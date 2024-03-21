@@ -1,0 +1,127 @@
+[gd_scene load_steps=12 format=3 uid="uid://cm35v0fu2apju"]
+
+[ext_resource type="Script" path="res://enemies/enemy_fasthuman.gd" id="1_tn4ny"]
+[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_ah3db"]
+[ext_resource type="Script" path="res://hitbox.gd" id="3_fa4yi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t7knm"]
+albedo_color = Color(0.878431, 0.231373, 0.133333, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_v8r4p"]
+material = SubResource("StandardMaterial3D_t7knm")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4b6ac"]
+
+[sub_resource type="Animation" id="Animation_quwnt"]
+resource_name = "overhead"
+length = 1.2
+step = 0.0166667
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeleeHitboxPivot")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 2.08165e-12, -3, 2.08165e-12, 0.15, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeleeHitboxPivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 0.633333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-1.74533, 3.48787e-16, 3.48787e-16)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeleeHitboxPivot:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MeleeHitboxPivot/EnemyHitbox:process_mode")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_muv68"]
+_data = {
+"overhead": SubResource("Animation_quwnt")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_na3bt"]
+radius = 0.2
+height = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r25tu"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_oq81m"]
+material = SubResource("StandardMaterial3D_r25tu")
+radius = 0.2
+height = 3.0
+
+[node name="EnemyFastHuman" type="CharacterBody3D" groups=["lockonables"]]
+collision_layer = 8
+collision_mask = 11
+script = ExtResource("1_tn4ny")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_v8r4p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_4b6ac")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+target_desired_distance = 5.0
+avoidance_enabled = true
+radius = 3.0
+
+[node name="EnemyHurtbox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 11
+script = ExtResource("2_ah3db")
+health = 20
+enemy_hitboxes = ["PlayerHitbox"]
+
+[node name="HurtboxCollider" type="CollisionShape3D" parent="EnemyHurtbox"]
+shape = SubResource("CapsuleShape3D_4b6ac")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_muv68")
+}
+
+[node name="MeleeHitboxPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -2.33333, 2.08165e-12)
+
+[node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.5, 2.08165e-12)
+collision_layer = 8
+collision_mask = 11
+script = ExtResource("3_fa4yi")
+
+[node name="HitboxCollider" type="CollisionShape3D" parent="MeleeHitboxPivot/EnemyHitbox"]
+shape = SubResource("CapsuleShape3D_na3bt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeleeHitboxPivot/EnemyHitbox"]
+mesh = SubResource("CapsuleMesh_oq81m")
+
+[connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
+[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

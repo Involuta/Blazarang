@@ -1,0 +1,164 @@
+extends CharacterBody3D
+
+var using_controller = false # only affects camera motion
+
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+const WALK_SPEED := 10
+const STEP_DODGE_SPEED := 30
+const STEP_DODGE_DURATION_SECS := .3
+const STEP_DODGE_COOLDOWN_SECS := .15
+const JUMP_SPEED := 15
+# Seconds it takes for Cotu to decelerate to 0 speed when not walking
+const WALK_DECEL_SECS := .25
+
+var grounded_speed := 0
+var can_dodge := true
+var is_dodging := false
+
+var mouse_camera_sensitivity := .001
+var joystick_camera_sensitivity := .1
+var camera_pitch_limit_deg := 90
+var camera_twist_input := .0
+var camera_pitch_input := .0
+var locked_on := false
+var lock_on_target = null
+
+var look_angle := 0.0
+var max_cam_dist := 6.0 # dist btwn player and camera when camera's not colliding with geometry; player can modify this in-game
+
+var roserang := preload("res://rang/roserang.tscn")
+var roserang_instance = null
+var is_rang_thrown := false
+@onready var physical_collider := $CollisionShape3D
+@onready var camera_twist_pivot := $CameraTwistPivot
+@onready var camera_pitch_pivot := $CameraTwistPivot/CameraPitchPivot
+@onready var camera := $CameraTwistPivot/CameraPitchPivot/CameraVisualObject
+@onready var rang_pointer_pivot := $RangPointerPivot
+@onready var target := $/root/Arena/Target
+@onready var armature := $CotuAnims/Armature
+@onready var anim_tree := $AnimationTree
+const LERP_VAL := .15 # The rate at which lerp funcs change; used for body mvmt animationa
+
+func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _physics_process(delta):
+	# Dodge logic
+	if Input.is_action_just_pressed("StepDodge") and can_dodge:
+		anim_tree.set("parameters/StateMachine/conditions/just_dodged", true)
+		step_dodge()
+	else:
+		anim_tree.set("parameters/StateMachine/conditions/just_dodged", false)
+	if Input.is_action_just_pressed("Jump") and is_on_floor():
+		velocity.y = JUMP_SPEED
+	
+	if is_dodging:
+		grounded_speed = STEP_DODGE_SPEED
+	else:
+		grounded_speed = WALK_SPEED
+	
+	# Cotu movement
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+	
+	var walk_input := Input.get_vector("WalkLeft", "WalkRight", "WalkForward", "WalkBackward")
+	var mvmt_dir = Vector3(walk_input.x, 0, walk_input.y)
+	var oriented_mvmt_dir = (camera_twist_pivot.basis * mvmt_dir).normalized()
+	if oriented_mvmt_dir:
+		velocity.x = lerp(velocity.x, oriented_mvmt_dir.x * grounded_speed, LERP_VAL)
+		velocity.z = lerp(velocity.z, oriented_mvmt_dir.z * grounded_speed, LERP_VAL)
+		armature.rotation.y = lerp_angle(armature.rotation.y, atan2(velocity.x, velocity.z), LERP_VAL)
+	else:
+		velocity.x = lerp(velocity.x, 0.0, LERP_VAL)
+		velocity.z = lerp(velocity.z, 0.0, LERP_VAL)
+	move_and_slide()
+	
+	# Rang Pointer movement; this block must come before the roserang throw bc if you instantiate the rang, then try to look_at(it) on the same frame, look_at will fail
+	if roserang_instance != null:
+		rang_pointer_pivot.look_at(roserang_instance.global_position)
+	else:
+		rang_pointer_pivot.transform.basis = camera_twist_pivot.transform.basis
+	
+	# Roserang throw
+	if Input.is_action_just_pressed("Throw") and roserang_instance == null:
+		roserang_instance = roserang.instantiate()
+		add_sibling(roserang_instance)
+		roserang_instance.set_direction(walk_input)
+		is_rang_thrown = true
+	
+	# Target control
+	if roserang_instance == null:
+		target.start_following_cotu()
+	
+	# Set look angle
+	look_angle = camera_twist_pivot.basis.get_euler().y
+
+	# Camera movement/orientation; ui_cancel means esc
+	if Input.is_action_just_pressed("ui_cancel"):
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
+	# Lock on logic; if target no longer exists, lock off
+	if !lock_on_target:
+		lock_off()
+	if using_controller:
+		camera_twist_input = Input.get_axis("LookRight", "LookLeft") * joystick_camera_sensitivity
+		camera_pitch_input = Input.get_axis("LookUp", "LookDown") * joystick_camera_sensitivity
+	if locked_on:
+		camera_twist_pivot.look_at(lock_on_target.global_position)
+	else:
+		camera_twist_pivot.rotate_y(camera_twist_input)
+	# While locked on, you can look up and down, but not left and right
+	camera_pitch_pivot.rotate_x(camera_pitch_input)
+	camera_pitch_pivot.rotation.x = clamp(
+		camera_pitch_pivot.rotation.x,
+		deg_to_rad(-camera_pitch_limit_deg),
+		deg_to_rad(camera_pitch_limit_deg))
+	# These 2 lines prevent the camera from continuing to move in the last direction the mouse was moved in
+	camera_twist_input = 0
+	camera_pitch_input = 0
+	
+	# Camera positioning based on level geometry
+	place_camera()
+	
+	anim_tree.set("parameters/StateMachine/RunBlendSpace/blend_position", velocity.length() / WALK_SPEED)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not using_controller:
+		if event is InputEventMouseMotion:
+			if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+				camera_twist_input = -event.relative.x * mouse_camera_sensitivity
+				camera_pitch_input = -event.relative.y * mouse_camera_sensitivity
+
+func place_camera():
+	var space_state := get_world_3d().direct_space_state
+	var cam_dir_basis = camera_twist_pivot.transform.basis * camera_pitch_pivot.transform.basis
+	var cam_dir_vec = cam_dir_basis * Vector3.FORWARD
+	var query = PhysicsRayQueryParameters3D.create(global_position, global_position - (max_cam_dist * cam_dir_vec))
+	query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
+	var result = space_state.intersect_ray(query)
+	if result:
+		camera.position = Vector3.ZERO
+		# Make the camera move slightly closer to Cotu after going to the raycast hit to prevent the camera from seeing below the floor
+		camera.global_position = result.position + .2 * result.position.direction_to(global_position)
+	else:
+		camera.position = Vector3.BACK * max_cam_dist
+
+func lock_on(node):
+	locked_on = true
+	lock_on_target = node
+
+func lock_off():
+	locked_on = false
+
+func step_dodge():
+	can_dodge = false
+	is_dodging = true
+	set_collision_mask_value(Globals.ENEMY_COL_LAYER, false)
+	if roserang_instance != null:
+		target.stop_following_cotu()
+	await get_tree().create_timer(STEP_DODGE_DURATION_SECS).timeout
+	is_dodging = false
+	set_collision_mask_value(Globals.ENEMY_COL_LAYER, true)
+	await get_tree().create_timer(STEP_DODGE_COOLDOWN_SECS).timeout
+	can_dodge = true

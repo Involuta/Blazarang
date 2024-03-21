@@ -1,0 +1,13 @@
+extends Node
+
+# Update this list before the layer names in Project Settings
+const PLAYER_COL_LAYER := 1
+const ARENA_COL_LAYER := 2
+const PARTICLE_COL_LAYER := 3
+const ENEMY_COL_LAYER := 4
+
+func make_mask(layers):
+	var mask := 0.0
+	for layer in layers:
+		mask += pow(2, layer-1)
+	return mask
