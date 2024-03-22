@@ -38,7 +38,7 @@ size = Vector3(5, 10, 5)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000432968, 9.53674e-07, 0.0252857)
 script = ExtResource("1_vpgsr")
 
-[node name="EnemySpawner2" parent="." instance=ExtResource("5_s7gyi")]
+[node name="EnemySpawner2" parent="." groups=["spawners"] instance=ExtResource("5_s7gyi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 45)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -78,13 +78,13 @@ shape = SubResource("BoxShape3D_carem")
 [node name="cotuCB" parent="." instance=ExtResource("4_ihvaq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.13567, 0)
 
-[node name="EnemySpawner" parent="." instance=ExtResource("5_s7gyi")]
+[node name="EnemySpawner" parent="." groups=["spawners"] instance=ExtResource("5_s7gyi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, -45)
 
-[node name="EnemySpawner3" parent="." instance=ExtResource("5_s7gyi")]
+[node name="EnemySpawner3" parent="." groups=["spawners"] instance=ExtResource("5_s7gyi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 10, 2.08165e-12)
 
-[node name="EnemySpawner4" parent="." instance=ExtResource("5_s7gyi")]
+[node name="EnemySpawner4" parent="." groups=["spawners"] instance=ExtResource("5_s7gyi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 10, 2.08165e-12)
 
 [node name="ArenaCam" type="Camera3D" parent="."]

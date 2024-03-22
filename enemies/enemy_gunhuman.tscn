@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://c8sivx3hx1oy1"]
+
+[ext_resource type="Script" path="res://enemies/enemy_gunhuman.gd" id="1_t4x7d"]
+[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="1_wbxbn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t7knm"]
+albedo_color = Color(0, 0.490196, 0.952941, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5fl67"]
+material = SubResource("StandardMaterial3D_t7knm")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_txubl"]
+
+[sub_resource type="Animation" id="Animation_i1lri"]
+resource_name = "shoot"
+step = 0.0166667
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cvygw"]
+_data = {
+"shoot": SubResource("Animation_i1lri")
+}
+
+[node name="EnemyGunHuman" type="CharacterBody3D"]
+collision_layer = 8
+collision_mask = 11
+script = ExtResource("1_t4x7d")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_5fl67")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_txubl")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+target_desired_distance = 3.0
+avoidance_enabled = true
+radius = 3.0
+
+[node name="EnemyHurtbox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 11
+script = ExtResource("1_wbxbn")
+health = 10
+enemy_hitboxes = ["PlayerHitbox"]
+
+[node name="HurtboxCollider" type="CollisionShape3D" parent="EnemyHurtbox"]
+shape = SubResource("CapsuleShape3D_txubl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cvygw")
+}
+
+[connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
+[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

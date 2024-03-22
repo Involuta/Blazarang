@@ -2,6 +2,7 @@ extends Node3D
 
 var cotu_look_direction
 
+@export var lockonable_limit := 20
 @onready var cotu = $/root/Arena/cotuCB
 @onready var camera_twist_pivot = $/root/Arena/cotuCB/CameraTwistPivot
 @onready var camera = $/root/Arena/cotuCB/CameraTwistPivot/CameraPitchPivot/CameraVisualObject/Camera3D

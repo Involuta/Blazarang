@@ -11,7 +11,7 @@ const FOLLOW_SPEED = 5.0
 const ATTACK_DURATION_SECS = 1.5
 
 var aiming_at_target = true
-const SWEEP_CHANCE = .2
+
 var rng := RandomNumberGenerator.new()
 @onready var nav_agent = $NavigationAgent3D
 @onready var animation_player = $AnimationPlayer
@@ -51,16 +51,9 @@ func follow():
 func start_attack():
 	behav_state = ATTACK
 	aiming_at_target = true
-	animation_player.play(choose_attack())
+	animation_player.play("shoot")
 	await get_tree().create_timer(ATTACK_DURATION_SECS).timeout
 	behav_state = FOLLOW
-
-func choose_attack() -> String:
-	var choice = rng.randf()
-	if choice <= SWEEP_CHANCE:
-		return "sweep"
-	else:
-		return "overhead"
 
 func attack():
 	nav_agent.velocity = Vector3.ZERO
@@ -70,3 +63,6 @@ func attack():
 	
 func stop_aiming_at_target():
 	aiming_at_target = false
+
+func shoot_bullet():
+	print("pew!")
