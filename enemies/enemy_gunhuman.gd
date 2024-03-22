@@ -6,17 +6,19 @@ enum {
 }
 var behav_state = FOLLOW
 
-const FOLLOW_SPEED = 5.0
+const FOLLOW_SPEED := 5.0
+const ATTACK_DURATION_SECS := 1.5
+const BULLET_SPEED := 30.0
 
-const ATTACK_DURATION_SECS = 1.5
-
-var aiming_at_target = true
+var aiming_at_target := true
 
 var rng := RandomNumberGenerator.new()
-@onready var nav_agent = $NavigationAgent3D
-@onready var animation_player = $AnimationPlayer
-@onready var cotu = $/root/Arena/cotuCB
-@onready var target = $/root/Arena/Target
+var bullet := preload("res://enemies/enemy_bullet.tscn")
+@onready var nav_agent := $NavigationAgent3D
+@onready var animation_player := $AnimationPlayer
+@onready var arena := $/root/Arena
+@onready var cotu := $/root/Arena/cotuCB
+@onready var target := $/root/Arena/Target
 
 func _ready():
 	add_to_group("lockonables")
@@ -65,4 +67,9 @@ func stop_aiming_at_target():
 	aiming_at_target = false
 
 func shoot_bullet():
-	print("pew!")
+	var bullet_inst = bullet.instantiate()
+	arena.add_child.call_deferred(bullet_inst)
+	await bullet_inst.tree_entered
+	bullet_inst.global_position = global_position
+	bullet_inst.velocity = BULLET_SPEED * global_position.direction_to(target.global_position)
+	bullet_inst.look_at(target.global_position)

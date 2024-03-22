@@ -1,3 +1,4 @@
-AnimationPlayer
 Node3D
+RigidBody3D
+AnimationPlayer
 CharacterBody3D

@@ -56,7 +56,7 @@ func start_attack():
 	behav_state = FOLLOW
 
 func choose_attack() -> String:
-	var choice = rng.randf()
+	var choice := rng.randf()
 	if choice <= SWEEP_CHANCE:
 		return "sweep"
 	else:

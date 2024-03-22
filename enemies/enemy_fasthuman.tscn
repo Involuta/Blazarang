@@ -196,7 +196,8 @@ libraries = {
 }
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
-transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, -3, 2.08165e-12)
+transform = Transform3D(-0.500004, 0.866023, -1.26261e-21, 3.13499e-06, 1.81001e-06, 1, 0.866023, 0.500004, -3.61999e-06, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+visible = false
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
 transform = Transform3D(0.999999, 2.15301e-08, -2.2719e-14, -8.9407e-08, 0.999999, 0, -6.17927e-15, -6.2758e-15, 0.999999, 0.065823, 2.37137, -4.71532e-07)

@@ -1,9 +1,10 @@
-res://enemies/enemy_fasthuman.tscn
-res://enemies/enemy_fasthuman.gd
 res://levels/main.tscn
-res://enemies/enemy_gunhuman.tscn
 res://enemies/EnemySpawner.gd
+res://enemies/enemy_fasthuman.tscn
+res://enemies/enemy_gunhuman.tscn
 res://enemies/EnemySpawner.tscn
-res://enemies/enemy_gunhuman.gd
 res://enemies/enemy_bullet.tscn
 res://cotu_versions/cotu_cb_main.tscn
+res://enemies/enemy_gunhuman.gd
+res://enemies/bullet.gd
+res://enemies/enemy_fasthuman.gd
