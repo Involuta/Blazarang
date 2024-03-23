@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://skntmavu4xsw"]
 
-[ext_resource type="Script" path="res://target.gd" id="1_qccme"]
+[ext_resource type="Script" path="res://target/target.gd" id="1_fgjod"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_cp1if"]
 size = Vector3(0.1, 1, 1)
@@ -8,7 +8,7 @@ size = Vector3(0.1, 1, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_qvdqm"]
 
 [node name="Target" type="Area3D"]
-script = ExtResource("1_qccme")
+script = ExtResource("1_fgjod")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_cp1if")

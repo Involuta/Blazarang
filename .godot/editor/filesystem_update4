@@ -1,10 +1,9 @@
 res://levels/main.tscn
-res://enemies/EnemySpawner.gd
-res://enemies/enemy_fasthuman.tscn
-res://enemies/enemy_gunhuman.tscn
-res://enemies/EnemySpawner.tscn
-res://enemies/enemy_bullet.tscn
 res://cotu_versions/cotu_cb_main.tscn
+res://target/target.tscn
+res://rang/special_rapidorbit.gd
+res://target/target.gd
+res://rang/roserang.tscn
+res://rang/roserang.gd
+res://enemies/EnemySpawner.gd
 res://enemies/enemy_gunhuman.gd
-res://enemies/bullet.gd
-res://enemies/enemy_fasthuman.gd

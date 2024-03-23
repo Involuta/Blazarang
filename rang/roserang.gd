@@ -1,8 +1,11 @@
 extends Area3D
 
+# Song BPMs:
 # Champion of the Universe - 113
 # It's Just You - 120
 # BIZARROBOT - 120, 90
+const SPECIAL_DIST := 7 # max dist from Cotu where doing special input will perform a special move
+
 var BPM := 113.0
 var max_radius := 30
 var petals := 5
@@ -16,9 +19,10 @@ var invincibility_secs := .5
 var initial_throw_angle := 0.0
 var initial_throw_angle_offset := petals*PI-.05
 
-@onready var cotu = $/root/Arena/cotuCB
-@onready var target = $/root/Arena/Target
-@onready var hitbox = $PlayerHitbox
+var rapidorbit_script := preload("res://rang/special_rapidorbit.gd")
+@onready var cotu := $/root/Arena/cotuCB
+@onready var target := $/root/Arena/Target
+@onready var hitbox := $PlayerHitbox
 
 func _ready():
 	initial_throw_angle = petals*cotu.look_angle + initial_throw_angle_offset
@@ -43,19 +47,21 @@ func rose(delta):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	rose(delta)
+	if Input.is_action_just_pressed("Special") and target.following_cotu and global_position.distance_to(cotu.global_position) < SPECIAL_DIST:
+		set_script(rapidorbit_script)
 
 func _on_area_entered(area):
 	if invincible:
 		return
-	if "Target" in area.name:
-		area.start_following_cotu()
+	if area == target:
+		target.start_following_cotu()
 		buff_rang()
 
 func _on_body_entered(body):
 	if invincible:
 		return
-	if "cotu" in body.name and not body.is_dodging:
-		body.is_rang_thrown = false
+	if body == cotu and not cotu.is_dodging:
+		cotu.is_rang_thrown = false
 		queue_free()
 
 func buff_rang():

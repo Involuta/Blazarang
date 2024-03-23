@@ -15,7 +15,7 @@ func _ready():
 			await get_tree().create_timer(get_physics_process_delta_time()).timeout
 		else:
 			var enemy_inst = choose_enemy()
-			arena.add_child.call_deferred(enemy_inst)
+			add_child.call_deferred(enemy_inst)
 			await enemy_inst.tree_entered
 			enemy_inst.global_position = global_position
 			await get_tree().create_timer(spawn_cooldown_secs).timeout

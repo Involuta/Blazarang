@@ -30,7 +30,6 @@ func _physics_process(_delta):
 		ATTACK:
 			attack()
 
-
 func _on_navigation_agent_3d_target_reached():
 	if behav_state != ATTACK:
 		start_attack()

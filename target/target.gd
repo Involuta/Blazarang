@@ -18,8 +18,3 @@ func start_following_cotu():
 	
 func stop_following_cotu():
 	following_cotu = false
-"""
-func _on_area_entered(area):
-	if "roserang" in area.name:
-		start_following_cotu()
-"""
