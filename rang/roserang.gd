@@ -61,7 +61,6 @@ func _on_body_entered(body):
 	if invincible:
 		return
 	if body == cotu and not cotu.is_dodging:
-		cotu.is_rang_thrown = false
 		queue_free()
 
 func buff_rang():

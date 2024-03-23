@@ -29,7 +29,8 @@ var max_cam_dist := 6.0 # dist btwn player and camera when camera's not collidin
 
 var roserang := preload("res://rang/roserang.tscn")
 var roserang_instance = null
-var is_rang_thrown := false
+var throw_queued := false
+const INSTANT_RETHROW_SECS := .15 # max possible time btwn player inputting throw and rang hitting Cotu that still cauess an instant rethrow
 @onready var physical_collider := $CollisionShape3D
 @onready var camera_twist_pivot := $CameraTwistPivot
 @onready var camera_pitch_pivot := $CameraTwistPivot/CameraPitchPivot
@@ -81,11 +82,16 @@ func _physics_process(delta):
 		rang_pointer_pivot.transform.basis = camera_twist_pivot.transform.basis
 	
 	# Roserang throw
-	if Input.is_action_just_pressed("Throw") and roserang_instance == null:
-		roserang_instance = roserang.instantiate()
-		add_sibling(roserang_instance)
-		roserang_instance.set_direction(walk_input)
-		is_rang_thrown = true
+	if Input.is_action_just_pressed("Throw"):
+		if roserang_instance == null:
+			# Manual throw
+			throw_rang(walk_input)
+		elif not throw_queued:
+			start_instant_rethrow_timer()
+	if throw_queued and roserang_instance == null:
+		# Instant rethrow
+		throw_queued = false
+		throw_rang(walk_input)
 	
 	# Target control
 	if roserang_instance == null:
@@ -162,3 +168,13 @@ func step_dodge():
 	set_collision_mask_value(Globals.ENEMY_COL_LAYER, true)
 	await get_tree().create_timer(STEP_DODGE_COOLDOWN_SECS).timeout
 	can_dodge = true
+
+func throw_rang(walk_input):
+	roserang_instance = roserang.instantiate()
+	add_sibling(roserang_instance)
+	roserang_instance.set_direction(walk_input)
+
+func start_instant_rethrow_timer():
+	throw_queued = true
+	await get_tree().create_timer(INSTANT_RETHROW_SECS).timeout
+	throw_queued = false

@@ -1,6 +1,6 @@
 extends Node3D
 
-const GUN_CHANCE = .4
+const GUN_CHANCE = .33
 
 var spawn_cooldown_secs := 7.0
 var rng := RandomNumberGenerator.new()
