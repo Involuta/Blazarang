@@ -6,7 +6,7 @@ var using_controller = false # only affects camera motion
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 const WALK_SPEED := 10
 const STEP_DODGE_SPEED := 15
-const STEP_DODGE_DURATION_SECS := .43
+const STEP_DODGE_DURATION_SECS := .5
 const STEP_DODGE_COOLDOWN_SECS := .1
 const JUMP_SPEED := 15
 # Seconds it takes for Cotu to decelerate to 0 speed when not walking

@@ -2,5 +2,4 @@ res://cotu_versions/cotu_cb_main.tscn
 res://levels/main.tscn
 res://target/target.tscn
 res://rang/roserang.tscn
-res://cotu_versions/cotu_anims_4.tscn
-res://cotu_versions/CotuControl.gd
+res://cotu_versions/cotu_anims_6.tscn
