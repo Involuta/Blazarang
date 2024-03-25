@@ -40,6 +40,7 @@ script = ExtResource("1_vpgsr")
 
 [node name="EnemySpawner2" parent="." groups=["spawners"] instance=ExtResource("5_s7gyi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 45)
+spawning = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_u6kpx")
@@ -82,12 +83,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.13785, -0.0867786)
 
 [node name="EnemySpawner" parent="." groups=["spawners"] instance=ExtResource("5_s7gyi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, -45)
+spawning = false
 
 [node name="EnemySpawner3" parent="." groups=["spawners"] instance=ExtResource("5_s7gyi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 10, 2.08165e-12)
+spawning = false
 
 [node name="EnemySpawner4" parent="." groups=["spawners"] instance=ExtResource("5_s7gyi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 10, 2.08165e-12)
+spawning = false
 
 [node name="ArenaCam" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.92553, 1.20676)

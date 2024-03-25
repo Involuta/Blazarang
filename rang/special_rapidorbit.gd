@@ -37,3 +37,9 @@ func rapidorbit(delta):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	rapidorbit(delta)
+
+# Rapidorbit cannot interact with Cotu nor Target
+func _on_area_entered(_area):
+	return
+func _on_body_entered(_body):
+	return

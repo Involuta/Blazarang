@@ -5,13 +5,14 @@ var using_controller = false # only affects camera motion
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 const WALK_SPEED := 10
-const STEP_DODGE_SPEED := 30
-const STEP_DODGE_DURATION_SECS := .3
-const STEP_DODGE_COOLDOWN_SECS := .15
+const STEP_DODGE_SPEED := 15
+const STEP_DODGE_DURATION_SECS := .43
+const STEP_DODGE_COOLDOWN_SECS := .1
 const JUMP_SPEED := 15
 # Seconds it takes for Cotu to decelerate to 0 speed when not walking
 const WALK_DECEL_SECS := .25
 
+var walk_input := Vector2.ZERO
 var grounded_speed := 0
 var can_dodge := true
 var is_dodging := false
@@ -30,7 +31,7 @@ var max_cam_dist := 6.0 # dist btwn player and camera when camera's not collidin
 var roserang := preload("res://rang/roserang.tscn")
 var roserang_instance = null
 var throw_queued := false
-const INSTANT_RETHROW_SECS := .15 # max possible time btwn player inputting throw and rang hitting Cotu that still cauess an instant rethrow
+const INSTANT_RETHROW_SECS := .2 # max possible time btwn player inputting throw and rang hitting Cotu that still cauess an instant rethrow
 @onready var physical_collider := $CollisionShape3D
 @onready var camera_twist_pivot := $CameraTwistPivot
 @onready var camera_pitch_pivot := $CameraTwistPivot/CameraPitchPivot
@@ -63,7 +64,7 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	
-	var walk_input := Input.get_vector("WalkLeft", "WalkRight", "WalkForward", "WalkBackward")
+	walk_input = Input.get_vector("WalkLeft", "WalkRight", "WalkForward", "WalkBackward")
 	var mvmt_dir = Vector3(walk_input.x, 0, walk_input.y)
 	var oriented_mvmt_dir = (camera_twist_pivot.basis * mvmt_dir).normalized()
 	if oriented_mvmt_dir:
@@ -85,13 +86,13 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("Throw"):
 		if roserang_instance == null:
 			# Manual throw
-			throw_rang(walk_input)
+			throw_rang()
 		elif not throw_queued:
 			start_instant_rethrow_timer()
 	if throw_queued and roserang_instance == null:
 		# Instant rethrow
 		throw_queued = false
-		throw_rang(walk_input)
+		throw_rang()
 	
 	# Target control
 	if roserang_instance == null:
@@ -127,6 +128,7 @@ func _physics_process(delta):
 	# Camera positioning based on level geometry
 	place_camera()
 	
+	# Animation tree parameters
 	anim_tree.set("parameters/StateMachine/RunBlendSpace/blend_position", velocity.length() / WALK_SPEED)
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -169,7 +171,7 @@ func step_dodge():
 	await get_tree().create_timer(STEP_DODGE_COOLDOWN_SECS).timeout
 	can_dodge = true
 
-func throw_rang(walk_input):
+func throw_rang():
 	roserang_instance = roserang.instantiate()
 	add_sibling(roserang_instance)
 	roserang_instance.set_direction(walk_input)
