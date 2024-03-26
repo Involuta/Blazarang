@@ -9,3 +9,4 @@ res://enemies/enemy_fasthuman.tscn
 res://hurtbox.gd
 res://rang/special_rapidorbit.gd
 res://rang/ricochet.gd
+res://rang/return_to_target.gd

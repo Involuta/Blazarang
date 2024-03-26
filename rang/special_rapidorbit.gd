@@ -23,6 +23,7 @@ func _init():
 	_ready()
 
 func _ready():
+	set_collision_mask_value(Globals.ARENA_COL_LAYER, false)
 	angle = 0
 	radius = initial_radius
 	await get_tree().create_timer(duration_secs).timeout

@@ -1,17 +1,8 @@
 extends CharacterBody3D
 
-# Song BPMs:
-# Champion of the Universe - 113
-# It's Just You - 120
-# BIZARROBOT - 120, 90
+const MAX_SPEED := 50
 const SPECIAL_DIST := 7 # max dist from Cotu where doing special input will perform a special move
-
-var angle := 0.0
-var angle_speed := 0.0
-var max_angle := 0.0
-
 var roserang_script := preload("res://rang/roserang.gd")
-var return_script := preload("res://rang/return_to_target.gd")
 var rapidorbit_script := preload("res://rang/special_rapidorbit.gd")
 @onready var cotu = $/root/Arena/cotuCB
 @onready var target = $/root/Arena/Target
@@ -22,11 +13,7 @@ func _init():
 	_ready()
 
 func _ready():
-	set_collision_mask_value(Globals.ARENA_COL_LAYER, true)
-	angle = target.angle
-	angle_speed = target.angle_speed
-	max_angle = target.max_angle
-	print(max_angle)
+	set_collision_mask_value(Globals.ARENA_COL_LAYER, false)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -34,16 +21,11 @@ func _physics_process(delta):
 		target.rang_thrown = false
 		set_script(roserang_script)
 		return
+	velocity = velocity.move_toward(MAX_SPEED * global_position.direction_to(target.global_position), 5)
+	#velocity = velocity.length() * global_position.direction_to(target.global_position)
 	handle_collision(move_and_collide(velocity * delta), delta)
-	angle += angle_speed
-	if angle >= max_angle:
-		set_script(return_script)
-		return
 	if Input.is_action_just_pressed("Special") and target.following_cotu and global_position.distance_to(cotu.global_position) < SPECIAL_DIST:
 		set_script(rapidorbit_script)
-
-func ricochet(collision):
-	velocity = velocity - 2 * velocity.project(collision.get_normal())
 
 func buff_rang():
 	hitbox.damage += 10
@@ -53,5 +35,3 @@ func handle_collision(collision, delta):
 		return
 	if collision.get_collider() == cotu and not cotu.is_dodging:
 		queue_free()
-	elif collision.get_collider().collision_layer == Globals.ARENA_COL_LAYER:
-		ricochet(collision)

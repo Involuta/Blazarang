@@ -166,7 +166,7 @@ height = 3.0
 
 [node name="EnemyFastHuman" type="CharacterBody3D" groups=["lockonables"]]
 collision_layer = 8
-collision_mask = 11
+collision_mask = 26
 script = ExtResource("1_tn4ny")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
