@@ -15,7 +15,7 @@ size = Vector3(0.25, 0.25, 0.25)
 [node name="death_particle" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 collision_layer = 4
-collision_mask = 3
+collision_mask = 18
 script = ExtResource("1_h3m83")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

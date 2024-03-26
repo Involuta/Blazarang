@@ -7,6 +7,10 @@ var cotu_look_direction
 @onready var camera_twist_pivot = $/root/Arena/cotuCB/CameraTwistPivot
 @onready var camera = $/root/Arena/cotuCB/CameraTwistPivot/CameraPitchPivot/CameraVisualObject/Camera3D
 
+func _ready():
+	#print($NavigationRegion3D/Floor/StaticBody3D.collision_layer)
+	return
+	
 func _process(_delta):
 	if Input.is_action_just_pressed("LockOn"):
 		if cotu.locked_on:

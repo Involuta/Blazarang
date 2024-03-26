@@ -5,6 +5,7 @@ const PLAYER_COL_LAYER := 1
 const ARENA_COL_LAYER := 2
 const PARTICLE_COL_LAYER := 3
 const ENEMY_COL_LAYER := 4
+const COTU_COL_LAYER := 5
 
 func make_mask(layers):
 	var mask := 0.0

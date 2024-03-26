@@ -16,7 +16,8 @@ radius = 2.0
 height = 0.2
 radius = 2.0
 
-[node name="roserang" type="Area3D"]
+[node name="roserang" type="CharacterBody3D"]
+collision_mask = 19
 script = ExtResource("1_m7w6u")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -26,12 +27,9 @@ mesh = SubResource("CylinderMesh_g7g1d")
 shape = SubResource("CylinderShape3D_k7swi")
 
 [node name="PlayerHitbox" type="Area3D" parent="."]
-collision_mask = 11
+collision_mask = 10
 script = ExtResource("2_1xumc")
 damage = 10
 
 [node name="HitboxCollider" type="CollisionShape3D" parent="PlayerHitbox"]
 shape = SubResource("CylinderShape3D_vx8km")
-
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]

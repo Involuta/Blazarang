@@ -1,4 +1,4 @@
-extends Area3D
+extends CharacterBody3D
 
 # Song BPMs:
 # Champion of the Universe - 113
@@ -6,7 +6,7 @@ extends Area3D
 # BIZARROBOT - 120, 90
 const SPECIAL_DIST := 7 # max dist from Cotu where doing special input will perform a special move
 
-var BPM := 113.0
+var BPM := 90.0
 var max_radius := 30
 var petals := 5
 
@@ -19,6 +19,7 @@ var invincibility_secs := .5
 var initial_throw_angle := 0.0
 var initial_throw_angle_offset := petals*PI-.05
 
+var ricochet_script := preload("res://rang/ricochet.gd")
 var rapidorbit_script := preload("res://rang/special_rapidorbit.gd")
 @onready var cotu := $/root/Arena/cotuCB
 @onready var target := $/root/Arena/Target
@@ -42,26 +43,29 @@ func rose(delta):
 	angle += speed * delta
 	radius = max_radius * sin(petals * angle + initial_throw_angle)
 	var angle_vec := Vector2.from_angle(angle)
-	global_position = target.global_position + radius * Vector3(angle_vec.x, 0, angle_vec.y)
+	return target.global_position + radius * Vector3(angle_vec.x, 0, angle_vec.y)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	rose(delta)
+func _physics_process(delta):
+	var new_pos = rose(delta)
+	# vel_vec is in meters per frame, which is what move_and_collide wants
+	var vel_vec = new_pos - global_position
+	var hit_arena = handle_collision(move_and_collide(vel_vec, true), vel_vec, delta)
+	if hit_arena:
+		set_script(ricochet_script)
+		return
+	global_position = new_pos
 	if Input.is_action_just_pressed("Special") and target.following_cotu and global_position.distance_to(cotu.global_position) < SPECIAL_DIST:
 		set_script(rapidorbit_script)
 
-func _on_area_entered(area):
-	if invincible:
-		return
-	if area == target:
-		target.start_following_cotu()
-		buff_rang()
-
-func _on_body_entered(body):
-	if invincible:
-		return
-	if body == cotu and not cotu.is_dodging:
-		queue_free()
-
 func buff_rang():
 	hitbox.damage += 10
+
+func handle_collision(collision, vel_vec, delta):
+	if not collision:
+		return false
+	if not invincible and collision.get_collider() == cotu and not cotu.is_dodging:
+		queue_free()
+		return false
+	elif collision.get_collider().collision_layer == Globals.ARENA_COL_LAYER:
+		velocity = (1/delta) * (vel_vec - 2 * vel_vec.project(collision.get_normal()))
+		return true

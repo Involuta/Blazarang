@@ -6,14 +6,9 @@ extends CharacterBody3D
 # BIZARROBOT - 120, 90
 const SPECIAL_DIST := 7 # max dist from Cotu where doing special input will perform a special move
 
-var BPM := 113.0
-var radius := 0.0
-var initial_radius := 3.0
-var final_radius := 7.0
-var angle := 0.0
-var speed := 25.0
 var duration_secs := 1.5
 
+var rapidorbit_script := preload("res://rang/special_rapidorbit.gd")
 @onready var cotu = $/root/Arena/cotuCB
 @onready var target = $/root/Arena/Target
 @onready var hitbox = $PlayerHitbox
@@ -23,16 +18,25 @@ func _init():
 	_ready()
 
 func _ready():
-	angle = 0
-	radius = initial_radius
 	await get_tree().create_timer(duration_secs).timeout
 	queue_free()
-	
-func rapidorbit(delta):
-	angle += speed * delta
-	radius += (final_radius - initial_radius) / duration_secs * delta
-	var angle_vec := Vector2.from_angle(angle)
-	global_position = cotu.global_position + radius * Vector3(angle_vec.x, 0, angle_vec.y)
 
+# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	rapidorbit(delta)
+	handle_collision(move_and_collide(velocity * delta), delta)
+	if Input.is_action_just_pressed("Special") and target.following_cotu and global_position.distance_to(cotu.global_position) < SPECIAL_DIST:
+		set_script(rapidorbit_script)
+
+func ricochet(collision):
+	velocity = velocity - 2 * velocity.project(collision.get_normal())
+
+func buff_rang():
+	hitbox.damage += 10
+
+func handle_collision(collision, delta):
+	if not collision:
+		return
+	if collision.get_collider() == cotu and not cotu.is_dodging:
+		queue_free()
+	elif collision.get_collider().collision_layer == Globals.ARENA_COL_LAYER:
+		ricochet(collision)
