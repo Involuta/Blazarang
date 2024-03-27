@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dqdba8l6potq1"]
+[gd_scene load_steps=8 format=3 uid="uid://dqdba8l6potq1"]
 
 [ext_resource type="Script" path="res://rang/roserang.gd" id="1_m7w6u"]
 [ext_resource type="Script" path="res://hitbox.gd" id="2_1xumc"]
+[ext_resource type="Script" path="res://rang/destroy_on_cotu_hit.gd" id="3_o7i4w"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_g7g1d"]
 top_radius = 2.0
@@ -11,24 +12,37 @@ height = 0.2
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_k7swi"]
 height = 0.2
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rgfc6"]
+height = 0.2
+radius = 2.0
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_vx8km"]
 height = 0.2
 radius = 2.0
 
 [node name="roserang" type="CharacterBody3D"]
-collision_mask = 19
+collision_mask = 2
 script = ExtResource("1_m7w6u")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CylinderMesh_g7g1d")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="WallCollider" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_k7swi")
 
+[node name="CotuCollider" type="Area3D" parent="."]
+collision_mask = 16
+script = ExtResource("3_o7i4w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CotuCollider"]
+shape = SubResource("CylinderShape3D_rgfc6")
+
 [node name="PlayerHitbox" type="Area3D" parent="."]
-collision_mask = 10
+collision_mask = 8
 script = ExtResource("2_1xumc")
 damage = 10
 
 [node name="HitboxCollider" type="CollisionShape3D" parent="PlayerHitbox"]
 shape = SubResource("CylinderShape3D_vx8km")
+
+[connection signal="body_entered" from="CotuCollider" to="CotuCollider" method="_on_body_entered"]

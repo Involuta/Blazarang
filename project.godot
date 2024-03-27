@@ -106,6 +106,8 @@ Special={
 3d_physics/layer_2="Arena"
 3d_physics/layer_3="Particle"
 3d_physics/layer_4="Enemy"
+3d_physics/layer_5="Cotu"
+3d_physics/layer_6="Target"
 
 [rendering]
 

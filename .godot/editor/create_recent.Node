@@ -1,9 +1,10 @@
+CollisionShape3D
+Area3D
+MeshInstance3D
 CharacterBody3D
 RigidBody3D
 RayCast3D
-CollisionShape3D
 StaticBody3D
-MeshInstance3D
 AnimationTree
 Node3D
 AnimationPlayer

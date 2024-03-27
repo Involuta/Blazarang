@@ -174,7 +174,6 @@ func step_dodge():
 func throw_rang():
 	roserang_instance = roserang.instantiate()
 	add_sibling(roserang_instance)
-	roserang_instance.set_direction(walk_input)
 
 func start_instant_rethrow_timer():
 	throw_queued = true

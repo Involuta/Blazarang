@@ -27,6 +27,20 @@ func stop_following_cotu():
 
 func _on_body_entered(body):
 	if body.name.contains("roserang") and not body.invincible:
-		roserang_queued = true
+		if body.mvmt_state != body.ROSE:
+			roserang_queued = true
 		start_following_cotu()
 		body.buff_rang()
+
+func _on_area_entered(area):
+	pass
+	"""
+	if area.name.contains("TargetCollider"):
+		var roserang = area.get_parent()
+		if roserang.mvmt_state != roserang.ROSE:
+			roserang_queued = true
+		start_following_cotu()
+		roserang.buff_rang()
+	else:
+		print(area.name)
+	"""
