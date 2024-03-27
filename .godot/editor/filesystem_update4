@@ -1,14 +1,6 @@
 res://levels/main.tscn
-res://rang/roserang.gd
-res://target/target.gd
 res://cotu_versions/cotu_cb_main.tscn
 res://target/target.tscn
 res://rang/roserang.tscn
-res://enemies/death_particle.tscn
 res://enemies/enemy_fasthuman.tscn
-res://hurtbox.gd
-res://rang/special_rapidorbit.gd
-res://rang/ricochet.gd
-res://rang/return_to_target.gd
-res://cotu_versions/CotuControl.gd
-res://rang/destroy_on_cotu_hit.gd
+res://rang/roserang.gd

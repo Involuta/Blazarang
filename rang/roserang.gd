@@ -18,9 +18,8 @@ var invincible := true
 var invincibility_secs := .5
 var initial_throw_angle := 0.0
 var initial_throw_angle_offset := petals*PI-.05 # rang is thrown
-#var initial_throw_angle_offset := petals*PI-PI/2 # curve to right
-var rose_switch_angle_offset_left := petals*PI+2*PI/3 # curve to left
-var rose_switch_angle_offset_right := petals*PI-PI/2 # rang switched from ricochet or return to rose
+var rose_switch_angle_offset_right := petals*PI+2*PI/3 # curve to left
+var rose_switch_angle_offset_left := petals*PI-PI/2 # rang switched from ricochet or return to rose
 # vel.angle(): right = 0, fwd = -pi/2, left = ±pi, back = pi/2
 # look_angle: right = -pi/2, fwd = 0, left = pi/2, back = ±pi
 # (-pi, pi/2) (-pi/2, 0) (0, -pi/2) (pi/2, -pi) (pi, -3pi/2)
@@ -32,7 +31,7 @@ enum {
 }
 var mvmt_state = ROSE
 var current_loop_angle := 0.0 # shows how far into the current loop the rang is (i.e. how far it would be if it were still in rose mode) to know whether to start returning during ricochet
-const RETURN_ACC := 1
+const RETURN_ACC := .4
 const MAX_RETURN_SPEED := 55
 
 var rapidorbit_script := preload("res://rang/special_rapidorbit.gd")
@@ -45,15 +44,15 @@ func _ready():
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, true)
 	initial_throw_angle = petals*cotu.look_angle + initial_throw_angle_offset
 	set_direction()
-	#print("Throw - Initial throw angle: " + str(initial_throw_angle))
 	global_position = target.global_position
 
 func set_direction():
 	if cotu.walk_input.x > 0:
-		angle_speed *= -1
+		angle_speed = -1*(PI / (petals * 120 / BPM))
 		angle = (-2*PI - initial_throw_angle) / petals
 	else:
 		# initial angle = (2PI - initial_throw_angle) / petals
+		angle_speed = PI / (petals * 120 / BPM)
 		angle = (2*PI - initial_throw_angle) / petals
 	
 func rose(delta):
@@ -73,12 +72,8 @@ func _physics_process(delta):
 			var new_pos = rose(delta)
 			# vel_vec is in meters per frame, which is what move_and_collide wants
 			var vel_vec = new_pos - global_position
-			print("Cotu look angle: " + str(cotu.look_angle))
-			print("Vel_vec angle: " + str(Vector2(vel_vec.x, vel_vec.z).angle()))
-			#if vel_vec.length() > 2:
-				#print("new_pos: " + str(new_pos))
-				#print("current_pos: " + str(global_position))
-				#print(vel_vec.length())
+			#print("Cotu look angle: " + str(cotu.look_angle))
+			#print("Vel_vec angle: " + str(Vector2(vel_vec.x, vel_vec.z).angle()))
 			var hit_arena = handle_collision(move_and_collide(vel_vec, true), vel_vec, delta)
 			if hit_arena:
 				set_collision_mask_value(Globals.ARENA_COL_LAYER, true)
@@ -93,9 +88,6 @@ func _physics_process(delta):
 				set_collision_mask_value(Globals.ARENA_COL_LAYER, false)
 				mvmt_state = RETURN
 		RETURN:
-			#print(global_position)
-			#print(velocity.length())
-			#print(global_position.direction_to(target.global_position))
 			if target.roserang_queued:
 				switch_to_rose()
 				return
@@ -116,23 +108,20 @@ func switch_to_rose():
 
 	initial_throw_angle = petals*(-1*Vector2(velocity.normalized().x, velocity.normalized().z).angle() - PI/2)
 	if cotu.walk_input.x > 0:
-		initial_throw_angle += rose_switch_angle_offset_left
-	else:
 		initial_throw_angle += rose_switch_angle_offset_right
+	else:
+		initial_throw_angle += rose_switch_angle_offset_left
 	print("Switch - Initial throw angle: " + str(initial_throw_angle))
 	set_direction()
 
 func ricochet(collision):
 	velocity = velocity - 2 * velocity.project(collision.get_normal())
-	#print(velocity.length())
 
 func handle_collision(collision, vel_vec, delta):
 	if collision and collision.get_collider().collision_layer == Globals.ARENA_COL_LAYER:
 		velocity = (1/delta) * (vel_vec - 2 * vel_vec.project(collision.get_normal()))
-		#print(velocity.length())
 		return true
 
 func handle_collision2(collision):
 	if collision and collision.get_collider().collision_layer == Globals.ARENA_COL_LAYER:
 		ricochet(collision)
-
