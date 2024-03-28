@@ -6,12 +6,14 @@ enum {
 }
 var behav_state = FOLLOW
 
-const FOLLOW_SPEED = 5.0
+const FOLLOW_SPEED := 5.0
+const TARGET_DISTANCE := 3.0
 
-const ATTACK_DURATION_SECS = 1.5
+const ATTACK_DURATION_SECS := 1.5
 
-var aiming_at_target = true
-const SWEEP_CHANCE = .2
+var aiming_at_target := true
+
+const SWEEP_CHANCE := .2
 var rng := RandomNumberGenerator.new()
 @onready var nav_agent = $NavigationAgent3D
 @onready var animation_player = $AnimationPlayer
@@ -47,6 +49,12 @@ func follow():
 	
 	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
 	nav_agent.velocity = new_velocity
+	
+	# If player isn't in sight, reduce target distance to a very small number
+	if can_see_target():
+		nav_agent.target_desired_distance = TARGET_DISTANCE
+	else:
+		nav_agent.target_desired_distance = .1
 
 func start_attack():
 	behav_state = ATTACK
@@ -70,3 +78,17 @@ func attack():
 	
 func stop_aiming_at_target():
 	aiming_at_target = false
+
+func can_see_target():
+	var space_state := get_world_3d().direct_space_state
+	var sight_dir := global_position.direction_to(target.global_position)
+	var query = PhysicsRayQueryParameters3D.create(global_position, global_position + nav_agent.neighbor_distance * sight_dir)
+	query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER, Globals.TARGET_COL_LAYER])
+	query.collide_with_areas = true
+	var result = space_state.intersect_ray(query)
+	if not result:
+		return true
+	if result.collider.collision_layer == Globals.ARENA_COL_LAYER:
+		return false
+	else:
+		return true

@@ -62,12 +62,16 @@ shape = SubResource("CylinderShape3D_0i10h")
 
 [node name="EnemySpawner" parent="." instance=ExtResource("3_01kc0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 5, 2.08165e-12)
+spawn_cooldown_secs = 5.0
 
 [node name="EnemySpawner2" parent="." instance=ExtResource("3_01kc0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 5, 2.08165e-12)
+spawn_cooldown_secs = 5.0
 
 [node name="EnemySpawner3" parent="." instance=ExtResource("3_01kc0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 5, 45)
+spawn_cooldown_secs = 5.0
 
 [node name="EnemySpawner4" parent="." instance=ExtResource("3_01kc0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 5, -45)
+spawn_cooldown_secs = 5.0

@@ -2,11 +2,11 @@ extends Node3D
 
 const GUN_CHANCE = .33
 
-var spawn_cooldown_secs := 7.0
 var rng := RandomNumberGenerator.new()
 var fasthuman := preload("res://enemies/enemy_fasthuman.tscn")
 var gunhuman := preload("res://enemies/enemy_gunhuman.tscn")
 @export var spawning := true
+@export var spawn_cooldown_secs := 7.0
 @onready var arena := $/root/Arena
 	
 func _ready():
