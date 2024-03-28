@@ -15,6 +15,7 @@ func make_mask(layers):
 	return mask
 
 var score := 0
+var multiplier := 50
 
 const DODGE_SCORE = 1
 const INSTANT_RETHROW_SCORE = 1
@@ -27,4 +28,4 @@ const RAPIDORBIT_HIT_SCORE = 1
 
 func award_score(points):
 	# Apply multipliers/modifiers
-	score += points
+	score += points * multiplier
