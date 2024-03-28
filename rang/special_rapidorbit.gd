@@ -37,3 +37,6 @@ func rapidorbit(delta):
 
 func _physics_process(delta):
 	rapidorbit(delta)
+
+func get_mvmt_state():
+	return "RAPIDORBIT"

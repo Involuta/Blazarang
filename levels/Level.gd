@@ -17,6 +17,8 @@ func _process(_delta):
 			cotu.lock_off()
 		else:
 			try_lock_on()
+	if Input.is_action_just_pressed("Special"):
+		print(Globals.score)
 
 func try_lock_on():
 	cotu_look_direction = camera_twist_pivot.basis * Vector3.FORWARD

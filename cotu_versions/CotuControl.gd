@@ -93,6 +93,7 @@ func _physics_process(delta):
 		# Instant rethrow
 		throw_queued = false
 		throw_rang()
+		Globals.award_score(Globals.INSTANT_RETHROW_SCORE)
 	
 	# Target control
 	if roserang_instance == null:

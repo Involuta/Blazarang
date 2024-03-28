@@ -20,7 +20,7 @@ radius = 2.0
 height = 0.2
 radius = 2.0
 
-[node name="roserang" type="CharacterBody3D"]
+[node name="Roserang" type="CharacterBody3D"]
 collision_mask = 2
 script = ExtResource("1_m7w6u")
 

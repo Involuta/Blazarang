@@ -26,21 +26,9 @@ func stop_following_cotu():
 	following_cotu = false
 
 func _on_body_entered(body):
-	if body.name.contains("roserang") and not body.invincible:
-		if body.mvmt_state != body.ROSE:
+	if body.name.contains("Roserang") and not body.invincible:
+		if body.get_mvmt_state() != "ROSE":
 			roserang_queued = true
 		start_following_cotu()
 		body.buff_rang()
-
-func _on_area_entered(area):
-	pass
-	"""
-	if area.name.contains("TargetCollider"):
-		var roserang = area.get_parent()
-		if roserang.mvmt_state != roserang.ROSE:
-			roserang_queued = true
-		start_following_cotu()
-		roserang.buff_rang()
-	else:
-		print(area.name)
-	"""
+		Globals.award_score(Globals.DODGE_SCORE)

@@ -12,3 +12,18 @@ func make_mask(layers):
 	for layer in layers:
 		mask += pow(2, layer-1)
 	return mask
+
+var score := 0
+
+const DODGE_SCORE = 1
+const INSTANT_RETHROW_SCORE = 1
+const MELEE_HIT_SCORE = 1
+const MELEE_KILL_SCORE = 2
+const GUNNER_HIT_SCORE = 1
+const GUNNER_KILL_SCORE = 2
+const RICOCHET_HIT_SCORE = 1
+const RAPIDORBIT_HIT_SCORE = 1
+
+func award_score(points):
+	# Apply multipliers/modifiers
+	score += points

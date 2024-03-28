@@ -4,3 +4,13 @@ res://target/target.tscn
 res://rang/roserang.tscn
 res://enemies/enemy_fasthuman.tscn
 res://rang/roserang.gd
+res://cotu_versions/CotuControl.gd
+res://levels/Arena.tscn
+res://globals.gd
+res://hurtbox.gd
+res://enemies/enemy_hurtbox.gd
+res://enemies/enemy_gunhuman.tscn
+res://rang/special_rapidorbit.gd
+res://levels/Level.gd
+res://target/target.gd
+res://cotu_versions/CotuHurtbox.gd

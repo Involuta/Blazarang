@@ -16,14 +16,13 @@ func on_hit(hitbox):
 	if hitbox.name in enemy_hitboxes:
 		if "is_dodging" in parent:
 			if not parent.is_dodging:
-				receive_hit(hitbox.damage)
+				receive_hit(hitbox.damage, hitbox.get_parent())
 			else:
 				return
 		else:
-			receive_hit(hitbox.damage)
-		
+			receive_hit(hitbox.damage, hitbox.get_parent())
 
-func receive_hit(damage: int):
+func receive_hit(damage: int, hitter):
 	health -= damage
 	if health <= 0:
 		die()

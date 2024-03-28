@@ -3,6 +3,19 @@ extends Hurtbox
 
 var death_particle := preload("res://enemies/death_particle.tscn")
 
+func receive_hit(damage: int, hitter):
+	match(parent.name):
+		"EnemyMelee":
+			Globals.award_score(Globals.MELEE_HIT_SCORE)
+		"EnemyGunner":
+			Globals.award_score(Globals.GUNNER_HIT_SCORE)
+	if hitter.name == "Roserang":
+		if hitter.get_mvmt_state() == "RICOCHET":
+			Globals.award_score(Globals.RICOCHET_HIT_SCORE)
+		elif hitter.get_mvmt_state() == "RAPIDORBIT":
+			Globals.award_score(Globals.RAPIDORBIT_HIT_SCORE)
+	super(damage, hitter)
+
 func death_effect():
 	for i in range(dp_count):
 		var dp = death_particle.instantiate()
@@ -11,5 +24,10 @@ func death_effect():
 		dp.apply_central_impulse(Vector3(rng.randf_range(-dp_impulse_limit, dp_impulse_limit), dp_impulse_limit*rng.randf(), rng.randf_range(-dp_impulse_limit, dp_impulse_limit)))
 
 func die():
+	match(parent.name):
+		"EnemyMelee":
+			Globals.award_score(Globals.MELEE_KILL_SCORE)
+		"EnemyGunner":
+			Globals.award_score(Globals.GUNNER_KILL_SCORE)
 	death_effect()
 	super()

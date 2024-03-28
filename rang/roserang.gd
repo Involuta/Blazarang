@@ -31,7 +31,7 @@ enum {
 }
 var mvmt_state = ROSE
 var current_loop_angle := 0.0 # shows how far into the current loop the rang is (i.e. how far it would be if it were still in rose mode) to know whether to start returning during ricochet
-const RETURN_ACC := .4
+const RETURN_ACC := 1.2
 const MAX_RETURN_SPEED := 55
 
 var rapidorbit_script := preload("res://rang/special_rapidorbit.gd")
@@ -72,8 +72,6 @@ func _physics_process(delta):
 			var new_pos = rose(delta)
 			# vel_vec is in meters per frame, which is what move_and_collide wants
 			var vel_vec = new_pos - global_position
-			#print("Cotu look angle: " + str(cotu.look_angle))
-			#print("Vel_vec angle: " + str(Vector2(vel_vec.x, vel_vec.z).angle()))
 			var hit_arena = handle_collision(move_and_collide(vel_vec, true), vel_vec, delta)
 			if hit_arena:
 				set_collision_mask_value(Globals.ARENA_COL_LAYER, true)
@@ -111,7 +109,6 @@ func switch_to_rose():
 		initial_throw_angle += rose_switch_angle_offset_right
 	else:
 		initial_throw_angle += rose_switch_angle_offset_left
-	print("Switch - Initial throw angle: " + str(initial_throw_angle))
 	set_direction()
 
 func ricochet(collision):
@@ -125,3 +122,12 @@ func handle_collision(collision, vel_vec, delta):
 func handle_collision2(collision):
 	if collision and collision.get_collider().collision_layer == Globals.ARENA_COL_LAYER:
 		ricochet(collision)
+
+func get_mvmt_state():
+	match(mvmt_state):
+		ROSE:
+			return "ROSE"
+		RICOCHET:
+			return "RICOCHET"
+		RETURN:
+			return "RETURN"
