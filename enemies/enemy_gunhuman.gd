@@ -44,6 +44,8 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 
 func follow():
 	look_at(target.global_position)
+	rotation.x = 0
+	rotation.z = 0
 	nav_agent.set_target_position(target.global_position)
 	var next_position = nav_agent.get_next_path_position()
 	var new_velocity = (next_position - global_position).normalized() * FOLLOW_SPEED
@@ -71,6 +73,8 @@ func attack():
 	velocity.z = 0
 	if aiming_at_target:
 		look_at(target.global_position)
+		rotation.x = 0
+		rotation.z = 0
 	
 func stop_aiming_at_target():
 	aiming_at_target = false

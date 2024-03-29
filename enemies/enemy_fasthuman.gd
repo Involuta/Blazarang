@@ -39,10 +39,12 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	# This line accelerates the agent rather than setting its velocity to its desired velocity directly, preventing it from getting caught on corners
 	if behav_state == FOLLOW:
 		velocity = velocity.move_toward(safe_velocity, .25)
-		move_and_slide()
+	move_and_slide()
 
 func follow():
 	look_at(target.global_position)
+	rotation.x = 0
+	rotation.z = 0
 	nav_agent.set_target_position(target.global_position)
 	var next_position = nav_agent.get_next_path_position()
 	var new_velocity = (next_position - global_position).normalized() * FOLLOW_SPEED
@@ -77,7 +79,8 @@ func attack():
 	velocity.z = 0
 	if aiming_at_target:
 		look_at(target.global_position)
-	move_and_slide()
+		rotation.x = 0
+		rotation.z = 0
 	
 func stop_aiming_at_target():
 	aiming_at_target = false
