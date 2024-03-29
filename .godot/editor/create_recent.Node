@@ -1,13 +1,14 @@
-StaticBody3D
+MultiMeshInstance3D
+Node3D
 CollisionShape3D
+StaticBody3D
+RigidBody3D
 NavigationRegion3D
 MeshInstance3D
 DirectionalLight3D
 WorldEnvironment
-Node3D
 Area3D
 CharacterBody3D
-RigidBody3D
 RayCast3D
 AnimationTree
 AnimationPlayer

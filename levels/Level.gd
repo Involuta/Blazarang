@@ -1,3 +1,4 @@
+class_name Level
 extends Node3D
 
 var cotu_look_direction
@@ -8,7 +9,6 @@ var cotu_look_direction
 @onready var camera = $/root/Arena/cotuCB/CameraTwistPivot/CameraPitchPivot/CameraVisualObject/Camera3D
 
 func _ready():
-	#print($NavigationRegion3D/Floor/StaticBody3D.collision_layer)
 	return
 	
 func _process(_delta):
@@ -17,8 +17,6 @@ func _process(_delta):
 			cotu.lock_off()
 		else:
 			try_lock_on()
-	if Input.is_action_just_pressed("Special"):
-		print(Globals.score)
 
 func try_lock_on():
 	cotu_look_direction = camera_twist_pivot.basis * Vector3.FORWARD

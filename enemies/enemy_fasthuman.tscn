@@ -168,6 +168,7 @@ height = 3.0
 collision_layer = 8
 collision_mask = 26
 script = ExtResource("1_tn4ny")
+sweep_chance = 0.15
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_v8r4p")

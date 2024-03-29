@@ -20,3 +20,4 @@ res://enemies/EnemySpawner.tscn
 res://enemies/enemy_gunhuman.gd
 res://enemies/bullet.gd
 res://enemies/enemy_bullet.tscn
+res://levels/moving_platform.gd

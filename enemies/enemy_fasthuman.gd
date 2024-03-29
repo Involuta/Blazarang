@@ -13,7 +13,7 @@ const ATTACK_DURATION_SECS := 1.5
 
 var aiming_at_target := true
 
-const SWEEP_CHANCE := .2
+@export var sweep_chance := .2
 var rng := RandomNumberGenerator.new()
 @onready var nav_agent = $NavigationAgent3D
 @onready var animation_player = $AnimationPlayer
@@ -65,7 +65,7 @@ func start_attack():
 
 func choose_attack() -> String:
 	var choice := rng.randf()
-	if choice <= SWEEP_CHANCE:
+	if choice <= sweep_chance:
 		return "sweep"
 	else:
 		return "overhead"
