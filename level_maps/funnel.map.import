@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://d2o1o54f71ib7"
+path="res://.godot/imported/funnel.map-939fd2a5007c81aa9ac60c3005f11baa.tres"
+
+[deps]
+
+source_file="res://level_maps/funnel.map"
+dest_files=["res://.godot/imported/funnel.map-939fd2a5007c81aa9ac60c3005f11baa.tres"]
+
+[params]
+

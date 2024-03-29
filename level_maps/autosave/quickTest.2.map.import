@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://77aprhug05pe"
+path="res://.godot/imported/quickTest.2.map-c0c14d979947f09405d4c84866a8adfb.tres"
+
+[deps]
+
+source_file="res://level_maps/autosave/quickTest.2.map"
+dest_files=["res://.godot/imported/quickTest.2.map-c0c14d979947f09405d4c84866a8adfb.tres"]
+
+[params]
+

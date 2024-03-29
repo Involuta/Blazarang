@@ -29,6 +29,7 @@ func choose_enemy():
 		cumulative_weight += enemy_chances[enemy]
 		if choice <= cumulative_weight:
 			return spawn_from_name(enemy)
+	return spawn_from_name("default")
 	
 func spawn_from_name(enemy_name):
 	match(enemy_name):
@@ -36,7 +37,7 @@ func spawn_from_name(enemy_name):
 			return melee.instantiate()
 		"GUNNER":
 			return gunner.instantiate()
-		_:
+		"default":
 			print("Error: attempted to spawn unknown enemy")
 			return melee.instantiate()
 

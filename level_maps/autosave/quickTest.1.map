@@ -1,0 +1,6 @@
+// Game: Blazarang
+// Format: Standard
+// entity 0
+{
+"classname" "worldspawn"
+}

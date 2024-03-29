@@ -65,8 +65,10 @@ func start_attack():
 	behav_state = FOLLOW
 
 func attack():
-	nav_agent.velocity = nav_agent.velocity.y * Vector3.UP
-	velocity = velocity.y * Vector3.UP
+	nav_agent.velocity.x = 0
+	nav_agent.velocity.z = 0
+	velocity.x = 0
+	velocity.z = 0
 	if aiming_at_target:
 		look_at(target.global_position)
 	
