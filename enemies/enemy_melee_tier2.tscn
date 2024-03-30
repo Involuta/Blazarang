@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://crnvtwl8auu75"]
+
+[ext_resource type="PackedScene" uid="uid://cm35v0fu2apju" path="res://enemies/enemy_melee_base.tscn" id="1_1ofje"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_02rfo"]
+albedo_color = Color(1, 0.156863, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_mlfo4"]
+material = SubResource("StandardMaterial3D_02rfo")
+
+[node name="EnemyMeleeTier2" instance=ExtResource("1_1ofje")]
+
+[node name="MeshInstance3D" parent="." index="0"]
+mesh = SubResource("CapsuleMesh_mlfo4")
+
+[node name="EnemyHurtbox" parent="." index="3"]
+health = 30

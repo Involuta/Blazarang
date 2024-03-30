@@ -96,7 +96,7 @@ func _physics_process(delta):
 			move_and_slide()
 
 func buff_rang():
-	hitbox.damage += 10
+	hitbox.damage = 30
 
 func switch_to_rose():
 	target.roserang_queued = false

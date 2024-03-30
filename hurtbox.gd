@@ -22,7 +22,7 @@ func on_hit(hitbox):
 		else:
 			receive_hit(hitbox.damage, hitbox.get_parent())
 
-func receive_hit(damage: int, hitter):
+func receive_hit(damage: int, _hitter):
 	health -= damage
 	if health <= 0:
 		die()

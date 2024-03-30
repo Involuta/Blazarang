@@ -1,12 +1,15 @@
 extends Node3D
 
 var rng := RandomNumberGenerator.new()
-var melee := preload("res://enemies/enemy_fasthuman.tscn")
-var gunner := preload("res://enemies/enemy_gunhuman.tscn")
+var melee_base := preload("res://enemies/enemy_melee_base.tscn")
+var melee_tier1 := preload("res://enemies/enemy_melee_tier1.tscn")
+var melee_tier2 := preload("res://enemies/enemy_melee_tier2.tscn")
+var melee_tier3 := preload("res://enemies/enemy_melee_tier3.tscn")
+var gunner := preload("res://enemies/enemy_gunner_base.tscn")
 @export var spawning := true
 @export var spawn_cooldown_secs := 7.0
 @export var enemy_chances = {
-	"MELEE": .66,
+	"MELEE_TIER1": .66,
 	"GUNNER" : .33
 }
 @onready var arena := $/root/Arena
@@ -33,13 +36,19 @@ func choose_enemy():
 	
 func spawn_from_name(enemy_name):
 	match(enemy_name):
-		"MELEE":
-			return melee.instantiate()
+		"MELEE_BASE":
+			return melee_base.instantiate()
+		"MELEE_TIER1":
+			return melee_tier1.instantiate()
+		"MELEE_TIER2":
+			return melee_tier2.instantiate()
+		"MELEE_TIER3":
+			return melee_tier3.instantiate()
 		"GUNNER":
 			return gunner.instantiate()
 		"default":
 			print("Error: attempted to spawn unknown enemy")
-			return melee.instantiate()
+			return melee_base.instantiate()
 
 func spawn_limit_met():
 	return get_tree().get_nodes_in_group("lockonables").size() >= arena.lockonable_limit

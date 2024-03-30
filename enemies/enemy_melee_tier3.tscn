@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwqdm1pn51yee"]
+
+[ext_resource type="PackedScene" uid="uid://crnvtwl8auu75" path="res://enemies/enemy_melee_tier2.tscn" id="1_6cuks"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kausb"]
+albedo_color = Color(1, 1, 0.0862745, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ilgca"]
+material = SubResource("StandardMaterial3D_kausb")
+
+[node name="EnemyMeleeTier3" instance=ExtResource("1_6cuks")]
+sweep_chance = 0.3
+
+[node name="MeshInstance3D" parent="." index="0"]
+mesh = SubResource("CapsuleMesh_ilgca")
+
+[node name="EnemyHurtbox" parent="." index="3"]
+health = 40

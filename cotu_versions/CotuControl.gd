@@ -8,7 +8,7 @@ const WALK_SPEED := 10
 const STEP_DODGE_SPEED := 15
 const STEP_DODGE_DURATION_SECS := .5
 const STEP_DODGE_COOLDOWN_SECS := .1
-const JUMP_SPEED := 15
+const JUMP_SPEED := 14
 # Seconds it takes for Cotu to decelerate to 0 speed when not walking
 const WALK_DECEL_SECS := .25
 
@@ -26,6 +26,7 @@ var locked_on := false
 var lock_on_target = null
 
 var look_angle := 0.0
+var look_angle2 := 0.0
 var max_cam_dist := 6.0 # dist btwn player and camera when camera's not colliding with geometry; player can modify this in-game
 
 var roserang := preload("res://rang/roserang.tscn")
@@ -101,7 +102,8 @@ func _physics_process(delta):
 	
 	# Set look angle
 	look_angle = camera_twist_pivot.basis.get_euler().y
-
+	look_angle2 = camera_twist_pivot.global_rotation.y
+	
 	# Camera movement/orientation; ui_cancel means esc
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

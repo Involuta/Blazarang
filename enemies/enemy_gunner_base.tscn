@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://c8sivx3hx1oy1"]
 
-[ext_resource type="Script" path="res://enemies/enemy_gunhuman.gd" id="1_t4x7d"]
-[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="1_wbxbn"]
+[ext_resource type="Script" path="res://enemies/enemy_gunner_base.gd" id="1_l3sqo"]
+[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_ijxet"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t7knm"]
 albedo_color = Color(0, 0.490196, 0.952941, 1)
@@ -52,7 +52,7 @@ _data = {
 [node name="EnemyGunner" type="CharacterBody3D"]
 collision_layer = 8
 collision_mask = 11
-script = ExtResource("1_t4x7d")
+script = ExtResource("1_l3sqo")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_5fl67")
@@ -68,7 +68,7 @@ radius = 3.0
 [node name="EnemyHurtbox" type="Area3D" parent="."]
 collision_layer = 8
 collision_mask = 11
-script = ExtResource("1_wbxbn")
+script = ExtResource("2_ijxet")
 health = 10
 enemy_hitboxes = ["PlayerHitbox"]
 

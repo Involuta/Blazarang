@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://cm35v0fu2apju"]
 
-[ext_resource type="Script" path="res://enemies/enemy_fasthuman.gd" id="1_tn4ny"]
-[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_ah3db"]
-[ext_resource type="Script" path="res://hitbox.gd" id="3_fa4yi"]
+[ext_resource type="Script" path="res://enemies/enemy_melee_base.gd" id="1_b2t2q"]
+[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_nfj3i"]
+[ext_resource type="Script" path="res://hitbox.gd" id="3_krk08"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5rrex"]
 albedo_color = Color(0.878431, 0.231373, 0.133333, 1)
@@ -164,10 +164,10 @@ material = SubResource("StandardMaterial3D_al1tw")
 radius = 0.2
 height = 3.0
 
-[node name="EnemyMelee" type="CharacterBody3D" groups=["lockonables"]]
+[node name="EnemyMeleeBase" type="CharacterBody3D" groups=["lockonables"]]
 collision_layer = 8
 collision_mask = 26
-script = ExtResource("1_tn4ny")
+script = ExtResource("1_b2t2q")
 sweep_chance = 0.15
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -184,7 +184,7 @@ radius = 3.0
 [node name="EnemyHurtbox" type="Area3D" parent="."]
 collision_layer = 8
 collision_mask = 11
-script = ExtResource("2_ah3db")
+script = ExtResource("2_nfj3i")
 health = 20
 enemy_hitboxes = ["PlayerHitbox"]
 
@@ -204,7 +204,7 @@ visible = false
 transform = Transform3D(0.999999, 2.15301e-08, -2.2719e-14, -8.9407e-08, 0.999999, 0, -6.17927e-15, -6.2758e-15, 0.999999, 0.065823, 2.37137, -4.71532e-07)
 collision_layer = 8
 collision_mask = 11
-script = ExtResource("3_fa4yi")
+script = ExtResource("3_krk08")
 
 [node name="HitboxCollider" type="CollisionShape3D" parent="MeleeHitboxPivot/EnemyHitbox"]
 shape = SubResource("CapsuleShape3D_na3bt")

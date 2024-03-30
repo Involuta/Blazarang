@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3nurhh7od5kk"]
+
+[ext_resource type="PackedScene" uid="uid://cm35v0fu2apju" path="res://enemies/enemy_melee_base.tscn" id="1_ampo0"]
+
+[node name="EnemyMeleeTier1" instance=ExtResource("1_ampo0")]
+sweep_chance = 2.08165e-12
