@@ -95,7 +95,7 @@ func _physics_process(delta):
 				velocity = MAX_RETURN_SPEED * global_position.direction_to(target.global_position)
 			move_and_slide()
 
-func buff_rang():
+func buff():
 	hitbox.damage = 30
 
 func switch_to_rose():

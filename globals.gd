@@ -29,3 +29,8 @@ const RAPIDORBIT_HIT_SCORE = 1
 func award_score(points):
 	# Apply multipliers/modifiers
 	score += points * multiplier
+
+enum BUFFS {
+	DAMAGE,
+	DEFENSE
+}

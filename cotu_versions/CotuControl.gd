@@ -29,10 +29,12 @@ var look_angle := 0.0
 var look_angle2 := 0.0
 var max_cam_dist := 6.0 # dist btwn player and camera when camera's not colliding with geometry; player can modify this in-game
 
-var roserang := preload("res://rang/roserang.tscn")
-var roserang_instance = null
 var throw_queued := false
 const INSTANT_RETHROW_SECS := .2 # max possible time btwn player inputting throw and rang hitting Cotu that still cauess an instant rethrow
+var buffs := []
+
+var roserang := preload("res://rang/roserang.tscn")
+var roserang_instance = null
 @onready var physical_collider := $CollisionShape3D
 @onready var camera_twist_pivot := $CameraTwistPivot
 @onready var camera_pitch_pivot := $CameraTwistPivot/CameraPitchPivot
@@ -96,9 +98,10 @@ func _physics_process(delta):
 		throw_rang()
 		Globals.award_score(Globals.INSTANT_RETHROW_SCORE)
 	
-	# Target control
+	# Target control and buff clearing
 	if roserang_instance == null:
 		target.start_following_cotu()
+		buffs = []
 	
 	# Set look angle
 	look_angle = camera_twist_pivot.basis.get_euler().y
@@ -177,8 +180,21 @@ func step_dodge():
 func throw_rang():
 	roserang_instance = roserang.instantiate()
 	add_sibling(roserang_instance)
+	apply_buffs_to_rang()
 
 func start_instant_rethrow_timer():
 	throw_queued = true
 	await get_tree().create_timer(INSTANT_RETHROW_SECS).timeout
 	throw_queued = false
+
+func buff():
+	if Globals.BUFFS.DAMAGE not in buffs:
+		buffs.append(Globals.BUFFS.DAMAGE)
+	if Globals.BUFFS.DEFENSE not in buffs:
+		buffs.append(Globals.BUFFS.DEFENSE)
+
+func apply_buffs_to_rang():
+	for buff in buffs:
+		match(buff):
+			Globals.BUFFS.DAMAGE:
+				roserang_instance.buff()

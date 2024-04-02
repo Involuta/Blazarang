@@ -112,10 +112,7 @@ Special={
 3d_physics/layer_4="Enemy"
 3d_physics/layer_5="Cotu"
 3d_physics/layer_6="Target"
-
-[physics]
-
-3d/default_gravity=9.8
+3d_physics/layer_7="ThickEnemy"
 
 [rendering]
 

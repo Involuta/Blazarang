@@ -9,6 +9,7 @@ albedo_color = Color(1, 1, 0.0862745, 1)
 material = SubResource("StandardMaterial3D_kausb")
 
 [node name="EnemyMeleeTier3" instance=ExtResource("1_6cuks")]
+collision_layer = 64
 sweep_chance = 0.3
 
 [node name="MeshInstance3D" parent="." index="0"]

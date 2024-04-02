@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://cotu_versions/CotuControl.gd" id="1_jhy4u"]
 [ext_resource type="Script" path="res://cotu_versions/CotuHurtbox.gd" id="2_o2tg2"]
-[ext_resource type="PackedScene" uid="uid://d1bqkmdbk3q07" path="res://cotu_versions/cotu_anims_6.tscn" id="3_qmg2q"]
+[ext_resource type="PackedScene" uid="uid://48unv252sqah" path="res://cotu_versions/cotu_anims_8.tscn" id="3_1u6vb"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_80wmm"]
 
@@ -83,14 +83,14 @@ transitions = ["Start", "RunBlendSpace", SubResource("AnimationNodeStateMachineT
 graph_offset = Vector2(77.393, -39.1124)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wg7n8"]
-graph_offset = Vector2(-15.36, 79.68)
+graph_offset = Vector2(-17.28, 45.12)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_auidk")
 nodes/StateMachine/position = Vector2(80, 150)
 node_connections = [&"output", 0, &"StateMachine"]
 
 [node name="cotuCB" type="CharacterBody3D"]
 collision_layer = 16
-collision_mask = 10
+collision_mask = 74
 script = ExtResource("1_jhy4u")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -136,36 +136,36 @@ active = true
 parameters/StateMachine/conditions/just_dodged = false
 parameters/StateMachine/RunBlendSpace/blend_position = 1.0
 
-[node name="CotuAnims" parent="." instance=ExtResource("3_qmg2q")]
+[node name="CotuAnims" parent="." instance=ExtResource("3_1u6vb")]
 
 [node name="Skeleton3D" parent="CotuAnims/Armature" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.988, 2.08165e-12)
-bones/0/position = Vector3(-0.00415829, 0.893967, 0.147526)
-bones/0/rotation = Quaternion(0.105601, 0.115218, -0.00103953, 0.987711)
-bones/1/position = Vector3(0.00186435, 0.0922829, -0.0105107)
-bones/1/rotation = Quaternion(0.0519485, -0.0278325, 0.0260126, 0.997923)
+bones/0/position = Vector3(-0.00369843, 0.905755, 0.14791)
+bones/0/rotation = Quaternion(0.0965998, 0.103448, -0.000877098, 0.989932)
+bones/1/position = Vector3(0.00186435, 0.0922828, -0.0105108)
+bones/1/rotation = Quaternion(0.0522003, -0.0235225, 0.024422, 0.998061)
 bones/2/rotation = Quaternion(-0.0486723, -0.016203, -0.00927094, 0.99864)
 bones/3/rotation = Quaternion(-0.0794417, -0.00918478, -0.0154666, 0.996677)
-bones/4/rotation = Quaternion(0.0696841, -0.0465391, 0.00662584, 0.996461)
-bones/7/position = Vector3(0.0677784, 0.110087, 0.0123683)
-bones/7/rotation = Quaternion(-0.56661, -0.425068, 0.566421, -0.421234)
-bones/8/rotation = Quaternion(0.553264, 0.100841, 0.0514204, 0.825279)
-bones/9/rotation = Quaternion(-1.7887e-07, -5.34572e-07, 0.632338, 0.774693)
-bones/10/rotation = Quaternion(-0.0726483, -0.103945, 0.0413105, 0.991066)
-bones/31/position = Vector3(-0.0602012, 0.115324, 0.00915635)
-bones/31/rotation = Quaternion(0.533551, -0.459051, 0.562896, 0.433295)
-bones/32/rotation = Quaternion(0.61004, -0.199807, 0.323249, 0.695297)
-bones/33/rotation = Quaternion(-1.97407e-07, -6.7339e-08, -0.592506, 0.805566)
-bones/34/rotation = Quaternion(-0.033891, -0.013632, -0.00574582, 0.999316)
-bones/55/rotation = Quaternion(-0.12416, 0.190759, 0.973274, -0.0305358)
+bones/4/rotation = Quaternion(0.0697, -0.0414197, 0.00599474, 0.99669)
+bones/7/position = Vector3(0.0676216, 0.110608, 0.0145047)
+bones/7/rotation = Quaternion(-0.577445, -0.444578, 0.552432, -0.404631)
+bones/8/rotation = Quaternion(0.536772, 0.0168242, 0.166958, 0.826872)
+bones/9/rotation = Quaternion(-1.73754e-07, -5.28499e-07, 0.641694, 0.766961)
+bones/10/rotation = Quaternion(-0.0995366, -0.111241, 0.0547297, 0.98728)
+bones/31/position = Vector3(-0.0603795, 0.115519, 0.0116316)
+bones/31/rotation = Quaternion(0.548744, -0.474216, 0.548967, 0.415493)
+bones/32/rotation = Quaternion(0.590286, -0.239519, 0.371996, 0.675138)
+bones/33/rotation = Quaternion(-1.91815e-07, -9.30322e-08, -0.647898, 0.761727)
+bones/34/rotation = Quaternion(-0.0289141, -0.0139162, 0.00208039, 0.999483)
+bones/55/rotation = Quaternion(-0.106583, 0.0785624, 0.990265, -0.0429271)
 bones/55/scale = Vector3(1, 0.999993, 1.00001)
-bones/56/rotation = Quaternion(-0.75092, 3.66001e-07, 1.26839e-07, 0.660393)
-bones/57/rotation = Quaternion(0.667115, 0.049369, 0.00615857, 0.743292)
-bones/58/rotation = Quaternion(0.275998, -0.094395, 0.0272504, 0.956124)
-bones/60/rotation = Quaternion(-0.107528, 0.456565, 0.88195, 0.0463802)
+bones/56/rotation = Quaternion(-0.668641, 3.56782e-07, 7.76909e-08, 0.743585)
+bones/57/rotation = Quaternion(0.672677, 0.0524131, 0.00656723, 0.738048)
+bones/58/rotation = Quaternion(0.275999, -0.0943952, 0.0272502, 0.956123)
+bones/60/rotation = Quaternion(-0.0898833, 0.506288, 0.856367, 0.0472069)
 bones/60/scale = Vector3(1, 0.999999, 1)
-bones/61/rotation = Quaternion(-0.615361, -2.15803e-06, -1.66534e-06, 0.788245)
-bones/62/rotation = Quaternion(0.524018, -0.0303033, -0.0167506, 0.851003)
-bones/63/rotation = Quaternion(0.399464, 0.0966476, -0.0157511, 0.911504)
+bones/61/rotation = Quaternion(-0.55994, -2.26885e-06, -1.5197e-06, 0.828533)
+bones/62/rotation = Quaternion(0.391279, -0.0266136, -0.0123475, 0.919804)
+bones/63/rotation = Quaternion(0.413699, 0.0968811, -0.0142384, 0.905132)
 
 [editable path="CotuAnims"]

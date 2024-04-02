@@ -7,6 +7,8 @@ var secs_before_sweeper1_spawns_min := 5.0
 var secs_before_sweeper1_spawns_max := 15.0
 var secs_before_sweeper2_spawns_min := 5.0
 var secs_before_sweeper2_spawns_max := 10.0
+var secs_before_sweeper3_spawns_min := 9.5
+var secs_before_sweeper3_spawns_max := 13.5
 const SECS_BEFORE_TIER2_SPAWNS := 15.0
 const SECS_BEFORE_TIER3_SPAWNS := 30.0
 const TIER1_SPAWNS := {
@@ -52,6 +54,10 @@ func start_spawning_sweeper_after_delay():
 	
 	var secs_before_sweeper2_spawns := rng.randf_range(secs_before_sweeper2_spawns_min, secs_before_sweeper2_spawns_max)
 	await get_tree().create_timer(secs_before_sweeper2_spawns).timeout
+	spawn_sweeper()
+	
+	var secs_before_sweeper3_spawns := rng.randf_range(secs_before_sweeper3_spawns_min, secs_before_sweeper3_spawns_max)
+	await get_tree().create_timer(secs_before_sweeper3_spawns).timeout
 	spawn_sweeper()
 
 func spawn_sweeper():
