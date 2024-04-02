@@ -41,7 +41,7 @@ func _on_navigation_agent_3d_target_reached():
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	# This line accelerates the agent rather than setting its velocity to its desired velocity directly, preventing it from getting caught on corners
-	if behav_state == FOLLOW:
+	if behav_state == FOLLOW and is_on_floor():
 		velocity = velocity.move_toward(safe_velocity, .25)
 	move_and_slide()
 

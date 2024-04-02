@@ -110,16 +110,16 @@ enemy_chances = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.5074, 12.6756, -15.6324)
 spawn_cooldown_secs = 9.0
 enemy_chances = {
-"GUNNER": 0.33,
-"MELEE_TIER1": 0.66
+"GUNNER": 0.25,
+"MELEE_TIER1": 0.75
 }
 
 [node name="EnemySpawner4" parent="." instance=ExtResource("6_m6ekn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.7236, 12.8979, -15.4906)
 spawn_cooldown_secs = 9.0
 enemy_chances = {
-"GUNNER": 0.33,
-"MELEE_TIER1": 0.66
+"GUNNER": 0.25,
+"MELEE_TIER1": 0.75
 }
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]

@@ -1,12 +1,8 @@
-res://addons/func_godot/textures/default_material.tres
 res://cotu_versions/cotu_cb_main.tscn
-res://level_nodes/Arena.tscn
-res://enemies/sweeper.tscn
-res://level_nodes/lvl1.tscn
-res://enemies/enemy_melee_tier3.tscn
+res://addons/func_godot/textures/default_material.tres
 res://cotu_versions/CotuControl.gd
+res://level_nodes/Arena.tscn
+res://level_nodes/lvl1.tscn
 res://rang/roserang.tscn
 res://target/target.tscn
-res://target/target.gd
 res://rang/roserang.gd
-res://globals.gd

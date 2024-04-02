@@ -47,7 +47,7 @@ func _ready():
 	global_position = target.global_position
 
 func set_direction():
-	if cotu.walk_input.x > 0:
+	if cotu.moving_right:
 		angle_speed = -1*(PI / (petals * 120 / BPM))
 		angle = (-2*PI - initial_throw_angle) / petals
 	else:
@@ -105,7 +105,7 @@ func switch_to_rose():
 	current_loop_angle = 0
 
 	initial_throw_angle = petals*(-1*Vector2(velocity.normalized().x, velocity.normalized().z).angle() - PI/2)
-	if cotu.walk_input.x > 0:
+	if cotu.moving_right:
 		initial_throw_angle += rose_switch_angle_offset_right
 	else:
 		initial_throw_angle += rose_switch_angle_offset_left

@@ -13,6 +13,7 @@ const JUMP_SPEED := 14
 const WALK_DECEL_SECS := .25
 
 var walk_input := Vector2.ZERO
+var moving_right := true # Did the player last try to walk right?
 var grounded_speed := 0
 var can_dodge := true
 var is_dodging := false
@@ -68,6 +69,8 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 	
 	walk_input = Input.get_vector("WalkLeft", "WalkRight", "WalkForward", "WalkBackward")
+	if walk_input.x != 0:
+		moving_right = walk_input.x > 0
 	var mvmt_dir = Vector3(walk_input.x, 0, walk_input.y)
 	var oriented_mvmt_dir = (camera_twist_pivot.basis * mvmt_dir).normalized()
 	if oriented_mvmt_dir:
@@ -105,7 +108,6 @@ func _physics_process(delta):
 	
 	# Set look angle
 	look_angle = camera_twist_pivot.basis.get_euler().y
-	look_angle2 = camera_twist_pivot.global_rotation.y
 	
 	# Camera movement/orientation; ui_cancel means esc
 	if Input.is_action_just_pressed("ui_cancel"):
