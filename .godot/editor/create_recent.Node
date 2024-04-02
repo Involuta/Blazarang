@@ -1,3 +1,4 @@
+NavigationRegion3D
 FuncGodotMap
 CollisionShape3D
 MeshInstance3D
@@ -8,7 +9,6 @@ SpotLight3D
 MultiMeshInstance3D
 Node3D
 StaticBody3D
-NavigationRegion3D
 DirectionalLight3D
 WorldEnvironment
 Area3D

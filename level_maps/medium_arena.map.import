@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://xo1bncr1p5x1"
+path="res://.godot/imported/medium_arena.map-386f743e2a5d02239adf0f0381110d2e.tres"
+
+[deps]
+
+source_file="res://level_maps/medium_arena.map"
+dest_files=["res://.godot/imported/medium_arena.map-386f743e2a5d02239adf0f0381110d2e.tres"]
+
+[params]
+
