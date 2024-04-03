@@ -30,6 +30,7 @@ func _on_body_entered(body):
 		if body.get_mvmt_state() != "ROSE":
 			roserang_queued = true
 		start_following_cotu()
-		cotu.buff()
-		body.buff()
+		cotu.buff_self()
+		body.buff_self()
+		body.current_loop_angle = 0
 		Globals.award_score(Globals.DODGE_SCORE)

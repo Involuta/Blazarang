@@ -72,16 +72,17 @@ func _physics_process(delta):
 			var new_pos = rose(delta)
 			# vel_vec is in meters per frame, which is what move_and_collide wants
 			var vel_vec = new_pos - global_position
-			var hit_arena = handle_collision(move_and_collide(vel_vec, true), vel_vec, delta)
+			var hit_arena = rose_handle_collision(move_and_collide(vel_vec, true), vel_vec, delta)
 			if hit_arena:
 				set_collision_mask_value(Globals.ARENA_COL_LAYER, true)
 				mvmt_state = RICOCHET
 				return
 			global_position = new_pos
+			set_collision_mask_value(Globals.ARENA_COL_LAYER, current_loop_angle < PI/(2*petals))
 		RICOCHET:
 			if target.roserang_queued:
 				switch_to_rose()
-			handle_collision2(move_and_collide(velocity * delta))
+			ricochet_handle_collision(move_and_collide(velocity * delta))
 			if current_loop_angle >= PI/(2*petals):
 				set_collision_mask_value(Globals.ARENA_COL_LAYER, false)
 				mvmt_state = RETURN
@@ -95,7 +96,7 @@ func _physics_process(delta):
 				velocity = MAX_RETURN_SPEED * global_position.direction_to(target.global_position)
 			move_and_slide()
 
-func buff():
+func buff_self():
 	hitbox.damage = 30
 
 func switch_to_rose():
@@ -114,12 +115,12 @@ func switch_to_rose():
 func ricochet(collision):
 	velocity = velocity - 2 * velocity.project(collision.get_normal())
 
-func handle_collision(collision, vel_vec, delta):
+func rose_handle_collision(collision, vel_vec, delta):
 	if collision and collision.get_collider().collision_layer == Globals.ARENA_COL_LAYER:
 		velocity = (1/delta) * (vel_vec - 2 * vel_vec.project(collision.get_normal()))
 		return true
 
-func handle_collision2(collision):
+func ricochet_handle_collision(collision):
 	if collision and collision.get_collider().collision_layer == Globals.ARENA_COL_LAYER:
 		ricochet(collision)
 

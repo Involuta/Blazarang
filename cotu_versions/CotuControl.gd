@@ -189,7 +189,7 @@ func start_instant_rethrow_timer():
 	await get_tree().create_timer(INSTANT_RETHROW_SECS).timeout
 	throw_queued = false
 
-func buff():
+func buff_self():
 	if Globals.BUFFS.DAMAGE not in buffs:
 		buffs.append(Globals.BUFFS.DAMAGE)
 	if Globals.BUFFS.DEFENSE not in buffs:
@@ -199,4 +199,4 @@ func apply_buffs_to_rang():
 	for buff in buffs:
 		match(buff):
 			Globals.BUFFS.DAMAGE:
-				roserang_instance.buff()
+				roserang_instance.buff_self()
