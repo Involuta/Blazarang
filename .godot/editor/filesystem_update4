@@ -7,3 +7,4 @@ res://rang/roserang.tscn
 res://target/target.tscn
 res://rang/roserang.gd
 res://target/target.gd
+res://level_nodes/pillar_room.gd

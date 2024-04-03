@@ -32,5 +32,4 @@ func _on_body_entered(body):
 		start_following_cotu()
 		cotu.buff_self()
 		body.buff_self()
-		body.current_loop_angle = 0
 		Globals.award_score(Globals.DODGE_SCORE)

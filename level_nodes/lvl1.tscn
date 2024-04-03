@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://cvrxu2n1hugn"]
 
+[ext_resource type="Script" path="res://level_nodes/pillar_room.gd" id="1_7mfd6"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_f46p1"]
-[ext_resource type="Script" path="res://level_nodes/Level.gd" id="1_g87fc"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="2_ivtuq"]
 [ext_resource type="Texture2D" uid="uid://cyg2snr1w5xw5" path="res://addons/func_godot/textures/default_texture.png" id="3_j0jwr"]
 [ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu_versions/cotu_cb_main.tscn" id="4_sk2o1"]
@@ -76,7 +76,7 @@ points = PackedVector3Array(10.5, 10.5, -33.5, 10.5, 1, -33.5, 14.5, 1, -33.5, 1
 points = PackedVector3Array(-2, 10.5, 12.5, -2, 1, 12.5, 2, 1, 12.5, 2, 10.5, 12.5, -2, 10.5, 16.5, -2, 1, 16.5, 2, 1, 16.5, 2, 10.5, 16.5)
 
 [node name="Arena" type="Node3D"]
-script = ExtResource("1_g87fc")
+script = ExtResource("1_7mfd6")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_750u3")
@@ -110,16 +110,16 @@ enemy_chances = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.5074, 12.6756, -15.6324)
 spawn_cooldown_secs = 9.0
 enemy_chances = {
-"GUNNER": 0.25,
-"MELEE_TIER1": 0.75
+"GUNNER": 0.2,
+"MELEE_TIER1": 0.8
 }
 
 [node name="EnemySpawner4" parent="." instance=ExtResource("6_m6ekn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.7236, 12.8979, -15.4906)
 spawn_cooldown_secs = 9.0
 enemy_chances = {
-"GUNNER": 0.25,
-"MELEE_TIER1": 0.75
+"GUNNER": 0.2,
+"MELEE_TIER1": 0.8
 }
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]

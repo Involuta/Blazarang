@@ -97,6 +97,7 @@ func _physics_process(delta):
 			move_and_slide()
 
 func buff_self():
+	current_loop_angle = 0
 	hitbox.damage = 30
 
 func switch_to_rose():
