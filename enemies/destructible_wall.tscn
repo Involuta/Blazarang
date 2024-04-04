@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://cpaqsb8vtrdtt"]
+
+[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="1_4qsac"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_48w0h"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_f0ntj"]
+material = SubResource("StandardMaterial3D_48w0h")
+size = Vector3(50, 50, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qykqn"]
+size = Vector3(50, 50, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_phd4r"]
+size = Vector3(50, 50, 1)
+
+[node name="DestructibleWall" type="StaticBody3D" groups=["lockonables"]]
+collision_layer = 64
+collision_mask = 26
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_f0ntj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_qykqn")
+
+[node name="EnemyHurtbox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 11
+script = ExtResource("1_4qsac")
+health = 10
+enemy_hitboxes = ["PlayerHitbox"]
+
+[node name="HurtboxCollider" type="CollisionShape3D" parent="EnemyHurtbox"]
+shape = SubResource("BoxShape3D_phd4r")

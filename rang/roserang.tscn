@@ -22,6 +22,7 @@ radius = 2.0
 
 [node name="Roserang" type="CharacterBody3D"]
 collision_mask = 2
+platform_floor_layers = 4294901760
 script = ExtResource("1_m7w6u")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

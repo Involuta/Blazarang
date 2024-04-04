@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://b4sx8yo0jrk2i"
+path="res://.godot/imported/first_maze.map-d75c3596d5579508b80493d56b5884a5.tres"
+
+[deps]
+
+source_file="res://level_maps/first_maze.map"
+dest_files=["res://.godot/imported/first_maze.map-d75c3596d5579508b80493d56b5884a5.tres"]
+
+[params]
+

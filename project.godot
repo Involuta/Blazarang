@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="BlazarangGodot"
-run/main_scene="res://level_nodes/Arena.tscn"
+run/main_scene="res://level_nodes/arena_elevator.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
 

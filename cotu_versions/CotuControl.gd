@@ -3,7 +3,7 @@ extends CharacterBody3D
 var using_controller = false # only affects camera motion
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var gravity = 1.5*ProjectSettings.get_setting("physics/3d/default_gravity")
 const WALK_SPEED := 10
 const STEP_DODGE_SPEED := 15
 const STEP_DODGE_DURATION_SECS := .5

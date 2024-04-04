@@ -19,4 +19,3 @@ func increase_difficulty_after_delay():
 	spawner2.spawn_cooldown_secs = 7
 	spawner3.spawn_cooldown_secs = 7
 	spawner4.spawn_cooldown_secs = 7
-	

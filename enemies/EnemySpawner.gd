@@ -8,6 +8,7 @@ var melee_tier3 := preload("res://enemies/enemy_melee_tier3.tscn")
 var gunner := preload("res://enemies/enemy_gunner_base.tscn")
 @export var spawning := true
 @export var spawn_cooldown_secs := 7.0
+var spawn_cooldown_active := false
 @export var enemy_chances = {
 	"MELEE_TIER1": .66,
 	"GUNNER" : .33
@@ -15,15 +16,20 @@ var gunner := preload("res://enemies/enemy_gunner_base.tscn")
 @onready var arena := $/root/Arena
 	
 func _ready():
-	while self and spawning:
-		if spawn_limit_met():
-			await get_tree().create_timer(get_physics_process_delta_time()).timeout
-		else:
-			var enemy_inst = choose_enemy()
-			arena.add_child.call_deferred(enemy_inst)
-			await enemy_inst.tree_entered
-			enemy_inst.global_position = global_position
-			await get_tree().create_timer(spawn_cooldown_secs).timeout
+	pass
+
+func _physics_process(delta):
+	if self and not spawn_cooldown_active and spawning and not spawn_limit_met():
+		spawn_enemy()
+
+func spawn_enemy():
+	spawn_cooldown_active = true
+	var enemy_inst = choose_enemy()
+	arena.add_child.call_deferred(enemy_inst)
+	await enemy_inst.tree_entered
+	enemy_inst.global_position = global_position
+	await get_tree().create_timer(spawn_cooldown_secs).timeout
+	spawn_cooldown_active = false
 
 func choose_enemy():
 	var choice := rng.randf()

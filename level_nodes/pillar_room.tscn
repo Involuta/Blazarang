@@ -1,12 +1,12 @@
 [gd_scene load_steps=23 format=3 uid="uid://cvrxu2n1hugn"]
 
-[ext_resource type="Script" path="res://level_nodes/pillar_room.gd" id="1_7mfd6"]
-[ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_f46p1"]
-[ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="2_ivtuq"]
-[ext_resource type="Texture2D" uid="uid://cyg2snr1w5xw5" path="res://addons/func_godot/textures/default_texture.png" id="3_j0jwr"]
-[ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu_versions/cotu_cb_main.tscn" id="4_sk2o1"]
-[ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://target/target.tscn" id="5_qa4wj"]
-[ext_resource type="PackedScene" uid="uid://dro4y6wgais4q" path="res://enemies/EnemySpawner.tscn" id="6_m6ekn"]
+[ext_resource type="Script" path="res://level_nodes/pillar_room.gd" id="1_61lp5"]
+[ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu_versions/cotu_cb_main.tscn" id="2_xp6y3"]
+[ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://target/target.tscn" id="3_psce3"]
+[ext_resource type="PackedScene" uid="uid://dro4y6wgais4q" path="res://enemies/EnemySpawner.tscn" id="4_jy1sq"]
+[ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="5_08ip6"]
+[ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="6_544ot"]
+[ext_resource type="Texture2D" uid="uid://cyg2snr1w5xw5" path="res://addons/func_godot/textures/default_texture.png" id="7_v3fvw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ep1e4"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -27,7 +27,7 @@ polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Arr
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l2od3"]
 albedo_color = Color(0.788235, 0, 0, 1)
-albedo_texture = ExtResource("3_j0jwr")
+albedo_texture = ExtResource("7_v3fvw")
 metallic = 0.5
 metallic_specular = 0.0
 roughness = 0.5
@@ -76,7 +76,7 @@ points = PackedVector3Array(10.5, 10.5, -33.5, 10.5, 1, -33.5, 14.5, 1, -33.5, 1
 points = PackedVector3Array(-2, 10.5, 12.5, -2, 1, 12.5, 2, 1, 12.5, 2, 10.5, 12.5, -2, 10.5, 16.5, -2, 1, 16.5, 2, 1, 16.5, 2, 10.5, 16.5)
 
 [node name="Arena" type="Node3D"]
-script = ExtResource("1_7mfd6")
+script = ExtResource("1_61lp5")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_750u3")
@@ -85,12 +85,12 @@ environment = SubResource("Environment_750u3")
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="cotuCB" parent="." instance=ExtResource("4_sk2o1")]
+[node name="cotuCB" parent="." instance=ExtResource("2_xp6y3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.99797, 0)
 
-[node name="Target" parent="." instance=ExtResource("5_qa4wj")]
+[node name="Target" parent="." instance=ExtResource("3_psce3")]
 
-[node name="EnemySpawner" parent="." instance=ExtResource("6_m6ekn")]
+[node name="EnemySpawner" parent="." instance=ExtResource("4_jy1sq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 12.6348, -38)
 spawn_cooldown_secs = 9.0
 enemy_chances = {
@@ -98,7 +98,7 @@ enemy_chances = {
 "MELEE_TIER1": 1.0
 }
 
-[node name="EnemySpawner2" parent="." instance=ExtResource("6_m6ekn")]
+[node name="EnemySpawner2" parent="." instance=ExtResource("4_jy1sq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28171, 14.5949, 14.3151)
 spawn_cooldown_secs = 9.0
 enemy_chances = {
@@ -106,7 +106,7 @@ enemy_chances = {
 "MELEE_TIER1": 0.5
 }
 
-[node name="EnemySpawner3" parent="." instance=ExtResource("6_m6ekn")]
+[node name="EnemySpawner3" parent="." instance=ExtResource("4_jy1sq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.5074, 12.6756, -15.6324)
 spawn_cooldown_secs = 9.0
 enemy_chances = {
@@ -114,7 +114,7 @@ enemy_chances = {
 "MELEE_TIER1": 0.8
 }
 
-[node name="EnemySpawner4" parent="." instance=ExtResource("6_m6ekn")]
+[node name="EnemySpawner4" parent="." instance=ExtResource("4_jy1sq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.7236, 12.8979, -15.4906)
 spawn_cooldown_secs = 9.0
 enemy_chances = {
@@ -126,9 +126,9 @@ enemy_chances = {
 navigation_mesh = SubResource("NavigationMesh_473p1")
 
 [node name="FuncGodotMap" type="Node3D" parent="NavigationRegion3D"]
-script = ExtResource("1_f46p1")
+script = ExtResource("5_08ip6")
 local_map_file = "res://level_maps/medium_arena.map"
-map_settings = ExtResource("2_ivtuq")
+map_settings = ExtResource("6_544ot")
 
 [node name="entity_0_worldspawn" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap"]
 collision_layer = 2
