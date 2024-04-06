@@ -98,7 +98,7 @@ func can_see_target():
 	query.collide_with_areas = true
 	var result = space_state.intersect_ray(query)
 	if not result:
-		return true
+		return false
 	if result.collider.collision_layer == Globals.ARENA_COL_LAYER:
 		return false
 	else:

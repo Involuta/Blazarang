@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://c8tuqsm187qo0"
+path="res://.godot/imported/hallway_invasion.map-1687894a73bd858b4af02a3900be57d4.tres"
+
+[deps]
+
+source_file="res://level_maps/hallway_invasion.map"
+dest_files=["res://.godot/imported/hallway_invasion.map-1687894a73bd858b4af02a3900be57d4.tres"]
+
+[params]
+

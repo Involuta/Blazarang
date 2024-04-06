@@ -19,9 +19,10 @@ const TIER2_SPAWNS := {
 	"MELEE_TIER2": .25
 }
 const TIER3_SPAWNS := {
-	"MELEE_TIER1": .5,
-	"MELEE_TIER2": .33,
-	"MELEE_TIER3": .167
+	"MELEE_TIER1": .4,
+	"MELEE_TIER2": .3,
+	"MELEE_TIER3": .2,
+	"GUNNER": .1
 }
 const SWEEPER_SPEED = 20.0
 var platform_radius

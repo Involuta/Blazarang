@@ -1,9 +1,9 @@
-MeshInstance3D
 CollisionShape3D
-StaticBody3D
+MeshInstance3D
+RigidBody3D
 NavigationRegion3D
 FuncGodotMap
-RigidBody3D
+StaticBody3D
 CharacterBody3D
 NavigationAgent3D
 SpotLight3D

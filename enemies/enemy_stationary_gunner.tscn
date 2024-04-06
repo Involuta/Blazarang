@@ -1,13 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://c8sivx3hx1oy1"]
+[gd_scene load_steps=8 format=3 uid="uid://b78jp5ykrb7o5"]
 
-[ext_resource type="Script" path="res://enemies/enemy_gunner_base.gd" id="1_l3sqo"]
-[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_ijxet"]
+[ext_resource type="Script" path="res://enemies/enemy_stationary_gunner.gd" id="1_g4bs0"]
+[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_ccnt6"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t7knm"]
-albedo_color = Color(0.168627, 0.462745, 1, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ioag"]
+albedo_color = Color(0.639216, 0.282353, 1, 1)
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_5fl67"]
-material = SubResource("StandardMaterial3D_t7knm")
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ti8lt"]
+material = SubResource("StandardMaterial3D_6ioag")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_txubl"]
 
@@ -49,26 +49,21 @@ _data = {
 "shoot": SubResource("Animation_i1lri")
 }
 
-[node name="EnemyGunner" type="CharacterBody3D"]
+[node name="EnemyStationaryGunner" type="CharacterBody3D"]
 collision_layer = 8
 collision_mask = 11
-script = ExtResource("1_l3sqo")
+script = ExtResource("1_g4bs0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_5fl67")
+mesh = SubResource("CapsuleMesh_ti8lt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_txubl")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-target_desired_distance = 20.0
-avoidance_enabled = true
-radius = 3.0
-
 [node name="EnemyHurtbox" type="Area3D" parent="."]
 collision_layer = 8
 collision_mask = 11
-script = ExtResource("2_ijxet")
+script = ExtResource("2_ccnt6")
 health = 10
 enemy_hitboxes = ["PlayerHitbox"]
 
@@ -79,6 +74,3 @@ shape = SubResource("CapsuleShape3D_txubl")
 libraries = {
 "": SubResource("AnimationLibrary_cvygw")
 }
-
-[connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
-[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

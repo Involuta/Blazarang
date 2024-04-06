@@ -2,10 +2,6 @@ extends Area3D
 
 var following_cotu := true
 
-# For transition from rose to ricochet
-var angle := 0.0
-var angle_speed := 0.0
-var max_angle := 0.0
 # For transition from ricochet/return to rose
 var roserang_queued := false # did the rang just hit the target while in the ricochet or return state?
 var rang_thrown := true # the roserang script has just readied; was the rang thrown by Cotu, or did it come from a ricochet or return state?

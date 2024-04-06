@@ -19,3 +19,12 @@ res://level_nodes/arena_elevator.tscn
 res://level_nodes/first_maze.gd
 res://level_nodes/main.tscn
 res://enemies/EnemySpawner.gd
+res://level_nodes/hallway_invasion.tscn
+res://enemies/enemy_stationary_gunner.tscn
+res://enemies/enemy_stationary_gunner.gd
+res://enemies/enemy_gunner_base.gd
+res://enemies/enemy_gunner_base.tscn
+res://enemies/enemy_melee_base.tscn
+res://enemies/EnemySpawner.tscn
+res://level_nodes/hallway_invasion.gd
+res://level_nodes/arena_elevator.gd
