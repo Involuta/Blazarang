@@ -7,9 +7,6 @@ var spawning_enemies := false
 @onready var spawner1 = $EnemySpawner
 @onready var spawner2 = $EnemySpawner2
 
-func _ready():
-	return
-
 func _physics_process(delta):
 	if not spawning_enemies and cotu.global_position.y < MAZE_FLOOR_Z_POS:
 		start_spawning_enemies()

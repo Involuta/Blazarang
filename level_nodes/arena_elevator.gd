@@ -34,6 +34,7 @@ var rng := RandomNumberGenerator.new()
 @onready var spawners = spawner_spinner.get_children()
 
 func _ready():
+	super()
 	platform_radius = $Platform/CollisionShape3D.shape.radius
 	for spawner in spawners:
 		spawner.enemy_chances = TIER1_SPAWNS

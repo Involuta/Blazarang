@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://dathtt00gjckt"
+path="res://.godot/imported/fun_arena.map-ec9247a51cb24e9d12144dccdc9be9cb.tres"
+
+[deps]
+
+source_file="res://level_maps/fun_arena.map"
+dest_files=["res://.godot/imported/fun_arena.map-ec9247a51cb24e9d12144dccdc9be9cb.tres"]
+
+[params]
+
