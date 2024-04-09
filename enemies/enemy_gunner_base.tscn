@@ -52,6 +52,7 @@ _data = {
 [node name="EnemyGunner" type="CharacterBody3D"]
 collision_layer = 8
 collision_mask = 11
+platform_floor_layers = 4294901762
 script = ExtResource("1_l3sqo")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

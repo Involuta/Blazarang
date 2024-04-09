@@ -1,8 +1,8 @@
+FuncGodotMap
 CollisionShape3D
 MeshInstance3D
 RigidBody3D
 NavigationRegion3D
-FuncGodotMap
 StaticBody3D
 CharacterBody3D
 NavigationAgent3D

@@ -1,10 +1,13 @@
 extends CharacterBody3D
 
 enum {
+	WAIT,
 	FOLLOW,
 	ATTACK
 }
 var behav_state = FOLLOW
+
+@export var aggro_distance := -1
 
 const FOLLOW_SPEED := 5.0
 const TARGET_DISTANCE := 3.0
@@ -23,11 +26,16 @@ var rng := RandomNumberGenerator.new()
 
 func _ready():
 	add_to_group("lockonables")
+	if aggro_distance > 0:
+		nav_agent.process_mode = Node.PROCESS_MODE_DISABLED
+		behav_state = WAIT
 
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	match(behav_state):
+		WAIT:
+			wait()
 		FOLLOW:
 			follow()
 		ATTACK:
@@ -36,6 +44,10 @@ func _physics_process(delta):
 	if global_position.y < -100:
 		queue_free()
 
+func wait():
+	if global_position.distance_to(target.global_position) < aggro_distance:
+		nav_agent.process_mode = Node.PROCESS_MODE_INHERIT
+		behav_state = FOLLOW
 
 func _on_navigation_agent_3d_target_reached():
 	if behav_state != ATTACK:

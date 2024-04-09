@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://5m2s58tumpji"
+path="res://.godot/imported/gun_arena.map-343dd1e0d985cb071719a2d43163ed7e.tres"
+
+[deps]
+
+source_file="res://level_maps/gun_arena.map"
+dest_files=["res://.godot/imported/gun_arena.map-343dd1e0d985cb071719a2d43163ed7e.tres"]
+
+[params]
+
