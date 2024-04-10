@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://ccvnh6rsvebpi"]
+
+[ext_resource type="Script" path="res://enemies/bullet.gd" id="1_ufdes"]
+[ext_resource type="Script" path="res://hitbox.gd" id="2_xoojo"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qwteq"]
+radius = 1.5
+height = 7.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ussiw"]
+albedo_color = Color(1, 1, 0.121569, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0osf0"]
+material = SubResource("StandardMaterial3D_ussiw")
+radius = 1.5
+height = 7.5
+
+[node name="enemy_mega_bullet" type="Node3D"]
+script = ExtResource("1_ufdes")
+max_lifetime_secs = 60.0
+
+[node name="EnemyHitbox" type="Area3D" parent="."]
+transform = Transform3D(0.999999, -6.97573e-16, -1.52459e-23, -1.52459e-23, -4.37113e-08, 0.999999, -6.97573e-16, -0.999999, -4.37113e-08, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+collision_layer = 8
+collision_mask = 18
+script = ExtResource("2_xoojo")
+damage = 30
+
+[node name="HitboxCollider" type="CollisionShape3D" parent="EnemyHitbox"]
+shape = SubResource("CapsuleShape3D_qwteq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EnemyHitbox"]
+mesh = SubResource("CapsuleMesh_0osf0")
+
+[connection signal="body_entered" from="EnemyHitbox" to="." method="_on_body_entered" flags=18]

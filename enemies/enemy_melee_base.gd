@@ -60,6 +60,7 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	move_and_slide()
 
 func follow():
+	print("following!")
 	look_at(target.global_position)
 	rotation.x = 0
 	rotation.z = 0

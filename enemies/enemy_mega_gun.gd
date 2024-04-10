@@ -3,15 +3,15 @@ extends CharacterBody3D
 var shooting := false
 
 var map_import_scale_factor := 240
-const SIGHT_DIST := 30.0
+const SIGHT_DIST := 400.0
 
-const ATTACK_DURATION_SECS := 1.5
+const ATTACK_DURATION_SECS := 5
 const BULLET_SPEED := 30.0
 
 var aiming_at_target := true
 
 var rng := RandomNumberGenerator.new()
-var bullet := preload("res://enemies/enemy_bullet.tscn")
+var mega_bullet := preload("res://enemies/enemy_mega_bullet.tscn")
 @onready var animation_player := $AnimationPlayer
 @onready var arena := $/root/Arena
 @onready var cotu := $/root/Arena/cotuCB
@@ -20,7 +20,7 @@ var bullet := preload("res://enemies/enemy_bullet.tscn")
 func _ready():
 	add_to_group("lockonables")
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if can_see_target() and not shooting:
 		start_attack()
 	if aiming_at_target:
@@ -37,7 +37,7 @@ func stop_aiming_at_target():
 	aiming_at_target = false
 
 func shoot_bullet():
-	var bullet_inst = bullet.instantiate()
+	var bullet_inst = mega_bullet.instantiate()
 	arena.add_child.call_deferred(bullet_inst)
 	await bullet_inst.tree_entered
 	bullet_inst.global_position = global_position
