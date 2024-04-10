@@ -1342,6 +1342,7 @@ points = PackedVector3Array(6.4, 76.8, 51.2, 6.4, 86.4, 51.2, 0, 86.4, 51.2, 0, 
 [node name="Arena" type="Node3D"]
 script = ExtResource("1_8iled")
 map_import_scale_factor = 5
+gravity_multiplier = 1.0
 
 [node name="cotuCB" parent="." instance=ExtResource("2_w0qr4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 12, 2.08165e-12)

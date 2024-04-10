@@ -300,7 +300,6 @@ size = Vector3(5, 1, 5)
 
 [node name="Arena" type="Node3D"]
 script = ExtResource("1_oe5hg")
-gravity_multiplier = 1.5
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_hq3a1")

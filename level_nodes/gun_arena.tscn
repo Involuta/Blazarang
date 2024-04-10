@@ -421,7 +421,6 @@ points = PackedVector3Array(3.91204, 2.5, -58.5856, 3.91204, 1, -58.5856, 5.0856
 
 [node name="Arena" type="Node3D"]
 script = ExtResource("1_6t37g")
-gravity_multiplier = 1.5
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_rarwp")

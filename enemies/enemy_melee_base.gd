@@ -45,6 +45,7 @@ func _physics_process(delta):
 		queue_free()
 
 func wait():
+	move_and_slide()
 	if global_position.distance_to(target.global_position) < aggro_distance:
 		nav_agent.process_mode = Node.PROCESS_MODE_INHERIT
 		behav_state = FOLLOW
@@ -60,7 +61,6 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	move_and_slide()
 
 func follow():
-	print("following!")
 	look_at(target.global_position)
 	rotation.x = 0
 	rotation.z = 0
