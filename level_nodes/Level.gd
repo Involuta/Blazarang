@@ -2,7 +2,7 @@ class_name Level
 extends Node3D
 
 var cotu_look_direction := Vector3.FORWARD
-
+@export var map_import_scale_factor := 32
 @export var gravity_multiplier := 1.0
 @export var lockonable_limit := 20
 @onready var cotu = $/root/Arena/cotuCB

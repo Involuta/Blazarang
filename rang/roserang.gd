@@ -62,7 +62,7 @@ func rose(delta):
 	return target.global_position + radius * Vector3(angle_vec.x, 0, angle_vec.y)
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("Special") and target.following_cotu and global_position.distance_to(cotu.global_position) < SPECIAL_DIST:
+	if Input.is_action_just_pressed("Special") and target.following_cotu and global_position.distance_to(target.global_position) < SPECIAL_DIST:
 		set_script(rapidorbit_script)
 		return
 	current_loop_angle += abs(angle_speed) * delta
@@ -120,6 +120,7 @@ func rose_handle_collision(collision, vel_vec, delta):
 	if collision and collision.get_collider().collision_layer == Globals.ARENA_COL_LAYER:
 		velocity = (1/delta) * (vel_vec - 2 * vel_vec.project(collision.get_normal()))
 		return true
+	return false
 
 func ricochet_handle_collision(collision):
 	if collision and collision.get_collider().collision_layer == Globals.ARENA_COL_LAYER:

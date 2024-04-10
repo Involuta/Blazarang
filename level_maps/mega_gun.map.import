@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://kojc7prv80bt"
+path="res://.godot/imported/mega_gun.map-4e5503fbf0c6fb19616676675e9c88f8.tres"
+
+[deps]
+
+source_file="res://level_maps/mega_gun.map"
+dest_files=["res://.godot/imported/mega_gun.map-4e5503fbf0c6fb19616676675e9c88f8.tres"]
+
+[params]
+
