@@ -12,3 +12,5 @@ res://level_nodes/pillar_room.tscn
 res://level_nodes/hallway_invasion.tscn
 res://enemies/enemy_stationary_gunner.tscn
 res://enemies/enemy_mega_gun.gd
+res://cotu_versions/CotuControl.gd
+res://level_nodes/hallway_invasion.gd

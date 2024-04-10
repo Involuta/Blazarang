@@ -8,9 +8,7 @@ const WALK_SPEED := 10
 const STEP_DODGE_SPEED := 15
 const STEP_DODGE_DURATION_SECS := .5
 const STEP_DODGE_COOLDOWN_SECS := .1
-var jump_speed := 14.0
-const MIN_JUMP_SPEED := 14.0
-const MAX_JUMP_SPEED := 22.0
+const JUMP_SPEED := 14.0
 const MAX_JUMP_CHARGE_SECS := .5
 # Seconds it takes for Cotu to decelerate to 0 speed when not walking
 const WALK_DECEL_SECS := .25
@@ -59,11 +57,8 @@ func _physics_process(delta):
 		step_dodge()
 	else:
 		anim_tree.set("parameters/StateMachine/conditions/just_dodged", false)
-	if Input.is_action_pressed("Jump") and is_on_floor() and jump_speed < MAX_JUMP_SPEED:
-		jump_speed += 0#(MAX_JUMP_SPEED - MIN_JUMP_SPEED) / MAX_JUMP_CHARGE_SECS * delta
-	if Input.is_action_just_released("Jump") and is_on_floor():
-		velocity.y = jump_speed
-		jump_speed = MIN_JUMP_SPEED
+	if Input.is_action_just_pressed("Jump") and is_on_floor():
+		velocity.y = JUMP_SPEED
 		
 	if is_dodging:
 		grounded_speed = STEP_DODGE_SPEED

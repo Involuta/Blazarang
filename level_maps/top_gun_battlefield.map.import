@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://bmicr27dn287t"
+path="res://.godot/imported/top_gun_battlefield.map-d717063d4ffc8cc9c1db6dbff5fbb048.tres"
+
+[deps]
+
+source_file="res://level_maps/top_gun_battlefield.map"
+dest_files=["res://.godot/imported/top_gun_battlefield.map-d717063d4ffc8cc9c1db6dbff5fbb048.tres"]
+
+[params]
+
