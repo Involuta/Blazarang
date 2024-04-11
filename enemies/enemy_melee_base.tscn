@@ -180,7 +180,7 @@ height = 3.0
 
 [node name="EnemyMeleeBase" type="CharacterBody3D" groups=["lockonables"]]
 collision_layer = 8
-collision_mask = 26
+collision_mask = 90
 platform_floor_layers = 4294901762
 script = ExtResource("1_b2t2q")
 sweep_chance = 0.15

@@ -55,9 +55,15 @@ func _on_navigation_agent_3d_target_reached():
 		start_attack()
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
-	# This line accelerates the agent rather than setting its velocity to its desired velocity directly, preventing it from getting caught on corners
-	if behav_state == FOLLOW and is_on_floor():
-		velocity = velocity.move_toward(safe_velocity, .25)
+	if behav_state == FOLLOW:
+		if is_on_floor():
+			# This line accelerates the agent rather than setting its velocity to its desired velocity directly, preventing it from getting caught on corners
+			velocity = velocity.move_toward(safe_velocity, .25)
+		else:
+			# If the enemy is in the air, don't use navigation agent at all
+			var move_dir = global_position.direction_to(target.global_position)
+			velocity.x = follow_speed / 2 * move_dir.x
+			velocity.z = follow_speed / 2 * move_dir.z
 	move_and_slide()
 
 func follow():

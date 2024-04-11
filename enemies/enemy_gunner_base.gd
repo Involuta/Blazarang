@@ -1,18 +1,21 @@
 extends CharacterBody3D
 
 enum {
+	WAIT,
 	FOLLOW,
 	ATTACK
 }
 var behav_state = FOLLOW
 
-const TARGET_DISTANCE := 20.0
-const FOLLOW_SPEED := 5.0
+@export var aggro_distance := -1
 
-const ATTACK_DURATION_SECS := 1.5
-const BULLET_SPEED := 30.0
+@export var follow_speed := 5.0
+@export var target_distance := 20.0
+
+@export var attack_duration_secs := 1.5
 
 var aiming_at_target := true
+@export var bullet_speed := 30.0
 
 var rng := RandomNumberGenerator.new()
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -25,24 +28,42 @@ var bullet := preload("res://enemies/enemy_bullet.tscn")
 
 func _ready():
 	add_to_group("lockonables")
+	if aggro_distance > 0:
+		nav_agent.process_mode = Node.PROCESS_MODE_DISABLED
+		behav_state = WAIT
 
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	match(behav_state):
+		WAIT:
+			wait()
 		FOLLOW:
 			follow()
 		ATTACK:
 			attack()
+
+func wait():
+	move_and_slide()
+	if global_position.distance_to(target.global_position) < aggro_distance:
+		nav_agent.process_mode = Node.PROCESS_MODE_INHERIT
+		behav_state = FOLLOW
 
 func _on_navigation_agent_3d_target_reached():
 	if behav_state != ATTACK:
 		start_attack()
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
-	# This line accelerates the agent rather than setting its velocity to its desired velocity directly, preventing it from getting caught on corners
-	if behav_state == FOLLOW and is_on_floor():
-		velocity = velocity.move_toward(safe_velocity, .25)
+	if behav_state == FOLLOW:
+		if is_on_floor():
+			# This line accelerates the agent rather than setting its velocity to its desired velocity directly, preventing it from getting caught on corners
+			velocity = velocity.move_toward(safe_velocity, .25)
+		else:
+			# If the enemy is in the air, don't use navigation agent at all
+			var move_dir = global_position.direction_to(target.global_position)
+			velocity.x = follow_speed / 2 * move_dir.x
+			velocity.z = follow_speed / 2 * move_dir.z
+	
 	move_and_slide()
 
 func follow():
@@ -51,14 +72,14 @@ func follow():
 	rotation.z = 0
 	nav_agent.set_target_position(target.global_position)
 	var next_position = nav_agent.get_next_path_position()
-	var new_velocity = (next_position - global_position).normalized() * FOLLOW_SPEED
+	var new_velocity = (next_position - global_position).normalized() * follow_speed
 	
 	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
 	nav_agent.velocity = new_velocity
 	
 	# If player isn't in sight, reduce target distance to a very small number
 	if can_see_target():
-		nav_agent.target_desired_distance = TARGET_DISTANCE
+		nav_agent.target_desired_distance = target_distance
 	else:
 		nav_agent.target_desired_distance = .1
 
@@ -66,7 +87,7 @@ func start_attack():
 	behav_state = ATTACK
 	aiming_at_target = true
 	animation_player.play("shoot")
-	await get_tree().create_timer(ATTACK_DURATION_SECS).timeout
+	await get_tree().create_timer(attack_duration_secs).timeout
 	behav_state = FOLLOW
 
 func attack():
@@ -87,7 +108,7 @@ func shoot_bullet():
 	arena.add_child.call_deferred(bullet_inst)
 	await bullet_inst.tree_entered
 	bullet_inst.global_position = global_position
-	bullet_inst.velocity = BULLET_SPEED * global_position.direction_to(target.global_position)
+	bullet_inst.velocity = bullet_speed * global_position.direction_to(target.global_position)
 	bullet_inst.look_at(target.global_position)
 
 func can_see_target():

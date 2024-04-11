@@ -324,7 +324,7 @@ height = 5.0
 
 [node name="EnemyBigMeleeTier1" type="CharacterBody3D" groups=["lockonables"]]
 collision_layer = 64
-collision_mask = 26
+collision_mask = 90
 platform_floor_layers = 4294901762
 script = ExtResource("1_jca1y")
 follow_speed = 5.0
@@ -340,7 +340,7 @@ shape = SubResource("CapsuleShape3D_unw8v")
 path_desired_distance = 1.5
 avoidance_enabled = true
 height = 3.0
-radius = 6.0
+radius = 4.0
 
 [node name="EnemyHurtbox" type="Area3D" parent="."]
 collision_layer = 8
