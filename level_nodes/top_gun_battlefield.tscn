@@ -270,20 +270,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00281897, 19.6314, 0.03510
 
 [node name="BMT3_1" parent="." instance=ExtResource("9_0gvhj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9353, 11.0587, 23.4853)
-aggro_distance = 20
-sweep_chance = 0.5
+aggro_distance = 30
 
 [node name="BMT3_2" parent="." instance=ExtResource("9_0gvhj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9353, 11.0587, 8.37668)
-aggro_distance = 20
-sweep_chance = 0.5
+aggro_distance = 30
 
 [node name="BMT3_3" parent="." instance=ExtResource("9_0gvhj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9353, 11.0587, -7.63004)
-aggro_distance = 20
-sweep_chance = 0.5
+aggro_distance = 30
 
 [node name="BMT3_4" parent="." instance=ExtResource("9_0gvhj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9353, 11.0587, -22.4999)
-aggro_distance = 20
-sweep_chance = 0.5
+aggro_distance = 30

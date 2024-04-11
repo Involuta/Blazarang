@@ -4,3 +4,7 @@
 
 [node name="EnemyMeleeTier1" instance=ExtResource("1_ampo0")]
 sweep_chance = 2.08165e-12
+
+[node name="MeleeHitboxPivot" parent="." index="5"]
+transform = Transform3D(-0.500004, -0.866023, -1.26261e-21, -3.13499e-06, 1.81001e-06, 1, -0.866023, 0.500004, -3.61999e-06, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+visible = false

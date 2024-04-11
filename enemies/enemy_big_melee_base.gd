@@ -9,14 +9,14 @@ var behav_state = FOLLOW
 
 @export var aggro_distance := -1
 
-@export var follow_speed := 5.0
-@export var target_distance := 3.0
+@export var follow_speed := 10.0
+@export var target_distance := 4.0
 
-@export var attack_duration_secs := 1.5
+@export var attack_duration_secs := 2.5
 
 var aiming_at_target := true
 
-@export var sweep_chance := .2
+@export var sweep_chance := .5
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 @onready var nav_agent = $NavigationAgent3D
@@ -87,9 +87,9 @@ func start_attack():
 func choose_attack() -> String:
 	var choice := rng.randf()
 	if choice <= sweep_chance:
-		return "sweep"
+		return "big_sweep"
 	else:
-		return "overhead"
+		return "big_overhead"
 
 func attack():
 	nav_agent.velocity.x = 0

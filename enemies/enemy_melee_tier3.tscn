@@ -17,3 +17,6 @@ mesh = SubResource("CapsuleMesh_ilgca")
 
 [node name="EnemyHurtbox" parent="." index="3"]
 health = 40
+
+[node name="MeleeHitboxPivot" parent="." index="5"]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 0.999999, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
