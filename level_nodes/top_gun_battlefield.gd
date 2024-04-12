@@ -5,7 +5,7 @@ extends Level
 @export var platform_angle_speed := 0.01
 @export var platform_radius := 30
 var platform_angle := 0.0
-@onready var super_jump_pad = $SuperJumpPad
+@onready var super_jump_pad = $JumpPads/SuperJumpPad
 @export var wall_jump_pad_speed := 23
 @export var floor_jump_pad_speed := 20
 @export var super_jump_pad_speed := 45
@@ -13,7 +13,7 @@ var super_jump_pad_activated := false
 
 func _ready():
 	super()
-	for child in get_children():
+	for child in $JumpPads.get_children():
 		if child.name.contains("JumpPadWall"):
 			child.constant_linear_velocity.y = wall_jump_pad_speed
 		elif child.name.contains("JumpPadFloor"):

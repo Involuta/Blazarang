@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 var shooting := false
 
-const SIGHT_DIST := 40.0
+@export var SIGHT_DIST := 40.0
 
 const ATTACK_DURATION_SECS := 1.5
 const BULLET_SPEED := 30.0

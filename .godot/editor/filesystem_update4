@@ -14,3 +14,8 @@ res://enemies/enemy_gunner_base.tscn
 res://enemies/enemy_stationary_gunner.tscn
 res://level_nodes/top_gun_battlefield.gd
 res://enemies/enemy_gunner_base.gd
+res://enemies/enemy_stationary_gunner.gd
+res://level_nodes/hallway_invasion.tscn
+res://level_nodes/first_maze.tscn
+res://level_nodes/pillar_room.tscn
+res://level_nodes/gun_arena.tscn
