@@ -22,9 +22,8 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var bullet := preload("res://enemies/enemy_bullet.tscn")
 @onready var nav_agent := $NavigationAgent3D
 @onready var animation_player := $AnimationPlayer
-@onready var arena := $/root/Arena
-@onready var cotu := $/root/Arena/cotuCB
-@onready var target := $/root/Arena/Target
+@onready var arena := $/root/Level
+@onready var target := $/root/Level/Target
 
 func _ready():
 	add_to_group("lockonables")

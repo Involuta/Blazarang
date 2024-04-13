@@ -7,7 +7,7 @@ var rng := RandomNumberGenerator.new()
 @export var health := 100
 @export var enemy_hitboxes := ["default"]
 @onready var parent := get_parent()
-@onready var arena := $/root/Arena
+@onready var level := $/root/Level
 
 func _ready():
 	area_entered.connect(on_hit)

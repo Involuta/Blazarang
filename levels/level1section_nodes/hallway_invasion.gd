@@ -30,7 +30,7 @@ func start_moving_bridge2_after_delay():
 	gunner_bridge2_moving = true
 
 func gb_reached_bounds(gunner_bridge):
-	return gunner_bridge.global_position.y > GUNNER_BRIDGE_MAX_HEIGHT or gunner_bridge.global_position.y < GUNNER_BRIDGE_MIN_HEIGHT
+	return gunner_bridge.position.y > GUNNER_BRIDGE_MAX_HEIGHT or gunner_bridge.position.y < GUNNER_BRIDGE_MIN_HEIGHT
 
 func gb1_switch_dir():
 	gunner_bridge1_moving = false

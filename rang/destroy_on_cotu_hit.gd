@@ -1,6 +1,6 @@
 extends Area3D
 
-@onready var cotu = $/root/Arena/cotuCB
+@onready var cotu = $/root/Level/cotuCB
 @onready var roserang = get_parent()
 
 func _on_body_entered(body):

@@ -1,6 +1,6 @@
 [gd_scene load_steps=133 format=3 uid="uid://12ycnm4xr20d"]
 
-[ext_resource type="Script" path="res://level_nodes/Level.gd" id="1_6t37g"]
+[ext_resource type="Script" path="res://levels/level1section_nodes/Level.gd" id="1_6t37g"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_c6uk5"]
 [ext_resource type="Material" uid="uid://cvex6toty8yn7" path="res://addons/func_godot/textures/default_material.tres" id="3_t6p4u"]
 [ext_resource type="Resource" uid="uid://crgpdahjaj" path="res://addons/func_godot/fgd/func_godot_fgd.tres" id="4_ic0hb"]

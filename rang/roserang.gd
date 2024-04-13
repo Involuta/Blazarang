@@ -35,8 +35,8 @@ const RETURN_ACC := 1.2
 const MAX_RETURN_SPEED := 55
 
 var rapidorbit_script := preload("res://rang/special_rapidorbit.gd")
-@onready var cotu = $/root/Arena/cotuCB
-@onready var target = $/root/Arena/Target
+@onready var cotu = $/root/Level/cotuCB
+@onready var target = $/root/Level/Target
 @onready var hitbox = $PlayerHitbox
 
 func _ready():

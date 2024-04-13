@@ -3,7 +3,8 @@ extends CharacterBody3D
 var using_controller = false # only affects camera motion
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var default_gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var gravity = default_gravity
 const WALK_SPEED := 10
 const STEP_DODGE_SPEED := 15
 const STEP_DODGE_DURATION_SECS := .5
@@ -42,7 +43,7 @@ var roserang_instance = null
 @onready var camera_pitch_pivot := $CameraTwistPivot/CameraPitchPivot
 @onready var camera := $CameraTwistPivot/CameraPitchPivot/CameraVisualObject
 @onready var rang_pointer_pivot := $RangPointerPivot
-@onready var target := $/root/Arena/Target
+@onready var target := $/root/Level/Target
 @onready var armature := $CotuAnims/Armature
 @onready var anim_tree := $AnimationTree
 const LERP_VAL := .15 # The rate at which lerp funcs change; used for body mvmt animationa

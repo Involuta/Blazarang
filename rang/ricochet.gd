@@ -13,8 +13,8 @@ var max_angle := 0.0
 var roserang_script := preload("res://rang/roserang.gd")
 var return_script := preload("res://rang/return_to_target.gd")
 var rapidorbit_script := preload("res://rang/special_rapidorbit.gd")
-@onready var cotu = $/root/Arena/cotuCB
-@onready var target = $/root/Arena/Target
+@onready var cotu = $/root/Level/cotuCB
+@onready var target = $/root/Level/Target
 @onready var hitbox = $PlayerHitbox
 
 func _init():

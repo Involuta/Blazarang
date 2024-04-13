@@ -14,8 +14,8 @@ var angle := 0.0
 var speed := 25.0
 var duration_secs := 1.5
 
-@onready var cotu = $/root/Arena/cotuCB
-@onready var target = $/root/Arena/Target
+@onready var cotu = $/root/Level/cotuCB
+@onready var target = $/root/Level/Target
 @onready var hitbox = $PlayerHitbox
 
 func _init():

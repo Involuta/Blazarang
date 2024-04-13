@@ -21,8 +21,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 @onready var nav_agent = $NavigationAgent3D
 @onready var animation_player = $AnimationPlayer
-@onready var cotu = $/root/Arena/cotuCB
-@onready var target = $/root/Arena/Target
+@onready var target = $/root/Level/Target
 
 func _ready():
 	add_to_group("lockonables")

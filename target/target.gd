@@ -6,7 +6,7 @@ var following_cotu := true
 var roserang_queued := false # did the rang just hit the target while in the ricochet or return state?
 var rang_thrown := true # the roserang script has just readied; was the rang thrown by Cotu, or did it come from a ricochet or return state?
 
-@onready var cotu = $/root/Arena/cotuCB
+@onready var cotu = $/root/Level/cotuCB
 
 func _ready():
 	pass

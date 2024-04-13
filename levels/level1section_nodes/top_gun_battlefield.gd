@@ -23,8 +23,8 @@ func _physics_process(delta):
 	platform_angle += platform_angle_speed
 	var platform_vec = platform_radius * Vector2.from_angle(platform_angle)
 	var new_position = platform_center + Vector3(platform_vec.x, 0, platform_vec.y)
-	platform.constant_linear_velocity = (new_position - platform.global_position) / delta
-	platform.global_position = new_position
+	platform.constant_linear_velocity = (new_position - platform.position) / delta
+	platform.position = new_position
 	
 	if Input.is_action_just_pressed("Special"):
 		super_jump_pad_activated = true

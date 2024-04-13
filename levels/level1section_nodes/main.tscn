@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://b5unhmjq16yvy"]
 
-[ext_resource type="Script" path="res://level_nodes/Level.gd" id="1_ishrm"]
+[ext_resource type="Script" path="res://levels/level1section_nodes/Level.gd" id="1_ishrm"]
 [ext_resource type="PackedScene" uid="uid://dro4y6wgais4q" path="res://enemies/EnemySpawner.tscn" id="2_finns"]
 [ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://target/target.tscn" id="3_l770m"]
 [ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu_versions/cotu_cb_main.tscn" id="4_wbc5l"]

@@ -3,15 +3,14 @@ extends Node3D
 
 var cotu_look_direction := Vector3.FORWARD
 @export var map_import_scale_factor := 32
-@export var gravity_multiplier := 1.5
 @export var lockonable_limit := 20
-@onready var cotu = $/root/Arena/cotuCB
-@onready var camera_twist_pivot = $/root/Arena/cotuCB/CameraTwistPivot
-@onready var camera = $/root/Arena/cotuCB/CameraTwistPivot/CameraPitchPivot/CameraVisualObject/Camera3D
+@onready var cotu = $/root/Level/cotuCB
+@onready var camera_twist_pivot = $/root/Level/cotuCB/CameraTwistPivot
+@onready var camera = $/root/Level/cotuCB/CameraTwistPivot/CameraPitchPivot/CameraVisualObject/Camera3D
 
 func _ready():
-	cotu.gravity = cotu.gravity * gravity_multiplier
-	
+	pass
+
 func _process(_delta):
 	if Input.is_action_just_pressed("LockOn"):
 		if cotu.locked_on:

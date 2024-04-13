@@ -1,27 +1,13 @@
-[gd_scene load_steps=439 format=3 uid="uid://c5h8xiiijgobm"]
+[gd_scene load_steps=437 format=3 uid="uid://c5h8xiiijgobm"]
 
-[ext_resource type="Script" path="res://level_nodes/arena_elevator.gd" id="1_8iled"]
-[ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu_versions/cotu_cb_main.tscn" id="2_w0qr4"]
-[ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://target/target.tscn" id="3_bcxaa"]
+[ext_resource type="Script" path="res://levels/level1section_nodes/arena_elevator.gd" id="1_8iled"]
+[ext_resource type="Script" path="res://levels/gravity_box.gd" id="3_hi8ns"]
 [ext_resource type="PackedScene" uid="uid://dro4y6wgais4q" path="res://enemies/EnemySpawner.tscn" id="4_8k527"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="5_hi1m2"]
 [ext_resource type="Material" uid="uid://cvex6toty8yn7" path="res://addons/func_godot/textures/default_material.tres" id="6_i0v4g"]
 [ext_resource type="Resource" uid="uid://crgpdahjaj" path="res://addons/func_godot/fgd/func_godot_fgd.tres" id="7_pjide"]
 [ext_resource type="Material" uid="uid://d0bvr2ypkxf24" path="res://textures/black_tile.tres" id="7_uadhw"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map_settings.gd" id="8_oneeh"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vsk86"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-
-[sub_resource type="Sky" id="Sky_mk1s1"]
-sky_material = SubResource("ProceduralSkyMaterial_vsk86")
-
-[sub_resource type="Environment" id="Environment_sgtle"]
-background_mode = 2
-sky = SubResource("Sky_mk1s1")
-tonemap_mode = 2
-glow_enabled = true
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0i10h"]
 height = 1.0
@@ -35,6 +21,10 @@ polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(4, 3, 5), PackedInt32Arr
 top_radius = 45.0
 bottom_radius = 45.0
 height = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_6ufh6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7ea7b"]
 
 [sub_resource type="Resource" id="Resource_ri6yt"]
 script = ExtResource("8_oneeh")
@@ -1339,23 +1329,9 @@ points = PackedVector3Array(19.2, 86.4, 48, 6.4, 86.4, 51.2, 6.4, 76.8, 51.2, 19
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_oudrg"]
 points = PackedVector3Array(6.4, 76.8, 51.2, 6.4, 86.4, 51.2, 0, 86.4, 51.2, 0, 76.8, 51.2, 7.2, 76.8, 57.6, 7.2, 86.4, 57.6, 0, 86.4, 57.6, 0, 76.8, 57.6)
 
-[node name="Arena" type="Node3D"]
+[node name="ArenaElevator" type="Node3D"]
 script = ExtResource("1_8iled")
 map_import_scale_factor = 5
-gravity_multiplier = 1.0
-
-[node name="cotuCB" parent="." instance=ExtResource("2_w0qr4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 12, 2.08165e-12)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_sgtle")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
-shadow_enabled = true
-
-[node name="Target" parent="." instance=ExtResource("3_bcxaa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 12, 2.08165e-12)
 
 [node name="Platform" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
@@ -1377,6 +1353,7 @@ skeleton = NodePath("../../..")
 
 [node name="EnemySpawner" parent="Platform/SpawnerSpinner" instance=ExtResource("4_8k527")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 5, 2.08165e-12)
+section_name = "ArenaElevator"
 spawn_cooldown_secs = 5.0
 enemy_chances = {
 "GUNNER": 0.0,
@@ -1386,6 +1363,7 @@ enemy_chances = {
 
 [node name="EnemySpawner2" parent="Platform/SpawnerSpinner" instance=ExtResource("4_8k527")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 5, 2.08165e-12)
+section_name = "ArenaElevator"
 spawn_cooldown_secs = 5.0
 enemy_chances = {
 "GUNNER": 2.08167e-12,
@@ -1395,6 +1373,7 @@ enemy_chances = {
 
 [node name="EnemySpawner3" parent="Platform/SpawnerSpinner" instance=ExtResource("4_8k527")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 5, 40)
+section_name = "ArenaElevator"
 spawn_cooldown_secs = 5.0
 enemy_chances = {
 "GUNNER": 2.08167e-12,
@@ -1404,11 +1383,25 @@ enemy_chances = {
 
 [node name="EnemySpawner4" parent="Platform/SpawnerSpinner" instance=ExtResource("4_8k527")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 5, -40)
+section_name = "ArenaElevator"
 spawn_cooldown_secs = 5.0
 enemy_chances = {
 "GUNNER": 2.08167e-12,
 "MELEE_TIER1": 1.0
 }
+
+[node name="GravityBox" type="Area3D" parent="Platform"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.60209e-18, 2, -2.60209e-18)
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("3_hi8ns")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platform/GravityBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+mesh = SubResource("BoxMesh_6ufh6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform/GravityBox"]
+shape = SubResource("BoxShape3D_7ea7b")
 
 [node name="FuncGodotMap" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 30, 2.08165e-12)
@@ -2685,3 +2678,5 @@ shape = SubResource("ConvexPolygonShape3D_btprn")
 
 [node name="entity_0_brush_419_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn"]
 shape = SubResource("ConvexPolygonShape3D_oudrg")
+
+[connection signal="body_entered" from="Platform/GravityBox" to="Platform/GravityBox" method="_on_body_entered"]

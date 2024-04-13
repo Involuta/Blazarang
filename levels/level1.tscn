@@ -1,0 +1,135 @@
+[gd_scene load_steps=9 format=3 uid="uid://bag075geuq340"]
+
+[ext_resource type="Script" path="res://levels/level1.gd" id="1_yr6va"]
+[ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu_versions/cotu_cb_main.tscn" id="2_x50dr"]
+[ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://target/target.tscn" id="3_tad40"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v5sw0"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_b1f78"]
+sky_material = SubResource("ProceduralSkyMaterial_v5sw0")
+
+[sub_resource type="Environment" id="Environment_ot8jt"]
+background_mode = 2
+sky = SubResource("Sky_b1f78")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_0eiko"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ckbsf"]
+
+[node name="Level" type="Node3D"]
+script = ExtResource("1_yr6va")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ot8jt")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="cotuCB" parent="." instance=ExtResource("2_x50dr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.81751, 4.35921, 9.53676e-07)
+
+[node name="Target" parent="." instance=ExtResource("3_tad40")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.57445, 2.43589, 0)
+
+[node name="FirstMazeLoadingTrigger" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56.62, 30.9944, -60.5605)
+collision_layer = 0
+collision_mask = 16
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FirstMazeLoadingTrigger"]
+mesh = SubResource("BoxMesh_0eiko")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FirstMazeLoadingTrigger"]
+shape = SubResource("BoxShape3D_ckbsf")
+
+[node name="HallwayInvasionDeloadingTrigger" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.0633, 46.2363, -162.453)
+collision_layer = 0
+collision_mask = 16
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="HallwayInvasionDeloadingTrigger"]
+mesh = SubResource("BoxMesh_0eiko")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HallwayInvasionDeloadingTrigger"]
+shape = SubResource("BoxShape3D_ckbsf")
+
+[node name="PillarRoomLoadingTrigger" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.4333, 28.9244, -128.11)
+collision_layer = 0
+collision_mask = 16
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PillarRoomLoadingTrigger"]
+mesh = SubResource("BoxMesh_0eiko")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PillarRoomLoadingTrigger"]
+shape = SubResource("BoxShape3D_ckbsf")
+
+[node name="FirstMazeDeloadingTrigger" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -131.591, 1.75765, -128.11)
+collision_layer = 0
+collision_mask = 16
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FirstMazeDeloadingTrigger"]
+mesh = SubResource("BoxMesh_0eiko")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FirstMazeDeloadingTrigger"]
+shape = SubResource("BoxShape3D_ckbsf")
+
+[node name="TopGunBattlefieldLoadingTrigger" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -179.538, 11.6102, -128.11)
+collision_layer = 0
+collision_mask = 16
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TopGunBattlefieldLoadingTrigger"]
+mesh = SubResource("BoxMesh_0eiko")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TopGunBattlefieldLoadingTrigger"]
+shape = SubResource("BoxShape3D_ckbsf")
+
+[node name="PillarRoomDeloadingTrigger" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -191.264, 20.4652, -128.122)
+collision_layer = 0
+collision_mask = 16
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PillarRoomDeloadingTrigger"]
+mesh = SubResource("BoxMesh_0eiko")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PillarRoomDeloadingTrigger"]
+shape = SubResource("BoxShape3D_ckbsf")
+
+[node name="ArenaElevatorLoadingTrigger" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -457.922, 91.8973, -112.094)
+collision_layer = 0
+collision_mask = 16
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ArenaElevatorLoadingTrigger"]
+mesh = SubResource("BoxMesh_0eiko")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ArenaElevatorLoadingTrigger"]
+shape = SubResource("BoxShape3D_ckbsf")
+
+[node name="TopGunBattlefieldDeloadingTrigger" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -486.444, 91.8973, -112.094)
+collision_layer = 0
+collision_mask = 16
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TopGunBattlefieldDeloadingTrigger"]
+mesh = SubResource("BoxMesh_0eiko")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TopGunBattlefieldDeloadingTrigger"]
+shape = SubResource("BoxShape3D_ckbsf")
+
+[connection signal="body_entered" from="FirstMazeLoadingTrigger" to="." method="_on_first_maze_loading_trigger_body_entered"]
+[connection signal="body_entered" from="HallwayInvasionDeloadingTrigger" to="." method="_on_hallway_invasion_deloading_trigger_body_entered"]
+[connection signal="body_entered" from="PillarRoomLoadingTrigger" to="." method="_on_pillar_room_loading_trigger_body_entered"]
+[connection signal="body_entered" from="FirstMazeDeloadingTrigger" to="." method="_on_first_maze_deloading_trigger_body_entered"]
+[connection signal="body_entered" from="TopGunBattlefieldLoadingTrigger" to="." method="_on_top_gun_battlefield_loading_trigger_body_entered"]
+[connection signal="body_entered" from="PillarRoomDeloadingTrigger" to="." method="_on_pillar_room_deloading_trigger_body_entered"]
+[connection signal="body_entered" from="ArenaElevatorLoadingTrigger" to="." method="_on_arena_elevator_loading_trigger_body_entered"]
+[connection signal="body_entered" from="TopGunBattlefieldDeloadingTrigger" to="." method="_on_top_gun_battlefield_deloading_trigger_body_entered"]

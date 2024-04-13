@@ -4,8 +4,8 @@ const MAX_SPEED := 50
 const SPECIAL_DIST := 7 # max dist from Cotu where doing special input will perform a special move
 var roserang_script := preload("res://rang/roserang.gd")
 var rapidorbit_script := preload("res://rang/special_rapidorbit.gd")
-@onready var cotu = $/root/Arena/cotuCB
-@onready var target = $/root/Arena/Target
+@onready var cotu = $/root/Level/cotuCB
+@onready var target = $/root/Level/Target
 @onready var hitbox = $PlayerHitbox
 
 func _init():

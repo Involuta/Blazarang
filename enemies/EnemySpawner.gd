@@ -1,5 +1,8 @@
 extends Node3D
 
+@export var section_name := ""
+var section
+
 var rng := RandomNumberGenerator.new()
 var melee_base := preload("res://enemies/enemy_melee_base.tscn")
 var melee_tier1 := preload("res://enemies/enemy_melee_tier1.tscn")
@@ -13,10 +16,10 @@ var spawn_cooldown_active := false
 	"MELEE_TIER1": .66,
 	"GUNNER" : .33
 }
-@onready var arena := $/root/Arena
-	
+
 func _ready():
-	pass
+	# Since sections are instantiated via script, the owned parameter must be false
+	section = $/root.find_child(section_name, true, false)
 
 func _physics_process(delta):
 	if self and not spawn_cooldown_active and spawning and not spawn_limit_met():
@@ -25,7 +28,7 @@ func _physics_process(delta):
 func spawn_enemy():
 	spawn_cooldown_active = true
 	var enemy_inst = choose_enemy()
-	arena.add_child.call_deferred(enemy_inst)
+	section.add_child.call_deferred(enemy_inst)
 	await enemy_inst.tree_entered
 	enemy_inst.global_position = global_position
 	await get_tree().create_timer(spawn_cooldown_secs).timeout
@@ -57,4 +60,4 @@ func spawn_from_name(enemy_name):
 			return melee_base.instantiate()
 
 func spawn_limit_met():
-	return get_tree().get_nodes_in_group("lockonables").size() >= arena.lockonable_limit
+	return get_tree().get_nodes_in_group("lockonables").size() >= section.lockonable_limit

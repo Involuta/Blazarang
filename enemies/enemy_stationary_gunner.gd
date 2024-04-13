@@ -13,9 +13,8 @@ var rng := RandomNumberGenerator.new()
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var bullet := preload("res://enemies/enemy_bullet.tscn")
 @onready var animation_player := $AnimationPlayer
-@onready var arena := $/root/Arena
-@onready var cotu := $/root/Arena/cotuCB
-@onready var target := $/root/Arena/Target
+@onready var level := $/root/Level
+@onready var target := $/root/Level/Target
 
 func _ready():
 	add_to_group("lockonables")
@@ -43,7 +42,7 @@ func stop_aiming_at_target():
 
 func shoot_bullet():
 	var bullet_inst = bullet.instantiate()
-	arena.add_child.call_deferred(bullet_inst)
+	level.add_child.call_deferred(bullet_inst)
 	await bullet_inst.tree_entered
 	bullet_inst.global_position = global_position
 	bullet_inst.velocity = BULLET_SPEED * global_position.direction_to(target.global_position)

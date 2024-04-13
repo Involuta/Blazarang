@@ -30,7 +30,7 @@ var rng := RandomNumberGenerator.new()
 @onready var sweeper = preload("res://enemies/sweeper.tscn")
 @onready var platform = $Platform
 @onready var spawner_spinner = $Platform/SpawnerSpinner
-@onready var target = $/root/Arena/Target
+@onready var target = $/root/Level/Target
 @onready var spawners = spawner_spinner.get_children()
 
 func _ready():
