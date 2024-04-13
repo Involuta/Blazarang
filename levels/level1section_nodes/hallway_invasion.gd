@@ -14,7 +14,7 @@ var gunner_bridge2_can_switch_dir := true
 @onready var gunner_bridge1 = $GunnerBridge1
 @onready var gunner_bridge2 = $GunnerBridge2
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if Input.is_action_just_pressed("Special"):
 		gunner_bridge1_moving = true
 		start_moving_bridge2_after_delay()

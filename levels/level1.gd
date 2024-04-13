@@ -26,7 +26,8 @@ func _on_first_maze_loading_trigger_body_entered(_body):
 	inst.global_position = section_positions["FirstMaze"]
 
 func _on_hallway_invasion_deloading_trigger_body_entered(_body):
-	if $HallwayInvasion:
+	# Using if find_child(...) instead of if $section prevents errors from being thrown when $section returns nullptr
+	if find_child("HallwayInvasion", false, false):
 		$HallwayInvasion.queue_free()
 
 func _on_pillar_room_loading_trigger_body_entered(_body):
@@ -37,7 +38,7 @@ func _on_pillar_room_loading_trigger_body_entered(_body):
 	inst.rotation.y = -PI/2
 
 func _on_first_maze_deloading_trigger_body_entered(_body):
-	if $FirstMaze:
+	if find_child("FirstMaze", false, false):
 		$FirstMaze.queue_free()
 
 func _on_top_gun_battlefield_loading_trigger_body_entered(_body):
@@ -47,7 +48,7 @@ func _on_top_gun_battlefield_loading_trigger_body_entered(_body):
 	inst.global_position = section_positions["TopGunBattlefield"]
 
 func _on_pillar_room_deloading_trigger_body_entered(_body):
-	if $PillarRoom:
+	if find_child("PillarRoom", false, false):
 		$PillarRoom.queue_free()
 
 func _on_arena_elevator_loading_trigger_body_entered(_body):
@@ -56,6 +57,6 @@ func _on_arena_elevator_loading_trigger_body_entered(_body):
 	await inst.tree_entered
 	inst.global_position = section_positions["ArenaElevator"]
 
-func _on_top_gun_battlefield_deloading_trigger_body_entered(body):
-	if $TopGunBattlefield:
+func _on_top_gun_battlefield_deloading_trigger_body_entered(_body):
+	if find_child("TopGunBattlefield", false, false):
 		$TopGunBattlefield.queue_free()

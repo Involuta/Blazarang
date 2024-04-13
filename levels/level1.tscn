@@ -38,7 +38,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.81751, 4.35921, 9.53676e-0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.57445, 2.43589, 0)
 
 [node name="FirstMazeLoadingTrigger" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56.62, 30.9944, -60.5605)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.179, 30.9944, -60.5605)
 collision_layer = 0
 collision_mask = 16
 

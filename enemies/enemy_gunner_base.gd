@@ -22,7 +22,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var bullet := preload("res://enemies/enemy_bullet.tscn")
 @onready var nav_agent := $NavigationAgent3D
 @onready var animation_player := $AnimationPlayer
-@onready var arena := $/root/Level
+@onready var level := $/root/Level
 @onready var target := $/root/Level/Target
 
 func _ready():
@@ -104,7 +104,7 @@ func stop_aiming_at_target():
 
 func shoot_bullet():
 	var bullet_inst = bullet.instantiate()
-	arena.add_child.call_deferred(bullet_inst)
+	level.add_child.call_deferred(bullet_inst)
 	await bullet_inst.tree_entered
 	bullet_inst.global_position = global_position
 	bullet_inst.velocity = bullet_speed * global_position.direction_to(target.global_position)

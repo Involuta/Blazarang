@@ -21,7 +21,7 @@ func _ready():
 	# Since sections are instantiated via script, the owned parameter must be false
 	section = $/root.find_child(section_name, true, false)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if self and not spawn_cooldown_active and spawning and not spawn_limit_met():
 		spawn_enemy()
 
