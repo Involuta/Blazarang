@@ -60,4 +60,7 @@ func spawn_from_name(enemy_name):
 			return melee_base.instantiate()
 
 func spawn_limit_met():
-	return get_tree().get_nodes_in_group("lockonables").size() >= section.lockonable_limit
+	if section:
+		return get_tree().get_nodes_in_group("lockonables").size() >= section.lockonable_limit
+	else:
+		return true

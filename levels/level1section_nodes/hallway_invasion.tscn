@@ -1,4 +1,4 @@
-[gd_scene load_steps=153 format=3 uid="uid://dpdul4hw6co6n"]
+[gd_scene load_steps=154 format=3 uid="uid://dpdul4hw6co6n"]
 
 [ext_resource type="Script" path="res://levels/level1section_nodes/hallway_invasion.gd" id="1_xrkj2"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_rl1bk"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d3nurhh7od5kk" path="res://enemies/enemy_melee_tier1.tscn" id="9_ry2ge"]
 [ext_resource type="Script" path="res://levels/gravity_box.gd" id="10_hxwdm"]
 [ext_resource type="PackedScene" uid="uid://crnvtwl8auu75" path="res://enemies/enemy_melee_tier2.tscn" id="10_r3rqt"]
+[ext_resource type="PackedScene" uid="uid://bsvswcktyrda1" path="res://levels/loading_trigger.tscn" id="11_hb6ub"]
 [ext_resource type="PackedScene" uid="uid://dwqdm1pn51yee" path="res://enemies/enemy_melee_tier3.tscn" id="11_tkegu"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_y5aon"]
@@ -1015,5 +1016,11 @@ mesh = SubResource("BoxMesh_7dgsa")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GravityBox"]
 shape = SubResource("BoxShape3D_qjlgf")
+
+[node name="LoadingTrigger" parent="." instance=ExtResource("11_hb6ub")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.02562, 38.4006, -60.8912)
+resource_path = "res://levels/level1section_nodes/first_maze.tscn"
+load_position = Vector3(-11, 14, -168)
+node_path_in_level = "FirstMaze"
 
 [connection signal="body_entered" from="GravityBox" to="GravityBox" method="_on_body_entered"]

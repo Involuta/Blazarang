@@ -61,8 +61,8 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 		else:
 			# If the enemy is in the air, don't use navigation agent at all
 			var move_dir = global_position.direction_to(target.global_position)
-			velocity.x = follow_speed / 2 * move_dir.x
-			velocity.z = follow_speed / 2 * move_dir.z
+			velocity.x = follow_speed * move_dir.x
+			velocity.z = follow_speed * move_dir.z
 	move_and_slide()
 
 func follow():

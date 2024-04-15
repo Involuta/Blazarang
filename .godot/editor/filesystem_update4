@@ -31,3 +31,9 @@ res://rang/special_rapidorbit.gd
 res://enemies/death_particle.tscn
 res://enemies/enemy_stationary_gunner.tscn
 res://enemies/enemy_bullet.tscn
+res://enemies/enemy_big_melee_tier1.tscn
+res://enemies/enemy_melee_base.tscn
+res://levels/loading_trigger.gd
+res://levels/level1section_nodes/deloading_trigger.gd
+res://levels/deloading_trigger.tscn
+res://levels/loading_trigger.tscn

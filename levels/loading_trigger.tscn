@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsvswcktyrda1"]
+
+[ext_resource type="Script" path="res://levels/loading_trigger.gd" id="1_11cax"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_v3hvu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n1dkf"]
+
+[node name="LoadingTrigger" type="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("1_11cax")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_v3hvu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_n1dkf")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

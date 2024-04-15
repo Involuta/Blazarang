@@ -1,10 +1,12 @@
-[gd_scene load_steps=94 format=3 uid="uid://dl1sgbi66x0h1"]
+[gd_scene load_steps=96 format=3 uid="uid://dl1sgbi66x0h1"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_8rohr"]
 [ext_resource type="Script" path="res://levels/level1section_nodes/first_maze.gd" id="1_oe5hg"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="2_e5hvx"]
 [ext_resource type="Texture2D" uid="uid://cyg2snr1w5xw5" path="res://addons/func_godot/textures/default_texture.png" id="3_lslmb"]
 [ext_resource type="PackedScene" uid="uid://dro4y6wgais4q" path="res://enemies/EnemySpawner.tscn" id="6_aupnp"]
+[ext_resource type="PackedScene" uid="uid://hq6vdsq0q3vs" path="res://levels/deloading_trigger.tscn" id="7_xs0e6"]
+[ext_resource type="PackedScene" uid="uid://bsvswcktyrda1" path="res://levels/loading_trigger.tscn" id="8_1ylov"]
 [ext_resource type="PackedScene" uid="uid://cpaqsb8vtrdtt" path="res://enemies/destructible_wall.tscn" id="8_f0jg0"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_jtn1q"]
@@ -588,5 +590,16 @@ skeleton = NodePath(".")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnerTrigger"]
 shape = SubResource("BoxShape3D_mbd2p")
+
+[node name="DeloadingTrigger" parent="." instance=ExtResource("7_xs0e6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 32.5465, 4.62291)
+node_path_in_level = "HallwayInvasion"
+
+[node name="LoadingTrigger" parent="." instance=ExtResource("8_1ylov")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.6017, 15.0661, 39.8929)
+resource_path = "res://levels/level1section_nodes/pillar_room.tscn"
+load_position = Vector3(-165, 2.08165e-12, -128)
+load_rotation_y_degrees = -90.0
+node_path_in_level = "PillarRoom"
 
 [connection signal="body_entered" from="SpawnerTrigger" to="." method="_on_spawner_trigger_body_entered"]

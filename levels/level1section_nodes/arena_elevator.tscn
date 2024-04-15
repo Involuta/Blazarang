@@ -1,4 +1,4 @@
-[gd_scene load_steps=437 format=3 uid="uid://c5h8xiiijgobm"]
+[gd_scene load_steps=438 format=3 uid="uid://c5h8xiiijgobm"]
 
 [ext_resource type="Script" path="res://levels/level1section_nodes/arena_elevator.gd" id="1_8iled"]
 [ext_resource type="Script" path="res://levels/gravity_box.gd" id="3_hi8ns"]
@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://crgpdahjaj" path="res://addons/func_godot/fgd/func_godot_fgd.tres" id="7_pjide"]
 [ext_resource type="Material" uid="uid://d0bvr2ypkxf24" path="res://textures/black_tile.tres" id="7_uadhw"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map_settings.gd" id="8_oneeh"]
+[ext_resource type="PackedScene" uid="uid://hq6vdsq0q3vs" path="res://levels/deloading_trigger.tscn" id="9_d5meg"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0i10h"]
 height = 1.0
@@ -2678,5 +2679,9 @@ shape = SubResource("ConvexPolygonShape3D_btprn")
 
 [node name="entity_0_brush_419_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn"]
 shape = SubResource("ConvexPolygonShape3D_oudrg")
+
+[node name="DeloadingTrigger" parent="." instance=ExtResource("9_d5meg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.8808, 12.0574, 0.030242)
+node_path_in_level = "TopGunBattlefield"
 
 [connection signal="body_entered" from="Platform/GravityBox" to="Platform/GravityBox" method="_on_body_entered"]
