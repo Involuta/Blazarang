@@ -1,7 +1,8 @@
-res://levels
 res://levels/
-res://enemies
+res://levels/level1section_nodes
 res://level_maps
+res://levels
+res://enemies
 res://cotu_versions
 /Users/ryanbascos/Library/Application Support/TrenchBroom/games
 /Users/ryanbascos/GodotBuilds

@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://dc63eixy0gd5b"
+path="res://.godot/imported/jumper_room.map-a0bafb65fa87023b1b73adb96dc9d976.tres"
+
+[deps]
+
+source_file="res://level_maps/jumper_room.map"
+dest_files=["res://.godot/imported/jumper_room.map-a0bafb65fa87023b1b73adb96dc9d976.tres"]
+
+[params]
+

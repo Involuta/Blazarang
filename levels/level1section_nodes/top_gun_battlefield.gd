@@ -1,7 +1,7 @@
 extends Level
 
 @onready var platform = $FloatingPlatform
-@export var platform_center := Vector3(-87, 40, 0)
+@export var platform_center_offset := Vector3(-87, 40, 0)
 @export var platform_angle_speed := 0.01
 @export var platform_radius := 30
 var platform_angle := 0.0
@@ -22,8 +22,10 @@ func _ready():
 func _physics_process(delta):
 	platform_angle += platform_angle_speed
 	var platform_vec = platform_radius * Vector2.from_angle(platform_angle)
-	var new_position = platform_center + Vector3(platform_vec.x, 0, platform_vec.y)
-	platform.constant_linear_velocity = (new_position - platform.position) / delta
+	# position is calculated relative to the battlefield (parent) node, so no rotation is necessary
+	var new_position = platform_center_offset + Vector3(platform_vec.x, 0, platform_vec.y)
+	# constant linear vel is global, so the battlefield's rotation needs to be applied
+	platform.constant_linear_velocity = (new_position - platform.position).rotated(Vector3.UP, rotation.y) / delta
 	platform.position = new_position
 	
 	if Input.is_action_just_pressed("Special"):

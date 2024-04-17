@@ -1,11 +1,11 @@
 extends Level
 
 var section_positions = {
-	"HallwayInvasion" : Vector3(0, 0, 0),
-	"FirstMaze" : Vector3(-11, 14, -168),
-	"PillarRoom" : Vector3(-165, 0, -128),
-	"TopGunBattlefield" : Vector3(-267, 17, -112),
-	"ArenaElevator" : Vector3(-527, 80, -112)
+	"HallwayInvasion" : Vector3(0, 10, 0),
+	"FirstMaze" : Vector3(-4, 50, -168),
+	"PillarRoom" : Vector3(37, 102, -337.3),
+	"TopGunBattlefield" : Vector3(16, 118, -444),
+	"ArenaElevator" : Vector3(16, 182, -704)
 }
 var hallway_invasion_resource := preload("res://levels/level1section_nodes/hallway_invasion.tscn")
 var first_maze_resource := preload("res://levels/level1section_nodes/first_maze.tscn")

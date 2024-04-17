@@ -168,7 +168,8 @@ node_path_in_level = "FirstMaze"
 [node name="LoadingTrigger" parent="." instance=ExtResource("8_tmgna")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0024209, 12.7855, 14.4026)
 resource_path = "res://levels/level1section_nodes/top_gun_battlefield.tscn"
-load_position = Vector3(-267, 17, -112)
+load_position = Vector3(16, 118, -444)
+load_rotation_y_degrees = -90.0
 node_path_in_level = "TopGunBattlefield"
 
 [connection signal="body_entered" from="GravityBox" to="GravityBox" method="_on_body_entered"]

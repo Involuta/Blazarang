@@ -28,7 +28,7 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="cotuCB" parent="." instance=ExtResource("2_x50dr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.81751, 4.35921, 9.53676e-07)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.818, 14, 2.08165e-12)
 
 [node name="Target" parent="." instance=ExtResource("3_tad40")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.57445, 2.43589, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.574, 14, 2.08165e-12)
