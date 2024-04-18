@@ -1355,6 +1355,7 @@ skeleton = NodePath("../../..")
 [node name="EnemySpawner" parent="Platform/SpawnerSpinner" instance=ExtResource("4_8k527")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 5, 2.08165e-12)
 section_name = "ArenaElevator"
+spawning = false
 spawn_cooldown_secs = 5.0
 enemy_chances = {
 "GUNNER": 0.0,
@@ -1365,6 +1366,7 @@ enemy_chances = {
 [node name="EnemySpawner2" parent="Platform/SpawnerSpinner" instance=ExtResource("4_8k527")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 5, 2.08165e-12)
 section_name = "ArenaElevator"
+spawning = false
 spawn_cooldown_secs = 5.0
 enemy_chances = {
 "GUNNER": 2.08167e-12,
@@ -1375,6 +1377,7 @@ enemy_chances = {
 [node name="EnemySpawner3" parent="Platform/SpawnerSpinner" instance=ExtResource("4_8k527")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 5, 40)
 section_name = "ArenaElevator"
+spawning = false
 spawn_cooldown_secs = 5.0
 enemy_chances = {
 "GUNNER": 2.08167e-12,
@@ -1385,6 +1388,7 @@ enemy_chances = {
 [node name="EnemySpawner4" parent="Platform/SpawnerSpinner" instance=ExtResource("4_8k527")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 5, -40)
 section_name = "ArenaElevator"
+spawning = false
 spawn_cooldown_secs = 5.0
 enemy_chances = {
 "GUNNER": 2.08167e-12,

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu_versions/cotu_cb_main.tscn" id="1_4wpki"]
 [ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://target/target.tscn" id="2_6nbsg"]
-[ext_resource type="PackedScene" uid="uid://dpdul4hw6co6n" path="res://levels/level1section_nodes/hallway_invasion.tscn" id="3_23kg5"]
+[ext_resource type="PackedScene" uid="uid://c5h8xiiijgobm" path="res://levels/level1section_nodes/arena_elevator.tscn" id="3_qd1nn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5i25g"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -27,9 +27,10 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="cotuCB" parent="." instance=ExtResource("1_4wpki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.04845, 7.52831, -0.107658)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.048, 25, -0.108)
 
 [node name="Target" parent="." instance=ExtResource("2_6nbsg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 7, -0.057)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 25, -0.057)
 
-[node name="HallwayInvasion" parent="." instance=ExtResource("3_23kg5")]
+[node name="ArenaElevator" parent="." instance=ExtResource("3_qd1nn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)

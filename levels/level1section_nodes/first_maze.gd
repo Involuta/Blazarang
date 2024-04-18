@@ -8,7 +8,7 @@ var spawning_enemies := false
 @onready var spawner2 = $EnemySpawner2
 @onready var trapdoor = $NavigationRegion3D/Trapdoor
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if cotu.global_position.y > trapdoor.global_position.y + 3:
 		trapdoor.collision_layer = Globals.ARENA_COL_LAYER
 

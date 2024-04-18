@@ -15,3 +15,7 @@ res://levels/level1section_nodes/first_arena.tscn
 res://levels/level1section_nodes/gun_arena.tscn
 res://levels/level1section_nodes/gun_arena.gd
 res://levels/level1section_nodes/hallway_invasion.gd
+res://levels/loading_trigger.gd
+res://levels/deloading_trigger.gd
+res://levels/level1section_nodes/arena_elevator.gd
+res://levels/level1section_nodes/arena_elevator.tscn

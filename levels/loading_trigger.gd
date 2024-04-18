@@ -11,6 +11,9 @@ func _ready():
 	resource = load(resource_path)
 
 func _on_body_entered(_body):
+	attempt_load_resource()
+
+func attempt_load_resource():
 	if not level.find_child(node_path_in_level, false, false):
 		var inst = resource.instantiate()
 		level.add_child.call_deferred(inst)

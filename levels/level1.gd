@@ -24,51 +24,9 @@ func _ready():
 	inst.global_position = section_positions["GunArena"]
 	inst.rotation.y = -PI/2
 	
-	
 	await get_tree().create_timer(spawn_hallway_delay_secs).timeout
-	var inst2 = hallway_invasion_resource.instantiate()
-	add_child.call_deferred(inst2)
-	await inst2.tree_entered
-	inst2.global_position = section_positions["HallwayInvasion"]
-
-func _on_first_maze_loading_trigger_body_entered(_body):
-	var inst = first_maze_resource.instantiate()
-	add_child.call_deferred(inst)
-	await inst.tree_entered
-	inst.global_position = section_positions["FirstMaze"]
-
-func _on_hallway_invasion_deloading_trigger_body_entered(_body):
-	# Using if find_child(...) instead of if $section prevents errors from being thrown when $section returns nullptr
-	if find_child("HallwayInvasion", false, false):
-		$HallwayInvasion.queue_free()
-
-func _on_pillar_room_loading_trigger_body_entered(_body):
-	var inst = pillar_room_resource.instantiate()
-	add_child.call_deferred(inst)
-	await inst.tree_entered
-	inst.global_position = section_positions["PillarRoom"]
-	inst.rotation.y = -PI/2
-
-func _on_first_maze_deloading_trigger_body_entered(_body):
-	if find_child("FirstMaze", false, false):
-		$FirstMaze.queue_free()
-
-func _on_top_gun_battlefield_loading_trigger_body_entered(_body):
-	var inst = top_gun_battlefield_resource.instantiate()
-	add_child.call_deferred(inst)
-	await inst.tree_entered
-	inst.global_position = section_positions["TopGunBattlefield"]
-
-func _on_pillar_room_deloading_trigger_body_entered(_body):
-	if find_child("PillarRoom", false, false):
-		$PillarRoom.queue_free()
-
-func _on_arena_elevator_loading_trigger_body_entered(_body):
-	var inst = arena_elevator_resource.instantiate()
-	add_child.call_deferred(inst)
-	await inst.tree_entered
-	inst.global_position = section_positions["ArenaElevator"]
-
-func _on_top_gun_battlefield_deloading_trigger_body_entered(_body):
-	if find_child("TopGunBattlefield", false, false):
-		$TopGunBattlefield.queue_free()
+	if not find_child("HallwayInvasion", false, false):
+		var inst2 = hallway_invasion_resource.instantiate()
+		add_child.call_deferred(inst2)
+		await inst2.tree_entered
+		inst2.global_position = section_positions["HallwayInvasion"]

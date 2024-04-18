@@ -38,13 +38,18 @@ func _ready():
 	platform_radius = $Platform/CollisionShape3D.shape.radius
 	for spawner in spawners:
 		spawner.enemy_chances = TIER1_SPAWNS
+
+func begin_sequence():
+	sequence_begun = true
+	for spawner in spawners:
+		spawner.spawning = true
 	start_spawning_sweeper_after_delay()
 	start_spawning_tier2_after_delay()
 	start_spawning_tier3_after_delay()
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("Special") and not sequence_begun:
-		sequence_begun = true
+		begin_sequence()
 	if sequence_begun:
 		platform.linear_velocity = platform_speed * Vector3.UP
 		spawner_spinner.rotate_y(spin_speed * delta)

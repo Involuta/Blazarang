@@ -50,7 +50,7 @@ func gb2_switch_dir():
 	await get_tree().create_timer(.5).timeout
 	gunner_bridge2_can_switch_dir = true
 
-func _on_jumpscare_trigger_body_entered(body):
+func _on_jumpscare_trigger_body_entered(_body):
 	if not jumpscare_triggered:
 		jumpscare_triggered = true
 		$MeleeSpawner1.spawn_enemy()
