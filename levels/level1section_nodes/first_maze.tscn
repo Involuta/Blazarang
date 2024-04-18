@@ -666,7 +666,7 @@ node_path_in_level = "HallwayInvasion"
 [node name="LoadingTrigger" parent="." instance=ExtResource("8_1ylov")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.7821, 54.2521, -46.0522)
 resource_path = "res://levels/level1section_nodes/pillar_room.tscn"
-load_position = Vector3(37, 102, -337.3)
+load_position = Vector3(37, 101.1, -337.1)
 load_rotation_y_degrees = 180.0
 node_path_in_level = "PillarRoom"
 
