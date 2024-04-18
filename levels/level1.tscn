@@ -19,6 +19,7 @@ glow_enabled = true
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_yr6va")
+spawn_hallway_delay_secs = 25
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ot8jt")
@@ -28,7 +29,7 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="cotuCB" parent="." instance=ExtResource("2_x50dr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.818, 14, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, -30, 2.08165e-12)
 
 [node name="Target" parent="." instance=ExtResource("3_tad40")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.574, 14, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, -30, 2.08165e-12)

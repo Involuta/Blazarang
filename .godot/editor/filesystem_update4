@@ -11,3 +11,7 @@ res://levels/level1section_nodes/first_maze.gd
 res://levels/level1.gd
 res://levels/level1section_nodes/pillar_room.tscn
 res://levels/level1section_nodes/top_gun_battlefield.gd
+res://levels/level1section_nodes/first_arena.tscn
+res://levels/level1section_nodes/gun_arena.tscn
+res://levels/level1section_nodes/gun_arena.gd
+res://levels/level1section_nodes/hallway_invasion.gd

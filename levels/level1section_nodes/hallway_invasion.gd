@@ -1,5 +1,6 @@
 extends Level
 
+var jumpscare_triggered := false
 const GUNNER_BRIDGE_MAX_HEIGHT := 25.0
 const GUNNER_BRIDGE_MIN_HEIGHT := 5.0
 const GUNNER_BRIDGE2_START_MOVE_DELAY := 2
@@ -48,3 +49,11 @@ func gb2_switch_dir():
 	gunner_bridge2_speed *= -1
 	await get_tree().create_timer(.5).timeout
 	gunner_bridge2_can_switch_dir = true
+
+func _on_jumpscare_trigger_body_entered(body):
+	if not jumpscare_triggered:
+		jumpscare_triggered = true
+		$MeleeSpawner1.spawn_enemy()
+		$MeleeSpawner2.spawn_enemy()
+		$MeleeSpawner3.spawn_enemy()
+		$MeleeSpawner4.spawn_enemy()

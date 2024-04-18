@@ -1,13 +1,13 @@
 CollisionShape3D
 MeshInstance3D
-StaticBody3D
-Node3D
-FuncGodotMap
 Area3D
+StaticBody3D
+NavigationRegion3D
+FuncGodotMap
+Node3D
 Node
 RigidBody3D
 NavigationAgent3D
-NavigationRegion3D
 CharacterBody3D
 SpotLight3D
 MultiMeshInstance3D
