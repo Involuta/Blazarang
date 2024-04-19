@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://tw33n8s07c4n"
-path="res://.godot/imported/SimpleRig.glb-12d5d8698b0d1ec4d1c0d21236b6bcde.scn"
+uid="uid://dv22yqjquw56q"
+path="res://.godot/imported/CustomAnimRig.glb-72cf9b0d7808f2080cea829146ecb83c.scn"
 
 [deps]
 
-source_file="res://SimpleRig.glb"
-dest_files=["res://.godot/imported/SimpleRig.glb-12d5d8698b0d1ec4d1c0d21236b6bcde.scn"]
+source_file="res://glb_imports/CustomAnimRig.glb"
+dest_files=["res://.godot/imported/CustomAnimRig.glb-72cf9b0d7808f2080cea829146ecb83c.scn"]
 
 [params]
 

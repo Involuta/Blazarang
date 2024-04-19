@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://cvrxu2n1hugn"]
 
 [ext_resource type="Script" path="res://levels/level1section_nodes/pillar_room.gd" id="1_61lp5"]
-[ext_resource type="PackedScene" uid="uid://dro4y6wgais4q" path="res://enemies/EnemySpawner.tscn" id="4_jy1sq"]
+[ext_resource type="PackedScene" uid="uid://dro4y6wgais4q" path="res://enemies/spawners/EnemySpawner.tscn" id="4_jy1sq"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="5_08ip6"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="6_544ot"]
 [ext_resource type="PackedScene" uid="uid://hq6vdsq0q3vs" path="res://levels/deloading_trigger.tscn" id="7_3xvef"]

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dv22yqjquw56q"
-path="res://.godot/imported/CustomAnimRig.glb-7bbe1c02b5976ee5c99bf55c9e5b2401.scn"
+uid="uid://b4uq5bml3c61o"
+path="res://.godot/imported/BasicPillEnemy.glb-e613b04d3d45987bd348ee5b85950c16.scn"
 
 [deps]
 
-source_file="res://CustomAnimRig.glb"
-dest_files=["res://.godot/imported/CustomAnimRig.glb-7bbe1c02b5976ee5c99bf55c9e5b2401.scn"]
+source_file="res://glb_imports/BasicPillEnemy.glb"
+dest_files=["res://.godot/imported/BasicPillEnemy.glb-e613b04d3d45987bd348ee5b85950c16.scn"]
 
 [params]
 

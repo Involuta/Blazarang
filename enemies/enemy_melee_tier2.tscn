@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://crnvtwl8auu75"]
+[gd_scene load_steps=5 format=3 uid="uid://crnvtwl8auu75"]
 
 [ext_resource type="PackedScene" uid="uid://cm35v0fu2apju" path="res://enemies/enemy_melee_base.tscn" id="1_1ofje"]
+[ext_resource type="PackedScene" uid="uid://chqakim1fdbsh" path="res://enemies/pill_enemy_variant1_mesh.tscn" id="2_u0snx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_02rfo"]
 albedo_color = Color(1, 0.156863, 1, 1)
@@ -11,10 +12,10 @@ material = SubResource("StandardMaterial3D_02rfo")
 [node name="EnemyMeleeTier2" instance=ExtResource("1_1ofje")]
 
 [node name="MeshInstance3D" parent="." index="0"]
+visible = false
 mesh = SubResource("CapsuleMesh_mlfo4")
 
 [node name="EnemyHurtbox" parent="." index="3"]
 health = 30
 
-[node name="MeleeHitboxPivot" parent="." index="5"]
-visible = false
+[node name="PillEnemyVariant1" parent="." index="6" instance=ExtResource("2_u0snx")]

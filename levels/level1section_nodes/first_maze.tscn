@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://levels/level1section_nodes/first_maze.gd" id="1_oe5hg"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="2_e5hvx"]
 [ext_resource type="Texture2D" uid="uid://cyg2snr1w5xw5" path="res://addons/func_godot/textures/default_texture.png" id="3_lslmb"]
-[ext_resource type="PackedScene" uid="uid://dro4y6wgais4q" path="res://enemies/EnemySpawner.tscn" id="6_aupnp"]
+[ext_resource type="PackedScene" uid="uid://dro4y6wgais4q" path="res://enemies/spawners/EnemySpawner.tscn" id="6_aupnp"]
 [ext_resource type="PackedScene" uid="uid://hq6vdsq0q3vs" path="res://levels/deloading_trigger.tscn" id="7_xs0e6"]
 [ext_resource type="PackedScene" uid="uid://bsvswcktyrda1" path="res://levels/loading_trigger.tscn" id="8_1ylov"]
 [ext_resource type="PackedScene" uid="uid://cpaqsb8vtrdtt" path="res://enemies/destructible_wall.tscn" id="8_f0jg0"]

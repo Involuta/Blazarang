@@ -1,10 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://d3nurhh7od5kk"]
+[gd_scene load_steps=3 format=3 uid="uid://d3nurhh7od5kk"]
 
 [ext_resource type="PackedScene" uid="uid://cm35v0fu2apju" path="res://enemies/enemy_melee_base.tscn" id="1_ampo0"]
+[ext_resource type="PackedScene" uid="uid://dll4li1unvtx2" path="res://enemies/basic_pill_enemy_mesh.tscn" id="2_stg4t"]
 
 [node name="EnemyMeleeTier1" instance=ExtResource("1_ampo0")]
 sweep_chance = 2.08165e-12
 
+[node name="MeshInstance3D" parent="." index="0"]
+visible = false
+
 [node name="MeleeHitboxPivot" parent="." index="5"]
 transform = Transform3D(-0.500004, -0.866023, -1.26261e-21, -3.13499e-06, 1.81001e-06, 1, -0.866023, 0.500004, -3.61999e-06, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-visible = false
+
+[node name="BasicPillEnemy" parent="." index="6" instance=ExtResource("2_stg4t")]

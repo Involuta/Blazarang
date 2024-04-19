@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_rl1bk"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="3_oluno"]
 [ext_resource type="Texture2D" uid="uid://cyg2snr1w5xw5" path="res://addons/func_godot/textures/default_texture.png" id="4_q08pe"]
-[ext_resource type="PackedScene" uid="uid://dro4y6wgais4q" path="res://enemies/EnemySpawner.tscn" id="7_8xxkt"]
+[ext_resource type="PackedScene" uid="uid://dro4y6wgais4q" path="res://enemies/spawners/EnemySpawner.tscn" id="7_8xxkt"]
 [ext_resource type="PackedScene" uid="uid://b78jp5ykrb7o5" path="res://enemies/enemy_stationary_gunner.tscn" id="8_qqw1h"]
 [ext_resource type="PackedScene" uid="uid://d3nurhh7od5kk" path="res://enemies/enemy_melee_tier1.tscn" id="9_ry2ge"]
 [ext_resource type="Script" path="res://levels/gravity_box.gd" id="10_hxwdm"]

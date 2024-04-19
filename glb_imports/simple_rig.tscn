@@ -1,5 +1,5 @@
 [gd_scene load_steps=2 format=3 uid="uid://fo65meotc75d"]
 
-[ext_resource type="PackedScene" uid="uid://tw33n8s07c4n" path="res://SimpleRig.glb" id="1_6ykdn"]
+[ext_resource type="PackedScene" uid="uid://tw33n8s07c4n" path="res://glb_imports/SimpleRig.glb" id="1_6ykdn"]
 
 [node name="SimpleRig" instance=ExtResource("1_6ykdn")]
