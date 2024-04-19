@@ -660,7 +660,7 @@ mesh = SubResource("BoxMesh_tejtn")
 shape = SubResource("BoxShape3D_ovq6r")
 
 [node name="DeloadingTrigger" parent="." instance=ExtResource("7_xs0e6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.453685, 0.691597, 31.9474)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2.08165e-12, 28)
 node_path_in_level = "HallwayInvasion"
 
 [node name="LoadingTrigger" parent="." instance=ExtResource("8_1ylov")]
