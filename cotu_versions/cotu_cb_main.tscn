@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://cotu_versions/CotuControl.gd" id="1_jhy4u"]
 [ext_resource type="Script" path="res://cotu_versions/CotuHurtbox.gd" id="2_o2tg2"]
-[ext_resource type="PackedScene" uid="uid://48unv252sqah" path="res://cotu_versions/cotu_anims_8.tscn" id="3_1u6vb"]
+[ext_resource type="PackedScene" uid="uid://48unv252sqah" path="res://glb_inherited_scenes/cotu_anims_8.tscn" id="3_1u6vb"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_80wmm"]
 

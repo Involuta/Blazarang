@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://c8sivx3hx1oy1"]
+[gd_scene load_steps=9 format=3 uid="uid://c8sivx3hx1oy1"]
 
-[ext_resource type="Script" path="res://enemies/enemy_gunner_base.gd" id="1_l3sqo"]
-[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_ijxet"]
+[ext_resource type="Script" path="res://enemies/enemy_gunner_base.gd" id="1_oxxcx"]
+[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_3looh"]
+[ext_resource type="PackedScene" uid="uid://bwtsdf6c24323" path="res://glb_inherited_scenes/mobile_gunner.tscn" id="3_n2hhp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t7knm"]
 albedo_color = Color(0.168627, 0.462745, 1, 1)
@@ -49,13 +50,14 @@ _data = {
 "shoot": SubResource("Animation_i1lri")
 }
 
-[node name="EnemyGunner" type="CharacterBody3D"]
+[node name="EnemyMobileGunner" type="CharacterBody3D"]
 collision_layer = 8
 collision_mask = 11
 platform_floor_layers = 4294901762
-script = ExtResource("1_l3sqo")
+script = ExtResource("1_oxxcx")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("CapsuleMesh_5fl67")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -69,7 +71,7 @@ radius = 3.0
 [node name="EnemyHurtbox" type="Area3D" parent="."]
 collision_layer = 8
 collision_mask = 9
-script = ExtResource("2_ijxet")
+script = ExtResource("2_3looh")
 health = 10
 enemy_hitboxes = ["PlayerHitbox"]
 
@@ -80,6 +82,8 @@ shape = SubResource("CapsuleShape3D_txubl")
 libraries = {
 "": SubResource("AnimationLibrary_cvygw")
 }
+
+[node name="GunnerT1" parent="." instance=ExtResource("3_n2hhp")]
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

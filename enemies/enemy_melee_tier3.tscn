@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://enemies/enemy_melee_base.gd" id="1_1j3bx"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_eijtw"]
 [ext_resource type="Script" path="res://hitbox.gd" id="3_y2l46"]
-[ext_resource type="PackedScene" uid="uid://b6fxpj4np7nqu" path="res://enemies/pill_enemy_variant2_mesh.tscn" id="4_h1c4w"]
+[ext_resource type="PackedScene" uid="uid://b6fxpj4np7nqu" path="res://glb_inherited_scenes/pill_enemy_variant2.tscn" id="4_h1c4w"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kausb"]
 albedo_color = Color(1, 1, 0.0862745, 1)

@@ -1,6 +1,11 @@
-res://enemies/enemy_melee_tier3.tscn
 res://addons/func_godot/textures/default_material.tres
-res://enemies/pill_enemy_variant2_mesh.tscn
-res://cotu_versions/cotu_cb_main.tscn
+res://glb_inherited_scenes/gunner_t1.tscn
+res://enemies/enemy_gunner_tier1.tscn
 res://levels/level1.tscn
 res://levels/test_level.tscn
+res://enemies/spawners/EnemySpawner.tscn
+res://glb_inherited_scenes/pill_enemy_variant1.tscn
+res://enemies/enemy_stationary_gunner.tscn
+res://enemies/enemy_gunner_base.tscn
+res://enemies/enemy_mobile_gunner.tscn
+res://enemies/spawners/EnemySpawner.gd
