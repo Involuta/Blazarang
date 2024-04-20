@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu_versions/cotu_cb_main.tscn" id="1_4wpki"]
 [ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://target/target.tscn" id="2_6nbsg"]
-[ext_resource type="PackedScene" uid="uid://c5h8xiiijgobm" path="res://levels/level1section_nodes/arena_elevator.tscn" id="3_qd1nn"]
+[ext_resource type="PackedScene" uid="uid://cb211d57a0el6" path="res://levels/level1section_nodes/top_gun_battlefield.tscn" id="3_w2vbs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5i25g"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -32,5 +32,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.048, 25, -0.108)
 [node name="Target" parent="." instance=ExtResource("2_6nbsg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 25, -0.057)
 
-[node name="ArenaElevator" parent="." instance=ExtResource("3_qd1nn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
+[node name="TopGunBattlefield" parent="." instance=ExtResource("3_w2vbs")]

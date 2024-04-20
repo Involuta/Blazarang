@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://diy6gikltg4wi"
-path="res://.godot/imported/PillEnemyVariant1.glb-caea405f892511ef27b236eec5e6c376.scn"
+uid="uid://yh7p6sjogusj"
+path="res://.godot/imported/MeleeT2.glb-eb44b1b7dd8a2b2b9e989b244803a0ac.scn"
 
 [deps]
 
-source_file="res://glb_imports/PillEnemyVariant1.glb"
-dest_files=["res://.godot/imported/PillEnemyVariant1.glb-caea405f892511ef27b236eec5e6c376.scn"]
+source_file="res://glb_imports/MeleeT2.glb"
+dest_files=["res://.godot/imported/MeleeT2.glb-eb44b1b7dd8a2b2b9e989b244803a0ac.scn"]
 
 [params]
 

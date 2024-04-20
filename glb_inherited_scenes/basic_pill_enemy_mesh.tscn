@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dll4li1unvtx2"]
-
-[ext_resource type="PackedScene" uid="uid://b4uq5bml3c61o" path="res://glb_imports/BasicPillEnemy.glb" id="1_la3r8"]
-
-[node name="BasicPillEnemy" instance=ExtResource("1_la3r8")]
-
-[node name="Sphere" parent="." index="0"]
-transform = Transform3D(-0.5, 1.74393e-16, 4.37114e-08, 1.74393e-16, 0.5, -1.74393e-16, -4.37114e-08, -1.74393e-16, -0.5, 0, 0, 0)

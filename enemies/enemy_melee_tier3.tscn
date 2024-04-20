@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://enemies/enemy_melee_base.gd" id="1_1j3bx"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_eijtw"]
 [ext_resource type="Script" path="res://hitbox.gd" id="3_y2l46"]
-[ext_resource type="PackedScene" uid="uid://b6fxpj4np7nqu" path="res://glb_inherited_scenes/pill_enemy_variant2.tscn" id="4_h1c4w"]
+[ext_resource type="PackedScene" uid="uid://bwdcuwgfmnx6s" path="res://glb_inherited_scenes/melee_t3.tscn" id="4_pe0vr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kausb"]
 albedo_color = Color(1, 1, 0.0862745, 1)
@@ -230,7 +230,7 @@ shape = SubResource("CapsuleShape3D_na3bt")
 transform = Transform3D(1, -1.62572e-08, -4.69464e-15, -4.73391e-08, 1, -3.90864e-15, 2.95455e-14, -2.14339e-14, 0.999999, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh = SubResource("CapsuleMesh_oq81m")
 
-[node name="PillEnemyVariant2" parent="." instance=ExtResource("4_h1c4w")]
+[node name="MeleeT3" parent="." instance=ExtResource("4_pe0vr")]
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached" flags=18]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed" flags=18]
