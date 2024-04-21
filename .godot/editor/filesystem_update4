@@ -11,3 +11,8 @@ res://glb_inherited_scenes/melee_t1.tscn
 res://glb_inherited_scenes/cotu_anims_10.tscn
 res://cotu/CotuControl.gd
 res://glb_inherited_scenes/cotu_anims_11.tscn
+res://textures/small_solid_white.tres
+res://textures/small_solid_driedblood.tres
+res://glb_inherited_scenes/cotu_anims_12.tscn
+res://enemies/spawners/EnemySpawner.tscn
+res://enemies/spawners/EnemySpawner.gd

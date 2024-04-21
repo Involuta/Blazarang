@@ -57,7 +57,7 @@ func spawn_from_name(enemy_name):
 			return gunner.instantiate()
 		"default":
 			print("Error: attempted to spawn unknown enemy")
-			return melee_base.instantiate()
+			return melee_tier1.instantiate()
 
 func spawn_limit_met():
 	if section:

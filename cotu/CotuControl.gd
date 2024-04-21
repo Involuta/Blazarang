@@ -99,9 +99,12 @@ func _physics_process(delta):
 			start_instant_rethrow_timer()
 	if throw_queued and roserang_instance == null:
 		# Instant rethrow
+		anim_tree.set("parameters/StateMachine/conditions/just_instant_rethrew", true)
 		throw_queued = false
 		throw_rang()
 		Globals.award_score(Globals.INSTANT_RETHROW_SCORE)
+	else:
+		anim_tree.set("parameters/StateMachine/conditions/just_instant_rethrew", false)
 	
 	# Target control and buff clearing
 	if roserang_instance == null:
