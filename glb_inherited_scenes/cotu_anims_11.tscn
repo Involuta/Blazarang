@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjtok0eqv0ugl"]
+
+[ext_resource type="PackedScene" uid="uid://dbgq0br0rheif" path="res://glb_imports/CustomAnimRig.glb" id="1_aq475"]
+
+[node name="CotuAnims11" instance=ExtResource("1_aq475")]

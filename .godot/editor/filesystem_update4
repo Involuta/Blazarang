@@ -9,3 +9,5 @@ res://levels/level1section_nodes/hallway_invasion.tscn
 res://enemies/enemy_melee_tier1.tscn
 res://glb_inherited_scenes/melee_t1.tscn
 res://glb_inherited_scenes/cotu_anims_10.tscn
+res://cotu/CotuControl.gd
+res://glb_inherited_scenes/cotu_anims_11.tscn
