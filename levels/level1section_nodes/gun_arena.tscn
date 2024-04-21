@@ -44,9 +44,7 @@ use_trenchbroom_groups_hierarchy = false
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_01g8c"]
 albedo_color = Color(0.788235, 0, 0, 1)
 albedo_texture = ExtResource("4_tcpyo")
-metallic = 0.5
 metallic_specular = 0.0
-roughness = 0.5
 texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ko8fr"]

@@ -1,20 +1,22 @@
 [gd_scene load_steps=7 format=3 uid="uid://bag075geuq340"]
 
 [ext_resource type="Script" path="res://levels/level1.gd" id="1_yr6va"]
-[ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu_versions/cotu_cb_main.tscn" id="2_x50dr"]
+[ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="2_x50dr"]
 [ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://target/target.tscn" id="3_tad40"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v5sw0"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+sky_top_color = Color(0.00392157, 0.117647, 0.2, 1)
+sky_horizon_color = Color(0, 0.156863, 0.290196, 1)
+ground_bottom_color = Color(0.12549, 0, 0.317647, 1)
+ground_horizon_color = Color(0, 0.156863, 0.290196, 1)
 
-[sub_resource type="Sky" id="Sky_b1f78"]
+[sub_resource type="Sky" id="Sky_1m4j0"]
 sky_material = SubResource("ProceduralSkyMaterial_v5sw0")
 
 [sub_resource type="Environment" id="Environment_ot8jt"]
 background_mode = 2
-sky = SubResource("Sky_b1f78")
-tonemap_mode = 2
+sky = SubResource("Sky_1m4j0")
+tonemap_mode = 3
 glow_enabled = true
 
 [node name="Level" type="Node3D"]
@@ -26,6 +28,7 @@ environment = SubResource("Environment_ot8jt")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_energy = 0.638
 shadow_enabled = true
 
 [node name="cotuCB" parent="." instance=ExtResource("2_x50dr")]

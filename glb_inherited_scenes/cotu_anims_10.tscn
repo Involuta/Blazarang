@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqfcimhdchd0m"]
+
+[ext_resource type="PackedScene" uid="uid://1n5j803ejba5" path="res://glb_imports/CustomAnimRig.glb" id="1_vqg48"]
+
+[node name="CotuAnims10" instance=ExtResource("1_vqg48")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/7/rotation = Quaternion(-0.549038, -0.441331, 0.565987, -0.428302)
+bones/8/rotation = Quaternion(-0.115394, 0.0546107, -0.0320633, 0.991299)
+bones/9/rotation = Quaternion(1.77704e-07, -5.37999e-07, 0.0760966, 0.9971)
+bones/10/rotation = Quaternion(0.0246469, 0.0532333, 0.00465488, 0.998267)
+bones/32/rotation = Quaternion(-0.115448, -0.0544677, 0.0330651, 0.991268)
+bones/33/rotation = Quaternion(-1.90185e-07, 3.91959e-08, -0.0750218, 0.997182)
+bones/34/rotation = Quaternion(0.0238018, -0.0510479, -0.009206, 0.99837)
+bones/55/rotation = Quaternion(-0.00118167, 0.0293328, -0.998743, 0.0406218)
+bones/55/scale = Vector3(1, 0.999999, 1)
+bones/56/rotation = Quaternion(-0.0069034, 3.28584e-07, -1.81722e-07, 0.999976)
+bones/57/rotation = Quaternion(0.503535, -0.00246989, 0.00161952, 0.86397)
+bones/60/rotation = Quaternion(-0.00122081, -0.0302477, 0.998716, 0.0406206)
+bones/60/scale = Vector3(1, 1, 1)
+bones/61/rotation = Quaternion(-0.00100266, -2.73097e-06, 9.17275e-09, 1)
+bones/62/rotation = Quaternion(0.493543, 0.00257562, -0.0016366, 0.869716)

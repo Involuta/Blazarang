@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://brh5e68d7aas0"]
+
+[ext_resource type="Texture2D" uid="uid://berkaqntqnl27" path="res://textures/small_solid_driedblood.png" id="1_obdgw"]
+
+[resource]
+albedo_color = Color(0.788235, 0, 0, 1)
+albedo_texture = ExtResource("1_obdgw")
+metallic_specular = 0.0
+texture_filter = 2

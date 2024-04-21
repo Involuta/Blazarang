@@ -1,10 +1,12 @@
+LightmapGI
+Node3D
+OmniLight3D
 CollisionShape3D
 MeshInstance3D
 Area3D
 StaticBody3D
 NavigationRegion3D
 FuncGodotMap
-Node3D
 Node
 RigidBody3D
 NavigationAgent3D

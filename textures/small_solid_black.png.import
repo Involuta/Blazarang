@@ -2,18 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c56ls18a180dq"
-path.s3tc="res://.godot/imported/CustomAnimRig_Simple.png-bc15c3c85e538a5bbd8580a5097e680b.s3tc.ctex"
+uid="uid://dooiw2nsdckty"
+path.s3tc="res://.godot/imported/small_solid_black.png-ed2bc21591c55d0fb18ac9f1e9b43c10.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={}
 
 [deps]
 
-source_file="res://CustomAnimRig_Simple.png"
-dest_files=["res://.godot/imported/CustomAnimRig_Simple.png-bc15c3c85e538a5bbd8580a5097e680b.s3tc.ctex"]
+source_file="res://textures/small_solid_black.png"
+dest_files=["res://.godot/imported/small_solid_black.png-ed2bc21591c55d0fb18ac9f1e9b43c10.s3tc.ctex"]
 
 [params]
 

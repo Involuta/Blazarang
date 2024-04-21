@@ -46,4 +46,9 @@ damage = 10
 [node name="HitboxCollider" type="CollisionShape3D" parent="PlayerHitbox"]
 shape = SubResource("CylinderShape3D_vx8km")
 
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_energy = 10.0
+omni_range = 15.0
+omni_shadow_mode = 0
+
 [connection signal="body_entered" from="CotuCollider" to="CotuCollider" method="_on_body_entered"]

@@ -1,8 +1,8 @@
 [gd_scene load_steps=23 format=3 uid="uid://icbfj05gq8vk"]
 
-[ext_resource type="Script" path="res://cotu_versions/CotuControl.gd" id="1_jhy4u"]
-[ext_resource type="Script" path="res://cotu_versions/CotuHurtbox.gd" id="2_o2tg2"]
-[ext_resource type="PackedScene" uid="uid://48unv252sqah" path="res://glb_inherited_scenes/cotu_anims_8.tscn" id="3_1u6vb"]
+[ext_resource type="Script" path="res://cotu/CotuControl.gd" id="1_aleek"]
+[ext_resource type="Script" path="res://cotu/CotuHurtbox.gd" id="2_fvpfg"]
+[ext_resource type="PackedScene" uid="uid://dqfcimhdchd0m" path="res://glb_inherited_scenes/cotu_anims_10.tscn" id="3_nto8f"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_80wmm"]
 
@@ -25,7 +25,7 @@ play_mode = 1
 animation = &"FrontTwistFlipFast"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kvedh"]
-animation = &"default"
+animation = &"Idle_pose"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j62tw"]
 animation = &"Run"
@@ -53,11 +53,13 @@ advance_condition = &"just_dodged"
 advance_expression = "abs(walk_input.y) > 0"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ieh2i"]
+xfade_time = 0.2
 priority = 2
 switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pc5go"]
+xfade_time = 0.2
 priority = 2
 switch_mode = 2
 advance_mode = 2
@@ -80,10 +82,10 @@ states/FrontTwistFlipFast/position = Vector2(531.693, 5.4951)
 states/RunBlendSpace/node = SubResource("AnimationNodeBlendSpace1D_ivebn")
 states/RunBlendSpace/position = Vector2(418.693, 150.5)
 transitions = ["Start", "RunBlendSpace", SubResource("AnimationNodeStateMachineTransition_nerqb"), "RunBlendSpace", "AerialEvadeFast", SubResource("AnimationNodeStateMachineTransition_e8r0g"), "RunBlendSpace", "FrontTwistFlipFast", SubResource("AnimationNodeStateMachineTransition_0y1n2"), "AerialEvadeFast", "RunBlendSpace", SubResource("AnimationNodeStateMachineTransition_ieh2i"), "FrontTwistFlipFast", "RunBlendSpace", SubResource("AnimationNodeStateMachineTransition_pc5go"), "AerialEvadeFast", "FrontTwistFlipFast", SubResource("AnimationNodeStateMachineTransition_rdo08"), "FrontTwistFlipFast", "AerialEvadeFast", SubResource("AnimationNodeStateMachineTransition_ggvq7")]
-graph_offset = Vector2(186.203, -89.7149)
+graph_offset = Vector2(44.273, -39.1124)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wg7n8"]
-graph_offset = Vector2(-64.32, 130.56)
+graph_offset = Vector2(-91.2, 117.12)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_auidk")
 nodes/StateMachine/position = Vector2(80, 150)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -91,7 +93,7 @@ node_connections = [&"output", 0, &"StateMachine"]
 [node name="cotuCB" type="CharacterBody3D"]
 collision_layer = 16
 collision_mask = 74
-script = ExtResource("1_jhy4u")
+script = ExtResource("1_aleek")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
@@ -121,7 +123,7 @@ skeleton = NodePath("../..")
 
 [node name="Hurtbox" type="Area3D" parent="."]
 collision_mask = 11
-script = ExtResource("2_o2tg2")
+script = ExtResource("2_fvpfg")
 health = 10000
 enemy_hitboxes = ["EnemyHitbox"]
 
@@ -136,36 +138,36 @@ active = true
 parameters/StateMachine/conditions/just_dodged = false
 parameters/StateMachine/RunBlendSpace/blend_position = 1.0
 
-[node name="CotuAnims" parent="." instance=ExtResource("3_1u6vb")]
+[node name="CotuAnims" parent="." instance=ExtResource("3_nto8f")]
 
 [node name="Skeleton3D" parent="CotuAnims/Armature" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.988, 2.08165e-12)
-bones/0/position = Vector3(6.7406e-05, 0.948373, 0.12586)
-bones/0/rotation = Quaternion(0.103863, 0.00132611, 0.00994681, 0.994541)
-bones/1/position = Vector3(1.29534e-06, 0.0922872, -0.0106757)
-bones/1/rotation = Quaternion(0.0537883, 0.0115901, 0.0114158, 0.99842)
-bones/2/rotation = Quaternion(-0.0486722, -0.016203, -0.00927094, 0.99864)
-bones/3/rotation = Quaternion(-0.0794417, -0.00918478, -0.0154666, 0.996677)
-bones/4/rotation = Quaternion(0.0697322, 0.000240947, 0.000844717, 0.997565)
-bones/7/position = Vector3(0.0662896, 0.113285, 0.032848)
-bones/7/rotation = Quaternion(-0.569693, -0.430428, 0.56265, -0.416661)
-bones/8/rotation = Quaternion(0.474949, 0.361786, -0.429806, 0.677348)
-bones/9/rotation = Quaternion(-2.59835e-07, -5.03699e-07, 0.724565, 0.689206)
-bones/10/rotation = Quaternion(-0.0134398, -0.102924, 0.0569222, 0.992968)
-bones/31/position = Vector3(-0.0616942, 0.11849, 0.0297045)
-bones/31/rotation = Quaternion(0.53774, -0.463328, 0.559079, 0.428478)
-bones/32/rotation = Quaternion(0.669379, 0.0913047, -0.135894, 0.724657)
-bones/33/rotation = Quaternion(-1.92026e-07, -5.71255e-08, -0.535423, 0.844584)
-bones/34/rotation = Quaternion(0.0477339, -0.029883, -0.000573303, 0.998413)
-bones/55/rotation = Quaternion(-8.48511e-05, 0.448697, 0.893679, -0.00284956)
+bones/0/position = Vector3(-0.000115169, 0.975601, 0.14947)
+bones/0/rotation = Quaternion(0.0921428, 0.0103128, 0.0089747, 0.995652)
+bones/1/position = Vector3(0.000280476, 0.0922826, -0.0106708)
+bones/1/rotation = Quaternion(0.0538141, 0.0123259, 0.0113948, 0.99841)
+bones/2/rotation = Quaternion(-0.0485782, -0.013557, -0.00999498, 0.998677)
+bones/3/rotation = Quaternion(-0.0796051, -0.00753887, -0.014675, 0.99669)
+bones/4/rotation = Quaternion(0.0697199, -0.00769006, 0.000753453, 0.997537)
+bones/7/position = Vector3(0.0664609, 0.113356, 0.0304682)
+bones/7/rotation = Quaternion(-0.580091, -0.450678, 0.548037, -0.400048)
+bones/8/rotation = Quaternion(0.517262, -0.0272273, 0.151616, 0.84185)
+bones/9/rotation = Quaternion(-1.84302e-07, -5.30102e-07, 0.669806, 0.742536)
+bones/10/rotation = Quaternion(-0.122611, -0.122076, 0.0603039, 0.98307)
+bones/31/position = Vector3(-0.0615661, 0.11778, 0.0279666)
+bones/31/rotation = Quaternion(0.553509, -0.478048, 0.545077, 0.409864)
+bones/32/rotation = Quaternion(0.521855, -0.321493, 0.46192, 0.641046)
+bones/33/rotation = Quaternion(-1.74734e-07, -1.00215e-07, -0.757543, 0.652785)
+bones/34/rotation = Quaternion(0.00667424, -0.0260469, 0.0222634, 0.99939)
+bones/55/rotation = Quaternion(-0.000202224, -0.0866534, 0.995906, -0.0257374)
 bones/55/scale = Vector3(1, 0.999993, 1.00001)
-bones/56/rotation = Quaternion(-0.237833, 3.64543e-07, -1.0214e-07, 0.971306)
-bones/57/rotation = Quaternion(0.373577, 0.0632065, 0.0109687, 0.925378)
-bones/58/rotation = Quaternion(0.278766, -0.0944739, 0.0269759, 0.95532)
-bones/60/rotation = Quaternion(-0.0146236, -0.138097, 0.989792, 0.0320521)
+bones/56/rotation = Quaternion(-0.320781, 3.72202e-07, -6.56971e-08, 0.947154)
+bones/57/rotation = Quaternion(0.59367, 0.0520866, 0.00678447, 0.802992)
+bones/58/rotation = Quaternion(0.279104, -0.0944831, 0.0269436, 0.955221)
+bones/60/rotation = Quaternion(-0.000645346, 0.433625, 0.900786, 0.0235278)
 bones/60/scale = Vector3(1, 0.999999, 1)
-bones/61/rotation = Quaternion(-0.295868, -2.61587e-06, -7.95657e-07, 0.955229)
-bones/62/rotation = Quaternion(0.585262, -0.0283899, -0.00802514, 0.810308)
-bones/63/rotation = Quaternion(0.284409, 0.0939768, -0.0275133, 0.953689)
+bones/61/rotation = Quaternion(-0.290579, -2.61567e-06, -7.8011e-07, 0.956851)
+bones/62/rotation = Quaternion(0.256713, -0.0131613, -0.00352488, 0.966392)
+bones/63/rotation = Quaternion(0.343317, 0.0955091, -0.0216014, 0.934101)
 
 [editable path="CotuAnims"]

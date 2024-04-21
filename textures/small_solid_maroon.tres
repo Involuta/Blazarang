@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b46stv2omwjqd"]
+
+[ext_resource type="Texture2D" uid="uid://bls66x5n74pff" path="res://textures/small_solid_maroon.png" id="1_p1fxp"]
+
+[resource]
+albedo_color = Color(0.788235, 0, 0, 1)
+albedo_texture = ExtResource("1_p1fxp")
+metallic_specular = 0.0
+texture_filter = 2

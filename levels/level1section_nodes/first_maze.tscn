@@ -16,9 +16,7 @@ polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Arr
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lf111"]
 albedo_color = Color(0.788235, 0, 0, 1)
 albedo_texture = ExtResource("3_lslmb")
-metallic = 0.5
 metallic_specular = 0.0
-roughness = 0.5
 texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_3n2b6"]

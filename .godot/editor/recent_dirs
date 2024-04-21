@@ -1,10 +1,9 @@
 res://glb_inherited_scenes
+res://levels
 res://enemies
 res://level_maps
 res://levels/
 res://levels/level1section_nodes
-res://levels
-res://cotu_versions
 /Users/ryanbascos/Library/Application Support/TrenchBroom/games
 /Users/ryanbascos/GodotBuilds
 /Users/ryanbascos/Applications/

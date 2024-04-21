@@ -5,14 +5,14 @@
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="5_g42r8"]
 [ext_resource type="Texture2D" uid="uid://cyg2snr1w5xw5" path="res://addons/func_godot/textures/default_texture.png" id="6_2erj1"]
 [ext_resource type="PackedScene" uid="uid://cyh6peelq6bm4" path="res://enemies/enemy_mega_gun.tscn" id="7_fxcv6"]
+[ext_resource type="PackedScene" uid="uid://c8sivx3hx1oy1" path="res://enemies/enemy_mobile_gunner.tscn" id="8_8vill"]
 [ext_resource type="PackedScene" uid="uid://b78jp5ykrb7o5" path="res://enemies/enemy_stationary_gunner.tscn" id="8_x5ho0"]
 [ext_resource type="PackedScene" uid="uid://dwqdm1pn51yee" path="res://enemies/enemy_melee_tier3.tscn" id="9_6darq"]
-[ext_resource type="PackedScene" uid="uid://c8sivx3hx1oy1" path="res://enemies/enemy_gunner_base.tscn" id="10_1ydrl"]
 [ext_resource type="PackedScene" uid="uid://dyilfie2mo46c" path="res://enemies/enemy_big_melee_tier1.tscn" id="11_8gncm"]
 [ext_resource type="PackedScene" uid="uid://crnvtwl8auu75" path="res://enemies/enemy_melee_tier2.tscn" id="12_0dlod"]
 [ext_resource type="Script" path="res://levels/gravity_box.gd" id="12_xnokl"]
 [ext_resource type="PackedScene" uid="uid://hq6vdsq0q3vs" path="res://levels/deloading_trigger.tscn" id="13_2dc3i"]
-[ext_resource type="PackedScene" uid="uid://dro4y6wgais4q" path="res://enemies/EnemySpawner.tscn" id="13_r21ed"]
+[ext_resource type="PackedScene" uid="uid://dro4y6wgais4q" path="res://enemies/spawners/EnemySpawner.tscn" id="13_r21ed"]
 [ext_resource type="PackedScene" uid="uid://bsvswcktyrda1" path="res://levels/loading_trigger.tscn" id="14_okpjc"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_uck3h"]
@@ -22,9 +22,7 @@ polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Arr
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t0h2w"]
 albedo_color = Color(0.788235, 0, 0, 1)
 albedo_texture = ExtResource("6_2erj1")
-metallic = 0.5
 metallic_specular = 0.0
-roughness = 0.5
 texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_a0xfs"]
@@ -403,7 +401,7 @@ aggro_distance = 30
 
 [node name="Wave2" type="Node3D" parent="."]
 
-[node name="GT1Wave2" parent="Wave2" instance=ExtResource("10_1ydrl")]
+[node name="GT1Wave2" parent="Wave2" instance=ExtResource("8_8vill")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00502682, 19.9178, 0.00301635)
 aggro_distance = 40
 target_distance = 40.0
@@ -424,7 +422,7 @@ aggro_distance = 30
 
 [node name="Wave3" type="Node3D" parent="."]
 
-[node name="GT1Wave3" parent="Wave3" instance=ExtResource("10_1ydrl")]
+[node name="GT1Wave3" parent="Wave3" instance=ExtResource("8_8vill")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.4952, 17.4015, 0.0281696)
 aggro_distance = 50
 target_distance = 50.0
@@ -455,25 +453,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -132.922, 44.2806, -36.1313)
 collision_mask = 26
 aggro_distance = 20
 
-[node name="GT1RightWall" parent="RightWallEnemies" instance=ExtResource("10_1ydrl")]
+[node name="GT1RightWall" parent="RightWallEnemies" instance=ExtResource("8_8vill")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -148.453, 44.5248, -35.8233)
 aggro_distance = 30
 
 [node name="PadsEnemies" type="Node3D" parent="."]
 
-[node name="GT1Pads_1" parent="PadsEnemies" instance=ExtResource("10_1ydrl")]
+[node name="GT1Pads_1" parent="PadsEnemies" instance=ExtResource("8_8vill")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -155, 12, 18)
 aggro_distance = 30
 
-[node name="GT1Pads_2" parent="PadsEnemies" instance=ExtResource("10_1ydrl")]
+[node name="GT1Pads_2" parent="PadsEnemies" instance=ExtResource("8_8vill")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -155, 10.5, -18)
 aggro_distance = 30
 
-[node name="GT1Pads_3" parent="PadsEnemies" instance=ExtResource("10_1ydrl")]
+[node name="GT1Pads_3" parent="PadsEnemies" instance=ExtResource("8_8vill")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -137, 12, 9)
 aggro_distance = 30
 
-[node name="GT1Pads_4" parent="PadsEnemies" instance=ExtResource("10_1ydrl")]
+[node name="GT1Pads_4" parent="PadsEnemies" instance=ExtResource("8_8vill")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -137, 12, -9)
 aggro_distance = 30
 
