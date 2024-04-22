@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://b18v7gt45bq4p"]
+[gd_scene load_steps=2 format=3 uid="uid://ci3w6epg1bu6u"]
 
-[ext_resource type="PackedScene" uid="uid://bfx78jl4vb45b" path="res://glb_imports/CustomAnimRig.glb" id="1_m2kdb"]
+[ext_resource type="PackedScene" uid="uid://dxqvk2nr32q0k" path="res://glb_imports/CustomAnimRig.glb" id="1_edqqg"]
 
-[node name="CotuAnims12" instance=ExtResource("1_m2kdb")]
+[node name="CotuAnims13" instance=ExtResource("1_edqqg")]
 
 [node name="Skeleton3D" parent="Armature" index="0"]
 bones/7/rotation = Quaternion(-0.549038, -0.441331, 0.565987, -0.428302)

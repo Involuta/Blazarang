@@ -2,18 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8yxdwjx03ydk"
-path.s3tc="res://.godot/imported/CustomAnimRig_Simple.png-beb1e2d0f4eb79276b095a754d3b034d.s3tc.ctex"
+uid="uid://bapaks7bu7kxb"
+path.s3tc="res://.godot/imported/SimpleRedLines.png-d18576c8b2ee3117769b6f32bd04e06e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={}
 
 [deps]
 
-source_file="res://glb_imports/CustomAnimRig_Simple.png"
-dest_files=["res://.godot/imported/CustomAnimRig_Simple.png-beb1e2d0f4eb79276b095a754d3b034d.s3tc.ctex"]
+source_file="res://textures/SimpleRedLines.png"
+dest_files=["res://.godot/imported/SimpleRedLines.png-d18576c8b2ee3117769b6f32bd04e06e.s3tc.ctex"]
 
 [params]
 

@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bunyx87ulnxii"]
+
+[ext_resource type="Texture2D" uid="uid://dqej01mxpd7vi" path="res://textures/RedLines.png" id="1_7sn4d"]
+
+[resource]
+albedo_color = Color(0.27451, 0, 0, 1)
+albedo_texture = ExtResource("1_7sn4d")
+metallic_specular = 0.0
+texture_filter = 2

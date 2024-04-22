@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bo6k6sryjc44h" path="res://textures/small_solid_white.png" id="1_f3nxi"]
 
 [resource]
+albedo_color = Color(0.341176, 0, 0, 1)
 albedo_texture = ExtResource("1_f3nxi")
 metallic_specular = 0.0
 texture_filter = 2
