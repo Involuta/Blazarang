@@ -6,5 +6,4 @@ res://levels/test_level.tscn
 res://rang/roserang.tscn
 res://target/target.tscn
 res://levels/level1section_nodes/hallway_invasion.tscn
-res://enemies/spawners/EnemySpawner.tscn
-res://glb_inherited_scenes/cotu_anims_13.tscn
+res://glb_inherited_scenes/cotu_anims_15.tscn
