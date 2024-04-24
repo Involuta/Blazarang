@@ -28,6 +28,7 @@ script = ExtResource("1_abaar")
 shape = SubResource("CapsuleShape3D_qwteq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="EnemyHitbox"]
+gi_mode = 0
 mesh = SubResource("CapsuleMesh_0osf0")
 
 [connection signal="body_entered" from="EnemyHitbox" to="." method="_on_body_entered"]

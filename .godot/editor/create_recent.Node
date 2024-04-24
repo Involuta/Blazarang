@@ -1,8 +1,8 @@
-VoxelGI
-LightmapGI
 DirectionalLight3D
-Node3D
+LightmapGI
 OmniLight3D
+VoxelGI
+Node3D
 CollisionShape3D
 MeshInstance3D
 Area3D

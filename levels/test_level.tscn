@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d4wywx3bv11n"]
+[gd_scene load_steps=7 format=3 uid="uid://d4wywx3bv11n"]
 
 [ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="1_4wpki"]
 [ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://target/target.tscn" id="2_6nbsg"]
@@ -6,9 +6,9 @@
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s5q5q"]
 sky_top_color = Color(0, 0.0156863, 0.109804, 1)
-sky_horizon_color = Color(0.027451, 0, 0.498039, 1)
-ground_bottom_color = Color(0.027451, 0, 0.498039, 1)
-ground_horizon_color = Color(0.027451, 0, 0.498039, 1)
+sky_horizon_color = Color(0, 0, 0, 1)
+ground_bottom_color = Color(0.00392157, 0, 0.168627, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Sky" id="Sky_b1f78"]
 sky_material = SubResource("ProceduralSkyMaterial_s5q5q")
@@ -19,18 +19,10 @@ sky = SubResource("Sky_b1f78")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="VoxelGIData" id="VoxelGIData_mp6du"]
-interior = true
-
 [node name="Level" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2chwq")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 1.74393e-16, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 4.58059, 0)
-shadow_enabled = true
-shadow_reverse_cull_face = true
 
 [node name="cotuCB" parent="." instance=ExtResource("1_4wpki")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.048, 13.9587, -0.108)
@@ -39,8 +31,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.048, 13.9587, -0.108)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 14.0594, -0.057)
 
 [node name="HallwayInvasion" parent="." instance=ExtResource("3_mschw")]
-
-[node name="VoxelGI" type="VoxelGI" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.999743, -0.0226524, 0, 0.0226524, 0.999743, 26.5491, 20.8698, -74.2109)
-size = Vector3(108.32, 78.7441, 210.161)
-data = SubResource("VoxelGIData_mp6du")

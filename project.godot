@@ -118,4 +118,3 @@ Special={
 
 limits/opengl/max_lights_per_object=20
 anti_aliasing/quality/msaa_3d=1
-occlusion_culling/use_occlusion_culling=true

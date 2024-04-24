@@ -12,12 +12,17 @@ collision_layer = 32
 script = ExtResource("1_fgjod")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+gi_mode = 0
 mesh = SubResource("BoxMesh_cp1if")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_qvdqm")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
+visible = false
+light_energy = 5.0
+light_bake_mode = 0
+omni_range = 10.0
 omni_shadow_mode = 0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

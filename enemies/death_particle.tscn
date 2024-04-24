@@ -19,6 +19,7 @@ collision_mask = 18
 script = ExtResource("1_h3m83")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+gi_mode = 0
 mesh = SubResource("BoxMesh_pbxte")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
