@@ -1,9 +1,10 @@
+res://levels/test_level.tscn
 res://addons/func_godot/textures/default_material.tres
 res://textures/SimpleRedLines.tres
-res://cotu/cotu_cb_main.tscn
+res://textures/RedBorderedRect.tres
 res://levels/level1.tscn
-res://levels/test_level.tscn
 res://rang/roserang.tscn
 res://target/target.tscn
 res://levels/level1section_nodes/hallway_invasion.tscn
+res://cotu/cotu_cb_main.tscn
 res://glb_inherited_scenes/cotu_anims_15.tscn

@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://ko2um8xuaqng"]
+
+[ext_resource type="Texture2D" uid="uid://bypk7lw3w751c" path="res://textures/RedBorderedRect.png" id="1_85wpw"]
+
+[resource]
+albedo_color = Color(0.333333, 0, 0, 1)
+albedo_texture = ExtResource("1_85wpw")
+metallic_specular = 0.0
+texture_filter = 2

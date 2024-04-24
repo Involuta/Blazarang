@@ -1,4 +1,6 @@
+VoxelGI
 LightmapGI
+DirectionalLight3D
 Node3D
 OmniLight3D
 CollisionShape3D
@@ -13,7 +15,6 @@ NavigationAgent3D
 CharacterBody3D
 SpotLight3D
 MultiMeshInstance3D
-DirectionalLight3D
 WorldEnvironment
 RayCast3D
 AnimationTree
