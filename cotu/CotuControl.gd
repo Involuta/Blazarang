@@ -142,7 +142,9 @@ func _physics_process(delta):
 	place_camera()
 	
 	# Animation tree parameters
-	anim_tree.set("parameters/StateMachine/RunBlendSpace/blend_position", velocity.length())
+	var vel2D := Vector2(velocity.x, velocity.z)
+	anim_tree.set("parameters/StateMachine/GroundBlendSpace/blend_position", vel2D.length())
+	anim_tree.set("parameters/StateMachine/AerialBlendSpace/blend_position", velocity.y)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not using_controller:

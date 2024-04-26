@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://dooiw2nsdckty" path="res://textures/small_solid_black.png" id="1_i4otc"]
 
 [resource]
-albedo_color = Color(0, 0, 0, 1)
 albedo_texture = ExtResource("1_i4otc")
 metallic_specular = 0.0
 texture_filter = 2

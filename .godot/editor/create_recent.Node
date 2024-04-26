@@ -1,6 +1,7 @@
+OmniLight3D
+SpotLight3D
 DirectionalLight3D
 LightmapGI
-OmniLight3D
 VoxelGI
 Node3D
 CollisionShape3D
@@ -13,7 +14,6 @@ Node
 RigidBody3D
 NavigationAgent3D
 CharacterBody3D
-SpotLight3D
 MultiMeshInstance3D
 WorldEnvironment
 RayCast3D

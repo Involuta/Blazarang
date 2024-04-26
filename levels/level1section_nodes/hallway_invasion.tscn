@@ -1384,8 +1384,7 @@ node_path_in_level = "FirstMaze"
 [node name="MainLights" type="Node3D" parent="."]
 
 [node name="MainLight1" type="OmniLight3D" parent="MainLights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 10, 2.08165e-12)
-light_color = Color(1, 0.862745, 0.862745, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.81, 10, 2.08165e-12)
 light_energy = 20.0
 light_bake_mode = 1
 omni_range = 50.0
@@ -1393,7 +1392,6 @@ omni_shadow_mode = 0
 
 [node name="MainLight5" type="OmniLight3D" parent="MainLights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.51042, 10, 2.08165e-12)
-light_color = Color(1, 0.862745, 0.862745, 1)
 light_energy = 20.0
 light_bake_mode = 1
 omni_range = 50.0
@@ -1410,7 +1408,7 @@ omni_shadow_mode = 0
 [node name="MainLight3" type="OmniLight3D" parent="MainLights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.8491, 9.87582, -60.1707)
 light_color = Color(1, 0.843137, 0.843137, 1)
-light_energy = 15.0
+light_energy = 12.0
 light_bake_mode = 1
 omni_range = 50.0
 omni_shadow_mode = 0
@@ -1418,15 +1416,15 @@ omni_shadow_mode = 0
 [node name="MainLight7" type="OmniLight3D" parent="MainLights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.8491, 9.87582, -92.6489)
 light_color = Color(1, 0.843137, 0.843137, 1)
-light_energy = 10.0
+light_energy = 9.0
 light_bake_mode = 1
 omni_range = 50.0
 omni_shadow_mode = 0
 
 [node name="MainLight4" type="OmniLight3D" parent="MainLights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.8491, 5.93867, -114.992)
-light_color = Color(1, 0.843137, 0.843137, 1)
-light_energy = 12.0
+light_color = Color(1, 0.823529, 0.823529, 1)
+light_energy = 6.0
 light_bake_mode = 1
 omni_range = 50.0
 omni_shadow_mode = 0

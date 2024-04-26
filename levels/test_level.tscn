@@ -2,13 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="1_4wpki"]
 [ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://target/target.tscn" id="2_6nbsg"]
-[ext_resource type="PackedScene" uid="uid://dpdul4hw6co6n" path="res://levels/level1section_nodes/hallway_invasion.tscn" id="3_mschw"]
+[ext_resource type="PackedScene" uid="uid://cb211d57a0el6" path="res://levels/level1section_nodes/top_gun_battlefield.tscn" id="3_17sik"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s5q5q"]
-sky_top_color = Color(0, 0.0156863, 0.109804, 1)
-sky_horizon_color = Color(0, 0, 0, 1)
-ground_bottom_color = Color(0.00392157, 0, 0.168627, 1)
-ground_horizon_color = Color(0, 0, 0, 1)
+sky_top_color = Color(0.0196078, 0, 0.172549, 1)
+sky_horizon_color = Color(0.00392157, 0, 0.0745098, 1)
+ground_bottom_color = Color(0.00392157, 0, 0.0666667, 1)
+ground_horizon_color = Color(0.00392157, 0, 0.0745098, 1)
 
 [sub_resource type="Sky" id="Sky_b1f78"]
 sky_material = SubResource("ProceduralSkyMaterial_s5q5q")
@@ -25,9 +25,9 @@ glow_enabled = true
 environment = SubResource("Environment_2chwq")
 
 [node name="cotuCB" parent="." instance=ExtResource("1_4wpki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.048, 13.9587, -0.108)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.6596, 11.3022, -21.6066)
 
 [node name="Target" parent="." instance=ExtResource("2_6nbsg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 14.0594, -0.057)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.7076, 11.4029, -21.5556)
 
-[node name="HallwayInvasion" parent="." instance=ExtResource("3_mschw")]
+[node name="TopGunBattlefield" parent="." instance=ExtResource("3_17sik")]

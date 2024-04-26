@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://kpk2r47ssxer"]
+
+[ext_resource type="Texture2D" uid="uid://cd2w44n4r7dtn" path="res://textures/small_vert_borders_grey.png" id="1_30yg5"]
+
+[resource]
+albedo_color = Color(0.27451, 0.27451, 0.27451, 1)
+albedo_texture = ExtResource("1_30yg5")
+metallic_specular = 0.0
+texture_filter = 2

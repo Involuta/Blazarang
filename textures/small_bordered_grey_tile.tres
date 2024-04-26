@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://w6pc3sy12tt6"]
+
+[ext_resource type="Texture2D" uid="uid://cg8kl1gytpunv" path="res://textures/small_bordered_grey_tile.png" id="1_08rn3"]
+
+[resource]
+albedo_color = Color(0.27451, 0.27451, 0.27451, 1)
+albedo_texture = ExtResource("1_08rn3")
+metallic_specular = 0.0
+texture_filter = 2
