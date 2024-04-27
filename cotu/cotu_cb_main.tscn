@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://icbfj05gq8vk"]
+[gd_scene load_steps=34 format=3 uid="uid://icbfj05gq8vk"]
 
 [ext_resource type="Script" path="res://cotu/CotuControl.gd" id="1_aleek"]
 [ext_resource type="Script" path="res://cotu/CotuHurtbox.gd" id="2_fvpfg"]
@@ -17,51 +17,18 @@ albedo_color = Color(0.52549, 0.00392157, 0.894118, 1)
 material = SubResource("StandardMaterial3D_d7hp7")
 size = Vector3(0.75, 0.75, 0.25)
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5n2fj"]
-animation = &"AscendPose"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i8vgo"]
-animation = &"DescendPose"
-
-[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_332ee"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_5n2fj")
-blend_point_0/pos = 0.0
-blend_point_1/node = SubResource("AnimationNodeAnimation_i8vgo")
-blend_point_1/pos = -12.0
-min_space = -12.0
-max_space = 5.0
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_agv1c"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sn2j3"]
 animation = &"AerialEvadeFast"
 play_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t00fa"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2xvry"]
 animation = &"FrontTwistFlipFast"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kvedh"]
-animation = &"Idle_pose"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j62tw"]
-animation = &"DodgeRun"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nl5hg"]
-animation = &"Run"
-
-[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_ivebn"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_kvedh")
-blend_point_0/pos = 0.0
-blend_point_1/node = SubResource("AnimationNodeAnimation_j62tw")
-blend_point_1/pos = 15.0
-blend_point_2/node = SubResource("AnimationNodeAnimation_nl5hg")
-blend_point_2/pos = 10.0
-min_space = 0.0
-max_space = 15.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u7ese"]
 animation = &"AscendPose"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_apkcv"]
-animation = &"DescendPose"
+animation = &"Idle_pose"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g1blj"]
 animation = &"Run"
@@ -69,146 +36,113 @@ animation = &"Run"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pieoh"]
 animation = &"DodgeRun"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f6p3t"]
+animation = &"DescendPose"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pmyfb"]
+animation = &"AscendPose"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_stjvg"]
+animation = &"DescendPose"
+
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_44u3n"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_u7ese")
-blend_point_0/pos = Vector2(0, 0.1)
+blend_point_0/pos = Vector2(0, 1)
 blend_point_1/node = SubResource("AnimationNodeAnimation_apkcv")
 blend_point_1/pos = Vector2(0, 0)
 blend_point_2/node = SubResource("AnimationNodeAnimation_g1blj")
-blend_point_2/pos = Vector2(10, 2.08167e-14)
+blend_point_2/pos = Vector2(10, 0)
 blend_point_3/node = SubResource("AnimationNodeAnimation_pieoh")
 blend_point_3/pos = Vector2(15, 0)
+blend_point_4/node = SubResource("AnimationNodeAnimation_f6p3t")
+blend_point_4/pos = Vector2(0, -1)
+blend_point_5/node = SubResource("AnimationNodeAnimation_pmyfb")
+blend_point_5/pos = Vector2(15, 1)
+blend_point_6/node = SubResource("AnimationNodeAnimation_stjvg")
+blend_point_6/pos = Vector2(15, -1)
 max_space = Vector2(15, 1)
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yiyf2"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y5nju"]
 animation = &"QuickSpinCCWBackwards"
 play_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tqigm"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8vgq7"]
 animation = &"QuickSpinCW"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e8r0g"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sxmkw"]
 xfade_time = 0.15
 advance_mode = 2
 advance_condition = &"just_dodged"
 advance_expression = "abs(walk_input.y) == 0"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0y1n2"]
-xfade_time = 0.15
-advance_mode = 2
-advance_condition = &"just_dodged"
-advance_expression = "abs(walk_input.y) > 0"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ieh2i"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nolyx"]
 xfade_time = 0.2
 priority = 2
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pc5go"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nele4"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"just_dodged"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ahun8"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"just_dodged"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4n1fb"]
+xfade_time = 0.15
+advance_mode = 2
+advance_condition = &"just_dodged"
+advance_expression = "abs(walk_input.y) > 0"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w13l8"]
 xfade_time = 0.15
 priority = 2
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rdo08"]
-xfade_time = 0.1
-advance_mode = 2
-advance_condition = &"just_dodged"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ggvq7"]
-xfade_time = 0.1
-advance_mode = 2
-advance_condition = &"just_dodged"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fd6fk"]
-xfade_time = 0.05
-advance_mode = 2
-advance_condition = &"just_instant_rethrew"
-advance_expression = "moving_right"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kef68"]
-xfade_time = 0.15
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_orq00"]
-xfade_time = 0.15
-priority = 2
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jsmfa"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3sep5"]
 xfade_time = 0.05
 advance_mode = 2
 advance_condition = &"just_instant_rethrew"
 advance_expression = "!moving_right"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8en1o"]
-xfade_time = 0.1
-advance_mode = 2
-advance_expression = "not is_on_floor()"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xc5kl"]
-advance_mode = 2
-advance_expression = "is_on_floor()"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ffss6"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hkx1h"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6pr6l"]
 xfade_time = 0.15
-advance_mode = 2
-advance_condition = &"just_dodged"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vjabe"]
-xfade_time = 0.15
-priority = 2
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ihiup"]
-xfade_time = 0.05
-advance_mode = 2
-advance_condition = &"just_instant_rethrew"
-advance_expression = "!moving_right"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jufja"]
-xfade_time = 0.15
-priority = 2
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yh5p6"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wuyjb"]
 xfade_time = 0.05
 advance_mode = 2
 advance_condition = &"just_instant_rethrew"
 advance_expression = "moving_right"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5f14m"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_af52k"]
 xfade_time = 0.15
 switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vq4bk"]
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_auidk"]
-states/AerialBlendSpace/node = SubResource("AnimationNodeBlendSpace1D_332ee")
-states/AerialBlendSpace/position = Vector2(80.4943, 145.384)
-states/AerialEvadeFast/node = SubResource("AnimationNodeAnimation_agv1c")
-states/AerialEvadeFast/position = Vector2(581.286, -98.2627)
+states/AerialEvadeFast/node = SubResource("AnimationNodeAnimation_sn2j3")
+states/AerialEvadeFast/position = Vector2(412.453, -60.9085)
 states/End/position = Vector2(900, 103.062)
-states/FrontTwistFlipFast/node = SubResource("AnimationNodeAnimation_t00fa")
-states/FrontTwistFlipFast/position = Vector2(580.854, 8.61619)
-states/GroundBlendSpace/node = SubResource("AnimationNodeBlendSpace1D_ivebn")
-states/GroundBlendSpace/position = Vector2(80.0341, 9.11839)
+states/FrontTwistFlipFast/node = SubResource("AnimationNodeAnimation_2xvry")
+states/FrontTwistFlipFast/position = Vector2(412.456, 50.9432)
 states/MoveBlendSpace/node = SubResource("AnimationNodeBlendSpace2D_44u3n")
-states/MoveBlendSpace/position = Vector2(80.2642, 228.635)
-states/QuickSpinCCW/node = SubResource("AnimationNodeAnimation_yiyf2")
-states/QuickSpinCCW/position = Vector2(581.65, 211.858)
-states/QuickSpinCW/node = SubResource("AnimationNodeAnimation_tqigm")
-states/QuickSpinCW/position = Vector2(581.468, 104.391)
-states/Start/position = Vector2(-96.5, 102.156)
-transitions = ["GroundBlendSpace", "AerialEvadeFast", SubResource("AnimationNodeStateMachineTransition_e8r0g"), "GroundBlendSpace", "FrontTwistFlipFast", SubResource("AnimationNodeStateMachineTransition_0y1n2"), "AerialEvadeFast", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_ieh2i"), "FrontTwistFlipFast", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_pc5go"), "AerialEvadeFast", "FrontTwistFlipFast", SubResource("AnimationNodeStateMachineTransition_rdo08"), "FrontTwistFlipFast", "AerialEvadeFast", SubResource("AnimationNodeStateMachineTransition_ggvq7"), "GroundBlendSpace", "QuickSpinCCW", SubResource("AnimationNodeStateMachineTransition_fd6fk"), "QuickSpinCCW", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_kef68"), "QuickSpinCW", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_orq00"), "GroundBlendSpace", "QuickSpinCW", SubResource("AnimationNodeStateMachineTransition_jsmfa"), "GroundBlendSpace", "AerialBlendSpace", SubResource("AnimationNodeStateMachineTransition_8en1o"), "AerialBlendSpace", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_xc5kl"), "Start", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_ffss6"), "AerialBlendSpace", "FrontTwistFlipFast", SubResource("AnimationNodeStateMachineTransition_hkx1h"), "FrontTwistFlipFast", "AerialBlendSpace", SubResource("AnimationNodeStateMachineTransition_vjabe"), "AerialBlendSpace", "QuickSpinCW", SubResource("AnimationNodeStateMachineTransition_ihiup"), "QuickSpinCW", "AerialBlendSpace", SubResource("AnimationNodeStateMachineTransition_jufja"), "AerialBlendSpace", "QuickSpinCCW", SubResource("AnimationNodeStateMachineTransition_yh5p6"), "QuickSpinCCW", "AerialBlendSpace", SubResource("AnimationNodeStateMachineTransition_5f14m")]
-graph_offset = Vector2(-76.9647, -4.8548)
+states/MoveBlendSpace/position = Vector2(85.4368, 102.609)
+states/QuickSpinCCW/node = SubResource("AnimationNodeAnimation_y5nju")
+states/QuickSpinCCW/position = Vector2(412.454, 241.971)
+states/QuickSpinCW/node = SubResource("AnimationNodeAnimation_8vgq7")
+states/QuickSpinCW/position = Vector2(412.451, 140.017)
+states/Start/position = Vector2(-96.5, 102.836)
+transitions = ["MoveBlendSpace", "AerialEvadeFast", SubResource("AnimationNodeStateMachineTransition_sxmkw"), "AerialEvadeFast", "MoveBlendSpace", SubResource("AnimationNodeStateMachineTransition_nolyx"), "AerialEvadeFast", "FrontTwistFlipFast", SubResource("AnimationNodeStateMachineTransition_nele4"), "FrontTwistFlipFast", "AerialEvadeFast", SubResource("AnimationNodeStateMachineTransition_ahun8"), "MoveBlendSpace", "FrontTwistFlipFast", SubResource("AnimationNodeStateMachineTransition_4n1fb"), "FrontTwistFlipFast", "MoveBlendSpace", SubResource("AnimationNodeStateMachineTransition_w13l8"), "MoveBlendSpace", "QuickSpinCW", SubResource("AnimationNodeStateMachineTransition_3sep5"), "QuickSpinCW", "MoveBlendSpace", SubResource("AnimationNodeStateMachineTransition_6pr6l"), "MoveBlendSpace", "QuickSpinCCW", SubResource("AnimationNodeStateMachineTransition_wuyjb"), "QuickSpinCCW", "MoveBlendSpace", SubResource("AnimationNodeStateMachineTransition_af52k"), "Start", "MoveBlendSpace", SubResource("AnimationNodeStateMachineTransition_vq4bk")]
+graph_offset = Vector2(-19.4775, -94.3834)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wg7n8"]
 graph_offset = Vector2(-41.28, 98.88)
@@ -265,39 +199,31 @@ advance_expression_base_node = NodePath("..")
 active = true
 parameters/StateMachine/conditions/just_dodged = false
 parameters/StateMachine/conditions/just_instant_rethrew = false
-parameters/StateMachine/AerialBlendSpace/blend_position = 0
-parameters/StateMachine/GroundBlendSpace/blend_position = 0.000634115
 parameters/StateMachine/MoveBlendSpace/blend_position = Vector2(0, 0)
 
 [node name="CotuAnims" parent="." instance=ExtResource("3_qnno8")]
 
 [node name="Skeleton3D" parent="CotuAnims/Armature" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.988, 2.08165e-12)
-bones/0/position = Vector3(6.74725e-05, 1.12345, -0.0689604)
-bones/0/rotation = Quaternion(0.0818988, 0.00301705, 0.00455092, 0.996626)
-bones/1/rotation = Quaternion(-0.059545, 0.0106978, -0.00716244, 0.998143)
-bones/2/rotation = Quaternion(-0.0161168, -0.0157259, -0.000583578, 0.999746)
-bones/3/rotation = Quaternion(-0.0574535, 0.00119413, 0.00515467, 0.998334)
-bones/4/rotation = Quaternion(0.156032, -0.000323781, 0.000801527, 0.987752)
-bones/7/position = Vector3(0.0663166, 0.115124, 0.0320528)
-bones/7/rotation = Quaternion(-0.589018, -0.462308, 0.537802, -0.387424)
-bones/8/rotation = Quaternion(0.425533, 0.00238703, -0.188114, 0.885172)
-bones/9/rotation = Quaternion(1.48578e-08, -5.68153e-07, 0.341855, 0.939753)
-bones/10/rotation = Quaternion(-0.0199109, 0.0136772, -0.021446, 0.999478)
-bones/31/position = Vector3(-0.0617995, 0.116818, 0.0315783)
-bones/31/rotation = Quaternion(0.56203, -0.490113, 0.534719, 0.397475)
-bones/32/rotation = Quaternion(0.448079, -0.0179381, 0.159977, 0.879381)
-bones/33/rotation = Quaternion(-2.12347e-07, -1.40138e-08, -0.318874, 0.947797)
-bones/34/rotation = Quaternion(-0.0218015, -0.114885, -0.0405682, 0.992311)
-bones/55/rotation = Quaternion(0.0219354, 0.055622, 0.99747, -0.0384615)
-bones/55/scale = Vector3(1, 0.999998, 0.999999)
-bones/56/rotation = Quaternion(-0.112225, 3.4536e-07, -1.42366e-07, 0.993683)
-bones/57/rotation = Quaternion(0.243753, 0.0625212, -0.0375589, 0.967091)
-bones/58/rotation = Quaternion(0.291375, -0.0948206, 0.0257292, 0.95155)
-bones/60/rotation = Quaternion(-0.0234313, 0.309544, 0.949503, 0.0455927)
-bones/60/scale = Vector3(1, 0.999995, 1)
-bones/61/rotation = Quaternion(-0.54087, -2.30159e-06, -1.46423e-06, 0.841106)
-bones/62/rotation = Quaternion(0.502665, -0.0675759, 0.0113449, 0.861761)
-bones/63/rotation = Quaternion(0.28446, 0.0939778, -0.0275099, 0.953674)
+bones/1/rotation = Quaternion(-0.0575528, 0, 0, 0.998342)
+bones/4/rotation = Quaternion(0.0575527, -5.38994e-13, 2.6138e-11, 0.998342)
+bones/7/rotation = Quaternion(-0.549038, -0.441331, 0.565987, -0.428302)
+bones/8/rotation = Quaternion(-0.0915406, 0.00171005, -0.0186011, 0.995626)
+bones/9/rotation = Quaternion(-0.0468408, -0.00281745, 0.0599725, 0.997096)
+bones/10/rotation = Quaternion(0.0535228, 0.109109, 0.0148282, 0.992477)
+bones/31/rotation = Quaternion(0.549725, -0.440786, 0.56543, 0.428718)
+bones/32/rotation = Quaternion(-0.0916217, -0.00178568, 0.0194077, 0.995603)
+bones/33/rotation = Quaternion(-0.0470464, 0.00275632, -0.0584284, 0.997179)
+bones/34/rotation = Quaternion(0.0529586, -0.106524, -0.0196144, 0.992705)
+bones/55/rotation = Quaternion(-0.00119041, -0.0293431, 0.998752, -0.0403995)
+bones/55/scale = Vector3(1.00002, 1, 1.00001)
+bones/56/rotation = Quaternion(-0.00708003, -1.42536e-05, 0.000276752, 0.999975)
+bones/57/rotation = Quaternion(0.503606, -0.00458463, 0.0026691, 0.863917)
+bones/58/rotation = Quaternion(0.276034, -0.0943951, 0.0272482, 0.956113)
+bones/60/rotation = Quaternion(0.00125708, -0.0304303, 0.99872, 0.0403907)
+bones/60/scale = Vector3(1.00002, 1, 1.00001)
+bones/61/rotation = Quaternion(-0.00083746, 8.29215e-06, -0.000309023, 1)
+bones/62/rotation = Quaternion(0.493462, 0.00480413, -0.00271807, 0.86975)
+bones/63/rotation = Quaternion(0.282048, 0.0939061, -0.0277473, 0.95439)
 
 [editable path="CotuAnims"]

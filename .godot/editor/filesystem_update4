@@ -10,3 +10,4 @@ res://rang/roserang.tscn
 res://target/target.tscn
 res://enemies/enemy_mega_gun.tscn
 res://glb_inherited_scenes/cotu_anims_17.tscn
+res://cotu/CotuControl.gd
