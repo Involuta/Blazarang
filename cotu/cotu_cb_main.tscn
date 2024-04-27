@@ -145,9 +145,9 @@ transitions = ["MoveBlendSpace", "AerialEvadeFast", SubResource("AnimationNodeSt
 graph_offset = Vector2(-19.4775, -94.3834)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wg7n8"]
-graph_offset = Vector2(-41.28, 98.88)
+graph_offset = Vector2(-213.12, 102.72)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_auidk")
-nodes/StateMachine/position = Vector2(80, 150)
+nodes/StateMachine/position = Vector2(70, 150)
 node_connections = [&"output", 0, &"StateMachine"]
 
 [node name="cotuCB" type="CharacterBody3D"]

@@ -11,3 +11,5 @@ res://target/target.tscn
 res://enemies/enemy_mega_gun.tscn
 res://glb_inherited_scenes/cotu_anims_17.tscn
 res://cotu/CotuControl.gd
+res://textures/solid_dark_gray_tile.tres
+res://textures/solid_light_gray_tile.tres
