@@ -1,7 +1,7 @@
+DirectionalLight3D
 MeshInstance3D
 OmniLight3D
 SpotLight3D
-DirectionalLight3D
 LightmapGI
 VoxelGI
 Node3D

@@ -47,7 +47,6 @@ damage = 10
 shape = SubResource("CylinderShape3D_vx8km")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-visible = false
 light_energy = 5.0
 light_bake_mode = 0
 omni_range = 10.0

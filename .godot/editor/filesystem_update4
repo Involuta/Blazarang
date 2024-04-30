@@ -26,3 +26,6 @@ res://cotu/cotu_outline.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
 res://cotu/cotu_anims_base_material.tres
 res://cotu/cotu_anims_outline.tres
+res://levels/level1section_nodes/first_maze.tscn
+res://icon/icon.tscn
+res://glb_inherited_scenes/cotu_anims_18.tscn

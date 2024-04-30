@@ -146,8 +146,9 @@ func _physics_process(delta):
 	
 	# Animation tree parameters
 	var vel2D = Vector2(velocity.x, velocity.z)
-	var move_blend_space := Vector2(vel2D.length(), velocity.y)
-	anim_tree.set("parameters/StateMachine/MoveBlendSpace/blend_position", move_blend_space)
+	var move_blend_space := Vector2(vel2D.length(), 0)
+	anim_tree.set("parameters/StateMachine/GroundBlendSpace/blend_position", move_blend_space)
+	anim_tree.set("parameters/StateMachine/AerialBlendSpace/blend_position", Vector3.UP*velocity.y)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not using_controller:

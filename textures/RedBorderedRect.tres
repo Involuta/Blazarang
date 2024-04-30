@@ -8,4 +8,3 @@ specular_mode = 2
 albedo_color = Color(0.254902, 0.254902, 0.254902, 1)
 albedo_texture = ExtResource("1_85wpw")
 roughness = 0.0
-texture_filter = 2
