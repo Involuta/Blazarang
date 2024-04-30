@@ -1,8 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://g4kirqxgep2"]
+[gd_scene load_steps=3 format=3 uid="uid://g4kirqxgep2"]
 
 [ext_resource type="PackedScene" uid="uid://wulbclfwsd6h" path="res://glb_imports/BigMeleeT1.glb" id="1_sql01"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xtwa6"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.917647, 0.886275, 0, 1)
+roughness = 0.0
 
 [node name="BigMeleeT1" instance=ExtResource("1_sql01")]
 
 [node name="BigMeleeT12" parent="." index="0"]
 transform = Transform3D(-0.5, 1.74393e-16, 4.37114e-08, 1.74393e-16, 0.5, -1.74393e-16, -4.37114e-08, -1.74393e-16, -0.5, 0, 0, 0)
+surface_material_override/3 = SubResource("StandardMaterial3D_xtwa6")

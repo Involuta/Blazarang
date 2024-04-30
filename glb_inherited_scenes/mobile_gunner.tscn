@@ -1,8 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwtsdf6c24323"]
+[gd_scene load_steps=3 format=3 uid="uid://bwtsdf6c24323"]
 
 [ext_resource type="PackedScene" uid="uid://dgc30jmr6pvvt" path="res://glb_imports/GunnerT1.glb" id="1_00lq7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6aobd"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.0823529, 0.243137, 1, 1)
+roughness = 0.0
 
 [node name="GunnerT1" instance=ExtResource("1_00lq7")]
 
 [node name="GunnerT12" parent="." index="0"]
 transform = Transform3D(-0.5, 1.74393e-16, 4.37114e-08, 1.74393e-16, 0.5, -1.74393e-16, -4.37114e-08, -1.74393e-16, -0.5, 0, 0, 0)
+surface_material_override/2 = SubResource("StandardMaterial3D_6aobd")

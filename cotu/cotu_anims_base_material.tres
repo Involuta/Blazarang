@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://yct3jaquatmq"]
+
+[ext_resource type="Material" uid="uid://dehydc3sj0s0t" path="res://cotu/cotu_anims_outline.tres" id="1_dslx2"]
+
+[resource]
+next_pass = ExtResource("1_dslx2")
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+roughness = 0.0

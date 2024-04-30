@@ -3,7 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://bapaks7bu7kxb" path="res://textures/SimpleRedLines.png" id="1_720yw"]
 
 [resource]
+diffuse_mode = 3
+specular_mode = 2
 albedo_color = Color(0.352941, 0, 0, 1)
 albedo_texture = ExtResource("1_720yw")
-metallic_specular = 0.0
+roughness = 0.0
 texture_filter = 2

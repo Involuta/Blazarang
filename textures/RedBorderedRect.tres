@@ -3,7 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://bypk7lw3w751c" path="res://textures/RedBorderedRect.png" id="1_85wpw"]
 
 [resource]
+diffuse_mode = 3
+specular_mode = 2
 albedo_color = Color(0.254902, 0.254902, 0.254902, 1)
 albedo_texture = ExtResource("1_85wpw")
-metallic_specular = 0.0
+roughness = 0.0
 texture_filter = 2

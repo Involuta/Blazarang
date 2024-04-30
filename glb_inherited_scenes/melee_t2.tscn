@@ -1,8 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsrvb25fuh6xo"]
+[gd_scene load_steps=3 format=3 uid="uid://bsrvb25fuh6xo"]
 
 [ext_resource type="PackedScene" uid="uid://yh7p6sjogusj" path="res://glb_imports/MeleeT2.glb" id="1_ma3ik"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5v0xg"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.87451, 0, 0.698039, 1)
+roughness = 0.0
 
 [node name="MeleeT2" instance=ExtResource("1_ma3ik")]
 
 [node name="Body" parent="." index="0"]
 transform = Transform3D(-0.5, 1.74393e-16, -4.37114e-08, 1.74393e-16, 0.5, -1.74393e-16, 4.37114e-08, -1.74393e-16, -0.5, 0, 0, 0)
+surface_material_override/2 = SubResource("StandardMaterial3D_5v0xg")

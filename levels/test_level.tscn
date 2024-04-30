@@ -25,9 +25,9 @@ glow_enabled = true
 environment = SubResource("Environment_2chwq")
 
 [node name="cotuCB" parent="." instance=ExtResource("1_4wpki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.6596, 11.3022, -21.6066)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.0398, 12.1121, -21.6066)
 
 [node name="Target" parent="." instance=ExtResource("2_6nbsg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.7076, 11.4029, -21.5556)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.0174, 12.1305, -21.5556)
 
 [node name="TopGunBattlefield" parent="." instance=ExtResource("3_17sik")]

@@ -1,14 +1,28 @@
-[gd_scene load_steps=34 format=3 uid="uid://icbfj05gq8vk"]
+[gd_scene load_steps=38 format=3 uid="uid://icbfj05gq8vk"]
 
 [ext_resource type="Script" path="res://cotu/CotuControl.gd" id="1_aleek"]
 [ext_resource type="Script" path="res://cotu/CotuHurtbox.gd" id="2_fvpfg"]
+[ext_resource type="Shader" path="res://cotu/cotu_outline.gdshader" id="2_hcsj1"]
 [ext_resource type="PackedScene" uid="uid://jmlvld0xwhcx" path="res://glb_inherited_scenes/cotu_anims_17.tscn" id="3_qnno8"]
+[ext_resource type="Material" uid="uid://yct3jaquatmq" path="res://cotu/cotu_anims_base_material.tres" id="5_iq74e"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_80wmm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kxw61"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_dx5gt"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_blnfp"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ibg07"]
+render_priority = 0
+shader = ExtResource("2_hcsj1")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/distance_falloff = 0.5
+shader_parameter/smoothing_cutoff = 0.1
+shader_parameter/smoothing_max = 0.1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d7hp7"]
 albedo_color = Color(0.52549, 0.00392157, 0.894118, 1)
@@ -175,6 +189,12 @@ skeleton = NodePath("")
 [node name="Camera3D" type="Camera3D" parent="CameraTwistPivot/CameraPitchPivot/CameraVisualObject"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 
+[node name="BlackOutlines" type="MeshInstance3D" parent="CameraTwistPivot/CameraPitchPivot/CameraVisualObject"]
+transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -0.1)
+extra_cull_margin = 100.0
+mesh = SubResource("QuadMesh_blnfp")
+surface_material_override/0 = SubResource("ShaderMaterial_ibg07")
+
 [node name="RangPointerPivot" type="Node3D" parent="."]
 
 [node name="RangPointer" type="MeshInstance3D" parent="RangPointerPivot"]
@@ -205,25 +225,34 @@ parameters/StateMachine/MoveBlendSpace/blend_position = Vector2(0, 0)
 
 [node name="Skeleton3D" parent="CotuAnims/Armature" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.988, 2.08165e-12)
-bones/1/rotation = Quaternion(-0.0575528, 0, 0, 0.998342)
-bones/4/rotation = Quaternion(0.0575527, -5.38994e-13, 2.6138e-11, 0.998342)
-bones/7/rotation = Quaternion(-0.549038, -0.441331, 0.565987, -0.428302)
-bones/8/rotation = Quaternion(-0.0915406, 0.00171005, -0.0186011, 0.995626)
-bones/9/rotation = Quaternion(-0.0468408, -0.00281745, 0.0599725, 0.997096)
-bones/10/rotation = Quaternion(0.0535228, 0.109109, 0.0148282, 0.992477)
-bones/31/rotation = Quaternion(0.549725, -0.440786, 0.56543, 0.428718)
-bones/32/rotation = Quaternion(-0.0916217, -0.00178568, 0.0194077, 0.995603)
-bones/33/rotation = Quaternion(-0.0470464, 0.00275632, -0.0584284, 0.997179)
-bones/34/rotation = Quaternion(0.0529586, -0.106524, -0.0196144, 0.992705)
-bones/55/rotation = Quaternion(-0.00119041, -0.0293431, 0.998752, -0.0403995)
-bones/55/scale = Vector3(1.00002, 1, 1.00001)
-bones/56/rotation = Quaternion(-0.00708003, -1.42536e-05, 0.000276752, 0.999975)
-bones/57/rotation = Quaternion(0.503606, -0.00458463, 0.0026691, 0.863917)
-bones/58/rotation = Quaternion(0.276034, -0.0943951, 0.0272482, 0.956113)
-bones/60/rotation = Quaternion(0.00125708, -0.0304303, 0.99872, 0.0403907)
-bones/60/scale = Vector3(1.00002, 1, 1.00001)
-bones/61/rotation = Quaternion(-0.00083746, 8.29215e-06, -0.000309023, 1)
-bones/62/rotation = Quaternion(0.493462, 0.00480413, -0.00271807, 0.86975)
-bones/63/rotation = Quaternion(0.282048, 0.0939061, -0.0277473, 0.95439)
+bones/0/position = Vector3(6.74725e-05, 0.996229, -0.0689604)
+bones/0/rotation = Quaternion(0.00357044, 0.0033643, 0.00430058, 0.999979)
+bones/1/rotation = Quaternion(0.00139416, 0.0105681, -0.00611713, 0.999924)
+bones/2/rotation = Quaternion(-0.0161168, -0.0157259, -0.000583579, 0.999746)
+bones/3/rotation = Quaternion(-0.00199327, 0.00116517, 0.00503772, 0.999985)
+bones/4/rotation = Quaternion(0.0697322, 0.000240947, 0.000844718, 0.997565)
+bones/7/position = Vector3(0.0663166, 0.115124, 0.0320527)
+bones/7/rotation = Quaternion(-0.589018, -0.462308, 0.537802, -0.387424)
+bones/8/rotation = Quaternion(0.559896, 0.067851, -0.052622, 0.824102)
+bones/9/rotation = Quaternion(5.86524e-08, -5.60568e-07, 0.270194, 0.962806)
+bones/10/rotation = Quaternion(0.0233955, -0.11194, -0.0135629, 0.993347)
+bones/31/position = Vector3(-0.0617995, 0.116818, 0.0315781)
+bones/31/rotation = Quaternion(0.56203, -0.490113, 0.534719, 0.397475)
+bones/32/rotation = Quaternion(0.579094, -0.0832928, 0.019492, 0.810761)
+bones/33/rotation = Quaternion(-2.04172e-07, 5.24444e-09, -0.236782, 0.971563)
+bones/34/rotation = Quaternion(0.0409756, 0.0222786, -0.0695037, 0.996491)
+bones/55/rotation = Quaternion(0.0504442, 0.140455, 0.987544, -0.0498507)
+bones/55/scale = Vector3(1, 0.999997, 0.999999)
+bones/56/rotation = Quaternion(-0.1456, 3.54599e-07, -1.34468e-07, 0.989344)
+bones/57/rotation = Quaternion(0.47363, 0.0695586, -0.0523114, 0.876413)
+bones/58/rotation = Quaternion(0.291365, -0.0948206, 0.0257287, 0.951553)
+bones/60/rotation = Quaternion(-0.0570368, 0.0489228, 0.996276, 0.0422715)
+bones/60/scale = Vector3(1, 1, 0.999997)
+bones/61/rotation = Quaternion(-0.202619, -2.67046e-06, -5.37794e-07, 0.979258)
+bones/62/rotation = Quaternion(0.591778, -0.0741573, 0.0264926, 0.802246)
+bones/63/rotation = Quaternion(0.284437, 0.0939771, -0.0275118, 0.953681)
+
+[node name="Ch36_001" parent="CotuAnims/Armature/Skeleton3D" index="0"]
+surface_material_override/0 = ExtResource("5_iq74e")
 
 [editable path="CotuAnims"]

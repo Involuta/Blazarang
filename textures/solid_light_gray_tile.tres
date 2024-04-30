@@ -3,7 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://cibnqd464bfed" path="res://textures/solid_light_gray_tile.png" id="1_0urp1"]
 
 [resource]
+diffuse_mode = 3
+specular_mode = 2
 albedo_color = Color(0.396078, 0.396078, 0.396078, 1)
 albedo_texture = ExtResource("1_0urp1")
 metallic_specular = 0.0
+roughness = 0.0
 texture_filter = 2

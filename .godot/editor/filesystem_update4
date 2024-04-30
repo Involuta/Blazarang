@@ -13,3 +13,16 @@ res://glb_inherited_scenes/cotu_anims_17.tscn
 res://cotu/CotuControl.gd
 res://textures/solid_dark_gray_tile.tres
 res://textures/solid_light_gray_tile.tres
+res://glb_inherited_scenes/mobile_gunner.tscn
+res://glb_inherited_scenes/stationary_gunner.tscn
+res://glb_inherited_scenes/melee_t1.tscn
+res://glb_inherited_scenes/melee_t2.tscn
+res://glb_inherited_scenes/big_melee_t1.tscn
+res://glb_inherited_scenes/melee_t3.tscn
+res://glb_inherited_scenes/simple_rig.tscn
+res://levels/level1section_nodes/hallway_invasion.tscn
+res://textures/small_solid_driedblood.tres
+res://cotu/cotu_outline.gdshader
+res://glb_inherited_scenes/cotu_outline.gdshader
+res://cotu/cotu_anims_base_material.tres
+res://cotu/cotu_anims_outline.tres
