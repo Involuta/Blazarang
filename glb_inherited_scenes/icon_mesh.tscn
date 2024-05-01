@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5fggubx1ibk6"]
+
+[ext_resource type="PackedScene" uid="uid://c4psn33f6gvm2" path="res://glb_imports/CotuIcon.glb" id="1_duvmp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fx58e"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+
+[node name="IconMesh" instance=ExtResource("1_duvmp")]
+
+[node name="Icon" parent="." index="0"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 2.08165e-12, 0.339954, 2.08165e-12)
+surface_material_override/0 = SubResource("StandardMaterial3D_fx58e")

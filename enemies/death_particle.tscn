@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://enemies/Disappear.gd" id="1_h3m83"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1wsws"]
+shading_mode = 0
 albedo_color = Color(0.878431, 0, 0.109804, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_pbxte"]

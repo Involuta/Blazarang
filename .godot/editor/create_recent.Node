@@ -1,3 +1,5 @@
+AnimationTree
+AnimationPlayer
 DirectionalLight3D
 MeshInstance3D
 OmniLight3D
@@ -17,5 +19,3 @@ CharacterBody3D
 MultiMeshInstance3D
 WorldEnvironment
 RayCast3D
-AnimationTree
-AnimationPlayer

@@ -25,11 +25,13 @@ shader_parameter/smoothing_cutoff = 0.1
 shader_parameter/smoothing_max = 0.1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d7hp7"]
-albedo_color = Color(0.52549, 0.00392157, 0.894118, 1)
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
 
 [sub_resource type="PrismMesh" id="PrismMesh_jrkru"]
 material = SubResource("StandardMaterial3D_d7hp7")
-size = Vector3(0.75, 0.75, 0.25)
+size = Vector3(0.75, 0.75, 0.1)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uk17i"]
 animation = &"AscendPose"
@@ -192,7 +194,7 @@ states/QuickSpinCW/node = SubResource("AnimationNodeAnimation_8vgq7")
 states/QuickSpinCW/position = Vector2(412.451, 140.017)
 states/Start/position = Vector2(-96.5, 102.836)
 transitions = ["GroundBlendSpace", "AerialEvadeFast", SubResource("AnimationNodeStateMachineTransition_sxmkw"), "AerialEvadeFast", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_nolyx"), "AerialEvadeFast", "FrontTwistFlipFast", SubResource("AnimationNodeStateMachineTransition_nele4"), "FrontTwistFlipFast", "AerialEvadeFast", SubResource("AnimationNodeStateMachineTransition_ahun8"), "GroundBlendSpace", "FrontTwistFlipFast", SubResource("AnimationNodeStateMachineTransition_4n1fb"), "FrontTwistFlipFast", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_w13l8"), "GroundBlendSpace", "QuickSpinCW", SubResource("AnimationNodeStateMachineTransition_3sep5"), "QuickSpinCW", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_6pr6l"), "GroundBlendSpace", "QuickSpinCCW", SubResource("AnimationNodeStateMachineTransition_wuyjb"), "QuickSpinCCW", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_af52k"), "Start", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_vq4bk"), "GroundBlendSpace", "AerialBlendSpace", SubResource("AnimationNodeStateMachineTransition_b57p5"), "AerialBlendSpace", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_pffs7"), "AerialBlendSpace", "AirDodge", SubResource("AnimationNodeStateMachineTransition_c3ntk"), "AirDodge", "AerialBlendSpace", SubResource("AnimationNodeStateMachineTransition_ixnca")]
-graph_offset = Vector2(-128.813, 290.974)
+graph_offset = Vector2(-370.163, 119.704)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wg7n8"]
 graph_offset = Vector2(-213.12, 102.72)
