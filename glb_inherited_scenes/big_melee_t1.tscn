@@ -1,6 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://g4kirqxgep2"]
+[gd_scene load_steps=4 format=3 uid="uid://g4kirqxgep2"]
 
 [ext_resource type="PackedScene" uid="uid://wulbclfwsd6h" path="res://glb_imports/BigMeleeT1.glb" id="1_sql01"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ms2te"]
+shading_mode = 0
+albedo_color = Color(0.686275, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xtwa6"]
 diffuse_mode = 3
@@ -12,4 +16,5 @@ roughness = 0.0
 
 [node name="BigMeleeT12" parent="." index="0"]
 transform = Transform3D(-0.5, 1.74393e-16, 4.37114e-08, 1.74393e-16, 0.5, -1.74393e-16, -4.37114e-08, -1.74393e-16, -0.5, 0, 0, 0)
+surface_material_override/2 = SubResource("StandardMaterial3D_ms2te")
 surface_material_override/3 = SubResource("StandardMaterial3D_xtwa6")

@@ -1,6 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwdcuwgfmnx6s"]
+[gd_scene load_steps=4 format=3 uid="uid://bwdcuwgfmnx6s"]
 
 [ext_resource type="PackedScene" uid="uid://bltt1jd5t1s13" path="res://glb_imports/MeleeT3.glb" id="1_77g41"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_akoyu"]
+shading_mode = 0
+albedo_color = Color(0.686275, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bsdjw"]
 diffuse_mode = 3
@@ -12,4 +16,5 @@ roughness = 0.0
 
 [node name="Body" parent="." index="0"]
 transform = Transform3D(-0.5, 1.74393e-16, -4.37114e-08, 1.74393e-16, 0.5, -1.74393e-16, 4.37114e-08, -1.74393e-16, -0.5, 0, 0, 0)
+surface_material_override/1 = SubResource("StandardMaterial3D_akoyu")
 surface_material_override/2 = SubResource("StandardMaterial3D_bsdjw")
