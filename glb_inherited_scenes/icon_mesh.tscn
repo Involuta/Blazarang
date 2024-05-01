@@ -1,8 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5fggubx1ibk6"]
+[gd_scene load_steps=5 format=3 uid="uid://b5fggubx1ibk6"]
 
 [ext_resource type="PackedScene" uid="uid://c4psn33f6gvm2" path="res://glb_imports/CotuIcon.glb" id="1_duvmp"]
+[ext_resource type="Shader" path="res://glb_inherited_scenes/cotu_outline.gdshader" id="2_aspuu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fn3m7"]
+render_priority = 1
+shader = ExtResource("2_aspuu")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fx58e"]
+next_pass = SubResource("ShaderMaterial_fn3m7")
 shading_mode = 0
 diffuse_mode = 3
 specular_mode = 2

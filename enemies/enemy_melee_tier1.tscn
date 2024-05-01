@@ -12,4 +12,4 @@ visible = false
 [node name="MeleeHitboxPivot" parent="." index="5"]
 transform = Transform3D(-0.500004, -0.866023, -1.26261e-21, -3.13499e-06, 1.81001e-06, 1, -0.866023, 0.500004, -3.61999e-06, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 
-[node name="MeleeT1" parent="." index="6" instance=ExtResource("2_gfvhv")]
+[node name="VisualMesh" parent="." index="6" instance=ExtResource("2_gfvhv")]

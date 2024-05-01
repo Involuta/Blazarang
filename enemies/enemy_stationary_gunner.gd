@@ -2,10 +2,10 @@ extends CharacterBody3D
 
 var shooting := false
 
-@export var SIGHT_DIST := 40.0
-
-const ATTACK_DURATION_SECS := 1.5
-const BULLET_SPEED := 30.0
+@export var sight_dist := 40.0
+@export var ATTACK_DURATION_SECS := 1.5
+@export var bullet_speed := 30.0
+@export var turn_speed := .25
 
 var aiming_at_target := true
 
@@ -26,9 +26,11 @@ func _physics_process(delta):
 	if can_see_target() and not shooting:
 		start_attack()
 	if aiming_at_target:
-		look_at(target.global_position)
-		rotation.x = 0
-		rotation.z = 0
+		lerp_look_at_target(turn_speed)
+
+func lerp_look_at_target(turn_speed):
+	var vec3_to_target := global_position.direction_to(target.global_position)
+	rotation.y = lerp_angle(rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
 
 func start_attack():
 	shooting = true
@@ -45,13 +47,13 @@ func shoot_bullet():
 	level.add_child.call_deferred(bullet_inst)
 	await bullet_inst.tree_entered
 	bullet_inst.global_position = global_position
-	bullet_inst.velocity = BULLET_SPEED * global_position.direction_to(target.global_position)
+	bullet_inst.velocity = bullet_speed * global_position.direction_to(target.global_position)
 	bullet_inst.look_at(target.global_position)
 
 func can_see_target():
 	var space_state := get_world_3d().direct_space_state
 	var sight_dir := global_position.direction_to(target.global_position)
-	var query = PhysicsRayQueryParameters3D.create(global_position, global_position + SIGHT_DIST * sight_dir)
+	var query = PhysicsRayQueryParameters3D.create(global_position, global_position + sight_dist * sight_dir)
 	query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER, Globals.TARGET_COL_LAYER])
 	query.collide_with_areas = true
 	var result = space_state.intersect_ray(query)

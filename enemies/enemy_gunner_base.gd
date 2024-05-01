@@ -17,6 +17,9 @@ var behav_state = FOLLOW
 var aiming_at_target := true
 @export var bullet_speed := 30.0
 
+@export var follow_turn_speed := .15
+@export var attack_turn_speed := .25
+
 var rng := RandomNumberGenerator.new()
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var bullet := preload("res://enemies/enemy_bullet.tscn")
@@ -42,6 +45,10 @@ func _physics_process(delta):
 		ATTACK:
 			attack()
 
+func lerp_look_at_target(turn_speed):
+	var vec3_to_target := global_position.direction_to(target.global_position)
+	rotation.y = lerp_angle(rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
+
 func wait():
 	move_and_slide()
 	if global_position.distance_to(target.global_position) < aggro_distance:
@@ -66,9 +73,7 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	move_and_slide()
 
 func follow():
-	look_at(target.global_position)
-	rotation.x = 0
-	rotation.z = 0
+	lerp_look_at_target(follow_turn_speed)
 	nav_agent.set_target_position(target.global_position)
 	var next_position = nav_agent.get_next_path_position()
 	var new_velocity = (next_position - global_position).normalized() * follow_speed
@@ -95,9 +100,7 @@ func attack():
 	velocity.x = 0
 	velocity.z = 0
 	if aiming_at_target:
-		look_at(target.global_position)
-		rotation.x = 0
-		rotation.z = 0
+		lerp_look_at_target(attack_turn_speed)
 	
 func stop_aiming_at_target():
 	aiming_at_target = false

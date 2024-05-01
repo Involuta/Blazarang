@@ -29,3 +29,8 @@ res://glb_inherited_scenes/stationary_gunner.tscn
 res://enemies/enemy_mobile_gunner.tscn
 res://glb_inherited_scenes/mobile_gunner.tscn
 res://enemies/enemy_bullet.tscn
+res://enemies/enemy_melee_base.tscn
+res://enemies/enemy_melee_base.gd
+res://enemies/enemy_stationary_gunner.gd
+res://enemies/enemy_big_melee_base.gd
+res://enemies/enemy_gunner_base.gd

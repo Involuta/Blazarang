@@ -78,4 +78,4 @@ libraries = {
 "": SubResource("AnimationLibrary_cvygw")
 }
 
-[node name="StationaryGunner" parent="." instance=ExtResource("3_ha5ar")]
+[node name="VisualMesh" parent="." instance=ExtResource("3_ha5ar")]

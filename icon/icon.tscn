@@ -1,9 +1,21 @@
-[gd_scene load_steps=14 format=3 uid="uid://skntmavu4xsw"]
+[gd_scene load_steps=19 format=3 uid="uid://skntmavu4xsw"]
 
 [ext_resource type="Script" path="res://icon/icon.gd" id="1_fgjod"]
 [ext_resource type="PackedScene" uid="uid://b5fggubx1ibk6" path="res://glb_inherited_scenes/icon_mesh.tscn" id="2_qle8n"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qvdqm"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0w1yi"]
+animation = &"AirNoLateralMvmt"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s6q6o"]
+animation = &"Follow"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_rgwku"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_0w1yi")
+blend_point_0/pos = 0.05
+blend_point_1/node = SubResource("AnimationNodeAnimation_s6q6o")
+blend_point_1/pos = 0.5
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g6ngv"]
 animation = &"Follow"
@@ -17,22 +29,27 @@ blend_point_0/pos = 0.5
 blend_point_1/node = SubResource("AnimationNodeAnimation_v6cun")
 blend_point_1/pos = 0.0
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jocra"]
-animation = &"Follow"
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ycmm1"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_de4hr"]
+advance_mode = 2
+advance_expression = "!cotu.is_on_floor()"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_crdw1"]
 advance_mode = 2
 advance_expression = "cotu.is_on_floor()"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_g6st4"]
+states/CotuAirBlendSpace/node = SubResource("AnimationNodeBlendSpace1D_rgwku")
+states/CotuAirBlendSpace/position = Vector2(469, 192.5)
 states/CotuGroundedBlendSpace/node = SubResource("AnimationNodeBlendSpace1D_0ent3")
 states/CotuGroundedBlendSpace/position = Vector2(470, 99.875)
-states/Follow/node = SubResource("AnimationNodeAnimation_jocra")
-states/Follow/position = Vector2(469.875, 200.5)
 states/Start/position = Vector2(187.5, 100)
-transitions = ["Start", "CotuGroundedBlendSpace", SubResource("AnimationNodeStateMachineTransition_ycmm1")]
+transitions = ["Start", "CotuGroundedBlendSpace", SubResource("AnimationNodeStateMachineTransition_ycmm1"), "CotuGroundedBlendSpace", "CotuAirBlendSpace", SubResource("AnimationNodeStateMachineTransition_de4hr"), "CotuAirBlendSpace", "CotuGroundedBlendSpace", SubResource("AnimationNodeStateMachineTransition_crdw1")]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_b7lgh"]
+graph_offset = Vector2(-15.36, 43.2)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_g6st4")
 nodes/StateMachine/position = Vector2(70, 150)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -121,8 +138,51 @@ tracks/2/keys = {
 "values": [Vector3(0.9, 0.9, 0.9)]
 }
 
+[sub_resource type="Animation" id="Animation_fh1rr"]
+resource_name = "AirNoLateralMvmt"
+length = 3.0
+loop_mode = 1
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("IconMesh:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.5708, 3.48787e-16, 3.48787e-16), Vector3(1.5708, 3.48787e-16, 6.28319)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("IconMesh:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("IconMesh:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.9, 0.9, 0.9)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5do6e"]
 _data = {
+"AirNoLateralMvmt": SubResource("Animation_fh1rr"),
 "Floored": SubResource("Animation_cpnbj"),
 "Follow": SubResource("Animation_1n5ka")
 }
@@ -132,7 +192,7 @@ collision_layer = 32
 script = ExtResource("1_fgjod")
 
 [node name="IconMesh" parent="." instance=ExtResource("2_qle8n")]
-transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+transform = Transform3D(-0.878688, 0.194697, -1.13634e-21, 7.048e-07, 3.18084e-06, -0.9, -0.194697, -0.878688, -3.25799e-06, 2.08165e-12, -1, 2.08165e-12)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_qvdqm")
@@ -149,6 +209,7 @@ tree_root = SubResource("AnimationNodeBlendTree_b7lgh")
 anim_player = NodePath("../AnimationPlayer")
 advance_expression_base_node = NodePath("..")
 active = true
+parameters/StateMachine/CotuAirBlendSpace/blend_position = 0
 parameters/StateMachine/CotuGroundedBlendSpace/blend_position = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

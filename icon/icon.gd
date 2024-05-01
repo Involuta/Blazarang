@@ -20,9 +20,10 @@ func _physics_process(_delta):
 	var dir_to_cotu := global_position.direction_to(cotu.global_position)
 	if following_cotu:
 		global_position += dir_to_cotu * (dist_to_cotu / 4)
-		if dist_to_cotu > floored_proximity:
+		if dist_to_cotu >= floored_proximity:
 			look_at(cotu.global_position)
-	anim_tree.set("parameters/StateMachine/CotuGroundedBlendSpace/blend_position", cotu.velocity.length())
+	anim_tree.set("parameters/StateMachine/CotuGroundedBlendSpace/blend_position", dist_to_cotu)
+	anim_tree.set("parameters/StateMachine/CotuAirBlendSpace/blend_position", dist_to_cotu)
 
 func start_following_cotu():
 	following_cotu = true

@@ -18,4 +18,4 @@ mesh = SubResource("CapsuleMesh_mlfo4")
 [node name="EnemyHurtbox" parent="." index="3"]
 health = 30
 
-[node name="MeleeT2" parent="." index="6" instance=ExtResource("2_jmf1i")]
+[node name="VisualMesh" parent="." index="6" instance=ExtResource("2_jmf1i")]

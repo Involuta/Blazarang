@@ -11,16 +11,18 @@ var behav_state = FOLLOW
 
 @export var follow_speed := 5.0
 @export var target_distance := 3.0
-
 @export var attack_duration_secs := 1.5
+@export var sweep_chance := .2
+@export var follow_turn_speed := .1
+@export var attack_turn_speed := .5
 
 var aiming_at_target := true
 
-@export var sweep_chance := .2
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 @onready var nav_agent = $NavigationAgent3D
 @onready var animation_player = $AnimationPlayer
+@onready var visual_mesh = $VisualMesh
 @onready var target = $/root/Level/Target
 
 func _ready():
@@ -42,6 +44,10 @@ func _physics_process(delta):
 			
 	if global_position.y < -100:
 		queue_free()
+
+func lerp_look_at_target(turn_speed):
+	var vec3_to_target := global_position.direction_to(target.global_position)
+	rotation.y = lerp_angle(rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
 
 func wait():
 	move_and_slide()
@@ -66,7 +72,7 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	move_and_slide()
 
 func follow():
-	look_at(target.global_position)
+	lerp_look_at_target(follow_turn_speed)
 	rotation.x = 0
 	rotation.z = 0
 	nav_agent.set_target_position(target.global_position)
@@ -102,7 +108,7 @@ func attack():
 	velocity.x = 0
 	velocity.z = 0
 	if aiming_at_target:
-		look_at(target.global_position)
+		lerp_look_at_target(attack_turn_speed)
 		rotation.x = 0
 		rotation.z = 0
 	

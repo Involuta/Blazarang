@@ -316,6 +316,7 @@ radius = 0.3
 height = 5.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_al1tw"]
+shading_mode = 0
 albedo_color = Color(1, 1, 0, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_oq81m"]
@@ -376,7 +377,7 @@ shape = SubResource("CapsuleShape3D_na3bt")
 transform = Transform3D(1, -1.62572e-08, -4.69464e-15, -4.73391e-08, 1, -3.90864e-15, 2.95455e-14, -2.14339e-14, 0.999999, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh = SubResource("CapsuleMesh_oq81m")
 
-[node name="BigMeleeT1" parent="." instance=ExtResource("4_soixx")]
+[node name="VisualMesh" parent="." instance=ExtResource("4_soixx")]
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

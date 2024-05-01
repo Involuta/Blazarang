@@ -83,7 +83,7 @@ libraries = {
 "": SubResource("AnimationLibrary_cvygw")
 }
 
-[node name="GunnerT1" parent="." instance=ExtResource("3_n2hhp")]
+[node name="VisualMesh" parent="." instance=ExtResource("3_n2hhp")]
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
