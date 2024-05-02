@@ -1,14 +1,14 @@
+OmniLight3D
+Area3D
+CollisionShape3D
 DirectionalLight3D
 AnimationTree
 AnimationPlayer
 MeshInstance3D
-OmniLight3D
 SpotLight3D
 LightmapGI
 VoxelGI
 Node3D
-CollisionShape3D
-Area3D
 StaticBody3D
 NavigationRegion3D
 FuncGodotMap
