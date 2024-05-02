@@ -30,3 +30,4 @@ res://enemies/enemy_mega_gun.gd
 res://levels/level1section_nodes/top_gun_battlefield.tscn
 res://levels/level1section_nodes/gun_arena.tscn
 res://icon/icon.gd
+res://cotu/CotuControl.gd

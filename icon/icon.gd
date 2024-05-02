@@ -1,7 +1,7 @@
 extends Area3D
 
 var following_cotu := true
-var follow_min_cotu_speed := 2
+var follow_cotu_min_dist := .5
 
 # For transition from ricochet/return to rose
 var roserang_queued := false # did the rang just hit the target while in the ricochet or return state?
@@ -18,12 +18,12 @@ func _physics_process(_delta):
 	var dir_to_cotu := global_position.direction_to(cotu.global_position)
 	if following_cotu:
 		global_position += dir_to_cotu * (dist_to_cotu / 4)
-	if Vector2(cotu.velocity.x, cotu.velocity.z).length() > follow_min_cotu_speed:
-		look_at(cotu.global_position)
+	
+	if (cotu.is_on_floor() and dist_to_cotu < follow_cotu_min_dist) or (!cotu.is_on_floor() and cotu.walk_input == Vector2.ZERO):
+		rotation = Vector3.ZERO
 	else:
-		if Input.is_action_just_pressed("Special"):
-			print("bs")
-		rotation.x = PI/2
+		look_at(cotu.global_position)
+	
 	anim_tree.set("parameters/StateMachine/CotuGroundedBlendSpace/blend_position", dist_to_cotu)
 
 func start_following_cotu():
