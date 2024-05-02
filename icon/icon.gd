@@ -1,7 +1,7 @@
 extends Area3D
 
 var following_cotu := true
-var floored_proximity := .5 # dist from Cotu at which point Icon becomes floored
+var follow_min_cotu_speed := 2
 
 # For transition from ricochet/return to rose
 var roserang_queued := false # did the rang just hit the target while in the ricochet or return state?
@@ -14,16 +14,17 @@ func _ready():
 	pass
 
 func _physics_process(_delta):
-	if Input.is_action_just_pressed("Special"):
-		print(following_cotu)
 	var dist_to_cotu := global_position.distance_to(cotu.global_position)
 	var dir_to_cotu := global_position.direction_to(cotu.global_position)
 	if following_cotu:
 		global_position += dir_to_cotu * (dist_to_cotu / 4)
-		if dist_to_cotu >= floored_proximity:
-			look_at(cotu.global_position)
+	if Vector2(cotu.velocity.x, cotu.velocity.z).length() > follow_min_cotu_speed:
+		look_at(cotu.global_position)
+	else:
+		if Input.is_action_just_pressed("Special"):
+			print("bs")
+		rotation.x = PI/2
 	anim_tree.set("parameters/StateMachine/CotuGroundedBlendSpace/blend_position", dist_to_cotu)
-	anim_tree.set("parameters/StateMachine/CotuAirBlendSpace/blend_position", dist_to_cotu)
 
 func start_following_cotu():
 	following_cotu = true

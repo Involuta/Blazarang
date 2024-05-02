@@ -1,6 +1,6 @@
+DirectionalLight3D
 AnimationTree
 AnimationPlayer
-DirectionalLight3D
 MeshInstance3D
 OmniLight3D
 SpotLight3D

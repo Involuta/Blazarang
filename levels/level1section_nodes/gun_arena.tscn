@@ -830,5 +830,12 @@ resource_path = "res://levels/level1section_nodes/hallway_invasion.tscn"
 load_position = Vector3(2.08165e-12, 10, 2.08165e-12)
 node_path_in_level = "HallwayInvasion"
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.939018, 0.155596, 0.306651, -0.34115, 0.533412, 0.774008, -0.0431389, -0.831421, 0.553965, -3.16012e-30, 25.9766, 0)
+light_color = Color(0.756863, 0.854902, 1, 1)
+light_energy = 1.5
+shadow_enabled = true
+shadow_opacity = 0.5
+
 [connection signal="tree_exited" from="EnemyMegaGun" to="." method="_on_enemy_mega_gun_tree_exited"]
 [connection signal="body_entered" from="GravityBox" to="GravityBox" method="_on_body_entered"]

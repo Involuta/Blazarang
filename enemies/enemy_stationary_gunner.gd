@@ -5,7 +5,7 @@ var shooting := false
 @export var sight_dist := 40.0
 @export var ATTACK_DURATION_SECS := 1.5
 @export var bullet_speed := 30.0
-@export var turn_speed := .25
+@export var attack_turn_speed := .25
 
 var aiming_at_target := true
 
@@ -26,7 +26,7 @@ func _physics_process(delta):
 	if can_see_target() and not shooting:
 		start_attack()
 	if aiming_at_target:
-		lerp_look_at_target(turn_speed)
+		lerp_look_at_target(attack_turn_speed)
 
 func lerp_look_at_target(turn_speed):
 	var vec3_to_target := global_position.direction_to(target.global_position)
