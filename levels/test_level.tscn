@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="1_4wpki"]
 [ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="2_6nbsg"]
-[ext_resource type="PackedScene" uid="uid://dl1sgbi66x0h1" path="res://levels/level1section_nodes/first_maze.tscn" id="3_4hr01"]
+[ext_resource type="PackedScene" uid="uid://cvrxu2n1hugn" path="res://levels/level1section_nodes/pillar_room.tscn" id="3_8jl6d"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s5q5q"]
 sky_top_color = Color(0.0196078, 0, 0.172549, 1)
@@ -30,5 +30,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.0398, 12.1121, -21.6066)
 [node name="Target" parent="." instance=ExtResource("2_6nbsg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.0174, 12.1305, -21.5556)
 
-[node name="FirstMaze" parent="." instance=ExtResource("3_4hr01")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.3059, 0, -29.6743)
+[node name="PillarRoom" parent="." instance=ExtResource("3_8jl6d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.0175, 0, 0)
