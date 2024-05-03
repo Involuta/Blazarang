@@ -18,3 +18,12 @@ res://levels/level1section_nodes/gun_arena.tscn
 res://levels/level1section_nodes/arena_elevator.tscn
 res://levels/torch.tscn
 res://enemies/enemy_bullet.tscn
+res://enemies/enemy_big_melee_base.gd
+res://enemies/enemy_gunner_base.gd
+res://enemies/enemy_melee_base.gd
+res://enemies/enemy_stationary_gunner.gd
+res://enemies/enemy_big_melee_tier1.tscn
+res://enemies/enemy_melee_base.tscn
+res://enemies/enemy_melee_tier1.tscn
+res://enemies/enemy_mobile_gunner.tscn
+res://enemies/enemy_stationary_gunner.tscn
