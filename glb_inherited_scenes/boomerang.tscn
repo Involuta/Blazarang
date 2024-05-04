@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://gu2jnnbm3ivq"]
+
+[ext_resource type="PackedScene" uid="uid://b1pyyv11jlrqa" path="res://glb_imports/boomerang.glb" id="1_0xqho"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pcsg6"]
+shading_mode = 0
+
+[node name="boomerang" instance=ExtResource("1_0xqho")]
+
+[node name="Boomerang3DModelV1" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_pcsg6")

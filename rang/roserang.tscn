@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dqdba8l6potq1"]
+[gd_scene load_steps=10 format=3 uid="uid://dqdba8l6potq1"]
 
 [ext_resource type="Script" path="res://rang/roserang.gd" id="1_m7w6u"]
 [ext_resource type="Script" path="res://hitbox.gd" id="2_1xumc"]
 [ext_resource type="Script" path="res://rang/destroy_on_cotu_hit.gd" id="3_o7i4w"]
+[ext_resource type="PackedScene" uid="uid://gu2jnnbm3ivq" path="res://glb_inherited_scenes/boomerang.tscn" id="4_a5tdd"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cvffx"]
 shading_mode = 0
@@ -30,6 +31,7 @@ platform_floor_layers = 4294901760
 script = ExtResource("1_m7w6u")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("CylinderMesh_g7g1d")
 
 [node name="WallCollider" type="CollisionShape3D" parent="."]
@@ -56,5 +58,8 @@ light_energy = 5.0
 light_bake_mode = 0
 omni_range = 7.0
 omni_shadow_mode = 0
+
+[node name="boomerang" parent="." instance=ExtResource("4_a5tdd")]
+transform = Transform3D(0.3, 0, -4.57379e-24, -4.57379e-24, -1.31134e-08, -0.3, 0, 0.3, -1.31134e-08, 2.08165e-12, 2.08165e-12, -0.25)
 
 [connection signal="body_entered" from="CotuCollider" to="CotuCollider" method="_on_body_entered"]
