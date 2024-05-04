@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="1_4wpki"]
 [ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="2_6nbsg"]
-[ext_resource type="PackedScene" uid="uid://dpdul4hw6co6n" path="res://levels/level1section_nodes/hallway_invasion.tscn" id="3_7xxvf"]
+[ext_resource type="PackedScene" uid="uid://cvrxu2n1hugn" path="res://levels/level1section_nodes/pillar_room.tscn" id="3_cy8ox"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s5q5q"]
 sky_top_color = Color(0.0196078, 0, 0.172549, 1)
@@ -30,4 +30,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.0398, 12.1121, -21.6066)
 [node name="Target" parent="." instance=ExtResource("2_6nbsg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.0174, 12.1305, -21.5556)
 
-[node name="HallwayInvasion" parent="." instance=ExtResource("3_7xxvf")]
+[node name="PillarRoom" parent="." instance=ExtResource("3_cy8ox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59.255, 0, 0)

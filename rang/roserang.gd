@@ -38,8 +38,9 @@ var rapidorbit_script := preload("res://rang/special_rapidorbit.gd")
 @onready var cotu = $/root/Level/cotuCB
 @onready var target = $/root/Level/Target
 @onready var hitbox = $PlayerHitbox
+@onready var mesh = $boomerang
 
-var rotate_speed := .5
+var rotate_speed := 1
 
 func _ready():
 	target.roserang_queued = false
@@ -64,7 +65,7 @@ func rose(delta):
 	return target.global_position + radius * Vector3(angle_vec.x, 0, angle_vec.y)
 
 func _physics_process(delta):
-	rotate_y(rotate_speed);
+	mesh.rotate_y(rotate_speed);
 	if Input.is_action_just_pressed("Special") and target.following_cotu and global_position.distance_to(target.global_position) < SPECIAL_DIST:
 		set_script(rapidorbit_script)
 		return
