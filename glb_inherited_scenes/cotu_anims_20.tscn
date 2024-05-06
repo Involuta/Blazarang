@@ -1,5 +1,3 @@
-[gd_scene load_steps=2 format=3 uid="uid://blsv3ttkw8h58"]
+[gd_scene format=3 uid="uid://12w2rahn5l6q"]
 
-[ext_resource type="PackedScene" uid="uid://w38w30wq8mq" path="res://glb_imports/ClothesEyesAnimRig.glb" id="1_ea1kq"]
-
-[node name="CotuAnims20" instance=ExtResource("1_ea1kq")]
+[node name="CotuAnims20"]
