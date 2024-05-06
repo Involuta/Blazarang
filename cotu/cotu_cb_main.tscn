@@ -1,11 +1,11 @@
-[gd_scene load_steps=47 format=3 uid="uid://icbfj05gq8vk"]
+[gd_scene load_steps=46 format=3 uid="uid://icbfj05gq8vk"]
 
 [ext_resource type="Script" path="res://cotu/CotuControl.gd" id="1_aleek"]
 [ext_resource type="Script" path="res://cotu/CotuHurtbox.gd" id="2_fvpfg"]
 [ext_resource type="Shader" path="res://cotu/cotu_outline.gdshader" id="2_hcsj1"]
-[ext_resource type="PackedScene" uid="uid://c11lqe2y6cwpo" path="res://glb_inherited_scenes/cotu_anims_21.tscn" id="4_iyyh2"]
-[ext_resource type="Material" uid="uid://yct3jaquatmq" path="res://cotu/cotu_anims_base_material.tres" id="5_fvp77"]
-[ext_resource type="Material" uid="uid://be7mwluw32wnh" path="res://cotu/cotu_anims_eyes.tres" id="6_brs3n"]
+[ext_resource type="PackedScene" uid="uid://d2b8b2501jda6" path="res://glb_inherited_scenes/cotu_anims_21.tscn" id="4_ja7e2"]
+[ext_resource type="Material" uid="uid://be7mwluw32wnh" path="res://cotu/cotu_anims_eyes.tres" id="5_x8s5g"]
+[ext_resource type="Material" uid="uid://yct3jaquatmq" path="res://cotu/cotu_anims_base_material.tres" id="6_qsh2i"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_80wmm"]
 
@@ -202,9 +202,6 @@ nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_auidk")
 nodes/StateMachine/position = Vector2(70, 150)
 node_connections = [&"output", 0, &"StateMachine"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5j2x2"]
-shading_mode = 0
-
 [node name="cotuCB" type="CharacterBody3D"]
 collision_layer = 16
 collision_mask = 74
@@ -263,20 +260,16 @@ parameters/StateMachine/conditions/just_instant_rethrew = false
 parameters/StateMachine/AerialBlendSpace/blend_position = Vector2(0, 0)
 parameters/StateMachine/GroundBlendSpace/blend_position = Vector2(0, 0)
 
-[node name="CotuAnims" parent="." instance=ExtResource("4_iyyh2")]
+[node name="CotuAnims" parent="." instance=ExtResource("4_ja7e2")]
 
 [node name="Skeleton3D" parent="CotuAnims/Armature" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.988, 2.08165e-12)
 bones/0/position = Vector3(6.74725e-05, 1.1138, -0.0715926)
 bones/0/rotation = Quaternion(0.0818988, 0.00301705, 0.00455092, 0.996626)
-bones/1/position = Vector3(0, 0.0922872, -0.0106759)
 bones/1/rotation = Quaternion(-0.0445268, 0.0105798, -0.00703301, 0.998927)
-bones/2/position = Vector3(-7.27596e-12, 0.108386, -1.46101e-08)
 bones/2/rotation = Quaternion(-0.0161168, -0.0157259, -0.000583578, 0.999746)
 bones/3/rotation = Quaternion(-0.040025, 0.00125486, 0.0051001, 0.999185)
-bones/4/position = Vector3(2.54717e-12, 0.139354, -1.86265e-09)
 bones/4/rotation = Quaternion(0.129216, -0.000166639, 0.000821223, 0.991616)
-bones/5/rotation = Quaternion(9.12832e-09, 1.0842e-18, -1.71025e-18, 1)
 bones/7/position = Vector3(0.0663166, 0.115124, 0.0320528)
 bones/7/rotation = Quaternion(-0.589018, -0.462308, 0.537802, -0.387424)
 bones/8/rotation = Quaternion(0.420406, 0.0192546, -0.177413, 0.889614)
@@ -298,13 +291,16 @@ bones/61/rotation = Quaternion(-0.55409, -6.55346e-06, -1.29368e-06, 0.832457)
 bones/62/rotation = Quaternion(0.5079, -0.0680982, 0.0141169, 0.858604)
 bones/63/rotation = Quaternion(0.284446, 0.0939771, -0.0275123, 0.953678)
 
-[node name="BodyPants" parent="CotuAnims/Armature/Skeleton3D" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_5j2x2")
+[node name="BodyHoodie" parent="CotuAnims/Armature/Skeleton3D" index="0"]
+surface_material_override/0 = ExtResource("5_x8s5g")
 
-[node name="Ch36_001" parent="CotuAnims/Armature/Skeleton3D" index="1"]
-surface_material_override/0 = ExtResource("5_fvp77")
+[node name="BodyPants" parent="CotuAnims/Armature/Skeleton3D" index="1"]
+surface_material_override/0 = ExtResource("6_qsh2i")
 
-[node name="Face" parent="CotuAnims/Armature/Skeleton3D" index="2"]
-surface_material_override/0 = ExtResource("6_brs3n")
+[node name="Ch36_001" parent="CotuAnims/Armature/Skeleton3D" index="2"]
+surface_material_override/0 = ExtResource("6_qsh2i")
+
+[node name="Face" parent="CotuAnims/Armature/Skeleton3D" index="3"]
+surface_material_override/0 = ExtResource("5_x8s5g")
 
 [editable path="CotuAnims"]

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dwu7muxqaac8p"
-path="res://.godot/imported/TestShirt.glb-bd79a8e8d5bbb395f0c8fa83cdf4034e.scn"
+uid="uid://c5jihcoru5r8p"
+path="res://.godot/imported/ClothesEyesAnimRig.glb-59fed9fcb182ec304075eb367347119c.scn"
 
 [deps]
 
-source_file="res://glb_imports/TestShirt.glb"
-dest_files=["res://.godot/imported/TestShirt.glb-bd79a8e8d5bbb395f0c8fa83cdf4034e.scn"]
+source_file="res://glb_imports/ClothesEyesAnimRig.glb"
+dest_files=["res://.godot/imported/ClothesEyesAnimRig.glb-59fed9fcb182ec304075eb367347119c.scn"]
 
 [params]
 

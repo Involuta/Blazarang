@@ -1,37 +1,5 @@
-[gd_scene load_steps=2 format=3 uid="uid://c11lqe2y6cwpo"]
+[gd_scene load_steps=2 format=3 uid="uid://d2b8b2501jda6"]
 
-[ext_resource type="PackedScene" uid="uid://pmruysgodcm2" path="res://glb_inherited_scenes/ClothesEyesAnimRig.glb" id="1_noqav"]
+[ext_resource type="PackedScene" uid="uid://c5jihcoru5r8p" path="res://glb_imports/ClothesEyesAnimRig.glb" id="1_r5box"]
 
-[node name="CotuAnims21" instance=ExtResource("1_noqav")]
-
-[node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/position = Vector3(-0.11962, 0.972692, -0.178781)
-bones/0/rotation = Quaternion(0.305432, 0.632345, 0.132285, 0.699537)
-bones/1/position = Vector3(-0.00251407, 0.0902004, -0.0121457)
-bones/1/rotation = Quaternion(0.0610697, -0.19152, -0.0584297, 0.977843)
-bones/2/position = Vector3(-5.58866e-08, 0.108386, -1.50583e-07)
-bones/2/rotation = Quaternion(-0.0227074, -0.0531502, -0.00440674, 0.998319)
-bones/3/rotation = Quaternion(-0.137164, -0.281465, 0.00903245, 0.949675)
-bones/4/position = Vector3(-2.51432e-08, 0.139354, -3.16947e-08)
-bones/4/rotation = Quaternion(0.182246, -0.0851705, 0.028508, 0.979142)
-bones/5/rotation = Quaternion(-0.130024, 0.0177901, 0.00300689, 0.991347)
-bones/7/position = Vector3(0.0662505, 0.113368, 0.0333887)
-bones/7/rotation = Quaternion(-0.469519, -0.483276, 0.503397, -0.540914)
-bones/8/rotation = Quaternion(0.268409, 0.232843, 0.400864, 0.844422)
-bones/9/rotation = Quaternion(-6.43244e-08, -5.6916e-07, 0.474905, 0.880037)
-bones/10/rotation = Quaternion(0.0568259, -0.229304, 0.0758612, 0.968729)
-bones/31/position = Vector3(-0.0617331, 0.118574, 0.0302422)
-bones/31/rotation = Quaternion(0.530964, -0.484714, 0.479056, 0.503622)
-bones/32/rotation = Quaternion(0.457877, -0.130267, 0.0141427, 0.879306)
-bones/33/rotation = Quaternion(-1.98718e-07, -5.45819e-08, -0.559144, 0.829071)
-bones/34/rotation = Quaternion(-0.107828, 0.283862, 0.0602432, 0.950876)
-bones/55/rotation = Quaternion(0.264904, -0.267443, -0.925332, 0.0454009)
-bones/55/scale = Vector3(0.999993, 0.999997, 1.00001)
-bones/56/rotation = Quaternion(-0.297547, 3.90033e-07, -8.1608e-08, 0.954707)
-bones/57/rotation = Quaternion(0.399377, -0.174728, 0.179489, 0.881903)
-bones/58/rotation = Quaternion(0.288451, -0.0947475, 0.0259985, 0.952441)
-bones/60/rotation = Quaternion(-0.221458, 0.555779, 0.750539, 0.280638)
-bones/60/scale = Vector3(1.00001, 0.999975, 1.00001)
-bones/61/rotation = Quaternion(-0.383355, -2.49443e-06, -1.05564e-06, 0.923601)
-bones/62/rotation = Quaternion(0.466069, -0.0403403, -0.0182589, 0.88364)
-bones/63/rotation = Quaternion(0.319838, 0.0949396, -0.0239814, 0.942398)
+[node name="CotuAnims21" instance=ExtResource("1_r5box")]
