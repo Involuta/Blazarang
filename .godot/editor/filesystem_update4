@@ -1,4 +1,3 @@
-res://levels/level1section_nodes/pillar_room.tscn
 res://addons/func_godot/textures/default_material.tres
 res://textures/RedBorderedRect.tres
 res://textures/solid_light_gray_tile.tres
@@ -23,4 +22,5 @@ res://enemies/enemy_melee_tier1.tscn
 res://enemies/enemy_mobile_gunner.tscn
 res://enemies/enemy_stationary_gunner.tscn
 res://glb_inherited_scenes/boomerang.tscn
-res://glb_inherited_scenes/cotu_anims_21.tscn
+res://levels/level1section_nodes/pillar_room.tscn
+res://glb_inherited_scenes/cotu_anims_23.tscn
