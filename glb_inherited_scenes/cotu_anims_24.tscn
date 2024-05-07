@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://duanou50282es"]
+
+[ext_resource type="PackedScene" uid="uid://4uixk52roj0q" path="res://glb_imports/ClothesEyesAnimRig.glb" id="1_kfspi"]
+
+[node name="CotuAnims24" instance=ExtResource("1_kfspi")]

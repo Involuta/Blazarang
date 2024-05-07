@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://cotu/CotuControl.gd" id="1_aleek"]
 [ext_resource type="Script" path="res://cotu/CotuHurtbox.gd" id="2_fvpfg"]
 [ext_resource type="Shader" path="res://cotu/cotu_outline.gdshader" id="2_hcsj1"]
-[ext_resource type="PackedScene" uid="uid://qlmvw230802y" path="res://glb_inherited_scenes/cotu_anims_23.tscn" id="4_w1mmv"]
-[ext_resource type="Material" uid="uid://yct3jaquatmq" path="res://cotu/cotu_anims_base_material.tres" id="5_jaghj"]
-[ext_resource type="Material" uid="uid://be7mwluw32wnh" path="res://cotu/cotu_anims_eyes.tres" id="6_a437s"]
+[ext_resource type="PackedScene" uid="uid://duanou50282es" path="res://glb_inherited_scenes/cotu_anims_24.tscn" id="4_gcwfx"]
+[ext_resource type="Material" uid="uid://yct3jaquatmq" path="res://cotu/cotu_anims_base_material.tres" id="5_25aol"]
+[ext_resource type="Material" uid="uid://be7mwluw32wnh" path="res://cotu/cotu_anims_eyes.tres" id="6_d0udm"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_80wmm"]
 
@@ -260,7 +260,7 @@ parameters/StateMachine/conditions/just_instant_rethrew = false
 parameters/StateMachine/AerialBlendSpace/blend_position = Vector2(0, 0)
 parameters/StateMachine/GroundBlendSpace/blend_position = Vector2(0, 0)
 
-[node name="CotuAnims" parent="." instance=ExtResource("4_w1mmv")]
+[node name="CotuAnims" parent="." instance=ExtResource("4_gcwfx")]
 
 [node name="Skeleton3D" parent="CotuAnims/Armature" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.988, 2.08165e-12)
@@ -292,15 +292,15 @@ bones/62/rotation = Quaternion(0.5079, -0.0680982, 0.0141169, 0.858604)
 bones/63/rotation = Quaternion(0.284446, 0.0939771, -0.0275123, 0.953678)
 
 [node name="BodyHoodie" parent="CotuAnims/Armature/Skeleton3D" index="0"]
-surface_material_override/0 = ExtResource("5_jaghj")
+surface_material_override/0 = ExtResource("5_25aol")
 
 [node name="BodyPants" parent="CotuAnims/Armature/Skeleton3D" index="1"]
-surface_material_override/0 = ExtResource("6_a437s")
+surface_material_override/0 = ExtResource("5_25aol")
 
 [node name="Ch36_001" parent="CotuAnims/Armature/Skeleton3D" index="2"]
-surface_material_override/0 = ExtResource("5_jaghj")
+surface_material_override/0 = ExtResource("5_25aol")
 
 [node name="Face" parent="CotuAnims/Armature/Skeleton3D" index="3"]
-surface_material_override/0 = ExtResource("6_a437s")
+surface_material_override/0 = ExtResource("6_d0udm")
 
 [editable path="CotuAnims"]
