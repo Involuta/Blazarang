@@ -1,11 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://gu2jnnbm3ivq"]
+[gd_scene load_steps=2 format=3 uid="uid://gu2jnnbm3ivq"]
 
 [ext_resource type="PackedScene" uid="uid://b1pyyv11jlrqa" path="res://glb_imports/boomerang.glb" id="1_0xqho"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pcsg6"]
-shading_mode = 0
-
 [node name="boomerang" instance=ExtResource("1_0xqho")]
+transform = Transform3D(1, 0, -1.5246e-23, -1.5246e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 
-[node name="Boomerang3DModelV1" parent="." index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_pcsg6")
+[node name="Skeleton3D" parent="RangArmature" index="0"]
+bones/0/rotation = Quaternion(-3.00482e-08, 1.18932e-07, 0.0020616, 0.999998)
+bones/2/rotation = Quaternion(2.709e-07, 1.56081e-07, -0.925599, 0.378507)
+bones/4/position = Vector3(0.384502, -0.00245298, 6.94887e-07)
+bones/4/rotation = Quaternion(-4.34729e-14, -2.77041e-10, 0.0020616, 0.999998)
+bones/5/position = Vector3(0.384503, -0.00245298, 6.94887e-07)
+bones/5/rotation = Quaternion(-2.98024e-08, -2.77063e-10, 0.0020616, 0.999998)
+bones/6/position = Vector3(0.384502, -0.00245298, 6.94887e-07)
+bones/6/rotation = Quaternion(-4.34729e-14, -2.77041e-10, 0.0020616, 0.999998)
+bones/7/position = Vector3(0.669196, 0.280125, 5.93496e-07)
+bones/7/rotation = Quaternion(-1.48549e-07, -1.75532e-07, 0.924816, -0.380414)
+bones/8/position = Vector3(0.669196, 0.280125, 5.93496e-07)
+bones/8/rotation = Quaternion(-1.44246e-07, -1.64144e-07, 0.924816, -0.380414)
+bones/9/position = Vector3(0.669196, 0.280124, 5.93497e-07)
+bones/9/rotation = Quaternion(-1.60875e-07, -1.84202e-07, 0.924816, -0.380414)
+
+[node name="Boomerang3DModelV1" parent="RangArmature/Skeleton3D" index="0"]
+transform = Transform3D(0.947893, -0.318589, -2.74521e-08, 0.318589, 0.947893, 2.70423e-08, 1.74063e-08, -3.43791e-08, 1, -1.20194e-07, 2.38674e-07, -1.14564e-14)
+bone_idx = 3
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "BasicSpin"

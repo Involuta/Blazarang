@@ -60,6 +60,6 @@ omni_range = 7.0
 omni_shadow_mode = 0
 
 [node name="boomerang" parent="." instance=ExtResource("4_a5tdd")]
-transform = Transform3D(0.3, 0, -4.57379e-24, -4.57379e-24, -1.31134e-08, -0.3, 0, 0.3, -1.31134e-08, 2.08165e-12, 2.08165e-12, -0.25)
+transform = Transform3D(0.08, -5.33137e-32, 2.33042e-39, 0, -3.49691e-09, -0.08, 5.33137e-32, 0.08, -3.49691e-09, -0.162627, 2.08165e-12, -0.0842355)
 
 [connection signal="body_entered" from="CotuCollider" to="CotuCollider" method="_on_body_entered"]

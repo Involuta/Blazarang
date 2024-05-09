@@ -65,7 +65,7 @@ func rose(delta):
 	return target.global_position + radius * Vector3(angle_vec.x, 0, angle_vec.y)
 
 func _physics_process(delta):
-	mesh.rotate_y(rotate_speed);
+	# mesh.rotate_y(rotate_speed);
 	if Input.is_action_just_pressed("Special") and target.following_cotu and global_position.distance_to(target.global_position) < SPECIAL_DIST:
 		set_script(rapidorbit_script)
 		return
