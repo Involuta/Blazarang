@@ -1,4 +1,4 @@
-res://levels/level1.tscn
+res://glb_inherited_scenes/boomerang.tscn
 res://addons/func_godot/textures/default_material.tres
 res://textures/RedBorderedRect.tres
 res://textures/solid_light_gray_tile.tres
@@ -7,6 +7,7 @@ res://cotu/cotu_outline.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
 res://cotu/cotu_anims_outline.tres
 res://cotu/cotu_anims_base_material.tres
+res://levels/level1.tscn
 res://levels/test_level.tscn
 res://cotu/cotu_cb_main.tscn
 res://icon/icon.tscn
@@ -21,9 +22,8 @@ res://enemies/enemy_melee_base.tscn
 res://enemies/enemy_melee_tier1.tscn
 res://enemies/enemy_mobile_gunner.tscn
 res://enemies/enemy_stationary_gunner.tscn
-res://glb_inherited_scenes/boomerang.tscn
 res://levels/level1section_nodes/pillar_room.tscn
 res://glb_inherited_scenes/cotu_anims_24.tscn
 res://glb_inherited_scenes/melee_t1.tscn
-res://cotu/CotuControl.gd
+res://rang/rang_trail.gd
 res://rang/roserang.gd

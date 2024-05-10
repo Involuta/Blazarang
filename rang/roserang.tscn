@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dqdba8l6potq1"]
+[gd_scene load_steps=12 format=3 uid="uid://dqdba8l6potq1"]
 
 [ext_resource type="Script" path="res://rang/roserang.gd" id="1_m7w6u"]
 [ext_resource type="Script" path="res://hitbox.gd" id="2_1xumc"]
 [ext_resource type="Script" path="res://rang/destroy_on_cotu_hit.gd" id="3_o7i4w"]
 [ext_resource type="PackedScene" uid="uid://gu2jnnbm3ivq" path="res://glb_inherited_scenes/boomerang.tscn" id="4_a5tdd"]
+[ext_resource type="Script" path="res://rang/rang_trail.gd" id="5_q4hkp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cvffx"]
 shading_mode = 0
@@ -24,6 +25,13 @@ radius = 2.0
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_vx8km"]
 height = 0.2
 radius = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54f1v"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
 
 [node name="Roserang" type="CharacterBody3D"]
 collision_mask = 2
@@ -61,5 +69,15 @@ omni_shadow_mode = 0
 
 [node name="boomerang" parent="." instance=ExtResource("4_a5tdd")]
 transform = Transform3D(0.08, -5.33137e-32, 2.33042e-39, 0, -3.49691e-09, -0.08, 5.33137e-32, 0.08, -3.49691e-09, -0.162627, 2.08165e-12, -0.0842355)
+
+[node name="Trail1" type="MeshInstance3D" parent="boomerang"]
+transform = Transform3D(1, -7.37251e-39, 4.6383e-43, 2.35099e-38, 1, -2.15383e-14, -2.85865e-43, 3.67709e-15, 1, 2.02437, 0.975101, -4.26209e-08)
+material_override = SubResource("StandardMaterial3D_54f1v")
+script = ExtResource("5_q4hkp")
+start_width = 12.0
+end_width = 5.0
+width_scale_acc = 3.0
+point_lifespan = 0.5
+end_color = Color(0, 0, 0.788235, 1)
 
 [connection signal="body_entered" from="CotuCollider" to="CotuCollider" method="_on_body_entered"]
