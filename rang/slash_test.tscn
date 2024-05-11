@@ -1,0 +1,114 @@
+[gd_scene load_steps=8 format=3 uid="uid://ch0s35387mnaj"]
+
+[ext_resource type="Script" path="res://rang/slash_test.gd" id="1_nynsa"]
+[ext_resource type="ArrayMesh" uid="uid://cxkbpvdugu01f" path="res://rang/boomerang.obj" id="1_vweqa"]
+[ext_resource type="Shader" uid="uid://dhc6wyqlctr7a" path="res://rang/slash_test.tres" id="2_dknkd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_futj6"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_dknkd")
+shader_parameter/ColorParameter = Color(0.776471, 0.780392, 0.180392, 1)
+shader_parameter/X_slider = -0.05
+shader_parameter/Y_Slider = -0.05
+
+[sub_resource type="Animation" id="Animation_38ur8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Boomerang:surface_material_override/0:shader_parameter/X_slider")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.05]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Boomerang:surface_material_override/0:shader_parameter/Y_Slider")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.05]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:play")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_i86ar"]
+resource_name = "slash_test"
+length = 0.3
+loop_mode = 1
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Boomerang:surface_material_override/0:shader_parameter/X_slider")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0736822, 0.203347),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.05, 0.16, 0.67]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Boomerang:surface_material_override/0:shader_parameter/Y_Slider")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0736822, 0.263033),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.07, 0.25, 0.67]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:play")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_77b3o"]
+_data = {
+"RESET": SubResource("Animation_38ur8"),
+"slash_test": SubResource("Animation_i86ar")
+}
+
+[node name="SlashTest" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.309106, 0, 0.384037)
+script = ExtResource("1_nynsa")
+
+[node name="Boomerang" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.90702, 0, -0.844537)
+mesh = ExtResource("1_vweqa")
+surface_material_override/0 = SubResource("ShaderMaterial_futj6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_77b3o")
+}

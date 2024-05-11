@@ -1,3 +1,4 @@
+AnimationPlayer
 Trail3D
 Line2D
 DirectionalLight3D
@@ -5,7 +6,6 @@ OmniLight3D
 Area3D
 CollisionShape3D
 AnimationTree
-AnimationPlayer
 MeshInstance3D
 SpotLight3D
 LightmapGI

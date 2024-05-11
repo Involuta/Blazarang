@@ -3,3 +3,32 @@
 [ext_resource type="PackedScene" uid="uid://4uixk52roj0q" path="res://glb_imports/ClothesEyesAnimRig.glb" id="1_kfspi"]
 
 [node name="CotuAnims24" instance=ExtResource("1_kfspi")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(6.7406e-05, 0.949485, 0.125401)
+bones/0/rotation = Quaternion(0.103862, 0.00128515, 0.00995109, 0.994541)
+bones/1/position = Vector3(1.09867e-09, 0.0922873, -0.0106758)
+bones/1/rotation = Quaternion(0.0537883, 0.0115901, 0.0114158, 0.99842)
+bones/2/rotation = Quaternion(-0.0486722, -0.016203, -0.00927094, 0.99864)
+bones/3/rotation = Quaternion(-0.0794417, -0.00918478, -0.0154666, 0.996677)
+bones/4/rotation = Quaternion(0.0697322, 0.000240947, 0.000844717, 0.997565)
+bones/7/position = Vector3(0.0662503, 0.113368, 0.0333884)
+bones/7/rotation = Quaternion(-0.569675, -0.430398, 0.562672, -0.416688)
+bones/8/rotation = Quaternion(0.474132, 0.362913, -0.43139, 0.67631)
+bones/9/rotation = Quaternion(-2.61077e-07, -5.06643e-07, 0.725661, 0.688053)
+bones/10/rotation = Quaternion(-0.0134769, -0.102989, 0.0567083, 0.992973)
+bones/31/position = Vector3(-0.0617333, 0.118575, 0.0302421)
+bones/31/rotation = Quaternion(0.537717, -0.463303, 0.559101, 0.428506)
+bones/32/rotation = Quaternion(0.668962, 0.0962025, -0.141495, 0.723335)
+bones/33/rotation = Quaternion(-1.93076e-07, -5.76079e-08, -0.530787, 0.847505)
+bones/34/rotation = Quaternion(0.0482583, -0.0297766, -0.00130929, 0.99839)
+bones/55/rotation = Quaternion(0.000456557, -0.44613, -0.894963, 0.00290697)
+bones/55/scale = Vector3(1, 0.999993, 1.00001)
+bones/56/rotation = Quaternion(-0.228016, 3.63706e-07, -1.06018e-07, 0.973657)
+bones/57/rotation = Quaternion(0.37034, 0.0630158, 0.0103636, 0.926698)
+bones/58/rotation = Quaternion(0.276001, -0.0943954, 0.0272492, 0.956123)
+bones/60/rotation = Quaternion(-0.0145955, -0.143777, 0.988992, 0.031788)
+bones/60/scale = Vector3(1, 0.999999, 1)
+bones/61/rotation = Quaternion(-0.284182, -2.62531e-06, -7.63669e-07, 0.95877)
+bones/62/rotation = Quaternion(0.583588, -0.0277142, -0.0074642, 0.811543)
+bones/63/rotation = Quaternion(0.284463, 0.0939783, -0.0275081, 0.953673)

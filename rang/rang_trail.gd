@@ -11,18 +11,18 @@ var prev_pos : Vector3
 @export var end_width := .0
 @export_range(.1, 3) var width_scale_acc := 1.0 # higher --> width decreases faster
 
-@export var motion_delta := .1 # trail smoothness; lower --> smoother (i.e. lower --> more points; at the lowest motion_delta, a new point is added every process frame)
+@export var min_motion_delta := .1 # min_dist btwn current and previous state needed to spawn a trail point
 @export var point_lifespan := 1.0
 
 @export var start_color := Color(1.0, 1.0, 1.0, 1.0)
 @export var end_color := Color(1.0, 1.0, 1.0, 1.0)
 
 func _ready():
-	prev_pos = get_global_transform().origin
+	prev_pos = global_position
 	mesh = ImmediateMesh.new()
 
 func append_point():
-	points.append(get_global_transform().origin)
+	points.append(global_position)
 	widths.append([
 		get_global_transform().basis.x * start_width,
 		get_global_transform().basis.x * start_width - get_global_transform().basis.x * end_width
@@ -36,9 +36,9 @@ func remove_point(i):
 	
 func _process(delta):
 	# If the dist btwn the previous pos and the current pos is greater than the spawn threshold and the trail is visible, spawn a new point
-	if (prev_pos - get_global_transform().origin).length() > motion_delta and trail_visible:
+	if (prev_pos - global_position).length() > min_motion_delta and trail_visible:
 		append_point()
-		prev_pos = get_global_transform().origin
+		prev_pos = global_position
 	
 	var p := 0
 	var max_points := points.size()
@@ -58,6 +58,7 @@ func _process(delta):
 		return
 	
 	mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLE_STRIP)
+	
 	for i in range(points.size()):
 		var t := float(i) / (points.size() - 1.0)
 		

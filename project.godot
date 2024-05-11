@@ -116,5 +116,6 @@ Special={
 
 [rendering]
 
+renderer/rendering_method="mobile"
 limits/opengl/max_lights_per_object=20
 anti_aliasing/quality/msaa_3d=1
