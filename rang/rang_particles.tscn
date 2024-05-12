@@ -7,14 +7,16 @@ emission_ring_axis = Vector3(2.08165e-12, 1, 2.08165e-12)
 emission_ring_height = 0.2
 emission_ring_radius = 2.0
 emission_ring_inner_radius = 0.0
+particle_flag_align_y = true
 particle_flag_rotate_y = true
 spread = 180.0
-flatness = 0.75
+flatness = 1.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 15.0
 initial_velocity_max = 20.0
 angle_min = -180.0
 angle_max = 180.0
+attractor_interaction_enabled = false
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cfr1q"]
 shading_mode = 0
@@ -26,7 +28,7 @@ size = Vector2(0.2, 0.2)
 [node name="RangParticles" type="Node3D"]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-amount = 40
-lifetime = 0.25
+amount = 20
+lifetime = 0.3
 process_material = SubResource("ParticleProcessMaterial_lrenx")
 draw_pass_1 = SubResource("QuadMesh_fbcdn")
