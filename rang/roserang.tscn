@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dqdba8l6potq1"]
+[gd_scene load_steps=13 format=3 uid="uid://dqdba8l6potq1"]
 
 [ext_resource type="Script" path="res://rang/roserang.gd" id="1_m7w6u"]
 [ext_resource type="Script" path="res://hitbox.gd" id="2_1xumc"]
 [ext_resource type="Script" path="res://rang/destroy_on_cotu_hit.gd" id="3_o7i4w"]
 [ext_resource type="PackedScene" uid="uid://gu2jnnbm3ivq" path="res://glb_inherited_scenes/boomerang.tscn" id="4_a5tdd"]
 [ext_resource type="Script" path="res://rang/rang_trail.gd" id="5_q4hkp"]
+[ext_resource type="PackedScene" uid="uid://xsh6t6rpr2st" path="res://rang/rang_particles.tscn" id="6_44m4u"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cvffx"]
 shading_mode = 0
@@ -79,5 +80,7 @@ end_width = 3.0
 width_scale_acc = 3.0
 point_lifespan = 0.5
 end_color = Color(0, 0, 0.788235, 1)
+
+[node name="RangParticles" parent="." instance=ExtResource("6_44m4u")]
 
 [connection signal="body_entered" from="CotuCollider" to="CotuCollider" method="_on_body_entered"]

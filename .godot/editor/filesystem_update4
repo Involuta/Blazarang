@@ -1,5 +1,6 @@
 res://levels/level1.tscn
 res://addons/func_godot/textures/default_material.tres
+res://rang/slash_test.tres
 res://textures/RedBorderedRect.tres
 res://textures/solid_light_gray_tile.tres
 res://textures/black_tile.tres
@@ -7,7 +8,6 @@ res://cotu/cotu_outline.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
 res://cotu/cotu_anims_outline.tres
 res://cotu/cotu_anims_base_material.tres
-res://rang/slash_test.tres
 res://levels/test_level.tscn
 res://icon/icon.tscn
 res://rang/roserang.tscn
@@ -27,3 +27,7 @@ res://glb_inherited_scenes/cotu_anims_24.tscn
 res://glb_inherited_scenes/melee_t1.tscn
 res://rang/slash_test.tscn
 res://cotu/cotu_cb_main.tscn
+res://enemies/enemy_melee_tier2.tscn
+res://enemies/enemy_melee_tier3.tscn
+res://rang/rang_particles.tscn
+res://textures/block-big.tres

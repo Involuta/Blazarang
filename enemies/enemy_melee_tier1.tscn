@@ -1,15 +1,269 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3nurhh7od5kk"]
+[gd_scene load_steps=17 format=3 uid="uid://d3nurhh7od5kk"]
 
-[ext_resource type="PackedScene" uid="uid://cm35v0fu2apju" path="res://enemies/enemy_melee_base.tscn" id="1_ampo0"]
+[ext_resource type="Script" path="res://enemies/enemy_melee_base.gd" id="1_dwc2x"]
+[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_eg5rr"]
 [ext_resource type="PackedScene" uid="uid://gxclvsg2cubt" path="res://glb_inherited_scenes/melee_t1.tscn" id="2_gfvhv"]
+[ext_resource type="Script" path="res://hitbox.gd" id="3_h3l5p"]
+[ext_resource type="PackedScene" uid="uid://ch0s35387mnaj" path="res://rang/slash_test.tscn" id="5_kp43r"]
+[ext_resource type="Shader" uid="uid://dhc6wyqlctr7a" path="res://rang/slash_test.tres" id="6_fvkq5"]
 
-[node name="EnemyMeleeTier1" instance=ExtResource("1_ampo0")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5rrex"]
+albedo_color = Color(0.878431, 0.231373, 0.133333, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_v8r4p"]
+material = SubResource("StandardMaterial3D_5rrex")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4b6ac"]
+
+[sub_resource type="Animation" id="Animation_4hqbc"]
+resource_name = "overhead"
+length = 1.1
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeleeHitboxPivot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeleeHitboxPivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.500001, 0.633333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16), Vector3(-1.74533, 3.48787e-16, 3.48787e-16)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeleeHitboxPivot:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MeleeHitboxPivot:process_mode")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 4]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop_aiming_at_target"
+}]
+}
+tracks/5/type = "position_3d"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("MeleeHitboxPivot/EnemyHitbox")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = PackedFloat32Array(0, 1, 2.08165e-12, -1, 2.08165e-12, 0.133334, 1, 2.08165e-12, 2.5, 2.08165e-12)
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.500001),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_vfx"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_fpxs0"]
+resource_name = "sweep"
+length = 1.56667
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeleeHitboxPivot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeleeHitboxPivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.766667, 0.966667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.5708, 3.48787e-16, 2.0944), Vector3(-1.5708, 3.48787e-16, 2.0944), Vector3(-1.5708, 3.48787e-16, -2.0944)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeleeHitboxPivot:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.56667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MeleeHitboxPivot:process_mode")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.56667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 4]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.766667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop_aiming_at_target"
+}]
+}
+tracks/5/type = "position_3d"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("MeleeHitboxPivot/EnemyHitbox")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = PackedFloat32Array(0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12, 0.2, 1, 2.08165e-12, 2.5, 2.08165e-12)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2ftbc"]
+_data = {
+"overhead": SubResource("Animation_4hqbc"),
+"sweep": SubResource("Animation_fpxs0")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_na3bt"]
+radius = 0.2
+height = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_al1tw"]
+shading_mode = 0
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_oq81m"]
+material = SubResource("StandardMaterial3D_al1tw")
+radius = 0.2
+height = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b2801"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("6_fvkq5")
+shader_parameter/ColorParameter = Color(0.776471, 0.780392, 0.180392, 1)
+shader_parameter/X_slider = -0.05
+shader_parameter/Y_Slider = -0.05
+
+[node name="EnemyMeleeTier1" type="CharacterBody3D" groups=["lockonables"]]
+collision_layer = 8
+collision_mask = 90
+platform_floor_layers = 4294901762
+script = ExtResource("1_dwc2x")
 sweep_chance = 2.08165e-12
 
-[node name="MeshInstance3D" parent="." index="0"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("CapsuleMesh_v8r4p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_4b6ac")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+target_desired_distance = 3.0
+avoidance_enabled = true
+radius = 3.0
+
+[node name="EnemyHurtbox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 9
+script = ExtResource("2_eg5rr")
+health = 20
+enemy_hitboxes = ["PlayerHitbox"]
+
+[node name="HurtboxCollider" type="CollisionShape3D" parent="EnemyHurtbox"]
+shape = SubResource("CapsuleShape3D_4b6ac")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2ftbc")
+}
+
+[node name="MeleeHitboxPivot" type="Node3D" parent="."]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 visible = false
 
-[node name="MeleeHitboxPivot" parent="." index="5"]
-transform = Transform3D(-0.500004, -0.866023, -1.26261e-21, -3.13499e-06, 1.81001e-06, 1, -0.866023, 0.500004, -3.61999e-06, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+[node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
+transform = Transform3D(0.999999, 2.15301e-08, -2.2719e-14, -8.9407e-08, 0.999999, 0, -6.17927e-15, -6.2758e-15, 0.999999, 2.08165e-12, -1, 2.08165e-12)
+collision_layer = 8
+collision_mask = 11
+script = ExtResource("3_h3l5p")
 
-[node name="VisualMesh" parent="." index="6" instance=ExtResource("2_gfvhv")]
+[node name="HitboxCollider" type="CollisionShape3D" parent="MeleeHitboxPivot/EnemyHitbox"]
+shape = SubResource("CapsuleShape3D_na3bt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeleeHitboxPivot/EnemyHitbox"]
+transform = Transform3D(1, -1.62572e-08, -4.69464e-15, -4.73391e-08, 1, -3.90864e-15, 2.95455e-14, -2.14339e-14, 0.999999, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+mesh = SubResource("CapsuleMesh_oq81m")
+
+[node name="VisualMesh" parent="." instance=ExtResource("2_gfvhv")]
+
+[node name="SlashTest" parent="." instance=ExtResource("5_kp43r")]
+transform = Transform3D(-1.44255e-07, 2, 1.93712e-07, 1.2829, -5.60773e-08, 1.53433, 1.53433, 2.34924e-07, -1.2829, -0.946335, 0.446315, -3.00658)
+
+[node name="Boomerang" parent="SlashTest" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_b2801")
+
+[connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached" flags=18]
+[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed" flags=18]
+
+[editable path="SlashTest"]
