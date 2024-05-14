@@ -1,20 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwtsdf6c24323"]
+[gd_scene load_steps=6 format=3 uid="uid://bhbi3rhsatvw4"]
 
-[ext_resource type="PackedScene" uid="uid://dgc30jmr6pvvt" path="res://glb_imports/GunnerT1.glb" id="1_00lq7"]
+[ext_resource type="PackedScene" uid="uid://sgjt41wnwf3u" path="res://glb_imports/MobileGunner.glb" id="1_yddop"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jtlrr"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wfi33"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kosi5"]
 shading_mode = 0
 albedo_color = Color(0.686275, 0, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6aobd"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3hedu"]
 diffuse_mode = 3
 specular_mode = 2
-albedo_color = Color(0.0823529, 0.243137, 1, 1)
+albedo_color = Color(0, 0.223529, 1, 1)
 roughness = 0.0
 
-[node name="GunnerT1" instance=ExtResource("1_00lq7")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mvu5j"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
 
-[node name="GunnerT12" parent="." index="0"]
-transform = Transform3D(-0.5, 1.74393e-16, 4.37114e-08, 1.74393e-16, 0.5, -1.74393e-16, -4.37114e-08, -1.74393e-16, -0.5, 0, 0, 0)
-surface_material_override/1 = SubResource("StandardMaterial3D_jtlrr")
-surface_material_override/2 = SubResource("StandardMaterial3D_6aobd")
+[node name="MobileGunner" instance=ExtResource("1_yddop")]
+
+[node name="GunnerT1" parent="." index="0"]
+transform = Transform3D(-0.5, 1.74393e-16, -4.37114e-08, 1.74393e-16, 0.5, -1.74393e-16, 4.37114e-08, -1.74393e-16, -0.5, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_wfi33")
+surface_material_override/1 = SubResource("StandardMaterial3D_kosi5")
+surface_material_override/2 = SubResource("StandardMaterial3D_3hedu")
+surface_material_override/3 = SubResource("StandardMaterial3D_mvu5j")

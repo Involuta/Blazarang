@@ -1,15 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://dwqdm1pn51yee"]
+[gd_scene load_steps=12 format=3 uid="uid://dwqdm1pn51yee"]
 
 [ext_resource type="Script" path="res://enemies/enemy_melee_base.gd" id="1_1j3bx"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_eijtw"]
 [ext_resource type="Script" path="res://hitbox.gd" id="3_y2l46"]
 [ext_resource type="PackedScene" uid="uid://bwdcuwgfmnx6s" path="res://glb_inherited_scenes/melee_t3.tscn" id="4_pe0vr"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kausb"]
-albedo_color = Color(1, 1, 0.0862745, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ilgca"]
-material = SubResource("StandardMaterial3D_kausb")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4b6ac"]
 
@@ -187,10 +181,6 @@ platform_floor_layers = 4294901762
 script = ExtResource("1_1j3bx")
 sweep_chance = 0.3
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("CapsuleMesh_ilgca")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_4b6ac")
 
@@ -216,6 +206,7 @@ libraries = {
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 0.999999, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+visible = false
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
 transform = Transform3D(0.999999, 2.15301e-08, -2.2719e-14, -8.9407e-08, 0.999999, 0, -6.17927e-15, -6.2758e-15, 0.999999, 2.08165e-12, -1, 2.08165e-12)

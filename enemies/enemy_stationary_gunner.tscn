@@ -1,14 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://b78jp5ykrb7o5"]
+[gd_scene load_steps=7 format=3 uid="uid://b78jp5ykrb7o5"]
 
 [ext_resource type="Script" path="res://enemies/enemy_stationary_gunner.gd" id="1_g4bs0"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_ccnt6"]
 [ext_resource type="PackedScene" uid="uid://cep17rebnochq" path="res://glb_inherited_scenes/stationary_gunner.tscn" id="3_ha5ar"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ioag"]
-albedo_color = Color(0.639216, 0.282353, 1, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ti8lt"]
-material = SubResource("StandardMaterial3D_6ioag")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_txubl"]
 
@@ -55,10 +49,6 @@ collision_layer = 8
 collision_mask = 11
 platform_floor_layers = 4294901762
 script = ExtResource("1_g4bs0")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("CapsuleMesh_ti8lt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_txubl")
