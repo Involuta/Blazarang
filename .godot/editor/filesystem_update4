@@ -1,17 +1,18 @@
+res://levels/level1.tscn
 res://addons/func_godot/textures/default_material.tres
 res://rang/slash_test.tres
 res://textures/RedBorderedRect.tres
 res://textures/solid_light_gray_tile.tres
 res://textures/black_tile.tres
+res://rang/roserang_shader.tres
 res://cotu/cotu_outline.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
 res://cotu/cotu_anims_outline.tres
 res://cotu/cotu_anims_base_material.tres
-res://glb_inherited_scenes/boomerang.tscn
-res://rang/roserang.tscn
-res://levels/level1.tscn
+res://levels/test_level.tres
 res://levels/test_level.tscn
 res://icon/icon.tscn
+res://rang/roserang.tscn
 res://levels/level1section_nodes/hallway_invasion.tscn
 res://levels/level1section_nodes/gun_arena.tscn
 res://levels/level1section_nodes/arena_elevator.tscn
@@ -30,4 +31,5 @@ res://cotu/cotu_cb_main.tscn
 res://enemies/enemy_melee_tier2.tscn
 res://enemies/enemy_melee_tier3.tscn
 res://rang/rang_particles.tscn
+res://glb_inherited_scenes/boomerang.tscn
 res://rang/roserang.gd

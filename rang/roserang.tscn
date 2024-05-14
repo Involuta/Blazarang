@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dqdba8l6potq1"]
+[gd_scene load_steps=15 format=3 uid="uid://dqdba8l6potq1"]
 
 [ext_resource type="Script" path="res://rang/roserang.gd" id="1_m7w6u"]
 [ext_resource type="Script" path="res://hitbox.gd" id="2_1xumc"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://rang/rang_trail.gd" id="5_q4hkp"]
 [ext_resource type="PackedScene" uid="uid://xsh6t6rpr2st" path="res://rang/rang_particles.tscn" id="6_44m4u"]
 [ext_resource type="PackedScene" uid="uid://dd1bl11ajhe0s" path="res://glb_inherited_scenes/boomerang.tscn" id="6_c0jd5"]
+[ext_resource type="Shader" uid="uid://dkll861wc3rxd" path="res://rang/roserang_shader.tres" id="7_j3iaw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cvffx"]
 shading_mode = 0
@@ -33,6 +34,11 @@ blend_mode = 1
 cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vop3h"]
+render_priority = 0
+shader = ExtResource("7_j3iaw")
+shader_parameter/ColorParameter = Color(1, 1, 1, 1)
 
 [node name="Roserang" type="CharacterBody3D"]
 collision_mask = 2
@@ -83,6 +89,9 @@ end_color = Color(0, 0, 0.788235, 1)
 
 [node name="boomerang" parent="." instance=ExtResource("6_c0jd5")]
 transform = Transform3D(-1.73645e-09, -0.023, -3.4729e-09, -0.023, 1.73645e-09, 2.01072e-09, -2.01072e-09, 3.4729e-09, -0.023, -0.236768, 0, 0)
+
+[node name="Boomerang3DModelV1" parent="boomerang" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_vop3h")
 
 [connection signal="body_entered" from="CotuCollider" to="CotuCollider" method="_on_body_entered"]
 

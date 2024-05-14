@@ -1,9 +1,10 @@
+OmniLight3D
+DirectionalLight3D
+Camera3D
 GPUParticles3D
 AnimationPlayer
 Trail3D
 Line2D
-DirectionalLight3D
-OmniLight3D
 Area3D
 CollisionShape3D
 AnimationTree

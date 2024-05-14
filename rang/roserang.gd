@@ -40,7 +40,7 @@ var rapidorbit_script := preload("res://rang/special_rapidorbit.gd")
 @onready var hitbox = $PlayerHitbox
 @onready var mesh = $boomerang
 
-var rotate_speed := 1
+var rotate_speed := 3.6
 
 func _ready():
 	target.roserang_queued = false
