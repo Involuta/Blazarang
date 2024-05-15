@@ -10,7 +10,7 @@ var behav_state = FOLLOW
 @export var aggro_distance := -1
 
 @export var follow_speed := 10.0
-@export var target_distance := 15.0
+@export var target_distance := 4.0
 
 @export var attack_duration_secs := 2.5
 
@@ -19,12 +19,21 @@ var behav_state = FOLLOW
 
 var aiming_at_target := true
 @export var bullet_speed := 30.0
-
+"""
 @export var attack_chances = {
 	"big_sweep": .2,
 	"big_overhead" : .2,
-	"double_sweep" : .6
+	"double_sweep" : .2,
+	"flying_sweep" : .4
 }
+"""
+@export var attack_chances = {
+	"big_overhead" : .2,
+	"flying_sweep" : .8
+}
+
+@export var flying_sweep_speed := 20.0
+
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 var bullet := preload("res://enemies/enemy_mega_bullet.tscn")
@@ -115,6 +124,7 @@ func start_attack():
 
 func end_attack():
 	behav_state = FOLLOW
+	gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func choose_attack() -> String:
 	var choice := rng.randf()
@@ -141,6 +151,14 @@ func shoot_bullet():
 	if bullet_inst.velocity.y < 0:
 		bullet_inst.velocity.y = 0
 	bullet_inst.look_at(target.global_position)
+
+func start_flying_sweep():
+	gravity = 0
+	velocity = -10 * global_position.direction_to(target.global_position)
+	velocity.y = 4
+
+func flying_sweep_rush():
+	velocity = flying_sweep_speed * global_position.direction_to(target.global_position)
 
 func can_see_target():
 	var space_state := get_world_3d().direct_space_state
