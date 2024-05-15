@@ -4,8 +4,6 @@ var spawning_enemies := false
 
 @export var default_gravity_multiplier = 1.5
 @export var gfield_gravity_multiplier = -.5
-@onready var spawner1 = $EnemySpawner
-@onready var spawner2 = $EnemySpawner2
 @onready var trapdoor = $NavigationRegion3D/Trapdoor
 
 func _physics_process(_delta):
@@ -14,8 +12,6 @@ func _physics_process(_delta):
 
 func start_spawning_enemies():
 	spawning_enemies = true
-	spawner1.spawning = true
-	spawner2.spawning = true
 
 func _on_spawner_trigger_body_entered(body):
 	if body == cotu:

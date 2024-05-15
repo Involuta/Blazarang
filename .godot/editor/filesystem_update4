@@ -40,3 +40,9 @@ res://levels/level1section_nodes/hallway_invasion.gd
 res://levels/level1.gd
 res://levels/level1section_nodes/first_miniboss.tscn
 res://levels/level1section_nodes/top_gun_battlefield.tscn
+res://enemies/miniboss.tscn
+res://enemies/enemy_mega_bullet.tscn
+res://glb_inherited_scenes/big_melee_t1.tscn
+res://rang/rang_trail.gd
+res://levels/level1section_nodes/first_maze.gd
+res://enemies/enemy_big_melee_base.gd
