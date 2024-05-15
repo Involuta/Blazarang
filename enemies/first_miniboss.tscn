@@ -1,9 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://cp4kl2mwytpqr"]
+[gd_scene load_steps=16 format=3 uid="uid://cp4kl2mwytpqr"]
 
-[ext_resource type="PackedScene" uid="uid://g4kirqxgep2" path="res://glb_inherited_scenes/big_melee_t1.tscn" id="1_3eo23"]
-[ext_resource type="Script" path="res://enemies/enemy_big_melee_base.gd" id="1_okov4"]
-[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_ujexi"]
-[ext_resource type="Script" path="res://hitbox.gd" id="3_xkcxt"]
+[ext_resource type="Script" path="res://enemies/first_miniboss.gd" id="1_hqrk6"]
+[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="1_qwvcv"]
+[ext_resource type="Script" path="res://hitbox.gd" id="2_dh1eu"]
+[ext_resource type="PackedScene" uid="uid://g4kirqxgep2" path="res://glb_inherited_scenes/big_melee_t1.tscn" id="3_a32lo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5d68u"]
 radius = 2.0
@@ -44,52 +44,67 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MeleeHitboxPivot:visible")
+tracks/2/path = NodePath("MeleeHitboxPivot:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1.6),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2, 2, 2)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("MeleeHitboxPivot:process_mode")
+tracks/3/path = NodePath("MeleeHitboxPivot:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 1.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0, 4]
+"values": [true, false]
 }
-tracks/4/type = "method"
+tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath(".")
+tracks/4/path = NodePath("MeleeHitboxPivot:process_mode")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 4]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.883335, 1.6),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
 "method": &"stop_aiming_at_target"
+}, {
+"args": [],
+"method": &"end_attack"
 }]
 }
-tracks/5/type = "position_3d"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("MeleeHitboxPivot/EnemyHitbox")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = PackedFloat32Array(0, 1, 2.08165e-12, -0.5, 2.08165e-12, 0.133334, 1, 2.08165e-12, 4, 2.08165e-12)
+tracks/6/type = "position_3d"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MeleeHitboxPivot/EnemyHitbox")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = PackedFloat32Array(0, 1, 2.08165e-12, -0.5, 2.08165e-12, 0.133334, 1, 2.08165e-12, 4, 2.08165e-12)
 
 [sub_resource type="Animation" id="Animation_c5n8h"]
 resource_name = "big_sweep"
-length = 2.06667
+length = 1.61667
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -118,48 +133,63 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MeleeHitboxPivot:visible")
+tracks/2/path = NodePath("MeleeHitboxPivot:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 2.06667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2, 2, 2)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("MeleeHitboxPivot:process_mode")
+tracks/3/path = NodePath("MeleeHitboxPivot:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 2.06667),
+"times": PackedFloat32Array(0, 1.61667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MeleeHitboxPivot:process_mode")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.61667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 4]
 }
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0.766667),
-"transitions": PackedFloat32Array(1),
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.966667, 1.61667),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
 "method": &"stop_aiming_at_target"
+}, {
+"args": [],
+"method": &"end_attack"
 }]
 }
-tracks/5/type = "position_3d"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("MeleeHitboxPivot/EnemyHitbox")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = PackedFloat32Array(0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12, 0.2, 1, 2.08165e-12, 4, 2.08165e-12)
+tracks/6/type = "position_3d"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MeleeHitboxPivot/EnemyHitbox")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = PackedFloat32Array(0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12, 0.2, 1, 2.08165e-12, 4, 2.08165e-12)
 
 [sub_resource type="Animation" id="Animation_ufqy8"]
 resource_name = "overhead"
@@ -295,10 +325,100 @@ tracks/4/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_wqamy"]
+resource_name = "double_sweep"
+length = 2.86667
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeleeHitboxPivot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, -1, 2.08165e-12)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeleeHitboxPivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.766668, 1.16667, 2.06667, 2.46667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.5708, 3.48787e-16, 2.0944), Vector3(-1.5708, 3.48787e-16, 2.0944), Vector3(-1.5708, 3.48787e-16, -2.0944), Vector3(-1.5708, 3.48787e-16, -2.0944), Vector3(-1.5708, 3.48787e-16, 2.0944)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeleeHitboxPivot:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.766668, 1.16667, 2.06667, 2.46667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(2, 2, 2), Vector3(2, 2, 2), Vector3(2.5, 2.5, 2.5), Vector3(2.5, 2.5, 2.5), Vector3(3, 3, 3)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MeleeHitboxPivot:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.86667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MeleeHitboxPivot:process_mode")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2.86667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 4]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2.26667, 2.86667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"stop_aiming_at_target"
+}, {
+"args": [],
+"method": &"end_attack"
+}]
+}
+tracks/6/type = "position_3d"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MeleeHitboxPivot/EnemyHitbox")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = PackedFloat32Array(0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12, 0.2, 1, 2.08165e-12, 4, 2.08165e-12)
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o2h33"]
 _data = {
 "big_overhead": SubResource("Animation_r51hv"),
 "big_sweep": SubResource("Animation_c5n8h"),
+"double_sweep": SubResource("Animation_wqamy"),
 "overhead": SubResource("Animation_ufqy8"),
 "sweep": SubResource("Animation_queae")
 }
@@ -318,17 +438,19 @@ material = SubResource("StandardMaterial3D_al1tw")
 radius = 0.3
 height = 5.0
 
-[node name="Miniboss" type="CharacterBody3D"]
+[node name="FirstMiniboss" type="CharacterBody3D"]
 collision_layer = 64
 collision_mask = 90
-script = ExtResource("1_okov4")
+script = ExtResource("1_hqrk6")
 target_distance = 6.0
+follow_turn_speed = 0.15
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_5d68u")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_desired_distance = 3.0
+target_desired_distance = 9.0
 avoidance_enabled = true
 height = 6.0
 radius = 6.0
@@ -336,7 +458,7 @@ radius = 6.0
 [node name="EnemyHurtbox" type="Area3D" parent="."]
 collision_layer = 8
 collision_mask = 9
-script = ExtResource("2_ujexi")
+script = ExtResource("1_qwvcv")
 health = 1000
 enemy_hitboxes = ["PlayerHitbox"]
 
@@ -349,13 +471,15 @@ libraries = {
 }
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
+process_mode = 4
 transform = Transform3D(2, -1.38455e-15, -1.21133e-16, -1.21133e-16, -0.347298, 1.96962, -1.38455e-15, -1.96962, -0.347298, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+visible = false
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
 transform = Transform3D(0.999999, 2.15301e-08, -2.2719e-14, -8.9407e-08, 0.999999, 0, -6.17927e-15, -6.2758e-15, 0.999999, 2.08165e-12, 4, 2.08165e-12)
 collision_layer = 8
 collision_mask = 11
-script = ExtResource("3_xkcxt")
+script = ExtResource("2_dh1eu")
 
 [node name="HitboxCollider" type="CollisionShape3D" parent="MeleeHitboxPivot/EnemyHitbox"]
 shape = SubResource("CapsuleShape3D_henf5")
@@ -364,7 +488,7 @@ shape = SubResource("CapsuleShape3D_henf5")
 transform = Transform3D(1, -1.62572e-08, -4.69464e-15, -4.73391e-08, 1, -3.90864e-15, 2.95455e-14, -2.14339e-14, 0.999999, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh = SubResource("CapsuleMesh_l85qd")
 
-[node name="VisualMesh" parent="." instance=ExtResource("1_3eo23")]
+[node name="VisualMesh" parent="." instance=ExtResource("3_a32lo")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
