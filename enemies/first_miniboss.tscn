@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cp4kl2mwytpqr"]
+[gd_scene load_steps=18 format=3 uid="uid://cp4kl2mwytpqr"]
 
 [ext_resource type="Script" path="res://enemies/first_miniboss.gd" id="1_hqrk6"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="1_qwvcv"]
@@ -84,7 +84,7 @@ tracks/5/path = NodePath(".")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0.883335, 1.6),
+"times": PackedFloat32Array(1, 1.6),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -101,6 +101,20 @@ tracks/6/path = NodePath("MeleeHitboxPivot/EnemyHitbox")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = PackedFloat32Array(0, 1, 2.08165e-12, -0.5, 2.08165e-12, 0.133334, 1, 2.08165e-12, 4, 2.08165e-12)
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shoot_bullet"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_c5n8h"]
 resource_name = "big_sweep"
@@ -173,23 +187,37 @@ tracks/5/path = NodePath(".")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
+"times": PackedFloat32Array(0.966667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop_aiming_at_target"
+}]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0.966667, 1.61667),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
-"method": &"stop_aiming_at_target"
+"method": &"shoot_bullet"
 }, {
 "args": [],
 "method": &"end_attack"
 }]
 }
-tracks/6/type = "position_3d"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("MeleeHitboxPivot/EnemyHitbox")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = PackedFloat32Array(0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12, 0.2, 1, 2.08165e-12, 4, 2.08165e-12)
+tracks/7/type = "position_3d"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("MeleeHitboxPivot/EnemyHitbox")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = PackedFloat32Array(0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12, 0.2, 1, 2.08165e-12, 4, 2.08165e-12)
 
 [sub_resource type="Animation" id="Animation_ufqy8"]
 resource_name = "overhead"
@@ -413,6 +441,23 @@ tracks/6/path = NodePath("MeleeHitboxPivot/EnemyHitbox")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = PackedFloat32Array(0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12, 0.2, 1, 2.08165e-12, 4, 2.08165e-12)
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.966668, 2.26667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"shoot_bullet"
+}, {
+"args": [],
+"method": &"shoot_bullet"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o2h33"]
 _data = {
@@ -437,6 +482,13 @@ resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_al1tw")
 radius = 0.3
 height = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fo8ei"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o4pv6"]
+albedo_color = Color(0.121569, 0.121569, 0.121569, 1)
 
 [node name="FirstMiniboss" type="CharacterBody3D"]
 collision_layer = 64
@@ -471,7 +523,6 @@ libraries = {
 }
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
-process_mode = 4
 transform = Transform3D(2, -1.38455e-15, -1.21133e-16, -1.21133e-16, -0.347298, 1.96962, -1.38455e-15, -1.96962, -0.347298, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 visible = false
 
@@ -491,5 +542,11 @@ mesh = SubResource("CapsuleMesh_l85qd")
 [node name="VisualMesh" parent="." instance=ExtResource("3_a32lo")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
+[node name="BigMeleeT12" parent="VisualMesh" index="0"]
+surface_material_override/1 = SubResource("StandardMaterial3D_fo8ei")
+surface_material_override/3 = SubResource("StandardMaterial3D_o4pv6")
+
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
+
+[editable path="VisualMesh"]

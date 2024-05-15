@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://4uixk52roj0q" path="res://glb_imports/ClothesEyesAnimRig.glb" id="1_kfspi"]
 
-[node name="CotuAnims24" instance=ExtResource("1_kfspi")]
+[node name="CotuAnims25" instance=ExtResource("1_kfspi")]
 
 [node name="Skeleton3D" parent="Armature" index="0"]
 bones/0/position = Vector3(6.7406e-05, 0.949485, 0.125401)

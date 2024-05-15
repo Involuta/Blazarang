@@ -10,7 +10,7 @@ var behav_state = FOLLOW
 @export var aggro_distance := -1
 
 @export var follow_speed := 10.0
-@export var target_distance := 4.0
+@export var target_distance := 15.0
 
 @export var attack_duration_secs := 2.5
 
@@ -18,6 +18,7 @@ var behav_state = FOLLOW
 @export var attack_turn_speed := .15
 
 var aiming_at_target := true
+@export var bullet_speed := 30.0
 
 @export var attack_chances = {
 	"big_sweep": .2,
@@ -26,8 +27,10 @@ var aiming_at_target := true
 }
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
+var bullet := preload("res://enemies/enemy_mega_bullet.tscn")
 @onready var nav_agent = $NavigationAgent3D
 @onready var animation_player = $AnimationPlayer
+@onready var level := $/root/Level
 @onready var target = $/root/Level/Target
 
 func _ready():
@@ -100,7 +103,12 @@ func follow():
 		nav_agent.target_desired_distance = .1
 
 func start_attack():
+	# Without this await, the animation player would call end_attack at the end of the previous animation on the exact same frame as when the AnimationPlayer.play func is called below. Since an animation was currently in progress, the func call would do nothing, leaving the enemy in ATTACK mode but with no animation playing to free it from ATTACK mode, causing it to stand still indefinitely
 	await get_tree().create_timer(get_process_delta_time()).timeout
+	nav_agent.velocity.x = 0
+	nav_agent.velocity.z = 0
+	velocity.x = 0
+	velocity.z = 0
 	behav_state = ATTACK
 	aiming_at_target = true
 	animation_player.play(choose_attack())
@@ -118,15 +126,21 @@ func choose_attack() -> String:
 	return attack_chances[0]
 
 func attack():
-	nav_agent.velocity.x = 0
-	nav_agent.velocity.z = 0
-	velocity.x = 0
-	velocity.z = 0
 	if aiming_at_target:
 		lerp_look_at_target(attack_turn_speed)
 	
 func stop_aiming_at_target():
 	aiming_at_target = false
+
+func shoot_bullet():
+	var bullet_inst = bullet.instantiate()
+	level.add_child.call_deferred(bullet_inst)
+	await bullet_inst.tree_entered
+	bullet_inst.global_position = global_position - 2 * Vector3.UP
+	bullet_inst.velocity = bullet_speed * global_position.direction_to(target.global_position)
+	if bullet_inst.velocity.y < 0:
+		bullet_inst.velocity.y = 0
+	bullet_inst.look_at(target.global_position)
 
 func can_see_target():
 	var space_state := get_world_3d().direct_space_state

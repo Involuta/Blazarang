@@ -198,7 +198,6 @@ transitions = ["GroundBlendSpace", "AerialEvadeFast", SubResource("AnimationNode
 graph_offset = Vector2(16.7919, -82.7055)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wg7n8"]
-graph_offset = Vector2(-21.12, 69.12)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_auidk")
 nodes/StateMachine/position = Vector2(70, 150)
 node_connections = [&"output", 0, &"StateMachine"]

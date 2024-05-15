@@ -11,10 +11,9 @@
 environment = ExtResource("1_q2fp5")
 
 [node name="cotuCB" parent="." instance=ExtResource("1_4wpki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.2144, 22.8717, 7.48451)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.0887, 22.8717, 5.98899)
 
 [node name="Target" parent="." instance=ExtResource("2_6nbsg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.0174, 12.1305, -21.5556)
 
 [node name="FirstMinibossArena" parent="." instance=ExtResource("4_hdjv2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.4199, 0, 0)
