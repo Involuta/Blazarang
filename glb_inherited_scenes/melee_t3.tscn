@@ -20,6 +20,7 @@ roughness = 0.0
 
 [node name="Body" parent="." index="0"]
 transform = Transform3D(-0.5, 1.74393e-16, -4.37114e-08, 1.74393e-16, 0.5, -1.74393e-16, 4.37114e-08, -1.74393e-16, -0.5, 0, 0, 0)
+lod_bias = 0.5
 surface_material_override/1 = SubResource("StandardMaterial3D_kxchj")
 surface_material_override/2 = SubResource("StandardMaterial3D_akoyu")
 surface_material_override/3 = SubResource("StandardMaterial3D_bsdjw")

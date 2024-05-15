@@ -36,3 +36,7 @@ res://glb_inherited_scenes/melee_t3.tscn
 res://glb_inherited_scenes/mobile_gunner.tscn
 res://glb_inherited_scenes/stationary_gunner.tscn
 res://textures/RedBorderedRect.tres
+res://levels/level1section_nodes/hallway_invasion.gd
+res://levels/level1.gd
+res://levels/level1section_nodes/first_miniboss.tscn
+res://levels/level1section_nodes/top_gun_battlefield.tscn

@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="1_4wpki"]
 [ext_resource type="Environment" uid="uid://bgusbrajqhj6h" path="res://levels/test_level.tres" id="1_q2fp5"]
 [ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="2_6nbsg"]
-[ext_resource type="PackedScene" uid="uid://cb211d57a0el6" path="res://levels/level1section_nodes/top_gun_battlefield.tscn" id="4_gj1ba"]
+[ext_resource type="PackedScene" uid="uid://bqk1kho3gqsuy" path="res://levels/level1section_nodes/first_miniboss.tscn" id="4_hdjv2"]
 
 [node name="Level" type="Node3D"]
 
@@ -11,9 +11,10 @@
 environment = ExtResource("1_q2fp5")
 
 [node name="cotuCB" parent="." instance=ExtResource("1_4wpki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.4123, 22.8717, 7.48451)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.2144, 22.8717, 7.48451)
 
 [node name="Target" parent="." instance=ExtResource("2_6nbsg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.0174, 12.1305, -21.5556)
 
-[node name="TopGunBattlefield" parent="." instance=ExtResource("4_gj1ba")]
+[node name="FirstMaze" parent="." instance=ExtResource("4_hdjv2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.4199, 0, 0)

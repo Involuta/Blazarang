@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://dhgu3oy3hvf0q"
+path="res://.godot/imported/first_miniboss.map-87c2287f1d96be87bea492edbf1fc8a7.tres"
+
+[deps]
+
+source_file="res://level_maps/first_miniboss.map"
+dest_files=["res://.godot/imported/first_miniboss.map-87c2287f1d96be87bea492edbf1fc8a7.tres"]
+
+[params]
+
