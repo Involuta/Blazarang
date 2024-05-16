@@ -41,7 +41,7 @@ shader = ExtResource("7_j3iaw")
 shader_parameter/ColorParameter = Color(1, 1, 1, 1)
 
 [node name="Roserang" type="CharacterBody3D"]
-collision_mask = 2
+collision_mask = 66
 platform_floor_layers = 4294901760
 script = ExtResource("1_m7w6u")
 

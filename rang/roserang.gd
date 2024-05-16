@@ -45,6 +45,7 @@ var rotate_speed := 3.6
 func _ready():
 	target.roserang_queued = false
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, true)
+	set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, true)
 	initial_throw_angle = petals*cotu.look_angle + initial_throw_angle_offset
 	set_direction()
 	global_position = target.global_position
@@ -79,16 +80,19 @@ func _physics_process(delta):
 			var hit_arena = rose_handle_collision(move_and_collide(vel_vec, true), vel_vec, delta)
 			if hit_arena:
 				set_collision_mask_value(Globals.ARENA_COL_LAYER, true)
+				set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, true)
 				mvmt_state = RICOCHET
 				return
 			global_position = new_pos
 			set_collision_mask_value(Globals.ARENA_COL_LAYER, current_loop_angle < PI/(2*petals))
+			set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, current_loop_angle < PI/(2*petals))
 		RICOCHET:
 			if target.roserang_queued:
 				switch_to_rose()
 			ricochet_handle_collision(move_and_collide(velocity * delta))
 			if current_loop_angle >= PI/(2*petals):
 				set_collision_mask_value(Globals.ARENA_COL_LAYER, false)
+				set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, false)
 				mvmt_state = RETURN
 		RETURN:
 			if target.roserang_queued:
@@ -107,6 +111,7 @@ func buff_self():
 func switch_to_rose():
 	target.roserang_queued = false
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, true)
+	set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, true)
 	mvmt_state = ROSE
 	current_loop_angle = 0
 
@@ -121,13 +126,13 @@ func ricochet(collision):
 	velocity = velocity - 2 * velocity.project(collision.get_normal())
 
 func rose_handle_collision(collision, vel_vec, delta):
-	if collision and collision.get_collider().collision_layer == Globals.ARENA_COL_LAYER:
+	if collision and (collision.get_collider().collision_layer == Globals.ARENA_COL_LAYER or collision.get_collider().collision_layer == Globals.THICK_ENEMY_COL_LAYER):
 		velocity = (1/delta) * (vel_vec - 2 * vel_vec.project(collision.get_normal()))
 		return true
 	return false
 
 func ricochet_handle_collision(collision):
-	if collision and collision.get_collider().collision_layer == Globals.ARENA_COL_LAYER:
+	if collision and (collision.get_collider().collision_layer == Globals.ARENA_COL_LAYER or collision.get_collider().collision_layer == Globals.THICK_ENEMY_COL_LAYER):
 		ricochet(collision)
 
 func get_mvmt_state():

@@ -3,9 +3,13 @@ extends CharacterBody3D
 enum {
 	WAIT,
 	FOLLOW,
-	ATTACK
+	SHORT_DIST_ATTACK,
+	LONG_DIST_ATTACK,
 }
-var behav_state = FOLLOW
+var behav_state := FOLLOW
+var long_dist_wait_remaining := 5.0
+
+@export var max_long_dist_wait := 5.0
 
 @export var aggro_distance := -1
 
@@ -19,6 +23,7 @@ var behav_state = FOLLOW
 
 var aiming_at_target := true
 @export var bullet_speed := 30.0
+@export var fast_bullet_speed := 50.0
 """
 @export var attack_chances = {
 	"big_sweep": .2,
@@ -27,9 +32,17 @@ var aiming_at_target := true
 	"flying_sweep" : .4
 }
 """
-@export var attack_chances = {
+@export var short_dist_attack_chances = {
+	"big_sweep": .2,
 	"big_overhead" : .2,
-	"flying_sweep" : .8
+	"double_sweep" : .2,
+	"flying_sweep" : .4
+}
+
+@export var long_dist_attack_chances = {
+	"big_overhead" : .1,
+	"flying_sweep" : .1,
+	"triple_shot_sweep" : .8
 }
 
 @export var flying_sweep_speed := 20.0
@@ -55,7 +68,7 @@ func _physics_process(delta):
 				print("WAIT")
 			FOLLOW:
 				print("FOLLOW")
-			ATTACK:
+			SHORT_DIST_ATTACK:
 				print("ATTACK")
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -64,8 +77,8 @@ func _physics_process(delta):
 			wait()
 		FOLLOW:
 			follow()
-		ATTACK:
-			attack()
+		SHORT_DIST_ATTACK:
+			short_dist_attack_frame()
 			
 	if global_position.y < -100:
 		queue_free()
@@ -81,8 +94,8 @@ func wait():
 		behav_state = FOLLOW
 
 func _on_navigation_agent_3d_target_reached():
-	if behav_state != ATTACK:
-		start_attack()
+	if behav_state != SHORT_DIST_ATTACK and behav_state != LONG_DIST_ATTACK:
+		start_short_dist_attack()
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	if behav_state == FOLLOW:
@@ -110,23 +123,27 @@ func follow():
 		nav_agent.target_desired_distance = target_distance
 	else:
 		nav_agent.target_desired_distance = .1
+	
+	long_dist_wait_remaining -= get_physics_process_delta_time()
+	if long_dist_wait_remaining <= 0:
+		start_long_dist_attack()
 
-func start_attack():
+func start_short_dist_attack():
 	# Without this await, the animation player would call end_attack at the end of the previous animation on the exact same frame as when the AnimationPlayer.play func is called below. Since an animation was currently in progress, the func call would do nothing, leaving the enemy in ATTACK mode but with no animation playing to free it from ATTACK mode, causing it to stand still indefinitely
 	await get_tree().create_timer(get_process_delta_time()).timeout
 	nav_agent.velocity.x = 0
 	nav_agent.velocity.z = 0
 	velocity.x = 0
 	velocity.z = 0
-	behav_state = ATTACK
+	behav_state = SHORT_DIST_ATTACK
 	aiming_at_target = true
-	animation_player.play(choose_attack())
+	animation_player.play(choose_attack(short_dist_attack_chances))
 
 func end_attack():
 	behav_state = FOLLOW
 	gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-func choose_attack() -> String:
+func choose_attack(attack_chances) -> String:
 	var choice := rng.randf()
 	var cumulative_weight := 0.0
 	for attack in attack_chances:
@@ -135,7 +152,7 @@ func choose_attack() -> String:
 			return attack
 	return attack_chances[0]
 
-func attack():
+func short_dist_attack_frame():
 	if aiming_at_target:
 		lerp_look_at_target(attack_turn_speed)
 	
@@ -147,10 +164,46 @@ func shoot_bullet():
 	level.add_child.call_deferred(bullet_inst)
 	await bullet_inst.tree_entered
 	bullet_inst.global_position = global_position - 2 * Vector3.UP
-	bullet_inst.velocity = bullet_speed * global_position.direction_to(target.global_position)
+	bullet_inst.look_at(target.global_position)
+	bullet_inst.velocity = -bullet_speed * bullet_inst.get_global_transform().basis.z
 	if bullet_inst.velocity.y < 0:
 		bullet_inst.velocity.y = 0
+
+func shoot_triple_shot():
+	var angle := -PI/6
+	for i in range(3):
+		var bullet_inst = bullet.instantiate()
+		level.add_child.call_deferred(bullet_inst)
+		await bullet_inst.tree_entered
+		bullet_inst.global_position = global_position - 2 * Vector3.UP
+		bullet_inst.look_at(target.global_position)
+		bullet_inst.rotate_object_local(Vector3.UP, angle)
+		bullet_inst.velocity = -bullet_speed * bullet_inst.get_global_transform().basis.z
+		if bullet_inst.velocity.y < 0:
+			bullet_inst.velocity.y = 0
+		angle += PI/6
+
+func shoot_fast_bullet():
+	var bullet_inst = bullet.instantiate()
+	level.add_child.call_deferred(bullet_inst)
+	await bullet_inst.tree_entered
+	bullet_inst.global_position = global_position - 2 * Vector3.UP
 	bullet_inst.look_at(target.global_position)
+	bullet_inst.velocity = -fast_bullet_speed * bullet_inst.get_global_transform().basis.z
+	if bullet_inst.velocity.y < 0:
+		bullet_inst.velocity.y = 0
+
+func start_long_dist_attack():
+	# This await might not be necessary, but it's here just in case
+	await get_tree().create_timer(get_process_delta_time()).timeout
+	nav_agent.velocity.x = 0
+	nav_agent.velocity.z = 0
+	velocity.x = 0
+	velocity.z = 0
+	behav_state = LONG_DIST_ATTACK
+	long_dist_wait_remaining = max_long_dist_wait
+	aiming_at_target = true
+	animation_player.play(choose_attack(long_dist_attack_chances))
 
 func start_flying_sweep():
 	gravity = 0

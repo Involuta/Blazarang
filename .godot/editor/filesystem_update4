@@ -49,3 +49,5 @@ res://enemies/enemy_big_melee_base.gd
 res://enemies/first_miniboss.tscn
 res://enemies/first_miniboss.gd
 res://levels/level1section_nodes/first_miniboss_arena.tscn
+res://rang/roserang.gd
+res://globals.gd
