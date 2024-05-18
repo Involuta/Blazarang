@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://brs1weegorsiy"
+path="res://.godot/imported/gauntlet1.map-38a36c57ee0c918a5b21fe1e606b2ea7.tres"
+
+[deps]
+
+source_file="res://level_maps/gauntlet1.map"
+dest_files=["res://.godot/imported/gauntlet1.map-38a36c57ee0c918a5b21fe1e606b2ea7.tres"]
+
+[params]
+

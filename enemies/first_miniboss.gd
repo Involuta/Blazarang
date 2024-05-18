@@ -33,16 +33,18 @@ var aiming_at_target := true
 }
 """
 @export var short_dist_attack_chances = {
-	"big_sweep": .2,
+	"big_sweep": .1,
 	"big_overhead" : .2,
-	"double_sweep" : .2,
-	"flying_sweep" : .4
+	"double_sweep" : .3,
+	"flying_sweep_right" : .2,
+	"flying_sweep_left" : .2
 }
 
 @export var long_dist_attack_chances = {
 	"big_overhead" : .1,
-	"flying_sweep" : .1,
-	"triple_shot_sweep" : .8
+	"flying_sweep_right" : .2,
+	"flying_sweep_left" : .1,
+	"triple_shot_sweep" : .6
 }
 
 @export var flying_sweep_speed := 20.0

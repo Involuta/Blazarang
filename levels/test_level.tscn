@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="1_4wpki"]
 [ext_resource type="Environment" uid="uid://bgusbrajqhj6h" path="res://levels/test_level.tres" id="1_q2fp5"]
 [ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="2_6nbsg"]
-[ext_resource type="PackedScene" uid="uid://bqk1kho3gqsuy" path="res://levels/level1section_nodes/first_miniboss_arena.tscn" id="4_hdjv2"]
+[ext_resource type="PackedScene" uid="uid://cjxdm8v82qb3v" path="res://levels/level1section_nodes/gauntlet_arena1.tscn" id="4_2f8yw"]
 
 [node name="Level" type="Node3D"]
 
@@ -16,4 +16,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.0887, 22.8717, 5.98899)
 [node name="Target" parent="." instance=ExtResource("2_6nbsg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.0174, 12.1305, -21.5556)
 
-[node name="FirstMinibossArena" parent="." instance=ExtResource("4_hdjv2")]
+[node name="GauntletArena1" parent="." instance=ExtResource("4_2f8yw")]

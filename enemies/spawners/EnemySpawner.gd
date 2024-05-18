@@ -9,6 +9,7 @@ var melee_tier1 := preload("res://enemies/enemy_melee_tier1.tscn")
 var melee_tier2 := preload("res://enemies/enemy_melee_tier2.tscn")
 var melee_tier3 := preload("res://enemies/enemy_melee_tier3.tscn")
 var gunner := preload("res://enemies/enemy_mobile_gunner.tscn")
+
 @export var spawning := true
 @export var spawn_cooldown_secs := 7.0
 var spawn_cooldown_active := false

@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dehydc3sj0s0t"]
 
-[ext_resource type="Shader" path="res://glb_inherited_scenes/cotu_outline.gdshader" id="1_bs26j"]
+[ext_resource type="Shader" path="res://shaders/cotu_outline.gdshader" id="1_bs26j"]
 
 [resource]
 render_priority = 1

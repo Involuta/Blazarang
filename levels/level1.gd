@@ -1,7 +1,7 @@
 extends Level
 
 var section_positions = {
-	"GunArena" : Vector3(-95, -50, 0),
+	"GunArena" : Vector3(-20, -50, 0),
 	"HallwayInvasion" : Vector3(0, 10, 0),
 	"FirstMaze" : Vector3(-4, 50, -168),
 	"PillarRoom" : Vector3(37, 101.1, -337.1),

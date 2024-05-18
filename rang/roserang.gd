@@ -35,6 +35,8 @@ const RETURN_ACC := 1.2
 const MAX_RETURN_SPEED := 55
 
 var rapidorbit_script := preload("res://rang/special_rapidorbit.gd")
+var ricochet_particles := preload("res://rang/rang_particles_ricochet.tscn")
+@onready var level := $/root/Level
 @onready var cotu = $/root/Level/cotuCB
 @onready var target = $/root/Level/Target
 @onready var hitbox = $PlayerHitbox
@@ -128,12 +130,21 @@ func ricochet(collision):
 func rose_handle_collision(collision, vel_vec, delta):
 	if collision and (collision.get_collider().collision_layer == Globals.ARENA_COL_LAYER or collision.get_collider().collision_layer == Globals.THICK_ENEMY_COL_LAYER):
 		velocity = (1/delta) * (vel_vec - 2 * vel_vec.project(collision.get_normal()))
+		emit_ricochet_particles(vel_vec)
 		return true
 	return false
 
 func ricochet_handle_collision(collision):
 	if collision and (collision.get_collider().collision_layer == Globals.ARENA_COL_LAYER or collision.get_collider().collision_layer == Globals.THICK_ENEMY_COL_LAYER):
 		ricochet(collision)
+		emit_ricochet_particles(collision.get_normal())
+
+func emit_ricochet_particles(dir):
+	var inst := ricochet_particles.instantiate()
+	level.add_child.call_deferred(inst)
+	await inst.tree_entered
+	inst.global_position = global_position
+	inst.look_at(inst.global_position + dir)
 
 func get_mvmt_state():
 	match(mvmt_state):

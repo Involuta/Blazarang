@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bhbi3rhsatvw4"]
+[gd_scene load_steps=8 format=3 uid="uid://bhbi3rhsatvw4"]
 
 [ext_resource type="PackedScene" uid="uid://sgjt41wnwf3u" path="res://glb_imports/MobileGunner.glb" id="1_yddop"]
+[ext_resource type="Shader" path="res://shaders/black_outline.gdshader" id="2_h4hib"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wfi33"]
 shading_mode = 0
@@ -10,7 +11,14 @@ albedo_color = Color(0, 0, 0, 1)
 shading_mode = 0
 albedo_color = Color(0.686275, 0, 0, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0t15h"]
+render_priority = 0
+shader = ExtResource("2_h4hib")
+shader_parameter/outline_color = null
+shader_parameter/outline_width = 3.0
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3hedu"]
+next_pass = SubResource("ShaderMaterial_0t15h")
 diffuse_mode = 3
 specular_mode = 2
 albedo_color = Color(0, 0.223529, 1, 1)

@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cep17rebnochq"]
+[gd_scene load_steps=8 format=3 uid="uid://cep17rebnochq"]
 
 [ext_resource type="PackedScene" uid="uid://dl3aod8or2pkj" path="res://glb_imports/StationaryGunner.glb" id="1_4jgyl"]
+[ext_resource type="Shader" path="res://shaders/black_outline.gdshader" id="2_wwv1a"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rjcpd"]
 shading_mode = 0
@@ -10,7 +11,14 @@ albedo_color = Color(0, 0, 0, 1)
 shading_mode = 0
 albedo_color = Color(0.686275, 0, 0, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_laru6"]
+render_priority = 0
+shader = ExtResource("2_wwv1a")
+shader_parameter/outline_color = null
+shader_parameter/outline_width = 3.0
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lmvdm"]
+next_pass = SubResource("ShaderMaterial_laru6")
 diffuse_mode = 3
 specular_mode = 2
 albedo_color = Color(0.482353, 0.207843, 0.898039, 1)

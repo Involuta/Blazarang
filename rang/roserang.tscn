@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://hitbox.gd" id="2_1xumc"]
 [ext_resource type="Script" path="res://rang/destroy_on_cotu_hit.gd" id="3_o7i4w"]
 [ext_resource type="Script" path="res://rang/rang_trail.gd" id="5_q4hkp"]
-[ext_resource type="PackedScene" uid="uid://xsh6t6rpr2st" path="res://rang/rang_particles.tscn" id="6_44m4u"]
+[ext_resource type="PackedScene" uid="uid://xsh6t6rpr2st" path="res://rang/rang_particles_base.tscn" id="6_44m4u"]
 [ext_resource type="PackedScene" uid="uid://dd1bl11ajhe0s" path="res://glb_inherited_scenes/boomerang.tscn" id="6_c0jd5"]
 [ext_resource type="Shader" uid="uid://dkll861wc3rxd" path="res://rang/roserang_shader.tres" id="7_j3iaw"]
 
@@ -74,7 +74,7 @@ light_bake_mode = 0
 omni_range = 7.0
 omni_shadow_mode = 0
 
-[node name="RangParticles" parent="." instance=ExtResource("6_44m4u")]
+[node name="RangParticlesBase" parent="." instance=ExtResource("6_44m4u")]
 
 [node name="Trail" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.08, -5.33137e-32, 2.33048e-39, 3.64338e-44, -3.49691e-09, -0.08, 5.33137e-32, 0.08, -3.49691e-09, -0.0117334, 1.89288e-12, 0.000465304)

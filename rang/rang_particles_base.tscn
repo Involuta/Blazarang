@@ -25,7 +25,7 @@ shading_mode = 0
 material = SubResource("StandardMaterial3D_cfr1q")
 size = Vector2(0.2, 0.2)
 
-[node name="RangParticles" type="Node3D"]
+[node name="RangParticlesBase" type="Node3D"]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 amount = 20

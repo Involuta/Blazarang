@@ -1,13 +1,17 @@
 extends Level
 
 var spawning_enemies := false
+var trapdoor_active := false
 
 @export var default_gravity_multiplier = 1.5
 @export var gfield_gravity_multiplier = -.5
 @onready var trapdoor = $NavigationRegion3D/Trapdoor
 
+func _on_miniboss_tree_exited():
+	trapdoor_active = true
+
 func _physics_process(_delta):
-	if cotu.global_position.y > trapdoor.global_position.y + 3:
+	if trapdoor_active and cotu.global_position.y > trapdoor.global_position.y + 3:
 		trapdoor.collision_layer = Globals.ARENA_COL_LAYER
 
 func start_spawning_enemies():

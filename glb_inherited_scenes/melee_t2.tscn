@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bsrvb25fuh6xo"]
+[gd_scene load_steps=7 format=3 uid="uid://bsrvb25fuh6xo"]
 
 [ext_resource type="PackedScene" uid="uid://yh7p6sjogusj" path="res://glb_imports/MeleeT2.glb" id="1_ma3ik"]
+[ext_resource type="Shader" path="res://shaders/black_outline.gdshader" id="2_vqqjy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3gytm"]
 shading_mode = 0
@@ -10,7 +11,14 @@ albedo_color = Color(0, 0, 0, 1)
 shading_mode = 0
 albedo_color = Color(0.686275, 0, 0, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2f4re"]
+render_priority = 0
+shader = ExtResource("2_vqqjy")
+shader_parameter/outline_color = null
+shader_parameter/outline_width = 3.0
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5v0xg"]
+next_pass = SubResource("ShaderMaterial_2f4re")
 diffuse_mode = 3
 specular_mode = 2
 albedo_color = Color(0.87451, 0, 0.698039, 1)

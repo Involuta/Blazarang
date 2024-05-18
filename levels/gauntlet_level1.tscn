@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=3 uid="uid://by6rgqxfg3vwp"]
+
+[ext_resource type="Script" path="res://levels/gauntlet_level1.gd" id="1_g21b3"]
+[ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="2_cdmya"]
+[ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="3_susk6"]
+[ext_resource type="PackedScene" uid="uid://cjxdm8v82qb3v" path="res://levels/level1section_nodes/gauntlet_arena1.tscn" id="4_y1q14"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2oney"]
+sky_top_color = Color(0.0196078, 0, 0.172549, 1)
+sky_horizon_color = Color(0.00392157, 0, 0.0745098, 1)
+ground_bottom_color = Color(0.00392157, 0, 0.0666667, 1)
+ground_horizon_color = Color(0.00392157, 0, 0.0745098, 1)
+
+[sub_resource type="Sky" id="Sky_xpqqj"]
+sky_material = SubResource("ProceduralSkyMaterial_2oney")
+
+[sub_resource type="Environment" id="Environment_vgqir"]
+background_mode = 1
+background_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+sky = SubResource("Sky_xpqqj")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Level" type="Node3D"]
+script = ExtResource("1_g21b3")
+
+[node name="cotuCB" parent="." instance=ExtResource("2_cdmya")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
+
+[node name="Target" parent="." instance=ExtResource("3_susk6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vgqir")
+
+[node name="GauntletArena1" parent="." instance=ExtResource("4_y1q14")]

@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://ufb8ku6arnop"
+path="res://.godot/imported/gauntlet_arena1.map-fa06a231d3b09832b0b1a728e5a6376e.tres"
+
+[deps]
+
+source_file="res://level_maps/gauntlet_arena1.map"
+dest_files=["res://.godot/imported/gauntlet_arena1.map-fa06a231d3b09832b0b1a728e5a6376e.tres"]
+
+[params]
+
