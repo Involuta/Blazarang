@@ -1,39 +1,97 @@
 extends Level
 
-var secs_before_difficulty_increase := 25.0
 var spin_speed := .25
 
-var sequence_begun := false
-
 @onready var spawner_spinner := $SpawnerSpinner
-@onready var spawner1 := $SpawnerSpinner/EnemySpawner1
-@onready var spawner2 := $SpawnerSpinner/EnemySpawner2
-@onready var spawner3 := $SpawnerSpinner/EnemySpawner3
-@onready var spawner4 := $SpawnerSpinner/EnemySpawner4
+@onready var ss1 := $SpawnerSpinner/EnemySpawner1
+@onready var ss2 := $SpawnerSpinner/EnemySpawner2
+@onready var ss3 := $SpawnerSpinner/EnemySpawner3
+@onready var ss4 := $SpawnerSpinner/EnemySpawner4
+
+@onready var ps1 := $PillarSpawners/EnemySpawner1
+@onready var ps2 := $PillarSpawners/EnemySpawner2
+@onready var ps3 := $PillarSpawners/EnemySpawner3
+@onready var ps4 := $PillarSpawners/EnemySpawner4
+
+var sequence_begun := false
+var wave_1_duration := 0
+var wave_2_duration := 25
 
 func _ready():
-	increase_difficulty_after_delay()
-
-func increase_difficulty_after_delay():
-	await get_tree().create_timer(secs_before_difficulty_increase).timeout
-	spawner1.enemy_chances = {
-		"MELEE_TIER1": .8,
-		"GUNNER" : .2
-	}
-	spawner1.spawn_cooldown_secs = 5
-	spawner2.spawn_cooldown_secs = 7
-	spawner3.spawn_cooldown_secs = 6
-	spawner4.spawn_cooldown_secs = 7
-
-func begin_sequence():
-	sequence_begun = true
-	spawner1.spawning = true
-	spawner2.spawning = true
-	spawner3.spawning = true
-	spawner4.spawning = true
+	pass
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("Special") and not sequence_begun:
 		begin_sequence()
 	if sequence_begun:
 		spawner_spinner.rotate_y(spin_speed * delta)
+
+func begin_sequence():
+	sequence_begun = true
+	if (wave_1_duration > 0):
+		rnb()
+		await get_tree().create_timer(wave_1_duration).timeout
+	if (wave_2_duration > 0):
+		gang()
+		await get_tree().create_timer(wave_2_duration).timeout
+
+func rnb():
+	ss1.spawning = true
+	ss2.spawning = true
+	ss3.spawning = true
+	ss4.spawning = true
+	ss1.enemy_chances = {
+		"MELEE_TIER1": 1,
+		"MOBILE_GUNNER" : 0
+	}
+	ss1.spawn_cooldown_secs = 8
+	ss2.enemy_chances = {
+		"MELEE_TIER1": .5,
+		"MOBILE_GUNNER" : .5
+	}
+	ss2.spawn_cooldown_secs = 8
+	ss3.enemy_chances = {
+		"MELEE_TIER1": .8,
+		"MOBILE_GUNNER" : .2
+	}
+	ss3.spawn_cooldown_secs = 8
+	ss4.enemy_chances = {
+		"MELEE_TIER1": .8,
+		"MOBILE_GUNNER" : .2
+	}
+	ss4.spawn_cooldown_secs = 8
+
+func gang():
+	ss1.spawning = true
+	ss2.spawning = true
+	ss3.spawning = true
+	ss4.spawning = false
+	ss1.enemy_chances = {
+		"MELEE_TIER1": 1,
+	}
+	ss1.spawn_cooldown_secs = 6
+	ss2.enemy_chances = {
+		"MELEE_TIER2": 1,
+	}
+	ss2.spawn_cooldown_secs = 12
+	ss3.enemy_chances = {
+		"STATIONARY_GUNNER": 1,
+	}
+	ss3.spawn_cooldown_secs = 7
+	
+	ps1.spawning = true
+	ps2.spawning = true
+	ps3.spawning = true
+	ps4.spawning = false
+	ps1.enemy_chances = {
+		"MELEE_TIER1": 1
+	}
+	ps1.spawn_cooldown_secs = 17
+	ps2.enemy_chances = {
+		"MELEE_TIER2" : 2,
+	}
+	ps2.spawn_cooldown_secs = 12
+	ps3.enemy_chances = {
+		"MELEE_TIER3" : 1
+	}
+	ps3.spawn_cooldown_secs = 12

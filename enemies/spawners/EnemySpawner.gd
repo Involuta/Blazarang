@@ -8,14 +8,15 @@ var melee_base := preload("res://enemies/enemy_melee_base.tscn")
 var melee_tier1 := preload("res://enemies/enemy_melee_tier1.tscn")
 var melee_tier2 := preload("res://enemies/enemy_melee_tier2.tscn")
 var melee_tier3 := preload("res://enemies/enemy_melee_tier3.tscn")
-var gunner := preload("res://enemies/enemy_mobile_gunner.tscn")
+var mobile_gunner := preload("res://enemies/enemy_mobile_gunner.tscn")
+var stationary_gunner := preload("res://enemies/enemy_stationary_gunner.tscn")
 
 @export var spawning := true
 @export var spawn_cooldown_secs := 7.0
 var spawn_cooldown_active := false
 @export var enemy_chances = {
 	"MELEE_TIER1": .66,
-	"GUNNER" : .33
+	"MOBILE_GUNNER" : .33
 }
 
 func _ready():
@@ -54,8 +55,10 @@ func spawn_from_name(enemy_name):
 			return melee_tier2.instantiate()
 		"MELEE_TIER3":
 			return melee_tier3.instantiate()
-		"GUNNER":
-			return gunner.instantiate()
+		"MOBILE_GUNNER":
+			return mobile_gunner.instantiate()
+		"STATIONARY_GUNNER":
+			return stationary_gunner.instantiate()
 		"default":
 			print("Error: attempted to spawn unknown enemy")
 			return melee_tier1.instantiate()
