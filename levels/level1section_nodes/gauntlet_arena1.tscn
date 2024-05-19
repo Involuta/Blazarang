@@ -94,6 +94,7 @@ size = Vector3(5, 10, 5)
 
 [node name="GauntletArena1" type="Node3D"]
 script = ExtResource("1_6pym5")
+lockonable_limit = 30
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)

@@ -14,8 +14,10 @@ var spin_speed := .25
 @onready var ps4 := $PillarSpawners/EnemySpawner4
 
 var sequence_begun := false
-var wave_1_duration := 0
+var wave_1_duration := 25
 var wave_2_duration := 25
+var wave_3_duration := 8
+var wave_4_duration := 25
 
 func _ready():
 	pass
@@ -34,6 +36,12 @@ func begin_sequence():
 	if (wave_2_duration > 0):
 		gang()
 		await get_tree().create_timer(wave_2_duration).timeout
+	if (wave_3_duration > 0):
+		surprise_swarm()
+		await get_tree().create_timer(wave_3_duration).timeout
+	if (wave_4_duration > 0):
+		gang()
+		await get_tree().create_timer(wave_4_duration).timeout
 
 func rnb():
 	ss1.spawning = true
@@ -42,24 +50,23 @@ func rnb():
 	ss4.spawning = true
 	ss1.enemy_chances = {
 		"MELEE_TIER1": 1,
-		"MOBILE_GUNNER" : 0
 	}
-	ss1.spawn_cooldown_secs = 8
+	ss1.spawn_cooldown_secs = 7
 	ss2.enemy_chances = {
 		"MELEE_TIER1": .5,
 		"MOBILE_GUNNER" : .5
 	}
-	ss2.spawn_cooldown_secs = 8
+	ss2.spawn_cooldown_secs = 7
 	ss3.enemy_chances = {
 		"MELEE_TIER1": .8,
 		"MOBILE_GUNNER" : .2
 	}
-	ss3.spawn_cooldown_secs = 8
+	ss3.spawn_cooldown_secs = 7
 	ss4.enemy_chances = {
 		"MELEE_TIER1": .8,
 		"MOBILE_GUNNER" : .2
 	}
-	ss4.spawn_cooldown_secs = 8
+	ss4.spawn_cooldown_secs = 7
 
 func gang():
 	ss1.spawning = true
@@ -95,3 +102,30 @@ func gang():
 		"MELEE_TIER3" : 1
 	}
 	ps3.spawn_cooldown_secs = 12
+
+func surprise_swarm():
+	ss1.spawning = true
+	ss2.spawning = true
+	ss3.spawning = true
+	ss4.spawning = true
+	ss1.enemy_chances = {
+		"MELEE_TIER1" : 1,
+	}
+	ss1.spawn_cooldown_secs = 1
+	ss2.enemy_chances = {
+		"MELEE_TIER1" : 1,
+	}
+	ss2.spawn_cooldown_secs = 1
+	ss3.enemy_chances = {
+		"MELEE_TIER1" : 1,
+	}
+	ss3.spawn_cooldown_secs = 1
+	ss4.enemy_chances = {
+		"MELEE_TIER1" : .5,
+		"MOBILE_GUNNER" : .5
+	}
+	ss4.spawn_cooldown_secs = 1
+	ps1.spawning = false
+	ps2.spawning = false
+	ps3.spawning = false
+	ps4.spawning = false

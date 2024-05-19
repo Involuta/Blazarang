@@ -47,3 +47,5 @@ res://textures/white_border_black_center.tres
 res://textures/small_solid_black.tres
 res://enemies/enemy_melee_tier1.tscn
 res://enemies/spawners/EnemySpawner.tscn
+res://enemies/enemy_big_melee_tier1.tscn
+res://enemies/enemy_melee_tier2.tscn
