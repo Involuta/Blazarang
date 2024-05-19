@@ -44,6 +44,7 @@ size = Vector2(0.2, 0.2)
 [node name="RangParticlesBase" type="Node3D"]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+cast_shadow = 0
 amount = 20
 lifetime = 0.3
 process_material = SubResource("ParticleProcessMaterial_lrenx")

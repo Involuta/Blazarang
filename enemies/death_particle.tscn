@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dsjvw30b8ljn2"]
 
-[ext_resource type="Script" path="res://DisappearRB.gd" id="1_c8ixl"]
+[ext_resource type="Script" path="res://DisappearRB.gd" id="1_jlqkh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1wsws"]
 shading_mode = 0
@@ -17,9 +17,10 @@ size = Vector3(0.25, 0.25, 0.25)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 collision_layer = 4
 collision_mask = 18
-script = ExtResource("1_c8ixl")
+script = ExtResource("1_jlqkh")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+cast_shadow = 0
 gi_mode = 0
 mesh = SubResource("BoxMesh_pbxte")
 

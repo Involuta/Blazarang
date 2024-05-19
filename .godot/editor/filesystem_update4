@@ -49,3 +49,5 @@ res://enemies/enemy_melee_tier1.tscn
 res://enemies/spawners/EnemySpawner.tscn
 res://enemies/enemy_big_melee_tier1.tscn
 res://enemies/enemy_melee_tier2.tscn
+res://enemies/enemy_mega_bullet.tscn
+res://enemies/enemy_bullet.tscn

@@ -35,6 +35,7 @@ size = Vector2(0.2, 0.2)
 script = ExtResource("1_ywrvr")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+cast_shadow = 0
 amount = 16
 explosiveness = 1.0
 trail_enabled = true

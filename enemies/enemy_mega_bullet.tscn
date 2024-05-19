@@ -31,6 +31,7 @@ damage = 30
 shape = SubResource("CapsuleShape3D_qwteq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="EnemyHitbox"]
+cast_shadow = 0
 gi_mode = 0
 visibility_range_end = 100.0
 mesh = SubResource("CapsuleMesh_0osf0")

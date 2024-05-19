@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dqdba8l6potq1"]
+[gd_scene load_steps=16 format=3 uid="uid://dqdba8l6potq1"]
 
 [ext_resource type="Script" path="res://rang/roserang.gd" id="1_m7w6u"]
 [ext_resource type="Script" path="res://hitbox.gd" id="2_1xumc"]
@@ -28,14 +28,21 @@ radius = 2.0
 height = 0.2
 radius = 2.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d7mak"]
+render_priority = 0
+shader = ExtResource("7_j3iaw")
+shader_parameter/ColorParameter = Color(1, 0, 1, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54f1v"]
+next_pass = SubResource("ShaderMaterial_d7mak")
 transparency = 1
 blend_mode = 1
 cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
+disable_receive_shadows = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vop3h"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b7u3l"]
 render_priority = 0
 shader = ExtResource("7_j3iaw")
 shader_parameter/ColorParameter = Color(1, 1, 1, 1)
@@ -79,6 +86,7 @@ omni_shadow_mode = 0
 [node name="Trail" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.08, -5.33137e-32, 2.33048e-39, 3.64338e-44, -3.49691e-09, -0.08, 5.33137e-32, 0.08, -3.49691e-09, -0.0117334, 1.89288e-12, 0.000465304)
 material_override = SubResource("StandardMaterial3D_54f1v")
+cast_shadow = 0
 skeleton = NodePath("")
 script = ExtResource("5_q4hkp")
 start_width = 12.0
@@ -91,7 +99,8 @@ end_color = Color(0, 0, 0.788235, 1)
 transform = Transform3D(-1.73645e-09, -0.023, -3.4729e-09, -0.023, 1.73645e-09, 2.01072e-09, -2.01072e-09, 3.4729e-09, -0.023, -0.236768, 0, 0)
 
 [node name="Boomerang3DModelV1" parent="boomerang" index="0"]
-surface_material_override/0 = SubResource("ShaderMaterial_vop3h")
+cast_shadow = 0
+surface_material_override/0 = SubResource("ShaderMaterial_b7u3l")
 
 [connection signal="body_entered" from="CotuCollider" to="CotuCollider" method="_on_body_entered"]
 

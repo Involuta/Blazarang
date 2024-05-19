@@ -43,6 +43,8 @@ var ricochet_particles := preload("res://rang/rang_particles_ricochet.tscn")
 @onready var mesh = $boomerang
 @onready var trail = $Trail
 @onready var base_particle_gradient = $RangParticlesBase/GPUParticles3D.process_material.color_ramp.gradient
+@onready var rang_glow_shader = $boomerang/Boomerang3DModelV1.get_surface_override_material(0)
+@onready var trail_glow_shader = $Trail.material_override.next_pass
 
 @export var rotate_speed := 3.6
 @export var rose_trail_color := Color(1,0,.8)
@@ -97,8 +99,12 @@ func _physics_process(delta):
 			trail.end_color = rose_trail_color if current_loop_angle < PI/(2*petals) else return_trail_color
 			if current_loop_angle < PI/(2*petals):
 				base_particle_gradient.set_color(1, rose_trail_color)
+				rang_glow_shader.set_shader_parameter("ColorParameter", rose_trail_color)
+				trail_glow_shader.set_shader_parameter("ColorParameter", rose_trail_color)
 			else:
 				base_particle_gradient.set_color(1, return_trail_color)
+				rang_glow_shader.set_shader_parameter("ColorParameter", return_trail_color)
+				trail_glow_shader.set_shader_parameter("ColorParameter", return_trail_color)
 		RICOCHET:
 			if target.roserang_queued:
 				switch_to_rose()
@@ -108,6 +114,8 @@ func _physics_process(delta):
 				set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, false)
 				trail.end_color = return_trail_color
 				base_particle_gradient.set_color(1, return_trail_color)
+				rang_glow_shader.set_shader_parameter("ColorParameter", return_trail_color)
+				trail_glow_shader.set_shader_parameter("ColorParameter", return_trail_color)
 				mvmt_state = RETURN
 		RETURN:
 			if target.roserang_queued:
@@ -138,6 +146,8 @@ func switch_to_rose():
 	set_direction()
 	trail.end_color = rose_trail_color
 	base_particle_gradient.set_color(1, rose_trail_color)
+	rang_glow_shader.set_shader_parameter("ColorParameter", rose_trail_color)
+	trail_glow_shader.set_shader_parameter("ColorParameter", rose_trail_color)
 
 func ricochet(collision):
 	velocity = velocity - 2 * velocity.project(collision.get_normal())
@@ -148,6 +158,8 @@ func rose_handle_collision(collision, vel_vec, delta):
 		emit_ricochet_particles(vel_vec)
 		trail.end_color = ricochet_trail_color
 		base_particle_gradient.set_color(1, ricochet_trail_color)
+		rang_glow_shader.set_shader_parameter("ColorParameter", ricochet_trail_color)
+		trail_glow_shader.set_shader_parameter("ColorParameter", ricochet_trail_color)
 		return true
 	return false
 
