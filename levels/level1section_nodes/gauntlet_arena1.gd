@@ -13,14 +13,22 @@ var spin_speed := .25
 @onready var ps3 := $PillarSpawners/EnemySpawner3
 @onready var ps4 := $PillarSpawners/EnemySpawner4
 
+var pillars := []
+var pillar_raised_height := 4
+var pillar_floor_height := -5
+var pillar_transition_duration := 5
+var pillars_raised := true
+
 var sequence_begun := false
 var wave_1_duration := 25
 var wave_2_duration := 25
 var wave_3_duration := 8
 var wave_4_duration := 25
+var wave_5_duration := 500
 
 func _ready():
-	pass
+	for i in range(4):
+		pillars.append(get_node("NavigationRegion3D/Pillar"+str(i+1)))
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("Special") and not sequence_begun:
@@ -28,10 +36,35 @@ func _physics_process(delta):
 	if sequence_begun:
 		spawner_spinner.rotate_y(spin_speed * delta)
 
+func raise_pillars():
+	if not pillars_raised:
+		pillars_raised = true
+		var tweens := []
+		for i in range(4):
+			tweens.append(create_tween())
+			tweens[i].tween_property(
+				pillars[i], 
+				"position", 
+				Vector3(pillars[i].position.x, pillar_raised_height, pillars[i].position.z), 
+				pillar_transition_duration)
+
+func lower_pillars():
+	if pillars_raised:
+		pillars_raised = false
+		var tweens := []
+		for i in range(4):
+			tweens.append(create_tween())
+			tweens[i].tween_property(
+				pillars[i], 
+				"position", 
+				Vector3(pillars[i].position.x, pillar_floor_height, pillars[i].position.z), 
+				pillar_transition_duration)
+
 func begin_sequence():
 	sequence_begun = true
 	if (wave_1_duration > 0):
-		rnb()
+		#rnb()
+		miniboss()
 		await get_tree().create_timer(wave_1_duration).timeout
 	if (wave_2_duration > 0):
 		gang()
@@ -42,8 +75,12 @@ func begin_sequence():
 	if (wave_4_duration > 0):
 		gang()
 		await get_tree().create_timer(wave_4_duration).timeout
+	if (wave_5_duration > 0):
+		miniboss()
+		await get_tree().create_timer(wave_4_duration).timeout
 
 func rnb():
+	raise_pillars()
 	ss1.spawning = true
 	ss2.spawning = true
 	ss3.spawning = true
@@ -69,6 +106,7 @@ func rnb():
 	ss4.spawn_cooldown_secs = 7
 
 func gang():
+	raise_pillars()
 	ss1.spawning = true
 	ss2.spawning = true
 	ss3.spawning = true
@@ -109,23 +147,44 @@ func surprise_swarm():
 	ss3.spawning = true
 	ss4.spawning = true
 	ss1.enemy_chances = {
-		"MELEE_TIER1" : 1,
+		"MELEE_TIER1" : .8,
+		"MOBILE_GUNNER" : .2
 	}
 	ss1.spawn_cooldown_secs = 1
 	ss2.enemy_chances = {
-		"MELEE_TIER1" : 1,
+		"MELEE_TIER1" : .8,
+		"MOBILE_GUNNER" : .2
 	}
 	ss2.spawn_cooldown_secs = 1
 	ss3.enemy_chances = {
-		"MELEE_TIER1" : 1,
+		"MELEE_TIER1" : .8,
+		"MOBILE_GUNNER" : .2
 	}
 	ss3.spawn_cooldown_secs = 1
 	ss4.enemy_chances = {
-		"MELEE_TIER1" : .5,
-		"MOBILE_GUNNER" : .5
+		"MELEE_TIER1" : .8,
+		"MOBILE_GUNNER" : .2
 	}
 	ss4.spawn_cooldown_secs = 1
 	ps1.spawning = false
 	ps2.spawning = false
 	ps3.spawning = false
 	ps4.spawning = false
+
+func miniboss():
+	lower_pillars()
+	ss1.spawning = false
+	ss2.spawning = false
+	ss3.spawning = false
+	ss4.spawning = false
+	
+	ps1.spawning = false
+	ps2.spawning = false
+	ps3.spawning = false
+	ps4.spawning = false
+	
+	var miniboss_asset := load("res://enemies/first_miniboss.tscn")
+	var mb_inst = miniboss_asset.instantiate()
+	get_parent().add_child.call_deferred(mb_inst)
+	await mb_inst.tree_entered
+	mb_inst.global_position = 30*Vector3.UP

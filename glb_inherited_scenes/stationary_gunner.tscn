@@ -21,8 +21,10 @@ shader_parameter/outline_width = 3.0
 next_pass = SubResource("ShaderMaterial_laru6")
 diffuse_mode = 3
 specular_mode = 2
-albedo_color = Color(0.482353, 0.207843, 0.898039, 1)
+albedo_color = Color(0.4, 0.2, 0.901961, 1)
 roughness = 0.0
+backlight_enabled = true
+backlight = Color(0.2, 0.1, 0.45, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jyh7i"]
 shading_mode = 0
