@@ -47,9 +47,9 @@ var ricochet_particles := preload("res://rang/rang_particles_ricochet.tscn")
 @onready var trail_glow_shader = $Trail.material_override.next_pass
 
 @export var rotate_speed := 3.6
-@export var rose_trail_color := Color(1,0,.8)
-@export var ricochet_trail_color := Color(0,.8,0)
-@export var return_trail_color := Color(0,0,.8)
+@export var rose_color := Color(1,0,.8)
+@export var ricochet_color := Color(0,.8,0)
+@export var return_color := Color(0,0,.8)
 
 func _ready():
 	target.roserang_queued = false
@@ -58,7 +58,7 @@ func _ready():
 	initial_throw_angle = petals*cotu.look_angle + initial_throw_angle_offset
 	set_direction()
 	global_position = target.global_position
-	trail.end_color = rose_trail_color
+	change_color(rose_color)
 
 func set_direction():
 	if cotu.moving_right:
@@ -74,6 +74,12 @@ func rose(delta):
 	radius = max_radius * sin(petals * angle + initial_throw_angle)
 	var angle_vec := Vector2.from_angle(angle)
 	return target.global_position + radius * Vector3(angle_vec.x, 0, angle_vec.y)
+
+func change_color(color: Color):
+	trail.end_color = color
+	base_particle_gradient.set_color(1, color)
+	rang_glow_shader.set_shader_parameter("ColorParameter", color)
+	trail_glow_shader.set_shader_parameter("ColorParameter", color)
 
 func _physics_process(delta):
 	mesh.rotate_y(rotate_speed);
@@ -96,15 +102,10 @@ func _physics_process(delta):
 			global_position = new_pos
 			set_collision_mask_value(Globals.ARENA_COL_LAYER, current_loop_angle < PI/(2*petals))
 			set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, current_loop_angle < PI/(2*petals))
-			trail.end_color = rose_trail_color if current_loop_angle < PI/(2*petals) else return_trail_color
 			if current_loop_angle < PI/(2*petals):
-				base_particle_gradient.set_color(1, rose_trail_color)
-				rang_glow_shader.set_shader_parameter("ColorParameter", rose_trail_color)
-				trail_glow_shader.set_shader_parameter("ColorParameter", rose_trail_color)
+				change_color(rose_color)
 			else:
-				base_particle_gradient.set_color(1, return_trail_color)
-				rang_glow_shader.set_shader_parameter("ColorParameter", return_trail_color)
-				trail_glow_shader.set_shader_parameter("ColorParameter", return_trail_color)
+				change_color(return_color)
 		RICOCHET:
 			if target.roserang_queued:
 				switch_to_rose()
@@ -112,10 +113,7 @@ func _physics_process(delta):
 			if current_loop_angle >= PI/(2*petals):
 				set_collision_mask_value(Globals.ARENA_COL_LAYER, false)
 				set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, false)
-				trail.end_color = return_trail_color
-				base_particle_gradient.set_color(1, return_trail_color)
-				rang_glow_shader.set_shader_parameter("ColorParameter", return_trail_color)
-				trail_glow_shader.set_shader_parameter("ColorParameter", return_trail_color)
+				change_color(return_color)
 				mvmt_state = RETURN
 		RETURN:
 			if target.roserang_queued:
@@ -144,10 +142,7 @@ func switch_to_rose():
 	else:
 		initial_throw_angle += rose_switch_angle_offset_left
 	set_direction()
-	trail.end_color = rose_trail_color
-	base_particle_gradient.set_color(1, rose_trail_color)
-	rang_glow_shader.set_shader_parameter("ColorParameter", rose_trail_color)
-	trail_glow_shader.set_shader_parameter("ColorParameter", rose_trail_color)
+	change_color(rose_color)
 
 func ricochet(collision):
 	velocity = velocity - 2 * velocity.project(collision.get_normal())
@@ -156,10 +151,7 @@ func rose_handle_collision(collision, vel_vec, delta):
 	if collision and (collision.get_collider().collision_layer == Globals.ARENA_COL_LAYER or collision.get_collider().collision_layer == Globals.THICK_ENEMY_COL_LAYER):
 		velocity = (1/delta) * (vel_vec - 2 * vel_vec.project(collision.get_normal()))
 		emit_ricochet_particles(vel_vec)
-		trail.end_color = ricochet_trail_color
-		base_particle_gradient.set_color(1, ricochet_trail_color)
-		rang_glow_shader.set_shader_parameter("ColorParameter", ricochet_trail_color)
-		trail_glow_shader.set_shader_parameter("ColorParameter", ricochet_trail_color)
+		change_color(ricochet_color)
 		return true
 	return false
 

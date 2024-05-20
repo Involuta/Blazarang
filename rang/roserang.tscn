@@ -84,7 +84,7 @@ omni_shadow_mode = 0
 [node name="RangParticlesBase" parent="." instance=ExtResource("6_44m4u")]
 
 [node name="Trail" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.08, -5.33137e-32, 2.33048e-39, 3.64338e-44, -3.49691e-09, -0.08, 5.33137e-32, 0.08, -3.49691e-09, -0.0117334, 1.89288e-12, 0.000465304)
+transform = Transform3D(0.08, -2.79029e-17, 2.79029e-17, 2.79029e-17, 0.08, -2.79029e-17, -2.79029e-17, 2.79029e-17, 0.08, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 material_override = SubResource("StandardMaterial3D_54f1v")
 cast_shadow = 0
 skeleton = NodePath("")
