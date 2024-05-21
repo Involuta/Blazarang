@@ -49,7 +49,7 @@ var ricochet_particles := preload("res://rang/rang_particles_ricochet.tscn")
 @export var rotate_speed := 3.6
 @export var rose_color := Color(1,0,.8)
 @export var ricochet_color := Color(0,.8,0)
-@export var return_color := Color(0,0,.8)
+@export var return_color := Color(0,0,1)
 
 func _ready():
 	target.roserang_queued = false

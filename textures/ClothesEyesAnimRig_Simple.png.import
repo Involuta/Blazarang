@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5octifw68ub4"
-path.s3tc="res://.godot/imported/SimpleRig_Simple.png-d1b6885810095b05d36b1e2ea65f0326.s3tc.ctex"
+uid="uid://bcrkkuyx84qnb"
+path.s3tc="res://.godot/imported/ClothesEyesAnimRig_Simple.png-c9ebd5696d7dea6a2329b2c0d6e4664a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://glb_imports/SimpleRig_Simple.png"
-dest_files=["res://.godot/imported/SimpleRig_Simple.png-d1b6885810095b05d36b1e2ea65f0326.s3tc.ctex"]
+source_file="res://textures/ClothesEyesAnimRig_Simple.png"
+dest_files=["res://.godot/imported/ClothesEyesAnimRig_Simple.png-c9ebd5696d7dea6a2329b2c0d6e4664a.s3tc.ctex"]
 
 [params]
 

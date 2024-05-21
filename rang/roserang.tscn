@@ -42,10 +42,10 @@ shading_mode = 0
 vertex_color_use_as_albedo = true
 disable_receive_shadows = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_b7u3l"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e1mob"]
 render_priority = 0
 shader = ExtResource("7_j3iaw")
-shader_parameter/ColorParameter = Color(1, 1, 1, 1)
+shader_parameter/ColorParameter = Color(2, 2, 1, 1)
 
 [node name="Roserang" type="CharacterBody3D"]
 collision_mask = 66
@@ -100,7 +100,7 @@ transform = Transform3D(-1.73645e-09, -0.023, -3.4729e-09, -0.023, 1.73645e-09, 
 
 [node name="Boomerang3DModelV1" parent="boomerang" index="0"]
 cast_shadow = 0
-surface_material_override/0 = SubResource("ShaderMaterial_b7u3l")
+surface_material_override/0 = SubResource("ShaderMaterial_e1mob")
 
 [connection signal="body_entered" from="CotuCollider" to="CotuCollider" method="_on_body_entered"]
 

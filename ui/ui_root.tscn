@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://kl1hpr0grn1v"]
+
+[ext_resource type="PackedScene" uid="uid://daj44qqb6dior" path="res://ui/health_bar.tscn" id="1_k5nv4"]
+[ext_resource type="Script" path="res://ui/ui_root.gd" id="1_s33yg"]
+
+[sub_resource type="Theme" id="Theme_73cwg"]
+
+[node name="UIRoot" type="Control"]
+top_level = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s33yg")
+
+[node name="CotuHealthBar" parent="." instance=ExtResource("1_k5nv4")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 364.0
+offset_bottom = 89.0
+grow_horizontal = 1
+grow_vertical = 1
+theme = SubResource("Theme_73cwg")

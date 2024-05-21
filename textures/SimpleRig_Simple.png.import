@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfbhpwnr6miq2"
-path.s3tc="res://.godot/imported/boomerang_RangTrails1.png-2dd01a26b1b4be1e4c3f7380e5835650.s3tc.ctex"
+uid="uid://b5octifw68ub4"
+path.s3tc="res://.godot/imported/SimpleRig_Simple.png-83a61a6b78b9ddef7c596d91178e8339.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://glb_imports/boomerang_RangTrails1.png"
-dest_files=["res://.godot/imported/boomerang_RangTrails1.png-2dd01a26b1b4be1e4c3f7380e5835650.s3tc.ctex"]
+source_file="res://textures/SimpleRig_Simple.png"
+dest_files=["res://.godot/imported/SimpleRig_Simple.png-83a61a6b78b9ddef7c596d91178e8339.s3tc.ctex"]
 
 [params]
 
