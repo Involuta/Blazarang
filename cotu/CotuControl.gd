@@ -19,6 +19,7 @@ var moving_right := true # Did the player last try to walk right?
 var grounded_speed := 0
 var can_dodge := true
 var is_dodging := false
+var dodge_self_damage := 20.0
 
 var mouse_camera_sensitivity := .001
 var joystick_camera_sensitivity := .1
@@ -35,6 +36,7 @@ var max_cam_dist := 6.0 # dist btwn player and camera when camera's not collidin
 var throw_queued := false
 const INSTANT_RETHROW_SECS := .2 # max possible time btwn player inputting throw and rang hitting Cotu that still cauess an instant rethrow
 var buffs := []
+var throw_self_damage := 20.0
 
 var roserang := preload("res://rang/roserang.tscn")
 var roserang_instance = null
@@ -46,6 +48,8 @@ var roserang_instance = null
 @onready var target := $/root/Level/Target
 @onready var armature := $CotuAnims/Armature
 @onready var anim_tree := $AnimationTree
+@onready var hurtbox := $Hurtbox
+
 const LERP_VAL := .15 # The rate at which lerp funcs change; used for body mvmt animationa
 
 func _ready():
@@ -87,6 +91,9 @@ func _physics_process(delta):
 		velocity.z = lerp(velocity.z, 0.0, LERP_VAL)
 	move_and_slide()
 	
+	# Recovery rate
+	hurtbox.set_fast_recovery_rate(walk_input == Vector2.ZERO and is_on_floor())
+	
 	# Rang Pointer movement; this block must come before the roserang throw bc if you instantiate the rang, then try to look_at(it) on the same frame, look_at will fail
 	if roserang_instance != null:
 		rang_pointer_pivot.look_at(roserang_instance.global_position)
@@ -97,6 +104,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("Throw"):
 		if roserang_instance == null:
 			# Manual throw
+			hurtbox.self_hit(throw_self_damage)
 			throw_rang()
 		elif not throw_queued:
 			start_instant_rethrow_timer()
@@ -181,6 +189,7 @@ func lock_off():
 func step_dodge():
 	can_dodge = false
 	is_dodging = true
+	hurtbox.self_hit(dodge_self_damage)
 	set_collision_mask_value(Globals.ENEMY_COL_LAYER, false)
 	if roserang_instance != null:
 		target.stop_following_cotu()

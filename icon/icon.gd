@@ -9,6 +9,9 @@ var rang_thrown := true # the roserang script has just readied; was the rang thr
 
 @onready var anim_tree = $AnimationTree
 @onready var cotu = $/root/Level/cotuCB
+@onready var cotu_hurtbox = $/root/Level/cotuCB/Hurtbox
+
+@export var icon_self_heal := 18.0
 
 func _ready():
 	pass
@@ -36,6 +39,7 @@ func _on_body_entered(body):
 	if body.name.contains("Roserang") and not body.invincible:
 		if body.get_mvmt_state() != "ROSE":
 			roserang_queued = true
+		cotu_hurtbox.self_heal(icon_self_heal)
 		start_following_cotu()
 		cotu.buff_self()
 		body.buff_self()

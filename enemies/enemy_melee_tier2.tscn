@@ -208,7 +208,7 @@ collision_layer = 8
 collision_mask = 9
 script = ExtResource("2_0r0r6")
 health = 30
-enemy_hitboxes = ["PlayerHitbox"]
+opponent_hitboxes = ["PlayerHitbox"]
 
 [node name="HurtboxCollider" type="CollisionShape3D" parent="EnemyHurtbox"]
 shape = SubResource("CapsuleShape3D_4b6ac")

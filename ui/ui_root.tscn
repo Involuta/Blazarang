@@ -1,9 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://kl1hpr0grn1v"]
+[gd_scene load_steps=3 format=3 uid="uid://kl1hpr0grn1v"]
 
 [ext_resource type="PackedScene" uid="uid://daj44qqb6dior" path="res://ui/health_bar.tscn" id="1_k5nv4"]
 [ext_resource type="Script" path="res://ui/ui_root.gd" id="1_s33yg"]
-
-[sub_resource type="Theme" id="Theme_73cwg"]
 
 [node name="UIRoot" type="Control"]
 top_level = true
@@ -28,4 +26,3 @@ offset_right = 364.0
 offset_bottom = 89.0
 grow_horizontal = 1
 grow_vertical = 1
-theme = SubResource("Theme_73cwg")

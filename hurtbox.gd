@@ -4,8 +4,9 @@ extends Area3D
 var rng := RandomNumberGenerator.new()
 @export var dp_impulse_limit := 5
 @export var dp_count := 5
-@export var health := 100
-@export var enemy_hitboxes := ["default"]
+@export var health := 100.0
+@export var max_health := 100.0
+@export var opponent_hitboxes := ["default"]
 @onready var parent := get_parent()
 @onready var level := $/root/Level
 
@@ -13,7 +14,7 @@ func _ready():
 	area_entered.connect(on_hit)
 
 func on_hit(hitbox):
-	if hitbox.name in enemy_hitboxes:
+	if hitbox.name in opponent_hitboxes:
 		if "is_dodging" in parent:
 			if not parent.is_dodging:
 				receive_hit(hitbox.damage, hitbox.get_parent())
@@ -22,7 +23,7 @@ func on_hit(hitbox):
 		else:
 			receive_hit(hitbox.damage, hitbox.get_parent())
 
-func receive_hit(damage: int, _hitter):
+func receive_hit(damage: float, _hitter):
 	health -= damage
 	if health <= 0:
 		die()

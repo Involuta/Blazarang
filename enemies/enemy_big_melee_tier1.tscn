@@ -339,7 +339,7 @@ radius = 4.0
 collision_layer = 8
 collision_mask = 9
 script = ExtResource("2_qtrs8")
-enemy_hitboxes = ["PlayerHitbox"]
+opponent_hitboxes = ["PlayerHitbox"]
 
 [node name="HurtboxCollider" type="CollisionShape3D" parent="EnemyHurtbox"]
 shape = SubResource("CapsuleShape3D_8dcoa")

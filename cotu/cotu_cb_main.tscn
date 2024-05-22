@@ -182,9 +182,10 @@ states/QuickSpinCW/node = SubResource("AnimationNodeAnimation_8vgq7")
 states/QuickSpinCW/position = Vector2(412.451, 140.017)
 states/Start/position = Vector2(-96.5, 102.836)
 transitions = ["GroundBlendSpace", "AerialEvadeFast", SubResource("AnimationNodeStateMachineTransition_sxmkw"), "AerialEvadeFast", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_nolyx"), "AerialEvadeFast", "FrontTwistFlipFast", SubResource("AnimationNodeStateMachineTransition_nele4"), "FrontTwistFlipFast", "AerialEvadeFast", SubResource("AnimationNodeStateMachineTransition_ahun8"), "GroundBlendSpace", "FrontTwistFlipFast", SubResource("AnimationNodeStateMachineTransition_4n1fb"), "FrontTwistFlipFast", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_w13l8"), "GroundBlendSpace", "QuickSpinCW", SubResource("AnimationNodeStateMachineTransition_3sep5"), "QuickSpinCW", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_6pr6l"), "GroundBlendSpace", "QuickSpinCCW", SubResource("AnimationNodeStateMachineTransition_wuyjb"), "QuickSpinCCW", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_af52k"), "Start", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_vq4bk"), "GroundBlendSpace", "AerialBlendSpace", SubResource("AnimationNodeStateMachineTransition_b57p5"), "AerialBlendSpace", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_pffs7"), "AerialBlendSpace", "AirDodge", SubResource("AnimationNodeStateMachineTransition_c3ntk"), "AirDodge", "AerialBlendSpace", SubResource("AnimationNodeStateMachineTransition_ixnca")]
-graph_offset = Vector2(16.7919, -82.7055)
+graph_offset = Vector2(-54.173, -125.523)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wg7n8"]
+graph_offset = Vector2(-27.84, 78.72)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_auidk")
 nodes/StateMachine/position = Vector2(70, 150)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -224,8 +225,7 @@ skeleton = NodePath("../..")
 [node name="Hurtbox" type="Area3D" parent="."]
 collision_mask = 11
 script = ExtResource("2_fvpfg")
-health = 150
-enemy_hitboxes = ["EnemyHitbox"]
+opponent_hitboxes = ["EnemyHitbox"]
 
 [node name="HurtboxCollider" type="CollisionShape3D" parent="Hurtbox"]
 shape = SubResource("CapsuleShape3D_kxw61")
@@ -238,7 +238,7 @@ active = true
 parameters/StateMachine/conditions/just_dodged = false
 parameters/StateMachine/conditions/just_instant_rethrew = false
 parameters/StateMachine/AerialBlendSpace/blend_position = Vector2(0, 0)
-parameters/StateMachine/GroundBlendSpace/blend_position = Vector2(10.1083, 0.00653601)
+parameters/StateMachine/GroundBlendSpace/blend_position = Vector2(10.097, 0.00217867)
 
 [node name="CotuAnims" parent="." instance=ExtResource("4_gcwfx")]
 

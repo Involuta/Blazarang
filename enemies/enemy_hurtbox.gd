@@ -3,7 +3,7 @@ extends Hurtbox
 
 var death_particle := preload("res://enemies/death_particle.tscn")
 
-func receive_hit(damage: int, hitter):
+func receive_hit(damage: float, hitter):
 	match(parent.name):
 		"EnemyMelee":
 			Globals.award_score(Globals.MELEE_HIT_SCORE)
