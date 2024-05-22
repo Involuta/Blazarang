@@ -852,6 +852,8 @@ radius = 6.0
 collision_layer = 8
 collision_mask = 9
 script = ExtResource("1_qwvcv")
+dp_impulse_limit = 18
+dp_count = 20
 health = 70
 opponent_hitboxes = ["PlayerHitbox"]
 
@@ -879,6 +881,7 @@ shape = SubResource("CapsuleShape3D_henf5")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeleeHitboxPivot/EnemyHitbox"]
 transform = Transform3D(1, -1.62572e-08, -4.69464e-15, -4.73391e-08, 1, -3.90864e-15, 2.95455e-14, -2.14339e-14, 0.999999, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+cast_shadow = 0
 mesh = SubResource("CapsuleMesh_l85qd")
 
 [node name="VisualMesh" parent="." instance=ExtResource("3_a32lo")]

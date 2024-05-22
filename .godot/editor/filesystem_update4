@@ -44,3 +44,4 @@ res://cotu/cotu_cb_main.tscn
 res://icon/icon.gd
 res://cotu/CotuControl.gd
 res://cotu/CotuHurtbox.gd
+res://glb_inherited_scenes/icon_mesh.tscn
