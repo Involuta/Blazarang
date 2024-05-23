@@ -24,7 +24,8 @@ var wave_1_duration := 25
 var wave_2_duration := 25
 var wave_3_duration := 8
 var wave_4_duration := 25
-var wave_5_duration := 500
+var wave_5_duration := 35
+var wave_6_duration := 25
 
 func _ready():
 	for i in range(4):
@@ -77,7 +78,10 @@ func begin_sequence():
 		await get_tree().create_timer(wave_4_duration).timeout
 	if (wave_5_duration > 0):
 		miniboss()
-		await get_tree().create_timer(wave_4_duration).timeout
+		await get_tree().create_timer(wave_5_duration).timeout
+	if (wave_6_duration > 0):
+		gang()
+		await get_tree().create_timer(wave_6_duration).timeout
 
 func rnb():
 	raise_pillars()

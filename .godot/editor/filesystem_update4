@@ -45,3 +45,5 @@ res://icon/icon.gd
 res://cotu/CotuControl.gd
 res://cotu/CotuHurtbox.gd
 res://glb_inherited_scenes/icon_mesh.tscn
+res://levels/level1section_nodes/gauntlet_arena1.gd
+res://ui/ui_root.gd

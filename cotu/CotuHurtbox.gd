@@ -8,15 +8,21 @@ var recovery_rate := .5
 var recovery_delay_remaining := 1.0
 var recovery_active := false
 
+var damage_indicator_value := 100.0
+
 func reset_recovery_delay():
 	recovery_delay_remaining = recovery_delay
 	recovery_active = false
 
 func receive_hit(damage: float, hitter):
+	if recovery_active:
+		damage_indicator_value = health
 	reset_recovery_delay()
 	super(damage, hitter)
 
 func self_hit(damage: float):
+	if recovery_active:
+		damage_indicator_value = health
 	reset_recovery_delay()
 	health -= damage
 	if health <= 0:
@@ -39,3 +45,4 @@ func _physics_process(delta):
 		recovery_active = true
 	if recovery_active and health < max_health:
 		health += recovery_rate
+		damage_indicator_value -= recovery_rate
