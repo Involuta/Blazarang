@@ -126,7 +126,7 @@ func gang():
 	ss3.enemy_chances = {
 		"STATIONARY_GUNNER": 1,
 	}
-	ss3.spawn_cooldown_secs = 7
+	ss3.spawn_cooldown_secs = 9
 	
 	ps1.spawning = true
 	ps2.spawning = true

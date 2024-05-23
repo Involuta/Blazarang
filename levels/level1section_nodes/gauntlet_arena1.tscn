@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cjxdm8v82qb3v"]
+[gd_scene load_steps=24 format=3 uid="uid://cjxdm8v82qb3v"]
 
 [ext_resource type="Script" path="res://levels/level1section_nodes/gauntlet_arena1.gd" id="1_6pym5"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_cpmn6"]
@@ -6,10 +6,7 @@
 [ext_resource type="Material" uid="uid://b7textbwfhsws" path="res://textures/white_border_black_solid_square.tres" id="4_uja4a"]
 [ext_resource type="Material" uid="uid://okww4de1upt5" path="res://textures/white_border_black_center.tres" id="5_lnqcj"]
 [ext_resource type="PackedScene" uid="uid://dro4y6wgais4q" path="res://enemies/spawners/EnemySpawner.tscn" id="5_pqy35"]
-[ext_resource type="Script" path="res://levels/gravity_box.gd" id="6_af73i"]
 [ext_resource type="Shader" path="res://shaders/black_outline.gdshader" id="6_q1wkq"]
-[ext_resource type="PackedScene" uid="uid://hq6vdsq0q3vs" path="res://levels/deloading_trigger.tscn" id="7_iigyt"]
-[ext_resource type="PackedScene" uid="uid://bsvswcktyrda1" path="res://levels/loading_trigger.tscn" id="8_mpl6s"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_om6er"]
 vertices = PackedVector3Array(-26.25, 0.5, -35.5, -35.5, 0.5, -35.5, -35.5, 0.5, -26.25, -35.5, 0.5, -17, -21, 0.5, -17, -21, 0.5, -20.75, -21, 0.5, -20.75, -17, 0.5, -21, -17, 0.5, -35.5, -35.5, 0.5, -26.25, -35.5, 0.5, -17, -21, 0.5, -20.75, -17, 0.5, -35.5, -26.25, 0.5, -35.5, 15, 0.5, -20.75, 17.25, 0.5, -21, 17.25, 0.5, -35.5, 8.5, 0.5, -35.5, -17, 0.5, -35.5, -17, 0.5, -21, -14.75, 0.5, -20.75, -8.5, 0.5, -35.5, -8.5, 0.5, -35.5, -14.75, 0.5, -20.75, -14.75, 0.5, -17, 0, 0.5, -35.5, 15, 0.5, -16.75, 15, 0.5, -20.75, 8.5, 0.5, -35.5, 0, 0.5, -35.5, -14.75, 0.5, -17, 35.5, 0.5, -27.5, 35.5, 0.5, -35.5, 26.25, 0.5, -35.5, 21, 0.5, -21, 21.25, 0.5, -19.25, 35.5, 0.5, -19.5, 17.25, 0.5, -35.5, 17.25, 0.5, -21, 21, 0.5, -21, 26.25, 0.5, -35.5, 17.25, 0.5, -35.5, 21, 0.5, -21, 35.5, 0.5, -19.5, 35.5, 0.5, -27.5, -20, 9.5, -20, -20, 9.5, -16, -16, 9.5, -16, -16, 9.5, -20, 16, 9.5, -20, 16, 9.5, -16, 20, 9.5, -16, 20, 9.5, -20, 21.25, 0.5, -19.25, 21.25, 0.5, -16.75, 35.5, 0.5, -16.5, 35.5, 0.5, -19.5, -35.5, 0.5, 17.25, -21, 0.5, 17.25, -20.75, 0.5, 15, -35.5, 0.5, 8.5, -20.75, 0.5, -14.75, -21, 0.5, -17, -35.5, 0.5, -17, -35.5, 0.5, -8.5, -17, 0.5, -14.75, -20.75, 0.5, -14.75, -35.5, 0.5, -8.5, -35.5, 0.5, 0, -35.5, 0.5, 8.5, -20.75, 0.5, 15, -16.75, 0.5, 15, -17, 0.5, -14.75, -35.5, 0.5, 0, 15, 0.5, -16.75, -14.75, 0.5, -17, -14.75, 0.5, -15.25, 15, 0.5, -15, 15, 0.5, 15.25, 17, 0.5, 15, 17, 0.5, -14.75, -15.25, 0.5, -14.75, -17, 0.5, -14.75, -16.75, 0.5, 15, -15, 0.5, 15, 15, 0.5, 15.25, 17, 0.5, -14.75, 15, 0.5, -15, -14.75, 0.5, -15.25, -15.25, 0.5, -14.75, -15, 0.5, 15, -14.75, 0.5, 17, 15, 0.5, 17, 15, 0.5, 15.25, -15, 0.5, 15, 35.5, 0.5, -16.5, 21.25, 0.5, -16.75, 21.25, 0.5, -15.25, 21, 0.5, 15, 21.25, 0.5, 16.75, 35.5, 0.5, 16.5, 35.5, 0.5, 8.25, 35.5, 0.5, -16.5, 21.25, 0.5, -15.25, 20.75, 0.5, -14.75, 35.5, 0.5, -8.25, 35.5, 0.5, -8.25, 20.75, 0.5, -14.75, 17, 0.5, -14.75, 35.5, 0.5, 0, 17, 0.5, 15, 21, 0.5, 15, 35.5, 0.5, 8.25, 35.5, 0.5, 0, 17, 0.5, -14.75, -20, 9.5, 16, -20, 9.5, 20, -16, 9.5, 20, -16, 9.5, 16, 16, 9.5, 16, 16, 9.5, 20, 20, 9.5, 20, 20, 9.5, 16, 21.25, 0.5, 16.75, 21.25, 0.5, 19.25, 35.5, 0.5, 19.5, 35.5, 0.5, 16.5, -15.25, 0.5, 21.25, -16.75, 0.5, 21.25, -16.5, 0.5, 35.5, 16.5, 0.5, 35.5, 16.75, 0.5, 21.25, 15, 0.5, 21, 8.25, 0.5, 35.5, -14.75, 0.5, 20.75, -15.25, 0.5, 21.25, -16.5, 0.5, 35.5, -8.25, 0.5, 35.5, -14.75, 0.5, 17, -14.75, 0.5, 20.75, -8.25, 0.5, 35.5, 0, 0.5, 35.5, 8.25, 0.5, 35.5, 15, 0.5, 21, 15, 0.5, 17, -14.75, 0.5, 17, 0, 0.5, 35.5, -35.5, 0.5, 26.25, -35.5, 0.5, 35.5, -27.5, 0.5, 35.5, -19.5, 0.5, 35.5, -19.25, 0.5, 21.25, -21, 0.5, 21, -21, 0.5, 21, -21, 0.5, 17.25, -35.5, 0.5, 17.25, -21, 0.5, 21, -35.5, 0.5, 17.25, -35.5, 0.5, 26.25, -27.5, 0.5, 35.5, -19.5, 0.5, 35.5, 27.5, 0.5, 35.5, 35.5, 0.5, 35.5, 35.5, 0.5, 27.5, 35.5, 0.5, 19.5, 21.25, 0.5, 19.25, 21.25, 0.5, 20.75, 20.75, 0.5, 21.25, 19.25, 0.5, 21.25, 19.5, 0.5, 35.5, 35.5, 0.5, 19.5, 21.25, 0.5, 20.75, 20.75, 0.5, 21.25, 19.5, 0.5, 35.5, 27.5, 0.5, 35.5, 35.5, 0.5, 27.5, -19.5, 0.5, 35.5, -16.5, 0.5, 35.5, -16.75, 0.5, 21.25, -19.25, 0.5, 21.25, 16.5, 0.5, 35.5, 19.5, 0.5, 35.5, 19.25, 0.5, 21.25, 16.75, 0.5, 21.25)
@@ -87,10 +84,6 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_1hwq5"]
 material = SubResource("StandardMaterial3D_a7n1w")
 size = Vector3(5, 10, 5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_wyaqd"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_goc6p"]
 
 [node name="GauntletArena1" type="Node3D"]
 script = ExtResource("1_6pym5")
@@ -275,35 +268,9 @@ enemy_chances = {
 "MELEE_TIER1": 0.8
 }
 
-[node name="GravityBox" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.60209e-18, 2, -42.1762)
-collision_layer = 2
-collision_mask = 16
-script = ExtResource("6_af73i")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="GravityBox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-mesh = SubResource("BoxMesh_wyaqd")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="GravityBox"]
-shape = SubResource("BoxShape3D_goc6p")
-
-[node name="DeloadingTrigger" parent="." instance=ExtResource("7_iigyt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0180795, 2.29941, -35.2304)
-node_path_in_level = "FirstMaze"
-
-[node name="LoadingTrigger" parent="." instance=ExtResource("8_mpl6s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0024209, 12.7855, 14.4026)
-resource_path = "res://levels/level1section_nodes/top_gun_battlefield.tscn"
-load_position = Vector3(16, 118, -444)
-load_rotation_y_degrees = -90.0
-node_path_in_level = "TopGunBattlefield"
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.939018, 0.155596, 0.306651, -0.34115, 0.533412, 0.774008, -0.0431389, -0.831421, 0.553965, -3.16012e-30, 25.9766, 0)
 light_color = Color(0.756863, 0.854902, 1, 1)
 light_energy = 1.5
 shadow_enabled = true
 shadow_opacity = 0.5
-
-[connection signal="body_entered" from="GravityBox" to="GravityBox" method="_on_body_entered"]
