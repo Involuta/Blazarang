@@ -1,3 +1,4 @@
+AnimationTree
 ProgressBar
 TextureProgressBar
 MeshInstance3D
@@ -17,7 +18,6 @@ AnimationPlayer
 Trail3D
 Line2D
 Area3D
-AnimationTree
 SpotLight3D
 LightmapGI
 VoxelGI

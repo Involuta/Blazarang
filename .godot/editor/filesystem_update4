@@ -1,4 +1,4 @@
-res://enemies/first_miniboss.tscn
+res://glb_inherited_scenes/melee_t1.tscn
 res://addons/func_godot/textures/default_material.tres
 res://rang/roserang_shader.tres
 res://rang/slash_test.tres
@@ -12,7 +12,8 @@ res://levels/test_level.tres
 res://textures/white_border_black_solid_square.tres
 res://textures/white_border_black_center.tres
 res://shaders/outline_everything.gdshader
-res://enemies/enemy_big_melee_tier1.tscn
+res://enemies/enemy_melee_tier1.tscn
+res://enemies/enemy_melee_base.gd
 res://levels/level1.tscn
 res://levels/test_level.tscn
 res://rang/roserang.tscn
@@ -25,8 +26,7 @@ res://levels/gauntlet_level1.tscn
 res://levels/level1section_nodes/top_gun_battlefield.tscn
 res://levels/level1section_nodes/pillar_room.tscn
 res://enemies/spawners/EnemySpawner.tscn
-res://enemies/enemy_melee_tier1.tscn
-res://glb_inherited_scenes/melee_t1.tscn
+res://enemies/enemy_big_melee_tier1.tscn
 res://enemies/enemy_melee_tier2.tscn
 res://glb_inherited_scenes/melee_t2.tscn
 res://enemies/enemy_melee_tier3.tscn
@@ -41,9 +41,6 @@ res://ui/ui_root.tscn
 res://ui/health_bar.tscn
 res://icon/icon.tscn
 res://cotu/cotu_cb_main.tscn
-res://icon/icon.gd
-res://cotu/CotuControl.gd
-res://cotu/CotuHurtbox.gd
+res://enemies/first_miniboss.tscn
 res://glb_inherited_scenes/icon_mesh.tscn
 res://levels/level1section_nodes/gauntlet_arena1.gd
-res://ui/ui_root.gd

@@ -21,7 +21,8 @@ var aiming_at_target := true
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 @onready var nav_agent = $NavigationAgent3D
-@onready var animation_player = $AnimationPlayer
+@onready var anim_player = $AnimationPlayer
+@onready var anim_tree = $AnimationTree
 @onready var visual_mesh = $VisualMesh
 @onready var target = $/root/Level/Target
 
@@ -91,8 +92,13 @@ func follow():
 func start_attack():
 	behav_state = ATTACK
 	aiming_at_target = true
-	animation_player.play(choose_attack())
+	if anim_tree:
+		choose_attack()
+	else:
+		anim_player.play(choose_attack())
 	await get_tree().create_timer(attack_duration_secs).timeout
+	if anim_tree:
+		anim_tree.set("parameters/StateMachine/conditions/overhead", false)
 	behav_state = FOLLOW
 
 func choose_attack() -> String:
@@ -100,6 +106,8 @@ func choose_attack() -> String:
 	if choice <= sweep_chance:
 		return "sweep"
 	else:
+		if anim_tree:
+			anim_tree.set("parameters/StateMachine/conditions/overhead", true)
 		return "overhead"
 
 func attack():

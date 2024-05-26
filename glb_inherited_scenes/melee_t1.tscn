@@ -1,36 +1,56 @@
 [gd_scene load_steps=7 format=3 uid="uid://cii55ymemjvsq"]
 
-[ext_resource type="PackedScene" uid="uid://d3jfr42uv7agv" path="res://glb_imports/MeleeT1.glb" id="1_aerlh"]
-[ext_resource type="Shader" path="res://shaders/black_outline.gdshader" id="2_kfvig"]
+[ext_resource type="PackedScene" uid="uid://c676sw18ty8mi" path="res://glb_imports/MeleeT1H.glb" id="1_mkjmh"]
+[ext_resource type="Shader" path="res://glb_inherited_scenes/black_outline.gdshader" id="2_7da52"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ivrpb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6qsgf"]
 render_priority = 0
-shader = ExtResource("2_kfvig")
-shader_parameter/outline_color = null
-shader_parameter/outline_width = 3.0
+shader = ExtResource("2_7da52")
+shader_parameter/outline_color = Color(0.607843, 0, 0, 1)
+shader_parameter/outline_width = 2.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gsfc7"]
-next_pass = SubResource("ShaderMaterial_ivrpb")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pgguw"]
+next_pass = SubResource("ShaderMaterial_6qsgf")
 diffuse_mode = 3
 specular_mode = 2
-albedo_color = Color(0.6, 0, 0, 1)
+albedo_color = Color(0.0509804, 0.0509804, 0.0509804, 1)
 roughness = 0.0
-backlight_enabled = true
-backlight = Color(0.6, 0, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j56lm"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w1d2c"]
 shading_mode = 0
-albedo_color = Color(0, 0, 0, 1)
+albedo_color = Color(0.607843, 0, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ysuhn"]
-shading_mode = 0
-albedo_color = Color(0.686275, 0, 0, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ii2jm"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.196078, 0.196078, 0.196078, 1)
+roughness = 0.0
 
-[node name="MeleeT1" instance=ExtResource("1_aerlh")]
+[node name="MeleeT1H" instance=ExtResource("1_mkjmh")]
+transform = Transform3D(-0.11, 3.83666e-17, -9.61651e-09, 3.83666e-17, 0.11, -3.83666e-17, 9.61651e-09, -3.83666e-17, -0.11, 0, 0, 0)
 
-[node name="Body" parent="." index="0"]
-transform = Transform3D(-0.5, 1.74393e-16, -4.37114e-08, 1.74393e-16, 0.5, -1.74393e-16, 4.37114e-08, -1.74393e-16, -0.5, 0, 0, 0)
-lod_bias = 0.5
-surface_material_override/0 = SubResource("StandardMaterial3D_gsfc7")
-surface_material_override/1 = SubResource("StandardMaterial3D_j56lm")
-surface_material_override/2 = SubResource("StandardMaterial3D_ysuhn")
+[node name="Skeleton3D" parent="ControlRig" index="0"]
+bones/6/position = Vector3(3.05176e-05, 2.56255, -0.0376814)
+bones/8/rotation = Quaternion(-0.175583, -0.0102147, -0.0628666, 0.982402)
+bones/9/rotation = Quaternion(2.72647e-08, -5.41212e-08, 0.0425484, 0.999094)
+bones/10/rotation = Quaternion(-0.0011582, 0.0222519, -4.96895e-05, 0.999752)
+bones/12/rotation = Quaternion(-0.175682, 0.00834353, 0.0520515, 0.983035)
+bones/13/rotation = Quaternion(-1.57734e-07, 1.35208e-06, -0.0461411, 0.998935)
+bones/14/rotation = Quaternion(-0.0011589, -0.0182853, 4.73129e-05, 0.999832)
+bones/15/rotation = Quaternion(0.000145502, -0.00528157, -0.999605, 0.0275997)
+bones/15/scale = Vector3(1, 1, 1)
+bones/16/rotation = Quaternion(-0.0404725, 1.2757e-06, -2.87545e-09, 0.999181)
+bones/17/rotation = Quaternion(0.482015, -0.0129903, -0.0190792, 0.875859)
+bones/18/position = Vector3(4.93469e-06, 1.79781, -2.77561e-05)
+bones/19/position = Vector3(3.70393e-06, 0.77421, 7.58466e-06)
+bones/20/rotation = Quaternion(0.00021129, 0.00761335, 0.99959, 0.0275993)
+bones/20/scale = Vector3(1, 1, 1)
+bones/21/rotation = Quaternion(-0.0400033, 4.42255e-07, 6.86308e-08, 0.9992)
+bones/22/rotation = Quaternion(0.477549, 0.0130599, 0.0190715, 0.878301)
+bones/23/position = Vector3(2.06239e-05, 1.78673, 2.50065e-05)
+bones/24/position = Vector3(-7.45436e-06, 0.771728, 7.86776e-06)
+
+[node name="BaseBody_003" parent="ControlRig/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_pgguw")
+surface_material_override/1 = SubResource("StandardMaterial3D_w1d2c")
+surface_material_override/2 = SubResource("StandardMaterial3D_ii2jm")

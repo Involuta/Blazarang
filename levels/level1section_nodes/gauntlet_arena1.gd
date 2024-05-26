@@ -64,8 +64,8 @@ func lower_pillars():
 func begin_sequence():
 	sequence_begun = true
 	if (wave_1_duration > 0):
-		#rnb()
-		miniboss()
+		rnb()
+		#miniboss()
 		await get_tree().create_timer(wave_1_duration).timeout
 	if (wave_2_duration > 0):
 		gang()
