@@ -8,6 +8,20 @@
 [ext_resource type="Shader" uid="uid://dhc6wyqlctr7a" path="res://rang/slash_test.tres" id="6_fvkq5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4b6ac"]
+height = 2.75
+
+[sub_resource type="Animation" id="Animation_gr5k6"]
+resource_name = "idle"
+tracks/0/type = "animation"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VisualMesh/AnimationPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": PackedStringArray("IdleCR"),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="Animation" id="Animation_q1l6b"]
 resource_name = "one_handed_walk"
@@ -210,19 +224,6 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0)
 }
 
-[sub_resource type="Animation" id="Animation_gr5k6"]
-resource_name = "idle"
-tracks/0/type = "animation"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("VisualMesh/AnimationPlayer")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"clips": PackedStringArray("IdleCR"),
-"times": PackedFloat32Array(0)
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2ftbc"]
 _data = {
 "idle": SubResource("Animation_gr5k6"),
@@ -303,6 +304,7 @@ script = ExtResource("1_dwc2x")
 sweep_chance = 2.08165e-12
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 shape = SubResource("CapsuleShape3D_4b6ac")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
@@ -351,34 +353,34 @@ visible = false
 surface_material_override/0 = SubResource("ShaderMaterial_b2801")
 
 [node name="VisualMesh" parent="." instance=ExtResource("6_7rw0y")]
-transform = Transform3D(-0.15, 5.2318e-17, -2.26494e-08, 5.2318e-17, 0.15, -5.2318e-17, 2.26494e-08, -5.2318e-17, -0.15, 2.08165e-12, -0.988, 2.08165e-12)
+transform = Transform3D(-0.15, 5.2318e-17, -2.26494e-08, 5.2318e-17, 0.15, -5.2318e-17, 2.26494e-08, -5.2318e-17, -0.15, 2.08165e-12, -1.35746, 2.08165e-12)
 
 [node name="Skeleton3D" parent="VisualMesh/ControlRig" index="0"]
-bones/0/position = Vector3(0.437186, 7.52973, -0.0988006)
-bones/0/rotation = Quaternion(0.031792, -0.326245, -0.0102611, 0.944695)
-bones/1/rotation = Quaternion(0.173263, 0.0280965, 0.0613553, 0.982561)
-bones/2/rotation = Quaternion(0.0482697, 0.00814771, -0.00385313, 0.998791)
-bones/3/rotation = Quaternion(0.00251506, 0.0226263, 0.0115787, 0.999674)
-bones/4/rotation = Quaternion(-0.148404, 0.021465, -0.0748179, 0.985859)
-bones/5/rotation = Quaternion(-0.0136508, 0.189673, -0.0148221, 0.98164)
-bones/7/rotation = Quaternion(0.678522, 0.369567, -0.429736, 0.467285)
-bones/8/rotation = Quaternion(0.480715, 0.00983186, 0.255956, 0.838632)
-bones/9/rotation = Quaternion(-1.79208e-08, -8.21752e-08, 0.472144, 0.881522)
-bones/10/rotation = Quaternion(-0.00533343, -0.0463286, 0.0242144, 0.998618)
-bones/11/rotation = Quaternion(0.636209, -0.380168, 0.277158, 0.611469)
-bones/12/rotation = Quaternion(0.430445, 0.0720452, -0.306177, 0.846039)
-bones/13/rotation = Quaternion(-7.38037e-07, 1.146e-06, -0.477587, 0.878584)
-bones/14/rotation = Quaternion(-0.0461157, 0.0226523, 0.015467, 0.998558)
-bones/15/rotation = Quaternion(-0.131345, -0.326519, -0.91375, 0.202967)
+bones/0/position = Vector3(0.0755615, 7.7551, -0.292609)
+bones/0/rotation = Quaternion(0.027512, -0.227386, 0.00852021, 0.973379)
+bones/1/rotation = Quaternion(0.173365, -0.0353627, 0.0373879, 0.983512)
+bones/2/rotation = Quaternion(0.0479957, -0.0101504, -3.86014e-05, 0.998796)
+bones/3/rotation = Quaternion(0.00194797, 0.00435975, 0.0150954, 0.999875)
+bones/4/rotation = Quaternion(-0.159523, 0.0216472, -0.0657872, 0.984762)
+bones/5/rotation = Quaternion(-0.0107777, 0.188787, -0.00801741, 0.981926)
+bones/7/rotation = Quaternion(0.67807, 0.370636, -0.430233, 0.466636)
+bones/8/rotation = Quaternion(0.448119, 0.0274097, 0.248518, 0.858299)
+bones/9/rotation = Quaternion(-1.52258e-08, -6.00097e-08, 0.521799, 0.853069)
+bones/10/rotation = Quaternion(-0.011409, -0.0498927, 0.0165732, 0.998552)
+bones/11/rotation = Quaternion(0.63512, -0.386413, 0.285703, 0.604716)
+bones/12/rotation = Quaternion(0.434751, 0.100053, -0.33183, 0.831186)
+bones/13/rotation = Quaternion(-7.27672e-07, 1.13267e-06, -0.459092, 0.888389)
+bones/14/rotation = Quaternion(-0.0464796, 0.0133069, 0.0135453, 0.998739)
+bones/15/rotation = Quaternion(-0.121995, -0.292438, -0.944334, 0.0884875)
 bones/15/scale = Vector3(1, 1, 0.999999)
-bones/16/rotation = Quaternion(-0.316299, 1.21795e-06, 3.32483e-07, 0.948659)
-bones/17/rotation = Quaternion(0.441206, -0.0612707, -0.111608, 0.888328)
-bones/18/rotation = Quaternion(0.359385, -0.156193, 0.0438729, 0.918978)
-bones/20/rotation = Quaternion(-0.000825405, 0.0243189, 0.997748, 0.0624981)
+bones/16/rotation = Quaternion(-0.715384, 9.47245e-07, 8.68529e-07, 0.698732)
+bones/17/rotation = Quaternion(0.604603, -0.00910563, -0.0440641, 0.795255)
+bones/18/rotation = Quaternion(0.332156, -0.139268, 0.0377244, 0.932123)
+bones/20/rotation = Quaternion(0.0806036, -0.265534, -0.958752, 0.0615628)
 bones/20/scale = Vector3(1, 1, 0.999999)
-bones/21/rotation = Quaternion(-0.482822, 3.51884e-07, 2.76807e-07, 0.875719)
-bones/22/rotation = Quaternion(0.767351, 0.0161774, -0.0244194, 0.640558)
-bones/23/rotation = Quaternion(0.397892, 0.177447, -0.0223667, 0.89983)
+bones/21/rotation = Quaternion(-0.485012, 3.89765e-07, 2.50149e-07, 0.874508)
+bones/22/rotation = Quaternion(0.657949, -0.00323418, -0.0824682, 0.748527)
+bones/23/rotation = Quaternion(0.333934, 0.147264, -0.0331222, 0.930432)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_uk78c")

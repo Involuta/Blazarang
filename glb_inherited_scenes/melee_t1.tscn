@@ -1,19 +1,19 @@
 [gd_scene load_steps=7 format=3 uid="uid://cii55ymemjvsq"]
 
 [ext_resource type="PackedScene" uid="uid://c676sw18ty8mi" path="res://glb_imports/MeleeT1H.glb" id="1_mkjmh"]
-[ext_resource type="Shader" path="res://glb_inherited_scenes/black_outline.gdshader" id="2_7da52"]
+[ext_resource type="Shader" path="res://glb_inherited_scenes/outline.gdshader" id="2_ixm25"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6qsgf"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lndga"]
 render_priority = 0
-shader = ExtResource("2_7da52")
+shader = ExtResource("2_ixm25")
 shader_parameter/outline_color = Color(0.607843, 0, 0, 1)
-shader_parameter/outline_width = 2.0
+shader_parameter/outline_width = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pgguw"]
-next_pass = SubResource("ShaderMaterial_6qsgf")
+next_pass = SubResource("ShaderMaterial_lndga")
 diffuse_mode = 3
 specular_mode = 2
-albedo_color = Color(0.0509804, 0.0509804, 0.0509804, 1)
+albedo_color = Color(0.0666667, 0.0666667, 0.0666667, 1)
 roughness = 0.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w1d2c"]
@@ -22,38 +22,28 @@ albedo_color = Color(0.607843, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ii2jm"]
 diffuse_mode = 3
-specular_mode = 2
-albedo_color = Color(0.196078, 0.196078, 0.196078, 1)
-roughness = 0.0
+specular_mode = 1
+albedo_color = Color(0.392157, 0.0588235, 0.0588235, 1)
+roughness = 0.2
 
 [node name="MeleeT1H" instance=ExtResource("1_mkjmh")]
 transform = Transform3D(-0.11, 3.83666e-17, -9.61651e-09, 3.83666e-17, 0.11, -3.83666e-17, 9.61651e-09, -3.83666e-17, -0.11, 0, 0, 0)
 
 [node name="Skeleton3D" parent="ControlRig" index="0"]
-bones/0/position = Vector3(0.0755615, 8.09115, -0.148589)
-bones/0/rotation = Quaternion(0.0285058, -0.0723977, 0.00411381, 0.99696)
-bones/1/rotation = Quaternion(0.0787022, -0.0280086, 0.0541453, 0.995033)
-bones/2/rotation = Quaternion(0.0479957, -0.0101503, -3.85976e-05, 0.998796)
-bones/3/rotation = Quaternion(0.00194796, 0.00435976, 0.0150955, 0.999875)
-bones/4/rotation = Quaternion(-0.0792634, -0.0740116, -0.0682809, 0.991755)
-bones/5/rotation = Quaternion(-0.0107777, 0.188787, -0.00801741, 0.981926)
-bones/7/rotation = Quaternion(0.67807, 0.370636, -0.430233, 0.466636)
-bones/8/rotation = Quaternion(0.467257, 0.0307657, 0.344156, 0.813807)
-bones/9/rotation = Quaternion(1.07836e-08, -5.98968e-08, 0.227081, 0.973876)
-bones/10/rotation = Quaternion(0.112153, 0.0107436, 0.201541, 0.972979)
-bones/11/rotation = Quaternion(0.63512, -0.386413, 0.285703, 0.604716)
-bones/12/rotation = Quaternion(0.448646, 0.00139215, -0.343846, 0.824915)
-bones/13/rotation = Quaternion(-5.13563e-07, 1.27694e-06, -0.304031, 0.952662)
-bones/14/rotation = Quaternion(-0.204635, 0.17817, -0.0768466, 0.959414)
-bones/15/rotation = Quaternion(-0.0557216, -0.244655, -0.966483, 0.0543216)
+bones/8/rotation = Quaternion(-0.175583, -0.0102147, -0.0628666, 0.982402)
+bones/9/rotation = Quaternion(2.72647e-08, -5.41212e-08, 0.0425484, 0.999094)
+bones/10/rotation = Quaternion(-0.0011582, 0.0222519, -4.96895e-05, 0.999752)
+bones/12/rotation = Quaternion(-0.175682, 0.00834353, 0.0520515, 0.983035)
+bones/13/rotation = Quaternion(-1.57734e-07, 1.35208e-06, -0.0461411, 0.998935)
+bones/14/rotation = Quaternion(-0.0011589, -0.0182853, 4.73129e-05, 0.999832)
+bones/15/rotation = Quaternion(0.000145502, -0.00528157, -0.999605, 0.0275997)
 bones/15/scale = Vector3(1, 1, 1)
-bones/16/rotation = Quaternion(-0.336819, 1.22817e-06, 3.72454e-07, 0.94157)
-bones/17/rotation = Quaternion(0.558163, -0.00714545, -0.051339, 0.828111)
-bones/18/rotation = Quaternion(0.332153, -0.139268, 0.037724, 0.932124)
-bones/20/rotation = Quaternion(-0.296231, 0.0688812, 0.948324, 0.0904647)
-bones/21/rotation = Quaternion(-0.353939, 4.24253e-07, 2.08145e-07, 0.935269)
-bones/22/rotation = Quaternion(0.677149, -0.0569537, 0.0874631, 0.728406)
-bones/23/rotation = Quaternion(0.333948, 0.14726, -0.0331324, 0.930428)
+bones/16/rotation = Quaternion(-0.0404725, 1.2757e-06, -2.87545e-09, 0.999181)
+bones/17/rotation = Quaternion(0.482015, -0.0129903, -0.0190792, 0.875859)
+bones/20/rotation = Quaternion(0.00021129, 0.00761335, 0.99959, 0.0275993)
+bones/20/scale = Vector3(1, 1, 1)
+bones/21/rotation = Quaternion(-0.0400033, 4.42255e-07, 6.86308e-08, 0.9992)
+bones/22/rotation = Quaternion(0.477549, 0.0130599, 0.0190715, 0.878301)
 
 [node name="BaseBody_003" parent="ControlRig/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_pgguw")

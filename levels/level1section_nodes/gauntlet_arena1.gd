@@ -191,4 +191,4 @@ func miniboss():
 	var mb_inst = miniboss_asset.instantiate()
 	get_parent().add_child.call_deferred(mb_inst)
 	await mb_inst.tree_entered
-	mb_inst.global_position = 30*Vector3.UP
+	mb_inst.global_position = 30*Vector3.UP - 30*Vector3.FORWARD

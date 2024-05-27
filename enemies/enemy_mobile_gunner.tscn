@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://c8sivx3hx1oy1"]
+[gd_scene load_steps=9 format=3 uid="uid://c8sivx3hx1oy1"]
 
 [ext_resource type="Script" path="res://enemies/enemy_gunner_base.gd" id="1_oxxcx"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_3looh"]
 [ext_resource type="PackedScene" uid="uid://bhbi3rhsatvw4" path="res://glb_inherited_scenes/mobile_gunner.tscn" id="3_n2hhp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_txubl"]
+height = 2.75
 
 [sub_resource type="Animation" id="Animation_i1lri"]
 resource_name = "shoot"
@@ -17,7 +18,7 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.733335),
+"times": PackedFloat32Array(0.833333),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -31,18 +32,36 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.733335),
+"times": PackedFloat32Array(0.833333),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"stop_aiming_at_target"
 }]
 }
+tracks/2/type = "animation"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MobileGunner/AnimationPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": PackedStringArray("FiringRifleCR"),
+"times": PackedFloat32Array(0.733333)
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cvygw"]
 _data = {
 "shoot": SubResource("Animation_i1lri")
 }
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_b8mbx"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_vdhls"]
+graph_offset = Vector2(-177.6, 108.48)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_b8mbx")
+nodes/StateMachine/position = Vector2(70, 150)
+node_connections = [&"output", 0, &"StateMachine"]
 
 [node name="EnemyMobileGunner" type="CharacterBody3D"]
 collision_layer = 8
@@ -74,6 +93,47 @@ libraries = {
 }
 
 [node name="MobileGunner" parent="." instance=ExtResource("3_n2hhp")]
+transform = Transform3D(-0.15, 5.2318e-17, -1.31134e-08, 5.2318e-17, 0.15, -5.2318e-17, 1.31134e-08, -5.2318e-17, -0.15, 0, -1.37032, 0)
+
+[node name="Skeleton3D" parent="MobileGunner/ControlRig" index="0"]
+bones/0/position = Vector3(0.185629, 7.96088, -0.212093)
+bones/0/rotation = Quaternion(-0.11143, -0.348179, -0.0307392, 0.930274)
+bones/1/rotation = Quaternion(0.0658536, -0.00305706, 0.000256868, 0.997825)
+bones/2/rotation = Quaternion(0.142256, -0.00052281, -0.00609455, 0.989811)
+bones/3/rotation = Quaternion(0.142264, -0.00114927, -0.00605328, 0.98981)
+bones/4/rotation = Quaternion(0.0103044, 0.0671857, 0.00479714, 0.997676)
+bones/5/rotation = Quaternion(-0.0377266, 0.196341, 0.0902046, 0.975648)
+bones/6/position = Vector3(0, 2.56255, -0.0376966)
+bones/7/rotation = Quaternion(0.426621, 0.198197, -0.64705, 0.600032)
+bones/8/rotation = Quaternion(0.307069, -0.218129, 0.256027, 0.890269)
+bones/9/rotation = Quaternion(2.60318e-09, -6.23921e-08, 0.546124, 0.837704)
+bones/10/rotation = Quaternion(-0.00893913, 0.008901, 0.00214596, 0.999918)
+bones/11/rotation = Quaternion(0.318478, -0.252592, 0.717525, 0.565621)
+bones/12/rotation = Quaternion(0.397483, -0.232485, -0.509427, 0.72694)
+bones/13/rotation = Quaternion(-1.08588e-06, 7.89533e-07, -0.751435, 0.659807)
+bones/14/rotation = Quaternion(-0.0106836, -0.0106199, -0.00313947, 0.999881)
+bones/15/rotation = Quaternion(-0.273723, -0.134229, -0.942568, 0.136466)
+bones/15/scale = Vector3(1.00001, 1, 1)
+bones/16/rotation = Quaternion(-0.288159, 1.21945e-06, 3.082e-07, 0.957582)
+bones/17/rotation = Quaternion(0.472741, 0.00117742, -0.034222, 0.880536)
+bones/18/position = Vector3(-2.44181e-07, 1.79785, -4.65661e-10)
+bones/18/rotation = Quaternion(0.31098, -0.14967, 0.0516871, 0.937133)
+bones/19/position = Vector3(-1.91852e-07, 0.774226, -1.22935e-07)
+bones/20/rotation = Quaternion(-0.104961, -0.102116, 0.982272, 0.117035)
+bones/20/scale = Vector3(1, 1, 0.999999)
+bones/21/rotation = Quaternion(-0.329832, 3.474e-07, 1.78579e-07, 0.94404)
+bones/22/rotation = Quaternion(0.690971, 0.106105, 0.0716516, 0.711454)
+bones/23/position = Vector3(7.88423e-08, 1.78674, -3.3062e-07)
+bones/23/rotation = Quaternion(0.321784, 0.149713, -0.0504742, 0.933538)
+bones/24/position = Vector3(2.14204e-08, 0.771728, 1.75089e-07)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_vdhls")
+anim_player = NodePath("../AnimationPlayer")
+advance_expression_base_node = NodePath("..")
+active = true
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
+
+[editable path="MobileGunner"]
