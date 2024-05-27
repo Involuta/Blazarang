@@ -51,7 +51,10 @@ var ricochet_particles := preload("res://rang/rang_particles_ricochet.tscn")
 @export var ricochet_color := Color(0,.8,0)
 @export var return_color := Color(0,0,1)
 
+@onready var audio_player := $AudioStreamPlayer3D
+
 func _ready():
+	audio_player.play()
 	target.roserang_queued = false
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, true)
 	set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, true)

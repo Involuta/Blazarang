@@ -44,3 +44,6 @@ res://enemies/first_miniboss.tscn
 res://glb_inherited_scenes/icon_mesh.tscn
 res://enemies/enemy_melee_tier1.tscn
 res://glb_inherited_scenes/mobile_gunner.tscn
+res://default_bus_layout.tres
+res://levels/gauntlet_level1.tscn
+res://levels/gauntlet_level1.gd

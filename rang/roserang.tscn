@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dqdba8l6potq1"]
+[gd_scene load_steps=17 format=3 uid="uid://dqdba8l6potq1"]
 
 [ext_resource type="Script" path="res://rang/roserang.gd" id="1_m7w6u"]
 [ext_resource type="Script" path="res://hitbox.gd" id="2_1xumc"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://xsh6t6rpr2st" path="res://rang/rang_particles_base.tscn" id="6_44m4u"]
 [ext_resource type="PackedScene" uid="uid://dd1bl11ajhe0s" path="res://glb_inherited_scenes/boomerang.tscn" id="6_c0jd5"]
 [ext_resource type="Shader" uid="uid://dkll861wc3rxd" path="res://rang/roserang_shader.tres" id="7_j3iaw"]
+[ext_resource type="AudioStream" uid="uid://bofcw86hxnpyt" path="res://audio/sfx/rain.mp3" id="8_udiut"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cvffx"]
 shading_mode = 0
@@ -101,6 +102,11 @@ transform = Transform3D(-1.73645e-09, -0.023, -3.4729e-09, -0.023, 1.73645e-09, 
 [node name="Boomerang3DModelV1" parent="boomerang" index="0"]
 cast_shadow = 0
 surface_material_override/0 = SubResource("ShaderMaterial_e1mob")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_udiut")
+volume_db = -5.0
+bus = &"SFX"
 
 [connection signal="body_entered" from="CotuCollider" to="CotuCollider" method="_on_body_entered"]
 

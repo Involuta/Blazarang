@@ -1,7 +1,10 @@
+AudioStreamPlayer3D
+AudioStreamPlayer
+MeshInstance3D
+BoneAttachment3D
 AnimationTree
 ProgressBar
 TextureProgressBar
-MeshInstance3D
 CollisionShape3D
 StaticBody3D
 NavigationRegion3D

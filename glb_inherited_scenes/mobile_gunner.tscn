@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bhbi3rhsatvw4"]
+[gd_scene load_steps=9 format=3 uid="uid://bhbi3rhsatvw4"]
 
 [ext_resource type="PackedScene" uid="uid://dh1uc1axpsod1" path="res://glb_imports/MobileGunnerH.glb" id="1_6r20b"]
 [ext_resource type="Shader" path="res://glb_inherited_scenes/black_outline.gdshader" id="2_8c7df"]
@@ -28,31 +28,52 @@ specular_mode = 1
 albedo_color = Color(0.0588235, 0.0588235, 0.392157, 1)
 roughness = 0.2
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u4s0e"]
+shading_mode = 0
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_q12l1"]
+material = SubResource("StandardMaterial3D_u4s0e")
+size = Vector3(1, 5, 1)
+
 [node name="MobileGunnerH" instance=ExtResource("1_6r20b")]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 
 [node name="Skeleton3D" parent="ControlRig" index="0"]
-bones/6/position = Vector3(3.05176e-05, 2.56255, -0.0376814)
-bones/8/rotation = Quaternion(-0.175583, -0.0102147, -0.0628666, 0.982402)
-bones/9/rotation = Quaternion(2.72647e-08, -5.41212e-08, 0.0425484, 0.999094)
-bones/10/rotation = Quaternion(-0.0011582, 0.0222519, -4.96895e-05, 0.999752)
-bones/12/rotation = Quaternion(-0.175682, 0.00834353, 0.0520515, 0.983035)
-bones/13/rotation = Quaternion(-1.57734e-07, 1.35208e-06, -0.0461411, 0.998935)
-bones/14/rotation = Quaternion(-0.0011589, -0.0182853, 4.73129e-05, 0.999832)
-bones/15/rotation = Quaternion(0.000145502, -0.00528157, -0.999605, 0.0275997)
-bones/15/scale = Vector3(1, 1, 1)
-bones/16/rotation = Quaternion(-0.0404725, 1.2757e-06, -2.87545e-09, 0.999181)
-bones/17/rotation = Quaternion(0.482015, -0.0129903, -0.0190792, 0.875859)
-bones/18/position = Vector3(4.93469e-06, 1.79781, -2.77561e-05)
-bones/19/position = Vector3(3.70393e-06, 0.77421, 7.58466e-06)
-bones/20/rotation = Quaternion(0.00021129, 0.00761335, 0.99959, 0.0275993)
-bones/20/scale = Vector3(1, 1, 1)
-bones/21/rotation = Quaternion(-0.0400033, 4.42255e-07, 6.86308e-08, 0.9992)
-bones/22/rotation = Quaternion(0.477549, 0.0130599, 0.0190715, 0.878301)
-bones/23/position = Vector3(2.06239e-05, 1.78673, 2.50065e-05)
-bones/24/position = Vector3(-7.45436e-06, 0.771728, 7.86776e-06)
+bones/0/position = Vector3(0.230043, 8.03069, -0.208209)
+bones/0/rotation = Quaternion(-0.126107, -0.347531, -0.0362669, 0.928442)
+bones/1/rotation = Quaternion(0.055239, -0.0115214, 0.00484888, 0.998393)
+bones/2/rotation = Quaternion(0.143051, -0.00172895, -0.00414104, 0.989705)
+bones/3/rotation = Quaternion(0.142974, -0.00231647, -0.00420133, 0.989714)
+bones/4/rotation = Quaternion(0.0342045, 0.0648914, 0.00904479, 0.997265)
+bones/5/rotation = Quaternion(-0.0379874, 0.18824, 0.0993183, 0.97635)
+bones/7/rotation = Quaternion(0.419518, 0.204426, -0.651423, 0.598216)
+bones/8/rotation = Quaternion(0.341019, -0.230408, 0.260646, 0.873316)
+bones/9/rotation = Quaternion(-1.51064e-06, -1.68143e-06, 0.549489, 0.835501)
+bones/10/rotation = Quaternion(-0.0178727, 0.0147374, 0.00056076, 0.999731)
+bones/11/rotation = Quaternion(0.310307, -0.259177, 0.711339, 0.574921)
+bones/12/rotation = Quaternion(0.387606, -0.224864, -0.523586, 0.724607)
+bones/13/rotation = Quaternion(1.90159e-06, -1.10144e-06, -0.763693, 0.64558)
+bones/14/rotation = Quaternion(0.00418735, -0.0198524, 0.00597147, 0.999776)
+bones/15/rotation = Quaternion(-0.265678, -0.137828, -0.9457, 0.126767)
+bones/16/rotation = Quaternion(-0.295288, 1.70393e-06, 3.51344e-07, 0.955408)
+bones/17/rotation = Quaternion(0.476505, 0.0321076, -0.0247511, 0.878236)
+bones/18/rotation = Quaternion(0.30468, -0.211454, 0.071393, 0.925937)
+bones/20/rotation = Quaternion(-0.10786, -0.0794302, 0.981707, 0.135308)
+bones/21/rotation = Quaternion(-0.36062, -3.34423e-07, -1.43925e-07, 0.932713)
+bones/22/rotation = Quaternion(0.703639, 0.0630936, 0.0752514, 0.703738)
+bones/23/rotation = Quaternion(0.309724, 0.218574, -0.0716472, 0.922585)
 
 [node name="BaseBody_005" parent="ControlRig/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_xmju5")
 surface_material_override/1 = SubResource("StandardMaterial3D_tkf77")
 surface_material_override/2 = SubResource("StandardMaterial3D_jxq4u")
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="ControlRig/Skeleton3D" index="1"]
+transform = Transform3D(0.577445, 0.454047, 0.678527, 0.512137, 0.445795, -0.734154, -0.635824, 0.771433, 0.0248876, -2.16157, 12.5746, 1.8984)
+bone_name = "mixamorig_RightHand"
+bone_idx = 14
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ControlRig/Skeleton3D/BoneAttachment3D" index="0"]
+transform = Transform3D(0.581928, -0.637753, -0.50461, 0.448087, 0.769256, -0.455481, 0.678658, 0.0389484, 0.733421, -0.889291, 2.84984, 0.068222)
+mesh = SubResource("BoxMesh_q12l1")
