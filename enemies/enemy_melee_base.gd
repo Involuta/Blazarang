@@ -11,9 +11,9 @@ var behav_state = FOLLOW
 
 @export var follow_speed := 5.0
 @export var target_distance := 3.0
-@export var attack_duration_secs := 1.5
+@export var attack_duration_secs := 1.1
 @export var sweep_chance := .2
-@export var follow_turn_speed := .1
+@export var follow_turn_speed := .15
 @export var attack_turn_speed := .5
 
 var aiming_at_target := true
@@ -26,11 +26,15 @@ var rng := RandomNumberGenerator.new()
 @onready var visual_mesh = $VisualMesh
 @onready var target = $/root/Level/Target
 
+var anim_tree_exists := true
+
 func _ready():
 	add_to_group("lockonables")
 	if aggro_distance > 0:
 		nav_agent.process_mode = Node.PROCESS_MODE_DISABLED
 		behav_state = WAIT
+	if not find_child("AnimationTree", false, false):
+		anim_tree_exists = false
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -49,6 +53,9 @@ func _physics_process(delta):
 func lerp_look_at_target(turn_speed):
 	var vec3_to_target := global_position.direction_to(target.global_position)
 	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
+
+func lerp_look_at_walk_dir(turn_speed):
+	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(velocity.x, velocity.z), turn_speed)
 
 func wait():
 	move_and_slide()
@@ -73,7 +80,7 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	move_and_slide()
 
 func follow():
-	lerp_look_at_target(follow_turn_speed)
+	lerp_look_at_walk_dir(follow_turn_speed)
 	global_rotation.x = 0
 	global_rotation.z = 0
 	nav_agent.set_target_position(target.global_position)
@@ -88,16 +95,19 @@ func follow():
 		nav_agent.target_desired_distance = target_distance
 	else:
 		nav_agent.target_desired_distance = .1
+	
+	if anim_tree_exists:
+		anim_tree.set("parameters/StateMachine/WalkSpace/blend_position", velocity.length_squared())
 
 func start_attack():
 	behav_state = ATTACK
 	aiming_at_target = true
-	if anim_tree:
-		choose_attack()
+	if anim_tree_exists:
+		anim_tree.set("parameters/StateMachine/conditions/overhead", true)
 	else:
 		anim_player.play(choose_attack())
 	await get_tree().create_timer(attack_duration_secs).timeout
-	if anim_tree:
+	if anim_tree_exists:
 		anim_tree.set("parameters/StateMachine/conditions/overhead", false)
 	behav_state = FOLLOW
 
@@ -106,8 +116,6 @@ func choose_attack() -> String:
 	if choice <= sweep_chance:
 		return "sweep"
 	else:
-		if anim_tree:
-			anim_tree.set("parameters/StateMachine/conditions/overhead", true)
 		return "overhead"
 
 func attack():

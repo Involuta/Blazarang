@@ -50,7 +50,7 @@ var roserang_instance = null
 @onready var anim_tree := $AnimationTree
 @onready var hurtbox := $Hurtbox
 
-const LERP_VAL := .15 # The rate at which lerp funcs change; used for body mvmt animationa
+const LERP_VAL := .15 # The rate at which lerp funcs change; used for body mvmt animations
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
