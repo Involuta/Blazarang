@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dasrfemvybmv"]
+
+[ext_resource type="PackedScene" uid="uid://cpx64anoc5p8u" path="res://glb_imports/BasicSword.glb" id="1_fysu6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7xexg"]
+shading_mode = 0
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oy1fp"]
+shading_mode = 0
+albedo_color = Color(0.0901961, 0.0901961, 0.0901961, 1)
+
+[node name="BasicSword" instance=ExtResource("1_fysu6")]
+
+[node name="Sword" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7xexg")
+surface_material_override/1 = SubResource("StandardMaterial3D_oy1fp")

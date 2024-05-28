@@ -47,3 +47,4 @@ res://glb_inherited_scenes/mobile_gunner.tscn
 res://glb_inherited_scenes/melee_t1.tscn
 res://levels/gauntlet_level1.tscn
 res://enemies/enemy_gunner_base.gd
+res://glb_inherited_scenes/basic_sword.tscn
