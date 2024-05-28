@@ -12,13 +12,13 @@ var behav_state = FOLLOW
 @export var follow_speed := 5.0
 @export var target_distance := 20.0
 
-@export var attack_duration_secs := .95
+@export var attack_duration_secs := 1.15
 
 var aiming_at_target := true
 @export var bullet_speed := 30.0
 
 @export var follow_turn_speed := .15
-@export var attack_turn_speed := .25
+@export var attack_turn_speed := .15
 
 var rng := RandomNumberGenerator.new()
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
