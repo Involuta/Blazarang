@@ -1,6 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dasrfemvybmv"]
+[gd_scene load_steps=12 format=3 uid="uid://dasrfemvybmv"]
 
 [ext_resource type="PackedScene" uid="uid://cpx64anoc5p8u" path="res://glb_imports/BasicSword.glb" id="1_fysu6"]
+[ext_resource type="Shader" path="res://GPUTrail-main/shaders/trail.gdshader" id="2_efj13"]
+[ext_resource type="Shader" path="res://GPUTrail-main/shaders/trail_draw_pass.gdshader" id="3_osy4a"]
+[ext_resource type="Texture2D" uid="uid://crk6pkb7e5rwc" path="res://GPUTrail-main/defaults/texture.tres" id="4_aa0hv"]
+[ext_resource type="Texture2D" uid="uid://ct31fhxvcragr" path="res://GPUTrail-main/defaults/curve.tres" id="5_1a7mr"]
+[ext_resource type="Script" path="res://GPUTrail-main/GPUTrail3D.gd" id="6_rs6re"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7xexg"]
 shading_mode = 0
@@ -10,8 +15,37 @@ albedo_color = Color(1, 1, 0, 1)
 shading_mode = 0
 albedo_color = Color(0.0901961, 0.0901961, 0.0901961, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jp5km"]
+shader = ExtResource("2_efj13")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_68wad"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_osy4a")
+shader_parameter/emmission_transform = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+shader_parameter/flags = 40
+shader_parameter/color_ramp = ExtResource("4_aa0hv")
+shader_parameter/curve = ExtResource("5_1a7mr")
+
+[sub_resource type="QuadMesh" id="QuadMesh_8ktjm"]
+material = SubResource("ShaderMaterial_68wad")
+
 [node name="BasicSword" instance=ExtResource("1_fysu6")]
 
 [node name="Sword" parent="." index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_7xexg")
 surface_material_override/1 = SubResource("StandardMaterial3D_oy1fp")
+
+[node name="GPUTrail3D" type="GPUParticles3D" parent="." index="1"]
+transform = Transform3D(3.9, 0, 0, 0, 3.9, 0, 0, 0, 3.9, 2.08165e-12, 3.5, 2.08165e-12)
+amount = 12
+lifetime = 12.0
+explosiveness = 1.0
+fixed_fps = 0
+process_material = SubResource("ShaderMaterial_jp5km")
+draw_pass_1 = SubResource("QuadMesh_8ktjm")
+script = ExtResource("6_rs6re")
+length = 12
+color_ramp = ExtResource("4_aa0hv")
+curve = ExtResource("5_1a7mr")
+_defaults_have_been_set = true
