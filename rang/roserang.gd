@@ -6,7 +6,7 @@ extends CharacterBody3D
 # BIZARROBOT - 120, 90
 const SPECIAL_DIST := 7 # max dist from Cotu where doing special input will perform a special move
 
-var BPM := 90.0
+var BPM := 107.0
 var max_radius := 30
 var petals := 5
 

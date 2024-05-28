@@ -12,7 +12,7 @@ var behav_state = FOLLOW
 @export var follow_speed := 5.0
 @export var target_distance := 20.0
 
-@export var attack_duration_secs := 1.5
+@export var attack_duration_secs := .95
 
 var aiming_at_target := true
 @export var bullet_speed := 30.0
@@ -24,7 +24,8 @@ var rng := RandomNumberGenerator.new()
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var bullet := preload("res://enemies/enemy_bullet.tscn")
 @onready var nav_agent := $NavigationAgent3D
-@onready var animation_player := $AnimationPlayer
+@onready var anim_player := $AnimationPlayer
+@onready var anim_tree := $AnimationTree
 @onready var level := $/root/Level
 @onready var target := $/root/Level/Target
 
@@ -48,6 +49,9 @@ func _physics_process(delta):
 func lerp_look_at_target(turn_speed):
 	var vec3_to_target := global_position.direction_to(target.global_position)
 	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
+
+func lerp_look_at_walk_dir(turn_speed):
+	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(velocity.x, velocity.z), turn_speed)
 
 func wait():
 	move_and_slide()
@@ -73,7 +77,7 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	move_and_slide()
 
 func follow():
-	lerp_look_at_target(follow_turn_speed)
+	lerp_look_at_walk_dir(follow_turn_speed)
 	nav_agent.set_target_position(target.global_position)
 	var next_position = nav_agent.get_next_path_position()
 	var new_velocity = (next_position - global_position).normalized() * follow_speed
@@ -86,12 +90,16 @@ func follow():
 		nav_agent.target_desired_distance = target_distance
 	else:
 		nav_agent.target_desired_distance = .1
+	
+	anim_tree.set("parameters/StateMachine/WalkBlendSpace/blend_position", velocity.length())
 
 func start_attack():
 	behav_state = ATTACK
 	aiming_at_target = true
-	animation_player.play("shoot")
+	anim_tree.set("parameters/StateMachine/conditions/shoot", true)
+	anim_player.play("shoot")
 	await get_tree().create_timer(attack_duration_secs).timeout
+	anim_tree.set("parameters/StateMachine/conditions/shoot", false)
 	behav_state = FOLLOW
 
 func attack():

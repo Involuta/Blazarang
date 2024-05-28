@@ -381,6 +381,9 @@ bones/21/rotation = Quaternion(-0.485012, 3.89765e-07, 2.50149e-07, 0.874508)
 bones/22/rotation = Quaternion(0.657949, -0.00323418, -0.0824682, 0.748527)
 bones/23/rotation = Quaternion(0.333934, 0.147264, -0.0331222, 0.930432)
 
+[node name="BoneAttachment3D" parent="VisualMesh/ControlRig/Skeleton3D" index="1"]
+transform = Transform3D(0.289812, 0.188626, 0.938312, 0.886329, -0.422839, -0.188754, 0.361151, 0.886356, -0.289729, -2.43571, 8.40342, 3.71909)
+
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_uk78c")
 anim_player = NodePath("../AnimationPlayer")
