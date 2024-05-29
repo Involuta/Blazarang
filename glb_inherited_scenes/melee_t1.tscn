@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c676sw18ty8mi" path="res://glb_imports/MeleeT1H.glb" id="1_mkjmh"]
 [ext_resource type="Shader" path="res://glb_inherited_scenes/outline.gdshader" id="2_ixm25"]
-[ext_resource type="PackedScene" uid="uid://dasrfemvybmv" path="res://glb_inherited_scenes/basic_sword.tscn" id="3_d5yu2"]
+[ext_resource type="PackedScene" uid="uid://dasrfemvybmv" path="res://glb_inherited_scenes/basic_sword_blade.tscn" id="3_d5yu2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lndga"]
 render_priority = 0
@@ -31,31 +31,25 @@ roughness = 0.2
 transform = Transform3D(-0.11, 3.83666e-17, -9.61651e-09, 3.83666e-17, 0.11, -3.83666e-17, 9.61651e-09, -3.83666e-17, -0.11, 0, 0, 0)
 
 [node name="Skeleton3D" parent="ControlRig" index="0"]
-bones/0/position = Vector3(-0.0291872, 8.14611, -0.875975)
-bones/0/rotation = Quaternion(-0.0396657, 0.00028458, -0.000596952, 0.999211)
-bones/1/rotation = Quaternion(0.00729068, -0.0279514, 0.000943308, 0.999582)
-bones/2/rotation = Quaternion(-0.0368239, -0.0452349, 0.0160789, 0.998168)
-bones/3/rotation = Quaternion(-0.0189662, -0.0471236, 0.000549569, 0.998709)
-bones/4/rotation = Quaternion(0.205548, -0.0127631, -0.0684404, 0.976167)
-bones/5/rotation = Quaternion(-0.0175194, 0.14048, 0.00949387, 0.989883)
-bones/7/rotation = Quaternion(0.595013, 0.388644, -0.572629, 0.408669)
-bones/8/rotation = Quaternion(-0.685163, -0.253112, 0.399394, 0.55405)
-bones/9/rotation = Quaternion(1.6952e-08, -5.14162e-08, 0.2145, 0.976724)
-bones/10/rotation = Quaternion(0.421745, -0.842091, 0.222652, 0.251872)
-bones/11/rotation = Quaternion(0.608063, -0.390032, 0.572595, 0.387646)
-bones/12/rotation = Quaternion(-0.413555, 0.330983, -0.729419, 0.432862)
-bones/13/rotation = Quaternion(-2.74072e-07, 1.32723e-06, -0.126324, 0.991989)
-bones/14/rotation = Quaternion(0.461837, 0.876341, 0.0357333, 0.132119)
-bones/15/rotation = Quaternion(-0.0586417, -0.52123, -0.848292, 0.0726666)
+bones/6/position = Vector3(3.05176e-05, 2.56255, -0.0376814)
+bones/8/rotation = Quaternion(-0.175583, -0.0102147, -0.0628666, 0.982402)
+bones/9/rotation = Quaternion(2.72647e-08, -5.41212e-08, 0.0425484, 0.999094)
+bones/10/rotation = Quaternion(-0.0011582, 0.0222519, -4.96895e-05, 0.999752)
+bones/12/rotation = Quaternion(-0.175682, 0.00834353, 0.0520515, 0.983035)
+bones/13/rotation = Quaternion(-1.57734e-07, 1.35208e-06, -0.0461411, 0.998935)
+bones/14/rotation = Quaternion(-0.0011589, -0.0182853, 4.73129e-05, 0.999832)
+bones/15/rotation = Quaternion(0.000145502, -0.00528157, -0.999605, 0.0275997)
 bones/15/scale = Vector3(1, 1, 1)
-bones/16/rotation = Quaternion(-0.717224, 9.22573e-07, 8.79695e-07, 0.696843)
-bones/17/rotation = Quaternion(0.465619, 0.0524488, -0.0300696, 0.882918)
-bones/18/rotation = Quaternion(0.310459, -0.148307, 0.0327987, 0.938373)
-bones/20/rotation = Quaternion(-0.122689, -0.00562013, 0.99068, 0.0588901)
-bones/20/scale = Vector3(1, 1, 0.999999)
-bones/21/rotation = Quaternion(-0.337962, 3.98718e-07, 1.95872e-07, 0.94116)
-bones/22/rotation = Quaternion(0.697801, -0.0458233, 0.0513733, 0.712976)
-bones/23/rotation = Quaternion(0.227601, 0.114111, -0.0634216, 0.964963)
+bones/16/rotation = Quaternion(-0.0404725, 1.2757e-06, -2.87545e-09, 0.999181)
+bones/17/rotation = Quaternion(0.482015, -0.0129903, -0.0190792, 0.875859)
+bones/18/position = Vector3(4.93469e-06, 1.79781, -2.77561e-05)
+bones/19/position = Vector3(3.70393e-06, 0.77421, 7.58466e-06)
+bones/20/rotation = Quaternion(0.00021129, 0.00761335, 0.99959, 0.0275993)
+bones/20/scale = Vector3(1, 1, 1)
+bones/21/rotation = Quaternion(-0.0400033, 4.42255e-07, 6.86308e-08, 0.9992)
+bones/22/rotation = Quaternion(0.477549, 0.0130599, 0.0190715, 0.878301)
+bones/23/position = Vector3(2.06239e-05, 1.78673, 2.50065e-05)
+bones/24/position = Vector3(-7.45436e-06, 0.771728, 7.86776e-06)
 
 [node name="BaseBody_003" parent="ControlRig/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_pgguw")
@@ -63,7 +57,7 @@ surface_material_override/1 = SubResource("StandardMaterial3D_w1d2c")
 surface_material_override/2 = SubResource("StandardMaterial3D_ii2jm")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="ControlRig/Skeleton3D" index="1"]
-transform = Transform3D(-0.387621, 0.911578, 0.137023, 0.92099, 0.376672, 0.0994738, 0.0390657, 0.164755, -0.985561, -1.61425, 18.6034, -0.784021)
+transform = Transform3D(-0.0228332, -0.999674, -0.0114055, -0.0363356, 0.0122307, -0.999265, 0.999079, -0.0224019, -0.0366031, -7.45628, 13.9867, -0.411582)
 bone_name = "mixamorig_RightHand"
 bone_idx = 14
 

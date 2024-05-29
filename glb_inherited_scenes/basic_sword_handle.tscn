@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://c44esoip3q0s1"]
+
+[ext_resource type="PackedScene" uid="uid://1hrg1uwhcuus" path="res://glb_imports/BasicSwordHandle.glb" id="1_nfaul"]
+
+[node name="BasicSwordHandle" instance=ExtResource("1_nfaul")]

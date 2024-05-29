@@ -122,6 +122,40 @@ tracks/6/keys = {
 "clips": PackedStringArray("OverheadCR"),
 "times": PackedFloat32Array(0)
 }
+tracks/7/type = "animation"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("VisualMesh/ControlRig/Skeleton3D/BoneAttachment3D/BasicSword/AnimationPlayer")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"clips": PackedStringArray("ExtendBlade", "RetractBlade"),
+"times": PackedFloat32Array(0.133333, 0.866667)
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("VisualMesh/ControlRig/Skeleton3D/BoneAttachment3D/BasicSword/GPUTrail3D:length")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.216667, 0.866667, 0.933333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 0, 12, 12, 0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("VisualMesh/ControlRig/Skeleton3D/BoneAttachment3D/BasicSword/GPUTrail3D:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.216667, 0.866667, 0.933333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, true, false]
+}
 
 [sub_resource type="Animation" id="Animation_fpxs0"]
 resource_name = "sweep"
@@ -351,6 +385,7 @@ bones/2/rotation = Quaternion(0.0479957, -0.0101504, -3.86014e-05, 0.998796)
 bones/3/rotation = Quaternion(0.00194797, 0.00435975, 0.0150954, 0.999875)
 bones/4/rotation = Quaternion(-0.159523, 0.0216472, -0.0657872, 0.984762)
 bones/5/rotation = Quaternion(-0.0107777, 0.188787, -0.00801741, 0.981926)
+bones/6/position = Vector3(0, 2.56255, -0.0376966)
 bones/7/rotation = Quaternion(0.67807, 0.370636, -0.430233, 0.466636)
 bones/8/rotation = Quaternion(0.448119, 0.0274097, 0.248518, 0.858299)
 bones/9/rotation = Quaternion(-1.52258e-08, -6.00097e-08, 0.521799, 0.853069)
@@ -363,15 +398,30 @@ bones/15/rotation = Quaternion(-0.121995, -0.292438, -0.944334, 0.0884875)
 bones/15/scale = Vector3(1, 1, 0.999999)
 bones/16/rotation = Quaternion(-0.715384, 9.47245e-07, 8.68529e-07, 0.698732)
 bones/17/rotation = Quaternion(0.604603, -0.00910563, -0.0440641, 0.795255)
+bones/18/position = Vector3(-2.44181e-07, 1.79785, -4.65661e-10)
 bones/18/rotation = Quaternion(0.332156, -0.139268, 0.0377244, 0.932123)
+bones/19/position = Vector3(-1.91852e-07, 0.774226, -1.22935e-07)
 bones/20/rotation = Quaternion(0.0806036, -0.265534, -0.958752, 0.0615628)
 bones/20/scale = Vector3(1, 1, 0.999999)
 bones/21/rotation = Quaternion(-0.485012, 3.89765e-07, 2.50149e-07, 0.874508)
 bones/22/rotation = Quaternion(0.657949, -0.00323418, -0.0824682, 0.748527)
+bones/23/position = Vector3(7.88423e-08, 1.78674, -3.3062e-07)
 bones/23/rotation = Quaternion(0.333934, 0.147264, -0.0331222, 0.930432)
+bones/24/position = Vector3(2.14204e-08, 0.771728, 1.75089e-07)
 
 [node name="BoneAttachment3D" parent="VisualMesh/ControlRig/Skeleton3D" index="1"]
-transform = Transform3D(0.286579, 0.189117, 0.939205, 0.887308, -0.422116, -0.185747, 0.361325, 0.886596, -0.288775, -2.44326, 8.40164, 3.71699)
+transform = Transform3D(0.2941, 0.20821, 0.93282, 0.882406, -0.434154, -0.1813, 0.367239, 0.876447, -0.31141, -2.46761, 8.30466, 3.85409)
+
+[node name="BasicSword" parent="VisualMesh/ControlRig/Skeleton3D/BoneAttachment3D" index="0"]
+transform = Transform3D(-0.50584, 2.20098, -0.563824, -0.459815, 0.705932, 1.36607, 1.33518, 1.07697, 0.256844, 1.37881, 2.02122, 0.567441)
+
+[node name="Blade" parent="VisualMesh/ControlRig/Skeleton3D/BoneAttachment3D/BasicSword" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.001, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="GPUTrail3D" parent="VisualMesh/ControlRig/Skeleton3D/BoneAttachment3D/BasicSword" index="1"]
+transform = Transform3D(3.9, 6.30905e-08, -4.65979e-09, -8.83897e-08, 3.9, -6.88302e-09, -4.22514e-08, 1.6388e-07, 3.9, 2.38419e-07, 3.5, 0)
+visible = false
+length = 0
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_uk78c")
@@ -386,3 +436,4 @@ parameters/StateMachine/WalkSpace/blend_position = 0.100662
 
 [editable path="SlashTest"]
 [editable path="VisualMesh"]
+[editable path="VisualMesh/ControlRig/Skeleton3D/BoneAttachment3D/BasicSword"]
