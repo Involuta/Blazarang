@@ -1,6 +1,6 @@
-GPUTrail3D
-AudioStreamPlayer3D
 AudioStreamPlayer
+AudioStreamPlayer3D
+GPUTrail3D
 MeshInstance3D
 BoneAttachment3D
 AnimationTree

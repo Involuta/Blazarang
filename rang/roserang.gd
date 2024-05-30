@@ -51,10 +51,11 @@ var ricochet_particles := preload("res://rang/rang_particles_ricochet.tscn")
 @export var ricochet_color := Color(0,.8,0)
 @export var return_color := Color(0,0,1)
 
-@onready var audio_player := $AudioStreamPlayer3D
+@onready var flying_sfx := $FlyingAudioStream
+@onready var ricochet_sfx := $RicochetAudioStream
 
 func _ready():
-	audio_player.play()
+	flying_sfx.play()
 	target.roserang_queued = false
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, true)
 	set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, true)
@@ -155,6 +156,7 @@ func rose_handle_collision(collision, vel_vec, delta):
 		velocity = (1/delta) * (vel_vec - 2 * vel_vec.project(collision.get_normal()))
 		emit_ricochet_particles(vel_vec)
 		change_color(ricochet_color)
+		ricochet_sfx.play()
 		return true
 	return false
 
@@ -162,6 +164,7 @@ func ricochet_handle_collision(collision):
 	if collision and (collision.get_collider().collision_layer == Globals.ARENA_COL_LAYER or collision.get_collider().collision_layer == Globals.THICK_ENEMY_COL_LAYER):
 		ricochet(collision)
 		emit_ricochet_particles(collision.get_normal())
+		ricochet_sfx.play()
 
 func emit_ricochet_particles(dir):
 	var inst := ricochet_particles.instantiate()

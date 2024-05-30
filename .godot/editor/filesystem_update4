@@ -52,3 +52,4 @@ res://glb_inherited_scenes/basic_sword_handle.tscn
 res://enemies/enemy_melee_base.gd
 res://enemies/enemy_anims/mt1_overhead.res
 res://rang/roserang.gd
+res://ui/ui_root.gd
