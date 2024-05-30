@@ -30,4 +30,3 @@ RigidBody3D
 NavigationAgent3D
 MultiMeshInstance3D
 WorldEnvironment
-RayCast3D

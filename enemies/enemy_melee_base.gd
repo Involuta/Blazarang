@@ -11,7 +11,7 @@ var behav_state = FOLLOW
 
 @export var follow_speed := 5.0
 @export var target_distance := 3.0
-@export var attack_duration_secs := 1.1
+@export var attack_duration_secs := 1.2
 @export var sweep_chance := .2
 @export var follow_turn_speed := .15
 @export var attack_turn_speed := .5
@@ -49,6 +49,9 @@ func _physics_process(delta):
 			
 	if global_position.y < -100:
 		queue_free()
+		
+	if anim_tree_exists:
+		anim_tree.set("parameters/StateMachine/WalkSpace/blend_position", nav_agent.velocity.length())
 
 func lerp_look_at_target(turn_speed):
 	var vec3_to_target := global_position.direction_to(target.global_position)
@@ -95,18 +98,16 @@ func follow():
 		nav_agent.target_desired_distance = target_distance
 	else:
 		nav_agent.target_desired_distance = .1
-	
-	if anim_tree_exists:
-		anim_tree.set("parameters/StateMachine/WalkSpace/blend_position", velocity.length_squared())
 
 func start_attack():
 	behav_state = ATTACK
 	aiming_at_target = true
 	if anim_tree_exists:
 		anim_tree.set("parameters/StateMachine/conditions/overhead", true)
-	else:
-		anim_player.play(choose_attack())
-	await get_tree().create_timer(attack_duration_secs).timeout
+	#anim_player.play(choose_attack())
+	#await get_tree().create_timer(attack_duration_secs).timeout
+
+func ding():
 	if anim_tree_exists:
 		anim_tree.set("parameters/StateMachine/conditions/overhead", false)
 	behav_state = FOLLOW

@@ -277,42 +277,44 @@ shader_parameter/X_slider = -0.05
 shader_parameter/Y_Slider = -0.05
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ljctp"]
-animation = &"two_handed_walk"
+animation = &"TwoHandedWalkCR"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6cgbc"]
-animation = &"idle"
+animation = &"IdleCR"
 
 [sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_j6rqy"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_ljctp")
-blend_point_0/pos = 1.0
+blend_point_0/pos = 5.0
 blend_point_1/node = SubResource("AnimationNodeAnimation_6cgbc")
 blend_point_1/pos = 0.0
+max_space = 5.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_scvwl"]
-animation = &"overhead"
+animation = &"OverheadCR"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wa8xh"]
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h7rje"]
+xfade_time = 0.1
 advance_mode = 2
-advance_condition = &"overhead"
+advance_expression = "behav_state == ATTACK"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1yfff"]
-xfade_time = 0.1
 switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_f8liy"]
 states/Start/position = Vector2(199.5, 101)
 states/WalkSpace/node = SubResource("AnimationNodeBlendSpace1D_j6rqy")
-states/WalkSpace/position = Vector2(388, 99.25)
+states/WalkSpace/position = Vector2(388, 100.5)
 states/overhead/node = SubResource("AnimationNodeAnimation_scvwl")
-states/overhead/position = Vector2(587.7, 99.8125)
+states/overhead/position = Vector2(587.7, 99.9062)
 transitions = ["Start", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_wa8xh"), "WalkSpace", "overhead", SubResource("AnimationNodeStateMachineTransition_h7rje"), "overhead", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_1yfff")]
-graph_offset = Vector2(181.2, -3.8925)
+graph_offset = Vector2(86.5803, -7.78501)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_uk78c"]
+graph_offset = Vector2(-6.72, 38.4)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_f8liy")
 nodes/StateMachine/position = Vector2(110, 150)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -350,7 +352,6 @@ libraries = {
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
 process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
 transform = Transform3D(0.999999, 2.15301e-08, -2.2719e-14, -8.9407e-08, 0.999999, 0, -6.17927e-15, -6.2758e-15, 0.999999, 0, 0, 0)
@@ -378,58 +379,55 @@ surface_material_override/0 = SubResource("ShaderMaterial_b2801")
 transform = Transform3D(-0.15, 5.2318e-17, -2.26494e-08, 5.2318e-17, 0.15, -5.2318e-17, 2.26494e-08, -5.2318e-17, -0.15, 2.08165e-12, -1.35746, 2.08165e-12)
 
 [node name="Skeleton3D" parent="VisualMesh/ControlRig" index="0"]
-bones/0/position = Vector3(0.0755615, 7.7551, -0.292609)
-bones/0/rotation = Quaternion(0.027512, -0.227386, 0.00852021, 0.973379)
-bones/1/rotation = Quaternion(0.173365, -0.0353627, 0.0373879, 0.983512)
-bones/2/rotation = Quaternion(0.0479957, -0.0101504, -3.86014e-05, 0.998796)
-bones/3/rotation = Quaternion(0.00194797, 0.00435975, 0.0150954, 0.999875)
-bones/4/rotation = Quaternion(-0.159523, 0.0216472, -0.0657872, 0.984762)
+bones/0/position = Vector3(0.0755615, 8.09115, -0.148589)
+bones/0/rotation = Quaternion(0.0285058, -0.0723977, 0.00411381, 0.99696)
+bones/1/rotation = Quaternion(0.0787022, -0.0280086, 0.0541453, 0.995033)
+bones/2/rotation = Quaternion(0.0479957, -0.0101503, -3.85976e-05, 0.998796)
+bones/3/rotation = Quaternion(0.00194796, 0.00435976, 0.0150955, 0.999875)
+bones/4/rotation = Quaternion(-0.0792633, -0.0740116, -0.0682809, 0.991755)
 bones/5/rotation = Quaternion(-0.0107777, 0.188787, -0.00801741, 0.981926)
 bones/6/position = Vector3(0, 2.56255, -0.0376966)
 bones/7/rotation = Quaternion(0.67807, 0.370636, -0.430233, 0.466636)
-bones/8/rotation = Quaternion(0.448119, 0.0274097, 0.248518, 0.858299)
-bones/9/rotation = Quaternion(-1.52258e-08, -6.00097e-08, 0.521799, 0.853069)
-bones/10/rotation = Quaternion(-0.011409, -0.0498927, 0.0165732, 0.998552)
+bones/8/rotation = Quaternion(0.467257, 0.0307657, 0.344156, 0.813807)
+bones/9/rotation = Quaternion(1.07959e-08, -5.98767e-08, 0.227082, 0.973876)
+bones/10/rotation = Quaternion(0.112153, 0.0107436, 0.201541, 0.972979)
 bones/11/rotation = Quaternion(0.63512, -0.386413, 0.285703, 0.604716)
-bones/12/rotation = Quaternion(0.434751, 0.100053, -0.33183, 0.831186)
-bones/13/rotation = Quaternion(-7.27672e-07, 1.13267e-06, -0.459092, 0.888389)
-bones/14/rotation = Quaternion(-0.0464796, 0.0133069, 0.0135453, 0.998739)
-bones/15/rotation = Quaternion(-0.121995, -0.292438, -0.944334, 0.0884875)
-bones/15/scale = Vector3(1, 1, 0.999999)
-bones/16/rotation = Quaternion(-0.715384, 9.47245e-07, 8.68529e-07, 0.698732)
-bones/17/rotation = Quaternion(0.604603, -0.00910563, -0.0440641, 0.795255)
+bones/12/rotation = Quaternion(0.448646, 0.00139215, -0.343846, 0.824915)
+bones/13/rotation = Quaternion(-5.13357e-07, 1.277e-06, -0.304031, 0.952662)
+bones/14/rotation = Quaternion(-0.204635, 0.17817, -0.0768466, 0.959414)
+bones/15/rotation = Quaternion(0.0557216, 0.244655, 0.966483, -0.0543217)
+bones/15/scale = Vector3(1, 1, 1)
+bones/16/rotation = Quaternion(-0.336819, 1.22918e-06, 3.70763e-07, 0.94157)
+bones/17/rotation = Quaternion(0.558163, -0.00714545, -0.051339, 0.828111)
 bones/18/position = Vector3(-2.44181e-07, 1.79785, -4.65661e-10)
-bones/18/rotation = Quaternion(0.332156, -0.139268, 0.0377244, 0.932123)
+bones/18/rotation = Quaternion(0.332153, -0.139268, 0.037724, 0.932124)
 bones/19/position = Vector3(-1.91852e-07, 0.774226, -1.22935e-07)
-bones/20/rotation = Quaternion(0.0806036, -0.265534, -0.958752, 0.0615628)
-bones/20/scale = Vector3(1, 1, 0.999999)
-bones/21/rotation = Quaternion(-0.485012, 3.89765e-07, 2.50149e-07, 0.874508)
-bones/22/rotation = Quaternion(0.657949, -0.00323418, -0.0824682, 0.748527)
+bones/20/rotation = Quaternion(-0.296231, 0.0688812, 0.948324, 0.0904647)
+bones/20/scale = Vector3(1.00001, 1, 1)
+bones/21/rotation = Quaternion(-0.353939, 4.2464e-07, 2.09868e-07, 0.935269)
+bones/22/rotation = Quaternion(0.677149, -0.0569537, 0.0874631, 0.728406)
 bones/23/position = Vector3(7.88423e-08, 1.78674, -3.3062e-07)
-bones/23/rotation = Quaternion(0.333934, 0.147264, -0.0331222, 0.930432)
+bones/23/rotation = Quaternion(0.333948, 0.14726, -0.0331324, 0.930428)
 bones/24/position = Vector3(2.14204e-08, 0.771728, 1.75089e-07)
 
 [node name="BoneAttachment3D" parent="VisualMesh/ControlRig/Skeleton3D" index="1"]
-transform = Transform3D(0.2941, 0.20821, 0.93282, 0.882406, -0.434154, -0.1813, 0.367239, 0.876447, -0.31141, -2.46761, 8.30466, 3.85409)
-
-[node name="BasicSword" parent="VisualMesh/ControlRig/Skeleton3D/BoneAttachment3D" index="0"]
-transform = Transform3D(-0.50584, 2.20098, -0.563824, -0.459815, 0.705932, 1.36607, 1.33518, 1.07697, 0.256844, 1.37881, 2.02122, 0.567441)
+transform = Transform3D(0.314971, 0.181435, 0.931598, 0.869626, -0.448359, -0.206697, 0.380188, 0.875246, -0.299001, -1.52903, 8.72481, 3.84328)
 
 [node name="Blade" parent="VisualMesh/ControlRig/Skeleton3D/BoneAttachment3D/BasicSword" index="0"]
 transform = Transform3D(1, 0, 0, 0, 0.001, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="GPUTrail3D" parent="VisualMesh/ControlRig/Skeleton3D/BoneAttachment3D/BasicSword" index="1"]
-transform = Transform3D(3.9, 6.30905e-08, -4.65979e-09, -8.83897e-08, 3.9, -6.88302e-09, -4.22514e-08, 1.6388e-07, 3.9, 2.38419e-07, 3.5, 0)
 visible = false
-length = 0
+amount = 1
+lifetime = 1.0
+length = 1
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_uk78c")
-anim_player = NodePath("../AnimationPlayer")
+anim_player = NodePath("../VisualMesh/AnimationPlayer")
 advance_expression_base_node = NodePath("..")
 active = true
-parameters/StateMachine/conditions/overhead = false
-parameters/StateMachine/WalkSpace/blend_position = 0.100662
+parameters/StateMachine/WalkSpace/blend_position = -0.00188327
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached" flags=18]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed" flags=18]
