@@ -102,21 +102,25 @@ func follow():
 func start_attack():
 	behav_state = ATTACK
 	aiming_at_target = true
-	if anim_tree_exists:
-		anim_tree.set("parameters/StateMachine/conditions/overhead", true)
+	choose_attack()
 	#anim_player.play(choose_attack())
 	#await get_tree().create_timer(attack_duration_secs).timeout
 
-func ding():
+func end_attack():
 	if anim_tree_exists:
 		anim_tree.set("parameters/StateMachine/conditions/overhead", false)
+		anim_tree.set("parameters/StateMachine/conditions/sweep", false)
 	behav_state = FOLLOW
 
 func choose_attack() -> String:
 	var choice := rng.randf()
 	if choice <= sweep_chance:
+		if anim_tree_exists:
+			anim_tree.set("parameters/StateMachine/conditions/sweep", true)
 		return "sweep"
 	else:
+		if anim_tree_exists:
+			anim_tree.set("parameters/StateMachine/conditions/overhead", true)
 		return "overhead"
 
 func attack():

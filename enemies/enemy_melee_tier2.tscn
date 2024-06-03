@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://crnvtwl8auu75"]
+[gd_scene load_steps=24 format=3 uid="uid://crnvtwl8auu75"]
 
 [ext_resource type="Script" path="res://enemies/enemy_melee_base.gd" id="1_aale5"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_0r0r6"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://hitbox.gd" id="3_lw0ui"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4b6ac"]
+radius = 0.75
+height = 2.35
 
 [sub_resource type="Animation" id="Animation_4hqbc"]
 resource_name = "overhead"
@@ -66,11 +68,14 @@ tracks/4/path = NodePath(".")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.5, 1.01667),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
 "method": &"stop_aiming_at_target"
+}, {
+"args": [],
+"method": &"end_attack"
 }]
 }
 tracks/5/type = "position_3d"
@@ -118,10 +123,10 @@ tracks/1/path = NodePath("MeleeHitboxPivot:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.766667, 0.966667),
+"times": PackedFloat32Array(0, 0.7682, 0.9686),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(-1.5708, 3.48787e-16, 2.0944), Vector3(-1.5708, 3.48787e-16, 2.0944), Vector3(-1.5708, 3.48787e-16, -2.0944)]
+"values": [Vector3(-1.5708, 3.48787e-16, -2.0944), Vector3(-1.5708, 3.48787e-16, -2.0944), Vector3(-1.5708, 3.48787e-16, 2.0944)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -154,11 +159,14 @@ tracks/4/path = NodePath(".")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.766667),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.766667, 1.48334),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
 "method": &"stop_aiming_at_target"
+}, {
+"args": [],
+"method": &"end_attack"
 }]
 }
 tracks/5/type = "position_3d"
@@ -187,6 +195,59 @@ albedo_color = Color(1, 1, 0, 1)
 material = SubResource("StandardMaterial3D_al1tw")
 radius = 0.2
 height = 3.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xhl13"]
+animation = &"OverheadCR"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lnhdq"]
+animation = &"SweepCR"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x6iqd"]
+animation = &"IdleCR"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vqd04"]
+animation = &"OneHandedMeleeWalkCR"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_xixeq"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_x6iqd")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_vqd04")
+blend_point_1/pos = 1.0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xruje"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hibdj"]
+advance_mode = 2
+advance_condition = &"overhead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ito5k"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_50775"]
+advance_mode = 2
+advance_condition = &"sweep"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bevw0"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_cn63x"]
+states/OverheadCR/node = SubResource("AnimationNodeAnimation_xhl13")
+states/OverheadCR/position = Vector2(570.1, 52.1013)
+states/SweepCR/node = SubResource("AnimationNodeAnimation_lnhdq")
+states/SweepCR/position = Vector2(569.771, 150.235)
+states/WalkSpace/node = SubResource("AnimationNodeBlendSpace1D_xixeq")
+states/WalkSpace/position = Vector2(388.078, 100.039)
+transitions = ["Start", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_xruje"), "WalkSpace", "OverheadCR", SubResource("AnimationNodeStateMachineTransition_hibdj"), "OverheadCR", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_ito5k"), "WalkSpace", "SweepCR", SubResource("AnimationNodeStateMachineTransition_50775"), "SweepCR", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_bevw0")]
+graph_offset = Vector2(126.443, 8.235)
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_kp0ng"]
+graph_offset = Vector2(-43.2, 84.48)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_cn63x")
+nodes/StateMachine/position = Vector2(90, 150)
+node_connections = [&"output", 0, &"StateMachine"]
 
 [node name="EnemyMeleeTier2" type="CharacterBody3D" groups=["lockonables"]]
 collision_layer = 8
@@ -223,7 +284,7 @@ transform = Transform3D(-0.500004, -0.866023, -1.26261e-21, -3.13499e-06, 1.8100
 visible = false
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
-transform = Transform3D(0.999999, 2.15301e-08, -2.2719e-14, -8.9407e-08, 0.999999, 0, -6.17927e-15, -6.2758e-15, 0.999999, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(0.999999, 2.15301e-08, -2.2719e-14, -8.9407e-08, 0.999999, 0, -6.17927e-15, -6.2758e-15, 0.999999, 2.08165e-12, 2.5, 2.08165e-12)
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("3_lw0ui")
@@ -237,6 +298,43 @@ cast_shadow = 0
 mesh = SubResource("CapsuleMesh_oq81m")
 
 [node name="VisualMesh" parent="." instance=ExtResource("2_jmf1i")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, -1.16977, 0)
+
+[node name="Skeleton3D" parent="VisualMesh/ControlRig" index="0"]
+bones/0/position = Vector3(0.0755615, 5.82368, 0.205741)
+bones/0/rotation = Quaternion(0.0285058, -0.0723977, 0.00411381, 0.99696)
+bones/1/rotation = Quaternion(0.0513864, -0.0265133, 0.054893, 0.996817)
+bones/2/rotation = Quaternion(0.0479957, -0.0101503, -3.86014e-05, 0.998796)
+bones/3/rotation = Quaternion(0.00194795, 0.00435976, 0.0150955, 0.999875)
+bones/4/rotation = Quaternion(-0.0520372, -0.0721113, -0.0702848, 0.993555)
+bones/5/rotation = Quaternion(-0.0107777, 0.188787, -0.00801741, 0.981926)
+bones/7/rotation = Quaternion(-0.65681, -0.404525, 0.417327, -0.480416)
+bones/8/rotation = Quaternion(0.52322, 0.0784238, 0.0490458, 0.847163)
+bones/9/rotation = Quaternion(-9.37965e-07, -4.39476e-08, 0.598764, 0.800925)
+bones/10/rotation = Quaternion(0.197398, 0.0797664, 0.0877518, 0.973124)
+bones/11/rotation = Quaternion(0.617377, -0.415344, 0.261386, 0.614828)
+bones/12/rotation = Quaternion(0.552182, 0.0824871, -0.0275072, 0.829177)
+bones/13/rotation = Quaternion(1.97821e-06, 1.67795e-06, -0.6289, 0.777487)
+bones/14/rotation = Quaternion(-0.0457307, 0.0287357, 0.0222021, 0.998294)
+bones/15/rotation = Quaternion(0.0502804, 0.285339, 0.954466, -0.0710523)
+bones/16/rotation = Quaternion(-0.394494, -1.55084e-06, -7.19499e-07, 0.918899)
+bones/17/rotation = Quaternion(0.656724, 0.0495672, -0.0810833, 0.748119)
+bones/18/rotation = Quaternion(0.256058, -0.285408, 0.0646402, 0.921302)
+bones/20/rotation = Quaternion(-0.349631, 0.0552242, 0.919017, 0.173539)
+bones/21/rotation = Quaternion(-0.370266, 1.56884e-06, 5.95936e-07, 0.928926)
+bones/22/rotation = Quaternion(0.743297, -0.162109, 0.187418, 0.621373)
+bones/23/rotation = Quaternion(0.261358, 0.29407, -0.0623219, 0.917241)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_kp0ng")
+anim_player = NodePath("../VisualMesh/AnimationPlayer")
+advance_expression_base_node = NodePath("..")
+active = true
+parameters/StateMachine/conditions/overhead = false
+parameters/StateMachine/conditions/sweep = false
+parameters/StateMachine/WalkSpace/blend_position = -0.0020647
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached" flags=18]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed" flags=18]
+
+[editable path="VisualMesh"]
