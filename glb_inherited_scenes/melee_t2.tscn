@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bsrvb25fuh6xo"]
+[gd_scene load_steps=9 format=3 uid="uid://bsrvb25fuh6xo"]
 
 [ext_resource type="PackedScene" uid="uid://dgog4e7fph8cu" path="res://glb_imports/MeleeT2H.glb" id="1_u3j2o"]
+[ext_resource type="Script" path="res://glb_inherited_scenes/attach_sword.gd" id="2_e4ohs"]
 [ext_resource type="Shader" path="res://glb_inherited_scenes/black_outline.gdshader" id="2_m8jgc"]
+[ext_resource type="PackedScene" uid="uid://dasrfemvybmv" path="res://glb_inherited_scenes/basic_sword.tscn" id="3_lc0n7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_phyo5"]
 render_priority = 0
@@ -30,8 +32,54 @@ roughness = 0.2
 
 [node name="ControlRig" parent="." index="0"]
 transform = Transform3D(-1, 3.48787e-16, -1.50996e-07, 3.48787e-16, 1, -3.48787e-16, 1.50996e-07, -3.48787e-16, -1, 0, 0, 0)
+script = ExtResource("2_e4ohs")
+
+[node name="Skeleton3D" parent="ControlRig" index="0"]
+bones/0/position = Vector3(0.436835, 5.52062, 0.330593)
+bones/0/rotation = Quaternion(0.00560466, 0.29133, -0.0158662, 0.956475)
+bones/1/rotation = Quaternion(0.111347, -0.02427, -5.46458e-05, 0.993485)
+bones/2/rotation = Quaternion(0.0875056, -0.0400785, -0.000383501, 0.995357)
+bones/3/rotation = Quaternion(0.0361691, 0.400655, -0.0834236, 0.911706)
+bones/4/rotation = Quaternion(-0.00224183, -0.258855, 0.0586586, 0.964131)
+bones/5/rotation = Quaternion(-0.0415021, -0.20347, 0.12903, 0.969654)
+bones/7/rotation = Quaternion(0.569613, 0.418815, -0.57167, 0.416328)
+bones/8/rotation = Quaternion(0.345651, -0.019563, 0.333436, 0.876906)
+bones/9/rotation = Quaternion(-9.59228e-07, 8.8984e-08, 0.696126, 0.717919)
+bones/10/rotation = Quaternion(-0.105241, -0.385272, 0.285079, 0.871332)
+bones/11/rotation = Quaternion(0.584793, -0.422287, 0.556687, 0.412058)
+bones/12/rotation = Quaternion(0.227151, -0.0467115, -0.833648, 0.50125)
+bones/13/rotation = Quaternion(2.51847e-06, 7.14146e-07, -0.255784, 0.966734)
+bones/14/rotation = Quaternion(0.0339343, 0.593108, -0.156761, 0.788985)
+bones/15/rotation = Quaternion(-0.136273, -0.105687, -0.93989, 0.294731)
+bones/16/rotation = Quaternion(-0.322977, -1.61333e-06, -5.78597e-07, 0.946407)
+bones/17/rotation = Quaternion(0.694833, 0.277492, -0.283843, 0.599699)
+bones/17/scale = Vector3(0.999987, 1, 0.999998)
+bones/18/rotation = Quaternion(0.268756, -0.333767, 0.0417896, 0.902565)
+bones/20/rotation = Quaternion(-0.634117, -0.378432, 0.66455, 0.114277)
+bones/21/rotation = Quaternion(-0.00199781, 1.64694e-06, -3.51866e-08, 0.999998)
+bones/22/rotation = Quaternion(0.524473, -0.0711683, 0.27441, 0.802846)
+bones/23/rotation = Quaternion(0.441331, 0.338243, 0.105447, 0.824439)
 
 [node name="BaseBody_002" parent="ControlRig/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_53mfj")
 surface_material_override/1 = SubResource("StandardMaterial3D_any8q")
 surface_material_override/2 = SubResource("StandardMaterial3D_d6yd3")
+
+[node name="SwordAttachment" type="BoneAttachment3D" parent="ControlRig/Skeleton3D" index="1"]
+transform = Transform3D(0.338599, 0.679299, -0.651077, 0.632746, 0.347745, 0.691885, 0.696406, -0.646239, -0.312078, 5.30136, 8.42665, 0.586293)
+bone_name = "mixamorig_RightHand"
+bone_idx = 14
+
+[node name="BasicSword" parent="ControlRig" index="1" instance=ExtResource("3_lc0n7")]
+transform = Transform3D(0.75, -7.14677e-16, -2.81458, 5.2318e-16, 1.5, -1.13356e-15, 1.29904, -1.91497e-16, 1.625, 5.30136, 8.42665, 0.586293)
+
+[node name="Blade" parent="ControlRig/BasicSword" index="0"]
+transform = Transform3D(1, 1.67037e-25, 7.30144e-30, 0, -4.37114e-11, 1, 1.67037e-22, -0.001, -4.37114e-08, 0, 0, 0)
+
+[node name="GPUTrail3D" parent="ControlRig/BasicSword" index="1"]
+visible = false
+amount = 1
+lifetime = 1.0
+length = 1
+
+[editable path="ControlRig/BasicSword"]

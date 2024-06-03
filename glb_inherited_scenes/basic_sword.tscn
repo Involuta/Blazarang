@@ -27,14 +27,15 @@ shader_parameter/curve = ExtResource("5_4x7ld")
 [sub_resource type="QuadMesh" id="QuadMesh_8ktjm"]
 material = SubResource("ShaderMaterial_68wad")
 
-[node name="BasicSwordBlade" instance=ExtResource("1_k4b5i")]
+[node name="BasicSword" instance=ExtResource("1_k4b5i")]
+transform = Transform3D(1.5, -5.2318e-16, 1.13356e-15, 5.2318e-16, 1.5, -1.13356e-15, -5.2318e-16, 5.2318e-16, 3.25, 0, 0, 0)
 
 [node name="Blade" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.0563383, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 3.82137e-15, -3.82137e-15, 4.12925e-08, 1, 0, -0.944662, 4.37114e-08, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_qbx8q")
 
 [node name="GPUTrail3D" type="GPUParticles3D" parent="." index="1"]
-transform = Transform3D(3.9, 0, 0, 0, 3.9, 0, 0, 0, 3.9, 2.08165e-12, 3.8, 2.08165e-12)
+transform = Transform3D(3.75, 2.49843e-22, 6.14925e-23, 2.48154e-23, -1.63918e-07, 3.75, 2.19132e-22, -3.75, -1.63918e-07, 0.254468, 0.168414, -3.50598)
 amount = 12
 lifetime = 12.0
 explosiveness = 1.0
@@ -48,3 +49,4 @@ curve = ExtResource("5_4x7ld")
 _defaults_have_been_set = true
 
 [node name="BasicSwordHandle" parent="." index="3" instance=ExtResource("7_88eje")]
+transform = Transform3D(1, 0, 3.82137e-15, -3.82137e-15, 4.37114e-08, 1, 0, -1, 4.37114e-08, 0, 0, 0)

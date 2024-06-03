@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c676sw18ty8mi" path="res://glb_imports/MeleeT1H.glb" id="1_mkjmh"]
 [ext_resource type="Shader" path="res://glb_inherited_scenes/outline.gdshader" id="2_ixm25"]
-[ext_resource type="PackedScene" uid="uid://dasrfemvybmv" path="res://glb_inherited_scenes/basic_sword_blade.tscn" id="3_d5yu2"]
+[ext_resource type="PackedScene" uid="uid://dasrfemvybmv" path="res://glb_inherited_scenes/basic_sword.tscn" id="3_d5yu2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lndga"]
 render_priority = 0

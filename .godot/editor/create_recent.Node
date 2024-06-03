@@ -1,9 +1,9 @@
+BoneAttachment3D
 AnimationTree
 AudioStreamPlayer
 AudioStreamPlayer3D
 GPUTrail3D
 MeshInstance3D
-BoneAttachment3D
 ProgressBar
 TextureProgressBar
 CollisionShape3D
