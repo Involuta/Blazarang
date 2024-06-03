@@ -1,13 +1,13 @@
-res://enemies/enemy_melee_tier2.tscn
+res://enemies/enemy_melee_tier1.tscn
 res://addons/func_godot/textures/default_material.tres
 res://rang/slash_test.tres
+res://enemies/enemy_anims/mt1_overhead.res
 res://glb_inherited_scenes/outline.gdshader
 res://GPUTrail-main/shaders/trail.gdshader
 res://GPUTrail-main/defaults/texture.tres
 res://GPUTrail-main/defaults/curve.tres
-res://enemies/enemy_anims/mt2_overhead.res
-res://shaders/black_outline.gdshader
 res://glb_inherited_scenes/black_outline.gdshader
+res://shaders/black_outline.gdshader
 res://textures/solid_light_gray_tile.tres
 res://textures/black_tile.tres
 res://rang/roserang_shader.tres
@@ -18,7 +18,6 @@ res://levels/test_level.tres
 res://textures/white_border_black_solid_square.tres
 res://textures/white_border_black_center.tres
 res://shaders/outline_everything.gdshader
-res://enemies/enemy_anims/mt2_sweep.res
 res://levels/level1.tscn
 res://levels/test_level.tscn
 res://rang/roserang.tscn
@@ -47,11 +46,7 @@ res://glb_inherited_scenes/icon_mesh.tscn
 res://glb_inherited_scenes/mobile_gunner.tscn
 res://glb_inherited_scenes/basic_sword_blade.tscn
 res://levels/gauntlet_level1.tscn
-res://enemies/enemy_melee_tier1.tscn
 res://glb_inherited_scenes/melee_t1.tscn
 res://glb_inherited_scenes/basic_sword_handle.tscn
 res://glb_inherited_scenes/melee_t2.tscn
-res://levels/gauntlet_level1.gd
-res://levels/level1section_nodes/gauntlet_arena1.gd
-res://enemies/enemy_melee_base.gd
-res://enemies/enemy_anims/mt1_overhead.res
+res://enemies/enemy_melee_tier2.tscn
