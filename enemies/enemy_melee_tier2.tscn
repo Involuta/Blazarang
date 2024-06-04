@@ -40,34 +40,22 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MeleeHitboxPivot:visible")
+tracks/2/path = NodePath("MeleeHitboxPivot:process_mode")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.866668),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true, false]
+"values": [0, 4]
 }
-tracks/3/type = "value"
+tracks/3/type = "method"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("MeleeHitboxPivot:process_mode")
+tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.866668),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 4]
-}
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0.5, 1.01667),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
@@ -78,20 +66,20 @@ tracks/4/keys = {
 "method": &"end_attack"
 }]
 }
-tracks/5/type = "position_3d"
+tracks/4/type = "position_3d"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MeleeHitboxPivot/EnemyHitbox")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 2.08165e-12, -1, 2.08165e-12, 0.133334, 1, 2.08165e-12, 2.5, 2.08165e-12)
+tracks/5/type = "method"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("MeleeHitboxPivot/EnemyHitbox")
+tracks/5/path = NodePath(".")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
-tracks/5/keys = PackedFloat32Array(0, 1, 2.08165e-12, -1, 2.08165e-12, 0.133334, 1, 2.08165e-12, 2.5, 2.08165e-12)
-tracks/6/type = "method"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath(".")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
+tracks/5/keys = {
 "times": PackedFloat32Array(0.500001),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -131,34 +119,22 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MeleeHitboxPivot:visible")
+tracks/2/path = NodePath("MeleeHitboxPivot:process_mode")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 1.33334),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true, false]
+"values": [0, 4]
 }
-tracks/3/type = "value"
+tracks/3/type = "method"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("MeleeHitboxPivot:process_mode")
+tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 1.33334),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 4]
-}
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0.766667, 1.48334),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
@@ -169,13 +145,13 @@ tracks/4/keys = {
 "method": &"end_attack"
 }]
 }
-tracks/5/type = "position_3d"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("MeleeHitboxPivot/EnemyHitbox")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = PackedFloat32Array(0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12, 0.2, 1, 2.08165e-12, 2.5, 2.08165e-12)
+tracks/4/type = "position_3d"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MeleeHitboxPivot/EnemyHitbox")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12, 0.2, 1, 2.08165e-12, 2.5, 2.08165e-12)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2ftbc"]
 _data = {
@@ -241,13 +217,14 @@ advance_mode = 2
 states/OverheadCR/node = SubResource("AnimationNodeAnimation_xhl13")
 states/OverheadCR/position = Vector2(570.1, 52.1013)
 states/SweepCR/node = SubResource("AnimationNodeAnimation_lnhdq")
-states/SweepCR/position = Vector2(569.771, 150.235)
+states/SweepCR/position = Vector2(569.935, 150.735)
 states/WalkSpace/node = SubResource("AnimationNodeBlendSpace1D_xixeq")
 states/WalkSpace/position = Vector2(388.078, 100.039)
 transitions = ["Start", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_xruje"), "WalkSpace", "OverheadCR", SubResource("AnimationNodeStateMachineTransition_hibdj"), "OverheadCR", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_ito5k"), "WalkSpace", "SweepCR", SubResource("AnimationNodeStateMachineTransition_50775"), "SweepCR", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_bevw0")]
 graph_offset = Vector2(126.443, 8.235)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_kp0ng"]
+graph_offset = Vector2(-13.44, 54.72)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_cn63x")
 nodes/StateMachine/position = Vector2(90, 150)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -258,6 +235,7 @@ collision_mask = 90
 platform_floor_layers = 4294901762
 script = ExtResource("1_aale5")
 sweep_chance = 0.5
+follow_turn_speed = 0.1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_4b6ac")
@@ -335,10 +313,10 @@ bones/23/rotation = Quaternion(0.261358, 0.29407, -0.0623219, 0.917241)
 transform = Transform3D(0.308286, 0.163911, 0.937066, 0.892386, -0.391078, -0.22518, 0.329556, 0.905644, -0.266835, -3.67247, 6.47143, 4.25523)
 
 [node name="BasicSword" parent="VisualMesh/ControlRig" index="1"]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 3.24999, -3.67247, 6.47143, 4.25523)
+transform = Transform3D(1.49999, 0, 0, 0, 1.5, 0, 0, 0, 3.24999, -3.67247, 6.47143, 4.25523)
 
 [node name="Blade" parent="VisualMesh/ControlRig/BasicSword" index="0"]
-transform = Transform3D(1, 1.67037e-22, 7.30144e-30, 0, -4.37114e-08, 1, 1.67037e-22, -1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(1, 1.67037e-25, 7.30144e-30, 0, -4.37114e-11, 1, 1.67037e-22, -0.001, -4.37114e-08, 0, 0, 0)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_kp0ng")

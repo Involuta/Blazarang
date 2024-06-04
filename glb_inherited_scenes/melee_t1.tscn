@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cii55ymemjvsq"]
+[gd_scene load_steps=9 format=3 uid="uid://cii55ymemjvsq"]
 
 [ext_resource type="PackedScene" uid="uid://c676sw18ty8mi" path="res://glb_imports/MeleeT1H.glb" id="1_mkjmh"]
+[ext_resource type="Script" path="res://glb_inherited_scenes/attach_sword.gd" id="2_f5ueq"]
 [ext_resource type="Shader" path="res://glb_inherited_scenes/outline.gdshader" id="2_ixm25"]
 [ext_resource type="PackedScene" uid="uid://dasrfemvybmv" path="res://glb_inherited_scenes/basic_sword.tscn" id="3_d5yu2"]
 
@@ -28,9 +29,24 @@ albedo_color = Color(0.392157, 0.0588235, 0.0588235, 1)
 roughness = 0.2
 
 [node name="MeleeT1H" instance=ExtResource("1_mkjmh")]
-transform = Transform3D(-0.11, 3.83666e-17, -9.61651e-09, 3.83666e-17, 0.11, -3.83666e-17, 9.61651e-09, -3.83666e-17, -0.11, 0, 0, 0)
+transform = Transform3D(-1, 3.48787e-16, -1.50996e-07, 3.48787e-16, 1, -3.48787e-16, 1.50996e-07, -3.48787e-16, -1, 0, 0, 0)
 
-[node name="Skeleton3D" parent="ControlRig" index="0"]
+[node name="ControlRig" parent="." index="0"]
+script = ExtResource("2_f5ueq")
+
+[node name="BasicSword" parent="ControlRig" index="0" instance=ExtResource("3_d5yu2")]
+transform = Transform3D(-6.55671e-08, 1.5, 7.842e-15, 1.44889, 6.33329e-08, 0.841162, 0.388229, 1.697e-08, -3.13926, -7.45628, 13.9867, -0.411582)
+
+[node name="Blade" parent="ControlRig/BasicSword" index="0"]
+transform = Transform3D(1, 1.67037e-22, 7.30144e-30, 0, -4.37114e-08, 1, 1.67037e-22, -1, -4.37114e-08, 0, 0, 0)
+
+[node name="GPUTrail3D" parent="ControlRig/BasicSword" index="1"]
+visible = false
+amount = 1
+lifetime = 1.0
+length = 1
+
+[node name="Skeleton3D" parent="ControlRig" index="1"]
 bones/6/position = Vector3(3.05176e-05, 2.56255, -0.0376814)
 bones/8/rotation = Quaternion(-0.175583, -0.0102147, -0.0628666, 0.982402)
 bones/9/rotation = Quaternion(2.72647e-08, -5.41212e-08, 0.0425484, 0.999094)
@@ -56,10 +72,9 @@ surface_material_override/0 = SubResource("StandardMaterial3D_pgguw")
 surface_material_override/1 = SubResource("StandardMaterial3D_w1d2c")
 surface_material_override/2 = SubResource("StandardMaterial3D_ii2jm")
 
-[node name="BoneAttachment3D" type="BoneAttachment3D" parent="ControlRig/Skeleton3D" index="1"]
-transform = Transform3D(-0.022833, -0.999674, -0.0114062, -0.0363356, 0.0122314, -0.999265, 0.999079, -0.0224017, -0.036603, -7.45628, 13.9867, -0.411581)
+[node name="SwordAttachment" type="BoneAttachment3D" parent="ControlRig/Skeleton3D" index="1"]
+transform = Transform3D(-0.0228332, -0.999674, -0.0114055, -0.0363356, 0.0122307, -0.999265, 0.999079, -0.0224019, -0.0366031, -7.45628, 13.9867, -0.411582)
 bone_name = "mixamorig_RightHand"
 bone_idx = 14
 
-[node name="BasicSword" parent="ControlRig/Skeleton3D/BoneAttachment3D" index="0" instance=ExtResource("3_d5yu2")]
-transform = Transform3D(-0.50584, 2.20098, -0.563824, -0.459815, 0.705932, 1.36607, 1.33518, 1.07697, 0.256844, 1.37881, 2.02122, 0.567441)
+[editable path="ControlRig/BasicSword"]
