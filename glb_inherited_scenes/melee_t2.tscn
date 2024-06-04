@@ -35,30 +35,30 @@ transform = Transform3D(-1, 3.48787e-16, -1.50996e-07, 3.48787e-16, 1, -3.48787e
 script = ExtResource("2_e4ohs")
 
 [node name="Skeleton3D" parent="ControlRig" index="0"]
-bones/0/position = Vector3(-0.0291872, 4.77264, 2.28256)
-bones/0/rotation = Quaternion(0.299386, 0.00476733, 0.0270895, 0.953735)
-bones/1/rotation = Quaternion(-0.0888723, -0.041896, -0.0251377, 0.994844)
-bones/2/rotation = Quaternion(0.0929774, -0.0468292, 0.00287078, 0.994562)
-bones/3/rotation = Quaternion(0.00412602, -0.047665, -0.00399914, 0.998847)
-bones/4/rotation = Quaternion(-0.0903567, -0.0115042, 0.0147695, 0.995733)
+bones/0/position = Vector3(-0.0291872, 5.80811, 0.164566)
+bones/0/rotation = Quaternion(0.0576362, 0.000341886, -0.000566353, 0.998337)
+bones/1/rotation = Quaternion(0.108078, -0.0277602, -0.00174684, 0.993753)
+bones/2/rotation = Quaternion(0.0841636, -0.0467452, 0.00377451, 0.995348)
+bones/3/rotation = Quaternion(-0.0189662, -0.0471236, 0.00054957, 0.998709)
+bones/4/rotation = Quaternion(-0.0903568, -0.0115042, 0.0147695, 0.995733)
 bones/5/rotation = Quaternion(-0.0175194, 0.14048, 0.00949387, 0.989883)
 bones/7/rotation = Quaternion(0.571476, 0.418331, -0.561141, 0.42841)
-bones/8/rotation = Quaternion(0.238596, 0.0141981, 0.367898, 0.898622)
-bones/9/rotation = Quaternion(-9.99873e-07, 9.1481e-08, 0.687149, 0.726516)
-bones/10/rotation = Quaternion(0.175543, -0.480133, 0.261594, 0.818673)
+bones/8/rotation = Quaternion(0.328169, 0.191799, 0.42546, 0.821281)
+bones/9/rotation = Quaternion(-9.62686e-07, -1.30679e-07, 0.539047, 0.842276)
+bones/10/rotation = Quaternion(0.086833, -0.58566, -0.0397657, 0.804911)
 bones/11/rotation = Quaternion(0.589157, -0.41725, 0.55722, 0.410246)
-bones/12/rotation = Quaternion(0.185788, -0.0244776, -0.678814, 0.709996)
-bones/13/rotation = Quaternion(2.33702e-06, 1.17878e-06, -0.428472, 0.903555)
-bones/14/rotation = Quaternion(0.320291, 0.548881, -0.189782, 0.748416)
-bones/15/rotation = Quaternion(0.1112, -0.735368, -0.665691, 0.0610252)
-bones/16/rotation = Quaternion(-0.537149, -1.41973e-06, -9.69809e-07, 0.843487)
-bones/17/rotation = Quaternion(0.580468, -0.00271189, -0.121459, 0.805169)
+bones/12/rotation = Quaternion(0.1329, -0.305569, -0.65418, 0.678979)
+bones/13/rotation = Quaternion(2.38543e-06, 1.06843e-06, -0.388833, 0.921308)
+bones/14/rotation = Quaternion(-0.0574114, 0.676197, -0.188652, 0.70984)
+bones/15/rotation = Quaternion(0.124134, -0.370428, -0.916798, 0.0828038)
+bones/16/rotation = Quaternion(-0.356729, -1.59926e-06, -6.49114e-07, 0.934208)
+bones/17/rotation = Quaternion(0.557384, -0.00131292, -0.127542, 0.820399)
 bones/17/scale = Vector3(0.999986, 1.00001, 0.999999)
 bones/18/rotation = Quaternion(0.23471, -0.294851, 0.0569131, 0.924519)
-bones/20/rotation = Quaternion(-0.503992, -0.0583156, 0.849012, 0.147547)
-bones/21/rotation = Quaternion(-0.00200027, 1.6798e-06, -4.58314e-08, 0.999998)
-bones/22/rotation = Quaternion(0.685183, -0.240491, 0.42133, 0.543295)
-bones/23/rotation = Quaternion(0.203956, 0.265839, -0.0499746, 0.940869)
+bones/20/rotation = Quaternion(-0.228517, -0.0410845, 0.962999, 0.136843)
+bones/21/rotation = Quaternion(-0.244344, 1.63386e-06, 3.98655e-07, 0.969689)
+bones/22/rotation = Quaternion(0.769668, -0.164061, 0.190562, 0.58684)
+bones/23/rotation = Quaternion(0.15086, 0.261278, -0.0729739, 0.950605)
 
 [node name="BaseBody_002" parent="ControlRig/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_53mfj")
@@ -66,15 +66,15 @@ surface_material_override/1 = SubResource("StandardMaterial3D_any8q")
 surface_material_override/2 = SubResource("StandardMaterial3D_d6yd3")
 
 [node name="SwordAttachment" type="BoneAttachment3D" parent="ControlRig/Skeleton3D" index="1"]
-transform = Transform3D(-0.314362, 0.936558, 0.155035, 0.732716, 0.135544, 0.666899, 0.603576, 0.323244, -0.728841, -1.70891, 5.69251, 8.46334)
+transform = Transform3D(-0.383885, 0.679237, 0.625515, 0.632813, -0.299798, 0.71391, 0.672443, 0.669894, -0.314743, -1.20726, 5.68224, 3.83827)
 bone_name = "mixamorig_RightHand"
 bone_idx = 14
 
 [node name="BasicSword" parent="ControlRig" index="1" instance=ExtResource("3_lc0n7")]
-transform = Transform3D(-6.55671e-08, 1.5, 7.12617e-15, 1.44889, 6.33329e-08, 0.841162, 0.388229, 1.697e-08, -3.13926, -1.70891, 5.69251, 8.46334)
+transform = Transform3D(-6.55671e-08, 1.5, -1.18245e-14, 1.44889, 6.33329e-08, 0.841162, 0.388229, 1.697e-08, -3.13926, -1.20726, 5.68224, 3.83827)
 
 [node name="Blade" parent="ControlRig/BasicSword" index="0"]
-transform = Transform3D(1, 1.67037e-22, 7.30144e-30, 0, -4.37114e-08, 1, 1.67037e-22, -1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(1, 1.67037e-25, 7.30142e-30, 0, -4.37114e-11, 1, 1.67037e-22, -0.001, -4.37114e-08, 0, 0, 0)
 
 [node name="GPUTrail3D" parent="ControlRig/BasicSword" index="1"]
 visible = false

@@ -244,10 +244,10 @@ libraries = {
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
 process_mode = 4
-transform = Transform3D(1, -6.92275e-16, -6.05665e-17, -6.05665e-17, -0.173649, 0.984808, -6.92275e-16, -0.984808, -0.173649, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(1, -2.29495e-16, 3.27753e-16, 3.27753e-16, 0.939693, -0.34202, -2.29495e-16, 0.34202, 0.939693, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
-transform = Transform3D(0.999999, 2.15301e-08, -2.2719e-14, -8.9407e-08, 0.999999, 0, -6.17927e-15, -6.2758e-15, 0.999999, 2.08165e-12, 2.75, 2.08165e-12)
+transform = Transform3D(0.999999, 2.15301e-08, -2.2719e-14, -8.9407e-08, 0.999999, 0, -6.17927e-15, -6.2758e-15, 0.999999, 2.08165e-12, -1, 2.08165e-12)
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("3_h3l5p")
