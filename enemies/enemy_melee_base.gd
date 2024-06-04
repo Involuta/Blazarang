@@ -136,10 +136,6 @@ func attack():
 func stop_aiming_at_target():
 	aiming_at_target = false
 
-func play_vfx():
-	if $SlashTest:
-		$SlashTest/AnimationPlayer.play("slash_test")
-
 func can_see_target():
 	var space_state := get_world_3d().direct_space_state
 	var sight_dir := global_position.direction_to(target.global_position)

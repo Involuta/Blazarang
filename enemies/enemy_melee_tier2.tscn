@@ -73,20 +73,6 @@ tracks/4/path = NodePath("MeleeHitboxPivot/EnemyHitbox")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = PackedFloat32Array(0, 1, 2.08165e-12, -1, 2.08165e-12, 0.133334, 1, 2.08165e-12, 2.5, 2.08165e-12)
-tracks/5/type = "method"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath(".")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0.500001),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"play_vfx"
-}]
-}
 
 [sub_resource type="Animation" id="Animation_fpxs0"]
 resource_name = "sweep"
@@ -261,7 +247,6 @@ libraries = {
 }
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
-process_mode = 4
 transform = Transform3D(-0.500004, -0.866023, -1.26261e-21, -3.13499e-06, 1.81001e-06, 1, -0.866023, 0.500004, -3.61999e-06, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 visible = false
 
