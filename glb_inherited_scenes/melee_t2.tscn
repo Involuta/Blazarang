@@ -25,7 +25,7 @@ albedo_color = Color(0.607843, 0, 0.607843, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d6yd3"]
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(0.294118, 0.0588235, 0.294118, 1)
+albedo_color = Color(0.392157, 0.0588235, 0.392157, 1)
 roughness = 0.2
 
 [node name="MeleeT2H" instance=ExtResource("1_u3j2o")]
@@ -36,21 +36,21 @@ script = ExtResource("2_e4ohs")
 
 [node name="Skeleton3D" parent="ControlRig" index="0"]
 bones/0/position = Vector3(-0.0291872, 5.80811, 0.164566)
-bones/0/rotation = Quaternion(0.0576362, 0.000341886, -0.000566353, 0.998337)
+bones/0/rotation = Quaternion(0.0576362, 0.000341885, -0.000566353, 0.998337)
 bones/1/rotation = Quaternion(0.108078, -0.0277602, -0.00174684, 0.993753)
 bones/2/rotation = Quaternion(0.0841636, -0.0467452, 0.00377451, 0.995348)
 bones/3/rotation = Quaternion(-0.0189662, -0.0471236, 0.00054957, 0.998709)
 bones/4/rotation = Quaternion(-0.0903568, -0.0115042, 0.0147695, 0.995733)
 bones/5/rotation = Quaternion(-0.0175194, 0.14048, 0.00949387, 0.989883)
 bones/7/rotation = Quaternion(0.571476, 0.418331, -0.561141, 0.42841)
-bones/8/rotation = Quaternion(0.328169, 0.191799, 0.42546, 0.821281)
-bones/9/rotation = Quaternion(-9.62686e-07, -1.30679e-07, 0.539047, 0.842276)
-bones/10/rotation = Quaternion(0.086833, -0.58566, -0.0397657, 0.804911)
+bones/8/rotation = Quaternion(0.346636, 0.181361, 0.479744, 0.785364)
+bones/9/rotation = Quaternion(-9.58774e-07, -1.53291e-07, 0.510721, 0.859746)
+bones/10/rotation = Quaternion(0.0564935, -0.582979, -0.0598869, 0.808305)
 bones/11/rotation = Quaternion(0.589157, -0.41725, 0.55722, 0.410246)
-bones/12/rotation = Quaternion(0.1329, -0.305569, -0.65418, 0.678979)
-bones/13/rotation = Quaternion(2.38543e-06, 1.06843e-06, -0.388833, 0.921308)
-bones/14/rotation = Quaternion(-0.0574114, 0.676197, -0.188652, 0.70984)
-bones/15/rotation = Quaternion(0.124134, -0.370428, -0.916798, 0.0828038)
+bones/12/rotation = Quaternion(0.139173, -0.301314, -0.668336, 0.665709)
+bones/13/rotation = Quaternion(2.3517e-06, 1.08494e-06, -0.398895, 0.916997)
+bones/14/rotation = Quaternion(-0.0777663, 0.674361, -0.165016, 0.715513)
+bones/15/rotation = Quaternion(0.124134, -0.370428, -0.916797, 0.0828038)
 bones/16/rotation = Quaternion(-0.356729, -1.59926e-06, -6.49114e-07, 0.934208)
 bones/17/rotation = Quaternion(0.557384, -0.00131292, -0.127542, 0.820399)
 bones/17/scale = Vector3(0.999986, 1.00001, 0.999999)
@@ -66,12 +66,12 @@ surface_material_override/1 = SubResource("StandardMaterial3D_any8q")
 surface_material_override/2 = SubResource("StandardMaterial3D_d6yd3")
 
 [node name="SwordAttachment" type="BoneAttachment3D" parent="ControlRig/Skeleton3D" index="1"]
-transform = Transform3D(-0.383885, 0.679237, 0.625515, 0.632813, -0.299798, 0.71391, 0.672443, 0.669894, -0.314743, -1.20726, 5.68224, 3.83827)
+transform = Transform3D(-0.383885, 0.679237, 0.625515, 0.632813, -0.299798, 0.71391, 0.672442, 0.669894, -0.314742, -0.934523, 5.83373, 3.83828)
 bone_name = "mixamorig_RightHand"
 bone_idx = 14
 
 [node name="BasicSword" parent="ControlRig" index="1" instance=ExtResource("3_lc0n7")]
-transform = Transform3D(-6.55671e-08, 1.5, -1.18245e-14, 1.44889, 6.33329e-08, 0.841162, 0.388229, 1.697e-08, -3.13926, -1.20726, 5.68224, 3.83827)
+transform = Transform3D(-6.55671e-08, 1.5, 4.14628e-15, -0.750001, -3.27835e-08, -2.81458, -1.29904, -5.67828e-08, 1.625, -0.934523, 5.83373, 3.83828)
 
 [node name="Blade" parent="ControlRig/BasicSword" index="0"]
 transform = Transform3D(1, 1.67037e-25, 7.30142e-30, 0, -4.37114e-11, 1, 1.67037e-22, -0.001, -4.37114e-08, 0, 0, 0)
