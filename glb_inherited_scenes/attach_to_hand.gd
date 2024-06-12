@@ -1,16 +1,19 @@
 @tool
 extends Node3D
 
-@export var obj_name := ""
-@export var attachment_name := ""
+@export var obj_names := ["BasicSword"]
+@export var attachment_names := ["SwordAttachment"]
 @export var local_offset := Vector3.ZERO
 
-var obj
-var attachment
+var objs := []
+var attachments := []
 
 func _ready():
-	obj = get_node(obj_name)
-	attachment = get_node("Skeleton3D/"+attachment_name)
+	for i in range(obj_names.size()):
+		objs.append(get_node(obj_names[i]))
+	for i in range(attachment_names.size()):
+		attachments.append(get_node("Skeleton3D/"+attachment_names[i]))
 
 func _process(delta):
-	obj.global_position = attachment.global_position + local_offset * attachment.transform.basis
+	for i in range(objs.size()):
+		objs[i].global_position = attachments[i].global_position + local_offset * attachments[i].transform.basis

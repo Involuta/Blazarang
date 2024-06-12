@@ -1,10 +1,10 @@
 res://levels/level1.tscn
 res://addons/func_godot/textures/default_material.tres
+res://rang/slash_test.tres
+res://glb_inherited_scenes/outline.gdshader
 res://GPUTrail-main/shaders/trail.gdshader
 res://GPUTrail-main/defaults/texture.tres
 res://GPUTrail-main/defaults/curve.tres
-res://rang/slash_test.tres
-res://glb_inherited_scenes/outline.gdshader
 res://glb_inherited_scenes/black_outline.gdshader
 res://shaders/black_outline.gdshader
 res://textures/solid_light_gray_tile.tres
@@ -42,8 +42,9 @@ res://glb_inherited_scenes/basic_sword.tscn
 res://levels/gauntlet_level1.tscn
 res://enemies/enemy_melee_tier1.tscn
 res://glb_inherited_scenes/basic_sword_handle.tscn
-res://glb_inherited_scenes/melee_t3.tscn
 res://enemies/enemy_melee_tier2.tscn
-res://glb_inherited_scenes/melee_t2.tscn
 res://enemies/enemy_melee_tier3.tscn
-res://enemies/enemy_anims/mt3_big_charge_up.res
+res://glb_inherited_scenes/melee_t3.tscn
+res://glb_inherited_scenes/melee_t1.tscn
+res://glb_inherited_scenes/attach_to_hand.gd
+res://glb_inherited_scenes/melee_t2.tscn

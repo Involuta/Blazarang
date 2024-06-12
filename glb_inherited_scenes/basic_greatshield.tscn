@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmyp1gi10xqj"]
+
+[ext_resource type="PackedScene" uid="uid://dbxvhpj7hyyxk" path="res://glb_imports/BasicGreatshield.glb" id="1_kcop5"]
+
+[node name="BasicGreatshield" instance=ExtResource("1_kcop5")]

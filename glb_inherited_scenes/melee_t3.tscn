@@ -56,8 +56,6 @@ roughness = 0.2
 
 [node name="ControlRig" parent="." index="0"]
 script = ExtResource("2_4auvi")
-obj_name = "BasicSword"
-attachment_name = "SwordAttachment"
 local_offset = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 
 [node name="Skeleton3D" parent="ControlRig" index="0"]
