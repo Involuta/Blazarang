@@ -1,5 +1,57 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmyp1gi10xqj"]
+[gd_scene load_steps=6 format=3 uid="uid://cmyp1gi10xqj"]
 
 [ext_resource type="PackedScene" uid="uid://dbxvhpj7hyyxk" path="res://glb_imports/BasicGreatshield.glb" id="1_kcop5"]
 
+[sub_resource type="Shader" id="Shader_gxs6v"]
+code = "shader_type spatial;
+render_mode cull_front, unshaded;
+
+uniform vec4 outline_color : source_color;
+uniform float outline_width = 1.0;
+
+void vertex() {
+	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
+	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
+	
+	vec2 offset = normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
+	
+	clip_position.xy += offset;
+	
+	POSITION = clip_position;
+}
+
+void fragment() {
+	ALBEDO = outline_color.rgb;
+	if (outline_color.a < 1.0) {
+		ALPHA = outline_color.a;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vsjyc"]
+render_priority = 0
+shader = SubResource("Shader_gxs6v")
+shader_parameter/outline_color = Color(1, 1, 0, 1)
+shader_parameter/outline_width = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qr4jh"]
+next_pass = SubResource("ShaderMaterial_vsjyc")
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.45098, 0.45098, 0.0588235, 1)
+roughness = 0.2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ggt1r"]
+size = Vector3(10.5, 16, 3.5)
+
 [node name="BasicGreatshield" instance=ExtResource("1_kcop5")]
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_qr4jh")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="2"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.297339, -7.14068, -2.08137)
+shape = SubResource("BoxShape3D_ggt1r")

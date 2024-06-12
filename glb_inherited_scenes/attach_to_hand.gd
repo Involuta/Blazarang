@@ -13,6 +13,8 @@ func _ready():
 		objs.append(get_node(obj_names[i]))
 	for i in range(attachment_names.size()):
 		attachments.append(get_node("Skeleton3D/"+attachment_names[i]))
+	if objs.size() == 0:
+		print(obj_names)
 
 func _process(delta):
 	for i in range(objs.size()):
