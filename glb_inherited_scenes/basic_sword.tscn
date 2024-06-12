@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dasrfemvybmv"]
+[gd_scene load_steps=17 format=3 uid="uid://dasrfemvybmv"]
 
 [ext_resource type="PackedScene" uid="uid://cpx64anoc5p8u" path="res://glb_imports/BasicSwordBlade.glb" id="1_k4b5i"]
 [ext_resource type="Shader" path="res://GPUTrail-main/shaders/trail.gdshader" id="2_iitfv"]
@@ -27,15 +27,104 @@ shader_parameter/curve = ExtResource("5_4x7ld")
 [sub_resource type="QuadMesh" id="QuadMesh_8ktjm"]
 material = SubResource("ShaderMaterial_68wad")
 
+[sub_resource type="Animation" id="Animation_kv86i"]
+resource_name = "BigExtendBlade"
+length = 0.116668
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Blade:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.116667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 0.001, 1), Vector3(1, 3, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BasicSwordHandle:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.116667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 1, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_670cs"]
+resource_name = "BigRetractBlade"
+length = 0.116668
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Blade:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.116667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 3, 3), Vector3(1, 0.001, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BasicSwordHandle:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.116667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 3), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0cncl"]
+resource_name = "ExtendBlade"
+length = 0.116667
+step = 0.0166667
+tracks/0/type = "scale_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Blade")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1, 0.001, 1, 0.0333333, 1, 1, 0.199052, 1, 0.0666667, 1, 1, 0.606808, 1, 0.1, 1, 1, 0.944662, 1, 0.116667, 1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_57cxp"]
+resource_name = "RetractBlade"
+length = 0.116667
+tracks/0/type = "scale_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Blade")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1, 1, 1, 0.0333333, 1, 1, 0.801948, 1, 0.0666667, 1, 1, 0.394192, 1, 0.1, 1, 1, 0.0563383, 1, 0.116667, 1, 1, 0.001, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v7csg"]
+_data = {
+"BigExtendBlade": SubResource("Animation_kv86i"),
+"BigRetractBlade": SubResource("Animation_670cs"),
+"ExtendBlade": SubResource("Animation_0cncl"),
+"RetractBlade": SubResource("Animation_57cxp")
+}
+
 [node name="BasicSword" instance=ExtResource("1_k4b5i")]
 transform = Transform3D(1.5, -5.2318e-16, 1.13356e-15, 5.2318e-16, 1.5, -1.13356e-15, -5.2318e-16, 5.2318e-16, 3.25, 0, 0, 0)
 
 [node name="Blade" parent="." index="0"]
-transform = Transform3D(1, 0, 3.82137e-15, -3.82137e-15, 4.12925e-08, 1, 0, -0.944662, 4.37114e-08, 0, 0, 0)
+transform = Transform3D(1, 5.01111e-22, 2.19043e-29, 0, -1.31134e-07, 3, 1.67037e-22, -3, -1.31134e-07, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_qbx8q")
 
 [node name="GPUTrail3D" type="GPUParticles3D" parent="." index="1"]
-transform = Transform3D(3.75, 2.49843e-22, 6.14925e-23, 2.48154e-23, -1.63918e-07, 3.75, 2.19132e-22, -3.75, -1.63918e-07, 0.254468, 0.168414, -3.50598)
+transform = Transform3D(3.75, 2.49843e-22, 6.14925e-23, 2.48154e-23, -1.63918e-07, 3.75, 2.19132e-22, -3.75, -1.63918e-07, 0.25, 0.17, -3.5)
 amount = 12
 lifetime = 12.0
 explosiveness = 1.0
@@ -48,5 +137,10 @@ color_ramp = ExtResource("4_1ldum")
 curve = ExtResource("5_4x7ld")
 _defaults_have_been_set = true
 
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_v7csg")
+}
+
 [node name="BasicSwordHandle" parent="." index="3" instance=ExtResource("7_88eje")]
-transform = Transform3D(1, 0, 3.82137e-15, -3.82137e-15, 4.37114e-08, 1, 0, -1, 4.37114e-08, 0, 0, 0)
+transform = Transform3D(1, 1.67037e-22, 2.19043e-29, 0, -4.37114e-08, 3, 1.67037e-22, -1, -1.31134e-07, 0, 0, 0)

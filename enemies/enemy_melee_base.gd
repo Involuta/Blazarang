@@ -103,8 +103,6 @@ func start_attack():
 	behav_state = ATTACK
 	aiming_at_target = true
 	choose_attack()
-	#anim_player.play(choose_attack())
-	#await get_tree().create_timer(attack_duration_secs).timeout
 
 func end_attack():
 	if anim_tree_exists:
