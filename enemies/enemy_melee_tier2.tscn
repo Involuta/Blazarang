@@ -247,7 +247,8 @@ libraries = {
 }
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
-transform = Transform3D(-0.500004, -0.866023, -1.26261e-21, -3.13499e-06, 1.81001e-06, 1, -0.866023, 0.500004, -3.61999e-06, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+process_mode = 4
+transform = Transform3D(1, -6.92275e-16, -6.05665e-17, -6.05665e-17, -0.173649, 0.984807, -6.92275e-16, -0.984807, -0.173649, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 visible = false
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
@@ -295,7 +296,7 @@ bones/22/rotation = Quaternion(0.743297, -0.162109, 0.187418, 0.621373)
 bones/23/rotation = Quaternion(0.261358, 0.29407, -0.0623219, 0.917241)
 
 [node name="SwordAttachment" parent="VisualMesh/ControlRig/Skeleton3D" index="1"]
-transform = Transform3D(0.308286, 0.163911, 0.937066, 0.892386, -0.391078, -0.22518, 0.329556, 0.905644, -0.266835, -3.67247, 6.47143, 4.25523)
+transform = Transform3D(0.308286, 0.163911, 0.937066, 0.892385, -0.391078, -0.225179, 0.329556, 0.905644, -0.266836, -3.67247, 6.47143, 4.25523)
 
 [node name="BasicSword" parent="VisualMesh/ControlRig" index="1"]
 transform = Transform3D(1.49999, 0, 0, 0, 1.5, 0, 0, 0, 3.24999, -3.67247, 6.47143, 4.25523)

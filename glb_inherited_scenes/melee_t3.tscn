@@ -91,20 +91,23 @@ surface_material_override/1 = SubResource("StandardMaterial3D_7t628")
 surface_material_override/2 = SubResource("StandardMaterial3D_yj0qj")
 
 [node name="SwordAttachment" type="BoneAttachment3D" parent="ControlRig/Skeleton3D" index="1"]
-transform = Transform3D(0.178243, -0.217555, 0.959635, 0.0948686, 0.974508, 0.203306, -0.979402, 0.0548014, 0.194338, -3.54712, 24.7925, -1.25035)
+transform = Transform3D(0.178243, -0.217556, 0.959635, 0.0948678, 0.974508, 0.203307, -0.979402, 0.0548004, 0.194338, -3.54713, 24.7925, -1.25036)
 bone_name = "mixamorig_RightHand"
 bone_idx = 14
 
 [node name="BasicSword" parent="ControlRig" index="1" instance=ExtResource("3_a4jtx")]
-transform = Transform3D(-6.55471e-08, 1.5, -4.95864e-09, 0.0261786, -1.1443e-09, -3.2495, -1.49977, -6.55771e-08, -0.0567202, -3.54712, 24.7925, -1.25035)
+transform = Transform3D(-6.55471e-08, 1.5, -4.95863e-09, 0.0261786, -1.1443e-09, -3.2495, -1.49977, -6.55771e-08, -0.0567202, -3.54713, 24.7925, -1.25036)
 
 [node name="Blade" parent="ControlRig/BasicSword" index="0"]
 transform = Transform3D(1, 1.67037e-25, 7.30142e-30, 0, -4.37114e-11, 1, 1.67037e-22, -0.001, -4.37114e-08, 0, 0, 0)
 
 [node name="GPUTrail3D" parent="ControlRig/BasicSword" index="1"]
-transform = Transform3D(3.75, 6.57396e-22, 9.57856e-30, 0, -4.91753e-07, 3.75, 2.19132e-22, -11.25, -1.63918e-07, 0.254, 0.168, -10)
+transform = Transform3D(11.25, 6.57396e-22, 2.87357e-29, 0, -4.91753e-07, 11.25, 6.57396e-22, -11.25, -4.91753e-07, 0.254, 0.168, -10)
 amount = 36
 lifetime = 36.0
 length = 36
+
+[node name="BasicSwordHandle" parent="ControlRig/BasicSword" index="3"]
+transform = Transform3D(1, 1.67037e-22, 7.30142e-30, 0, -4.37114e-08, 1, 1.67037e-22, -1, -4.37114e-08, 0, 0, 0)
 
 [editable path="ControlRig/BasicSword"]

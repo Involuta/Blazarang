@@ -271,9 +271,6 @@ surface_material_override/0 = SubResource("ShaderMaterial_b2801")
 [node name="VisualMesh" parent="." instance=ExtResource("6_7rw0y")]
 transform = Transform3D(-0.15, 5.23181e-17, -2.26494e-08, 5.23181e-17, 0.15, -5.23181e-17, 2.26494e-08, -5.23181e-17, -0.15, 0, -1.37309, 0)
 
-[node name="ControlRig" parent="VisualMesh" index="0"]
-attachment_name = null
-
 [node name="BasicSword" parent="VisualMesh/ControlRig" index="0"]
 transform = Transform3D(1.49998, 0, 0, 0, 1.49995, 0, 0, 0, 3.24997, -1.52903, 8.72481, 3.84327)
 
@@ -311,7 +308,7 @@ bones/23/position = Vector3(7.88423e-08, 1.78674, -3.3062e-07)
 bones/23/rotation = Quaternion(0.333948, 0.14726, -0.0331324, 0.930428)
 bones/24/position = Vector3(2.14204e-08, 0.771728, 1.75089e-07)
 
-[node name="BoneAttachment3D" parent="VisualMesh/ControlRig/Skeleton3D" index="1"]
+[node name="SwordAttachment" parent="VisualMesh/ControlRig/Skeleton3D" index="1"]
 transform = Transform3D(0.314971, 0.181436, 0.931597, 0.869627, -0.448359, -0.206698, 0.380188, 0.875246, -0.299002, -1.52903, 8.72482, 3.84328)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]

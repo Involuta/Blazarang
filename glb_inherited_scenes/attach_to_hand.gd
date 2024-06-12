@@ -13,4 +13,4 @@ func _ready():
 	attachment = get_node("Skeleton3D/"+attachment_name)
 
 func _process(delta):
-	obj.global_position = attachment.global_position + local_offset * attachment.basis
+	obj.global_position = attachment.global_position + local_offset * attachment.transform.basis

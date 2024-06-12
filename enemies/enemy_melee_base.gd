@@ -11,7 +11,6 @@ var behav_state = FOLLOW
 
 @export var follow_speed := 5.0
 @export var target_distance := 3.0
-@export var attack_duration_secs := 1.2
 @export var sweep_chance := .2
 @export var follow_turn_speed := .15
 @export var attack_turn_speed := .5
