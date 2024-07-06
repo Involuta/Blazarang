@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://deka1sdtxvdp8"]
+
+[ext_resource type="PackedScene" uid="uid://b4etr8hvkh0om" path="res://glb_imports/BasicGun.glb" id="1_v3dwv"]
+[ext_resource type="Shader" path="res://glb_inherited_scenes/outline.gdshader" id="2_gs7ux"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gt7tt"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+roughness = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5i1js"]
+render_priority = 0
+shader = ExtResource("2_gs7ux")
+shader_parameter/outline_color = Color(0.529412, 0.443137, 0.980392, 1)
+shader_parameter/outline_width = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g87a8"]
+next_pass = SubResource("ShaderMaterial_5i1js")
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.4, 0.2, 0.901961, 1)
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_od25a"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.333333, 0.333333, 0.333333, 1)
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gsvly"]
+shading_mode = 0
+albedo_color = Color(0.4, 0.2, 0.901961, 1)
+
+[node name="BasicGun" instance=ExtResource("1_v3dwv")]
+
+[node name="Cube" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.13688)
+surface_material_override/0 = SubResource("StandardMaterial3D_gt7tt")
+surface_material_override/1 = SubResource("StandardMaterial3D_g87a8")
+surface_material_override/2 = SubResource("StandardMaterial3D_od25a")
+surface_material_override/3 = SubResource("StandardMaterial3D_gsvly")

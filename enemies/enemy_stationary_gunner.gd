@@ -15,6 +15,8 @@ var bullet := preload("res://enemies/enemy_bullet.tscn")
 @onready var animation_player := $AnimationPlayer
 @onready var level := $/root/Level
 @onready var target := $/root/Level/Target
+@onready var gun_mesh := $VisualMesh
+@onready var stand_mesh := $BasicStationaryGunStand
 
 func _ready():
 	add_to_group("lockonables")
@@ -29,8 +31,8 @@ func _physics_process(delta):
 		lerp_look_at_target(attack_turn_speed)
 
 func lerp_look_at_target(turn_speed):
-	var vec3_to_target := global_position.direction_to(target.global_position)
-	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
+	var vec3_to_target := -global_position.direction_to(target.global_position)
+	gun_mesh.rotation.y = lerp_angle(gun_mesh.rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
 
 func start_attack():
 	shooting = true

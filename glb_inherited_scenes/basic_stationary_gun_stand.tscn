@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsslc0o0ktnl"]
+
+[ext_resource type="PackedScene" uid="uid://c217j7splstqq" path="res://glb_imports/BasicStationaryGunStand.glb" id="1_q03jh"]
+
+[node name="BasicStationaryGunStand" instance=ExtResource("1_q03jh")]

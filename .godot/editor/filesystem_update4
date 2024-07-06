@@ -44,8 +44,11 @@ res://enemies/enemy_melee_tier1.tscn
 res://glb_inherited_scenes/basic_sword_handle.tscn
 res://enemies/enemy_melee_tier2.tscn
 res://enemies/enemy_melee_tier3.tscn
-res://glb_inherited_scenes/melee_t3.tscn
 res://glb_inherited_scenes/melee_t1.tscn
-res://glb_inherited_scenes/attach_to_hand.gd
 res://glb_inherited_scenes/melee_t2.tscn
 res://glb_inherited_scenes/basic_greatshield.tscn
+res://glb_inherited_scenes/melee_t3.tscn
+res://ui/ui_root.gd
+res://glb_inherited_scenes/basic_gun.tscn
+res://enemies/enemy_stationary_gunner.gd
+res://glb_inherited_scenes/basic_stationary_gun_stand.tscn
