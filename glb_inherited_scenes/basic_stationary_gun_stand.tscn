@@ -1,5 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsslc0o0ktnl"]
+[gd_scene load_steps=5 format=3 uid="uid://bsslc0o0ktnl"]
 
 [ext_resource type="PackedScene" uid="uid://c217j7splstqq" path="res://glb_imports/BasicStationaryGunStand.glb" id="1_q03jh"]
+[ext_resource type="Shader" path="res://glb_inherited_scenes/outline.gdshader" id="2_tvuqb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mxouv"]
+render_priority = 0
+shader = ExtResource("2_tvuqb")
+shader_parameter/outline_color = Color(0.4, 0.2, 0.901961, 1)
+shader_parameter/outline_width = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_krbpv"]
+next_pass = SubResource("ShaderMaterial_mxouv")
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+roughness = 0.0
 
 [node name="BasicStationaryGunStand" instance=ExtResource("1_q03jh")]
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_krbpv")

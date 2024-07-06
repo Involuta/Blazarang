@@ -31,8 +31,13 @@ func _physics_process(delta):
 		lerp_look_at_target(attack_turn_speed)
 
 func lerp_look_at_target(turn_speed):
-	var vec3_to_target := -global_position.direction_to(target.global_position)
-	gun_mesh.rotation.y = lerp_angle(gun_mesh.rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
+	var old_rotation = gun_mesh.rotation
+	gun_mesh.look_at(target.global_position)
+	var target_rotation = gun_mesh.rotation
+	gun_mesh.rotation = old_rotation
+	gun_mesh.rotation.y = lerp_angle(gun_mesh.rotation.y, target_rotation.y, turn_speed)
+	gun_mesh.rotation.x = lerp_angle(gun_mesh.rotation.x, target_rotation.x, turn_speed)
+	gun_mesh.rotation.z = lerp_angle(gun_mesh.rotation.z, target_rotation.z, turn_speed)
 
 func start_attack():
 	shooting = true

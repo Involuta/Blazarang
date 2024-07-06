@@ -52,3 +52,5 @@ res://ui/ui_root.gd
 res://glb_inherited_scenes/basic_gun.tscn
 res://enemies/enemy_stationary_gunner.gd
 res://glb_inherited_scenes/basic_stationary_gun_stand.tscn
+res://enemies/enemy_mega_gun.tscn
+res://glb_inherited_scenes/big_melee_t1.tscn
