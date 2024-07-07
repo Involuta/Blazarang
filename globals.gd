@@ -15,6 +15,10 @@ func make_mask(layers):
 		mask += pow(2, layer-1)
 	return mask
 
+# "collision.get_collider().collision_layer" will return a layer number as a power of 2, but we're comparing it to a counting integer used in the editor
+func compare_layers(collision_layer, global_layer):
+	return collision_layer == pow(2, global_layer-1)
+
 var score := 0
 var multiplier := 50
 

@@ -152,12 +152,15 @@ func ricochet(collision):
 	velocity = velocity - 2 * velocity.project(collision.get_normal())
 
 func rose_handle_collision(collision, vel_vec, delta):
-	if collision and (collision.get_collider().collision_layer == Globals.ARENA_COL_LAYER or collision.get_collider().collision_layer == Globals.THICK_ENEMY_COL_LAYER):
+	if collision and (Globals.compare_layers(collision.get_collider().collision_layer, Globals.ARENA_COL_LAYER) or Globals.compare_layers(collision.get_collider().collision_layer, Globals.THICK_ENEMY_COL_LAYER)):
+		print(collision.get_collider().collision_layer)
 		velocity = (1/delta) * (vel_vec - 2 * vel_vec.project(collision.get_normal()))
 		emit_ricochet_particles(vel_vec)
 		change_color(ricochet_color)
 		ricochet_sfx.play()
 		return true
+	elif collision:
+		print(collision.get_collider().collision_layer)
 	return false
 
 func ricochet_handle_collision(collision):
