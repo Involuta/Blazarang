@@ -159,8 +159,6 @@ func rose_handle_collision(collision, vel_vec, delta):
 		change_color(ricochet_color)
 		ricochet_sfx.play()
 		return true
-	elif collision:
-		print(collision.get_collider().collision_layer)
 	return false
 
 func ricochet_handle_collision(collision):
