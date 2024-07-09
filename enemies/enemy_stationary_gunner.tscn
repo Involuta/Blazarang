@@ -69,7 +69,7 @@ libraries = {
 "": SubResource("AnimationLibrary_cvygw")
 }
 
-[node name="VisualMesh" parent="." instance=ExtResource("3_qmav4")]
+[node name="GunMesh" parent="." instance=ExtResource("3_qmav4")]
 transform = Transform3D(0.1, -3.48787e-17, 3.48787e-17, 3.48787e-17, 0.1, -3.48787e-17, -3.48787e-17, 3.48787e-17, 0.1, 2.08165e-12, 0.763, 2.08165e-12)
 
 [node name="BasicStationaryGunStand" parent="." instance=ExtResource("4_bkhgp")]
