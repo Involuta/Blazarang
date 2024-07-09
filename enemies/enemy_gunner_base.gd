@@ -26,6 +26,7 @@ var bullet := preload("res://enemies/enemy_bullet.tscn")
 @onready var nav_agent := $NavigationAgent3D
 @onready var anim_player := $AnimationPlayer
 @onready var anim_tree := $AnimationTree
+@onready var gun_mesh := $MobileGunner/ControlRig/Skeleton3D/BoneAttachment3D/BasicGun
 @onready var level := $/root/Level
 @onready var target := $/root/Level/Target
 
@@ -117,9 +118,9 @@ func shoot_bullet():
 	var bullet_inst = bullet.instantiate()
 	level.add_child.call_deferred(bullet_inst)
 	await bullet_inst.tree_entered
-	bullet_inst.global_position = global_position
-	bullet_inst.velocity = bullet_speed * global_position.direction_to(target.global_position)
-	bullet_inst.look_at(target.global_position)
+	bullet_inst.global_position = gun_mesh.global_position
+	bullet_inst.global_rotation = gun_mesh.global_rotation
+	bullet_inst.velocity = bullet_speed * -bullet_inst.get_global_transform().basis.z
 
 func can_see_target():
 	var space_state := get_world_3d().direct_space_state
