@@ -12,8 +12,6 @@ var behav_state = FOLLOW
 @export var follow_speed := 5.0
 @export var target_distance := 20.0
 
-@export var attack_duration_secs := 1.15
-
 var aiming_at_target := true
 @export var bullet_speed := 30.0
 
@@ -98,10 +96,13 @@ func start_attack():
 	behav_state = ATTACK
 	aiming_at_target = true
 	anim_tree.set("parameters/StateMachine/conditions/shoot", true)
-	anim_player.play("shoot")
-	await get_tree().create_timer(attack_duration_secs).timeout
-	anim_tree.set("parameters/StateMachine/conditions/shoot", false)
-	behav_state = FOLLOW
+
+func try_end_attack():
+	if global_position.distance_to(target.global_position) > target_distance:
+		anim_tree.set("parameters/StateMachine/conditions/shoot", false)
+		behav_state = FOLLOW
+	else:
+		aiming_at_target = true
 
 func attack():
 	nav_agent.velocity.x = 0
