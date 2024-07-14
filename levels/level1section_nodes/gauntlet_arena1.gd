@@ -20,7 +20,7 @@ var pillar_transition_duration := 5
 var pillars_raised := true
 
 var sequence_begun := false
-var wave_1_duration := 25
+var wave_1_duration := 40
 var wave_2_duration := 25
 var wave_3_duration := 8
 var wave_4_duration := 25
@@ -64,8 +64,7 @@ func lower_pillars():
 func begin_sequence():
 	sequence_begun = true
 	if (wave_1_duration > 0):
-		rnb()
-		#miniboss()
+		miniboss()
 		await get_tree().create_timer(wave_1_duration).timeout
 	if (wave_2_duration > 0):
 		gang()

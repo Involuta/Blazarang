@@ -61,3 +61,4 @@ res://globals.gd
 res://enemies/enemy_anims/mt3_big_overhead.res
 res://levels/level1section_nodes/gauntlet_arena1.gd
 res://enemies/enemy_gunner_base.gd
+res://glb_inherited_scenes/first_miniboss_meshes.tscn

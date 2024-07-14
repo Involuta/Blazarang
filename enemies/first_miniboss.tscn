@@ -1,9 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://cp4kl2mwytpqr"]
+[gd_scene load_steps=20 format=3 uid="uid://cp4kl2mwytpqr"]
 
 [ext_resource type="Script" path="res://enemies/first_miniboss.gd" id="1_hqrk6"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="1_qwvcv"]
 [ext_resource type="Script" path="res://hitbox.gd" id="2_dh1eu"]
-[ext_resource type="PackedScene" uid="uid://g4kirqxgep2" path="res://glb_inherited_scenes/big_melee_t1.tscn" id="3_a32lo"]
+[ext_resource type="PackedScene" uid="uid://ns60fsb6nukn" path="res://glb_inherited_scenes/first_miniboss_meshes.tscn" id="4_gwavs"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_llq2q"]
 height = 6.0
@@ -823,13 +823,6 @@ material = SubResource("StandardMaterial3D_al1tw")
 radius = 0.3
 height = 5.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fo8ei"]
-shading_mode = 0
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o4pv6"]
-albedo_color = Color(0.121569, 0.121569, 0.121569, 1)
-
 [node name="FirstMiniboss" type="CharacterBody3D"]
 collision_layer = 64
 collision_mask = 90
@@ -884,14 +877,8 @@ transform = Transform3D(1, -1.62572e-08, -4.69464e-15, -4.73391e-08, 1, -3.90864
 cast_shadow = 0
 mesh = SubResource("CapsuleMesh_l85qd")
 
-[node name="VisualMesh" parent="." instance=ExtResource("3_a32lo")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-
-[node name="BigMeleeT12" parent="VisualMesh" index="0"]
-surface_material_override/1 = SubResource("StandardMaterial3D_fo8ei")
-surface_material_override/3 = SubResource("StandardMaterial3D_o4pv6")
+[node name="FirstMiniboss" parent="." instance=ExtResource("4_gwavs")]
+transform = Transform3D(-0.85, 2.96469e-16, -1.28346e-07, 2.96469e-16, 0.85, -2.96469e-16, 1.28346e-07, -2.96469e-16, -0.85, 0, 1.87285, 0)
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
-
-[editable path="VisualMesh"]

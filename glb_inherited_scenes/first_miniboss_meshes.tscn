@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ns60fsb6nukn"]
+
+[ext_resource type="PackedScene" uid="uid://dlg0dyk0bydo2" path="res://glb_imports/FirstMiniboss.glb" id="1_6n444"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v5hn8"]
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="FirstMiniboss" instance=ExtResource("1_6n444")]
+
+[node name="InnerBody" parent="." index="0"]
+surface_material_override/1 = SubResource("StandardMaterial3D_v5hn8")
