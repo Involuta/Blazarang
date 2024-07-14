@@ -1,3 +1,4 @@
+Node3D
 StaticBody3D
 CollisionShape3D
 BoneAttachment3D
@@ -11,7 +12,6 @@ TextureProgressBar
 NavigationRegion3D
 FuncGodotMap
 GPUParticles3D
-Node3D
 CharacterBody3D
 EnemyHurtbox
 Hurtbox
