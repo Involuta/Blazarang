@@ -1141,7 +1141,7 @@ tracks/4/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_sejrl"]
+[sub_resource type="Animation" id="Animation_ihqcd"]
 resource_name = "triple_shot_sweep"
 length = 1.61667
 step = 0.0166667
@@ -1188,10 +1188,10 @@ tracks/3/path = NodePath("MeleeHitboxPivot:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 1.61667),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.333334, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [true, false]
+"values": [false, false, false]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -1200,10 +1200,10 @@ tracks/4/path = NodePath("MeleeHitboxPivot:process_mode")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 1.61667),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.333334, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [0, 4]
+"values": [4, 0, 4]
 }
 tracks/5/type = "method"
 tracks/5/imported = false
@@ -1242,7 +1242,113 @@ tracks/7/enabled = true
 tracks/7/path = NodePath("MeleeHitboxPivot/EnemyHitbox")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
-tracks/7/keys = PackedFloat32Array(0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12, 0.2, 1, 2.08165e-12, 4, 2.08165e-12)
+tracks/7/keys = PackedFloat32Array(0, 1, 2.08165e-12, 4, 2.08165e-12)
+tracks/8/type = "animation"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("BladeSpinnerPivot/BasicSword/AnimationPlayer")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"clips": PackedStringArray("BigExtendBlade", "BigRetractBlade"),
+"times": PackedFloat32Array(0.216667, 1.3)
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("BladeSpinnerPivot/BasicSword:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.216667, 1.41667, 1.61667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(2.08165e-12, 2.08165e-12, -2.3), Vector3(2.08165e-12, 2.08165e-12, -2.3), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("BladeSpinnerPivot:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.766668, 1.16667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(3.48787e-16, 2.0944, 3.14159), Vector3(3.48787e-16, 2.0944, 3.14159), Vector3(3.48787e-16, -2.0944, 3.14159)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("FirstMiniboss/BladeSpinner:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.216667, 0.766668, 1.16667, 1.41667, 1.61667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(3.48787e-16, 3.14159, 3.48787e-16), Vector3(3.48787e-16, 2.0944, 3.48787e-16), Vector3(3.48787e-16, 2.0944, 3.48787e-16), Vector3(3.48787e-16, -2.0944, 3.48787e-16), Vector3(3.48787e-16, -2.0944, 3.48787e-16), Vector3(3.48787e-16, -3.14159, 3.48787e-16)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("BladeSpinnerPivot/BasicSword/GPUTrail3D:length")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [18]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("BladeSpinnerPivot/BasicSword/GPUTrail3D:scale")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(10.7, 10.7, 10.7)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("BladeSpinnerPivot/BasicSword/GPUTrail3D:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 0.17, -10.7)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("BladeSpinnerPivot/BasicSword/GPUTrail3D:visible")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 0.333334, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("BladeSpinnerPivot/BasicSword:scale")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.69, 0.28, 0.5)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o2h33"]
 _data = {
@@ -1254,7 +1360,7 @@ _data = {
 "flying_sweep_right": SubResource("Animation_k8rbk"),
 "overhead": SubResource("Animation_ufqy8"),
 "sweep": SubResource("Animation_queae"),
-"triple_shot_sweep": SubResource("Animation_sejrl")
+"triple_shot_sweep": SubResource("Animation_ihqcd")
 }
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_henf5"]
@@ -1309,7 +1415,6 @@ libraries = {
 }
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
-process_mode = 4
 transform = Transform3D(-0.210788, -1.53946, 1.25922, 1.22122, 0.899258, 1.30382, -1.56977, 0.906307, 0.845237, 2.08165e-12, -1, 2.08165e-12)
 visible = false
 
@@ -1331,26 +1436,25 @@ mesh = SubResource("CapsuleMesh_l85qd")
 transform = Transform3D(-0.85, 2.96469e-16, -1.28346e-07, 2.96469e-16, 0.85, -2.96469e-16, 1.28346e-07, -2.96469e-16, -0.85, 0, 1.87285, 0)
 
 [node name="BladeSpinner" parent="FirstMiniboss" index="4"]
-transform = Transform3D(-1.3, 4.53423e-16, 1.1365e-07, 4.53423e-16, 1.3, -4.53423e-16, -1.1365e-07, -4.53423e-16, -1.3, -0.00746727, -0.533658, 0)
+transform = Transform3D(1.3, -4.53424e-16, -3.24573e-06, 4.53423e-16, 1.3, -4.53423e-16, 3.24573e-06, 4.53422e-16, 1.3, -0.00746727, -0.533658, 0)
 
 [node name="BladeSpinnerPivot" type="Node3D" parent="."]
-transform = Transform3D(-0.5, -1.27665e-16, -0.866025, 3.48787e-16, 1, -3.48787e-16, 0.866025, -4.76452e-16, -0.5, 2.08165e-12, -2.29, 2.08165e-12)
+transform = Transform3D(-1, 8.74228e-08, -2.49671e-06, -8.74228e-08, -1, -3.48787e-16, -2.49671e-06, 2.17921e-13, 1, 2.08165e-12, -2.29, 2.08165e-12)
 
 [node name="BasicSword" parent="BladeSpinnerPivot" instance=ExtResource("5_4g3n1")]
-transform = Transform3D(0.69, -9.76603e-17, 1.74393e-16, 2.40663e-16, 0.28, -1.74393e-16, -2.40663e-16, 9.76603e-17, 0.5, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(0.69, -9.76603e-17, 1.74393e-16, 2.40663e-16, 0.28, -1.74393e-16, -2.40663e-16, 9.76603e-17, 0.5, 2.08165e-12, 2.08165e-12, -2.3)
 
 [node name="Blade" parent="BladeSpinnerPivot/BasicSword" index="0"]
-transform = Transform3D(1, -1.74188e-25, -7.61402e-30, 0, -4.37114e-11, 1, -1.74188e-22, -0.001, -4.37114e-08, 2.1842e-16, 0, -0.0018084)
+transform = Transform3D(3, -5.22565e-22, -2.28421e-29, 0, -1.31134e-07, 3, -5.22565e-22, -3, -1.31134e-07, 2.1842e-16, 0, -0.0018084)
 
 [node name="GPUTrail3D" parent="BladeSpinnerPivot/BasicSword" index="1"]
 transform = Transform3D(10.7, -4.63679e-21, -2.02681e-28, 0, -4.67712e-07, 10.7, -4.63679e-21, -10.7, -4.67712e-07, 1, 0.17, -10.7)
-visible = false
 amount = 18
 lifetime = 18.0
 length = 18
 
 [node name="BasicSwordHandle" parent="BladeSpinnerPivot/BasicSword" index="3"]
-transform = Transform3D(1, -8.69734e-23, -3.80173e-30, 0, -4.37114e-08, 1, -8.69734e-23, -1, -4.37114e-08, 2.16402e-16, 0, 0.00476623)
+transform = Transform3D(3, -8.69734e-23, -1.14052e-29, 0, -4.37114e-08, 3, -2.6092e-22, -1, -1.31134e-07, 2.16402e-16, 0, 0.00476623)
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
