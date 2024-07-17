@@ -49,11 +49,14 @@ var aiming_at_target := true
 
 @export var flying_sweep_speed := 20.0
 
+@export var body_spinner2_rotation_multiplier := 0.001
+
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 var bullet := preload("res://enemies/enemy_mega_bullet.tscn")
 @onready var nav_agent = $NavigationAgent3D
 @onready var animation_player = $AnimationPlayer
+@onready var body_spinner2 := $FirstMiniboss/BodySpinner2
 @onready var level := $/root/Level
 @onready var target = $/root/Level/Target
 
@@ -84,6 +87,8 @@ func _physics_process(delta):
 			
 	if global_position.y < -100:
 		queue_free()
+	
+	body_spinner2.rotation.y += delta * body_spinner2_rotation_multiplier * velocity.length() + delta
 
 func lerp_look_at_target(turn_speed):
 	var vec3_to_target := global_position.direction_to(target.global_position)

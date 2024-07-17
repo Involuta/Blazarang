@@ -63,3 +63,4 @@ res://levels/level1section_nodes/gauntlet_arena1.gd
 res://enemies/enemy_gunner_base.gd
 res://glb_inherited_scenes/first_miniboss_meshes.tscn
 res://enemies/enemy_anims/mt3_big_charge_up.res
+res://enemies/first_miniboss.gd

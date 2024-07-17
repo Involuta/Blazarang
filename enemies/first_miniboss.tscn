@@ -1446,6 +1446,7 @@ script = ExtResource("1_hqrk6")
 target_distance = 10.0
 follow_turn_speed = 0.15
 fast_bullet_speed = 60.0
+body_spinner2_rotation_multiplier = 0.1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_llq2q")
