@@ -49,7 +49,7 @@ var aiming_at_target := true
 
 @export var flying_sweep_speed := 20.0
 
-@export var body_spinner2_rotation_multiplier := 0.001
+@export var body_spinner2_rotation_speed := 1.75
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
@@ -88,7 +88,7 @@ func _physics_process(delta):
 	if global_position.y < -100:
 		queue_free()
 	
-	body_spinner2.rotation.y += delta * body_spinner2_rotation_multiplier * velocity.length() + delta
+	body_spinner2.rotation.y += delta * body_spinner2_rotation_speed
 
 func lerp_look_at_target(turn_speed):
 	var vec3_to_target := global_position.direction_to(target.global_position)
