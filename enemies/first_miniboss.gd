@@ -50,12 +50,19 @@ var aiming_at_target := true
 @export var flying_sweep_speed := 20.0
 
 @export var body_spinner2_rotation_speed := 1.75
+@export var body_spinner1_max_duration := 5.0
+@export var body_spinner1_min_duration := 1.0
+var body_spinner1_current_duration := 5.0
+@export var body_spinner1_max_rotation_speed := 5.0
+@export var body_spinner1_min_rotation_speed := 1.0
+var body_spinner1_rotation_speed := 3.0
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 var bullet := preload("res://enemies/enemy_mega_bullet.tscn")
 @onready var nav_agent = $NavigationAgent3D
 @onready var animation_player = $AnimationPlayer
+@onready var body_spinner1 := $FirstMiniboss/BodySpinner1
 @onready var body_spinner2 := $FirstMiniboss/BodySpinner2
 @onready var level := $/root/Level
 @onready var target = $/root/Level/Target
@@ -87,6 +94,14 @@ func _physics_process(delta):
 			
 	if global_position.y < -100:
 		queue_free()
+	
+	body_spinner1.rotation.y += delta * body_spinner1_rotation_speed
+	body_spinner1_current_duration -= delta
+	if body_spinner1_current_duration < 0:
+		body_spinner1_current_duration = rng.randf_range(body_spinner1_min_duration, body_spinner1_max_duration)
+		body_spinner1_rotation_speed = rng.randf_range(body_spinner1_min_rotation_speed, body_spinner1_max_rotation_speed)
+		if rng.randf() > .5:
+			body_spinner1_rotation_speed *= -1
 	
 	body_spinner2.rotation.y += delta * body_spinner2_rotation_speed
 
