@@ -294,7 +294,6 @@ bones/12/rotation = Quaternion(0.448646, 0.00139215, -0.343846, 0.824915)
 bones/13/rotation = Quaternion(-5.13357e-07, 1.277e-06, -0.304031, 0.952662)
 bones/14/rotation = Quaternion(-0.204635, 0.17817, -0.0768466, 0.959414)
 bones/15/rotation = Quaternion(0.0557216, 0.244655, 0.966483, -0.0543217)
-bones/15/scale = Vector3(1, 1, 1)
 bones/16/rotation = Quaternion(-0.336819, 1.22918e-06, 3.70763e-07, 0.94157)
 bones/17/rotation = Quaternion(0.558163, -0.00714545, -0.051339, 0.828111)
 bones/18/position = Vector3(-2.44181e-07, 1.79785, -4.65661e-10)
@@ -309,7 +308,7 @@ bones/23/rotation = Quaternion(0.333948, 0.14726, -0.0331324, 0.930428)
 bones/24/position = Vector3(2.14204e-08, 0.771728, 1.75089e-07)
 
 [node name="SwordAttachment" parent="VisualMesh/ControlRig/Skeleton3D" index="1"]
-transform = Transform3D(0.314971, 0.181435, 0.931598, 0.869626, -0.448359, -0.206697, 0.380188, 0.875246, -0.299001, -1.52903, 8.72481, 3.84328)
+transform = Transform3D(0.314971, 0.181436, 0.931597, 0.869627, -0.448359, -0.206698, 0.380188, 0.875246, -0.299002, -1.52903, 8.72482, 3.84328)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_uk78c")

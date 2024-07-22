@@ -56,6 +56,7 @@ var body_spinner1_current_duration := 5.0
 @export var body_spinner1_max_rotation_speed := 5.0
 @export var body_spinner1_min_rotation_speed := 1.0
 var body_spinner1_rotation_speed := 3.0
+var body_spinner1_will_rest := true
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
@@ -100,6 +101,11 @@ func _physics_process(delta):
 	if body_spinner1_current_duration < 0:
 		body_spinner1_current_duration = rng.randf_range(body_spinner1_min_duration, body_spinner1_max_duration)
 		body_spinner1_rotation_speed = rng.randf_range(body_spinner1_min_rotation_speed, body_spinner1_max_rotation_speed)
+		if body_spinner1_will_rest:
+			body_spinner1_rotation_speed = 0
+			body_spinner1_will_rest = false
+		else:
+			body_spinner1_will_rest = true
 		if rng.randf() > .5:
 			body_spinner1_rotation_speed *= -1
 	
@@ -185,11 +191,9 @@ func shoot_bullet():
 	var bullet_inst = bullet.instantiate()
 	level.add_child.call_deferred(bullet_inst)
 	await bullet_inst.tree_entered
-	bullet_inst.global_position = global_position - 2 * Vector3.UP
+	bullet_inst.global_position = global_position + Vector3.UP + get_global_transform().basis.z
 	bullet_inst.look_at(target.global_position)
 	bullet_inst.velocity = -bullet_speed * bullet_inst.get_global_transform().basis.z
-	if bullet_inst.velocity.y < 0:
-		bullet_inst.velocity.y = 0
 
 func shoot_triple_shot():
 	var angle := -PI/6
@@ -197,23 +201,19 @@ func shoot_triple_shot():
 		var bullet_inst = bullet.instantiate()
 		level.add_child.call_deferred(bullet_inst)
 		await bullet_inst.tree_entered
-		bullet_inst.global_position = global_position - 2 * Vector3.UP
+		bullet_inst.global_position = global_position + Vector3.UP + Vector3.FORWARD
 		bullet_inst.look_at(target.global_position)
 		bullet_inst.rotate_object_local(Vector3.UP, angle)
 		bullet_inst.velocity = -bullet_speed * bullet_inst.get_global_transform().basis.z
-		if bullet_inst.velocity.y < 0:
-			bullet_inst.velocity.y = 0
 		angle += PI/6
 
 func shoot_fast_bullet():
 	var bullet_inst = bullet.instantiate()
 	level.add_child.call_deferred(bullet_inst)
 	await bullet_inst.tree_entered
-	bullet_inst.global_position = global_position - 2 * Vector3.UP
+	bullet_inst.global_position = global_position + Vector3.UP + Vector3.FORWARD
 	bullet_inst.look_at(target.global_position)
 	bullet_inst.velocity = -fast_bullet_speed * bullet_inst.get_global_transform().basis.z
-	if bullet_inst.velocity.y < 0:
-		bullet_inst.velocity.y = 0
 
 func start_long_dist_attack():
 	# This await might not be necessary, but it's here just in case
