@@ -24,6 +24,7 @@ var long_dist_wait_remaining := 5.0
 
 @export var tornado_max_speed := 25.0
 @export var tornado_acc := 10.0
+var tornado_movement_begun = NOTIFICATION_WM_CLOSE_REQUEST
 
 var aiming_at_target := true
 @export var bullet_speed := 30.0
@@ -178,6 +179,7 @@ func start_short_dist_attack():
 func end_attack():
 	behav_state = FOLLOW
 	gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+	tornado_movement_begun = false
 
 func choose_attack(attack_chances) -> String:
 	var choice := rng.randf()
@@ -248,10 +250,29 @@ func start_flying_sweep():
 func flying_sweep_rush():
 	velocity = flying_sweep_speed * global_position.direction_to(target.global_position)
 
+func start_tornado():
+	velocity = Vector3.ZERO
+
+func start_tornado_movement():
+	tornado_movement_begun = true
+
 func tornado_frame():
+	if not tornado_movement_begun:
+		return
 	lerp_look_at_target(attack_turn_speed)
 	velocity += tornado_acc * get_physics_process_delta_time() * global_position.direction_to(target.global_position)
 	velocity.y = 0
+
+func tornado_push():
+	shoot_bullet()
+	var old_acc = tornado_acc
+	tornado_acc = 0
+	for i in range(30):
+		await get_tree().create_timer(get_physics_process_delta_time()).timeout
+		velocity *= .95
+	tornado_acc = old_acc * 2
+	await get_tree().create_timer(.5).timeout
+	tornado_acc = old_acc
 
 func can_see_target():
 	var space_state := get_world_3d().direct_space_state
