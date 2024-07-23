@@ -21,6 +21,7 @@ render_priority = 0
 shader = ExtResource("3_hsmaq")
 shader_parameter/emmission_transform = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
 shader_parameter/flags = 40
+shader_parameter/tex = ExtResource("4_1ldum")
 shader_parameter/color_ramp = ExtResource("4_1ldum")
 shader_parameter/curve = ExtResource("5_4x7ld")
 

@@ -1,12 +1,56 @@
-[gd_scene load_steps=3 format=3 uid="uid://ns60fsb6nukn"]
+[gd_scene load_steps=10 format=3 uid="uid://ns60fsb6nukn"]
 
 [ext_resource type="PackedScene" uid="uid://dlg0dyk0bydo2" path="res://glb_imports/FirstMiniboss.glb" id="1_6n444"]
+[ext_resource type="Material" uid="uid://dehydc3sj0s0t" path="res://cotu/cotu_anims_outline.tres" id="2_ex545"]
+[ext_resource type="Shader" path="res://glb_inherited_scenes/outline.gdshader" id="3_7inua"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3aknf"]
+next_pass = ExtResource("2_ex545")
+albedo_color = Color(0.0901961, 0.0901961, 0.0901961, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v5hn8"]
 shading_mode = 0
 albedo_color = Color(1, 0, 0, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d6ihy"]
+render_priority = 0
+shader = ExtResource("3_7inua")
+shader_parameter/outline_color = Color(0.780392, 0.780392, 0.780392, 1)
+shader_parameter/outline_width = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jnqhs"]
+next_pass = SubResource("ShaderMaterial_d6ihy")
+albedo_color = Color(0.313726, 0.313726, 0.313726, 1)
+roughness = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kr1ll"]
+render_priority = 0
+shader = ExtResource("3_7inua")
+shader_parameter/outline_color = Color(0.780392, 0.780392, 0.780392, 1)
+shader_parameter/outline_width = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kw6hv"]
+next_pass = SubResource("ShaderMaterial_kr1ll")
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
 [node name="FirstMiniboss" instance=ExtResource("1_6n444")]
 
 [node name="InnerBody" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_3aknf")
 surface_material_override/1 = SubResource("StandardMaterial3D_v5hn8")
+
+[node name="BodySpinner1" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_jnqhs")
+
+[node name="BodySpinner2" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_jnqhs")
+
+[node name="BodySpinner3" parent="." index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_jnqhs")
+
+[node name="BladeSpinner" parent="." index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_kw6hv")
+
+[node name="TopSpinner" parent="." index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_jnqhs")
