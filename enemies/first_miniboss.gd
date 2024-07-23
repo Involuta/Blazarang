@@ -269,7 +269,7 @@ func tornado_push():
 	tornado_acc = 0
 	for i in range(30):
 		await get_tree().create_timer(get_physics_process_delta_time()).timeout
-		velocity *= .95
+		velocity *= .94
 	tornado_acc = old_acc * 2
 	await get_tree().create_timer(.5).timeout
 	tornado_acc = old_acc

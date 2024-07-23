@@ -19,7 +19,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MeleeHitboxPivot:rotation")
+tracks/0/path = NodePath("MeleeHitboxPivot3:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -36,7 +36,7 @@ step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MeleeHitboxPivot:position")
+tracks/0/path = NodePath("MeleeHitboxPivot3:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -48,7 +48,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MeleeHitboxPivot:rotation")
+tracks/1/path = NodePath("MeleeHitboxPivot3:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -60,7 +60,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MeleeHitboxPivot:scale")
+tracks/2/path = NodePath("MeleeHitboxPivot3:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -72,7 +72,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("MeleeHitboxPivot:visible")
+tracks/3/path = NodePath("MeleeHitboxPivot3:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -84,7 +84,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("MeleeHitboxPivot:process_mode")
+tracks/4/path = NodePath("MeleeHitboxPivot3:process_mode")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -127,7 +127,7 @@ tracks/6/keys = {
 tracks/7/type = "position_3d"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("MeleeHitboxPivot/EnemyHitbox")
+tracks/7/path = NodePath("MeleeHitboxPivot3/EnemyHitbox")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = PackedFloat32Array(0, 1, 2.08165e-12, 4, 2.08165e-12)
@@ -257,7 +257,7 @@ step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MeleeHitboxPivot:position")
+tracks/0/path = NodePath("MeleeHitboxPivot3:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -269,7 +269,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MeleeHitboxPivot:rotation")
+tracks/1/path = NodePath("MeleeHitboxPivot3:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -281,7 +281,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MeleeHitboxPivot:scale")
+tracks/2/path = NodePath("MeleeHitboxPivot3:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -293,7 +293,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("MeleeHitboxPivot:visible")
+tracks/3/path = NodePath("MeleeHitboxPivot3:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -305,7 +305,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("MeleeHitboxPivot:process_mode")
+tracks/4/path = NodePath("MeleeHitboxPivot3:process_mode")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -334,7 +334,7 @@ tracks/5/keys = {
 tracks/6/type = "position_3d"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("MeleeHitboxPivot/EnemyHitbox")
+tracks/6/path = NodePath("MeleeHitboxPivot3/EnemyHitbox")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = PackedFloat32Array(0, 1, 2.08165e-12, 3.6, 2.08165e-12, 1.5, 1, 2.08165e-12, 3.6, 2.08165e-12, 1.75, 1, 2.08165e-12, 3.04, 2.08165e-12)
@@ -481,7 +481,7 @@ step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MeleeHitboxPivot:position")
+tracks/0/path = NodePath("MeleeHitboxPivot3:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -493,7 +493,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MeleeHitboxPivot:rotation")
+tracks/1/path = NodePath("MeleeHitboxPivot3:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -505,7 +505,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MeleeHitboxPivot:scale")
+tracks/2/path = NodePath("MeleeHitboxPivot3:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -517,7 +517,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("MeleeHitboxPivot:visible")
+tracks/3/path = NodePath("MeleeHitboxPivot3:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -529,7 +529,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("MeleeHitboxPivot:process_mode")
+tracks/4/path = NodePath("MeleeHitboxPivot3:process_mode")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -575,7 +575,7 @@ tracks/6/keys = {
 tracks/7/type = "position_3d"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("MeleeHitboxPivot/EnemyHitbox")
+tracks/7/path = NodePath("MeleeHitboxPivot3/EnemyHitbox")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = PackedFloat32Array(0, 1, 2.08165e-12, 4, 2.08165e-12)
@@ -731,7 +731,7 @@ step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MeleeHitboxPivot:position")
+tracks/0/path = NodePath("MeleeHitboxPivot3:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -743,7 +743,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MeleeHitboxPivot:rotation")
+tracks/1/path = NodePath("MeleeHitboxPivot3:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -755,7 +755,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MeleeHitboxPivot:scale")
+tracks/2/path = NodePath("MeleeHitboxPivot3:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -767,7 +767,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("MeleeHitboxPivot:visible")
+tracks/3/path = NodePath("MeleeHitboxPivot3:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -779,7 +779,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("MeleeHitboxPivot:process_mode")
+tracks/4/path = NodePath("MeleeHitboxPivot3:process_mode")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -825,7 +825,7 @@ tracks/6/keys = {
 tracks/7/type = "position_3d"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("MeleeHitboxPivot/EnemyHitbox")
+tracks/7/path = NodePath("MeleeHitboxPivot3/EnemyHitbox")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = PackedFloat32Array(0, 1, 2.08165e-12, 4, 2.08165e-12)
@@ -981,7 +981,7 @@ step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MeleeHitboxPivot:position")
+tracks/0/path = NodePath("MeleeHitboxPivot3:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -993,7 +993,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MeleeHitboxPivot:rotation")
+tracks/1/path = NodePath("MeleeHitboxPivot3:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1005,7 +1005,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MeleeHitboxPivot:visible")
+tracks/2/path = NodePath("MeleeHitboxPivot3:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1017,7 +1017,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("MeleeHitboxPivot:process_mode")
+tracks/3/path = NodePath("MeleeHitboxPivot3:process_mode")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -1048,7 +1048,7 @@ step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MeleeHitboxPivot:position")
+tracks/0/path = NodePath("MeleeHitboxPivot3:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1060,7 +1060,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MeleeHitboxPivot:rotation")
+tracks/1/path = NodePath("MeleeHitboxPivot3:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1072,7 +1072,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MeleeHitboxPivot:visible")
+tracks/2/path = NodePath("MeleeHitboxPivot3:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1084,7 +1084,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("MeleeHitboxPivot:process_mode")
+tracks/3/path = NodePath("MeleeHitboxPivot3:process_mode")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -1115,7 +1115,7 @@ step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MeleeHitboxPivot:position")
+tracks/0/path = NodePath("MeleeHitboxPivot3:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1127,7 +1127,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MeleeHitboxPivot:rotation")
+tracks/1/path = NodePath("MeleeHitboxPivot3:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1139,7 +1139,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MeleeHitboxPivot:scale")
+tracks/2/path = NodePath("MeleeHitboxPivot3:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1151,7 +1151,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("MeleeHitboxPivot:visible")
+tracks/3/path = NodePath("MeleeHitboxPivot3:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -1163,7 +1163,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("MeleeHitboxPivot:process_mode")
+tracks/4/path = NodePath("MeleeHitboxPivot3:process_mode")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -1206,7 +1206,7 @@ tracks/6/keys = {
 tracks/7/type = "position_3d"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("MeleeHitboxPivot/EnemyHitbox")
+tracks/7/path = NodePath("MeleeHitboxPivot3/EnemyHitbox")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = PackedFloat32Array(0, 1, 2.08165e-12, 4, 2.08165e-12)
@@ -1372,7 +1372,7 @@ step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MeleeHitboxPivot:position")
+tracks/0/path = NodePath("MeleeHitboxPivot3:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1384,7 +1384,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MeleeHitboxPivot:rotation")
+tracks/1/path = NodePath("MeleeHitboxPivot3:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1396,7 +1396,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MeleeHitboxPivot:scale")
+tracks/2/path = NodePath("MeleeHitboxPivot3:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1408,7 +1408,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("MeleeHitboxPivot:visible")
+tracks/3/path = NodePath("MeleeHitboxPivot3:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -1420,7 +1420,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("MeleeHitboxPivot:process_mode")
+tracks/4/path = NodePath("MeleeHitboxPivot3:process_mode")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -1463,7 +1463,7 @@ tracks/6/keys = {
 tracks/7/type = "position_3d"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("MeleeHitboxPivot/EnemyHitbox")
+tracks/7/path = NodePath("MeleeHitboxPivot3/EnemyHitbox")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = PackedFloat32Array(0, 1, 2.08165e-12, 4, 2.08165e-12)
@@ -1699,31 +1699,31 @@ step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MeleeHitboxPivot:position")
+tracks/0/path = NodePath("MeleeHitboxPivot3:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(2.08165e-12, -1, 2.08165e-12)]
+"values": [Vector3(2.08165e-12, -2.29, 2.08165e-12)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MeleeHitboxPivot:rotation")
+tracks/1/path = NodePath("MeleeHitboxPivot3:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.766667, 1.16667),
+"times": PackedFloat32Array(0, 0.766667, 9.50002),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(-1.5708, 3.48787e-16, 2.0944), Vector3(-1.5708, 3.48787e-16, 2.0944), Vector3(-1.5708, 3.48787e-16, -2.0944)]
+"values": [Vector3(-1.5708, 3.48787e-16, 2.0944), Vector3(-1.5708, 3.48787e-16, 2.0944), Vector3(-1.5708, 3.48787e-16, -33.5103)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MeleeHitboxPivot:scale")
+tracks/2/path = NodePath("MeleeHitboxPivot3:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1735,7 +1735,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("MeleeHitboxPivot:visible")
+tracks/3/path = NodePath("MeleeHitboxPivot3:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -1747,11 +1747,11 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("MeleeHitboxPivot:process_mode")
+tracks/4/path = NodePath("MeleeHitboxPivot3:process_mode")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.333334, 1.3),
+"times": PackedFloat32Array(0, 0.333334, 9.61668),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [4, 0, 4]
@@ -1788,7 +1788,7 @@ tracks/5/keys = {
 tracks/6/type = "position_3d"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("MeleeHitboxPivot/EnemyHitbox")
+tracks/6/path = NodePath("MeleeHitboxPivot3/EnemyHitbox")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = PackedFloat32Array(0, 1, 2.08165e-12, 4, 2.08165e-12)
@@ -2016,6 +2016,66 @@ tracks/25/keys = {
 "update": 0,
 "values": [Vector3(3.48787e-16, 3.14159, 3.48787e-16), Vector3(3.48787e-16, 2.0944, 3.48787e-16), Vector3(3.48787e-16, 2.0944, 3.48787e-16), Vector3(3.48787e-16, -33.5103, 3.48787e-16), Vector3(3.48787e-16, -33.5103, 3.48787e-16), Vector3(3.48787e-16, -34.5575, 3.48787e-16)]
 }
+tracks/26/type = "value"
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/path = NodePath("MeleeHitboxPivot2:position")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, -1.336, 2.08165e-12)]
+}
+tracks/27/type = "value"
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/path = NodePath("MeleeHitboxPivot2:rotation")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/keys = {
+"times": PackedFloat32Array(0, 0.766668, 9.50002),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.5708, 3.48787e-16, -2.0944), Vector3(-1.5708, 3.48787e-16, -2.0944), Vector3(-1.5708, 3.48787e-16, 33.5103)]
+}
+tracks/28/type = "value"
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/path = NodePath("MeleeHitboxPivot2:scale")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2, 2, 2)]
+}
+tracks/29/type = "value"
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/path = NodePath("MeleeHitboxPivot2:visible")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/keys = {
+"times": PackedFloat32Array(0, 0.333334, 9.61668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, false]
+}
+tracks/30/type = "value"
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/path = NodePath("MeleeHitboxPivot2:process_mode")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/keys = {
+"times": PackedFloat32Array(0, 0.333334, 9.61668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 0, 4]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o2h33"]
 _data = {
@@ -2102,21 +2162,40 @@ libraries = {
 "": SubResource("AnimationLibrary_o2h33")
 }
 
-[node name="MeleeHitboxPivot" type="Node3D" parent="."]
+[node name="MeleeHitboxPivot3" type="Node3D" parent="."]
 process_mode = 4
-transform = Transform3D(-0.210788, -1.53946, 1.25922, 1.22122, 0.899258, 1.30382, -1.56977, 0.906307, 0.845237, 2.08165e-12, -1, 2.08165e-12)
+transform = Transform3D(-0.210788, -1.53946, 1.25922, 1.22122, 0.899258, 1.30382, -1.56977, 0.906307, 0.845237, 2.08165e-12, -2.29, 2.08165e-12)
 visible = false
 
-[node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
+[node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot3"]
 transform = Transform3D(0.999999, 2.15301e-08, -2.2719e-14, -8.9407e-08, 0.999999, 0, -6.17927e-15, -6.2758e-15, 0.999999, 2.08165e-12, 4, 2.08165e-12)
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("2_dh1eu")
 
-[node name="HitboxCollider" type="CollisionShape3D" parent="MeleeHitboxPivot/EnemyHitbox"]
+[node name="HitboxCollider" type="CollisionShape3D" parent="MeleeHitboxPivot3/EnemyHitbox"]
 shape = SubResource("CapsuleShape3D_henf5")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MeleeHitboxPivot/EnemyHitbox"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeleeHitboxPivot3/EnemyHitbox"]
+transform = Transform3D(1, -1.62572e-08, -4.69464e-15, -4.73391e-08, 1, -3.90864e-15, 2.95455e-14, -2.14339e-14, 0.999999, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+cast_shadow = 0
+mesh = SubResource("CapsuleMesh_l85qd")
+
+[node name="MeleeHitboxPivot2" type="Node3D" parent="."]
+process_mode = 4
+transform = Transform3D(-1, -1.73205, -3.04919e-23, -7.57103e-08, 4.37115e-08, 2, -1.73205, 1, -8.74228e-08, 2.08165e-12, -1.336, 2.08165e-12)
+visible = false
+
+[node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot2"]
+transform = Transform3D(0.999999, 2.15301e-08, -2.2719e-14, -8.9407e-08, 0.999999, 0, -6.17927e-15, -6.2758e-15, 0.999999, 2.08165e-12, 4, 2.08165e-12)
+collision_layer = 8
+collision_mask = 11
+script = ExtResource("2_dh1eu")
+
+[node name="HitboxCollider" type="CollisionShape3D" parent="MeleeHitboxPivot2/EnemyHitbox"]
+shape = SubResource("CapsuleShape3D_henf5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeleeHitboxPivot2/EnemyHitbox"]
 transform = Transform3D(1, -1.62572e-08, -4.69464e-15, -4.73391e-08, 1, -3.90864e-15, 2.95455e-14, -2.14339e-14, 0.999999, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 cast_shadow = 0
 mesh = SubResource("CapsuleMesh_l85qd")
@@ -2128,45 +2207,45 @@ transform = Transform3D(-0.85, 2.96469e-16, -1.28346e-07, 2.96469e-16, 0.85, -2.
 transform = Transform3D(-0.65, -1.65964e-16, -1.12583, 4.53423e-16, 1.3, -4.53423e-16, 1.12583, -6.19387e-16, -0.65, -0.0125384, -0.533658, 0)
 
 [node name="BodySpinner2" parent="FirstMiniboss" index="2"]
-transform = Transform3D(-1.3, 4.53423e-16, -1.1365e-07, 4.53423e-16, 1.3, -4.53423e-16, 1.1365e-07, -4.53423e-16, -1.3, -0.0125384, -1.52107, 0)
+transform = Transform3D(-0.650023, -1.65952e-16, -1.12582, 4.53423e-16, 1.3, -4.53423e-16, 1.12582, -6.19391e-16, -0.650023, -0.0125384, -1.52107, 0)
 
 [node name="BodySpinner3" parent="FirstMiniboss" index="3"]
-transform = Transform3D(1.3, -4.53423e-16, 4.53423e-16, 4.53423e-16, 1.3, -4.53423e-16, -4.53423e-16, 4.53423e-16, 1.3, -0.0125384, -2.52398, 0)
+transform = Transform3D(-0.650022, 6.19391e-16, 1.12582, 4.53423e-16, 1.3, -4.53423e-16, -1.12582, 1.65952e-16, -0.650022, -0.0125384, -2.52398, 0)
 
 [node name="BladeSpinner" parent="FirstMiniboss" index="4"]
-transform = Transform3D(-1.3, 4.53424e-16, 3.29574e-06, 4.53423e-16, 1.3, -4.53423e-16, -3.29574e-06, -4.53422e-16, -1.3, -0.00746727, -0.533658, 0)
+transform = Transform3D(-0.650023, -1.65952e-16, -1.12582, 4.53423e-16, 1.3, -4.53423e-16, 1.12582, -6.19391e-16, -0.650023, -0.00746727, -0.533658, 0)
 
 [node name="BladeSpinnerPivot3" type="Node3D" parent="."]
-transform = Transform3D(0.500004, 1.2676e-06, 0.866023, 2.53518e-06, -1, -3.48787e-16, 0.866023, 2.19553e-06, -0.500004, 2.08165e-12, -2.29, 2.08165e-12)
+transform = Transform3D(0.500001, -4.37115e-08, -0.866024, -8.74227e-08, -1, -3.48787e-16, -0.866024, 7.57103e-08, -0.500001, 2.08165e-12, -2.29, 2.08165e-12)
 
 [node name="BasicSword" parent="BladeSpinnerPivot3" instance=ExtResource("5_4g3n1")]
-transform = Transform3D(0.69, -9.76604e-17, 1.74393e-16, 2.40663e-16, 0.28, -1.74393e-16, -2.40663e-16, 9.76604e-17, 0.5, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(0.69, -9.76604e-17, 1.74393e-16, 2.40663e-16, 0.28, -1.74393e-16, -2.40663e-16, 9.76604e-17, 0.5, 2.08165e-12, 2.08165e-12, -2.29996)
 
 [node name="Blade" parent="BladeSpinnerPivot3/BasicSword" index="0"]
-transform = Transform3D(2.14286, -2.98683e-22, -1.63157e-29, 0, -7.49526e-08, 2.14286, -3.7326e-22, -1.71472, -9.36673e-08, 2.1842e-16, 0, -0.0018084)
+transform = Transform3D(1, -1.74188e-25, -7.614e-30, 0, -4.37114e-11, 1, -1.74188e-22, -0.001, -4.37114e-08, 2.1842e-16, 0, -0.0018084)
 
 [node name="GPUTrail3D" parent="BladeSpinnerPivot3/BasicSword" index="1"]
 transform = Transform3D(10.7, -4.63679e-21, -2.02681e-28, 0, -4.67712e-07, 10.7, -4.63679e-21, -10.7, -4.67712e-07, 1, 0.17, -10.7)
 visible = false
 
 [node name="BasicSwordHandle" parent="BladeSpinnerPivot3/BasicSword" index="3"]
-transform = Transform3D(2.14286, -8.69734e-23, -8.14656e-30, 0, -4.37114e-08, 2.14286, -1.86372e-22, -1, -9.36673e-08, 2.16402e-16, 0, 0.00476623)
+transform = Transform3D(1, -8.69734e-23, -3.80173e-30, 0, -4.37114e-08, 1, -8.69734e-23, -1, -4.37114e-08, 2.16402e-16, 0, 0.00476623)
 
 [node name="BladeSpinnerPivot2" type="Node3D" parent="."]
-transform = Transform3D(-0.5, -1.27665e-16, -0.866025, 3.48787e-16, 1, -3.48787e-16, 0.866025, -4.76452e-16, -0.5, 2.08165e-12, -1.33632, 2.08165e-12)
+transform = Transform3D(-0.500001, 4.76452e-16, 0.866024, 3.48787e-16, 1, -3.48787e-16, -0.866024, 1.27664e-16, -0.500001, 2.08165e-12, -1.33632, 2.08165e-12)
 
 [node name="BasicSword" parent="BladeSpinnerPivot2" instance=ExtResource("5_4g3n1")]
-transform = Transform3D(0.69, -9.76604e-17, 1.74393e-16, 2.40663e-16, 0.28, -1.74393e-16, -2.40663e-16, 9.76603e-17, 0.5, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(0.69, -9.76604e-17, 1.74393e-16, 2.40663e-16, 0.28, -1.74393e-16, -2.40663e-16, 9.76603e-17, 0.5, 2.08165e-12, 2.08165e-12, -2.29996)
 
 [node name="Blade" parent="BladeSpinnerPivot2/BasicSword" index="0"]
-transform = Transform3D(2.14286, -2.98683e-22, -1.63157e-29, 0, -7.49526e-08, 2.14286, -3.7326e-22, -1.71471, -9.36673e-08, 2.1842e-16, 0, -0.0018084)
+transform = Transform3D(1, -1.74188e-25, -7.614e-30, 0, -4.37114e-11, 1, -1.74188e-22, -0.001, -4.37114e-08, 2.1842e-16, 0, -0.0018084)
 
 [node name="GPUTrail3D" parent="BladeSpinnerPivot2/BasicSword" index="1"]
 transform = Transform3D(10.7, -4.63679e-21, -2.02681e-28, 0, -4.67712e-07, 10.7, -4.63679e-21, -10.7, -4.67712e-07, 1, 0.34, -10.7)
 visible = false
 
 [node name="BasicSwordHandle" parent="BladeSpinnerPivot2/BasicSword" index="3"]
-transform = Transform3D(2.14286, -8.69734e-23, -8.14656e-30, 0, -4.37114e-08, 2.14286, -1.86372e-22, -1, -9.36673e-08, 2.16402e-16, 0, 0.00476623)
+transform = Transform3D(1, -8.69734e-23, -3.80173e-30, 0, -4.37114e-08, 1, -8.69734e-23, -1, -4.37114e-08, 2.16402e-16, 0, 0.00476623)
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
