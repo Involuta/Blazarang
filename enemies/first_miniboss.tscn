@@ -2040,6 +2040,7 @@ script = ExtResource("1_hqrk6")
 max_long_dist_wait = 2.0
 target_distance = 10.0
 follow_turn_speed = 0.15
+tornado_acc = 15.0
 fast_bullet_speed = 100.0
 short_dist_attack_chances = {
 "big_sweep": 0.1,

@@ -247,12 +247,11 @@ func start_flying_sweep():
 
 func flying_sweep_rush():
 	velocity = flying_sweep_speed * global_position.direction_to(target.global_position)
-var i = 0
+
 func tornado_frame():
-	i += 1
-	print("woosh", i)
 	lerp_look_at_target(attack_turn_speed)
 	velocity += tornado_acc * get_physics_process_delta_time() * global_position.direction_to(target.global_position)
+	velocity.y = 0
 
 func can_see_target():
 	var space_state := get_world_3d().direct_space_state
