@@ -5,6 +5,7 @@ enum {
 	FOLLOW,
 	SHORT_DIST_ATTACK,
 	LONG_DIST_ATTACK,
+	TORNADO
 }
 var behav_state := FOLLOW
 var long_dist_wait_remaining := 5.0
@@ -20,6 +21,9 @@ var long_dist_wait_remaining := 5.0
 
 @export var follow_turn_speed := .05
 @export var attack_turn_speed := .15
+
+@export var tornado_max_speed := 25.0
+@export var tornado_acc := 10.0
 
 var aiming_at_target := true
 @export var bullet_speed := 30.0
@@ -92,6 +96,10 @@ func _physics_process(delta):
 			follow()
 		SHORT_DIST_ATTACK:
 			short_dist_attack_frame()
+		LONG_DIST_ATTACK:
+			long_dist_attack_frame()
+		TORNADO:
+			tornado_frame()
 			
 	if global_position.y < -100:
 		queue_free()
@@ -122,7 +130,7 @@ func wait():
 		behav_state = FOLLOW
 
 func _on_navigation_agent_3d_target_reached():
-	if behav_state != SHORT_DIST_ATTACK and behav_state != LONG_DIST_ATTACK:
+	if behav_state != SHORT_DIST_ATTACK and behav_state != LONG_DIST_ATTACK and behav_state != TORNADO:
 		start_short_dist_attack()
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
@@ -183,6 +191,10 @@ func choose_attack(attack_chances) -> String:
 func short_dist_attack_frame():
 	if aiming_at_target:
 		lerp_look_at_target(attack_turn_speed)
+
+func long_dist_attack_frame():
+	if aiming_at_target:
+		lerp_look_at_target(attack_turn_speed)
 	
 func stop_aiming_at_target():
 	aiming_at_target = false
@@ -222,10 +234,11 @@ func start_long_dist_attack():
 	nav_agent.velocity.z = 0
 	velocity.x = 0
 	velocity.z = 0
-	behav_state = LONG_DIST_ATTACK
+	behav_state = TORNADO
 	long_dist_wait_remaining = max_long_dist_wait
 	aiming_at_target = true
-	animation_player.play(choose_attack(long_dist_attack_chances))
+	var tornado_test = { "tornado": 1 }
+	animation_player.play(choose_attack(tornado_test))
 
 func start_flying_sweep():
 	gravity = 0
@@ -234,6 +247,12 @@ func start_flying_sweep():
 
 func flying_sweep_rush():
 	velocity = flying_sweep_speed * global_position.direction_to(target.global_position)
+var i = 0
+func tornado_frame():
+	i += 1
+	print("woosh", i)
+	lerp_look_at_target(attack_turn_speed)
+	velocity += tornado_acc * get_physics_process_delta_time() * global_position.direction_to(target.global_position)
 
 func can_see_target():
 	var space_state := get_world_3d().direct_space_state
