@@ -19,7 +19,7 @@ var moving_right := true # Did the player last try to walk right?
 var grounded_speed := 0
 var can_dodge := true
 var is_dodging := false
-var dodge_self_damage := 20.0
+var dodge_self_damage := 18.0
 
 var mouse_camera_sensitivity := .001
 var joystick_camera_sensitivity := .1
@@ -36,7 +36,7 @@ var max_cam_dist := 6.0 # dist btwn player and camera when camera's not collidin
 var throw_queued := false
 const INSTANT_RETHROW_SECS := .2 # max possible time btwn player inputting throw and rang hitting Cotu that still cauess an instant rethrow
 var buffs := []
-var throw_self_damage := 20.0
+var throw_self_damage := 18.0
 
 var roserang := preload("res://rang/roserang.tscn")
 var roserang_instance = null

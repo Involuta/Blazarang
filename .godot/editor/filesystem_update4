@@ -56,3 +56,6 @@ res://glb_inherited_scenes/boomerang.tscn
 res://cotu/cotu_cb_main.tscn
 res://glb_inherited_scenes/first_miniboss_meshes.tscn
 res://enemies/first_miniboss.gd
+res://ui/ui_root.gd
+res://cotu/CotuControl.gd
+res://levels/level1section_nodes/first_maze.tscn

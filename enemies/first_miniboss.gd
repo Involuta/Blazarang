@@ -264,7 +264,6 @@ func tornado_frame():
 	velocity.y = 0
 
 func tornado_push():
-	shoot_bullet()
 	var old_acc = tornado_acc
 	tornado_acc = 0
 	for i in range(30):
