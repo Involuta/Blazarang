@@ -46,10 +46,10 @@ var aiming_at_target := true
 }
 
 @export var long_dist_attack_chances = {
-	"big_overhead" : .1,
+	"snipe" : .1,
 	"flying_sweep_right" : .2,
 	"flying_sweep_left" : .1,
-	"triple_shot_sweep" : .6
+	"triple_shot" : .6
 }
 
 @export var flying_sweep_speed := 20.0
@@ -236,11 +236,10 @@ func start_long_dist_attack():
 	nav_agent.velocity.z = 0
 	velocity.x = 0
 	velocity.z = 0
-	behav_state = TORNADO
+	behav_state = LONG_DIST_ATTACK
 	long_dist_wait_remaining = max_long_dist_wait
 	aiming_at_target = true
-	var tornado_test = { "tornado": 1 }
-	animation_player.play(choose_attack(tornado_test))
+	animation_player.play(choose_attack(long_dist_attack_chances))
 
 func start_flying_sweep():
 	gravity = 0
