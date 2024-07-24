@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://kl1hpr0grn1v"]
+[gd_scene load_steps=4 format=3 uid="uid://kl1hpr0grn1v"]
 
 [ext_resource type="PackedScene" uid="uid://daj44qqb6dior" path="res://ui/health_bar.tscn" id="1_k5nv4"]
 [ext_resource type="Script" path="res://ui/ui_root.gd" id="1_s33yg"]
+[ext_resource type="Texture2D" uid="uid://xur0b17wu4hl" path="res://ui/DESTABILIZED-clear.png" id="3_7lpk5"]
 
 [node name="UIRoot" type="Control"]
 top_level = true
@@ -26,3 +27,12 @@ offset_right = 364.0
 offset_bottom = 89.0
 grow_horizontal = 1
 grow_vertical = 1
+
+[node name="DESTABILIZED" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 383.0
+offset_top = -4.0
+offset_right = 1561.0
+offset_bottom = 477.0
+texture = ExtResource("3_7lpk5")

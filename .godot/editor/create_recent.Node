@@ -1,3 +1,5 @@
+TextureRect
+RichTextLabel
 StaticBody3D
 Node3D
 CollisionShape3D
@@ -29,4 +31,3 @@ Node
 RigidBody3D
 NavigationAgent3D
 MultiMeshInstance3D
-WorldEnvironment

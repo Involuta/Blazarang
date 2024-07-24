@@ -10,6 +10,8 @@ var recovery_active := false
 
 var damage_indicator_value := 100.0
 
+var destabilized = false
+
 func reset_recovery_delay():
 	recovery_delay_remaining = recovery_delay
 	recovery_active = false
@@ -46,3 +48,9 @@ func _physics_process(delta):
 	if recovery_active and health < max_health:
 		health += recovery_rate
 		damage_indicator_value -= recovery_rate
+
+func die():
+	# AKA destabilize
+	print("died")
+	self_heal(1000)
+	destabilized = true

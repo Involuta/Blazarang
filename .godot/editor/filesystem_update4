@@ -59,3 +59,5 @@ res://enemies/first_miniboss.gd
 res://ui/ui_root.gd
 res://cotu/CotuControl.gd
 res://levels/level1section_nodes/first_maze.tscn
+res://levels/level1section_nodes/gauntlet_arena1.gd
+res://cotu/CotuHurtbox.gd
