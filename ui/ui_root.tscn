@@ -1,8 +1,34 @@
-[gd_scene load_steps=4 format=3 uid="uid://kl1hpr0grn1v"]
+[gd_scene load_steps=10 format=3 uid="uid://kl1hpr0grn1v"]
 
 [ext_resource type="PackedScene" uid="uid://daj44qqb6dior" path="res://ui/health_bar.tscn" id="1_k5nv4"]
 [ext_resource type="Script" path="res://ui/ui_root.gd" id="1_s33yg"]
 [ext_resource type="Texture2D" uid="uid://xur0b17wu4hl" path="res://ui/DESTABILIZED-clear.png" id="3_7lpk5"]
+[ext_resource type="Shader" path="res://ui/flash.gdshader" id="3_82pj8"]
+[ext_resource type="Shader" path="res://ui/glitch.gdshader" id="5_8m8fe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wshvs"]
+shader = ExtResource("5_8m8fe")
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 1.0
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_26fs1"]
+shader = ExtResource("3_82pj8")
+shader_parameter/color1 = Color(0, 0, 0, 1)
+shader_parameter/color2 = Color(1, 1, 1, 1)
+shader_parameter/threshold = 1.0
+shader_parameter/intensity = 5.0
+shader_parameter/opacity = 0.5
+shader_parameter/glow_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_muld8"]
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.205117, 0.205117, 0.205117, 1, 1, 1, 1, 1, 0.205117, 0.205117, 0.205117, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_o07wl"]
+gradient = SubResource("Gradient_muld8")
 
 [node name="UIRoot" type="Control"]
 top_level = true
@@ -28,11 +54,32 @@ offset_bottom = 89.0
 grow_horizontal = 1
 grow_vertical = 1
 
+[node name="GlitchBox" type="ColorRect" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.176471)
+z_index = 1
+material = SubResource("ShaderMaterial_wshvs")
+layout_mode = 0
+offset_left = -36.0
+offset_right = 1961.0
+offset_bottom = 1081.0
+
 [node name="DESTABILIZED" type="TextureRect" parent="."]
 visible = false
+top_level = true
+material = SubResource("ShaderMaterial_26fs1")
 layout_mode = 0
-offset_left = 383.0
 offset_top = -4.0
-offset_right = 1561.0
-offset_bottom = 477.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 texture = ExtResource("3_7lpk5")
+
+[node name="Gradient" type="TextureRect" parent="DESTABILIZED"]
+modulate = Color(1, 1, 1, 0.823529)
+z_index = -1
+layout_mode = 0
+offset_left = -4.0
+offset_top = 333.0
+offset_right = 1914.0
+offset_bottom = 774.0
+texture = SubResource("GradientTexture1D_o07wl")

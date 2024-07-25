@@ -61,3 +61,6 @@ res://cotu/CotuControl.gd
 res://levels/level1section_nodes/first_maze.tscn
 res://levels/level1section_nodes/gauntlet_arena1.gd
 res://cotu/CotuHurtbox.gd
+res://ui/glow.gdshader
+res://ui/flash.gdshader
+res://ui/glitch.gdshader
