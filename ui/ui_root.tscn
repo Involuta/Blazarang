@@ -57,21 +57,23 @@ grow_vertical = 1
 [node name="GlitchBox" type="ColorRect" parent="."]
 visible = false
 modulate = Color(1, 1, 1, 0.176471)
-z_index = 1
 material = SubResource("ShaderMaterial_wshvs")
 layout_mode = 0
 offset_left = -36.0
 offset_right = 1961.0
 offset_bottom = 1081.0
+mouse_filter = 2
 
 [node name="DESTABILIZED" type="TextureRect" parent="."]
 visible = false
 top_level = true
+z_index = -1
 material = SubResource("ShaderMaterial_26fs1")
 layout_mode = 0
 offset_top = -4.0
 offset_right = 1920.0
 offset_bottom = 1080.0
+mouse_filter = 2
 texture = ExtResource("3_7lpk5")
 
 [node name="Gradient" type="TextureRect" parent="DESTABILIZED"]
