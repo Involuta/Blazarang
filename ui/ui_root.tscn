@@ -142,6 +142,7 @@ script = ExtResource("1_s33yg")
 glitch_shader_shake_color_rate = 0.0299999
 
 [node name="CotuHealthBar" parent="." instance=ExtResource("1_k5nv4")]
+modulate = Color(1, 0.740741, 0, 1)
 layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.0

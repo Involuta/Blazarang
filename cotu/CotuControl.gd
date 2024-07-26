@@ -38,6 +38,8 @@ const INSTANT_RETHROW_SECS := .2 # max possible time btwn player inputting throw
 var buffs := []
 var throw_self_damage := 18.0
 
+var destabilized = false
+
 var roserang := preload("res://rang/roserang.tscn")
 var roserang_instance = null
 @onready var physical_collider := $CollisionShape3D
@@ -104,7 +106,8 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("Throw"):
 		if roserang_instance == null:
 			# Manual throw
-			hurtbox.self_hit(throw_self_damage)
+			if not destabilized:
+				hurtbox.self_hit(throw_self_damage)
 			throw_rang()
 		elif not throw_queued:
 			start_instant_rethrow_timer()
@@ -189,7 +192,8 @@ func lock_off():
 func step_dodge():
 	can_dodge = false
 	is_dodging = true
-	hurtbox.self_hit(dodge_self_damage)
+	if not destabilized:
+		hurtbox.self_hit(dodge_self_damage)
 	set_collision_mask_value(Globals.ENEMY_COL_LAYER, false)
 	if roserang_instance != null:
 		target.stop_following_cotu()

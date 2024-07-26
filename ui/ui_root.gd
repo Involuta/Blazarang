@@ -24,7 +24,7 @@ func _physics_process(delta):
 	cotu_health_bar.max_value = cotu_hurtbox.max_health
 	cotu_health_bar.value = cotu_hurtbox.health
 	cotu_damage_indicator.value = cotu_hurtbox.damage_indicator_value
-	if cotu_hurtbox.destabilized and not destabilized:
+	if cotu_hurtbox.parent.destabilized and not destabilized:
 		destab_anim()
 	destab_shader.set_shader_parameter("opacity", destab_shader_opacity)
 	glitch_shader.set_shader_parameter("shake_power", glitch_shader_shake_power)

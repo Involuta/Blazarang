@@ -11,7 +11,6 @@ var recovery_active := false
 var damage_indicator_value := 100.0
 
 @export var destab_invin_time := 2.0
-var destabilized = false
 
 func reset_recovery_delay():
 	recovery_delay_remaining = recovery_delay
@@ -53,8 +52,13 @@ func _physics_process(delta):
 
 func die():
 	# AKA destabilize
-	destabilized = true
+	if parent.destabilized:
+		parent.queue_free()
+		return
+	parent.destabilized = true
 	self_heal(max_health)
 	invincible = true
 	await get_tree().create_timer(destab_invin_time).timeout
 	invincible = false
+	health = 1
+	max_health = 1
