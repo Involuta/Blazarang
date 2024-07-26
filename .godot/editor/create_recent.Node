@@ -1,3 +1,4 @@
+AnimationPlayer
 TextureRect
 ColorRect
 RichTextLabel
@@ -21,7 +22,6 @@ Hurtbox
 DirectionalLight3D
 OmniLight3D
 Camera3D
-AnimationPlayer
 Trail3D
 Line2D
 Area3D
