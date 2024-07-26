@@ -64,3 +64,4 @@ res://cotu/CotuHurtbox.gd
 res://ui/glow.gdshader
 res://ui/flash.gdshader
 res://ui/glitch.gdshader
+res://hurtbox.gd

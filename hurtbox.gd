@@ -10,6 +10,8 @@ var rng := RandomNumberGenerator.new()
 @onready var parent := get_parent()
 @onready var level := $/root/Level
 
+var invincible = false
+
 func _ready():
 	area_entered.connect(on_hit)
 
@@ -27,6 +29,10 @@ func receive_hit(damage: float, _hitter):
 	health -= damage
 	if health <= 0:
 		die()
+
+func _physics_process(delta):
+	if invincible:
+		health = max_health
 	
 func die():
 	parent.queue_free()
