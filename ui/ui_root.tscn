@@ -20,7 +20,7 @@ shader_parameter/color1 = Color(0, 0, 0, 1)
 shader_parameter/color2 = Color(1, 1, 1, 1)
 shader_parameter/threshold = 1.0
 shader_parameter/intensity = 5.0
-shader_parameter/opacity = 0.5
+shader_parameter/opacity = 0.3
 shader_parameter/glow_color = Color(1, 1, 1, 1)
 
 [sub_resource type="Gradient" id="Gradient_muld8"]
@@ -32,7 +32,7 @@ gradient = SubResource("Gradient_muld8")
 
 [sub_resource type="Animation" id="Animation_ydv3p"]
 resource_name = "destabilize"
-length = 1.5
+length = 0.766668
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -41,10 +41,10 @@ tracks/0/path = NodePath("..:destab_shader_opacity")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"times": PackedFloat32Array(0, 0.333333, 0.6, 0.75),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [0.5, 0.15, 2.08165e-12, 2.08165e-12]
+"values": [0.5, 0.1, 0.1, 0.5]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -53,10 +53,10 @@ tracks/1/path = NodePath("..:glitch_shader_shake_power")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.333333, 0.6, 0.75, 0.766667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.03, 0.005, 0.005]
+"values": [0.03, 0.005, 0.005, 0.03, 0.005]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -65,10 +65,10 @@ tracks/2/path = NodePath("..:glitch_shader_shake_color_rate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.333333, 0.6, 0.75, 0.766667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.02, 2.08165e-12, 2.08165e-12]
+"values": [0.02, 2.08165e-12, 2.08165e-12, 0.03, 2.08165e-12]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -77,10 +77,10 @@ tracks/3/path = NodePath("Gradient:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0.823529), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -101,48 +101,10 @@ tracks/5/path = NodePath(".:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 1.5),
+"times": PackedFloat32Array(0, 0.75),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath(".:material")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("ShaderMaterial_26fs1")]
-}
-tracks/7/type = "method"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("..")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"remove_destab_material"
-}]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath(".:modulate")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0, 1, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3vweo"]
@@ -159,9 +121,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_s33yg")
-destab_shader_opacity = 2.08165e-12
-glitch_shader_shake_power = 0.005
-glitch_shader_shake_color_rate = 2.08165e-12
 
 [node name="CotuHealthBar" parent="." instance=ExtResource("1_k5nv4")]
 layout_mode = 0
@@ -187,8 +146,7 @@ offset_bottom = 1081.0
 mouse_filter = 2
 
 [node name="DESTABILIZED" type="TextureRect" parent="."]
-visible = false
-modulate = Color(1, 1, 1, 0)
+modulate = Color(1, 1, 1, 1)
 top_level = true
 z_index = -1
 material = SubResource("ShaderMaterial_26fs1")
@@ -200,7 +158,6 @@ mouse_filter = 2
 texture = ExtResource("3_7lpk5")
 
 [node name="Gradient" type="TextureRect" parent="DESTABILIZED"]
-modulate = Color(1, 1, 1, 0)
 z_index = -1
 layout_mode = 0
 offset_left = -4.0

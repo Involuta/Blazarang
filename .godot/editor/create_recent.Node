@@ -1,7 +1,9 @@
+Label
+RichTextLabel
+TextEdit
 AnimationPlayer
 TextureRect
 ColorRect
-RichTextLabel
 StaticBody3D
 Node3D
 CollisionShape3D
@@ -29,4 +31,3 @@ SpotLight3D
 LightmapGI
 VoxelGI
 Node
-RigidBody3D
