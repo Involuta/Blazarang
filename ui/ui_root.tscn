@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://kl1hpr0grn1v"]
+[gd_scene load_steps=13 format=3 uid="uid://kl1hpr0grn1v"]
 
 [ext_resource type="PackedScene" uid="uid://daj44qqb6dior" path="res://ui/health_bar.tscn" id="1_k5nv4"]
 [ext_resource type="Script" path="res://ui/ui_root.gd" id="1_s33yg"]
@@ -107,8 +107,26 @@ tracks/5/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_fc276"]
+resource_name = "destabbed_health"
+length = 12.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../CotuHealthBar:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.8, 2.7, 3.6, 4.5, 5.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 0.833333, 0, 1), Color(0.333333, 1, 0, 1), Color(0, 1, 0.5, 1), Color(0, 0.666667, 1, 1), Color(0.166667, 0, 1, 1), Color(1, 0, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3vweo"]
 _data = {
+"destabbed_health": SubResource("Animation_fc276"),
 "destabilize": SubResource("Animation_ydv3p")
 }
 
@@ -121,6 +139,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_s33yg")
+glitch_shader_shake_power = 0.005
+glitch_shader_shake_color_rate = 2.08165e-12
 
 [node name="CotuHealthBar" parent="." instance=ExtResource("1_k5nv4")]
 layout_mode = 0
@@ -146,6 +166,7 @@ offset_bottom = 1081.0
 mouse_filter = 2
 
 [node name="DESTABILIZED" type="TextureRect" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 1)
 top_level = true
 z_index = -1
@@ -158,6 +179,7 @@ mouse_filter = 2
 texture = ExtResource("3_7lpk5")
 
 [node name="Gradient" type="TextureRect" parent="DESTABILIZED"]
+modulate = Color(1, 1, 1, 0)
 z_index = -1
 layout_mode = 0
 offset_left = -4.0
@@ -166,7 +188,13 @@ offset_right = 1914.0
 offset_bottom = 774.0
 texture = SubResource("GradientTexture1D_o07wl")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="DestabilizeAnimation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../DESTABILIZED")
+libraries = {
+"": SubResource("AnimationLibrary_3vweo")
+}
+
+[node name="HealthBarAnimation" type="AnimationPlayer" parent="."]
 root_node = NodePath("../DESTABILIZED")
 libraries = {
 "": SubResource("AnimationLibrary_3vweo")

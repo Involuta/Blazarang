@@ -16,6 +16,7 @@ var destabilized = false
 @export var glitch_shader_shake_color_rate := .02
 
 func _ready():
+	cotu_health_bar.modulate = Color.WHITE
 	glitch_box.visible = false
 	destab_icon.visible = false
 
@@ -31,4 +32,5 @@ func _physics_process(delta):
 
 func destab_anim():
 	destabilized = true
-	$AnimationPlayer.play("destabilize")
+	$DestabilizeAnimation.play("destabilize")
+	$HealthBarAnimation.play("destabbed_health")
