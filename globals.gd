@@ -1,5 +1,7 @@
 extends Node
 
+signal score_updated
+
 # Update this list before the layer names in Project Settings
 const PLAYER_COL_LAYER := 1
 const ARENA_COL_LAYER := 2
@@ -24,16 +26,18 @@ var multiplier := 50
 
 const DODGE_SCORE = 1
 const INSTANT_RETHROW_SCORE = 1
+const RICOCHET_HIT_SCORE = 1
+const RAPIDORBIT_HIT_SCORE = 1
+
 const MELEE_HIT_SCORE = 1
 const MELEE_KILL_SCORE = 2
 const GUNNER_HIT_SCORE = 1
 const GUNNER_KILL_SCORE = 2
-const RICOCHET_HIT_SCORE = 1
-const RAPIDORBIT_HIT_SCORE = 1
 
 func award_score(points):
 	# Apply multipliers/modifiers
 	score += points * multiplier
+	score_updated.emit()
 
 enum BUFFS {
 	DAMAGE,

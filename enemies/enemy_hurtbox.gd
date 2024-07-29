@@ -1,13 +1,15 @@
 class_name EnemyHurtbox
 extends Hurtbox
 
+@export var hit_score := 1
+@export var kill_score := 1
 var death_particle := preload("res://enemies/death_particle.tscn")
 
 func receive_hit(damage: float, hitter):
 	match(parent.name):
-		"EnemyMelee":
+		"EnemyMeleeTier1":
 			Globals.award_score(Globals.MELEE_HIT_SCORE)
-		"EnemyGunner":
+		"EnemyGunnerTier2":
 			Globals.award_score(Globals.GUNNER_HIT_SCORE)
 	if hitter.name == "Roserang":
 		if hitter.get_mvmt_state() == "RICOCHET":

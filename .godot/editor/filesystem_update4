@@ -65,3 +65,5 @@ res://ui/glow.gdshader
 res://ui/flash.gdshader
 res://ui/glitch.gdshader
 res://hurtbox.gd
+res://globals.gd
+res://enemies/enemy_hurtbox.gd

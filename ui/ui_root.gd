@@ -21,6 +21,8 @@ func _ready():
 	cotu_health_bar.modulate = Color.WHITE
 	glitch_box.visible = false
 	destab_icon.visible = false
+	
+	Globals.score_updated.connect(on_score_updated)
 
 func _physics_process(delta):
 	cotu_health_bar.max_value = cotu_hurtbox.max_health
@@ -31,10 +33,11 @@ func _physics_process(delta):
 	destab_shader.set_shader_parameter("opacity", destab_shader_opacity)
 	glitch_shader.set_shader_parameter("shake_power", glitch_shader_shake_power)
 	glitch_shader.set_shader_parameter("shake_color_rate", glitch_shader_shake_color_rate)
-	
-	score_num_display.text = str(Globals.score)
 
 func destab_anim():
 	destabilized = true
 	$DestabilizeAnimation.play("destabilize")
 	$HealthBarAnimation.play("destabbed_health")
+
+func on_score_updated():
+	score_num_display.text = str(Globals.score)
