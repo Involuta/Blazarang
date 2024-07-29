@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://kl1hpr0grn1v"]
+[gd_scene load_steps=14 format=3 uid="uid://kl1hpr0grn1v"]
 
 [ext_resource type="PackedScene" uid="uid://daj44qqb6dior" path="res://ui/health_bar.tscn" id="1_k5nv4"]
 [ext_resource type="Script" path="res://ui/ui_root.gd" id="1_s33yg"]
@@ -130,6 +130,10 @@ _data = {
 "destabilize": SubResource("Animation_ydv3p")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_apqk7"]
+font_size = 90
+outline_color = Color(1, 0, 1, 1)
+
 [node name="UIRoot" type="Control"]
 top_level = true
 layout_mode = 3
@@ -157,6 +161,7 @@ grow_horizontal = 1
 grow_vertical = 1
 
 [node name="GlitchBox" type="ColorRect" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.176471)
 material = SubResource("ShaderMaterial_wshvs")
 layout_mode = 0
@@ -199,3 +204,14 @@ root_node = NodePath("../DESTABILIZED")
 libraries = {
 "": SubResource("AnimationLibrary_3vweo")
 }
+
+[node name="ScoreNumDisplay" type="Label" parent="."]
+layout_mode = 0
+offset_left = 695.0
+offset_top = 903.0
+offset_right = 1214.0
+offset_bottom = 1030.0
+text = "9999"
+label_settings = SubResource("LabelSettings_apqk7")
+horizontal_alignment = 1
+vertical_alignment = 1

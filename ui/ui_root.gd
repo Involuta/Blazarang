@@ -15,6 +15,8 @@ var destabilized = false
 @export var glitch_shader_shake_power := .03
 @export var glitch_shader_shake_color_rate := .02
 
+@onready var score_num_display := $ScoreNumDisplay
+
 func _ready():
 	cotu_health_bar.modulate = Color.WHITE
 	glitch_box.visible = false
@@ -29,6 +31,8 @@ func _physics_process(delta):
 	destab_shader.set_shader_parameter("opacity", destab_shader_opacity)
 	glitch_shader.set_shader_parameter("shake_power", glitch_shader_shake_power)
 	glitch_shader.set_shader_parameter("shake_color_rate", glitch_shader_shake_color_rate)
+	
+	score_num_display.text = str(Globals.score)
 
 func destab_anim():
 	destabilized = true
