@@ -131,7 +131,7 @@ _data = {
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_apqk7"]
-font_size = 90
+font_size = 50
 outline_color = Color(1, 0, 1, 1)
 
 [sub_resource type="Animation" id="Animation_02hir"]
