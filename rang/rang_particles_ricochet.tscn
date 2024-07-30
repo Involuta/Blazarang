@@ -38,6 +38,5 @@ script = ExtResource("1_ywrvr")
 cast_shadow = 0
 amount = 16
 explosiveness = 1.0
-trail_enabled = true
 process_material = SubResource("ParticleProcessMaterial_8ik51")
 draw_pass_1 = SubResource("QuadMesh_pywly")

@@ -40,6 +40,7 @@ vertex_color_use_as_albedo = true
 [sub_resource type="QuadMesh" id="QuadMesh_fbcdn"]
 material = SubResource("StandardMaterial3D_cfr1q")
 size = Vector2(0.2, 0.2)
+orientation = 1
 
 [node name="RangParticlesBase" type="Node3D"]
 

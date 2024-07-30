@@ -3,6 +3,7 @@ extends Hurtbox
 
 var hit_score := 1.0
 var kill_score := 1.0
+var hit_particles := preload("res://enemies/enemy_hit_particles.tscn")
 var death_particle := preload("res://enemies/death_particle.tscn")
 
 func _ready():
@@ -14,6 +15,7 @@ func _ready():
 	super()
 
 func receive_hit(damage: float, hitter):
+	emit_hit_particles(hitter.global_position)
 	Globals.award_score(hit_score)
 	if hitter.name == "Roserang":
 		if hitter.get_mvmt_state() == "RICOCHET":
@@ -21,6 +23,12 @@ func receive_hit(damage: float, hitter):
 		elif hitter.get_mvmt_state() == "RAPIDORBIT":
 			Globals.award_score(Globals.RAPIDORBIT_HIT_SCORE)
 	super(damage, hitter)
+
+func emit_hit_particles(hit_position):
+	var inst := hit_particles.instantiate()
+	level.add_child.call_deferred(inst)
+	await inst.tree_entered
+	inst.global_position = hit_position
 
 func death_effect():
 	for i in range(dp_count):

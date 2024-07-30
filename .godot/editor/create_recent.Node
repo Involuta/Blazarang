@@ -1,3 +1,4 @@
+GPUParticles3D
 Node2D
 AnimationPlayer
 Label
@@ -18,7 +19,6 @@ ProgressBar
 TextureProgressBar
 NavigationRegion3D
 FuncGodotMap
-GPUParticles3D
 CharacterBody3D
 EnemyHurtbox
 Hurtbox
@@ -30,4 +30,3 @@ Line2D
 Area3D
 SpotLight3D
 LightmapGI
-VoxelGI

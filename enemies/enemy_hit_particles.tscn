@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://doj1akyfh87lb"]
+
+[ext_resource type="Script" path="res://DisappearNode.gd" id="1_eu4ca"]
+
+[sub_resource type="Curve" id="Curve_x0yk7"]
+_data = [Vector2(0, 1), 0.0, -0.0967058, 0, 0, Vector2(0.497903, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2h7fp"]
+curve = SubResource("Curve_x0yk7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g01re"]
+direction = Vector3(2.08165e-12, 2.08165e-12, 1)
+spread = 180.0
+flatness = 1.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+scale_curve = SubResource("CurveTexture_2h7fp")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ggmjv"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_4bgiq"]
+material = SubResource("StandardMaterial3D_ggmjv")
+
+[node name="EnemyHitParticles" type="Node3D"]
+script = ExtResource("1_eu4ca")
+disappear_secs = 0.5
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_g01re")
+draw_pass_1 = SubResource("BoxMesh_4bgiq")

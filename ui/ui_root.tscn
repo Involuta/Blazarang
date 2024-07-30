@@ -300,16 +300,14 @@ libraries = {
 
 [node name="ScoreNumDisplay" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -205.0
-offset_top = -179.0
-offset_right = 205.0
-offset_bottom = 1.0
-grow_horizontal = 2
+offset_left = -410.0
+offset_top = -180.0
+grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(205, 70)
 text = "0"
