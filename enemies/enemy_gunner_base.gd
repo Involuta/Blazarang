@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+@export var entity_name := "EnemyMobileGunner"
+
 enum {
 	WAIT,
 	FOLLOW,

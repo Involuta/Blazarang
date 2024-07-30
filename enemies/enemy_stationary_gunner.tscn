@@ -50,6 +50,7 @@ collision_layer = 8
 collision_mask = 11
 platform_floor_layers = 4294901762
 script = ExtResource("1_g4bs0")
+entity_name = "EnemyStationaryGunner"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_txubl")

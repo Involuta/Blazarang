@@ -29,10 +29,15 @@ const INSTANT_RETHROW_SCORE = 1
 const RICOCHET_HIT_SCORE = 1
 const RAPIDORBIT_HIT_SCORE = 1
 
-const MELEE_HIT_SCORE = 1
-const MELEE_KILL_SCORE = 2
-const GUNNER_HIT_SCORE = 1
-const GUNNER_KILL_SCORE = 2
+# health, hit score, kill score
+const enemy_hurtbox_data = {
+	"EnemyMeleeTier1" : [20, 1, 1],
+	"EnemyMeleeTier2" : [30, 1, 1.5],
+	"EnemyMeleeTier3" : [40, 1.5, 2],
+	"EnemyMobileGunner" : [10, 1, 1],
+	"EnemyStationaryGunner" : [10, 1, 1],
+	"FirstMiniboss" : [500, 1, 10]
+}
 
 func award_score(points):
 	# Apply multipliers/modifiers

@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+@export var entity_name := "EnemyMobileGunner"
+
 var shooting := false
 
 @export var sight_dist := 40.0

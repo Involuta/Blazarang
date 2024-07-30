@@ -4,8 +4,8 @@ extends Area3D
 var rng := RandomNumberGenerator.new()
 @export var dp_impulse_limit := 5
 @export var dp_count := 5
-@export var health := 100.0
-@export var max_health := 100.0
+var health := 100.0
+var max_health := 100.0
 @export var opponent_hitboxes := ["default"]
 @onready var parent := get_parent()
 @onready var level := $/root/Level

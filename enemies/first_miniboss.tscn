@@ -2074,8 +2074,6 @@ collision_mask = 9
 script = ExtResource("1_qwvcv")
 dp_impulse_limit = 18
 dp_count = 20
-health = 500.0
-max_health = 500.0
 opponent_hitboxes = ["PlayerHitbox"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHurtbox"]

@@ -67,3 +67,7 @@ res://ui/glitch.gdshader
 res://hurtbox.gd
 res://globals.gd
 res://enemies/enemy_hurtbox.gd
+res://enemies/enemy_melee_base.tscn
+res://enemies/enemy_melee_base.gd
+res://enemies/enemy_gunner_base.gd
+res://enemies/enemy_stationary_gunner.gd
