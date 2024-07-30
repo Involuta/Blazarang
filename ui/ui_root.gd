@@ -7,6 +7,9 @@ extends Control
 @onready var destab_shader = $DESTABILIZED.material
 @onready var glitch_box := $GlitchBox
 @onready var glitch_shader = $GlitchBox.material
+
+@onready var update_score_anim := $UpdateScoreAnimation
+
 @onready var cotu_hurtbox := $/root/Level/cotuCB/Hurtbox
 
 var destabilized = false
@@ -39,5 +42,14 @@ func destab_anim():
 	$DestabilizeAnimation.play("destabilize")
 	$HealthBarAnimation.play("destabbed_health")
 
-func on_score_updated():
+func on_score_updated(score_change):
 	score_num_display.text = str(Globals.score)
+	update_score_anim.stop()
+	if score_change <= 1:
+		print(score_change)
+		update_score_anim.play("small_update_score")
+	elif score_change <= 1.5:
+		print("bungalow")
+		update_score_anim.play("med_update_score")
+	elif score_change <= 2:
+		update_score_anim.play("big_update_score")

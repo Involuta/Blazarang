@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://kl1hpr0grn1v"]
+[gd_scene load_steps=18 format=3 uid="uid://kl1hpr0grn1v"]
 
 [ext_resource type="PackedScene" uid="uid://daj44qqb6dior" path="res://ui/health_bar.tscn" id="1_k5nv4"]
 [ext_resource type="Script" path="res://ui/ui_root.gd" id="1_s33yg"]
@@ -134,6 +134,100 @@ _data = {
 font_size = 90
 outline_color = Color(1, 0, 1, 1)
 
+[sub_resource type="Animation" id="Animation_02hir"]
+resource_name = "big_update_score"
+length = 0.500002
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScoreNumDisplay:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScoreNumDisplay:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_i2cse"]
+resource_name = "small_update_score"
+length = 0.333335
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScoreNumDisplay:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScoreNumDisplay:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.15, 1.15), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jpbxy"]
+resource_name = "med_update_score"
+length = 0.416668
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScoreNumDisplay:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.416667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScoreNumDisplay:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.416667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.4, 1.4), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_otxfp"]
+_data = {
+"big_update_score": SubResource("Animation_02hir"),
+"med_update_score": SubResource("Animation_jpbxy"),
+"small_update_score": SubResource("Animation_i2cse")
+}
+
 [node name="UIRoot" type="Control"]
 top_level = true
 layout_mode = 3
@@ -146,7 +240,7 @@ script = ExtResource("1_s33yg")
 glitch_shader_shake_color_rate = 0.0299999
 
 [node name="CotuHealthBar" parent="." instance=ExtResource("1_k5nv4")]
-modulate = Color(1, 0.740741, 0, 1)
+modulate = Color(1, 0.37037, 0, 1)
 layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.0
@@ -161,7 +255,6 @@ grow_horizontal = 1
 grow_vertical = 1
 
 [node name="GlitchBox" type="ColorRect" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0.176471)
 material = SubResource("ShaderMaterial_wshvs")
 layout_mode = 0
@@ -206,12 +299,25 @@ libraries = {
 }
 
 [node name="ScoreNumDisplay" type="Label" parent="."]
-layout_mode = 0
-offset_left = 695.0
-offset_top = 903.0
-offset_right = 1214.0
-offset_bottom = 1030.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -205.0
+offset_top = -179.0
+offset_right = 205.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(205, 70)
 text = "0"
 label_settings = SubResource("LabelSettings_apqk7")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="UpdateScoreAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_otxfp")
+}

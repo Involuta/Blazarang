@@ -1,7 +1,8 @@
+Node2D
+AnimationPlayer
 Label
 RichTextLabel
 TextEdit
-AnimationPlayer
 TextureRect
 ColorRect
 StaticBody3D

@@ -1,8 +1,8 @@
 class_name EnemyHurtbox
 extends Hurtbox
 
-var hit_score := 1
-var kill_score := 1
+var hit_score := 1.0
+var kill_score := 1.0
 var death_particle := preload("res://enemies/death_particle.tscn")
 
 func _ready():
