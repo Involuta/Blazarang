@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://DisappearNode.gd" id="1_eu4ca"]
 
 [sub_resource type="Curve" id="Curve_x0yk7"]
-_data = [Vector2(0, 1), 0.0, -0.0967058, 0, 0, Vector2(0.497903, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, -0.0967058, 0, 0, Vector2(0.495806, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_2h7fp"]
@@ -30,6 +30,8 @@ script = ExtResource("1_eu4ca")
 disappear_secs = 0.5
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+lifetime = 0.5
+one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_g01re")
 draw_pass_1 = SubResource("BoxMesh_4bgiq")

@@ -6,6 +6,8 @@ var kill_score := 1.0
 var hit_particles := preload("res://enemies/enemy_hit_particles.tscn")
 var death_particle := preload("res://enemies/death_particle.tscn")
 
+@onready var hit_sfx := $HitSFX
+
 func _ready():
 	var enemy_name = parent.entity_name
 	max_health = Globals.enemy_hurtbox_data[enemy_name][0]
@@ -16,6 +18,7 @@ func _ready():
 
 func receive_hit(damage: float, hitter):
 	emit_hit_particles(hitter.global_position)
+	hit_sfx.play()
 	Globals.award_score(hit_score)
 	if hitter.name == "Roserang":
 		if hitter.get_mvmt_state() == "RICOCHET":

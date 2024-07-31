@@ -19,3 +19,13 @@ res://enemies/enemy_hit_particles.tscn
 res://enemies/enemy_hurtbox.gd
 res://rang/roserang.tscn
 res://rang/rang_particles_base.tscn
+res://enemies/enemy_melee_tier1.tscn
+res://enemies/enemy_mobile_gunner.tscn
+res://cotu/cotu_anims_outline.tres
+res://enemies/enemy_melee_tier2.tscn
+res://enemies/enemy_melee_tier3.tscn
+res://enemies/enemy_stationary_gunner.tscn
+res://enemies/first_miniboss.tscn
+res://cotu/cotu_anims_base_material.tres
+res://cotu/cotu_cb_main.tscn
+res://hitbox.gd
