@@ -1,4 +1,5 @@
 AudioStreamPlayer3D
+Area3D
 AudioStreamPlayer
 GPUParticles3D
 Node2D
@@ -27,6 +28,5 @@ OmniLight3D
 Camera3D
 Trail3D
 Line2D
-Area3D
 SpotLight3D
 LightmapGI

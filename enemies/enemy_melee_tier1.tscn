@@ -1,9 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://d3nurhh7od5kk"]
+[gd_scene load_steps=24 format=3 uid="uid://d3nurhh7od5kk"]
 
 [ext_resource type="Script" path="res://enemies/enemy_melee_base.gd" id="1_dwc2x"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_eg5rr"]
 [ext_resource type="Script" path="res://hitbox.gd" id="3_h3l5p"]
-[ext_resource type="AudioStream" uid="uid://dcu4efx13q0b5" path="res://audio/sfx/hit1.wav" id="3_oip6j"]
 [ext_resource type="PackedScene" uid="uid://ch0s35387mnaj" path="res://rang/slash_test.tscn" id="5_kp43r"]
 [ext_resource type="PackedScene" uid="uid://cii55ymemjvsq" path="res://glb_inherited_scenes/melee_t1.tscn" id="6_7rw0y"]
 [ext_resource type="Shader" uid="uid://dhc6wyqlctr7a" path="res://rang/slash_test.tres" id="6_fvkq5"]
@@ -236,11 +235,6 @@ opponent_hitboxes = ["PlayerHitbox"]
 
 [node name="HurtboxCollider" type="CollisionShape3D" parent="EnemyHurtbox"]
 shape = SubResource("CapsuleShape3D_4b6ac")
-
-[node name="HitSFX" type="AudioStreamPlayer3D" parent="EnemyHurtbox"]
-stream = ExtResource("3_oip6j")
-volume_db = 45.0
-bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
