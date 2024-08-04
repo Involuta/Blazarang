@@ -30,3 +30,4 @@ res://cotu/cotu_anims_base_material.tres
 res://cotu/cotu_cb_main.tscn
 res://hitbox.gd
 res://rang/hit_sfx_player.gd
+res://rang/roserang.gd

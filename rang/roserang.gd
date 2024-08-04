@@ -86,7 +86,7 @@ func change_color(color: Color):
 	trail_glow_shader.set_shader_parameter("ColorParameter", color)
 
 func _physics_process(delta):
-	mesh.rotate_y(rotate_speed);
+	mesh.rotate_y(rotate_speed)
 	if Input.is_action_just_pressed("Special") and target.following_cotu and global_position.distance_to(target.global_position) < SPECIAL_DIST:
 		set_script(rapidorbit_script)
 		return
@@ -97,6 +97,7 @@ func _physics_process(delta):
 			var new_pos = rose(delta)
 			# vel_vec is in meters per frame, which is what move_and_collide wants
 			var vel_vec = new_pos - global_position
+			look_at(new_pos)
 			var hit_arena = rose_handle_collision(move_and_collide(vel_vec, true), vel_vec, delta)
 			if hit_arena:
 				set_collision_mask_value(Globals.ARENA_COL_LAYER, true)
@@ -113,6 +114,7 @@ func _physics_process(delta):
 		RICOCHET:
 			if target.roserang_queued:
 				switch_to_rose()
+			look_at(global_position + velocity)
 			ricochet_handle_collision(move_and_collide(velocity * delta))
 			if current_loop_angle >= PI/(2*petals):
 				set_collision_mask_value(Globals.ARENA_COL_LAYER, false)
@@ -127,6 +129,7 @@ func _physics_process(delta):
 				velocity = (velocity.length() + RETURN_ACC) * global_position.direction_to(target.global_position)
 			else:
 				velocity = MAX_RETURN_SPEED * global_position.direction_to(target.global_position)
+			look_at(global_position + velocity)
 			move_and_slide()
 
 func buff_self():

@@ -1,15 +1,15 @@
-[gd_scene load_steps=21 format=3 uid="uid://dqdba8l6potq1"]
+[gd_scene load_steps=22 format=3 uid="uid://dqdba8l6potq1"]
 
 [ext_resource type="Script" path="res://rang/roserang.gd" id="1_m7w6u"]
 [ext_resource type="Script" path="res://hitbox.gd" id="2_1xumc"]
 [ext_resource type="Script" path="res://rang/destroy_on_cotu_hit.gd" id="3_o7i4w"]
 [ext_resource type="Script" path="res://rang/hit_sfx_player.gd" id="4_s5v25"]
 [ext_resource type="Script" path="res://rang/rang_trail.gd" id="5_q4hkp"]
+[ext_resource type="AudioStream" uid="uid://y2t2k8f41igx" path="res://audio/sfx/HitSound3.wav" id="5_ru7fj"]
 [ext_resource type="PackedScene" uid="uid://xsh6t6rpr2st" path="res://rang/rang_particles_base.tscn" id="6_44m4u"]
 [ext_resource type="PackedScene" uid="uid://dd1bl11ajhe0s" path="res://glb_inherited_scenes/boomerang.tscn" id="6_c0jd5"]
 [ext_resource type="Shader" uid="uid://dkll861wc3rxd" path="res://rang/roserang_shader.tres" id="7_j3iaw"]
 [ext_resource type="AudioStream" uid="uid://c6kwran0tovv1" path="res://audio/sfx/flying_rang.wav" id="8_ml2k7"]
-[ext_resource type="AudioStream" uid="uid://dcu4efx13q0b5" path="res://audio/sfx/hit1.wav" id="9_c2v6i"]
 [ext_resource type="AudioStream" uid="uid://7urbs42hegym" path="res://audio/sfx/ricochet.wav" id="9_iyhsu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cvffx"]
@@ -31,6 +31,11 @@ radius = 2.0
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_vx8km"]
 height = 0.2
 radius = 2.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vtrgj"]
+streams_count = 1
+stream_0/stream = ExtResource("5_ru7fj")
+stream_0/weight = 1.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_o5dk8"]
 height = 0.2
@@ -88,7 +93,7 @@ collision_mask = 8
 script = ExtResource("4_s5v25")
 
 [node name="HitAudioStream" type="AudioStreamPlayer3D" parent="HitSFXPlayer"]
-stream = ExtResource("9_c2v6i")
+stream = SubResource("AudioStreamRandomizer_vtrgj")
 attenuation_model = 2
 volume_db = -33.0
 unit_size = 90.0

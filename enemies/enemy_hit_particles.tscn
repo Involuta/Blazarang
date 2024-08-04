@@ -11,7 +11,7 @@ curve = SubResource("Curve_x0yk7")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g01re"]
 direction = Vector3(2.08165e-12, 2.08165e-12, 1)
-spread = 180.0
+spread = 90.0
 flatness = 1.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 20.0
@@ -27,7 +27,7 @@ material = SubResource("StandardMaterial3D_ggmjv")
 
 [node name="EnemyHitParticles" type="Node3D"]
 script = ExtResource("1_eu4ca")
-disappear_secs = 0.5
+disappear_secs = 0.6
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 lifetime = 0.5

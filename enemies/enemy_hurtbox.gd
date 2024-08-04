@@ -15,7 +15,7 @@ func _ready():
 	super()
 
 func receive_hit(damage: float, hitter):
-	emit_hit_particles(hitter.global_position)
+	emit_hit_particles(hitter)
 	Globals.award_score(hit_score)
 	if hitter.name == "Roserang":
 		if hitter.get_mvmt_state() == "RICOCHET":
@@ -24,11 +24,12 @@ func receive_hit(damage: float, hitter):
 			Globals.award_score(Globals.RAPIDORBIT_HIT_SCORE)
 	super(damage, hitter)
 
-func emit_hit_particles(hit_position):
+func emit_hit_particles(hitter):
 	var inst := hit_particles.instantiate()
 	level.add_child.call_deferred(inst)
 	await inst.tree_entered
-	inst.global_position = hit_position
+	inst.global_position = hitter.global_position
+	inst.global_rotation.y = hitter.global_rotation.y + PI
 
 func death_effect():
 	for i in range(dp_count):
