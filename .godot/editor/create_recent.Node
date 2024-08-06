@@ -1,7 +1,8 @@
+CollisionShape3D
+Area3D
 FuncGodotMap
 NavigationRegion3D
 AudioStreamPlayer3D
-Area3D
 AudioStreamPlayer
 GPUParticles3D
 Node2D
@@ -13,7 +14,6 @@ TextureRect
 ColorRect
 StaticBody3D
 Node3D
-CollisionShape3D
 BoneAttachment3D
 AnimationTree
 GPUTrail3D

@@ -38,3 +38,4 @@ res://levels/hub.tscn
 res://levels/gauntlet_level1.tscn
 res://levels/level1.tscn
 res://levels/level1section_nodes/gauntlet_arena1.tscn
+res://levels/hub_level.gd
