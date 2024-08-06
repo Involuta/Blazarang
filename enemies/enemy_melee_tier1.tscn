@@ -203,9 +203,10 @@ states/WalkSpace/position = Vector2(388, 100.5)
 states/overhead/node = SubResource("AnimationNodeAnimation_scvwl")
 states/overhead/position = Vector2(587.7, 99.9062)
 transitions = ["Start", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_wa8xh"), "WalkSpace", "overhead", SubResource("AnimationNodeStateMachineTransition_h7rje"), "overhead", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_1yfff")]
-graph_offset = Vector2(-90.8322, 46.71)
+graph_offset = Vector2(-44.1222, -15.57)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_uk78c"]
+graph_offset = Vector2(-9.6, 57.6)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_f8liy")
 nodes/StateMachine/position = Vector2(110, 150)
 node_connections = [&"output", 0, &"StateMachine"]

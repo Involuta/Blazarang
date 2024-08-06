@@ -1,0 +1,47 @@
+[gd_scene load_steps=10 format=3 uid="uid://kxc8o8fwfmnd"]
+
+[ext_resource type="Script" path="res://levels/gauntlet_level1.gd" id="1_semmq"]
+[ext_resource type="PackedScene" uid="uid://kl1hpr0grn1v" path="res://ui/ui_root.tscn" id="2_wjf4o"]
+[ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="3_ohw5y"]
+[ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="4_xqr0j"]
+[ext_resource type="PackedScene" uid="uid://djyktbqfnc8fs" path="res://levels/hub_section_nodes/hub_room1.tscn" id="6_juebu"]
+[ext_resource type="AudioStream" uid="uid://br0a4rin6vcg3" path="res://audio/music/COTU.wav" id="6_ww5lu"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2oney"]
+sky_top_color = Color(0.0196078, 0, 0.172549, 1)
+sky_horizon_color = Color(0.00392157, 0, 0.0745098, 1)
+ground_bottom_color = Color(0.00392157, 0, 0.0666667, 1)
+ground_horizon_color = Color(0.00392157, 0, 0.0745098, 1)
+
+[sub_resource type="Sky" id="Sky_xpqqj"]
+sky_material = SubResource("ProceduralSkyMaterial_2oney")
+
+[sub_resource type="Environment" id="Environment_vgqir"]
+background_mode = 1
+background_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+sky = SubResource("Sky_xpqqj")
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 2.0
+glow_bloom = 0.2
+
+[node name="Level" type="Node3D"]
+script = ExtResource("1_semmq")
+
+[node name="UIRoot" parent="." instance=ExtResource("2_wjf4o")]
+
+[node name="cotuCB" parent="." instance=ExtResource("3_ohw5y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
+
+[node name="Target" parent="." instance=ExtResource("4_xqr0j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vgqir")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ww5lu")
+volume_db = -5.0
+bus = &"Music"
+
+[node name="hub_room1" parent="." instance=ExtResource("6_juebu")]

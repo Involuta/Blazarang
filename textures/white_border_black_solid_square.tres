@@ -3,8 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://bcocbyw2dlml1" path="res://textures/white_border_black_solid_square.png" id="1_7a6vw"]
 
 [resource]
+shading_mode = 0
 albedo_texture = ExtResource("1_7a6vw")
-metallic = 0.5
-metallic_specular = 0.0
-roughness = 0.5
 texture_filter = 2

@@ -31,3 +31,10 @@ res://cotu/cotu_cb_main.tscn
 res://hitbox.gd
 res://rang/hit_sfx_player.gd
 res://rang/roserang.gd
+res://textures/white_border_black_solid_square.tres
+res://textures/white_border_black_center.tres
+res://levels/hub_section_nodes/hub_room1.tscn
+res://levels/hub.tscn
+res://levels/gauntlet_level1.tscn
+res://levels/level1.tscn
+res://levels/level1section_nodes/gauntlet_arena1.tscn

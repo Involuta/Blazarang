@@ -1,3 +1,4 @@
+res://level_maps
 res://audio/sfx
 res://
 res://ui
@@ -8,7 +9,6 @@ res://glb_imports
 res://shaders
 res://rang
 res://levels
-res://level_maps
 res://levels/level1section_nodes
 res://enemies
 res://textures
