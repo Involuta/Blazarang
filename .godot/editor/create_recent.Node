@@ -1,4 +1,6 @@
+StaticBody3D
 CollisionShape3D
+MeshInstance3D
 Area3D
 FuncGodotMap
 NavigationRegion3D
@@ -12,12 +14,10 @@ RichTextLabel
 TextEdit
 TextureRect
 ColorRect
-StaticBody3D
 Node3D
 BoneAttachment3D
 AnimationTree
 GPUTrail3D
-MeshInstance3D
 ProgressBar
 TextureProgressBar
 CharacterBody3D

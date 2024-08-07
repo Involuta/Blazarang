@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://kxc8o8fwfmnd"]
+[gd_scene load_steps=14 format=3 uid="uid://kxc8o8fwfmnd"]
 
 [ext_resource type="Script" path="res://levels/hub_level.gd" id="1_4lyfx"]
 [ext_resource type="PackedScene" uid="uid://kl1hpr0grn1v" path="res://ui/ui_root.tscn" id="2_wjf4o"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="4_xqr0j"]
 [ext_resource type="PackedScene" uid="uid://djyktbqfnc8fs" path="res://levels/hub_section_nodes/hub_room1.tscn" id="6_juebu"]
 [ext_resource type="AudioStream" uid="uid://br0a4rin6vcg3" path="res://audio/music/COTU.wav" id="6_ww5lu"]
+[ext_resource type="Material" uid="uid://vsefhkxljqg8" path="res://textures/small_solid_black.tres" id="7_m862u"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2oney"]
 sky_top_color = Color(0.0196078, 0, 0.172549, 1)
@@ -27,6 +28,13 @@ glow_bloom = 0.2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_be7bh"]
 size = Vector3(1, 3, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fusxk"]
+material = ExtResource("7_m862u")
+size = Vector3(0.5, 2.5, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0x0ad"]
+size = Vector3(0.5, 2.5, 2)
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_4lyfx")
@@ -50,13 +58,27 @@ bus = &"Music"
 [node name="hub_room1" parent="." instance=ExtResource("6_juebu")]
 
 [node name="ExitRoom" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.6188, 2, 2.08165e-12)
 collision_layer = 2
 collision_mask = 16
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExitRoom"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 shape = SubResource("BoxShape3D_be7bh")
+
+[node name="ExitDoor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.25, 4.25, 2.08165e-12)
+collision_layer = 2
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ExitDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+mesh = SubResource("BoxMesh_fusxk")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExitDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+shape = SubResource("BoxShape3D_0x0ad")
 
 [connection signal="area_entered" from="ExitRoom" to="." method="_on_exit_room_area_entered"]
 [connection signal="body_entered" from="ExitRoom" to="." method="_on_exit_room_body_entered"]
