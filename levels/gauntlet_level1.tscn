@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://by6rgqxfg3vwp"]
+[gd_scene load_steps=20 format=3 uid="uid://by6rgqxfg3vwp"]
 
 [ext_resource type="Script" path="res://levels/gauntlet_level1.gd" id="1_g21b3"]
 [ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="2_cdmya"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="3_susk6"]
 [ext_resource type="PackedScene" uid="uid://cjxdm8v82qb3v" path="res://levels/level1section_nodes/gauntlet_arena1.tscn" id="4_y1q14"]
 [ext_resource type="AudioStream" uid="uid://br0a4rin6vcg3" path="res://audio/music/COTU.wav" id="6_1sujv"]
+[ext_resource type="Material" uid="uid://vsefhkxljqg8" path="res://textures/small_solid_black.tres" id="7_2hyy7"]
+[ext_resource type="Script" path="res://DisappearRB.gd" id="7_tfag3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2oney"]
 sky_top_color = Color(0.0196078, 0, 0.172549, 1)
@@ -25,13 +27,67 @@ glow_enabled = true
 glow_intensity = 2.0
 glow_bloom = 0.2
 
+[sub_resource type="BoxMesh" id="BoxMesh_2lrcn"]
+material = ExtResource("7_2hyy7")
+size = Vector3(0.5, 2.5, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_csl2d"]
+size = Vector3(0.5, 2.5, 2)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jro2y"]
+load_path = "res://.godot/imported/small_solid_black.png-ed2bc21591c55d0fb18ac9f1e9b43c10.s3tc.ctex"
+
+[sub_resource type="Shader" id="Shader_kscou"]
+code = "shader_type spatial;
+render_mode cull_front, unshaded;
+
+uniform vec4 outline_color : source_color;
+uniform float outline_width = 1.0;
+
+void vertex() {
+	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
+	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
+	
+	vec2 offset = normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
+	
+	clip_position.xy += offset;
+	
+	POSITION = clip_position;
+}
+
+void fragment() {
+	ALBEDO = outline_color.rgb;
+	if (outline_color.a < 1.0) {
+		ALPHA = outline_color.a;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2gn78"]
+render_priority = 0
+shader = SubResource("Shader_kscou")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h0bqq"]
+next_pass = SubResource("ShaderMaterial_2gn78")
+albedo_texture = SubResource("CompressedTexture2D_jro2y")
+metallic_specular = 0.0
+texture_filter = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_2erk3"]
+material = SubResource("StandardMaterial3D_h0bqq")
+size = Vector3(2, 0.5, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yxu1q"]
+size = Vector3(2, 0.5, 2)
+
 [node name="Level" type="Node3D"]
 script = ExtResource("1_g21b3")
 
 [node name="UIRoot" parent="." instance=ExtResource("2_ob26x")]
 
 [node name="cotuCB" parent="." instance=ExtResource("2_cdmya")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 11.5, 2.08165e-12)
 
 [node name="Target" parent="." instance=ExtResource("3_susk6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
@@ -45,3 +101,83 @@ environment = SubResource("Environment_vgqir")
 stream = ExtResource("6_1sujv")
 volume_db = -5.0
 bus = &"Music"
+
+[node name="EntranceDoorLeft" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 12.5, 2.08165e-12)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("7_tfag3")
+disappear_secs = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EntranceDoorLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+mesh = SubResource("BoxMesh_2lrcn")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EntranceDoorLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+shape = SubResource("BoxShape3D_csl2d")
+
+[node name="EntranceDoorBack" type="RigidBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, 2.08165e-12, 12.5, 1.25)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("7_tfag3")
+disappear_secs = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EntranceDoorBack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+mesh = SubResource("BoxMesh_2lrcn")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EntranceDoorBack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+shape = SubResource("BoxShape3D_csl2d")
+
+[node name="EntranceDoorForward" type="RigidBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, -3.48787e-16, -1, 3.48787e-16, 1, -3.48787e-16, 1, -3.48787e-16, -4.37114e-08, 2.08165e-12, 12.5, -1.25)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("7_tfag3")
+disappear_secs = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EntranceDoorForward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+mesh = SubResource("BoxMesh_2lrcn")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EntranceDoorForward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+shape = SubResource("BoxShape3D_csl2d")
+
+[node name="EntranceDoorRight" type="RigidBody3D" parent="."]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 1.25, 12.5, 2.08165e-12)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("7_tfag3")
+disappear_secs = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EntranceDoorRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+mesh = SubResource("BoxMesh_2lrcn")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EntranceDoorRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+shape = SubResource("BoxShape3D_csl2d")
+
+[node name="EntranceCeiling" type="RigidBody3D" parent="."]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 14, 2.08165e-12)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("7_tfag3")
+disappear_secs = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EntranceCeiling"]
+transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+mesh = SubResource("BoxMesh_2erk3")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EntranceCeiling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+shape = SubResource("BoxShape3D_yxu1q")

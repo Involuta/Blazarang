@@ -130,8 +130,8 @@ shape = SubResource("ConvexPolygonShape3D_12rec")
 [node name="entity_0_brush_11_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_0_worldspawn"]
 shape = SubResource("ConvexPolygonShape3D_i37n0")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.939018, 0.155596, 0.306651, -0.34115, 0.533412, 0.774008, -0.0431389, -0.831421, 0.553965, -3.16012e-30, 25.9766, 0)
-light_color = Color(0.756863, 0.854902, 1, 1)
-shadow_enabled = true
-shadow_opacity = 0.5
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 5, 2.08165e-12)
+light_energy = 10.0
+light_size = 15.0
+omni_range = 15.0

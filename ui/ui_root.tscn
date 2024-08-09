@@ -30,6 +30,23 @@ colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.588235, 1, 1, 1, 1, 1, 1, 1, 0.
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_o07wl"]
 gradient = SubResource("Gradient_muld8")
 
+[sub_resource type="Animation" id="Animation_fc276"]
+resource_name = "destabbed_health"
+length = 12.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../CotuHealthBar:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.8, 2.7, 3.6, 4.5, 5.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 0.833333, 0, 1), Color(0.333333, 1, 0, 1), Color(0, 1, 0.5, 1), Color(0, 0.666667, 1, 1), Color(0.166667, 0, 1, 1), Color(1, 0, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_ydv3p"]
 resource_name = "destabilize"
 length = 0.766668
@@ -107,23 +124,6 @@ tracks/5/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="Animation" id="Animation_fc276"]
-resource_name = "destabbed_health"
-length = 12.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../CotuHealthBar:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.9, 1.8, 2.7, 3.6, 4.5, 5.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 0, 0, 1), Color(1, 0.833333, 0, 1), Color(0.333333, 1, 0, 1), Color(0, 1, 0.5, 1), Color(0, 0.666667, 1, 1), Color(0.166667, 0, 1, 1), Color(1, 0, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3vweo"]
 _data = {
 "destabbed_health": SubResource("Animation_fc276"),
@@ -148,7 +148,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 0, 1), Color(1, 1, 1, 1)]
+"values": [Color(0, 1, 0, 1), Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -161,6 +161,35 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jpbxy"]
+resource_name = "med_update_score"
+length = 0.416668
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScoreNumDisplay:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.416667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScoreNumDisplay:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.416667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.4, 1.4), Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_i2cse"]
@@ -190,35 +219,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1.15, 1.15), Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_jpbxy"]
-resource_name = "med_update_score"
-length = 0.416668
-step = 0.0166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ScoreNumDisplay:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.416667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 0, 1, 1), Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ScoreNumDisplay:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.416667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1.4, 1.4), Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_otxfp"]
@@ -265,7 +265,6 @@ mouse_filter = 2
 
 [node name="DESTABILIZED" type="TextureRect" parent="."]
 visible = false
-modulate = Color(1, 1, 1, 1)
 top_level = true
 z_index = -1
 material = SubResource("ShaderMaterial_26fs1")

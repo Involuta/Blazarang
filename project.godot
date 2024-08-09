@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="BlazarangGodot"
-run/main_scene="res://levels/gauntlet_level1.tscn"
+run/main_scene="res://levels/hub.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
 
@@ -113,6 +113,7 @@ Special={
 3d_physics/layer_5="Cotu"
 3d_physics/layer_6="Target"
 3d_physics/layer_7="ThickEnemy"
+3d_physics/layer_8="EnemyBounds"
 
 [rendering]
 

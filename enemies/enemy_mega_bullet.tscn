@@ -25,7 +25,7 @@ transform = Transform3D(0.999999, -6.97573e-16, -1.52459e-23, -1.52459e-23, -4.3
 collision_layer = 8
 collision_mask = 18
 script = ExtResource("2_xoojo")
-damage = 30
+damage = 15
 
 [node name="HitboxCollider" type="CollisionShape3D" parent="EnemyHitbox"]
 shape = SubResource("CapsuleShape3D_qwteq")
