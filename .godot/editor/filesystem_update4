@@ -45,3 +45,4 @@ res://ui/ui_root.tscn
 res://enemies/enemy_mega_bullet.tscn
 res://levels/level1section_nodes/first_miniboss_arena.tscn
 res://levels/level1section_nodes/gauntlet_arena1.gd
+res://textures/small_solid_white.tres
