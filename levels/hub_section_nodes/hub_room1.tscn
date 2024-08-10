@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://djyktbqfnc8fs"]
+[gd_scene load_steps=32 format=3 uid="uid://djyktbqfnc8fs"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_qcdon"]
 [ext_resource type="Script" path="res://levels/hub_section_nodes/hub_room.gd" id="1_wombd"]
@@ -6,6 +6,7 @@
 [ext_resource type="Material" uid="uid://b7textbwfhsws" path="res://textures/white_border_black_solid_square.tres" id="3_hjikl"]
 [ext_resource type="Material" uid="uid://vsefhkxljqg8" path="res://textures/small_solid_black.tres" id="4_iw5mc"]
 [ext_resource type="Material" uid="uid://b348dodss1ihp" path="res://textures/small_solid_white.tres" id="5_hla25"]
+[ext_resource type="Texture2D" uid="uid://wrxac3q4r5nq" path="res://textures/8164.webp" id="7_674sf"]
 [ext_resource type="Texture2D" uid="uid://bpp6eajjxo4pl" path="res://textures/3-VAR1_1.webp" id="7_meev4"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_sbqok"]
@@ -134,7 +135,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MainLevelPanel:position")
+tracks/2/path = NodePath("MiddleLevelPanel:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -146,7 +147,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("MainLevelPanel:scale")
+tracks/3/path = NodePath("MiddleLevelPanel:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -187,7 +188,7 @@ step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MainLevelPanel:position")
+tracks/0/path = NodePath("MiddleLevelPanel:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -199,7 +200,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MainLevelPanel:scale")
+tracks/1/path = NodePath("MiddleLevelPanel:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -341,13 +342,13 @@ light_energy = 10.0
 light_size = 15.0
 omni_range = 15.0
 
-[node name="MainLevelPanel" type="Sprite3D" parent="."]
-transform = Transform3D(-8.74228e-09, -6.97574e-17, -0.2, 6.97574e-17, 0.2, -6.97574e-17, 0.2, -6.97574e-17, -8.74228e-09, 11.5, 0.5, -3)
-texture = ExtResource("7_meev4")
-
 [node name="UpperLevelPanel" type="Sprite3D" parent="."]
 transform = Transform3D(-1.31134e-08, -1.04636e-16, -0.3, 1.04636e-16, 0.3, -1.04636e-16, 0.3, -1.04636e-16, -1.31134e-08, 11.5, 3.5, -3)
 texture = ExtResource("7_meev4")
+
+[node name="MiddleLevelPanel" type="Sprite3D" parent="."]
+transform = Transform3D(-8.74228e-09, -6.97574e-17, -0.2, 6.97574e-17, 0.2, -6.97574e-17, 0.2, -6.97574e-17, -8.74228e-09, 11.5, 0.5, -3)
+texture = ExtResource("7_674sf")
 
 [node name="LowerLevelPanel" type="Sprite3D" parent="."]
 transform = Transform3D(-8.74228e-09, -6.97574e-17, -0.2, 6.97574e-17, 0.2, -6.97574e-17, 0.2, -6.97574e-17, -8.74228e-09, 11.5, 0.5, -3)
