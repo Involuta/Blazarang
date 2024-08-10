@@ -30,7 +30,7 @@ func receive_hit(damage: float, _hitter):
 	if health <= 0:
 		die()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if invincible:
 		health = max_health
 	

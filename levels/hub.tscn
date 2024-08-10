@@ -82,5 +82,3 @@ shape = SubResource("BoxShape3D_0x0ad")
 
 [connection signal="area_entered" from="ExitRoom" to="." method="_on_exit_room_area_entered"]
 [connection signal="body_entered" from="ExitRoom" to="." method="_on_exit_room_body_entered"]
-
-[editable path="hub_room1"]

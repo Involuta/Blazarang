@@ -27,7 +27,7 @@ func _ready():
 	
 	Globals.score_updated.connect(on_score_updated)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	cotu_health_bar.max_value = cotu_hurtbox.max_health
 	cotu_health_bar.value = cotu_hurtbox.health
 	cotu_damage_indicator.value = cotu_hurtbox.damage_indicator_value

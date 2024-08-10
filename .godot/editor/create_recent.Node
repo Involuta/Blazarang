@@ -1,3 +1,13 @@
+AnimationPlayer
+Sprite3D
+Camera3D
+Camera2D
+Control
+Label
+SubViewport
+AnimatedSprite3D
+RichTextLabel
+SubViewportContainer
 CollisionShape3D
 MeshInstance3D
 StaticBody3D
@@ -11,9 +21,6 @@ AudioStreamPlayer3D
 AudioStreamPlayer
 GPUParticles3D
 Node2D
-AnimationPlayer
-Label
-RichTextLabel
 TextEdit
 TextureRect
 ColorRect
@@ -23,10 +30,3 @@ GPUTrail3D
 ProgressBar
 TextureProgressBar
 CharacterBody3D
-EnemyHurtbox
-Hurtbox
-DirectionalLight3D
-Camera3D
-Trail3D
-Line2D
-SpotLight3D

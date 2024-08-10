@@ -1,10 +1,12 @@
-[gd_scene load_steps=29 format=3 uid="uid://djyktbqfnc8fs"]
+[gd_scene load_steps=31 format=3 uid="uid://djyktbqfnc8fs"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_qcdon"]
+[ext_resource type="Script" path="res://levels/hub_section_nodes/hub_room.gd" id="1_wombd"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="2_75gy2"]
 [ext_resource type="Material" uid="uid://b7textbwfhsws" path="res://textures/white_border_black_solid_square.tres" id="3_hjikl"]
 [ext_resource type="Material" uid="uid://vsefhkxljqg8" path="res://textures/small_solid_black.tres" id="4_iw5mc"]
 [ext_resource type="Material" uid="uid://b348dodss1ihp" path="res://textures/small_solid_white.tres" id="5_hla25"]
+[ext_resource type="Texture2D" uid="uid://bpp6eajjxo4pl" path="res://textures/3-VAR1_1.webp" id="7_meev4"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_sbqok"]
 vertices = PackedVector3Array(0, 1, -9.25, -9.25, 1, -9.25, -9.25, 1, 0, 0, 1, 9.5, 9.5, 1, 9.5, 9.5, 1, 0, -9.25, 1, 0, -9.25, 1, 9.5, 0, 1, 9.5, 9.5, 1, 0, 9.5, 1, -9.25, 0, 1, -9.25)
@@ -101,17 +103,168 @@ points = PackedVector3Array(10, 1.5625, -6, 10, 1.5, -6, 11, 1.5, -6, 11, 1.5625
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_44qab"]
 points = PackedVector3Array(10, 8, -6, 10, 5.5, -6, 11, 5.5, -6, 11, 8, -6, 10, 8, 6, 10, 5.5, 6, 11, 5.5, 6, 11, 8, 6)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w8nlb"]
-albedo_color = Color(0.403922, 1, 1, 1)
+[sub_resource type="Animation" id="Animation_pwwyr"]
+resource_name = "scroll_up"
+length = 0.133335
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LowerLevelPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(11.5, 0.5, -3), Vector3(11.5, 3.5, -3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LowerLevelPanel:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.2, 0.2, 0.2), Vector3(0.3, 0.3, 0.3)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MainLevelPanel:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(11.5, 3.5, -3), Vector3(11.5, 6.5, -3)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MainLevelPanel:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.3, 0.3, 0.3), Vector3(0.2, 0.2, 0.2)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UpperLevelPanel:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(11.5, 6.5, -3)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("UpperLevelPanel:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.2, 0.2, 0.2)]
+}
 
-[sub_resource type="BoxMesh" id="BoxMesh_0yih5"]
-material = SubResource("StandardMaterial3D_w8nlb")
-size = Vector3(1, 4, 14)
+[sub_resource type="Animation" id="Animation_sby6n"]
+resource_name = "scroll_down"
+length = 0.133335
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MainLevelPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(11.5, 3.5, -3), Vector3(11.5, 0.5, -3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MainLevelPanel:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.3, 0.3, 0.3), Vector3(0.2, 0.2, 0.2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UpperLevelPanel:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(11.5, 6.5, -3), Vector3(11.5, 3.5, -3)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UpperLevelPanel:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.2, 0.2, 0.2), Vector3(0.3, 0.3, 0.3)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("LowerLevelPanel:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(11.5, 0.5, -3)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("LowerLevelPanel:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.2, 0.2, 0.2)]
+}
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_05mju"]
-size = Vector3(1, 4, 14)
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5wauu"]
+_data = {
+"scroll_down": SubResource("Animation_sby6n"),
+"scroll_up": SubResource("Animation_pwwyr")
+}
 
 [node name="hub_room1" type="Node3D"]
+script = ExtResource("1_wombd")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_sbqok")
@@ -188,11 +341,19 @@ light_energy = 10.0
 light_size = 15.0
 omni_range = 15.0
 
-[node name="Background" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 3.5, 2.08165e-12)
+[node name="MainLevelPanel" type="Sprite3D" parent="."]
+transform = Transform3D(-8.74228e-09, -6.97574e-17, -0.2, 6.97574e-17, 0.2, -6.97574e-17, 0.2, -6.97574e-17, -8.74228e-09, 11.5, 0.5, -3)
+texture = ExtResource("7_meev4")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Background"]
-mesh = SubResource("BoxMesh_0yih5")
+[node name="UpperLevelPanel" type="Sprite3D" parent="."]
+transform = Transform3D(-1.31134e-08, -1.04636e-16, -0.3, 1.04636e-16, 0.3, -1.04636e-16, 0.3, -1.04636e-16, -1.31134e-08, 11.5, 3.5, -3)
+texture = ExtResource("7_meev4")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Background"]
-shape = SubResource("BoxShape3D_05mju")
+[node name="LowerLevelPanel" type="Sprite3D" parent="."]
+transform = Transform3D(-8.74228e-09, -6.97574e-17, -0.2, 6.97574e-17, 0.2, -6.97574e-17, 0.2, -6.97574e-17, -8.74228e-09, 11.5, 0.5, -3)
+texture = ExtResource("7_meev4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5wauu")
+}

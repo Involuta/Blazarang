@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dieefivfbkovw"
-path.s3tc="res://.godot/imported/icon_godambler3d.svg-f7df9bfe58320474198644aa06a8f3f6.s3tc.ctex"
+uid="uid://bpp6eajjxo4pl"
+path.s3tc="res://.godot/imported/3-VAR1_1.webp-0a20102c97b44259b92d1f345c625cc2.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/func_godot/icons/icon_godambler3d.svg"
-dest_files=["res://.godot/imported/icon_godambler3d.svg-f7df9bfe58320474198644aa06a8f3f6.s3tc.ctex"]
+source_file="res://textures/3-VAR1_1.webp"
+dest_files=["res://.godot/imported/3-VAR1_1.webp-0a20102c97b44259b92d1f345c625cc2.s3tc.ctex"]
 
 [params]
 
@@ -33,6 +33,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=0
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false
