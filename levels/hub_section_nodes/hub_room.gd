@@ -4,6 +4,7 @@ extends Node3D
 @onready var middle_level_panel := $MiddleLevelPanel
 @onready var lower_level_panel := $LowerLevelPanel
 @onready var anim_player := $AnimationPlayer
+@onready var exit_door := $ExitDoor
 
 var level_list := {
 	"res://textures/3-VAR1_1.webp" : "res://levels/gauntlet_level1.tscn",
@@ -15,7 +16,18 @@ var level_list_pos := 0
 var selected_level := "res://levels/gauntlet_level1.tscn"
 
 func _ready():
-	pass
+	middle_level_panel.position = Vector3(11.5, 3.5, -3)
+	middle_level_panel.scale = .3 * Vector3.ONE
+	middle_level_panel.texture = load(level_list.keys()[level_list_pos])
+	exit_door.position = Vector3(-10.25, 4.25, 0)
+
+func _on_exit_room_body_entered(_body):
+	# Move ExitDoor y pos from 4.25 to 1.75
+	var tween = get_tree().create_tween()
+	tween.tween_property(exit_door, "position", Vector3(-10.25, 1.75, 0), 1)
+	tween.tween_property($OmniLight3D, "omni_range", 10, 1)
+	await get_tree().create_timer(2).timeout
+	get_tree().change_scene_to_file(level_list.values()[level_list_pos])
 
 func scroll_up():
 	middle_level_panel.texture = load(level_list.keys()[level_list_pos])

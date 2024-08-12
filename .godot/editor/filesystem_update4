@@ -23,3 +23,7 @@ res://ui/glow.gdshader
 res://levels/hub_section_nodes/hub_room1.tscn
 res://ui/ui_root.tscn
 res://levels/hub_section_nodes/hub_room.gd
+res://levels/hub_level.gd
+res://cotu/CotuHurtbox.gd
+res://levels/level1section_nodes/gauntlet_arena1.gd
+res://cotu/cotu_death_particles.tscn

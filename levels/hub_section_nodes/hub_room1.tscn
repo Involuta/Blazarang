@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://djyktbqfnc8fs"]
+[gd_scene load_steps=39 format=3 uid="uid://djyktbqfnc8fs"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_qcdon"]
 [ext_resource type="Script" path="res://levels/hub_section_nodes/hub_room.gd" id="1_wombd"]
@@ -264,6 +264,56 @@ _data = {
 "scroll_up": SubResource("Animation_pwwyr")
 }
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_kqaun"]
+size = Vector3(1, 3, 2)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2im6r"]
+load_path = "res://.godot/imported/small_solid_black.png-ed2bc21591c55d0fb18ac9f1e9b43c10.s3tc.ctex"
+
+[sub_resource type="Shader" id="Shader_4qdw3"]
+code = "shader_type spatial;
+render_mode cull_front, unshaded;
+
+uniform vec4 outline_color : source_color;
+uniform float outline_width = 1.0;
+
+void vertex() {
+	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
+	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
+	
+	vec2 offset = normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
+	
+	clip_position.xy += offset;
+	
+	POSITION = clip_position;
+}
+
+void fragment() {
+	ALBEDO = outline_color.rgb;
+	if (outline_color.a < 1.0) {
+		ALPHA = outline_color.a;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jddls"]
+render_priority = 1
+shader = SubResource("Shader_4qdw3")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3v6td"]
+next_pass = SubResource("ShaderMaterial_jddls")
+albedo_texture = SubResource("CompressedTexture2D_2im6r")
+metallic_specular = 0.0
+texture_filter = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_lhiwg"]
+material = SubResource("StandardMaterial3D_3v6td")
+size = Vector3(0.5, 2.5, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ec0t2"]
+size = Vector3(0.5, 2.5, 2)
+
 [node name="hub_room1" type="Node3D"]
 script = ExtResource("1_wombd")
 
@@ -358,3 +408,28 @@ texture = ExtResource("7_meev4")
 libraries = {
 "": SubResource("AnimationLibrary_5wauu")
 }
+
+[node name="ExitRoom" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.6188, 2, 2.08165e-12)
+collision_layer = 2
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExitRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.876971, 0, 2.08165e-12)
+shape = SubResource("BoxShape3D_kqaun")
+
+[node name="ExitDoor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.25, 4.25, 2.08165e-12)
+collision_layer = 2
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ExitDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+mesh = SubResource("BoxMesh_lhiwg")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExitDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+shape = SubResource("BoxShape3D_ec0t2")
+
+[connection signal="body_entered" from="ExitRoom" to="." method="_on_exit_room_body_entered"]

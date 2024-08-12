@@ -53,7 +53,10 @@ func _physics_process(delta):
 func die():
 	# AKA destabilize
 	if parent.destabilized:
-		parent.queue_free()
+		Engine.time_scale = .1
+		await get_tree().create_timer(.5).timeout
+		Engine.time_scale = 1
+		get_tree().change_scene_to_file("res://levels/hub.tscn")
 		return
 	parent.destabilized = true
 	self_heal(max_health)
