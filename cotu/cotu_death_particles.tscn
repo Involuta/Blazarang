@@ -7,8 +7,7 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 gradient = SubResource("Gradient_pfho8")
 
 [sub_resource type="Curve" id="Curve_hnffa"]
-max_value = 5.0
-_data = [Vector2(2.08165e-12, 5), 0.0, 2.08165e-12, 0, 0, Vector2(1, 0.1), 2.08165e-12, 0.0, 0, 0]
+_data = [Vector2(2.08165e-12, 1), 0.0, 2.08165e-12, 0, 0, Vector2(1, 0.1), 2.08165e-12, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_6wba2"]
@@ -19,8 +18,8 @@ particle_flag_align_y = true
 particle_flag_rotate_y = true
 direction = Vector3(2.08165e-12, 1, 2.08165e-12)
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-initial_velocity_min = 15.0
-initial_velocity_max = 20.0
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
 angle_min = -180.0
 angle_max = 180.0
 scale_curve = SubResource("CurveTexture_6wba2")
@@ -38,7 +37,8 @@ size = Vector3(0.1, 0.1, 0.1)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 cast_shadow = 0
-amount = 50
-lifetime = 2.0
+amount = 100
+lifetime = 0.2
+randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_h31m5")
 draw_pass_1 = SubResource("BoxMesh_2rfo1")

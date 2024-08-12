@@ -54,6 +54,7 @@ func die():
 	# AKA destabilize
 	if parent.destabilized:
 		Engine.time_scale = .1
+		parent.get_node("DeathParticles/GPUParticles3D").emitting = true
 		await get_tree().create_timer(.5).timeout
 		Engine.time_scale = 1
 		get_tree().change_scene_to_file("res://levels/hub.tscn")

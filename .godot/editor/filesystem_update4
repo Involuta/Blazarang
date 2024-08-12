@@ -27,3 +27,4 @@ res://levels/hub_level.gd
 res://cotu/CotuHurtbox.gd
 res://levels/level1section_nodes/gauntlet_arena1.gd
 res://cotu/cotu_death_particles.tscn
+res://cotu/cotu_cb_main.tscn
