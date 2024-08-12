@@ -28,3 +28,5 @@ res://cotu/CotuHurtbox.gd
 res://levels/level1section_nodes/gauntlet_arena1.gd
 res://cotu/cotu_death_particles.tscn
 res://cotu/cotu_cb_main.tscn
+res://glb_inherited_scenes/melee_t3.tscn
+res://enemies/enemy_melee_tier3.tscn
