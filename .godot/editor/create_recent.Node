@@ -1,3 +1,4 @@
+BoneAttachment3D
 AnimationPlayer
 Sprite3D
 Camera3D
@@ -24,7 +25,6 @@ Node2D
 TextEdit
 TextureRect
 ColorRect
-BoneAttachment3D
 AnimationTree
 GPUTrail3D
 ProgressBar

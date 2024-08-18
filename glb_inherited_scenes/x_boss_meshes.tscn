@@ -61,3 +61,8 @@ transform = Transform3D(-0.1, 3.48787e-17, -8.74228e-09, 3.48787e-17, 0.1, -3.48
 surface_material_override/0 = SubResource("StandardMaterial3D_fbp14")
 surface_material_override/1 = SubResource("StandardMaterial3D_w5qfh")
 surface_material_override/2 = SubResource("StandardMaterial3D_r7mu1")
+
+[node name="LeftArmAttachment" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(-0.0403358, 0.999155, 0.00790155, -0.0481341, 0.00595573, -0.998823, -0.998026, -0.0406687, 0.0478532, 7.69244, 19.3648, -0.340102)
+bone_name = "mixamorig_LeftForeArm"
+bone_idx = 9
