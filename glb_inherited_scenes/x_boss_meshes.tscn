@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://b3uvg3j4qge8o"]
+
+[ext_resource type="PackedScene" uid="uid://rp0n2dfx0chj" path="res://glb_imports/8164_meshes.glb" id="1_mluec"]
+[ext_resource type="Shader" path="res://glb_inherited_scenes/outline.gdshader" id="2_jd27j"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fbp14"]
+shading_mode = 0
+albedo_color = Color(1, 0.196078, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5jpbe"]
+render_priority = 0
+shader = ExtResource("2_jd27j")
+shader_parameter/outline_color = Color(0.431373, 0.431373, 0.431373, 1)
+shader_parameter/outline_width = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w5qfh"]
+next_pass = SubResource("ShaderMaterial_5jpbe")
+albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
+roughness = 0.0
+
+[sub_resource type="Shader" id="Shader_0t678"]
+code = "shader_type spatial;
+render_mode cull_front, unshaded;
+
+uniform vec4 outline_color : source_color;
+uniform float outline_width = 1.0;
+
+void vertex() {
+	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
+	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
+	
+	vec2 offset = normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
+	
+	clip_position.xy += offset;
+	
+	POSITION = clip_position;
+}
+
+void fragment() {
+	ALBEDO = outline_color.rgb;
+	if (outline_color.a < 1.0) {
+		ALPHA = outline_color.a;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m66tw"]
+render_priority = 0
+shader = SubResource("Shader_0t678")
+shader_parameter/outline_color = Color(0.431373, 0.431373, 0.431373, 1)
+shader_parameter/outline_width = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r7mu1"]
+next_pass = SubResource("ShaderMaterial_m66tw")
+albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
+roughness = 0.0
+
+[node name="X_boss_meshes" instance=ExtResource("1_mluec")]
+transform = Transform3D(-0.1, 3.48787e-17, -8.74228e-09, 3.48787e-17, 0.1, -3.48787e-17, 8.74228e-09, -3.48787e-17, -0.1, 0, 0, 0)
+
+[node name="Body_001" parent="Armature/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_fbp14")
+surface_material_override/1 = SubResource("StandardMaterial3D_w5qfh")
+surface_material_override/2 = SubResource("StandardMaterial3D_r7mu1")
