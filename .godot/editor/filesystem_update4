@@ -36,3 +36,5 @@ res://glb_inherited_scenes/melee_t2.tscn
 res://enemies/enemy_anims/mt2_overhead.res
 res://enemies/enemy_anims/mt2_sweep.res
 res://enemies/enemy_anims/mt2_one-handed-walk.res
+res://enemies/enemy_anims/mt2_idle.res
+res://enemies/enemy_melee_tier2.tscn

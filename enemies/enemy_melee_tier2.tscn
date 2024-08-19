@@ -205,12 +205,12 @@ states/OverheadCR/position = Vector2(570.1, 52.1013)
 states/SweepCR/node = SubResource("AnimationNodeAnimation_lnhdq")
 states/SweepCR/position = Vector2(569.935, 150.735)
 states/WalkSpace/node = SubResource("AnimationNodeBlendSpace1D_xixeq")
-states/WalkSpace/position = Vector2(388.078, 100.039)
+states/WalkSpace/position = Vector2(388.078, 100.02)
 transitions = ["Start", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_xruje"), "WalkSpace", "OverheadCR", SubResource("AnimationNodeStateMachineTransition_hibdj"), "OverheadCR", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_ito5k"), "WalkSpace", "SweepCR", SubResource("AnimationNodeStateMachineTransition_50775"), "SweepCR", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_bevw0")]
 graph_offset = Vector2(126.443, 8.235)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_kp0ng"]
-graph_offset = Vector2(-13.44, 54.72)
+graph_offset = Vector2(-87.36, 93.12)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_cn63x")
 nodes/StateMachine/position = Vector2(90, 150)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -248,7 +248,7 @@ libraries = {
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
 process_mode = 4
-transform = Transform3D(1, -6.92275e-16, -6.05665e-17, -6.05665e-17, -0.173649, 0.984807, -6.92275e-16, -0.984807, -0.173649, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(1, -6.92275e-16, -6.05664e-17, -6.05665e-17, -0.173649, 0.984807, -6.92275e-16, -0.984807, -0.173649, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 visible = false
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
@@ -267,7 +267,7 @@ cast_shadow = 0
 mesh = SubResource("CapsuleMesh_oq81m")
 
 [node name="VisualMesh" parent="." instance=ExtResource("2_jmf1i")]
-transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, -1.16688, 0)
+transform = Transform3D(-0.15, 5.2318e-17, -2.26494e-08, 5.2318e-17, 0.15, -5.2318e-17, 2.26494e-08, -5.2318e-17, -0.15, 0, -1.15232, 0)
 
 [node name="Skeleton3D" parent="VisualMesh/ControlRig" index="0"]
 bones/0/position = Vector3(0.0755615, 5.82368, 0.205741)
@@ -277,7 +277,6 @@ bones/2/rotation = Quaternion(0.0479957, -0.0101503, -3.86014e-05, 0.998796)
 bones/3/rotation = Quaternion(0.00194795, 0.00435976, 0.0150955, 0.999875)
 bones/4/rotation = Quaternion(-0.0520372, -0.0721113, -0.0702848, 0.993555)
 bones/5/rotation = Quaternion(-0.0107777, 0.188787, -0.00801741, 0.981926)
-bones/6/position = Vector3(0, 2.58908, -0.180004)
 bones/7/rotation = Quaternion(-0.65681, -0.404525, 0.417327, -0.480416)
 bones/8/rotation = Quaternion(0.52322, 0.0784238, 0.0490458, 0.847163)
 bones/9/rotation = Quaternion(-9.37965e-07, -4.39476e-08, 0.598764, 0.800925)
@@ -289,23 +288,23 @@ bones/14/rotation = Quaternion(-0.0457307, 0.0287357, 0.0222021, 0.998294)
 bones/15/rotation = Quaternion(0.0502804, 0.285339, 0.954466, -0.0710523)
 bones/16/rotation = Quaternion(-0.394494, -1.55084e-06, -7.19499e-07, 0.918899)
 bones/17/rotation = Quaternion(0.656724, 0.0495672, -0.0810833, 0.748119)
-bones/18/position = Vector3(3.53903e-08, 1.92306, 1.49012e-07)
 bones/18/rotation = Quaternion(0.256058, -0.285408, 0.0646402, 0.921302)
-bones/19/position = Vector3(-5.96046e-08, 0.916799, -2.30968e-07)
 bones/20/rotation = Quaternion(-0.349631, 0.0552242, 0.919017, 0.173539)
-bones/20/scale = Vector3(0.999989, 1, 1)
 bones/21/rotation = Quaternion(-0.370266, 1.56884e-06, 5.95936e-07, 0.928926)
 bones/22/rotation = Quaternion(0.743297, -0.162109, 0.187418, 0.621373)
 bones/23/rotation = Quaternion(0.261358, 0.29407, -0.0623219, 0.917241)
 
-[node name="SwordAttachment" parent="VisualMesh/ControlRig/Skeleton3D" index="1"]
+[node name="BoneAttachment3D" parent="VisualMesh/ControlRig/Skeleton3D" index="1"]
 transform = Transform3D(0.308286, 0.163911, 0.937066, 0.892386, -0.391078, -0.22518, 0.329556, 0.905644, -0.266835, -3.67247, 6.47143, 4.25523)
 
-[node name="BasicSword" parent="VisualMesh/ControlRig" index="1"]
-transform = Transform3D(1.49999, 0, 0, 0, 1.5, 0, 0, 0, 3.24999, -3.67247, 6.47143, 4.25523)
+[node name="SwordPivot" parent="VisualMesh/ControlRig" index="1"]
+transform = Transform3D(0.507839, -0.24357, 0.826301, 0.861452, 0.143588, -0.487117, 2.36876e-08, 0.959196, 0.282743, -5.13793, 6.83412, 5.63263)
 
-[node name="Blade" parent="VisualMesh/ControlRig/BasicSword" index="0"]
-transform = Transform3D(1, 1.67037e-25, 7.30144e-30, 0, -4.37114e-11, 1, 1.67037e-22, -0.001, -4.37114e-08, 0, 0, 0)
+[node name="BasicSword" parent="VisualMesh/ControlRig/SwordPivot" index="0"]
+transform = Transform3D(-6.55672e-08, 1.5, 5.6678e-16, -0.750001, -3.27835e-08, -2.81459, -1.29904, -5.67828e-08, 1.625, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+
+[node name="Blade" parent="VisualMesh/ControlRig/SwordPivot/BasicSword" index="0"]
+transform = Transform3D(1, 1.67037e-25, 7.30142e-30, 0, -4.37114e-11, 1, 1.67037e-22, -0.001, -4.37114e-08, 0, 0, 0)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_kp0ng")
@@ -314,10 +313,10 @@ advance_expression_base_node = NodePath("..")
 active = true
 parameters/StateMachine/conditions/overhead = false
 parameters/StateMachine/conditions/sweep = false
-parameters/StateMachine/WalkSpace/blend_position = -0.0020647
+parameters/StateMachine/WalkSpace/blend_position = -0.000627756
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached" flags=18]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed" flags=18]
 
 [editable path="VisualMesh"]
-[editable path="VisualMesh/ControlRig/BasicSword"]
+[editable path="VisualMesh/ControlRig/SwordPivot/BasicSword"]
