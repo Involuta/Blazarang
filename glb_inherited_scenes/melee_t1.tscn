@@ -67,15 +67,15 @@ surface_material_override/1 = SubResource("StandardMaterial3D_w1d2c")
 surface_material_override/2 = SubResource("StandardMaterial3D_ii2jm")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="ControlRig/Skeleton3D" index="1"]
-transform = Transform3D(0.574468, -0.753296, -0.320204, -0.791287, -0.611174, 0.0181959, -0.209408, 0.24292, -0.947173, -1.0691, 8.12234, 3.15815)
+transform = Transform3D(0.574469, -0.753295, -0.320204, -0.791286, -0.611176, 0.0181966, -0.209409, 0.24292, -0.947173, -1.06909, 8.12233, 3.15814)
 bone_name = "mixamorig_LeftHand"
 bone_idx = 10
 
 [node name="SwordPivot" type="Node3D" parent="ControlRig" index="1"]
-transform = Transform3D(0.913991, 0.0357266, -0.404158, 0.146897, 0.899399, 0.411708, 0.378208, -0.435667, 0.816795, -1.0691, 8.12234, 3.15815)
+transform = Transform3D(0.794151, -0.457809, 0.399669, 0.142112, -0.499521, -0.854567, 0.59087, 0.735453, -0.331635, -1.06909, 8.12233, 3.15814)
 
 [node name="BasicSword" parent="ControlRig/SwordPivot" index="0" instance=ExtResource("3_d5yu2")]
-transform = Transform3D(-6.55671e-08, 1.5, -1.09493e-15, 1.44889, 6.33329e-08, 0.841162, 0.388229, 1.697e-08, -3.13926, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(-6.55671e-08, 1.5, -2.99627e-14, -0.75, -3.27835e-08, -2.81458, -1.29904, -5.67827e-08, 1.625, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 
 [node name="Blade" parent="ControlRig/SwordPivot/BasicSword" index="0"]
 transform = Transform3D(1, 1.67037e-25, 7.30142e-30, 0, -4.37114e-11, 1, 1.67037e-22, -0.001, -4.37114e-08, 2.08165e-12, 2.08165e-12, -0.485)

@@ -20,4 +20,4 @@ func detach():
 	
 func _process(_delta):
 	if attached:
-		obj_to_attach.global_position = bone_attachment.global_position
+		obj_to_attach.position = bone_attachment.position
