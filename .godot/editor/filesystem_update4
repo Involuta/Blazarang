@@ -29,3 +29,9 @@ res://glb_inherited_scenes/melee_t3.tscn
 res://glb_inherited_scenes/x_boss_meshes.tscn
 res://enemies/x_boss.tscn
 res://enemies/enemy_anims/x_slipnslice.res
+res://glb_inherited_scenes/melee_t1.tscn
+res://enemies/enemy_anims/mt1_overhead.res
+res://enemies/enemy_melee_tier1.tscn
+res://enemies/enemy_anims/mt1_two-handed-walk.res
+res://glb_inherited_scenes/simple_attach_to_hand.gd
+res://glb_inherited_scenes/attach_to_hand.gd
