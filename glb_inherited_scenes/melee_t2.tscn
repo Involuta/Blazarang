@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://bsrvb25fuh6xo"]
+[gd_scene load_steps=8 format=3 uid="uid://bsrvb25fuh6xo"]
 
 [ext_resource type="PackedScene" uid="uid://dgog4e7fph8cu" path="res://glb_imports/MeleeT2H.glb" id="1_u3j2o"]
-[ext_resource type="Script" path="res://glb_inherited_scenes/attach_to_hand.gd" id="2_b2wdn"]
 [ext_resource type="Shader" path="res://glb_inherited_scenes/black_outline.gdshader" id="2_m8jgc"]
 [ext_resource type="PackedScene" uid="uid://dasrfemvybmv" path="res://glb_inherited_scenes/basic_sword.tscn" id="3_lc0n7"]
 
@@ -32,50 +31,61 @@ roughness = 0.2
 
 [node name="ControlRig" parent="." index="0"]
 transform = Transform3D(-1, 3.48787e-16, -1.50996e-07, 3.48787e-16, 1, -3.48787e-16, 1.50996e-07, -3.48787e-16, -1, 0, 0, 0)
-script = ExtResource("2_b2wdn")
 
 [node name="Skeleton3D" parent="ControlRig" index="0"]
-bones/6/position = Vector3(3.62396e-05, 2.5892, -0.180012)
-bones/8/rotation = Quaternion(-0.148607, 0.0202248, -0.0549471, 0.987161)
-bones/9/rotation = Quaternion(-7.74747e-07, -5.68407e-07, 0.0432125, 0.999066)
-bones/10/rotation = Quaternion(0.0132169, -0.0131463, -0.00491614, 0.999814)
-bones/12/rotation = Quaternion(-0.148599, -0.0202685, 0.0544988, 0.987187)
-bones/13/rotation = Quaternion(2.59057e-06, 1.59572e-07, -0.0432125, 0.999066)
-bones/14/rotation = Quaternion(0.0132148, 0.0132662, 0.00492396, 0.999813)
-bones/15/rotation = Quaternion(0.000642203, -0.0114865, -0.998384, 0.0556501)
-bones/16/rotation = Quaternion(-0.0858579, -1.71352e-06, -1.81098e-07, 0.996307)
-bones/17/rotation = Quaternion(0.604434, 0.0381203, -0.064117, 0.793155)
-bones/18/position = Vector3(2.88502e-05, 1.92314, -1.40572e-05)
-bones/19/position = Vector3(-1.22967e-07, 0.916791, 3.02494e-05)
-bones/20/rotation = Quaternion(0.000308506, 0.005507, 0.998435, 0.0556526)
+bones/0/position = Vector3(-0.0291872, 5.80811, 0.164565)
+bones/0/rotation = Quaternion(0.0553962, -0.284867, 0.0159222, 0.956833)
+bones/1/rotation = Quaternion(0.108078, -0.0277602, -0.00174684, 0.993753)
+bones/2/rotation = Quaternion(0.0841636, -0.0467452, 0.00377451, 0.995348)
+bones/3/rotation = Quaternion(-0.0189662, -0.0471236, 0.000549571, 0.998709)
+bones/4/rotation = Quaternion(-0.0914933, 0.242163, -0.0421452, 0.964992)
+bones/5/rotation = Quaternion(-0.0175194, 0.14048, 0.00949386, 0.989883)
+bones/7/rotation = Quaternion(0.571476, 0.418331, -0.561141, 0.42841)
+bones/8/rotation = Quaternion(0.455501, -0.146885, -0.340961, 0.809128)
+bones/9/rotation = Quaternion(-9.50625e-07, -1.21458e-07, 0.543769, 0.839235)
+bones/10/rotation = Quaternion(0.0885677, -0.109971, -0.10478, 0.98442)
+bones/11/rotation = Quaternion(0.589157, -0.41725, 0.55722, 0.410246)
+bones/12/rotation = Quaternion(0.470662, 0.145621, -0.292501, 0.819582)
+bones/13/rotation = Quaternion(2.25831e-06, 1.27241e-06, -0.477055, 0.878874)
+bones/14/rotation = Quaternion(0.0537769, 0.101368, 0.16169, 0.980147)
+bones/15/rotation = Quaternion(-0.0716837, -0.2347, -0.9622, 0.118105)
+bones/16/rotation = Quaternion(-0.790067, -1.01759e-06, -1.42047e-06, 0.613021)
+bones/17/rotation = Quaternion(0.755154, 0.209846, -0.230113, 0.576849)
+bones/17/scale = Vector3(0.999988, 1, 0.999998)
+bones/18/rotation = Quaternion(0.234706, -0.294844, 0.056939, 0.924521)
+bones/20/rotation = Quaternion(-0.00609712, 0.338931, 0.94076, 0.00768737)
 bones/20/scale = Vector3(1, 0.999999, 1)
-bones/21/rotation = Quaternion(-0.0595699, 1.67858e-06, 7.68906e-08, 0.998224)
-bones/22/rotation = Quaternion(0.584052, -0.0416903, 0.0636217, 0.808145)
+bones/21/rotation = Quaternion(-0.469511, 1.47322e-06, 7.30219e-07, 0.882926)
+bones/22/rotation = Quaternion(0.720454, -0.125308, 0.0664139, 0.678847)
+bones/23/rotation = Quaternion(0.150828, 0.261275, -0.0729864, 0.95061)
 
 [node name="BaseBody_002" parent="ControlRig/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_53mfj")
 surface_material_override/1 = SubResource("StandardMaterial3D_any8q")
 surface_material_override/2 = SubResource("StandardMaterial3D_d6yd3")
 
-[node name="SwordAttachment" type="BoneAttachment3D" parent="ControlRig/Skeleton3D" index="1"]
-transform = Transform3D(-0.0423587, -0.999035, -0.0116021, 0.0279876, 0.0104215, -0.999554, 0.99871, -0.0426645, 0.0275192, -9.51075, 11.4468, -0.444254)
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="ControlRig/Skeleton3D" index="1"]
+transform = Transform3D(-0.406626, -0.460639, 0.788966, 0.729856, -0.683222, -0.0227393, 0.549513, 0.566585, 0.614016, -6.03754, 6.21324, 1.33656)
 bone_name = "mixamorig_RightHand"
 bone_idx = 14
 
-[node name="BasicSword" parent="ControlRig" index="1" instance=ExtResource("3_lc0n7")]
-transform = Transform3D(-6.55671e-08, 1.5, -1.3717e-14, 1.44889, 6.33329e-08, 0.841162, 0.388229, 1.697e-08, -3.13926, -9.51075, 11.4468, -0.444254)
+[node name="SwordPivot" type="Node3D" parent="ControlRig" index="1"]
+transform = Transform3D(1, -3.48787e-16, 0, 3.48787e-16, 1, -3.48787e-16, 0, 3.48787e-16, 1, -7.00135, 5.54645, 2.23104)
 
-[node name="Blade" parent="ControlRig/BasicSword" index="0"]
+[node name="BasicSword" parent="ControlRig/SwordPivot" index="0" instance=ExtResource("3_lc0n7")]
+transform = Transform3D(-6.55672e-08, 1.5, -1.11273e-15, 1.47244, 6.43624e-08, 0.62013, 0.286214, 1.25108e-08, -3.19029, 0, 0, 0)
+
+[node name="Blade" parent="ControlRig/SwordPivot/BasicSword" index="0"]
 transform = Transform3D(1, 1.67037e-25, 7.30142e-30, 0, -4.37114e-11, 1, 1.67037e-22, -0.001, -4.37114e-08, 0, 0, 0)
 
-[node name="GPUTrail3D" parent="ControlRig/BasicSword" index="1"]
+[node name="GPUTrail3D" parent="ControlRig/SwordPivot/BasicSword" index="1"]
 transform = Transform3D(3.75, 2.19132e-22, 9.57856e-30, 0, -1.63918e-07, 3.75, 2.19132e-22, -3.75, -1.63918e-07, 0.25, 0.17, -3.5)
 visible = false
 amount = 1
 lifetime = 1.0
 length = 1
 
-[node name="BasicSwordHandle" parent="ControlRig/BasicSword" index="3"]
-transform = Transform3D(1, 1.67037e-22, 7.30142e-30, 0, -4.37114e-08, 1, 1.67037e-22, -1, -4.37114e-08, 0, 0, 0)
+[node name="BasicSwordHandle" parent="ControlRig/SwordPivot/BasicSword" index="3"]
+transform = Transform3D(0.996276, -0.0862165, -1.85216e-08, 1.34536e-08, -5.93635e-08, 1, -0.0862168, -0.996276, -5.79825e-08, -0.0960006, -1.26639e-08, -0.0249784)
 
-[editable path="ControlRig/BasicSword"]
+[editable path="ControlRig/SwordPivot/BasicSword"]
