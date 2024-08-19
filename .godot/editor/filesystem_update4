@@ -28,3 +28,4 @@ res://enemies/enemy_melee_tier3.tscn
 res://glb_inherited_scenes/melee_t3.tscn
 res://glb_inherited_scenes/x_boss_meshes.tscn
 res://enemies/x_boss.tscn
+res://enemies/enemy_anims/x_slipnslice.res
