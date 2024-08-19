@@ -28,14 +28,14 @@ var aiming_at_target := true
 @export var fast_bullet_speed := 50.0
 
 @export var short_dist_attack_chances = {
-	"SlipnSlice" : .25,
+	"SlipnSlice" : 1,
 	"Superman" : .25,
 	"Triangle" : .25,
 	"BigX" : .25
 }
 
 @export var long_dist_attack_chances = {
-	"SlipnSlice" : .25,
+	"SlipnSlice" : 1,
 	"Superman" : .25,
 	"Triangle" : .25,
 	"BigX" : .25
@@ -47,6 +47,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 var bullet := preload("res://enemies/enemy_mega_bullet.tscn")
 @onready var nav_agent = $NavigationAgent3D
+@onready var anim_tree = $AnimationTree
 @onready var animation_player = $XMeshes/AnimationPlayer
 @onready var level := $/root/Level
 @onready var target = $/root/Level/Target
@@ -135,20 +136,21 @@ func start_short_dist_attack():
 	velocity.z = 0
 	behav_state = SHORT_DIST_ATTACK
 	aiming_at_target = true
-	animation_player.play(choose_attack(short_dist_attack_chances))
+	anim_tree.set(choose_attack(short_dist_attack_chances), true)
 
 func end_attack():
+	anim_tree.set("parameters/StateMachine/conditions/slipnslice", false)
 	behav_state = FOLLOW
-	gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func choose_attack(attack_chances) -> String:
+	var param_path_base := "parameters/StateMachine/conditions/"
 	var choice := rng.randf()
 	var cumulative_weight := 0.0
 	for attack in attack_chances:
 		cumulative_weight += attack_chances[attack]
 		if choice <= cumulative_weight:
-			return attack
-	return attack_chances[0]
+			return param_path_base + attack
+	return param_path_base + attack_chances[0]
 
 func short_dist_attack_frame():
 	if aiming_at_target:
