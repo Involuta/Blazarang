@@ -1,24 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://b3uvg3j4qge8o"]
+[gd_scene load_steps=29 format=3 uid="uid://b3uvg3j4qge8o"]
 
 [ext_resource type="PackedScene" uid="uid://rp0n2dfx0chj" path="res://glb_imports/8164_meshes.glb" id="1_mluec"]
-[ext_resource type="Shader" path="res://glb_inherited_scenes/outline.gdshader" id="2_jd27j"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fbp14"]
-shading_mode = 0
-albedo_color = Color(1, 0.196078, 0, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5jpbe"]
-render_priority = 0
-shader = ExtResource("2_jd27j")
-shader_parameter/outline_color = Color(0.431373, 0.431373, 0.431373, 1)
-shader_parameter/outline_width = 1.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w5qfh"]
-next_pass = SubResource("ShaderMaterial_5jpbe")
-albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
-roughness = 0.0
-
-[sub_resource type="Shader" id="Shader_0t678"]
+[sub_resource type="Shader" id="Shader_065xt"]
 code = "shader_type spatial;
 render_mode cull_front, unshaded;
 
@@ -43,21 +27,336 @@ void fragment() {
 	}
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_m66tw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s7a6n"]
 render_priority = 0
-shader = SubResource("Shader_0t678")
+shader = SubResource("Shader_065xt")
 shader_parameter/outline_color = Color(0.431373, 0.431373, 0.431373, 1)
 shader_parameter/outline_width = 1.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r7mu1"]
-next_pass = SubResource("ShaderMaterial_m66tw")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6w36t"]
+next_pass = SubResource("ShaderMaterial_s7a6n")
+albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
+roughness = 0.0
+
+[sub_resource type="Shader" id="Shader_lib57"]
+code = "shader_type spatial;
+render_mode cull_front, unshaded;
+
+uniform vec4 outline_color : source_color;
+uniform float outline_width = 1.0;
+
+void vertex() {
+	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
+	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
+	
+	vec2 offset = normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
+	
+	clip_position.xy += offset;
+	
+	POSITION = clip_position;
+}
+
+void fragment() {
+	ALBEDO = outline_color.rgb;
+	if (outline_color.a < 1.0) {
+		ALPHA = outline_color.a;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ygth1"]
+render_priority = 0
+shader = SubResource("Shader_lib57")
+shader_parameter/outline_color = Color(0.431373, 0.431373, 0.431373, 1)
+shader_parameter/outline_width = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_toeh3"]
+next_pass = SubResource("ShaderMaterial_ygth1")
+albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
+roughness = 0.0
+
+[sub_resource type="Shader" id="Shader_3du31"]
+code = "shader_type spatial;
+render_mode cull_front, unshaded;
+
+uniform vec4 outline_color : source_color;
+uniform float outline_width = 1.0;
+
+void vertex() {
+	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
+	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
+	
+	vec2 offset = normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
+	
+	clip_position.xy += offset;
+	
+	POSITION = clip_position;
+}
+
+void fragment() {
+	ALBEDO = outline_color.rgb;
+	if (outline_color.a < 1.0) {
+		ALPHA = outline_color.a;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1osv6"]
+render_priority = 0
+shader = SubResource("Shader_3du31")
+shader_parameter/outline_color = Color(0.431373, 0.431373, 0.431373, 1)
+shader_parameter/outline_width = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6iout"]
+next_pass = SubResource("ShaderMaterial_1osv6")
+albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
+roughness = 0.0
+
+[sub_resource type="Shader" id="Shader_pnwi6"]
+code = "shader_type spatial;
+render_mode cull_front, unshaded;
+
+uniform vec4 outline_color : source_color;
+uniform float outline_width = 1.0;
+
+void vertex() {
+	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
+	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
+	
+	vec2 offset = normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
+	
+	clip_position.xy += offset;
+	
+	POSITION = clip_position;
+}
+
+void fragment() {
+	ALBEDO = outline_color.rgb;
+	if (outline_color.a < 1.0) {
+		ALPHA = outline_color.a;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jxmun"]
+render_priority = 0
+shader = SubResource("Shader_pnwi6")
+shader_parameter/outline_color = Color(0.431373, 0.431373, 0.431373, 1)
+shader_parameter/outline_width = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l037o"]
+next_pass = SubResource("ShaderMaterial_jxmun")
+albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
+roughness = 0.0
+
+[sub_resource type="Shader" id="Shader_tiwuv"]
+code = "shader_type spatial;
+render_mode cull_front, unshaded;
+
+uniform vec4 outline_color : source_color;
+uniform float outline_width = 1.0;
+
+void vertex() {
+	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
+	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
+	
+	vec2 offset = normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
+	
+	clip_position.xy += offset;
+	
+	POSITION = clip_position;
+}
+
+void fragment() {
+	ALBEDO = outline_color.rgb;
+	if (outline_color.a < 1.0) {
+		ALPHA = outline_color.a;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tobhi"]
+render_priority = 0
+shader = SubResource("Shader_tiwuv")
+shader_parameter/outline_color = Color(0.431373, 0.431373, 0.431373, 1)
+shader_parameter/outline_width = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nw6f6"]
+next_pass = SubResource("ShaderMaterial_tobhi")
+albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
+roughness = 0.0
+
+[sub_resource type="Shader" id="Shader_hmder"]
+code = "shader_type spatial;
+render_mode cull_front, unshaded;
+
+uniform vec4 outline_color : source_color;
+uniform float outline_width = 1.0;
+
+void vertex() {
+	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
+	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
+	
+	vec2 offset = normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
+	
+	clip_position.xy += offset;
+	
+	POSITION = clip_position;
+}
+
+void fragment() {
+	ALBEDO = outline_color.rgb;
+	if (outline_color.a < 1.0) {
+		ALPHA = outline_color.a;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4s2se"]
+render_priority = 0
+shader = SubResource("Shader_hmder")
+shader_parameter/outline_color = Color(0.431373, 0.431373, 0.431373, 1)
+shader_parameter/outline_width = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cvcmr"]
+next_pass = SubResource("ShaderMaterial_4s2se")
+albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
+roughness = 0.0
+
+[sub_resource type="Shader" id="Shader_hcnm2"]
+code = "shader_type spatial;
+render_mode cull_front, unshaded;
+
+uniform vec4 outline_color : source_color;
+uniform float outline_width = 1.0;
+
+void vertex() {
+	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
+	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
+	
+	vec2 offset = normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
+	
+	clip_position.xy += offset;
+	
+	POSITION = clip_position;
+}
+
+void fragment() {
+	ALBEDO = outline_color.rgb;
+	if (outline_color.a < 1.0) {
+		ALPHA = outline_color.a;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pecgi"]
+render_priority = 0
+shader = SubResource("Shader_hcnm2")
+shader_parameter/outline_color = Color(0.431373, 0.431373, 0.431373, 1)
+shader_parameter/outline_width = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ot1fy"]
+next_pass = SubResource("ShaderMaterial_pecgi")
+albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
+roughness = 0.0
+
+[sub_resource type="Shader" id="Shader_vfain"]
+code = "shader_type spatial;
+render_mode cull_front, unshaded;
+
+uniform vec4 outline_color : source_color;
+uniform float outline_width = 1.0;
+
+void vertex() {
+	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
+	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
+	
+	vec2 offset = normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
+	
+	clip_position.xy += offset;
+	
+	POSITION = clip_position;
+}
+
+void fragment() {
+	ALBEDO = outline_color.rgb;
+	if (outline_color.a < 1.0) {
+		ALPHA = outline_color.a;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n30ri"]
+render_priority = 0
+shader = SubResource("Shader_vfain")
+shader_parameter/outline_color = Color(0.431373, 0.431373, 0.431373, 1)
+shader_parameter/outline_width = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_woqvd"]
+next_pass = SubResource("ShaderMaterial_n30ri")
+albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
+roughness = 0.0
+
+[sub_resource type="Shader" id="Shader_8oy8s"]
+code = "shader_type spatial;
+render_mode cull_front, unshaded;
+
+uniform vec4 outline_color : source_color;
+uniform float outline_width = 1.0;
+
+void vertex() {
+	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
+	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
+	
+	vec2 offset = normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
+	
+	clip_position.xy += offset;
+	
+	POSITION = clip_position;
+}
+
+void fragment() {
+	ALBEDO = outline_color.rgb;
+	if (outline_color.a < 1.0) {
+		ALPHA = outline_color.a;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_keq6n"]
+render_priority = 0
+shader = SubResource("Shader_8oy8s")
+shader_parameter/outline_color = Color(0.431373, 0.431373, 0.431373, 1)
+shader_parameter/outline_width = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wmyen"]
+next_pass = SubResource("ShaderMaterial_keq6n")
 albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
 roughness = 0.0
 
 [node name="X_boss_meshes" instance=ExtResource("1_mluec")]
-transform = Transform3D(-0.1, 3.48787e-17, -8.74228e-09, 3.48787e-17, 0.1, -3.48787e-17, 8.74228e-09, -3.48787e-17, -0.1, 0, 0, 0)
+transform = Transform3D(-0.1, 3.48787e-17, -8.74228e-09, 3.48787e-17, 0.1, -3.48787e-17, 8.74228e-09, -3.48787e-17, -0.1, 2.08165e-12, -1.023, 2.08165e-12)
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(1, 8.4, -0.52)
+bones/0/rotation = Quaternion(-0.506676, 0.312546, -0.339883, 0.728062)
+bones/4/rotation = Quaternion(0.428176, -0.363952, 0.298726, 0.771341)
+bones/8/rotation = Quaternion(0.298111, 0.511686, -0.436916, 0.677061)
+bones/9/rotation = Quaternion(-1.74968e-07, -1.39075e-07, 0.844759, 0.535148)
+bones/10/rotation = Quaternion(0.0119258, -0.00203716, -0.195841, 0.980561)
+bones/12/rotation = Quaternion(0.533417, -0.277365, 0.190147, 0.776131)
+bones/13/rotation = Quaternion(-5.69717e-07, 1.56916e-06, -0.321885, 0.946779)
+bones/14/rotation = Quaternion(0.0305796, -0.294388, -0.127211, 0.946688)
+bones/15/rotation = Quaternion(-0.110629, -0.858389, -0.318533, 0.386608)
+bones/15/scale = Vector3(1.00001, 1, 0.999994)
+bones/16/rotation = Quaternion(-0.926809, -2.07084e-06, -3.55545e-06, 0.375534)
+bones/17/rotation = Quaternion(0.474522, 0.346235, -0.197067, 0.78493)
+bones/18/rotation = Quaternion(0.276971, 0.230061, -0.0684611, 0.930415)
+bones/20/rotation = Quaternion(0.0196722, -0.0679827, -0.996444, 0.0457237)
+bones/20/scale = Vector3(0.999999, 1, 1)
+bones/21/rotation = Quaternion(-0.00168907, 9.46982e-06, 7.76449e-07, 0.999999)
+bones/22/rotation = Quaternion(0.338459, 0.0664494, -0.00479024, 0.93862)
+bones/23/rotation = Quaternion(0.413326, -0.237704, 0.0435529, 0.87793)
 
 [node name="Body_001" parent="Armature/Skeleton3D" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_fbp14")
-surface_material_override/1 = SubResource("StandardMaterial3D_w5qfh")
-surface_material_override/2 = SubResource("StandardMaterial3D_r7mu1")
+surface_material_override/0 = SubResource("StandardMaterial3D_6w36t")
+surface_material_override/1 = SubResource("StandardMaterial3D_toeh3")
+surface_material_override/2 = SubResource("StandardMaterial3D_6iout")
+surface_material_override/3 = SubResource("StandardMaterial3D_l037o")
+surface_material_override/4 = SubResource("StandardMaterial3D_nw6f6")
+surface_material_override/5 = SubResource("StandardMaterial3D_cvcmr")
+surface_material_override/6 = SubResource("StandardMaterial3D_ot1fy")
+surface_material_override/7 = SubResource("StandardMaterial3D_woqvd")
+surface_material_override/8 = SubResource("StandardMaterial3D_wmyen")
