@@ -1,5 +1,3 @@
-res://enemies/enemy_anims/x_slipnslice.res
-res://enemies/enemy_anims/x_superman.res
 res://enemies/x_boss.tscn
 res://addons/func_godot/textures/default_material.tres
 res://ui/flash.gdshader
@@ -14,6 +12,8 @@ res://textures/small_solid_white.tres
 res://GPUTrail-main/shaders/trail.gdshader
 res://GPUTrail-main/defaults/texture.tres
 res://GPUTrail-main/defaults/curve.tres
+res://enemies/enemy_anims/x_idle.res
+res://enemies/enemy_anims/x_run.res
 res://glb_inherited_scenes/outline.gdshader
 res://glb_inherited_scenes/black_outline.gdshader
 res://textures/white_border_black_center.tres
@@ -22,7 +22,6 @@ res://levels/test_level.tres
 res://shaders/outline_everything.gdshader
 res://rang/slash_test.tres
 res://ui/glow.gdshader
-res://enemies/x_boss.gd
 res://levels/hub.tscn
 res://ui/ui_root.tscn
 res://levels/hub_section_nodes/hub_room1.tscn
@@ -39,3 +38,5 @@ res://enemies/enemy_melee_tier1.tscn
 res://levels/gauntlet_level1.tscn
 res://levels/test_level.tscn
 res://levels/x_boss_level_section_nodes/x_boss_arena1.tscn
+res://enemies/enemy_anims/x_slipnslice.res
+res://enemies/enemy_anims/x_superman.res

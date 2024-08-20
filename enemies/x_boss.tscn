@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dwniaym2g1off"]
+[gd_scene load_steps=25 format=3 uid="uid://dwniaym2g1off"]
 
 [ext_resource type="Script" path="res://enemies/x_boss.gd" id="1_u3wem"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_5lf37"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://b3uvg3j4qge8o" path="res://glb_inherited_scenes/x_boss_meshes.tscn" id="4_dnuas"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4b6ac"]
+height = 2.75
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5p3gr"]
 height = 2.75
 
 [sub_resource type="Animation" id="Animation_4hqbc"]
@@ -211,7 +214,6 @@ transitions = ["Start", "WalkSpace", SubResource("AnimationNodeStateMachineTrans
 graph_offset = Vector2(147.038, 11.2275)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_uk78c"]
-graph_offset = Vector2(-19.2, 76.8)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_f8liy")
 nodes/StateMachine/position = Vector2(110, 150)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -241,13 +243,15 @@ avoidance_enabled = true
 radius = 3.0
 
 [node name="EnemyHurtbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 collision_layer = 8
 collision_mask = 9
 script = ExtResource("2_5lf37")
 opponent_hitboxes = ["PlayerHitbox"]
 
 [node name="HurtboxCollider" type="CollisionShape3D" parent="EnemyHurtbox"]
-shape = SubResource("CapsuleShape3D_4b6ac")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+shape = SubResource("CapsuleShape3D_5p3gr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -273,10 +277,13 @@ cast_shadow = 0
 mesh = SubResource("CapsuleMesh_oq81m")
 
 [node name="XMeshes" parent="." instance=ExtResource("4_dnuas")]
-transform = Transform3D(-0.1, 3.48787e-17, -8.74228e-09, 3.48787e-17, 0.1, -3.48787e-17, 8.74228e-09, -3.48787e-17, -0.1, 2.08165e-12, -1.508, 2.08165e-12)
+transform = Transform3D(-0.1, 3.48787e-17, -8.74228e-09, 3.48787e-17, 0.1, -3.48787e-17, 8.74228e-09, -3.48787e-17, -0.1, 2.08165e-12, -1.023, 2.08165e-12)
 
 [node name="Skeleton3D" parent="XMeshes/Armature" index="0"]
 bones/0/position = Vector3(2.42062e-10, 13.3196, 0.227602)
+bones/0/rotation = Quaternion(-3.63501e-08, -5.16988e-26, -4.21753e-11, 1)
+bones/1/position = Vector3(-2.50135e-10, 1.53056, -0.0794429)
+bones/4/rotation = Quaternion(0.025926, -1.03347e-25, -3.27731e-27, 0.999664)
 bones/8/rotation = Quaternion(0.545348, 0.298975, 0.0512187, 0.7814)
 bones/9/rotation = Quaternion(-1.2497e-08, -2.38313e-07, 0.187932, 0.982182)
 bones/10/rotation = Quaternion(0.0636621, 0.50911, -0.00334524, 0.858337)
@@ -284,14 +291,15 @@ bones/12/rotation = Quaternion(0.556868, -0.327487, -0.0537849, 0.761418)
 bones/13/rotation = Quaternion(-3.96141e-07, 1.65376e-06, -0.231204, 0.972905)
 bones/14/rotation = Quaternion(0.0686443, -0.487103, 0.0556874, 0.86886)
 bones/15/rotation = Quaternion(0.0282742, -0.189878, -0.980151, 0.0495091)
-bones/15/scale = Vector3(1, 1, 0.999999)
+bones/15/scale = Vector3(0.999999, 1, 1)
 bones/16/rotation = Quaternion(-0.424102, -3.94779e-06, -1.19327e-06, 0.905615)
 bones/17/rotation = Quaternion(0.543881, -0.0500174, 0.0149768, 0.837537)
 bones/18/rotation = Quaternion(0.276961, 0.230053, -0.0684875, 0.930418)
 bones/20/rotation = Quaternion(0.0404664, 0.0760993, 0.995179, 0.0468008)
-bones/20/scale = Vector3(1, 1, 0.999999)
+bones/20/scale = Vector3(0.999999, 1, 1)
 bones/21/rotation = Quaternion(-0.170479, 9.22952e-06, 2.3733e-06, 0.985361)
 bones/22/rotation = Quaternion(0.248953, 0.0450927, -0.025747, 0.967123)
+bones/23/rotation = Quaternion(0.280711, -0.231213, 0.0698784, 0.928902)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_uk78c")
