@@ -1,0 +1,89 @@
+[gd_scene load_steps=7 format=3 uid="uid://be5qq551348yp"]
+
+[ext_resource type="PackedScene" uid="uid://dwniaym2g1off" path="res://enemies/x_boss.tscn" id="2_duonk"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_om6er"]
+vertices = PackedVector3Array(-18.5, 1, -24.5, -24.5, 1, -24.5, -24.5, 1, -18.5, -24.5, 1, 18.25, -24.5, 1, 24.5, -18.5, 1, 24.5, 24.5, 1, -18.5, 24.5, 1, -24.5, 18.25, 1, -24.5, 18.25, 1, 24.5, 24.5, 1, 24.5, 24.5, 1, 18.25, -24.5, 1, 12.25, -24.5, 1, 18.25, -18.5, 1, 24.5, -12.25, 1, 24.5, 24.5, 1, -18.5, 18.25, 1, -24.5, 12.25, 1, -24.5, 24.5, 1, -12.25, -12.25, 1, -24.5, -18.5, 1, -24.5, -24.5, 1, -18.5, -24.5, 1, -12.25, 12.25, 1, 24.5, 18.25, 1, 24.5, 24.5, 1, 18.25, 6, 1, 24.5, 24.5, 1, 12.25, 24.5, 1, 6, 0, 1, 24.5, 12.25, 1, 24.5, 24.5, 1, 18.25, 24.5, 1, 12.25, 6, 1, 24.5, 0, 1, -24.5, -6.25, 1, -24.5, -24.5, 1, -6.25, -24.5, 1, 0, 24.5, 1, 0, 0, 1, -24.5, -24.5, 1, 0, -6.25, 1, 24.5, 0, 1, 24.5, 24.5, 1, 6, -24.5, 1, 12.25, -12.25, 1, 24.5, -6.25, 1, 24.5, -24.5, 1, 6, 24.5, 1, -6.25, 24.5, 1, -12.25, 12.25, 1, -24.5, 6, 1, -24.5, -6.25, 1, -24.5, -12.25, 1, -24.5, -24.5, 1, -12.25, -24.5, 1, -6.25, -24.5, 1, 0, -24.5, 1, 6, -6.25, 1, 24.5, 24.5, 1, -6.25, 6, 1, -24.5, 0, 1, -24.5, 24.5, 1, 0)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(8, 7, 6), PackedInt32Array(11, 10, 9), PackedInt32Array(13, 12, 14), PackedInt32Array(14, 12, 15), PackedInt32Array(17, 16, 18), PackedInt32Array(18, 16, 19), PackedInt32Array(21, 20, 22), PackedInt32Array(22, 20, 23), PackedInt32Array(26, 25, 24), PackedInt32Array(28, 27, 29), PackedInt32Array(29, 27, 30), PackedInt32Array(32, 31, 33), PackedInt32Array(33, 31, 34), PackedInt32Array(36, 35, 37), PackedInt32Array(37, 35, 38), PackedInt32Array(44, 43, 39), PackedInt32Array(39, 43, 42), PackedInt32Array(39, 42, 41), PackedInt32Array(39, 41, 40), PackedInt32Array(46, 45, 47), PackedInt32Array(47, 45, 48), PackedInt32Array(50, 49, 51), PackedInt32Array(51, 49, 52), PackedInt32Array(54, 53, 55), PackedInt32Array(55, 53, 56), PackedInt32Array(59, 58, 57), PackedInt32Array(61, 60, 62), PackedInt32Array(62, 60, 63)]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lnsgl"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m76wq"]
+albedo_color = Color(0.247059, 0.247059, 0.247059, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_70ln2"]
+material = SubResource("StandardMaterial3D_m76wq")
+size = Vector3(50, 1, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ufggu"]
+size = Vector3(1, 10, 72)
+
+[node name="XBossArena1" type="Node3D"]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
+navigation_mesh = SubResource("NavigationMesh_om6er")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_lnsgl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D"]
+mesh = SubResource("BoxMesh_70ln2")
+
+[node name="SunsetLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.939018, 0.155596, 0.306651, -0.34115, 0.533412, 0.774008, -0.0431389, -0.831421, 0.553965, -3.16012e-30, 25.9766, 0)
+visible = false
+light_color = Color(1, 0.831373, 0.772549, 1)
+light_energy = 1.5
+shadow_enabled = true
+shadow_opacity = 0.5
+
+[node name="Moonlight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.939018, 0.155596, 0.306651, -0.34115, 0.533412, 0.774008, -0.0431389, -0.831421, 0.553965, -3.16012e-30, 25.9766, 0)
+light_color = Color(0.764706, 0.764706, 0.764706, 1)
+light_energy = 1.5
+shadow_enabled = true
+shadow_opacity = 0.5
+
+[node name="InvisibleWalls" type="Node3D" parent="."]
+transform = Transform3D(0.69, 0, 0, 0, 0.69, 0, 0, 0, 0.69, 2.08165e-12, 15, 2.08165e-12)
+
+[node name="RightWall" type="StaticBody3D" parent="InvisibleWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 2.08165e-12, 2.08165e-12)
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InvisibleWalls/RightWall"]
+shape = SubResource("BoxShape3D_ufggu")
+
+[node name="LeftWall" type="StaticBody3D" parent="InvisibleWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 2.08165e-12, 2.08165e-12)
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InvisibleWalls/LeftWall"]
+shape = SubResource("BoxShape3D_ufggu")
+
+[node name="FrontWall" type="StaticBody3D" parent="InvisibleWalls"]
+transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, 2.08165e-12, 2.08165e-12, 36)
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InvisibleWalls/FrontWall"]
+shape = SubResource("BoxShape3D_ufggu")
+
+[node name="BackWall" type="StaticBody3D" parent="InvisibleWalls"]
+transform = Transform3D(-4.37114e-08, -3.48787e-16, -1, 3.48787e-16, 1, -3.48787e-16, 1, -3.48787e-16, -4.37114e-08, 2.08165e-12, 2.08165e-12, -36)
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InvisibleWalls/BackWall"]
+shape = SubResource("BoxShape3D_ufggu")
+
+[node name="XBoss" parent="." instance=ExtResource("2_duonk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 11.95, -20)

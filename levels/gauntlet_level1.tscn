@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="2_cdmya"]
 [ext_resource type="PackedScene" uid="uid://kl1hpr0grn1v" path="res://ui/ui_root.tscn" id="2_ob26x"]
 [ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="3_susk6"]
-[ext_resource type="PackedScene" uid="uid://cjxdm8v82qb3v" path="res://levels/level1section_nodes/gauntlet_arena1.tscn" id="4_y1q14"]
+[ext_resource type="PackedScene" uid="uid://cjxdm8v82qb3v" path="res://levels/level1_section_nodes/gauntlet_arena1.tscn" id="4_y1q14"]
 [ext_resource type="AudioStream" uid="uid://br0a4rin6vcg3" path="res://audio/music/COTU.wav" id="6_1sujv"]
 [ext_resource type="Material" uid="uid://vsefhkxljqg8" path="res://textures/small_solid_black.tres" id="7_2hyy7"]
 [ext_resource type="Script" path="res://DisappearRB.gd" id="7_tfag3"]

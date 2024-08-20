@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://bqk1kho3gqsuy"]
 
-[ext_resource type="Script" path="res://levels/level1section_nodes/first_maze.gd" id="1_oxsmd"]
+[ext_resource type="Script" path="res://levels/level1_section_nodes/first_maze.gd" id="1_oxsmd"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_ukiy0"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="3_egrhy"]
 [ext_resource type="Material" uid="uid://ko2um8xuaqng" path="res://textures/RedBorderedRect.tres" id="4_y47wr"]

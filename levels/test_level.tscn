@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="1_4wpki"]
 [ext_resource type="Environment" uid="uid://bgusbrajqhj6h" path="res://levels/test_level.tres" id="1_q2fp5"]
 [ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="2_6nbsg"]
-[ext_resource type="PackedScene" uid="uid://cjxdm8v82qb3v" path="res://levels/level1section_nodes/gauntlet_arena1.tscn" id="4_2f8yw"]
+[ext_resource type="PackedScene" uid="uid://cjxdm8v82qb3v" path="res://levels/level1_section_nodes/gauntlet_arena1.tscn" id="4_2f8yw"]
 
 [node name="Level" type="Node3D"]
 

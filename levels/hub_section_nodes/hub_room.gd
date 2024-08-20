@@ -8,7 +8,7 @@ extends Node3D
 
 var level_list := {
 	"res://textures/3-VAR1_1.webp" : "res://levels/gauntlet_level1.tscn",
-	"res://textures/8164.webp" : "res://levels/hub.tscn"
+	"res://textures/8164.webp" : "res://levels/x_boss_level1.tscn"
 }
 
 var level_list_pos := 0

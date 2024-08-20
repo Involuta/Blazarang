@@ -42,7 +42,7 @@ var aiming_at_target := true
 }
 
 @export var superman_speed := 20.0
-
+var param_path_base := "parameters/StateMachine/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 var bullet := preload("res://enemies/enemy_mega_bullet.tscn")
@@ -139,11 +139,13 @@ func start_short_dist_attack():
 	anim_tree.set(choose_attack(short_dist_attack_chances), true)
 
 func end_attack():
-	anim_tree.set("parameters/StateMachine/conditions/slipnslice", false)
+	for attack in short_dist_attack_chances.keys():
+		anim_tree.set(param_path_base + attack, false)
+	for attack in long_dist_attack_chances.keys():
+		anim_tree.set(param_path_base + attack, false)
 	behav_state = FOLLOW
 
 func choose_attack(attack_chances) -> String:
-	var param_path_base := "parameters/StateMachine/conditions/"
 	var choice := rng.randf()
 	var cumulative_weight := 0.0
 	for attack in attack_chances:
@@ -189,7 +191,7 @@ func start_long_dist_attack():
 	behav_state = LONG_DIST_ATTACK
 	long_dist_wait_remaining = max_long_dist_wait
 	aiming_at_target = true
-	animation_player.play(choose_attack(long_dist_attack_chances))
+	anim_tree.set(choose_attack(short_dist_attack_chances), true)
 
 func start_superman():
 	velocity = 10 * global_position.direction_to(target.global_position)

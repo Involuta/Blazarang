@@ -65,7 +65,7 @@ surface_material_override/1 = SubResource("StandardMaterial3D_any8q")
 surface_material_override/2 = SubResource("StandardMaterial3D_d6yd3")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="ControlRig/Skeleton3D" index="1"]
-transform = Transform3D(0.338599, 0.679299, -0.651077, 0.632746, 0.347745, 0.691885, 0.696406, -0.646239, -0.312078, 5.30136, 8.42665, 0.586293)
+transform = Transform3D(0.338599, 0.6793, -0.651077, 0.632747, 0.347745, 0.691885, 0.696406, -0.646239, -0.312079, 5.30136, 8.42664, 0.586295)
 bone_name = "mixamorig_RightHand"
 bone_idx = 14
 

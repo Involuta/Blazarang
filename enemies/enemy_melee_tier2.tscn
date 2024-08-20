@@ -207,7 +207,7 @@ states/SweepCR/position = Vector2(569.935, 150.735)
 states/WalkSpace/node = SubResource("AnimationNodeBlendSpace1D_xixeq")
 states/WalkSpace/position = Vector2(388.078, 100.02)
 transitions = ["Start", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_xruje"), "WalkSpace", "OverheadCR", SubResource("AnimationNodeStateMachineTransition_hibdj"), "OverheadCR", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_ito5k"), "WalkSpace", "SweepCR", SubResource("AnimationNodeStateMachineTransition_50775"), "SweepCR", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_bevw0")]
-graph_offset = Vector2(126.443, 8.235)
+graph_offset = Vector2(138.391, 8.23499)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_kp0ng"]
 graph_offset = Vector2(-87.36, 93.12)
@@ -247,12 +247,11 @@ libraries = {
 }
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
-process_mode = 4
-transform = Transform3D(-0.500004, -0.866022, -1.2626e-21, -3.13499e-06, 1.81001e-06, 0.999999, -0.866023, 0.500004, -3.61999e-06, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(1, -1.74393e-16, 3.02058e-16, 3.02058e-16, 0.866025, -0.5, -1.74393e-16, 0.5, 0.866025, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 visible = false
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
-transform = Transform3D(0.999999, 2.15301e-08, -2.2719e-14, -8.9407e-08, 0.999999, 0, -6.17927e-15, -6.2758e-15, 0.999999, 2.08165e-12, 2.5, 2.08165e-12)
+transform = Transform3D(0.999999, 2.15301e-08, -2.2719e-14, -8.9407e-08, 0.999999, 0, -6.17927e-15, -6.2758e-15, 0.999999, 2.08165e-12, -1, 2.08165e-12)
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("3_lw0ui")
@@ -296,10 +295,10 @@ bones/22/rotation = Quaternion(0.743297, -0.162109, 0.187418, 0.621373)
 bones/23/rotation = Quaternion(0.261358, 0.29407, -0.0623219, 0.917241)
 
 [node name="BoneAttachment3D" parent="VisualMesh/ControlRig/Skeleton3D" index="1"]
-transform = Transform3D(0.308286, 0.163911, 0.937066, 0.892386, -0.391078, -0.22518, 0.329556, 0.905644, -0.266835, -3.67247, 6.47143, 4.25523)
+transform = Transform3D(0.308286, 0.163911, 0.937066, 0.892385, -0.391078, -0.225179, 0.329556, 0.905644, -0.266836, -3.67247, 6.47143, 4.25523)
 
 [node name="SwordPivot" parent="VisualMesh/ControlRig" index="1"]
-transform = Transform3D(0.507839, -0.24357, 0.826301, 0.861452, 0.143588, -0.487117, 2.36876e-08, 0.959196, 0.282743, -5.13793, 6.83412, 5.63263)
+transform = Transform3D(0.507839, -0.24357, 0.826301, 0.861452, 0.143588, -0.487117, 2.36876e-08, 0.959195, 0.282743, -5.13793, 6.83412, 5.63263)
 
 [node name="BasicSword" parent="VisualMesh/ControlRig/SwordPivot" index="0"]
 transform = Transform3D(-6.55672e-08, 1.5, 5.6678e-16, -0.750001, -3.27835e-08, -2.81459, -1.29904, -5.67828e-08, 1.625, 2.08165e-12, 2.08165e-12, 2.08165e-12)
