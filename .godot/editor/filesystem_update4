@@ -40,3 +40,5 @@ res://levels/test_level.tscn
 res://levels/x_boss_level_section_nodes/x_boss_arena1.tscn
 res://enemies/enemy_anims/x_slipnslice.res
 res://enemies/enemy_anims/x_superman.res
+res://globals.gd
+res://rang/roserang.tscn

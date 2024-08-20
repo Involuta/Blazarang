@@ -37,7 +37,7 @@ const enemy_hurtbox_data = {
 	"EnemyMobileGunner" : [10, 1.0, 1.0],
 	"EnemyStationaryGunner" : [10, 1.0, 1.0],
 	"FirstMiniboss" : [500, 1.0, 10.0],
-	"XBoss" : [400, 1.0, 100.0]
+	"XBoss" : [4000, 1.0, 100.0]
 }
 
 func award_score(points):
