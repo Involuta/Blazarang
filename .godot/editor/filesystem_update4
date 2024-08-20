@@ -42,3 +42,5 @@ res://enemies/enemy_anims/x_slipnslice.res
 res://enemies/enemy_anims/x_superman.res
 res://globals.gd
 res://rang/roserang.tscn
+res://rang/hit_sfx_player.gd
+res://enemies/enemy_hurtbox.gd

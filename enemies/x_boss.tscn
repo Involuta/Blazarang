@@ -220,7 +220,7 @@ node_connections = [&"output", 0, &"StateMachine"]
 
 [node name="XBoss" type="CharacterBody3D" groups=["lockonables"]]
 collision_layer = 8
-collision_mask = 90
+collision_mask = 218
 platform_floor_layers = 4294901762
 script = ExtResource("1_u3wem")
 target_distance = 10.0
@@ -267,6 +267,7 @@ transform = Transform3D(0.999999, 2.15301e-08, -2.2719e-14, -8.9407e-08, 0.99999
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("3_rpkwr")
+damage = 60
 
 [node name="HitboxCollider" type="CollisionShape3D" parent="MeleeHitboxPivot/EnemyHitbox"]
 shape = SubResource("CapsuleShape3D_na3bt")

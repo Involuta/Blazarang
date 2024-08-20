@@ -5,5 +5,6 @@ extends Area3D
 func _ready():
 	area_entered.connect(play_hit_sound)
 
-func play_hit_sound(_area):
-	hit_sfx.play()
+func play_hit_sound(area):
+	if area.name == "EnemyHurtbox":
+		hit_sfx.play()
