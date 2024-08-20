@@ -30,15 +30,11 @@ var aiming_at_target := true
 @export var short_dist_attack_chances = {
 	"SlipnSlice" : 1.0,
 	"Superman" : .25,
-	"Triangle" : .25,
-	"BigX" : .25
 }
 
 @export var long_dist_attack_chances = {
 	"SlipnSlice" : 1.0,
-	"Superman" : .25,
-	"Triangle" : .25,
-	"BigX" : .25
+	"Superman" : .25
 }
 
 @export var slipnslice_speed := 20.0
@@ -167,11 +163,21 @@ func long_dist_attack_frame():
 func stop_aiming_at_target():
 	aiming_at_target = false
 
-func start_slipnslice():
-	velocity = slipnslice_speed * global_position.direction_to(target.global_position)
+func face_target():
+	look_at(target.global_position)
 
-func end_slipnslice():
+func start_slipnslice():
+	velocity = slipnslice_speed * -transform.basis.z
+
+func stop_mvmt():
 	velocity = Vector3.ZERO
+
+func start_superman():
+	velocity.y = 6
+
+func superman_rush():
+	velocity = superman_speed * -transform.basis.z
+	velocity.y = -6
 
 func shoot_bullet():
 	var bullet_inst = bullet.instantiate()
@@ -200,13 +206,6 @@ func start_long_dist_attack():
 	long_dist_wait_remaining = max_long_dist_wait
 	aiming_at_target = true
 	anim_tree.set(choose_attack(short_dist_attack_chances), true)
-
-func start_superman():
-	velocity = 10 * global_position.direction_to(target.global_position)
-	velocity.y = 4
-
-func superman_rush():
-	velocity = superman_speed * global_position.direction_to(target.global_position)
 
 func can_see_target():
 	var space_state := get_world_3d().direct_space_state
