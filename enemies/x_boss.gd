@@ -55,6 +55,7 @@ func _ready():
 	if aggro_distance > 0:
 		nav_agent.process_mode = Node.PROCESS_MODE_DISABLED
 		behav_state = WAIT
+	anim_tree.active = true
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("Special"):

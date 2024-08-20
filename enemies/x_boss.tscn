@@ -5,10 +5,10 @@
 [ext_resource type="Script" path="res://hitbox.gd" id="3_rpkwr"]
 [ext_resource type="PackedScene" uid="uid://b3uvg3j4qge8o" path="res://glb_inherited_scenes/x_boss_meshes.tscn" id="4_dnuas"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4b6ac"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ub1sp"]
 height = 2.75
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bc8ga"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7g15b"]
 height = 2.75
 
 [sub_resource type="Animation" id="Animation_4hqbc"]
@@ -147,13 +147,13 @@ _data = {
 "sweep": SubResource("Animation_fpxs0")
 }
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5o8sx"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tyc3d"]
 radius = 0.25
-height = 2.75
+height = 4.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_f0kqn"]
 radius = 0.25
-height = 2.75
+height = 4.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_scvwl"]
 animation = &"SlipnSlice"
@@ -230,7 +230,7 @@ long_dist_attack_chances = {
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-shape = SubResource("CapsuleShape3D_4b6ac")
+shape = SubResource("CapsuleShape3D_ub1sp")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 target_desired_distance = 3.0
@@ -238,7 +238,7 @@ avoidance_enabled = true
 radius = 3.0
 
 [node name="EnemyHurtbox" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.5296, 2.08165e-12)
 collision_layer = 8
 collision_mask = 9
 script = ExtResource("2_5lf37")
@@ -246,7 +246,7 @@ opponent_hitboxes = ["PlayerHitbox"]
 
 [node name="HurtboxCollider" type="CollisionShape3D" parent="EnemyHurtbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-shape = SubResource("CapsuleShape3D_bc8ga")
+shape = SubResource("CapsuleShape3D_7g15b")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -254,52 +254,51 @@ libraries = {
 }
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(0.909473, 0.413659, -0.0417737, -0.008726, 0.119444, 0.992802, 0.415672, -0.902563, 0.112241, -0.367286, 0.0782859, -0.461212)
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
-transform = Transform3D(0.999999, 2.15301e-08, -2.2719e-14, -8.9407e-08, 0.999999, 0, -6.17927e-15, -6.2758e-15, 0.999999, 0, 0, 0)
+transform = Transform3D(0.999999, -2.37602e-08, -2.39897e-14, -7.3817e-08, 0.999999, -4.48589e-09, -2.12448e-16, 2.20434e-08, 0.999999, 2.08165e-12, 1.5, 2.08165e-12)
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("3_rpkwr")
 damage = 60
 
 [node name="HitboxCollider" type="CollisionShape3D" parent="MeleeHitboxPivot/EnemyHitbox"]
-shape = SubResource("CapsuleShape3D_5o8sx")
+shape = SubResource("CapsuleShape3D_tyc3d")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeleeHitboxPivot/EnemyHitbox"]
 transform = Transform3D(1, -1.62572e-08, -4.69464e-15, -4.73391e-08, 1, -3.90864e-15, 2.95455e-14, -2.14339e-14, 0.999999, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-visible = false
 cast_shadow = 0
 mesh = SubResource("CapsuleMesh_f0kqn")
 
 [node name="XMeshes" parent="." instance=ExtResource("4_dnuas")]
-transform = Transform3D(-0.1, 3.48787e-17, -8.74228e-09, 3.48787e-17, 0.1, -3.48787e-17, 8.74228e-09, -3.48787e-17, -0.1, 2.08165e-12, -1.023, 2.08165e-12)
+transform = Transform3D(-0.1, 3.48787e-17, -8.74228e-09, 3.48787e-17, 0.1, -3.48787e-17, 8.74228e-09, -3.48787e-17, -0.1, 2.08165e-12, -1.43625, 1.2355)
 
 [node name="Skeleton3D" parent="XMeshes/Armature" index="0"]
-bones/0/position = Vector3(2.42062e-10, 13.3196, 0.227602)
-bones/8/rotation = Quaternion(0.545348, 0.298975, 0.0512187, 0.7814)
-bones/9/rotation = Quaternion(-1.22294e-08, -2.38201e-07, 0.187932, 0.982182)
-bones/10/rotation = Quaternion(0.0636621, 0.50911, -0.00334524, 0.858337)
-bones/12/rotation = Quaternion(0.556868, -0.327487, -0.0537849, 0.761418)
-bones/13/rotation = Quaternion(-3.95819e-07, 1.65371e-06, -0.231204, 0.972905)
-bones/14/rotation = Quaternion(0.0686443, -0.487103, 0.0556874, 0.86886)
-bones/15/rotation = Quaternion(-0.0282742, 0.189878, 0.980151, -0.0495091)
-bones/15/scale = Vector3(1, 1, 0.999999)
-bones/16/rotation = Quaternion(-0.424102, -3.94773e-06, -1.19297e-06, 0.905615)
-bones/17/rotation = Quaternion(0.543881, -0.0500174, 0.0149768, 0.837537)
-bones/18/rotation = Quaternion(0.276961, 0.230053, -0.0684875, 0.930418)
-bones/20/rotation = Quaternion(0.0404664, 0.0760993, 0.995179, 0.0468008)
-bones/20/scale = Vector3(1, 1, 0.999999)
-bones/21/rotation = Quaternion(-0.170479, 9.22951e-06, 2.37336e-06, 0.985361)
-bones/22/rotation = Quaternion(0.248953, 0.0450927, -0.025747, 0.967123)
-bones/23/rotation = Quaternion(0.280721, -0.231216, 0.0698715, 0.928899)
+bones/0/position = Vector3(-0.914062, 9.43966, 13.5887)
+bones/0/rotation = Quaternion(0.23001, 0.0136724, -0.0148683, 0.972979)
+bones/4/rotation = Quaternion(-0.20827, -0.0158686, 0.0130247, 0.977856)
+bones/8/rotation = Quaternion(-0.284494, -0.139576, 0.202454, 0.926603)
+bones/9/rotation = Quaternion(-1.46812e-07, -1.86765e-07, 0.729183, 0.684319)
+bones/10/rotation = Quaternion(-0.106382, -0.100444, -0.0158474, 0.989112)
+bones/12/rotation = Quaternion(0.503522, -0.206773, 0.248398, 0.801255)
+bones/13/rotation = Quaternion(-4.92956e-07, 1.59324e-06, -0.2896, 0.957148)
+bones/14/rotation = Quaternion(-0.020194, -0.77215, -0.0844942, 0.629474)
+bones/15/rotation = Quaternion(-0.144327, -0.678659, -0.701194, 0.164069)
+bones/15/scale = Vector3(0.999999, 1, 1)
+bones/16/rotation = Quaternion(-0.764974, -3.09062e-06, -2.7274e-06, 0.644061)
+bones/17/rotation = Quaternion(0.779177, 0.11243, -0.103488, 0.607892)
+bones/18/rotation = Quaternion(0.276968, 0.230053, -0.0684862, 0.930416)
+bones/20/rotation = Quaternion(0.0392264, -0.115484, -0.992466, 0.0116923)
+bones/20/scale = Vector3(0.999999, 1, 1)
+bones/21/rotation = Quaternion(-0.658738, 6.64077e-06, 6.83237e-06, 0.752372)
+bones/22/rotation = Quaternion(0.859401, -0.0266757, -0.0528729, 0.507861)
+bones/23/rotation = Quaternion(0.280679, -0.23121, 0.0698908, 0.928912)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_uk78c")
 anim_player = NodePath("../XMeshes/AnimationPlayer")
 advance_expression_base_node = NodePath("..")
-active = true
 parameters/StateMachine/conditions/SlipnSlice = false
 parameters/StateMachine/conditions/Superman = false
 parameters/StateMachine/WalkSpace/blend_position = -0.00188327
