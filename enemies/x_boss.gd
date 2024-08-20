@@ -28,20 +28,22 @@ var aiming_at_target := true
 @export var fast_bullet_speed := 50.0
 
 @export var short_dist_attack_chances = {
-	"SlipnSlice" : 1,
+	"SlipnSlice" : 1.0,
 	"Superman" : .25,
 	"Triangle" : .25,
 	"BigX" : .25
 }
 
 @export var long_dist_attack_chances = {
-	"SlipnSlice" : 1,
+	"SlipnSlice" : 1.0,
 	"Superman" : .25,
 	"Triangle" : .25,
 	"BigX" : .25
 }
 
+@export var slipnslice_speed := 20.0
 @export var superman_speed := 20.0
+
 var param_path_base := "parameters/StateMachine/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
@@ -164,6 +166,12 @@ func long_dist_attack_frame():
 	
 func stop_aiming_at_target():
 	aiming_at_target = false
+
+func start_slipnslice():
+	velocity = slipnslice_speed * global_position.direction_to(target.global_position)
+
+func end_slipnslice():
+	velocity = Vector3.ZERO
 
 func shoot_bullet():
 	var bullet_inst = bullet.instantiate()
