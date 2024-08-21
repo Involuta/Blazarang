@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwui2mc0avv1y"]
+
+[ext_resource type="PackedScene" uid="uid://dnn5utdpa54kx" path="res://glb_imports/XLeftArm.glb" id="1_dfm1y"]
+
+[node name="XLeftArm" instance=ExtResource("1_dfm1y")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="LeftArm" parent="." index="0"]
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, -4.022, 3.47375, 2)

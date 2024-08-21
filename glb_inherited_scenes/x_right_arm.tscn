@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://t0xndtulje0m"]
+
+[ext_resource type="PackedScene" uid="uid://d8rrte1l683t" path="res://glb_imports/XRightArm.glb" id="1_4jxjw"]
+
+[node name="XRightArm" instance=ExtResource("1_4jxjw")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="RightArm" parent="." index="0"]
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 4.022, 3.474, 2)

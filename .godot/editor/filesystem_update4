@@ -45,3 +45,5 @@ res://rang/roserang.tscn
 res://rang/hit_sfx_player.gd
 res://enemies/enemy_hurtbox.gd
 res://enemies/x_boss.gd
+res://glb_inherited_scenes/x_right_arm.tscn
+res://glb_inherited_scenes/x_left_arm.tscn
