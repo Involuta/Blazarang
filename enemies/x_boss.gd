@@ -46,7 +46,6 @@ var rng := RandomNumberGenerator.new()
 var bullet := preload("res://enemies/enemy_mega_bullet.tscn")
 @onready var nav_agent = $NavigationAgent3D
 @onready var anim_tree = $AnimationTree
-@onready var animation_player = $XMeshes/AnimationPlayer
 @onready var level := $/root/Level
 @onready var target := $/root/Level/Target
 @onready var left_arm := $/root/Level/XBossArena1/XLeftArm
@@ -183,18 +182,15 @@ func superman_rush():
 	velocity.y = -5
 
 func triangle_shoot_arms():
-	print("dong")
-	left_arm.global_position = global_position + Vector3(-.2, .65, 0)
-	left_arm.rotation.y = 56
+	left_arm.rotation_degrees.y = rotation_degrees.y + 216
 	left_arm.visible = true
 	var left_arm_tween = get_tree().create_tween()
-	left_arm_tween.tween_property(left_arm, "global_position", left_arm.global_position - left_arm.basis.z, .4)
+	left_arm_tween.tween_property(left_arm, "global_position", 70*left_arm.basis.z, .4).as_relative().from(global_position + Vector3(-.2, .65, 0))
 	
-	right_arm.global_position = global_position + Vector3(.2, .65, 0)
-	right_arm.rotation.y = -56
+	right_arm.rotation_degrees.y = rotation_degrees.y - 216
 	right_arm.visible = true
 	var right_arm_tween = get_tree().create_tween()
-	right_arm_tween.tween_property(right_arm, "global_position", right_arm.global_position - right_arm.basis.z, .4)
+	right_arm_tween.tween_property(right_arm, "global_position", 70*right_arm.basis.z, .4).as_relative().from(global_position + Vector3(.2, .65, 0))
 
 func shoot_bullet():
 	var bullet_inst = bullet.instantiate()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b3uvg3j4qge8o"]
+[gd_scene load_steps=23 format=3 uid="uid://b3uvg3j4qge8o"]
 
 [ext_resource type="PackedScene" uid="uid://rp0n2dfx0chj" path="res://glb_imports/8164_meshes.glb" id="1_mluec"]
 
@@ -74,10 +74,6 @@ next_pass = SubResource("ShaderMaterial_ygth1")
 albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
 roughness = 0.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4mh7x"]
-transparency = 4
-albedo_color = Color(1, 1, 1, 0)
-
 [sub_resource type="Shader" id="Shader_pnwi6"]
 code = "shader_type spatial;
 render_mode cull_front, unshaded;
@@ -149,10 +145,6 @@ shader_parameter/outline_width = 1.0
 next_pass = SubResource("ShaderMaterial_tobhi")
 albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
 roughness = 0.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kt34q"]
-transparency = 4
-albedo_color = Color(1, 1, 1, 0)
 
 [sub_resource type="Shader" id="Shader_hcnm2"]
 code = "shader_type spatial;
@@ -266,33 +258,33 @@ roughness = 0.0
 transform = Transform3D(-0.1, 3.48787e-17, -8.74228e-09, 3.48787e-17, 0.1, -3.48787e-17, 8.74228e-09, -3.48787e-17, -0.1, 2.08165e-12, -1.023, 2.08165e-12)
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/position = Vector3(-3.09902e-07, 9.64952, 0.13281)
-bones/0/rotation = Quaternion(-0.322609, 1.19864e-11, -3.99203e-11, 0.946532)
-bones/4/rotation = Quaternion(0.34704, -9.87545e-19, -6.61908e-18, 0.93785)
-bones/8/rotation = Quaternion(0.683764, -0.0920379, 0.56442, 0.453239)
-bones/9/rotation = Quaternion(2.36059e-08, -2.10516e-07, 0.00159244, 0.999999)
-bones/10/rotation = Quaternion(0.0925662, 0.560425, 0.0280031, 0.82254)
-bones/12/rotation = Quaternion(0.684361, 0.0957013, -0.561245, 0.455516)
-bones/13/rotation = Quaternion(-3.29469e-08, 1.69869e-06, -0.00164429, 0.999999)
-bones/14/rotation = Quaternion(0.0814836, -0.566168, 0.0174316, 0.820067)
-bones/15/rotation = Quaternion(0.154692, -0.141403, -0.973087, 0.0957942)
+bones/0/position = Vector3(2.42062e-10, 11, 0.227602)
+bones/0/rotation = Quaternion(0.173648, 7.32326e-12, -4.15339e-11, 0.984808)
+bones/4/rotation = Quaternion(-0.148058, -2.68924e-18, 3.67648e-17, 0.988979)
+bones/8/rotation = Quaternion(0.573974, 0.291079, 0.158839, 0.74873)
+bones/9/rotation = Quaternion(3.91925e-08, -2.24666e-07, 0.00156835, 0.999999)
+bones/10/rotation = Quaternion(-0.153814, 0.43701, 0.139414, 0.875173)
+bones/12/rotation = Quaternion(0.5756, -0.288174, -0.153602, 0.749698)
+bones/13/rotation = Quaternion(-1.03555e-08, 1.66259e-06, -0.00161943, 0.999999)
+bones/14/rotation = Quaternion(-0.141926, -0.441408, -0.133377, 0.875915)
+bones/15/rotation = Quaternion(-0.0236043, -0.513366, -0.844024, 0.153364)
 bones/15/scale = Vector3(1, 1, 1)
-bones/16/rotation = Quaternion(-0.784165, -3.01428e-06, -2.83203e-06, 0.620552)
-bones/17/rotation = Quaternion(0.47906, 0.00311846, -0.112208, 0.870575)
+bones/16/rotation = Quaternion(-0.727087, -3.24715e-06, -2.57373e-06, 0.686546)
+bones/17/rotation = Quaternion(0.695924, 0.0294357, -0.0788378, 0.713168)
 bones/18/rotation = Quaternion(0.276876, 0.230055, -0.0684817, 0.930443)
-bones/20/rotation = Quaternion(-0.0559637, 0.180424, 0.977247, 0.0964556)
+bones/20/rotation = Quaternion(-0.0256435, 0.510241, 0.846024, 0.152446)
 bones/20/scale = Vector3(1, 1, 1)
-bones/21/rotation = Quaternion(-0.0808316, 9.40832e-06, 1.52859e-06, 0.996728)
-bones/22/rotation = Quaternion(0.317516, -0.00725768, 0.0364762, 0.947523)
-bones/23/rotation = Quaternion(0.29458, -0.231778, 0.0680844, 0.92459)
+bones/21/rotation = Quaternion(-0.722113, 6.01855e-06, 7.39385e-06, 0.691775)
+bones/22/rotation = Quaternion(0.695165, -0.0287988, 0.0777876, 0.714048)
+bones/23/rotation = Quaternion(0.280621, -0.231215, 0.0698731, 0.928929)
 
 [node name="Body_001" parent="Armature/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_6w36t")
 surface_material_override/1 = SubResource("StandardMaterial3D_toeh3")
-surface_material_override/2 = SubResource("StandardMaterial3D_4mh7x")
+surface_material_override/2 = SubResource("StandardMaterial3D_toeh3")
 surface_material_override/3 = SubResource("StandardMaterial3D_l037o")
 surface_material_override/4 = SubResource("StandardMaterial3D_nw6f6")
-surface_material_override/5 = SubResource("StandardMaterial3D_kt34q")
+surface_material_override/5 = SubResource("StandardMaterial3D_toeh3")
 surface_material_override/6 = SubResource("StandardMaterial3D_ot1fy")
 surface_material_override/7 = SubResource("StandardMaterial3D_woqvd")
 surface_material_override/8 = SubResource("StandardMaterial3D_wmyen")

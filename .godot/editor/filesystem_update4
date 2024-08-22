@@ -38,3 +38,10 @@ res://levels/x_boss_level1.tscn
 res://levels/x_boss_level_section_nodes/x_boss_arena1.tscn
 res://glb_inherited_scenes/x_boss_meshes.tscn
 res://enemies/x_boss.gd
+res://enemies/enemy_anims/x_idle.res
+res://enemies/enemy_anims/x_run.res
+res://enemies/enemy_anims/x_slipnslice.res
+res://enemies/enemy_anims/x_superman.res
+res://enemies/enemy_anims/x_triangle.res
+res://glb_inherited_scenes/x_left_arm.tscn
+res://glb_inherited_scenes/x_right_arm.tscn
