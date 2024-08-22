@@ -48,7 +48,9 @@ var bullet := preload("res://enemies/enemy_mega_bullet.tscn")
 @onready var anim_tree = $AnimationTree
 @onready var animation_player = $XMeshes/AnimationPlayer
 @onready var level := $/root/Level
-@onready var target = $/root/Level/Target
+@onready var target := $/root/Level/Target
+@onready var left_arm := $/root/Level/XBossArena1/XLeftArm
+@onready var right_arm := $/root/Level/XBossArena1/XRightArm
 
 func _ready():
 	add_to_group("lockonables")
@@ -151,7 +153,7 @@ func choose_attack(attack_chances) -> String:
 		cumulative_weight += attack_chances[attack]
 		if choice <= cumulative_weight:
 			return param_path_base + attack
-	return param_path_base + attack_chances[0]
+	return param_path_base + attack_chances[attack_chances.keys()[0]]
 
 func short_dist_attack_frame():
 	if aiming_at_target:
@@ -178,7 +180,21 @@ func start_superman():
 
 func superman_rush():
 	velocity = superman_speed * -transform.basis.z
-	velocity.y = -6
+	velocity.y = -5
+
+func triangle_shoot_arms():
+	print("dong")
+	left_arm.global_position = global_position + Vector3(-.2, .65, 0)
+	left_arm.rotation.y = 56
+	left_arm.visible = true
+	var left_arm_tween = get_tree().create_tween()
+	left_arm_tween.tween_property(left_arm, "global_position", left_arm.global_position - left_arm.basis.z, .4)
+	
+	right_arm.global_position = global_position + Vector3(.2, .65, 0)
+	right_arm.rotation.y = -56
+	right_arm.visible = true
+	var right_arm_tween = get_tree().create_tween()
+	right_arm_tween.tween_property(right_arm, "global_position", right_arm.global_position - right_arm.basis.z, .4)
 
 func shoot_bullet():
 	var bullet_inst = bullet.instantiate()
