@@ -39,6 +39,8 @@ var aiming_at_target := true
 
 @export var slipnslice_speed := 20.0
 @export var superman_speed := 20.0
+@export var triangle_arm_angle := 36.0
+@export var triangle_arm_dist := 90.0
 
 var param_path_base := "parameters/StateMachine/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -182,16 +184,22 @@ func superman_rush():
 	velocity.y = -5
 
 func triangle_shoot_arms():
-	left_arm.rotation_degrees.y = rotation_degrees.y + 216
+	left_arm.rotation_degrees.y = rotation_degrees.y + 180 + triangle_arm_angle
 	left_arm.visible = true
 	var left_arm_tween = get_tree().create_tween()
-	left_arm_tween.tween_property(left_arm, "global_position", 70*left_arm.basis.z, .4).as_relative().from(global_position + Vector3(-.2, .65, 0))
+	left_arm_tween.tween_callback(left_arm.stop_firing_laser)
+	left_arm_tween.tween_property(left_arm, "global_position", triangle_arm_dist*left_arm.basis.z, .3).as_relative().from(global_position + Vector3(-.2, .65, 0))
+	left_arm_tween.tween_property(left_arm, "rotation_degrees", Vector3.UP * -2 * triangle_arm_angle, .1).as_relative()
+	left_arm_tween.tween_callback(left_arm.fire_laser)
 	
-	right_arm.rotation_degrees.y = rotation_degrees.y - 216
+	right_arm.rotation_degrees.y = rotation_degrees.y - 180 - triangle_arm_angle
 	right_arm.visible = true
 	var right_arm_tween = get_tree().create_tween()
-	right_arm_tween.tween_property(right_arm, "global_position", 70*right_arm.basis.z, .4).as_relative().from(global_position + Vector3(.2, .65, 0))
-
+	right_arm_tween.tween_callback(right_arm.stop_firing_laser)
+	right_arm_tween.tween_property(right_arm, "global_position", triangle_arm_dist*right_arm.basis.z, .3).as_relative().from(global_position + Vector3(.2, .65, 0))
+	right_arm_tween.tween_property(right_arm, "rotation_degrees", Vector3.UP * 2 * triangle_arm_angle, .1).as_relative()
+	right_arm_tween.tween_callback(right_arm.fire_laser)
+	
 func shoot_bullet():
 	var bullet_inst = bullet.instantiate()
 	level.add_child.call_deferred(bullet_inst)

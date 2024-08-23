@@ -1,8 +1,10 @@
+CollisionShape3D
+Hitbox
+Hurtbox
 WorldEnvironment
 GPUParticles3D
 MeshInstance3D
 RayCast3D
-CollisionShape3D
 StaticBody3D
 Node3D
 BoneAttachment3D
@@ -28,6 +30,3 @@ TextEdit
 TextureRect
 ColorRect
 AnimationTree
-GPUTrail3D
-ProgressBar
-TextureProgressBar

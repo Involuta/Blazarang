@@ -243,9 +243,9 @@ platform_floor_layers = 4294901762
 script = ExtResource("1_u3wem")
 target_distance = 10.0
 short_dist_attack_chances = {
-"SlipnSlice": 2.08167e-12,
-"Superman": 0.5,
-"Triangle": 0.5
+"SlipnSlice": 0.33,
+"Superman": 0.33,
+"Triangle": 0.33
 }
 long_dist_attack_chances = {
 "SlipnSlice": 0.5,

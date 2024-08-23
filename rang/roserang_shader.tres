@@ -8,13 +8,13 @@ operator = 2
 expanded_output_ports = [0]
 parameter_name = "ColorParameter"
 default_value_enabled = true
-default_value = Color(2, 2, 1, 1)
+default_value = Color(0.6, 0.6, 0.6, 1)
 
 [resource]
 code = "shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
 
-uniform vec4 ColorParameter : source_color = vec4(2.000000, 2.000000, 1.000000, 1.000000);
+uniform vec4 ColorParameter : source_color = vec4(0.600000, 0.600000, 0.600000, 1.000000);
 
 
 
@@ -34,6 +34,7 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-325.92, 127.68)
 nodes/fragment/2/node = SubResource("VisualShaderNodeVectorOp_glu5n")
 nodes/fragment/2/position = Vector2(-40, 340)
 nodes/fragment/3/node = SubResource("VisualShaderNodeColorParameter_hdoap")
