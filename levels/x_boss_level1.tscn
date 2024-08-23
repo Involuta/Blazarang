@@ -23,7 +23,8 @@ sky = SubResource("Sky_xpqqj")
 tonemap_mode = 2
 glow_enabled = true
 glow_intensity = 2.0
-glow_bloom = 0.2
+glow_blend_mode = 0
+glow_hdr_threshold = 1.5
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_sfodj")

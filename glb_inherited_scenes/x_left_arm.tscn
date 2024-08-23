@@ -1,9 +1,65 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwui2mc0avv1y"]
+[gd_scene load_steps=11 format=3 uid="uid://cwui2mc0avv1y"]
 
 [ext_resource type="PackedScene" uid="uid://dnn5utdpa54kx" path="res://glb_imports/XLeftArm.glb" id="1_dfm1y"]
+
+[sub_resource type="Gradient" id="Gradient_bwoip"]
+offsets = PackedFloat32Array(0.7525, 1)
+colors = PackedColorArray(2, 0.27, 0, 1, 2, 0.27, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1iq35"]
+gradient = SubResource("Gradient_bwoip")
+
+[sub_resource type="Curve" id="Curve_k3ufj"]
+_data = [Vector2(0.49783, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3vj4h"]
+curve = SubResource("Curve_k3ufj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s2opr"]
+lifetime_randomness = 0.5
+direction = Vector3(2.08165e-12, 2.08165e-12, 1)
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+scale_curve = SubResource("CurveTexture_3vj4h")
+color = Color(2, 0.27, 0, 1)
+color_ramp = SubResource("GradientTexture1D_1iq35")
+attractor_interaction_enabled = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kg27b"]
+transparency = 4
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_tfj6f"]
+material = SubResource("StandardMaterial3D_kg27b")
+radius = 0.05
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_44iqp"]
+shading_mode = 0
+albedo_color = Color(2, 0.27, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_48vyg"]
+material = SubResource("StandardMaterial3D_44iqp")
+top_radius = 0.25
+bottom_radius = 0.25
+height = 1000.0
 
 [node name="XLeftArm" instance=ExtResource("1_dfm1y")]
 transform = Transform3D(0.1, -3.48787e-17, 3.48787e-17, 3.48787e-17, 0.1, -3.48787e-17, -3.48787e-17, 3.48787e-17, 0.1, 0, 0, 0)
 
 [node name="LeftArm" parent="." index="0"]
 transform = Transform3D(-4.67266e-08, -3.72846e-16, -1.06898, 3.72846e-16, 1.06898, -3.72846e-16, 1.06898, -3.72846e-16, -4.67266e-08, -2.187, 3.474, -4)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." index="1"]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 2.08165e-12, 8)
+amount = 20
+lifetime = 0.3
+process_material = SubResource("ParticleProcessMaterial_s2opr")
+draw_pass_1 = SubResource("SphereMesh_tfj6f")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2"]
+transform = Transform3D(1, -1.57852e-23, 1.5246e-23, 1.06845e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.513, 2.08165e-12, 508)
+mesh = SubResource("CylinderMesh_48vyg")

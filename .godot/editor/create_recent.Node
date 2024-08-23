@@ -1,4 +1,7 @@
+WorldEnvironment
+GPUParticles3D
 MeshInstance3D
+RayCast3D
 CollisionShape3D
 StaticBody3D
 Node3D
@@ -20,7 +23,6 @@ FuncGodotMap
 NavigationRegion3D
 AudioStreamPlayer3D
 AudioStreamPlayer
-GPUParticles3D
 Node2D
 TextEdit
 TextureRect
@@ -29,4 +31,3 @@ AnimationTree
 GPUTrail3D
 ProgressBar
 TextureProgressBar
-CharacterBody3D
