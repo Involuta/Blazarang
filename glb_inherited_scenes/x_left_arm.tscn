@@ -77,7 +77,7 @@ transform = Transform3D(1, -1.21652e-31, 1.06845e-23, 1.06845e-23, 1, -1.06845e-
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("3_ltcgr")
-damage = 60
+damage = 40
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHitbox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
