@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dwniaym2g1off"]
+[gd_scene load_steps=31 format=3 uid="uid://dwniaym2g1off"]
 
 [ext_resource type="Script" path="res://enemies/x_boss.gd" id="1_u3wem"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_5lf37"]
@@ -8,7 +8,7 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ub1sp"]
 height = 2.75
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bc8ga"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v41vc"]
 height = 2.75
 
 [sub_resource type="Animation" id="Animation_4hqbc"]
@@ -147,54 +147,21 @@ _data = {
 "sweep": SubResource("Animation_fpxs0")
 }
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_75u72"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ffvd3"]
 radius = 0.25
-height = 4.0
+height = 1.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_f0kqn"]
 radius = 0.25
 height = 4.0
 
-[sub_resource type="Shader" id="Shader_065xt"]
-code = "shader_type spatial;
-render_mode cull_front, unshaded;
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y6nrg"]
+transparency = 4
+albedo_color = Color(1, 1, 1, 0)
 
-uniform vec4 outline_color : source_color;
-uniform float outline_width = 1.0;
-
-void vertex() {
-	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
-	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
-	
-	vec2 offset = normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
-	
-	clip_position.xy += offset;
-	
-	POSITION = clip_position;
-}
-
-void fragment() {
-	ALBEDO = outline_color.rgb;
-	if (outline_color.a < 1.0) {
-		ALPHA = outline_color.a;
-	}
-}"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_s7a6n"]
-render_priority = 0
-shader = SubResource("Shader_065xt")
-shader_parameter/outline_color = Color(0.431373, 0.431373, 0.431373, 1)
-shader_parameter/outline_width = 1.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w0kva"]
-next_pass = SubResource("ShaderMaterial_s7a6n")
-albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
-roughness = 0.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m105k"]
-next_pass = SubResource("ShaderMaterial_s7a6n")
-albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
-roughness = 0.0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cpdpd"]
+transparency = 4
+albedo_color = Color(1, 1, 1, 0)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_scvwl"]
 animation = &"SlipnSlice"
@@ -255,6 +222,7 @@ switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fs8sj"]
+xfade_time = 0.15
 switch_mode = 2
 advance_mode = 2
 
@@ -280,6 +248,7 @@ nodes/StateMachine/position = Vector2(110, 150)
 node_connections = [&"output", 0, &"StateMachine"]
 
 [node name="XBoss" type="CharacterBody3D" groups=["lockonables"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 collision_layer = 8
 collision_mask = 218
 platform_floor_layers = 4294901762
@@ -313,7 +282,7 @@ opponent_hitboxes = ["PlayerHitbox"]
 
 [node name="HurtboxCollider" type="CollisionShape3D" parent="EnemyHurtbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-shape = SubResource("CapsuleShape3D_bc8ga")
+shape = SubResource("CapsuleShape3D_v41vc")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -322,17 +291,17 @@ libraries = {
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
 process_mode = 4
-transform = Transform3D(1, 0, 0, 0, -0.419864, 0.907587, 0, -0.907587, -0.419864, -0.188539, -0.452492, -2.77152)
+transform = Transform3D(1, -4.70935e-16, 3.26699e-16, 3.26699e-16, 0.936672, 0.350207, -4.70935e-16, -0.350207, 0.936672, -0.2, 2.08165e-12, 2.08165e-12)
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
-transform = Transform3D(0.999999, -2.37602e-08, -2.39897e-14, -7.3817e-08, 0.999999, -4.48589e-09, -2.12448e-16, 2.20434e-08, 0.999999, 0, 0, 0)
+transform = Transform3D(0.999999, -2.37602e-08, -2.39897e-14, -7.3817e-08, 0.999999, -4.48589e-09, -2.12448e-16, 2.20434e-08, 0.999999, 2.08165e-12, 1, 2.08165e-12)
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("3_rpkwr")
 damage = 60
 
 [node name="HitboxCollider" type="CollisionShape3D" parent="MeleeHitboxPivot/EnemyHitbox"]
-shape = SubResource("CapsuleShape3D_75u72")
+shape = SubResource("CapsuleShape3D_ffvd3")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeleeHitboxPivot/EnemyHitbox"]
 transform = Transform3D(1, -1.62572e-08, -4.69464e-15, -4.73391e-08, 1, -3.90864e-15, 2.95455e-14, -2.14339e-14, 0.999999, 2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -354,19 +323,19 @@ bones/12/rotation = Quaternion(0.683499, 0.0930689, -0.559504, 0.459481)
 bones/13/rotation = Quaternion(-3.2535e-08, 1.70448e-06, -0.00164635, 0.999999)
 bones/14/rotation = Quaternion(0.0756718, -0.548859, 0.00734705, 0.83245)
 bones/15/rotation = Quaternion(0.165287, -0.137221, -0.972527, 0.0896809)
-bones/15/scale = Vector3(1.00001, 1, 0.999994)
+bones/15/scale = Vector3(1, 1, 1)
 bones/16/rotation = Quaternion(-0.787843, -3.00074e-06, -2.82468e-06, 0.615876)
 bones/17/rotation = Quaternion(0.463849, 0.000330501, -0.118283, 0.877982)
-bones/18/rotation = Quaternion(0.276971, 0.230061, -0.0684611, 0.930415)
+bones/18/rotation = Quaternion(0.276876, 0.230055, -0.0684817, 0.930443)
 bones/20/rotation = Quaternion(-0.0649269, 0.140649, 0.983629, 0.09207)
-bones/20/scale = Vector3(0.999999, 1, 1)
+bones/20/scale = Vector3(1, 1, 1)
 bones/21/rotation = Quaternion(-0.0016818, 9.49676e-06, 7.82686e-07, 0.999999)
 bones/22/rotation = Quaternion(0.291657, -0.00648946, 0.0357307, 0.955833)
 bones/23/rotation = Quaternion(0.308383, -0.232293, 0.066279, 0.92008)
 
 [node name="Body_001" parent="X_boss_meshes/Armature/Skeleton3D" index="0"]
-surface_material_override/2 = SubResource("StandardMaterial3D_w0kva")
-surface_material_override/5 = SubResource("StandardMaterial3D_m105k")
+surface_material_override/2 = SubResource("StandardMaterial3D_y6nrg")
+surface_material_override/5 = SubResource("StandardMaterial3D_cpdpd")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_uk78c")
