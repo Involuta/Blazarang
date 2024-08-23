@@ -1,13 +1,13 @@
+GPUParticles3D
+Node3D
 CollisionShape3D
 Area3D
 Hitbox
 Hurtbox
 WorldEnvironment
-GPUParticles3D
 MeshInstance3D
 RayCast3D
 StaticBody3D
-Node3D
 BoneAttachment3D
 AnimationPlayer
 Sprite3D

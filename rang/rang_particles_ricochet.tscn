@@ -5,7 +5,7 @@
 [sub_resource type="Gradient" id="Gradient_u3gr3"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0.8, 0, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_1cx3i"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lnsv3"]
 gradient = SubResource("Gradient_u3gr3")
 
 [sub_resource type="Curve" id="Curve_jiv72"]
@@ -13,22 +13,22 @@ max_value = 2.0
 _data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_u6nda"]
+[sub_resource type="CurveTexture" id="CurveTexture_jofnx"]
 curve = SubResource("Curve_jiv72")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8ik51"]
 direction = Vector3(2.08165e-12, 2.08165e-12, 1)
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_max = 20.0
-scale_curve = SubResource("CurveTexture_u6nda")
-color_ramp = SubResource("GradientTexture1D_1cx3i")
+scale_curve = SubResource("CurveTexture_jofnx")
+color_ramp = SubResource("GradientTexture1D_lnsv3")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5y4yx"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mml6g"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_pywly"]
-material = SubResource("StandardMaterial3D_5y4yx")
+material = SubResource("StandardMaterial3D_mml6g")
 size = Vector2(0.2, 0.2)
 
 [node name="RangParticlesRicochet" type="Node3D"]

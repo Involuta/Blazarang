@@ -38,7 +38,8 @@ var aiming_at_target := true
 }
 
 @export var slipnslice_speed := 20.0
-@export var superman_speed := 20.0
+@export var superman_fwd_speed := 20.0
+@export var superman_down_speed := 7.0
 @export var triangle_arm_angle := 36.0
 @export var triangle_arm_dist := 90.0
 
@@ -180,8 +181,8 @@ func start_superman():
 	velocity.y = 6
 
 func superman_rush():
-	velocity = superman_speed * -transform.basis.z
-	velocity.y = -5
+	velocity = superman_fwd_speed * -transform.basis.z
+	velocity.y = -superman_down_speed
 
 func triangle_shoot_arms():
 	left_arm.rotation_degrees.y = rotation_degrees.y + 180 + triangle_arm_angle
