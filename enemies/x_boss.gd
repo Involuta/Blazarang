@@ -154,7 +154,7 @@ func choose_attack(attack_chances) -> String:
 		cumulative_weight += attack_chances[attack]
 		if choice <= cumulative_weight:
 			return param_path_base + attack
-	return param_path_base + attack_chances[attack_chances.keys()[0]]
+	return param_path_base + attack_chances.keys()[0]
 
 func short_dist_attack_frame():
 	if aiming_at_target:
@@ -188,7 +188,7 @@ func triangle_shoot_arms():
 	left_arm.visible = true
 	var left_arm_tween = get_tree().create_tween()
 	left_arm_tween.tween_callback(left_arm.stop_firing_laser)
-	left_arm_tween.tween_property(left_arm, "global_position", triangle_arm_dist*left_arm.basis.z, .3).as_relative().from(global_position + Vector3(-.2, .65, 0))
+	left_arm_tween.tween_property(left_arm, "global_position", triangle_arm_dist*left_arm.basis.z, .3).as_relative().from(global_position + Vector3(-.2, .2, 0))
 	left_arm_tween.tween_property(left_arm, "rotation_degrees", Vector3.UP * -2 * triangle_arm_angle, .1).as_relative()
 	left_arm_tween.tween_callback(left_arm.fire_laser)
 	
@@ -196,7 +196,7 @@ func triangle_shoot_arms():
 	right_arm.visible = true
 	var right_arm_tween = get_tree().create_tween()
 	right_arm_tween.tween_callback(right_arm.stop_firing_laser)
-	right_arm_tween.tween_property(right_arm, "global_position", triangle_arm_dist*right_arm.basis.z, .3).as_relative().from(global_position + Vector3(.2, .65, 0))
+	right_arm_tween.tween_property(right_arm, "global_position", triangle_arm_dist*right_arm.basis.z, .3).as_relative().from(global_position + Vector3(.2, .2, 0))
 	right_arm_tween.tween_property(right_arm, "rotation_degrees", Vector3.UP * 2 * triangle_arm_angle, .1).as_relative()
 	right_arm_tween.tween_callback(right_arm.fire_laser)
 	

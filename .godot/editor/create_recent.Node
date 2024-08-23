@@ -1,4 +1,5 @@
 CollisionShape3D
+Area3D
 Hitbox
 Hurtbox
 WorldEnvironment
@@ -20,7 +21,6 @@ RichTextLabel
 SubViewportContainer
 OmniLight3D
 RigidBody3D
-Area3D
 FuncGodotMap
 NavigationRegion3D
 AudioStreamPlayer3D
