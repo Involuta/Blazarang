@@ -42,6 +42,7 @@ var aiming_at_target := true
 @export var superman_down_speed := 7.0
 @export var triangle_arm_angle := 36.0
 @export var triangle_arm_dist := 90.0
+@export var triangle_axkick_dist := 20.0
 
 var param_path_base := "parameters/StateMachine/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
