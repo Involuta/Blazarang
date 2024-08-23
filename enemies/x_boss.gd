@@ -42,7 +42,8 @@ var aiming_at_target := true
 @export var superman_down_speed := 7.0
 @export var triangle_arm_angle := 36.0
 @export var triangle_arm_dist := 90.0
-@export var triangle_axkick_dist := 20.0
+@export var triangle_axkick_dist := 10.0
+@export var flyingkick_speed := 15.0
 
 var param_path_base := "parameters/StateMachine/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -201,7 +202,10 @@ func triangle_shoot_arms():
 	right_arm_tween.tween_property(right_arm, "global_position", triangle_arm_dist*right_arm.basis.z, .3).as_relative().from(global_position + Vector3(.2, .2, 0))
 	right_arm_tween.tween_property(right_arm, "rotation_degrees", Vector3.UP * 2 * triangle_arm_angle, .1).as_relative()
 	right_arm_tween.tween_callback(right_arm.fire_laser)
-	
+
+func flyingkick_rush():
+	velocity = flyingkick_speed * -transform.basis.z
+
 func shoot_bullet():
 	var bullet_inst = bullet.instantiate()
 	level.add_child.call_deferred(bullet_inst)

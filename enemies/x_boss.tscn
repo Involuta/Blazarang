@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dwniaym2g1off"]
+[gd_scene load_steps=41 format=3 uid="uid://dwniaym2g1off"]
 
 [ext_resource type="Script" path="res://enemies/x_boss.gd" id="1_u3wem"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_5lf37"]
@@ -155,46 +155,13 @@ height = 1.0
 radius = 0.25
 height = 4.0
 
-[sub_resource type="Shader" id="Shader_065xt"]
-code = "shader_type spatial;
-render_mode cull_front, unshaded;
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y6nrg"]
+transparency = 4
+albedo_color = Color(1, 1, 1, 0)
 
-uniform vec4 outline_color : source_color;
-uniform float outline_width = 1.0;
-
-void vertex() {
-	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
-	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
-	
-	vec2 offset = normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
-	
-	clip_position.xy += offset;
-	
-	POSITION = clip_position;
-}
-
-void fragment() {
-	ALBEDO = outline_color.rgb;
-	if (outline_color.a < 1.0) {
-		ALPHA = outline_color.a;
-	}
-}"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_s7a6n"]
-render_priority = 0
-shader = SubResource("Shader_065xt")
-shader_parameter/outline_color = Color(0.431373, 0.431373, 0.431373, 1)
-shader_parameter/outline_width = 1.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w0kva"]
-next_pass = SubResource("ShaderMaterial_s7a6n")
-albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
-roughness = 0.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m105k"]
-next_pass = SubResource("ShaderMaterial_s7a6n")
-albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
-roughness = 0.0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cpdpd"]
+transparency = 4
+albedo_color = Color(1, 1, 1, 0)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_scvwl"]
 animation = &"SlipnSlice"
@@ -269,6 +236,11 @@ switch_mode = 2
 advance_mode = 2
 advance_expression = "global_position.distance_to(target.global_position) > triangle_axkick_dist"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g4osy"]
+xfade_time = 0.15
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_f8liy"]
 states/SlipnSlice/node = SubResource("AnimationNodeAnimation_scvwl")
 states/SlipnSlice/position = Vector2(587.41, 39.9062)
@@ -283,8 +255,8 @@ states/TriangleFlyingKick/node = SubResource("AnimationNodeAnimation_45hdd")
 states/TriangleFlyingKick/position = Vector2(588.228, 160.097)
 states/WalkSpace/node = SubResource("AnimationNodeBlendSpace1D_j6rqy")
 states/WalkSpace/position = Vector2(388, 100.5)
-transitions = ["Start", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_wa8xh"), "WalkSpace", "SlipnSlice", SubResource("AnimationNodeStateMachineTransition_h7rje"), "SlipnSlice", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_1yfff"), "WalkSpace", "Superman", SubResource("AnimationNodeStateMachineTransition_3v00a"), "Superman", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_rac7r"), "WalkSpace", "Triangle", SubResource("AnimationNodeStateMachineTransition_cvaa1"), "Triangle", "TriangleAxKick", SubResource("AnimationNodeStateMachineTransition_aj21x"), "TriangleAxKick", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_fs8sj"), "Triangle", "TriangleFlyingKick", SubResource("AnimationNodeStateMachineTransition_3dfv1")]
-graph_offset = Vector2(37.2307, 67.7999)
+transitions = ["Start", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_wa8xh"), "WalkSpace", "SlipnSlice", SubResource("AnimationNodeStateMachineTransition_h7rje"), "SlipnSlice", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_1yfff"), "WalkSpace", "Superman", SubResource("AnimationNodeStateMachineTransition_3v00a"), "Superman", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_rac7r"), "WalkSpace", "Triangle", SubResource("AnimationNodeStateMachineTransition_cvaa1"), "Triangle", "TriangleAxKick", SubResource("AnimationNodeStateMachineTransition_aj21x"), "TriangleAxKick", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_fs8sj"), "Triangle", "TriangleFlyingKick", SubResource("AnimationNodeStateMachineTransition_3dfv1"), "TriangleFlyingKick", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_g4osy")]
+graph_offset = Vector2(334.118, 136.282)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_uk78c"]
 graph_offset = Vector2(-44.8948, 176.64)
@@ -335,14 +307,16 @@ platform_floor_layers = 4294901762
 script = ExtResource("1_u3wem")
 target_distance = 10.0
 short_dist_attack_chances = {
-"SlipnSlice": 0.33,
-"Superman": 0.33,
-"Triangle": 0.33
+"SlipnSlice": 2.08167e-12,
+"Superman": 2.08167e-12,
+"Triangle": 1.0
 }
 long_dist_attack_chances = {
 "SlipnSlice": 0.5,
 "Superman": 0.5
 }
+triangle_axkick_dist = 5.0
+flyingkick_speed = 40.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -370,8 +344,7 @@ libraries = {
 }
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
-process_mode = 4
-transform = Transform3D(1, -4.70934e-16, 3.26699e-16, 3.26699e-16, 0.936672, 0.350207, -4.70935e-16, -0.350207, 0.936672, -0.2, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(1, -4.70935e-16, 3.26699e-16, 3.26699e-16, 0.936671, 0.350209, -4.70935e-16, -0.350209, 0.936671, -0.2, 2.08165e-12, 2.08165e-12)
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
 transform = Transform3D(0.999999, -2.37602e-08, -2.39897e-14, -7.3817e-08, 0.999999, -4.48589e-09, -2.12448e-16, 2.20434e-08, 0.999999, 2.08165e-12, 1, 2.08165e-12)
@@ -393,29 +366,29 @@ mesh = SubResource("CapsuleMesh_f0kqn")
 transform = Transform3D(-0.1, 3.48787e-17, -8.74228e-09, 3.48787e-17, 0.1, -3.48787e-17, 8.74228e-09, -3.48787e-17, -0.1, 2.08165e-12, -1.3, 2.08165e-12)
 
 [node name="Skeleton3D" parent="X_boss_meshes/Armature" index="0"]
-bones/0/position = Vector3(5.58075e-10, 16, -0.00416055)
+bones/0/position = Vector3(5.58075e-10, 16, -0.413825)
 bones/0/rotation = Quaternion(3.81556e-08, -1.03398e-25, -4.21753e-11, 1)
-bones/4/rotation = Quaternion(0.155786, 7.77587e-19, -2.04818e-17, 0.987791)
-bones/8/rotation = Quaternion(0.528601, 0.722771, 0.222981, 0.385309)
-bones/9/rotation = Quaternion(-1.79589e-07, -1.64063e-07, 0.887337, 0.461122)
-bones/10/rotation = Quaternion(0.248817, -0.953196, 0.037955, 0.167529)
-bones/12/rotation = Quaternion(0.627754, -0.482567, -0.133431, 0.596029)
-bones/13/rotation = Quaternion(-6.61713e-07, 1.51039e-06, -0.378445, 0.925624)
-bones/14/rotation = Quaternion(-0.444811, -0.597628, 0.0619948, 0.664184)
-bones/15/rotation = Quaternion(0.0645083, 0.973187, 0.206461, 0.0782064)
+bones/4/rotation = Quaternion(0.1561, 9.65623e-19, -2.7479e-17, 0.987741)
+bones/8/rotation = Quaternion(-0.0323202, -0.0533728, 0.015112, 0.997937)
+bones/9/rotation = Quaternion(-1.97382e-07, -1.1571e-07, 0.924685, 0.380733)
+bones/10/rotation = Quaternion(-0.413862, 0.64741, -0.129445, 0.626755)
+bones/12/rotation = Quaternion(0.516663, 0.0269512, -0.156376, 0.841356)
+bones/13/rotation = Quaternion(-1.9643e-08, 1.6689e-06, -0.00161868, 0.999999)
+bones/14/rotation = Quaternion(-0.15155, -0.699877, -0.176262, 0.675379)
+bones/15/rotation = Quaternion(0.0645674, 0.972844, 0.208104, 0.0780974)
 bones/15/scale = Vector3(1.00001, 1, 0.999994)
-bones/16/rotation = Quaternion(-0.00144248, -4.09309e-06, 5.91417e-07, 0.999999)
-bones/17/rotation = Quaternion(-0.0144695, 0.106514, 0.0221503, 0.993958)
-bones/18/rotation = Quaternion(0.273362, 0.230905, -0.0656528, 0.931475)
-bones/20/rotation = Quaternion(-0.0531838, -0.100288, 0.992055, 0.0542354)
+bones/16/rotation = Quaternion(-0.00144479, -4.0899e-06, 5.89689e-07, 0.999999)
+bones/17/rotation = Quaternion(-0.0129789, 0.106303, 0.0219907, 0.994006)
+bones/18/rotation = Quaternion(0.273361, 0.230905, -0.0656529, 0.931475)
+bones/20/rotation = Quaternion(-0.0531837, -0.100287, 0.992055, 0.0542354)
 bones/20/scale = Vector3(0.999999, 1, 1)
-bones/21/rotation = Quaternion(-0.00167978, 9.49418e-06, 7.83174e-07, 0.999999)
+bones/21/rotation = Quaternion(-0.00168063, 9.49606e-06, 7.80215e-07, 0.999999)
 bones/22/rotation = Quaternion(0.417211, -0.0444454, 0.0349514, 0.907049)
-bones/23/rotation = Quaternion(0.290086, -0.231817, 0.067851, 0.926017)
+bones/23/rotation = Quaternion(0.290658, -0.231843, 0.0677599, 0.925838)
 
 [node name="Body_001" parent="X_boss_meshes/Armature/Skeleton3D" index="0"]
-surface_material_override/2 = SubResource("StandardMaterial3D_w0kva")
-surface_material_override/5 = SubResource("StandardMaterial3D_m105k")
+surface_material_override/2 = SubResource("StandardMaterial3D_y6nrg")
+surface_material_override/5 = SubResource("StandardMaterial3D_cpdpd")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_uk78c")

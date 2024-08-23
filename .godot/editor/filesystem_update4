@@ -49,3 +49,4 @@ res://rang/roserang.tscn
 res://glb_inherited_scenes/x_arm.gd
 res://enemies/enemy_anims/x_triangle_axkick.res
 res://rang/rang_particles_ricochet.tscn
+res://enemies/enemy_anims/x_triangle_flyingkick.res
