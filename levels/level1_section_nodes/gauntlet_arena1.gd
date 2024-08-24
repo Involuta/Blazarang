@@ -64,10 +64,10 @@ func lower_pillars():
 func begin_sequence():
 	sequence_begun = true
 	if (wave_1_duration > 0):
-		rnb()
+		gang()
 		await get_tree().create_timer(wave_1_duration).timeout
 	if (wave_2_duration > 0):
-		gang()
+		surprise_swarm()
 		await get_tree().create_timer(wave_2_duration).timeout
 	if (wave_3_duration > 0):
 		surprise_swarm()

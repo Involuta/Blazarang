@@ -201,7 +201,6 @@ parameters/StateMachine/conditions/sweep = false
 parameters/StateMachine/WalkSpace/blend_position = -0.000627756
 
 [node name="Sparks" type="Node3D" parent="."]
-process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -1.103, -4.712)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Sparks"]
