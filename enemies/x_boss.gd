@@ -43,7 +43,7 @@ var aiming_at_target := true
 @export var triangle_arm_angle := 36.0
 @export var triangle_arm_dist := 90.0
 @export var triangle_axkick_dist := 10.0
-@export var flyingkick_speed := 15.0
+@export var flyingkick_hit_frames := 10
 
 var param_path_base := "parameters/StateMachine/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -204,8 +204,9 @@ func triangle_shoot_arms():
 	right_arm_tween.tween_callback(right_arm.fire_laser)
 
 func flyingkick_rush():
+	# Travel time must be shorter than time hitbox is active in the anim
 	var kick_tween = get_tree().create_tween()
-	kick_tween.tween_property(self, "global_position", (-1.5+global_position.distance_to(target.global_position)) * -transform.basis.z, .3).as_relative()
+	kick_tween.tween_property(self, "global_position", (-1.5+global_position.distance_to(target.global_position)) * -transform.basis.z, flyingkick_hit_frames/60.0).as_relative()
 
 func shoot_bullet():
 	var bullet_inst = bullet.instantiate()
