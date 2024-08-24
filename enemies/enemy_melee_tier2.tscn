@@ -175,7 +175,7 @@ bones/22/rotation = Quaternion(0.769668, -0.164061, 0.190562, 0.58684)
 bones/23/rotation = Quaternion(0.15086, 0.261278, -0.0729739, 0.950605)
 
 [node name="BoneAttachment3D" parent="VisualMesh/ControlRig/Skeleton3D" index="1"]
-transform = Transform3D(-0.383885, 0.679237, 0.625515, 0.632813, -0.299798, 0.71391, 0.672443, 0.669894, -0.314743, -1.20726, 5.68224, 3.83827)
+transform = Transform3D(-0.383884, 0.679237, 0.625516, 0.632813, -0.299799, 0.71391, 0.672443, 0.669894, -0.314742, -1.20727, 5.68224, 3.83826)
 
 [node name="SwordPivot" parent="VisualMesh/ControlRig" index="1"]
 transform = Transform3D(-4.37114e-08, 0.999999, -3.39847e-16, 0.974369, 4.2591e-08, 0.224951, 0.224951, 9.83292e-09, -0.974369, -9.53326e-07, 4.64528, 6.31359)
