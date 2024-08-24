@@ -22,7 +22,6 @@ var aiming_at_target := true
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 @onready var nav_agent = $NavigationAgent3D
-@onready var anim_player = $AnimationPlayer
 @onready var anim_tree = $AnimationTree
 @onready var visual_mesh = $VisualMesh
 @onready var target = $/root/Level/Target
