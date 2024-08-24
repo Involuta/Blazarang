@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://crnvtwl8auu75"]
+[gd_scene load_steps=29 format=3 uid="uid://crnvtwl8auu75"]
 
 [ext_resource type="Script" path="res://enemies/enemy_melee_base.gd" id="1_aale5"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_0r0r6"]
@@ -147,7 +147,7 @@ _data = {
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_na3bt"]
 radius = 0.2
-height = 3.0
+height = 3.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_al1tw"]
 shading_mode = 0
@@ -215,6 +215,32 @@ nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_cn63x")
 nodes/StateMachine/position = Vector2(90, 150)
 node_connections = [&"output", 0, &"StateMachine"]
 
+[sub_resource type="Curve" id="Curve_bvkav"]
+max_value = 2.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_sq2jl"]
+curve = SubResource("Curve_bvkav")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8msvn"]
+direction = Vector3(2.08165e-12, 1, 2.08165e-12)
+spread = 90.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+scale_curve = SubResource("CurveTexture_sq2jl")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jt2y7"]
+shading_mode = 0
+albedo_color = Color(1, 1, 0, 1)
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_c6vql"]
+material = SubResource("StandardMaterial3D_jt2y7")
+size = Vector2(0.3, 0.3)
+
 [node name="EnemyMeleeTier2" type="CharacterBody3D" groups=["lockonables"]]
 collision_layer = 8
 collision_mask = 90
@@ -247,11 +273,10 @@ libraries = {
 }
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
-transform = Transform3D(1, -1.74393e-16, 3.02058e-16, 3.02058e-16, 0.866025, -0.5, -1.74393e-16, 0.5, 0.866025, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-visible = false
+transform = Transform3D(-0.500004, 0.866023, -1.2626e-21, 3.13499e-06, 1.81001e-06, 0.999999, 0.866023, 0.500004, -3.61999e-06, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
-transform = Transform3D(0.999999, 2.15301e-08, -2.2719e-14, -8.9407e-08, 0.999999, 0, -6.17927e-15, -6.2758e-15, 0.999999, 2.08165e-12, -1, 2.08165e-12)
+transform = Transform3D(0.999999, 2.15301e-08, -2.2719e-14, -8.9407e-08, 0.999999, 0, -6.17927e-15, -6.2758e-15, 0.999999, 2.08165e-12, 2.5, 2.08165e-12)
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("3_lw0ui")
@@ -269,51 +294,69 @@ mesh = SubResource("CapsuleMesh_oq81m")
 transform = Transform3D(0.15, -5.2318e-17, 5.2318e-17, 5.2318e-17, 0.15, -5.2318e-17, -5.2318e-17, 5.2318e-17, 0.15, 0, -1.15232, 0)
 
 [node name="Skeleton3D" parent="VisualMesh/ControlRig" index="0"]
-bones/0/position = Vector3(0.0755615, 5.82368, 0.205741)
-bones/0/rotation = Quaternion(0.0285058, -0.0723977, 0.00411381, 0.99696)
-bones/1/rotation = Quaternion(0.0513864, -0.0265133, 0.054893, 0.996817)
-bones/2/rotation = Quaternion(0.0479957, -0.0101503, -3.86014e-05, 0.998796)
-bones/3/rotation = Quaternion(0.00194795, 0.00435976, 0.0150955, 0.999875)
-bones/4/rotation = Quaternion(-0.0520372, -0.0721113, -0.0702848, 0.993555)
-bones/5/rotation = Quaternion(-0.0107777, 0.188787, -0.00801741, 0.981926)
-bones/7/rotation = Quaternion(-0.65681, -0.404525, 0.417327, -0.480416)
-bones/8/rotation = Quaternion(0.52322, 0.0784238, 0.0490458, 0.847163)
-bones/9/rotation = Quaternion(-9.37965e-07, -4.39476e-08, 0.598764, 0.800925)
-bones/10/rotation = Quaternion(0.197398, 0.0797664, 0.0877518, 0.973124)
-bones/11/rotation = Quaternion(0.617377, -0.415344, 0.261386, 0.614828)
-bones/12/rotation = Quaternion(0.552182, 0.0824871, -0.0275072, 0.829177)
-bones/13/rotation = Quaternion(1.97821e-06, 1.67795e-06, -0.6289, 0.777487)
-bones/14/rotation = Quaternion(-0.0457307, 0.0287357, 0.0222021, 0.998294)
-bones/15/rotation = Quaternion(0.0502804, 0.285339, 0.954466, -0.0710523)
-bones/16/rotation = Quaternion(-0.394494, -1.55084e-06, -7.19499e-07, 0.918899)
-bones/17/rotation = Quaternion(0.656724, 0.0495672, -0.0810833, 0.748119)
-bones/17/scale = Vector3(1, 1, 1)
-bones/18/rotation = Quaternion(0.256058, -0.285408, 0.0646402, 0.921302)
-bones/20/rotation = Quaternion(-0.349631, 0.0552242, 0.919017, 0.173539)
-bones/21/rotation = Quaternion(-0.370266, 1.56884e-06, 5.95936e-07, 0.928926)
-bones/22/rotation = Quaternion(0.743297, -0.162109, 0.187418, 0.621373)
-bones/23/rotation = Quaternion(0.261358, 0.29407, -0.0623219, 0.917241)
+bones/0/position = Vector3(0.436835, 5.52062, 0.330593)
+bones/0/rotation = Quaternion(0.0470928, -0.370091, 0.000430635, 0.927801)
+bones/1/rotation = Quaternion(0.111347, -0.02427, -5.46458e-05, 0.993485)
+bones/2/rotation = Quaternion(0.0875056, -0.0400785, -0.000383501, 0.995357)
+bones/3/rotation = Quaternion(-0.0155701, -0.0399574, -0.0028235, 0.999076)
+bones/4/rotation = Quaternion(-0.0798564, 0.257471, -0.0350176, 0.962344)
+bones/5/rotation = Quaternion(-0.0166308, 0.157355, -0.0113071, 0.987337)
+bones/7/rotation = Quaternion(0.569613, 0.418815, -0.57167, 0.416328)
+bones/8/rotation = Quaternion(0.448815, -0.181674, -0.430081, 0.761965)
+bones/9/rotation = Quaternion(-9.41536e-07, -1.84824e-07, 0.442817, 0.896612)
+bones/10/rotation = Quaternion(0.120339, -0.123301, -0.0887039, 0.981044)
+bones/11/rotation = Quaternion(0.584793, -0.422287, 0.556687, 0.412058)
+bones/12/rotation = Quaternion(0.45428, 0.160836, -0.336583, 0.808995)
+bones/13/rotation = Quaternion(2.29218e-06, 1.19521e-06, -0.442187, 0.896923)
+bones/14/rotation = Quaternion(0.0619408, 0.137142, 0.148192, 0.977443)
+bones/15/rotation = Quaternion(-0.0790699, -0.330341, -0.912692, 0.22719)
+bones/16/rotation = Quaternion(-0.390069, -1.53786e-06, -7.12688e-07, 0.920786)
+bones/17/rotation = Quaternion(0.619732, 0.028947, -0.209903, 0.755669)
+bones/17/scale = Vector3(0.999987, 1, 0.999998)
+bones/18/rotation = Quaternion(0.186169, -0.32863, 0.071764, 0.923143)
+bones/20/rotation = Quaternion(-0.0121521, -0.0682054, 0.967256, 0.244165)
+bones/21/rotation = Quaternion(-0.00199781, 1.64694e-06, -3.51866e-08, 0.999998)
+bones/22/rotation = Quaternion(0.652796, -0.0451877, 0.263341, 0.708849)
+bones/23/rotation = Quaternion(0.237127, 0.332131, -0.0889479, 0.908597)
 
 [node name="BoneAttachment3D" parent="VisualMesh/ControlRig/Skeleton3D" index="1"]
-transform = Transform3D(0.308286, 0.163911, 0.937066, 0.892385, -0.391078, -0.225179, 0.329556, 0.905644, -0.266836, -3.67247, 6.47143, 4.25523)
+transform = Transform3D(-0.460537, -0.551531, 0.695499, 0.76093, -0.648748, -0.0105938, 0.457046, 0.524347, 0.718449, -5.87852, 6.23261, 0.791363)
 
 [node name="SwordPivot" parent="VisualMesh/ControlRig" index="1"]
-transform = Transform3D(0.507839, -0.24357, 0.826301, 0.861452, 0.143588, -0.487117, 2.36876e-08, 0.959195, 0.282743, -5.13793, 6.83412, 5.63263)
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 0.999999, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, -7.78994, 5.72911, -0.290199)
 
 [node name="BasicSword" parent="VisualMesh/ControlRig/SwordPivot" index="0"]
-transform = Transform3D(-6.55672e-08, 1.5, 5.6678e-16, -0.750001, -3.27835e-08, -2.81459, -1.29904, -5.67828e-08, 1.625, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(0.750001, 1.91546e-16, 2.81459, 5.23181e-16, 1.5, -1.13368e-15, -1.29904, 7.14706e-16, 1.625, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 
 [node name="Blade" parent="VisualMesh/ControlRig/SwordPivot/BasicSword" index="0"]
+transform = Transform3D(1, 1.67037e-25, 7.30142e-30, 0, -4.37114e-11, 1, 1.67037e-22, -0.001, -4.37114e-08, 0, 0, 0)
+
+[node name="GPUTrail3D" parent="VisualMesh/ControlRig/SwordPivot/BasicSword" index="1"]
 visible = false
+amount = 1
+lifetime = 1.0
+length = 1
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_kp0ng")
 anim_player = NodePath("../VisualMesh/AnimationPlayer")
 advance_expression_base_node = NodePath("..")
-active = true
 parameters/StateMachine/conditions/overhead = false
 parameters/StateMachine/conditions/sweep = false
 parameters/StateMachine/WalkSpace/blend_position = -0.000627756
+
+[node name="Sparks" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -1.103, -4.712)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Sparks"]
+cast_shadow = 0
+emitting = false
+amount = 5
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_8msvn")
+draw_pass_1 = SubResource("QuadMesh_c6vql")
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached" flags=18]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed" flags=18]

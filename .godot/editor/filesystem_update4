@@ -54,3 +54,5 @@ res://enemies/enemy_hit_particles.tscn
 res://enemies/enemy_hurtbox.gd
 res://enemies/enemy_anims/mt1_overhead.res
 res://enemies/enemy_melee_base.gd
+res://enemies/enemy_anims/mt2_overhead.res
+res://enemies/enemy_anims/mt2_sweep.res
