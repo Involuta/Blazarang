@@ -204,9 +204,9 @@ func triangle_shoot_arms():
 	right_arm_tween.tween_callback(right_arm.fire_laser)
 
 func flyingkick_rush():
-	# Travel time must be shorter than time hitbox is active in the anim
+	# Up vec prevents X from ending up under the ground after tweening
 	var kick_tween = get_tree().create_tween()
-	kick_tween.tween_property(self, "global_position", (-1.5+global_position.distance_to(target.global_position)) * -transform.basis.z, flyingkick_hit_frames/60.0).as_relative()
+	kick_tween.tween_property(self, "global_position", (-1.5+global_position.distance_to(target.global_position)) * -transform.basis.z + .01 * Vector3.UP, flyingkick_hit_frames/60.0).as_relative()
 
 func shoot_bullet():
 	var bullet_inst = bullet.instantiate()
