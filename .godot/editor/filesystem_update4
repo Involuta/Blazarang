@@ -52,3 +52,4 @@ res://rang/rang_particles_ricochet.tscn
 res://enemies/enemy_anims/x_triangle_flyingkick.res
 res://enemies/enemy_hit_particles.tscn
 res://enemies/enemy_hurtbox.gd
+res://enemies/enemy_anims/mt1_overhead.res
