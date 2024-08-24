@@ -30,6 +30,7 @@ func emit_hit_particles(hitter):
 	await inst.tree_entered
 	inst.global_position = hitter.global_position
 	inst.global_rotation.y = hitter.global_rotation.y + PI
+	inst.get_node("GPUParticles3D").emitting = true
 
 func death_effect():
 	for i in range(dp_count):

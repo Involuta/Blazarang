@@ -17,6 +17,7 @@ gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 20.0
 initial_velocity_max = 20.0
 scale_curve = SubResource("CurveTexture_2h7fp")
+color = Color(1, 1, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ggmjv"]
 shading_mode = 0
@@ -30,6 +31,7 @@ script = ExtResource("1_eu4ca")
 disappear_secs = 0.6
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
