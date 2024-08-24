@@ -36,6 +36,8 @@ func _ready():
 		behav_state = WAIT
 	if not find_child("AnimationTree", false, false):
 		anim_tree_exists = false
+	else:
+		anim_tree.active = true
 
 func _physics_process(delta):
 	if not is_on_floor():
