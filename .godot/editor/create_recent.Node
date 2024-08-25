@@ -1,3 +1,4 @@
+BoneAttachment3D
 Hitbox
 CollisionShape3D
 Node3D
@@ -10,7 +11,6 @@ Hurtbox
 WorldEnvironment
 RayCast3D
 StaticBody3D
-BoneAttachment3D
 AnimationPlayer
 Camera3D
 Camera2D

@@ -288,3 +288,13 @@ surface_material_override/5 = SubResource("StandardMaterial3D_toeh3")
 surface_material_override/6 = SubResource("StandardMaterial3D_ot1fy")
 surface_material_override/7 = SubResource("StandardMaterial3D_woqvd")
 surface_material_override/8 = SubResource("StandardMaterial3D_wmyen")
+
+[node name="LeftArm" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.590992, 0.163348, -0.789966, 0.399878, -0.909819, 0.111027, -0.70059, -0.381506, -0.603015, 3.5919, 17.8938, 2.29566)
+bone_name = "mixamorig_LeftArm"
+bone_idx = 8
+
+[node name="RightArm" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.588988, -0.163377, 0.791455, -0.402669, -0.908451, 0.112131, 0.700679, -0.384738, -0.600854, -3.5919, 17.882, 2.3281)
+bone_name = "mixamorig_RightArm"
+bone_idx = 12

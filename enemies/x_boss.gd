@@ -53,6 +53,8 @@ var body_mat := preload("res://textures/x_boss_body.tres")
 @onready var nav_agent := $NavigationAgent3D
 @onready var anim_tree := $AnimationTree
 @onready var x_meshes := $X_boss_meshes/Armature/Skeleton3D/Body_001
+@onready var x_mesh_left_arm := $X_boss_meshes/Armature/Skeleton3D/LeftArm
+@onready var x_mesh_right_arm := $X_boss_meshes/Armature/Skeleton3D/RightArm
 @onready var level := $/root/Level
 @onready var target := $/root/Level/Target
 @onready var left_arm := $/root/Level/XBossArena1/XLeftArm
@@ -189,7 +191,7 @@ func superman_rush():
 	velocity.y = -superman_down_speed
 
 func triangle_shoot_arms():
-	left_arm.rotation_degrees.y = rotation_degrees.y + 180 + triangle_arm_angle
+	left_arm.rotation_degrees = (rotation_degrees.y + 180 + triangle_arm_angle) * Vector3.UP
 	left_arm.visible = true
 	var left_arm_tween = get_tree().create_tween()
 	left_arm_tween.tween_callback(left_arm.stop_firing_laser)
@@ -197,7 +199,7 @@ func triangle_shoot_arms():
 	left_arm_tween.tween_property(left_arm, "rotation_degrees", Vector3.UP * -2 * triangle_arm_angle, .1).as_relative()
 	left_arm_tween.tween_callback(left_arm.fire_laser)
 	
-	right_arm.rotation_degrees.y = rotation_degrees.y - 180 - triangle_arm_angle
+	right_arm.rotation_degrees = (rotation_degrees.y - 180 - triangle_arm_angle) * Vector3.UP
 	right_arm.visible = true
 	var right_arm_tween = get_tree().create_tween()
 	right_arm_tween.tween_callback(right_arm.stop_firing_laser)
@@ -215,30 +217,36 @@ func recall_left_arm():
 		return
 	left_arm.stop_firing_laser()
 	var recall_tween = get_tree().create_tween()
-	recall_tween.tween_method(recall_left_arm_frame, 0.0, 1.0, .5)
-	recall_tween.tween_callback(hide_left_arm)
-	recall_tween.tween_callback(x_meshes.set_surface_override_material.bind(2, body_mat))
+	recall_tween.set_parallel()
+	recall_tween.tween_method(recall_left_arm_frame, 0.0, 1.0, .8).set_ease(Tween.EASE_OUT)
+	recall_tween.tween_callback(hide_left_arm).set_delay(.3)
+	recall_tween.tween_callback(x_meshes.set_surface_override_material.bind(2, body_mat)).set_delay(.3)
 
 func recall_left_arm_frame(lerp_val):
-	left_arm.global_position = left_arm.global_position.lerp(global_position + Vector3(.2, .2, 0), lerp_val)
+	left_arm.rotation = x_mesh_left_arm.rotation
+	left_arm.rotation_degrees.y += 180
+	left_arm.global_position = left_arm.global_position.lerp(x_mesh_left_arm.global_position, lerp_val)
 
 func hide_left_arm():
-	left_arm.global_position.y = 0
+	left_arm.visible = false
 
 func recall_right_arm():
 	if x_meshes.get_surface_override_material(5) == body_mat:
 		return
 	right_arm.stop_firing_laser()
 	var recall_tween = get_tree().create_tween()
-	recall_tween.tween_method(recall_right_arm_frame, 0.0, 1.0, .5)
-	recall_tween.tween_callback(hide_right_arm)
-	recall_tween.tween_callback(x_meshes.set_surface_override_material.bind(5, body_mat))
+	recall_tween.set_parallel()
+	recall_tween.tween_method(recall_right_arm_frame, 0.0, 1.0, .8).set_ease(Tween.EASE_OUT)
+	recall_tween.tween_callback(hide_right_arm).set_delay(.3)
+	recall_tween.tween_callback(x_meshes.set_surface_override_material.bind(5, body_mat)).set_delay(.3)
 
 func recall_right_arm_frame(lerp_val):
-	right_arm.global_position = right_arm.global_position.lerp(global_position + Vector3(-.2, .2, 0), lerp_val)
+	right_arm.rotation = x_mesh_right_arm.rotation
+	right_arm.rotation_degrees.y += 180
+	right_arm.global_position = right_arm.global_position.lerp(x_mesh_right_arm.global_position, lerp_val)
 
 func hide_right_arm():
-	right_arm.global_position.y = 0
+	right_arm.visible = false
 
 func shoot_bullet():
 	var bullet_inst = bullet.instantiate()

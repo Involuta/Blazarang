@@ -226,6 +226,8 @@ skeleton = NodePath("../..")
 [node name="Hurtbox" type="Area3D" parent="."]
 collision_mask = 11
 script = ExtResource("2_fvpfg")
+fast_recovery_rate = 50.0
+recovery_delay = 2.08165e-12
 opponent_hitboxes = ["EnemyHitbox"]
 
 [node name="HurtboxCollider" type="CollisionShape3D" parent="Hurtbox"]
