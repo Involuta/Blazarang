@@ -219,12 +219,12 @@ func recall_left_arm():
 	var recall_tween = get_tree().create_tween()
 	recall_tween.set_parallel()
 	recall_tween.tween_method(recall_left_arm_frame, 0.0, 1.0, .8).set_ease(Tween.EASE_OUT)
-	recall_tween.tween_callback(hide_left_arm).set_delay(.3)
-	recall_tween.tween_callback(x_meshes.set_surface_override_material.bind(2, body_mat)).set_delay(.3)
+	recall_tween.tween_callback(hide_left_arm).set_delay(.25)
+	recall_tween.tween_callback(x_meshes.set_surface_override_material.bind(2, body_mat)).set_delay(.25)
 
 func recall_left_arm_frame(lerp_val):
-	left_arm.rotation = x_mesh_left_arm.rotation
-	left_arm.rotation_degrees.y += 180
+	left_arm.rotation_degrees = left_arm.rotation_degrees.lerp((rotation_degrees.y - 180 - triangle_arm_angle) * Vector3.UP, lerp_val)
+	left_arm.rotation_degrees = (rotation_degrees.y + 180 + triangle_arm_angle) * Vector3.UP
 	left_arm.global_position = left_arm.global_position.lerp(x_mesh_left_arm.global_position, lerp_val)
 
 func hide_left_arm():
@@ -237,12 +237,12 @@ func recall_right_arm():
 	var recall_tween = get_tree().create_tween()
 	recall_tween.set_parallel()
 	recall_tween.tween_method(recall_right_arm_frame, 0.0, 1.0, .8).set_ease(Tween.EASE_OUT)
-	recall_tween.tween_callback(hide_right_arm).set_delay(.3)
-	recall_tween.tween_callback(x_meshes.set_surface_override_material.bind(5, body_mat)).set_delay(.3)
+	recall_tween.tween_callback(hide_right_arm).set_delay(.25)
+	recall_tween.tween_callback(x_meshes.set_surface_override_material.bind(5, body_mat)).set_delay(.25)
 
 func recall_right_arm_frame(lerp_val):
-	right_arm.rotation = x_mesh_right_arm.rotation
-	right_arm.rotation_degrees.y += 180
+	right_arm.rotation_degrees = right_arm.rotation_degrees.lerp((rotation_degrees.y + 180 + triangle_arm_angle) * Vector3.UP, lerp_val)
+	right_arm.rotation_degrees = (rotation_degrees.y - 180 - triangle_arm_angle) * Vector3.UP
 	right_arm.global_position = right_arm.global_position.lerp(x_mesh_right_arm.global_position, lerp_val)
 
 func hide_right_arm():
