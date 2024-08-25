@@ -49,8 +49,10 @@ var param_path_base := "parameters/StateMachine/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 var bullet := preload("res://enemies/enemy_mega_bullet.tscn")
-@onready var nav_agent = $NavigationAgent3D
-@onready var anim_tree = $AnimationTree
+var body_mat := preload("res://textures/x_boss_body.tres")
+@onready var nav_agent := $NavigationAgent3D
+@onready var anim_tree := $AnimationTree
+@onready var x_meshes := $X_boss_meshes/Armature/Skeleton3D/Body_001
 @onready var level := $/root/Level
 @onready var target := $/root/Level/Target
 @onready var left_arm := $/root/Level/XBossArena1/XLeftArm
@@ -206,7 +208,37 @@ func triangle_shoot_arms():
 func flyingkick_rush():
 	# Up vec prevents X from ending up under the ground after tweening
 	var kick_tween = get_tree().create_tween()
-	kick_tween.tween_property(self, "global_position", (-1.5+global_position.distance_to(target.global_position)) * -transform.basis.z + .01 * Vector3.UP, flyingkick_hit_frames/60.0).as_relative()
+	kick_tween.tween_property(self, "global_position", (-1.5+global_position.distance_to(target.global_position)) * -transform.basis.z + .01 * Vector3.UP, flyingkick_hit_frames/60.0).set_trans(Tween.TRANS_EXPO).as_relative()
+
+func recall_left_arm():
+	if x_meshes.get_surface_override_material(2) == body_mat:
+		return
+	left_arm.stop_firing_laser()
+	var recall_tween = get_tree().create_tween()
+	recall_tween.tween_method(recall_left_arm_frame, 0.0, 1.0, .5).set_trans(Tween.TRANS_SINE)
+	recall_tween.tween_callback(hide_left_arm)
+	recall_tween.tween_callback(x_meshes.set_surface_override_material.bind(2, body_mat))
+
+func recall_left_arm_frame(lerp_val):
+	left_arm.global_position = left_arm.global_position.lerp(global_position + Vector3(-.2, .2, 0), lerp_val)
+
+func hide_left_arm():
+	left_arm.global_position.y = 0
+
+func recall_right_arm():
+	if x_meshes.get_surface_override_material(5) == body_mat:
+		return
+	right_arm.stop_firing_laser()
+	var recall_tween = get_tree().create_tween()
+	recall_tween.tween_method(recall_left_arm_frame, 0.0, 1.0, .5).set_trans(Tween.TRANS_SINE)
+	recall_tween.tween_callback(hide_right_arm)
+	recall_tween.tween_callback(x_meshes.set_surface_override_material.bind(5, body_mat))
+
+func recall_right_arm_frame(lerp_val):
+	right_arm.global_position = right_arm.global_position.lerp(global_position + Vector3(.2, .2, 0), lerp_val)
+
+func hide_right_arm():
+	right_arm.global_position.y = 0
 
 func shoot_bullet():
 	var bullet_inst = bullet.instantiate()
