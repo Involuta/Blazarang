@@ -1,10 +1,9 @@
-[gd_scene load_steps=45 format=3 uid="uid://dwniaym2g1off"]
+[gd_scene load_steps=46 format=3 uid="uid://dwniaym2g1off"]
 
 [ext_resource type="Script" path="res://enemies/x_boss.gd" id="1_u3wem"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_5lf37"]
 [ext_resource type="Script" path="res://hitbox.gd" id="3_rpkwr"]
 [ext_resource type="PackedScene" uid="uid://b3uvg3j4qge8o" path="res://glb_inherited_scenes/x_boss_meshes.tscn" id="4_dnuas"]
-[ext_resource type="Material" uid="uid://cpt3jh8fp2mx8" path="res://textures/x_boss_body.tres" id="5_csxax"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ub1sp"]
 height = 2.75
@@ -19,6 +18,14 @@ height = 4.0
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_f0kqn"]
 radius = 0.25
 height = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y6nrg"]
+transparency = 4
+albedo_color = Color(1, 1, 1, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cpdpd"]
+transparency = 4
+albedo_color = Color(1, 1, 1, 0)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_scvwl"]
 animation = &"SlipnSlice"
@@ -249,34 +256,32 @@ cast_shadow = 0
 mesh = SubResource("CapsuleMesh_f0kqn")
 
 [node name="X_boss_meshes" parent="." instance=ExtResource("4_dnuas")]
-transform = Transform3D(-0.1, 3.48787e-17, -8.74228e-09, 3.48787e-17, 0.1, -3.48787e-17, 8.74228e-09, -3.48787e-17, -0.1, 2.08165e-12, -1.023, 2.08165e-12)
+transform = Transform3D(-0.1, 3.48787e-17, -8.74228e-09, 3.48787e-17, 0.1, -3.48787e-17, 8.74228e-09, -3.48787e-17, -0.1, 2.08165e-12, -1.3, 2.08165e-12)
 
 [node name="Skeleton3D" parent="X_boss_meshes/Armature" index="0"]
-bones/0/position = Vector3(-0.00837887, 13.3056, 0.29893)
-bones/0/rotation = Quaternion(0.173655, 0.00832038, 0.000465143, 0.984771)
-bones/1/position = Vector3(5.9394e-05, 1.53061, -0.0790779)
-bones/1/rotation = Quaternion(-0.025926, -9.54616e-10, 8.27222e-10, 0.999664)
-bones/4/rotation = Quaternion(-0.14551, -0.00854103, 0.0021779, 0.989318)
-bones/8/rotation = Quaternion(0.537864, 0.214225, 0.100949, 0.809085)
-bones/9/rotation = Quaternion(4.29066e-08, -2.34846e-07, 0.00157106, 0.999999)
-bones/10/rotation = Quaternion(-0.171516, 0.496135, 0.0899229, 0.846372)
-bones/12/rotation = Quaternion(0.547976, -0.181157, -0.107032, 0.809598)
-bones/13/rotation = Quaternion(-2.91923e-08, 1.66818e-06, -0.00162068, 0.999999)
-bones/14/rotation = Quaternion(-0.136697, -0.511652, -0.0433802, 0.847139)
-bones/15/rotation = Quaternion(-0.0229551, -0.188338, -0.980134, 0.0577829)
-bones/15/scale = Vector3(0.999999, 1, 1)
-bones/16/rotation = Quaternion(-0.38615, -4.00194e-06, -1.03323e-06, 0.922436)
-bones/17/rotation = Quaternion(0.410942, 0.0248717, 0.0186804, 0.911131)
-bones/18/rotation = Quaternion(0.276966, 0.230053, -0.0684869, 0.930416)
-bones/20/rotation = Quaternion(-0.050126, 0.0300426, 0.997155, 0.0476091)
-bones/20/scale = Vector3(0.999999, 1, 1)
-bones/21/rotation = Quaternion(-0.0392914, 9.46077e-06, 1.13121e-06, 0.999228)
-bones/22/rotation = Quaternion(0.251154, -0.0255807, -0.0168804, 0.967462)
-bones/23/rotation = Quaternion(0.284425, -0.231608, 0.0685529, 0.927772)
+bones/0/position = Vector3(-1.08245e-07, 10.0678, -0.0202449)
+bones/0/rotation = Quaternion(-0.0725, 2.943e-11, -4.20644e-11, 0.997368)
+bones/4/rotation = Quaternion(0.0983333, -3.72901e-18, 6.7814e-17, 0.995154)
+bones/8/rotation = Quaternion(0.634335, -0.12783, 0.589284, 0.483759)
+bones/9/rotation = Quaternion(4.57105e-08, -2.24678e-07, 0.00158254, 0.999999)
+bones/10/rotation = Quaternion(0.133995, 0.628936, -0.0798496, 0.761649)
+bones/12/rotation = Quaternion(0.635029, 0.131245, -0.585955, 0.485973)
+bones/13/rotation = Quaternion(-3.50065e-08, 1.66976e-06, -0.00163395, 0.999999)
+bones/14/rotation = Quaternion(0.122923, -0.627201, 0.113613, 0.760659)
+bones/15/rotation = Quaternion(0.0569416, -0.262451, -0.953269, 0.1384)
+bones/15/scale = Vector3(1, 1, 1)
+bones/16/rotation = Quaternion(-0.729074, -3.21826e-06, -2.57201e-06, 0.684435)
+bones/17/rotation = Quaternion(0.592963, 0.0185168, -0.0761834, 0.801404)
+bones/18/rotation = Quaternion(0.276876, 0.230055, -0.0684817, 0.930443)
+bones/20/rotation = Quaternion(0.0160123, 0.456069, 0.881055, 0.124448)
+bones/20/scale = Vector3(1, 1, 1)
+bones/21/rotation = Quaternion(-0.569016, 7.37772e-06, 6.02974e-06, 0.822326)
+bones/22/rotation = Quaternion(0.402695, -0.00684766, 0.0522282, 0.913817)
+bones/23/rotation = Quaternion(0.280709, -0.231214, 0.0698752, 0.928903)
 
 [node name="Body_001" parent="X_boss_meshes/Armature/Skeleton3D" index="0"]
-surface_material_override/2 = ExtResource("5_csxax")
-surface_material_override/5 = ExtResource("5_csxax")
+surface_material_override/2 = SubResource("StandardMaterial3D_y6nrg")
+surface_material_override/5 = SubResource("StandardMaterial3D_cpdpd")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_uk78c")

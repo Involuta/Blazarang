@@ -215,12 +215,12 @@ func recall_left_arm():
 		return
 	left_arm.stop_firing_laser()
 	var recall_tween = get_tree().create_tween()
-	recall_tween.tween_method(recall_left_arm_frame, 0.0, 1.0, .5).set_trans(Tween.TRANS_SINE)
+	recall_tween.tween_method(recall_left_arm_frame, 0.0, 1.0, .5)
 	recall_tween.tween_callback(hide_left_arm)
 	recall_tween.tween_callback(x_meshes.set_surface_override_material.bind(2, body_mat))
 
 func recall_left_arm_frame(lerp_val):
-	left_arm.global_position = left_arm.global_position.lerp(global_position + Vector3(-.2, .2, 0), lerp_val)
+	left_arm.global_position = left_arm.global_position.lerp(global_position + Vector3(.2, .2, 0), lerp_val)
 
 func hide_left_arm():
 	left_arm.global_position.y = 0
@@ -230,12 +230,12 @@ func recall_right_arm():
 		return
 	right_arm.stop_firing_laser()
 	var recall_tween = get_tree().create_tween()
-	recall_tween.tween_method(recall_left_arm_frame, 0.0, 1.0, .5).set_trans(Tween.TRANS_SINE)
+	recall_tween.tween_method(recall_right_arm_frame, 0.0, 1.0, .5)
 	recall_tween.tween_callback(hide_right_arm)
 	recall_tween.tween_callback(x_meshes.set_surface_override_material.bind(5, body_mat))
 
 func recall_right_arm_frame(lerp_val):
-	right_arm.global_position = right_arm.global_position.lerp(global_position + Vector3(.2, .2, 0), lerp_val)
+	right_arm.global_position = right_arm.global_position.lerp(global_position + Vector3(-.2, .2, 0), lerp_val)
 
 func hide_right_arm():
 	right_arm.global_position.y = 0
