@@ -31,10 +31,10 @@ script = ExtResource("1_4lyfx")
 [node name="UIRoot" parent="." instance=ExtResource("2_wjf4o")]
 
 [node name="cotuCB" parent="." instance=ExtResource("3_ohw5y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 30, 2.08165e-12)
 
 [node name="Target" parent="." instance=ExtResource("4_xqr0j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vgqir")
