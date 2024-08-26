@@ -52,6 +52,7 @@ var bullet := preload("res://enemies/enemy_mega_bullet.tscn")
 var body_mat := preload("res://textures/x_boss_body.tres")
 @onready var nav_agent := $NavigationAgent3D
 @onready var anim_tree := $AnimationTree
+@onready var anim_player := $X_boss_meshes/AnimationPlayer
 @onready var x_meshes := $X_boss_meshes/Armature/Skeleton3D/Body_001
 @onready var x_mesh_left_arm := $X_boss_meshes/Armature/Skeleton3D/LeftArm
 @onready var x_mesh_right_arm := $X_boss_meshes/Armature/Skeleton3D/RightArm
@@ -75,7 +76,9 @@ func _physics_process(delta):
 			FOLLOW:
 				print("FOLLOW")
 			SHORT_DIST_ATTACK:
-				print("ATTACK")
+				print("SHORT_DIST_ATTACK")
+			LONG_DIST_ATTACK:
+				print("LONG_DIST_ATTACK")
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	match(behav_state):
@@ -132,20 +135,23 @@ func follow():
 	else:
 		nav_agent.target_desired_distance = .1
 	
-	long_dist_wait_remaining -= get_physics_process_delta_time()
+	# This code block ensures start_long_dist_attack is only called once
 	if long_dist_wait_remaining <= 0:
-		start_long_dist_attack()
+		return
+	else:
+		long_dist_wait_remaining -= get_physics_process_delta_time()
+		if long_dist_wait_remaining <= 0:
+			start_long_dist_attack()
 
 func start_short_dist_attack():
 	# Without this await, the animation player would call end_attack at the end of the previous animation on the exact same frame as when the AnimationPlayer.play func is called below. Since an animation was currently in progress, the func call would do nothing, leaving the enemy in ATTACK mode but with no animation playing to free it from ATTACK mode, causing it to stand still indefinitely
 	await get_tree().create_timer(get_process_delta_time()).timeout
-	nav_agent.velocity.x = 0
-	nav_agent.velocity.z = 0
-	velocity.x = 0
-	velocity.z = 0
+	anim_tree.set(choose_attack(short_dist_attack_chances), true)
+	if x_meshes.get_surface_override_material(2) != body_mat:
+		await get_tree().create_timer(1.15).timeout
+	stop_mvmt()
 	behav_state = SHORT_DIST_ATTACK
 	aiming_at_target = true
-	anim_tree.set(choose_attack(short_dist_attack_chances), true)
 
 func end_attack():
 	for attack in short_dist_attack_chances.keys():
@@ -181,7 +187,10 @@ func start_slipnslice():
 	velocity = slipnslice_speed * -transform.basis.z
 
 func stop_mvmt():
-	velocity = Vector3.ZERO
+	nav_agent.velocity.x = 0
+	nav_agent.velocity.z = 0
+	velocity.x = 0
+	velocity.z = 0
 
 func start_superman():
 	velocity.y = 6
@@ -210,7 +219,7 @@ func triangle_shoot_arms():
 func flyingkick_rush():
 	# Up vec prevents X from ending up under the ground after tweening
 	var kick_tween = get_tree().create_tween()
-	kick_tween.tween_property(self, "global_position", (-1.5+global_position.distance_to(target.global_position)) * -transform.basis.z + .01 * Vector3.UP, flyingkick_hit_frames/60.0).set_trans(Tween.TRANS_EXPO).as_relative()
+	kick_tween.tween_property(self, "global_position", (-1.5+global_position.distance_to(target.global_position)) * -transform.basis.z + .03 * Vector3.UP, flyingkick_hit_frames/60.0).set_trans(Tween.TRANS_EXPO).as_relative()
 
 func recall_left_arm():
 	if x_meshes.get_surface_override_material(2) == body_mat:
@@ -224,7 +233,7 @@ func recall_left_arm():
 
 func recall_left_arm_frame(lerp_val):
 	left_arm.rotation_degrees = left_arm.rotation_degrees.lerp((rotation_degrees.y - 180 - triangle_arm_angle) * Vector3.UP, lerp_val)
-	left_arm.rotation_degrees = (rotation_degrees.y + 180 + triangle_arm_angle) * Vector3.UP
+	left_arm.rotation_degrees = (rotation_degrees.y + 180 + 112) * Vector3.UP
 	left_arm.global_position = left_arm.global_position.lerp(x_mesh_left_arm.global_position, lerp_val)
 
 func hide_left_arm():
@@ -267,14 +276,13 @@ func shoot_fast_bullet():
 func start_long_dist_attack():
 	# This await might not be necessary, but it's here just in case
 	await get_tree().create_timer(get_process_delta_time()).timeout
-	nav_agent.velocity.x = 0
-	nav_agent.velocity.z = 0
-	velocity.x = 0
-	velocity.z = 0
+	anim_tree.set(choose_attack(short_dist_attack_chances), true)
+	if x_meshes.get_surface_override_material(2) != body_mat:
+		await get_tree().create_timer(1.15).timeout
+	stop_mvmt()
 	behav_state = LONG_DIST_ATTACK
 	long_dist_wait_remaining = max_long_dist_wait
 	aiming_at_target = true
-	anim_tree.set(choose_attack(short_dist_attack_chances), true)
 
 func can_see_target():
 	var space_state := get_world_3d().direct_space_state

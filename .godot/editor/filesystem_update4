@@ -33,3 +33,9 @@ res://hurtbox.gd
 res://enemies/enemy_anims/x_idle.res
 res://enemies/enemy_anims/x_run.res
 res://enemies/enemy_anims/x_triangle_flyingkick.res
+res://enemies/enemy_anims/x_recall_left_arm.res
+res://textures/white_border_black_solid_square.tres
+res://textures/small_solid_black.tres
+res://textures/small_solid_white.tres
+res://levels/hub_section_nodes/hub_room.gd
+res://levels/hub_section_nodes/hub_room1.tscn

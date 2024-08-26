@@ -11,7 +11,7 @@ var level_list := {
 	"res://textures/8164.webp" : "res://levels/x_boss_level1.tscn"
 }
 
-var level_list_pos := 0
+var level_list_pos := 1
 
 var selected_level := "res://levels/gauntlet_level1.tscn"
 
