@@ -143,12 +143,18 @@ func follow():
 		if long_dist_wait_remaining <= 0:
 			start_long_dist_attack()
 
+func left_arm_deployed():
+	return x_meshes.get_surface_override_material(2) != body_mat
+
+func right_arm_deployed():
+	return x_meshes.get_surface_override_material(5) != body_mat
+
 func start_short_dist_attack():
 	# Without this await, the animation player would call end_attack at the end of the previous animation on the exact same frame as when the AnimationPlayer.play func is called below. Since an animation was currently in progress, the func call would do nothing, leaving the enemy in ATTACK mode but with no animation playing to free it from ATTACK mode, causing it to stand still indefinitely
 	await get_tree().create_timer(get_process_delta_time()).timeout
 	anim_tree.set(choose_attack(short_dist_attack_chances), true)
-	if x_meshes.get_surface_override_material(2) != body_mat:
-		await get_tree().create_timer(1.15).timeout
+	if left_arm_deployed():
+		await get_tree().create_timer(.5).timeout
 	stop_mvmt()
 	behav_state = SHORT_DIST_ATTACK
 	aiming_at_target = true
@@ -182,8 +188,10 @@ func stop_aiming_at_target():
 
 func face_target():
 	look_at(target.global_position)
+	rotation.x = 0
+	rotation.z = 0
 
-func start_slipnslice():
+func slipnslice_rush():
 	velocity = slipnslice_speed * -transform.basis.z
 
 func stop_mvmt():
@@ -219,10 +227,10 @@ func triangle_shoot_arms():
 func flyingkick_rush():
 	# Up vec prevents X from ending up under the ground after tweening
 	var kick_tween = get_tree().create_tween()
-	kick_tween.tween_property(self, "global_position", (-1.5+global_position.distance_to(target.global_position)) * -transform.basis.z + .03 * Vector3.UP, flyingkick_hit_frames/60.0).set_trans(Tween.TRANS_EXPO).as_relative()
+	kick_tween.tween_property(self, "global_position", (-1.5+global_position.distance_to(target.global_position)) * -transform.basis.z + .1 * Vector3.UP, flyingkick_hit_frames/60.0).set_trans(Tween.TRANS_EXPO).as_relative()
 
 func recall_left_arm():
-	if x_meshes.get_surface_override_material(2) == body_mat:
+	if not left_arm_deployed():
 		return
 	left_arm.stop_firing_laser()
 	var recall_tween = get_tree().create_tween()
@@ -240,7 +248,7 @@ func hide_left_arm():
 	left_arm.visible = false
 
 func recall_right_arm():
-	if x_meshes.get_surface_override_material(5) == body_mat:
+	if right_arm_deployed():
 		return
 	right_arm.stop_firing_laser()
 	var recall_tween = get_tree().create_tween()
@@ -277,7 +285,7 @@ func start_long_dist_attack():
 	# This await might not be necessary, but it's here just in case
 	await get_tree().create_timer(get_process_delta_time()).timeout
 	anim_tree.set(choose_attack(short_dist_attack_chances), true)
-	if x_meshes.get_surface_override_material(2) != body_mat:
+	if left_arm_deployed():
 		await get_tree().create_timer(1.15).timeout
 	stop_mvmt()
 	behav_state = LONG_DIST_ATTACK
