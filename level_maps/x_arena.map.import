@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://baev5b5fml11n"
+path="res://.godot/imported/x_arena.map-5b22a238f82298cdc2f90e41cb7b706d.tres"
+
+[deps]
+
+source_file="res://level_maps/x_arena.map"
+dest_files=["res://.godot/imported/x_arena.map-5b22a238f82298cdc2f90e41cb7b706d.tres"]
+
+[params]
+

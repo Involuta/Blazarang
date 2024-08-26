@@ -1,3 +1,4 @@
+FuncGodotMap
 BoneAttachment3D
 Hitbox
 CollisionShape3D
@@ -22,7 +23,6 @@ RichTextLabel
 SubViewportContainer
 OmniLight3D
 RigidBody3D
-FuncGodotMap
 NavigationRegion3D
 AudioStreamPlayer3D
 AudioStreamPlayer

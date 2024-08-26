@@ -39,3 +39,6 @@ res://textures/small_solid_black.tres
 res://textures/small_solid_white.tres
 res://levels/hub_section_nodes/hub_room.gd
 res://levels/hub_section_nodes/hub_room1.tscn
+res://addons/func_godot/func_godot_default_map_settings.tres
+res://textures/x_grid1.tres
+res://levels/x_boss_level1.tscn
