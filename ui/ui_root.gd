@@ -27,6 +27,12 @@ func _ready():
 	
 	Globals.score_updated.connect(on_score_updated)
 
+func awaken():
+	$BlackScreenAnimations.play("awaken")
+
+func hide_black_screen():
+	$BlackScreen.modulate = Color(0,0,0,0)
+
 func _physics_process(_delta):
 	cotu_health_bar.max_value = cotu_hurtbox.max_health
 	cotu_health_bar.value = cotu_hurtbox.health
@@ -36,6 +42,12 @@ func _physics_process(_delta):
 	destab_shader.set_shader_parameter("opacity", destab_shader_opacity)
 	glitch_shader.set_shader_parameter("shake_power", glitch_shader_shake_power)
 	glitch_shader.set_shader_parameter("shake_color_rate", glitch_shader_shake_color_rate)
+	
+	if cotu_hurtbox.parent.global_position.y < 0:
+		$BlackScreenAnimations.play("death_fall")
+
+func return_to_hub():
+	get_tree().change_scene_to_file("res://levels/hub.tscn")
 
 func destab_anim():
 	destabilized = true

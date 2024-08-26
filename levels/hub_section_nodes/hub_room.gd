@@ -13,8 +13,6 @@ var level_list := {
 
 var level_list_pos := 1
 
-var selected_level := "res://levels/gauntlet_level1.tscn"
-
 func _ready():
 	middle_level_panel.position = Vector3(11.5, 3.5, -3)
 	middle_level_panel.scale = .3 * Vector3.ONE

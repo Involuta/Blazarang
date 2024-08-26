@@ -43,3 +43,9 @@ res://addons/func_godot/func_godot_default_map_settings.tres
 res://textures/x_grid1.tres
 res://levels/x_boss_level1.tscn
 res://cotu/CotuControl.gd
+res://ui/ui_root.tscn
+res://ui/ui_root.gd
+res://levels/hub.tscn
+res://levels/hub_level.gd
+res://levels/gauntlet_level1.gd
+res://levels/x_boss_level1.gd

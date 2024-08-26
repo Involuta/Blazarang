@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://kl1hpr0grn1v"]
+[gd_scene load_steps=23 format=3 uid="uid://kl1hpr0grn1v"]
 
 [ext_resource type="PackedScene" uid="uid://daj44qqb6dior" path="res://ui/health_bar.tscn" id="1_k5nv4"]
 [ext_resource type="Script" path="res://ui/ui_root.gd" id="1_s33yg"]
@@ -228,6 +228,67 @@ _data = {
 "small_update_score": SubResource("Animation_i2cse")
 }
 
+[sub_resource type="Animation" id="Animation_vb1ii"]
+resource_name = "death_fall"
+length = 3.0
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlackScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"return_to_hub"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_bl4yg"]
+resource_name = "awaken"
+length = 3.0
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlackScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ps3l"]
+_data = {
+"awaken": SubResource("Animation_bl4yg"),
+"death_fall": SubResource("Animation_vb1ii")
+}
+
+[sub_resource type="Gradient" id="Gradient_u4kip"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_03c2h"]
+gradient = SubResource("Gradient_u4kip")
+
 [node name="UIRoot" type="Control"]
 top_level = true
 layout_mode = 3
@@ -237,7 +298,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_s33yg")
-glitch_shader_shake_color_rate = 0.0299999
+glitch_shader_shake_power = 0.005
+glitch_shader_shake_color_rate = 2.08165e-12
 
 [node name="CotuHealthBar" parent="." instance=ExtResource("1_k5nv4")]
 modulate = Color(1, 0, 0, 1)
@@ -298,7 +360,6 @@ libraries = {
 }
 
 [node name="ScoreNumDisplay" type="Label" parent="."]
-modulate = Color(0, 1, 1, 1)
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -309,7 +370,6 @@ offset_left = -410.0
 offset_top = -180.0
 grow_horizontal = 0
 grow_vertical = 0
-scale = Vector2(1.4, 1.4)
 pivot_offset = Vector2(205, 70)
 text = "0"
 label_settings = SubResource("LabelSettings_apqk7")
@@ -320,3 +380,17 @@ vertical_alignment = 1
 libraries = {
 "": SubResource("AnimationLibrary_otxfp")
 }
+
+[node name="BlackScreenAnimations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0ps3l")
+}
+
+[node name="BlackScreen" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_03c2h")

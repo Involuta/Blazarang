@@ -1,8 +1,9 @@
+AnimationPlayer
+CollisionShape3D
+Hitbox
 GPUParticles3D
 BoneAttachment3D
 FuncGodotMap
-Hitbox
-CollisionShape3D
 Node3D
 Sprite3D
 GPUParticles2D
@@ -12,7 +13,6 @@ Hurtbox
 WorldEnvironment
 RayCast3D
 StaticBody3D
-AnimationPlayer
 Camera3D
 Camera2D
 Control
