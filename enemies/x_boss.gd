@@ -5,8 +5,7 @@ extends CharacterBody3D
 enum {
 	WAIT,
 	FOLLOW,
-	SHORT_DIST_ATTACK,
-	LONG_DIST_ATTACK,
+	ATTACK,
 }
 var behav_state := FOLLOW
 var long_dist_wait_remaining := 5.0
@@ -75,10 +74,8 @@ func _physics_process(delta):
 				print("WAIT")
 			FOLLOW:
 				print("FOLLOW")
-			SHORT_DIST_ATTACK:
-				print("SHORT_DIST_ATTACK")
-			LONG_DIST_ATTACK:
-				print("LONG_DIST_ATTACK")
+			ATTACK:
+				print("ATTACK")
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	match(behav_state):
@@ -86,11 +83,8 @@ func _physics_process(delta):
 			wait()
 		FOLLOW:
 			follow()
-		SHORT_DIST_ATTACK:
-			short_dist_attack_frame()
-		LONG_DIST_ATTACK:
-			long_dist_attack_frame()
-			
+		ATTACK:
+			attack_frame()
 	if global_position.y < -100:
 		queue_free()
 
@@ -105,8 +99,8 @@ func wait():
 		behav_state = FOLLOW
 
 func _on_navigation_agent_3d_target_reached():
-	if behav_state != SHORT_DIST_ATTACK and behav_state != LONG_DIST_ATTACK:
-		start_short_dist_attack()
+	if behav_state != ATTACK:
+		queue_attack()
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	if behav_state == FOLLOW:
@@ -141,7 +135,7 @@ func follow():
 	else:
 		long_dist_wait_remaining -= get_physics_process_delta_time()
 		if long_dist_wait_remaining <= 0:
-			start_long_dist_attack()
+			queue_attack()
 
 func left_arm_deployed():
 	return x_meshes.get_surface_override_material(2) != body_mat
@@ -149,14 +143,15 @@ func left_arm_deployed():
 func right_arm_deployed():
 	return x_meshes.get_surface_override_material(5) != body_mat
 
-func start_short_dist_attack():
+func queue_attack():
+	long_dist_wait_remaining = max_long_dist_wait
+	anim_tree.set(choose_attack(short_dist_attack_chances), true)
+
+func start_attack():
 	# Without this await, the animation player would call end_attack at the end of the previous animation on the exact same frame as when the AnimationPlayer.play func is called below. Since an animation was currently in progress, the func call would do nothing, leaving the enemy in ATTACK mode but with no animation playing to free it from ATTACK mode, causing it to stand still indefinitely
 	await get_tree().create_timer(get_process_delta_time()).timeout
-	anim_tree.set(choose_attack(short_dist_attack_chances), true)
-	if left_arm_deployed():
-		await get_tree().create_timer(.5).timeout
 	stop_mvmt()
-	behav_state = SHORT_DIST_ATTACK
+	behav_state = ATTACK
 	aiming_at_target = true
 
 func end_attack():
@@ -175,11 +170,7 @@ func choose_attack(attack_chances) -> String:
 			return param_path_base + attack
 	return param_path_base + attack_chances.keys()[0]
 
-func short_dist_attack_frame():
-	if aiming_at_target:
-		lerp_look_at_target(attack_turn_speed)
-
-func long_dist_attack_frame():
+func attack_frame():
 	if aiming_at_target:
 		lerp_look_at_target(attack_turn_speed)
 	
@@ -234,18 +225,18 @@ func recall_left_arm():
 		return
 	left_arm.stop_firing_laser()
 	var recall_tween = get_tree().create_tween()
-	recall_tween.set_parallel()
-	recall_tween.tween_method(recall_left_arm_frame, 0.0, 1.0, .8).set_ease(Tween.EASE_OUT)
-	recall_tween.tween_callback(hide_left_arm).set_delay(.25)
-	recall_tween.tween_callback(x_meshes.set_surface_override_material.bind(2, body_mat)).set_delay(.25)
+	recall_tween.tween_method(recall_left_arm_frame, 0.0, 1.0, .65).set_ease(Tween.EASE_OUT)
 
 func recall_left_arm_frame(lerp_val):
 	left_arm.rotation_degrees = left_arm.rotation_degrees.lerp((rotation_degrees.y - 180 - triangle_arm_angle) * Vector3.UP, lerp_val)
 	left_arm.rotation_degrees = (rotation_degrees.y + 180 + 112) * Vector3.UP
 	left_arm.global_position = left_arm.global_position.lerp(x_mesh_left_arm.global_position, lerp_val)
 
-func hide_left_arm():
+func hide_floating_left_arm():
 	left_arm.visible = false
+
+func restore_rig_left_arm():
+	x_meshes.set_surface_override_material(2, body_mat)
 
 func recall_right_arm():
 	if right_arm_deployed():
@@ -280,17 +271,6 @@ func shoot_fast_bullet():
 	bullet_inst.global_position = global_position + Vector3.UP + Vector3.FORWARD
 	bullet_inst.look_at(target.global_position)
 	bullet_inst.velocity = -fast_bullet_speed * bullet_inst.get_global_transform().basis.z
-
-func start_long_dist_attack():
-	# This await might not be necessary, but it's here just in case
-	await get_tree().create_timer(get_process_delta_time()).timeout
-	anim_tree.set(choose_attack(short_dist_attack_chances), true)
-	if left_arm_deployed():
-		await get_tree().create_timer(1.15).timeout
-	stop_mvmt()
-	behav_state = LONG_DIST_ATTACK
-	long_dist_wait_remaining = max_long_dist_wait
-	aiming_at_target = true
 
 func can_see_target():
 	var space_state := get_world_3d().direct_space_state

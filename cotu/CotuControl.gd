@@ -139,7 +139,7 @@ func _physics_process(delta):
 		camera_twist_input = Input.get_axis("LookRight", "LookLeft") * joystick_camera_sensitivity
 		camera_pitch_input = Input.get_axis("LookUp", "LookDown") * joystick_camera_sensitivity
 	if locked_on:
-		camera_twist_pivot.look_at(lock_on_target.global_position)
+		camera_twist_pivot.look_at(lock_on_target.global_position + 2*Vector3.DOWN)
 	else:
 		camera_twist_pivot.rotate_y(camera_twist_input)
 	# While locked on, you can look up and down, but not left and right
