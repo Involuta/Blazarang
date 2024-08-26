@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b3uvg3j4qge8o"]
+[gd_scene load_steps=28 format=3 uid="uid://b3uvg3j4qge8o"]
 
 [ext_resource type="PackedScene" uid="uid://rp0n2dfx0chj" path="res://glb_imports/8164_meshes.glb" id="1_mluec"]
 
@@ -254,32 +254,55 @@ next_pass = SubResource("ShaderMaterial_keq6n")
 albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
 roughness = 0.0
 
+[sub_resource type="Curve" id="Curve_yh0sc"]
+_data = [Vector2(2.08165e-12, 1), 0.0, 0.0, 0, 0, Vector2(1, 2.08165e-12), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ydrjc"]
+curve = SubResource("Curve_yh0sc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vtshv"]
+direction = Vector3(2.08165e-12, -1, 2.08165e-12)
+spread = 10.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 40.0
+initial_velocity_max = 40.0
+scale_curve = SubResource("CurveTexture_ydrjc")
+color = Color(1, 0.270588, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_on8av"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_eqjva"]
+material = SubResource("StandardMaterial3D_on8av")
+size = Vector2(0.1, 0.1)
+
 [node name="X_boss_meshes" instance=ExtResource("1_mluec")]
-transform = Transform3D(-0.1, 3.48787e-17, -8.74228e-09, 3.48787e-17, 0.1, -3.48787e-17, 8.74228e-09, -3.48787e-17, -0.1, 2.08165e-12, -1.023, 2.08165e-12)
+transform = Transform3D(-0.1, 3.48787e-17, -8.74228e-09, 3.48787e-17, 0.1, -3.48787e-17, 8.74228e-09, -3.48787e-17, -0.1, 2.08165e-12, -1.426, 2.08165e-12)
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/position = Vector3(6.48096e-08, 11.0819, -0.214847)
-bones/0/rotation = Quaternion(0.21644, 9.12654e-12, -4.11755e-11, 0.976296)
-bones/1/rotation = Quaternion(0.0612991, 2.58694e-12, 4.20951e-11, 0.998119)
-bones/2/rotation = Quaternion(0.0871557, 1.50712e-18, -1.83863e-17, 0.996195)
-bones/3/rotation = Quaternion(0.079198, 1.50557e-18, -1.83674e-17, 0.996857)
-bones/4/rotation = Quaternion(0.0691391, -1.02747e-18, -4.51464e-18, 0.997607)
-bones/8/rotation = Quaternion(0.577536, -0.042512, 0.0292635, 0.814732)
-bones/9/rotation = Quaternion(-8.41664e-08, -2.1278e-07, 0.471522, 0.881854)
-bones/10/rotation = Quaternion(0.076823, 0.669839, -0.0562462, 0.736376)
-bones/12/rotation = Quaternion(0.577161, 0.0432188, -0.0219583, 0.81519)
-bones/13/rotation = Quaternion(-7.98483e-07, 1.47913e-06, -0.475992, 0.87945)
-bones/14/rotation = Quaternion(0.0887912, -0.670038, 0.0666006, 0.733982)
-bones/15/rotation = Quaternion(-0.0399842, -0.569072, -0.818011, 0.0735966)
-bones/15/scale = Vector3(1, 1, 0.999999)
-bones/16/rotation = Quaternion(-0.730598, -3.23055e-06, -2.60338e-06, 0.682808)
-bones/17/rotation = Quaternion(0.690991, 0.0190827, 0.000697256, 0.722612)
-bones/18/rotation = Quaternion(0.276961, 0.230053, -0.0684875, 0.930418)
-bones/20/rotation = Quaternion(-0.0244481, 0.544612, 0.835865, 0.0642643)
-bones/20/scale = Vector3(1, 1, 0.999999)
-bones/21/rotation = Quaternion(-0.650962, 6.7199e-06, 6.76642e-06, 0.75911)
-bones/22/rotation = Quaternion(0.489316, -0.0204317, -0.016464, 0.871712)
-bones/23/rotation = Quaternion(0.280818, -0.231228, 0.0698284, 0.92887)
+bones/0/position = Vector3(-1, 9.6354, -1.23273)
+bones/0/rotation = Quaternion(0.258819, 1.09164e-11, -4.07385e-11, 0.965926)
+bones/4/rotation = Quaternion(-0.23369, -3.3746e-18, 5.73608e-17, 0.972311)
+bones/8/rotation = Quaternion(-0.248695, -0.215593, 0.578462, 0.74636)
+bones/9/rotation = Quaternion(-1.4505e-07, -1.73532e-07, 0.674224, 0.738527)
+bones/10/rotation = Quaternion(-0.015565, -0.029247, 0.0666454, 0.997227)
+bones/12/rotation = Quaternion(0.503487, -0.193329, 0.235127, 0.808604)
+bones/13/rotation = Quaternion(-4.4963e-07, 1.61493e-06, -0.261454, 0.965216)
+bones/14/rotation = Quaternion(-0.033585, -0.781599, -0.0773525, 0.618055)
+bones/15/rotation = Quaternion(-0.136409, -0.684193, -0.701839, 0.143854)
+bones/15/scale = Vector3(0.999999, 1, 1)
+bones/16/rotation = Quaternion(-0.745651, -3.19382e-06, -2.67052e-06, 0.666336)
+bones/17/rotation = Quaternion(0.766092, 0.0951232, -0.0845339, 0.630007)
+bones/18/rotation = Quaternion(0.276968, 0.230053, -0.0684862, 0.930416)
+bones/20/rotation = Quaternion(-0.046464, 0.0820622, 0.995432, 0.0149187)
+bones/20/scale = Vector3(0.999999, 1, 1)
+bones/21/rotation = Quaternion(-0.573904, 7.33805e-06, 6.08266e-06, 0.818923)
+bones/22/rotation = Quaternion(0.815454, -0.0425624, -0.0285533, 0.576549)
+bones/23/rotation = Quaternion(0.280682, -0.231211, 0.0698879, 0.928911)
 
 [node name="Body_001" parent="Armature/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_6w36t")
@@ -293,11 +316,31 @@ surface_material_override/7 = SubResource("StandardMaterial3D_woqvd")
 surface_material_override/8 = SubResource("StandardMaterial3D_wmyen")
 
 [node name="LeftArm" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
-transform = Transform3D(-0.026358, 0.207528, -0.977874, 0.710122, -0.684609, -0.164431, -0.703585, -0.698744, -0.129325, 3.5919, 16.7195, 4.07719)
+transform = Transform3D(0.955225, 0.294729, 0.026062, -0.0293192, 0.181937, -0.982873, -0.294423, 0.938101, 0.182432, 2.5919, 16.0654, 2.00101)
 bone_name = "mixamorig_LeftArm"
 bone_idx = 8
 
 [node name="RightArm" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
-transform = Transform3D(-0.0284395, -0.207637, 0.977793, -0.716262, -0.678086, -0.164826, 0.697252, -0.705043, -0.129438, -3.5919, 16.6915, 4.09743)
+transform = Transform3D(-0.113936, -0.283672, 0.952129, -0.876944, -0.421671, -0.23057, 0.466892, -0.861234, -0.200721, -4.5919, 16.0481, 2.03091)
 bone_name = "mixamorig_RightArm"
 bone_idx = 12
+
+[node name="LeftFoot" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="3"]
+transform = Transform3D(-0.989496, 0.141849, -0.0278325, -0.0890402, -0.446415, 0.890386, 0.113875, 0.883512, 0.454357, 2.00006, 3.19858, 0.0123363)
+bone_name = "mixamorig_LeftFoot"
+bone_idx = 17
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Armature/Skeleton3D/LeftFoot" index="0"]
+amount = 12
+process_material = SubResource("ParticleProcessMaterial_vtshv")
+draw_pass_1 = SubResource("QuadMesh_eqjva")
+
+[node name="RightFoot" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="4"]
+transform = Transform3D(-0.997532, -0.0495862, 0.0496871, 0.0628816, -0.945825, 0.318529, 0.031201, 0.320868, 0.946611, -2, 3.99987, -7.59337)
+bone_name = "mixamorig_RightFoot"
+bone_idx = 22
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Armature/Skeleton3D/RightFoot" index="0"]
+amount = 12
+process_material = SubResource("ParticleProcessMaterial_vtshv")
+draw_pass_1 = SubResource("QuadMesh_eqjva")
