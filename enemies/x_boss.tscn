@@ -296,6 +296,18 @@ mesh = SubResource("CapsuleMesh_f0kqn")
 surface_material_override/2 = SubResource("StandardMaterial3D_y6nrg")
 surface_material_override/5 = SubResource("StandardMaterial3D_cpdpd")
 
+[node name="LeftArm" parent="X_boss_meshes/Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.955225, 0.29473, 0.0260621, -0.0293194, 0.181938, -0.982873, -0.294423, 0.938101, 0.182433, 2.5919, 16.0653, 2.00101)
+
+[node name="RightArm" parent="X_boss_meshes/Armature/Skeleton3D" index="2"]
+transform = Transform3D(-0.113936, -0.283673, 0.952128, -0.876944, -0.421672, -0.23057, 0.466892, -0.861233, -0.200722, -4.5919, 16.0481, 2.0309)
+
+[node name="LeftFoot" parent="X_boss_meshes/Armature/Skeleton3D" index="3"]
+transform = Transform3D(-0.989496, 0.141849, -0.0278321, -0.0890395, -0.446415, 0.890385, 0.113875, 0.883511, 0.454357, 2.00005, 3.19858, 0.0123315)
+
+[node name="RightFoot" parent="X_boss_meshes/Armature/Skeleton3D" index="4"]
+transform = Transform3D(-0.997532, -0.049586, 0.0496871, 0.0628815, -0.945825, 0.318529, 0.0312009, 0.320867, 0.94661, -2, 3.99986, -7.59337)
+
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_uk78c")
 anim_player = NodePath("../X_boss_meshes/AnimationPlayer")

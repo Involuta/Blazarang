@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://c433gnebqhmb0"]
+
+[ext_resource type="PackedScene" uid="uid://8vi70u6sy80m" path="res://glb_imports/XIcon.glb" id="1_qxh2k"]
+[ext_resource type="Shader" path="res://glb_inherited_scenes/outline.gdshader" id="2_ichmc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jo8e2"]
+render_priority = 0
+shader = ExtResource("2_ichmc")
+shader_parameter/outline_color = Color(0.0392157, 0, 0, 1)
+shader_parameter/outline_width = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oln8s"]
+next_pass = SubResource("ShaderMaterial_jo8e2")
+shading_mode = 0
+albedo_color = Color(2, 0.46, 0, 1)
+
+[node name="XIcon" instance=ExtResource("1_qxh2k")]
+
+[node name="Icon" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_oln8s")

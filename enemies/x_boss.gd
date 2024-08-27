@@ -59,6 +59,7 @@ var body_mat := preload("res://textures/x_boss_body.tres")
 @onready var target := $/root/Level/Target
 @onready var left_arm := $/root/Level/XBossArena1/XLeftArm
 @onready var right_arm := $/root/Level/XBossArena1/XRightArm
+@onready var x_icon := $/root/Level/XBossArena1/XIcon
 
 func _ready():
 	add_to_group("lockonables")
@@ -87,6 +88,10 @@ func _physics_process(delta):
 			attack_frame()
 	if global_position.y < -100:
 		queue_free()
+	
+	x_icon.global_position.x = global_position.x
+	x_icon.global_position.z = global_position.z
+	x_icon.rotation.y = rotation.y
 
 func lerp_look_at_target(turn_speed):
 	var vec3_to_target := global_position.direction_to(target.global_position)

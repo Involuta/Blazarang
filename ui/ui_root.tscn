@@ -228,6 +228,23 @@ _data = {
 "small_update_score": SubResource("Animation_i2cse")
 }
 
+[sub_resource type="Animation" id="Animation_bl4yg"]
+resource_name = "awaken"
+length = 3.0
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlackScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_vb1ii"]
 resource_name = "death_fall"
 length = 3.0
@@ -257,23 +274,6 @@ tracks/1/keys = {
 "args": [],
 "method": &"return_to_hub"
 }]
-}
-
-[sub_resource type="Animation" id="Animation_bl4yg"]
-resource_name = "awaken"
-length = 3.0
-step = 0.0166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BlackScreen:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0ps3l"]
