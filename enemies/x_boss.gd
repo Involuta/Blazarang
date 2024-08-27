@@ -36,6 +36,7 @@ var aiming_at_target := true
 	"Superman" : .25
 }
 
+@export var dash_speed := 40.0
 @export var slipnslice_speed := 20.0
 @export var superman_fwd_speed := 20.0
 @export var superman_down_speed := 7.0
@@ -186,6 +187,12 @@ func face_target():
 	look_at(target.global_position)
 	rotation.x = 0
 	rotation.z = 0
+
+func dash():
+	velocity = dash_speed * -transform.basis.z
+
+func teleport():
+	global_position = Vector3.UP * 11
 
 func slipnslice_rush():
 	velocity = slipnslice_speed * -transform.basis.z

@@ -37,3 +37,12 @@ res://icon/icon.tscn
 res://levels/gauntlet_level1.tscn
 res://enemies/x_icon.tscn
 res://enemies/x_boss.gd
+res://enemies/enemy_anims/x_idle.res
+res://enemies/enemy_anims/x_recall_left_arm.res
+res://enemies/enemy_anims/x_run.res
+res://enemies/enemy_anims/x_slipnslice.res
+res://enemies/enemy_anims/x_superman.res
+res://enemies/enemy_anims/x_triangle.res
+res://enemies/enemy_anims/x_triangle_axkick.res
+res://enemies/enemy_anims/x_triangle_flyingkick.res
+res://enemies/enemy_anims/x_dash.res
