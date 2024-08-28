@@ -294,12 +294,12 @@ bones/12/rotation = Quaternion(0.503487, -0.193329, 0.235127, 0.808604)
 bones/13/rotation = Quaternion(-4.4963e-07, 1.61493e-06, -0.261454, 0.965216)
 bones/14/rotation = Quaternion(-0.033585, -0.781599, -0.0773525, 0.618055)
 bones/15/rotation = Quaternion(-0.136409, -0.684193, -0.701839, 0.143854)
-bones/15/scale = Vector3(0.999999, 1, 1)
+bones/15/scale = Vector3(1.00001, 0.999997, 0.999997)
 bones/16/rotation = Quaternion(-0.745651, -3.19382e-06, -2.67052e-06, 0.666336)
 bones/17/rotation = Quaternion(0.766092, 0.0951232, -0.0845339, 0.630007)
-bones/18/rotation = Quaternion(0.276968, 0.230053, -0.0684862, 0.930416)
+bones/18/rotation = Quaternion(0.276979, 0.230067, -0.06844, 0.930413)
 bones/20/rotation = Quaternion(-0.046464, 0.0820622, 0.995432, 0.0149187)
-bones/20/scale = Vector3(0.999999, 1, 1)
+bones/20/scale = Vector3(1.00002, 1, 0.999983)
 bones/21/rotation = Quaternion(-0.573904, 7.33805e-06, 6.08266e-06, 0.818923)
 bones/22/rotation = Quaternion(0.815454, -0.0425624, -0.0285533, 0.576549)
 bones/23/rotation = Quaternion(0.280682, -0.231211, 0.0698879, 0.928911)
@@ -316,17 +316,17 @@ surface_material_override/7 = SubResource("StandardMaterial3D_woqvd")
 surface_material_override/8 = SubResource("StandardMaterial3D_wmyen")
 
 [node name="LeftArm" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.955225, 0.29473, 0.0260621, -0.0293194, 0.181938, -0.982873, -0.294423, 0.938101, 0.182433, 2.5919, 16.0653, 2.00101)
+transform = Transform3D(0.955225, 0.294729, 0.026062, -0.0293192, 0.181937, -0.982873, -0.294423, 0.938101, 0.182432, 2.5919, 16.0654, 2.00101)
 bone_name = "mixamorig_LeftArm"
 bone_idx = 8
 
 [node name="RightArm" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
-transform = Transform3D(-0.113936, -0.283673, 0.952128, -0.876944, -0.421672, -0.23057, 0.466892, -0.861233, -0.200722, -4.5919, 16.0481, 2.0309)
+transform = Transform3D(-0.113936, -0.283672, 0.952129, -0.876944, -0.421671, -0.23057, 0.466892, -0.861234, -0.200721, -4.5919, 16.0481, 2.03091)
 bone_name = "mixamorig_RightArm"
 bone_idx = 12
 
 [node name="LeftFoot" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="3"]
-transform = Transform3D(-0.989496, 0.141849, -0.0278321, -0.0890395, -0.446415, 0.890385, 0.113875, 0.883511, 0.454357, 2.00005, 3.19858, 0.0123315)
+transform = Transform3D(-0.989503, 0.141846, -0.0278323, -0.0890422, -0.446415, 0.890382, 0.113878, 0.88351, 0.454355, 2.00005, 3.1986, 0.0123334)
 bone_name = "mixamorig_LeftFoot"
 bone_idx = 17
 
@@ -336,7 +336,7 @@ process_material = SubResource("ParticleProcessMaterial_vtshv")
 draw_pass_1 = SubResource("QuadMesh_eqjva")
 
 [node name="RightFoot" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="4"]
-transform = Transform3D(-0.997532, -0.049586, 0.0496871, 0.0628815, -0.945825, 0.318529, 0.0312009, 0.320867, 0.94661, -2, 3.99986, -7.59337)
+transform = Transform3D(-0.997551, -0.0495844, 0.0496902, 0.0628835, -0.945821, 0.318533, 0.031198, 0.320858, 0.946598, -2, 3.99985, -7.59331)
 bone_name = "mixamorig_RightFoot"
 bone_idx = 22
 
