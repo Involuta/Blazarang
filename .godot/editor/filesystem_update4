@@ -37,3 +37,5 @@ res://levels/hub.tscn
 res://icon/icon.tscn
 res://levels/gauntlet_level1.tscn
 res://levels/hub_level.gd
+res://enemies/enemy_anims/x_superman.res
+res://enemies/x_boss.gd
