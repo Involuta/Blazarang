@@ -40,3 +40,4 @@ res://levels/hub_level.gd
 res://enemies/enemy_anims/x_superman.res
 res://enemies/x_boss.gd
 res://enemies/enemy_anims/x_triangle_axkick.res
+res://levels/x_boss_level_section_nodes/x_boss_arena1.tscn

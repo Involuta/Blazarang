@@ -291,7 +291,7 @@ radius = 3.0
 
 [node name="XBoss" type="CharacterBody3D" groups=["lockonables"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-collision_layer = 64
+collision_layer = 8
 collision_mask = 146
 platform_floor_layers = 4294901762
 script = ExtResource("1_u3wem")
@@ -305,6 +305,7 @@ long_dist_attack_chances = {
 "SlipnSlice": 2.08167e-12,
 "Superman": 1.0
 }
+teleport_dist_from_target = 7.5
 triangle_axkick_dist = 6.0
 flyingkick_hit_frames = 9
 

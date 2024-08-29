@@ -37,6 +37,7 @@ var aiming_at_target := true
 }
 
 @export var dash_speed := 40.0
+@export var teleport_dist_from_target := 5.0
 @export var slipnslice_speed := 20.0
 @export var superman_fwd_speed := 20.0
 @export var superman_down_speed := 7.0
@@ -191,7 +192,10 @@ func dash():
 	velocity = dash_speed * -transform.basis.z
 
 func teleport():
-	global_position = Vector3.UP * 11
+	var dir_to_target := global_position.direction_to(target.global_position)
+	var icon_vec := Vector2(dir_to_target.x, dir_to_target.z).orthogonal()
+	global_position.x = target.global_position.x + teleport_dist_from_target * icon_vec.x
+	global_position.z = target.global_position.z + teleport_dist_from_target * icon_vec.y
 
 func slipnslice_rush():
 	velocity = slipnslice_speed * -transform.basis.z
