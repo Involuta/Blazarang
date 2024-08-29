@@ -8,6 +8,14 @@ enum {
 	ATTACK,
 }
 var behav_state := FOLLOW
+
+enum {
+	MY_POS,
+	TELEPORT_POS,
+	STATIONARY
+}
+var x_icon_pos_state := MY_POS
+
 var long_dist_wait_remaining := 5.0
 
 @export var max_long_dist_wait := 5.0
@@ -88,12 +96,17 @@ func _physics_process(delta):
 			follow()
 		ATTACK:
 			attack_frame()
+	match(x_icon_pos_state):
+		MY_POS:
+			x_icon_follow_my_pos()
+		TELEPORT_POS:
+			x_icon_follow_teleport_pos()
+		STATIONARY:
+			pass
 	if global_position.y < -100:
 		queue_free()
 	
-	x_icon.global_position.x = global_position.x
-	x_icon.global_position.z = global_position.z
-	x_icon.rotation.y = rotation.y
+	anim_tree.set("parameters/StateMachine/WalkSpace/blend_position", nav_agent.velocity.length())
 
 func lerp_look_at_target(turn_speed):
 	var vec3_to_target := global_position.direction_to(target.global_position)
@@ -192,10 +205,8 @@ func dash():
 	velocity = dash_speed * -transform.basis.z
 
 func teleport():
-	var dir_to_target := global_position.direction_to(target.global_position)
-	var icon_vec := Vector2(dir_to_target.x, dir_to_target.z).orthogonal()
-	global_position.x = target.global_position.x + teleport_dist_from_target * icon_vec.x
-	global_position.z = target.global_position.z + teleport_dist_from_target * icon_vec.y
+	global_position.x = x_icon.global_position.x
+	global_position.z = x_icon.global_position.z
 
 func slipnslice_rush():
 	velocity = slipnslice_speed * -transform.basis.z
@@ -270,21 +281,25 @@ func recall_right_arm_frame(lerp_val):
 func hide_right_arm():
 	right_arm.visible = false
 
-func shoot_bullet():
-	var bullet_inst = bullet.instantiate()
-	level.add_child.call_deferred(bullet_inst)
-	await bullet_inst.tree_entered
-	bullet_inst.global_position = global_position + Vector3.UP + get_global_transform().basis.z
-	bullet_inst.look_at(target.global_position)
-	bullet_inst.velocity = -bullet_speed * bullet_inst.get_global_transform().basis.z
+func set_x_icon_my_pos():
+	x_icon_pos_state = MY_POS
 
-func shoot_fast_bullet():
-	var bullet_inst = bullet.instantiate()
-	level.add_child.call_deferred(bullet_inst)
-	await bullet_inst.tree_entered
-	bullet_inst.global_position = global_position + Vector3.UP + Vector3.FORWARD
-	bullet_inst.look_at(target.global_position)
-	bullet_inst.velocity = -fast_bullet_speed * bullet_inst.get_global_transform().basis.z
+func set_x_icon_teleport_pos():
+	x_icon_pos_state = TELEPORT_POS
+
+func set_x_icon_stationary():
+	x_icon_pos_state = STATIONARY
+
+func x_icon_follow_my_pos():
+	x_icon.global_position.x = global_position.x
+	x_icon.global_position.z = global_position.z
+	x_icon.rotation.y = rotation.y
+
+func x_icon_follow_teleport_pos():
+	var dir_to_target := global_position.direction_to(target.global_position)
+	var icon_vec := Vector2(dir_to_target.x, dir_to_target.z).orthogonal()
+	x_icon.global_position.x = target.global_position.x + teleport_dist_from_target * icon_vec.x
+	x_icon.global_position.z = target.global_position.z + teleport_dist_from_target * icon_vec.y
 
 func can_see_target():
 	var space_state := get_world_3d().direct_space_state
