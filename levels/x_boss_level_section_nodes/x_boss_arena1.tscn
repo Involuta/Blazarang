@@ -135,3 +135,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 15.3529, 2.08165
 
 [node name="XIcon" parent="." instance=ExtResource("8_ha6s8")]
 transform = Transform3D(0.5, -1.74393e-16, 1.74393e-16, 1.74393e-16, 0.5, -1.74393e-16, -1.74393e-16, 1.74393e-16, 0.5, 2.08165e-12, 10.1, 2.08165e-12)
+
+[node name="XIconPos" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10.1, 2.08165e-12)

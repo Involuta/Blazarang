@@ -1,10 +1,10 @@
+Node3D
 AnimationPlayer
 CollisionShape3D
 Hitbox
 GPUParticles3D
 BoneAttachment3D
 FuncGodotMap
-Node3D
 Sprite3D
 GPUParticles2D
 MeshInstance3D

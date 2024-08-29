@@ -403,6 +403,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, -0.262266, -1.86635)
 
 [node name="ExplosionSparks" type="GPUParticles3D" parent="ExplosionPivot"]
 cast_shadow = 0
+emitting = false
 amount = 30
 one_shot = true
 explosiveness = 1.0
@@ -411,6 +412,7 @@ draw_pass_1 = SubResource("CapsuleMesh_my7ab")
 
 [node name="ExplosionBall" type="GPUParticles3D" parent="ExplosionPivot"]
 cast_shadow = 0
+emitting = false
 amount = 1
 lifetime = 0.3
 one_shot = true
@@ -422,6 +424,7 @@ draw_pass_1 = SubResource("SphereMesh_epefv")
 
 [node name="InnerExplosionBall" type="GPUParticles3D" parent="ExplosionPivot"]
 cast_shadow = 0
+emitting = false
 amount = 1
 lifetime = 0.3
 one_shot = true

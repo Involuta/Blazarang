@@ -15,6 +15,7 @@ enum {
 	STATIONARY
 }
 var x_icon_pos_state := MY_POS
+var x_icon_lerp_val := 1.0
 
 var long_dist_wait_remaining := 5.0
 
@@ -70,6 +71,7 @@ var body_mat := preload("res://textures/x_boss_body.tres")
 @onready var left_arm := $/root/Level/XBossArena1/XLeftArm
 @onready var right_arm := $/root/Level/XBossArena1/XRightArm
 @onready var x_icon := $/root/Level/XBossArena1/XIcon
+@onready var x_icon_pos := $/root/Level/XBossArena1/XIconPos
 
 func _ready():
 	add_to_group("lockonables")
@@ -103,6 +105,7 @@ func _physics_process(delta):
 			x_icon_follow_teleport_pos()
 		STATIONARY:
 			pass
+	x_icon.global_position = lerp(x_icon.global_position, x_icon_pos.global_position, x_icon_lerp_val)
 	if global_position.y < -100:
 		queue_free()
 	
@@ -205,8 +208,8 @@ func dash():
 	velocity = dash_speed * -transform.basis.z
 
 func teleport():
-	global_position.x = x_icon.global_position.x
-	global_position.z = x_icon.global_position.z
+	global_position.x = x_icon_pos.global_position.x
+	global_position.z = x_icon_pos.global_position.z
 
 func slipnslice_rush():
 	velocity = slipnslice_speed * -transform.basis.z
@@ -282,24 +285,28 @@ func hide_right_arm():
 	right_arm.visible = false
 
 func set_x_icon_my_pos():
+	var lerp_tween = get_tree().create_tween()
+	lerp_tween.tween_property(self, "x_icon_lerp_val", 1.0, .5).from_current()
 	x_icon_pos_state = MY_POS
 
 func set_x_icon_teleport_pos():
+	# No need for lerp since it's not jumping directly to 1.0
+	x_icon_lerp_val = .2
 	x_icon_pos_state = TELEPORT_POS
 
 func set_x_icon_stationary():
 	x_icon_pos_state = STATIONARY
 
 func x_icon_follow_my_pos():
-	x_icon.global_position.x = global_position.x
-	x_icon.global_position.z = global_position.z
-	x_icon.rotation.y = rotation.y
+	x_icon_pos.global_position.x = global_position.x
+	x_icon_pos.global_position.z = global_position.z
+	x_icon_pos.rotation.y = rotation.y
 
 func x_icon_follow_teleport_pos():
 	var dir_to_target := global_position.direction_to(target.global_position)
 	var icon_vec := Vector2(dir_to_target.x, dir_to_target.z).orthogonal()
-	x_icon.global_position.x = target.global_position.x + teleport_dist_from_target * icon_vec.x
-	x_icon.global_position.z = target.global_position.z + teleport_dist_from_target * icon_vec.y
+	x_icon_pos.global_position.x = target.global_position.x + teleport_dist_from_target * icon_vec.x
+	x_icon_pos.global_position.z = target.global_position.z + teleport_dist_from_target * icon_vec.y
 
 func can_see_target():
 	var space_state := get_world_3d().direct_space_state
