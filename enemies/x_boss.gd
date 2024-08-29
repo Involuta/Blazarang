@@ -201,7 +201,8 @@ func stop_mvmt():
 	velocity.z = 0
 
 func start_superman():
-	velocity = 6 * Vector3.UP
+	velocity = .5 * superman_fwd_speed * -transform.basis.z
+	velocity.y = 6
 
 func superman_rush():
 	velocity = superman_fwd_speed * -transform.basis.z
