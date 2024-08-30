@@ -17,6 +17,11 @@ enum {
 var x_icon_pos_state := MY_POS
 var x_icon_lerp_val := 1.0
 
+enum DIST_TYPE {
+	SHORT_DIST,
+	LONG_DIST
+}
+
 var long_dist_wait_remaining := 5.0
 
 @export var max_long_dist_wait := 5.0
@@ -123,7 +128,7 @@ func wait():
 
 func _on_navigation_agent_3d_target_reached():
 	if behav_state != ATTACK:
-		queue_attack()
+		queue_attack(DIST_TYPE.SHORT_DIST)
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	if behav_state == FOLLOW:
@@ -158,7 +163,7 @@ func follow():
 	else:
 		long_dist_wait_remaining -= get_physics_process_delta_time()
 		if long_dist_wait_remaining <= 0:
-			queue_attack()
+			queue_attack(DIST_TYPE.LONG_DIST)
 
 func left_arm_deployed():
 	return x_meshes.get_surface_override_material(2) != body_mat
@@ -166,9 +171,13 @@ func left_arm_deployed():
 func right_arm_deployed():
 	return x_meshes.get_surface_override_material(5) != body_mat
 
-func queue_attack():
+func queue_attack(dist_type):
 	long_dist_wait_remaining = max_long_dist_wait
-	anim_tree.set(choose_attack(short_dist_attack_chances), true)
+	match(dist_type):
+		DIST_TYPE.SHORT_DIST:
+			anim_tree.set(choose_attack(short_dist_attack_chances), true)
+		DIST_TYPE.LONG_DIST:
+			anim_tree.set(choose_attack(long_dist_attack_chances), true)
 
 func start_attack():
 	# Without this await, the animation player would call end_attack at the end of the previous animation on the exact same frame as when the AnimationPlayer.play func is called below. Since an animation was currently in progress, the func call would do nothing, leaving the enemy in ATTACK mode but with no animation playing to free it from ATTACK mode, causing it to stand still indefinitely

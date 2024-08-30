@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://dwniaym2g1off"]
+[gd_scene load_steps=67 format=3 uid="uid://dwniaym2g1off"]
 
 [ext_resource type="Script" path="res://enemies/x_boss.gd" id="1_u3wem"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_5lf37"]
@@ -138,6 +138,7 @@ advance_expression = "left_arm_deployed()"
 xfade_time = 0.15
 switch_mode = 2
 advance_mode = 2
+advance_expression = "global_position.distance_to(target.global_position) > target_distance"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0gtds"]
 switch_mode = 2
@@ -152,40 +153,53 @@ advance_mode = 2
 xfade_time = 0.15
 switch_mode = 2
 advance_mode = 2
+advance_expression = "global_position.distance_to(target.global_position) > target_distance"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lsw81"]
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1p223"]
+xfade_time = 0.15
+switch_mode = 2
+advance_mode = 2
+advance_expression = "global_position.distance_to(target.global_position) <= target_distance"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qk3jt"]
+xfade_time = 0.15
+switch_mode = 2
+advance_mode = 2
+advance_expression = "global_position.distance_to(target.global_position) <= target_distance"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_f8liy"]
 states/Dash-SlipnSlice/node = SubResource("AnimationNodeAnimation_jlflv")
-states/Dash-SlipnSlice/position = Vector2(149.361, -130.923)
+states/Dash-SlipnSlice/position = Vector2(136.861, -114.923)
 states/Dash-Superman/node = SubResource("AnimationNodeAnimation_j6evd")
-states/Dash-Superman/position = Vector2(809.27, -1.46796)
+states/Dash-Superman/position = Vector2(776.27, 100.25)
 states/LeftArmRecall-SlipnSlice/node = SubResource("AnimationNodeAnimation_g1k2a")
-states/LeftArmRecall-SlipnSlice/position = Vector2(201.982, -24.7851)
+states/LeftArmRecall-SlipnSlice/position = Vector2(138.251, -27.0103)
 states/LeftArmRecall-Superman/node = SubResource("AnimationNodeAnimation_i18fe")
-states/LeftArmRecall-Superman/position = Vector2(587.527, -47.323)
+states/LeftArmRecall-Superman/position = Vector2(589.615, -1.823)
 states/SlipnSlice/node = SubResource("AnimationNodeAnimation_scvwl")
 states/SlipnSlice/position = Vector2(387.955, -26.6853)
-states/Start/position = Vector2(199.5, 101)
+states/Start/position = Vector2(-113.5, 100.281)
 states/Superman/node = SubResource("AnimationNodeAnimation_b7uiy")
-states/Superman/position = Vector2(587.877, 23)
+states/Superman/position = Vector2(589.408, 100.375)
 states/TPSlipnSlice/node = SubResource("AnimationNodeAnimation_0mba8")
-states/TPSlipnSlice/position = Vector2(321.885, -90.603)
+states/TPSlipnSlice/position = Vector2(301.885, -114.843)
 states/Triangle/node = SubResource("AnimationNodeAnimation_3n3db")
-states/Triangle/position = Vector2(586.866, 208.182)
+states/Triangle/position = Vector2(387.661, 216.334)
 states/TriangleAxKick/node = SubResource("AnimationNodeAnimation_d4sor")
-states/TriangleAxKick/position = Vector2(586.875, 282.002)
+states/TriangleAxKick/position = Vector2(546.875, 216.202)
 states/TriangleFlyingKick/node = SubResource("AnimationNodeAnimation_45hdd")
-states/TriangleFlyingKick/position = Vector2(587.702, 138.097)
+states/TriangleFlyingKick/position = Vector2(184.702, 216.268)
 states/WalkSpace/node = SubResource("AnimationNodeBlendSpace1D_j6rqy")
 states/WalkSpace/position = Vector2(388, 100.5)
-transitions = ["Start", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_wa8xh"), "WalkSpace", "SlipnSlice", SubResource("AnimationNodeStateMachineTransition_h7rje"), "SlipnSlice", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_1yfff"), "WalkSpace", "Superman", SubResource("AnimationNodeStateMachineTransition_3v00a"), "Superman", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_rac7r"), "WalkSpace", "Triangle", SubResource("AnimationNodeStateMachineTransition_cvaa1"), "Triangle", "TriangleAxKick", SubResource("AnimationNodeStateMachineTransition_aj21x"), "TriangleAxKick", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_fs8sj"), "Triangle", "TriangleFlyingKick", SubResource("AnimationNodeStateMachineTransition_3dfv1"), "TriangleFlyingKick", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_g4osy"), "WalkSpace", "LeftArmRecall-SlipnSlice", SubResource("AnimationNodeStateMachineTransition_jhkhm"), "WalkSpace", "LeftArmRecall-Superman", SubResource("AnimationNodeStateMachineTransition_u4r7n"), "LeftArmRecall-SlipnSlice", "Dash-SlipnSlice", SubResource("AnimationNodeStateMachineTransition_gupc8"), "Dash-SlipnSlice", "TPSlipnSlice", SubResource("AnimationNodeStateMachineTransition_0gtds"), "TPSlipnSlice", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_rioo5"), "LeftArmRecall-Superman", "Dash-Superman", SubResource("AnimationNodeStateMachineTransition_wx3ga"), "Dash-Superman", "Superman", SubResource("AnimationNodeStateMachineTransition_lsw81")]
-graph_offset = Vector2(120.375, -24.503)
+transitions = ["Start", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_wa8xh"), "WalkSpace", "SlipnSlice", SubResource("AnimationNodeStateMachineTransition_h7rje"), "SlipnSlice", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_1yfff"), "WalkSpace", "Superman", SubResource("AnimationNodeStateMachineTransition_3v00a"), "Superman", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_rac7r"), "WalkSpace", "Triangle", SubResource("AnimationNodeStateMachineTransition_cvaa1"), "Triangle", "TriangleAxKick", SubResource("AnimationNodeStateMachineTransition_aj21x"), "TriangleAxKick", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_fs8sj"), "Triangle", "TriangleFlyingKick", SubResource("AnimationNodeStateMachineTransition_3dfv1"), "TriangleFlyingKick", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_g4osy"), "WalkSpace", "LeftArmRecall-SlipnSlice", SubResource("AnimationNodeStateMachineTransition_jhkhm"), "WalkSpace", "LeftArmRecall-Superman", SubResource("AnimationNodeStateMachineTransition_u4r7n"), "LeftArmRecall-SlipnSlice", "Dash-SlipnSlice", SubResource("AnimationNodeStateMachineTransition_gupc8"), "Dash-SlipnSlice", "TPSlipnSlice", SubResource("AnimationNodeStateMachineTransition_0gtds"), "TPSlipnSlice", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_rioo5"), "LeftArmRecall-Superman", "Dash-Superman", SubResource("AnimationNodeStateMachineTransition_wx3ga"), "Dash-Superman", "Superman", SubResource("AnimationNodeStateMachineTransition_lsw81"), "LeftArmRecall-SlipnSlice", "SlipnSlice", SubResource("AnimationNodeStateMachineTransition_1p223"), "LeftArmRecall-Superman", "Superman", SubResource("AnimationNodeStateMachineTransition_qk3jt")]
+graph_offset = Vector2(-393.368, 41.0021)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_uk78c"]
-graph_offset = Vector2(-69.12, 157.44)
+graph_offset = Vector2(-27.84, 175.68)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_f8liy")
 nodes/StateMachine/position = Vector2(110, 150)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -302,11 +316,12 @@ short_dist_attack_chances = {
 "Triangle": 0.33
 }
 long_dist_attack_chances = {
-"SlipnSlice": 2.08167e-12,
-"Superman": 1.0
+"SlipnSlice": 0.5,
+"Superman": 2.08167e-12,
+"Triangle": 0.5
 }
 teleport_dist_from_target = 7.5
-triangle_axkick_dist = 2.0
+triangle_axkick_dist = 1.0
 flyingkick_hit_frames = 9
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
