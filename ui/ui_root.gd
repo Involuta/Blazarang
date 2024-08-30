@@ -11,6 +11,7 @@ extends Control
 @onready var update_score_anim := $UpdateScoreAnimation
 
 @onready var cotu_hurtbox := $/root/Level/cotuCB/Hurtbox
+@onready var cotu_icon := $/root/Level/Icon
 
 var destabilized = false
 

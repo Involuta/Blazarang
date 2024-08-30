@@ -42,3 +42,8 @@ res://enemies/x_boss.gd
 res://enemies/enemy_anims/x_triangle_axkick.res
 res://levels/x_boss_level_section_nodes/x_boss_arena1.tscn
 res://enemies/x_icon.tscn
+res://ui/ui_root.gd
+res://icon/icon.gd
+res://cotu/CotuControl.gd
+res://rang/roserang.gd
+res://rang/roserang.tscn

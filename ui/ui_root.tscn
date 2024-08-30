@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://kl1hpr0grn1v"]
+[gd_scene load_steps=24 format=3 uid="uid://kl1hpr0grn1v"]
 
 [ext_resource type="PackedScene" uid="uid://daj44qqb6dior" path="res://ui/health_bar.tscn" id="1_k5nv4"]
 [ext_resource type="Script" path="res://ui/ui_root.gd" id="1_s33yg"]
 [ext_resource type="Shader" path="res://ui/flash.gdshader" id="3_82pj8"]
 [ext_resource type="Shader" path="res://ui/glitch.gdshader" id="5_8m8fe"]
 [ext_resource type="Texture2D" uid="uid://nqsst4yllc8q" path="res://textures/DESTABILIZED3-clear.png" id="5_gps14"]
+[ext_resource type="Texture2D" uid="uid://bcaxwrkv0h3xx" path="res://textures/buff_DMG-clear.png" id="6_3q1q1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wshvs"]
 shader = ExtResource("5_8m8fe")
@@ -317,6 +318,7 @@ grow_horizontal = 1
 grow_vertical = 1
 
 [node name="GlitchBox" type="ColorRect" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.176471)
 material = SubResource("ShaderMaterial_wshvs")
 layout_mode = 0
@@ -387,6 +389,7 @@ libraries = {
 }
 
 [node name="BlackScreen" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -394,3 +397,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_03c2h")
+
+[node name="BuffIcon1" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 52.0
+offset_right = 192.0
+offset_bottom = 199.0
+texture = ExtResource("6_3q1q1")
+expand_mode = 1

@@ -132,7 +132,7 @@ func _physics_process(delta):
 			look_at(global_position + velocity)
 			move_and_slide()
 
-func buff_self():
+func buff_damage():
 	current_loop_angle = 0
 	hitbox.damage = 30
 

@@ -35,7 +35,8 @@ var max_cam_dist := 6.0 # dist btwn player and camera when camera's not collidin
 
 var throw_queued := false
 const INSTANT_RETHROW_SECS := .2 # max possible time btwn player inputting throw and rang hitting Cotu that still cauess an instant rethrow
-var buffs := []
+var buff_list := [Globals.BUFFS.DAMAGE, Globals.BUFFS.DAMAGE, Globals.BUFFS.DAMAGE]
+var next_buff_index := 0
 var throw_self_damage := 18.0
 
 var destabilized = false
@@ -123,7 +124,7 @@ func _physics_process(delta):
 	# Target control and buff clearing
 	if roserang_instance == null:
 		target.start_following_cotu()
-		buffs = []
+		next_buff_index = 0
 	
 	# Set look angle
 	look_angle = camera_twist_pivot.basis.get_euler().y
@@ -213,14 +214,12 @@ func start_instant_rethrow_timer():
 	await get_tree().create_timer(INSTANT_RETHROW_SECS).timeout
 	throw_queued = false
 
-func buff_self():
-	if Globals.BUFFS.DAMAGE not in buffs:
-		buffs.append(Globals.BUFFS.DAMAGE)
-	if Globals.BUFFS.DEFENSE not in buffs:
-		buffs.append(Globals.BUFFS.DEFENSE)
+func add_buff():
+	if next_buff_index < buff_list.size():
+		next_buff_index += 1
 
 func apply_buffs_to_rang():
-	for buff in buffs:
-		match(buff):
+	for i in range(next_buff_index):
+		match(buff_list[i]):
 			Globals.BUFFS.DAMAGE:
-				roserang_instance.buff_self()
+				roserang_instance.buff_damage()

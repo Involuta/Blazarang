@@ -1,3 +1,4 @@
+TextureRect
 Node3D
 AnimationPlayer
 CollisionShape3D
@@ -28,5 +29,4 @@ AudioStreamPlayer3D
 AudioStreamPlayer
 Node2D
 TextEdit
-TextureRect
 ColorRect
