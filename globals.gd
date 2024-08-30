@@ -24,6 +24,15 @@ func compare_layers(collision_layer, global_layer):
 var score := 0
 var multiplier := 50
 
+enum BUFFS {
+	DAMAGE,
+	DEFENSE
+}
+
+const BUFF_SPRITES = {
+	BUFFS.DAMAGE : "res://textures/buff_DMG-clear.png"
+}
+
 const DODGE_SCORE = 1
 const INSTANT_RETHROW_SCORE = 1
 const RICOCHET_HIT_SCORE = 1
@@ -44,8 +53,3 @@ func award_score(points):
 	# Apply multipliers/modifiers
 	score += points * multiplier
 	score_updated.emit(points)
-
-enum BUFFS {
-	DAMAGE,
-	DEFENSE
-}

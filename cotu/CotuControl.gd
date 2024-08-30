@@ -49,6 +49,7 @@ var roserang_instance = null
 @onready var camera := $CameraTwistPivot/CameraPitchPivot/CameraVisualObject
 @onready var rang_pointer_pivot := $RangPointerPivot
 @onready var target := $/root/Level/Target
+@onready var buff_icon1 := $/root/Level/UIRoot/BuffIcon1
 @onready var armature := $CotuAnims/Armature
 @onready var anim_tree := $AnimationTree
 @onready var hurtbox := $Hurtbox
@@ -125,6 +126,7 @@ func _physics_process(delta):
 	if roserang_instance == null:
 		target.start_following_cotu()
 		next_buff_index = 0
+		buff_icon1.texture = null
 	
 	# Set look angle
 	look_angle = camera_twist_pivot.basis.get_euler().y
@@ -219,7 +221,9 @@ func add_buff():
 		next_buff_index += 1
 
 func apply_buffs_to_rang():
+	buff_icon1.texture = null
 	for i in range(next_buff_index):
 		match(buff_list[i]):
 			Globals.BUFFS.DAMAGE:
 				roserang_instance.buff_damage()
+				buff_icon1.texture = load("res://textures/buff_DMG-clear.png")
