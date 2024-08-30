@@ -23,6 +23,7 @@ func destroy_self():
 	$BulletMesh.queue_free()
 	$TailParticles.queue_free()
 	$ExplodeParticles.emitting = true
+	$ExplosionBall.emitting = true
 	await get_tree().create_timer(bullet_explosion_secs).timeout
 	queue_free()
 

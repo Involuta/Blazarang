@@ -15,7 +15,7 @@ albedo_color = Color(1, 1, 0, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jp5km"]
 shader = ExtResource("2_iitfv")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_68wad"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yow5x"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_hsmaq")
@@ -26,7 +26,7 @@ shader_parameter/color_ramp = ExtResource("4_1ldum")
 shader_parameter/curve = ExtResource("5_4x7ld")
 
 [sub_resource type="QuadMesh" id="QuadMesh_8ktjm"]
-material = SubResource("ShaderMaterial_68wad")
+material = SubResource("ShaderMaterial_yow5x")
 
 [sub_resource type="Animation" id="Animation_kv86i"]
 resource_name = "BigExtendBlade"

@@ -50,65 +50,61 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_5ebfw")
 size = Vector2(0.7, 0.7)
 
-[sub_resource type="Curve" id="Curve_11wxf"]
+[sub_resource type="Curve" id="Curve_808oc"]
 _data = [Vector2(2.08165e-12, 1), 0.0, 0.0, 0, 0, Vector2(1, 2.08165e-12), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_mjvr2"]
-curve = SubResource("Curve_11wxf")
+[sub_resource type="CurveTexture" id="CurveTexture_li67g"]
+curve = SubResource("Curve_808oc")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mvuur"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b6f3m"]
 direction = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 spread = 180.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 10.0
 initial_velocity_max = 10.0
-angular_velocity_min = 90.0
-angular_velocity_max = 90.0
-angle_min = -45.0
-angle_max = 45.0
-scale_curve = SubResource("CurveTexture_mjvr2")
+scale_curve = SubResource("CurveTexture_li67g")
 color = Color(1, 1, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ltbnc"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
-billboard_mode = 3
+billboard_mode = 1
 billboard_keep_scale = true
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_tv0gd"]
 material = SubResource("StandardMaterial3D_ltbnc")
 size = Vector2(0.8, 0.8)
 
-[sub_resource type="Gradient" id="Gradient_jy6ft"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+[sub_resource type="Gradient" id="Gradient_pxy1r"]
+colors = PackedColorArray(2, 1, 0, 0.78, 1, 1, 0, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_swgu1"]
-gradient = SubResource("Gradient_jy6ft")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3eggs"]
+gradient = SubResource("Gradient_pxy1r")
 
-[sub_resource type="Curve" id="Curve_cgwp2"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 5), 0.0, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_tk1bb"]
+_data = [Vector2(2.08165e-12, 2.08165e-12), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, 0.0, 1, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_8u761"]
-curve = SubResource("Curve_cgwp2")
+[sub_resource type="CurveTexture" id="CurveTexture_jw4rf"]
+curve = SubResource("Curve_tk1bb")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0hojb"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_anu2t"]
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-scale_curve = SubResource("CurveTexture_8u761")
-color = Color(1, 1, 0, 1)
-color_ramp = SubResource("GradientTexture1D_swgu1")
+scale_curve = SubResource("CurveTexture_jw4rf")
+color = Color(0.996078, 1, 0, 1)
+color_ramp = SubResource("GradientTexture1D_3eggs")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0crn3"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_63v3o"]
 transparency = 4
 shading_mode = 0
 vertex_color_use_as_albedo = true
+disable_receive_shadows = true
 
-[sub_resource type="TorusMesh" id="TorusMesh_wsu7n"]
-material = SubResource("StandardMaterial3D_0crn3")
+[sub_resource type="SphereMesh" id="SphereMesh_cik5v"]
+material = SubResource("StandardMaterial3D_63v3o")
+radius = 5.0
+height = 10.0
 
 [node name="enemy_mega_bullet" type="Node3D"]
 script = ExtResource("1_ufdes")
@@ -142,16 +138,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -3.
 emitting = false
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_mvuur")
+process_material = SubResource("ParticleProcessMaterial_b6f3m")
 draw_pass_1 = SubResource("QuadMesh_tv0gd")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.01681)
+[node name="ExplosionBall" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -4)
+cast_shadow = 0
 emitting = false
 amount = 1
-lifetime = 0.5
+lifetime = 0.4
 one_shot = true
-process_material = SubResource("ParticleProcessMaterial_0hojb")
-draw_pass_1 = SubResource("TorusMesh_wsu7n")
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_anu2t")
+draw_pass_1 = SubResource("SphereMesh_cik5v")
 
 [connection signal="body_entered" from="EnemyHitbox" to="." method="_on_body_entered" flags=18]
