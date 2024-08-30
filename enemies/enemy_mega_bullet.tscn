@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ccvnh6rsvebpi"]
+[gd_scene load_steps=23 format=3 uid="uid://ccvnh6rsvebpi"]
 
 [ext_resource type="Script" path="res://enemies/bullet.gd" id="1_ufdes"]
 [ext_resource type="Script" path="res://hitbox.gd" id="2_xoojo"]
@@ -11,14 +11,109 @@ height = 7.5
 shading_mode = 0
 albedo_color = Color(1, 1, 0.121569, 1)
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_0osf0"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6ktvd"]
 material = SubResource("StandardMaterial3D_ussiw")
 radius = 1.5
 height = 7.5
 
+[sub_resource type="Curve" id="Curve_4u7nc"]
+_data = [Vector2(2.08165e-12, 1), 0.0, 0.0, 0, 0, Vector2(1, 2.08165e-12), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_jf7iu"]
+curve = SubResource("Curve_4u7nc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xrj05"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.5
+emission_ring_radius = 1.5
+emission_ring_inner_radius = 0.0
+direction = Vector3(2.08165e-12, 2.08165e-12, -1)
+spread = 0.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 3.0
+initial_velocity_max = 3.0
+scale_curve = SubResource("CurveTexture_jf7iu")
+color = Color(1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5ebfw"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_dkhmu"]
+material = SubResource("StandardMaterial3D_5ebfw")
+size = Vector2(0.7, 0.7)
+
+[sub_resource type="Curve" id="Curve_11wxf"]
+_data = [Vector2(2.08165e-12, 1), 0.0, 0.0, 0, 0, Vector2(1, 2.08165e-12), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mjvr2"]
+curve = SubResource("Curve_11wxf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mvuur"]
+direction = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+spread = 180.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+angular_velocity_min = 90.0
+angular_velocity_max = 90.0
+angle_min = -45.0
+angle_max = 45.0
+scale_curve = SubResource("CurveTexture_mjvr2")
+color = Color(1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ltbnc"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_tv0gd"]
+material = SubResource("StandardMaterial3D_ltbnc")
+size = Vector2(0.8, 0.8)
+
+[sub_resource type="Gradient" id="Gradient_jy6ft"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_swgu1"]
+gradient = SubResource("Gradient_jy6ft")
+
+[sub_resource type="Curve" id="Curve_cgwp2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 5), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8u761"]
+curve = SubResource("Curve_cgwp2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0hojb"]
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+scale_curve = SubResource("CurveTexture_8u761")
+color = Color(1, 1, 0, 1)
+color_ramp = SubResource("GradientTexture1D_swgu1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0crn3"]
+transparency = 4
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="TorusMesh" id="TorusMesh_wsu7n"]
+material = SubResource("StandardMaterial3D_0crn3")
+
 [node name="enemy_mega_bullet" type="Node3D"]
 script = ExtResource("1_ufdes")
-max_lifetime_secs = 60.0
+max_lifetime_secs = 5.0
+bullet_explosion_secs = 1.5
 
 [node name="EnemyHitbox" type="Area3D" parent="."]
 transform = Transform3D(0.999999, -6.97573e-16, -1.52459e-23, -1.52459e-23, -4.37113e-08, 0.999999, -6.97573e-16, -0.999999, -4.37113e-08, 2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -30,10 +125,33 @@ damage = 15
 [node name="HitboxCollider" type="CollisionShape3D" parent="EnemyHitbox"]
 shape = SubResource("CapsuleShape3D_qwteq")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="EnemyHitbox"]
-cast_shadow = 0
-gi_mode = 0
-visibility_range_end = 100.0
-mesh = SubResource("CapsuleMesh_0osf0")
+[node name="BulletMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_6ktvd")
+
+[node name="TailParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(-1, 3.48787e-16, -8.74228e-08, 3.48787e-16, 1, -3.48787e-16, 8.74228e-08, -3.48787e-16, -1, 2.08165e-12, 2.08165e-12, 4.39202)
+amount = 5
+lifetime = 0.3
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_xrj05")
+draw_pass_1 = SubResource("QuadMesh_dkhmu")
+
+[node name="ExplodeParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -3.75)
+emitting = false
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_mvuur")
+draw_pass_1 = SubResource("QuadMesh_tv0gd")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.01681)
+emitting = false
+amount = 1
+lifetime = 0.5
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_0hojb")
+draw_pass_1 = SubResource("TorusMesh_wsu7n")
 
 [connection signal="body_entered" from="EnemyHitbox" to="." method="_on_body_entered" flags=18]

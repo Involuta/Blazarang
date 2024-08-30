@@ -48,3 +48,8 @@ res://cotu/CotuControl.gd
 res://rang/roserang.gd
 res://rang/roserang.tscn
 res://globals.gd
+res://enemies/enemy_bullet.tscn
+res://glb_inherited_scenes/x_boss_meshes.tscn
+res://enemies/bullet.gd
+res://enemies/enemy_mega_bullet.tscn
+res://levels/level1_section_nodes/gauntlet_arena1.gd

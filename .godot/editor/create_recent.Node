@@ -1,14 +1,14 @@
+GPUParticles3D
+MeshInstance3D
+AnimationPlayer
 TextureRect
 Node3D
-AnimationPlayer
 CollisionShape3D
 Hitbox
-GPUParticles3D
 BoneAttachment3D
 FuncGodotMap
 Sprite3D
 GPUParticles2D
-MeshInstance3D
 Area3D
 Hurtbox
 WorldEnvironment

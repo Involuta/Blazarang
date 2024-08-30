@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dl6hfq4ei0eok"]
+[gd_scene load_steps=16 format=3 uid="uid://dl6hfq4ei0eok"]
 
 [ext_resource type="Script" path="res://hitbox.gd" id="1_abaar"]
 [ext_resource type="Script" path="res://enemies/bullet.gd" id="1_ld4k0"]
@@ -7,14 +7,80 @@
 radius = 0.15
 height = 1.5
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ussiw"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bgh8b"]
 shading_mode = 0
-albedo_color = Color(1, 1, 0.121569, 1)
+albedo_color = Color(1, 1, 0, 1)
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_0osf0"]
-material = SubResource("StandardMaterial3D_ussiw")
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fy3ne"]
+material = SubResource("StandardMaterial3D_bgh8b")
 radius = 0.15
 height = 1.5
+
+[sub_resource type="Curve" id="Curve_4lsch"]
+_data = [Vector2(2.08165e-12, 1), 0.0, 0.0, 0, 0, Vector2(1, 2.08165e-12), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_exdns"]
+curve = SubResource("Curve_4lsch")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xa23a"]
+direction = Vector3(2.08165e-12, 2.08165e-12, -1)
+spread = 0.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 3.0
+initial_velocity_max = 3.0
+angular_velocity_min = 90.0
+angular_velocity_max = 90.0
+angle_min = -45.0
+angle_max = 45.0
+scale_curve = SubResource("CurveTexture_exdns")
+color = Color(1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6a43x"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_f6gkp"]
+material = SubResource("StandardMaterial3D_6a43x")
+size = Vector2(0.2, 0.2)
+
+[sub_resource type="Curve" id="Curve_rxjmq"]
+_data = [Vector2(2.08165e-12, 1), 0.0, 0.0, 0, 0, Vector2(1, 2.08165e-12), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_78y1c"]
+curve = SubResource("Curve_rxjmq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o14a6"]
+direction = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+spread = 180.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 3.0
+initial_velocity_max = 3.0
+angular_velocity_min = 90.0
+angular_velocity_max = 90.0
+angle_min = -45.0
+angle_max = 45.0
+scale_curve = SubResource("CurveTexture_78y1c")
+color = Color(1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jkc6s"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_ofniw"]
+material = SubResource("StandardMaterial3D_jkc6s")
+size = Vector2(0.2, 0.2)
 
 [node name="enemy_bullet" type="Node3D"]
 script = ExtResource("1_ld4k0")
@@ -28,10 +94,25 @@ script = ExtResource("1_abaar")
 [node name="HitboxCollider" type="CollisionShape3D" parent="EnemyHitbox"]
 shape = SubResource("CapsuleShape3D_qwteq")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="EnemyHitbox"]
-cast_shadow = 0
-gi_mode = 0
-visibility_range_end = 100.0
-mesh = SubResource("CapsuleMesh_0osf0")
+[node name="BulletMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_fy3ne")
+
+[node name="TailParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(-1, 3.48787e-16, -8.74228e-08, 3.48787e-16, 1, -3.48787e-16, 8.74228e-08, -3.48787e-16, -1, 2.08165e-12, 2.08165e-12, 0.703691)
+amount = 5
+lifetime = 0.3
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_xa23a")
+draw_pass_1 = SubResource("QuadMesh_f6gkp")
+
+[node name="ExplodeParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -0.7)
+emitting = false
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_o14a6")
+draw_pass_1 = SubResource("QuadMesh_ofniw")
 
 [connection signal="body_entered" from="EnemyHitbox" to="." method="_on_body_entered"]
