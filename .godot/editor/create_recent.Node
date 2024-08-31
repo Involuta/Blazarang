@@ -1,9 +1,10 @@
-CollisionShape3D
-Hitbox
 GPUParticles3D
 MeshInstance3D
-AnimationPlayer
 Node3D
+GPUParticlesAttractorSphere3D
+CollisionShape3D
+Hitbox
+AnimationPlayer
 TextureRect
 BoneAttachment3D
 FuncGodotMap
@@ -29,4 +30,3 @@ AudioStreamPlayer3D
 AudioStreamPlayer
 Node2D
 TextEdit
-ColorRect
