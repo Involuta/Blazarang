@@ -1,3 +1,4 @@
+res://
 res://enemies/enemy_anims
 res://enemies
 res://level_maps
@@ -5,7 +6,6 @@ res://textures
 res://glb_inherited_scenes
 res://levels
 res://audio/sfx
-res://
 res://ui
 /Users/ryanbascos/GameDevMiscAssets
 res://glb_imports

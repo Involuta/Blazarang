@@ -43,3 +43,4 @@ res://enemies/bullet.gd
 res://levels/level1_section_nodes/gauntlet_arena1.gd
 res://glb_inherited_scenes/basic_sword.tscn
 res://enemies/x_boss.gd
+res://enemies/x_teleport_in.tscn

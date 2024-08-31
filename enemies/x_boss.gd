@@ -219,6 +219,11 @@ func dash():
 func teleport():
 	global_position.x = x_icon_pos.global_position.x
 	global_position.z = x_icon_pos.global_position.z
+	var tp_inst = load("res://enemies/x_teleport_in.tscn").instantiate()
+	level.add_child.call_deferred(tp_inst)
+	await tp_inst.tree_entered
+	tp_inst.global_position = global_position
+	tp_inst.global_position.y = x_icon_pos.global_position.y
 
 func slipnslice_rush():
 	velocity = slipnslice_speed * -transform.basis.z
