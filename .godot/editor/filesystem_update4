@@ -42,3 +42,4 @@ res://enemies/enemy_bullet.tscn
 res://enemies/enemy_mega_bullet.tscn
 res://glb_inherited_scenes/basic_sword.tscn
 res://enemies/x_teleport_in.tscn
+res://glb_inherited_scenes/x_head_pieces.tscn
