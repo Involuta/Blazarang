@@ -1,5 +1,7 @@
 extends Level
 
+var BPM := 112
+
 var spin_speed := .25
 
 @onready var spawner_spinner := $SpawnerSpinner
@@ -22,8 +24,8 @@ var pillars_raised := true
 var sequence_begun := false
 var wave_1_duration := 15
 var wave_2_duration := 25
-var wave_3_duration := 8
-var wave_4_duration := 25
+var wave_3_duration := 10
+var wave_4_duration := 30
 var wave_5_duration := 40
 var wave_6_duration := 25
 
@@ -64,7 +66,7 @@ func lower_pillars():
 func begin_sequence():
 	sequence_begun = true
 	if (wave_1_duration > 0):
-		gang()
+		rnb()
 		await get_tree().create_timer(wave_1_duration).timeout
 	if (wave_2_duration > 0):
 		gang()

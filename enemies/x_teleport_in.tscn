@@ -277,5 +277,4 @@ script = ExtResource("2_y3vjr")
 damage = 12
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("CylinderShape3D_4n6g8")

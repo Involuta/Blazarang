@@ -21,6 +21,7 @@ res://shaders/outline_everything.gdshader
 res://rang/slash_test.tres
 res://ui/glow.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
+res://levels/level1_section_nodes/gauntlet_arena1.gd
 res://enemies/enemy_melee_tier2.tscn
 res://enemies/enemy_melee_tier3.tscn
 res://glb_inherited_scenes/x_left_arm.tscn
@@ -36,13 +37,8 @@ res://enemies/x_boss.tscn
 res://levels/x_boss_level_section_nodes/x_boss_arena1.tscn
 res://enemies/x_icon.tscn
 res://rang/roserang.tscn
-res://enemies/enemy_bullet.tscn
 res://glb_inherited_scenes/x_boss_meshes.tscn
+res://enemies/enemy_bullet.tscn
 res://enemies/enemy_mega_bullet.tscn
-res://enemies/bullet.gd
-res://levels/level1_section_nodes/gauntlet_arena1.gd
 res://glb_inherited_scenes/basic_sword.tscn
-res://enemies/x_boss.gd
 res://enemies/x_teleport_in.tscn
-res://enemies/enemy_anims/x_triangle_flyingkick.res
-res://enemies/enemy_anims/x_triangle_axkick.res

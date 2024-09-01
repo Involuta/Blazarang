@@ -500,16 +500,16 @@ surface_material_override/2 = SubResource("StandardMaterial3D_y6nrg")
 surface_material_override/5 = SubResource("StandardMaterial3D_cpdpd")
 
 [node name="LeftArm" parent="X_boss_meshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.274495, -0.621809, -0.733489, -0.895531, 0.112533, -0.430535, 0.350252, 0.775042, -0.525959, 3.5919, 14.8384, -4.78542)
+transform = Transform3D(0.274496, -0.621809, -0.733489, -0.895531, 0.112533, -0.430535, 0.350252, 0.775042, -0.525959, 3.5919, 14.8384, -4.78541)
 
 [node name="RightArm" parent="X_boss_meshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.272001, 0.622716, 0.733649, 0.897279, 0.11136, -0.427189, -0.347716, 0.774483, -0.52846, -3.5919, 14.8606, -4.75898)
+transform = Transform3D(0.272002, 0.622715, 0.733649, 0.897279, 0.111359, -0.427189, -0.347715, 0.774484, -0.528459, -3.5919, 14.8606, -4.75897)
 
 [node name="LeftFoot" parent="X_boss_meshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(-0.989507, 0.141815, -0.0278209, -0.144323, -0.979794, 0.138453, -0.00762676, 0.14102, 0.989976, 3.00019, 3.59997, 2.15086)
+transform = Transform3D(-0.98951, 0.141813, -0.0278206, -0.144323, -0.979794, 0.138454, -0.00762696, 0.141021, 0.989976, 3.00019, 3.59997, 2.15086)
 
 [node name="RightFoot" parent="X_boss_meshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(-0.988293, -0.151524, 0.0177794, 0.0177269, 0.00169808, 0.999842, -0.15153, 0.988453, 0.00100857, -2.94897, 3.74242, 8.18994)
+transform = Transform3D(-0.988293, -0.151524, 0.0177794, 0.017727, 0.0016969, 0.999841, -0.151529, 0.988452, 0.00100896, -2.94897, 3.74242, 8.18994)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_uk78c")
