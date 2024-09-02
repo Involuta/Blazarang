@@ -16,6 +16,7 @@ enum {
 }
 var x_icon_pos_state := MY_POS
 var x_icon_lerp_val := 1.0
+var x_icon_tp_to_left := true
 
 enum DIST_TYPE {
 	SHORT_DIST,
@@ -307,6 +308,7 @@ func set_x_icon_teleport_pos():
 	# No need for lerp since it's not jumping directly to 1.0
 	x_icon_lerp_val = .2
 	x_icon_pos_state = TELEPORT_POS
+	x_icon_tp_to_left = rng.randf() < .5
 
 func set_x_icon_stationary():
 	x_icon_pos_state = STATIONARY
@@ -319,6 +321,8 @@ func x_icon_follow_my_pos():
 func x_icon_follow_teleport_pos():
 	var dir_to_target := global_position.direction_to(target.global_position)
 	var icon_vec := Vector2(dir_to_target.x, dir_to_target.z).orthogonal()
+	if x_icon_tp_to_left:
+		icon_vec *= -1
 	x_icon_pos.global_position.x = target.global_position.x + teleport_dist_from_target * icon_vec.x
 	x_icon_pos.global_position.z = target.global_position.z + teleport_dist_from_target * icon_vec.y
 

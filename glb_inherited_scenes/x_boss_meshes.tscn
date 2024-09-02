@@ -1,42 +1,11 @@
-[gd_scene load_steps=28 format=3 uid="uid://b3uvg3j4qge8o"]
+[gd_scene load_steps=21 format=3 uid="uid://b3uvg3j4qge8o"]
 
 [ext_resource type="PackedScene" uid="uid://rp0n2dfx0chj" path="res://glb_imports/8164_meshes.glb" id="1_mluec"]
+[ext_resource type="PackedScene" uid="uid://d1opgv0y2ujut" path="res://glb_inherited_scenes/x_head_pieces.tscn" id="2_pkf4d"]
 
-[sub_resource type="Shader" id="Shader_065xt"]
-code = "shader_type spatial;
-render_mode cull_front, unshaded;
-
-uniform vec4 outline_color : source_color;
-uniform float outline_width = 1.0;
-
-void vertex() {
-	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
-	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
-	
-	vec2 offset = normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
-	
-	clip_position.xy += offset;
-	
-	POSITION = clip_position;
-}
-
-void fragment() {
-	ALBEDO = outline_color.rgb;
-	if (outline_color.a < 1.0) {
-		ALPHA = outline_color.a;
-	}
-}"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_s7a6n"]
-render_priority = 0
-shader = SubResource("Shader_065xt")
-shader_parameter/outline_color = Color(0.431373, 0.431373, 0.431373, 1)
-shader_parameter/outline_width = 1.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6w36t"]
-next_pass = SubResource("ShaderMaterial_s7a6n")
-albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
-roughness = 0.0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c5l8d"]
+transparency = 4
+albedo_color = Color(1, 1, 1, 0)
 
 [sub_resource type="Shader" id="Shader_lib57"]
 code = "shader_type spatial;
@@ -146,113 +115,17 @@ next_pass = SubResource("ShaderMaterial_tobhi")
 albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
 roughness = 0.0
 
-[sub_resource type="Shader" id="Shader_hcnm2"]
-code = "shader_type spatial;
-render_mode cull_front, unshaded;
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jfquu"]
+transparency = 4
+albedo_color = Color(1, 1, 1, 0)
 
-uniform vec4 outline_color : source_color;
-uniform float outline_width = 1.0;
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlfdu"]
+transparency = 4
+albedo_color = Color(1, 1, 1, 0)
 
-void vertex() {
-	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
-	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
-	
-	vec2 offset = normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
-	
-	clip_position.xy += offset;
-	
-	POSITION = clip_position;
-}
-
-void fragment() {
-	ALBEDO = outline_color.rgb;
-	if (outline_color.a < 1.0) {
-		ALPHA = outline_color.a;
-	}
-}"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pecgi"]
-render_priority = 0
-shader = SubResource("Shader_hcnm2")
-shader_parameter/outline_color = Color(0.431373, 0.431373, 0.431373, 1)
-shader_parameter/outline_width = 1.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ot1fy"]
-next_pass = SubResource("ShaderMaterial_pecgi")
-albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
-roughness = 0.0
-
-[sub_resource type="Shader" id="Shader_vfain"]
-code = "shader_type spatial;
-render_mode cull_front, unshaded;
-
-uniform vec4 outline_color : source_color;
-uniform float outline_width = 1.0;
-
-void vertex() {
-	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
-	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
-	
-	vec2 offset = normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
-	
-	clip_position.xy += offset;
-	
-	POSITION = clip_position;
-}
-
-void fragment() {
-	ALBEDO = outline_color.rgb;
-	if (outline_color.a < 1.0) {
-		ALPHA = outline_color.a;
-	}
-}"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_n30ri"]
-render_priority = 0
-shader = SubResource("Shader_vfain")
-shader_parameter/outline_color = Color(0.431373, 0.431373, 0.431373, 1)
-shader_parameter/outline_width = 1.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_woqvd"]
-next_pass = SubResource("ShaderMaterial_n30ri")
-albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
-roughness = 0.0
-
-[sub_resource type="Shader" id="Shader_8oy8s"]
-code = "shader_type spatial;
-render_mode cull_front, unshaded;
-
-uniform vec4 outline_color : source_color;
-uniform float outline_width = 1.0;
-
-void vertex() {
-	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
-	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
-	
-	vec2 offset = normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
-	
-	clip_position.xy += offset;
-	
-	POSITION = clip_position;
-}
-
-void fragment() {
-	ALBEDO = outline_color.rgb;
-	if (outline_color.a < 1.0) {
-		ALPHA = outline_color.a;
-	}
-}"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_keq6n"]
-render_priority = 0
-shader = SubResource("Shader_8oy8s")
-shader_parameter/outline_color = Color(0.431373, 0.431373, 0.431373, 1)
-shader_parameter/outline_width = 1.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wmyen"]
-next_pass = SubResource("ShaderMaterial_keq6n")
-albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
-roughness = 0.0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5bl6g"]
+transparency = 4
+albedo_color = Color(1, 1, 1, 0)
 
 [sub_resource type="Curve" id="Curve_yh0sc"]
 _data = [Vector2(2.08165e-12, 1), 0.0, 0.0, 0, 0, Vector2(1, 2.08165e-12), 0.0, 0.0, 0, 0]
@@ -281,55 +154,69 @@ material = SubResource("StandardMaterial3D_q6otp")
 size = Vector2(0.1, 0.1)
 
 [node name="X_boss_meshes" instance=ExtResource("1_mluec")]
-transform = Transform3D(-0.1, 3.48787e-17, -8.74228e-09, 3.48787e-17, 0.1, -3.48787e-17, 8.74228e-09, -3.48787e-17, -0.1, 2.08165e-12, -1.426, 2.08165e-12)
+transform = Transform3D(-0.1, 3.48787e-17, -8.74228e-09, 3.48787e-17, 0.1, -3.48787e-17, 8.74228e-09, -3.48787e-17, -0.1, 2.08165e-12, -1.9, 2.08165e-12)
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/position = Vector3(1.08844e-07, 10.7897, -0.278193)
-bones/0/rotation = Quaternion(0.21644, 9.12654e-12, -4.11755e-11, 0.976296)
-bones/1/rotation = Quaternion(0.0612991, 2.58694e-12, 4.20951e-11, 0.998119)
-bones/2/rotation = Quaternion(0.0871557, 1.50712e-18, -1.83863e-17, 0.996195)
-bones/3/rotation = Quaternion(0.0848003, 1.50606e-18, -1.83734e-17, 0.996398)
-bones/4/rotation = Quaternion(0.0689818, -5.99835e-19, -2.78184e-18, 0.997618)
-bones/8/rotation = Quaternion(0.577653, -0.0366593, 0.0159803, 0.815302)
-bones/9/rotation = Quaternion(-7.96982e-08, -1.82008e-07, 0.499923, 0.86607)
-bones/10/rotation = Quaternion(0.0866141, 0.669092, -0.0642926, 0.73531)
-bones/12/rotation = Quaternion(0.577259, 0.0374805, -0.00874955, 0.815653)
-bones/13/rotation = Quaternion(-8.47613e-07, 1.44498e-06, -0.504115, 0.863636)
-bones/14/rotation = Quaternion(0.098534, -0.669172, 0.0744728, 0.732771)
-bones/15/rotation = Quaternion(-0.037902, -0.586951, -0.80506, 0.0770106)
-bones/15/scale = Vector3(1, 1, 0.999999)
-bones/16/rotation = Quaternion(-0.758425, -3.11174e-06, -2.7257e-06, 0.65176)
-bones/17/rotation = Quaternion(0.704917, 0.0194288, -0.00149366, 0.709022)
-bones/18/rotation = Quaternion(0.276961, 0.230053, -0.0684875, 0.930418)
-bones/20/rotation = Quaternion(-0.0217014, 0.564923, 0.822127, 0.067072)
-bones/20/scale = Vector3(1, 1, 0.999999)
-bones/21/rotation = Quaternion(-0.685204, 6.39391e-06, 7.06887e-06, 0.728351)
-bones/22/rotation = Quaternion(0.507848, -0.0198179, -0.0143995, 0.861098)
-bones/23/rotation = Quaternion(0.280793, -0.231225, 0.06984, 0.928877)
+bones/0/position = Vector3(1, 8.4, -0.52)
+bones/0/rotation = Quaternion(-0.506676, 0.312546, -0.339883, 0.728062)
+bones/4/rotation = Quaternion(0.428176, -0.363952, 0.298726, 0.771341)
+bones/8/rotation = Quaternion(0.298111, 0.511686, -0.436916, 0.677061)
+bones/9/rotation = Quaternion(-1.74968e-07, -1.39075e-07, 0.844759, 0.535148)
+bones/10/rotation = Quaternion(0.0119258, -0.00203716, -0.195841, 0.980561)
+bones/12/rotation = Quaternion(0.533417, -0.277365, 0.190147, 0.776131)
+bones/13/rotation = Quaternion(-5.69717e-07, 1.56916e-06, -0.321885, 0.946779)
+bones/14/rotation = Quaternion(0.0305796, -0.294388, -0.127211, 0.946688)
+bones/15/rotation = Quaternion(-0.110629, -0.858389, -0.318533, 0.386608)
+bones/15/scale = Vector3(1.00001, 1, 0.999994)
+bones/16/rotation = Quaternion(-0.926809, -2.07084e-06, -3.55545e-06, 0.375534)
+bones/17/rotation = Quaternion(0.474522, 0.346235, -0.197067, 0.78493)
+bones/18/rotation = Quaternion(0.276971, 0.230061, -0.0684611, 0.930415)
+bones/20/rotation = Quaternion(0.0196722, -0.0679827, -0.996444, 0.0457237)
+bones/20/scale = Vector3(0.999999, 1, 1)
+bones/21/rotation = Quaternion(-0.00168907, 9.46982e-06, 7.76449e-07, 0.999999)
+bones/22/rotation = Quaternion(0.338459, 0.0664494, -0.00479024, 0.93862)
+bones/23/rotation = Quaternion(0.413326, -0.237704, 0.0435529, 0.87793)
 
-[node name="Body_001" parent="Armature/Skeleton3D" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_6w36t")
+[node name="Head" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="0"]
+transform = Transform3D(0.99973, -0.023128, 0.00238959, 0.0218289, 0.969, 0.246095, -0.00800728, -0.245976, 0.969243, 2.02584, 11.0534, -7.96476)
+bone_name = "mixamorig_Head"
+bone_idx = 5
+
+[node name="8164_head_meshes" parent="Armature/Skeleton3D/Head" index="0" instance=ExtResource("2_pkf4d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.303, 2.08165e-12)
+
+[node name="BottomFace" parent="Armature/Skeleton3D/Head/8164_head_meshes" index="0"]
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0, 0.897338, 2)
+
+[node name="LeftFace" parent="Armature/Skeleton3D/Head/8164_head_meshes" index="1"]
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0, 0.897338, 2)
+
+[node name="TopFace" parent="Armature/Skeleton3D/Head/8164_head_meshes" index="3"]
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0, 0.897338, 2)
+
+[node name="Body_001" parent="Armature/Skeleton3D" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_c5l8d")
 surface_material_override/1 = SubResource("StandardMaterial3D_toeh3")
 surface_material_override/2 = SubResource("StandardMaterial3D_toeh3")
 surface_material_override/3 = SubResource("StandardMaterial3D_l037o")
 surface_material_override/4 = SubResource("StandardMaterial3D_nw6f6")
 surface_material_override/5 = SubResource("StandardMaterial3D_toeh3")
-surface_material_override/6 = SubResource("StandardMaterial3D_ot1fy")
-surface_material_override/7 = SubResource("StandardMaterial3D_woqvd")
-surface_material_override/8 = SubResource("StandardMaterial3D_wmyen")
+surface_material_override/6 = SubResource("StandardMaterial3D_jfquu")
+surface_material_override/7 = SubResource("StandardMaterial3D_tlfdu")
+surface_material_override/8 = SubResource("StandardMaterial3D_5bl6g")
 
-[node name="LeftArm" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
-transform = Transform3D(-0.0379034, 0.20784, -0.977428, 0.73599, -0.655818, -0.167994, -0.675931, -0.725744, -0.12811, 3.5919, 16.4114, 4.02706)
+[node name="LeftArm" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
+transform = Transform3D(-0.0331594, -0.482534, -0.875249, 0.305127, -0.838809, 0.450885, -0.951734, -0.252111, 0.175049, 4.00927, 7.10296, -7.86609)
 bone_name = "mixamorig_LeftArm"
 bone_idx = 8
 
-[node name="RightArm" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
-transform = Transform3D(-0.0400218, -0.207907, 0.977329, -0.741681, -0.649247, -0.168486, 0.669558, -0.73161, -0.128217, -3.5919, 16.3832, 4.04699)
+[node name="RightArm" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.586319, -0.731235, 0.348605, 0.20673, -0.281022, -0.937171, 0.783258, 0.621548, -0.0136006, -0.0836841, 12.9517, -7.0609)
 bone_name = "mixamorig_RightArm"
 bone_idx = 12
 
-[node name="LeftFoot" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="3"]
-transform = Transform3D(-0.989495, 0.141861, -0.0278306, -0.128833, -0.777982, 0.614935, 0.065584, 0.612061, 0.788085, 2.00003, 3.99978, 1.09673e-05)
+[node name="LeftFoot" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="4"]
+transform = Transform3D(-0.586238, 0.66362, 0.464681, 0.77844, 0.302552, 0.550007, 0.224414, 0.684157, -0.693948, 5.00027, 6.39993, 0.48002)
 bone_name = "mixamorig_LeftFoot"
 bone_idx = 17
 
@@ -338,8 +225,8 @@ amount = 12
 process_material = SubResource("ParticleProcessMaterial_vtshv")
 draw_pass_1 = SubResource("QuadMesh_eqjva")
 
-[node name="RightFoot" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="4"]
-transform = Transform3D(-0.989284, -0.143571, 0.0265642, 0.144633, -0.938713, 0.312885, -0.0199851, 0.313375, 0.949418, -2.00017, 3.3204, 0.24624)
+[node name="RightFoot" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="5"]
+transform = Transform3D(-0.710055, 0.453956, 0.538281, 0.674824, 0.220403, 0.704297, 0.201081, 0.863335, -0.462839, 0.0184452, 6.67852, 9.41437)
 bone_name = "mixamorig_RightFoot"
 bone_idx = 22
 
@@ -347,3 +234,5 @@ bone_idx = 22
 amount = 12
 process_material = SubResource("ParticleProcessMaterial_vtshv")
 draw_pass_1 = SubResource("QuadMesh_eqjva")
+
+[editable path="Armature/Skeleton3D/Head/8164_head_meshes"]

@@ -1,6 +1,57 @@
-[gd_scene load_steps=9 format=3 uid="uid://d1opgv0y2ujut"]
+[gd_scene load_steps=16 format=3 uid="uid://d1opgv0y2ujut"]
 
 [ext_resource type="PackedScene" uid="uid://da5jjble4aa6b" path="res://glb_imports/8164_head_meshes.glb" id="1_k1ewo"]
+
+[sub_resource type="Shader" id="Shader_tiwuv"]
+code = "shader_type spatial;
+render_mode cull_front, unshaded;
+
+uniform vec4 outline_color : source_color;
+uniform float outline_width = 1.0;
+
+void vertex() {
+	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
+	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
+	
+	vec2 offset = normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
+	
+	clip_position.xy += offset;
+	
+	POSITION = clip_position;
+}
+
+void fragment() {
+	ALBEDO = outline_color.rgb;
+	if (outline_color.a < 1.0) {
+		ALPHA = outline_color.a;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tobhi"]
+render_priority = 0
+shader = SubResource("Shader_tiwuv")
+shader_parameter/outline_color = Color(0.431373, 0.431373, 0.431373, 1)
+shader_parameter/outline_width = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8jhra"]
+next_pass = SubResource("ShaderMaterial_tobhi")
+albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dpbsh"]
+next_pass = SubResource("ShaderMaterial_tobhi")
+albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7wboe"]
+next_pass = SubResource("ShaderMaterial_tobhi")
+albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ehw4f"]
+next_pass = SubResource("ShaderMaterial_tobhi")
+albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
+roughness = 0.0
 
 [sub_resource type="Animation" id="Animation_ktr4m"]
 resource_name = "BottomFaceAction"
@@ -124,6 +175,22 @@ tracks/3/keys = {
 "values": [Vector3(2.08165e-12, 0.34, 2), Vector3(0, 0.897338, 2)]
 }
 
+[sub_resource type="Animation" id="Animation_v20rl"]
+resource_name = "expand_right"
+length = 0.30001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RightFace:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.38, 0.897, 2), Vector3(0, 0.897338, 2)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8ecom"]
 _data = {
 "BottomFaceAction": SubResource("Animation_ktr4m"),
@@ -131,22 +198,27 @@ _data = {
 "RightFaceAction": SubResource("Animation_4xbjj"),
 "TopFaceAction": SubResource("Animation_wn8ib"),
 "contract_all": SubResource("Animation_mc1gq"),
-"expand_all": SubResource("Animation_hk7sq")
+"expand_all": SubResource("Animation_hk7sq"),
+"expand_right": SubResource("Animation_v20rl")
 }
 
 [node name="8164_head_meshes" instance=ExtResource("1_k1ewo")]
 
 [node name="BottomFace" parent="." index="0"]
-transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0, 0.897338, 2)
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 2.08165e-12, 1.36, 2)
+surface_material_override/0 = SubResource("StandardMaterial3D_8jhra")
 
 [node name="LeftFace" parent="." index="1"]
-transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0, 0.897338, 2)
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, -0.38, 0.897, 2)
+surface_material_override/0 = SubResource("StandardMaterial3D_dpbsh")
 
 [node name="RightFace" parent="." index="2"]
 transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0, 0.897338, 2)
+surface_material_override/0 = SubResource("StandardMaterial3D_7wboe")
 
 [node name="TopFace" parent="." index="3"]
-transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0, 0.897338, 2)
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 2.08165e-12, 0.34, 2)
+surface_material_override/0 = SubResource("StandardMaterial3D_ehw4f")
 
 [node name="AnimationPlayer" parent="." index="4"]
 libraries = {

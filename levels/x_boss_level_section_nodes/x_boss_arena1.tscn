@@ -127,7 +127,7 @@ collision_mask = 0
 shape = SubResource("BoxShape3D_ufggu")
 
 [node name="XBoss" parent="." instance=ExtResource("2_duonk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 15.3529, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 12.2003, 2.08165e-12)
 
 [node name="XLeftArm" parent="." instance=ExtResource("2_2tvw5")]
 

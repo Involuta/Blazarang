@@ -1,3 +1,4 @@
+BoneAttachment3D
 GPUParticles3D
 MeshInstance3D
 Node3D
@@ -6,7 +7,6 @@ CollisionShape3D
 Hitbox
 AnimationPlayer
 TextureRect
-BoneAttachment3D
 FuncGodotMap
 Sprite3D
 GPUParticles2D
