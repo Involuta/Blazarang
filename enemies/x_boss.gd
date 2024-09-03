@@ -51,6 +51,7 @@ var aiming_at_target := true
 	"Superman" : .25
 }
 
+@export var diagonal_dash_speed := 30.0
 @export var dash_speed := 40.0
 @export var teleport_dist_from_target := 5.0
 @export var slipnslice_speed := 20.0
@@ -213,6 +214,15 @@ func face_target():
 	look_at(target.global_position)
 	rotation.x = 0
 	rotation.z = 0
+
+func diagonal_dash():
+	var dir_to_target := global_position.direction_to(target.global_position)
+	var dir_to_target2D := Vector2(dir_to_target.x, dir_to_target.z)
+	var icon_vec := dir_to_target2D.orthogonal()
+	if x_icon_tp_to_left:
+		icon_vec *= -1
+	var dash_dir2D := dir_to_target2D + icon_vec
+	velocity = diagonal_dash_speed * Vector3(dash_dir2D.x, 0, dash_dir2D.y)
 
 func dash():
 	velocity = dash_speed * -transform.basis.z
