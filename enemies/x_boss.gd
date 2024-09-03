@@ -25,12 +25,12 @@ enum DIST_TYPE {
 
 var long_dist_wait_remaining := 5.0
 
-@export var max_long_dist_wait := 5.0
+@export var max_long_dist_wait := 2.0
 
 @export var aggro_distance := -1
 
 @export var follow_speed := 10.0
-@export var target_distance := 4.0
+@export var target_distance := 7.5
 
 @export var attack_duration_secs := 2.5
 
@@ -53,7 +53,7 @@ var aiming_at_target := true
 
 @export var diagonal_dash_speed := 30.0
 @export var dash_speed := 40.0
-@export var teleport_dist_from_target := 5.0
+@export var teleport_dist_from_target := 7.5
 @export var slipnslice_speed := 20.0
 @export var superman_fwd_speed := 20.0
 @export var superman_down_speed := 7.0
@@ -219,9 +219,9 @@ func diagonal_dash():
 	var dir_to_target := global_position.direction_to(target.global_position)
 	var dir_to_target2D := Vector2(dir_to_target.x, dir_to_target.z)
 	var icon_vec := dir_to_target2D.orthogonal()
-	if x_icon_tp_to_left:
+	if rng.randf() < .5:
 		icon_vec *= -1
-	var dash_dir2D := (3 * dir_to_target2D + icon_vec).normalized()
+	var dash_dir2D := (2.7 * dir_to_target2D + icon_vec).normalized()
 	velocity = diagonal_dash_speed * Vector3(dash_dir2D.x, 0, dash_dir2D.y)
 
 func dash():
@@ -326,7 +326,7 @@ func set_x_icon_stationary():
 func x_icon_follow_my_pos():
 	x_icon_pos.global_position.x = global_position.x
 	x_icon_pos.global_position.z = global_position.z
-	x_icon_pos.rotation.y = rotation.y
+	x_icon.rotation.y = rotation.y
 
 func x_icon_follow_teleport_pos():
 	var dir_to_target := global_position.direction_to(target.global_position)
