@@ -22,10 +22,10 @@ enum DIST_TYPE {
 	SHORT_DIST,
 	LONG_DIST
 }
-
 var long_dist_wait_remaining := 5.0
-
 @export var max_long_dist_wait := 2.0
+
+@export var min_y_pos := 11.4
 
 @export var aggro_distance := -1
 
@@ -98,6 +98,9 @@ func _physics_process(delta):
 				print("ATTACK")
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+	if global_position.y < min_y_pos:
+		velocity.y = 0
+		global_position.y = min_y_pos
 	match(behav_state):
 		WAIT:
 			wait()

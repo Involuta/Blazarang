@@ -1,9 +1,10 @@
+CollisionShape3D
+StaticBody3D
 BoneAttachment3D
 GPUParticles3D
 MeshInstance3D
 Node3D
 GPUParticlesAttractorSphere3D
-CollisionShape3D
 Hitbox
 AnimationPlayer
 TextureRect
@@ -14,7 +15,6 @@ Area3D
 Hurtbox
 WorldEnvironment
 RayCast3D
-StaticBody3D
 Camera3D
 Camera2D
 Control
