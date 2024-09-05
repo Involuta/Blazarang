@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dasrfemvybmv"]
+[gd_scene load_steps=19 format=3 uid="uid://dasrfemvybmv"]
 
 [ext_resource type="PackedScene" uid="uid://cpx64anoc5p8u" path="res://glb_imports/BasicSwordBlade.glb" id="1_k4b5i"]
 [ext_resource type="Shader" path="res://GPUTrail-main/shaders/trail.gdshader" id="2_iitfv"]
@@ -15,6 +15,12 @@ albedo_color = Color(1, 1, 0, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jp5km"]
 shader = ExtResource("2_iitfv")
 
+[sub_resource type="Gradient" id="Gradient_cx3l6"]
+colors = PackedColorArray(1, 1, 0, 0.490196, 1, 1, 0, 0.0392157)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_avxio"]
+gradient = SubResource("Gradient_cx3l6")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yow5x"]
 resource_local_to_scene = true
 render_priority = 0
@@ -22,7 +28,7 @@ shader = ExtResource("3_hsmaq")
 shader_parameter/emmission_transform = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
 shader_parameter/flags = 40
 shader_parameter/tex = ExtResource("4_1ldum")
-shader_parameter/color_ramp = ExtResource("4_1ldum")
+shader_parameter/color_ramp = SubResource("GradientTexture1D_avxio")
 shader_parameter/curve = ExtResource("5_4x7ld")
 
 [sub_resource type="QuadMesh" id="QuadMesh_8ktjm"]
@@ -121,7 +127,7 @@ _data = {
 transform = Transform3D(1.5, -5.2318e-16, 1.13356e-15, 5.2318e-16, 1.5, -1.13356e-15, -5.2318e-16, 5.2318e-16, 3.25, 0, 0, 0)
 
 [node name="Blade" parent="." index="0"]
-transform = Transform3D(1, 1.57912e-25, 6.90256e-30, 0, -4.37114e-11, 1, 1.57912e-22, -0.001, -4.37114e-08, 3.66788e-16, -3.66788e-16, -0.485357)
+transform = Transform3D(1, 1.57912e-25, 6.90255e-30, 0, -4.37114e-11, 1, 1.57912e-22, -0.001, -4.37114e-08, 3.66788e-16, -3.66788e-16, -0.485357)
 surface_material_override/0 = SubResource("StandardMaterial3D_qbx8q")
 
 [node name="GPUTrail3D" type="GPUParticles3D" parent="." index="1"]
@@ -134,7 +140,7 @@ process_material = SubResource("ShaderMaterial_jp5km")
 draw_pass_1 = SubResource("QuadMesh_8ktjm")
 script = ExtResource("6_eaulg")
 length = 12
-color_ramp = ExtResource("4_1ldum")
+color_ramp = SubResource("GradientTexture1D_avxio")
 curve = ExtResource("5_4x7ld")
 _defaults_have_been_set = true
 
@@ -144,4 +150,4 @@ libraries = {
 }
 
 [node name="BasicSwordHandle" parent="." index="3" instance=ExtResource("7_88eje")]
-transform = Transform3D(1, 1.57912e-22, 6.90256e-30, 0, -4.37114e-08, 1, 1.57912e-22, -1, -4.37114e-08, 3.66788e-16, -3.66788e-16, -0.485357)
+transform = Transform3D(1, 1.57912e-22, 6.90255e-30, 0, -4.37114e-08, 1, 1.57912e-22, -1, -4.37114e-08, 3.66788e-16, -3.66788e-16, -0.485357)

@@ -1,7 +1,7 @@
+GPUParticles3D
 CollisionShape3D
 StaticBody3D
 BoneAttachment3D
-GPUParticles3D
 MeshInstance3D
 Node3D
 GPUParticlesAttractorSphere3D
