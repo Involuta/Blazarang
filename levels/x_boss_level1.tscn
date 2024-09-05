@@ -32,7 +32,7 @@ script = ExtResource("1_sfodj")
 [node name="UIRoot" parent="." instance=ExtResource("2_h42ov")]
 
 [node name="cotuCB" parent="." instance=ExtResource("3_w7p5q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 11.5, 20)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 11.5, 15)
 
 [node name="Target" parent="." instance=ExtResource("4_vjqpw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)

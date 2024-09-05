@@ -10,10 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://c433gnebqhmb0" path="res://enemies/x_icon.tscn" id="8_ha6s8"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_om6er"]
-vertices = PackedVector3Array(-23.5, 3, 11.75, -23.5, 3, 23.5, -11.75, 3, 23.5, 11.75, 3, 23.5, 23.5, 3, 23.5, 23.5, 3, 11.75, 23.5, 3, -11.75, 23.5, 3, -23.5, 11.75, 3, -23.5, -11.75, 3, -23.5, -23.5, 3, -23.5, -23.5, 3, -11.75, -23.5, 3, 0, -23.5, 3, 11.75, -11.75, 3, 23.5, 0, 3, 23.5, 11.75, 3, 23.5, 23.5, 3, 11.75, 23.5, 3, 0, 23.5, 3, -11.75, 11.75, 3, -23.5, 0, 3, -23.5, 0, 3, -23.5, -11.75, 3, -23.5, -23.5, 3, -11.75, -23.5, 3, 0, 23.5, 3, 0, 0, 3, -23.5, -23.5, 3, 0, -11.75, 3, 23.5, 0, 3, 23.5, 23.5, 3, 11.75)
+vertices = PackedVector3Array(-23.5, 0.333333, 11.75, -23.5, 0.333333, 23.5, -11.75, 0.333333, 23.5, 11.75, 0.333333, 23.5, 23.5, 0.333333, 23.5, 23.5, 0.333333, 11.75, 23.5, 0.333333, -11.75, 23.5, 0.333333, -23.5, 11.75, 0.333333, -23.5, -11.75, 0.333333, -23.5, -23.5, 0.333333, -23.5, -23.5, 0.333333, -11.75, -23.5, 0.333333, 0, -23.5, 0.333333, 11.75, -11.75, 0.333333, 23.5, 0, 0.333333, 23.5, 11.75, 0.333333, 23.5, 23.5, 0.333333, 11.75, 23.5, 0.333333, 0, 23.5, 0.333333, -11.75, 11.75, 0.333333, -23.5, 0, 0.333333, -23.5, 0, 0.333333, -23.5, -11.75, 0.333333, -23.5, -23.5, 0.333333, -11.75, -23.5, 0.333333, 0, 23.5, 0.333333, 0, 0, 0.333333, -23.5, -23.5, 0.333333, 0, -11.75, 0.333333, 23.5, 0, 0.333333, 23.5, 23.5, 0.333333, 11.75)
 polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(8, 7, 6), PackedInt32Array(11, 10, 9), PackedInt32Array(14, 13, 12), PackedInt32Array(17, 16, 15), PackedInt32Array(19, 18, 20), PackedInt32Array(20, 18, 21), PackedInt32Array(23, 22, 24), PackedInt32Array(24, 22, 25), PackedInt32Array(31, 30, 26), PackedInt32Array(26, 30, 29), PackedInt32Array(26, 29, 28), PackedInt32Array(26, 28, 27)]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_be4jw"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_ymgnk"]
 _surfaces = [{
 "aabb": AABB(-24, -0.666667, -24, 48, 0.666677, 48),
 "attribute_data": PackedByteArray(0, 0, 16, 65, 0, 0, 0, 0, 0, 0, 16, 65, 0, 0, 128, 62, 0, 0, 16, 193, 0, 0, 128, 62, 0, 0, 16, 193, 0, 0, 0, 0, 0, 0, 16, 193, 0, 0, 0, 0, 0, 0, 16, 65, 0, 0, 0, 0, 0, 0, 16, 65, 0, 0, 128, 62, 0, 0, 16, 193, 0, 0, 128, 62, 0, 0, 16, 65, 0, 0, 0, 0, 0, 0, 16, 65, 0, 0, 128, 62, 0, 0, 16, 193, 0, 0, 128, 62, 0, 0, 16, 193, 0, 0, 0, 0, 0, 0, 16, 193, 0, 0, 0, 0, 0, 0, 16, 65, 0, 0, 0, 0, 0, 0, 16, 65, 0, 0, 128, 62, 0, 0, 16, 193, 0, 0, 128, 62),
@@ -38,11 +38,11 @@ _surfaces = [{
 "vertex_data": PackedByteArray(0, 0, 192, 65, 171, 170, 42, 191, 0, 0, 192, 193, 255, 127, 0, 0, 0, 0, 255, 223, 0, 0, 192, 193, 171, 170, 42, 191, 0, 0, 192, 193, 255, 127, 0, 0, 0, 0, 255, 223, 0, 0, 192, 193, 171, 170, 42, 191, 0, 0, 192, 65, 255, 127, 0, 0, 0, 0, 255, 223, 0, 0, 192, 65, 171, 170, 42, 191, 0, 0, 192, 65, 255, 127, 0, 0, 0, 0, 255, 223, 0, 0, 192, 65, 0, 0, 0, 0, 0, 0, 192, 193, 255, 127, 255, 255, 255, 191, 255, 191, 0, 0, 192, 65, 0, 0, 0, 0, 0, 0, 192, 65, 255, 127, 255, 255, 255, 191, 255, 191, 0, 0, 192, 193, 0, 0, 0, 0, 0, 0, 192, 65, 255, 127, 255, 255, 255, 191, 255, 191, 0, 0, 192, 193, 0, 0, 0, 0, 0, 0, 192, 193, 255, 127, 255, 255, 255, 191, 255, 191)
 }]
 
-[sub_resource type="ArrayOccluder3D" id="ArrayOccluder3D_schnn"]
+[sub_resource type="ArrayOccluder3D" id="ArrayOccluder3D_34nn2"]
 vertices = PackedVector3Array(-24, 0, -24, -24, -0.666667, -24, 24, -0.666667, -24, 24, 0, -24, -24, 0, -24, -24, 0, 24, -24, -0.666667, 24, -24, -0.666667, -24, 24, 0, -24, 24, -0.666667, -24, 24, -0.666667, 24, 24, 0, 24, -24, 0, 24, 24, 0, 24, 24, -0.666667, 24, -24, -0.666667, 24, 24, -0.666667, -24, -24, -0.666667, -24, -24, -0.666667, 24, 24, -0.666667, 24, 24, 0, -24, 24, 0, 24, -24, 0, 24, -24, 0, -24)
 indices = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 2, 3, 4, 5, 6, 4, 6, 7, 8, 9, 10, 8, 10, 11, 12, 13, 14, 12, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 17, 18, 16, 18, 19, 20, 21, 22, 20, 22, 23)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_apc4p"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mkemk"]
 points = PackedVector3Array(-24, 0, -24, -24, -0.666667, -24, 24, -0.666667, -24, 24, 0, -24, -24, 0, 24, -24, -0.666667, 24, 24, -0.666667, 24, 24, 0, 24)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ufggu"]
@@ -64,13 +64,13 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="entity_0_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/Arena/entity_0_worldspawn"]
-mesh = SubResource("ArrayMesh_be4jw")
+mesh = SubResource("ArrayMesh_ymgnk")
 
 [node name="entity_0_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/Arena/entity_0_worldspawn"]
-occluder = SubResource("ArrayOccluder3D_schnn")
+occluder = SubResource("ArrayOccluder3D_34nn2")
 
 [node name="entity_0_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/Arena/entity_0_worldspawn"]
-shape = SubResource("ConvexPolygonShape3D_apc4p")
+shape = SubResource("ConvexPolygonShape3D_mkemk")
 
 [node name="SunsetLight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.939018, 0.155596, 0.306651, -0.34115, 0.533412, 0.774008, -0.0431389, -0.831421, 0.553965, -3.16012e-30, 25.9766, 0)
