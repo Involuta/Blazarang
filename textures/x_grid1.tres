@@ -3,6 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://qh7u7hel7746" path="res://textures/x_grid1.png" id="1_cuk2u"]
 
 [resource]
+transparency = 4
+albedo_color = Color(1, 1, 1, 0.784314)
 albedo_texture = ExtResource("1_cuk2u")
 metallic = 0.25
 metallic_specular = 0.0
