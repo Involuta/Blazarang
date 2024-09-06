@@ -1,14 +1,15 @@
-[gd_scene load_steps=24 format=3 uid="uid://b2i61ldwbwc8o"]
+[gd_scene load_steps=23 format=3 uid="uid://b2i61ldwbwc8o"]
 
 [ext_resource type="PackedScene" uid="uid://cpx64anoc5p8u" path="res://glb_imports/BasicSwordBlade.glb" id="1_magb4"]
+[ext_resource type="Texture2D" uid="uid://crk6pkb7e5rwc" path="res://GPUTrail-main/defaults/texture.tres" id="4_oc1t2"]
 [ext_resource type="Texture2D" uid="uid://ct31fhxvcragr" path="res://GPUTrail-main/defaults/curve.tres" id="5_e2cg4"]
 [ext_resource type="Script" path="res://GPUTrail-main/GPUTrail3D.gd" id="6_bnh63"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qbx8q"]
 shading_mode = 0
-albedo_color = Color(1, 0.458824, 0, 1)
+albedo_color = Color(1, 0.219608, 0, 1)
 
-[sub_resource type="Shader" id="Shader_p3idx"]
+[sub_resource type="Shader" id="Shader_ras3i"]
 code = "shader_type particles;
 
 render_mode keep_data,disable_force,disable_velocity;
@@ -54,7 +55,7 @@ void process() {
 }"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5yjly"]
-shader = SubResource("Shader_p3idx")
+shader = SubResource("Shader_ras3i")
 
 [sub_resource type="Shader" id="Shader_lu3jv"]
 code = "shader_type spatial;
@@ -185,30 +186,25 @@ void fragment(){
 	}
 }"
 
-[sub_resource type="Gradient" id="Gradient_w1mtv"]
-colors = PackedColorArray(1, 0.517647, 0, 0.490196, 1, 1, 0, 0.0392157)
+[sub_resource type="Gradient" id="Gradient_w6t7k"]
+offsets = PackedFloat32Array(0.00431034, 1)
+colors = PackedColorArray(1, 0.219608, 0, 0.627451, 1, 0.219608, 0, 0.0392157)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_cjrym"]
-gradient = SubResource("Gradient_w1mtv")
+gradient = SubResource("Gradient_w6t7k")
 
-[sub_resource type="Gradient" id="Gradient_tpy4l"]
-colors = PackedColorArray(1, 0.517647, 0, 0.490196, 1, 0.517647, 0, 0.0392157)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_qkh6d"]
-gradient = SubResource("Gradient_tpy4l")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_k5xte"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e80fu"]
 resource_local_to_scene = true
 render_priority = 0
 shader = SubResource("Shader_lu3jv")
 shader_parameter/emmission_transform = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
 shader_parameter/flags = 40
-shader_parameter/tex = SubResource("GradientTexture1D_qkh6d")
+shader_parameter/tex = ExtResource("4_oc1t2")
 shader_parameter/color_ramp = SubResource("GradientTexture1D_cjrym")
 shader_parameter/curve = ExtResource("5_e2cg4")
 
 [sub_resource type="QuadMesh" id="QuadMesh_a1rq5"]
-material = SubResource("ShaderMaterial_k5xte")
+material = SubResource("ShaderMaterial_e80fu")
 
 [sub_resource type="Animation" id="Animation_5nsmi"]
 resource_name = "ExtendBlade"
@@ -221,10 +217,10 @@ tracks/0/path = NodePath("Blade:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05),
+"times": PackedFloat32Array(0, 0.0500001),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(1, 0.001, 1), Vector3(1, 1, 1)]
+"values": [Vector3(1, 0.001, 1), Vector3(1, 1.5, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -277,7 +273,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.05),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(1, 1, 1), Vector3(1, 0.001, 1)]
+"values": [Vector3(1, 1.5, 1), Vector3(1, 0.001, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -326,7 +322,7 @@ _data = {
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(2, 0.27, 0, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_f3hgu"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_srdny"]
 gradient = SubResource("Gradient_yunrh")
 
 [sub_resource type="Curve" id="Curve_1gu83"]
@@ -334,7 +330,7 @@ max_value = 2.0
 _data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_yi6k1"]
+[sub_resource type="CurveTexture" id="CurveTexture_uidvh"]
 curve = SubResource("Curve_1gu83")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0eofo"]
@@ -346,22 +342,23 @@ spread = 30.0
 gravity = Vector3(2.08165e-12, -9.8, 2.08165e-12)
 initial_velocity_min = 20.0
 initial_velocity_max = 20.0
-scale_curve = SubResource("CurveTexture_yi6k1")
+scale_curve = SubResource("CurveTexture_uidvh")
 color = Color(2, 0.27, 0, 1)
-color_ramp = SubResource("GradientTexture1D_f3hgu")
+color_ramp = SubResource("GradientTexture1D_srdny")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_geubj"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_682ty"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
 disable_receive_shadows = true
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_nd8hc"]
-material = SubResource("StandardMaterial3D_geubj")
-radius = 0.02
+[sub_resource type="CylinderMesh" id="CylinderMesh_25dic"]
+material = SubResource("StandardMaterial3D_682ty")
+top_radius = 0.0
+bottom_radius = 0.02
 height = 0.4
 
 [node name="XBlade" instance=ExtResource("1_magb4")]
-transform = Transform3D(1.5, -5.2318e-16, 1.13356e-15, 5.22257e-16, -0.00264419, -3.24999, 5.24101e-16, 1.5, -0.00572907, 0, 0, 0)
+transform = Transform3D(0.15, -5.2318e-17, 4.95493e-24, 0, -6.55671e-09, -0.325, 5.2318e-17, 0.15, -1.42062e-08, 0, 0, 0)
 
 [node name="Blade" parent="." index="0"]
 transform = Transform3D(1, 1.57912e-25, 6.90255e-30, 0, -4.37114e-11, 1, 1.57912e-22, -0.001, -4.37114e-08, -8.20059e-20, 8.20059e-20, 0.000109134)
@@ -394,4 +391,4 @@ emitting = false
 amount = 50
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_0eofo")
-draw_pass_1 = SubResource("CapsuleMesh_nd8hc")
+draw_pass_1 = SubResource("CylinderMesh_25dic")
