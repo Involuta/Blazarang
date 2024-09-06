@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b2i61ldwbwc8o"]
+[gd_scene load_steps=21 format=3 uid="uid://b2i61ldwbwc8o"]
 
 [ext_resource type="PackedScene" uid="uid://cpx64anoc5p8u" path="res://glb_imports/BasicSwordBlade.glb" id="1_magb4"]
 [ext_resource type="Texture2D" uid="uid://crk6pkb7e5rwc" path="res://GPUTrail-main/defaults/texture.tres" id="4_oc1t2"]
@@ -187,8 +187,7 @@ void fragment(){
 }"
 
 [sub_resource type="Gradient" id="Gradient_w6t7k"]
-offsets = PackedFloat32Array(0.00431034, 1)
-colors = PackedColorArray(1, 0.219608, 0, 0.627451, 1, 0.219608, 0, 0.0392157)
+colors = PackedColorArray(1, 0.219608, 0, 1, 1, 0.219608, 0, 0.0392157)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_cjrym"]
 gradient = SubResource("Gradient_w6t7k")
@@ -220,7 +219,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.0500001),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(1, 0.001, 1), Vector3(1, 1.5, 1)]
+"values": [Vector3(1, 0.001, 1), Vector3(2, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -273,7 +272,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.05),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(1, 1.5, 1), Vector3(1, 0.001, 1)]
+"values": [Vector3(2, 1, 1), Vector3(1, 0.001, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -318,16 +317,9 @@ _data = {
 "RetractBlade": SubResource("Animation_yov3w")
 }
 
-[sub_resource type="Gradient" id="Gradient_yunrh"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(2, 0.27, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_srdny"]
-gradient = SubResource("Gradient_yunrh")
-
 [sub_resource type="Curve" id="Curve_1gu83"]
-max_value = 2.0
-_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+max_value = 5.0
+_data = [Vector2(2.08165e-12, 5), 0.0, 0.0, 0, 0, Vector2(1, 0.01), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_uidvh"]
@@ -335,16 +327,16 @@ curve = SubResource("Curve_1gu83")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0eofo"]
 emission_shape = 3
-emission_box_extents = Vector3(2.08165e-12, 2.08165e-12, 5)
+emission_box_extents = Vector3(2.08165e-12, 2.08165e-12, 4)
 particle_flag_align_y = true
 direction = Vector3(2.08165e-12, 2.08165e-12, -1)
 spread = 30.0
+flatness = 1.0
 gravity = Vector3(2.08165e-12, -9.8, 2.08165e-12)
 initial_velocity_min = 20.0
 initial_velocity_max = 20.0
 scale_curve = SubResource("CurveTexture_uidvh")
-color = Color(2, 0.27, 0, 1)
-color_ramp = SubResource("GradientTexture1D_srdny")
+color = Color(1.50196, 0.219608, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_682ty"]
 shading_mode = 0
@@ -358,23 +350,23 @@ bottom_radius = 0.02
 height = 0.4
 
 [node name="XBlade" instance=ExtResource("1_magb4")]
-transform = Transform3D(0.15, -5.2318e-17, 4.95493e-24, 0, -6.55671e-09, -0.325, 5.2318e-17, 0.15, -1.42062e-08, 0, 0, 0)
+transform = Transform3D(0.15, -5.2318e-17, 7.62298e-24, 0, -6.55671e-09, -0.5, 5.2318e-17, 0.15, -2.18557e-08, 0, 0, 0)
 
 [node name="Blade" parent="." index="0"]
-transform = Transform3D(1, 1.57912e-25, 6.90255e-30, 0, -4.37114e-11, 1, 1.57912e-22, -0.001, -4.37114e-08, -8.20059e-20, 8.20059e-20, 0.000109134)
+transform = Transform3D(2, 1.57912e-22, 6.90255e-30, 0, -4.37114e-08, 1, 3.15824e-22, -1, -4.37114e-08, -8.20059e-20, 8.20059e-20, 0.000109134)
 surface_material_override/0 = SubResource("StandardMaterial3D_qbx8q")
 
 [node name="GPUTrail3D" type="GPUParticles3D" parent="." index="1"]
-transform = Transform3D(3.75, 1.47907e-21, 1.35544e-21, -7.27919e-23, -1.63918e-07, 3.75, -4.41933e-22, -3.75, -1.63918e-07, 0.25, 0.17, -3.98536)
-visible = false
-amount = 1
+transform = Transform3D(3.75001, -4.41933e-22, -1.3596e-21, 1.23937e-21, -1.63918e-07, 3.75001, -4.41932e-22, -3.75, -1.63918e-07, 2.08165e-12, 1.99462e-12, -3.985)
+amount = 12
+lifetime = 12.0
 explosiveness = 1.0
 fixed_fps = 0
-visibility_aabb = AABB(-4, -5.95361, -4, 8, 8, 8)
+visibility_aabb = AABB(-4, -6, -4, 8, 8, 8)
 process_material = SubResource("ShaderMaterial_5yjly")
 draw_pass_1 = SubResource("QuadMesh_a1rq5")
 script = ExtResource("6_bnh63")
-length = 1
+length = 12
 color_ramp = SubResource("GradientTexture1D_cjrym")
 curve = ExtResource("5_e2cg4")
 _defaults_have_been_set = true
@@ -385,10 +377,12 @@ libraries = {
 }
 
 [node name="Sparks" type="GPUParticles3D" parent="." index="3"]
-transform = Transform3D(1, 1.60751e-23, -1.58819e-22, -5.29396e-23, 1, 1.58819e-22, -4.97885e-24, 4.97885e-24, 1, 3.45147e-15, -3.45147e-15, -4.56721)
+transform = Transform3D(1, -1.30915e-21, -1.5882e-22, 6.22547e-22, 1, -2.99691e-13, -4.97885e-24, 1.84732e-15, 1, 2.08165e-12, -2.64843e-07, -5.81768)
 cast_shadow = 0
-emitting = false
-amount = 50
-lifetime = 0.5
+amount = 69
+lifetime = 0.7
+fixed_fps = 60
+interpolate = false
+fract_delta = false
 process_material = SubResource("ParticleProcessMaterial_0eofo")
 draw_pass_1 = SubResource("CylinderMesh_25dic")
