@@ -58,3 +58,7 @@ res://enemies/enemy_anims/x_diagonaldash_right.res
 res://addons/func_godot/func_godot_default_map_settings.tres
 res://enemies/x_blade.tscn
 res://textures/solid_dark_gray_tile.tres
+res://textures/solid_light_gray_tile.tres
+res://textures/clear_tile.tres
+res://textures/x_grid2.tres
+res://textures/x_grid3.tres

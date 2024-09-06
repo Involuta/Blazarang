@@ -98,9 +98,6 @@ func _physics_process(delta):
 				print("ATTACK")
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-	if global_position.y < min_y_pos:
-		velocity.y = 0
-		global_position.y = min_y_pos
 	match(behav_state):
 		WAIT:
 			wait()
@@ -145,6 +142,9 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 			var move_dir = global_position.direction_to(target.global_position)
 			velocity.x = follow_speed / 2 * move_dir.x
 			velocity.z = follow_speed / 2 * move_dir.z
+	if global_position.y < min_y_pos:
+		velocity.y = 0
+		global_position.y = min_y_pos
 	move_and_slide()
 
 func follow():
@@ -225,7 +225,7 @@ func diagonal_dash():
 	if rng.randf() < .5:
 		icon_vec *= -1
 	var dash_dir2D := (2.7 * dir_to_target2D + icon_vec).normalized()
-	velocity = diagonal_dash_speed * Vector3(dash_dir2D.x, 0, dash_dir2D.y)
+	velocity = diagonal_dash_speed * Vector3(dash_dir2D.x, .35, dash_dir2D.y).normalized()
 
 func dash():
 	velocity = dash_speed * -transform.basis.z

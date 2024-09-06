@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bhg2pm50yb3xh"]
+
+[ext_resource type="Texture2D" uid="uid://mvk18k1bphy4" path="res://textures/x_grid3.png" id="1_tcp6j"]
+
+[resource]
+transparency = 4
+albedo_color = Color(0.435294, 0.435294, 0.435294, 1)
+albedo_texture = ExtResource("1_tcp6j")
+metallic = 0.5
+metallic_specular = 0.0
+roughness = 0.5
+texture_filter = 2

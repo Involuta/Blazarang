@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://ddioclje45p0r"]
+
+[ext_resource type="Texture2D" uid="uid://dmo7sr6wth0dj" path="res://textures/x_grid2.png" id="1_tykp8"]
+
+[resource]
+transparency = 4
+shading_mode = 0
+albedo_texture = ExtResource("1_tykp8")
+texture_filter = 2
