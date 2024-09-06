@@ -62,3 +62,5 @@ res://textures/solid_light_gray_tile.tres
 res://textures/clear_tile.tres
 res://textures/x_grid2.tres
 res://textures/x_grid3.tres
+res://ui/ui_root.gd
+res://cotu/CotuControl.gd

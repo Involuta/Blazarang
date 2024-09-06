@@ -10,6 +10,8 @@ extends Control
 
 @onready var update_score_anim := $UpdateScoreAnimation
 
+@onready var buff_icon1 := $BuffIcon1
+
 @onready var cotu_hurtbox := $/root/Level/cotuCB/Hurtbox
 @onready var cotu_icon := $/root/Level/Icon
 
@@ -64,3 +66,9 @@ func on_score_updated(score_change):
 		update_score_anim.play("med_update_score")
 	elif score_change <= 2:
 		update_score_anim.play("big_update_score")
+
+func show_buff_icon1():
+	buff_icon1.texture = load("res://textures/buff_DMG-clear.png")
+
+func clear_buffs():
+	buff_icon1.texture = null
