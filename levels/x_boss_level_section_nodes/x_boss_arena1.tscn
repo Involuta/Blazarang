@@ -86,7 +86,7 @@ size = Vector3(1, 10, 72)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6mlqp"]
 shading_mode = 0
-albedo_color = Color(0, 0.392157, 1, 1)
+albedo_color = Color(0, 0.117647, 0.352941, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_0uw1l"]
 material = SubResource("StandardMaterial3D_6mlqp")
@@ -105,6 +105,8 @@ local_map_file = "res://level_maps/x_arena.map"
 map_settings = ExtResource("2_kxbd4")
 
 [node name="entity_0_worldspawn" type="StaticBody3D" parent="NavigationRegion3D/Arena"]
+collision_layer = 2
+collision_mask = 0
 
 [node name="entity_0_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/Arena/entity_0_worldspawn"]
 mesh = SubResource("ArrayMesh_h4l3s")
