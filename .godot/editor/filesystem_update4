@@ -64,3 +64,13 @@ res://textures/x_grid2.tres
 res://textures/x_grid3.tres
 res://ui/ui_root.gd
 res://cotu/CotuControl.gd
+res://enemies/enemy_hit_particles.tscn
+res://enemies/enemy_hurtbox.gd
+res://enemies/enemy_stationary_gunner.tscn
+res://enemies/enemy_mobile_gunner.tscn
+res://enemies/first_miniboss.tscn
+res://glb_inherited_scenes/basic_gun.tscn
+res://enemies/death_particle.tscn
+res://glb_inherited_scenes/first_miniboss_meshes.tscn
+res://levels/level1_section_nodes/gauntlet_arena1.gd
+res://levels/level1_section_nodes/gauntlet_arena1.tscn

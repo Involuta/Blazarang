@@ -1,6 +1,8 @@
 class_name EnemyHurtbox
 extends Hurtbox
 
+@export var hit_particle_color := Color.RED
+
 var hit_score := 1.0
 var kill_score := 1.0
 var hit_particles := preload("res://enemies/enemy_hit_particles.tscn")
@@ -30,13 +32,16 @@ func emit_hit_particles(hitter):
 	await inst.tree_entered
 	inst.global_position = hitter.global_position
 	inst.global_rotation.y = hitter.global_rotation.y + PI
-	inst.get_node("GPUParticles3D").emitting = true
+	var particle_settings = inst.get_node("GPUParticles3D")
+	particle_settings.emitting = true
+	particle_settings.process_material.color = hit_particle_color
 
 func death_effect():
 	for i in range(dp_count):
 		var dp = death_particle.instantiate()
 		level.add_child(dp)
 		dp.global_position = global_position
+		dp.get_node("MeshInstance3D").mesh.material.albedo_color = hit_particle_color
 		dp.apply_central_impulse(Vector3(rng.randf_range(-dp_impulse_limit, dp_impulse_limit), dp_impulse_limit*rng.randf(), rng.randf_range(-dp_impulse_limit, dp_impulse_limit)))
 
 func die():

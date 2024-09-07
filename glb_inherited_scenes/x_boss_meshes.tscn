@@ -221,6 +221,7 @@ bone_name = "mixamorig_LeftFoot"
 bone_idx = 17
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Armature/Skeleton3D/LeftFoot" index="0"]
+visible = false
 amount = 12
 process_material = SubResource("ParticleProcessMaterial_vtshv")
 draw_pass_1 = SubResource("QuadMesh_eqjva")
@@ -231,6 +232,7 @@ bone_name = "mixamorig_RightFoot"
 bone_idx = 22
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Armature/Skeleton3D/RightFoot" index="0"]
+visible = false
 amount = 12
 process_material = SubResource("ParticleProcessMaterial_vtshv")
 draw_pass_1 = SubResource("QuadMesh_eqjva")
