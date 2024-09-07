@@ -482,14 +482,11 @@ libraries = {
 
 [node name="ScoreNumDisplay" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -410.0
 offset_top = -180.0
-grow_horizontal = 0
+offset_right = 410.0
 grow_vertical = 0
 pivot_offset = Vector2(205, 70)
 text = "0"
@@ -531,6 +528,7 @@ expand_mode = 1
 [node name="BuffIcon1UpParticles" type="GPUParticles2D" parent="BuffIcon1Pivot"]
 position = Vector2(114, 127)
 rotation = 3.14159
+emitting = false
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_xax8r")
 texture = ExtResource("7_d3h4s")
@@ -540,6 +538,7 @@ explosiveness = 1.0
 
 [node name="BuffIcon1DownParticles" type="GPUParticles2D" parent="BuffIcon1Pivot"]
 position = Vector2(114, 127)
+emitting = false
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_xax8r")
 texture = ExtResource("7_d3h4s")

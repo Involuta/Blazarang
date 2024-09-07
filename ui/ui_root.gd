@@ -11,6 +11,7 @@ extends Control
 @onready var update_score_anim := $UpdateScoreAnimation
 
 @onready var buff_icon1 := $BuffIcon1Pivot/BuffIcon1
+var buff1_applied := false
 
 @onready var cotu := $/root/Level/cotuCB
 @onready var cotu_hurtbox := $/root/Level/cotuCB/Hurtbox
@@ -75,7 +76,10 @@ func on_score_updated(score_change):
 		update_score_anim.play("big_update_score")
 
 func clear_buffs():
+	buff1_applied = false
 	$BuffAnimations.play("clear_buffs")
 
 func apply_buff1():
-	$BuffAnimations.play("apply_buff1")
+	if not buff1_applied:
+		buff1_applied = true
+		$BuffAnimations.play("apply_buff1")

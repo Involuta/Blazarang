@@ -224,7 +224,7 @@ func diagonal_dash():
 	var icon_vec := dir_to_target2D.orthogonal()
 	if rng.randf() < .5:
 		icon_vec *= -1
-	var dash_dir2D := (2.7 * dir_to_target2D + icon_vec).normalized()
+	var dash_dir2D := (1.7 * dir_to_target2D + icon_vec).normalized()
 	velocity = diagonal_dash_speed * Vector3(dash_dir2D.x, .35, dash_dir2D.y).normalized()
 
 func dash():

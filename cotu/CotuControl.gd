@@ -221,7 +221,8 @@ func add_buff():
 		next_buff_index += 1
 
 func apply_buffs_to_rang():
-	ui.clear_buffs()
+	if next_buff_index <= 0:
+		ui.clear_buffs()
 	for i in range(next_buff_index):
 		match(buff_list[i]):
 			Globals.BUFFS.DAMAGE:
