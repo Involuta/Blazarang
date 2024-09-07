@@ -66,7 +66,7 @@ func lower_pillars():
 func begin_sequence():
 	sequence_begun = true
 	if (wave_1_duration > 0):
-		miniboss()
+		rnb()
 		await get_tree().create_timer(wave_1_duration).timeout
 	if (wave_2_duration > 0):
 		gang()
@@ -192,4 +192,5 @@ func miniboss():
 	var mb_inst = miniboss_asset.instantiate()
 	get_parent().add_child.call_deferred(mb_inst)
 	await mb_inst.tree_entered
-	mb_inst.global_position = 30*Vector3.UP - 30*Vector3.FORWARD
+	mb_inst.global_position = 300*Vector3.UP - 30*Vector3.FORWARD
+	var mb_mvmt_tween = get_tree().create_tween()

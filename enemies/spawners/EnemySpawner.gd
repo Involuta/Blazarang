@@ -19,6 +19,10 @@ var spawn_cooldown_active := false
 	"MOBILE_GUNNER" : .33
 }
 
+@onready var top_spinner := $TopSpinner
+@onready var middle_spinner := $MiddleSpinner
+@onready var bottom_spinner := $BottomSpinner
+
 func _ready():
 	# Since sections are instantiated via script, the owned parameter must be false
 	section = $/root.find_child(section_name, true, false)
@@ -26,8 +30,13 @@ func _ready():
 func _physics_process(_delta):
 	if self and not spawn_cooldown_active and spawning and not spawn_limit_met():
 		spawn_enemy()
+	rotate_y(.25 * get_physics_process_delta_time())
 
 func spawn_enemy():
+	var spinner_tween = get_tree().create_tween()
+	spinner_tween.set_parallel()
+	spinner_tween.tween_property(middle_spinner, "rotation", Vector3.UP * PI, .5).from(Vector3.ZERO)
+	spinner_tween.tween_property(bottom_spinner, "rotation", Vector3.UP * -PI, .5).from(Vector3.ZERO)
 	spawn_cooldown_active = true
 	var enemy_inst = choose_enemy()
 	section.add_child.call_deferred(enemy_inst)
