@@ -226,4 +226,4 @@ func apply_buffs_to_rang():
 		match(buff_list[i]):
 			Globals.BUFFS.DAMAGE:
 				roserang_instance.buff_damage()
-				ui.show_buff_icon1()
+				ui.apply_buff1()

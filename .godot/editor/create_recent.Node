@@ -1,3 +1,7 @@
+Node2D
+GPUParticles2D
+TextureRect
+AnimationPlayer
 MeshInstance3D
 Node3D
 GPUParticles3D
@@ -6,11 +10,8 @@ StaticBody3D
 BoneAttachment3D
 GPUParticlesAttractorSphere3D
 Hitbox
-AnimationPlayer
-TextureRect
 FuncGodotMap
 Sprite3D
-GPUParticles2D
 Area3D
 Hurtbox
 WorldEnvironment
@@ -28,5 +29,4 @@ RigidBody3D
 NavigationRegion3D
 AudioStreamPlayer3D
 AudioStreamPlayer
-Node2D
 TextEdit

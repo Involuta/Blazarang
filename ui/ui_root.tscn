@@ -1,34 +1,12 @@
-[gd_scene load_steps=23 format=3 uid="uid://kl1hpr0grn1v"]
+[gd_scene load_steps=31 format=3 uid="uid://kl1hpr0grn1v"]
 
 [ext_resource type="PackedScene" uid="uid://daj44qqb6dior" path="res://ui/health_bar.tscn" id="1_k5nv4"]
 [ext_resource type="Script" path="res://ui/ui_root.gd" id="1_s33yg"]
 [ext_resource type="Shader" path="res://ui/flash.gdshader" id="3_82pj8"]
 [ext_resource type="Shader" path="res://ui/glitch.gdshader" id="5_8m8fe"]
 [ext_resource type="Texture2D" uid="uid://nqsst4yllc8q" path="res://textures/DESTABILIZED3-clear.png" id="5_gps14"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wshvs"]
-shader = ExtResource("5_8m8fe")
-shader_parameter/shake_power = 0.005
-shader_parameter/shake_rate = 1.0
-shader_parameter/shake_speed = 5.0
-shader_parameter/shake_block_size = 30.5
-shader_parameter/shake_color_rate = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_26fs1"]
-shader = ExtResource("3_82pj8")
-shader_parameter/color1 = Color(0, 0, 0, 1)
-shader_parameter/color2 = Color(1, 1, 1, 1)
-shader_parameter/threshold = 1.0
-shader_parameter/intensity = 5.0
-shader_parameter/opacity = 0.3
-shader_parameter/glow_color = Color(1, 1, 1, 1)
-
-[sub_resource type="Gradient" id="Gradient_muld8"]
-offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
-colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.588235, 1, 1, 1, 1, 1, 1, 1, 0.588235, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_o07wl"]
-gradient = SubResource("Gradient_muld8")
+[ext_resource type="Texture2D" uid="uid://bcaxwrkv0h3xx" path="res://textures/buff_DMG-clear.png" id="6_o16a4"]
+[ext_resource type="Texture2D" uid="uid://bo6k6sryjc44h" path="res://textures/small_solid_white.png" id="7_d3h4s"]
 
 [sub_resource type="Animation" id="Animation_fc276"]
 resource_name = "destabbed_health"
@@ -130,6 +108,30 @@ _data = {
 "destabilize": SubResource("Animation_ydv3p")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wshvs"]
+shader = ExtResource("5_8m8fe")
+shader_parameter/shake_power = 0.005
+shader_parameter/shake_rate = 1.0
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_26fs1"]
+shader = ExtResource("3_82pj8")
+shader_parameter/color1 = Color(0, 0, 0, 1)
+shader_parameter/color2 = Color(1, 1, 1, 1)
+shader_parameter/threshold = 1.0
+shader_parameter/intensity = 5.0
+shader_parameter/opacity = 0.3
+shader_parameter/glow_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_muld8"]
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.588235, 1, 1, 1, 1, 1, 1, 1, 0.588235, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_o07wl"]
+gradient = SubResource("Gradient_muld8")
+
 [sub_resource type="LabelSettings" id="LabelSettings_apqk7"]
 font_size = 50
 outline_color = Color(1, 0, 1, 1)
@@ -228,6 +230,13 @@ _data = {
 "small_update_score": SubResource("Animation_i2cse")
 }
 
+[sub_resource type="Gradient" id="Gradient_u4kip"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_03c2h"]
+gradient = SubResource("Gradient_u4kip")
+
 [sub_resource type="Animation" id="Animation_bl4yg"]
 resource_name = "awaken"
 length = 3.0
@@ -282,12 +291,123 @@ _data = {
 "death_fall": SubResource("Animation_vb1ii")
 }
 
-[sub_resource type="Gradient" id="Gradient_u4kip"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0, 0, 0, 1)
+[sub_resource type="Curve" id="Curve_o0t0n"]
+_data = [Vector2(2.08165e-12, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0.001), 0.0, 0.0, 0, 0]
+point_count = 2
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_03c2h"]
-gradient = SubResource("Gradient_u4kip")
+[sub_resource type="CurveTexture" id="CurveTexture_26q1t"]
+curve = SubResource("Curve_o0t0n")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xax8r"]
+emission_shape = 3
+emission_box_extents = Vector3(50, 1, 1)
+particle_flag_disable_z = true
+direction = Vector3(2.08165e-12, 1, 2.08165e-12)
+spread = 0.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_curve = SubResource("CurveTexture_26q1t")
+
+[sub_resource type="Animation" id="Animation_jvts5"]
+resource_name = "apply_buff1"
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BuffIcon1Pivot/BuffIcon1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BuffIcon1Pivot/BuffIcon1:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BuffIcon1Pivot/BuffIcon1DownParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BuffIcon1Pivot/BuffIcon1UpParticles:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_wm2n6"]
+resource_name = "clear_buffs"
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BuffIcon1Pivot/BuffIcon1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BuffIcon1Pivot/BuffIcon1DownParticles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BuffIcon1Pivot/BuffIcon1UpParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3lowh"]
+_data = {
+"apply_buff1": SubResource("Animation_jvts5"),
+"clear_buffs": SubResource("Animation_wm2n6")
+}
 
 [node name="UIRoot" type="Control"]
 top_level = true
@@ -315,6 +435,12 @@ offset_right = 364.0
 offset_bottom = 89.0
 grow_horizontal = 1
 grow_vertical = 1
+
+[node name="HealthBarAnimation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../DESTABILIZED")
+libraries = {
+"": SubResource("AnimationLibrary_3vweo")
+}
 
 [node name="GlitchBox" type="ColorRect" parent="."]
 visible = false
@@ -354,12 +480,6 @@ libraries = {
 "": SubResource("AnimationLibrary_3vweo")
 }
 
-[node name="HealthBarAnimation" type="AnimationPlayer" parent="."]
-root_node = NodePath("../DESTABILIZED")
-libraries = {
-"": SubResource("AnimationLibrary_3vweo")
-}
-
 [node name="ScoreNumDisplay" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 3
@@ -382,11 +502,6 @@ libraries = {
 "": SubResource("AnimationLibrary_otxfp")
 }
 
-[node name="BlackScreenAnimations" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_0ps3l")
-}
-
 [node name="BlackScreen" type="TextureRect" parent="."]
 visible = false
 layout_mode = 1
@@ -397,26 +512,58 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_03c2h")
 
-[node name="BuffIcon1" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 45.0
+[node name="BlackScreenAnimations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0ps3l")
+}
+
+[node name="BuffIcon1Pivot" type="Node2D" parent="."]
+
+[node name="BuffIcon1" type="TextureRect" parent="BuffIcon1Pivot"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 38.0
 offset_top = 52.0
-offset_right = 192.0
+offset_right = 185.0
 offset_bottom = 199.0
+texture = ExtResource("6_o16a4")
 expand_mode = 1
+
+[node name="BuffIcon1UpParticles" type="GPUParticles2D" parent="BuffIcon1Pivot"]
+position = Vector2(114, 127)
+rotation = 3.14159
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_xax8r")
+texture = ExtResource("7_d3h4s")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+
+[node name="BuffIcon1DownParticles" type="GPUParticles2D" parent="BuffIcon1Pivot"]
+position = Vector2(114, 127)
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_xax8r")
+texture = ExtResource("7_d3h4s")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
 
 [node name="BuffIcon2" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 175.0
+offset_left = 163.0
 offset_top = 52.0
-offset_right = 322.0
+offset_right = 310.0
 offset_bottom = 199.0
 expand_mode = 1
 
 [node name="BuffIcon3" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 305.0
+offset_left = 288.0
 offset_top = 52.0
-offset_right = 452.0
+offset_right = 435.0
 offset_bottom = 199.0
 expand_mode = 1
+
+[node name="BuffAnimations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3lowh")
+}

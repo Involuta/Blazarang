@@ -10,8 +10,9 @@ extends Control
 
 @onready var update_score_anim := $UpdateScoreAnimation
 
-@onready var buff_icon1 := $BuffIcon1
+@onready var buff_icon1 := $BuffIcon1Pivot/BuffIcon1
 
+@onready var cotu := $/root/Level/cotuCB
 @onready var cotu_hurtbox := $/root/Level/cotuCB/Hurtbox
 @onready var cotu_icon := $/root/Level/Icon
 
@@ -27,8 +28,14 @@ func _ready():
 	cotu_health_bar.modulate = Color.WHITE
 	glitch_box.visible = false
 	destab_icon.visible = false
+	buff_icon1.visible = false
 	
 	Globals.score_updated.connect(on_score_updated)
+	
+	for buff in cotu.buff_list:
+		match(buff):
+			Globals.BUFFS.DAMAGE:
+				buff_icon1.texture = load("res://textures/buff_DMG-clear.png")
 
 func awaken():
 	$BlackScreenAnimations.play("awaken")
@@ -67,8 +74,8 @@ func on_score_updated(score_change):
 	elif score_change <= 2:
 		update_score_anim.play("big_update_score")
 
-func show_buff_icon1():
-	buff_icon1.texture = load("res://textures/buff_DMG-clear.png")
-
 func clear_buffs():
-	buff_icon1.texture = null
+	$BuffAnimations.play("clear_buffs")
+
+func apply_buff1():
+	$BuffAnimations.play("apply_buff1")
