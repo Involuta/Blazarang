@@ -456,12 +456,13 @@ platform_floor_layers = 4294901762
 script = ExtResource("1_u3wem")
 follow_speed = 15.0
 short_dist_attack_chances = {
+"DiagonalDash": 2.08167e-12,
 "SlipnSlice": 0.45,
 "Superman": 0.45,
 "Triangle": 0.1
 }
 long_dist_attack_chances = {
-"DiagonalDash": 0.9,
+"DiagonalDash": 0.5,
 "SlipnSlice": 0.2,
 "Superman": 0.2,
 "Triangle": 0.1
