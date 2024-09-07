@@ -70,6 +70,7 @@ var rng := RandomNumberGenerator.new()
 var bullet := preload("res://enemies/enemy_mega_bullet.tscn")
 @onready var nav_agent = $NavigationAgent3D
 @onready var animation_player = $AnimationPlayer
+@onready var inner_body := $FirstMiniboss/InnerBody
 @onready var body_spinner1 := $FirstMiniboss/BodySpinner1
 @onready var body_spinner2 := $FirstMiniboss/BodySpinner2
 @onready var level := $/root/Level
