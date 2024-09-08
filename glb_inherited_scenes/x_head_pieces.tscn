@@ -1,6 +1,7 @@
-[gd_scene load_steps=25 format=3 uid="uid://d1opgv0y2ujut"]
+[gd_scene load_steps=36 format=3 uid="uid://d1opgv0y2ujut"]
 
 [ext_resource type="PackedScene" uid="uid://da5jjble4aa6b" path="res://glb_imports/8164_head_meshes.glb" id="1_k1ewo"]
+[ext_resource type="PackedScene" uid="uid://dg2jcripae6d6" path="res://glb_inherited_scenes/x_fire_head.tscn" id="2_wvf5b"]
 
 [sub_resource type="Shader" id="Shader_tiwuv"]
 code = "shader_type spatial;
@@ -105,6 +106,66 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector3(0, 0.897338, 2), Vector3(2.08165e-12, 0.34, 2)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("XFireHead:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("TopLeftSparks:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("TopRightSparks:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("BottomRightSparks:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("BottomLeftSparks:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_hk7sq"]
 resource_name = "expand_all"
@@ -157,6 +218,66 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(2.08165e-12, 0.34, 2), Vector3(0, 0.897338, 2)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("XFireHead:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.500001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("TopLeftSparks:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.500001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("TopRightSparks:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.500001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("BottomRightSparks:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.500001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("BottomLeftSparks:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.500001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_hb3o3"]
@@ -211,6 +332,66 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector3(2.08165e-12, 0.34, 2), Vector3(0, 0.897338, 2)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("XFireHead:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.0500001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("TopLeftSparks:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.0500001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("TopRightSparks:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.0500001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("BottomRightSparks:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.0500001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("BottomLeftSparks:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.0500001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_iwhio"]
 resource_name = "fast_contract_all"
@@ -263,6 +444,66 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0.897338, 2), Vector3(2.08165e-12, 0.34, 2)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("XFireHead:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("TopLeftSparks:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("TopRightSparks:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("BottomRightSparks:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("BottomLeftSparks:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8ecom"]
@@ -425,22 +666,80 @@ _data = {
 "expand_top": SubResource("Animation_nyaki")
 }
 
+[sub_resource type="Curve" id="Curve_rcosl"]
+max_value = 5.0
+_data = [Vector2(2.08165e-12, 5), 0.0, 0.0, 0, 0, Vector2(1, 0.01), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_v8y55"]
+curve = SubResource("Curve_rcosl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6hum1"]
+particle_flag_align_y = true
+direction = Vector3(1, 1, 2.08165e-12)
+spread = 3.0
+gravity = Vector3(2.08165e-12, 29, 2.08165e-12)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+scale_curve = SubResource("CurveTexture_v8y55")
+color = Color(1.50196, 0.270588, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u6nvk"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+disable_receive_shadows = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gduuc"]
+material = SubResource("StandardMaterial3D_u6nvk")
+top_radius = 0.0
+bottom_radius = 0.02
+height = 0.4
+
+[sub_resource type="Curve" id="Curve_5ax67"]
+max_value = 5.0
+_data = [Vector2(2.08165e-12, 5), 0.0, 0.0, 0, 0, Vector2(1, 0.01), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_r28q3"]
+curve = SubResource("Curve_5ax67")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_72b23"]
+particle_flag_align_y = true
+direction = Vector3(1, -1, 2.08165e-12)
+spread = 3.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 15.0
+initial_velocity_max = 15.0
+scale_curve = SubResource("CurveTexture_r28q3")
+color = Color(1.50196, 0.270588, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r746d"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+disable_receive_shadows = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hyt0a"]
+material = SubResource("StandardMaterial3D_r746d")
+top_radius = 0.0
+bottom_radius = 0.02
+height = 0.4
+
 [node name="8164_head_meshes" instance=ExtResource("1_k1ewo")]
 
 [node name="BottomFace" parent="." index="0"]
-transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 2.08165e-12, 1.36, 2)
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0, 0.897338, 2)
 surface_material_override/0 = SubResource("StandardMaterial3D_8jhra")
 
 [node name="LeftFace" parent="." index="1"]
-transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, -0.38, 0.897, 2)
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0, 0.897338, 2)
 surface_material_override/0 = SubResource("StandardMaterial3D_dpbsh")
 
 [node name="RightFace" parent="." index="2"]
-transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0.38, 0.897, 2)
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0, 0.897338, 2)
 surface_material_override/0 = SubResource("StandardMaterial3D_7wboe")
 
 [node name="TopFace" parent="." index="3"]
-transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 2.08165e-12, 0.34, 2)
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0, 0.897338, 2)
 surface_material_override/0 = SubResource("StandardMaterial3D_ehw4f")
 
 [node name="AnimationPlayer" parent="." index="4"]
@@ -468,3 +767,58 @@ libraries = {
 libraries = {
 "": SubResource("AnimationLibrary_k2ja4")
 }
+
+[node name="XFireHead" parent="." index="9" instance=ExtResource("2_wvf5b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.091037, 2.01293)
+
+[node name="TopLeftSparks" type="GPUParticles3D" parent="." index="10"]
+transform = Transform3D(0.968104, -0.24867, -0.030616, 0.206675, 0.723521, 0.658637, -0.141632, -0.643957, 0.751838, 0.80472, 0.976355, 1.60189)
+cast_shadow = 0
+custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
+amount = 50
+lifetime = 0.4
+fixed_fps = 60
+interpolate = false
+fract_delta = false
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_6hum1")
+draw_pass_1 = SubResource("CylinderMesh_gduuc")
+
+[node name="TopRightSparks" type="GPUParticles3D" parent="." index="11"]
+transform = Transform3D(0.23801, -0.759367, -0.605569, 0.964366, 0.110595, 0.240347, -0.115538, -0.641195, 0.75863, -0.805, 0.976, 1.602)
+cast_shadow = 0
+custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
+amount = 50
+lifetime = 0.4
+fixed_fps = 60
+interpolate = false
+fract_delta = false
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_6hum1")
+draw_pass_1 = SubResource("CylinderMesh_gduuc")
+
+[node name="BottomRightSparks" type="GPUParticles3D" parent="." index="12"]
+transform = Transform3D(0.170738, 0.652725, 0.738105, 0.0201254, 0.746638, -0.664927, -0.985111, 0.128383, 0.114343, -0.620725, -0.822176, 1.41773)
+cast_shadow = 0
+custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
+amount = 10
+lifetime = 0.3
+fixed_fps = 60
+interpolate = false
+fract_delta = false
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_72b23")
+draw_pass_1 = SubResource("CylinderMesh_hyt0a")
+
+[node name="BottomLeftSparks" type="GPUParticles3D" parent="." index="13"]
+transform = Transform3D(0.0472184, -0.437471, 0.897992, 0.165308, 0.890021, 0.424895, -0.985111, 0.128383, 0.114343, 0.621, -0.822, 1.418)
+cast_shadow = 0
+custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
+amount = 10
+lifetime = 0.3
+fixed_fps = 60
+interpolate = false
+fract_delta = false
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_72b23")
+draw_pass_1 = SubResource("CylinderMesh_hyt0a")

@@ -1,6 +1,6 @@
-AnimationPlayer
-MeshInstance3D
 GPUParticles3D
+MeshInstance3D
+AnimationPlayer
 Node2D
 GPUParticles2D
 TextureRect

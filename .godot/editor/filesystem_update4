@@ -30,3 +30,5 @@ res://enemies/enemy_anims/x_superman.res
 res://enemies/enemy_anims/x_triangle_axkick.res
 res://enemies/enemy_anims/x_triangle_flyingkick.res
 res://enemies/enemy_anims/x_triangle.res
+res://glb_inherited_scenes/x_fire_head.tscn
+res://enemies/x_blade.tscn
