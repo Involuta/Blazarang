@@ -18,3 +18,15 @@ res://ui/flash.gdshader
 res://ui/glow.gdshader
 res://ui/glitch.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
+res://enemies/x_boss.tscn
+res://enemies/enemy_anims/x_recall_left_arm.res
+res://enemies/first_miniboss.tscn
+res://enemies/x_icon.tscn
+res://glb_inherited_scenes/first_miniboss_meshes.tscn
+res://levels/level1_section_nodes/gauntlet_arena1.tscn
+res://enemies/spawners/EnemySpawner.tscn
+res://levels/level1_section_nodes/arena_elevator.tscn
+res://enemies/enemy_anims/x_superman.res
+res://enemies/enemy_anims/x_triangle_axkick.res
+res://enemies/enemy_anims/x_triangle_flyingkick.res
+res://enemies/enemy_anims/x_triangle.res

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://d1opgv0y2ujut"]
+[gd_scene load_steps=25 format=3 uid="uid://d1opgv0y2ujut"]
 
 [ext_resource type="PackedScene" uid="uid://da5jjble4aa6b" path="res://glb_imports/8164_head_meshes.glb" id="1_k1ewo"]
 
@@ -159,10 +159,118 @@ tracks/3/keys = {
 "values": [Vector3(2.08165e-12, 0.34, 2), Vector3(0, 0.897338, 2)]
 }
 
+[sub_resource type="Animation" id="Animation_hb3o3"]
+resource_name = "fast_expand_all"
+length = 0.0500018
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BottomFace:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0500001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 1.36, 2), Vector3(0, 0.897338, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LeftFace:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0500001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.38, 0.897, 2), Vector3(0, 0.897338, 2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RightFace:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0500001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.38, 0.897, 2), Vector3(0, 0.897338, 2)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TopFace:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0500001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 0.34, 2), Vector3(0, 0.897338, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_iwhio"]
+resource_name = "fast_contract_all"
+length = 0.0500018
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BottomFace:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0500001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.897338, 2), Vector3(2.08165e-12, 1.36, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LeftFace:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0500001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.897338, 2), Vector3(-0.38, 0.897, 2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RightFace:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0500001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.897338, 2), Vector3(0.38, 0.897, 2)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TopFace:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0500001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.897338, 2), Vector3(2.08165e-12, 0.34, 2)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8ecom"]
 _data = {
 "contract_all": SubResource("Animation_mc1gq"),
-"expand_all": SubResource("Animation_hk7sq")
+"expand_all": SubResource("Animation_hk7sq"),
+"fast_contract_all": SubResource("Animation_iwhio"),
+"fast_expand_all": SubResource("Animation_hb3o3")
 }
 
 [sub_resource type="Animation" id="Animation_64o1m"]
@@ -320,19 +428,19 @@ _data = {
 [node name="8164_head_meshes" instance=ExtResource("1_k1ewo")]
 
 [node name="BottomFace" parent="." index="0"]
-transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0, 0.897338, 2)
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 2.08165e-12, 1.36, 2)
 surface_material_override/0 = SubResource("StandardMaterial3D_8jhra")
 
 [node name="LeftFace" parent="." index="1"]
-transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0, 0.897338, 2)
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, -0.38, 0.897, 2)
 surface_material_override/0 = SubResource("StandardMaterial3D_dpbsh")
 
 [node name="RightFace" parent="." index="2"]
-transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0, 0.897338, 2)
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0.38, 0.897, 2)
 surface_material_override/0 = SubResource("StandardMaterial3D_7wboe")
 
 [node name="TopFace" parent="." index="3"]
-transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0, 0.897338, 2)
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 2.08165e-12, 0.34, 2)
 surface_material_override/0 = SubResource("StandardMaterial3D_ehw4f")
 
 [node name="AnimationPlayer" parent="." index="4"]
