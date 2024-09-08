@@ -1,9 +1,9 @@
+AnimationPlayer
 MeshInstance3D
 GPUParticles3D
 Node2D
 GPUParticles2D
 TextureRect
-AnimationPlayer
 Node3D
 CollisionShape3D
 StaticBody3D

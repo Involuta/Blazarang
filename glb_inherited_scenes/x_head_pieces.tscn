@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d1opgv0y2ujut"]
+[gd_scene load_steps=23 format=3 uid="uid://d1opgv0y2ujut"]
 
 [ext_resource type="PackedScene" uid="uid://da5jjble4aa6b" path="res://glb_imports/8164_head_meshes.glb" id="1_k1ewo"]
 
@@ -52,22 +52,6 @@ roughness = 0.0
 next_pass = SubResource("ShaderMaterial_tobhi")
 albedo_color = Color(0.745098, 0.745098, 0.745098, 1)
 roughness = 0.0
-
-[sub_resource type="Animation" id="Animation_ktr4m"]
-resource_name = "BottomFaceAction"
-length = 0.001
-
-[sub_resource type="Animation" id="Animation_0hjc2"]
-resource_name = "LeftFaceAction"
-length = 0.001
-
-[sub_resource type="Animation" id="Animation_4xbjj"]
-resource_name = "RightFaceAction"
-length = 0.001
-
-[sub_resource type="Animation" id="Animation_wn8ib"]
-resource_name = "TopFaceAction"
-length = 0.001
 
 [sub_resource type="Animation" id="Animation_mc1gq"]
 resource_name = "contract_all"
@@ -175,41 +159,172 @@ tracks/3/keys = {
 "values": [Vector3(2.08165e-12, 0.34, 2), Vector3(0, 0.897338, 2)]
 }
 
-[sub_resource type="Animation" id="Animation_v20rl"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8ecom"]
+_data = {
+"contract_all": SubResource("Animation_mc1gq"),
+"expand_all": SubResource("Animation_hk7sq")
+}
+
+[sub_resource type="Animation" id="Animation_64o1m"]
 resource_name = "expand_right"
-length = 0.30001
+length = 0.20001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("RightFace:position")
+tracks/0/path = NodePath("../RightFace:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0.38, 0.897, 2), Vector3(0, 0.897338, 2)]
+"values": [Vector3(0.38, 0.897, 2), Vector3(2.08165e-12, 0.897, 2)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8ecom"]
+[sub_resource type="Animation" id="Animation_nlaop"]
+resource_name = "contract_right"
+length = 0.20001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../RightFace:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 0.897, 2), Vector3(0.38, 0.897, 2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7q31d"]
 _data = {
-"BottomFaceAction": SubResource("Animation_ktr4m"),
-"LeftFaceAction": SubResource("Animation_0hjc2"),
-"RightFaceAction": SubResource("Animation_4xbjj"),
-"TopFaceAction": SubResource("Animation_wn8ib"),
-"contract_all": SubResource("Animation_mc1gq"),
-"expand_all": SubResource("Animation_hk7sq"),
-"expand_right": SubResource("Animation_v20rl")
+"contract_right": SubResource("Animation_nlaop"),
+"expand_right": SubResource("Animation_64o1m")
+}
+
+[sub_resource type="Animation" id="Animation_tfydc"]
+resource_name = "expand_bottom"
+length = 0.20001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BottomFace:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.66532e-12, 1.26747, 2), Vector3(2.08165e-12, 0.897, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_nc850"]
+resource_name = "contract_bottom"
+length = 0.20001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BottomFace:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 0.897, 2), Vector3(1.66532e-12, 1.26747, 2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3u50q"]
+_data = {
+"contract_bottom": SubResource("Animation_nc850"),
+"expand_bottom": SubResource("Animation_tfydc")
+}
+
+[sub_resource type="Animation" id="Animation_0trdh"]
+resource_name = "expand_left"
+length = 0.20001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeftFace:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.38, 0.897, 2), Vector3(2.08165e-12, 0.897, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_yoha6"]
+resource_name = "contract_left"
+length = 0.20001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeftFace:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 0.897, 2), Vector3(-0.38, 0.897, 2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_16sxb"]
+_data = {
+"contract_left": SubResource("Animation_yoha6"),
+"expand_left": SubResource("Animation_0trdh")
+}
+
+[sub_resource type="Animation" id="Animation_nyaki"]
+resource_name = "expand_top"
+length = 0.20001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TopFace:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 0.34, 2), Vector3(2.08165e-12, 0.897, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_02rek"]
+resource_name = "contract_top"
+length = 0.20001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TopFace:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 0.897, 2), Vector3(2.08165e-12, 0.34, 2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k2ja4"]
+_data = {
+"contract_top": SubResource("Animation_02rek"),
+"expand_top": SubResource("Animation_nyaki")
 }
 
 [node name="8164_head_meshes" instance=ExtResource("1_k1ewo")]
 
 [node name="BottomFace" parent="." index="0"]
-transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 2.08165e-12, 1.36, 2)
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0, 0.897338, 2)
 surface_material_override/0 = SubResource("StandardMaterial3D_8jhra")
 
 [node name="LeftFace" parent="." index="1"]
-transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, -0.38, 0.897, 2)
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0, 0.897338, 2)
 surface_material_override/0 = SubResource("StandardMaterial3D_dpbsh")
 
 [node name="RightFace" parent="." index="2"]
@@ -217,10 +332,31 @@ transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0, 0.897338
 surface_material_override/0 = SubResource("StandardMaterial3D_7wboe")
 
 [node name="TopFace" parent="." index="3"]
-transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 2.08165e-12, 0.34, 2)
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0, 0.897338, 2)
 surface_material_override/0 = SubResource("StandardMaterial3D_ehw4f")
 
 [node name="AnimationPlayer" parent="." index="4"]
 libraries = {
 "": SubResource("AnimationLibrary_8ecom")
+}
+
+[node name="RightFaceAnims" type="AnimationPlayer" parent="." index="5"]
+root_node = NodePath("../BottomFaceAnims")
+libraries = {
+"": SubResource("AnimationLibrary_7q31d")
+}
+
+[node name="BottomFaceAnims" type="AnimationPlayer" parent="." index="6"]
+libraries = {
+"": SubResource("AnimationLibrary_3u50q")
+}
+
+[node name="LeftFaceAnims" type="AnimationPlayer" parent="." index="7"]
+libraries = {
+"": SubResource("AnimationLibrary_16sxb")
+}
+
+[node name="TopFaceAnims" type="AnimationPlayer" parent="." index="8"]
+libraries = {
+"": SubResource("AnimationLibrary_k2ja4")
 }

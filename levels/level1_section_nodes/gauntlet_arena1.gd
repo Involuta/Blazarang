@@ -194,4 +194,4 @@ func miniboss():
 	await mb_inst.tree_entered
 	mb_inst.global_position = 300*Vector3.UP - 30*Vector3.FORWARD
 	var mb_mvmt_tween = get_tree().create_tween()
-	mb_mvmt_tween.tween_property(mb_inst, "global_position", 40*Vector3.UP - 30*Vector3.FORWARD, 1)
+	mb_mvmt_tween.tween_property(mb_inst, "global_position", 36*Vector3.UP - 30*Vector3.FORWARD, 1)
