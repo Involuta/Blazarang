@@ -182,17 +182,8 @@ transform = Transform3D(1, 8.43506e-11, 8.53163e-18, -8.43506e-11, 1, 1.41293e-0
 bone_name = "mixamorig_Head"
 bone_idx = 5
 
-[node name="8164_head_meshes" parent="Armature/Skeleton3D/Head" index="0" instance=ExtResource("2_pkf4d")]
+[node name="XHead" parent="Armature/Skeleton3D/Head" index="0" instance=ExtResource("2_pkf4d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.303, 2.08165e-12)
-
-[node name="BottomFace" parent="Armature/Skeleton3D/Head/8164_head_meshes" index="0"]
-transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0, 0.897338, 2)
-
-[node name="LeftFace" parent="Armature/Skeleton3D/Head/8164_head_meshes" index="1"]
-transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0, 0.897338, 2)
-
-[node name="TopFace" parent="Armature/Skeleton3D/Head/8164_head_meshes" index="3"]
-transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0, 0.897338, 2)
 
 [node name="Body_001" parent="Armature/Skeleton3D" index="1"]
 surface_material_override/0 = SubResource("StandardMaterial3D_c5l8d")
@@ -237,4 +228,4 @@ amount = 12
 process_material = SubResource("ParticleProcessMaterial_vtshv")
 draw_pass_1 = SubResource("QuadMesh_eqjva")
 
-[editable path="Armature/Skeleton3D/Head/8164_head_meshes"]
+[editable path="Armature/Skeleton3D/Head/XHead"]

@@ -764,7 +764,7 @@ scale_curve = SubResource("CurveTexture_ngams")
 color = Color(1.50196, 0.270588, 0, 1)
 attractor_interaction_enabled = false
 
-[node name="8164_head_meshes" instance=ExtResource("1_k1ewo")]
+[node name="XHead" instance=ExtResource("1_k1ewo")]
 
 [node name="BottomFace" parent="." index="0"]
 transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0, 0.897338, 2)

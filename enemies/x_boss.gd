@@ -73,6 +73,7 @@ var body_mat := preload("res://textures/x_boss_body.tres")
 @onready var anim_tree := $AnimationTree
 @onready var anim_player := $X_boss_meshes/AnimationPlayer
 @onready var x_meshes := $X_boss_meshes/Armature/Skeleton3D/Body_001
+@onready var x_mesh_head := $X_boss_meshes/Armature/Skeleton3D/Head/XHead
 @onready var x_mesh_left_arm := $X_boss_meshes/Armature/Skeleton3D/LeftArm
 @onready var x_mesh_right_arm := $X_boss_meshes/Armature/Skeleton3D/RightArm
 @onready var level := $/root/Level
@@ -129,6 +130,14 @@ func _physics_process(delta):
 func lerp_look_at_position(target_pos, turn_speed):
 	var vec3_to_target := global_position.direction_to(target_pos)
 	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
+	
+	var old_head_rotation = x_mesh_head.rotation
+	x_mesh_head.look_at(Vector3(target.global_position.x, min_y_pos, target.global_position.z), Vector3.UP, true)
+	var head_target_rotation = x_mesh_head.rotation
+	x_mesh_head.rotation = old_head_rotation
+	x_mesh_head.rotation.y = lerp_angle(x_mesh_head.rotation.y, head_target_rotation.y, 2 * turn_speed)
+	x_mesh_head.rotation.x = lerp_angle(x_mesh_head.rotation.x, head_target_rotation.x, 2 * turn_speed)
+	x_mesh_head.rotation.z = lerp_angle(x_mesh_head.rotation.z, head_target_rotation.z, 2 * turn_speed)
 
 func wait():
 	move_and_slide()

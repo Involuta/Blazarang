@@ -46,3 +46,5 @@ res://levels/x_boss_level_section_nodes/x_boss_arena1.tscn
 res://textures/solid_light_gray_tile.tres
 res://textures/clear_tile.tres
 res://enemies/x_boss.gd
+res://glb_inherited_scenes/x_boss_meshes.tscn
+res://cotu/cotu_death_particles.tscn

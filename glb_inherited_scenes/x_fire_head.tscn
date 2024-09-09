@@ -5,7 +5,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dujut"]
 cull_mode = 2
 shading_mode = 0
-albedo_color = Color(1, 0.270588, 0, 1)
+albedo_color = Color(2, 0.27, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4s1e2"]
 transparency = 4
