@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://44tjk2l5crj" path="res://glb_imports/8164fire_head_mesh.glb" id="1_g6vsn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dujut"]
+cull_mode = 2
 shading_mode = 0
 albedo_color = Color(1, 0.270588, 0, 1)
 

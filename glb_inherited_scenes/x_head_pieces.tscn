@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://d1opgv0y2ujut"]
+[gd_scene load_steps=42 format=3 uid="uid://d1opgv0y2ujut"]
 
 [ext_resource type="PackedScene" uid="uid://da5jjble4aa6b" path="res://glb_imports/8164_head_meshes.glb" id="1_k1ewo"]
 [ext_resource type="PackedScene" uid="uid://dg2jcripae6d6" path="res://glb_inherited_scenes/x_fire_head.tscn" id="2_wvf5b"]
@@ -678,11 +678,12 @@ curve = SubResource("Curve_rcosl")
 particle_flag_align_y = true
 direction = Vector3(1, 1, 2.08165e-12)
 spread = 3.0
-gravity = Vector3(2.08165e-12, 29, 2.08165e-12)
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 20.0
 initial_velocity_max = 20.0
 scale_curve = SubResource("CurveTexture_v8y55")
 color = Color(1.50196, 0.270588, 0, 1)
+attractor_interaction_enabled = false
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u6nvk"]
 shading_mode = 0
@@ -695,23 +696,43 @@ top_radius = 0.0
 bottom_radius = 0.02
 height = 0.4
 
-[sub_resource type="Curve" id="Curve_5ax67"]
+[sub_resource type="Curve" id="Curve_rjk1d"]
 max_value = 5.0
 _data = [Vector2(2.08165e-12, 5), 0.0, 0.0, 0, 0, Vector2(1, 0.01), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_r28q3"]
-curve = SubResource("Curve_5ax67")
+[sub_resource type="CurveTexture" id="CurveTexture_stooc"]
+curve = SubResource("Curve_rjk1d")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_72b23"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0ijpq"]
 particle_flag_align_y = true
-direction = Vector3(1, -1, 2.08165e-12)
+direction = Vector3(-1, 1, 2.08165e-12)
+spread = 3.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+scale_curve = SubResource("CurveTexture_stooc")
+color = Color(1.50196, 0.270588, 0, 1)
+attractor_interaction_enabled = false
+
+[sub_resource type="Curve" id="Curve_y15u0"]
+max_value = 5.0
+_data = [Vector2(2.08165e-12, 5), 0.0, 0.0, 0, 0, Vector2(1, 0.01), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_75uy6"]
+curve = SubResource("Curve_y15u0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_trce0"]
+particle_flag_align_y = true
+direction = Vector3(-1, -1, 1)
 spread = 3.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 15.0
 initial_velocity_max = 15.0
-scale_curve = SubResource("CurveTexture_r28q3")
+scale_curve = SubResource("CurveTexture_75uy6")
 color = Color(1.50196, 0.270588, 0, 1)
+attractor_interaction_enabled = false
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r746d"]
 shading_mode = 0
@@ -723,6 +744,25 @@ material = SubResource("StandardMaterial3D_r746d")
 top_radius = 0.0
 bottom_radius = 0.02
 height = 0.4
+
+[sub_resource type="Curve" id="Curve_xquet"]
+max_value = 5.0
+_data = [Vector2(2.08165e-12, 5), 0.0, 0.0, 0, 0, Vector2(1, 0.01), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ngams"]
+curve = SubResource("Curve_xquet")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qiaeu"]
+particle_flag_align_y = true
+direction = Vector3(1, -1, 1)
+spread = 3.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 15.0
+initial_velocity_max = 15.0
+scale_curve = SubResource("CurveTexture_ngams")
+color = Color(1.50196, 0.270588, 0, 1)
+attractor_interaction_enabled = false
 
 [node name="8164_head_meshes" instance=ExtResource("1_k1ewo")]
 
@@ -772,7 +812,7 @@ libraries = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.091037, 2.01293)
 
 [node name="TopLeftSparks" type="GPUParticles3D" parent="." index="10"]
-transform = Transform3D(0.968104, -0.24867, -0.030616, 0.206675, 0.723521, 0.658637, -0.141632, -0.643957, 0.751838, 0.80472, 0.976355, 1.60189)
+transform = Transform3D(0.938792, -0.328301, -0.104343, 0.314021, 0.691041, 0.65104, -0.141632, -0.643957, 0.751838, 0.80472, 0.976355, 1.60189)
 cast_shadow = 0
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
 amount = 50
@@ -785,7 +825,7 @@ process_material = SubResource("ParticleProcessMaterial_6hum1")
 draw_pass_1 = SubResource("CylinderMesh_gduuc")
 
 [node name="TopRightSparks" type="GPUParticles3D" parent="." index="11"]
-transform = Transform3D(0.23801, -0.759367, -0.605569, 0.964366, 0.110595, 0.240347, -0.115538, -0.641195, 0.75863, -0.805, 0.976, 1.602)
+transform = Transform3D(0.887412, 0.251014, 0.386642, -0.456406, 0.59625, 0.660439, -0.0647561, -0.762548, 0.643683, -0.805, 0.976, 1.602)
 cast_shadow = 0
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
 amount = 50
@@ -794,11 +834,11 @@ fixed_fps = 60
 interpolate = false
 fract_delta = false
 local_coords = true
-process_material = SubResource("ParticleProcessMaterial_6hum1")
+process_material = SubResource("ParticleProcessMaterial_0ijpq")
 draw_pass_1 = SubResource("CylinderMesh_gduuc")
 
 [node name="BottomRightSparks" type="GPUParticles3D" parent="." index="12"]
-transform = Transform3D(0.170738, 0.652725, 0.738105, 0.0201254, 0.746638, -0.664927, -0.985111, 0.128383, 0.114343, -0.620725, -0.822176, 1.41773)
+transform = Transform3D(0.837842, 0.23851, 0.491055, 0.544607, -0.427373, -0.721634, 0.0377459, 0.872047, -0.487965, -0.620725, -0.822176, 1.41773)
 cast_shadow = 0
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
 amount = 10
@@ -807,11 +847,11 @@ fixed_fps = 60
 interpolate = false
 fract_delta = false
 local_coords = true
-process_material = SubResource("ParticleProcessMaterial_72b23")
+process_material = SubResource("ParticleProcessMaterial_trce0")
 draw_pass_1 = SubResource("CylinderMesh_hyt0a")
 
 [node name="BottomLeftSparks" type="GPUParticles3D" parent="." index="13"]
-transform = Transform3D(0.0472184, -0.437471, 0.897992, 0.165308, 0.890021, 0.424895, -0.985111, 0.128383, 0.114343, 0.621, -0.822, 1.418)
+transform = Transform3D(-0.0739871, 0.274376, 0.958772, 0.229257, 0.940338, -0.25141, -0.97055, 0.201204, -0.132476, 0.621, -0.822, 1.418)
 cast_shadow = 0
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
 amount = 10
@@ -820,5 +860,5 @@ fixed_fps = 60
 interpolate = false
 fract_delta = false
 local_coords = true
-process_material = SubResource("ParticleProcessMaterial_72b23")
+process_material = SubResource("ParticleProcessMaterial_qiaeu")
 draw_pass_1 = SubResource("CylinderMesh_hyt0a")
