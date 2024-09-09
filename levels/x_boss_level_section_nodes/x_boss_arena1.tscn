@@ -86,7 +86,7 @@ size = Vector3(1, 10, 72)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6mlqp"]
 shading_mode = 0
-albedo_color = Color(0, 0.117647, 0.352941, 1)
+albedo_color = Color(0.258824, 0.0745098, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_0uw1l"]
 material = SubResource("StandardMaterial3D_6mlqp")

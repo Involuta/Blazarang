@@ -20,7 +20,7 @@ inner_radius = 0.7
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7i3j6"]
 shading_mode = 0
-albedo_color = Color(1, 0.913725, 0.6, 1)
+albedo_color = Color(2, 0.91, 0.6, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_8frlv"]
 material = SubResource("StandardMaterial3D_7i3j6")

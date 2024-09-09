@@ -41,3 +41,7 @@ res://cotu/CotuControl.gd
 res://rang/destroy_on_cotu_hit.gd
 res://cotu/cotu_cb_main.tscn
 res://rang/roserang.tscn
+res://enemies/x_teleport_in.tscn
+res://levels/x_boss_level_section_nodes/x_boss_arena1.tscn
+res://textures/solid_light_gray_tile.tres
+res://textures/clear_tile.tres

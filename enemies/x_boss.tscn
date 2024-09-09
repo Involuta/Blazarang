@@ -273,7 +273,7 @@ particle_flag_align_y = true
 direction = Vector3(2.08165e-12, 1, 2.08165e-12)
 spread = 90.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-initial_velocity_min = 20.0
+initial_velocity_min = 5.0
 initial_velocity_max = 20.0
 scale_curve = SubResource("CurveTexture_5pmt7")
 color = Color(2, 0.27, 0, 1)
@@ -290,8 +290,8 @@ radius = 0.02
 height = 0.4
 
 [sub_resource type="Gradient" id="Gradient_vxxs2"]
-offsets = PackedFloat32Array(0, 0.75, 1)
-colors = PackedColorArray(2, 1, 0, 0.78, 2, 0.27, 0, 0.5, 1, 0.439216, 0, 0)
+offsets = PackedFloat32Array(0, 0.5425, 1)
+colors = PackedColorArray(1.5, 1, 0, 0.78, 1.5, 0.27, 0, 0.5, 1, 0.439216, 0, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_b1rjn"]
 gradient = SubResource("Gradient_vxxs2")
@@ -307,7 +307,7 @@ curve = SubResource("Curve_e7jhj")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wrmm7"]
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 scale_curve = SubResource("CurveTexture_wkb6s")
-color = Color(0.996078, 0.596078, 0.52549, 1)
+color = Color(1.5, 0.6, 0.53, 1)
 color_ramp = SubResource("GradientTexture1D_b1rjn")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_otoiy"]
@@ -320,8 +320,8 @@ disable_receive_shadows = true
 material = SubResource("StandardMaterial3D_otoiy")
 
 [sub_resource type="Gradient" id="Gradient_6m8xa"]
-offsets = PackedFloat32Array(0, 0.75, 1)
-colors = PackedColorArray(2, 1, 0.745098, 0.780392, 2, 0.862745, 0, 0.501961, 1, 0.439216, 0, 0)
+offsets = PackedFloat32Array(0, 0.525, 1)
+colors = PackedColorArray(1.5, 1, 0.75, 0.78, 1.5, 0.86, 0, 0.5, 1, 0.439216, 0, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_0xs0i"]
 gradient = SubResource("Gradient_6m8xa")
@@ -337,7 +337,7 @@ curve = SubResource("Curve_g2k1j")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2c5hp"]
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 scale_curve = SubResource("CurveTexture_36asa")
-color = Color(1, 0.807843, 0.772549, 1)
+color = Color(1.5, 0.81, 0.77, 1)
 color_ramp = SubResource("GradientTexture1D_0xs0i")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5cvwu"]
@@ -466,9 +466,9 @@ short_dist_attack_chances = {
 "Triangle": 0.1
 }
 long_dist_attack_chances = {
-"DiagonalDash": 0.5,
-"SlipnSlice": 0.2,
-"Superman": 0.2,
+"DiagonalDash": 0.1,
+"SlipnSlice": 0.4,
+"Superman": 0.4,
 "Triangle": 0.1
 }
 diagonal_dash_speed = 22.0
@@ -521,15 +521,6 @@ transform = Transform3D(0.15, -5.2318e-17, 7.62298e-24, 0, -6.55671e-09, -0.5, 5
 
 [node name="Blade" parent="MeleeHitboxPivot/XBlade" index="0"]
 transform = Transform3D(1, 1.57912e-25, 6.90255e-30, 0, -4.37114e-11, 1, 1.57912e-22, -0.001, -4.37114e-08, -8.20059e-20, 8.20059e-20, 0.000109134)
-
-[node name="GPUTrail3D" parent="MeleeHitboxPivot/XBlade" index="1"]
-visible = false
-amount = 1
-lifetime = 1.0
-length = 1
-
-[node name="Sparks" parent="MeleeHitboxPivot/XBlade" index="3"]
-emitting = false
 
 [node name="X_boss_meshes" parent="." instance=ExtResource("4_dnuas")]
 transform = Transform3D(-0.1, 3.48787e-17, -8.74228e-09, 3.48787e-17, 0.1, -3.48787e-17, 8.74228e-09, -3.48787e-17, -0.1, 2.08165e-12, -1.426, 2.08165e-12)
@@ -617,7 +608,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, -0.936101, -0.478013)
 [node name="ExplosionSparks" type="GPUParticles3D" parent="ExplosionPivot"]
 cast_shadow = 0
 emitting = false
-amount = 30
+amount = 60
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_ttkjx")
