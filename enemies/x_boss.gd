@@ -100,6 +100,10 @@ func _physics_process(delta):
 				print("ATTACK")
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+		if global_position.y < min_y_pos:
+			velocity.y = 0
+			global_position.y = min_y_pos
+	move_and_slide()
 	match(behav_state):
 		WAIT:
 			wait()
@@ -120,10 +124,10 @@ func _physics_process(delta):
 	if global_position.y < -100:
 		queue_free()
 	
-	anim_tree.set("parameters/StateMachine/WalkSpace/blend_position", nav_agent.velocity.length())
+	anim_tree.set("parameters/StateMachine/WalkSpace/blend_position", velocity.length())
 
-func lerp_look_at_target(turn_speed):
-	var vec3_to_target := global_position.direction_to(target.global_position)
+func lerp_look_at_position(target_pos, turn_speed):
+	var vec3_to_target := global_position.direction_to(target_pos)
 	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
 
 func wait():
@@ -132,39 +136,14 @@ func wait():
 		nav_agent.process_mode = Node.PROCESS_MODE_INHERIT
 		behav_state = FOLLOW
 
-func _on_navigation_agent_3d_target_reached():
-	if behav_state != ATTACK:
-		queue_attack(DIST_TYPE.SHORT_DIST)
-
-func _on_navigation_agent_3d_velocity_computed(safe_velocity):
-	if behav_state == FOLLOW or behav_state == STRAFE_FOLLOW:
-		if is_on_floor():
-			# This line accelerates the agent rather than setting its velocity to its desired velocity directly, preventing it from getting caught on corners
-			velocity = velocity.move_toward(safe_velocity, .25)
-		else:
-			# If the enemy is in the air, don't use navigation agent at all
-			var move_dir = global_position.direction_to(target.global_position)
-			velocity.x = follow_speed / 2 * move_dir.x
-			velocity.z = follow_speed / 2 * move_dir.z
-	if not is_on_floor() and global_position.y < min_y_pos:
-		velocity.y = 0
-		global_position.y = min_y_pos
-	move_and_slide()
-
 func follow():
-	lerp_look_at_target(follow_turn_speed)
-	nav_agent.set_target_position(target.global_position)
-	var next_position = nav_agent.get_next_path_position()
-	var new_velocity = (next_position - global_position).normalized() * follow_speed
+	lerp_look_at_position(target.global_position, follow_turn_speed)
+	var move_dir = global_position.direction_to(target.global_position)
+	velocity.x = follow_speed / 2 * move_dir.x
+	velocity.z = follow_speed / 2 * move_dir.z
 	
-	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
-	nav_agent.velocity = new_velocity
-	
-	# If player isn't in sight, reduce target distance to a very small number
-	if can_see_target():
-		nav_agent.target_desired_distance = target_distance
-	else:
-		nav_agent.target_desired_distance = .1
+	if global_position.distance_to(target.global_position) < target_distance and behav_state != ATTACK:
+		queue_attack(DIST_TYPE.SHORT_DIST)
 	
 	# This code block ensures start_long_dist_attack is only called once
 	if long_dist_wait_remaining <= 0:
@@ -180,21 +159,12 @@ func strafe_follow():
 	var icon_vec := dir_to_target2D.orthogonal()
 	if strafing_left:
 		icon_vec *= -1
-	var strafe_dest = target.global_position + 10*Vector3(icon_vec.x, 0, icon_vec.y)
+	var strafe_dest = target.global_position + 5*Vector3(icon_vec.x, 0, icon_vec.y)
 	
-	lerp_look_at_target(follow_turn_speed)
-	nav_agent.set_target_position(strafe_dest)
-	var next_position = nav_agent.get_next_path_position()
-	var new_velocity = (next_position - global_position).normalized() * follow_speed
-	
-	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
-	nav_agent.velocity = new_velocity
-	
-	# If player isn't in sight, reduce target distance to a very small number
-	if can_see_target():
-		nav_agent.target_desired_distance = target_distance
-	else:
-		nav_agent.target_desired_distance = .1
+	lerp_look_at_position(strafe_dest, follow_turn_speed)
+	var move_dir = global_position.direction_to(strafe_dest)
+	velocity.x = follow_speed / 2 * move_dir.x
+	velocity.z = follow_speed / 2 * move_dir.z
 
 func left_arm_deployed():
 	return x_meshes.get_surface_override_material(2) != body_mat
@@ -238,7 +208,7 @@ func choose_attack(attack_chances) -> String:
 
 func attack_frame():
 	if aiming_at_target:
-		lerp_look_at_target(attack_turn_speed)
+		lerp_look_at_position(target.global_position, attack_turn_speed)
 	
 func stop_aiming_at_target():
 	aiming_at_target = false
