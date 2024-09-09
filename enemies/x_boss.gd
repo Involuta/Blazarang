@@ -263,7 +263,7 @@ func start_superman():
 	# Without this line, X's fall protection (which sets his y vel to 0 when his global y is below the min) would prevent his y vel from changing
 	global_position.y = min_y_pos + .01
 	velocity = .6 * superman_fwd_speed * -transform.basis.z
-	velocity.y = 6
+	velocity.y = 5
 
 func superman_rush():
 	velocity = superman_fwd_speed * -transform.basis.z
