@@ -24,8 +24,10 @@ enum DIST_TYPE {
 	SHORT_DIST,
 	LONG_DIST
 }
-var long_dist_wait_remaining := 5.0
+@export var min_long_dist_wait := 1.0
 @export var max_long_dist_wait := 2.0
+var long_dist_wait_remaining := 5.0
+var attack_queued := false
 
 @export var min_y_pos := 11.4
 
@@ -151,7 +153,7 @@ func follow():
 	velocity.x = follow_speed / 2 * move_dir.x
 	velocity.z = follow_speed / 2 * move_dir.z
 	
-	if global_position.distance_to(target.global_position) < target_distance and behav_state != ATTACK:
+	if not attack_queued and behav_state != ATTACK and global_position.distance_to(target.global_position) < target_distance:
 		queue_attack(DIST_TYPE.SHORT_DIST)
 	
 	# This code block ensures start_long_dist_attack is only called once
@@ -159,7 +161,7 @@ func follow():
 		return
 	else:
 		long_dist_wait_remaining -= get_physics_process_delta_time()
-		if long_dist_wait_remaining <= 0:
+		if not attack_queued and long_dist_wait_remaining <= 0:
 			queue_attack(DIST_TYPE.LONG_DIST)
 	
 func strafe_follow():
@@ -182,7 +184,8 @@ func right_arm_deployed():
 	return x_meshes.get_surface_override_material(5) != body_mat
 
 func queue_attack(dist_type):
-	long_dist_wait_remaining = max_long_dist_wait
+	attack_queued = true
+	long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	match(dist_type):
 		DIST_TYPE.SHORT_DIST:
 			anim_tree.set(choose_attack(short_dist_attack_chances), true)
@@ -200,6 +203,7 @@ func start_attack():
 	aiming_at_target = true
 
 func end_attack():
+	attack_queued = false
 	for attack in short_dist_attack_chances.keys():
 		anim_tree.set(param_path_base + attack, false)
 	for attack in long_dist_attack_chances.keys():
@@ -256,6 +260,8 @@ func stop_mvmt():
 	velocity.z = 0
 
 func start_superman():
+	# Without this line, X's fall protection (which sets his y vel to 0 when his global y is below the min) would prevent his y vel from changing
+	global_position.y = min_y_pos + .01
 	velocity = .6 * superman_fwd_speed * -transform.basis.z
 	velocity.y = 6
 
