@@ -257,6 +257,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Blade:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_yov3w"]
 resource_name = "RetractBlade"
@@ -310,6 +322,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Blade:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.0500001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v7csg"]
 _data = {
@@ -353,20 +377,20 @@ height = 0.4
 transform = Transform3D(0.15, -5.2318e-17, 7.62298e-24, 0, -6.55671e-09, -0.5, 5.2318e-17, 0.15, -2.18557e-08, 0, 0, 0)
 
 [node name="Blade" parent="." index="0"]
-transform = Transform3D(2, 1.57912e-22, -2.02233e-24, -7.80819e-24, -4.37114e-08, 1, 3.15824e-22, -1, -4.37114e-08, -8.20059e-20, -4.88244e-19, 0.000109134)
+transform = Transform3D(1, 1.57912e-25, 6.90255e-30, 0, -4.37114e-11, 1, 1.57912e-22, -0.001, -4.37114e-08, -8.20059e-20, -4.88244e-19, 0.000109134)
 surface_material_override/0 = SubResource("StandardMaterial3D_qbx8q")
 
 [node name="GPUTrail3D" type="GPUParticles3D" parent="." index="1"]
 transform = Transform3D(3.75001, -4.41933e-22, -1.3596e-21, 1.23937e-21, -1.63918e-07, 3.75001, -4.41932e-22, -3.75, -1.63918e-07, 2.08165e-12, 1.80515e-12, -3.985)
-amount = 12
-lifetime = 12.0
+visible = false
+amount = 1
 explosiveness = 1.0
 fixed_fps = 0
 visibility_aabb = AABB(-4, -6, -4, 8, 8, 8)
 process_material = SubResource("ShaderMaterial_5yjly")
 draw_pass_1 = SubResource("QuadMesh_a1rq5")
 script = ExtResource("6_bnh63")
-length = 12
+length = 1
 color_ramp = SubResource("GradientTexture1D_cjrym")
 curve = ExtResource("5_e2cg4")
 _defaults_have_been_set = true
@@ -380,6 +404,7 @@ libraries = {
 transform = Transform3D(1, -1.30915e-21, -1.58819e-22, 6.22547e-22, 1, -2.16794e-13, -4.97885e-24, 8.06457e-15, 1, 2.08165e-12, -7.06852e-10, -4.00486)
 cast_shadow = 0
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
+emitting = false
 amount = 69
 lifetime = 0.7
 fixed_fps = 60
