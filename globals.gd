@@ -23,6 +23,7 @@ func compare_layers(collision_layer, global_layer):
 
 var score := 0
 var multiplier := 50
+var combo_count := 0
 
 enum BUFFS {
 	DAMAGE,

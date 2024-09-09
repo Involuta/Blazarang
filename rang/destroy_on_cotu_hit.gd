@@ -5,4 +5,5 @@ extends Area3D
 
 func _on_body_entered(body):
 	if not roserang.invincible and body == cotu and not cotu.is_dodging:
+		Globals.combo_count = 0
 		roserang.queue_free()

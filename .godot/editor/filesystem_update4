@@ -33,3 +33,11 @@ res://enemies/enemy_anims/x_triangle.res
 res://glb_inherited_scenes/x_fire_head.tscn
 res://enemies/x_blade.tscn
 res://enemies/enemy_anims/x_slipnslice.res
+res://ui/ui_root.tscn
+res://ui/ui_root.gd
+res://globals.gd
+res://cotu/cotu_anims_base_material.tres
+res://cotu/CotuControl.gd
+res://rang/destroy_on_cotu_hit.gd
+res://cotu/cotu_cb_main.tscn
+res://rang/roserang.tscn

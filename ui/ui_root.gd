@@ -23,6 +23,7 @@ var destabilized = false
 @export var glitch_shader_shake_power := .03
 @export var glitch_shader_shake_color_rate := .02
 
+@onready var combo_display := $ComboDisplay
 @onready var score_num_display := $ScoreNumDisplay
 
 func _ready():
@@ -66,7 +67,7 @@ func destab_anim():
 	$HealthBarAnimation.play("destabbed_health")
 
 func on_score_updated(score_change):
-	score_num_display.text = str(Globals.score)
+	score_num_display.text = str("SCORE: ", Globals.score)
 	update_score_anim.stop()
 	if score_change <= 1:
 		update_score_anim.play("small_update_score")
@@ -74,6 +75,9 @@ func on_score_updated(score_change):
 		update_score_anim.play("med_update_score")
 	elif score_change <= 2:
 		update_score_anim.play("big_update_score")
+	
+	Globals.combo_count += 1
+	combo_display.text = str("COMBO: ", Globals.combo_count)
 
 func clear_buffs():
 	buff1_applied = false

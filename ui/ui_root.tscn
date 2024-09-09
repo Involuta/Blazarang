@@ -443,8 +443,9 @@ libraries = {
 }
 
 [node name="GlitchBox" type="ColorRect" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0.176471)
+top_level = true
+z_index = 2
 material = SubResource("ShaderMaterial_wshvs")
 layout_mode = 0
 offset_left = -36.0
@@ -454,8 +455,7 @@ mouse_filter = 2
 
 [node name="DESTABILIZED" type="TextureRect" parent="."]
 visible = false
-top_level = true
-z_index = -1
+z_index = 1
 material = SubResource("ShaderMaterial_26fs1")
 layout_mode = 0
 offset_top = -4.0
@@ -500,6 +500,7 @@ libraries = {
 }
 
 [node name="BlackScreen" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -516,7 +517,6 @@ libraries = {
 [node name="BuffIcon1Pivot" type="Node2D" parent="."]
 
 [node name="BuffIcon1" type="TextureRect" parent="BuffIcon1Pivot"]
-modulate = Color(1, 1, 1, 0)
 offset_left = 38.0
 offset_top = 52.0
 offset_right = 185.0
@@ -565,3 +565,18 @@ expand_mode = 1
 libraries = {
 "": SubResource("AnimationLibrary_3lowh")
 }
+
+[node name="ComboDisplay" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -276.0
+offset_right = 410.0
+offset_bottom = -96.0
+grow_vertical = 0
+pivot_offset = Vector2(205, 70)
+text = "0"
+label_settings = SubResource("LabelSettings_apqk7")
+horizontal_alignment = 1
+vertical_alignment = 1
