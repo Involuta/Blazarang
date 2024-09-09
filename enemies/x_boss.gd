@@ -5,9 +5,11 @@ extends CharacterBody3D
 enum {
 	WAIT,
 	FOLLOW,
+	STRAFE_FOLLOW,
 	ATTACK,
 }
 var behav_state := FOLLOW
+var strafing_left := false
 
 enum {
 	MY_POS,
@@ -103,6 +105,8 @@ func _physics_process(delta):
 			wait()
 		FOLLOW:
 			follow()
+		STRAFE_FOLLOW:
+			strafe_follow()
 		ATTACK:
 			attack_frame()
 	match(x_icon_pos_state):
@@ -133,7 +137,7 @@ func _on_navigation_agent_3d_target_reached():
 		queue_attack(DIST_TYPE.SHORT_DIST)
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
-	if behav_state == FOLLOW:
+	if behav_state == FOLLOW or behav_state == STRAFE_FOLLOW:
 		if is_on_floor():
 			# This line accelerates the agent rather than setting its velocity to its desired velocity directly, preventing it from getting caught on corners
 			velocity = velocity.move_toward(safe_velocity, .25)
@@ -142,7 +146,7 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 			var move_dir = global_position.direction_to(target.global_position)
 			velocity.x = follow_speed / 2 * move_dir.x
 			velocity.z = follow_speed / 2 * move_dir.z
-	if global_position.y < min_y_pos:
+	if not is_on_floor() and global_position.y < min_y_pos:
 		velocity.y = 0
 		global_position.y = min_y_pos
 	move_and_slide()
@@ -169,6 +173,28 @@ func follow():
 		long_dist_wait_remaining -= get_physics_process_delta_time()
 		if long_dist_wait_remaining <= 0:
 			queue_attack(DIST_TYPE.LONG_DIST)
+	
+func strafe_follow():
+	var dir_to_target := global_position.direction_to(target.global_position)
+	var dir_to_target2D := Vector2(dir_to_target.x, dir_to_target.z)
+	var icon_vec := dir_to_target2D.orthogonal()
+	if strafing_left:
+		icon_vec *= -1
+	var strafe_dest = target.global_position + 10*Vector3(icon_vec.x, 0, icon_vec.y)
+	
+	lerp_look_at_target(follow_turn_speed)
+	nav_agent.set_target_position(strafe_dest)
+	var next_position = nav_agent.get_next_path_position()
+	var new_velocity = (next_position - global_position).normalized() * follow_speed
+	
+	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
+	nav_agent.velocity = new_velocity
+	
+	# If player isn't in sight, reduce target distance to a very small number
+	if can_see_target():
+		nav_agent.target_desired_distance = target_distance
+	else:
+		nav_agent.target_desired_distance = .1
 
 func left_arm_deployed():
 	return x_meshes.get_surface_override_material(2) != body_mat
@@ -183,6 +209,10 @@ func queue_attack(dist_type):
 			anim_tree.set(choose_attack(short_dist_attack_chances), true)
 		DIST_TYPE.LONG_DIST:
 			anim_tree.set(choose_attack(long_dist_attack_chances), true)
+
+func start_strafe():
+	behav_state = STRAFE_FOLLOW
+	strafing_left = rng.randf() < .5
 
 func start_attack():
 	# Without this await, the animation player would call end_attack at the end of the previous animation on the exact same frame as when the AnimationPlayer.play func is called below. Since an animation was currently in progress, the func call would do nothing, leaving the enemy in ATTACK mode but with no animation playing to free it from ATTACK mode, causing it to stand still indefinitely
