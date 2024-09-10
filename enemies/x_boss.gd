@@ -299,7 +299,6 @@ func recall_left_arm():
 	recall_tween.tween_method(recall_left_arm_frame, 0.0, 1.0, .65).set_ease(Tween.EASE_OUT)
 
 func recall_left_arm_frame(lerp_val):
-	left_arm.rotation_degrees = left_arm.rotation_degrees.lerp((rotation_degrees.y - 180 - triangle_arm_angle) * Vector3.UP, lerp_val)
 	left_arm.rotation_degrees = (rotation_degrees.y + 180 + 112) * Vector3.UP
 	left_arm.global_position = left_arm.global_position.lerp(x_mesh_left_arm.global_position, lerp_val)
 
