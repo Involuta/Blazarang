@@ -48,3 +48,4 @@ res://textures/clear_tile.tres
 res://enemies/x_boss.gd
 res://glb_inherited_scenes/x_boss_meshes.tscn
 res://cotu/cotu_death_particles.tscn
+res://enemies/enemy_anims/x_tp_slipnslice.res
