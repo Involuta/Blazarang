@@ -57,6 +57,7 @@ var aiming_at_target := true
 
 @export var diagonal_dash_speed := 30.0
 @export var dash_speed := 40.0
+@export var dash_back_speed := 30.0
 @export var teleport_dist_from_target := 7.5
 @export var slipnslice_speed := 20.0
 @export var superman_fwd_speed := 20.0
@@ -290,6 +291,9 @@ func flyingkick_rush():
 	# Up vec prevents X from ending up under the ground after tweening
 	var kick_tween = get_tree().create_tween()
 	kick_tween.tween_property(self, "global_position", (-1.5+global_position.distance_to(target.global_position)) * -transform.basis.z + .1 * Vector3.UP, flyingkick_hit_frames/60.0).set_trans(Tween.TRANS_EXPO).as_relative()
+
+func dash_back():
+	velocity = dash_back_speed * transform.basis.z
 
 func recall_left_arm():
 	if not left_arm_deployed():

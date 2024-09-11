@@ -46,3 +46,6 @@ environment = SubResource("Environment_vgqir")
 stream = ExtResource("6_qrshy")
 volume_db = -5.0
 bus = &"Music"
+
+[node name="Icon" parent="." instance=ExtResource("4_vjqpw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.1436, 14.8854)
