@@ -309,22 +309,21 @@ func restore_rig_left_arm():
 	x_meshes.set_surface_override_material(2, body_mat)
 
 func recall_right_arm():
-	if right_arm_deployed():
+	if not right_arm_deployed():
 		return
 	right_arm.stop_firing_laser()
 	var recall_tween = get_tree().create_tween()
-	recall_tween.set_parallel()
-	recall_tween.tween_method(recall_right_arm_frame, 0.0, 1.0, .8).set_ease(Tween.EASE_OUT)
-	recall_tween.tween_callback(hide_right_arm).set_delay(.25)
-	recall_tween.tween_callback(x_meshes.set_surface_override_material.bind(5, body_mat)).set_delay(.25)
+	recall_tween.tween_method(recall_right_arm_frame, 0.0, 1.0, .25).set_ease(Tween.EASE_OUT)
 
 func recall_right_arm_frame(lerp_val):
-	right_arm.rotation_degrees = right_arm.rotation_degrees.lerp((rotation_degrees.y + 180 + triangle_arm_angle) * Vector3.UP, lerp_val)
-	right_arm.rotation_degrees = (rotation_degrees.y - 180 - triangle_arm_angle) * Vector3.UP
+	right_arm.rotation_degrees = Vector3(-60.2, -174.8, -31.3)
 	right_arm.global_position = right_arm.global_position.lerp(x_mesh_right_arm.global_position, lerp_val)
 
-func hide_right_arm():
+func hide_floating_right_arm():
 	right_arm.visible = false
+
+func restore_rig_right_arm():
+	x_meshes.set_surface_override_material(5, body_mat)
 
 func set_x_icon_my_pos():
 	var lerp_tween = get_tree().create_tween()

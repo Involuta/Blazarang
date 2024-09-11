@@ -49,3 +49,4 @@ res://enemies/enemy_anims/x_triangle_axkick.res
 res://enemies/enemy_anims/x_triangle_flyingkick.res
 res://enemies/enemy_anims/x_rightarmslice.res
 res://glb_inherited_scenes/x_boss_meshes.tscn
+res://enemies/x_boss.gd
