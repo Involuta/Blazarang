@@ -34,7 +34,7 @@ script = ExtResource("1_sfodj")
 [node name="cotuCB" parent="." instance=ExtResource("3_w7p5q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 11.5, 15)
 
-[node name="Target" parent="." instance=ExtResource("4_vjqpw")]
+[node name="Icon" parent="." instance=ExtResource("4_vjqpw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
 
 [node name="XBossArena1" parent="." instance=ExtResource("5_cuvuo")]
@@ -46,6 +46,3 @@ environment = SubResource("Environment_vgqir")
 stream = ExtResource("6_qrshy")
 volume_db = -5.0
 bus = &"Music"
-
-[node name="Icon" parent="." instance=ExtResource("4_vjqpw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.1436, 14.8854)

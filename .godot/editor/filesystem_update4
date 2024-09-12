@@ -51,3 +51,11 @@ res://enemies/enemy_anims/x_rightarmslice.res
 res://glb_inherited_scenes/x_boss_meshes.tscn
 res://enemies/x_boss.gd
 res://levels/x_boss_level1.tscn
+res://icon/icon.tscn
+res://cotu/CotuControl.gd
+res://levels/hub.tscn
+res://textures/small_solid_black.tres
+res://textures/small_solid_white.tres
+res://levels/hub_section_nodes/hub_room1.tscn
+res://levels/hub_level.gd
+res://rang/roserang.gd

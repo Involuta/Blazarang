@@ -1,6 +1,6 @@
 extends Level
 
-@onready var icon := $Target
+@onready var icon := $Icon
 
 func _ready():
 	icon.visible = false

@@ -57,7 +57,7 @@ var aiming_at_target := true
 
 @export var diagonal_dash_speed := 30.0
 @export var dash_speed := 40.0
-@export var dash_back_speed := 30.0
+@export var dash_back_speed := 36.0
 @export var teleport_dist_from_target := 7.5
 @export var slipnslice_speed := 20.0
 @export var superman_fwd_speed := 20.0
@@ -80,7 +80,7 @@ var body_mat := preload("res://textures/x_boss_body.tres")
 @onready var x_mesh_left_arm := $X_boss_meshes/Armature/Skeleton3D/LeftArm
 @onready var x_mesh_right_arm := $X_boss_meshes/Armature/Skeleton3D/RightArm
 @onready var level := $/root/Level
-@onready var target := $/root/Level/Target
+@onready var target := $/root/Level/Icon
 @onready var left_arm := $/root/Level/XBossArena1/XLeftArm
 @onready var right_arm := $/root/Level/XBossArena1/XRightArm
 @onready var x_icon := $/root/Level/XBossArena1/XIcon
@@ -186,7 +186,6 @@ func right_arm_deployed():
 
 func queue_attack(dist_type):
 	attack_queued = true
-	long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	match(dist_type):
 		DIST_TYPE.SHORT_DIST:
 			anim_tree.set(choose_attack(short_dist_attack_chances), true)
@@ -209,6 +208,16 @@ func end_attack():
 		anim_tree.set(param_path_base + attack, false)
 	for attack in long_dist_attack_chances.keys():
 		anim_tree.set(param_path_base + attack, false)
+	long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
+	behav_state = FOLLOW
+
+func end_attack_instant_followup():
+	attack_queued = false
+	for attack in short_dist_attack_chances.keys():
+		anim_tree.set(param_path_base + attack, false)
+	for attack in long_dist_attack_chances.keys():
+		anim_tree.set(param_path_base + attack, false)
+	long_dist_wait_remaining = rng.randf_range(0, min_long_dist_wait)
 	behav_state = FOLLOW
 
 func choose_attack(attack_chances) -> String:
@@ -294,6 +303,12 @@ func flyingkick_rush():
 
 func dash_back():
 	velocity = dash_back_speed * transform.basis.z
+	var dash_back_tween = get_tree().create_tween()
+	dash_back_tween.tween_method(dash_back_frame, 0.0, 1.0, .9).set_ease(Tween.EASE_IN)
+
+func dash_back_frame(lerp_val):
+	var original_vel = dash_back_speed * velocity.normalized()
+	velocity = original_vel.lerp(Vector3.ZERO, lerp_val)
 
 func recall_left_arm():
 	if not left_arm_deployed():
