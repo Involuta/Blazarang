@@ -22,7 +22,8 @@ var x_icon_tp_to_left := true
 
 enum DIST_TYPE {
 	SHORT_DIST,
-	LONG_DIST
+	LONG_DIST_RIGHT_ARM_NOT_DEPLOYED,
+	LONG_DIST_RIGHT_ARM_DEPLOYED
 }
 @export var min_long_dist_wait := 1.0
 @export var max_long_dist_wait := 2.0
@@ -46,13 +47,24 @@ var aiming_at_target := true
 @export var fast_bullet_speed := 50.0
 
 @export var short_dist_attack_chances = {
-	"SlipnSlice" : 1.0,
-	"Superman" : .25,
+	"SlipnSlice" : .2,
+	"Superman" : .2,
+	"RightArmSlice" : .4,
+	"Triangle" : .1
 }
 
-@export var long_dist_attack_chances = {
-	"SlipnSlice" : 1.0,
-	"Superman" : .25
+@export var long_dist_right_arm_deployed_attack_chances = {
+	"SlipnSlice" : .4,
+	"Superman" : .4,
+	"Triangle" : .1,
+	"DiagonalDash" : .1
+}
+
+@export var long_dist_right_arm_not_deployed_attack_chances = {
+	"SlipnSlice" : .2,
+	"Superman" : .2,
+	"Triangle" : .1,
+	"RightArmLaser" : .5
 }
 
 @export var diagonal_dash_speed := 30.0
@@ -163,8 +175,11 @@ func follow():
 	else:
 		long_dist_wait_remaining -= get_physics_process_delta_time()
 		if not attack_queued and long_dist_wait_remaining <= 0:
-			queue_attack(DIST_TYPE.LONG_DIST)
-	
+			if right_arm_deployed():
+				queue_attack(DIST_TYPE.LONG_DIST_RIGHT_ARM_DEPLOYED)
+			else:
+				queue_attack(DIST_TYPE.LONG_DIST_RIGHT_ARM_NOT_DEPLOYED)
+
 func strafe_follow():
 	var dir_to_target := global_position.direction_to(target.global_position)
 	var dir_to_target2D := Vector2(dir_to_target.x, dir_to_target.z)
@@ -189,8 +204,10 @@ func queue_attack(dist_type):
 	match(dist_type):
 		DIST_TYPE.SHORT_DIST:
 			anim_tree.set(choose_attack(short_dist_attack_chances), true)
-		DIST_TYPE.LONG_DIST:
-			anim_tree.set(choose_attack(long_dist_attack_chances), true)
+		DIST_TYPE.LONG_DIST_RIGHT_ARM_DEPLOYED:
+			anim_tree.set(choose_attack(long_dist_right_arm_deployed_attack_chances), true)
+		DIST_TYPE.LONG_DIST_RIGHT_ARM_NOT_DEPLOYED:
+			anim_tree.set(choose_attack(long_dist_right_arm_not_deployed_attack_chances), true)
 
 func start_strafe():
 	behav_state = STRAFE_FOLLOW
@@ -206,7 +223,9 @@ func end_attack():
 	attack_queued = false
 	for attack in short_dist_attack_chances.keys():
 		anim_tree.set(param_path_base + attack, false)
-	for attack in long_dist_attack_chances.keys():
+	for attack in long_dist_right_arm_deployed_attack_chances.keys():
+		anim_tree.set(param_path_base + attack, false)
+	for attack in long_dist_right_arm_not_deployed_attack_chances.keys():
 		anim_tree.set(param_path_base + attack, false)
 	long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	behav_state = FOLLOW
@@ -215,9 +234,11 @@ func end_attack_instant_followup():
 	attack_queued = false
 	for attack in short_dist_attack_chances.keys():
 		anim_tree.set(param_path_base + attack, false)
-	for attack in long_dist_attack_chances.keys():
+	for attack in long_dist_right_arm_deployed_attack_chances.keys():
 		anim_tree.set(param_path_base + attack, false)
-	long_dist_wait_remaining = rng.randf_range(0, min_long_dist_wait)
+	for attack in long_dist_right_arm_not_deployed_attack_chances.keys():
+		anim_tree.set(param_path_base + attack, false)
+	long_dist_wait_remaining = rng.randf_range(0.1, min_long_dist_wait)
 	behav_state = FOLLOW
 
 func choose_attack(attack_chances) -> String:
@@ -309,6 +330,12 @@ func dash_back():
 func dash_back_frame(lerp_val):
 	var original_vel = dash_back_speed * velocity.normalized()
 	velocity = original_vel.lerp(Vector3.ZERO, lerp_val)
+
+func right_arm_laser():
+	right_arm.global_position = x_mesh_right_arm.global_position
+	right_arm.rotation = (PI + rotation.y) * Vector3.UP
+	right_arm.visible = true
+	right_arm.fire_laser()
 
 func recall_left_arm():
 	if not left_arm_deployed():
