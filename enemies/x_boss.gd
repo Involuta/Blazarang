@@ -335,7 +335,7 @@ func recall_right_arm():
 	recall_tween.tween_method(recall_right_arm_frame, 0.0, 1.0, .25).set_ease(Tween.EASE_OUT)
 
 func recall_right_arm_frame(lerp_val):
-	right_arm.rotation_degrees = Vector3(-60.2, -174.8, -31.3)
+	right_arm.rotation_degrees = rotation_degrees + Vector3(-31.5, -45.8, 80.1)
 	right_arm.global_position = right_arm.global_position.lerp(x_mesh_right_arm.global_position, lerp_val)
 
 func hide_floating_right_arm():

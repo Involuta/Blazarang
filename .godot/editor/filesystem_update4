@@ -59,3 +59,5 @@ res://textures/small_solid_white.tres
 res://levels/hub_section_nodes/hub_room1.tscn
 res://levels/hub_level.gd
 res://rang/roserang.gd
+res://glb_inherited_scenes/x_left_arm.tscn
+res://glb_inherited_scenes/x_right_arm.tscn
