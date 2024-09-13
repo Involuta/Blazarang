@@ -1,9 +1,5 @@
 extends Node3D
 
-@onready var upper_level_panel := $LevelPanels/UpperLevelPanel
-@onready var middle_level_panel := $LevelPanels/MiddleLevelPanel
-@onready var lower_level_panel := $LevelPanels/LowerLevelPanel
-@onready var anim_player := $AnimationPlayer
 @onready var exit_door := $ExitDoor
 
 enum PANELS {
@@ -20,9 +16,6 @@ var level_list := {
 var level_list_pos := 1
 
 func _ready():
-	middle_level_panel.position = Vector3(11.5, 3.5, -3)
-	middle_level_panel.scale = .3 * Vector3.ONE
-	middle_level_panel.texture = load(level_list.keys()[level_list_pos])
 	exit_door.position = Vector3(-10.25, 4.25, 0)
 
 func _on_exit_room_body_entered(_body):
@@ -32,21 +25,6 @@ func _on_exit_room_body_entered(_body):
 	tween.tween_property($OmniLight3D, "omni_range", 10, 1)
 	await get_tree().create_timer(2).timeout
 	get_tree().change_scene_to_file(level_list.values()[level_list_pos])
-
-func scroll_up():
-	middle_level_panel.texture = load(level_list.keys()[level_list_pos])
-	level_list_pos = (level_list_pos + 1) % level_list.size()
-	lower_level_panel.texture = load(level_list.keys()[level_list_pos])
-	anim_player.play("scroll_up")
-	
-func scroll_down():
-	middle_level_panel.texture = load(level_list.keys()[level_list_pos])
-	# mod (%) doesn't work because in Godot, negative mod positive is negative. According to Google, -1 mod 2 is 1, but in Godot, -1 mod 2 is -1.
-	level_list_pos -= 1
-	if level_list_pos <= -1:
-		level_list_pos = level_list.size()-1
-	upper_level_panel.texture = load(level_list.keys()[level_list_pos])
-	anim_player.play("scroll_down")
 
 func file_to_texture(file):
 	var image = Image.load_from_file(file)
@@ -73,11 +51,7 @@ func switch_panel():
 			pass
 
 func _physics_process(_delta):
-	if Input.is_action_just_pressed("UIScrollUp"):
-		scroll_up()
-	elif Input.is_action_just_pressed("UIScrollDown"):
-		scroll_down()
-	elif Input.is_action_just_pressed("UIScrollLeft"):
+	if Input.is_action_just_pressed("UIScrollLeft"):
 		switch_panel_left()
 	elif Input.is_action_just_pressed("UIScrollRight"):
 		switch_panel_right()

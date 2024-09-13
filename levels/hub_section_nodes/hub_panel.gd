@@ -4,7 +4,6 @@ extends Node3D
 @onready var middle_panel := $MiddlePanel
 @onready var lower_panel := $LowerPanel
 @onready var anim_player := $AnimationPlayer
-@onready var exit_door := $ExitDoor
 
 var panel_selected := false
 
@@ -16,18 +15,8 @@ var panel_selected := false
 var texture_value_dict_pos := 1
 
 func _ready():
-	middle_panel.position = Vector3(11.5, 3.5, -3)
 	middle_panel.scale = .3 * Vector3.ONE
 	middle_panel.texture = load(texture_value_dict.keys()[texture_value_dict_pos])
-	exit_door.position = Vector3(-10.25, 4.25, 0)
-
-func _on_exit_room_body_entered(_body):
-	# Move ExitDoor y pos from 4.25 to 1.75
-	var tween = get_tree().create_tween()
-	tween.tween_property(exit_door, "position", Vector3(-10.25, 1.75, 0), 1)
-	tween.tween_property($OmniLight3D, "omni_range", 10, 1)
-	await get_tree().create_timer(2).timeout
-	get_tree().change_scene_to_file(texture_value_dict.values()[texture_value_dict_pos])
 
 func scroll_up():
 	middle_panel.texture = load(texture_value_dict.keys()[texture_value_dict_pos])

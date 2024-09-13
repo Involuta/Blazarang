@@ -62,3 +62,4 @@ res://enemies/first_miniboss.gd
 res://enemies/enemy_melee_base.gd
 res://levels/hub_section_nodes/hub_panel.gd
 res://levels/hub_section_nodes/hub_panel.tscn
+res://enemies/x_boss.gd

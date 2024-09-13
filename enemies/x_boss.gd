@@ -84,7 +84,6 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 var bullet := preload("res://enemies/enemy_mega_bullet.tscn")
 var body_mat := preload("res://textures/x_boss_body.tres")
-@onready var nav_agent := $NavigationAgent3D
 @onready var anim_tree := $AnimationTree
 @onready var anim_player := $X_boss_meshes/AnimationPlayer
 @onready var x_meshes := $X_boss_meshes/Armature/Skeleton3D/Body_001
