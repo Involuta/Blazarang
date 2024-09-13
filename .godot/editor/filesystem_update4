@@ -60,3 +60,5 @@ res://levels/hub_section_nodes/hub_room.gd
 res://levels/gauntlet_level1.tscn
 res://enemies/first_miniboss.gd
 res://enemies/enemy_melee_base.gd
+res://levels/hub_section_nodes/hub_panel.gd
+res://levels/hub_section_nodes/hub_panel.tscn
