@@ -1,21 +1,16 @@
 extends Node3D
 
+@onready var item_panel := $ItemPanel
+@onready var level_panel := $LevelPanel
 @onready var exit_door := $ExitDoor
 
-enum PANELS {
-	ITEM_PANEL,
-	LEVEL_PANEL
-}
-var selected_panel := PANELS.ITEM_PANEL
+var panel_list_pos := 0
 
-var level_list := {
-	"res://textures/3-VAR1_1.webp" : "res://levels/gauntlet_level1.tscn",
-	"res://textures/8164.webp" : "res://levels/x_boss_level1.tscn"
-}
-
-var level_list_pos := 1
+var panel_list
 
 func _ready():
+	panel_list = [item_panel, level_panel]
+	panel_list[panel_list_pos].selected = true
 	exit_door.position = Vector3(-10.25, 4.25, 0)
 
 func _on_exit_room_body_entered(_body):
@@ -24,7 +19,7 @@ func _on_exit_room_body_entered(_body):
 	tween.tween_property(exit_door, "position", Vector3(-10.25, 1.75, 0), 1)
 	tween.tween_property($OmniLight3D, "omni_range", 10, 1)
 	await get_tree().create_timer(2).timeout
-	get_tree().change_scene_to_file(level_list.values()[level_list_pos])
+	get_tree().change_scene_to_file(level_panel.get_panel_value())
 
 func file_to_texture(file):
 	var image = Image.load_from_file(file)
@@ -32,23 +27,16 @@ func file_to_texture(file):
 	return texture
 
 func switch_panel_left():
-	selected_panel -= 1
-	if selected_panel <= -1:
-		selected_panel = PANELS.size()-1
-	switch_panel()
+	panel_list[panel_list_pos].selected = false
+	panel_list_pos -= 1
+	if panel_list_pos <= -1:
+		panel_list_pos = panel_list.size()-1
+	panel_list[panel_list_pos].selected = true
 
 func switch_panel_right():
-	selected_panel = (selected_panel + 1) % PANELS.size()
-	switch_panel()
-
-func switch_panel():
-	match(selected_panel):
-		PANELS.ITEM_PANEL:
-			print("item panel selected!")
-		PANELS.LEVEL_PANEL:
-			print("level panel selected!")
-		_:
-			pass
+	panel_list[panel_list_pos].selected = false
+	panel_list_pos = (panel_list_pos + 1) % panel_list.size()
+	panel_list[panel_list_pos].selected = true
 
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("UIScrollLeft"):

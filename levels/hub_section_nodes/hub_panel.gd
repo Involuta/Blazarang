@@ -5,7 +5,7 @@ extends Node3D
 @onready var lower_panel := $LowerPanel
 @onready var anim_player := $AnimationPlayer
 
-var panel_selected := false
+var selected := false
 
 @export var texture_value_dict := {
 	"res://textures/3-VAR1_1.webp" : "res://levels/gauntlet_level1.tscn",
@@ -38,8 +38,11 @@ func file_to_texture(file):
 	var texture = ImageTexture.create_from_image(image)
 	return texture
 
+func get_panel_value():
+	return texture_value_dict.values()[texture_value_dict_pos]
+
 func _physics_process(_delta):
-	if panel_selected:
+	if selected:
 		if Input.is_action_just_pressed("UIScrollUp"):
 			scroll_up()
 		elif Input.is_action_just_pressed("UIScrollDown"):
