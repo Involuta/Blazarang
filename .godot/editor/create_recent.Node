@@ -1,10 +1,10 @@
+Node3D
 GPUParticles3D
 MeshInstance3D
 AnimationPlayer
 Node2D
 GPUParticles2D
 TextureRect
-Node3D
 CollisionShape3D
 StaticBody3D
 BoneAttachment3D

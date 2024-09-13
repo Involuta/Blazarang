@@ -89,7 +89,7 @@ script = ExtResource("1_g21b3")
 [node name="cotuCB" parent="." instance=ExtResource("2_cdmya")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 11.5, 2.08165e-12)
 
-[node name="Target" parent="." instance=ExtResource("3_susk6")]
+[node name="Icon" parent="." instance=ExtResource("3_susk6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

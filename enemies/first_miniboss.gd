@@ -74,7 +74,7 @@ var bullet := preload("res://enemies/enemy_mega_bullet.tscn")
 @onready var body_spinner1 := $FirstMiniboss/BodySpinner1
 @onready var body_spinner2 := $FirstMiniboss/BodySpinner2
 @onready var level := $/root/Level
-@onready var target = $/root/Level/Target
+@onready var target = $/root/Level/Icon
 
 func _ready():
 	add_to_group("lockonables")

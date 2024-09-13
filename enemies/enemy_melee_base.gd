@@ -24,7 +24,7 @@ var rng := RandomNumberGenerator.new()
 @onready var nav_agent = $NavigationAgent3D
 @onready var anim_tree = $AnimationTree
 @onready var visual_mesh = $VisualMesh
-@onready var target = $/root/Level/Target
+@onready var target = $/root/Level/Icon
 
 var anim_tree_exists := true
 

@@ -1,10 +1,16 @@
 extends Node3D
 
-@onready var upper_level_panel := $UpperLevelPanel
-@onready var middle_level_panel := $MiddleLevelPanel
-@onready var lower_level_panel := $LowerLevelPanel
+@onready var upper_level_panel := $LevelPanels/UpperLevelPanel
+@onready var middle_level_panel := $LevelPanels/MiddleLevelPanel
+@onready var lower_level_panel := $LevelPanels/LowerLevelPanel
 @onready var anim_player := $AnimationPlayer
 @onready var exit_door := $ExitDoor
+
+enum PANELS {
+	ITEM_PANEL,
+	LEVEL_PANEL
+}
+var selected_panel := PANELS.ITEM_PANEL
 
 var level_list := {
 	"res://textures/3-VAR1_1.webp" : "res://levels/gauntlet_level1.tscn",
@@ -29,13 +35,16 @@ func _on_exit_room_body_entered(_body):
 
 func scroll_up():
 	middle_level_panel.texture = load(level_list.keys()[level_list_pos])
-	level_list_pos = (level_list_pos + 1) % level_list.keys().size()
+	level_list_pos = (level_list_pos + 1) % level_list.size()
 	lower_level_panel.texture = load(level_list.keys()[level_list_pos])
 	anim_player.play("scroll_up")
 	
 func scroll_down():
 	middle_level_panel.texture = load(level_list.keys()[level_list_pos])
-	level_list_pos = (level_list_pos - 1) % level_list.keys().size()
+	# mod (%) doesn't work because in Godot, negative mod positive is negative. According to Google, -1 mod 2 is 1, but in Godot, -1 mod 2 is -1.
+	level_list_pos -= 1
+	if level_list_pos <= -1:
+		level_list_pos = level_list.size()-1
 	upper_level_panel.texture = load(level_list.keys()[level_list_pos])
 	anim_player.play("scroll_down")
 
@@ -44,8 +53,31 @@ func file_to_texture(file):
 	var texture = ImageTexture.create_from_image(image)
 	return texture
 
+func switch_panel_left():
+	selected_panel -= 1
+	if selected_panel <= -1:
+		selected_panel = PANELS.size()-1
+	switch_panel()
+
+func switch_panel_right():
+	selected_panel = (selected_panel + 1) % PANELS.size()
+	switch_panel()
+
+func switch_panel():
+	match(selected_panel):
+		PANELS.ITEM_PANEL:
+			print("item panel selected!")
+		PANELS.LEVEL_PANEL:
+			print("level panel selected!")
+		_:
+			pass
+
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("UIScrollUp"):
 		scroll_up()
 	elif Input.is_action_just_pressed("UIScrollDown"):
 		scroll_down()
+	elif Input.is_action_just_pressed("UIScrollLeft"):
+		switch_panel_left()
+	elif Input.is_action_just_pressed("UIScrollRight"):
+		switch_panel_right()

@@ -162,7 +162,7 @@ step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MiddleLevelPanel:position")
+tracks/0/path = NodePath("LevelPanels/MiddleLevelPanel:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -174,7 +174,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MiddleLevelPanel:scale")
+tracks/1/path = NodePath("LevelPanels/MiddleLevelPanel:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -186,7 +186,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("UpperLevelPanel:position")
+tracks/2/path = NodePath("LevelPanels/UpperLevelPanel:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -198,7 +198,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("UpperLevelPanel:scale")
+tracks/3/path = NodePath("LevelPanels/UpperLevelPanel:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -210,7 +210,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("LowerLevelPanel:position")
+tracks/4/path = NodePath("LevelPanels/LowerLevelPanel:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -222,7 +222,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("LowerLevelPanel:scale")
+tracks/5/path = NodePath("LevelPanels/LowerLevelPanel:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -239,7 +239,7 @@ step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("LowerLevelPanel:position")
+tracks/0/path = NodePath("LevelPanels/LowerLevelPanel:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -251,7 +251,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("LowerLevelPanel:scale")
+tracks/1/path = NodePath("LevelPanels/LowerLevelPanel:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -263,7 +263,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MiddleLevelPanel:position")
+tracks/2/path = NodePath("LevelPanels/MiddleLevelPanel:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -275,7 +275,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("MiddleLevelPanel:scale")
+tracks/3/path = NodePath("LevelPanels/MiddleLevelPanel:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -287,7 +287,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("UpperLevelPanel:position")
+tracks/4/path = NodePath("LevelPanels/UpperLevelPanel:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -299,7 +299,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("UpperLevelPanel:scale")
+tracks/5/path = NodePath("LevelPanels/UpperLevelPanel:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -467,18 +467,6 @@ light_energy = 10.0
 light_size = 15.0
 omni_range = 15.0
 
-[node name="UpperLevelPanel" type="Sprite3D" parent="."]
-transform = Transform3D(-8.74228e-09, -6.97573e-17, -0.2, 6.97573e-17, 0.2, -6.97573e-17, 0.2, -6.97573e-17, -8.74228e-09, 11.5, 6.5, -3)
-texture = ExtResource("7_meev4")
-
-[node name="MiddleLevelPanel" type="Sprite3D" parent="."]
-transform = Transform3D(-1.31134e-08, -1.04636e-16, -0.3, 1.04636e-16, 0.3, -1.04636e-16, 0.3, -1.04636e-16, -1.31134e-08, 11.5, 3.5, -3)
-texture = ExtResource("7_674sf")
-
-[node name="LowerLevelPanel" type="Sprite3D" parent="."]
-transform = Transform3D(-8.74228e-09, -6.97574e-17, -0.2, 6.97574e-17, 0.2, -6.97574e-17, 0.2, -6.97574e-17, -8.74228e-09, 11.5, 0.5, -3)
-texture = ExtResource("7_meev4")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_5wauu")
@@ -506,5 +494,33 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExitDoor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 shape = SubResource("BoxShape3D_ec0t2")
+
+[node name="ItemPanels" type="Node3D" parent="."]
+
+[node name="UpperItemPanel" type="Sprite3D" parent="ItemPanels"]
+transform = Transform3D(0.2, -6.97573e-17, -2.66454e-15, 6.97573e-17, 0.2, -6.97573e-17, 2.7119e-15, 6.97573e-17, 0.2, -3, 6.5, -11.5)
+texture = ExtResource("7_meev4")
+
+[node name="MiddleItemPanel" type="Sprite3D" parent="ItemPanels"]
+transform = Transform3D(0.3, -1.04636e-16, 1.7657e-14, 1.04636e-16, 0.3, -1.04636e-16, -1.77517e-14, 1.04636e-16, 0.3, -3, 3.5, -11.5)
+texture = ExtResource("7_674sf")
+
+[node name="LowerItemPanel" type="Sprite3D" parent="ItemPanels"]
+transform = Transform3D(0.2, -6.97574e-17, -2.66454e-15, 6.97574e-17, 0.2, -6.97574e-17, 2.7119e-15, 6.97574e-17, 0.2, -3, 0.5, -11.5)
+texture = ExtResource("7_meev4")
+
+[node name="LevelPanels" type="Node3D" parent="."]
+
+[node name="UpperLevelPanel" type="Sprite3D" parent="LevelPanels"]
+transform = Transform3D(-8.74228e-09, -6.97573e-17, -0.2, 6.97573e-17, 0.2, -6.97573e-17, 0.2, -6.97573e-17, -8.74228e-09, 11.5, 6.5, -3)
+texture = ExtResource("7_meev4")
+
+[node name="MiddleLevelPanel" type="Sprite3D" parent="LevelPanels"]
+transform = Transform3D(-1.31134e-08, -1.04636e-16, -0.3, 1.04636e-16, 0.3, -1.04636e-16, 0.3, -1.04636e-16, -1.31134e-08, 11.5, 3.5, -3)
+texture = ExtResource("7_674sf")
+
+[node name="LowerLevelPanel" type="Sprite3D" parent="LevelPanels"]
+transform = Transform3D(-8.74228e-09, -6.97574e-17, -0.2, 6.97574e-17, 0.2, -6.97574e-17, 0.2, -6.97574e-17, -8.74228e-09, 11.5, 0.5, -3)
+texture = ExtResource("7_meev4")
 
 [connection signal="body_entered" from="ExitRoom" to="." method="_on_exit_room_body_entered"]

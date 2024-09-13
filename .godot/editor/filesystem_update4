@@ -56,3 +56,7 @@ res://enemies/enemy_anims/x_triangle.res
 res://enemies/enemy_anims/x_triangle_axkick.res
 res://enemies/enemy_anims/x_triangle_flyingkick.res
 res://rang/rang_particles_base.tscn
+res://levels/hub_section_nodes/hub_room.gd
+res://levels/gauntlet_level1.tscn
+res://enemies/first_miniboss.gd
+res://enemies/enemy_melee_base.gd
