@@ -35,6 +35,7 @@ const RETURN_ACC := 1.2
 const MAX_RETURN_SPEED := 55
 
 var rapidorbit_script := preload("res://rang/special_rapidorbit.gd")
+var homing_script := preload("res://rang/special_homing.gd")
 var ricochet_particles := preload("res://rang/rang_particles_ricochet.tscn")
 @onready var level := $/root/Level
 @onready var cotu = $/root/Level/cotuCB
@@ -88,7 +89,7 @@ func change_color(color: Color):
 func _physics_process(delta):
 	mesh.rotate_y(rotate_speed)
 	if Input.is_action_just_pressed("Special") and global_position.distance_to(target.global_position) < SPECIAL_DIST:
-		set_script(rapidorbit_script)
+		set_script(homing_script)
 		return
 	current_loop_angle += abs(angle_speed) * delta
 	invincible = current_loop_angle < PI/(5*petals)

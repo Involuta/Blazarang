@@ -71,3 +71,4 @@ res://enemies/bullet.gd
 res://enemies/enemy_mega_bullet.tscn
 res://rang/special_rapidorbit.gd
 res://rang/roserang.gd
+res://rang/special_homing.gd
