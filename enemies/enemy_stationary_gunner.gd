@@ -16,7 +16,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var bullet := preload("res://enemies/enemy_bullet.tscn")
 @onready var animation_player := $AnimationPlayer
 @onready var level := $/root/Level
-@onready var target := $/root/Level/Target
+@onready var target := $/root/Level/Icon
 @onready var gun_mesh := $GunMesh
 @onready var stand_mesh := $BasicStationaryGunStand
 

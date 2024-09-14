@@ -28,7 +28,7 @@ var bullet := preload("res://enemies/enemy_bullet.tscn")
 @onready var anim_tree := $AnimationTree
 @onready var gun_mesh := $MobileGunner/ControlRig/Skeleton3D/BoneAttachment3D/BasicGun
 @onready var level := $/root/Level
-@onready var target := $/root/Level/Target
+@onready var target := $/root/Level/Icon
 
 func _ready():
 	add_to_group("lockonables")

@@ -30,7 +30,7 @@ func scroll_down():
 	texture_value_dict_pos -= 1
 	if texture_value_dict_pos <= -1:
 		texture_value_dict_pos = texture_value_dict.size()-1
-	lower_panel.texture = load(texture_value_dict.keys()[texture_value_dict_pos])
+	upper_panel.texture = load(texture_value_dict.keys()[texture_value_dict_pos])
 	anim_player.play("scroll_down")
 
 func file_to_texture(file):
