@@ -19,6 +19,8 @@ func _physics_process(delta):
 
 func destroy_self():
 	destroyed = true
+	# For whatever reason, high velocity apparently makes the particles disappear early
+	velocity = Vector3.ZERO
 	$EnemyHitbox.queue_free()
 	$BulletMesh.queue_free()
 	$TailParticles.queue_free()

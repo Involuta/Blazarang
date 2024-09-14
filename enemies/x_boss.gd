@@ -100,7 +100,6 @@ var body_mat := preload("res://textures/x_boss_body.tres")
 func _ready():
 	add_to_group("lockonables")
 	if aggro_distance > 0:
-		nav_agent.process_mode = Node.PROCESS_MODE_DISABLED
 		behav_state = WAIT
 	anim_tree.active = true
 
@@ -156,7 +155,6 @@ func lerp_look_at_position(target_pos, turn_speed):
 func wait():
 	move_and_slide()
 	if global_position.distance_to(target.global_position) < aggro_distance:
-		nav_agent.process_mode = Node.PROCESS_MODE_INHERIT
 		behav_state = FOLLOW
 
 func follow():
@@ -396,17 +394,3 @@ func x_icon_follow_teleport_pos():
 		icon_vec *= -1
 	x_icon_pos.global_position.x = target.global_position.x + teleport_dist_from_target * icon_vec.x
 	x_icon_pos.global_position.z = target.global_position.z + teleport_dist_from_target * icon_vec.y
-
-func can_see_target():
-	var space_state := get_world_3d().direct_space_state
-	var sight_dir := global_position.direction_to(target.global_position)
-	var query = PhysicsRayQueryParameters3D.create(global_position, global_position + nav_agent.neighbor_distance * sight_dir)
-	query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER, Globals.TARGET_COL_LAYER])
-	query.collide_with_areas = true
-	var result = space_state.intersect_ray(query)
-	if not result:
-		return true
-	if result.collider.collision_layer == Globals.ARENA_COL_LAYER:
-		return false
-	else:
-		return true

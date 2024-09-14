@@ -485,18 +485,9 @@ collision_layer = 8
 collision_mask = 146
 platform_floor_layers = 4294901762
 script = ExtResource("1_u3wem")
-entity_name = null
 min_long_dist_wait = 0.5
 max_long_dist_wait = 2.5
-min_y_pos = null
-aggro_distance = null
 follow_speed = 15.0
-target_distance = null
-attack_duration_secs = null
-follow_turn_speed = null
-attack_turn_speed = null
-bullet_speed = null
-fast_bullet_speed = null
 short_dist_attack_chances = {
 "DiagonalDash": 2.08167e-12,
 "RightArmSlice": 0.8,
@@ -504,17 +495,7 @@ short_dist_attack_chances = {
 "Superman": 2.08167e-12,
 "Triangle": 0.2
 }
-long_dist_right_arm_deployed_attack_chances = null
-long_dist_right_arm_not_deployed_attack_chances = null
 diagonal_dash_speed = 22.0
-dash_speed = null
-dash_back_speed = null
-teleport_dist_from_target = null
-slipnslice_speed = null
-superman_fwd_speed = null
-superman_down_speed = null
-triangle_arm_angle = null
-triangle_arm_dist = null
 triangle_axkick_dist = 2.25
 flyingkick_hit_frames = 9
 

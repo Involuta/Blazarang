@@ -8,8 +8,7 @@ extends Node3D
 var selected := false
 
 @export var texture_value_dict := {
-	"res://textures/3-VAR1_1.webp" : "res://levels/gauntlet_level1.tscn",
-	"res://textures/8164.webp" : "res://levels/x_boss_level1.tscn"
+	
 }
 
 var texture_value_dict_pos := 1
