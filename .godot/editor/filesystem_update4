@@ -69,3 +69,5 @@ res://enemies/enemy_gunner_base.gd
 res://enemies/enemy_melee_tier3.tscn
 res://enemies/bullet.gd
 res://enemies/enemy_mega_bullet.tscn
+res://rang/special_rapidorbit.gd
+res://rang/roserang.gd

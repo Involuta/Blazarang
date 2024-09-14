@@ -14,8 +14,10 @@ var angle := 0.0
 var speed := 25.0
 var duration_secs := 1.5
 
+var invincible := true
+
 @onready var cotu = $/root/Level/cotuCB
-@onready var target = $/root/Level/Target
+@onready var target = $/root/Level/Icon
 @onready var hitbox = $PlayerHitbox
 
 func _init():
@@ -26,6 +28,7 @@ func _ready():
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, false)
 	angle = 0
 	radius = initial_radius
+	$PlayerHitbox.damage *= 1.5
 	await get_tree().create_timer(duration_secs).timeout
 	queue_free()
 	
@@ -33,7 +36,7 @@ func rapidorbit(delta):
 	angle += speed * delta
 	radius += (final_radius - initial_radius) / duration_secs * delta
 	var angle_vec := Vector2.from_angle(angle)
-	global_position = cotu.global_position + radius * Vector3(angle_vec.x, 0, angle_vec.y)
+	global_position = target.global_position + radius * Vector3(angle_vec.x, 0, angle_vec.y)
 
 func _physics_process(delta):
 	rapidorbit(delta)
