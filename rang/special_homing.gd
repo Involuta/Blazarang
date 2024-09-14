@@ -35,11 +35,13 @@ func dist_to_lockonable(a, b):
 	return icon.global_position.distance_to(a.global_position) < icon.global_position.distance_to(b.global_position)
 
 func homing_attack(target):
-	var homing_time := 0.0
-	while (homing_time < .5) and target != null:
-		global_position = global_position.lerp(target.global_position, .5)
+	var current_homing_time := 0.0
+	var final_homing_time := .25
+	var original_pos := global_position
+	while (current_homing_time < final_homing_time) and target != null:
+		global_position = original_pos.lerp(target.global_position, current_homing_time/final_homing_time)
 		await get_tree().create_timer(get_physics_process_delta_time()).timeout
-		homing_time += get_physics_process_delta_time()
+		current_homing_time += get_physics_process_delta_time()
 
 func get_mvmt_state():
 	return "HOMING"
