@@ -7,8 +7,7 @@ extends CharacterBody3D
 
 var BPM := 113.0
 var rotate_speed := 3.6
-var target_homing_time := .25
-var max_targets := 5
+var max_targets := 15
 
 var invincible := true
 
@@ -38,12 +37,16 @@ func dist_to_lockonable(a, b):
 	return icon.global_position.distance_to(a.global_position) < icon.global_position.distance_to(b.global_position)
 
 func homing_attack(target):
-	var current_homing_time := 0.0
-	var original_pos = global_position
-	while (current_homing_time < target_homing_time) and target != null:
-		global_position = original_pos.lerp(target.global_position, current_homing_time/target_homing_time)
+	if target == null:
+		return
+	var original_dist_to_target := global_position.distance_to(target.global_position)
+	# The line below instantly teleports the rang to enemies but risks quantum superposition bug, making the rang unusable
+	var homing_speed := original_dist_to_target / get_physics_process_delta_time()
+	# var homing_speed := original_dist_to_target / get_physics_process_delta_time()
+	while target != null and global_position.distance_to(target.global_position) > 1:
+		velocity = homing_speed * global_position.direction_to(target.global_position)
+		move_and_slide()
 		await get_tree().create_timer(get_physics_process_delta_time()).timeout
-		current_homing_time += get_physics_process_delta_time()
 
 func _physics_process(delta):
 	mesh.rotate_y(rotate_speed)
