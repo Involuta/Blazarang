@@ -45,12 +45,11 @@ var ricochet_particles := preload("res://rang/rang_particles_ricochet.tscn")
 @onready var trail = $Trail
 @onready var base_particle_gradient = $RangParticlesBase/GPUParticles3D.process_material.color_ramp.gradient
 @onready var rang_glow_shader = $boomerang/Boomerang3DModelV1.get_surface_override_material(0)
-@onready var trail_glow_shader = $Trail.material_override.next_pass
 
 @export var rotate_speed := 3.6
-@export var rose_color := Color(1,0,.8)
-@export var ricochet_color := Color(0,.8,0)
-@export var return_color := Color(0,0,1)
+@export var rose_color := Color(1,0,.8,.03)
+@export var ricochet_color := Color(0,.8,0,.03)
+@export var return_color := Color(0,0,1,.03)
 
 @onready var flying_sfx := $FlyingAudioStream
 @onready var ricochet_sfx := $RicochetAudioStream
@@ -81,10 +80,9 @@ func rose(delta):
 	return target.global_position + radius * Vector3(angle_vec.x, 0, angle_vec.y)
 
 func change_color(color: Color):
-	trail.end_color = color
+	trail.color_ramp.gradient.colors[1] = color
 	base_particle_gradient.set_color(1, color)
 	rang_glow_shader.set_shader_parameter("ColorParameter", color)
-	trail_glow_shader.set_shader_parameter("ColorParameter", color)
 
 func _physics_process(delta):
 	mesh.rotate_y(rotate_speed)

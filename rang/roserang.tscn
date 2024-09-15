@@ -1,16 +1,18 @@
-[gd_scene load_steps=22 format=3 uid="uid://dqdba8l6potq1"]
+[gd_scene load_steps=29 format=3 uid="uid://dqdba8l6potq1"]
 
 [ext_resource type="Script" path="res://rang/roserang.gd" id="1_m7w6u"]
 [ext_resource type="Script" path="res://hitbox.gd" id="2_1xumc"]
 [ext_resource type="Script" path="res://rang/destroy_on_cotu_hit.gd" id="3_o7i4w"]
 [ext_resource type="Script" path="res://rang/hit_sfx_player.gd" id="4_s5v25"]
-[ext_resource type="Script" path="res://rang/rang_trail.gd" id="5_q4hkp"]
 [ext_resource type="AudioStream" uid="uid://y2t2k8f41igx" path="res://audio/sfx/HitSound3.wav" id="5_ru7fj"]
 [ext_resource type="PackedScene" uid="uid://xsh6t6rpr2st" path="res://rang/rang_particles_base.tscn" id="6_44m4u"]
 [ext_resource type="PackedScene" uid="uid://dd1bl11ajhe0s" path="res://glb_inherited_scenes/boomerang.tscn" id="6_c0jd5"]
 [ext_resource type="Shader" uid="uid://dkll861wc3rxd" path="res://rang/roserang_shader.tres" id="7_j3iaw"]
 [ext_resource type="AudioStream" uid="uid://c6kwran0tovv1" path="res://audio/sfx/flying_rang.wav" id="8_ml2k7"]
 [ext_resource type="AudioStream" uid="uid://7urbs42hegym" path="res://audio/sfx/ricochet.wav" id="9_iyhsu"]
+[ext_resource type="Shader" path="res://GPUTrail-main/shaders/trail.gdshader" id="12_mcojj"]
+[ext_resource type="Shader" path="res://GPUTrail-main/shaders/trail_draw_pass.gdshader" id="13_vk0if"]
+[ext_resource type="Script" path="res://GPUTrail-main/GPUTrail3D.gd" id="14_gsab4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cvffx"]
 shading_mode = 0
@@ -41,24 +43,39 @@ stream_0/weight = 1.0
 height = 0.2
 radius = 2.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_d7mak"]
-render_priority = 0
-shader = ExtResource("7_j3iaw")
-shader_parameter/ColorParameter = Color(1, 0, 1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54f1v"]
-next_pass = SubResource("ShaderMaterial_d7mak")
-transparency = 1
-blend_mode = 1
-cull_mode = 2
-shading_mode = 0
-vertex_color_use_as_albedo = true
-disable_receive_shadows = true
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e1mob"]
 render_priority = 0
 shader = ExtResource("7_j3iaw")
 shader_parameter/ColorParameter = Color(2, 2, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_18bd2"]
+shader = ExtResource("12_mcojj")
+
+[sub_resource type="Gradient" id="Gradient_6dfss"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 0, 1, 0.0392157)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_aaqkt"]
+gradient = SubResource("Gradient_6dfss")
+
+[sub_resource type="Curve" id="Curve_cuoyk"]
+_data = [Vector2(0, 1), 0.0, -1.18082, 0, 0, Vector2(1, 0.0129609), -0.943115, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_s4uxv"]
+width = 32
+curve = SubResource("Curve_cuoyk")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_buwaw"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("13_vk0if")
+shader_parameter/emmission_transform = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+shader_parameter/flags = 40
+shader_parameter/color_ramp = SubResource("GradientTexture1D_aaqkt")
+shader_parameter/curve = SubResource("CurveTexture_s4uxv")
+
+[sub_resource type="QuadMesh" id="QuadMesh_cvf3i"]
+material = SubResource("ShaderMaterial_buwaw")
 
 [node name="Roserang" type="CharacterBody3D"]
 collision_mask = 66
@@ -112,18 +129,6 @@ omni_shadow_mode = 0
 
 [node name="RangParticlesBase" parent="." instance=ExtResource("6_44m4u")]
 
-[node name="Trail" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.08, -2.79029e-17, 2.79029e-17, 2.79029e-17, 0.08, -2.79029e-17, -2.79029e-17, 2.79029e-17, 0.08, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-material_override = SubResource("StandardMaterial3D_54f1v")
-cast_shadow = 0
-skeleton = NodePath("")
-script = ExtResource("5_q4hkp")
-start_width = 12.0
-end_width = 3.0
-width_scale_acc = 3.0
-point_lifespan = 0.5
-end_color = Color(0, 0, 0.788235, 1)
-
 [node name="boomerang" parent="." instance=ExtResource("6_c0jd5")]
 transform = Transform3D(-1.73645e-09, -0.023, -3.4729e-09, -0.023, 1.73645e-09, 2.01072e-09, -2.01072e-09, 3.4729e-09, -0.023, -0.236768, 0, 0)
 
@@ -139,6 +144,20 @@ bus = &"SFX"
 [node name="RicochetAudioStream" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_iyhsu")
 volume_db = -12.0
+
+[node name="Trail" type="GPUParticles3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 3.48787e-16, 1, -4.37114e-08, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, 0, 0, 0)
+amount = 30
+lifetime = 30.0
+explosiveness = 1.0
+fixed_fps = 0
+process_material = SubResource("ShaderMaterial_18bd2")
+draw_pass_1 = SubResource("QuadMesh_cvf3i")
+script = ExtResource("14_gsab4")
+length = 30
+color_ramp = SubResource("GradientTexture1D_aaqkt")
+curve = SubResource("CurveTexture_s4uxv")
+_defaults_have_been_set = true
 
 [connection signal="body_entered" from="CotuCollider" to="CotuCollider" method="_on_body_entered"]
 

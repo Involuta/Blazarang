@@ -2403,6 +2403,7 @@ transform = Transform3D(1, -8.69734e-23, -3.80173e-30, 0, -4.37114e-08, 1, -8.69
 
 [node name="EyeColorChange" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, -1.5246e-23, -1.5246e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.864047, -1.38196)
+emitting = false
 amount = 1
 lifetime = 0.6
 one_shot = true
@@ -2422,6 +2423,7 @@ draw_pass_1 = SubResource("CylinderMesh_s1lyi")
 
 [node name="RingParticle" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 0, 0.864047, -2.25143)
+emitting = false
 amount = 3
 lifetime = 0.5
 one_shot = true

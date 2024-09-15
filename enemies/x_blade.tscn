@@ -381,8 +381,7 @@ transform = Transform3D(1, 1.57912e-25, 6.90255e-30, 0, -4.37114e-11, 1, 1.57912
 surface_material_override/0 = SubResource("StandardMaterial3D_qbx8q")
 
 [node name="GPUTrail3D" type="GPUParticles3D" parent="." index="1"]
-transform = Transform3D(3.75001, -4.41933e-22, -1.3596e-21, 1.23937e-21, -1.63918e-07, 3.75001, -4.41932e-22, -3.75, -1.63918e-07, 2.08165e-12, 1.80515e-12, -3.985)
-visible = false
+transform = Transform3D(3.75001, -4.41933e-22, -1.0552e-21, 1.16878e-21, -1.63918e-07, 3.75001, -4.41932e-22, -3.75, -1.63918e-07, 2.08165e-12, 1.7862e-12, -3.985)
 amount = 1
 explosiveness = 1.0
 fixed_fps = 0
