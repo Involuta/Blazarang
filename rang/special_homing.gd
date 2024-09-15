@@ -6,13 +6,16 @@ extends CharacterBody3D
 # BIZARROBOT - 120, 90
 
 var BPM := 113.0
+var rotate_speed := 3.6
+var target_homing_time := .25
 var max_targets := 5
 
 var invincible := true
 
+@onready var mesh = $boomerang
+@onready var hitbox = $PlayerHitbox
 @onready var cotu = $/root/Level/cotuCB
 @onready var icon = $/root/Level/Icon
-@onready var hitbox = $PlayerHitbox
 
 func _init():
 	# When this script is assigned to roserang, _init() is called, but not _ready() bc the roserang is already in the scene tree, and _ready() is only called when a node enters the scene tree for the first time. To get the @onready values, you must call _ready() manually
@@ -36,12 +39,14 @@ func dist_to_lockonable(a, b):
 
 func homing_attack(target):
 	var current_homing_time := 0.0
-	var final_homing_time := .25
-	var original_pos := global_position
-	while (current_homing_time < final_homing_time) and target != null:
-		global_position = original_pos.lerp(target.global_position, current_homing_time/final_homing_time)
+	var original_pos = global_position
+	while (current_homing_time < target_homing_time) and target != null:
+		global_position = original_pos.lerp(target.global_position, current_homing_time/target_homing_time)
 		await get_tree().create_timer(get_physics_process_delta_time()).timeout
 		current_homing_time += get_physics_process_delta_time()
+
+func _physics_process(delta):
+	mesh.rotate_y(rotate_speed)
 
 func get_mvmt_state():
 	return "HOMING"
