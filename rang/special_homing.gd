@@ -7,7 +7,8 @@ extends CharacterBody3D
 
 var BPM := 113.0
 var rotate_speed := 3.6
-var max_targets := 15
+var max_targets := 12
+var homing_speed_multiplier := .2 # must be between 0 (exclusive) and 1 (inclusive)
 
 var invincible := true
 
@@ -21,8 +22,8 @@ func _init():
 	_ready()
 
 func _ready():
+	# $Trail.visible = false
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, false)
-	$PlayerHitbox.damage *= 1.5
 	var all_lockonables = get_tree().get_nodes_in_group("lockonables")
 	if not all_lockonables.is_empty():
 		all_lockonables.sort_custom(dist_to_lockonable)
@@ -41,10 +42,12 @@ func homing_attack(target):
 		return
 	var original_dist_to_target := global_position.distance_to(target.global_position)
 	# The line below instantly teleports the rang to enemies but risks quantum superposition bug, making the rang unusable
-	var homing_speed := original_dist_to_target / get_physics_process_delta_time()
-	# var homing_speed := original_dist_to_target / get_physics_process_delta_time()
+	var homing_speed := homing_speed_multiplier * original_dist_to_target / get_physics_process_delta_time()
 	while target != null and global_position.distance_to(target.global_position) > 1:
-		velocity = homing_speed * global_position.direction_to(target.global_position)
+		if global_position.distance_to(target.global_position) <= homing_speed * get_physics_process_delta_time():
+			velocity = global_position.distance_to(target.global_position) * global_position.direction_to(target.global_position) / get_physics_process_delta_time()
+		else:
+			velocity = homing_speed * global_position.direction_to(target.global_position)
 		move_and_slide()
 		await get_tree().create_timer(get_physics_process_delta_time()).timeout
 
