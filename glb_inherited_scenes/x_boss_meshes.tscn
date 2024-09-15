@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b3uvg3j4qge8o"]
+[gd_scene load_steps=28 format=3 uid="uid://b3uvg3j4qge8o"]
 
 [ext_resource type="PackedScene" uid="uid://rp0n2dfx0chj" path="res://glb_imports/8164_meshes.glb" id="1_mluec"]
 [ext_resource type="PackedScene" uid="uid://d1opgv0y2ujut" path="res://glb_inherited_scenes/x_head_pieces.tscn" id="2_pkf4d"]
@@ -127,6 +127,36 @@ albedo_color = Color(1, 1, 1, 0)
 transparency = 4
 albedo_color = Color(1, 1, 1, 0)
 
+[sub_resource type="Gradient" id="Gradient_3ia16"]
+offsets = PackedFloat32Array(0, 0.5425, 1)
+colors = PackedColorArray(1, 0.439216, 0, 0, 1.5, 0.27, 0, 0.5, 1.5, 1, 0, 0.78)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xgi1f"]
+gradient = SubResource("Gradient_3ia16")
+
+[sub_resource type="Curve" id="Curve_1x4yo"]
+max_value = 10.0
+_data = [Vector2(2.08165e-12, 10), 0.0, -10.0, 0, 1, Vector2(1, 0), -10.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lpm3i"]
+curve = SubResource("Curve_1x4yo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gocoe"]
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+scale_curve = SubResource("CurveTexture_lpm3i")
+color = Color(1.5, 0.6, 0.53, 1)
+color_ramp = SubResource("GradientTexture1D_xgi1f")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_70nmr"]
+transparency = 4
+shading_mode = 0
+vertex_color_use_as_albedo = true
+disable_receive_shadows = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_uuqt1"]
+material = SubResource("StandardMaterial3D_70nmr")
+
 [sub_resource type="Curve" id="Curve_yh0sc"]
 _data = [Vector2(2.08165e-12, 1), 0.0, 0.0, 0, 0, Vector2(1, 2.08165e-12), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -229,10 +259,34 @@ transform = Transform3D(0.446638, 0.278946, -0.85012, 0.312189, -0.939028, -0.14
 bone_name = "mixamorig_LeftArm"
 bone_idx = 8
 
+[node name="ReattachBox" type="GPUParticles3D" parent="Armature/Skeleton3D/LeftArm" index="0"]
+cast_shadow = 0
+emitting = false
+amount = 1
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_gocoe")
+draw_pass_1 = SubResource("BoxMesh_uuqt1")
+
 [node name="RightArm" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="3"]
 transform = Transform3D(0.498514, -0.255042, 0.828515, -0.33588, -0.937913, -0.0866209, 0.799167, -0.2351, -0.553227, -3.5919, 20.505, -0.152356)
 bone_name = "mixamorig_RightArm"
 bone_idx = 12
+
+[node name="ReattachBox" type="GPUParticles3D" parent="Armature/Skeleton3D/RightArm" index="0"]
+cast_shadow = 0
+emitting = false
+amount = 1
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_gocoe")
+draw_pass_1 = SubResource("BoxMesh_uuqt1")
 
 [node name="LeftFoot" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="4"]
 transform = Transform3D(-0.989495, 0.141864, -0.027828, -0.128834, -0.777992, 0.614923, 0.0655851, 0.612048, 0.788095, 2.00012, 4.05366, 0.251875)
