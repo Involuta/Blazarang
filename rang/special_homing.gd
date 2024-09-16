@@ -24,6 +24,7 @@ func _init():
 func _ready():
 	# $Trail.visible = false
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, false)
+	set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, false)
 	var all_lockonables = get_tree().get_nodes_in_group("lockonables")
 	if not all_lockonables.is_empty():
 		all_lockonables.sort_custom(dist_to_lockonable)

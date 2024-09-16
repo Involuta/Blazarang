@@ -26,6 +26,7 @@ func _init():
 
 func _ready():
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, false)
+	set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, false)
 	angle = 0
 	radius = initial_radius
 	$PlayerHitbox.damage *= 1.5

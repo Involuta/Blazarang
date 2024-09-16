@@ -7,7 +7,11 @@ var invincibility_secs := .05
 @export var bullet_explosion_secs := 1.0
 var destroyed := false
 
+@onready var explosion_hitbox := $ExplosionHitboxPivot/EnemyHitbox
+
 func _ready():
+	if explosion_hitbox != null:
+		explosion_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	await get_tree().create_timer(invincibility_secs).timeout
 	invincible = false
 	await get_tree().create_timer(max_lifetime_secs).timeout
@@ -26,6 +30,11 @@ func destroy_self():
 	$TailParticles.queue_free()
 	$ExplodeParticles.emitting = true
 	$ExplosionBall.emitting = true
+	if explosion_hitbox != null:
+		explosion_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
+	await get_tree().create_timer(bullet_explosion_secs/4.0).timeout
+	if explosion_hitbox != null:
+		explosion_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
 	await get_tree().create_timer(bullet_explosion_secs).timeout
 	queue_free()
 
