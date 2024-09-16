@@ -297,6 +297,22 @@ func superman_rush():
 	velocity = superman_fwd_speed * -transform.basis.z
 	velocity.y = -superman_down_speed
 
+func triangle_recall_arms():
+	left_arm.stop_firing_laser()
+	right_arm.stop_firing_laser()
+	var left_mvmt_tween = get_tree().create_tween()
+	var right_mvmt_tween = get_tree().create_tween()
+	var rotation_tween = get_tree().create_tween()
+	rotation_tween.set_parallel()
+	rotation_tween.tween_property(left_arm, "rotation_degrees", Vector3(63, -25, -164), .2)
+	rotation_tween.tween_property(right_arm, "rotation_degrees", Vector3(63, 25, -164), .2)
+	left_mvmt_tween.tween_property(left_arm, "global_position", global_position + Vector3(-.351, .436, -.252), .2)
+	right_mvmt_tween.tween_property(right_arm, "global_position", global_position + Vector3(.351, .436, -.252), .2)
+	left_mvmt_tween.tween_callback(hide_floating_left_arm)
+	left_mvmt_tween.tween_callback(restore_rig_left_arm)
+	right_mvmt_tween.tween_callback(hide_floating_right_arm)
+	right_mvmt_tween.tween_callback(restore_rig_right_arm)
+
 func triangle_shoot_arms():
 	left_arm.rotation_degrees = (rotation_degrees.y + 180 + triangle_arm_angle) * Vector3.UP
 	left_arm.visible = true
