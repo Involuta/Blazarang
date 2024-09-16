@@ -78,3 +78,5 @@ res://cotu/shakeable_camera.tscn
 res://cotu/shakeable_camera.gd
 res://trauma_causer.tscn
 res://trauma_causer.gd
+res://glb_inherited_scenes/x_right_arm.tscn
+res://glb_inherited_scenes/x_left_arm.tscn

@@ -47,8 +47,8 @@ disable_receive_shadows = true
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_48vyg"]
 material = SubResource("StandardMaterial3D_44iqp")
-top_radius = 0.25
-bottom_radius = 0.25
+top_radius = 0.4
+bottom_radius = 0.4
 height = 1000.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ino44"]
@@ -74,7 +74,7 @@ process_material = SubResource("ParticleProcessMaterial_s2opr")
 draw_pass_1 = SubResource("SphereMesh_tfj6f")
 
 [node name="LaserMesh" type="MeshInstance3D" parent="." index="2"]
-transform = Transform3D(1, -1.57852e-23, 1.5246e-23, 1.06845e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.513, 2.08165e-12, 508)
+transform = Transform3D(1, -1.57852e-23, 1.5246e-23, 1.06845e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.39, 2.08165e-12, 508)
 visible = false
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_48vyg")
