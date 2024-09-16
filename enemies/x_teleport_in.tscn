@@ -1,6 +1,7 @@
-[gd_scene load_steps=23 format=3 uid="uid://caj8t83sp4iw8"]
+[gd_scene load_steps=25 format=3 uid="uid://caj8t83sp4iw8"]
 
 [ext_resource type="Script" path="res://DisappearNode.gd" id="1_685k5"]
+[ext_resource type="PackedScene" uid="uid://xxarwwj6l614" path="res://trauma_causer.tscn" id="2_1sl6i"]
 [ext_resource type="Script" path="res://hitbox.gd" id="2_y3vjr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ret76"]
@@ -218,28 +219,48 @@ tracks/9/keys = {
 "update": 1,
 "values": [SubResource("CylinderShape3D_4n6g8"), SubResource("CylinderShape3D_531yi"), SubResource("CylinderShape3D_5mx0w"), SubResource("CylinderShape3D_oib7o")]
 }
+tracks/10/type = "method"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("TraumaCauser")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"cause_trauma"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oqtkm"]
 _data = {
 "teleport": SubResource("Animation_2ne84")
 }
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_4lunx"]
+radius = 12.0
+
 [node name="XTeleportIn" type="Node3D"]
 script = ExtResource("1_685k5")
 disappear_secs = 0.7
 
 [node name="TPLowerDisc" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.1, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(5, 0, 0, 0, 0.1, 0, 0, 0, 5, 0, 0, 0)
+transparency = 1.0
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_0w676")
 
 [node name="TPFallingRing" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 8, 2.08165e-12)
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transparency = 1.0
 cast_shadow = 0
 mesh = SubResource("TorusMesh_s82p1")
 
 [node name="TPColumn" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 50, 0, 0, 0, 0.5, 2.08165e-12, 50, 2.08165e-12)
+transform = Transform3D(3, 0, 0, 0, 50, 0, 0, 0, 3, 2.08165e-12, 50, 2.08165e-12)
+transparency = 1.0
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_8frlv")
 
@@ -277,4 +298,10 @@ script = ExtResource("2_y3vjr")
 damage = 12
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHitbox"]
-shape = SubResource("CylinderShape3D_4n6g8")
+shape = SubResource("CylinderShape3D_oib7o")
+
+[node name="TraumaCauser" parent="." instance=ExtResource("2_1sl6i")]
+trauma_amount = 0.3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TraumaCauser"]
+shape = SubResource("SphereShape3D_4lunx")

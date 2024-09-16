@@ -1,3 +1,6 @@
+CollisionShape3D
+Area3D
+Camera3D
 GPUTrail3D
 AnimationPlayer
 Node3D
@@ -6,18 +9,15 @@ MeshInstance3D
 Node2D
 GPUParticles2D
 TextureRect
-CollisionShape3D
 StaticBody3D
 BoneAttachment3D
 GPUParticlesAttractorSphere3D
 Hitbox
 FuncGodotMap
 Sprite3D
-Area3D
 Hurtbox
 WorldEnvironment
 RayCast3D
-Camera3D
 Camera2D
 Control
 Label
@@ -30,4 +30,3 @@ RigidBody3D
 NavigationRegion3D
 AudioStreamPlayer3D
 AudioStreamPlayer
-TextEdit

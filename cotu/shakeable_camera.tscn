@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://jv0ogh4h31nr"]
+
+[ext_resource type="Script" path="res://cotu/shakeable_camera.gd" id="1_kxef2"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yjypn"]
+noise_type = 0
+seed = 1
+frequency = 0.1
+fractal_octaves = 3
+fractal_lacunarity = 3.0
+fractal_gain = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sfrut"]
+radius = 1.5
+
+[node name="ShakeableCamera" type="Area3D"]
+script = ExtResource("1_kxef2")
+noise = SubResource("FastNoiseLite_yjypn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_sfrut")
+
+[node name="Camera3D" type="Camera3D" parent="."]

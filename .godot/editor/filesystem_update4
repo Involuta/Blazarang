@@ -74,3 +74,7 @@ res://rang/roserang.gd
 res://rang/special_homing.gd
 res://levels/level1_section_nodes/gauntlet_arena1.gd
 res://glb_inherited_scenes/boomerang.tscn
+res://cotu/shakeable_camera.tscn
+res://cotu/shakeable_camera.gd
+res://trauma_causer.tscn
+res://trauma_causer.gd

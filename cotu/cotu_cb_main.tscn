@@ -1,6 +1,7 @@
-[gd_scene load_steps=44 format=3 uid="uid://icbfj05gq8vk"]
+[gd_scene load_steps=45 format=3 uid="uid://icbfj05gq8vk"]
 
 [ext_resource type="Script" path="res://cotu/CotuControl.gd" id="1_aleek"]
+[ext_resource type="PackedScene" uid="uid://jv0ogh4h31nr" path="res://cotu/shakeable_camera.tscn" id="2_b6h2k"]
 [ext_resource type="Script" path="res://cotu/CotuHurtbox.gd" id="2_fvpfg"]
 [ext_resource type="PackedScene" uid="uid://bhf6sxuvk61ia" path="res://cotu/cotu_death_particles.tscn" id="3_no5xx"]
 [ext_resource type="PackedScene" uid="uid://duanou50282es" path="res://glb_inherited_scenes/cotu_anims_24.tscn" id="4_gcwfx"]
@@ -212,7 +213,7 @@ gi_mode = 0
 mesh = SubResource("SphereMesh_dx5gt")
 skeleton = NodePath("")
 
-[node name="Camera3D" type="Camera3D" parent="CameraTwistPivot/CameraPitchPivot/CameraVisualObject"]
+[node name="ShakeableCamera" parent="CameraTwistPivot/CameraPitchPivot/CameraVisualObject" instance=ExtResource("2_b6h2k")]
 
 [node name="RangPointerPivot" type="Node3D" parent="."]
 
