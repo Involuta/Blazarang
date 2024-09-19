@@ -81,3 +81,7 @@ res://trauma_causer.gd
 res://glb_inherited_scenes/x_right_arm.tscn
 res://glb_inherited_scenes/x_left_arm.tscn
 res://cotu/CotuControl.gd
+res://ui/ui_root.gd
+res://cotu/CotuHurtbox.gd
+res://signal_bus.gd
+res://globals.gd

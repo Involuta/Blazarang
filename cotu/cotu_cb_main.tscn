@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://icbfj05gq8vk"]
+[gd_scene load_steps=47 format=3 uid="uid://icbfj05gq8vk"]
 
 [ext_resource type="Script" path="res://cotu/CotuControl.gd" id="1_aleek"]
 [ext_resource type="PackedScene" uid="uid://jv0ogh4h31nr" path="res://cotu/shakeable_camera.tscn" id="2_b6h2k"]
@@ -7,8 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://duanou50282es" path="res://glb_inherited_scenes/cotu_anims_24.tscn" id="4_gcwfx"]
 [ext_resource type="Material" uid="uid://yct3jaquatmq" path="res://cotu/cotu_anims_base_material.tres" id="5_25aol"]
 [ext_resource type="Material" uid="uid://be7mwluw32wnh" path="res://cotu/cotu_anims_eyes.tres" id="6_d0udm"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_80wmm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kxw61"]
 radius = 0.25
@@ -212,10 +210,6 @@ node_connections = [&"output", 0, &"StateMachine"]
 collision_layer = 16
 collision_mask = 74
 script = ExtResource("1_aleek")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("CapsuleMesh_80wmm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_kxw61")

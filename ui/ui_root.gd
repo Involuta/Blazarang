@@ -17,8 +17,6 @@ var buff1_applied := false
 @onready var cotu_hurtbox := $/root/Level/cotuCB/Hurtbox
 @onready var cotu_icon := $/root/Level/Icon
 
-var destabilized = false
-
 @export var destab_shader_opacity := .5
 @export var glitch_shader_shake_power := .03
 @export var glitch_shader_shake_color_rate := .02
@@ -33,6 +31,8 @@ func _ready():
 	buff_icon1.visible = false
 	
 	Globals.score_updated.connect(on_score_updated)
+	Globals.destabilize.connect(on_destabilize)
+	Globals.stabilize.connect(on_stabilize)
 	
 	for buff in cotu.buff_list:
 		match(buff):
@@ -49,8 +49,6 @@ func _physics_process(_delta):
 	cotu_health_bar.max_value = cotu_hurtbox.max_health
 	cotu_health_bar.value = cotu_hurtbox.health
 	cotu_damage_indicator.value = cotu_hurtbox.damage_indicator_value
-	if cotu_hurtbox.parent.destabilized and not destabilized:
-		destab_anim()
 	destab_shader.set_shader_parameter("opacity", destab_shader_opacity)
 	glitch_shader.set_shader_parameter("shake_power", glitch_shader_shake_power)
 	glitch_shader.set_shader_parameter("shake_color_rate", glitch_shader_shake_color_rate)
@@ -61,10 +59,14 @@ func _physics_process(_delta):
 func return_to_hub():
 	get_tree().change_scene_to_file("res://levels/hub.tscn")
 
-func destab_anim():
-	destabilized = true
+func on_destabilize():
 	$DestabilizeAnimation.play("destabilize")
 	$HealthBarAnimation.play("destabbed_health")
+
+func on_stabilize():
+	$DestabilizeAnimation.play("stabilize")
+	$HealthBarAnimation.stop()
+	$CotuHealthBar.modulate = Color.WHITE
 
 func on_score_updated(score_change):
 	score_num_display.text = str("SCORE: ", Globals.score)

@@ -472,12 +472,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_s33yg")
-destab_shader_opacity = 2.08165e-12
-glitch_shader_shake_power = 2.08165e-12
-glitch_shader_shake_color_rate = 2.08165e-12
 
 [node name="CotuHealthBar" parent="." instance=ExtResource("1_k5nv4")]
-modulate = Color(1, 0, 0.981548, 1)
+modulate = Color(1, 0, 0, 1)
 layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.0
@@ -498,7 +495,6 @@ libraries = {
 }
 
 [node name="GlitchBox" type="ColorRect" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0.176471)
 top_level = true
 z_index = 2

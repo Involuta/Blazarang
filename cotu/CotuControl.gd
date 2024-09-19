@@ -58,6 +58,15 @@ const LERP_VAL := .15 # The rate at which lerp funcs change; used for body mvmt 
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	Globals.destabilize.connect(on_destabilize)
+	Globals.stabilize.connect(on_stabilize)
+
+func on_destabilize():
+	destabilized = true
+
+func on_stabilize():
+	destabilized = false
 
 func _physics_process(delta):
 	# Dodge logic

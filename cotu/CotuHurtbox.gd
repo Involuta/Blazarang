@@ -59,7 +59,7 @@ func die():
 		Engine.time_scale = 1
 		get_tree().change_scene_to_file("res://levels/hub.tscn")
 		return
-	parent.destabilized = true
+	Globals.destabilize.emit()
 	self_heal(max_health)
 	invincible = true
 	await get_tree().create_timer(destab_invin_time).timeout

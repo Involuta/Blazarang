@@ -1,6 +1,8 @@
 extends Node
 
 signal score_updated(score_change)
+signal destabilize
+signal stabilize
 
 # Update this list before the layer names in Project Settings
 const PLAYER_COL_LAYER := 1
