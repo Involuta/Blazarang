@@ -158,6 +158,11 @@ func _physics_process(delta):
 	# Camera positioning based on level geometry
 	place_camera()
 	
+	if Input.is_action_just_pressed("UseItem"):
+		anim_tree.set("parameters/StateMachine/conditions/use_item", true)
+	else:
+		anim_tree.set("parameters/StateMachine/conditions/use_item", false)
+	
 	# Animation tree parameters
 	var vel2D = Vector2(velocity.x, velocity.z)
 	var move_blend_space := Vector2(vel2D.length(), 0)
