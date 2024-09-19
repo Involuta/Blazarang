@@ -26,6 +26,7 @@ var buff1_applied := false
 
 func _ready():
 	cotu_health_bar.modulate = Color.WHITE
+	cotu_damage_indicator.max_value = cotu_hurtbox.max_health
 	glitch_box.visible = false
 	destab_icon.visible = false
 	buff_icon1.visible = false

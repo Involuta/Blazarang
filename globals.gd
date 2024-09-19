@@ -40,6 +40,7 @@ const DODGE_SCORE = 1
 const INSTANT_RETHROW_SCORE = 1
 const RICOCHET_HIT_SCORE = 1
 const RAPIDORBIT_HIT_SCORE = 1
+const HOMING_HIT_SCORE = 1
 
 # health, hit score, kill score
 const enemy_hurtbox_data = {

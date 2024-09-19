@@ -16,11 +16,13 @@ var damage_indicator_value := 100.0
 
 func _ready():
 	super()
+	damage_indicator_value = max_health
 	Globals.stabilize.connect(on_stabilize)
 
 func on_stabilize():
 	max_health = original_max_health
 	health = max_health
+	damage_indicator_value = max_health
 
 func reset_recovery_delay():
 	recovery_delay_remaining = recovery_delay

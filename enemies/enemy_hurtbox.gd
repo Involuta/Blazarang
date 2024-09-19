@@ -24,6 +24,8 @@ func receive_hit(damage: float, hitter):
 			Globals.award_score(Globals.RICOCHET_HIT_SCORE)
 		elif hitter.get_mvmt_state() == "RAPIDORBIT":
 			Globals.award_score(Globals.RAPIDORBIT_HIT_SCORE)
+		elif hitter.get_mvmt_state() == "HOMING":
+			Globals.award_score(Globals.HOMING_HIT_SCORE)
 	super(damage, hitter)
 
 func emit_hit_particles(hitter):

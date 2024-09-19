@@ -88,3 +88,10 @@ res://globals.gd
 res://cotu/cotu_anims/use_item_stabilizer.res
 res://enemies/enemy_melee_tier1.tscn
 res://hurtbox.gd
+res://enemies/enemy_hurtbox.gd
+res://enemies/boss_hurtbox.gd
+res://levels/x_boss_level1.gd
+res://ui/health_bar.tscn
+res://levels/x_boss_level_section_nodes/x_boss_arena1.tscn
+res://enemies/enemy_big_melee_tier1.tscn
+res://levels/torch.tscn
