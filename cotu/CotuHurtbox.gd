@@ -1,6 +1,8 @@
 class_name CotuHurtbox
 extends Hurtbox
 
+@export var original_max_health := 100.0
+
 @export var base_recovery_rate := .25
 @export var fast_recovery_rate := .5
 var recovery_rate := .5
@@ -11,6 +13,14 @@ var recovery_active := false
 var damage_indicator_value := 100.0
 
 @export var destab_invin_time := 2.0
+
+func _ready():
+	super()
+	Globals.stabilize.connect(on_stabilize)
+
+func on_stabilize():
+	max_health = original_max_health
+	health = max_health
 
 func reset_recovery_delay():
 	recovery_delay_remaining = recovery_delay

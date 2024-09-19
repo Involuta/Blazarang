@@ -68,6 +68,9 @@ func on_destabilize():
 func on_stabilize():
 	destabilized = false
 
+func emit_stabilize():
+	Globals.stabilize.emit()
+
 func _physics_process(delta):
 	# Dodge logic
 	if Input.is_action_just_pressed("StepDodge") and can_dodge:

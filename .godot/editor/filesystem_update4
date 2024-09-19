@@ -85,3 +85,6 @@ res://ui/ui_root.gd
 res://cotu/CotuHurtbox.gd
 res://signal_bus.gd
 res://globals.gd
+res://cotu/cotu_anims/use_item_stabilizer.res
+res://enemies/enemy_melee_tier1.tscn
+res://hurtbox.gd
