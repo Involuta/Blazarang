@@ -263,7 +263,7 @@ func diagonal_dash():
 	var dir_to_target := global_position.direction_to(target.global_position)
 	var dir_to_target2D := Vector2(dir_to_target.x, dir_to_target.z)
 	var icon_vec := dir_to_target2D.orthogonal()
-	if rng.randf() < .5:
+	if not x_icon_tp_to_left:
 		icon_vec *= -1
 	var dash_dir2D := (1.7 * dir_to_target2D + icon_vec).normalized()
 	velocity = diagonal_dash_speed * Vector3(dash_dir2D.x, 0, dash_dir2D.y).normalized()
@@ -349,6 +349,14 @@ func right_arm_laser():
 	right_arm.rotation = (PI + rotation.y) * Vector3.UP
 	right_arm.visible = true
 	right_arm.fire_laser()
+
+func start_face_rain():
+	# Without this line, X's fall protection (which sets his y vel to 0 when his global y is below the min) would prevent his y vel from changing
+	global_position.y = min_y_pos + .01
+	velocity = 1 * Vector3.UP
+
+func face_rain_shoot_bombs():
+	velocity = 1 * Vector3.DOWN
 
 func recall_left_arm():
 	if not left_arm_deployed():

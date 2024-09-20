@@ -164,7 +164,7 @@ bones/22/rotation = Quaternion(0.658483, 0.113916, 0.00199795, 0.743922)
 bones/23/rotation = Quaternion(0.305114, 0.220829, -0.0729202, 0.923484)
 
 [node name="BoneAttachment3D" parent="MobileGunner/ControlRig/Skeleton3D" index="1"]
-transform = Transform3D(0.530504, 0.456261, 0.714417, 0.574862, 0.425738, -0.698771, -0.622976, 0.781392, -0.0364314, -2.30371, 12.7317, 2.26703)
+transform = Transform3D(0.530503, 0.456261, 0.714418, 0.574862, 0.425739, -0.69877, -0.622977, 0.781391, -0.0364315, -2.30371, 12.7317, 2.26703)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_vdhls")

@@ -119,7 +119,6 @@ shape = SubResource("CapsuleShape3D_4b6ac")
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
 process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
 transform = Transform3D(0.999999, 2.15301e-08, -2.2719e-14, -8.9407e-08, 0.999999, 0, -6.17927e-15, -6.2758e-15, 0.999999, 0, 0, 0)
@@ -156,7 +155,6 @@ bones/12/rotation = Quaternion(0.448639, 0.00140196, -0.343854, 0.824916)
 bones/13/rotation = Quaternion(-5.14845e-07, 1.1885e-06, -0.304052, 0.952655)
 bones/14/rotation = Quaternion(-0.204617, 0.178149, -0.0768357, 0.959422)
 bones/15/rotation = Quaternion(0.0557203, 0.244669, 0.966478, -0.0543352)
-bones/15/scale = Vector3(1, 1, 1)
 bones/16/rotation = Quaternion(-0.336833, 1.83762e-06, 4.18116e-07, 0.941564)
 bones/17/rotation = Quaternion(0.558164, -0.00714494, -0.0513349, 0.828111)
 bones/18/rotation = Quaternion(0.332153, -0.139268, 0.0377243, 0.932124)
@@ -167,7 +165,7 @@ bones/22/rotation = Quaternion(0.677152, -0.0569541, 0.0874421, 0.728406)
 bones/23/rotation = Quaternion(0.333949, 0.147261, -0.0331319, 0.930427)
 
 [node name="BoneAttachment3D" parent="VisualMesh/ControlRig/Skeleton3D" index="1"]
-transform = Transform3D(0.574458, -0.753303, -0.320206, -0.791297, -0.611161, 0.018186, -0.209397, 0.242931, -0.947173, 0.172138, 8.27295, 3.13148)
+transform = Transform3D(0.574457, -0.753304, -0.320205, -0.791298, -0.61116, 0.0181878, -0.209398, 0.24293, -0.947173, 0.172131, 8.27296, 3.13148)
 
 [node name="SwordPivot" parent="VisualMesh/ControlRig" index="1"]
 transform = Transform3D(0.794143, -0.457805, 0.399666, 0.142111, -0.499516, -0.85456, 0.590865, 0.735446, -0.331632, -0.000278863, 7.86918, 3.95635)

@@ -7,7 +7,7 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qbx8q"]
 shading_mode = 0
-albedo_color = Color(1, 0.219608, 0, 1)
+albedo_color = Color(1, 0.270588, 0, 1)
 
 [sub_resource type="Shader" id="Shader_ras3i"]
 code = "shader_type particles;
@@ -187,7 +187,8 @@ void fragment(){
 }"
 
 [sub_resource type="Gradient" id="Gradient_w6t7k"]
-colors = PackedColorArray(1, 0.219608, 0, 1, 1, 0.219608, 0, 0.0392157)
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 0.270588, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_cjrym"]
 gradient = SubResource("Gradient_w6t7k")
@@ -360,7 +361,7 @@ gravity = Vector3(2.08165e-12, -4.9, 2.08165e-12)
 initial_velocity_min = 20.0
 initial_velocity_max = 20.0
 scale_curve = SubResource("CurveTexture_e5fyj")
-color = Color(1.50196, 0.219608, 0, 1)
+color = Color(1.50196, 0.211765, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8jtxm"]
 shading_mode = 0
@@ -381,15 +382,16 @@ transform = Transform3D(1, 1.57912e-25, 6.90255e-30, 0, -4.37114e-11, 1, 1.57912
 surface_material_override/0 = SubResource("StandardMaterial3D_qbx8q")
 
 [node name="GPUTrail3D" type="GPUParticles3D" parent="." index="1"]
-transform = Transform3D(3.75001, -4.41933e-22, -1.0552e-21, 1.16878e-21, -1.63918e-07, 3.75001, -4.41932e-22, -3.75, -1.63918e-07, 2.08165e-12, 1.7862e-12, -3.985)
-amount = 1
+transform = Transform3D(3.75001, -4.41933e-22, -9.49323e-22, 1.08055e-21, -1.63918e-07, 3.75001, -4.41932e-22, -3.75, -1.63918e-07, 2.08165e-12, 1.7862e-12, -3.985)
+amount = 90
+lifetime = 90.0
 explosiveness = 1.0
 fixed_fps = 0
 visibility_aabb = AABB(-4, -6, -4, 8, 8, 8)
 process_material = SubResource("ShaderMaterial_5yjly")
 draw_pass_1 = SubResource("QuadMesh_a1rq5")
 script = ExtResource("6_bnh63")
-length = 1
+length = 90
 color_ramp = SubResource("GradientTexture1D_cjrym")
 curve = ExtResource("5_e2cg4")
 _defaults_have_been_set = true
@@ -403,7 +405,6 @@ libraries = {
 transform = Transform3D(1, -1.30915e-21, -1.58819e-22, 6.22547e-22, 1, -2.16794e-13, -4.97885e-24, 8.06457e-15, 1, 2.08165e-12, -7.06852e-10, -4.00486)
 cast_shadow = 0
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-emitting = false
 amount = 69
 lifetime = 0.7
 fixed_fps = 60
