@@ -6,7 +6,7 @@ var cotu_look_direction := Vector3.FORWARD
 @export var lockonable_limit := 20
 @onready var cotu = $/root/Level/cotuCB
 @onready var camera_twist_pivot = $/root/Level/cotuCB/CameraTwistPivot
-@onready var camera = $/root/Level/cotuCB/CameraTwistPivot/CameraPitchPivot/CameraVisualObject/Camera3D
+@onready var camera = $/root/Level/cotuCB/CameraTwistPivot/CameraPitchPivot/CameraVisualObject/ShakeableCamera/sCamera3D
 
 func _ready():
 	pass

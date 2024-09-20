@@ -87,7 +87,7 @@ func change_color(color: Color):
 func _physics_process(delta):
 	mesh.rotate_y(rotate_speed)
 	if Input.is_action_just_pressed("Special") and global_position.distance_to(target.global_position) < SPECIAL_DIST:
-		set_script(homing_script)
+		set_script(rapidorbit_script)
 		return
 	current_loop_angle += abs(angle_speed) * delta
 	invincible = current_loop_angle < PI/(5*petals)
