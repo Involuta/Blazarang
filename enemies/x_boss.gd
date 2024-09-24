@@ -49,7 +49,7 @@ var aiming_at_target := true
 @export var short_dist_attack_chances = {
 	"SlipnSlice" : .2,
 	"Superman" : .2,
-	"RightArmSlice" : .4,
+	"FaceRain" : .4,
 	"Triangle" : .1
 }
 
@@ -84,6 +84,10 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 var bullet := preload("res://enemies/enemy_mega_bullet.tscn")
 var body_mat := preload("res://textures/x_boss_body.tres")
+var left_head_piece := preload("res://enemies/x_left_head_piece_rb.tscn")
+var right_head_piece := preload("res://enemies/x_right_head_piece_rb.tscn")
+var top_head_piece := preload("res://enemies/x_top_head_piece_rb.tscn")
+var bottom_head_piece := preload("res://enemies/x_bottom_head_piece_rb.tscn")
 @onready var anim_tree := $AnimationTree
 @onready var anim_player := $X_boss_meshes/AnimationPlayer
 @onready var x_meshes := $X_boss_meshes/Armature/Skeleton3D/Body_001
@@ -357,6 +361,22 @@ func start_face_rain():
 
 func face_rain_shoot_bombs():
 	velocity = 1 * Vector3.DOWN
+	var lhp = left_head_piece.instantiate()
+	var rhp = right_head_piece.instantiate()
+	var thp = top_head_piece.instantiate()
+	var bhp = bottom_head_piece.instantiate()
+	await lhp.tree_entered
+	await rhp.tree_entered
+	await thp.tree_entered
+	await bhp.tree_entered
+	lhp.linear_velocity = (Vector3.UP + Vector3.LEFT) * 10
+	lhp.global_position = global_position + .5 * Vector3.UP
+	rhp.linear_velocity = (Vector3.UP + Vector3.RIGHT) * 10
+	rhp.global_position = global_position + .5 * Vector3.UP
+	thp.linear_velocity = (Vector3.UP + Vector3.BACK) * 10
+	thp.global_position = global_position + .5 * Vector3.UP
+	bhp.linear_velocity = (Vector3.UP + Vector3.FORWARD) * 10
+	bhp.global_position = global_position + .5 * Vector3.UP
 
 func recall_left_arm():
 	if not left_arm_deployed():
