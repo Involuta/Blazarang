@@ -56,3 +56,6 @@ res://glb_inherited_scenes/x_bottom_head_piece.tscn
 res://enemies/x_bottom_head_piece_rb.tscn
 res://glb_inherited_scenes/x_top_head_piece.tscn
 res://glb_inherited_scenes/first_miniboss_meshes.tscn
+res://enemies/x_boss.gd
+res://enemies/enemy_anims/x_dash.res
+res://enemies/enemy_anims/x_superman.res

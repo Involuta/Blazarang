@@ -13,7 +13,7 @@ var strafing_left := false
 
 enum {
 	MY_POS,
-	TELEPORT_POS,
+	TARGETSIDE_POS,
 	STATIONARY
 }
 var x_icon_pos_state := MY_POS
@@ -136,8 +136,8 @@ func _physics_process(delta):
 	match(x_icon_pos_state):
 		MY_POS:
 			x_icon_follow_my_pos()
-		TELEPORT_POS:
-			x_icon_follow_teleport_pos()
+		TARGETSIDE_POS:
+			x_icon_follow_targetside_pos()
 		STATIONARY:
 			pass
 	x_icon.global_position = lerp(x_icon.global_position, x_icon_pos.global_position, x_icon_lerp_val)
@@ -432,10 +432,10 @@ func set_x_icon_my_pos():
 	lerp_tween.tween_property(self, "x_icon_lerp_val", 1.0, .5).from_current()
 	x_icon_pos_state = MY_POS
 
-func set_x_icon_teleport_pos():
+func set_x_icon_targetside_pos():
 	# No need for lerp since it's not jumping directly to 1.0
 	x_icon_lerp_val = .2
-	x_icon_pos_state = TELEPORT_POS
+	x_icon_pos_state = TARGETSIDE_POS
 	x_icon_tp_to_left = rng.randf() < .5
 
 func set_x_icon_stationary():
@@ -446,7 +446,7 @@ func x_icon_follow_my_pos():
 	x_icon_pos.global_position.z = global_position.z
 	x_icon.rotation.y = rotation.y
 
-func x_icon_follow_teleport_pos():
+func x_icon_follow_targetside_pos():
 	var dir_to_target := global_position.direction_to(target.global_position)
 	var icon_vec := Vector2(dir_to_target.x, dir_to_target.z).orthogonal()
 	if x_icon_tp_to_left:
