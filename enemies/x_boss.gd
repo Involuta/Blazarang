@@ -14,6 +14,7 @@ var strafing_left := false
 enum {
 	MY_POS,
 	TARGETSIDE_POS,
+	FLYINGFACERAIN_POS,
 	STATIONARY
 }
 var x_icon_pos_state := MY_POS
@@ -363,7 +364,7 @@ func start_flying_facerain():
 	fr_tween.tween_property(self, "global_position", flying_facerain_height * Vector3.UP, 1.0).from(Vector3(0, min_y_pos + .01, -24))
 
 func flying_facerain_shoot_bombs():
-	velocity = 1 * Vector3.UP
+	velocity = 8 * (Vector3.UP + Vector3.FORWARD)
 	var lhp = left_head_piece.instantiate()
 	level.add_child.call_deferred(lhp)
 	await lhp.tree_entered
@@ -453,3 +454,8 @@ func x_icon_follow_targetside_pos():
 		icon_vec *= -1
 	x_icon_pos.global_position.x = target.global_position.x + teleport_dist_from_target * icon_vec.x
 	x_icon_pos.global_position.z = target.global_position.z + teleport_dist_from_target * icon_vec.y
+
+func set_x_icon_flyingfacerain_pos():
+	x_icon_lerp_val = .05
+	x_icon_pos.global_position.x = 0
+	x_icon_pos.global_position.z = -24
