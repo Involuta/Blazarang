@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmn4c837rk0lf"]
+
+[ext_resource type="PackedScene" uid="uid://blsij3fqsch4l" path="res://glb_inherited_scenes/x_left_head_piece.tscn" id="1_25qrw"]
+
+[node name="XLeftHeadPieceRB" type="RigidBody3D"]
+
+[node name="8164_left_head_piece" parent="." instance=ExtResource("1_25qrw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.95, 0.5, 1.3)

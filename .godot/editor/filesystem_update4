@@ -45,3 +45,7 @@ res://levels/torch.tscn
 res://cotu/shakeable_camera.tscn
 res://enemies/x_blade.tscn
 res://globals.gd
+res://glb_inherited_scenes/x_left_head_piece_rb.tscn
+res://glb_inherited_scenes/x_right_head_piece_rb.tscn
+res://glb_inherited_scenes/x_top_head_piece_rb.tscn
+res://glb_inherited_scenes/x_bottom_head_piece_rb.tscn
