@@ -49,7 +49,7 @@ var aiming_at_target := true
 @export var short_dist_attack_chances = {
 	"SlipnSlice" : .2,
 	"Superman" : .2,
-	"FaceRain" : .4,
+	"FlyingFaceRain" : .4,
 	"Triangle" : .1
 }
 
@@ -78,7 +78,8 @@ var aiming_at_target := true
 @export var triangle_arm_dist := 90.0
 @export var triangle_axkick_dist := 10.0
 @export var flyingkick_hit_frames := 10
-@export var facerain_piece_speed := 10.0
+@export var flying_facerain_piece_speed := 5.0
+@export var flying_facerain_height := 30.0
 
 var param_path_base := "parameters/StateMachine/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -355,13 +356,14 @@ func right_arm_laser():
 	right_arm.visible = true
 	right_arm.fire_laser()
 
-func start_face_rain():
+func start_flying_facerain():
 	# Without this line, X's fall protection (which sets his y vel to 0 when his global y is below the min) would prevent his y vel from changing
-	global_position.y = min_y_pos + .01
-	velocity = 1 * Vector3.UP
+	global_position = Vector3(0, min_y_pos + .01, -24)
+	var fr_tween = get_tree().create_tween()
+	fr_tween.tween_property(self, "global_position", flying_facerain_height * Vector3.UP, 1.0).from(Vector3(0, min_y_pos + .01, -24))
 
 func flying_facerain_shoot_bombs():
-	velocity = 1 * Vector3.DOWN
+	velocity = 1 * Vector3.UP
 	var lhp = left_head_piece.instantiate()
 	level.add_child.call_deferred(lhp)
 	await lhp.tree_entered
@@ -374,18 +376,22 @@ func flying_facerain_shoot_bombs():
 	var bhp = bottom_head_piece.instantiate()
 	level.add_child.call_deferred(bhp)
 	await bhp.tree_entered
-	lhp.linear_velocity = (Vector3.UP + Vector3.LEFT) * facerain_piece_speed
-	lhp.global_position = global_position + Vector3(-.05, 1.176, .71)
-	lhp.rotation = rotation
-	rhp.linear_velocity = (Vector3.UP + Vector3.RIGHT) * facerain_piece_speed
-	rhp.global_position = global_position + Vector3(.05, 1.176, .71)
-	rhp.rotation = rotation
-	thp.linear_velocity = (Vector3.UP + Vector3.BACK) * facerain_piece_speed
-	thp.global_position = global_position + Vector3(0, 1.795, .767)
-	thp.rotation = rotation
-	bhp.linear_velocity = (Vector3.UP + Vector3.FORWARD) * facerain_piece_speed
-	bhp.global_position = global_position + Vector3(0, 1.716, .69)
-	bhp.rotation = rotation
+	lhp.linear_velocity = (Vector3.UP + Vector3.LEFT) * flying_facerain_piece_speed
+	lhp.global_position = Vector3(0, flying_facerain_height - .68, -.2)
+	lhp.rotation = Vector3(PI / 2, 0, 0)
+	rhp.linear_velocity = (Vector3.UP + Vector3.RIGHT) * flying_facerain_piece_speed
+	rhp.global_position = Vector3(0, flying_facerain_height - .68, -.2)
+	rhp.rotation = Vector3(PI / 2, 0, 0)
+	thp.linear_velocity = (Vector3.UP + Vector3.FORWARD) * flying_facerain_piece_speed
+	thp.global_position = Vector3(0, flying_facerain_height - .68, -.2)
+	thp.rotation = Vector3(PI / 2, 0, 0)
+	bhp.linear_velocity = (Vector3.UP + Vector3.BACK) * flying_facerain_piece_speed
+	bhp.global_position = Vector3(0, flying_facerain_height - .68, -.2)
+	bhp.rotation = Vector3(PI / 2, 0, 0)
+
+func flying_facerain_descend():
+	var fr_tween = get_tree().create_tween()
+	fr_tween.tween_property(self, "global_position", min_y_pos * Vector3.UP, .166)
 
 func recall_left_arm():
 	if not left_arm_deployed():
