@@ -364,7 +364,7 @@ func start_flying_facerain():
 	fr_tween.tween_property(self, "global_position", flying_facerain_height * Vector3.UP, 1.0).from(Vector3(0, min_y_pos + .01, -24))
 
 func flying_facerain_shoot_bombs():
-	velocity = 8 * (Vector3.UP + Vector3.FORWARD)
+	velocity = 8 * (Vector3.UP)
 	var lhp = left_head_piece.instantiate()
 	level.add_child.call_deferred(lhp)
 	await lhp.tree_entered

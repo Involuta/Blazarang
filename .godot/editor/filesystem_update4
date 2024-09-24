@@ -59,3 +59,4 @@ res://glb_inherited_scenes/first_miniboss_meshes.tscn
 res://enemies/x_boss.gd
 res://enemies/enemy_anims/x_dash.res
 res://enemies/enemy_anims/x_superman.res
+res://enemies/enemy_anims/x_triangle_flyingkick.res
