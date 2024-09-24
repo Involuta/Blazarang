@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhylakey10mb7"]
+
+[ext_resource type="PackedScene" uid="uid://8pfvme0hcu76" path="res://glb_imports/8164_bottom_head_piece.glb" id="1_64ti3"]
+
+[node name="8164_bottom_head_piece" instance=ExtResource("1_64ti3")]
+
+[node name="BottomFace" parent="." index="0"]
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 2.08165e-12, 2.08165e-12, 2.08165e-12)

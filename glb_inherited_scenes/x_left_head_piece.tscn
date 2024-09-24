@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://blsij3fqsch4l"]
+
+[ext_resource type="PackedScene" uid="uid://c04nh5np10ivd" path="res://glb_imports/8164_left_head_piece.glb" id="1_3ie4t"]
+
+[node name="8164_left_head_piece" instance=ExtResource("1_3ie4t")]
+
+[node name="LeftFace" parent="." index="0"]
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 2.08165e-12, 2.08165e-12, 2.08165e-12)
