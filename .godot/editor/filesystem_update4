@@ -73,3 +73,6 @@ res://enemies/x_right_head_piece_rb.tscn
 res://glb_inherited_scenes/x_left_head_piece.tscn
 res://enemies/x_top_head_piece_rb.tscn
 res://glb_inherited_scenes/x_bottom_head_piece.tscn
+res://glb_inherited_scenes/x_boss_meshes.tscn
+res://glb_inherited_scenes/x_top_head_piece.tscn
+res://glb_inherited_scenes/first_miniboss_meshes.tscn

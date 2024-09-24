@@ -78,6 +78,7 @@ var aiming_at_target := true
 @export var triangle_arm_dist := 90.0
 @export var triangle_axkick_dist := 10.0
 @export var flyingkick_hit_frames := 10
+@export var facerain_piece_speed := 7.0
 
 var param_path_base := "parameters/StateMachine/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -362,20 +363,24 @@ func start_face_rain():
 func face_rain_shoot_bombs():
 	velocity = 1 * Vector3.DOWN
 	var lhp = left_head_piece.instantiate()
-	var rhp = right_head_piece.instantiate()
-	var thp = top_head_piece.instantiate()
-	var bhp = bottom_head_piece.instantiate()
+	level.add_child.call_deferred(lhp)
 	await lhp.tree_entered
+	var rhp = right_head_piece.instantiate()
+	level.add_child.call_deferred(rhp)
 	await rhp.tree_entered
+	var thp = top_head_piece.instantiate()
+	level.add_child.call_deferred(thp)
 	await thp.tree_entered
+	var bhp = bottom_head_piece.instantiate()
+	level.add_child.call_deferred(bhp)
 	await bhp.tree_entered
-	lhp.linear_velocity = (Vector3.UP + Vector3.LEFT) * 10
+	lhp.linear_velocity = (Vector3.UP + Vector3.LEFT) * facerain_piece_speed
 	lhp.global_position = global_position + .5 * Vector3.UP
-	rhp.linear_velocity = (Vector3.UP + Vector3.RIGHT) * 10
+	rhp.linear_velocity = (Vector3.UP + Vector3.RIGHT) * facerain_piece_speed
 	rhp.global_position = global_position + .5 * Vector3.UP
-	thp.linear_velocity = (Vector3.UP + Vector3.BACK) * 10
+	thp.linear_velocity = (Vector3.UP + Vector3.BACK) * facerain_piece_speed
 	thp.global_position = global_position + .5 * Vector3.UP
-	bhp.linear_velocity = (Vector3.UP + Vector3.FORWARD) * 10
+	bhp.linear_velocity = (Vector3.UP + Vector3.FORWARD) * facerain_piece_speed
 	bhp.global_position = global_position + .5 * Vector3.UP
 
 func recall_left_arm():

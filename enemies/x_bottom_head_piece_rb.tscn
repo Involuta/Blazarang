@@ -5,6 +5,8 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_rwqsk"]
 
 [node name="XBottomHeadPieceRB" type="RigidBody3D"]
+collision_layer = 8
+collision_mask = 2
 
 [node name="8164_bottom_head_piece" parent="." instance=ExtResource("1_tiffj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.4, 1.5)
