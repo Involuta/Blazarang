@@ -360,7 +360,7 @@ func start_face_rain():
 	global_position.y = min_y_pos + .01
 	velocity = 1 * Vector3.UP
 
-func face_rain_shoot_bombs():
+func flying_facerain_shoot_bombs():
 	velocity = 1 * Vector3.DOWN
 	var lhp = left_head_piece.instantiate()
 	level.add_child.call_deferred(lhp)
@@ -375,13 +375,17 @@ func face_rain_shoot_bombs():
 	level.add_child.call_deferred(bhp)
 	await bhp.tree_entered
 	lhp.linear_velocity = (Vector3.UP + Vector3.LEFT) * facerain_piece_speed
-	lhp.global_position = global_position + .5 * Vector3.UP
+	lhp.global_position = global_position + Vector3(-.05, 1.176, .71)
+	lhp.rotation = rotation
 	rhp.linear_velocity = (Vector3.UP + Vector3.RIGHT) * facerain_piece_speed
-	rhp.global_position = global_position + .5 * Vector3.UP
+	rhp.global_position = global_position + Vector3(.05, 1.176, .71)
+	rhp.rotation = rotation
 	thp.linear_velocity = (Vector3.UP + Vector3.BACK) * facerain_piece_speed
-	thp.global_position = global_position + .5 * Vector3.UP
+	thp.global_position = global_position + Vector3(0, 1.795, .767)
+	thp.rotation = rotation
 	bhp.linear_velocity = (Vector3.UP + Vector3.FORWARD) * facerain_piece_speed
-	bhp.global_position = global_position + .5 * Vector3.UP
+	bhp.global_position = global_position + Vector3(0, 1.716, .69)
+	bhp.rotation = rotation
 
 func recall_left_arm():
 	if not left_arm_deployed():
