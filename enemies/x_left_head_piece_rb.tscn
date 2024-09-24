@@ -1,15 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://dmn4c837rk0lf"]
+[gd_scene load_steps=4 format=3 uid="uid://dmn4c837rk0lf"]
 
+[ext_resource type="Script" path="res://DisappearRB.gd" id="1_7n78i"]
 [ext_resource type="PackedScene" uid="uid://blsij3fqsch4l" path="res://glb_inherited_scenes/x_left_head_piece.tscn" id="1_25qrw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lpwbv"]
+size = Vector3(0.2, 0.2, 0.2)
 
 [node name="XLeftHeadPieceRB" type="RigidBody3D"]
 collision_layer = 8
 collision_mask = 2
+script = ExtResource("1_7n78i")
 
 [node name="8164_left_head_piece" parent="." instance=ExtResource("1_25qrw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.95, 0.5, 1.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0839597, 0.0657076, 0.155143)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_lpwbv")

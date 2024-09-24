@@ -78,7 +78,7 @@ var aiming_at_target := true
 @export var triangle_arm_dist := 90.0
 @export var triangle_axkick_dist := 10.0
 @export var flyingkick_hit_frames := 10
-@export var facerain_piece_speed := 7.0
+@export var facerain_piece_speed := 10.0
 
 var param_path_base := "parameters/StateMachine/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
