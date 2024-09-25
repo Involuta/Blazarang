@@ -360,6 +360,7 @@ func right_arm_laser():
 func start_flying_facerain():
 	# Without this line, X's fall protection (which sets his y vel to 0 when his global y is below the min) would prevent his y vel from changing
 	global_position = Vector3(0, min_y_pos + .01, -24)
+	rotation.y = -PI
 	var fr_tween = get_tree().create_tween()
 	fr_tween.tween_property(self, "global_position", flying_facerain_height * Vector3.UP, 1.0).from(Vector3(0, min_y_pos + .01, -24))
 
