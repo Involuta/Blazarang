@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ds0qy8lfh8wfn"]
+[gd_scene load_steps=24 format=3 uid="uid://ds0qy8lfh8wfn"]
 
 [ext_resource type="Script" path="res://DisappearRB.gd" id="1_bn4tn"]
 [ext_resource type="PackedScene" uid="uid://dhylakey10mb7" path="res://glb_inherited_scenes/x_bottom_head_piece.tscn" id="1_tiffj"]
@@ -34,6 +34,33 @@ billboard_keep_scale = true
 [sub_resource type="QuadMesh" id="QuadMesh_l11nv"]
 material = SubResource("StandardMaterial3D_5meq8")
 size = Vector2(0.1, 0.1)
+
+[sub_resource type="Curve" id="Curve_ifjuo"]
+_data = [Vector2(2.08165e-12, 1), 0.0, 0.0, 0, 0, Vector2(1, 2.08165e-12), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pgbgv"]
+curve = SubResource("Curve_ifjuo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5isge"]
+particle_flag_align_y = true
+direction = Vector3(2.08165e-12, 1, 2.08165e-12)
+spread = 90.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+scale_curve = SubResource("CurveTexture_pgbgv")
+color = Color(1, 0.270588, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_134jl"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+disable_receive_shadows = true
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1ejyh"]
+material = SubResource("StandardMaterial3D_134jl")
+radius = 0.02
+height = 0.4
 
 [sub_resource type="Shader" id="Shader_5hvj8"]
 code = "shader_type particles;
@@ -249,6 +276,12 @@ transform = Transform3D(-0.999998, 8.08671e-11, 0.00185004, 0.00185004, 4.37113e
 amount = 12
 process_material = SubResource("ParticleProcessMaterial_3mh6k")
 draw_pass_1 = SubResource("QuadMesh_l11nv")
+
+[node name="BombParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 0, 0, 0)
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_5isge")
+draw_pass_1 = SubResource("CapsuleMesh_1ejyh")
 
 [node name="GPUTrail3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(0.1, -1.21652e-32, -5.19733e-25, -5.19733e-25, 0.1, 5.19733e-25, 0, 0, 0.1, 0, 0, 0)
