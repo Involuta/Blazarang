@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cs6a6cyr6wxtv"]
+[gd_scene load_steps=9 format=3 uid="uid://cs6a6cyr6wxtv"]
 
 [ext_resource type="Script" path="res://DisappearRB.gd" id="1_g1hht"]
 [ext_resource type="PackedScene" uid="uid://cq2bsd5mc37f1" path="res://glb_inherited_scenes/x_top_head_piece.tscn" id="1_qyy8p"]
@@ -6,7 +6,34 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_pj1qi"]
 size = Vector3(0.2, 0.2, 0.2)
 
+[sub_resource type="Curve" id="Curve_x3445"]
+_data = [Vector2(2.08165e-12, 1), 0.0, 0.0, 0, 0, Vector2(1, 2.08165e-12), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2qvqw"]
+curve = SubResource("Curve_x3445")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yiqa7"]
+direction = Vector3(2.08165e-12, 2.08165e-12, -1)
+spread = 10.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+scale_curve = SubResource("CurveTexture_2qvqw")
+color = Color(1, 0.270588, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gwba2"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_wi2wi"]
+material = SubResource("StandardMaterial3D_gwba2")
+size = Vector2(0.1, 0.1)
+
 [node name="XTopHeadPieceRB" type="RigidBody3D"]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 0, 0, 0)
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_g1hht")
@@ -16,3 +43,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.0605778, 0.12
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_pj1qi")
+
+[node name="FlightParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, -1.39525e-15, -6.97476e-16, -6.97866e-16, -0.000279295, -1, 1.39505e-15, 1, -0.000279295, 0, 0, 0)
+amount = 12
+process_material = SubResource("ParticleProcessMaterial_yiqa7")
+draw_pass_1 = SubResource("QuadMesh_wi2wi")

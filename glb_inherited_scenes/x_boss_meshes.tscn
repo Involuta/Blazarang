@@ -161,7 +161,7 @@ material = SubResource("StandardMaterial3D_70nmr")
 _data = [Vector2(2.08165e-12, 1), 0.0, 0.0, 0, 0, Vector2(1, 2.08165e-12), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_d3gku"]
+[sub_resource type="CurveTexture" id="CurveTexture_lw76f"]
 curve = SubResource("Curve_yh0sc")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vtshv"]
@@ -170,17 +170,17 @@ spread = 10.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 40.0
 initial_velocity_max = 40.0
-scale_curve = SubResource("CurveTexture_d3gku")
+scale_curve = SubResource("CurveTexture_lw76f")
 color = Color(1, 0.270588, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q6otp"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4k5kw"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
 billboard_mode = 1
 billboard_keep_scale = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_eqjva"]
-material = SubResource("StandardMaterial3D_q6otp")
+material = SubResource("StandardMaterial3D_4k5kw")
 size = Vector2(0.1, 0.1)
 
 [node name="X_boss_meshes" instance=ExtResource("1_mluec")]
@@ -212,7 +212,7 @@ bones/22/rotation = Quaternion(0.124014, 0.0375172, -0.0289314, 0.991149)
 bones/23/rotation = Quaternion(0.323587, -0.236583, 0.0495141, 0.914805)
 
 [node name="Head" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="0"]
-transform = Transform3D(1, 2.0734e-16, -2.50638e-16, -2.36614e-16, -0.0871558, -0.996195, -2.28556e-16, 0.996195, -0.0871558, -2.20866e-09, 7.95729, 0.931362)
+transform = Transform3D(1, 2.20518e-16, -2.03437e-16, -1.88042e-16, -0.0871565, -0.996195, -2.37231e-16, 0.996195, -0.0871565, -2.20865e-09, 7.95732, 0.931362)
 bone_name = "mixamorig_Head"
 bone_idx = 5
 
@@ -258,7 +258,7 @@ surface_material_override/7 = SubResource("StandardMaterial3D_tlfdu")
 surface_material_override/8 = SubResource("StandardMaterial3D_5bl6g")
 
 [node name="LeftArm" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.397665, 0.913455, -0.0863913, 0.687693, -0.234396, 0.687122, 0.607405, -0.332655, -0.721387, 3.5919, 8.66967, 0.0736341)
+transform = Transform3D(0.397664, 0.913455, -0.0863911, 0.687693, -0.234395, 0.687122, 0.607406, -0.332654, -0.721387, 3.5919, 8.66971, 0.0736337)
 bone_name = "mixamorig_LeftArm"
 bone_idx = 8
 
@@ -275,7 +275,7 @@ process_material = SubResource("ParticleProcessMaterial_gocoe")
 draw_pass_1 = SubResource("BoxMesh_uuqt1")
 
 [node name="RightArm" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.390664, -0.91937, 0.04627, -0.690598, -0.259477, 0.67509, -0.608651, -0.295687, -0.736283, -3.5919, 8.66967, 0.0391196)
+transform = Transform3D(0.390664, -0.91937, 0.04627, -0.690598, -0.259477, 0.67509, -0.608651, -0.295687, -0.736283, -3.5919, 8.6697, 0.0391192)
 bone_name = "mixamorig_RightArm"
 bone_idx = 12
 
@@ -292,7 +292,7 @@ process_material = SubResource("ParticleProcessMaterial_gocoe")
 draw_pass_1 = SubResource("BoxMesh_uuqt1")
 
 [node name="LeftFoot" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="4"]
-transform = Transform3D(-0.999014, 0.0429146, 0.0114567, 0.0380256, 0.959616, -0.278733, -0.0229553, -0.278022, -0.960299, 1.00855, 26.0291, -0.0256755)
+transform = Transform3D(-0.999013, 0.0429145, 0.0114566, 0.0380256, 0.959616, -0.278733, -0.0229555, -0.278022, -0.960299, 1.00855, 26.0291, -0.0256762)
 bone_name = "mixamorig_LeftFoot"
 bone_idx = 17
 
@@ -303,7 +303,7 @@ process_material = SubResource("ParticleProcessMaterial_vtshv")
 draw_pass_1 = SubResource("QuadMesh_eqjva")
 
 [node name="RightFoot" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="5"]
-transform = Transform3D(-0.999112, -0.0418819, -0.00492229, -0.0397759, 0.974714, -0.219887, 0.0140067, -0.219495, -0.975512, -1.00855, 26.0291, -0.0265886)
+transform = Transform3D(-0.999111, -0.0418818, -0.00492207, -0.0397759, 0.974714, -0.219886, 0.0140067, -0.219494, -0.975512, -1.00855, 26.0292, -0.0265895)
 bone_name = "mixamorig_RightFoot"
 bone_idx = 22
 
