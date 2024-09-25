@@ -61,3 +61,4 @@ res://enemies/enemy_anims/x_dash.res
 res://enemies/enemy_anims/x_superman.res
 res://enemies/enemy_anims/x_triangle_flyingkick.res
 res://glb_inherited_scenes/x_boss_meshes.tscn
+res://enemies/x_head_piece.gd

@@ -1,7 +1,7 @@
 [gd_scene load_steps=24 format=3 uid="uid://ds0qy8lfh8wfn"]
 
-[ext_resource type="Script" path="res://DisappearRB.gd" id="1_bn4tn"]
 [ext_resource type="PackedScene" uid="uid://dhylakey10mb7" path="res://glb_inherited_scenes/x_bottom_head_piece.tscn" id="1_tiffj"]
+[ext_resource type="Script" path="res://enemies/x_head_piece.gd" id="1_w6mb1"]
 [ext_resource type="Texture2D" uid="uid://crk6pkb7e5rwc" path="res://GPUTrail-main/defaults/texture.tres" id="5_k2s7u"]
 [ext_resource type="Texture2D" uid="uid://ct31fhxvcragr" path="res://GPUTrail-main/defaults/curve.tres" id="6_gw7vo"]
 [ext_resource type="Script" path="res://GPUTrail-main/GPUTrail3D.gd" id="7_mn2yg"]
@@ -263,7 +263,7 @@ material = SubResource("ShaderMaterial_6v62q")
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 0, 0, 0)
 collision_layer = 8
 collision_mask = 2
-script = ExtResource("1_bn4tn")
+script = ExtResource("1_w6mb1")
 
 [node name="8164_bottom_head_piece" parent="." instance=ExtResource("1_tiffj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.136726, 0.131107)
