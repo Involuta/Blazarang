@@ -78,7 +78,7 @@ var aiming_at_target := true
 @export var triangle_arm_angle := 36.0
 @export var triangle_arm_dist := 90.0
 @export var triangle_axkick_dist := 10.0
-@export var flyingkick_hit_frames := 10
+@export var flyingkick_hit_frames := 10 # Put the # of frames that the hitbox is active in the animation here
 @export var flying_facerain_piece_speed := 5.0
 @export var flying_facerain_height := 30.0
 
@@ -340,7 +340,7 @@ func triangle_shoot_arms():
 func flyingkick_rush():
 	# Up vec prevents X from ending up under the ground after tweening
 	var kick_tween = get_tree().create_tween()
-	kick_tween.tween_property(self, "global_position", (-1.5+global_position.distance_to(target.global_position)) * -transform.basis.z + .1 * Vector3.UP, flyingkick_hit_frames/60.0).set_trans(Tween.TRANS_EXPO).as_relative()
+	kick_tween.tween_property(self, "global_position", (-1.5+global_position.distance_to(target.global_position)) * -transform.basis.z + .1 * Vector3.UP, (flyingkick_hit_frames-1)/60.0).set_trans(Tween.TRANS_EXPO).as_relative()
 
 func dash_back():
 	velocity = dash_back_speed * transform.basis.z
@@ -399,8 +399,6 @@ func flying_facerain_descend():
 func spawn_volcano():
 	var volcano_inst = load("res://enemies/x_volcano.tscn").instantiate()
 	level.add_child(volcano_inst)
-	await volcano_inst.tree_entered
-	volcano_inst.global_position = global_position
 
 func recall_left_arm():
 	if not left_arm_deployed():

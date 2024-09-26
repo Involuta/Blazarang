@@ -7,7 +7,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c0wtu"]
 transparency = 4
 shading_mode = 0
-albedo_color = Color(2, 0.26, 0, 1)
+albedo_color = Color(1.27451, 0.258824, 0, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_rqrur"]
 material = SubResource("StandardMaterial3D_c0wtu")
@@ -24,7 +24,7 @@ material = SubResource("StandardMaterial3D_p5jhs")
 
 [sub_resource type="Gradient" id="Gradient_nt3ke"]
 offsets = PackedFloat32Array(0)
-colors = PackedColorArray(2, 0.27, 0, 1)
+colors = PackedColorArray(1, 0.270588, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_w5tm3"]
 gradient = SubResource("Gradient_nt3ke")
@@ -46,7 +46,7 @@ gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 20.0
 initial_velocity_max = 20.0
 scale_curve = SubResource("CurveTexture_yxesq")
-color = Color(2, 0.27, 0, 1)
+color = Color(1, 0.270588, 0, 1)
 color_ramp = SubResource("GradientTexture1D_w5tm3")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_crv3m"]
@@ -57,8 +57,8 @@ disable_receive_shadows = true
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_g5x34"]
 material = SubResource("StandardMaterial3D_crv3m")
-radius = 0.02
-height = 0.4
+radius = 0.025
+height = 0.5
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_xo6j7"]
 gradient = SubResource("Gradient_nt3ke")
@@ -69,12 +69,15 @@ direction = Vector3(2.08165e-12, 1, 2.08165e-12)
 spread = 30.0
 initial_velocity_min = 5.0
 initial_velocity_max = 20.0
-color = Color(2, 0.270588, 0, 1)
+scale_min = 0.5
+scale_max = 1.5
+color = Color(1, 0.270588, 0, 1)
 color_ramp = SubResource("GradientTexture1D_xo6j7")
 
 [sub_resource type="Animation" id="Animation_v13yb"]
 resource_name = "erupt"
-length = 0.60001
+length = 0.666668
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -82,10 +85,10 @@ tracks/0/path = NodePath("Column:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(3, 50, 3)]
+"values": [Vector3(3, 50, 3), Vector3(0.1, 50, 0.1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -121,7 +124,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0.1, 0.1, 0.1), Vector3(5, 0.1, 5)]
+"values": [Vector3(0.1, 0.1, 0.1), Vector3(15, 0.1, 15)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -147,15 +150,27 @@ tracks/5/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("EnemyHitbox:process_mode")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 4]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g88e0"]
 _data = {
 "erupt": SubResource("Animation_v13yb")
 }
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_oib7o"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0gs1s"]
 height = 0.5
-radius = 3.0
+radius = 5.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4lunx"]
 radius = 12.0
@@ -164,32 +179,38 @@ radius = 12.0
 radius = 36.0
 
 [node name="XVolcano" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
 script = ExtResource("1_l4vub")
 disappear_secs = 6.0
 
 [node name="TPLowerDisc" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+transform = Transform3D(15, 0, 0, 0, 0.1, 0, 0, 0, 15, 0, 0, 0)
+transparency = 1.0
 cast_shadow = 0
+custom_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
 mesh = SubResource("CylinderMesh_rqrur")
 
 [node name="Column" type="MeshInstance3D" parent="."]
-transform = Transform3D(3, 0, 0, 0, 50, 0, 0, 0, 3, 2.08165e-12, 50, 2.08165e-12)
+transform = Transform3D(0.1, 0, 0, 0, 50, 0, 0, 0, 0.1, 2.08165e-12, 50, 2.08165e-12)
+transparency = 1.0
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_tp1rv")
 
 [node name="FloorSparks" type="GPUParticles3D" parent="."]
 cast_shadow = 0
+custom_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
 emitting = false
 amount = 50
+lifetime = 2.0
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_v014i")
 draw_pass_1 = SubResource("CapsuleMesh_g5x34")
 
 [node name="Lava" type="GPUParticles3D" parent="."]
-emitting = false
+custom_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
 amount = 50
-lifetime = 4.0
+lifetime = 6.0
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_jjjwm")
@@ -202,13 +223,14 @@ libraries = {
 }
 
 [node name="EnemyHitbox" type="Area3D" parent="."]
+process_mode = 4
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("2_k3fxy")
-damage = 12
+damage = 90
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHitbox"]
-shape = SubResource("CylinderShape3D_oib7o")
+shape = SubResource("CylinderShape3D_0gs1s")
 
 [node name="TraumaCauser" parent="." instance=ExtResource("3_0n0u6")]
 collision_layer = 0
