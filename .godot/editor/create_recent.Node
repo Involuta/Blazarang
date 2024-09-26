@@ -1,4 +1,5 @@
 GPUParticles3D
+MeshInstance3D
 AnimationPlayer
 GPUTrail3D
 CollisionShape3D
@@ -6,7 +7,6 @@ RigidBody3D
 Area3D
 Node3D
 Camera3D
-MeshInstance3D
 Node2D
 GPUParticles2D
 TextureRect

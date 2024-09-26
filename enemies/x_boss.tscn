@@ -305,7 +305,7 @@ node_connections = [&"output", 0, &"StateMachine"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(2, 0.27, 0, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_mqaof"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_cli8v"]
 gradient = SubResource("Gradient_awn88")
 
 [sub_resource type="Curve" id="Curve_uw1pp"]
@@ -313,7 +313,7 @@ max_value = 2.0
 _data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_5pmt7"]
+[sub_resource type="CurveTexture" id="CurveTexture_4aeyf"]
 curve = SubResource("Curve_uw1pp")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ttkjx"]
@@ -323,17 +323,17 @@ spread = 90.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 5.0
 initial_velocity_max = 20.0
-scale_curve = SubResource("CurveTexture_5pmt7")
+scale_curve = SubResource("CurveTexture_4aeyf")
 color = Color(2, 0.27, 0, 1)
-color_ramp = SubResource("GradientTexture1D_mqaof")
+color_ramp = SubResource("GradientTexture1D_cli8v")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xyobr"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2sixa"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
 disable_receive_shadows = true
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_my7ab"]
-material = SubResource("StandardMaterial3D_xyobr")
+material = SubResource("StandardMaterial3D_2sixa")
 radius = 0.02
 height = 0.4
 
@@ -718,6 +718,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.338255, 0.642138, -0.65273
 
 [node name="ChargeupParticles" type="GPUParticles3D" parent="ChargeupPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+emitting = false
 amount = 20
 lifetime = 0.45
 one_shot = true
@@ -738,6 +739,7 @@ transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-
 [node name="RingParticle" type="GPUParticles3D" parent="ShockwavePivot"]
 transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 0, 0, 0)
 cast_shadow = 0
+emitting = false
 amount = 1
 lifetime = 0.5
 one_shot = true
