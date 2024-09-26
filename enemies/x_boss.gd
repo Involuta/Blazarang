@@ -394,6 +394,13 @@ func flying_facerain_shoot_bombs():
 func flying_facerain_descend():
 	var fr_tween = get_tree().create_tween()
 	fr_tween.tween_property(self, "global_position", min_y_pos * Vector3.UP, .166)
+	fr_tween.tween_callback(spawn_volcano)
+
+func spawn_volcano():
+	var volcano_inst = load("res://enemies/x_volcano.tscn").instantiate()
+	level.add_child(volcano_inst)
+	await volcano_inst.tree_entered
+	volcano_inst.global_position = global_position
 
 func recall_left_arm():
 	if not left_arm_deployed():

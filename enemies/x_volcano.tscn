@@ -1,0 +1,224 @@
+[gd_scene load_steps=22 format=3 uid="uid://bg2swy025xr60"]
+
+[ext_resource type="Script" path="res://DisappearNode.gd" id="1_l4vub"]
+[ext_resource type="Script" path="res://hitbox.gd" id="2_k3fxy"]
+[ext_resource type="PackedScene" uid="uid://xxarwwj6l614" path="res://trauma_causer.tscn" id="3_0n0u6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c0wtu"]
+transparency = 4
+shading_mode = 0
+albedo_color = Color(2, 0.26, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rqrur"]
+material = SubResource("StandardMaterial3D_c0wtu")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p5jhs"]
+shading_mode = 0
+albedo_color = Color(2, 0.91, 0.6, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tp1rv"]
+material = SubResource("StandardMaterial3D_p5jhs")
+
+[sub_resource type="Gradient" id="Gradient_nt3ke"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(2, 0.27, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_w5tm3"]
+gradient = SubResource("Gradient_nt3ke")
+
+[sub_resource type="Curve" id="Curve_1ninf"]
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_yxesq"]
+curve = SubResource("Curve_1ninf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v014i"]
+particle_flag_align_y = true
+direction = Vector3(1, 2.08165e-12, 2.08165e-12)
+spread = 180.0
+flatness = 1.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+scale_curve = SubResource("CurveTexture_yxesq")
+color = Color(2, 0.27, 0, 1)
+color_ramp = SubResource("GradientTexture1D_w5tm3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_crv3m"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0.478431, 0, 1)
+disable_receive_shadows = true
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g5x34"]
+material = SubResource("StandardMaterial3D_crv3m")
+radius = 0.02
+height = 0.4
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xo6j7"]
+gradient = SubResource("Gradient_nt3ke")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jjjwm"]
+particle_flag_align_y = true
+direction = Vector3(2.08165e-12, 1, 2.08165e-12)
+spread = 30.0
+initial_velocity_min = 5.0
+initial_velocity_max = 20.0
+color = Color(2, 0.270588, 0, 1)
+color_ramp = SubResource("GradientTexture1D_xo6j7")
+
+[sub_resource type="Animation" id="Animation_v13yb"]
+resource_name = "erupt"
+length = 0.60001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Column:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3, 50, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Column:transparency")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FloorSparks:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TPLowerDisc:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.1, 0.1, 0.1), Vector3(5, 0.1, 5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("TPLowerDisc:transparency")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Lava:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g88e0"]
+_data = {
+"erupt": SubResource("Animation_v13yb")
+}
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_oib7o"]
+height = 0.5
+radius = 3.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4lunx"]
+radius = 12.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_h4wfg"]
+radius = 36.0
+
+[node name="XVolcano" type="Node3D"]
+script = ExtResource("1_l4vub")
+disappear_secs = 6.0
+
+[node name="TPLowerDisc" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_rqrur")
+
+[node name="Column" type="MeshInstance3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 50, 0, 0, 0, 3, 2.08165e-12, 50, 2.08165e-12)
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_tp1rv")
+
+[node name="FloorSparks" type="GPUParticles3D" parent="."]
+cast_shadow = 0
+emitting = false
+amount = 50
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_v014i")
+draw_pass_1 = SubResource("CapsuleMesh_g5x34")
+
+[node name="Lava" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 50
+lifetime = 4.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_jjjwm")
+draw_pass_1 = SubResource("CapsuleMesh_g5x34")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "erupt"
+libraries = {
+"": SubResource("AnimationLibrary_g88e0")
+}
+
+[node name="EnemyHitbox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 11
+script = ExtResource("2_k3fxy")
+damage = 12
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHitbox"]
+shape = SubResource("CylinderShape3D_oib7o")
+
+[node name="TraumaCauser" parent="." instance=ExtResource("3_0n0u6")]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TraumaCauser"]
+shape = SubResource("SphereShape3D_4lunx")
+
+[node name="FarTraumaCauser" parent="." instance=ExtResource("3_0n0u6")]
+collision_layer = 0
+trauma_amount = 0.5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FarTraumaCauser"]
+shape = SubResource("SphereShape3D_h4wfg")

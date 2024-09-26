@@ -62,3 +62,6 @@ res://enemies/enemy_anims/x_superman.res
 res://enemies/enemy_anims/x_triangle_flyingkick.res
 res://glb_inherited_scenes/x_boss_meshes.tscn
 res://enemies/x_head_piece.gd
+res://enemies/x_volcano.tscn
+res://enemies/x_teleport_in.tscn
+res://levels/level1_section_nodes/Level.gd
