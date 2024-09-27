@@ -236,7 +236,7 @@ material = SubResource("ShaderMaterial_5hbjs")
 _data = [Vector2(2.08165e-12, 1), 0.0, 0.0, 0, 0, Vector2(1, 2.08165e-12), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_7rxdm"]
+[sub_resource type="CurveTexture" id="CurveTexture_vdxjp"]
 curve = SubResource("Curve_4h4m7")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i7uxy"]
@@ -246,16 +246,16 @@ spread = 90.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 10.0
 initial_velocity_max = 10.0
-scale_curve = SubResource("CurveTexture_7rxdm")
+scale_curve = SubResource("CurveTexture_vdxjp")
 color = Color(1, 0.270588, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xyobr"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_enkp6"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
 disable_receive_shadows = true
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_nv3od"]
-material = SubResource("StandardMaterial3D_xyobr")
+material = SubResource("StandardMaterial3D_enkp6")
 radius = 0.02
 height = 0.4
 

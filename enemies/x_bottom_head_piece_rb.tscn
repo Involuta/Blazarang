@@ -23,7 +23,7 @@ gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 1.0
 initial_velocity_max = 1.0
 scale_curve = SubResource("CurveTexture_lecfy")
-color = Color(1, 0.270588, 0, 1)
+color = Color(1, 0.27, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5meq8"]
 shading_mode = 0
@@ -34,33 +34,6 @@ billboard_keep_scale = true
 [sub_resource type="QuadMesh" id="QuadMesh_l11nv"]
 material = SubResource("StandardMaterial3D_5meq8")
 size = Vector2(0.1, 0.1)
-
-[sub_resource type="Curve" id="Curve_ifjuo"]
-_data = [Vector2(2.08165e-12, 1), 0.0, 0.0, 0, 0, Vector2(1, 2.08165e-12), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_mm8lj"]
-curve = SubResource("Curve_ifjuo")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5isge"]
-particle_flag_align_y = true
-direction = Vector3(2.08165e-12, 1, 2.08165e-12)
-spread = 90.0
-gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-initial_velocity_min = 10.0
-initial_velocity_max = 10.0
-scale_curve = SubResource("CurveTexture_mm8lj")
-color = Color(1, 0.270588, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ss1x"]
-shading_mode = 0
-vertex_color_use_as_albedo = true
-disable_receive_shadows = true
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_1ejyh"]
-material = SubResource("StandardMaterial3D_3ss1x")
-radius = 0.02
-height = 0.4
 
 [sub_resource type="Shader" id="Shader_5hvj8"]
 code = "shader_type particles;
@@ -259,6 +232,33 @@ shader_parameter/curve = ExtResource("6_gw7vo")
 [sub_resource type="QuadMesh" id="QuadMesh_mt61w"]
 material = SubResource("ShaderMaterial_6v62q")
 
+[sub_resource type="Curve" id="Curve_wrrq1"]
+_data = [Vector2(2.08165e-12, 1), 0.0, 0.0, 0, 0, Vector2(1, 2.08165e-12), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7rxdm"]
+curve = SubResource("Curve_wrrq1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xlsti"]
+particle_flag_align_y = true
+direction = Vector3(2.08165e-12, 1, 2.08165e-12)
+spread = 90.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+scale_curve = SubResource("CurveTexture_7rxdm")
+color = Color(1, 0.270588, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xyobr"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+disable_receive_shadows = true
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bxnfi"]
+material = SubResource("StandardMaterial3D_xyobr")
+radius = 0.02
+height = 0.4
+
 [node name="XBottomHeadPieceRB" type="RigidBody3D"]
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 0, 0, 0)
 collision_layer = 8
@@ -277,12 +277,6 @@ amount = 12
 process_material = SubResource("ParticleProcessMaterial_3mh6k")
 draw_pass_1 = SubResource("QuadMesh_l11nv")
 
-[node name="BombParticles" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 0, 0, 0)
-amount = 5
-process_material = SubResource("ParticleProcessMaterial_5isge")
-draw_pass_1 = SubResource("CapsuleMesh_1ejyh")
-
 [node name="GPUTrail3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(0.1, -1.21652e-32, -5.19733e-25, -5.19733e-25, 0.1, 5.19733e-25, 0, 0, 0.1, 0, 0, 0)
 amount = 20
@@ -297,3 +291,9 @@ color_ramp = ExtResource("5_k2s7u")
 curve = ExtResource("6_gw7vo")
 billboard = true
 _defaults_have_been_set = true
+
+[node name="BombParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 0, 0, 0)
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_xlsti")
+draw_pass_1 = SubResource("CapsuleMesh_bxnfi")

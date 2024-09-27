@@ -7,7 +7,7 @@ func _ready():
 	$FlightParticles.visible = true
 	$BombParticles.visible = false
 	await get_tree().create_timer(flight_secs).timeout
-	$FlightParticles.visible = false
+	$FlightParticles.rotation = Vector3(0,0,-PI)
 	$BombParticles.visible = true
 	await get_tree().create_timer(detonate_delay_secs).timeout
 	queue_free()
