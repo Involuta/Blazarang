@@ -1,8 +1,8 @@
+GPUParticles3D
+MeshInstance3D
 CollisionShape3D
 RigidBody3D
 GPUTrail3D
-MeshInstance3D
-GPUParticles3D
 AnimationPlayer
 Area3D
 Node3D

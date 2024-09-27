@@ -1,7 +1,50 @@
-[gd_scene load_steps=28 format=3 uid="uid://b3uvg3j4qge8o"]
+[gd_scene load_steps=37 format=3 uid="uid://b3uvg3j4qge8o"]
 
 [ext_resource type="PackedScene" uid="uid://rp0n2dfx0chj" path="res://glb_imports/8164_meshes.glb" id="1_mluec"]
 [ext_resource type="PackedScene" uid="uid://d1opgv0y2ujut" path="res://glb_inherited_scenes/x_head_pieces.tscn" id="2_pkf4d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3dgug"]
+shading_mode = 0
+albedo_color = Color(2, 0.92549, 0.537255, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_o1ab0"]
+material = SubResource("StandardMaterial3D_3dgug")
+radius = 1.5
+height = 3.0
+
+[sub_resource type="Gradient" id="Gradient_a0ijh"]
+colors = PackedColorArray(1, 0.168627, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2523g"]
+gradient = SubResource("Gradient_a0ijh")
+
+[sub_resource type="Curve" id="Curve_jsd6o"]
+_data = [Vector2(2.08165e-12, 1), 0.0, 0.0, 0, 0, Vector2(1, 2.08165e-12), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5pjto"]
+curve = SubResource("Curve_jsd6o")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8tnpd"]
+particle_flag_align_y = true
+direction = Vector3(2.08165e-12, 1, 2.08165e-12)
+spread = 180.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+scale_curve = SubResource("CurveTexture_5pjto")
+color = Color(2, 0.92549, 0.537255, 1)
+color_ramp = SubResource("GradientTexture1D_2523g")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6pm1e"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+disable_receive_shadows = true
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_dk04h"]
+material = SubResource("StandardMaterial3D_6pm1e")
+radius = 0.02
+height = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c5l8d"]
 transparency = 4
@@ -218,6 +261,7 @@ bone_idx = 5
 
 [node name="XHead" parent="Armature/Skeleton3D/Head" index="0" instance=ExtResource("2_pkf4d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.303, 2.08165e-12)
+visible = false
 
 [node name="BottomFace" parent="Armature/Skeleton3D/Head/XHead" index="0"]
 transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 2.08165e-12, 1.36, 2)
@@ -245,6 +289,16 @@ emitting = false
 
 [node name="BottomLeftSparks" parent="Armature/Skeleton3D/Head/XHead" index="13"]
 emitting = false
+
+[node name="GlowingHead" type="MeshInstance3D" parent="Armature/Skeleton3D/Head" index="1"]
+transform = Transform3D(1, -2.76897e-14, 2.99465e-15, 7.70367e-15, 1, -2.63235e-08, -1.56504e-15, 2.30978e-08, 1, 6.66134e-16, 0.258998, 2.96033)
+mesh = SubResource("CapsuleMesh_o1ab0")
+
+[node name="BombParticles" type="GPUParticles3D" parent="Armature/Skeleton3D/Head/GlowingHead" index="0"]
+transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 0, 0, 0)
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_8tnpd")
+draw_pass_1 = SubResource("CapsuleMesh_dk04h")
 
 [node name="Body_001" parent="Armature/Skeleton3D" index="1"]
 surface_material_override/0 = SubResource("StandardMaterial3D_c5l8d")

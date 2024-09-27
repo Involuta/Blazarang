@@ -10,7 +10,6 @@ var square_particle := preload("res://enemies/square_particle.tscn")
 @onready var rng := RandomNumberGenerator.new()
 
 func _ready():
-	print("bing")
 	for i in range(square_particle_num):
 		var sp := square_particle.instantiate()
 		add_child(sp)

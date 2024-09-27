@@ -1,6 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://d14mq7afv37xd"]
+[gd_scene load_steps=14 format=3 uid="uid://d14mq7afv37xd"]
 
-[ext_resource type="Script" path="res://enemies/rotate.gd" id="1_72b0o"]
+[ext_resource type="Script" path="res://enemies/square_particle.gd" id="1_f83y5"]
 [ext_resource type="Script" path="res://GPUTrail-main/GPUTrail3D.gd" id="2_8bm15"]
 [ext_resource type="Texture2D" uid="uid://ct31fhxvcragr" path="res://GPUTrail-main/defaults/curve.tres" id="3_rqfqs"]
 
@@ -15,7 +15,7 @@ particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_ntvx4"]
 material = SubResource("StandardMaterial3D_n40ht")
-size = Vector2(0.5, 0.5)
+size = Vector2(0.6, 0.6)
 
 [sub_resource type="Shader" id="Shader_fjoe2"]
 code = "shader_type particles;
@@ -194,33 +194,6 @@ void fragment(){
 	}
 }"
 
-[sub_resource type="Gradient" id="Gradient_36i3q"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(2, 0.521569, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_pln6b"]
-gradient = SubResource("Gradient_36i3q")
-
-[sub_resource type="Curve" id="Curve_c52wn"]
-_data = [Vector2(0, 1), 0.0, -1.18082, 0, 0, Vector2(1, 0.0129609), -0.943115, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_2ebs2"]
-width = 32
-curve = SubResource("Curve_c52wn")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5stvq"]
-resource_local_to_scene = true
-render_priority = 0
-shader = SubResource("Shader_q1rkj")
-shader_parameter/emmission_transform = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
-shader_parameter/flags = 40
-shader_parameter/color_ramp = SubResource("GradientTexture1D_pln6b")
-shader_parameter/curve = SubResource("CurveTexture_2ebs2")
-
-[sub_resource type="QuadMesh" id="QuadMesh_snup0"]
-material = SubResource("ShaderMaterial_5stvq")
-
 [sub_resource type="Gradient" id="Gradient_ps55b"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(2, 0.34902, 0, 1)
@@ -228,28 +201,41 @@ colors = PackedColorArray(2, 0.34902, 0, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_dagh5"]
 gradient = SubResource("Gradient_ps55b")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5stvq"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_q1rkj")
+shader_parameter/emmission_transform = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+shader_parameter/flags = 40
+shader_parameter/color_ramp = SubResource("GradientTexture1D_dagh5")
+shader_parameter/curve = ExtResource("3_rqfqs")
+
+[sub_resource type="QuadMesh" id="QuadMesh_snup0"]
+material = SubResource("ShaderMaterial_5stvq")
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_clqd3"]
 
 [node name="SquareParticle" type="RigidBody3D"]
 gravity_scale = 2.66454e-15
-linear_velocity = Vector3(2.08165e-12, 1, 2.08165e-12)
+linear_velocity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 angular_velocity = Vector3(0.0261799, 3.63316e-14, 3.63316e-14)
-script = ExtResource("1_72b0o")
+script = ExtResource("1_f83y5")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 cast_shadow = 0
 mesh = SubResource("QuadMesh_ntvx4")
 
 [node name="GPUTrail3D" type="GPUParticles3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-amount = 10
-lifetime = 10.0
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+cast_shadow = 0
+amount = 15
+lifetime = 15.0
 explosiveness = 1.0
 fixed_fps = 0
 process_material = SubResource("ShaderMaterial_2luk6")
 draw_pass_1 = SubResource("QuadMesh_snup0")
 script = ExtResource("2_8bm15")
-length = 10
+length = 15
 color_ramp = SubResource("GradientTexture1D_dagh5")
 curve = ExtResource("3_rqfqs")
 _defaults_have_been_set = true
