@@ -8,7 +8,7 @@ func _ready():
 	$UIRoot.hide_black_screen()
 	x_damage_indicator.max_value = x_hurtbox.max_health
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	x_health_bar.max_value = x_hurtbox.max_health
 	x_health_bar.value = x_hurtbox.health
 	x_damage_indicator.value = x_hurtbox.damage_indicator_value

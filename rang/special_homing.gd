@@ -52,7 +52,7 @@ func homing_attack(target):
 		move_and_slide()
 		await get_tree().create_timer(get_physics_process_delta_time()).timeout
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	mesh.rotate_y(rotate_speed)
 
 func get_mvmt_state():

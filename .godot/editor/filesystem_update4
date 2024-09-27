@@ -66,3 +66,9 @@ res://enemies/x_volcano.tscn
 res://enemies/x_teleport_in.tscn
 res://levels/level1_section_nodes/Level.gd
 res://glb_inherited_scenes/mobile_gunner.tscn
+res://enemies/SquareParticle.tscn
+res://enemies/rotate.gd
+res://enemies/square_particle.tscn
+res://enemies/x_volcano.gd
+res://rang/special_homing.gd
+res://levels/x_boss_level1.gd
