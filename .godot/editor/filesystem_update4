@@ -72,3 +72,5 @@ res://enemies/square_particle.tscn
 res://enemies/x_volcano.gd
 res://rang/special_homing.gd
 res://levels/x_boss_level1.gd
+res://enemies/x_warning_sun.tscn
+res://enemies/x_warning_sun.gd

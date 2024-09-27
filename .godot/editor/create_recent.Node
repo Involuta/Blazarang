@@ -1,11 +1,11 @@
+AnimationPlayer
+Node3D
 GPUParticles3D
 MeshInstance3D
 CollisionShape3D
 RigidBody3D
 GPUTrail3D
-AnimationPlayer
 Area3D
-Node3D
 Camera3D
 Node2D
 GPUParticles2D

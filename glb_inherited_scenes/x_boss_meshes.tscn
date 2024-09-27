@@ -3,26 +3,26 @@
 [ext_resource type="PackedScene" uid="uid://rp0n2dfx0chj" path="res://glb_imports/8164_meshes.glb" id="1_mluec"]
 [ext_resource type="PackedScene" uid="uid://d1opgv0y2ujut" path="res://glb_inherited_scenes/x_head_pieces.tscn" id="2_pkf4d"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3dgug"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bm2fu"]
 shading_mode = 0
 albedo_color = Color(2, 0.92549, 0.537255, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_o1ab0"]
-material = SubResource("StandardMaterial3D_3dgug")
+material = SubResource("StandardMaterial3D_bm2fu")
 radius = 1.5
 height = 3.0
 
 [sub_resource type="Gradient" id="Gradient_a0ijh"]
 colors = PackedColorArray(1, 0.168627, 0, 1, 1, 0, 0, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_2523g"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qeqnf"]
 gradient = SubResource("Gradient_a0ijh")
 
 [sub_resource type="Curve" id="Curve_jsd6o"]
 _data = [Vector2(2.08165e-12, 1), 0.0, 0.0, 0, 0, Vector2(1, 2.08165e-12), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_5pjto"]
+[sub_resource type="CurveTexture" id="CurveTexture_csosj"]
 curve = SubResource("Curve_jsd6o")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8tnpd"]
@@ -32,17 +32,17 @@ spread = 180.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 20.0
 initial_velocity_max = 20.0
-scale_curve = SubResource("CurveTexture_5pjto")
+scale_curve = SubResource("CurveTexture_csosj")
 color = Color(2, 0.92549, 0.537255, 1)
-color_ramp = SubResource("GradientTexture1D_2523g")
+color_ramp = SubResource("GradientTexture1D_qeqnf")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6pm1e"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3m5tq"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
 disable_receive_shadows = true
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_dk04h"]
-material = SubResource("StandardMaterial3D_6pm1e")
+material = SubResource("StandardMaterial3D_3m5tq")
 radius = 0.02
 height = 0.2
 
