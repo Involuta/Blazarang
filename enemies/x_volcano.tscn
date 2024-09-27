@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bg2swy025xr60"]
+[gd_scene load_steps=36 format=3 uid="uid://bg2swy025xr60"]
 
 [ext_resource type="Script" path="res://DisappearNode.gd" id="1_l4vub"]
 [ext_resource type="Script" path="res://hitbox.gd" id="2_k3fxy"]
@@ -7,7 +7,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c0wtu"]
 transparency = 4
 shading_mode = 0
-albedo_color = Color(1.27451, 0.258824, 0, 1)
+albedo_color = Color(1.5, 0.26, 0, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_rqrur"]
 material = SubResource("StandardMaterial3D_c0wtu")
@@ -21,16 +21,6 @@ albedo_color = Color(2, 0.91, 0.6, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_tp1rv"]
 material = SubResource("StandardMaterial3D_p5jhs")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0asox"]
-transparency = 4
-shading_mode = 0
-albedo_color = Color(1.5, 0.43, 0, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_owbee"]
-material = SubResource("StandardMaterial3D_0asox")
-radius = 5.0
-height = 10.0
 
 [sub_resource type="Gradient" id="Gradient_nt3ke"]
 offsets = PackedFloat32Array(0)
@@ -53,8 +43,8 @@ direction = Vector3(1, 2.08165e-12, 2.08165e-12)
 spread = 180.0
 flatness = 1.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-initial_velocity_min = 20.0
-initial_velocity_max = 20.0
+initial_velocity_min = 30.0
+initial_velocity_max = 30.0
 scale_curve = SubResource("CurveTexture_yxesq")
 color = Color(1, 0.270588, 0, 1)
 color_ramp = SubResource("GradientTexture1D_w5tm3")
@@ -193,34 +183,10 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Ball:scale")
+tracks/7/path = NodePath("Squares:emitting")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.666667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0.5, 0.5, 0.5), Vector3(2, 2, 2)]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("Ball:transparency")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0, 0.666667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("Spikes:emitting")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -249,9 +215,8 @@ colors = PackedColorArray(1, 0.486275, 0, 1, 1, 0.486275, 0, 0)
 gradient = SubResource("Gradient_xtvrw")
 
 [sub_resource type="Curve" id="Curve_bfnx2"]
-max_value = 6.0
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 6), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 0.998905), 0.0, 0.0, 0, 0, Vector2(0.901392, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_w4sd4"]
 curve = SubResource("Curve_bfnx2")
@@ -260,24 +225,44 @@ curve = SubResource("Curve_bfnx2")
 particle_flag_align_y = true
 direction = Vector3(2.08165e-12, 1, 2.08165e-12)
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-initial_velocity_min = 0.1
-initial_velocity_max = 0.1
-scale_min = 0.5
-scale_max = 2.0
+initial_velocity_min = 40.0
+initial_velocity_max = 40.0
 scale_curve = SubResource("CurveTexture_w4sd4")
 color = Color(1, 0.486275, 0, 1)
 color_ramp = SubResource("GradientTexture1D_l3yxb")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wcjr3"]
-transparency = 4
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4qmnq"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+use_particle_trails = true
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_y57tr"]
-material = SubResource("StandardMaterial3D_wcjr3")
-top_radius = 0.0
-bottom_radius = 1.0
-height = 10.0
+[sub_resource type="QuadMesh" id="QuadMesh_rcspv"]
+material = SubResource("StandardMaterial3D_4qmnq")
+
+[sub_resource type="Curve" id="Curve_r5183"]
+_data = [Vector2(0, 1), 0.0, -1.00896, 0, 1, Vector2(0.991119, 0), -1.00896, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c5w51"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_n5wbp"]
+material = SubResource("StandardMaterial3D_c5w51")
+section_length = 1.0
+section_segments = 10
+curve = SubResource("Curve_r5183")
 
 [node name="XVolcano" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
@@ -295,15 +280,11 @@ transform = Transform3D(3, 0, 0, 0, 50, 0, 0, 0, 3, 2.08165e-12, 50, 2.08165e-12
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_tp1rv")
 
-[node name="Ball" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-mesh = SubResource("SphereMesh_owbee")
-
 [node name="FloorSparks" type="GPUParticles3D" parent="."]
 cast_shadow = 0
 custom_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
 emitting = false
-amount = 50
+amount = 100
 lifetime = 2.0
 one_shot = true
 explosiveness = 1.0
@@ -349,10 +330,13 @@ trauma_amount = 0.5
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FarTraumaCauser"]
 shape = SubResource("SphereShape3D_h4wfg")
 
-[node name="Spikes" type="GPUParticles3D" parent="."]
+[node name="Squares" type="GPUParticles3D" parent="."]
 emitting = false
-lifetime = 0.7
+lifetime = 2.0
 one_shot = true
 explosiveness = 1.0
+trail_enabled = true
 process_material = SubResource("ParticleProcessMaterial_6p7va")
-draw_pass_1 = SubResource("CylinderMesh_y57tr")
+draw_passes = 2
+draw_pass_1 = SubResource("QuadMesh_rcspv")
+draw_pass_2 = SubResource("RibbonTrailMesh_n5wbp")
