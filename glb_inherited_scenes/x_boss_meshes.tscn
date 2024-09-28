@@ -35,6 +35,7 @@ initial_velocity_max = 20.0
 scale_curve = SubResource("CurveTexture_csosj")
 color = Color(2, 0.92549, 0.537255, 1)
 color_ramp = SubResource("GradientTexture1D_qeqnf")
+attractor_interaction_enabled = false
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3m5tq"]
 shading_mode = 0
