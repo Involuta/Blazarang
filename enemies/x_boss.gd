@@ -246,7 +246,6 @@ func end_attack():
 		anim_tree.set(param_path_base + attack, false)
 	for attack in long_dist_right_arm_not_deployed_attack_chances.keys():
 		anim_tree.set(param_path_base + attack, false)
-	anim_tree.set(param_path_base + "FlyingFaceRain", false)
 	long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	behav_state = FOLLOW
 
@@ -259,9 +258,12 @@ func end_attack_instant_followup():
 		anim_tree.set(param_path_base + attack, false)
 	for attack in long_dist_right_arm_not_deployed_attack_chances.keys():
 		anim_tree.set(param_path_base + attack, false)
-	anim_tree.set(param_path_base + "FlyingFaceRain", false)
 	long_dist_wait_remaining = rng.randf_range(0.1, min_long_dist_wait)
 	behav_state = FOLLOW
+
+func end_flying_facerain():
+	end_attack()
+	anim_tree.set(param_path_base + "FlyingFaceRain", false)
 
 func choose_attack(attack_chances) -> String:
 	var choice := rng.randf()
