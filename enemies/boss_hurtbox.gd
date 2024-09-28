@@ -21,16 +21,19 @@ func reset_recovery_delay():
 	recovery_active = false
 
 func receive_hit(damage: float, hitter):
+	if invincible:
+		return
 	if recovery_active:
 		damage_indicator_value = health
 	reset_recovery_delay()
-	super(damage, hitter)
+	health -= damage
+	if health <= 0:
+		die()
 	if health_segment_threshold_index > 0 and health < max_health * health_segment_thresholds[health_segment_threshold_index]:
+		Globals.health_segment_lost.emit(health_segment_threshold_index)
 		health_segment_threshold_index -= 1
-		print(health_segment_threshold_index + 1)
 
 func _physics_process(delta):
-	super(delta)
 	recovery_delay_remaining -= delta
 	if recovery_delay_remaining < 0:
 		recovery_active = true

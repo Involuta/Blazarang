@@ -26,13 +26,11 @@ func on_hit(hitbox):
 			receive_hit(hitbox.damage, hitbox.get_parent())
 
 func receive_hit(damage: float, _hitter):
+	if invincible:
+		return
 	health -= damage
 	if health <= 0:
 		die()
 
-func _physics_process(_delta):
-	if invincible:
-		health = max_health
-	
 func die():
 	parent.queue_free()

@@ -109,6 +109,7 @@ func _ready():
 	add_to_group("lockonables")
 	if aggro_distance > 0:
 		behav_state = WAIT
+	Globals.health_segment_lost.connect(on_health_segment_lost)
 	anim_tree.active = true
 	x_mesh_head.visible = true
 	$X_boss_meshes/Armature/Skeleton3D/Head/GlowingHead.visible = false
@@ -215,6 +216,10 @@ func queue_attack(dist_type):
 			anim_tree.set(choose_attack(long_dist_right_arm_deployed_attack_chances), true)
 		DIST_TYPE.LONG_DIST_RIGHT_ARM_NOT_DEPLOYED:
 			anim_tree.set(choose_attack(long_dist_right_arm_not_deployed_attack_chances), true)
+
+func on_health_segment_lost(seg_num):
+	if seg_num == 3:
+		print("queue flying facerain!")
 
 func start_strafe():
 	behav_state = STRAFE_FOLLOW

@@ -1,8 +1,9 @@
 extends Node
 
-signal score_updated(score_change)
+signal score_updated(score_change: int)
 signal destabilize
 signal stabilize
+signal health_segment_lost(seg_num: int)
 
 # Update this list before the layer names in Project Settings
 const PLAYER_COL_LAYER := 1

@@ -87,3 +87,7 @@ res://enemies/enemy_anims/x_tp_slipnslice.res
 res://enemies/enemy_anims/x_triangle.res
 res://enemies/enemy_anims/x_triangle_axkick.res
 res://enemies/enemy_anims/x_triangle_volcano.res
+res://enemies/boss_hurtbox.gd
+res://cotu/CotuHurtbox.gd
+res://hurtbox.gd
+res://globals.gd
