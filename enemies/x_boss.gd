@@ -30,6 +30,7 @@ enum DIST_TYPE {
 @export var max_long_dist_wait := 2.0
 var long_dist_wait_remaining := 5.0
 var attack_queued := false
+signal no_attack_queued
 
 @export var min_y_pos := 11.4
 
@@ -48,9 +49,9 @@ var aiming_at_target := true
 @export var fast_bullet_speed := 50.0
 
 @export var short_dist_attack_chances = {
-	"SlipnSlice" : .2,
-	"Superman" : .2,
-	"FlyingFaceRain" : .4,
+	"SlipnSlice" : .25,
+	"Superman" : .25,
+	"RightArmSlice" : .4,
 	"Triangle" : .1
 }
 
@@ -219,7 +220,12 @@ func queue_attack(dist_type):
 
 func on_health_segment_lost(seg_num):
 	if seg_num == 3:
-		print("queue flying facerain!")
+		if attack_queued:
+			print("i'm waiting for no attack queued")
+			await no_attack_queued
+		print("eyyyy")
+		attack_queued = true
+		anim_tree.set(param_path_base + "FlyingFaceRain", true)
 
 func start_strafe():
 	behav_state = STRAFE_FOLLOW
@@ -233,23 +239,27 @@ func start_attack():
 
 func end_attack():
 	attack_queued = false
+	no_attack_queued.emit()
 	for attack in short_dist_attack_chances.keys():
 		anim_tree.set(param_path_base + attack, false)
 	for attack in long_dist_right_arm_deployed_attack_chances.keys():
 		anim_tree.set(param_path_base + attack, false)
 	for attack in long_dist_right_arm_not_deployed_attack_chances.keys():
 		anim_tree.set(param_path_base + attack, false)
+	anim_tree.set(param_path_base + "FlyingFaceRain", false)
 	long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	behav_state = FOLLOW
 
 func end_attack_instant_followup():
 	attack_queued = false
+	no_attack_queued.emit()
 	for attack in short_dist_attack_chances.keys():
 		anim_tree.set(param_path_base + attack, false)
 	for attack in long_dist_right_arm_deployed_attack_chances.keys():
 		anim_tree.set(param_path_base + attack, false)
 	for attack in long_dist_right_arm_not_deployed_attack_chances.keys():
 		anim_tree.set(param_path_base + attack, false)
+	anim_tree.set(param_path_base + "FlyingFaceRain", false)
 	long_dist_wait_remaining = rng.randf_range(0.1, min_long_dist_wait)
 	behav_state = FOLLOW
 
