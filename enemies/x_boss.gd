@@ -221,9 +221,7 @@ func queue_attack(dist_type):
 func on_health_segment_lost(seg_num):
 	if seg_num == 3:
 		if attack_queued:
-			print("i'm waiting for no attack queued")
 			await no_attack_queued
-		print("eyyyy")
 		attack_queued = true
 		anim_tree.set(param_path_base + "FlyingFaceRain", true)
 
