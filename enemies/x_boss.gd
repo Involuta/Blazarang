@@ -81,6 +81,7 @@ var aiming_at_target := true
 @export var flyingkick_hit_frames := 10 # Put the # of frames that the hitbox is active in the animation here
 @export var flying_facerain_piece_speed := 5.0
 @export var flying_facerain_height := 30.0
+@export var triangle_volcano_ascend_speed := 100.0
 
 var param_path_base := "parameters/StateMachine/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -399,6 +400,19 @@ func flying_facerain_descend():
 func spawn_volcano():
 	var volcano_inst = load("res://enemies/x_volcano.tscn").instantiate()
 	level.add_child(volcano_inst)
+
+func triangle_volcano_ascend():
+	# Without this line, X's fall protection (which sets his y vel to 0 when his global y is below the min) would prevent his y vel from changing
+	global_position = Vector3(0, min_y_pos + .01, -24)
+	velocity = triangle_volcano_ascend_speed * Vector3.UP
+
+func triangle_volcano_descend():
+	velocity = Vector3.ZERO
+	global_position.x = x_icon_pos.global_position.x
+	global_position.z = x_icon_pos.global_position.z
+	var original_descend_pos := global_position
+	var des_tween = get_tree().create_tween()
+	des_tween.tween_property(self, "global_position", (original_descend_pos.y - min_y_pos) * Vector3.DOWN, .3).from(original_descend_pos)
 
 func recall_left_arm():
 	if not left_arm_deployed():
