@@ -6,17 +6,24 @@ var rng := RandomNumberGenerator.new()
 @export var dp_count := 5
 var health := 100.0
 var max_health := 100.0 # This is only set by the Globals script or the CotuHurtbox script.
+var current_opponent_hitboxes
 @export var opponent_hitboxes := ["default"]
 @onready var parent := get_parent()
 @onready var level := $/root/Level
 
-var invincible = false
-
 func _ready():
 	area_entered.connect(on_hit)
+	current_opponent_hitboxes = opponent_hitboxes
+
+func set_invincibility(val: bool):
+	print(val)
+	if val:
+		current_opponent_hitboxes = []
+	else:
+		current_opponent_hitboxes = opponent_hitboxes
 
 func on_hit(hitbox):
-	if hitbox.name in opponent_hitboxes:
+	if hitbox.name in current_opponent_hitboxes:
 		if "is_dodging" in parent:
 			if not parent.is_dodging:
 				receive_hit(hitbox.damage, hitbox.get_parent())
@@ -26,8 +33,6 @@ func on_hit(hitbox):
 			receive_hit(hitbox.damage, hitbox.get_parent())
 
 func receive_hit(damage: float, _hitter):
-	if invincible:
-		return
 	health -= damage
 	if health <= 0:
 		die()

@@ -18,14 +18,7 @@ func _ready():
 
 func receive_hit(damage: float, hitter):
 	emit_hit_particles(hitter)
-	Globals.award_score(hit_score)
-	if hitter.name == "Roserang":
-		if hitter.get_mvmt_state() == "RICOCHET":
-			Globals.award_score(Globals.RICOCHET_HIT_SCORE)
-		elif hitter.get_mvmt_state() == "RAPIDORBIT":
-			Globals.award_score(Globals.RAPIDORBIT_HIT_SCORE)
-		elif hitter.get_mvmt_state() == "HOMING":
-			Globals.award_score(Globals.HOMING_HIT_SCORE)
+	award_score(hitter)
 	super(damage, hitter)
 
 func emit_hit_particles(hitter):
@@ -37,6 +30,16 @@ func emit_hit_particles(hitter):
 	var particle_settings = inst.get_node("GPUParticles3D")
 	particle_settings.emitting = true
 	particle_settings.process_material.color = hit_particle_color
+
+func award_score(hitter):
+	Globals.award_score(hit_score)
+	if hitter.name == "Roserang":
+		if hitter.get_mvmt_state() == "RICOCHET":
+			Globals.award_score(Globals.RICOCHET_HIT_SCORE)
+		elif hitter.get_mvmt_state() == "RAPIDORBIT":
+			Globals.award_score(Globals.RAPIDORBIT_HIT_SCORE)
+		elif hitter.get_mvmt_state() == "HOMING":
+			Globals.award_score(Globals.HOMING_HIT_SCORE)
 
 func death_effect():
 	for i in range(dp_count):

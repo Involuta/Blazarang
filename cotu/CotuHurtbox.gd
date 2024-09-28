@@ -29,18 +29,12 @@ func reset_recovery_delay():
 	recovery_active = false
 
 func receive_hit(damage: float, hitter):
-	if invincible:
-		return
 	if recovery_active:
 		damage_indicator_value = health
 	reset_recovery_delay()
-	health -= damage
-	if health <= 0:
-		die()
+	super(damage, hitter)
 
 func self_hit(damage: float):
-	if invincible:
-		return
 	if recovery_active:
 		damage_indicator_value = health
 	reset_recovery_delay()
@@ -77,8 +71,8 @@ func die():
 		get_tree().change_scene_to_file("res://levels/hub.tscn")
 		return
 	Globals.destabilize.emit()
-	invincible = true
+	set_invincibility(true)
 	health = 1
 	max_health = 1
 	await get_tree().create_timer(destab_invin_time).timeout
-	invincible = false
+	set_invincibility(false)
