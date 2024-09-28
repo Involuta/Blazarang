@@ -91,3 +91,5 @@ res://enemies/boss_hurtbox.gd
 res://cotu/CotuHurtbox.gd
 res://hurtbox.gd
 res://globals.gd
+res://enemies/enemy_hurtbox.gd
+res://enemies/enemy_hit_particles.tscn

@@ -19,7 +19,8 @@ func _ready():
 	flight_particles.visible = false
 	bomb_particles.visible = false
 	var warning_sun_inst = load("res://enemies/x_warning_sun.tscn").instantiate()
-	level.add_child(warning_sun_inst)
+	level.add_child.call_deferred(warning_sun_inst)
+	await warning_sun_inst.tree_entered
 	warning_sun_inst.global_position = global_position
 	await get_tree().create_timer(warning_secs).timeout
 	

@@ -214,7 +214,6 @@ mesh = SubResource("CylinderMesh_tp1rv")
 [node name="FloorSparks" type="GPUParticles3D" parent="."]
 cast_shadow = 0
 custom_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
-emitting = false
 amount = 100
 lifetime = 2.0
 one_shot = true
@@ -224,7 +223,6 @@ draw_pass_1 = SubResource("CapsuleMesh_g5x34")
 
 [node name="Lava" type="GPUParticles3D" parent="."]
 custom_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
-emitting = false
 amount = 50
 lifetime = 6.0
 one_shot = true

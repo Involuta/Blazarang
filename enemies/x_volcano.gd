@@ -12,7 +12,8 @@ var square_particle := preload("res://enemies/square_particle.tscn")
 func _ready():
 	for i in range(square_particle_num):
 		var sp := square_particle.instantiate()
-		add_child(sp)
+		add_child.call_deferred(sp)
+		await sp.tree_entered
 		sp.global_position = global_position
 		sp.linear_velocity = square_particle_speed * Vector3(rng.randf_range(-1, 1), rng.randf_range(.25, 1), rng.randf_range(-1, 1)).normalized()
 	await get_tree().create_timer(disappear_secs).timeout
