@@ -529,9 +529,9 @@ max_long_dist_wait = 2.5
 follow_speed = 15.0
 short_dist_attack_chances = {
 "FlyingFaceRain": 0.25,
-"SlipnSlice": 0.25,
-"Superman": 0.4,
-"Triangle": 0.1
+"SlipnSlice": 2.08167e-12,
+"Superman": 2.08167e-12,
+"Triangle": 0.75
 }
 diagonal_dash_speed = 22.0
 triangle_axkick_dist = 2.25
@@ -595,32 +595,35 @@ emitting = false
 transform = Transform3D(-0.1, 3.48787e-17, -8.74228e-09, 3.48787e-17, 0.1, -3.48787e-17, 8.74228e-09, -3.48787e-17, -0.1, 2.08165e-12, -1.3, 2.08165e-12)
 
 [node name="Skeleton3D" parent="X_boss_meshes/Armature" index="0"]
-bones/0/position = Vector3(1.59188e-07, 10.6667, -0.333333)
-bones/0/rotation = Quaternion(0.21644, 9.12654e-12, -4.11755e-11, 0.976296)
+bones/0/position = Vector3(2.24115e-05, 13.157, -1.17073)
+bones/0/rotation = Quaternion(1, 4.21753e-11, -2.36923e-16, 5.75924e-06)
 bones/1/position = Vector3(0, 1.53056, -0.079443)
-bones/1/rotation = Quaternion(0.0612991, 2.58694e-12, 4.20951e-11, 0.99812)
-bones/2/rotation = Quaternion(0.0871557, 1.50712e-18, -1.83863e-17, 0.996195)
-bones/3/rotation = Quaternion(0.0871557, 1.50712e-18, -1.83863e-17, 0.996195)
-bones/4/rotation = Quaternion(0.156187, -1.06527e-18, -2.71544e-17, 0.987728)
-bones/8/rotation = Quaternion(0.392829, -0.238195, 0.543629, 0.702436)
-bones/9/rotation = Quaternion(-1.56747e-07, -1.81746e-07, 0.835671, 0.54923)
-bones/10/rotation = Quaternion(-0.249713, 0.90224, 0.0478385, 0.348306)
-bones/12/rotation = Quaternion(0.391324, 0.240428, -0.541202, 0.704386)
-bones/13/rotation = Quaternion(-1.43749e-06, 8.98363e-07, -0.837784, 0.546001)
-bones/14/rotation = Quaternion(-0.229572, -0.934572, -0.064545, 0.264017)
-bones/15/rotation = Quaternion(-0.0368574, -0.59602, -0.798289, 0.0783376)
-bones/15/scale = Vector3(1, 1, 0.999999)
-bones/16/rotation = Quaternion(-0.769104, -3.06149e-06, -2.77126e-06, 0.639124)
-bones/17/rotation = Quaternion(0.708568, 0.0195697, -0.0023021, 0.705368)
-bones/18/rotation = Quaternion(0.276961, 0.230053, -0.0684875, 0.930418)
-bones/20/rotation = Quaternion(-0.0204352, 0.574685, 0.815273, 0.0681894)
-bones/20/scale = Vector3(1, 1, 0.999999)
-bones/21/rotation = Quaternion(-0.698176, 6.27317e-06, 7.19391e-06, 0.715926)
-bones/22/rotation = Quaternion(0.512996, -0.0196368, -0.0135431, 0.858059)
-bones/23/rotation = Quaternion(0.280711, -0.231213, 0.0698784, 0.928902)
+bones/1/rotation = Quaternion(-0.025926, 0, 0, 0.999664)
+bones/2/rotation = Quaternion(-3.72529e-09, 0, 0, 1)
+bones/3/rotation = Quaternion(7.45058e-09, 0, 0, 1)
+bones/4/rotation = Quaternion(-0.398978, -2.90664e-18, 9.76629e-17, 0.916961)
+bones/8/rotation = Quaternion(0.618719, 0.304133, 0.171152, 0.703844)
+bones/9/rotation = Quaternion(3.08071e-08, -2.27454e-07, 0.00157224, 0.999999)
+bones/10/rotation = Quaternion(-0.169943, 0.382489, 0.127926, 0.899142)
+bones/12/rotation = Quaternion(0.620253, -0.302072, -0.166789, 0.704429)
+bones/13/rotation = Quaternion(-1.78143e-08, 1.66099e-06, -0.00162361, 0.999999)
+bones/14/rotation = Quaternion(-0.152366, -0.373264, -0.120964, 0.907098)
+bones/15/rotation = Quaternion(-0.041421, -0.0232057, -0.997847, 0.0452394)
+bones/15/scale = Vector3(1.00001, 1, 0.999994)
+bones/16/rotation = Quaternion(-0.00144462, -4.09054e-06, 5.89393e-07, 0.999999)
+bones/17/rotation = Quaternion(0.149009, 0.0328791, 0.0164182, 0.988153)
+bones/18/rotation = Quaternion(0.305618, 0.233273, -0.0567252, 0.921393)
+bones/20/rotation = Quaternion(-0.0424547, 0.0175739, 0.997805, 0.0476875)
+bones/20/scale = Vector3(0.999999, 1, 1)
+bones/21/rotation = Quaternion(-0.00168083, 9.49967e-06, 7.77681e-07, 0.999999)
+bones/22/rotation = Quaternion(0.2232, -0.0260233, -0.0159616, 0.974295)
+bones/23/rotation = Quaternion(0.288124, -0.231999, 0.0672299, 0.926629)
 
 [node name="Head" parent="X_boss_meshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1, 3.55616e-16, -6.01141e-16, -6.80277e-16, 0.34202, -0.939693, -1.22461e-16, 0.939693, 0.34202, 1.59317e-07, 16.6835, 5.26675)
+transform = Transform3D(1, 5.42195e-11, 6.4616e-11, 8.43504e-11, -0.642781, -0.76605, -8.77733e-16, 0.76605, -0.642781, 2.24122e-05, 4.80167, -0.197161)
+
+[node name="XHead" parent="X_boss_meshes/Armature/Skeleton3D/Head" index="0"]
+visible = true
 
 [node name="BottomFace" parent="X_boss_meshes/Armature/Skeleton3D/Head/XHead" index="0"]
 transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0, 0.897338, 2)
@@ -653,16 +656,16 @@ emitting = true
 visible = false
 
 [node name="LeftArm" parent="X_boss_meshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.46925, 0.0724377, -0.880089, -0.273442, -0.935727, -0.222812, -0.839663, 0.345208, -0.419282, 3.5919, 16.2817, 3.97741)
+transform = Transform3D(0.631321, 0.0460125, -0.774156, -0.0946196, 0.995351, -0.0180026, 0.769728, 0.0846157, 0.632739, 3.59193, 5.97162, -0.756174)
 
 [node name="RightArm" parent="X_boss_meshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.469329, -0.0709303, 0.88017, 0.274908, -0.935496, -0.221977, 0.83914, 0.346146, -0.419556, -3.5919, 16.2534, 3.99721)
+transform = Transform3D(0.631506, -0.0460358, 0.774003, 0.0975806, 0.995018, -0.0204344, -0.769206, 0.0884322, 0.632852, -3.59188, 5.97162, -0.790688)
 
 [node name="LeftFoot" parent="X_boss_meshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(-0.989496, 0.141861, -0.0278337, -0.128833, -0.777968, 0.614953, 0.065584, 0.61208, 0.788072, 2.00004, 3.9997, 1.78814e-05)
+transform = Transform3D(-0.990772, 0.134212, -0.0192595, 0.132993, 0.934299, -0.330756, -0.0263993, -0.330261, -0.943514, 1.94984, 23.2873, -1.48391)
 
 [node name="RightFoot" parent="X_boss_meshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(-0.989285, -0.14357, 0.0265655, 0.144633, -0.93871, 0.312896, -0.0199856, 0.313387, 0.949415, -2.00019, 3.32029, 0.246275)
+transform = Transform3D(-0.989513, -0.142389, 0.0242303, -0.137559, 0.877898, -0.458663, 0.0440368, -0.457187, -0.888281, -1.99114, 23.2875, -1.38353)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_uk78c")

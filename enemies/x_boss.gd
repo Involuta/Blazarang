@@ -110,6 +110,8 @@ func _ready():
 	if aggro_distance > 0:
 		behav_state = WAIT
 	anim_tree.active = true
+	x_mesh_head.visible = true
+	$X_boss_meshes/Armature/Skeleton3D/Head/GlowingHead.visible = false
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("Special"):
@@ -400,11 +402,16 @@ func flying_facerain_descend():
 func spawn_volcano():
 	var volcano_inst = load("res://enemies/x_volcano.tscn").instantiate()
 	level.add_child(volcano_inst)
+	volcano_inst.global_position = global_position
 
 func triangle_volcano_ascend():
 	# Without this line, X's fall protection (which sets his y vel to 0 when his global y is below the min) would prevent his y vel from changing
-	global_position = Vector3(0, min_y_pos + .01, -24)
+	global_position.y = min_y_pos + .01
 	velocity = triangle_volcano_ascend_speed * Vector3.UP
+	x_icon_lerp_val = .2
+	x_icon_pos.global_position.x = target.global_position.x
+	x_icon_pos.global_position.z = target.global_position.z
+	set_x_icon_stationary()
 
 func triangle_volcano_descend():
 	velocity = Vector3.ZERO
@@ -412,7 +419,7 @@ func triangle_volcano_descend():
 	global_position.z = x_icon_pos.global_position.z
 	var original_descend_pos := global_position
 	var des_tween = get_tree().create_tween()
-	des_tween.tween_property(self, "global_position", (original_descend_pos.y - min_y_pos) * Vector3.DOWN, .3).from(original_descend_pos)
+	des_tween.tween_property(self, "global_position", (original_descend_pos.y - min_y_pos) * Vector3.DOWN, .3).from(original_descend_pos).as_relative()
 
 func recall_left_arm():
 	if not left_arm_deployed():
