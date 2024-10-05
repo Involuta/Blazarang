@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://djyktbqfnc8fs"]
+[gd_scene load_steps=48 format=3 uid="uid://djyktbqfnc8fs"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_qcdon"]
 [ext_resource type="Script" path="res://levels/hub_section_nodes/hub_room.gd" id="1_wombd"]
@@ -204,6 +204,12 @@ size = Vector3(0.5, 2.5, 2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ec0t2"]
 size = Vector3(0.5, 2.5, 2)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mvpf6"]
+shading_mode = 0
+
+[sub_resource type="SphereMesh" id="SphereMesh_o2mce"]
+material = SubResource("StandardMaterial3D_mvpf6")
+
 [node name="hub_room1" type="Node3D"]
 script = ExtResource("1_wombd")
 
@@ -344,5 +350,9 @@ texture_value_dict = {
 "res://textures/3-VAR1_1.webp": "res://levels/gauntlet_level1.tscn",
 "res://textures/8164.webp": "res://levels/x_boss_level1.tscn"
 }
+
+[node name="PanelSelector" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 3.5, -5.5)
+mesh = SubResource("SphereMesh_o2mce")
 
 [connection signal="body_entered" from="ExitRoom" to="." method="_on_exit_room_body_entered"]

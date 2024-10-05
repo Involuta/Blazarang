@@ -33,6 +33,7 @@ var look_angle := 0.0
 var look_angle2 := 0.0
 var max_cam_dist := 6.0 # dist btwn player and camera when camera's not colliding with geometry; player can modify this in-game
 
+var can_throw := true
 var throw_queued := false
 const INSTANT_RETHROW_SECS := .2 # max possible time btwn player inputting throw and rang hitting Cotu that still cauess an instant rethrow
 var buff_list := [Globals.BUFFS.DAMAGE, Globals.BUFFS.DAMAGE, Globals.BUFFS.DAMAGE]
@@ -118,14 +119,14 @@ func _physics_process(delta):
 	
 	# Roserang throw
 	if Input.is_action_just_pressed("Throw"):
-		if roserang_instance == null:
+		if roserang_instance == null and can_throw:
 			# Manual throw
 			if not destabilized:
 				hurtbox.self_hit(throw_self_damage)
 			throw_rang()
 		elif not throw_queued:
 			start_instant_rethrow_timer()
-	if throw_queued and roserang_instance == null:
+	if throw_queued and roserang_instance == null and can_throw:
 		# Instant rethrow
 		anim_tree.set("parameters/StateMachine/conditions/just_instant_rethrew", true)
 		throw_queued = false

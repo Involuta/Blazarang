@@ -3,13 +3,17 @@ extends Node3D
 @onready var item_panel := $ItemPanel
 @onready var level_panel := $LevelPanel
 @onready var exit_door := $ExitDoor
+@onready var panel_selector := $PanelSelector
 
 var panel_list_pos := 0
 
 var panel_list
 
+var panel_selector_pos_list
+
 func _ready():
 	panel_list = [item_panel, level_panel]
+	panel_selector_pos_list = [Vector3(-5.5,3.5,-11.5), Vector3(11.5,3.5,-5.5)]
 	panel_list[panel_list_pos].selected = true
 	exit_door.position = Vector3(-10.25, 4.25, 0)
 
@@ -43,3 +47,5 @@ func _physics_process(_delta):
 		switch_panel_left()
 	elif Input.is_action_just_pressed("UIScrollRight"):
 		switch_panel_right()
+	
+	panel_selector.global_position = lerp(panel_selector.global_position, panel_selector_pos_list[panel_list_pos], .12)
