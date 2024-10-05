@@ -79,6 +79,7 @@ var aiming_at_target := true
 @export var triangle_arm_angle := 36.0
 @export var triangle_arm_dist := 90.0
 @export var triangle_axkick_dist := 10.0
+@export var flyingkick_speed := 200.0
 @export var flyingkick_hit_frames := 10 # Put the # of frames that the hitbox is active in the animation here
 @export var flying_facerain_piece_speed := 5.0
 @export var flying_facerain_height := 30.0
@@ -356,9 +357,10 @@ func triangle_shoot_arms():
 	right_arm_tween.tween_callback(right_arm.fire_laser)
 
 func flyingkick_rush():
-	# Up vec prevents X from ending up under the ground after tweening
-	var kick_tween = get_tree().create_tween()
-	kick_tween.tween_property(self, "global_position", (-1.5+global_position.distance_to(target.global_position)) * -transform.basis.z + .1 * Vector3.UP, (flyingkick_hit_frames-1)/60.0).set_trans(Tween.TRANS_EXPO).as_relative()
+	global_position.y = min_y_pos + .1
+	velocity = flyingkick_speed * -transform.basis.z
+	await get_tree().create_timer((flyingkick_hit_frames-1)/60.0).timeout
+	velocity = Vector3.ZERO
 
 func dash_back():
 	velocity = dash_back_speed * transform.basis.z
