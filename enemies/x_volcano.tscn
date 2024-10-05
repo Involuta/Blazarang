@@ -202,7 +202,7 @@ script = ExtResource("1_u0lj8")
 disappear_secs = 6.0
 
 [node name="TPLowerDisc" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 2.08165e-12, -1, 2.08165e-12)
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_rqrur")
 
@@ -212,8 +212,10 @@ cast_shadow = 0
 mesh = SubResource("CylinderMesh_tp1rv")
 
 [node name="FloorSparks" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -1, 2.08165e-12)
 cast_shadow = 0
 custom_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
+emitting = false
 amount = 100
 lifetime = 2.0
 one_shot = true
@@ -222,7 +224,9 @@ process_material = SubResource("ParticleProcessMaterial_v014i")
 draw_pass_1 = SubResource("CapsuleMesh_g5x34")
 
 [node name="Lava" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -1, 2.08165e-12)
 custom_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
+emitting = false
 amount = 50
 lifetime = 6.0
 one_shot = true

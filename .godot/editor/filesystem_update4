@@ -59,3 +59,4 @@ res://glb_inherited_scenes/x_boss_meshes.tscn
 res://enemies/enemy_hit_particles.tscn
 res://globals.gd
 res://enemies/x_boss.gd
+res://levels/x_boss_level1.gd
