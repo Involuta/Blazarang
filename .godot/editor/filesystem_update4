@@ -65,3 +65,5 @@ res://levels/hub_level.gd
 res://cotu/cotu_cb_main.tscn
 res://levels/hub.tscn
 res://levels/hub_section_nodes/hub_room.gd
+res://enemies/enemy_hurtbox.gd
+res://rang/rang_hit_particles.tscn

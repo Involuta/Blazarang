@@ -6,6 +6,7 @@ extends Hurtbox
 var hit_score := 1.0
 var kill_score := 1.0
 var hit_particles := preload("res://enemies/enemy_hit_particles.tscn")
+var rang_hit_particles := preload("res://rang/rang_hit_particles.tscn")
 var death_particle := preload("res://enemies/death_particle.tscn")
 
 func _ready():
@@ -18,6 +19,8 @@ func _ready():
 
 func receive_hit(damage: float, hitter):
 	emit_hit_particles(hitter)
+	if hitter.name == "Roserang":
+		emit_hitter_particles(hitter)
 	award_score(hitter)
 	super(damage, hitter)
 
@@ -30,6 +33,15 @@ func emit_hit_particles(hitter):
 	var particle_settings = inst.get_node("GPUParticles3D")
 	particle_settings.emitting = true
 	particle_settings.process_material.color = hit_particle_color
+
+func emit_hitter_particles(hitter):
+	var inst := rang_hit_particles.instantiate()
+	level.add_child.call_deferred(inst)
+	await inst.tree_entered
+	inst.global_position = hitter.global_position
+	inst.global_rotation.y = hitter.global_rotation.y + PI
+	var particle_settings = inst.get_node("GPUParticles3D")
+	particle_settings.emitting = true
 
 func award_score(hitter):
 	Globals.award_score(hit_score)
