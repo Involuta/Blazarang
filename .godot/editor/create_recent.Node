@@ -1,3 +1,4 @@
+AnimatedSprite3D
 GPUParticles3D
 MeshInstance3D
 CollisionShape3D
@@ -23,7 +24,6 @@ Camera2D
 Control
 Label
 SubViewport
-AnimatedSprite3D
 RichTextLabel
 SubViewportContainer
 OmniLight3D

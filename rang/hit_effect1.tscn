@@ -1,0 +1,83 @@
+[gd_scene load_steps=13 format=3 uid="uid://mpihc5n1bhib"]
+
+[ext_resource type="Texture2D" uid="uid://dsp54kxhbcush" path="res://rang/HitEffect1Spritesheet.png" id="1_px8p8"]
+[ext_resource type="Script" path="res://DisappearNode.gd" id="2_vcp3v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8lr5q"]
+atlas = ExtResource("1_px8p8")
+region = Rect2(0, 0, 242, 242)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f74vv"]
+atlas = ExtResource("1_px8p8")
+region = Rect2(242, 0, 242, 242)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yyln"]
+atlas = ExtResource("1_px8p8")
+region = Rect2(484, 0, 242, 242)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4dlif"]
+atlas = ExtResource("1_px8p8")
+region = Rect2(0, 242, 242, 242)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_srf74"]
+atlas = ExtResource("1_px8p8")
+region = Rect2(242, 242, 242, 242)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yo5bc"]
+atlas = ExtResource("1_px8p8")
+region = Rect2(484, 242, 242, 242)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6axnl"]
+atlas = ExtResource("1_px8p8")
+region = Rect2(0, 484, 242, 242)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wumn2"]
+atlas = ExtResource("1_px8p8")
+region = Rect2(242, 484, 242, 242)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70qov"]
+atlas = ExtResource("1_px8p8")
+region = Rect2(484, 484, 242, 242)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qqsvd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8lr5q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f74vv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yyln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4dlif")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_srf74")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yo5bc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6axnl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wumn2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70qov")
+}],
+"loop": false,
+"name": &"default",
+"speed": 30.0
+}]
+
+[node name="HitEffect1" type="AnimatedSprite3D"]
+billboard = 1
+sprite_frames = SubResource("SpriteFrames_qqsvd")
+autoplay = "default"
+frame = 8
+frame_progress = 1.0
+script = ExtResource("2_vcp3v")

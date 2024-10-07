@@ -7,6 +7,7 @@ var hit_score := 1.0
 var kill_score := 1.0
 var hit_particles := preload("res://enemies/enemy_hit_particles.tscn")
 var rang_hit_particles := preload("res://rang/rang_hit_particles.tscn")
+var rang_hit_effect := preload("res://rang/hit_effect1.tscn")
 var death_particle := preload("res://enemies/death_particle.tscn")
 
 func _ready():
@@ -42,6 +43,11 @@ func emit_hitter_particles(hitter):
 	inst.global_rotation.y = hitter.global_rotation.y + PI
 	var particle_settings = inst.get_node("GPUParticles3D")
 	particle_settings.emitting = true
+	
+	var inst2 := rang_hit_effect.instantiate()
+	level.add_child.call_deferred(inst2)
+	await inst2.tree_entered
+	inst2.global_position = hitter.global_position
 
 func award_score(hitter):
 	Globals.award_score(hit_score)

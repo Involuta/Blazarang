@@ -1,4 +1,5 @@
 res://
+res://rang
 res://enemies/enemy_anims
 res://enemies
 res://glb_inherited_scenes
@@ -11,7 +12,6 @@ res://ui
 /Users/ryanbascos/GameDevMiscAssets
 res://glb_imports
 res://shaders
-res://rang
 res://cotu
 res://levels/
 /Users/ryanbascos/Library/Application Support/TrenchBroom/games
