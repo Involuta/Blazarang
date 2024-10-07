@@ -3,71 +3,71 @@
 [ext_resource type="Texture2D" uid="uid://dsp54kxhbcush" path="res://rang/HitEffect1Spritesheet.png" id="1_px8p8"]
 [ext_resource type="Script" path="res://DisappearNode.gd" id="2_vcp3v"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8lr5q"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwrbk"]
 atlas = ExtResource("1_px8p8")
-region = Rect2(0, 0, 242, 242)
+region = Rect2(0, 0, 682, 682)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_f74vv"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfyxk"]
 atlas = ExtResource("1_px8p8")
-region = Rect2(242, 0, 242, 242)
+region = Rect2(682, 0, 682, 682)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2yyln"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6pghf"]
 atlas = ExtResource("1_px8p8")
-region = Rect2(484, 0, 242, 242)
+region = Rect2(1364, 0, 682, 682)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4dlif"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ix67v"]
 atlas = ExtResource("1_px8p8")
-region = Rect2(0, 242, 242, 242)
+region = Rect2(0, 682, 682, 682)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_srf74"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_s13ss"]
 atlas = ExtResource("1_px8p8")
-region = Rect2(242, 242, 242, 242)
+region = Rect2(682, 682, 682, 682)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yo5bc"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qo2hn"]
 atlas = ExtResource("1_px8p8")
-region = Rect2(484, 242, 242, 242)
+region = Rect2(1364, 682, 682, 682)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6axnl"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8o7w"]
 atlas = ExtResource("1_px8p8")
-region = Rect2(0, 484, 242, 242)
+region = Rect2(0, 1364, 682, 682)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wumn2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_djqgu"]
 atlas = ExtResource("1_px8p8")
-region = Rect2(242, 484, 242, 242)
+region = Rect2(682, 1364, 682, 682)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_70qov"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_i801l"]
 atlas = ExtResource("1_px8p8")
-region = Rect2(484, 484, 242, 242)
+region = Rect2(1364, 1364, 682, 682)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qqsvd"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8lr5q")
+"texture": SubResource("AtlasTexture_jwrbk")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_f74vv")
+"texture": SubResource("AtlasTexture_sfyxk")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2yyln")
+"texture": SubResource("AtlasTexture_6pghf")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4dlif")
+"texture": SubResource("AtlasTexture_ix67v")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_srf74")
+"texture": SubResource("AtlasTexture_s13ss")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yo5bc")
+"texture": SubResource("AtlasTexture_qo2hn")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6axnl")
+"texture": SubResource("AtlasTexture_w8o7w")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wumn2")
+"texture": SubResource("AtlasTexture_djqgu")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_70qov")
+"texture": SubResource("AtlasTexture_i801l")
 }],
 "loop": false,
 "name": &"default",
@@ -78,6 +78,4 @@ animations = [{
 billboard = 1
 sprite_frames = SubResource("SpriteFrames_qqsvd")
 autoplay = "default"
-frame = 8
-frame_progress = 1.0
 script = ExtResource("2_vcp3v")
