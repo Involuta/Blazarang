@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bg2swy025xr60"]
+[gd_scene load_steps=36 format=3 uid="uid://bg2swy025xr60"]
 
 [ext_resource type="Script" path="res://enemies/x_volcano.gd" id="1_u0lj8"]
 [ext_resource type="Script" path="res://hitbox.gd" id="2_k3fxy"]
@@ -33,12 +33,11 @@ albedo_color = Color(2, 0.91, 0.6, 1)
 [sub_resource type="CylinderMesh" id="CylinderMesh_tp1rv"]
 material = SubResource("StandardMaterial3D_p5jhs")
 
-[sub_resource type="Gradient" id="Gradient_nt3ke"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(1.50196, 0.270588, 0, 1)
+[sub_resource type="Gradient" id="Gradient_bek42"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 0, 0, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_w5tm3"]
-gradient = SubResource("Gradient_nt3ke")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_atgce"]
+gradient = SubResource("Gradient_bek42")
 
 [sub_resource type="Curve" id="Curve_1ninf"]
 max_value = 2.0
@@ -57,13 +56,12 @@ gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 30.0
 initial_velocity_max = 30.0
 scale_curve = SubResource("CurveTexture_yxesq")
-color = Color(1, 0.270588, 0, 1)
-color_ramp = SubResource("GradientTexture1D_w5tm3")
+color_ramp = SubResource("GradientTexture1D_atgce")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_crv3m"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 0.478431, 0, 1)
+albedo_color = Color(1, 0.396078, 0, 1)
 disable_receive_shadows = true
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_g5x34"]
@@ -82,8 +80,8 @@ inner_radius = 1.9
 outer_radius = 2.0
 
 [sub_resource type="Gradient" id="Gradient_rj4s4"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(1.3, 0.35, 0, 1)
+offsets = PackedFloat32Array(0, 0.625)
+colors = PackedColorArray(1.30196, 0.572549, 0, 1, 2.00392, 0.160784, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_70fut"]
 gradient = SubResource("Gradient_rj4s4")
@@ -96,7 +94,7 @@ initial_velocity_min = 5.0
 initial_velocity_max = 20.0
 scale_min = 0.5
 scale_max = 1.5
-color = Color(1.3, 0.35, 0, 1)
+color = Color(1.30196, 0.482353, 0, 1)
 color_ramp = SubResource("GradientTexture1D_70fut")
 
 [sub_resource type="Curve" id="Curve_gjuql"]
@@ -281,6 +279,30 @@ tracks/11/keys = {
 "update": 0,
 "values": [0.0, 1.0]
 }
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("ExplosionBall:scale")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 0.333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(10, 10, 10)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("ExplosionBall:transparency")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g88e0"]
 _data = {
@@ -296,6 +318,14 @@ radius = 12.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_h4wfg"]
 radius = 36.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ctytl"]
+transparency = 4
+shading_mode = 0
+albedo_color = Color(1, 0.568627, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_icx4a"]
+material = SubResource("StandardMaterial3D_ctytl")
 
 [node name="XVolcano" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
@@ -377,3 +407,8 @@ trauma_amount = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FarTraumaCauser"]
 shape = SubResource("SphereShape3D_h4wfg")
+
+[node name="ExplosionBall" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+transparency = 1.0
+mesh = SubResource("SphereMesh_icx4a")

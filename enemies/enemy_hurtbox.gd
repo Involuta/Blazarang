@@ -21,7 +21,7 @@ func _ready():
 func receive_hit(damage: float, hitter):
 	emit_hit_particles(hitter)
 	if hitter.name == "Roserang":
-		emit_hitter_particles(hitter)
+		emit_hitter_effect(hitter)
 	award_score(hitter)
 	super(damage, hitter)
 
@@ -43,11 +43,12 @@ func emit_hitter_particles(hitter):
 	inst.global_rotation.y = hitter.global_rotation.y + PI
 	var particle_settings = inst.get_node("GPUParticles3D")
 	particle_settings.emitting = true
-	
-	var inst2 := rang_hit_effect.instantiate()
-	level.add_child.call_deferred(inst2)
-	await inst2.tree_entered
-	inst2.global_position = hitter.global_position
+
+func emit_hitter_effect(hitter):
+	var inst := rang_hit_effect.instantiate()
+	level.add_child.call_deferred(inst)
+	await inst.tree_entered
+	inst.global_position = hitter.global_position
 
 func award_score(hitter):
 	Globals.award_score(hit_score)
