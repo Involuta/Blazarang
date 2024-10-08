@@ -25,10 +25,10 @@ func destroy_self():
 	destroyed = true
 	# For whatever reason, high velocity apparently makes the particles disappear early
 	velocity = Vector3.ZERO
-	$EnemyHitbox.queue_free()
-	$BulletMesh.queue_free()
-	$TailParticles.queue_free()
-	$ExplodeParticles.emitting = true
+	for child in get_children():
+		if not "Explosion" in child.name:
+			child.queue_free()
+	$ExplosionParticles.emitting = true
 	$ExplosionBall.emitting = true
 	if explosion_hitbox != null:
 		explosion_hitbox.process_mode = Node.PROCESS_MODE_INHERIT

@@ -1,7 +1,7 @@
+GPUParticles3D
 MeshInstance3D
 AnimationPlayer
 AnimatedSprite3D
-GPUParticles3D
 CollisionShape3D
 Hitbox
 Node3D

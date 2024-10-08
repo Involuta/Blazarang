@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ccvnh6rsvebpi"]
+[gd_scene load_steps=33 format=3 uid="uid://ccvnh6rsvebpi"]
 
 [ext_resource type="Script" path="res://enemies/bullet.gd" id="1_ufdes"]
 [ext_resource type="Script" path="res://hitbox.gd" id="2_xoojo"]
@@ -111,6 +111,46 @@ height = 10.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_5r448"]
 radius = 4.0
 
+[sub_resource type="CurveTexture" id="CurveTexture_bh0l4"]
+
+[sub_resource type="Gradient" id="Gradient_glq47"]
+offsets = PackedFloat32Array(0.6075, 1)
+colors = PackedColorArray(1, 1, 0, 0.482353, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_c6r6q"]
+gradient = SubResource("Gradient_glq47")
+
+[sub_resource type="Curve" id="Curve_75air"]
+max_value = 3.0
+_data = [Vector2(0, 1.6747), 0.0, 0.0, 0, 0, Vector2(1, 0.721796), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_q1flm"]
+curve = SubResource("Curve_75air")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nocym"]
+particle_flag_align_y = true
+direction = Vector3(2.08165e-12, 2.08165e-12, -1)
+spread = 0.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 8.0
+initial_velocity_max = 8.0
+angular_velocity_curve = SubResource("CurveTexture_bh0l4")
+scale_curve = SubResource("CurveTexture_q1flm")
+color = Color(1, 1, 0, 0.509804)
+color_ramp = SubResource("GradientTexture1D_c6r6q")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dwgvv"]
+transparency = 4
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="TorusMesh" id="TorusMesh_c4ng7"]
+material = SubResource("StandardMaterial3D_dwgvv")
+inner_radius = 0.7
+rings = 6
+ring_segments = 3
+
 [node name="EnemyMegaBullet" type="Node3D"]
 script = ExtResource("1_ufdes")
 max_lifetime_secs = 5.0
@@ -139,7 +179,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_xrj05")
 draw_pass_1 = SubResource("QuadMesh_dkhmu")
 
-[node name="ExplodeParticles" type="GPUParticles3D" parent="."]
+[node name="ExplosionParticles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -3.75)
 emitting = false
 one_shot = true
@@ -170,5 +210,12 @@ damage = 30
 
 [node name="HitboxCollider" type="CollisionShape3D" parent="ExplosionHitboxPivot/EnemyHitbox"]
 shape = SubResource("SphereShape3D_5r448")
+
+[node name="HexParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 2.08165e-12, 4)
+amount = 3
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_nocym")
+draw_pass_1 = SubResource("TorusMesh_c4ng7")
 
 [connection signal="body_entered" from="EnemyHitbox" to="." method="_on_body_entered" flags=18]
