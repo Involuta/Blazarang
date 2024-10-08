@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b2i61ldwbwc8o"]
+[gd_scene load_steps=22 format=3 uid="uid://b2i61ldwbwc8o"]
 
 [ext_resource type="PackedScene" uid="uid://cpx64anoc5p8u" path="res://glb_imports/BasicSwordBlade.glb" id="1_magb4"]
 [ext_resource type="Texture2D" uid="uid://crk6pkb7e5rwc" path="res://GPUTrail-main/defaults/texture.tres" id="4_oc1t2"]
@@ -187,8 +187,8 @@ void fragment(){
 }"
 
 [sub_resource type="Gradient" id="Gradient_w6t7k"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(1, 0.270588, 0, 1)
+offsets = PackedFloat32Array(0.00431034, 1)
+colors = PackedColorArray(1, 0.470588, 0, 1, 1, 0.431373, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_cjrym"]
 gradient = SubResource("Gradient_w6t7k")
@@ -343,8 +343,8 @@ _data = {
 }
 
 [sub_resource type="Curve" id="Curve_1gu83"]
-max_value = 5.0
-_data = [Vector2(2.08165e-12, 5), 0.0, 0.0, 0, 0, Vector2(1, 0.01), 0.0, 0.0, 0, 0]
+max_value = 3.0
+_data = [Vector2(2.08165e-12, 3), 0.0, 0.0, 0, 0, Vector2(1, 0.01), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_e5fyj"]
@@ -363,16 +363,18 @@ initial_velocity_max = 20.0
 scale_curve = SubResource("CurveTexture_e5fyj")
 color = Color(1.50196, 0.211765, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8jtxm"]
+[sub_resource type="Curve" id="Curve_7ffhd"]
+_data = [Vector2(0, 0), 0.0, 2.36625, 0, 0, Vector2(0.252444, 0.192954), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vssj3"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
-disable_receive_shadows = true
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_25dic"]
-material = SubResource("StandardMaterial3D_8jtxm")
-top_radius = 0.0
-bottom_radius = 0.02
-height = 0.4
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_hr7ra"]
+material = SubResource("StandardMaterial3D_vssj3")
+radius = 0.25
+curve = SubResource("Curve_7ffhd")
 
 [node name="XBlade" instance=ExtResource("1_magb4")]
 transform = Transform3D(0.15, -5.2318e-17, 7.62298e-24, 0, -6.55671e-09, -0.5, 5.2318e-17, 0.15, -2.18557e-08, 0, 0, 0)
@@ -405,10 +407,10 @@ libraries = {
 transform = Transform3D(1, -1.30915e-21, -1.58819e-22, 6.22547e-22, 1, -2.16794e-13, -4.97885e-24, 8.06457e-15, 1, 2.08165e-12, -7.06852e-10, -4.00486)
 cast_shadow = 0
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-amount = 69
+amount = 100
 lifetime = 0.7
 fixed_fps = 60
 interpolate = false
 fract_delta = false
 process_material = SubResource("ParticleProcessMaterial_0eofo")
-draw_pass_1 = SubResource("CylinderMesh_25dic")
+draw_pass_1 = SubResource("TubeTrailMesh_hr7ra")
