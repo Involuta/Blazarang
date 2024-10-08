@@ -387,6 +387,7 @@ mesh = SubResource("TorusMesh_a56kv")
 [node name="Lava" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -1, 2.08165e-12)
 custom_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
+emitting = false
 amount = 50
 lifetime = 6.0
 one_shot = true
