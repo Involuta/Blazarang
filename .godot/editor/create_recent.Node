@@ -1,3 +1,4 @@
+CPUParticles3D
 GPUParticles3D
 MeshInstance3D
 AnimationPlayer
@@ -29,4 +30,3 @@ SubViewportContainer
 OmniLight3D
 NavigationRegion3D
 AudioStreamPlayer3D
-AudioStreamPlayer
