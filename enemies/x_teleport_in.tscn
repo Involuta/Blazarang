@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://caj8t83sp4iw8"]
+[gd_scene load_steps=25 format=3 uid="uid://caj8t83sp4iw8"]
 
 [ext_resource type="Script" path="res://DisappearNode.gd" id="1_685k5"]
 [ext_resource type="PackedScene" uid="uid://xxarwwj6l614" path="res://trauma_causer.tscn" id="2_1sl6i"]
@@ -7,7 +7,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ret76"]
 transparency = 4
 shading_mode = 0
-albedo_color = Color(2, 0.26, 0, 1)
+albedo_color = Color(2, 0.623529, 0, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_0w676"]
 material = SubResource("StandardMaterial3D_ret76")
@@ -18,7 +18,7 @@ height = 0.05
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rpflb"]
 transparency = 4
 shading_mode = 0
-albedo_color = Color(2, 0.26, 0, 1)
+albedo_color = Color(2, 0.443137, 0, 1)
 
 [sub_resource type="TorusMesh" id="TorusMesh_s82p1"]
 material = SubResource("StandardMaterial3D_rpflb")
@@ -54,13 +54,6 @@ material = SubResource("StandardMaterial3D_li7ua")
 radius = 0.02
 height = 0.4
 
-[sub_resource type="Gradient" id="Gradient_6caw6"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(2, 0.27, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_32fsw"]
-gradient = SubResource("Gradient_6caw6")
-
 [sub_resource type="Curve" id="Curve_uw5im"]
 max_value = 2.0
 _data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -77,8 +70,6 @@ gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 20.0
 initial_velocity_max = 20.0
 scale_curve = SubResource("CurveTexture_q6gh0")
-color = Color(2, 0.27, 0, 1)
-color_ramp = SubResource("GradientTexture1D_32fsw")
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_k1fld"]
 material = SubResource("StandardMaterial3D_li7ua")
@@ -138,7 +129,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.266667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(1, 1, 1), Vector3(2, 1, 2)]
+"values": [Vector3(2, 1, 2), Vector3(1, 1, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -174,7 +165,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.266667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0.5, 0.1, 0.5), Vector3(5, 0.1, 5)]
+"values": [Vector3(3, 0.1, 3), Vector3(0.5, 0.1, 0.5)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -198,7 +189,7 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0, 0.266667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0.5, 50, 0.5), Vector3(3, 50, 3)]
+"values": [Vector3(3, 50, 3), Vector3(0.5, 50, 0.5)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
@@ -269,19 +260,19 @@ script = ExtResource("1_685k5")
 disappear_secs = 0.7
 
 [node name="TPLowerDisc" type="MeshInstance3D" parent="."]
-transform = Transform3D(5, 0, 0, 0, 0.1, 0, 0, 0, 5, 0, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.1, 0, 0, 0, 0.5, 0, 0, 0)
 transparency = 1.0
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_0w676")
 
 [node name="TPFallingRing" type="MeshInstance3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 transparency = 1.0
 cast_shadow = 0
 mesh = SubResource("TorusMesh_s82p1")
 
 [node name="TPColumn" type="MeshInstance3D" parent="."]
-transform = Transform3D(3, 0, 0, 0, 50, 0, 0, 0, 3, 2.08165e-12, 50, 2.08165e-12)
+transform = Transform3D(0.5, 0, 0, 0, 50, 0, 0, 0, 0.5, 2.08165e-12, 50, 2.08165e-12)
 transparency = 1.0
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_8frlv")

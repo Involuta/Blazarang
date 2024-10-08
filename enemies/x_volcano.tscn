@@ -1,16 +1,27 @@
-[gd_scene load_steps=26 format=3 uid="uid://bg2swy025xr60"]
+[gd_scene load_steps=34 format=3 uid="uid://bg2swy025xr60"]
 
 [ext_resource type="Script" path="res://enemies/x_volcano.gd" id="1_u0lj8"]
 [ext_resource type="Script" path="res://hitbox.gd" id="2_k3fxy"]
 [ext_resource type="PackedScene" uid="uid://xxarwwj6l614" path="res://trauma_causer.tscn" id="3_0n0u6"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c0wtu"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l8irc"]
 transparency = 4
 shading_mode = 0
-albedo_color = Color(1.5, 0.26, 0, 1)
+albedo_color = Color(2.00392, 1, 0.6, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_rqrur"]
-material = SubResource("StandardMaterial3D_c0wtu")
+material = SubResource("StandardMaterial3D_l8irc")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mbbcv"]
+transparency = 4
+shading_mode = 0
+albedo_color = Color(1.50196, 0.678431, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_mb8rq"]
+material = SubResource("StandardMaterial3D_mbbcv")
 top_radius = 1.0
 bottom_radius = 1.0
 height = 0.05
@@ -60,6 +71,16 @@ material = SubResource("StandardMaterial3D_crv3m")
 radius = 0.025
 height = 0.5
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3iat1"]
+transparency = 4
+shading_mode = 0
+albedo_color = Color(1, 0.360784, 0, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_a56kv"]
+material = SubResource("StandardMaterial3D_3iat1")
+inner_radius = 1.9
+outer_radius = 2.0
+
 [sub_resource type="Gradient" id="Gradient_rj4s4"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(1.3, 0.35, 0, 1)
@@ -91,6 +112,26 @@ use_particle_trails = true
 material = SubResource("StandardMaterial3D_go0uh")
 sections = 10
 curve = SubResource("Curve_gjuql")
+
+[sub_resource type="TorusMesh" id="TorusMesh_mep8u"]
+material = SubResource("StandardMaterial3D_3iat1")
+inner_radius = 1.5
+outer_radius = 2.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_jr1bc"]
+material = SubResource("StandardMaterial3D_3iat1")
+inner_radius = 1.6
+outer_radius = 2.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_475sj"]
+material = SubResource("StandardMaterial3D_3iat1")
+inner_radius = 1.7
+outer_radius = 2.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_leu2j"]
+material = SubResource("StandardMaterial3D_3iat1")
+inner_radius = 1.8
+outer_radius = 2.0
 
 [sub_resource type="Animation" id="Animation_v13yb"]
 resource_name = "erupt"
@@ -142,7 +183,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0.1, 0.1, 0.1), Vector3(15, 0.1, 15)]
+"values": [Vector3(4, 0.1, 4), Vector3(2, 0.1, 2)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -180,6 +221,66 @@ tracks/6/keys = {
 "update": 1,
 "values": [0, 4]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("FloorRing:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(10, 10, 10)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("FloorRing:mesh")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.0333334, 0.0666668, 0.1, 0.133334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [SubResource("TorusMesh_mep8u"), SubResource("TorusMesh_jr1bc"), SubResource("TorusMesh_475sj"), SubResource("TorusMesh_leu2j"), SubResource("TorusMesh_a56kv")]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("FloorRing:transparency")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.133334, 0.333334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("TPLowerDisc2:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(7, 0.1, 7), Vector3(4, 0.1, 4)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("TPLowerDisc2:transparency")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g88e0"]
 _data = {
@@ -202,12 +303,20 @@ script = ExtResource("1_u0lj8")
 disappear_secs = 6.0
 
 [node name="TPLowerDisc" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 2.08165e-12, -1, 2.08165e-12)
+transform = Transform3D(2, 0, 0, 0, 0.1, 0, 0, 0, 2, 2.08165e-12, -1, 2.08165e-12)
+transparency = 1.0
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_rqrur")
 
+[node name="TPLowerDisc2" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 0.1, 0, 0, 0, 4, 2.08165e-12, -1, 2.08165e-12)
+transparency = 1.0
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_mb8rq")
+
 [node name="Column" type="MeshInstance3D" parent="."]
-transform = Transform3D(3, 0, 0, 0, 50, 0, 0, 0, 3, 2.08165e-12, 50, 2.08165e-12)
+transform = Transform3D(0.1, 0, 0, 0, 50, 0, 0, 0, 0.1, 2.08165e-12, 49, 2.08165e-12)
+transparency = 1.0
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_tp1rv")
 
@@ -222,6 +331,11 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_v014i")
 draw_pass_1 = SubResource("CapsuleMesh_g5x34")
+
+[node name="FloorRing" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 2.08165e-12, -1, 2.08165e-12)
+transparency = 1.0
+mesh = SubResource("TorusMesh_a56kv")
 
 [node name="Lava" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -1, 2.08165e-12)
@@ -242,6 +356,7 @@ libraries = {
 }
 
 [node name="EnemyHitbox" type="Area3D" parent="."]
+process_mode = 4
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("2_k3fxy")
