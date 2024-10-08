@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bg2swy025xr60"]
+[gd_scene load_steps=37 format=3 uid="uid://bg2swy025xr60"]
 
 [ext_resource type="Script" path="res://enemies/x_volcano.gd" id="1_u0lj8"]
 [ext_resource type="Script" path="res://hitbox.gd" id="2_k3fxy"]
@@ -110,6 +110,11 @@ use_particle_trails = true
 material = SubResource("StandardMaterial3D_go0uh")
 sections = 10
 curve = SubResource("Curve_gjuql")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2sn6r"]
+transparency = 4
+shading_mode = 0
+albedo_color = Color(2, 0.74, 0.3, 1)
 
 [sub_resource type="TorusMesh" id="TorusMesh_mep8u"]
 material = SubResource("StandardMaterial3D_3iat1")
@@ -303,6 +308,18 @@ tracks/13/keys = {
 "update": 0,
 "values": [0.0, 0.0, 1.0]
 }
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("ExplosionBall:material_override")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 0.0833335),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_2sn6r"), null]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g88e0"]
 _data = {
@@ -322,7 +339,7 @@ radius = 36.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ctytl"]
 transparency = 4
 shading_mode = 0
-albedo_color = Color(1, 0.568627, 0, 1)
+albedo_color = Color(2, 0.57, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_icx4a"]
 material = SubResource("StandardMaterial3D_ctytl")
@@ -370,7 +387,6 @@ mesh = SubResource("TorusMesh_a56kv")
 [node name="Lava" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -1, 2.08165e-12)
 custom_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
-emitting = false
 amount = 50
 lifetime = 6.0
 one_shot = true
