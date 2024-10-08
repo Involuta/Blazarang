@@ -1,20 +1,25 @@
-[gd_scene load_steps=24 format=3 uid="uid://ccvnh6rsvebpi"]
+[gd_scene load_steps=25 format=3 uid="uid://ccvnh6rsvebpi"]
 
 [ext_resource type="Script" path="res://enemies/bullet.gd" id="1_ufdes"]
 [ext_resource type="Script" path="res://hitbox.gd" id="2_xoojo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qwteq"]
-radius = 1.5
 height = 7.5
+
+[sub_resource type="Curve" id="Curve_yqcmn"]
+_data = [Vector2(0, 0), 0.0, 10.7416, 0, 0, Vector2(0.153265, 1), 2.08165e-12, 2.08165e-12, 0, 0, Vector2(0.98962, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ussiw"]
 shading_mode = 0
 albedo_color = Color(1, 1, 0, 1)
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_6ktvd"]
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_54mcl"]
 material = SubResource("StandardMaterial3D_ussiw")
-radius = 1.5
-height = 7.5
+section_length = 1.5
+cap_top = false
+cap_bottom = false
+curve = SubResource("Curve_yqcmn")
 
 [sub_resource type="Curve" id="Curve_4u7nc"]
 _data = [Vector2(2.08165e-12, 1), 0.0, 0.0, 0, 0, Vector2(1, 2.08165e-12), 0.0, 0.0, 0, 0]
@@ -24,11 +29,8 @@ point_count = 2
 curve = SubResource("Curve_4u7nc")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xrj05"]
-emission_shape = 6
-emission_ring_axis = Vector3(0, 0, 1)
-emission_ring_height = 1.5
-emission_ring_radius = 1.5
-emission_ring_inner_radius = 0.0
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 5)
 direction = Vector3(2.08165e-12, 2.08165e-12, -1)
 spread = 0.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -83,7 +85,7 @@ colors = PackedColorArray(2, 1, 0, 0.780392, 1, 1, 0, 0)
 gradient = SubResource("Gradient_pxy1r")
 
 [sub_resource type="Curve" id="Curve_tk1bb"]
-_data = [Vector2(2.08165e-12, 2.08165e-12), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, 0.0, 1, 0]
+_data = [Vector2(0, 0.399416), 0.0, 0.600584, 0, 1, Vector2(1, 1), 0.600584, 0.0, 1, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_jw4rf"]
@@ -107,7 +109,7 @@ radius = 5.0
 height = 10.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5r448"]
-radius = 6.0
+radius = 4.0
 
 [node name="EnemyMegaBullet" type="Node3D"]
 script = ExtResource("1_ufdes")
@@ -127,10 +129,10 @@ shape = SubResource("CapsuleShape3D_qwteq")
 
 [node name="BulletMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 0, 0, 0)
-mesh = SubResource("CapsuleMesh_6ktvd")
+mesh = SubResource("TubeTrailMesh_54mcl")
 
 [node name="TailParticles" type="GPUParticles3D" parent="."]
-transform = Transform3D(-1, 3.48787e-16, -8.74228e-08, 3.48787e-16, 1, -3.48787e-16, 8.74228e-08, -3.48787e-16, -1, 2.08165e-12, 2.08165e-12, 4.39202)
+transform = Transform3D(-1, 3.48787e-16, -8.74228e-08, 3.48787e-16, 1, -3.48787e-16, 8.74228e-08, -3.48787e-16, -1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 amount = 5
 lifetime = 0.3
 local_coords = true
@@ -150,7 +152,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -4)
 cast_shadow = 0
 emitting = false
 amount = 1
-lifetime = 0.4
+lifetime = 0.25
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 60
@@ -158,6 +160,7 @@ process_material = SubResource("ParticleProcessMaterial_anu2t")
 draw_pass_1 = SubResource("SphereMesh_cik5v")
 
 [node name="ExplosionHitboxPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -4)
 
 [node name="EnemyHitbox" type="Area3D" parent="ExplosionHitboxPivot"]
 collision_layer = 8

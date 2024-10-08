@@ -34,7 +34,7 @@ func destroy_self():
 		explosion_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
 	await get_tree().create_timer(bullet_explosion_secs/4.0).timeout
 	if explosion_hitbox != null:
-		explosion_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
+		explosion_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	await get_tree().create_timer(bullet_explosion_secs).timeout
 	queue_free()
 

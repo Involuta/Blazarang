@@ -70,3 +70,4 @@ res://rang/rang_hit_particles.tscn
 res://rang/hit_effect_1.tscn
 res://rang/hit_effect1.tscn
 res://enemies/enemy_bullet.tscn
+res://enemies/bullet.gd
