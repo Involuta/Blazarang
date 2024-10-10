@@ -443,8 +443,8 @@ disable_receive_shadows = true
 [sub_resource type="SphereMesh" id="SphereMesh_l3jmq"]
 material = SubResource("StandardMaterial3D_5cvwu")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_py6mh"]
-radius = 1.0
+[sub_resource type="SphereShape3D" id="SphereShape3D_656hx"]
+radius = 3.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_j3f5l"]
 radius = 20.0
@@ -570,8 +570,6 @@ long_dist_right_arm_deployed_attack_chances = {
 }
 diagonal_dash_speed = 22.0
 triangle_axkick_dist = 2.25
-flying_facerain_piece_speed = 7.5
-flying_facerain_height = 20.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -753,7 +751,7 @@ damage = 20
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExplosionPivot/EnemyHitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-shape = SubResource("SphereShape3D_py6mh")
+shape = SubResource("SphereShape3D_656hx")
 
 [node name="TraumaCauser" parent="ExplosionPivot" instance=ExtResource("6_r6uan")]
 collision_layer = 0

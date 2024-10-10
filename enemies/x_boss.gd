@@ -45,6 +45,7 @@ signal no_attack_queued
 @export var attack_turn_speed := .15
 
 var aiming_at_target := true
+var dash_back_canceled := false
 @export var bullet_speed := 30.0
 @export var fast_bullet_speed := 50.0
 
@@ -82,8 +83,8 @@ var aiming_at_target := true
 @export var triangle_axkick_dist := 10.0
 @export var flyingkick_speed := 200.0
 @export var flyingkick_hit_frames := 10 # Put the # of frames that the hitbox is active in the animation here
-@export var flying_facerain_piece_speed := 5.0
-@export var flying_facerain_height := 30.0
+@export var flying_facerain_piece_speed := 7.5
+@export var flying_facerain_height := 20.0
 @export var triangle_volcano_ascend_speed := 100.0
 
 var param_path_base := "parameters/StateMachine/conditions/"
@@ -302,6 +303,7 @@ func dash():
 	velocity = dash_speed * -transform.basis.z
 
 func teleport():
+	dash_back_canceled = true
 	global_position.x = x_icon_pos.global_position.x
 	global_position.y = max(min_y_pos, x_icon_pos.global_position.y)
 	global_position.z = x_icon_pos.global_position.z
@@ -368,11 +370,14 @@ func flyingkick_rush():
 	velocity = Vector3.ZERO
 
 func dash_back():
+	dash_back_canceled = false
 	velocity = dash_back_speed * transform.basis.z
 	var dash_back_tween = get_tree().create_tween()
 	dash_back_tween.tween_method(dash_back_frame, 0.0, 1.0, .9).set_ease(Tween.EASE_IN)
 
 func dash_back_frame(lerp_val):
+	if dash_back_canceled:
+		return
 	var original_vel = dash_back_speed * velocity.normalized()
 	velocity = original_vel.lerp(Vector3.ZERO, lerp_val)
 
