@@ -75,6 +75,7 @@ var aiming_at_target := true
 @export var teleport_dist_from_target := 7.5
 @export var slipnslice_speed := 20.0
 @export var superman_fwd_speed := 20.0
+@export var superman_up_speed := 5.0
 @export var superman_down_speed := 7.0
 @export var triangle_arm_angle := 36.0
 @export var triangle_arm_dist := 90.0
@@ -226,6 +227,9 @@ func on_health_segment_lost(seg_num):
 		attack_queued = true
 		anim_tree.set(param_path_base + "FlyingFaceRain", true)
 
+func aim_at_target():
+	aiming_at_target = true
+
 func start_strafe():
 	behav_state = STRAFE_FOLLOW
 	strafing_left = rng.randf() < .5
@@ -299,6 +303,7 @@ func dash():
 
 func teleport():
 	global_position.x = x_icon_pos.global_position.x
+	global_position.y = max(min_y_pos, x_icon_pos.global_position.y)
 	global_position.z = x_icon_pos.global_position.z
 	var tp_inst = load("res://enemies/x_teleport_in.tscn").instantiate()
 	level.add_child.call_deferred(tp_inst)
@@ -317,7 +322,7 @@ func start_superman():
 	# Without this line, X's fall protection (which sets his y vel to 0 when his global y is below the min) would prevent his y vel from changing
 	global_position.y = min_y_pos + .01
 	velocity = .6 * superman_fwd_speed * -transform.basis.z
-	velocity.y = 5
+	velocity.y = superman_up_speed
 
 func superman_rush():
 	velocity = superman_fwd_speed * -transform.basis.z

@@ -75,3 +75,5 @@ res://levels/hub.tscn
 res://rang/rang_hit_particles.tscn
 res://rang/hit_effect1.tscn
 res://enemies/enemy_bullet.tscn
+res://enemies/x_boss.gd
+res://glb_inherited_scenes/x_boss_meshes.tscn
