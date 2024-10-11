@@ -77,3 +77,4 @@ res://rang/hit_effect1.tscn
 res://enemies/enemy_bullet.tscn
 res://enemies/x_boss.gd
 res://glb_inherited_scenes/x_boss_meshes.tscn
+res://levels/x_boss_level1.gd

@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://b2i61ldwbwc8o"]
+[gd_scene load_steps=23 format=3 uid="uid://b2i61ldwbwc8o"]
 
 [ext_resource type="PackedScene" uid="uid://cpx64anoc5p8u" path="res://glb_imports/BasicSwordBlade.glb" id="1_magb4"]
 [ext_resource type="Texture2D" uid="uid://crk6pkb7e5rwc" path="res://GPUTrail-main/defaults/texture.tres" id="4_oc1t2"]
 [ext_resource type="Texture2D" uid="uid://ct31fhxvcragr" path="res://GPUTrail-main/defaults/curve.tres" id="5_e2cg4"]
+[ext_resource type="PackedScene" uid="uid://cwui2mc0avv1y" path="res://glb_inherited_scenes/x_left_arm.tscn" id="5_er6wh"]
 [ext_resource type="Script" path="res://GPUTrail-main/GPUTrail3D.gd" id="6_bnh63"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qbx8q"]
@@ -414,3 +415,6 @@ interpolate = false
 fract_delta = false
 process_material = SubResource("ParticleProcessMaterial_0eofo")
 draw_pass_1 = SubResource("TubeTrailMesh_hr7ra")
+
+[node name="XLeftArm" parent="." index="4" instance=ExtResource("5_er6wh")]
+transform = Transform3D(0.667, -1.00714e-07, -2.00824e-08, -1.00714e-07, -0.667, 1.16272e-08, -1.00714e-07, -5.8311e-08, -0.133, 2.08165e-12, 1.22712e-07, 0.842185)

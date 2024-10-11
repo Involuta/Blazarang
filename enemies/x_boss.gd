@@ -91,6 +91,7 @@ var param_path_base := "parameters/StateMachine/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 var bullet := preload("res://enemies/enemy_mega_bullet.tscn")
+var transparent_mat := preload("res://textures/clear_tile.tres")
 var body_mat := preload("res://textures/x_boss_body.tres")
 var left_head_piece := preload("res://enemies/x_left_head_piece_rb.tscn")
 var right_head_piece := preload("res://enemies/x_right_head_piece_rb.tscn")
@@ -461,6 +462,9 @@ func recall_left_arm_frame(lerp_val):
 
 func hide_floating_left_arm():
 	left_arm.visible = false
+
+func hide_rig_left_arm():
+	x_meshes.set_surface_override_material(2, transparent_mat)
 
 func restore_rig_left_arm():
 	x_meshes.set_surface_override_material(2, body_mat)
