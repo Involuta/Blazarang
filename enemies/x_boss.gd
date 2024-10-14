@@ -37,7 +37,8 @@ signal no_attack_queued
 @export var aggro_distance := -1
 
 @export var follow_speed := 10.0
-@export var target_distance := 7.5
+@export var follow_stop_dist := 2.5
+@export var shortrange_attack_distance := 7.5
 
 @export var attack_duration_secs := 2.5
 
@@ -73,7 +74,7 @@ var dash_back_canceled := false
 @export var diagonal_dash_speed := 30.0
 @export var dash_speed := 40.0
 @export var dash_back_speed := 36.0
-@export var teleport_dist_from_target := 7.5
+@export var side_teleport_dist_from_target := 7.5
 @export var slipnslice_speed := 20.0
 @export var superman_fwd_speed := 20.0
 @export var superman_up_speed := 5.0
@@ -175,11 +176,15 @@ func wait():
 
 func follow():
 	lerp_look_at_position(target.global_position, follow_turn_speed)
+	if global_position.distance_to(target.global_position) < follow_stop_dist:
+		velocity.x = 0
+		velocity.z = 0
+		return
 	var move_dir = global_position.direction_to(target.global_position)
 	velocity.x = follow_speed / 2 * move_dir.x
 	velocity.z = follow_speed / 2 * move_dir.z
 	
-	if not attack_queued and behav_state != ATTACK and global_position.distance_to(target.global_position) < target_distance:
+	if not attack_queued and behav_state != ATTACK and global_position.distance_to(target.global_position) < shortrange_attack_distance:
 		queue_attack(DIST_TYPE.SHORT_DIST)
 	
 	# This code block ensures start_long_dist_attack is only called once
@@ -510,8 +515,8 @@ func x_icon_follow_targetside_pos():
 	var icon_vec := Vector2(dir_to_target.x, dir_to_target.z).orthogonal()
 	if x_icon_tp_to_left:
 		icon_vec *= -1
-	x_icon_pos.global_position.x = target.global_position.x + teleport_dist_from_target * icon_vec.x
-	x_icon_pos.global_position.z = target.global_position.z + teleport_dist_from_target * icon_vec.y
+	x_icon_pos.global_position.x = target.global_position.x + side_teleport_dist_from_target * icon_vec.x
+	x_icon_pos.global_position.z = target.global_position.z + side_teleport_dist_from_target * icon_vec.y
 
 func set_x_icon_flyingfacerain_pos():
 	x_icon_lerp_val = .05
