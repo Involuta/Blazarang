@@ -14,6 +14,7 @@ var strafing_left := false
 enum {
 	MY_POS,
 	TARGETSIDE_POS,
+	TARGETFRONT_POS,
 	FLYINGFACERAIN_POS,
 	STATIONARY
 }
@@ -75,6 +76,7 @@ var dash_back_canceled := false
 @export var dash_speed := 40.0
 @export var dash_back_speed := 36.0
 @export var side_teleport_dist_from_target := 7.5
+@export var front_teleport_dist_from_target := 1.5
 @export var slipnslice_speed := 20.0
 @export var superman_fwd_speed := 20.0
 @export var superman_up_speed := 5.0
@@ -149,6 +151,8 @@ func _physics_process(delta):
 			x_icon_follow_my_pos()
 		TARGETSIDE_POS:
 			x_icon_follow_targetside_pos()
+		TARGETFRONT_POS:
+			x_icon_follow_targetfront_pos()
 		STATIONARY:
 			pass
 	x_icon.global_position = lerp(x_icon.global_position, x_icon_pos.global_position, x_icon_lerp_val)
@@ -393,6 +397,15 @@ func right_arm_laser():
 	right_arm.visible = true
 	right_arm.fire_laser()
 
+func chain_slice_left_laser():
+	left_arm.rotation_degrees = (rotation_degrees.y + 180 + triangle_arm_angle) * Vector3.UP
+	left_arm.visible = true
+	var left_arm_tween = get_tree().create_tween()
+	left_arm_tween.tween_callback(left_arm.stop_firing_laser)
+	left_arm_tween.tween_property(left_arm, "global_position", triangle_arm_dist*left_arm.basis.z, .3).as_relative().from(global_position + Vector3(-.2, .2, 0))
+	left_arm_tween.tween_property(left_arm, "rotation_degrees", Vector3.UP * -2 * triangle_arm_angle, .1).as_relative()
+	left_arm_tween.tween_callback(left_arm.fire_laser)
+
 func start_flying_facerain():
 	# Without this line, X's fall protection (which sets his y vel to 0 when his global y is below the min) would prevent his y vel from changing
 	global_position = Vector3(0, min_y_pos + .01, -24)
@@ -502,6 +515,11 @@ func set_x_icon_targetside_pos():
 	x_icon_pos_state = TARGETSIDE_POS
 	x_icon_tp_to_left = rng.randf() < .5
 
+func set_x_icon_targetfront_pos():
+	# No need for lerp since it's not jumping directly to 1.0
+	x_icon_lerp_val = .2
+	x_icon_pos_state = TARGETFRONT_POS
+
 func set_x_icon_stationary():
 	x_icon_pos_state = STATIONARY
 
@@ -517,6 +535,11 @@ func x_icon_follow_targetside_pos():
 		icon_vec *= -1
 	x_icon_pos.global_position.x = target.global_position.x + side_teleport_dist_from_target * icon_vec.x
 	x_icon_pos.global_position.z = target.global_position.z + side_teleport_dist_from_target * icon_vec.y
+
+func x_icon_follow_targetfront_pos():
+	var dir_to_target := global_position.direction_to(target.global_position)
+	x_icon_pos.global_position.x = target.global_position.x - front_teleport_dist_from_target * dir_to_target.x
+	x_icon_pos.global_position.z = target.global_position.z - front_teleport_dist_from_target * dir_to_target.z
 
 func set_x_icon_flyingfacerain_pos():
 	x_icon_lerp_val = .05

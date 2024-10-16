@@ -77,3 +77,5 @@ res://rang/rang_hit_particles.tscn
 res://rang/hit_effect1.tscn
 res://enemies/enemy_bullet.tscn
 res://enemies/x_boss.gd
+res://enemies/enemy_anims/x_chainslice_left_laser.res
+res://globals.gd
