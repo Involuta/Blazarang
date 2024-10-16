@@ -34,6 +34,7 @@ albedo_color = Color(2, 0.91, 0.6, 1)
 material = SubResource("StandardMaterial3D_p5jhs")
 
 [sub_resource type="Gradient" id="Gradient_bek42"]
+offsets = PackedFloat32Array(0, 0.620112)
 colors = PackedColorArray(1, 1, 1, 1, 1, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_atgce"]
@@ -41,7 +42,7 @@ gradient = SubResource("Gradient_bek42")
 
 [sub_resource type="Curve" id="Curve_1ninf"]
 max_value = 2.0
-_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0.001), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_yxesq"]
@@ -51,7 +52,7 @@ curve = SubResource("Curve_1ninf")
 particle_flag_align_y = true
 direction = Vector3(1, 2.08165e-12, 2.08165e-12)
 spread = 180.0
-flatness = 1.0
+flatness = 0.69
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 30.0
 initial_velocity_max = 30.0
@@ -167,7 +168,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("FloorSparks:emitting")
+tracks/2/path = NodePath("Sparks:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -367,7 +368,7 @@ transparency = 1.0
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_tp1rv")
 
-[node name="FloorSparks" type="GPUParticles3D" parent="."]
+[node name="Sparks" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -1, 2.08165e-12)
 cast_shadow = 0
 custom_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
