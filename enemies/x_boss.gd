@@ -89,6 +89,8 @@ var dash_back_canceled := false
 @export var flying_facerain_piece_speed := 7.5
 @export var flying_facerain_height := 20.0
 @export var triangle_volcano_ascend_speed := 100.0
+@export var armbombs_dashback_lateral_dist := 40.0
+@export var armbombs_dashback_height := 20.0
 
 var param_path_base := "parameters/StateMachine/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -466,6 +468,12 @@ func triangle_volcano_descend():
 	var original_descend_pos := global_position
 	var des_tween = get_tree().create_tween()
 	des_tween.tween_property(self, "global_position", (original_descend_pos.y - min_y_pos) * Vector3.DOWN, .3).from(original_descend_pos).as_relative()
+
+func armbombs_dashback():
+	var dir_to_target := global_position.direction_to(target.global_position)
+	var original_pos := global_position
+	var dash_tween = get_tree().create_tween()
+	dash_tween.tween_property(self, "global_position", Vector3(-armbombs_dashback_lateral_dist * dir_to_target.x, armbombs_dashback_height, -armbombs_dashback_lateral_dist * dir_to_target.z), .1).from(original_pos).as_relative().set_ease(Tween.EASE_IN)
 
 func recall_left_arm():
 	if not left_arm_deployed():
