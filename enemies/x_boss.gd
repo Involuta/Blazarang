@@ -481,6 +481,23 @@ func armbombs_dashback():
 	var dash_tween = get_tree().create_tween()
 	dash_tween.tween_property(self, "global_position", Vector3(-armbombs_dashback_lateral_dist * dir_to_target.x, armbombs_dashback_height, -armbombs_dashback_lateral_dist * dir_to_target.z), .1).from(original_pos).as_relative().set_ease(Tween.EASE_IN)
 
+func armbombs_arm_recall():
+	left_arm.visible = true
+	right_arm.visible = true
+	left_arm.stop_firing_laser()
+	right_arm.stop_firing_laser()
+	var left_mvmt_tween = get_tree().create_tween()
+	var right_mvmt_tween = get_tree().create_tween()
+	var rotation_tween = get_tree().create_tween()
+	rotation_tween.set_parallel()
+	rotation_tween.tween_property(left_arm, "rotation_degrees", Vector3(-60, rotation_degrees.y, 0), .25)
+	rotation_tween.tween_property(right_arm, "rotation_degrees", Vector3(-60, rotation_degrees.y, 0), .25)
+	left_mvmt_tween.tween_property(left_arm, "global_position", global_position + 3 * Vector3.LEFT, .2)
+	right_mvmt_tween.tween_property(right_arm, "global_position", global_position + 3 * Vector3.RIGHT, .2)
+	left_mvmt_tween.tween_callback(hide_rig_left_arm)
+	right_mvmt_tween.tween_callback(hide_rig_right_arm)
+	
+
 func recall_left_arm():
 	if not left_arm_deployed():
 		return
@@ -514,6 +531,9 @@ func recall_right_arm_frame(lerp_val):
 
 func hide_floating_right_arm():
 	right_arm.visible = false
+
+func hide_rig_right_arm():
+	x_meshes.set_surface_override_material(5, transparent_mat)
 
 func restore_rig_right_arm():
 	x_meshes.set_surface_override_material(5, body_mat)
