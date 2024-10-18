@@ -175,6 +175,12 @@ func lerp_look_at_position(target_pos, turn_speed):
 	x_mesh_head.rotation.x = lerp_angle(x_mesh_head.rotation.x, head_target_rotation.x, 2 * turn_speed)
 	x_mesh_head.rotation.z = lerp_angle(x_mesh_head.rotation.z, head_target_rotation.z, 2 * turn_speed)
 
+func remove_gravity():
+	gravity = 0
+
+func restore_gravity():
+	gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+
 func wait():
 	move_and_slide()
 	if global_position.distance_to(target.global_position) < aggro_distance:
