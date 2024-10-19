@@ -492,11 +492,33 @@ func armbombs_arm_recall():
 	rotation_tween.set_parallel()
 	rotation_tween.tween_property(left_arm, "rotation_degrees", Vector3(-60, rotation_degrees.y, 0), .25)
 	rotation_tween.tween_property(right_arm, "rotation_degrees", Vector3(-60, rotation_degrees.y, 0), .25)
-	left_mvmt_tween.tween_property(left_arm, "global_position", global_position + 3 * Vector3.LEFT, .2)
-	right_mvmt_tween.tween_property(right_arm, "global_position", global_position + 3 * Vector3.RIGHT, .2)
+	left_mvmt_tween.tween_property(left_arm, "global_position", global_position, .2)
+	right_mvmt_tween.tween_property(right_arm, "global_position", global_position, .2)
 	left_mvmt_tween.tween_callback(hide_rig_left_arm)
 	right_mvmt_tween.tween_callback(hide_rig_right_arm)
+
+func armbombs_shoot_arms():
+	var mhp1 := $MeleeHitboxPivot/XBlade/XLeftArm
+	var mhp2 := $MeleeHitboxPivot2/XBlade/XLeftArm
+	left_arm.global_position = mhp1.global_position
+	right_arm.global_position = mhp2.global_position
+	mhp1.visible = false
+	mhp2.visible = false
 	
+	var dir_to_target := global_position.direction_to(target.global_position)
+	var rightside_vec := -Vector2(dir_to_target.x, dir_to_target.z).orthogonal() + Vector2(dir_to_target.x, dir_to_target.z)
+	var right_arm_landing_site = Vector3(0,min_y_pos-.5,0)
+	right_arm_landing_site.x = target.global_position.x + side_teleport_dist_from_target * rightside_vec.x
+	right_arm_landing_site.z = target.global_position.z + side_teleport_dist_from_target * rightside_vec.y
+	right_arm.look_at(right_arm_landing_site)
+	var left_arm_landing_site = Vector3(0,min_y_pos-.5,0)
+	var leftside_vec := Vector2(dir_to_target.x, dir_to_target.z).orthogonal() - Vector2(dir_to_target.x, dir_to_target.z)
+	left_arm_landing_site.x = target.global_position.x + side_teleport_dist_from_target * leftside_vec.x
+	left_arm_landing_site.z = target.global_position.z + side_teleport_dist_from_target * leftside_vec.y
+	left_arm.look_at(left_arm_landing_site)
+	var shoot_tween = get_tree().create_tween()
+	shoot_tween.tween_property(right_arm, "global_position", right_arm_landing_site, .125) # .125 = length of 8th note at 120 BPM
+	shoot_tween.tween_property(left_arm, "global_position", left_arm_landing_site, .125)
 
 func recall_left_arm():
 	if not left_arm_deployed():
