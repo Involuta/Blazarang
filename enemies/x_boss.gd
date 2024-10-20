@@ -506,7 +506,7 @@ func armbombs_shoot_arms():
 	mhp2.visible = false
 	
 	var dir_to_target := global_position.direction_to(target.global_position)
-	var rightside_vec := -Vector2(dir_to_target.x, dir_to_target.z).orthogonal() + Vector2(dir_to_target.x, dir_to_target.z)
+	var rightside_vec := -Vector2(dir_to_target.x, dir_to_target.z).orthogonal()
 	var right_arm_landing_site = Vector3(0,min_y_pos+.4,0)
 	right_arm_landing_site.x = target.global_position.x + side_teleport_dist_from_target * rightside_vec.x
 	right_arm_landing_site.z = target.global_position.z + side_teleport_dist_from_target * rightside_vec.y
@@ -524,6 +524,10 @@ func armbombs_shoot_arms():
 	scale_tween.tween_property(right_arm, "scale", Vector3(.64,.64,.64), .125)
 	shoot_tween.tween_property(left_arm, "global_position", left_arm_landing_site, .125)
 	scale_tween.tween_property(left_arm, "scale", Vector3(.64,.64,.64), .125)
+
+func armbombs_trigger():
+	left_arm.armbomb_trigger()
+	right_arm.armbomb_trigger()
 
 func recall_left_arm():
 	if not left_arm_deployed():

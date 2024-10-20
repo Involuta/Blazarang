@@ -82,3 +82,4 @@ res://globals.gd
 res://enemies/enemy_anims/x_armbombs.res
 res://enemies/enemy_anims/x_superkick.res
 res://glb_inherited_scenes/x_boss_meshes.tscn
+res://glb_inherited_scenes/x_arm.gd

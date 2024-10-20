@@ -1,7 +1,7 @@
+AnimationPlayer
 MeshInstance3D
 CPUParticles3D
 GPUParticles3D
-AnimationPlayer
 AnimatedSprite3D
 CollisionShape3D
 Hitbox

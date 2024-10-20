@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://t0xndtulje0m"]
+[gd_scene load_steps=22 format=3 uid="uid://t0xndtulje0m"]
 
 [ext_resource type="PackedScene" uid="uid://d8rrte1l683t" path="res://glb_imports/XRightArm.glb" id="1_4jxjw"]
 [ext_resource type="Script" path="res://glb_inherited_scenes/x_arm.gd" id="2_yypiv"]
@@ -40,6 +40,45 @@ material = SubResource("StandardMaterial3D_8jl2l")
 radius = 0.05
 height = 0.1
 
+[sub_resource type="Gradient" id="Gradient_paq71"]
+offsets = PackedFloat32Array(0.756983, 1)
+colors = PackedColorArray(1, 0.27, 0, 1, 2, 0.27, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0oy5v"]
+gradient = SubResource("Gradient_paq71")
+
+[sub_resource type="Curve" id="Curve_a1jrt"]
+_data = [Vector2(0.49783, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_e8q2t"]
+curve = SubResource("Curve_a1jrt")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1kg8l"]
+lifetime_randomness = 0.5
+particle_flag_align_y = true
+direction = Vector3(2.08165e-12, 2.08165e-12, -1)
+spread = 30.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+scale_curve = SubResource("CurveTexture_e8q2t")
+color = Color(1.5, 0.27, 0, 1)
+color_ramp = SubResource("GradientTexture1D_0oy5v")
+attractor_interaction_enabled = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vds8p"]
+transparency = 4
+shading_mode = 0
+vertex_color_use_as_albedo = true
+disable_receive_shadows = true
+billboard_keep_scale = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_2s6kd"]
+material = SubResource("StandardMaterial3D_vds8p")
+radius = 0.2
+height = 2.0
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_om0wc"]
 shading_mode = 0
 albedo_color = Color(2, 0.27, 0, 1)
@@ -73,13 +112,22 @@ lifetime = 0.3
 process_material = SubResource("ParticleProcessMaterial_3usda")
 draw_pass_1 = SubResource("SphereMesh_18n5t")
 
-[node name="LaserMesh" type="MeshInstance3D" parent="." index="2"]
+[node name="ArmBombParticles" type="GPUParticles3D" parent="." index="2"]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08098e-12, 2.08232e-12, 9.92621)
+cast_shadow = 0
+emitting = false
+amount = 20
+lifetime = 0.3
+process_material = SubResource("ParticleProcessMaterial_1kg8l")
+draw_pass_1 = SubResource("SphereMesh_2s6kd")
+
+[node name="LaserMesh" type="MeshInstance3D" parent="." index="3"]
 transform = Transform3D(1, -1.57852e-23, 1.5246e-23, 1.06845e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.39, 2.08165e-12, 508)
 visible = false
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_pxqac")
 
-[node name="EnemyHitbox" type="Area3D" parent="." index="3"]
+[node name="EnemyHitbox" type="Area3D" parent="." index="4"]
 process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 collision_layer = 8
