@@ -1,3 +1,4 @@
+res://textures
 res://enemies
 res://enemies/enemy_anims
 res://rang
@@ -5,7 +6,6 @@ res://
 res://glb_inherited_scenes
 res://cotu/cotu_anims
 res://level_maps
-res://textures
 res://levels
 res://audio/sfx
 res://ui

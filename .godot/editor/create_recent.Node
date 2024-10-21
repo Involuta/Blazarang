@@ -1,5 +1,5 @@
-AnimationPlayer
 MeshInstance3D
+AnimationPlayer
 CPUParticles3D
 GPUParticles3D
 AnimatedSprite3D

@@ -528,6 +528,7 @@ func armbombs_shoot_arms():
 
 func armbombs_trigger():
 	left_arm.armbomb_trigger()
+	await get_tree().create_timer(.125).timeout
 	right_arm.armbomb_trigger()
 
 func recall_left_arm():

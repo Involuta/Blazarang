@@ -4,6 +4,8 @@ extends Node3D
 @onready var laser_mesh := $LaserMesh
 @onready var hitbox := $EnemyHitbox
 @onready var arrow := $XArrow
+@onready var arrow_mat := preload("res://textures/x_arrow.tres")
+@onready var white_mat := preload("res://textures/small_solid_white.tres")
 
 func _ready():
 	stop_firing_laser()
@@ -20,5 +22,4 @@ func fire_laser():
 	hitbox.process_mode = Node.PROCESS_MODE_INHERIT
 
 func armbomb_trigger():
-	pass
-	arrow.visible = true
+	$AnimationPlayer.play("ArmBomb")

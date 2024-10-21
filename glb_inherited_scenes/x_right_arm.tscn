@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://t0xndtulje0m"]
+[gd_scene load_steps=29 format=3 uid="uid://t0xndtulje0m"]
 
 [ext_resource type="PackedScene" uid="uid://d8rrte1l683t" path="res://glb_imports/XRightArm.glb" id="1_4jxjw"]
 [ext_resource type="Script" path="res://glb_inherited_scenes/x_arm.gd" id="2_yypiv"]
@@ -58,11 +58,141 @@ size = Vector3(1.5, 1, 11)
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_qsg0n"]
 length = 500.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dmdqd"]
+transparency = 4
+shading_mode = 0
+albedo_color = Color(1.50196, 0.764706, 0, 0.941176)
+disable_receive_shadows = true
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1n3wq"]
 transparency = 4
 shading_mode = 0
-albedo_color = Color(1.50196, 0.329412, 0, 0.858824)
+albedo_color = Color(1.50196, 0.32549, 0, 0.784314)
 disable_receive_shadows = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m7oct"]
+shading_mode = 0
+albedo_color = Color(1.25, 1.25, 1.25, 1)
+
+[sub_resource type="Animation" id="Animation_x5mqd"]
+resource_name = "ArmBomb"
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("XArrow:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ExplosionSparks:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 0.583333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("XArrow/Cube:surface_material_override/0")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.416667, 0.483333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_1n3wq"), SubResource("StandardMaterial3D_dmdqd"), SubResource("StandardMaterial3D_m7oct")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("XArrow:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.416667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(25, 25, 25), Vector3(25, 25, 25), Vector3(50, 50, 400)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("XArrow:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.416667, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, -20), Vector3(2.08165e-12, 2.08165e-12, -720)]
+}
+
+[sub_resource type="Animation" id="Animation_i3cet"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("XArrow:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, -150)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xx87h"]
+_data = {
+"ArmBomb": SubResource("Animation_x5mqd"),
+"RESET": SubResource("Animation_i3cet")
+}
+
+[sub_resource type="Gradient" id="Gradient_jgfvk"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(2, 0.45098, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4mjo2"]
+gradient = SubResource("Gradient_jgfvk")
+
+[sub_resource type="Curve" id="Curve_ejgg4"]
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_jxg46"]
+curve = SubResource("Curve_ejgg4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e7rdm"]
+particle_flag_align_y = true
+direction = Vector3(2.08165e-12, 2.08165e-12, -1)
+spread = 25.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 750.0
+initial_velocity_max = 1000.0
+scale_curve = SubResource("CurveTexture_jxg46")
+color = Color(2, 0.45098, 0, 1)
+color_ramp = SubResource("GradientTexture1D_4mjo2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ijj6g"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+disable_receive_shadows = true
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fqnxe"]
+material = SubResource("StandardMaterial3D_ijj6g")
+radius = 0.1
 
 [node name="XRightArm" instance=ExtResource("1_4jxjw")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
@@ -103,9 +233,25 @@ transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-
 shape = SubResource("SeparationRayShape3D_qsg0n")
 
 [node name="XArrow" parent="." index="4" instance=ExtResource("4_xewll")]
-transform = Transform3D(25, -1.72295e-21, 5.62483e-21, 1.72295e-21, 25, -5.62483e-21, -5.62483e-21, 5.62483e-21, 25, 2.08165e-12, 2.08165e-12, -20)
+transform = Transform3D(25, -1.72295e-21, 5.62486e-21, 1.72295e-21, 25, -5.62486e-21, -5.62483e-21, 5.62483e-21, 25.0001, 2.08165e-12, 2.08165e-12, -150)
 
 [node name="Cube" parent="XArrow" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_1n3wq")
+surface_material_override/0 = SubResource("StandardMaterial3D_dmdqd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+libraries = {
+"": SubResource("AnimationLibrary_xx87h")
+}
+
+[node name="ExplosionSparks" type="GPUParticles3D" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 30)
+cast_shadow = 0
+custom_aabb = AABB(-500, -500, -500, 1000, 1000, 1000)
+emitting = false
+amount = 30
+lifetime = 0.5
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_e7rdm")
+draw_pass_1 = SubResource("CapsuleMesh_fqnxe")
 
 [editable path="XArrow"]
