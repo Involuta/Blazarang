@@ -3,7 +3,11 @@ extends Node3D
 @onready var firing_particles := $FiringParticles
 @onready var laser_mesh := $LaserMesh
 @onready var hitbox := $EnemyHitbox
-@onready var armbomb_particles := $ArmBombParticles
+@onready var arrow := $XArrow
+
+func _ready():
+	stop_firing_laser()
+	arrow.visible = false
 
 func stop_firing_laser():
 	firing_particles.emitting = false
@@ -16,4 +20,5 @@ func fire_laser():
 	hitbox.process_mode = Node.PROCESS_MODE_INHERIT
 
 func armbomb_trigger():
-	armbomb_particles.emitting = true
+	pass
+	arrow.visible = true

@@ -1,11 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://cwui2mc0avv1y"]
+[gd_scene load_steps=17 format=3 uid="uid://cwui2mc0avv1y"]
 
 [ext_resource type="PackedScene" uid="uid://dnn5utdpa54kx" path="res://glb_imports/XLeftArm.glb" id="1_dfm1y"]
 [ext_resource type="Script" path="res://glb_inherited_scenes/x_arm.gd" id="2_8tv8p"]
 [ext_resource type="Script" path="res://hitbox.gd" id="3_ltcgr"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wh8fp"]
-shading_mode = 0
+[ext_resource type="PackedScene" uid="uid://d2ugnhpgcxyi7" path="res://enemies/x_arrow.tscn" id="4_8r6gd"]
 
 [sub_resource type="Gradient" id="Gradient_bwoip"]
 offsets = PackedFloat32Array(0.7525, 1)
@@ -43,45 +41,6 @@ material = SubResource("StandardMaterial3D_kg27b")
 radius = 0.05
 height = 0.1
 
-[sub_resource type="Gradient" id="Gradient_qbyti"]
-offsets = PackedFloat32Array(0.7525, 1)
-colors = PackedColorArray(1, 0.27, 0, 1, 2, 0.27, 0, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_x78ux"]
-gradient = SubResource("Gradient_qbyti")
-
-[sub_resource type="Curve" id="Curve_f6ixg"]
-_data = [Vector2(0.49783, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_v3yic"]
-curve = SubResource("Curve_f6ixg")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_df350"]
-lifetime_randomness = 0.5
-particle_flag_align_y = true
-direction = Vector3(2.08165e-12, 2.08165e-12, -1)
-spread = 30.0
-gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-initial_velocity_min = 50.0
-initial_velocity_max = 50.0
-scale_curve = SubResource("CurveTexture_v3yic")
-color = Color(1.5, 0.27, 0, 1)
-color_ramp = SubResource("GradientTexture1D_x78ux")
-attractor_interaction_enabled = false
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vds8p"]
-transparency = 4
-shading_mode = 0
-vertex_color_use_as_albedo = true
-disable_receive_shadows = true
-billboard_keep_scale = true
-
-[sub_resource type="SphereMesh" id="SphereMesh_x7lom"]
-material = SubResource("StandardMaterial3D_vds8p")
-radius = 0.2
-height = 2.0
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_44iqp"]
 shading_mode = 0
 albedo_color = Color(2, 0.27, 0, 1)
@@ -99,13 +58,16 @@ size = Vector3(1.5, 1, 11)
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_1i3su"]
 length = 500.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p8a2h"]
+transparency = 4
+albedo_color = Color(1.50196, 0.321569, 0, 0.329412)
+
 [node name="XLeftArm" instance=ExtResource("1_dfm1y")]
 transform = Transform3D(0.1, -3.48787e-17, 3.48787e-17, 3.48787e-17, 0.1, -3.48787e-17, -3.48787e-17, 3.48787e-17, 0.1, 0, 0, 0)
 script = ExtResource("2_8tv8p")
 
 [node name="LeftArm" parent="." index="0"]
 transform = Transform3D(-4.67266e-08, -3.72846e-16, -1.06898, 3.72846e-16, 1.06898, -3.72846e-16, 1.06898, -3.72846e-16, -4.67266e-08, -2.187, 3.474, -4)
-surface_material_override/0 = SubResource("StandardMaterial3D_wh8fp")
 
 [node name="FiringParticles" type="GPUParticles3D" parent="." index="1"]
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 2.08165e-12, 8)
@@ -115,22 +77,13 @@ lifetime = 0.3
 process_material = SubResource("ParticleProcessMaterial_s2opr")
 draw_pass_1 = SubResource("SphereMesh_tfj6f")
 
-[node name="ArmBombParticles" type="GPUParticles3D" parent="." index="2"]
-transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08098e-12, 2.08232e-12, 9.92621)
-cast_shadow = 0
-emitting = false
-amount = 20
-lifetime = 0.3
-process_material = SubResource("ParticleProcessMaterial_df350")
-draw_pass_1 = SubResource("SphereMesh_x7lom")
-
-[node name="LaserMesh" type="MeshInstance3D" parent="." index="3"]
+[node name="LaserMesh" type="MeshInstance3D" parent="." index="2"]
 transform = Transform3D(1, -1.57852e-23, 1.5246e-23, 1.06845e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.39, 2.08165e-12, 508)
 visible = false
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_48vyg")
 
-[node name="EnemyHitbox" type="Area3D" parent="." index="4"]
+[node name="EnemyHitbox" type="Area3D" parent="." index="3"]
 process_mode = 4
 transform = Transform3D(1, -1.21652e-31, 1.06845e-23, 1.06845e-23, 1, -1.06845e-23, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 collision_layer = 8
@@ -145,3 +98,11 @@ shape = SubResource("BoxShape3D_ino44")
 [node name="LaserCollider" type="CollisionShape3D" parent="EnemyHitbox" index="1"]
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 0.513, 2.08165e-12, 8.5)
 shape = SubResource("SeparationRayShape3D_1i3su")
+
+[node name="XArrow" parent="." index="4" instance=ExtResource("4_8r6gd")]
+transform = Transform3D(25, -4.02341e-21, 8.15269e-21, 3.91753e-21, 25, -8.15269e-21, -8.78797e-21, 8.78797e-21, 25, 2.08165e-12, 2.08165e-12, -20)
+
+[node name="Cube" parent="XArrow" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_p8a2h")
+
+[editable path="XArrow"]
