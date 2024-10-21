@@ -58,9 +58,11 @@ size = Vector3(1.5, 1, 11)
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_qsg0n"]
 length = 500.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q3sna"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1n3wq"]
 transparency = 4
-albedo_color = Color(1.50196, 0.509804, 0, 0.329412)
+shading_mode = 0
+albedo_color = Color(1.50196, 0.329412, 0, 0.858824)
+disable_receive_shadows = true
 
 [node name="XRightArm" instance=ExtResource("1_4jxjw")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
@@ -104,6 +106,6 @@ shape = SubResource("SeparationRayShape3D_qsg0n")
 transform = Transform3D(25, -1.72295e-21, 5.62483e-21, 1.72295e-21, 25, -5.62483e-21, -5.62483e-21, 5.62483e-21, 25, 2.08165e-12, 2.08165e-12, -20)
 
 [node name="Cube" parent="XArrow" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_q3sna")
+surface_material_override/0 = SubResource("StandardMaterial3D_1n3wq")
 
 [editable path="XArrow"]
