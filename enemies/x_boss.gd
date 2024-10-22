@@ -72,6 +72,21 @@ var dash_back_canceled := false
 	"RightArmLaser" : .5
 }
 
+@export var phase2_long_dist_right_arm_deployed_attack_chances = {
+	"ChainSlice" : .3,
+	"Superman" : .25,
+	"SlipnSlice" : .25,
+	"Triangle" : .1,
+	"DiagonalDash" : .1
+}
+
+@export var phase2_long_dist_right_arm_not_deployed_attack_chances = {
+	"ChainSlice" : .25,
+	"Superman" : .25,
+	"Triangle" : .1,
+	"RightArmLaser" : .4
+}
+
 @export var diagonal_dash_speed := 30.0
 @export var dash_speed := 40.0
 @export var dash_back_speed := 36.0
@@ -92,6 +107,7 @@ var dash_back_canceled := false
 @export var armbombs_dashback_lateral_dist := 40.0
 @export var armbombs_dashback_height := 20.0
 
+var phase2 := false
 var param_path_base := "parameters/StateMachine/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
@@ -235,13 +251,22 @@ func right_arm_deployed():
 
 func queue_attack(dist_type):
 	attack_queued = true
-	match(dist_type):
-		DIST_TYPE.SHORT_DIST:
-			anim_tree.set(choose_attack(short_dist_attack_chances), true)
-		DIST_TYPE.LONG_DIST_RIGHT_ARM_DEPLOYED:
-			anim_tree.set(choose_attack(long_dist_right_arm_deployed_attack_chances), true)
-		DIST_TYPE.LONG_DIST_RIGHT_ARM_NOT_DEPLOYED:
-			anim_tree.set(choose_attack(long_dist_right_arm_not_deployed_attack_chances), true)
+	if phase2:
+		match(dist_type):
+			DIST_TYPE.SHORT_DIST:
+				anim_tree.set(choose_attack(short_dist_attack_chances), true)
+			DIST_TYPE.LONG_DIST_RIGHT_ARM_DEPLOYED:
+				anim_tree.set(choose_attack(phase2_long_dist_right_arm_deployed_attack_chances), true)
+			DIST_TYPE.LONG_DIST_RIGHT_ARM_NOT_DEPLOYED:
+				anim_tree.set(choose_attack(phase2_long_dist_right_arm_not_deployed_attack_chances), true)
+	else:
+		match(dist_type):
+			DIST_TYPE.SHORT_DIST:
+				anim_tree.set(choose_attack(short_dist_attack_chances), true)
+			DIST_TYPE.LONG_DIST_RIGHT_ARM_DEPLOYED:
+				anim_tree.set(choose_attack(long_dist_right_arm_deployed_attack_chances), true)
+			DIST_TYPE.LONG_DIST_RIGHT_ARM_NOT_DEPLOYED:
+				anim_tree.set(choose_attack(long_dist_right_arm_not_deployed_attack_chances), true)
 
 func on_health_segment_lost(seg_num):
 	if seg_num == 3:
@@ -249,6 +274,8 @@ func on_health_segment_lost(seg_num):
 			await no_attack_queued
 		attack_queued = true
 		anim_tree.set(param_path_base + "FlyingFaceRain", true)
+	if seg_num == 2:
+		phase2 = true
 
 func aim_at_target():
 	aiming_at_target = true
@@ -266,12 +293,20 @@ func start_attack():
 func end_attack():
 	attack_queued = false
 	no_attack_queued.emit()
-	for attack in short_dist_attack_chances.keys():
-		anim_tree.set(param_path_base + attack, false)
-	for attack in long_dist_right_arm_deployed_attack_chances.keys():
-		anim_tree.set(param_path_base + attack, false)
-	for attack in long_dist_right_arm_not_deployed_attack_chances.keys():
-		anim_tree.set(param_path_base + attack, false)
+	if phase2:
+		for attack in short_dist_attack_chances.keys():
+			anim_tree.set(param_path_base + attack, false)
+		for attack in phase2_long_dist_right_arm_deployed_attack_chances.keys():
+			anim_tree.set(param_path_base + attack, false)
+		for attack in phase2_long_dist_right_arm_not_deployed_attack_chances.keys():
+			anim_tree.set(param_path_base + attack, false)
+	else:
+		for attack in short_dist_attack_chances.keys():
+			anim_tree.set(param_path_base + attack, false)
+		for attack in long_dist_right_arm_deployed_attack_chances.keys():
+			anim_tree.set(param_path_base + attack, false)
+		for attack in long_dist_right_arm_not_deployed_attack_chances.keys():
+			anim_tree.set(param_path_base + attack, false)
 	long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	behav_state = FOLLOW
 
@@ -527,9 +562,9 @@ func armbombs_shoot_arms():
 	#scale_tween.tween_property(left_arm, "scale", Vector3(.64,.64,.64), .125)
 
 func armbombs_trigger():
-	left_arm.armbomb_trigger()
-	await get_tree().create_timer(.125).timeout
 	right_arm.armbomb_trigger()
+	await get_tree().create_timer(.125).timeout
+	left_arm.armbomb_trigger()
 
 func recall_left_arm():
 	if not left_arm_deployed():
