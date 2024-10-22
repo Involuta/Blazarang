@@ -72,6 +72,14 @@ var dash_back_canceled := false
 	"RightArmLaser" : .5
 }
 
+@export var phase2_short_dist_attack_chances = {
+	"ChainSlice" : .2,
+	"Superman" : .15,
+	"ArmBombs" : .3,
+	"RightArmSlice" : .2,
+	"Triangle" : .15
+}
+
 @export var phase2_long_dist_right_arm_deployed_attack_chances = {
 	"ChainSlice" : .3,
 	"Superman" : .25,
@@ -208,10 +216,6 @@ func wait():
 
 func follow():
 	lerp_look_at_position(target.global_position, follow_turn_speed)
-	if global_position.distance_to(target.global_position) < follow_stop_dist:
-		velocity.x = 0
-		velocity.z = 0
-		return
 	var move_dir = global_position.direction_to(target.global_position)
 	velocity.x = follow_speed / 2 * move_dir.x
 	velocity.z = follow_speed / 2 * move_dir.z
@@ -254,7 +258,7 @@ func queue_attack(dist_type):
 	if phase2:
 		match(dist_type):
 			DIST_TYPE.SHORT_DIST:
-				anim_tree.set(choose_attack(short_dist_attack_chances), true)
+				anim_tree.set(choose_attack(phase2_short_dist_attack_chances), true)
 			DIST_TYPE.LONG_DIST_RIGHT_ARM_DEPLOYED:
 				anim_tree.set(choose_attack(phase2_long_dist_right_arm_deployed_attack_chances), true)
 			DIST_TYPE.LONG_DIST_RIGHT_ARM_NOT_DEPLOYED:
@@ -294,7 +298,7 @@ func end_attack():
 	attack_queued = false
 	no_attack_queued.emit()
 	if phase2:
-		for attack in short_dist_attack_chances.keys():
+		for attack in phase2_short_dist_attack_chances.keys():
 			anim_tree.set(param_path_base + attack, false)
 		for attack in phase2_long_dist_right_arm_deployed_attack_chances.keys():
 			anim_tree.set(param_path_base + attack, false)
@@ -313,13 +317,21 @@ func end_attack():
 func end_attack_instant_followup():
 	attack_queued = false
 	no_attack_queued.emit()
-	for attack in short_dist_attack_chances.keys():
-		anim_tree.set(param_path_base + attack, false)
-	for attack in long_dist_right_arm_deployed_attack_chances.keys():
-		anim_tree.set(param_path_base + attack, false)
-	for attack in long_dist_right_arm_not_deployed_attack_chances.keys():
-		anim_tree.set(param_path_base + attack, false)
-	long_dist_wait_remaining = rng.randf_range(0.1, min_long_dist_wait)
+	if phase2:
+		for attack in phase2_short_dist_attack_chances.keys():
+			anim_tree.set(param_path_base + attack, false)
+		for attack in phase2_long_dist_right_arm_deployed_attack_chances.keys():
+			anim_tree.set(param_path_base + attack, false)
+		for attack in phase2_long_dist_right_arm_not_deployed_attack_chances.keys():
+			anim_tree.set(param_path_base + attack, false)
+	else:
+		for attack in short_dist_attack_chances.keys():
+			anim_tree.set(param_path_base + attack, false)
+		for attack in long_dist_right_arm_deployed_attack_chances.keys():
+			anim_tree.set(param_path_base + attack, false)
+		for attack in long_dist_right_arm_not_deployed_attack_chances.keys():
+			anim_tree.set(param_path_base + attack, false)
+	long_dist_wait_remaining = rng.randf_range(.07, min_long_dist_wait)
 	behav_state = FOLLOW
 
 func end_flying_facerain():
