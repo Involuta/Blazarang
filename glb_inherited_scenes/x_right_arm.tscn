@@ -58,11 +58,9 @@ size = Vector3(1.5, 1, 11)
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_qsg0n"]
 length = 500.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dmdqd"]
-transparency = 4
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0p17"]
 shading_mode = 0
-albedo_color = Color(1.50196, 0.764706, 0, 0.941176)
-disable_receive_shadows = true
+albedo_color = Color(1.25098, 1, 0.176471, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1n3wq"]
 transparency = 4
@@ -70,9 +68,11 @@ shading_mode = 0
 albedo_color = Color(1.50196, 0.32549, 0, 0.784314)
 disable_receive_shadows = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m7oct"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dmdqd"]
+transparency = 4
 shading_mode = 0
-albedo_color = Color(1.25, 1.25, 1.25, 1)
+albedo_color = Color(1.50196, 0.764706, 0, 0.941176)
+disable_receive_shadows = true
 
 [sub_resource type="Animation" id="Animation_x5mqd"]
 resource_name = "ArmBomb"
@@ -111,7 +111,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.416667, 0.483333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [SubResource("StandardMaterial3D_1n3wq"), SubResource("StandardMaterial3D_dmdqd"), SubResource("StandardMaterial3D_m7oct")]
+"values": [SubResource("StandardMaterial3D_1n3wq"), SubResource("StandardMaterial3D_dmdqd"), SubResource("StandardMaterial3D_a0p17")]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -123,7 +123,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.416667, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(25, 25, 25), Vector3(25, 25, 25), Vector3(50, 50, 400)]
+"values": [Vector3(25, 25, 25), Vector3(25, 25, 25), Vector3(100, 100, 400)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -233,10 +233,10 @@ transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-
 shape = SubResource("SeparationRayShape3D_qsg0n")
 
 [node name="XArrow" parent="." index="4" instance=ExtResource("4_xewll")]
-transform = Transform3D(25, -1.72295e-21, 5.62486e-21, 1.72295e-21, 25, -5.62486e-21, -5.62483e-21, 5.62483e-21, 25.0001, 2.08165e-12, 2.08165e-12, -150)
+transform = Transform3D(45, -3.10131e-21, 7.31228e-20, 3.10131e-21, 45, -7.31228e-20, -1.01247e-20, 1.01247e-20, 325, 2.08165e-12, 2.08165e-12, -150)
 
 [node name="Cube" parent="XArrow" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_dmdqd")
+surface_material_override/0 = SubResource("StandardMaterial3D_a0p17")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
 libraries = {
