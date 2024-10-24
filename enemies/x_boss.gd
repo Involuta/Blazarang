@@ -73,17 +73,16 @@ var dash_back_canceled := false
 }
 
 @export var phase2_short_dist_attack_chances = {
-	"ChainSlice" : .2,
-	"Superman" : .15,
-	"ArmBombs" : .3,
-	"RightArmSlice" : .2,
-	"Triangle" : .15
+	"ChainSlice" : .3,
+	"Superman" : .2,
+	"RightArmSlice" : .3,
+	"Triangle" : .2
 }
 
 @export var phase2_long_dist_right_arm_deployed_attack_chances = {
-	"ChainSlice" : .3,
+	"ArmBombs" : .25,
 	"Superman" : .25,
-	"SlipnSlice" : .25,
+	"ChainSlice" : .3,
 	"Triangle" : .1,
 	"DiagonalDash" : .1
 }
@@ -400,20 +399,23 @@ func superman_rush():
 	velocity.y = -superman_down_speed
 
 func triangle_recall_arms():
-	left_arm.stop_firing_laser()
-	right_arm.stop_firing_laser()
-	var left_mvmt_tween = get_tree().create_tween()
-	var right_mvmt_tween = get_tree().create_tween()
 	var rotation_tween = get_tree().create_tween()
 	rotation_tween.set_parallel()
-	rotation_tween.tween_property(left_arm, "rotation_degrees", Vector3(63, -25, -164), .2)
-	rotation_tween.tween_property(right_arm, "rotation_degrees", Vector3(63, 25, -164), .2)
-	left_mvmt_tween.tween_property(left_arm, "global_position", global_position + Vector3(-.351, .436, -.252), .2)
-	right_mvmt_tween.tween_property(right_arm, "global_position", global_position + Vector3(.351, .436, -.252), .2)
-	left_mvmt_tween.tween_callback(hide_floating_left_arm)
-	left_mvmt_tween.tween_callback(restore_rig_left_arm)
-	right_mvmt_tween.tween_callback(hide_floating_right_arm)
-	right_mvmt_tween.tween_callback(restore_rig_right_arm)
+	if left_arm_deployed():
+		left_arm.stop_firing_laser()
+		var left_mvmt_tween = get_tree().create_tween()
+		rotation_tween.tween_property(left_arm, "rotation_degrees", Vector3(63, -25, -164), .2)
+		left_mvmt_tween.tween_property(left_arm, "global_position", global_position + Vector3(-.351, .436, -.252), .2)
+		left_mvmt_tween.tween_callback(hide_floating_left_arm)
+		left_mvmt_tween.tween_callback(restore_rig_left_arm)
+	
+	if right_arm_deployed():
+		right_arm.stop_firing_laser()
+		var right_mvmt_tween = get_tree().create_tween()
+		rotation_tween.tween_property(right_arm, "rotation_degrees", Vector3(63, 25, -164), .2)
+		right_mvmt_tween.tween_property(right_arm, "global_position", global_position + Vector3(.351, .436, -.252), .2)
+		right_mvmt_tween.tween_callback(hide_floating_right_arm)
+		right_mvmt_tween.tween_callback(restore_rig_right_arm)
 
 func triangle_shoot_arms():
 	left_arm.rotation_degrees = (rotation_degrees.y + 180 + triangle_arm_angle) * Vector3.UP
@@ -530,23 +532,23 @@ func armbombs_dashback():
 	var dir_to_target := global_position.direction_to(target.global_position)
 	var original_pos := global_position
 	var dash_tween = get_tree().create_tween()
-	dash_tween.tween_property(self, "global_position", Vector3(-armbombs_dashback_lateral_dist * dir_to_target.x, armbombs_dashback_height, -armbombs_dashback_lateral_dist * dir_to_target.z), .1).from(original_pos).as_relative().set_ease(Tween.EASE_IN)
+	dash_tween.tween_property(self, "global_position", Vector3(-armbombs_dashback_lateral_dist * dir_to_target.x, armbombs_dashback_height, -armbombs_dashback_lateral_dist * dir_to_target.z), .3).as_relative().set_ease(Tween.EASE_IN)
 
 func armbombs_arm_recall():
-	left_arm.visible = true
-	right_arm.visible = true
-	left_arm.stop_firing_laser()
-	right_arm.stop_firing_laser()
-	var left_mvmt_tween = get_tree().create_tween()
-	var right_mvmt_tween = get_tree().create_tween()
 	var rotation_tween = get_tree().create_tween()
 	rotation_tween.set_parallel()
-	rotation_tween.tween_property(left_arm, "rotation_degrees", Vector3(-75.5, 171.6-rotation_degrees.y, 178.6), .25)
-	rotation_tween.tween_property(right_arm, "rotation_degrees", Vector3(-75.5, -171.6-rotation_degrees.y, 178.6), .25)
-	left_mvmt_tween.tween_property(left_arm, "global_position", global_position, .2)
-	right_mvmt_tween.tween_property(right_arm, "global_position", global_position, .2)
-	left_mvmt_tween.tween_callback(hide_floating_left_arm)
-	right_mvmt_tween.tween_callback(hide_floating_right_arm)
+	if left_arm_deployed():
+		left_arm.stop_firing_laser()
+		var left_mvmt_tween = get_tree().create_tween()
+		rotation_tween.tween_property(left_arm, "rotation_degrees", Vector3(-75.5, 171.6-rotation_degrees.y, 178.6), .25)
+		left_mvmt_tween.tween_property(left_arm, "global_position", global_position, .2)
+		left_mvmt_tween.tween_callback(hide_floating_left_arm)
+	if right_arm_deployed():
+		right_arm.stop_firing_laser()
+		var right_mvmt_tween = get_tree().create_tween()
+		rotation_tween.tween_property(right_arm, "rotation_degrees", Vector3(-75.5, -171.6-rotation_degrees.y, 178.6), .25)
+		right_mvmt_tween.tween_property(right_arm, "global_position", global_position, .2)
+		right_mvmt_tween.tween_callback(hide_floating_right_arm)
 
 func armbombs_shoot_arms():
 	mhp1.visible = false

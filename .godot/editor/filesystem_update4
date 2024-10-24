@@ -58,3 +58,5 @@ res://enemies/enemy_bullet.tscn
 res://glb_inherited_scenes/x_boss_meshes.tscn
 res://enemies/x_arrow.tscn
 res://glb_inherited_scenes/x_left_arm.tscn
+res://enemies/x_boss.gd
+res://enemies/enemy_anims/x_armbombs.res
