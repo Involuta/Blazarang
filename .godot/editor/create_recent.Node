@@ -1,14 +1,14 @@
+CollisionShape3D
+Area3D
 MeshInstance3D
 AnimationPlayer
 CPUParticles3D
 GPUParticles3D
 AnimatedSprite3D
-CollisionShape3D
 Hitbox
 Node3D
 RigidBody3D
 GPUTrail3D
-Area3D
 Camera3D
 Node2D
 GPUParticles2D
