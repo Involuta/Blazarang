@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://t0xndtulje0m"]
+[gd_scene load_steps=30 format=3 uid="uid://t0xndtulje0m"]
 
 [ext_resource type="PackedScene" uid="uid://d8rrte1l683t" path="res://glb_imports/XRightArm.glb" id="1_4jxjw"]
 [ext_resource type="Script" path="res://glb_inherited_scenes/x_arm.gd" id="2_yypiv"]
@@ -62,6 +62,44 @@ length = 500.0
 shading_mode = 0
 albedo_color = Color(1.25098, 1, 0.176471, 1)
 
+[sub_resource type="Gradient" id="Gradient_x51qw"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(2, 0.45098, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1mkfh"]
+gradient = SubResource("Gradient_x51qw")
+
+[sub_resource type="Curve" id="Curve_jmxvu"]
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_u3t53"]
+curve = SubResource("Curve_jmxvu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_laaq7"]
+particle_flag_align_y = true
+direction = Vector3(2.08165e-12, 2.08165e-12, -1)
+spread = 25.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 750.0
+initial_velocity_max = 1000.0
+scale_curve = SubResource("CurveTexture_u3t53")
+color = Color(2, 0.45098, 0, 1)
+color_ramp = SubResource("GradientTexture1D_1mkfh")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5xjxn"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+disable_receive_shadows = true
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_87igs"]
+material = SubResource("StandardMaterial3D_5xjxn")
+radius = 0.1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7s2ed"]
+radius = 4.0
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1n3wq"]
 transparency = 4
 shading_mode = 0
@@ -92,59 +130,71 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ExplosionSparks:emitting")
+tracks/1/path = NodePath("XArrow/Cube:surface_material_override/0")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.516668, 0.600001),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("XArrow/Cube:surface_material_override/0")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.416667, 0.483333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [SubResource("StandardMaterial3D_1n3wq"), SubResource("StandardMaterial3D_dmdqd"), SubResource("StandardMaterial3D_a0p17")]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("XArrow:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("XArrow:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.416667, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(25, 25, 25), Vector3(25, 25, 25), Vector3(100, 100, 400)]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("XArrow:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("XArrow:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0.416667, 0.500001),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(2.08165e-12, 2.08165e-12, -20), Vector3(2.08165e-12, 2.08165e-12, -520)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("XArrow/EnemyHitbox:process_mode")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.500001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 4]
+}
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("XArrow/EnemyHitbox:process_mode")
+tracks/5/path = NodePath("ExplosionPivot/ExplosionSparks:emitting")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.500001),
+"times": PackedFloat32Array(0.516668, 0.600001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ExplosionPivot/EnemyHitbox:process_mode")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.516668, 0.600001),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 4]
@@ -170,41 +220,6 @@ _data = {
 "ArmBomb": SubResource("Animation_x5mqd"),
 "RESET": SubResource("Animation_i3cet")
 }
-
-[sub_resource type="Gradient" id="Gradient_jgfvk"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(2, 0.45098, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_4mjo2"]
-gradient = SubResource("Gradient_jgfvk")
-
-[sub_resource type="Curve" id="Curve_ejgg4"]
-max_value = 2.0
-_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_jxg46"]
-curve = SubResource("Curve_ejgg4")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e7rdm"]
-particle_flag_align_y = true
-direction = Vector3(2.08165e-12, 2.08165e-12, -1)
-spread = 25.0
-gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-initial_velocity_min = 750.0
-initial_velocity_max = 1000.0
-scale_curve = SubResource("CurveTexture_jxg46")
-color = Color(2, 0.45098, 0, 1)
-color_ramp = SubResource("GradientTexture1D_4mjo2")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ijj6g"]
-shading_mode = 0
-vertex_color_use_as_albedo = true
-disable_receive_shadows = true
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_fqnxe"]
-material = SubResource("StandardMaterial3D_ijj6g")
-radius = 0.1
 
 [node name="XRightArm" instance=ExtResource("1_4jxjw")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
@@ -251,20 +266,33 @@ visible = false
 [node name="Cube" parent="XArrow" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_a0p17")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
-libraries = {
-"": SubResource("AnimationLibrary_xx87h")
-}
+[node name="ExplosionPivot" type="Node3D" parent="." index="5"]
+transform = Transform3D(10, 3.48787e-15, -3.48787e-15, -3.48787e-15, 10, 3.48787e-15, 3.48787e-15, -3.48787e-15, 10, 0, 0, 0)
 
-[node name="ExplosionSparks" type="GPUParticles3D" parent="." index="6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 30)
+[node name="ExplosionSparks" type="GPUParticles3D" parent="ExplosionPivot" index="0"]
+transform = Transform3D(0.1, -3.48787e-17, 3.48787e-17, 3.48787e-17, 0.1, -3.48787e-17, -3.48787e-17, 3.48787e-17, 0.1, 2.09211e-13, 2.07119e-13, 3)
 cast_shadow = 0
 custom_aabb = AABB(-500, -500, -500, 1000, 1000, 1000)
 emitting = false
 amount = 30
 lifetime = 0.5
 explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_e7rdm")
-draw_pass_1 = SubResource("CapsuleMesh_fqnxe")
+process_material = SubResource("ParticleProcessMaterial_laaq7")
+draw_pass_1 = SubResource("CapsuleMesh_87igs")
+
+[node name="EnemyHitbox" type="Area3D" parent="ExplosionPivot" index="1"]
+process_mode = 4
+collision_layer = 8
+collision_mask = 11
+script = ExtResource("3_yk8jj")
+damage = 50
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExplosionPivot/EnemyHitbox" index="0"]
+shape = SubResource("SphereShape3D_7s2ed")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+libraries = {
+"": SubResource("AnimationLibrary_xx87h")
+}
 
 [editable path="XArrow"]

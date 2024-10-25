@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cwui2mc0avv1y"]
+[gd_scene load_steps=29 format=3 uid="uid://cwui2mc0avv1y"]
 
 [ext_resource type="PackedScene" uid="uid://dnn5utdpa54kx" path="res://glb_imports/XLeftArm.glb" id="1_dfm1y"]
 [ext_resource type="Script" path="res://glb_inherited_scenes/x_arm.gd" id="2_8tv8p"]
@@ -63,6 +63,44 @@ length = 500.0
 shading_mode = 0
 albedo_color = Color(1.25098, 1, 0.176471, 1)
 
+[sub_resource type="Gradient" id="Gradient_lobk3"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(2, 0.45098, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wrdr4"]
+gradient = SubResource("Gradient_lobk3")
+
+[sub_resource type="Curve" id="Curve_qswyy"]
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mabc5"]
+curve = SubResource("Curve_qswyy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bptyc"]
+particle_flag_align_y = true
+direction = Vector3(2.08165e-12, 2.08165e-12, -1)
+spread = 25.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 750.0
+initial_velocity_max = 1000.0
+scale_curve = SubResource("CurveTexture_mabc5")
+color = Color(2, 0.45098, 0, 1)
+color_ramp = SubResource("GradientTexture1D_wrdr4")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_26f12"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+disable_receive_shadows = true
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_aw8ds"]
+material = SubResource("StandardMaterial3D_26f12")
+radius = 0.1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_c7dd7"]
+radius = 4.0
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hx2jh"]
 transparency = 4
 shading_mode = 0
@@ -87,7 +125,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ExplosionSparks:emitting")
+tracks/1/path = NodePath("ExplosionPivot/ExplosionSparks:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -144,46 +182,23 @@ tracks/5/keys = {
 "update": 1,
 "values": [0, 4]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ExplosionPivot/EnemyHitbox:process_mode")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.516667, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 4]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ne6pa"]
 _data = {
 "ArmBomb": SubResource("Animation_arx4y")
 }
-
-[sub_resource type="Gradient" id="Gradient_lobk3"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(2, 0.45098, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_1mkfh"]
-gradient = SubResource("Gradient_lobk3")
-
-[sub_resource type="Curve" id="Curve_qswyy"]
-max_value = 2.0
-_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_u3t53"]
-curve = SubResource("Curve_qswyy")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bptyc"]
-particle_flag_align_y = true
-direction = Vector3(2.08165e-12, 2.08165e-12, -1)
-spread = 25.0
-gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-initial_velocity_min = 750.0
-initial_velocity_max = 1000.0
-scale_curve = SubResource("CurveTexture_u3t53")
-color = Color(2, 0.45098, 0, 1)
-color_ramp = SubResource("GradientTexture1D_1mkfh")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5xjxn"]
-shading_mode = 0
-vertex_color_use_as_albedo = true
-disable_receive_shadows = true
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_aw8ds"]
-material = SubResource("StandardMaterial3D_5xjxn")
-radius = 0.1
 
 [node name="XLeftArm" instance=ExtResource("1_dfm1y")]
 transform = Transform3D(0.1, -3.48787e-17, 3.48787e-17, 3.48787e-17, 0.1, -3.48787e-17, -3.48787e-17, 3.48787e-17, 0.1, 0, 0, 0)
@@ -230,16 +245,11 @@ visible = false
 cast_shadow = 0
 surface_material_override/0 = SubResource("StandardMaterial3D_vt8l7")
 
-[node name="EnemyHitbox" parent="XArrow" index="1"]
-process_mode = 4
+[node name="ExplosionPivot" type="Node3D" parent="." index="5"]
+transform = Transform3D(10, 3.48787e-15, -3.48787e-15, -3.48787e-15, 10, 3.48787e-15, 3.48787e-15, -3.48787e-15, 10, 0, 0, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
-libraries = {
-"": SubResource("AnimationLibrary_ne6pa")
-}
-
-[node name="ExplosionSparks" type="GPUParticles3D" parent="." index="6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 30)
+[node name="ExplosionSparks" type="GPUParticles3D" parent="ExplosionPivot" index="0"]
+transform = Transform3D(0.1, -3.48787e-17, 3.48787e-17, 3.48787e-17, 0.1, -3.48787e-17, -3.48787e-17, 3.48787e-17, 0.1, 2.09211e-13, 2.07119e-13, 3)
 cast_shadow = 0
 custom_aabb = AABB(-500, -500, -500, 1000, 1000, 1000)
 emitting = false
@@ -248,5 +258,20 @@ lifetime = 0.5
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_bptyc")
 draw_pass_1 = SubResource("CapsuleMesh_aw8ds")
+
+[node name="EnemyHitbox" type="Area3D" parent="ExplosionPivot" index="1"]
+process_mode = 4
+collision_layer = 8
+collision_mask = 11
+script = ExtResource("3_ltcgr")
+damage = 50
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExplosionPivot/EnemyHitbox" index="0"]
+shape = SubResource("SphereShape3D_c7dd7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+libraries = {
+"": SubResource("AnimationLibrary_ne6pa")
+}
 
 [editable path="XArrow"]
