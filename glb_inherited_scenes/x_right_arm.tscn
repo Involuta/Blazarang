@@ -114,6 +114,7 @@ disable_receive_shadows = true
 
 [sub_resource type="Animation" id="Animation_x5mqd"]
 resource_name = "ArmBomb"
+length = 1.1
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -122,7 +123,7 @@ tracks/0/path = NodePath("XArrow:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -134,7 +135,7 @@ tracks/1/path = NodePath("XArrow/Cube:surface_material_override/0")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.416667, 0.483333),
+"times": PackedFloat32Array(0, 0.916668, 0.983335),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [SubResource("StandardMaterial3D_1n3wq"), SubResource("StandardMaterial3D_dmdqd"), SubResource("StandardMaterial3D_a0p17")]
@@ -146,10 +147,10 @@ tracks/2/path = NodePath("XArrow:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.416667, 0.5),
+"times": PackedFloat32Array(0, 0.916668, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(25, 25, 25), Vector3(25, 25, 25), Vector3(100, 100, 400)]
+"values": [Vector3(25, 25, 25), Vector3(25, 25, 25), Vector3(75, 75, 400)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -158,7 +159,7 @@ tracks/3/path = NodePath("XArrow:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.416667, 0.500001),
+"times": PackedFloat32Array(0.916668, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(2.08165e-12, 2.08165e-12, -20), Vector3(2.08165e-12, 2.08165e-12, -520)]
@@ -170,7 +171,7 @@ tracks/4/path = NodePath("XArrow/EnemyHitbox:process_mode")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.500001),
+"times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 4]
@@ -182,7 +183,7 @@ tracks/5/path = NodePath("ExplosionPivot/ExplosionSparks:emitting")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0.516668, 0.600001),
+"times": PackedFloat32Array(1.01667, 1.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -194,7 +195,7 @@ tracks/6/path = NodePath("ExplosionPivot/EnemyHitbox:process_mode")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0.516668, 0.600001),
+"times": PackedFloat32Array(1.01667, 1.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 4]
@@ -260,7 +261,7 @@ transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-
 shape = SubResource("SeparationRayShape3D_qsg0n")
 
 [node name="XArrow" parent="." index="4" instance=ExtResource("4_xewll")]
-transform = Transform3D(100, -6.8918e-21, 8.99973e-20, 6.8918e-21, 100, -8.99973e-20, -2.24993e-20, 2.24993e-20, 400, 2.08165e-12, 2.08165e-12, -150)
+transform = Transform3D(75, -5.16885e-21, 8.99973e-20, 5.16885e-21, 75, -8.99973e-20, -1.68745e-20, 1.68745e-20, 400, 2.08165e-12, 2.08165e-12, -150)
 visible = false
 
 [node name="Cube" parent="XArrow" index="0"]

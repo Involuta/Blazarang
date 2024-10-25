@@ -296,20 +296,18 @@ func start_attack():
 func end_attack():
 	attack_queued = false
 	no_attack_queued.emit()
-	if phase2:
-		for attack in phase2_short_dist_attack_chances.keys():
-			anim_tree.set(param_path_base + attack, false)
-		for attack in phase2_long_dist_right_arm_deployed_attack_chances.keys():
-			anim_tree.set(param_path_base + attack, false)
-		for attack in phase2_long_dist_right_arm_not_deployed_attack_chances.keys():
-			anim_tree.set(param_path_base + attack, false)
-	else:
-		for attack in short_dist_attack_chances.keys():
-			anim_tree.set(param_path_base + attack, false)
-		for attack in long_dist_right_arm_deployed_attack_chances.keys():
-			anim_tree.set(param_path_base + attack, false)
-		for attack in long_dist_right_arm_not_deployed_attack_chances.keys():
-			anim_tree.set(param_path_base + attack, false)
+	for attack in phase2_short_dist_attack_chances.keys():
+		anim_tree.set(param_path_base + attack, false)
+	for attack in phase2_long_dist_right_arm_deployed_attack_chances.keys():
+		anim_tree.set(param_path_base + attack, false)
+	for attack in phase2_long_dist_right_arm_not_deployed_attack_chances.keys():
+		anim_tree.set(param_path_base + attack, false)
+	for attack in short_dist_attack_chances.keys():
+		anim_tree.set(param_path_base + attack, false)
+	for attack in long_dist_right_arm_deployed_attack_chances.keys():
+		anim_tree.set(param_path_base + attack, false)
+	for attack in long_dist_right_arm_not_deployed_attack_chances.keys():
+		anim_tree.set(param_path_base + attack, false)
 	long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	behav_state = FOLLOW
 
@@ -570,15 +568,15 @@ func armbombs_shoot_arms():
 	left_arm.visible = true
 	var shoot_tween = get_tree().create_tween()
 	var scale_tween = get_tree().create_tween()
-	shoot_tween.tween_property(right_arm, "global_position", right_arm_landing_site, .125) # .125 = length of 8th note at 120 BPM
+	shoot_tween.tween_property(left_arm, "global_position", left_arm_landing_site, .125) # .125 = length of 8th note at 120 BPM
 	#scale_tween.tween_property(right_arm, "scale", Vector3(.64,.64,.64), .125)
-	shoot_tween.tween_property(left_arm, "global_position", left_arm_landing_site, .125)
+	shoot_tween.tween_property(right_arm, "global_position", right_arm_landing_site, .125)
 	#scale_tween.tween_property(left_arm, "scale", Vector3(.64,.64,.64), .125)
 
 func armbombs_trigger():
-	right_arm.armbomb_trigger()
-	await get_tree().create_timer(.125).timeout
 	left_arm.armbomb_trigger()
+	await get_tree().create_timer(.125).timeout
+	right_arm.armbomb_trigger()
 
 func recall_left_arm():
 	if not left_arm_deployed():
