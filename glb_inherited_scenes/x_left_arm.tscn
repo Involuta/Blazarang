@@ -59,15 +59,15 @@ size = Vector3(1.5, 1, 11)
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_1i3su"]
 length = 500.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vt8l7"]
-shading_mode = 0
-albedo_color = Color(1.25098, 1, 0.176471, 1)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hx2jh"]
 transparency = 4
 shading_mode = 0
 albedo_color = Color(1.50196, 0.54902, 0, 0.941176)
 disable_receive_shadows = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vt8l7"]
+shading_mode = 0
+albedo_color = Color(1.25098, 1, 0.176471, 1)
 
 [sub_resource type="Animation" id="Animation_arx4y"]
 resource_name = "ArmBomb"
@@ -130,7 +130,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(2.08165e-12, 2.08165e-12, -20), Vector3(2.08165e-12, 2.08165e-12, -720)]
+"values": [Vector3(2.08165e-12, 2.08165e-12, -20), Vector3(2.08165e-12, 2.08165e-12, -520)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ne6pa"]
@@ -211,11 +211,11 @@ transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-
 shape = SubResource("SeparationRayShape3D_1i3su")
 
 [node name="XArrow" parent="." index="4" instance=ExtResource("4_8r6gd")]
-transform = Transform3D(45.8333, -7.18213e-21, 1.18638e-19, 7.18213e-21, 45.8333, -1.18638e-19, -1.61113e-20, 1.61113e-20, 337.5, 2.08165e-12, 2.08165e-12, -603.333)
+transform = Transform3D(25, -3.91753e-21, 8.78799e-21, 3.91753e-21, 25, -8.78799e-21, -8.78799e-21, 8.78799e-21, 25, 2.08165e-12, 2.08165e-12, -20)
 
 [node name="Cube" parent="XArrow" index="0"]
 cast_shadow = 0
-surface_material_override/0 = SubResource("StandardMaterial3D_vt8l7")
+surface_material_override/0 = ExtResource("5_7pmlh")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
 libraries = {
