@@ -73,10 +73,11 @@ var dash_back_canceled := false
 }
 
 @export var phase2_short_dist_attack_chances = {
-	"ChainSlice" : .3,
+	"ChainSlice" : .2,
+	"Sweep" : .2,
 	"Superman" : .2,
 	"RightArmSlice" : .3,
-	"Triangle" : .2
+	"Triangle" : .1
 }
 
 @export var phase2_long_dist_right_arm_deployed_attack_chances = {
