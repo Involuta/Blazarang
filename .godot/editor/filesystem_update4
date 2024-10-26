@@ -25,3 +25,5 @@ res://shaders/outline_everything.gdshader
 res://rang/slash_test.tres
 res://ui/glow.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
+res://enemies/x_blade.tscn
+res://enemies/enemy_anims/x_slipnslice.res
