@@ -73,27 +73,29 @@ var dash_back_canceled := false
 }
 
 @export var phase2_short_dist_attack_chances = {
-	"ChainSlice" : .2,
+	"ChainSlice" : .25,
 	"Sweep" : .2,
-	"Superman" : .2,
+	"Superman" : .15,
 	"RightArmSlice" : .3,
 	"Triangle" : .1
 }
 
 @export var phase2_long_dist_right_arm_deployed_attack_chances = {
-	"ArmBombs" : .3,
-	"Superman" : .25,
-	"ChainSlice" : .25,
+	"ArmBombs" : .25,
+	"Sweep" : .2,
+	"ChainSlice" : .2,
+	"Superman" : .1,
 	"Triangle" : .1,
 	"DiagonalDash" : .1
 }
 
 @export var phase2_long_dist_right_arm_not_deployed_attack_chances = {
 	"ArmBombs" : .2,
+	"Sweep" : .2,
 	"ChainSlice" : .2,
-	"Superman" : .2,
+	"Superman" : .1,
 	"Triangle" : .1,
-	"RightArmLaser" : .3
+	"RightArmLaser" : .2
 }
 
 @export var diagonal_dash_speed := 30.0

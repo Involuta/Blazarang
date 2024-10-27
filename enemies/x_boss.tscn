@@ -639,6 +639,22 @@ min_long_dist_wait = 0.5
 max_long_dist_wait = 2.5
 follow_speed = 15.0
 follow_stop_dist = 1.5
+phase2_long_dist_right_arm_deployed_attack_chances = {
+"ArmBombs": 2.08167e-12,
+"ChainSlice": 0.2,
+"DiagonalDash": 0.1,
+"Superman": 0.1,
+"Sweep": 0.9,
+"Triangle": 0.1
+}
+phase2_long_dist_right_arm_not_deployed_attack_chances = {
+"ArmBombs": 2.08167e-12,
+"ChainSlice": 0.2,
+"RightArmLaser": 0.2,
+"Superman": 0.1,
+"Sweep": 0.9,
+"Triangle": 0.1
+}
 diagonal_dash_speed = 22.0
 triangle_axkick_dist = 2.25
 armbombs_dashback_lateral_dist = 15.0
