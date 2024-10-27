@@ -65,3 +65,4 @@ res://enemies/enemy_anims/x_rightarmslice.res
 res://enemies/enemy_anims/x_tp_slipnslice.res
 res://enemies/x_boss.gd
 res://levels/x_boss_level1.gd
+res://enemies/enemy_anims/x_triangle_flyingkick.res
