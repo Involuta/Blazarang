@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b2i61ldwbwc8o"]
+[gd_scene load_steps=26 format=3 uid="uid://b2i61ldwbwc8o"]
 
 [ext_resource type="PackedScene" uid="uid://cpx64anoc5p8u" path="res://glb_imports/BasicSwordBlade.glb" id="1_magb4"]
 [ext_resource type="Texture2D" uid="uid://crk6pkb7e5rwc" path="res://GPUTrail-main/defaults/texture.tres" id="4_oc1t2"]
@@ -271,6 +271,66 @@ tracks/4/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sparks:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, -7.06852e-10, -4.00486)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sparks:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("GPUTrail3D:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3.75001, 3.75, 3.75001)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Blade:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-8.20059e-20, -4.88244e-19, 0.000109134)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("GPUTrail3D:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 1.7862e-12, -3.985)]
+}
 
 [sub_resource type="Animation" id="Animation_bp0wv"]
 resource_name = "ExtendMegaBlade"
@@ -283,10 +343,10 @@ tracks/0/path = NodePath("Blade:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0500001),
+"times": PackedFloat32Array(0, 0.05),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(1, 0.001, 1), Vector3(2, 1, 1)]
+"values": [Vector3(1, 0.001, 1), Vector3(2, 4.5, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -335,6 +395,66 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sparks:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, -12)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sparks:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 4.5)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("GPUTrail3D:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3.75, 16.875, 3.75)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Blade:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("GPUTrail3D:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, -16)]
 }
 
 [sub_resource type="Animation" id="Animation_yov3w"]
@@ -401,6 +521,66 @@ tracks/4/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sparks:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, -7.06852e-10, -4.00486)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sparks:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("GPUTrail3D:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3.75001, 3.75, 3.75001)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Blade:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-8.20059e-20, -4.88244e-19, 0.000109134)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("GPUTrail3D:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 1.7862e-12, -3.985)]
+}
 
 [sub_resource type="Animation" id="Animation_5l7ml"]
 resource_name = "RetractMegaBlade"
@@ -416,7 +596,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(2, 1, 1), Vector3(1, 0.001, 1)]
+"values": [Vector3(2, 4.5, 1), Vector3(1, 0.001, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -466,11 +646,99 @@ tracks/4/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sparks:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, -12)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sparks:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 4.5)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("GPUTrail3D:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3.75, 16.875, 3.75)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Blade:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("GPUTrail3D:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, -16)]
+}
+
+[sub_resource type="Animation" id="Animation_hkb2q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sparks:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, -7.75575e-07, -9.32294)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sparks:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 2)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v7csg"]
 _data = {
 "ExtendBlade": SubResource("Animation_5nsmi"),
 "ExtendMegaBlade": SubResource("Animation_bp0wv"),
+"RESET": SubResource("Animation_hkb2q"),
 "RetractBlade": SubResource("Animation_yov3w"),
 "RetractMegaBlade": SubResource("Animation_5l7ml")
 }
@@ -513,12 +781,12 @@ curve = SubResource("Curve_7ffhd")
 transform = Transform3D(0.15, -5.2318e-17, 7.62298e-24, 0, -6.55671e-09, -0.5, 5.2318e-17, 0.15, -2.18557e-08, 0, 0, 0)
 
 [node name="Blade" parent="." index="0"]
-transform = Transform3D(1, 1.57912e-25, 6.90255e-30, 0, -4.37114e-11, 1, 1.57912e-22, -0.001, -4.37114e-08, -8.20059e-20, -4.88244e-19, 0.000109134)
+transform = Transform3D(1, 1.57912e-25, 6.90255e-30, 0, -4.37114e-11, 1, 1.57912e-22, -0.001, -4.37114e-08, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 visible = false
 surface_material_override/0 = SubResource("StandardMaterial3D_qbx8q")
 
 [node name="GPUTrail3D" type="GPUParticles3D" parent="." index="1"]
-transform = Transform3D(3.75001, -4.41933e-22, -9.49323e-22, 9.92314e-22, -1.63918e-07, 3.75001, -4.41932e-22, -3.75, -1.63918e-07, 2.08165e-12, 1.7862e-12, -3.985)
+transform = Transform3D(3.75, -1.98869e-21, -1.93174e-29, 0, -7.3763e-07, 3.75, -4.41931e-22, -16.875, -1.63918e-07, 2.08165e-12, 2.08165e-12, -13)
 visible = false
 amount = 1
 explosiveness = 1.0
@@ -538,7 +806,7 @@ libraries = {
 }
 
 [node name="Sparks" type="GPUParticles3D" parent="." index="3"]
-transform = Transform3D(1, -1.30915e-21, -1.58819e-22, 6.22547e-22, 1, -2.16794e-13, -4.97885e-24, 8.06457e-15, 1, 2.08165e-12, -7.06852e-10, -4.00486)
+transform = Transform3D(1, -3.97554e-22, 9.9577e-24, 3.97554e-22, 1, 1.04216e-15, -4.97885e-24, -5.2108e-16, 2, 2.08165e-12, -7.75575e-07, -9.32294)
 cast_shadow = 0
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
 emitting = false
