@@ -109,6 +109,7 @@ disable_receive_shadows = true
 
 [sub_resource type="Animation" id="Animation_arx4y"]
 resource_name = "ArmBomb"
+length = 1.0
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false

@@ -1,10 +1,11 @@
-CollisionShape3D
 Area3D
-Node3D
+StaticBody3D
+CollisionShape3D
+GPUParticles3D
 MeshInstance3D
+Node3D
 AnimationPlayer
 CPUParticles3D
-GPUParticles3D
 AnimatedSprite3D
 Hitbox
 RigidBody3D
@@ -13,7 +14,6 @@ Camera3D
 Node2D
 GPUParticles2D
 TextureRect
-StaticBody3D
 BoneAttachment3D
 GPUParticlesAttractorSphere3D
 FuncGodotMap
