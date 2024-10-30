@@ -16,14 +16,14 @@ height = 3.0
 offsets = PackedFloat32Array(0, 0.385)
 colors = PackedColorArray(1, 1, 1, 1, 1, 0.223529, 0, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_qeqnf"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_oq3cx"]
 gradient = SubResource("Gradient_a0ijh")
 
 [sub_resource type="Curve" id="Curve_jsd6o"]
 _data = [Vector2(2.08165e-12, 1), 0.0, 0.0, 0, 0, Vector2(1, 2.08165e-12), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_csosj"]
+[sub_resource type="CurveTexture" id="CurveTexture_26mc4"]
 curve = SubResource("Curve_jsd6o")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8tnpd"]
@@ -33,18 +33,18 @@ spread = 180.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 20.0
 initial_velocity_max = 20.0
-scale_curve = SubResource("CurveTexture_csosj")
+scale_curve = SubResource("CurveTexture_26mc4")
 color = Color(2, 0.92549, 0.537255, 1)
-color_ramp = SubResource("GradientTexture1D_qeqnf")
+color_ramp = SubResource("GradientTexture1D_oq3cx")
 attractor_interaction_enabled = false
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3m5tq"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ssptu"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
 disable_receive_shadows = true
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_dk04h"]
-material = SubResource("StandardMaterial3D_3m5tq")
+material = SubResource("StandardMaterial3D_ssptu")
 radius = 0.02
 height = 0.2
 
@@ -277,23 +277,8 @@ transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0.38, 0.897
 [node name="TopFace" parent="Armature/Skeleton3D/Head/XHead" index="3"]
 transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 2.08165e-12, 0.34, 2)
 
-[node name="XFireHead" parent="Armature/Skeleton3D/Head/XHead" index="9"]
-visible = false
-
-[node name="TopLeftSparks" parent="Armature/Skeleton3D/Head/XHead" index="10"]
-emitting = false
-
-[node name="TopRightSparks" parent="Armature/Skeleton3D/Head/XHead" index="11"]
-emitting = false
-
-[node name="BottomRightSparks" parent="Armature/Skeleton3D/Head/XHead" index="12"]
-emitting = false
-
-[node name="BottomLeftSparks" parent="Armature/Skeleton3D/Head/XHead" index="13"]
-emitting = false
-
 [node name="GlowingHead" type="MeshInstance3D" parent="Armature/Skeleton3D/Head" index="1"]
-transform = Transform3D(1, -2.76897e-14, 2.99465e-15, 7.70367e-15, 1, -2.63235e-08, -1.56504e-15, 2.30978e-08, 1, 6.66134e-16, 0.258998, 2.96033)
+transform = Transform3D(1, -2.76897e-14, 2.99465e-15, 7.70367e-15, 1, -2.63235e-08, -1.56504e-15, 2.30978e-08, 1, 1.86262e-07, 1.67939, 0.829739)
 mesh = SubResource("CapsuleMesh_o1ab0")
 
 [node name="BombParticles" type="GPUParticles3D" parent="Armature/Skeleton3D/Head/GlowingHead" index="0"]
