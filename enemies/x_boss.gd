@@ -149,6 +149,7 @@ func _ready():
 	if aggro_distance > 0:
 		behav_state = WAIT
 	Globals.health_segment_lost.connect(on_health_segment_lost)
+	attack_turn_speed = .15
 	anim_tree.active = true
 	x_mesh_head.visible = true
 	mhp1.visible = false

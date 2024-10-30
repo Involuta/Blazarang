@@ -86,3 +86,4 @@ res://enemies/enemy_anims/x_triangle_flyingkick.res
 res://enemies/enemy_anims/x_triangle_volcano.res
 res://enemies/enemy_anims/x_armbombs_facelaser.res
 res://glb_inherited_scenes/x_head_pieces.tscn
+res://enemies/x_boss.gd
