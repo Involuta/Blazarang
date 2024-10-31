@@ -265,20 +265,8 @@ bone_idx = 5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.303, 2.08165e-12)
 visible = false
 
-[node name="BottomFace" parent="Armature/Skeleton3D/Head/XHead" index="0"]
-transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 2.08165e-12, 1.36, 2)
-
-[node name="LeftFace" parent="Armature/Skeleton3D/Head/XHead" index="1"]
-transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, -0.38, 0.897, 2)
-
-[node name="RightFace" parent="Armature/Skeleton3D/Head/XHead" index="2"]
-transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0.38, 0.897, 2)
-
-[node name="TopFace" parent="Armature/Skeleton3D/Head/XHead" index="3"]
-transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 2.08165e-12, 0.34, 2)
-
 [node name="GlowingHead" type="MeshInstance3D" parent="Armature/Skeleton3D/Head" index="1"]
-transform = Transform3D(1, -2.76897e-14, 2.99465e-15, 7.70367e-15, 1, -2.63235e-08, -1.56504e-15, 2.30978e-08, 1, 1.86262e-07, 1.67939, 0.829739)
+transform = Transform3D(1, -2.76897e-14, 2.99465e-15, 7.70367e-15, 1, -2.63235e-08, -1.56504e-15, 2.30978e-08, 1, 6.66134e-16, 0.258998, 2.96033)
 mesh = SubResource("CapsuleMesh_o1ab0")
 
 [node name="BombParticles" type="GPUParticles3D" parent="Armature/Skeleton3D/Head/GlowingHead" index="0"]
