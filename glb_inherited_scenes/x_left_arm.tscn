@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cwui2mc0avv1y"]
+[gd_scene load_steps=30 format=3 uid="uid://cwui2mc0avv1y"]
 
 [ext_resource type="PackedScene" uid="uid://dnn5utdpa54kx" path="res://glb_imports/XLeftArm.glb" id="1_dfm1y"]
 [ext_resource type="Script" path="res://glb_inherited_scenes/x_arm.gd" id="2_8tv8p"]
@@ -59,10 +59,6 @@ size = Vector3(1.5, 1, 11)
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_1i3su"]
 length = 500.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vt8l7"]
-shading_mode = 0
-albedo_color = Color(1.25098, 1, 0.176471, 1)
-
 [sub_resource type="Gradient" id="Gradient_lobk3"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(2, 0.45098, 0, 1)
@@ -107,6 +103,10 @@ shading_mode = 0
 albedo_color = Color(1.50196, 0.54902, 0, 0.941176)
 disable_receive_shadows = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vt8l7"]
+shading_mode = 0
+albedo_color = Color(1.25098, 1, 0.176471, 1)
+
 [sub_resource type="Animation" id="Animation_arx4y"]
 resource_name = "ArmBomb"
 step = 0.0166667
@@ -141,10 +141,10 @@ tracks/2/path = NodePath("XArrow/Cube:surface_material_override/0")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.483333),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0.4, 0.483333),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("5_7pmlh"), SubResource("StandardMaterial3D_hx2jh"), SubResource("StandardMaterial3D_vt8l7")]
+"values": [SubResource("StandardMaterial3D_hx2jh"), SubResource("StandardMaterial3D_vt8l7")]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -194,44 +194,243 @@ tracks/6/keys = {
 "update": 1,
 "values": [0, 4]
 }
-tracks/7/type = "animation"
+tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("XArrow/AnimationPlayer")
+tracks/7/path = NodePath("XArrow/Cube_001:surface_material_override/0")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"clips": PackedStringArray("CubeAction"),
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0.400001, 0.483334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_hx2jh"), SubResource("StandardMaterial3D_vt8l7")]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("XArrow/Cube_001:surface_material_override/0")
-tracks/8/interp = 1
+tracks/8/path = NodePath("XArrow/Cube:transparency")
+tracks/8/interp = 2
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 0.400001, 0.483334),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [ExtResource("5_7pmlh"), SubResource("StandardMaterial3D_hx2jh"), SubResource("StandardMaterial3D_vt8l7")]
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("XArrow/Cube:transparency")
-tracks/9/interp = 2
+tracks/9/path = NodePath("XArrow/Cube_001:transparency")
+tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("XArrow/Cube_002:surface_material_override/0")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0.400001, 0.483334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_hx2jh"), SubResource("StandardMaterial3D_vt8l7")]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("XArrow/Cube_002:transparency")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("XArrow/Cube_003:surface_material_override/0")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0.400001, 0.483334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_hx2jh"), SubResource("StandardMaterial3D_vt8l7")]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("XArrow/Cube_003:transparency")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("XArrow/Cube_004:surface_material_override/0")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0.400001, 0.483334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_hx2jh"), SubResource("StandardMaterial3D_vt8l7")]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("XArrow/Cube_004:transparency")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_iy8sq"]
+resource_name = "CondenseArrow"
+length = 0.166668
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("XArrow:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("XArrow:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(25, 25, 25)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("XArrow:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, -20)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("XArrow/Cube_001:surface_material_override/0")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_7pmlh")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("XArrow/Cube:surface_material_override/0")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_7pmlh")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("XArrow/Cube:transparency")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.166667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [1.0, 0.0]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("XArrow/Cube_001:transparency")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("XArrow/Cube_002:surface_material_override/0")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_7pmlh")]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("XArrow/Cube_002:transparency")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("XArrow/Cube_003:surface_material_override/0")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_7pmlh")]
+}
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("XArrow/Cube_001:transparency")
+tracks/10/path = NodePath("XArrow/Cube_003:transparency")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -243,19 +442,19 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("XArrow/Cube_002:surface_material_override/0")
+tracks/11/path = NodePath("XArrow/Cube_004:surface_material_override/0")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PackedFloat32Array(0, 0.400001, 0.483334),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("5_7pmlh"), SubResource("StandardMaterial3D_hx2jh"), SubResource("StandardMaterial3D_vt8l7")]
+"values": [ExtResource("5_7pmlh")]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("XArrow/Cube_002:transparency")
+tracks/12/path = NodePath("XArrow/Cube_004:transparency")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -264,58 +463,21 @@ tracks/12/keys = {
 "update": 0,
 "values": [1.0, 0.0]
 }
-tracks/13/type = "value"
+tracks/13/type = "animation"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("XArrow/Cube_003:surface_material_override/0")
+tracks/13/path = NodePath("XArrow/AnimationPlayer")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
-"times": PackedFloat32Array(0, 0.400001, 0.483334),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [ExtResource("5_7pmlh"), SubResource("StandardMaterial3D_hx2jh"), SubResource("StandardMaterial3D_vt8l7")]
-}
-tracks/14/type = "value"
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath("XArrow/Cube_003:transparency")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/keys = {
-"times": PackedFloat32Array(0, 0.166667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1.0, 0.0]
-}
-tracks/15/type = "value"
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/path = NodePath("XArrow/Cube_004:surface_material_override/0")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/keys = {
-"times": PackedFloat32Array(0, 0.400001, 0.483334),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [ExtResource("5_7pmlh"), SubResource("StandardMaterial3D_hx2jh"), SubResource("StandardMaterial3D_vt8l7")]
-}
-tracks/16/type = "value"
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/path = NodePath("XArrow/Cube_004:transparency")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/keys = {
-"times": PackedFloat32Array(0, 0.166667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1.0, 0.0]
+"clips": PackedStringArray("CubeAction"),
+"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ne6pa"]
 _data = {
-"ArmBomb": SubResource("Animation_arx4y")
+"ArmBomb": SubResource("Animation_arx4y"),
+"CondenseArrow": SubResource("Animation_iy8sq")
 }
 
 [node name="XLeftArm" instance=ExtResource("1_dfm1y")]
@@ -356,29 +518,36 @@ transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-
 shape = SubResource("SeparationRayShape3D_1i3su")
 
 [node name="XArrow" parent="." index="4" instance=ExtResource("4_8r6gd")]
-transform = Transform3D(75, -1.17526e-20, 1.40608e-19, 1.17526e-20, 75, -1.40608e-19, -2.6364e-20, 2.6364e-20, 400, 2.08165e-12, 2.08165e-12, -520)
-visible = false
+transform = Transform3D(25, -3.91753e-21, 8.788e-21, 3.91753e-21, 25, -8.788e-21, -8.788e-21, 8.788e-21, 25, 2.08165e-12, 2.08165e-12, -20)
 
 [node name="Cube" parent="XArrow" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -2.5)
+transparency = 1.0
 cast_shadow = 0
-surface_material_override/0 = SubResource("StandardMaterial3D_vt8l7")
+surface_material_override/0 = ExtResource("5_7pmlh")
+
+[node name="EnemyHitbox" parent="XArrow" index="1"]
+process_mode = 0
 
 [node name="Cube_001" parent="XArrow" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-surface_material_override/0 = SubResource("StandardMaterial3D_vt8l7")
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.25, 1.25, -2.5)
+transparency = 1.0
+surface_material_override/0 = ExtResource("5_7pmlh")
 
 [node name="Cube_002" parent="XArrow" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-surface_material_override/0 = SubResource("StandardMaterial3D_vt8l7")
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.25, 1.25, -2.5)
+transparency = 1.0
+surface_material_override/0 = ExtResource("5_7pmlh")
 
 [node name="Cube_003" parent="XArrow" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-surface_material_override/0 = SubResource("StandardMaterial3D_vt8l7")
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.25, -1.25, -2.5)
+transparency = 1.0
+surface_material_override/0 = ExtResource("5_7pmlh")
 
 [node name="Cube_004" parent="XArrow" index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-surface_material_override/0 = SubResource("StandardMaterial3D_vt8l7")
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.25, -1.25, -2.5)
+transparency = 1.0
+surface_material_override/0 = ExtResource("5_7pmlh")
 
 [node name="ExplosionPivot" type="Node3D" parent="." index="5"]
 transform = Transform3D(10, 3.48787e-15, -3.48787e-15, -3.48787e-15, 10, 3.48787e-15, 3.48787e-15, -3.48787e-15, 10, 0, 0, 0)
