@@ -554,9 +554,9 @@ func armbombs_arm_recall():
 		right_mvmt_tween.tween_callback(hide_floating_right_arm)
 
 func armbombs_shoot_arms():
+	armbombs_arm_switch()
 	mhp1.visible = false
 	mhp2.visible = false
-	armbombs_trigger()
 	
 	var dir_to_target := global_position.direction_to(target.global_position)
 	
@@ -567,8 +567,8 @@ func armbombs_shoot_arms():
 	
 	left_arm.look_at_from_position(mhp1.global_position, left_arm_landing_site, Vector3.UP, true)
 	var goal_rotation = left_arm.rotation
-	var rot_tween = get_tree().create_tween()
-	rot_tween.tween_property(left_arm, "rotation", goal_rotation, .125).from(PI/2*Vector3.RIGHT)
+	var all_tween = get_tree().create_tween()
+	all_tween.tween_property(left_arm, "rotation", goal_rotation, .125).from(PI/2*Vector3.RIGHT).set_ease(Tween.EASE_IN_OUT)
 	
 	var rightside_vec := -Vector2(dir_to_target.x, dir_to_target.z).orthogonal()
 	var right_arm_landing_site = Vector3(0,min_y_pos-1.3,0)
@@ -577,17 +577,19 @@ func armbombs_shoot_arms():
 	
 	right_arm.look_at_from_position(mhp2.global_position, right_arm_landing_site, Vector3.UP, true)
 	goal_rotation = right_arm.rotation
-	rot_tween.tween_property(right_arm, "rotation", goal_rotation, .125).from(PI/2*Vector3.RIGHT)
+	all_tween.tween_property(right_arm, "rotation", goal_rotation, .125).from(PI/2*Vector3.RIGHT).set_ease(Tween.EASE_IN_OUT)
 	
-	right_arm.visible = true
+	all_tween.tween_callback(armbombs_trigger)
+	
+	all_tween.tween_property(left_arm, "global_position", left_arm_landing_site, .125) # .125 = length of 8th note at 120 BPM
+	all_tween.tween_property(right_arm, "global_position", right_arm_landing_site, .125)
+
+func armbombs_arm_switch():
+	# Switch melee hitbox pivot (mhp) arms with floating arms
+	left_arm.prep_arrow()
+	right_arm.prep_arrow()
 	left_arm.visible = true
-	
-	var shoot_tween = get_tree().create_tween()
-	var scale_tween = get_tree().create_tween()
-	shoot_tween.tween_property(left_arm, "global_position", left_arm_landing_site, .125) # .125 = length of 8th note at 120 BPM
-	#scale_tween.tween_property(right_arm, "scale", Vector3(.64,.64,.64), .125)
-	shoot_tween.tween_property(right_arm, "global_position", right_arm_landing_site, .125)
-	#scale_tween.tween_property(left_arm, "scale", Vector3(.64,.64,.64), .125)
+	right_arm.visible = true
 
 func armbombs_trigger():
 	left_arm.armbomb_trigger()

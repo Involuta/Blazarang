@@ -21,5 +21,8 @@ func fire_laser():
 	laser_mesh.visible = true
 	hitbox.process_mode = Node.PROCESS_MODE_INHERIT
 
+func prep_arrow():
+	$AnimationPlayer.play("PrepArrow")
+
 func armbomb_trigger():
 	$AnimationPlayer.play("ArmBomb")
