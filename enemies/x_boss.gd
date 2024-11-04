@@ -559,18 +559,29 @@ func armbombs_shoot_arms():
 	armbombs_trigger()
 	
 	var dir_to_target := global_position.direction_to(target.global_position)
-	var rightside_vec := -Vector2(dir_to_target.x, dir_to_target.z).orthogonal()
-	var right_arm_landing_site = Vector3(0,min_y_pos-1.3,0)
-	right_arm_landing_site.x = target.global_position.x + side_teleport_dist_from_target * rightside_vec.x
-	right_arm_landing_site.z = target.global_position.z + side_teleport_dist_from_target * rightside_vec.y
-	right_arm.look_at_from_position(mhp2.global_position, right_arm_landing_site, Vector3.UP, true)
+	
 	var left_arm_landing_site = Vector3(0,min_y_pos-1.3,0)
 	var leftside_vec := Vector2(dir_to_target.x, dir_to_target.z).orthogonal() - Vector2(dir_to_target.x, dir_to_target.z)
 	left_arm_landing_site.x = target.global_position.x + side_teleport_dist_from_target * leftside_vec.x
 	left_arm_landing_site.z = target.global_position.z + side_teleport_dist_from_target * leftside_vec.y
+	
 	left_arm.look_at_from_position(mhp1.global_position, left_arm_landing_site, Vector3.UP, true)
+	var goal_rotation = left_arm.rotation
+	var rot_tween = get_tree().create_tween()
+	rot_tween.tween_property(left_arm, "rotation", goal_rotation, .125).from(PI/2*Vector3.RIGHT)
+	
+	var rightside_vec := -Vector2(dir_to_target.x, dir_to_target.z).orthogonal()
+	var right_arm_landing_site = Vector3(0,min_y_pos-1.3,0)
+	right_arm_landing_site.x = target.global_position.x + side_teleport_dist_from_target * rightside_vec.x
+	right_arm_landing_site.z = target.global_position.z + side_teleport_dist_from_target * rightside_vec.y
+	
+	right_arm.look_at_from_position(mhp2.global_position, right_arm_landing_site, Vector3.UP, true)
+	goal_rotation = right_arm.rotation
+	rot_tween.tween_property(right_arm, "rotation", goal_rotation, .125).from(PI/2*Vector3.RIGHT)
+	
 	right_arm.visible = true
 	left_arm.visible = true
+	
 	var shoot_tween = get_tree().create_tween()
 	var scale_tween = get_tree().create_tween()
 	shoot_tween.tween_property(left_arm, "global_position", left_arm_landing_site, .125) # .125 = length of 8th note at 120 BPM
