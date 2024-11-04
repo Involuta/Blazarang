@@ -63,3 +63,6 @@ res://glb_inherited_scenes/x_head_pieces.tscn
 res://enemies/enemy_anims/x_arrow_condense.res
 res://enemies/enemy_anims/x_armbombs.res
 res://enemies/x_boss.gd
+res://cotu/CotuControl.gd
+res://enemies/enemy_anims/x_chainslice_left.res
+res://enemies/enemy_anims/x_tp_chainslice_left.res
