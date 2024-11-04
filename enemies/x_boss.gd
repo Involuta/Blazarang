@@ -541,16 +541,12 @@ func armbombs_arm_recall():
 	if left_arm_deployed():
 		left_arm.stop_firing_laser()
 		var left_mvmt_tween = get_tree().create_tween()
-		var left_rot_tween = get_tree().create_tween()
-		left_rot_tween.tween_property(left_arm, "rotation_degrees", Vector3(-75.5, 171.6-rotation_degrees.y, 178.6), .25)
-		left_mvmt_tween.tween_property(left_arm, "global_position", global_position, .2)
+		left_mvmt_tween.tween_method(recall_left_arm_frame, 0.0, 1.0, .2).set_ease(Tween.EASE_OUT)
 		left_mvmt_tween.tween_callback(hide_floating_left_arm)
 	if right_arm_deployed():
 		right_arm.stop_firing_laser()
 		var right_mvmt_tween = get_tree().create_tween()
-		var right_rot_tween = get_tree().create_tween()
-		right_rot_tween.tween_property(right_arm, "rotation_degrees", Vector3(-75.5, -171.6-rotation_degrees.y, 178.6), .25)
-		right_mvmt_tween.tween_property(right_arm, "global_position", global_position, .2)
+		right_mvmt_tween.tween_method(recall_right_arm_frame, 0.0, 1.0, .2).set_ease(Tween.EASE_OUT)
 		right_mvmt_tween.tween_callback(hide_floating_right_arm)
 
 func armbombs_shoot_arms():
@@ -566,9 +562,9 @@ func armbombs_shoot_arms():
 	left_arm_landing_site.z = target.global_position.z + side_teleport_dist_from_target * leftside_vec.y
 	
 	left_arm.look_at_from_position(mhp1.global_position, left_arm_landing_site, Vector3.UP, true)
-	var goal_rotation = left_arm.rotation
+	#var goal_rotation = left_arm.rotation
 	var all_tween = get_tree().create_tween()
-	all_tween.tween_property(left_arm, "rotation", goal_rotation, .125).from(PI/2*Vector3.RIGHT).set_ease(Tween.EASE_IN_OUT)
+	#all_tween.tween_property(left_arm, "rotation", goal_rotation, .05).from(PI/2*Vector3.RIGHT).set_ease(Tween.EASE_IN_OUT)
 	
 	var rightside_vec := -Vector2(dir_to_target.x, dir_to_target.z).orthogonal()
 	var right_arm_landing_site = Vector3(0,min_y_pos-1.3,0)
@@ -576,13 +572,13 @@ func armbombs_shoot_arms():
 	right_arm_landing_site.z = target.global_position.z + side_teleport_dist_from_target * rightside_vec.y
 	
 	right_arm.look_at_from_position(mhp2.global_position, right_arm_landing_site, Vector3.UP, true)
-	goal_rotation = right_arm.rotation
-	all_tween.tween_property(right_arm, "rotation", goal_rotation, .125).from(PI/2*Vector3.RIGHT).set_ease(Tween.EASE_IN_OUT)
+	#goal_rotation = right_arm.rotation
+	#all_tween.tween_property(right_arm, "rotation", goal_rotation, .05).from(PI/2*Vector3.RIGHT).set_ease(Tween.EASE_IN_OUT)
 	
-	all_tween.tween_callback(armbombs_trigger)
+	armbombs_trigger()
 	
-	all_tween.tween_property(left_arm, "global_position", left_arm_landing_site, .125) # .125 = length of 8th note at 120 BPM
-	all_tween.tween_property(right_arm, "global_position", right_arm_landing_site, .125)
+	all_tween.tween_property(left_arm, "global_position", left_arm_landing_site, .125).set_trans(Tween.TRANS_LINEAR) # .125 = length of 8th note at 120 BPM
+	all_tween.tween_property(right_arm, "global_position", right_arm_landing_site, .125).set_trans(Tween.TRANS_LINEAR)
 
 func armbombs_arm_switch():
 	# Switch melee hitbox pivot (mhp) arms with floating arms
