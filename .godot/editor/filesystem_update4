@@ -69,3 +69,8 @@ res://enemies/enemy_anims/x_tp_chainslice_left.res
 res://glb_inherited_scenes/x_arm.gd
 res://enemies/enemy_hurtbox.gd
 res://enemies/enemy_anims/x_triangle_volcano.res
+res://enemies/enemy_anims/x_superman.res
+res://enemies/enemy_anims/x_rightarmslice.res
+res://enemies/enemy_anims/x_slipnslice.res
+res://enemies/enemy_anims/x_tp_slipnslice.res
+res://enemies/enemy_anims/x_triangle_flyingkick.res
