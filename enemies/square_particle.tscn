@@ -228,6 +228,7 @@ mesh = SubResource("QuadMesh_ntvx4")
 [node name="GPUTrail3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 cast_shadow = 0
+custom_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
 amount = 15
 lifetime = 15.0
 explosiveness = 1.0

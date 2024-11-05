@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bg2swy025xr60"]
+[gd_scene load_steps=39 format=3 uid="uid://bg2swy025xr60"]
 
 [ext_resource type="Script" path="res://enemies/x_volcano.gd" id="1_u0lj8"]
 [ext_resource type="Script" path="res://hitbox.gd" id="2_k3fxy"]
@@ -87,16 +87,25 @@ colors = PackedColorArray(1.30196, 0.572549, 0, 1, 2.00392, 0.160784, 0, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_70fut"]
 gradient = SubResource("Gradient_rj4s4")
 
+[sub_resource type="Curve" id="Curve_c53k6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.938685, 0.992333), 0.0, 0.0, 0, 0, Vector2(1, 0.0870755), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_reqog"]
+curve = SubResource("Curve_c53k6")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jjjwm"]
 emission_shape = 1
 emission_sphere_radius = 2.0
 particle_flag_align_y = true
 direction = Vector3(2.08165e-12, 1, 2.08165e-12)
-spread = 30.0
-initial_velocity_min = 5.0
-initial_velocity_max = 20.0
+spread = 25.0
+initial_velocity_min = 15.0
+initial_velocity_max = 30.0
+linear_accel_max = 2.08167e-15
 scale_min = 0.5
 scale_max = 1.5
+scale_curve = SubResource("CurveTexture_reqog")
 color = Color(1.30196, 0.482353, 0, 1)
 color_ramp = SubResource("GradientTexture1D_70fut")
 
@@ -350,7 +359,7 @@ material = SubResource("StandardMaterial3D_ctytl")
 [node name="XVolcano" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
 script = ExtResource("1_u0lj8")
-disappear_secs = 6.0
+disappear_secs = 9.0
 
 [node name="TPLowerDisc" type="MeshInstance3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 0.1, 0, 0, 0, 2, 2.08165e-12, -1, 2.08165e-12)
@@ -374,7 +383,6 @@ mesh = SubResource("CylinderMesh_tp1rv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -1, 2.08165e-12)
 cast_shadow = 0
 custom_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
-emitting = false
 amount = 100
 lifetime = 2.0
 one_shot = true
@@ -390,9 +398,8 @@ mesh = SubResource("TorusMesh_a56kv")
 [node name="Lava" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -1, 2.08165e-12)
 custom_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
-emitting = false
 amount = 50
-lifetime = 6.0
+lifetime = 9.0
 one_shot = true
 explosiveness = 1.0
 trail_enabled = true
