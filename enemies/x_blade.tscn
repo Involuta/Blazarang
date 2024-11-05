@@ -23,7 +23,7 @@ void process() {
 	const float amount = LIFETIME;
 	
 	vec4 a = EMISSION_TRANSFORM * vec4(0,1,0,1);
-	vec4 b = EMISSION_TRANSFORM * vec4(0,-1,0,1);
+	vec4 b = EMISSION_TRANSFORM * vec4(0,-.5,0,1);
 	
 	// start
 	if(CUSTOM.w == 0.0){
