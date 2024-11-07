@@ -15,6 +15,6 @@ func _ready():
 		add_child.call_deferred(sp)
 		await sp.tree_entered
 		sp.global_position = global_position
-		sp.linear_velocity = square_particle_speed * Vector3(rng.randf_range(-1, 1), rng.randf_range(.25, 1), rng.randf_range(-1, 1)).normalized()
+		sp.linear_velocity = square_particle_speed * Vector3(rng.randf_range(-1, 1), rng.randf_range(0, .75), rng.randf_range(-1, 1)).normalized()
 	await get_tree().create_timer(disappear_secs).timeout
 	queue_free()
