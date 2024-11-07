@@ -10,6 +10,8 @@ enum {
 }
 var behav_state := FOLLOW
 var strafing_left := false
+var stop_checking := false
+@export var stop_dist := 1.0
 
 enum {
 	MY_POS,
@@ -299,6 +301,7 @@ func start_attack():
 	aiming_at_target = true
 
 func end_attack():
+	stop_checking = false
 	attack_queued = false
 	no_attack_queued.emit()
 	for attack in phase2_short_dist_attack_chances.keys():
@@ -352,6 +355,9 @@ func choose_attack(attack_chances) -> String:
 func attack_frame():
 	if aiming_at_target:
 		lerp_look_at_position(target.global_position, attack_turn_speed)
+	if stop_checking and global_position.distance_to(target.global_position) < stop_dist:
+		velocity.x = 0
+		velocity.z = 0
 	
 func stop_aiming_at_target():
 	aiming_at_target = false
@@ -386,6 +392,7 @@ func teleport():
 
 func slipnslice_rush():
 	velocity = slipnslice_speed * -transform.basis.z
+	stop_checking = true
 
 func stop_mvmt():
 	velocity.x = 0
