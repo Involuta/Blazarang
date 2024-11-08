@@ -64,3 +64,5 @@ res://enemies/x_arrow.tscn
 res://glb_inherited_scenes/x_right_arm.tscn
 res://enemies/enemy_anims/x_armbombs_facelaser.res
 res://enemies/enemy_anims/x_triangle_volcano.res
+res://enemies/x_boss.gd
+res://enemies/enemy_anims/x_sweep.res

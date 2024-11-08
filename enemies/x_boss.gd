@@ -119,6 +119,7 @@ var dash_back_canceled := false
 @export var triangle_volcano_ascend_speed := 100.0
 @export var armbombs_dashback_lateral_dist := 40.0
 @export var armbombs_dashback_height := 20.0
+@export var lunge_facerain_float_dist := 5.0
 
 var phase2 := false
 var param_path_base := "parameters/StateMachine/conditions/"
@@ -156,9 +157,6 @@ func _ready():
 	x_mesh_head.visible = true
 	mhp1.visible = false
 	mhp2.visible = false
-
-func test():
-	print($X_boss_meshes/Armature/Skeleton3D/Head/GlowingHead.position)
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("Special"):
@@ -524,7 +522,7 @@ func spawn_volcano():
 	volcano_inst.global_position = global_position
 
 func triangle_volcano_ascend():
-	# Without this line, X's fall protection (which sets his y vel to 0 when his global y is below the min) would prevent his y vel from changing
+	# Without this line, X's fall protection (which sets his y vel to 0 when his global y is below the min) would prevent his y vel and pos from changing
 	global_position.y = min_y_pos + .01
 	velocity = triangle_volcano_ascend_speed * Vector3.UP
 	x_icon_lerp_val = .2
@@ -600,6 +598,23 @@ func armbombs_trigger():
 	left_arm.armbomb_trigger()
 	await get_tree().create_timer(.125).timeout
 	right_arm.armbomb_trigger()
+
+func lunge_facerain_start_dash():
+	# Without this line, X's fall protection (which sets his y vel to 0 when his global y is below the min) would prevent his y vel and pos from changing
+	global_position.y = min_y_pos + .01
+	var dir_to_target := global_position.direction_to(target.global_position)
+	var dist_to_target := global_position.distance_to(target.global_position)
+	var lateral_dist := dist_to_target+armbombs_dashback_lateral_dist
+	var fr_tween = get_tree().create_tween()
+	fr_tween.tween_property(self, "global_position", Vector3(lateral_dist * dir_to_target.x, .75*armbombs_dashback_height, lateral_dist * dir_to_target.z), 1).as_relative().set_ease(Tween.EASE_OUT)
+	fr_tween.tween_property(self, "global_position", Vector3(.1*lateral_dist * dir_to_target.x, .1*.75*armbombs_dashback_height, .1*lateral_dist * dir_to_target.z), .5).as_relative().set_ease(Tween.EASE_OUT)
+
+func lunge_facerain_end_dash():
+	look_at(target.global_position)
+	var fr_tween = get_tree().create_tween()
+	await fr_tween.tween_property(self, "global_position", target.global_position, .25).set_ease(Tween.EASE_IN).finished
+	rotation.x = 0
+	rotation.y = 0
 
 func recall_left_arm():
 	if not left_arm_deployed():
