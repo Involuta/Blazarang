@@ -120,6 +120,7 @@ var dash_back_canceled := false
 @export var armbombs_dashback_lateral_dist := 40.0
 @export var armbombs_dashback_height := 20.0
 @export var lunge_facerain_float_dist := 5.0
+@export var lunge_facerain_bomb_speed := 9
 
 var phase2 := false
 var param_path_base := "parameters/StateMachine/conditions/"
@@ -608,6 +609,35 @@ func lunge_facerain_start_dash():
 	var fr_tween = get_tree().create_tween()
 	fr_tween.tween_property(self, "global_position", Vector3(lateral_dist * dir_to_target.x, .75*armbombs_dashback_height, lateral_dist * dir_to_target.z), 1).as_relative().set_ease(Tween.EASE_OUT)
 	fr_tween.tween_property(self, "global_position", Vector3(.1*lateral_dist * dir_to_target.x, .1*.75*armbombs_dashback_height, .1*lateral_dist * dir_to_target.z), .5).as_relative().set_ease(Tween.EASE_OUT)
+
+func lunge_facerain_shoot_bombs():
+	var lhp = left_head_piece.instantiate()
+	level.add_child.call_deferred(lhp)
+	await lhp.tree_entered
+	var rhp = right_head_piece.instantiate()
+	level.add_child.call_deferred(rhp)
+	await rhp.tree_entered
+	var thp = top_head_piece.instantiate()
+	level.add_child.call_deferred(thp)
+	await thp.tree_entered
+	var bhp = bottom_head_piece.instantiate()
+	level.add_child.call_deferred(bhp)
+	await bhp.tree_entered
+	var dir_to_target = x_mesh_head.global_position.direction_to(target.global_position)
+	var dir_to_target_orth_2D = Vector2(dir_to_target.x, dir_to_target.z).orthogonal()
+	var dir_to_target_orth_3D = Vector3(dir_to_target_orth_2D.x, 0, dir_to_target_orth_2D.y)
+	lhp.linear_velocity = lunge_facerain_bomb_speed * (dir_to_target + dir_to_target_orth_3D)
+	lhp.global_position = x_mesh_head.global_position
+	lhp.rotation = Vector3(PI / 2, rotation.y, 0)
+	rhp.linear_velocity = lunge_facerain_bomb_speed * (dir_to_target - dir_to_target_orth_3D)
+	rhp.global_position = x_mesh_head.global_position
+	rhp.rotation = Vector3(PI / 2, rotation.y, 0)
+	thp.linear_velocity = 5 * lunge_facerain_bomb_speed * dir_to_target
+	thp.global_position = x_mesh_head.global_position
+	thp.rotation = Vector3(PI / 2, rotation.y, 0)
+	bhp.linear_velocity = lunge_facerain_bomb_speed * dir_to_target + lunge_facerain_bomb_speed * Vector3.UP
+	bhp.global_position = x_mesh_head.global_position
+	bhp.rotation = Vector3(PI / 2, rotation.y, 0)
 
 func lunge_facerain_end_dash():
 	look_at(target.global_position)

@@ -66,3 +66,5 @@ res://enemies/enemy_anims/x_armbombs_facelaser.res
 res://enemies/enemy_anims/x_triangle_volcano.res
 res://enemies/x_boss.gd
 res://enemies/enemy_anims/x_sweep.res
+res://enemies/x_head_piece.gd
+res://enemies/x_bottom_head_piece_rb.tscn

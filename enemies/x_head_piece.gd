@@ -30,3 +30,7 @@ func _ready():
 	volcano_inst.global_position = global_position
 	
 	queue_free()
+
+func _physics_process(delta):
+	if global_position.y < -30:
+		queue_free()
