@@ -156,7 +156,9 @@ func _ready():
 	x_mesh_head.visible = true
 	mhp1.visible = false
 	mhp2.visible = false
-	$X_boss_meshes/Armature/Skeleton3D/Head/GlowingHead.visible = false
+
+func test():
+	print($X_boss_meshes/Armature/Skeleton3D/Head/GlowingHead.position)
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("Special"):
