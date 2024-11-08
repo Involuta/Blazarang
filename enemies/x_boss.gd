@@ -611,6 +611,9 @@ func lunge_facerain_start_dash():
 	fr_tween.tween_property(self, "global_position", Vector3(.1*lateral_dist * dir_to_target.x, .1*.75*armbombs_dashback_height, .1*lateral_dist * dir_to_target.z), .5).as_relative().set_ease(Tween.EASE_OUT)
 
 func lunge_facerain_shoot_bombs():
+	if not x_mesh_head.visible:
+		return
+	x_mesh_head.visible = false
 	var lhp = left_head_piece.instantiate()
 	level.add_child.call_deferred(lhp)
 	await lhp.tree_entered

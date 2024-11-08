@@ -60,3 +60,7 @@ res://enemies/x_arrow.tscn
 res://enemies/x_boss.tscn
 res://glb_inherited_scenes/x_right_arm.tscn
 res://enemies/x_bottom_head_piece_rb.tscn
+res://enemies/x_boss.gd
+res://enemies/enemy_anims/x_lunge_facerain.res
+res://glb_inherited_scenes/x_boss_meshes.tscn
+res://enemies/enemy_anims/x_dash.res
