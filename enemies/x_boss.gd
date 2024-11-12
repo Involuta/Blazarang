@@ -627,15 +627,16 @@ func lunge_facerain_shoot_bombs():
 	level.add_child.call_deferred(bhp)
 	await bhp.tree_entered
 	var dir_to_target = x_mesh_head.global_position.direction_to(target.global_position)
+	dir_to_target.y = .5
 	var dir_to_target_orth_2D = Vector2(dir_to_target.x, dir_to_target.z).orthogonal()
 	var dir_to_target_orth_3D = Vector3(dir_to_target_orth_2D.x, 0, dir_to_target_orth_2D.y)
-	lhp.linear_velocity = 2.5 * lunge_facerain_bomb_speed * (dir_to_target + dir_to_target_orth_3D)
+	lhp.linear_velocity = lunge_facerain_bomb_speed * (dir_to_target + dir_to_target_orth_3D)
 	lhp.global_position = x_mesh_head.global_position
 	lhp.rotation = Vector3(PI / 2, rotation.y, 0)
-	rhp.linear_velocity = 2.5 * lunge_facerain_bomb_speed * (dir_to_target - dir_to_target_orth_3D)
+	rhp.linear_velocity = lunge_facerain_bomb_speed * (dir_to_target - dir_to_target_orth_3D)
 	rhp.global_position = x_mesh_head.global_position
 	rhp.rotation = Vector3(PI / 2, rotation.y, 0)
-	thp.linear_velocity = 5 * lunge_facerain_bomb_speed * dir_to_target
+	thp.linear_velocity = 2 * lunge_facerain_bomb_speed * dir_to_target
 	thp.global_position = x_mesh_head.global_position
 	thp.rotation = Vector3(PI / 2, rotation.y, 0)
 	bhp.linear_velocity = lunge_facerain_bomb_speed * dir_to_target
