@@ -649,6 +649,16 @@ func lunge_facerain_end_dash():
 	rotation.x = 0
 	rotation.y = 0
 
+func start_lunge_superkick():
+	# Without this line, X's fall protection (which sets his y vel to 0 when his global y is below the min) would prevent his y vel from changing
+	global_position.y = min_y_pos + .01
+	velocity = 2 * superman_fwd_speed * -transform.basis.z
+	velocity.y = superman_up_speed
+
+func lunge_superkick_rush():
+	velocity = 2 * superman_fwd_speed * -transform.basis.z
+	velocity.y = -superman_down_speed
+
 func recall_left_arm():
 	if not left_arm_deployed():
 		return
