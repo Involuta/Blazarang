@@ -121,6 +121,7 @@ var dash_back_canceled := false
 @export var armbombs_dashback_height := 20.0
 @export var lunge_facerain_float_dist := 5.0
 @export var lunge_facerain_bomb_speed := 9
+@export var lunge_laser_diagonal_dash_dist := 25.0
 
 var phase2 := false
 var param_path_base := "parameters/StateMachine/conditions/"
@@ -259,6 +260,9 @@ func left_arm_deployed():
 
 func right_arm_deployed():
 	return x_meshes.get_surface_override_material(5) != body_mat
+
+func head_deployed():
+	return not x_mesh_head.visible
 
 func queue_attack(dist_type):
 	attack_queued = true
@@ -429,21 +433,21 @@ func triangle_recall_arms():
 		right_mvmt_tween.tween_callback(restore_rig_right_arm)
 
 func triangle_shoot_arms():
-	left_arm.rotation_degrees = (rotation_degrees.y + 180 + triangle_arm_angle) * Vector3.UP
-	left_arm.visible = true
-	var left_arm_tween = get_tree().create_tween()
-	left_arm_tween.tween_callback(left_arm.stop_firing_laser)
-	left_arm_tween.tween_property(left_arm, "global_position", triangle_arm_dist*left_arm.basis.z, .3).as_relative().from(global_position + Vector3(-.2, .2, 0))
-	left_arm_tween.tween_property(left_arm, "rotation_degrees", Vector3.UP * -2 * triangle_arm_angle, .1).as_relative()
-	left_arm_tween.tween_callback(left_arm.fire_laser)
-	
-	right_arm.rotation_degrees = (rotation_degrees.y - 180 - triangle_arm_angle) * Vector3.UP
+	right_arm.rotation_degrees = (rotation_degrees.y + 180 + triangle_arm_angle) * Vector3.UP
 	right_arm.visible = true
 	var right_arm_tween = get_tree().create_tween()
 	right_arm_tween.tween_callback(right_arm.stop_firing_laser)
 	right_arm_tween.tween_property(right_arm, "global_position", triangle_arm_dist*right_arm.basis.z, .3).as_relative().from(global_position + Vector3(.2, .2, 0))
-	right_arm_tween.tween_property(right_arm, "rotation_degrees", Vector3.UP * 2 * triangle_arm_angle, .1).as_relative()
+	right_arm_tween.tween_property(right_arm, "rotation_degrees", Vector3.UP * -2 * triangle_arm_angle, .1).as_relative()
 	right_arm_tween.tween_callback(right_arm.fire_laser)
+	
+	left_arm.rotation_degrees = (rotation_degrees.y - 180 - triangle_arm_angle) * Vector3.UP
+	left_arm.visible = true
+	var left_arm_tween = get_tree().create_tween()
+	left_arm_tween.tween_callback(left_arm.stop_firing_laser)
+	left_arm_tween.tween_property(left_arm, "global_position", triangle_arm_dist*left_arm.basis.z, .3).as_relative().from(global_position + Vector3(-.2, .2, 0))
+	left_arm_tween.tween_property(left_arm, "rotation_degrees", Vector3.UP * 2 * triangle_arm_angle, .1).as_relative()
+	left_arm_tween.tween_callback(left_arm.fire_laser)
 
 func flyingkick_rush():
 	global_position.y = min_y_pos + .1
@@ -630,10 +634,10 @@ func lunge_facerain_shoot_bombs():
 	dir_to_target.y = .5
 	var dir_to_target_orth_2D = Vector2(dir_to_target.x, dir_to_target.z).orthogonal()
 	var dir_to_target_orth_3D = Vector3(dir_to_target_orth_2D.x, 0, dir_to_target_orth_2D.y)
-	lhp.linear_velocity = lunge_facerain_bomb_speed * (dir_to_target + dir_to_target_orth_3D)
+	lhp.linear_velocity = lunge_facerain_bomb_speed * (dir_to_target + dir_to_target_orth_3D).normalized()
 	lhp.global_position = x_mesh_head.global_position
 	lhp.rotation = Vector3(PI / 2, rotation.y, 0)
-	rhp.linear_velocity = lunge_facerain_bomb_speed * (dir_to_target - dir_to_target_orth_3D)
+	rhp.linear_velocity = lunge_facerain_bomb_speed * (dir_to_target - dir_to_target_orth_3D).normalized()
 	rhp.global_position = x_mesh_head.global_position
 	rhp.rotation = Vector3(PI / 2, rotation.y, 0)
 	thp.linear_velocity = 2 * lunge_facerain_bomb_speed * dir_to_target
@@ -659,6 +663,31 @@ func start_lunge_superkick():
 func lunge_superkick_rush():
 	velocity = 2 * superman_fwd_speed * -transform.basis.z
 	velocity.y = -superman_down_speed
+
+func start_lunge_laser():
+	# Without this line, X's fall protection (which sets his y vel to 0 when his global y is below the min) would prevent his y vel from changing
+	global_position.y = min_y_pos + .01
+	velocity = superman_fwd_speed * -transform.basis.z
+	velocity.y = superman_up_speed
+
+func lunge_laser_shoot_arm():
+	right_arm.rotation_degrees = (rotation_degrees.y + 180 + triangle_arm_angle) * Vector3.UP
+	right_arm.visible = true
+	var right_arm_tween = get_tree().create_tween()
+	right_arm_tween.tween_callback(right_arm.stop_firing_laser)
+	var right_arm_offset_vec = 1.5*triangle_arm_dist*right_arm.basis.z
+	right_arm_tween.tween_property(right_arm, "global_position", Vector3(global_position.x+right_arm_offset_vec.x, min_y_pos, global_position.z+right_arm_offset_vec.z), .3).from(global_position + Vector3(.2, .2, 0))
+	right_arm_tween.tween_property(right_arm, "rotation_degrees", -90*Vector3.UP, .1).as_relative()
+	right_arm_tween.tween_callback(right_arm.fire_laser)
+
+func lunge_laser_diagonal_dash():
+	var dir_to_target := global_position.direction_to(target.global_position)
+	var dir_to_target2D := Vector2(dir_to_target.x, dir_to_target.z)
+	var icon_vec := -dir_to_target2D.orthogonal()
+	var dash_dir2D := (dir_to_target2D + icon_vec).normalized()
+	var pos_tween := get_tree().create_tween()
+	var lateral_mvmt_vec := lunge_laser_diagonal_dash_dist * Vector3(dash_dir2D.x, 0, dash_dir2D.y)
+	pos_tween.tween_property(self, "global_position", Vector3(global_position.x + lateral_mvmt_vec.x, min_y_pos, global_position.z + lateral_mvmt_vec.z), 1.25).set_ease(Tween.EASE_OUT)
 
 func recall_left_arm():
 	if not left_arm_deployed():
