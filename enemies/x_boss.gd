@@ -686,7 +686,7 @@ func lunge_laser_diagonal_dash():
 	var dash_dir2D := (fwd_dir2D - fwd_dir2D.orthogonal()).normalized()
 	var pos_tween := get_tree().create_tween()
 	var lateral_mvmt_vec := lunge_laser_diagonal_dash_dist * Vector3(dash_dir2D.x, 0, dash_dir2D.y)
-	pos_tween.tween_property(self, "global_position", Vector3(global_position.x + lateral_mvmt_vec.x, min_y_pos, global_position.z + lateral_mvmt_vec.z), 1.25).set_ease(Tween.EASE_OUT)
+	pos_tween.tween_property(self, "global_position", Vector3(global_position.x + lateral_mvmt_vec.x, min_y_pos, global_position.z + lateral_mvmt_vec.z), 1.15).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 func recall_left_arm():
 	if not left_arm_deployed():
