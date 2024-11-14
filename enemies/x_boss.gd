@@ -657,11 +657,11 @@ func lunge_facerain_end_dash():
 func start_lunge_superkick():
 	# Without this line, X's fall protection (which sets his y vel to 0 when his global y is below the min) would prevent his y vel from changing
 	global_position.y = min_y_pos + .01
-	velocity = 2 * superman_fwd_speed * -transform.basis.z
+	velocity = superman_fwd_speed * -transform.basis.z
 	velocity.y = superman_up_speed
 
 func lunge_superkick_rush():
-	velocity = 2 * superman_fwd_speed * -transform.basis.z
+	velocity = 3 * superman_fwd_speed * -transform.basis.z
 	velocity.y = -superman_down_speed
 
 func start_lunge_laser():
@@ -681,10 +681,9 @@ func lunge_laser_shoot_arm():
 	right_arm_tween.tween_callback(right_arm.fire_laser)
 
 func lunge_laser_diagonal_dash():
-	var dir_to_target := global_position.direction_to(target.global_position)
-	var dir_to_target2D := Vector2(dir_to_target.x, dir_to_target.z)
-	var icon_vec := -dir_to_target2D.orthogonal()
-	var dash_dir2D := (dir_to_target2D + icon_vec).normalized()
+	var fwd_dir := -transform.basis.z
+	var fwd_dir2D := Vector2(fwd_dir.x, fwd_dir.z)
+	var dash_dir2D := (fwd_dir2D - fwd_dir2D.orthogonal()).normalized()
 	var pos_tween := get_tree().create_tween()
 	var lateral_mvmt_vec := lunge_laser_diagonal_dash_dist * Vector3(dash_dir2D.x, 0, dash_dir2D.y)
 	pos_tween.tween_property(self, "global_position", Vector3(global_position.x + lateral_mvmt_vec.x, min_y_pos, global_position.z + lateral_mvmt_vec.z), 1.25).set_ease(Tween.EASE_OUT)
