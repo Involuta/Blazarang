@@ -688,6 +688,19 @@ func lunge_laser_diagonal_dash():
 	var lateral_mvmt_vec := lunge_laser_diagonal_dash_dist * Vector3(dash_dir2D.x, 0, dash_dir2D.y)
 	pos_tween.tween_property(self, "global_position", Vector3(global_position.x + lateral_mvmt_vec.x, min_y_pos, global_position.z + lateral_mvmt_vec.z), 1.15).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
+func start_strafe_laser():
+	behav_state = STRAFE_FOLLOW
+	strafing_left = false
+	follow_speed *= 2
+
+func strafe_laser_deploy_arm():
+	right_arm.global_position = x_mesh_right_arm.global_position
+	right_arm.rotation = (PI/2 + rotation.y) * Vector3.UP
+	right_arm.visible = true
+	right_arm.fire_laser()
+	hide_rig_right_arm()
+	follow_speed /= 2
+
 func recall_left_arm():
 	if not left_arm_deployed():
 		return

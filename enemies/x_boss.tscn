@@ -1,4 +1,4 @@
-[gd_scene load_steps=152 format=3 uid="uid://dwniaym2g1off"]
+[gd_scene load_steps=155 format=3 uid="uid://dwniaym2g1off"]
 
 [ext_resource type="Script" path="res://enemies/x_boss.gd" id="1_u3wem"]
 [ext_resource type="Script" path="res://enemies/boss_hurtbox.gd" id="2_y4k4d"]
@@ -102,6 +102,9 @@ animation = &"RightArmSlice"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_scvwl"]
 animation = &"SlipnSlice"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ntf3h"]
+animation = &"StrafeLaser"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_q4nhp"]
 animation = &"Superkick"
@@ -450,6 +453,16 @@ xfade_time = 0.15
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tjcpb"]
+xfade_time = 0.15
+advance_mode = 2
+advance_condition = &"StrafeLaser"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sw40p"]
+xfade_time = 0.15
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_f8liy"]
 states/ArmBombs/node = SubResource("AnimationNodeAnimation_nam3m")
 states/ArmBombs/position = Vector2(939.413, -15.4126)
@@ -466,7 +479,7 @@ states/Dash-SlipnSlice/position = Vector2(136.861, -114.923)
 states/Dash-Superman/node = SubResource("AnimationNodeAnimation_j6evd")
 states/Dash-Superman/position = Vector2(809.77, 43.25)
 states/DiagonalDashLeft/node = SubResource("AnimationNodeAnimation_m4k54")
-states/DiagonalDashLeft/position = Vector2(78.915, 41.7924)
+states/DiagonalDashLeft/position = Vector2(163.415, 10.7924)
 states/DiagonalDashRight/node = SubResource("AnimationNodeAnimation_nekqg")
 states/DiagonalDashRight/position = Vector2(78.8549, 144.092)
 states/End/position = Vector2(1123, 98.8983)
@@ -477,7 +490,7 @@ states/FlyingFaceRainPrep/position = Vector2(730.956, -67.985)
 states/LeftArmRecall-ChainSlice/node = SubResource("AnimationNodeAnimation_v4oup")
 states/LeftArmRecall-ChainSlice/position = Vector2(982.291, 247.251)
 states/LeftArmRecall-SlipnSlice/node = SubResource("AnimationNodeAnimation_g1k2a")
-states/LeftArmRecall-SlipnSlice/position = Vector2(138.251, -27.0103)
+states/LeftArmRecall-SlipnSlice/position = Vector2(137.208, -42.0103)
 states/LeftArmRecall-Superman/node = SubResource("AnimationNodeAnimation_i18fe")
 states/LeftArmRecall-Superman/position = Vector2(589.46, -1.823)
 states/LungeFaceRain/node = SubResource("AnimationNodeAnimation_tjves")
@@ -491,8 +504,10 @@ states/RightArmLaser/position = Vector2(569.118, -114.883)
 states/RightArmSlice/node = SubResource("AnimationNodeAnimation_vy7vs")
 states/RightArmSlice/position = Vector2(741.982, 261.301)
 states/SlipnSlice/node = SubResource("AnimationNodeAnimation_scvwl")
-states/SlipnSlice/position = Vector2(387.955, -26.6853)
+states/SlipnSlice/position = Vector2(387.819, -41.8478)
 states/Start/position = Vector2(-113.5, 100.281)
+states/StrafeLaser/node = SubResource("AnimationNodeAnimation_ntf3h")
+states/StrafeLaser/position = Vector2(7.23439, 34.0169)
 states/Superkick/node = SubResource("AnimationNodeAnimation_q4nhp")
 states/Superkick/position = Vector2(780.368, 172.657)
 states/Superman/node = SubResource("AnimationNodeAnimation_b7uiy")
@@ -515,8 +530,8 @@ states/TriangleVolcano/node = SubResource("AnimationNodeAnimation_m2mtd")
 states/TriangleVolcano/position = Vector2(301.596, 295.783)
 states/WalkSpace/node = SubResource("AnimationNodeBlendSpace1D_j6rqy")
 states/WalkSpace/position = Vector2(387.977, 100.203)
-transitions = ["Start", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_wa8xh"), "WalkSpace", "SlipnSlice", SubResource("AnimationNodeStateMachineTransition_h7rje"), "SlipnSlice", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_1yfff"), "WalkSpace", "Superman", SubResource("AnimationNodeStateMachineTransition_3v00a"), "Superman", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_rac7r"), "WalkSpace", "Triangle", SubResource("AnimationNodeStateMachineTransition_cvaa1"), "Triangle", "TriangleAxKick", SubResource("AnimationNodeStateMachineTransition_aj21x"), "TriangleAxKick", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_fs8sj"), "Triangle", "TriangleFlyingKick", SubResource("AnimationNodeStateMachineTransition_3dfv1"), "TriangleFlyingKick", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_g4osy"), "WalkSpace", "LeftArmRecall-SlipnSlice", SubResource("AnimationNodeStateMachineTransition_jhkhm"), "WalkSpace", "LeftArmRecall-Superman", SubResource("AnimationNodeStateMachineTransition_u4r7n"), "LeftArmRecall-SlipnSlice", "Dash-SlipnSlice", SubResource("AnimationNodeStateMachineTransition_gupc8"), "Dash-SlipnSlice", "TPSlipnSlice", SubResource("AnimationNodeStateMachineTransition_0gtds"), "TPSlipnSlice", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_rioo5"), "LeftArmRecall-Superman", "Dash-Superman", SubResource("AnimationNodeStateMachineTransition_wx3ga"), "Dash-Superman", "Superman", SubResource("AnimationNodeStateMachineTransition_lsw81"), "LeftArmRecall-SlipnSlice", "SlipnSlice", SubResource("AnimationNodeStateMachineTransition_1p223"), "LeftArmRecall-Superman", "Superman", SubResource("AnimationNodeStateMachineTransition_qk3jt"), "WalkSpace", "Dash-SlipnSlice", SubResource("AnimationNodeStateMachineTransition_cyx8k"), "WalkSpace", "Dash-Superman", SubResource("AnimationNodeStateMachineTransition_7kjpw"), "WalkSpace", "DiagonalDashLeft", SubResource("AnimationNodeStateMachineTransition_qwgta"), "DiagonalDashLeft", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_tylw2"), "WalkSpace", "DiagonalDashRight", SubResource("AnimationNodeStateMachineTransition_k26i0"), "DiagonalDashRight", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_54rut"), "WalkSpace", "RightArmSlice", SubResource("AnimationNodeStateMachineTransition_mhdqe"), "RightArmSlice", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_lfv1l"), "WalkSpace", "RightArmLaser", SubResource("AnimationNodeStateMachineTransition_eg8h4"), "RightArmLaser", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_6uf0l"), "WalkSpace", "FlyingFaceRainPrep", SubResource("AnimationNodeStateMachineTransition_6y1jf"), "FlyingFaceRainPrep", "FlyingFaceRain", SubResource("AnimationNodeStateMachineTransition_1umvm"), "FlyingFaceRain", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_axdx7"), "Triangle", "TriangleVolcano", SubResource("AnimationNodeStateMachineTransition_23l36"), "TriangleVolcano", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_uead8"), "WalkSpace", "ChainSliceLeft", SubResource("AnimationNodeStateMachineTransition_n8rgg"), "WalkSpace", "LeftArmRecall-ChainSlice", SubResource("AnimationNodeStateMachineTransition_cb4ci"), "LeftArmRecall-ChainSlice", "ChainSliceLeft", SubResource("AnimationNodeStateMachineTransition_5qwjy"), "WalkSpace", "TPRightArmSlice", SubResource("AnimationNodeStateMachineTransition_mgkng"), "TPRightArmSlice", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_y1cvs"), "ChainSliceLeft", "ChainSliceLeftLaser", SubResource("AnimationNodeStateMachineTransition_s2llg"), "WalkSpace", "ArmBombs", SubResource("AnimationNodeStateMachineTransition_80vjm"), "ChainSliceLeftLaser", "Superkick", SubResource("AnimationNodeStateMachineTransition_w7af2"), "Superkick", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_bkfjp"), "ChainSliceLeft", "Superman", SubResource("AnimationNodeStateMachineTransition_hmiks"), "WalkSpace", "Sweep", SubResource("AnimationNodeStateMachineTransition_ykmto"), "WalkSpace", "Dash-ChainSliceLeft", SubResource("AnimationNodeStateMachineTransition_tdhwy"), "LeftArmRecall-ChainSlice", "Dash-ChainSliceLeft", SubResource("AnimationNodeStateMachineTransition_tj4k2"), "Dash-ChainSliceLeft", "TPChainSliceLeft", SubResource("AnimationNodeStateMachineTransition_3h60p"), "TPChainSliceLeft", "ChainSliceLeftLaser", SubResource("AnimationNodeStateMachineTransition_p48b0"), "TPChainSliceLeft", "Superman", SubResource("AnimationNodeStateMachineTransition_m5iqf"), "ArmBombs", "ArmBombsFaceLaser", SubResource("AnimationNodeStateMachineTransition_5p1h8"), "ArmBombsFaceLaser", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_6cf4p"), "Sweep", "LungeFaceRain", SubResource("AnimationNodeStateMachineTransition_nf5ph"), "LungeFaceRain", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_e5mqk"), "Sweep", "LungeSuperkick", SubResource("AnimationNodeStateMachineTransition_kv82x"), "LungeSuperkick", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_xpgfn"), "Sweep", "LungeLaser", SubResource("AnimationNodeStateMachineTransition_jpk2m"), "LungeLaser", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_kb15u")]
-graph_offset = Vector2(-410.146, 88.1395)
+transitions = ["Start", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_wa8xh"), "WalkSpace", "SlipnSlice", SubResource("AnimationNodeStateMachineTransition_h7rje"), "SlipnSlice", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_1yfff"), "WalkSpace", "Superman", SubResource("AnimationNodeStateMachineTransition_3v00a"), "Superman", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_rac7r"), "WalkSpace", "Triangle", SubResource("AnimationNodeStateMachineTransition_cvaa1"), "Triangle", "TriangleAxKick", SubResource("AnimationNodeStateMachineTransition_aj21x"), "TriangleAxKick", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_fs8sj"), "Triangle", "TriangleFlyingKick", SubResource("AnimationNodeStateMachineTransition_3dfv1"), "TriangleFlyingKick", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_g4osy"), "WalkSpace", "LeftArmRecall-SlipnSlice", SubResource("AnimationNodeStateMachineTransition_jhkhm"), "WalkSpace", "LeftArmRecall-Superman", SubResource("AnimationNodeStateMachineTransition_u4r7n"), "LeftArmRecall-SlipnSlice", "Dash-SlipnSlice", SubResource("AnimationNodeStateMachineTransition_gupc8"), "Dash-SlipnSlice", "TPSlipnSlice", SubResource("AnimationNodeStateMachineTransition_0gtds"), "TPSlipnSlice", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_rioo5"), "LeftArmRecall-Superman", "Dash-Superman", SubResource("AnimationNodeStateMachineTransition_wx3ga"), "Dash-Superman", "Superman", SubResource("AnimationNodeStateMachineTransition_lsw81"), "LeftArmRecall-SlipnSlice", "SlipnSlice", SubResource("AnimationNodeStateMachineTransition_1p223"), "LeftArmRecall-Superman", "Superman", SubResource("AnimationNodeStateMachineTransition_qk3jt"), "WalkSpace", "Dash-SlipnSlice", SubResource("AnimationNodeStateMachineTransition_cyx8k"), "WalkSpace", "Dash-Superman", SubResource("AnimationNodeStateMachineTransition_7kjpw"), "WalkSpace", "DiagonalDashLeft", SubResource("AnimationNodeStateMachineTransition_qwgta"), "DiagonalDashLeft", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_tylw2"), "WalkSpace", "DiagonalDashRight", SubResource("AnimationNodeStateMachineTransition_k26i0"), "DiagonalDashRight", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_54rut"), "WalkSpace", "RightArmSlice", SubResource("AnimationNodeStateMachineTransition_mhdqe"), "RightArmSlice", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_lfv1l"), "WalkSpace", "RightArmLaser", SubResource("AnimationNodeStateMachineTransition_eg8h4"), "RightArmLaser", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_6uf0l"), "WalkSpace", "FlyingFaceRainPrep", SubResource("AnimationNodeStateMachineTransition_6y1jf"), "FlyingFaceRainPrep", "FlyingFaceRain", SubResource("AnimationNodeStateMachineTransition_1umvm"), "FlyingFaceRain", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_axdx7"), "Triangle", "TriangleVolcano", SubResource("AnimationNodeStateMachineTransition_23l36"), "TriangleVolcano", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_uead8"), "WalkSpace", "ChainSliceLeft", SubResource("AnimationNodeStateMachineTransition_n8rgg"), "WalkSpace", "LeftArmRecall-ChainSlice", SubResource("AnimationNodeStateMachineTransition_cb4ci"), "LeftArmRecall-ChainSlice", "ChainSliceLeft", SubResource("AnimationNodeStateMachineTransition_5qwjy"), "WalkSpace", "TPRightArmSlice", SubResource("AnimationNodeStateMachineTransition_mgkng"), "TPRightArmSlice", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_y1cvs"), "ChainSliceLeft", "ChainSliceLeftLaser", SubResource("AnimationNodeStateMachineTransition_s2llg"), "WalkSpace", "ArmBombs", SubResource("AnimationNodeStateMachineTransition_80vjm"), "ChainSliceLeftLaser", "Superkick", SubResource("AnimationNodeStateMachineTransition_w7af2"), "Superkick", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_bkfjp"), "ChainSliceLeft", "Superman", SubResource("AnimationNodeStateMachineTransition_hmiks"), "WalkSpace", "Sweep", SubResource("AnimationNodeStateMachineTransition_ykmto"), "WalkSpace", "Dash-ChainSliceLeft", SubResource("AnimationNodeStateMachineTransition_tdhwy"), "LeftArmRecall-ChainSlice", "Dash-ChainSliceLeft", SubResource("AnimationNodeStateMachineTransition_tj4k2"), "Dash-ChainSliceLeft", "TPChainSliceLeft", SubResource("AnimationNodeStateMachineTransition_3h60p"), "TPChainSliceLeft", "ChainSliceLeftLaser", SubResource("AnimationNodeStateMachineTransition_p48b0"), "TPChainSliceLeft", "Superman", SubResource("AnimationNodeStateMachineTransition_m5iqf"), "ArmBombs", "ArmBombsFaceLaser", SubResource("AnimationNodeStateMachineTransition_5p1h8"), "ArmBombsFaceLaser", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_6cf4p"), "Sweep", "LungeFaceRain", SubResource("AnimationNodeStateMachineTransition_nf5ph"), "LungeFaceRain", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_e5mqk"), "Sweep", "LungeSuperkick", SubResource("AnimationNodeStateMachineTransition_kv82x"), "LungeSuperkick", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_xpgfn"), "Sweep", "LungeLaser", SubResource("AnimationNodeStateMachineTransition_jpk2m"), "LungeLaser", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_kb15u"), "WalkSpace", "StrafeLaser", SubResource("AnimationNodeStateMachineTransition_tjcpb"), "StrafeLaser", "WalkSpace", SubResource("AnimationNodeStateMachineTransition_sw40p")]
+graph_offset = Vector2(-86.3255, 7.74683)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_uk78c"]
 graph_offset = Vector2(-98.88, 452.5)
@@ -741,19 +756,21 @@ phase2_short_dist_attack_chances = {
 "Triangle": 2.08167e-12
 }
 phase2_long_dist_right_arm_deployed_attack_chances = {
-"ArmBombs": 0.3,
+"ArmBombs": 2.08167e-12,
 "ChainSlice": 2.08167e-12,
 "DiagonalDash": 2.08167e-12,
+"StrafeLaser": 2.08167e-12,
 "Superman": 2.08167e-12,
-"Sweep": 0.7,
+"Sweep": 2.08167e-12,
 "Triangle": 2.08167e-12
 }
 phase2_long_dist_right_arm_not_deployed_attack_chances = {
-"ArmBombs": 0.3,
+"ArmBombs": 2.08167e-12,
 "ChainSlice": 2.08167e-12,
 "RightArmLaser": 2.08167e-12,
+"StrafeLaser": 1.0,
 "Superman": 2.08167e-12,
-"Sweep": 0.7,
+"Sweep": 2.08167e-12,
 "Triangle": 2.08167e-12
 }
 diagonal_dash_speed = 22.0
@@ -779,7 +796,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.0
 shape = SubResource("CapsuleShape3D_5p3gr")
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
-transform = Transform3D(0.999999, -6.97573e-16, -1.5246e-23, -1.52459e-23, -4.37113e-08, 1, -6.97573e-16, -0.999999, -4.37114e-08, 2.08165e-12, 2.08165e-12, 0.8)
+transform = Transform3D(0.999999, -3.48787e-16, -3.48787e-16, -3.48787e-16, -0.999999, 8.74228e-08, -3.48787e-16, -8.74227e-08, -1, -2, 1, 2.08165e-12)
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
 process_mode = 4
@@ -814,6 +831,7 @@ visible = false
 
 [node name="XArrow" parent="MeleeHitboxPivot/XBlade/XLeftArm" index="4"]
 transform = Transform3D(25, -3.91753e-21, 8.788e-21, 3.91753e-21, 25, -8.788e-21, -8.788e-21, 8.788e-21, 25, 2.08165e-12, 2.08165e-12, -20)
+visible = true
 
 [node name="Cube" parent="MeleeHitboxPivot/XBlade/XLeftArm/XArrow" index="0"]
 surface_material_override/0 = ExtResource("5_qr4nt")
@@ -831,7 +849,7 @@ surface_material_override/0 = ExtResource("5_qr4nt")
 surface_material_override/0 = ExtResource("5_qr4nt")
 
 [node name="MeleeHitboxPivot2" type="Node3D" parent="."]
-transform = Transform3D(0.999999, -6.97573e-16, -1.5246e-23, -1.52459e-23, -4.37113e-08, 1, -6.97573e-16, -0.999999, -4.37114e-08, 2.08165e-12, 2.08165e-12, 0.8)
+transform = Transform3D(0.999999, -3.48787e-16, -3.48787e-16, -3.48787e-16, -0.999999, 8.74228e-08, -3.48787e-16, -8.74227e-08, -1, 2, 1, 2.08165e-12)
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot2"]
 process_mode = 4
@@ -862,66 +880,66 @@ visible = false
 
 [node name="XArrow" parent="MeleeHitboxPivot2/XBlade/XLeftArm" index="4"]
 transform = Transform3D(25, -3.91753e-21, 8.788e-21, 3.91753e-21, 25, -8.788e-21, -8.788e-21, 8.788e-21, 25, 2.08165e-12, 2.08165e-12, -20)
+visible = true
 
 [node name="Cube" parent="MeleeHitboxPivot2/XBlade/XLeftArm/XArrow" index="0"]
-transform = Transform3D(0.614, 0, 0, 0, 0.614, 0, 0, 0, 0.614, 0, 0, -2.41)
-transparency = 0.784
 surface_material_override/0 = ExtResource("5_qr4nt")
 
 [node name="Cube_001" parent="MeleeHitboxPivot2/XBlade/XLeftArm/XArrow" index="2"]
-transform = Transform3D(0.518, 0, 0, 0, 0.518, 0, 0, 0, 0.518, -1.205, 1.205, -2.41)
-transparency = 0.784
 surface_material_override/0 = ExtResource("5_qr4nt")
 
 [node name="Cube_002" parent="MeleeHitboxPivot2/XBlade/XLeftArm/XArrow" index="3"]
-transform = Transform3D(0.518, 0, 0, 0, 0.518, 0, 0, 0, 0.518, 1.205, 1.205, -2.41)
-transparency = 0.784
 surface_material_override/0 = ExtResource("5_qr4nt")
 
 [node name="Cube_003" parent="MeleeHitboxPivot2/XBlade/XLeftArm/XArrow" index="4"]
-transform = Transform3D(0.614, 0, 0, 0, 0.614, 0, 0, 0, 0.614, -1.205, -1.205, -2.41)
-transparency = 0.784
 surface_material_override/0 = ExtResource("5_qr4nt")
 
 [node name="Cube_004" parent="MeleeHitboxPivot2/XBlade/XLeftArm/XArrow" index="5"]
-transform = Transform3D(0.614, 0, 0, 0, 0.614, 0, 0, 0, 0.614, 1.205, -1.205, -2.41)
-transparency = 0.784
 surface_material_override/0 = ExtResource("5_qr4nt")
 
 [node name="X_boss_meshes" parent="." instance=ExtResource("5_f83nc")]
 transform = Transform3D(-0.1, 3.48787e-17, 8.74228e-09, 3.48787e-17, 0.1, -3.48787e-17, -8.74228e-09, -3.48787e-17, -0.1, 2.08165e-12, -1.3, 2.08165e-12)
 
 [node name="Skeleton3D" parent="X_boss_meshes/Armature" index="0"]
-bones/0/position = Vector3(-0.248111, 12.7539, 3.19081)
-bones/0/rotation = Quaternion(-0.308668, -0.00241343, 0.00153087, 0.951166)
-bones/1/position = Vector3(1.21961e-05, 1.53205, -0.0776105)
-bones/1/rotation = Quaternion(0.0344055, -8.3712e-05, -0.000324956, 0.999408)
-bones/2/rotation = Quaternion(0.104992, -0.0953676, -0.0469054, 0.988778)
-bones/3/position = Vector3(-0.0236071, 1.87316, 0.472064)
-bones/3/rotation = Quaternion(0.115475, -0.176145, -0.041622, 0.976681)
-bones/4/rotation = Quaternion(0.21086, 0.268578, -0.0347899, 0.939252)
-bones/8/rotation = Quaternion(0.184731, 0.412942, -0.0431817, 0.89078)
-bones/9/rotation = Quaternion(-1.82371e-07, -1.29509e-07, 0.874481, 0.48506)
-bones/10/rotation = Quaternion(-0.059301, 0.343278, 0.0684596, 0.934857)
-bones/12/rotation = Quaternion(-0.0473729, -0.0340474, 0.592429, 0.803508)
-bones/13/rotation = Quaternion(-1.44175e-06, 8.44566e-07, -0.85741, 0.514634)
-bones/14/rotation = Quaternion(-0.0582447, -0.0646072, -0.251019, 0.964066)
-bones/15/rotation = Quaternion(-0.0187023, -0.293504, -0.939097, 0.17777)
+bones/0/position = Vector3(-1.27822e-08, 11.292, 1.79208)
+bones/0/rotation = Quaternion(0.170509, 8.97589e-10, -4.43414e-09, 0.985356)
+bones/1/position = Vector3(-1.32654e-09, 1.5539, -0.0378107)
+bones/1/rotation = Quaternion(0.0187202, -3.99917e-11, 4.52445e-09, 0.999825)
+bones/2/rotation = Quaternion(0.0124303, 6.7747e-21, -6.77657e-21, 0.999923)
+bones/3/position = Vector3(1.68051e-18, 2.09289, -0.198792)
+bones/3/rotation = Quaternion(0.0189515, 8.47121e-21, 6.77697e-21, 0.99982)
+bones/4/rotation = Quaternion(-0.188774, -0.356388, 0.0950679, 0.910118)
+bones/8/rotation = Quaternion(0.537614, 0.188553, 0.105149, 0.815084)
+bones/9/rotation = Quaternion(4.84983e-08, -2.31298e-07, 0.00157235, 0.999999)
+bones/10/rotation = Quaternion(-0.0970106, 0.533919, 0.0473293, 0.838617)
+bones/12/rotation = Quaternion(0.292926, 0.00761174, 0.168844, 0.941078)
+bones/13/rotation = Quaternion(-5.98147e-07, 1.5555e-06, -0.340231, 0.940342)
+bones/14/rotation = Quaternion(-0.0257635, -0.641959, 0.0847246, 0.761608)
+bones/15/rotation = Quaternion(-0.0137657, -0.299143, -0.950682, 0.0807954)
 bones/15/scale = Vector3(0.999999, 1, 1)
-bones/16/rotation = Quaternion(-0.950971, -1.82831e-06, -3.71239e-06, 0.309281)
-bones/17/rotation = Quaternion(0.965392, 0.0816405, -0.0711684, 0.237252)
-bones/18/rotation = Quaternion(0.276954, 0.230055, -0.0684802, 0.93042)
-bones/20/rotation = Quaternion(-0.0294424, 0.557568, 0.825464, 0.0828267)
-bones/20/scale = Vector3(1, 1, 1)
-bones/21/rotation = Quaternion(-0.884589, 3.76034e-06, 8.75147e-06, 0.466372)
-bones/22/rotation = Quaternion(0.839552, -0.0197293, 0.00210108, 0.542918)
-bones/23/rotation = Quaternion(0.280705, -0.231214, 0.0698776, 0.928904)
+bones/16/rotation = Quaternion(-0.662345, -3.45273e-06, -2.26371e-06, 0.749199)
+bones/17/rotation = Quaternion(0.596981, 0.0198931, 0.00129642, 0.802008)
+bones/18/rotation = Quaternion(0.276974, 0.230057, -0.0684804, 0.930413)
+bones/20/rotation = Quaternion(-0.0413457, -0.0175088, 0.996753, 0.0668339)
+bones/20/scale = Vector3(0.999999, 1, 1)
+bones/21/rotation = Quaternion(-0.323813, 8.73678e-06, 3.7997e-06, 0.946121)
+bones/22/rotation = Quaternion(0.558629, -0.0177964, -0.00407989, 0.829217)
+bones/23/rotation = Quaternion(0.280717, -0.231214, 0.0698759, 0.9289)
 
 [node name="Head" parent="X_boss_meshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.999433, -0.00304552, -0.0335333, -0.0080967, 0.944943, -0.327134, 0.0326834, 0.32722, 0.944383, -0.111875, 20.4606, 1.32385)
+transform = Transform3D(0.727899, -0.0384927, -0.684603, 0.0152893, 0.999086, -0.0399188, 0.685513, 0.0185898, 0.727823, -0.14921, 19.3932, 4.7079)
+
+[node name="XHead" parent="X_boss_meshes/Armature/Skeleton3D/Head" index="0"]
+visible = true
+
+[node name="BottomFace" parent="X_boss_meshes/Armature/Skeleton3D/Head/XHead" index="0"]
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 1.66532e-12, 1.26747, 2)
+
+[node name="Facelaser" parent="X_boss_meshes/Armature/Skeleton3D/Head/XHead" index="14"]
+transform = Transform3D(0.1, -6.66422e-31, 2.91302e-39, 0, -4.37114e-08, -0.1, 6.66422e-32, 1, -4.37114e-09, 2.08165e-12, 2.08165e-12, 500)
 
 [node name="GlowingHead" parent="X_boss_meshes/Armature/Skeleton3D/Head" index="1"]
-transform = Transform3D(1, -4.23913e-09, -2.59347e-09, 1.06168e-09, 1, -1.29942e-08, -2.07412e-11, -3.0217e-09, 1, 2.08165e-12, -1.3, 2.5)
+transform = Transform3D(1, -4.23913e-09, -2.59347e-09, 1.06168e-09, 1, -1.29942e-08, -2.07412e-11, -3.0217e-09, 1, -1.36713e-07, 1.6229, 0.607077)
 transparency = 1.0
 
 [node name="BombParticles" parent="X_boss_meshes/Armature/Skeleton3D/Head/GlowingHead" index="0"]
@@ -933,16 +951,16 @@ surface_material_override/2 = SubResource("StandardMaterial3D_s05at")
 surface_material_override/5 = SubResource("StandardMaterial3D_s05at")
 
 [node name="LeftArm" parent="X_boss_meshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.53998, 0.841541, -0.0151671, 0.659063, -0.433962, -0.614258, -0.523506, 0.321691, -0.788959, 2.89392, 19.2098, 2.8538)
+transform = Transform3D(0.385664, 0.277018, -0.880071, 0.520821, -0.85272, -0.0401753, -0.761584, -0.442865, -0.47314, 3.5919, 18.1045, 4.33208)
 
 [node name="RightArm" parent="X_boss_meshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(-0.959934, 0.268309, 0.0808454, -0.0916969, -0.0281409, -0.995389, -0.264797, -0.962922, 0.0516166, -3.12964, 19.2002, -1.06092)
+transform = Transform3D(-0.310333, -0.691907, 0.651888, -0.517626, -0.452181, -0.726358, 0.797344, -0.562846, -0.217822, -3.5919, 18.0881, 4.36245)
 
 [node name="LeftFoot" parent="X_boss_meshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(-0.989499, 0.141825, -0.0278417, -0.053453, -0.180126, 0.982191, 0.134283, 0.973366, 0.185817, 1.72669, 9.19961, 4.66394)
+transform = Transform3D(-0.989494, 0.141863, -0.0278288, -0.143879, -0.985118, 0.0940325, -0.014075, 0.0970485, 0.995181, 2.11807, 3.95028, -0.889073)
 
 [node name="RightFoot" parent="X_boss_meshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(-0.989284, -0.14356, 0.0265842, 0.0171937, 0.0662608, 0.997655, -0.144984, 0.987421, -0.0630825, -2.0001, 9.54016, 7.32667)
+transform = Transform3D(-0.989283, -0.143569, 0.0265625, 0.145904, -0.978872, 0.143256, 0.00543432, 0.145597, 0.98933, -2.00012, 3.60402, -3.98534)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_uk78c")
@@ -955,6 +973,7 @@ parameters/StateMachine/conditions/FlyingFaceRain = false
 parameters/StateMachine/conditions/RightArmLaser = false
 parameters/StateMachine/conditions/RightArmSlice = false
 parameters/StateMachine/conditions/SlipnSlice = false
+parameters/StateMachine/conditions/StrafeLaser = false
 parameters/StateMachine/conditions/Superman = false
 parameters/StateMachine/conditions/Sweep = false
 parameters/StateMachine/conditions/TPRightArmSlice = false
@@ -1034,7 +1053,7 @@ strength = 2.66454e-15
 radius = 2.1
 
 [node name="ShockwavePivot" type="Node3D" parent="."]
-transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, -0.338255, 0.642138, -0.65273)
+transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 
 [node name="RingParticle" type="GPUParticles3D" parent="ShockwavePivot"]
 transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 0, 0, 0)
