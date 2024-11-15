@@ -75,29 +75,31 @@ var dash_back_canceled := false
 }
 
 @export var phase2_short_dist_attack_chances = {
-	"ChainSlice" : .25,
-	"Sweep" : .2,
-	"Superman" : .15,
+	"ArmBombs" : .1,
+	"ChainSlice" : .15,
+	"Sweep" : .3,
+	"Superman" : .05,
 	"RightArmSlice" : .3,
 	"Triangle" : .1
 }
 
 @export var phase2_long_dist_right_arm_deployed_attack_chances = {
-	"ArmBombs" : .25,
-	"Sweep" : .2,
-	"ChainSlice" : .2,
+	"ArmBombs" : .1,
+	"Sweep" : .35,
+	"ChainSlice" : .25,
 	"Superman" : .1,
 	"Triangle" : .1,
 	"DiagonalDash" : .1
 }
 
 @export var phase2_long_dist_right_arm_not_deployed_attack_chances = {
-	"ArmBombs" : .2,
-	"Sweep" : .2,
-	"ChainSlice" : .2,
-	"Superman" : .1,
+	"ArmBombs" : .1,
+	"Sweep" : .35,
+	"ChainSlice" : .1,
+	"Superman" : .05,
 	"Triangle" : .1,
-	"RightArmLaser" : .2
+	"RightArmLaser" : .15,
+	"StrafeLaser" : .15,
 }
 
 @export var diagonal_dash_speed := 30.0
@@ -691,7 +693,7 @@ func lunge_laser_diagonal_dash():
 func start_strafe_laser():
 	behav_state = STRAFE_FOLLOW
 	strafing_left = false
-	follow_speed *= 2
+	follow_speed *= 1.5
 
 func strafe_laser_deploy_arm():
 	right_arm.global_position = x_mesh_right_arm.global_position
@@ -699,7 +701,7 @@ func strafe_laser_deploy_arm():
 	right_arm.visible = true
 	right_arm.fire_laser()
 	hide_rig_right_arm()
-	follow_speed /= 2
+	follow_speed /= 1.5
 
 func recall_left_arm():
 	if not left_arm_deployed():
