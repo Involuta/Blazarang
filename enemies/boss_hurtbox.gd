@@ -8,7 +8,7 @@ var recovery_active := false
 
 var damage_indicator_value := 100.0
 
-@export var health_segment_thresholds := [0.0, .25, .5, .75, 1.0]
+@export var health_segment_thresholds := [0.0, .3, .6, .8, 1.0]
 var health_segment_threshold_index := 3
 
 func _ready():

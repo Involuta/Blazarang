@@ -93,3 +93,5 @@ res://enemies/enemy_anims/x_lunge_superkick.res
 res://enemies/enemy_anims/x_lunge_laser.res
 res://enemies/enemy_anims/x_strafe_laser.res
 res://globals.gd
+res://enemies/boss_hurtbox.gd
+res://GPUTrail-main/shaders/trail_draw_pass.gdshader
