@@ -29,9 +29,13 @@ enum DIST_TYPE {
 	LONG_DIST_RIGHT_ARM_NOT_DEPLOYED,
 	LONG_DIST_RIGHT_ARM_DEPLOYED
 }
-@export var min_long_dist_wait := 1.0
-@export var max_long_dist_wait := 2.0
-var long_dist_wait_remaining := 5.0
+@export var phase1_min_long_dist_wait := .5
+@export var phase1_max_long_dist_wait := 2.5
+@export var phase2_min_long_dist_wait := .2
+@export var phase2_max_long_dist_wait := 1
+var min_long_dist_wait := .5
+var max_long_dist_wait := 2.5
+var long_dist_wait_remaining := 2.5
 var attack_queued := false
 signal no_attack_queued
 
@@ -39,8 +43,8 @@ signal no_attack_queued
 
 @export var aggro_distance := -1
 
-@export var follow_speed := 10.0
-@export var follow_stop_dist := 2.5
+@export var follow_speed := 15.0
+@export var follow_stop_dist := 1.5
 @export var shortrange_attack_distance := 7.5
 
 @export var attack_duration_secs := 2.5
@@ -85,24 +89,24 @@ var dash_back_canceled := false
 
 @export var phase2_long_dist_right_arm_deployed_attack_chances = {
 	"ArmBombs" : .1,
-	"Sweep" : .3,
-	"ChainSlice" : .3,
+	"Sweep" : .325,
+	"ChainSlice" : .325,
 	"Superman" : .1,
 	"Triangle" : .1,
-	"DiagonalDash" : .1
+	"DiagonalDash" : .05
 }
 
 @export var phase2_long_dist_right_arm_not_deployed_attack_chances = {
 	"ArmBombs" : .1,
-	"Sweep" : .3,
-	"ChainSlice" : .15,
-	"Superman" : .05,
+	"Sweep" : .2,
+	"ChainSlice" : .1,
+	"Superman" : .1,
 	"Triangle" : .1,
-	"RightArmLaser" : .15,
-	"StrafeLaser" : .15,
+	"RightArmLaser" : .2,
+	"StrafeLaser" : .2,
 }
 
-@export var diagonal_dash_speed := 30.0
+@export var diagonal_dash_speed := 22.0
 @export var dash_speed := 40.0
 @export var dash_back_speed := 36.0
 @export var side_teleport_dist_from_target := 7.5
@@ -113,14 +117,14 @@ var dash_back_canceled := false
 @export var superman_down_speed := 7.0
 @export var triangle_arm_angle := 36.0
 @export var triangle_arm_dist := 90.0
-@export var triangle_axkick_dist := 10.0
+@export var triangle_axkick_dist := 2.25
 @export var flyingkick_speed := 200.0
 @export var flyingkick_hit_frames := 10 # Put the # of frames that the hitbox is active in the animation here
 @export var flying_facerain_piece_speed := 7.5
 @export var flying_facerain_height := 20.0
 @export var triangle_volcano_ascend_speed := 100.0
-@export var armbombs_dashback_lateral_dist := 40.0
-@export var armbombs_dashback_height := 20.0
+@export var armbombs_dashback_lateral_dist := 15.0
+@export var armbombs_dashback_height := 12.0
 @export var lunge_facerain_float_dist := 5.0
 @export var lunge_facerain_bomb_speed := 9
 @export var lunge_laser_diagonal_dash_dist := 25.0
@@ -155,8 +159,14 @@ func _ready():
 	add_to_group("lockonables")
 	if aggro_distance > 0:
 		behav_state = WAIT
+	
 	Globals.health_segment_lost.connect(on_health_segment_lost)
+	
+	min_long_dist_wait = phase1_min_long_dist_wait
+	max_long_dist_wait = phase1_max_long_dist_wait
+	
 	attack_turn_speed = .15
+	
 	anim_tree.active = true
 	x_mesh_head.visible = true
 	mhp1.visible = false
@@ -292,7 +302,12 @@ func on_health_segment_lost(seg_num):
 		attack_queued = true
 		anim_tree.set(param_path_base + "FlyingFaceRain", true)
 	if seg_num == 2:
-		phase2 = true
+		start_phase2()
+
+func start_phase2():
+	phase2 = true
+	min_long_dist_wait = phase2_min_long_dist_wait
+	max_long_dist_wait = phase2_max_long_dist_wait
 
 func aim_at_target():
 	aiming_at_target = true
@@ -365,7 +380,10 @@ func attack_frame():
 	if stop_checking and global_position.distance_to(target.global_position) < stop_dist:
 		velocity.x = 0
 		velocity.z = 0
-	
+
+func do_stop_checking():
+	stop_checking = true
+
 func stop_aiming_at_target():
 	aiming_at_target = false
 
@@ -399,7 +417,6 @@ func teleport():
 
 func slipnslice_rush():
 	velocity = slipnslice_speed * -transform.basis.z
-	stop_checking = true
 
 func stop_mvmt():
 	velocity.x = 0
@@ -547,7 +564,6 @@ func triangle_volcano_descend():
 
 func armbombs_dashback():
 	var dir_to_target := global_position.direction_to(target.global_position)
-	var original_pos := global_position
 	var dash_tween = get_tree().create_tween()
 	dash_tween.tween_property(self, "global_position", Vector3(-armbombs_dashback_lateral_dist * dir_to_target.x, armbombs_dashback_height, -armbombs_dashback_lateral_dist * dir_to_target.z), .3).as_relative().set_ease(Tween.EASE_IN)
 
