@@ -1,3 +1,5 @@
+TextureButton
+CanvasLayer
 Area3D
 StaticBody3D
 CollisionShape3D
@@ -29,4 +31,3 @@ RichTextLabel
 SubViewportContainer
 OmniLight3D
 NavigationRegion3D
-AudioStreamPlayer3D

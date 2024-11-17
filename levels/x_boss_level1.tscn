@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://pfq5suoxwxu0"]
+[gd_scene load_steps=12 format=3 uid="uid://pfq5suoxwxu0"]
 
 [ext_resource type="Script" path="res://levels/x_boss_level1.gd" id="1_sfodj"]
 [ext_resource type="PackedScene" uid="uid://kl1hpr0grn1v" path="res://ui/ui_root.tscn" id="2_h42ov"]
@@ -7,15 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="4_vjqpw"]
 [ext_resource type="PackedScene" uid="uid://be5qq551348yp" path="res://levels/x_boss_level_section_nodes/x_boss_arena1.tscn" id="5_cuvuo"]
 [ext_resource type="AudioStream" uid="uid://br0a4rin6vcg3" path="res://audio/music/COTU.wav" id="6_qrshy"]
+[ext_resource type="Texture2D" uid="uid://c2uiocih10ecm" path="res://textures/BlackStarryBG.webp" id="7_ha5vg"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2oney"]
-sky_top_color = Color(0.0196078, 0, 0.172549, 1)
-sky_horizon_color = Color(0.00392157, 0, 0.0745098, 1)
-ground_bottom_color = Color(0.00392157, 0, 0.0666667, 1)
-ground_horizon_color = Color(0.00392157, 0, 0.0745098, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_qyqhp"]
+panorama = ExtResource("7_ha5vg")
 
 [sub_resource type="Sky" id="Sky_xpqqj"]
-sky_material = SubResource("ProceduralSkyMaterial_2oney")
+sky_material = SubResource("PanoramaSkyMaterial_qyqhp")
 
 [sub_resource type="Environment" id="Environment_vgqir"]
 background_mode = 1

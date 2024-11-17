@@ -679,8 +679,10 @@ func start_lunge_superkick():
 	velocity.y = superman_up_speed
 
 func lunge_superkick_rush():
-	velocity = 3 * superman_fwd_speed * -transform.basis.z
-	velocity.y = -superman_down_speed
+	velocity = Vector3.ZERO
+	var lateral_dest := global_position + (global_position.distance_to(target.global_position)-1) * -transform.basis.z
+	var rush_tween = get_tree().create_tween()
+	rush_tween.tween_property(self, "global_position", Vector3(lateral_dest.x, min_y_pos, lateral_dest.z), .167).set_trans(Tween.TRANS_CUBIC)
 
 func start_lunge_laser():
 	# Without this line, X's fall protection (which sets his y vel to 0 when his global y is below the min) would prevent his y vel from changing
@@ -709,7 +711,7 @@ func lunge_laser_diagonal_dash():
 func start_strafe_laser():
 	behav_state = STRAFE_FOLLOW
 	strafing_left = false
-	follow_speed *= 1.5
+	follow_speed *= 2
 
 func strafe_laser_deploy_arm():
 	right_arm.global_position = x_mesh_right_arm.global_position
@@ -717,7 +719,7 @@ func strafe_laser_deploy_arm():
 	right_arm.visible = true
 	right_arm.fire_laser()
 	hide_rig_right_arm()
-	follow_speed /= 1.5
+	follow_speed /= 2
 
 func recall_left_arm():
 	if not left_arm_deployed():
