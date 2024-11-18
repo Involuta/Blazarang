@@ -1,11 +1,11 @@
 [gd_scene load_steps=10 format=3 uid="uid://kxc8o8fwfmnd"]
 
-[ext_resource type="Script" path="res://levels/hub_level.gd" id="1_4lyfx"]
-[ext_resource type="PackedScene" uid="uid://kl1hpr0grn1v" path="res://ui/ui_root.tscn" id="2_wjf4o"]
-[ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="3_ohw5y"]
-[ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="4_xqr0j"]
-[ext_resource type="PackedScene" uid="uid://djyktbqfnc8fs" path="res://levels/hub_section_nodes/hub_room1.tscn" id="6_juebu"]
-[ext_resource type="AudioStream" uid="uid://br0a4rin6vcg3" path="res://audio/music/COTU.wav" id="6_ww5lu"]
+[ext_resource type="Script" path="res://levels/hub/hub_level.gd" id="1_frjon"]
+[ext_resource type="PackedScene" uid="uid://kl1hpr0grn1v" path="res://ui/ui_root.tscn" id="2_aeo5n"]
+[ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="3_klwa5"]
+[ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="4_tdqnr"]
+[ext_resource type="AudioStream" uid="uid://br0a4rin6vcg3" path="res://audio/music/COTU.wav" id="5_4lgj2"]
+[ext_resource type="PackedScene" uid="uid://djyktbqfnc8fs" path="res://levels/hub/section_nodes/hub_room1.tscn" id="6_1ssbx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2oney"]
 sky_top_color = Color(0.0196078, 0, 0.172549, 1)
@@ -26,22 +26,22 @@ glow_intensity = 2.0
 glow_bloom = 0.2
 
 [node name="Level" type="Node3D"]
-script = ExtResource("1_4lyfx")
+script = ExtResource("1_frjon")
 
-[node name="UIRoot" parent="." instance=ExtResource("2_wjf4o")]
+[node name="UIRoot" parent="." instance=ExtResource("2_aeo5n")]
 
-[node name="cotuCB" parent="." instance=ExtResource("3_ohw5y")]
+[node name="cotuCB" parent="." instance=ExtResource("3_klwa5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 20, 2.08165e-12)
 
-[node name="Icon" parent="." instance=ExtResource("4_xqr0j")]
+[node name="Icon" parent="." instance=ExtResource("4_tdqnr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vgqir")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_ww5lu")
+stream = ExtResource("5_4lgj2")
 volume_db = -5.0
 bus = &"Music"
 
-[node name="hub_room1" parent="." instance=ExtResource("6_juebu")]
+[node name="hub_room1" parent="." instance=ExtResource("6_1ssbx")]

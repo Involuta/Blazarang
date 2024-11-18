@@ -21,6 +21,9 @@ func _process(delta):
 	cam.rotation_degrees.y = initial_rotation.y + max_y * get_shake_intensity() * get_noise_from_seed(1)
 	cam.rotation_degrees.z = initial_rotation.z + max_z * get_shake_intensity() * get_noise_from_seed(2)
 
+func _physics_process(delta):
+	Globals.emit_signal("camera_updated", rotation)
+
 func add_trauma(trauma_amount: float):
 	trauma = clamp(trauma + trauma_amount, 0.0, 1.0)
 

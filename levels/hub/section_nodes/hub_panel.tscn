@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://sjko7n65lhpb"]
 
-[ext_resource type="Texture2D" uid="uid://bpp6eajjxo4pl" path="res://textures/3-VAR1_1.webp" id="1_mt5do"]
-[ext_resource type="Script" path="res://levels/hub_section_nodes/hub_panel.gd" id="1_nmlbl"]
-[ext_resource type="Texture2D" uid="uid://wrxac3q4r5nq" path="res://textures/8164.webp" id="2_j23sq"]
+[ext_resource type="Script" path="res://levels/hub/section_nodes/hub_panel.gd" id="1_rfpe5"]
+[ext_resource type="Texture2D" uid="uid://bpp6eajjxo4pl" path="res://textures/3-VAR1_1.webp" id="2_016ii"]
+[ext_resource type="Texture2D" uid="uid://wrxac3q4r5nq" path="res://textures/8164.webp" id="3_cwi4u"]
 
 [sub_resource type="Animation" id="Animation_12g6a"]
 resource_name = "scroll_down"
@@ -165,19 +165,19 @@ _data = {
 }
 
 [node name="hub_panel" type="Node3D"]
-script = ExtResource("1_nmlbl")
+script = ExtResource("1_rfpe5")
 
 [node name="UpperPanel" type="Sprite3D" parent="."]
 transform = Transform3D(-8.74228e-09, -6.97573e-17, -0.2, 6.97573e-17, 0.2, -6.97573e-17, 0.2, -6.97573e-17, -8.74228e-09, 2.08165e-12, 6.5, 2.08165e-12)
-texture = ExtResource("1_mt5do")
+texture = ExtResource("2_016ii")
 
 [node name="MiddlePanel" type="Sprite3D" parent="."]
 transform = Transform3D(-1.31134e-08, -1.04636e-16, -0.3, 1.04636e-16, 0.3, -1.04636e-16, 0.3, -1.04636e-16, -1.31134e-08, 2.08165e-12, 3.5, 2.08165e-12)
-texture = ExtResource("2_j23sq")
+texture = ExtResource("3_cwi4u")
 
 [node name="LowerPanel" type="Sprite3D" parent="."]
 transform = Transform3D(-8.74228e-09, -6.97574e-17, -0.2, 6.97574e-17, 0.2, -6.97574e-17, 0.2, -6.97574e-17, -8.74228e-09, 2.08165e-12, 0.5, 2.08165e-12)
-texture = ExtResource("1_mt5do")
+texture = ExtResource("2_016ii")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

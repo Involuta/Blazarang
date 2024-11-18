@@ -1,5 +1,6 @@
 extends Node
 
+signal camera_updated(rotation: Vector3)
 signal score_updated(score_change: int)
 signal destabilize
 signal stabilize

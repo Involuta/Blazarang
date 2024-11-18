@@ -1,13 +1,13 @@
 [gd_scene load_steps=12 format=3 uid="uid://7jmfcqgrk3p5"]
 
-[ext_resource type="PackedScene" uid="uid://12ycnm4xr20d" path="res://levels/level1_section_nodes/gun_arena.tscn" id="1_eq6j6"]
+[ext_resource type="PackedScene" uid="uid://12ycnm4xr20d" path="res://levels/level1/section_nodes/gun_arena.tscn" id="1_eq6j6"]
 [ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="1_sh4lv"]
 [ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="2_k1mtd"]
-[ext_resource type="PackedScene" uid="uid://dpdul4hw6co6n" path="res://levels/level1_section_nodes/hallway_invasion.tscn" id="4_b2uwb"]
-[ext_resource type="PackedScene" uid="uid://bqk1kho3gqsuy" path="res://levels/level1_section_nodes/first_miniboss_arena.tscn" id="5_hviw6"]
-[ext_resource type="PackedScene" uid="uid://cvrxu2n1hugn" path="res://levels/level1_section_nodes/pillar_room.tscn" id="6_7q8mv"]
-[ext_resource type="PackedScene" uid="uid://cb211d57a0el6" path="res://levels/level1_section_nodes/top_gun_battlefield.tscn" id="7_4c48a"]
-[ext_resource type="PackedScene" uid="uid://c5h8xiiijgobm" path="res://levels/level1_section_nodes/arena_elevator.tscn" id="8_7juhr"]
+[ext_resource type="PackedScene" uid="uid://dpdul4hw6co6n" path="res://levels/level1/section_nodes/hallway_invasion.tscn" id="4_b2uwb"]
+[ext_resource type="PackedScene" uid="uid://bqk1kho3gqsuy" path="res://levels/level1/section_nodes/first_miniboss_arena.tscn" id="5_hviw6"]
+[ext_resource type="PackedScene" uid="uid://cvrxu2n1hugn" path="res://levels/level1/pillar_room.tscn" id="6_7q8mv"]
+[ext_resource type="PackedScene" uid="uid://cb211d57a0el6" path="res://levels/level1/top_gun_battlefield.tscn" id="7_4c48a"]
+[ext_resource type="PackedScene" uid="uid://c5h8xiiijgobm" path="res://levels/level1/section_nodes/arena_elevator.tscn" id="8_7juhr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pwxhw"]
 sky_top_color = Color(0.0196078, 0, 0.172549, 1)

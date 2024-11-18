@@ -1,0 +1,58 @@
+[gd_scene load_steps=13 format=3 uid="uid://bag075geuq340"]
+
+[ext_resource type="Script" path="res://levels/level1/level1.gd" id="1_ss1m7"]
+[ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="2_mtgvj"]
+[ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="3_sgbmd"]
+[ext_resource type="PackedScene" uid="uid://12ycnm4xr20d" path="res://levels/level1/section_nodes/gun_arena.tscn" id="4_l81pb"]
+[ext_resource type="PackedScene" uid="uid://dpdul4hw6co6n" path="res://levels/level1/section_nodes/hallway_invasion.tscn" id="5_hpenb"]
+[ext_resource type="PackedScene" uid="uid://bqk1kho3gqsuy" path="res://levels/level1/section_nodes/first_miniboss_arena.tscn" id="6_y45eq"]
+[ext_resource type="PackedScene" uid="uid://cvrxu2n1hugn" path="res://levels/level1/section_nodes/pillar_room.tscn" id="7_qey3u"]
+[ext_resource type="PackedScene" uid="uid://cb211d57a0el6" path="res://levels/level1/section_nodes/top_gun_battlefield.tscn" id="8_2q20b"]
+[ext_resource type="PackedScene" uid="uid://c5h8xiiijgobm" path="res://levels/level1/section_nodes/arena_elevator.tscn" id="9_4rxv8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2oney"]
+sky_top_color = Color(0.0196078, 0, 0.172549, 1)
+sky_horizon_color = Color(0.00392157, 0, 0.0745098, 1)
+ground_bottom_color = Color(0.00392157, 0, 0.0666667, 1)
+ground_horizon_color = Color(0.00392157, 0, 0.0745098, 1)
+
+[sub_resource type="Sky" id="Sky_xpqqj"]
+sky_material = SubResource("ProceduralSkyMaterial_2oney")
+
+[sub_resource type="Environment" id="Environment_vgqir"]
+background_mode = 1
+background_color = Color(0, 0, 0.164706, 1)
+sky = SubResource("Sky_xpqqj")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Level" type="Node3D"]
+script = ExtResource("1_ss1m7")
+spawn_hallway_delay_secs = 25
+
+[node name="cotuCB" parent="." instance=ExtResource("2_mtgvj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.0483, 47.3151, -58.963)
+
+[node name="Target" parent="." instance=ExtResource("3_sgbmd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, -30, 2.08165e-12)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vgqir")
+
+[node name="GunArena" parent="." instance=ExtResource("4_l81pb")]
+transform = Transform3D(-4.37114e-08, -3.48787e-16, -1, 3.48787e-16, 1, -3.48787e-16, 1, -3.48787e-16, -4.37114e-08, -45.2196, -1.26262, 2.08165e-12)
+
+[node name="HallwayInvasion" parent="." instance=ExtResource("5_hpenb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
+
+[node name="FirstMinibossArena" parent="." instance=ExtResource("6_y45eq")]
+transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, -24.0107, 35.5049, -59.2522)
+
+[node name="PillarRoom" parent="." instance=ExtResource("7_qey3u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.6537, 70.1562, 17.6183)
+
+[node name="TopGunBattlefield" parent="." instance=ExtResource("8_2q20b")]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, -155, -40, 2.08165e-12)
+
+[node name="ArenaElevator" parent="." instance=ExtResource("9_4rxv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -420, 20, 2.08165e-12)

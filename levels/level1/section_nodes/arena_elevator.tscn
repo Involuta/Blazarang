@@ -1,6 +1,6 @@
 [gd_scene load_steps=438 format=3 uid="uid://c5h8xiiijgobm"]
 
-[ext_resource type="Script" path="res://levels/level1_section_nodes/arena_elevator.gd" id="1_8iled"]
+[ext_resource type="Script" path="res://levels/level1/section_nodes/arena_elevator.gd" id="1_8iled"]
 [ext_resource type="Script" path="res://levels/gravity_box.gd" id="3_hi8ns"]
 [ext_resource type="PackedScene" uid="uid://dro4y6wgais4q" path="res://enemies/spawners/EnemySpawner.tscn" id="4_8k527"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="5_hi1m2"]

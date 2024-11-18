@@ -58,7 +58,7 @@ func _physics_process(_delta):
 		$BlackScreenAnimations.play("death_fall")
 
 func return_to_hub():
-	get_tree().change_scene_to_file("res://levels/hub.tscn")
+	get_tree().change_scene_to_file("res://levels/hub/hub.tscn")
 
 func on_destabilize():
 	$DestabilizeAnimation.play("destabilize")

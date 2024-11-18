@@ -1,6 +1,6 @@
 [gd_scene load_steps=109 format=3 uid="uid://dpdul4hw6co6n"]
 
-[ext_resource type="Script" path="res://levels/level1_section_nodes/hallway_invasion.gd" id="1_xrkj2"]
+[ext_resource type="Script" path="res://levels/level1/section_nodes/hallway_invasion.gd" id="1_xrkj2"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_rl1bk"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="3_oluno"]
 [ext_resource type="Texture2D" uid="uid://cyg2snr1w5xw5" path="res://addons/func_godot/textures/default_texture.png" id="4_q08pe"]

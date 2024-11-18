@@ -1,6 +1,6 @@
 [gd_scene load_steps=90 format=3 uid="uid://cb211d57a0el6"]
 
-[ext_resource type="Script" path="res://levels/level1_section_nodes/top_gun_battlefield.gd" id="1_r4ivc"]
+[ext_resource type="Script" path="res://levels/level1/section_nodes/top_gun_battlefield.gd" id="1_r4ivc"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="4_c271x"]
 [ext_resource type="Material" uid="uid://cxu1tqk1f0s3w" path="res://textures/solid_dark_gray_tile.tres" id="4_lct11"]
 [ext_resource type="Material" uid="uid://ko2um8xuaqng" path="res://textures/RedBorderedRect.tres" id="4_obddq"]

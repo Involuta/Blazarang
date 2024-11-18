@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmuqsguscdwmr"]
+
+[ext_resource type="Script" path="res://bg_camera.gd" id="1_qycqg"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_hcnjo"]
+
+[node name="XBossLevelBackground" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.26798, 0, 0)
+mesh = SubResource("BoxMesh_hcnjo")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.73165, 1.59025, 5.00645)
+mesh = SubResource("BoxMesh_hcnjo")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.71405, 0.85507, -9.96492)
+mesh = SubResource("BoxMesh_hcnjo")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.71405, 7.17872, 1.71037)
+mesh = SubResource("BoxMesh_hcnjo")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+script = ExtResource("1_qycqg")

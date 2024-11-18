@@ -1,10 +1,11 @@
+Camera3D
+MeshInstance3D
 TextureButton
 CanvasLayer
 Area3D
 StaticBody3D
 CollisionShape3D
 GPUParticles3D
-MeshInstance3D
 Node3D
 AnimationPlayer
 CPUParticles3D
@@ -12,7 +13,6 @@ AnimatedSprite3D
 Hitbox
 RigidBody3D
 GPUTrail3D
-Camera3D
 Node2D
 GPUParticles2D
 TextureRect
@@ -30,4 +30,3 @@ SubViewport
 RichTextLabel
 SubViewportContainer
 OmniLight3D
-NavigationRegion3D
