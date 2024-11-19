@@ -199,9 +199,9 @@ shape = SubResource("BoxShape3D_ufggu")
 [node name="XBoss" parent="." instance=ExtResource("2_duonk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 11.4, 2.08165e-12)
 
-[node name="XLeftArm" parent="." instance=ExtResource("2_2tvw5")]
+[node name="FloatingXLeftArm" parent="." instance=ExtResource("2_2tvw5")]
 
-[node name="XRightArm" parent="." instance=ExtResource("3_dvggr")]
+[node name="FloatingXRightArm" parent="." instance=ExtResource("3_dvggr")]
 
 [node name="XIcon" parent="." instance=ExtResource("8_ha6s8")]
 transform = Transform3D(0.5, -1.74393e-16, 1.74393e-16, 1.74393e-16, 0.5, -1.74393e-16, -1.74393e-16, 1.74393e-16, 0.5, 2.08165e-12, 10.1, 2.08165e-12)

@@ -1,11 +1,16 @@
 extends Level
 
-@onready var x_health_bar := $UIRoot/XHealthBar
-@onready var x_damage_indicator := $UIRoot/XHealthBar/DamageIndicator
-@onready var x_hurtbox := $XBossArena1/XBoss/EnemyHurtbox
+var ui_root : Control
+var x_health_bar : Control
+var x_damage_indicator : Control
+var x_hurtbox : Node3D
 
 func _ready():
-	$UIRoot.hide_black_screen()
+	ui_root = root.find_child("UIRoot")
+	x_health_bar = ui_root.find_child("XHealthBar")
+	x_damage_indicator = x_health_bar.get_node("DamageIndicator")
+	x_hurtbox = root.find_child("EnemyHurtbox")
+	ui_root.hide_black_screen()
 	x_damage_indicator.max_value = x_hurtbox.max_health
 
 func _physics_process(_delta):

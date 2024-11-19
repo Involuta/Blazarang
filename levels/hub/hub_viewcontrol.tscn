@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnt63k7skyo8a"]
+
+[ext_resource type="PackedScene" uid="uid://cmuqsguscdwmr" path="res://levels/x_boss_level/x_boss_level_background.tscn" id="1_nolqg"]
+[ext_resource type="PackedScene" uid="uid://kxc8o8fwfmnd" path="res://levels/hub/hub.tscn" id="2_4mfw5"]
+[ext_resource type="PackedScene" uid="uid://kl1hpr0grn1v" path="res://ui/ui_root.tscn" id="3_q1drv"]
+
+[node name="ViewControl" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BGViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="BGViewportContainer"]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="XBossLevelBackground" parent="BGViewportContainer/SubViewport" instance=ExtResource("1_nolqg")]
+
+[node name="LevelViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="LevelViewportContainer"]
+own_world_3d = true
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="Level" parent="LevelViewportContainer/SubViewport" instance=ExtResource("2_4mfw5")]
+
+[node name="UIRoot" parent="." instance=ExtResource("3_q1drv")]
+layout_mode = 1

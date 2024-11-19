@@ -37,9 +37,12 @@ const MAX_RETURN_SPEED := 55
 var rapidorbit_script := preload("res://rang/special_rapidorbit.gd")
 var homing_script := preload("res://rang/special_homing.gd")
 var ricochet_particles := preload("res://rang/rang_particles_ricochet.tscn")
-@onready var level := $/root/Level
-@onready var cotu = $/root/Level/cotuCB
-@onready var target = $/root/Level/Icon
+
+@onready var root := $/root/ViewControl
+var level
+var cotu
+var target
+
 @onready var hitbox = $PlayerHitbox
 @onready var mesh = $boomerang
 @onready var trail = $Trail
@@ -55,6 +58,10 @@ var ricochet_particles := preload("res://rang/rang_particles_ricochet.tscn")
 @onready var ricochet_sfx := $RicochetAudioStream
 
 func _ready():
+	level = root.find_child("Level")
+	cotu = root.find_child("cotuCB")
+	target = level.find_child("Icon")
+	
 	flying_sfx.play()
 	target.roserang_queued = false
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, true)

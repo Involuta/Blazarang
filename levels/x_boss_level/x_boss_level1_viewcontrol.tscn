@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://kl1hpr0grn1v" path="res://ui/ui_root.tscn" id="3_1gbxc"]
 [ext_resource type="PackedScene" uid="uid://daj44qqb6dior" path="res://ui/health_bar.tscn" id="4_2353f"]
 
-[node name="XBossLevel1ViewControl" type="Control"]
+[node name="ViewControl" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

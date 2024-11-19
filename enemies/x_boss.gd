@@ -146,19 +146,28 @@ var bottom_head_piece := preload("res://enemies/x_bottom_head_piece_rb.tscn")
 @onready var x_mesh_head := $X_boss_meshes/Armature/Skeleton3D/Head/XHead
 @onready var x_mesh_left_arm := $X_boss_meshes/Armature/Skeleton3D/LeftArm
 @onready var x_mesh_right_arm := $X_boss_meshes/Armature/Skeleton3D/RightArm
-@onready var level := $/root/LevelViewPortContainer/SubViewport/Level
-@onready var target := $/root/LevelViewPortContainer/SubViewport/Level/Icon
-@onready var left_arm := $/root/LevelViewPortContainer/SubViewport/Level/XBossArena1/XLeftArm
-@onready var right_arm := $/root/LevelViewPortContainer/SubViewport/Level/XBossArena1/XRightArm
-@onready var x_icon := $/root/LevelViewPortContainer/SubViewport/Level/XBossArena1/XIcon
-@onready var x_icon_pos := $/root/LevelViewPortContainer/SubViewport/Level/XBossArena1/XIconPos
 @onready var mhp1 := $MeleeHitboxPivot/XBlade/XLeftArm
 @onready var mhp2 := $MeleeHitboxPivot2/XBlade/XLeftArm
+
+@onready var root := $/root/ViewControl
+var level : Node3D
+var target : Node3D
+var left_arm : Node3D
+var right_arm : Node3D
+var x_icon : Node3D
+var x_icon_pos : Node3D
 
 func _ready():
 	add_to_group("lockonables")
 	if aggro_distance > 0:
 		behav_state = WAIT
+	
+	level = root.find_child("Level")
+	target = level.get_node("Icon")
+	left_arm = level.find_child("FloatingXLeftArm")
+	right_arm = level.find_child("FloatingXRightArm")
+	x_icon = root.find_child("XIcon")
+	x_icon_pos = root.find_child("XIconPos")
 	
 	Globals.health_segment_lost.connect(on_health_segment_lost)
 	

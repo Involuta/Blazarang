@@ -13,9 +13,10 @@ extends Control
 @onready var buff_icon1 := $BuffIcon1Pivot/BuffIcon1
 var buff1_applied := false
 
-@onready var cotu := $/root/LevelViewPortContainer/SubViewport/Level/cotuCB
-@onready var cotu_hurtbox := $/root/LevelViewPortContainer/SubViewport/Level/cotuCB/Hurtbox
-@onready var cotu_icon := $/root/LevelViewPortContainer/SubViewport/Level/Icon
+@onready var root := $/root/ViewControl
+var cotu : Node3D
+var cotu_hurtbox : Node3D
+var cotu_icon : Node3D
 
 @export var destab_shader_opacity := .5
 @export var glitch_shader_shake_power := .03
@@ -25,6 +26,10 @@ var buff1_applied := false
 @onready var score_num_display := $ScoreNumDisplay
 
 func _ready():
+	cotu = root.find_child("cotuCB")
+	cotu_hurtbox = root.find_child("Hurtbox")
+	cotu_icon = root.find_child("Icon")
+
 	cotu_health_bar.modulate = Color.WHITE
 	cotu_damage_indicator.max_value = cotu_hurtbox.max_health
 	glitch_box.visible = false
@@ -58,7 +63,7 @@ func _physics_process(_delta):
 		$BlackScreenAnimations.play("death_fall")
 
 func return_to_hub():
-	get_tree().change_scene_to_file("res://levels/hub/hub.tscn")
+	get_tree().change_scene_to_file("res://levels/hub/hub_viewcontrol.tscn")
 
 func on_destabilize():
 	$DestabilizeAnimation.play("destabilize")

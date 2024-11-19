@@ -8,15 +8,18 @@ var roserang_queued := false # did the rang just hit the target while in the ric
 var rang_thrown := true # the roserang script has just readied; was the rang thrown by Cotu, or did it come from a ricochet or return state?
 
 @onready var anim_tree = $AnimationTree
-@onready var cotu = $/root/Level/cotuCB
-@onready var cotu_hurtbox = $/root/Level/cotuCB/Hurtbox
+
+@onready var root := $/root/ViewControl
+var cotu : Node3D
+var cotu_hurtbox : Node3D
 
 @export var icon_self_heal := 18.0
 @export var buff_list := [Globals.BUFFS.DAMAGE, Globals.BUFFS.DAMAGE, Globals.BUFFS.DAMAGE]
 @export var next_buff_index := 0
 
 func _ready():
-	pass
+	cotu = root.find_child("cotuCB")
+	cotu_hurtbox = cotu.find_child("Hurtbox")
 
 func _physics_process(_delta):
 	var dist_to_cotu := global_position.distance_to(cotu.global_position)

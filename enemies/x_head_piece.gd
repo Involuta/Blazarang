@@ -6,9 +6,12 @@ extends RigidBody3D
 
 @onready var flight_particles := $FlightParticles
 @onready var bomb_particles := $BombParticles
-@onready var level := $/root/Level
+
+@onready var root := $/root/ViewControl
+var level : Node3D
 
 func _ready():
+	level = root.find_child("Level")
 	flight_particles.visible = true
 	bomb_particles.visible = false
 	await get_tree().create_timer(flight_secs).timeout

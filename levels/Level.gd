@@ -4,12 +4,16 @@ extends Node3D
 var cotu_look_direction := Vector3.FORWARD
 @export var map_import_scale_factor := 32
 @export var lockonable_limit := 20
-@onready var cotu = $/root/Level/cotuCB
-@onready var camera_twist_pivot = $/root/Level/cotuCB/CameraTwistPivot
-@onready var camera = $/root/Level/cotuCB/CameraTwistPivot/CameraPitchPivot/CameraVisualObject/ShakeableCamera/Camera3D
+
+@onready var root := $/root/ViewControl
+var cotu : Node3D
+var camera_twist_pivot : Node3D
+var camera : Node3D
 
 func _ready():
-	pass
+	cotu = root.find_child("cotuCB")
+	camera_twist_pivot = cotu.find_child("CameraTwistPivot")
+	camera = cotu.find_child("Camera3D")
 
 func _process(_delta):
 	if Input.is_action_just_pressed("LockOn"):

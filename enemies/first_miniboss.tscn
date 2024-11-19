@@ -2334,7 +2334,7 @@ libraries = {
 
 [node name="MeleeHitboxPivot3" type="Node3D" parent="."]
 process_mode = 4
-transform = Transform3D(-0.210787, -1.53946, 1.25922, 1.22122, 0.899258, 1.30382, -1.56977, 0.906306, 0.845238, 2.08165e-12, -1, 2.08165e-12)
+transform = Transform3D(-0.210787, -1.53946, 1.25922, 1.22122, 0.899257, 1.30382, -1.56977, 0.906306, 0.845238, 2.08165e-12, -1, 2.08165e-12)
 visible = false
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot3"]

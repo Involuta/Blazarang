@@ -49,15 +49,22 @@ var roserang_instance = null
 @onready var camera_pitch_pivot := $CameraTwistPivot/CameraPitchPivot
 @onready var camera := $CameraTwistPivot/CameraPitchPivot/CameraVisualObject
 @onready var rang_pointer_pivot := $RangPointerPivot
-@onready var target := $/root/Level/Icon
-@onready var ui := $/root/Level/UIRoot
 @onready var armature := $CotuAnims/Armature
 @onready var anim_tree := $AnimationTree
 @onready var hurtbox := $Hurtbox
 
+@onready var root := $/root/ViewControl
+var level : Node3D
+var target: Node3D
+var ui: Control
+
 const LERP_VAL := .15 # The rate at which lerp funcs change; used for body mvmt animations
 
 func _ready():
+	level = root.find_child("Level")
+	target = root.find_child("Icon")
+	ui = root.find_child("UIRoot")
+	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	Globals.destabilize.connect(on_destabilize)

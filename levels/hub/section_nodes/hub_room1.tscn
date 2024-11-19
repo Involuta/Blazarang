@@ -348,7 +348,7 @@ texture_value_dict = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 2.08165e-12, -3.5)
 texture_value_dict = {
 "res://textures/3-VAR1_1.webp": "res://levels/gauntlet_level1.tscn",
-"res://textures/8164.webp": "res://levels/x_boss_level/x_boss_level1.tscn"
+"res://textures/8164.webp": "res://levels/x_boss_level/x_boss_level1_viewcontrol.tscn"
 }
 
 [node name="PanelSelector" type="MeshInstance3D" parent="."]

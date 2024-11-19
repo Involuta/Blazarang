@@ -9,9 +9,12 @@ var max_health := 100.0 # This is only set by the Globals script or the CotuHurt
 var current_opponent_hitboxes
 @export var opponent_hitboxes := ["default"]
 @onready var parent := get_parent()
-@onready var level := $/root/Level
+
+@onready var root := $/root/ViewControl
+var level : Node3D
 
 func _ready():
+	level = root.find_child("Level")
 	area_entered.connect(on_hit)
 	current_opponent_hitboxes = opponent_hitboxes
 
