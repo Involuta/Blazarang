@@ -163,11 +163,11 @@ func _ready():
 		behav_state = WAIT
 	
 	level = root.find_child("Level")
-	target = level.get_node("Icon")
+	target = level.find_child("Icon")
 	left_arm = level.find_child("FloatingXLeftArm")
 	right_arm = level.find_child("FloatingXRightArm")
-	x_icon = root.find_child("XIcon")
-	x_icon_pos = root.find_child("XIconPos")
+	x_icon = level.find_child("XIcon")
+	x_icon_pos = level.find_child("XIconPos")
 	
 	Globals.health_segment_lost.connect(on_health_segment_lost)
 	

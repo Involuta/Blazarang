@@ -27,7 +27,7 @@ var cotu_icon : Node3D
 
 func _ready():
 	cotu = root.find_child("cotuCB")
-	cotu_hurtbox = root.find_child("Hurtbox")
+	cotu_hurtbox = cotu.find_child("Hurtbox")
 	cotu_icon = root.find_child("Icon")
 
 	cotu_health_bar.modulate = Color.WHITE

@@ -62,7 +62,7 @@ const LERP_VAL := .15 # The rate at which lerp funcs change; used for body mvmt 
 
 func _ready():
 	level = root.find_child("Level")
-	target = root.find_child("Icon")
+	target = level.find_child("Icon")
 	ui = root.find_child("UIRoot")
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
