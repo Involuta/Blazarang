@@ -1,8 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://cmuqsguscdwmr"]
+[gd_scene load_steps=8 format=3 uid="uid://cmuqsguscdwmr"]
 
+[ext_resource type="Material" uid="uid://b348dodss1ihp" path="res://textures/small_solid_white.tres" id="1_2qt1n"]
 [ext_resource type="Script" path="res://bg_camera.gd" id="1_qycqg"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_hcnjo"]
+material = ExtResource("1_2qt1n")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_taasp"]
+load_path = "res://.godot/imported/BlackStarryBG.webp-42cfbe646311ffffd0833896f1e64777.s3tc.ctex"
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_4umln"]
+panorama = SubResource("CompressedTexture2D_taasp")
+
+[sub_resource type="Sky" id="Sky_vjvoc"]
+sky_material = SubResource("PanoramaSkyMaterial_4umln")
+
+[sub_resource type="Environment" id="Environment_cg8r5"]
+background_mode = 1
+background_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+sky = SubResource("Sky_vjvoc")
+ambient_light_source = 1
+reflected_light_source = 1
+tonemap_mode = 2
+glow_intensity = 2.0
+glow_blend_mode = 0
+glow_hdr_threshold = 1.5
 
 [node name="XBossLevelBackground" type="Node3D"]
 
@@ -24,3 +46,6 @@ mesh = SubResource("BoxMesh_hcnjo")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 script = ExtResource("1_qycqg")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_cg8r5")

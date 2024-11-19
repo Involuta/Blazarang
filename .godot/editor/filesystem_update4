@@ -79,3 +79,4 @@ res://rang/destroy_on_cotu_hit.gd
 res://cotu/shakeable_camera.gd
 res://levels/x_boss_level/x_boss_level1.gd
 res://enemies/x_head_piece.gd
+res://levels/level_viewport_container.gd

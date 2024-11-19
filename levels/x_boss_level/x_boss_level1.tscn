@@ -7,21 +7,23 @@
 [ext_resource type="Texture2D" uid="uid://c2uiocih10ecm" path="res://textures/BlackStarryBG.webp" id="7_06s5i"]
 [ext_resource type="AudioStream" uid="uid://br0a4rin6vcg3" path="res://audio/music/COTU.wav" id="8_crtxc"]
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_qyqhp"]
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ea6bh"]
 panorama = ExtResource("7_06s5i")
 
-[sub_resource type="Sky" id="Sky_xpqqj"]
-sky_material = SubResource("PanoramaSkyMaterial_qyqhp")
+[sub_resource type="Sky" id="Sky_pojwu"]
+sky_material = SubResource("PanoramaSkyMaterial_ea6bh")
 
-[sub_resource type="Environment" id="Environment_vgqir"]
+[sub_resource type="Environment" id="Environment_e0bl7"]
 background_mode = 1
 background_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
-sky = SubResource("Sky_xpqqj")
+sky = SubResource("Sky_pojwu")
+ambient_light_source = 1
+reflected_light_source = 1
 tonemap_mode = 2
 glow_enabled = true
-glow_intensity = 2.0
+glow_intensity = 1.0
+glow_strength = 0.75
 glow_blend_mode = 0
-glow_hdr_threshold = 1.5
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_saim5")
@@ -34,10 +36,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
 
 [node name="XBossArena1" parent="." instance=ExtResource("6_8uom0")]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_vgqir")
-
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_crtxc")
 volume_db = -5.0
 bus = &"Music"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_e0bl7")

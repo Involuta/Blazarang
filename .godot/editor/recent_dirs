@@ -1,3 +1,4 @@
+res://levels
 res://
 res://enemies/enemy_anims
 res://textures
@@ -6,7 +7,6 @@ res://rang
 res://glb_inherited_scenes
 res://cotu/cotu_anims
 res://level_maps
-res://levels
 res://audio/sfx
 res://ui
 /Users/ryanbascos/GameDevMiscAssets
