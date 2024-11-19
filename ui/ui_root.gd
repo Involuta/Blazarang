@@ -13,9 +13,9 @@ extends Control
 @onready var buff_icon1 := $BuffIcon1Pivot/BuffIcon1
 var buff1_applied := false
 
-@onready var cotu := $/root/Level/cotuCB
-@onready var cotu_hurtbox := $/root/Level/cotuCB/Hurtbox
-@onready var cotu_icon := $/root/Level/Icon
+@onready var cotu := $/root/LevelViewPortContainer/SubViewport/Level/cotuCB
+@onready var cotu_hurtbox := $/root/LevelViewPortContainer/SubViewport/Level/cotuCB/Hurtbox
+@onready var cotu_icon := $/root/LevelViewPortContainer/SubViewport/Level/Icon
 
 @export var destab_shader_opacity := .5
 @export var glitch_shader_shake_power := .03

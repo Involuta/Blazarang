@@ -1,3 +1,5 @@
+SubViewport
+SubViewportContainer
 Camera3D
 MeshInstance3D
 TextureButton
@@ -26,7 +28,5 @@ RayCast3D
 Camera2D
 Control
 Label
-SubViewport
 RichTextLabel
-SubViewportContainer
 OmniLight3D

@@ -1,8 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://pfq5suoxwxu0"]
+[gd_scene load_steps=10 format=3 uid="uid://pfq5suoxwxu0"]
 
 [ext_resource type="Script" path="res://levels/x_boss_level/x_boss_level1.gd" id="1_saim5"]
-[ext_resource type="PackedScene" uid="uid://kl1hpr0grn1v" path="res://ui/ui_root.tscn" id="2_xw0om"]
-[ext_resource type="PackedScene" uid="uid://daj44qqb6dior" path="res://ui/health_bar.tscn" id="3_32nqn"]
 [ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="4_vo2xj"]
 [ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="5_cy6s5"]
 [ext_resource type="PackedScene" uid="uid://be5qq551348yp" path="res://levels/x_boss_level/section_nodes/x_boss_arena1.tscn" id="6_8uom0"]
@@ -27,16 +25,6 @@ glow_hdr_threshold = 1.5
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_saim5")
-
-[node name="UIRoot" parent="." instance=ExtResource("2_xw0om")]
-
-[node name="XHealthBar" parent="UIRoot" instance=ExtResource("3_32nqn")]
-modulate = Color(1, 0.376471, 0, 1)
-layout_mode = 1
-offset_left = -480.0
-offset_top = 360.0
-offset_right = 480.0
-offset_bottom = 408.0
 
 [node name="cotuCB" parent="." instance=ExtResource("4_vo2xj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 11.5, 15)
