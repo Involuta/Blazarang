@@ -16,13 +16,17 @@ var duration_secs := 1.5
 
 var invincible := true
 
-@onready var cotu = $/root/Level/cotuCB
-@onready var target = $/root/Level/Icon
+@onready var root := $/root/ViewControl
+var cotu : Node3D
+var target : Node3D
+
 @onready var hitbox = $PlayerHitbox
 
 func _init():
 	# When this script is assigned to roserang, _init() is called, but not _ready() bc the roserang is already in the scene tree, and _ready() is only called when a node enters the scene tree for the first time. To get the @onready values, you must call _ready() manually
 	_ready()
+	cotu = root.find_child("cotuCB")
+	target = root.find_child("Icon")
 
 func _ready():
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, false)

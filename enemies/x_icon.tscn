@@ -12,7 +12,7 @@ shader_parameter/outline_width = 5.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oln8s"]
 next_pass = SubResource("ShaderMaterial_jo8e2")
 shading_mode = 0
-albedo_color = Color(2, 0.46, 0, 1)
+albedo_color = Color(1, 0.46, 0, 1)
 
 [node name="XIcon" instance=ExtResource("1_qxh2k")]
 

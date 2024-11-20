@@ -948,7 +948,7 @@ attractor_interaction_enabled = false
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ycrk"]
 cull_mode = 2
 shading_mode = 0
-albedo_color = Color(2, 0.29, 0, 1)
+albedo_color = Color(1.5, 0.29, 0, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_ojblk"]
 material = SubResource("StandardMaterial3D_6ycrk")

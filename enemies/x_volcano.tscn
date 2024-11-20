@@ -7,7 +7,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l8irc"]
 transparency = 4
 shading_mode = 0
-albedo_color = Color(2.00392, 1, 0.6, 1)
+albedo_color = Color(1.5, 1, 0.6, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_rqrur"]
 material = SubResource("StandardMaterial3D_l8irc")
@@ -28,7 +28,7 @@ height = 0.05
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p5jhs"]
 shading_mode = 0
-albedo_color = Color(2, 0.91, 0.6, 1)
+albedo_color = Color(1.5, 0.91, 0.6, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_tp1rv"]
 material = SubResource("StandardMaterial3D_p5jhs")
@@ -351,7 +351,7 @@ radius = 36.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ctytl"]
 transparency = 4
 shading_mode = 0
-albedo_color = Color(2, 0.57, 0, 1)
+albedo_color = Color(1.5, 0.57, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_icx4a"]
 material = SubResource("StandardMaterial3D_ctytl")
