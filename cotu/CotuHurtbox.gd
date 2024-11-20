@@ -68,7 +68,7 @@ func die():
 		parent.get_node("DeathParticles/GPUParticles3D").emitting = true
 		await get_tree().create_timer(.5).timeout
 		Engine.time_scale = 1
-		get_tree().change_scene_to_file("res://levels/hub.tscn")
+		get_tree().change_scene_to_file("res://levels/hub/hub_viewcontrol.tscn")
 		return
 	Globals.destabilize.emit()
 	set_invincibility(true)

@@ -73,3 +73,4 @@ res://enemies/enemy_anims/x_superman.res
 res://enemies/enemy_anims/x_lunge_superkick.res
 res://enemies/enemy_anims/x_superkick.res
 res://levels/Level.gd
+res://cotu/CotuHurtbox.gd
