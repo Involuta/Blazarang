@@ -1,14 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://cmuqsguscdwmr"]
+[gd_scene load_steps=10 format=3 uid="uid://cmuqsguscdwmr"]
 
 [ext_resource type="Script" path="res://bg_camera.gd" id="1_qycqg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_15uri"]
-transparency = 4
 shading_mode = 0
-albedo_color = Color(1, 0.313726, 0, 0.509804)
+albedo_color = Color(0.254902, 0.0509804, 0, 0.478431)
 
 [sub_resource type="BoxMesh" id="BoxMesh_hcnjo"]
 material = SubResource("StandardMaterial3D_15uri")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aoq7e"]
+shading_mode = 0
+albedo_color = Color(2, 0.33, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_yo5ex"]
+material = SubResource("StandardMaterial3D_aoq7e")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_taasp"]
 load_path = "res://.godot/imported/BlackStarryBG.webp-42cfbe646311ffffd0833896f1e64777.s3tc.ctex"
@@ -25,6 +31,7 @@ background_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
 sky = SubResource("Sky_vjvoc")
 ambient_light_source = 1
 reflected_light_source = 1
+glow_enabled = true
 glow_intensity = 2.0
 glow_blend_mode = 0
 glow_hdr_threshold = 1.5
@@ -49,6 +56,10 @@ mesh = SubResource("BoxMesh_hcnjo")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 script = ExtResource("1_qycqg")
+
+[node name="Star" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.75, 2.08165e-12)
+mesh = SubResource("SphereMesh_yo5ex")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_cg8r5")

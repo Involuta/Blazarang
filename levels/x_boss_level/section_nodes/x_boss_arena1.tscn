@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://be5qq551348yp"]
+[gd_scene load_steps=23 format=3 uid="uid://be5qq551348yp"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_xf82h"]
 [ext_resource type="PackedScene" uid="uid://cwui2mc0avv1y" path="res://glb_inherited_scenes/x_left_arm.tscn" id="2_2tvw5"]
@@ -83,15 +83,6 @@ points = PackedVector3Array(24, 0, 24, 24, -0.666667, 24, 24.6667, -0.666667, 24
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ufggu"]
 size = Vector3(1, 10, 72)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6mlqp"]
-shading_mode = 0
-albedo_color = Color(0.258824, 0.0745098, 0, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_0uw1l"]
-material = SubResource("StandardMaterial3D_6mlqp")
-radius = 50.0
-height = 100.0
 
 [node name="XBossArena1" type="Node3D"]
 
@@ -208,8 +199,3 @@ transform = Transform3D(0.5, -1.74393e-16, 1.74393e-16, 1.74393e-16, 0.5, -1.743
 
 [node name="XIconPos" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10.1, 2.08165e-12)
-
-[node name="XLostPower" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -50, 2.08165e-12)
-custom_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
-mesh = SubResource("SphereMesh_0uw1l")

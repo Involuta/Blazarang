@@ -1,7 +1,7 @@
+MeshInstance3D
 SubViewport
 SubViewportContainer
 Camera3D
-MeshInstance3D
 TextureButton
 CanvasLayer
 Area3D
