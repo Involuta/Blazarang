@@ -71,3 +71,4 @@ res://enemies/x_icon.tscn
 res://enemies/enemy_anims/x_lunge_superkick.res
 res://enemies/enemy_anims/x_superkick.res
 res://enemies/enemy_anims/x_superman.res
+res://enemies/x_boss.gd

@@ -75,9 +75,9 @@ transparency = 4
 shading_mode = 0
 albedo_color = Color(1, 0.360784, 0, 1)
 
-[sub_resource type="TorusMesh" id="TorusMesh_mep8u"]
+[sub_resource type="TorusMesh" id="TorusMesh_a56kv"]
 material = SubResource("StandardMaterial3D_3iat1")
-inner_radius = 1.5
+inner_radius = 1.9
 outer_radius = 2.0
 
 [sub_resource type="Gradient" id="Gradient_rj4s4"]
@@ -128,6 +128,11 @@ transparency = 4
 shading_mode = 0
 albedo_color = Color(2, 0.74, 0.3, 1)
 
+[sub_resource type="TorusMesh" id="TorusMesh_mep8u"]
+material = SubResource("StandardMaterial3D_3iat1")
+inner_radius = 1.5
+outer_radius = 2.0
+
 [sub_resource type="TorusMesh" id="TorusMesh_jr1bc"]
 material = SubResource("StandardMaterial3D_3iat1")
 inner_radius = 1.6
@@ -141,11 +146,6 @@ outer_radius = 2.0
 [sub_resource type="TorusMesh" id="TorusMesh_leu2j"]
 material = SubResource("StandardMaterial3D_3iat1")
 inner_radius = 1.8
-outer_radius = 2.0
-
-[sub_resource type="TorusMesh" id="TorusMesh_a56kv"]
-material = SubResource("StandardMaterial3D_3iat1")
-inner_radius = 1.9
 outer_radius = 2.0
 
 [sub_resource type="Animation" id="Animation_v13yb"]
@@ -362,17 +362,20 @@ script = ExtResource("1_u0lj8")
 disappear_secs = 9.0
 
 [node name="TPLowerDisc" type="MeshInstance3D" parent="."]
-transform = Transform3D(4, 0, 0, 0, 0.1, 0, 0, 0, 4, 2.08165e-12, -1, 2.08165e-12)
+transform = Transform3D(2, 0, 0, 0, 0.1, 0, 0, 0, 2, 2.08165e-12, -1, 2.08165e-12)
+transparency = 1.0
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_rqrur")
 
 [node name="TPLowerDisc2" type="MeshInstance3D" parent="."]
-transform = Transform3D(7, 0, 0, 0, 0.1, 0, 0, 0, 7, 2.08165e-12, -1, 2.08165e-12)
+transform = Transform3D(4, 0, 0, 0, 0.1, 0, 0, 0, 4, 2.08165e-12, -1, 2.08165e-12)
+transparency = 1.0
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_mb8rq")
 
 [node name="Column" type="MeshInstance3D" parent="."]
-transform = Transform3D(3, 0, 0, 0, 50, 0, 0, 0, 3, 2.08165e-12, 49, 2.08165e-12)
+transform = Transform3D(0.1, 0, 0, 0, 50, 0, 0, 0, 0.1, 2.08165e-12, 49, 2.08165e-12)
+transparency = 1.0
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_tp1rv")
 
@@ -380,6 +383,7 @@ mesh = SubResource("CylinderMesh_tp1rv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -1, 2.08165e-12)
 cast_shadow = 0
 custom_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
+emitting = false
 amount = 100
 lifetime = 2.0
 one_shot = true
@@ -388,14 +392,16 @@ process_material = SubResource("ParticleProcessMaterial_v014i")
 draw_pass_1 = SubResource("CapsuleMesh_g5x34")
 
 [node name="FloorRing" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -1, 2.08165e-12)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 2.08165e-12, -1, 2.08165e-12)
+transparency = 1.0
 cast_shadow = 0
-mesh = SubResource("TorusMesh_mep8u")
+mesh = SubResource("TorusMesh_a56kv")
 
 [node name="Lava" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -1, 2.08165e-12)
 cast_shadow = 0
 custom_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
+emitting = false
 amount = 50
 lifetime = 9.0
 one_shot = true
@@ -411,6 +417,7 @@ libraries = {
 }
 
 [node name="EnemyHitbox" type="Area3D" parent="."]
+process_mode = 4
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("2_k3fxy")
@@ -433,6 +440,7 @@ trauma_amount = 0.5
 shape = SubResource("SphereShape3D_h4wfg")
 
 [node name="ExplosionBall" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_2sn6r")
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+transparency = 1.0
 cast_shadow = 0
 mesh = SubResource("SphereMesh_icx4a")

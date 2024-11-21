@@ -89,11 +89,11 @@ var dash_back_canceled := false
 
 @export var phase2_long_dist_right_arm_deployed_attack_chances = {
 	"ArmBombs" : .1,
-	"Sweep" : .325,
-	"ChainSlice" : .325,
+	"Sweep" : .3,
+	"ChainSlice" : .3,
 	"Superman" : .1,
 	"Triangle" : .1,
-	"DiagonalDash" : .05
+	"DiagonalDash" : .1
 }
 
 @export var phase2_long_dist_right_arm_not_deployed_attack_chances = {
