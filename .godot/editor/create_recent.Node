@@ -1,3 +1,4 @@
+GPUParticles3D
 MeshInstance3D
 SubViewport
 SubViewportContainer
@@ -7,7 +8,6 @@ CanvasLayer
 Area3D
 StaticBody3D
 CollisionShape3D
-GPUParticles3D
 Node3D
 AnimationPlayer
 CPUParticles3D

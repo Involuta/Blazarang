@@ -744,14 +744,6 @@ collision_layer = 8
 collision_mask = 130
 platform_floor_layers = 4294901762
 script = ExtResource("1_u3wem")
-phase2_long_dist_right_arm_deployed_attack_chances = {
-"ArmBombs": 0.1,
-"ChainSlice": 0.325,
-"DiagonalDash": 0.05,
-"Superman": 0.1,
-"Sweep": 0.325,
-"Triangle": 0.1
-}
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
