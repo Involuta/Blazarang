@@ -744,6 +744,14 @@ collision_layer = 8
 collision_mask = 130
 platform_floor_layers = 4294901762
 script = ExtResource("1_u3wem")
+phase2_long_dist_right_arm_deployed_attack_chances = {
+"ArmBombs": 0.1,
+"ChainSlice": 0.325,
+"DiagonalDash": 0.05,
+"Superman": 0.1,
+"Sweep": 0.325,
+"Triangle": 0.1
+}
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -801,27 +809,27 @@ transform = Transform3D(25, -3.91753e-21, 8.788e-21, 3.91753e-21, 25, -8.788e-21
 visible = true
 
 [node name="Cube" parent="MeleeHitboxPivot/XBlade/XLeftArm/XArrow" index="0"]
-transform = Transform3D(0.967375, 0, 0, 0, 0.967375, 0, 0, 0, 0.967375, 0, 0, -0.765428)
+transform = Transform3D(0.999626, 0, 0, 0, 0.999626, 0, 0, 0, 0.999626, 0, 0, -0.00877193)
 surface_material_override/0 = ExtResource("5_qr4nt")
 
 [node name="Cube_001" parent="MeleeHitboxPivot/XBlade/XLeftArm/XArrow" index="2"]
-transform = Transform3D(0.846914, 0, 0, 0, 0.846914, 0, 0, 0, 0.846914, -0.382714, 0.382714, -0.765428)
+transform = Transform3D(0.998246, 0, 0, 0, 0.998246, 0, 0, 0, 0.998246, -0.00438597, 0.00438597, -0.00877193)
 surface_material_override/0 = ExtResource("5_qr4nt")
 
 [node name="Cube_002" parent="MeleeHitboxPivot/XBlade/XLeftArm/XArrow" index="3"]
-transform = Transform3D(0.846914, 0, 0, 0, 0.846914, 0, 0, 0, 0.846914, 0.382714, 0.382714, -0.765428)
+transform = Transform3D(0.998246, 0, 0, 0, 0.998246, 0, 0, 0, 0.998246, 0.00438597, 0.00438597, -0.00877193)
 surface_material_override/0 = ExtResource("5_qr4nt")
 
 [node name="Cube_003" parent="MeleeHitboxPivot/XBlade/XLeftArm/XArrow" index="4"]
-transform = Transform3D(0.967375, 0, 0, 0, 0.967375, 0, 0, 0, 0.967375, -0.382714, -0.382714, -0.765428)
+transform = Transform3D(0.999626, 0, 0, 0, 0.999626, 0, 0, 0, 0.999626, -0.00438597, -0.00438597, -0.00877193)
 surface_material_override/0 = ExtResource("5_qr4nt")
 
 [node name="Cube_004" parent="MeleeHitboxPivot/XBlade/XLeftArm/XArrow" index="5"]
-transform = Transform3D(0.967375, 0, 0, 0, 0.967375, 0, 0, 0, 0.967375, 0.382714, -0.382714, -0.765428)
+transform = Transform3D(0.999626, 0, 0, 0, 0.999626, 0, 0, 0, 0.999626, 0.00438597, -0.00438597, -0.00877193)
 surface_material_override/0 = ExtResource("5_qr4nt")
 
 [node name="MeleeHitboxPivot2" type="Node3D" parent="."]
-transform = Transform3D(0.999999, -6.97573e-16, -1.5246e-23, -1.52459e-23, -4.37113e-08, 1, -6.97573e-16, -0.999999, -4.37114e-08, 2.08165e-12, 2.08165e-12, 0.8)
+transform = Transform3D(0.999999, -3.48787e-16, -3.48787e-16, -3.48787e-16, -0.999999, 8.74228e-08, -3.48787e-16, -8.74227e-08, -1, 2, 1, 2.08165e-12)
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot2"]
 process_mode = 4
@@ -855,23 +863,23 @@ transform = Transform3D(25, -3.91753e-21, 8.788e-21, 3.91753e-21, 25, -8.788e-21
 visible = true
 
 [node name="Cube" parent="MeleeHitboxPivot2/XBlade/XLeftArm/XArrow" index="0"]
-transform = Transform3D(0.997806, 0, 0, 0, 0.997806, 0, 0, 0, 0.997806, 0, 0, -0.051472)
+transform = Transform3D(0.999915, 0, 0, 0, 0.999915, 0, 0, 0, 0.999915, 0, 0, -0.00200104)
 surface_material_override/0 = ExtResource("5_qr4nt")
 
 [node name="Cube_001" parent="MeleeHitboxPivot2/XBlade/XLeftArm/XArrow" index="2"]
-transform = Transform3D(0.989706, 0, 0, 0, 0.989706, 0, 0, 0, 0.989706, -0.025736, 0.025736, -0.051472)
+transform = Transform3D(0.9996, 0, 0, 0, 0.9996, 0, 0, 0, 0.9996, -0.00100052, 0.00100052, -0.00200104)
 surface_material_override/0 = ExtResource("5_qr4nt")
 
 [node name="Cube_002" parent="MeleeHitboxPivot2/XBlade/XLeftArm/XArrow" index="3"]
-transform = Transform3D(0.989706, 0, 0, 0, 0.989706, 0, 0, 0, 0.989706, 0.025736, 0.025736, -0.051472)
+transform = Transform3D(0.9996, 0, 0, 0, 0.9996, 0, 0, 0, 0.9996, 0.00100052, 0.00100052, -0.00200104)
 surface_material_override/0 = ExtResource("5_qr4nt")
 
 [node name="Cube_003" parent="MeleeHitboxPivot2/XBlade/XLeftArm/XArrow" index="4"]
-transform = Transform3D(0.997806, 0, 0, 0, 0.997806, 0, 0, 0, 0.997806, -0.025736, -0.025736, -0.051472)
+transform = Transform3D(0.999915, 0, 0, 0, 0.999915, 0, 0, 0, 0.999915, -0.00100052, -0.00100052, -0.00200104)
 surface_material_override/0 = ExtResource("5_qr4nt")
 
 [node name="Cube_004" parent="MeleeHitboxPivot2/XBlade/XLeftArm/XArrow" index="5"]
-transform = Transform3D(0.997806, 0, 0, 0, 0.997806, 0, 0, 0, 0.997806, 0.025736, -0.025736, -0.051472)
+transform = Transform3D(0.999915, 0, 0, 0, 0.999915, 0, 0, 0, 0.999915, 0.00100052, -0.00100052, -0.00200104)
 surface_material_override/0 = ExtResource("5_qr4nt")
 
 [node name="X_boss_meshes" parent="." instance=ExtResource("5_f83nc")]

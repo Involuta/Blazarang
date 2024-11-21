@@ -104,7 +104,7 @@ radius = 4.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hx2jh"]
 transparency = 4
 shading_mode = 0
-albedo_color = Color(1.50196, 0.54902, 0, 0.941176)
+albedo_color = Color(1.50196, 0.54902, 0, 0.960784)
 disable_receive_shadows = true
 
 [sub_resource type="Animation" id="Animation_arx4y"]
@@ -141,7 +141,7 @@ tracks/2/path = NodePath("XArrow/Cube:surface_material_override/0")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.483333),
+"times": PackedFloat32Array(0, 0.4, 0.4843),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [ExtResource("5_7pmlh"), SubResource("StandardMaterial3D_hx2jh"), SubResource("StandardMaterial3D_vt8l7")]

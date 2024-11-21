@@ -103,13 +103,13 @@ radius = 4.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1n3wq"]
 transparency = 4
 shading_mode = 0
-albedo_color = Color(1.50196, 0.32549, 0, 0.784314)
+albedo_color = Color(1.50196, 0.32549, 0, 0.960784)
 disable_receive_shadows = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dmdqd"]
 transparency = 4
 shading_mode = 0
-albedo_color = Color(1.50196, 0.764706, 0, 0.941176)
+albedo_color = Color(1.50196, 0.764706, 0, 0.960784)
 disable_receive_shadows = true
 
 [sub_resource type="Animation" id="Animation_x5mqd"]
