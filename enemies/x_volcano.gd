@@ -5,8 +5,6 @@ extends Node3D
 @export var square_particle_speed := 20.0
 
 var square_particle := preload("res://enemies/square_particle.tscn")
-
-@onready var level := $/root/Level
 @onready var rng := RandomNumberGenerator.new()
 
 func _ready():
