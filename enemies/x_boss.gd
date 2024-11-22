@@ -128,6 +128,8 @@ var dash_back_canceled := false
 @export var lunge_facerain_float_dist := 5.0
 @export var lunge_facerain_bomb_speed := 9
 @export var lunge_laser_diagonal_dash_dist := 25.0
+@export var far_strafe_laser_dist := 12.5
+@export var very_far_strafe_laser_dist := 16.0
 
 var phase2 := false
 var param_path_base := "parameters/StateMachine/conditions/"
@@ -725,6 +727,22 @@ func start_strafe_laser():
 func strafe_laser_deploy_arm():
 	right_arm.global_position = x_mesh_right_arm.global_position
 	right_arm.rotation = (PI/2 + rotation.y) * Vector3.UP
+	right_arm.visible = true
+	right_arm.fire_laser()
+	hide_rig_right_arm()
+	follow_speed /= 2
+
+func far_strafe_laser_deploy_arm():
+	right_arm.global_position = x_mesh_right_arm.global_position
+	right_arm.rotation = (3*PI/4 + rotation.y) * Vector3.UP
+	right_arm.visible = true
+	right_arm.fire_laser()
+	hide_rig_right_arm()
+	follow_speed /= 2
+
+func very_far_strafe_laser_deploy_arm():
+	right_arm.global_position = x_mesh_right_arm.global_position
+	right_arm.rotation = (7*PI/8 + rotation.y) * Vector3.UP
 	right_arm.visible = true
 	right_arm.fire_laser()
 	hide_rig_right_arm()
