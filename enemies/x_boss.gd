@@ -590,6 +590,22 @@ func armbombs_arm_recall():
 		right_mvmt_tween.tween_method(recall_right_arm_frame, 0.0, 1.0, .2).set_ease(Tween.EASE_OUT)
 		right_mvmt_tween.tween_callback(hide_floating_right_arm)
 
+func left_arm_recall_homing():
+	if left_arm_deployed():
+		left_arm.stop_firing_laser()
+		var left_mvmt_tween = get_tree().create_tween()
+		left_mvmt_tween.tween_method(recall_left_arm_frame, 0.0, 1.0, .2).set_ease(Tween.EASE_OUT)
+		left_mvmt_tween.tween_callback(hide_floating_left_arm)
+		left_mvmt_tween.tween_callback(restore_rig_left_arm)
+
+func right_arm_recall_homing():
+	if right_arm_deployed():
+		right_arm.stop_firing_laser()
+		var right_mvmt_tween = get_tree().create_tween()
+		right_mvmt_tween.tween_method(recall_right_arm_frame, 0.0, 1.0, .2).set_ease(Tween.EASE_OUT)
+		right_mvmt_tween.tween_callback(hide_floating_right_arm)
+		right_mvmt_tween.tween_callback(restore_rig_right_arm)
+
 func armbombs_shoot_arms():
 	armbombs_arm_switch()
 	mhp1.visible = false

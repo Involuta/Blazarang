@@ -824,24 +824,19 @@ transform = Transform3D(75, -1.17526e-20, 1.40608e-19, 1.17526e-20, 75, -1.40608
 visible = false
 
 [node name="Cube" parent="XArrow" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 cast_shadow = 0
 surface_material_override/0 = SubResource("StandardMaterial3D_vt8l7")
 
 [node name="Cube_001" parent="XArrow" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_vt8l7")
 
 [node name="Cube_002" parent="XArrow" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_vt8l7")
 
 [node name="Cube_003" parent="XArrow" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_vt8l7")
 
 [node name="Cube_004" parent="XArrow" index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_vt8l7")
 
 [node name="ExplosionPivot" type="Node3D" parent="." index="5"]
