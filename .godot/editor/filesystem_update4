@@ -60,3 +60,4 @@ res://rang/slash_test.tres
 res://ui/glow.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
 res://enemies/enemy_anims/x_dual_blade_dash.res
+res://enemies/x_boss.gd

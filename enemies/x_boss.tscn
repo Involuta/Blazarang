@@ -567,7 +567,6 @@ transitions = ["Start", "WalkSpace", SubResource("AnimationNodeStateMachineTrans
 graph_offset = Vector2(-180.773, -51.8032)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_uk78c"]
-graph_offset = Vector2(-99.84, 446.4)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_f8liy")
 nodes/StateMachine/position = Vector2(110, 150)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -814,7 +813,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.0
 shape = SubResource("CapsuleShape3D_7g15b")
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
-transform = Transform3D(-0.714976, -0.69896, -0.0161792, -0.0115692, -0.0113101, 0.999869, -0.699052, 0.715069, 2.82234e-08, -0.847339, -0.4728, -0.57437)
+transform = Transform3D(-0.714976, -0.69896, -0.0161792, 0.170368, -0.196622, 0.965564, -0.678072, 0.687599, 0.259661, -0.68332, -0.247231, -0.0813712)
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
 process_mode = 4
@@ -865,7 +864,7 @@ surface_material_override/0 = ExtResource("5_qr4nt")
 surface_material_override/0 = ExtResource("5_qr4nt")
 
 [node name="MeleeHitboxPivot2" type="Node3D" parent="."]
-transform = Transform3D(-0.679917, 0.685664, 0.259954, 0.170563, -0.196903, 0.965473, 0.713176, 0.70078, 0.0169289, 0.936881, -0.471, -0.137187)
+transform = Transform3D(-0.678347, 0.687204, 0.25999, 0.170563, -0.196903, 0.965473, 0.714669, 0.69927, 0.0163572, 0.683, -0.247, -0.081)
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot2"]
 process_mode = 4

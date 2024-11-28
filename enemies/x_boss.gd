@@ -130,6 +130,9 @@ var dash_back_canceled := false
 @export var lunge_laser_diagonal_dash_dist := 25.0
 @export var far_strafe_laser_dist := 12.5
 @export var very_far_strafe_laser_dist := 16.0
+@export var dual_blade_dash_back_dist := 21.0
+@export var dual_blade_dash_in_dist := 19.0
+@export var dual_blade_dash_leap_height := 10.0
 
 var phase2 := false
 var param_path_base := "parameters/StateMachine/conditions/"
@@ -763,6 +766,22 @@ func very_far_strafe_laser_deploy_arm():
 	right_arm.fire_laser()
 	hide_rig_right_arm()
 	follow_speed /= 2
+
+func dual_blade_dash_back():
+	var dir_to_target := global_position.direction_to(target.global_position)
+	var mvmt_tween := get_tree().create_tween()
+	mvmt_tween.tween_property(self, "global_position", -dual_blade_dash_back_dist * dir_to_target, .5).as_relative().set_ease(Tween.EASE_OUT)
+
+func dual_blade_dash_in():
+	var dir_to_target := global_position.direction_to(target.global_position)
+	var mvmt_tween := get_tree().create_tween()
+	mvmt_tween.tween_property(self, "global_position", dual_blade_dash_in_dist * dir_to_target, .6).as_relative()
+
+func dual_blade_leap():
+	var mvmt_tween := get_tree().create_tween()
+	mvmt_tween.tween_property(self, "global_position", dual_blade_dash_leap_height * Vector3.UP, .3).as_relative()
+	mvmt_tween.tween_property(self, "global_position", Vector3.UP, .2).as_relative()
+	mvmt_tween.tween_property(self, "global_position", dual_blade_dash_leap_height * Vector3.DOWN, .3).as_relative()
 
 func recall_left_arm():
 	if not left_arm_deployed():
