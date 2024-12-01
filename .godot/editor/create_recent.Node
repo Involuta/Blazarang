@@ -1,3 +1,4 @@
+OmniLight3D
 AnimationPlayer
 GPUParticles3D
 MeshInstance3D
@@ -29,4 +30,3 @@ Camera2D
 Control
 Label
 RichTextLabel
-OmniLight3D
