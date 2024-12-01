@@ -1,3 +1,4 @@
+AnimationPlayer
 GPUParticles3D
 MeshInstance3D
 SubViewport
@@ -9,7 +10,6 @@ Area3D
 StaticBody3D
 CollisionShape3D
 Node3D
-AnimationPlayer
 CPUParticles3D
 AnimatedSprite3D
 Hitbox

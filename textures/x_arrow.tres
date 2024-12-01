@@ -2,6 +2,7 @@
 
 [resource]
 transparency = 4
+cull_mode = 2
 shading_mode = 0
 albedo_color = Color(1.50196, 0.32549, 0, 0.960784)
 disable_receive_shadows = true

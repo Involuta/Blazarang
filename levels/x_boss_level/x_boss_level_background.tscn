@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cmuqsguscdwmr"]
+[gd_scene load_steps=10 format=3 uid="uid://cmuqsguscdwmr"]
 
 [ext_resource type="Script" path="res://bg_camera.gd" id="1_qycqg"]
 
@@ -15,83 +15,6 @@ albedo_color = Color(2, 0.33, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_yo5ex"]
 material = SubResource("StandardMaterial3D_aoq7e")
-
-[sub_resource type="Gradient" id="Gradient_7h5g0"]
-colors = PackedColorArray(1.30196, 0.572549, 0, 1, 2.00392, 0.160784, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_imhrr"]
-gradient = SubResource("Gradient_7h5g0")
-
-[sub_resource type="Curve" id="Curve_duepu"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.938685, 0.992333), 0.0, 0.0, 0, 0, Vector2(1, 0.0870755), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_kngk4"]
-curve = SubResource("Curve_duepu")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7j0x7"]
-particle_flag_align_y = true
-direction = Vector3(-1, 2.08165e-12, 2.08165e-12)
-spread = 180.0
-flatness = 1.0
-gravity = Vector3(2.08165e-12, -0.2, 2.08165e-12)
-initial_velocity_min = 2.0
-initial_velocity_max = 4.0
-linear_accel_max = 2.08167e-15
-scale_min = 0.5
-scale_max = 1.5
-scale_curve = SubResource("CurveTexture_kngk4")
-color = Color(1.30196, 0.482353, 0, 1)
-color_ramp = SubResource("GradientTexture1D_imhrr")
-
-[sub_resource type="Curve" id="Curve_vt852"]
-_data = [Vector2(0, 0), 0.0, 1.01561, 0, 0, Vector2(0.232735, 0.0711938), -0.0288446, -0.0288446, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xbl0t"]
-shading_mode = 0
-vertex_color_use_as_albedo = true
-use_particle_trails = true
-
-[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_4aqwq"]
-material = SubResource("StandardMaterial3D_xbl0t")
-sections = 10
-curve = SubResource("Curve_vt852")
-
-[sub_resource type="Gradient" id="Gradient_tiac0"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_by5mv"]
-gradient = SubResource("Gradient_tiac0")
-
-[sub_resource type="Curve" id="Curve_0nuw8"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_6fi7x"]
-curve = SubResource("Curve_0nuw8")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dm3va"]
-particle_flag_align_y = true
-direction = Vector3(2.08165e-12, 2.08165e-12, -1)
-spread = 180.0
-flatness = 1.0
-gravity = Vector3(2.08165e-12, -0.01, 2.08165e-12)
-initial_velocity_min = 0.1
-initial_velocity_max = 0.2
-scale_min = 0.5
-scale_max = 1.5
-scale_curve = SubResource("CurveTexture_6fi7x")
-color_ramp = SubResource("GradientTexture1D_by5mv")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a5m01"]
-shading_mode = 0
-vertex_color_use_as_albedo = true
-albedo_color = Color(0.701961, 0.243137, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_pjmwa"]
-material = SubResource("StandardMaterial3D_a5m01")
-size = Vector3(0.6, 0.6, 0.01)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_taasp"]
 load_path = "res://.godot/imported/BlackStarryBG.webp-42cfbe646311ffffd0833896f1e64777.s3tc.ctex"
@@ -141,22 +64,6 @@ script = ExtResource("1_qycqg")
 [node name="Star" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.75, 2.08165e-12)
 mesh = SubResource("SphereMesh_yo5ex")
-
-[node name="Lava" type="GPUParticles3D" parent="Star"]
-visible = false
-amount = 48
-lifetime = 20.0
-explosiveness = 0.5
-trail_enabled = true
-trail_lifetime = 1.0
-process_material = SubResource("ParticleProcessMaterial_7j0x7")
-draw_pass_1 = SubResource("TubeTrailMesh_4aqwq")
-
-[node name="Squares" type="GPUParticles3D" parent="Star"]
-lifetime = 32.0
-fixed_fps = 2
-process_material = SubResource("ParticleProcessMaterial_dm3va")
-draw_pass_1 = SubResource("BoxMesh_pjmwa")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_cg8r5")

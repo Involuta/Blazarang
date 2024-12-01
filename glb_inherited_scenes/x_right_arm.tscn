@@ -59,6 +59,7 @@ size = Vector3(1.5, 1, 11)
 length = 500.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0p17"]
+cull_mode = 2
 shading_mode = 0
 albedo_color = Color(1.25098, 1, 0.176471, 1)
 
@@ -102,12 +103,14 @@ radius = 4.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1n3wq"]
 transparency = 4
+cull_mode = 2
 shading_mode = 0
 albedo_color = Color(1.50196, 0.32549, 0, 0.960784)
 disable_receive_shadows = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dmdqd"]
 transparency = 4
+cull_mode = 2
 shading_mode = 0
 albedo_color = Color(1.50196, 0.764706, 0, 0.960784)
 disable_receive_shadows = true
@@ -831,23 +834,18 @@ transform = Transform3D(75, -5.16885e-21, 8.99973e-20, 5.16885e-21, 75, -8.99973
 visible = false
 
 [node name="Cube" parent="XArrow" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_a0p17")
 
 [node name="Cube_001" parent="XArrow" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_a0p17")
 
 [node name="Cube_002" parent="XArrow" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_a0p17")
 
 [node name="Cube_003" parent="XArrow" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_a0p17")
 
 [node name="Cube_004" parent="XArrow" index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_a0p17")
 
 [node name="ExplosionPivot" type="Node3D" parent="." index="5"]
