@@ -131,8 +131,8 @@ var dash_back_canceled := false
 @export var far_strafe_laser_dist := 12.5
 @export var very_far_strafe_laser_dist := 16.0
 @export var dual_blade_dash_back_dist := 21.0
-@export var dual_blade_dash_in_dist := 19.0
-@export var dual_blade_dash_leap_height := 10.0
+@export var dual_blade_dash_in_speed := 40.0
+@export var dual_blade_dash_leap_height := 3.0
 
 var phase2 := false
 var param_path_base := "parameters/StateMachine/conditions/"
@@ -151,8 +151,8 @@ var bottom_head_piece := preload("res://enemies/x_bottom_head_piece_rb.tscn")
 @onready var x_mesh_head := $X_boss_meshes/Armature/Skeleton3D/Head/XHead
 @onready var x_mesh_left_arm := $X_boss_meshes/Armature/Skeleton3D/LeftArm
 @onready var x_mesh_right_arm := $X_boss_meshes/Armature/Skeleton3D/RightArm
-@onready var mhp1 := $MeleeHitboxPivot/XBlade/XLeftArm
-@onready var mhp2 := $MeleeHitboxPivot2/XBlade/XLeftArm
+@onready var mhp_arm1 := $MeleeHitboxPivot/XBlade/XArm
+@onready var mhp_arm2 := $MeleeHitboxPivot2/XBlade/XArm
 
 @onready var root := $/root/ViewControl
 var level : Node3D
@@ -183,8 +183,12 @@ func _ready():
 	
 	anim_tree.active = true
 	x_mesh_head.visible = true
-	mhp1.visible = false
-	mhp2.visible = false
+	mhp_arm1.visible = false
+	mhp_arm2.visible = false
+	
+	$MeleeHitboxPivot/EnemyHitbox.process_mode = Node.PROCESS_MODE_DISABLED
+	$MeleeHitboxPivot2/EnemyHitbox.process_mode = Node.PROCESS_MODE_DISABLED
+	$ExplosionPivot/EnemyHitbox.process_mode = Node.PROCESS_MODE_DISABLED
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("Special"):
@@ -611,8 +615,8 @@ func right_arm_recall_homing():
 
 func armbombs_shoot_arms():
 	armbombs_arm_switch()
-	mhp1.visible = false
-	mhp2.visible = false
+	mhp_arm1.visible = false
+	mhp_arm2.visible = false
 	
 	var dir_to_target := global_position.direction_to(target.global_position)
 	
@@ -621,7 +625,7 @@ func armbombs_shoot_arms():
 	left_arm_landing_site.x = target.global_position.x + side_teleport_dist_from_target * leftside_vec.x
 	left_arm_landing_site.z = target.global_position.z + side_teleport_dist_from_target * leftside_vec.y
 	
-	left_arm.look_at_from_position(mhp1.global_position, left_arm_landing_site, Vector3.UP, true)
+	left_arm.look_at_from_position(mhp_arm1.global_position, left_arm_landing_site, Vector3.UP, true)
 	#var goal_rotation = left_arm.rotation
 	var all_tween = get_tree().create_tween()
 	#all_tween.tween_property(left_arm, "rotation", goal_rotation, .05).from(PI/2*Vector3.RIGHT).set_ease(Tween.EASE_IN_OUT)
@@ -631,7 +635,7 @@ func armbombs_shoot_arms():
 	right_arm_landing_site.x = target.global_position.x + side_teleport_dist_from_target * rightside_vec.x
 	right_arm_landing_site.z = target.global_position.z + side_teleport_dist_from_target * rightside_vec.y
 	
-	right_arm.look_at_from_position(mhp2.global_position, right_arm_landing_site, Vector3.UP, true)
+	right_arm.look_at_from_position(mhp_arm2.global_position, right_arm_landing_site, Vector3.UP, true)
 	#goal_rotation = right_arm.rotation
 	#all_tween.tween_property(right_arm, "rotation", goal_rotation, .05).from(PI/2*Vector3.RIGHT).set_ease(Tween.EASE_IN_OUT)
 	
@@ -641,7 +645,7 @@ func armbombs_shoot_arms():
 	all_tween.tween_property(right_arm, "global_position", right_arm_landing_site, .125).set_trans(Tween.TRANS_LINEAR)
 
 func armbombs_arm_switch():
-	# Switch melee hitbox pivot (mhp) arms with floating arms
+	# Switch melee hitbox pivot (mhp_arm) arms with floating arms
 	left_arm.prep_arrow()
 	right_arm.prep_arrow()
 	left_arm.visible = true
@@ -770,18 +774,19 @@ func very_far_strafe_laser_deploy_arm():
 func dual_blade_dash_back():
 	var dir_to_target := global_position.direction_to(target.global_position)
 	var mvmt_tween := get_tree().create_tween()
-	mvmt_tween.tween_property(self, "global_position", -dual_blade_dash_back_dist * dir_to_target, .5).as_relative().set_ease(Tween.EASE_OUT)
+	mvmt_tween.tween_property(self, "global_position", -dual_blade_dash_back_dist * dir_to_target, .2).as_relative().set_ease(Tween.EASE_OUT)
 
 func dual_blade_dash_in():
 	var dir_to_target := global_position.direction_to(target.global_position)
-	var mvmt_tween := get_tree().create_tween()
-	mvmt_tween.tween_property(self, "global_position", dual_blade_dash_in_dist * dir_to_target, .6).as_relative()
+	velocity = dual_blade_dash_in_speed * dir_to_target
+	#var mvmt_tween := get_tree().create_tween()
+	#mvmt_tween.tween_property(self, "global_position", dual_blade_dash_in_dist * dir_to_target, .6).as_relative()
 
 func dual_blade_leap():
 	var mvmt_tween := get_tree().create_tween()
-	mvmt_tween.tween_property(self, "global_position", dual_blade_dash_leap_height * Vector3.UP, .3).as_relative()
-	mvmt_tween.tween_property(self, "global_position", Vector3.UP, .2).as_relative()
-	mvmt_tween.tween_property(self, "global_position", dual_blade_dash_leap_height * Vector3.DOWN, .3).as_relative()
+	mvmt_tween.tween_property(self, "global_position", dual_blade_dash_leap_height * Vector3.UP, .1).as_relative()
+	mvmt_tween.tween_interval(.6)
+	mvmt_tween.tween_property(self, "global_position", dual_blade_dash_leap_height * Vector3.DOWN, .1).as_relative()
 
 func recall_left_arm():
 	if not left_arm_deployed():
@@ -864,3 +869,9 @@ func set_x_icon_flyingfacerain_pos():
 	x_icon_lerp_val = .05
 	x_icon_pos.global_position.x = 0
 	x_icon_pos.global_position.z = -24
+
+func slow_mo():
+	Engine.time_scale = .1
+
+func no_slow_mo():
+	Engine.time_scale = 1
