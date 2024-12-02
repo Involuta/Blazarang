@@ -16,6 +16,8 @@ albedo_color = Color(2, 0.33, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_yo5ex"]
 material = SubResource("StandardMaterial3D_aoq7e")
+radius = 0.3
+height = 0.6
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_taasp"]
 load_path = "res://.godot/imported/BlackStarryBG.webp-42cfbe646311ffffd0833896f1e64777.s3tc.ctex"
@@ -28,7 +30,7 @@ sky_material = SubResource("PanoramaSkyMaterial_4umln")
 
 [sub_resource type="Environment" id="Environment_cg8r5"]
 background_mode = 1
-background_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+background_color = Color(0.0177324, 0.0177324, 0.0177324, 1)
 sky = SubResource("Sky_vjvoc")
 ambient_light_source = 1
 reflected_light_source = 1
