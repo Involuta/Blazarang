@@ -1,14 +1,12 @@
-res://glb_inherited_scenes/x_left_arm.tscn
+res://enemies/first_miniboss.tscn
 res://enemies/enemy_hurtbox.gd
-res://textures/clear_tile.tres
-res://textures/x_boss_body.tres
-res://GPUTrail-main/shaders/trail.gdshader
-res://GPUTrail-main/shaders/trail_draw_pass.gdshader
-res://GPUTrail-main/defaults/texture.tres
-res://GPUTrail-main/defaults/curve.tres
 res://shaders/cotu_outline.gdshader
 res://cotu/cotu_anims_outline.tres
 res://glb_inherited_scenes/outline.gdshader
+res://GPUTrail-main/shaders/trail.gdshader
+res://GPUTrail-main/defaults/curve.tres
+res://GPUTrail-main/shaders/trail_draw_pass.gdshader
+res://GPUTrail-main/defaults/texture.tres
 res://rang/roserang_shader.tres
 res://cotu/cotu_anims_base_material.tres
 res://ui/flash.gdshader
@@ -20,6 +18,8 @@ res://glb_inherited_scenes/black_outline.gdshader
 res://textures/small_solid_black.tres
 res://textures/x_arrow.tres
 res://textures/small_solid_white.tres
+res://textures/clear_tile.tres
+res://textures/x_boss_body.tres
 res://textures/solid_light_gray_tile.tres
 res://textures/solid_dark_gray_tile.tres
 res://textures/black_tile.tres
@@ -27,7 +27,6 @@ res://shaders/outline_everything.gdshader
 res://rang/slash_test.tres
 res://ui/glow.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
-res://enemies/first_miniboss.tscn
 res://rang/rang_particles_base.tscn
 res://levels/gauntlet_level1.tscn
 res://enemies/enemy_melee_tier3.tscn
@@ -53,6 +52,7 @@ res://levels/hub/hub.tscn
 res://rang/rang_hit_particles.tscn
 res://rang/hit_effect1.tscn
 res://enemies/enemy_bullet.tscn
+res://glb_inherited_scenes/x_left_arm.tscn
 res://enemies/x_blade.tscn
 res://enemies/x_volcano.tscn
 res://glb_inherited_scenes/x_head_pieces.tscn

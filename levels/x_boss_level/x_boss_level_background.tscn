@@ -101,11 +101,32 @@ transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 4.93565, -0.790592, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.265, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_ulr7k")
 
+[node name="Diamond8" parent="." instance=ExtResource("2_6woii")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 7.10178, 0.995053, -0.764652)
+
+[node name="Cube" parent="Diamond8" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.265, 0.980741)
+surface_material_override/0 = SubResource("StandardMaterial3D_ulr7k")
+
+[node name="Diamond9" parent="." instance=ExtResource("2_6woii")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 8.9723, 0.995053, 1.56052)
+
+[node name="Cube" parent="Diamond9" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.58621, 4.86573, -9.53965)
+surface_material_override/0 = SubResource("StandardMaterial3D_ulr7k")
+
+[node name="Diamond10" parent="." instance=ExtResource("2_6woii")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.650813, 0.995053, -5.99607)
+
+[node name="Cube" parent="Diamond10" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.80697, 3.09366, 3.05087)
+surface_material_override/0 = SubResource("StandardMaterial3D_ulr7k")
+
 [node name="Diamond4" parent="." instance=ExtResource("2_6woii")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 4.93565, -0.315463, 2.26993)
 
 [node name="Cube" parent="Diamond4" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.265, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.265, -0.402354)
 surface_material_override/0 = SubResource("StandardMaterial3D_ulr7k")
 
 [node name="Diamond5" parent="." instance=ExtResource("2_6woii")]
@@ -119,19 +140,22 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ulr7k")
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -2.11843, -1.3785, 2.12721)
 
 [node name="Cube" parent="Diamond6" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6381, 2.74487, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19802, 2.74487, 0.92411)
 surface_material_override/0 = SubResource("StandardMaterial3D_ulr7k")
 
 [node name="Diamond7" parent="." instance=ExtResource("2_6woii")]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -1.84874, -1.3785, -0.604901)
 
 [node name="Cube" parent="Diamond7" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.36354, 3.33175, 1.75105)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.237807, 3.33175, 1.96216)
 surface_material_override/0 = SubResource("StandardMaterial3D_ulr7k")
 
 [editable path="Diamond1"]
 [editable path="Diamond2"]
 [editable path="Diamond3"]
+[editable path="Diamond8"]
+[editable path="Diamond9"]
+[editable path="Diamond10"]
 [editable path="Diamond4"]
 [editable path="Diamond5"]
 [editable path="Diamond6"]
