@@ -69,3 +69,5 @@ res://levels/x_boss_level/x_boss_level1_viewcontrol.tscn
 res://levels/hub/hub_viewcontrol.tscn
 res://enemies/x_icon.tscn
 res://levels/x_boss_level/background_nodes/diamond.tscn
+res://enemies/enemy_anims/x_dual_blade_dash.res
+res://enemies/x_boss.gd

@@ -11,7 +11,7 @@ enum {
 var behav_state := FOLLOW
 var strafing_left := false
 var stop_checking := false
-@export var stop_dist := 1.0
+var stop_dist := 1.0
 
 enum {
 	MY_POS,
@@ -44,7 +44,6 @@ signal no_attack_queued
 @export var aggro_distance := -1
 
 @export var follow_speed := 15.0
-@export var follow_stop_dist := 1.5
 @export var shortrange_attack_distance := 7.5
 
 @export var attack_duration_secs := 2.5
@@ -112,6 +111,7 @@ var dash_back_canceled := false
 @export var side_teleport_dist_from_target := 7.5
 @export var front_teleport_dist_from_target := 1.5
 @export var slipnslice_speed := 20.0
+@export var slipnslice_stop_dist := 1.0
 @export var superman_fwd_speed := 20.0
 @export var superman_up_speed := 5.0
 @export var superman_down_speed := 7.0
@@ -131,8 +131,9 @@ var dash_back_canceled := false
 @export var far_strafe_laser_dist := 12.5
 @export var very_far_strafe_laser_dist := 16.0
 @export var dual_blade_dash_back_dist := 21.0
-@export var dual_blade_dash_in_dist := 19.0
-@export var dual_blade_dash_leap_height := 10.0
+@export var dual_blade_dash_in_speed := 40.0
+@export var dual_blade_dash_stop_dist := 2.0
+@export var dual_blade_dash_leap_height := 3.0
 
 var phase2 := false
 var param_path_base := "parameters/StateMachine/conditions/"
@@ -430,6 +431,7 @@ func teleport():
 	tp_inst.global_position.y = x_icon_pos.global_position.y
 
 func slipnslice_rush():
+	stop_dist = slipnslice_stop_dist
 	velocity = slipnslice_speed * -transform.basis.z
 
 func stop_mvmt():
@@ -770,18 +772,18 @@ func very_far_strafe_laser_deploy_arm():
 func dual_blade_dash_back():
 	var dir_to_target := global_position.direction_to(target.global_position)
 	var mvmt_tween := get_tree().create_tween()
-	mvmt_tween.tween_property(self, "global_position", -dual_blade_dash_back_dist * dir_to_target, .5).as_relative().set_ease(Tween.EASE_OUT)
+	mvmt_tween.tween_property(self, "global_position", -dual_blade_dash_back_dist * dir_to_target, .2).as_relative().set_ease(Tween.EASE_OUT)
 
 func dual_blade_dash_in():
+	stop_dist = dual_blade_dash_stop_dist
 	var dir_to_target := global_position.direction_to(target.global_position)
-	var mvmt_tween := get_tree().create_tween()
-	mvmt_tween.tween_property(self, "global_position", dual_blade_dash_in_dist * dir_to_target, .6).as_relative()
+	velocity = dual_blade_dash_in_speed * dir_to_target
 
 func dual_blade_leap():
 	var mvmt_tween := get_tree().create_tween()
-	mvmt_tween.tween_property(self, "global_position", dual_blade_dash_leap_height * Vector3.UP, .3).as_relative()
-	mvmt_tween.tween_property(self, "global_position", Vector3.UP, .2).as_relative()
-	mvmt_tween.tween_property(self, "global_position", dual_blade_dash_leap_height * Vector3.DOWN, .3).as_relative()
+	mvmt_tween.tween_property(self, "global_position", dual_blade_dash_leap_height * Vector3.UP, .1).as_relative()
+	mvmt_tween.tween_interval(.6)
+	mvmt_tween.tween_property(self, "global_position", dual_blade_dash_leap_height * Vector3.DOWN, .1).as_relative()
 
 func recall_left_arm():
 	if not left_arm_deployed():

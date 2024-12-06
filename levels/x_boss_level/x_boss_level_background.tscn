@@ -75,7 +75,8 @@ mesh = SubResource("SphereMesh_yo5ex")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Star"]
 light_color = Color(1, 0.443137, 0, 1)
-omni_range = 10.0
+light_energy = 1.5
+omni_range = 15.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_cg8r5")
@@ -109,7 +110,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.265, 0.980741)
 surface_material_override/0 = SubResource("StandardMaterial3D_ulr7k")
 
 [node name="Diamond9" parent="." instance=ExtResource("2_6woii")]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 8.9723, 0.995053, 1.56052)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.30436, 0.995053, 0.53774)
 
 [node name="Cube" parent="Diamond9" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.58621, 4.86573, -9.53965)
