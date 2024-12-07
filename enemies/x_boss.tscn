@@ -20,7 +20,7 @@ height = 24.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xdhg2"]
 shading_mode = 0
-albedo_color = Color(2, 0.27, 0, 1)
+albedo_color = Color(1.38, 0.27, 0, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_uo2xn"]
 material = SubResource("StandardMaterial3D_xdhg2")
@@ -679,8 +679,8 @@ disable_receive_shadows = true
 [sub_resource type="SphereMesh" id="SphereMesh_l3jmq"]
 material = SubResource("StandardMaterial3D_5cvwu")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_py6mh"]
-radius = 1.0
+[sub_resource type="SphereShape3D" id="SphereShape3D_656hx"]
+radius = 3.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_j3f5l"]
 radius = 20.0
@@ -1027,7 +1027,7 @@ parameters/StateMachine/conditions/Triangle = false
 parameters/StateMachine/WalkSpace/blend_position = 0.00188327
 
 [node name="ExplosionPivot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.188539, -1.53818, -1.40661)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, -0.262266, -1.86635)
 
 [node name="ExplosionSparks" type="GPUParticles3D" parent="ExplosionPivot"]
 cast_shadow = 0
@@ -1062,18 +1062,17 @@ process_material = SubResource("ParticleProcessMaterial_2c5hp")
 draw_pass_1 = SubResource("SphereMesh_l3jmq")
 
 [node name="EnemyHitbox" type="Area3D" parent="ExplosionPivot"]
-process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 script = ExtResource("3_rpkwr")
 damage = 20
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExplosionPivot/EnemyHitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-shape = SubResource("SphereShape3D_py6mh")
+shape = SubResource("SphereShape3D_656hx")
 
 [node name="TraumaCauser" parent="ExplosionPivot" instance=ExtResource("6_r6uan")]
 collision_layer = 0
-trauma_amount = 0.44
+trauma_amount = 0.42
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExplosionPivot/TraumaCauser"]
 shape = SubResource("SphereShape3D_j3f5l")
