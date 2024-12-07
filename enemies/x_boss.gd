@@ -133,7 +133,7 @@ var dash_back_canceled := false
 @export var dual_blade_dash_back_dist := 21.0
 @export var dual_blade_dash_in_speed := 40.0
 @export var dual_blade_dash_stop_dist := 2.0
-@export var dual_blade_dash_leap_height := 3.0
+@export var dual_blade_dash_leap_height := 2.0
 
 var phase2 := false
 var param_path_base := "parameters/StateMachine/conditions/"

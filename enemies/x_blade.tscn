@@ -611,7 +611,7 @@ tracks/9/keys = {
 
 [sub_resource type="Animation" id="Animation_5l7ml"]
 resource_name = "RetractMegaBlade"
-length = 0.250002
+length = 0.233335
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -620,7 +620,7 @@ tracks/0/path = NodePath("Blade:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25),
+"times": PackedFloat32Array(0, 0.233334),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(2, 4.5, 1), Vector3(1, 0.001, 1)]
@@ -632,7 +632,7 @@ tracks/1/path = NodePath("Sparks:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.133334),
+"times": PackedFloat32Array(0.116667),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
@@ -644,7 +644,7 @@ tracks/2/path = NodePath("GPUTrail3D:length")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.133334),
+"times": PackedFloat32Array(0.116667),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [1]
@@ -656,7 +656,7 @@ tracks/3/path = NodePath("GPUTrail3D:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.133334),
+"times": PackedFloat32Array(0.116667),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
@@ -668,7 +668,7 @@ tracks/4/path = NodePath("Blade:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.25),
+"times": PackedFloat32Array(0.233334),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
@@ -786,7 +786,7 @@ visible = false
 surface_material_override/0 = SubResource("StandardMaterial3D_qbx8q")
 
 [node name="GPUTrail3D" type="GPUParticles3D" parent="." index="1"]
-transform = Transform3D(3.75, -1.98869e-21, -1.93174e-29, 0, -7.3763e-07, 3.75, -4.41931e-22, -16.875, -1.63918e-07, 2.08165e-12, 2.08165e-12, -13)
+transform = Transform3D(3.75, -1.98869e-21, -1.93174e-29, 0, -7.3763e-07, 3.75, -4.41931e-22, -16.875, -1.63918e-07, 2.08165e-12, 2.08165e-12, -16)
 visible = false
 amount = 1
 explosiveness = 1.0
