@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cltnvatu6e8de"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8dxd2"]
+sky_top_color = Color(0.588235, 0.270588, 0.776471, 1)
+sky_horizon_color = Color(0.647059, 0.654902, 0.266667, 1)
+ground_bottom_color = Color(0.156863, 0.282353, 0.156863, 1)
+ground_horizon_color = Color(0.623529, 0.698039, 0.368627, 1)
+
+[sub_resource type="Sky" id="Sky_wun1b"]
+sky_material = SubResource("ProceduralSkyMaterial_8dxd2")
+
+[sub_resource type="Environment" id="Environment_1inmc"]
+background_mode = 2
+sky = SubResource("Sky_wun1b")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="BallsLevelBackground" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1inmc")

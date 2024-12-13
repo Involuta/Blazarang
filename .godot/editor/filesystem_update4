@@ -1,4 +1,4 @@
-res://enemies/x_boss.tscn
+res://enemies/first_miniboss.tscn
 res://enemies/enemy_hurtbox.gd
 res://textures/clear_tile.tres
 res://textures/x_boss_body.tres
@@ -20,7 +20,6 @@ res://glb_inherited_scenes/black_outline.gdshader
 res://textures/small_solid_black.tres
 res://textures/x_arrow.tres
 res://textures/small_solid_white.tres
-res://enemies/enemy_anims/x_dual_blade_dash.res
 res://textures/solid_light_gray_tile.tres
 res://textures/solid_dark_gray_tile.tres
 res://textures/black_tile.tres
@@ -28,7 +27,6 @@ res://shaders/outline_everything.gdshader
 res://rang/slash_test.tres
 res://ui/glow.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
-res://enemies/first_miniboss.tscn
 res://rang/rang_particles_base.tscn
 res://levels/gauntlet_level1.tscn
 res://enemies/enemy_melee_tier3.tscn
@@ -59,6 +57,7 @@ res://enemies/x_blade.tscn
 res://enemies/x_volcano.tscn
 res://glb_inherited_scenes/x_head_pieces.tscn
 res://enemies/x_arrow.tscn
+res://enemies/x_boss.tscn
 res://glb_inherited_scenes/x_right_arm.tscn
 res://enemies/x_bottom_head_piece_rb.tscn
 res://levels/x_boss_level/x_boss_level_background.tscn
@@ -70,4 +69,7 @@ res://levels/x_boss_level/x_boss_level1_viewcontrol.tscn
 res://levels/hub/hub_viewcontrol.tscn
 res://enemies/x_icon.tscn
 res://levels/x_boss_level/background_nodes/diamond.tscn
-res://enemies/x_boss.gd
+res://levels/balls_level/balls_level.tscn
+res://levels/balls_level/balls_level_viewcontrol.tscn
+res://levels/balls_level/balls_level_background.tscn
+res://levels/balls_level/section_nodes/balls_level_main_arena.tscn

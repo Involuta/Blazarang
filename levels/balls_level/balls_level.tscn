@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://26r1xic77ey5"]
+
+[ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="1_t8k04"]
+[ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="2_553cb"]
+
+[node name="Level" type="Node3D"]
+
+[node name="cotuCB" parent="." instance=ExtResource("1_t8k04")]
+
+[node name="Icon" parent="." instance=ExtResource("2_553cb")]
