@@ -1,13 +1,14 @@
+res://
+res://levels/balls_level
+res://level_maps
 res://levels/x_boss_level/background_nodes
 res://enemies/enemy_anims
 res://levels
-res://
 res://textures
 res://enemies
 res://rang
 res://glb_inherited_scenes
 res://cotu/cotu_anims
-res://level_maps
 res://audio/sfx
 res://ui
 /Users/ryanbascos/GameDevMiscAssets

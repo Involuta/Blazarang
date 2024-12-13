@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://dl4jkmedr8n61"
+path="res://.godot/imported/balls_main_arena.map-a732834307104f15800bdabe1f575482.tres"
+
+[deps]
+
+source_file="res://level_maps/balls_main_arena.map"
+dest_files=["res://.godot/imported/balls_main_arena.map-a732834307104f15800bdabe1f575482.tres"]
+
+[params]
+

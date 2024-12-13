@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cyrhr80f6vf4o"]
+[gd_scene load_steps=5 format=3 uid="uid://cyrhr80f6vf4o"]
 
+[ext_resource type="PackedScene" uid="uid://cltnvatu6e8de" path="res://levels/balls_level/balls_level_background.tscn" id="1_vm5mx"]
 [ext_resource type="Script" path="res://levels/level_viewport_container.gd" id="1_wsaj5"]
 [ext_resource type="PackedScene" uid="uid://kl1hpr0grn1v" path="res://ui/ui_root.tscn" id="2_o1k83"]
+[ext_resource type="PackedScene" uid="uid://26r1xic77ey5" path="res://levels/balls_level/balls_level.tscn" id="3_pjsj4"]
 
 [node name="ViewControl" type="Control"]
 layout_mode = 3
@@ -12,6 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="BGViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
@@ -21,7 +24,10 @@ handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
+[node name="BallsLevelBackground" parent="BGViewportContainer/SubViewport" instance=ExtResource("1_vm5mx")]
+
 [node name="LevelViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_wsaj5")
@@ -33,6 +39,8 @@ handle_input_locally = false
 audio_listener_enable_3d = true
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
+
+[node name="Level" parent="LevelViewportContainer/SubViewport" instance=ExtResource("3_pjsj4")]
 
 [node name="UIRoot" parent="." instance=ExtResource("2_o1k83")]
 layout_mode = 1
