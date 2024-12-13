@@ -73,3 +73,4 @@ res://levels/balls_level/balls_level.tscn
 res://levels/balls_level/balls_level_viewcontrol.tscn
 res://levels/balls_level/balls_level_background.tscn
 res://levels/balls_level/section_nodes/balls_level_main_arena.tscn
+res://enemies/x_boss.gd

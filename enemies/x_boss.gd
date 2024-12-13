@@ -323,6 +323,12 @@ func start_phase2():
 	phase2 = true
 	min_long_dist_wait = phase2_min_long_dist_wait
 	max_long_dist_wait = phase2_max_long_dist_wait
+	var light_tween = get_tree().create_tween()
+	light_tween.set_parallel()
+	var phase1light = root.find_child("Phase1Light")
+	var phase2light = root.find_child("Phase2Light")
+	light_tween.tween_property(phase1light, "light_energy", 0, 2)
+	light_tween.tween_property(phase2light, "light_energy", 1.5, 2)
 
 func aim_at_target():
 	aiming_at_target = true

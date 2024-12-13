@@ -133,15 +133,14 @@ shape = SubResource("ConvexPolygonShape3D_ykbts")
 [node name="entity_0_brush_8_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/Arena/entity_0_worldspawn"]
 shape = SubResource("ConvexPolygonShape3D_ff8yl")
 
-[node name="SunsetLight" type="DirectionalLight3D" parent="."]
+[node name="Phase2Light" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.939018, 0.155596, 0.306651, -0.34115, 0.533412, 0.774008, -0.0431389, -0.831421, 0.553965, -3.16012e-30, 25.9766, 0)
-visible = false
 light_color = Color(1, 0.831373, 0.772549, 1)
-light_energy = 1.5
+light_energy = 0.0
 shadow_enabled = true
 shadow_opacity = 0.5
 
-[node name="Moonlight" type="DirectionalLight3D" parent="."]
+[node name="Phase1Light" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.939018, 0.155596, 0.306651, -0.34115, 0.533412, 0.774008, -0.0431389, -0.831421, 0.553965, -3.16012e-30, 25.9766, 0)
 light_color = Color(0.764706, 0.764706, 0.764706, 1)
 light_energy = 1.5
