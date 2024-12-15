@@ -48,3 +48,7 @@ res://enemies/spawners/gauntlet_enemy_spawner.tscn
 res://levels/gauntlet/section_nodes/gauntlet_arena1.tscn
 res://levels/Level.gd
 res://enemies/spawners/gauntlet_enemy_spawner.gd
+res://enemies/enemy_melee_base.tscn
+res://enemies/enemy_melee_tier1.tscn
+res://enemies/enemy_melee_tier2.tscn
+res://globals.gd

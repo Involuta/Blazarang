@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c8vj6vfod1e6k"]
+[gd_scene load_steps=11 format=3 uid="uid://c8vj6vfod1e6k"]
 
 [ext_resource type="Script" path="res://levels/Level.gd" id="1_0iegu"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_4q2wi"]
@@ -34,6 +34,11 @@ indices = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_a8d1v"]
 points = PackedVector3Array(-42.6667, 0.666667, -42.6667, -42.6667, -0.666667, -42.6667, 42.6667, -0.666667, -42.6667, 42.6667, 0.666667, -42.6667, -42.6667, 0.666667, 42.6667, -42.6667, -0.666667, 42.6667, 42.6667, -0.666667, 42.6667, 42.6667, 0.666667, 42.6667)
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_6v2j4"]
+top_radius = 0.0
+bottom_radius = 1.0
+height = 5.0
+
 [node name="BallsLevelMainArena" type="Node3D"]
 script = ExtResource("1_0iegu")
 
@@ -61,3 +66,16 @@ shape = SubResource("ConvexPolygonShape3D_a8d1v")
 [node name="BallSpawner" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, 42, 5, 2.08165e-12)
 script = ExtResource("3_1glt0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BallSpawner"]
+transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_6v2j4")
+
+[node name="BallSpawner2" type="Node3D" parent="."]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 5, 40)
+script = ExtResource("3_1glt0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BallSpawner2"]
+transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+mesh = SubResource("CylinderMesh_6v2j4")
+skeleton = NodePath("../../BallSpawner")
