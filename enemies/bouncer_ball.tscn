@@ -1,20 +1,21 @@
-[gd_scene load_steps=9 format=3 uid="uid://dfmgy0cxcs51w"]
+[gd_scene load_steps=9 format=3 uid="uid://dbqcnmw0wsmdb"]
 
-[ext_resource type="Script" path="res://enemies/roller.gd" id="1_6pdsw"]
-[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_utfq3"]
-[ext_resource type="Script" path="res://hitbox.gd" id="3_pdcpe"]
+[ext_resource type="Script" path="res://enemies/bouncer.gd" id="1_apl53"]
+[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_jo0j8"]
+[ext_resource type="Script" path="res://hitbox.gd" id="3_0qtde"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xs2x3"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f3pcq"]
 friction = 0.0
+bounce = 1.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bi2ey"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i4scl"]
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(0.156863, 0.521569, 0.980392, 1)
+albedo_color = Color(0.784314, 0.00392157, 0.980392, 1)
 roughness = 0.1
 
-[sub_resource type="SphereMesh" id="SphereMesh_f30y8"]
-material = SubResource("StandardMaterial3D_bi2ey")
+[sub_resource type="SphereMesh" id="SphereMesh_8kpta"]
+material = SubResource("StandardMaterial3D_i4scl")
 radius = 2.5
 height = 5.0
 
@@ -24,14 +25,14 @@ radius = 2.5
 [sub_resource type="SphereShape3D" id="SphereShape3D_nj4ah"]
 radius = 2.55
 
-[node name="RollerBall" type="RigidBody3D"]
+[node name="BouncerBall" type="RigidBody3D"]
 collision_layer = 8
 collision_mask = 10
-physics_material_override = SubResource("PhysicsMaterial_xs2x3")
-script = ExtResource("1_6pdsw")
+physics_material_override = SubResource("PhysicsMaterial_f3pcq")
+script = ExtResource("1_apl53")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_f30y8")
+mesh = SubResource("SphereMesh_8kpta")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_mi232")
@@ -39,8 +40,8 @@ shape = SubResource("SphereShape3D_mi232")
 [node name="EnemyHurtbox" type="Area3D" parent="."]
 collision_layer = 8
 collision_mask = 9
-script = ExtResource("2_utfq3")
-hit_particle_color = Color(0.156863, 0.521569, 0.980392, 1)
+script = ExtResource("2_jo0j8")
+hit_particle_color = Color(1, 0, 1, 1)
 dp_impulse_limit = 10
 dp_count = 0
 opponent_hitboxes = ["PlayerHitbox"]
@@ -52,7 +53,7 @@ shape = SubResource("SphereShape3D_mi232")
 transform = Transform3D(0.999999, -3.48787e-16, 3.48787e-16, 3.48787e-16, 0.999999, -3.48787e-16, -3.48787e-16, 3.48787e-16, 0.999999, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 collision_layer = 8
 collision_mask = 18
-script = ExtResource("3_pdcpe")
+script = ExtResource("3_0qtde")
 damage = 20
 
 [node name="HitboxCollider" type="CollisionShape3D" parent="EnemyHitbox"]

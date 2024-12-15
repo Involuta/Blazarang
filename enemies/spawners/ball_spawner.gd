@@ -2,17 +2,20 @@ extends Node3D
 
 var rng := RandomNumberGenerator.new()
 var roller := preload("res://enemies/roller_ball.tscn")
+var bouncer := preload("res://enemies/bouncer_ball.tscn")
 
 @export var spawning := true
 @export var spawn_cooldown_secs := 3.0
 var spawn_cooldown_active := false
 @export var enemy_chances = {
-	"ROLLER": 1
+	"ROLLER": .75,
+	"BOUNCER": .25,
 }
 
-@export var roll_speed := 20.0
-@export var roll_dir := Vector2.LEFT
-@export var roll_dir_angle_arc := 30.0
+@export var move_speed := 20.0
+@export var move_dir := Vector2.LEFT
+@export var move_dir_angle_arc := 30.0
+@export var bounce_height := 20.0
 
 @onready var root = $/root/ViewControl
 var level : Node3D
@@ -50,15 +53,27 @@ func spawn_from_name(enemy_name):
 	match(enemy_name):
 		"ROLLER":
 			await spawn_roller()
+		"BOUNCER":
+			await spawn_bouncer()
 		"default":
 			print("Error: attempted to spawn unknown enemy")
 			await spawn_roller()
 
 func spawn_roller():
-	var r = roller.instantiate()
-	level.add_child.call_deferred(r)
-	await r.tree_entered
-	r.global_position = global_position
-	var roll_dir_half_arc := deg_to_rad(roll_dir_angle_arc) / 2
-	r.global_rotation = rotation + rng.randf_range(-roll_dir_half_arc, roll_dir_half_arc) * Vector3.UP
-	r.linear_velocity = roll_speed * -r.get_global_transform().basis.z
+	var b = roller.instantiate()
+	level.add_child.call_deferred(b)
+	await b.tree_entered
+	b.global_position = global_position
+	var move_dir_half_arc := deg_to_rad(move_dir_angle_arc) / 2
+	b.global_rotation = rotation + rng.randf_range(-move_dir_half_arc, move_dir_half_arc) * Vector3.UP
+	b.linear_velocity = move_speed * -b.get_global_transform().basis.z
+
+func spawn_bouncer():
+	var b = bouncer.instantiate()
+	level.add_child.call_deferred(b)
+	await b.tree_entered
+	b.global_position = global_position
+	var move_dir_half_arc := deg_to_rad(move_dir_angle_arc) / 2
+	b.global_rotation = rotation + rng.randf_range(-move_dir_half_arc, move_dir_half_arc) * Vector3.UP
+	b.linear_velocity = .25 * move_speed * -b.get_global_transform().basis.z
+	b.linear_velocity.y = bounce_height

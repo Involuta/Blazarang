@@ -54,6 +54,7 @@ const enemy_hurtbox_data = {
 	"FirstMiniboss" : [500, 1.0, 10.0],
 	
 	"Roller" : [10, 1.0, 1.0],
+	"Bouncer" : [10, 1.0, 2.0],
 	
 	"XBoss" : [500, 1.0, 100.0],
 	
