@@ -1,20 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://c8vj6vfod1e6k"]
+[gd_scene load_steps=8 format=3 uid="uid://c8vj6vfod1e6k"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_4q2wi"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="2_vnpjo"]
-[ext_resource type="Texture2D" uid="uid://cyg2snr1w5xw5" path="res://addons/func_godot/textures/default_texture.png" id="3_drplt"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_mcv4c"]
 vertices = PackedVector3Array(-31.6667, 1.08333, -42.1667, -42.1667, 1.08333, -42.1667, -42.1667, 1.08333, -31.6667, -42.1667, 1.08333, 31.3333, -42.1667, 1.08333, 42.0833, -31.6667, 1.08333, 42.0833, 42.0833, 1.08333, -31.6667, 42.0833, 1.08333, -42.1667, 31.3333, 1.08333, -42.1667, 31.3333, 1.08333, 42.0833, 42.0833, 1.08333, 42.0833, 42.0833, 1.08333, 31.3333, -21.1667, 1.08333, -42.1667, -31.6667, 1.08333, -42.1667, -42.1667, 1.08333, -31.6667, -42.1667, 1.08333, -21.1667, -42.1667, 1.08333, 31.3333, -31.6667, 1.08333, 42.0833, -21.1667, 1.08333, 42.0833, 42.0833, 1.08333, -21.1667, 42.0833, 1.08333, -31.6667, 31.3333, 1.08333, -42.1667, 20.8333, 1.08333, -42.1667, 20.8333, 1.08333, 42.0833, 31.3333, 1.08333, 42.0833, 42.0833, 1.08333, 31.3333, -42.1667, 1.08333, 10.3333, -42.1667, 1.08333, 20.8333, -10.6667, 1.08333, 42.0833, -0.166668, 1.08333, 42.0833, -42.1667, 1.08333, 20.8333, -42.1667, 1.08333, 31.3333, -21.1667, 1.08333, 42.0833, -10.6667, 1.08333, 42.0833, 42.0833, 1.08333, -0.166668, 42.0833, 1.08333, -10.6667, 10.3333, 1.08333, -42.1667, -0.166668, 1.08333, -42.1667, 20.8333, 1.08333, 42.0833, 42.0833, 1.08333, 31.3333, 42.0833, 1.08333, 20.8333, 10.3333, 1.08333, 42.0833, -10.6667, 1.08333, -42.1667, -21.1667, 1.08333, -42.1667, -42.1667, 1.08333, -21.1667, -42.1667, 1.08333, -10.6667, 10.3333, 1.08333, 42.0833, 42.0833, 1.08333, 20.8333, 42.0833, 1.08333, 10.3333, -0.166668, 1.08333, 42.0833, 42.0833, 1.08333, -10.6667, 42.0833, 1.08333, -21.1667, 20.8333, 1.08333, -42.1667, 10.3333, 1.08333, -42.1667, -0.166668, 1.08333, -42.1667, -10.6667, 1.08333, -42.1667, -42.1667, 1.08333, -10.6667, -42.1667, 1.08333, -0.166668, -42.1667, 1.08333, -0.166668, -42.1667, 1.08333, 10.3333, -0.166668, 1.08333, 42.0833, 42.0833, 1.08333, 10.3333, 42.0833, 1.08333, -0.166668, -0.166668, 1.08333, -42.1667)
 polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(8, 7, 6), PackedInt32Array(11, 10, 9), PackedInt32Array(13, 12, 14), PackedInt32Array(14, 12, 15), PackedInt32Array(18, 17, 16), PackedInt32Array(20, 19, 21), PackedInt32Array(21, 19, 22), PackedInt32Array(25, 24, 23), PackedInt32Array(27, 26, 28), PackedInt32Array(28, 26, 29), PackedInt32Array(31, 30, 32), PackedInt32Array(32, 30, 33), PackedInt32Array(35, 34, 36), PackedInt32Array(36, 34, 37), PackedInt32Array(39, 38, 40), PackedInt32Array(40, 38, 41), PackedInt32Array(43, 42, 44), PackedInt32Array(44, 42, 45), PackedInt32Array(47, 46, 48), PackedInt32Array(48, 46, 49), PackedInt32Array(51, 50, 52), PackedInt32Array(52, 50, 53), PackedInt32Array(55, 54, 56), PackedInt32Array(56, 54, 57), PackedInt32Array(59, 58, 60), PackedInt32Array(60, 58, 61), PackedInt32Array(61, 58, 62), PackedInt32Array(62, 58, 63)]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qc4w8"]
-albedo_color = Color(0.788235, 0, 0, 1)
-albedo_texture = ExtResource("3_drplt")
-metallic = 0.5
-metallic_specular = 0.0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t7qgp"]
+albedo_color = Color(0, 0.207843, 0.654902, 1)
 roughness = 0.5
-texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_bdvp1"]
 _surfaces = [{
@@ -23,7 +18,7 @@ _surfaces = [{
 "format": 4119,
 "index_count": 36,
 "index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 4, 0, 6, 0, 7, 0, 8, 0, 9, 0, 10, 0, 8, 0, 10, 0, 11, 0, 12, 0, 13, 0, 14, 0, 12, 0, 14, 0, 15, 0, 16, 0, 17, 0, 18, 0, 16, 0, 18, 0, 19, 0, 20, 0, 21, 0, 22, 0, 20, 0, 22, 0, 23, 0),
-"material": SubResource("StandardMaterial3D_qc4w8"),
+"material": SubResource("StandardMaterial3D_t7qgp"),
 "name": "__TB_empty",
 "primitive": 3,
 "vertex_count": 24,

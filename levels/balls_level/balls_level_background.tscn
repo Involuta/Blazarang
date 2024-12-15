@@ -3,17 +3,20 @@
 [ext_resource type="Script" path="res://bg_camera.gd" id="1_m1xyr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8dxd2"]
-sky_top_color = Color(0.588235, 0.270588, 0.776471, 1)
-sky_horizon_color = Color(0.647059, 0.654902, 0.266667, 1)
-ground_bottom_color = Color(0.156863, 0.282353, 0.156863, 1)
-ground_horizon_color = Color(0.623529, 0.698039, 0.368627, 1)
+sky_top_color = Color(0.529412, 0.807843, 0.921569, 1)
+sky_horizon_color = Color(0.529412, 0.807843, 0.921569, 1)
+ground_bottom_color = Color(0.101961, 0.290196, 0.00784314, 1)
+ground_horizon_color = Color(0, 0.509804, 0.0392157, 1)
+ground_curve = 0.105561
 
 [sub_resource type="Sky" id="Sky_wun1b"]
 sky_material = SubResource("ProceduralSkyMaterial_8dxd2")
+radiance_size = 0
 
 [sub_resource type="Environment" id="Environment_1inmc"]
 background_mode = 2
 sky = SubResource("Sky_wun1b")
+sky_rotation = Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)
 tonemap_mode = 2
 glow_enabled = true
 
@@ -23,4 +26,5 @@ glow_enabled = true
 environment = SubResource("Environment_1inmc")
 
 [node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 script = ExtResource("1_m1xyr")
