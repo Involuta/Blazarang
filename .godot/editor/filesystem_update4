@@ -74,3 +74,4 @@ res://levels/balls_level/balls_level_viewcontrol.tscn
 res://levels/balls_level/balls_level_background.tscn
 res://levels/balls_level/section_nodes/balls_level_main_arena.tscn
 res://enemies/x_boss.gd
+res://enemies/enemy_anims/x_dual_blade_dash.res
