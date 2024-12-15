@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dro4y6wgais4q"]
 
-[ext_resource type="Script" path="res://enemies/spawners/EnemySpawner.gd" id="1_s3jp3"]
+[ext_resource type="Script" path="res://enemies/spawners/gauntlet_enemy_spawner.gd" id="1_s3jp3"]
 
 [sub_resource type="Shader" id="Shader_auh6u"]
 code = "shader_type spatial;
