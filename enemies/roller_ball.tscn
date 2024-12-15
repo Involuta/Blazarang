@@ -3,22 +3,20 @@
 [ext_resource type="Script" path="res://enemies/roller.gd" id="1_6pdsw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bi2ey"]
-albedo_color = Color(0, 0.392157, 1, 1)
+albedo_color = Color(0.784314, 0.00392157, 0.980392, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_f30y8"]
 material = SubResource("StandardMaterial3D_bi2ey")
-radius = 1.5
-height = 3.0
+radius = 2.5
+height = 5.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_mi232"]
-radius = 1.5
+radius = 2.5
 
 [node name="RollerBall" type="RigidBody3D"]
 collision_layer = 8
 collision_mask = 10
 script = ExtResource("1_6pdsw")
-roll_speed = 20.0
-roll_dir_variation = 0.69
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_f30y8")

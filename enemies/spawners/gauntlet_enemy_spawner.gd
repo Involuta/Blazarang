@@ -1,8 +1,5 @@
 extends Node3D
 
-@export var section_name := ""
-var section
-
 var rng := RandomNumberGenerator.new()
 var melee_base := preload("res://enemies/enemy_melee_base.tscn")
 var melee_tier1 := preload("res://enemies/enemy_melee_tier1.tscn")
@@ -23,9 +20,12 @@ var spawn_cooldown_active := false
 @onready var middle_spinner := $MiddleSpinner
 @onready var bottom_spinner := $BottomSpinner
 
+@onready var root := $/root/ViewControl
+var level : Node3D
+
 func _ready():
 	# Since sections are instantiated via script, the owned parameter must be false
-	section = $/root.find_child(section_name, true, false)
+	level = root.find_child("Level")
 
 func _physics_process(_delta):
 	if self and not spawn_cooldown_active and spawning and not spawn_limit_met():

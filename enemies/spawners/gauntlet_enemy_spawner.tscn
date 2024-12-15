@@ -84,6 +84,10 @@ size = Vector3(1, 0.5, 1)
 
 [node name="GauntletEnemySpawner" type="Node3D"]
 script = ExtResource("1_s3jp3")
+section_name = null
+spawning = null
+spawn_cooldown_secs = null
+enemy_chances = null
 
 [node name="TopSpinner" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_f4l5o")
