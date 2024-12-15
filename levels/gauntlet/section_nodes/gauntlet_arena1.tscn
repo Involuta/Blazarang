@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=3 uid="uid://cjxdm8v82qb3v"]
 
-[ext_resource type="Script" path="res://levels/gauntlet_arena1.gd" id="1_tkr2q"]
+[ext_resource type="Script" path="res://levels/gauntlet/section_nodes/gauntlet_arena1.gd" id="1_tkr2q"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_a2k3t"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="3_5uh0e"]
 [ext_resource type="Material" uid="uid://okww4de1upt5" path="res://textures/white_border_black_center.tres" id="4_w26it"]

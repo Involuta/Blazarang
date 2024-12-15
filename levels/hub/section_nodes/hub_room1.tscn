@@ -210,7 +210,7 @@ shading_mode = 0
 [sub_resource type="SphereMesh" id="SphereMesh_o2mce"]
 material = SubResource("StandardMaterial3D_mvpf6")
 
-[node name="hub_room1" type="Node3D"]
+[node name="HubRoom1" type="Node3D"]
 script = ExtResource("1_amthg")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
@@ -347,7 +347,7 @@ texture_value_dict = {
 [node name="LevelPanel" parent="." instance=ExtResource("9_u5aok")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 2.08165e-12, -3.5)
 texture_value_dict = {
-"res://textures/3-VAR1_1.webp": "res://levels/gauntlet_level1.tscn",
+"res://textures/3-VAR1_1.webp": "res://levels/gauntlet/gaunlet_level_viewcontrol.tscn",
 "res://textures/8164.webp": "res://levels/x_boss_level/x_boss_level1_viewcontrol.tscn"
 }
 

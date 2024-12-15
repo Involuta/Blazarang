@@ -1,10 +1,10 @@
 [gd_scene load_steps=20 format=3 uid="uid://by6rgqxfg3vwp"]
 
-[ext_resource type="Script" path="res://levels/gauntlet_level1.gd" id="1_g21b3"]
+[ext_resource type="Script" path="res://levels/gauntlet/gauntlet_level1.gd" id="1_g21b3"]
 [ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="2_cdmya"]
 [ext_resource type="PackedScene" uid="uid://kl1hpr0grn1v" path="res://ui/ui_root.tscn" id="2_ob26x"]
 [ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="3_susk6"]
-[ext_resource type="PackedScene" uid="uid://cjxdm8v82qb3v" path="res://levels/gauntlet_arena1.tscn" id="4_y1q14"]
+[ext_resource type="PackedScene" uid="uid://cjxdm8v82qb3v" path="res://levels/gauntlet/section_nodes/gauntlet_arena1.tscn" id="4_y1q14"]
 [ext_resource type="AudioStream" uid="uid://br0a4rin6vcg3" path="res://audio/music/COTU.wav" id="6_1sujv"]
 [ext_resource type="Material" uid="uid://vsefhkxljqg8" path="res://textures/small_solid_black.tres" id="7_2hyy7"]
 [ext_resource type="Script" path="res://DisappearRB.gd" id="7_tfag3"]
@@ -15,13 +15,13 @@ sky_horizon_color = Color(0.00392157, 0, 0.0745098, 1)
 ground_bottom_color = Color(0.00392157, 0, 0.0666667, 1)
 ground_horizon_color = Color(0.00392157, 0, 0.0745098, 1)
 
-[sub_resource type="Sky" id="Sky_xpqqj"]
+[sub_resource type="Sky" id="Sky_tiocf"]
 sky_material = SubResource("ProceduralSkyMaterial_2oney")
 
 [sub_resource type="Environment" id="Environment_vgqir"]
 background_mode = 1
 background_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
-sky = SubResource("Sky_xpqqj")
+sky = SubResource("Sky_tiocf")
 tonemap_mode = 2
 glow_enabled = true
 glow_intensity = 2.0

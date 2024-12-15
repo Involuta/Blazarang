@@ -41,4 +41,4 @@ stream = ExtResource("5_4lgj2")
 volume_db = -5.0
 bus = &"Music"
 
-[node name="hub_room1" parent="." instance=ExtResource("6_1ssbx")]
+[node name="HubRoom" parent="." instance=ExtResource("6_1ssbx")]

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://hg3sme140wqp"]
+
+[ext_resource type="Script" path="res://bg_camera.gd" id="1_nebo1"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_upylf"]
+sky_top_color = Color(0.0196078, 0, 0.172549, 1)
+sky_horizon_color = Color(0.00392157, 0, 0.0745098, 1)
+ground_bottom_color = Color(0.00392157, 0, 0.0666667, 1)
+ground_horizon_color = Color(0.00392157, 0, 0.0745098, 1)
+
+[sub_resource type="Sky" id="Sky_jfu7v"]
+sky_material = SubResource("ProceduralSkyMaterial_upylf")
+
+[sub_resource type="Environment" id="Environment_imp0g"]
+background_mode = 1
+background_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+sky = SubResource("Sky_jfu7v")
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 2.0
+glow_bloom = 0.2
+
+[node name="GauntletLevelBackground" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_imp0g")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+script = ExtResource("1_nebo1")
