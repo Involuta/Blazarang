@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="BlazarangGodot"
-run/main_scene="res://levels/hub/hub_viewcontrol.tscn"
+run/main_scene="res://levels/balls_level/balls_level_viewcontrol.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
 

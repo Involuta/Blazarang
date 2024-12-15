@@ -11,7 +11,7 @@ var camera_twist_pivot : Node3D
 var camera : Node3D
 
 func _ready():
-	cotu = find_child("cotuCB")
+	cotu = root.find_child("cotuCB")
 	camera_twist_pivot = cotu.find_child("CameraTwistPivot")
 	camera = cotu.find_child("Camera3D")
 

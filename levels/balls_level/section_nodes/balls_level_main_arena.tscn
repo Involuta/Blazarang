@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://c8vj6vfod1e6k"]
+[gd_scene load_steps=10 format=3 uid="uid://c8vj6vfod1e6k"]
 
+[ext_resource type="Script" path="res://levels/Level.gd" id="1_0iegu"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_4q2wi"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="2_vnpjo"]
 [ext_resource type="Script" path="res://enemies/spawners/ball_spawner.gd" id="3_1glt0"]
@@ -34,6 +35,7 @@ indices = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 points = PackedVector3Array(-42.6667, 0.666667, -42.6667, -42.6667, -0.666667, -42.6667, 42.6667, -0.666667, -42.6667, 42.6667, 0.666667, -42.6667, -42.6667, 0.666667, 42.6667, -42.6667, -0.666667, 42.6667, 42.6667, -0.666667, 42.6667, 42.6667, 0.666667, 42.6667)
 
 [node name="BallsLevelMainArena" type="Node3D"]
+script = ExtResource("1_0iegu")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_mcv4c")

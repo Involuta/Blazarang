@@ -41,3 +41,9 @@ res://enemies/enemy_big_melee_base.gd
 res://enemies/enemy_gunner_base.gd
 res://enemies/enemy_stationary_gunner.gd
 res://levels/x_boss_level/x_boss_level1.tscn
+res://levels/balls_level/section_nodes/balls_level_main_arena.tscn
+res://enemies/spawners/ball_spawner.gd
+res://enemies/roller.gd
+res://enemies/spawners/gauntlet_enemy_spawner.tscn
+res://levels/gauntlet/section_nodes/gauntlet_arena1.tscn
+res://levels/Level.gd

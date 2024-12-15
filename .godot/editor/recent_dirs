@@ -1,12 +1,13 @@
+res://levels
+res://levels/
+res://levels/balls_level
 res://levels/hub
 res://enemies/spawners
 res://levels/x_boss_level
 res://
-res://levels/balls_level
 res://level_maps
 res://levels/x_boss_level/background_nodes
 res://enemies/enemy_anims
-res://levels
 res://textures
 res://enemies
 res://rang
@@ -18,7 +19,6 @@ res://ui
 res://glb_imports
 res://shaders
 res://cotu
-res://levels/
 /Users/ryanbascos/Library/Application Support/TrenchBroom/games
 /Users/ryanbascos/GodotBuilds
 /Users/ryanbascos/Applications/

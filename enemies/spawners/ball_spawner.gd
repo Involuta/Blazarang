@@ -1,7 +1,7 @@
 extends Node3D
 
-var section
-var section_name = ""
+@export var section_name = "BallsLevelMainArena"
+var section : Node3D
 var rng := RandomNumberGenerator.new()
 var roller := preload("res://enemies/roller_ball.tscn")
 
@@ -9,8 +9,7 @@ var roller := preload("res://enemies/roller_ball.tscn")
 @export var spawn_cooldown_secs := 3.0
 var spawn_cooldown_active := false
 @export var enemy_chances = {
-	"ROLLER": .66,
-	"BOUNCER" : .33
+	"ROLLER": 1
 }
 
 func _ready():
@@ -20,7 +19,6 @@ func _ready():
 func _physics_process(_delta):
 	if self and not spawn_cooldown_active and spawning and not spawn_limit_met():
 		spawn_enemy()
-	rotate_y(.25 * get_physics_process_delta_time())
 
 func spawn_enemy():
 	spawn_cooldown_active = true
