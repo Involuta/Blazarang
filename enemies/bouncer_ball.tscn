@@ -11,7 +11,7 @@ bounce = 1.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i4scl"]
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(0.784314, 0.00392157, 0.980392, 1)
+albedo_color = Color(1, 0.45098, 0.792157, 1)
 roughness = 0.1
 
 [sub_resource type="SphereMesh" id="SphereMesh_8kpta"]
@@ -41,7 +41,7 @@ shape = SubResource("SphereShape3D_mi232")
 collision_layer = 8
 collision_mask = 9
 script = ExtResource("2_jo0j8")
-hit_particle_color = Color(1, 0, 1, 1)
+hit_particle_color = Color(1, 0.45098, 0.792157, 1)
 dp_impulse_limit = 10
 dp_count = 0
 opponent_hitboxes = ["PlayerHitbox"]
