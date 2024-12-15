@@ -5,6 +5,7 @@ var roller := preload("res://enemies/roller_ball.tscn")
 var bouncer := preload("res://enemies/bouncer_ball.tscn")
 var giant_roller := preload("res://enemies/giant_roller_ball.tscn")
 var giant_bouncer := preload("res://enemies/giant_bouncer_ball.tscn")
+var swarm := preload("res://enemies/swarm_ball.tscn")
 
 @export var spawning := true
 @export var spawn_cooldown_secs := 3.0
@@ -18,6 +19,8 @@ var spawn_cooldown_active := false
 @export var move_speed := 20.0
 @export var move_dir_angle_arc := 30.0
 @export var bounce_height := 20.0
+
+@export var swarm_size := 15.0
 
 @onready var root = $/root/ViewControl
 var level : Node3D
@@ -61,6 +64,8 @@ func spawn_from_name(enemy_name):
 			await spawn_giant_roller()
 		"GIANT_BOUNCER":
 			await spawn_giant_bouncer()
+		"SWARM":
+			await spawn_swarm()
 		"default":
 			print("Error: attempted to spawn unknown enemy")
 			await spawn_roller()
@@ -100,3 +105,14 @@ func spawn_giant_bouncer():
 	b.global_rotation = rotation
 	b.linear_velocity = .25 * move_speed * -b.get_global_transform().basis.z
 	b.linear_velocity.y = bounce_height
+
+func spawn_swarm():
+	for i in range(swarm_size):
+		var b = swarm.instantiate()
+		level.add_child.call_deferred(b)
+		await b.tree_entered
+		b.global_position = global_position
+		var move_dir_half_arc := deg_to_rad(move_dir_angle_arc) / 2
+		b.global_rotation = rotation + rng.randf_range(-move_dir_half_arc, move_dir_half_arc) * Vector3.UP
+		b.linear_velocity = move_speed * -b.get_global_transform().basis.z
+		b.linear_velocity.y = rng.randfn()
