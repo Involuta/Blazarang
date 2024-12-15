@@ -24,11 +24,14 @@ var rng := RandomNumberGenerator.new()
 @onready var nav_agent = $NavigationAgent3D
 @onready var anim_tree = $AnimationTree
 @onready var visual_mesh = $VisualMesh
-@onready var target = $/root/Level/Icon
+@onready var root := $/root/ViewControl
+
+var target : Node3D
 
 var anim_tree_exists := true
 
 func _ready():
+	target = root.find_child("Icon")
 	add_to_group("lockonables")
 	if aggro_distance > 0:
 		nav_agent.process_mode = Node.PROCESS_MODE_DISABLED

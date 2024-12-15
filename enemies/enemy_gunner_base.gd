@@ -27,10 +27,14 @@ var bullet := preload("res://enemies/enemy_bullet.tscn")
 @onready var anim_player := $AnimationPlayer
 @onready var anim_tree := $AnimationTree
 @onready var gun_mesh := $MobileGunner/ControlRig/Skeleton3D/BoneAttachment3D/BasicGun
-@onready var level := $/root/Level
-@onready var target := $/root/Level/Icon
+@onready var root := $/root/ViewControl
+
+var level : Node3D
+var target : Node3D
 
 func _ready():
+	level = root.find_child("Level")
+	target = root.find_child("Icon")
 	add_to_group("lockonables")
 	if aggro_distance > 0:
 		nav_agent.process_mode = Node.PROCESS_MODE_DISABLED

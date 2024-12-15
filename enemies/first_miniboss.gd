@@ -73,10 +73,13 @@ var bullet := preload("res://enemies/enemy_mega_bullet.tscn")
 @onready var inner_body := $FirstMiniboss/InnerBody
 @onready var body_spinner1 := $FirstMiniboss/BodySpinner1
 @onready var body_spinner2 := $FirstMiniboss/BodySpinner2
-@onready var level := $/root/Level
-@onready var target = $/root/Level/Icon
+@onready var root := $/root/ViewControl
+var level : Node3D
+var target : Node3D
 
 func _ready():
+	level = root.find_child("Level")
+	target = root.find_child("Icon")
 	add_to_group("lockonables")
 	if aggro_distance > 0:
 		nav_agent.process_mode = Node.PROCESS_MODE_DISABLED

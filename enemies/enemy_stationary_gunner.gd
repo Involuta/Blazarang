@@ -15,12 +15,16 @@ var rng := RandomNumberGenerator.new()
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var bullet := preload("res://enemies/enemy_bullet.tscn")
 @onready var animation_player := $AnimationPlayer
-@onready var level := $/root/Level
-@onready var target := $/root/Level/Icon
 @onready var gun_mesh := $GunMesh
 @onready var stand_mesh := $BasicStationaryGunStand
+@onready var root = $/root/ViewControl
+
+var level : Node3D
+var target : Node3D
 
 func _ready():
+	level = root.find_child("Level")
+	target = root.find_child("Icon")
 	add_to_group("lockonables")
 
 func _physics_process(delta):

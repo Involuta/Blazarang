@@ -24,9 +24,12 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 @onready var nav_agent = $NavigationAgent3D
 @onready var animation_player = $AnimationPlayer
-@onready var target = $/root/Level/Target
+@onready var root = $/root/ViewControl
+
+var target : Node3D
 
 func _ready():
+	target = root.find_child("Icon")
 	add_to_group("lockonables")
 	if aggro_distance > 0:
 		nav_agent.process_mode = Node.PROCESS_MODE_DISABLED
