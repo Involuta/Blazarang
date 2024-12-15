@@ -4,6 +4,7 @@ var rng := RandomNumberGenerator.new()
 var roller := preload("res://enemies/roller_ball.tscn")
 var bouncer := preload("res://enemies/bouncer_ball.tscn")
 var giant_roller := preload("res://enemies/giant_roller_ball.tscn")
+var giant_bouncer := preload("res://enemies/giant_bouncer_ball.tscn")
 
 @export var spawning := true
 @export var spawn_cooldown_secs := 3.0
@@ -58,6 +59,8 @@ func spawn_from_name(enemy_name):
 			await spawn_bouncer()
 		"GIANT_ROLLER":
 			await spawn_giant_roller()
+		"GIANT_BOUNCER":
+			await spawn_giant_bouncer()
 		"default":
 			print("Error: attempted to spawn unknown enemy")
 			await spawn_roller()
@@ -81,7 +84,6 @@ func spawn_bouncer():
 	b.linear_velocity = .25 * move_speed * -b.get_global_transform().basis.z
 	b.linear_velocity.y = bounce_height
 
-
 func spawn_giant_roller():
 	var b = giant_roller.instantiate()
 	level.add_child.call_deferred(b)
@@ -89,3 +91,12 @@ func spawn_giant_roller():
 	b.global_position = global_position
 	b.global_rotation = rotation
 	b.linear_velocity = move_speed * -b.get_global_transform().basis.z
+
+func spawn_giant_bouncer():
+	var b = giant_bouncer.instantiate()
+	level.add_child.call_deferred(b)
+	await b.tree_entered
+	b.global_position = global_position
+	b.global_rotation = rotation
+	b.linear_velocity = .25 * move_speed * -b.get_global_transform().basis.z
+	b.linear_velocity.y = bounce_height

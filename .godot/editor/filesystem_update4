@@ -56,3 +56,6 @@ res://enemies/enemy_bullet.tscn
 res://enemies/bouncer_ball.tscn
 res://enemies/bouncer.gd
 res://enemies/giant_roller_ball.tscn
+res://enemies/giant_roller.gd
+res://enemies/ball.gd
+res://enemies/giant_bouncer_ball.tscn

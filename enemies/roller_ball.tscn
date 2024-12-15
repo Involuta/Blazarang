@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dfmgy0cxcs51w"]
 
-[ext_resource type="Script" path="res://enemies/roller.gd" id="1_6pdsw"]
+[ext_resource type="Script" path="res://enemies/ball.gd" id="1_2magb"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_utfq3"]
 [ext_resource type="Script" path="res://hitbox.gd" id="3_pdcpe"]
 
@@ -28,7 +28,8 @@ radius = 1.85
 collision_layer = 8
 collision_mask = 10
 physics_material_override = SubResource("PhysicsMaterial_xs2x3")
-script = ExtResource("1_6pdsw")
+script = ExtResource("1_2magb")
+entity_name = "RollerBall"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_f30y8")

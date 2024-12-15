@@ -53,8 +53,10 @@ const enemy_hurtbox_data = {
 	"EnemyStationaryGunner" : [10, 1.0, 1.0],
 	"FirstMiniboss" : [500, 1.0, 10.0],
 	
-	"Roller" : [10, 1.0, 1.0],
-	"Bouncer" : [10, 1.0, 2.0],
+	"RollerBall" : [10, 1.0, 1.0],
+	"BouncerBall" : [10, 1.0, 2.0],
+	"GiantRollerBall" : [30, 1.0, 2.0],
+	"GiantBouncerBall" : [10, 1.0, 2.0],
 	
 	"XBoss" : [500, 1.0, 100.0],
 	
