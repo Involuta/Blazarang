@@ -16,14 +16,14 @@ roughness = 0.1
 
 [sub_resource type="SphereMesh" id="SphereMesh_8kpta"]
 material = SubResource("StandardMaterial3D_i4scl")
-radius = 2.5
-height = 5.0
+radius = 1.8
+height = 3.6
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_mi232"]
-radius = 2.5
+radius = 1.8
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_nj4ah"]
-radius = 2.55
+radius = 1.85
 
 [node name="BouncerBall" type="RigidBody3D"]
 collision_layer = 8
@@ -54,7 +54,7 @@ transform = Transform3D(0.999999, -3.48787e-16, 3.48787e-16, 3.48787e-16, 0.9999
 collision_layer = 8
 collision_mask = 18
 script = ExtResource("3_0qtde")
-damage = 20
+damage = 36
 
 [node name="HitboxCollider" type="CollisionShape3D" parent="EnemyHitbox"]
 shape = SubResource("SphereShape3D_nj4ah")
