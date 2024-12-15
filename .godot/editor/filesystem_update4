@@ -52,3 +52,4 @@ res://enemies/enemy_melee_base.tscn
 res://enemies/enemy_melee_tier1.tscn
 res://enemies/enemy_melee_tier2.tscn
 res://globals.gd
+res://enemies/enemy_bullet.tscn
