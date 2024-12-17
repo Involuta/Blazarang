@@ -64,3 +64,5 @@ res://enemies/swarm_ball.tscn
 res://enemies/skull_ball.tscn
 res://enemies/skull_ball.gd
 res://enemies/x_volcano.tscn
+res://enemies/heavy_ball.tscn
+res://enemies/heavy_ball.gd

@@ -7,6 +7,7 @@ var giant_roller := preload("res://enemies/giant_roller_ball.tscn")
 var giant_bouncer := preload("res://enemies/giant_bouncer_ball.tscn")
 var swarm := preload("res://enemies/swarm_ball.tscn")
 var skull := preload("res://enemies/skull_ball.tscn")
+var heavy := preload("res://enemies/heavy_ball.tscn")
 
 @export var spawning := true
 @export var spawn_cooldown_secs := 3.0
@@ -25,6 +26,8 @@ var spawn_cooldown_active := false
 
 @export var skull_follow_speed := 5.0
 @export var skull_explode_dist := 5.0
+
+@export var arena_floor_y := 10.0
 
 @onready var root = $/root/ViewControl
 var level : Node3D
@@ -72,6 +75,8 @@ func spawn_from_name(enemy_name):
 			await spawn_swarm()
 		"SKULL":
 			await spawn_skull()
+		"HEAVY":
+			await spawn_heavy()
 		"default":
 			print("Error: attempted to spawn unknown enemy")
 			await spawn_roller()
@@ -131,3 +136,13 @@ func spawn_skull():
 	b.global_rotation = rotation
 	b.follow_speed = skull_follow_speed
 	b.explode_dist = skull_explode_dist
+
+func spawn_heavy():
+	var b = heavy.instantiate()
+	level.add_child.call_deferred(b)
+	await b.tree_entered
+	b.global_position = global_position
+	b.global_rotation = rotation
+	b.linear_velocity = .25 * move_speed * -b.get_global_transform().basis.z
+	b.linear_velocity.y = bounce_height
+	b.arena_floor_y = arena_floor_y

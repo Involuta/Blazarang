@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://cqaat4e3ukpmf"]
+
+[ext_resource type="Script" path="res://enemies/heavy_ball.gd" id="1_t8xu3"]
+[ext_resource type="Script" path="res://hitbox.gd" id="3_qhid8"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xs2x3"]
+friction = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ec4ku"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.392157, 0.392157, 0.392157, 1)
+metallic = 0.5
+roughness = 0.3
+
+[sub_resource type="SphereMesh" id="SphereMesh_f30y8"]
+material = SubResource("StandardMaterial3D_ec4ku")
+radius = 2.0
+height = 4.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mi232"]
+radius = 2.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nj4ah"]
+radius = 2.05
+
+[node name="HeavyBall" type="RigidBody3D"]
+collision_layer = 2
+collision_mask = 2
+mass = 30.0
+physics_material_override = SubResource("PhysicsMaterial_xs2x3")
+script = ExtResource("1_t8xu3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_f30y8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_mi232")
+
+[node name="EnemyHitbox" type="Area3D" parent="."]
+transform = Transform3D(0.999999, -3.48787e-16, 3.48787e-16, 3.48787e-16, 0.999999, -3.48787e-16, -3.48787e-16, 3.48787e-16, 0.999999, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+collision_layer = 8
+collision_mask = 18
+script = ExtResource("3_qhid8")
+damage = 30
+
+[node name="HitboxCollider" type="CollisionShape3D" parent="EnemyHitbox"]
+shape = SubResource("SphereShape3D_nj4ah")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
