@@ -15,14 +15,14 @@ roughness = 0.1
 
 [sub_resource type="SphereMesh" id="SphereMesh_f30y8"]
 material = SubResource("StandardMaterial3D_ec4ku")
-radius = 1.8
-height = 3.6
+radius = 1.25
+height = 2.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_mi232"]
-radius = 1.8
+radius = 1.25
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_nj4ah"]
-radius = 1.85
+radius = 1.3
 
 [node name="RollerBall" type="RigidBody3D"]
 collision_layer = 8
