@@ -24,6 +24,7 @@ var spawn_cooldown_active := false
 @export var swarm_size := 15.0
 
 @export var skull_follow_speed := 5.0
+@export var skull_explode_dist := 5.0
 
 @onready var root = $/root/ViewControl
 var level : Node3D
@@ -129,3 +130,4 @@ func spawn_skull():
 	b.global_position = global_position
 	b.global_rotation = rotation
 	b.follow_speed = skull_follow_speed
+	b.explode_dist = skull_explode_dist
