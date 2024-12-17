@@ -61,3 +61,5 @@ res://enemies/ball.gd
 res://enemies/giant_bouncer_ball.tscn
 res://enemies/buckshot_ball.tscn
 res://enemies/swarm_ball.tscn
+res://enemies/skull_ball.tscn
+res://enemies/skull_ball.gd

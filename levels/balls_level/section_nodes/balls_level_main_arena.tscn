@@ -80,7 +80,8 @@ enemy_chances = {
 "GIANT_BOUNCER": 2.08167e-12,
 "GIANT_ROLLER": 2.08167e-12,
 "ROLLER": 2.08167e-12,
-"SWARM": 1.0
+"SKULL": 1.0,
+"SWARM": 2.08167e-12
 }
 move_speed = 15.0
 

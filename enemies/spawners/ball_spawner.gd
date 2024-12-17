@@ -6,6 +6,7 @@ var bouncer := preload("res://enemies/bouncer_ball.tscn")
 var giant_roller := preload("res://enemies/giant_roller_ball.tscn")
 var giant_bouncer := preload("res://enemies/giant_bouncer_ball.tscn")
 var swarm := preload("res://enemies/swarm_ball.tscn")
+var skull := preload("res://enemies/skull_ball.tscn")
 
 @export var spawning := true
 @export var spawn_cooldown_secs := 3.0
@@ -21,6 +22,8 @@ var spawn_cooldown_active := false
 @export var bounce_height := 20.0
 
 @export var swarm_size := 15.0
+
+@export var skull_follow_speed := 5.0
 
 @onready var root = $/root/ViewControl
 var level : Node3D
@@ -66,6 +69,8 @@ func spawn_from_name(enemy_name):
 			await spawn_giant_bouncer()
 		"SWARM":
 			await spawn_swarm()
+		"SKULL":
+			await spawn_skull()
 		"default":
 			print("Error: attempted to spawn unknown enemy")
 			await spawn_roller()
@@ -116,3 +121,11 @@ func spawn_swarm():
 		b.global_rotation = rotation + rng.randf_range(-move_dir_half_arc, move_dir_half_arc) * Vector3.UP
 		b.linear_velocity = move_speed * -b.get_global_transform().basis.z
 		b.linear_velocity.y = rng.randfn()
+
+func spawn_skull():
+	var b = skull.instantiate()
+	level.add_child.call_deferred(b)
+	await b.tree_entered
+	b.global_position = global_position
+	b.global_rotation = rotation
+	b.follow_speed = skull_follow_speed

@@ -1,4 +1,5 @@
 extends RigidBody3D
+class_name Ball
 
 @export var entity_name := "Ball"
 
