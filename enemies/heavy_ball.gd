@@ -5,6 +5,5 @@ var arena_floor_y := 10.0
 
 func _physics_process(delta):
 	super(delta)
-	if global_position.y <= arena_floor_y + physical_collider.shape.radius + 1:
-		linear_velocity.x = 0
-		linear_velocity.z = 0
+	if global_position.y <= arena_floor_y + physical_collider.shape.radius / 2:
+		linear_velocity = Vector3.ZERO

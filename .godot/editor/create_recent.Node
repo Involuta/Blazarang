@@ -1,7 +1,8 @@
-AnimationPlayer
-MeshInstance3D
 RigidBody3D
 CollisionShape3D
+StaticBody3D
+AnimationPlayer
+MeshInstance3D
 Node3D
 Camera3D
 FuncGodotMap
@@ -13,7 +14,6 @@ SubViewportContainer
 TextureButton
 CanvasLayer
 Area3D
-StaticBody3D
 CPUParticles3D
 AnimatedSprite3D
 Hitbox
