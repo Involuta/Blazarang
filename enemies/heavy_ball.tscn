@@ -25,8 +25,8 @@ radius = 2.0
 radius = 2.05
 
 [node name="HeavyBall" type="RigidBody3D"]
-collision_layer = 8
-collision_mask = 8
+collision_layer = 64
+collision_mask = 64
 mass = 30.0
 physics_material_override = SubResource("PhysicsMaterial_xs2x3")
 script = ExtResource("1_t8xu3")
@@ -42,7 +42,7 @@ transform = Transform3D(0.999999, -3.48787e-16, 3.48787e-16, 3.48787e-16, 0.9999
 collision_layer = 8
 collision_mask = 18
 script = ExtResource("3_qhid8")
-damage = 30
+damage = 80
 
 [node name="HitboxCollider" type="CollisionShape3D" parent="EnemyHitbox"]
 shape = SubResource("SphereShape3D_nj4ah")

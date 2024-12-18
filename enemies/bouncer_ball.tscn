@@ -27,7 +27,7 @@ radius = 1.85
 
 [node name="BouncerBall" type="RigidBody3D"]
 collision_layer = 8
-collision_mask = 10
+collision_mask = 74
 physics_material_override = SubResource("PhysicsMaterial_f3pcq")
 script = ExtResource("1_wv7x3")
 entity_name = "BouncerBall"
