@@ -66,3 +66,6 @@ res://enemies/skull_ball.gd
 res://enemies/x_volcano.tscn
 res://enemies/heavy_ball.tscn
 res://enemies/heavy_ball.gd
+res://enemies/spawners/ball_cannon.tscn
+res://enemies/spawners/cannon_ball_spawner.tscn
+res://enemies/spawners/cannon_ball_spawner.gd

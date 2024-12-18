@@ -1,4 +1,5 @@
 extends Node3D
+class_name BallSpawner
 
 var rng := RandomNumberGenerator.new()
 var roller := preload("res://enemies/roller_ball.tscn")
@@ -13,9 +14,13 @@ var heavy := preload("res://enemies/heavy_ball.tscn")
 @export var spawn_cooldown_secs := 3.0
 var spawn_cooldown_active := false
 @export var enemy_chances = {
-	"ROLLER": .4,
-	"BOUNCER": .1,
-	"GIANT_ROLLER": .5
+	"ROLLER": .25,
+	"BOUNCER": .25,
+	"GIANT_ROLLER": 0,
+	"GIANT_BOUNCER": 0,
+	"SWARM": 0,
+	"SKULL": .25,
+	"HEAVY": .25
 }
 
 @export var move_speed := 20.0

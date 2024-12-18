@@ -14,7 +14,7 @@ func _ready():
 	target = root.find_child("Icon")
 	$EnemyHitbox.process_mode = Node.PROCESS_MODE_DISABLED
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if moving:
 		var dir_to_target := global_position.direction_to(target.global_position)
 		linear_velocity.x = follow_speed * dir_to_target.x
