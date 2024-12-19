@@ -89,15 +89,16 @@ transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-
 script = ExtResource("3_1glt0")
 spawn_cooldown_secs = 4.0
 enemy_chances = {
-"BOUNCER": 2.08167e-12,
+"BOUNCER": 0.5,
 "GIANT_BOUNCER": 2.08167e-12,
 "GIANT_ROLLER": 2.08167e-12,
-"HEAVY": 1.0,
+"HEAVY": 0.5,
 "ROLLER": 2.08167e-12,
 "SKULL": 2.08167e-12,
 "SWARM": 2.08167e-12
 }
 move_speed = 15.0
+bounce_height = 15.0
 heavy_launch_height = 10.0
 
 [node name="Mesh" type="Node3D" parent="BallSpawner2"]
