@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwkv4n3ofhmt6"]
+
+[ext_resource type="PackedScene" uid="uid://dqwtcqe3gt0ad" path="res://glb_imports/cannon_mortarT1.glb" id="1_tsxpx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jmo8d"]
+albedo_color = Color(0.117647, 0.117647, 0.117647, 1)
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dn7kg"]
+albedo_color = Color(0.313726, 0.313726, 0.313726, 1)
+roughness = 0.0
+
+[node name="cannon_mortarT1" instance=ExtResource("1_tsxpx")]
+
+[node name="Funnel" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_jmo8d")
+
+[node name="Sphere" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_dn7kg")

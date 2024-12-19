@@ -1,3 +1,4 @@
+res://glb_inherited_scenes
 res://levels
 res://levels/
 res://levels/balls_level
@@ -11,7 +12,6 @@ res://enemies/enemy_anims
 res://textures
 res://enemies
 res://rang
-res://glb_inherited_scenes
 res://cotu/cotu_anims
 res://audio/sfx
 res://ui

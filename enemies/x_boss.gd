@@ -8,7 +8,7 @@ enum {
 	STRAFE_FOLLOW,
 	ATTACK,
 }
-var behav_state := FOLLOW
+var  := FOLLOW
 var strafing_left := false
 var stop_checking := false
 var stop_dist := 1.0
