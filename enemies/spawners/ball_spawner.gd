@@ -39,6 +39,7 @@ var spawn_cooldown_active := false
 @export var heavy_launch_height := 40.0
 @export var arena_floor_y := 10.0
 
+@onready var mesh = $Mesh
 @onready var root = $/root/ViewControl
 var level : Node3D
 var target : Node3D
@@ -51,16 +52,25 @@ func _physics_process(_delta):
 	if self and not spawn_cooldown_active and spawning and not spawn_limit_met():
 		spawn_enemy()
 	if aiming_at_target:
-		lerp_look_at_target(attack_turn_speed)
+		lateral_look_at_target(attack_turn_speed)
+		vert_look_at_target(attack_turn_speed)
 
-func lerp_look_at_target(turn_speed):
+func lateral_look_at_target(turn_speed):
 	var old_rotation := rotation
 	look_at(target.global_position)
 	var target_rotation := rotation
 	rotation = old_rotation
 	rotation.y = lerp_angle(rotation.y, target_rotation.y, turn_speed)
-	rotation.x = lerp_angle(rotation.x, target_rotation.x, turn_speed)
-	rotation.z = lerp_angle(rotation.z, target_rotation.z, turn_speed)
+	#rotation.x = lerp_angle(rotation.x, target_rotation.x, turn_speed)
+	#rotation.z = lerp_angle(rotation.z, target_rotation.z, turn_speed)
+
+func vert_look_at_target(turn_speed):
+	var old_rotation = mesh.rotation
+	mesh.look_at(target.global_position)
+	var target_rotation = mesh.rotation
+	mesh.rotation = old_rotation
+	# Rotation "upward" = tan^-1(y_vel/x_vel)
+	mesh.rotation.x = lerp_angle(mesh.rotation.x, target_rotation.x, turn_speed)
 
 func spawn_limit_met():
 	if level:
@@ -166,8 +176,6 @@ func spawn_heavy():
 	await b.tree_entered
 	b.global_position = global_position
 	b.global_rotation = rotation
-	#b.linear_velocity = .25 * move_speed * -b.get_global_transform().basis.z
-	#b.linear_velocity.y = bounce_height
 	var y_vel : float = sqrt(2 * gravity * heavy_launch_height + global_position.y)
 	var total_flight_time : float = 2 * y_vel / gravity
 	var vec_to_target := target.global_position - global_position
