@@ -11,7 +11,8 @@ var swarm := preload("res://enemies/swarm_ball.tscn")
 var skull := preload("res://enemies/skull_ball.tscn")
 var heavy := preload("res://enemies/heavy_ball.tscn")
 
-var aiming_at_target := NOTIFICATION_WM_CLOSE_REQUEST
+var lateral_aiming_at_target := true
+var vert_aiming_at_target := true
 @export var attack_turn_speed := .1
 
 @export var spawning := true
@@ -30,6 +31,8 @@ var spawn_cooldown_active := false
 @export var move_speed := 20.0
 @export var move_dir_angle_arc := 30.0
 @export var bounce_height := 20.0
+var high_trajectory_lateral_vel := 0.0
+var high_trajectory_y_vel := 0.0
 
 @export var swarm_size := 15.0
 
@@ -49,11 +52,22 @@ func _ready():
 	target = root.find_child("Icon")
 
 func _physics_process(_delta):
+	update_high_trajectory_vels()
 	if self and not spawn_cooldown_active and spawning and not spawn_limit_met():
 		spawn_enemy()
-	if aiming_at_target:
+	if lateral_aiming_at_target:
 		lateral_look_at_target(attack_turn_speed)
+	if vert_aiming_at_target:
 		vert_look_at_target(attack_turn_speed)
+	else:
+		vert_look_high_trajectory(attack_turn_speed)
+
+func update_high_trajectory_vels():
+	high_trajectory_y_vel = sqrt(2 * gravity * heavy_launch_height + global_position.y)
+	var total_flight_time : float = 2 * high_trajectory_y_vel / gravity
+	var vec_to_target := target.global_position - global_position
+	var lateral_dist_to_target := 1.42 * Vector2(vec_to_target.x, vec_to_target.z).length()
+	high_trajectory_lateral_vel = lateral_dist_to_target / total_flight_time
 
 func lateral_look_at_target(turn_speed):
 	var old_rotation := rotation
@@ -69,8 +83,12 @@ func vert_look_at_target(turn_speed):
 	mesh.look_at(target.global_position)
 	var target_rotation = mesh.rotation
 	mesh.rotation = old_rotation
-	# Rotation "upward" = tan^-1(y_vel/x_vel)
 	mesh.rotation.x = lerp_angle(mesh.rotation.x, target_rotation.x, turn_speed)
+
+func vert_look_high_trajectory(turn_speed):
+	# Rotation "upward" = tan^-1(y_vel/x_vel)
+	var target_rotation_x = atan2(high_trajectory_y_vel, high_trajectory_lateral_vel)
+	mesh.rotation.x = lerp_angle(mesh.rotation.x, target_rotation_x, turn_speed)
 
 func spawn_limit_met():
 	if level:
@@ -171,16 +189,12 @@ func spawn_skull():
 	b.explode_dist = skull_explode_dist
 
 func spawn_heavy():
+	vert_aiming_at_target = false
 	var b = heavy.instantiate()
 	level.add_child.call_deferred(b)
 	await b.tree_entered
 	b.global_position = global_position
 	b.global_rotation = rotation
-	var y_vel : float = sqrt(2 * gravity * heavy_launch_height + global_position.y)
-	var total_flight_time : float = 2 * y_vel / gravity
-	var vec_to_target := target.global_position - global_position
-	var lateral_dist_to_target := 1.42 * Vector2(vec_to_target.x, vec_to_target.z).length()
-	var lateral_vel := lateral_dist_to_target / total_flight_time
-	b.linear_velocity = lateral_vel * -b.get_global_transform().basis.z
-	b.linear_velocity.y = y_vel
+	b.linear_velocity = high_trajectory_lateral_vel * -b.get_global_transform().basis.z
+	b.linear_velocity.y = high_trajectory_y_vel
 	b.arena_floor_y = arena_floor_y
