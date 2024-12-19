@@ -13,6 +13,8 @@ func _ready():
 
 func _physics_process(delta):
 	super(delta)
+	if global_position.y <= arena_floor_y - physical_collider.shape.radius * 2:
+		queue_free()
 	if linear_velocity.length() > depress_min_speed:
 		if global_position.y <= arena_floor_y + physical_collider.shape.radius / 2:
 			linear_velocity = Vector3.ZERO

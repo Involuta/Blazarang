@@ -1,11 +1,6 @@
 extends BallSpawner
 
-@onready var attack_turn_speed := .1
-
-var aiming_at_target := true
-
 @onready var animation_player := $AnimationPlayer
-var target : Node3D
 
 func _ready():
 	super()

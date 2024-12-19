@@ -1,6 +1,7 @@
 extends Node3D
 class_name BallSpawner
 
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 var roller := preload("res://enemies/roller_ball.tscn")
 var bouncer := preload("res://enemies/bouncer_ball.tscn")
@@ -9,6 +10,9 @@ var giant_bouncer := preload("res://enemies/giant_bouncer_ball.tscn")
 var swarm := preload("res://enemies/swarm_ball.tscn")
 var skull := preload("res://enemies/skull_ball.tscn")
 var heavy := preload("res://enemies/heavy_ball.tscn")
+
+var aiming_at_target := NOTIFICATION_WM_CLOSE_REQUEST
+@export var attack_turn_speed := .1
 
 @export var spawning := true
 @export var spawn_cooldown_secs := 3.0
@@ -32,17 +36,31 @@ var spawn_cooldown_active := false
 @export var skull_follow_speed := 5.0
 @export var skull_explode_dist := 5.0
 
+@export var heavy_launch_height := 40.0
 @export var arena_floor_y := 10.0
 
 @onready var root = $/root/ViewControl
 var level : Node3D
+var target : Node3D
 
 func _ready():
 	level = root.find_child("Level")
+	target = root.find_child("Icon")
 
 func _physics_process(_delta):
 	if self and not spawn_cooldown_active and spawning and not spawn_limit_met():
 		spawn_enemy()
+	if aiming_at_target:
+		lerp_look_at_target(attack_turn_speed)
+
+func lerp_look_at_target(turn_speed):
+	var old_rotation := rotation
+	look_at(target.global_position)
+	var target_rotation := rotation
+	rotation = old_rotation
+	rotation.y = lerp_angle(rotation.y, target_rotation.y, turn_speed)
+	rotation.x = lerp_angle(rotation.x, target_rotation.x, turn_speed)
+	rotation.z = lerp_angle(rotation.z, target_rotation.z, turn_speed)
 
 func spawn_limit_met():
 	if level:
@@ -148,6 +166,13 @@ func spawn_heavy():
 	await b.tree_entered
 	b.global_position = global_position
 	b.global_rotation = rotation
-	b.linear_velocity = .25 * move_speed * -b.get_global_transform().basis.z
-	b.linear_velocity.y = bounce_height
+	#b.linear_velocity = .25 * move_speed * -b.get_global_transform().basis.z
+	#b.linear_velocity.y = bounce_height
+	var y_vel : float = sqrt(2 * gravity * heavy_launch_height + global_position.y)
+	var total_flight_time : float = 2 * y_vel / gravity
+	var vec_to_target := target.global_position - global_position
+	var lateral_dist_to_target := 1.42 * Vector2(vec_to_target.x, vec_to_target.z).length()
+	var lateral_vel := lateral_dist_to_target / total_flight_time
+	b.linear_velocity = lateral_vel * -b.get_global_transform().basis.z
+	b.linear_velocity.y = y_vel
 	b.arena_floor_y = arena_floor_y
