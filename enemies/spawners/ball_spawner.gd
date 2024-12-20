@@ -27,9 +27,9 @@ var spawn_cooldown_active := false
 @export var enemy_chances = {
 	"ROLLER": .25,
 	"BOUNCER": .25,
-	"GIANT_ROLLER": 0,
-	"GIANT_BOUNCER": 0,
-	"SWARM": 0,
+	"GIANT_ROLLER": .0,
+	"GIANT_BOUNCER": .0,
+	"SWARM": .0,
 	"SKULL": .25,
 	"HEAVY": .25
 }
@@ -65,7 +65,7 @@ func _ready():
 	level = root.find_child("Level")
 	target = root.find_child("Icon")
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	update_high_target_trajectory_vels()
 	if self and not spawn_cooldown_active and spawning and not spawn_limit_met():
 		spawn_enemy()
@@ -74,11 +74,11 @@ func _physics_process(_delta):
 	if spawn_cooldown_active:
 		match(vert_aim_type):
 			AT_TARGET:
-				vert_look_at_target(attack_turn_speed)
+				vert_look_at_target(attack_turn_speed * delta)
 			HIGH_BOUNCE_TRAJECTORY:
-				vert_look_high_bounce_trajectory(attack_turn_speed)
+				vert_look_high_bounce_trajectory(attack_turn_speed * delta)
 			HIGH_TARGET_TRAJECTORY:
-				vert_look_high_target_trajectory(attack_turn_speed)
+				vert_look_high_target_trajectory(attack_turn_speed * delta)
 
 func update_high_target_trajectory_vels():
 	high_target_trajectory_y_vel = sqrt(2 * gravity * heavy_launch_height + global_position.y)
@@ -92,26 +92,28 @@ func lateral_look_at_target(turn_speed):
 	look_at(target.global_position)
 	var target_rotation := rotation
 	rotation = old_rotation
-	rotation.y = lerp_angle(rotation.y, target_rotation.y, turn_speed)
-	#rotation.x = lerp_angle(rotation.x, target_rotation.x, turn_speed)
-	#rotation.z = lerp_angle(rotation.z, target_rotation.z, turn_speed)
+	rotation.y = move_toward(rotation.y, target_rotation.y, turn_speed)
+	#rotation.y = lerp_angle(rotation.y, target_rotation.y, turn_speed)
 
 func vert_look_at_target(turn_speed):
 	var old_rotation = mesh.rotation
 	mesh.look_at(target.global_position)
 	var target_rotation = mesh.rotation
 	mesh.rotation = old_rotation
-	mesh.rotation.x = lerp_angle(mesh.rotation.x, target_rotation.x, turn_speed)
+	mesh.rotation.x = move_toward(mesh.rotation.x, target_rotation.x, turn_speed)
+	#mesh.rotation.x = lerp_angle(mesh.rotation.x, target_rotation.x, turn_speed)
 
 func vert_look_high_bounce_trajectory(turn_speed):
 	# Rotation "upward" = tan^-1(y_vel/x_vel)
 	var target_rotation_x = atan2(bounce_height, .25 * move_speed)
-	mesh.rotation.x = lerp_angle(mesh.rotation.x, target_rotation_x, turn_speed)
+	mesh.rotation.x = move_toward(mesh.rotation.x, target_rotation_x, turn_speed)
+	#mesh.rotation.x = lerp_angle(mesh.rotation.x, target_rotation_x, turn_speed)
 
 func vert_look_high_target_trajectory(turn_speed):
 	# Rotation "upward" = tan^-1(y_vel/x_vel)
 	var target_rotation_x = atan2(high_target_trajectory_y_vel, high_target_trajectory_lateral_vel)
-	mesh.rotation.x = lerp_angle(mesh.rotation.x, target_rotation_x, turn_speed)
+	mesh.rotation.x = move_toward(mesh.rotation.x, target_rotation_x, turn_speed)
+	#mesh.rotation.x = lerp_angle(mesh.rotation.x, target_rotation_x, turn_speed)
 
 func spawn_limit_met():
 	if level:
