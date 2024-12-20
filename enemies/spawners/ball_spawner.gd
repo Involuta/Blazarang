@@ -35,7 +35,7 @@ var spawn_cooldown_active := false
 }
 
 @export var move_speed := 20.0
-@export var move_dir_angle_arc := 30.0
+@export var move_dir_angle_arc := 20.0
 @export var bounce_height := 20.0
 var high_target_trajectory_lateral_vel := 0.0
 var high_target_trajectory_y_vel := 0.0
@@ -164,8 +164,7 @@ func spawn_roller():
 	level.add_child.call_deferred(b)
 	await b.tree_entered
 	b.global_position = global_position
-	var move_dir_half_arc := deg_to_rad(move_dir_angle_arc) / 2
-	b.global_rotation = rotation + rng.randf_range(-move_dir_half_arc, move_dir_half_arc) * Vector3.UP
+	b.global_rotation = rotation
 	b.linear_velocity = move_speed * -b.get_global_transform().basis.z
 
 func spawn_bouncer():
@@ -175,8 +174,7 @@ func spawn_bouncer():
 	level.add_child.call_deferred(b)
 	await b.tree_entered
 	b.global_position = global_position
-	var move_dir_half_arc := deg_to_rad(move_dir_angle_arc) / 2
-	b.global_rotation = rotation + rng.randf_range(-move_dir_half_arc, move_dir_half_arc) * Vector3.UP
+	b.global_rotation = rotation
 	b.linear_velocity = .25 * move_speed * -b.get_global_transform().basis.z
 	b.linear_velocity.y = bounce_height
 
@@ -222,6 +220,7 @@ func spawn_skull():
 	await b.tree_entered
 	b.global_position = global_position
 	b.global_rotation = rotation
+	b.linear_velocity = move_speed * -b.get_global_transform().basis.z
 	b.follow_speed = skull_follow_speed
 	b.explode_dist = skull_explode_dist
 

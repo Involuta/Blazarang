@@ -13,6 +13,7 @@ roughness = 0.0
 [node name="cannon_mortarT1" instance=ExtResource("1_tsxpx")]
 
 [node name="Funnel" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.75, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_jmo8d")
 
 [node name="Sphere" parent="." index="1"]
