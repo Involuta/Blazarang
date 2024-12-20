@@ -33,6 +33,8 @@ collision_layer = 8
 collision_mask = 74
 mass = 20.0
 physics_material_override = SubResource("PhysicsMaterial_f3pcq")
+linear_damp_mode = 1
+angular_damp_mode = 1
 script = ExtResource("1_wk04o")
 entity_name = "BouncerBall"
 

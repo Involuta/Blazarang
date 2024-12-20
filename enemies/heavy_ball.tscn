@@ -29,6 +29,8 @@ collision_layer = 64
 collision_mask = 64
 mass = 30.0
 physics_material_override = SubResource("PhysicsMaterial_xs2x3")
+linear_damp_mode = 1
+angular_damp_mode = 1
 script = ExtResource("1_t8xu3")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

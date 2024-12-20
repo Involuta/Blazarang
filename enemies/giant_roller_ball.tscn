@@ -29,6 +29,8 @@ collision_layer = 8
 collision_mask = 74
 mass = 20.0
 physics_material_override = SubResource("PhysicsMaterial_xs2x3")
+linear_damp_mode = 1
+angular_damp_mode = 1
 script = ExtResource("1_vup2v")
 entity_name = "GiantRollerBall"
 
