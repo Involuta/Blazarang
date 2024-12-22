@@ -71,3 +71,5 @@ res://enemies/spawners/cannon_ball_spawner.tscn
 res://enemies/spawners/cannon_ball_spawner.gd
 res://enemies/x_boss.gd
 res://glb_inherited_scenes/cannon_mortar_t1.tscn
+res://levels/level1/section_nodes/gun_arena.tscn
+res://enemies/death_ball.tscn
