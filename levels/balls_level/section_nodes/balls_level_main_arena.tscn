@@ -114,7 +114,6 @@ enemy_chances = {
 "SWARM": 0.2
 }
 move_speed = 15.0
-bounce_height = 40.0
 
 [node name="Mesh" type="Node3D" parent="BallSpawner2"]
 
@@ -136,7 +135,6 @@ enemy_chances = {
 "SWARM": 0.2
 }
 move_speed = 15.0
-bounce_height = 40.0
 
 [node name="Mesh" type="Node3D" parent="BallSpawner4"]
 
@@ -158,7 +156,6 @@ enemy_chances = {
 "SWARM": 0.2
 }
 move_speed = 15.0
-bounce_height = 40.0
 
 [node name="Mesh" type="Node3D" parent="BallSpawner1"]
 

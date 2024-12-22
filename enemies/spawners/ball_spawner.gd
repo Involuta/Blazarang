@@ -36,7 +36,7 @@ var spawn_cooldown_active := false
 
 @export var move_speed := 20.0
 @export var move_dir_angle_arc := 20.0
-@export var bounce_height := 20.0
+@export var bounce_height := 10.0
 var high_target_trajectory_lateral_vel := 0.0
 var high_target_trajectory_y_vel := 0.0
 

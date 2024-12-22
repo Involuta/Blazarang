@@ -3,11 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://dqwtcqe3gt0ad" path="res://glb_imports/cannon_mortarT1.glb" id="1_tsxpx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jmo8d"]
-albedo_color = Color(0.117647, 0.117647, 0.117647, 1)
+albedo_color = Color(0.627451, 0.572549, 0, 1)
 roughness = 0.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dn7kg"]
-albedo_color = Color(0.313726, 0.313726, 0.313726, 1)
+albedo_color = Color(0, 0.290196, 0.654902, 1)
 roughness = 0.0
 
 [node name="cannon_mortarT1" instance=ExtResource("1_tsxpx")]
