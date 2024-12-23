@@ -10,7 +10,7 @@ roughness = 0.0
 albedo_color = Color(0, 0.290196, 0.654902, 1)
 roughness = 0.0
 
-[node name="cannon_mortarT1" instance=ExtResource("1_tsxpx")]
+[node name="CannonMortarT1" instance=ExtResource("1_tsxpx")]
 
 [node name="Funnel" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.75, 0, 0, 0)

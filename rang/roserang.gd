@@ -102,6 +102,7 @@ func _physics_process(delta):
 		ROSE:
 			var new_pos = rose(delta)
 			# vel_vec is in meters per frame, which is what move_and_collide wants
+			# CharacterBody3D's velocity is in meters per second
 			var vel_vec = new_pos - global_position
 			look_at(new_pos)
 			var hit_arena = rose_handle_collision(move_and_collide(vel_vec, true), vel_vec, delta)
@@ -111,9 +112,10 @@ func _physics_process(delta):
 				mvmt_state = RICOCHET
 				return
 			global_position = new_pos
-			set_collision_mask_value(Globals.ARENA_COL_LAYER, current_loop_angle < PI/(2*petals))
-			set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, current_loop_angle < PI/(2*petals))
-			if current_loop_angle < PI/(2*petals):
+			var reached_return := current_loop_angle < PI/(2*petals)
+			set_collision_mask_value(Globals.ARENA_COL_LAYER, reached_return)
+			set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, reached_return)
+			if reached_return:
 				change_color(rose_color)
 			else:
 				change_color(return_color)

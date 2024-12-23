@@ -1,11 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dykhe21cmwub"]
+[gd_scene load_steps=7 format=3 uid="uid://dykhe21cmwub"]
 
-[ext_resource type="Script" path="res://enemies/ball.gd" id="1_f2xbk"]
+[ext_resource type="Script" path="res://enemies/death_ball.gd" id="1_xap5c"]
 [ext_resource type="Script" path="res://hitbox.gd" id="3_r1bjf"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f3pcq"]
-friction = 0.0
-bounce = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i4scl"]
 diffuse_mode = 3
@@ -24,14 +20,10 @@ radius = 1.8
 [sub_resource type="SphereShape3D" id="SphereShape3D_nj4ah"]
 radius = 1.85
 
-[node name="DeathBall" type="RigidBody3D"]
-collision_layer = 8
-collision_mask = 74
-physics_material_override = SubResource("PhysicsMaterial_f3pcq")
-linear_damp_mode = 1
-angular_damp_mode = 1
-script = ExtResource("1_f2xbk")
-entity_name = "DeathBall"
+[node name="DeathBall" type="CharacterBody3D"]
+collision_layer = 64
+collision_mask = 75
+script = ExtResource("1_xap5c")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_8kpta")
@@ -41,7 +33,7 @@ shape = SubResource("SphereShape3D_mi232")
 
 [node name="EnemyHitbox" type="Area3D" parent="."]
 transform = Transform3D(0.999999, -3.48787e-16, 3.48787e-16, 3.48787e-16, 0.999999, -3.48787e-16, -3.48787e-16, 3.48787e-16, 0.999999, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-collision_layer = 8
+collision_layer = 64
 collision_mask = 18
 script = ExtResource("3_r1bjf")
 damage = 36

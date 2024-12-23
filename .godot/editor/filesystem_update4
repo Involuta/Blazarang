@@ -73,3 +73,7 @@ res://enemies/x_boss.gd
 res://glb_inherited_scenes/cannon_mortar_t1.tscn
 res://levels/level1/section_nodes/gun_arena.tscn
 res://enemies/death_ball.tscn
+res://enemies/death_ball.gd
+res://rang/roserang.tscn
+res://rang/roserang.gd
+res://cotu/cotu_cb_main.tscn
