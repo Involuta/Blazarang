@@ -175,10 +175,13 @@ func rose_handle_collision(collision, vel_vec, delta):
 	return false
 
 func ricochet_handle_collision(collision):
-	if collision and (collision.get_collider().collision_layer == Globals.ARENA_COL_LAYER or collision.get_collider().collision_layer == Globals.THICK_ENEMY_COL_LAYER):
+	if collision and (Globals.compare_layers(collision.get_collider().collision_layer, Globals.ARENA_COL_LAYER) or Globals.compare_layers(collision.get_collider().collision_layer, Globals.THICK_ENEMY_COL_LAYER)):
 		ricochet(collision)
 		emit_ricochet_particles(collision.get_normal())
 		ricochet_sfx.play()
+		var col_obj := instance_from_id(collision.get_collider_id())
+		if col_obj.has_method("ricochet_rang_hit"):
+			col_obj.ricochet_rang_hit(collision.get_normal())
 
 func emit_ricochet_particles(dir):
 	var inst := ricochet_particles.instantiate()

@@ -144,6 +144,7 @@ UseItem={
 3d_physics/layer_6="Target"
 3d_physics/layer_7="ThickEnemy"
 3d_physics/layer_8="EnemyBounds"
+3d_physics/layer_9="RangInteractable"
 
 [rendering]
 

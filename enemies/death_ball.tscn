@@ -18,11 +18,11 @@ height = 3.6
 radius = 1.8
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_nj4ah"]
-radius = 2.0
+radius = 1.85
 
 [node name="DeathBall" type="CharacterBody3D"]
 collision_layer = 64
-collision_mask = 67
+collision_mask = 83
 script = ExtResource("1_xap5c")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

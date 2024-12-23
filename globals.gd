@@ -14,6 +14,8 @@ const ENEMY_COL_LAYER := 4
 const COTU_COL_LAYER := 5
 const TARGET_COL_LAYER := 6
 const THICK_ENEMY_COL_LAYER := 7
+const ENEMY_BOUND_COL_LAYER := 8
+const RANG_INTERACTABLE_COL_LAYER := 9
 
 func make_mask(layers):
 	var mask := 0.0

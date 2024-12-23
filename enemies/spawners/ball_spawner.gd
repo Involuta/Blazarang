@@ -50,7 +50,7 @@ var high_target_trajectory_y_vel := 0.0
 @export var heavy_launch_height := 40.0
 @export var arena_floor_y := 10.0
 
-@export var death_ball_move_speed := 20.0
+@export var death_ball_move_speed := 15.0
 
 @export var roller_chargeup_secs := 1.0
 @export var bouncer_chargeup_secs := 2.0
