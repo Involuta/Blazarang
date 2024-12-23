@@ -18,11 +18,11 @@ height = 3.6
 radius = 1.8
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_nj4ah"]
-radius = 1.85
+radius = 2.0
 
 [node name="DeathBall" type="CharacterBody3D"]
 collision_layer = 64
-collision_mask = 75
+collision_mask = 67
 script = ExtResource("1_xap5c")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -33,7 +33,7 @@ shape = SubResource("SphereShape3D_mi232")
 
 [node name="EnemyHitbox" type="Area3D" parent="."]
 transform = Transform3D(0.999999, -3.48787e-16, 3.48787e-16, 3.48787e-16, 0.999999, -3.48787e-16, -3.48787e-16, 3.48787e-16, 0.999999, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-collision_layer = 64
+collision_layer = 8
 collision_mask = 18
 script = ExtResource("3_r1bjf")
 damage = 36

@@ -26,13 +26,13 @@ var vert_aiming_at_target := true
 @export var spawn_cooldown_secs := 3.0
 var spawn_cooldown_active := false
 @export var enemy_chances = {
-	"ROLLER": .25,
-	"BOUNCER": .25,
+	"ROLLER": .0,
+	"BOUNCER": .0,
 	"GIANT_ROLLER": .0,
 	"GIANT_BOUNCER": .0,
 	"SWARM": .0,
-	"SKULL": .25,
-	"HEAVY": .25,
+	"SKULL": .0,
+	"HEAVY": .0,
 	"DEATHBALL": 1.0
 }
 

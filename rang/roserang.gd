@@ -168,6 +168,9 @@ func rose_handle_collision(collision, vel_vec, delta):
 		emit_ricochet_particles(vel_vec)
 		change_color(ricochet_color)
 		ricochet_sfx.play()
+		var col_obj := instance_from_id(collision.get_collider_id())
+		if col_obj.has_method("rose_rang_hit"):
+			col_obj.rose_rang_hit(collision, vel_vec, delta)
 		return true
 	return false
 

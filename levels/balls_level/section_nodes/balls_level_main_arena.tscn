@@ -257,7 +257,6 @@ shape = SubResource("ConvexPolygonShape3D_gk84u")
 [node name="BallSpawner" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 3, 2.08165e-12)
 script = ExtResource("3_1glt0")
-spawn_cooldown_secs = 10.0
 enemy_chances = {
 "BOUNCER": 2.08167e-12,
 "DEATHBALL": 1,
