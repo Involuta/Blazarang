@@ -257,6 +257,7 @@ shape = SubResource("ConvexPolygonShape3D_gk84u")
 [node name="BallSpawner" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 3, 2.08165e-12)
 script = ExtResource("3_1glt0")
+spawn_cooldown_secs = 1000.0
 enemy_chances = {
 "BOUNCER": 0.0,
 "DEATHBALL": 1.0,
@@ -267,5 +268,24 @@ enemy_chances = {
 "SKULL": 0.0,
 "SWARM": 0.0
 }
+deathball_move_speed = 60.0
 
 [node name="Mesh" parent="BallSpawner" instance=ExtResource("5_v5u6t")]
+
+[node name="BallSpawner2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 3, 8)
+script = ExtResource("3_1glt0")
+enemy_chances = {
+"BOUNCER": 0.0,
+"DEATHBALL": 2.08167e-12,
+"GIANT_BOUNCER": 0.0,
+"GIANT_ROLLER": 0.0,
+"HEAVY": 0.0,
+"POPPER": 1.0,
+"ROLLER": 0.0,
+"SKULL": 0.0,
+"SWARM": 0.0
+}
+deathball_move_speed = 60.0
+
+[node name="Mesh" parent="BallSpawner2" instance=ExtResource("5_v5u6t")]

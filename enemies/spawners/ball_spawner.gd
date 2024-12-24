@@ -11,6 +11,7 @@ var swarm := preload("res://enemies/swarm_ball.tscn")
 var skull := preload("res://enemies/skull_ball.tscn")
 var heavy := preload("res://enemies/heavy_ball.tscn")
 var deathball := preload("res://enemies/death_ball.tscn")
+var popper := preload("res://enemies/popper_ball.tscn")
 
 var lateral_aiming_at_target := true
 enum {
@@ -33,7 +34,8 @@ var spawn_cooldown_active := false
 	"SWARM": .0,
 	"SKULL": .0,
 	"HEAVY": .0,
-	"DEATHBALL": 1.0
+	"DEATHBALL": 1.0,
+	"POPPER" : 1.0,
 }
 
 @export var move_speed := 20.0
@@ -50,7 +52,7 @@ var high_target_trajectory_y_vel := 0.0
 @export var heavy_launch_height := 40.0
 @export var arena_floor_y := 10.0
 
-@export var death_ball_move_speed := 15.0
+@export var deathball_move_speed := 15.0
 
 @export var roller_chargeup_secs := 1.0
 @export var bouncer_chargeup_secs := 2.0
@@ -159,6 +161,8 @@ func spawn_from_name(enemy_name):
 			await spawn_heavy()
 		"DEATHBALL":
 			await spawn_deathball()
+		"POPPER":
+			await spawn_popper()
 		"default":
 			print("Error: attempted to spawn unknown enemy")
 			await spawn_roller()
@@ -250,4 +254,14 @@ func spawn_deathball():
 	await b.tree_entered
 	b.global_position = global_position
 	b.global_rotation = rotation
-	b.velocity = move_speed * -b.get_global_transform().basis.z
+	b.velocity = deathball_move_speed * -b.get_global_transform().basis.z
+
+func spawn_popper():
+	vert_aim_type = AT_TARGET
+	await get_tree().create_timer(roller_chargeup_secs).timeout
+	var b = popper.instantiate()
+	level.add_child.call_deferred(b)
+	await b.tree_entered
+	b.global_position = global_position
+	b.global_rotation = rotation
+	b.linear_velocity = move_speed * -b.get_global_transform().basis.z

@@ -77,3 +77,5 @@ res://enemies/death_ball.gd
 res://rang/roserang.tscn
 res://rang/roserang.gd
 res://cotu/cotu_cb_main.tscn
+res://enemies/popper_ball.tscn
+res://enemies/popper_ball.gd
