@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+var striking := false
 var default_gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var gravity := 0.0
 var rang_ricochet_height := 15.0
@@ -26,12 +27,19 @@ func handle_collision(collision):
 	if collision:
 		#print(instance_from_id(collision.get_collider_id()).name)
 		var cl = collision.get_collider().collision_layer
-		if Globals.compare_layers(cl, Globals.ARENA_COL_LAYER) or Globals.compare_layers(cl, Globals.THICK_ENEMY_COL_LAYER) or Globals.compare_layers(cl, Globals.COTU_COL_LAYER):
+		if Globals.compare_layers(cl, Globals.ARENA_COL_LAYER):
+			if striking:
+				velocity.y = 0
+				gravity = default_gravity
+				striking = false
+			else:
+				velocity = velocity - 2 * velocity.project(collision.get_normal())
+		elif Globals.compare_layers(cl, Globals.THICK_ENEMY_COL_LAYER) or Globals.compare_layers(cl, Globals.COTU_COL_LAYER):
 			velocity = velocity - 2 * velocity.project(collision.get_normal())
-			#velocity = velocity - 2 * collision.get_normal()
 		elif Globals.compare_layers(cl, Globals.ENEMY_BOUND_COL_LAYER):
 			velocity = Vector3.ZERO
 			gravity = 0
+			striking = true
 			await get_tree().create_timer(.5).timeout
 			velocity = 60 * global_position.direction_to(target.global_position)
 
