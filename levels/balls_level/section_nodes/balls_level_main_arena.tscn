@@ -258,13 +258,13 @@ shape = SubResource("ConvexPolygonShape3D_gk84u")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 3, 2.08165e-12)
 script = ExtResource("3_1glt0")
 enemy_chances = {
-"BOUNCER": 2.08167e-12,
-"DEATHBALL": 1,
+"BOUNCER": 0.0,
+"DEATHBALL": 1.0,
 "GIANT_BOUNCER": 0.0,
 "GIANT_ROLLER": 0.0,
-"HEAVY": 2.08167e-12,
+"HEAVY": 0.0,
 "ROLLER": 2.08167e-12,
-"SKULL": 2.08167e-12,
+"SKULL": 0.0,
 "SWARM": 0.0
 }
 

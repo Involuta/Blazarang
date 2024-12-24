@@ -11,7 +11,9 @@ func _ready():
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= default_gravity * delta
-	handle_collision(move_and_collide(velocity * delta))
+	for i in range(get_slide_collision_count()):
+		handle_collision(get_slide_collision(i))
+	move_and_slide()
 	#global_position += velocity * delta
 
 func ricochet_rang_hit(collision_normal):
@@ -19,11 +21,13 @@ func ricochet_rang_hit(collision_normal):
 	velocity.y = rang_ricochet_height
 
 func handle_collision(collision):
-	if collision:
+	if collision and collision.get_normal() != Vector3.UP:
 		#print(instance_from_id(collision.get_collider_id()).name)
 		var cl = collision.get_collider().collision_layer
 		if Globals.compare_layers(cl, Globals.ARENA_COL_LAYER) or Globals.compare_layers(cl, Globals.THICK_ENEMY_COL_LAYER) or Globals.compare_layers(cl, Globals.COTU_COL_LAYER):
 			velocity = velocity - 2 * velocity.project(collision.get_normal())
+			print(collision.get_normal())
+			#velocity = velocity - 2 * collision.get_normal()
 
 func rose_rang_hit(_collision, _vel_vec, _delta):
 	var dir_from_cotu := Vector2(global_position.x - cotu.global_position.x, global_position.z - cotu.global_position.z).normalized()
