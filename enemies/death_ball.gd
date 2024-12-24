@@ -16,8 +16,8 @@ func _ready():
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-	handle_collision(move_and_collide(velocity * delta))
-	#global_position += velocity * delta
+	handle_collision(move_and_collide(velocity * delta, true))
+	global_position += velocity * delta
 
 func ricochet_rang_hit(collision_normal):
 	velocity = velocity - 2 * velocity.project(collision_normal)
