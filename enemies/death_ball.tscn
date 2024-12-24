@@ -22,7 +22,7 @@ radius = 1.85
 
 [node name="DeathBall" type="CharacterBody3D"]
 collision_layer = 64
-collision_mask = 83
+collision_mask = 211
 script = ExtResource("1_xap5c")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
