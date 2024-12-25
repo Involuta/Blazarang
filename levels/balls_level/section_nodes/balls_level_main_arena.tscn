@@ -281,6 +281,7 @@ deathball_move_speed = 60.0
 [node name="BallSpawner2" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 3, 8)
 script = ExtResource("3_1glt0")
+spawning = false
 enemy_chances = {
 "BOUNCER": 0.0,
 "DEATHBALL": 2.08167e-12,

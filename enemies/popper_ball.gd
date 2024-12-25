@@ -5,7 +5,7 @@ var target : Node3D
 var moving := true
 
 @export var disappear_secs := 3.0
-@export var min_speed := 5.0
+@export var min_speed := 7.0
 
 func _ready():
 	target = root.find_child("Icon")
