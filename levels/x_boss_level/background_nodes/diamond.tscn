@@ -6,8 +6,10 @@
 [node name="Diamond" instance=ExtResource("1_y6ybw")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
-[node name="Bottom" parent="." index="0"]
+[node name="Top" parent="." index="0"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 surface_material_override/0 = ExtResource("2_admw2")
 
-[node name="Top" parent="." index="1"]
+[node name="Bottom" parent="." index="1"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 surface_material_override/0 = ExtResource("2_admw2")
