@@ -8,7 +8,7 @@ enum {
 	STRAFE_FOLLOW,
 	ATTACK,
 }
-var  := FOLLOW
+var behav_state := FOLLOW
 var strafing_left := false
 var stop_checking := false
 var stop_dist := 1.0
@@ -87,11 +87,11 @@ var dash_back_canceled := false
 }
 
 @export var phase2_long_dist_right_arm_deployed_attack_chances = {
-	"ArmBombs" : .1,
+	"ArmBombs" : .125,
 	"Sweep" : .3,
-	"ChainSlice" : .3,
+	"ChainSlice" : .25,
 	"Superman" : .1,
-	"Triangle" : .1,
+	"Triangle" : .125,
 	"DiagonalDash" : .1
 }
 

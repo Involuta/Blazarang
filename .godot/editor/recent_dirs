@@ -1,14 +1,14 @@
+res://enemies/enemy_anims
+res://levels/x_boss_level
+res://levels/x_boss_level/background_nodes
 res://enemies/spawners
 res://glb_inherited_scenes
 res://levels
 res://levels/
 res://levels/balls_level
 res://levels/hub
-res://levels/x_boss_level
 res://
 res://level_maps
-res://levels/x_boss_level/background_nodes
-res://enemies/enemy_anims
 res://textures
 res://enemies
 res://rang
