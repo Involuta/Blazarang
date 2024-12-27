@@ -92,7 +92,8 @@ var dash_back_canceled := false
 	"ChainSlice" : .25,
 	"Superman" : .1,
 	"Triangle" : .125,
-	"DiagonalDash" : .1
+	"DiagonalDash" : .1,
+	"SemicircleDash" : .0
 }
 
 @export var phase2_long_dist_right_arm_not_deployed_attack_chances = {
@@ -778,17 +779,18 @@ func very_far_strafe_laser_deploy_arm():
 
 func semicircle_dash():
 	var mvmt_tween := get_tree().create_tween()
-	mvmt_tween.tween_method(semicircle_dash_frame, 0.0, 1.0, 2.75).set_ease(Tween.EASE_OUT)
+	mvmt_tween.tween_method(semicircle_dash_frame, 1.0, 0, 2.4167).set_ease(Tween.EASE_OUT)
 
-func semicircle_dash_frame(_lerp_val):
+func semicircle_dash_frame(lerp_val):
 	var dir_to_target := global_position.direction_to(target.global_position)
 	var dash_dir := Vector2(dir_to_target.x, dir_to_target.z).orthogonal()
 	if x_icon_tp_to_left:
 		dash_dir *= -1
 	# Linear speed = angular speed * radius
-	# Angular speed = PI radians / len of anim in secs
-	var angular_speed = PI / 2.75
-	velocity = angular_speed * semicircle_dash_radius * dash_dir
+	# Angular speed = PI (supposedly; in actuality, PI/2 causes a semicircle) radians / len of anim in secs
+	var angular_speed = PI/2 / 2.4167
+	var dash_dir3D := Vector3(dash_dir.x, 0, dash_dir.y)
+	velocity = angular_speed * semicircle_dash_radius * dash_dir3D
 
 func dual_blade_dash_back():
 	var dir_to_target := global_position.direction_to(target.global_position)
