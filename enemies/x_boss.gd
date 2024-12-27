@@ -130,6 +130,7 @@ var dash_back_canceled := false
 @export var lunge_laser_diagonal_dash_dist := 25.0
 @export var far_strafe_laser_dist := 12.5
 @export var very_far_strafe_laser_dist := 16.0
+@export var semicircle_dash_radius := 50.0
 @export var dual_blade_dash_back_dist := 21.0
 @export var dual_blade_dash_in_speed := 40.0
 @export var dual_blade_dash_stop_dist := 2.0
@@ -774,6 +775,20 @@ func very_far_strafe_laser_deploy_arm():
 	right_arm.fire_laser()
 	hide_rig_right_arm()
 	follow_speed /= 2
+
+func semicircle_dash():
+	var mvmt_tween := get_tree().create_tween()
+	mvmt_tween.tween_method(semicircle_dash_frame, 0.0, 1.0, 2.75).set_ease(Tween.EASE_OUT)
+
+func semicircle_dash_frame(_lerp_val):
+	var dir_to_target := global_position.direction_to(target.global_position)
+	var dash_dir := Vector2(dir_to_target.x, dir_to_target.z).orthogonal()
+	if x_icon_tp_to_left:
+		dash_dir *= -1
+	# Linear speed = angular speed * radius
+	# Angular speed = PI radians / len of anim in secs
+	var angular_speed = PI / 2.75
+	velocity = angular_speed * semicircle_dash_radius * dash_dir
 
 func dual_blade_dash_back():
 	var dir_to_target := global_position.direction_to(target.global_position)
