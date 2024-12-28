@@ -6,6 +6,7 @@ var x_damage_indicator : Control
 var x_hurtbox : Node3D
 
 func _ready():
+	super()
 	ui_root = root.find_child("UIRoot")
 	x_health_bar = ui_root.find_child("XHealthBar")
 	x_damage_indicator = x_health_bar.find_child("DamageIndicator")

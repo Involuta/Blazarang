@@ -64,3 +64,9 @@ res://enemies/enemy_anims/x_triangle_volcano.res
 res://enemies/enemy_anims/x_very_far_strafe_laser.res
 res://enemies/enemy_anims/diamond_twist_in.res
 res://enemies/enemy_anims/x_semicircledash.res
+res://levels/Level.gd
+res://cotu/cotu_anims_outline.tres
+res://cotu/cotu_anims_base_material.tres
+res://textures/solid_light_gray_tile.tres
+res://levels/x_boss_level/x_boss_level1.tscn
+res://levels/x_boss_level/x_boss_level1.gd
