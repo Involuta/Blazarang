@@ -53,8 +53,7 @@ signal no_attack_queued
 
 var aiming_at_target := true
 var dash_back_canceled := false
-@export var bullet_speed := 30.0
-@export var fast_bullet_speed := 50.0
+var semicircle_center := Vector3.ZERO
 
 @export var short_dist_attack_chances = {
 	"SlipnSlice" : .25,
@@ -141,7 +140,6 @@ var phase2 := false
 var param_path_base := "parameters/StateMachine/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
-var bullet := preload("res://enemies/enemy_mega_bullet.tscn")
 var transparent_mat := preload("res://textures/clear_tile.tres")
 var body_mat := preload("res://textures/x_boss_body.tres")
 var left_head_piece := preload("res://enemies/x_left_head_piece_rb.tscn")
@@ -784,17 +782,17 @@ func very_far_strafe_laser_deploy_arm():
 func semicircle_dash():
 	var mvmt_tween := get_tree().create_tween()
 	var dash_dir = -1 if x_icon_tp_to_left else 1
-	var semicircle_center := global_position + semicircle_dash_radius * global_position.direction_to(target.global_position)
+	semicircle_center = global_position + semicircle_dash_radius * global_position.direction_to(target.global_position)
 	# 2 frames enabling X to freely rotate (X enters attack mode, then stops aiming at target)
 	# 18 frames of rotation towards dash dir = .3 secs
 	# 145 frames of flight = 2.4167 secs
 	# 35 frames of slowdown = .5833 secs
 	mvmt_tween.tween_property(self, "global_rotation", Vector3.UP * PI/2 * dash_dir, 0.3).as_relative()
-	mvmt_tween.tween_method(semicircle_dash_frame, semicircle_center, semicircle_center, 2.4167).set_ease(Tween.EASE_OUT)
+	mvmt_tween.tween_method(semicircle_dash_frame, 0.0, 1.0, 2.4167).set_ease(Tween.EASE_OUT)
 	mvmt_tween.tween_callback(slowdown.bind(.5833))
 	mvmt_tween.tween_method(semicircle_slowdown_frame, 0.0, 1.0, .5833).set_ease(Tween.EASE_OUT)
 
-func semicircle_dash_frame(semicircle_center):
+func semicircle_dash_frame(lerp_val):
 	var dir_to_target := global_position.direction_to(semicircle_center)
 	var dash_dir := Vector2(dir_to_target.x, dir_to_target.z).orthogonal()
 	if x_icon_tp_to_left:
@@ -805,11 +803,22 @@ func semicircle_dash_frame(semicircle_center):
 	var linear_speed = angular_speed * semicircle_dash_radius
 	var dash_dir3D := Vector3(dash_dir.x, 0, dash_dir.y)
 	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(dash_dir.x, dash_dir.y), attack_turn_speed)
+	global_position.y = 2*sin(PI*lerp_val) + min_y_pos
+	x_meshes.rotation.x = deg_to_rad(-10)*cos(PI*lerp_val)
 	velocity = linear_speed * dash_dir3D
 
 func semicircle_slowdown_frame(lerp_val):
 	var dir_to_target := global_position.direction_to(target.global_position)
 	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(dir_to_target.x, dir_to_target.z), lerp_val)
+	x_meshes.rotation.x = lerp_angle(x_meshes.rotation.x, 0, lerp_val)
+	# Look at target during slowdown
+	var old_head_rotation = x_mesh_head.rotation
+	x_mesh_head.look_at(Vector3(target.global_position.x, min_y_pos, target.global_position.z), Vector3.UP, true)
+	var head_target_rotation = x_mesh_head.rotation
+	x_mesh_head.rotation = old_head_rotation
+	x_mesh_head.rotation.y = lerp_angle(x_mesh_head.rotation.y, head_target_rotation.y, 2 * attack_turn_speed)
+	x_mesh_head.rotation.x = lerp_angle(x_mesh_head.rotation.x, head_target_rotation.x, 2 * attack_turn_speed)
+	x_mesh_head.rotation.z = lerp_angle(x_mesh_head.rotation.z, head_target_rotation.z, 2 * attack_turn_speed)
 
 func dual_blade_dash_back():
 	var dir_to_target := global_position.direction_to(target.global_position)
