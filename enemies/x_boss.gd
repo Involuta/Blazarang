@@ -591,7 +591,7 @@ func triangle_volcano_descend():
 func armbombs_dashback():
 	var dir_to_target := global_position.direction_to(target.global_position)
 	var dash_tween = get_tree().create_tween()
-	dash_tween.tween_property(self, "global_position", Vector3(-armbombs_dashback_lateral_dist * dir_to_target.x, armbombs_dashback_height, -armbombs_dashback_lateral_dist * dir_to_target.z), .3).as_relative().set_ease(Tween.EASE_IN)
+	dash_tween.tween_property(self, "global_position", Vector3(-armbombs_dashback_lateral_dist * dir_to_target.x, armbombs_dashback_height, -armbombs_dashback_lateral_dist * dir_to_target.z), .5).as_relative().set_ease(Tween.EASE_OUT)
 
 func armbombs_arm_recall():
 	if left_arm_deployed():
