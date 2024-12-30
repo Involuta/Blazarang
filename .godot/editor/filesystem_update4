@@ -71,3 +71,4 @@ res://textures/solid_light_gray_tile.tres
 res://levels/x_boss_level/x_boss_level1.tscn
 res://levels/x_boss_level/x_boss_level1.gd
 res://levels/x_boss_level/section_nodes/x_boss_arena1.tscn
+res://enemies/enemy_anims/x_strafeslice.res

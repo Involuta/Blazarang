@@ -130,7 +130,8 @@ var semicircle_center := Vector3.ZERO
 @export var lunge_laser_diagonal_dash_dist := 25.0
 @export var far_strafe_laser_dist := 12.5
 @export var very_far_strafe_laser_dist := 16.0
-@export var semicircle_dash_radius := 50.0
+@export var semicircle_dash_radius := 20.0
+@export var strafeslice_up_speed := .5
 @export var dual_blade_dash_back_dist := 21.0
 @export var dual_blade_dash_in_speed := 40.0
 @export var dual_blade_dash_stop_dist := 2.0
@@ -820,16 +821,19 @@ func semicircle_slowdown_frame(lerp_val):
 	x_mesh_head.rotation.x = lerp_angle(x_mesh_head.rotation.x, head_target_rotation.x, 2 * attack_turn_speed)
 	x_mesh_head.rotation.z = lerp_angle(x_mesh_head.rotation.z, head_target_rotation.z, 2 * attack_turn_speed)
 
-func start_strafe_slice():
+func start_strafeslice():
+	global_position.y = min_y_pos + .01
+	velocity.y = strafeslice_up_speed
 	behav_state = STRAFE_FOLLOW
 	strafing_left = false
 	follow_speed *= 2
-	var mvmt_tween := get_tree().create_tween()
-	mvmt_tween.tween_property(self, "global_position", superman_up_speed * Vector3.UP, .9167).as_relative().set_ease(Tween.EASE_OUT)
+	#var mvmt_tween := get_tree().create_tween()
+	#mvmt_tween.tween_property(self, "global_position", strafeslice_height * Vector3.UP, .9167).as_relative().set_ease(Tween.EASE_OUT)
 
 func strafe_slice_dive():
 	velocity = superman_fwd_speed * -transform.basis.z
 	velocity.y = -superman_down_speed
+	follow_speed /= 2
 
 func dual_blade_dash_back():
 	var dir_to_target := global_position.direction_to(target.global_position)
