@@ -132,6 +132,7 @@ var semicircle_center := Vector3.ZERO
 @export var very_far_strafe_laser_dist := 16.0
 @export var semicircle_dash_radius := 20.0
 @export var strafeslice_up_speed := .5
+@export var strafeslice_rush_speed := 40.0
 @export var dual_blade_dash_back_dist := 21.0
 @export var dual_blade_dash_in_speed := 40.0
 @export var dual_blade_dash_stop_dist := 2.0
@@ -827,12 +828,10 @@ func start_strafeslice():
 	behav_state = STRAFE_FOLLOW
 	strafing_left = false
 	follow_speed *= 2
-	#var mvmt_tween := get_tree().create_tween()
-	#mvmt_tween.tween_property(self, "global_position", strafeslice_height * Vector3.UP, .9167).as_relative().set_ease(Tween.EASE_OUT)
 
-func strafe_slice_dive():
-	velocity = superman_fwd_speed * -transform.basis.z
-	velocity.y = -superman_down_speed
+func strafeslice_rush():
+	velocity = strafeslice_rush_speed * -transform.basis.z
+	velocity.y = -strafeslice_up_speed
 	follow_speed /= 2
 
 func dual_blade_dash_back():
