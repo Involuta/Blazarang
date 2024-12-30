@@ -820,6 +820,17 @@ func semicircle_slowdown_frame(lerp_val):
 	x_mesh_head.rotation.x = lerp_angle(x_mesh_head.rotation.x, head_target_rotation.x, 2 * attack_turn_speed)
 	x_mesh_head.rotation.z = lerp_angle(x_mesh_head.rotation.z, head_target_rotation.z, 2 * attack_turn_speed)
 
+func start_strafe_slice():
+	behav_state = STRAFE_FOLLOW
+	strafing_left = false
+	follow_speed *= 2
+	var mvmt_tween := get_tree().create_tween()
+	mvmt_tween.tween_property(self, "global_position", superman_up_speed * Vector3.UP, .9167).as_relative().set_ease(Tween.EASE_OUT)
+
+func strafe_slice_dive():
+	velocity = superman_fwd_speed * -transform.basis.z
+	velocity.y = -superman_down_speed
+
 func dual_blade_dash_back():
 	var dir_to_target := global_position.direction_to(target.global_position)
 	var mvmt_tween := get_tree().create_tween()
