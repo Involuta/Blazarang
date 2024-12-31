@@ -68,3 +68,4 @@ res://enemies/enemy_anims/x_triangle_volcano.res
 res://enemies/enemy_anims/x_very_far_strafe_laser.res
 res://enemies/enemy_anims/x_tp_strafeslice.res
 res://enemies/enemy_anims/x_semicircledash_tp.res
+res://enemies/x_head_piece.gd

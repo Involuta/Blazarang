@@ -79,19 +79,19 @@ var semicircle_center := Vector3.ZERO
 }
 
 @export var phase2_short_dist_attack_chances = {
-	"ArmBombs" : .1,
+	"ArmBombs" : .05,
 	"ChainSlice" : .1,
 	"Sweep" : .2,
-	"Superman" : .05,
-	"RightArmSlice" : .2,
+	"Superman" : .1,
+	"RightArmSlice" : .1,
 	"Triangle" : .1,
-	"StrafeSlice" : .25
+	"StrafeSlice" : .35
 }
 
 @export var phase2_long_dist_right_arm_deployed_attack_chances = {
 	"ArmBombs" : .1,
-	"Sweep" : .3,
-	"ChainSlice" : .2,
+	"Sweep" : .25,
+	"ChainSlice" : .25,
 	"Superman" : .1,
 	"Triangle" : .1,
 	"DiagonalDash" : .1,
@@ -104,8 +104,9 @@ var semicircle_center := Vector3.ZERO
 	"ChainSlice" : .1,
 	"Superman" : .1,
 	"Triangle" : .1,
-	"RightArmLaser" : .2,
-	"StrafeLaser" : .2,
+	"RightArmLaser" : .1,
+	"StrafeLaser" : .1,
+	"SemicircleDash" : .2
 }
 
 @export var diagonal_dash_speed := 22.0
@@ -281,7 +282,7 @@ func strafe_follow():
 	var icon_vec := dir_to_target2D.orthogonal()
 	if strafing_left:
 		icon_vec *= -1
-	var strafe_dest = target.global_position + 5*Vector3(icon_vec.x, 0, icon_vec.y)
+	var strafe_dest = target.global_position + shortrange_attack_distance*Vector3(icon_vec.x, 0, icon_vec.y)
 	
 	lerp_look_at_position(strafe_dest, follow_turn_speed)
 	var move_dir = global_position.direction_to(strafe_dest)
@@ -614,7 +615,7 @@ func armbombs_arm_recall():
 	if right_arm_deployed():
 		right_arm.stop_firing_laser()
 		var right_mvmt_tween = get_tree().create_tween()
-		right_mvmt_tween.tween_method(recall_right_arm_frame, 0.0, 1.0, .2).set_ease(Tween.EASE_OUT)
+		right_mvmt_tween.tween_method(rightarmslice_recall_right_arm_frame, 0.0, 1.0, .2).set_ease(Tween.EASE_OUT)
 		right_mvmt_tween.tween_callback(hide_floating_right_arm)
 
 func left_arm_recall_homing():
@@ -629,7 +630,7 @@ func right_arm_recall_homing():
 	if right_arm_deployed():
 		right_arm.stop_firing_laser()
 		var right_mvmt_tween = get_tree().create_tween()
-		right_mvmt_tween.tween_method(recall_right_arm_frame, 0.0, 1.0, .2).set_ease(Tween.EASE_OUT)
+		right_mvmt_tween.tween_method(rightarmslice_recall_right_arm_frame, 0.0, 1.0, .2).set_ease(Tween.EASE_OUT)
 		right_mvmt_tween.tween_callback(hide_floating_right_arm)
 		right_mvmt_tween.tween_callback(restore_rig_right_arm)
 
@@ -890,14 +891,14 @@ func hide_rig_left_arm():
 func restore_rig_left_arm():
 	x_meshes.set_surface_override_material(2, body_mat)
 
-func recall_right_arm():
+func rightarmslice_recall_right_arm():
 	if not right_arm_deployed():
 		return
 	right_arm.stop_firing_laser()
 	var recall_tween = get_tree().create_tween()
-	recall_tween.tween_method(recall_right_arm_frame, 0.0, 1.0, .25).set_ease(Tween.EASE_OUT)
+	recall_tween.tween_method(rightarmslice_recall_right_arm_frame, 0.0, 1.0, .25).set_ease(Tween.EASE_OUT)
 
-func recall_right_arm_frame(lerp_val):
+func rightarmslice_recall_right_arm_frame(lerp_val):
 	right_arm.rotation_degrees = rotation_degrees + Vector3(-31.5, -45.8, 80.1)
 	right_arm.global_position = right_arm.global_position.lerp(x_mesh_right_arm.global_position, lerp_val)
 
