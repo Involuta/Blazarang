@@ -902,6 +902,17 @@ func rightarmslice_recall_right_arm_frame(lerp_val):
 	right_arm.rotation_degrees = rotation_degrees + Vector3(-31.5, -45.8, 80.1)
 	right_arm.global_position = right_arm.global_position.lerp(x_mesh_right_arm.global_position, lerp_val)
 
+func strafeslice_recall_right_arm():
+	if not right_arm_deployed():
+		return
+	right_arm.stop_firing_laser()
+	var recall_tween = get_tree().create_tween()
+	recall_tween.tween_method(strafeslice_recall_right_arm_frame, 0.0, 1.0, .25).set_ease(Tween.EASE_OUT)
+
+func strafeslice_recall_right_arm_frame(lerp_val):
+	right_arm.rotation_degrees = rotation_degrees + Vector3(0, 90, 0)
+	right_arm.global_position = right_arm.global_position.lerp(x_mesh_right_arm.global_position, lerp_val)
+
 func hide_floating_right_arm():
 	right_arm.visible = false
 
