@@ -49,7 +49,9 @@ signal no_attack_queued
 @export var attack_duration_secs := 2.5
 
 @export var follow_turn_speed := .05
-@export var attack_turn_speed := .15
+var attack_turn_speed := 0.15
+@export var base_attack_turn_speed := .15
+@export var fast_attack_turn_speed := .3
 
 var aiming_at_target := true
 var dash_back_canceled := false
@@ -78,21 +80,22 @@ var semicircle_center := Vector3.ZERO
 
 @export var phase2_short_dist_attack_chances = {
 	"ArmBombs" : .1,
-	"ChainSlice" : .25,
+	"ChainSlice" : .1,
 	"Sweep" : .2,
 	"Superman" : .05,
-	"RightArmSlice" : .3,
-	"Triangle" : .1
+	"RightArmSlice" : .2,
+	"Triangle" : .1,
+	"StrafeSlice" : .25
 }
 
 @export var phase2_long_dist_right_arm_deployed_attack_chances = {
-	"ArmBombs" : .125,
+	"ArmBombs" : .1,
 	"Sweep" : .3,
-	"ChainSlice" : .25,
+	"ChainSlice" : .2,
 	"Superman" : .1,
-	"Triangle" : .125,
+	"Triangle" : .1,
 	"DiagonalDash" : .1,
-	"SemicircleDash" : .0
+	"SemicircleDash" : .1
 }
 
 @export var phase2_long_dist_right_arm_not_deployed_attack_chances = {
@@ -183,7 +186,7 @@ func _ready():
 	min_long_dist_wait = phase1_min_long_dist_wait
 	max_long_dist_wait = phase1_max_long_dist_wait
 	
-	attack_turn_speed = .15
+	attack_turn_speed = base_attack_turn_speed
 	
 	anim_tree.active = true
 	x_mesh_head.visible = true
@@ -335,6 +338,12 @@ func start_phase2():
 
 func aim_at_target():
 	aiming_at_target = true
+
+func set_fast_turn_speed():
+	attack_turn_speed = fast_attack_turn_speed
+
+func set_base_turn_speed():
+	attack_turn_speed = base_attack_turn_speed
 
 func start_strafe():
 	behav_state = STRAFE_FOLLOW
