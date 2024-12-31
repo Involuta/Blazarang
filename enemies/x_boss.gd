@@ -804,6 +804,16 @@ func semicircle_dash():
 	mvmt_tween.tween_callback(slowdown.bind(.5833))
 	mvmt_tween.tween_method(semicircle_slowdown_frame, 0.0, 1.0, .5833).set_ease(Tween.EASE_OUT)
 
+func semicircle_dash_tp():
+	var mvmt_tween := get_tree().create_tween()
+	var dash_dir = -1 if x_icon_tp_to_left else 1
+	semicircle_center = global_position + semicircle_dash_radius * global_position.direction_to(target.global_position)
+	# 2 frames enabling X to freely rotate (X enters attack mode, then stops aiming at target)
+	# 18 frames of rotation towards dash dir = .3 secs
+	# 82 frames of flight = 1.667 secs
+	mvmt_tween.tween_property(self, "global_rotation", Vector3.UP * PI/2 * dash_dir, 0.3).as_relative()
+	mvmt_tween.tween_method(semicircle_dash_frame, 0.0, 1.0, 1.367).set_ease(Tween.EASE_OUT)
+
 func semicircle_dash_frame(lerp_val):
 	var dir_to_target := global_position.direction_to(semicircle_center)
 	var dash_dir := Vector2(dir_to_target.x, dir_to_target.z).orthogonal()
