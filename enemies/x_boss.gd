@@ -132,6 +132,7 @@ var semicircle_center := Vector3.ZERO
 @export var very_far_strafe_laser_dist := 16.0
 @export var semicircle_dash_radius := 20.0
 @export var strafeslice_up_speed := .5
+@export var strafeslice_down_speed := 6.0
 @export var strafeslice_rush_speed := 40.0
 @export var dual_blade_dash_back_dist := 21.0
 @export var dual_blade_dash_in_speed := 40.0
@@ -831,7 +832,7 @@ func start_strafeslice():
 
 func strafeslice_rush():
 	velocity = strafeslice_rush_speed * -transform.basis.z
-	velocity.y = -strafeslice_up_speed
+	velocity.y = -strafeslice_down_speed
 	follow_speed /= 2
 
 func dual_blade_dash_back():
