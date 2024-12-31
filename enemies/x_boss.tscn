@@ -960,10 +960,10 @@ bones/16/rotation = Quaternion(-0.424102, -3.95296e-06, -1.1919e-06, 0.905615)
 bones/17/rotation = Quaternion(0.54388, -0.0500174, 0.0149768, 0.837537)
 bones/18/rotation = Quaternion(0.276961, 0.230053, -0.0684874, 0.930418)
 bones/20/rotation = Quaternion(0.0404664, 0.0760996, 0.995179, 0.0468007)
-bones/20/scale = Vector3(1, 1, 0.999999)
+bones/20/scale = Vector3(1, 1, 1)
 bones/21/rotation = Quaternion(-0.17048, 9.22971e-06, 2.37582e-06, 0.985361)
 bones/22/rotation = Quaternion(0.248953, 0.0450927, -0.0257469, 0.967123)
-bones/23/rotation = Quaternion(0.280711, -0.231213, 0.0698784, 0.928902)
+bones/23/rotation = Quaternion(0.2807, -0.231214, 0.0698752, 0.928905)
 
 [node name="Head" parent="X_boss_meshes/Armature/Skeleton3D" index="0"]
 transform = Transform3D(1, 2.24797e-20, 3.49925e-18, -1.19363e-27, 1, 7.05121e-08, -3.06615e-18, -7.24938e-08, 1, 7.47168e-08, 21.8654, -0.00187315)
@@ -989,10 +989,10 @@ transform = Transform3D(0.446637, 0.278945, -0.85012, 0.312189, -0.939028, -0.14
 transform = Transform3D(0.498514, -0.255043, 0.828515, -0.335881, -0.937913, -0.0866218, 0.799167, -0.2351, -0.553227, -3.5919, 20.505, -0.152356)
 
 [node name="LeftFoot" parent="X_boss_meshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(-0.989495, 0.141864, -0.0278278, -0.128835, -0.777994, 0.614921, 0.0655853, 0.612047, 0.788097, 2.00013, 4.05366, 0.251867)
+transform = Transform3D(-0.989496, 0.141864, -0.0278278, -0.128835, -0.777994, 0.614921, 0.0655853, 0.612047, 0.788097, 2.00013, 4.05366, 0.251867)
 
 [node name="RightFoot" parent="X_boss_meshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(-0.989285, -0.143571, 0.0265599, 0.144633, -0.938722, 0.312861, -0.0199851, 0.31335, 0.949426, -2.00013, 3.32071, 0.246226)
+transform = Transform3D(-0.989283, -0.143571, 0.0265602, 0.144633, -0.938722, 0.312861, -0.0199854, 0.31335, 0.949428, -2.00013, 3.32072, 0.246223)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_uk78c")
