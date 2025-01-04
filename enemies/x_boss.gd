@@ -875,7 +875,12 @@ func dual_blade_leap():
 
 func diamond_rain():
 	var rain_tween := get_tree().create_tween()
-	var spawn_pos := global_position + diamond_rain_radius * -transform.basis.z
+	var spawn_pos := global_position + diamond_rain_radius * transform.basis.z
+	rain_tween.tween_callback(spawn_diamond_at.bind(spawn_pos))
+	rain_tween.tween_interval(.25)
+	spawn_pos = global_position + diamond_rain_radius * -transform.basis.x
+	rain_tween.tween_callback(spawn_diamond_at.bind(spawn_pos))
+	spawn_pos = global_position + diamond_rain_radius * transform.basis.x
 	rain_tween.tween_callback(spawn_diamond_at.bind(spawn_pos))
 
 func spawn_diamond_at(pos : Vector3):
