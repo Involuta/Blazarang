@@ -137,7 +137,6 @@ shape = SubResource("ConvexPolygonShape3D_ff8yl")
 transform = Transform3D(0.939018, 0.155596, 0.306651, -0.34115, 0.533412, 0.774008, -0.0431389, -0.831421, 0.553965, -3.16012e-30, 25.9766, 0)
 light_color = Color(1, 0.831373, 0.772549, 1)
 light_energy = 0.0
-shadow_enabled = true
 shadow_opacity = 0.5
 
 [node name="Phase1Light" type="DirectionalLight3D" parent="."]

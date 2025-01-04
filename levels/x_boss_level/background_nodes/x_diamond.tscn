@@ -1,13 +1,23 @@
-[gd_scene load_steps=12 format=3 uid="uid://cs10twlummdtg"]
+[gd_scene load_steps=16 format=3 uid="uid://cs10twlummdtg"]
 
+[ext_resource type="Script" path="res://levels/x_boss_level/background_nodes/x_diamond.gd" id="1_4fbxl"]
 [ext_resource type="PackedScene" uid="uid://bqwo81yvpd1ok" path="res://levels/x_boss_level/background_nodes/diamond.tscn" id="1_oi60u"]
+[ext_resource type="Shader" path="res://glb_inherited_scenes/outline.gdshader" id="2_gtr3n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xfvqt"]
+render_priority = 0
+shader = ExtResource("2_gtr3n")
+shader_parameter/outline_color = Color(1, 0.337255, 0, 1)
+shader_parameter/outline_width = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xia16"]
-albedo_color = Color(0.741259, 0.279383, 0, 1)
+next_pass = SubResource("ShaderMaterial_xfvqt")
+albedo_color = Color(1.25098, 0.368627, 0, 1)
 roughness = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0lssr"]
-albedo_color = Color(0.745098, 0.27451, 0, 1)
+next_pass = SubResource("ShaderMaterial_xfvqt")
+albedo_color = Color(1.25098, 0.368627, 0, 1)
 roughness = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ke3vj"]
@@ -41,7 +51,7 @@ tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("Diamond/Bottom:position")
-tracks/1/interp = 1
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.3),
@@ -53,7 +63,7 @@ tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("Diamond/Top:rotation")
-tracks/2/interp = 1
+tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.3),
@@ -65,13 +75,25 @@ tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/path = NodePath("Diamond/Bottom:rotation")
-tracks/3/interp = 1
+tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(3.48787e-16, -1.5708, 3.48787e-16)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("EyeMesh:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 1, 2.08165e-12)]
 }
 
 [sub_resource type="Animation" id="Animation_j02a8"]
@@ -93,7 +115,7 @@ tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("Diamond/Bottom:position")
-tracks/1/interp = 1
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.3),
@@ -105,7 +127,7 @@ tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("Diamond/Top:rotation")
-tracks/2/interp = 1
+tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.3),
@@ -117,13 +139,25 @@ tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/path = NodePath("Diamond/Bottom:rotation")
-tracks/3/interp = 1
+tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(3.48787e-16, -1.5708, 3.48787e-16), Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("EyeMesh:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 1, 2.08165e-12)]
 }
 
 [sub_resource type="Animation" id="Animation_amm3s"]
@@ -145,13 +179,37 @@ tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("Diamond/Top:rotation")
-tracks/1/interp = 1
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(3.48787e-16, 1.5708, 3.48787e-16)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("EyeMesh:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 1.8, 2.08165e-12)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Diamond/Bottom:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
 }
 
 [sub_resource type="Animation" id="Animation_vslpf"]
@@ -173,7 +231,7 @@ tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("Diamond/Top:rotation")
-tracks/1/interp = 1
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.3),
@@ -181,9 +239,86 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(3.48787e-16, 1.5708, 3.48787e-16), Vector3(0, 0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("EyeMesh:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 1.8, 2.08165e-12)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Diamond/Bottom:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
+}
+
+[sub_resource type="Animation" id="Animation_8x77q"]
+resource_name = "shoot_laser"
+length = 0.90001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Diamond/Top:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 0.8, 2.08165e-12)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Diamond/Bottom:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Diamond/Top:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3.48787e-16, 1.5708, 3.48787e-16)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Diamond/Bottom:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3.48787e-16, -1.5708, 3.48787e-16)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6nv5h"]
 _data = {
+"shoot_laser": SubResource("Animation_8x77q"),
 "top_twist_in": SubResource("Animation_vslpf"),
 "top_twist_out": SubResource("Animation_amm3s"),
 "twist_in": SubResource("Animation_j02a8"),
@@ -191,6 +326,7 @@ _data = {
 }
 
 [node name="XDiamond" type="Node3D"]
+script = ExtResource("1_4fbxl")
 
 [node name="Diamond" parent="." instance=ExtResource("1_oi60u")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2.08165e-12, 1, 2.08165e-12)
@@ -199,10 +335,11 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2.08165e-12, 1, 2.08165e-12)
 surface_material_override/0 = SubResource("StandardMaterial3D_xia16")
 
 [node name="Bottom" parent="Diamond" index="1"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 surface_material_override/0 = SubResource("StandardMaterial3D_0lssr")
 
-[node name="SunMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, -7.70367e-15, 1.56504e-15, 7.70367e-15, 1, -2.30978e-08, -1.56504e-15, 2.30978e-08, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+[node name="EyeMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(3, -2.3111e-14, 4.69512e-15, 2.3111e-14, 3, -6.92934e-08, -4.69512e-15, 6.92934e-08, 3, 2.08165e-12, 1.8, 2.08165e-12)
 mesh = SubResource("CapsuleMesh_jec7k")
 skeleton = NodePath("../..")
 
