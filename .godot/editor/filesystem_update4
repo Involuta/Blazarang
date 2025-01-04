@@ -30,3 +30,4 @@ res://levels/x_boss_level/section_nodes/x_boss_arena1.tscn
 res://enemies/x_warning_sun.tscn
 res://levels/x_boss_level/x_boss_level1_viewcontrol.tscn
 res://enemies/x_boss.gd
+res://enemies/x_volcano.tscn

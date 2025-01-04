@@ -3,14 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://bqwo81yvpd1ok" path="res://levels/x_boss_level/background_nodes/diamond.tscn" id="1_oi60u"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xia16"]
-albedo_color = Color(0.564706, 0.321569, 0.137255, 1)
-metallic = 0.5
-roughness = 0.0
+albedo_color = Color(0.741259, 0.279383, 0, 1)
+roughness = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0lssr"]
-albedo_color = Color(0.564706, 0.321569, 0.137255, 1)
-metallic = 0.5
-roughness = 0.0
+albedo_color = Color(0.745098, 0.27451, 0, 1)
+roughness = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ke3vj"]
 shading_mode = 0
