@@ -6,6 +6,8 @@ extends Node3D
 @onready var root := $/root/ViewControl
 var target : Node3D
 
+var aiming_at_target := true
+
 func _ready():
 	target = root.find_child("Icon")
 	await get_tree().create_timer(1).timeout
@@ -16,4 +18,8 @@ func _ready():
 	anim_player.play("top_twist_in")
 
 func _physics_process(_delta):
-	eye.look_at(target.global_position)
+	if aiming_at_target:
+		eye.look_at(target.global_position)
+
+func stop_aiming_at_target():
+	aiming_at_target = false
