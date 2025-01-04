@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://enemies/x_warning_sun.gd" id="1_as52f"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_moxko"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qvi6s"]
 shading_mode = 0
 albedo_color = Color(2, 0.92549, 0.537255, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_35e2b"]
-material = SubResource("StandardMaterial3D_moxko")
+material = SubResource("StandardMaterial3D_qvi6s")
 radius = 0.25
 height = 0.5
 

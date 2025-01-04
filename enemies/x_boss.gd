@@ -142,6 +142,7 @@ var semicircle_center := Vector3.ZERO
 @export var dual_blade_dash_in_speed := 40.0
 @export var dual_blade_dash_stop_dist := 2.0
 @export var dual_blade_dash_leap_height := 2.0
+@export var diamond_rain_radius := 3.0
 
 var phase2 := false
 var param_path_base := "parameters/StateMachine/conditions/"
@@ -153,6 +154,7 @@ var left_head_piece := preload("res://enemies/x_left_head_piece_rb.tscn")
 var right_head_piece := preload("res://enemies/x_right_head_piece_rb.tscn")
 var top_head_piece := preload("res://enemies/x_top_head_piece_rb.tscn")
 var bottom_head_piece := preload("res://enemies/x_bottom_head_piece_rb.tscn")
+var diamond := preload("res://levels/x_boss_level/background_nodes/x_diamond.tscn")
 @onready var anim_tree := $AnimationTree
 @onready var anim_player := $X_boss_meshes/AnimationPlayer
 @onready var x_meshes := $X_boss_meshes/Armature/Skeleton3D/Body_001
@@ -870,6 +872,19 @@ func dual_blade_leap():
 	mvmt_tween.tween_property(self, "global_position", dual_blade_dash_leap_height * Vector3.UP, .1).as_relative()
 	mvmt_tween.tween_interval(.6)
 	mvmt_tween.tween_property(self, "global_position", dual_blade_dash_leap_height * Vector3.DOWN, .1).as_relative()
+
+func diamond_rain():
+	var rain_tween := get_tree().create_tween()
+	var spawn_pos := global_position + diamond_rain_radius * -transform.basis.z
+	rain_tween.tween_callback(spawn_diamond_at.bind(spawn_pos))
+
+func spawn_diamond_at(pos : Vector3):
+	var d = diamond.instantiate()
+	level.add_child.call_deferred(d)
+	await d.tree_entered
+	d.global_position = pos + Vector3.UP * 1000
+	var fall_tween := get_tree().create_tween()
+	fall_tween.tween_property(d, "global_position", Vector3.DOWN * 1000, 1.0).as_relative()
 
 func recall_left_arm():
 	if not left_arm_deployed():

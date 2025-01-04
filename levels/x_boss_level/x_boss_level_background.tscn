@@ -62,6 +62,7 @@ visible = false
 mesh = SubResource("BoxMesh_hcnjo")
 
 [node name="Camera3D" type="Camera3D" parent="."]
+current = true
 script = ExtResource("1_qycqg")
 
 [node name="Star" type="MeshInstance3D" parent="."]
