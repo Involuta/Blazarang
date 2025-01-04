@@ -882,9 +882,9 @@ func spawn_diamond_at(pos : Vector3):
 	var d = diamond.instantiate()
 	level.add_child.call_deferred(d)
 	await d.tree_entered
-	d.global_position = pos + Vector3.UP * 1000
+	d.global_position = pos + Vector3.UP * 75
 	var fall_tween := get_tree().create_tween()
-	fall_tween.tween_property(d, "global_position", Vector3.DOWN * 1000, 1.0).as_relative()
+	fall_tween.tween_property(d, "global_position", pos, .5)
 
 func recall_left_arm():
 	if not left_arm_deployed():
