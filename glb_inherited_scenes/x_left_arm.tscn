@@ -42,13 +42,13 @@ material = SubResource("StandardMaterial3D_kg27b")
 radius = 0.05
 height = 0.1
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_44iqp"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7poel"]
 shading_mode = 0
 albedo_color = Color(2, 0.27, 0, 1)
 disable_receive_shadows = true
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_48vyg"]
-material = SubResource("StandardMaterial3D_44iqp")
+material = SubResource("StandardMaterial3D_7poel")
 top_radius = 0.4
 bottom_radius = 0.4
 height = 1000.0

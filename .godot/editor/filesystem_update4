@@ -32,3 +32,4 @@ res://levels/x_boss_level/x_boss_level1_viewcontrol.tscn
 res://enemies/x_boss.gd
 res://enemies/x_volcano.tscn
 res://levels/x_boss_level/background_nodes/x_diamond.gd
+res://glb_inherited_scenes/x_left_arm.tscn
