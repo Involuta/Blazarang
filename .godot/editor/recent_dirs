@@ -1,3 +1,4 @@
+res://levels/balls_level
 res://enemies/enemy_anims
 res://levels/x_boss_level
 res://levels/x_boss_level/background_nodes
@@ -5,7 +6,6 @@ res://enemies/spawners
 res://glb_inherited_scenes
 res://levels
 res://levels/
-res://levels/balls_level
 res://levels/hub
 res://
 res://level_maps

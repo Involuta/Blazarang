@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://cy4cd0vab7e7s"]
+
+[ext_resource type="Script" path="res://enemies/ball_walker.gd" id="1_evdbk"]
+[ext_resource type="Script" path="res://enemies/spawners/ball_spawner.gd" id="2_7lttv"]
+[ext_resource type="PackedScene" uid="uid://cwkv4n3ofhmt6" path="res://glb_inherited_scenes/cannon_mortar_t1.tscn" id="3_lq8gj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_arkt7"]
+radius = 1.0
+height = 3.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vj2c2"]
+radius = 1.0
+height = 3.0
+
+[node name="BallWalker" type="CharacterBody3D"]
+collision_layer = 8
+collision_mask = 11
+script = ExtResource("1_evdbk")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 1.5
+target_desired_distance = 20.0
+avoidance_enabled = true
+height = 3.0
+radius = 4.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_arkt7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_vj2c2")
+skeleton = NodePath("")
+
+[node name="BallSpawner" type="Node3D" parent="."]
+transform = Transform3D(-1, 3.48787e-16, -8.74228e-08, 3.48787e-16, 1, -3.48787e-16, 8.74228e-08, -3.48787e-16, -1, 2.08165e-12, 4, 2.08165e-12)
+script = ExtResource("2_7lttv")
+
+[node name="Mesh" parent="BallSpawner" instance=ExtResource("3_lq8gj")]
+
+[connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
+[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

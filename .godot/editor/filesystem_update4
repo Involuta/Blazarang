@@ -71,3 +71,9 @@ res://enemies/enemy_anims/x_triangle_flyingkick.res
 res://enemies/enemy_anims/x_triangle_volcano.res
 res://enemies/enemy_anims/x_very_far_strafe_laser.res
 res://enemies/enemy_anims/x_diamond_rain.res
+res://enemies/ball_walker.tscn
+res://enemies/ball_walker.gd
+res://levels/balls_level/section_nodes/balls_level_main_arena.tscn
+res://enemies/enemy_melee_tier3.tscn
+res://enemies/enemy_big_melee_tier1.tscn
+res://enemies/enemy_mobile_gunner.tscn

@@ -1,11 +1,13 @@
+CharacterBody3D
+NavigationAgent3D
+BallSpawner
+MeshInstance3D
+CollisionShape3D
 OmniLight3D
 AnimationPlayer
-CollisionShape3D
 StaticBody3D
 Node3D
-CharacterBody3D
 RigidBody3D
-MeshInstance3D
 Camera3D
 FuncGodotMap
 NavigationRegion3D
@@ -28,5 +30,3 @@ Sprite3D
 Hurtbox
 WorldEnvironment
 RayCast3D
-Camera2D
-Control
