@@ -94,32 +94,32 @@ func update_high_target_trajectory_vels():
 	high_target_trajectory_lateral_vel = lateral_dist_to_target / total_flight_time
 
 func lateral_look_at_target(turn_speed):
-	var old_rotation := rotation
+	var old_global_rotation := global_rotation
 	look_at(target.global_position)
-	var target_rotation := rotation
-	rotation = old_rotation
-	rotation.y = move_toward(rotation.y, target_rotation.y, turn_speed)
-	#rotation.y = lerp_angle(rotation.y, target_rotation.y, turn_speed)
+	var target_global_rotation := global_rotation
+	global_rotation = old_global_rotation
+	global_rotation.y = move_toward(global_rotation.y, target_global_rotation.y, turn_speed)
+	#global_rotation.y = lerp_angle(global_rotation.y, target_global_rotation.y, turn_speed)
 
 func vert_look_at_target(turn_speed):
-	var old_rotation = mesh.rotation
+	var old_global_rotation = mesh.global_rotation
 	mesh.look_at(target.global_position)
-	var target_rotation = mesh.rotation
-	mesh.rotation = old_rotation
-	mesh.rotation.x = move_toward(mesh.rotation.x, target_rotation.x, turn_speed)
-	#mesh.rotation.x = lerp_angle(mesh.rotation.x, target_rotation.x, turn_speed)
+	var target_global_rotation = mesh.global_rotation
+	mesh.global_rotation = old_global_rotation
+	mesh.global_rotation.x = move_toward(mesh.global_rotation.x, target_global_rotation.x, turn_speed)
+	#mesh.global_rotation.x = lerp_angle(mesh.global_rotation.x, target_global_rotation.x, turn_speed)
 
 func vert_look_high_bounce_trajectory(turn_speed):
-	# Rotation "upward" = tan^-1(y_vel/x_vel)
-	var target_rotation_x = atan2(bounce_height, .25 * move_speed)
-	mesh.rotation.x = move_toward(mesh.rotation.x, target_rotation_x, turn_speed)
-	#mesh.rotation.x = lerp_angle(mesh.rotation.x, target_rotation_x, turn_speed)
+	# global_rotation "upward" = tan^-1(y_vel/x_vel)
+	var target_global_rotation_x = atan2(bounce_height, .25 * move_speed)
+	mesh.global_rotation.x = move_toward(mesh.global_rotation.x, target_global_rotation_x, turn_speed)
+	#mesh.global_rotation.x = lerp_angle(mesh.global_rotation.x, target_global_rotation_x, turn_speed)
 
 func vert_look_high_target_trajectory(turn_speed):
-	# Rotation "upward" = tan^-1(y_vel/x_vel)
-	var target_rotation_x = atan2(high_target_trajectory_y_vel, high_target_trajectory_lateral_vel)
-	mesh.rotation.x = move_toward(mesh.rotation.x, target_rotation_x, turn_speed)
-	#mesh.rotation.x = lerp_angle(mesh.rotation.x, target_rotation_x, turn_speed)
+	# global_rotation "upward" = tan^-1(y_vel/x_vel)
+	var target_global_rotation_x = atan2(high_target_trajectory_y_vel, high_target_trajectory_lateral_vel)
+	mesh.global_rotation.x = move_toward(mesh.global_rotation.x, target_global_rotation_x, turn_speed)
+	#mesh.global_rotation.x = lerp_angle(mesh.global_rotation.x, target_global_rotation_x, turn_speed)
 
 func spawn_limit_met():
 	if level:
@@ -174,7 +174,7 @@ func spawn_roller():
 	level.add_child.call_deferred(b)
 	await b.tree_entered
 	b.global_position = global_position
-	b.global_rotation = rotation
+	b.global_rotation = global_rotation
 	b.linear_velocity = move_speed * -b.get_global_transform().basis.z
 
 func spawn_bouncer():
@@ -184,7 +184,7 @@ func spawn_bouncer():
 	level.add_child.call_deferred(b)
 	await b.tree_entered
 	b.global_position = global_position
-	b.global_rotation = rotation
+	b.global_rotation = global_rotation
 	b.linear_velocity = .25 * move_speed * -b.get_global_transform().basis.z
 	b.linear_velocity.y = bounce_height
 
@@ -195,7 +195,7 @@ func spawn_giant_roller():
 	level.add_child.call_deferred(b)
 	await b.tree_entered
 	b.global_position = global_position
-	b.global_rotation = rotation
+	b.global_rotation = global_rotation
 	b.linear_velocity = move_speed * -b.get_global_transform().basis.z
 
 func spawn_giant_bouncer():
@@ -205,7 +205,7 @@ func spawn_giant_bouncer():
 	level.add_child.call_deferred(b)
 	await b.tree_entered
 	b.global_position = global_position
-	b.global_rotation = rotation
+	b.global_rotation = global_rotation
 	b.linear_velocity = .25 * move_speed * -b.get_global_transform().basis.z
 	b.linear_velocity.y = bounce_height
 
@@ -218,7 +218,7 @@ func spawn_swarm():
 		await b.tree_entered
 		b.global_position = global_position
 		var move_dir_half_arc := deg_to_rad(move_dir_angle_arc) / 2
-		b.global_rotation = rotation + rng.randf_range(-move_dir_half_arc, move_dir_half_arc) * Vector3.UP
+		b.global_rotation = global_rotation + rng.randf_range(-move_dir_half_arc, move_dir_half_arc) * Vector3.UP
 		b.linear_velocity = move_speed * -b.get_global_transform().basis.z
 		b.linear_velocity.y = rng.randfn()
 
@@ -229,7 +229,7 @@ func spawn_skull():
 	level.add_child.call_deferred(b)
 	await b.tree_entered
 	b.global_position = global_position
-	b.global_rotation = rotation
+	b.global_rotation = global_rotation
 	b.linear_velocity = move_speed * -b.get_global_transform().basis.z
 	b.follow_speed = skull_follow_speed
 	b.explode_dist = skull_explode_dist
@@ -241,7 +241,7 @@ func spawn_heavy():
 	level.add_child.call_deferred(b)
 	await b.tree_entered
 	b.global_position = global_position
-	b.global_rotation = rotation
+	b.global_rotation = global_rotation
 	b.linear_velocity = high_target_trajectory_lateral_vel * -b.get_global_transform().basis.z
 	b.linear_velocity.y = high_target_trajectory_y_vel
 	b.arena_floor_y = arena_floor_y
@@ -253,7 +253,7 @@ func spawn_deathball():
 	level.add_child.call_deferred(b)
 	await b.tree_entered
 	b.global_position = global_position
-	b.global_rotation = rotation
+	b.global_rotation = global_rotation
 	b.velocity = deathball_move_speed * -b.get_global_transform().basis.z
 
 func spawn_popper():
@@ -263,5 +263,5 @@ func spawn_popper():
 	level.add_child.call_deferred(b)
 	await b.tree_entered
 	b.global_position = global_position
-	b.global_rotation = rotation
+	b.global_rotation = global_rotation
 	b.linear_velocity = move_speed * -b.get_global_transform().basis.z

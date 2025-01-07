@@ -76,7 +76,8 @@ func wait():
 
 func _on_navigation_agent_3d_target_reached():
 	if behav_state != ATTACK:
-		start_attack()
+		print("bling bling!")
+		#start_attack()
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	if behav_state == FOLLOW:

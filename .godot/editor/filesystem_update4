@@ -77,3 +77,4 @@ res://levels/balls_level/section_nodes/balls_level_main_arena.tscn
 res://enemies/enemy_melee_tier3.tscn
 res://enemies/enemy_big_melee_tier1.tscn
 res://enemies/enemy_mobile_gunner.tscn
+res://enemies/spawners/ball_spawner.gd
