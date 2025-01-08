@@ -5,12 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://cwkv4n3ofhmt6" path="res://glb_inherited_scenes/cannon_mortar_t1.tscn" id="3_lq8gj"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_arkt7"]
-radius = 1.0
-height = 3.0
+radius = 2.0
+height = 4.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_vj2c2"]
-radius = 1.0
-height = 3.0
+radius = 2.0
+height = 4.0
 
 [node name="BallWalker" type="CharacterBody3D"]
 collision_layer = 8
@@ -18,11 +18,11 @@ collision_mask = 154
 script = ExtResource("1_evdbk")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-path_desired_distance = 1.5
+path_desired_distance = 2.0
 target_desired_distance = 20.0
 avoidance_enabled = true
-height = 3.0
-radius = 4.0
+height = 4.0
+radius = 3.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_arkt7")

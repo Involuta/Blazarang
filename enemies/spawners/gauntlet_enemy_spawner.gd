@@ -39,7 +39,7 @@ func spawn_enemy():
 	spinner_tween.tween_property(bottom_spinner, "rotation", Vector3.UP * -PI, .5).from(Vector3.ZERO)
 	spawn_cooldown_active = true
 	var enemy_inst = choose_enemy()
-	section.add_child.call_deferred(enemy_inst)
+	level.add_child.call_deferred(enemy_inst)
 	await enemy_inst.tree_entered
 	enemy_inst.global_position = global_position
 	await get_tree().create_timer(spawn_cooldown_secs).timeout
@@ -73,7 +73,7 @@ func spawn_from_name(enemy_name):
 			return melee_tier1.instantiate()
 
 func spawn_limit_met():
-	if section:
-		return get_tree().get_nodes_in_group("lockonables").size() >= section.lockonable_limit
+	if level:
+		return get_tree().get_nodes_in_group("lockonables").size() >= level.lockonable_limit
 	else:
 		return true

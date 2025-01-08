@@ -641,7 +641,7 @@ transitions = ["Start", "WalkSpace", SubResource("AnimationNodeStateMachineTrans
 graph_offset = Vector2(335.421, -94.1333)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_uk78c"]
-graph_offset = Vector2(-28.8, 590.4)
+graph_offset = Vector2(-28.8, 291)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_f8liy")
 nodes/StateMachine/position = Vector2(110, 150)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -851,17 +851,6 @@ collision_layer = 8
 collision_mask = 146
 platform_floor_layers = 4294901762
 script = ExtResource("1_u3wem")
-phase2_long_dist_right_arm_not_deployed_attack_chances = {
-"ArmBombs": 2.08167e-12,
-"ChainSlice": 2.08167e-12,
-"DualBladeDash": 1.0,
-"RightArmLaser": 2.08167e-12,
-"SemicircleDash": 2.08167e-12,
-"StrafeLaser": 2.08167e-12,
-"Superman": 2.08167e-12,
-"Sweep": 2.08167e-12,
-"Triangle": 2.08167e-12
-}
 front_teleport_dist_from_target = 9.0
 strafeslice_up_speed = 5.0
 strafeslice_down_speed = 5.0

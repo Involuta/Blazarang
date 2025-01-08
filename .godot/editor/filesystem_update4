@@ -78,3 +78,7 @@ res://enemies/enemy_melee_tier3.tscn
 res://enemies/enemy_big_melee_tier1.tscn
 res://enemies/enemy_mobile_gunner.tscn
 res://enemies/spawners/ball_spawner.gd
+res://enemies/enemy_melee_tier1.tscn
+res://enemies/spawners/gauntlet_enemy_spawner.gd
+res://enemies/enemy_stationary_gunner.tscn
+res://enemies/enemy_melee_tier2.tscn
