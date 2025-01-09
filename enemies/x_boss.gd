@@ -92,21 +92,21 @@ var semicircle_center := Vector3.ZERO
 	"ArmBombs" : .1,
 	"Sweep" : .25,
 	"ChainSlice" : .25,
-	"Superman" : .1,
+	"Superman" : .05,
 	"Triangle" : .1,
-	"DiagonalDash" : .1,
+	"DiagonalDash" : .15,
 	"SemicircleDash" : .1
 }
 
 @export var phase2_long_dist_right_arm_not_deployed_attack_chances = {
-	"ArmBombs" : .1,
+	"ArmBombs" : .05,
 	"Sweep" : .2,
 	"ChainSlice" : .1,
 	"Superman" : .1,
 	"Triangle" : .1,
 	"RightArmLaser" : .1,
 	"StrafeLaser" : .1,
-	"SemicircleDash" : .2
+	"SemicircleDash" : .25
 }
 
 @export var diagonal_dash_speed := 22.0
@@ -198,6 +198,7 @@ func _ready():
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("Special"):
+		print($X_boss_meshes/Armature/Skeleton3D/Head.position)
 		match(behav_state):
 			WAIT:
 				print("WAIT")
