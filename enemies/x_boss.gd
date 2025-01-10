@@ -815,7 +815,7 @@ func semicircle_dash_tp():
 	# 2 frames enabling X to freely rotate (X enters attack mode, then stops aiming at target)
 	# 18 frames of rotation towards dash dir = .3 secs
 	# 82 frames of flight = 1.667 secs
-	mvmt_tween.tween_property(self, "global_rotation", Vector3.UP * PI/2 * dash_dir, 0.3).as_relative()
+	mvmt_tween.tween_property(self, "rotation", Vector3.UP * PI/2 * dash_dir, 0.3).as_relative()
 	mvmt_tween.tween_method(semicircle_dash_frame, 0.0, 1.0, 1.367).set_ease(Tween.EASE_OUT)
 
 func semicircle_dash_frame(lerp_val):
@@ -828,14 +828,14 @@ func semicircle_dash_frame(lerp_val):
 	var angular_speed = PI / 2.4167
 	var linear_speed = angular_speed * semicircle_dash_radius
 	var dash_dir3D := Vector3(dash_dir.x, 0, dash_dir.y)
-	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(dash_dir.x, dash_dir.y), attack_turn_speed)
+	rotation.y = lerp_angle(rotation.y, PI + atan2(dash_dir.x, dash_dir.y), attack_turn_speed)
 	global_position.y = 2*sin(PI*lerp_val) + min_y_pos
 	x_meshes.rotation.x = deg_to_rad(-10)*cos(PI*lerp_val)
 	velocity = linear_speed * dash_dir3D
 
 func semicircle_slowdown_frame(lerp_val):
 	var dir_to_target := global_position.direction_to(target.global_position)
-	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(dir_to_target.x, dir_to_target.z), lerp_val)
+	rotation.y = lerp_angle(global_rotation.y, PI + atan2(dir_to_target.x, dir_to_target.z), lerp_val)
 	x_meshes.rotation.x = lerp_angle(x_meshes.rotation.x, 0, lerp_val)
 	# Look at target during slowdown
 	var old_head_rotation = x_mesh_head.rotation
