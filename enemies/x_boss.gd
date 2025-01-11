@@ -80,12 +80,12 @@ var semicircle_center := Vector3.ZERO
 
 @export var phase2_short_dist_attack_chances = {
 	"ArmBombs" : .05,
-	"ChainSlice" : .1,
-	"Sweep" : .2,
+	"ChainSlice" : .15,
+	"Sweep" : .15,
 	"Superman" : .1,
-	"RightArmSlice" : .1,
+	"RightArmSlice" : .15,
 	"Triangle" : .1,
-	"StrafeSlice" : .35
+	"StrafeSlice" : .3
 }
 
 @export var phase2_long_dist_right_arm_deployed_attack_chances = {
@@ -765,6 +765,8 @@ func lunge_laser_diagonal_dash():
 func start_strafe_laser():
 	behav_state = STRAFE_FOLLOW
 	strafing_left = false
+	# Wait before increasing this
+	await get_tree().create_timer(.35)
 	follow_speed *= 2
 
 func strafe_laser_deploy_arm():
