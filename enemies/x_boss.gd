@@ -806,9 +806,6 @@ func semicircle_dash():
 	mvmt_tween.tween_method(semicircle_slowdown_frame, 0.0, 1.0, .5833).set_ease(Tween.EASE_OUT)
 
 func semicircle_dash_tp():
-	if global_position.distance_to(target.global_position) < 15:
-		x_mesh_head.visible = true
-		#Engine.time_scale = .1
 	var mvmt_tween := get_tree().create_tween()
 	var dash_dir = -1 if x_icon_tp_to_left else 1
 	semicircle_center = global_position + semicircle_dash_radius * global_position.direction_to(target.global_position)
