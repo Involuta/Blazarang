@@ -650,9 +650,7 @@ func armbombs_shoot_arms():
 	left_arm_landing_site.z = target.global_position.z + side_teleport_dist_from_target * leftside_vec.y
 	
 	left_arm.look_at_from_position(mhp1.global_position, left_arm_landing_site, Vector3.UP, true)
-	#var goal_rotation = left_arm.rotation
 	var all_tween = get_tree().create_tween()
-	#all_tween.tween_property(left_arm, "rotation", goal_rotation, .05).from(PI/2*Vector3.RIGHT).set_ease(Tween.EASE_IN_OUT)
 	
 	var rightside_vec := -Vector2(dir_to_target.x, dir_to_target.z).orthogonal()
 	var right_arm_landing_site = Vector3(0,min_y_pos-1.3,0)
@@ -660,8 +658,6 @@ func armbombs_shoot_arms():
 	right_arm_landing_site.z = target.global_position.z + side_teleport_dist_from_target * rightside_vec.y
 	
 	right_arm.look_at_from_position(mhp2.global_position, right_arm_landing_site, Vector3.UP, true)
-	#goal_rotation = right_arm.rotation
-	#all_tween.tween_property(right_arm, "rotation", goal_rotation, .05).from(PI/2*Vector3.RIGHT).set_ease(Tween.EASE_IN_OUT)
 	
 	armbombs_trigger()
 	
