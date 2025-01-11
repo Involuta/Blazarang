@@ -395,7 +395,7 @@ func end_attack_instant_followup():
 			anim_tree.set(param_path_base + attack, false)
 		for attack in long_dist_right_arm_not_deployed_attack_chances.keys():
 			anim_tree.set(param_path_base + attack, false)
-	long_dist_wait_remaining = rng.randf_range(.07, min_long_dist_wait)
+	long_dist_wait_remaining = .02
 	behav_state = FOLLOW
 
 func end_flying_facerain():
@@ -801,10 +801,14 @@ func semicircle_dash():
 	# 35 frames of slowdown = .5833 secs
 	mvmt_tween.tween_property(self, "global_rotation", Vector3.UP * PI/2 * dash_dir, 0.3).as_relative()
 	mvmt_tween.tween_method(semicircle_dash_frame, 0.0, 1.0, 2.4167).set_ease(Tween.EASE_OUT)
+	mvmt_tween.tween_callback(semicircle_reset_mesh_rotation)
 	mvmt_tween.tween_callback(slowdown.bind(.5833))
 	mvmt_tween.tween_method(semicircle_slowdown_frame, 0.0, 1.0, .5833).set_ease(Tween.EASE_OUT)
 
 func semicircle_dash_tp():
+	if global_position.distance_to(target.global_position) < 15:
+		x_mesh_head.visible = true
+		#Engine.time_scale = .1
 	var mvmt_tween := get_tree().create_tween()
 	var dash_dir = -1 if x_icon_tp_to_left else 1
 	semicircle_center = global_position + semicircle_dash_radius * global_position.direction_to(target.global_position)
@@ -813,6 +817,7 @@ func semicircle_dash_tp():
 	# 82 frames of flight = 1.667 secs
 	mvmt_tween.tween_property(self, "rotation", Vector3.UP * PI/2 * dash_dir, 0.3).as_relative()
 	mvmt_tween.tween_method(semicircle_dash_frame, 0.0, 1.0, 1.367).set_ease(Tween.EASE_OUT)
+	mvmt_tween.tween_callback(semicircle_reset_mesh_rotation)
 
 func semicircle_dash_frame(lerp_val):
 	var dir_to_target := global_position.direction_to(semicircle_center)
@@ -828,6 +833,9 @@ func semicircle_dash_frame(lerp_val):
 	global_position.y = 2*sin(PI*lerp_val) + min_y_pos
 	x_meshes.rotation.x = deg_to_rad(-10)*cos(PI*lerp_val)
 	velocity = linear_speed * dash_dir3D
+
+func semicircle_reset_mesh_rotation():
+	x_meshes.rotation.x = 0
 
 func semicircle_slowdown_frame(lerp_val):
 	var dir_to_target := global_position.direction_to(target.global_position)
