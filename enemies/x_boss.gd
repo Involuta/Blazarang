@@ -891,9 +891,17 @@ func spawn_diamond_at(pos : Vector3):
 	var d = diamond.instantiate()
 	level.add_child.call_deferred(d)
 	await d.tree_entered
-	d.global_position = pos + Vector3.UP * 37.5
+	d.global_position = pos + Vector3.UP * 100
 	var fall_tween := get_tree().create_tween()
-	fall_tween.tween_property(d, "global_position", pos, .25)
+	fall_tween.tween_property(d, "global_position", pos + Vector3.UP * 37.5, .1)
+	fall_tween.tween_property(d, "global_position", pos, .25).set_ease(Tween.EASE_IN)
+	fall_tween.tween_interval(3.0)
+	fall_tween.tween_property(d, "global_position", pos + Vector3.UP * 37.5, 1).set_ease(Tween.EASE_IN)
+	fall_tween.tween_property(d, "global_position", pos + Vector3.UP * 100, .1)
+	fall_tween.tween_callback(delete_diamond.bind(d))
+
+func delete_diamond(d: Node3D):
+	d.queue_free()
 
 func recall_left_arm():
 	if not left_arm_deployed():
