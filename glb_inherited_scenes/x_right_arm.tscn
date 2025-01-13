@@ -819,7 +819,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.0
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("3_yk8jj")
-damage = 50
+damage = 48
 
 [node name="ArmCollider" type="CollisionShape3D" parent="EnemyHitbox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 2.08165e-12, 5.5)
