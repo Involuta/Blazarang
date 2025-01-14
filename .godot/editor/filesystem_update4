@@ -1,12 +1,12 @@
-res://glb_inherited_scenes/x_left_arm.tscn
+res://levels/x_boss_level/x_boss_level_background.tscn
 res://enemies/enemy_hurtbox.gd
+res://levels/x_boss_level/background_nodes/diamond.tres
 res://textures/clear_tile.tres
 res://textures/x_boss_body.tres
 res://GPUTrail-main/shaders/trail.gdshader
 res://GPUTrail-main/shaders/trail_draw_pass.gdshader
 res://GPUTrail-main/defaults/texture.tres
 res://GPUTrail-main/defaults/curve.tres
-res://levels/x_boss_level/background_nodes/diamond.tres
 res://glb_inherited_scenes/outline.gdshader
 res://textures/x_arrow.tres
 res://textures/small_solid_white.tres
@@ -23,8 +23,8 @@ res://ui/flash.gdshader
 res://ui/glow.gdshader
 res://ui/glitch.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
-res://levels/x_boss_level/x_boss_level_background.tscn
 res://enemies/x_boss.tscn
 res://levels/x_boss_level/x_boss_level1.tscn
 res://levels/x_boss_level/background_nodes/x_diamond.tscn
-res://glb_inherited_scenes/x_right_arm.tscn
+res://cotu/cotu_cb_main.tscn
+res://enemies/enemy_melee_tier1.tscn
