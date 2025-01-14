@@ -856,9 +856,9 @@ script = ExtResource("1_u3wem")
 phase2_short_dist_attack_chances = {
 "ArmBombs": 0.05,
 "ChainSlice": 0.15,
-"RightArmSlice": 0.225,
-"StrafeSlice": 0.225,
-"Superman": 0.1,
+"RightArmSlice": 0.2,
+"StrafeSlice": 0.2,
+"Superman": 0.15,
 "Sweep": 0.15,
 "Triangle": 0.1
 }
