@@ -258,6 +258,10 @@ func wait():
 	if global_position.distance_to(target.global_position) < aggro_distance:
 		behav_state = FOLLOW
 
+func multiply_follow_speed_over_interval(multiplier : float, duration: float):
+	var speed_tween := get_tree().create_tween()
+	speed_tween.tween_property(self, "follow_speed", follow_speed * multiplier, duration)
+
 func follow():
 	lerp_look_at_position(target.global_position, follow_turn_speed)
 	var move_dir = global_position.direction_to(target.global_position)
@@ -443,6 +447,9 @@ func slowdown(duration_secs : float):
 
 func dash():
 	velocity = dash_speed * -transform.basis.z
+
+func dash_grab_mvmt():
+	velocity = 1.5 * dash_speed * -transform.basis.z
 
 func teleport():
 	dash_back_canceled = true
@@ -765,7 +772,7 @@ func start_strafe_laser():
 	behav_state = STRAFE_FOLLOW
 	strafing_left = false
 	# Wait before increasing this
-	await get_tree().create_timer(.35)
+	await get_tree().create_timer(.35).timeout
 	follow_speed *= 2
 
 func strafe_laser_deploy_arm():
