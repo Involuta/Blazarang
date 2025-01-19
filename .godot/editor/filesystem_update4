@@ -1,4 +1,4 @@
-res://levels/x_boss_level/x_boss_level_background.tscn
+res://enemies/x_boss.tscn
 res://enemies/enemy_hurtbox.gd
 res://levels/x_boss_level/background_nodes/diamond.tres
 res://textures/clear_tile.tres
@@ -23,8 +23,8 @@ res://ui/flash.gdshader
 res://ui/glow.gdshader
 res://ui/glitch.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
-res://enemies/x_boss.tscn
+res://enemies/x_boss.gd
+res://levels/x_boss_level/x_boss_level_background.tscn
+res://levels/x_boss_level/background_nodes/spawn_bg_diamonds.gd
 res://levels/x_boss_level/x_boss_level1.tscn
-res://levels/x_boss_level/background_nodes/x_diamond.tscn
-res://cotu/cotu_cb_main.tscn
-res://enemies/enemy_melee_tier1.tscn
+res://levels/x_boss_level/background_nodes/diamond.tscn

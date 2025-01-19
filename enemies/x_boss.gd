@@ -82,10 +82,10 @@ var semicircle_center := Vector3.ZERO
 	"ArmBombs" : .05,
 	"ChainSlice" : .15,
 	"Sweep" : .15,
-	"Superman" : .1,
-	"RightArmSlice" : .15,
+	"Superman" : .15,
+	"RightArmSlice" : .2,
 	"Triangle" : .1,
-	"StrafeSlice" : .3
+	"StrafeSlice" : .2
 }
 
 @export var phase2_long_dist_right_arm_deployed_attack_chances = {
