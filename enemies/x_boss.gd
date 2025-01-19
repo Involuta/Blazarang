@@ -101,12 +101,12 @@ var semicircle_center := Vector3.ZERO
 @export var phase2_long_dist_right_arm_not_deployed_attack_chances = {
 	"ArmBombs" : .05,
 	"Sweep" : .2,
-	"ChainSlice" : .1,
-	"Superman" : .1,
+	"ChainSlice" : .05,
+	"Superman" : .05,
 	"Triangle" : .1,
-	"RightArmLaser" : .1,
-	"StrafeLaser" : .1,
-	"SemicircleDash" : .25
+	"RightArmLaser" : .15,
+	"StrafeLaser" : .2,
+	"StrafeSlice" : .2
 }
 
 @export var diagonal_dash_speed := 22.0
@@ -944,6 +944,17 @@ func strafeslice_recall_right_arm():
 func strafeslice_recall_right_arm_frame(lerp_val):
 	right_arm.rotation_degrees = rotation_degrees + Vector3(0, 90, 0)
 	right_arm.global_position = right_arm.global_position.lerp(x_mesh_right_arm.global_position, lerp_val)
+
+func icon_recall_right_arm():
+	if not right_arm_deployed():
+		return
+	right_arm.stop_firing_laser()
+	var recall_tween = get_tree().create_tween()
+	recall_tween.tween_method(icon_recall_right_arm_frame, 0.0, 1.0, .25).set_ease(Tween.EASE_OUT)
+
+func icon_recall_right_arm_frame(lerp_val):
+	right_arm.rotation_degrees = rotation_degrees + Vector3(0, 90, 0)
+	right_arm.global_position = right_arm.global_position.lerp(x_icon.global_position + 2.5 * Vector3.UP, lerp_val)
 
 func hide_floating_right_arm():
 	right_arm.visible = false
