@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmwc52cltthas"]
+
+[ext_resource type="PackedScene" uid="uid://cqxg20m4bx02k" path="res://glb_imports/Diamond.glb" id="1_lokcp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cmdlk"]
+albedo_color = Color(0.447059, 0.227451, 0, 1)
+
+[node name="Diamond" instance=ExtResource("1_lokcp")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Top" parent="." index="0"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+surface_material_override/0 = SubResource("StandardMaterial3D_cmdlk")
+
+[node name="Bottom" parent="." index="1"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+surface_material_override/0 = SubResource("StandardMaterial3D_cmdlk")

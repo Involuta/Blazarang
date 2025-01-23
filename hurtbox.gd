@@ -19,14 +19,18 @@ func _ready():
 	current_opponent_hitboxes = opponent_hitboxes
 
 func set_invincibility(val: bool):
-	print(val)
 	if val:
 		current_opponent_hitboxes = []
 	else:
 		current_opponent_hitboxes = opponent_hitboxes
 
+func _physics_process(delta):
+	pass
+
 func on_hit(hitbox):
 	if hitbox.name in current_opponent_hitboxes:
+		if "DOT_dmg_per_frame" in hitbox:
+			pass
 		if "is_dodging" in parent:
 			if not parent.is_dodging:
 				receive_hit(hitbox.damage, hitbox.get_parent())
