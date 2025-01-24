@@ -5,7 +5,7 @@ extends Node3D
 @export var big_diamond_max_size := 1.0
 @export var big_diamond_min_spawn_radius := 1.0
 @export var big_diamond_max_spawn_radius := 5.5
-@export var big_diamond_min_dist_from_others := 2
+@export var big_diamond_min_dist_from_others := 2.0
 
 @export var small_diamond_num := 100.0
 @export var small_diamond_min_size := .05
@@ -23,6 +23,10 @@ var big_diamond_list := []
 var small_diamond_list := []
 
 func _ready():
+	var starlight_tween := get_tree().create_tween()
+	starlight_tween.set_parallel()
+	starlight_tween.tween_property($Star/OmniLight3D, "omni_range", 15, 3)
+	starlight_tween.tween_property($Star, "scale", Vector3.ONE, 3)
 	bg = root.find_child("XBossLevelBackground")
 	for i in range(big_diamond_num):
 		spawn_big_diamond()
