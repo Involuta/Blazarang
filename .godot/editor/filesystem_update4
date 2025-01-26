@@ -29,3 +29,4 @@ res://levels/x_boss_level/x_boss_level1.tscn
 res://levels/x_boss_level/background_nodes/diamond.tscn
 res://levels/x_boss_level/background_nodes/flat_diamond.tscn
 res://levels/x_boss_level/background_nodes/x_diamond.tscn
+res://glb_inherited_scenes/x_boss_meshes.tscn

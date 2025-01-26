@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://b3uvg3j4qge8o"]
+[gd_scene load_steps=32 format=3 uid="uid://b3uvg3j4qge8o"]
 
 [ext_resource type="PackedScene" uid="uid://rp0n2dfx0chj" path="res://glb_imports/8164_meshes.glb" id="1_mluec"]
 [ext_resource type="PackedScene" uid="uid://d1opgv0y2ujut" path="res://glb_inherited_scenes/x_head_pieces.tscn" id="2_pkf4d"]
@@ -202,32 +202,6 @@ disable_receive_shadows = true
 [sub_resource type="BoxMesh" id="BoxMesh_uuqt1"]
 material = SubResource("StandardMaterial3D_70nmr")
 
-[sub_resource type="Curve" id="Curve_yh0sc"]
-_data = [Vector2(2.08165e-12, 1), 0.0, 0.0, 0, 0, Vector2(1, 2.08165e-12), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_lw76f"]
-curve = SubResource("Curve_yh0sc")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vtshv"]
-direction = Vector3(2.08165e-12, -1, 2.08165e-12)
-spread = 10.0
-gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-initial_velocity_min = 40.0
-initial_velocity_max = 40.0
-scale_curve = SubResource("CurveTexture_lw76f")
-color = Color(1, 0.270588, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4k5kw"]
-shading_mode = 0
-vertex_color_use_as_albedo = true
-billboard_mode = 1
-billboard_keep_scale = true
-
-[sub_resource type="QuadMesh" id="QuadMesh_eqjva"]
-material = SubResource("StandardMaterial3D_4k5kw")
-size = Vector2(0.1, 0.1)
-
 [node name="X_boss_meshes" instance=ExtResource("1_mluec")]
 transform = Transform3D(-0.1, 3.48787e-17, -8.74228e-09, 3.48787e-17, 0.1, -3.48787e-17, 8.74228e-09, -3.48787e-17, -0.1, 2.08165e-12, -1.3, 2.08165e-12)
 
@@ -320,26 +294,9 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_gocoe")
 draw_pass_1 = SubResource("BoxMesh_uuqt1")
 
-[node name="LeftFoot" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="4"]
-transform = Transform3D(-0.999013, 0.0429145, 0.0114566, 0.0380256, 0.959616, -0.278733, -0.0229555, -0.278022, -0.960299, 1.00855, 26.0291, -0.0256762)
-bone_name = "mixamorig_LeftFoot"
-bone_idx = 17
-
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Armature/Skeleton3D/LeftFoot" index="0"]
-visible = false
-amount = 12
-process_material = SubResource("ParticleProcessMaterial_vtshv")
-draw_pass_1 = SubResource("QuadMesh_eqjva")
-
-[node name="RightFoot" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="5"]
-transform = Transform3D(-0.999111, -0.0418818, -0.00492207, -0.0397759, 0.974714, -0.219886, 0.0140067, -0.219494, -0.975512, -1.00855, 26.0292, -0.0265895)
-bone_name = "mixamorig_RightFoot"
-bone_idx = 22
-
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Armature/Skeleton3D/RightFoot" index="0"]
-visible = false
-amount = 12
-process_material = SubResource("ParticleProcessMaterial_vtshv")
-draw_pass_1 = SubResource("QuadMesh_eqjva")
+[node name="LeftHand" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="4"]
+transform = Transform3D(0.317021, 0.901698, -0.294004, 0.943216, -0.332175, -0.00170704, -0.0991998, -0.276768, -0.955802, 11.0921, 6.73496, -2.66742)
+bone_name = "mixamorig_LeftHand"
+bone_idx = 10
 
 [editable path="Armature/Skeleton3D/Head/XHead"]
