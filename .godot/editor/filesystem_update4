@@ -74,3 +74,7 @@ res://enemies/enemy_anims/x_triangle_volcano.res
 res://enemies/enemy_anims/x_very_far_strafe_laser.res
 res://cotu/cotu_anims/use_item_stabilizer.res
 res://cotu/cotu_cb_main.tscn
+res://globals.gd
+res://cotu/cotu_anims/x_boss_grab.res
+res://enemies/enemy_anims/x_dashgrab_whiff.res
+res://enemies/enemy_anims/x_dashgrab_punish.res

@@ -82,6 +82,7 @@ func emit_stabilize():
 	Globals.stabilize.emit()
 
 func release_from_grab():
+	Globals.XBossGrab = false
 	grab_pos_node = null
 	grabbed = false
 	anim_tree.set("parameters/StateMachine/conditions/XBossGrab", false)
@@ -89,6 +90,7 @@ func release_from_grab():
 func start_grab_anim(hitbox_name):
 	match(hitbox_name):
 		"XBossGrab":
+			Globals.XBossGrab = true
 			anim_tree.set("parameters/StateMachine/conditions/XBossGrab", true)
 		_:
 			print("Error in CotuControl: hitbox name from CotuHurtbox not found")

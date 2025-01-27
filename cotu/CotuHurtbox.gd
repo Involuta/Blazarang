@@ -33,7 +33,8 @@ func reset_recovery_delay():
 
 func on_hit(hitbox):
 	if hitbox.name in opponent_grab_hitboxes:
-		parent.grab_pos_node = hitbox.parent
+		Globals.XBossGrab = true
+		parent.grab_pos_node = hitbox.get_parent()
 		parent.grabbed = true
 		parent.start_grab_anim(hitbox.name)
 	else:

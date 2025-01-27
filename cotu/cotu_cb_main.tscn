@@ -252,6 +252,7 @@ skeleton = NodePath("../..")
 [node name="Hurtbox" type="Area3D" parent="."]
 collision_mask = 11
 script = ExtResource("2_fvpfg")
+opponent_grab_hitboxes = ["XBossGrab"]
 opponent_hitboxes = ["EnemyHitbox", "DeathHitbox"]
 
 [node name="HurtboxCollider" type="CollisionShape3D" parent="Hurtbox"]
