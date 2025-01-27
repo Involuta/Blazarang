@@ -30,3 +30,6 @@ res://levels/x_boss_level/background_nodes/diamond.tscn
 res://levels/x_boss_level/background_nodes/flat_diamond.tscn
 res://levels/x_boss_level/background_nodes/x_diamond.tscn
 res://glb_inherited_scenes/x_boss_meshes.tscn
+res://cotu/CotuHurtbox.gd
+res://cotu/CotuControl.gd
+res://hurtbox.gd

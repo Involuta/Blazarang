@@ -14,6 +14,9 @@ var damage_indicator_value := 100.0
 
 @export var destab_invin_time := 2.0
 
+# When Cotu gets grabbed, his position is set to the hitbox's parent
+@export var opponent_grab_hitboxes := []
+
 func _ready():
 	super()
 	damage_indicator_value = max_health
@@ -27,6 +30,13 @@ func on_stabilize():
 func reset_recovery_delay():
 	recovery_delay_remaining = recovery_delay
 	recovery_active = false
+
+func on_hit(hitbox):
+	if hitbox.name in opponent_grab_hitboxes:
+		parent.grab_pos_node = hitbox.parent
+		parent.grabbed = true
+	else:
+		super(hitbox)
 
 func receive_hit(damage: float, hitter):
 	if recovery_active:

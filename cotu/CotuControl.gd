@@ -41,6 +41,8 @@ var next_buff_index := 0
 var throw_self_damage := 18.0
 
 var destabilized = false
+var grabbed = false
+var grab_pos_node : Node3D
 
 var roserang := preload("res://rang/roserang.tscn")
 var roserang_instance = null
@@ -79,7 +81,15 @@ func on_stabilize():
 func emit_stabilize():
 	Globals.stabilize.emit()
 
+func release_from_grab():
+	grab_pos_node = null
+	grabbed = false
+
 func _physics_process(delta):
+	if grabbed:
+		global_position = grab_pos_node.global_position
+		return
+	
 	# Dodge logic
 	if Input.is_action_just_pressed("StepDodge") and can_dodge:
 		anim_tree.set("parameters/StateMachine/conditions/just_dodged", true)
