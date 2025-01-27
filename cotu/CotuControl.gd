@@ -129,9 +129,11 @@ func _physics_process(delta):
 	# Camera positioning based on level geometry
 	place_camera()
 	
+	# Grabbed logic
 	if grabbed:
-		global_position = grab_pos_node.global_position
+		global_position = grab_pos_node.global_position + .2 * Vector3.DOWN
 		return
+	
 	# Dodge logic
 	if Input.is_action_just_pressed("StepDodge") and can_dodge:
 		anim_tree.set("parameters/StateMachine/conditions/just_dodged", true)

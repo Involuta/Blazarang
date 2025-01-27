@@ -305,6 +305,10 @@ func right_arm_deployed():
 func head_deployed():
 	return not x_mesh_head.visible
 
+func cotu_grabbed():
+	# Anim tree can't read Globals values directly from advance expressions
+	return Globals.XBossGrab
+
 func queue_attack(dist_type):
 	attack_queued = true
 	if phase2:
