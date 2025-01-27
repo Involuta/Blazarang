@@ -1,4 +1,4 @@
-[gd_scene load_steps=178 format=3 uid="uid://dwniaym2g1off"]
+[gd_scene load_steps=179 format=3 uid="uid://dwniaym2g1off"]
 
 [ext_resource type="Script" path="res://enemies/x_boss.gd" id="1_u3wem"]
 [ext_resource type="Script" path="res://enemies/boss_hurtbox.gd" id="2_y4k4d"]
@@ -39,6 +39,9 @@ albedo_color = Color(2, 0.27, 0, 1)
 material = SubResource("StandardMaterial3D_vdsab")
 radius = 0.25
 height = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bun6n"]
+radius = 4.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nam3m"]
 animation = &"ArmBombs"
@@ -1046,6 +1049,14 @@ transform = Transform3D(0.498514, -0.255042, 0.828515, -0.33588, -0.937913, -0.0
 
 [node name="LeftHand" parent="X_boss_meshes/Armature/Skeleton3D" index="4"]
 transform = Transform3D(0.998417, 0.0401369, 0.0393841, 0.0404142, -0.999163, -0.00627171, 0.0390992, 0.00785354, -0.999204, 5.12475, 12.5883, -0.507344)
+
+[node name="XBossGrab" type="Area3D" parent="X_boss_meshes/Armature/Skeleton3D/LeftHand" index="0"]
+collision_layer = 8
+collision_mask = 11
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="X_boss_meshes/Armature/Skeleton3D/LeftHand/XBossGrab"]
+transform = Transform3D(1, -5.46129e-08, -1.61184e-10, -1.32549e-09, 1, 4.73418e-11, -2.30589e-09, -1.06033e-09, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+shape = SubResource("SphereShape3D_bun6n")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_uk78c")

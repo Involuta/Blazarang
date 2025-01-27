@@ -1,10 +1,11 @@
+CollisionShape3D
+Area3D
 BoneAttachment3D
 AnimationTree
 CharacterBody3D
 NavigationAgent3D
 BallSpawner
 MeshInstance3D
-CollisionShape3D
 OmniLight3D
 AnimationPlayer
 StaticBody3D
@@ -18,7 +19,6 @@ SubViewport
 SubViewportContainer
 TextureButton
 CanvasLayer
-Area3D
 CPUParticles3D
 AnimatedSprite3D
 Hitbox

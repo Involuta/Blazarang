@@ -84,12 +84,19 @@ func emit_stabilize():
 func release_from_grab():
 	grab_pos_node = null
 	grabbed = false
+	anim_tree.set("parameters/StateMachine/conditions/XBossGrab", false)
+
+func start_grab_anim(hitbox_name):
+	match(hitbox_name):
+		"XBossGrab":
+			anim_tree.set("parameters/StateMachine/conditions/XBossGrab", true)
+		_:
+			print("Error in CotuControl: hitbox name from CotuHurtbox not found")
 
 func _physics_process(delta):
 	if grabbed:
 		global_position = grab_pos_node.global_position
 		return
-	
 	# Dodge logic
 	if Input.is_action_just_pressed("StepDodge") and can_dodge:
 		anim_tree.set("parameters/StateMachine/conditions/just_dodged", true)
