@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://icbfj05gq8vk"]
+[gd_scene load_steps=50 format=3 uid="uid://icbfj05gq8vk"]
 
 [ext_resource type="Script" path="res://cotu/CotuControl.gd" id="1_aleek"]
 [ext_resource type="PackedScene" uid="uid://jv0ogh4h31nr" path="res://cotu/shakeable_camera.tscn" id="2_b6h2k"]
@@ -87,6 +87,9 @@ animation = &"QuickSpinCW"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_41k5d"]
 animation = &"UseStabilizer"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_iinnq"]
+animation = &"XBossGrab"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sxmkw"]
 xfade_time = 0.15
@@ -178,6 +181,14 @@ xfade_time = 0.15
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_17a15"]
+advance_mode = 2
+advance_condition = &"XBossGrab"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_me2yl"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_auidk"]
 states/AerialBlendSpace/node = SubResource("AnimationNodeBlendSpace2D_25pme")
 states/AerialBlendSpace/position = Vector2(84.7999, 348.134)
@@ -197,11 +208,13 @@ states/QuickSpinCW/position = Vector2(412.451, 140.017)
 states/Start/position = Vector2(-96.5, 102.836)
 states/UseStabilizer/node = SubResource("AnimationNodeAnimation_41k5d")
 states/UseStabilizer/position = Vector2(84.9591, -18.813)
-transitions = ["GroundBlendSpace", "AerialEvadeFast", SubResource("AnimationNodeStateMachineTransition_sxmkw"), "AerialEvadeFast", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_nolyx"), "AerialEvadeFast", "FrontTwistFlipFast", SubResource("AnimationNodeStateMachineTransition_nele4"), "FrontTwistFlipFast", "AerialEvadeFast", SubResource("AnimationNodeStateMachineTransition_ahun8"), "GroundBlendSpace", "FrontTwistFlipFast", SubResource("AnimationNodeStateMachineTransition_4n1fb"), "FrontTwistFlipFast", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_w13l8"), "GroundBlendSpace", "QuickSpinCW", SubResource("AnimationNodeStateMachineTransition_3sep5"), "QuickSpinCW", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_6pr6l"), "GroundBlendSpace", "QuickSpinCCW", SubResource("AnimationNodeStateMachineTransition_wuyjb"), "QuickSpinCCW", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_af52k"), "Start", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_vq4bk"), "GroundBlendSpace", "AerialBlendSpace", SubResource("AnimationNodeStateMachineTransition_b57p5"), "AerialBlendSpace", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_pffs7"), "AerialBlendSpace", "AirDodge", SubResource("AnimationNodeStateMachineTransition_c3ntk"), "AirDodge", "AerialBlendSpace", SubResource("AnimationNodeStateMachineTransition_ixnca"), "GroundBlendSpace", "UseStabilizer", SubResource("AnimationNodeStateMachineTransition_vfwdk"), "UseStabilizer", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_05va5")]
-graph_offset = Vector2(-258.271, -94.383)
+states/XBossGrab/node = SubResource("AnimationNodeAnimation_iinnq")
+states/XBossGrab/position = Vector2(221.204, 257.849)
+transitions = ["GroundBlendSpace", "AerialEvadeFast", SubResource("AnimationNodeStateMachineTransition_sxmkw"), "AerialEvadeFast", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_nolyx"), "AerialEvadeFast", "FrontTwistFlipFast", SubResource("AnimationNodeStateMachineTransition_nele4"), "FrontTwistFlipFast", "AerialEvadeFast", SubResource("AnimationNodeStateMachineTransition_ahun8"), "GroundBlendSpace", "FrontTwistFlipFast", SubResource("AnimationNodeStateMachineTransition_4n1fb"), "FrontTwistFlipFast", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_w13l8"), "GroundBlendSpace", "QuickSpinCW", SubResource("AnimationNodeStateMachineTransition_3sep5"), "QuickSpinCW", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_6pr6l"), "GroundBlendSpace", "QuickSpinCCW", SubResource("AnimationNodeStateMachineTransition_wuyjb"), "QuickSpinCCW", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_af52k"), "Start", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_vq4bk"), "GroundBlendSpace", "AerialBlendSpace", SubResource("AnimationNodeStateMachineTransition_b57p5"), "AerialBlendSpace", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_pffs7"), "AerialBlendSpace", "AirDodge", SubResource("AnimationNodeStateMachineTransition_c3ntk"), "AirDodge", "AerialBlendSpace", SubResource("AnimationNodeStateMachineTransition_ixnca"), "GroundBlendSpace", "UseStabilizer", SubResource("AnimationNodeStateMachineTransition_vfwdk"), "UseStabilizer", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_05va5"), "GroundBlendSpace", "XBossGrab", SubResource("AnimationNodeStateMachineTransition_17a15"), "XBossGrab", "GroundBlendSpace", SubResource("AnimationNodeStateMachineTransition_me2yl")]
+graph_offset = Vector2(-284.566, 37.9621)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wg7n8"]
-graph_offset = Vector2(-257.28, 164.16)
+graph_offset = Vector2(-105.6, 130.56)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_auidk")
 nodes/StateMachine/position = Vector2(70, 150)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -249,6 +262,7 @@ tree_root = SubResource("AnimationNodeBlendTree_wg7n8")
 anim_player = NodePath("../CotuAnims/AnimationPlayer")
 advance_expression_base_node = NodePath("..")
 active = true
+parameters/StateMachine/conditions/XBossGrab = false
 parameters/StateMachine/conditions/just_dodged = false
 parameters/StateMachine/conditions/just_instant_rethrew = false
 parameters/StateMachine/conditions/use_item = false
