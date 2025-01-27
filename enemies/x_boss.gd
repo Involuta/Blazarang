@@ -456,6 +456,10 @@ func dash():
 func dash_grab_mvmt():
 	velocity = 1.5 * dash_speed * -transform.basis.z
 
+func levitate_up_for_frames(frames: int, dist: float):
+	var mvmt_tween = get_tree().create_tween()
+	mvmt_tween.tween_property(self, "global_position", Vector3.UP * dist, frames * get_physics_process_delta_time()).as_relative()
+
 func teleport():
 	dash_back_canceled = true
 	global_position.x = x_icon_pos.global_position.x

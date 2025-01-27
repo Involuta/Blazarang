@@ -40,8 +40,9 @@ var buff_list := [Globals.BUFFS.DAMAGE, Globals.BUFFS.DAMAGE, Globals.BUFFS.DAMA
 var next_buff_index := 0
 var throw_self_damage := 18.0
 
-var destabilized = false
-var grabbed = false
+var destabilized := false
+var grabbed := false
+var stunned := false
 var grab_pos_node : Node3D
 
 var roserang := preload("res://rang/roserang.tscn")
@@ -71,6 +72,8 @@ func _ready():
 	
 	Globals.destabilize.connect(on_destabilize)
 	Globals.stabilize.connect(on_stabilize)
+	
+	anim_tree.active = true
 
 func on_destabilize():
 	destabilized = true
@@ -86,6 +89,12 @@ func release_from_grab():
 	grab_pos_node = null
 	grabbed = false
 	anim_tree.set("parameters/StateMachine/conditions/XBossGrab", false)
+
+func stun():
+	stunned = true
+
+func end_stun():
+	stunned = false
 
 func start_grab_anim(hitbox_name):
 	match(hitbox_name):
@@ -131,7 +140,16 @@ func _physics_process(delta):
 	
 	# Grabbed logic
 	if grabbed:
-		global_position = grab_pos_node.global_position + .2 * Vector3.DOWN
+		global_position = grab_pos_node.global_position - .5 * Vector3.UP
+		return
+	
+	# Falling
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+	
+	# Stunned logic
+	if stunned:
+		move_and_slide()
 		return
 	
 	# Dodge logic
@@ -149,9 +167,6 @@ func _physics_process(delta):
 		grounded_speed = WALK_SPEED
 	
 	# Cotu movement
-	if not is_on_floor():
-		velocity.y -= gravity * delta
-	
 	walk_input = Input.get_vector("WalkLeft", "WalkRight", "WalkForward", "WalkBackward")
 	if walk_input.x != 0:
 		moving_right = walk_input.x > 0
