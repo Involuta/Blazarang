@@ -78,3 +78,4 @@ res://globals.gd
 res://cotu/cotu_anims/x_boss_grab.res
 res://enemies/enemy_anims/x_dashgrab_whiff.res
 res://enemies/enemy_anims/x_dashgrab_punish.res
+res://enemies/x_boss.gd

@@ -96,6 +96,39 @@ func start_grab_anim(hitbox_name):
 			print("Error in CotuControl: hitbox name from CotuHurtbox not found")
 
 func _physics_process(delta):
+	# Set look angle
+	look_angle = camera_twist_pivot.basis.get_euler().y
+	
+	# Camera movement/orientation; ui_cancel means esc
+	if Input.is_action_just_pressed("ui_cancel"):
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
+	# Lock on logic; if target no longer exists, lock off
+	if !lock_on_target:
+		lock_off()
+	if using_controller:
+		camera_twist_input = Input.get_axis("LookRight", "LookLeft") * joystick_camera_sensitivity
+		camera_pitch_input = Input.get_axis("LookUp", "LookDown") * joystick_camera_sensitivity
+	if locked_on:
+		camera_twist_pivot.look_at(lock_on_target.global_position + 2*Vector3.DOWN)
+	else:
+		camera_twist_pivot.rotate_y(camera_twist_input)
+	# While locked on, you can look up and down, but not left and right
+	camera_pitch_pivot.rotate_x(camera_pitch_input)
+	camera_pitch_pivot.rotation.x = clamp(
+		camera_pitch_pivot.rotation.x,
+		deg_to_rad(-camera_pitch_limit_deg),
+		deg_to_rad(camera_pitch_limit_deg))
+	# These 2 lines prevent the camera from continuing to move in the last direction the mouse was moved in
+	camera_twist_input = 0
+	camera_pitch_input = 0
+	
+	# Send updates to background camera
+	Globals.camera_updated.emit(camera_twist_pivot.rotation + camera_pitch_pivot.rotation)
+	
+	# Camera positioning based on level geometry
+	place_camera()
+	
 	if grabbed:
 		global_position = grab_pos_node.global_position
 		return
@@ -166,39 +199,6 @@ func _physics_process(delta):
 		target.start_following_cotu()
 		next_buff_index = 0
 		ui.clear_buffs()
-	
-	# Set look angle
-	look_angle = camera_twist_pivot.basis.get_euler().y
-	
-	# Camera movement/orientation; ui_cancel means esc
-	if Input.is_action_just_pressed("ui_cancel"):
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	
-	# Lock on logic; if target no longer exists, lock off
-	if !lock_on_target:
-		lock_off()
-	if using_controller:
-		camera_twist_input = Input.get_axis("LookRight", "LookLeft") * joystick_camera_sensitivity
-		camera_pitch_input = Input.get_axis("LookUp", "LookDown") * joystick_camera_sensitivity
-	if locked_on:
-		camera_twist_pivot.look_at(lock_on_target.global_position + 2*Vector3.DOWN)
-	else:
-		camera_twist_pivot.rotate_y(camera_twist_input)
-	# While locked on, you can look up and down, but not left and right
-	camera_pitch_pivot.rotate_x(camera_pitch_input)
-	camera_pitch_pivot.rotation.x = clamp(
-		camera_pitch_pivot.rotation.x,
-		deg_to_rad(-camera_pitch_limit_deg),
-		deg_to_rad(camera_pitch_limit_deg))
-	# These 2 lines prevent the camera from continuing to move in the last direction the mouse was moved in
-	camera_twist_input = 0
-	camera_pitch_input = 0
-	
-	# Send updates to background camera
-	Globals.camera_updated.emit(camera_twist_pivot.rotation + camera_pitch_pivot.rotation)
-	
-	# Camera positioning based on level geometry
-	place_camera()
 	
 	if Input.is_action_just_pressed("UseItem"):
 		anim_tree.set("parameters/StateMachine/conditions/use_item", true)
