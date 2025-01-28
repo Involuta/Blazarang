@@ -24,7 +24,7 @@ func _ready():
 func _physics_process(_delta):
 	var dist_to_cotu := global_position.distance_to(cotu.global_position)
 	var dir_to_cotu := global_position.direction_to(cotu.global_position)
-	if following_cotu:
+	if following_cotu and not cotu.grabbed and not cotu.stunned:
 		global_position += dir_to_cotu * (dist_to_cotu / 4)
 	
 	if (cotu.is_on_floor() and dist_to_cotu < follow_cotu_min_dist) or (!cotu.is_on_floor() and cotu.walk_input == Vector2.ZERO):

@@ -101,8 +101,8 @@ func release_from_grab():
 
 func launch_from_grabber():
 	velocity = 100 * grab_pos_node.global_position.direction_to(global_position)
-	velocity.y = 0
-	await get_tree().create_timer(.5).timeout
+	velocity.y = -1
+	await get_tree().create_timer(.25).timeout
 	grab_pos_node = null
 
 func stun():
@@ -164,6 +164,7 @@ func _physics_process(delta):
 	
 	# Stunned logic
 	if stunned:
+		print(velocity)
 		move_and_slide()
 		return
 	
