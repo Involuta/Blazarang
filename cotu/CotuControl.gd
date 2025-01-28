@@ -84,17 +84,21 @@ func on_stabilize():
 func emit_stabilize():
 	Globals.stabilize.emit()
 
-func release_from_grab():
-	Globals.XBossGrab = false
-	grab_pos_node = null
-	grabbed = false
-	anim_tree.set("parameters/StateMachine/conditions/XBossGrab", false)
+func change_max_cam_dist_over_secs(new_max_cam_dist: float, duration: float):
+	var cam_tween := get_tree().create_tween()
+	cam_tween.tween_property(self, "max_cam_dist", new_max_cam_dist, duration)
 
 func turn_towards_grabber():
 	armature.look_at(grab_pos_node.get_parent().global_position)
 	armature.rotation.y += PI
 	armature.rotation.x = 0
 	armature.rotation.z = 0
+
+func release_from_grab():
+	Globals.XBossGrab = false
+	grab_pos_node = null
+	grabbed = false
+	anim_tree.set("parameters/StateMachine/conditions/XBossGrab", false)
 
 func stun():
 	stunned = true
