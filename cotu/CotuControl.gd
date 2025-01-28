@@ -96,9 +96,14 @@ func turn_towards_grabber():
 
 func release_from_grab():
 	Globals.XBossGrab = false
-	grab_pos_node = null
 	grabbed = false
 	anim_tree.set("parameters/StateMachine/conditions/XBossGrab", false)
+
+func launch_from_grabber():
+	velocity = 100 * grab_pos_node.global_position.direction_to(global_position)
+	velocity.y = 0
+	await get_tree().create_timer(.5).timeout
+	grab_pos_node = null
 
 func stun():
 	stunned = true

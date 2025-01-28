@@ -231,7 +231,7 @@ bones/22/rotation = Quaternion(0.248953, 0.0450928, -0.0257469, 0.967123)
 bones/23/rotation = Quaternion(0.280712, -0.231213, 0.0698784, 0.928902)
 
 [node name="Head" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="0"]
-transform = Transform3D(1, -2.2468e-16, -2.11031e-16, 2.29675e-16, 0.0871565, 0.996195, -2.04995e-16, -0.996195, 0.0871565, 1.21019e-10, 21.2174, -1.0446)
+transform = Transform3D(1, -2.14835e-16, -1.56357e-16, 1.74164e-16, 0.0871566, 0.996195, -2.00225e-16, -0.996195, 0.0871566, 1.2102e-10, 21.2173, -1.0446)
 bone_name = "mixamorig_Head"
 bone_idx = 5
 
@@ -264,7 +264,7 @@ surface_material_override/7 = SubResource("StandardMaterial3D_tlfdu")
 surface_material_override/8 = SubResource("StandardMaterial3D_5bl6g")
 
 [node name="LeftArm" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.446637, 0.278945, -0.85012, 0.312189, -0.939028, -0.1441, -0.838483, -0.201038, -0.506488, 3.5919, 20.505, -0.186871)
+transform = Transform3D(0.446637, 0.278946, -0.85012, 0.312189, -0.939028, -0.1441, -0.838483, -0.201038, -0.506489, 3.5919, 20.505, -0.18687)
 bone_name = "mixamorig_LeftArm"
 bone_idx = 8
 
@@ -281,7 +281,7 @@ process_material = SubResource("ParticleProcessMaterial_gocoe")
 draw_pass_1 = SubResource("BoxMesh_uuqt1")
 
 [node name="RightArm" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.498514, -0.255044, 0.828515, -0.335881, -0.937913, -0.0866221, 0.799167, -0.2351, -0.553227, -3.5919, 20.505, -0.152357)
+transform = Transform3D(0.498514, -0.255042, 0.828515, -0.33588, -0.937913, -0.0866209, 0.799167, -0.2351, -0.553227, -3.5919, 20.505, -0.152356)
 bone_name = "mixamorig_RightArm"
 bone_idx = 12
 
@@ -298,7 +298,7 @@ process_material = SubResource("ParticleProcessMaterial_gocoe")
 draw_pass_1 = SubResource("BoxMesh_uuqt1")
 
 [node name="LeftHand" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.998417, 0.0401369, 0.0393836, 0.0404142, -0.999163, -0.00627109, 0.0390987, 0.00785283, -0.999204, 5.12474, 12.5884, -0.507349)
+transform = Transform3D(0.998417, 0.0401369, 0.039384, 0.0404142, -0.999163, -0.00627181, 0.039099, 0.00785361, -0.999204, 5.12475, 12.5883, -0.507345)
 bone_name = "mixamorig_LeftHand"
 bone_idx = 10
 
