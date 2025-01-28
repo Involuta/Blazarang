@@ -90,6 +90,12 @@ func release_from_grab():
 	grabbed = false
 	anim_tree.set("parameters/StateMachine/conditions/XBossGrab", false)
 
+func turn_towards_grabber():
+	armature.look_at(grab_pos_node.get_parent().global_position)
+	armature.rotation.y += PI
+	armature.rotation.x = 0
+	armature.rotation.z = 0
+
 func stun():
 	stunned = true
 

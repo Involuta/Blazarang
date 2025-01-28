@@ -309,6 +309,7 @@ func cotu_grabbed():
 	# Anim tree can't read Globals values directly from advance expressions
 	return Globals.XBossGrab
 
+
 func queue_attack(dist_type):
 	attack_queued = true
 	if phase2:

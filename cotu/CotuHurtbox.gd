@@ -36,6 +36,7 @@ func on_hit(hitbox):
 		Globals.XBossGrab = true
 		parent.grab_pos_node = hitbox.get_parent()
 		parent.grabbed = true
+		parent.turn_towards_grabber()
 		parent.start_grab_anim(hitbox.name)
 	else:
 		super(hitbox)
