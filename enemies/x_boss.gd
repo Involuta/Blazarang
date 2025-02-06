@@ -454,7 +454,7 @@ func dash():
 	velocity = dash_speed * -transform.basis.z
 
 func dash_grab_mvmt():
-	velocity = 1.5 * dash_speed * -transform.basis.z
+	velocity = 2 * dash_speed * -transform.basis.z
 
 func levitate_up_for_frames(frames: int, dist: float):
 	var mvmt_tween = get_tree().create_tween()

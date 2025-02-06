@@ -32,3 +32,5 @@ res://enemies/enemy_anims/x_lunge_facerain.res
 res://icon/icon.tscn
 res://icon/icon.gd
 res://enemies/enemy_anims/x_dashgrab.res
+res://enemies/enemy_anims/x_dashgrab_punish.res
+res://cotu/cotu_anims/use_item_stabilizer.res

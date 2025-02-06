@@ -100,10 +100,11 @@ func release_from_grab():
 	anim_tree.set("parameters/StateMachine/conditions/XBossGrab", false)
 
 func launch_from_grabber():
-	velocity = 100 * grab_pos_node.global_position.direction_to(global_position)
-	velocity.y = -1
-	await get_tree().create_timer(.25).timeout
+	velocity = 100 * grab_pos_node.get_parent().global_position.direction_to(global_position)
+	velocity.y = 20
+	await get_tree().create_timer(2).timeout
 	grab_pos_node = null
+	velocity = Vector3.ZERO
 
 func stun():
 	stunned = true
@@ -164,7 +165,6 @@ func _physics_process(delta):
 	
 	# Stunned logic
 	if stunned:
-		print(velocity)
 		move_and_slide()
 		return
 	
