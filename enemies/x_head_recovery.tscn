@@ -1,0 +1,97 @@
+[gd_scene load_steps=8 format=3 uid="uid://b4cjh4hgxmclr"]
+
+[ext_resource type="Script" path="res://DisappearNode.gd" id="1_4o26w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dk2pf"]
+shading_mode = 0
+albedo_color = Color(1.5, 1.5, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_h2kxi"]
+material = SubResource("StandardMaterial3D_dk2pf")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3f04o"]
+shading_mode = 0
+albedo_color = Color(1.5, 1.5, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wvmy3"]
+material = SubResource("StandardMaterial3D_3f04o")
+
+[sub_resource type="Animation" id="Animation_d7qbt"]
+resource_name = "recover_head"
+length = 0.50001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SunMesh:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(4, 4, 4), Vector3(4, 4, 4), Vector3(0.1, 0.1, 0.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SunMesh:transparency")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.4, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TPColumn:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2, 50, 2), Vector3(0.01, 50, 0.01)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TPColumn:transparency")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sx8d6"]
+_data = {
+"recover_head": SubResource("Animation_d7qbt")
+}
+
+[node name="XHeadRecovery" type="Node3D"]
+script = ExtResource("1_4o26w")
+disappear_secs = 1.5
+
+[node name="SunMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, -7.70367e-16, 1.56504e-16, 7.70367e-16, 0.1, -2.30978e-09, -1.56504e-16, 2.30978e-09, 0.1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+mesh = SubResource("CapsuleMesh_h2kxi")
+skeleton = NodePath("../..")
+
+[node name="TPColumn" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.01, 0, 0, 0, 50, 0, 0, 0, 0.01, 2.08165e-12, 50, 2.08165e-12)
+transparency = 1.0
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_wvmy3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "recover_head"
+libraries = {
+"": SubResource("AnimationLibrary_sx8d6")
+}

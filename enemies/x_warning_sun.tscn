@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://enemies/x_warning_sun.gd" id="1_as52f"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qvi6s"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h4mtd"]
 shading_mode = 0
 albedo_color = Color(2, 0.92549, 0.537255, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_35e2b"]
-material = SubResource("StandardMaterial3D_qvi6s")
+material = SubResource("StandardMaterial3D_h4mtd")
 radius = 0.25
 height = 0.5
 
@@ -49,7 +49,8 @@ script = ExtResource("1_as52f")
 max_shake_dist = 0.3
 
 [node name="SunMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, -7.70367e-15, 1.56504e-15, 7.70367e-15, 1, -2.30978e-08, -1.56504e-15, 2.30978e-08, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(2, -1.54073e-14, 3.13008e-15, 1.54073e-14, 2, -4.61956e-08, -3.13008e-15, 4.61956e-08, 2, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transparency = 1.0
 mesh = SubResource("CapsuleMesh_35e2b")
 skeleton = NodePath("../..")
 

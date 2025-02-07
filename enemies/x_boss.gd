@@ -471,6 +471,15 @@ func teleport():
 	tp_inst.global_position = global_position
 	tp_inst.global_position.y = x_icon_pos.global_position.y
 
+func recover_head():
+	if x_mesh_head.visible:
+		return
+	var recovery_inst = load("res://enemies/x_head_recovery.tscn").instantiate()
+	add_child(recovery_inst)
+	while not recovery_inst.is_queued_for_deletion():
+		recovery_inst.global_position = x_mesh_head.global_position
+		await get_tree().create_timer(get_physics_process_delta_time()).timeout
+
 func slipnslice_rush():
 	stop_dist = slipnslice_stop_dist
 	velocity = slipnslice_speed * -transform.basis.z

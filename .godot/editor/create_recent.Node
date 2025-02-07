@@ -1,3 +1,4 @@
+AnimationPlayer
 CollisionShape3D
 Area3D
 BoneAttachment3D
@@ -7,7 +8,6 @@ NavigationAgent3D
 BallSpawner
 MeshInstance3D
 OmniLight3D
-AnimationPlayer
 StaticBody3D
 Node3D
 RigidBody3D

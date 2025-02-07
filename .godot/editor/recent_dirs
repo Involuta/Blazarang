@@ -1,3 +1,4 @@
+res://
 res://enemies/enemy_anims
 res://cotu/cotu_anims
 res://levels/x_boss_level/background_nodes
@@ -9,7 +10,6 @@ res://glb_inherited_scenes
 res://levels
 res://levels/
 res://levels/hub
-res://
 res://level_maps
 res://textures
 res://enemies
