@@ -99,6 +99,9 @@ func release_from_grab():
 	grabbed = false
 	anim_tree.set("parameters/StateMachine/conditions/XBossGrab", false)
 
+func stop_mvmt():
+	velocity = Vector3.ZERO
+
 func launch_from_grabber():
 	velocity = 100 * grab_pos_node.get_parent().global_position.direction_to(global_position)
 	velocity.y = 20

@@ -70,3 +70,4 @@ res://cotu/cotu_anims/x_boss_grab.res
 res://cotu/cotu_anims_outline.tres
 res://cotu/cotu_anims_base_material.tres
 res://cotu/cotu_cb_main.tscn
+res://cotu/CotuControl.gd
