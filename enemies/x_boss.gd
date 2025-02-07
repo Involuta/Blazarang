@@ -456,9 +456,9 @@ func dash():
 func dash_grab_mvmt():
 	velocity = 2 * dash_speed * -transform.basis.z
 
-func levitate_up_for_frames(frames: int, dist: float):
-	var mvmt_tween = get_tree().create_tween()
-	mvmt_tween.tween_property(self, "global_position", Vector3.UP * dist, frames * get_physics_process_delta_time()).as_relative()
+func levitate_up_for_frames(frames: int, vel: float):
+	velocity.y = vel
+	#await get_tree().create_timer(frames * get_physics_process_delta_time()).timeout
 
 func teleport():
 	dash_back_canceled = true
@@ -476,7 +476,7 @@ func recover_head():
 		return
 	var recovery_inst = load("res://enemies/x_head_recovery.tscn").instantiate()
 	add_child(recovery_inst)
-	while not recovery_inst.is_queued_for_deletion():
+	while is_instance_valid(recovery_inst):
 		recovery_inst.global_position = x_mesh_head.global_position
 		await get_tree().create_timer(get_physics_process_delta_time()).timeout
 
@@ -979,6 +979,17 @@ func icon_recall_right_arm():
 func icon_recall_right_arm_frame(lerp_val):
 	right_arm.rotation_degrees = rotation_degrees + Vector3(0, 90, 0)
 	right_arm.global_position = right_arm.global_position.lerp(x_icon.global_position + 2.5 * Vector3.UP, lerp_val)
+
+func dash_grab_punish_dash_to_center():
+	var center_pos := Vector3.UP * min_y_pos
+	look_at(center_pos)
+	var fr_tween = get_tree().create_tween()
+	await fr_tween.tween_property(self, "global_position", center_pos, 1.3).set_ease(Tween.EASE_IN).finished
+	rotation.x = 0
+	rotation.z = 0
+
+func fast_dash():
+	velocity = 1 * dash_speed * -transform.basis.z
 
 func hide_floating_right_arm():
 	right_arm.visible = false
