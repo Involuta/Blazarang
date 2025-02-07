@@ -457,6 +457,8 @@ func dash_grab_mvmt():
 	velocity = 2 * dash_speed * -transform.basis.z
 
 func levitate_up_for_frames(frames: int, vel: float):
+	# Without this line, X's fall protection (which sets his y vel to 0 when his global y is below the min) would prevent his y vel from changing
+	global_position.y = min_y_pos + .01
 	velocity.y = vel
 	#await get_tree().create_timer(frames * get_physics_process_delta_time()).timeout
 
