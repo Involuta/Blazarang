@@ -984,7 +984,7 @@ func dash_grab_punish_dash_to_center():
 	var center_pos := Vector3.UP * min_y_pos
 	look_at(center_pos)
 	var fr_tween = get_tree().create_tween()
-	await fr_tween.tween_property(self, "global_position", center_pos, 1.3).set_ease(Tween.EASE_IN).finished
+	await fr_tween.tween_property(self, "global_position", center_pos, 70*get_physics_process_delta_time()).set_ease(Tween.EASE_IN).finished
 	rotation.x = 0
 	rotation.z = 0
 
