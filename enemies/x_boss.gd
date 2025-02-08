@@ -982,6 +982,10 @@ func icon_recall_right_arm_frame(lerp_val):
 	right_arm.rotation_degrees = rotation_degrees + Vector3(0, 90, 0)
 	right_arm.global_position = right_arm.global_position.lerp(x_icon.global_position + 2.5 * Vector3.UP, lerp_val)
 
+func dash_grab_punish_rotate_for_frames(frames: int):
+	var rot_tween = get_tree().create_tween()
+	await rot_tween.tween_property(self, "rotation", PI * Vector3.UP, frames*get_physics_process_delta_time()).as_relative().finished
+
 func dash_grab_punish_dash_to_center():
 	var center_pos := Vector3.UP * min_y_pos
 	look_at(center_pos)

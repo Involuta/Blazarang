@@ -73,3 +73,4 @@ res://cotu/cotu_cb_main.tscn
 res://cotu/CotuControl.gd
 res://bg_camera.gd
 res://globals.gd
+res://cotu/cotu_anims/use_item_stabilizer.res
