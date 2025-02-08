@@ -152,7 +152,8 @@ func _physics_process(delta):
 	camera_pitch_input = 0
 	
 	# Send updates to background camera
-	Globals.camera_updated.emit(camera_twist_pivot.rotation + camera_pitch_pivot.rotation)
+	Globals.cam_pos_updated.emit(global_position)
+	Globals.cam_rot_updated.emit(camera_twist_pivot.rotation + camera_pitch_pivot.rotation)
 	
 	# Camera positioning based on level geometry
 	place_camera()

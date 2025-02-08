@@ -71,3 +71,5 @@ res://cotu/cotu_anims_outline.tres
 res://cotu/cotu_anims_base_material.tres
 res://cotu/cotu_cb_main.tscn
 res://cotu/CotuControl.gd
+res://bg_camera.gd
+res://globals.gd
