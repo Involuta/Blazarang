@@ -1,17 +1,12 @@
-[gd_scene load_steps=50 format=3 uid="uid://icbfj05gq8vk"]
+[gd_scene load_steps=46 format=3 uid="uid://icbfj05gq8vk"]
 
 [ext_resource type="Script" path="res://cotu/CotuControl.gd" id="1_aleek"]
-[ext_resource type="PackedScene" uid="uid://jv0ogh4h31nr" path="res://cotu/shakeable_camera.tscn" id="2_b6h2k"]
 [ext_resource type="Script" path="res://cotu/CotuHurtbox.gd" id="2_fvpfg"]
 [ext_resource type="PackedScene" uid="uid://bhf6sxuvk61ia" path="res://cotu/cotu_death_particles.tscn" id="3_no5xx"]
 [ext_resource type="PackedScene" uid="uid://duanou50282es" path="res://glb_inherited_scenes/cotu_anims_24.tscn" id="4_gcwfx"]
-[ext_resource type="Material" uid="uid://yct3jaquatmq" path="res://cotu/cotu_anims_base_material.tres" id="5_25aol"]
-[ext_resource type="Material" uid="uid://be7mwluw32wnh" path="res://cotu/cotu_anims_eyes.tres" id="6_d0udm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kxw61"]
 radius = 0.25
-
-[sub_resource type="SphereMesh" id="SphereMesh_dx5gt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d7hp7"]
 shading_mode = 0
@@ -227,19 +222,6 @@ script = ExtResource("1_aleek")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_kxw61")
 
-[node name="CameraTwistPivot" type="Node3D" parent="."]
-
-[node name="CameraPitchPivot" type="Node3D" parent="CameraTwistPivot"]
-
-[node name="CameraVisualObject" type="MeshInstance3D" parent="CameraTwistPivot/CameraPitchPivot"]
-transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 2.08165e-12, 4)
-visible = false
-gi_mode = 0
-mesh = SubResource("SphereMesh_dx5gt")
-skeleton = NodePath("")
-
-[node name="ShakeableCamera" parent="CameraTwistPivot/CameraPitchPivot/CameraVisualObject" instance=ExtResource("2_b6h2k")]
-
 [node name="RangPointerPivot" type="Node3D" parent="."]
 
 [node name="RangPointer" type="MeshInstance3D" parent="RangPointerPivot"]
@@ -307,17 +289,6 @@ bones/61/rotation = Quaternion(-0.146336, -2.70298e-06, -3.8358e-07, 0.989235)
 bones/62/rotation = Quaternion(0.583741, -0.0823503, 0.0620066, 0.805369)
 bones/63/rotation = Quaternion(0.284469, 0.0939778, -0.0275092, 0.953671)
 
-[node name="BodyHoodie" parent="CotuAnims/Armature/Skeleton3D" index="0"]
-surface_material_override/0 = ExtResource("5_25aol")
-
-[node name="BodyPants" parent="CotuAnims/Armature/Skeleton3D" index="1"]
-surface_material_override/0 = ExtResource("5_25aol")
-
-[node name="Ch36_001" parent="CotuAnims/Armature/Skeleton3D" index="2"]
-surface_material_override/0 = ExtResource("5_25aol")
-
-[node name="Face" parent="CotuAnims/Armature/Skeleton3D" index="3"]
-surface_material_override/0 = ExtResource("6_d0udm")
-
 [editable path="DeathParticles"]
 [editable path="CotuAnims"]
+[editable path="CotuAnims/CameraTwistPivot/CameraPitchPivot/CameraVisualObject/ShakeableCamera"]

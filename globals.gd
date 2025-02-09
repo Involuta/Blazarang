@@ -1,5 +1,6 @@
 extends Node
 
+# Tells X whether he grabbed Cotu after a grab attempt. Set by CotuHurtbox and CotuControl.
 var XBossGrab := false
 
 signal cam_pos_updated(new_pos: Vector3)

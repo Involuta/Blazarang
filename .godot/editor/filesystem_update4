@@ -74,3 +74,5 @@ res://cotu/CotuControl.gd
 res://bg_camera.gd
 res://globals.gd
 res://cotu/cotu_anims/use_item_stabilizer.res
+res://glb_inherited_scenes/cotu_anims_24.tscn
+res://cotu/CotuHurtbox.gd

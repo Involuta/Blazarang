@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://duanou50282es"]
+[gd_scene load_steps=6 format=3 uid="uid://duanou50282es"]
 
 [ext_resource type="PackedScene" uid="uid://4uixk52roj0q" path="res://glb_imports/ClothesEyesAnimRig.glb" id="1_kfspi"]
+[ext_resource type="Material" uid="uid://yct3jaquatmq" path="res://cotu/cotu_anims_base_material.tres" id="2_ioqk1"]
+[ext_resource type="Material" uid="uid://be7mwluw32wnh" path="res://cotu/cotu_anims_eyes.tres" id="3_x01tm"]
+[ext_resource type="PackedScene" uid="uid://jv0ogh4h31nr" path="res://cotu/shakeable_camera.tscn" id="4_pf46s"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_gvwq5"]
 
 [node name="CotuAnims25" instance=ExtResource("1_kfspi")]
 
@@ -32,3 +37,28 @@ bones/60/scale = Vector3(1, 0.999999, 1)
 bones/61/rotation = Quaternion(-0.284182, -2.62531e-06, -7.63669e-07, 0.95877)
 bones/62/rotation = Quaternion(0.583588, -0.0277142, -0.0074642, 0.811543)
 bones/63/rotation = Quaternion(0.284463, 0.0939783, -0.0275081, 0.953673)
+
+[node name="BodyHoodie" parent="Armature/Skeleton3D" index="0"]
+surface_material_override/0 = ExtResource("2_ioqk1")
+
+[node name="BodyPants" parent="Armature/Skeleton3D" index="1"]
+surface_material_override/0 = ExtResource("2_ioqk1")
+
+[node name="Ch36_001" parent="Armature/Skeleton3D" index="2"]
+surface_material_override/0 = ExtResource("2_ioqk1")
+
+[node name="Face" parent="Armature/Skeleton3D" index="3"]
+surface_material_override/0 = ExtResource("3_x01tm")
+
+[node name="CameraTwistPivot" type="Node3D" parent="." index="2"]
+
+[node name="CameraPitchPivot" type="Node3D" parent="CameraTwistPivot" index="0"]
+
+[node name="CameraVisualObject" type="MeshInstance3D" parent="CameraTwistPivot/CameraPitchPivot" index="0"]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 2.08165e-12, 4)
+visible = false
+gi_mode = 0
+mesh = SubResource("SphereMesh_gvwq5")
+skeleton = NodePath("")
+
+[node name="ShakeableCamera" parent="CameraTwistPivot/CameraPitchPivot/CameraVisualObject" index="0" instance=ExtResource("4_pf46s")]
