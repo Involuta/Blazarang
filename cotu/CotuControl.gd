@@ -48,9 +48,9 @@ var grab_pos_node : Node3D
 var roserang := preload("res://rang/roserang.tscn")
 var roserang_instance = null
 @onready var physical_collider := $CollisionShape3D
-@onready var camera_twist_pivot := $CotuAnims/CameraTwistPivot
-@onready var camera_pitch_pivot := $CotuAnims/CameraTwistPivot/CameraPitchPivot
-@onready var camera := $CotuAnims/CameraTwistPivot/CameraPitchPivot/CameraVisualObject
+@onready var camera_twist_pivot := $CameraTwistPivot
+@onready var camera_pitch_pivot := $CameraTwistPivot/CameraPitchPivot
+@onready var camera := $CameraTwistPivot/CameraPitchPivot/CameraVisualObject
 @onready var rang_pointer_pivot := $RangPointerPivot
 @onready var armature := $CotuAnims/Armature
 @onready var anim_tree := $AnimationTree
@@ -89,6 +89,8 @@ func change_max_cam_dist_over_secs(new_max_cam_dist: float, duration: float):
 	cam_tween.tween_property(self, "max_cam_dist", new_max_cam_dist, duration)
 
 func release_from_grab():
+	grabbed = false
+	armature.visible = true
 	Globals.XBossGrab = false
 	anim_tree.set("parameters/StateMachine/conditions/XBossGrab", false)
 
@@ -102,6 +104,8 @@ func end_stun():
 	stunned = false
 
 func start_grab_anim(hitbox_name):
+	grabbed = true
+	armature.visible = false
 	match(hitbox_name):
 		"XBossGrab":
 			Globals.XBossGrab = true
@@ -143,6 +147,11 @@ func _physics_process(delta):
 	
 	# Camera positioning based on level geometry
 	place_camera()
+	
+	# Grabbed logic
+	if grabbed:
+		global_position = grab_pos_node.global_position - .5 * Vector3.UP
+		return
 	
 	# Falling
 	if not is_on_floor():
