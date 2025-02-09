@@ -237,6 +237,7 @@ mesh = SubResource("SphereMesh_h5dcv")
 skeleton = NodePath("")
 
 [node name="ShakeableCamera" parent="CameraTwistPivot/CameraPitchPivot/CameraVisualObject" instance=ExtResource("2_b6h2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 
 [node name="RangPointerPivot" type="Node3D" parent="."]
 
