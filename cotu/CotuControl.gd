@@ -85,6 +85,7 @@ func emit_stabilize():
 	Globals.stabilize.emit()
 
 func change_max_cam_dist_over_secs(new_max_cam_dist: float, duration: float):
+	# This needs to be a tween instead of keyframes bc modifying max_cam_dist via keyframes will cause the property to be reset to 0 whenever there aren't any keyframes for it. You'd then need to put at least 1 keyframe for this property for every single anim
 	var cam_tween := get_tree().create_tween()
 	cam_tween.tween_property(self, "max_cam_dist", new_max_cam_dist, duration)
 

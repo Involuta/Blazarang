@@ -1,3 +1,4 @@
+MeshInstance3D
 BoneAttachment3D
 AnimationPlayer
 CollisionShape3D
@@ -6,7 +7,6 @@ AnimationTree
 CharacterBody3D
 NavigationAgent3D
 BallSpawner
-MeshInstance3D
 OmniLight3D
 StaticBody3D
 Node3D

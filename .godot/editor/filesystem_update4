@@ -77,3 +77,5 @@ res://cotu/cotu_anims/use_item_stabilizer.res
 res://glb_inherited_scenes/cotu_anims_24.tscn
 res://cotu/CotuHurtbox.gd
 res://glb_inherited_scenes/x_boss_meshes.tscn
+res://enemies/x_boss_grab.gd
+res://enemies/grab_hitbox.gd
