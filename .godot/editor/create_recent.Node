@@ -1,7 +1,7 @@
+BoneAttachment3D
 AnimationPlayer
 CollisionShape3D
 Area3D
-BoneAttachment3D
 AnimationTree
 CharacterBody3D
 NavigationAgent3D
