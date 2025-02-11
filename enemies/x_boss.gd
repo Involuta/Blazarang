@@ -793,7 +793,7 @@ func start_strafe_laser():
 	behav_state = STRAFE_FOLLOW
 	strafing_left = false
 	# Wait before increasing this
-	await get_tree().create_timer(.35).timeout
+	await get_tree().create_timer(.08).timeout
 	follow_speed *= 2
 
 func strafe_laser_deploy_arm():
