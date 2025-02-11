@@ -28,3 +28,6 @@ res://enemies/x_boss.tscn
 res://enemies/x_boss.gd
 res://cotu/CotuControl.gd
 res://globals.gd
+res://glb_inherited_scenes/x_right_arm.tscn
+res://glb_inherited_scenes/x_arm.gd
+res://glb_inherited_scenes/x_left_arm.tscn
