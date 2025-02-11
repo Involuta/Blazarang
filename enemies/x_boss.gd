@@ -114,7 +114,7 @@ var semicircle_center := Vector3.ZERO
 @export var dash_speed := 40.0
 @export var dash_back_speed := 36.0
 @export var side_teleport_dist_from_target := 7.5
-@export var front_teleport_dist_from_target := 1.5
+@export var front_teleport_dist_from_target := 9.0
 @export var slipnslice_speed := 20.0
 @export var slipnslice_stop_dist := 1.0
 @export var superman_fwd_speed := 20.0
@@ -133,17 +133,17 @@ var semicircle_center := Vector3.ZERO
 @export var lunge_facerain_float_dist := 5.0
 @export var lunge_facerain_bomb_speed := 9
 @export var lunge_laser_diagonal_dash_dist := 25.0
-@export var far_strafe_laser_dist := 12.5
-@export var very_far_strafe_laser_dist := 16.0
+@export var far_strafe_laser_dist := 16.0
+@export var very_far_strafe_laser_dist := 22.0
 @export var semicircle_dash_radius := 20.0
-@export var strafeslice_up_speed := .5
-@export var strafeslice_down_speed := 6.0
+@export var strafeslice_up_speed := 5.0
+@export var strafeslice_down_speed := 5.0
 @export var strafeslice_rush_speed := 40.0
 @export var dual_blade_dash_back_dist := 21.0
 @export var dual_blade_dash_in_speed := 40.0
 @export var dual_blade_dash_stop_dist := 2.0
 @export var dual_blade_dash_leap_height := 2.0
-@export var diamond_rain_radius := 3.0
+@export var diamond_rain_radius := 6.0
 
 var phase2 := false
 var param_path_base := "parameters/StateMachine/conditions/"
@@ -792,9 +792,10 @@ func lunge_laser_diagonal_dash():
 func start_strafe_laser():
 	behav_state = STRAFE_FOLLOW
 	strafing_left = false
-	# Wait before increasing this
-	await get_tree().create_timer(.08).timeout
-	follow_speed *= 2
+	var follow_speed_tween = get_tree().create_tween()
+	#await get_tree().create_timer(.08).timeout
+	#follow_speed *= 2
+	follow_speed_tween.tween_property(self, "follow_speed", follow_speed*2, .15)
 
 func strafe_laser_deploy_arm():
 	right_arm.global_position = x_mesh_right_arm.global_position

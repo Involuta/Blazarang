@@ -1,5 +1,5 @@
 extends Level
-
+"""
 var section_positions = {
 	"GunArena" : Vector3(-20, -50, 0),
 	"HallwayInvasion" : Vector3(0, 10, 0),
@@ -8,6 +8,7 @@ var section_positions = {
 	"TopGunBattlefield" : Vector3(16, 118, -444),
 	"ArenaElevator" : Vector3(16, 182, -704)
 }
+
 var gun_arena_resource := preload("res://levels/level1section_nodes/gun_arena.tscn")
 var hallway_invasion_resource := preload("res://levels/level1section_nodes/hallway_invasion.tscn")
 var first_maze_resource := preload("res://levels/level1section_nodes/first_maze.tscn")
@@ -30,3 +31,4 @@ func _ready():
 		add_child.call_deferred(inst2)
 		await inst2.tree_entered
 		inst2.global_position = section_positions["HallwayInvasion"]
+"""

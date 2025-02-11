@@ -1,4 +1,4 @@
-[gd_scene load_steps=183 format=3 uid="uid://dwniaym2g1off"]
+[gd_scene load_steps=184 format=3 uid="uid://dwniaym2g1off"]
 
 [ext_resource type="Script" path="res://enemies/x_boss.gd" id="1_u3wem"]
 [ext_resource type="Script" path="res://enemies/boss_hurtbox.gd" id="2_y4k4d"]
@@ -16,8 +16,9 @@ height = 2.75
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7g15b"]
 height = 2.75
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mvwev"]
-height = 24.0
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p5bq1"]
+radius = 0.1
+height = 6.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xdhg2"]
 shading_mode = 0
@@ -27,6 +28,9 @@ albedo_color = Color(1.38, 0.27, 0, 1)
 material = SubResource("StandardMaterial3D_xdhg2")
 radius = 0.25
 height = 0.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mvwev"]
+height = 24.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vdsab"]
 shading_mode = 0
@@ -668,7 +672,6 @@ transitions = ["Start", "WalkSpace", SubResource("AnimationNodeStateMachineTrans
 graph_offset = Vector2(85.6167, 244.125)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_uk78c"]
-graph_offset = Vector2(-179.52, 509.28)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_f8liy")
 nodes/StateMachine/position = Vector2(110, 150)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -878,10 +881,17 @@ collision_layer = 0
 collision_mask = 146
 platform_floor_layers = 4294901762
 script = ExtResource("1_u3wem")
-front_teleport_dist_from_target = 9.0
-strafeslice_up_speed = 5.0
-strafeslice_down_speed = 5.0
-diamond_rain_radius = 6.0
+phase2_long_dist_right_arm_not_deployed_attack_chances = {
+"ArmBombs": 2.08167e-12,
+"ChainSlice": 2.08167e-12,
+"DualBladeDash": 0.0,
+"RightArmLaser": 2.08167e-12,
+"SemicircleDash": 2.08167e-12,
+"StrafeLaser": 1.0,
+"Superman": 2.08167e-12,
+"Sweep": 2.08167e-12,
+"Triangle": 2.08167e-12
+}
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -901,18 +911,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.0
 shape = SubResource("CapsuleShape3D_7g15b")
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
-transform = Transform3D(0.999998, -3.48787e-16, -3.48787e-16, -3.48786e-16, -1, 8.74227e-08, -3.48786e-16, -8.74228e-08, -0.999999, -2, 1, 2.08165e-12)
+transform = Transform3D(-0.641437, 0.418137, -0.643209, -0.654507, 0.13912, 0.743144, 0.400219, 0.897668, 0.184437, 0.488606, 0.141644, -0.0976413)
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
 process_mode = 4
-transform = Transform3D(0.999999, -3.6074e-09, -4.0875e-17, -7.51574e-09, 0.999999, -9.53989e-08, -3.48786e-16, 9.53989e-08, 0.999999, 2.08165e-12, 12, 2.08165e-12)
+transform = Transform3D(0.999999, -3.6074e-09, -4.0875e-17, -7.51574e-09, 0.999999, -9.53989e-08, -3.48786e-16, 9.53989e-08, 0.999999, 2.08165e-12, 3, 2.08165e-12)
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("3_rpkwr")
-damage = 40
+damage = 50
 
 [node name="HitboxCollider" type="CollisionShape3D" parent="MeleeHitboxPivot/EnemyHitbox"]
-shape = SubResource("CapsuleShape3D_mvwev")
+shape = SubResource("CapsuleShape3D_p5bq1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeleeHitboxPivot/EnemyHitbox"]
 transform = Transform3D(1, -1.62572e-08, -4.69464e-15, -4.73391e-08, 1, -3.90864e-15, 2.95455e-14, -2.14339e-14, 0.999999, 2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -921,10 +931,13 @@ cast_shadow = 0
 mesh = SubResource("CapsuleMesh_uo2xn")
 
 [node name="XBlade" parent="MeleeHitboxPivot" instance=ExtResource("4_jwe6g")]
-transform = Transform3D(0.1, -5.23181e-17, 1.14345e-23, 0, -6.55671e-09, -0.75, 3.48787e-17, 0.15, -3.27835e-08, -0.0167179, 0.499908, -0.0183741)
+transform = Transform3D(0.1, -1.65716e-09, 3.62183e-16, 0, -6.55671e-09, -0.75, 1.10477e-09, 0.15, -3.27835e-08, 0.0102567, 0.506957, -0.00521123)
 
 [node name="Blade" parent="MeleeHitboxPivot/XBlade" index="0"]
-transform = Transform3D(1, 3.80453e-12, 1.66301e-16, 0, -4.37114e-11, 1, 3.80453e-09, -0.001, -4.37114e-08, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(1, 3.80453e-12, 1.66301e-16, 0, -4.37114e-11, 1, 3.80453e-09, -0.001, -4.37114e-08, -8.20059e-20, -4.88244e-19, 0.000109134)
+
+[node name="GPUTrail3D" parent="MeleeHitboxPivot/XBlade" index="1"]
+transform = Transform3D(3.75001, -4.41931e-22, -1.93175e-29, 0, -1.63918e-07, 3.75001, -4.41932e-22, -3.75, -1.63918e-07, 2.08165e-12, 1.7862e-12, -3.985)
 
 [node name="XLeftArm" parent="MeleeHitboxPivot/XBlade" index="4"]
 transform = Transform3D(0.667, -1.00714e-07, -2.00824e-08, -1.00714e-07, -0.667, 1.16645e-08, -1.00714e-07, -5.84978e-08, -0.133, -0.287228, -0.0540974, 1.14452)
@@ -949,7 +962,7 @@ surface_material_override/0 = ExtResource("5_qr4nt")
 surface_material_override/0 = ExtResource("5_qr4nt")
 
 [node name="MeleeHitboxPivot2" type="Node3D" parent="."]
-transform = Transform3D(1, -3.48787e-16, -3.48787e-16, -3.48787e-16, -1, 8.74228e-08, -3.48787e-16, -8.74228e-08, -1, 2, 1, 2.08165e-12)
+transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 2.08165e-12, 2.08165e-12, 0.8)
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot2"]
 process_mode = 4
@@ -1016,32 +1029,33 @@ mesh = SubResource("BoxMesh_ghh5t")
 transform = Transform3D(0.1, -3.48787e-17, 3.48787e-17, 3.48787e-17, 0.1, -3.48787e-17, -3.48787e-17, 3.48787e-17, 0.1, 2.08165e-12, -1.3, 2.08165e-12)
 
 [node name="Skeleton3D" parent="X_boss_meshes/Armature" index="0"]
-bones/0/position = Vector3(-0.67169, 11.3987, 6.20421)
-bones/0/rotation = Quaternion(0.244218, -0.176962, 0.0339197, 0.952833)
-bones/1/position = Vector3(-2.38419e-07, 1.53056, -0.0794427)
-bones/1/rotation = Quaternion(-0.025926, 2.70515e-09, 5.51966e-09, 0.999664)
-bones/2/rotation = Quaternion(-5.58794e-09, 1.00117e-08, -5.58794e-09, 1)
-bones/3/rotation = Quaternion(5.58794e-09, 1.00117e-08, -5.58794e-09, 1)
-bones/4/rotation = Quaternion(-0.123149, 0.165107, -0.0411603, 0.977691)
-bones/8/rotation = Quaternion(0.314218, -0.0254753, -0.307259, 0.897892)
-bones/9/rotation = Quaternion(-1.70295e-07, -1.39784e-07, 0.787723, 0.61603)
-bones/10/rotation = Quaternion(0.161835, -0.548616, 0.259252, 0.778215)
-bones/12/rotation = Quaternion(0.0306242, 0.0940609, 0.292299, 0.951197)
-bones/13/rotation = Quaternion(-1.40414e-08, 1.67219e-06, -0.00161949, 0.999999)
-bones/14/rotation = Quaternion(-0.00705238, 0.711304, 0.0719113, 0.699161)
-bones/15/rotation = Quaternion(0.191324, -0.157015, 0.96888, 0.00372859)
-bones/15/scale = Vector3(1, 1, 0.999999)
-bones/16/rotation = Quaternion(-0.00144444, -4.10123e-06, 5.77687e-07, 0.999999)
-bones/17/rotation = Quaternion(0.337283, -0.0274176, -0.0357674, 0.940324)
-bones/18/rotation = Quaternion(0.366206, 0.233069, -0.0586269, 0.898963)
-bones/20/rotation = Quaternion(-0.0278899, 0.0774787, 0.994007, 0.0719039)
-bones/20/scale = Vector3(1, 1, 0.999999)
-bones/21/rotation = Quaternion(-0.309713, 8.8116e-06, 3.66984e-06, 0.95083)
-bones/22/rotation = Quaternion(0.438947, -0.0156292, 0.0342824, 0.897723)
-bones/23/rotation = Quaternion(0.280713, -0.231215, 0.0698753, 0.928901)
+bones/0/position = Vector3(2.42062e-10, 13.3196, 0.227602)
+bones/0/rotation = Quaternion(0.173648, 7.32326e-12, -4.15343e-11, 0.984808)
+bones/1/position = Vector3(-2.50135e-10, 1.53056, -0.0794427)
+bones/1/rotation = Quaternion(-0.025926, -1.09329e-12, 4.21607e-11, 0.999664)
+bones/2/rotation = Quaternion(-3.72529e-09, 0, 0, 1)
+bones/3/position = Vector3(-1.38778e-17, 2.0435, 4.13507e-07)
+bones/3/rotation = Quaternion(2.23517e-08, 4.1359e-25, 3.08149e-33, 1)
+bones/4/rotation = Quaternion(-0.148058, 6.10897e-18, 1.78274e-17, 0.988979)
+bones/8/rotation = Quaternion(0.54508, 0.216561, 0.0973372, 0.804061)
+bones/9/rotation = Quaternion(4.47795e-08, -2.25242e-07, 0.00157235, 0.999999)
+bones/10/rotation = Quaternion(-0.167856, 0.497643, 0.0804784, 0.847171)
+bones/12/rotation = Quaternion(0.54612, -0.21469, -0.0923164, 0.80445)
+bones/13/rotation = Quaternion(-3.25745e-08, 1.69498e-06, -0.00162359, 0.999999)
+bones/14/rotation = Quaternion(-0.17644, -0.491898, -0.0357724, 0.851836)
+bones/15/rotation = Quaternion(-0.0312653, -0.169927, -0.983274, 0.0576187)
+bones/15/scale = Vector3(0.999999, 1, 1)
+bones/16/rotation = Quaternion(-0.364411, -4.02226e-06, -9.35454e-07, 0.931238)
+bones/17/rotation = Quaternion(0.394146, 0.0254984, 0.0194399, 0.918488)
+bones/18/rotation = Quaternion(0.276974, 0.230058, -0.0684804, 0.930413)
+bones/20/rotation = Quaternion(-0.0424547, 0.0175738, 0.997805, 0.0476875)
+bones/20/scale = Vector3(0.999999, 1, 1)
+bones/21/rotation = Quaternion(-0.00168023, 9.49937e-06, 7.74885e-07, 0.999999)
+bones/22/rotation = Quaternion(0.223201, -0.0260236, -0.0159612, 0.974294)
+bones/23/rotation = Quaternion(0.288124, -0.231999, 0.06723, 0.926629)
 
 [node name="Head" parent="X_boss_meshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.999772, -0.00903247, -0.0193647, 0.00504255, 0.980399, -0.196956, 0.0207643, 0.196814, 0.980221, -1.71178, 19.1531, 9.68916)
+transform = Transform3D(1, 1.73852e-16, -3.48093e-16, -1.74201e-16, 1, 7.72877e-08, 3.48916e-16, -9.42451e-08, 1, 1.21031e-10, 21.5398, 2.6395)
 
 [node name="XHead" parent="X_boss_meshes/Armature/Skeleton3D/Head" index="0"]
 visible = true
@@ -1070,16 +1084,16 @@ transform = Transform3D(1, 2.22572e-15, -4.83611e-15, 4.69788e-15, -2.28655e-08,
 emitting = false
 
 [node name="LeftArm" parent="X_boss_meshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(-0.283215, 0.758387, -0.587059, 0.556972, -0.368255, -0.744426, -0.780751, -0.537808, -0.318105, 1.73437, 17.83, 10.3937)
+transform = Transform3D(0.410416, 0.26322, -0.873083, 0.442147, -0.894802, -0.0619242, -0.797536, -0.360617, -0.483623, 3.5919, 20.2134, 2.29567)
 
 [node name="RightArm" parent="X_boss_meshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(-0.819419, -0.541469, 0.188054, -0.258927, 0.0569657, -0.964216, 0.51138, -0.838788, -0.18688, -4.99405, 17.9701, 7.88036)
+transform = Transform3D(0.409884, -0.263207, 0.873337, -0.44525, -0.893375, -0.0602766, 0.796083, -0.364147, -0.483373, -3.5919, 20.2016, 2.3281)
 
 [node name="LeftHand" parent="X_boss_meshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(-0.31771, -0.37335, -0.871591, -0.929801, -0.0574723, 0.363547, -0.185823, 0.925909, -0.328882, 5.22551, 14.4607, 11.8357)
+transform = Transform3D(0.953937, 0.297372, 0.0396647, 0.297447, -0.954729, 0.00413566, 0.0390985, 0.00785306, -0.999205, 5.74931, 12.8556, -0.656994)
 
 [node name="RightHand" parent="X_boss_meshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(-0.218295, -0.430632, -0.87573, 0.970864, -0.00493754, -0.239581, 0.0988472, -0.902514, 0.419163, -9.45457, 18.4348, 0.994296)
+transform = Transform3D(0.924332, -0.380359, -0.0306285, -0.379216, -0.924556, 0.0372926, -0.0425023, -0.0228559, -0.998835, -5.74937, 12.8542, -0.653704)
 
 [node name="SunMesh" parent="X_boss_meshes/Armature/Skeleton3D/RightHand" index="0"]
 visible = false
@@ -1150,7 +1164,7 @@ shape = SubResource("SphereShape3D_656hx")
 
 [node name="TraumaCauser" parent="ExplosionPivot" instance=ExtResource("6_r6uan")]
 collision_layer = 0
-trauma_amount = 0.44
+trauma_amount = 0.15
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExplosionPivot/TraumaCauser"]
 shape = SubResource("SphereShape3D_j3f5l")
