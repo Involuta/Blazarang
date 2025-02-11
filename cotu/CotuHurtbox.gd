@@ -8,7 +8,8 @@ extends Hurtbox
 var recovery_rate := .5
 @export var recovery_delay := 1.0
 var recovery_delay_remaining := 1.0
-var recovery_active := false
+@export var recovery_disabled := false # Exported so that it can be set via anim keyframes
+var recovery_active := false # This really means "Cotu is trying to recover". If recovery_disabled, recovery_active does not recover stability
 
 var damage_indicator_value := 100.0
 
@@ -67,7 +68,7 @@ func _physics_process(delta):
 	recovery_delay_remaining -= delta
 	if recovery_delay_remaining < 0:
 		recovery_active = true
-	if recovery_active and health < max_health:
+	if not recovery_disabled and recovery_active and health < max_health:
 		health += recovery_rate
 		damage_indicator_value -= recovery_rate
 
