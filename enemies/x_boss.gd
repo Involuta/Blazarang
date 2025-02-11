@@ -85,7 +85,7 @@ var semicircle_center := Vector3.ZERO
 	"Superman" : .15,
 	"RightArmSlice" : .2,
 	"Triangle" : .1,
-	"StrafeSlice" : .2
+	"SemicircleDash" : .2
 }
 
 @export var phase2_long_dist_right_arm_deployed_attack_chances = {
@@ -95,7 +95,7 @@ var semicircle_center := Vector3.ZERO
 	"Superman" : .05,
 	"Triangle" : .1,
 	"DiagonalDash" : .15,
-	"StrafeSlice" : .125
+	"SemicircleDash" : .125
 }
 
 @export var phase2_long_dist_right_arm_not_deployed_attack_chances = {
