@@ -72,6 +72,8 @@ func _ready():
 	
 	Globals.destabilize.connect(on_destabilize)
 	Globals.stabilize.connect(on_stabilize)
+	# This line fixes a bug that happens when X destroys Cotu with his grab punish (XBossGrab is true, but since Cotu was destroyed, he can't be released from the grab; the grab release sets this bool to false). Then Cotu retries the fight. If X tries another DashGrab, he'll think he successfully grabbed Cotu even though he didn't bc XBossGrab is still true from last time
+	Globals.XBossGrab = false
 	
 	anim_tree.active = true
 

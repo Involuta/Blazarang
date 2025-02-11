@@ -66,7 +66,7 @@ const enemy_hurtbox_data = {
 	"SkullBall" : [60, 1.0, 3.0],
 	"PopperBall" : [10, 1.0, 1.0],
 	
-	"XBoss" : [500, 1.0, 100.0],
+	"XBoss" : [3000, 1.0, 100.0],
 	
 }
 

@@ -25,3 +25,6 @@ res://glb_inherited_scenes/cotu_outline.gdshader
 res://cotu/cotu_cb_main.tscn
 res://glb_inherited_scenes/cotu_anims_24.tscn
 res://enemies/x_boss.tscn
+res://enemies/x_boss.gd
+res://cotu/CotuControl.gd
+res://globals.gd
