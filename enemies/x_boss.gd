@@ -106,7 +106,8 @@ var semicircle_center := Vector3.ZERO
 	"Triangle" : .1,
 	"RightArmLaser" : .2,
 	"StrafeLaser" : .2,
-	"SemicircleDash" : .15
+	"SemicircleDash" : .15,
+	"DualBladeDash" : 0.0
 }
 
 @export var diagonal_dash_speed := 22.0
@@ -905,12 +906,12 @@ func dual_blade_leap():
 
 func diamond_rain():
 	var rain_tween := get_tree().create_tween()
-	var spawn_pos := global_position + diamond_rain_radius * transform.basis.z
+	var spawn_pos := global_position + diamond_rain_radius * transform.basis.z + 2.5 * dual_blade_dash_leap_height * Vector3.UP
 	rain_tween.tween_callback(spawn_diamond_at.bind(spawn_pos))
 	rain_tween.tween_interval(.25)
-	spawn_pos = global_position + diamond_rain_radius * -transform.basis.x
+	spawn_pos = global_position + diamond_rain_radius * -transform.basis.x + 2.5 * dual_blade_dash_leap_height * Vector3.UP
 	rain_tween.tween_callback(spawn_diamond_at.bind(spawn_pos))
-	spawn_pos = global_position + diamond_rain_radius * transform.basis.x
+	spawn_pos = global_position + diamond_rain_radius * transform.basis.x + 2.5 * dual_blade_dash_leap_height * Vector3.UP
 	rain_tween.tween_callback(spawn_diamond_at.bind(spawn_pos))
 
 func spawn_diamond_at(pos : Vector3):
