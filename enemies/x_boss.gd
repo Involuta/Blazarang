@@ -933,23 +933,31 @@ func delete_diamond(d: Node3D):
 
 func laser_combo_mvmt():
 	pass
-	# Laser sweep RL descend
-	
-	# Laser sweep RL forward
-	
-	# Laser sweep RL ascend while moving forward
-	
-	# Laser sweep LR descend
-	
-	# Laser sweep LR forward
-	
-	# Laser sweep LR ascend while moving forward
+	"""
+	Laser sweep RL
+	Get X's lateral vec to target: lateral_vec_to_target
+	Fwd tween changes X's lateral pos to target lateral pos in t secs
+	Vert tween changes X's y pos to min_y_pos in t/2 secs, then waits t/2 secs
+	Fwd tween moves X's lateral pos by lateral_vec_to_target.length in the direction lateral_vec_to_target.normalized
+	Vert tween changes X's y pos to laser_combo_max_height
+	"""
+	"""
+	Laser sweep LR
+	Get X's lateral vec to target: lateral_vec_to_target
+	Fwd tween changes X's lateral pos to target lateral pos in t secs
+	Vert tween changes X's y pos to min_y_pos in t/2 secs, then waits t/2 secs
+	Fwd tween moves X's lateral pos by lateral_vec_to_target.length in the direction lateral_vec_to_target.normalized
+	Vert tween changes X's y pos to laser_combo_max_height
+	"""
 	
 	# Laser sweep overhead (just stay still and wait)
 	
-	# Laser sweep LR descend
-	
-	# Laser sweep LR forward
+	"""
+	Laser sweep LR
+	Get X's lateral vec to target: lateral_vec_to_target
+	Fwd tween changes X's lateral pos to target lateral pos in t secs
+	Vert tween changes X's y pos to min_y_pos in t/2 secs, then waits t/2 secs
+	"""
 	
 	# Laser sweep RL stationary (just wait)
 	
