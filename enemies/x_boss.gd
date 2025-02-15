@@ -931,6 +931,34 @@ func spawn_diamond_at(pos : Vector3):
 func delete_diamond(d: Node3D):
 	d.queue_free()
 
+func laser_combo_mvmt():
+	pass
+	# Laser sweep RL descend
+	
+	# Laser sweep RL forward
+	
+	# Laser sweep RL ascend while moving forward
+	
+	# Laser sweep LR descend
+	
+	# Laser sweep LR forward
+	
+	# Laser sweep LR ascend while moving forward
+	
+	# Laser sweep overhead (just stay still and wait)
+	
+	# Laser sweep LR descend
+	
+	# Laser sweep LR forward
+	
+	# Laser sweep RL stationary (just wait)
+	
+	# Ball launch (instantiate ball) and move icon to teleport pos
+	
+	# Teleport
+	
+	# Snapkick (move forward with same logic as TriangleFlyingKick)
+
 func recall_left_arm():
 	if not left_arm_deployed():
 		return
