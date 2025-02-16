@@ -933,6 +933,7 @@ func delete_diamond(d: Node3D):
 
 func laser_combo_mvmt():
 	var lateral_vec_to_target := Vector3.FORWARD
+	# 8.5t = 10 seconds (first 2 decimal points only so that the tween lengths don't go over total anim time)
 	var t = 1.17
 	await create_tween().tween_property(self, "global_position", armbombs_dashback_height*Vector3.UP, .01).as_relative().finished
 	"""
