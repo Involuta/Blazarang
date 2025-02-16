@@ -932,62 +932,53 @@ func delete_diamond(d: Node3D):
 	d.queue_free()
 
 func laser_combo_mvmt():
-	global_position.y = armbombs_dashback_height
 	var lateral_vec_to_target := Vector3.FORWARD
-	var fwd_tween := get_tree().create_tween()
-	var vert_tween := get_tree().create_tween()
 	var t = 1.42
+	await create_tween().tween_property(self, "global_position", armbombs_dashback_height*Vector3.UP, 1).as_relative().finished
 	"""
 	Laser sweep RL
 	Get X's lateral vec to target: lateral_vec_to_target
-	Fwd tween changes X's lateral pos by lateral_vec_to_target in t secs
-	Vert tween changes X's y pos down by laser_combo_max_height in t/2 secs, then waits t/2 secs
-	Fwd tween moves X's lateral pos by lateral_vec_to_target in t secs
-	Vert tween changes X's y pos up by laser_combo_max_height in t secs
+	Mvmt tween changes X's lateral pos by lateral_vec_to_target/2 and changes y pos down by laser_combo_max_height in t/2 secs
+	Mvmt tween moves X's lateral pos by lateral_vec_to_target/2 in t/2 secs
+	Mvmt tween changes X's lateral pos by lateral_vec_to_target and changes y pos up by laser_combo_max_height in t secs
 	"""
 	lateral_vec_to_target = target.global_position - global_position
 	lateral_vec_to_target.y = 0
-	fwd_tween.tween_property(self, "global_position", 2*lateral_vec_to_target, 2*t).as_relative()
-	vert_tween.tween_property(self, "global_position", armbombs_dashback_height*Vector3.DOWN, t/2).as_relative()
-	vert_tween.tween_interval(t/2)
-	vert_tween.tween_property(self, "global_position", armbombs_dashback_height*Vector3.UP, t).as_relative()
+	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target+armbombs_dashback_height*Vector3.DOWN, t/2).as_relative().finished
+	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target, t/2).as_relative().finished
+	await create_tween().tween_property(self, "global_position", lateral_vec_to_target+armbombs_dashback_height*Vector3.UP, t).as_relative().finished
 	"""
 	Laser sweep LR
 	Get X's lateral vec to target: lateral_vec_to_target
-	Fwd tween changes X's lateral pos by lateral_vec_to_target in t secs
-	Vert tween changes X's y pos down by laser_combo_max_height in t/2 secs, then waits t/2 secs
-	Fwd tween moves X's lateral pos by lateral_vec_to_target in t secs
-	Vert tween changes X's y pos up by laser_combo_max_height in t secs
+	Mvmt tween changes X's lateral pos by lateral_vec_to_target/2 and changes y pos down by laser_combo_max_height in t/2 secs
+	Mvmt tween moves X's lateral pos by lateral_vec_to_target/2 in t/2 secs
+	Mvmt tween changes X's lateral pos by lateral_vec_to_target and changes y pos up by laser_combo_max_height in t secs
 	"""
 	lateral_vec_to_target = target.global_position - global_position
 	lateral_vec_to_target.y = 0
-	fwd_tween.tween_property(self, "global_position", 2*lateral_vec_to_target, 2*t).as_relative()
-	vert_tween.tween_property(self, "global_position", armbombs_dashback_height*Vector3.DOWN, t/2).as_relative()
-	vert_tween.tween_interval(t/2)
-	vert_tween.tween_property(self, "global_position", armbombs_dashback_height*Vector3.UP, t).as_relative()
+	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target+armbombs_dashback_height*Vector3.DOWN, t/2).as_relative().finished
+	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target, t/2).as_relative().finished
+	await create_tween().tween_property(self, "global_position", lateral_vec_to_target+armbombs_dashback_height*Vector3.UP, t).as_relative().finished
 	
 	# Laser sweep overhead (just stay still and wait)
-	fwd_tween.tween_interval(t/2)
-	vert_tween.tween_interval(t/2)
+	await create_tween().tween_interval(t/2).finished
 	
 	"""
 	Laser sweep LR
 	Get X's lateral vec to target: lateral_vec_to_target
-	Fwd tween changes X's lateral pos by lateral_vec_to_target in t secs
-	Vert tween changes X's y pos down by laser_combo_max_height in t/2 secs, then waits t/2 secs
+	Mvmt tween changes X's lateral pos by lateral_vec_to_target/2 and changes y pos down by laser_combo_max_height in t/2 secs
+	Mvmt tween moves X's lateral pos by lateral_vec_to_target/2 in t/2 secs
 	"""
 	lateral_vec_to_target = target.global_position - global_position
-	fwd_tween.tween_property(self, "global_position", lateral_vec_to_target, t).as_relative()
-	vert_tween.tween_property(self, "global_position", armbombs_dashback_height*Vector3.DOWN, t/2).as_relative()
-	vert_tween.tween_interval(t/2)
+	lateral_vec_to_target.y = 0
+	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target+armbombs_dashback_height*Vector3.DOWN, t/2).as_relative().finished
+	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target, t/2).as_relative().finished
 	
 	# Laser sweep RL stationary (just wait)
-	fwd_tween.tween_interval(t/2)
-	vert_tween.tween_interval(t/2)
+	create_tween().tween_interval(t/2).finished
 	
 	# Ball launch (instantiate ball) and move icon to teleport pos
-	fwd_tween.tween_interval(t)
-	vert_tween.tween_interval(t)
+	create_tween().tween_interval(t/2).finished
 	
 	# Teleport
 	
