@@ -944,8 +944,8 @@ func laser_combo_mvmt():
 	"""
 	lateral_vec_to_target = target.global_position - global_position
 	lateral_vec_to_target.y = 0
-	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target+armbombs_dashback_height*Vector3.DOWN, t/2).as_relative().finished
-	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target, t/2).as_relative().finished
+	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target+armbombs_dashback_height*Vector3.DOWN, .5*t).as_relative().finished
+	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target, .5*t).as_relative().finished
 	await create_tween().tween_property(self, "global_position", lateral_vec_to_target+armbombs_dashback_height*Vector3.UP, t).as_relative().finished
 	"""
 	Laser sweep LR
@@ -956,12 +956,12 @@ func laser_combo_mvmt():
 	"""
 	lateral_vec_to_target = target.global_position - global_position
 	lateral_vec_to_target.y = 0
-	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target+armbombs_dashback_height*Vector3.DOWN, t/2).as_relative().finished
-	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target, t/2).as_relative().finished
+	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target+armbombs_dashback_height*Vector3.DOWN, .5*t).as_relative().finished
+	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target, .5*t).as_relative().finished
 	await create_tween().tween_property(self, "global_position", lateral_vec_to_target+armbombs_dashback_height*Vector3.UP, t).as_relative().finished
 	
 	# Laser sweep overhead (just stay still and wait)
-	await create_tween().tween_interval(t/2).finished
+	await create_tween().tween_interval(.5*t).finished
 	
 	"""
 	Laser sweep LR
@@ -971,29 +971,29 @@ func laser_combo_mvmt():
 	"""
 	lateral_vec_to_target = target.global_position - global_position
 	lateral_vec_to_target.y = 0
-	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target+armbombs_dashback_height*Vector3.DOWN, t/2).as_relative().finished
-	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target, t/2).as_relative().finished
+	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target+armbombs_dashback_height*Vector3.DOWN, .5*t).as_relative().finished
+	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target, .5*t).as_relative().finished
 	
 	# Laser sweep RL stationary (just wait) t=6 after sweep
-	await create_tween().tween_interval(t/2).finished
+	await create_tween().tween_interval(.5*t).finished
 	
 	# Ball launch (instantiate ball) and move icon to teleport pos
 	set_x_icon_targetside_pos()
-	await create_tween().tween_interval(t/2).finished
+	await create_tween().tween_interval(.5*t).finished
 	
-	# Teleport and charge up Snapkick, t=7 after chargeup
+	# Teleport and charge up Flyingkick, t=7.5 after chargeup
 	set_x_icon_my_pos()
 	teleport()
-	await create_tween().tween_interval(t/2).finished
+	await create_tween().tween_interval(t).finished
 	
-	# Snapkick (move forward with same logic as TriangleFlyingKick)
+	# Flyingkick (move forward with same logic as TriangleFlyingKick)
 	global_position.y = min_y_pos + .1
 	velocity = flyingkick_speed * -transform.basis.z
-	await get_tree().create_timer(t/2).timeout
+	await get_tree().create_timer(.25*t).timeout
 	velocity = Vector3.ZERO
 	
 	# Cooldown
-	await create_tween().tween_interval(t).finished
+	await create_tween().tween_interval(.75*t).finished
 
 func recall_left_arm():
 	if not left_arm_deployed():
