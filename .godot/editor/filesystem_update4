@@ -28,3 +28,5 @@ res://cotu/cotu_cb_main.tscn
 res://glb_inherited_scenes/cotu_anims_24.tscn
 res://glb_inherited_scenes/x_right_arm.tscn
 res://glb_inherited_scenes/x_left_arm.tscn
+res://levels/x_boss_level/background_nodes/x_diamond.tscn
+res://enemies/enemy_anims/x_superman.res

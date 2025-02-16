@@ -25,17 +25,17 @@ albedo_color = Color(1.25098, 0.368627, 0, 1)
 metallic = 0.5
 roughness = 0.5
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ke3vj"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_38sst"]
 shading_mode = 0
 albedo_color = Color(2, 1, 0.66, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_jec7k"]
-material = SubResource("StandardMaterial3D_ke3vj")
+material = SubResource("StandardMaterial3D_38sst")
 radius = 0.3
 height = 0.6
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_28v83"]
-material = SubResource("StandardMaterial3D_ke3vj")
+material = SubResource("StandardMaterial3D_38sst")
 top_radius = 0.4
 bottom_radius = 0.4
 height = 1000.0
@@ -159,6 +159,18 @@ tracks/8/keys = {
 "update": 1,
 "values": [4, 0, 4]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("EyeMesh:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_vslpf"]
 resource_name = "top_twist_in"
@@ -211,6 +223,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("EyeMesh:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.30001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_amm3s"]
 resource_name = "top_twist_out"
@@ -262,6 +286,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("EyeMesh:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_j02a8"]
@@ -327,6 +363,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector3(2.08165e-12, 1, 2.08165e-12)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("EyeMesh:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_nuulj"]
 resource_name = "twist_out"
@@ -391,6 +439,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector3(2.08165e-12, 1, 2.08165e-12)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("EyeMesh:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6nv5h"]
 _data = {
@@ -408,19 +468,20 @@ script = ExtResource("1_4fbxl")
 transform = Transform3D(1.6, 0, 0, 0, 2, 0, 0, 0, 1.6, 2.08165e-12, 1, 2.08165e-12)
 
 [node name="Top" parent="Diamond" index="0"]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 2.08165e-12, 0.01, 2.08165e-12)
+transform = Transform3D(-2.89599e-06, 2.79031e-16, 0.8, 2.7903e-16, 0.8, -2.7903e-16, -0.8, 2.79029e-16, -2.89599e-06, 2.08165e-12, 0.8, 2.08165e-12)
 surface_material_override/0 = SubResource("StandardMaterial3D_xia16")
 
 [node name="Bottom" parent="Diamond" index="1"]
+transform = Transform3D(-2.89599e-06, -2.79029e-16, -0.8, 2.7903e-16, 0.8, -2.7903e-16, 0.8, -2.79031e-16, -2.89599e-06, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 surface_material_override/0 = SubResource("StandardMaterial3D_0lssr")
 
 [node name="EyeMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(3, -2.3111e-14, 4.69512e-15, 2.3111e-14, 3, -6.92934e-08, -4.69512e-15, 6.92934e-08, 3, 2.08165e-12, 1, 2.08165e-12)
+transform = Transform3D(3, -2.3111e-14, 4.69512e-15, 2.3111e-14, 3, -6.92934e-08, -4.69512e-15, 6.92934e-08, 3, 2.08165e-12, 1.8, 2.08165e-12)
 mesh = SubResource("CapsuleMesh_jec7k")
 skeleton = NodePath("../..")
 
 [node name="LaserMesh" type="MeshInstance3D" parent="EyeMesh"]
-transform = Transform3D(0.01, -6.97574e-16, -1.5246e-25, -1.5246e-25, -4.37114e-08, 0.01, -6.97574e-18, -1, -4.37114e-10, 2.08165e-12, 2.08165e-12, -500)
+transform = Transform3D(1, -6.97574e-16, -3.04919e-23, 0, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 2.08165e-12, 2.08165e-12, -500)
 visible = false
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_28v83")
