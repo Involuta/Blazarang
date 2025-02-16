@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cs10twlummdtg"]
+[gd_scene load_steps=20 format=3 uid="uid://cs10twlummdtg"]
 
 [ext_resource type="Script" path="res://levels/x_boss_level/background_nodes/x_diamond.gd" id="1_4fbxl"]
 [ext_resource type="PackedScene" uid="uid://bqwo81yvpd1ok" path="res://levels/x_boss_level/background_nodes/diamond.tscn" id="1_oi60u"]
@@ -34,10 +34,14 @@ material = SubResource("StandardMaterial3D_38sst")
 radius = 0.3
 height = 0.6
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bulnv"]
+shading_mode = 0
+albedo_color = Color(2, 1, 0.66, 1)
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_28v83"]
-material = SubResource("StandardMaterial3D_38sst")
-top_radius = 0.4
-bottom_radius = 0.4
+material = SubResource("StandardMaterial3D_bulnv")
+top_radius = 0.25
+bottom_radius = 0.25
 height = 1000.0
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_6t0av"]
@@ -481,7 +485,7 @@ mesh = SubResource("CapsuleMesh_jec7k")
 skeleton = NodePath("../..")
 
 [node name="LaserMesh" type="MeshInstance3D" parent="EyeMesh"]
-transform = Transform3D(1, -6.97574e-16, -3.04919e-23, 0, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 2.08165e-12, 2.08165e-12, -500)
+transform = Transform3D(0.01, -6.97574e-16, -3.04919e-25, 0, -4.37114e-08, 0.01, -6.97574e-18, -1, -4.37114e-10, 2.08165e-12, 2.08165e-12, -500)
 visible = false
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_28v83")
