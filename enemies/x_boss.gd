@@ -978,12 +978,14 @@ func laser_combo_mvmt():
 	await create_tween().tween_interval(.5*t).finished
 	
 	# Ball launch (instantiate ball) and move icon to teleport pos
+	side_teleport_dist_from_target *= 1.75
 	set_x_icon_targetside_pos()
 	await create_tween().tween_interval(.5*t).finished
 	
 	# Teleport and charge up Flyingkick, t=7.5 after chargeup
 	set_x_icon_my_pos()
 	teleport()
+	side_teleport_dist_from_target /= 1.75
 	await create_tween().tween_interval(t).finished
 	
 	# Flyingkick (move forward with same logic as TriangleFlyingKick)

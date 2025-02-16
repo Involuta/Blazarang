@@ -41,9 +41,7 @@ glow_hdr_threshold = 1.5
 
 [node name="XBossLevelBackground" type="Node3D"]
 script = ExtResource("1_ruyd8")
-big_diamond_min_dist_from_others = 2.4
-small_diamond_num = 90.0
-small_diamond_max_size = 0.15
+small_diamond_max_size = 0.25
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.26798, 0, 0)

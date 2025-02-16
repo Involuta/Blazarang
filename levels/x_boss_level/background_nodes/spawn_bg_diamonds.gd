@@ -5,11 +5,11 @@ extends Node3D
 @export var big_diamond_max_size := 1.0
 @export var big_diamond_min_spawn_radius := 1.0
 @export var big_diamond_max_spawn_radius := 5.5
-@export var big_diamond_min_dist_from_others := 2.0
+@export var big_diamond_min_dist_from_others := 2.4
 
-@export var small_diamond_num := 100.0
+@export var small_diamond_num := 80.0
 @export var small_diamond_min_size := .05
-@export var small_diamond_max_size := .1
+@export var small_diamond_max_size := .15
 @export var small_diamond_min_spawn_radius := 6.0
 @export var small_diamond_max_spawn_radius := 12.0
 @export var small_diamond_min_dist_from_others := .5
