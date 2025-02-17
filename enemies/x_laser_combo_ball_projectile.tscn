@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://ckkxheuv5iefh"]
+
+[ext_resource type="Script" path="res://DisappearNode.gd" id="1_3qwr0"]
+[ext_resource type="Script" path="res://hitbox.gd" id="1_hwgla"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_87q5o"]
+shading_mode = 0
+albedo_color = Color(1.5, 0.8, 0.5, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_k7pmu"]
+material = SubResource("StandardMaterial3D_87q5o")
+radius = 3.0
+height = 6.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7y48p"]
+radius = 3.0
+
+[node name="LaserComboBallProjectile" type="Node3D"]
+visible = false
+script = ExtResource("1_3qwr0")
+disappear_secs = 5.0
+
+[node name="LaserComboBall" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.707107, -1.60554e-24, -0.707107, 3.48787e-16, 1, -3.48787e-16, 0.707107, -4.93259e-16, -0.707107, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+mesh = SubResource("CapsuleMesh_k7pmu")
+skeleton = NodePath("../..")
+
+[node name="EnemyHitbox" type="Area3D" parent="LaserComboBall"]
+process_mode = 4
+transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 2.08165e-12, 2.08165e-12, -200)
+collision_layer = 8
+collision_mask = 11
+script = ExtResource("1_hwgla")
+damage = 70
+
+[node name="BallCollider" type="CollisionShape3D" parent="LaserComboBall/EnemyHitbox"]
+transform = Transform3D(1, -3.48787e-16, -2.50326e-08, 3.48787e-16, 1, -2.66454e-15, -2.50325e-08, 3.05684e-15, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+shape = SubResource("SphereShape3D_7y48p")

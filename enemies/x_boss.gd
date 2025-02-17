@@ -979,6 +979,15 @@ func laser_combo_mvmt():
 	await create_tween().tween_interval(.5*t).finished
 	
 	# Ball launch (instantiate ball) and move icon to teleport pos
+	var ball_inst = load("res://enemies/x_laser_combo_ball_projectile.tscn").instantiate()
+	level.add_child.call_deferred(ball_inst)
+	await ball_inst.tree_entered
+	ball_inst.global_position = global_position
+	ball_inst.visible = true
+	lateral_vec_to_target = target.global_position - global_position
+	lateral_vec_to_target.y = 0
+	create_tween().tween_property(ball_inst, "global_position", 1.5*lateral_vec_to_target, 1.5*t).as_relative()
+	
 	side_teleport_dist_from_target *= 1.75
 	set_x_icon_targetside_pos()
 	await create_tween().tween_interval(.5*t).finished
