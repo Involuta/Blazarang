@@ -16,6 +16,7 @@ var stop_dist := 1.0
 enum {
 	MY_POS,
 	TARGETSIDE_POS,
+	TARGETDIAGONAL_POS,
 	TARGETFRONT_POS,
 	FLYINGFACERAIN_POS,
 	STATIONARY
@@ -227,6 +228,8 @@ func _physics_process(delta):
 			x_icon_follow_my_pos()
 		TARGETSIDE_POS:
 			x_icon_follow_targetside_pos()
+		TARGETDIAGONAL_POS:
+			x_icon_follow_targetdiagonal_pos()
 		TARGETFRONT_POS:
 			x_icon_follow_targetfront_pos()
 		STATIONARY:
@@ -947,7 +950,7 @@ func laser_combo_mvmt():
 	lateral_vec_to_target.y = 0
 	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target+armbombs_dashback_height*Vector3.DOWN, .5*t).as_relative().finished
 	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target, .5*t).as_relative().finished
-	await create_tween().tween_property(self, "global_position", lateral_vec_to_target+armbombs_dashback_height*Vector3.UP, t).as_relative().finished
+	await create_tween().tween_property(self, "global_position", lateral_vec_to_target, t).as_relative().finished
 	"""
 	Laser sweep LR
 	Get X's lateral vec to target: lateral_vec_to_target
@@ -957,9 +960,9 @@ func laser_combo_mvmt():
 	"""
 	lateral_vec_to_target = target.global_position - global_position
 	lateral_vec_to_target.y = 0
-	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target+armbombs_dashback_height*Vector3.DOWN, .5*t).as_relative().finished
 	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target, .5*t).as_relative().finished
-	await create_tween().tween_property(self, "global_position", lateral_vec_to_target+armbombs_dashback_height*Vector3.UP, t).as_relative().finished
+	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target, .5*t).as_relative().finished
+	await create_tween().tween_property(self, "global_position", lateral_vec_to_target, t).as_relative().finished
 	
 	# Laser sweep overhead (just stay still and wait)
 	await create_tween().tween_interval(.5*t).finished
@@ -972,7 +975,7 @@ func laser_combo_mvmt():
 	"""
 	lateral_vec_to_target = target.global_position - global_position
 	lateral_vec_to_target.y = 0
-	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target+armbombs_dashback_height*Vector3.DOWN, .5*t).as_relative().finished
+	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target, .5*t).as_relative().finished
 	await create_tween().tween_property(self, "global_position", .5*lateral_vec_to_target, .5*t).as_relative().finished
 	
 	# Laser sweep RL stationary (just wait) t=6 after sweep
@@ -988,14 +991,14 @@ func laser_combo_mvmt():
 	lateral_vec_to_target.y = 0
 	create_tween().tween_property(ball_inst, "global_position", 1.5*lateral_vec_to_target, 1.5*t).as_relative()
 	
-	side_teleport_dist_from_target *= 1.75
-	set_x_icon_targetside_pos()
+	side_teleport_dist_from_target *= 1.25
+	set_x_icon_targetdiagonal_pos()
 	await create_tween().tween_interval(.5*t).finished
 	
 	# Teleport and charge up Flyingkick, t=7.5 after chargeup
 	set_x_icon_my_pos()
 	teleport()
-	side_teleport_dist_from_target /= 1.75
+	side_teleport_dist_from_target /= 1.25
 	await create_tween().tween_interval(t).finished
 	
 	# Flyingkick (move forward with same logic as TriangleFlyingKick)
@@ -1095,6 +1098,12 @@ func set_x_icon_targetside_pos():
 	x_icon_pos_state = TARGETSIDE_POS
 	x_icon_tp_to_left = rng.randf() < .5
 
+func set_x_icon_targetdiagonal_pos():
+	# No need for lerp since it's not jumping directly to 1.0
+	x_icon_lerp_val = .2
+	x_icon_pos_state = TARGETDIAGONAL_POS
+	x_icon_tp_to_left = rng.randf() < .5
+
 func set_x_icon_targetfront_pos():
 	# No need for lerp since it's not jumping directly to 1.0
 	x_icon_lerp_val = .2
@@ -1113,6 +1122,13 @@ func x_icon_follow_targetside_pos():
 	var icon_vec := Vector2(dir_to_target.x, dir_to_target.z).orthogonal()
 	if x_icon_tp_to_left:
 		icon_vec *= -1
+	x_icon_pos.global_position.x = target.global_position.x + side_teleport_dist_from_target * icon_vec.x
+	x_icon_pos.global_position.z = target.global_position.z + side_teleport_dist_from_target * icon_vec.y
+
+func x_icon_follow_targetdiagonal_pos():
+	var dir_to_self := target.global_position.direction_to(global_position)
+	var dir := -1 if x_icon_tp_to_left else 1
+	var icon_vec := Vector2(dir_to_self.x, dir_to_self.z).rotated(dir * PI/4)
 	x_icon_pos.global_position.x = target.global_position.x + side_teleport_dist_from_target * icon_vec.x
 	x_icon_pos.global_position.z = target.global_position.z + side_teleport_dist_from_target * icon_vec.y
 

@@ -18,7 +18,7 @@ radius = 3.0
 [node name="LaserComboBallProjectile" type="Node3D"]
 visible = false
 script = ExtResource("1_3qwr0")
-disappear_secs = 5.0
+disappear_secs = 2.0
 
 [node name="LaserComboBall" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.707107, -1.60554e-24, -0.707107, 3.48787e-16, 1, -3.48787e-16, 0.707107, -4.93259e-16, -0.707107, 2.08165e-12, 2.08165e-12, 2.08165e-12)
