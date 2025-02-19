@@ -108,6 +108,7 @@ scale_max = 1.5
 scale_curve = SubResource("CurveTexture_reqog")
 color = Color(1.30196, 0.482353, 0, 1)
 color_ramp = SubResource("GradientTexture1D_70fut")
+attractor_interaction_enabled = false
 
 [sub_resource type="Curve" id="Curve_gjuql"]
 _data = [Vector2(0, 0), 0.0, 2.36625, 0, 0, Vector2(0.252444, 0.192954), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

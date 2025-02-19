@@ -1,3 +1,5 @@
+GPUParticlesAttractorSphere3D
+GPUParticles3D
 MeshInstance3D
 BoneAttachment3D
 AnimationPlayer
@@ -14,7 +16,6 @@ RigidBody3D
 Camera3D
 FuncGodotMap
 NavigationRegion3D
-GPUParticles3D
 SubViewport
 SubViewportContainer
 TextureButton
@@ -26,7 +27,6 @@ GPUTrail3D
 Node2D
 GPUParticles2D
 TextureRect
-GPUParticlesAttractorSphere3D
 Sprite3D
 Hurtbox
 WorldEnvironment

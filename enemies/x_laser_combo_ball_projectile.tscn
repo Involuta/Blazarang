@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ckkxheuv5iefh"]
+[gd_scene load_steps=10 format=3 uid="uid://ckkxheuv5iefh"]
 
 [ext_resource type="Script" path="res://DisappearNode.gd" id="1_3qwr0"]
 [ext_resource type="Script" path="res://hitbox.gd" id="1_hwgla"]
@@ -15,8 +15,33 @@ height = 6.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_7y48p"]
 radius = 3.0
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7d1h8"]
+emission_shape = 2
+emission_sphere_radius = 1.0
+particle_flag_align_y = true
+direction = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+spread = 180.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+angular_velocity_min = 10.0
+angular_velocity_max = 10.0
+
+[sub_resource type="Curve" id="Curve_gjuql"]
+_data = [Vector2(0, 0), 0.0, 2.36625, 0, 0, Vector2(0.252444, 0.192954), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ulqhy"]
+shading_mode = 0
+albedo_color = Color(1, 0.913725, 0.564706, 1)
+use_particle_trails = true
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_qfdx1"]
+material = SubResource("StandardMaterial3D_ulqhy")
+sections = 8
+curve = SubResource("Curve_gjuql")
+
 [node name="LaserComboBallProjectile" type="Node3D"]
-visible = false
 script = ExtResource("1_3qwr0")
 disappear_secs = 2.0
 
@@ -36,3 +61,20 @@ damage = 70
 [node name="BallCollider" type="CollisionShape3D" parent="LaserComboBall/EnemyHitbox"]
 transform = Transform3D(1, -3.48787e-16, -2.50326e-08, 3.48787e-16, 1, -2.66454e-15, -2.50325e-08, 3.05684e-15, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 shape = SubResource("SphereShape3D_7y48p")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 20
+lifetime = 10.0
+speed_scale = 3.0
+fixed_fps = 60
+local_coords = true
+trail_enabled = true
+trail_lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_7d1h8")
+draw_pass_1 = SubResource("TubeTrailMesh_qfdx1")
+
+[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="."]
+transform = Transform3D(1, -4.22701e-24, -7.57478e-09, -2.5503e-22, 1, 1.25612e-22, -1.26881e-08, 1.29625e-24, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+strength = 15.0
+attenuation = 1e-05
+radius = 10.0

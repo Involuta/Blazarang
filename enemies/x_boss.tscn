@@ -1,4 +1,4 @@
-[gd_scene load_steps=191 format=3 uid="uid://dwniaym2g1off"]
+[gd_scene load_steps=195 format=3 uid="uid://dwniaym2g1off"]
 
 [ext_resource type="Script" path="res://enemies/x_boss.gd" id="1_u3wem"]
 [ext_resource type="Script" path="res://enemies/boss_hurtbox.gd" id="2_y4k4d"]
@@ -908,6 +908,32 @@ height = 400.0
 height = 400.0
 radius = 1.0
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3wo4w"]
+emission_shape = 2
+emission_sphere_radius = 1.0
+particle_flag_align_y = true
+direction = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+spread = 180.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+angular_velocity_min = 10.0
+angular_velocity_max = 10.0
+
+[sub_resource type="Curve" id="Curve_ml6vc"]
+_data = [Vector2(0, 0), 0.0, 2.36625, 0, 0, Vector2(0.252444, 0.192954), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5gl0a"]
+shading_mode = 0
+albedo_color = Color(1, 0.913725, 0.564706, 1)
+use_particle_trails = true
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_0qrsn"]
+material = SubResource("StandardMaterial3D_5gl0a")
+sections = 8
+curve = SubResource("Curve_ml6vc")
+
 [node name="XBoss" type="CharacterBody3D" groups=["lockonables"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 collision_layer = 0
@@ -1270,20 +1296,20 @@ bones/61/rotation = Quaternion(-0.00100266, -2.73097e-06, 9.17275e-09, 1)
 bones/62/rotation = Quaternion(0.493543, 0.00257562, -0.0016366, 0.869716)
 bones/63/rotation = Quaternion(0.282048, 0.0939061, -0.0277473, 0.95439)
 
-[node name="LaserComboBall" type="MeshInstance3D" parent="."]
+[node name="LaserPivot" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.707107, -1.60554e-24, -0.707107, 3.48787e-16, 1, -3.48787e-16, 0.707107, -4.93259e-16, -0.707107, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 visible = false
 mesh = SubResource("CapsuleMesh_utpur")
 skeleton = NodePath("../..")
 
-[node name="LaserMesh" type="MeshInstance3D" parent="LaserComboBall"]
+[node name="LaserMesh" type="MeshInstance3D" parent="LaserPivot"]
 transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 2.08165e-12, 2.08165e-12, -200)
 visible = false
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_n6qlk")
 skeleton = NodePath("../..")
 
-[node name="EnemyHitbox" type="Area3D" parent="LaserComboBall"]
+[node name="EnemyHitbox" type="Area3D" parent="LaserPivot"]
 process_mode = 4
 transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 2.08165e-12, 2.08165e-12, -200)
 collision_layer = 8
@@ -1291,9 +1317,26 @@ collision_mask = 11
 script = ExtResource("3_rpkwr")
 damage = 40
 
-[node name="LaserCollider" type="CollisionShape3D" parent="LaserComboBall/EnemyHitbox"]
+[node name="LaserCollider" type="CollisionShape3D" parent="LaserPivot/EnemyHitbox"]
 transform = Transform3D(1, -3.48787e-16, -2.50326e-08, 3.48787e-16, 1, -2.66454e-15, -2.50325e-08, 3.05684e-15, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 shape = SubResource("CylinderShape3D_bhmef")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="LaserPivot"]
+amount = 20
+lifetime = 10.0
+speed_scale = 3.0
+fixed_fps = 60
+local_coords = true
+trail_enabled = true
+trail_lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_3wo4w")
+draw_pass_1 = SubResource("TubeTrailMesh_0qrsn")
+
+[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="LaserPivot"]
+transform = Transform3D(1, -4.22701e-24, -7.57478e-09, -2.5503e-22, 1, 1.25612e-22, -1.26881e-08, 1.29625e-24, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+strength = 15.0
+attenuation = 1e-05
+radius = 10.0
 
 [editable path="MeleeHitboxPivot/XBlade"]
 [editable path="MeleeHitboxPivot/XBlade/XLeftArm"]
