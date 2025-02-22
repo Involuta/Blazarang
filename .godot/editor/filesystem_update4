@@ -1,4 +1,4 @@
-res://levels/x_boss_level/x_boss_level_background.tscn
+res://levels/x_boss_level/section_nodes/x_boss_arena1.tscn
 res://textures/clear_tile.tres
 res://textures/x_boss_body.tres
 res://GPUTrail-main/shaders/trail.gdshader
@@ -21,9 +21,9 @@ res://ui/flash.gdshader
 res://ui/glow.gdshader
 res://ui/glitch.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
+res://textures/solid_light_gray_tile.tres
 res://enemies/x_boss.tscn
-res://levels/x_boss_level/background_nodes/x_diamond.tscn
-res://enemies/enemy_anims/x_lasercombo.res
 res://enemies/x_laser_combo_ball_projectile.tscn
+res://levels/x_boss_level/x_boss_level1.tscn
 res://enemies/x_boss.gd
-res://enemies/x_volcano.tscn
+res://DisappearNode.gd

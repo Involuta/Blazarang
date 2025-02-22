@@ -147,6 +147,7 @@ var semicircle_center := Vector3.ZERO
 @export var diamond_rain_radius := 6.0
 
 var phase2 := false
+var laser_combo_ball_following_self := false
 var param_path_base := "parameters/StateMachine/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
@@ -173,6 +174,7 @@ var left_arm : Node3D
 var right_arm : Node3D
 var x_icon : Node3D
 var x_icon_pos : Node3D
+var laser_combo_ball : Node3D
 
 func _ready():
 	add_to_group("lockonables")
@@ -185,6 +187,7 @@ func _ready():
 	right_arm = level.find_child("FloatingXRightArm")
 	x_icon = level.find_child("XIcon")
 	x_icon_pos = level.find_child("XIconPos")
+	laser_combo_ball = level.find_child("XLaserComboBall")
 	
 	Globals.health_segment_lost.connect(on_health_segment_lost)
 	
@@ -237,6 +240,9 @@ func _physics_process(delta):
 	x_icon.global_position = lerp(x_icon.global_position, x_icon_pos.global_position, x_icon_lerp_val)
 	if global_position.y < -100:
 		queue_free()
+	
+	if is_instance_valid(laser_combo_ball) and laser_combo_ball_following_self:
+		laser_combo_ball.global_position = global_position
 	
 	anim_tree.set("parameters/StateMachine/WalkSpace/blend_position", velocity.length())
 
@@ -934,7 +940,13 @@ func spawn_diamond_at(pos : Vector3):
 func delete_diamond(d: Node3D):
 	d.queue_free()
 
+func delete_laser_combo_ball():
+	laser_combo_ball.queue_free()
+
 func laser_combo_mvmt():
+	laser_combo_ball.process_mode = Node.PROCESS_MODE_INHERIT
+	laser_combo_ball.visible = true
+	laser_combo_ball_following_self = true
 	var lateral_vec_to_target := Vector3.FORWARD
 	# 8.5t = 10 seconds (first 2 decimal points only so that the tween lengths don't go over total anim time)
 	var t = 1.17
@@ -981,15 +993,13 @@ func laser_combo_mvmt():
 	# Laser sweep RL stationary (just wait) t=6 after sweep
 	await create_tween().tween_interval(.5*t).finished
 	
-	# Ball launch (instantiate ball) and move icon to teleport pos
-	var ball_inst = load("res://enemies/x_laser_combo_ball_projectile.tscn").instantiate()
-	level.add_child.call_deferred(ball_inst)
-	await ball_inst.tree_entered
-	ball_inst.global_position = global_position
-	ball_inst.visible = true
+	# Ball launch (make ball visible and send it fwd) and move icon to teleport pos
+	laser_combo_ball_following_self = false
 	lateral_vec_to_target = target.global_position - global_position
 	lateral_vec_to_target.y = 0
-	create_tween().tween_property(ball_inst, "global_position", 1.5*lateral_vec_to_target, 1.5*t).as_relative()
+	var ball_tween := create_tween()
+	ball_tween.tween_property(laser_combo_ball, "global_position", 1.5*lateral_vec_to_target, 1.5*t).as_relative()
+	ball_tween.tween_callback(delete_laser_combo_ball)
 	
 	side_teleport_dist_from_target *= 1.25
 	set_x_icon_targetdiagonal_pos()

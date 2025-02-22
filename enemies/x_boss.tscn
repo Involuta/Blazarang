@@ -1,4 +1,4 @@
-[gd_scene load_steps=195 format=3 uid="uid://dwniaym2g1off"]
+[gd_scene load_steps=190 format=3 uid="uid://dwniaym2g1off"]
 
 [ext_resource type="Script" path="res://enemies/x_boss.gd" id="1_u3wem"]
 [ext_resource type="Script" path="res://enemies/boss_hurtbox.gd" id="2_y4k4d"]
@@ -893,11 +893,6 @@ attractor_interaction_enabled = false
 shading_mode = 0
 albedo_color = Color(1.5, 0.8, 0.5, 1)
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_utpur"]
-material = SubResource("StandardMaterial3D_wt0qc")
-radius = 3.0
-height = 6.0
-
 [sub_resource type="CylinderMesh" id="CylinderMesh_n6qlk"]
 material = SubResource("StandardMaterial3D_wt0qc")
 top_radius = 0.4
@@ -907,32 +902,6 @@ height = 400.0
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_bhmef"]
 height = 400.0
 radius = 1.0
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3wo4w"]
-emission_shape = 2
-emission_sphere_radius = 1.0
-particle_flag_align_y = true
-direction = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-spread = 180.0
-gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-initial_velocity_min = 10.0
-initial_velocity_max = 10.0
-angular_velocity_min = 10.0
-angular_velocity_max = 10.0
-
-[sub_resource type="Curve" id="Curve_ml6vc"]
-_data = [Vector2(0, 0), 0.0, 2.36625, 0, 0, Vector2(0.252444, 0.192954), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5gl0a"]
-shading_mode = 0
-albedo_color = Color(1, 0.913725, 0.564706, 1)
-use_particle_trails = true
-
-[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_0qrsn"]
-material = SubResource("StandardMaterial3D_5gl0a")
-sections = 8
-curve = SubResource("Curve_ml6vc")
 
 [node name="XBoss" type="CharacterBody3D" groups=["lockonables"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -1085,7 +1054,6 @@ visible = false
 mesh = SubResource("BoxMesh_ghh5t")
 
 [node name="X_boss_meshes" parent="." instance=ExtResource("5_f83nc")]
-transform = Transform3D(-0.1, 3.48787e-17, -8.74228e-09, 3.48787e-17, 0.1, -3.48787e-17, 8.74228e-09, -3.48787e-17, -0.1, 2.08165e-12, -1.3, 2.08165e-12)
 
 [node name="Skeleton3D" parent="X_boss_meshes/Armature" index="0"]
 bones/0/position = Vector3(2.42062e-10, 13.3196, 0.227602)
@@ -1113,7 +1081,7 @@ bones/22/rotation = Quaternion(0.223201, -0.0260236, -0.0159612, 0.974294)
 bones/23/rotation = Quaternion(0.288124, -0.231999, 0.0672301, 0.926629)
 
 [node name="Head" parent="X_boss_meshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1, 7.92624e-11, 2.88486e-11, -7.92624e-11, 1, 1.35586e-07, -2.88486e-11, -1.24047e-07, 1, 9.63192e-10, 21.5398, 2.6395)
+transform = Transform3D(1, 7.92623e-11, 2.88486e-11, -7.92624e-11, 1, 1.01196e-06, -2.88485e-11, -1.00944e-06, 1, 9.63191e-10, 21.5398, 2.6395)
 
 [node name="XHead" parent="X_boss_meshes/Armature/Skeleton3D/Head" index="0"]
 visible = true
@@ -1127,16 +1095,16 @@ transform = Transform3D(1, 2.22572e-15, -4.83611e-15, 4.69788e-15, -2.28655e-08,
 emitting = false
 
 [node name="LeftArm" parent="X_boss_meshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.410416, 0.263219, -0.873083, 0.442147, -0.894802, -0.061924, -0.797536, -0.360617, -0.483623, 3.5919, 20.2134, 2.29566)
+transform = Transform3D(0.410416, 0.26322, -0.873083, 0.442147, -0.894802, -0.0619246, -0.797536, -0.360616, -0.483623, 3.5919, 20.2134, 2.29566)
 
 [node name="RightArm" parent="X_boss_meshes/Armature/Skeleton3D" index="3"]
 transform = Transform3D(0.409884, -0.263207, 0.873337, -0.44525, -0.893375, -0.060277, 0.796083, -0.364147, -0.483373, -3.5919, 20.2016, 2.3281)
 
 [node name="LeftHand" parent="X_boss_meshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.953937, 0.297371, 0.0396644, 0.297446, -0.954729, 0.00413558, 0.0390984, 0.00785298, -0.999204, 5.74931, 12.8556, -0.656995)
+transform = Transform3D(0.953938, 0.297371, 0.039665, 0.297446, -0.954729, 0.00413598, 0.0390991, 0.0078528, -0.999204, 5.74931, 12.8556, -0.656994)
 
 [node name="RightHand" parent="X_boss_meshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.924331, -0.380359, -0.0306287, -0.379216, -0.924556, 0.0372926, -0.0425025, -0.0228558, -0.998835, -5.74937, 12.8542, -0.653703)
+transform = Transform3D(0.924332, -0.380359, -0.0306284, -0.379216, -0.924556, 0.0372928, -0.0425023, -0.0228561, -0.998835, -5.74937, 12.8542, -0.653705)
 
 [node name="SunMesh" parent="X_boss_meshes/Armature/Skeleton3D/RightHand" index="0"]
 visible = false
@@ -1298,8 +1266,6 @@ bones/63/rotation = Quaternion(0.282048, 0.0939061, -0.0277473, 0.95439)
 
 [node name="LaserPivot" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.707107, -1.60554e-24, -0.707107, 3.48787e-16, 1, -3.48787e-16, 0.707107, -4.93259e-16, -0.707107, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-visible = false
-mesh = SubResource("CapsuleMesh_utpur")
 skeleton = NodePath("../..")
 
 [node name="LaserMesh" type="MeshInstance3D" parent="LaserPivot"]
@@ -1320,23 +1286,6 @@ damage = 40
 [node name="LaserCollider" type="CollisionShape3D" parent="LaserPivot/EnemyHitbox"]
 transform = Transform3D(1, -3.48787e-16, -2.50326e-08, 3.48787e-16, 1, -2.66454e-15, -2.50325e-08, 3.05684e-15, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 shape = SubResource("CylinderShape3D_bhmef")
-
-[node name="GPUParticles3D" type="GPUParticles3D" parent="LaserPivot"]
-amount = 20
-lifetime = 10.0
-speed_scale = 3.0
-fixed_fps = 60
-local_coords = true
-trail_enabled = true
-trail_lifetime = 0.5
-process_material = SubResource("ParticleProcessMaterial_3wo4w")
-draw_pass_1 = SubResource("TubeTrailMesh_0qrsn")
-
-[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="LaserPivot"]
-transform = Transform3D(1, -4.22701e-24, -7.57478e-09, -2.5503e-22, 1, 1.25612e-22, -1.26881e-08, 1.29625e-24, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-strength = 15.0
-attenuation = 1e-05
-radius = 10.0
 
 [editable path="MeleeHitboxPivot/XBlade"]
 [editable path="MeleeHitboxPivot/XBlade/XLeftArm"]

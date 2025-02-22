@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://be5qq551348yp"]
+[gd_scene load_steps=24 format=3 uid="uid://be5qq551348yp"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_xf82h"]
 [ext_resource type="PackedScene" uid="uid://cwui2mc0avv1y" path="res://glb_inherited_scenes/x_left_arm.tscn" id="2_2tvw5"]
@@ -9,6 +9,7 @@
 [ext_resource type="Material" uid="uid://cwl80cdm2434o" path="res://textures/clear_tile.tres" id="4_xp44b"]
 [ext_resource type="Material" uid="uid://bhg2pm50yb3xh" path="res://textures/x_grid3.tres" id="5_4gyuf"]
 [ext_resource type="PackedScene" uid="uid://c433gnebqhmb0" path="res://enemies/x_icon.tscn" id="8_ha6s8"]
+[ext_resource type="PackedScene" uid="uid://ckkxheuv5iefh" path="res://enemies/x_laser_combo_ball_projectile.tscn" id="10_v3cwj"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_om6er"]
 vertices = PackedVector3Array(17.8333, 0.333333, 24.0833, 24.0833, 0.333333, 24.0833, 24.0833, 0.333333, 17.8333, -24.1667, 0.333333, 17.8333, -24.1667, 0.333333, 24.0833, -12.1667, 0.333333, 24.0833, 24.0833, 0.333333, -12.1667, 24.0833, 0.333333, -24.1667, 17.8333, 0.333333, -24.1667, 11.8333, 0.333333, 24.0833, 17.8333, 0.333333, 24.0833, 24.0833, 0.333333, 17.8333, -12.1667, 0.333333, -24.1667, -24.1667, 0.333333, -24.1667, -24.1667, 0.333333, -12.1667, -24.1667, 0.333333, 11.8333, -24.1667, 0.333333, 17.8333, -12.1667, 0.333333, 24.0833, -0.166666, 0.333333, 24.0833, 24.0833, 0.333333, -12.1667, 17.8333, 0.333333, -24.1667, 11.8333, 0.333333, -24.1667, 11.8333, 0.333333, 24.0833, 24.0833, 0.333333, 17.8333, 24.0833, 0.333333, 11.8333, -0.166666, 0.333333, 24.0833, -0.166666, 0.333333, -24.1667, -12.1667, 0.333333, -24.1667, -24.1667, 0.333333, -12.1667, -24.1667, 0.333333, -0.166666, -24.1667, 0.333333, -0.166666, -24.1667, 0.333333, 11.8333, -0.166666, 0.333333, 24.0833, 24.0833, 0.333333, 11.8333, 24.0833, 0.333333, -0.166666, -0.166666, 0.333333, -24.1667, 24.0833, 0.333333, -0.166666, 24.0833, 0.333333, -12.1667, 11.8333, 0.333333, -24.1667, -0.166666, 0.333333, -24.1667)
@@ -197,3 +198,6 @@ transform = Transform3D(0.5, -1.74393e-16, 1.74393e-16, 1.74393e-16, 0.5, -1.743
 
 [node name="XIconPos" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10.1, 2.08165e-12)
+
+[node name="XLaserComboBall" parent="." instance=ExtResource("10_v3cwj")]
+visible = false
