@@ -145,8 +145,12 @@ var semicircle_center := Vector3.ZERO
 @export var dual_blade_dash_stop_dist := 2.0
 @export var dual_blade_dash_leap_height := 2.0
 @export var diamond_rain_radius := 6.0
+@export var laser_combo_chargeup_diamond_min_spawn_radius := 6.0
+@export var laser_combo_chargeup_diamond_max_spawn_radius := 20.0
+@export var laser_combo_chargeup_diamond_min_dist_from_others := 3.0
 
 var phase2 := false
+var laser_combo_chargeup_diamond_pos_list := []
 var laser_combo_ball_following_self := false
 var param_path_base := "parameters/StateMachine/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -914,20 +918,21 @@ func dual_blade_leap():
 	mvmt_tween.tween_interval(.6)
 	mvmt_tween.tween_property(self, "global_position", dual_blade_dash_leap_height * Vector3.DOWN, .1).as_relative()
 
-func diamond_rain():
+func dual_blade_dash_diamond_rain():
 	var rain_tween := get_tree().create_tween()
 	var spawn_pos := global_position + diamond_rain_radius * transform.basis.z + 2.5 * dual_blade_dash_leap_height * Vector3.UP
-	rain_tween.tween_callback(spawn_diamond_at.bind(spawn_pos))
+	rain_tween.tween_callback(spawn_diamond_at.bind(spawn_pos, target))
 	rain_tween.tween_interval(.25)
 	spawn_pos = global_position + diamond_rain_radius * -transform.basis.x + 2.5 * dual_blade_dash_leap_height * Vector3.UP
-	rain_tween.tween_callback(spawn_diamond_at.bind(spawn_pos))
+	rain_tween.tween_callback(spawn_diamond_at.bind(spawn_pos, target))
 	spawn_pos = global_position + diamond_rain_radius * transform.basis.x + 2.5 * dual_blade_dash_leap_height * Vector3.UP
-	rain_tween.tween_callback(spawn_diamond_at.bind(spawn_pos))
+	rain_tween.tween_callback(spawn_diamond_at.bind(spawn_pos, target))
 
-func spawn_diamond_at(pos : Vector3):
+func spawn_diamond_at(pos : Vector3, diamond_target : Node3D):
 	var d = diamond.instantiate()
 	level.add_child.call_deferred(d)
 	await d.tree_entered
+	d.set_target(diamond_target)
 	d.global_position = pos + Vector3.UP * 100
 	var fall_tween := get_tree().create_tween()
 	fall_tween.tween_property(d, "global_position", pos + Vector3.UP * 37.5, .1)
@@ -943,10 +948,43 @@ func delete_diamond(d: Node3D):
 func delete_laser_combo_ball():
 	laser_combo_ball.queue_free()
 
-func laser_combo_chargeup():
+func laser_combo_chargeup_mvmt():
 	laser_combo_ball_following_self = true
 	Globals.activate_x_laser_combo_ball.emit()
 	await create_tween().tween_property(self, "global_position", armbombs_dashback_height*Vector3.UP, 2.5).set_ease(Tween.EASE_IN_OUT).as_relative().finished
+
+func laser_combo_chargeup_diamond_rain():
+	for i in range(10):
+		spawn_laser_combo_chargeup_diamond()
+		await create_tween().tween_interval(.1).finished
+
+func spawn_laser_combo_chargeup_diamond():
+	while true:
+		var test_pos := diamond_spawn_coord_within_radiuses(laser_combo_chargeup_diamond_min_spawn_radius, laser_combo_chargeup_diamond_max_spawn_radius)
+		if diamond_spawn_pos_is_far_from_others(laser_combo_chargeup_diamond_pos_list, test_pos, laser_combo_chargeup_diamond_min_dist_from_others):
+			spawn_diamond_at(test_pos, self)
+			laser_combo_chargeup_diamond_pos_list.append(test_pos)
+			break
+
+func diamond_spawn_coord_within_radiuses(min_spawn_radius: float, max_spawn_radius: float) -> Vector3:
+	var theta = rng.randf_range(0, 2*PI)  # Angle around the vertical axis (0 to 2π)
+	var phi = rng.randf_range(0, PI)     # Angle from the top (0 to π)
+	var r = rng.randf_range(min_spawn_radius, max_spawn_radius)  # Radius within shell
+
+	# Convert spherical coordinates to Cartesian coordinates
+	var x = r * sin(phi) * cos(theta)
+	var y = r * sin(phi) * sin(theta)
+	var z = r * cos(phi)
+
+	return global_position + Vector3(x, y, z)
+
+func diamond_spawn_pos_is_far_from_others(diamond_pos_list, pos: Vector3, dist: float) -> bool:
+	if diamond_pos_list.is_empty():
+		return true
+	for d in diamond_pos_list:
+		if d.distance_to(pos) < dist:
+			return false
+	return true
 
 func laser_combo_mvmt():
 	var lateral_vec_to_target := Vector3.FORWARD

@@ -16,8 +16,8 @@ height = 2.75
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7g15b"]
 height = 2.75
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_kfmh4"]
-radius = 5.0
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mvwev"]
+height = 24.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xdhg2"]
 shading_mode = 0
@@ -28,7 +28,7 @@ material = SubResource("StandardMaterial3D_xdhg2")
 radius = 0.25
 height = 0.5
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mqyl2"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p8k1v"]
 height = 24.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vdsab"]
@@ -916,7 +916,7 @@ radius = 1.0
 [node name="XBoss" type="CharacterBody3D" groups=["lockonables"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 collision_layer = 0
-collision_mask = 10
+collision_mask = 146
 platform_floor_layers = 4294901762
 script = ExtResource("1_u3wem")
 phase2_long_dist_right_arm_not_deployed_attack_chances = {
@@ -931,6 +931,9 @@ phase2_long_dist_right_arm_not_deployed_attack_chances = {
 "Sweep": 2.08167e-12,
 "Triangle": 2.08167e-12
 }
+laser_combo_chargeup_diamond_min_spawn_radius = 10.0
+laser_combo_chargeup_diamond_max_spawn_radius = 25.0
+laser_combo_chargeup_diamond_min_dist_from_others = 4.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -950,18 +953,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.0
 shape = SubResource("CapsuleShape3D_7g15b")
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
-transform = Transform3D(-0.714975, -0.698961, -0.0161792, -0.0115692, -0.0113101, 0.999868, -0.699051, 0.71507, 2.82234e-08, 0.11339, 0.722541, -0.544962)
+transform = Transform3D(-0.714975, -0.698961, -0.0161788, 0.000535012, -0.0236878, 0.999718, -0.699147, 0.714767, 0.0173101, -0.565285, -0.592598, -0.676325)
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
 process_mode = 4
-transform = Transform3D(0.999999, -3.6074e-09, -4.0875e-17, -7.51574e-09, 0.999999, -9.53989e-08, -3.48786e-16, 9.53989e-08, 0.999999, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(0.999999, -3.6074e-09, -4.0875e-17, -7.51574e-09, 0.999999, -9.53989e-08, -3.48786e-16, 9.53989e-08, 0.999999, 2.08165e-12, 12, 2.08165e-12)
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("3_rpkwr")
-damage = 99
+damage = 40
 
 [node name="HitboxCollider" type="CollisionShape3D" parent="MeleeHitboxPivot/EnemyHitbox"]
-shape = SubResource("SphereShape3D_kfmh4")
+shape = SubResource("CapsuleShape3D_mvwev")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeleeHitboxPivot/EnemyHitbox"]
 transform = Transform3D(1, -1.62572e-08, -4.69464e-15, -4.73391e-08, 1, -3.90864e-15, 2.95455e-14, -2.14339e-14, 0.999999, 2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -999,7 +1002,7 @@ surface_material_override/0 = ExtResource("5_qr4nt")
 surface_material_override/0 = ExtResource("5_qr4nt")
 
 [node name="MeleeHitboxPivot2" type="Node3D" parent="."]
-transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 2.08165e-12, 2.08165e-12, 0.8)
+transform = Transform3D(-0.72717, 0.628958, 0.275019, 0.329022, -0.0322751, 0.94377, 0.602468, 0.776769, -0.183472, 0.565, -0.593, -0.676)
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot2"]
 process_mode = 4
@@ -1010,7 +1013,7 @@ script = ExtResource("3_rpkwr")
 damage = 40
 
 [node name="HitboxCollider" type="CollisionShape3D" parent="MeleeHitboxPivot2/EnemyHitbox"]
-shape = SubResource("CapsuleShape3D_mqyl2")
+shape = SubResource("CapsuleShape3D_p8k1v")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeleeHitboxPivot2/EnemyHitbox"]
 transform = Transform3D(1, -1.62572e-08, -4.69464e-15, -4.73391e-08, 1, -3.90864e-15, 2.95455e-14, -2.14339e-14, 0.999999, 2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -1067,32 +1070,32 @@ mesh = SubResource("BoxMesh_ghh5t")
 transform = Transform3D(-0.1, 3.48787e-17, -8.74228e-09, 3.48787e-17, 0.1, -3.48787e-17, 8.74228e-09, -3.48787e-17, -0.1, 2.08165e-12, -2.2, 2.08165e-12)
 
 [node name="Skeleton3D" parent="X_boss_meshes/Armature" index="0"]
-bones/0/position = Vector3(2.42062e-10, 17.0057, 0.0423295)
-bones/0/rotation = Quaternion(0.00300551, 1.24346e-13, -4.21751e-11, 0.999995)
+bones/0/position = Vector3(2.42062e-10, 16.7568, -0.0275311)
+bones/0/rotation = Quaternion(0.101204, 4.27097e-12, -4.19586e-11, 0.994866)
 bones/1/position = Vector3(0, 1.53056, -0.079443)
-bones/1/rotation = Quaternion(-0.0432223, -1.82051e-12, 4.21359e-11, 0.999066)
-bones/2/rotation = Quaternion(-0.0340903, -4.99553e-19, 8.18103e-18, 0.999419)
-bones/3/rotation = Quaternion(-0.0776962, -1.15058e-18, 1.86555e-17, 0.996977)
-bones/4/rotation = Quaternion(0.254963, 3.01301e-18, -5.75992e-17, 0.966951)
-bones/8/rotation = Quaternion(0.258724, 0.0293224, -0.22413, 0.939131)
-bones/9/rotation = Quaternion(2.18047e-08, -2.2622e-07, 0.15875, 0.987319)
-bones/10/rotation = Quaternion(-0.116275, 0.00968617, 0.0491108, 0.991955)
-bones/12/rotation = Quaternion(0.243865, -0.0225036, 0.277645, 0.928944)
-bones/13/rotation = Quaternion(-4.86522e-07, 1.61912e-06, -0.25581, 0.966727)
-bones/14/rotation = Quaternion(-0.0823247, -0.0172622, -0.00683168, 0.996433)
-bones/15/rotation = Quaternion(-0.0260797, -0.255469, -0.966041, 0.0286236)
+bones/1/rotation = Quaternion(-0.025926, -1.0961e-12, 4.21614e-11, 0.999664)
+bones/2/rotation = Quaternion(-3.72529e-09, 7.70372e-34, 2.06795e-25, 1)
+bones/3/rotation = Quaternion(7.45058e-09, -9.62965e-34, 1.29247e-25, 1)
+bones/4/rotation = Quaternion(0.0888425, 1.30643e-18, -1.77715e-17, 0.996046)
+bones/8/rotation = Quaternion(0.404777, -0.1768, -0.322043, 0.837368)
+bones/9/rotation = Quaternion(-2.78634e-08, -2.44209e-07, 0.214994, 0.976615)
+bones/10/rotation = Quaternion(-0.0697117, 0.16362, 0.087997, 0.980115)
+bones/12/rotation = Quaternion(0.403559, 0.149433, 0.268841, 0.861704)
+bones/13/rotation = Quaternion(-2.17356e-07, 1.68606e-06, -0.130859, 0.991401)
+bones/14/rotation = Quaternion(-0.104325, -0.0984493, -0.143679, 0.979173)
+bones/15/rotation = Quaternion(-0.0215373, -0.34175, -0.939468, 0.0119696)
 bones/15/scale = Vector3(0.999999, 1, 1)
-bones/16/rotation = Quaternion(-0.651653, -3.48808e-06, -2.2197e-06, 0.758517)
-bones/17/rotation = Quaternion(0.400599, 0.0931524, 0.0509838, 0.910079)
+bones/16/rotation = Quaternion(-0.570029, -3.70032e-06, -1.84494e-06, 0.821624)
+bones/17/rotation = Quaternion(0.311464, 0.084157, 0.0497474, 0.945216)
 bones/18/rotation = Quaternion(0.276974, 0.230057, -0.0684804, 0.930413)
-bones/20/rotation = Quaternion(-0.104035, 0.031311, 0.993961, 0.0154025)
+bones/20/rotation = Quaternion(-0.0696988, 0.0726357, 0.994797, 0.0156727)
 bones/20/scale = Vector3(0.999999, 1, 1)
-bones/21/rotation = Quaternion(-0.251986, 8.98628e-06, 3.12812e-06, 0.967731)
-bones/22/rotation = Quaternion(0.255496, -0.111051, -0.0204298, 0.960194)
+bones/21/rotation = Quaternion(-0.0830179, 9.39743e-06, 1.54862e-06, 0.996548)
+bones/22/rotation = Quaternion(0.145032, -0.116522, 0.00393612, 0.982534)
 bones/23/rotation = Quaternion(0.280721, -0.231216, 0.0698715, 0.928899)
 
 [node name="Head" parent="X_boss_meshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1, 1.66385e-16, -4.65357e-17, -1.65053e-16, 0.977735, -0.209844, 1.01791e-17, 0.209844, 0.977735, 3.71167e-10, 25.3712, -0.811493)
+transform = Transform3D(1, -4.39084e-16, 1.06127e-16, 4.49834e-16, 0.946425, -0.322923, 4.10087e-17, 0.322923, 0.946425, 3.71163e-10, 25.1239, 1.57155)
 
 [node name="XHead" parent="X_boss_meshes/Armature/Skeleton3D/Head" index="0"]
 visible = true
@@ -1109,16 +1112,16 @@ transform = Transform3D(1, 2.22572e-15, -4.83611e-15, 4.69788e-15, -2.28655e-08,
 emitting = false
 
 [node name="LeftArm" parent="X_boss_meshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(-0.39054, 0.692609, -0.606441, -0.0553225, -0.675223, -0.735536, -0.918922, -0.253707, 0.302018, 3.5919, 24.0763, -1.06289)
+transform = Transform3D(-0.689714, 0.35343, -0.631966, 0.161646, -0.7756, -0.610176, -0.705808, -0.523002, 0.477812, 3.5919, 23.8785, 1.01339)
 
 [node name="RightArm" parent="X_boss_meshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(-0.479101, -0.662162, 0.576198, 0.022231, -0.665385, -0.746169, 0.877478, -0.344681, 0.333507, -3.5919, 24.085, -1.02947)
+transform = Transform3D(-0.58584, -0.423322, 0.691079, -0.157321, -0.77711, -0.609385, 0.79501, -0.465723, 0.388665, -3.5919, 23.8715, 1.0472)
 
 [node name="LeftHand" parent="X_boss_meshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(-0.0601401, 0.909908, -0.410427, -0.299717, -0.40866, -0.862071, -0.952131, 0.0711668, 0.297291, 9.64256, 18.7397, -1.91027)
+transform = Transform3D(-0.142763, 0.756432, -0.638302, -0.0789725, -0.651557, -0.754477, -0.986601, -0.0573029, 0.152755, 7.55255, 17.5215, -1.86612)
 
 [node name="RightHand" parent="X_boss_meshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(-0.0596126, -0.897233, 0.437515, 0.327784, -0.431585, -0.840412, 0.94287, 0.093311, 0.319826, -9.65138, 19.0204, -1.89181)
+transform = Transform3D(-0.12804, -0.784761, 0.606428, 0.117331, -0.619153, -0.776455, 0.984804, -0.0282642, 0.171353, -7.63607, 17.4271, -1.86614)
 
 [node name="SunMesh" parent="X_boss_meshes/Armature/Skeleton3D/RightHand" index="0"]
 visible = false

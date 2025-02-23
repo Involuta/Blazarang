@@ -74,3 +74,5 @@ res://levels/x_boss_level/x_boss_level_background.tscn
 res://globals.gd
 res://enemies/x_laser_combo_ball.gd
 res://hurtbox.gd
+res://levels/x_boss_level/background_nodes/x_diamond.tscn
+res://levels/x_boss_level/background_nodes/x_diamond.gd

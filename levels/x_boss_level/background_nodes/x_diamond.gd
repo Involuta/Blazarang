@@ -17,6 +17,9 @@ func _ready():
 	await anim_player.animation_finished
 	anim_player.play("top_twist_in")
 
+func set_target(new_target : Node3D):
+	target = new_target
+
 func _physics_process(_delta):
 	if aiming_at_target:
 		eye.look_at(target.global_position)
