@@ -922,7 +922,7 @@ script = ExtResource("1_u3wem")
 phase2_long_dist_right_arm_not_deployed_attack_chances = {
 "ArmBombs": 2.08167e-12,
 "ChainSlice": 2.08167e-12,
-"DualBladeDash": 0.0,
+"DualBladeDash": 2.08167e-12,
 "LaserCombo": 1.0,
 "RightArmLaser": 2.08167e-12,
 "SemicircleDash": 2.08167e-12,
@@ -933,7 +933,7 @@ phase2_long_dist_right_arm_not_deployed_attack_chances = {
 }
 laser_combo_chargeup_diamond_min_spawn_radius = 10.0
 laser_combo_chargeup_diamond_max_spawn_radius = 25.0
-laser_combo_chargeup_diamond_min_dist_from_others = 4.0
+laser_combo_chargeup_diamond_min_dist_from_others = 5.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)

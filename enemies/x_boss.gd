@@ -148,6 +148,7 @@ var semicircle_center := Vector3.ZERO
 @export var laser_combo_chargeup_diamond_min_spawn_radius := 6.0
 @export var laser_combo_chargeup_diamond_max_spawn_radius := 20.0
 @export var laser_combo_chargeup_diamond_min_dist_from_others := 3.0
+@export var laser_combo_chargeup_diamond_num := 8
 
 var phase2 := false
 var laser_combo_chargeup_diamond_pos_list := []
@@ -932,8 +933,9 @@ func spawn_diamond_at(pos : Vector3, diamond_target : Node3D):
 	var d = diamond.instantiate()
 	level.add_child.call_deferred(d)
 	await d.tree_entered
-	d.set_target(diamond_target)
+	d.target = diamond_target
 	d.global_position = pos + Vector3.UP * 100
+	d.visible = true
 	var fall_tween := get_tree().create_tween()
 	fall_tween.tween_property(d, "global_position", pos + Vector3.UP * 37.5, .1)
 	fall_tween.tween_property(d, "global_position", pos, .25).set_ease(Tween.EASE_IN)
@@ -954,7 +956,7 @@ func laser_combo_chargeup_mvmt():
 	await create_tween().tween_property(self, "global_position", armbombs_dashback_height*Vector3.UP, 2.5).set_ease(Tween.EASE_IN_OUT).as_relative().finished
 
 func laser_combo_chargeup_diamond_rain():
-	for i in range(10):
+	for i in range(laser_combo_chargeup_diamond_num):
 		spawn_laser_combo_chargeup_diamond()
 		await create_tween().tween_interval(.1).finished
 

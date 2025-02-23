@@ -466,6 +466,7 @@ _data = {
 }
 
 [node name="XDiamond" type="Node3D"]
+visible = false
 script = ExtResource("1_4fbxl")
 
 [node name="Diamond" parent="." instance=ExtResource("1_oi60u")]
@@ -481,7 +482,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_0lssr")
 
 [node name="EyeMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(3, -2.3111e-14, 4.69512e-15, 2.3111e-14, 3, -6.92934e-08, -4.69512e-15, 6.92934e-08, 3, 2.08165e-12, 1.8, 2.08165e-12)
-visible = false
 mesh = SubResource("CapsuleMesh_jec7k")
 skeleton = NodePath("../..")
 
