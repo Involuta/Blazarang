@@ -9,6 +9,7 @@ signal score_updated(score_change: int)
 signal destabilize
 signal stabilize
 signal health_segment_lost(seg_num: int)
+signal activate_x_laser_combo_ball
 
 # Update this list before the layer names in Project Settings
 const PLAYER_COL_LAYER := 1

@@ -466,7 +466,7 @@ func dash():
 func dash_grab_mvmt():
 	velocity = 2 * dash_speed * -transform.basis.z
 
-func levitate_up_for_frames(frames: int, vel: float):
+func levitate_up_with_vel(vel: float):
 	# Without this line, X's fall protection (which sets his y vel to 0 when his global y is below the min) would prevent his y vel from changing
 	global_position.y = min_y_pos + .01
 	velocity.y = vel
@@ -943,14 +943,15 @@ func delete_diamond(d: Node3D):
 func delete_laser_combo_ball():
 	laser_combo_ball.queue_free()
 
-func laser_combo_mvmt():
-	laser_combo_ball.process_mode = Node.PROCESS_MODE_INHERIT
-	laser_combo_ball.visible = true
+func laser_combo_chargeup():
 	laser_combo_ball_following_self = true
+	Globals.activate_x_laser_combo_ball.emit()
+	await create_tween().tween_property(self, "global_position", armbombs_dashback_height*Vector3.UP, 2.5).set_ease(Tween.EASE_IN_OUT).as_relative().finished
+
+func laser_combo_mvmt():
 	var lateral_vec_to_target := Vector3.FORWARD
 	# 8.5t = 10 seconds (first 2 decimal points only so that the tween lengths don't go over total anim time)
 	var t = 1.17
-	await create_tween().tween_property(self, "global_position", armbombs_dashback_height*Vector3.UP, .01).as_relative().finished
 	"""
 	Laser sweep RL
 	Get X's lateral vec to target: lateral_vec_to_target

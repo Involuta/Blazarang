@@ -41,6 +41,8 @@ glow_hdr_threshold = 1.5
 
 [node name="XBossLevelBackground" type="Node3D"]
 script = ExtResource("1_ruyd8")
+big_diamond_max_size = 0.9
+big_diamond_max_spawn_radius = 5.7
 small_diamond_max_size = 0.25
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

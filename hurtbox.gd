@@ -24,7 +24,7 @@ func set_invincibility(val: bool):
 	else:
 		current_opponent_hitboxes = opponent_hitboxes
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	pass
 
 func on_hit(hitbox):

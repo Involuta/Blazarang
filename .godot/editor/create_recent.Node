@@ -1,8 +1,8 @@
+AnimationPlayer
 GPUParticlesAttractorSphere3D
 GPUParticles3D
 MeshInstance3D
 BoneAttachment3D
-AnimationPlayer
 CollisionShape3D
 Area3D
 AnimationTree
