@@ -77,3 +77,4 @@ res://hurtbox.gd
 res://levels/x_boss_level/background_nodes/x_diamond.tscn
 res://levels/x_boss_level/background_nodes/x_diamond.gd
 res://enemies/square_particle.tscn
+res://enemies/x_blade.tscn

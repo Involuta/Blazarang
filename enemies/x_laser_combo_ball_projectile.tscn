@@ -27,19 +27,19 @@ initial_velocity_max = 10.0
 angular_velocity_min = 10.0
 angular_velocity_max = 10.0
 
-[sub_resource type="Curve" id="Curve_gjuql"]
+[sub_resource type="Curve" id="Curve_lqylp"]
 _data = [Vector2(0, 0), 0.0, 2.36625, 0, 0, Vector2(0.252444, 0.192954), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ulqhy"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bqmxi"]
 shading_mode = 0
 albedo_color = Color(1, 0.913725, 0.564706, 1)
 use_particle_trails = true
 
 [sub_resource type="TubeTrailMesh" id="TubeTrailMesh_qfdx1"]
-material = SubResource("StandardMaterial3D_ulqhy")
+material = SubResource("StandardMaterial3D_bqmxi")
 sections = 8
-curve = SubResource("Curve_gjuql")
+curve = SubResource("Curve_lqylp")
 
 [sub_resource type="Animation" id="Animation_whoax"]
 resource_name = "grow"

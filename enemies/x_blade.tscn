@@ -888,7 +888,7 @@ gravity = Vector3(2.08165e-12, -4.9, 2.08165e-12)
 initial_velocity_min = 20.0
 initial_velocity_max = 20.0
 scale_curve = SubResource("CurveTexture_e5fyj")
-color = Color(1.50196, 0.211765, 0, 1)
+color = Color(1.5, 0.21, 0, 1)
 
 [sub_resource type="Curve" id="Curve_7ffhd"]
 _data = [Vector2(0, 0), 0.0, 2.36625, 0, 0, Vector2(0.252444, 0.192954), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

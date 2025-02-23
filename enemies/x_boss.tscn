@@ -13,11 +13,12 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ub1sp"]
 height = 2.75
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tryxg"]
-height = 1.5
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v41vc"]
+height = 2.75
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ffvd3"]
-height = 3.0
+radius = 0.25
+height = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xdhg2"]
 shading_mode = 0
@@ -796,8 +797,8 @@ disable_receive_shadows = true
 [sub_resource type="SphereMesh" id="SphereMesh_l3jmq"]
 material = SubResource("StandardMaterial3D_5cvwu")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_656hx"]
-radius = 3.5
+[sub_resource type="SphereShape3D" id="SphereShape3D_i222x"]
+radius = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_j3f5l"]
 radius = 20.0
@@ -853,6 +854,7 @@ gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 15.0
 initial_velocity_max = 15.0
 color = Color(1, 0.243137, 0, 1)
+attractor_interaction_enabled = false
 
 [sub_resource type="Curve" id="Curve_260mj"]
 _data = [Vector2(0.0230504, 0), 0.0, 0.0, 0, 0, Vector2(0.376798, 0.362359), 1.95296, 1.95296, 0, 0, Vector2(0.813494, 0.579409), -4.37936, -4.37936, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -963,7 +965,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.0
 shape = SubResource("CapsuleShape3D_ub1sp")
 
 [node name="EnemyHurtbox" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -1.5, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 collision_layer = 8
 collision_mask = 9
 script = ExtResource("2_y4k4d")
@@ -973,18 +975,18 @@ opponent_hitboxes = ["PlayerHitbox"]
 
 [node name="HurtboxCollider" type="CollisionShape3D" parent="EnemyHurtbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-shape = SubResource("CapsuleShape3D_tryxg")
+shape = SubResource("CapsuleShape3D_v41vc")
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
-transform = Transform3D(0.999998, -2.97506e-07, -3.65292e-08, -3.65291e-08, -0.241922, 0.970295, -2.97506e-07, -0.970296, -0.241922, -0.0373502, -1.13855, -0.795822)
+transform = Transform3D(0.999998, -4.70935e-16, 3.26699e-16, 3.26698e-16, 0.936672, 0.350207, -4.70934e-16, -0.350207, 0.936671, -0.2, 2.08165e-12, 2.08165e-12)
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
 process_mode = 4
-transform = Transform3D(0.999999, -3.6074e-09, -4.0875e-17, -7.51574e-09, 0.999999, -9.53989e-08, -3.48786e-16, 9.53989e-08, 0.999999, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(0.999999, -3.6074e-09, -4.0875e-17, -7.51574e-09, 0.999999, -9.53989e-08, -3.48786e-16, 9.53989e-08, 0.999999, 2.08165e-12, 1, 2.08165e-12)
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("3_rpkwr")
-damage = 80
+damage = 10
 
 [node name="HitboxCollider" type="CollisionShape3D" parent="MeleeHitboxPivot/EnemyHitbox"]
 shape = SubResource("CapsuleShape3D_ffvd3")
@@ -1168,7 +1170,7 @@ parameters/StateMachine/conditions/Triangle = false
 parameters/StateMachine/WalkSpace/blend_position = 0.00188327
 
 [node name="ExplosionPivot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, -0.262266, -1.86635)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, -0.936101, -0.478013)
 
 [node name="ExplosionSparks" type="GPUParticles3D" parent="ExplosionPivot"]
 cast_shadow = 0
@@ -1210,11 +1212,11 @@ damage = 20
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExplosionPivot/EnemyHitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-shape = SubResource("SphereShape3D_656hx")
+shape = SubResource("SphereShape3D_i222x")
 
 [node name="TraumaCauser" parent="ExplosionPivot" instance=ExtResource("6_r6uan")]
 collision_layer = 0
-trauma_amount = 0.4
+trauma_amount = 0.6
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExplosionPivot/TraumaCauser"]
 shape = SubResource("SphereShape3D_j3f5l")
@@ -1237,7 +1239,7 @@ draw_pass_1 = SubResource("QuadMesh_442bf")
 [node name="ChargeupAttractor" type="GPUParticlesAttractorSphere3D" parent="ChargeupPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 strength = 2.66454e-15
-radius = 2.1
+radius = 100.0
 
 [node name="LaserComboKickChargeupParticles" type="GPUParticles3D" parent="ChargeupPivot"]
 emitting = false
