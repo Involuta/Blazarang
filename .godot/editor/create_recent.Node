@@ -1,6 +1,6 @@
+GPUParticles3D
 AnimationPlayer
 GPUParticlesAttractorSphere3D
-GPUParticles3D
 MeshInstance3D
 BoneAttachment3D
 CollisionShape3D

@@ -924,9 +924,9 @@ func dual_blade_dash_diamond_rain():
 	var spawn_pos := global_position + diamond_rain_radius * transform.basis.z + 2.5 * dual_blade_dash_leap_height * Vector3.UP
 	rain_tween.tween_callback(spawn_diamond_at.bind(spawn_pos, target))
 	rain_tween.tween_interval(.25)
-	spawn_pos = global_position + diamond_rain_radius * -transform.basis.x + 2.5 * dual_blade_dash_leap_height * Vector3.UP
+	spawn_pos = global_position + diamond_rain_radius * -transform.basis.x + 1.5 * dual_blade_dash_leap_height * Vector3.UP
 	rain_tween.tween_callback(spawn_diamond_at.bind(spawn_pos, target))
-	spawn_pos = global_position + diamond_rain_radius * transform.basis.x + 2.5 * dual_blade_dash_leap_height * Vector3.UP
+	spawn_pos = global_position + diamond_rain_radius * transform.basis.x + 1.5 * dual_blade_dash_leap_height * Vector3.UP
 	rain_tween.tween_callback(spawn_diamond_at.bind(spawn_pos, target))
 
 func spawn_diamond_at(pos : Vector3, diamond_target : Node3D):
