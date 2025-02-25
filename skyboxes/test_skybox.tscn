@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dq0grbvlk4dlw"]
+
+[ext_resource type="Shader" path="res://skygradient.gdshader" id="1_j8wwr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jgbdc"]
+render_priority = 0
+shader = ExtResource("1_j8wwr")
+shader_parameter/top_color = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+shader_parameter/middle_color = Vector3(1, 0.3, 2.08165e-12)
+shader_parameter/bottom_color = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+shader_parameter/horizon_sharpness = 3.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_4atp0"]
+material = SubResource("ShaderMaterial_jgbdc")
+flip_faces = true
+radius = 50.0
+height = 100.0
+
+[node name="TestSkybox" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_4atp0")

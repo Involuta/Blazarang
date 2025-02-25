@@ -1,8 +1,8 @@
+MeshInstance3D
 GPUParticles3D
 GPUTrail3D
 AnimationPlayer
 GPUParticlesAttractorSphere3D
-MeshInstance3D
 BoneAttachment3D
 CollisionShape3D
 Area3D
