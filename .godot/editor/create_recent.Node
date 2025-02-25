@@ -1,4 +1,5 @@
 GPUParticles3D
+GPUTrail3D
 AnimationPlayer
 GPUParticlesAttractorSphere3D
 MeshInstance3D
@@ -23,7 +24,6 @@ CanvasLayer
 CPUParticles3D
 AnimatedSprite3D
 Hitbox
-GPUTrail3D
 Node2D
 GPUParticles2D
 TextureRect
