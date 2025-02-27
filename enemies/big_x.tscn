@@ -1,0 +1,119 @@
+[gd_scene load_steps=11 format=3 uid="uid://bq1mw3215mb2j"]
+
+[ext_resource type="PackedScene" uid="uid://bbthct6ttyunj" path="res://glb_imports/8164_big_X.glb" id="1_vkxfk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ta32g"]
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(2, 0.235294, 0, 1)
+
+[sub_resource type="Curve" id="Curve_cx81g"]
+max_value = 5.0
+_data = [Vector2(2.08165e-12, 5), 0.0, 0.0, 0, 0, Vector2(1, 0.01), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8dqcj"]
+curve = SubResource("Curve_cx81g")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_funew"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 0.25, 0.01)
+particle_flag_align_y = true
+direction = Vector3(1, 2.08165e-12, 2.08165e-12)
+spread = 3.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+scale_curve = SubResource("CurveTexture_8dqcj")
+color = Color(1.50196, 0.235294, 0, 1)
+attractor_interaction_enabled = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u6nvk"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+disable_receive_shadows = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3cn1i"]
+material = SubResource("StandardMaterial3D_u6nvk")
+top_radius = 0.0
+bottom_radius = 0.02
+height = 0.4
+
+[sub_resource type="Curve" id="Curve_4tw1s"]
+max_value = 5.0
+_data = [Vector2(2.08165e-12, 5), 0.0, 0.0, 0, 0, Vector2(1, 0.01), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_md4iq"]
+curve = SubResource("Curve_4tw1s")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cqy6i"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 0.2, 0.01)
+particle_flag_align_y = true
+direction = Vector3(1, 2.08165e-12, 2.08165e-12)
+spread = 3.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 15.0
+initial_velocity_max = 15.0
+scale_curve = SubResource("CurveTexture_md4iq")
+color = Color(1.50196, 0.235294, 0, 1)
+attractor_interaction_enabled = false
+
+[node name="BigX" instance=ExtResource("1_vkxfk")]
+
+[node name="BigX" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+surface_material_override/0 = SubResource("StandardMaterial3D_ta32g")
+
+[node name="TopLeftSparks" type="GPUParticles3D" parent="." index="2"]
+transform = Transform3D(0.58842, -0.808555, 4.87247e-16, 0.808555, 0.58842, 7.67801e-17, -3.48787e-16, 3.48787e-16, 1, 1.2, 1.5, 2.08165e-12)
+cast_shadow = 0
+custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
+amount = 50
+lifetime = 0.4
+fixed_fps = 60
+interpolate = false
+fract_delta = false
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_funew")
+draw_pass_1 = SubResource("CylinderMesh_3cn1i")
+
+[node name="TopRightSparks" type="GPUParticles3D" parent="." index="3"]
+transform = Transform3D(-0.587785, -0.809017, 3.48787e-16, 0.809017, -0.587785, -3.48787e-16, 4.87186e-16, 7.71627e-17, 1, -1.2, 1.5, 2.08165e-12)
+cast_shadow = 0
+custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
+amount = 50
+lifetime = 0.4
+fixed_fps = 60
+interpolate = false
+fract_delta = false
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_funew")
+draw_pass_1 = SubResource("CylinderMesh_3cn1i")
+
+[node name="BottomLeft" type="GPUParticles3D" parent="." index="4"]
+transform = Transform3D(0.582123, 0.813101, 3.48787e-16, -0.8131, 0.582123, -3.48787e-16, -4.86636e-16, -8.0562e-17, 1, 0.475675, -0.776801, 2.08165e-12)
+cast_shadow = 0
+custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
+amount = 50
+lifetime = 0.4
+fixed_fps = 60
+interpolate = false
+fract_delta = false
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_cqy6i")
+draw_pass_1 = SubResource("CylinderMesh_3cn1i")
+
+[node name="BottomRight" type="GPUParticles3D" parent="." index="5"]
+transform = Transform3D(-0.596, 0.802984, 3.6318e-16, -0.802984, -0.596001, -3.33774e-16, -5.15596e-17, -4.90557e-16, 1, -0.476, -0.777, 2.08165e-12)
+cast_shadow = 0
+custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
+amount = 50
+lifetime = 0.4
+fixed_fps = 60
+interpolate = false
+fract_delta = false
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_cqy6i")
+draw_pass_1 = SubResource("CylinderMesh_3cn1i")

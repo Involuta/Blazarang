@@ -29,3 +29,7 @@ res://enemies/enemy_anims/x_lasercombo.res
 res://enemies/x_arrow.tscn
 res://enemies/enemy_anims/x_arrow_condense.res
 res://glb_inherited_scenes/x_left_arm.tscn
+res://enemies/x_boss.gd
+res://enemies/big_x.tscn
+res://enemies/enemy_anims/x_triangle_axkick.res
+res://enemies/enemy_anims/x_triangle_flyingkick.res

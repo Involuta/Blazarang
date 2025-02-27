@@ -1,4 +1,4 @@
-[gd_scene load_steps=202 format=3 uid="uid://dwniaym2g1off"]
+[gd_scene load_steps=193 format=3 uid="uid://dwniaym2g1off"]
 
 [ext_resource type="Script" path="res://enemies/x_boss.gd" id="1_u3wem"]
 [ext_resource type="Script" path="res://enemies/boss_hurtbox.gd" id="2_y4k4d"]
@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://enemies/grab_hitbox.gd" id="6_f731e"]
 [ext_resource type="PackedScene" uid="uid://xxarwwj6l614" path="res://trauma_causer.tscn" id="6_r6uan"]
 [ext_resource type="PackedScene" uid="uid://duanou50282es" path="res://glb_inherited_scenes/cotu_anims_24.tscn" id="8_q60er"]
-[ext_resource type="PackedScene" uid="uid://d2ugnhpgcxyi7" path="res://enemies/x_arrow.tscn" id="10_c0flp"]
+[ext_resource type="PackedScene" uid="uid://bq1mw3215mb2j" path="res://enemies/big_x.tscn" id="9_vshoy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ub1sp"]
 height = 2.75
@@ -696,7 +696,6 @@ transitions = ["Start", "WalkSpace", SubResource("AnimationNodeStateMachineTrans
 graph_offset = Vector2(72.6421, -208.972)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_uk78c"]
-graph_offset = Vector2(-67.2, 510.72)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_f8liy")
 nodes/StateMachine/position = Vector2(110, 150)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -846,55 +845,6 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_4t8cx")
 size = Vector2(0.055, 0.055)
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k0quo"]
-particle_flag_align_y = true
-direction = Vector3(2.08165e-12, 2.08165e-12, 1)
-spread = 25.0
-gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-initial_velocity_min = 15.0
-initial_velocity_max = 15.0
-color = Color(1, 0.243137, 0, 1)
-attractor_interaction_enabled = false
-
-[sub_resource type="Curve" id="Curve_260mj"]
-_data = [Vector2(0.0230504, 0), 0.0, 0.0, 0, 0, Vector2(0.376798, 0.362359), 1.95296, 1.95296, 0, 0, Vector2(0.813494, 0.579409), -4.37936, -4.37936, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jdenk"]
-shading_mode = 0
-vertex_color_use_as_albedo = true
-
-[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_ogf0x"]
-material = SubResource("StandardMaterial3D_jdenk")
-radius = 0.3
-section_length = 0.6
-curve = SubResource("Curve_260mj")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8bvrc"]
-cull_mode = 2
-shading_mode = 0
-albedo_color = Color(1.25098, 1, 0.176471, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_djwbx"]
-cull_mode = 2
-shading_mode = 0
-albedo_color = Color(1.25098, 1, 0.176471, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b6i0b"]
-cull_mode = 2
-shading_mode = 0
-albedo_color = Color(1.25098, 1, 0.176471, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_px7pk"]
-cull_mode = 2
-shading_mode = 0
-albedo_color = Color(1.25098, 1, 0.176471, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7crp0"]
-cull_mode = 2
-shading_mode = 0
-albedo_color = Color(1.25098, 1, 0.176471, 1)
-
 [sub_resource type="Gradient" id="Gradient_dqjp3"]
 offsets = PackedFloat32Array(0, 0.7)
 colors = PackedColorArray(0.737255, 0.654902, 0.462745, 0.729412, 0.737255, 0.654902, 0.462745, 0)
@@ -981,8 +931,8 @@ phase2_long_dist_right_arm_not_deployed_attack_chances = {
 "Sweep": 2.08167e-12,
 "Triangle": 2.08167e-12
 }
-laser_combo_chargeup_diamond_min_spawn_radius = 10.0
-laser_combo_chargeup_diamond_max_spawn_radius = 25.0
+laser_combo_chargeup_diamond_min_spawn_radius = 16.0
+laser_combo_chargeup_diamond_max_spawn_radius = 18.0
 laser_combo_chargeup_diamond_min_dist_from_others = 5.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -1149,13 +1099,16 @@ transform = Transform3D(1, 8.43505e-11, 2.89902e-18, -8.43505e-11, 1, 7.05121e-0
 visible = true
 
 [node name="BottomFace" parent="X_boss_meshes/Armature/Skeleton3D/Head/XHead" index="0"]
-transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 2.08165e-12, 1.36, 2)
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 1.94287e-12, 1.32916, 2)
 
 [node name="LeftFace" parent="X_boss_meshes/Armature/Skeleton3D/Head/XHead" index="1"]
-transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, -0.316667, 0.897, 2)
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, -0.354667, 0.897023, 2)
 
 [node name="RightFace" parent="X_boss_meshes/Armature/Skeleton3D/Head/XHead" index="2"]
-transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0.316667, 0.897, 2)
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 0.354667, 0.897023, 2)
+
+[node name="TopFace" parent="X_boss_meshes/Armature/Skeleton3D/Head/XHead" index="3"]
+transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 1.94287e-12, 0.377156, 2)
 
 [node name="GlowingHead" parent="X_boss_meshes/Armature/Skeleton3D/Head" index="1"]
 transform = Transform3D(1, -4.23913e-09, -2.59347e-09, 1.06168e-09, 1, -1.29942e-08, -2.07412e-11, -3.0217e-09, 1, 1.30267e-07, 1.26055, 1.25805)
@@ -1253,7 +1206,7 @@ trauma_amount = 0.44
 shape = SubResource("SphereShape3D_j3f5l")
 
 [node name="ChargeupPivot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0896441, 0.130292, -0.65273)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.338255, 0.642138, -0.65273)
 
 [node name="TriangleKickChargeupParticles" type="GPUParticles3D" parent="ChargeupPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -1272,30 +1225,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.0
 strength = 2.66454e-15
 radius = 100.0
 
-[node name="LaserComboKickChargeupParticles" type="GPUParticles3D" parent="ChargeupPivot"]
-emitting = false
-amount = 15
-process_material = SubResource("ParticleProcessMaterial_k0quo")
-draw_pass_1 = SubResource("TubeTrailMesh_ogf0x")
-
-[node name="XArrow" parent="ChargeupPivot" instance=ExtResource("10_c0flp")]
-transform = Transform3D(-5, 1.74393e-15, -7.54979e-07, 1.74393e-15, 5, -1.74393e-15, 7.54979e-07, -1.74393e-15, -5, 0.0896441, -0.130292, 0.65273)
+[node name="BigX" parent="ChargeupPivot" instance=ExtResource("9_vshoy")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2.08165e-12, 2.08165e-12, 2)
 visible = false
 
-[node name="Cube" parent="ChargeupPivot/XArrow" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_8bvrc")
+[node name="TopLeftSparks" parent="ChargeupPivot/BigX" index="2"]
+emitting = false
 
-[node name="Cube_001" parent="ChargeupPivot/XArrow" index="2"]
-surface_material_override/0 = SubResource("StandardMaterial3D_djwbx")
+[node name="TopRightSparks" parent="ChargeupPivot/BigX" index="3"]
+emitting = false
 
-[node name="Cube_002" parent="ChargeupPivot/XArrow" index="3"]
-surface_material_override/0 = SubResource("StandardMaterial3D_b6i0b")
+[node name="BottomLeft" parent="ChargeupPivot/BigX" index="4"]
+emitting = false
 
-[node name="Cube_003" parent="ChargeupPivot/XArrow" index="4"]
-surface_material_override/0 = SubResource("StandardMaterial3D_px7pk")
-
-[node name="Cube_004" parent="ChargeupPivot/XArrow" index="5"]
-surface_material_override/0 = SubResource("StandardMaterial3D_7crp0")
+[node name="BottomRight" parent="ChargeupPivot/BigX" index="5"]
+emitting = false
 
 [node name="ShockwavePivot" type="Node3D" parent="."]
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, -0.338255, 0.642138, -0.65273)
@@ -1388,5 +1332,5 @@ shape = SubResource("CylinderShape3D_bhmef")
 [editable path="MeleeHitboxPivot2/XBlade/XLeftArm/XArrow"]
 [editable path="X_boss_meshes"]
 [editable path="X_boss_meshes/Armature/Skeleton3D/Head/XHead"]
-[editable path="ChargeupPivot/XArrow"]
+[editable path="ChargeupPivot/BigX"]
 [editable path="CotuAnims25"]

@@ -978,7 +978,7 @@ func diamond_spawn_coord_within_radiuses(min_spawn_radius: float, max_spawn_radi
 	var y = r * sin(phi) * sin(theta)
 	var z = r * cos(phi)
 
-	return global_position + Vector3(x, y, z)
+	return global_position + 5 * Vector3.UP + Vector3(x, y, z)
 
 func diamond_spawn_pos_is_far_from_others(diamond_pos_list, pos: Vector3, dist: float) -> bool:
 	if diamond_pos_list.is_empty():
@@ -1180,8 +1180,8 @@ func x_icon_follow_targetdiagonal_pos():
 	var dir_to_self := target.global_position.direction_to(global_position)
 	var dir := -1 if x_icon_tp_to_left else 1
 	var icon_vec := Vector2(dir_to_self.x, dir_to_self.z).rotated(dir * PI/4)
-	x_icon_pos.global_position.x = target.global_position.x + side_teleport_dist_from_target * icon_vec.x
-	x_icon_pos.global_position.z = target.global_position.z + side_teleport_dist_from_target * icon_vec.y
+	x_icon_pos.global_position.x = target.global_position.x + 1.5 * side_teleport_dist_from_target * icon_vec.x
+	x_icon_pos.global_position.z = target.global_position.z + 1.5 * side_teleport_dist_from_target * icon_vec.y
 
 func x_icon_follow_targetfront_pos():
 	var dir_to_target := global_position.direction_to(target.global_position)
