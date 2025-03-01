@@ -207,11 +207,6 @@ func _ready():
 	mhp2.visible = false
 
 func _physics_process(delta):
-	$ChargeupPivot.position = Vector3.ZERO
-	$ChargeupPivot.visible = true
-	$ChargeupPivot/BigX.visible = true
-	$ChargeupPivot/BigX/BigX.visible = true
-	$ChargeupPivot/BigX.scale = 2*Vector3.ONE
 	if Input.is_action_just_pressed("Special"):
 		print(Globals.XBossGrab)
 		match(behav_state):

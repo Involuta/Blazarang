@@ -14,7 +14,7 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ub1sp"]
 height = 2.75
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v41vc"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bc8ga"]
 height = 2.75
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kfmh4"]
@@ -950,7 +950,7 @@ opponent_hitboxes = ["PlayerHitbox"]
 
 [node name="HurtboxCollider" type="CollisionShape3D" parent="EnemyHurtbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-shape = SubResource("CapsuleShape3D_v41vc")
+shape = SubResource("CapsuleShape3D_bc8ga")
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
 transform = Transform3D(0.999998, -3.48787e-16, -3.48787e-16, -3.48786e-16, -1, 8.74227e-08, -3.48786e-16, -8.74228e-08, -0.999999, -2, 1, 2.08165e-12)
@@ -1217,19 +1217,7 @@ strength = 2.66454e-15
 radius = 100.0
 
 [node name="BigX" parent="ChargeupPivot" instance=ExtResource("9_vshoy")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2.08165e-12, 2.08165e-12, 2)
-
-[node name="TopLeftSparks" parent="ChargeupPivot/BigX" index="2"]
-emitting = false
-
-[node name="TopRightSparks" parent="ChargeupPivot/BigX" index="3"]
-emitting = false
-
-[node name="BottomLeft" parent="ChargeupPivot/BigX" index="4"]
-emitting = false
-
-[node name="BottomRight" parent="ChargeupPivot/BigX" index="5"]
-emitting = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2)
 
 [node name="ShockwavePivot" type="Node3D" parent="."]
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, -0.338255, 0.642138, -0.65273)
