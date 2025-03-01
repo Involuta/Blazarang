@@ -185,7 +185,6 @@ func _ready():
 	add_to_group("lockonables")
 	if aggro_distance > 0:
 		behav_state = WAIT
-	
 	level = root.find_child("Level")
 	target = level.find_child("Icon")
 	left_arm = level.find_child("FloatingXLeftArm")
