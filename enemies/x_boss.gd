@@ -111,6 +111,50 @@ var semicircle_center := Vector3.ZERO
 	"DualBladeDash" : 0.0
 }
 
+# No Semicircle Dash
+@export var pre_laser_combo_short_dist_attack_chances1 = {
+	"ArmBombs" : .1,
+	"ChainSlice" : .2,
+	"Sweep" : .2,
+	"Superman" : .2,
+	"RightArmSlice" : .2,
+	"Triangle" : .1,
+}
+@export var pre_laser_combo_long_dist_attack_chances1 = {
+	"ArmBombs" : .1,
+	"Sweep" : .25,
+	"ChainSlice" : .25,
+	"Superman" : .05,
+	"Triangle" : .1,
+	"DiagonalDash" : .25,
+}
+
+# No ArmBombs
+@export var pre_laser_combo_short_dist_attack_chances2 = {
+	"ChainSlice" : .2,
+	"Sweep" : .2,
+	"Superman" : .2,
+	"RightArmSlice" : .2,
+	"Triangle" : .2,
+}
+@export var pre_laser_combo_long_dist_attack_chances2 = {
+	"Sweep" : .25,
+	"ChainSlice" : .25,
+	"Superman" : .15,
+	"Triangle" : .1,
+	"DiagonalDash" : .25,
+}
+
+# No ChainSlice nor Sweep
+@export var pre_laser_combo_short_dist_attack_chances3 = {
+	"Superman" : .5,
+	"RightArmSlice" : .5,
+}
+@export var pre_laser_combo_long_dist_attack_chances3 = {
+	"Superman" : .5,
+	"DiagonalDash" : .5,
+}
+
 @export var diagonal_dash_speed := 22.0
 @export var dash_speed := 40.0
 @export var dash_back_speed := 36.0
