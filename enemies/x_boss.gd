@@ -366,6 +366,16 @@ func start_phase2():
 	var phase2light = root.find_child("Phase2Light")
 	light_tween.tween_property(phase1light, "light_energy", 0, 2)
 	light_tween.tween_property(phase2light, "light_energy", 1.5, 2)
+	
+	var laser_combo_wait_tween := create_tween()
+	laser_combo_wait_tween.tween_interval(9)
+	laser_combo_wait_tween.tween_callback(on_laser_combo)
+
+func on_laser_combo():
+	if attack_queued:
+		await no_attack_queued
+	attack_queued = true
+	anim_tree.set(param_path_base + "LaserCombo", true)
 
 func aim_at_target():
 	aiming_at_target = true
@@ -497,6 +507,7 @@ func recover_head():
 		return
 	var recovery_inst = load("res://enemies/x_head_recovery.tscn").instantiate()
 	add_child(recovery_inst)
+	x_mesh_head.visible = true
 	while is_instance_valid(recovery_inst):
 		recovery_inst.global_position = x_mesh_head.global_position
 		await get_tree().create_timer(get_physics_process_delta_time()).timeout
@@ -1061,6 +1072,9 @@ func laser_combo_mvmt():
 	velocity = flyingkick_speed * -transform.basis.z
 	await get_tree().create_timer(.25*t).timeout
 	velocity = Vector3.ZERO
+	
+	# End
+	anim_tree.set(param_path_base + "LaserCombo", false)
 	
 	# Cooldown
 	await create_tween().tween_interval(.75*t).finished
