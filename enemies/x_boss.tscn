@@ -896,7 +896,7 @@ curve = SubResource("Curve_idekg")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p6qdj"]
 emission_shape = 3
-emission_box_extents = Vector3(1, 0.19, 0.01)
+emission_box_extents = Vector3(1, 0.205, 0.01)
 particle_flag_align_y = true
 direction = Vector3(1, 2.08165e-12, 2.08165e-12)
 spread = 0.0
@@ -928,7 +928,7 @@ curve = SubResource("Curve_v8fl3")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cpda0"]
 emission_shape = 3
-emission_box_extents = Vector3(1, 0.19, 0.01)
+emission_box_extents = Vector3(1, 0.225, 0.01)
 particle_flag_align_y = true
 direction = Vector3(1, 2.08165e-12, 2.08165e-12)
 spread = 0.0
@@ -1311,15 +1311,17 @@ strength = 2.66454e-15
 radius = 100.0
 
 [node name="BigX" type="MeshInstance3D" parent="ChargeupPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.25, 2.08165e-12, 2.08165e-12, 0.0578139)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2.5, 2.08165e-12, 2.08165e-12, 1)
+visible = false
 mesh = SubResource("ArrayMesh_6hsdb")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_mi7hf")
 
-[node name="TopLeftSparks" type="GPUParticles3D" parent="ChargeupPivot"]
-transform = Transform3D(0.637679, -0.770302, 4.91086e-16, 0.770302, 0.63768, 4.6257e-17, -3.48787e-16, 3.48787e-16, 1, 1.05, 1.30869, 2.08165e-12)
+[node name="TopLeftSparks" type="GPUParticles3D" parent="ChargeupPivot/BigX"]
+transform = Transform3D(0.642788, -0.766044, 3.48787e-16, 0.766044, 0.642788, -3.48787e-16, 3.43923e-17, 3.93106e-16, 0.8, 1.165, 1.3855, -0.0231256)
 cast_shadow = 0
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
+emitting = false
 amount = 50
 lifetime = 0.4
 fixed_fps = 60
@@ -1329,10 +1331,11 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_p6qdj")
 draw_pass_1 = SubResource("CylinderMesh_ewj81")
 
-[node name="TopRightSparks" type="GPUParticles3D" parent="ChargeupPivot"]
-transform = Transform3D(-0.630323, -0.776333, 3.66989e-16, 0.776333, -0.630323, -3.29581e-16, 4.87186e-16, 7.71627e-17, 1, -1.04981, 1.30833, 2.08165e-12)
+[node name="TopRightSparks" type="GPUParticles3D" parent="ChargeupPivot/BigX"]
+transform = Transform3D(-0.642788, -0.766044, 3.48787e-16, 0.766044, -0.642788, -3.48787e-16, 3.93106e-16, 3.43923e-17, 0.8, -1.16522, 1.38559, -0.0231256)
 cast_shadow = 0
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
+emitting = false
 amount = 50
 lifetime = 0.4
 fixed_fps = 60
@@ -1342,10 +1345,11 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_p6qdj")
 draw_pass_1 = SubResource("CylinderMesh_ewj81")
 
-[node name="BottomLeft" type="GPUParticles3D" parent="ChargeupPivot"]
-transform = Transform3D(0.582123, 0.813101, 3.48787e-16, -0.8131, 0.582123, -3.48787e-16, -4.86636e-16, -8.0562e-17, 1, 1.077, -1.629, 2.08165e-12)
+[node name="BottomLeft" type="GPUParticles3D" parent="ChargeupPivot/BigX"]
+transform = Transform3D(0.587785, 0.809017, 3.48787e-16, -0.809017, 0.587785, -3.48787e-16, -3.89749e-16, -6.17302e-17, 0.8, 1.06598, -1.6545, -0.0231256)
 cast_shadow = 0
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
+emitting = false
 amount = 50
 lifetime = 0.4
 fixed_fps = 60
@@ -1355,10 +1359,11 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_cpda0")
 draw_pass_1 = SubResource("CylinderMesh_ewj81")
 
-[node name="BottomRight" type="GPUParticles3D" parent="ChargeupPivot"]
-transform = Transform3D(-0.596, 0.802984, 3.6318e-16, -0.802984, -0.596001, -3.33774e-16, -5.15596e-17, -4.90557e-16, 1, -1.07734, -1.62889, 2.08165e-12)
+[node name="BottomRight" type="GPUParticles3D" parent="ChargeupPivot/BigX"]
+transform = Transform3D(-0.611651, 0.791128, 3.3823e-16, -0.791128, -0.611651, -3.59034e-16, -6.17303e-17, -3.89749e-16, 0.8, -1.066, -1.6545, -0.0231256)
 cast_shadow = 0
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
+emitting = false
 amount = 50
 lifetime = 0.4
 fixed_fps = 60

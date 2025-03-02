@@ -171,6 +171,7 @@ var diamond := preload("res://levels/x_boss_level/background_nodes/x_diamond.tsc
 @onready var x_mesh_right_arm := $X_boss_meshes/Armature/Skeleton3D/RightArm
 @onready var mhp1 := $MeleeHitboxPivot/XBlade/XLeftArm
 @onready var mhp2 := $MeleeHitboxPivot2/XBlade/XLeftArm
+@onready var bigX := $ChargeupPivot/BigX
 
 @onready var root := $/root/ViewControl
 var level : Node3D
@@ -206,6 +207,10 @@ func _ready():
 	mhp2.visible = false
 
 func _physics_process(delta):
+	if bigX.visible:
+		bigX.look_at(target.global_position)
+		bigX.rotation.x = 0
+		bigX.rotation.z = 0
 	if Input.is_action_just_pressed("Special"):
 		print(Globals.XBossGrab)
 		match(behav_state):
