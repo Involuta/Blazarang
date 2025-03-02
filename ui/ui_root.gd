@@ -7,6 +7,7 @@ extends Control
 @onready var destab_shader = $DESTABILIZED.material
 @onready var glitch_box := $GlitchBox
 @onready var glitch_shader = $GlitchBox.material
+@onready var time_left := $TimeLeft
 
 @onready var update_score_anim := $UpdateScoreAnimation
 
@@ -52,6 +53,8 @@ func hide_black_screen():
 	$BlackScreen.modulate = Color(0,0,0,0)
 
 func _physics_process(_delta):
+	time_left.text = str("Time left: ", Globals.time_left)
+	
 	cotu_health_bar.max_value = cotu_hurtbox.max_health
 	cotu_health_bar.value = cotu_hurtbox.health
 	cotu_damage_indicator.value = cotu_hurtbox.damage_indicator_value

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://kl1hpr0grn1v"]
+[gd_scene load_steps=33 format=3 uid="uid://kl1hpr0grn1v"]
 
 [ext_resource type="PackedScene" uid="uid://daj44qqb6dior" path="res://ui/health_bar.tscn" id="1_k5nv4"]
 [ext_resource type="Script" path="res://ui/ui_root.gd" id="1_s33yg"]
@@ -463,6 +463,10 @@ _data = {
 "clear_buffs": SubResource("Animation_wm2n6")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_u1iil"]
+font_size = 50
+outline_color = Color(1, 0, 1, 1)
+
 [node name="UIRoot" type="Control"]
 top_level = true
 layout_mode = 3
@@ -632,5 +636,20 @@ grow_vertical = 0
 pivot_offset = Vector2(205, 70)
 text = "0"
 label_settings = SubResource("LabelSettings_apqk7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeLeft" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -205.0
+offset_right = 205.0
+offset_bottom = 180.0
+grow_horizontal = 2
+pivot_offset = Vector2(205, 70)
+text = "0"
+label_settings = SubResource("LabelSettings_u1iil")
 horizontal_alignment = 1
 vertical_alignment = 1

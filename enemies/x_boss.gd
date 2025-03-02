@@ -40,6 +40,14 @@ var long_dist_wait_remaining := 2.5
 var attack_queued := false
 signal no_attack_queued
 
+enum PHASE {
+	PHASE1,
+	PHASE2,
+	POST_LASER_COMBO,
+}
+var phase := PHASE.PHASE1
+@export var pre_laser_combo_time_remaining := 20.0
+
 @export var min_y_pos := 11.4
 
 @export var aggro_distance := -1
@@ -194,7 +202,6 @@ var semicircle_center := Vector3.ZERO
 @export var laser_combo_chargeup_diamond_min_dist_from_others := 3.0
 @export var laser_combo_chargeup_diamond_num := 8
 
-var phase2 := false
 var laser_combo_chargeup_diamond_pos_list := []
 var laser_combo_ball_following_self := false
 var param_path_base := "parameters/StateMachine/conditions/"
@@ -251,12 +258,7 @@ func _ready():
 	mhp2.visible = false
 
 func _physics_process(delta):
-	if bigX.visible:
-		bigX.look_at(target.global_position)
-		bigX.rotation.x = 0
-		bigX.rotation.z = 0
 	if Input.is_action_just_pressed("Special"):
-		print(Globals.XBossGrab)
 		match(behav_state):
 			WAIT:
 				print("WAIT")
@@ -296,6 +298,15 @@ func _physics_process(delta):
 	
 	if is_instance_valid(laser_combo_ball) and laser_combo_ball_following_self:
 		laser_combo_ball.global_position = global_position
+	
+	if bigX.visible:
+		bigX.look_at(target.global_position)
+		bigX.rotation.x = 0
+		bigX.rotation.z = 0
+	
+	if phase == PHASE.PHASE2:
+		pre_laser_combo_time_remaining -= delta
+		Globals.time_left = pre_laser_combo_time_remaining
 	
 	anim_tree.set("parameters/StateMachine/WalkSpace/blend_position", velocity.length())
 
@@ -374,22 +385,53 @@ func cotu_grabbed():
 
 func queue_attack(dist_type):
 	attack_queued = true
-	if phase2:
-		match(dist_type):
-			DIST_TYPE.SHORT_DIST:
-				anim_tree.set(choose_attack(phase2_short_dist_attack_chances), true)
-			DIST_TYPE.LONG_DIST_RIGHT_ARM_DEPLOYED:
-				anim_tree.set(choose_attack(phase2_long_dist_right_arm_deployed_attack_chances), true)
-			DIST_TYPE.LONG_DIST_RIGHT_ARM_NOT_DEPLOYED:
-				anim_tree.set(choose_attack(phase2_long_dist_right_arm_not_deployed_attack_chances), true)
-	else:
-		match(dist_type):
-			DIST_TYPE.SHORT_DIST:
-				anim_tree.set(choose_attack(short_dist_attack_chances), true)
-			DIST_TYPE.LONG_DIST_RIGHT_ARM_DEPLOYED:
-				anim_tree.set(choose_attack(long_dist_right_arm_deployed_attack_chances), true)
-			DIST_TYPE.LONG_DIST_RIGHT_ARM_NOT_DEPLOYED:
-				anim_tree.set(choose_attack(long_dist_right_arm_not_deployed_attack_chances), true)
+	match(phase):
+		PHASE.POST_LASER_COMBO:
+			match(dist_type):
+				DIST_TYPE.SHORT_DIST:
+					anim_tree.set(choose_attack(phase2_short_dist_attack_chances), true)
+				DIST_TYPE.LONG_DIST_RIGHT_ARM_DEPLOYED:
+					anim_tree.set(choose_attack(phase2_long_dist_right_arm_deployed_attack_chances), true)
+				DIST_TYPE.LONG_DIST_RIGHT_ARM_NOT_DEPLOYED:
+					anim_tree.set(choose_attack(phase2_long_dist_right_arm_not_deployed_attack_chances), true)
+		PHASE.PHASE2:
+			if pre_laser_combo_time_remaining >= 9.25:
+				match(dist_type):
+					DIST_TYPE.SHORT_DIST:
+						anim_tree.set(choose_attack(phase2_short_dist_attack_chances), true)
+					DIST_TYPE.LONG_DIST_RIGHT_ARM_DEPLOYED:
+						anim_tree.set(choose_attack(phase2_long_dist_right_arm_deployed_attack_chances), true)
+					DIST_TYPE.LONG_DIST_RIGHT_ARM_NOT_DEPLOYED:
+						anim_tree.set(choose_attack(phase2_long_dist_right_arm_not_deployed_attack_chances), true)
+			elif pre_laser_combo_time_remaining < 9.25 and pre_laser_combo_time_remaining >= 7.15:
+				match(dist_type):
+					DIST_TYPE.SHORT_DIST:
+						anim_tree.set(choose_attack(pre_laser_combo_short_dist_attack_chances1), true)
+					_:
+						anim_tree.set(choose_attack(pre_laser_combo_long_dist_attack_chances1), true)
+			elif pre_laser_combo_time_remaining < 7.15 and pre_laser_combo_time_remaining >= 5.5:
+				match(dist_type):
+					DIST_TYPE.SHORT_DIST:
+						anim_tree.set(choose_attack(pre_laser_combo_short_dist_attack_chances2), true)
+					_:
+						anim_tree.set(choose_attack(pre_laser_combo_long_dist_attack_chances2), true)
+			elif pre_laser_combo_time_remaining < 5.5 and pre_laser_combo_time_remaining >= 3.4:
+				match(dist_type):
+					DIST_TYPE.SHORT_DIST:
+						anim_tree.set(choose_attack(pre_laser_combo_short_dist_attack_chances3), true)
+					_:
+						anim_tree.set(choose_attack(pre_laser_combo_long_dist_attack_chances3), true)
+			else:
+				# Do nothing until laser combo chargeup
+				pass
+		PHASE.PHASE1:
+			match(dist_type):
+				DIST_TYPE.SHORT_DIST:
+					anim_tree.set(choose_attack(short_dist_attack_chances), true)
+				DIST_TYPE.LONG_DIST_RIGHT_ARM_DEPLOYED:
+					anim_tree.set(choose_attack(long_dist_right_arm_deployed_attack_chances), true)
+				DIST_TYPE.LONG_DIST_RIGHT_ARM_NOT_DEPLOYED:
+					anim_tree.set(choose_attack(long_dist_right_arm_not_deployed_attack_chances), true)
 
 func on_health_segment_lost(seg_num):
 	if seg_num == 3:
@@ -401,7 +443,7 @@ func on_health_segment_lost(seg_num):
 		start_phase2()
 
 func start_phase2():
-	phase2 = true
+	phase = PHASE.PHASE2
 	min_long_dist_wait = phase2_min_long_dist_wait
 	max_long_dist_wait = phase2_max_long_dist_wait
 	var light_tween = get_tree().create_tween()
@@ -412,8 +454,14 @@ func start_phase2():
 	light_tween.tween_property(phase2light, "light_energy", 1.5, 2)
 	
 	var laser_combo_wait_tween := create_tween()
-	laser_combo_wait_tween.tween_interval(9)
+	laser_combo_wait_tween.tween_interval(pre_laser_combo_time_remaining)
 	laser_combo_wait_tween.tween_callback(on_laser_combo)
+	laser_combo_wait_tween.tween_callback(emit_no_attack_queued)
+	
+	Globals.time_left = pre_laser_combo_time_remaining
+
+func emit_no_attack_queued():
+	no_attack_queued.emit()
 
 func on_laser_combo():
 	if attack_queued:
@@ -462,7 +510,7 @@ func end_attack():
 func end_attack_instant_followup():
 	attack_queued = false
 	no_attack_queued.emit()
-	if phase2:
+	if phase == PHASE.PHASE2 or phase == PHASE.POST_LASER_COMBO:
 		for attack in phase2_short_dist_attack_chances.keys():
 			anim_tree.set(param_path_base + attack, false)
 		for attack in phase2_long_dist_right_arm_deployed_attack_chances.keys():
@@ -1122,6 +1170,9 @@ func laser_combo_mvmt():
 	
 	# Cooldown
 	await create_tween().tween_interval(.75*t).finished
+	
+	# Switch phase
+	phase = PHASE.POST_LASER_COMBO
 
 func recall_left_arm():
 	if not left_arm_deployed():

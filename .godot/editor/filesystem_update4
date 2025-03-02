@@ -37,3 +37,6 @@ res://textures/solid_light_gray_tile.tres
 res://levels/x_boss_level/x_boss_level1.tscn
 res://enemies/enemy_anims/x_lunge_facerain.res
 res://enemies/enemy_anims/x_lasercombo_chargeup.res
+res://ui/ui_root.tscn
+res://ui/ui_root.gd
+res://globals.gd
