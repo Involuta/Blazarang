@@ -116,7 +116,6 @@ var semicircle_center := Vector3.ZERO
 	"RightArmLaser" : .2,
 	"StrafeLaser" : .2,
 	"SemicircleDash" : .15,
-	"DualBladeDash" : 0.0
 }
 
 # No Semicircle Dash
@@ -220,6 +219,8 @@ var diamond := preload("res://levels/x_boss_level/background_nodes/x_diamond.tsc
 @onready var x_mesh_head := $X_boss_meshes/Armature/Skeleton3D/Head/XHead
 @onready var x_mesh_left_arm := $X_boss_meshes/Armature/Skeleton3D/LeftArm
 @onready var x_mesh_right_arm := $X_boss_meshes/Armature/Skeleton3D/RightArm
+@onready var reattach_box_left := $X_boss_meshes/Armature/Skeleton3D/LeftArm/ReattachBox
+@onready var reattach_box_right := $X_boss_meshes/Armature/Skeleton3D/RightArm/ReattachBox
 @onready var mhp1 := $MeleeHitboxPivot/XBlade/XLeftArm
 @onready var mhp2 := $MeleeHitboxPivot2/XBlade/XLeftArm
 @onready var bigX := $ChargeupPivot/BigX
@@ -1031,9 +1032,9 @@ func dual_blade_dash_diamond_rain():
 	var spawn_pos := global_position + diamond_rain_radius * transform.basis.z + 2.5 * dual_blade_dash_leap_height * Vector3.UP
 	rain_tween.tween_callback(spawn_diamond_at.bind(spawn_pos, target))
 	rain_tween.tween_interval(.25)
-	spawn_pos = global_position + diamond_rain_radius * -transform.basis.x + 1.5 * dual_blade_dash_leap_height * Vector3.UP
+	spawn_pos = global_position + diamond_rain_radius * -transform.basis.x + 1 * dual_blade_dash_leap_height * Vector3.UP
 	rain_tween.tween_callback(spawn_diamond_at.bind(spawn_pos, target))
-	spawn_pos = global_position + diamond_rain_radius * transform.basis.x + 1.5 * dual_blade_dash_leap_height * Vector3.UP
+	spawn_pos = global_position + diamond_rain_radius * transform.basis.x + 1 * dual_blade_dash_leap_height * Vector3.UP
 	rain_tween.tween_callback(spawn_diamond_at.bind(spawn_pos, target))
 
 func spawn_diamond_at(pos : Vector3, diamond_target : Node3D):
@@ -1192,6 +1193,7 @@ func hide_rig_left_arm():
 	x_meshes.set_surface_override_material(2, transparent_mat)
 
 func restore_rig_left_arm():
+	reattach_box_left.emitting = true
 	x_meshes.set_surface_override_material(2, body_mat)
 
 func rightarmslice_recall_right_arm():
@@ -1249,6 +1251,7 @@ func hide_rig_right_arm():
 	x_meshes.set_surface_override_material(5, transparent_mat)
 
 func restore_rig_right_arm():
+	reattach_box_right.emitting = true
 	x_meshes.set_surface_override_material(5, body_mat)
 
 func set_x_icon_my_pos():

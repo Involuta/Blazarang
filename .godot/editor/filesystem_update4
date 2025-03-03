@@ -1,4 +1,4 @@
-res://skyboxes/test_skybox.tscn
+res://enemies/x_boss.tscn
 res://textures/clear_tile.tres
 res://textures/x_boss_body.tres
 res://GPUTrail-main/shaders/trail.gdshader
@@ -10,6 +10,7 @@ res://glb_inherited_scenes/outline.gdshader
 res://skygradient.gdshader
 res://textures/x_arrow.tres
 res://textures/small_solid_white.tres
+res://enemies/enemy_anims/x_dual_blade_dash.res
 res://shaders/cotu_outline.gdshader
 res://cotu/cotu_anims_outline.tres
 res://cotu/cotu_anims_base_material.tres
@@ -23,20 +24,8 @@ res://ui/glow.gdshader
 res://ui/glitch.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
 res://levels/x_boss_level/x_boss_level_background.tscn
-res://enemies/x_boss.tscn
 res://enemies/x_laser_combo_ball_projectile.tscn
-res://enemies/enemy_anims/x_lasercombo.res
-res://enemies/x_arrow.tscn
-res://enemies/enemy_anims/x_arrow_condense.res
-res://glb_inherited_scenes/x_left_arm.tscn
 res://enemies/x_boss.gd
-res://enemies/big_x.tscn
-res://enemies/enemy_anims/x_triangle_axkick.res
-res://enemies/enemy_anims/x_triangle_flyingkick.res
-res://textures/solid_light_gray_tile.tres
-res://levels/x_boss_level/x_boss_level1.tscn
-res://enemies/enemy_anims/x_lunge_facerain.res
-res://enemies/enemy_anims/x_lasercombo_chargeup.res
-res://ui/ui_root.tscn
-res://ui/ui_root.gd
-res://globals.gd
+res://enemies/enemy_anims/x_recall_left_arm.res
+res://enemies/enemy_anims/x_rightarmslice.res
+res://enemies/enemy_anims/x_diamond_rain.res
