@@ -257,6 +257,14 @@ func _ready():
 	x_mesh_head.visible = true
 	mhp1.visible = false
 	mhp2.visible = false
+	
+	attack_queued = true
+	hide_rig_left_arm()
+	hide_rig_right_arm()
+	anim_tree.set(param_path_base + "PreFight", true)
+
+func end_pre_fight():
+	anim_tree.set(param_path_base + "PreFight", false)
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("Special"):
@@ -307,7 +315,7 @@ func _physics_process(delta):
 	
 	if phase == PHASE.PHASE2:
 		pre_laser_combo_time_remaining -= delta
-		Globals.time_left = pre_laser_combo_time_remaining
+		Globals.time_left = int(pre_laser_combo_time_remaining)
 	
 	anim_tree.set("parameters/StateMachine/WalkSpace/blend_position", velocity.length())
 
@@ -759,6 +767,7 @@ func armbombs_dashback():
 	dash_tween.tween_property(self, "global_position", Vector3(-armbombs_dashback_lateral_dist * dir_to_target.x, armbombs_dashback_height, -armbombs_dashback_lateral_dist * dir_to_target.z), .5).as_relative().set_ease(Tween.EASE_OUT)
 
 func armbombs_arm_recall():
+	# Rig arms are not restored; after recalling the arms, ArmBombs uses floating arms not attached to X's rig BUT are children of x_boss
 	if left_arm_deployed():
 		left_arm.stop_firing_laser()
 		var left_mvmt_tween = get_tree().create_tween()
@@ -1181,6 +1190,8 @@ func recall_left_arm():
 	left_arm.stop_firing_laser()
 	var recall_tween = get_tree().create_tween()
 	recall_tween.tween_method(recall_left_arm_frame, 0.0, 1.0, .65).set_ease(Tween.EASE_OUT)
+	recall_tween.tween_callback(hide_floating_left_arm)
+	recall_tween.tween_callback(restore_rig_left_arm)
 
 func recall_left_arm_frame(lerp_val):
 	left_arm.rotation_degrees = (rotation_degrees.y + 180 + 112) * Vector3.UP
@@ -1193,6 +1204,8 @@ func hide_rig_left_arm():
 	x_meshes.set_surface_override_material(2, transparent_mat)
 
 func restore_rig_left_arm():
+	if not left_arm_deployed():
+		return
 	reattach_box_left.emitting = true
 	x_meshes.set_surface_override_material(2, body_mat)
 
@@ -1251,6 +1264,8 @@ func hide_rig_right_arm():
 	x_meshes.set_surface_override_material(5, transparent_mat)
 
 func restore_rig_right_arm():
+	if not right_arm_deployed():
+		return
 	reattach_box_right.emitting = true
 	x_meshes.set_surface_override_material(5, body_mat)
 
