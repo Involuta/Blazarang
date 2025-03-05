@@ -32,3 +32,7 @@ res://enemies/enemy_anims/x_very_far_strafe_laser.res
 res://cotu/cotu_anims/use_item_stabilizer.res
 res://cotu/cotu_anims/x_boss_grab.res
 res://enemies/enemy_anims/x_dashgrab_punish.res
+res://glb_inherited_scenes/cotu_icon_circle.tscn
+res://icon/icon.tscn
+res://cotu/cotu_cb_main.tscn
+res://glb_inherited_scenes/icon_mesh.tscn

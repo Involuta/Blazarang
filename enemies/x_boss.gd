@@ -174,7 +174,7 @@ var semicircle_center := Vector3.ZERO
 @export var superman_down_speed := 7.0
 @export var triangle_arm_angle := 36.0
 @export var triangle_arm_dist := 90.0
-@export var triangle_axkick_dist := 2.25
+@export var triangle_axkick_dist := 3.5
 @export var flyingkick_speed := 200.0
 @export var flyingkick_hit_frames := 10 # Put the # of frames that the hitbox is active in the animation here
 @export var flying_facerain_piece_speed := 7.5
@@ -182,7 +182,7 @@ var semicircle_center := Vector3.ZERO
 @export var triangle_volcano_ascend_speed := 100.0
 @export var armbombs_dashback_lateral_dist := 15.0
 @export var armbombs_dashback_height := 12.0
-@export var lunge_facerain_shockwave_min_dist := 60.0
+@export var lunge_facerain_shockwave_min_dist := 45.0
 @export var lunge_facerain_float_dist := 5.0
 @export var lunge_facerain_bomb_speed := 9
 @export var lunge_laser_diagonal_dash_dist := 25.0
@@ -198,9 +198,9 @@ var semicircle_center := Vector3.ZERO
 @export var dual_blade_dash_stop_dist := 2.0
 @export var dual_blade_dash_leap_height := 2.0
 @export var diamond_rain_radius := 6.0
-@export var laser_combo_chargeup_diamond_min_spawn_radius := 6.0
-@export var laser_combo_chargeup_diamond_max_spawn_radius := 20.0
-@export var laser_combo_chargeup_diamond_min_dist_from_others := 3.0
+@export var laser_combo_chargeup_diamond_min_spawn_radius := 16.0
+@export var laser_combo_chargeup_diamond_max_spawn_radius := 18.0
+@export var laser_combo_chargeup_diamond_min_dist_from_others := 5.0
 @export var laser_combo_chargeup_diamond_num := 8
 
 var laser_combo_chargeup_diamond_pos_list := []
@@ -1101,7 +1101,7 @@ func diamond_spawn_coord_within_radiuses(min_spawn_radius: float, max_spawn_radi
 	var y = r * sin(phi) * sin(theta)
 	var z = r * cos(phi)
 
-	return global_position + 5 * Vector3.UP + Vector3(x, y, z)
+	return global_position + 8*Vector3.UP + Vector3(x, y, z)
 
 func diamond_spawn_pos_is_far_from_others(diamond_pos_list, pos: Vector3, dist: float) -> bool:
 	if diamond_pos_list.is_empty():
@@ -1300,6 +1300,11 @@ func set_x_icon_targetfront_pos():
 func set_x_icon_stationary():
 	x_icon_pos_state = STATIONARY
 
+func set_x_icon_flyingfacerain_pos():
+	x_icon_lerp_val = .05
+	x_icon_pos.global_position.x = 0
+	x_icon_pos.global_position.z = -24
+
 func x_icon_follow_my_pos():
 	x_icon_pos.global_position.x = global_position.x
 	x_icon_pos.global_position.z = global_position.z
@@ -1324,8 +1329,3 @@ func x_icon_follow_targetfront_pos():
 	var dir_to_target := global_position.direction_to(target.global_position)
 	x_icon_pos.global_position.x = target.global_position.x - front_teleport_dist_from_target * dir_to_target.x
 	x_icon_pos.global_position.z = target.global_position.z - front_teleport_dist_from_target * dir_to_target.z
-
-func set_x_icon_flyingfacerain_pos():
-	x_icon_lerp_val = .05
-	x_icon_pos.global_position.x = 0
-	x_icon_pos.global_position.z = -24

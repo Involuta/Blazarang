@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://skntmavu4xsw"]
+[gd_scene load_steps=23 format=3 uid="uid://skntmavu4xsw"]
 
 [ext_resource type="Script" path="res://icon/icon.gd" id="1_fgjod"]
 [ext_resource type="PackedScene" uid="uid://b5fggubx1ibk6" path="res://glb_inherited_scenes/icon_mesh.tscn" id="2_qle8n"]
+[ext_resource type="PackedScene" uid="uid://cwqyp0lcxfevf" path="res://glb_inherited_scenes/cotu_icon_circle.tscn" id="3_jnp3h"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qvdqm"]
 
@@ -77,7 +78,7 @@ step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("IconMesh:rotation")
+tracks/0/path = NodePath("TriangleIconMesh:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -89,7 +90,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("IconMesh:position")
+tracks/1/path = NodePath("TriangleIconMesh:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -101,7 +102,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("IconMesh:scale")
+tracks/2/path = NodePath("TriangleIconMesh:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -109,6 +110,30 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0.9, 0.9, 0.9)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CircleIconMesh:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5708, 3.48787e-16, 3.48787e-16)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CircleIconMesh:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_cpnbj"]
@@ -119,7 +144,7 @@ step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("IconMesh:rotation")
+tracks/0/path = NodePath("TriangleIconMesh:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -131,7 +156,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("IconMesh:position")
+tracks/1/path = NodePath("TriangleIconMesh:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -143,7 +168,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("IconMesh:scale")
+tracks/2/path = NodePath("TriangleIconMesh:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -151,6 +176,30 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0.9, 0.9, 0.9)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CircleIconMesh:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5708, 3.48787e-16, 3.48787e-16)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CircleIconMesh:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, -1, 2.08165e-12)]
 }
 
 [sub_resource type="Animation" id="Animation_1n5ka"]
@@ -161,7 +210,7 @@ step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("IconMesh:rotation")
+tracks/0/path = NodePath("TriangleIconMesh:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -173,7 +222,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("IconMesh:position")
+tracks/1/path = NodePath("TriangleIconMesh:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -185,7 +234,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("IconMesh:scale")
+tracks/2/path = NodePath("TriangleIconMesh:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -193,6 +242,30 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0.9, 0.9, 0.9)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CircleIconMesh:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CircleIconMesh:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5do6e"]
@@ -206,18 +279,11 @@ _data = {
 collision_layer = 32
 script = ExtResource("1_fgjod")
 
-[node name="IconMesh" parent="." instance=ExtResource("2_qle8n")]
-transform = Transform3D(0.805861, 0.400734, 0.000797747, 1.04991e-06, 0.00178953, -0.899998, -0.400734, 0.805859, 0.00160188, 2.08165e-12, -0.998732, 2.08165e-12)
+[node name="TriangleIconMesh" parent="." instance=ExtResource("2_qle8n")]
+transform = Transform3D(-0.614769, -0.657311, -0.00131312, 9.01055e-06, 0.00178951, -0.899998, 0.657312, -0.614768, -0.00121579, 2.08165e-12, -0.998732, 2.08165e-12)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_qvdqm")
-
-[node name="RedLight" type="OmniLight3D" parent="."]
-visible = false
-light_energy = 5.0
-light_bake_mode = 0
-omni_range = 7.0
-omni_shadow_mode = 0
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_b7lgh")
@@ -230,5 +296,8 @@ parameters/StateMachine/CotuGroundedBlendSpace/blend_position = 0.000634074
 libraries = {
 "": SubResource("AnimationLibrary_5do6e")
 }
+
+[node name="CircleIconMesh" parent="." instance=ExtResource("3_jnp3h")]
+transform = Transform3D(0.69, -4.74868e-22, 4.79387e-19, 4.79387e-19, 0.00137444, -0.689999, -4.74868e-22, 0.689999, 0.00137444, 2.08165e-12, -0.998732, 2.08165e-12)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

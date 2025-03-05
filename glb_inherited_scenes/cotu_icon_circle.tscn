@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwqyp0lcxfevf"]
+
+[ext_resource type="PackedScene" uid="uid://ci1b7huu0ix06" path="res://glb_imports/CotuIconCircle.glb" id="1_4vaq6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nrrr3"]
+cull_mode = 2
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+
+[node name="CotuIconCircle" instance=ExtResource("1_4vaq6")]
+
+[node name="Circle" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_nrrr3")
