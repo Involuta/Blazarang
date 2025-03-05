@@ -182,6 +182,7 @@ var semicircle_center := Vector3.ZERO
 @export var triangle_volcano_ascend_speed := 100.0
 @export var armbombs_dashback_lateral_dist := 15.0
 @export var armbombs_dashback_height := 12.0
+@export var lunge_facerain_shockwave_min_dist := 60.0
 @export var lunge_facerain_float_dist := 5.0
 @export var lunge_facerain_bomb_speed := 9
 @export var lunge_laser_diagonal_dash_dist := 25.0
@@ -468,7 +469,7 @@ func start_phase2():
 	laser_combo_wait_tween.tween_callback(on_laser_combo)
 	laser_combo_wait_tween.tween_callback(emit_no_attack_queued)
 	
-	Globals.time_left = pre_laser_combo_time_remaining
+	Globals.time_left = int(pre_laser_combo_time_remaining)
 
 func emit_no_attack_queued():
 	no_attack_queued.emit()
@@ -841,8 +842,12 @@ func lunge_facerain_start_dash():
 	var dir_to_target := global_position.direction_to(target.global_position)
 	var dist_to_target := global_position.distance_to(target.global_position)
 	var lateral_dist := dist_to_target+armbombs_dashback_lateral_dist
+	var dash_dest := Vector3(lateral_dist * dir_to_target.x, .75*armbombs_dashback_height, lateral_dist * dir_to_target.z)
+	if lateral_dist > lunge_facerain_shockwave_min_dist:
+		$ShockwavePivot.look_at(dash_dest)
+		$ShockwavePivot/RingParticle.emitting = true
 	var fr_tween = get_tree().create_tween()
-	fr_tween.tween_property(self, "global_position", Vector3(lateral_dist * dir_to_target.x, .75*armbombs_dashback_height, lateral_dist * dir_to_target.z), 1).as_relative().set_ease(Tween.EASE_OUT)
+	fr_tween.tween_property(self, "global_position", dash_dest, 1).as_relative().set_ease(Tween.EASE_OUT)
 	fr_tween.tween_property(self, "global_position", Vector3(.1*lateral_dist * dir_to_target.x, .1*.75*armbombs_dashback_height, .1*lateral_dist * dir_to_target.z), .5).as_relative().set_ease(Tween.EASE_OUT)
 
 func lunge_facerain_shoot_bombs():
