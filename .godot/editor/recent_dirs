@@ -1,3 +1,4 @@
+res://photo_scenes
 res://icon
 res://enemies/enemy_anims
 res://enemies
@@ -19,7 +20,6 @@ res://rang
 res://audio/sfx
 res://ui
 /Users/ryanbascos/GameDevMiscAssets
-res://glb_imports
 /Users/ryanbascos/Library/Application Support/TrenchBroom/games
 /Users/ryanbascos/GodotBuilds
 /Users/ryanbascos/Applications/

@@ -46,7 +46,7 @@ enum PHASE {
 	POST_LASER_COMBO,
 }
 var phase := PHASE.PHASE1
-@export var pre_laser_combo_time_remaining := 20.0
+@export var pre_laser_combo_time_remaining := 10.0
 
 @export var min_y_pos := 11.4
 
@@ -269,14 +269,6 @@ func end_pre_fight():
 	anim_tree.set(param_path_base + "PreFight", false)
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("Special"):
-		match(behav_state):
-			WAIT:
-				print("WAIT")
-			FOLLOW:
-				print("FOLLOW")
-			ATTACK:
-				print("ATTACK")
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 		if global_position.y < min_y_pos:
@@ -1162,7 +1154,7 @@ func laser_combo_mvmt():
 	lateral_vec_to_target = target.global_position - global_position
 	lateral_vec_to_target.y = 0
 	var ball_tween := create_tween()
-	ball_tween.tween_property(laser_combo_ball, "global_position", 1.5*lateral_vec_to_target, 1.5*t).as_relative()
+	ball_tween.tween_property(laser_combo_ball, "global_position", 2.5*lateral_vec_to_target, 2.5*t).as_relative()
 	ball_tween.tween_callback(delete_laser_combo_ball)
 	
 	side_teleport_dist_from_target *= 1.25

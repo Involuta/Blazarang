@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ckkxheuv5iefh"]
+[gd_scene load_steps=23 format=3 uid="uid://ckkxheuv5iefh"]
 
 [ext_resource type="Script" path="res://hitbox.gd" id="1_hwgla"]
 [ext_resource type="Script" path="res://enemies/x_laser_combo_ball.gd" id="1_wi63g"]
@@ -56,55 +56,121 @@ step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
+tracks/0/path = NodePath("Streaks:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(1.41667, 2.58334),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0.01, 0.01, 0.01), Vector3(1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Streaks:emitting")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 1.16667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Dots:emitting")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 1.33334),
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Dots:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.58334),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BallMesh:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.41667, 2.58334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01), Vector3(1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BallMesh:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FastDots:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_imn18"]
+resource_name = "shrink"
+length = 2.0
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dots:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BallMesh:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0.01, 0.01, 0.01)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BallMesh:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FastDots:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a7aek"]
 _data = {
-"grow": SubResource("Animation_whoax")
+"grow": SubResource("Animation_whoax"),
+"shrink": SubResource("Animation_imn18")
 }
 
 [sub_resource type="Curve" id="Curve_03cen"]
@@ -140,6 +206,23 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_0h7xt")
 size = Vector2(0.5, 0.5)
 
+[sub_resource type="Curve" id="Curve_hvo3l"]
+_data = [Vector2(0.501352, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0.177072), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_u8rv1"]
+curve = SubResource("Curve_hvo3l")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b2wh0"]
+direction = Vector3(1, 2.08165e-12, 2.08165e-12)
+spread = 180.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+scale_curve = SubResource("CurveTexture_u8rv1")
+color = Color(1, 0.913725, 0.564706, 1)
+attractor_interaction_enabled = false
+
 [node name="LaserComboBall" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 script = ExtResource("1_wi63g")
@@ -162,7 +245,6 @@ shape = SubResource("SphereShape3D_7y48p")
 
 [node name="Streaks" type="GPUParticles3D" parent="."]
 visible = false
-emitting = false
 amount = 2
 lifetime = 20.0
 one_shot = true
@@ -189,4 +271,10 @@ libraries = {
 amount = 20
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_0huv0")
+draw_pass_1 = SubResource("QuadMesh_fhjvf")
+
+[node name="FastDots" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_b2wh0")
 draw_pass_1 = SubResource("QuadMesh_fhjvf")

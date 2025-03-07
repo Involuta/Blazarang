@@ -20,19 +20,19 @@ material = SubResource("StandardMaterial3D_aoq7e")
 radius = 0.3
 height = 0.6
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_taasp"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_muu1n"]
 load_path = "res://.godot/imported/BlackStarryBG.webp-42cfbe646311ffffd0833896f1e64777.s3tc.ctex"
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_4umln"]
-panorama = SubResource("CompressedTexture2D_taasp")
+panorama = SubResource("CompressedTexture2D_muu1n")
 
-[sub_resource type="Sky" id="Sky_vjvoc"]
+[sub_resource type="Sky" id="Sky_jonad"]
 sky_material = SubResource("PanoramaSkyMaterial_4umln")
 
 [sub_resource type="Environment" id="Environment_cg8r5"]
 background_mode = 1
 background_color = Color(0.0177324, 0.0177324, 0.0177324, 1)
-sky = SubResource("Sky_vjvoc")
+sky = SubResource("Sky_jonad")
 ambient_light_source = 1
 reflected_light_source = 1
 glow_enabled = true
