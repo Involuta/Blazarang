@@ -38,3 +38,7 @@ res://textures/white_border_black_center.tres
 res://textures/white_border_black_solid_square.tres
 res://levels/gauntlet/section_nodes/gauntlet_arena1.gd
 res://levels/gauntlet/section_nodes/gauntlet_arena1.tscn
+res://rang/axrang.tscn
+res://enemies/bullet.gd
+res://enemies/enemy_bullet.tscn
+res://enemies/enemy_mega_bullet.tscn

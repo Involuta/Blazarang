@@ -7,9 +7,10 @@ var invincibility_secs := .05
 @export var bullet_explosion_secs := 1.0
 var destroyed := false
 
-@onready var explosion_hitbox := $ExplosionHitboxPivot/EnemyHitbox
+var explosion_hitbox : Node3D
 
 func _ready():
+	explosion_hitbox = get_node_or_null("ExplosionHitboxPivot/EnemyHitbox")
 	if explosion_hitbox != null:
 		explosion_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	await get_tree().create_timer(invincibility_secs).timeout

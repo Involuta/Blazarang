@@ -107,13 +107,6 @@ bus = &"SFX"
 [node name="HitboxCollider" type="CollisionShape3D" parent="HitSFXPlayer"]
 shape = SubResource("CylinderShape3D_o5dk8")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-visible = false
-light_energy = 5.0
-light_bake_mode = 0
-omni_range = 7.0
-omni_shadow_mode = 0
-
 [node name="RangParticlesBase" parent="." instance=ExtResource("6_44m4u")]
 
 [node name="boomerang" parent="." instance=ExtResource("6_c0jd5")]
