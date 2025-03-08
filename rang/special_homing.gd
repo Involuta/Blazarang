@@ -14,15 +14,18 @@ var invincible := true
 
 @onready var mesh = $boomerang
 @onready var hitbox = $PlayerHitbox
-@onready var cotu = $/root/Level/cotuCB
-@onready var icon = $/root/Level/Icon
+@onready var root := $/root/ViewControl
+var cotu : Node3D
+var icon : Node3D
 
 func _init():
 	# When this script is assigned to roserang, _init() is called, but not _ready() bc the roserang is already in the scene tree, and _ready() is only called when a node enters the scene tree for the first time. To get the @onready values, you must call _ready() manually
 	_ready()
 
 func _ready():
-	# $Trail.visible = false
+	cotu = root.find_child("cotuCB")
+	icon = root.find_child("Icon")
+	
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, false)
 	set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, false)
 	var all_lockonables = get_tree().get_nodes_in_group("lockonables")
@@ -42,7 +45,6 @@ func homing_attack(target):
 	if target == null:
 		return
 	var original_dist_to_target := global_position.distance_to(target.global_position)
-	# The line below instantly teleports the rang to enemies but risks quantum superposition bug, making the rang unusable
 	var homing_speed := homing_speed_multiplier * original_dist_to_target / get_physics_process_delta_time()
 	while target != null and global_position.distance_to(target.global_position) > 1:
 		if global_position.distance_to(target.global_position) <= homing_speed * get_physics_process_delta_time():

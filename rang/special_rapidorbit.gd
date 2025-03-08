@@ -18,7 +18,7 @@ var invincible := true
 
 @onready var root := $/root/ViewControl
 var cotu : Node3D
-var target : Node3D
+var icon : Node3D
 
 @onready var hitbox = $PlayerHitbox
 
@@ -26,7 +26,7 @@ func _init():
 	# When this script is assigned to roserang, _init() is called, but not _ready() bc the roserang is already in the scene tree, and _ready() is only called when a node enters the scene tree for the first time. To get the @onready values, you must call _ready() manually
 	_ready()
 	cotu = root.find_child("cotuCB")
-	target = root.find_child("Icon")
+	icon = root.find_child("Icon")
 
 func _ready():
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, false)
@@ -41,7 +41,7 @@ func rapidorbit(delta):
 	angle += speed * delta
 	radius += (final_radius - initial_radius) / duration_secs * delta
 	var angle_vec := Vector2.from_angle(angle)
-	global_position = target.global_position + radius * Vector3(angle_vec.x, 0, angle_vec.y)
+	global_position = icon.global_position + radius * Vector3(angle_vec.x, 0, angle_vec.y)
 
 func _physics_process(delta):
 	rapidorbit(delta)
