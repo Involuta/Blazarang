@@ -27,3 +27,4 @@ res://levels/x_boss_level/x_boss_level_background.tscn
 res://enemies/x_boss.tscn
 res://enemies/x_boss.gd
 res://enemies/enemy_anims/x_lunge_laser.res
+res://enemies/enemy_anims/x_lasercombo.res
