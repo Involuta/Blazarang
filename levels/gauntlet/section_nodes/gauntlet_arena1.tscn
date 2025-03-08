@@ -190,7 +190,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 20, 2.08165e-12)
 
 [node name="EnemySpawner1" parent="SpawnerSpinner" instance=ExtResource("7_sv8mr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 5, 2.08165e-12)
-section_name = "GauntletArena1"
 spawning = false
 spawn_cooldown_secs = 8.0
 enemy_chances = {
@@ -200,7 +199,6 @@ enemy_chances = {
 
 [node name="EnemySpawner2" parent="SpawnerSpinner" instance=ExtResource("7_sv8mr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 5, 2.08165e-12)
-section_name = "GauntletArena1"
 spawning = false
 spawn_cooldown_secs = 8.0
 enemy_chances = {
@@ -210,7 +208,6 @@ enemy_chances = {
 
 [node name="EnemySpawner3" parent="SpawnerSpinner" instance=ExtResource("7_sv8mr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 5, 25)
-section_name = "GauntletArena1"
 spawning = false
 spawn_cooldown_secs = 8.0
 enemy_chances = {
@@ -220,7 +217,6 @@ enemy_chances = {
 
 [node name="EnemySpawner4" parent="SpawnerSpinner" instance=ExtResource("7_sv8mr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 5, -25)
-section_name = "GauntletArena1"
 spawning = false
 spawn_cooldown_secs = 8.0
 enemy_chances = {
@@ -233,7 +229,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 20, 2.08165e-12)
 
 [node name="EnemySpawner1" parent="PillarSpawners" instance=ExtResource("7_sv8mr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 5, -18)
-section_name = "GauntletArena1"
 spawning = false
 spawn_cooldown_secs = 8.0
 enemy_chances = {
@@ -243,7 +238,6 @@ enemy_chances = {
 
 [node name="EnemySpawner2" parent="PillarSpawners" instance=ExtResource("7_sv8mr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 5, -18)
-section_name = "GauntletArena1"
 spawning = false
 spawn_cooldown_secs = 8.0
 enemy_chances = {
@@ -253,7 +247,6 @@ enemy_chances = {
 
 [node name="EnemySpawner3" parent="PillarSpawners" instance=ExtResource("7_sv8mr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 5, 18)
-section_name = "GauntletArena1"
 spawning = false
 spawn_cooldown_secs = 8.0
 enemy_chances = {
@@ -263,7 +256,6 @@ enemy_chances = {
 
 [node name="EnemySpawner4" parent="PillarSpawners" instance=ExtResource("7_sv8mr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 5, 18)
-section_name = "GauntletArena1"
 spawning = false
 spawn_cooldown_secs = 8.0
 enemy_chances = {

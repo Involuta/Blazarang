@@ -34,3 +34,7 @@ res://icon/icon.tscn
 res://rang/roserang.tscn
 res://rang/special_homing.gd
 res://rang/special_rapidorbit.gd
+res://textures/white_border_black_center.tres
+res://textures/white_border_black_solid_square.tres
+res://levels/gauntlet/section_nodes/gauntlet_arena1.gd
+res://levels/gauntlet/section_nodes/gauntlet_arena1.tscn

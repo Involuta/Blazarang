@@ -4,7 +4,8 @@ extends CharacterBody3D
 # Champion of the Universe - 113
 # It's Just You - 120
 # BIZARROBOT - 120, 90
-const SPECIAL_DIST := 7 # max dist from Cotu where doing special input will perform a special move
+var current_special_script
+const SPECIAL_DIST := 13 # max dist from Cotu where doing special input will perform a special move
 
 var BPM := 120.0
 var max_radius := 30
@@ -70,6 +71,8 @@ func _ready():
 	set_direction()
 	global_position = target.global_position
 	change_color(rose_color)
+	
+	current_special_script = homing_script
 
 func set_direction():
 	if cotu.moving_right:
@@ -94,7 +97,7 @@ func change_color(color: Color):
 func _physics_process(delta):
 	mesh.rotate_y(rotate_speed)
 	if Input.is_action_just_pressed("Special") and global_position.distance_to(target.global_position) < SPECIAL_DIST:
-		set_script(homing_script)
+		set_script(current_special_script)
 		return
 	current_loop_angle += abs(angle_speed) * delta
 	invincible = current_loop_angle < PI/(5*petals)
