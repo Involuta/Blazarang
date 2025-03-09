@@ -3,7 +3,7 @@ extends Node3D
 
 @export var obj_names := ["BasicSword"]
 @export var attachment_names := ["SwordAttachment"]
-@export var local_offset := Vector3.ZERO
+@export var local_offset := [Vector3.ZERO, Vector3.ZERO]
 
 var objs := []
 var attachments := []
@@ -18,4 +18,4 @@ func _ready():
 
 func _process(_delta):
 	for i in range(objs.size()):
-		objs[i].global_position = attachments[i].global_position + local_offset * attachments[i].transform.basis
+		objs[i].global_position = attachments[i].global_position + local_offset[i] * attachments[i].transform.basis
