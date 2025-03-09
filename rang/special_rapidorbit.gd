@@ -46,5 +46,8 @@ func rapidorbit(delta):
 func _physics_process(delta):
 	rapidorbit(delta)
 
+func buff_damage():
+	hitbox.damage = 30
+
 func get_mvmt_state():
 	return "RAPIDORBIT"

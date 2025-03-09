@@ -59,7 +59,6 @@ roughness = 0.2
 script = ExtResource("2_4auvi")
 obj_names = ["BasicSword", "BasicGreatshield"]
 attachment_names = ["SwordAttachment", "ShieldAttachment"]
-local_offset = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 
 [node name="Skeleton3D" parent="ControlRig" index="0"]
 bones/0/position = Vector3(0.186255, 8.0368, 0.726565)

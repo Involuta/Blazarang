@@ -7,7 +7,7 @@ extends CharacterBody3D
 
 var BPM := 113.0
 var rotate_speed := 3.6
-var max_targets := 12
+var max_targets := 11
 var homing_speed_multiplier := .125 # must be between 0 (exclusive) and 1 (inclusive)
 
 var invincible := true
@@ -56,6 +56,9 @@ func homing_attack(target):
 
 func _physics_process(_delta):
 	mesh.rotate_y(rotate_speed)
+
+func buff_damage():
+	hitbox.damage = 30
 
 func get_mvmt_state():
 	return "HOMING"

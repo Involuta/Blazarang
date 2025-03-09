@@ -40,6 +40,11 @@ var buff_list := [Globals.BUFFS.DAMAGE, Globals.BUFFS.DAMAGE, Globals.BUFFS.DAMA
 var next_buff_index := 0
 var throw_self_damage := 18.0
 
+var rapidorbit_script := preload("res://rang/special_rapidorbit.gd")
+var homing_script := preload("res://rang/special_homing.gd")
+var current_special_script
+var special_queued := false
+
 var destabilized := false
 var grabbed := false
 var stunned := false
@@ -69,6 +74,8 @@ func _ready():
 	ui = root.find_child("UIRoot")
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	current_special_script = rapidorbit_script
 	
 	Globals.destabilize.connect(on_destabilize)
 	Globals.stabilize.connect(on_stabilize)
@@ -206,6 +213,12 @@ func _physics_process(delta):
 	else:
 		rang_pointer_pivot.transform.basis = camera_twist_pivot.transform.basis
 	
+	# Special throw (takes precedence over instant rethrow)
+	if Input.is_action_just_pressed("Special") and not special_queued and roserang_instance != null:
+		start_special_timer()
+	if special_queued and roserang_instance == null:
+		throw_special_rang()
+	
 	# Roserang throw
 	if Input.is_action_just_pressed("Throw"):
 		if roserang_instance == null and can_throw:
@@ -305,3 +318,14 @@ func apply_buffs_to_rang():
 			Globals.BUFFS.DAMAGE:
 				roserang_instance.buff_damage()
 				ui.apply_buff1()
+
+func throw_special_rang():
+	roserang_instance = roserang.instantiate()
+	add_sibling(roserang_instance)
+	roserang_instance.set_script(current_special_script)
+	apply_buffs_to_rang()
+
+func start_special_timer():
+	special_queued = true
+	await get_tree().create_timer(INSTANT_RETHROW_SECS).timeout
+	special_queued = false

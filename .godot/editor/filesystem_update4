@@ -42,3 +42,5 @@ res://rang/axrang.tscn
 res://enemies/bullet.gd
 res://enemies/enemy_bullet.tscn
 res://enemies/enemy_mega_bullet.tscn
+res://glb_inherited_scenes/melee_t3.tscn
+res://cotu/CotuControl.gd
