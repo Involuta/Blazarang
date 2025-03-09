@@ -32,3 +32,5 @@ res://icon/icon.tscn
 res://rang/axrang.tscn
 res://glb_inherited_scenes/melee_t3.tscn
 res://glb_inherited_scenes/basic_greatshield.tscn
+res://enemies/enemy_melee_tier2.tscn
+res://enemies/enemy_melee_tier1.tscn
