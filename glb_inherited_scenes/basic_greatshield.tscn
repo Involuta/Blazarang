@@ -41,7 +41,7 @@ albedo_color = Color(0.45098, 0.45098, 0.0588235, 1)
 roughness = 0.2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ggt1r"]
-size = Vector3(10.5, 16, 3.5)
+size = Vector3(12, 6, 4)
 
 [node name="BasicGreatshield" instance=ExtResource("1_kcop5")]
 

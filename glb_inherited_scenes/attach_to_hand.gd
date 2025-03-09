@@ -18,4 +18,5 @@ func _ready():
 
 func _process(_delta):
 	for i in range(objs.size()):
-		objs[i].global_position = attachments[i].global_position + local_offset[i] * attachments[i].transform.basis
+		pass
+		#objs[i].global_position = attachments[i].global_position + local_offset[i] * attachments[i].transform.basis
