@@ -31,3 +31,7 @@ res://rang/axrang.tscn
 res://enemies/enemy_melee_tier3.tscn
 res://enemies/enemy_anims/mt3_big_overhead.res
 res://enemies/enemy_anims/mt3_big_charge_up.res
+res://textures/white_border_black_center.tres
+res://textures/white_border_black_solid_square.tres
+res://levels/gauntlet/section_nodes/gauntlet_arena1.gd
+res://levels/gauntlet/section_nodes/gauntlet_arena1.tscn

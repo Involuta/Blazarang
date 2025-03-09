@@ -3,7 +3,7 @@ extends Node3D
 
 @export var obj_names := ["BasicSword"]
 @export var attachment_names := ["SwordAttachment"]
-@export var local_offset := [Vector3.ZERO, Vector3.ZERO]
+@export var local_offset := [Vector3(.29,.35,.22)]
 
 var objs := []
 var attachments := []

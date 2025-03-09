@@ -288,31 +288,41 @@ mesh = SubResource("CapsuleMesh_oq81m")
 transform = Transform3D(-0.15, 5.2318e-17, -1.31134e-08, 5.2318e-17, 0.15, -5.2318e-17, 1.31134e-08, -5.2318e-17, -0.15, 0, -1.56436, 0)
 
 [node name="ControlRig" parent="VisualMesh" index="0"]
-local_offset = [Vector3(-0.25, 0.14, -0.15)]
+transform = Transform3D(1, 1.60059e-23, -7.73712e-15, -1.25877e-23, 1, 1.91535e-23, 3.60032e-15, 6.44178e-24, 1, 0, 0, 0)
+local_offset = [Vector3(0.29, 0.35, 0.22)]
 
 [node name="Skeleton3D" parent="VisualMesh/ControlRig" index="0"]
-bones/0/position = Vector3(0.186255, 8.0368, 0.726565)
-bones/8/rotation = Quaternion(0.0593006, -0.358695, 0.199588, 0.909938)
-bones/9/rotation = Quaternion(1.5067e-06, 1.35519e-06, 0.748344, 0.66331)
-bones/10/rotation = Quaternion(0.0285191, 0.0622591, -0.281221, 0.957197)
-bones/12/rotation = Quaternion(0.30559, 0.143012, -0.690796, 0.639503)
-bones/13/rotation = Quaternion(3.01811e-08, 7.3848e-07, -0.00220935, 0.999998)
-bones/14/rotation = Quaternion(-0.0325735, 0.26114, -0.042316, 0.963823)
-bones/15/rotation = Quaternion(-0.177393, -0.324966, -0.911666, 0.178308)
-bones/16/rotation = Quaternion(-0.563394, -6.39566e-08, -6.78113e-09, 0.826188)
-bones/17/rotation = Quaternion(0.739502, 0.0384972, -0.0766207, 0.667671)
-bones/20/rotation = Quaternion(0.030135, 0.0379867, 0.993369, 0.104244)
-bones/21/rotation = Quaternion(-0.408261, -3.50003e-07, -1.17748e-07, 0.912866)
-bones/22/rotation = Quaternion(0.846492, -0.0573281, 0.120823, 0.515331)
+bones/0/position = Vector3(0.186255, 8.91884, -0.592007)
+bones/0/rotation = Quaternion(0.0473998, -0.158453, 0.0122675, 0.986152)
+bones/1/rotation = Quaternion(0.0445087, -0.0138489, 0.0114663, 0.998847)
+bones/2/rotation = Quaternion(0.0419609, -0.0212065, 0.00700384, 0.99887)
+bones/3/rotation = Quaternion(0.0414742, -0.0223417, 0.00729808, 0.998863)
+bones/4/rotation = Quaternion(0.0925755, 0.117053, -0.126207, 0.980714)
+bones/5/rotation = Quaternion(-0.200447, 0.0734138, 0.0289419, 0.976521)
+bones/7/rotation = Quaternion(0.594434, 0.404551, -0.508945, 0.473246)
+bones/8/rotation = Quaternion(0.184857, -0.407316, 0.208218, 0.869808)
+bones/9/rotation = Quaternion(1.08381e-06, 1.70517e-06, 0.548111, 0.836406)
+bones/10/rotation = Quaternion(-0.0342959, 0.0344825, -0.0027535, 0.998813)
+bones/12/rotation = Quaternion(0.385504, -0.0769171, 0.0191464, 0.919296)
+bones/13/rotation = Quaternion(-7.40053e-08, 7.62483e-07, -0.192347, 0.981327)
+bones/14/rotation = Quaternion(-0.0208051, -0.0483304, -0.0620525, 0.996685)
+bones/15/rotation = Quaternion(-0.192027, -0.261033, -0.945842, 0.0192593)
+bones/16/rotation = Quaternion(-0.594053, -5.69314e-08, -1.10348e-09, 0.804426)
+bones/17/rotation = Quaternion(0.689451, -0.0235298, 0.0429716, 0.722673)
+bones/18/rotation = Quaternion(0.407153, 0.116912, 0.0129288, 0.905755)
+bones/20/rotation = Quaternion(-0.118022, -0.217758, -0.968611, 0.0211156)
+bones/21/rotation = Quaternion(-0.40916, -3.30765e-07, -1.55413e-07, 0.912463)
+bones/22/rotation = Quaternion(0.71535, -0.00302417, -0.0377779, 0.697738)
+bones/23/rotation = Quaternion(0.247678, -0.128246, 0.0225361, 0.960052)
 
 [node name="SwordAttachment" parent="VisualMesh/ControlRig/Skeleton3D" index="1"]
-transform = Transform3D(0.178242, -0.217556, 0.959635, 0.893418, -0.372909, -0.250484, 0.412351, 0.902002, 0.1279, -4.31368, 11.4405, 8.26208)
+transform = Transform3D(0.0812548, -0.284099, 0.955346, -0.0936717, -0.956449, -0.27646, 0.992281, -0.0670252, -0.104328, -5.79367, 7.61293, -3.82677)
 
 [node name="ShieldAttachment" parent="VisualMesh/ControlRig/Skeleton3D" index="2"]
-transform = Transform3D(0.651542, -0.200749, -0.731569, -0.649966, 0.349573, -0.674791, 0.3912, 0.915149, 0.0972819, 3.5787, 14.0627, 9.73612)
+transform = Transform3D(0.651542, -0.200749, -0.731569, -0.649965, 0.349573, -0.674791, 0.391201, 0.91515, 0.0972819, 3.57875, 14.419, 9.7363)
 
 [node name="BasicSword" parent="VisualMesh/ControlRig" index="1"]
-transform = Transform3D(7.69938e-08, 1.5, -2.83034e-07, 1.49425, -6.53176e-08, 0.283247, 0.13073, -1.36849e-07, -3.23753, -5.06757, 9.72027, -0.98771)
+transform = Transform3D(7.69938e-08, 1.5, -2.83034e-07, 1.49425, -6.53176e-08, 0.283247, 0.13073, -1.36849e-07, -3.23753, -6.16376, 5.43898, 0.201559)
 
 [node name="Blade" parent="VisualMesh/ControlRig/BasicSword" index="0"]
 transform = Transform3D(1, 1.67037e-25, 7.30142e-30, 0, -4.37114e-11, 1, 1.67037e-22, -0.001, -4.37114e-08, 0, 0, 0)
@@ -328,7 +338,7 @@ length = 1
 transform = Transform3D(3, 1.67037e-22, 2.19043e-29, 0, -4.37114e-08, 3, 5.01111e-22, -1, -1.31134e-07, 0, 0, 0)
 
 [node name="BasicGreatshield" parent="VisualMesh/ControlRig" index="2"]
-transform = Transform3D(1, 1.21514e-17, -3.91433e-09, -9.98332e-23, 1, 1.45818e-17, 6.52385e-09, -1.21512e-17, 1, 5.66244, 13.8084, 9.24393)
+transform = Transform3D(1, 1.3014e-17, -4.19209e-09, -9.67866e-23, 1, 1.52403e-17, 6.98687e-09, -1.30135e-17, 1, 3.26192, 16.1888, 12.5825)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_8gb4u")
