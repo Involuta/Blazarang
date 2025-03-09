@@ -29,3 +29,5 @@ res://rang/roserang.tscn
 res://icon/icon.tscn
 res://rang/axrang.tscn
 res://enemies/enemy_melee_tier3.tscn
+res://enemies/enemy_anims/mt3_big_overhead.res
+res://enemies/enemy_anims/mt3_big_charge_up.res

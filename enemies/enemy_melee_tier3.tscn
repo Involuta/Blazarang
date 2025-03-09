@@ -225,7 +225,6 @@ transitions = ["BigChargeUpCR", "BigOverheadCR", SubResource("AnimationNodeState
 graph_offset = Vector2(131.423, 11.91)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8gb4u"]
-graph_offset = Vector2(-19.2, 48.96)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_qroef")
 nodes/StateMachine/position = Vector2(60, 150)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -267,7 +266,9 @@ libraries = {
 }
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
-transform = Transform3D(1, -6.79063e-16, 1.12114e-16, 1.12114e-16, 0.321439, 0.94693, -6.79064e-16, -0.946929, 0.321439, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+process_mode = 4
+transform = Transform3D(1, -6.96246e-16, -3.03978e-17, -3.03978e-17, -0.0871528, 0.996195, -6.96247e-16, -0.996194, -0.0871529, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+visible = false
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
 transform = Transform3D(0.999999, 2.15301e-08, -2.2719e-14, -8.9407e-08, 0.999999, 0, -6.17927e-15, -6.2758e-15, 0.999999, 2.08165e-12, 6.5, 2.08165e-12)
@@ -289,7 +290,7 @@ mesh = SubResource("CapsuleMesh_oq81m")
 transform = Transform3D(-0.15, 5.2318e-17, -1.31134e-08, 5.2318e-17, 0.15, -5.2318e-17, 1.31134e-08, -5.2318e-17, -0.15, 0, -1.56436, 0)
 
 [node name="ControlRig" parent="VisualMesh" index="0"]
-local_offset = [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
+local_offset = [Vector3(-0.25, 0.14, -0.15)]
 
 [node name="Skeleton3D" parent="VisualMesh/ControlRig" index="0"]
 bones/0/position = Vector3(0.186255, 8.75602, -0.592007)
@@ -300,48 +301,50 @@ bones/3/rotation = Quaternion(0.0414742, -0.0223417, 0.00729807, 0.998863)
 bones/4/rotation = Quaternion(0.0925755, 0.117053, -0.126207, 0.980714)
 bones/5/rotation = Quaternion(-0.200447, 0.0734138, 0.0289418, 0.976521)
 bones/7/rotation = Quaternion(0.594434, 0.404551, -0.508945, 0.473246)
-bones/8/rotation = Quaternion(0.182907, -0.389967, 0.215821, 0.876294)
-bones/9/rotation = Quaternion(1.0866e-06, 1.6661e-06, 0.550004, 0.835162)
+bones/8/rotation = Quaternion(0.182907, -0.389967, 0.215821, 0.876295)
+bones/9/rotation = Quaternion(1.08905e-06, 1.66436e-06, 0.550004, 0.835162)
 bones/10/rotation = Quaternion(-0.0467851, 0.0456995, -0.00806851, 0.997826)
-bones/11/rotation = Quaternion(0.633043, -0.402938, 0.513209, 0.416549)
-bones/12/rotation = Quaternion(0.421926, -0.125357, -0.0405601, 0.897006)
-bones/13/rotation = Quaternion(-9.54625e-08, 7.4741e-07, -0.188422, 0.982088)
+bones/12/rotation = Quaternion(0.421926, -0.125357, -0.04056, 0.897006)
+bones/13/rotation = Quaternion(-9.55429e-08, 7.47461e-07, -0.188422, 0.982088)
 bones/14/rotation = Quaternion(-0.0407788, -0.0404755, -0.0924888, 0.994055)
-bones/15/rotation = Quaternion(0.176389, 0.285196, 0.933817, -0.124643)
-bones/16/rotation = Quaternion(-0.266366, -4.03113e-08, 2.4488e-08, 0.963872)
+bones/15/rotation = Quaternion(-0.176389, -0.285196, -0.933817, 0.124643)
+bones/16/rotation = Quaternion(-0.266366, -4.25617e-08, 2.00946e-08, 0.963872)
 bones/17/rotation = Quaternion(0.52875, 0.0081836, -0.0579123, 0.84676)
 bones/18/rotation = Quaternion(0.250872, 0.1669, -0.0144579, 0.953414)
 bones/20/rotation = Quaternion(0.0573144, 0.107209, 0.988642, 0.0883694)
-bones/21/rotation = Quaternion(-0.334045, -3.70752e-07, -1.27255e-07, 0.942557)
+bones/21/rotation = Quaternion(-0.334045, -3.68744e-07, -1.27601e-07, 0.942557)
 bones/22/rotation = Quaternion(0.765099, -0.0299611, 0.0874845, 0.637238)
 bones/23/rotation = Quaternion(0.212775, -0.127348, 0.0271579, 0.968386)
 
 [node name="SwordAttachment" parent="VisualMesh/ControlRig/Skeleton3D" index="1"]
-transform = Transform3D(0.178242, -0.217556, 0.959635, 0.0255959, -0.973897, -0.225543, 0.983653, 0.0647639, -0.168021, -5.06148, 7.24381, -3.28233)
+transform = Transform3D(0.178242, -0.217556, 0.959635, 0.0255959, -0.973897, -0.225543, 0.983653, 0.064764, -0.168021, -5.06148, 7.24382, -3.28233)
 
 [node name="ShieldAttachment" parent="VisualMesh/ControlRig/Skeleton3D" index="2"]
-transform = Transform3D(0.651542, -0.200749, -0.731569, -0.649966, 0.349573, -0.674791, 0.3912, 0.91515, 0.0972817, 3.57874, 14.0626, 9.73631)
+transform = Transform3D(0.651542, -0.200749, -0.731569, -0.649966, 0.349573, -0.674791, 0.3912, 0.91515, 0.0972818, 3.57874, 14.0626, 9.73631)
 
 [node name="BasicSword" parent="VisualMesh/ControlRig" index="1"]
-transform = Transform3D(1.49999, 0, 0, 0, 1.5, 0, 0, 0, 3.24997, -5.06148, 7.24381, -3.28233)
+transform = Transform3D(-6.55651e-08, 1.5, -1.42058e-07, -2.28683e-23, -6.55671e-08, -3.2499, -1.49996, -6.55671e-08, 6.20954e-15, -5.06757, 9.72027, -0.98771)
 
 [node name="Blade" parent="VisualMesh/ControlRig/BasicSword" index="0"]
 transform = Transform3D(1, 1.67037e-25, 7.30142e-30, 0, -4.37114e-11, 1, 1.67037e-22, -0.001, -4.37114e-08, 0, 0, 0)
 
 [node name="GPUTrail3D" parent="VisualMesh/ControlRig/BasicSword" index="1"]
-transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+transform = Transform3D(11.25, 6.57396e-22, 2.87357e-29, 0, -4.91753e-07, 11.25, 6.57396e-22, -11.25, -4.91753e-07, 0.254, 0.168, -3.5)
+visible = false
+amount = 1
+lifetime = 1.0
+length = 1
 
 [node name="BasicSwordHandle" parent="VisualMesh/ControlRig/BasicSword" index="3"]
 transform = Transform3D(1, 1.67037e-22, 7.30142e-30, 0, -4.37114e-08, 1, 1.67037e-22, -1, -4.37114e-08, 0, 0, 0)
 
 [node name="BasicGreatshield" parent="VisualMesh/ControlRig" index="2"]
-transform = Transform3D(1, 9.47056e-18, -3.05076e-09, -1.00335e-22, 1, 1.13648e-17, 5.08458e-09, -9.47036e-18, 1, 3.57874, 14.0626, 9.73631)
+transform = Transform3D(1, 1.14003e-17, -3.67237e-09, -9.99739e-23, 1, 1.36805e-17, 6.1206e-09, -1.14001e-17, 1, 5.66247, 13.8083, 9.24412)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_8gb4u")
 anim_player = NodePath("../VisualMesh/AnimationPlayer")
 advance_expression_base_node = NodePath("..")
-active = true
 parameters/StateMachine/conditions/overhead = false
 parameters/StateMachine/WalkSpace/blend_position = 0
 
