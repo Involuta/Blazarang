@@ -125,6 +125,7 @@ transform = Transform3D(0.999999, 2.15301e-08, -2.2719e-14, -8.9407e-08, 0.99999
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("3_h3l5p")
+damage = 24
 
 [node name="HitboxCollider" type="CollisionShape3D" parent="MeleeHitboxPivot/EnemyHitbox"]
 shape = SubResource("CapsuleShape3D_na3bt")
