@@ -42,3 +42,4 @@ res://enemies/enemy_anims/mt2_one-handed-walk.res
 res://enemies/enemy_anims/mt2_overhead.res
 res://enemies/enemy_anims/mt2_sweep.res
 res://glb_inherited_scenes/melee_t2.tscn
+res://cotu/CotuControl.gd

@@ -220,19 +220,19 @@ func _physics_process(delta):
 		throw_special_rang()
 	
 	# Roserang throw
-	if Input.is_action_just_pressed("Throw"):
+	if Input.is_action_just_pressed("ThrowRoserang"):
 		if roserang_instance == null and can_throw:
 			# Manual throw
 			if not destabilized:
 				hurtbox.self_hit(throw_self_damage)
-			throw_rang()
+			throw_roserang()
 		elif not throw_queued:
 			start_instant_rethrow_timer()
 	if throw_queued and roserang_instance == null and can_throw:
 		# Instant rethrow
 		anim_tree.set("parameters/StateMachine/conditions/just_instant_rethrew", true)
 		throw_queued = false
-		throw_rang()
+		throw_roserang()
 		Globals.award_score(Globals.INSTANT_RETHROW_SCORE)
 	else:
 		anim_tree.set("parameters/StateMachine/conditions/just_instant_rethrew", false)
@@ -296,7 +296,7 @@ func step_dodge():
 	await get_tree().create_timer(STEP_DODGE_COOLDOWN_SECS).timeout
 	can_dodge = true
 
-func throw_rang():
+func throw_roserang():
 	roserang_instance = roserang.instantiate()
 	add_sibling(roserang_instance)
 	apply_buffs_to_rang()
