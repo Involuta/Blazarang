@@ -33,8 +33,8 @@ var look_angle := 0.0
 var look_angle2 := 0.0
 var max_cam_dist := 6.0 # dist btwn player and camera when camera's not colliding with geometry; player can modify this in-game
 
-var can_throw := true
-var throw_queued := false
+var can_throw_roserang := true
+var roserang_throw_queued := false
 const INSTANT_RETHROW_SECS := .2 # max possible time btwn player inputting throw and rang hitting Cotu that still cauess an instant rethrow
 var buff_list := [Globals.BUFFS.DAMAGE, Globals.BUFFS.DAMAGE, Globals.BUFFS.DAMAGE]
 var next_buff_index := 0
@@ -42,8 +42,8 @@ var throw_self_damage := 18.0
 
 var rapidorbit_script := preload("res://rang/special_rapidorbit.gd")
 var homing_script := preload("res://rang/special_homing.gd")
-var current_special_script
-var special_queued := false
+var current_roserang_special_script
+var roserang_special_queued := false
 
 var destabilized := false
 var grabbed := false
@@ -52,6 +52,8 @@ var grab_pos_node : Node3D
 
 var roserang := preload("res://rang/roserang.tscn")
 var roserang_instance = null
+var axrang := preload("res://rang/axrang.tscn")
+var axrang_instance = null
 @onready var physical_collider := $CollisionShape3D
 @onready var camera_twist_pivot := $CameraTwistPivot
 @onready var camera_pitch_pivot := $CameraTwistPivot/CameraPitchPivot
@@ -75,7 +77,7 @@ func _ready():
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
-	current_special_script = rapidorbit_script
+	current_roserang_special_script = rapidorbit_script
 	
 	Globals.destabilize.connect(on_destabilize)
 	Globals.stabilize.connect(on_stabilize)
@@ -214,24 +216,24 @@ func _physics_process(delta):
 		rang_pointer_pivot.transform.basis = camera_twist_pivot.transform.basis
 	
 	# Special throw (takes precedence over instant rethrow)
-	if Input.is_action_just_pressed("Special") and not special_queued and roserang_instance != null:
-		start_special_timer()
-	if special_queued and roserang_instance == null:
-		throw_special_rang()
+	if Input.is_action_just_pressed("Special") and not roserang_special_queued and roserang_instance != null:
+		start_roserang_special_timer()
+	if roserang_special_queued and roserang_instance == null:
+		throw_special_roserang()
 	
 	# Roserang throw
 	if Input.is_action_just_pressed("ThrowRoserang"):
-		if roserang_instance == null and can_throw:
+		if roserang_instance == null and can_throw_roserang:
 			# Manual throw
 			if not destabilized:
 				hurtbox.self_hit(throw_self_damage)
 			throw_roserang()
-		elif not throw_queued:
+		elif not roserang_throw_queued:
 			start_instant_rethrow_timer()
-	if throw_queued and roserang_instance == null and can_throw:
+	if roserang_throw_queued and roserang_instance == null and can_throw_roserang:
 		# Instant rethrow
 		anim_tree.set("parameters/StateMachine/conditions/just_instant_rethrew", true)
-		throw_queued = false
+		roserang_throw_queued = false
 		throw_roserang()
 		Globals.award_score(Globals.INSTANT_RETHROW_SCORE)
 	else:
@@ -299,18 +301,18 @@ func step_dodge():
 func throw_roserang():
 	roserang_instance = roserang.instantiate()
 	add_sibling(roserang_instance)
-	apply_buffs_to_rang()
+	apply_buffs_to_roserang()
 
 func start_instant_rethrow_timer():
-	throw_queued = true
+	roserang_throw_queued = true
 	await get_tree().create_timer(INSTANT_RETHROW_SECS).timeout
-	throw_queued = false
+	roserang_throw_queued = false
 
 func add_buff():
 	if next_buff_index < buff_list.size():
 		next_buff_index += 1
 
-func apply_buffs_to_rang():
+func apply_buffs_to_roserang():
 	if next_buff_index <= 0:
 		ui.clear_buffs()
 	for i in range(next_buff_index):
@@ -319,13 +321,27 @@ func apply_buffs_to_rang():
 				roserang_instance.buff_damage()
 				ui.apply_buff1()
 
-func throw_special_rang():
+func throw_special_roserang():
 	roserang_instance = roserang.instantiate()
 	add_sibling(roserang_instance)
-	roserang_instance.set_script(current_special_script)
-	apply_buffs_to_rang()
+	roserang_instance.set_script(current_roserang_special_script)
+	apply_buffs_to_roserang()
 
-func start_special_timer():
-	special_queued = true
+func start_roserang_special_timer():
+	roserang_special_queued = true
 	await get_tree().create_timer(INSTANT_RETHROW_SECS).timeout
-	special_queued = false
+	roserang_special_queued = false
+
+func throw_axrang():
+	axrang_instance = axrang.instantiate()
+	add_sibling(axrang_instance)
+	apply_buffs_to_axrang()
+
+func apply_buffs_to_axrang():
+	if next_buff_index <= 0:
+		ui.clear_buffs()
+	for i in range(next_buff_index):
+		match(buff_list[i]):
+			Globals.BUFFS.DAMAGE:
+				axrang_instance.buff_damage()
+				ui.apply_buff1()
