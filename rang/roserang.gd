@@ -14,7 +14,7 @@ var rose_eqn_angle_speed := PI / (rose_eqn_petals * 120 / BPM)
 var rose_eqn_current_angle := 0.0 # angle to calculate radius
 var rose_eqn_current_radius := 0.0 # dist from rose center at angle
 
-var invincible := true
+var invincible := true # This var prevents the rang from being destroyed right after Cotu throws it (and also stops the Icon from buffing the rang as soon as the rang is thrown)
 var invincibility_secs := .5
 var rose_eqn_initial_throw_angle := 0.0
 var rose_eqn_initial_throw_angle_offset := rose_eqn_petals*PI-.05 # rang is thrown
