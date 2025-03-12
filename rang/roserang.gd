@@ -7,19 +7,19 @@ extends CharacterBody3D
 const SPECIAL_DIST := 13 # max dist from Cotu where doing special input will perform a special move
 
 var BPM := 120.0
-var max_radius := 30
-var petals := 5
+var rose_eqn_max_radius := 30
+var rose_eqn_petals := 5
 
-var angle_speed := PI / (petals * 120 / BPM)
-var angle := 0.0 # angle to calculate radius
-var radius := 0.0 # dist from rose center at angle
+var rose_eqn_angle_speed := PI / (rose_eqn_petals * 120 / BPM)
+var rose_eqn_current_angle := 0.0 # angle to calculate radius
+var rose_eqn_current_radius := 0.0 # dist from rose center at angle
 
 var invincible := true
 var invincibility_secs := .5
-var initial_throw_angle := 0.0
-var initial_throw_angle_offset := petals*PI-.05 # rang is thrown
-var rose_switch_angle_offset_right := petals*PI+2*PI/3 # curve to left
-var rose_switch_angle_offset_left := petals*PI-PI/2 # rang switched from ricochet or return to rose
+var rose_eqn_initial_throw_angle := 0.0
+var rose_eqn_initial_throw_angle_offset := rose_eqn_petals*PI-.05 # rang is thrown
+var rose_switch_angle_offset_right := rose_eqn_petals*PI+2*PI/3 # curve to left
+var rose_switch_angle_offset_left := rose_eqn_petals*PI-PI/2 # rang switched from ricochet or return to rose
 # vel.angle(): right = 0, fwd = -pi/2, left = ±pi, back = pi/2
 # look_angle: right = -pi/2, fwd = 0, left = pi/2, back = ±pi
 # (-pi, pi/2) (-pi/2, 0) (0, -pi/2) (pi/2, -pi) (pi, -3pi/2)
@@ -44,11 +44,10 @@ var cotu
 var target
 
 @onready var hitbox = $PlayerHitbox
-@onready var mesh = $boomerang
+@onready var mesh = $RoserangMesh
 @onready var trail = $Trail
 @onready var base_particle_gradient = $RangParticlesBase/GPUParticles3D.process_material.color_ramp.gradient
-@onready var rang_glow_shader = $boomerang/Boomerang3DModelV1.get_surface_override_material(0)
-
+@onready var rang_glow_shader = $RoserangMesh/Boomerang3DModelV1.get_surface_override_material(0)
 @export var rotate_speed := 3.6
 @export var rose_color := Color(1,0,.8)
 @export var ricochet_color := Color(0,.8,0)
@@ -66,25 +65,25 @@ func _ready():
 	target.roserang_queued = false
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, true)
 	set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, true)
-	initial_throw_angle = petals*cotu.look_angle + initial_throw_angle_offset
+	rose_eqn_initial_throw_angle = rose_eqn_petals*cotu.look_angle + rose_eqn_initial_throw_angle_offset
 	set_direction()
 	global_position = target.global_position
 	change_color(rose_color)
 
 func set_direction():
 	if cotu.moving_right:
-		angle_speed = -1*(PI / (petals * 120 / BPM))
-		angle = (-2*PI - initial_throw_angle) / petals
+		rose_eqn_angle_speed = -1*(PI / (rose_eqn_petals * 120 / BPM))
+		rose_eqn_current_angle = (-2*PI - rose_eqn_initial_throw_angle) / rose_eqn_petals
 	else:
 		# initial angle = (2PI - initial_throw_angle) / petals
-		angle_speed = PI / (petals * 120 / BPM)
-		angle = (2*PI - initial_throw_angle) / petals
+		rose_eqn_angle_speed = PI / (rose_eqn_petals * 120 / BPM)
+		rose_eqn_current_angle = (2*PI - rose_eqn_initial_throw_angle) / rose_eqn_petals
 	
 func rose(delta):
-	angle += angle_speed * delta
-	radius = max_radius * sin(petals * angle + initial_throw_angle)
-	var angle_vec := Vector2.from_angle(angle)
-	return target.global_position + radius * Vector3(angle_vec.x, 0, angle_vec.y)
+	rose_eqn_current_angle += rose_eqn_angle_speed * delta
+	rose_eqn_current_radius = rose_eqn_max_radius * sin(rose_eqn_petals * rose_eqn_current_angle + rose_eqn_initial_throw_angle)
+	var angle_vec := Vector2.from_angle(rose_eqn_current_angle)
+	return target.global_position + rose_eqn_current_radius * Vector3(angle_vec.x, 0, angle_vec.y)
 
 func change_color(color: Color):
 	trail.color_ramp.gradient.colors[1] = color
@@ -93,8 +92,8 @@ func change_color(color: Color):
 
 func _physics_process(delta):
 	mesh.rotate_y(rotate_speed)
-	current_loop_angle += abs(angle_speed) * delta
-	invincible = current_loop_angle < PI/(5*petals)
+	current_loop_angle += abs(rose_eqn_angle_speed) * delta
+	invincible = current_loop_angle < PI/(5*rose_eqn_petals)
 	match(mvmt_state):
 		ROSE:
 			var new_pos = rose(delta)
@@ -109,7 +108,7 @@ func _physics_process(delta):
 				mvmt_state = RICOCHET
 				return
 			global_position = new_pos
-			var reached_return := current_loop_angle < PI/(2*petals)
+			var reached_return := current_loop_angle < PI/(2*rose_eqn_petals)
 			set_collision_mask_value(Globals.ARENA_COL_LAYER, reached_return)
 			set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, reached_return)
 			if reached_return:
@@ -121,7 +120,7 @@ func _physics_process(delta):
 				switch_to_rose()
 			look_at(global_position + velocity)
 			ricochet_handle_collision(move_and_collide(velocity * delta))
-			if current_loop_angle >= PI/(2*petals):
+			if current_loop_angle >= PI/(2*rose_eqn_petals):
 				set_collision_mask_value(Globals.ARENA_COL_LAYER, false)
 				set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, false)
 				change_color(return_color)
@@ -148,11 +147,11 @@ func switch_to_rose():
 	mvmt_state = ROSE
 	current_loop_angle = 0
 
-	initial_throw_angle = petals*(-1*Vector2(velocity.normalized().x, velocity.normalized().z).angle() - PI/2)
+	rose_eqn_initial_throw_angle = rose_eqn_petals*(-1*Vector2(velocity.normalized().x, velocity.normalized().z).angle() - PI/2)
 	if cotu.moving_right:
-		initial_throw_angle += rose_switch_angle_offset_right
+		rose_eqn_initial_throw_angle += rose_switch_angle_offset_right
 	else:
-		initial_throw_angle += rose_switch_angle_offset_left
+		rose_eqn_initial_throw_angle += rose_switch_angle_offset_left
 	set_direction()
 	change_color(rose_color)
 

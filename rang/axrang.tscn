@@ -1,19 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://ilwv1c8q8cjc"]
+[gd_scene load_steps=3 format=3 uid="uid://bd3ofyt7xl0jo"]
 
-[ext_resource type="PackedScene" uid="uid://1kq3g4ml4ckr" path="res://glb_imports/AxRang.glb" id="1_6tbui"]
+[ext_resource type="PackedScene" uid="uid://ilwv1c8q8cjc" path="res://glb_inherited_scenes/ax.tscn" id="1_dymgk"]
+[ext_resource type="Script" path="res://rang/axrang.gd" id="1_eeoip"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vqfxi"]
-shading_mode = 0
-albedo_color = Color(2, 2, 2, 1)
+[node name="Axrang" type="Node3D"]
+script = ExtResource("1_eeoip")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_veoa4"]
-cull_mode = 2
-albedo_color = Color(0, 0, 0, 1)
+[node name="AxRotationPivot" type="Node3D" parent="."]
 
-[node name="AxRang" instance=ExtResource("1_6tbui")]
+[node name="AxRang" parent="AxRotationPivot" instance=ExtResource("1_dymgk")]
+transform = Transform3D(-1.00536e-08, 8.0221e-17, 0.23, 8.0221e-17, 0.23, -8.0221e-17, -0.23, 8.0221e-17, -1.00536e-08, 2.08165e-12, -1.1, 2.08165e-12)
 
-[node name="AxHead" parent="." index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_vqfxi")
-
-[node name="AxHandle" parent="." index="1"]
-surface_material_override/0 = SubResource("StandardMaterial3D_veoa4")
+[editable path="AxRotationPivot/AxRang"]

@@ -44,3 +44,5 @@ res://enemies/enemy_anims/mt2_sweep.res
 res://glb_inherited_scenes/melee_t2.tscn
 res://cotu/CotuControl.gd
 res://icon/icon.gd
+res://rang/roserang.gd
+res://rang/axrang.gd

@@ -109,10 +109,10 @@ shape = SubResource("CylinderShape3D_o5dk8")
 
 [node name="RangParticlesBase" parent="." instance=ExtResource("6_44m4u")]
 
-[node name="boomerang" parent="." instance=ExtResource("6_c0jd5")]
+[node name="RoserangMesh" parent="." instance=ExtResource("6_c0jd5")]
 transform = Transform3D(-1.00536e-09, 0.023, 8.0221e-18, -0.023, -1.00536e-09, -8.0221e-18, -8.0221e-18, -8.0221e-18, 0.023, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 
-[node name="Boomerang3DModelV1" parent="boomerang" index="0"]
+[node name="Boomerang3DModelV1" parent="RoserangMesh" index="0"]
 cast_shadow = 0
 surface_material_override/0 = SubResource("ShaderMaterial_e1mob")
 
@@ -142,4 +142,4 @@ _defaults_have_been_set = true
 
 [connection signal="body_entered" from="CotuCollider" to="CotuCollider" method="_on_body_entered"]
 
-[editable path="boomerang"]
+[editable path="RoserangMesh"]
