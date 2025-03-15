@@ -38,7 +38,10 @@ var roserang_throw_queued := false
 const INSTANT_RETHROW_SECS := .2 # max possible time btwn player inputting throw and rang hitting Cotu that still cauess an instant rethrow
 var buff_list := [Globals.BUFFS.DAMAGE, Globals.BUFFS.DAMAGE, Globals.BUFFS.DAMAGE]
 var next_buff_index := 0
-var throw_self_damage := 18.0
+var throw_roserang_self_damage := 18.0
+
+var can_throw_axrang := true
+var throw_axrang_self_damage := 36.0
 
 var rapidorbit_script := preload("res://rang/special_rapidorbit.gd")
 var homing_script := preload("res://rang/special_homing.gd")
@@ -221,12 +224,17 @@ func _physics_process(delta):
 	if roserang_special_queued and roserang_instance == null:
 		throw_special_roserang()
 	
+	if Input.is_action_just_pressed("ThrowAxrang"):
+		if axrang_instance == null and can_throw_axrang:
+			hurtbox.self_hit(throw_axrang_self_damage)
+			throw_axrang()
+	
 	# Roserang throw
 	if Input.is_action_just_pressed("ThrowRoserang"):
 		if roserang_instance == null and can_throw_roserang:
 			# Manual throw
 			if not destabilized:
-				hurtbox.self_hit(throw_self_damage)
+				hurtbox.self_hit(throw_roserang_self_damage)
 			throw_roserang()
 		elif not roserang_throw_queued:
 			start_instant_rethrow_timer()

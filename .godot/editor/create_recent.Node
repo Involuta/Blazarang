@@ -1,4 +1,6 @@
+CollisionShape3D
 Node3D
+CharacterBody3D
 Camera3D
 MeshInstance3D
 GPUParticles3D
@@ -6,10 +8,8 @@ GPUTrail3D
 AnimationPlayer
 GPUParticlesAttractorSphere3D
 BoneAttachment3D
-CollisionShape3D
 Area3D
 AnimationTree
-CharacterBody3D
 NavigationAgent3D
 BallSpawner
 OmniLight3D

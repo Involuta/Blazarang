@@ -39,9 +39,9 @@ var homing_script := preload("res://rang/special_homing.gd")
 var ricochet_particles := preload("res://rang/rang_particles_ricochet.tscn")
 
 @onready var root := $/root/ViewControl
-var level
-var cotu
-var target
+var level : Node3D
+var cotu : Node3D
+var target : Node3D
 
 @onready var hitbox = $PlayerHitbox
 @onready var mesh = $RoserangMesh

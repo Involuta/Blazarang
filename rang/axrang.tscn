@@ -1,14 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://bd3ofyt7xl0jo"]
+[gd_scene load_steps=4 format=3 uid="uid://bd3ofyt7xl0jo"]
 
-[ext_resource type="PackedScene" uid="uid://ilwv1c8q8cjc" path="res://glb_inherited_scenes/ax.tscn" id="1_dymgk"]
-[ext_resource type="Script" path="res://rang/axrang.gd" id="1_eeoip"]
+[ext_resource type="Script" path="res://rang/axrang.gd" id="1_wabwy"]
+[ext_resource type="PackedScene" uid="uid://ilwv1c8q8cjc" path="res://glb_inherited_scenes/ax.tscn" id="2_b1lvs"]
 
-[node name="Axrang" type="Node3D"]
-script = ExtResource("1_eeoip")
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_blh27"]
 
-[node name="AxRotationPivot" type="Node3D" parent="."]
+[node name="Axrang" type="CharacterBody3D"]
+script = ExtResource("1_wabwy")
+rotate_speed = 0.5
 
-[node name="AxRang" parent="AxRotationPivot" instance=ExtResource("1_dymgk")]
-transform = Transform3D(-1.00536e-08, 8.0221e-17, 0.23, 8.0221e-17, 0.23, -8.0221e-17, -0.23, 8.0221e-17, -1.00536e-08, 2.08165e-12, -1.1, 2.08165e-12)
+[node name="AxrangPivot" type="Node3D" parent="."]
 
-[editable path="AxRotationPivot/AxRang"]
+[node name="AxrangMesh" parent="AxrangPivot" instance=ExtResource("2_b1lvs")]
+transform = Transform3D(-8.74228e-09, 6.97574e-17, 0.2, 6.97574e-17, 0.2, -6.97574e-17, -0.2, 6.97574e-17, -8.74228e-09, 0, -0.715494, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_blh27")
