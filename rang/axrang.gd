@@ -19,7 +19,7 @@ func _ready():
 	target = level.find_child("Icon")
 	
 	global_position = target.global_position
-	rotation.y = cotu.armature.rotation.y
+	rotation.y = cotu.look_angle + PI
 	velocity = fwd_speed * transform.basis.z
 
 func _physics_process(delta):
