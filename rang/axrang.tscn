@@ -3,7 +3,8 @@
 [ext_resource type="Script" path="res://rang/axrang.gd" id="1_wabwy"]
 [ext_resource type="PackedScene" uid="uid://ilwv1c8q8cjc" path="res://glb_inherited_scenes/ax.tscn" id="2_b1lvs"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_blh27"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_gby86"]
+size = Vector3(0.2, 2, 1)
 
 [node name="Axrang" type="CharacterBody3D"]
 script = ExtResource("1_wabwy")
@@ -14,5 +15,6 @@ rotate_speed = 0.5
 [node name="AxrangMesh" parent="AxrangPivot" instance=ExtResource("2_b1lvs")]
 transform = Transform3D(-8.74228e-09, 6.97574e-17, 0.2, 6.97574e-17, 0.2, -6.97574e-17, -0.2, 6.97574e-17, -8.74228e-09, 0, -0.715494, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CylinderShape3D_blh27")
+[node name="WallCollider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.546809, 0)
+shape = SubResource("BoxShape3D_gby86")
