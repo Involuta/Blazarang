@@ -10,9 +10,9 @@ size = Vector3(0.2, 2, 1)
 script = ExtResource("1_wabwy")
 rotate_speed = 0.5
 
-[node name="AxrangPivot" type="Node3D" parent="."]
+[node name="Pivot" type="Node3D" parent="."]
 
-[node name="AxrangMesh" parent="AxrangPivot" instance=ExtResource("2_b1lvs")]
+[node name="AxrangMesh" parent="Pivot" instance=ExtResource("2_b1lvs")]
 transform = Transform3D(-8.74228e-09, 6.97574e-17, 0.2, 6.97574e-17, 0.2, -6.97574e-17, -0.2, 6.97574e-17, -8.74228e-09, 0, -0.715494, 0)
 
 [node name="WallCollider" type="CollisionShape3D" parent="."]

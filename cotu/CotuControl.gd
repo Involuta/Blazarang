@@ -228,6 +228,8 @@ func _physics_process(delta):
 		if axrang_instance == null and can_throw_axrang:
 			hurtbox.self_hit(throw_axrang_self_damage)
 			throw_axrang()
+		elif axrang_instance != null:
+			axrang_instance.advance_state()
 	
 	# Roserang throw
 	if Input.is_action_just_pressed("ThrowRoserang"):

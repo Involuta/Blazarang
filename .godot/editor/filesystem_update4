@@ -28,3 +28,4 @@ res://cotu/cotu_cb_main.tscn
 res://icon/icon.tscn
 res://rang/roserang.tscn
 res://rang/roserang.gd
+res://cotu/CotuControl.gd
