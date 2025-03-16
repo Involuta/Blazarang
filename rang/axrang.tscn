@@ -1,15 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://bd3ofyt7xl0jo"]
+[gd_scene load_steps=8 format=3 uid="uid://bd3ofyt7xl0jo"]
 
 [ext_resource type="Script" path="res://rang/axrang.gd" id="1_wabwy"]
 [ext_resource type="PackedScene" uid="uid://ilwv1c8q8cjc" path="res://glb_inherited_scenes/ax.tscn" id="2_b1lvs"]
 [ext_resource type="Script" path="res://rang/destroy_on_cotu_hit.gd" id="3_5hupc"]
+[ext_resource type="Script" path="res://hitbox.gd" id="4_lmpjw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gby86"]
 size = Vector3(0.2, 2, 1)
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_1k4p1"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2bl6c"]
 height = 0.2
-radius = 2.0
+radius = 1.4
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_x7u53"]
+height = 0.5
+radius = 1.4
 
 [node name="Axrang" type="CharacterBody3D"]
 script = ExtResource("1_wabwy")
@@ -25,10 +30,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.546809, 0)
 shape = SubResource("BoxShape3D_gby86")
 
 [node name="CotuCollider" type="Area3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 3.48787e-16, 1, -4.37114e-08, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 0.35, 2.08165e-12)
 collision_mask = 16
 script = ExtResource("3_5hupc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CotuCollider"]
-shape = SubResource("CylinderShape3D_1k4p1")
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+shape = SubResource("CylinderShape3D_2bl6c")
+
+[node name="PlayerHitbox" type="Area3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 3.48787e-16, 1, -4.37114e-08, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 0.35, 2.08165e-12)
+collision_mask = 0
+script = ExtResource("4_lmpjw")
+damage = 20
+
+[node name="HitboxCollider" type="CollisionShape3D" parent="PlayerHitbox"]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+shape = SubResource("CylinderShape3D_x7u53")
 
 [connection signal="body_entered" from="CotuCollider" to="CotuCollider" method="_on_body_entered"]

@@ -22,6 +22,7 @@ var level : Node3D
 var cotu : Node3D
 var target : Node3D
 
+@onready var hitbox = $PlayerHitbox
 @onready var pivot = $Pivot
 
 func _ready():
@@ -37,15 +38,16 @@ func _ready():
 	invincible = false
 
 func _physics_process(delta):
-	pivot.rotate_x(rotate_speed)
 	var fwd_vec = fwd_speed * transform.basis.z
 	match(mvmt_state):
 		FWD:
+			pivot.rotate_x(rotate_speed)
 			var vel_vec = fwd_speed * transform.basis.z
 			move_and_collide(vel_vec, false)
 		EXPLODE:
 			pass
 		RETURN:
+			pivot.rotate_x(-rotate_speed)
 			if velocity.length() < max_return_speed:
 				velocity = (velocity.length() + return_acc) * global_position.direction_to(target.global_position)
 			else:
@@ -67,3 +69,6 @@ func switch_to_explode():
 
 func switch_to_return():
 	mvmt_state = RETURN
+
+func buff_damage():
+	hitbox.damage = 40
