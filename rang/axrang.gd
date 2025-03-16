@@ -32,6 +32,9 @@ func _ready():
 	global_position = target.global_position
 	rotation.y = cotu.look_angle + PI
 	velocity = fwd_speed * transform.basis.z
+	
+	await get_tree().create_timer(1).timeout
+	invincible = false
 
 func _physics_process(delta):
 	pivot.rotate_x(rotate_speed)

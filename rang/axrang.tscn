@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://bd3ofyt7xl0jo"]
+[gd_scene load_steps=6 format=3 uid="uid://bd3ofyt7xl0jo"]
 
 [ext_resource type="Script" path="res://rang/axrang.gd" id="1_wabwy"]
 [ext_resource type="PackedScene" uid="uid://ilwv1c8q8cjc" path="res://glb_inherited_scenes/ax.tscn" id="2_b1lvs"]
+[ext_resource type="Script" path="res://rang/destroy_on_cotu_hit.gd" id="3_5hupc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gby86"]
 size = Vector3(0.2, 2, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1k4p1"]
+height = 0.2
+radius = 2.0
 
 [node name="Axrang" type="CharacterBody3D"]
 script = ExtResource("1_wabwy")
@@ -18,3 +23,12 @@ transform = Transform3D(-8.74228e-09, 6.97574e-17, 0.2, 6.97574e-17, 0.2, -6.975
 [node name="WallCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.546809, 0)
 shape = SubResource("BoxShape3D_gby86")
+
+[node name="CotuCollider" type="Area3D" parent="."]
+collision_mask = 16
+script = ExtResource("3_5hupc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CotuCollider"]
+shape = SubResource("CylinderShape3D_1k4p1")
+
+[connection signal="body_entered" from="CotuCollider" to="CotuCollider" method="_on_body_entered"]

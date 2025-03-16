@@ -29,3 +29,4 @@ res://icon/icon.tscn
 res://rang/roserang.tscn
 res://rang/roserang.gd
 res://cotu/CotuControl.gd
+res://rang/destroy_on_cotu_hit.gd
