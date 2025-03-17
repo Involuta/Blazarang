@@ -39,3 +39,6 @@ res://levels/gauntlet/section_nodes/gauntlet_arena1.tscn
 res://levels/gauntlet/gauntlet_level_background.tscn
 res://levels/gauntlet/gauntlet_level_viewcontrol.tscn
 res://levels/gauntlet/gauntlet_level1.gd
+res://levels/Level.gd
+res://textures/solid_light_gray_tile.tres
+res://levels/x_boss_level/x_boss_level1_viewcontrol.tscn

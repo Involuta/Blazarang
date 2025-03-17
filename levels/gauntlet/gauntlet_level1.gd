@@ -1,7 +1,7 @@
 extends Level
 
 func _ready():
-	super._ready()
+	super()
 	#$MusicPlayer.play()
 	root.get_node("UIRoot").hide_black_screen()
 	$EntranceDoorRight.add_constant_force(20*Vector3.RIGHT)

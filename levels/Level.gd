@@ -6,16 +6,17 @@ var cotu_look_direction := Vector3.FORWARD
 @export var lockonable_limit := 20
 
 @onready var root := $/root/ViewControl
-var cotu : Node3D
+var cotu
 var camera_twist_pivot : Node3D
 var camera : Node3D
 
 func _ready():
 	cotu = root.find_child("cotuCB")
+	print(cotu.name)
 	camera_twist_pivot = cotu.find_child("CameraTwistPivot")
 	camera = cotu.find_child("Camera3D")
 
-func _process(_delta):
+func _physics_process(_delta):
 	if Input.is_action_just_pressed("LockOn"):
 		if cotu.locked_on:
 			cotu.lock_off()

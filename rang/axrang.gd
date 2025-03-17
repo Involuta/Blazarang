@@ -38,8 +38,7 @@ func _ready():
 	await get_tree().create_timer(1).timeout
 	invincible = false
 
-func _physics_process(delta):
-	var fwd_vec = fwd_speed * transform.basis.z
+func _physics_process(_delta):
 	match(mvmt_state):
 		FWD:
 			pivot.rotate_x(rotate_speed)
