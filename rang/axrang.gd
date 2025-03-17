@@ -76,4 +76,4 @@ func switch_to_return():
 	mvmt_state = RETURN
 
 func buff_damage():
-	hitbox.damage = 40
+	hitbox.damage = 50

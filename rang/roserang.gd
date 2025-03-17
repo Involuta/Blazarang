@@ -138,7 +138,7 @@ func _physics_process(delta):
 
 func buff_damage():
 	current_loop_angle = 0
-	hitbox.damage = 30
+	hitbox.damage = 20
 
 func switch_to_rose():
 	target.roserang_queued = false
