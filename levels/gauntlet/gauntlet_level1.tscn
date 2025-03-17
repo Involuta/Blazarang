@@ -1,8 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://by6rgqxfg3vwp"]
+[gd_scene load_steps=19 format=3 uid="uid://by6rgqxfg3vwp"]
 
 [ext_resource type="Script" path="res://levels/gauntlet/gauntlet_level1.gd" id="1_g21b3"]
 [ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="2_cdmya"]
-[ext_resource type="PackedScene" uid="uid://kl1hpr0grn1v" path="res://ui/ui_root.tscn" id="2_ob26x"]
 [ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="3_susk6"]
 [ext_resource type="PackedScene" uid="uid://cjxdm8v82qb3v" path="res://levels/gauntlet/section_nodes/gauntlet_arena1.tscn" id="4_y1q14"]
 [ext_resource type="AudioStream" uid="uid://br0a4rin6vcg3" path="res://audio/music/COTU.wav" id="6_1sujv"]
@@ -83,8 +82,6 @@ size = Vector3(2, 0.5, 2)
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_g21b3")
-
-[node name="UIRoot" parent="." instance=ExtResource("2_ob26x")]
 
 [node name="cotuCB" parent="." instance=ExtResource("2_cdmya")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 11.5, 2.08165e-12)

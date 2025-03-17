@@ -30,3 +30,12 @@ res://rang/roserang.tscn
 res://rang/roserang.gd
 res://cotu/CotuControl.gd
 res://rang/destroy_on_cotu_hit.gd
+res://ui/ui_root.tscn
+res://levels/gauntlet/gauntlet_level1.tscn
+res://textures/white_border_black_center.tres
+res://textures/white_border_black_solid_square.tres
+res://textures/small_solid_black.tres
+res://levels/gauntlet/section_nodes/gauntlet_arena1.tscn
+res://levels/gauntlet/gauntlet_level_background.tscn
+res://levels/gauntlet/gauntlet_level_viewcontrol.tscn
+res://levels/gauntlet/gauntlet_level1.gd

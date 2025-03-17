@@ -575,6 +575,7 @@ libraries = {
 [node name="BuffIcon1Pivot" type="Node2D" parent="."]
 
 [node name="BuffIcon1" type="TextureRect" parent="BuffIcon1Pivot"]
+modulate = Color(1, 1, 1, 0)
 offset_left = 38.0
 offset_top = 52.0
 offset_right = 185.0

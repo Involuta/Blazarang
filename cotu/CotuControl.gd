@@ -250,7 +250,7 @@ func _physics_process(delta):
 	else:
 		anim_tree.set("parameters/StateMachine/conditions/just_instant_rethrew", false)
 	
-	# Target control and buff clearing
+	# Target control and buff clearing. This only runs if the instant rethrow code above didn't run, i.e. an instant rethrow didn't occur
 	if roserang_instance == null:
 		target.start_following_cotu()
 		next_buff_index = 0

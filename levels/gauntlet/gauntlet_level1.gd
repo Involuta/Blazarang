@@ -3,7 +3,7 @@ extends Level
 func _ready():
 	super._ready()
 	#$MusicPlayer.play()
-	$UIRoot.hide_black_screen()
+	root.get_node("UIRoot").hide_black_screen()
 	$EntranceDoorRight.add_constant_force(20*Vector3.RIGHT)
 	$EntranceDoorForward.add_constant_force(20*Vector3.FORWARD)
 	$EntranceDoorBack.add_constant_force(20*Vector3.BACK)
