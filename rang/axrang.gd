@@ -13,6 +13,7 @@ var invincibility_secs := .5
 @export var rotate_speed := .1
 
 @export var fwd_speed := 1.0
+@export var fwd_max_dist := 60.0
 
 @export var max_return_speed := 55
 @export var return_acc := 1.2
@@ -44,14 +45,18 @@ func _physics_process(delta):
 			pivot.rotate_x(rotate_speed)
 			var vel_vec = fwd_speed * transform.basis.z
 			move_and_collide(vel_vec, false)
+			
+			# If too far from Cotu, stop moving
+			if global_position.distance_to(cotu.global_position) > fwd_max_dist:
+				advance_state()
 		EXPLODE:
 			pass
 		RETURN:
 			pivot.rotate_x(-rotate_speed)
 			if velocity.length() < max_return_speed:
-				velocity = (velocity.length() + return_acc) * global_position.direction_to(target.global_position)
+				velocity = (velocity.length() + return_acc) * global_position.direction_to(cotu.global_position)
 			else:
-				velocity = max_return_speed * global_position.direction_to(target.global_position)
+				velocity = max_return_speed * global_position.direction_to(cotu.global_position)
 			look_at(global_position + velocity)
 			move_and_slide()
 
