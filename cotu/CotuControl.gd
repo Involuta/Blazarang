@@ -248,7 +248,8 @@ func _physics_process(delta):
 	# Clear axrang buffs if axrang wasn't perfect caught
 	if not axrang_perfect_caught:
 		next_axrang_buff_index = 0
-		#ui.clear_axrang_buffs()
+		if not ui.axrang_buffs_cleared():
+			ui.clear_axrang_buffs()
 	
 	# Roserang throw
 	if Input.is_action_just_pressed("ThrowRoserang"):
@@ -271,7 +272,8 @@ func _physics_process(delta):
 	if roserang_instance == null:
 		target.start_following_cotu()
 		next_roserang_buff_index = 0
-		ui.clear_buffs()#ui.clear_roserang_buffs()
+		if not ui.roserang_buffs_cleared():
+			ui.clear_roserang_buffs()
 	
 	if Input.is_action_just_pressed("UseItem"):
 		anim_tree.set("parameters/StateMachine/conditions/use_item", true)
@@ -345,13 +347,13 @@ func add_roserang_buff(): # Called by target/Icon when roserang hits it
 		next_roserang_buff_index += 1
 
 func apply_buffs_to_roserang():
-	if next_roserang_buff_index <= 0:
-		ui.clear_buffs()#ui.clear_roserang_buffs()
+	if next_roserang_buff_index <= 0 and not ui.roserang_buffs_cleared():
+		ui.clear_roserang_buffs()
 	for i in range(next_roserang_buff_index):
 		match(roserang_buff_list[i]):
 			Globals.BUFFS.DAMAGE:
 				roserang_instance.buff_damage()
-				ui.apply_buff1()
+				ui.apply_roserang_buff1()
 
 func throw_special_roserang():
 	roserang_instance = roserang.instantiate()
@@ -379,11 +381,10 @@ func add_axrang_buff(): # Called by Cotu when he catches the axrang
 		next_axrang_buff_index += 1
 
 func apply_buffs_to_axrang():
-	if next_axrang_buff_index <= 0:
-		pass
-		#ui.clear_axrang_buffs()
+	if next_axrang_buff_index <= 0 and not ui.axrang_buffs_cleared():
+		ui.clear_axrang_buffs()
 	for i in range(next_axrang_buff_index):
 		match(axrang_buff_list[i]):
 			Globals.BUFFS.DAMAGE:
 				axrang_instance.buff_damage()
-				ui.apply_buff1()
+				ui.apply_axrang_buff1()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://kl1hpr0grn1v"]
+[gd_scene load_steps=36 format=3 uid="uid://kl1hpr0grn1v"]
 
 [ext_resource type="PackedScene" uid="uid://daj44qqb6dior" path="res://ui/health_bar.tscn" id="1_k5nv4"]
 [ext_resource type="Script" path="res://ui/ui_root.gd" id="1_s33yg"]
@@ -366,12 +366,12 @@ orbit_velocity_max = 0.0
 scale_curve = SubResource("CurveTexture_26q1t")
 
 [sub_resource type="Animation" id="Animation_jvts5"]
-resource_name = "apply_buff1"
+resource_name = "apply_roserang_buff1"
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("BuffIcon1Pivot/BuffIcon1:visible")
+tracks/0/path = NodePath("RoserangBuffIcon1Pivot/RoserangBuffIcon1:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -383,7 +383,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("BuffIcon1Pivot/BuffIcon1:modulate")
+tracks/1/path = NodePath("RoserangBuffIcon1Pivot/RoserangBuffIcon1:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -395,7 +395,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("BuffIcon1Pivot/BuffIcon1DownParticles:emitting")
+tracks/2/path = NodePath("RoserangBuffIcon1Pivot/RoserangBuffIcon1DownParticles:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -407,7 +407,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("BuffIcon1Pivot/BuffIcon1UpParticles:emitting")
+tracks/3/path = NodePath("RoserangBuffIcon1Pivot/RoserangBuffIcon1UpParticles:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -418,12 +418,12 @@ tracks/3/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_wm2n6"]
-resource_name = "clear_buffs"
+resource_name = "clear_roserang_buffs"
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("BuffIcon1Pivot/BuffIcon1:visible")
+tracks/0/path = NodePath("RoserangBuffIcon1Pivot/RoserangBuffIcon1:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -435,7 +435,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("BuffIcon1Pivot/BuffIcon1DownParticles:emitting")
+tracks/1/path = NodePath("RoserangBuffIcon1Pivot/RoserangBuffIcon1DownParticles:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -447,7 +447,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("BuffIcon1Pivot/BuffIcon1UpParticles:emitting")
+tracks/2/path = NodePath("RoserangBuffIcon1Pivot/RoserangBuffIcon1UpParticles:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -459,8 +459,105 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3lowh"]
 _data = {
-"apply_buff1": SubResource("Animation_jvts5"),
-"clear_buffs": SubResource("Animation_wm2n6")
+"apply_roserang_buff1": SubResource("Animation_jvts5"),
+"clear_roserang_buffs": SubResource("Animation_wm2n6")
+}
+
+[sub_resource type="Animation" id="Animation_8nqmm"]
+resource_name = "clear_axrang_buffs"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AxrangBuffIcon1Pivot/AxrangBuffIcon1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AxrangBuffIcon1Pivot/AxrangBuffIcon1UpParticles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AxrangBuffIcon1Pivot/AxrangBuffIcon1DownParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_o3q2i"]
+resource_name = "apply_axrang_buff1"
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AxrangBuffIcon1Pivot/AxrangBuffIcon1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AxrangBuffIcon1Pivot/AxrangBuffIcon1UpParticles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AxrangBuffIcon1Pivot/AxrangBuffIcon1DownParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AxrangBuffIcon1Pivot/AxrangBuffIcon1:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5p47o"]
+_data = {
+"apply_axrang_buff1": SubResource("Animation_o3q2i"),
+"clear_axrang_buffs": SubResource("Animation_8nqmm")
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_u1iil"]
@@ -572,10 +669,9 @@ libraries = {
 "": SubResource("AnimationLibrary_0ps3l")
 }
 
-[node name="BuffIcon1Pivot" type="Node2D" parent="."]
+[node name="RoserangBuffIcon1Pivot" type="Node2D" parent="."]
 
-[node name="BuffIcon1" type="TextureRect" parent="BuffIcon1Pivot"]
-modulate = Color(1, 1, 1, 0)
+[node name="RoserangBuffIcon1" type="TextureRect" parent="RoserangBuffIcon1Pivot"]
 offset_left = 38.0
 offset_top = 52.0
 offset_right = 185.0
@@ -583,7 +679,7 @@ offset_bottom = 199.0
 texture = ExtResource("6_o16a4")
 expand_mode = 1
 
-[node name="BuffIcon1UpParticles" type="GPUParticles2D" parent="BuffIcon1Pivot"]
+[node name="RoserangBuffIcon1UpParticles" type="GPUParticles2D" parent="RoserangBuffIcon1Pivot"]
 position = Vector2(114, 127)
 rotation = 3.14159
 emitting = false
@@ -594,8 +690,40 @@ lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 
-[node name="BuffIcon1DownParticles" type="GPUParticles2D" parent="BuffIcon1Pivot"]
+[node name="RoserangBuffIcon1DownParticles" type="GPUParticles2D" parent="RoserangBuffIcon1Pivot"]
 position = Vector2(114, 127)
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_xax8r")
+texture = ExtResource("7_d3h4s")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+
+[node name="AxrangBuffIcon1Pivot" type="Node2D" parent="."]
+
+[node name="AxrangBuffIcon1" type="TextureRect" parent="AxrangBuffIcon1Pivot"]
+visible = false
+offset_left = 38.0
+offset_top = 100.0
+offset_right = 185.0
+offset_bottom = 247.0
+texture = ExtResource("6_o16a4")
+expand_mode = 1
+
+[node name="AxrangBuffIcon1UpParticles" type="GPUParticles2D" parent="AxrangBuffIcon1Pivot"]
+position = Vector2(114, 175)
+rotation = 3.14159
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_xax8r")
+texture = ExtResource("7_d3h4s")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+
+[node name="AxrangBuffIcon1DownParticles" type="GPUParticles2D" parent="AxrangBuffIcon1Pivot"]
+position = Vector2(114, 175)
 emitting = false
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_xax8r")
@@ -620,9 +748,14 @@ offset_right = 435.0
 offset_bottom = 199.0
 expand_mode = 1
 
-[node name="BuffAnimations" type="AnimationPlayer" parent="."]
+[node name="RoserangBuffAnimations" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_3lowh")
+}
+
+[node name="AxrangBuffAnimations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5p47o")
 }
 
 [node name="ComboDisplay" type="Label" parent="."]

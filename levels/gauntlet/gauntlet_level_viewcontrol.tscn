@@ -44,3 +44,5 @@ render_target_update_mode = 4
 
 [node name="UIRoot" parent="." instance=ExtResource("4_aphn2")]
 layout_mode = 1
+
+[editable path="UIRoot"]

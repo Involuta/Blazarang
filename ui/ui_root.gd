@@ -11,8 +11,14 @@ extends Control
 
 @onready var update_score_anim := $UpdateScoreAnimation
 
-@onready var buff_icon1 := $BuffIcon1Pivot/BuffIcon1
-var buff1_applied := false
+@onready var roserang_buff_icon1 := $RoserangBuffIcon1Pivot/RoserangBuffIcon1
+var roserang_buff1_applied := false
+
+@onready var axrang_buff_icon1 := $AxrangBuffIcon1Pivot/AxrangBuffIcon1
+var axrang_buff1_applied := false
+
+@onready var roserang_buff_anims := $RoserangBuffAnimations
+@onready var axrang_buff_anims := $AxrangBuffAnimations
 
 @onready var root := $/root/ViewControl
 var cotu : Node3D
@@ -35,16 +41,26 @@ func _ready():
 	cotu_damage_indicator.max_value = cotu_hurtbox.max_health
 	glitch_box.visible = false
 	destab_icon.visible = false
-	buff_icon1.visible = false
+	roserang_buff_icon1.visible = false
 	
 	Globals.score_updated.connect(on_score_updated)
 	Globals.destabilize.connect(on_destabilize)
 	Globals.stabilize.connect(on_stabilize)
 	
-	for buff in cotu.roserang_buff_list:
-		match(buff):
+	for rose_buff in cotu.roserang_buff_list:
+		match(rose_buff):
 			Globals.BUFFS.DAMAGE:
-				buff_icon1.texture = load("res://textures/buff_DMG-clear.png")
+				roserang_buff_icon1.texture = load("res://textures/buff_DMG-clear.png")
+	for ax_buff in cotu.axrang_buff_list:
+		match(ax_buff):
+			Globals.BUFFS.DAMAGE:
+				axrang_buff_icon1.texture = load("res://textures/buff_DMG-clear.png")
+
+func roserang_buffs_cleared():
+	return not roserang_buff1_applied
+
+func axrang_buffs_cleared():
+	return not axrang_buff1_applied
 
 func awaken():
 	$BlackScreenAnimations.play("awaken")
@@ -90,11 +106,26 @@ func on_score_updated(score_change):
 	Globals.combo_count += 1
 	combo_display.text = str("COMBO: ", Globals.combo_count)
 
-func clear_buffs():
-	buff1_applied = false
-	$BuffAnimations.play("clear_buffs")
+func clear_roserang_buffs():
+	roserang_buff1_applied = false
+	roserang_buff_anims.play("clear_roserang_buffs")
 
-func apply_buff1():
-	if not buff1_applied:
-		buff1_applied = true
-		$BuffAnimations.play("apply_buff1")
+func apply_roserang_buff1():
+	if not roserang_buff1_applied:
+		print("Roserang buffed!")
+		roserang_buff1_applied = true
+		roserang_buff_anims.play("apply_roserang_buff1")
+
+func clear_axrang_buffs():
+	print("Axrang buffs cleared!")
+	axrang_buff1_applied = false
+	axrang_buff_anims.play("clear_axrang_buffs")
+
+func apply_axrang_buff1():
+	if not axrang_buff1_applied:
+		print("Axrang buffed!")
+		axrang_buff1_applied = true
+		axrang_buff_anims.play("apply_axrang_buff1")
+
+func test():
+	print("Test")
