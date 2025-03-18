@@ -1,25 +1,32 @@
 class_name CotuHurtbox
 extends Hurtbox
 
-@export var original_max_health := 100.0
+var original_max_health := 100.0
 
-@export var base_recovery_rate := .25
-@export var fast_recovery_rate := .5
+var base_recovery_rate := .25
+var fast_recovery_rate := .5
 var recovery_rate := .5
-@export var recovery_delay := 1.0
+
+var recovery_delay := 1.0
 var recovery_delay_remaining := 1.0
 @export var recovery_disabled := false # Exported so that it can be set via anim keyframes
 var recovery_active := false # This really means "Cotu is trying to recover". If recovery_disabled, recovery_active does not recover stability
 
 var damage_indicator_value := 100.0
 
-@export var destab_invin_time := 2.0
+var destab_invin_time := 2.0
 
 # When Cotu gets grabbed, his position is set to the hitbox's parent
 @export var opponent_grab_hitboxes := []
 
 func _ready():
 	super()
+	original_max_health = Globals.cotu_max_health
+	base_recovery_rate = Globals.cotu_base_regen_rate
+	fast_recovery_rate = Globals.cotu_fast_regen_rate
+	recovery_delay = Globals.cotu_regen_delay
+	destab_invin_time = Globals.cotu_destabilize_invincibility_time
+	
 	damage_indicator_value = max_health
 	Globals.stabilize.connect(on_stabilize)
 

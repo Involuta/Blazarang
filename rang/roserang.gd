@@ -61,6 +61,8 @@ func _ready():
 	cotu = root.find_child("cotuCB")
 	target = level.find_child("Icon")
 	
+	hitbox.damage = Globals.roserang_base_damage
+	
 	flying_sfx.play()
 	target.roserang_queued = false
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, true)

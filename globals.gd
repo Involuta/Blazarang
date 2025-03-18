@@ -53,6 +53,17 @@ const RICOCHET_HIT_SCORE = 1
 const RAPIDORBIT_HIT_SCORE = 1
 const HOMING_HIT_SCORE = 1
 
+# These are vars in case they change as the player progresses
+var cotu_max_health := 100.0
+var cotu_regen_delay := 1.0 # time after a loss in stability before regen begins
+var cotu_base_regen_rate := .25
+var cotu_fast_regen_rate := .5
+var cotu_destabilize_invincibility_time := 2.0
+
+var roserang_base_damage := 10
+var axrang_base_damage := 25
+var axrang_explosion_damage := 10
+
 # health, hit score, kill score
 const enemy_hurtbox_data = {
 	"EnemyMeleeTier1" : [20, 1.0, 1.0],

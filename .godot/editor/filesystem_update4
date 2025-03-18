@@ -47,3 +47,8 @@ res://enemies/first_miniboss.tscn
 res://enemies/enemy_mobile_gunner.tscn
 res://enemies/enemy_stationary_gunner.tscn
 res://enemies/enemy_hit_particles.tscn
+res://cotu/CotuHurtbox.gd
+res://rang/roserang.gd
+res://levels/hub/section_nodes/hub_room1.tscn
+res://levels/hub/hub_viewcontrol.tscn
+res://levels/hub/hub.tscn

@@ -34,6 +34,9 @@ func _ready():
 	cotu = root.find_child("cotuCB")
 	target = level.find_child("Icon")
 	
+	hitbox.damage = Globals.axrang_base_damage
+	explosion_hitbox.damage = Globals.axrang_explosion_damage
+	
 	global_position = target.global_position
 	rotation.y = cotu.look_angle + PI
 	velocity = fwd_speed * transform.basis.z
