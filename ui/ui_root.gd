@@ -112,20 +112,14 @@ func clear_roserang_buffs():
 
 func apply_roserang_buff1():
 	if not roserang_buff1_applied:
-		print("Roserang buffed!")
 		roserang_buff1_applied = true
 		roserang_buff_anims.play("apply_roserang_buff1")
 
 func clear_axrang_buffs():
-	print("Axrang buffs cleared!")
 	axrang_buff1_applied = false
 	axrang_buff_anims.play("clear_axrang_buffs")
 
 func apply_axrang_buff1():
 	if not axrang_buff1_applied:
-		print("Axrang buffed!")
 		axrang_buff1_applied = true
 		axrang_buff_anims.play("apply_axrang_buff1")
-
-func test():
-	print("Test")

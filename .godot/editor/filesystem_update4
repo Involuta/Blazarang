@@ -36,3 +36,4 @@ res://cotu/CotuControl.gd
 res://rang/axrang.gd
 res://rang/destroy_on_cotu_hit.gd
 res://icon/icon.gd
+res://enemies/enemy_melee_tier3.tscn
