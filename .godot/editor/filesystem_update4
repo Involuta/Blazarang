@@ -33,3 +33,6 @@ res://textures/white_border_black_solid_square.tres
 res://textures/small_solid_black.tres
 res://levels/gauntlet/gauntlet_level_viewcontrol.tscn
 res://cotu/CotuControl.gd
+res://rang/axrang.gd
+res://rang/destroy_on_cotu_hit.gd
+res://icon/icon.gd

@@ -234,22 +234,11 @@ func _physics_process(delta):
 			# Throw
 			if not destabilized and not axrang_perfect_caught:
 				hurtbox.self_hit(throw_axrang_self_damage)
-			axrang_perfect_caught = false
 			throw_axrang()
 		elif axrang_instance != null and not axrang_instance.is_returning():
 			axrang_instance.advance_state()
 		elif axrang_instance != null and axrang_instance.is_returning():
 			start_axrang_perfect_catch_timer()
-	if axrang_perfect_catch_queued and axrang_instance == null and can_throw_axrang:
-		# Catch
-		axrang_perfect_catch_queued = false
-		axrang_perfect_caught = true
-		add_axrang_buff()
-	# Clear axrang buffs if axrang wasn't perfect caught
-	if not axrang_perfect_caught:
-		next_axrang_buff_index = 0
-		if not ui.axrang_buffs_cleared():
-			ui.clear_axrang_buffs()
 	
 	# Roserang throw
 	if Input.is_action_just_pressed("ThrowRoserang"):
@@ -335,7 +324,7 @@ func step_dodge():
 func throw_roserang():
 	roserang_instance = roserang.instantiate()
 	add_sibling(roserang_instance)
-	apply_buffs_to_roserang()
+	apply_buffs_to_roserang_instance()
 
 func start_roserang_instant_rethrow_timer():
 	roserang_throw_queued = true
@@ -346,9 +335,10 @@ func add_roserang_buff(): # Called by target/Icon when roserang hits it
 	if next_roserang_buff_index < roserang_buff_list.size():
 		next_roserang_buff_index += 1
 
-func apply_buffs_to_roserang():
+func apply_buffs_to_roserang_instance():
 	if next_roserang_buff_index <= 0 and not ui.roserang_buffs_cleared():
 		ui.clear_roserang_buffs()
+	# Apply buffs to the roserang instance and UI simultaneously
 	for i in range(next_roserang_buff_index):
 		match(roserang_buff_list[i]):
 			Globals.BUFFS.DAMAGE:
@@ -359,17 +349,36 @@ func throw_special_roserang():
 	roserang_instance = roserang.instantiate()
 	add_sibling(roserang_instance)
 	roserang_instance.set_script(current_roserang_special_script)
-	apply_buffs_to_roserang()
+	apply_buffs_to_roserang_instance()
 
 func start_roserang_special_timer():
 	roserang_special_queued = true
 	await get_tree().create_timer(rang_catch_input_buffer_secs).timeout
 	roserang_special_queued = false
 
+func on_catch_axrang():
+	if axrang_perfect_catch_queued:
+		# Perfect catch
+		axrang_perfect_catch_queued = false
+		axrang_perfect_caught = true
+		add_axrang_buff()
+		# Apply buffs visually in the UI, but not the ax itself because the ax instance doesn't exist yet (catching the axrang sets axrang_instance to null)
+		for i in range(next_axrang_buff_index):
+			match(axrang_buff_list[i]):
+				Globals.BUFFS.DAMAGE:
+					ui.apply_axrang_buff1()
+	else:
+		# Clear axrang buffs if axrang wasn't perfect caught
+		axrang_perfect_caught = false
+		next_axrang_buff_index = 0
+		if not ui.axrang_buffs_cleared():
+			ui.clear_axrang_buffs()
+
 func throw_axrang():
 	axrang_instance = axrang.instantiate()
 	add_sibling(axrang_instance)
-	apply_buffs_to_axrang()
+	apply_buffs_to_axrang_instance()
+	axrang_instance.caught.connect(on_catch_axrang)
 
 func start_axrang_perfect_catch_timer():
 	axrang_perfect_catch_queued = true
@@ -380,11 +389,9 @@ func add_axrang_buff(): # Called by Cotu when he catches the axrang
 	if next_axrang_buff_index < axrang_buff_list.size():
 		next_axrang_buff_index += 1
 
-func apply_buffs_to_axrang():
-	if next_axrang_buff_index <= 0 and not ui.axrang_buffs_cleared():
-		ui.clear_axrang_buffs()
+func apply_buffs_to_axrang_instance():
+	# Apply buffs to the ax instance itself, but not the UI because the buffs were already applied in the UI in the previous perfect catch
 	for i in range(next_axrang_buff_index):
 		match(axrang_buff_list[i]):
 			Globals.BUFFS.DAMAGE:
 				axrang_instance.buff_damage()
-				ui.apply_axrang_buff1()
