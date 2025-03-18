@@ -39,6 +39,9 @@ func _ready():
 	invincible = false
 
 func _physics_process(_delta):
+	# Failsafe in case CotuCollider fails to make ax disappear when touching Cotu
+	if not invincible and global_position.distance_to(cotu.global_position) < 1:
+		queue_free()
 	match(mvmt_state):
 		FWD:
 			pivot.rotate_x(rotate_speed)

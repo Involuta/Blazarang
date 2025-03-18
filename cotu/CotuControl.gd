@@ -42,7 +42,8 @@ var next_roserang_buff_index := 0
 var throw_roserang_self_damage := 18.0
 
 var can_throw_axrang := true
-var axrang_catch_queued := false
+var axrang_perfect_catch_queued := false
+var axrang_perfect_caught := false
 var axrang_buff_list := [Globals.BUFFS.DAMAGE, Globals.BUFFS.DAMAGE, Globals.BUFFS.DAMAGE]
 var next_axrang_buff_index := 0
 var throw_axrang_self_damage := 36.0
@@ -231,13 +232,23 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ThrowAxrang"):
 		if axrang_instance == null and can_throw_axrang:
 			# Throw
-			if not destabilized:
+			if not destabilized and not axrang_perfect_caught:
 				hurtbox.self_hit(throw_axrang_self_damage)
+			axrang_perfect_caught = false
 			throw_axrang()
 		elif axrang_instance != null and not axrang_instance.is_returning():
 			axrang_instance.advance_state()
 		elif axrang_instance != null and axrang_instance.is_returning():
-			start_axrang_catch_timer()
+			start_axrang_perfect_catch_timer()
+	if axrang_perfect_catch_queued and axrang_instance == null and can_throw_axrang:
+		# Catch
+		axrang_perfect_catch_queued = false
+		axrang_perfect_caught = true
+		add_axrang_buff()
+	# Clear axrang buffs if axrang wasn't perfect caught
+	if not axrang_perfect_caught:
+		next_axrang_buff_index = 0
+		#ui.clear_axrang_buffs()
 	
 	# Roserang throw
 	if Input.is_action_just_pressed("ThrowRoserang"):
@@ -256,12 +267,11 @@ func _physics_process(delta):
 		Globals.award_score(Globals.INSTANT_RETHROW_SCORE)
 	else:
 		anim_tree.set("parameters/StateMachine/conditions/just_instant_rethrew", false)
-	
-	# Target control and buff clearing. This only runs if the instant rethrow code above didn't run, i.e. an instant rethrow didn't occur
+	# Clear roserang buffs (and make target/Icon follow Cotu again) if an instant rethrow didn't just occur (i.e. if roserang_instance is still null after an instant rethrow would have reassigned it)
 	if roserang_instance == null:
 		target.start_following_cotu()
 		next_roserang_buff_index = 0
-		ui.clear_buffs()
+		ui.clear_buffs()#ui.clear_roserang_buffs()
 	
 	if Input.is_action_just_pressed("UseItem"):
 		anim_tree.set("parameters/StateMachine/conditions/use_item", true)
@@ -330,13 +340,13 @@ func start_roserang_instant_rethrow_timer():
 	await get_tree().create_timer(rang_catch_input_buffer_secs).timeout
 	roserang_throw_queued = false
 
-func add_roserang_buff():
+func add_roserang_buff(): # Called by target/Icon when roserang hits it
 	if next_roserang_buff_index < roserang_buff_list.size():
 		next_roserang_buff_index += 1
 
 func apply_buffs_to_roserang():
 	if next_roserang_buff_index <= 0:
-		ui.clear_buffs()
+		ui.clear_buffs()#ui.clear_roserang_buffs()
 	for i in range(next_roserang_buff_index):
 		match(roserang_buff_list[i]):
 			Globals.BUFFS.DAMAGE:
@@ -359,18 +369,19 @@ func throw_axrang():
 	add_sibling(axrang_instance)
 	apply_buffs_to_axrang()
 
-func start_axrang_catch_timer():
-	axrang_catch_queued = true
+func start_axrang_perfect_catch_timer():
+	axrang_perfect_catch_queued = true
 	await get_tree().create_timer(rang_catch_input_buffer_secs).timeout
-	axrang_catch_queued = false
+	axrang_perfect_catch_queued = false
 
-func add_axrang_buff():
+func add_axrang_buff(): # Called by Cotu when he catches the axrang
 	if next_axrang_buff_index < axrang_buff_list.size():
 		next_axrang_buff_index += 1
 
 func apply_buffs_to_axrang():
 	if next_axrang_buff_index <= 0:
-		ui.clear_buffs()
+		pass
+		#ui.clear_axrang_buffs()
 	for i in range(next_axrang_buff_index):
 		match(axrang_buff_list[i]):
 			Globals.BUFFS.DAMAGE:
