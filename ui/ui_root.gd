@@ -41,7 +41,7 @@ func _ready():
 	Globals.destabilize.connect(on_destabilize)
 	Globals.stabilize.connect(on_stabilize)
 	
-	for buff in cotu.buff_list:
+	for buff in cotu.roserang_buff_list:
 		match(buff):
 			Globals.BUFFS.DAMAGE:
 				buff_icon1.texture = load("res://textures/buff_DMG-clear.png")

@@ -47,6 +47,6 @@ func _on_body_entered(body):
 		start_following_cotu()
 		cotu_hurtbox.self_heal(icon_self_heal)
 		Globals.award_score(Globals.DODGE_SCORE)
-		cotu.add_buff()
+		cotu.add_roserang_buff()
 		# Why is apply_buffs_to_rang here? Rang is applied buffs when Cotu throws, instant rethrows, or the rang hits the icon
 		cotu.apply_buffs_to_roserang()

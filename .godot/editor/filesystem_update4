@@ -42,3 +42,5 @@ res://levels/gauntlet/gauntlet_level1.gd
 res://levels/Level.gd
 res://textures/solid_light_gray_tile.tres
 res://levels/x_boss_level/x_boss_level1_viewcontrol.tscn
+res://ui/ui_root.gd
+res://icon/icon.gd

@@ -74,5 +74,8 @@ func switch_to_explode():
 func switch_to_return():
 	mvmt_state = RETURN
 
+func is_returning():
+	return mvmt_state == RETURN
+
 func buff_damage():
 	hitbox.damage = 50
