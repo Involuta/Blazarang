@@ -14,7 +14,7 @@ signal health_segment_lost(seg_num: int)
 signal activate_x_laser_combo_ball
 
 # Update this list before the layer names in Project Settings
-const PLAYER_COL_LAYER := 1
+const ROSERANG_COL_LAYER := 1
 const ARENA_COL_LAYER := 2
 const PARTICLE_COL_LAYER := 3
 const ENEMY_COL_LAYER := 4
@@ -22,7 +22,7 @@ const COTU_COL_LAYER := 5
 const TARGET_COL_LAYER := 6
 const THICK_ENEMY_COL_LAYER := 7
 const ENEMY_BOUND_COL_LAYER := 8
-const RANG_INTERACTABLE_COL_LAYER := 9
+const AXRANG_COL_LAYER := 9
 
 func make_mask(layers):
 	var mask := 0.0

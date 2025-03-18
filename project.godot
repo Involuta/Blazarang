@@ -142,7 +142,7 @@ ThrowAxrang={
 
 [layer_names]
 
-3d_physics/layer_1="Player"
+3d_physics/layer_1="Roserang"
 3d_physics/layer_2="Arena"
 3d_physics/layer_3="Particle"
 3d_physics/layer_4="Enemy"
@@ -150,7 +150,7 @@ ThrowAxrang={
 3d_physics/layer_6="Target"
 3d_physics/layer_7="ThickEnemy"
 3d_physics/layer_8="EnemyBounds"
-3d_physics/layer_9="RangInteractable"
+3d_physics/layer_9="Axrang"
 
 [rendering]
 

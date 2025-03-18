@@ -37,3 +37,10 @@ res://rang/axrang.gd
 res://rang/destroy_on_cotu_hit.gd
 res://icon/icon.gd
 res://enemies/enemy_melee_tier3.tscn
+res://globals.gd
+res://glb_inherited_scenes/melee_t3.tscn
+res://enemies/x_boss.tscn
+res://glb_inherited_scenes/melee_t1.tscn
+res://enemies/enemy_melee_tier1.tscn
+res://enemies/enemy_melee_tier2.tscn
+res://enemies/first_miniboss.tscn

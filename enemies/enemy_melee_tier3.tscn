@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dwqdm1pn51yee"]
+[gd_scene load_steps=24 format=3 uid="uid://dwqdm1pn51yee"]
 
 [ext_resource type="Script" path="res://enemies/enemy_melee_base.gd" id="1_1j3bx"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_eijtw"]
@@ -6,6 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://donkrix8titvb" path="res://glb_inherited_scenes/melee_t3.tscn" id="4_n1rxq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4b6ac"]
+height = 3.25
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5fgu5"]
+radius = 1.0
 height = 3.25
 
 [sub_resource type="Animation" id="Animation_4hqbc"]
@@ -250,7 +254,7 @@ avoidance_enabled = true
 height = 3.0
 radius = 4.0
 
-[node name="EnemyHurtbox" type="Area3D" parent="."]
+[node name="EnemyRoserangHurtbox" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 1)
 collision_layer = 8
 collision_mask = 9
@@ -258,8 +262,19 @@ script = ExtResource("2_eijtw")
 hit_particle_color = Color(1, 1, 0, 1)
 opponent_hitboxes = ["PlayerHitbox"]
 
-[node name="HurtboxCollider" type="CollisionShape3D" parent="EnemyHurtbox"]
+[node name="HurtboxCollider" type="CollisionShape3D" parent="EnemyRoserangHurtbox"]
 shape = SubResource("CapsuleShape3D_4b6ac")
+
+[node name="EnemyAxrangHurtbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+collision_layer = 8
+collision_mask = 264
+script = ExtResource("2_eijtw")
+hit_particle_color = Color(1, 1, 0, 1)
+opponent_hitboxes = ["PlayerHitbox"]
+
+[node name="HurtboxCollider" type="CollisionShape3D" parent="EnemyAxrangHurtbox"]
+shape = SubResource("CapsuleShape3D_5fgu5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
