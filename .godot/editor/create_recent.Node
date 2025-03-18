@@ -1,12 +1,12 @@
 AnimationPlayer
+MeshInstance3D
+GPUParticles3D
+Node3D
 TextureRect
 Node2D
 CollisionShape3D
-Node3D
 CharacterBody3D
 Camera3D
-MeshInstance3D
-GPUParticles3D
 GPUTrail3D
 GPUParticlesAttractorSphere3D
 BoneAttachment3D

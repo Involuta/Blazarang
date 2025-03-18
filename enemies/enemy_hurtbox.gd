@@ -29,7 +29,7 @@ func emit_hit_particles(hitter):
 	var inst := hit_particles.instantiate()
 	level.add_child.call_deferred(inst)
 	await inst.tree_entered
-	inst.global_position = hitter.global_position
+	inst.global_position = global_position
 	inst.global_rotation.y = hitter.global_rotation.y + PI
 	var particle_settings = inst.get_node("GPUParticles3D")
 	particle_settings.emitting = true

@@ -24,8 +24,10 @@ var level : Node3D
 var cotu : Node3D
 var target : Node3D
 
-@onready var hitbox = $PlayerHitbox
-@onready var pivot = $Pivot
+@onready var hitbox := $PlayerHitbox
+@onready var pivot := $Pivot
+@onready var explosion_hitbox := $ExplosionPivot/PlayerHitbox
+@onready var explosion_particles := $ExplosionPivot/GPUParticles3D
 
 func _ready():
 	level = root.find_child("Level")
@@ -35,6 +37,8 @@ func _ready():
 	global_position = target.global_position
 	rotation.y = cotu.look_angle + PI
 	velocity = fwd_speed * transform.basis.z
+	
+	explosion_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	
 	await get_tree().create_timer(1).timeout
 	invincible = false
@@ -75,6 +79,7 @@ func advance_state():
 
 func switch_to_explode():
 	mvmt_state = EXPLODE
+	$AnimationPlayer.play("explode")
 
 func switch_to_return():
 	mvmt_state = RETURN
@@ -84,3 +89,4 @@ func is_returning():
 
 func buff_damage():
 	hitbox.damage = 50
+	explosion_hitbox.damage = 20
