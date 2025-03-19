@@ -16,6 +16,8 @@ var behav_state = FOLLOW
 @export var sweep_chance := .2
 @export var follow_turn_speed := .15
 @export var attack_turn_speed := .5
+@export var jump_vertical_speed := 5.0
+@export var jump_lateral_speed := 9.0
 
 var aiming_at_target := true
 
@@ -109,6 +111,16 @@ func start_attack():
 	aiming_at_target = true
 	choose_attack()
 
+func stop_lateral_mvmt():
+	velocity.x = 0
+	velocity.z = 0
+
+func jump_fwd():
+	velocity.y = jump_vertical_speed
+	var attack_dir = jump_lateral_speed * global_position.direction_to(target.global_position)
+	velocity.x = attack_dir.x
+	velocity.z = attack_dir.z
+
 func end_attack():
 	if anim_tree_exists:
 		anim_tree.set("parameters/StateMachine/conditions/overhead", false)
@@ -129,8 +141,6 @@ func choose_attack() -> String:
 func attack():
 	nav_agent.velocity.x = 0
 	nav_agent.velocity.z = 0
-	velocity.x = 0
-	velocity.z = 0
 	if aiming_at_target:
 		lerp_look_at_target(attack_turn_speed)
 		global_rotation.x = 0

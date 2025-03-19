@@ -52,3 +52,9 @@ res://rang/roserang.gd
 res://levels/hub/section_nodes/hub_room1.tscn
 res://levels/hub/hub_viewcontrol.tscn
 res://levels/hub/hub.tscn
+res://enemies/enemy_melee_base.gd
+res://enemies/enemy_anims/mt2_overhead.res
+res://enemies/enemy_anims/mt2_sweep.res
+res://enemies/enemy_anims/mt1_overhead.res
+res://enemies/enemy_anims/mt3_big_charge_up.res
+res://enemies/enemy_gunner_base.gd

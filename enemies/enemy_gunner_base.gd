@@ -103,6 +103,10 @@ func start_attack():
 	aiming_at_target = true
 	anim_tree.set("parameters/StateMachine/conditions/shoot", true)
 
+func stop_lateral_mvmt():
+	velocity.x = 0
+	velocity.z = 0
+
 func try_end_attack():
 	if global_position.distance_to(target.global_position) > target_distance:
 		anim_tree.set("parameters/StateMachine/conditions/shoot", false)
