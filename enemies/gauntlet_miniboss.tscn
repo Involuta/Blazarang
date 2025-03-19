@@ -1,6 +1,6 @@
 [gd_scene load_steps=35 format=3 uid="uid://cp4kl2mwytpqr"]
 
-[ext_resource type="Script" path="res://enemies/first_miniboss.gd" id="1_hqrk6"]
+[ext_resource type="Script" path="res://enemies/gauntlet_miniboss.gd" id="1_hqrk6"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="1_qwvcv"]
 [ext_resource type="Script" path="res://hitbox.gd" id="2_dh1eu"]
 [ext_resource type="PackedScene" uid="uid://ns60fsb6nukn" path="res://glb_inherited_scenes/first_miniboss_meshes.tscn" id="4_gwavs"]
@@ -2278,7 +2278,7 @@ billboard_keep_scale = true
 material = SubResource("StandardMaterial3D_53jld")
 inner_radius = 0.96
 
-[node name="FirstMiniboss" type="CharacterBody3D"]
+[node name="GauntletMiniboss" type="CharacterBody3D"]
 collision_layer = 64
 collision_mask = 218
 script = ExtResource("1_hqrk6")

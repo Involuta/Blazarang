@@ -65,13 +65,14 @@ var axrang_base_damage := 25
 var axrang_explosion_damage := 10
 
 # health, hit score, kill score
+# Each key corresponds to an enemy's "entity name"
 const enemy_hurtbox_data = {
-	"EnemyMeleeTier1" : [20, 1.0, 1.0],
-	"EnemyMeleeTier2" : [30, 1.0, 1.5],
-	"EnemyMeleeTier3" : [40, 1.5, 2.0],
-	"EnemyMobileGunner" : [10, 1.0, 1.0],
-	"EnemyStationaryGunner" : [10, 1.0, 1.0],
-	"FirstMiniboss" : [500, 1.0, 10.0],
+	"GauntletMeleeTier1" : [20, 1.0, 1.0],
+	"GauntletMeleeTier2" : [30, 1.0, 1.5],
+	"GauntletMeleeTier3" : [40, 1.5, 2.0],
+	"GauntletMobileGunner" : [10, 1.0, 1.0],
+	"GauntletStationaryGunner" : [10, 1.0, 1.0],
+	"GauntletMiniboss" : [500, 1.0, 10.0],
 	
 	"RollerBall" : [10, 1.0, 1.0],
 	"BouncerBall" : [10, 1.0, 2.0],

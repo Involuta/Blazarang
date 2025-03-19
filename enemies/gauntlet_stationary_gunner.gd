@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var entity_name := "EnemyMobileGunner"
+@export var entity_name := "GauntletStationaryGunner" # Used by globals to assign health, hit score, etc.
 
 var shooting := false
 

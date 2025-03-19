@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var entity_name := "FirstMiniboss"
+@export var entity_name := "GauntletMiniboss" # Used by globals to assign health, hit score, etc.
 
 enum {
 	WAIT,

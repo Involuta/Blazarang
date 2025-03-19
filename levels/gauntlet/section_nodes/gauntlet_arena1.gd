@@ -66,7 +66,7 @@ func lower_pillars():
 func begin_sequence():
 	sequence_begun = true
 	if (wave_1_duration > 0):
-		gang()
+		miniboss()
 		await get_tree().create_timer(wave_1_duration).timeout
 	if (wave_2_duration > 0):
 		gang()
@@ -188,7 +188,7 @@ func miniboss():
 	ps3.spawning = false
 	ps4.spawning = false
 	
-	var miniboss_asset := load("res://enemies/first_miniboss.tscn")
+	var miniboss_asset := load("res://enemies/gauntlet_miniboss.tscn")
 	var mb_inst = miniboss_asset.instantiate()
 	get_parent().add_child.call_deferred(mb_inst)
 	await mb_inst.tree_entered

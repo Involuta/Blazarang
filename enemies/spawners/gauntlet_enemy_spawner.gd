@@ -1,12 +1,11 @@
 extends Node3D
 
 var rng := RandomNumberGenerator.new()
-var melee_base := preload("res://enemies/enemy_melee_base.tscn")
-var melee_tier1 := preload("res://enemies/enemy_melee_tier1.tscn")
-var melee_tier2 := preload("res://enemies/enemy_melee_tier2.tscn")
-var melee_tier3 := preload("res://enemies/enemy_melee_tier3.tscn")
-var mobile_gunner := preload("res://enemies/enemy_mobile_gunner.tscn")
-var stationary_gunner := preload("res://enemies/enemy_stationary_gunner.tscn")
+var melee_tier1 := preload("res://enemies/gauntlet_melee_tier1.tscn")
+var melee_tier2 := preload("res://enemies/gauntlet_melee_tier2.tscn")
+var melee_tier3 := preload("res://enemies/gauntlet_melee_tier3.tscn")
+var mobile_gunner := preload("res://enemies/gauntlet_mobile_gunner.tscn")
+var stationary_gunner := preload("res://enemies/gauntlet_stationary_gunner.tscn")
 
 @export var spawning := true
 @export var spawn_cooldown_secs := 7.0
@@ -56,8 +55,6 @@ func choose_enemy():
 	
 func spawn_from_name(enemy_name):
 	match(enemy_name):
-		"MELEE_BASE":
-			return melee_base.instantiate()
 		"MELEE_TIER1":
 			return melee_tier1.instantiate()
 		"MELEE_TIER2":

@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://cm35v0fu2apju"]
 
-[ext_resource type="Script" path="res://enemies/enemy_melee_base.gd" id="1_b2t2q"]
+[ext_resource type="Script" path="res://enemies/gauntlet_enemy_base.gd" id="1_b2t2q"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_nfj3i"]
 [ext_resource type="Script" path="res://hitbox.gd" id="3_krk08"]
 

@@ -58,3 +58,16 @@ res://enemies/enemy_anims/mt2_sweep.res
 res://enemies/enemy_anims/mt1_overhead.res
 res://enemies/enemy_anims/mt3_big_charge_up.res
 res://enemies/enemy_gunner_base.gd
+res://enemies/gauntlet_melee_tier3.tscn
+res://enemies/gauntlet_mobile_gunner.tscn
+res://enemies/spawners/gauntlet_enemy_spawner.gd
+res://enemies/gauntlet_melee_tier2.tscn
+res://enemies/gauntlet_melee_tier1.tscn
+res://enemies/gauntlet_miniboss.tscn
+res://enemies/gauntlet_enemy_base.gd
+res://enemies/gauntlet_stationary_gunner.gd
+res://levels/gauntlet/section_nodes/gauntlet_arena1.gd
+res://enemies/gauntlet_stationary_gunner.tscn
+res://enemies/gauntlet_mobile_gunner.gd
+res://enemies/gauntlet_miniboss.gd
+res://enemies/x_boss.gd

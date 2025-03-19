@@ -1,9 +1,9 @@
 [gd_scene load_steps=26 format=3 uid="uid://crnvtwl8auu75"]
 
-[ext_resource type="Script" path="res://enemies/enemy_melee_base.gd" id="1_aale5"]
-[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_0r0r6"]
-[ext_resource type="PackedScene" uid="uid://bsrvb25fuh6xo" path="res://glb_inherited_scenes/melee_t2.tscn" id="2_jmf1i"]
-[ext_resource type="Script" path="res://hitbox.gd" id="3_lw0ui"]
+[ext_resource type="Script" path="res://enemies/gauntlet_enemy_base.gd" id="1_ghx6x"]
+[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_tbkks"]
+[ext_resource type="Script" path="res://hitbox.gd" id="3_bxuvo"]
+[ext_resource type="PackedScene" uid="uid://bsrvb25fuh6xo" path="res://glb_inherited_scenes/melee_t2.tscn" id="4_kx56q"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4b6ac"]
 radius = 0.75
@@ -105,12 +105,12 @@ billboard_keep_scale = true
 material = SubResource("StandardMaterial3D_jt2y7")
 size = Vector2(0.3, 0.3)
 
-[node name="EnemyMeleeTier2" type="CharacterBody3D" groups=["lockonables"]]
+[node name="GauntletMeleeTier2" type="CharacterBody3D" groups=["lockonables"]]
 collision_layer = 8
 collision_mask = 90
 platform_floor_layers = 4294901762
-script = ExtResource("1_aale5")
-entity_name = "EnemyMeleeTier2"
+script = ExtResource("1_ghx6x")
+entity_name = "GauntletMeleeTier2"
 sweep_chance = 0.5
 follow_turn_speed = 0.1
 
@@ -125,7 +125,7 @@ radius = 3.0
 [node name="EnemyHurtbox" type="Area3D" parent="."]
 collision_layer = 8
 collision_mask = 265
-script = ExtResource("2_0r0r6")
+script = ExtResource("2_tbkks")
 hit_particle_color = Color(1, 0, 1, 1)
 opponent_hitboxes = ["PlayerHitbox"]
 
@@ -140,7 +140,7 @@ transform = Transform3D(-0.5, 0.866025, 3.78552e-08, -1.5246e-23, -4.37114e-08, 
 transform = Transform3D(0.999999, 2.15301e-08, -2.2719e-14, -8.9407e-08, 0.999999, 0, -6.17927e-15, -6.2758e-15, 0.999999, 2.08165e-12, 1.75, 2.08165e-12)
 collision_layer = 8
 collision_mask = 11
-script = ExtResource("3_lw0ui")
+script = ExtResource("3_bxuvo")
 damage = 24
 
 [node name="HitboxCollider" type="CollisionShape3D" parent="MeleeHitboxPivot/EnemyHitbox"]
@@ -152,7 +152,7 @@ visible = false
 cast_shadow = 0
 mesh = SubResource("CapsuleMesh_oq81m")
 
-[node name="VisualMesh" parent="." instance=ExtResource("2_jmf1i")]
+[node name="VisualMesh" parent="." instance=ExtResource("4_kx56q")]
 transform = Transform3D(0.15, -5.2318e-17, 5.2318e-17, 5.2318e-17, 0.15, -5.2318e-17, -5.2318e-17, 5.2318e-17, 0.15, 0, -1.15232, 0)
 
 [node name="Skeleton3D" parent="VisualMesh/ControlRig" index="0"]
