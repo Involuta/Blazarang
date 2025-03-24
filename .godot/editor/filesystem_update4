@@ -71,3 +71,8 @@ res://enemies/gauntlet_stationary_gunner.tscn
 res://enemies/gauntlet_mobile_gunner.gd
 res://enemies/gauntlet_miniboss.gd
 res://enemies/x_boss.gd
+res://glb_inherited_scenes/ax.tscn
+res://cotu/cotu_anims/use_item_stabilizer.res
+res://cotu/cotu_anims/x_boss_grab.res
+res://cotu/cotu_anims/ax_melee1.res
+res://cotu/cotu_anims/ax_melee2.res

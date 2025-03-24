@@ -1,3 +1,4 @@
+res://cotu/cotu_anims
 res://enemies/enemy_anims
 res://rang
 res://levels/gauntlet
@@ -6,7 +7,6 @@ res://icon
 res://enemies
 res://skyboxes
 res://
-res://cotu/cotu_anims
 res://levels/x_boss_level/background_nodes
 res://levels/x_boss_level
 res://levels/balls_level
