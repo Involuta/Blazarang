@@ -229,6 +229,11 @@ func _physics_process(delta):
 	if roserang_special_queued and roserang_instance == null:
 		throw_special_roserang()
 	
+	if Input.is_action_just_pressed("MeleeAxrang"):
+		anim_tree.set("parameters/StateMachine/conditions/melee_ax", true)
+	else:
+		anim_tree.set("parameters/StateMachine/conditions/melee_ax", false)
+	
 	if Input.is_action_just_pressed("ThrowAxrang"):
 		if axrang_instance == null and can_throw_axrang:
 			# Throw
