@@ -1,15 +1,17 @@
-[gd_scene load_steps=29 format=3 uid="uid://ckkxheuv5iefh"]
+[gd_scene load_steps=34 format=3 uid="uid://ckkxheuv5iefh"]
 
 [ext_resource type="Script" path="res://hitbox.gd" id="1_hwgla"]
 [ext_resource type="Script" path="res://enemies/x_laser_combo_ball.gd" id="1_wi63g"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_87q5o"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iuxs1"]
+transparency = 4
 cull_mode = 2
 shading_mode = 0
+vertex_color_use_as_albedo = true
 albedo_color = Color(1.5, 0.8, 0.5, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_k7pmu"]
-material = SubResource("StandardMaterial3D_87q5o")
+material = SubResource("StandardMaterial3D_iuxs1")
 radius = 3.0
 height = 6.0
 
@@ -144,26 +146,26 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("VibratingBallMesh:visible")
+tracks/7/path = NodePath(".:vibrating_ball_size")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 2.58333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath(".:vibrating_ball_size")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
 "times": PackedFloat32Array(2.58333),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [1.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("VibratingBallParticles:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 2.58333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_imn18"]
@@ -233,14 +235,14 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("VibratingBallMesh:visible")
+tracks/5/path = NodePath("VibratingBallParticles:emitting")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true, false]
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_l8sli"]
@@ -290,7 +292,7 @@ tracks/3/path = NodePath("Streaks:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(2.5),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -310,14 +312,14 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("VibratingBallMesh:visible")
+tracks/5/path = NodePath("VibratingBallParticles:emitting")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
 "update": 1,
-"values": [true]
+"values": []
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a7aek"]
@@ -403,12 +405,33 @@ color = Color(1, 0.913725, 0.564706, 1)
 color_ramp = SubResource("GradientTexture1D_iggkw")
 attractor_interaction_enabled = false
 
+[sub_resource type="Gradient" id="Gradient_qnbh4"]
+colors = PackedColorArray(1, 1, 1, 0.117647, 1, 1, 1, 0.0392157)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_adnyb"]
+gradient = SubResource("Gradient_qnbh4")
+
+[sub_resource type="Curve" id="Curve_8pn4u"]
+max_value = 1.5
+_data = [Vector2(2.08165e-12, 1.1), 0.0, 0.0, 0, 0, Vector2(0.4, 0.8), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3d6cw"]
+curve = SubResource("Curve_8pn4u")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t5dxw"]
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+scale_curve = SubResource("CurveTexture_3d6cw")
+color = Color(1.5, 0.8, 0.5, 1)
+color_ramp = SubResource("GradientTexture1D_adnyb")
+attractor_interaction_enabled = false
+
 [node name="LaserComboBall" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 script = ExtResource("1_wi63g")
 
 [node name="BallMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(0.01, -3.48787e-18, 3.48787e-18, 3.48787e-18, 0.01, -3.48787e-18, -3.48787e-18, 3.48787e-18, 0.01, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh = SubResource("CapsuleMesh_k7pmu")
 skeleton = NodePath("../..")
 
@@ -422,12 +445,6 @@ damage = 70
 [node name="BallCollider" type="CollisionShape3D" parent="BallMesh/EnemyHitbox"]
 transform = Transform3D(1, -3.48787e-16, -2.50326e-08, 3.48787e-16, 1, -2.66454e-15, -2.50325e-08, 3.05684e-15, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 shape = SubResource("SphereShape3D_7y48p")
-
-[node name="VibratingBallMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.929281, -3.24121e-16, 3.24121e-16, 3.24121e-16, 0.929281, -3.24121e-16, -3.24121e-16, 3.24121e-16, 0.929281, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-transparency = 0.5
-mesh = SubResource("CapsuleMesh_k7pmu")
-skeleton = NodePath("../..")
 
 [node name="Streaks" type="GPUParticles3D" parent="."]
 emitting = false
@@ -443,18 +460,13 @@ trail_lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_7d1h8")
 draw_pass_1 = SubResource("TubeTrailMesh_qfdx1")
 
-[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="."]
-transform = Transform3D(1, -4.22701e-24, -7.57478e-09, -2.5503e-22, 1, 1.25612e-22, -1.26881e-08, 1.29625e-24, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-strength = 20.0
-attenuation = 1e-05
-radius = 100.0
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_a7aek")
 }
 
 [node name="Dots" type="GPUParticles3D" parent="."]
+emitting = false
 amount = 20
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_0huv0")
@@ -467,7 +479,7 @@ process_material = SubResource("ParticleProcessMaterial_b2wh0")
 draw_pass_1 = SubResource("QuadMesh_fhjvf")
 
 [node name="ExplosionOuterBallMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
 transparency = 0.85
 mesh = SubResource("CapsuleMesh_k7pmu")
 
@@ -480,3 +492,11 @@ explosiveness = 1.0
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_8p51r")
 draw_pass_1 = SubResource("QuadMesh_fhjvf")
+
+[node name="VibratingBallParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+emitting = false
+amount = 10
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_t5dxw")
+draw_pass_1 = SubResource("CapsuleMesh_k7pmu")
