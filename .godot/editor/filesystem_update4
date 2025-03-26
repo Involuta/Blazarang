@@ -76,3 +76,6 @@ res://cotu/cotu_anims/use_item_stabilizer.res
 res://cotu/cotu_anims/x_boss_grab.res
 res://cotu/cotu_anims/ax_melee1.res
 res://cotu/cotu_anims/ax_melee2.res
+res://enemies/x_laser_combo_ball_projectile.tscn
+res://enemies/x_laser_combo_ball.gd
+res://glb_inherited_scenes/x_left_arm.tscn

@@ -1,9 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://ckkxheuv5iefh"]
+[gd_scene load_steps=29 format=3 uid="uid://ckkxheuv5iefh"]
 
 [ext_resource type="Script" path="res://hitbox.gd" id="1_hwgla"]
 [ext_resource type="Script" path="res://enemies/x_laser_combo_ball.gd" id="1_wi63g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_87q5o"]
+cull_mode = 2
 shading_mode = 0
 albedo_color = Color(1.5, 0.8, 0.5, 1)
 
@@ -16,30 +17,33 @@ height = 6.0
 radius = 3.0
 
 [sub_resource type="Gradient" id="Gradient_jc72l"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 0.839216, 0.568627, 1)
+offsets = PackedFloat32Array(0, 0.542234)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.839216, 0.568627, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_6wquv"]
 gradient = SubResource("Gradient_jc72l")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7d1h8"]
-emission_shape = 2
-emission_sphere_radius = 3.0
 particle_flag_align_y = true
 direction = Vector3(2.08165e-12, 2.08165e-12, 1)
-spread = 80.0
+spread = 180.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-initial_velocity_min = 10.0
-initial_velocity_max = 10.0
+initial_velocity_min = 40.0
+initial_velocity_max = 40.0
 angular_velocity_min = 10.0
 angular_velocity_max = 10.0
+linear_accel_min = 2.08167e-15
+linear_accel_max = 2.08167e-15
 color = Color(1, 0.913725, 0.564706, 1)
 color_ramp = SubResource("GradientTexture1D_6wquv")
+attractor_interaction_enabled = false
 
 [sub_resource type="Curve" id="Curve_lqylp"]
 _data = [Vector2(0, 0), 0.0, 2.36625, 0, 0, Vector2(0.252444, 0.192954), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bqmxi"]
+transparency = 4
 shading_mode = 0
 vertex_color_use_as_albedo = true
 use_particle_trails = true
@@ -56,11 +60,11 @@ step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Streaks:emitting")
+tracks/0/path = NodePath("Dots:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.16667),
+"times": PackedFloat32Array(0, 2.58334),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -68,50 +72,74 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Dots:emitting")
+tracks/1/path = NodePath("BallMesh:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 2.58334),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("BallMesh:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(1.41667, 2.58334),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0.01, 0.01, 0.01), Vector3(1, 1, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BallMesh:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("BallMesh:visible")
+tracks/3/path = NodePath("FastDots:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("FastDots:emitting")
+tracks/4/path = NodePath("ExplosionOuterBallMesh:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ExplosionOuterBallMesh:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1.66667, 2.58334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01), Vector3(30, 30, 30)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ExplosionOuterBallMesh:transparency")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(1.66667),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.85]
 }
 
 [sub_resource type="Animation" id="Animation_imn18"]
@@ -167,8 +195,74 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_l8sli"]
+resource_name = "explosion"
+length = 2.66667
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ExplosionOuterBallMesh:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(30, 30, 30), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ExplosionOuterBallMesh:transparency")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.2, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.85, 0.85, 0.1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ExplosionSlowParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Streaks:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(2.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ExplosionOuterBallMesh:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a7aek"]
 _data = {
+"explosion": SubResource("Animation_l8sli"),
 "grow": SubResource("Animation_whoax"),
 "shrink": SubResource("Animation_imn18")
 }
@@ -194,6 +288,7 @@ color = Color(1, 0.913725, 0.564706, 1)
 attractor_interaction_enabled = false
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0h7xt"]
+transparency = 4
 shading_mode = 0
 vertex_color_use_as_albedo = true
 billboard_mode = 3
@@ -223,12 +318,37 @@ scale_curve = SubResource("CurveTexture_u8rv1")
 color = Color(1, 0.913725, 0.564706, 1)
 attractor_interaction_enabled = false
 
+[sub_resource type="Gradient" id="Gradient_8qmo2"]
+offsets = PackedFloat32Array(0.73842, 0.874659, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_iggkw"]
+gradient = SubResource("Gradient_8qmo2")
+
+[sub_resource type="Curve" id="Curve_o8ieq"]
+_data = [Vector2(0.60166, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.01), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xlxa8"]
+curve = SubResource("Curve_o8ieq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8p51r"]
+spread = 180.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 2.0
+initial_velocity_max = 7.0
+linear_accel_min = -1.0
+scale_curve = SubResource("CurveTexture_xlxa8")
+color = Color(1, 0.913725, 0.564706, 1)
+color_ramp = SubResource("GradientTexture1D_iggkw")
+attractor_interaction_enabled = false
+
 [node name="LaserComboBall" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 script = ExtResource("1_wi63g")
 
 [node name="BallMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(0.929281, -3.24121e-16, 3.24121e-16, 3.24121e-16, 0.929281, -3.24121e-16, -3.24121e-16, 3.24121e-16, 0.929281, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh = SubResource("CapsuleMesh_k7pmu")
 skeleton = NodePath("../..")
 
@@ -244,11 +364,12 @@ transform = Transform3D(1, -3.48787e-16, -2.50326e-08, 3.48787e-16, 1, -2.66454e
 shape = SubResource("SphereShape3D_7y48p")
 
 [node name="Streaks" type="GPUParticles3D" parent="."]
-visible = false
-amount = 2
-lifetime = 20.0
+emitting = false
+amount = 36
+lifetime = 4.0
 one_shot = true
-speed_scale = 2.5
+speed_scale = 1.5
+explosiveness = 1.0
 fixed_fps = 60
 visibility_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
 trail_enabled = true
@@ -268,6 +389,7 @@ libraries = {
 }
 
 [node name="Dots" type="GPUParticles3D" parent="."]
+emitting = false
 amount = 20
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_0huv0")
@@ -275,6 +397,21 @@ draw_pass_1 = SubResource("QuadMesh_fhjvf")
 
 [node name="FastDots" type="GPUParticles3D" parent="."]
 emitting = false
-amount = 40
+amount = 50
 process_material = SubResource("ParticleProcessMaterial_b2wh0")
+draw_pass_1 = SubResource("QuadMesh_fhjvf")
+
+[node name="ExplosionOuterBallMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
+transparency = 0.85
+mesh = SubResource("CapsuleMesh_k7pmu")
+
+[node name="ExplosionSlowParticles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 50
+lifetime = 3.5
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_8p51r")
 draw_pass_1 = SubResource("QuadMesh_fhjvf")

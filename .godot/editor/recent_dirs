@@ -1,3 +1,4 @@
+res://levels/x_boss_level
 res://
 res://cotu/cotu_anims
 res://enemies/enemy_anims
@@ -8,7 +9,6 @@ res://icon
 res://enemies
 res://skyboxes
 res://levels/x_boss_level/background_nodes
-res://levels/x_boss_level
 res://levels/balls_level
 res://enemies/spawners
 res://glb_inherited_scenes

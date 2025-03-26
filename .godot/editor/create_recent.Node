@@ -1,9 +1,9 @@
+GPUParticles3D
+MeshInstance3D
 CollisionShape3D
 Area3D
 Node3D
 AnimationPlayer
-MeshInstance3D
-GPUParticles3D
 TextureRect
 Node2D
 CharacterBody3D
