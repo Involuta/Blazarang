@@ -292,7 +292,7 @@ tracks/3/path = NodePath("Streaks:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(2.5),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -316,10 +316,10 @@ tracks/5/path = NodePath("VibratingBallParticles:emitting")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": []
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a7aek"]
@@ -431,7 +431,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.0
 script = ExtResource("1_wi63g")
 
 [node name="BallMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.01, -3.48787e-18, 3.48787e-18, 3.48787e-18, 0.01, -3.48787e-18, -3.48787e-18, 3.48787e-18, 0.01, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh = SubResource("CapsuleMesh_k7pmu")
 skeleton = NodePath("../..")
 
@@ -447,7 +447,6 @@ transform = Transform3D(1, -3.48787e-16, -2.50326e-08, 3.48787e-16, 1, -2.66454e
 shape = SubResource("SphereShape3D_7y48p")
 
 [node name="Streaks" type="GPUParticles3D" parent="."]
-emitting = false
 amount = 36
 lifetime = 4.0
 one_shot = true
@@ -466,7 +465,6 @@ libraries = {
 }
 
 [node name="Dots" type="GPUParticles3D" parent="."]
-emitting = false
 amount = 20
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_0huv0")
@@ -479,8 +477,8 @@ process_material = SubResource("ParticleProcessMaterial_b2wh0")
 draw_pass_1 = SubResource("QuadMesh_fhjvf")
 
 [node name="ExplosionOuterBallMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
-transparency = 0.85
+visible = false
+transparency = 0.1
 mesh = SubResource("CapsuleMesh_k7pmu")
 
 [node name="ExplosionSlowParticles" type="GPUParticles3D" parent="."]
@@ -495,7 +493,6 @@ draw_pass_1 = SubResource("QuadMesh_fhjvf")
 
 [node name="VibratingBallParticles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-emitting = false
 amount = 10
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_t5dxw")
