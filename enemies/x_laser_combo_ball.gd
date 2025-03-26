@@ -1,6 +1,10 @@
 extends Node3D
 
-@onready var anim_player = $AnimationPlayer
+@onready var anim_player := $AnimationPlayer
+@onready var vibrating_ball_mesh := $VibratingBallMesh
+@export var vibrating_ball_size := 1.0 # Used by anims
+var vibrating_ball_size_range := .2
+var rng := RandomNumberGenerator.new()
 
 func _ready():
 	visible = false
@@ -26,3 +30,6 @@ func _on_activate():
 	anim_player.play("explosion")
 	await get_tree().create_timer(5.4).timeout
 	anim_player.play("shrink")
+
+func _physics_process(_delta):
+	vibrating_ball_mesh.scale = (vibrating_ball_size+vibrating_ball_size_range*rng.randf()) * Vector3.ONE

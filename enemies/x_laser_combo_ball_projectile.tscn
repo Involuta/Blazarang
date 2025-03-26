@@ -141,6 +141,30 @@ tracks/6/keys = {
 "update": 0,
 "values": [0.85]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("VibratingBallMesh:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 2.58333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".:vibrating_ball_size")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(2.58333),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
 
 [sub_resource type="Animation" id="Animation_imn18"]
 resource_name = "shrink"
@@ -190,6 +214,30 @@ tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 1.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:vibrating_ball_size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.01]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("VibratingBallMesh:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -258,6 +306,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("VibratingBallMesh:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a7aek"]
@@ -348,7 +408,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.0
 script = ExtResource("1_wi63g")
 
 [node name="BallMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.929281, -3.24121e-16, 3.24121e-16, 3.24121e-16, 0.929281, -3.24121e-16, -3.24121e-16, 3.24121e-16, 0.929281, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh = SubResource("CapsuleMesh_k7pmu")
 skeleton = NodePath("../..")
 
@@ -362,6 +422,12 @@ damage = 70
 [node name="BallCollider" type="CollisionShape3D" parent="BallMesh/EnemyHitbox"]
 transform = Transform3D(1, -3.48787e-16, -2.50326e-08, 3.48787e-16, 1, -2.66454e-15, -2.50325e-08, 3.05684e-15, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 shape = SubResource("SphereShape3D_7y48p")
+
+[node name="VibratingBallMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.929281, -3.24121e-16, 3.24121e-16, 3.24121e-16, 0.929281, -3.24121e-16, -3.24121e-16, 3.24121e-16, 0.929281, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transparency = 0.5
+mesh = SubResource("CapsuleMesh_k7pmu")
+skeleton = NodePath("../..")
 
 [node name="Streaks" type="GPUParticles3D" parent="."]
 emitting = false
@@ -389,7 +455,6 @@ libraries = {
 }
 
 [node name="Dots" type="GPUParticles3D" parent="."]
-emitting = false
 amount = 20
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_0huv0")
