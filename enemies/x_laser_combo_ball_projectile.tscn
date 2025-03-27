@@ -447,6 +447,7 @@ transform = Transform3D(1, -3.48787e-16, -2.50326e-08, 3.48787e-16, 1, -2.66454e
 shape = SubResource("SphereShape3D_7y48p")
 
 [node name="Streaks" type="GPUParticles3D" parent="."]
+emitting = false
 amount = 36
 lifetime = 4.0
 one_shot = true

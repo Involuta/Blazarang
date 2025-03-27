@@ -269,6 +269,16 @@ func end_pre_fight():
 	anim_tree.set(param_path_base + "PreFight", false)
 
 func _physics_process(delta):
+	if Input.is_action_just_pressed("Special"):
+		match(behav_state):
+			WAIT:
+				print("WAIT")
+			FOLLOW:
+				print("FOLLOW: ", long_dist_wait_remaining)
+			STRAFE_FOLLOW:
+				print("STRAFE FOLLOW")
+			ATTACK:
+				print("ATTACK")
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 		if global_position.y < min_y_pos:
@@ -348,6 +358,14 @@ func follow():
 	
 	if not attack_queued and behav_state != ATTACK and global_position.distance_to(target.global_position) < shortrange_attack_distance:
 		queue_attack(DIST_TYPE.SHORT_DIST)
+		if phase == PHASE.POST_LASER_COMBO:
+			print("Short dist attack queued!")
+		else:
+			match(phase):
+				PHASE.PHASE1:
+					print("1")
+				PHASE.PHASE2:
+					print("2")
 	
 	# This code block ensures start_long_dist_attack is only called once
 	if long_dist_wait_remaining <= 0:
@@ -1175,9 +1193,6 @@ func laser_combo_mvmt():
 	
 	# End
 	anim_tree.set(param_path_base + "LaserCombo", false)
-	
-	# Cooldown
-	await create_tween().tween_interval(.75*t).finished
 	
 	# Switch phase
 	phase = PHASE.POST_LASER_COMBO
