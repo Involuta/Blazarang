@@ -269,16 +269,6 @@ func end_pre_fight():
 	anim_tree.set(param_path_base + "PreFight", false)
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("Special"):
-		match(behav_state):
-			WAIT:
-				print("WAIT")
-			FOLLOW:
-				print("FOLLOW: ", long_dist_wait_remaining)
-			STRAFE_FOLLOW:
-				print("STRAFE FOLLOW")
-			ATTACK:
-				print("ATTACK")
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 		if global_position.y < min_y_pos:
@@ -358,14 +348,6 @@ func follow():
 	
 	if not attack_queued and behav_state != ATTACK and global_position.distance_to(target.global_position) < shortrange_attack_distance:
 		queue_attack(DIST_TYPE.SHORT_DIST)
-		if phase == PHASE.POST_LASER_COMBO:
-			print("Short dist attack queued!")
-		else:
-			match(phase):
-				PHASE.PHASE1:
-					print("1")
-				PHASE.PHASE2:
-					print("2")
 	
 	# This code block ensures start_long_dist_attack is only called once
 	if long_dist_wait_remaining <= 0:
@@ -529,24 +511,12 @@ func end_attack():
 	behav_state = FOLLOW
 
 func end_attack_instant_followup():
-	attack_queued = false
-	no_attack_queued.emit()
-	if phase == PHASE.PHASE2 or phase == PHASE.POST_LASER_COMBO:
-		for attack in phase2_short_dist_attack_chances.keys():
-			anim_tree.set(param_path_base + attack, false)
-		for attack in phase2_long_dist_right_arm_deployed_attack_chances.keys():
-			anim_tree.set(param_path_base + attack, false)
-		for attack in phase2_long_dist_right_arm_not_deployed_attack_chances.keys():
-			anim_tree.set(param_path_base + attack, false)
-	else:
-		for attack in short_dist_attack_chances.keys():
-			anim_tree.set(param_path_base + attack, false)
-		for attack in long_dist_right_arm_deployed_attack_chances.keys():
-			anim_tree.set(param_path_base + attack, false)
-		for attack in long_dist_right_arm_not_deployed_attack_chances.keys():
-			anim_tree.set(param_path_base + attack, false)
+	end_attack()
 	long_dist_wait_remaining = .02
-	behav_state = FOLLOW
+
+func end_attack_laser_combo():
+	end_attack()
+	long_dist_wait_remaining = 2
 
 func end_flying_facerain():
 	end_attack()
