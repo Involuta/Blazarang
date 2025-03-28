@@ -1051,6 +1051,10 @@ func spawn_diamond_at(pos : Vector3, diamond_target : Node3D):
 	fall_tween.tween_property(d, "global_position", pos + Vector3.UP * 100, .1)
 	fall_tween.tween_callback(delete_diamond.bind(d))
 
+func spawn_diamond_at_self():
+	if phase == PHASE.POST_LASER_COMBO:
+		spawn_diamond_at(global_position, target)
+
 func delete_diamond(d: Node3D):
 	d.queue_free()
 
