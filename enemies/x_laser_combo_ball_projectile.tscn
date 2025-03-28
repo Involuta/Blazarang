@@ -429,9 +429,10 @@ attractor_interaction_enabled = false
 [node name="LaserComboBall" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 script = ExtResource("1_wi63g")
+vibrating_ball_size = 0.175
 
 [node name="BallMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(0.174998, -6.10371e-17, 6.10371e-17, 6.10371e-17, 0.174998, -6.10371e-17, -6.10371e-17, 6.10371e-17, 0.174998, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh = SubResource("CapsuleMesh_k7pmu")
 skeleton = NodePath("../..")
 
@@ -466,6 +467,7 @@ libraries = {
 }
 
 [node name="Dots" type="GPUParticles3D" parent="."]
+emitting = false
 amount = 20
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_0huv0")
@@ -494,6 +496,7 @@ draw_pass_1 = SubResource("QuadMesh_fhjvf")
 
 [node name="VibratingBallParticles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+emitting = false
 amount = 10
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_t5dxw")

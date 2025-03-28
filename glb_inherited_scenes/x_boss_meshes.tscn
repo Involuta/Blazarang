@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://b3uvg3j4qge8o"]
+[gd_scene load_steps=41 format=3 uid="uid://b3uvg3j4qge8o"]
 
 [ext_resource type="PackedScene" uid="uid://rp0n2dfx0chj" path="res://glb_imports/8164_meshes.glb" id="1_mluec"]
 [ext_resource type="PackedScene" uid="uid://d1opgv0y2ujut" path="res://glb_inherited_scenes/x_head_pieces.tscn" id="2_pkf4d"]
@@ -211,36 +211,73 @@ material = SubResource("StandardMaterial3D_mrvyg")
 radius = 0.25
 height = 0.5
 
+[sub_resource type="Gradient" id="Gradient_v8kdy"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ceknv"]
+gradient = SubResource("Gradient_v8kdy")
+
+[sub_resource type="Curve" id="Curve_3go0u"]
+_data = [Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.01), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ijln5"]
+curve = SubResource("Curve_3go0u")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i7h3t"]
+direction = Vector3(2.08165e-12, 1, 2.08165e-12)
+spread = 15.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 40.0
+initial_velocity_max = 40.0
+scale_curve = SubResource("CurveTexture_ijln5")
+color = Color(1, 0.913725, 0.564706, 1)
+color_ramp = SubResource("GradientTexture1D_ceknv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_607jx"]
+transparency = 4
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_ssbiy"]
+material = SubResource("StandardMaterial3D_607jx")
+size = Vector2(0.8, 0.8)
+
 [node name="X_boss_meshes" instance=ExtResource("1_mluec")]
-transform = Transform3D(-0.1, 3.48787e-17, -8.74228e-09, 3.48787e-17, 0.1, -3.48787e-17, 8.74228e-09, -3.48787e-17, -0.1, 2.08165e-12, -1.3, 2.08165e-12)
+transform = Transform3D(-0.1, 3.48787e-17, -8.74228e-09, 3.48787e-17, 0.1, -3.48787e-17, 8.74228e-09, -3.48787e-17, -0.1, 2.08165e-12, -1.023, 2.08165e-12)
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/position = Vector3(2.42096e-10, 13.3196, 0.227602)
-bones/0/rotation = Quaternion(-3.63501e-08, -5.16988e-26, -4.21753e-11, 1)
-bones/1/position = Vector3(-2.5018e-10, 1.53056, -0.0794428)
-bones/1/rotation = Quaternion(-0.025926, -1.09344e-12, 4.21611e-11, 0.999664)
-bones/2/rotation = Quaternion(-3.72529e-09, 7.28904e-25, 1.89043e-26, 1)
-bones/3/rotation = Quaternion(7.45058e-09, 7.28904e-25, 1.89043e-26, 1)
-bones/4/rotation = Quaternion(-0.656248, -6.01444e-18, 1.53799e-16, 0.754545)
-bones/8/rotation = Quaternion(0.545348, 0.298975, 0.0512186, 0.7814)
-bones/9/rotation = Quaternion(3.12505e-10, -2.32724e-07, 0.187932, 0.982182)
-bones/10/rotation = Quaternion(0.063662, 0.50911, -0.0033452, 0.858337)
-bones/12/rotation = Quaternion(0.556868, -0.327487, -0.0537849, 0.761418)
-bones/13/rotation = Quaternion(-3.89078e-07, 1.62716e-06, -0.231204, 0.972905)
-bones/14/rotation = Quaternion(0.0686443, -0.487103, 0.0556874, 0.86886)
-bones/15/rotation = Quaternion(0.0282741, -0.189878, -0.980151, 0.0495091)
-bones/15/scale = Vector3(1, 1, 0.999999)
-bones/16/rotation = Quaternion(-0.424102, -3.95261e-06, -1.19879e-06, 0.905614)
-bones/17/rotation = Quaternion(0.54388, -0.0500173, 0.014977, 0.837537)
-bones/18/rotation = Quaternion(0.276961, 0.230053, -0.0684874, 0.930418)
-bones/20/rotation = Quaternion(0.0404665, 0.0760996, 0.995179, 0.0468008)
-bones/20/scale = Vector3(1, 1, 0.999999)
-bones/21/rotation = Quaternion(-0.17048, 9.23104e-06, 2.37098e-06, 0.985361)
-bones/22/rotation = Quaternion(0.248953, 0.0450928, -0.0257469, 0.967123)
-bones/23/rotation = Quaternion(0.280712, -0.231213, 0.0698784, 0.928902)
+bones/0/position = Vector3(2.42062e-10, 13.3196, 0.227602)
+bones/0/rotation = Quaternion(0.173648, 7.32326e-12, -4.15339e-11, 0.984808)
+bones/1/rotation = Quaternion(-0.025926, -1.09328e-12, 4.21603e-11, 0.999664)
+bones/2/rotation = Quaternion(-3.72529e-09, -2.06795e-25, -3.61892e-25, 1)
+bones/3/rotation = Quaternion(2.23517e-08, 4.1359e-25, -2.06795e-25, 1)
+bones/4/rotation = Quaternion(-0.148058, -1.27775e-18, 3.84429e-17, 0.988979)
+bones/8/rotation = Quaternion(0.54508, 0.216561, 0.0973372, 0.804061)
+bones/9/rotation = Quaternion(4.84983e-08, -2.31298e-07, 0.00157235, 0.999999)
+bones/10/rotation = Quaternion(-0.167856, 0.497643, 0.0804784, 0.847171)
+bones/12/rotation = Quaternion(0.54612, -0.21469, -0.0923164, 0.80445)
+bones/13/rotation = Quaternion(-3.35241e-08, 1.69055e-06, -0.00162357, 0.999999)
+bones/14/rotation = Quaternion(-0.17644, -0.491898, -0.0357724, 0.851836)
+bones/15/rotation = Quaternion(-0.0312652, -0.169927, -0.983274, 0.0576187)
+bones/15/scale = Vector3(1.00002, 1, 0.999985)
+bones/16/rotation = Quaternion(-0.36441, -4.02443e-06, -9.29097e-07, 0.931238)
+bones/17/rotation = Quaternion(0.394146, 0.0254983, 0.0194397, 0.918488)
+bones/18/rotation = Quaternion(0.276968, 0.230054, -0.0684861, 0.930416)
+bones/20/rotation = Quaternion(-0.0424547, 0.0175738, 0.997805, 0.0476875)
+bones/20/scale = Vector3(1.00001, 0.999999, 0.999996)
+bones/21/rotation = Quaternion(-0.00168023, 9.49937e-06, 7.74885e-07, 0.999999)
+bones/22/rotation = Quaternion(0.223201, -0.0260236, -0.0159612, 0.974294)
+bones/23/rotation = Quaternion(0.288124, -0.231999, 0.0672301, 0.926629)
 
 [node name="Head" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="0"]
-transform = Transform3D(1, -2.14835e-16, -1.56357e-16, 1.74164e-16, 0.0871566, 0.996195, -2.00225e-16, -0.996195, 0.0871566, 1.2102e-10, 21.2173, -1.0446)
+transform = Transform3D(1, 1.22328e-16, -2.31442e-16, -1.28228e-16, 1, 7.72877e-08, 2.34835e-16, -9.42451e-08, 1, 3.71165e-10, 21.5398, 2.6395)
 bone_name = "mixamorig_Head"
 bone_idx = 5
 
@@ -248,15 +285,14 @@ bone_idx = 5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.303, 2.08165e-12)
 visible = false
 
-[node name="BottomFace" parent="Armature/Skeleton3D/Head/XHead" index="0"]
-transform = Transform3D(1.06898, 0, 0, 0, 1.06898, 0, 0, 0, 1.06898, 1.66532e-12, 1.26747, 2)
-
 [node name="GlowingHead" type="MeshInstance3D" parent="Armature/Skeleton3D/Head" index="1"]
-transform = Transform3D(1, -6.32169e-14, 6.2514e-15, 1.82942e-14, 1, -6.34346e-08, -4.00143e-15, 2.30978e-08, 1, 2.08165e-12, -1.3, 2.5)
+transform = Transform3D(1, -6.32169e-14, 6.2514e-15, 1.82942e-14, 1, -6.34346e-08, -4.00143e-15, 2.30978e-08, 1, -1.36713e-07, 1.6229, 0.607077)
+transparency = 1.0
 mesh = SubResource("CapsuleMesh_o1ab0")
 
 [node name="BombParticles" type="GPUParticles3D" parent="Armature/Skeleton3D/Head/GlowingHead" index="0"]
 transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 0, 0, 0)
+emitting = false
 amount = 30
 process_material = SubResource("ParticleProcessMaterial_8tnpd")
 draw_pass_1 = SubResource("CapsuleMesh_ybwcq")
@@ -273,7 +309,7 @@ surface_material_override/7 = SubResource("StandardMaterial3D_tlfdu")
 surface_material_override/8 = SubResource("StandardMaterial3D_5bl6g")
 
 [node name="LeftArm" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.446637, 0.278946, -0.85012, 0.312189, -0.939028, -0.1441, -0.838483, -0.201038, -0.506489, 3.5919, 20.505, -0.18687)
+transform = Transform3D(0.410416, 0.263219, -0.873083, 0.442147, -0.894802, -0.0619239, -0.797536, -0.360617, -0.483623, 3.5919, 20.2134, 2.29566)
 bone_name = "mixamorig_LeftArm"
 bone_idx = 8
 
@@ -290,7 +326,7 @@ process_material = SubResource("ParticleProcessMaterial_gocoe")
 draw_pass_1 = SubResource("BoxMesh_uuqt1")
 
 [node name="RightArm" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.498514, -0.255042, 0.828515, -0.33588, -0.937913, -0.0866209, 0.799167, -0.2351, -0.553227, -3.5919, 20.505, -0.152356)
+transform = Transform3D(0.409884, -0.263207, 0.873337, -0.44525, -0.893375, -0.060277, 0.796083, -0.364147, -0.483373, -3.5919, 20.2016, 2.3281)
 bone_name = "mixamorig_RightArm"
 bone_idx = 12
 
@@ -307,18 +343,29 @@ process_material = SubResource("ParticleProcessMaterial_gocoe")
 draw_pass_1 = SubResource("BoxMesh_uuqt1")
 
 [node name="LeftHand" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.998417, 0.0401369, 0.039384, 0.0404142, -0.999163, -0.00627181, 0.039099, 0.00785361, -0.999204, 5.12475, 12.5883, -0.507345)
+transform = Transform3D(0.953937, 0.297371, 0.0396644, 0.297446, -0.954729, 0.00413565, 0.0390984, 0.00785295, -0.999204, 5.74931, 12.8556, -0.656995)
 bone_name = "mixamorig_LeftHand"
 bone_idx = 10
 
 [node name="RightHand" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.998287, -0.041202, -0.0415367, -0.0402047, -0.998889, 0.0245678, -0.0425027, -0.0228557, -0.998835, -4.65342, 12.5885, -0.50256)
+transform = Transform3D(0.924331, -0.380359, -0.0306287, -0.379216, -0.924556, 0.0372926, -0.0425025, -0.0228557, -0.998835, -5.74937, 12.8542, -0.653703)
 bone_name = "mixamorig_RightHand"
 bone_idx = 14
 
 [node name="SunMesh" type="MeshInstance3D" parent="Armature/Skeleton3D/RightHand" index="0"]
 transform = Transform3D(4, 3.91563e-08, -1.77388e-09, -1.90631e-07, 4, 2.50798e-08, -6.6172e-08, 1.66875e-07, 4, -0.247943, 3.25595, 0.0513231)
+visible = false
 mesh = SubResource("CapsuleMesh_hnvds")
 skeleton = NodePath("../..")
+
+[node name="LaserShootParticles" type="GPUParticles3D" parent="Armature/Skeleton3D/RightHand" index="1"]
+transform = Transform3D(1, 1.67638e-09, 6.9173e-09, 6.22153e-09, 1, -2.1063e-09, -1.73413e-08, 3.11443e-09, 1, -0.260298, -1.60549, 0.240876)
+emitting = false
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.6
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_i7h3t")
+draw_pass_1 = SubResource("QuadMesh_ssbiy")
 
 [editable path="Armature/Skeleton3D/Head/XHead"]
