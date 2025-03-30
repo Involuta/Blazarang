@@ -84,3 +84,5 @@ res://enemies/enemy_anims/x_dashgrab.res
 res://enemies/enemy_anims/x_dashgrab_punish.res
 res://enemies/enemy_anims/x_semicircledash.res
 res://glb_inherited_scenes/x_boss_meshes.tscn
+res://cotu/cotu_anims/ax_melee_run1.res
+res://cotu/cotu_anims/ax_melee_run2.res
