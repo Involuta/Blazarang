@@ -410,7 +410,12 @@ func apply_buffs_to_axrang_instance():
 				axrang_instance.buff_damage()
 
 func throw_special_axrang():
-	pass
+	anim_tree.set("parameters/StateMachine/conditions/AxOverhead", true)
 
 func start_axrang_special_timer():
-	pass
+	axrang_special_queued = true
+	await get_tree().create_timer(rang_catch_input_buffer_secs).timeout
+	axrang_special_queued = false
+
+func end_attack():
+	anim_tree.set("parameters/StateMachine/conditions/AxOverhead", false)
