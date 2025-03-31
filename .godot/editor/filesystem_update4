@@ -34,3 +34,4 @@ res://cotu/cotu_anims/x_boss_grab.res
 res://enemies/x_boss.tscn
 res://enemies/enemy_anims/x_lasercombo.res
 res://cotu/cotu_anims/ax_overhead.res
+res://cotu/CotuControl.gd

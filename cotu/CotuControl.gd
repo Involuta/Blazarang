@@ -53,6 +53,9 @@ var homing_script := preload("res://rang/special_homing.gd")
 var current_roserang_special_script
 var roserang_special_queued := false
 
+var axrang_special_queued := false
+
+
 var destabilized := false
 var grabbed := false
 var stunned := false
@@ -229,6 +232,11 @@ func _physics_process(delta):
 	if roserang_special_queued and roserang_instance == null:
 		throw_special_roserang()
 	
+	if Input.is_action_just_pressed("Special") and not axrang_special_queued and axrang_instance != null:
+		start_axrang_special_timer()
+	if axrang_special_queued and axrang_instance == null:
+		throw_special_axrang()
+	
 	if Input.is_action_just_pressed("MeleeAxrang"):
 		anim_tree.set("parameters/StateMachine/conditions/melee_ax", true)
 	else:
@@ -400,3 +408,9 @@ func apply_buffs_to_axrang_instance():
 		match(axrang_buff_list[i]):
 			Globals.BUFFS.DAMAGE:
 				axrang_instance.buff_damage()
+
+func throw_special_axrang():
+	pass
+
+func start_axrang_special_timer():
+	pass
