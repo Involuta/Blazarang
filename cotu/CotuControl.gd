@@ -17,6 +17,8 @@ const WALK_DECEL_SECS := .25
 var walk_input := Vector2.ZERO
 var moving_right := true # Did the player last try to walk right?
 var grounded_speed := 0
+@export var can_walk := true # Exported so it can be set via anim
+@export var can_rotate := true # Exported so it can be set via anim
 var can_dodge := true
 var is_dodging := false
 var dodge_self_damage := 18.0
@@ -96,6 +98,10 @@ func _ready():
 	Globals.XBossGrab = false
 	
 	anim_tree.active = true
+	
+	can_walk = true
+	can_rotate = true
+	can_dodge = true
 
 func on_destabilize():
 	destabilized = true
@@ -206,13 +212,15 @@ func _physics_process(delta):
 	var mvmt_dir = Vector3(walk_input.x, 0, walk_input.y)
 	var oriented_mvmt_dir = (camera_twist_pivot.basis * mvmt_dir).normalized()
 	if oriented_mvmt_dir:
-		velocity.x = lerp(velocity.x, oriented_mvmt_dir.x * grounded_speed, LERP_VAL)
-		velocity.z = lerp(velocity.z, oriented_mvmt_dir.z * grounded_speed, LERP_VAL)
-		if is_on_floor():
-			armature.rotation.y = lerp_angle(armature.rotation.y, atan2(velocity.x, velocity.z), LERP_VAL)
-		else:
-			armature.rotation.y = lerp_angle(armature.rotation.y, atan2(velocity.x, velocity.z), LERP_VAL / 5)
-	else:
+		if can_walk:
+			velocity.x = lerp(velocity.x, oriented_mvmt_dir.x * grounded_speed, LERP_VAL)
+			velocity.z = lerp(velocity.z, oriented_mvmt_dir.z * grounded_speed, LERP_VAL)
+		if can_rotate:
+			if is_on_floor():
+				armature.rotation.y = lerp_angle(armature.rotation.y, atan2(oriented_mvmt_dir.x, oriented_mvmt_dir.z), LERP_VAL)
+			else:
+				armature.rotation.y = lerp_angle(armature.rotation.y, atan2(oriented_mvmt_dir.x, oriented_mvmt_dir.z), LERP_VAL / 5)
+	if not oriented_mvmt_dir or not can_walk:
 		velocity.x = lerp(velocity.x, 0.0, LERP_VAL)
 		velocity.z = lerp(velocity.z, 0.0, LERP_VAL)
 	move_and_slide()

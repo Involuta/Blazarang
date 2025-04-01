@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://icbfj05gq8vk"]
+[gd_scene load_steps=65 format=3 uid="uid://icbfj05gq8vk"]
 
 [ext_resource type="Script" path="res://cotu/CotuControl.gd" id="1_aleek"]
 [ext_resource type="PackedScene" uid="uid://jv0ogh4h31nr" path="res://cotu/shakeable_camera.tscn" id="2_b6h2k"]
@@ -198,6 +198,7 @@ advance_mode = 2
 advance_condition = &"AxOverhead"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7y6fe"]
+xfade_time = 0.18
 switch_mode = 2
 advance_mode = 2
 
@@ -287,6 +288,10 @@ shading_mode = 0
 
 [sub_resource type="SphereMesh" id="SphereMesh_67pio"]
 material = SubResource("StandardMaterial3D_7hn6c")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_kywm8"]
+height = 1.0
+radius = 1.0
 
 [node name="cotuCB" type="CharacterBody3D"]
 collision_layer = 16
@@ -384,6 +389,7 @@ transform = Transform3D(1, 0, 0, 0, -0.0842517, -0.996444, 0, 0.996445, -0.08425
 
 [node name="Axrang" parent="CotuAnims/Armature/AxrangPivot" instance=ExtResource("6_gbgyu")]
 transform = Transform3D(-8.74228e-09, 6.97576e-17, 0.200001, 6.97574e-17, 0.200001, -6.97576e-17, -0.2, 6.97576e-17, -8.74231e-09, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+visible = false
 
 [node name="PlayerHitbox" type="Area3D" parent="CotuAnims/Armature/AxrangPivot/Axrang"]
 process_mode = 4
@@ -397,8 +403,11 @@ damage = 25
 transform = Transform3D(1, -7.49586e-24, 4.7125e-10, -1.30168e-23, 1, 2.26047e-23, 7.93085e-10, -1.81539e-24, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_3abu6")
 
-[node name="SlamFallingParticles" type="GPUParticles3D" parent="CotuAnims/Armature" index="2"]
-transform = Transform3D(0.2, -6.97576e-17, 6.97576e-17, 6.97574e-17, 0.200001, -6.97576e-17, -6.97574e-17, 6.97576e-17, 0.200001, 2.08165e-12, -0.950668, 2.83855)
+[node name="ExplosionPivot" type="Node3D" parent="CotuAnims/Armature" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.950668, 2.83855)
+
+[node name="SlamFallingParticles" type="GPUParticles3D" parent="CotuAnims/Armature/ExplosionPivot"]
+transform = Transform3D(0.2, -6.97576e-17, 6.97576e-17, 6.97574e-17, 0.200001, -6.97576e-17, -6.97574e-17, 6.97576e-17, 0.200001, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 emitting = false
 amount = 16
 lifetime = 1.2
@@ -407,8 +416,8 @@ explosiveness = 0.9
 process_material = SubResource("ParticleProcessMaterial_lvqjx")
 draw_pass_1 = SubResource("QuadMesh_fugu7")
 
-[node name="SlamRisingParticles" type="GPUParticles3D" parent="CotuAnims/Armature" index="3"]
-transform = Transform3D(0.2, -6.97576e-17, 6.97576e-17, 6.97574e-17, 0.200001, -6.97576e-17, -6.97574e-17, 6.97576e-17, 0.200001, 2.08165e-12, -0.950668, 2.83855)
+[node name="SlamRisingParticles" type="GPUParticles3D" parent="CotuAnims/Armature/ExplosionPivot"]
+transform = Transform3D(0.2, -6.97576e-17, 6.97576e-17, 6.97574e-17, 0.200001, -6.97576e-17, -6.97574e-17, 6.97576e-17, 0.200001, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 emitting = false
 amount = 16
 one_shot = true
@@ -416,10 +425,23 @@ explosiveness = 0.75
 process_material = SubResource("ParticleProcessMaterial_hyoxg")
 draw_pass_1 = SubResource("QuadMesh_fugu7")
 
-[node name="SlamSphere" type="MeshInstance3D" parent="CotuAnims/Armature" index="4"]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 2.08165e-12, -0.950668, 2.83855)
+[node name="SlamSphere" type="MeshInstance3D" parent="CotuAnims/Armature/ExplosionPivot"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 transparency = 1.0
 mesh = SubResource("SphereMesh_67pio")
+skeleton = NodePath("../..")
+
+[node name="PlayerHitbox" type="Area3D" parent="CotuAnims/Armature/ExplosionPivot"]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.457913, -0.0568836)
+collision_layer = 256
+collision_mask = 0
+script = ExtResource("7_fuq7l")
+damage = 100
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CotuAnims/Armature/ExplosionPivot/PlayerHitbox"]
+transform = Transform3D(1, -7.49586e-24, 4.7125e-10, -1.30168e-23, 1, 2.26047e-23, 7.93085e-10, -1.81539e-24, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+shape = SubResource("CylinderShape3D_kywm8")
 
 [editable path="DeathParticles"]
 [editable path="CotuAnims"]

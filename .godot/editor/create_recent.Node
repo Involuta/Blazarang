@@ -1,8 +1,8 @@
+Node3D
 MeshInstance3D
 GPUParticles3D
 CollisionShape3D
 Area3D
-Node3D
 AnimationPlayer
 TextureRect
 Node2D
