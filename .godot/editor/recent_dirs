@@ -1,9 +1,10 @@
+res://glb_inherited_scenes
+res://rang
 res://cotu/cotu_anims
 res://levels/gauntlet
 res://levels/x_boss_level
 res://
 res://enemies/enemy_anims
-res://rang
 res://photo_scenes
 res://icon
 res://enemies
@@ -11,7 +12,6 @@ res://skyboxes
 res://levels/x_boss_level/background_nodes
 res://levels/balls_level
 res://enemies/spawners
-res://glb_inherited_scenes
 res://levels
 res://levels/
 res://levels/hub

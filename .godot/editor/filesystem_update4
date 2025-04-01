@@ -36,3 +36,5 @@ res://enemies/enemy_anims/x_lasercombo.res
 res://cotu/cotu_anims/ax_overhead.res
 res://cotu/CotuControl.gd
 res://cotu/cotu_anims/ax_arcslash.res
+res://rang/axrang_arc_slash.tscn
+res://rang/roserang.tscn

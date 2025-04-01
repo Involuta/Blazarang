@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dqdba8l6potq1"]
+[gd_scene load_steps=28 format=3 uid="uid://dqdba8l6potq1"]
 
 [ext_resource type="Script" path="res://rang/roserang.gd" id="1_m7w6u"]
 [ext_resource type="Script" path="res://hitbox.gd" id="2_1xumc"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://c6kwran0tovv1" path="res://audio/sfx/flying_rang.wav" id="8_ml2k7"]
 [ext_resource type="AudioStream" uid="uid://7urbs42hegym" path="res://audio/sfx/ricochet.wav" id="9_iyhsu"]
 [ext_resource type="Shader" path="res://GPUTrail-main/shaders/trail.gdshader" id="12_mcojj"]
+[ext_resource type="Texture2D" uid="uid://crk6pkb7e5rwc" path="res://GPUTrail-main/defaults/texture.tres" id="13_ntbhv"]
 [ext_resource type="Shader" path="res://GPUTrail-main/shaders/trail_draw_pass.gdshader" id="13_vk0if"]
 [ext_resource type="Script" path="res://GPUTrail-main/GPUTrail3D.gd" id="14_gsab4"]
 
@@ -42,31 +43,32 @@ shader_parameter/ColorParameter = Color(2, 2, 1, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_18bd2"]
 shader = ExtResource("12_mcojj")
 
-[sub_resource type="Gradient" id="Gradient_6dfss"]
+[sub_resource type="Gradient" id="Gradient_1xf5o"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 0, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_aaqkt"]
-gradient = SubResource("Gradient_6dfss")
+gradient = SubResource("Gradient_1xf5o")
 
-[sub_resource type="Curve" id="Curve_cuoyk"]
+[sub_resource type="Curve" id="Curve_kf8t5"]
 _data = [Vector2(0, 1), 0.0, -1.18082, 0, 0, Vector2(1, 0.0129609), -0.943115, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_s4uxv"]
 width = 32
-curve = SubResource("Curve_cuoyk")
+curve = SubResource("Curve_kf8t5")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_buwaw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jp5p1"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("13_vk0if")
 shader_parameter/emmission_transform = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
 shader_parameter/flags = 40
+shader_parameter/tex = ExtResource("13_ntbhv")
 shader_parameter/color_ramp = SubResource("GradientTexture1D_aaqkt")
 shader_parameter/curve = SubResource("CurveTexture_s4uxv")
 
 [sub_resource type="QuadMesh" id="QuadMesh_cvf3i"]
-material = SubResource("ShaderMaterial_buwaw")
+material = SubResource("ShaderMaterial_jp5p1")
 
 [node name="Roserang" type="CharacterBody3D"]
 collision_mask = 66
