@@ -20,8 +20,8 @@ radius = 1.4
 radius = 6.0
 
 [sub_resource type="Curve" id="Curve_e31xm"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.00766695), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.498831, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.00766695), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_da84p"]
 curve = SubResource("Curve_e31xm")
