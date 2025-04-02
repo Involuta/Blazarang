@@ -220,6 +220,7 @@ _defaults_have_been_set = true
 
 [node name="LeftFrontTrail" type="GPUParticles3D" parent="."]
 transform = Transform3D(-2.66989e-08, -0.6108, 0.222313, 0.65, -2.84124e-08, -2.26711e-16, 9.71761e-09, 0.222313, 0.6108, -0.78, 2.08165e-12, 0.36)
+visible = false
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
 amount = 30
 lifetime = 30.0
@@ -235,6 +236,7 @@ _defaults_have_been_set = true
 
 [node name="RightFrontTrail" type="GPUParticles3D" parent="."]
 transform = Transform3D(-2.66989e-08, -0.6108, -0.222313, 0.65, -2.84124e-08, -2.26711e-16, -9.71761e-09, -0.222313, 0.6108, 0.78, 2.08165e-12, 0.36)
+visible = false
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
 amount = 30
 lifetime = 30.0
@@ -250,6 +252,7 @@ _defaults_have_been_set = true
 
 [node name="LeftMiddleTrail" type="GPUParticles3D" parent="."]
 transform = Transform3D(-1.8113e-08, -0.414377, 0.279806, 0.5, -2.18557e-08, -3.48787e-16, 1.22307e-08, 0.279806, 0.414377, -1.17, 2.08165e-12, 0.55)
+visible = false
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
 amount = 22
 lifetime = 22.0
@@ -265,6 +268,7 @@ _defaults_have_been_set = true
 
 [node name="RightMiddleTrail" type="GPUParticles3D" parent="."]
 transform = Transform3D(-1.81192e-08, -0.414519, -0.279596, 0.5, -2.18557e-08, -1.74393e-16, -1.22215e-08, -0.279596, 0.414519, 1.17, 2.08165e-12, 0.55)
+visible = false
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
 amount = 22
 lifetime = 22.0
@@ -280,6 +284,7 @@ _defaults_have_been_set = true
 
 [node name="LeftTrail" type="GPUParticles3D" parent="."]
 transform = Transform3D(-1.09278e-08, -0.25, 0.433013, 0.5, -2.18557e-08, -1.74393e-16, 1.89276e-08, 0.433013, 0.25, -1.58, 2.08165e-12, 0.92)
+visible = false
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
 amount = 22
 lifetime = 22.0
@@ -295,6 +300,7 @@ _defaults_have_been_set = true
 
 [node name="RightTrail" type="GPUParticles3D" parent="."]
 transform = Transform3D(-1.09278e-08, -0.25, -0.433013, 0.5, -2.18557e-08, -1.74393e-16, -1.89276e-08, -0.433013, 0.25, 1.58, 2.08165e-12, 0.92)
+visible = false
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
 amount = 22
 lifetime = 22.0

@@ -46,3 +46,4 @@ res://enemies/gauntlet_mobile_gunner.tscn
 res://globals.gd
 res://rang/axrang.gd
 res://rang/roserang.gd
+res://glb_inherited_scenes/arc.tscn

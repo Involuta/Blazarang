@@ -67,6 +67,7 @@ const player_hitbox_data = {
 	"AxrangBaseExplosionDamage" : 10,
 	"AxrangDirectDamageBuff1" : 50,
 	"AxrangExplosionDamageBuff1" : 20,
+	"AxrangBaseOverheadDamage" : 100,
 }
 
 # health, hit score, kill score

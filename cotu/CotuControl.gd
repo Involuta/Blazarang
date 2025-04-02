@@ -82,6 +82,8 @@ var axrang_instance = null
 @onready var armature := $CotuAnims/Armature
 @onready var anim_tree := $AnimationTree
 @onready var hurtbox := $Hurtbox
+@onready var axrang_melee_hitbox := $CotuAnims/Armature/AxrangPivot/Axrang/PlayerHitbox
+@onready var axrang_overhead_explosion_hitbox := $CotuAnims/Armature/ExplosionPivot/PlayerHitbox
 
 @onready var root := $/root/ViewControl
 var level : Node3D
