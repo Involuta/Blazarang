@@ -38,7 +38,7 @@ var spawn_cooldown_active := false
 	"POPPER" : 1.0,
 }
 
-@export var move_speed := 20.0
+@export var roller_move_speed := 20.0
 @export var move_dir_angle_arc := 20.0
 @export var bounce_height := 10.0
 var high_target_trajectory_lateral_vel := 0.0
@@ -49,7 +49,7 @@ var high_target_trajectory_y_vel := 0.0
 @export var skull_follow_speed := 5.0
 @export var skull_explode_dist := 5.0
 
-@export var heavy_launch_height := 40.0
+@export var heavy_launch_height := 20.0
 @export var arena_floor_y := 10.0
 
 @export var deathball_move_speed := 15.0
@@ -90,7 +90,7 @@ func update_high_target_trajectory_vels():
 	high_target_trajectory_y_vel = sqrt(2 * gravity * heavy_launch_height + global_position.y)
 	var total_flight_time : float = 2 * high_target_trajectory_y_vel / gravity
 	var vec_to_target := target.global_position - global_position
-	var lateral_dist_to_target := 1.42 * Vector2(vec_to_target.x, vec_to_target.z).length()
+	var lateral_dist_to_target := 1 * Vector2(vec_to_target.x, vec_to_target.z).length()
 	high_target_trajectory_lateral_vel = lateral_dist_to_target / total_flight_time
 
 func lateral_look_at_target(turn_speed):
@@ -111,7 +111,7 @@ func vert_look_at_target(turn_speed):
 
 func vert_look_high_bounce_trajectory(turn_speed):
 	# global_rotation "upward" = tan^-1(y_vel/x_vel)
-	var target_global_rotation_x = atan2(bounce_height, .25 * move_speed)
+	var target_global_rotation_x = atan2(bounce_height, .25 * roller_move_speed)
 	mesh.global_rotation.x = move_toward(mesh.global_rotation.x, target_global_rotation_x, turn_speed)
 	#mesh.global_rotation.x = lerp_angle(mesh.global_rotation.x, target_global_rotation_x, turn_speed)
 
@@ -175,7 +175,7 @@ func spawn_roller():
 	await b.tree_entered
 	b.global_position = global_position
 	b.global_rotation = global_rotation
-	b.linear_velocity = move_speed * -b.get_global_transform().basis.z
+	b.linear_velocity = roller_move_speed * -b.get_global_transform().basis.z
 
 func spawn_bouncer():
 	vert_aim_type = HIGH_BOUNCE_TRAJECTORY
@@ -185,7 +185,7 @@ func spawn_bouncer():
 	await b.tree_entered
 	b.global_position = global_position
 	b.global_rotation = global_rotation
-	b.linear_velocity = .25 * move_speed * -b.get_global_transform().basis.z
+	b.linear_velocity = .25 * roller_move_speed * -b.get_global_transform().basis.z
 	b.linear_velocity.y = bounce_height
 
 func spawn_giant_roller():
@@ -196,7 +196,7 @@ func spawn_giant_roller():
 	await b.tree_entered
 	b.global_position = global_position
 	b.global_rotation = global_rotation
-	b.linear_velocity = move_speed * -b.get_global_transform().basis.z
+	b.linear_velocity = roller_move_speed * -b.get_global_transform().basis.z
 
 func spawn_giant_bouncer():
 	vert_aim_type = HIGH_BOUNCE_TRAJECTORY
@@ -206,7 +206,7 @@ func spawn_giant_bouncer():
 	await b.tree_entered
 	b.global_position = global_position
 	b.global_rotation = global_rotation
-	b.linear_velocity = .25 * move_speed * -b.get_global_transform().basis.z
+	b.linear_velocity = .25 * roller_move_speed * -b.get_global_transform().basis.z
 	b.linear_velocity.y = bounce_height
 
 func spawn_swarm():
@@ -219,7 +219,7 @@ func spawn_swarm():
 		b.global_position = global_position
 		var move_dir_half_arc := deg_to_rad(move_dir_angle_arc) / 2
 		b.global_rotation = global_rotation + rng.randf_range(-move_dir_half_arc, move_dir_half_arc) * Vector3.UP
-		b.linear_velocity = move_speed * -b.get_global_transform().basis.z
+		b.linear_velocity = roller_move_speed * -b.get_global_transform().basis.z
 		b.linear_velocity.y = rng.randfn()
 
 func spawn_skull():
@@ -230,7 +230,7 @@ func spawn_skull():
 	await b.tree_entered
 	b.global_position = global_position
 	b.global_rotation = global_rotation
-	b.linear_velocity = move_speed * -b.get_global_transform().basis.z
+	b.linear_velocity = roller_move_speed * -b.get_global_transform().basis.z
 	b.follow_speed = skull_follow_speed
 	b.explode_dist = skull_explode_dist
 
@@ -264,4 +264,4 @@ func spawn_popper():
 	await b.tree_entered
 	b.global_position = global_position
 	b.global_rotation = global_rotation
-	b.linear_velocity = move_speed * -b.get_global_transform().basis.z
+	b.linear_velocity = roller_move_speed * -b.get_global_transform().basis.z

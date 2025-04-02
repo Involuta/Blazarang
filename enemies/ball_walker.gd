@@ -12,7 +12,7 @@ var behav_state = FOLLOW
 @export var aggro_distance := -1
 
 @export var follow_speed := 5.0
-@export var target_distance := 20.0
+@export var target_distance := 40.0
 
 var aiming_at_target := true
 @export var ball_speed := 20.0
@@ -76,8 +76,7 @@ func wait():
 
 func _on_navigation_agent_3d_target_reached():
 	if behav_state != ATTACK:
-		print("bling bling!")
-		#start_attack()
+		start_attack()
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	if behav_state == FOLLOW:
