@@ -41,3 +41,5 @@ res://rang/roserang.tscn
 res://enemies/enemy_bullet.tscn
 res://enemies/bullet.gd
 res://rang/axrang_arc_slash.gd
+res://glb_inherited_scenes/mobile_gunner.tscn
+res://enemies/gauntlet_mobile_gunner.tscn

@@ -63,6 +63,7 @@ var axrang_specials = [
 	"AxArcSlash"
 ]
 var current_axrang_special := "AxOverhead"
+@export var arc_slash_projectile_speed := 20.0
 
 var destabilized := false
 var grabbed := false
@@ -439,5 +440,8 @@ func end_attack():
 func shoot_arc_projectile():
 	var arc_file := load("res://rang/axrang_arc_slash.tscn")
 	var arc_inst = arc_file.instantiate()
-	arc_inst.velocity = armature.transform.basis.z
-	arc_inst.rotation = armature.transform.rotation.y
+	level.add_child.call_deferred(arc_inst)
+	await arc_inst.tree_entered
+	arc_inst.global_position = global_position
+	arc_inst.velocity = arc_slash_projectile_speed * armature.transform.basis.z
+	arc_inst.rotation.y = PI + armature.rotation.y

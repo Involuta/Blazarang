@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://b2vpcjrj8fxwk"]
+[gd_scene load_steps=21 format=3 uid="uid://b2vpcjrj8fxwk"]
 
 [ext_resource type="Script" path="res://rang/axrang_arc_slash.gd" id="1_6i0b4"]
 [ext_resource type="PackedScene" uid="uid://b7dblthtlyn0r" path="res://glb_inherited_scenes/arc.tscn" id="1_ko5fr"]
 [ext_resource type="Shader" path="res://GPUTrail-main/shaders/trail.gdshader" id="2_k1lcd"]
 [ext_resource type="Texture2D" uid="uid://crk6pkb7e5rwc" path="res://GPUTrail-main/defaults/texture.tres" id="4_3fayh"]
 [ext_resource type="Script" path="res://GPUTrail-main/GPUTrail3D.gd" id="5_hpq5l"]
+[ext_resource type="Script" path="res://hitbox.gd" id="6_y5ulk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xhio8"]
 shader = ExtResource("2_k1lcd")
@@ -146,8 +147,8 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 0.917379, 1, 1, 1, 0, 1, 1)
 gradient = SubResource("Gradient_6dfss")
 
 [sub_resource type="Curve" id="Curve_cuoyk"]
-_data = [Vector2(0.000911325, 0.997627), 0.0, -3.25024, 0, 0, Vector2(0.33, 0.67), 0.0, 0.0, 0, 0, Vector2(0.67, 0.33), 0.0, 0.0, 0, 0, Vector2(1, 0.00766695), -0.600098, 0.0, 0, 0]
-point_count = 4
+_data = [Vector2(0, 0.976451), 0.0, -1.49877, 0, 0, Vector2(1, 0.00766695), -0.600098, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_40aiw"]
 width = 32
@@ -192,8 +193,11 @@ shading_mode = 0
 material = SubResource("StandardMaterial3D_1n5bl")
 size = Vector2(0.25, 0.25)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_3rgu6"]
+size = Vector3(4, 1, 1)
+
 [node name="AxrangArcSlash" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 script = ExtResource("1_6i0b4")
 
 [node name="Arc" parent="." instance=ExtResource("1_ko5fr")]
@@ -201,6 +205,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.24191)
 
 [node name="FrontTrail" type="GPUParticles3D" parent="."]
 transform = Transform3D(-3.71547e-08, -0.85, 2.96469e-16, 0.85, -3.71547e-08, -2.96469e-16, 2.96469e-16, 2.96469e-16, 0.85, 2.08165e-12, 2.08165e-12, 0.19)
+custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
+amount = 36
+lifetime = 36.0
+explosiveness = 1.0
+fixed_fps = 0
+process_material = SubResource("ShaderMaterial_xhio8")
+draw_pass_1 = SubResource("QuadMesh_8g0kd")
+script = ExtResource("5_hpq5l")
+length = 36
+color_ramp = SubResource("GradientTexture1D_04mix")
+curve = SubResource("CurveTexture_40aiw")
+_defaults_have_been_set = true
+
+[node name="LeftFrontTrail" type="GPUParticles3D" parent="."]
+transform = Transform3D(-2.66989e-08, -0.6108, 0.222313, 0.65, -2.84124e-08, -2.26711e-16, 9.71761e-09, 0.222313, 0.6108, -0.78, 2.08165e-12, 0.36)
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
 amount = 30
 lifetime = 30.0
@@ -214,32 +233,17 @@ color_ramp = SubResource("GradientTexture1D_04mix")
 curve = SubResource("CurveTexture_40aiw")
 _defaults_have_been_set = true
 
-[node name="LeftFrontTrail" type="GPUParticles3D" parent="."]
-transform = Transform3D(-2.66989e-08, -0.6108, 0.222313, 0.65, -2.84124e-08, -2.26711e-16, 9.71761e-09, 0.222313, 0.6108, -0.78, 2.08165e-12, 0.36)
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-amount = 24
-lifetime = 24.0
-explosiveness = 1.0
-fixed_fps = 0
-process_material = SubResource("ShaderMaterial_xhio8")
-draw_pass_1 = SubResource("QuadMesh_8g0kd")
-script = ExtResource("5_hpq5l")
-length = 24
-color_ramp = SubResource("GradientTexture1D_04mix")
-curve = SubResource("CurveTexture_40aiw")
-_defaults_have_been_set = true
-
 [node name="RightFrontTrail" type="GPUParticles3D" parent="."]
 transform = Transform3D(-2.66989e-08, -0.6108, -0.222313, 0.65, -2.84124e-08, -2.26711e-16, -9.71761e-09, -0.222313, 0.6108, 0.78, 2.08165e-12, 0.36)
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-amount = 24
-lifetime = 24.0
+amount = 30
+lifetime = 30.0
 explosiveness = 1.0
 fixed_fps = 0
 process_material = SubResource("ShaderMaterial_xhio8")
 draw_pass_1 = SubResource("QuadMesh_8g0kd")
 script = ExtResource("5_hpq5l")
-length = 24
+length = 30
 color_ramp = SubResource("GradientTexture1D_04mix")
 curve = SubResource("CurveTexture_40aiw")
 _defaults_have_been_set = true
@@ -247,14 +251,14 @@ _defaults_have_been_set = true
 [node name="LeftMiddleTrail" type="GPUParticles3D" parent="."]
 transform = Transform3D(-1.8113e-08, -0.414377, 0.279806, 0.5, -2.18557e-08, -3.48787e-16, 1.22307e-08, 0.279806, 0.414377, -1.17, 2.08165e-12, 0.55)
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-amount = 16
-lifetime = 16.0
+amount = 22
+lifetime = 22.0
 explosiveness = 1.0
 fixed_fps = 0
 process_material = SubResource("ShaderMaterial_xhio8")
 draw_pass_1 = SubResource("QuadMesh_8g0kd")
 script = ExtResource("5_hpq5l")
-length = 16
+length = 22
 color_ramp = SubResource("GradientTexture1D_04mix")
 curve = SubResource("CurveTexture_40aiw")
 _defaults_have_been_set = true
@@ -262,14 +266,14 @@ _defaults_have_been_set = true
 [node name="RightMiddleTrail" type="GPUParticles3D" parent="."]
 transform = Transform3D(-1.81192e-08, -0.414519, -0.279596, 0.5, -2.18557e-08, -1.74393e-16, -1.22215e-08, -0.279596, 0.414519, 1.17, 2.08165e-12, 0.55)
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-amount = 16
-lifetime = 16.0
+amount = 22
+lifetime = 22.0
 explosiveness = 1.0
 fixed_fps = 0
 process_material = SubResource("ShaderMaterial_xhio8")
 draw_pass_1 = SubResource("QuadMesh_8g0kd")
 script = ExtResource("5_hpq5l")
-length = 16
+length = 22
 color_ramp = SubResource("GradientTexture1D_04mix")
 curve = SubResource("CurveTexture_40aiw")
 _defaults_have_been_set = true
@@ -277,14 +281,14 @@ _defaults_have_been_set = true
 [node name="LeftTrail" type="GPUParticles3D" parent="."]
 transform = Transform3D(-1.09278e-08, -0.25, 0.433013, 0.5, -2.18557e-08, -1.74393e-16, 1.89276e-08, 0.433013, 0.25, -1.58, 2.08165e-12, 0.92)
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-amount = 6
-lifetime = 6.0
+amount = 22
+lifetime = 22.0
 explosiveness = 1.0
 fixed_fps = 0
 process_material = SubResource("ShaderMaterial_xhio8")
 draw_pass_1 = SubResource("QuadMesh_8g0kd")
 script = ExtResource("5_hpq5l")
-length = 6
+length = 22
 color_ramp = SubResource("GradientTexture1D_04mix")
 curve = SubResource("CurveTexture_40aiw")
 _defaults_have_been_set = true
@@ -292,14 +296,14 @@ _defaults_have_been_set = true
 [node name="RightTrail" type="GPUParticles3D" parent="."]
 transform = Transform3D(-1.09278e-08, -0.25, -0.433013, 0.5, -2.18557e-08, -1.74393e-16, -1.89276e-08, -0.433013, 0.25, 1.58, 2.08165e-12, 0.92)
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-amount = 6
-lifetime = 6.0
+amount = 22
+lifetime = 22.0
 explosiveness = 1.0
 fixed_fps = 0
 process_material = SubResource("ShaderMaterial_xhio8")
 draw_pass_1 = SubResource("QuadMesh_8g0kd")
 script = ExtResource("5_hpq5l")
-length = 6
+length = 22
 color_ramp = SubResource("GradientTexture1D_04mix")
 curve = SubResource("CurveTexture_40aiw")
 _defaults_have_been_set = true
@@ -309,3 +313,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 0.5
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_nmsp5")
 draw_pass_1 = SubResource("QuadMesh_omlfg")
+
+[node name="PlayerHitbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.0269435, 0.504379)
+collision_layer = 256
+collision_mask = 0
+script = ExtResource("6_y5ulk")
+damage = 50
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerHitbox"]
+transform = Transform3D(1, -7.49586e-24, 4.7125e-10, -1.30168e-23, 1, 2.26047e-23, 7.93085e-10, -1.81539e-24, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+shape = SubResource("BoxShape3D_3rgu6")
