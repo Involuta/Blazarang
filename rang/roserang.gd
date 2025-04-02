@@ -61,7 +61,7 @@ func _ready():
 	cotu = root.find_child("cotuCB")
 	target = level.find_child("Icon")
 	
-	hitbox.damage = Globals.roserang_base_damage
+	hitbox.damage = Globals.player_hitbox_data.RoserangBaseDamage
 	
 	flying_sfx.play()
 	target.roserang_queued = false
@@ -140,7 +140,7 @@ func _physics_process(delta):
 
 func buff_damage():
 	current_loop_angle = 0
-	hitbox.damage = 20
+	hitbox.damage = Globals.player_hitbox_data.RoserangDamageBuff1
 
 func switch_to_rose():
 	target.roserang_queued = false

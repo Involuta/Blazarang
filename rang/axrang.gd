@@ -34,8 +34,8 @@ func _ready():
 	cotu = root.find_child("cotuCB")
 	target = level.find_child("Icon")
 	
-	hitbox.damage = Globals.axrang_base_damage
-	explosion_hitbox.damage = Globals.axrang_explosion_damage
+	hitbox.damage = Globals.player_hitbox_data.AxrangBaseDirectDamage
+	explosion_hitbox.damage = Globals.player_hitbox_data.AxrangBaseExplosionDamage
 	
 	global_position = target.global_position
 	rotation.y = cotu.look_angle + PI
@@ -91,5 +91,5 @@ func is_returning():
 	return mvmt_state == RETURN
 
 func buff_damage():
-	hitbox.damage = 50
-	explosion_hitbox.damage = 20
+	hitbox.damage = Globals.player_hitbox_data.AxrangDirectDamageBuff1
+	explosion_hitbox.damage = Globals.player_hitbox_data.AxrangExplosionDamageBuff1

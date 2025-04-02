@@ -43,3 +43,6 @@ res://enemies/bullet.gd
 res://rang/axrang_arc_slash.gd
 res://glb_inherited_scenes/mobile_gunner.tscn
 res://enemies/gauntlet_mobile_gunner.tscn
+res://globals.gd
+res://rang/axrang.gd
+res://rang/roserang.gd

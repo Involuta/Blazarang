@@ -60,9 +60,14 @@ var cotu_base_regen_rate := .25
 var cotu_fast_regen_rate := .5
 var cotu_destabilize_invincibility_time := 2.0
 
-var roserang_base_damage := 10
-var axrang_base_damage := 25
-var axrang_explosion_damage := 10
+const player_hitbox_data = {
+	"RoserangBaseDamage" : 10,
+	"RoserangDamageBuff1" : 20,
+	"AxrangBaseDirectDamage" : 25,
+	"AxrangBaseExplosionDamage" : 10,
+	"AxrangDirectDamageBuff1" : 50,
+	"AxrangExplosionDamageBuff1" : 20,
+}
 
 # health, hit score, kill score
 # Each key corresponds to an enemy's "entity name"
