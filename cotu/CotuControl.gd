@@ -14,6 +14,8 @@ const MAX_JUMP_CHARGE_SECS := .5
 # Seconds it takes for Cotu to decelerate to 0 speed when not walking
 const WALK_DECEL_SECS := .25
 
+var anim_tree_param_path_base := "parameters/StateMachine/conditions/"
+
 var walk_input := Vector2.ZERO
 var moving_right := true # Did the player last try to walk right?
 var grounded_speed := 0
@@ -56,7 +58,11 @@ var current_roserang_special_script
 var roserang_special_queued := false
 
 var axrang_special_queued := false
-
+var axrang_specials = [
+	"AxOverhead",
+	"AxArcSlash"
+]
+var current_axrang_special := "AxOverhead"
 
 var destabilized := false
 var grabbed := false
@@ -91,6 +97,7 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	current_roserang_special_script = rapidorbit_script
+	current_axrang_special = "AxArcSlash"
 	
 	Globals.destabilize.connect(on_destabilize)
 	Globals.stabilize.connect(on_stabilize)
@@ -121,7 +128,7 @@ func release_from_grab():
 	grabbed = false
 	armature.visible = true
 	Globals.XBossGrab = false
-	anim_tree.set("parameters/StateMachine/conditions/XBossGrab", false)
+	anim_tree.set(anim_tree_param_path_base + "XBossGrab", false)
 
 func stop_mvmt():
 	velocity = Vector3.ZERO
@@ -138,7 +145,7 @@ func start_grab_anim(hitbox_name):
 	match(hitbox_name):
 		"XBossGrab":
 			Globals.XBossGrab = true
-			anim_tree.set("parameters/StateMachine/conditions/XBossGrab", true)
+			anim_tree.set(anim_tree_param_path_base + "XBossGrab", true)
 		_:
 			print("Error in CotuControl: hitbox name from CotuHurtbox not found")
 
@@ -193,10 +200,10 @@ func _physics_process(delta):
 	
 	# Dodge logic
 	if Input.is_action_just_pressed("StepDodge") and can_dodge:
-		anim_tree.set("parameters/StateMachine/conditions/just_dodged", true)
+		anim_tree.set(anim_tree_param_path_base + "just_dodged", true)
 		step_dodge()
 	else:
-		anim_tree.set("parameters/StateMachine/conditions/just_dodged", false)
+		anim_tree.set(anim_tree_param_path_base + "just_dodged", false)
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
 		velocity.y = JUMP_SPEED
 		
@@ -246,9 +253,9 @@ func _physics_process(delta):
 		throw_special_axrang()
 	
 	if Input.is_action_just_pressed("MeleeAxrang"):
-		anim_tree.set("parameters/StateMachine/conditions/melee_ax", true)
+		anim_tree.set(anim_tree_param_path_base + "melee_ax", true)
 	else:
-		anim_tree.set("parameters/StateMachine/conditions/melee_ax", false)
+		anim_tree.set(anim_tree_param_path_base + "melee_ax", false)
 	
 	if Input.is_action_just_pressed("ThrowAxrang"):
 		if axrang_instance == null and can_throw_axrang:
@@ -272,12 +279,12 @@ func _physics_process(delta):
 			start_roserang_instant_rethrow_timer()
 	if roserang_throw_queued and roserang_instance == null and can_throw_roserang:
 		# Instant rethrow
-		anim_tree.set("parameters/StateMachine/conditions/just_instant_rethrew", true)
+		anim_tree.set(anim_tree_param_path_base + "just_instant_rethrew", true)
 		roserang_throw_queued = false
 		throw_roserang()
 		Globals.award_score(Globals.INSTANT_RETHROW_SCORE)
 	else:
-		anim_tree.set("parameters/StateMachine/conditions/just_instant_rethrew", false)
+		anim_tree.set(anim_tree_param_path_base + "just_instant_rethrew", false)
 	# Clear roserang buffs (and make target/Icon follow Cotu again) if an instant rethrow didn't just occur (i.e. if roserang_instance is still null after an instant rethrow would have reassigned it)
 	if roserang_instance == null:
 		target.start_following_cotu()
@@ -286,9 +293,9 @@ func _physics_process(delta):
 			ui.clear_roserang_buffs()
 	
 	if Input.is_action_just_pressed("UseItem"):
-		anim_tree.set("parameters/StateMachine/conditions/use_item", true)
+		anim_tree.set(anim_tree_param_path_base + "use_item", true)
 	else:
-		anim_tree.set("parameters/StateMachine/conditions/use_item", false)
+		anim_tree.set(anim_tree_param_path_base + "use_item", false)
 	
 	# Animation tree parameters
 	var vel2D = Vector2(velocity.x, velocity.z)
@@ -418,7 +425,7 @@ func apply_buffs_to_axrang_instance():
 				axrang_instance.buff_damage()
 
 func throw_special_axrang():
-	anim_tree.set("parameters/StateMachine/conditions/AxOverhead", true)
+	anim_tree.set(anim_tree_param_path_base + current_axrang_special, true)
 
 func start_axrang_special_timer():
 	axrang_special_queued = true
@@ -426,4 +433,11 @@ func start_axrang_special_timer():
 	axrang_special_queued = false
 
 func end_attack():
-	anim_tree.set("parameters/StateMachine/conditions/AxOverhead", false)
+	anim_tree.set(anim_tree_param_path_base + "AxOverhead", false)
+	anim_tree.set(anim_tree_param_path_base + "AxArcSlash", false)
+
+func shoot_arc_projectile():
+	var arc_file := load("res://rang/axrang_arc_slash.tscn")
+	var arc_inst = arc_file.instantiate()
+	arc_inst.velocity = armature.transform.basis.z
+	arc_inst.rotation = armature.transform.rotation.y

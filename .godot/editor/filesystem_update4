@@ -38,3 +38,6 @@ res://cotu/CotuControl.gd
 res://cotu/cotu_anims/ax_arcslash.res
 res://rang/axrang_arc_slash.tscn
 res://rang/roserang.tscn
+res://enemies/enemy_bullet.tscn
+res://enemies/bullet.gd
+res://rang/axrang_arc_slash.gd

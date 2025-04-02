@@ -16,11 +16,11 @@ func _ready():
 	await get_tree().create_timer(invincibility_secs).timeout
 	invincible = false
 	await get_tree().create_timer(max_lifetime_secs).timeout
-	if self and not destroyed:
+	if not destroyed and self:
 		destroy_self()
 
 func _physics_process(delta):
-	global_position += velocity*delta
+	global_position += velocity * delta
 
 func destroy_self():
 	destroyed = true
