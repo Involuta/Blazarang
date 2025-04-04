@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://cy4cd0vab7e7s"]
+[gd_scene load_steps=13 format=3 uid="uid://cy4cd0vab7e7s"]
 
 [ext_resource type="Script" path="res://enemies/ball_walker.gd" id="1_evdbk"]
 [ext_resource type="Script" path="res://enemies/spawners/ball_spawner.gd" id="2_7lttv"]
+[ext_resource type="PackedScene" uid="uid://bereixsbnqp0e" path="res://enemies/ball_walker_mesh_leg_gun.tscn" id="4_25puj"]
 [ext_resource type="PackedScene" uid="uid://el0vhxctxsiu" path="res://glb_inherited_scenes/bowl_mesh.tscn" id="5_7qoeb"]
 [ext_resource type="PackedScene" uid="uid://bmtn0cwrlroe4" path="res://enemies/ball_walker_mesh_leg_stand.tscn" id="5_rin41"]
 
@@ -18,7 +19,7 @@ resource_name = "squat"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("BallWalkerMeshLegStand/DomeMesh/Shin/Knee:rotation")
+tracks/0/path = NodePath("LeftLegStand/DomeMesh/Shin/Knee:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -30,7 +31,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("BallWalkerMeshLegStand2/DomeMesh/Shin/Knee:rotation")
+tracks/1/path = NodePath("RightLegStand/DomeMesh/Shin/Knee:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -57,7 +58,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("BallWalkerMeshLegStand2/DomeMesh/Shin/Knee:rotation")
+tracks/0/path = NodePath("RightLegStand/DomeMesh/Shin/Knee:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -69,7 +70,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("BallWalkerMeshLegStand/DomeMesh/Shin/Knee:rotation")
+tracks/1/path = NodePath("LeftLegStand/DomeMesh/Shin/Knee:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -90,33 +91,69 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector3(2.08165e-12, 0.167867, 2.08165e-12)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RightLegGun:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(8.6901, 3.48645, 2.08165e-12)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RightLegGun/HipJoint/Thigh/Knee:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.872665, -1.5708, -1.5708)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RightLegGun/HipJoint:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.13424, -1.5708, -1.5708)]
+}
 
 [sub_resource type="Animation" id="Animation_ytr22"]
 resource_name = "launch"
-length = 0.50001
+length = 1.00001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("BallWalkerMeshLegStand/DomeMesh/Shin/Knee:rotation")
+tracks/0/path = NodePath("LeftLegStand/DomeMesh/Shin/Knee:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(-0.366519, 1.5708, 1.5708), Vector3(1.0472, 1.5708, 1.5708)]
+"values": [Vector3(-0.366519, 1.5708, 1.5708), Vector3(2.0944, 1.5708, 1.5708)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("BallWalkerMeshLegStand2/DomeMesh/Shin/Knee:rotation")
+tracks/1/path = NodePath("RightLegStand/DomeMesh/Shin/Knee:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(-0.366519, -1.5708, -1.5708), Vector3(1.0472, -1.5708, -1.5708)]
+"values": [Vector3(-0.366519, -1.5708, -1.5708), Vector3(2.0944, -1.5708, -1.5708)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -125,16 +162,104 @@ tracks/2/path = NodePath("BallSpawner:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
+"times": PackedFloat32Array(0, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": []
+"values": [Vector3(2.08165e-12, 0.240518, 2.08165e-12), Vector3(2.08165e-12, 14.4088, 2.08165e-12), Vector3(2.08165e-12, 16.6999, 2.08165e-12)]
+}
+
+[sub_resource type="Animation" id="Animation_r3iv3"]
+resource_name = "shoot_from_foot"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeftLegStand/DomeMesh/Shin/Knee:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.0472, 1.5708, 1.5708), Vector3(2.35619, 1.5708, 1.5708)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightLegStand/DomeMesh/Shin/Knee:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.0472, -1.5708, -1.5708), Vector3(-0.366519, -1.5708, -1.5708)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BallSpawner:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.4, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 3.97854, 2.08165e-12), Vector3(0.799186, 6.28767, 2.08165e-12), Vector3(1.59837, 7.87332, 2.08165e-12), Vector3(3.26373, 10.3965, 2.08165e-12), Vector3(4.9291, 12.3127, 2.08165e-12), Vector3(8.25982, 15.3132, 2.08165e-12)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BallSpawner:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16), Vector3(3.48787e-16, 3.48787e-16, -1.5708)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RightLegGun/HipJoint:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.06325, -1.5708, -1.5708), Vector3(1.13424, -1.5708, -1.5708)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RightLegGun/HipJoint/Thigh/Knee:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.0472, 1.5708, 1.5708), Vector3(2.0944, 1.5708, 1.5708)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("RightLegGun:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-7.52808, -2.6632, 2.08165e-12), Vector3(-4.28445, 3.17562, 2.08165e-12), Vector3(0.475069, 3.25333, 2.08165e-12), Vector3(4.28659, 3.33104, 2.08165e-12), Vector3(6.91038, 3.40874, 2.08165e-12), Vector3(7.98112, 3.4476, 2.08165e-12), Vector3(8.6901, 3.48645, 2.08165e-12)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dmtk3"]
 _data = {
 "RESET": SubResource("Animation_bwgsr"),
 "launch": SubResource("Animation_ytr22"),
+"shoot_from_foot": SubResource("Animation_r3iv3"),
 "squat": SubResource("Animation_kansg")
 }
 
@@ -158,7 +283,7 @@ mesh = SubResource("CapsuleMesh_vj2c2")
 skeleton = NodePath("")
 
 [node name="BallSpawner" type="Node3D" parent="."]
-transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 0.167867, 2.08165e-12)
+transform = Transform3D(-4.37114e-08, 1, 3.48787e-16, -1, -4.37114e-08, -3.48787e-16, -3.48787e-16, -3.48787e-16, 1, 2.08165e-12, 0.167867, 2.08165e-12)
 script = ExtResource("2_7lttv")
 attack_turn_speed = 5.0
 spawn_cooldown_secs = 0.5
@@ -182,31 +307,45 @@ transform = Transform3D(0.625, 7.60327e-32, 0, -7.60327e-32, 0.625, 0, 0, 0, 0.6
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 
-[node name="BallWalkerMeshLegStand" parent="." instance=ExtResource("5_rin41")]
+[node name="LeftLegStand" parent="." instance=ExtResource("5_rin41")]
 transform = Transform3D(5, -1.74393e-15, 1.74393e-15, 1.74393e-15, 5, -1.74393e-15, -1.74393e-15, 1.74393e-15, 5, 10, -2, 2.08165e-12)
 
-[node name="DomeMesh" parent="BallWalkerMeshLegStand" index="0"]
+[node name="DomeMesh" parent="LeftLegStand" index="0"]
 transform = Transform3D(0.1, -1.21652e-32, -5.19733e-25, -5.19733e-25, 0.1, 5.19733e-25, 0, 0, 0.1, 0, 0, 0)
 
-[node name="Knee" parent="BallWalkerMeshLegStand/DomeMesh/Shin" index="0"]
+[node name="Knee" parent="LeftLegStand/DomeMesh/Shin" index="0"]
 transform = Transform3D(-0.358368, 5.93761e-08, 0.93358, 0.933581, -4.08081e-08, 0.358368, 5.93762e-08, 1, -4.08081e-08, 0, 0.503055, -2.08165e-13)
 
-[node name="BallWalkerMeshLegStand2" parent="." instance=ExtResource("5_rin41")]
+[node name="RightLegStand" parent="." instance=ExtResource("5_rin41")]
 transform = Transform3D(5, -1.74393e-15, 1.74393e-15, 1.74393e-15, 5, -1.74393e-15, -1.74393e-15, 1.74393e-15, 5, -10, -2, 2.08165e-12)
+visible = false
 
-[node name="DomeMesh" parent="BallWalkerMeshLegStand2" index="0"]
+[node name="DomeMesh" parent="RightLegStand" index="0"]
 transform = Transform3D(0.1, -1.21652e-32, -5.19733e-25, -5.19733e-25, 0.1, 5.19733e-25, 0, 0, 0.1, 0, 0, 0)
 
-[node name="Knee" parent="BallWalkerMeshLegStand2/DomeMesh/Shin" index="0"]
-transform = Transform3D(-0.358368, -5.93761e-08, -0.933581, -0.933581, -4.08081e-08, 0.358368, -5.93762e-08, 1, -4.08081e-08, 0, 0.503055, -2.08165e-13)
+[node name="Knee" parent="RightLegStand/DomeMesh/Shin" index="0"]
+transform = Transform3D(-0.358368, -5.93761e-08, -0.93358, -0.93358, -4.08081e-08, 0.358368, -5.93761e-08, 1, -4.08081e-08, 0, 0.503055, -2.08165e-13)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_dmtk3")
 }
 
+[node name="RightLegGun" parent="." instance=ExtResource("4_25puj")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 8.6901, 3.48645, 2.08165e-12)
+
+[node name="HipJoint" parent="RightLegGun" index="0"]
+transform = Transform3D(0.906212, -4.09961e-09, -0.422824, -0.422824, -1.84822e-08, -0.906212, -4.09961e-09, 1, -1.84822e-08, 0, 2.17465, 6.57723e-15)
+
+[node name="Knee" parent="RightLegGun/HipJoint/Thigh" index="0"]
+transform = Transform3D(0.766045, -1.02265e-08, -0.642788, -0.642788, -2.80971e-08, -0.766045, -1.02265e-08, 1, -2.80971e-08, -4.47035e-08, -0.506072, -2.27374e-13)
+
+[node name="Shin" parent="RightLegGun/HipJoint/Thigh/Knee" index="0"]
+transform = Transform3D(1, 5.67484e-16, -1.98523e-23, 6.61744e-24, -4.37114e-08, 1, -4.44089e-16, -1, -4.37114e-08, 0, 2.19894e-08, 0.503055)
+
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
 
-[editable path="BallWalkerMeshLegStand"]
-[editable path="BallWalkerMeshLegStand2"]
+[editable path="LeftLegStand"]
+[editable path="RightLegStand"]
+[editable path="RightLegGun"]
