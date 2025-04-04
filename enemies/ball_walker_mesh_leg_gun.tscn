@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bereixsbnqp0e"]
+[gd_scene load_steps=5 format=3 uid="uid://bereixsbnqp0e"]
 
 [ext_resource type="PackedScene" uid="uid://c613hspm13igo" path="res://glb_inherited_scenes/dome_mesh.tscn" id="1_kgpfi"]
 
@@ -11,6 +11,10 @@ height = 0.3
 top_radius = 0.12
 bottom_radius = 0.12
 height = 0.69
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4pufk"]
+height = 1.0
+radius = 5.6
 
 [node name="BallWalkerMeshLegGun" type="Node3D"]
 
@@ -35,3 +39,11 @@ skeleton = NodePath("DomeMesh")
 
 [node name="DomeMesh" parent="HipJoint/Thigh/Knee/Shin" instance=ExtResource("1_kgpfi")]
 transform = Transform3D(0.1, 0, 6.27465e-25, -3.0103e-17, 0.1, 6.35511e-33, -2.13076e-39, 0, 0.1, -2.08722e-13, -0.663061, -2.09941e-13)
+
+[node name="Foot" type="StaticBody3D" parent="HipJoint/Thigh/Knee/Shin/DomeMesh"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HipJoint/Thigh/Knee/Shin/DomeMesh/Foot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.5, 2.08165e-12)
+shape = SubResource("CylinderShape3D_4pufk")

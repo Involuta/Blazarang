@@ -1,7 +1,8 @@
+StaticBody3D
+CollisionShape3D
 MeshInstance3D
 GPUParticles3D
 Node3D
-CollisionShape3D
 Area3D
 AnimationPlayer
 TextureRect
@@ -15,7 +16,6 @@ AnimationTree
 NavigationAgent3D
 BallSpawner
 OmniLight3D
-StaticBody3D
 RigidBody3D
 FuncGodotMap
 NavigationRegion3D
