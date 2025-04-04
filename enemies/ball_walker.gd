@@ -57,9 +57,9 @@ func _physics_process(delta):
 		WAIT:
 			wait()
 		FOLLOW:
-			follow()
+			pass#follow()
 		ATTACK:
-			attack()
+			pass#attack()
 
 func lerp_look_at_target(turn_speed):
 	var vec3_to_target := global_position.direction_to(target.global_position)

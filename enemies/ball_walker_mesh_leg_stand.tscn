@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmtn0cwrlroe4"]
+
+[ext_resource type="PackedScene" uid="uid://c613hspm13igo" path="res://glb_inherited_scenes/dome_mesh.tscn" id="1_5uh7d"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qf2at"]
+top_radius = 0.12
+bottom_radius = 0.12
+height = 0.69
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vdng6"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.3
+
+[node name="BallWalkerMeshLegStand" type="Node3D"]
+
+[node name="DomeMesh" parent="." instance=ExtResource("1_5uh7d")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="Shin" type="MeshInstance3D" parent="DomeMesh"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 2.08165e-12, 6.63061, 2.08165e-12)
+mesh = SubResource("CylinderMesh_qf2at")
+
+[node name="Knee" type="MeshInstance3D" parent="DomeMesh/Shin"]
+transform = Transform3D(1, 0, -1.5246e-23, -1.5246e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, -2.08165e-13, 0.503055, -2.08165e-13)
+mesh = SubResource("CylinderMesh_vdng6")
+skeleton = NodePath("../../..")
+
+[node name="Thigh" type="MeshInstance3D" parent="DomeMesh/Shin/Knee"]
+transform = Transform3D(1, -1.5246e-23, -6.66422e-31, -6.66422e-31, -4.37114e-08, 1, -1.5246e-23, -1, -4.37114e-08, 2.08165e-13, -2.21209e-08, -0.506072)
+mesh = SubResource("CylinderMesh_qf2at")
+skeleton = NodePath("../../..")
+
+[node name="HipJoint" type="MeshInstance3D" parent="DomeMesh/Shin/Knee/Thigh"]
+transform = Transform3D(1, -1.86247e-38, -1.5246e-23, -1.5246e-23, -4.37114e-08, -1, -1.86247e-38, 1, -4.37114e-08, -2.08165e-13, 0.502466, -2.07177e-13)
+mesh = SubResource("CylinderMesh_vdng6")
+skeleton = NodePath("../../../../..")

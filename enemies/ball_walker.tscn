@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cy4cd0vab7e7s"]
+[gd_scene load_steps=7 format=3 uid="uid://cy4cd0vab7e7s"]
 
 [ext_resource type="Script" path="res://enemies/ball_walker.gd" id="1_evdbk"]
 [ext_resource type="Script" path="res://enemies/spawners/ball_spawner.gd" id="2_7lttv"]
-[ext_resource type="PackedScene" uid="uid://cwkv4n3ofhmt6" path="res://glb_inherited_scenes/cannon_mortar_t1.tscn" id="3_lq8gj"]
+[ext_resource type="PackedScene" uid="uid://el0vhxctxsiu" path="res://glb_inherited_scenes/bowl_mesh.tscn" id="5_7qoeb"]
+[ext_resource type="PackedScene" uid="uid://bmtn0cwrlroe4" path="res://enemies/ball_walker_mesh_leg_stand.tscn" id="5_rin41"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_arkt7"]
 radius = 2.0
@@ -51,9 +52,31 @@ swarm_chargeup_secs = 1.0
 skull_chargeup_secs = 1.0
 heavy_chargeup_secs = 1.0
 
-[node name="Mesh" parent="BallSpawner" instance=ExtResource("3_lq8gj")]
+[node name="BowlMesh" parent="BallSpawner" instance=ExtResource("5_7qoeb")]
+transform = Transform3D(0.625, 7.60327e-32, 0, -7.60327e-32, 0.625, 0, 0, 0, 0.625, -0.0205688, 1.35761, 2.08047e-12)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 
+[node name="BallWalkerMeshLegStand" parent="." instance=ExtResource("5_rin41")]
+transform = Transform3D(5, -1.74393e-15, 1.74393e-15, 1.74393e-15, 5, -1.74393e-15, -1.74393e-15, 1.74393e-15, 5, 10, -2, 2.08165e-12)
+
+[node name="DomeMesh" parent="BallWalkerMeshLegStand" index="0"]
+transform = Transform3D(0.1, -1.21652e-32, -5.19733e-25, -5.19733e-25, 0.1, 5.19733e-25, 0, 0, 0.1, 0, 0, 0)
+
+[node name="Knee" parent="BallWalkerMeshLegStand/DomeMesh/Shin" index="0"]
+transform = Transform3D(0.866025, 5.85622e-09, 0.5, 0.5, -2.18557e-08, -0.866025, 5.85622e-09, 1, -2.18557e-08, 0, 0.503055, -2.08165e-13)
+
+[node name="BallWalkerMeshLegStand2" parent="." instance=ExtResource("5_rin41")]
+transform = Transform3D(5, -1.74393e-15, 1.74393e-15, 1.74393e-15, 5, -1.74393e-15, -1.74393e-15, 1.74393e-15, 5, -10, -2, 2.08165e-12)
+
+[node name="DomeMesh" parent="BallWalkerMeshLegStand2" index="0"]
+transform = Transform3D(0.1, -1.21652e-32, -5.19733e-25, -5.19733e-25, 0.1, 5.19733e-25, 0, 0, 0.1, 0, 0, 0)
+
+[node name="Knee" parent="BallWalkerMeshLegStand2/DomeMesh/Shin" index="0"]
+transform = Transform3D(0.866025, -5.85622e-09, -0.5, -0.5, -2.18557e-08, -0.866026, -5.85622e-09, 1, -2.18557e-08, 0, 0.503055, -2.08165e-13)
+
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
+
+[editable path="BallWalkerMeshLegStand"]
+[editable path="BallWalkerMeshLegStand2"]

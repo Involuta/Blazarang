@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://el0vhxctxsiu"]
+
+[ext_resource type="PackedScene" uid="uid://dmfmmjbb1h0n" path="res://glb_imports/BowlMesh.glb" id="1_pdp3k"]
+
+[node name="BowlMesh" instance=ExtResource("1_pdp3k")]

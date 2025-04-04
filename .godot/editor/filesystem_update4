@@ -54,3 +54,7 @@ res://enemies/ball_walker.tscn
 res://enemies/ball_walker.gd
 res://enemies/spawners/ball_spawner.gd
 res://enemies/skull_ball.tscn
+res://glb_inherited_scenes/dome_mesh.tscn
+res://enemies/ball_walker_mesh_leg.tscn
+res://enemies/ball_walker_mesh_leg_stand.tscn
+res://enemies/ball_walker_mesh_leg_gun.tscn

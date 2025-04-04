@@ -62,7 +62,7 @@ var high_target_trajectory_y_vel := 0.0
 @export var skull_chargeup_secs := 4.5
 @export var heavy_chargeup_secs := 4.0
 
-@onready var mesh = $Mesh
+@onready var mesh = $BowlMesh
 @onready var root = $/root/ViewControl
 var level : Node3D
 var target : Node3D
@@ -94,31 +94,31 @@ func update_high_target_trajectory_vels():
 	high_target_trajectory_lateral_vel = lateral_dist_to_target / total_flight_time
 
 func lateral_look_at_target(turn_speed):
-	var old_global_rotation := global_rotation
+	var old_global_rotation := rotation
 	look_at(target.global_position)
-	var target_global_rotation := global_rotation
-	global_rotation = old_global_rotation
-	global_rotation.y = move_toward(global_rotation.y, target_global_rotation.y, turn_speed)
+	var target_global_rotation := rotation
+	rotation = old_global_rotation
+	rotation.y = move_toward(rotation.y, target_global_rotation.y, turn_speed)
 	#global_rotation.y = lerp_angle(global_rotation.y, target_global_rotation.y, turn_speed)
 
 func vert_look_at_target(turn_speed):
-	var old_global_rotation = mesh.global_rotation
+	var old_global_rotation = mesh.rotation
 	mesh.look_at(target.global_position)
-	var target_global_rotation = mesh.global_rotation
-	mesh.global_rotation = old_global_rotation
-	mesh.global_rotation.x = move_toward(mesh.global_rotation.x, target_global_rotation.x, turn_speed)
+	var target_global_rotation = mesh.rotation
+	mesh.rotation = old_global_rotation
+	mesh.rotation.x = move_toward(mesh.rotation.x, target_global_rotation.x, turn_speed)
 	#mesh.global_rotation.x = lerp_angle(mesh.global_rotation.x, target_global_rotation.x, turn_speed)
 
 func vert_look_high_bounce_trajectory(turn_speed):
 	# global_rotation "upward" = tan^-1(y_vel/x_vel)
 	var target_global_rotation_x = atan2(bounce_height, .25 * roller_move_speed)
-	mesh.global_rotation.x = move_toward(mesh.global_rotation.x, target_global_rotation_x, turn_speed)
+	mesh.rotation.x = move_toward(mesh.rotation.x, target_global_rotation_x, turn_speed)
 	#mesh.global_rotation.x = lerp_angle(mesh.global_rotation.x, target_global_rotation_x, turn_speed)
 
 func vert_look_high_target_trajectory(turn_speed):
 	# global_rotation "upward" = tan^-1(y_vel/x_vel)
 	var target_global_rotation_x = atan2(high_target_trajectory_y_vel, high_target_trajectory_lateral_vel)
-	mesh.global_rotation.x = move_toward(mesh.global_rotation.x, target_global_rotation_x, turn_speed)
+	mesh.rotation.x = move_toward(mesh.rotation.x, target_global_rotation_x, turn_speed)
 	#mesh.global_rotation.x = lerp_angle(mesh.global_rotation.x, target_global_rotation_x, turn_speed)
 
 func spawn_limit_met():

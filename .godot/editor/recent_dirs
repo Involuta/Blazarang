@@ -1,6 +1,6 @@
-res://levels/balls_level
-res://enemies
 res://glb_inherited_scenes
+res://enemies
+res://levels/balls_level
 res://rang
 res://cotu/cotu_anims
 res://levels/gauntlet

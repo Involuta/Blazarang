@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://c613hspm13igo"]
+
+[ext_resource type="PackedScene" uid="uid://ex7am6a7wy8k" path="res://glb_imports/DomeMesh.glb" id="1_xae7r"]
+
+[node name="DomeMesh" instance=ExtResource("1_xae7r")]
