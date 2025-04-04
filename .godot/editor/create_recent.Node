@@ -1,10 +1,10 @@
+AnimationPlayer
 StaticBody3D
 CollisionShape3D
 MeshInstance3D
 GPUParticles3D
 Node3D
 Area3D
-AnimationPlayer
 TextureRect
 Node2D
 CharacterBody3D
