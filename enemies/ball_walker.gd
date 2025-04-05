@@ -72,6 +72,7 @@ func attack():
 	velocity.x = 0
 	velocity.z = 0
 	if aiming_at_target:
+		pass
 		lerp_look_at_target(attack_turn_speed)
 	#ball_spawner.spawning = true
 
