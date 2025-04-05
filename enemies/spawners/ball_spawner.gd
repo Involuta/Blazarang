@@ -76,8 +76,9 @@ func _physics_process(delta):
 	if self and not spawn_cooldown_active and spawning and not spawn_limit_met():
 		spawn_enemy()
 	if lateral_aiming_at_target:
-		lateral_look_at_target(attack_turn_speed)
+		pass#lateral_look_at_target(attack_turn_speed)
 	if spawn_cooldown_active:
+		return
 		match(vert_aim_type):
 			AT_TARGET:
 				vert_look_at_target(attack_turn_speed * delta)
