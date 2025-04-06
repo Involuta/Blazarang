@@ -38,10 +38,10 @@ mesh = SubResource("CylinderMesh_qf2at")
 skeleton = NodePath("DomeMesh")
 
 [node name="DomeMesh" parent="HipJoint/Thigh/Knee/Shin" instance=ExtResource("1_kgpfi")]
-transform = Transform3D(0.1, 0, 6.27465e-25, -3.0103e-17, 0.1, 6.35511e-33, -2.13076e-39, 0, 0.1, -2.08722e-13, -0.663061, -2.09941e-13)
+transform = Transform3D(0.1, -1.7094e-32, 6.97574e-17, 8.09193e-17, 0.1, -6.97574e-17, -6.97574e-17, 6.97574e-17, 0.1, -2.08722e-13, -0.663061, -2.10172e-13)
 
 [node name="Foot" type="StaticBody3D" parent="HipJoint/Thigh/Knee/Shin/DomeMesh"]
-collision_layer = 2
+collision_layer = 0
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HipJoint/Thigh/Knee/Shin/DomeMesh/Foot"]

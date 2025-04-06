@@ -1,5 +1,5 @@
 13236e398de779183e51c2c80f40862e
-::res://::1743885445
+::res://::1743900399
 bg_camera.gd::GDScript::-1::1738980091::0::1::::<>Camera3D<>::
 default_bus_layout.tres::AudioBusLayout::129218507605815108::1716850979::0::1::::<><>::
 DisappearNode.gd::GDScript::-1::1740190714::0::1::::<>Node3D<>::
@@ -10,7 +10,7 @@ hurtbox.gd::GDScript::-1::1740272620::0::1::::Hurtbox<>Area3D<>::
 icon.svg::CompressedTexture2D::5729510642774274939::1706514784::1710997056::1::::<><>::
 README.md::TextFile::-1::1710997351::0::1::::<><>::
 SimpleRig_Simple.png::CompressedTexture2D::9024274526364438550::1708742020::1710997056::1::::<><>::
-skygradient.gdshader::Shader::-1::1743885445::0::1::::<><>::
+skygradient.gdshader::Shader::-1::1743900399::0::1::::<><>::
 trauma_causer.gd::GDScript::-1::1726461370::0::1::::<>Area3D<>::
 trauma_causer.tscn::PackedScene::1661855640464717557::1726464233::0::1::::<><>::res://trauma_causer.gd
 ::res://addons/::1711684076
@@ -120,11 +120,11 @@ ax_melee_run2.res::Animation::3678520410919111552::1743547925::0::1::::<><>::
 ax_overhead.res::Animation::2438000502887860793::1743547925::0::1::::<><>::
 use_item_stabilizer.res::Animation::3957165992223724292::1743547925::0::1::::<><>::
 x_boss_grab.res::Animation::3100454904043032557::1743547925::0::1::::<><>::
-::res://enemies/::1743885155
+::res://enemies/::1743900399
 ball.gd::GDScript::-1::1734949913::0::1::::Ball<>RigidBody3D<>::
-ball_walker.gd::GDScript::-1::1743885155::0::1::::<>CharacterBody3D<>::
-ball_walker.tscn::PackedScene::6517368706461206578::1743885155::0::1::::<><>::res://enemies/ball_walker.gd<>res://enemies/spawners/ball_spawner.gd<>uid://bereixsbnqp0e::::res://enemies/ball_walker_mesh_leg_gun.tscn<>uid://el0vhxctxsiu::::res://glb_inherited_scenes/bowl_mesh.tscn<>uid://bmtn0cwrlroe4::::res://enemies/ball_walker_mesh_leg_stand.tscn
-ball_walker_mesh_leg_gun.tscn::PackedScene::2702528870293539458::1743884880::0::1::::<><>::uid://c613hspm13igo::::res://glb_inherited_scenes/dome_mesh.tscn
+ball_walker.gd::GDScript::-1::1743900297::0::1::::<>CharacterBody3D<>::
+ball_walker.tscn::PackedScene::6517368706461206578::1743900398::0::1::::<><>::res://enemies/ball_walker.gd<>uid://bereixsbnqp0e::::res://enemies/ball_walker_mesh_leg_gun.tscn<>uid://el0vhxctxsiu::::res://glb_inherited_scenes/bowl_mesh.tscn<>uid://bmtn0cwrlroe4::::res://enemies/ball_walker_mesh_leg_stand.tscn
+ball_walker_mesh_leg_gun.tscn::PackedScene::2702528870293539458::1743900399::0::1::::<><>::uid://c613hspm13igo::::res://glb_inherited_scenes/dome_mesh.tscn<>res://enemies/spawners/ball_spawner.gd
 ball_walker_mesh_leg_stand.tscn::PackedScene::3268744090250395701::1743884880::0::1::::<><>::uid://c613hspm13igo::::res://glb_inherited_scenes/dome_mesh.tscn
 big_x.tscn::PackedScene::3563885408471686755::1741314726::0::1::::<><>::uid://bbthct6ttyunj
 boss_hurtbox.gd::GDScript::-1::1731721203::0::1::::BossHurtbox<>EnemyHurtbox<>::
@@ -244,8 +244,8 @@ x_triangle_axkick.res::Animation::4307932431392217478::1741032242::0::1::::<><>:
 x_triangle_flyingkick.res::Animation::3257318106845168529::1741032242::0::1::::<><>::
 x_triangle_volcano.res::Animation::7677701538624631045::1741032242::0::1::::<><>::
 x_very_far_strafe_laser.res::Animation::6700950869920336791::1741042451::0::1::::<><>::
-::res://enemies/spawners/::1743876880
-ball_spawner.gd::GDScript::-1::1743876880::0::1::::BallSpawner<>Node3D<>::
+::res://enemies/spawners/::1743900272
+ball_spawner.gd::GDScript::-1::1743900272::0::1::::BallSpawner<>Node3D<>::
 gauntlet_enemy_spawner.gd::GDScript::-1::1742365850::0::1::::<>Node3D<>::
 gauntlet_enemy_spawner.tscn::PackedScene::8383178995809135922::1734475565::0::1::::<><>::res://enemies/spawners/gauntlet_enemy_spawner.gd
 ::res://FuncGodot Manual/::1711684079
@@ -339,7 +339,7 @@ tips_worldspawn_env1.png::CompressedTexture2D::9175876197917771380::1711684079::
 tips_worldspawn_env2.png::CompressedTexture2D::259060120679355898::1711684079::1711684088::1::::<><>::
 tips_worldspawn_env3.png::CompressedTexture2D::2152430958217483623::1711684079::1711684088::1::::<><>::
 ::res://FuncGodot Manual/pages/::1711684079
-::res://glb_imports/::1743885552
+::res://glb_imports/::1743885591
 8164fire_head_mesh.glb::PackedScene::61662167142987603::1725781438::1725781539::1::::<><>::
 8164_arrow.glb::PackedScene::4157638328838379862::1730611144::1730620727::1::::<><>::uid://bvbiqwudfgcg3
 8164_big_X.glb::PackedScene::2496262341917664163::1740819718::1740819639::1::::<><>::
@@ -382,7 +382,7 @@ StationaryGunner.glb::PackedScene::7989167118534490369::1715665286::1715665287::
 XIcon.glb::PackedScene::2360127999650788770::1724727780::1724727781::1::::<><>::
 XLeftArm.glb::PackedScene::8100412158098403439::1724211407::1724211408::1::::<><>::
 XRightArm.glb::PackedScene::279754549491631543::1724211411::1724211411::1::::<><>::
-::res://glb_inherited_scenes/::1743885445
+::res://glb_inherited_scenes/::1743900399
 arc.tscn::PackedScene::4638738183734252583::1743621726::0::1::::<><>::uid://pl0hk4tiefh2::::res://glb_imports/Arc.glb
 attach_to_hand.gd::GDScript::-1::1741501975::0::1::::<>Node3D<>::
 ax.tscn::PackedScene::585593550130544228::1743381630::0::1::::<><>::uid://1kq3g4ml4ckr::::res://glb_imports/AxRang.glb
@@ -392,13 +392,13 @@ basic_stationary_gun_stand.tscn::PackedScene::108460337150589041::1722361808::0:
 basic_sword.tscn::PackedScene::211690064650478145::1725738993::0::1::::<><>::uid://cpx64anoc5p8u
 basic_sword_handle.tscn::PackedScene::6868460548423173250::1722361808::0::1::::<><>::uid://1hrg1uwhcuus
 big_melee_t1.tscn::PackedScene::14165364460054793::1722361809::0::1::::<><>::uid://wulbclfwsd6h
-black_outline.gdshader::Shader::-1::1743885445::0::1::::<><>::
+black_outline.gdshader::Shader::-1::1743900399::0::1::::<><>::
 boomerang.tscn::PackedScene::7423584170109001020::1726520379::0::1::::<><>::uid://jp5hfj5anq6j
 bowl_mesh.tscn::PackedScene::305019359649090388::1743885445::0::1::::<><>::uid://dmfmmjbb1h0n::::res://glb_imports/BowlMesh.glb
 cannon_mortar_t1.tscn::PackedScene::6338967276535992861::1734959578::0::1::::<><>::uid://dqwtcqe3gt0ad
 cotu_anims_24.tscn::PackedScene::8563854343845013854::1739736770::0::1::::<><>::uid://4uixk52roj0q
 cotu_icon_circle.tscn::PackedScene::6351511296421250167::1741223155::0::1::::<><>::uid://ci1b7huu0ix06
-cotu_outline.gdshader::Shader::-1::1743885445::0::1::::<><>::
+cotu_outline.gdshader::Shader::-1::1743900399::0::1::::<><>::
 dome_mesh.tscn::PackedScene::7004082887299004090::1743885282::0::1::::<><>::uid://ex7am6a7wy8k::::res://glb_imports/DomeMesh.glb
 first_miniboss_meshes.tscn::PackedScene::951540929001506217::1728412461::0::1::::<><>::uid://dlg0dyk0bydo2
 icon_mesh.tscn::PackedScene::4502783951416282359::1741223155::0::1::::<><>::uid://c4psn33f6gvm2
@@ -406,7 +406,7 @@ melee_t1.tscn::PackedScene::5352743501419293008::1742278250::0::1::::<><>::uid:/
 melee_t2.tscn::PackedScene::3686192598367502768::1741743060::0::1::::<><>::uid://dgog4e7fph8cu
 melee_t3.tscn::PackedScene::8169380758480980711::1742277664::0::1::::<><>::uid://5uv6uo3oxhqi
 mobile_gunner.tscn::PackedScene::2880343609614049141::1743556204::0::1::::<><>::uid://dh1uc1axpsod1::::res://glb_imports/MobileGunnerH.glb<>res://glb_inherited_scenes/black_outline.gdshader
-outline.gdshader::Shader::-1::1743885445::0::1::::<><>::
+outline.gdshader::Shader::-1::1743900399::0::1::::<><>::
 simple_attach_to_hand.gd::GDScript::-1::1724053001::0::1::::<>Node3D<>::
 simple_rig.tscn::PackedScene::381781944460928383::1714444429::0::1::::<><>::uid://tw33n8s07c4n
 stationary_gunner.tscn::PackedScene::5086199094605643750::1722361805::0::1::::<><>::uid://dl3aod8or2pkj
@@ -429,12 +429,12 @@ README.md::TextFile::-1::1716937637::0::1::::<><>::
 ::res://GPUTrail-main/defaults/::1743883543
 curve.tres::CurveTexture::6165819948555381221::1743883543::0::1::::<><>::
 texture.tres::GradientTexture1D::5988605028696468514::1743883543::0::1::::<><>::
-::res://GPUTrail-main/shaders/::1743885445
+::res://GPUTrail-main/shaders/::1743900399
 custom_example_alpha_erosion.gdshader::Shader::-1::1716937637::0::1::::<><>::
 custom_example_blank.gdshader::Shader::-1::1716937637::0::1::::<><>::
 gputrail_lib.gdshaderinc::ShaderInclude::-1::1716937637::0::1::::<><>::
-trail.gdshader::Shader::-1::1743885445::0::1::::<><>::
-trail_draw_pass.gdshader::Shader::-1::1743885445::0::1::::<><>::
+trail.gdshader::Shader::-1::1743900399::0::1::::<><>::
+trail_draw_pass.gdshader::Shader::-1::1743900399::0::1::::<><>::
 ::res://icon/::1742365962
 CotuIcon2D.png::CompressedTexture2D::6450463565778704075::1725649960::1725650058::1::::<><>::
 icon.gd::GDScript::-1::1742273784::0::1::::<>Area3D<>::
@@ -554,10 +554,10 @@ slash_test.tres::VisualShader::7656635512075821468::1743883543::0::1::::<><>::
 slash_test.tscn::PackedScene::5316917245300703037::1715737173::0::1::::<><>::res://rang/slash_test.gd<>uid://cxkbpvdugu01f
 special_homing.gd::GDScript::-1::1741490535::0::1::::<>CharacterBody3D<>::
 special_rapidorbit.gd::GDScript::-1::1741490535::0::1::::<>CharacterBody3D<>::
-::res://shaders/::1743885445
-black_outline.gdshader::Shader::-1::1743885445::0::1::::<><>::
-cotu_outline.gdshader::Shader::-1::1743885445::0::1::::<><>::
-outline_everything.gdshader::Shader::-1::1743885445::0::1::::<><>::
+::res://shaders/::1743900399
+black_outline.gdshader::Shader::-1::1743900399::0::1::::<><>::
+cotu_outline.gdshader::Shader::-1::1743900399::0::1::::<><>::
+outline_everything.gdshader::Shader::-1::1743900399::0::1::::<><>::
 ::res://skyboxes/::1740453209
 test_skybox.tscn::PackedScene::8334287739070837312::1740453209::0::1::::<><>::res://skygradient.gdshader
 ::res://textures/::1743883543
@@ -630,12 +630,12 @@ x_grid3.png::CompressedTexture2D::886273406962690609::1725602290::1725602348::1:
 x_grid3.tres::StandardMaterial3D::2891795679189318701::1725603634::0::1::::<><>::uid://mvk18k1bphy4
 x_grid4.png::CompressedTexture2D::6687191175843592460::1725603084::1725603159::1::::<><>::
 x_grid4.tres::StandardMaterial3D::5033927404185293554::1725603158::0::1::::<><>::uid://c2jlcdjkgb5ue
-::res://ui/::1743885445
+::res://ui/::1743900399
 DESTABILIZED-clear.png::CompressedTexture2D::1656707886653010413::1721853688::1721935460::1::::<><>::
 DESTABILIZED.png::CompressedTexture2D::2659935411795010853::1721853611::1731805857::1::::<><>::
-flash.gdshader::Shader::-1::1743885445::0::1::::<><>::
-glitch.gdshader::Shader::-1::1743885445::0::1::::<><>::
-glow.gdshader::Shader::-1::1743885445::0::1::::<><>::
+flash.gdshader::Shader::-1::1743900399::0::1::::<><>::
+glitch.gdshader::Shader::-1::1743900399::0::1::::<><>::
+glow.gdshader::Shader::-1::1743900399::0::1::::<><>::
 health_bar.tscn::PackedScene::7179654896856773045::1734223238::0::1::::<><>::
 health_bar_theme.tres::Theme::5382748259125192956::1716327415::0::1::::<><>::
 ui_root.gd::GDScript::-1::1742276735::0::1::::<>Control<>::
