@@ -32,3 +32,5 @@ res://levels/balls_level/section_nodes/balls_level_main_arena.tscn
 res://levels/balls_level/balls_level.tscn
 res://cotu/cotu_anims_outline.tres
 res://cotu/cotu_anims_base_material.tres
+res://glb_inherited_scenes/icon_mesh.tscn
+res://glb_inherited_scenes/cotu_icon_circle.tscn

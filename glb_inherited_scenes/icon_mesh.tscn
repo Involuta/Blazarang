@@ -6,6 +6,7 @@
 shading_mode = 0
 diffuse_mode = 3
 specular_mode = 2
+disable_receive_shadows = true
 
 [node name="IconMesh" instance=ExtResource("1_duvmp")]
 

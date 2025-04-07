@@ -7,8 +7,10 @@ cull_mode = 2
 shading_mode = 0
 diffuse_mode = 3
 specular_mode = 2
+disable_receive_shadows = true
 
 [node name="CotuIconCircle" instance=ExtResource("1_4vaq6")]
 
 [node name="Circle" parent="." index="0"]
+cast_shadow = 0
 surface_material_override/0 = SubResource("StandardMaterial3D_nrrr3")

@@ -170,7 +170,7 @@ func spawn_from_name(enemy_name):
 		"POPPER":
 			await spawn_popper()
 		"default":
-			print("Error: attempted to spawn unknown enemy")
+			print("Error: attempted to spawn unknown enemy: ", enemy_name)
 			await spawn_roller()
 
 func spawn_roller():
@@ -191,8 +191,8 @@ func spawn_bouncer():
 	await b.tree_entered
 	b.global_position = global_position
 	b.global_rotation = global_rotation
-	b.linear_velocity = .25 * roller_move_speed * -b.get_global_transform().basis.z
-	b.linear_velocity.y = bounce_height
+	b.linear_velocity = high_target_trajectory_lateral_vel * -b.get_global_transform().basis.z
+	b.linear_velocity.y = init_high_target_trajectory_y_vel
 
 func spawn_giant_roller():
 	vert_aim_type = AT_TARGET

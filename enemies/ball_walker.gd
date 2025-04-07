@@ -20,6 +20,30 @@ var aiming_at_target := true
 @export var follow_turn_speed := .15
 @export var attack_turn_speed := .15
 
+@export var cannon_enemy_chances = {
+	"ROLLER": .0,
+	"BOUNCER": .0,
+	"GIANT_ROLLER": .0,
+	"GIANT_BOUNCER": .0,
+	"SWARM": .0,
+	"SKULL": .0,
+	"HEAVY": 1.0,
+	"DEATHBALL": .0,
+	"POPPER" : .0,
+}
+
+@export var mortar_enemy_chances = {
+	"ROLLER": .0,
+	"BOUNCER": .5,
+	"GIANT_ROLLER": .0,
+	"GIANT_BOUNCER": .0,
+	"SWARM": .0,
+	"SKULL": .0,
+	"HEAVY": .5,
+	"DEATHBALL": .0,
+	"POPPER" : .0,
+}
+
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 var roller := preload("res://enemies/roller_ball.tscn")
@@ -45,6 +69,8 @@ func _ready():
 	target = root.find_child("Icon")
 	ball_spawner = find_child("BallSpawner")
 	add_to_group("lockonables")
+	
+	ball_spawner.enemy_chances = mortar_enemy_chances
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("Special"):
@@ -75,7 +101,9 @@ func stop_aiming_at_target():
 func switch_to_long_dist_state():
 	behav_state = LONG_DIST
 	aiming_at_target = true
-	$AnimationPlayer.play("stand_to_foot_cannon")
+	$AnimationPlayer.play("stand_to_foot_mortar")
+	ball_spawner.enemy_chances = mortar_enemy_chances
+	ball_spawner.spawning = true
 	#anim_tree.set("parameters/StateMachine/conditions/shoot", true)
 
 func long_dist_state_frame():
@@ -90,6 +118,7 @@ func long_dist_state_frame():
 func switch_to_short_dist_state():
 	behav_state = SHORT_DIST
 	$AnimationPlayer.play("squat")
+	ball_spawner.spawning = false
 	#await get_tree().create_tween().tween_property(self, "global_position", global_position - 19 * -transform.basis.z, 2).finished
 
 func short_dist_state_frame():
