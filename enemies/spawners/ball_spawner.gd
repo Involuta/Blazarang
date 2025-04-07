@@ -180,7 +180,7 @@ func spawn_roller():
 	level.add_child.call_deferred(b)
 	await b.tree_entered
 	b.global_position = global_position
-	b.global_rotation = global_rotation
+	b.global_rotation = mesh.global_rotation
 	b.linear_velocity = roller_move_speed * -b.get_global_transform().basis.z
 
 func spawn_bouncer():

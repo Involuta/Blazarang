@@ -75,7 +75,7 @@ func stop_aiming_at_target():
 func switch_to_long_dist_state():
 	behav_state = LONG_DIST
 	aiming_at_target = true
-	$AnimationPlayer.play("stand_to_foot_mortar")
+	$AnimationPlayer.play("stand_to_foot_cannon")
 	#anim_tree.set("parameters/StateMachine/conditions/shoot", true)
 
 func long_dist_state_frame():
