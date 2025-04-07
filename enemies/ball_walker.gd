@@ -20,28 +20,18 @@ var aiming_at_target := true
 @export var follow_turn_speed := .15
 @export var attack_turn_speed := .15
 
+@export var long_dist_substate_chances = {
+	"CANNON": .5,
+	"MORTAR": .5
+}
+
 @export var cannon_enemy_chances = {
-	"ROLLER": .0,
-	"BOUNCER": .0,
-	"GIANT_ROLLER": .0,
-	"GIANT_BOUNCER": .0,
-	"SWARM": .0,
-	"SKULL": .0,
-	"HEAVY": 1.0,
-	"DEATHBALL": .0,
-	"POPPER" : .0,
+	"ROLLER": 1.0,
 }
 
 @export var mortar_enemy_chances = {
-	"ROLLER": .0,
 	"BOUNCER": .5,
-	"GIANT_ROLLER": .0,
-	"GIANT_BOUNCER": .0,
-	"SWARM": .0,
-	"SKULL": .0,
 	"HEAVY": .5,
-	"DEATHBALL": .0,
-	"POPPER" : .0,
 }
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -69,6 +59,7 @@ func _ready():
 	target = root.find_child("Icon")
 	ball_spawner = find_child("BallSpawner")
 	add_to_group("lockonables")
+	
 	
 	ball_spawner.enemy_chances = mortar_enemy_chances
 
@@ -100,11 +91,42 @@ func stop_aiming_at_target():
 
 func switch_to_long_dist_state():
 	behav_state = LONG_DIST
+	choose_long_dist_substate()
 	aiming_at_target = true
+	ball_spawner.spawning = true
+	#anim_tree.set("parameters/StateMachine/conditions/shoot", true)
+
+func choose_long_dist_substate():
+	var choice := rng.randf()
+	var cumulative_weight := 0.0
+	for substate in long_dist_substate_chances:
+		cumulative_weight += long_dist_substate_chances[substate]
+		if choice <= cumulative_weight:
+			await choose_substate_from_name(substate)
+			return
+	await choose_substate_from_name("default")
+
+func choose_substate_from_name(substate: String):
+	match(substate):
+		"CANNON":
+			await switch_to_cannon()
+		"MORTAR":
+			await switch_to_mortar()
+		"default":
+			print("Error: attempted to switch to substate: ", substate)
+			await switch_to_cannon()
+
+func switch_to_mortar():
+	# Replace this with an anim_tree condition
 	$AnimationPlayer.play("stand_to_foot_mortar")
 	ball_spawner.enemy_chances = mortar_enemy_chances
 	ball_spawner.spawning = true
-	#anim_tree.set("parameters/StateMachine/conditions/shoot", true)
+
+func switch_to_cannon():
+	# Replace this with an anim_tree condition
+	$AnimationPlayer.play("stand_to_foot_cannon")
+	ball_spawner.enemy_chances = cannon_enemy_chances
+	ball_spawner.spawning = true
 
 func long_dist_state_frame():
 	velocity.x = 0
