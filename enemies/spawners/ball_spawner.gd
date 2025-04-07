@@ -42,14 +42,14 @@ var spawn_cooldown_active := false
 @export var move_dir_angle_arc := 20.0
 @export var bounce_height := 10.0
 var high_target_trajectory_lateral_vel := 0.0
-var high_target_trajectory_y_vel := 0.0
+var init_high_target_trajectory_y_vel := 0.0 # y vel a high target trajectory projectile has upon launch
 
 @export var swarm_size := 15.0
 
 @export var skull_follow_speed := 5.0
 @export var skull_explode_dist := 5.0
 
-@export var heavy_launch_height := 20.0
+@export var heavy_launch_height_from_launch_point := 20.0 # Y difference between point where heavy spawns and max height heavy reaches during flight, both in global coords
 @export var arena_floor_y := 10.0
 
 @export var deathball_move_speed := 15.0
@@ -62,7 +62,7 @@ var high_target_trajectory_y_vel := 0.0
 @export var skull_chargeup_secs := 4.5
 @export var heavy_chargeup_secs := 4.0
 
-@onready var mesh = $BowlMesh
+@onready var mesh = $MeshPivot
 @onready var root = $/root/ViewControl
 var level : Node3D
 var target : Node3D
@@ -76,9 +76,8 @@ func _physics_process(delta):
 	if self and not spawn_cooldown_active and spawning and not spawn_limit_met():
 		spawn_enemy()
 	if lateral_aiming_at_target:
-		pass#lateral_look_at_target(attack_turn_speed)
+		lateral_look_at_target(attack_turn_speed)
 	if spawn_cooldown_active:
-		return
 		match(vert_aim_type):
 			AT_TARGET:
 				vert_look_at_target(attack_turn_speed * delta)
@@ -88,10 +87,16 @@ func _physics_process(delta):
 				vert_look_high_target_trajectory(attack_turn_speed * delta)
 
 func update_high_target_trajectory_vels():
-	high_target_trajectory_y_vel = sqrt(2 * gravity * heavy_launch_height + global_position.y)
-	var total_flight_time : float = 2 * high_target_trajectory_y_vel / gravity
+	# Init vel when ball is launched
+	init_high_target_trajectory_y_vel = sqrt(2 * gravity * heavy_launch_height_from_launch_point)
+	var self_target_height_diff := global_position.y - target.global_position.y
+	# Vel when ball hits the ground from max height (assumes launcher is above target)
+	var final_high_target_trajectory_y_vel = sqrt(2 * gravity * heavy_launch_height_from_launch_point + self_target_height_diff)
+	# Total time = time to go up + time to fall down
+	var total_flight_time : float = init_high_target_trajectory_y_vel / gravity + final_high_target_trajectory_y_vel / gravity
 	var vec_to_target := target.global_position - global_position
-	var lateral_dist_to_target := 1 * Vector2(vec_to_target.x, vec_to_target.z).length()
+	# Multiplier is used for fine-tuned accuracy adjustment
+	var lateral_dist_to_target := .95 * Vector2(vec_to_target.x, vec_to_target.z).length()
 	high_target_trajectory_lateral_vel = lateral_dist_to_target / total_flight_time
 
 func lateral_look_at_target(turn_speed):
@@ -118,7 +123,7 @@ func vert_look_high_bounce_trajectory(turn_speed):
 
 func vert_look_high_target_trajectory(turn_speed):
 	# global_rotation "upward" = tan^-1(y_vel/x_vel)
-	var target_global_rotation_x = atan2(high_target_trajectory_y_vel, high_target_trajectory_lateral_vel)
+	var target_global_rotation_x = atan2(init_high_target_trajectory_y_vel, high_target_trajectory_lateral_vel)
 	mesh.rotation.x = move_toward(mesh.rotation.x, target_global_rotation_x, turn_speed)
 	#mesh.global_rotation.x = lerp_angle(mesh.global_rotation.x, target_global_rotation_x, turn_speed)
 
@@ -244,7 +249,7 @@ func spawn_heavy():
 	b.global_position = global_position
 	b.global_rotation = global_rotation
 	b.linear_velocity = high_target_trajectory_lateral_vel * -b.get_global_transform().basis.z
-	b.linear_velocity.y = high_target_trajectory_y_vel
+	b.linear_velocity.y = init_high_target_trajectory_y_vel
 	b.arena_floor_y = arena_floor_y
 
 func spawn_deathball():

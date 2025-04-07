@@ -1,9 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://cy4cd0vab7e7s"]
+[gd_scene load_steps=17 format=3 uid="uid://cy4cd0vab7e7s"]
 
 [ext_resource type="Script" path="res://enemies/ball_walker.gd" id="1_evdbk"]
+[ext_resource type="Script" path="res://enemies/spawners/ball_spawner.gd" id="2_7lttv"]
 [ext_resource type="PackedScene" uid="uid://bereixsbnqp0e" path="res://enemies/ball_walker_mesh_leg_gun.tscn" id="4_25puj"]
 [ext_resource type="PackedScene" uid="uid://el0vhxctxsiu" path="res://glb_inherited_scenes/bowl_mesh.tscn" id="5_7qoeb"]
 [ext_resource type="PackedScene" uid="uid://bmtn0cwrlroe4" path="res://enemies/ball_walker_mesh_leg_stand.tscn" id="5_rin41"]
+[ext_resource type="PackedScene" uid="uid://c613hspm13igo" path="res://glb_inherited_scenes/dome_mesh.tscn" id="6_lq8vy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_arkt7"]
 radius = 2.0
@@ -592,6 +594,18 @@ tracks/10/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("BallSpawner:spawning")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_q6sxk"]
 resource_name = "step_flip"
@@ -752,6 +766,18 @@ tracks/12/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(29, -2, 2.08165e-12)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("BallSpawner:spawning")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_a32it"]
@@ -981,7 +1007,9 @@ transform = Transform3D(10, -3.48787e-15, 3.48787e-15, 3.48787e-15, 10, -3.48787
 transform = Transform3D(-0.358368, 4.91728e-06, 0.93358, 0.933581, -3.37955e-06, 0.358368, 4.91728e-06, 1, -3.37955e-06, 0, 0.503055, -2.06057e-13)
 
 [node name="RightLegStand" parent="WalkerPivot" instance=ExtResource("5_rin41")]
+process_mode = 4
 transform = Transform3D(5, -1.74393e-15, 2.84217e-14, 1.74393e-15, 5, -1.74393e-15, 7.10543e-15, 1.74393e-15, 5, 29.6135, -1.82877, -1.73156e-06)
+visible = false
 
 [node name="DomeMesh" parent="WalkerPivot/RightLegStand" index="0"]
 transform = Transform3D(0.1, -1.21652e-32, -5.19733e-25, -5.19733e-25, 0.1, 5.19733e-25, 0, 0, 0.1, 0, 0, 0)
@@ -996,9 +1024,7 @@ transform = Transform3D(-0.358368, -4.91728e-06, -0.93358, -0.93358, -3.37955e-0
 transform = Transform3D(1, -6.95797e-15, -1.17164e-08, -1.11029e-08, -4.37114e-08, -1, 4.35753e-15, 1, -4.37114e-08, -4.76837e-07, 0.502466, -1.98952e-13)
 
 [node name="RightLegGun" parent="WalkerPivot" instance=ExtResource("4_25puj")]
-process_mode = 4
 transform = Transform3D(5, 0, 2.84217e-14, 2.64698e-23, 5, -5.29396e-23, 7.10543e-15, 5.78515e-30, 5, 8.6901, 3.48645, 2.08165e-12)
-visible = false
 
 [node name="HipJoint" parent="WalkerPivot/RightLegGun" index="0"]
 transform = Transform3D(0.906213, -3.39508e-07, -0.422821, -0.422821, -1.53061e-06, -0.906213, -3.39507e-07, 1, -1.53061e-06, 0, 2.17465, 6.57723e-15)
@@ -1008,6 +1034,29 @@ transform = Transform3D(0.766045, -8.46916e-07, -0.642788, -0.642788, -2.32688e-
 
 [node name="Shin" parent="WalkerPivot/RightLegGun/HipJoint/Thigh/Knee" index="0"]
 transform = Transform3D(1, 5.67484e-16, -1.98523e-23, 6.61744e-24, -4.37114e-08, 1, -4.44089e-16, -1, -4.37114e-08, 0, 2.19894e-08, 0.503055)
+
+[node name="BallSpawner" type="Node3D" parent="."]
+transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 2.08165e-12, 7, -8)
+script = ExtResource("2_7lttv")
+attack_turn_speed = 0.2
+spawn_cooldown_secs = 1.0
+enemy_chances = {
+"BOUNCER": 0.0,
+"DEATHBALL": 2.08167e-12,
+"GIANT_BOUNCER": 0.0,
+"GIANT_ROLLER": 0.0,
+"HEAVY": 1.0,
+"POPPER": 2.08167e-12,
+"ROLLER": 2.08167e-12,
+"SKULL": 0.0,
+"SWARM": 0.0
+}
+heavy_chargeup_secs = 1.0
+
+[node name="MeshPivot" type="Node3D" parent="BallSpawner"]
+
+[node name="DomeMesh" parent="BallSpawner/MeshPivot" instance=ExtResource("6_lq8vy")]
+transform = Transform3D(0.5, 0, -1.88468e-23, -1.32349e-23, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0, 0)
 
 [editable path="WalkerPivot/LeftLegStand"]
 [editable path="WalkerPivot/RightLegStand"]

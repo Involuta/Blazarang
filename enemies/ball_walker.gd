@@ -43,10 +43,12 @@ var ball_spawner : Node3D
 func _ready():
 	level = root.find_child("Level")
 	target = root.find_child("Icon")
-	ball_spawner = $WalkerPivot/RightLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh
+	ball_spawner = find_child("BallSpawner")
 	add_to_group("lockonables")
 
 func _physics_process(delta):
+	if Input.is_action_just_pressed("Special"):
+		print(ball_spawner.position)
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	match(behav_state):
@@ -86,8 +88,8 @@ func long_dist_state_frame():
 
 func switch_to_short_dist_state():
 	behav_state = SHORT_DIST
-	$AnimationPlayer.play("step_flip")
-	await get_tree().create_tween().tween_property(self, "global_position", global_position - 19 * -transform.basis.z, 2).finished
+	$AnimationPlayer.play("squat")
+	#await get_tree().create_tween().tween_property(self, "global_position", global_position - 19 * -transform.basis.z, 2).finished
 
 func short_dist_state_frame():
 	velocity.x = 0
