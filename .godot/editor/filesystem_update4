@@ -29,3 +29,6 @@ res://glb_inherited_scenes/bowl_mesh.tscn
 res://enemies/spawners/ball_spawner.gd
 res://enemies/spawners/stationary_ball_spawner.gd
 res://levels/balls_level/section_nodes/balls_level_main_arena.tscn
+res://levels/balls_level/balls_level.tscn
+res://cotu/cotu_anims_outline.tres
+res://cotu/cotu_anims_base_material.tres

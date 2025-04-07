@@ -56,6 +56,7 @@ func _physics_process(delta):
 			long_dist_state_frame()
 		SHORT_DIST:
 			short_dist_state_frame()
+	move_and_slide()
 
 func lerp_look_at_target(turn_speed):
 	var vec3_to_target := global_position.direction_to(target.global_position)
@@ -74,7 +75,7 @@ func stop_aiming_at_target():
 func switch_to_long_dist_state():
 	behav_state = LONG_DIST
 	aiming_at_target = true
-	$AnimationPlayer.play("stand_to_foot_cannon")
+	$AnimationPlayer.play("stand_to_foot_mortar")
 	#anim_tree.set("parameters/StateMachine/conditions/shoot", true)
 
 func long_dist_state_frame():

@@ -14,7 +14,7 @@ shadow_enabled = true
 directional_shadow_mode = 1
 
 [node name="cotuCB" parent="." instance=ExtResource("1_t8k04")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 20, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 20, -26.4927)
 
 [node name="Icon" parent="." instance=ExtResource("2_553cb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 20, 2.08165e-12)

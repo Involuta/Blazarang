@@ -96,7 +96,7 @@ func update_high_target_trajectory_vels():
 	var total_flight_time : float = init_high_target_trajectory_y_vel / gravity + final_high_target_trajectory_y_vel / gravity
 	var vec_to_target := target.global_position - global_position
 	# Multiplier is used for fine-tuned accuracy adjustment
-	var lateral_dist_to_target := .95 * Vector2(vec_to_target.x, vec_to_target.z).length()
+	var lateral_dist_to_target := .75 * Vector2(vec_to_target.x, vec_to_target.z).length()
 	high_target_trajectory_lateral_vel = lateral_dist_to_target / total_flight_time
 
 func lateral_look_at_target(turn_speed):
