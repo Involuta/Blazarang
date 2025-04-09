@@ -41,6 +41,8 @@ var aiming_at_target := true
 	"HEAVY": .5,
 }
 
+const STANDING_FEET_DIST := 19.0 # Dist btwn each foot when neutrally standing
+
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 var roller := preload("res://enemies/roller_ball.tscn")
@@ -95,8 +97,15 @@ func try_end_attack():
 func stop_aiming_at_target():
 	aiming_at_target = false
 
+func target_closer_to_standing_foot():
+	return $WalkerPivot/LeftLegStand/DomeMesh/Foot.global_position.distance_to(target.global_position) <= $WalkerPivot/RightLegStand/DomeMesh/Foot.global_position.distance_to(target.global_position)
+
 func switch_to_long_dist_state():
 	behav_state = LONG_DIST
+	# If target is closer to left foot than right foot (ie closer to standing foot than gun foot), instantly move forward L units and instantly flip the walker before choosing a long range substate
+	if target_closer_to_standing_foot():
+		global_position += STANDING_FEET_DIST * -transform.basis.z
+		rotation.y += PI
 	choose_long_dist_substate()
 	aiming_at_target = true
 	ball_spawner.spawning = true
@@ -155,7 +164,6 @@ func switch_to_short_dist_state():
 		_:
 			print("Error: tried to transition to short dist state from impossible foot state")
 	ball_spawner.spawning = false
-	#await get_tree().create_tween().tween_property(self, "global_position", global_position - 19 * -transform.basis.z, 2).finished
 
 func short_dist_state_frame():
 	velocity.x = 0
