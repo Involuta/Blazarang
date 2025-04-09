@@ -7,6 +7,13 @@ enum {
 	SHORT_DIST
 }
 var behav_state = LONG_DIST
+
+enum {
+	CANNON,
+	MORTAR
+}
+var foot_state = CANNON
+
 @export var short_dist_state_range := 40.0
 
 @export var aggro_distance := -1
@@ -59,7 +66,6 @@ func _ready():
 	target = root.find_child("Icon")
 	ball_spawner = find_child("BallSpawner")
 	add_to_group("lockonables")
-	
 	
 	ball_spawner.enemy_chances = mortar_enemy_chances
 
@@ -118,12 +124,14 @@ func choose_substate_from_name(substate: String):
 
 func switch_to_mortar():
 	# Replace this with an anim_tree condition
+	foot_state = MORTAR
 	$AnimationPlayer.play("stand_to_foot_mortar")
 	ball_spawner.enemy_chances = mortar_enemy_chances
 	ball_spawner.spawning = true
 
 func switch_to_cannon():
 	# Replace this with an anim_tree condition
+	foot_state = CANNON
 	$AnimationPlayer.play("stand_to_foot_cannon")
 	ball_spawner.enemy_chances = cannon_enemy_chances
 	ball_spawner.spawning = true
@@ -139,7 +147,13 @@ func long_dist_state_frame():
 
 func switch_to_short_dist_state():
 	behav_state = SHORT_DIST
-	$AnimationPlayer.play("squat")
+	match(foot_state):
+		CANNON:
+			$AnimationPlayer.play("foot_cannon_to_stand")
+		MORTAR:
+			$AnimationPlayer.play("foot_mortar_to_stand")
+		_:
+			print("Error: tried to transition to short dist state from impossible foot state")
 	ball_spawner.spawning = false
 	#await get_tree().create_tween().tween_property(self, "global_position", global_position - 19 * -transform.basis.z, 2).finished
 
