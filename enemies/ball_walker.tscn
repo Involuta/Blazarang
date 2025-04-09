@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cy4cd0vab7e7s"]
+[gd_scene load_steps=21 format=3 uid="uid://cy4cd0vab7e7s"]
 
 [ext_resource type="Script" path="res://enemies/ball_walker.gd" id="1_evdbk"]
 [ext_resource type="Script" path="res://enemies/spawners/ball_spawner.gd" id="2_7lttv"]
@@ -1756,10 +1756,195 @@ tracks/15/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_ftjac"]
+resource_name = "foot_mortar_to_stand"
+length = 1.00001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WalkerPivot/LeftLegStand/DomeMesh/Shin/Knee:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.35619, 1.5708, 1.5708), Vector3(1.0472, 1.5708, 1.5708)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WalkerPivot/BowlPivot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(8.25982, 15.3132, 2.08165e-12), Vector3(4.9291, 12.3127, 2.08165e-12), Vector3(3.26373, 10.3965, 2.08165e-12), Vector3(1.59837, 7.87332, 2.08165e-12), Vector3(0.799186, 6.28767, 2.08165e-12), Vector3(2.08165e-12, 3.97854, 2.08165e-12)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WalkerPivot/BowlPivot:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(3.48787e-16, 3.48787e-16, -1.5708), Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WalkerPivot/LegGun/HipJoint:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-1.0472, -1.5708, -1.5708), Vector3(1.06325, -1.5708, -1.5708)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WalkerPivot/LegGun/HipJoint/Thigh/Knee:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.0944, 1.5708, 1.5708), Vector3(1.0472, 1.5708, 1.5708)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WalkerPivot/LegGun:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(8.6901, 3.48645, 2.08165e-12), Vector3(7.98112, 3.4476, 2.08165e-12), Vector3(6.91038, 3.40874, 2.08165e-12), Vector3(4.28659, 3.33104, 2.08165e-12), Vector3(0.475069, 3.25333, 2.08165e-12), Vector3(-4.28445, 3.17562, 2.08165e-12), Vector3(-7.52808, -2.6632, 2.08165e-12)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WalkerPivot/LegGun:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("WalkerPivot/RightLegStand:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("WalkerPivot/RightLegStand:process_mode")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("WalkerPivot/LegGun:process_mode")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 4]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("WalkerPivot/LegGun/HipJoint/Thigh/Knee/Shin/DomeMesh:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("BallSpawner:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("WalkerPivot/LeftLegStand:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("WalkerPivot/LeftLegStand:process_mode")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("WalkerPivot/RightLegStand/DomeMesh/Shin/Knee:rotation")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.0472, -1.5708, -1.5708)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dmtk3"]
 _data = {
 "RESET": SubResource("Animation_bwgsr"),
 "foot_cannon_to_stand": SubResource("Animation_lbspi"),
+"foot_mortar_to_stand": SubResource("Animation_ftjac"),
 "jump": SubResource("Animation_a32it"),
 "launch": SubResource("Animation_ytr22"),
 "left_stomp": SubResource("Animation_r1dud"),
@@ -1819,7 +2004,9 @@ transform = Transform3D(-0.358368, 4.91728e-06, 0.93358, 0.933581, -3.37955e-06,
 collision_layer = 0
 
 [node name="RightLegStand" parent="WalkerPivot" instance=ExtResource("5_rin41")]
+process_mode = 4
 transform = Transform3D(5, -1.74393e-15, 2.84217e-14, 1.74393e-15, 5, -1.74393e-15, 7.10543e-15, 1.74393e-15, 5, 29.6135, -1.82877, -1.73156e-06)
+visible = false
 
 [node name="DomeMesh" parent="WalkerPivot/RightLegStand" index="0"]
 transform = Transform3D(0.1, -5.19732e-25, 2.36828e-17, -3.30872e-24, 0.1, 8.14204e-24, 4.44089e-16, -8.82761e-24, 0.1, 0, 0, 0)
@@ -1831,9 +2018,7 @@ transform = Transform3D(-0.358368, -4.91728e-06, -0.93358, -0.93358, -3.37955e-0
 transform = Transform3D(1, 4.41972e-14, 2.94916e-08, 8.26076e-09, -4.37112e-08, -1, -6.83777e-14, 1, -4.37115e-08, -4.76837e-07, 0.502466, -1.13687e-13)
 
 [node name="LegGun" parent="WalkerPivot" instance=ExtResource("4_25puj")]
-process_mode = 4
 transform = Transform3D(5, 0, 2.84217e-14, 2.64698e-23, 5, -5.29396e-23, 7.10543e-15, 5.78515e-30, 5, 8.6901, 3.48645, 2.08165e-12)
-visible = false
 
 [node name="HipJoint" parent="WalkerPivot/LegGun" index="0"]
 transform = Transform3D(0.906213, -3.39508e-07, -0.422821, -0.422821, -1.53061e-06, -0.906213, -3.39507e-07, 1, -1.53061e-06, 0, 2.17465, -7.10543e-15)
