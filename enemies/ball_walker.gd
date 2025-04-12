@@ -153,6 +153,8 @@ func choose_substate_from_name(substate: String):
 			switch_to_cannon()
 		"MORTAR":
 			switch_to_mortar()
+		"STOMP":
+			stomp()
 		"default":
 			print("Error: attempted to switch to substate: ", substate)
 			switch_to_cannon()
@@ -170,6 +172,12 @@ func switch_to_cannon():
 	anim_player.play("stand_to_foot_cannon")
 	ball_spawner.enemy_chances = cannon_enemy_chances
 	ball_spawner.spawning = true
+
+func stomp():
+	if target_closer_to_standing_foot():
+		anim_player.play("left_stomp")
+	else:
+		anim_player.play("right_stomp")
 
 func long_dist_state_frame():
 	velocity.x = 0
@@ -195,3 +203,11 @@ func short_dist_state_frame():
 	velocity.z = 0
 	if global_position.distance_to(target.global_position) >= short_dist_state_range:
 		switch_to_long_dist_state()
+	short_dist_wait_remaining -= get_physics_process_delta_time()
+	if short_dist_wait_remaining <= 0:
+		match(phase):
+			PHASE.PHASE1:
+				choose_substate(phase1_short_dist_substate_chances)
+			PHASE.PHASE2:
+				choose_substate(phase2_short_dist_substate_chances)
+		short_dist_wait_remaining = max_short_dist_wait
