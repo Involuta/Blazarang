@@ -1287,7 +1287,7 @@ bones/22/rotation = Quaternion(0.825163, -0.0362546, 0.0487452, 0.561618)
 bones/23/rotation = Quaternion(0.280716, -0.231214, 0.0698765, 0.9289)
 
 [node name="Head" parent="X_boss_meshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.999988, 0.00468574, -0.00130593, -0.00486433, 0.962612, -0.27084, -1.18994e-05, 0.270843, 0.962624, 2.72486, 14.4122, 3.45162)
+transform = Transform3D(0.999988, 0.00468664, -0.00130621, -0.00486525, 0.962612, -0.270841, -1.19586e-05, 0.270844, 0.962623, 2.72487, 14.4122, 3.45163)
 
 [node name="XHead" parent="X_boss_meshes/Armature/Skeleton3D/Head" index="0"]
 visible = true
@@ -1315,16 +1315,16 @@ surface_material_override/2 = SubResource("StandardMaterial3D_s05at")
 surface_material_override/5 = SubResource("StandardMaterial3D_h2w4t")
 
 [node name="LeftArm" parent="X_boss_meshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(-0.314678, -0.340655, -0.885964, 0.805273, -0.589943, -0.059184, -0.502507, -0.732066, 0.459963, 3.48721, 14.5193, -0.369993)
+transform = Transform3D(-0.314678, -0.340655, -0.885964, 0.805273, -0.589942, -0.059184, -0.502507, -0.732067, 0.459962, 3.48721, 14.5193, -0.36999)
 
 [node name="RightArm" parent="X_boss_meshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.644948, -0.104974, -0.756983, 0.276822, -0.891167, 0.359433, -0.712329, -0.441365, -0.545697, 1.34579, 12.104, 6.04787)
+transform = Transform3D(0.644948, -0.104974, -0.756983, 0.276822, -0.891166, 0.359433, -0.712329, -0.441365, -0.545697, 1.3458, 12.104, 6.04787)
 
 [node name="LeftHand" parent="X_boss_meshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.757313, 0.0990122, -0.645502, -0.599971, -0.284861, -0.747589, -0.257899, 0.953442, -0.156325, 2.30262, 7.99301, -3.49145)
+transform = Transform3D(0.757313, 0.099012, -0.645503, -0.599971, -0.284862, -0.747588, -0.2579, 0.953441, -0.156326, 2.30262, 7.99301, -3.49146)
 
 [node name="RightHand" parent="X_boss_meshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.262156, 0.0451833, -0.963967, 0.945831, 0.186207, 0.265952, 0.191514, -0.981471, 0.00607955, 2.62653, 6.88891, 0.836239)
+transform = Transform3D(0.262156, 0.0451835, -0.963967, 0.945831, 0.186209, 0.265951, 0.191516, -0.981471, 0.00607975, 2.62653, 6.88891, 0.836238)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_uk78c")

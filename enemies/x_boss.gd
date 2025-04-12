@@ -914,8 +914,6 @@ func start_strafe_laser():
 	behav_state = STRAFE_FOLLOW
 	strafing_left = false
 	var follow_speed_tween = get_tree().create_tween()
-	#await get_tree().create_timer(.08).timeout
-	#follow_speed *= 2
 	follow_speed_tween.tween_property(self, "follow_speed", follow_speed*2, .15)
 
 func strafe_laser_deploy_arm():
