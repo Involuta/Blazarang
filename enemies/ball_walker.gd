@@ -12,6 +12,8 @@ var dist_state = DIST_TYPE.LONG_DIST
 var short_dist_wait_remaining := 3.0
 var substate_queued := false
 
+@export var bowl_slam_dist_from_feet := 5.0 # Dist target must be from both feet for a stomp to trigger a bowl slam
+
 enum PHASE {
 	PHASE1,
 	PHASE2,
@@ -28,10 +30,8 @@ var foot_state = FOOT_TYPE.CANNON
 @export var aggro_distance := -1
 
 @export var follow_speed := 5.0
-@export var target_distance := 40.0
 
 var aiming_at_target := true
-@export var ball_speed := 20.0
 
 @export var follow_turn_speed := .15
 @export var attack_turn_speed := .15
@@ -78,6 +78,7 @@ var deathball := preload("res://enemies/death_ball.tscn")
 var popper := preload("res://enemies/popper_ball.tscn")
 
 @onready var standing_foot := $WalkerPivot/LeftLegStand/DomeMesh/Foot
+@onready var gun_foot := $WalkerPivot/LegGun/HipJoint/Thigh/Knee/Shin/DomeMesh/Foot
 @onready var anim_player := $AnimationPlayer
 #@onready var anim_tree := $AnimationTree
 @onready var root := $/root/ViewControl
@@ -110,18 +111,14 @@ func lerp_look_at_target(turn_speed):
 	var vec3_to_target := global_position.direction_to(target.global_position)
 	rotation.y = lerp_angle(rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
 
-func try_end_substate():
-	if global_position.distance_to(target.global_position) > target_distance:
-		#anim_player.play("parameters/StateMachine/conditions/shoot", false)
-		pass
-	else:
-		aiming_at_target = true
-
 func stop_aiming_at_target():
 	aiming_at_target = false
 
 func target_closer_to_standing_foot():
-	return standing_foot.global_position.distance_to(target.global_position) <= $WalkerPivot/RightLegStand/DomeMesh/Foot.global_position.distance_to(target.global_position)
+	return standing_foot.global_position.distance_to(target.global_position) <= gun_foot.global_position.distance_to(target.global_position)
+
+func target_in_bowl_slam_range():
+	return standing_foot.global_position.distance_to(target.global_position) >= bowl_slam_dist_from_feet and gun_foot.global_position.distance_to(target.global_position) >= bowl_slam_dist_from_feet
 
 func switch_to_long_dist_state():
 	dist_state = DIST_TYPE.LONG_DIST
@@ -174,10 +171,15 @@ func switch_to_cannon():
 	ball_spawner.spawning = true
 
 func stomp():
-	if target_closer_to_standing_foot():
-		anim_player.play("left_stomp")
+	if target_in_bowl_slam_range():
+		anim_player.play("bowl_flip_down")
+		await anim_player.animation_finished
+		anim_player.play("bowl_flip_upright")
 	else:
-		anim_player.play("right_stomp")
+		if target_closer_to_standing_foot():
+			anim_player.play("left_stomp")
+		else:
+			anim_player.play("right_stomp")
 
 func long_dist_state_frame():
 	velocity.x = 0
