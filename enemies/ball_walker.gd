@@ -7,12 +7,16 @@ enum DIST_TYPE {
 	SHORT_DIST
 }
 var dist_state = DIST_TYPE.LONG_DIST
-@export var dist_state_switch_cooldown := 2.0 # Time after a dist state switch before dist state can switch again
+var anim_in_progress := false
+@export var max_dist_state_switch_cooldown := 10.0 # Time after a dist state switch before dist state can switch again
+var dist_state_switch_cooldown_remaining := 5.0
 var can_switch_dist_state := false
 @export var short_dist_state_range := 30.0
 @export var max_short_dist_wait := 3.0
 var short_dist_wait_remaining := 3.0
 var substate_queued := false
+
+@export var max_dist_from_arena_center := 80.0 # Max dist from arena center before walker steps the other way
 
 @export var bowl_slam_foot_radius:= 6.0 # Imagine a circle w this radius around each foot. If the target is within both circles, a bowl slam occurs
 
@@ -159,21 +163,26 @@ func choose_substate_from_name(substate: String):
 			switch_to_cannon()
 
 func switch_to_mortar():
-	# Replace this with an anim_tree condition
+	anim_in_progress = true
 	foot_state = FOOT_TYPE.MORTAR
 	anim_player.play("stand_to_foot_mortar")
 	ball_spawner.enemy_chances = mortar_enemy_chances
 	ball_spawner.spawning = true
+	await get_tree().create_timer(1.0).timeout
+	anim_in_progress = false
 
 func switch_to_cannon():
-	# Replace this with an anim_tree condition
+	anim_in_progress = true
 	foot_state = FOOT_TYPE.CANNON
 	anim_player.play("stand_to_foot_cannon")
 	ball_spawner.enemy_chances = cannon_enemy_chances
 	ball_spawner.spawning = true
+	await get_tree().create_timer(1.0).timeout
+	anim_in_progress = false
 
 func stomp():
 	if target_in_bowl_slam_range():
+		anim_in_progress = true
 		"""
 		anim_player.play("bowl_flip_down")
 		await anim_player.animation_finished
@@ -183,11 +192,15 @@ func stomp():
 		await step_flip_to_downbowl()
 		await get_tree().create_timer(0.5).timeout
 		await step_flip_to_upbowl()
+		anim_in_progress = false
 	else:
+		anim_in_progress = true
 		if target_closer_to_standing_foot():
 			global_position += STANDING_FEET_DIST * -transform.basis.z
 			rotation.y += PI
 		anim_player.play("right_stomp")
+		await get_tree().create_timer(2.0).timeout
+		anim_in_progress = false
 
 func step_flip_to_downbowl():
 	anim_player.play("step_flip_to_downbowl")
@@ -214,18 +227,28 @@ func step_flip_to_upbowl():
 	await get_tree().create_timer(.01).timeout
 	rotation.y += PI
 	
-	# walker pivot moves back to its original pos while global pos does the same
 	await create_tween().tween_property(self, "global_position", global_position - transform.basis.z * STANDING_FEET_DIST, 2.0).finished
+	
+	"""
+	# walker pivot moves back to its original pos while global pos does the same
+	create_tween().tween_property(self, "global_position", global_position - transform.basis.z * STANDING_FEET_DIST, 2.0)
+	# rotate PI/2 radians at the same time
+	await create_tween().tween_property(self, "rotation", Vector3.UP * PI/2, 2.0).as_relative().finished
+	"""
 
 func long_dist_state_frame():
 	velocity.x = 0
 	velocity.z = 0
 	if aiming_at_target:
 		lerp_look_at_target(attack_turn_speed)
-	if global_position.distance_to(target.global_position) <= short_dist_state_range:
+	if not anim_in_progress and dist_state_switch_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < short_dist_state_range:
 		switch_to_short_dist_state()
+		dist_state_switch_cooldown_remaining = max_dist_state_switch_cooldown
+	elif not anim_in_progress and dist_state_switch_cooldown_remaining > 0:
+		dist_state_switch_cooldown_remaining -= get_physics_process_delta_time()
 
 func switch_to_short_dist_state():
+	anim_in_progress = true
 	dist_state = DIST_TYPE.SHORT_DIST
 	match(foot_state):
 		FOOT_TYPE.CANNON:
@@ -235,18 +258,25 @@ func switch_to_short_dist_state():
 		_:
 			print("Error: tried to transition to short dist state from impossible foot state")
 	ball_spawner.spawning = false
+	await get_tree().create_timer(1.0).timeout
+	anim_in_progress = false
 
 func short_dist_state_frame():
 	velocity.x = 0
 	velocity.z = 0
-	if global_position.distance_to(target.global_position) >= short_dist_state_range:
+		
+	if not anim_in_progress and dist_state_switch_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) >= short_dist_state_range:
 		switch_to_long_dist_state()
-	short_dist_wait_remaining -= get_physics_process_delta_time()
-	if short_dist_wait_remaining <= 0:
+		dist_state_switch_cooldown_remaining = max_dist_state_switch_cooldown
+	elif dist_state_switch_cooldown_remaining > 0:
+		dist_state_switch_cooldown_remaining -= get_physics_process_delta_time()
+	
+	if not anim_in_progress and short_dist_wait_remaining <= 0:
 		match(phase):
 			PHASE.PHASE1:
-				print(global_position.distance_to(target.global_position))
 				choose_substate(phase1_short_dist_substate_chances)
 			PHASE.PHASE2:
 				choose_substate(phase2_short_dist_substate_chances)
 		short_dist_wait_remaining = max_short_dist_wait
+	else:
+		short_dist_wait_remaining -= get_physics_process_delta_time()

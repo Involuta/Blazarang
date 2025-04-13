@@ -2847,6 +2847,7 @@ transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-
 collision_layer = 64
 collision_mask = 130
 script = ExtResource("1_evdbk")
+max_dist_state_switch_cooldown = 5.0
 short_dist_state_range = 20.0
 max_short_dist_wait = 5.0
 
@@ -2890,9 +2891,7 @@ transform = Transform3D(-0.358368, 4.91728e-06, 0.93358, 0.933581, -3.37955e-06,
 collision_layer = 0
 
 [node name="RightLegStand" parent="WalkerPivot" instance=ExtResource("5_rin41")]
-process_mode = 4
 transform = Transform3D(5, -1.74393e-15, 2.84217e-14, 1.74393e-15, 5, -1.74393e-15, 7.10543e-15, 1.74393e-15, 5, 29.6135, -1.82877, -1.73156e-06)
-visible = false
 
 [node name="DomeMesh" parent="WalkerPivot/RightLegStand" index="0"]
 transform = Transform3D(0.1, -5.19732e-25, 2.36828e-17, -3.30872e-24, 0.1, 8.14204e-24, 4.44089e-16, -8.82761e-24, 0.1, 0, 0, 0)
@@ -2904,7 +2903,9 @@ transform = Transform3D(-0.358368, -4.91728e-06, -0.93358, -0.93358, -3.37955e-0
 transform = Transform3D(1, 4.41972e-14, 2.94916e-08, 8.26076e-09, -4.37112e-08, -1, -6.83777e-14, 1, -4.37115e-08, -4.76837e-07, 0.502466, -1.13687e-13)
 
 [node name="LegGun" parent="WalkerPivot" instance=ExtResource("4_25puj")]
+process_mode = 4
 transform = Transform3D(5, 0, 2.84217e-14, 2.64698e-23, 5, -5.29396e-23, 7.10543e-15, 5.78515e-30, 5, 8.6901, 3.48645, 2.08165e-12)
+visible = false
 
 [node name="HipJoint" parent="WalkerPivot/LegGun" index="0"]
 transform = Transform3D(0.906213, -3.39508e-07, -0.422821, -0.422821, -1.53061e-06, -0.906213, -3.39507e-07, 1, -1.53061e-06, 0, 2.17465, -7.10543e-15)
