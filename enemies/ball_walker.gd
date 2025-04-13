@@ -7,17 +7,18 @@ enum DIST_TYPE {
 	SHORT_DIST
 }
 var dist_state = DIST_TYPE.LONG_DIST
+@export var dist_state_switch_cooldown := 2.0 # Time after a dist state switch before dist state can switch again
+var can_switch_dist_state := false
 @export var short_dist_state_range := 30.0
 @export var max_short_dist_wait := 3.0
 var short_dist_wait_remaining := 3.0
 var substate_queued := false
 
-@export var bowl_slam_dist_from_feet := 5.0 # Dist target must be from both feet for a stomp to trigger a bowl slam
+@export var bowl_slam_foot_radius:= 6.0 # Imagine a circle w this radius around each foot. If the target is within both circles, a bowl slam occurs
 
 enum PHASE {
 	PHASE1,
 	PHASE2,
-	POST_LASER_COMBO,
 }
 var phase := PHASE.PHASE1
 
@@ -77,6 +78,7 @@ var heavy := preload("res://enemies/heavy_ball.tscn")
 var deathball := preload("res://enemies/death_ball.tscn")
 var popper := preload("res://enemies/popper_ball.tscn")
 
+@onready var walker_pivot := $WalkerPivot
 @onready var standing_foot := $WalkerPivot/LeftLegStand/DomeMesh/Foot
 @onready var gun_foot := $WalkerPivot/LegGun/HipJoint/Thigh/Knee/Shin/DomeMesh/Foot
 @onready var anim_player := $AnimationPlayer
@@ -118,7 +120,7 @@ func target_closer_to_standing_foot():
 	return standing_foot.global_position.distance_to(target.global_position) <= gun_foot.global_position.distance_to(target.global_position)
 
 func target_in_bowl_slam_range():
-	return standing_foot.global_position.distance_to(target.global_position) >= bowl_slam_dist_from_feet and gun_foot.global_position.distance_to(target.global_position) >= bowl_slam_dist_from_feet
+	return standing_foot.global_position.distance_to(target.global_position) >= bowl_slam_foot_radius and gun_foot.global_position.distance_to(target.global_position) >= bowl_slam_foot_radius
 
 func switch_to_long_dist_state():
 	dist_state = DIST_TYPE.LONG_DIST
@@ -172,14 +174,48 @@ func switch_to_cannon():
 
 func stomp():
 	if target_in_bowl_slam_range():
+		"""
 		anim_player.play("bowl_flip_down")
 		await anim_player.animation_finished
+		await get_tree().create_timer(1.0).timeout
 		anim_player.play("bowl_flip_upright")
+		"""
+		await step_flip_to_downbowl()
+		await get_tree().create_timer(0.5).timeout
+		await step_flip_to_upbowl()
 	else:
 		if target_closer_to_standing_foot():
-			anim_player.play("left_stomp")
-		else:
-			anim_player.play("right_stomp")
+			global_position += STANDING_FEET_DIST * -transform.basis.z
+			rotation.y += PI
+		anim_player.play("right_stomp")
+
+func step_flip_to_downbowl():
+	anim_player.play("step_flip_to_downbowl")
+	# global pos and walker pivot move an equal distance in opposite directions (global pos moves via tween, walker pivot moves via anim)
+	await create_tween().tween_property(self, "global_position", global_position + transform.basis.z * STANDING_FEET_DIST, 2.0).finished
+	# walker pivot then resets its pos so that other anims can work correctly, thus moving back to its original position
+	walker_pivot.position = Vector3(0,0,-10)
+	# To compensate, global pos also moves back to its original pos
+	global_position -= transform.basis.z * STANDING_FEET_DIST
+	# So after the step flip to downbowl anim, global pos and walker pivot are both UNCHANGED
+	# The only things that changed were the positions and rotations of the legs and bowl
+
+func step_flip_to_upbowl():
+	anim_player.play("step_flip_to_upbowl")
+	# Flip the walker so that it still moves forward
+	"""
+	Playing the anim and rotating the walker simultaneously in code causes a bug where 
+	the walker flips for an extremely short moment before resuming the mvmt correctly.
+	Each of these actions individually flip the walker, meaning that even though the code
+	does both at the same time, one flip is happening before another.
+	Through testing, it was found that it was the rotation that was happening sooner.
+	To fix the bug, a tiny delay was added between the anim starting and the rotation.
+	"""
+	await get_tree().create_timer(.01).timeout
+	rotation.y += PI
+	
+	# walker pivot moves back to its original pos while global pos does the same
+	await create_tween().tween_property(self, "global_position", global_position - transform.basis.z * STANDING_FEET_DIST, 2.0).finished
 
 func long_dist_state_frame():
 	velocity.x = 0
@@ -209,6 +245,7 @@ func short_dist_state_frame():
 	if short_dist_wait_remaining <= 0:
 		match(phase):
 			PHASE.PHASE1:
+				print(global_position.distance_to(target.global_position))
 				choose_substate(phase1_short_dist_substate_chances)
 			PHASE.PHASE2:
 				choose_substate(phase2_short_dist_substate_chances)
