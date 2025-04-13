@@ -26,3 +26,5 @@ res://cotu/cotu_anims_outline.tres
 res://cotu/cotu_anims_base_material.tres
 res://enemies/x_boss.tscn
 res://enemies/x_boss.gd
+res://enemies/ball_walker_skeleton.tscn
+res://enemies/ball_walker_skeleton.gd

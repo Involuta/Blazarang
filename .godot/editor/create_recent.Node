@@ -1,7 +1,11 @@
+Marker3D
+CollisionShape3D
+PhysicalBone3D
+SkeletonIK3D
+Skeleton3D
 Node3D
 AnimationPlayer
 StaticBody3D
-CollisionShape3D
 MeshInstance3D
 GPUParticles3D
 Area3D
@@ -27,6 +31,3 @@ CPUParticles3D
 AnimatedSprite3D
 Hitbox
 GPUParticles2D
-Sprite3D
-Hurtbox
-WorldEnvironment

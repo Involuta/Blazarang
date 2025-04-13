@@ -191,7 +191,11 @@ func stomp():
 		"""
 		await step_flip_to_downbowl()
 		await get_tree().create_timer(0.5).timeout
-		await step_flip_to_upbowl()
+		if global_position.distance_to(Vector3.ZERO) > max_dist_from_arena_center:
+			await turn_step_flip_to_upbowl()
+		else:
+			print(global_position.distance_to(Vector3.ZERO))
+			await step_flip_to_upbowl()
 		anim_in_progress = false
 	else:
 		anim_in_progress = true
@@ -213,6 +217,21 @@ func step_flip_to_downbowl():
 	# So after the step flip to downbowl anim, global pos and walker pivot are both UNCHANGED
 	# The only things that changed were the positions and rotations of the legs and bowl
 
+func turn_step_flip_to_upbowl():
+	anim_player.play("turn_step_flip_to_upbowl")
+	# Flip the walker so that it still moves forward
+	"""
+	Playing the anim and rotating the walker simultaneously in code causes a bug where 
+	the walker flips for an extremely short moment before resuming the mvmt correctly.
+	Each of these actions individually flip the walker, meaning that even though the code
+	does both at the same time, one flip is happening before another.
+	Through testing, it was found that it was the rotation that was happening sooner.
+	To fix the bug, a tiny delay was added between the anim starting and the rotation.
+	"""
+	await get_tree().create_timer(.01).timeout
+	rotation.y += PI
+	await create_tween().tween_property(self, "global_position", global_position - transform.basis.z * STANDING_FEET_DIST, 2.0).finished
+
 func step_flip_to_upbowl():
 	anim_player.play("step_flip_to_upbowl")
 	# Flip the walker so that it still moves forward
@@ -228,13 +247,6 @@ func step_flip_to_upbowl():
 	rotation.y += PI
 	
 	await create_tween().tween_property(self, "global_position", global_position - transform.basis.z * STANDING_FEET_DIST, 2.0).finished
-	
-	"""
-	# walker pivot moves back to its original pos while global pos does the same
-	create_tween().tween_property(self, "global_position", global_position - transform.basis.z * STANDING_FEET_DIST, 2.0)
-	# rotate PI/2 radians at the same time
-	await create_tween().tween_property(self, "rotation", Vector3.UP * PI/2, 2.0).as_relative().finished
-	"""
 
 func long_dist_state_frame():
 	velocity.x = 0
