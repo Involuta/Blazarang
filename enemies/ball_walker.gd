@@ -16,6 +16,8 @@ var can_switch_dist_state := false
 var short_dist_wait_remaining := 3.0
 var substate_queued := false
 
+var aiming_at_icon := false
+
 @export var max_dist_from_arena_center := 80.0 # Max dist from arena center before walker steps the other way
 
 @export var bowl_slam_foot_radius:= 6.0 # Imagine a circle w this radius around each foot. If the target is within both circles, a bowl slam occurs
@@ -91,11 +93,13 @@ var popper := preload("res://enemies/popper_ball.tscn")
 
 var level : Node3D
 var target : Node3D
+var walker_icon : Node3D
 var ball_spawner : Node3D
 
 func _ready():
 	level = root.find_child("Level")
 	target = root.find_child("Icon")
+	walker_icon = root.find_child("WalkerIcon")
 	ball_spawner = find_child("BallSpawner")
 	add_to_group("lockonables")
 	
@@ -113,9 +117,9 @@ func _physics_process(delta):
 			short_dist_state_frame()
 	move_and_slide()
 
-func lerp_look_at_target(turn_speed):
-	var vec3_to_target := global_position.direction_to(target.global_position)
-	rotation.y = lerp_angle(rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
+func lerp_look_at_position(target_pos, turn_speed):
+	var vec3_to_target := global_position.direction_to(target_pos)
+	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
 
 func stop_aiming_at_target():
 	aiming_at_target = false
@@ -181,25 +185,18 @@ func switch_to_cannon():
 	anim_in_progress = false
 
 func step_or_stomp():
-	var old_rotation = rotation
-	look_at(global_position*2)
-	rotation.x = 0
-	rotation.z = 0
-	# If the walker is too far from the arena center and is looking away from the arena center (ie 90 deg or more away from the vec pointing to the center), make it face the center
-	if global_position.distance_to(Vector3.ZERO) > max_dist_from_arena_center and old_rotation.dot(rotation) <= 0:
-		pass
-	else:
-		#rotation = old_rotation
-		pass
 	if target_in_bowl_slam_range():
+		aiming_at_icon = true
 		anim_in_progress = true
 		await step_flip_to_downbowl()
 		# If the walker is too far from the arena center after one step, turn 90 deg on the second step
 		if global_position.distance_to(Vector3.ZERO) > max_dist_from_arena_center:
-			await turn_step_flip_to_upbowl()
+			#await turn_step_flip_to_upbowl()
+			await step_flip_to_upbowl()
 		else:
 			await step_flip_to_upbowl()
 		anim_in_progress = false
+		aiming_at_icon = false
 	else:
 		anim_in_progress = true
 		if target_closer_to_standing_foot():
@@ -230,8 +227,12 @@ func step_flip_to_upbowl():
 func long_dist_state_frame():
 	velocity.x = 0
 	velocity.z = 0
+	
 	if aiming_at_target:
-		lerp_look_at_target(attack_turn_speed)
+		lerp_look_at_position(target.global_position, attack_turn_speed)
+	elif aiming_at_icon:
+		lerp_look_at_position(walker_icon.global_position, attack_turn_speed)
+	
 	if not anim_in_progress and dist_state_switch_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < short_dist_state_range:
 		switch_to_short_dist_state()
 		dist_state_switch_cooldown_remaining = max_dist_state_switch_cooldown
@@ -239,6 +240,7 @@ func long_dist_state_frame():
 		dist_state_switch_cooldown_remaining -= get_physics_process_delta_time()
 
 func switch_to_short_dist_state():
+	aiming_at_target = false
 	anim_in_progress = true
 	dist_state = DIST_TYPE.SHORT_DIST
 	match(foot_state):
@@ -255,7 +257,12 @@ func switch_to_short_dist_state():
 func short_dist_state_frame():
 	velocity.x = 0
 	velocity.z = 0
-		
+	
+	if aiming_at_target:
+		lerp_look_at_position(target.global_position, attack_turn_speed)
+	elif aiming_at_icon:
+		lerp_look_at_position(walker_icon.global_position, attack_turn_speed)
+	
 	if not anim_in_progress and dist_state_switch_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) >= short_dist_state_range:
 		switch_to_long_dist_state()
 		dist_state_switch_cooldown_remaining = max_dist_state_switch_cooldown
