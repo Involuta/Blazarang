@@ -157,7 +157,7 @@ func choose_substate_from_name(substate: String):
 		"MORTAR":
 			switch_to_mortar()
 		"STOMP":
-			stomp()
+			step_or_stomp()
 		"default":
 			print("Error: attempted to switch to substate: ", substate)
 			switch_to_cannon()
@@ -180,21 +180,24 @@ func switch_to_cannon():
 	await get_tree().create_timer(1.0).timeout
 	anim_in_progress = false
 
-func stomp():
+func step_or_stomp():
+	var old_rotation = rotation
+	look_at(global_position*2)
+	rotation.x = 0
+	rotation.z = 0
+	# If the walker is too far from the arena center and is looking away from the arena center (ie 90 deg or more away from the vec pointing to the center), make it face the center
+	if global_position.distance_to(Vector3.ZERO) > max_dist_from_arena_center and old_rotation.dot(rotation) <= 0:
+		pass
+	else:
+		#rotation = old_rotation
+		pass
 	if target_in_bowl_slam_range():
 		anim_in_progress = true
-		"""
-		anim_player.play("bowl_flip_down")
-		await anim_player.animation_finished
-		await get_tree().create_timer(1.0).timeout
-		anim_player.play("bowl_flip_upright")
-		"""
 		await step_flip_to_downbowl()
-		await get_tree().create_timer(0.5).timeout
+		# If the walker is too far from the arena center after one step, turn 90 deg on the second step
 		if global_position.distance_to(Vector3.ZERO) > max_dist_from_arena_center:
 			await turn_step_flip_to_upbowl()
 		else:
-			print(global_position.distance_to(Vector3.ZERO))
 			await step_flip_to_upbowl()
 		anim_in_progress = false
 	else:
