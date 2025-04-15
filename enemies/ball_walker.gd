@@ -19,6 +19,8 @@ var substate_queued := false
 var aiming_at_icon := false
 
 @export var max_dist_from_arena_center := 80.0 # Max dist from arena center before walker steps the other way
+@export var arena_radius := 40.0
+var walker_icon_pos := Vector3.ZERO
 
 @export var bowl_slam_foot_radius:= 6.0 # Imagine a circle w this radius around each foot. If the target is within both circles, a bowl slam occurs
 
@@ -116,10 +118,19 @@ func _physics_process(delta):
 		DIST_TYPE.SHORT_DIST:
 			short_dist_state_frame()
 	move_and_slide()
+	
+	var target_pos := -target.global_position
+	var target_pos_angle_from_center := atan2(target_pos.x, target_pos.z)
+	walker_icon_pos = Vector3(arena_radius * sin(target_pos_angle_from_center), 15, arena_radius * cos(target_pos_angle_from_center))
+	walker_icon.global_position = walker_icon_pos
 
 func lerp_look_at_position(target_pos, turn_speed):
 	var vec3_to_target := global_position.direction_to(target_pos)
 	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
+
+func linear_look_at_position(target_pos, turn_speed):
+	var vec3_to_target := global_position.direction_to(target_pos)
+	global_rotation.y = move_toward(global_rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
 
 func stop_aiming_at_target():
 	aiming_at_target = false
@@ -229,9 +240,9 @@ func long_dist_state_frame():
 	velocity.z = 0
 	
 	if aiming_at_target:
-		lerp_look_at_position(target.global_position, attack_turn_speed)
+		linear_look_at_position(target.global_position, attack_turn_speed)
 	elif aiming_at_icon:
-		lerp_look_at_position(walker_icon.global_position, attack_turn_speed)
+		linear_look_at_position(walker_icon.global_position, attack_turn_speed)
 	
 	if not anim_in_progress and dist_state_switch_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < short_dist_state_range:
 		switch_to_short_dist_state()
@@ -259,9 +270,9 @@ func short_dist_state_frame():
 	velocity.z = 0
 	
 	if aiming_at_target:
-		lerp_look_at_position(target.global_position, attack_turn_speed)
+		linear_look_at_position(target.global_position, attack_turn_speed)
 	elif aiming_at_icon:
-		lerp_look_at_position(walker_icon.global_position, attack_turn_speed)
+		linear_look_at_position(walker_icon.global_position, attack_turn_speed)
 	
 	if not anim_in_progress and dist_state_switch_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) >= short_dist_state_range:
 		switch_to_long_dist_state()
