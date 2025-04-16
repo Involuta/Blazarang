@@ -16,6 +16,7 @@ var can_switch_dist_state := false
 var short_dist_wait_remaining := 3.0
 var substate_queued := false
 
+var facing_forward := false # Whether to face toward or away from the target pos of lerp_look_at
 var aiming_at_icon := false
 
 @export var max_dist_from_arena_center := 80.0 # Max dist from arena center before walker steps the other way
@@ -126,6 +127,8 @@ func _physics_process(delta):
 
 func lerp_look_at_position(target_pos, turn_speed):
 	var vec3_to_target := global_position.direction_to(target_pos)
+	if facing_forward:
+		vec3_to_target *= -1
 	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
 
 func linear_look_at_position(target_pos, turn_speed):
@@ -218,6 +221,7 @@ func step_or_stomp():
 		anim_in_progress = false
 
 func step_flip_to_downbowl():
+	facing_forward = true
 	anim_player.play("step_flip_to_downbowl")
 	await anim_player.animation_finished
 	# Flip ball walker so that when the upbowl step flip anim plays, it moves the walker forward instead of backward
@@ -225,12 +229,8 @@ func step_flip_to_downbowl():
 	# To compensate, global pos moves back
 	global_position -= transform.basis.z * STANDING_FEET_DIST
 
-func turn_step_flip_to_upbowl():
-	anim_player.play("step_flip_to_upbowl")
-	await create_tween().tween_property(self, "rotation", Vector3.UP * PI/2, 2.0).as_relative().finished
-	# Don't do anything else; the rotation and global pos mvmt from the previous anim (step flip to downbowl) did all the work already
-
 func step_flip_to_upbowl():
+	facing_forward = false
 	anim_player.play("step_flip_to_upbowl")
 	await anim_player.animation_finished
 	# Don't do anything else; the rotation and global pos mvmt from the previous anim (step flip to downbowl) did all the work already
@@ -240,9 +240,9 @@ func long_dist_state_frame():
 	velocity.z = 0
 	
 	if aiming_at_target:
-		linear_look_at_position(target.global_position, attack_turn_speed)
+		lerp_look_at_position(target.global_position, attack_turn_speed)
 	elif aiming_at_icon:
-		linear_look_at_position(walker_icon.global_position, attack_turn_speed)
+		lerp_look_at_position(walker_icon.global_position, attack_turn_speed)
 	
 	if not anim_in_progress and dist_state_switch_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < short_dist_state_range:
 		switch_to_short_dist_state()
@@ -270,9 +270,9 @@ func short_dist_state_frame():
 	velocity.z = 0
 	
 	if aiming_at_target:
-		linear_look_at_position(target.global_position, attack_turn_speed)
+		lerp_look_at_position(target.global_position, attack_turn_speed)
 	elif aiming_at_icon:
-		linear_look_at_position(walker_icon.global_position, attack_turn_speed)
+		lerp_look_at_position(walker_icon.global_position, attack_turn_speed)
 	
 	if not anim_in_progress and dist_state_switch_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) >= short_dist_state_range:
 		switch_to_long_dist_state()
