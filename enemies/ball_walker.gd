@@ -139,7 +139,7 @@ func linear_look_at_position(target_pos, turn_speed):
 	var vec3_to_target := global_position.direction_to(target_pos)
 	if facing_forward:
 		vec3_to_target *= -1
-	global_rotation.y = Globals.rotate_toward(global_rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
+	global_rotation.y = Globals.rotate_toward(global_rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed * get_physics_process_delta_time())
 
 func stop_aiming_at_target():
 	aiming_at_target = false
@@ -210,12 +210,7 @@ func step_or_stomp():
 		aiming_at_icon = true
 		anim_in_progress = true
 		await step_flip_to_downbowl()
-		# If the walker is too far from the arena center after one step, turn 90 deg on the second step
-		if global_position.distance_to(Vector3.ZERO) > max_dist_from_arena_center:
-			#await turn_step_flip_to_upbowl()
-			await step_flip_to_upbowl()
-		else:
-			await step_flip_to_upbowl()
+		await step_flip_to_upbowl()
 		anim_in_progress = false
 		aiming_at_icon = false
 	else:
