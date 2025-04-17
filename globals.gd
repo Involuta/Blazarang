@@ -91,6 +91,11 @@ const enemy_hurtbox_data = {
 	
 }
 
+func rotate_toward(from: float, to: float, delta: float) -> float:
+	var difference := wrapf(to - from, -PI, PI)
+	var step = clamp(difference, -delta, delta)
+	return from + step
+
 func award_score(points):
 	# Apply multipliers/modifiers
 	score += points * multiplier

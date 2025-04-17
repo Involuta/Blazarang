@@ -26,3 +26,4 @@ res://skygradient.gdshader
 res://enemies/ball_walker.gd
 res://enemies/x_boss.tscn
 res://levels/balls_level/section_nodes/balls_level_main_arena.tscn
+res://globals.gd

@@ -18,6 +18,7 @@ var substate_queued := false
 
 var facing_forward := false # Whether to face toward or away from the target pos of lerp_look_at
 var aiming_at_icon := false
+var latest_saved_y_rotation := 0.0 # Latest rotation before initiating linear look at pos
 
 @export var max_dist_from_arena_center := 80.0 # Max dist from arena center before walker steps the other way
 @export var arena_radius := 40.0
@@ -125,6 +126,9 @@ func _physics_process(delta):
 	walker_icon_pos = Vector3(arena_radius * sin(target_pos_angle_from_center), 15, arena_radius * cos(target_pos_angle_from_center))
 	walker_icon.global_position = walker_icon_pos
 
+func update_latest_y_rotation():
+	latest_saved_y_rotation = global_rotation.y
+
 func lerp_look_at_position(target_pos, turn_speed):
 	var vec3_to_target := global_position.direction_to(target_pos)
 	if facing_forward:
@@ -133,7 +137,9 @@ func lerp_look_at_position(target_pos, turn_speed):
 
 func linear_look_at_position(target_pos, turn_speed):
 	var vec3_to_target := global_position.direction_to(target_pos)
-	global_rotation.y = move_toward(global_rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
+	if facing_forward:
+		vec3_to_target *= -1
+	global_rotation.y = Globals.rotate_toward(global_rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
 
 func stop_aiming_at_target():
 	aiming_at_target = false
@@ -145,6 +151,8 @@ func target_in_bowl_slam_range():
 	return standing_foot.global_position.distance_to(target.global_position) >= bowl_slam_foot_radius and gun_foot.global_position.distance_to(target.global_position) >= bowl_slam_foot_radius
 
 func switch_to_long_dist_state():
+	aiming_at_icon = false
+	aiming_at_target = true
 	dist_state = DIST_TYPE.LONG_DIST
 	# If target is closer to left foot than right foot (ie closer to standing foot than gun foot), instantly move forward L units and instantly flip the walker before choosing a long range substate
 	if target_closer_to_standing_foot():
@@ -155,7 +163,6 @@ func switch_to_long_dist_state():
 			choose_substate(phase1_long_dist_substate_chances)
 		PHASE.PHASE2:
 			choose_substate(phase2_long_dist_substate_chances)
-	aiming_at_target = true
 	ball_spawner.spawning = true
 
 func choose_substate(substate_chances):
@@ -221,6 +228,7 @@ func step_or_stomp():
 		anim_in_progress = false
 
 func step_flip_to_downbowl():
+	update_latest_y_rotation()
 	facing_forward = true
 	anim_player.play("step_flip_to_downbowl")
 	await anim_player.animation_finished
@@ -228,6 +236,7 @@ func step_flip_to_downbowl():
 	rotation.y += PI
 	# To compensate, global pos moves back
 	global_position -= transform.basis.z * STANDING_FEET_DIST
+	update_latest_y_rotation()
 
 func step_flip_to_upbowl():
 	facing_forward = false
@@ -240,9 +249,9 @@ func long_dist_state_frame():
 	velocity.z = 0
 	
 	if aiming_at_target:
-		lerp_look_at_position(target.global_position, attack_turn_speed)
+		linear_look_at_position(target.global_position, attack_turn_speed)
 	elif aiming_at_icon:
-		lerp_look_at_position(walker_icon.global_position, attack_turn_speed)
+		linear_look_at_position(walker_icon.global_position, attack_turn_speed)
 	
 	if not anim_in_progress and dist_state_switch_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < short_dist_state_range:
 		switch_to_short_dist_state()
@@ -270,9 +279,9 @@ func short_dist_state_frame():
 	velocity.z = 0
 	
 	if aiming_at_target:
-		lerp_look_at_position(target.global_position, attack_turn_speed)
+		linear_look_at_position(target.global_position, attack_turn_speed)
 	elif aiming_at_icon:
-		lerp_look_at_position(walker_icon.global_position, attack_turn_speed)
+		linear_look_at_position(walker_icon.global_position, attack_turn_speed)
 	
 	if not anim_in_progress and dist_state_switch_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) >= short_dist_state_range:
 		switch_to_long_dist_state()
