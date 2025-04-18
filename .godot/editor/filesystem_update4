@@ -29,3 +29,5 @@ res://levels/balls_level/section_nodes/balls_level_main_arena.tscn
 res://globals.gd
 res://enemies/x_blade.tscn
 res://rang/roserang.tscn
+res://glb_inherited_scenes/basic_sword.tscn
+res://enemies/gauntlet_miniboss.tscn

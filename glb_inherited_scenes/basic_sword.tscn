@@ -143,13 +143,13 @@ void fragment(){
 }"
 
 [sub_resource type="Gradient" id="Gradient_cx3l6"]
-colors = PackedColorArray(1, 1, 0, 0.490196, 1, 1, 0, 0.0392157)
+colors = PackedColorArray(1, 1, 0, 0.588235, 1, 1, 0, 0.0392157)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_avxio"]
 gradient = SubResource("Gradient_cx3l6")
 
 [sub_resource type="Gradient" id="Gradient_53tnv"]
-colors = PackedColorArray(1, 1, 0, 0.490196, 1, 1, 0, 0.0392157)
+colors = PackedColorArray(1, 1, 0, 0.588235, 1, 1, 0, 0.0392157)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_2cfx4"]
 gradient = SubResource("Gradient_53tnv")
