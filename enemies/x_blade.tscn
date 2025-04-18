@@ -188,7 +188,6 @@ void fragment(){
 }"
 
 [sub_resource type="Gradient" id="Gradient_w6t7k"]
-offsets = PackedFloat32Array(0.00431034, 1)
 colors = PackedColorArray(1, 0.470588, 0, 1, 1, 0.431373, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_cjrym"]

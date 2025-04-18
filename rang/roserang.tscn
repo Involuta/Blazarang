@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dqdba8l6potq1"]
+[gd_scene load_steps=33 format=3 uid="uid://dqdba8l6potq1"]
 
 [ext_resource type="Script" path="res://rang/roserang.gd" id="1_m7w6u"]
 [ext_resource type="Script" path="res://hitbox.gd" id="2_1xumc"]
@@ -11,8 +11,6 @@
 [ext_resource type="AudioStream" uid="uid://c6kwran0tovv1" path="res://audio/sfx/flying_rang.wav" id="8_ml2k7"]
 [ext_resource type="AudioStream" uid="uid://7urbs42hegym" path="res://audio/sfx/ricochet.wav" id="9_iyhsu"]
 [ext_resource type="Shader" path="res://GPUTrail-main/shaders/trail.gdshader" id="12_mcojj"]
-[ext_resource type="Texture2D" uid="uid://crk6pkb7e5rwc" path="res://GPUTrail-main/defaults/texture.tres" id="13_ntbhv"]
-[ext_resource type="Shader" path="res://GPUTrail-main/shaders/trail_draw_pass.gdshader" id="13_vk0if"]
 [ext_resource type="Script" path="res://GPUTrail-main/GPUTrail3D.gd" id="14_gsab4"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_k7swi"]
@@ -43,6 +41,170 @@ shader_parameter/ColorParameter = Color(2, 2, 1, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_18bd2"]
 shader = ExtResource("12_mcojj")
 
+[sub_resource type="Shader" id="Shader_7gmku"]
+code = "shader_type spatial;
+
+render_mode unshaded,world_vertex_coords,cull_disabled;
+
+uniform sampler2D tex : repeat_disable, source_color, hint_default_white;
+uniform sampler2D color_ramp : repeat_disable, source_color, hint_default_white;
+uniform sampler2D curve : repeat_disable, hint_default_white;
+uniform mat4 emmission_transform = mat4(1);
+uniform int flags = 0;
+/*uniform bool vertical_texture = false;
+uniform bool use_red_as_alpha = false;
+uniform bool billboard = false;
+uniform bool dewiggle = false;
+uniform bool snap_to_transform = false;*/
+
+#define vertical_texture  bool(flags & 1)
+#define use_red_as_alpha  bool(flags & 2)
+#define billboard		  bool(flags & 4)
+#define dewiggle 		  bool(flags & 8)
+#define snap_to_transform bool(flags & 16)
+#define clip_overlaps bool(flags & 32)
+
+
+varying float scale_interp;
+varying vec2 clip;
+varying vec2 mesh_uv;
+void vertex(){
+	mesh_uv = UV;
+	
+	mat4 my_model_matrix = MODEL_MATRIX;
+	if(snap_to_transform && INSTANCE_CUSTOM.w==2.0){
+		my_model_matrix[1] = emmission_transform * vec4(0,1,0,1);
+		my_model_matrix[2] = emmission_transform * vec4(0,-1,0,1);
+	}
+	
+	if(billboard){
+		vec3 t0 = my_model_matrix[0].xyz-my_model_matrix[3].xyz;
+		vec3 t1 = my_model_matrix[1].xyz-my_model_matrix[2].xyz;
+		
+		//vec3 up1 = up0;
+		vec3 up0 = length(t0)*normalize(
+			cross(
+				my_model_matrix[3].xyz-INV_VIEW_MATRIX[3].xyz,
+				//-INV_VIEW_MATRIX[2].xyz,
+				t0));
+		vec3 up1 = length(t1)*normalize(
+			cross(
+				my_model_matrix[2].xyz-INV_VIEW_MATRIX[3].xyz,
+				//-INV_VIEW_MATRIX[2].xyz,
+				t1));
+		
+		my_model_matrix[0] = my_model_matrix[3];
+		my_model_matrix[1] = my_model_matrix[2];
+		
+		my_model_matrix[0].xyz += up0;
+		my_model_matrix[3].xyz -= up0;
+		
+		my_model_matrix[1].xyz += up1;
+		my_model_matrix[2].xyz -= up1;
+	}
+	
+	vec3 a = mix(my_model_matrix[1].xyz,my_model_matrix[0].xyz,UV.x);
+	vec3 b = mix(my_model_matrix[2].xyz,my_model_matrix[3].xyz,UV.x);
+
+	UV.x = (UV.x + INSTANCE_CUSTOM.w-1.0 - 2.0)/(INSTANCE_CUSTOM.z-1.0);
+
+	
+	float h = textureLod(curve, vec2(UV.x), 0.0).x;//h=1.0;
+	
+	VERTEX = mix(a,b,(UV.y-0.5)*h + 0.5);
+
+	if(dewiggle){
+		scale_interp = h;
+		UV *= scale_interp;
+	}
+	
+		
+	clip.x = dot(VERTEX - INV_VIEW_MATRIX[3].xyz,cross(my_model_matrix[1].xyz - INV_VIEW_MATRIX[3].xyz,my_model_matrix[2].xyz - INV_VIEW_MATRIX[3].xyz));
+	clip.y = dot(VERTEX - INV_VIEW_MATRIX[3].xyz,cross(my_model_matrix[3].xyz - INV_VIEW_MATRIX[3].xyz,my_model_matrix[0].xyz - INV_VIEW_MATRIX[3].xyz));
+}
+
+void fragment(){
+	//if(billboard && !FRONT_FACING) discard;
+	
+	vec2 clip0 = clip;
+	float ababab = clip0.x*clip0.y;
+	//ababab += dFdx(ababab) + dFdy(ababab);
+	//clip0 -= fwidth(clip0);
+	if(clip_overlaps && ababab < 0.0) { 
+		
+		
+		
+		if(abs(mesh_uv.x-0.5)<0.5)
+			discard;
+	}
+	
+	vec2 base_uv = UV;
+
+	if(dewiggle){
+		base_uv /= scale_interp;
+	}
+	
+	vec2 raw_uv = base_uv;
+
+	if(vertical_texture){
+		base_uv = base_uv.yx;
+	}
+	
+	vec4 T = textureLod(tex, base_uv, 0.0);
+	ALBEDO = T.rgb;
+	ALPHA = T.a;
+	
+	if(use_red_as_alpha){
+		ALBEDO = vec3(1);
+		ALPHA = T.r;
+	}
+	
+	T = textureLod(color_ramp, raw_uv, 0.0);
+	ALBEDO *= T.rgb;
+	ALPHA *= T.a;
+	
+	//ALBEDO = vec3(UV,0);
+	
+	if((base_uv.x < .01) || (.99 < base_uv.x)){
+		//ALBEDO = vec3(1,0,1);
+	}
+}"
+
+[sub_resource type="Gradient" id="Gradient_87pwe"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 0, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7l0hn"]
+gradient = SubResource("Gradient_87pwe")
+
+[sub_resource type="Curve" id="Curve_fteg1"]
+_data = [Vector2(0, 1), 0.0, -1.18082, 0, 0, Vector2(1, 0.0129609), -0.943115, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_s2ypa"]
+width = 32
+curve = SubResource("Curve_fteg1")
+
+[sub_resource type="Gradient" id="Gradient_aaeak"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_r0f1a"]
+gradient = SubResource("Gradient_aaeak")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4fsvp"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_7gmku")
+shader_parameter/emmission_transform = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+shader_parameter/flags = 40
+shader_parameter/tex = SubResource("GradientTexture1D_r0f1a")
+shader_parameter/color_ramp = SubResource("GradientTexture1D_7l0hn")
+shader_parameter/curve = SubResource("CurveTexture_s2ypa")
+
+[sub_resource type="QuadMesh" id="QuadMesh_cvf3i"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_4fsvp")
+
 [sub_resource type="Gradient" id="Gradient_1xf5o"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 0, 1, 1)
 
@@ -56,19 +218,6 @@ point_count = 2
 [sub_resource type="CurveTexture" id="CurveTexture_s4uxv"]
 width = 32
 curve = SubResource("Curve_kf8t5")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jp5p1"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("13_vk0if")
-shader_parameter/emmission_transform = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
-shader_parameter/flags = 40
-shader_parameter/tex = ExtResource("13_ntbhv")
-shader_parameter/color_ramp = SubResource("GradientTexture1D_aaqkt")
-shader_parameter/curve = SubResource("CurveTexture_s4uxv")
-
-[sub_resource type="QuadMesh" id="QuadMesh_cvf3i"]
-material = SubResource("ShaderMaterial_jp5p1")
 
 [node name="Roserang" type="CharacterBody3D"]
 collision_mask = 66
