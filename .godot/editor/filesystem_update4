@@ -8,11 +8,11 @@ res://GPUTrail-main/defaults/texture.tres
 res://GPUTrail-main/defaults/curve.tres
 res://levels/x_boss_level/background_nodes/diamond.tres
 res://glb_inherited_scenes/outline.gdshader
+res://textures/x_arrow.tres
+res://textures/small_solid_white.tres
 res://shaders/cotu_outline.gdshader
 res://cotu/cotu_anims_outline.tres
 res://cotu/cotu_anims_base_material.tres
-res://textures/x_arrow.tres
-res://textures/small_solid_white.tres
 res://rang/roserang_shader.tres
 res://glb_inherited_scenes/black_outline.gdshader
 res://shaders/outline_everything.gdshader
@@ -26,8 +26,3 @@ res://skygradient.gdshader
 res://enemies/ball_walker.gd
 res://enemies/x_boss.tscn
 res://levels/balls_level/section_nodes/balls_level_main_arena.tscn
-res://globals.gd
-res://enemies/x_blade.tscn
-res://rang/roserang.tscn
-res://glb_inherited_scenes/basic_sword.tscn
-res://enemies/gauntlet_miniboss.tscn

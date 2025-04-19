@@ -24,7 +24,7 @@ var latest_saved_y_rotation := 0.0 # Latest rotation before initiating linear lo
 @export var arena_radius := 40.0
 var walker_icon_pos := Vector3.ZERO
 
-@export var bowl_slam_foot_radius:= 6.0 # Imagine a circle w this radius around each foot. If the target is within both circles, a bowl slam occurs
+@export var bowl_slam_proximity := 5.0 # Imagine a circle w this radius around the walker pivot. If the target is within the circle, a bowl slam occurs
 
 enum PHASE {
 	PHASE1,
@@ -148,7 +148,7 @@ func target_closer_to_standing_foot():
 	return standing_foot.global_position.distance_to(target.global_position) <= gun_foot.global_position.distance_to(target.global_position)
 
 func target_in_bowl_slam_range():
-	return standing_foot.global_position.distance_to(target.global_position) >= bowl_slam_foot_radius and gun_foot.global_position.distance_to(target.global_position) >= bowl_slam_foot_radius
+	return walker_pivot.global_position.distance_to(target.global_position) <= bowl_slam_proximity
 
 func switch_to_long_dist_state():
 	aiming_at_icon = false
@@ -207,12 +207,17 @@ func switch_to_cannon():
 
 func step_or_stomp():
 	if target_in_bowl_slam_range():
-		aiming_at_icon = true
-		anim_in_progress = true
-		await step_flip_to_downbowl()
-		await step_flip_to_upbowl()
-		anim_in_progress = false
-		aiming_at_icon = false
+		if rng.randf() > .5:
+			aiming_at_icon = true
+			anim_in_progress = true
+			await step_flip_to_downbowl()
+			await step_flip_to_upbowl()
+			anim_in_progress = false
+			aiming_at_icon = false
+		else:
+			anim_in_progress = true
+			await bowl_slam()
+			anim_in_progress = false
 	else:
 		anim_in_progress = true
 		if target_closer_to_standing_foot():
@@ -221,6 +226,14 @@ func step_or_stomp():
 		anim_player.play("right_stomp")
 		await get_tree().create_timer(2.0).timeout
 		anim_in_progress = false
+
+func bowl_slam():
+	anim_player.play("bowl_flip_down")
+	await anim_player.animation_finished
+	anim_player.play("bowl_slam")
+	await anim_player.animation_finished
+	anim_player.play("bowl_flip_upright")
+	await anim_player.animation_finished
 
 func step_flip_to_downbowl():
 	update_latest_y_rotation()
