@@ -15,6 +15,7 @@ var popper := preload("res://enemies/popper_ball.tscn")
 
 var lateral_aiming_at_target := true
 enum {
+	STOP,
 	AT_TARGET,
 	HIGH_TARGET_TRAJECTORY,
 	HIGH_BOUNCE_TRAJECTORY
@@ -38,7 +39,8 @@ var spawn_cooldown_active := false
 	"POPPER" : 1.0,
 }
 
-@export var roller_move_speed := 20.0
+@export var roller_fwd_speed := 20.0
+@export var roller_init_down_speed := 5.0 # downward y vel of rollers when they're first shot
 @export var move_dir_angle_arc := 20.0
 @export var bounce_height := 10.0
 var high_target_trajectory_lateral_vel := 0.0
@@ -79,6 +81,8 @@ func _physics_process(delta):
 		lateral_look_at_target(attack_turn_speed)
 	if spawn_cooldown_active:
 		match(vert_aim_type):
+			STOP:
+				pass
 			AT_TARGET:
 				vert_look_at_target(attack_turn_speed * delta)
 			HIGH_BOUNCE_TRAJECTORY:
@@ -104,8 +108,7 @@ func lateral_look_at_target(turn_speed):
 	look_at(target.global_position)
 	var target_global_rotation := rotation
 	rotation = old_global_rotation
-	rotation.y = move_toward(rotation.y, target_global_rotation.y, turn_speed)
-	#global_rotation.y = lerp_angle(global_rotation.y, target_global_rotation.y, turn_speed)
+	rotation.y = clampf(move_toward(rotation.y, target_global_rotation.y, turn_speed), -PI/4, PI/4)
 
 func vert_look_at_target(turn_speed):
 	var old_global_rotation = mesh.rotation
@@ -117,7 +120,7 @@ func vert_look_at_target(turn_speed):
 
 func vert_look_high_bounce_trajectory(turn_speed):
 	# global_rotation "upward" = tan^-1(y_vel/x_vel)
-	var target_global_rotation_x = atan2(bounce_height, .25 * roller_move_speed)
+	var target_global_rotation_x = atan2(bounce_height, .25 * roller_fwd_speed)
 	mesh.rotation.x = move_toward(mesh.rotation.x, target_global_rotation_x, turn_speed)
 	#mesh.global_rotation.x = lerp_angle(mesh.global_rotation.x, target_global_rotation_x, turn_speed)
 
@@ -174,17 +177,19 @@ func spawn_from_name(enemy_name):
 			await spawn_roller()
 
 func spawn_roller():
-	vert_aim_type = AT_TARGET
+	vert_aim_type = STOP
+	lateral_aiming_at_target = false
 	await get_tree().create_timer(roller_chargeup_secs).timeout
 	var b = roller.instantiate()
 	level.add_child.call_deferred(b)
 	await b.tree_entered
 	b.global_position = global_position
 	b.global_rotation = mesh.global_rotation
-	b.linear_velocity = roller_move_speed * -b.get_global_transform().basis.z
+	b.linear_velocity = roller_fwd_speed * -b.get_global_transform().basis.z
+	b.linear_velocity.y = -roller_init_down_speed
 
 func spawn_bouncer():
-	vert_aim_type = HIGH_BOUNCE_TRAJECTORY
+	vert_aim_type = STOP
 	await get_tree().create_timer(bouncer_chargeup_secs).timeout
 	var b = bouncer.instantiate()
 	level.add_child.call_deferred(b)
@@ -202,7 +207,8 @@ func spawn_giant_roller():
 	await b.tree_entered
 	b.global_position = global_position
 	b.global_rotation = global_rotation
-	b.linear_velocity = roller_move_speed * -b.get_global_transform().basis.z
+	b.linear_velocity = roller_fwd_speed * -b.get_global_transform().basis.z
+	b.linear_velocity.y = -roller_init_down_speed
 
 func spawn_giant_bouncer():
 	vert_aim_type = HIGH_BOUNCE_TRAJECTORY
@@ -212,7 +218,7 @@ func spawn_giant_bouncer():
 	await b.tree_entered
 	b.global_position = global_position
 	b.global_rotation = global_rotation
-	b.linear_velocity = .25 * roller_move_speed * -b.get_global_transform().basis.z
+	b.linear_velocity = .25 * roller_fwd_speed * -b.get_global_transform().basis.z
 	b.linear_velocity.y = bounce_height
 
 func spawn_swarm():
@@ -225,8 +231,8 @@ func spawn_swarm():
 		b.global_position = global_position
 		var move_dir_half_arc := deg_to_rad(move_dir_angle_arc) / 2
 		b.global_rotation = global_rotation + rng.randf_range(-move_dir_half_arc, move_dir_half_arc) * Vector3.UP
-		b.linear_velocity = roller_move_speed * -b.get_global_transform().basis.z
-		b.linear_velocity.y = rng.randfn()
+		b.linear_velocity = roller_fwd_speed * -b.get_global_transform().basis.z
+		b.linear_velocity.y = -roller_init_down_speed
 
 func spawn_skull():
 	vert_aim_type = AT_TARGET
@@ -236,12 +242,13 @@ func spawn_skull():
 	await b.tree_entered
 	b.global_position = global_position
 	b.global_rotation = global_rotation
-	b.linear_velocity = roller_move_speed * -b.get_global_transform().basis.z
+	b.linear_velocity = roller_fwd_speed * -b.get_global_transform().basis.z
+	b.linear_velocity.y = -roller_init_down_speed
 	b.follow_speed = skull_follow_speed
 	b.explode_dist = skull_explode_dist
 
 func spawn_heavy():
-	vert_aim_type = HIGH_TARGET_TRAJECTORY
+	vert_aim_type = STOP
 	await get_tree().create_timer(heavy_chargeup_secs).timeout
 	var b = heavy.instantiate()
 	level.add_child.call_deferred(b)
@@ -270,4 +277,4 @@ func spawn_popper():
 	await b.tree_entered
 	b.global_position = global_position
 	b.global_rotation = global_rotation
-	b.linear_velocity = roller_move_speed * -b.get_global_transform().basis.z
+	b.linear_velocity = roller_fwd_speed * -b.get_global_transform().basis.z
