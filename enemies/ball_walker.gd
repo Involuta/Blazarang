@@ -20,6 +20,7 @@ var substate_queued := false
 
 var facing_forward := false # Whether to face toward or away from the target pos of lerp_look_at
 var aiming_at_icon := false
+var just_walked := false # Whether the last short dist action the walker performed was a walk
 var latest_saved_y_rotation := 0.0 # Latest rotation before initiating linear look at pos
 
 @export var max_dist_from_arena_center := 80.0 # Max dist from arena center before walker steps the other way
@@ -100,20 +101,20 @@ var popper := preload("res://enemies/popper_ball.tscn")
 var level : Node3D
 var target : Node3D
 var walker_icon : Node3D
-var ball_spawner : Node3D
+var foot_ball_spawner : Node3D
 
 func _ready():
 	level = root.find_child("Level")
 	target = root.find_child("Icon")
 	walker_icon = root.find_child("WalkerIcon")
-	ball_spawner = find_child("BallSpawner")
+	foot_ball_spawner = find_child("FootBallSpawner")
 	add_to_group("lockonables")
 	
-	ball_spawner.enemy_chances = mortar_enemy_chances
+	foot_ball_spawner.enemy_chances = mortar_enemy_chances
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("Special"):
-		print(ball_spawner.position)
+		print(foot_ball_spawner.position)
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	match(dist_state):
@@ -165,7 +166,7 @@ func switch_to_long_dist_state():
 			choose_substate(phase1_long_dist_substate_chances)
 		PHASE.PHASE2:
 			choose_substate(phase2_long_dist_substate_chances)
-	ball_spawner.spawning = true
+	foot_ball_spawner.spawning = true
 
 func choose_substate(substate_chances):
 	var choice := rng.randf()
@@ -193,8 +194,8 @@ func switch_to_mortar():
 	anim_in_progress = true
 	foot_state = FOOT_TYPE.MORTAR
 	anim_player.play("stand_to_foot_mortar")
-	ball_spawner.enemy_chances = mortar_enemy_chances
-	ball_spawner.spawning = true
+	foot_ball_spawner.enemy_chances = mortar_enemy_chances
+	foot_ball_spawner.spawning = true
 	await get_tree().create_timer(1.0).timeout
 	anim_in_progress = false
 
@@ -202,14 +203,15 @@ func switch_to_cannon():
 	anim_in_progress = true
 	foot_state = FOOT_TYPE.CANNON
 	anim_player.play("stand_to_foot_cannon")
-	ball_spawner.enemy_chances = cannon_enemy_chances
-	ball_spawner.spawning = true
+	foot_ball_spawner.enemy_chances = cannon_enemy_chances
+	foot_ball_spawner.spawning = true
 	await get_tree().create_timer(1.0).timeout
 	anim_in_progress = false
 
 func step_or_stomp():
-	# If you're too far from arena center, walk towards icon
-	if global_position.distance_to(min_y_pos * Vector3.UP) >= max_dist_from_arena_center:
+	# If you're too far from arena center and you didn't just walk, walk towards icon
+	if not just_walked and global_position.distance_to(min_y_pos * Vector3.UP) >= max_dist_from_arena_center:
+		just_walked = true
 		aiming_at_icon = true
 		anim_in_progress = true
 		await step_flip_to_downbowl()
@@ -218,7 +220,8 @@ func step_or_stomp():
 		aiming_at_icon = false
 	# Otherwise, if target is directly below you, either bowl slam or walk away
 	elif target_in_bowl_slam_range():
-		if rng.randf() > .5:
+		if not just_walked and rng.randf() > .5:
+			just_walked = true
 			aiming_at_icon = true
 			anim_in_progress = true
 			await step_flip_to_downbowl()
@@ -226,11 +229,13 @@ func step_or_stomp():
 			anim_in_progress = false
 			aiming_at_icon = false
 		else:
+			just_walked = false
 			anim_in_progress = true
 			await bowl_slam()
 			anim_in_progress = false
 	# If you cannot bowl slam or walk, stomp. If the target is closer to the gun foot, flip yourself
 	else:
+		just_walked = false
 		anim_in_progress = true
 		if target_closer_to_standing_foot():
 			global_position += STANDING_FEET_DIST * -transform.basis.z
@@ -290,7 +295,7 @@ func switch_to_short_dist_state():
 			anim_player.play("foot_mortar_to_stand")
 		_:
 			print("Error: tried to transition to short dist state from impossible foot state")
-	ball_spawner.spawning = false
+	foot_ball_spawner.spawning = false
 	await get_tree().create_timer(1.0).timeout
 	anim_in_progress = false
 
