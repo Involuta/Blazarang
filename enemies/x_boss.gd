@@ -48,7 +48,7 @@ enum PHASE {
 var phase := PHASE.PHASE1
 @export var pre_laser_combo_time_remaining := 10.0
 
-@export var min_y_pos := 11.4
+@export var min_y_pos := 11.4 # y pos of arena floor, ie X's minimum y position
 
 @export var aggro_distance := -1
 

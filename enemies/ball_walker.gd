@@ -2,6 +2,8 @@ extends CharacterBody3D
 
 @export var entity_name := "BallWalker"
 
+var min_y_pos := 10.0 # y pos of arena floor, used for calculating dist walker is from arena center
+
 enum DIST_TYPE {
 	LONG_DIST,
 	SHORT_DIST
@@ -206,7 +208,16 @@ func switch_to_cannon():
 	anim_in_progress = false
 
 func step_or_stomp():
-	if target_in_bowl_slam_range():
+	# If you're too far from arena center, walk towards icon
+	if global_position.distance_to(min_y_pos * Vector3.UP) >= max_dist_from_arena_center:
+		aiming_at_icon = true
+		anim_in_progress = true
+		await step_flip_to_downbowl()
+		await step_flip_to_upbowl()
+		anim_in_progress = false
+		aiming_at_icon = false
+	# Otherwise, if target is directly below you, either bowl slam or walk away
+	elif target_in_bowl_slam_range():
 		if rng.randf() > .5:
 			aiming_at_icon = true
 			anim_in_progress = true
@@ -218,6 +229,7 @@ func step_or_stomp():
 			anim_in_progress = true
 			await bowl_slam()
 			anim_in_progress = false
+	# If you cannot bowl slam or walk, stomp. If the target is closer to the gun foot, flip yourself
 	else:
 		anim_in_progress = true
 		if target_closer_to_standing_foot():
