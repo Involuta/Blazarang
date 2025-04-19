@@ -235,15 +235,15 @@ func spawn_swarm():
 		b.linear_velocity.y = -roller_init_down_speed
 
 func spawn_skull():
-	vert_aim_type = AT_TARGET
+	vert_aim_type = STOP
 	await get_tree().create_timer(skull_chargeup_secs).timeout
 	var b = skull.instantiate()
 	level.add_child.call_deferred(b)
 	await b.tree_entered
 	b.global_position = global_position
 	b.global_rotation = global_rotation
-	b.linear_velocity = roller_fwd_speed * -b.get_global_transform().basis.z
-	b.linear_velocity.y = -roller_init_down_speed
+	#b.linear_velocity = roller_fwd_speed * -b.get_global_transform().basis.z
+	b.linear_velocity.y = 2 * roller_init_down_speed
 	b.follow_speed = skull_follow_speed
 	b.explode_dist = skull_explode_dist
 

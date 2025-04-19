@@ -69,7 +69,8 @@ var aiming_at_target := true
 }
 
 @export var cannon_enemy_chances = {
-	"ROLLER": 1.0,
+	"ROLLER": .66,
+	"SKULL" : .34
 }
 
 @export var mortar_enemy_chances = {

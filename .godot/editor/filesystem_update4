@@ -28,3 +28,5 @@ res://enemies/x_boss.tscn
 res://levels/balls_level/section_nodes/balls_level_main_arena.tscn
 res://enemies/spawners/ball_spawner.gd
 res://enemies/x_boss.gd
+res://enemies/skull_ball.gd
+res://enemies/skull_ball.tscn
