@@ -17,6 +17,7 @@ func _ready():
 	level = root.find_child("Level")
 	area_entered.connect(on_hit)
 	current_opponent_hitboxes = opponent_hitboxes
+	assert(opponent_hitboxes != ["default"], "opponent hitboxes not changed from default")
 
 func set_invincibility(val: bool):
 	if val:

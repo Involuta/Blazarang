@@ -1,6 +1,8 @@
 class_name EnemyHurtbox
 extends Hurtbox
 
+@export var enemy_name := "XBoss"
+
 @export var hit_particle_color := Color.RED
 
 var hit_score := 1.0
@@ -11,7 +13,6 @@ var rang_hit_effect := preload("res://rang/hit_effect1.tscn")
 var death_particle := preload("res://enemies/death_particle.tscn")
 
 func _ready():
-	var enemy_name = parent.entity_name
 	max_health = Globals.enemy_hurtbox_data[enemy_name][0]
 	health = max_health
 	hit_score = Globals.enemy_hurtbox_data[enemy_name][1]
