@@ -1,7 +1,7 @@
 class_name EnemyHurtbox
 extends Hurtbox
 
-@export var enemy_name := "XBoss"
+@export var enemy_name := "GauntletMeleeTier1"
 
 @export var hit_particle_color := Color.RED
 

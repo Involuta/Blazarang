@@ -23,3 +23,7 @@ res://ui/glow.gdshader
 res://ui/glitch.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
 res://skygradient.gdshader
+res://enemies/x_boss.tscn
+res://levels/balls_level/section_nodes/balls_level_main_arena.tscn
+res://enemies/skull_ball.tscn
+res://globals.gd

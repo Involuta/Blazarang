@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cy4cd0vab7e7s"]
+[gd_scene load_steps=31 format=3 uid="uid://cy4cd0vab7e7s"]
 
 [ext_resource type="Script" path="res://enemies/ball_walker.gd" id="1_evdbk"]
 [ext_resource type="Script" path="res://enemies/spawners/ball_spawner.gd" id="2_7lttv"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bmtn0cwrlroe4" path="res://enemies/ball_walker_mesh_leg_stand.tscn" id="5_rin41"]
 [ext_resource type="Script" path="res://enemies/multi_hurtbox_child.gd" id="5_tqkwm"]
 [ext_resource type="PackedScene" uid="uid://c613hspm13igo" path="res://glb_inherited_scenes/dome_mesh.tscn" id="6_lq8vy"]
+[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="8_ng0f4"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_5sb8t"]
 height = 0.5
@@ -2894,6 +2895,11 @@ _data = {
 [sub_resource type="SphereShape3D" id="SphereShape3D_54la2"]
 radius = 7.2
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_kna8k"]
+radius = 7.2
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_njqlp"]
+
 [node name="BallWalker" type="CharacterBody3D"]
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 collision_layer = 64
@@ -2963,18 +2969,20 @@ transform = Transform3D(-0.358368, 4.91728e-06, 0.93358, 0.933581, -3.37955e-06,
 [node name="Foot" parent="WalkerPivot/LeftLegStand/DomeMesh" index="2"]
 collision_layer = 0
 
-[node name="FootHurtbox" type="Area3D" parent="WalkerPivot/LeftLegStand/DomeMesh/Foot" index="1"]
+[node name="LeftFootHurtbox" type="Area3D" parent="WalkerPivot/LeftLegStand/DomeMesh/Foot" index="1" node_paths=PackedStringArray("hurtbox_owner")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -4, 2.08165e-12)
+collision_layer = 8
+collision_mask = 265
 script = ExtResource("5_tqkwm")
+hurtbox_owner = NodePath("../../../../../MultiHurtboxOwner")
 enemy_name = "BallWalker"
+opponent_hitboxes = ["PlayerHitbox"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WalkerPivot/LeftLegStand/DomeMesh/Foot/FootHurtbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WalkerPivot/LeftLegStand/DomeMesh/Foot/LeftFootHurtbox"]
 shape = SubResource("SphereShape3D_54la2")
 
 [node name="RightLegStand" parent="WalkerPivot" instance=ExtResource("5_rin41")]
-process_mode = 4
 transform = Transform3D(5, -1.74393e-15, 2.84217e-14, 1.74393e-15, 5, -1.74393e-15, 7.10543e-15, 1.74393e-15, 5, 29.6135, -1.82877, -1.73156e-06)
-visible = false
 
 [node name="DomeMesh" parent="WalkerPivot/RightLegStand" index="0"]
 transform = Transform3D(0.1, -5.19732e-25, 2.36828e-17, -3.30872e-24, 0.1, 8.14204e-24, 4.44089e-16, -8.82761e-24, 0.1, 0, 0, 0)
@@ -2985,8 +2993,22 @@ transform = Transform3D(-0.358368, -4.91728e-06, -0.93358, -0.93358, -3.37955e-0
 [node name="HipJoint" parent="WalkerPivot/RightLegStand/DomeMesh/Shin/Knee/Thigh" index="0"]
 transform = Transform3D(1, 4.41972e-14, 2.94916e-08, 8.26076e-09, -4.37112e-08, -1, -6.83777e-14, 1, -4.37115e-08, -4.76837e-07, 0.502466, -1.13687e-13)
 
+[node name="RightFootHurtbox" type="Area3D" parent="WalkerPivot/RightLegStand/DomeMesh/Foot" index="1" node_paths=PackedStringArray("hurtbox_owner")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -4, 2.08165e-12)
+collision_layer = 8
+collision_mask = 265
+script = ExtResource("5_tqkwm")
+hurtbox_owner = NodePath("../../../../../MultiHurtboxOwner")
+enemy_name = "BallWalker"
+opponent_hitboxes = ["PlayerHitbox"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WalkerPivot/RightLegStand/DomeMesh/Foot/RightFootHurtbox"]
+shape = SubResource("SphereShape3D_kna8k")
+
 [node name="LegGun" parent="WalkerPivot" instance=ExtResource("4_25puj")]
+process_mode = 4
 transform = Transform3D(5, 0, 2.84217e-14, 2.64698e-23, 5, -5.29396e-23, 7.10543e-15, 5.78515e-30, 5, 8.6901, 3.48645, 2.08165e-12)
+visible = false
 
 [node name="HipJoint" parent="WalkerPivot/LegGun" index="0"]
 transform = Transform3D(0.906213, -3.39508e-07, -0.422821, -0.422821, -1.53061e-06, -0.906213, -3.39507e-07, 1, -1.53061e-06, 0, 2.17465, -7.10543e-15)
@@ -3022,6 +3044,16 @@ heavy_chargeup_secs = 1.0
 
 [node name="DomeMesh" parent="FootBallSpawner/MeshPivot" instance=ExtResource("6_lq8vy")]
 transform = Transform3D(0.5, -1.74393e-16, 1.74393e-16, 1.74393e-16, 0.5, -1.74393e-16, -1.74393e-16, 1.74393e-16, 0.5, 0, 0, 0)
+
+[node name="MultiHurtboxOwner" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("8_ng0f4")
+enemy_name = "BallWalker"
+opponent_hitboxes = ["PlayerHitbox"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MultiHurtboxOwner"]
+shape = SubResource("SeparationRayShape3D_njqlp")
 
 [editable path="WalkerPivot/LeftLegStand"]
 [editable path="WalkerPivot/RightLegStand"]
