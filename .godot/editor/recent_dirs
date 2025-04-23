@@ -1,3 +1,4 @@
+res://
 res://enemies
 res://enemies/spawners
 res://levels/balls_level
@@ -6,7 +7,6 @@ res://levels/x_boss_level
 res://glb_inherited_scenes
 res://rang
 res://cotu/cotu_anims
-res://
 res://enemies/enemy_anims
 res://photo_scenes
 res://icon
