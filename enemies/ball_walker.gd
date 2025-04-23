@@ -209,6 +209,12 @@ func switch_to_cannon():
 	await get_tree().create_timer(1.0).timeout
 	anim_in_progress = false
 
+func spawn_foot_explosion():
+	var foot_explosion_inst = load("res://enemies/ball_walker_foot_explosion.tscn").instantiate()
+	level.add_child.call_deferred(foot_explosion_inst)
+	await foot_explosion_inst.tree_entered
+	foot_explosion_inst.global_position = gun_foot.global_position
+
 func step_or_stomp():
 	# If you're too far from arena center and you didn't just walk, walk towards icon
 	if not just_walked and global_position.distance_to(min_y_pos * Vector3.UP) >= max_dist_from_arena_center:
