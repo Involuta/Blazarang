@@ -264,6 +264,7 @@ func step_flip_to_downbowl():
 	facing_forward = true
 	anim_player.play("step_flip_to_downbowl")
 	await anim_player.animation_finished
+	await spawn_foot_explosion() # Spawn the foot explosion before the flip to prevent it from being spawned at the wrong foot
 	# Flip ball walker so that when the upbowl step flip anim plays, it moves the walker forward instead of backward
 	rotation.y += PI
 	# To compensate, global pos moves back
@@ -274,6 +275,7 @@ func step_flip_to_upbowl():
 	facing_forward = false
 	anim_player.play("step_flip_to_upbowl")
 	await anim_player.animation_finished
+	await spawn_foot_explosion()
 	# Don't do anything else; the rotation and global pos mvmt from the previous anim (step flip to downbowl) did all the work already
 
 func long_dist_state_frame():
