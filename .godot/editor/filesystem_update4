@@ -31,3 +31,4 @@ res://enemies/ball_walker_foot_explosion.tscn
 res://enemies/ball_walker_foot_explosion.gd
 res://enemies/ball_walker.gd
 res://hurtbox.gd
+res://enemies/swarm_ball.tscn

@@ -15,17 +15,17 @@ roughness = 0.1
 
 [sub_resource type="SphereMesh" id="SphereMesh_fcffq"]
 material = SubResource("StandardMaterial3D_ffvih")
-radius = 0.2
-height = 0.4
+radius = 0.3
+height = 0.6
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6tu7i"]
-radius = 0.2
+radius = 0.3
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_e7w80"]
-radius = 0.2
+radius = 0.3
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_nj4ah"]
-radius = 0.25
+radius = 0.35
 
 [node name="SwarmBall" type="RigidBody3D"]
 collision_layer = 8
