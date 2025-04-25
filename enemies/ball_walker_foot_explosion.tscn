@@ -63,6 +63,7 @@ height = 1.0
 [node name="BallWalkerFootExplosion" type="Node3D"]
 script = ExtResource("1_l6u87")
 disappear_secs = 0.5
+num_spawned_balls = 6.0
 
 [node name="EnemyHitbox" type="Area3D" parent="."]
 collision_layer = 8

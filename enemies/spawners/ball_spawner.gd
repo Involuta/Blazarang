@@ -100,7 +100,7 @@ func update_high_target_trajectory_vels():
 	var total_flight_time : float = init_high_target_trajectory_y_vel / gravity + final_high_target_trajectory_y_vel / gravity
 	var vec_to_target := target.global_position - global_position
 	# Multiplier is used for fine-tuned accuracy adjustment
-	var lateral_dist_to_target := .75 * Vector2(vec_to_target.x, vec_to_target.z).length()
+	var lateral_dist_to_target := 1.0 * Vector2(vec_to_target.x, vec_to_target.z).length()
 	high_target_trajectory_lateral_vel = lateral_dist_to_target / total_flight_time
 
 func lateral_look_at_target(turn_speed):
@@ -196,7 +196,7 @@ func spawn_bouncer():
 	await b.tree_entered
 	b.global_position = global_position
 	b.global_rotation = global_rotation
-	b.linear_velocity = high_target_trajectory_lateral_vel * -b.get_global_transform().basis.z
+	b.linear_velocity = high_target_trajectory_lateral_vel * global_position.direction_to(target.global_position)
 	b.linear_velocity.y = init_high_target_trajectory_y_vel
 
 func spawn_giant_roller():
@@ -255,7 +255,7 @@ func spawn_heavy():
 	await b.tree_entered
 	b.global_position = global_position
 	b.global_rotation = global_rotation
-	b.linear_velocity = high_target_trajectory_lateral_vel * -b.get_global_transform().basis.z
+	b.linear_velocity = high_target_trajectory_lateral_vel * global_position.direction_to(target.global_position)
 	b.linear_velocity.y = init_high_target_trajectory_y_vel
 	b.arena_floor_y = arena_floor_y
 

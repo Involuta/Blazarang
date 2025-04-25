@@ -29,6 +29,12 @@ var walker_icon_pos := Vector3.ZERO
 
 @export var bowl_slam_proximity := 5.0 # Imagine a circle w this radius around the walker pivot. If the target is within the circle, a bowl slam occurs
 
+@export var bowl_radius := 8.0 # Radius of bowl mesh
+@export var num_rim_balls := 7.0 # Num of balls spawned from rim per rim ball blast
+@export var rim_ball_fwd_speed := 8.0
+@export var rim_ball_init_down_speed := 8.0 # Downward speed of rim ball when it's first shot out
+
+
 enum PHASE {
 	PHASE1,
 	PHASE2,
@@ -77,7 +83,6 @@ var aiming_at_target := true
 	"HEAVY": .5,
 }
 
-var bowl_radius := 8.0 # Radius of bowl mesh
 const STANDING_FEET_DIST := 19.0 # Dist btwn each foot when neutrally standing
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -212,14 +217,17 @@ func switch_to_cannon():
 
 func spawn_rim_balls():
 	var ball_vec := -transform.basis.z
-	for i in range(6):
+	# Make it so that a ball doesn't shoot directly from the walker's rim in its fwd direction bc that's where its thigh is
+	# 2 balls shoot at equivalent angles beside the line representing the walker's fwd direction
+	ball_vec = ball_vec.rotated(Vector3.UP, PI/num_rim_balls)
+	for i in range(num_rim_balls):
 		var b = foot_ball_spawner.roller.instantiate()
 		level.add_child.call_deferred(b)
 		await b.tree_entered
 		b.global_position = bowl_pivot.global_position + bowl_radius * ball_vec
-		b.linear_velocity = 8 * ball_vec
-		b.linear_velocity.y = -8
-		ball_vec = ball_vec.rotated(Vector3.UP, 2 * PI / 6)
+		b.linear_velocity = rim_ball_fwd_speed * ball_vec
+		b.linear_velocity.y = -rim_ball_init_down_speed
+		ball_vec = ball_vec.rotated(Vector3.UP, 2 * PI / num_rim_balls)
 
 func spawn_foot_explosion():
 	var foot_explosion_inst = load("res://enemies/ball_walker_foot_explosion.tscn").instantiate()

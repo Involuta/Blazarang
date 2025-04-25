@@ -34,3 +34,4 @@ res://hurtbox.gd
 res://enemies/swarm_ball.tscn
 res://levels/balls_level/balls_level.tscn
 res://enemies/spawners/stationary_ball_spawner.gd
+res://enemies/spawners/ball_spawner.gd
