@@ -44,6 +44,7 @@ shape = SubResource("SphereShape3D_mi232")
 collision_layer = 8
 collision_mask = 9
 script = ExtResource("2_cf847")
+enemy_name = "GGiantRollerBall"
 hit_particle_color = Color(0.298039, 0.752941, 1, 1)
 dp_impulse_limit = 10
 dp_count = 0

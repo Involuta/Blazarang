@@ -65,6 +65,7 @@ shape = SubResource("SphereShape3D_mi232")
 collision_layer = 8
 collision_mask = 9
 script = ExtResource("2_xkl6b")
+enemy_name = "SSkullBall"
 hit_particle_color = Color(0, 0.0823529, 0.133333, 1)
 dp_impulse_limit = 10
 dp_count = 0

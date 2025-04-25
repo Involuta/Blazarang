@@ -126,6 +126,7 @@ radius = 3.0
 collision_layer = 8
 collision_mask = 265
 script = ExtResource("2_tbkks")
+enemy_name = "GauntletMeleeTier2"
 hit_particle_color = Color(1, 0, 1, 1)
 opponent_hitboxes = ["PlayerHitbox"]
 
@@ -182,7 +183,7 @@ bones/22/rotation = Quaternion(0.652796, -0.0451877, 0.263341, 0.708849)
 bones/23/rotation = Quaternion(0.237127, 0.332131, -0.0889479, 0.908597)
 
 [node name="BoneAttachment3D" parent="VisualMesh/ControlRig/Skeleton3D" index="1"]
-transform = Transform3D(-0.460537, -0.551531, 0.695499, 0.76093, -0.648748, -0.0105938, 0.457046, 0.524347, 0.718449, -5.87852, 6.23261, 0.791363)
+transform = Transform3D(-0.460537, -0.551533, 0.695498, 0.760931, -0.648745, -0.0105928, 0.457044, 0.524348, 0.71845, -5.87852, 6.23262, 0.791362)
 
 [node name="SwordPivot" parent="VisualMesh/ControlRig" index="1"]
 transform = Transform3D(0.499999, 1.27665e-16, 0.866024, 3.48786e-16, 0.999999, -3.48786e-16, -0.866024, 4.76451e-16, 0.499999, -7.78994, 5.72911, -0.290199)

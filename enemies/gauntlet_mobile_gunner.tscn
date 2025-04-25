@@ -127,6 +127,7 @@ radius = 3.0
 collision_layer = 8
 collision_mask = 265
 script = ExtResource("2_jxdic")
+enemy_name = "GauntletMobileGunner"
 hit_particle_color = Color(0, 0, 1, 1)
 opponent_hitboxes = ["PlayerHitbox"]
 
@@ -142,33 +143,33 @@ libraries = {
 transform = Transform3D(-0.15, 5.2318e-17, -1.31134e-08, 5.2318e-17, 0.15, -5.2318e-17, 1.31134e-08, -5.2318e-17, -0.15, 0, -1.37032, 0)
 
 [node name="Skeleton3D" parent="MobileGunner/ControlRig" index="0"]
-bones/0/position = Vector3(0.111962, 8.36447, -0.13226)
-bones/0/rotation = Quaternion(-0.110678, -0.339516, -0.0291065, 0.933612)
-bones/1/rotation = Quaternion(0.0531544, -0.00133679, 0.00195029, 0.998583)
-bones/2/rotation = Quaternion(0.145921, 6.93424e-05, -0.00641145, 0.989276)
-bones/3/rotation = Quaternion(0.143792, -0.000476067, -0.00625391, 0.989588)
-bones/4/rotation = Quaternion(0.0195386, 0.0650107, 0.00870828, 0.997655)
-bones/5/rotation = Quaternion(-0.035444, 0.191523, 0.090827, 0.976634)
-bones/7/rotation = Quaternion(-0.42686, -0.197279, 0.648762, -0.598314)
-bones/8/rotation = Quaternion(0.313314, -0.217218, 0.267528, 0.884918)
-bones/9/rotation = Quaternion(-1.4627e-06, -1.70039e-06, 0.5367, 0.843773)
+bones/0/position = Vector3(0.0933378, 8.38288, -0.121092)
+bones/0/rotation = Quaternion(-0.109447, -0.340026, -0.0277098, 0.933615)
+bones/1/rotation = Quaternion(0.0407419, -0.00115059, 0.00444154, 0.999159)
+bones/2/rotation = Quaternion(0.133963, 0.000199393, -0.00512096, 0.990973)
+bones/3/rotation = Quaternion(0.138235, -8.5618e-05, -0.00503828, 0.990387)
+bones/4/rotation = Quaternion(0.0226994, 0.0650534, 0.00871341, 0.997586)
+bones/5/rotation = Quaternion(-0.030893, 0.191475, 0.0910573, 0.976776)
+bones/7/rotation = Quaternion(-0.422115, -0.202167, 0.650869, -0.59776)
+bones/8/rotation = Quaternion(0.327541, -0.192967, 0.257251, 0.888427)
+bones/9/rotation = Quaternion(-1.46706e-06, -1.68756e-06, 0.530195, 0.847876)
 bones/10/rotation = Quaternion(-0.00186429, 0.00186761, 2.31328e-05, 0.999997)
 bones/11/rotation = Quaternion(0.3162, -0.254169, 0.717481, 0.566248)
-bones/12/rotation = Quaternion(0.379784, -0.229474, -0.518534, 0.730909)
-bones/13/rotation = Quaternion(1.92172e-06, -1.1357e-06, -0.757295, 0.653073)
+bones/12/rotation = Quaternion(0.379568, -0.248568, -0.508902, 0.731546)
+bones/13/rotation = Quaternion(1.90634e-06, -1.10018e-06, -0.757708, 0.652593)
 bones/14/rotation = Quaternion(-0.00201468, -0.00201225, -4.34282e-05, 0.999996)
-bones/15/rotation = Quaternion(0.413565, 0.0493722, 0.898248, -0.140276)
-bones/16/rotation = Quaternion(-0.212095, 1.70913e-06, 1.95448e-07, 0.977249)
-bones/17/rotation = Quaternion(0.487203, 0.0243666, -0.0246514, 0.8726)
+bones/15/rotation = Quaternion(0.415098, 0.0442782, 0.898238, -0.137481)
+bones/16/rotation = Quaternion(-0.199607, 1.73515e-06, 1.75521e-07, 0.979876)
+bones/17/rotation = Quaternion(0.481433, 0.0236261, -0.0259489, 0.87578)
 bones/18/rotation = Quaternion(0.30964, -0.214208, 0.0718171, 0.923623)
-bones/20/rotation = Quaternion(0.027759, -0.0718963, 0.995852, 0.0483658)
+bones/20/rotation = Quaternion(0.02508, -0.0748386, 0.995639, 0.0497261)
 bones/20/scale = Vector3(1, 0.999999, 1)
-bones/21/rotation = Quaternion(-0.282322, -3.91607e-07, -1.28317e-07, 0.95932)
-bones/22/rotation = Quaternion(0.658465, 0.114571, 0.00153517, 0.743838)
-bones/23/rotation = Quaternion(0.304689, 0.22082, -0.0730015, 0.92362)
+bones/21/rotation = Quaternion(-0.274064, -3.37674e-07, -1.23784e-07, 0.961711)
+bones/22/rotation = Quaternion(0.655434, 0.1114, 0.00171756, 0.74699)
+bones/23/rotation = Quaternion(0.305412, 0.220836, -0.0728623, 0.923388)
 
 [node name="BoneAttachment3D" parent="MobileGunner/ControlRig/Skeleton3D" index="1"]
-transform = Transform3D(0.52776, 0.45452, 0.717552, 0.576909, 0.428215, -0.695563, -0.623414, 0.781053, -0.0362222, -2.30612, 12.7211, 2.24649)
+transform = Transform3D(0.538005, 0.462977, 0.704417, 0.560498, 0.427679, -0.709177, -0.629597, 0.776366, -0.029405, -2.2656, 12.7976, 2.11365)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_vdhls")

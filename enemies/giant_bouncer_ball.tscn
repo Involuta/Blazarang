@@ -48,6 +48,7 @@ shape = SubResource("SphereShape3D_jnyli")
 collision_layer = 8
 collision_mask = 9
 script = ExtResource("2_6aiv1")
+enemy_name = "GGiantBouncerBall"
 hit_particle_color = Color(1, 0.45098, 0.792157, 1)
 dp_impulse_limit = 10
 dp_count = 0
