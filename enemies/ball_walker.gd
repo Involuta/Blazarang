@@ -93,6 +93,7 @@ var deathball := preload("res://enemies/death_ball.tscn")
 var popper := preload("res://enemies/popper_ball.tscn")
 
 @onready var walker_pivot := $WalkerPivot
+@onready var bowl_pivot := $WalkerPivot/BowlPivot
 @onready var standing_foot := $WalkerPivot/LeftLegStand/DomeMesh/Foot
 @onready var gun_foot := $WalkerPivot/LegGun/HipJoint/Thigh/Knee/Shin/DomeMesh/Foot
 @onready var anim_player := $AnimationPlayer
@@ -215,6 +216,13 @@ func spawn_foot_explosion():
 	await foot_explosion_inst.tree_entered
 	foot_explosion_inst.global_position = gun_foot.global_position
 
+func spawn_bowl_explosion():
+	var foot_explosion_inst = load("res://enemies/ball_walker_foot_explosion.tscn").instantiate()
+	level.add_child.call_deferred(foot_explosion_inst)
+	await foot_explosion_inst.tree_entered
+	foot_explosion_inst.global_position = bowl_pivot.global_position
+	foot_explosion_inst.global_position.y = min_y_pos+1
+
 func step_or_stomp():
 	# If you're too far from arena center and you didn't just walk, walk towards icon
 	if not just_walked and global_position.distance_to(min_y_pos * Vector3.UP) >= max_dist_from_arena_center:
@@ -227,7 +235,7 @@ func step_or_stomp():
 		aiming_at_icon = false
 	# Otherwise, if target is directly below you, either bowl slam or walk away
 	elif target_in_bowl_slam_range():
-		if not just_walked and rng.randf() > .5:
+		if not just_walked and rng.randf() > .9:
 			just_walked = true
 			aiming_at_icon = true
 			anim_in_progress = true
