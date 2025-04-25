@@ -1,8 +1,8 @@
 MeshInstance3D
+Node3D
 AnimationPlayer
 CollisionShape3D
 Area3D
-Node3D
 Marker3D
 PhysicalBone3D
 SkeletonIK3D

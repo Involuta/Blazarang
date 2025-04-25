@@ -69,8 +69,7 @@ var aiming_at_target := true
 }
 
 @export var cannon_enemy_chances = {
-	"ROLLER": .66,
-	"SKULL" : .34
+	"ROLLER": 1,
 }
 
 @export var mortar_enemy_chances = {
@@ -78,6 +77,7 @@ var aiming_at_target := true
 	"HEAVY": .5,
 }
 
+var bowl_radius := 8.0 # Radius of bowl mesh
 const STANDING_FEET_DIST := 19.0 # Dist btwn each foot when neutrally standing
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -210,12 +210,24 @@ func switch_to_cannon():
 	await get_tree().create_timer(1.0).timeout
 	anim_in_progress = false
 
+func spawn_rim_balls():
+	var ball_vec := -transform.basis.z
+	for i in range(6):
+		var b = foot_ball_spawner.roller.instantiate()
+		level.add_child.call_deferred(b)
+		await b.tree_entered
+		b.global_position = bowl_pivot.global_position + bowl_radius * ball_vec
+		b.linear_velocity = 8 * ball_vec
+		b.linear_velocity.y = -8
+		ball_vec = ball_vec.rotated(Vector3.UP, 2 * PI / 6)
+
 func spawn_foot_explosion():
 	var foot_explosion_inst = load("res://enemies/ball_walker_foot_explosion.tscn").instantiate()
 	level.add_child.call_deferred(foot_explosion_inst)
 	await foot_explosion_inst.tree_entered
 	foot_explosion_inst.global_position = gun_foot.global_position
 	foot_explosion_inst.rotation.y = rotation.y
+	spawn_rim_balls()
 
 func spawn_bowl_explosion():
 	var foot_explosion_inst = load("res://enemies/ball_walker_foot_explosion.tscn").instantiate()

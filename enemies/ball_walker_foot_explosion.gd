@@ -17,7 +17,7 @@ func _ready():
 	queue_free()
 
 func spawn_balls():
-	var ball_vec := Vector3.FORWARD
+	var ball_vec := -transform.basis.z
 	for i in range(num_spawned_balls):
 		var b = swarm.instantiate()
 		level.add_child.call_deferred(b)
