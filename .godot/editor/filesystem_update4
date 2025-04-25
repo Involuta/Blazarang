@@ -35,3 +35,6 @@ res://enemies/swarm_ball.tscn
 res://levels/balls_level/balls_level.tscn
 res://enemies/spawners/stationary_ball_spawner.gd
 res://enemies/spawners/ball_spawner.gd
+res://glb_inherited_scenes/first_miniboss_meshes.tscn
+res://enemies/gauntlet_miniboss.tscn
+res://levels/gauntlet/section_nodes/gauntlet_arena1.gd
