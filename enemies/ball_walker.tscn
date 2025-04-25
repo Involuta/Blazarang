@@ -1593,10 +1593,10 @@ tracks/3/path = NodePath("WalkerPivot/RightLegStand:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
+"values": [false, true]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -1605,10 +1605,10 @@ tracks/4/path = NodePath("WalkerPivot/LegGun:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true]
+"values": [true, false]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -1617,10 +1617,10 @@ tracks/5/path = NodePath("WalkerPivot/RightLegStand:process_mode")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [4]
+"values": [4, 0]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -1629,10 +1629,10 @@ tracks/6/path = NodePath("WalkerPivot/LegGun:process_mode")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0]
+"values": [0, 4]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -2981,6 +2981,7 @@ shape = SubResource("CylinderShape3D_5sb8t")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, -1.5246e-23, -1.5246e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2.08165e-12, 2.08165e-12, 5)
+visible = false
 mesh = SubResource("CylinderMesh_18exh")
 skeleton = NodePath("")
 
