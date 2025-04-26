@@ -11,8 +11,10 @@ enum DIST_TYPE {
 var dist_state = DIST_TYPE.LONG_DIST
 var anim_in_progress := false
 @export var max_dist_state_switch_cooldown := 10.0 # Time after a dist state switch before dist state can switch again
-var dist_state_switch_cooldown_remaining := 5.0
+var dist_state_switch_cooldown_remaining := 10.0
 var can_switch_dist_state := false
+@export var max_foot_ball_spawner_upgrade_time := 5.0 # Time after foot ball spawner starts spawning balls that it gets upgraded
+var foot_ball_spawner_upgrade_time_remaining := 5.0
 @export var short_dist_state_range := 30.0
 @export var max_short_dist_wait := 3.0
 var short_dist_wait_remaining := 3.0
@@ -78,9 +80,17 @@ var aiming_at_target := true
 	"ROLLER": 1,
 }
 
+@export var upgraded_cannon_enemy_chances = {
+	"SKULL" : 1,
+}
+
 @export var mortar_enemy_chances = {
 	"BOUNCER": .5,
 	"HEAVY": .5,
+}
+
+@export var upgraded_mortar_enemy_chances = {
+	"SKULL" : 1,
 }
 
 const STANDING_FEET_DIST := 19.0 # Dist btwn each foot when neutrally standing
@@ -118,6 +128,9 @@ func _ready():
 	add_to_group("lockonables")
 	
 	foot_ball_spawner.enemy_chances = mortar_enemy_chances
+	
+	dist_state_switch_cooldown_remaining = max_dist_state_switch_cooldown
+	foot_ball_spawner_upgrade_time_remaining = max_foot_ball_spawner_upgrade_time
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("Special"):
@@ -203,7 +216,7 @@ func switch_to_mortar():
 	anim_player.play("stand_to_foot_mortar")
 	foot_ball_spawner.enemy_chances = mortar_enemy_chances
 	foot_ball_spawner.spawning = true
-	await get_tree().create_timer(1.0).timeout
+	await anim_player.animation_finished
 	anim_in_progress = false
 
 func switch_to_cannon():
@@ -212,13 +225,19 @@ func switch_to_cannon():
 	anim_player.play("stand_to_foot_cannon")
 	foot_ball_spawner.enemy_chances = cannon_enemy_chances
 	foot_ball_spawner.spawning = true
-	await get_tree().create_timer(1.0).timeout
+	await anim_player.animation_finished
 	anim_in_progress = false
+
+func upgrade_foot_ball_spawner():
+	if foot_state == FOOT_TYPE.CANNON:
+		foot_ball_spawner.enemy_chances = upgraded_cannon_enemy_chances
+	elif foot_state == FOOT_TYPE.MORTAR:
+		foot_ball_spawner.enemy_chances = upgraded_mortar_enemy_chances
 
 func spawn_rim_balls():
 	var ball_vec := -transform.basis.z
 	# Make it so that a ball doesn't shoot directly from the walker's rim in its fwd direction bc that's where its thigh is
-	# 2 balls shoot at equivalent angles beside the line representing the walker's fwd direction
+	# 2 balls shoot at equivalent angles beside the line representinga the walker's fwd direction
 	ball_vec = ball_vec.rotated(Vector3.UP, PI/num_rim_balls)
 	for i in range(num_rim_balls):
 		var b = foot_ball_spawner.roller.instantiate()
@@ -317,11 +336,18 @@ func long_dist_state_frame():
 	elif aiming_at_icon:
 		linear_look_at_position(walker_icon.global_position, attack_turn_speed)
 	
-	if not anim_in_progress and dist_state_switch_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < short_dist_state_range:
-		switch_to_short_dist_state()
-		dist_state_switch_cooldown_remaining = max_dist_state_switch_cooldown
-	elif not anim_in_progress and dist_state_switch_cooldown_remaining > 0:
-		dist_state_switch_cooldown_remaining -= get_physics_process_delta_time()
+	if not anim_in_progress:
+		if foot_ball_spawner_upgrade_time_remaining <= 0:
+			upgrade_foot_ball_spawner()
+		else:
+			foot_ball_spawner_upgrade_time_remaining -= get_physics_process_delta_time()
+		
+		if dist_state_switch_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < short_dist_state_range:
+			switch_to_short_dist_state()
+			dist_state_switch_cooldown_remaining = max_dist_state_switch_cooldown
+			foot_ball_spawner_upgrade_time_remaining = max_foot_ball_spawner_upgrade_time
+		elif dist_state_switch_cooldown_remaining > 0:
+			dist_state_switch_cooldown_remaining -= get_physics_process_delta_time()
 
 func switch_to_short_dist_state():
 	aiming_at_target = false
@@ -350,7 +376,7 @@ func short_dist_state_frame():
 	if not anim_in_progress and dist_state_switch_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) >= short_dist_state_range:
 		switch_to_long_dist_state()
 		dist_state_switch_cooldown_remaining = max_dist_state_switch_cooldown
-	elif dist_state_switch_cooldown_remaining > 0:
+	elif not anim_in_progress and dist_state_switch_cooldown_remaining > 0:
 		dist_state_switch_cooldown_remaining -= get_physics_process_delta_time()
 	
 	if not anim_in_progress and short_dist_wait_remaining <= 0:

@@ -47,3 +47,10 @@ res://enemies/bouncer_ball.tscn
 res://enemies/giant_bouncer_ball.tscn
 res://enemies/giant_roller_ball.tscn
 res://enemies/popper_ball.tscn
+res://enemies/gauntlet_melee_tier1.tscn
+res://enemies/gauntlet_enemy_base.gd
+res://enemies/gauntlet_mobile_gunner.gd
+res://enemies/gauntlet_stationary_gunner.gd
+res://enemies/gauntlet_miniboss.gd
+res://enemies/x_boss.gd
+res://enemies/ball.gd

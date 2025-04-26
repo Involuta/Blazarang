@@ -2970,6 +2970,7 @@ collision_layer = 64
 collision_mask = 130
 script = ExtResource("1_evdbk")
 max_dist_state_switch_cooldown = 5.0
+max_foot_ball_spawner_upgrade_time = 4.0
 short_dist_state_range = 20.0
 max_short_dist_wait = 5.0
 max_dist_from_arena_center = 16.0
@@ -3097,6 +3098,7 @@ enemy_chances = {
 heavy_launch_height_from_launch_point = 12.0
 roller_chargeup_secs = 2.08165e-12
 bouncer_chargeup_secs = 0.4
+skull_chargeup_secs = 2.08165e-12
 heavy_chargeup_secs = 0.4
 
 [node name="MeshPivot" type="Node3D" parent="FootBallSpawner"]
