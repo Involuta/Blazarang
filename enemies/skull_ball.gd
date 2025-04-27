@@ -20,10 +20,11 @@ func _physics_process(_delta):
 		var dir_to_target := global_position.direction_to(target.global_position)
 		linear_velocity.x = follow_speed * dir_to_target.x
 		linear_velocity.z = follow_speed * dir_to_target.z
+		
+		if global_position.distance_to(target.global_position) < explode_dist:
+			moving = false
+			$AnimationPlayer.play("explode")
+			await get_tree().create_timer(disappear_secs).timeout
+			queue_free()
 	else:
 		linear_velocity = Vector3.ZERO
-	if global_position.distance_to(target.global_position) < explode_dist:
-		moving = false
-		$AnimationPlayer.play("explode")
-		await get_tree().create_timer(disappear_secs).timeout
-		queue_free()

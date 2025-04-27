@@ -1,5 +1,6 @@
-AudioStreamPlayer
 MeshInstance3D
+GPUParticles3D
+AudioStreamPlayer
 Node3D
 AnimationPlayer
 CollisionShape3D
@@ -9,7 +10,6 @@ PhysicalBone3D
 SkeletonIK3D
 Skeleton3D
 StaticBody3D
-GPUParticles3D
 TextureRect
 Node2D
 CharacterBody3D
@@ -30,4 +30,3 @@ TextureButton
 CanvasLayer
 CPUParticles3D
 AnimatedSprite3D
-Hitbox
