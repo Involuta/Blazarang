@@ -2976,6 +2976,12 @@ max_short_dist_wait = 5.0
 max_dist_from_arena_center = 16.0
 num_rim_balls = 6.0
 attack_turn_speed = 0.75
+random_balls_chances = {
+"BOUNCER": 0.3,
+"HEAVY": 0.2,
+"ROLLER": 0.5,
+"SKULL": 2.08167e-12
+}
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 2.08165e-12, -1.75, 2.08165e-12)

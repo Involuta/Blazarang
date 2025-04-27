@@ -93,6 +93,13 @@ var aiming_at_target := true
 	"SKULL" : 1,
 }
 
+@export var random_balls_chances = {
+	"ROLLER" : .25,
+	"BOUNCER" : .25,
+	"HEAVY" : .25,
+	"SKULL" : .25,
+}
+
 const STANDING_FEET_DIST := 19.0 # Dist btwn each foot when neutrally standing
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -234,13 +241,36 @@ func upgrade_foot_ball_spawner():
 	elif foot_state == FOOT_TYPE.MORTAR:
 		foot_ball_spawner.enemy_chances = upgraded_mortar_enemy_chances
 
+func choose_ball_from_name(ball_name):
+	match(ball_name):
+		"ROLLER":
+			return foot_ball_spawner.roller
+		"BOUNCER":
+			return foot_ball_spawner.bouncer
+		"HEAVY":
+			return foot_ball_spawner.heavy
+		"SKULL":
+			return foot_ball_spawner.skull
+		"default":
+			print("Error: attempted to choose ball with name: ", ball_name)
+			return foot_ball_spawner.roller
+
+func get_random_ball():
+	var choice := rng.randf()
+	var cumulative_weight := 0.0
+	for ball in random_balls_chances:
+		cumulative_weight += random_balls_chances[ball]
+		if choice <= cumulative_weight:
+			return choose_ball_from_name(ball)
+	return choose_ball_from_name("default")
+
 func spawn_rim_balls():
 	var ball_vec := -transform.basis.z
 	# Make it so that a ball doesn't shoot directly from the walker's rim in its fwd direction bc that's where its thigh is
 	# 2 balls shoot at equivalent angles beside the line representinga the walker's fwd direction
 	ball_vec = ball_vec.rotated(Vector3.UP, PI/num_rim_balls)
 	for i in range(num_rim_balls):
-		var b = foot_ball_spawner.roller.instantiate()
+		var b = get_random_ball().instantiate()#foot_ball_spawner.roller.instantiate()
 		level.add_child.call_deferred(b)
 		await b.tree_entered
 		b.global_position = bowl_pivot.global_position + bowl_radius * ball_vec
