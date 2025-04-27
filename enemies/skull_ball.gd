@@ -13,6 +13,7 @@ var explode_dist := 4.0
 func _ready():
 	target = root.find_child("Icon")
 	$EnemyHitbox.process_mode = Node.PROCESS_MODE_DISABLED
+	$LaughStreamPlayer.play()
 
 func _physics_process(_delta):
 	if moving:

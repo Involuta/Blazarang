@@ -54,3 +54,5 @@ res://enemies/gauntlet_stationary_gunner.gd
 res://enemies/gauntlet_miniboss.gd
 res://enemies/x_boss.gd
 res://enemies/ball.gd
+res://enemies/skull_ball.gd
+res://rang/roserang.tscn

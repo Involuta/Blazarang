@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dqdba8l6potq1"]
+[gd_scene load_steps=29 format=3 uid="uid://dqdba8l6potq1"]
 
 [ext_resource type="Script" path="res://rang/roserang.gd" id="1_m7w6u"]
 [ext_resource type="Script" path="res://hitbox.gd" id="2_1xumc"]
@@ -170,19 +170,19 @@ void fragment(){
 	}
 }"
 
-[sub_resource type="Gradient" id="Gradient_87pwe"]
+[sub_resource type="Gradient" id="Gradient_1xf5o"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 0, 1, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_7l0hn"]
-gradient = SubResource("Gradient_87pwe")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_aaqkt"]
+gradient = SubResource("Gradient_1xf5o")
 
-[sub_resource type="Curve" id="Curve_fteg1"]
+[sub_resource type="Curve" id="Curve_kf8t5"]
 _data = [Vector2(0, 1), 0.0, -1.18082, 0, 0, Vector2(1, 0.0129609), -0.943115, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_s2ypa"]
+[sub_resource type="CurveTexture" id="CurveTexture_s4uxv"]
 width = 32
-curve = SubResource("Curve_fteg1")
+curve = SubResource("Curve_kf8t5")
 
 [sub_resource type="Gradient" id="Gradient_aaeak"]
 offsets = PackedFloat32Array(0)
@@ -198,26 +198,12 @@ shader = SubResource("Shader_7gmku")
 shader_parameter/emmission_transform = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
 shader_parameter/flags = 40
 shader_parameter/tex = SubResource("GradientTexture1D_r0f1a")
-shader_parameter/color_ramp = SubResource("GradientTexture1D_7l0hn")
-shader_parameter/curve = SubResource("CurveTexture_s2ypa")
+shader_parameter/color_ramp = SubResource("GradientTexture1D_aaqkt")
+shader_parameter/curve = SubResource("CurveTexture_s4uxv")
 
 [sub_resource type="QuadMesh" id="QuadMesh_cvf3i"]
 resource_local_to_scene = true
 material = SubResource("ShaderMaterial_4fsvp")
-
-[sub_resource type="Gradient" id="Gradient_1xf5o"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 0, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_aaqkt"]
-gradient = SubResource("Gradient_1xf5o")
-
-[sub_resource type="Curve" id="Curve_kf8t5"]
-_data = [Vector2(0, 1), 0.0, -1.18082, 0, 0, Vector2(1, 0.0129609), -0.943115, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_s4uxv"]
-width = 32
-curve = SubResource("Curve_kf8t5")
 
 [node name="Roserang" type="CharacterBody3D"]
 collision_mask = 66

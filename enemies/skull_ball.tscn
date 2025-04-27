@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://dvcpkp84uyvkc"]
+[gd_scene load_steps=12 format=3 uid="uid://dvcpkp84uyvkc"]
 
 [ext_resource type="Script" path="res://enemies/skull_ball.gd" id="1_ebyms"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_xkl6b"]
 [ext_resource type="Script" path="res://hitbox.gd" id="3_68d6s"]
+[ext_resource type="AudioStream" uid="uid://d0xusfqqc8emu" path="res://audio/sfx/evil_laugh.mp3" id="4_c7kkm"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xs2x3"]
 friction = 0.0
@@ -89,3 +90,7 @@ shape = SubResource("SphereShape3D_wrndk")
 libraries = {
 "": SubResource("AnimationLibrary_obs3y")
 }
+
+[node name="LaughStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_c7kkm")
+volume_db = -12.0
