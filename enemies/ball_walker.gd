@@ -94,13 +94,13 @@ var aiming_at_target := true
 }
 
 @export var random_balls_chances = {
-	"ROLLER" : .25,
-	"BOUNCER" : .25,
-	"HEAVY" : .25,
-	"SKULL" : .25,
+	"ROLLER" : .5,
+	"BOUNCER" : .3,
+	"HEAVY" : .2,
+	"SKULL" : 0.0,
 }
 
-const STANDING_FEET_DIST := 19.0 # Dist btwn each foot when neutrally standing
+const STANDING_FEET_DIST := 20.0 # Dist btwn each foot when neutrally standing
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()

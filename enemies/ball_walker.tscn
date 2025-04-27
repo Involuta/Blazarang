@@ -2976,11 +2976,16 @@ max_short_dist_wait = 5.0
 max_dist_from_arena_center = 16.0
 num_rim_balls = 6.0
 attack_turn_speed = 0.75
+mortar_enemy_chances = {
+"BOUNCER": 0.5,
+"HEAVY": 0.4,
+"SKULL": 0.1
+}
 random_balls_chances = {
-"BOUNCER": 0.3,
-"HEAVY": 0.2,
+"BOUNCER": 0.4,
+"HEAVY": 0.07,
 "ROLLER": 0.5,
-"SKULL": 2.08167e-12
+"SKULL": 0.03
 }
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
