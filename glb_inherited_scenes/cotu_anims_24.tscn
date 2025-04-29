@@ -1,8 +1,62 @@
-[gd_scene load_steps=4 format=3 uid="uid://duanou50282es"]
+[gd_scene load_steps=8 format=3 uid="uid://duanou50282es"]
 
 [ext_resource type="PackedScene" uid="uid://4uixk52roj0q" path="res://glb_imports/ClothesEyesAnimRig.glb" id="1_kfspi"]
-[ext_resource type="Material" uid="uid://yct3jaquatmq" path="res://cotu/cotu_anims_base_material.tres" id="2_ioqk1"]
 [ext_resource type="Material" uid="uid://be7mwluw32wnh" path="res://cotu/cotu_anims_eyes.tres" id="3_x01tm"]
+
+[sub_resource type="Shader" id="Shader_om2a7"]
+code = "shader_type spatial;
+render_mode cull_front, unshaded;
+
+uniform vec4 outline_color : source_color;
+uniform float outline_width = 1.0;
+
+void vertex() {
+	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
+	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
+	
+	vec2 offset = normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
+	
+	clip_position.xy += offset;
+	
+	POSITION = clip_position;
+}
+
+void fragment() {
+	ALBEDO = outline_color.rgb;
+	if (outline_color.a < 1.0) {
+		ALPHA = outline_color.a;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3i5mm"]
+render_priority = 1
+shader = SubResource("Shader_om2a7")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c250y"]
+next_pass = SubResource("ShaderMaterial_3i5mm")
+cull_mode = 2
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_whuvp"]
+next_pass = SubResource("ShaderMaterial_3i5mm")
+cull_mode = 2
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hvim7"]
+next_pass = SubResource("ShaderMaterial_3i5mm")
+cull_mode = 2
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+roughness = 0.0
 
 [node name="CotuAnims25" instance=ExtResource("1_kfspi")]
 
@@ -36,13 +90,13 @@ bones/62/rotation = Quaternion(0.583588, -0.0277142, -0.0074642, 0.811543)
 bones/63/rotation = Quaternion(0.284463, 0.0939783, -0.0275081, 0.953673)
 
 [node name="BodyHoodie" parent="Armature/Skeleton3D" index="0"]
-surface_material_override/0 = ExtResource("2_ioqk1")
+surface_material_override/0 = SubResource("StandardMaterial3D_c250y")
 
 [node name="BodyPants" parent="Armature/Skeleton3D" index="1"]
-surface_material_override/0 = ExtResource("2_ioqk1")
+surface_material_override/0 = SubResource("StandardMaterial3D_whuvp")
 
 [node name="Ch36_001" parent="Armature/Skeleton3D" index="2"]
-surface_material_override/0 = ExtResource("2_ioqk1")
+surface_material_override/0 = SubResource("StandardMaterial3D_hvim7")
 
 [node name="Face" parent="Armature/Skeleton3D" index="3"]
 surface_material_override/0 = ExtResource("3_x01tm")

@@ -223,6 +223,7 @@ func switch_to_mortar():
 	anim_player.play("stand_to_foot_mortar")
 	foot_ball_spawner.enemy_chances = mortar_enemy_chances
 	foot_ball_spawner.spawning = true
+	foot_ball_spawner.skull_launched_by_mortar = true
 	await anim_player.animation_finished
 	anim_in_progress = false
 
@@ -232,6 +233,7 @@ func switch_to_cannon():
 	anim_player.play("stand_to_foot_cannon")
 	foot_ball_spawner.enemy_chances = cannon_enemy_chances
 	foot_ball_spawner.spawning = true
+	foot_ball_spawner.skull_launched_by_mortar = false
 	await anim_player.animation_finished
 	anim_in_progress = false
 
@@ -265,6 +267,7 @@ func get_random_ball():
 	return choose_ball_from_name("default")
 
 func spawn_rim_balls():
+	foot_ball_spawner.skull_launched_by_mortar = false
 	var ball_vec := -transform.basis.z
 	# Make it so that a ball doesn't shoot directly from the walker's rim in its fwd direction bc that's where its thigh is
 	# 2 balls shoot at equivalent angles beside the line representinga the walker's fwd direction

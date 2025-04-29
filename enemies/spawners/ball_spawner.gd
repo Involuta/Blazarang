@@ -48,6 +48,7 @@ var init_high_target_trajectory_y_vel := 0.0 # y vel a high target trajectory pr
 
 @export var swarm_size := 15.0
 
+var skull_launched_by_mortar := false # If true, skull has initial upward vel. If not (it's shot by a cannon), it doesn't
 @export var skull_follow_speed := 5.0
 @export var skull_explode_dist := 5.0
 
@@ -242,7 +243,9 @@ func spawn_skull():
 	await b.tree_entered
 	b.global_position = global_position
 	b.global_rotation = global_rotation
-	b.linear_velocity.y = 2 * roller_init_down_speed
+	if skull_launched_by_mortar:
+		# If skull ball was launched by mortar, give it initial upward speed
+		b.linear_velocity.y = 2 * roller_init_down_speed
 	b.follow_speed = skull_follow_speed
 	b.explode_dist = skull_explode_dist
 

@@ -101,6 +101,18 @@ tracks/5/keys = {
 "update": 0,
 "values": [Vector3(1, 1, 1), Vector3(5, 5, 5)]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("EnemyHurtbox:process_mode")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 4]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_obs3y"]
 _data = {
@@ -202,6 +214,5 @@ process_material = SubResource("ParticleProcessMaterial_5yuiy")
 draw_pass_1 = SubResource("QuadMesh_h0mv2")
 
 [node name="ExplosionMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
-transparency = 1.0
+visible = false
 mesh = SubResource("SphereMesh_g2iu7")
