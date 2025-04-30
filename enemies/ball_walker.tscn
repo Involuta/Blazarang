@@ -58,7 +58,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("WalkerPivot/LegGun:position")
+tracks/3/path = NodePath("WalkerPivot/RightLegGun:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -70,7 +70,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("WalkerPivot/LegGun/HipJoint/Thigh/Knee:rotation")
+tracks/4/path = NodePath("WalkerPivot/RightLegGun/HipJoint/Thigh/Knee:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -82,7 +82,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("WalkerPivot/LegGun/HipJoint:rotation")
+tracks/5/path = NodePath("WalkerPivot/RightLegGun/HipJoint:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -187,6 +187,30 @@ tracks/13/keys = {
 "update": 0,
 "values": [Vector3(0.977384, 3.48787e-16, 3.48787e-16)]
 }
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("WalkerPivot/LeftLegGun:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-5.08, -5.9, 2.08165e-12)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("WalkerPivot/LeftLegGun/HipJoint/Thigh/Knee:rotation")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.3439, -1.5708, -1.5708)]
+}
 
 [sub_resource type="Animation" id="Animation_o6rbw"]
 resource_name = "bowl_flip_down"
@@ -254,7 +278,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("WalkerPivot/LegGun:visible")
+tracks/5/path = NodePath("WalkerPivot/RightLegGun:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -278,7 +302,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("WalkerPivot/LegGun:process_mode")
+tracks/7/path = NodePath("WalkerPivot/RightLegGun:process_mode")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -354,6 +378,30 @@ tracks/13/path = NodePath("FootBallSpawner:visible")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("WalkerPivot/LeftLegGun:process_mode")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("WalkerPivot/LeftLegGun:visible")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -426,7 +474,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("WalkerPivot/LegGun:visible")
+tracks/5/path = NodePath("WalkerPivot/RightLegGun:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -450,7 +498,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("WalkerPivot/LegGun:process_mode")
+tracks/7/path = NodePath("WalkerPivot/RightLegGun:process_mode")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -526,6 +574,30 @@ tracks/13/path = NodePath("FootBallSpawner:visible")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("WalkerPivot/LeftLegGun:process_mode")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("WalkerPivot/LeftLegGun:visible")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -599,7 +671,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("WalkerPivot/LegGun:visible")
+tracks/5/path = NodePath("WalkerPivot/RightLegGun:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -623,7 +695,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("WalkerPivot/LegGun:process_mode")
+tracks/7/path = NodePath("WalkerPivot/RightLegGun:process_mode")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -718,6 +790,30 @@ tracks/14/keys = {
 "method": &"spawn_bowl_explosion"
 }]
 }
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("WalkerPivot/LeftLegGun:process_mode")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("WalkerPivot/LeftLegGun:visible")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_lbspi"]
 resource_name = "foot_cannon_to_stand"
@@ -773,7 +869,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("WalkerPivot/LegGun/HipJoint:rotation")
+tracks/4/path = NodePath("WalkerPivot/RightLegGun/HipJoint:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -785,7 +881,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("WalkerPivot/LegGun/HipJoint/Thigh/Knee:rotation")
+tracks/5/path = NodePath("WalkerPivot/RightLegGun/HipJoint/Thigh/Knee:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -797,7 +893,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("WalkerPivot/LegGun:position")
+tracks/6/path = NodePath("WalkerPivot/RightLegGun:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -821,7 +917,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("WalkerPivot/LegGun:visible")
+tracks/8/path = NodePath("WalkerPivot/RightLegGun:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -845,7 +941,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("WalkerPivot/LegGun:process_mode")
+tracks/10/path = NodePath("WalkerPivot/RightLegGun:process_mode")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -869,7 +965,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("WalkerPivot/LegGun/HipJoint/Thigh/Knee/Shin/DomeMesh:visible")
+tracks/12/path = NodePath("WalkerPivot/RightLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh:visible")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -928,6 +1024,30 @@ tracks/16/keys = {
 "method": &"spawn_foot_explosion"
 }]
 }
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("WalkerPivot/LeftLegGun:process_mode")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("WalkerPivot/LeftLegGun:visible")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_ftjac"]
 resource_name = "foot_mortar_to_stand"
@@ -971,7 +1091,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("WalkerPivot/LegGun/HipJoint:rotation")
+tracks/3/path = NodePath("WalkerPivot/RightLegGun/HipJoint:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -983,7 +1103,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("WalkerPivot/LegGun/HipJoint/Thigh/Knee:rotation")
+tracks/4/path = NodePath("WalkerPivot/RightLegGun/HipJoint/Thigh/Knee:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -995,7 +1115,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("WalkerPivot/LegGun:position")
+tracks/5/path = NodePath("WalkerPivot/RightLegGun:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -1007,7 +1127,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("WalkerPivot/LegGun:visible")
+tracks/6/path = NodePath("WalkerPivot/RightLegGun:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -1043,7 +1163,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("WalkerPivot/LegGun:process_mode")
+tracks/9/path = NodePath("WalkerPivot/RightLegGun:process_mode")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -1055,7 +1175,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("WalkerPivot/LegGun/HipJoint/Thigh/Knee/Shin/DomeMesh:visible")
+tracks/10/path = NodePath("WalkerPivot/RightLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh:visible")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -1126,6 +1246,30 @@ tracks/15/keys = {
 "method": &"spawn_foot_explosion"
 }]
 }
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("WalkerPivot/LeftLegGun:process_mode")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("WalkerPivot/LeftLegGun:visible")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_a32it"]
 resource_name = "lateral_jump"
@@ -1180,7 +1324,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("WalkerPivot/LegGun:visible")
+tracks/4/path = NodePath("WalkerPivot/RightLegGun:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -1204,7 +1348,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("WalkerPivot/LegGun:process_mode")
+tracks/6/path = NodePath("WalkerPivot/RightLegGun:process_mode")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -1393,7 +1537,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("WalkerPivot/LegGun:visible")
+tracks/4/path = NodePath("WalkerPivot/RightLegGun:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -1417,7 +1561,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("WalkerPivot/LegGun:process_mode")
+tracks/6/path = NodePath("WalkerPivot/RightLegGun:process_mode")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -1489,7 +1633,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("WalkerPivot/LegGun/HipJoint:rotation")
+tracks/12/path = NodePath("WalkerPivot/RightLegGun/HipJoint:rotation")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -1501,7 +1645,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("WalkerPivot/LegGun/HipJoint/Thigh/Knee:rotation")
+tracks/13/path = NodePath("WalkerPivot/RightLegGun/HipJoint/Thigh/Knee:rotation")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -1513,7 +1657,7 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("WalkerPivot/LegGun:position")
+tracks/14/path = NodePath("WalkerPivot/RightLegGun:position")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -1525,7 +1669,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("WalkerPivot/LegGun/HipJoint/Thigh/Knee/Shin/DomeMesh:visible")
+tracks/15/path = NodePath("WalkerPivot/RightLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh:visible")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -1541,6 +1685,30 @@ tracks/16/path = NodePath("FootBallSpawner:visible")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("WalkerPivot/LeftLegGun:process_mode")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("WalkerPivot/LeftLegGun:visible")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -1601,7 +1769,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("WalkerPivot/LegGun:visible")
+tracks/4/path = NodePath("WalkerPivot/RightLegGun:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -1625,7 +1793,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("WalkerPivot/LegGun:process_mode")
+tracks/6/path = NodePath("WalkerPivot/RightLegGun:process_mode")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -1673,7 +1841,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("WalkerPivot/LegGun/HipJoint:rotation")
+tracks/10/path = NodePath("WalkerPivot/RightLegGun/HipJoint:rotation")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -1685,7 +1853,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("WalkerPivot/LegGun/HipJoint/Thigh/Knee/Shin:position")
+tracks/11/path = NodePath("WalkerPivot/RightLegGun/HipJoint/Thigh/Knee/Shin:position")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -1697,7 +1865,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("WalkerPivot/LegGun/HipJoint/Thigh/Knee/Shin:rotation")
+tracks/12/path = NodePath("WalkerPivot/RightLegGun/HipJoint/Thigh/Knee/Shin:rotation")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -1709,7 +1877,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("WalkerPivot/LegGun:position")
+tracks/13/path = NodePath("WalkerPivot/RightLegGun:position")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -1721,7 +1889,7 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("WalkerPivot/LegGun/HipJoint/Thigh/Knee:rotation")
+tracks/14/path = NodePath("WalkerPivot/RightLegGun/HipJoint/Thigh/Knee:rotation")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -1733,7 +1901,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("WalkerPivot/LegGun/HipJoint/Thigh/Knee/Shin/DomeMesh:visible")
+tracks/15/path = NodePath("WalkerPivot/RightLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh:visible")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -1791,6 +1959,30 @@ tracks/19/keys = {
 "args": [],
 "method": &"spawn_foot_explosion"
 }]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("WalkerPivot/LeftLegGun:process_mode")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("WalkerPivot/LeftLegGun:visible")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_kansg"]
@@ -1858,7 +2050,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("WalkerPivot/LegGun:visible")
+tracks/5/path = NodePath("WalkerPivot/RightLegGun:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -1882,7 +2074,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("WalkerPivot/LegGun:process_mode")
+tracks/7/path = NodePath("WalkerPivot/RightLegGun:process_mode")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -2017,7 +2209,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("WalkerPivot/LegGun/HipJoint:rotation")
+tracks/4/path = NodePath("WalkerPivot/RightLegGun/HipJoint:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -2029,7 +2221,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("WalkerPivot/LegGun/HipJoint/Thigh/Knee:rotation")
+tracks/5/path = NodePath("WalkerPivot/RightLegGun/HipJoint/Thigh/Knee:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -2041,7 +2233,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("WalkerPivot/LegGun:position")
+tracks/6/path = NodePath("WalkerPivot/RightLegGun:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -2065,7 +2257,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("WalkerPivot/LegGun:visible")
+tracks/8/path = NodePath("WalkerPivot/RightLegGun:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -2089,7 +2281,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("WalkerPivot/LegGun:process_mode")
+tracks/10/path = NodePath("WalkerPivot/RightLegGun:process_mode")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -2113,7 +2305,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("WalkerPivot/LegGun/HipJoint/Thigh/Knee/Shin/DomeMesh:visible")
+tracks/12/path = NodePath("WalkerPivot/RightLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh:visible")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -2170,6 +2362,30 @@ tracks/16/keys = {
 "update": 0,
 "values": [Vector3(0.977384, 3.48787e-16, 3.48787e-16)]
 }
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("WalkerPivot/LeftLegGun:process_mode")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("WalkerPivot/LeftLegGun:visible")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_oqbkc"]
 resource_name = "stand_to_foot_mortar"
@@ -2212,7 +2428,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("WalkerPivot/LegGun/HipJoint:rotation")
+tracks/3/path = NodePath("WalkerPivot/RightLegGun/HipJoint:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -2224,7 +2440,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("WalkerPivot/LegGun/HipJoint/Thigh/Knee:rotation")
+tracks/4/path = NodePath("WalkerPivot/RightLegGun/HipJoint/Thigh/Knee:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -2236,7 +2452,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("WalkerPivot/LegGun:position")
+tracks/5/path = NodePath("WalkerPivot/RightLegGun:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -2248,7 +2464,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("WalkerPivot/LegGun:visible")
+tracks/6/path = NodePath("WalkerPivot/RightLegGun:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -2284,7 +2500,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("WalkerPivot/LegGun:process_mode")
+tracks/9/path = NodePath("WalkerPivot/RightLegGun:process_mode")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -2296,7 +2512,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("WalkerPivot/LegGun/HipJoint/Thigh/Knee/Shin/DomeMesh:visible")
+tracks/10/path = NodePath("WalkerPivot/RightLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh:visible")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -2365,6 +2581,30 @@ tracks/15/keys = {
 "update": 0,
 "values": [Vector3(-8.74228e-08, -3.14159, -3.14159)]
 }
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("WalkerPivot/LeftLegGun:process_mode")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("WalkerPivot/LeftLegGun:visible")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_q6sxk"]
 resource_name = "step_flip_to_downbowl"
@@ -2409,7 +2649,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("WalkerPivot/LegGun/HipJoint:rotation")
+tracks/3/path = NodePath("WalkerPivot/RightLegGun/HipJoint:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -2421,7 +2661,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("WalkerPivot/LegGun/HipJoint/Thigh/Knee:rotation")
+tracks/4/path = NodePath("WalkerPivot/RightLegGun/HipJoint/Thigh/Knee:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -2433,7 +2673,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("WalkerPivot/LegGun:position")
+tracks/5/path = NodePath("WalkerPivot/RightLegGun:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -2445,7 +2685,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("WalkerPivot/LegGun:visible")
+tracks/6/path = NodePath("WalkerPivot/RightLegGun:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -2481,7 +2721,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("WalkerPivot/LegGun:process_mode")
+tracks/9/path = NodePath("WalkerPivot/RightLegGun:process_mode")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -2562,6 +2802,30 @@ tracks/15/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("WalkerPivot/LeftLegGun:process_mode")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("WalkerPivot/LeftLegGun:visible")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_eijdu"]
 resource_name = "step_flip_to_upbowl"
@@ -2606,7 +2870,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("WalkerPivot/LegGun/HipJoint:rotation")
+tracks/3/path = NodePath("WalkerPivot/RightLegGun/HipJoint:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -2618,7 +2882,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("WalkerPivot/LegGun/HipJoint/Thigh/Knee:rotation")
+tracks/4/path = NodePath("WalkerPivot/RightLegGun/HipJoint/Thigh/Knee:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -2630,7 +2894,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("WalkerPivot/LegGun:position")
+tracks/5/path = NodePath("WalkerPivot/RightLegGun:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -2642,7 +2906,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("WalkerPivot/LegGun:visible")
+tracks/6/path = NodePath("WalkerPivot/RightLegGun:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -2678,7 +2942,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("WalkerPivot/LegGun:process_mode")
+tracks/9/path = NodePath("WalkerPivot/RightLegGun:process_mode")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -2759,6 +3023,30 @@ tracks/15/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("WalkerPivot/LeftLegGun:process_mode")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("WalkerPivot/LeftLegGun:visible")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_7vlw7"]
 resource_name = "vertical_jump"
@@ -2826,7 +3114,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("WalkerPivot/LegGun:visible")
+tracks/5/path = NodePath("WalkerPivot/RightLegGun:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -2850,7 +3138,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("WalkerPivot/LegGun:process_mode")
+tracks/7/path = NodePath("WalkerPivot/RightLegGun:process_mode")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -2934,7 +3222,7 @@ tracks/13/keys = {
 
 [sub_resource type="Animation" id="Animation_ojngc"]
 resource_name = "typhoon"
-length = 1.2
+length = 3.5
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -2943,7 +3231,7 @@ tracks/0/path = NodePath("WalkerPivot/LeftLegStand/DomeMesh/Shin/Knee:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6, 0.9, 1.2),
+"times": PackedFloat32Array(0, 2.9, 3.2, 3.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0.226893, 1.5708, 1.5708), Vector3(0.226893, 1.5708, 1.5708), Vector3(0.802853, 1.5708, 1.5708), Vector3(1.12508, 1.5708, 1.5708)]
@@ -2955,7 +3243,7 @@ tracks/1/path = NodePath("WalkerPivot/RightLegStand/DomeMesh/Shin/Knee:rotation"
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.6, 0.9, 1.2),
+"times": PackedFloat32Array(0, 2.9, 3.2, 3.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0.226893, -1.5708, -1.5708), Vector3(0.226893, -1.5708, -1.5708), Vector3(0.802851, -1.5708, -1.5708), Vector3(1.12574, -1.5708, -1.5708)]
@@ -2967,7 +3255,7 @@ tracks/2/path = NodePath("WalkerPivot/BowlPivot:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.6, 1.2),
+"times": PackedFloat32Array(0, 2.9, 3.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(2.08165e-12, 1.5, 2.08165e-12), Vector3(2.08165e-12, 1.5, 2.08165e-12), Vector3(0, 8.44318, 2.07478e-12)]
@@ -2991,22 +3279,22 @@ tracks/4/path = NodePath("WalkerPivot/RightLegStand:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 2.9),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true]
+"values": [false, true]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("WalkerPivot/LegGun:visible")
+tracks/5/path = NodePath("WalkerPivot/RightLegGun:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 2.9),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
+"values": [true, false]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -3015,22 +3303,22 @@ tracks/6/path = NodePath("WalkerPivot/RightLegStand:process_mode")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 2.9),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0]
+"values": [4, 0]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("WalkerPivot/LegGun:process_mode")
+tracks/7/path = NodePath("WalkerPivot/RightLegGun:process_mode")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 2.9),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [4]
+"values": [0, 4]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
@@ -3075,10 +3363,10 @@ tracks/11/path = NodePath("WalkerPivot/LeftLegStand:visible")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 2.9),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true]
+"values": [false, true]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
@@ -3087,10 +3375,10 @@ tracks/12/path = NodePath("WalkerPivot/LeftLegStand:process_mode")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 2.9),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0]
+"values": [4, 0]
 }
 tracks/13/type = "value"
 tracks/13/imported = false
@@ -3103,6 +3391,102 @@ tracks/13/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("WalkerPivot/RightLegGun/HipJoint:rotation")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 0.25, 1, 1.9, 2.15, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.22609, 1.5708, 1.5708), Vector3(-0.401426, 1.5708, 1.5708), Vector3(0.226893, 1.5708, 1.5708), Vector3(0.226893, 1.5708, 1.5708), Vector3(-0.401426, 1.5708, 1.5708), Vector3(0.226893, 1.5708, 1.5708)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("WalkerPivot/RightLegGun/HipJoint/Thigh/Knee:rotation")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 1, 1.9, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(2.9147, 1.5708, 1.5708), Vector3(1.3439, 1.5708, 1.5708), Vector3(1.3439, 1.5708, 1.5708), Vector3(2.9147, 1.5708, 1.5708)]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("WalkerPivot/RightLegGun:position")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(5.1, -5.9, 2.08165e-12)]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("WalkerPivot/LeftLegGun:position")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-5.08, -5.9, 2.08165e-12)]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("WalkerPivot/LeftLegGun:visible")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0, 2.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("WalkerPivot/LeftLegGun/HipJoint:rotation")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0, 0.25, 1, 1.9, 2.15, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.226893, -1.5708, -1.5708), Vector3(-0.401426, -1.5708, -1.5708), Vector3(0.226893, -1.5708, -1.5708), Vector3(0.226893, -1.5708, -1.5708), Vector3(-0.401426, -1.5708, -1.5708), Vector3(0.226893, -1.5708, -1.5708)]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("WalkerPivot/LeftLegGun/HipJoint/Thigh/Knee:rotation")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0, 1, 1.9, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(2.9147, -1.5708, -1.5708), Vector3(1.3439, -1.5708, -1.5708), Vector3(1.3439, -1.5708, -1.5708), Vector3(2.9147, -1.5708, -1.5708)]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("WalkerPivot/LeftLegGun:process_mode")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0, 2.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 4]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dmtk3"]
@@ -3206,7 +3590,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.0
 mesh = SubResource("SphereMesh_q81ne")
 
 [node name="LeftLegStand" parent="WalkerPivot" instance=ExtResource("5_rin41")]
-transform = Transform3D(5, -1.74393e-15, 9.28455e-13, 1.74393e-15, 5, -1.74393e-15, -3.16047e-12, 1.74393e-15, 5, 10, -2, -3.63798e-12)
+transform = Transform3D(5, -1.74393e-15, 9.28455e-13, 1.74393e-15, 5, -1.74393e-15, -3.16047e-12, 1.74393e-15, 5, 10, -2, 2.08165e-12)
 
 [node name="DomeMesh" parent="WalkerPivot/LeftLegStand" index="0"]
 transform = Transform3D(0.1, -5.19732e-25, 2.36828e-17, -3.30872e-24, 0.1, 8.14204e-24, 4.44089e-16, -8.82761e-24, 0.1, 0, 0, 0)
@@ -3259,28 +3643,52 @@ opponent_hitboxes = ["PlayerHitbox"]
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WalkerPivot/RightLegStand/DomeMesh/Foot/RightFootHurtbox"]
 shape = SubResource("SphereShape3D_kna8k")
 
-[node name="LegGun" parent="WalkerPivot" instance=ExtResource("4_25puj")]
+[node name="RightLegGun" parent="WalkerPivot" instance=ExtResource("4_25puj")]
 process_mode = 4
-transform = Transform3D(5, 0, 2.84217e-14, 2.64698e-23, 5, -5.29396e-23, 7.10543e-15, 5.78515e-30, 5, 8.6901, 3.48645, 2.08165e-12)
+transform = Transform3D(4.99999, -4.44285e-27, 9.2848e-13, 2.64895e-23, 5, 1.35726e-21, -1.53742e-11, -6.83809e-21, 4.99999, 8.6901, 3.48645, 2.08165e-12)
 visible = false
 
-[node name="HipJoint" parent="WalkerPivot/LegGun" index="0"]
-transform = Transform3D(0.906213, -3.39508e-07, -0.422821, -0.422821, -1.53061e-06, -0.906213, -3.39507e-07, 1, -1.53061e-06, 0, 2.17465, -7.10543e-15)
+[node name="HipJoint" parent="WalkerPivot/RightLegGun" index="0"]
+transform = Transform3D(0.906213, -3.39507e-07, -0.422821, -0.422821, -1.53061e-06, -0.906213, -3.39507e-07, 0.999999, -1.53061e-06, 0, 2.175, 2.27374e-12)
 
-[node name="Knee" parent="WalkerPivot/LegGun/HipJoint/Thigh" index="0"]
-transform = Transform3D(0.766045, -8.46916e-07, -0.642787, -0.642788, -2.32688e-06, -0.766045, -8.46917e-07, 1, -2.32688e-06, -2.38419e-07, -0.506071, -3.33955e-13)
+[node name="Knee" parent="WalkerPivot/RightLegGun/HipJoint/Thigh" index="0"]
+transform = Transform3D(0.766045, -8.46916e-07, -0.642787, -0.642788, -2.32688e-06, -0.766045, -8.46917e-07, 1, -2.32688e-06, -2.38419e-07, -0.506071, 5.40012e-13)
 
-[node name="Shin" parent="WalkerPivot/LegGun/HipJoint/Thigh/Knee" index="0"]
+[node name="Shin" parent="WalkerPivot/RightLegGun/HipJoint/Thigh/Knee" index="0"]
 transform = Transform3D(1, -4.44089e-16, -1.6076e-21, 0, -3.61999e-06, 1, -4.44089e-16, -1, -3.61999e-06, 0, 2.19894e-08, 0.503055)
 
-[node name="EnemyHitbox" type="Area3D" parent="WalkerPivot/LegGun/HipJoint/Thigh/Knee/Shin/DomeMesh/Foot" index="1"]
+[node name="EnemyHitbox" type="Area3D" parent="WalkerPivot/RightLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh/Foot" index="1"]
 process_mode = 4
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("7_ably2")
 damage = 49
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WalkerPivot/LegGun/HipJoint/Thigh/Knee/Shin/DomeMesh/Foot/EnemyHitbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WalkerPivot/RightLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh/Foot/EnemyHitbox"]
+shape = SubResource("CylinderShape3D_tol7x")
+
+[node name="LeftLegGun" parent="WalkerPivot" instance=ExtResource("4_25puj")]
+process_mode = 4
+transform = Transform3D(5, -2.82727e-27, 9.28469e-13, 2.64782e-23, 5, 8.11928e-22, -1.48171e-11, -4.29699e-21, 5, -5.08, -5.9, 2.08165e-12)
+visible = false
+
+[node name="HipJoint" parent="WalkerPivot/LeftLegGun" index="0"]
+transform = Transform3D(0.224951, -3.38785e-08, -0.97437, -0.97437, -4.25911e-08, -0.224951, -3.38785e-08, 1, -4.25911e-08, 0, 2.17465, 0)
+
+[node name="Knee" parent="WalkerPivot/LeftLegGun/HipJoint/Thigh" index="0"]
+transform = Transform3D(0.974371, -1.12032e-09, -0.224951, -0.224951, -9.83292e-09, -0.97437, -1.12032e-09, 1, -9.83292e-09, -2.38419e-07, -0.506071, -4.54747e-13)
+
+[node name="Shin" parent="WalkerPivot/LeftLegGun/HipJoint/Thigh/Knee" index="0"]
+transform = Transform3D(1, -4.44089e-16, -1.6076e-21, 0, -3.61999e-06, 1, -4.44089e-16, -1, -3.61999e-06, 0, 2.19894e-08, 0.503055)
+
+[node name="EnemyHitbox" type="Area3D" parent="WalkerPivot/LeftLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh/Foot" index="1"]
+process_mode = 4
+collision_layer = 8
+collision_mask = 11
+script = ExtResource("7_ably2")
+damage = 49
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WalkerPivot/LeftLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh/Foot/EnemyHitbox"]
 shape = SubResource("CylinderShape3D_tol7x")
 
 [node name="FootBallSpawner" type="Node3D" parent="."]
@@ -3324,4 +3732,5 @@ shape = SubResource("SeparationRayShape3D_njqlp")
 
 [editable path="WalkerPivot/LeftLegStand"]
 [editable path="WalkerPivot/RightLegStand"]
-[editable path="WalkerPivot/LegGun"]
+[editable path="WalkerPivot/RightLegGun"]
+[editable path="WalkerPivot/LeftLegGun"]
