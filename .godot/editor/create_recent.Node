@@ -1,15 +1,15 @@
 MeshInstance3D
+CollisionShape3D
+StaticBody3D
 GPUParticles3D
 AudioStreamPlayer
 Node3D
 AnimationPlayer
-CollisionShape3D
 Area3D
 Marker3D
 PhysicalBone3D
 SkeletonIK3D
 Skeleton3D
-StaticBody3D
 TextureRect
 Node2D
 CharacterBody3D
