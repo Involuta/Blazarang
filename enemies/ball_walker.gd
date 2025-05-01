@@ -368,11 +368,15 @@ func step_flip_to_upbowl():
 func typhoon():
 	anim_player.play("bowl_flip_down")
 	await anim_player.animation_finished
+	anim_player.play("bowl_lower")
+	await anim_player.animation_finished
 	anim_player.play("typhoon")
 	walker_pivot.position = Vector3.ZERO
 	global_position += 10 * -transform.basis.z
 	typhoon_rotating = true
-	await create_tween().tween_property(self, "typhoon_rotation_rate", PI/10, 2.2).finished
+	typhoon_rotation_rate = 0
+	# Rotate for 4.4 seconds
+	await create_tween().tween_property(self, "typhoon_rotation_rate", PI/12, 2.2).finished
 	await create_tween().tween_property(self, "typhoon_rotation_rate", 0, 2.2).finished
 	await anim_player.animation_finished
 	typhoon_rotating = false
