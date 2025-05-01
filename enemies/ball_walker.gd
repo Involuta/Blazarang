@@ -36,6 +36,8 @@ var walker_icon_pos := Vector3.ZERO
 @export var rim_ball_fwd_speed := 8.0
 @export var rim_ball_init_down_speed := 8.0 # Downward speed of rim ball when it's first shot out
 
+var typhoon_rotating := false # If this is true, the walker pivot rotates about its y axis
+var typhoon_rotation_rate := 0.0 # Modified by physics_process if typhoon_rotating
 
 enum PHASE {
 	PHASE1,
@@ -144,6 +146,8 @@ func _physics_process(delta):
 		print(foot_ball_spawner.position)
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+	if typhoon_rotating:
+		rotate_y(typhoon_rotation_rate)
 	match(dist_state):
 		DIST_TYPE.LONG_DIST:
 			long_dist_state_frame()
@@ -309,7 +313,7 @@ func step_or_stomp():
 		aiming_at_icon = false
 	# Otherwise, if target is directly below you, either bowl slam or walk away
 	elif target_in_bowl_slam_range():
-		if not just_walked and rng.randf() > .5:
+		if not just_walked and rng.randf() > .9:
 			just_walked = true
 			aiming_at_icon = true
 			anim_in_progress = true
@@ -320,7 +324,8 @@ func step_or_stomp():
 		else:
 			just_walked = false
 			anim_in_progress = true
-			await bowl_slam()
+			#await bowl_slam()
+			await typhoon()
 			anim_in_progress = false
 	# If you cannot bowl slam or walk, stomp. If the target is closer to the gun foot, flip yourself
 	else:
@@ -359,6 +364,23 @@ func step_flip_to_upbowl():
 	await anim_player.animation_finished
 	await spawn_foot_explosion()
 	# Don't do anything else; the rotation and global pos mvmt from the previous anim (step flip to downbowl) did all the work already
+
+func typhoon():
+	anim_player.play("bowl_flip_down")
+	await anim_player.animation_finished
+	anim_player.play("typhoon")
+	walker_pivot.position = Vector3.ZERO
+	global_position += 10 * -transform.basis.z
+	typhoon_rotating = true
+	await create_tween().tween_property(self, "typhoon_rotation_rate", PI/10, 2.2).finished
+	await create_tween().tween_property(self, "typhoon_rotation_rate", 0, 2.2).finished
+	await anim_player.animation_finished
+	typhoon_rotating = false
+	walker_pivot.rotation.y = -PI/2
+	walker_pivot.position = 10 * Vector3.FORWARD
+	global_position += 10 * transform.basis.z
+	anim_player.play("bowl_flip_upright")
+	await anim_player.animation_finished
 
 func long_dist_state_frame():
 	velocity.x = 0

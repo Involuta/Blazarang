@@ -23,3 +23,4 @@ res://glb_inherited_scenes/cotu_outline.gdshader
 res://skygradient.gdshader
 res://enemies/ball_walker_foot_explosion.tscn
 res://enemies/skull_ball.tscn
+res://enemies/ball_walker.gd

@@ -3050,7 +3050,7 @@ tracks/17/keys = {
 
 [sub_resource type="Animation" id="Animation_ojngc"]
 resource_name = "typhoon"
-length = 3.5
+length = 5.0
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -3059,7 +3059,7 @@ tracks/0/path = NodePath("WalkerPivot/LeftLegStand/DomeMesh/Shin/Knee:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.9, 3.2, 3.5),
+"times": PackedFloat32Array(0, 4.4, 4.7, 5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0.226893, 1.5708, 1.5708), Vector3(0.226893, 1.5708, 1.5708), Vector3(0.802853, 1.5708, 1.5708), Vector3(1.12508, 1.5708, 1.5708)]
@@ -3071,7 +3071,7 @@ tracks/1/path = NodePath("WalkerPivot/RightLegStand/DomeMesh/Shin/Knee:rotation"
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 2.9, 3.2, 3.5),
+"times": PackedFloat32Array(0, 4.4, 4.7, 5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0.226893, -1.5708, -1.5708), Vector3(0.226893, -1.5708, -1.5708), Vector3(0.802851, -1.5708, -1.5708), Vector3(1.12574, -1.5708, -1.5708)]
@@ -3083,7 +3083,7 @@ tracks/2/path = NodePath("WalkerPivot/BowlPivot:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 2.9, 3.5),
+"times": PackedFloat32Array(0, 4.4, 5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(2.08165e-12, 1.5, 2.08165e-12), Vector3(2.08165e-12, 1.5, 2.08165e-12), Vector3(0, 8.44318, 2.07478e-12)]
@@ -3107,7 +3107,7 @@ tracks/4/path = NodePath("WalkerPivot/RightLegStand:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 2.9),
+"times": PackedFloat32Array(0, 4.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -3119,7 +3119,7 @@ tracks/5/path = NodePath("WalkerPivot/RightLegGun:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 2.9),
+"times": PackedFloat32Array(0, 4.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -3131,7 +3131,7 @@ tracks/6/path = NodePath("WalkerPivot/RightLegStand:process_mode")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 2.9),
+"times": PackedFloat32Array(0, 4.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [4, 0]
@@ -3143,7 +3143,7 @@ tracks/7/path = NodePath("WalkerPivot/RightLegGun:process_mode")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 2.9),
+"times": PackedFloat32Array(0, 4.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 4]
@@ -3191,7 +3191,7 @@ tracks/11/path = NodePath("WalkerPivot/LeftLegStand:visible")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PackedFloat32Array(0, 2.9),
+"times": PackedFloat32Array(0, 4.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -3203,7 +3203,7 @@ tracks/12/path = NodePath("WalkerPivot/LeftLegStand:process_mode")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
-"times": PackedFloat32Array(0, 2.9),
+"times": PackedFloat32Array(0, 4.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [4, 0]
@@ -3227,7 +3227,7 @@ tracks/14/path = NodePath("WalkerPivot/RightLegGun/HipJoint:rotation")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
-"times": PackedFloat32Array(0, 0.25, 1, 1.9, 2.4, 2.9),
+"times": PackedFloat32Array(0, 0.25, 1, 3.4, 3.9, 4.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0.22609, 1.5708, 1.5708), Vector3(-0.401426, 1.5708, 1.5708), Vector3(0.226893, 1.5708, 1.5708), Vector3(0.226893, 1.5708, 1.5708), Vector3(-0.575959, 1.5708, 1.5708), Vector3(0.226893, 1.5708, 1.5708)]
@@ -3239,10 +3239,10 @@ tracks/15/path = NodePath("WalkerPivot/RightLegGun/HipJoint/Thigh/Knee:rotation"
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
-"times": PackedFloat32Array(0, 1, 1.9, 2.4, 2.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.25, 1, 3.4, 3.9, 4.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(2.9147, 1.5708, 1.5708), Vector3(1.3439, 1.5708, 1.5708), Vector3(1.3439, 1.5708, 1.5708), Vector3(3.14159, 1.5708, 1.5708), Vector3(2.9147, 1.5708, 1.5708)]
+"values": [Vector3(2.9147, 1.5708, 1.5708), Vector3(3.05433, 1.5708, 1.5708), Vector3(1.3439, 1.5708, 1.5708), Vector3(1.3439, 1.5708, 1.5708), Vector3(3.14159, 1.5708, 1.5708), Vector3(2.9147, 1.5708, 1.5708)]
 }
 tracks/16/type = "value"
 tracks/16/imported = false
@@ -3275,7 +3275,7 @@ tracks/18/path = NodePath("WalkerPivot/LeftLegGun:visible")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
-"times": PackedFloat32Array(0, 2.9),
+"times": PackedFloat32Array(0, 4.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -3287,7 +3287,7 @@ tracks/19/path = NodePath("WalkerPivot/LeftLegGun/HipJoint:rotation")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
-"times": PackedFloat32Array(0, 0.25, 1, 1.9, 2.4, 2.9),
+"times": PackedFloat32Array(0, 0.25, 1, 3.4, 3.9, 4.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0.226893, -1.5708, -1.5708), Vector3(-0.401426, -1.5708, -1.5708), Vector3(0.226893, -1.5708, -1.5708), Vector3(0.226893, -1.5708, -1.5708), Vector3(-0.575959, -1.5708, -1.5708), Vector3(0.226893, -1.5708, -1.5708)]
@@ -3299,10 +3299,10 @@ tracks/20/path = NodePath("WalkerPivot/LeftLegGun/HipJoint/Thigh/Knee:rotation")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
-"times": PackedFloat32Array(0, 1, 1.9, 2.4, 2.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.25, 1, 3.4, 3.9, 4.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(2.9147, -1.5708, -1.5708), Vector3(1.3439, -1.5708, -1.5708), Vector3(1.3439, -1.5708, -1.5708), Vector3(3.14159, -1.5708, -1.5708), Vector3(2.9147, -1.5708, -1.5708)]
+"values": [Vector3(2.9147, -1.5708, -1.5708), Vector3(3.05433, -1.5708, -1.5708), Vector3(1.3439, -1.5708, -1.5708), Vector3(1.3439, -1.5708, -1.5708), Vector3(3.14159, -1.5708, -1.5708), Vector3(2.9147, -1.5708, -1.5708)]
 }
 tracks/21/type = "value"
 tracks/21/imported = false
@@ -3311,7 +3311,7 @@ tracks/21/path = NodePath("WalkerPivot/LeftLegGun:process_mode")
 tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/keys = {
-"times": PackedFloat32Array(0, 2.9),
+"times": PackedFloat32Array(0, 4.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 4]
