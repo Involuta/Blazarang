@@ -23,6 +23,7 @@ var substate_queued := false
 var facing_forward := false # Whether to face toward or away from the target pos of lerp_look_at
 var aiming_at_icon := false
 var just_walked := false # Whether the last short dist action the walker performed was a walk
+var just_typhooned := false # Whether the last short dist action the walker performed was a walk
 var latest_saved_y_rotation := 0.0 # Latest rotation before initiating linear look at pos
 
 @export var max_dist_from_arena_center := 80.0 # Max dist from arena center before walker steps the other way
@@ -305,6 +306,7 @@ func step_or_stomp():
 	# If you're too far from arena center and you didn't just walk, walk towards icon
 	if not just_walked and global_position.distance_to(min_y_pos * Vector3.UP) >= max_dist_from_arena_center:
 		just_walked = true
+		just_typhooned = false
 		aiming_at_icon = true
 		anim_in_progress = true
 		await step_flip_to_downbowl()
@@ -313,8 +315,9 @@ func step_or_stomp():
 		aiming_at_icon = false
 	# Otherwise, if target is directly below you, either bowl slam or walk away
 	elif target_in_bowl_slam_range():
-		if not just_walked and rng.randf() > .9:
+		if not just_walked and rng.randf() > .5:
 			just_walked = true
+			just_typhooned = false
 			aiming_at_icon = true
 			anim_in_progress = true
 			await step_flip_to_downbowl()
@@ -323,20 +326,30 @@ func step_or_stomp():
 			aiming_at_icon = false
 		else:
 			just_walked = false
+			just_typhooned = false
 			anim_in_progress = true
-			#await bowl_slam()
-			await typhoon()
+			await bowl_slam()
 			anim_in_progress = false
-	# If you cannot bowl slam or walk, stomp. If the target is closer to the gun foot, flip yourself
+	# If you cannot bowl slam or walk, either stomp or typhoon. If you just typhooned, stomp. If you stomp and the target is closer to the gun foot, flip yourself
+	elif not just_typhooned and rng.randf() > .67:
+		just_walked = false
+		just_typhooned = true
+		anim_in_progress = true
+		await typhoon()
+		anim_in_progress = false
 	else:
 		just_walked = false
+		just_typhooned = false
 		anim_in_progress = true
-		if target_closer_to_standing_foot():
-			global_position += STANDING_FEET_DIST * -transform.basis.z
-			rotation.y += PI
-		anim_player.play("right_stomp")
-		await get_tree().create_timer(2.0).timeout
+		await stomp()
 		anim_in_progress = false
+
+func stomp():
+	if target_closer_to_standing_foot():
+		global_position += STANDING_FEET_DIST * -transform.basis.z
+		rotation.y += PI
+	anim_player.play("right_stomp")
+	await get_tree().create_timer(2.0).timeout
 
 func bowl_slam():
 	anim_player.play("bowl_flip_down")
