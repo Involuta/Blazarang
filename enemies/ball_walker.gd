@@ -24,6 +24,7 @@ var facing_forward := false # Whether to face toward or away from the target pos
 var aiming_at_icon := false
 var just_walked := false # Whether the last short dist action the walker performed was a walk
 var just_typhooned := false # Whether the last short dist action the walker performed was a walk
+@export var typhoon_chance := .33 # Chance of using typhoon instead of stomping
 var latest_saved_y_rotation := 0.0 # Latest rotation before initiating linear look at pos
 
 @export var max_dist_from_arena_center := 80.0 # Max dist from arena center before walker steps the other way
@@ -278,7 +279,7 @@ func spawn_rim_balls():
 	# 2 balls shoot at equivalent angles beside the line representinga the walker's fwd direction
 	ball_vec = ball_vec.rotated(Vector3.UP, PI/num_rim_balls)
 	for i in range(num_rim_balls):
-		var b = get_random_ball().instantiate()#foot_ball_spawner.roller.instantiate()
+		var b = get_random_ball().instantiate()
 		level.add_child.call_deferred(b)
 		await b.tree_entered
 		b.global_position = bowl_pivot.global_position + bowl_radius * ball_vec
@@ -331,7 +332,7 @@ func step_or_stomp():
 			await bowl_slam()
 			anim_in_progress = false
 	# If you cannot bowl slam or walk, either stomp or typhoon. If you just typhooned, stomp. If you stomp and the target is closer to the gun foot, flip yourself
-	elif not just_typhooned and rng.randf() > .67:
+	elif not just_typhooned and rng.randf() <= typhoon_chance:
 		just_walked = false
 		just_typhooned = true
 		anim_in_progress = true

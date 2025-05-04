@@ -3513,6 +3513,32 @@ tracks/21/keys = {
 "update": 1,
 "values": [0, 4]
 }
+tracks/22/type = "method"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath(".")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
+"times": PackedFloat32Array(1.6, 1.9, 2.2, 2.5, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"spawn_rim_balls"
+}, {
+"args": [],
+"method": &"spawn_rim_balls"
+}, {
+"args": [],
+"method": &"spawn_rim_balls"
+}, {
+"args": [],
+"method": &"spawn_rim_balls"
+}, {
+"args": [],
+"method": &"spawn_rim_balls"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_7vlw7"]
 resource_name = "vertical_jump"
@@ -3736,6 +3762,7 @@ max_dist_state_switch_cooldown = 5.0
 max_foot_ball_spawner_upgrade_time = 4.0
 short_dist_state_range = 20.0
 max_short_dist_wait = 5.0
+typhoon_chance = 0.99
 max_dist_from_arena_center = 16.0
 num_rim_balls = 6.0
 attack_turn_speed = 0.75
@@ -3776,14 +3803,20 @@ transform = Transform3D(1, -5.48843e-16, 2.8571e-16, 2.8571e-16, 0.819152, 0.573
 [node name="BowlMesh" parent="WalkerPivot/BowlPivot" instance=ExtResource("5_7qoeb")]
 transform = Transform3D(0.625, -2.11758e-22, 2.84217e-14, 9.92617e-24, 0.625, 1.15197e-23, -8.88178e-16, 8.25744e-22, 0.625, 0, -4.04349, 2.07478e-12)
 
-[node name="BowlBallCollider" type="StaticBody3D" parent="WalkerPivot/BowlPivot"]
+[node name="BowlBallHurtbox" type="Area3D" parent="WalkerPivot/BowlPivot" node_paths=PackedStringArray("hurtbox_owner")]
 transform = Transform3D(0.999999, -3.48827e-16, 2.00468e-12, -3.51483e-16, -1, 2.53518e-06, 6.27554e-14, -2.53518e-06, -1, 2.08165e-12, -0.1, 2.08165e-12)
+collision_layer = 8
+collision_mask = 265
+script = ExtResource("5_tqkwm")
+hurtbox_owner = NodePath("../../../MultiHurtboxOwner")
+enemy_name = "BallWalker"
+opponent_hitboxes = ["PlayerHitbox"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WalkerPivot/BowlPivot/BowlBallCollider"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WalkerPivot/BowlPivot/BowlBallHurtbox"]
 transform = Transform3D(0.999999, 4.039e-28, 2.68681e-12, 3.06637e-27, 1, 2.27459e-22, -3.35044e-12, -9.75865e-22, 0.999999, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 shape = SubResource("SphereShape3D_5dkf2")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WalkerPivot/BowlPivot/BowlBallCollider"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WalkerPivot/BowlPivot/BowlBallHurtbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh = SubResource("SphereMesh_q81ne")
 

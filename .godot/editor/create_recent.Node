@@ -1,3 +1,4 @@
+Area3D
 MeshInstance3D
 CollisionShape3D
 StaticBody3D
@@ -5,7 +6,6 @@ GPUParticles3D
 AudioStreamPlayer
 Node3D
 AnimationPlayer
-Area3D
 Marker3D
 PhysicalBone3D
 SkeletonIK3D
