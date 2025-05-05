@@ -24,3 +24,5 @@ res://skygradient.gdshader
 res://enemies/ball_walker_foot_explosion.tscn
 res://enemies/skull_ball.tscn
 res://enemies/ball_walker.gd
+res://enemies/giant_bouncer_ball.tscn
+res://enemies/spawners/ball_spawner.gd

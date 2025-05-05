@@ -62,6 +62,9 @@ var aiming_at_target := true
 @export var follow_turn_speed := .15
 @export var attack_turn_speed := .15
 
+@export var cannon_spawn_cooldown_secs := 1.0
+@export var mortar_spawn_cooldown_secs := 1.4
+
 @export var phase1_short_dist_substate_chances = {
 	"STOMP": 1.0,
 }
@@ -130,12 +133,14 @@ var level : Node3D
 var target : Node3D
 var walker_icon : Node3D
 var foot_ball_spawner : Node3D
+var foot_ball_spawner2 : Node3D
 
 func _ready():
 	level = root.find_child("Level")
 	target = root.find_child("Icon")
 	walker_icon = root.find_child("WalkerIcon")
 	foot_ball_spawner = find_child("FootBallSpawner")
+	foot_ball_spawner2 = find_child("FootBallSpawner2")
 	add_to_group("lockonables")
 	
 	foot_ball_spawner.enemy_chances = mortar_enemy_chances
@@ -227,6 +232,7 @@ func switch_to_mortar():
 	anim_in_progress = true
 	foot_state = FOOT_TYPE.MORTAR
 	anim_player.play("stand_to_foot_mortar")
+	foot_ball_spawner.spawn_cooldown_secs = mortar_spawn_cooldown_secs
 	foot_ball_spawner.enemy_chances = mortar_enemy_chances
 	foot_ball_spawner.spawning = true
 	foot_ball_spawner.skull_launched_by_mortar = true
@@ -238,6 +244,7 @@ func switch_to_cannon():
 	foot_state = FOOT_TYPE.CANNON
 	anim_player.play("stand_to_foot_cannon")
 	foot_ball_spawner.enemy_chances = cannon_enemy_chances
+	foot_ball_spawner.spawn_cooldown_secs = cannon_spawn_cooldown_secs
 	foot_ball_spawner.spawning = true
 	foot_ball_spawner.skull_launched_by_mortar = false
 	await anim_player.animation_finished
@@ -273,6 +280,7 @@ func get_random_ball():
 	return choose_ball_from_name("default")
 
 func spawn_rim_balls():
+	#return
 	foot_ball_spawner.skull_launched_by_mortar = false
 	var ball_vec := -transform.basis.z
 	# Make it so that a ball doesn't shoot directly from the walker's rim in its fwd direction bc that's where its thigh is
@@ -379,6 +387,10 @@ func step_flip_to_upbowl():
 	await spawn_foot_explosion()
 	# Don't do anything else; the rotation and global pos mvmt from the previous anim (step flip to downbowl) did all the work already
 
+func set_foot_ball_spawners_spawning(state: bool):
+	foot_ball_spawner.spawning = state
+	foot_ball_spawner2.spawning = state
+
 func typhoon():
 	anim_player.play("bowl_flip_down")
 	await anim_player.animation_finished
@@ -387,8 +399,12 @@ func typhoon():
 	anim_player.play("typhoon")
 	walker_pivot.position = Vector3.ZERO
 	global_position += 10 * -transform.basis.z
-	typhoon_rotating = true
 	typhoon_rotation_rate = 0
+	foot_ball_spawner.spawn_cooldown_secs = .5
+	foot_ball_spawner2.spawn_cooldown_secs = .5
+	foot_ball_spawner.enemy_chances = cannon_enemy_chances
+	foot_ball_spawner2.enemy_chances = cannon_enemy_chances
+	typhoon_rotating = true
 	# Rotate for 4.4 seconds
 	await create_tween().tween_property(self, "typhoon_rotation_rate", PI/12, 2.2).finished
 	await create_tween().tween_property(self, "typhoon_rotation_rate", 0, 2.2).finished

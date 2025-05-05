@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cy4cd0vab7e7s"]
+[gd_scene load_steps=36 format=3 uid="uid://cy4cd0vab7e7s"]
 
 [ext_resource type="Script" path="res://enemies/ball_walker.gd" id="1_evdbk"]
 [ext_resource type="Script" path="res://enemies/spawners/ball_spawner.gd" id="2_7lttv"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://el0vhxctxsiu" path="res://glb_inherited_scenes/bowl_mesh.tscn" id="5_7qoeb"]
 [ext_resource type="PackedScene" uid="uid://bmtn0cwrlroe4" path="res://enemies/ball_walker_mesh_leg_stand.tscn" id="5_rin41"]
 [ext_resource type="Script" path="res://enemies/multi_hurtbox_child.gd" id="5_tqkwm"]
-[ext_resource type="PackedScene" uid="uid://c613hspm13igo" path="res://glb_inherited_scenes/dome_mesh.tscn" id="6_lq8vy"]
 [ext_resource type="Script" path="res://hitbox.gd" id="7_ably2"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="8_ng0f4"]
 
@@ -3520,11 +3519,11 @@ tracks/22/path = NodePath(".")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/keys = {
-"times": PackedFloat32Array(1.6, 1.9, 2.2, 2.5, 2.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(1, 1.6, 1.9, 2.2, 2.5, 2.8, 3.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "values": [{
-"args": [],
-"method": &"spawn_rim_balls"
+"args": [true],
+"method": &"set_foot_ball_spawners_spawning"
 }, {
 "args": [],
 "method": &"spawn_rim_balls"
@@ -3537,7 +3536,37 @@ tracks/22/keys = {
 }, {
 "args": [],
 "method": &"spawn_rim_balls"
+}, {
+"args": [],
+"method": &"spawn_rim_balls"
+}, {
+"args": [false],
+"method": &"set_foot_ball_spawners_spawning"
 }]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("FootBallSpawner:position")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 3.8, 15)]
+}
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("FootBallSpawner:rotation")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3.48787e-16, 3.14159, 3.48787e-16)]
 }
 
 [sub_resource type="Animation" id="Animation_7vlw7"]
@@ -3890,6 +3919,9 @@ transform = Transform3D(0.766045, -8.46916e-07, -0.642787, -0.642788, -2.32688e-
 [node name="Shin" parent="WalkerPivot/RightLegGun/HipJoint/Thigh/Knee" index="0"]
 transform = Transform3D(1, -4.44089e-16, -1.6076e-21, 0, -3.61999e-06, 1, -4.44089e-16, -1, -3.61999e-06, 0, 2.19894e-08, 0.503055)
 
+[node name="DomeMesh" parent="WalkerPivot/RightLegGun/HipJoint/Thigh/Knee/Shin" index="0"]
+visible = false
+
 [node name="EnemyHitbox" type="Area3D" parent="WalkerPivot/RightLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh/Foot" index="1"]
 process_mode = 4
 collision_layer = 8
@@ -3942,14 +3974,37 @@ enemy_chances = {
 }
 heavy_launch_height_from_launch_point = 12.0
 roller_chargeup_secs = 2.08165e-12
+bouncer_chargeup_secs = 2.08165e-12
+skull_chargeup_secs = 2.08165e-12
+heavy_chargeup_secs = 2.08165e-12
+
+[node name="MeshPivot" type="Node3D" parent="FootBallSpawner"]
+
+[node name="FootBallSpawner2" type="Node3D" parent="."]
+transform = Transform3D(-1, 3.48787e-16, -8.74227e-08, 3.48787e-16, 1, -3.48787e-16, 8.74228e-08, -3.48787e-16, -1, 2.08165e-12, 3.8, -15)
+visible = false
+script = ExtResource("2_7lttv")
+attack_turn_speed = 0.2
+spawning = false
+spawn_cooldown_secs = 1.0
+enemy_chances = {
+"BOUNCER": 0.0,
+"DEATHBALL": 2.08167e-12,
+"GIANT_BOUNCER": 0.0,
+"GIANT_ROLLER": 0.0,
+"HEAVY": 0.0,
+"POPPER": 2.08167e-12,
+"ROLLER": 0.0,
+"SKULL": 0.0,
+"SWARM": 0.0
+}
+heavy_launch_height_from_launch_point = 12.0
+roller_chargeup_secs = 2.08165e-12
 bouncer_chargeup_secs = 0.4
 skull_chargeup_secs = 2.08165e-12
 heavy_chargeup_secs = 0.4
 
-[node name="MeshPivot" type="Node3D" parent="FootBallSpawner"]
-
-[node name="DomeMesh" parent="FootBallSpawner/MeshPivot" instance=ExtResource("6_lq8vy")]
-transform = Transform3D(0.5, -1.74393e-16, 1.74393e-16, 1.74393e-16, 0.5, -1.74393e-16, -1.74393e-16, 1.74393e-16, 0.5, 0, 0, 0)
+[node name="MeshPivot" type="Node3D" parent="FootBallSpawner2"]
 
 [node name="MultiHurtboxOwner" type="Area3D" parent="."]
 collision_layer = 0
