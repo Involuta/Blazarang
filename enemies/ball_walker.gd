@@ -280,7 +280,6 @@ func get_random_ball():
 	return choose_ball_from_name("default")
 
 func spawn_rim_balls():
-	#return
 	foot_ball_spawner.skull_launched_by_mortar = false
 	var ball_vec := -transform.basis.z
 	# Make it so that a ball doesn't shoot directly from the walker's rim in its fwd direction bc that's where its thigh is
@@ -392,18 +391,49 @@ func set_foot_ball_spawners_spawning(state: bool):
 	foot_ball_spawner2.spawning = state
 
 func typhoon():
+	if rng.randf() > .5:
+		await typhoon_cannon()
+	else:
+		await typhoon_mortar()
+
+func typhoon_cannon():
 	anim_player.play("bowl_flip_down")
 	await anim_player.animation_finished
 	anim_player.play("bowl_lower")
 	await anim_player.animation_finished
-	anim_player.play("typhoon")
+	anim_player.play("typhoon_cannon")
 	walker_pivot.position = Vector3.ZERO
 	global_position += 10 * -transform.basis.z
 	typhoon_rotation_rate = 0
-	foot_ball_spawner.spawn_cooldown_secs = .5
-	foot_ball_spawner2.spawn_cooldown_secs = .5
+	foot_ball_spawner.spawn_cooldown_secs = cannon_spawn_cooldown_secs / 2
+	foot_ball_spawner2.spawn_cooldown_secs = cannon_spawn_cooldown_secs / 2
 	foot_ball_spawner.enemy_chances = cannon_enemy_chances
 	foot_ball_spawner2.enemy_chances = cannon_enemy_chances
+	typhoon_rotating = true
+	# Rotate for 4.4 seconds
+	await create_tween().tween_property(self, "typhoon_rotation_rate", PI/12, 2.2).finished
+	await create_tween().tween_property(self, "typhoon_rotation_rate", 0, 2.2).finished
+	await anim_player.animation_finished
+	typhoon_rotating = false
+	walker_pivot.rotation.y = -PI/2
+	walker_pivot.position = 10 * Vector3.FORWARD
+	global_position += 10 * transform.basis.z
+	anim_player.play("bowl_flip_upright")
+	await anim_player.animation_finished
+
+func typhoon_mortar():
+	anim_player.play("bowl_flip_down")
+	await anim_player.animation_finished
+	anim_player.play("bowl_lower")
+	await anim_player.animation_finished
+	anim_player.play("typhoon_mortar")
+	walker_pivot.position = Vector3.ZERO
+	global_position += 10 * -transform.basis.z
+	typhoon_rotation_rate = 0
+	foot_ball_spawner.spawn_cooldown_secs = mortar_spawn_cooldown_secs / 2
+	foot_ball_spawner2.spawn_cooldown_secs = mortar_spawn_cooldown_secs / 2
+	foot_ball_spawner.enemy_chances = mortar_enemy_chances
+	foot_ball_spawner2.enemy_chances = mortar_enemy_chances
 	typhoon_rotating = true
 	# Rotate for 4.4 seconds
 	await create_tween().tween_property(self, "typhoon_rotation_rate", PI/12, 2.2).finished
