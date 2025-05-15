@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://clp2agu4jlltu"]
+
+[ext_resource type="PackedScene" uid="uid://cfi7hs4r4ntd7" path="res://glb_inherited_scenes/mini_ball_walker_meshes.tscn" id="1_ca0ub"]
+
+[node name="MiniBallWalker" type="Node3D"]
+
+[node name="MiniBallWalker" parent="." instance=ExtResource("1_ca0ub")]
