@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c5qo3aa1udn4u" path="res://glb_imports/MiniBallWalker.glb" id="1_by328"]
 
-[node name="MiniBallWalker" instance=ExtResource("1_by328")]
+[node name="MiniBallWalkerMeshes" instance=ExtResource("1_by328")]
 
 [node name="Skeleton3D" parent="Armature" index="0"]
 bones/0/position = Vector3(0, 3.53488, 0)
