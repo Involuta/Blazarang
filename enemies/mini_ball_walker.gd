@@ -7,16 +7,20 @@ var hitbox : Node3D
 var target : Node3D
 var moving := true
 
-@export var disappear_secs := 3.0
-
-# Set by spawner
-var follow_speed := 10.0
-var explode_dist := 4.0
+@export var follow_speed := 3.5
+@export var turn_speed := .1
+@export var kick_dist := 3.0
+@export var kick_secs := 2.0
 
 func _ready():
 	target = root.find_child("Icon")
 	hitbox = find_child("EnemyHitbox")
 	hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+	
+	anim_player.play("walk")
+
+func lerp_look_at_walk_dir(turn_speed):
+	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(velocity.x, velocity.z), turn_speed)
 
 func _physics_process(_delta):
 	if moving:
@@ -24,12 +28,15 @@ func _physics_process(_delta):
 		var dir_to_target := global_position.direction_to(target.global_position)
 		velocity.x = follow_speed * dir_to_target.x
 		velocity.z = follow_speed * dir_to_target.z
+		lerp_look_at_walk_dir(turn_speed)
 		move_and_slide()
 		
-		if global_position.distance_to(target.global_position) < explode_dist:
+		if global_position.distance_to(target.global_position) < kick_dist:
 			moving = false
+			anim_player.stop(false)
 			anim_player.play("kick")
-			await get_tree().create_timer(disappear_secs).timeout
+			await get_tree().create_timer(kick_secs).timeout
+			anim_player.play("walk")
 			moving = true
 	else:
 		velocity = Vector3.ZERO

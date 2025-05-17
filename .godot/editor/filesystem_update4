@@ -27,3 +27,5 @@ res://enemies/mini_ball_walker.gd
 res://levels/balls_level/section_nodes/balls_level_main_arena.tscn
 res://enemies/ball_walker.tscn
 res://enemies/gauntlet_melee_tier1.tscn
+res://enemies/heavy_ball.tscn
+res://enemies/roller_ball.tscn
