@@ -7,14 +7,14 @@ var hitbox : Node3D
 var target : Node3D
 var moving := true
 
-@export var follow_speed := 3.5
+@export var follow_speed := 3.0
 @export var turn_speed := .1
 @export var kick_dist := 3.0
 @export var kick_secs := 2.0
 
 func _ready():
 	target = root.find_child("Icon")
-	hitbox = find_child("EnemyHitbox")
+	hitbox = find_child("MeleeHitboxPivot")
 	hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	
 	anim_player.play("walk")

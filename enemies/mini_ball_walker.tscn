@@ -22,50 +22,49 @@ shape = SubResource("CapsuleShape3D_l2haw")
 transform = Transform3D(-0.08, 2.79029e-17, -6.99382e-09, 2.79029e-17, 0.08, -2.79029e-17, 6.99382e-09, -2.79029e-17, -0.08, 0, -0.871314, 0)
 
 [node name="Skeleton3D" parent="MiniBallWalkerMeshes/Armature" index="0"]
-bones/0/position = Vector3(1.90677e-06, -6.04309, -12.2843)
-bones/0/rotation = Quaternion(0, 1.33215e-07, 0, 1)
-bones/1/rotation = Quaternion(0.0992215, -0.538776, -0.789831, 0.275757)
-bones/2/rotation = Quaternion(0.0565647, -0.269819, -0.0278941, 0.960843)
-bones/5/position = Vector3(6.58568, -3.62714, 12.2865)
+bones/0/position = Vector3(0, 0, 0)
+bones/1/rotation = Quaternion(-0.134479, 0.313838, -0.864121, 0.36975)
+bones/2/rotation = Quaternion(0.637762, -0.104799, -0.396448, 0.652002)
+bones/5/position = Vector3(6.57531, -9.62771, 0.0659761)
 bones/5/rotation = Quaternion(0.0819575, 0, 0.996636, -1.03312e-08)
-bones/7/rotation = Quaternion(-0.436408, -0.647436, 0.50522, 0.367598)
-bones/8/rotation = Quaternion(0.869259, 0.130311, 0.429468, 0.207283)
-bones/11/position = Vector3(-6.57532, -1.32577, -2.4805)
-bones/11/rotation = Quaternion(-0.0576879, 0.707934, 0.701507, -0.0582163)
-bones/14/position = Vector3(6.58568, -9.67023, 0.00219134)
+bones/7/rotation = Quaternion(-0.134135, -0.313145, 0.864594, 0.369358)
+bones/8/rotation = Quaternion(0.636822, 0.104811, 0.396042, 0.653164)
+bones/11/position = Vector3(-6.57531, -9.64871, 0.0659761)
+bones/11/rotation = Quaternion(-0.0819575, 0, 0.996636, 1.03312e-08)
+bones/14/position = Vector3(6.58568, -9.63286, 0.039562)
 bones/14/rotation = Quaternion(1, 0, -2.22045e-16, 7.54979e-08)
 
 [node name="LeftShin" parent="MiniBallWalkerMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.982233, -0.174171, 0.0698777, 0.122074, 0.875793, 0.466994, -0.142535, -0.450167, 0.881495, 0.411714, -11.9576, 1.62854)
+transform = Transform3D(0.999984, -0.00468882, -0.00315196, 0.00474356, 0.999834, 0.0175734, 0.00306897, -0.0175883, 0.999841, 0.00809145, -11.3199, 0.00902653)
 
 [node name="LeftThigh" parent="MiniBallWalkerMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.558175, 0.609563, -0.562916, 0.589009, 0.186734, 0.786256, 0.584388, -0.770431, -0.254808, -7.89814, -6.94164, -8.44883)
+transform = Transform3D(0.999841, -0.0129249, 0.0123153, 0.0131294, 0.999775, -0.0166695, -0.0120971, 0.0168285, 0.999785, 0.186871, -11.6204, -0.170716)
 
 [node name="LeftFoot" parent="MiniBallWalkerMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(1, -1.01893e-07, 3.17091e-07, 1.01893e-07, 1, 2.36679e-07, -2.84489e-07, -2.36679e-07, 1, 0.0103712, -11.3304, -0.0637835)
+transform = Transform3D(1, -1.01893e-07, 5.24734e-08, 1.01893e-07, 1, 2.36679e-07, -2.14319e-08, -2.36679e-07, 1, 9.53674e-07, -11.2878, 1.71363e-07)
 
 [node name="RightShin" parent="MiniBallWalkerMeshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.793436, 0.547256, -0.266401, -0.449927, 0.822126, 0.348819, 0.409908, -0.156905, 0.89853, -2.24916, -11.7151, -11.8683)
+transform = Transform3D(0.999986, 0.00429247, 0.00289646, -0.00433866, 0.99986, 0.0161564, -0.00282668, -0.016169, 0.999866, -0.00739956, -11.3382, 0.00826454)
 
 [node name="RightThigh" parent="MiniBallWalkerMeshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.548588, 0.0445338, -0.834906, -0.565901, 0.754863, -0.331569, 0.615474, 0.654369, 0.43931, -3.964, -16.886, -20.3576)
+transform = Transform3D(0.999865, 0.0118838, -0.0113107, -0.0120566, 0.99981, -0.0153371, 0.0111263, 0.0154715, 0.999818, -0.171757, -11.6147, -0.156891)
 
 [node name="RightFoot" parent="MiniBallWalkerMeshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(1, 6.82003e-08, -3.7372e-08, 3.97599e-08, -0.00912094, 0.999958, 7.50149e-08, -0.999958, -0.009121, 0.0169945, -7.41968, -13.1041)
+transform = Transform3D(1, 1.01893e-07, -5.24734e-08, -1.01893e-07, 1, 2.36679e-07, 2.14319e-08, -2.36679e-07, 1, 0.0169945, -11.3088, 2.83122e-07)
 
 [node name="Sphere" parent="MiniBallWalkerMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(1, 0, 2.6643e-07, 0, 1, 0, -2.6643e-07, 0, 1, 1.90677e-06, -17.5893, -12.2843)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11.5462, 0)
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
 process_mode = 4
-transform = Transform3D(-1, 2.82342e-14, -1.50996e-07, 2.82342e-14, 1, -1.78024e-14, 1.50996e-07, -1.78024e-14, -1, -1.16415e-10, -0.828327, 1.45682)
+transform = Transform3D(-1, 2.82342e-14, -1.50996e-07, 2.82342e-14, 1, -1.78024e-14, 1.50996e-07, -1.78024e-14, -1, -0.561328, -0.425668, -2.76317)
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
 transform = Transform3D(1, 5.41784e-22, -2.36768e-15, -3.39764e-20, 1, 7.0874e-22, -2.8431e-15, 2.76482e-22, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("3_l1iqn")
-damage = 15
+damage = 20
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeleeHitboxPivot/EnemyHitbox"]
 transform = Transform3D(1, -4.68124e-23, -3.26115e-21, -5.49801e-21, 1, 7.08741e-22, -9.97588e-22, 2.76482e-22, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
