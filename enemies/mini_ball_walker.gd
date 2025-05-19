@@ -8,38 +8,37 @@ var hitbox : Node3D
 var target : Node3D
 @export var walk_moving := true # Whether walker is moving its central ball or not (it's not moving when both feet are on the ground and stationary). Exported so it can be changed in animation
 var moving := true # Whether walker is approaching
+var root_vel := Vector3.ZERO
 
 @export var follow_speed := 3.0
 @export var turn_speed := .1
-@export var kick_dist := 3.0
-@export var kick_secs := 2.0
+@export var kick_dist := 2.0
+@export var kick_secs := 1.5
 
 func _ready():
 	target = root.find_child("Icon")
 	hitbox = find_child("MeleeHitboxPivot")
 	hitbox.process_mode = Node.PROCESS_MODE_DISABLED
-	
-	anim_player.play("walk")
+	anim_tree.active = true
 
-func lerp_look_at_walk_dir(turn_speed):
-	rotation.y = lerp_angle(rotation.y, atan2(velocity.x, velocity.z), turn_speed)
+func lerp_look_at_target(turn_speed):
+	var dir_to_target := global_position.direction_to(target.global_position)
+	rotation.y = lerp_angle(rotation.y, atan2(dir_to_target.x, dir_to_target.z), turn_speed)
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	if moving:
+		lerp_look_at_target(turn_speed)
+		var current_rotation = transform.basis.get_rotation_quaternion()
+		velocity = .08 * (current_rotation.normalized() * anim_tree.get_root_motion_position()) / delta
 		velocity.y -= gravity
-		var dir_to_target := global_position.direction_to(target.global_position)
-		velocity.x = follow_speed * dir_to_target.x
-		velocity.z = follow_speed * dir_to_target.z
-		lerp_look_at_walk_dir(turn_speed)
-		if walk_moving:
-			move_and_slide()
+		move_and_slide()
 		
 		if global_position.distance_to(target.global_position) < kick_dist:
 			moving = false
 			anim_player.stop(false)
-			anim_player.play("kick")
+			anim_tree.set("parameters/StateMachine/conditions/kick", true)
 			await get_tree().create_timer(kick_secs).timeout
-			anim_player.play("walk")
+			anim_tree.set("parameters/StateMachine/conditions/kick", false)
 			moving = true
 	else:
 		velocity = Vector3.ZERO
