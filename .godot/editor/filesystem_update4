@@ -27,3 +27,4 @@ res://enemies/mini_ball_walker.tscn
 res://levels/balls_level/section_nodes/balls_level_main_arena.tscn
 res://enemies/mini_ball_walker.gd
 res://enemies/enemy_anims/mini_ball_walker_kick.res
+res://enemies/enemy_anims/mini_ball_walker_walk.res

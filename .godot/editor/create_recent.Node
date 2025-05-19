@@ -1,5 +1,5 @@
-AnimationTree
 MeshInstance3D
+AnimationTree
 CollisionShape3D
 Area3D
 Node3D
