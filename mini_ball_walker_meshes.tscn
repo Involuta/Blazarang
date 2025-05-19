@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3 uid="uid://cifsgdf800m5p"]
+
+[ext_resource type="PackedScene" uid="uid://c5qo3aa1udn4u" path="res://glb_imports/MiniBallWalker.glb" id="1_3tvih"]
+
+[node name="MiniBallWalker" instance=ExtResource("1_3tvih")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/1/position = Vector3(0, -11.5462, -11.5932)
+bones/2/position = Vector3(0, 15.0811, 0.00608921)
+bones/3/rotation = Quaternion(-0.0548032, 0.0432014, -0.962973, 0.260409)
+bones/4/rotation = Quaternion(0.355791, -0.126727, -0.230267, 0.896845)
+bones/7/position = Vector3(6.57531, -13.2299, 2.35887)
+bones/7/rotation = Quaternion(0.0819518, 0.0118106, 0.996566, 0.000971224)
+bones/9/rotation = Quaternion(-0.134966, -0.413863, 0.859928, 0.266505)
+bones/10/rotation = Quaternion(0.238178, 0.0612887, 0.183187, 0.951818)
+bones/13/position = Vector3(-6.57531, -12.37, -11.7806)
+bones/13/rotation = Quaternion(-0.0792037, -0.25618, 0.963148, 0.0210668)
+
+[node name="LeftShin" parent="Armature/Skeleton3D" index="0"]
+transform = Transform3D(0.998686, -0.00344, 0.0511321, 0.0123365, 0.984542, -0.174716, -0.0497406, 0.175117, 0.98329, 0.010972, -11.3991, -9.25679)
+bone_idx = 5
+
+[node name="LeftThigh" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.934103, 0.285379, -0.214502, -0.14822, 0.856617, 0.494205, 0.324781, -0.429845, 0.842467, -3.8153, -4.54914, -7.76234)
+bone_idx = 6
+
+[node name="LeftFoot" parent="Armature/Skeleton3D" index="2"]
+transform = Transform3D(1, -1.03302e-07, 5.18728e-08, 1.02304e-07, 0.999719, 0.0236995, -4.98749e-08, -0.0236995, 0.999719, 0, -11.3562, -9.25486)
+bone_idx = 8
+
+[node name="RightShin" parent="Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.936016, -0.147782, -0.31943, -0.242521, 0.386913, -0.889653, 0.255066, 0.910197, 0.326316, -0.15427, -11.0134, -23.2231)
+bone_idx = 11
+
+[node name="RightThigh" parent="Armature/Skeleton3D" index="4"]
+transform = Transform3D(0.970808, -0.199725, -0.132819, 0.174786, 0.96829, -0.178504, 0.164259, 0.150079, 0.974933, 1.82517, -7.86641, -13.0735)
+bone_idx = 12
+
+[node name="RightFoot" parent="Armature/Skeleton3D" index="5"]
+transform = Transform3D(1, 9.99263e-08, -2.24709e-08, -9.95937e-08, 0.867856, -0.496816, -7.87406e-09, 0.496816, 0.867856, 0.0169964, -10.2431, -24.2498)
+bone_idx = 14
+
+[node name="Sphere" parent="Armature/Skeleton3D" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.01134, -11.5871)
+bone_idx = 15

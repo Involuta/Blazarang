@@ -1,11 +1,13 @@
 extends CharacterBody3D
 
 @onready var anim_player := $MiniBallWalkerMeshes/AnimationPlayer
+@onready var anim_tree := $AnimationTree
 @onready var root := $/root/ViewControl
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var hitbox : Node3D
 var target : Node3D
-var moving := true
+@export var walk_moving := true # Whether walker is moving its central ball or not (it's not moving when both feet are on the ground and stationary). Exported so it can be changed in animation
+var moving := true # Whether walker is approaching
 
 @export var follow_speed := 3.0
 @export var turn_speed := .1
@@ -20,7 +22,7 @@ func _ready():
 	anim_player.play("walk")
 
 func lerp_look_at_walk_dir(turn_speed):
-	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(velocity.x, velocity.z), turn_speed)
+	rotation.y = lerp_angle(rotation.y, atan2(velocity.x, velocity.z), turn_speed)
 
 func _physics_process(_delta):
 	if moving:
@@ -29,7 +31,8 @@ func _physics_process(_delta):
 		velocity.x = follow_speed * dir_to_target.x
 		velocity.z = follow_speed * dir_to_target.z
 		lerp_look_at_walk_dir(turn_speed)
-		move_and_slide()
+		if walk_moving:
+			move_and_slide()
 		
 		if global_position.distance_to(target.global_position) < kick_dist:
 			moving = false
