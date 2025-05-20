@@ -14,7 +14,7 @@ var aiming_at_target := true
 @export var follow_speed := 3.0
 @export var turn_speed := .1
 @export var kick_dist := 2.0
-@export var kick_secs := 1.833
+@export var kick_secs := 3.5
 
 func _ready():
 	target = root.find_child("Icon")
@@ -32,6 +32,13 @@ func aim_at_target():
 func stop_aiming_at_target():
 	aiming_at_target = false
 
+func leap():
+	velocity = 10 * transform.basis.z
+	velocity.y += 3
+
+func stop_mvmt():
+	velocity = Vector3.ZERO
+
 func _physics_process(delta):
 	if aiming_at_target:
 		lerp_look_at_target(turn_speed)
@@ -39,15 +46,15 @@ func _physics_process(delta):
 	if moving:
 		var current_rotation = transform.basis.get_rotation_quaternion()
 		velocity = .08 * (current_rotation.normalized() * anim_tree.get_root_motion_position()) / delta
-		velocity.y -= gravity
-		move_and_slide()
 		
 		if global_position.distance_to(target.global_position) < kick_dist:
 			moving = false
 			anim_player.stop(false)
-			anim_tree.set("parameters/StateMachine/conditions/kick", true)
+			anim_tree.set("parameters/StateMachine/conditions/leap", true)
 			await get_tree().create_timer(kick_secs).timeout
-			anim_tree.set("parameters/StateMachine/conditions/kick", false)
+			anim_tree.set("parameters/StateMachine/conditions/leap", false)
 			moving = true
-	else:
-		velocity = Vector3.ZERO
+	
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+	move_and_slide()

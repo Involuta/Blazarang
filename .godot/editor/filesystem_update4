@@ -1,4 +1,9 @@
-res://enemies/ball_walker.tscn
+res://enemies/enemy_anims/mini_ball_walker_idle.res
+res://enemies/enemy_anims/mini_ball_walker_kick.res
+res://enemies/enemy_anims/mini_ball_walker_leap.res
+res://enemies/enemy_anims/mini_ball_walker_recover.res
+res://enemies/enemy_anims/mini_ball_walker_walk.res
+res://enemies/mini_ball_walker.tscn
 res://enemies/enemy_hurtbox.gd
 res://rang/roserang_shader.tres
 res://GPUTrail-main/shaders/trail.gdshader
@@ -21,13 +26,7 @@ res://ui/glow.gdshader
 res://ui/glitch.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
 res://skygradient.gdshader
-res://enemies/ball_walker_foot_explosion.tscn
-res://mini_ball_walker_meshes.tscn
-res://enemies/mini_ball_walker.tscn
-res://levels/balls_level/section_nodes/balls_level_main_arena.tscn
 res://enemies/mini_ball_walker.gd
-res://enemies/enemy_anims/mini_ball_walker_kick.res
-res://enemies/enemy_anims/mini_ball_walker_walk.res
-res://enemies/enemy_anims/mini_ball_walker_idle.res
-res://enemies/enemy_anims/mini_ball_walker_leap.res
-res://enemies/enemy_anims/mini_ball_walker_recover.res
+res://enemies/ball_walker.tscn
+res://enemies/ball_walker_foot_explosion.tscn
+res://levels/balls_level/section_nodes/balls_level_main_arena.tscn

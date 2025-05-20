@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://clp2agu4jlltu"]
+[gd_scene load_steps=20 format=3 uid="uid://clp2agu4jlltu"]
 
 [ext_resource type="Script" path="res://enemies/mini_ball_walker.gd" id="1_td7b6"]
 [ext_resource type="PackedScene" uid="uid://cifsgdf800m5p" path="res://mini_ball_walker_meshes.tscn" id="2_q67k5"]
@@ -7,13 +7,22 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l2haw"]
 height = 1.75
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_nwmsj"]
+height = 1.75
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_ltohk"]
 size = Vector3(0.5, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_rn88h"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y34oa"]
-animation = &"kick"
+animation = &"leap"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c8a7a"]
+animation = &"leap"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4pra2"]
+animation = &"recover"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_btvsh"]
 animation = &"walk"
@@ -31,15 +40,34 @@ xfade_time = 0.15
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t173v"]
+xfade_time = 0.15
+advance_mode = 2
+advance_condition = &"leap"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gyv2i"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tq0bn"]
+xfade_time = 0.15
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ggvjc"]
 states/kick/node = SubResource("AnimationNodeAnimation_y34oa")
 states/kick/position = Vector2(473, 99.75)
+states/leap/node = SubResource("AnimationNodeAnimation_c8a7a")
+states/leap/position = Vector2(472.964, 188.842)
+states/recover/node = SubResource("AnimationNodeAnimation_4pra2")
+states/recover/position = Vector2(311.696, 188.957)
 states/walk/node = SubResource("AnimationNodeAnimation_btvsh")
 states/walk/position = Vector2(311.5, 100.75)
-transitions = ["Start", "walk", SubResource("AnimationNodeStateMachineTransition_fhccp"), "walk", "kick", SubResource("AnimationNodeStateMachineTransition_of415"), "kick", "walk", SubResource("AnimationNodeStateMachineTransition_t8ooa")]
+transitions = ["Start", "walk", SubResource("AnimationNodeStateMachineTransition_fhccp"), "walk", "kick", SubResource("AnimationNodeStateMachineTransition_of415"), "kick", "walk", SubResource("AnimationNodeStateMachineTransition_t8ooa"), "walk", "leap", SubResource("AnimationNodeStateMachineTransition_t173v"), "leap", "recover", SubResource("AnimationNodeStateMachineTransition_gyv2i"), "recover", "walk", SubResource("AnimationNodeStateMachineTransition_tq0bn")]
+graph_offset = Vector2(12.8925, 56.5725)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_onfs1"]
-graph_offset = Vector2(-39.36, 95.04)
+graph_offset = Vector2(-54.72, 126.72)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_ggvjc")
 nodes/StateMachine/position = Vector2(50, 150)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -49,49 +77,59 @@ collision_layer = 8
 collision_mask = 90
 script = ExtResource("1_td7b6")
 walk_moving = false
+kick_dist = 10.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.957879, 2.08165e-12)
 shape = SubResource("CapsuleShape3D_l2haw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+visible = false
+mesh = SubResource("CapsuleMesh_nwmsj")
+skeleton = NodePath("../..")
 
 [node name="MiniBallWalkerMeshes" parent="." instance=ExtResource("2_q67k5")]
 transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 2.08165e-12, -0.873, 2.08165e-12)
 
 [node name="Skeleton3D" parent="MiniBallWalkerMeshes/Armature" index="0"]
-bones/1/position = Vector3(0, -11.5462, -0.394967)
-bones/2/position = Vector3(0, 15.5663, 0.00608921)
-bones/3/rotation = Quaternion(-0.112725, 0.342358, -0.896915, 0.256179)
-bones/4/rotation = Quaternion(0.260046, -0.0726088, -0.198925, 0.942089)
-bones/7/position = Vector3(6.57531, -13.7448, -9.00335)
-bones/7/rotation = Quaternion(0.0819575, -0.000285493, 0.996636, -2.34884e-05)
-bones/9/rotation = Quaternion(-0.0638961, -0.0545837, 0.954392, 0.286483)
-bones/10/rotation = Quaternion(0.429647, 0.132954, 0.269276, 0.851597)
-bones/13/position = Vector3(-6.57531, -11.9754, 3.18412)
-bones/13/rotation = Quaternion(-0.0816126, 0.0913466, 0.992441, -0.00751181)
+bones/0/position = Vector3(6.58568, -9.63286, 0.039562)
+bones/0/rotation = Quaternion(1, 0, -2.22045e-16, 7.54979e-08)
+bones/1/position = Vector3(0, -11.5462, 0)
+bones/2/position = Vector3(0, 11.5462, 0)
+bones/3/rotation = Quaternion(-0.134479, 0.313838, -0.864121, 0.36975)
+bones/4/rotation = Quaternion(0.637761, -0.104799, -0.396448, 0.652002)
+bones/7/position = Vector3(6.57531, -9.62771, 0.0659761)
+bones/7/rotation = Quaternion(0.0819575, 0, 0.996636, -1.03312e-08)
+bones/9/rotation = Quaternion(-0.134135, -0.313145, 0.864594, 0.369358)
+bones/10/rotation = Quaternion(0.636822, 0.104811, 0.396042, 0.653164)
+bones/13/position = Vector3(-6.57531, -9.64871, 0.0659761)
+bones/13/rotation = Quaternion(-0.0819575, 0, 0.996636, 1.03312e-08)
 
 [node name="LeftShin" parent="MiniBallWalkerMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.96099, 0.110169, 0.253695, 0.151009, 0.559476, -0.814975, -0.231721, 0.821492, 0.521014, 0.0611801, -11.6018, -9.26782)
+transform = Transform3D(0.999984, -0.00468893, -0.00315208, 0.00474361, 0.999834, 0.0175734, 0.00306915, -0.0175883, 0.999841, 0.00809193, -11.3199, 0.00902987)
 
 [node name="LeftThigh" parent="MiniBallWalkerMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.972167, 0.228489, 0.0518132, -0.226662, 0.973199, -0.0388235, -0.0592953, 0.0259989, 0.997902, -2.40918, -6.90515, -0.580403)
+transform = Transform3D(0.999841, -0.0129249, 0.0123151, 0.0131294, 0.999775, -0.0166693, -0.012097, 0.0168284, 0.999785, 0.186872, -11.6204, -0.170716)
 
 [node name="LeftFoot" parent="MiniBallWalkerMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(1, -1.03422e-07, 5.2073e-08, 1.03468e-07, 1, -0.000572676, -8.04459e-08, 0.000572676, 1, 9.53674e-07, -11.3848, -9.45915)
+transform = Transform3D(1, -1.0195e-07, 3.75722e-08, 1.0195e-07, 1, 2.36623e-07, 8.37044e-09, -2.36623e-07, 1, 1.90735e-06, -11.2878, 1.22935e-06)
 
 [node name="RightShin" parent="MiniBallWalkerMeshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.999927, 0.00449, -0.0111916, -0.00477763, 0.999655, -0.0258131, 0.0110719, 0.0258645, 0.999604, -0.011838, -9.67651, 2.79564)
+transform = Transform3D(0.999987, 0.00429261, 0.00289646, -0.00433874, 0.99986, 0.0161562, -0.0028266, -0.0161689, 0.999866, -0.00740051, -11.3382, 0.00826597)
 
 [node name="RightThigh" parent="MiniBallWalkerMeshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.947866, -0.228909, 0.221698, 0.10368, 0.879378, 0.4647, -0.30133, -0.417487, 0.857266, 3.21567, -4.50195, 3.3848)
+transform = Transform3D(0.999865, 0.0118837, -0.0113106, -0.0120565, 0.99981, -0.015337, 0.0111263, 0.0154714, 0.999818, -0.171757, -11.6147, -0.156891)
 
 [node name="RightFoot" parent="MiniBallWalkerMeshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(1, 8.95023e-08, -2.24709e-08, -8.45353e-08, 0.983199, 0.182539, 4.27058e-08, -0.182539, 0.983199, 0.0169959, -9.59963, 3.03341)
+transform = Transform3D(1, 1.0195e-07, -3.75722e-08, -1.0195e-07, 1, 2.36623e-07, -8.37044e-09, -2.36623e-07, 1, 0.0169935, -11.3088, 1.2219e-06)
 
 [node name="Sphere" parent="MiniBallWalkerMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.52613, -0.388877)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11.5462, 0)
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
 process_mode = 4
-transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, -0.521733, -0.359049, -1.44467)
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 0.533117, -0.400908, 2.7831)
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
 transform = Transform3D(1, 5.41784e-22, -2.36768e-15, -3.39764e-20, 1, 7.0874e-22, -2.8431e-15, 2.76482e-22, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -113,5 +151,6 @@ tree_root = SubResource("AnimationNodeBlendTree_onfs1")
 anim_player = NodePath("../MiniBallWalkerMeshes/AnimationPlayer")
 root_motion_track = NodePath("Armature/Skeleton3D:Bone.Root")
 parameters/StateMachine/conditions/kick = false
+parameters/StateMachine/conditions/leap = false
 
 [editable path="MiniBallWalkerMeshes"]

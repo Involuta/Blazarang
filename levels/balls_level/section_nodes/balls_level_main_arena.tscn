@@ -223,4 +223,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1, 2.08165e-12)
 mesh = SubResource("BoxMesh_whus2")
 
 [node name="MiniBallWalker" parent="." instance=ExtResource("6_xq1q7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2, -33.4709)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.285, 2, -22.2334)
