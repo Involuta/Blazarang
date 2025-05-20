@@ -4,17 +4,26 @@ extends CharacterBody3D
 @onready var anim_tree := $AnimationTree
 @onready var root := $/root/ViewControl
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var rng := RandomNumberGenerator.new()
 var hitbox : Node3D
 var target : Node3D
-@export var walk_moving := true # Whether walker is moving its central ball or not (it's not moving when both feet are on the ground and stationary). Exported so it can be changed in animation
-var moving := true # Whether walker is approaching
+enum {
+	WALK,
+	KICK,
+	LEAP,
+}
+var behav_state := WALK
+@export var max_leap_interval := 5.0 # Max time btwn leaps
+@export var min_leap_interval := 1.0 # Min time btwn leaps
+var time_until_next_leap := 5.0
 var root_vel := Vector3.ZERO
 var aiming_at_target := true
 
 @export var follow_speed := 3.0
 @export var turn_speed := .1
 @export var kick_dist := 2.0
-@export var kick_secs := 3.5
+@export var kick_secs := 2.0
+@export var leap_secs := 3.5
 
 func _ready():
 	target = root.find_child("Icon")
@@ -43,17 +52,30 @@ func _physics_process(delta):
 	if aiming_at_target:
 		lerp_look_at_target(turn_speed)
 	
-	if moving:
-		var current_rotation = transform.basis.get_rotation_quaternion()
-		velocity = .08 * (current_rotation.normalized() * anim_tree.get_root_motion_position()) / delta
-		
-		if global_position.distance_to(target.global_position) < kick_dist:
-			moving = false
-			anim_player.stop(false)
-			anim_tree.set("parameters/StateMachine/conditions/leap", true)
-			await get_tree().create_timer(kick_secs).timeout
-			anim_tree.set("parameters/StateMachine/conditions/leap", false)
-			moving = true
+	match(behav_state):
+		WALK:
+			var current_rotation = transform.basis.get_rotation_quaternion()
+			velocity = .08 * (current_rotation.normalized() * anim_tree.get_root_motion_position()) / delta
+			
+			if global_position.distance_to(target.global_position) < kick_dist:
+				behav_state = KICK
+				anim_tree.set("parameters/StateMachine/conditions/kick", true)
+				await get_tree().create_timer(kick_secs).timeout
+				anim_tree.set("parameters/StateMachine/conditions/kick", false)
+				behav_state = WALK
+			
+			time_until_next_leap -= delta
+			if time_until_next_leap <= 0:
+				time_until_next_leap = rng.randf_range(min_leap_interval, max_leap_interval)
+				behav_state = LEAP
+				anim_tree.set("parameters/StateMachine/conditions/leap", true)
+				await get_tree().create_timer(leap_secs).timeout
+				anim_tree.set("parameters/StateMachine/conditions/leap", false)
+				behav_state = WALK
+		KICK:
+			velocity = Vector3.ZERO
+		LEAP:
+			pass
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
