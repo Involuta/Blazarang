@@ -7,6 +7,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 var hitbox : Node3D
 var target : Node3D
+var aiming_at_target := true
 enum {
 	WALK,
 	KICK,
@@ -16,20 +17,23 @@ var behav_state := WALK
 @export var max_leap_interval := 5.0 # Max time btwn leaps
 @export var min_leap_interval := 1.0 # Min time btwn leaps
 var time_until_next_leap := 5.0
-var root_vel := Vector3.ZERO
-var aiming_at_target := true
+@export var leap_secs := 3.5
 
 @export var follow_speed := 3.0
 @export var turn_speed := .1
 @export var kick_dist := 2.0
-@export var kick_secs := 2.0
-@export var leap_secs := 3.5
+@export var kick_secs := 1.833
+@export var kick_cooldown_secs := 2.5
+var kick_cooldown_remaining := 2.5
 
 func _ready():
 	target = root.find_child("Icon")
 	hitbox = find_child("MeleeHitboxPivot")
 	hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	anim_tree.active = true
+	
+	time_until_next_leap = leap_secs
+	kick_cooldown_remaining = kick_cooldown_secs
 
 func lerp_look_at_target(turn_speed):
 	var dir_to_target := global_position.direction_to(target.global_position)
@@ -57,7 +61,9 @@ func _physics_process(delta):
 			var current_rotation = transform.basis.get_rotation_quaternion()
 			velocity = .08 * (current_rotation.normalized() * anim_tree.get_root_motion_position()) / delta
 			
-			if global_position.distance_to(target.global_position) < kick_dist:
+			kick_cooldown_remaining -= delta
+			if kick_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < kick_dist:
+				kick_cooldown_remaining = kick_cooldown_secs
 				behav_state = KICK
 				anim_tree.set("parameters/StateMachine/conditions/kick", true)
 				await get_tree().create_timer(kick_secs).timeout
