@@ -134,7 +134,7 @@ transform = Transform3D(1, 5.41784e-22, -2.36768e-15, -3.39764e-20, 1, 7.0874e-2
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("3_l1iqn")
-damage = 20
+damage = 50
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeleeHitboxPivot/EnemyHitbox"]
 transform = Transform3D(1, -4.68124e-23, -3.26115e-21, -5.49801e-21, 1, 7.08741e-22, -9.97588e-22, 2.76482e-22, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)

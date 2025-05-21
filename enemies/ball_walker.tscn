@@ -1,8 +1,10 @@
-[gd_scene load_steps=37 format=3 uid="uid://cy4cd0vab7e7s"]
+[gd_scene load_steps=45 format=3 uid="uid://cy4cd0vab7e7s"]
 
 [ext_resource type="Script" path="res://enemies/ball_walker.gd" id="1_evdbk"]
 [ext_resource type="Script" path="res://enemies/spawners/ball_spawner.gd" id="2_7lttv"]
+[ext_resource type="Shader" path="res://shaders/black_outline.gdshader" id="3_ji803"]
 [ext_resource type="PackedScene" uid="uid://bereixsbnqp0e" path="res://enemies/ball_walker_mesh_leg_gun.tscn" id="4_25puj"]
+[ext_resource type="Shader" path="res://glb_inherited_scenes/black_outline.gdshader" id="4_l4pij"]
 [ext_resource type="PackedScene" uid="uid://el0vhxctxsiu" path="res://glb_inherited_scenes/bowl_mesh.tscn" id="5_7qoeb"]
 [ext_resource type="PackedScene" uid="uid://bmtn0cwrlroe4" path="res://enemies/ball_walker_mesh_leg_stand.tscn" id="5_rin41"]
 [ext_resource type="Script" path="res://enemies/multi_hurtbox_child.gd" id="5_tqkwm"]
@@ -4114,6 +4116,177 @@ tracks/13/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_ioyxt"]
+resource_name = "roll_bowl_ball"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WalkerPivot/LeftLegStand/DomeMesh/Shin/Knee:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.0472, 1.5708, 1.5708), Vector3(-0.366519, 1.5708, 1.5708)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WalkerPivot/RightLegStand/DomeMesh/Shin/Knee:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.0472, -1.5708, -1.5708), Vector3(-0.366519, -1.5708, -1.5708)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WalkerPivot/BowlPivot:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 9.3, 2.08165e-12), Vector3(0, 9.85485, 2.07478e-12), Vector3(0, 9.94718, 2.07478e-12), Vector3(0, 9.7673, 2.07478e-12), Vector3(0, 9.49288, 2.07478e-12), Vector3(0, 9.01204, 2.07478e-12), Vector3(0, 5.46758, 2.07478e-12)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WalkerPivot/BowlPivot:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16), Vector3(-1.5708, 3.48787e-16, 3.48787e-16)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WalkerPivot/RightLegStand:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WalkerPivot/RightLegGun:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WalkerPivot/RightLegStand:process_mode")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("WalkerPivot/RightLegGun:process_mode")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("WalkerPivot/RightLegStand:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-10, -2, 2.08165e-12)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("WalkerPivot/RightLegStand/DomeMesh/Shin:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 6.63061, 2.08165e-12)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("WalkerPivot/RightLegStand/DomeMesh/Shin:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("WalkerPivot/LeftLegStand:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("WalkerPivot/LeftLegStand:process_mode")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("FootBallSpawner:visible")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dmtk3"]
 _data = {
 "RESET": SubResource("Animation_bwgsr"),
@@ -4127,6 +4300,7 @@ _data = {
 "launch": SubResource("Animation_ytr22"),
 "left_stomp": SubResource("Animation_r1dud"),
 "right_stomp": SubResource("Animation_ottkf"),
+"roll_bowl_ball": SubResource("Animation_ioyxt"),
 "squat": SubResource("Animation_kansg"),
 "stand_to_foot_cannon": SubResource("Animation_r3iv3"),
 "stand_to_foot_mortar": SubResource("Animation_oqbkc"),
@@ -4137,12 +4311,39 @@ _data = {
 "vertical_jump": SubResource("Animation_7vlw7")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ll2xf"]
+render_priority = 0
+shader = ExtResource("3_ji803")
+shader_parameter/outline_color = Color(0.337255, 0.0901961, 0, 1)
+shader_parameter/outline_width = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3lbqe"]
+next_pass = SubResource("ShaderMaterial_ll2xf")
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.266667, 0.266667, 0.266667, 1)
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_5dkf2"]
 radius = 3.6
 
 [sub_resource type="SphereMesh" id="SphereMesh_q81ne"]
 radius = 3.6
 height = 7.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6fhwl"]
+render_priority = 0
+shader = ExtResource("4_l4pij")
+shader_parameter/outline_color = Color(1, 0.286275, 0, 1)
+shader_parameter/outline_width = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nt7kj"]
+next_pass = SubResource("ShaderMaterial_6fhwl")
+albedo_color = Color(0.321569, 0.321569, 0.321569, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q50tx"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.196078, 0.196078, 0.196078, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_54la2"]
 radius = 7.2
@@ -4206,6 +4407,9 @@ transform = Transform3D(1, -5.48843e-16, 2.8571e-16, 2.8571e-16, 0.819152, 0.573
 [node name="BowlMesh" parent="WalkerPivot/BowlPivot" instance=ExtResource("5_7qoeb")]
 transform = Transform3D(0.625, -2.11758e-22, 2.84217e-14, 9.92617e-24, 0.625, 1.15197e-23, -8.88178e-16, 8.25744e-22, 0.625, 0, -4.04349, 2.07478e-12)
 
+[node name="Bowl" parent="WalkerPivot/BowlPivot/BowlMesh" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_3lbqe")
+
 [node name="BowlBallHurtbox" type="Area3D" parent="WalkerPivot/BowlPivot" node_paths=PackedStringArray("hurtbox_owner")]
 transform = Transform3D(0.999999, -3.48827e-16, 2.00468e-12, -3.51483e-16, -1, 2.53518e-06, 6.27554e-14, -2.53518e-06, -1, 2.08165e-12, -0.1, 2.08165e-12)
 collision_layer = 8
@@ -4222,23 +4426,31 @@ shape = SubResource("SphereShape3D_5dkf2")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="WalkerPivot/BowlPivot/BowlBallHurtbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh = SubResource("SphereMesh_q81ne")
+surface_material_override/0 = SubResource("StandardMaterial3D_nt7kj")
 
 [node name="LeftLegStand" parent="WalkerPivot" instance=ExtResource("5_rin41")]
-process_mode = 4
 transform = Transform3D(5, -1.74393e-15, 9.28455e-13, 1.74393e-15, 5, -1.74393e-15, -3.16047e-12, 1.74393e-15, 5, 10, -2, 2.08165e-12)
-visible = false
 
 [node name="DomeMesh" parent="WalkerPivot/LeftLegStand" index="0"]
 transform = Transform3D(0.1, -5.19732e-25, 2.36828e-17, -3.30872e-24, 0.1, 8.14204e-24, 4.44089e-16, -8.82761e-24, 0.1, 0, 0, 0)
 
+[node name="Dome" parent="WalkerPivot/LeftLegStand/DomeMesh" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_3lbqe")
+
 [node name="Shin" parent="WalkerPivot/LeftLegStand/DomeMesh" index="1"]
 transform = Transform3D(10, -3.48787e-15, 3.48787e-15, 3.48787e-15, 10, -3.48787e-15, -3.48787e-15, 3.48787e-15, 10, 2.08165e-12, 6.631, 2.08165e-12)
+surface_material_override/0 = SubResource("StandardMaterial3D_3lbqe")
 
 [node name="Knee" parent="WalkerPivot/LeftLegStand/DomeMesh/Shin" index="0"]
 transform = Transform3D(-0.358368, 4.91728e-06, 0.93358, 0.933581, -3.37955e-06, 0.358368, 4.91728e-06, 1, -3.37955e-06, -1.35525e-20, 0.503055, -2.06057e-13)
+surface_material_override/0 = SubResource("StandardMaterial3D_q50tx")
+
+[node name="Thigh" parent="WalkerPivot/LeftLegStand/DomeMesh/Shin/Knee" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_3lbqe")
 
 [node name="HipJoint" parent="WalkerPivot/LeftLegStand/DomeMesh/Shin/Knee/Thigh" index="0"]
 transform = Transform3D(1, -3.35429e-13, 1.06145e-09, -7.49088e-09, -4.37114e-08, -1, 2.61388e-13, 1, -4.37114e-08, 5.96046e-08, 0.502466, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_q50tx")
 
 [node name="Foot" parent="WalkerPivot/LeftLegStand/DomeMesh" index="2"]
 collision_layer = 0
@@ -4256,18 +4468,27 @@ opponent_hitboxes = ["PlayerHitbox"]
 shape = SubResource("SphereShape3D_54la2")
 
 [node name="RightLegStand" parent="WalkerPivot" instance=ExtResource("5_rin41")]
-process_mode = 4
 transform = Transform3D(5, -1.74393e-15, 2.84217e-14, 1.74393e-15, 5, -1.74393e-15, 7.10543e-15, 1.74393e-15, 5, 29.6135, -1.82877, -1.73156e-06)
-visible = false
 
 [node name="DomeMesh" parent="WalkerPivot/RightLegStand" index="0"]
 transform = Transform3D(0.1, -5.19732e-25, 2.36828e-17, -3.30872e-24, 0.1, 8.14204e-24, 4.44089e-16, -8.82761e-24, 0.1, 0, 0, 0)
 
+[node name="Dome" parent="WalkerPivot/RightLegStand/DomeMesh" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_3lbqe")
+
+[node name="Shin" parent="WalkerPivot/RightLegStand/DomeMesh" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_3lbqe")
+
 [node name="Knee" parent="WalkerPivot/RightLegStand/DomeMesh/Shin" index="0"]
 transform = Transform3D(-0.358368, -4.91728e-06, -0.93358, -0.93358, -3.37955e-06, 0.358368, -4.91728e-06, 1, -3.37955e-06, 0, 0.503055, -1.98952e-13)
+surface_material_override/0 = SubResource("StandardMaterial3D_q50tx")
+
+[node name="Thigh" parent="WalkerPivot/RightLegStand/DomeMesh/Shin/Knee" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_3lbqe")
 
 [node name="HipJoint" parent="WalkerPivot/RightLegStand/DomeMesh/Shin/Knee/Thigh" index="0"]
 transform = Transform3D(1, 4.41972e-14, 2.94916e-08, 8.26076e-09, -4.37112e-08, -1, -6.83777e-14, 1, -4.37115e-08, -4.76837e-07, 0.502466, -1.13687e-13)
+surface_material_override/0 = SubResource("StandardMaterial3D_q50tx")
 
 [node name="RightFootHurtbox" type="Area3D" parent="WalkerPivot/RightLegStand/DomeMesh/Foot" index="1" node_paths=PackedStringArray("hurtbox_owner")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -4, 2.08165e-12)
@@ -4282,19 +4503,29 @@ opponent_hitboxes = ["PlayerHitbox"]
 shape = SubResource("SphereShape3D_kna8k")
 
 [node name="RightLegGun" parent="WalkerPivot" instance=ExtResource("4_25puj")]
+process_mode = 4
 transform = Transform3D(4.99999, -4.44285e-27, 9.2848e-13, 2.64895e-23, 5, 1.35726e-21, -1.53742e-11, -6.83809e-21, 4.99999, 8.6901, 3.48645, 2.08165e-12)
 
 [node name="HipJoint" parent="WalkerPivot/RightLegGun" index="0"]
 transform = Transform3D(0.906213, -3.39507e-07, -0.422821, -0.422821, -1.53061e-06, -0.906213, -3.39507e-07, 0.999999, -1.53061e-06, 0, 2.175, 2.27374e-12)
+surface_material_override/0 = SubResource("StandardMaterial3D_q50tx")
+
+[node name="Thigh" parent="WalkerPivot/RightLegGun/HipJoint" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_3lbqe")
 
 [node name="Knee" parent="WalkerPivot/RightLegGun/HipJoint/Thigh" index="0"]
 transform = Transform3D(0.766045, -8.46916e-07, -0.642787, -0.642788, -2.32688e-06, -0.766045, -8.46917e-07, 1, -2.32688e-06, -2.38419e-07, -0.506071, 5.40012e-13)
+surface_material_override/0 = SubResource("StandardMaterial3D_q50tx")
 
 [node name="Shin" parent="WalkerPivot/RightLegGun/HipJoint/Thigh/Knee" index="0"]
 transform = Transform3D(1, -4.44089e-16, -1.6076e-21, 0, -3.61999e-06, 1, -4.44089e-16, -1, -3.61999e-06, 0, 2.19894e-08, 0.503055)
+surface_material_override/0 = SubResource("StandardMaterial3D_3lbqe")
 
 [node name="DomeMesh" parent="WalkerPivot/RightLegGun/HipJoint/Thigh/Knee/Shin" index="0"]
 visible = false
+
+[node name="Dome" parent="WalkerPivot/RightLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_3lbqe")
 
 [node name="EnemyHitbox" type="Area3D" parent="WalkerPivot/RightLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh/Foot" index="1"]
 process_mode = 4
@@ -4311,12 +4542,21 @@ transform = Transform3D(5, -2.82727e-27, 9.28469e-13, 2.64782e-23, 5, 8.11928e-2
 
 [node name="HipJoint" parent="WalkerPivot/LeftLegGun" index="0"]
 transform = Transform3D(-0.866023, -6.75498e-06, 0.500004, 0.500004, 1.81001e-06, 0.866023, -6.75498e-06, 1, 1.81001e-06, 0, 2.17465, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_q50tx")
+
+[node name="Thigh" parent="WalkerPivot/LeftLegGun/HipJoint" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_3lbqe")
 
 [node name="Knee" parent="WalkerPivot/LeftLegGun/HipJoint/Thigh" index="0"]
 transform = Transform3D(0.97437, -9.2783e-08, -0.224954, -0.224955, -8.14333e-07, -0.974369, -9.27831e-08, 1, -8.14333e-07, 0, -0.506071, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_q50tx")
 
 [node name="Shin" parent="WalkerPivot/LeftLegGun/HipJoint/Thigh/Knee" index="0"]
 transform = Transform3D(1, -4.44089e-16, -1.6076e-21, 0, -3.61999e-06, 1, -4.44089e-16, -1, -3.61999e-06, 0, 2.19894e-08, 0.503055)
+surface_material_override/0 = SubResource("StandardMaterial3D_3lbqe")
+
+[node name="Dome" parent="WalkerPivot/LeftLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_3lbqe")
 
 [node name="EnemyHitbox" type="Area3D" parent="WalkerPivot/LeftLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh/Foot" index="1"]
 process_mode = 4
@@ -4390,7 +4630,12 @@ opponent_hitboxes = ["PlayerHitbox"]
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MultiHurtboxOwner"]
 shape = SubResource("SeparationRayShape3D_njqlp")
 
+[editable path="WalkerPivot/BowlPivot/BowlMesh"]
 [editable path="WalkerPivot/LeftLegStand"]
+[editable path="WalkerPivot/LeftLegStand/DomeMesh"]
 [editable path="WalkerPivot/RightLegStand"]
+[editable path="WalkerPivot/RightLegStand/DomeMesh"]
 [editable path="WalkerPivot/RightLegGun"]
+[editable path="WalkerPivot/RightLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh"]
 [editable path="WalkerPivot/LeftLegGun"]
+[editable path="WalkerPivot/LeftLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh"]

@@ -147,6 +147,9 @@ func _ready():
 	
 	dist_state_switch_cooldown_remaining = max_dist_state_switch_cooldown
 	foot_ball_spawner_upgrade_time_remaining = max_foot_ball_spawner_upgrade_time
+	
+	$WalkerPivot/LeftLegGun.visible = false
+	$WalkerPivot/RightLegGun.visible = false
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("Special"):

@@ -30,3 +30,11 @@ res://enemies/mini_ball_walker.gd
 res://enemies/ball_walker.tscn
 res://enemies/ball_walker_foot_explosion.tscn
 res://levels/balls_level/section_nodes/balls_level_main_arena.tscn
+res://cotu/cotu_anims_outline.tres
+res://enemies/ball_walker.gd
+res://enemies/roller_ball.tscn
+res://levels/balls_level/balls_level_background.tscn
+res://levels/balls_level/balls_level.tscn
+res://enemies/skull_ball.tscn
+res://enemies/swarm_ball.tscn
+res://glb_inherited_scenes/first_miniboss_meshes.tscn
