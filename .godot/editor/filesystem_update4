@@ -28,3 +28,5 @@ res://enemies/bouncer_ball.tscn
 res://enemies/ball_walker.gd
 res://enemies/skull_ball.gd
 res://enemies/skull_ball.tscn
+res://enemies/enemy_anims/mini_ball_walker_leap.res
+res://enemies/enemy_anims/mini_ball_walker_recover.res

@@ -4432,7 +4432,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_q50tx")
 surface_material_override/0 = SubResource("StandardMaterial3D_q50tx")
 
 [node name="BowlBallHurtbox" type="Area3D" parent="WalkerPivot/BowlPivot" node_paths=PackedStringArray("hurtbox_owner")]
-transform = Transform3D(0.999999, -3.48827e-16, 2.00468e-12, -3.51483e-16, -1, 2.53518e-06, 6.27554e-14, -2.53518e-06, -1, 2.08165e-12, -0.1, 2.08165e-12)
+transform = Transform3D(0.999999, 1.43989e-13, 2.6868e-12, 4.37696e-13, -1, 2.53518e-06, -3.69614e-14, -2.53518e-06, -1, 2.08165e-12, -0.5, 2.08165e-12)
 collision_layer = 8
 collision_mask = 265
 script = ExtResource("5_tqkwm")
@@ -4492,7 +4492,9 @@ opponent_hitboxes = ["PlayerHitbox"]
 shape = SubResource("SphereShape3D_54la2")
 
 [node name="RightLegStand" parent="WalkerPivot" instance=ExtResource("5_rin41")]
+process_mode = 4
 transform = Transform3D(5, -1.74393e-15, 2.84217e-14, 1.74393e-15, 5, -1.74393e-15, 7.10543e-15, 1.74393e-15, 5, 29.6135, -1.82877, -1.73156e-06)
+visible = false
 
 [node name="DomeMesh" parent="WalkerPivot/RightLegStand" index="0"]
 transform = Transform3D(0.1, -5.19732e-25, 2.36828e-17, -3.30872e-24, 0.1, 8.14204e-24, 4.44089e-16, -8.82761e-24, 0.1, 0, 0, 0)
@@ -4527,9 +4529,7 @@ opponent_hitboxes = ["PlayerHitbox"]
 shape = SubResource("SphereShape3D_kna8k")
 
 [node name="RightLegGun" parent="WalkerPivot" instance=ExtResource("4_25puj")]
-process_mode = 4
 transform = Transform3D(4.99999, -4.44285e-27, 9.2848e-13, 2.64895e-23, 5, 1.35726e-21, -1.53742e-11, -6.83809e-21, 4.99999, 8.6901, 3.48645, 2.08165e-12)
-visible = false
 
 [node name="HipJoint" parent="WalkerPivot/RightLegGun" index="0"]
 transform = Transform3D(0.906213, -3.39507e-07, -0.422821, -0.422821, -1.53061e-06, -0.906213, -3.39507e-07, 0.999999, -1.53061e-06, 0, 2.175, 2.27374e-12)
