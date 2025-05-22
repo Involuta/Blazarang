@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dbqcnmw0wsmdb"]
+[gd_scene load_steps=11 format=3 uid="uid://dbqcnmw0wsmdb"]
 
 [ext_resource type="Script" path="res://enemies/ball.gd" id="1_wv7x3"]
+[ext_resource type="Shader" path="res://glb_inherited_scenes/outline.gdshader" id="2_gmn3i"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_jo0j8"]
 [ext_resource type="Script" path="res://hitbox.gd" id="3_0qtde"]
 
@@ -8,7 +9,14 @@
 friction = 0.0
 bounce = 1.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7vwmt"]
+render_priority = 0
+shader = ExtResource("2_gmn3i")
+shader_parameter/outline_color = Color(1, 0.329412, 1, 1)
+shader_parameter/outline_width = 2.0
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_76u6r"]
+next_pass = SubResource("ShaderMaterial_7vwmt")
 diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(1, 0.45098, 0.792157, 1)

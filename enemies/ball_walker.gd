@@ -123,6 +123,7 @@ var popper := preload("res://enemies/popper_ball.tscn")
 
 @onready var walker_pivot := $WalkerPivot
 @onready var bowl_pivot := $WalkerPivot/BowlPivot
+@onready var rim_ball_spawn_pivot := $WalkerPivot/BowlPivot/RimBallSpawnPivot
 @onready var standing_foot := $WalkerPivot/LeftLegStand/DomeMesh/Foot
 @onready var gun_foot := $WalkerPivot/RightLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh/Foot
 @onready var anim_player := $AnimationPlayer
@@ -292,7 +293,7 @@ func spawn_rim_balls():
 		var b = get_random_ball().instantiate()
 		level.add_child.call_deferred(b)
 		await b.tree_entered
-		b.global_position = bowl_pivot.global_position + bowl_radius * ball_vec
+		b.global_position = rim_ball_spawn_pivot.global_position + bowl_radius * ball_vec
 		b.linear_velocity = rim_ball_fwd_speed * ball_vec
 		b.linear_velocity.y = -rim_ball_init_down_speed
 		ball_vec = ball_vec.rotated(Vector3.UP, 2 * PI / num_rim_balls)
@@ -321,9 +322,14 @@ func step_or_stomp():
 		aiming_at_icon = true
 		anim_in_progress = true
 		await step_flip_to_downbowl()
-		await step_flip_to_upbowl()
-		anim_in_progress = false
+		# Wait for spawned rim balls to leave cannons before stepping and rotating again
 		aiming_at_icon = false
+		await get_tree().create_timer(.5).timeout
+		await step_flip_to_upbowl()
+		# Wait for spawned rim balls to leave cannons before rotating again
+		aiming_at_icon = false
+		await get_tree().create_timer(.5).timeout
+		anim_in_progress = false
 	# Otherwise, if target is directly below you, either bowl slam or walk away
 	elif target_in_bowl_slam_range():
 		if not just_walked and rng.randf() > .5:
@@ -332,9 +338,14 @@ func step_or_stomp():
 			aiming_at_icon = true
 			anim_in_progress = true
 			await step_flip_to_downbowl()
-			await step_flip_to_upbowl()
-			anim_in_progress = false
+			# Wait for spawned rim balls to leave cannons before stepping and rotating again
 			aiming_at_icon = false
+			await get_tree().create_timer(.5).timeout
+			await step_flip_to_upbowl()
+			# Wait for spawned rim balls to leave cannons before rotating again
+			aiming_at_icon = false
+			await get_tree().create_timer(.5).timeout
+			anim_in_progress = false
 		else:
 			just_walked = false
 			just_typhooned = false

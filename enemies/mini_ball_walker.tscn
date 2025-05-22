@@ -105,22 +105,22 @@ bones/13/position = Vector3(-6.57531, 0.333103, -18.9953)
 bones/13/rotation = Quaternion(-0.0570565, -0.715461, 0.693829, 0.0588354)
 
 [node name="LeftShin" parent="MiniBallWalkerMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.517736, 0.487191, 0.703274, 0.851931, -0.369014, -0.37154, 0.0785071, 0.791501, -0.606105, 2.29715, -0.936713, -20.722)
+transform = Transform3D(0.517736, 0.48719, 0.703274, 0.85193, -0.369015, -0.371541, 0.078508, 0.791501, -0.606105, 2.29716, -0.936701, -20.722)
 
 [node name="LeftThigh" parent="MiniBallWalkerMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.912466, -0.0490489, 0.406201, 0.272813, 0.812819, -0.514683, -0.304923, 0.580448, 0.755051, 1.9902, -7.81904, -6.83982)
+transform = Transform3D(0.912466, -0.0490495, 0.4062, 0.272813, 0.812819, -0.514683, -0.304923, 0.580448, 0.755051, 1.9902, -7.81904, -6.83983)
 
 [node name="LeftFoot" parent="MiniBallWalkerMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(1, -1.1116e-07, 5.16726e-08, 4.58131e-08, -0.0306912, -0.999529, 1.02356e-07, 0.999529, -0.0306912, 4.76837e-07, 4.1463, -20.6527)
+transform = Transform3D(1, -8.13576e-08, 1.69881e-07, 1.30056e-07, -0.0306917, -0.999529, 1.10056e-07, 0.999529, -0.0306916, -9.53674e-07, 4.1463, -20.6526)
 
 [node name="RightShin" parent="MiniBallWalkerMeshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.517736, -0.487191, -0.703274, -0.851931, -0.369014, -0.37154, -0.0785071, 0.791501, -0.606105, -2.29715, -0.936713, -20.722)
+transform = Transform3D(0.517736, -0.48719, -0.703274, -0.85193, -0.369015, -0.371541, -0.078508, 0.791501, -0.606105, -2.29716, -0.936701, -20.722)
 
 [node name="RightThigh" parent="MiniBallWalkerMeshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.912466, 0.0490489, -0.406201, -0.272813, 0.812819, -0.514683, 0.304923, 0.580448, 0.755051, -1.9902, -7.81904, -6.83982)
+transform = Transform3D(0.912466, 0.0490495, -0.4062, -0.272813, 0.812819, -0.514683, 0.304923, 0.580448, 0.755051, -1.9902, -7.81904, -6.83983)
 
 [node name="RightFoot" parent="MiniBallWalkerMeshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(1, 1.1116e-07, -5.16726e-08, -4.58131e-08, -0.0306912, -0.999529, -1.02356e-07, 0.999529, -0.0306912, 0.0169954, 4.1463, -20.6527)
+transform = Transform3D(1, 8.13576e-08, -1.69881e-07, -1.30056e-07, -0.0306917, -0.999529, -1.10056e-07, 0.999529, -0.0306916, 0.0169964, 4.1463, -20.6526)
 
 [node name="Sphere" parent="MiniBallWalkerMeshes/Armature/Skeleton3D" index="6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.84991, 0)
