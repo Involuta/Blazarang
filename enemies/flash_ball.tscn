@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bjgck5hsfbxpy"]
+[gd_scene load_steps=16 format=3 uid="uid://bjgck5hsfbxpy"]
 
 [ext_resource type="Script" path="res://enemies/ball.gd" id="1_w76pt"]
 [ext_resource type="Script" path="res://hitbox.gd" id="4_e2h1v"]
@@ -7,12 +7,15 @@
 friction = 0.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ec4ku"]
+resource_local_to_scene = true
+transparency = 4
 shading_mode = 0
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(0.87451, 0.32549, 0.0823529, 1)
+albedo_color = Color(1, 1, 1, 0)
 
 [sub_resource type="SphereMesh" id="SphereMesh_f30y8"]
+resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_ec4ku")
 radius = 1.25
 height = 2.5
@@ -21,18 +24,106 @@ height = 2.5
 radius = 1.25
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_nj4ah"]
+radius = 2.6
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hidfq"]
 radius = 1.3
+
+[sub_resource type="Animation" id="Animation_h4sdn"]
+resource_name = "explode"
+length = 2.30001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.9, 2.1, 2.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.87451, 0.32549, 0.0823529, 1), Color(0.996078, 0.827451, 0.768627, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2.1, 2.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(5, 5, 5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles3D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("EnemyHitbox/HitboxCollider:shape")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [SubResource("SphereShape3D_hidfq"), SubResource("SphereShape3D_nj4ah")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6h6hg"]
+_data = {
+"explode": SubResource("Animation_h4sdn")
+}
+
+[sub_resource type="Curve" id="Curve_ejsgg"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.501507, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.198247), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_38vfg"]
+curve = SubResource("Curve_ejsgg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rd2nd"]
+spread = 180.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+scale_curve = SubResource("CurveTexture_38vfg")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fgyhl"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_h0mv2"]
+material = SubResource("StandardMaterial3D_fgyhl")
 
 [node name="FlashBall" type="RigidBody3D"]
 collision_layer = 8
 collision_mask = 74
 physics_material_override = SubResource("PhysicsMaterial_xs2x3")
+gravity_scale = 1.5
 linear_damp_mode = 1
 angular_damp_mode = 1
 script = ExtResource("1_w76pt")
-disappear_secs = 1.5
+disappear_secs = 2.5
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 mesh = SubResource("SphereMesh_f30y8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -49,3 +140,14 @@ damage = 30
 shape = SubResource("SphereShape3D_nj4ah")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "explode"
+libraries = {
+"": SubResource("AnimationLibrary_6h6hg")
+}
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_rd2nd")
+draw_pass_1 = SubResource("QuadMesh_h0mv2")

@@ -4,7 +4,7 @@ extends Ball
 var target : Node3D
 var moving := true
 
-@export var disappear_secs := 3.0
+@export var explode_delay_secs := 3.0
 @export var min_speed := 7.0
 
 func _ready():
@@ -15,5 +15,5 @@ func _physics_process(_delta):
 	if linear_velocity.length() < min_speed:
 		moving = false
 		$AnimationPlayer.play("explode")
-		await get_tree().create_timer(disappear_secs).timeout
+		await get_tree().create_timer(explode_delay_secs).timeout
 		queue_free()

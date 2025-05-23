@@ -9,7 +9,7 @@ enum {
 }
 var behav_state = PASSIVE
 
-@export var disappear_secs := 3.0
+@export var explode_delay_secs := 3.0
 
 # Set by spawner
 var follow_speed := 10.0
@@ -34,7 +34,7 @@ func _physics_process(_delta):
 			if global_position.distance_to(target.global_position) < explode_dist:
 				behav_state = EXPLODE
 				$AnimationPlayer.play("explode")
-				await get_tree().create_timer(disappear_secs).timeout
+				await get_tree().create_timer(explode_delay_secs).timeout
 				queue_free()
 		EXPLODE:
 			linear_velocity = Vector3.ZERO

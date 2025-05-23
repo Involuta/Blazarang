@@ -120,6 +120,7 @@ var skull := preload("res://enemies/skull_ball.tscn")
 var heavy := preload("res://enemies/heavy_ball.tscn")
 var deathball := preload("res://enemies/death_ball.tscn")
 var popper := preload("res://enemies/popper_ball.tscn")
+var flash := preload("res://enemies/flash_ball.tscn")
 
 @onready var walker_pivot := $WalkerPivot
 @onready var bowl_pivot := $WalkerPivot/BowlPivot
@@ -298,13 +299,29 @@ func spawn_rim_balls():
 		b.linear_velocity.y = -rim_ball_init_down_speed
 		ball_vec = ball_vec.rotated(Vector3.UP, 2 * PI / num_rim_balls)
 
+func spawn_flash_balls():
+	foot_ball_spawner.skull_launched_by_mortar = false
+	var ball_vec := -transform.basis.z
+	# Make it so that a ball doesn't shoot directly from the walker's rim in its fwd direction bc that's where its thigh is
+	# 2 balls shoot at equivalent angles beside the line representinga the walker's fwd direction
+	ball_vec = ball_vec.rotated(Vector3.UP, PI/num_rim_balls)
+	for i in range(num_rim_balls):
+		var b = flash.instantiate()
+		level.add_child.call_deferred(b)
+		await b.tree_entered
+		b.global_position = rim_ball_spawn_pivot.global_position + .5 * bowl_radius * ball_vec
+		b.linear_velocity = .5*rim_ball_fwd_speed * ball_vec
+		b.linear_velocity.y = 12
+		ball_vec = ball_vec.rotated(Vector3.UP, 2 * PI / num_rim_balls)
+
 func spawn_foot_explosion():
 	var foot_explosion_inst = load("res://enemies/ball_walker_foot_explosion.tscn").instantiate()
 	level.add_child.call_deferred(foot_explosion_inst)
 	await foot_explosion_inst.tree_entered
 	foot_explosion_inst.global_position = gun_foot.global_position
 	foot_explosion_inst.rotation.y = rotation.y
-	spawn_rim_balls()
+	#spawn_rim_balls()
+	spawn_flash_balls()
 
 func spawn_bowl_explosion():
 	var foot_explosion_inst = load("res://enemies/ball_walker_foot_explosion.tscn").instantiate()
