@@ -88,7 +88,7 @@ const enemy_hurtbox_data = {
 	"PopperBall" : [10, 1.0, 1.0],
 	"BallWalker" : [6000, 1.0, 1.0],
 	
-	"XBoss" : [2000, 1.0, 100.0],
+	"XBoss" : [200, 1.0, 100.0],
 	
 }
 

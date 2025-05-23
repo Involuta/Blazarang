@@ -16,11 +16,6 @@ func _on_activate():
 	visible = true
 	for child in get_children():
 		child.process_mode = Node.PROCESS_MODE_INHERIT
-	"""
-	anim_player.play("grow")
-	await get_tree().create_timer(11).timeout
-	anim_player.play("shrink")
-	"""
 	# 10.5 secs btwn grow and shrink
 	anim_player.play("grow")
 	# Laser combo startup is 2.5 secs long
