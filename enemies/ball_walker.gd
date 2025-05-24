@@ -10,13 +10,13 @@ enum DIST_TYPE {
 }
 var dist_state = DIST_TYPE.LONG_DIST
 var anim_in_progress := false
-@export var max_dist_state_switch_cooldown := 10.0 # Time after a dist state switch before dist state can switch again
+@export var max_dist_state_switch_cooldown := 5.0 # Time after a dist state switch before dist state can switch again
 var dist_state_switch_cooldown_remaining := 10.0
 var can_switch_dist_state := false
-@export var max_foot_ball_spawner_upgrade_time := 5.0 # Time after foot ball spawner starts spawning balls that it gets upgraded
+@export var max_foot_ball_spawner_upgrade_time := 4.0 # Time after foot ball spawner starts spawning balls that it gets upgraded
 var foot_ball_spawner_upgrade_time_remaining := 5.0
-@export var short_dist_state_range := 30.0
-@export var max_short_dist_wait := 3.0
+@export var short_dist_state_range := 20.0
+@export var max_short_dist_wait := 5.0
 var short_dist_wait_remaining := 3.0
 var substate_queued := false
 
@@ -24,19 +24,22 @@ var facing_forward := false # Whether to face toward or away from the target pos
 var aiming_at_icon := false
 var just_walked := false # Whether the last short dist action the walker performed was a walk
 var just_typhooned := false # Whether the last short dist action the walker performed was a walk
-@export var typhoon_chance := .33 # Chance of using typhoon instead of stomping
+@export var typhoon_chance := .5 # Chance of using typhoon instead of stomping
 var latest_saved_y_rotation := 0.0 # Latest rotation before initiating linear look at pos
 
-@export var max_dist_from_arena_center := 80.0 # Max dist from arena center before walker steps the other way
+@export var max_dist_from_arena_center := 16.0 # Max dist from arena center before walker steps the other way
 @export var arena_radius := 40.0
 var walker_icon_pos := Vector3.ZERO
 
-@export var bowl_slam_proximity := 5.0 # Imagine a circle w this radius around the walker pivot. If the target is within the circle, a bowl slam occurs
+@export var bowl_slam_proximity := 5.0 # Imagine a sphere w this radius around the walker pivot. If the target is within the sphere, a bowl slam occurs
 
+@export var flash_ball_proximity := 10.0 # If target is within this radius of walker pivot, flash balls are fired instead of rim balls when walker is upright
 @export var bowl_radius := 8.0 # Radius of bowl mesh
-@export var num_rim_balls := 7.0 # Num of balls spawned from rim per rim ball blast
-@export var rim_ball_fwd_speed := 8.0
-@export var rim_ball_init_down_speed := 8.0 # Downward speed of rim ball when it's first shot out
+@export var num_rim_balls := 6.0 # Num of balls spawned from rim per rim ball blast
+@export var rim_ball_fwd_speed := 12.0
+@export var rim_ball_init_down_speed := 0.0 # Downward speed of rim ball when it's first shot out
+@export var flash_ball_init_up_speed := 12.0 # Vertical upward speed of flash ball when spawned
+var in_downbowl := false # If bowl is in downbowl state, rim balls are fired instead of flash balls
 
 var typhoon_rotating := false # If this is true, the walker pivot rotates about its y axis
 var typhoon_rotation_rate := 0.0 # Modified by physics_process if typhoon_rotating
@@ -60,7 +63,7 @@ var foot_state = FOOT_TYPE.CANNON
 var aiming_at_target := true
 
 @export var follow_turn_speed := .15
-@export var attack_turn_speed := .15
+@export var attack_turn_speed := .75
 
 @export var cannon_spawn_cooldown_secs := 1.0
 @export var mortar_spawn_cooldown_secs := 1.4
@@ -311,7 +314,7 @@ func spawn_flash_balls():
 		await b.tree_entered
 		b.global_position = rim_ball_spawn_pivot.global_position + .5 * bowl_radius * ball_vec
 		b.linear_velocity = .5*rim_ball_fwd_speed * ball_vec
-		b.linear_velocity.y = 12
+		b.linear_velocity.y = flash_ball_init_up_speed
 		ball_vec = ball_vec.rotated(Vector3.UP, 2 * PI / num_rim_balls)
 
 func spawn_foot_explosion():
@@ -320,8 +323,10 @@ func spawn_foot_explosion():
 	await foot_explosion_inst.tree_entered
 	foot_explosion_inst.global_position = gun_foot.global_position
 	foot_explosion_inst.rotation.y = rotation.y
-	#spawn_rim_balls()
-	spawn_flash_balls()
+	if in_downbowl or walker_pivot.global_position.distance_to(target.global_position) > flash_ball_proximity:
+		spawn_rim_balls()
+	else:
+		spawn_flash_balls()
 
 func spawn_bowl_explosion():
 	var foot_explosion_inst = load("res://enemies/ball_walker_foot_explosion.tscn").instantiate()
@@ -339,9 +344,10 @@ func step_or_stomp():
 		aiming_at_icon = true
 		anim_in_progress = true
 		await step_flip_to_downbowl()
-		# Wait for spawned rim balls to leave cannons before stepping and rotating again
+		# Wait for spawned rim balls to leave cannons before stepping and rotating again (if aiming_at_icon is true during wait, walker rotates while waiting)
 		aiming_at_icon = false
 		await get_tree().create_timer(.5).timeout
+		aiming_at_icon = true
 		await step_flip_to_upbowl()
 		# Wait for spawned rim balls to leave cannons before rotating again
 		aiming_at_icon = false
@@ -358,6 +364,7 @@ func step_or_stomp():
 			# Wait for spawned rim balls to leave cannons before stepping and rotating again
 			aiming_at_icon = false
 			await get_tree().create_timer(.5).timeout
+			aiming_at_icon = true
 			await step_flip_to_upbowl()
 			# Wait for spawned rim balls to leave cannons before rotating again
 			aiming_at_icon = false
@@ -400,6 +407,7 @@ func bowl_slam():
 
 func step_flip_to_downbowl():
 	update_latest_y_rotation()
+	in_downbowl = true
 	facing_forward = true
 	anim_player.play("step_flip_to_downbowl")
 	await anim_player.animation_finished
@@ -407,8 +415,9 @@ func step_flip_to_downbowl():
 	# Flip ball walker so that when the upbowl step flip anim plays, it moves the walker forward instead of backward
 	rotation.y += PI
 	# To compensate, global pos moves back
-	global_position -= transform.basis.z * STANDING_FEET_DIST
+	global_position -= transform.basis.z * (STANDING_FEET_DIST-1)
 	update_latest_y_rotation()
+	in_downbowl = false
 
 func step_flip_to_upbowl():
 	facing_forward = false
