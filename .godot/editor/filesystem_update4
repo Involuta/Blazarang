@@ -25,3 +25,6 @@ res://enemies/flash_ball.tscn
 res://enemies/skull_ball.tscn
 res://enemies/ball_walker.gd
 res://levels/balls_level/section_nodes/balls_level_main_arena.tscn
+res://enemies/roller_ball.tscn
+res://enemies/swarm_ball.tscn
+res://enemies/ball_walker_foot_explosion.tscn

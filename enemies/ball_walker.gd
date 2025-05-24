@@ -87,11 +87,12 @@ var aiming_at_target := true
 }
 
 @export var cannon_enemy_chances = {
-	"ROLLER": 1,
+	"ROLLER": .9,
+	"HEAVY": .1,
 }
 
 @export var upgraded_cannon_enemy_chances = {
-	"SKULL" : 1,
+	"SKULL" : 1.0,
 }
 
 @export var mortar_enemy_chances = {
@@ -100,7 +101,7 @@ var aiming_at_target := true
 }
 
 @export var upgraded_mortar_enemy_chances = {
-	"SKULL" : 1,
+	"SKULL" : 1.0,
 }
 
 @export var random_balls_chances = {

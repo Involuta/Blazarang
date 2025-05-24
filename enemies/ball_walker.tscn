@@ -4314,8 +4314,8 @@ _data = {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ll2xf"]
 render_priority = 0
 shader = ExtResource("3_ji803")
-shader_parameter/outline_color = Color(0.337255, 0.0901961, 0, 1)
-shader_parameter/outline_width = 2.0
+shader_parameter/outline_color = Color(0, 0.301961, 0.913725, 1)
+shader_parameter/outline_width = 3.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3lbqe"]
 next_pass = SubResource("ShaderMaterial_ll2xf")
@@ -4338,7 +4338,7 @@ height = 7.2
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6fhwl"]
 render_priority = 0
 shader = ExtResource("4_l4pij")
-shader_parameter/outline_color = Color(1, 0.286275, 0, 1)
+shader_parameter/outline_color = Color(0.0862745, 0.321569, 1, 1)
 shader_parameter/outline_width = 4.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nt7kj"]
