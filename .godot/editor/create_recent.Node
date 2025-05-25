@@ -1,9 +1,10 @@
+CollisionShape3D
+Hitbox
 GPUParticles3D
 AnimationPlayer
 Node3D
 MeshInstance3D
 AnimationTree
-CollisionShape3D
 Area3D
 NavigationAgent3D
 NavigationRegion3D
@@ -29,4 +30,3 @@ SubViewportContainer
 TextureButton
 CanvasLayer
 CPUParticles3D
-AnimatedSprite3D

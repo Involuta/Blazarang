@@ -104,11 +104,16 @@ var aiming_at_target := true
 	"SKULL" : 1.0,
 }
 
-@export var random_balls_chances = {
-	"ROLLER" : .5,
-	"BOUNCER" : .3,
-	"HEAVY" : .2,
-	"SKULL" : 0.0,
+@export var random_rim_ball_chances = {
+	"ROLLER" : .97,
+	"SKULL" : 0.03,
+}
+
+@export var random_core_ball_chances = {
+	"FLASH" : .85,
+	"BOUNCER" : .05,
+	"HEAVY" : .07,
+	"SKULL" : .03,
 }
 
 const STANDING_FEET_DIST := 20.0 # Dist btwn each foot when neutrally standing
@@ -268,22 +273,24 @@ func upgrade_foot_ball_spawner():
 func choose_ball_from_name(ball_name):
 	match(ball_name):
 		"ROLLER":
-			return foot_ball_spawner.roller
+			return roller
 		"BOUNCER":
-			return foot_ball_spawner.bouncer
+			return bouncer
 		"HEAVY":
-			return foot_ball_spawner.heavy
+			return heavy
 		"SKULL":
-			return foot_ball_spawner.skull
+			return skull
+		"FLASH":
+			return flash
 		"default":
 			print("Error: attempted to choose ball with name: ", ball_name)
 			return foot_ball_spawner.roller
 
-func get_random_ball():
+func get_random_ball(ball_chances):
 	var choice := rng.randf()
 	var cumulative_weight := 0.0
-	for ball in random_balls_chances:
-		cumulative_weight += random_balls_chances[ball]
+	for ball in ball_chances:
+		cumulative_weight += ball_chances[ball]
 		if choice <= cumulative_weight:
 			return choose_ball_from_name(ball)
 	return choose_ball_from_name("default")
@@ -295,7 +302,7 @@ func spawn_rim_balls():
 	# 2 balls shoot at equivalent angles beside the line representinga the walker's fwd direction
 	ball_vec = ball_vec.rotated(Vector3.UP, PI/num_rim_balls)
 	for i in range(num_rim_balls):
-		var b = get_random_ball().instantiate()
+		var b = get_random_ball(random_rim_ball_chances).instantiate()
 		level.add_child.call_deferred(b)
 		await b.tree_entered
 		b.global_position = rim_ball_spawn_pivot.global_position + bowl_radius * ball_vec
@@ -303,14 +310,14 @@ func spawn_rim_balls():
 		b.linear_velocity.y = -rim_ball_init_down_speed
 		ball_vec = ball_vec.rotated(Vector3.UP, 2 * PI / num_rim_balls)
 
-func spawn_flash_balls():
+func spawn_core_balls():
 	foot_ball_spawner.skull_launched_by_mortar = false
 	var ball_vec := -transform.basis.z
 	# Make it so that a ball doesn't shoot directly from the walker's rim in its fwd direction bc that's where its thigh is
 	# 2 balls shoot at equivalent angles beside the line representinga the walker's fwd direction
 	ball_vec = ball_vec.rotated(Vector3.UP, PI/num_rim_balls)
 	for i in range(num_rim_balls):
-		var b = flash.instantiate()
+		var b = get_random_ball(random_core_ball_chances).instantiate()
 		level.add_child.call_deferred(b)
 		await b.tree_entered
 		b.global_position = rim_ball_spawn_pivot.global_position + .5 * bowl_radius * ball_vec
@@ -327,7 +334,7 @@ func spawn_foot_explosion():
 	if in_downbowl or walker_pivot.global_position.distance_to(target.global_position) > flash_ball_proximity:
 		spawn_rim_balls()
 	else:
-		spawn_flash_balls()
+		spawn_core_balls()
 
 func spawn_bowl_explosion():
 	var foot_explosion_inst = load("res://enemies/ball_walker_foot_explosion.tscn").instantiate()

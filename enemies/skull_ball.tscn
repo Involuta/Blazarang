@@ -16,8 +16,8 @@ roughness = 0.1
 
 [sub_resource type="SphereMesh" id="SphereMesh_7o3dh"]
 material = SubResource("StandardMaterial3D_vskty")
-radius = 1.8
-height = 3.6
+radius = 1.25
+height = 2.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_mi232"]
 radius = 1.8
