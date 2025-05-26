@@ -134,6 +134,7 @@ var flash := preload("res://enemies/flash_ball.tscn")
 @onready var walker_pivot := $WalkerPivot
 @onready var bowl_pivot := $WalkerPivot/BowlPivot
 @onready var rim_ball_spawn_pivot := $WalkerPivot/BowlPivot/RimBallSpawnPivot
+@onready var bowl_hitbox_container := $WalkerPivot/BowlPivot/BowlHitboxContainer
 @onready var standing_foot := $WalkerPivot/LeftLegStand/DomeMesh/Foot
 @onready var gun_foot := $WalkerPivot/RightLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh/Foot
 @onready var anim_player := $AnimationPlayer
@@ -158,6 +159,9 @@ func _ready():
 	
 	dist_state_switch_cooldown_remaining = max_dist_state_switch_cooldown
 	foot_ball_spawner_upgrade_time_remaining = max_foot_ball_spawner_upgrade_time
+	
+	# Typhoon's damage over time hitbox at bowl is disabled in phase 1 and enabled in phase 2
+	bowl_hitbox_container.process_mode = Node.PROCESS_MODE_DISABLED
 	
 	$WalkerPivot/LeftLegGun.visible = false
 	$WalkerPivot/RightLegGun.visible = false
@@ -555,3 +559,6 @@ func short_dist_state_frame():
 		short_dist_wait_remaining = max_short_dist_wait
 	else:
 		short_dist_wait_remaining -= get_physics_process_delta_time()
+
+func start_phase2():
+	bowl_hitbox_container.process_mode = Node.PROCESS_MODE_INHERIT

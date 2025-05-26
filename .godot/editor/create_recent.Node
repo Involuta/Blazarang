@@ -1,9 +1,9 @@
+Node3D
 GPUParticles3D
 MeshInstance3D
 CollisionShape3D
 Hitbox
 AnimationPlayer
-Node3D
 AnimationTree
 Area3D
 NavigationAgent3D

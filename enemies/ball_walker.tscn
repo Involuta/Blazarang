@@ -3768,7 +3768,7 @@ tracks/26/keys = {
 tracks/27/type = "value"
 tracks/27/imported = false
 tracks/27/enabled = true
-tracks/27/path = NodePath("WalkerPivot/BowlPivot/EnemyHitbox:process_mode")
+tracks/27/path = NodePath("WalkerPivot/BowlPivot/BowlHitboxContainer/EnemyHitbox:process_mode")
 tracks/27/interp = 1
 tracks/27/loop_wrap = true
 tracks/27/keys = {
@@ -4129,7 +4129,7 @@ tracks/26/keys = {
 tracks/27/type = "value"
 tracks/27/imported = false
 tracks/27/enabled = true
-tracks/27/path = NodePath("WalkerPivot/BowlPivot/EnemyHitbox:process_mode")
+tracks/27/path = NodePath("WalkerPivot/BowlPivot/BowlHitboxContainer/EnemyHitbox:process_mode")
 tracks/27/interp = 1
 tracks/27/loop_wrap = true
 tracks/27/keys = {
@@ -4464,14 +4464,16 @@ surface_material_override/0 = SubResource("StandardMaterial3D_nt7kj")
 [node name="RimBallSpawnPivot" type="Node3D" parent="WalkerPivot/BowlPivot"]
 transform = Transform3D(1, 8.3376e-14, -4.13066e-13, 2.18848e-13, 1, 9.34645e-19, -1.84807e-14, 1.76247e-20, 1, 2.08165e-12, -0.28, 2.08165e-12)
 
-[node name="EnemyHitbox" type="Area3D" parent="WalkerPivot/BowlPivot"]
-transform = Transform3D(1, 7.88471e-19, -1.85692e-13, -2.41415e-19, 1, -8.62446e-14, -3.00859e-14, 8.61868e-14, 1, 0, 3, 0)
+[node name="BowlHitboxContainer" type="Node3D" parent="WalkerPivot/BowlPivot"]
+
+[node name="EnemyHitbox" type="Area3D" parent="WalkerPivot/BowlPivot/BowlHitboxContainer"]
+transform = Transform3D(1, 1.65583e-18, -4.13066e-13, -5.61743e-19, 1, -8.62446e-14, -1.84807e-14, 8.61871e-14, 1, 0, 3, 0)
 collision_layer = 8
 collision_mask = 18
 script = ExtResource("7_ably2")
 damage = 10
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WalkerPivot/BowlPivot/EnemyHitbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WalkerPivot/BowlPivot/BowlHitboxContainer/EnemyHitbox"]
 transform = Transform3D(1, 6.44156e-23, 4.13066e-13, -7.57752e-23, 1, 2.08159e-22, 1.84807e-14, -1.22724e-23, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 shape = SubResource("CylinderShape3D_orqr8")
 
