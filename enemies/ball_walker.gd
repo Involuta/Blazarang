@@ -88,7 +88,7 @@ var aiming_at_target := true
 
 @export var cannon_enemy_chances = {
 	"ROLLER": .9,
-	"HEAVY": .1,
+	"SKULL": .1,
 }
 
 @export var upgraded_cannon_enemy_chances = {

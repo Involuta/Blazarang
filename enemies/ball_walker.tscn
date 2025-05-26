@@ -3765,6 +3765,18 @@ tracks/26/keys = {
 "update": 0,
 "values": [Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
 }
+tracks/27/type = "value"
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/path = NodePath("WalkerPivot/BowlPivot/EnemyHitbox:process_mode")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/keys = {
+"times": PackedFloat32Array(1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3, 3.1, 3.2, 3.3, 3.4, 3.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4]
+}
 
 [sub_resource type="Animation" id="Animation_ujtnk"]
 resource_name = "typhoon_mortar"
@@ -4114,6 +4126,18 @@ tracks/26/keys = {
 "update": 0,
 "values": [Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
 }
+tracks/27/type = "value"
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/path = NodePath("WalkerPivot/BowlPivot/EnemyHitbox:process_mode")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/keys = {
+"times": PackedFloat32Array(1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3, 3.1, 3.2, 3.3, 3.4, 3.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4]
+}
 
 [sub_resource type="Animation" id="Animation_7vlw7"]
 resource_name = "vertical_jump"
@@ -4441,16 +4465,20 @@ surface_material_override/0 = SubResource("StandardMaterial3D_nt7kj")
 transform = Transform3D(1, 8.3376e-14, -4.13066e-13, 2.18848e-13, 1, 9.34645e-19, -1.84807e-14, 1.76247e-20, 1, 2.08165e-12, -0.28, 2.08165e-12)
 
 [node name="EnemyHitbox" type="Area3D" parent="WalkerPivot/BowlPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 3, 2.08165e-12)
+transform = Transform3D(1, 7.88471e-19, -1.85692e-13, -2.41415e-19, 1, -8.62446e-14, -3.00859e-14, 8.61868e-14, 1, 0, 3, 0)
+collision_layer = 8
+collision_mask = 18
 script = ExtResource("7_ably2")
-damage = 3
+damage = 10
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WalkerPivot/BowlPivot/EnemyHitbox"]
 transform = Transform3D(1, 6.44156e-23, 4.13066e-13, -7.57752e-23, 1, 2.08159e-22, 1.84807e-14, -1.22724e-23, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 shape = SubResource("CylinderShape3D_orqr8")
 
 [node name="LeftLegStand" parent="WalkerPivot" instance=ExtResource("5_rin41")]
+process_mode = 4
 transform = Transform3D(5, -1.74393e-15, 9.28455e-13, 1.74393e-15, 5, -1.74393e-15, -3.16047e-12, 1.74393e-15, 5, 10, -2, 2.08165e-12)
+visible = false
 
 [node name="DomeMesh" parent="WalkerPivot/LeftLegStand" index="0"]
 transform = Transform3D(0.1, -5.19732e-25, 2.36828e-17, -3.30872e-24, 0.1, 8.14204e-24, 4.44089e-16, -8.82761e-24, 0.1, 0, 0, 0)
@@ -4489,7 +4517,9 @@ opponent_hitboxes = ["PlayerHitbox"]
 shape = SubResource("SphereShape3D_54la2")
 
 [node name="RightLegStand" parent="WalkerPivot" instance=ExtResource("5_rin41")]
+process_mode = 4
 transform = Transform3D(5, -1.74393e-15, 2.84217e-14, 1.74393e-15, 5, -1.74393e-15, 7.10543e-15, 1.74393e-15, 5, 29.6135, -1.82877, -1.73156e-06)
+visible = false
 
 [node name="DomeMesh" parent="WalkerPivot/RightLegStand" index="0"]
 transform = Transform3D(0.1, -5.19732e-25, 2.36828e-17, -3.30872e-24, 0.1, 8.14204e-24, 4.44089e-16, -8.82761e-24, 0.1, 0, 0, 0)
@@ -4524,9 +4554,7 @@ opponent_hitboxes = ["PlayerHitbox"]
 shape = SubResource("SphereShape3D_kna8k")
 
 [node name="RightLegGun" parent="WalkerPivot" instance=ExtResource("4_25puj")]
-process_mode = 4
 transform = Transform3D(4.99999, -4.44285e-27, 9.2848e-13, 2.64895e-23, 5, 1.35726e-21, -1.53742e-11, -6.83809e-21, 4.99999, 8.6901, 3.48645, 2.08165e-12)
-visible = false
 
 [node name="HipJoint" parent="WalkerPivot/RightLegGun" index="0"]
 transform = Transform3D(0.906213, -3.39507e-07, -0.422821, -0.422821, -1.53061e-06, -0.906213, -3.39507e-07, 0.999999, -1.53061e-06, 0, 2.175, 2.27374e-12)
@@ -4560,9 +4588,7 @@ damage = 49
 shape = SubResource("CylinderShape3D_tol7x")
 
 [node name="LeftLegGun" parent="WalkerPivot" instance=ExtResource("4_25puj")]
-process_mode = 4
 transform = Transform3D(5, -2.82727e-27, 9.28469e-13, 2.64782e-23, 5, 8.11928e-22, -1.48171e-11, -4.29699e-21, 5, -5.08, -5.9, 2.08165e-12)
-visible = false
 
 [node name="HipJoint" parent="WalkerPivot/LeftLegGun" index="0"]
 transform = Transform3D(-0.866023, -6.75498e-06, 0.500004, 0.500004, 1.81001e-06, 0.866023, -6.75498e-06, 1, 1.81001e-06, 0, 2.17465, 0)
@@ -4619,7 +4645,7 @@ heavy_chargeup_secs = 2.08165e-12
 [node name="MeshPivot" type="Node3D" parent="FootBallSpawner"]
 
 [node name="FootBallSpawner2" type="Node3D" parent="."]
-transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 3.8, -15)
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 14.9, -4)
 visible = false
 script = ExtResource("2_7lttv")
 attack_turn_speed = 0.2
