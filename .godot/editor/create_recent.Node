@@ -1,9 +1,9 @@
+GPUParticles3D
+MeshInstance3D
 CollisionShape3D
 Hitbox
-GPUParticles3D
 AnimationPlayer
 Node3D
-MeshInstance3D
 AnimationTree
 Area3D
 NavigationAgent3D

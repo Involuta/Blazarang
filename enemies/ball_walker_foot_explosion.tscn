@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cju7q8lmimibg"]
+[gd_scene load_steps=19 format=3 uid="uid://cju7q8lmimibg"]
 
 [ext_resource type="Script" path="res://enemies/ball_walker_foot_explosion.gd" id="1_l6u87"]
 [ext_resource type="Script" path="res://hitbox.gd" id="2_vbsko"]
@@ -37,7 +37,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MeshInstance3D:scale")
+tracks/1/path = NodePath("FloorDisc:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -45,6 +45,54 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(6, 1, 6), Vector3(18, 1, 18)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ExplosionBallMesh:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(6, 6, 6)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ExplosionBallMesh:mesh:material:albedo_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1.50196, 1.50196, 1.50196, 1), Color(0.26, 0.56, 1.5, 0.75), Color(0.258824, 0.560784, 1.50196, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GPUParticles3D:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("EnemyHitbox:process_mode")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 4]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kceuk"]
@@ -54,18 +102,57 @@ _data = {
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lky6h"]
 transparency = 4
-albedo_color = Color(0.258824, 0.427451, 1, 0.623529)
+shading_mode = 0
+albedo_color = Color(0.258824, 0.560784, 1.50196, 0)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_qxeo4"]
 material = SubResource("StandardMaterial3D_lky6h")
-height = 1.0
+height = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_xsvhj"]
+material = SubResource("StandardMaterial3D_lky6h")
+
+[sub_resource type="Gradient" id="Gradient_m6fv4"]
+offsets = PackedFloat32Array(0, 0.457565)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0.341176, 1.50196, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ikhue"]
+gradient = SubResource("Gradient_m6fv4")
+
+[sub_resource type="Curve" id="Curve_sirbp"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.504519, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.150602), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_1wgb3"]
+curve = SubResource("Curve_sirbp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k7fmy"]
+direction = Vector3(2.08165e-12, 1, 2.08165e-12)
+spread = 90.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 5.0
+initial_velocity_max = 20.0
+scale_min = 0.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_1wgb3")
+color_ramp = SubResource("GradientTexture1D_ikhue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_404a5"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_ysw8s"]
+material = SubResource("StandardMaterial3D_404a5")
+radius = 0.3
+height = 0.6
 
 [node name="BallWalkerFootExplosion" type="Node3D"]
 script = ExtResource("1_l6u87")
-disappear_secs = 0.5
+disappear_secs = 2.0
 num_spawned_balls = 6.0
 
 [node name="EnemyHitbox" type="Area3D" parent="."]
+process_mode = 4
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("2_vbsko")
@@ -80,6 +167,18 @@ libraries = {
 "": SubResource("AnimationLibrary_kceuk")
 }
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="FloorDisc" type="MeshInstance3D" parent="."]
 transform = Transform3D(18, 0, 0, 0, 1, 0, 0, 0, 18, 0, 0, 0)
 mesh = SubResource("CylinderMesh_qxeo4")
+
+[node name="ExplosionBallMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
+mesh = SubResource("SphereMesh_xsvhj")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 30
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_k7fmy")
+draw_pass_1 = SubResource("SphereMesh_ysw8s")

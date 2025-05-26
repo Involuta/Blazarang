@@ -4371,16 +4371,6 @@ mortar_enemy_chances = {
 "HEAVY": 0.4,
 "SKULL": 0.1
 }
-random_rim_ball_chances = {
-"ROLLER": 0.95,
-"SKULL": 0.05
-}
-random_core_ball_chances = {
-"BOUNCER": 0.05,
-"FLASH": 0.85,
-"HEAVY": 0.05,
-"SKULL": 0.05
-}
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 2.08165e-12, -1.75, 2.08165e-12)
