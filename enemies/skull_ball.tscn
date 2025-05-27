@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://dvcpkp84uyvkc"]
+[gd_scene load_steps=21 format=3 uid="uid://dvcpkp84uyvkc"]
 
 [ext_resource type="Script" path="res://enemies/skull_ball.gd" id="1_ebyms"]
+[ext_resource type="Shader" path="res://glb_inherited_scenes/black_outline.gdshader" id="2_jc1lq"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_xkl6b"]
 [ext_resource type="Script" path="res://hitbox.gd" id="3_68d6s"]
 [ext_resource type="AudioStream" uid="uid://d0xusfqqc8emu" path="res://audio/sfx/evil_laugh.mp3" id="4_c7kkm"]
@@ -8,14 +9,21 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xs2x3"]
 friction = 0.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vskty"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cy15v"]
+render_priority = 0
+shader = ExtResource("2_jc1lq")
+shader_parameter/outline_color = Color(0, 0.509804, 1, 1)
+shader_parameter/outline_width = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ec4ku"]
+next_pass = SubResource("ShaderMaterial_cy15v")
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(0.0901961, 0.466667, 1, 1)
+albedo_color = Color(0.0823529, 0.0823529, 0.0823529, 1)
 roughness = 0.1
 
 [sub_resource type="SphereMesh" id="SphereMesh_7o3dh"]
-material = SubResource("StandardMaterial3D_vskty")
+material = SubResource("StandardMaterial3D_ec4ku")
 radius = 1.25
 height = 2.5
 

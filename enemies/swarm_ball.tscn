@@ -11,7 +11,7 @@ friction = 0.0
 shading_mode = 0
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(0, 0.666667, 1.50196, 1)
+albedo_color = Color(0, 0.823529, 1.50196, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_fcffq"]
 material = SubResource("StandardMaterial3D_ffvih")

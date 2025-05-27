@@ -27,3 +27,5 @@ res://enemies/skull_ball.tscn
 res://levels/balls_level/section_nodes/balls_level_main_arena.tscn
 res://enemies/ball_walker.gd
 res://enemies/swarm_ball.tscn
+res://levels/balls_level/balls_level_background.tscn
+res://enemies/roller_ball.tscn
