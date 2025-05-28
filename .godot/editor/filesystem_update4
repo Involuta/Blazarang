@@ -34,3 +34,4 @@ res://levels/balls_level/balls_level.tscn
 res://enemies/damage_over_time_area.gd
 res://damage_over_time_area.gd
 res://enemies/ball_walker_radiation_zone.gd
+res://enemies/mini_ball_walker.tscn

@@ -1,27 +1,45 @@
-[gd_scene load_steps=17 format=3 uid="uid://8aqtamar6ihi"]
+[gd_scene load_steps=21 format=3 uid="uid://8aqtamar6ihi"]
 
 [ext_resource type="Script" path="res://hitbox.gd" id="1_a1t4a"]
 [ext_resource type="Script" path="res://enemies/ball_walker_radiation_zone.gd" id="1_c52ry"]
 [ext_resource type="Script" path="res://damage_over_time_area.gd" id="1_lxska"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_6dqld"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bw518"]
 height = 1.0
-radius = 9.0
+radius = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kja62"]
+resource_local_to_scene = true
 transparency = 4
 shading_mode = 0
 albedo_color = Color(0, 0.431373, 1.50196, 0)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_wd5td"]
+resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_kja62")
 top_radius = 9.0
 bottom_radius = 9.0
 height = 0.05
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6dqld"]
+height = 1.0
+radius = 9.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_57crq"]
+height = 1.0
+radius = 7.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vnq12"]
+height = 1.0
+radius = 5.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_m32ll"]
+height = 1.0
+radius = 3.0
+
 [sub_resource type="Animation" id="Animation_7u45g"]
 resource_name = "disappear"
-length = 1.50001
+length = 2.00001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -29,7 +47,7 @@ tracks/0/path = NodePath("GPUParticles3D:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -41,7 +59,7 @@ tracks/1/path = NodePath("MeshInstance3D:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.5),
+"times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(1, 1, 1), Vector3(0.05, 1, 0.05)]
@@ -53,15 +71,27 @@ tracks/2/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1.5),
+"times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0, 0.431373, 1.50196, 0.235294), Color(0, 0.431373, 1.50196, 0)]
+"values": [Color(0, 0.62, 2, 1), Color(0, 0.431373, 1.50196, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DamageOverTimeArea/EnemyHitbox/CollisionShape3D:shape")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [SubResource("CylinderShape3D_6dqld"), SubResource("CylinderShape3D_57crq"), SubResource("CylinderShape3D_vnq12"), SubResource("CylinderShape3D_m32ll"), SubResource("CylinderShape3D_bw518")]
 }
 
 [sub_resource type="Animation" id="Animation_03y8f"]
 resource_name = "spread"
-length = 1.50001
+length = 2.00001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -81,7 +111,7 @@ tracks/1/path = NodePath("MeshInstance3D:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.5),
+"times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0.05, 1, 0.05), Vector3(1, 1, 1)]
@@ -93,10 +123,22 @@ tracks/2/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.7, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0, 1, 1.50196, 0), Color(0, 1, 1.50196, 0.235294), Color(0, 0.431373, 1.50196, 0.235294)]
+"values": [Color(0, 1, 1.50196, 0), Color(0, 0.62, 2, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DamageOverTimeArea/EnemyHitbox/CollisionShape3D:shape")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2.00001),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [SubResource("CylinderShape3D_bw518"), SubResource("CylinderShape3D_m32ll"), SubResource("CylinderShape3D_vnq12"), SubResource("CylinderShape3D_57crq"), SubResource("CylinderShape3D_6dqld")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wvn8m"]
@@ -106,7 +148,7 @@ _data = {
 }
 
 [sub_resource type="Gradient" id="Gradient_mtjcd"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0.117647, 1, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0.294118, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_w05sa"]
 gradient = SubResource("Gradient_mtjcd")
@@ -128,10 +170,10 @@ direction = Vector3(2.08165e-12, 1, 2.08165e-12)
 spread = 0.0
 gravity = Vector3(2.08165e-12, 9.8, 2.08165e-12)
 scale_curve = SubResource("CurveTexture_aji5v")
-color = Color(0, 0.631373, 1, 1)
+color = Color(0, 0.737255, 1, 1)
 color_ramp = SubResource("GradientTexture1D_w05sa")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jbewo"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4q0h5"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
 billboard_mode = 3
@@ -140,11 +182,12 @@ particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="QuadMesh" id="QuadMesh_xqqnx"]
-material = SubResource("StandardMaterial3D_jbewo")
+[sub_resource type="SphereMesh" id="SphereMesh_6vkp1"]
+material = SubResource("StandardMaterial3D_4q0h5")
 
 [node name="BallWalkerRadiationZone" type="Node3D"]
 script = ExtResource("1_c52ry")
+disappear_secs = 15.0
 
 [node name="DamageOverTimeArea" type="Node3D" parent="."]
 script = ExtResource("1_lxska")
@@ -157,7 +200,7 @@ script = ExtResource("1_a1t4a")
 damage = 6
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DamageOverTimeArea/EnemyHitbox"]
-shape = SubResource("CylinderShape3D_6dqld")
+shape = SubResource("CylinderShape3D_bw518")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 2.08165e-12, -0.35, 2.08165e-12)
@@ -173,4 +216,4 @@ libraries = {
 emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_vwbhu")
-draw_pass_1 = SubResource("QuadMesh_xqqnx")
+draw_pass_1 = SubResource("SphereMesh_6vkp1")

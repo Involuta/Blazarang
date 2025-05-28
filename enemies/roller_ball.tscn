@@ -10,7 +10,7 @@ friction = 0.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vskty"]
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(0, 0.666667, 0.913725, 1)
+albedo_color = Color(0, 0.67, 1, 1)
 roughness = 0.1
 
 [sub_resource type="SphereMesh" id="SphereMesh_f30y8"]

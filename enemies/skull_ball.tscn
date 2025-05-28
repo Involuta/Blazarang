@@ -140,9 +140,9 @@ gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 15.0
 initial_velocity_max = 20.0
 scale_curve = SubResource("CurveTexture_vwb5t")
-color = Color(0.0862745, 0.321569, 1, 1)
+color = Color(0.0862745, 0.627451, 1, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fgyhl"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jghbl"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
 billboard_mode = 3
@@ -151,13 +151,13 @@ particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="QuadMesh" id="QuadMesh_h0mv2"]
-material = SubResource("StandardMaterial3D_fgyhl")
+[sub_resource type="SphereMesh" id="SphereMesh_pson3"]
+material = SubResource("StandardMaterial3D_jghbl")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_axrkd"]
 transparency = 4
 shading_mode = 0
-albedo_color = Color(0.270588, 0.486275, 1, 1)
+albedo_color = Color(0.270588, 0.65098, 1, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_g2iu7"]
 material = SubResource("StandardMaterial3D_axrkd")
@@ -219,7 +219,7 @@ one_shot = true
 explosiveness = 1.0
 visibility_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
 process_material = SubResource("ParticleProcessMaterial_5yuiy")
-draw_pass_1 = SubResource("QuadMesh_h0mv2")
+draw_pass_1 = SubResource("SphereMesh_pson3")
 
 [node name="ExplosionMesh" type="MeshInstance3D" parent="."]
 visible = false

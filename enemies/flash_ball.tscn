@@ -121,7 +121,7 @@ particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="QuadMesh" id="QuadMesh_h0mv2"]
+[sub_resource type="SphereMesh" id="SphereMesh_csyy3"]
 material = SubResource("StandardMaterial3D_fgyhl")
 
 [node name="FlashBall" type="RigidBody3D"]
@@ -163,4 +163,4 @@ emitting = false
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_rd2nd")
-draw_pass_1 = SubResource("QuadMesh_h0mv2")
+draw_pass_1 = SubResource("SphereMesh_csyy3")
