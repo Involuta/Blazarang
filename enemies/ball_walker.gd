@@ -448,6 +448,13 @@ func typhoon():
 	else:
 		await typhoon_mortar()
 
+func spawn_radiation_zone():
+	var radiation_zone_inst = load("res://enemies/ball_walker_radiation_zone.tscn").instantiate()
+	level.add_child.call_deferred(radiation_zone_inst)
+	await radiation_zone_inst.tree_entered
+	radiation_zone_inst.global_position = bowl_pivot.global_position
+	radiation_zone_inst.global_position.y = min_y_pos + 1
+
 func typhoon_cannon():
 	anim_player.play("bowl_flip_down")
 	await anim_player.animation_finished

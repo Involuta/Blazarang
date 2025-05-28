@@ -29,3 +29,8 @@ res://enemies/ball_walker.gd
 res://enemies/swarm_ball.tscn
 res://levels/balls_level/balls_level_background.tscn
 res://enemies/roller_ball.tscn
+res://enemies/ball_walker_radiation_zone.tscn
+res://levels/balls_level/balls_level.tscn
+res://enemies/damage_over_time_area.gd
+res://damage_over_time_area.gd
+res://enemies/ball_walker_radiation_zone.gd

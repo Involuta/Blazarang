@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://26r1xic77ey5"]
+[gd_scene load_steps=6 format=3 uid="uid://26r1xic77ey5"]
 
 [ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="1_t8k04"]
 [ext_resource type="Script" path="res://levels/Level.gd" id="1_wsv7n"]
 [ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="2_553cb"]
 [ext_resource type="PackedScene" uid="uid://c8vj6vfod1e6k" path="res://levels/balls_level/section_nodes/balls_level_main_arena.tscn" id="3_fcj1v"]
+
+[sub_resource type="Environment" id="Environment_lon07"]
+ambient_light_source = 1
+glow_enabled = true
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_wsv7n")
@@ -21,3 +25,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 20, 2.08165e-12)
 
 [node name="BallsLevelMainArena" parent="." instance=ExtResource("3_fcj1v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lon07")

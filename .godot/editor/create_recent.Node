@@ -1,9 +1,10 @@
-MeshInstance3D
 Node3D
 GPUParticles3D
+WorldEnvironment
+MeshInstance3D
+AnimationPlayer
 CollisionShape3D
 Hitbox
-AnimationPlayer
 AnimationTree
 Area3D
 NavigationAgent3D
@@ -29,4 +30,3 @@ SubViewport
 SubViewportContainer
 TextureButton
 CanvasLayer
-CPUParticles3D
