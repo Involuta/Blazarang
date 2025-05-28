@@ -187,7 +187,7 @@ material = SubResource("StandardMaterial3D_4q0h5")
 
 [node name="BallWalkerRadiationZone" type="Node3D"]
 script = ExtResource("1_c52ry")
-disappear_secs = 15.0
+disappear_secs = 20.0
 
 [node name="DamageOverTimeArea" type="Node3D" parent="."]
 script = ExtResource("1_lxska")

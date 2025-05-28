@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cltnvatu6e8de"]
+[gd_scene load_steps=6 format=3 uid="uid://cltnvatu6e8de"]
 
+[ext_resource type="Script" path="res://levels/balls_level/balls_level_background.gd" id="1_f8g2i"]
 [ext_resource type="Script" path="res://bg_camera.gd" id="1_m1xyr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8dxd2"]
@@ -22,6 +23,8 @@ tonemap_mode = 2
 glow_enabled = true
 
 [node name="BallsLevelBackground" type="Node3D"]
+script = ExtResource("1_f8g2i")
+star_num = 2.08165e-12
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1inmc")

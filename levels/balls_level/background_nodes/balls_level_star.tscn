@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmtb1di1kgy4f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lilx4"]
+shading_mode = 0
+albedo_color = Color(0.5, 0.46, 1.5, 1)
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_j00mk"]
+material = SubResource("StandardMaterial3D_lilx4")
+radius = 0.1
+height = 0.2
+
+[node name="BallsLevelStar" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_j00mk")

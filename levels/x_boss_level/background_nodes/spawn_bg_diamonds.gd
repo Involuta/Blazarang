@@ -2,14 +2,14 @@ extends Node3D
 
 @export var big_diamond_num := 20.0
 @export var big_diamond_min_size := .05
-@export var big_diamond_max_size := 1.0
-@export var big_diamond_min_spawn_radius := 1.0
-@export var big_diamond_max_spawn_radius := 5.5
+@export var big_diamond_max_size := .9
+@export var big_diamond_min_spawn_radius := 2.0
+@export var big_diamond_max_spawn_radius := 5.7
 @export var big_diamond_min_dist_from_others := 2.4
 
 @export var small_diamond_num := 80.0
 @export var small_diamond_min_size := .05
-@export var small_diamond_max_size := .15
+@export var small_diamond_max_size := .25
 @export var small_diamond_min_spawn_radius := 6.0
 @export var small_diamond_max_spawn_radius := 12.0
 @export var small_diamond_min_dist_from_others := .5
@@ -69,10 +69,10 @@ func spawn_coord_within_radiuses(min_spawn_radius: float, max_spawn_radius: floa
 
 	return Vector3(x, y, z)
 
-func spawn_pos_is_far_from_others(diamond_list, pos: Vector3, dist: float) -> bool:
-	if diamond_list.is_empty():
+func spawn_pos_is_far_from_others(obj_list, pos: Vector3, dist: float) -> bool:
+	if obj_list.is_empty():
 		return true
-	for d in diamond_list:
-		if d.global_position.distance_to(pos) < dist:
+	for obj in obj_list:
+		if obj.global_position.distance_to(pos) < dist:
 			return false
 	return true
