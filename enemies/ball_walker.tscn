@@ -4368,7 +4368,7 @@ transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-
 collision_layer = 64
 collision_mask = 130
 script = ExtResource("1_evdbk")
-flash_ball_proximity = 20.0
+max_dist_from_arena_center = 36.0
 mortar_enemy_chances = {
 "BOUNCER": 0.5,
 "HEAVY": 0.4,
@@ -4446,9 +4446,7 @@ transform = Transform3D(1, 8.3376e-14, -4.13066e-13, 2.18848e-13, 1, 9.34645e-19
 [node name="BowlHitboxContainer" type="Node3D" parent="WalkerPivot/BowlPivot"]
 
 [node name="LeftLegStand" parent="WalkerPivot" instance=ExtResource("5_rin41")]
-process_mode = 4
 transform = Transform3D(5, -1.74393e-15, 9.28455e-13, 1.74393e-15, 5, -1.74393e-15, -3.16047e-12, 1.74393e-15, 5, 10, -2, 2.08165e-12)
-visible = false
 
 [node name="DomeMesh" parent="WalkerPivot/LeftLegStand" index="0"]
 transform = Transform3D(0.1, -5.19732e-25, 2.36828e-17, -3.30872e-24, 0.1, 8.14204e-24, 4.44089e-16, -8.82761e-24, 0.1, 0, 0, 0)
@@ -4487,9 +4485,7 @@ opponent_hitboxes = ["PlayerHitbox"]
 shape = SubResource("SphereShape3D_54la2")
 
 [node name="RightLegStand" parent="WalkerPivot" instance=ExtResource("5_rin41")]
-process_mode = 4
 transform = Transform3D(5, -1.74393e-15, 2.84217e-14, 1.74393e-15, 5, -1.74393e-15, 7.10543e-15, 1.74393e-15, 5, 29.6135, -1.82877, -1.73156e-06)
-visible = false
 
 [node name="DomeMesh" parent="WalkerPivot/RightLegStand" index="0"]
 transform = Transform3D(0.1, -5.19732e-25, 2.36828e-17, -3.30872e-24, 0.1, 8.14204e-24, 4.44089e-16, -8.82761e-24, 0.1, 0, 0, 0)
@@ -4524,7 +4520,9 @@ opponent_hitboxes = ["PlayerHitbox"]
 shape = SubResource("SphereShape3D_kna8k")
 
 [node name="RightLegGun" parent="WalkerPivot" instance=ExtResource("4_25puj")]
+process_mode = 4
 transform = Transform3D(4.99999, -4.44285e-27, 9.2848e-13, 2.64895e-23, 5, 1.35726e-21, -1.53742e-11, -6.83809e-21, 4.99999, 8.6901, 3.48645, 2.08165e-12)
+visible = false
 
 [node name="HipJoint" parent="WalkerPivot/RightLegGun" index="0"]
 transform = Transform3D(0.906213, -3.39507e-07, -0.422821, -0.422821, -1.53061e-06, -0.906213, -3.39507e-07, 0.999999, -1.53061e-06, 0, 2.175, 2.27374e-12)

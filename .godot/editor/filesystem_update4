@@ -31,3 +31,4 @@ res://enemies/ball_walker.tscn
 res://levels/balls_level/balls_level.tscn
 res://enemies/ball_walker.gd
 res://ui/ui_root.tscn
+res://levels/balls_level/section_nodes/balls_level_main_arena.tscn

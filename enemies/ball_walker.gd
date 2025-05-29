@@ -21,19 +21,18 @@ var short_dist_wait_remaining := 3.0
 var substate_queued := false
 
 var facing_forward := false # Whether to face toward or away from the target pos of lerp_look_at
-var aiming_at_icon := false
 var just_walked := false # Whether the last short dist action the walker performed was a walk
 var just_typhooned := false # Whether the last short dist action the walker performed was a walk
 @export var typhoon_chance := .5 # Chance of using typhoon instead of stomping
 var latest_saved_y_rotation := 0.0 # Latest rotation before initiating linear look at pos
 
-@export var max_dist_from_arena_center := 16.0 # Max dist from arena center before walker steps the other way
+@export var max_dist_from_arena_center := 30.0 # Max dist from arena center before walker steps the other way
 @export var arena_radius := 40.0
 var walker_icon_pos := Vector3.ZERO
 
 @export var bowl_slam_proximity := 5.0 # Imagine a sphere w this radius around the walker pivot. If the target is within the sphere, a bowl slam occurs
 
-@export var flash_ball_proximity := 10.0 # If target is within this radius of walker pivot, flash balls are fired instead of rim balls when walker is upright
+@export var flash_ball_proximity := 20.0 # If target is within this radius of walker pivot, flash balls are fired instead of rim balls when walker is upright
 @export var bowl_radius := 8.0 # Radius of bowl mesh
 @export var num_rim_balls := 6.0 # Num of balls spawned from rim per rim ball blast
 @export var rim_ball_fwd_speed := 12.0
@@ -60,7 +59,13 @@ var foot_state = FOOT_TYPE.CANNON
 
 @export var follow_speed := 5.0
 
-var aiming_at_target := true
+enum WALK_DEST {
+	TARGET,
+	ICON,
+	CENTER,
+}
+var walk_dest := WALK_DEST.TARGET
+var can_rotate := false # Toggled to prevent walker from rotating when it's staying still
 
 @export var follow_turn_speed := .15
 @export var attack_turn_speed := .75
@@ -71,7 +76,13 @@ var aiming_at_target := true
 var phase2 := false
 
 @export var phase1_short_dist_substate_chances = {
-	"STOMP": 1.0,
+	"MELEE": 1.0,
+}
+
+@export var phase1_standard_melee_attack_chances = {
+	"WALK": .4,
+	"STOMP": .4,
+	"TYPHOON": .2,
 }
 
 @export var phase1_long_dist_substate_chances = {
@@ -80,7 +91,13 @@ var phase2 := false
 }
 
 @export var phase2_short_dist_substate_chances = {
-	"STOMP": 1.0,
+	"MELEE": 1.0,
+}
+
+@export var phase2_standard_melee_attack_chances = {
+	"WALK": .4,
+	"STOMP": .4,
+	"TYPHOON": .2,
 }
 
 @export var phase2_long_dist_substate_chances = {
@@ -207,8 +224,15 @@ func linear_look_at_position(target_pos, turn_speed):
 		vec3_to_target *= -1
 	global_rotation.y = Globals.rotate_toward(global_rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed * get_physics_process_delta_time())
 
+func aim_at_target():
+	walk_dest = WALK_DEST.TARGET
+
 func stop_aiming_at_target():
-	aiming_at_target = false
+	# If too far from arena center, aim at center. Otherwise, aim at icon
+	if global_position.distance_to(min_y_pos * Vector3.UP) >= max_dist_from_arena_center:
+		walk_dest = WALK_DEST.CENTER
+	else:
+		walk_dest = WALK_DEST.ICON
 
 func target_closer_to_standing_foot():
 	return standing_foot.global_position.distance_to(target.global_position) <= gun_foot.global_position.distance_to(target.global_position)
@@ -217,8 +241,7 @@ func target_in_bowl_slam_range():
 	return walker_pivot.global_position.distance_to(target.global_position) <= bowl_slam_proximity
 
 func switch_to_long_dist_state():
-	aiming_at_icon = false
-	aiming_at_target = true
+	walk_dest = WALK_DEST.TARGET
 	dist_state = DIST_TYPE.LONG_DIST
 	# If target is closer to left foot than right foot (ie closer to standing foot than gun foot), instantly move forward L units and instantly flip the walker before choosing a long range substate
 	if target_closer_to_standing_foot():
@@ -247,8 +270,8 @@ func choose_substate_from_name(substate: String):
 			switch_to_cannon()
 		"MORTAR":
 			switch_to_mortar()
-		"STOMP":
-			step_or_stomp()
+		"MELEE":
+			melee_substate()
 		"default":
 			print("Error: attempted to switch to substate: ", substate)
 			switch_to_cannon()
@@ -355,61 +378,97 @@ func spawn_bowl_explosion():
 	foot_explosion_inst.global_position.y = min_y_pos+1
 	foot_explosion_inst.rotation.y = rotation.y
 
-func step_or_stomp():
-	# If you're too far from arena center and you didn't just walk, walk towards icon
+func choose_melee_substate_from_chances(melee_substates) -> String:
+	var choice := rng.randf()
+	var cumulative_weight := 0.0
+	for substate in melee_substates:
+		cumulative_weight += melee_substates[substate]
+		if choice <= cumulative_weight:
+			return substate
+	return "STOMP"
+
+func standard_choose_melee_substate() -> String:
+	# "standard" means not being too far from arena center and not able to bowl slam
+	var substate: String
+	# just_walked and just_typhooned doesn't need to be covered because it shouldn't be possible, but it's here just in case
+	if just_walked and just_typhooned:
+		print("Error: You somehow just walked AND just typhooned")
+		substate = "STOMP"
+	if just_walked and not just_typhooned:
+		# Stomp or typhoon
+		if rng.randf() > .6:
+			substate = "STOMP"
+		else:
+			substate = "TYPHOON"
+	elif not just_walked and just_typhooned:
+		# Walk or stomp
+		if rng.randf() > .6:
+			substate = "WALK"
+		else:
+			substate = "STOMP"
+	else:
+		# Walk, stomp, or typhoon
+		if phase2:
+			substate = choose_melee_substate_from_chances(phase2_standard_melee_attack_chances)
+		else:
+			substate = choose_melee_substate_from_chances(phase1_standard_melee_attack_chances)
+	return substate
+
+func melee_substate():
+	# If you're too far from arena center and you didn't just walk, walk towards center
+	stop_aiming_at_target()
 	if not just_walked and global_position.distance_to(min_y_pos * Vector3.UP) >= max_dist_from_arena_center:
 		just_walked = true
 		just_typhooned = false
-		aiming_at_icon = true
-		anim_in_progress = true
-		await step_flip_to_downbowl()
-		# Wait for spawned rim balls to leave cannons before stepping and rotating again (if aiming_at_icon is true during wait, walker rotates while waiting)
-		aiming_at_icon = false
-		await get_tree().create_timer(.5).timeout
-		aiming_at_icon = true
-		await step_flip_to_upbowl()
-		# Wait for spawned rim balls to leave cannons before rotating again
-		aiming_at_icon = false
-		await get_tree().create_timer(.5).timeout
-		anim_in_progress = false
-	# Otherwise, if target is directly below you, either bowl slam or walk away
+		await walk()
+	# If target is directly below you, either bowl slam or walk away
 	elif target_in_bowl_slam_range():
 		if not just_walked and rng.randf() > .5:
 			just_walked = true
 			just_typhooned = false
-			aiming_at_icon = true
-			anim_in_progress = true
-			await step_flip_to_downbowl()
-			# Wait for spawned rim balls to leave cannons before stepping and rotating again
-			aiming_at_icon = false
-			await get_tree().create_timer(.5).timeout
-			aiming_at_icon = true
-			await step_flip_to_upbowl()
-			# Wait for spawned rim balls to leave cannons before rotating again
-			aiming_at_icon = false
-			await get_tree().create_timer(.5).timeout
-			anim_in_progress = false
+			await walk()
 		else:
 			just_walked = false
 			just_typhooned = false
 			anim_in_progress = true
 			await bowl_slam()
 			anim_in_progress = false
-	# If you cannot bowl slam or walk, either stomp or typhoon. If you just typhooned, stomp. If you stomp and the target is closer to the gun foot, flip yourself
-	elif not just_typhooned and rng.randf() <= typhoon_chance:
-		just_walked = false
-		just_typhooned = true
-		anim_in_progress = true
-		await typhoon()
-		anim_in_progress = false
-	else:
-		just_walked = false
-		just_typhooned = false
-		anim_in_progress = true
-		await stomp()
-		anim_in_progress = false
+	# If you're not too far from the arena center and you're not in a bowl slam situation, then walk, typhoon, or stomp depending on what you just did
+	var substate := standard_choose_melee_substate()
+	match(substate):
+		"WALK":
+			just_walked = true
+			just_typhooned = false
+			await walk()
+		"TYPHOON":
+			just_walked = false
+			just_typhooned = true
+			anim_in_progress = true
+			await typhoon()
+			anim_in_progress = false
+		"STOMP":
+			just_walked = false
+			just_typhooned = false
+			anim_in_progress = true
+			await stomp()
+			anim_in_progress = false
+
+func walk():
+	can_rotate = true
+	anim_in_progress = true
+	await step_flip_to_downbowl()
+	# Wait for spawned rim balls to leave cannons before stepping and rotating again (if can_rotate is true during wait, walker rotates while waiting)
+	can_rotate = false
+	await get_tree().create_timer(.5).timeout
+	can_rotate = true
+	await step_flip_to_upbowl()
+	# Wait for spawned rim balls to leave cannons before rotating again
+	can_rotate = false
+	await get_tree().create_timer(.5).timeout
+	anim_in_progress = false
 
 func stomp():
+	# If the target is closer to the gun foot, flip yourself
 	if target_closer_to_standing_foot():
 		global_position += STANDING_FEET_DIST * -transform.basis.z
 		rotation.y += PI
@@ -518,10 +577,14 @@ func long_dist_state_frame():
 	velocity.x = 0
 	velocity.z = 0
 	
-	if aiming_at_target:
-		linear_look_at_position(target.global_position, attack_turn_speed)
-	elif aiming_at_icon:
-		linear_look_at_position(walker_icon.global_position, attack_turn_speed)
+	if can_rotate:
+		match(walk_dest):
+			WALK_DEST.CENTER:
+				linear_look_at_position(Vector3(0, min_y_pos, 0), attack_turn_speed)
+			WALK_DEST.TARGET:
+				linear_look_at_position(target.global_position, attack_turn_speed)
+			WALK_DEST.ICON:
+				linear_look_at_position(walker_icon.global_position, attack_turn_speed)
 	
 	if not anim_in_progress:
 		if foot_ball_spawner_upgrade_time_remaining <= 0:
@@ -537,7 +600,7 @@ func long_dist_state_frame():
 			dist_state_switch_cooldown_remaining -= get_physics_process_delta_time()
 
 func switch_to_short_dist_state():
-	aiming_at_target = false
+	can_rotate = false
 	anim_in_progress = true
 	dist_state = DIST_TYPE.SHORT_DIST
 	match(foot_state):
@@ -555,10 +618,14 @@ func short_dist_state_frame():
 	velocity.x = 0
 	velocity.z = 0
 	
-	if aiming_at_target:
-		linear_look_at_position(target.global_position, attack_turn_speed)
-	elif aiming_at_icon:
-		linear_look_at_position(walker_icon.global_position, attack_turn_speed)
+	if can_rotate:
+		match(walk_dest):
+			WALK_DEST.CENTER:
+				linear_look_at_position(Vector3(0, min_y_pos, 0), attack_turn_speed)
+			WALK_DEST.TARGET:
+				linear_look_at_position(target.global_position, attack_turn_speed)
+			WALK_DEST.ICON:
+				linear_look_at_position(walker_icon.global_position, attack_turn_speed)
 	
 	if not anim_in_progress and dist_state_switch_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) >= short_dist_state_range:
 		switch_to_long_dist_state()
