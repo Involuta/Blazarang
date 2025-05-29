@@ -39,3 +39,14 @@ res://levels/x_boss_level/x_boss_level_background.tscn
 res://levels/balls_level/balls_level_background.gd
 res://levels/x_boss_level/background_nodes/spawn_bg_diamonds.gd
 res://levels/balls_level/background_nodes/balls_level_star.tscn
+res://levels/balls_level/balls_level_viewcontrol.tscn
+res://textures/solid_light_gray_tile.tres
+res://enemies/x_boss.tscn
+res://ui/health_bar.tscn
+res://ui/ui_root.tscn
+res://levels/balls_level/balls_level.gd
+res://levels/x_boss_level/x_boss_level1_viewcontrol.tscn
+res://levels/x_boss_level/x_boss_level1.gd
+res://levels/x_boss_level/x_boss_level1.tscn
+res://globals.gd
+res://enemies/mini_ball_walker.gd

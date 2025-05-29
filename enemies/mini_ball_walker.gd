@@ -20,7 +20,7 @@ var time_until_next_leap := 5.0
 @export var leap_secs := 3.5
 
 @export var follow_speed := 3.0
-@export var turn_speed := .1
+@export var walk_turn_speed := .1
 @export var kick_dist := 2.0
 @export var kick_secs := 1.833
 @export var kick_cooldown_secs := 2.5
@@ -54,7 +54,7 @@ func stop_mvmt():
 
 func _physics_process(delta):
 	if aiming_at_target:
-		lerp_look_at_target(turn_speed)
+		lerp_look_at_target(walk_turn_speed)
 	
 	match(behav_state):
 		WALK:

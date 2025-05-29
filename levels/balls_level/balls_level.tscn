@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://26r1xic77ey5"]
 
+[ext_resource type="Script" path="res://levels/balls_level/balls_level.gd" id="1_lidbm"]
 [ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="1_t8k04"]
-[ext_resource type="Script" path="res://levels/Level.gd" id="1_wsv7n"]
 [ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="2_553cb"]
 [ext_resource type="PackedScene" uid="uid://c8vj6vfod1e6k" path="res://levels/balls_level/section_nodes/balls_level_main_arena.tscn" id="3_fcj1v"]
 
@@ -10,7 +10,7 @@ ambient_light_source = 1
 glow_enabled = true
 
 [node name="Level" type="Node3D"]
-script = ExtResource("1_wsv7n")
+script = ExtResource("1_lidbm")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 1.74393e-16, 0.5, 0.866026, -0.5, 0.75, -0.433013, 0, 0, 0)

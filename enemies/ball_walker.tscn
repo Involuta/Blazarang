@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bmtn0cwrlroe4" path="res://enemies/ball_walker_mesh_leg_stand.tscn" id="5_rin41"]
 [ext_resource type="Script" path="res://enemies/multi_hurtbox_child.gd" id="5_tqkwm"]
 [ext_resource type="Script" path="res://hitbox.gd" id="7_ably2"]
-[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="8_ng0f4"]
+[ext_resource type="Script" path="res://enemies/boss_hurtbox.gd" id="10_n240s"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_5sb8t"]
 height = 0.5
@@ -4427,7 +4427,7 @@ transform = Transform3D(0.999999, 1.43989e-13, 2.6868e-12, 4.37696e-13, -1, 2.53
 collision_layer = 8
 collision_mask = 265
 script = ExtResource("5_tqkwm")
-hurtbox_owner = NodePath("../../../MultiHurtboxOwner")
+hurtbox_owner = NodePath("../../../EnemyHurtbox")
 enemy_name = "BallWalker"
 opponent_hitboxes = ["PlayerHitbox"]
 
@@ -4479,7 +4479,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -4, 2.08165e-12)
 collision_layer = 8
 collision_mask = 265
 script = ExtResource("5_tqkwm")
-hurtbox_owner = NodePath("../../../../../MultiHurtboxOwner")
+hurtbox_owner = NodePath("../../../../../EnemyHurtbox")
 enemy_name = "BallWalker"
 opponent_hitboxes = ["PlayerHitbox"]
 
@@ -4516,7 +4516,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -4, 2.08165e-12)
 collision_layer = 8
 collision_mask = 265
 script = ExtResource("5_tqkwm")
-hurtbox_owner = NodePath("../../../../../MultiHurtboxOwner")
+hurtbox_owner = NodePath("../../../../../EnemyHurtbox")
 enemy_name = "BallWalker"
 opponent_hitboxes = ["PlayerHitbox"]
 
@@ -4640,14 +4640,15 @@ heavy_chargeup_secs = 0.4
 
 [node name="MeshPivot" type="Node3D" parent="FootBallSpawner2"]
 
-[node name="MultiHurtboxOwner" type="Area3D" parent="."]
-collision_layer = 0
-collision_mask = 0
-script = ExtResource("8_ng0f4")
+[node name="EnemyHurtbox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 265
+script = ExtResource("10_n240s")
+health_segment_thresholds = [0.0, 0.5, 1.0]
 enemy_name = "BallWalker"
 opponent_hitboxes = ["PlayerHitbox"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MultiHurtboxOwner"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHurtbox"]
 shape = SubResource("SeparationRayShape3D_njqlp")
 
 [editable path="WalkerPivot/BowlPivot/BowlMesh"]
