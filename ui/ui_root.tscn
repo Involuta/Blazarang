@@ -703,7 +703,7 @@ explosiveness = 1.0
 [node name="AxrangBuffIcon1Pivot" type="Node2D" parent="."]
 
 [node name="AxrangBuffIcon1" type="TextureRect" parent="AxrangBuffIcon1Pivot"]
-modulate = Color(1, 1, 1, 0.111111)
+modulate = Color(1, 1, 1, 0)
 offset_left = 38.0
 offset_top = 100.0
 offset_right = 185.0
@@ -714,6 +714,7 @@ expand_mode = 1
 [node name="AxrangBuffIcon1UpParticles" type="GPUParticles2D" parent="AxrangBuffIcon1Pivot"]
 position = Vector2(114, 175)
 rotation = 3.14159
+emitting = false
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_xax8r")
 texture = ExtResource("7_d3h4s")
@@ -723,6 +724,7 @@ explosiveness = 1.0
 
 [node name="AxrangBuffIcon1DownParticles" type="GPUParticles2D" parent="AxrangBuffIcon1Pivot"]
 position = Vector2(114, 175)
+emitting = false
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_xax8r")
 texture = ExtResource("7_d3h4s")

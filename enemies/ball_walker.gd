@@ -163,6 +163,8 @@ func _ready():
 	
 	$WalkerPivot/LeftLegGun.visible = false
 	$WalkerPivot/RightLegGun.visible = false
+	
+	Globals.health_segment_lost.connect(on_health_segment_lost)
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("Special"):
@@ -182,8 +184,6 @@ func _physics_process(delta):
 	var target_pos_angle_from_center := atan2(target_pos.x, target_pos.z)
 	walker_icon_pos = Vector3(arena_radius * sin(target_pos_angle_from_center), 15, arena_radius * cos(target_pos_angle_from_center))
 	walker_icon.global_position = walker_icon_pos
-	
-	Globals.health_segment_lost.connect(on_health_segment_lost)
 
 func on_health_segment_lost(seg_num):
 	if seg_num == 1:
