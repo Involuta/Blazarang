@@ -68,6 +68,8 @@ var aiming_at_target := true
 @export var cannon_spawn_cooldown_secs := 1.0
 @export var mortar_spawn_cooldown_secs := 1.4
 
+var phase2 := false
+
 @export var phase1_short_dist_substate_chances = {
 	"STOMP": 1.0,
 }
@@ -134,7 +136,6 @@ var flash := preload("res://enemies/flash_ball.tscn")
 @onready var walker_pivot := $WalkerPivot
 @onready var bowl_pivot := $WalkerPivot/BowlPivot
 @onready var rim_ball_spawn_pivot := $WalkerPivot/BowlPivot/RimBallSpawnPivot
-@onready var bowl_hitbox_container := $WalkerPivot/BowlPivot/BowlHitboxContainer
 @onready var standing_foot := $WalkerPivot/LeftLegStand/DomeMesh/Foot
 @onready var gun_foot := $WalkerPivot/RightLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh/Foot
 @onready var anim_player := $AnimationPlayer
@@ -160,9 +161,6 @@ func _ready():
 	dist_state_switch_cooldown_remaining = max_dist_state_switch_cooldown
 	foot_ball_spawner_upgrade_time_remaining = max_foot_ball_spawner_upgrade_time
 	
-	# Typhoon's damage over time hitbox at bowl is disabled in phase 1 and enabled in phase 2
-	bowl_hitbox_container.process_mode = Node.PROCESS_MODE_DISABLED
-	
 	$WalkerPivot/LeftLegGun.visible = false
 	$WalkerPivot/RightLegGun.visible = false
 
@@ -184,6 +182,15 @@ func _physics_process(delta):
 	var target_pos_angle_from_center := atan2(target_pos.x, target_pos.z)
 	walker_icon_pos = Vector3(arena_radius * sin(target_pos_angle_from_center), 15, arena_radius * cos(target_pos_angle_from_center))
 	walker_icon.global_position = walker_icon_pos
+	
+	Globals.health_segment_lost.connect(on_health_segment_lost)
+
+func on_health_segment_lost(seg_num):
+	if seg_num == 1:
+		start_phase2()
+
+func start_phase2():
+	phase2 = true
 
 func update_latest_y_rotation():
 	latest_saved_y_rotation = global_rotation.y
@@ -449,6 +456,8 @@ func typhoon():
 		await typhoon_mortar()
 
 func spawn_radiation_zone():
+	if not phase2:
+		return
 	var radiation_zone_inst = load("res://enemies/ball_walker_radiation_zone.tscn").instantiate()
 	level.add_child.call_deferred(radiation_zone_inst)
 	await radiation_zone_inst.tree_entered
@@ -566,6 +575,3 @@ func short_dist_state_frame():
 		short_dist_wait_remaining = max_short_dist_wait
 	else:
 		short_dist_wait_remaining -= get_physics_process_delta_time()
-
-func start_phase2():
-	bowl_hitbox_container.process_mode = Node.PROCESS_MODE_INHERIT
