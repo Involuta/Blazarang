@@ -5,19 +5,19 @@
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_p3v7c"]
 height = 1.0
-radius = 9.0
+radius = 10.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_6vx5e"]
 height = 1.0
-radius = 3.0
+radius = 4.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_auw3s"]
 height = 1.0
-radius = 5.0
+radius = 6.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_5ltr8"]
 height = 1.0
-radius = 7.0
+radius = 8.0
 
 [sub_resource type="Animation" id="Animation_a4u2l"]
 resource_name = "explode"

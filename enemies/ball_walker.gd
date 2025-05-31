@@ -26,7 +26,7 @@ var just_typhooned := false # Whether the last short dist action the walker perf
 @export var typhoon_chance := .5 # Chance of using typhoon instead of stomping
 var latest_saved_y_rotation := 0.0 # Latest rotation before initiating linear look at pos
 
-@export var max_dist_from_arena_center := 30.0 # Max dist from arena center before walker steps the other way
+@export var max_dist_from_arena_center := 36.0 # Max dist from arena center before walker steps the other way
 @export var arena_radius := 40.0
 var walker_icon_pos := Vector3.ZERO
 
