@@ -1,0 +1,81 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckifn7eyumnbs"]
+
+[ext_resource type="PackedScene" uid="uid://bqqs2bydogj2n" path="res://glb_imports/Landmite.glb" id="1_t72rh"]
+
+[node name="Landmite" instance=ExtResource("1_t72rh")]
+
+[node name="LeftVeryBackShin" parent="Armature/Skeleton3D" index="0"]
+transform = Transform3D(1, 1.16103e-07, 4.47656e-08, -5.34219e-08, 1, 2.46884e-08, 6.34016e-08, -5.68937e-08, 1, 4.76837e-07, 3.57628e-07, -1.19209e-07)
+bone_idx = 4
+
+[node name="LeftVeryBackThigh" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(1, 1.85535e-07, 1.10788e-07, -1.55995e-07, 1, -7.30299e-09, -1.62604e-09, -2.55223e-08, 1, -0.1, 4.17233e-07, -5.96046e-08)
+bone_idx = 5
+
+[node name="LeftMiddleBackShin" parent="Armature/Skeleton3D" index="2"]
+transform = Transform3D(1, 1.12437e-07, 8.31458e-09, -1.27052e-07, 1, -1.74552e-07, 8.22565e-08, 5.45187e-08, 1, 7.15256e-07, 1.19209e-07, -2.98023e-08)
+bone_idx = 9
+
+[node name="LeftMiddleBackThigh" parent="Armature/Skeleton3D" index="3"]
+transform = Transform3D(1, -2.09279e-08, 7.24279e-08, 2.76377e-08, 1, -1.57683e-07, 1.63979e-08, 3.78998e-08, 1, 0, 0, -8.9407e-08)
+bone_idx = 10
+
+[node name="LeftMiddleFrontShin" parent="Armature/Skeleton3D" index="4"]
+transform = Transform3D(1, 1.00037e-08, 2.91868e-08, -1.87449e-08, 1, -1.30797e-08, -1.55135e-08, 1.51496e-08, 1, 1.19209e-07, 2.38419e-07, -3.91155e-08)
+bone_idx = 14
+
+[node name="LeftMiddleFrontThigh" parent="Armature/Skeleton3D" index="5"]
+transform = Transform3D(1, 1.13821e-08, -8.7944e-08, -4.20814e-08, 1, -1.81105e-08, 1.04125e-07, 2.1007e-08, 1, 2.38419e-07, 0, -3.72529e-08)
+bone_idx = 15
+
+[node name="LeftVeryFrontShin" parent="Armature/Skeleton3D" index="6"]
+transform = Transform3D(1, -2.71823e-07, -4.25362e-08, 3.31872e-07, 1, -7.30572e-08, 9.07149e-08, 1.65998e-08, 1, -2.38419e-07, 2.38419e-07, -2.68221e-07)
+bone_idx = 19
+
+[node name="LeftVeryFrontThigh" parent="Armature/Skeleton3D" index="7"]
+transform = Transform3D(1, 6.95265e-08, 3.22232e-08, 2.76614e-08, 1, -5.93323e-08, 3.14905e-09, -6.07469e-09, 1, -2.98023e-07, 2.38419e-07, -2.38419e-07)
+bone_idx = 20
+
+[node name="RightVeryBackShin" parent="Armature/Skeleton3D" index="8"]
+transform = Transform3D(1, -2.35298e-07, -2.25255e-08, 1.72633e-07, 1, 3.21374e-08, -8.55205e-08, -6.41187e-08, 1, -7.15256e-07, 3.57628e-07, -1.19209e-07)
+bone_idx = 24
+
+[node name="RightVeryBackThigh" parent="Armature/Skeleton3D" index="9"]
+transform = Transform3D(1, -1.85691e-07, -9.51767e-08, 1.56096e-07, 1, -1.70237e-08, -1.51366e-08, -1.51621e-08, 1, 2.38419e-07, 4.17233e-07, -2.38419e-07)
+bone_idx = 25
+
+[node name="RightMiddleBackShin" parent="Armature/Skeleton3D" index="10"]
+transform = Transform3D(1, -1.12011e-07, 9.25857e-09, 1.26129e-07, 1, -1.31927e-07, -9.34303e-08, 1.16845e-08, 1, -4.76837e-07, 4.76837e-07, -8.9407e-08)
+bone_idx = 29
+
+[node name="RightMiddleBackThigh" parent="Armature/Skeleton3D" index="11"]
+transform = Transform3D(1, 2.10562e-08, -7.40975e-08, -2.76521e-08, 1, -1.54884e-07, -1.47681e-08, 3.46403e-08, 1, 0, 1.19209e-07, -5.96046e-08)
+bone_idx = 30
+
+[node name="RightMiddleFrontShin" parent="Armature/Skeleton3D" index="12"]
+transform = Transform3D(1, -9.79342e-09, 6.94613e-09, 2.24617e-08, 1, 1.25426e-09, -2.08044e-08, 7.15647e-10, 1, -2.38419e-07, -1.19209e-07, -7.07805e-08)
+bone_idx = 34
+
+[node name="RightMiddleFrontThigh" parent="Armature/Skeleton3D" index="13"]
+transform = Transform3D(1, -1.1045e-08, 8.68741e-08, 4.20824e-08, 1, -9.9058e-10, -1.02844e-07, 3.89394e-09, 1, 0, 0, -3.44589e-08)
+bone_idx = 35
+
+[node name="RightVeryFrontShin" parent="Armature/Skeleton3D" index="14"]
+transform = Transform3D(1, 9.22237e-08, 1.27339e-08, -9.71791e-08, 1, -1.17761e-07, -4.88657e-08, 7.55612e-08, 1, 9.53674e-07, 0, 0)
+bone_idx = 39
+
+[node name="RightVeryFrontThigh" parent="Armature/Skeleton3D" index="15"]
+transform = Transform3D(1, 4.96217e-08, -4.97583e-08, -1.46839e-07, 1, -6.98368e-08, 1.59427e-08, 4.63532e-09, 1, 1.78814e-07, 2.38419e-07, -1.49012e-07)
+bone_idx = 40
+
+[node name="LeftMandible" parent="Armature/Skeleton3D" index="16"]
+transform = Transform3D(0.999992, 0.00381308, 0.000458599, -0.00382537, 0.999521, 0.0307202, -0.000341203, -0.0307218, 0.999528, 0.00438085, -0.0235648, -0.0377045)
+bone_idx = 43
+
+[node name="RightMandible" parent="Armature/Skeleton3D" index="17"]
+transform = Transform3D(0.999992, -0.00381308, -0.000458599, 0.00382537, 0.999521, 0.0307202, 0.000341203, -0.0307218, 0.999528, -0.00438085, -0.0235648, -0.0377045)
+bone_idx = 46
+
+[node name="Body" parent="Armature/Skeleton3D" index="18"]
+transform = Transform3D(1, 1.58974e-24, 2.82761e-24, 2.57794e-24, 1, 6.93648e-09, -2.62584e-24, 6.93648e-09, 1, 7.94093e-23, 2.38419e-07, 4.17233e-07)
+bone_idx = 47

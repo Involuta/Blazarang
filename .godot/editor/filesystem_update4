@@ -1,4 +1,3 @@
-res://enemies/ball_walker_foot_explosion.tscn
 res://enemies/enemy_hurtbox.gd
 res://glb_inherited_scenes/outline.gdshader
 res://glb_inherited_scenes/black_outline.gdshader
@@ -21,8 +20,5 @@ res://ui/glow.gdshader
 res://ui/glitch.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
 res://skygradient.gdshader
-res://enemies/ball_walker.tscn
-res://levels/balls_level/balls_level.tscn
-res://enemies/mini_ball_walker.tscn
-res://levels/balls_level/section_nodes/balls_level_main_arena.tscn
-res://levels/balls_level/balls_level_background.tscn
+res://enemies/landmite.tscn
+res://start_ik.gd

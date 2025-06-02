@@ -1,7 +1,7 @@
 [gd_scene load_steps=24 format=3 uid="uid://clp2agu4jlltu"]
 
 [ext_resource type="Script" path="res://enemies/mini_ball_walker.gd" id="1_td7b6"]
-[ext_resource type="PackedScene" uid="uid://cifsgdf800m5p" path="res://mini_ball_walker_meshes.tscn" id="2_q67k5"]
+[ext_resource type="PackedScene" uid="uid://cifsgdf800m5p" path="res://glb_inherited_scenes/mini_ball_walker_meshes.tscn" id="2_q67k5"]
 [ext_resource type="Script" path="res://hitbox.gd" id="3_l1iqn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l2haw"]
