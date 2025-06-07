@@ -17,7 +17,7 @@ var behav_state := WALK
 @export var max_leap_interval := 5.0 # Max time btwn leaps
 @export var min_leap_interval := 1.0 # Min time btwn leaps
 var time_until_next_leap := 5.0
-@export var leap_secs := 3.5
+@export var leap_secs := 1.4
 
 @export var follow_speed := 3.0
 @export var walk_turn_speed := .1
@@ -46,8 +46,8 @@ func stop_aiming_at_target():
 	aiming_at_target = false
 
 func leap():
-	velocity = 10 * transform.basis.z
-	velocity.y += 30
+	velocity = 8 * transform.basis.z
+	velocity.y += 6.5
 
 func stop_mvmt():
 	velocity = Vector3.ZERO
@@ -76,7 +76,9 @@ func _physics_process(delta):
 				time_until_next_leap = rng.randf_range(min_leap_interval, max_leap_interval)
 				behav_state = LEAP
 				#anim_tree.set("parameters/StateMachine/conditions/leap", true)
+				leap()
 				await get_tree().create_timer(leap_secs).timeout
+				stop_mvmt()
 				#anim_tree.set("parameters/StateMachine/conditions/leap", false)
 				behav_state = WALK
 		BITE:
