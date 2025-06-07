@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bqqs2bydogj2n" path="res://glb_imports/Landmite.glb" id="1_t72rh"]
 
-[node name="Landmite" instance=ExtResource("1_t72rh")]
+[node name="LandmiteMeshes" instance=ExtResource("1_t72rh")]
 
 [node name="LeftVeryBackShin" parent="Armature/Skeleton3D" index="0"]
 transform = Transform3D(1, 1.16103e-07, 4.47656e-08, -5.34219e-08, 1, 2.46884e-08, 6.34016e-08, -5.68937e-08, 1, 4.76837e-07, 3.57628e-07, -1.19209e-07)

@@ -1,13 +1,13 @@
+Node3D
+AnimationTree
 Marker3D
 SkeletonIK3D
 MeshInstance3D
-Node3D
 GPUParticles3D
 WorldEnvironment
 AnimationPlayer
 CollisionShape3D
 Hitbox
-AnimationTree
 Area3D
 NavigationAgent3D
 NavigationRegion3D

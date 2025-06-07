@@ -21,3 +21,5 @@ res://ui/glow.gdshader
 res://ui/glitch.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
 res://skygradient.gdshader
+res://glb_inherited_scenes/landmite_meshes.tscn
+res://enemies/landmite.gd
