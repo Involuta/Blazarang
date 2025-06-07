@@ -1,10 +1,11 @@
+res://levels
+res://levels/mite_level
 res://glb_inherited_scenes
 res://enemies/enemy_anims
 res://enemies
 res://
 res://enemies/spawners
 res://levels/balls_level
-res://levels/gauntlet
 res://levels/x_boss_level
 res://rang
 res://cotu/cotu_anims
@@ -12,7 +13,6 @@ res://photo_scenes
 res://icon
 res://skyboxes
 res://levels/x_boss_level/background_nodes
-res://levels
 res://levels/
 res://levels/hub
 res://level_maps

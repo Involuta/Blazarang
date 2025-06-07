@@ -47,7 +47,7 @@ func stop_aiming_at_target():
 
 func leap():
 	velocity = 10 * transform.basis.z
-	velocity.y += 3
+	velocity.y += 30
 
 func stop_mvmt():
 	velocity = Vector3.ZERO
@@ -59,7 +59,8 @@ func _physics_process(delta):
 	match(behav_state):
 		WALK:
 			var current_rotation = transform.basis.get_rotation_quaternion()
-			velocity = .08 * (current_rotation.normalized() * anim_tree.get_root_motion_position()) / delta
+			#velocity = .08 * (current_rotation.normalized() * anim_tree.get_root_motion_position()) / delta
+			velocity = 5.0 * transform.basis.z
 			
 			bite_cooldown_remaining -= delta
 			if bite_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < bite_dist:

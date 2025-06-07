@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://bojoxt1vrmeve"]
+
+[ext_resource type="Script" path="res://levels/Level.gd" id="1_ppvaj"]
+[ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="2_pdpo8"]
+[ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="3_rncx6"]
+[ext_resource type="PackedScene" uid="uid://bnylrq5nmpcv" path="res://levels/mite_level/section_nodes/mite_level_main_arena.tscn" id="4_k8y7q"]
+
+[sub_resource type="Environment" id="Environment_lon07"]
+ambient_light_source = 1
+glow_enabled = true
+
+[node name="Level" type="Node3D"]
+script = ExtResource("1_ppvaj")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 1.74393e-16, 0.5, 0.866026, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_mode = 1
+
+[node name="cotuCB" parent="." instance=ExtResource("2_pdpo8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 20, -26.4927)
+
+[node name="Icon" parent="." instance=ExtResource("3_rncx6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 20, 2.08165e-12)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lon07")
+
+[node name="MiteLevelMainArena" parent="." instance=ExtResource("4_k8y7q")]
