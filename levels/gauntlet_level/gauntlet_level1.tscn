@@ -1,12 +1,12 @@
 [gd_scene load_steps=19 format=3 uid="uid://by6rgqxfg3vwp"]
 
-[ext_resource type="Script" path="res://levels/gauntlet/gauntlet_level1.gd" id="1_g21b3"]
-[ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="2_cdmya"]
-[ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="3_susk6"]
-[ext_resource type="PackedScene" uid="uid://cjxdm8v82qb3v" path="res://levels/gauntlet/section_nodes/gauntlet_arena1.tscn" id="4_y1q14"]
-[ext_resource type="AudioStream" uid="uid://br0a4rin6vcg3" path="res://audio/music/COTU.wav" id="6_1sujv"]
-[ext_resource type="Material" uid="uid://vsefhkxljqg8" path="res://textures/small_solid_black.tres" id="7_2hyy7"]
-[ext_resource type="Script" path="res://DisappearRB.gd" id="7_tfag3"]
+[ext_resource type="Script" path="res://levels/gauntlet_level/gauntlet_level1.gd" id="1_cc2bt"]
+[ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="2_bt3t0"]
+[ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="3_nqo7i"]
+[ext_resource type="PackedScene" uid="uid://cjxdm8v82qb3v" path="res://levels/gauntlet_level/section_nodes/gauntlet_arena1.tscn" id="4_ncis8"]
+[ext_resource type="AudioStream" uid="uid://br0a4rin6vcg3" path="res://audio/music/COTU.wav" id="5_t71pa"]
+[ext_resource type="Script" path="res://DisappearRB.gd" id="6_qnm0e"]
+[ext_resource type="Material" uid="uid://vsefhkxljqg8" path="res://textures/small_solid_black.tres" id="7_ngyv0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2oney"]
 sky_top_color = Color(0.0196078, 0, 0.172549, 1)
@@ -27,7 +27,7 @@ glow_intensity = 2.0
 glow_bloom = 0.2
 
 [sub_resource type="BoxMesh" id="BoxMesh_2lrcn"]
-material = ExtResource("7_2hyy7")
+material = ExtResource("7_ngyv0")
 size = Vector3(0.5, 2.5, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_csl2d"]
@@ -81,21 +81,21 @@ size = Vector3(2, 0.5, 2)
 size = Vector3(2, 0.5, 2)
 
 [node name="Level" type="Node3D"]
-script = ExtResource("1_g21b3")
+script = ExtResource("1_cc2bt")
 
-[node name="cotuCB" parent="." instance=ExtResource("2_cdmya")]
+[node name="cotuCB" parent="." instance=ExtResource("2_bt3t0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 11.5, 2.08165e-12)
 
-[node name="Icon" parent="." instance=ExtResource("3_susk6")]
+[node name="Icon" parent="." instance=ExtResource("3_nqo7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vgqir")
 
-[node name="GauntletArena1" parent="." instance=ExtResource("4_y1q14")]
+[node name="GauntletArena1" parent="." instance=ExtResource("4_ncis8")]
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_1sujv")
+stream = ExtResource("5_t71pa")
 volume_db = -5.0
 bus = &"Music"
 
@@ -103,7 +103,7 @@ bus = &"Music"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 12.5, 2.08165e-12)
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("7_tfag3")
+script = ExtResource("6_qnm0e")
 disappear_secs = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="EntranceDoorLeft"]
@@ -119,7 +119,7 @@ shape = SubResource("BoxShape3D_csl2d")
 transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, 2.08165e-12, 12.5, 1.25)
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("7_tfag3")
+script = ExtResource("6_qnm0e")
 disappear_secs = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="EntranceDoorBack"]
@@ -135,7 +135,7 @@ shape = SubResource("BoxShape3D_csl2d")
 transform = Transform3D(-4.37114e-08, -3.48787e-16, -1, 3.48787e-16, 1, -3.48787e-16, 1, -3.48787e-16, -4.37114e-08, 2.08165e-12, 12.5, -1.25)
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("7_tfag3")
+script = ExtResource("6_qnm0e")
 disappear_secs = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="EntranceDoorForward"]
@@ -151,7 +151,7 @@ shape = SubResource("BoxShape3D_csl2d")
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 1.25, 12.5, 2.08165e-12)
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("7_tfag3")
+script = ExtResource("6_qnm0e")
 disappear_secs = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="EntranceDoorRight"]
@@ -167,7 +167,7 @@ shape = SubResource("BoxShape3D_csl2d")
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 14, 2.08165e-12)
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("7_tfag3")
+script = ExtResource("6_qnm0e")
 disappear_secs = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="EntranceCeiling"]

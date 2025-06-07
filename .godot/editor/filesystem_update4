@@ -1,13 +1,12 @@
-res://enemies/landmite.tscn
 res://enemies/enemy_hurtbox.gd
 res://glb_inherited_scenes/outline.gdshader
 res://glb_inherited_scenes/black_outline.gdshader
 res://rang/roserang_shader.tres
+res://levels/x_boss_level/background_nodes/diamond.tres
 res://GPUTrail-main/shaders/trail.gdshader
 res://GPUTrail-main/shaders/trail_draw_pass.gdshader
 res://GPUTrail-main/defaults/texture.tres
 res://GPUTrail-main/defaults/curve.tres
-res://levels/x_boss_level/background_nodes/diamond.tres
 res://textures/x_arrow.tres
 res://textures/small_solid_white.tres
 res://textures/clear_tile.tres
@@ -21,5 +20,8 @@ res://ui/glow.gdshader
 res://ui/glitch.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
 res://skygradient.gdshader
-res://glb_inherited_scenes/landmite_meshes.tscn
-res://enemies/landmite.gd
+res://textures/white_border_black_center.tres
+res://textures/white_border_black_solid_square.tres
+res://cotu/cotu_anims_outline.tres
+res://textures/small_solid_black.tres
+res://enemies/landmite.tscn
