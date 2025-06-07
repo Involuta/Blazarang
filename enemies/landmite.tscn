@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://bknq8cqwurygt"]
+[gd_scene load_steps=4 format=3 uid="uid://bknq8cqwurygt"]
 
 [ext_resource type="PackedScene" uid="uid://ckifn7eyumnbs" path="res://glb_inherited_scenes/landmite_meshes.tscn" id="1_dpwyp"]
 [ext_resource type="Script" path="res://start_ik.gd" id="2_tgjp2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ch2p"]
+albedo_color = Color(0.745098, 0, 0, 1)
+metallic = 0.5
+roughness = 0.5
 
 [node name="Landmite" type="Node3D"]
 
@@ -10,61 +15,119 @@
 [node name="LeftVeryBackShin" parent="Landmite/Armature/Skeleton3D" index="0"]
 transform = Transform3D(0.313382, 0.909336, 0.273678, -0.910392, 0.369671, -0.185821, -0.270144, -0.190922, 0.943701, 2.14592, 1.85684, -0.344805)
 
+[node name="LeftVeryBackShin" parent="Landmite/Armature/Skeleton3D/LeftVeryBackShin" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
+
 [node name="LeftVeryBackThigh" parent="Landmite/Armature/Skeleton3D" index="1"]
 transform = Transform3D(0.695032, -0.34579, 0.630365, 0.349524, 0.928679, 0.124051, -0.628302, 0.134108, 0.766324, 0.473097, -0.369237, 0.660109)
 
+[node name="LeftVeryBackThigh" parent="Landmite/Armature/Skeleton3D/LeftVeryBackThigh" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
+
 [node name="LeftMiddleBackShin" parent="Landmite/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.28711, 0.952591, 0.100686, -0.955031, 0.29279, -0.0467829, -0.074045, -0.0827268, 0.993818, 1.8375, 1.65615, -0.0495999)
+transform = Transform3D(0.538569, 0.8359, 0.105899, -0.837925, 0.54454, -0.0368327, -0.0884549, -0.0688987, 0.993694, 1.47318, 1.5251, 0.0057348)
+
+[node name="LeftMiddleBackShin" parent="Landmite/Armature/Skeleton3D/LeftMiddleBackShin" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
 
 [node name="LeftMiddleBackThigh" parent="Landmite/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.487598, -0.861744, 0.140166, 0.861618, 0.500877, 0.0820731, -0.140932, 0.0807513, 0.98672, -0.193613, -1.34504, 0.219241)
+transform = Transform3D(0.756113, -0.643716, 0.117994, 0.643675, 0.764056, 0.0435951, -0.118217, 0.0429871, 0.992057, -0.287381, -0.885627, 0.16236)
+
+[node name="LeftMiddleBackThigh" parent="Landmite/Armature/Skeleton3D/LeftMiddleBackThigh" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
 
 [node name="LeftMiddleFrontShin" parent="Landmite/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.436887, 0.881104, -0.181068, -0.880402, 0.460127, 0.114782, 0.184449, 0.109266, 0.976749, 1.53334, 1.62644, -0.051228)
+transform = Transform3D(0.562773, 0.806476, -0.181334, -0.80608, 0.584016, 0.0957098, 0.183089, 0.0923064, 0.978753, 1.3776, 1.52178, -0.0637055)
+
+[node name="LeftMiddleFrontShin" parent="Landmite/Armature/Skeleton3D/LeftMiddleFrontShin" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
 
 [node name="LeftMiddleFrontThigh" parent="Landmite/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.436589, -0.869648, -0.230439, 0.871153, 0.47262, -0.133126, 0.224683, -0.142626, 0.963937, -0.299666, -1.47209, -0.386505)
+transform = Transform3D(0.643309, -0.7292, -0.233281, 0.730482, 0.675841, -0.0981571, 0.229237, -0.107262, 0.967442, -0.373808, -1.11207, -0.354705)
+
+[node name="LeftMiddleFrontThigh" parent="Landmite/Armature/Skeleton3D/LeftMiddleFrontThigh" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
 
 [node name="LeftVeryFrontShin" parent="Landmite/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.457411, 0.823348, -0.335966, -0.818316, 0.537593, 0.203352, 0.348043, 0.181911, 0.91966, 1.7775, 1.71003, 0.169086)
+transform = Transform3D(0.531113, 0.725162, -0.438246, -0.719744, 0.659042, 0.218249, 0.447089, 0.19951, 0.871956, 1.56907, 1.50406, 0.0766848)
+
+[node name="LeftVeryFrontShin" parent="Landmite/Armature/Skeleton3D/LeftVeryFrontShin" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
 
 [node name="LeftVeryFrontThigh" parent="Landmite/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.692657, -0.463816, -0.55236, 0.464737, 0.872653, -0.149987, 0.551585, -0.152812, 0.820002, 0.0173211, -0.478605, -0.568955)
+transform = Transform3D(0.699037, -0.363574, -0.615761, 0.365389, 0.921807, -0.129473, 0.614685, -0.134486, 0.777223, 0.143021, -0.34854, -0.587331)
+
+[node name="LeftVeryFrontThigh" parent="Landmite/Armature/Skeleton3D/LeftVeryFrontThigh" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
 
 [node name="RightVeryBackShin" parent="Landmite/Armature/Skeleton3D" index="8"]
-transform = Transform3D(1, -2.35298e-07, -2.25255e-08, 1.72633e-07, 1, 3.21374e-08, -8.55205e-08, -6.41187e-08, 1, -7.15256e-07, 3.57628e-07, -1.19209e-07)
+transform = Transform3D(0.313382, -0.909336, -0.273678, 0.910393, 0.369671, -0.185821, 0.270144, -0.190922, 0.943701, -2.14592, 1.85684, -0.344805)
+
+[node name="RightVeryBackShin" parent="Landmite/Armature/Skeleton3D/RightVeryBackShin" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
 
 [node name="RightVeryBackThigh" parent="Landmite/Armature/Skeleton3D" index="9"]
-transform = Transform3D(1, -1.85691e-07, -9.51767e-08, 1.56096e-07, 1, -1.70237e-08, -1.51366e-08, -1.51621e-08, 1, 2.38419e-07, 4.17233e-07, -2.38419e-07)
+transform = Transform3D(0.695032, 0.34579, -0.630365, -0.349524, 0.928679, 0.124051, 0.628302, 0.134108, 0.766324, -0.542601, -0.334284, 0.597278)
+
+[node name="RightVeryBackThigh" parent="Landmite/Armature/Skeleton3D/RightVeryBackThigh" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
 
 [node name="RightMiddleBackShin" parent="Landmite/Armature/Skeleton3D" index="10"]
-transform = Transform3D(0.28711, -0.952591, -0.100686, 0.955031, 0.29279, -0.0467829, 0.074045, -0.0827268, 0.993818, -1.8375, 1.65615, -0.0495999)
+transform = Transform3D(0.538569, -0.8359, -0.105899, 0.837925, 0.544541, -0.0368327, 0.0884549, -0.0688988, 0.993694, -1.47318, 1.5251, 0.00573474)
+
+[node name="RightMiddleBackShin" parent="Landmite/Armature/Skeleton3D/RightMiddleBackShin" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
 
 [node name="RightMiddleBackThigh" parent="Landmite/Armature/Skeleton3D" index="11"]
-transform = Transform3D(0.487598, 0.861744, -0.140166, -0.861619, 0.500877, 0.0820731, 0.140932, 0.0807513, 0.986721, 0.193613, -1.34504, 0.219241)
+transform = Transform3D(0.756113, 0.643716, -0.117994, -0.643675, 0.764056, 0.0435951, 0.118217, 0.0429871, 0.992057, 0.287381, -0.885627, 0.16236)
+
+[node name="RightMiddleBackThigh" parent="Landmite/Armature/Skeleton3D/RightMiddleBackThigh" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
 
 [node name="RightMiddleFrontShin" parent="Landmite/Armature/Skeleton3D" index="12"]
-transform = Transform3D(0.436887, -0.881104, 0.181068, 0.880402, 0.460127, 0.114782, -0.184449, 0.109266, 0.976749, -1.53334, 1.62644, -0.051228)
+transform = Transform3D(0.562773, -0.806476, 0.181334, 0.806079, 0.584016, 0.0957098, -0.183089, 0.0923064, 0.978753, -1.3776, 1.52178, -0.0637055)
+
+[node name="RightMiddleFrontShin" parent="Landmite/Armature/Skeleton3D/RightMiddleFrontShin" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
 
 [node name="RightMiddleFrontThigh" parent="Landmite/Armature/Skeleton3D" index="13"]
-transform = Transform3D(0.436589, 0.869648, 0.230439, -0.871153, 0.47262, -0.133126, -0.224683, -0.142626, 0.963937, 0.299666, -1.47209, -0.386505)
+transform = Transform3D(0.643309, 0.729201, 0.233281, -0.730482, 0.675841, -0.0981571, -0.229237, -0.107262, 0.967442, 0.373809, -1.11207, -0.354705)
+
+[node name="RightMiddleFrontThigh" parent="Landmite/Armature/Skeleton3D/RightMiddleFrontThigh" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
 
 [node name="RightVeryFrontShin" parent="Landmite/Armature/Skeleton3D" index="14"]
-transform = Transform3D(1, 9.22237e-08, 1.27339e-08, -9.71791e-08, 1, -1.17761e-07, -4.88657e-08, 7.55612e-08, 1, 9.53674e-07, 0, 0)
+transform = Transform3D(0.531113, -0.725162, 0.438246, 0.719744, 0.659042, 0.218249, -0.447089, 0.19951, 0.871956, -1.56907, 1.50406, 0.0766847)
+
+[node name="RightVeryFrontShin" parent="Landmite/Armature/Skeleton3D/RightVeryFrontShin" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
 
 [node name="RightVeryFrontThigh" parent="Landmite/Armature/Skeleton3D" index="15"]
-transform = Transform3D(1, 4.96217e-08, -4.97583e-08, -1.46839e-07, 1, -6.98368e-08, 1.59427e-08, 4.63532e-09, 1, 1.78814e-07, 2.38419e-07, -1.49012e-07)
+transform = Transform3D(0.699037, 0.363574, 0.615761, -0.365389, 0.921807, -0.129473, -0.614685, -0.134486, 0.777223, -0.143021, -0.34854, -0.587331)
+
+[node name="RightVeryFrontThigh" parent="Landmite/Armature/Skeleton3D/RightVeryFrontThigh" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
 
 [node name="LeftMandible" parent="Landmite/Armature/Skeleton3D" index="16"]
 transform = Transform3D(0.999992, 0.00381308, 0.000458599, -0.00382537, 0.999521, 0.0307202, -0.000341203, -0.0307218, 0.999528, 0.00438085, -0.0235648, -0.0377045)
 
+[node name="LeftMandible" parent="Landmite/Armature/Skeleton3D/LeftMandible" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
+
 [node name="RightMandible" parent="Landmite/Armature/Skeleton3D" index="17"]
 transform = Transform3D(0.999992, -0.00381308, -0.000458599, 0.00382537, 0.999521, 0.0307202, 0.000341203, -0.0307218, 0.999528, -0.00438085, -0.0235648, -0.0377045)
+
+[node name="RightMandible" parent="Landmite/Armature/Skeleton3D/RightMandible" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
 
 [node name="Body" parent="Landmite/Armature/Skeleton3D" index="18"]
 transform = Transform3D(1, 1.58974e-24, 2.82761e-24, 2.57794e-24, 1, 6.93648e-09, -2.62584e-24, 6.93648e-09, 1, 7.94093e-23, 2.38419e-07, 4.17233e-07)
 
+[node name="Body" parent="Landmite/Armature/Skeleton3D/Body" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
+
 [node name="LeftVeryFront" type="SkeletonIK3D" parent="Landmite/Armature/Skeleton3D" index="19"]
+process_priority = 1
 root_bone = &"Bone.008.L"
 tip_bone = &"Bone.009.L.001"
 use_magnet = true
@@ -73,6 +136,7 @@ target_node = NodePath("../../LeftVeryFront")
 script = ExtResource("2_tgjp2")
 
 [node name="LeftMiddleFront" type="SkeletonIK3D" parent="Landmite/Armature/Skeleton3D" index="20"]
+process_priority = 1
 root_bone = &"Bone.006.L"
 tip_bone = &"Bone.007.L.001"
 use_magnet = true
@@ -81,6 +145,7 @@ target_node = NodePath("../../LeftMiddleFront")
 script = ExtResource("2_tgjp2")
 
 [node name="LeftMiddleBack" type="SkeletonIK3D" parent="Landmite/Armature/Skeleton3D" index="21"]
+process_priority = 1
 root_bone = &"Bone.004.L"
 tip_bone = &"Bone.005.L.001"
 use_magnet = true
@@ -89,6 +154,7 @@ target_node = NodePath("../../LeftMiddleBack")
 script = ExtResource("2_tgjp2")
 
 [node name="LeftVeryBack" type="SkeletonIK3D" parent="Landmite/Armature/Skeleton3D" index="22"]
+process_priority = 1
 root_bone = &"Bone.002.L"
 tip_bone = &"Bone.003.L.001"
 use_magnet = true
@@ -97,6 +163,7 @@ target_node = NodePath("../../LeftVeryBack")
 script = ExtResource("2_tgjp2")
 
 [node name="RightVeryFront" type="SkeletonIK3D" parent="Landmite/Armature/Skeleton3D" index="23"]
+process_priority = 1
 root_bone = &"Bone.008.R"
 tip_bone = &"Bone.009.R.001"
 use_magnet = true
@@ -105,6 +172,7 @@ target_node = NodePath("../../RightVeryFront")
 script = ExtResource("2_tgjp2")
 
 [node name="RightMiddleFront" type="SkeletonIK3D" parent="Landmite/Armature/Skeleton3D" index="24"]
+process_priority = 1
 root_bone = &"Bone.006.R"
 tip_bone = &"Bone.007.R.001"
 use_magnet = true
@@ -113,6 +181,7 @@ target_node = NodePath("../../RightMiddleFront")
 script = ExtResource("2_tgjp2")
 
 [node name="RightMiddleBack" type="SkeletonIK3D" parent="Landmite/Armature/Skeleton3D" index="25"]
+process_priority = 1
 root_bone = &"Bone.004.R"
 tip_bone = &"Bone.005.R.001"
 use_magnet = true
@@ -121,6 +190,7 @@ target_node = NodePath("../../RightMiddleBack")
 script = ExtResource("2_tgjp2")
 
 [node name="RightVeryBack" type="SkeletonIK3D" parent="Landmite/Armature/Skeleton3D" index="26"]
+process_priority = 1
 root_bone = &"Bone.002.R"
 tip_bone = &"Bone.003.R.001"
 use_magnet = true
@@ -129,25 +199,25 @@ target_node = NodePath("../../RightVeryBack")
 script = ExtResource("2_tgjp2")
 
 [node name="LeftVeryFront" type="Marker3D" parent="Landmite/Armature" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3, -1.5, 1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, -1.5, 1.7)
 
 [node name="LeftMiddleFront" type="Marker3D" parent="Landmite/Armature" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1.5, 0.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3, -1.5, 0.4)
 
 [node name="LeftMiddleBack" type="Marker3D" parent="Landmite/Armature" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, -1.5, -0.6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3, -1.5, -0.6)
 
 [node name="LeftVeryBack" type="Marker3D" parent="Landmite/Armature" index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3, -1.5, -1.9)
 
 [node name="RightVeryFront" type="Marker3D" parent="Landmite/Armature" index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3, -1.5, 1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, -1.5, 1.7)
 
 [node name="RightMiddleFront" type="Marker3D" parent="Landmite/Armature" index="6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1.5, 0.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3, -1.5, 0.4)
 
 [node name="RightMiddleBack" type="Marker3D" parent="Landmite/Armature" index="7"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, -1.5, -0.6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3, -1.5, -0.6)
 
 [node name="RightVeryBack" type="Marker3D" parent="Landmite/Armature" index="8"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3, -1.5, -1.9)
