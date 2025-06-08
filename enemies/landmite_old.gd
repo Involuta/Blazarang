@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@onready var anim_player := $MiniBallWalkerMeshes/AnimationPlayer
+@onready var anim_player := $LandmiteMeshes/AnimationPlayer
 @onready var anim_tree := $AnimationTree
 @onready var root := $/root/ViewControl
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -10,23 +10,21 @@ var target : Node3D
 var aiming_at_target := true
 enum {
 	WALK,
-	KICK,
+	BITE,
 	LEAP,
 }
 var behav_state := WALK
 @export var max_leap_interval := 5.0 # Max time btwn leaps
 @export var min_leap_interval := 1.0 # Min time btwn leaps
-@export var leap_lateral_speed := 10.0
-@export var leap_vertical_speed := 3.0
 var time_until_next_leap := 5.0
-@export var leap_secs := 3.5
+@export var leap_secs := 1.4
 
 @export var follow_speed := 3.0
 @export var walk_turn_speed := .1
-@export var kick_dist := 2.0
-@export var kick_secs := 1.833
-@export var kick_cooldown_secs := 2.5
-var kick_cooldown_remaining := 2.5
+@export var bite_dist := 2.0
+@export var bite_secs := 1.833
+@export var bite_cooldown_secs := 2.5
+var bite_cooldown_remaining := 2.5
 
 func _ready():
 	target = root.find_child("Icon")
@@ -35,7 +33,7 @@ func _ready():
 	anim_tree.active = true
 	
 	time_until_next_leap = leap_secs
-	kick_cooldown_remaining = kick_cooldown_secs
+	bite_cooldown_remaining = bite_cooldown_secs
 
 func lerp_look_at_target(turn_speed):
 	var dir_to_target := global_position.direction_to(target.global_position)
@@ -48,8 +46,8 @@ func stop_aiming_at_target():
 	aiming_at_target = false
 
 func leap():
-	velocity = leap_lateral_speed * transform.basis.z
-	velocity.y += leap_vertical_speed
+	velocity = 8 * transform.basis.z
+	velocity.y += 6.5
 
 func stop_mvmt():
 	velocity = Vector3.ZERO
@@ -61,26 +59,29 @@ func _physics_process(delta):
 	match(behav_state):
 		WALK:
 			var current_rotation = transform.basis.get_rotation_quaternion()
-			velocity = .08 * (current_rotation.normalized() * anim_tree.get_root_motion_position()) / delta
+			#velocity = .08 * (current_rotation.normalized() * anim_tree.get_root_motion_position()) / delta
+			velocity = 5.0 * transform.basis.z
 			
-			kick_cooldown_remaining -= delta
-			if kick_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < kick_dist:
-				kick_cooldown_remaining = kick_cooldown_secs
-				behav_state = KICK
-				anim_tree.set("parameters/StateMachine/conditions/kick", true)
-				await get_tree().create_timer(kick_secs).timeout
-				anim_tree.set("parameters/StateMachine/conditions/kick", false)
+			bite_cooldown_remaining -= delta
+			if bite_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < bite_dist:
+				bite_cooldown_remaining = bite_cooldown_secs
+				behav_state = BITE
+				#anim_tree.set("parameters/StateMachine/conditions/bite", true)
+				await get_tree().create_timer(bite_secs).timeout
+				#anim_tree.set("parameters/StateMachine/conditions/bite", false)
 				behav_state = WALK
 			
 			time_until_next_leap -= delta
 			if time_until_next_leap <= 0:
 				time_until_next_leap = rng.randf_range(min_leap_interval, max_leap_interval)
 				behav_state = LEAP
-				anim_tree.set("parameters/StateMachine/conditions/leap", true)
+				#anim_tree.set("parameters/StateMachine/conditions/leap", true)
+				leap()
 				await get_tree().create_timer(leap_secs).timeout
-				anim_tree.set("parameters/StateMachine/conditions/leap", false)
+				stop_mvmt()
+				#anim_tree.set("parameters/StateMachine/conditions/leap", false)
 				behav_state = WALK
-		KICK:
+		BITE:
 			velocity = Vector3.ZERO
 		LEAP:
 			pass

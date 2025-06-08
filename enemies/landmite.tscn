@@ -29,7 +29,6 @@ node_connections = [&"output", 0, &"StateMachine"]
 collision_layer = 8
 collision_mask = 90
 script = ExtResource("1_unap6")
-max_leap_interval = 4.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.85, -0.5)
@@ -66,13 +65,13 @@ transform = Transform3D(0.756113, -0.643716, 0.117994, 0.643675, 0.764056, 0.043
 surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
 
 [node name="LeftMiddleFrontShin" parent="LandmiteMeshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.562773, 0.806477, -0.181333, -0.80608, 0.584017, 0.0957097, 0.183089, 0.0923064, 0.978753, 1.3776, 1.52178, -0.0637054)
+transform = Transform3D(0.562773, 0.806476, -0.181334, -0.80608, 0.584016, 0.0957098, 0.183089, 0.0923064, 0.978753, 1.3776, 1.52178, -0.0637054)
 
 [node name="LeftMiddleFrontShin" parent="LandmiteMeshes/Armature/Skeleton3D/LeftMiddleFrontShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
 
 [node name="LeftMiddleFrontThigh" parent="LandmiteMeshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.643309, -0.7292, -0.233281, 0.730482, 0.675841, -0.0981571, 0.229237, -0.107262, 0.967442, -0.373808, -1.11207, -0.354705)
+transform = Transform3D(0.643309, -0.7292, -0.233281, 0.730481, 0.675841, -0.098157, 0.229237, -0.107262, 0.967442, -0.373808, -1.11207, -0.354705)
 
 [node name="LeftMiddleFrontThigh" parent="LandmiteMeshes/Armature/Skeleton3D/LeftMiddleFrontThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
@@ -114,13 +113,13 @@ transform = Transform3D(0.756113, 0.643716, -0.117994, -0.643675, 0.764056, 0.04
 surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
 
 [node name="RightMiddleFrontShin" parent="LandmiteMeshes/Armature/Skeleton3D" index="12"]
-transform = Transform3D(0.562773, -0.806477, 0.181333, 0.80608, 0.584017, 0.0957097, -0.183089, 0.0923064, 0.978753, -1.3776, 1.52178, -0.0637055)
+transform = Transform3D(0.562773, -0.806476, 0.181334, 0.806079, 0.584016, 0.0957098, -0.183089, 0.0923064, 0.978753, -1.3776, 1.52178, -0.0637055)
 
 [node name="RightMiddleFrontShin" parent="LandmiteMeshes/Armature/Skeleton3D/RightMiddleFrontShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
 
 [node name="RightMiddleFrontThigh" parent="LandmiteMeshes/Armature/Skeleton3D" index="13"]
-transform = Transform3D(0.643309, 0.729201, 0.233281, -0.730482, 0.675841, -0.0981571, -0.229237, -0.107262, 0.967442, 0.373809, -1.11207, -0.354705)
+transform = Transform3D(0.643309, 0.7292, 0.233281, -0.730482, 0.675842, -0.098157, -0.229237, -0.107262, 0.967442, 0.373809, -1.11207, -0.354705)
 
 [node name="RightMiddleFrontThigh" parent="LandmiteMeshes/Armature/Skeleton3D/RightMiddleFrontThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
@@ -256,5 +255,10 @@ tree_root = SubResource("AnimationNodeBlendTree_14737")
 anim_player = NodePath("../LandmiteMeshes/AnimationPlayer")
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+target_desired_distance = 3.0
+avoidance_enabled = true
+radius = 2.0
 
 [editable path="LandmiteMeshes"]
