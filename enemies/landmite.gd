@@ -43,9 +43,6 @@ func _ready():
 	bite_cooldown_remaining = bite_cooldown_secs
 
 func _physics_process(delta):
-	if aiming_at_target:
-		lerp_look_at_target(walk_turn_speed)
-	
 	match(behav_state):
 		WALK:
 			walk(delta)
@@ -81,6 +78,8 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	move_and_slide()
 
 func walk(delta):
+	target_position = target.global_position
+	
 	lerp_look_at_walk_dir(walk_turn_speed)
 	global_rotation.x = 0
 	global_rotation.z = 0
@@ -123,7 +122,7 @@ func stop_lateral_mvmt():
 
 func leap():
 	#anim_tree.set("parameters/StateMachine/conditions/leap", true)
-	velocity = leap_lateral_speed * transform.basis.z
+	velocity = leap_lateral_speed * -transform.basis.z
 	velocity.y = leap_vertical_speed
 	await get_tree().create_timer(leap_secs).timeout
 	stop_lateral_mvmt()
