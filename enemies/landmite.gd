@@ -10,12 +10,11 @@ var hitbox : Node3D
 var target : Node3D
 var aiming_at_target := true
 enum {
-	WALK,
+	FOLLOW,
 	BITE,
-	STALK,
 	LEAP,
 }
-var behav_state := WALK
+var behav_state := FOLLOW
 @export var target_distance := 2.0 # Dist from target necessary to bite
 var target_position := Vector3.ZERO # Position mite moves to; set to target.global_position when not strafing and set to a point beside and behind the target when strafing ("fwd" = to the target)
 
@@ -27,7 +26,7 @@ var time_until_next_leap := 5.0
 @export var leap_vertical_speed := 3.0
 
 @export var follow_speed := 3.0
-@export var walk_turn_speed := .1
+@export var follow_turn_speed := .1
 @export var bite_dist := 2.0
 @export var bite_secs := 1.833
 @export var bite_cooldown_secs := 2.5
@@ -44,10 +43,10 @@ func _ready():
 
 func _physics_process(delta):
 	match(behav_state):
-		WALK:
-			walk(delta)
+		FOLLOW: 
+			follow(delta)
 		BITE:
-			velocity = Vector3.ZERO
+			stop_lateral_mvmt()
 		LEAP:
 			pass
 	
@@ -59,14 +58,14 @@ func lerp_look_at_target(turn_speed):
 	var vec3_to_target := global_position.direction_to(target.global_position)
 	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
 
-func lerp_look_at_walk_dir(turn_speed):
+func lerp_look_at_follow_dir(turn_speed):
 	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(velocity.x, velocity.z), turn_speed)
 
 func _on_navigation_agent_3d_target_reached():
 	pass
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
-	if behav_state == WALK:
+	if behav_state == FOLLOW:
 		if is_on_floor():
 			# This line accelerates the agent rather than setting its velocity to its desired velocity directly, preventing it from getting caught on corners
 			velocity = velocity.move_toward(safe_velocity, .25)
@@ -77,10 +76,10 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 			velocity.z = follow_speed * move_dir.z
 	move_and_slide()
 
-func walk(delta):
+func follow(delta):
 	target_position = target.global_position
 	
-	lerp_look_at_walk_dir(walk_turn_speed)
+	lerp_look_at_follow_dir(follow_turn_speed)
 	global_rotation.x = 0
 	global_rotation.z = 0
 	nav_agent.set_target_position(target_position)
@@ -101,14 +100,14 @@ func walk(delta):
 		bite_cooldown_remaining = bite_cooldown_secs
 		behav_state = BITE
 		await bite()
-		behav_state = WALK
+		behav_state = FOLLOW
 	
 	time_until_next_leap -= delta
 	if time_until_next_leap <= 0:
 		time_until_next_leap = rng.randf_range(min_leap_interval, max_leap_interval)
 		behav_state = LEAP
 		await leap()
-		behav_state = WALK
+		behav_state = FOLLOW
 
 func bite():
 	stop_lateral_mvmt()

@@ -34,3 +34,4 @@ res://levels/balls_level/balls_level_background.tscn
 res://enemies/landmite.gd
 res://enemies/mini_ball_walker.gd
 res://enemies/gauntlet_melee_tier1.tscn
+res://globals.gd
