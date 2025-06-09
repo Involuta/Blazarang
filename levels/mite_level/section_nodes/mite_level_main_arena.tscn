@@ -1,10 +1,11 @@
-[gd_scene load_steps=30 format=3 uid="uid://bnylrq5nmpcv"]
+[gd_scene load_steps=31 format=3 uid="uid://bnylrq5nmpcv"]
 
 [ext_resource type="Script" path="res://levels/Level.gd" id="1_ev1g5"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_tod8u"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="3_wnptv"]
 [ext_resource type="Texture2D" uid="uid://cyg2snr1w5xw5" path="res://addons/func_godot/textures/default_texture.png" id="4_2kekb"]
 [ext_resource type="PackedScene" uid="uid://bknq8cqwurygt" path="res://enemies/landmite.tscn" id="5_a3mh6"]
+[ext_resource type="PackedScene" uid="uid://s18sdq53k2im" path="res://enemies/paramite.tscn" id="6_3d33o"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_mcv4c"]
 vertices = PackedVector3Array(-0.0833321, 1, -40.8333, -10.5833, 1, -40.8333, -20.3333, 1, -35.8333, -35.5833, 1, -20.8333, -40.8333, 1, -10.5833, -40.8333, 1, -0.0833321, -0.0833321, 1, 40.9167, 10.4167, 1, 40.9167, 20.4167, 1, 35.9167, 40.9167, 1, -0.0833321, 40.9167, 1, -10.5833, 35.9167, 1, -20.5833, -20.5833, 1, 35.6667, -10.5833, 1, 40.9167, -0.0833321, 1, 40.9167, 20.4167, 1, 35.9167, -40.8333, 1, -0.0833321, -40.8333, 1, 10.6667, -35.8333, 1, 20.6667, -35.8333, 1, 20.6667, -30.8333, 1, 30.6667, -20.5833, 1, 35.6667, -40.8333, 1, -0.0833321, 35.9167, 1, -20.5833, 30.9167, 1, -30.5833, 20.6667, 1, -35.5833, 40.9167, 1, -0.0833321, -20.3333, 1, -35.8333, -30.3333, 1, -31.0833, -35.5833, 1, -20.8333, 35.6667, 1, 20.6667, 40.9167, 1, 10.4167, 40.9167, 1, -0.0833321, 20.6667, 1, -35.5833, 10.6667, 1, -40.8333, -0.0833321, 1, -40.8333, 40.9167, 1, -0.0833321, 20.6667, 1, -35.5833, -0.0833321, 1, -40.8333, -40.8333, 1, -0.0833321, -20.5833, 1, 35.6667, 20.4167, 1, 35.9167, 20.4167, 1, 35.9167, 30.4167, 1, 30.9167, 35.6667, 1, 20.6667, 40.9167, 1, -0.0833321)
@@ -226,3 +227,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.41334, 2.02984, 8.23371)
 
 [node name="Landmite4" parent="." instance=ExtResource("5_a3mh6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.83437, 2.02984, 8.23371)
+
+[node name="Paramite" parent="." instance=ExtResource("6_3d33o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.44583, 2.08963, 0)

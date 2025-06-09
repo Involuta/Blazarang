@@ -1,9 +1,9 @@
 NavigationAgent3D
-MeshInstance3D
+AnimationTree
 CollisionShape3D
 CharacterBody3D
+MeshInstance3D
 Node3D
-AnimationTree
 Marker3D
 SkeletonIK3D
 GPUParticles3D
