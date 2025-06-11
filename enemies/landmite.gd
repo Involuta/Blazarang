@@ -58,7 +58,7 @@ func lerp_look_at_target(turn_speed):
 	var vec3_to_target := global_position.direction_to(target.global_position)
 	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
 
-func lerp_look_at_follow_dir(turn_speed):
+func lerp_look_at_move_dir(turn_speed):
 	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(velocity.x, velocity.z), turn_speed)
 
 func _on_navigation_agent_3d_target_reached():
@@ -79,7 +79,7 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 func follow(delta):
 	target_position = target.global_position
 	
-	lerp_look_at_follow_dir(follow_turn_speed)
+	lerp_look_at_move_dir(follow_turn_speed)
 	global_rotation.x = 0
 	global_rotation.z = 0
 	nav_agent.set_target_position(target_position)
