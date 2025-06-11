@@ -21,14 +21,14 @@ var target_position := Vector3.ZERO # Position mite moves to; set to target.glob
 @export var max_leap_interval := 5.0 # Max time btwn leaps
 @export var min_leap_interval := 1.0 # Min time btwn leaps
 var time_until_next_leap := 5.0
-@export var leap_secs := 1.4
-@export var leap_lateral_speed := 10.0
-@export var leap_vertical_speed := 3.0
+@export var leap_secs := 1.0
+@export var leap_lateral_speed := 9.0
+@export var leap_vertical_speed := 4.5
 
 @export var follow_speed := 3.0
 @export var follow_turn_speed := .1
-@export var bite_dist := 2.0
-@export var bite_secs := 1.833
+@export var bite_dist := 1.0
+@export var bite_secs := .5
 @export var bite_cooldown_secs := 2.5
 var bite_cooldown_remaining := 2.5
 

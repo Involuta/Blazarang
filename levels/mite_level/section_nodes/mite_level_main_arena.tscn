@@ -218,15 +218,19 @@ mesh = SubResource("BoxMesh_whus2")
 
 [node name="Landmite" parent="." instance=ExtResource("5_a3mh6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.02984, 8.23371)
+leap_secs = 1.0
 
 [node name="Landmite2" parent="." instance=ExtResource("5_a3mh6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.11211, 2.02984, 8.23371)
+leap_secs = 1.0
 
 [node name="Landmite3" parent="." instance=ExtResource("5_a3mh6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.41334, 2.02984, 8.23371)
+leap_secs = 1.0
 
 [node name="Landmite4" parent="." instance=ExtResource("5_a3mh6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.83437, 2.02984, 8.23371)
+leap_secs = 1.0
 
 [node name="Paramite" parent="." instance=ExtResource("6_3d33o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.44583, 2.08963, 0)
