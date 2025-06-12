@@ -229,7 +229,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.41334, 2.02984, 8.23371)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.83437, 2.02984, 8.23371)
 
 [node name="Paramite" parent="." instance=ExtResource("6_3d33o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.446, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.446, 1.8, 2.08165e-12)
 
 [node name="Paramite2" parent="." instance=ExtResource("6_3d33o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.418, 2.08165e-12, -0.093)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.418, 1.8, -0.093)

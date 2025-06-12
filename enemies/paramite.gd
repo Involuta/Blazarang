@@ -1,6 +1,9 @@
 extends CharacterBody3D
 
 @onready var nav_agent := $NavigationAgent3D
+@onready var body_meshes := $ParamiteMeshes
+@onready var physical_collider := $CollisionShape3D
+@onready var hurtbox := $EnemyHurtbox
 @onready var anim_player := $ParamiteMeshes/AnimationPlayer
 @onready var anim_tree := $AnimationTree
 @onready var root := $/root/ViewControl
@@ -14,7 +17,7 @@ enum {
 }
 var behav_state := LAUNCH
 
-@export var launch_vert_speed := 10.0 # Initial vertical launch speed (lateral speed is set by paramite spawner)
+@export var launch_vert_speed := 12.0 # Initial vertical launch speed (lateral speed is set by paramite spawner)
 @export var follow_duration := 10.0 # Time mite spends following before falling
 @export var fall_height := 6.0 # Height above the ground mite descends to before falling
 
@@ -29,12 +32,28 @@ func _ready():
 	hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	anim_tree.active = true
 	
-	var glide_descend_tween = get_tree().create_tween()
-	glide_descend_tween.set_parallel()
-	glide_descend_tween.tween_property($ParamiteMeshes, "position", Vector3(0,fall_height,-.5), follow_duration)
-	glide_descend_tween.tween_property($CollisionShape3D, "position", Vector3(0,fall_height,0), follow_duration)
-	glide_descend_tween.tween_property($EnemyHurtbox, "position", Vector3(0,fall_height,0), follow_duration)
-	#velocity.y = launch_vert_speed
+	set_mesh_and_colliders_y_pos(0)
+	
+	velocity.y = launch_vert_speed
+
+func set_mesh_and_colliders_y_pos(new_y_pos: float):
+	body_meshes.position.y = new_y_pos
+	physical_collider.position.y = new_y_pos
+	hurtbox.position.y = new_y_pos
+
+func get_height_from_ground():
+	var space_state := get_world_3d().direct_space_state
+	var sight_dir := Vector3.DOWN
+	var query = PhysicsRayQueryParameters3D.create(global_position, global_position + nav_agent.neighbor_distance * sight_dir)
+	query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
+	query.collide_with_areas = true
+	var result = space_state.intersect_ray(query)
+	if result:
+		# result.position.y is the global position of the point the ray hit
+		return global_position.y - result.position.y
+	else:
+		# 10 is global y pos of the arena node. If we don't get a result from our ray, we just assume that the mite's height from the ground is the difference btwn its global y pos and the ground node's y pos, which could be wrong due to various slope geometry
+		return global_position.y - 10
 
 func _physics_process(delta):
 	match(behav_state):
@@ -70,11 +89,25 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	move_and_slide()
 
 func launch_frame(delta):
-	if velocity.y <= .1:
-		behav_state = FOLLOW
+	if velocity.y <= 0:
+		switch_to_follow()
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+
+func switch_to_follow():
+	# Placeholder: replace y pos with true y dist from ground obtained from raycast
+	# To do: set parent object global position to the ground height obtained from raycast
+	var height_from_ground = get_height_from_ground()
+	global_position.y -= height_from_ground
+	set_mesh_and_colliders_y_pos(height_from_ground)
+	behav_state = FOLLOW
+	
+	var glide_descend_tween = get_tree().create_tween()
+	glide_descend_tween.set_parallel()
+	glide_descend_tween.tween_property(body_meshes, "position", Vector3(0,fall_height,-.5), follow_duration)
+	glide_descend_tween.tween_property(physical_collider, "position", Vector3(0,fall_height,0), follow_duration)
+	glide_descend_tween.tween_property(hurtbox, "position", Vector3(0,fall_height,0), follow_duration)
 
 func follow(_delta):
 	target_position = target.global_position
