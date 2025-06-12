@@ -15,8 +15,9 @@ enum {
 var behav_state := LAUNCH
 
 @export var launch_vert_speed := 10.0 # Initial vertical launch speed (lateral speed is set by paramite spawner)
+@export var follow_duration := 10.0 # Time mite spends following before falling
+@export var fall_height := 6.0 # Height above the ground mite descends to before falling
 
-@export var fall_height := 6.0 # Height from ground necessary to fall
 var target_position := Vector3.ZERO # Position mite moves to; set to target.global_position when not strafing and set to a point beside and behind the target when strafing ("fwd" = to the target)
 
 @export var follow_speed := 3.0
@@ -28,6 +29,11 @@ func _ready():
 	hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	anim_tree.active = true
 	
+	var glide_descend_tween = get_tree().create_tween()
+	glide_descend_tween.set_parallel()
+	glide_descend_tween.tween_property($ParamiteMeshes, "position", Vector3(0,fall_height,-.5), follow_duration)
+	glide_descend_tween.tween_property($CollisionShape3D, "position", Vector3(0,fall_height,0), follow_duration)
+	glide_descend_tween.tween_property($EnemyHurtbox, "position", Vector3(0,fall_height,0), follow_duration)
 	#velocity.y = launch_vert_speed
 
 func _physics_process(delta):

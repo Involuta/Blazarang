@@ -15,7 +15,6 @@ roughness = 0.5
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_v8kte"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_mxa20"]
-graph_offset = Vector2(-28.8, 59.52)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_v8kte")
 nodes/StateMachine/position = Vector2(100, 150)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -29,11 +28,11 @@ collision_mask = 90
 script = ExtResource("1_sdbgq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 12, 2.08165e-12)
 shape = SubResource("CapsuleShape3D_tej0w")
 
 [node name="ParamiteMeshes" parent="." instance=ExtResource("1_d7ubw")]
-transform = Transform3D(-0.5, 1.74393e-16, -4.37114e-08, 1.74393e-16, 0.5, -1.74393e-16, 4.37114e-08, -1.74393e-16, -0.5, 2.08165e-12, 10, -0.5)
+transform = Transform3D(-0.5, 1.74393e-16, -4.37114e-08, 1.74393e-16, 0.5, -1.74393e-16, 4.37114e-08, -1.74393e-16, -0.5, 2.08165e-12, 12, -0.5)
 
 [node name="Skeleton3D" parent="ParamiteMeshes/Armature" index="0"]
 bones/0/position = Vector3(-2.08705e-16, 0.0550838, 0.0297988)
@@ -213,7 +212,7 @@ avoidance_layers = 2
 avoidance_mask = 2
 
 [node name="EnemyHurtbox" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 12, 2.08165e-12)
 collision_layer = 8
 collision_mask = 265
 script = ExtResource("2_50ns4")
