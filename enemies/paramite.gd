@@ -108,6 +108,8 @@ func switch_to_follow():
 	glide_descend_tween.tween_property(body_meshes, "position", Vector3(0,fall_height,-.5), follow_duration)
 	glide_descend_tween.tween_property(physical_collider, "position", Vector3(0,fall_height,0), follow_duration)
 	glide_descend_tween.tween_property(hurtbox, "position", Vector3(0,fall_height,0), follow_duration)
+	await glide_descend_tween.finished
+	switch_to_fall()
 
 func follow(_delta):
 	target_position = target.global_position
@@ -121,6 +123,11 @@ func follow(_delta):
 	
 	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
 	nav_agent.velocity = new_velocity
+
+func switch_to_fall():
+	global_position.y += body_meshes.position.y
+	set_mesh_and_colliders_y_pos(0)
+	behav_state = FALL
 
 func fall_frame(delta):
 	if not is_on_floor():
