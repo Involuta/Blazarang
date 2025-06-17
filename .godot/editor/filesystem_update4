@@ -27,3 +27,7 @@ res://cotu/cotu_cb_main.tscn
 res://cotu/CotuControl.gd
 res://hurtbox.gd
 res://enemies/paramite.tscn
+res://enemies/spitweb.gd
+res://rang/roserang.tscn
+res://enemies/paramite.gd
+res://enemies/landmite.tscn

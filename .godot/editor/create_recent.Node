@@ -1,3 +1,4 @@
+AnimationPlayer
 MeshInstance3D
 CollisionShape3D
 Area3D
@@ -9,7 +10,6 @@ Marker3D
 SkeletonIK3D
 GPUParticles3D
 WorldEnvironment
-AnimationPlayer
 Hitbox
 NavigationRegion3D
 StaticBody3D

@@ -129,7 +129,6 @@ func shoot_spitweb():
 	level.add_child.call_deferred(sw_inst)
 	await sw_inst.tree_entered
 	sw_inst.global_position = hitbox.global_position
-	sw_inst.global_rotation = hitbox.global_rotation
 	# Projectile must travel lateral dist to target in t time
 	# t is time it takes for projectile to fall to the ground from its current height
 	# d0 + s0t + 1/2at^2 = d
