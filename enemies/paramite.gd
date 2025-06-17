@@ -138,11 +138,15 @@ func shoot_spitweb():
 	await sw_inst.tree_entered
 	sw_inst.global_position = hitbox.global_position
 	sw_inst.global_rotation = hitbox.global_rotation
-	var sw_speed = global_position.distance_to(target_position) / (2 * gravity * body_meshes.position.y)
 	# Projectile must travel lateral dist to target in t time
 	# t is time it takes for projectile to fall to the ground from its current height
-	# t = 2gh
-	sw_inst.velocity = 150 * sw_speed * -transform.basis.z
+	# d0 + s0t + 1/2at^2 = d
+	# 1/2gt^2 = d
+	# t^2 = 2 * body_meshes.height / gravity
+	var t = sqrt(2 * body_meshes.position.y / gravity)
+	var sw_speed = global_position.distance_to(target_position) / t
+	print(sw_speed)
+	sw_inst.velocity = sw_speed * -transform.basis.z
 
 func switch_to_fall():
 	global_position.y += body_meshes.position.y

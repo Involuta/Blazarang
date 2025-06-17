@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bm6viv0yfti56"]
+[gd_scene load_steps=6 format=3 uid="uid://bm6viv0yfti56"]
 
 [ext_resource type="Script" path="res://enemies/spitweb.gd" id="1_t5eaf"]
+[ext_resource type="Script" path="res://hitbox.gd" id="2_pgyr7"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gc6no"]
 radius = 0.25
@@ -19,6 +20,7 @@ script = ExtResource("1_t5eaf")
 [node name="EnemyHitbox" type="Area3D" parent="."]
 collision_layer = 8
 collision_mask = 18
+script = ExtResource("2_pgyr7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHitbox"]
 shape = SubResource("SphereShape3D_gc6no")
