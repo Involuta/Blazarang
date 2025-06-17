@@ -78,18 +78,7 @@ func _on_navigation_agent_3d_target_reached():
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	if behav_state == FOLLOW:
-		"""
-		if is_on_floor():
-			# This line accelerates the agent rather than setting its velocity to its desired velocity directly, preventing it from getting caught on corners
-			velocity = velocity.move_toward(safe_velocity, .25)
-		else:
-			# If the enemy is in the air, don't use navigation agent at all
-			var move_dir = global_position.direction_to(target_position)
-			velocity.x = follow_speed * move_dir.x
-			velocity.z = follow_speed * move_dir.z
-		"""
 		velocity = velocity.move_toward(safe_velocity, .25)
-		#velocity.y = -.5
 	move_and_slide()
 
 func launch_frame(delta):
@@ -121,7 +110,10 @@ func follow(_delta):
 	lerp_look_at_move_dir(follow_turn_speed)
 	global_rotation.x = 0
 	global_rotation.z = 0
-	nav_agent.set_target_position(target_position)
+	if global_position.distance_to(target_position) <= nav_agent.target_desired_distance:
+		nav_agent.set_target_position(global_position)
+	else:
+		nav_agent.set_target_position(target_position)
 	var next_position = nav_agent.get_next_path_position()
 	var new_velocity = (next_position - global_position).normalized() * follow_speed
 	
@@ -145,8 +137,7 @@ func shoot_spitweb():
 	# t^2 = 2 * body_meshes.height / gravity
 	var t = sqrt(2 * body_meshes.position.y / gravity)
 	var sw_speed = global_position.distance_to(target_position) / t
-	print(sw_speed)
-	sw_inst.velocity = sw_speed * -transform.basis.z
+	sw_inst.velocity = sw_speed * global_position.direction_to(target_position)
 
 func switch_to_fall():
 	global_position.y += body_meshes.position.y

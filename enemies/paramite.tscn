@@ -206,9 +206,9 @@ tree_root = SubResource("AnimationNodeBlendTree_mxa20")
 anim_player = NodePath("../ParamiteMeshes/AnimationPlayer")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-target_desired_distance = 3.0
+target_desired_distance = 15.0
 avoidance_enabled = true
-radius = 2.0
+radius = 3.0
 avoidance_layers = 2
 avoidance_mask = 2
 
