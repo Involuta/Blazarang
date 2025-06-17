@@ -40,7 +40,11 @@ var combo_count := 0
 
 enum BUFFS {
 	DAMAGE,
-	DEFENSE
+}
+
+enum DEBUFFS {
+	NONE,
+	SLOW,
 }
 
 const BUFF_SPRITES = {

@@ -5,8 +5,8 @@ var using_controller = false # only affects camera motion
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var default_gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var gravity = default_gravity
-const WALK_SPEED := 10
-const STEP_DODGE_SPEED := 15
+const WALK_SPEED := 10.0
+const STEP_DODGE_SPEED := 15.0
 const STEP_DODGE_DURATION_SECS := .5
 const STEP_DODGE_COOLDOWN_SECS := .1
 const JUMP_SPEED := 14.0
@@ -18,7 +18,7 @@ var anim_tree_param_path_base := "parameters/StateMachine/conditions/"
 
 var walk_input := Vector2.ZERO
 var moving_right := true # Did the player last try to walk right?
-var grounded_speed := 0
+var grounded_speed := 0.0
 @export var can_walk := true # Exported so it can be set via anim
 @export var can_rotate := true # Exported so it can be set via anim
 var can_dodge := true
@@ -36,6 +36,11 @@ var lock_on_target = null
 var look_angle := 0.0
 var look_angle2 := 0.0
 var max_cam_dist := 6.0 # dist btwn player and camera when camera's not colliding with geometry; player can modify this in-game
+
+@export var max_slow_duration := 3.5
+var active_debuffs = {
+	Globals.DEBUFFS.SLOW: 0.0
+}
 
 var rang_catch_input_buffer_secs := .2 # max possible time btwn player inputting throw and rang hitting Cotu that still causes an instant rethrow or catch. Also max possible time btwn player inputting special and the rang hitting Cotu that still causes a special
 
@@ -121,6 +126,9 @@ func on_stabilize():
 
 func emit_stabilize():
 	Globals.stabilize.emit()
+
+func receive_debuff_slow():
+	active_debuffs[Globals.DEBUFFS.SLOW] = max_slow_duration
 
 func change_max_cam_dist_over_secs(new_max_cam_dist: float, duration: float):
 	# This needs to be a tween instead of keyframes bc modifying max_cam_dist via keyframes will cause the property to be reset to 0 whenever there aren't any keyframes for it. You'd then need to put at least 1 keyframe for this property for every single anim
@@ -214,6 +222,10 @@ func _physics_process(delta):
 		grounded_speed = STEP_DODGE_SPEED
 	else:
 		grounded_speed = WALK_SPEED
+	
+	if active_debuffs[Globals.DEBUFFS.SLOW] > 0:
+		grounded_speed *= .5
+		active_debuffs[Globals.DEBUFFS.SLOW] -= delta
 	
 	# Cotu movement
 	walk_input = Input.get_vector("WalkLeft", "WalkRight", "WalkForward", "WalkBackward")

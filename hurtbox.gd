@@ -34,11 +34,21 @@ func on_hit(hitbox):
 			pass
 		if "is_dodging" in parent:
 			if not parent.is_dodging:
+				receive_debuff(hitbox.debuff)
 				receive_hit(hitbox.damage, hitbox.get_parent())
 			else:
 				return
 		else:
+			receive_debuff(hitbox.debuff)
 			receive_hit(hitbox.damage, hitbox.get_parent())
+
+func receive_debuff(debuff):
+	if debuff != Globals.DEBUFFS.NONE and "active_debuffs" in parent and parent.active_debuffs[debuff] <= 0:
+		match(debuff):
+			Globals.DEBUFFS.SLOW:
+				parent.receive_debuff_slow()
+			_:
+				pass
 
 func receive_hit(damage: float, _hitter):
 	health -= damage

@@ -21,6 +21,7 @@ script = ExtResource("1_t5eaf")
 collision_layer = 8
 collision_mask = 18
 script = ExtResource("2_pgyr7")
+debuff = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHitbox"]
 shape = SubResource("SphereShape3D_gc6no")
