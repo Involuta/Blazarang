@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+var spitweb := preload("res://enemies/spitweb.tscn")
 @onready var nav_agent := $NavigationAgent3D
 @onready var body_meshes := $ParamiteMeshes
 @onready var physical_collider := $CollisionShape3D
@@ -7,7 +8,9 @@ extends CharacterBody3D
 @onready var anim_player := $ParamiteMeshes/AnimationPlayer
 @onready var anim_tree := $AnimationTree
 @onready var root := $/root/ViewControl
+var rng := RandomNumberGenerator.new()
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var level : Node3D
 var hitbox : Node3D
 var target : Node3D
 enum {
@@ -27,6 +30,7 @@ var target_position := Vector3.ZERO # Position mite moves to; set to target.glob
 @export var follow_turn_speed := .1
 
 func _ready():
+	level = root.find_child("Level")
 	target = root.find_child("Icon")
 	hitbox = find_child("MeleeHitboxPivot")
 	hitbox.process_mode = Node.PROCESS_MODE_DISABLED
@@ -123,6 +127,22 @@ func follow(_delta):
 	
 	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
 	nav_agent.velocity = new_velocity
+	
+	# Spit web rarely
+	if rng.randf() < .01:
+		shoot_spitweb()
+
+func shoot_spitweb():
+	var sw_inst = spitweb.instantiate()
+	level.add_child.call_deferred(sw_inst)
+	await sw_inst.tree_entered
+	sw_inst.global_position = hitbox.global_position
+	sw_inst.global_rotation = hitbox.global_rotation
+	var sw_speed = global_position.distance_to(target_position) / (2 * gravity * body_meshes.position.y)
+	# Projectile must travel lateral dist to target in t time
+	# t is time it takes for projectile to fall to the ground from its current height
+	# t = 2gh
+	sw_inst.velocity = 150 * sw_speed * -transform.basis.z
 
 func switch_to_fall():
 	global_position.y += body_meshes.position.y

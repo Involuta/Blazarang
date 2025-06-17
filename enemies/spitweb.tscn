@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bm6viv0yfti56"]
+
+[ext_resource type="Script" path="res://enemies/spitweb.gd" id="1_t5eaf"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gc6no"]
+radius = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pag03"]
+shading_mode = 0
+
+[sub_resource type="SphereMesh" id="SphereMesh_orfq0"]
+material = SubResource("StandardMaterial3D_pag03")
+radius = 0.25
+height = 0.5
+
+[node name="Spitweb" type="Node3D"]
+script = ExtResource("1_t5eaf")
+
+[node name="EnemyHitbox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 18
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHitbox"]
+shape = SubResource("SphereShape3D_gc6no")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, -3.48787e-16, 5.2318e-16, 3.48787e-16, 1, -5.2318e-16, -3.48787e-16, 3.48787e-16, 1.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_orfq0")
+
+[connection signal="body_entered" from="EnemyHitbox" to="." method="_on_body_entered"]

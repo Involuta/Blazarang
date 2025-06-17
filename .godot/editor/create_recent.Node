@@ -1,8 +1,9 @@
+MeshInstance3D
+CollisionShape3D
+Area3D
 NavigationAgent3D
 AnimationTree
-CollisionShape3D
 CharacterBody3D
-MeshInstance3D
 Node3D
 Marker3D
 SkeletonIK3D
@@ -10,7 +11,6 @@ GPUParticles3D
 WorldEnvironment
 AnimationPlayer
 Hitbox
-Area3D
 NavigationRegion3D
 StaticBody3D
 AudioStreamPlayer

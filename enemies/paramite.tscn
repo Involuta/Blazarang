@@ -26,7 +26,6 @@ radius = 1.0
 collision_layer = 8
 collision_mask = 90
 script = ExtResource("1_sdbgq")
-follow_duration = 5.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -199,11 +198,12 @@ transform = Transform3D(-0.999252, -0.00208844, 0.0386129, -0.0203977, -0.819854
 [node name="Body" parent="ParamiteMeshes/Armature/Skeleton3D/Body" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")
 
+[node name="MeleeHitboxPivot" type="Node3D" parent="ParamiteMeshes"]
+transform = Transform3D(-2, 6.97572e-16, 1.74846e-07, 6.97572e-16, 2, -6.97572e-16, -1.74846e-07, -6.97572e-16, -2, -1.74846e-08, 0.2, 0.2)
+
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_mxa20")
 anim_player = NodePath("../ParamiteMeshes/AnimationPlayer")
-
-[node name="MeleeHitboxPivot" type="Node3D" parent="."]
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 target_desired_distance = 3.0
