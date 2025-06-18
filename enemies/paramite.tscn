@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://s18sdq53k2im"]
+[gd_scene load_steps=15 format=3 uid="uid://s18sdq53k2im"]
 
 [ext_resource type="PackedScene" uid="uid://dcy7ebw6m5b1v" path="res://glb_inherited_scenes/paramite_meshes.tscn" id="1_d7ubw"]
 [ext_resource type="Script" path="res://enemies/paramite.gd" id="1_sdbgq"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_50ns4"]
+[ext_resource type="Script" path="res://hitbox.gd" id="4_mvpmk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tej0w"]
 radius = 1.0
@@ -41,6 +42,9 @@ node_connections = [&"output", 0, &"StateMachine"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7nguh"]
 radius = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_h5y8l"]
+radius = 0.3
 
 [node name="Paramite" type="CharacterBody3D"]
 collision_layer = 8
@@ -219,6 +223,15 @@ shape = SubResource("CapsuleShape3D_7nguh")
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.6, -1)
+
+[node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
+collision_layer = 8
+collision_mask = 18
+script = ExtResource("4_mvpmk")
+damage = 15
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeleeHitboxPivot/EnemyHitbox"]
+shape = SubResource("SphereShape3D_h5y8l")
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

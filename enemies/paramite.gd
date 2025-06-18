@@ -33,7 +33,7 @@ func _ready():
 	level = root.find_child("Level")
 	target = root.find_child("Icon")
 	hitbox = find_child("MeleeHitboxPivot")
-	hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+	#hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	anim_tree.active = true
 	
 	set_mesh_and_colliders_y_pos(0)
