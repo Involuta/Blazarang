@@ -35,7 +35,7 @@ var bite_cooldown_remaining := 2.5
 func _ready():
 	target = root.find_child("Icon")
 	hitbox = find_child("MeleeHitboxPivot")
-	#hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+	hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	anim_tree.active = true
 	
 	time_until_next_leap = leap_secs

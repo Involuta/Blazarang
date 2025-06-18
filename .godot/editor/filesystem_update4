@@ -32,3 +32,4 @@ res://rang/roserang.tscn
 res://enemies/paramite.gd
 res://enemies/landmite.tscn
 res://enemies/landmite.gd
+res://hitbox.gd

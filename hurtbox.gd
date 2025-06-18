@@ -7,7 +7,7 @@ var rng := RandomNumberGenerator.new()
 var health := 100.0
 var max_health := 100.0 # This is only set by the Globals script or the CotuHurtbox script.
 var current_opponent_hitboxes
-@export var opponent_hitboxes := ["default"]
+@export var opponent_hitboxes := ["default"] # opponent is a misnomer; this is a list any hitboxes that could affect this entity, opponent, ally, or neutral
 @onready var parent := get_parent()
 
 @onready var root := $/root/ViewControl
@@ -35,11 +35,13 @@ func on_hit(hitbox):
 		if "is_dodging" in parent:
 			if not parent.is_dodging:
 				receive_debuff(hitbox.debuff)
+				receive_heal(hitbox.heal_amt)
 				receive_hit(hitbox.damage, hitbox.get_parent())
 			else:
 				return
 		else:
 			receive_debuff(hitbox.debuff)
+			receive_heal(hitbox.heal_amt)
 			receive_hit(hitbox.damage, hitbox.get_parent())
 
 func receive_debuff(debuff):
@@ -49,6 +51,11 @@ func receive_debuff(debuff):
 				parent.receive_debuff_slow()
 			_:
 				pass
+
+func receive_heal(heal_amt: int):
+	health += heal_amt
+	if health > max_health:
+		health = max_health
 
 func receive_hit(damage: float, _hitter):
 	health -= damage

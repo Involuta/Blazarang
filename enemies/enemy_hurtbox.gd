@@ -20,10 +20,12 @@ func _ready():
 	super()
 
 func receive_hit(damage: float, hitter):
-	emit_hit_particles(hitter)
+	# Check if this is a healing hit
+	if damage > 0:
+		emit_hit_particles(hitter)
+		award_score(hitter)
 	if hitter.name == "Roserang":
 		emit_hitter_effect(hitter)
-	award_score(hitter)
 	super(damage, hitter)
 
 func emit_hit_particles(hitter):

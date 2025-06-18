@@ -31,7 +31,7 @@ node_connections = [&"output", 0, &"StateMachine"]
 [sub_resource type="SphereShape3D" id="SphereShape3D_cfdsp"]
 
 [node name="Landmite" type="CharacterBody3D"]
-collision_layer = 64
+collision_layer = 8
 collision_mask = 90
 script = ExtResource("1_unap6")
 
@@ -137,7 +137,7 @@ cast_shadow = 0
 surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
 
 [node name="RightMiddleFrontShin" parent="LandmiteMeshes/Armature/Skeleton3D" index="12"]
-transform = Transform3D(0.562773, -0.806476, 0.181334, 0.806079, 0.584016, 0.0957098, -0.183089, 0.0923064, 0.978753, -1.3776, 1.52178, -0.0637055)
+transform = Transform3D(0.562773, -0.806476, 0.181333, 0.806079, 0.584016, 0.0957098, -0.183089, 0.0923063, 0.978753, -1.3776, 1.52178, -0.0637055)
 
 [node name="RightMiddleFrontShin" parent="LandmiteMeshes/Armature/Skeleton3D/RightMiddleFrontShin" index="0"]
 visible = false
@@ -153,7 +153,7 @@ cast_shadow = 0
 surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
 
 [node name="RightVeryFrontShin" parent="LandmiteMeshes/Armature/Skeleton3D" index="14"]
-transform = Transform3D(0.531113, -0.725161, 0.438246, 0.719744, 0.659042, 0.218249, -0.447088, 0.19951, 0.871956, -1.56907, 1.50406, 0.076685)
+transform = Transform3D(0.531113, -0.725161, 0.438246, 0.719743, 0.659042, 0.218249, -0.447089, 0.19951, 0.871956, -1.56907, 1.50406, 0.076685)
 
 [node name="RightVeryFrontShin" parent="LandmiteMeshes/Armature/Skeleton3D/RightVeryFrontShin" index="0"]
 cast_shadow = 0
@@ -310,7 +310,7 @@ collision_layer = 8
 collision_mask = 265
 script = ExtResource("4_impec")
 enemy_name = "Landmite"
-opponent_hitboxes = ["PlayerHitbox"]
+opponent_hitboxes = ["PlayerHitbox", "HealingHitbox"]
 
 [node name="HurtboxCollider" type="CollisionShape3D" parent="EnemyHurtbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
