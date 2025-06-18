@@ -1,3 +1,4 @@
+Node3D
 Area3D
 CollisionShape3D
 AnimationPlayer
@@ -5,7 +6,6 @@ MeshInstance3D
 NavigationAgent3D
 AnimationTree
 CharacterBody3D
-Node3D
 Marker3D
 SkeletonIK3D
 GPUParticles3D

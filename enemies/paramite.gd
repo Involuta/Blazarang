@@ -44,6 +44,7 @@ func set_mesh_and_colliders_y_pos(new_y_pos: float):
 	body_meshes.position.y = new_y_pos
 	physical_collider.position.y = new_y_pos
 	hurtbox.position.y = new_y_pos
+	hitbox.position.y = new_y_pos
 
 func get_height_from_ground():
 	var space_state := get_world_3d().direct_space_state
@@ -73,6 +74,10 @@ func _physics_process(delta):
 func lerp_look_at_move_dir(turn_speed):
 	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(velocity.x, velocity.z), turn_speed)
 
+func lerp_look_at_target(turn_speed):
+	var dir_to_target = global_position.direction_to(target_position)
+	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(dir_to_target.x, dir_to_target.z), turn_speed)
+
 func _on_navigation_agent_3d_target_reached():
 	pass
 
@@ -89,8 +94,10 @@ func launch_frame(delta):
 		velocity.y -= gravity * delta
 
 func switch_to_follow():
-	# Placeholder: replace y pos with true y dist from ground obtained from raycast
-	# To do: set parent object global position to the ground height obtained from raycast
+	# Set mesh and colliders' y pos to global pos's y dist from ground obtained from raycast
+	# Set parent object global position to the ground by moving it down the height obtained from raycast
+	anim_tree.set("parameters/StateMachine/conditions/following", true)
+	
 	var height_from_ground = get_height_from_ground()
 	global_position.y -= height_from_ground
 	set_mesh_and_colliders_y_pos(height_from_ground)
@@ -101,13 +108,15 @@ func switch_to_follow():
 	glide_descend_tween.tween_property(body_meshes, "position", Vector3(0,fall_height,-.5), follow_duration)
 	glide_descend_tween.tween_property(physical_collider, "position", Vector3(0,fall_height,0), follow_duration)
 	glide_descend_tween.tween_property(hurtbox, "position", Vector3(0,fall_height,0), follow_duration)
+	glide_descend_tween.tween_property(hitbox, "position", Vector3(0,fall_height-.6,-1), follow_duration)
 	await glide_descend_tween.finished
 	switch_to_fall()
 
 func follow(_delta):
 	target_position = target.global_position
 	
-	lerp_look_at_move_dir(follow_turn_speed)
+	#lerp_look_at_move_dir(follow_turn_speed)
+	lerp_look_at_target(follow_turn_speed)
 	global_rotation.x = 0
 	global_rotation.z = 0
 	if global_position.distance_to(target_position) <= nav_agent.target_desired_distance:
@@ -139,6 +148,8 @@ func shoot_spitweb():
 	sw_inst.velocity = sw_speed * global_position.direction_to(target_position)
 
 func switch_to_fall():
+	anim_tree.set("parameters/StateMachine/conditions/following", false)
+	
 	global_position.y += body_meshes.position.y
 	set_mesh_and_colliders_y_pos(0)
 	behav_state = FALL
