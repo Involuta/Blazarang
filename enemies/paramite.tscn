@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://s18sdq53k2im"]
+[gd_scene load_steps=16 format=3 uid="uid://s18sdq53k2im"]
 
 [ext_resource type="PackedScene" uid="uid://dcy7ebw6m5b1v" path="res://glb_inherited_scenes/paramite_meshes.tscn" id="1_d7ubw"]
 [ext_resource type="Script" path="res://enemies/paramite.gd" id="1_sdbgq"]
@@ -21,18 +21,24 @@ animation = &"glide"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r8dec"]
 advance_mode = 2
-advance_condition = &"following"
+advance_expression = "behav_state == FOLLOW"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t765v"]
 switch_mode = 2
 advance_mode = 2
+advance_expression = "behav_state != FOLLOW"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nt1xo"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "behav_state == FOLLOW"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_v8kte"]
 states/flip/node = SubResource("AnimationNodeAnimation_ftkg5")
 states/flip/position = Vector2(453.5, 100)
 states/glide/node = SubResource("AnimationNodeAnimation_pmocf")
 states/glide/position = Vector2(340.5, 100)
-transitions = ["Start", "glide", SubResource("AnimationNodeStateMachineTransition_r8dec"), "glide", "flip", SubResource("AnimationNodeStateMachineTransition_t765v")]
+transitions = ["Start", "glide", SubResource("AnimationNodeStateMachineTransition_r8dec"), "glide", "flip", SubResource("AnimationNodeStateMachineTransition_t765v"), "flip", "glide", SubResource("AnimationNodeStateMachineTransition_nt1xo")]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_mxa20"]
 graph_offset = Vector2(-22.08, 103.68)
@@ -199,15 +205,15 @@ surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_mxa20")
 anim_player = NodePath("../ParamiteMeshes/AnimationPlayer")
+advance_expression_base_node = NodePath("..")
 active = true
-parameters/StateMachine/conditions/following = false
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 target_desired_distance = 15.0
 avoidance_enabled = true
 radius = 3.0
 avoidance_layers = 2
-avoidance_mask = 2
+avoidance_mask = 3
 
 [node name="EnemyHurtbox" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)

@@ -17,6 +17,7 @@ enum {
 	LAUNCH,
 	FOLLOW,
 	FALL,
+	RETREAT,
 }
 var behav_state := LAUNCH
 
@@ -29,6 +30,8 @@ var target_position := Vector3.ZERO # Position mite moves to; set to target.glob
 @export var follow_speed := 3.0
 @export var follow_turn_speed := .1
 
+@export var retreat_dest := 30*Vector3.FORWARD
+
 func _ready():
 	level = root.find_child("Level")
 	target = root.find_child("Icon")
@@ -36,8 +39,11 @@ func _ready():
 	#hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	anim_tree.active = true
 	
+	switch_to_launch()
+
+func switch_to_launch():
+	behav_state = LAUNCH
 	set_mesh_and_colliders_y_pos(0)
-	
 	velocity.y = launch_vert_speed
 
 func set_mesh_and_colliders_y_pos(new_y_pos: float):
@@ -68,6 +74,8 @@ func _physics_process(delta):
 			follow(delta)
 		FALL:
 			fall_frame(delta)
+		RETREAT:
+			retreat(delta)
 	
 	move_and_slide()
 
@@ -82,7 +90,7 @@ func _on_navigation_agent_3d_target_reached():
 	pass
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
-	if behav_state == FOLLOW:
+	if behav_state == FOLLOW or behav_state == RETREAT:
 		velocity = velocity.move_toward(safe_velocity, .25)
 	move_and_slide()
 
@@ -153,7 +161,29 @@ func switch_to_fall():
 	global_position.y += body_meshes.position.y
 	set_mesh_and_colliders_y_pos(0)
 	behav_state = FALL
+	
+	await get_tree().create_timer(.75).timeout
+	switch_to_retreat()
 
 func fall_frame(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+
+func switch_to_retreat():
+	behav_state = RETREAT
+
+func retreat(_delta):
+	target_position = retreat_dest
+	
+	lerp_look_at_move_dir(follow_turn_speed)
+	global_rotation.x = 0
+	global_rotation.z = 0
+	if global_position.distance_to(target_position) <= nav_agent.target_desired_distance:
+		switch_to_launch()
+	else:
+		nav_agent.set_target_position(target_position)
+	var next_position = nav_agent.get_next_path_position()
+	var new_velocity = (next_position - global_position).normalized() * follow_speed
+	
+	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
+	nav_agent.velocity = new_velocity
