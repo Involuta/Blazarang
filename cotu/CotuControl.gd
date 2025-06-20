@@ -38,8 +38,10 @@ var look_angle2 := 0.0
 var max_cam_dist := 6.0 # dist btwn player and camera when camera's not colliding with geometry; player can modify this in-game
 
 @export var max_slow_duration := 3.5
+@export var max_infest_duration := 100.0
 var active_debuffs = {
-	Globals.DEBUFFS.SLOW: 0.0
+	Globals.DEBUFFS.SLOW: 0.0,
+	Globals.DEBUFFS.INFEST: 0.0,
 }
 
 var rang_catch_input_buffer_secs := .2 # max possible time btwn player inputting throw and rang hitting Cotu that still causes an instant rethrow or catch. Also max possible time btwn player inputting special and the rang hitting Cotu that still causes a special
@@ -129,6 +131,9 @@ func emit_stabilize():
 
 func receive_debuff_slow():
 	active_debuffs[Globals.DEBUFFS.SLOW] = max_slow_duration
+
+func receive_debuff_infest():
+	active_debuffs[Globals.DEBUFFS.INFEST] = max_infest_duration
 
 func change_max_cam_dist_over_secs(new_max_cam_dist: float, duration: float):
 	# This needs to be a tween instead of keyframes bc modifying max_cam_dist via keyframes will cause the property to be reset to 0 whenever there aren't any keyframes for it. You'd then need to put at least 1 keyframe for this property for every single anim
@@ -226,6 +231,9 @@ func _physics_process(delta):
 	if active_debuffs[Globals.DEBUFFS.SLOW] > 0:
 		grounded_speed *= .5
 		active_debuffs[Globals.DEBUFFS.SLOW] -= delta
+	
+	if active_debuffs[Globals.DEBUFFS.INFEST] > 0:
+		active_debuffs[Globals.DEBUFFS.INFEST] -= delta
 	
 	# Cotu movement
 	walk_input = Input.get_vector("WalkLeft", "WalkRight", "WalkForward", "WalkBackward")

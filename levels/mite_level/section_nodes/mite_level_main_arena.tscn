@@ -1,11 +1,12 @@
-[gd_scene load_steps=31 format=3 uid="uid://bnylrq5nmpcv"]
+[gd_scene load_steps=38 format=3 uid="uid://bnylrq5nmpcv"]
 
-[ext_resource type="Script" path="res://levels/Level.gd" id="1_ev1g5"]
+[ext_resource type="Script" path="res://levels/mite_level/section_nodes/mite_level_main_arena.gd" id="1_tjf6h"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_tod8u"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="3_wnptv"]
 [ext_resource type="Texture2D" uid="uid://cyg2snr1w5xw5" path="res://addons/func_godot/textures/default_texture.png" id="4_2kekb"]
 [ext_resource type="PackedScene" uid="uid://bknq8cqwurygt" path="res://enemies/landmite.tscn" id="5_a3mh6"]
 [ext_resource type="PackedScene" uid="uid://s18sdq53k2im" path="res://enemies/paramite.tscn" id="6_3d33o"]
+[ext_resource type="Script" path="res://hitbox.gd" id="7_8tej4"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_mcv4c"]
 vertices = PackedVector3Array(-0.0833321, 1, -40.8333, -10.5833, 1, -40.8333, -20.3333, 1, -35.8333, -35.5833, 1, -20.8333, -40.8333, 1, -10.5833, -40.8333, 1, -0.0833321, -0.0833321, 1, 40.9167, 10.4167, 1, 40.9167, 20.4167, 1, 35.9167, 40.9167, 1, -0.0833321, 40.9167, 1, -10.5833, 35.9167, 1, -20.5833, -20.5833, 1, 35.6667, -10.5833, 1, 40.9167, -0.0833321, 1, 40.9167, 20.4167, 1, 35.9167, -40.8333, 1, -0.0833321, -40.8333, 1, 10.6667, -35.8333, 1, 20.6667, -35.8333, 1, 20.6667, -30.8333, 1, 30.6667, -20.5833, 1, 35.6667, -40.8333, 1, -0.0833321, 35.9167, 1, -20.5833, 30.9167, 1, -30.5833, 20.6667, 1, -35.5833, 40.9167, 1, -0.0833321, -20.3333, 1, -35.8333, -30.3333, 1, -31.0833, -35.5833, 1, -20.8333, 35.6667, 1, 20.6667, 40.9167, 1, 10.4167, 40.9167, 1, -0.0833321, 20.6667, 1, -35.5833, 10.6667, 1, -40.8333, -0.0833321, 1, -40.8333, 40.9167, 1, -0.0833321, 20.6667, 1, -35.5833, -0.0833321, 1, -40.8333, -40.8333, 1, -0.0833321, -20.5833, 1, 35.6667, 20.4167, 1, 35.9167, 20.4167, 1, 35.9167, 30.4167, 1, 30.9167, 35.6667, 1, 20.6667, 40.9167, 1, -0.0833321)
@@ -92,15 +93,50 @@ points = PackedVector3Array(-10.3333, 0.666667, -41.3333, -31, 0.666667, -31, -3
 points = PackedVector3Array(0, 0, -41.3333, 0, 0.666667, -41.3333, -10.3333, 0.666667, -41.3333, -10.3333, 0, -41.3333, 0, 0, 0, 0, 0.666667, 0)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n0lcv"]
-size = Vector3(1, 50, 72)
+size = Vector3(1, 50, 62)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0c023"]
 size = Vector3(72, 1, 72)
 
 [sub_resource type="BoxMesh" id="BoxMesh_whus2"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_7rdxw"]
+radius = 40.0
+
+[sub_resource type="Curve" id="Curve_bitw0"]
+_data = [Vector2(0, 0.102957), 0.0, 0.0, 0, 0, Vector2(0.224312, 0.796458), 0.0, 0.0, 0, 0, Vector2(1, 0.0976633), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_q0f0j"]
+curve = SubResource("Curve_bitw0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nwdal"]
+emission_shape = 3
+emission_box_extents = Vector3(60, 6, 60)
+direction = Vector3(2.08165e-12, 1, 2.08165e-12)
+spread = 180.0
+flatness = 0.5
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 0.5
+initial_velocity_max = 2.0
+scale_min = 0.4
+scale_curve = SubResource("CurveTexture_q0f0j")
+color = Color(1.50196, 0.843137, 0.34902, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_08bdv"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="SphereMesh" id="SphereMesh_qq31a"]
+material = SubResource("StandardMaterial3D_08bdv")
+
 [node name="MiteLevelMainArena" type="Node3D"]
-script = ExtResource("1_ev1g5")
+script = ExtResource("1_tjf6h")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_mcv4c")
@@ -170,10 +206,10 @@ shape = SubResource("ConvexPolygonShape3D_avabn")
 shape = SubResource("ConvexPolygonShape3D_6l4jo")
 
 [node name="InvisibleWalls" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 36, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 27, 2.08165e-12)
 
 [node name="RightWall" type="StaticBody3D" parent="InvisibleWalls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 2.08165e-12, 2.08165e-12)
 collision_layer = 128
 collision_mask = 0
 
@@ -181,7 +217,7 @@ collision_mask = 0
 shape = SubResource("BoxShape3D_n0lcv")
 
 [node name="LeftWall" type="StaticBody3D" parent="InvisibleWalls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 2.08165e-12, 2.08165e-12)
 collision_layer = 128
 collision_mask = 0
 
@@ -189,7 +225,7 @@ collision_mask = 0
 shape = SubResource("BoxShape3D_n0lcv")
 
 [node name="FrontWall" type="StaticBody3D" parent="InvisibleWalls"]
-transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, 2.08165e-12, 2.08165e-12, 36)
+transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, 2.08165e-12, 2.08165e-12, 32)
 collision_layer = 128
 collision_mask = 0
 
@@ -197,7 +233,7 @@ collision_mask = 0
 shape = SubResource("BoxShape3D_n0lcv")
 
 [node name="BackWall" type="StaticBody3D" parent="InvisibleWalls"]
-transform = Transform3D(-4.37114e-08, -3.48787e-16, -1, 3.48787e-16, 1, -3.48787e-16, 1, -3.48787e-16, -4.37114e-08, 2.08165e-12, 2.08165e-12, -36)
+transform = Transform3D(-4.37114e-08, -3.48787e-16, -1, 3.48787e-16, 1, -3.48787e-16, 1, -3.48787e-16, -4.37114e-08, 2.08165e-12, 2.08165e-12, -32)
 collision_layer = 128
 collision_mask = 0
 
@@ -233,3 +269,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.446, 1.8, 2.08165e-12)
 
 [node name="Paramite2" parent="." instance=ExtResource("6_3d33o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.418, 1.8, -0.093)
+
+[node name="MiteCloudPivot" type="Node3D" parent="."]
+
+[node name="EnemyHitbox" type="Area3D" parent="MiteCloudPivot"]
+collision_layer = 8
+collision_mask = 16
+script = ExtResource("7_8tej4")
+damage = 0
+debuff = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MiteCloudPivot/EnemyHitbox"]
+shape = SubResource("SphereShape3D_7rdxw")
+
+[node name="MiteCloudParticles" type="GPUParticles3D" parent="MiteCloudPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 6, 2.08165e-12)
+amount = 12
+process_material = SubResource("ParticleProcessMaterial_nwdal")
+draw_pass_1 = SubResource("SphereMesh_qq31a")

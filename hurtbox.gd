@@ -49,6 +49,8 @@ func receive_debuff(debuff):
 		match(debuff):
 			Globals.DEBUFFS.SLOW:
 				parent.receive_debuff_slow()
+			Globals.DEBUFFS.INFEST:
+				parent.receive_debuff_infest()
 			_:
 				pass
 

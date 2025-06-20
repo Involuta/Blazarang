@@ -76,7 +76,10 @@ func _physics_process(delta):
 	if recovery_delay_remaining < 0:
 		recovery_active = true
 	if not recovery_disabled and recovery_active and health < max_health:
-		health += recovery_rate
+		if parent.active_debuffs[Globals.DEBUFFS.INFEST] > 0:
+			health += recovery_rate / 3
+		else:
+			health += recovery_rate
 		damage_indicator_value -= recovery_rate
 
 func die():

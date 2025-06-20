@@ -1,6 +1,5 @@
-[gd_scene load_steps=32 format=3 uid="uid://c8vj6vfod1e6k"]
+[gd_scene load_steps=31 format=3 uid="uid://c8vj6vfod1e6k"]
 
-[ext_resource type="Script" path="res://levels/Level.gd" id="1_0iegu"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_4q2wi"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="2_vnpjo"]
 [ext_resource type="Texture2D" uid="uid://cyg2snr1w5xw5" path="res://addons/func_godot/textures/default_texture.png" id="4_gohtq"]
@@ -102,7 +101,6 @@ size = Vector3(72, 1, 72)
 [sub_resource type="BoxMesh" id="BoxMesh_whus2"]
 
 [node name="BallsLevelMainArena" type="Node3D"]
-script = ExtResource("1_0iegu")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_mcv4c")

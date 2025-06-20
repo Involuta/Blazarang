@@ -1,6 +1,7 @@
+GPUParticles3D
+Node3D
 CollisionShape3D
 Area3D
-Node3D
 AnimationPlayer
 MeshInstance3D
 NavigationAgent3D
@@ -8,7 +9,6 @@ AnimationTree
 CharacterBody3D
 Marker3D
 SkeletonIK3D
-GPUParticles3D
 WorldEnvironment
 Hitbox
 NavigationRegion3D
