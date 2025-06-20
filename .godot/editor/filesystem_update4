@@ -34,3 +34,4 @@ res://enemies/landmite.tscn
 res://enemies/landmite.gd
 res://hitbox.gd
 res://enemies/enemy_anims/paramite_glide.res
+res://globals.gd

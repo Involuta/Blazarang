@@ -31,6 +31,7 @@ var target_position := Vector3.ZERO # Position mite moves to; set to target.glob
 @export var follow_turn_speed := .1
 
 @export var retreat_dest := 30*Vector3.FORWARD
+@export var retreat_speed := 6.0
 
 func _ready():
 	level = root.find_child("Level")
@@ -183,7 +184,7 @@ func retreat(_delta):
 	else:
 		nav_agent.set_target_position(target_position)
 	var next_position = nav_agent.get_next_path_position()
-	var new_velocity = (next_position - global_position).normalized() * follow_speed
+	var new_velocity = (next_position - global_position).normalized() * retreat_speed
 	
 	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
 	nav_agent.velocity = new_velocity

@@ -45,6 +45,7 @@ enum BUFFS {
 enum DEBUFFS {
 	NONE,
 	SLOW,
+	INFESTED,
 }
 
 const BUFF_SPRITES = {
