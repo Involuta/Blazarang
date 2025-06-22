@@ -19,17 +19,17 @@ var behav_state := FOLLOW
 var target_position := Vector3.ZERO # Position mite moves to; set to target.global_position when not strafing and set to a point beside and behind the target when strafing ("fwd" = to the target)
 
 var can_leap := true
-@export var max_leap_cooldown := 3.5 # Max time after a leap ends before you can leap again
-@export var min_leap_cooldown := 1.0 # Max time after a leap ends before you can leap again
+@export var max_leap_cooldown := 3.0 # Max time after a leap ends before you can leap again
+@export var min_leap_cooldown := .25 # Max time after a leap ends before you can leap again
 var time_until_can_leap := 5.0 # Set to random(min_leap_cooldown, max_leap_cooldown) when reset
 @export var roserang_leap_proximity := 30.0
 @export var can_leap_window := 5.0 # Time you are able to leap on your own before a forced leap occurs
 var time_until_forced_leap := 5.0 # Set to can_leap_window when reset
 @export var leap_secs := 1.0
-@export var leap_lateral_speed := 9.0
-@export var leap_vertical_speed := 4.5
+@export var leap_lateral_speed := 11.0
+@export var leap_vertical_speed := 5.0
 
-@export var follow_speed := 3.0
+@export var follow_speed := 3.5
 @export var follow_turn_speed := .1
 @export var bite_dist := 1.0
 @export var bite_secs := .5
@@ -142,8 +142,8 @@ func stop_lateral_mvmt():
 
 func leap():
 	#anim_tree.set("parameters/StateMachine/conditions/leap", true)
-	velocity = leap_lateral_speed * -transform.basis.z
-	velocity.y = leap_vertical_speed
+	velocity = (leap_lateral_speed + rng.randf_range(-.5,.5)) * -transform.basis.z
+	velocity.y = leap_vertical_speed + rng.randf_range(-.5,.5)
 	await get_tree().create_timer(leap_secs).timeout
 	stop_lateral_mvmt()
 	#anim_tree.set("parameters/StateMachine/conditions/leap", false)
