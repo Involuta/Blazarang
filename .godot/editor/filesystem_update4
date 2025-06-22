@@ -40,3 +40,4 @@ res://levels/x_boss_level/section_nodes/x_boss_arena1.tscn
 res://levels/x_boss_level/x_boss_level1.tscn
 res://levels/hub/section_nodes/hub_room1.tscn
 res://levels/hub/hub.tscn
+res://enemies/landmite.gd

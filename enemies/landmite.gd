@@ -18,9 +18,13 @@ var behav_state := FOLLOW
 @export var target_distance := 2.0 # Dist from target necessary to bite
 var target_position := Vector3.ZERO # Position mite moves to; set to target.global_position when not strafing and set to a point beside and behind the target when strafing ("fwd" = to the target)
 
-@export var max_leap_interval := 5.0 # Max time btwn leaps
-@export var min_leap_interval := 1.0 # Min time btwn leaps
-var time_until_next_leap := 5.0
+var can_leap := true
+@export var max_leap_cooldown := 3.5 # Max time after a leap ends before you can leap again
+@export var min_leap_cooldown := 1.0 # Max time after a leap ends before you can leap again
+var time_until_can_leap := 5.0 # Set to random(min_leap_cooldown, max_leap_cooldown) when reset
+@export var roserang_leap_proximity := 30.0
+@export var can_leap_window := 5.0 # Time you are able to leap on your own before a forced leap occurs
+var time_until_forced_leap := 5.0 # Set to can_leap_window when reset
 @export var leap_secs := 1.0
 @export var leap_lateral_speed := 9.0
 @export var leap_vertical_speed := 4.5
@@ -38,7 +42,10 @@ func _ready():
 	#hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	anim_tree.active = true
 	
-	time_until_next_leap = leap_secs
+	time_until_can_leap = rng.randf_range(min_leap_cooldown, max_leap_cooldown)
+	can_leap = true
+	time_until_forced_leap = can_leap_window
+	
 	bite_cooldown_remaining = bite_cooldown_secs
 
 func _physics_process(delta):
@@ -102,12 +109,26 @@ func follow(delta):
 		await bite()
 		behav_state = FOLLOW
 	
-	time_until_next_leap -= delta
-	if time_until_next_leap <= 0:
-		time_until_next_leap = rng.randf_range(min_leap_interval, max_leap_interval)
-		behav_state = LEAP
-		await leap()
-		behav_state = FOLLOW
+	if can_leap:
+		time_until_forced_leap -= delta
+		if time_until_forced_leap <= 0 or close_to_roserang():
+			time_until_forced_leap = can_leap_window
+			behav_state = LEAP
+			await leap()
+			behav_state = FOLLOW
+			can_leap = false
+	else:
+		time_until_can_leap -= delta
+		if time_until_can_leap <= 0:
+			time_until_can_leap = rng.randf_range(min_leap_cooldown, max_leap_cooldown)
+			can_leap = true
+
+func close_to_roserang():
+	var roserang = root.find_child("Roserang", true, false)
+	if roserang == null:
+		return false
+	else:
+		return global_position.distance_to(roserang.global_position) < roserang_leap_proximity
 
 func bite():
 	stop_lateral_mvmt()
