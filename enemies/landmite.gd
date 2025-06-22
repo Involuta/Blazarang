@@ -11,12 +11,15 @@ var target : Node3D
 var aiming_at_target := true
 enum {
 	FOLLOW,
+	STRAFE,
 	BITE,
 	LEAP,
 }
 var behav_state := FOLLOW
-@export var target_distance := 2.0 # Dist from target necessary to bite
+@export var target_distance := 1.0 # Dist from target necessary to bite
 var target_position := Vector3.ZERO # Position mite moves to; set to target.global_position when not strafing and set to a point beside and behind the target when strafing ("fwd" = to the target)
+
+var strafing_left := true
 
 var can_leap := true
 @export var max_leap_cooldown := 3.0 # Max time after a leap ends before you can leap again
@@ -52,10 +55,15 @@ func _physics_process(delta):
 	match(behav_state):
 		FOLLOW: 
 			follow(delta)
+		STRAFE:
+			strafe(delta)
 		BITE:
 			stop_lateral_mvmt()
 		LEAP:
 			pass
+	
+	if Input.is_action_just_pressed("Special"):
+		behav_state = STRAFE
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -129,6 +137,51 @@ func close_to_roserang():
 		return false
 	else:
 		return global_position.distance_to(roserang.global_position) < roserang_leap_proximity
+
+func strafe(delta):
+	var dir_to_target := global_position.direction_to(target.global_position)
+	var dir_to_target2D := Vector2(dir_to_target.x, dir_to_target.z)
+	var icon_vec := dir_to_target2D.orthogonal()
+	if strafing_left:
+		icon_vec *= -1
+	target_position = target.global_position + 5.0*Vector3(icon_vec.x, 0, icon_vec.y)
+	
+	lerp_look_at_move_dir(follow_turn_speed)
+	global_rotation.x = 0
+	global_rotation.z = 0
+	nav_agent.set_target_position(target_position)
+	var next_position = nav_agent.get_next_path_position()
+	var new_velocity = (next_position - global_position).normalized() * follow_speed
+	
+	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
+	nav_agent.velocity = new_velocity
+	
+	# If player isn't in sight, reduce target distance to a very small number
+	if can_see_target():
+		nav_agent.target_desired_distance = target_distance
+	else:
+		nav_agent.target_desired_distance = .1
+		
+	bite_cooldown_remaining -= delta
+	if bite_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < bite_dist:
+		bite_cooldown_remaining = bite_cooldown_secs
+		behav_state = BITE
+		await bite()
+		behav_state = FOLLOW
+	
+	if can_leap:
+		time_until_forced_leap -= delta
+		if time_until_forced_leap <= 0 or close_to_roserang():
+			time_until_forced_leap = can_leap_window
+			behav_state = LEAP
+			await leap()
+			behav_state = FOLLOW
+			can_leap = false
+	else:
+		time_until_can_leap -= delta
+		if time_until_can_leap <= 0:
+			time_until_can_leap = rng.randf_range(min_leap_cooldown, max_leap_cooldown)
+			can_leap = true
 
 func bite():
 	stop_lateral_mvmt()
