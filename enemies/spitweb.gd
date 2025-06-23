@@ -9,7 +9,12 @@ var grounded := false
 @export var bullet_explosion_secs := 1.0
 var destroyed := false
 
+@onready var flight_particles := $FlightParticles
+@onready var impact_particles := $ImpactParticles
+
 func _ready():
+	flight_particles.emitting = true
+	impact_particles.emitting = false
 	await get_tree().create_timer(invincibility_secs).timeout
 	invincible = false
 	await get_tree().create_timer(max_lifetime_secs).timeout

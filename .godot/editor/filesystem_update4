@@ -42,3 +42,4 @@ res://levels/hub/section_nodes/hub_room1.tscn
 res://levels/hub/hub.tscn
 res://enemies/landmite.gd
 res://enemies/x_boss.tscn
+res://enemies/spitweb.gd

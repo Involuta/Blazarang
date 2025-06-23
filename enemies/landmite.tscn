@@ -47,7 +47,7 @@ mesh = SubResource("CapsuleMesh_wrs5x")
 transform = Transform3D(-0.6, 2.09272e-16, -9.05975e-08, 2.09272e-16, 0.6, -2.09272e-16, 9.05975e-08, -2.09272e-16, -0.6, 0, 0, 0)
 
 [node name="LeftVeryBackShin" parent="LandmiteMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.31338, 0.909332, 0.273677, -0.910388, 0.369669, -0.18582, -0.270143, -0.190921, 0.943696, 2.14592, 1.85683, -0.344812)
+transform = Transform3D(0.31338, 0.909332, 0.273677, -0.910388, 0.369669, -0.18582, -0.270143, -0.190921, 0.943696, 2.14592, 1.85683, -0.344811)
 
 [node name="LeftVeryBackShin" parent="LandmiteMeshes/Armature/Skeleton3D/LeftVeryBackShin" index="0"]
 cast_shadow = 0
