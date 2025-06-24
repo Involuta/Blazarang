@@ -40,6 +40,8 @@ func _ready():
 	#hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	anim_tree.active = true
 	
+	hurtbox.add_to_group("lockonables")
+	
 	switch_to_launch()
 
 func switch_to_launch():

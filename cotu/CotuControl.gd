@@ -48,19 +48,28 @@ var rang_catch_input_buffer_secs := .2 # max possible time btwn player inputting
 
 var can_throw_roserang := true
 var roserang_throw_queued := false
-var roserang_buff_list := [Globals.BUFFS.DAMAGE, Globals.BUFFS.DAMAGE, Globals.BUFFS.DAMAGE]
+enum ROSERANG_THROW_TYPES {
+	ROSE,
+	HOMING,
+	POWER,
+}
+var roserang_throw_type := ROSERANG_THROW_TYPES.ROSE
+var homing_targets_added := 0 # Increments for every homing buff applied
+var roserang_buff_list := [Globals.ROSERANG_BUFFS.HOMING, Globals.ROSERANG_BUFFS.DAMAGE, Globals.ROSERANG_BUFFS.DAMAGE]
 var next_roserang_buff_index := 0
 var throw_roserang_self_damage := 18.0
 
 var can_throw_axrang := true
 var axrang_perfect_catch_queued := false
 var axrang_perfect_caught := false
-var axrang_buff_list := [Globals.BUFFS.DAMAGE, Globals.BUFFS.DAMAGE, Globals.BUFFS.DAMAGE]
+var axrang_buff_list := [Globals.AXRANG_BUFFS.DAMAGE, Globals.AXRANG_BUFFS.DAMAGE, Globals.AXRANG_BUFFS.DAMAGE]
 var next_axrang_buff_index := 0
 var throw_axrang_self_damage := 36.0
 
+var rose_script := preload("res://rang/roserang.gd")
+var homing_script := preload("res://rang/roserang_homing.gd")
 var rapidorbit_script := preload("res://rang/special_rapidorbit.gd")
-var homing_script := preload("res://rang/special_homing.gd")
+var special_homing_script := preload("res://rang/special_homing.gd")
 var current_roserang_special_script
 var roserang_special_queued := false
 
@@ -106,7 +115,7 @@ func _ready():
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
-	current_roserang_special_script = rapidorbit_script
+	current_roserang_special_script = special_homing_script
 	current_axrang_special = "AxArcSlash"
 	
 	Globals.destabilize.connect(on_destabilize)
@@ -268,7 +277,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("Special") and not roserang_special_queued and roserang_instance != null:
 		start_roserang_special_timer()
 	if roserang_special_queued and roserang_instance == null:
-		throw_special_roserang()
+		throw_roserang_with_script(current_roserang_special_script)
 	
 	if Input.is_action_just_pressed("Special") and not axrang_special_queued and axrang_instance != null:
 		start_axrang_special_timer()
@@ -297,14 +306,27 @@ func _physics_process(delta):
 			# Manual throw
 			if not destabilized:
 				hurtbox.self_hit(throw_roserang_self_damage)
-			throw_roserang()
+			throw_roserang_with_script(rose_script)
 		elif not roserang_throw_queued:
 			start_roserang_instant_rethrow_timer()
 	if roserang_throw_queued and roserang_instance == null and can_throw_roserang:
 		# Instant rethrow
 		anim_tree.set(anim_tree_param_path_base + "just_instant_rethrew", true)
 		roserang_throw_queued = false
-		throw_roserang()
+		
+		# Set throw type
+		homing_targets_added = roserang_buff_list.slice(0, next_roserang_buff_index).count(Globals.ROSERANG_BUFFS.HOMING)
+		if homing_targets_added > 0:
+			roserang_throw_type = ROSERANG_THROW_TYPES.HOMING
+		else:
+			roserang_throw_type = ROSERANG_THROW_TYPES.ROSE
+		
+		match(roserang_throw_type):
+			ROSERANG_THROW_TYPES.ROSE:
+				throw_roserang_with_script(rose_script)
+			ROSERANG_THROW_TYPES.HOMING:
+				throw_roserang_with_script(homing_script)
+		
 		Globals.award_score(Globals.INSTANT_RETHROW_SCORE)
 	else:
 		anim_tree.set(anim_tree_param_path_base + "just_instant_rethrew", false)
@@ -372,9 +394,10 @@ func step_dodge():
 	can_throw_roserang = true
 	can_throw_axrang = true
 
-func throw_roserang():
+func throw_roserang_with_script(script):
 	roserang_instance = roserang.instantiate()
 	add_sibling(roserang_instance)
+	roserang_instance.set_script(script)
 	apply_buffs_to_roserang_instance()
 
 func start_roserang_instant_rethrow_timer():
@@ -392,15 +415,11 @@ func apply_buffs_to_roserang_instance():
 	# Apply buffs to the roserang instance and UI simultaneously
 	for i in range(next_roserang_buff_index):
 		match(roserang_buff_list[i]):
-			Globals.BUFFS.DAMAGE:
+			Globals.ROSERANG_BUFFS.DAMAGE:
 				roserang_instance.buff_damage()
 				ui.apply_roserang_buff1()
-
-func throw_special_roserang():
-	roserang_instance = roserang.instantiate()
-	add_sibling(roserang_instance)
-	roserang_instance.set_script(current_roserang_special_script)
-	apply_buffs_to_roserang_instance()
+			Globals.ROSERANG_BUFFS.HOMING:
+				roserang_instance.buff_homing_targets(homing_targets_added)
 
 func start_roserang_special_timer():
 	roserang_special_queued = true
@@ -444,7 +463,7 @@ func apply_buffs_to_axrang_instance():
 	# Apply buffs to the ax instance itself, but not the UI because the buffs were already applied in the UI in the previous perfect catch
 	for i in range(next_axrang_buff_index):
 		match(axrang_buff_list[i]):
-			Globals.BUFFS.DAMAGE:
+			Globals.AXRANG_BUFFS.DAMAGE:
 				axrang_instance.buff_damage()
 
 func throw_special_axrang():

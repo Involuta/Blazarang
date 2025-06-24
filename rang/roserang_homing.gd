@@ -7,7 +7,7 @@ extends CharacterBody3D
 
 var BPM := 113.0
 var rotate_speed := 3.6
-var max_targets := 11
+var max_targets := 1
 var homing_speed_multiplier := .125 # must be between 0 (exclusive) and 1 (inclusive)
 
 var invincible := true

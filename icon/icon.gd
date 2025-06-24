@@ -14,7 +14,6 @@ var cotu : Node3D
 var cotu_hurtbox : Node3D
 
 @export var icon_self_heal := 18.0
-@export var buff_list := [Globals.BUFFS.DAMAGE, Globals.BUFFS.DAMAGE, Globals.BUFFS.DAMAGE]
 @export var next_buff_index := 0
 
 func _ready():

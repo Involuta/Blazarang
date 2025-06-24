@@ -49,12 +49,16 @@ func _ready():
 	
 	for rose_buff in cotu.roserang_buff_list:
 		match(rose_buff):
-			Globals.BUFFS.DAMAGE:
+			Globals.ROSERANG_BUFFS.DAMAGE:
 				roserang_buff_icon1.texture = load("res://textures/buff_DMG-clear.png")
+			_:
+				pass
 	for ax_buff in cotu.axrang_buff_list:
 		match(ax_buff):
-			Globals.BUFFS.DAMAGE:
+			Globals.AXRANG_BUFFS.DAMAGE:
 				axrang_buff_icon1.texture = load("res://textures/buff_DMG-clear.png")
+			_:
+				pass
 
 func roserang_buffs_cleared():
 	return not roserang_buff1_applied

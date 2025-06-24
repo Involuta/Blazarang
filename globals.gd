@@ -38,7 +38,12 @@ var score := 0
 var multiplier := 50
 var combo_count := 0
 
-enum BUFFS {
+enum ROSERANG_BUFFS {
+	DAMAGE,
+	HOMING,
+}
+
+enum AXRANG_BUFFS {
 	DAMAGE,
 }
 
@@ -49,7 +54,7 @@ enum DEBUFFS {
 }
 
 const BUFF_SPRITES = {
-	BUFFS.DAMAGE : "res://textures/buff_DMG-clear.png"
+	ROSERANG_BUFFS.DAMAGE : "res://textures/buff_DMG-clear.png"
 }
 
 const DODGE_SCORE = 1

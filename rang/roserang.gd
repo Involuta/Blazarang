@@ -142,6 +142,10 @@ func buff_damage():
 	current_loop_angle = 0
 	hitbox.damage = Globals.player_hitbox_data.RoserangDamageBuff1
 
+func buff_homing_targets(targets_added: int):
+	# This func exists so that if the rang hits the icon while in rose mode, and the homing buff is applied, the current living rang simply does nothing and continues in rose mode. The buff only takes effect when an instant rethrow occurs
+	pass
+
 func switch_to_rose():
 	target.roserang_queued = false
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, true)
