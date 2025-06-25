@@ -8,6 +8,7 @@ extends CharacterBody3D
 var BPM := 113.0
 var rotate_speed := 3.6
 var max_targets := 1
+var max_target_proximity := 30.0 # Farthest dist lockonable can be from rang (when it's spawned in) for it to be targeted; should be same or similar to rose's max radius
 var homing_speed_multiplier := .125 # must be between 0 (exclusive) and 1 (inclusive)
 
 var invincible := true
@@ -29,6 +30,7 @@ func _ready():
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, false)
 	set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, false)
 	var all_lockonables = get_tree().get_nodes_in_group("lockonables")
+	all_lockonables = all_lockonables.filter(within_proximity)
 	if not all_lockonables.is_empty():
 		all_lockonables.sort_custom(dist_to_lockonable)
 		var i := 0
@@ -37,6 +39,9 @@ func _ready():
 			i += 1
 	await homing_attack(icon)
 	queue_free()
+
+func within_proximity(lockonable):
+	return icon.global_position.distance_to(lockonable.global_position) < max_target_proximity
 
 func dist_to_lockonable(a, b):
 	return icon.global_position.distance_to(a.global_position) < icon.global_position.distance_to(b.global_position)
