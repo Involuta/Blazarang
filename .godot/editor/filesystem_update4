@@ -72,3 +72,7 @@ res://levels/mite_level/mite_level.tscn
 res://rang/roserang.tscn
 res://icon/icon.tscn
 res://rang/rang_particles_base.tscn
+res://rang/destroy_on_cotu_hit.gd
+res://rang/roserang_homing.gd
+res://icon/icon.gd
+res://rang/special_homing.gd

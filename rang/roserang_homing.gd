@@ -37,8 +37,9 @@ func _ready():
 		while i < max_targets and i < all_lockonables.size():
 			await homing_attack(all_lockonables[i])
 			i += 1
+	invincible = false # Allow rang to be deleted when it touches Cotu
 	await homing_attack(icon)
-	#queue_free()
+	queue_free()
 
 func within_proximity(lockonable):
 	return icon.global_position.distance_to(lockonable.global_position) < max_target_proximity
