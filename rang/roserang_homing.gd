@@ -38,7 +38,7 @@ func _ready():
 			await homing_attack(all_lockonables[i])
 			i += 1
 	await homing_attack(icon)
-	queue_free()
+	#queue_free()
 
 func within_proximity(lockonable):
 	return icon.global_position.distance_to(lockonable.global_position) < max_target_proximity

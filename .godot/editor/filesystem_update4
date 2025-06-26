@@ -38,3 +38,5 @@ res://enemies/gauntlet_melee_tier1.tscn
 res://rang/roserang_homing.gd
 res://hurtbox.gd
 res://rang/roserang.gd
+res://icon/icon.tscn
+res://rang/rang_particles_base.tscn
