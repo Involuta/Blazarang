@@ -34,3 +34,4 @@ res://rang/roserang.tscn
 res://enemies/x_laser_combo_ball_projectile.tscn
 res://enemies/enemy_anims/x_semicircledash.res
 res://enemies/enemy_anims/x_semicircledash_tp.res
+res://rang/roserang_homing.gd
