@@ -69,7 +69,7 @@ func _ready():
 				pass
 
 func roserang_buffs_cleared():
-	return not roserang_buff_applied
+	return not (true in roserang_buff_applied)
 
 func axrang_buffs_cleared():
 	return not axrang_buff1_applied
