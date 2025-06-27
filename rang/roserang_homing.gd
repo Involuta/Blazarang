@@ -38,7 +38,7 @@ func _ready():
 			await homing_attack(all_lockonables[i])
 			i += 1
 	invincible = false # Allow rang to be deleted when it touches Cotu
-	await homing_attack(icon)
+	await homing_return()
 	queue_free()
 
 func within_proximity(lockonable):
@@ -53,10 +53,15 @@ func homing_attack(target):
 	var original_dist_to_target := global_position.distance_to(target.global_position)
 	var homing_speed := homing_speed_multiplier * original_dist_to_target / get_physics_process_delta_time()
 	while target != null and global_position.distance_to(target.global_position) > 1:
-		if global_position.distance_to(target.global_position) <= homing_speed * get_physics_process_delta_time():
-			velocity = global_position.distance_to(target.global_position) * global_position.direction_to(target.global_position) / get_physics_process_delta_time()
-		else:
-			velocity = homing_speed * global_position.direction_to(target.global_position)
+		velocity = homing_speed * global_position.direction_to(target.global_position)
+		move_and_slide()
+		await get_tree().create_timer(get_physics_process_delta_time()).timeout
+
+func homing_return():
+	# No matter what the distance is, the rang should return to the icon in .4 seconds
+	while global_position.distance_to(icon.global_position) > 1:
+		# .04175 * 
+		velocity = (icon.global_position - global_position) / get_physics_process_delta_time()
 		move_and_slide()
 		await get_tree().create_timer(get_physics_process_delta_time()).timeout
 
