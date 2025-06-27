@@ -11,13 +11,13 @@ extends Control
 
 @onready var update_score_anim := $UpdateScoreAnimation
 
+@onready var roserang_buff_icon0 := $RoserangBuffIcon0Pivot/RoserangBuffIcon0
 @onready var roserang_buff_icon1 := $RoserangBuffIcon1Pivot/RoserangBuffIcon1
 @onready var roserang_buff_icon2 := $RoserangBuffIcon2Pivot/RoserangBuffIcon2
-@onready var roserang_buff_icon3 := $RoserangBuffIcon3Pivot/RoserangBuffIcon3
-var roserang_buff_icons := []
-var roserang_buff1_applied := false
+var roserang_buff_icons := [] # List of icon nodes
+var roserang_buff_applied := [] # List of bools, where bool i is whether buff i has been applied
 
-@onready var axrang_buff_icon1 := $AxrangBuffIcon1Pivot/AxrangBuffIcon1
+@onready var axrang_buff_icon0 := $AxrangBuffIcon0Pivot/AxrangBuffIcon0
 var axrang_buff1_applied := false
 
 @onready var roserang_buff_anims := $RoserangBuffAnimations
@@ -46,7 +46,8 @@ func _ready():
 	destab_icon.visible = false
 	roserang_buff_icon1.visible = false
 	
-	roserang_buff_icons = [roserang_buff_icon1, roserang_buff_icon2, roserang_buff_icon3]
+	roserang_buff_icons = [roserang_buff_icon0, roserang_buff_icon1, roserang_buff_icon2]
+	roserang_buff_applied = [false, false, false]
 	
 	Globals.score_updated.connect(on_score_updated)
 	Globals.destabilize.connect(on_destabilize)
@@ -63,12 +64,12 @@ func _ready():
 	for ax_buff in cotu.axrang_buff_list:
 		match(ax_buff):
 			Globals.AXRANG_BUFFS.DAMAGE:
-				axrang_buff_icon1.texture = load("res://textures/buff_DMG-clear.png")
+				axrang_buff_icon0.texture = load("res://textures/buff_DMG-clear.png")
 			_:
 				pass
 
 func roserang_buffs_cleared():
-	return not roserang_buff1_applied
+	return not roserang_buff_applied
 
 func axrang_buffs_cleared():
 	return not axrang_buff1_applied
@@ -118,13 +119,13 @@ func on_score_updated(score_change):
 	combo_display.text = str("COMBO: ", Globals.combo_count)
 
 func clear_roserang_buffs():
-	roserang_buff1_applied = false
+	roserang_buff_applied.fill(false)
 	roserang_buff_anims.play("clear_roserang_buffs")
 
 func apply_roserang_buff(buff_index: int):
-	if not roserang_buff1_applied:
-		roserang_buff1_applied = true
-		roserang_buff_anims.play("apply_roserang_buff1")
+	if not roserang_buff_applied[buff_index]:
+		roserang_buff_applied[buff_index] = true
+		roserang_buff_anims.play("apply_roserang_buff" + str(buff_index))
 
 func clear_axrang_buffs():
 	axrang_buff1_applied = false
