@@ -414,10 +414,10 @@ func apply_buffs_to_roserang_instance():
 		ui.clear_roserang_buffs()
 	# Apply buffs to the roserang instance and UI simultaneously
 	for i in range(next_roserang_buff_index):
+		ui.apply_roserang_buff(i)
 		match(roserang_buff_list[i]):
 			Globals.ROSERANG_BUFFS.DAMAGE:
 				roserang_instance.buff_damage()
-				ui.apply_roserang_buff1()
 			Globals.ROSERANG_BUFFS.HOMING:
 				roserang_instance.buff_homing_targets(homing_targets_added)
 

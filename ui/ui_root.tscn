@@ -672,6 +672,7 @@ libraries = {
 [node name="RoserangBuffIcon1Pivot" type="Node2D" parent="."]
 
 [node name="RoserangBuffIcon1" type="TextureRect" parent="RoserangBuffIcon1Pivot"]
+modulate = Color(1, 1, 1, 0)
 offset_left = 38.0
 offset_top = 52.0
 offset_right = 185.0
@@ -732,22 +733,6 @@ lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 
-[node name="BuffIcon2" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 163.0
-offset_top = 52.0
-offset_right = 310.0
-offset_bottom = 199.0
-expand_mode = 1
-
-[node name="BuffIcon3" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 288.0
-offset_top = 52.0
-offset_right = 435.0
-offset_bottom = 199.0
-expand_mode = 1
-
 [node name="RoserangBuffAnimations" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_3lowh")
@@ -787,3 +772,63 @@ text = "0"
 label_settings = SubResource("LabelSettings_u1iil")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="RoserangBuffIcon2Pivot" type="Node2D" parent="."]
+
+[node name="RoserangBuffIcon2" type="TextureRect" parent="RoserangBuffIcon2Pivot"]
+offset_left = 163.0
+offset_top = 52.0
+offset_right = 310.0
+offset_bottom = 199.0
+expand_mode = 1
+
+[node name="RoserangBuffIcon2UpParticles" type="GPUParticles2D" parent="RoserangBuffIcon2Pivot"]
+position = Vector2(163, 127)
+rotation = 3.14159
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_xax8r")
+texture = ExtResource("7_d3h4s")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+
+[node name="RoserangBuffIcon2DownParticles" type="GPUParticles2D" parent="RoserangBuffIcon2Pivot"]
+position = Vector2(163, 127)
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_xax8r")
+texture = ExtResource("7_d3h4s")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+
+[node name="RoserangBuffIcon3Pivot" type="Node2D" parent="."]
+
+[node name="RoserangBuffIcon3" type="TextureRect" parent="RoserangBuffIcon3Pivot"]
+offset_left = 288.0
+offset_top = 52.0
+offset_right = 435.0
+offset_bottom = 199.0
+expand_mode = 1
+
+[node name="RoserangBuffIcon3UpParticles" type="GPUParticles2D" parent="RoserangBuffIcon3Pivot"]
+position = Vector2(288, 127)
+rotation = 3.14159
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_xax8r")
+texture = ExtResource("7_d3h4s")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+
+[node name="RoserangBuffIcon3DownParticles" type="GPUParticles2D" parent="RoserangBuffIcon3Pivot"]
+position = Vector2(288, 127)
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_xax8r")
+texture = ExtResource("7_d3h4s")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0

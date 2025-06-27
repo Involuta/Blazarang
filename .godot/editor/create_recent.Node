@@ -1,3 +1,4 @@
+Node2D
 GPUParticles3D
 Node3D
 CollisionShape3D
@@ -17,7 +18,6 @@ AudioStreamPlayer
 PhysicalBone3D
 Skeleton3D
 TextureRect
-Node2D
 Camera3D
 GPUTrail3D
 GPUParticlesAttractorSphere3D

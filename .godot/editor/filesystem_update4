@@ -35,3 +35,11 @@ res://enemies/x_laser_combo_ball_projectile.tscn
 res://enemies/enemy_anims/x_semicircledash.res
 res://enemies/enemy_anims/x_semicircledash_tp.res
 res://rang/roserang_homing.gd
+res://levels/hub/section_nodes/hub_room1.tscn
+res://textures/white_border_black_solid_square.tres
+res://cotu/cotu_anims_outline.tres
+res://textures/small_solid_black.tres
+res://levels/hub/section_nodes/hub_panel.tscn
+res://ui/ui_root.tscn
+res://ui/ui_root.gd
+res://cotu/CotuControl.gd

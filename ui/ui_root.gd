@@ -12,6 +12,9 @@ extends Control
 @onready var update_score_anim := $UpdateScoreAnimation
 
 @onready var roserang_buff_icon1 := $RoserangBuffIcon1Pivot/RoserangBuffIcon1
+@onready var roserang_buff_icon2 := $RoserangBuffIcon2Pivot/RoserangBuffIcon2
+@onready var roserang_buff_icon3 := $RoserangBuffIcon3Pivot/RoserangBuffIcon3
+var roserang_buff_icons := []
 var roserang_buff1_applied := false
 
 @onready var axrang_buff_icon1 := $AxrangBuffIcon1Pivot/AxrangBuffIcon1
@@ -43,14 +46,18 @@ func _ready():
 	destab_icon.visible = false
 	roserang_buff_icon1.visible = false
 	
+	roserang_buff_icons = [roserang_buff_icon1, roserang_buff_icon2, roserang_buff_icon3]
+	
 	Globals.score_updated.connect(on_score_updated)
 	Globals.destabilize.connect(on_destabilize)
 	Globals.stabilize.connect(on_stabilize)
 	
-	for rose_buff in cotu.roserang_buff_list:
-		match(rose_buff):
+	for i in range(len(cotu.roserang_buff_list)):
+		match(cotu.roserang_buff_list[i]):
 			Globals.ROSERANG_BUFFS.DAMAGE:
-				roserang_buff_icon1.texture = load("res://textures/buff_DMG-clear.png")
+				roserang_buff_icons[i].texture = load("res://textures/buff_DMG-clear.png")
+			Globals.ROSERANG_BUFFS.HOMING:
+				roserang_buff_icons[i].texture = load("res://textures/buff_HMG-clear.png")
 			_:
 				pass
 	for ax_buff in cotu.axrang_buff_list:
@@ -114,7 +121,7 @@ func clear_roserang_buffs():
 	roserang_buff1_applied = false
 	roserang_buff_anims.play("clear_roserang_buffs")
 
-func apply_roserang_buff1():
+func apply_roserang_buff(buff_index: int):
 	if not roserang_buff1_applied:
 		roserang_buff1_applied = true
 		roserang_buff_anims.play("apply_roserang_buff1")
