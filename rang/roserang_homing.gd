@@ -7,7 +7,8 @@ extends CharacterBody3D
 
 var BPM := 113.0
 var rotate_speed := 3.6
-var max_targets := 1
+var base_max_targets := 1
+var current_max_targets := 1
 var max_target_proximity := 30.0 # Farthest dist lockonable can be from rang (when it's spawned in) for it to be targeted; should be same or similar to rose's max radius
 var homing_time := .12 # Time it takes for rang to move from 1 target to another
 
@@ -27,6 +28,8 @@ func _ready():
 	cotu = root.find_child("cotuCB")
 	icon = root.find_child("Icon")
 	
+	current_max_targets = base_max_targets
+	
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, false)
 	set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, false)
 	var all_lockonables = get_tree().get_nodes_in_group("lockonables")
@@ -34,7 +37,7 @@ func _ready():
 	if not all_lockonables.is_empty():
 		all_lockonables.sort_custom(dist_to_lockonable)
 		var i := 0
-		while i < max_targets and i < all_lockonables.size():
+		while i < current_max_targets and i < all_lockonables.size():
 			await homing_attack(all_lockonables[i])
 			i += 1
 	invincible = false # Allow rang to be deleted when it touches Cotu
@@ -71,8 +74,8 @@ func buff_damage():
 	hitbox.damage = 30
 
 func buff_homing_targets(targets_added: int):
-	# Why aren't we doing current_max_targets = base_max_targets + targets_added to prevent accumulation? There is no risk of accumulation between buffing cycles because the script is reloaded after every instant rethrow
-	max_targets += targets_added
+	# Why aren't we doing max_targets += targets_added? When the script is reloaded after every instant rethrow, variable values retain changes from previous scripts
+	current_max_targets = base_max_targets + targets_added
 
 func get_mvmt_state():
 	return "HOMING"

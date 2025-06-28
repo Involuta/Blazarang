@@ -55,7 +55,7 @@ enum ROSERANG_THROW_TYPES {
 }
 var roserang_throw_type := ROSERANG_THROW_TYPES.ROSE
 var homing_targets_added := 0 # Increments for every homing buff applied
-@export var roserang_buff_list := [Globals.ROSERANG_BUFFS.HOMING, Globals.ROSERANG_BUFFS.DAMAGE, Globals.ROSERANG_BUFFS.DAMAGE]
+@export var roserang_buff_list := [Globals.ROSERANG_BUFFS.HOMING, Globals.ROSERANG_BUFFS.HOMING, Globals.ROSERANG_BUFFS.DAMAGE]
 var next_roserang_buff_index := 0
 var throw_roserang_self_damage := 18.0
 
