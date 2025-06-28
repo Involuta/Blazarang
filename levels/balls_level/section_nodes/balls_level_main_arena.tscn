@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c8vj6vfod1e6k"]
+[gd_scene load_steps=38 format=3 uid="uid://c8vj6vfod1e6k"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_4q2wi"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="2_vnpjo"]
@@ -99,6 +99,43 @@ size = Vector3(72, 1, 72)
 [sub_resource type="PrismMesh" id="PrismMesh_ajpnn"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_whus2"]
+
+[sub_resource type="Gradient" id="Gradient_73h2l"]
+colors = PackedColorArray(0, 0, 1, 1, 0, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wxvqq"]
+gradient = SubResource("Gradient_73h2l")
+
+[sub_resource type="Curve" id="Curve_6r3e0"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_u81s2"]
+curve = SubResource("Curve_6r3e0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_00n5e"]
+emission_shape = 3
+emission_box_extents = Vector3(40, 0.1, 40)
+direction = Vector3(2.08165e-12, 1, 2.08165e-12)
+spread = 0.0
+flatness = 1.0
+gravity = Vector3(2.08165e-12, 9.8, 2.08165e-12)
+scale_min = 0.0
+scale_curve = SubResource("CurveTexture_u81s2")
+color = Color(0.494118, 0.784314, 1, 1)
+color_ramp = SubResource("GradientTexture1D_wxvqq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_08bdv"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="SphereMesh" id="SphereMesh_eolyr"]
+material = SubResource("StandardMaterial3D_08bdv")
 
 [node name="BallsLevelMainArena" type="Node3D"]
 
@@ -225,3 +262,11 @@ mesh = SubResource("BoxMesh_whus2")
 
 [node name="MiniBallWalker" parent="." instance=ExtResource("6_xq1q7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.285, 2, -22.2334)
+
+[node name="RadiationParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 2.08165e-12, -10)
+amount = 22
+lifetime = 2.5
+visibility_aabb = AABB(-400, -400, -400, 800, 800, 800)
+process_material = SubResource("ParticleProcessMaterial_00n5e")
+draw_pass_1 = SubResource("SphereMesh_eolyr")

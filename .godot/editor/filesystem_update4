@@ -46,3 +46,6 @@ res://cotu/CotuControl.gd
 res://rang/special_homing.gd
 res://enemies/landmite.gd
 res://levels/mite_level/section_nodes/mite_level_main_arena.tscn
+res://enemies/ball_walker.tscn
+res://levels/balls_level/balls_level.tscn
+res://levels/balls_level/section_nodes/balls_level_main_arena.tscn

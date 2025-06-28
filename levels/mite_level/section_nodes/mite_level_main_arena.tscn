@@ -123,7 +123,7 @@ scale_min = 0.4
 scale_curve = SubResource("CurveTexture_q0f0j")
 color = Color(1.50196, 0.843137, 0.34902, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_08bdv"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uxjbv"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
 billboard_mode = 3
@@ -133,7 +133,7 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="SphereMesh" id="SphereMesh_qq31a"]
-material = SubResource("StandardMaterial3D_08bdv")
+material = SubResource("StandardMaterial3D_uxjbv")
 
 [node name="MiteLevelMainArena" type="Node3D"]
 script = ExtResource("1_tjf6h")
