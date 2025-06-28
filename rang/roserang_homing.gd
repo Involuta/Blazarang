@@ -9,7 +9,7 @@ var BPM := 113.0
 var rotate_speed := 3.6
 var max_targets := 1
 var max_target_proximity := 30.0 # Farthest dist lockonable can be from rang (when it's spawned in) for it to be targeted; should be same or similar to rose's max radius
-var homing_time := .1 # Time it takes for rang to go from 1 target to another
+var homing_time := .12 # Time it takes for rang to move from 1 target to another
 
 var invincible := true
 

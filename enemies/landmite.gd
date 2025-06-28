@@ -20,6 +20,7 @@ var behav_state := FOLLOW
 var target_position := Vector3.ZERO # Position mite moves to; set to target.global_position when not strafing and set to a point beside and behind the target when strafing ("fwd" = to the target)
 
 var strafing_left := true
+@export var strafe_radius := 15.0 # Dist btwn target and strafe dest
 
 var can_leap := true
 @export var max_leap_cooldown := 3.0 # Max time after a leap ends before you can leap again
@@ -146,7 +147,7 @@ func strafe(delta):
 	var icon_vec := dir_to_target2D.orthogonal()
 	if strafing_left:
 		icon_vec *= -1
-	target_position = target.global_position + 5.0*Vector3(icon_vec.x, 0, icon_vec.y)
+	target_position = target.global_position + strafe_radius * Vector3(icon_vec.x, 0, icon_vec.y)
 	
 	lerp_look_at_move_dir(follow_turn_speed)
 	global_rotation.x = 0

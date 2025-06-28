@@ -8,7 +8,7 @@ extends CharacterBody3D
 var BPM := 113.0
 var rotate_speed := 3.6
 var max_targets := 11 # No max proximity exists; any lockonable in the entire level can be targeted
-var homing_speed_multiplier := .125 # must be between 0 (exclusive) and 1 (inclusive)
+var homing_time := .12 # Time it takes for rang to move from 1 target to another
 
 var invincible := true
 
@@ -42,16 +42,20 @@ func dist_to_lockonable(a, b):
 	return icon.global_position.distance_to(a.global_position) < icon.global_position.distance_to(b.global_position)
 
 func homing_attack(target):
-	if target == null:
-		return
-	var original_dist_to_target := global_position.distance_to(target.global_position)
-	var homing_speed := homing_speed_multiplier * original_dist_to_target / get_physics_process_delta_time()
-	while target != null and global_position.distance_to(target.global_position) > 1:
-		if global_position.distance_to(target.global_position) <= homing_speed * get_physics_process_delta_time():
-			velocity = global_position.distance_to(target.global_position) * global_position.direction_to(target.global_position) / get_physics_process_delta_time()
-		else:
-			velocity = homing_speed * global_position.direction_to(target.global_position)
-		move_and_slide()
+	# No matter what the distance is, the rang should return to the icon in .4 seconds
+	# Get original vector from icon to rang
+	var original_vec = global_position - target.global_position
+	# Progress = value btwn 0 and 1 where 0 is beginning of path and 1 is end
+	# At every frame, set rang's position to icon's position + icon_to_rang vec - (progress * icon_to_rang_vec)
+	# Progress reaches 1 at .4 seconds = .4 / delta = n frames
+	var n = int(homing_time/get_physics_process_delta_time())
+	# 1 is added to n bc the rang won't reach if the dist btwn icon and the target increases during the rang mvmt
+	for i in range(n+1):
+		if target == null:
+			return
+		var progress = float(i)/n
+		var progress_vec = ((1 - progress) * original_vec)
+		global_position = target.global_position + progress_vec
 		await get_tree().create_timer(get_physics_process_delta_time()).timeout
 
 func _physics_process(_delta):
