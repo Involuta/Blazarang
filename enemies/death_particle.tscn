@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dsjvw30b8ljn2"]
 
-[ext_resource type="Script" path="res://DisappearRB.gd" id="1_jlqkh"]
+[ext_resource type="Script" path="res://general_scripts/DisappearRB.gd" id="1_jlqkh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1wsws"]
 shading_mode = 0

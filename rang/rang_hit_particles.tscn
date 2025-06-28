@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c4f1e3kdxj7ed"]
 
-[ext_resource type="Script" path="res://DisappearNode.gd" id="1_h8wan"]
+[ext_resource type="Script" path="res://general_scripts/DisappearNode.gd" id="1_h8wan"]
 
 [sub_resource type="Curve" id="Curve_g215j"]
 max_value = 2.0

@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://el0vhxctxsiu" path="res://glb_inherited_scenes/bowl_mesh.tscn" id="5_7qoeb"]
 [ext_resource type="PackedScene" uid="uid://bmtn0cwrlroe4" path="res://enemies/ball_walker_mesh_leg_stand.tscn" id="5_rin41"]
 [ext_resource type="Script" path="res://enemies/multi_hurtbox_child.gd" id="5_tqkwm"]
-[ext_resource type="Script" path="res://hitbox.gd" id="7_ably2"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="7_ably2"]
 [ext_resource type="Script" path="res://enemies/boss_hurtbox.gd" id="10_n240s"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_5sb8t"]

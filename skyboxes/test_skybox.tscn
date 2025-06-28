@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dq0grbvlk4dlw"]
 
-[ext_resource type="Shader" path="res://skygradient.gdshader" id="1_j8wwr"]
+[ext_resource type="Shader" path="res://general_scripts/skygradient.gdshader" id="1_j8wwr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jgbdc"]
 render_priority = 0

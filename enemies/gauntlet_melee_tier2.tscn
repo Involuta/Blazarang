@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://enemies/gauntlet_enemy_base.gd" id="1_ghx6x"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_tbkks"]
-[ext_resource type="Script" path="res://hitbox.gd" id="3_bxuvo"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="3_bxuvo"]
 [ext_resource type="PackedScene" uid="uid://bsrvb25fuh6xo" path="res://glb_inherited_scenes/melee_t2.tscn" id="4_kx56q"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4b6ac"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cvgn7rjgn5vt0"]
 
-[ext_resource type="Script" path="res://DisappearNode.gd" id="1_ywrvr"]
+[ext_resource type="Script" path="res://general_scripts/DisappearNode.gd" id="1_ywrvr"]
 
 [sub_resource type="Gradient" id="Gradient_u3gr3"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0.8, 0, 1)

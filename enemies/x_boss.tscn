@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://enemies/x_boss.gd" id="1_u3wem"]
 [ext_resource type="Script" path="res://enemies/boss_hurtbox.gd" id="2_y4k4d"]
-[ext_resource type="Script" path="res://hitbox.gd" id="3_rpkwr"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="3_rpkwr"]
 [ext_resource type="PackedScene" uid="uid://b2i61ldwbwc8o" path="res://enemies/x_blade.tscn" id="4_jwe6g"]
 [ext_resource type="PackedScene" uid="uid://b3uvg3j4qge8o" path="res://glb_inherited_scenes/x_boss_meshes.tscn" id="5_f83nc"]
 [ext_resource type="Material" uid="uid://bfy48sth1alq7" path="res://textures/x_arrow.tres" id="5_qr4nt"]
 [ext_resource type="Script" path="res://enemies/grab_hitbox.gd" id="6_f731e"]
-[ext_resource type="PackedScene" uid="uid://xxarwwj6l614" path="res://trauma_causer.tscn" id="6_r6uan"]
+[ext_resource type="PackedScene" uid="uid://xxarwwj6l614" path="res://general_scripts/trauma_causer.tscn" id="6_r6uan"]
 [ext_resource type="PackedScene" uid="uid://duanou50282es" path="res://glb_inherited_scenes/cotu_anims_24.tscn" id="8_q60er"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ch0f6"]

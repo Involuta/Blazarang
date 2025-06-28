@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://hg3sme140wqp"]
 
-[ext_resource type="Script" path="res://bg_camera.gd" id="1_nebo1"]
+[ext_resource type="Script" path="res://general_scripts/bg_camera.gd" id="1_nebo1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_upylf"]
 sky_top_color = Color(0.0196078, 0, 0.172549, 1)

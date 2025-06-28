@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://ckifn7eyumnbs" path="res://glb_inherited_scenes/landmite_meshes.tscn" id="1_dpwyp"]
 [ext_resource type="Script" path="res://enemies/landmite.gd" id="1_unap6"]
-[ext_resource type="Script" path="res://start_ik.gd" id="2_tgjp2"]
-[ext_resource type="Script" path="res://hitbox.gd" id="4_h4rgh"]
+[ext_resource type="Script" path="res://general_scripts/start_ik.gd" id="3_abw3u"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="4_25qvn"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="4_impec"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sii8f"]
@@ -47,14 +47,14 @@ mesh = SubResource("CapsuleMesh_wrs5x")
 transform = Transform3D(-0.6, 2.09272e-16, -9.05975e-08, 2.09272e-16, 0.6, -2.09272e-16, 9.05975e-08, -2.09272e-16, -0.6, 0, 0, 0)
 
 [node name="LeftVeryBackShin" parent="LandmiteMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.313381, 0.909337, 0.273678, -0.910393, 0.369671, -0.185821, -0.270144, -0.190922, 0.943701, 2.14592, 1.85684, -0.344805)
+transform = Transform3D(0.313381, 0.909336, 0.273678, -0.910392, 0.36967, -0.185821, -0.270144, -0.190922, 0.943701, 2.14592, 1.85684, -0.344805)
 
 [node name="LeftVeryBackShin" parent="LandmiteMeshes/Armature/Skeleton3D/LeftVeryBackShin" index="0"]
 cast_shadow = 0
 surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
 
 [node name="LeftVeryBackThigh" parent="LandmiteMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.695032, -0.34579, 0.630365, 0.349524, 0.928679, 0.124051, -0.628302, 0.134108, 0.766324, 0.473097, -0.369237, 0.660109)
+transform = Transform3D(0.695032, -0.34579, 0.630365, 0.349524, 0.928679, 0.124051, -0.628302, 0.134108, 0.766324, 0.473098, -0.369237, 0.660109)
 
 [node name="LeftVeryBackThigh" parent="LandmiteMeshes/Armature/Skeleton3D/LeftVeryBackThigh" index="0"]
 cast_shadow = 0
@@ -77,7 +77,7 @@ cast_shadow = 0
 surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
 
 [node name="LeftMiddleFrontShin" parent="LandmiteMeshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.562773, 0.806477, -0.181333, -0.80608, 0.584017, 0.0957097, 0.183089, 0.0923063, 0.978753, 1.3776, 1.52178, -0.0637055)
+transform = Transform3D(0.562773, 0.806477, -0.181333, -0.80608, 0.584017, 0.0957097, 0.183089, 0.0923064, 0.978753, 1.3776, 1.52178, -0.0637055)
 
 [node name="LeftMiddleFrontShin" parent="LandmiteMeshes/Armature/Skeleton3D/LeftMiddleFrontShin" index="0"]
 visible = false
@@ -193,7 +193,7 @@ tip_bone = &"Bone.009.L.001"
 use_magnet = true
 magnet = Vector3(2.08165e-12, 10, 2.08165e-12)
 target_node = NodePath("../../LeftVeryFront")
-script = ExtResource("2_tgjp2")
+script = ExtResource("3_abw3u")
 
 [node name="LeftMiddleFront" type="SkeletonIK3D" parent="LandmiteMeshes/Armature/Skeleton3D" index="20"]
 process_priority = 1
@@ -202,7 +202,7 @@ tip_bone = &"Bone.007.L.001"
 use_magnet = true
 magnet = Vector3(0, 10, 0)
 target_node = NodePath("../../LeftMiddleFront")
-script = ExtResource("2_tgjp2")
+script = ExtResource("3_abw3u")
 
 [node name="LeftMiddleBack" type="SkeletonIK3D" parent="LandmiteMeshes/Armature/Skeleton3D" index="21"]
 process_priority = 1
@@ -211,7 +211,7 @@ tip_bone = &"Bone.005.L.001"
 use_magnet = true
 magnet = Vector3(0, 10, 0)
 target_node = NodePath("../../LeftMiddleBack")
-script = ExtResource("2_tgjp2")
+script = ExtResource("3_abw3u")
 
 [node name="LeftVeryBack" type="SkeletonIK3D" parent="LandmiteMeshes/Armature/Skeleton3D" index="22"]
 process_priority = 1
@@ -220,7 +220,7 @@ tip_bone = &"Bone.003.L.001"
 use_magnet = true
 magnet = Vector3(0, 10, 0)
 target_node = NodePath("../../LeftVeryBack")
-script = ExtResource("2_tgjp2")
+script = ExtResource("3_abw3u")
 
 [node name="RightVeryFront" type="SkeletonIK3D" parent="LandmiteMeshes/Armature/Skeleton3D" index="23"]
 process_priority = 1
@@ -229,7 +229,7 @@ tip_bone = &"Bone.009.R.001"
 use_magnet = true
 magnet = Vector3(0, 10, 0)
 target_node = NodePath("../../RightVeryFront")
-script = ExtResource("2_tgjp2")
+script = ExtResource("3_abw3u")
 
 [node name="RightMiddleFront" type="SkeletonIK3D" parent="LandmiteMeshes/Armature/Skeleton3D" index="24"]
 process_priority = 1
@@ -238,7 +238,7 @@ tip_bone = &"Bone.007.R.001"
 use_magnet = true
 magnet = Vector3(0, 10, 0)
 target_node = NodePath("../../RightMiddleFront")
-script = ExtResource("2_tgjp2")
+script = ExtResource("3_abw3u")
 
 [node name="RightMiddleBack" type="SkeletonIK3D" parent="LandmiteMeshes/Armature/Skeleton3D" index="25"]
 process_priority = 1
@@ -247,7 +247,7 @@ tip_bone = &"Bone.005.R.001"
 use_magnet = true
 magnet = Vector3(0, 10, 0)
 target_node = NodePath("../../RightMiddleBack")
-script = ExtResource("2_tgjp2")
+script = ExtResource("3_abw3u")
 
 [node name="RightVeryBack" type="SkeletonIK3D" parent="LandmiteMeshes/Armature/Skeleton3D" index="26"]
 process_priority = 1
@@ -256,7 +256,7 @@ tip_bone = &"Bone.003.R.001"
 use_magnet = true
 magnet = Vector3(0, 10, 0)
 target_node = NodePath("../../RightVeryBack")
-script = ExtResource("2_tgjp2")
+script = ExtResource("3_abw3u")
 
 [node name="LeftVeryFront" type="Marker3D" parent="LandmiteMeshes/Armature" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, -1.5, 1.7)
@@ -293,7 +293,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.6, -0.65)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 collision_layer = 8
 collision_mask = 11
-script = ExtResource("4_h4rgh")
+script = ExtResource("4_25qvn")
 damage = 20
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeleeHitboxPivot/EnemyHitbox"]

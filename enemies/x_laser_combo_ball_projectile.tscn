@@ -1,6 +1,6 @@
 [gd_scene load_steps=37 format=3 uid="uid://ckkxheuv5iefh"]
 
-[ext_resource type="Script" path="res://hitbox.gd" id="1_hwgla"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="1_hwgla"]
 [ext_resource type="Script" path="res://enemies/x_laser_combo_ball.gd" id="1_wi63g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iuxs1"]

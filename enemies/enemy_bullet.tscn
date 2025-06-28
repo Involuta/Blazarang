@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://dl6hfq4ei0eok"]
 
-[ext_resource type="Script" path="res://hitbox.gd" id="1_abaar"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="1_abaar"]
 [ext_resource type="Script" path="res://enemies/bullet.gd" id="1_ld4k0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mxo5g"]

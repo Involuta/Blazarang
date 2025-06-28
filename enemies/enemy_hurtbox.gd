@@ -64,6 +64,10 @@ func award_score(hitter):
 			Globals.award_score(Globals.HOMING_HIT_SCORE)
 
 func death_effect():
+	var parent = get_parent()
+	if "death_effect" in parent:
+		parent.death_effect()
+		return
 	for i in range(dp_count):
 		var dp = death_particle.instantiate()
 		level.add_child(dp)

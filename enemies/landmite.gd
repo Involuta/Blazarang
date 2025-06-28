@@ -1,11 +1,13 @@
 extends CharacterBody3D
 
+var mite_explosion := preload("res://enemies/mite_explosion.tscn")
 @onready var nav_agent := $NavigationAgent3D
 @onready var anim_player := $LandmiteMeshes/AnimationPlayer
 @onready var anim_tree := $AnimationTree
 @onready var root := $/root/ViewControl
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var level : Node3D
 var hitbox : Node3D
 var target : Node3D
 var aiming_at_target := true
@@ -41,6 +43,7 @@ var time_until_forced_leap := 5.0 # Set to can_leap_window when reset
 var bite_cooldown_remaining := 2.5
 
 func _ready():
+	level = root.find_child("Level")
 	target = root.find_child("Icon")
 	hitbox = find_child("MeleeHitboxPivot")
 	#hitbox.process_mode = Node.PROCESS_MODE_DISABLED
@@ -220,3 +223,9 @@ func can_see_target():
 		return false
 	else:
 		return true
+
+func death_effect():
+	var me_inst = mite_explosion.instantiate()
+	level.add_child.call_deferred(me_inst)
+	await me_inst.tree_entered
+	me_inst.global_position = global_position

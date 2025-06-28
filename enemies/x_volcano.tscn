@@ -1,8 +1,8 @@
 [gd_scene load_steps=39 format=3 uid="uid://bg2swy025xr60"]
 
 [ext_resource type="Script" path="res://enemies/x_volcano.gd" id="1_u0lj8"]
-[ext_resource type="Script" path="res://hitbox.gd" id="2_k3fxy"]
-[ext_resource type="PackedScene" uid="uid://xxarwwj6l614" path="res://trauma_causer.tscn" id="3_0n0u6"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="2_k3fxy"]
+[ext_resource type="PackedScene" uid="uid://xxarwwj6l614" path="res://general_scripts/trauma_causer.tscn" id="3_0n0u6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l8irc"]
 transparency = 4

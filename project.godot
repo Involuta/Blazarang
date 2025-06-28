@@ -13,7 +13,11 @@ config_version=5
 config/name="BlazarangGodot"
 run/main_scene="res://levels/mite_level/mite_level_viewcontrol.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
-config/icon="res://icon.svg"
+config/icon="res://general_scripts/icon.svg"
+
+[audio]
+
+buses/default_bus_layout="res://general_scripts/default_bus_layout.tres"
 
 [autoload]
 

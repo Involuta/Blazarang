@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://enemies/enemy_big_melee_base.gd" id="1_jca1y"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_qtrs8"]
-[ext_resource type="Script" path="res://hitbox.gd" id="3_qlf6c"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="3_qlf6c"]
 [ext_resource type="PackedScene" uid="uid://g4kirqxgep2" path="res://glb_inherited_scenes/big_melee_t1.tscn" id="4_soixx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_unw8v"]

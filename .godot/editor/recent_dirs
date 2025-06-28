@@ -1,8 +1,9 @@
+res://general_scripts
+res://enemies
 res://levels/mite_level
 res://levels/balls_level
 res://
 res://enemies/enemy_anims
-res://enemies
 res://glb_inherited_scenes
 res://levels
 res://enemies/spawners

@@ -1,18 +1,18 @@
 [gd_scene load_steps=21 format=3 uid="uid://8aqtamar6ihi"]
 
-[ext_resource type="Script" path="res://hitbox.gd" id="1_a1t4a"]
 [ext_resource type="Script" path="res://enemies/ball_walker_radiation_zone.gd" id="1_c52ry"]
-[ext_resource type="Script" path="res://damage_over_time_area.gd" id="1_lxska"]
+[ext_resource type="Script" path="res://general_scripts/damage_over_time_area.gd" id="2_8wtcc"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="3_krtyl"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_bw518"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6dqld"]
 height = 1.0
-radius = 1.0
+radius = 12.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kja62"]
 resource_local_to_scene = true
 transparency = 4
 shading_mode = 0
-albedo_color = Color(0, 0.431373, 1.50196, 0)
+albedo_color = Color(0, 0.62, 2, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_wd5td"]
 resource_local_to_scene = true
@@ -20,10 +20,6 @@ material = SubResource("StandardMaterial3D_kja62")
 top_radius = 12.0
 bottom_radius = 12.0
 height = 0.05
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_6dqld"]
-height = 1.0
-radius = 12.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_57crq"]
 height = 1.0
@@ -36,6 +32,10 @@ radius = 6.0
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_m32ll"]
 height = 1.0
 radius = 3.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bw518"]
+height = 1.0
+radius = 1.0
 
 [sub_resource type="Animation" id="Animation_7u45g"]
 resource_name = "disappear"
@@ -190,20 +190,20 @@ script = ExtResource("1_c52ry")
 disappear_secs = 20.0
 
 [node name="DamageOverTimeArea" type="Node3D" parent="."]
-script = ExtResource("1_lxska")
+script = ExtResource("2_8wtcc")
 time_btwn_damage_ticks = 0.2
 
 [node name="EnemyHitbox" type="Area3D" parent="DamageOverTimeArea"]
 collision_layer = 8
 collision_mask = 18
-script = ExtResource("1_a1t4a")
+script = ExtResource("3_krtyl")
 damage = 6
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DamageOverTimeArea/EnemyHitbox"]
-shape = SubResource("CylinderShape3D_bw518")
+shape = SubResource("CylinderShape3D_6dqld")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.05, 0, 0, 0, 1, 0, 0, 0, 0.05, 2.08165e-12, -0.35, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.35, 2.08165e-12)
 mesh = SubResource("CylinderMesh_wd5td")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -213,7 +213,6 @@ libraries = {
 }
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_vwbhu")
 draw_pass_1 = SubResource("SphereMesh_6vkp1")

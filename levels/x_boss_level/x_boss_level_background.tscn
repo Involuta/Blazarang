@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://cmuqsguscdwmr"]
 
-[ext_resource type="Script" path="res://bg_camera.gd" id="1_qycqg"]
+[ext_resource type="Script" path="res://general_scripts/bg_camera.gd" id="1_qycqg"]
 [ext_resource type="Script" path="res://levels/x_boss_level/background_nodes/spawn_bg_diamonds.gd" id="1_ruyd8"]
 [ext_resource type="PackedScene" uid="uid://dq0grbvlk4dlw" path="res://skyboxes/test_skybox.tscn" id="3_l4xc7"]
 

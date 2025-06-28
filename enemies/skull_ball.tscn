@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://enemies/skull_ball.gd" id="1_ebyms"]
 [ext_resource type="Shader" path="res://glb_inherited_scenes/black_outline.gdshader" id="2_jc1lq"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_xkl6b"]
-[ext_resource type="Script" path="res://hitbox.gd" id="3_68d6s"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="3_68d6s"]
 [ext_resource type="AudioStream" uid="uid://d0xusfqqc8emu" path="res://audio/sfx/evil_laugh.mp3" id="4_c7kkm"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xs2x3"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cqaat4e3ukpmf"]
 
 [ext_resource type="Script" path="res://enemies/heavy_ball.gd" id="1_t8xu3"]
-[ext_resource type="Script" path="res://hitbox.gd" id="3_qhid8"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="3_qhid8"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xs2x3"]
 friction = 0.0

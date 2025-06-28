@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://enemies/ball.gd" id="1_wk04o"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_6aiv1"]
-[ext_resource type="Script" path="res://hitbox.gd" id="3_3bqti"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="3_3bqti"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f3pcq"]
 friction = 0.0

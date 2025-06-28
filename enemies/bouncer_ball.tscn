@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://enemies/ball.gd" id="1_wv7x3"]
 [ext_resource type="Shader" path="res://glb_inherited_scenes/outline.gdshader" id="2_gmn3i"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_jo0j8"]
-[ext_resource type="Script" path="res://hitbox.gd" id="3_0qtde"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="3_0qtde"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f3pcq"]
 friction = 0.0

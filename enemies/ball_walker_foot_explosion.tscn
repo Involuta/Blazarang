@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=3 uid="uid://cju7q8lmimibg"]
 
 [ext_resource type="Script" path="res://enemies/ball_walker_foot_explosion.gd" id="1_l6u87"]
-[ext_resource type="Script" path="res://hitbox.gd" id="2_vbsko"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="2_vbsko"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_p3v7c"]
 height = 1.0

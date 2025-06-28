@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dhdekntejmrdi"]
 
 [ext_resource type="Script" path="res://levels/balls_level/balls_level_background.gd" id="1_qm7qv"]
-[ext_resource type="Script" path="res://bg_camera.gd" id="2_m88ah"]
+[ext_resource type="Script" path="res://general_scripts/bg_camera.gd" id="2_m88ah"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8dxd2"]
 sky_top_color = Color(0.305882, 0, 0, 1)

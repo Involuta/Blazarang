@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dykhe21cmwub"]
 
 [ext_resource type="Script" path="res://enemies/death_ball.gd" id="1_xap5c"]
-[ext_resource type="Script" path="res://hitbox.gd" id="3_r1bjf"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="3_r1bjf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i4scl"]
 diffuse_mode = 3

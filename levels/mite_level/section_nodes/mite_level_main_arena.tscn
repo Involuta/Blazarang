@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cyg2snr1w5xw5" path="res://addons/func_godot/textures/default_texture.png" id="4_2kekb"]
 [ext_resource type="PackedScene" uid="uid://bknq8cqwurygt" path="res://enemies/landmite.tscn" id="5_a3mh6"]
 [ext_resource type="PackedScene" uid="uid://s18sdq53k2im" path="res://enemies/paramite.tscn" id="6_3d33o"]
-[ext_resource type="Script" path="res://hitbox.gd" id="7_8tej4"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="7_cwqry"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_mcv4c"]
 vertices = PackedVector3Array(-0.0833321, 1, -40.8333, -10.5833, 1, -40.8333, -20.3333, 1, -35.8333, -35.5833, 1, -20.8333, -40.8333, 1, -10.5833, -40.8333, 1, -0.0833321, -0.0833321, 1, 40.9167, 10.4167, 1, 40.9167, 20.4167, 1, 35.9167, 40.9167, 1, -0.0833321, 40.9167, 1, -10.5833, 35.9167, 1, -20.5833, -20.5833, 1, 35.6667, -10.5833, 1, 40.9167, -0.0833321, 1, 40.9167, 20.4167, 1, 35.9167, -40.8333, 1, -0.0833321, -40.8333, 1, 10.6667, -35.8333, 1, 20.6667, -35.8333, 1, 20.6667, -30.8333, 1, 30.6667, -20.5833, 1, 35.6667, -40.8333, 1, -0.0833321, 35.9167, 1, -20.5833, 30.9167, 1, -30.5833, 20.6667, 1, -35.5833, 40.9167, 1, -0.0833321, -20.3333, 1, -35.8333, -30.3333, 1, -31.0833, -35.5833, 1, -20.8333, 35.6667, 1, 20.6667, 40.9167, 1, 10.4167, 40.9167, 1, -0.0833321, 20.6667, 1, -35.5833, 10.6667, 1, -40.8333, -0.0833321, 1, -40.8333, 40.9167, 1, -0.0833321, 20.6667, 1, -35.5833, -0.0833321, 1, -40.8333, -40.8333, 1, -0.0833321, -20.5833, 1, 35.6667, 20.4167, 1, 35.9167, 20.4167, 1, 35.9167, 30.4167, 1, 30.9167, 35.6667, 1, 20.6667, 40.9167, 1, -0.0833321)
@@ -275,7 +275,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.418, 1.8, -0.093)
 [node name="EnemyHitbox" type="Area3D" parent="MiteCloudPivot"]
 collision_layer = 8
 collision_mask = 16
-script = ExtResource("7_8tej4")
+script = ExtResource("7_cwqry")
 damage = 0
 debuff = 2
 
