@@ -225,7 +225,9 @@ func can_see_target():
 		return true
 
 func death_effect():
+	"""
 	var me_inst = mite_explosion.instantiate()
 	level.add_child.call_deferred(me_inst)
 	await me_inst.tree_entered
 	me_inst.global_position = global_position
+	"""

@@ -190,3 +190,10 @@ func retreat(_delta):
 	
 	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
 	nav_agent.velocity = new_velocity
+
+func death_effect():
+	var sw_inst = spitweb.instantiate()
+	level.add_child.call_deferred(sw_inst)
+	await sw_inst.tree_entered
+	sw_inst.global_position = hitbox.global_position
+	sw_inst.velocity = 5 * Vector3.UP
