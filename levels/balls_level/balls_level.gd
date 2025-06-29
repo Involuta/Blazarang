@@ -10,7 +10,7 @@ func _ready():
 	ui_root = root.find_child("UIRoot")
 	ball_walker_health_bar = ui_root.find_child("BallWalkerHealthBar")
 	ball_walker_damage_indicator = ball_walker_health_bar.find_child("DamageIndicator")
-	ball_walker_hurtbox = root.find_child("BallWalker").find_child("EnemyHurtbox")
+	ball_walker_hurtbox = root.find_child("BallWalker").find_child("EnemyHurtboxFlesh")
 	ui_root.hide_black_screen()
 	ball_walker_damage_indicator.max_value = ball_walker_hurtbox.max_health
 

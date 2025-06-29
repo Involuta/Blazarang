@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://mpihc5n1bhib"]
 
 [ext_resource type="Texture2D" uid="uid://dsp54kxhbcush" path="res://rang/HitEffect1Spritesheet.png" id="1_px8p8"]
-[ext_resource type="Script" path="res://DisappearNode.gd" id="2_vcp3v"]
+[ext_resource type="Script" path="res://general_scripts/DisappearNode.gd" id="2_vcp3v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jwrbk"]
 atlas = ExtResource("1_px8p8")

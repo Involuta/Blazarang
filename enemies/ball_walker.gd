@@ -178,14 +178,16 @@ func _ready():
 	dist_state_switch_cooldown_remaining = max_dist_state_switch_cooldown
 	foot_ball_spawner_upgrade_time_remaining = max_foot_ball_spawner_upgrade_time
 	
+	# Keep flesh hurtboxes deactivated until armor is broken (armor breaking handled in EnemyHurtboxArmor node)
+	find_child("LeftFootFleshHurtbox").process_mode = Node.PROCESS_MODE_DISABLED
+	find_child("RightFootFleshHurtbox").process_mode = Node.PROCESS_MODE_DISABLED
+	
 	$WalkerPivot/LeftLegGun.visible = false
 	$WalkerPivot/RightLegGun.visible = false
 	
 	Globals.health_segment_lost.connect(on_health_segment_lost)
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("Special"):
-		print(foot_ball_spawner.position)
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	if typhoon_rotating:

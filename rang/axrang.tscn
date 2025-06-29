@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://rang/axrang.gd" id="1_wabwy"]
 [ext_resource type="PackedScene" uid="uid://ilwv1c8q8cjc" path="res://glb_inherited_scenes/ax.tscn" id="2_b1lvs"]
 [ext_resource type="Script" path="res://rang/destroy_on_cotu_hit.gd" id="3_5hupc"]
-[ext_resource type="Script" path="res://hitbox.gd" id="4_lmpjw"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="4_lmpjw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gby86"]
 size = Vector3(0.2, 2, 1)

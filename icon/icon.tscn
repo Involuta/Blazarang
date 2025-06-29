@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cwqyp0lcxfevf" path="res://glb_inherited_scenes/cotu_icon_circle.tscn" id="3_jnp3h"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qvdqm"]
+size = Vector3(0.5, 0.5, 0.5)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fnpre"]
 animation = &"Follow"
@@ -280,7 +281,7 @@ collision_layer = 32
 script = ExtResource("1_fgjod")
 
 [node name="TriangleIconMesh" parent="." instance=ExtResource("2_qle8n")]
-transform = Transform3D(-0.184216, -0.880943, -0.00175371, 1.02524e-05, 0.0017895, -0.899998, 0.880945, -0.184216, -0.000356248, 2.08165e-12, -0.998732, 2.08165e-12)
+transform = Transform3D(0.774612, -0.458231, -0.000899852, 1.30797e-05, 0.00178948, -0.899998, 0.458232, 0.77461, 0.00154683, 2.08165e-12, -0.998732, 2.08165e-12)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_qvdqm")

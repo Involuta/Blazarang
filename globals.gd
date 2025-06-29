@@ -96,6 +96,7 @@ const enemy_hurtbox_data = {
 	"GiantBouncerBall" : [10, 1.0, 2.0],
 	"SkullBall" : [60, 1.0, 3.0],
 	"PopperBall" : [10, 1.0, 1.0],
+	"BallWalkerArmor" : [100, 1.0, 1.0],
 	"BallWalker" : [200, 1.0, 1.0],
 	
 	"XBoss" : [200, 1.0, 100.0],

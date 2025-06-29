@@ -1,6 +1,9 @@
 class_name Hurtbox
 extends Area3D
 
+# Changing the name of a hurtbox node is fine (UNLESS IT'S A BOSS HURTBOX DISPLAYED IN UI); nothing looks at a hurtbox name (EXCEPT FOR UI ON A DISPLAYED HURTBOX)
+# You shouldn't change the name of a hitbox since that's what hurtboxes look at
+
 var rng := RandomNumberGenerator.new()
 @export var dp_impulse_limit := 5
 @export var dp_count := 5
@@ -30,8 +33,6 @@ func _physics_process(_delta):
 
 func on_hit(hitbox):
 	if hitbox.name in current_opponent_hitboxes:
-		if "DOT_dmg_per_frame" in hitbox:
-			pass
 		if "is_dodging" in parent:
 			if not parent.is_dodging:
 				receive_debuff(hitbox.debuff)

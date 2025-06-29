@@ -71,7 +71,7 @@ func _physics_process(_delta):
 	mesh.rotate_y(rotate_speed)
 
 func buff_damage():
-	hitbox.damage = 30
+	hitbox.damage = Globals.player_hitbox_data.RoserangDamageBuff1
 
 func buff_homing_targets(targets_added: int):
 	# Why aren't we doing max_targets += targets_added? When the script is reloaded after every instant rethrow, variable values retain changes from previous scripts

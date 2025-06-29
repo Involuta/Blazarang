@@ -435,7 +435,7 @@ func on_catch_axrang():
 		# Apply buffs visually in the UI, but not the ax itself because the ax instance doesn't exist yet (catching the axrang sets axrang_instance to null)
 		for i in range(next_axrang_buff_index):
 			match(axrang_buff_list[i]):
-				Globals.BUFFS.DAMAGE:
+				Globals.AXRANG_BUFFS.DAMAGE:
 					ui.apply_axrang_buff1()
 	else:
 		# Clear axrang buffs if axrang wasn't perfect caught

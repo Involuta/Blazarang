@@ -47,7 +47,7 @@ func _physics_process(delta):
 	rapidorbit(delta)
 
 func buff_damage():
-	hitbox.damage = 30
+	hitbox.damage = Globals.player_hitbox_data.RoserangDamageBuff1
 
 func get_mvmt_state():
 	return "RAPIDORBIT"
