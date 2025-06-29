@@ -31,3 +31,4 @@ res://enemies/mite_explosion.tscn
 res://general_scripts/skygradient.gdshader
 res://enemies/landmite.gd
 res://enemies/paramite.gd
+res://enemies/mite_death_particle.tscn

@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-var mite_explosion := preload("res://enemies/mite_explosion.tscn")
+#var tiny_mite := preload("res://enemies/mite_death_particle.tscn")
 @onready var nav_agent := $NavigationAgent3D
 @onready var anim_player := $LandmiteMeshes/AnimationPlayer
 @onready var anim_tree := $AnimationTree
@@ -41,6 +41,8 @@ var time_until_forced_leap := 5.0 # Set to can_leap_window when reset
 @export var bite_secs := .5
 @export var bite_cooldown_secs := 2.5
 var bite_cooldown_remaining := 2.5
+
+@export var dp_impulse_limit := 5.0
 
 func _ready():
 	level = root.find_child("Level")
@@ -230,4 +232,12 @@ func death_effect():
 	level.add_child.call_deferred(me_inst)
 	await me_inst.tree_entered
 	me_inst.global_position = global_position
+	"""
+	"""
+	for i in range(10):
+		var tm_inst = tiny_mite.instantiate()
+		level.add_child.call_deferred(tm_inst)
+		await tm_inst.tree_entered
+		tm_inst.global_position = global_position
+		tm_inst.apply_central_impulse(Vector3(rng.randf_range(-dp_impulse_limit, dp_impulse_limit), dp_impulse_limit*rng.randf(), rng.randf_range(-dp_impulse_limit, dp_impulse_limit)))
 	"""
