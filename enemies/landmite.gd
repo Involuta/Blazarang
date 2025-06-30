@@ -32,7 +32,9 @@ var time_until_can_leap := 5.0 # Set to random(min_leap_cooldown, max_leap_coold
 @export var can_leap_window := 5.0 # Time you are able to leap on your own before a forced leap occurs
 var time_until_forced_leap := 5.0 # Set to can_leap_window when reset
 @export var leap_secs := 1.0
-@export var leap_lateral_speed := 11.0
+@export var leap_length_threshold := 12.0 # If mite is farther than this value from target, it'll do long leap; otherwise, short leap
+@export var leap_short_lateral_speed := 5.0
+@export var leap_long_lateral_speed := 11.0
 @export var leap_vertical_speed := 5.0
 
 @export var follow_speed := 3.5
@@ -203,7 +205,10 @@ func stop_lateral_mvmt():
 
 func leap():
 	#anim_tree.set("parameters/StateMachine/conditions/leap", true)
-	velocity = (leap_lateral_speed + rng.randf_range(-.5,.5)) * -transform.basis.z
+	if global_position.distance_to(target_position) > leap_length_threshold:
+		velocity = (leap_long_lateral_speed + rng.randf_range(-.5,.5)) * -transform.basis.z
+	else:
+		velocity = (leap_short_lateral_speed + rng.randf_range(-.5,.5)) * -transform.basis.z
 	velocity.y = leap_vertical_speed + rng.randf_range(-.5,.5)
 	await get_tree().create_timer(leap_secs).timeout
 	stop_lateral_mvmt()

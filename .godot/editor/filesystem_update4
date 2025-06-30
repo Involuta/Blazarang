@@ -36,3 +36,4 @@ res://rang/special_homing.gd
 res://rang/special_rapidorbit.gd
 res://icon/icon.tscn
 res://rang/roserang.tscn
+res://enemies/landmite.gd
