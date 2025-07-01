@@ -27,9 +27,10 @@ radius = 1.0
 collision_layer = 8
 collision_mask = 90
 script = ExtResource("1_leqc5")
-target_distance = 2.0
-follow_speed = 6.0
-follow_random_dest_radius = 10.0
+max_leap_cooldown = 5.0
+min_leap_cooldown = 2.5
+follow_speed = 20.0
+follow_random_dest_radius = 3.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -182,6 +183,7 @@ active = true
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 avoidance_enabled = true
 radius = 1.0
+max_speed = 20.0
 avoidance_mask = 3
 
 [node name="EnemyHurtbox" type="Area3D" parent="."]

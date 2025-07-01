@@ -75,7 +75,6 @@ func _on_navigation_agent_3d_target_reached():
 	var target_position_x = target.global_position.x + rng.randf_range(-follow_random_dest_radius, follow_random_dest_radius)
 	var target_position_z = target.global_position.z + rng.randf_range(-follow_random_dest_radius, follow_random_dest_radius)
 	target_position = Vector3(target_position_x, target.global_position.y, target_position_z)
-	print("Success!")
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	if behav_state == FOLLOW:
@@ -90,6 +89,8 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	move_and_slide()
 
 func follow(delta):
+	target_position.y = target.global_position.y
+	
 	lerp_look_at_move_dir(follow_turn_speed)
 	global_rotation.x = 0
 	global_rotation.z = 0
