@@ -25,3 +25,8 @@ res://cotu/cotu_cb_main.tscn
 res://enemies/paramite.tscn
 res://enemies/landmite.tscn
 res://levels/mite_level/mite_level.tscn
+res://enemies/flatmite.tscn
+res://enemies/paramite.gd
+res://enemies/flatmite.gd
+res://enemies/landmite.gd
+res://globals.gd

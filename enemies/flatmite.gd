@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 #var tiny_mite := preload("res://enemies/mite_death_particle.tscn")
 @onready var nav_agent := $NavigationAgent3D
-@onready var anim_player := $LandmiteMeshes/AnimationPlayer
+#@onready var anim_player := $FlatmiteMeshes/AnimationPlayer
 @onready var anim_tree := $AnimationTree
 @onready var root := $/root/ViewControl
 var rng := RandomNumberGenerator.new()
@@ -13,36 +13,26 @@ var target : Node3D
 var aiming_at_target := true
 enum {
 	FOLLOW,
-	STRAFE,
-	BITE,
 	LEAP,
 }
 var behav_state := FOLLOW
 @export var target_distance := 1.0 # Dist from target necessary to bite
-var target_position := Vector3.ZERO # Position mite moves to; set to target.global_position when not strafing and set to a point beside and behind the target when strafing ("fwd" = to the target)
-
-var strafing_left := true
-@export var strafe_radius := 15.0 # Dist btwn target and strafe dest
+var target_position := Vector3.ZERO # Position mite moves to
 
 var can_leap := true
-@export var max_leap_cooldown := 3.0 # Max time after a leap ends before you can leap again
-@export var min_leap_cooldown := .25 # Min time after a leap ends before you can leap again
+@export var max_leap_cooldown := 6.0 # Max time after a leap ends before you can leap again
+@export var min_leap_cooldown := 3.0 # Min time after a leap ends before you can leap again
 var time_until_can_leap := 5.0 # Set to random(min_leap_cooldown, max_leap_cooldown) when reset
-@export var roserang_leap_proximity := 30.0 # When the rang is this close or closer to the mite, the mite leaps
-@export var can_leap_window := 5.0 # Time you are able to leap on your own before a forced leap occurs
-var time_until_forced_leap := 5.0 # Set to can_leap_window when reset
+@export var roserang_leap_proximity := 30.0 # When the rang is this far or farther from the mite, the mite leaps
 @export var leap_secs := 1.0
 @export var leap_length_threshold := 12.0 # If mite is farther than this value from target, it'll do long leap; otherwise, short leap
-@export var leap_short_lateral_speed := 5.0
-@export var leap_long_lateral_speed := 11.0
-@export var leap_vertical_speed := 5.0
+@export var leap_short_lateral_speed := 4.5
+@export var leap_long_lateral_speed := 9.0
+@export var leap_vertical_speed := 6.0
 
 @export var follow_speed := 3.5
 @export var follow_turn_speed := .1
-@export var bite_dist := 1.0
-@export var bite_secs := .5
-@export var bite_cooldown_secs := 2.5
-var bite_cooldown_remaining := 2.5
+@export var follow_random_dest_radius := 15.0 # Radius around target that mite target position can be within
 
 @export var dp_impulse_limit := 5.0
 
@@ -55,9 +45,11 @@ func _ready():
 	
 	time_until_can_leap = rng.randf_range(min_leap_cooldown, max_leap_cooldown)
 	can_leap = true
-	time_until_forced_leap = can_leap_window
 	
-	bite_cooldown_remaining = bite_cooldown_secs
+	await get_tree().create_timer(1.0).timeout
+	var target_position_x = target.global_position.x + rng.randf_range(-follow_random_dest_radius, follow_random_dest_radius)
+	var target_position_z = target.global_position.z + rng.randf_range(-follow_random_dest_radius, follow_random_dest_radius)
+	target_position = Vector3(target_position_x, target.global_position.y, target_position_z)
 	
 	add_to_group("lockonables")
 
@@ -65,10 +57,6 @@ func _physics_process(delta):
 	match(behav_state):
 		FOLLOW: 
 			follow(delta)
-		STRAFE:
-			strafe(delta)
-		BITE:
-			stop_lateral_mvmt()
 		LEAP:
 			pass
 	
@@ -84,7 +72,10 @@ func lerp_look_at_move_dir(turn_speed):
 	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(velocity.x, velocity.z), turn_speed)
 
 func _on_navigation_agent_3d_target_reached():
-	pass
+	var target_position_x = target.global_position.x + rng.randf_range(-follow_random_dest_radius, follow_random_dest_radius)
+	var target_position_z = target.global_position.z + rng.randf_range(-follow_random_dest_radius, follow_random_dest_radius)
+	target_position = Vector3(target_position_x, target.global_position.y, target_position_z)
+	print("Success!")
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	if behav_state == FOLLOW:
@@ -99,8 +90,6 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	move_and_slide()
 
 func follow(delta):
-	target_position = target.global_position
-	
 	lerp_look_at_move_dir(follow_turn_speed)
 	global_rotation.x = 0
 	global_rotation.z = 0
@@ -117,17 +106,8 @@ func follow(delta):
 	else:
 		nav_agent.target_desired_distance = .1
 		
-	bite_cooldown_remaining -= delta
-	if bite_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < bite_dist:
-		bite_cooldown_remaining = bite_cooldown_secs
-		behav_state = BITE
-		await bite()
-		behav_state = FOLLOW
-	
 	if can_leap:
-		time_until_forced_leap -= delta
-		if time_until_forced_leap <= 0 or close_to_roserang():
-			time_until_forced_leap = can_leap_window
+		if far_from_roserang():
 			behav_state = LEAP
 			await leap()
 			behav_state = FOLLOW
@@ -138,63 +118,12 @@ func follow(delta):
 			time_until_can_leap = rng.randf_range(min_leap_cooldown, max_leap_cooldown)
 			can_leap = true
 
-func close_to_roserang():
+func far_from_roserang():
 	var roserang = root.find_child("Roserang", true, false)
 	if roserang == null:
 		return false
 	else:
-		return global_position.distance_to(roserang.global_position) < roserang_leap_proximity
-
-func strafe(delta):
-	var dir_to_target := global_position.direction_to(target.global_position)
-	var dir_to_target2D := Vector2(dir_to_target.x, dir_to_target.z)
-	var icon_vec := dir_to_target2D.orthogonal()
-	if strafing_left:
-		icon_vec *= -1
-	target_position = target.global_position + strafe_radius * Vector3(icon_vec.x, 0, icon_vec.y)
-	
-	lerp_look_at_move_dir(follow_turn_speed)
-	global_rotation.x = 0
-	global_rotation.z = 0
-	nav_agent.set_target_position(target_position)
-	var next_position = nav_agent.get_next_path_position()
-	var new_velocity = (next_position - global_position).normalized() * follow_speed
-	
-	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
-	nav_agent.velocity = new_velocity
-	
-	# If player isn't in sight, reduce target distance to a very small number
-	if can_see_target():
-		nav_agent.target_desired_distance = target_distance
-	else:
-		nav_agent.target_desired_distance = .1
-		
-	bite_cooldown_remaining -= delta
-	if bite_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < bite_dist:
-		bite_cooldown_remaining = bite_cooldown_secs
-		behav_state = BITE
-		await bite()
-		behav_state = FOLLOW
-	
-	if can_leap:
-		time_until_forced_leap -= delta
-		if time_until_forced_leap <= 0 or close_to_roserang():
-			time_until_forced_leap = can_leap_window
-			behav_state = LEAP
-			await leap()
-			behav_state = FOLLOW
-			can_leap = false
-	else:
-		time_until_can_leap -= delta
-		if time_until_can_leap <= 0:
-			time_until_can_leap = rng.randf_range(min_leap_cooldown, max_leap_cooldown)
-			can_leap = true
-
-func bite():
-	stop_lateral_mvmt()
-	#anim_tree.set("parameters/StateMachine/conditions/bite", true)
-	await get_tree().create_timer(bite_secs).timeout
-	#anim_tree.set("parameters/StateMachine/conditions/bite", false)
+		return global_position.distance_to(roserang.global_position) > roserang_leap_proximity
 
 func stop_lateral_mvmt():
 	velocity.x = 0

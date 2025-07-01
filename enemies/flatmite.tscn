@@ -1,9 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://s18sdq53k2im"]
+[gd_scene load_steps=9 format=3 uid="uid://dfc0tigy6k7el"]
 
-[ext_resource type="PackedScene" uid="uid://dcy7ebw6m5b1v" path="res://glb_inherited_scenes/paramite_meshes.tscn" id="1_d7ubw"]
-[ext_resource type="Script" path="res://enemies/paramite.gd" id="1_sdbgq"]
-[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_50ns4"]
-[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="4_ohxfo"]
+[ext_resource type="Script" path="res://enemies/flatmite.gd" id="1_leqc5"]
+[ext_resource type="PackedScene" uid="uid://dcy7ebw6m5b1v" path="res://glb_inherited_scenes/paramite_meshes.tscn" id="2_u6qya"]
+[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="3_cp585"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tej0w"]
 radius = 1.0
@@ -13,35 +12,10 @@ albedo_color = Color(1, 1, 0.768627, 1)
 metallic = 0.25
 roughness = 0.5
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ftkg5"]
-animation = &"flip"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pmocf"]
-animation = &"glide"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r8dec"]
-advance_mode = 2
-advance_expression = "behav_state == FOLLOW"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t765v"]
-switch_mode = 2
-advance_mode = 2
-advance_expression = "behav_state != FOLLOW"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nt1xo"]
-switch_mode = 2
-advance_mode = 2
-advance_expression = "behav_state == FOLLOW"
-
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_v8kte"]
-states/flip/node = SubResource("AnimationNodeAnimation_ftkg5")
-states/flip/position = Vector2(453.5, 100)
-states/glide/node = SubResource("AnimationNodeAnimation_pmocf")
-states/glide/position = Vector2(340.5, 100)
-transitions = ["Start", "glide", SubResource("AnimationNodeStateMachineTransition_r8dec"), "glide", "flip", SubResource("AnimationNodeStateMachineTransition_t765v"), "flip", "glide", SubResource("AnimationNodeStateMachineTransition_nt1xo")]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_mxa20"]
-graph_offset = Vector2(-22.08, 103.68)
+graph_offset = Vector2(-42.24, 65.28)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_v8kte")
 nodes/StateMachine/position = Vector2(100, 150)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -49,19 +23,19 @@ node_connections = [&"output", 0, &"StateMachine"]
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7nguh"]
 radius = 1.0
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_h5y8l"]
-radius = 0.3
-
-[node name="Paramite" type="CharacterBody3D"]
+[node name="Flatmite" type="CharacterBody3D"]
 collision_layer = 8
 collision_mask = 90
-script = ExtResource("1_sdbgq")
+script = ExtResource("1_leqc5")
+target_distance = 2.0
+follow_speed = 6.0
+follow_random_dest_radius = 10.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 shape = SubResource("CapsuleShape3D_tej0w")
 
-[node name="ParamiteMeshes" parent="." instance=ExtResource("1_d7ubw")]
+[node name="ParamiteMeshes" parent="." instance=ExtResource("2_u6qya")]
 transform = Transform3D(-0.5, 1.74393e-16, 4.37114e-08, 1.74393e-16, 0.5, -1.74393e-16, -4.37114e-08, -1.74393e-16, -0.5, 2.08165e-12, 2.08165e-12, -0.5)
 
 [node name="Skeleton3D" parent="ParamiteMeshes/Armature" index="0"]
@@ -206,35 +180,21 @@ advance_expression_base_node = NodePath("..")
 active = true
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-target_desired_distance = 15.0
 avoidance_enabled = true
-radius = 3.0
-avoidance_layers = 2
+radius = 1.0
 avoidance_mask = 3
 
 [node name="EnemyHurtbox" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 collision_layer = 8
 collision_mask = 265
-script = ExtResource("2_50ns4")
-enemy_name = "Paramite"
+script = ExtResource("3_cp585")
+enemy_name = "Flatmite"
 hit_particle_color = Color(1, 1, 0.768627, 1)
 opponent_hitboxes = ["PlayerHitbox"]
 
 [node name="HurtboxCollider" type="CollisionShape3D" parent="EnemyHurtbox"]
 shape = SubResource("CapsuleShape3D_7nguh")
-
-[node name="MeleeHitboxPivot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.6, -1)
-
-[node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
-collision_layer = 8
-collision_mask = 18
-script = ExtResource("4_ohxfo")
-damage = 15
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeleeHitboxPivot/EnemyHitbox"]
-shape = SubResource("SphereShape3D_h5y8l")
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
