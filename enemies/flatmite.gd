@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+var spitweb := preload("res://enemies/spitweb.tscn")
 #var tiny_mite := preload("res://enemies/mite_death_particle.tscn")
 @onready var nav_agent := $NavigationAgent3D
 #@onready var anim_player := $FlatmiteMeshes/AnimationPlayer
@@ -29,6 +30,8 @@ var time_until_can_leap := 5.0 # Set to random(min_leap_cooldown, max_leap_coold
 @export var leap_short_lateral_speed := 4.5
 @export var leap_long_lateral_speed := 9.0
 @export var leap_vertical_speed := 6.0
+@export var spitweb_num := 10.0 # Number of spitweb projectiles shot
+@export var spitweb_speed := 20.0 # Speed of a spitweb projectile
 
 @export var follow_speed := 3.5
 @export var follow_turn_speed := .1
@@ -137,9 +140,22 @@ func leap():
 	else:
 		velocity = (leap_short_lateral_speed + rng.randf_range(-.5,.5)) * -transform.basis.z
 	velocity.y = leap_vertical_speed + rng.randf_range(-.5,.5)
-	await get_tree().create_timer(leap_secs).timeout
+	await get_tree().create_timer(leap_secs/2).timeout
+	shoot_spitwebs()
+	await get_tree().create_timer(leap_secs/2).timeout
 	stop_lateral_mvmt()
 	#anim_tree.set("parameters/StateMachine/conditions/leap", false)
+
+func shoot_spitwebs():
+	for i in range(10):
+		var sw_inst = spitweb.instantiate()
+		level.add_child.call_deferred(sw_inst)
+		await sw_inst.tree_entered
+		sw_inst.global_position = hitbox.global_position
+		
+		var spit_dir := global_position.direction_to(target_position)
+		spit_dir += Vector3(rng.randf_range(-.5, .5), rng.randf_range(-.5, .5), rng.randf_range(-.5, .5))
+		sw_inst.velocity = spitweb_speed * spit_dir
 
 func stop_aiming_at_target():
 	aiming_at_target = false
