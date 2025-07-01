@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 var spitweb := preload("res://enemies/spitweb.tscn")
-#var tiny_mite := preload("res://enemies/mite_death_particle.tscn")
+@onready var physical_collider := $CollisionShape3D
 @onready var nav_agent := $NavigationAgent3D
 #@onready var anim_player := $FlatmiteMeshes/AnimationPlayer
 @onready var anim_tree := $AnimationTree
@@ -20,20 +20,28 @@ var behav_state := FOLLOW
 @export var target_distance := 1.0 # Dist from target necessary to bite
 var target_position := Vector3.ZERO # Position mite moves to
 
+# Pre-leap startup
 var can_leap := true
-@export var max_leap_cooldown := 6.0 # Max time after a leap ends before you can leap again
-@export var min_leap_cooldown := 3.0 # Min time after a leap ends before you can leap again
+@export var max_leap_cooldown := 5.0 # Max time after a leap ends before you can leap (startup) again
+@export var min_leap_cooldown := 2.0 # Min time after a leap ends before you can leap (startup) again
 var time_until_can_leap := 5.0 # Set to random(min_leap_cooldown, max_leap_cooldown) when reset
-@export var roserang_leap_proximity := 30.0 # When the rang is this far or farther from the mite, the mite leaps
-@export var leap_secs := 1.0
-@export var leap_length_threshold := 12.0 # If mite is farther than this value from target, it'll do long leap; otherwise, short leap
-@export var leap_short_lateral_speed := 4.5
-@export var leap_long_lateral_speed := 9.0
-@export var leap_vertical_speed := 6.0
-@export var spitweb_num := 10.0 # Number of spitweb projectiles shot
-@export var spitweb_speed := 20.0 # Speed of a spitweb projectile
+@export var roserang_leap_proximity := 25.0 # When the rang is this far or farther from the mite, the mite leaps
 
-@export var follow_speed := 3.5
+# Leap startup
+var in_leap_startup := false # Becomes true during leap startup; used to know whether to run twds target or not
+@export var leap_startup_proximity := 10.0 # Dist from target needed during leap startup to initiate a leap
+
+# Leap
+@export var leap_secs := 1.5
+@export var leap_length_threshold := 12.0 # If mite is farther than this value from target, it'll do long leap; otherwise, short leap
+@export var leap_short_lateral_speed := 4.0
+@export var leap_long_lateral_speed := 8.0
+@export var leap_vertical_speed := 6.0
+@export var spitweb_num := 10 # Number of spitweb projectiles shot
+@export var spitweb_speed := 20.0 # Speed of a spitweb projectile
+@export var spitweb_spread := .5 # X and Z vel of projectiles are changed by a random num btwn -spitweb_spread and spitweb_spread
+
+@export var follow_speed := 20.0
 @export var follow_turn_speed := .1
 @export var follow_random_dest_radius := 15.0 # Radius around target that mite target position can be within
 
@@ -61,7 +69,7 @@ func _physics_process(delta):
 		FOLLOW: 
 			follow(delta)
 		LEAP:
-			pass
+			lerp_look_at_target(follow_turn_speed)
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -75,9 +83,15 @@ func lerp_look_at_move_dir(turn_speed):
 	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(velocity.x, velocity.z), turn_speed)
 
 func _on_navigation_agent_3d_target_reached():
-	var target_position_x = target.global_position.x + rng.randf_range(-follow_random_dest_radius, follow_random_dest_radius)
-	var target_position_z = target.global_position.z + rng.randf_range(-follow_random_dest_radius, follow_random_dest_radius)
-	target_position = Vector3(target_position_x, target.global_position.y, target_position_z)
+	if in_leap_startup:
+		in_leap_startup = false
+		behav_state = LEAP
+		await leap()
+		behav_state = FOLLOW
+	else:
+		var target_position_x = target.global_position.x + rng.randf_range(-follow_random_dest_radius, follow_random_dest_radius)
+		var target_position_z = target.global_position.z + rng.randf_range(-follow_random_dest_radius, follow_random_dest_radius)
+		target_position = Vector3(target_position_x, target.global_position.y, target_position_z)
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	if behav_state == FOLLOW:
@@ -92,7 +106,10 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	move_and_slide()
 
 func follow(delta):
-	target_position.y = target.global_position.y
+	if in_leap_startup:
+		target_position = target.global_position
+	else:
+		target_position.y = target.global_position.y
 	
 	lerp_look_at_move_dir(follow_turn_speed)
 	global_rotation.x = 0
@@ -106,16 +123,18 @@ func follow(delta):
 	
 	# If player isn't in sight, reduce target distance to a very small number
 	if can_see_target():
-		nav_agent.target_desired_distance = target_distance
+		if in_leap_startup:
+			nav_agent.target_desired_distance = leap_startup_proximity
+		else:
+			nav_agent.target_desired_distance = roserang_leap_proximity
 	else:
 		nav_agent.target_desired_distance = .1
 		
 	if can_leap:
 		if far_from_roserang():
-			behav_state = LEAP
-			await leap()
-			behav_state = FOLLOW
 			can_leap = false
+			in_leap_startup = true
+			return
 	else:
 		time_until_can_leap -= delta
 		if time_until_can_leap <= 0:
@@ -140,21 +159,23 @@ func leap():
 	else:
 		velocity = (leap_short_lateral_speed + rng.randf_range(-.5,.5)) * -transform.basis.z
 	velocity.y = leap_vertical_speed + rng.randf_range(-.5,.5)
+	physical_collider.process_mode = Node.PROCESS_MODE_DISABLED
 	await get_tree().create_timer(leap_secs/2).timeout
 	shoot_spitwebs()
+	physical_collider.process_mode = Node.PROCESS_MODE_INHERIT
 	await get_tree().create_timer(leap_secs/2).timeout
 	stop_lateral_mvmt()
 	#anim_tree.set("parameters/StateMachine/conditions/leap", false)
 
 func shoot_spitwebs():
-	for i in range(10):
+	target_position = target.global_position
+	for i in range(spitweb_num):
 		var sw_inst = spitweb.instantiate()
 		level.add_child.call_deferred(sw_inst)
 		await sw_inst.tree_entered
 		sw_inst.global_position = hitbox.global_position
-		
-		var spit_dir := global_position.direction_to(target_position)
-		spit_dir += Vector3(rng.randf_range(-.5, .5), rng.randf_range(-.5, .5), rng.randf_range(-.5, .5))
+		var spit_dir := hitbox.global_position.direction_to(target_position)
+		spit_dir += Vector3(rng.randf_range(-spitweb_spread, spitweb_spread), rng.randf_range(0, spitweb_spread/2), rng.randf_range(-spitweb_spread, spitweb_spread))
 		sw_inst.velocity = spitweb_speed * spit_dir
 
 func stop_aiming_at_target():
