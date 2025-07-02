@@ -1,3 +1,5 @@
+res://levels
+res://procedural_animation
 res://glb_inherited_scenes
 res://general_scripts
 res://enemies
@@ -5,7 +7,6 @@ res://levels/balls_level
 res://levels/mite_level
 res://
 res://enemies/enemy_anims
-res://levels
 res://enemies/spawners
 res://levels/x_boss_level
 res://rang
@@ -19,7 +20,6 @@ res://levels/hub
 res://level_maps
 res://textures
 res://audio/sfx
-res://ui
 /Users/ryanbascos/GameDevMiscAssets
 /Users/ryanbascos/Library/Application Support/TrenchBroom/games
 /Users/ryanbascos/GodotBuilds

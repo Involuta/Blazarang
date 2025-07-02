@@ -1,19 +1,45 @@
-[gd_scene load_steps=5 format=3 uid="uid://d4wywx3bv11n"]
+[gd_scene load_steps=7 format=3 uid="uid://d4wywx3bv11n"]
 
-[ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="1_4wpki"]
-[ext_resource type="Environment" uid="uid://bgusbrajqhj6h" path="res://levels/test_level.tres" id="1_q2fp5"]
-[ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="2_6nbsg"]
-[ext_resource type="PackedScene" uid="uid://cjxdm8v82qb3v" path="res://levels/level1_section_nodes/gauntlet_arena1.tscn" id="4_2f8yw"]
+[ext_resource type="PackedScene" uid="uid://cge1js2j822dh" path="res://enemies/mite_proc_anim_test.tscn" id="4_v3gxb"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tbmi2"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_8r27o"]
+sky_material = SubResource("ProceduralSkyMaterial_tbmi2")
+
+[sub_resource type="Environment" id="Environment_hlyg2"]
+background_mode = 2
+sky = SubResource("Sky_8r27o")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_haq8g"]
+size = Vector3(40, 1, 40)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_alqdx"]
+size = Vector3(40, 1, 40)
 
 [node name="Level" type="Node3D"]
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("1_q2fp5")
+environment = SubResource("Environment_hlyg2")
 
-[node name="cotuCB" parent="." instance=ExtResource("1_4wpki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.0887, 22.8717, 5.98899)
+[node name="MiteProceduralAnimTest" parent="." instance=ExtResource("4_v3gxb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 12, 2.08165e-12)
 
-[node name="Target" parent="." instance=ExtResource("2_6nbsg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.0174, 12.1305, -21.5556)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
+mesh = SubResource("BoxMesh_haq8g")
 
-[node name="GauntletArena1" parent="." instance=ExtResource("4_2f8yw")]
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_alqdx")
