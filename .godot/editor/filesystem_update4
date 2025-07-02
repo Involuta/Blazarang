@@ -32,3 +32,5 @@ res://enemies/landmite.gd
 res://globals.gd
 res://enemies/enemy_anims/paramite_flip.res
 res://enemies/enemy_anims/paramite_glide.res
+res://enemies/mite_procedural_anim_test.tscn
+res://general_scripts/start_ik.gd
