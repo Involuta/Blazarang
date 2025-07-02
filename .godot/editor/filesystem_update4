@@ -42,3 +42,4 @@ res://textures/white_border_black_center.tres
 res://textures/white_border_black_solid_square.tres
 res://procedural_animation/step_ray.gd
 res://procedural_animation/ik_target.gd
+res://procedural_animation/step_target_container.gd

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cge1js2j822dh"]
+[gd_scene load_steps=7 format=3 uid="uid://cge1js2j822dh"]
 
 [ext_resource type="Script" path="res://enemies/mite_proc_anim_test_mvmt.gd" id="1_m2pg4"]
 [ext_resource type="PackedScene" uid="uid://dcy7ebw6m5b1v" path="res://glb_inherited_scenes/paramite_meshes.tscn" id="1_tn8yl"]
 [ext_resource type="Script" path="res://procedural_animation/start_ik.gd" id="3_nfadg"]
 [ext_resource type="Script" path="res://procedural_animation/step_ray.gd" id="4_6lwnr"]
 [ext_resource type="Script" path="res://procedural_animation/ik_target.gd" id="4_g0okk"]
+[ext_resource type="Script" path="res://procedural_animation/step_target_container.gd" id="5_kn6ga"]
 
 [node name="MiteProceduralAnimTest" type="Node3D"]
 script = ExtResource("1_m2pg4")
@@ -133,6 +134,7 @@ step_target = NodePath("../StepTargetContainer/LeftMiddleBackRay/LeftMiddleBackS
 adjacent_target = NodePath("../RightMiddleBackIKTarget")
 
 [node name="StepTargetContainer" type="Node3D" parent="ParamiteMeshes/Armature" index="5"]
+script = ExtResource("5_kn6ga")
 
 [node name="LeftVeryFrontRay" type="RayCast3D" parent="ParamiteMeshes/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
 transform = Transform3D(0.999848, -0.000304586, 0.0174497, 3.48734e-16, 0.999848, 0.0174524, -0.0174524, -0.0174497, 0.999695, 2.5, 4.3, 1)
