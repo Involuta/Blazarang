@@ -47,7 +47,7 @@ mesh = SubResource("CapsuleMesh_wrs5x")
 transform = Transform3D(-0.6, 2.09272e-16, -9.05975e-08, 2.09272e-16, 0.6, -2.09272e-16, 9.05975e-08, -2.09272e-16, -0.6, 0, 0, 0)
 
 [node name="LeftVeryBackShin" parent="LandmiteMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.313381, 0.909337, 0.273678, -0.910393, 0.369671, -0.185821, -0.270144, -0.190922, 0.943701, 2.14592, 1.85684, -0.344805)
+transform = Transform3D(0.313381, 0.909336, 0.273678, -0.910393, 0.369671, -0.185821, -0.270144, -0.190922, 0.943701, 2.14592, 1.85684, -0.344805)
 
 [node name="LeftVeryBackShin" parent="LandmiteMeshes/Armature/Skeleton3D/LeftVeryBackShin" index="0"]
 cast_shadow = 0
@@ -153,7 +153,7 @@ cast_shadow = 0
 surface_material_override/0 = SubResource("StandardMaterial3D_7ch2p")
 
 [node name="RightVeryFrontShin" parent="LandmiteMeshes/Armature/Skeleton3D" index="14"]
-transform = Transform3D(0.531113, -0.725161, 0.438246, 0.719744, 0.659042, 0.218249, -0.447089, 0.19951, 0.871956, -1.56907, 1.50406, 0.076685)
+transform = Transform3D(0.531112, -0.725161, 0.438246, 0.719744, 0.659042, 0.218249, -0.447088, 0.19951, 0.871956, -1.56907, 1.50406, 0.0766851)
 
 [node name="RightVeryFrontShin" parent="LandmiteMeshes/Armature/Skeleton3D/RightVeryFrontShin" index="0"]
 cast_shadow = 0
