@@ -2,16 +2,20 @@ extends Node3D
 
 # Huge thanks to Crigz Vs Game Dev on YouTube for the Spider Bot Procedural Animation tutorial!
 
-@export var run_speed := 5.0
+@export var run_speed := 10.0
 @export var turn_speed := 1.0
 @export var ground_offset := .5 # Height of mite's body from the ground
 
-# Leg IK targets
-# vf = very front, mb = middle back
+# Leg IK targets; note that their positions are also their global positions
+# vf = very front, mb = middle back, mf = middle front, vb = very back
 @export var lvf_ik : Marker3D
 @export var rmb_ik : Marker3D
 @export var rvf_ik : Marker3D
 @export var lmb_ik : Marker3D
+@export var lmf_ik : Marker3D
+@export var rvb_ik : Marker3D
+@export var rmf_ik : Marker3D
+@export var lvb_ik : Marker3D
 
 func _process(delta):
 	# Create 2 planes made from the 4 IK targets and get the average of their normals
@@ -24,7 +28,7 @@ func _process(delta):
 	transform.basis = lerp(transform.basis, target_basis, run_speed * delta).orthonormalized()
 	
 	# Offset body from the ground
-	var avg_ik_pos = (lvf_ik.position + rmb_ik.position + rvf_ik.position + lmb_ik.position) / 4
+	var avg_ik_pos = (lvf_ik.position + rmb_ik.position + rvf_ik.position + lmb_ik.position + lmf_ik.position + rvb_ik.position + rmf_ik.position + lvb_ik.position) / 8
 	var target_pos = avg_ik_pos + transform.basis.y * ground_offset
 	# Dot product gets the difference in positions only in this direction
 	var dist_to_target_pos = transform.basis.y.dot(target_pos - position)
