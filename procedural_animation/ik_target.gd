@@ -14,7 +14,7 @@ extends Marker3D
 @export var adjacent_target : Node3D
 var is_stepping := false
 
-func _process(delta):
+func _physics_process(delta):
 	if not is_stepping and not adjacent_target.is_stepping and global_position.distance_to(step_target.global_position) > step_distance:
 		step()
 
