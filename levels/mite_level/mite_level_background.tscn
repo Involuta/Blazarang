@@ -22,7 +22,7 @@ sky_rotation = Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="BallsLevelBackground" type="Node3D"]
+[node name="MiteLevelBackground" type="Node3D"]
 script = ExtResource("1_qm7qv")
 star_num = 2.08165e-12
 

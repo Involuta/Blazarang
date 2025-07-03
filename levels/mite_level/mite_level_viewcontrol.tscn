@@ -24,7 +24,7 @@ handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
-[node name="BallsLevelBackground" parent="BGViewportContainer/SubViewport" instance=ExtResource("1_mx7vy")]
+[node name="MiteLevelBackground" parent="BGViewportContainer/SubViewport" instance=ExtResource("1_mx7vy")]
 
 [node name="LevelViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 0

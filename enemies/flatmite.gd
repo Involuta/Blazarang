@@ -168,7 +168,6 @@ func leap():
 	#anim_tree.set("parameters/StateMachine/conditions/leap", false)
 
 func shoot_spitwebs():
-	CylinderShape3D
 	target_position = target.global_position
 	for i in range(spitweb_num):
 		var sw_inst = spitweb.instantiate()

@@ -2,7 +2,8 @@ extends CharacterBody3D
 
 #var tiny_mite := preload("res://enemies/mite_death_particle.tscn")
 @onready var nav_agent := $NavigationAgent3D
-@onready var anim_player := $LandmiteMeshes/AnimationPlayer
+@onready var meshes := $ParamiteProcAnimMeshes
+@onready var anim_player := $ParamiteProcAnimMeshes/ParamiteMeshes/AnimationPlayer
 @onready var anim_tree := $AnimationTree
 @onready var root := $/root/ViewControl
 var rng := RandomNumberGenerator.new()
@@ -201,6 +202,8 @@ func stop_lateral_mvmt():
 	velocity.z = 0
 
 func leap():
+	# Stop IK
+	meshes.stop_ik()
 	#anim_tree.set("parameters/StateMachine/conditions/leap", true)
 	if global_position.distance_to(target_position) > leap_length_threshold:
 		velocity = (leap_long_lateral_speed + rng.randf_range(-.5,.5)) * -transform.basis.z
@@ -209,6 +212,8 @@ func leap():
 	velocity.y = leap_vertical_speed + rng.randf_range(-.5,.5)
 	await get_tree().create_timer(leap_secs).timeout
 	stop_lateral_mvmt()
+	# Do IK again
+	meshes.start_ik()
 	#anim_tree.set("parameters/StateMachine/conditions/leap", false)
 
 func stop_aiming_at_target():

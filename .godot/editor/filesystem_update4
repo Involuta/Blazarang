@@ -43,3 +43,8 @@ res://textures/white_border_black_solid_square.tres
 res://procedural_animation/step_ray.gd
 res://procedural_animation/ik_target.gd
 res://procedural_animation/step_target_container.gd
+res://enemies/paramite_proc_anim_meshes.tscn
+res://enemies/paramite_proc_anim_meshes.gd
+res://procedural_animation/start_ik.gd
+res://levels/mite_level/mite_level_background.tscn
+res://levels/mite_level/mite_level_viewcontrol.tscn
