@@ -2,10 +2,10 @@ extends CharacterBody3D
 
 var spitweb := preload("res://enemies/spitweb.tscn")
 @onready var nav_agent := $NavigationAgent3D
-@onready var body_meshes := $ParamiteMeshes
+@onready var body_meshes := $ParamiteProcAnimMeshes
 @onready var physical_collider := $CollisionShape3D
 @onready var hurtbox := $EnemyHurtbox
-@onready var anim_player := $ParamiteMeshes/AnimationPlayer
+@onready var anim_player := $ParamiteProcAnimMeshes/ParamiteMeshes/AnimationPlayer
 @onready var anim_tree := $AnimationTree
 @onready var root := $/root/ViewControl
 var rng := RandomNumberGenerator.new()
@@ -45,6 +45,9 @@ func _ready():
 	switch_to_launch()
 
 func switch_to_launch():
+	# Stop IK since you're leaving the ground
+	body_meshes.stop_ik()
+	
 	behav_state = LAUNCH
 	set_mesh_and_colliders_y_pos(0)
 	velocity.y = launch_vert_speed
@@ -173,6 +176,8 @@ func fall_frame(delta):
 		velocity.y -= gravity * delta
 
 func switch_to_retreat():
+	# Start IK
+	body_meshes.start_ik()
 	behav_state = RETREAT
 
 func retreat(_delta):

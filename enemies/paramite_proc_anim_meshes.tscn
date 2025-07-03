@@ -31,40 +31,40 @@ lvb_sk = NodePath("ParamiteMeshes/Armature/Skeleton3D/LeftVeryBackLeg")
 transform = Transform3D(-1, 3.48787e-16, -8.74228e-08, 3.48787e-16, 1, -3.48787e-16, 8.74228e-08, -3.48787e-16, -1, 0, 0, 0)
 
 [node name="LeftVeryBackShin" parent="ParamiteMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.237359, 0.597863, 0.76565, -0.601803, 0.70921, -0.367226, -0.762558, -0.373606, 0.528133, 1.92116, 0.73862, -0.0951059)
+transform = Transform3D(0.205543, 0.865839, 0.45616, -0.868048, 0.376548, -0.32359, -0.451942, -0.329456, 0.828983, 2.00431, 1.43465, -0.508119)
 
 [node name="LeftVeryBackThigh" parent="ParamiteMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.257372, 0.0940906, 0.961721, -0.0937301, 0.992986, -0.0720658, -0.961756, -0.0715944, 0.264386, 1.59964, 0.0475221, 0.490937)
+transform = Transform3D(0.290495, -0.164415, 0.942646, 0.169256, 0.978423, 0.118496, -0.941788, 0.125126, 0.312055, 1.33772, -0.122523, 0.663394)
 
 [node name="LeftMiddleBackShin" parent="ParamiteMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.499504, 0.720474, 0.481053, -0.73237, 0.647797, -0.209747, -0.462742, -0.247539, 0.851231, 1.5051, 1.06133, 0.0193639)
+transform = Transform3D(0.499504, 0.720474, 0.481053, -0.732369, 0.647797, -0.209747, -0.462742, -0.247539, 0.851231, 1.5051, 1.06132, 0.0193642)
 
 [node name="LeftMiddleBackThigh" parent="ParamiteMeshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.658744, -0.214398, 0.721172, 0.222844, 0.971128, 0.0851542, -0.718608, 0.104614, 0.687502, 0.442361, -0.231177, 0.741547)
+transform = Transform3D(0.658744, -0.214398, 0.721172, 0.222844, 0.971128, 0.0851541, -0.718608, 0.104614, 0.687502, 0.442361, -0.231177, 0.741547)
 
 [node name="LeftMiddleFrontShin" parent="ParamiteMeshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.480326, 0.70266, -0.524933, -0.715333, 0.660154, 0.229116, 0.507527, 0.265452, 0.819726, 1.39757, 1.14744, -0.109364)
+transform = Transform3D(0.480327, 0.70266, -0.524933, -0.715333, 0.660154, 0.229115, 0.507527, 0.265452, 0.819726, 1.39757, 1.14744, -0.109364)
 
 [node name="LeftMiddleFrontThigh" parent="ParamiteMeshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.617335, -0.318222, -0.719466, 0.327693, 0.935437, -0.13257, 0.715202, -0.153924, 0.681757, 0.0873352, -0.41369, -0.915976)
+transform = Transform3D(0.617335, -0.318221, -0.719466, 0.327693, 0.935437, -0.13257, 0.715202, -0.153924, 0.681757, 0.0873353, -0.41369, -0.915976)
 
 [node name="LeftVeryFrontShin" parent="ParamiteMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.145422, 0.884564, -0.44317, -0.875524, 0.323668, 0.358744, 0.460772, 0.335836, 0.821525, 1.87291, 1.44758, 0.577803)
+transform = Transform3D(0.145422, 0.884564, -0.44317, -0.875524, 0.323668, 0.358744, 0.460772, 0.335836, 0.821525, 1.87291, 1.44758, 0.577804)
 
 [node name="LeftVeryFrontThigh" parent="ParamiteMeshes/Armature/Skeleton3D" index="7"]
 transform = Transform3D(0.14259, -0.380014, -0.913924, 0.387475, 0.871096, -0.301752, 0.910786, -0.311096, 0.271455, 0.74001, -0.348663, -0.81994)
 
 [node name="RightVeryBackShin" parent="ParamiteMeshes/Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.237358, -0.597863, -0.76565, 0.601803, 0.709209, -0.367227, 0.762558, -0.373606, 0.528132, -1.92116, 0.73862, -0.0951065)
+transform = Transform3D(0.205542, -0.865837, -0.45616, 0.868047, 0.376548, -0.32359, 0.451941, -0.329456, 0.828982, -2.00431, 1.43464, -0.508121)
 
 [node name="RightVeryBackThigh" parent="ParamiteMeshes/Armature/Skeleton3D" index="9"]
-transform = Transform3D(0.257372, -0.0940906, -0.961721, 0.0937303, 0.992986, -0.0720658, 0.961756, -0.0715946, 0.264386, -1.62538, 0.0381492, 0.394761)
+transform = Transform3D(0.290495, 0.164415, -0.942646, -0.169255, 0.978423, 0.118496, 0.941789, 0.125125, 0.312055, -1.36677, -0.105597, 0.569215)
 
 [node name="RightMiddleBackShin" parent="ParamiteMeshes/Armature/Skeleton3D" index="10"]
-transform = Transform3D(0.499504, -0.720474, -0.481053, 0.732369, 0.647797, -0.209747, 0.462742, -0.24754, 0.85123, -1.5051, 1.06132, 0.0193637)
+transform = Transform3D(0.499504, -0.720474, -0.481053, 0.732369, 0.647797, -0.209747, 0.462742, -0.24754, 0.85123, -1.5051, 1.06133, 0.0193635)
 
 [node name="RightMiddleBackThigh" parent="ParamiteMeshes/Armature/Skeleton3D" index="11"]
-transform = Transform3D(0.658744, 0.214398, -0.721173, -0.222844, 0.971128, 0.0851542, 0.718608, 0.104614, 0.687502, -0.442361, -0.231177, 0.741547)
+transform = Transform3D(0.658744, 0.214399, -0.721173, -0.222844, 0.971128, 0.0851545, 0.718608, 0.104614, 0.687502, -0.442361, -0.231177, 0.741548)
 
 [node name="RightMiddleFrontShin" parent="ParamiteMeshes/Armature/Skeleton3D" index="12"]
 transform = Transform3D(0.480326, -0.70266, 0.524933, 0.715333, 0.660154, 0.229115, -0.507527, 0.265452, 0.819726, -1.39757, 1.14744, -0.109364)
@@ -195,7 +195,7 @@ step_target = NodePath("../StepTargetContainer/LeftMiddleFrontRay/LeftMiddleFron
 step_distance = 1.1
 
 [node name="RightVeryBackIKTarget" type="Marker3D" parent="ParamiteMeshes/Armature" index="6" node_paths=PackedStringArray("step_target")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, -1, 1.75)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, -1, 1.5)
 top_level = true
 script = ExtResource("4_gipll")
 step_target = NodePath("../StepTargetContainer/RightVeryBackRay/RightVeryBackStepTarget")
@@ -209,7 +209,7 @@ step_target = NodePath("../StepTargetContainer/RightMiddleFrontRay/RightMiddleFr
 step_distance = 1.1
 
 [node name="LeftVeryBackIKTarget" type="Marker3D" parent="ParamiteMeshes/Armature" index="8" node_paths=PackedStringArray("step_target")]
-transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -1, -1, 1.75)
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -1, -1, 1.5)
 top_level = true
 script = ExtResource("4_gipll")
 step_target = NodePath("../StepTargetContainer/LeftVeryBackRay/LeftVeryBackStepTarget")
@@ -274,14 +274,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3, -1, -0.7)
 top_level = true
 
 [node name="RightVeryBackRay" type="RayCast3D" parent="ParamiteMeshes/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
-transform = Transform3D(0.999391, 0.00121797, 0.0348782, 3.48574e-16, 0.999391, -0.0348995, -0.0348995, 0.0348782, 0.998782, -1.7, 4, -2.9)
+transform = Transform3D(0.999391, 0.00121797, 0.0348782, 3.48574e-16, 0.999391, -0.0348995, -0.0348995, 0.0348782, 0.998782, -1.7, 4, -2.5)
 target_position = Vector3(0, -10, 0)
 collision_mask = 2
 script = ExtResource("6_5qvrw")
 step_target = NodePath("RightVeryBackStepTarget")
 
 [node name="RightVeryBackStepTarget" type="Marker3D" parent="ParamiteMeshes/Armature/StepTargetContainer/RightVeryBackRay"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 1.75)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 1.5)
 top_level = true
 
 [node name="RightMiddleFrontRay" type="RayCast3D" parent="ParamiteMeshes/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
@@ -296,14 +296,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3, -1, -0.7)
 top_level = true
 
 [node name="LeftVeryBackRay" type="RayCast3D" parent="ParamiteMeshes/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
-transform = Transform3D(0.999391, -0.00121797, -0.0348782, 3.48574e-16, 0.999391, -0.0348995, 0.0348995, 0.0348782, 0.998782, 1.7, 4, -2.9)
+transform = Transform3D(0.999391, -0.00121797, -0.0348782, 3.48574e-16, 0.999391, -0.0348995, 0.0348995, 0.0348782, 0.998782, 1.7, 4, -2.5)
 target_position = Vector3(0, -10, 0)
 collision_mask = 2
 script = ExtResource("6_5qvrw")
 step_target = NodePath("LeftVeryBackStepTarget")
 
 [node name="LeftVeryBackStepTarget" type="Marker3D" parent="ParamiteMeshes/Armature/StepTargetContainer/LeftVeryBackRay"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 1.75)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 1.5)
 top_level = true
 
 [editable path="ParamiteMeshes"]
