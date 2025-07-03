@@ -33,6 +33,7 @@ extends Node3D
 var ik_stopped := false
 
 func _process(delta):
+	return
 	if ik_stopped:
 		return
 	
@@ -43,14 +44,14 @@ func _process(delta):
 	
 	# Convert the normal to a basis, then a quaternion to prevent a "Basis must be normalized" error, then convert the lerped quaternion back to a Basis
 	var target_basis = _basis_from_normal(avg_normal)
-	transform.basis = lerp(transform.basis.orthonormalized(), target_basis, run_speed * delta).orthonormalized()
+	transform.basis = lerp(transform.basis, target_basis, run_speed * delta).orthonormalized()
 	
 	# Offset body from the ground
 	var avg_ik_pos = (lvf_ik.position + rmb_ik.position + rvf_ik.position + lmb_ik.position + lmf_ik.position + rvb_ik.position + rmf_ik.position + lvb_ik.position) / 8
 	var target_pos = avg_ik_pos + transform.basis.y * ground_offset
 	# Dot product gets the difference in positions only in this direction
 	var dist_to_target_pos = transform.basis.y.dot(target_pos - global_position)
-	global_position = lerp(global_position, global_position + transform.basis.y * dist_to_target_pos, run_speed * delta)
+	#global_position = lerp(global_position, global_position + transform.basis.y * dist_to_target_pos, run_speed * delta)
 
 func _basis_from_normal(normal: Vector3) -> Basis:
 	var result = Basis()

@@ -15,7 +15,9 @@ extends Marker3D
 var is_stepping := false
 
 func _physics_process(delta):
-	if not is_stepping and not adjacent_ik_target.is_stepping and global_position.distance_to(step_target.global_position) > step_distance:
+	#if not is_stepping and not adjacent_ik_target.is_stepping and global_position.distance_to(step_target.global_position) > step_distance:
+		#step()
+	if not is_stepping and global_position.distance_to(step_target.global_position) > step_distance:
 		step()
 
 func recalculate_ik_target():
