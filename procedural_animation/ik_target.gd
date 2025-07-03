@@ -10,16 +10,14 @@ extends Marker3D
 @export var step_distance := 1.5
 
 # Adjacent target = IK target horizontally opposite this IK target
-# Only step when you're not stepping and the adjacent target isn't stepping
-@export var adjacent_ik_target : Node3D
+# Only step when you're not stepping
 var is_stepping := false
 
 func _physics_process(delta):
-	#if not is_stepping and not adjacent_ik_target.is_stepping and global_position.distance_to(step_target.global_position) > step_distance:
-		#step()
 	if not is_stepping and global_position.distance_to(step_target.global_position) > step_distance:
 		step()
 
+# Called by main parent script after landing from a leap to instantly bring IK targets to step targets, which prevents odd interpolation from old pre-leap IK target position to new post-leap step target position
 func recalculate_ik_target():
 	global_position = step_target.global_position
 
