@@ -28,3 +28,4 @@ res://enemies/paramite.tscn
 res://enemies/paramite.gd
 res://enemies/landmite.tscn
 res://procedural_animation/step_target_container.gd
+res://procedural_animation/ik_target.gd

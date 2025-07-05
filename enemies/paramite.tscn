@@ -63,13 +63,13 @@ shape = SubResource("CapsuleShape3D_tej0w")
 [node name="ParamiteProcAnimMeshes" parent="." instance=ExtResource("2_wn62r")]
 
 [node name="LeftVeryBackShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.205542, 0.865836, 0.456159, -0.868045, 0.376547, -0.323589, -0.45194, -0.329455, 0.828981, 2.00431, 1.43464, -0.508124)
+transform = Transform3D(0.205542, 0.865836, 0.456159, -0.868045, 0.376547, -0.323589, -0.45194, -0.329455, 0.828981, 2.00431, 1.43464, -0.508123)
 
 [node name="LeftVeryBackShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/LeftVeryBackShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")
 
 [node name="LeftVeryBackThigh" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.290495, -0.164415, 0.942646, 0.169255, 0.978423, 0.118496, -0.941788, 0.125125, 0.312055, 1.33772, -0.122522, 0.663394)
+transform = Transform3D(0.290495, -0.164415, 0.942645, 0.169255, 0.978423, 0.118496, -0.941788, 0.125125, 0.312055, 1.33772, -0.122522, 0.663393)
 
 [node name="LeftVeryBackThigh" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/LeftVeryBackThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")
@@ -86,20 +86,11 @@ transform = Transform3D(0.731779, -0.0796819, 0.676868, 0.0871217, 0.995931, 0.0
 [node name="LeftMiddleBackThigh" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/LeftMiddleBackThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")
 
-[node name="LeftMiddleFrontShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.480326, 0.70266, -0.524933, -0.715333, 0.660154, 0.229116, 0.507527, 0.265452, 0.819726, 1.39757, 1.14744, -0.109364)
-
 [node name="LeftMiddleFrontShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/LeftMiddleFrontShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")
 
-[node name="LeftMiddleFrontThigh" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.617335, -0.318222, -0.719466, 0.327693, 0.935437, -0.13257, 0.715202, -0.153924, 0.681757, 0.0873352, -0.41369, -0.915976)
-
 [node name="LeftMiddleFrontThigh" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/LeftMiddleFrontThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")
-
-[node name="LeftVeryFrontShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.145422, 0.884564, -0.44317, -0.875524, 0.323668, 0.358744, 0.460772, 0.335836, 0.821525, 1.87291, 1.44758, 0.577803)
 
 [node name="LeftVeryFrontShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/LeftVeryFrontShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")
@@ -107,8 +98,14 @@ surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")
 [node name="LeftVeryFrontThigh" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/LeftVeryFrontThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")
 
+[node name="RightVeryBackShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D" index="8"]
+transform = Transform3D(0.205542, -0.865836, -0.456159, 0.868045, 0.376547, -0.323589, 0.451941, -0.329455, 0.828981, -2.00431, 1.43464, -0.508123)
+
 [node name="RightVeryBackShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/RightVeryBackShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")
+
+[node name="RightVeryBackThigh" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D" index="9"]
+transform = Transform3D(0.290494, 0.164415, -0.942646, -0.169255, 0.978423, 0.118496, 0.941789, 0.125125, 0.312054, -1.36677, -0.105597, 0.569214)
 
 [node name="RightVeryBackThigh" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/RightVeryBackThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")
@@ -125,6 +122,9 @@ transform = Transform3D(0.731779, 0.0796816, -0.676868, -0.0871216, 0.995931, 0.
 [node name="RightMiddleBackThigh" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/RightMiddleBackThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")
 
+[node name="RightMiddleFrontShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D" index="12"]
+transform = Transform3D(0.480326, -0.70266, 0.524933, 0.715333, 0.660154, 0.229115, -0.507527, 0.265452, 0.819726, -1.39757, 1.14744, -0.109364)
+
 [node name="RightMiddleFrontShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/RightMiddleFrontShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")
 
@@ -132,13 +132,10 @@ surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")
 surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")
 
 [node name="RightVeryFrontShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D" index="14"]
-transform = Transform3D(0.145422, -0.884563, 0.443169, 0.875524, 0.323668, 0.358744, -0.460772, 0.335836, 0.821525, -1.87291, 1.44758, 0.577804)
+transform = Transform3D(0.145422, -0.884563, 0.44317, 0.875524, 0.323668, 0.358744, -0.460772, 0.335836, 0.821525, -1.87291, 1.44758, 0.577804)
 
 [node name="RightVeryFrontShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/RightVeryFrontShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")
-
-[node name="RightVeryFrontThigh" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D" index="15"]
-transform = Transform3D(0.14259, 0.380014, 0.913924, -0.387475, 0.871096, -0.301752, -0.910786, -0.311096, 0.271455, -0.74001, -0.348663, -0.81994)
 
 [node name="RightVeryFrontThigh" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/RightVeryFrontThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")
@@ -151,6 +148,41 @@ surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")
 
 [node name="Body" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/Body" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")
+
+[node name="LeftVeryFrontIKTarget" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature" index="1"]
+step_distance = 1.5
+checking_adjacent = false
+
+[node name="RightMiddleBackIKTarget" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature" index="2"]
+step_distance = 1.5
+checking_adjacent = false
+
+[node name="RightVeryFrontIKTarget" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature" index="3"]
+step_distance = 1.5
+checking_adjacent = false
+
+[node name="LeftMiddleBackIKTarget" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature" index="4"]
+step_distance = 1.5
+checking_adjacent = false
+
+[node name="LeftMiddleFrontIKTarget" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature" index="5"]
+step_distance = 1.5
+checking_adjacent = false
+
+[node name="RightVeryBackIKTarget" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature" index="6"]
+step_distance = 1.0
+checking_adjacent = false
+
+[node name="RightMiddleFrontIKTarget" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature" index="7"]
+step_distance = 1.5
+checking_adjacent = false
+
+[node name="LeftVeryBackIKTarget" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature" index="8"]
+step_distance = 1.0
+checking_adjacent = false
+
+[node name="StepTargetContainer" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature" index="9"]
+offset = 9.3
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_mxa20")
