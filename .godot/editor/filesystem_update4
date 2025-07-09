@@ -29,3 +29,4 @@ res://enemies/flatmite.tscn
 res://enemies/paramite_proc_anim_meshes.tscn
 res://enemies/paramite.tscn
 res://levels/mite_level/section_nodes/mite_level_main_arena.tscn
+res://enemies/flatmite.gd

@@ -185,8 +185,8 @@ func retreat(_delta):
 	target_position = retreat_dest
 	
 	lerp_look_at_move_dir(follow_turn_speed)
-	global_rotation.x = PI + atan2(ground_normal.y, ground_normal.z)
-	global_rotation.z = PI + atan2(ground_normal.y, ground_normal.x)
+	global_rotation.x = 0#PI + atan2(ground_normal.y, ground_normal.z)
+	global_rotation.z = 0#PI + atan2(ground_normal.y, ground_normal.x)
 	if global_position.distance_to(target_position) <= nav_agent.target_desired_distance:
 		switch_to_launch()
 	else:

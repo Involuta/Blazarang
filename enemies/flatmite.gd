@@ -77,10 +77,10 @@ func _physics_process(delta):
 
 func lerp_look_at_target(turn_speed):
 	var vec3_to_target := global_position.direction_to(target.global_position)
-	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
+	global_rotation.y = lerp_angle(global_rotation.y, atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
 
 func lerp_look_at_move_dir(turn_speed):
-	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(velocity.x, velocity.z), turn_speed)
+	global_rotation.y = lerp_angle(global_rotation.y, atan2(velocity.x, velocity.z), turn_speed)
 
 func _on_navigation_agent_3d_target_reached():
 	if in_leap_startup:
@@ -155,9 +155,9 @@ func stop_lateral_mvmt():
 func leap():
 	#anim_tree.set("parameters/StateMachine/conditions/leap", true)
 	if global_position.distance_to(target_position) > leap_length_threshold:
-		velocity = (leap_long_lateral_speed + rng.randf_range(-.5,.5)) * -transform.basis.z
+		velocity = (leap_long_lateral_speed + rng.randf_range(-.5,.5)) * transform.basis.z
 	else:
-		velocity = (leap_short_lateral_speed + rng.randf_range(-.5,.5)) * -transform.basis.z
+		velocity = (leap_short_lateral_speed + rng.randf_range(-.5,.5)) * transform.basis.z
 	velocity.y = leap_vertical_speed + rng.randf_range(-.5,.5)
 	physical_collider.process_mode = Node.PROCESS_MODE_DISABLED
 	await get_tree().create_timer(leap_secs/2).timeout
