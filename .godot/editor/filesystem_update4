@@ -1,13 +1,13 @@
-res://enemies/paramite.tscn
+res://levels/mite_level/section_nodes/mite_level_main_arena.tscn
 res://enemies/enemy_hurtbox.gd
 res://rang/roserang_shader.tres
 res://GPUTrail-main/shaders/trail.gdshader
 res://GPUTrail-main/shaders/trail_draw_pass.gdshader
 res://GPUTrail-main/defaults/texture.tres
 res://GPUTrail-main/defaults/curve.tres
+res://levels/x_boss_level/background_nodes/diamond.tres
 res://glb_inherited_scenes/outline.gdshader
 res://glb_inherited_scenes/black_outline.gdshader
-res://levels/x_boss_level/background_nodes/diamond.tres
 res://textures/x_arrow.tres
 res://textures/small_solid_white.tres
 res://textures/clear_tile.tres
@@ -25,3 +25,4 @@ res://cotu/cotu_cb_main.tscn
 res://enemies/flatmite.tscn
 res://enemies/landmite.tscn
 res://enemies/paramite_proc_anim_meshes.tscn
+res://enemies/paramite.tscn

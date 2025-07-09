@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://uxdsrj0tihms"
+path="res://.godot/imported/mite_arena.map-a639aba66b24fe8b48ec7a1cb153e75b.tres"
+
+[deps]
+
+source_file="res://level_maps/mite_arena.map"
+dest_files=["res://.godot/imported/mite_arena.map-a639aba66b24fe8b48ec7a1cb153e75b.tres"]
+
+[params]
+

@@ -1,3 +1,4 @@
+res://level_maps
 res://levels/mite_level
 res://procedural_animation
 res://levels
@@ -17,7 +18,6 @@ res://skyboxes
 res://levels/x_boss_level/background_nodes
 res://levels/
 res://levels/hub
-res://level_maps
 res://textures
 res://audio/sfx
 /Users/ryanbascos/GameDevMiscAssets
