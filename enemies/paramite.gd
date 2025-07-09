@@ -32,6 +32,7 @@ var target_position := Vector3.ZERO # Position mite moves to; set to target.glob
 
 @export var retreat_dest := 30*Vector3.FORWARD
 @export var retreat_speed := 6.0
+var ground_normal := Vector3.UP # Normal of the ground, determined by the avg normal of the planes formed by points where feet hit the ground
 
 func _ready():
 	level = root.find_child("Level")
@@ -86,11 +87,11 @@ func _physics_process(delta):
 	move_and_slide()
 
 func lerp_look_at_move_dir(turn_speed):
-	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(velocity.x, velocity.z), turn_speed)
+	global_rotation.y = lerp_angle(global_rotation.y, atan2(velocity.x, velocity.z), turn_speed)
 
 func lerp_look_at_target(turn_speed):
 	var dir_to_target = global_position.direction_to(target_position)
-	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(dir_to_target.x, dir_to_target.z), turn_speed)
+	global_rotation.y = lerp_angle(global_rotation.y, atan2(dir_to_target.x, dir_to_target.z), turn_speed)
 
 func _on_navigation_agent_3d_target_reached():
 	pass
@@ -184,8 +185,8 @@ func retreat(_delta):
 	target_position = retreat_dest
 	
 	lerp_look_at_move_dir(follow_turn_speed)
-	global_rotation.x = 0
-	global_rotation.z = 0
+	global_rotation.x = PI + atan2(ground_normal.y, ground_normal.z)
+	global_rotation.z = PI + atan2(ground_normal.y, ground_normal.x)
 	if global_position.distance_to(target_position) <= nav_agent.target_desired_distance:
 		switch_to_launch()
 	else:

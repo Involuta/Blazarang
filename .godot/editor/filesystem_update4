@@ -1,4 +1,4 @@
-res://levels/mite_level/section_nodes/mite_level_main_arena.tscn
+res://enemies/landmite.tscn
 res://enemies/enemy_hurtbox.gd
 res://rang/roserang_shader.tres
 res://GPUTrail-main/shaders/trail.gdshader
@@ -21,8 +21,11 @@ res://ui/glow.gdshader
 res://ui/glitch.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
 res://general_scripts/skygradient.gdshader
+res://enemies/paramite_proc_anim_meshes.gd
+res://enemies/landmite.gd
 res://cotu/cotu_cb_main.tscn
+res://enemies/paramite.gd
 res://enemies/flatmite.tscn
-res://enemies/landmite.tscn
 res://enemies/paramite_proc_anim_meshes.tscn
 res://enemies/paramite.tscn
+res://levels/mite_level/section_nodes/mite_level_main_arena.tscn

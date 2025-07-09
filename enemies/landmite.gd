@@ -25,6 +25,8 @@ var target_position := Vector3.ZERO # Position mite moves to; set to target.glob
 var strafing_left := true
 @export var strafe_radius := 15.0 # Dist btwn target and strafe dest
 
+var ground_normal := Vector3.UP # Normal of the ground, determined by the avg normal of the planes formed by points where feet hit the ground
+
 var can_leap := true
 @export var max_leap_cooldown := 3.0 # Max time after a leap ends before you can leap again
 @export var min_leap_cooldown := .25 # Min time after a leap ends before you can leap again
@@ -79,10 +81,10 @@ func _physics_process(delta):
 
 func lerp_look_at_target(turn_speed):
 	var vec3_to_target := global_position.direction_to(target.global_position)
-	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
+	global_rotation.y = lerp_angle(global_rotation.y, atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
 
 func lerp_look_at_move_dir(turn_speed):
-	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(velocity.x, velocity.z), turn_speed)
+	global_rotation.y = lerp_angle(global_rotation.y, atan2(velocity.x, velocity.z), turn_speed)
 
 func _on_navigation_agent_3d_target_reached():
 	pass
@@ -103,8 +105,9 @@ func follow(delta):
 	target_position = target.global_position
 	
 	lerp_look_at_move_dir(follow_turn_speed)
-	global_rotation.x = 0
-	global_rotation.z = 0
+	#print(ground_normal)
+	global_rotation.x = 0#atan2(ground_normal.y, ground_normal.z)
+	global_rotation.z = 0#atan2(ground_normal.y, ground_normal.x)
 	nav_agent.set_target_position(target_position)
 	var next_position = nav_agent.get_next_path_position()
 	var new_velocity = (next_position - global_position).normalized() * follow_speed
@@ -206,9 +209,9 @@ func leap():
 	meshes.stop_ik()
 	#anim_tree.set("parameters/StateMachine/conditions/leap", true)
 	if global_position.distance_to(target_position) > leap_length_threshold:
-		velocity = (leap_long_lateral_speed + rng.randf_range(-.5,.5)) * -transform.basis.z
+		velocity = (leap_long_lateral_speed + rng.randf_range(-.5,.5)) * transform.basis.z
 	else:
-		velocity = (leap_short_lateral_speed + rng.randf_range(-.5,.5)) * -transform.basis.z
+		velocity = (leap_short_lateral_speed + rng.randf_range(-.5,.5)) * transform.basis.z
 	velocity.y = leap_vertical_speed + rng.randf_range(-.5,.5)
 	await get_tree().create_timer(leap_secs).timeout
 	stop_lateral_mvmt()

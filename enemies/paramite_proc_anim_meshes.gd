@@ -30,10 +30,12 @@ extends Node3D
 @export var rmf_sk : SkeletonIK3D
 @export var lvb_sk : SkeletonIK3D
 
+@onready var parent := get_parent()
+
 var ik_stopped := false
 
 func _process(delta):
-	return
+	#return
 	if ik_stopped:
 		return
 	
@@ -41,6 +43,10 @@ func _process(delta):
 	var plane1 = Plane(lmb_ik.position, lvf_ik.position, rvf_ik.position)
 	var plane2 = Plane(rvf_ik.position, rmb_ik.position, lmb_ik.position)
 	var avg_normal = ((plane1.normal + plane2.normal) / 2).normalized()
+	
+	parent.ground_normal = avg_normal
+	
+	return
 	
 	# Convert the normal to a basis, then a quaternion to prevent a "Basis must be normalized" error, then convert the lerped quaternion back to a Basis
 	var target_basis = _basis_from_normal(avg_normal)
