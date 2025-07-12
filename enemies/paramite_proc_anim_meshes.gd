@@ -51,7 +51,7 @@ func _process(delta):
 	# Convert the normal to a basis, then a quaternion to prevent a "Basis must be normalized" error, then convert the lerped quaternion back to a Basis
 	draw_vector_line(avg_normal * 10)
 	var target_basis = _basis_from_normal(avg_normal)
-	transform.basis = lerp(transform.basis, target_basis, run_speed * delta).orthonormalized()
+	rotation = lerp(transform.basis.get_rotation_quaternion(), target_basis.get_rotation_quaternion(), run_speed * delta).get_euler()
 	
 	# Offset body from the ground
 	var avg_ik_pos = (lvf_ik.position + rmb_ik.position + rvf_ik.position + lmb_ik.position + lmf_ik.position + rvb_ik.position + rmf_ik.position + lvb_ik.position) / 8
@@ -62,6 +62,7 @@ func _process(delta):
 	
 	return
 
+# If you want to see the normal vec of the mite's body meshes, add a new MeshInstance3D child to the mite parent (sibling of paramite proc anim meshes), and don't give it a mesh property. Just drag it into the Inspector field in this script
 @export var normal_line : MeshInstance3D
 
 func draw_vector_line(vec: Vector3):
@@ -82,9 +83,6 @@ func _basis_from_normal(normal: Vector3) -> Basis:
 	result.z = transform.basis.x.cross(normal)
 	
 	result = result.orthonormalized()
-	result.x *= scale.x
-	result.y *= scale.y
-	result.z *= scale.z
 	
 	return result
 

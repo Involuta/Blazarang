@@ -9,6 +9,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sii8f"]
 radius = 1.0
+height = 2.5
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wrs5x"]
 radius = 1.2
@@ -1193,7 +1194,7 @@ nodes/StateMachine/position = Vector2(80, 150)
 node_connections = [&"output", 0, &"StateMachine"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cfdsp"]
-radius = 0.3
+radius = 0.4
 
 [node name="Landmite" type="CharacterBody3D"]
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 0, 0, 0)
@@ -1209,13 +1210,9 @@ shape = SubResource("CapsuleShape3D_sii8f")
 visible = false
 mesh = SubResource("CapsuleMesh_wrs5x")
 
-[node name="NormalLine" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 0, 0, 0)
-visible = false
-
 [node name="ParamiteProcAnimMeshes" parent="." node_paths=PackedStringArray("normal_line") instance=ExtResource("2_72n1w")]
 ground_offset = 1.5
-normal_line = NodePath("../NormalLine")
+normal_line = NodePath("")
 
 [node name="Skeleton3D" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature" index="0"]
 bones/0/rest = Transform3D(1, 2.65221e-17, -8.70893e-18, -8.70893e-18, 0.592811, 0.805341, 2.65221e-17, -0.805341, 0.592811, -2.08705e-16, -1.14492, 0.629799)

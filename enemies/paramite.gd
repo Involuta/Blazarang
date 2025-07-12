@@ -29,6 +29,7 @@ var target_position := Vector3.ZERO # Position mite moves to; set to target.glob
 
 @export var follow_speed := 3.0
 @export var follow_turn_speed := .1
+@export var spit_chance := .01 # Chance that spitweb is shot in the current physics frame
 
 @export var retreat_dest := 30*Vector3.FORWARD
 @export var retreat_speed := 6.0
@@ -142,7 +143,7 @@ func follow(_delta):
 	nav_agent.velocity = new_velocity
 	
 	# Spit web rarely
-	if rng.randf() < .01:
+	if rng.randf() < spit_chance:
 		shoot_spitweb()
 
 func shoot_spitweb():
