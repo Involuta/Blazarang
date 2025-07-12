@@ -86,12 +86,11 @@ func _physics_process(delta):
 	
 	move_and_slide()
 
-func lerp_look_at_move_dir(turn_speed):
-	global_rotation.y = lerp_angle(global_rotation.y, atan2(velocity.x, velocity.z), turn_speed)
-
-func lerp_look_at_target(turn_speed):
-	var dir_to_target = global_position.direction_to(target_position)
-	global_rotation.y = lerp_angle(global_rotation.y, atan2(dir_to_target.x, dir_to_target.z), turn_speed)
+# Equivalent of lerp_look_at_move_dir or lerp_look_at_target in other enemies. This func is necessary for mites bc the mesh itself needs to rotate independently of the parent
+# Rotate body meshes y rotation so that it meshes look in the direction of the vector, which is a 3D vec whose y value is ignored
+func rotate_y_to_vec(to_vec : Vector3, turn_speed : float):
+	var rotation_amt = atan2(to_vec.x, to_vec.z) - body_meshes.rotation.y
+	body_meshes.rotate_object_local(Vector3.UP, rotation_amt * turn_speed)
 
 func _on_navigation_agent_3d_target_reached():
 	pass
@@ -130,10 +129,8 @@ func switch_to_follow():
 func follow(_delta):
 	target_position = target.global_position
 	
-	#lerp_look_at_move_dir(follow_turn_speed)
-	lerp_look_at_target(follow_turn_speed)
-	global_rotation.x = 0
-	global_rotation.z = 0
+	var vec_to_target := target_position - global_position
+	rotate_y_to_vec(vec_to_target, follow_turn_speed)
 	if global_position.distance_to(target_position) <= nav_agent.target_desired_distance:
 		nav_agent.set_target_position(global_position)
 	else:
@@ -184,9 +181,7 @@ func switch_to_retreat():
 func retreat(_delta):
 	target_position = retreat_dest
 	
-	lerp_look_at_move_dir(follow_turn_speed)
-	global_rotation.x = 0#PI + atan2(ground_normal.y, ground_normal.z)
-	global_rotation.z = 0#PI + atan2(ground_normal.y, ground_normal.x)
+	rotate_y_to_vec(velocity, follow_turn_speed)
 	if global_position.distance_to(target_position) <= nav_agent.target_desired_distance:
 		switch_to_launch()
 	else:

@@ -1211,6 +1211,7 @@ mesh = SubResource("CapsuleMesh_wrs5x")
 
 [node name="NormalLine" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 0, 0, 0)
+visible = false
 
 [node name="ParamiteProcAnimMeshes" parent="." node_paths=PackedStringArray("normal_line") instance=ExtResource("2_72n1w")]
 ground_offset = 1.5
@@ -1417,7 +1418,7 @@ mesh = SubResource("ArrayMesh_i6heb")
 surface_material_override/0 = SubResource("StandardMaterial3D_8ihky")
 
 [node name="LeftMiddleBackShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(-0.930845, -0.210189, -0.298911, 0.143316, 0.542472, -0.827759, 0.336137, -0.813354, -0.474834, 2.51235, -0.272457, -1.9552)
+transform = Transform3D(-0.930845, -0.210188, -0.298911, 0.143316, 0.542472, -0.827759, 0.336137, -0.813354, -0.474834, 2.51235, -0.272458, -1.9552)
 
 [node name="LeftMiddleBackShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/LeftMiddleBackShin" index="0"]
 mesh = SubResource("ArrayMesh_qq8ag")
@@ -1473,7 +1474,7 @@ mesh = SubResource("ArrayMesh_qtogu")
 surface_material_override/0 = SubResource("StandardMaterial3D_8ihky")
 
 [node name="RightMiddleBackShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D" index="10"]
-transform = Transform3D(-0.930845, 0.210189, 0.298911, -0.143316, 0.542472, -0.827759, -0.336137, -0.813354, -0.474834, -2.51235, -0.272456, -1.9552)
+transform = Transform3D(-0.930845, 0.210188, 0.298911, -0.143316, 0.542472, -0.827759, -0.336137, -0.813354, -0.474834, -2.51235, -0.272457, -1.9552)
 
 [node name="RightMiddleBackShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/RightMiddleBackShin" index="0"]
 mesh = SubResource("ArrayMesh_7j21y")

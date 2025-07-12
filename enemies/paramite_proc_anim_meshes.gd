@@ -30,22 +30,14 @@ extends Node3D
 @export var lvb_sk : SkeletonIK3D
 
 @onready var parent := get_parent()
+var avg_normal := Vector3.UP # This is visible in the entire script so that the parent can see it; if it's Vector3.UP, the parent can leap
 
 var ik_stopped := false
 
 func _process(delta):
-	#return
 	if ik_stopped:
 		return
-	"""
-	# Create 4 planes made from the 8 IK targets and get the average of their normals
-	var plane1 = Plane(lmb_ik.position, lvf_ik.position, rvf_ik.position)
-	var plane2 = Plane(rvf_ik.position, rmb_ik.position, lmb_ik.position)
-	var plane3 = Plane(lvb_ik.position, lmf_ik.position, rmf_ik.position)
-	var plane4 = Plane(rmf_ik.position, rvb_ik.position, lvb_ik.position)
-	var avg_normal : Vector3 = ((plane1.normal + plane2.normal + plane3.normal + plane4.normal) / 4).normalized()
 	
-	"""
 	# Raycast downward to get ground normal
 	var space_state := get_world_3d().direct_space_state
 	var sight_dir := Vector3.DOWN
@@ -54,7 +46,7 @@ func _process(delta):
 	var result = space_state.intersect_ray(query)
 	if not result:
 		return
-	var avg_normal = result.normal
+	avg_normal = result.normal
 	
 	# Convert the normal to a basis, then a quaternion to prevent a "Basis must be normalized" error, then convert the lerped quaternion back to a Basis
 	draw_vector_line(avg_normal * 10)
@@ -68,8 +60,6 @@ func _process(delta):
 	var dist_to_target_pos = transform.basis.y.dot(target_pos - global_position)
 	position = lerp(position, position + transform.basis.y * dist_to_target_pos, run_speed * delta)
 	
-	_movement(delta)
-	
 	return
 
 @export var normal_line : MeshInstance3D
@@ -81,12 +71,9 @@ func draw_vector_line(vec: Vector3):
 	mesh.surface_add_vertex(Vector3.ZERO)
 	mesh.surface_add_vertex(Vector3.ZERO + vec)
 	mesh.surface_end()
+	if not normal_line:
+		return
 	normal_line.mesh = mesh
-
-func _movement(delta):
-	var move_dir = Vector2.UP
-	parent.translate(Vector3(0, 0, -move_dir.y) * run_speed * delta)
-	parent.rotate_object_local(Vector3.UP, -move_dir.x * turn_speed * delta)
 
 func _basis_from_normal(normal: Vector3) -> Basis:
 	var result = Basis()

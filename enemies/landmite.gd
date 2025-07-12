@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 #var tiny_mite := preload("res://enemies/mite_death_particle.tscn")
 @onready var nav_agent := $NavigationAgent3D
-@onready var meshes := $ParamiteProcAnimMeshes
+@onready var body_meshes := $ParamiteProcAnimMeshes
 @onready var anim_player := $ParamiteProcAnimMeshes/ParamiteMeshes/AnimationPlayer
 @onready var anim_tree := $AnimationTree
 @onready var root := $/root/ViewControl
@@ -79,13 +79,11 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 	move_and_slide()
 
-func lerp_look_at_target(turn_speed):
-	var vec3_to_target := global_position.direction_to(target.global_position)
-	global_rotation.y = lerp_angle(global_rotation.y, atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
-
-func lerp_look_at_move_dir(turn_speed):
-	#global_rotation.y = lerp_angle(global_rotation.y, atan2(velocity.x, velocity.z), turn_speed)
-	rotate_object_local(Vector3.UP, (atan2(velocity.x, velocity.z) - rotation.y) * turn_speed)
+# Equivalent of lerp_look_at_move_dir or lerp_look_at_target in other enemies. This func is necessary for mites bc the mesh itself needs to rotate independently of the parent
+# Rotate body meshes y rotation so that it meshes look in the direction of the vector, which is a 3D vec whose y value is ignored
+func rotate_y_to_vec(to_vec, turn_speed):
+	var rotation_amt = atan2(to_vec.x, to_vec.z) - body_meshes.rotation.y
+	body_meshes.rotate_object_local(Vector3.UP, rotation_amt * turn_speed)
 
 func _on_navigation_agent_3d_target_reached():
 	pass
@@ -103,12 +101,9 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	move_and_slide()
 
 func follow(delta):
-	return
 	target_position = target.global_position
 	
-	lerp_look_at_move_dir(follow_turn_speed)
-	#global_rotation.x = atan2(ground_normal.z, ground_normal.y)
-	#global_rotation.z = atan2(ground_normal.x, ground_normal.y)
+	rotate_y_to_vec(velocity, follow_turn_speed)
 	nav_agent.set_target_position(target_position)
 	var next_position = nav_agent.get_next_path_position()
 	var new_velocity = (next_position - global_position).normalized() * follow_speed
@@ -158,7 +153,7 @@ func strafe(delta):
 		icon_vec *= -1
 	target_position = target.global_position + strafe_radius * Vector3(icon_vec.x, 0, icon_vec.y)
 	
-	lerp_look_at_move_dir(follow_turn_speed)
+	rotate_y_to_vec(velocity, follow_turn_speed)
 	global_rotation.x = 0
 	global_rotation.z = 0
 	nav_agent.set_target_position(target_position)
@@ -206,18 +201,21 @@ func stop_lateral_mvmt():
 	velocity.z = 0
 
 func leap():
+	if body_meshes.avg_normal != Vector3.UP:
+		return
+	
 	# Stop IK
-	meshes.stop_ik()
+	body_meshes.stop_ik()
 	#anim_tree.set("parameters/StateMachine/conditions/leap", true)
 	if global_position.distance_to(target_position) > leap_length_threshold:
-		velocity = (leap_long_lateral_speed + rng.randf_range(-.5,.5)) * transform.basis.z
+		velocity = (leap_long_lateral_speed + rng.randf_range(-.5,.5)) * body_meshes.transform.basis.z
 	else:
-		velocity = (leap_short_lateral_speed + rng.randf_range(-.5,.5)) * transform.basis.z
+		velocity = (leap_short_lateral_speed + rng.randf_range(-.5,.5)) * body_meshes.transform.basis.z
 	velocity.y = leap_vertical_speed + rng.randf_range(-.5,.5)
 	await get_tree().create_timer(leap_secs).timeout
 	stop_lateral_mvmt()
 	# Do IK again
-	meshes.start_ik()
+	body_meshes.start_ik()
 	#anim_tree.set("parameters/StateMachine/conditions/leap", false)
 
 func stop_aiming_at_target():

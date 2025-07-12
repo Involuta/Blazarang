@@ -29,3 +29,5 @@ res://enemies/paramite_proc_anim_meshes.tscn
 res://levels/test_level.tscn
 res://enemies/mite_proc_anim_test.tscn
 res://enemies/paramite_proc_anim_meshes.gd
+res://enemies/landmite.gd
+res://enemies/paramite.gd
