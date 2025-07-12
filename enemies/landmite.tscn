@@ -1196,6 +1196,7 @@ node_connections = [&"output", 0, &"StateMachine"]
 radius = 0.3
 
 [node name="Landmite" type="CharacterBody3D"]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 0, 0, 0)
 collision_layer = 8
 collision_mask = 90
 script = ExtResource("1_unap6")
@@ -1208,9 +1209,12 @@ shape = SubResource("CapsuleShape3D_sii8f")
 visible = false
 mesh = SubResource("CapsuleMesh_wrs5x")
 
-[node name="ParamiteProcAnimMeshes" parent="." instance=ExtResource("2_72n1w")]
-transform = Transform3D(0.6, -2.09272e-16, 2.09272e-16, 2.09272e-16, 0.6, -2.09272e-16, -2.09272e-16, 2.09272e-16, 0.6, 0, 0, 0)
+[node name="NormalLine" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="ParamiteProcAnimMeshes" parent="." node_paths=PackedStringArray("normal_line") instance=ExtResource("2_72n1w")]
 ground_offset = 1.5
+normal_line = NodePath("../NormalLine")
 
 [node name="Skeleton3D" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature" index="0"]
 bones/0/rest = Transform3D(1, 2.65221e-17, -8.70893e-18, -8.70893e-18, 0.592811, 0.805341, 2.65221e-17, -0.805341, 0.592811, -2.08705e-16, -1.14492, 0.629799)

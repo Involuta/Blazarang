@@ -5,7 +5,6 @@ extends Node3D
 @export var run_speed := 10.0
 @export var turn_speed := 1.0
 @export var ground_offset := 1.0 # Height of mite's body from the ground
-@export var arena_height := 10.0
 
 # Why are these nodes export and not onready? So that the paramite, flatmite, jumping spider, etc. can use the same script
 
@@ -38,17 +37,27 @@ func _process(delta):
 	#return
 	if ik_stopped:
 		return
-	
-	# Create 2 planes made from the 4 IK targets and get the average of their normals
+	"""
+	# Create 4 planes made from the 8 IK targets and get the average of their normals
 	var plane1 = Plane(lmb_ik.position, lvf_ik.position, rvf_ik.position)
 	var plane2 = Plane(rvf_ik.position, rmb_ik.position, lmb_ik.position)
-	var avg_normal = ((plane1.normal + plane2.normal) / 2).normalized()
+	var plane3 = Plane(lvb_ik.position, lmf_ik.position, rmf_ik.position)
+	var plane4 = Plane(rmf_ik.position, rvb_ik.position, lvb_ik.position)
+	var avg_normal : Vector3 = ((plane1.normal + plane2.normal + plane3.normal + plane4.normal) / 4).normalized()
 	
-	parent.ground_normal = avg_normal
-	
-	return
+	"""
+	# Raycast downward to get ground normal
+	var space_state := get_world_3d().direct_space_state
+	var sight_dir := Vector3.DOWN
+	var query = PhysicsRayQueryParameters3D.create(global_position, global_position + 10.0 * sight_dir)
+	query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
+	var result = space_state.intersect_ray(query)
+	if not result:
+		return
+	var avg_normal = result.normal
 	
 	# Convert the normal to a basis, then a quaternion to prevent a "Basis must be normalized" error, then convert the lerped quaternion back to a Basis
+	draw_vector_line(avg_normal * 10)
 	var target_basis = _basis_from_normal(avg_normal)
 	transform.basis = lerp(transform.basis, target_basis, run_speed * delta).orthonormalized()
 	
@@ -57,7 +66,27 @@ func _process(delta):
 	var target_pos = avg_ik_pos + transform.basis.y * ground_offset
 	# Dot product gets the difference in positions only in this direction
 	var dist_to_target_pos = transform.basis.y.dot(target_pos - global_position)
-	#global_position = lerp(global_position, global_position + transform.basis.y * dist_to_target_pos, run_speed * delta)
+	position = lerp(position, position + transform.basis.y * dist_to_target_pos, run_speed * delta)
+	
+	_movement(delta)
+	
+	return
+
+@export var normal_line : MeshInstance3D
+
+func draw_vector_line(vec: Vector3):
+	var mesh = ImmediateMesh.new()
+	mesh.clear_surfaces()
+	mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+	mesh.surface_add_vertex(Vector3.ZERO)
+	mesh.surface_add_vertex(Vector3.ZERO + vec)
+	mesh.surface_end()
+	normal_line.mesh = mesh
+
+func _movement(delta):
+	var move_dir = Vector2.UP
+	parent.translate(Vector3(0, 0, -move_dir.y) * run_speed * delta)
+	parent.rotate_object_local(Vector3.UP, -move_dir.x * turn_speed * delta)
 
 func _basis_from_normal(normal: Vector3) -> Basis:
 	var result = Basis()
