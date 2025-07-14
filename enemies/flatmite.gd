@@ -3,6 +3,7 @@ extends CharacterBody3D
 var spitweb := preload("res://enemies/spitweb.tscn")
 @onready var physical_collider := $CollisionShape3D
 @onready var nav_agent := $NavigationAgent3D
+@onready var body_meshes := $FlatmiteMeshes
 #@onready var anim_player := $FlatmiteMeshes/AnimationPlayer
 @onready var anim_tree := $AnimationTree
 @onready var root := $/root/ViewControl
@@ -32,7 +33,7 @@ var in_leap_startup := false # Becomes true during leap startup; used to know wh
 @export var leap_startup_proximity := 10.0 # Dist from target needed during leap startup to initiate a leap
 
 # Leap
-@export var leap_secs := 1.5
+@export var leap_secs := 1.2
 @export var leap_length_threshold := 12.0 # If mite is farther than this value from target, it'll do long leap; otherwise, short leap
 @export var leap_short_lateral_speed := 4.0
 @export var leap_long_lateral_speed := 8.0
@@ -69,18 +70,26 @@ func _physics_process(delta):
 		FOLLOW: 
 			follow(delta)
 		LEAP:
-			lerp_look_at_target(follow_turn_speed)
+			rotate_y_to_vec(target_position - global_position, follow_turn_speed)
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	move_and_slide()
 
-func lerp_look_at_target(turn_speed):
-	var vec3_to_target := global_position.direction_to(target.global_position)
-	global_rotation.y = lerp_angle(global_rotation.y, atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
+# Equivalent of lerp_look_at_move_dir or lerp_look_at_target in other enemies. This func is necessary for mites bc the mesh itself needs to rotate independently of the parent
+# Rotate body meshes y rotation so that it meshes look in the direction of the vector, which is a 3D vec whose y value is ignored
+func rotate_y_to_vec(to_vec : Vector3, turn_speed : float):
+	var rotation_amt = atan2(to_vec.x, to_vec.z) - body_meshes.rotation.y
+	body_meshes.rotate_object_local(Vector3.UP, rotation_amt * turn_speed)
 
-func lerp_look_at_move_dir(turn_speed):
-	global_rotation.y = lerp_angle(global_rotation.y, atan2(velocity.x, velocity.z), turn_speed)
+# Ray origin pos is just a lateral pos; its y doesn't matter
+func get_result_from_downray_at(ray_origin_pos : Vector3) -> Dictionary:
+	var space_state := get_world_3d().direct_space_state
+	var sight_dir := Vector3.DOWN
+	var query = PhysicsRayQueryParameters3D.create(ray_origin_pos, ray_origin_pos + 30.0 * sight_dir)
+	query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
+	var result = space_state.intersect_ray(query)
+	return result
 
 func _on_navigation_agent_3d_target_reached():
 	if in_leap_startup:
@@ -91,7 +100,14 @@ func _on_navigation_agent_3d_target_reached():
 	else:
 		var target_position_x = target.global_position.x + rng.randf_range(-follow_random_dest_radius, follow_random_dest_radius)
 		var target_position_z = target.global_position.z + rng.randf_range(-follow_random_dest_radius, follow_random_dest_radius)
+		
+		# From a point at the target's lateral pos but far above the floor, cast a ray straight down. The pt where the ray hits the ground is the target position y
+		# If the ray doesn't hit somehow, default to the target's global y pos
 		target_position = Vector3(target_position_x, target.global_position.y, target_position_z)
+		var result := get_result_from_downray_at(target_position)
+		if not result:
+			return
+		target_position.y = result.position.y
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	if behav_state == FOLLOW:
@@ -111,9 +127,7 @@ func follow(delta):
 	else:
 		target_position.y = target.global_position.y
 	
-	lerp_look_at_move_dir(follow_turn_speed)
-	global_rotation.x = 0
-	global_rotation.z = 0
+	rotate_y_to_vec(velocity, follow_turn_speed)
 	nav_agent.set_target_position(target_position)
 	var next_position = nav_agent.get_next_path_position()
 	var new_velocity = (next_position - global_position).normalized() * follow_speed
@@ -140,6 +154,25 @@ func follow(delta):
 		if time_until_can_leap <= 0:
 			time_until_can_leap = rng.randf_range(min_leap_cooldown, max_leap_cooldown)
 			can_leap = true
+	
+	# Raycast downward to get ground normal
+	var result := get_result_from_downray_at(global_position)
+	if not result:
+		return
+	
+	# Convert the normal to a basis, then a quaternion to prevent a "Basis must be normalized" error, then convert the lerped quaternion back to a Basis
+	var target_basis = _basis_from_normal(result.normal)
+	body_meshes.rotation = target_basis.get_rotation_quaternion().get_euler()
+
+func _basis_from_normal(normal: Vector3) -> Basis:
+	var result = Basis()
+	result.x = normal.cross(transform.basis.z)
+	result.y = normal
+	result.z = transform.basis.x.cross(normal)
+	
+	result = result.orthonormalized()
+	
+	return result
 
 func far_from_roserang():
 	var roserang = root.find_child("Roserang", true, false)
@@ -155,9 +188,9 @@ func stop_lateral_mvmt():
 func leap():
 	#anim_tree.set("parameters/StateMachine/conditions/leap", true)
 	if global_position.distance_to(target_position) > leap_length_threshold:
-		velocity = (leap_long_lateral_speed + rng.randf_range(-.5,.5)) * transform.basis.z
+		velocity = (leap_long_lateral_speed + rng.randf_range(-.5,.5)) * body_meshes.transform.basis.z
 	else:
-		velocity = (leap_short_lateral_speed + rng.randf_range(-.5,.5)) * transform.basis.z
+		velocity = (leap_short_lateral_speed + rng.randf_range(-.5,.5)) * body_meshes.transform.basis.z
 	velocity.y = leap_vertical_speed + rng.randf_range(-.5,.5)
 	physical_collider.process_mode = Node.PROCESS_MODE_DISABLED
 	await get_tree().create_timer(leap_secs/2).timeout

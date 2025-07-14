@@ -31,3 +31,4 @@ res://enemies/mite_proc_anim_test.tscn
 res://enemies/paramite_proc_anim_meshes.gd
 res://enemies/landmite.gd
 res://enemies/paramite.gd
+res://enemies/flatmite.gd

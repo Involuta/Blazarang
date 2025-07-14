@@ -130,8 +130,7 @@ func switch_to_follow():
 func follow(_delta):
 	target_position = target.global_position
 	
-	var vec_to_target := target_position - global_position
-	rotate_y_to_vec(vec_to_target, follow_turn_speed)
+	rotate_y_to_vec(target_position - global_position, follow_turn_speed)
 	if global_position.distance_to(target_position) <= nav_agent.target_desired_distance:
 		nav_agent.set_target_position(global_position)
 	else:
