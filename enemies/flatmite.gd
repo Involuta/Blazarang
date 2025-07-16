@@ -85,8 +85,7 @@ func rotate_y_to_vec(to_vec : Vector3, turn_speed : float):
 # Ray origin pos is just a lateral pos; its y doesn't matter
 func get_result_from_downray_at(ray_origin_pos : Vector3) -> Dictionary:
 	var space_state := get_world_3d().direct_space_state
-	var sight_dir := Vector3.DOWN
-	var query = PhysicsRayQueryParameters3D.create(ray_origin_pos, ray_origin_pos + 30.0 * sight_dir)
+	var query = PhysicsRayQueryParameters3D.create(ray_origin_pos + 10 * Vector3.UP, ray_origin_pos + 20.0 * Vector3.DOWN)
 	query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
 	var result = space_state.intersect_ray(query)
 	return result
@@ -154,25 +153,6 @@ func follow(delta):
 		if time_until_can_leap <= 0:
 			time_until_can_leap = rng.randf_range(min_leap_cooldown, max_leap_cooldown)
 			can_leap = true
-	
-	# Raycast downward to get ground normal
-	var result := get_result_from_downray_at(global_position)
-	if not result:
-		return
-	
-	# Convert the normal to a basis, then a quaternion to prevent a "Basis must be normalized" error, then convert the lerped quaternion back to a Basis
-	var target_basis = _basis_from_normal(result.normal)
-	body_meshes.rotation = target_basis.get_rotation_quaternion().get_euler()
-
-func _basis_from_normal(normal: Vector3) -> Basis:
-	var result = Basis()
-	result.x = normal.cross(transform.basis.z)
-	result.y = normal
-	result.z = transform.basis.x.cross(normal)
-	
-	result = result.orthonormalized()
-	
-	return result
 
 func far_from_roserang():
 	var roserang = root.find_child("Roserang", true, false)

@@ -1210,9 +1210,8 @@ shape = SubResource("CapsuleShape3D_sii8f")
 visible = false
 mesh = SubResource("CapsuleMesh_wrs5x")
 
-[node name="ParamiteProcAnimMeshes" parent="." node_paths=PackedStringArray("normal_line") instance=ExtResource("2_72n1w")]
+[node name="ParamiteProcAnimMeshes" parent="." instance=ExtResource("2_72n1w")]
 ground_offset = 1.5
-normal_line = NodePath("")
 
 [node name="Skeleton3D" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature" index="0"]
 bones/0/rest = Transform3D(1, 2.65221e-17, -8.70893e-18, -8.70893e-18, 0.592811, 0.805341, 2.65221e-17, -0.805341, 0.592811, -2.08705e-16, -1.14492, 0.629799)
@@ -1415,7 +1414,7 @@ mesh = SubResource("ArrayMesh_i6heb")
 surface_material_override/0 = SubResource("StandardMaterial3D_8ihky")
 
 [node name="LeftMiddleBackShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(-0.930845, -0.210189, -0.298911, 0.143316, 0.542472, -0.827759, 0.336137, -0.813354, -0.474834, 2.51235, -0.272457, -1.9552)
+transform = Transform3D(-0.930845, -0.210188, -0.298911, 0.143316, 0.542472, -0.827759, 0.336137, -0.813354, -0.474834, 2.51235, -0.272458, -1.9552)
 
 [node name="LeftMiddleBackShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/LeftMiddleBackShin" index="0"]
 mesh = SubResource("ArrayMesh_qq8ag")
@@ -1471,7 +1470,7 @@ mesh = SubResource("ArrayMesh_qtogu")
 surface_material_override/0 = SubResource("StandardMaterial3D_8ihky")
 
 [node name="RightMiddleBackShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D" index="10"]
-transform = Transform3D(-0.930845, 0.210189, 0.298911, -0.143316, 0.542472, -0.827759, -0.336137, -0.813354, -0.474834, -2.51235, -0.272456, -1.9552)
+transform = Transform3D(-0.930845, 0.210188, 0.298911, -0.143316, 0.542472, -0.827759, -0.336137, -0.813354, -0.474834, -2.51235, -0.272457, -1.9552)
 
 [node name="RightMiddleBackShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/RightMiddleBackShin" index="0"]
 mesh = SubResource("ArrayMesh_7j21y")
