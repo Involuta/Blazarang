@@ -2,13 +2,12 @@ extends Node3D
 
 # Ground slope-based rotation and ground offset of meshes must be separate from parent rotation (dir the mite faces to match its vel)
 
-@export var ground_offset := 1.0
+@export var ground_offset := 1.5
 
 func _process(delta):
 	# Raycast downward to get ground normal
 	var space_state := get_world_3d().direct_space_state
-	var sight_dir := Vector3.DOWN
-	var query = PhysicsRayQueryParameters3D.create(global_position - sight_dir, global_position + 10.0 * sight_dir)
+	var query = PhysicsRayQueryParameters3D.create(global_position + 30 * Vector3.UP, global_position + 60.0 * Vector3.DOWN)
 	query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
 	var result = space_state.intersect_ray(query)
 	if not result:
@@ -18,13 +17,13 @@ func _process(delta):
 	# Convert the normal to a basis, then a quaternion to prevent a "Basis must be normalized" error, then convert the lerped quaternion back to a Basis
 	draw_vector_line(avg_normal * 10)
 	var target_basis = _basis_from_normal(avg_normal)
-	rotation = lerp(transform.basis.get_rotation_quaternion(), target_basis.get_rotation_quaternion(), .15).get_euler()
+	rotation = lerp(transform.basis.get_rotation_quaternion(), target_basis.get_rotation_quaternion(), .2).get_euler()
 	
 	# Offset body from the ground
 	var target_pos = result.position + transform.basis.y * ground_offset
 	# Dot product gets the difference in positions only in this direction
 	var dist_to_target_pos = transform.basis.y.dot(target_pos - global_position)
-	position = lerp(position, position + transform.basis.y * dist_to_target_pos, .15)
+	position = lerp(position, position + transform.basis.y * dist_to_target_pos, .2)
 	
 	return
 

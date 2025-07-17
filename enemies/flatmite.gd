@@ -4,6 +4,7 @@ var spitweb := preload("res://enemies/spitweb.tscn")
 @onready var physical_collider := $CollisionShape3D
 @onready var nav_agent := $NavigationAgent3D
 @onready var body_meshes := $FlatmiteMeshes
+@onready var target_pos_mesh := $TargetPosMesh
 #@onready var anim_player := $FlatmiteMeshes/AnimationPlayer
 @onready var anim_tree := $AnimationTree
 @onready var root := $/root/ViewControl
@@ -18,7 +19,7 @@ enum {
 	LEAP,
 }
 var behav_state := FOLLOW
-@export var target_distance := 1.0 # Dist from target necessary to bite
+@export var target_position_distance := 2.0 # Dist from target position mite must be within in order to consider that location visited
 var target_position := Vector3.ZERO # Position mite moves to
 
 # Pre-leap startup
@@ -59,13 +60,12 @@ func _ready():
 	can_leap = true
 	
 	await get_tree().create_timer(1.0).timeout
-	var target_position_x = target.global_position.x + rng.randf_range(-follow_random_dest_radius, follow_random_dest_radius)
-	var target_position_z = target.global_position.z + rng.randf_range(-follow_random_dest_radius, follow_random_dest_radius)
-	target_position = Vector3(target_position_x, target.global_position.y, target_position_z)
+	set_new_target_random_dest()
 	
 	add_to_group("lockonables")
 
 func _physics_process(delta):
+	target_pos_mesh.global_position = target_position
 	match(behav_state):
 		FOLLOW: 
 			follow(delta)
@@ -82,10 +82,21 @@ func rotate_y_to_vec(to_vec : Vector3, turn_speed : float):
 	var rotation_amt = atan2(to_vec.x, to_vec.z) - body_meshes.rotation.y
 	body_meshes.rotate_object_local(Vector3.UP, rotation_amt * turn_speed)
 
+func set_new_target_random_dest():
+	# From a point at the target's lateral pos but far above the floor, cast a ray straight down. If it hits the ground, set the target pos to that. If not, choose again
+	var result = null
+	while not result:
+		var target_position_x = target.global_position.x + rng.randf_range(-follow_random_dest_radius, follow_random_dest_radius)
+		var target_position_z = target.global_position.z + rng.randf_range(-follow_random_dest_radius, follow_random_dest_radius)
+		target_position = Vector3(target_position_x, target.global_position.y, target_position_z)
+		result = get_result_from_downray_at(target_position)
+		if result:
+			target_position.y = result.position.y
+
 # Ray origin pos is just a lateral pos; its y doesn't matter
 func get_result_from_downray_at(ray_origin_pos : Vector3) -> Dictionary:
 	var space_state := get_world_3d().direct_space_state
-	var query = PhysicsRayQueryParameters3D.create(ray_origin_pos + 10 * Vector3.UP, ray_origin_pos + 20.0 * Vector3.DOWN)
+	var query = PhysicsRayQueryParameters3D.create(ray_origin_pos + 30 * Vector3.UP, ray_origin_pos + 60.0 * Vector3.DOWN)
 	query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
 	var result = space_state.intersect_ray(query)
 	return result
@@ -97,16 +108,7 @@ func _on_navigation_agent_3d_target_reached():
 		await leap()
 		behav_state = FOLLOW
 	else:
-		var target_position_x = target.global_position.x + rng.randf_range(-follow_random_dest_radius, follow_random_dest_radius)
-		var target_position_z = target.global_position.z + rng.randf_range(-follow_random_dest_radius, follow_random_dest_radius)
-		
-		# From a point at the target's lateral pos but far above the floor, cast a ray straight down. The pt where the ray hits the ground is the target position y
-		# If the ray doesn't hit somehow, default to the target's global y pos
-		target_position = Vector3(target_position_x, target.global_position.y, target_position_z)
-		var result := get_result_from_downray_at(target_position)
-		if not result:
-			return
-		target_position.y = result.position.y
+		set_new_target_random_dest()
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	if behav_state == FOLLOW:
@@ -123,8 +125,6 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 func follow(delta):
 	if in_leap_startup:
 		target_position = target.global_position
-	else:
-		target_position.y = target.global_position.y
 	
 	rotate_y_to_vec(velocity, follow_turn_speed)
 	nav_agent.set_target_position(target_position)
@@ -139,7 +139,7 @@ func follow(delta):
 		if in_leap_startup:
 			nav_agent.target_desired_distance = leap_startup_proximity
 		else:
-			nav_agent.target_desired_distance = roserang_leap_proximity
+			nav_agent.target_desired_distance = target_position_distance
 	else:
 		nav_agent.target_desired_distance = .1
 		

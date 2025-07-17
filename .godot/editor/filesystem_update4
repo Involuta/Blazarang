@@ -30,3 +30,4 @@ res://enemies/mite_proc_anim_test.tscn
 res://enemies/flatmite.gd
 res://glb_inherited_scenes/flatmite_meshes.tscn
 res://glb_inherited_scenes/flatmite_meshes.gd
+res://enemies/landmite.gd
