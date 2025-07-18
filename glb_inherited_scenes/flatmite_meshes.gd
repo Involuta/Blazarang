@@ -4,7 +4,14 @@ extends Node3D
 
 @export var ground_offset := 1.5
 
+# Check whether parent is leaping; if so, don't correct orientation and offset
+@onready var parent := get_parent()
+
 func _process(delta):
+	if parent.is_leaping() or not parent.is_on_floor():
+		position = Vector3.ZERO
+		return
+	
 	# Raycast downward to get ground normal
 	var space_state := get_world_3d().direct_space_state
 	var query = PhysicsRayQueryParameters3D.create(global_position + 30 * Vector3.UP, global_position + 60.0 * Vector3.DOWN)
@@ -23,7 +30,7 @@ func _process(delta):
 	var target_pos = result.position + transform.basis.y * ground_offset
 	# Dot product gets the difference in positions only in this direction
 	var dist_to_target_pos = transform.basis.y.dot(target_pos - global_position)
-	position = lerp(position, position + transform.basis.y * dist_to_target_pos, .2)
+	position = position + transform.basis.y * dist_to_target_pos
 	
 	return
 

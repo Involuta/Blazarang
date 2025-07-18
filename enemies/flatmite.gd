@@ -43,8 +43,8 @@ var in_leap_startup := false # Becomes true during leap startup; used to know wh
 @export var spitweb_speed := 20.0 # Speed of a spitweb projectile
 @export var spitweb_spread := .5 # X and Z vel of projectiles are changed by a random num btwn -spitweb_spread and spitweb_spread
 
-@export var follow_speed := 20.0
-@export var follow_turn_speed := .1
+@export var follow_speed := 13.0
+@export var follow_turn_speed := .2
 @export var follow_random_dest_radius := 15.0 # Radius around target that mite target position can be within
 
 @export var dp_impulse_limit := 5.0
@@ -64,13 +64,17 @@ func _ready():
 	
 	add_to_group("lockonables")
 
+# Called by flatmite meshes to know whether to do ground slope orientation & offset correction
+func is_leaping():
+	return behav_state == LEAP
+
 func _physics_process(delta):
 	target_pos_mesh.global_position = target_position
 	match(behav_state):
 		FOLLOW: 
 			follow(delta)
 		LEAP:
-			rotate_y_to_vec(target_position - global_position, follow_turn_speed)
+			leap_frame(delta)
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -142,7 +146,7 @@ func follow(delta):
 			nav_agent.target_desired_distance = target_position_distance
 	else:
 		nav_agent.target_desired_distance = .1
-		
+	
 	if can_leap:
 		if far_from_roserang():
 			can_leap = false
@@ -166,7 +170,6 @@ func stop_lateral_mvmt():
 	velocity.z = 0
 
 func leap():
-	#anim_tree.set("parameters/StateMachine/conditions/leap", true)
 	if global_position.distance_to(target_position) > leap_length_threshold:
 		velocity = (leap_long_lateral_speed + rng.randf_range(-.5,.5)) * body_meshes.transform.basis.z
 	else:
@@ -178,7 +181,9 @@ func leap():
 	physical_collider.process_mode = Node.PROCESS_MODE_INHERIT
 	await get_tree().create_timer(leap_secs/2).timeout
 	stop_lateral_mvmt()
-	#anim_tree.set("parameters/StateMachine/conditions/leap", false)
+
+func leap_frame(delta):
+	rotate_y_to_vec(target_position - global_position, follow_turn_speed)
 
 func shoot_spitwebs():
 	target_position = target.global_position
