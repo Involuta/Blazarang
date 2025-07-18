@@ -80,10 +80,13 @@ func _physics_process(delta):
 	move_and_slide()
 
 # Equivalent of lerp_look_at_move_dir or lerp_look_at_target in other enemies. This func is necessary for mites bc the mesh itself needs to rotate independently of the parent
-# Rotate body meshes y rotation so that it meshes look in the direction of the vector, which is a 3D vec whose y value is ignored
+# Rotate body meshes y rotation so that meshes look in the direction of the vector, which is a 3D vec whose y value is ignored
+# Why not do rotation_amt = atan2(to_vec.x, to_vec.z) - body_meshes.rotation.y? It causes mites to spin around randomly for some reason
 func rotate_y_to_vec(to_vec, turn_speed):
-	var rotation_amt = atan2(to_vec.x, to_vec.z) - body_meshes.rotation.y
-	body_meshes.rotate_object_local(Vector3.UP, rotation_amt * turn_speed)
+	var to_vec_2d = Vector2(to_vec.x, to_vec.z)
+	var body_mesh_basis_z_2d = Vector2(body_meshes.transform.basis.z.x, body_meshes.transform.basis.z.z)
+	var rotation_amt = body_mesh_basis_z_2d.angle_to(to_vec_2d)
+	body_meshes.rotate_object_local(Vector3.UP, -rotation_amt * turn_speed)
 
 func _on_navigation_agent_3d_target_reached():
 	pass

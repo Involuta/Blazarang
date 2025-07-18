@@ -28,3 +28,4 @@ res://enemies/paramite.tscn
 res://levels/test_level.tscn
 res://glb_inherited_scenes/flatmite_meshes.gd
 res://enemies/flatmite.gd
+res://enemies/landmite.gd
