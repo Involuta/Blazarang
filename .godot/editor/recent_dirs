@@ -1,3 +1,4 @@
+res://levels/balls_level
 res://glb_inherited_scenes
 res://level_maps
 res://levels/mite_level
@@ -5,7 +6,6 @@ res://procedural_animation
 res://levels
 res://general_scripts
 res://enemies
-res://levels/balls_level
 res://
 res://enemies/enemy_anims
 res://enemies/spawners

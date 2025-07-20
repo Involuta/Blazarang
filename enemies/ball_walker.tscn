@@ -4124,7 +4124,8 @@ tracks/26/keys = {
 
 [sub_resource type="Animation" id="Animation_7vlw7"]
 resource_name = "vertical_jump"
-length = 0.40001
+length = 0.2
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -4132,7 +4133,7 @@ tracks/0/path = NodePath("WalkerPivot/LeftLegStand/DomeMesh/Shin/Knee:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(-0.366519, 1.5708, 1.5708), Vector3(1.0472, 1.5708, 1.5708)]
@@ -4144,7 +4145,7 @@ tracks/1/path = NodePath("WalkerPivot/RightLegStand/DomeMesh/Shin/Knee:rotation"
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(-0.366519, -1.5708, -1.5708), Vector3(1.0472, -1.5708, -1.5708)]
@@ -4156,10 +4157,10 @@ tracks/2/path = NodePath("WalkerPivot/BowlPivot:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(2.08165e-12, 0.167867, 2.08165e-12), Vector3(0, 2.03987, 2.07478e-12), Vector3(0, 3.55435, 2.07478e-12), Vector3(0, 4.53255, 2.07478e-12), Vector3(2.08165e-12, 3.97854, 2.08165e-12)]
+"values": [Vector3(2.08165e-12, 6.4, 2.08165e-12), Vector3(2.08165e-12, 8, 2.08165e-12), Vector3(2.08165e-12, 10, 2.08165e-12), Vector3(2.08165e-12, 9.65, 2.08165e-12), Vector3(2.08165e-12, 9.3, 2.08165e-12)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -4168,7 +4169,7 @@ tracks/3/path = NodePath("WalkerPivot/BowlPivot:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.4),
+"times": PackedFloat32Array(0.2),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
@@ -4180,7 +4181,7 @@ tracks/4/path = NodePath("WalkerPivot/RightLegStand:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.4),
+"times": PackedFloat32Array(0.2),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -4192,7 +4193,7 @@ tracks/5/path = NodePath("WalkerPivot/RightLegGun:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0.4),
+"times": PackedFloat32Array(0.2),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
@@ -4204,7 +4205,7 @@ tracks/6/path = NodePath("WalkerPivot/RightLegStand:process_mode")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0.4),
+"times": PackedFloat32Array(0.2),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
@@ -4216,7 +4217,7 @@ tracks/7/path = NodePath("WalkerPivot/RightLegGun:process_mode")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0.4),
+"times": PackedFloat32Array(0.2),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [4]
@@ -4228,7 +4229,7 @@ tracks/8/path = NodePath("WalkerPivot/RightLegStand:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0.4),
+"times": PackedFloat32Array(0.2),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(-10, -2, 2.08165e-12)]
@@ -4240,7 +4241,7 @@ tracks/9/path = NodePath("WalkerPivot/RightLegStand/DomeMesh/Shin:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(0.4),
+"times": PackedFloat32Array(0.2),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(2.08165e-12, 6.63061, 2.08165e-12)]
@@ -4252,7 +4253,7 @@ tracks/10/path = NodePath("WalkerPivot/RightLegStand/DomeMesh/Shin:rotation")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(0.4),
+"times": PackedFloat32Array(0.2),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 0, 0)]
@@ -4264,7 +4265,7 @@ tracks/11/path = NodePath("WalkerPivot/LeftLegStand:visible")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PackedFloat32Array(0.4),
+"times": PackedFloat32Array(0.2),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -4276,7 +4277,7 @@ tracks/12/path = NodePath("WalkerPivot/LeftLegStand:process_mode")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
-"times": PackedFloat32Array(0.4),
+"times": PackedFloat32Array(0.2),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
@@ -4288,10 +4289,24 @@ tracks/13/path = NodePath("FootBallSpawner:visible")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
-"times": PackedFloat32Array(0.4),
+"times": PackedFloat32Array(0.2),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/14/type = "method"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath(".")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"jump_add_vel"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dmtk3"]
@@ -4392,7 +4407,7 @@ libraries = {
 transform = Transform3D(-3.61999e-06, -3.48786e-16, -0.999999, 3.48787e-16, 1, -3.48787e-16, 0.999999, -3.48788e-16, -3.61999e-06, 2.08165e-12, 2.08165e-12, -10)
 
 [node name="BowlPivot" type="Node3D" parent="WalkerPivot"]
-transform = Transform3D(1, -5.48843e-16, 2.8571e-16, 2.8571e-16, 0.819152, 0.573576, -5.48843e-16, -0.573576, 0.819152, 2.08165e-12, 0.167867, 2.08165e-12)
+transform = Transform3D(0.999999, -5.48843e-16, 2.85709e-16, 2.85709e-16, 0.819152, 0.573575, -5.48842e-16, -0.573576, 0.819151, 2.08165e-12, 0.167867, 2.08165e-12)
 
 [node name="BowlMesh" parent="WalkerPivot/BowlPivot" instance=ExtResource("5_7qoeb")]
 transform = Transform3D(-1.25, 1.88745e-07, 1.59636e-12, -1.88745e-07, -1.25, -4.35746e-16, -1.61159e-14, -4.35763e-16, 1.25, 2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -4597,7 +4612,9 @@ damage = 49
 shape = SubResource("CylinderShape3D_tol7x")
 
 [node name="LeftLegGun" parent="WalkerPivot" instance=ExtResource("4_25puj")]
+process_mode = 4
 transform = Transform3D(5, -2.82727e-27, 9.28469e-13, 2.64782e-23, 5, 8.11928e-22, -1.48171e-11, -4.29699e-21, 5, -5.08, -5.9, 2.08165e-12)
+visible = false
 
 [node name="HipJoint" parent="WalkerPivot/LeftLegGun" index="0"]
 transform = Transform3D(-0.866023, -6.75498e-06, 0.500004, 0.500004, 1.81001e-06, 0.866023, -6.75498e-06, 1, 1.81001e-06, 0, 2.17465, 0)

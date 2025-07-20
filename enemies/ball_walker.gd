@@ -80,8 +80,9 @@ var phase2 := false
 }
 
 @export var phase1_standard_melee_attack_chances = {
-	"WALK": .4,
-	"STOMP": .4,
+	"WALK": .3,
+	"STOMP": .3,
+	"JUMP": .2,
 	"TYPHOON": .2,
 }
 
@@ -95,8 +96,9 @@ var phase2 := false
 }
 
 @export var phase2_standard_melee_attack_chances = {
-	"WALK": .4,
-	"STOMP": .4,
+	"WALK": .3,
+	"STOMP": .3,
+	"JUMP" : .2,
 	"TYPHOON": .2,
 }
 
@@ -255,6 +257,7 @@ func switch_to_long_dist_state():
 		PHASE.PHASE2:
 			choose_substate(phase2_long_dist_substate_chances)
 	foot_ball_spawner.spawning = true
+	can_rotate = true
 
 func choose_substate(substate_chances):
 	var choice := rng.randf()
@@ -372,6 +375,14 @@ func spawn_foot_explosion():
 	else:
 		spawn_core_balls()
 
+func spawn_foot_explosion_no_balls():
+	# Used by jump func where spawn_foot_explosion and spawn_foot_explosion_no_balls are called simultaneously, causing only one set of balls to spawn
+	var foot_explosion_inst = load("res://enemies/ball_walker_foot_explosion.tscn").instantiate()
+	level.add_child.call_deferred(foot_explosion_inst)
+	await foot_explosion_inst.tree_entered
+	foot_explosion_inst.global_position = gun_foot.global_position
+	foot_explosion_inst.rotation.y = rotation.y
+
 func spawn_bowl_explosion():
 	var foot_explosion_inst = load("res://enemies/ball_walker_foot_explosion.tscn").instantiate()
 	level.add_child.call_deferred(foot_explosion_inst)
@@ -396,20 +407,26 @@ func standard_choose_melee_substate() -> String:
 	if just_walked and just_typhooned:
 		print("Error: You somehow just walked AND just typhooned")
 		substate = "STOMP"
+	
+	var rval := rng.randf()
 	if just_walked and not just_typhooned:
-		# Stomp or typhoon
-		if rng.randf() > .6:
+		# Stomp (40% chance), jump (30%), or typhoon (30%).
+		if rval > .6:
 			substate = "STOMP"
+		elif rval > .3:
+			substate = "JUMP"
 		else:
 			substate = "TYPHOON"
 	elif not just_walked and just_typhooned:
-		# Walk or stomp
-		if rng.randf() > .6:
-			substate = "WALK"
-		else:
+		# Stomp (40% chance), jump (30%), or walk (30%)
+		if rval > .6:
 			substate = "STOMP"
+		elif rval > .3:
+			substate = "JUMP"
+		else:
+			substate = "WALK"
 	else:
-		# Walk, stomp, or typhoon
+		# Stomp, jump, walk, or typhoon
 		if phase2:
 			substate = choose_melee_substate_from_chances(phase2_standard_melee_attack_chances)
 		else:
@@ -435,7 +452,7 @@ func melee_substate():
 			anim_in_progress = true
 			await bowl_slam()
 			anim_in_progress = false
-	# If you're not too far from the arena center and you're not in a bowl slam situation, then walk, typhoon, or stomp depending on what you just did
+	# If you're not too far from the arena center and you're not in a bowl slam situation, then walk, typhoon, stomp, or jump depending on what you just did
 	var substate := standard_choose_melee_substate()
 	match(substate):
 		"WALK":
@@ -453,6 +470,12 @@ func melee_substate():
 			just_typhooned = false
 			anim_in_progress = true
 			await stomp()
+			anim_in_progress = false
+		"JUMP":
+			just_walked = false
+			just_typhooned = false
+			anim_in_progress = true
+			await jump()
 			anim_in_progress = false
 
 func walk():
@@ -476,6 +499,25 @@ func stomp():
 		rotation.y += PI
 	anim_player.play("right_stomp")
 	await get_tree().create_timer(2.0).timeout
+
+func jump():
+	anim_player.play("squat")
+	await anim_player.animation_finished
+	anim_player.play("vertical_jump")
+	await anim_player.animation_finished
+	# Wait for walker's feet to land
+	while not is_on_floor():
+		await get_tree().create_timer(get_physics_process_delta_time()).timeout
+	# Instantly spawn 2 foot explosions on opposite feet, but only 1 set of balls from bowl
+	await spawn_foot_explosion_no_balls()
+	global_position += STANDING_FEET_DIST * -transform.basis.z
+	rotation.y += PI
+	await spawn_foot_explosion()
+	# Slight endlag
+	await get_tree().create_timer(.75).timeout
+
+func jump_add_vel():
+	velocity.y = 15.0
 
 func bowl_slam():
 	anim_player.play("bowl_flip_down")
