@@ -375,13 +375,23 @@ func spawn_foot_explosion():
 	else:
 		spawn_core_balls()
 
-func spawn_foot_explosion_no_balls():
-	# Used by jump func where spawn_foot_explosion and spawn_foot_explosion_no_balls are called simultaneously, causing only one set of balls to spawn
+func spawn_foot_explosion_rim_balls():
+	# Used by jump func to spawn a foot explosion and rim balls
 	var foot_explosion_inst = load("res://enemies/ball_walker_foot_explosion.tscn").instantiate()
 	level.add_child.call_deferred(foot_explosion_inst)
 	await foot_explosion_inst.tree_entered
 	foot_explosion_inst.global_position = gun_foot.global_position
 	foot_explosion_inst.rotation.y = rotation.y
+	spawn_rim_balls()
+
+func spawn_foot_explosion_core_balls():
+	# Used by jump func to spawn a foot explosion and rim balls
+	var foot_explosion_inst = load("res://enemies/ball_walker_foot_explosion.tscn").instantiate()
+	level.add_child.call_deferred(foot_explosion_inst)
+	await foot_explosion_inst.tree_entered
+	foot_explosion_inst.global_position = gun_foot.global_position
+	foot_explosion_inst.rotation.y = rotation.y
+	spawn_core_balls()
 
 func spawn_bowl_explosion():
 	var foot_explosion_inst = load("res://enemies/ball_walker_foot_explosion.tscn").instantiate()
@@ -508,11 +518,11 @@ func jump():
 	# Wait for walker's feet to land
 	while not is_on_floor():
 		await get_tree().create_timer(get_physics_process_delta_time()).timeout
-	# Instantly spawn 2 foot explosions on opposite feet, but only 1 set of balls from bowl
-	await spawn_foot_explosion_no_balls()
+	# Instantly spawn 2 foot explosions on opposite feet, and both rim and core balls
+	await spawn_foot_explosion_rim_balls()
 	global_position += STANDING_FEET_DIST * -transform.basis.z
 	rotation.y += PI
-	await spawn_foot_explosion()
+	await spawn_foot_explosion_core_balls()
 	# Slight endlag
 	await get_tree().create_timer(.75).timeout
 
