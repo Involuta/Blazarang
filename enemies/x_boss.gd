@@ -1178,7 +1178,8 @@ func recall_left_arm():
 		return
 	left_arm.stop_firing_laser()
 	var recall_tween = get_tree().create_tween()
-	recall_tween.tween_method(recall_left_arm_frame, 0.0, 1.0, .65).set_ease(Tween.EASE_OUT)
+	# At .33 seconds or 20 frames, X's left shoulder is fully extended to receive arm. Make recall tween finish slightly earlier than that so arm is restored right on time
+	recall_tween.tween_method(recall_left_arm_frame, 0.0, 1.0, .3).set_ease(Tween.EASE_OUT)
 	recall_tween.tween_callback(hide_floating_left_arm)
 	recall_tween.tween_callback(restore_rig_left_arm)
 

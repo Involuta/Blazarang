@@ -1,8 +1,9 @@
+CollisionShape3D
+Area3D
 MeshInstance3D
 RemoteTransform3D
 FuncGodotMap
 StaticBody3D
-CollisionShape3D
 RayCast3D
 Node3D
 Camera3D
@@ -11,7 +12,6 @@ SkeletonIK3D
 EnemyHurtbox
 GPUParticles3D
 Node2D
-Area3D
 AnimationPlayer
 NavigationAgent3D
 AnimationTree

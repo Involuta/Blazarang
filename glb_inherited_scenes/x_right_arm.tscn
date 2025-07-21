@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://d8rrte1l683t" path="res://glb_imports/XRightArm.glb" id="1_4jxjw"]
 [ext_resource type="Script" path="res://glb_inherited_scenes/x_arm.gd" id="2_yypiv"]
-[ext_resource type="Script" path="res://hitbox.gd" id="3_yk8jj"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="3_yk8jj"]
 [ext_resource type="PackedScene" uid="uid://d2ugnhpgcxyi7" path="res://enemies/x_arrow.tscn" id="4_xewll"]
 
 [sub_resource type="Gradient" id="Gradient_wq6nw"]

@@ -158,6 +158,9 @@ var flash := preload("res://enemies/flash_ball.tscn")
 @onready var standing_foot := $WalkerPivot/LeftLegStand/DomeMesh/Foot
 @onready var gun_foot := $WalkerPivot/RightLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh/Foot
 @onready var anim_player := $AnimationPlayer
+@onready var right_foot_trauma_causer := $WalkerPivot/RightLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh/Foot/TraumaCauser
+@onready var left_foot_trauma_causer := $WalkerPivot/LeftLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh/Foot/TraumaCauser
+@onready var bowl_trauma_causer := $WalkerPivot/BowlPivot/TraumaCauser
 #@onready var anim_tree := $AnimationTree
 @onready var root := $/root/ViewControl
 
@@ -365,6 +368,8 @@ func spawn_core_balls():
 		ball_vec = ball_vec.rotated(Vector3.UP, 2 * PI / num_rim_balls)
 
 func spawn_foot_explosion():
+	# Shake screen (only right foot stomps)
+	right_foot_trauma_causer.cause_trauma()
 	var foot_explosion_inst = load("res://enemies/ball_walker_foot_explosion.tscn").instantiate()
 	level.add_child.call_deferred(foot_explosion_inst)
 	await foot_explosion_inst.tree_entered
@@ -376,6 +381,8 @@ func spawn_foot_explosion():
 		spawn_core_balls()
 
 func spawn_foot_explosion_rim_balls():
+	# Shake screen (since this func is only called alongside spawn_foot_explosion_core_balls, only cause trauma for 1 foot)
+	right_foot_trauma_causer.cause_trauma()
 	# Used by jump func to spawn a foot explosion and rim balls
 	var foot_explosion_inst = load("res://enemies/ball_walker_foot_explosion.tscn").instantiate()
 	level.add_child.call_deferred(foot_explosion_inst)
@@ -385,6 +392,8 @@ func spawn_foot_explosion_rim_balls():
 	spawn_rim_balls()
 
 func spawn_foot_explosion_core_balls():
+	# Shake screen (since this func is only called alongside spawn_foot_explosion_core_balls, only cause trauma for 1 foot)
+	left_foot_trauma_causer.cause_trauma()
 	# Used by jump func to spawn a foot explosion and rim balls
 	var foot_explosion_inst = load("res://enemies/ball_walker_foot_explosion.tscn").instantiate()
 	level.add_child.call_deferred(foot_explosion_inst)
@@ -394,6 +403,8 @@ func spawn_foot_explosion_core_balls():
 	spawn_core_balls()
 
 func spawn_bowl_explosion():
+	# Shake screen
+	bowl_trauma_causer.cause_trauma()
 	var foot_explosion_inst = load("res://enemies/ball_walker_foot_explosion.tscn").instantiate()
 	level.add_child.call_deferred(foot_explosion_inst)
 	await foot_explosion_inst.tree_entered

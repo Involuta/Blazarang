@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://da5jjble4aa6b" path="res://glb_imports/8164_head_meshes.glb" id="1_k1ewo"]
 [ext_resource type="PackedScene" uid="uid://dg2jcripae6d6" path="res://glb_inherited_scenes/x_fire_head.tscn" id="2_wvf5b"]
-[ext_resource type="Script" path="res://hitbox.gd" id="3_bn154"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="3_bn154"]
 
 [sub_resource type="Shader" id="Shader_tiwuv"]
 code = "shader_type spatial;

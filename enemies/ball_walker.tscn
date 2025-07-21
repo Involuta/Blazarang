@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cy4cd0vab7e7s"]
+[gd_scene load_steps=46 format=3 uid="uid://cy4cd0vab7e7s"]
 
 [ext_resource type="Script" path="res://enemies/ball_walker.gd" id="1_evdbk"]
 [ext_resource type="Script" path="res://enemies/spawners/ball_spawner.gd" id="2_7lttv"]
@@ -9,12 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://bmtn0cwrlroe4" path="res://enemies/ball_walker_mesh_leg_stand.tscn" id="5_rin41"]
 [ext_resource type="Script" path="res://enemies/multi_hurtbox_child.gd" id="5_tqkwm"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="7_ably2"]
+[ext_resource type="Script" path="res://general_scripts/trauma_causer.gd" id="9_i4jhh"]
 [ext_resource type="Script" path="res://enemies/boss_hurtbox.gd" id="10_n240s"]
 [ext_resource type="Script" path="res://enemies/ball_walker_armor.gd" id="11_11jmm"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_5sb8t"]
-height = 0.5
-radius = 2.8
+[sub_resource type="SphereShape3D" id="SphereShape3D_3mbtk"]
+radius = 20.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_18exh"]
 height = 10.0
@@ -4387,9 +4387,9 @@ mortar_enemy_chances = {
 "SKULL": 0.1
 }
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="WalkerPivot@LeftLegGun@HipJoint@Thigh@Knee@Shin@DomeMesh@Foot@TraumaCauser@CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 2.08165e-12, -1.75, 2.08165e-12)
-shape = SubResource("CylinderShape3D_5sb8t")
+shape = SubResource("SphereShape3D_3mbtk")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, -1.5246e-23, -1.5246e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2.08165e-12, 2.08165e-12, 5)
@@ -4456,6 +4456,13 @@ surface_material_override/0 = SubResource("StandardMaterial3D_nt7kj")
 transform = Transform3D(1, 8.3376e-14, -4.13066e-13, 2.18848e-13, 1, 9.34645e-19, -1.84807e-14, 1.76247e-20, 1, 2.08165e-12, -0.28, 2.08165e-12)
 
 [node name="BowlHitboxContainer" type="Node3D" parent="WalkerPivot/BowlPivot"]
+
+[node name="TraumaCauser" type="Area3D" parent="WalkerPivot/BowlPivot"]
+script = ExtResource("9_i4jhh")
+trauma_amount = 0.4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WalkerPivot/BowlPivot/TraumaCauser"]
+shape = SubResource("SphereShape3D_3mbtk")
 
 [node name="LeftLegStand" parent="WalkerPivot" instance=ExtResource("5_rin41")]
 transform = Transform3D(5, -1.74393e-15, 9.28455e-13, 1.74393e-15, 5, -1.74393e-15, -3.16047e-12, 1.74393e-15, 5, 10, -2, 2.08165e-12)
@@ -4610,6 +4617,13 @@ damage = 49
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WalkerPivot/RightLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh/Foot/EnemyHitbox"]
 shape = SubResource("CylinderShape3D_tol7x")
+
+[node name="TraumaCauser" type="Area3D" parent="WalkerPivot/RightLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh/Foot" index="2"]
+script = ExtResource("9_i4jhh")
+trauma_amount = 0.4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WalkerPivot/RightLegGun/HipJoint/Thigh/Knee/Shin/DomeMesh/Foot/TraumaCauser"]
+shape = SubResource("SphereShape3D_3mbtk")
 
 [node name="LeftLegGun" parent="WalkerPivot" instance=ExtResource("4_25puj")]
 process_mode = 4
