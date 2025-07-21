@@ -246,7 +246,7 @@ mesh = SubResource("SphereMesh_g2iu7")
 [node name="TraumaCauser" type="Area3D" parent="."]
 collision_layer = 0
 script = ExtResource("6_hey1c")
-trauma_amount = 0.3
+trauma_amount = 0.35
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TraumaCauser"]
 shape = SubResource("SphereShape3D_yau4y")
