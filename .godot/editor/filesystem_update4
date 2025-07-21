@@ -28,3 +28,4 @@ res://enemies/x_boss.tscn
 res://enemies/x_boss.gd
 res://enemies/enemy_anims/x_recall_left_arm.res
 res://levels/x_boss_level/background_nodes/x_diamond.tscn
+res://enemies/enemy_anims/x_triangle_flyingkick.res
