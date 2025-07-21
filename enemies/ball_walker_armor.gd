@@ -33,7 +33,7 @@ func receive_hit(damage: float, hitter):
 		emit_hitter_effect(hitter)
 	health -= damage
 	if health <= 0:
-		die()
+		call_deferred("die")
 
 func emit_hit_particles(hitter):
 	var inst := hit_particles.instantiate()
@@ -75,7 +75,6 @@ func death_effect():
 	pass
 
 func die():
-
 	var parent = get_parent()
 	parent.find_child("LeftFootFleshHurtbox").process_mode = Node.PROCESS_MODE_INHERIT
 	parent.find_child("RightFootFleshHurtbox").process_mode = Node.PROCESS_MODE_INHERIT

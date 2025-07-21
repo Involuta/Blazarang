@@ -1,10 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://dvcpkp84uyvkc"]
+[gd_scene load_steps=23 format=3 uid="uid://dvcpkp84uyvkc"]
 
 [ext_resource type="Script" path="res://enemies/skull_ball.gd" id="1_ebyms"]
 [ext_resource type="Shader" path="res://glb_inherited_scenes/black_outline.gdshader" id="2_jc1lq"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_xkl6b"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="3_68d6s"]
 [ext_resource type="AudioStream" uid="uid://d0xusfqqc8emu" path="res://audio/sfx/evil_laugh.mp3" id="4_c7kkm"]
+[ext_resource type="Script" path="res://general_scripts/trauma_causer.gd" id="6_hey1c"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xs2x3"]
 friction = 0.0
@@ -121,6 +122,20 @@ tracks/6/keys = {
 "update": 1,
 "values": [0, 4]
 }
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("TraumaCauser")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(1.0521),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"cause_trauma"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_obs3y"]
 _data = {
@@ -163,6 +178,9 @@ albedo_color = Color(0.270588, 0.65098, 1, 1)
 material = SubResource("StandardMaterial3D_axrkd")
 radius = 1.8
 height = 3.6
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yau4y"]
+radius = 8.5
 
 [node name="SkullBall" type="RigidBody3D"]
 collision_layer = 0
@@ -224,3 +242,11 @@ draw_pass_1 = SubResource("SphereMesh_pson3")
 [node name="ExplosionMesh" type="MeshInstance3D" parent="."]
 visible = false
 mesh = SubResource("SphereMesh_g2iu7")
+
+[node name="TraumaCauser" type="Area3D" parent="."]
+collision_layer = 0
+script = ExtResource("6_hey1c")
+trauma_amount = 0.3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TraumaCauser"]
+shape = SubResource("SphereShape3D_yau4y")
