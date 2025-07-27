@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dekgpjmjs8dta"]
+
+[ext_resource type="PackedScene" uid="uid://cub4exk8r440c" path="res://glb_inherited_scenes/harvestman_meshes.tscn" id="1_hpxb4"]
+
+[node name="HarvestmanProcAnimMeshes" type="Node3D"]
+
+[node name="Harvestman" parent="." instance=ExtResource("1_hpxb4")]
