@@ -167,25 +167,57 @@ top_level = true
 [node name="LeftVeryFrontStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -8, 9)
 
+[node name="LeftVeryFrontRay" type="RayCast3D" parent="Harvestman/Armature/StepTargetContainer/LeftVeryFrontStepTarget"]
+transform = Transform3D(0.999391, -0.00121797, 0.0348782, 3.48574e-16, 0.999391, 0.0348995, -0.0348995, -0.0348782, 0.998782, 0, 10, 0)
+target_position = Vector3(0, -10, 0)
+
 [node name="RightMiddleBackStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -6, -0.4)
+
+[node name="RightMiddleBackRay" type="RayCast3D" parent="Harvestman/Armature/StepTargetContainer/RightMiddleBackStepTarget"]
+transform = Transform3D(0.999391, 0.00121797, 0.0348782, 3.48574e-16, 0.999391, -0.0348995, -0.0348995, 0.0348782, 0.998782, 0, 10, 0)
+target_position = Vector3(0, -10, 0)
 
 [node name="RightVeryFrontStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -8, 9)
 
+[node name="RightVeryFrontRay" type="RayCast3D" parent="Harvestman/Armature/StepTargetContainer/RightVeryFrontStepTarget"]
+transform = Transform3D(0.999391, 0.00121797, -0.0348782, 3.48574e-16, 0.999391, 0.0348995, 0.0348995, -0.0348782, 0.998782, 0, 10, 0)
+target_position = Vector3(0, -10, 0)
+
 [node name="LeftMiddleBackStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -6, -0.4)
+
+[node name="LeftMiddleBackRay" type="RayCast3D" parent="Harvestman/Armature/StepTargetContainer/LeftMiddleBackStepTarget"]
+transform = Transform3D(0.999391, -0.00121797, -0.0348782, 3.48574e-16, 0.999391, -0.0348995, 0.0348995, 0.0348782, 0.998782, 0, 10, 0)
+target_position = Vector3(0, -10, 0)
 
 [node name="LeftMiddleFrontStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -6, 2.08165e-12)
 
+[node name="LeftMiddleFrontRay" type="RayCast3D" parent="Harvestman/Armature/StepTargetContainer/LeftMiddleFrontStepTarget"]
+transform = Transform3D(0.999391, -0.00121797, 0.0348782, 3.48574e-16, 0.999391, 0.0348995, -0.0348995, -0.0348782, 0.998782, 0, 10, 0)
+target_position = Vector3(0, -10, 0)
+
 [node name="RightVeryBackStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -8, -9)
+
+[node name="RightVeryBackRay" type="RayCast3D" parent="Harvestman/Armature/StepTargetContainer/RightVeryBackStepTarget"]
+transform = Transform3D(0.999391, 0.00121797, 0.0348782, 3.48574e-16, 0.999391, -0.0348995, -0.0348995, 0.0348782, 0.998782, 0, 10, 0)
+target_position = Vector3(0, -10, 0)
 
 [node name="RightMiddleFrontStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -6, 2.08165e-12)
 
+[node name="RightMiddleFrontRay" type="RayCast3D" parent="Harvestman/Armature/StepTargetContainer/RightMiddleFrontStepTarget"]
+transform = Transform3D(0.999391, 0.00121797, -0.0348782, 3.48574e-16, 0.999391, 0.0348995, 0.0348995, -0.0348782, 0.998782, 0, 10, 0)
+target_position = Vector3(0, -10, 0)
+
 [node name="LeftVeryBackStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -8, -9)
+
+[node name="LeftVeryBackRay" type="RayCast3D" parent="Harvestman/Armature/StepTargetContainer/LeftVeryBackStepTarget"]
+transform = Transform3D(0.999391, -0.00121797, -0.0348782, 3.48574e-16, 0.999391, -0.0348995, 0.0348995, 0.0348782, 0.998782, 0, 10, 0)
+target_position = Vector3(0, -10, 0)
 
 [editable path="Harvestman"]

@@ -1,3 +1,4 @@
+RayCast3D
 Node3D
 Marker3D
 SkeletonIK3D
@@ -7,7 +8,6 @@ MeshInstance3D
 RemoteTransform3D
 FuncGodotMap
 StaticBody3D
-RayCast3D
 Camera3D
 EnemyHurtbox
 GPUParticles3D
