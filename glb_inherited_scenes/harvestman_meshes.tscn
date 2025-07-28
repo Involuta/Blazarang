@@ -111,3 +111,35 @@ tip_bone = &"Bone.009.R"
 [node name="LeftVeryBackLeg" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="26"]
 root_bone = &"Bone.004.L"
 tip_bone = &"Bone.005.L"
+
+[node name="LeftVeryFrontIKTarget" type="Marker3D" parent="Armature" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -5.5, 9)
+top_level = true
+
+[node name="RightMiddleBackIKTarget" type="Marker3D" parent="Armature" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -4.5, -0.4)
+top_level = true
+
+[node name="RightVeryFrontIKTarget" type="Marker3D" parent="Armature" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -5.5, 9)
+top_level = true
+
+[node name="LeftMiddleBackIKTarget" type="Marker3D" parent="Armature" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -4.5, -0.4)
+top_level = true
+
+[node name="LeftMiddleFrontIKTarget" type="Marker3D" parent="Armature" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -4.5, 2.08165e-12)
+top_level = true
+
+[node name="RightVeryBackIKTarget" type="Marker3D" parent="Armature" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -5.5, -9)
+top_level = true
+
+[node name="RightMiddleFrontIKTarget" type="Marker3D" parent="Armature" index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -4.5, 2.08165e-12)
+top_level = true
+
+[node name="LeftVeryBackIKTarget" type="Marker3D" parent="Armature" index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -5.5, -9)
+top_level = true

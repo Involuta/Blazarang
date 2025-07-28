@@ -1,3 +1,4 @@
+Marker3D
 SkeletonIK3D
 CollisionShape3D
 Area3D
@@ -8,7 +9,6 @@ StaticBody3D
 RayCast3D
 Node3D
 Camera3D
-Marker3D
 EnemyHurtbox
 GPUParticles3D
 Node2D
