@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcffjmoveconi"]
+[gd_scene load_steps=3 format=3 uid="uid://dcffjmoveconi"]
 
 [ext_resource type="PackedScene" uid="uid://dcnrtub32dk8f" path="res://glb_inherited_scenes/harvestman_meshes.tscn" id="1_qjs1t"]
+[ext_resource type="Script" path="res://procedural_animation/start_ik.gd" id="2_bxf5l"]
 
 [node name="HarvestmanProcAnimMeshes" type="Node3D"]
 
@@ -67,21 +68,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.96046e-08, 0)
 root_bone = &"Bone.002.L"
 tip_bone = &"Bone.003.L.001"
 target_node = NodePath("../../LeftVeryFrontIKTarget")
+script = ExtResource("2_bxf5l")
 
 [node name="RightVeryFrontLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="20"]
 root_bone = &"Bone.002.R"
 tip_bone = &"Bone.003.R.001"
 target_node = NodePath("../../RightVeryFrontIKTarget")
+script = ExtResource("2_bxf5l")
 
 [node name="LeftVeryBackLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="21"]
 root_bone = &"Bone.004.L"
 tip_bone = &"Bone.005.L.001"
 target_node = NodePath("../../LeftVeryBackIKTarget")
+script = ExtResource("2_bxf5l")
 
 [node name="RightVeryBackLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="22"]
 root_bone = &"Bone.004.R"
 tip_bone = &"Bone.005.R.001"
 target_node = NodePath("../../RightVeryBackIKTarget")
+script = ExtResource("2_bxf5l")
 
 [node name="LeftVeryFrontIKTarget" type="Marker3D" parent="Harvestman/Armature" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -8, 9)
@@ -94,5 +99,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -8, -9)
 
 [node name="RightVeryBackIKTarget" type="Marker3D" parent="Harvestman/Armature" index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -8, -9)
+
+[node name="StepTargetContainer" type="Node3D" parent="Harvestman/Armature" index="5"]
+
+[node name="LeftVeryFrontStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -8, 9)
+
+[node name="LeftVeryFrontRay" type="RayCast3D" parent="Harvestman/Armature/StepTargetContainer/LeftVeryFrontStepTarget"]
+
+[node name="RightVeryFrontStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -8, 9)
+
+[node name="RightVeryFrontRay" type="RayCast3D" parent="Harvestman/Armature/StepTargetContainer/RightVeryFrontStepTarget"]
+
+[node name="LeftVeryBackStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -8, -9)
+
+[node name="LeftVeryBackRay" type="RayCast3D" parent="Harvestman/Armature/StepTargetContainer/LeftVeryBackStepTarget"]
+
+[node name="RightVeryBackStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -8, -9)
+
+[node name="RightVeryBackRay" type="RayCast3D" parent="Harvestman/Armature/StepTargetContainer/RightVeryBackStepTarget"]
 
 [editable path="Harvestman"]
