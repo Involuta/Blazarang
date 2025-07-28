@@ -47,12 +47,6 @@ transform = Transform3D(-0.946198, -0.320254, 0.0463447, 0.323492, -0.932644, 0.
 [node name="LeftMiddleFrontThigh" parent="ParamiteMeshes/Armature/Skeleton3D" index="5"]
 transform = Transform3D(0.182479, -0.983202, -0.00380718, 0.983209, 0.182481, -0.000159132, 0.000851197, -0.00371422, 0.999993, -0.150449, -1.8943, -0.00475946)
 
-[node name="LeftVeryFrontShin" parent="ParamiteMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(-0.890563, 0.10974, 0.441425, -0.123827, 0.875318, -0.467425, -0.437682, -0.470931, -0.765936, 2.90515, 1.51915, 1.26382)
-
-[node name="LeftVeryFrontThigh" parent="ParamiteMeshes/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.178793, -0.980129, -0.0859097, 0.979321, 0.185686, -0.080322, 0.0946781, -0.0697722, 0.99306, -0.26601, -1.67774, -0.153193)
-
 [node name="RightVeryBackShin" parent="ParamiteMeshes/Armature/Skeleton3D" index="8"]
 transform = Transform3D(-0.763337, -0.326304, 0.557532, 0.329917, 0.545098, 0.770728, -0.555401, 0.772265, -0.30844, -2.50745, 2.21963, -1.58523)
 

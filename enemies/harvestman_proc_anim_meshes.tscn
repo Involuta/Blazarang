@@ -8,6 +8,7 @@
 
 [node name="HarvestmanProcAnimMeshes" type="Node3D" node_paths=PackedStringArray("lvf_ik", "rmb_ik", "rvf_ik", "lmb_ik", "lmf_ik", "rvb_ik", "rmf_ik", "lvb_ik")]
 script = ExtResource("1_was61")
+ground_offset = 5.0
 lvf_ik = NodePath("Harvestman/Armature/LeftVeryFrontIKTarget")
 rmb_ik = NodePath("Harvestman/Armature/RightMiddleBackIKTarget")
 rvf_ik = NodePath("Harvestman/Armature/RightVeryFrontIKTarget")
