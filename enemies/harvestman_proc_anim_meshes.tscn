@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1eillt6fa4f0"]
+[gd_scene load_steps=4 format=3 uid="uid://d1eillt6fa4f0"]
 
 [ext_resource type="PackedScene" uid="uid://dnhh7oqmsqohb" path="res://glb_inherited_scenes/harvestman_meshes.tscn" id="1_qjs1t"]
+[ext_resource type="Script" path="res://enemies/harvestman_proc_anim_test_mvmt.gd" id="1_was61"]
+[ext_resource type="Script" path="res://procedural_animation/start_ik.gd" id="2_bxf5l"]
 
 [node name="HarvestmanProcAnimMeshes" type="Node3D"]
+script = ExtResource("1_was61")
 
 [node name="Harvestman" parent="." instance=ExtResource("1_qjs1t")]
 
@@ -68,47 +71,121 @@ root_bone = &"Bone.002.L"
 tip_bone = &"Bone.003.L"
 use_magnet = true
 magnet = Vector3(0, 10, 0)
+target_node = NodePath("../../LeftVeryFrontIKTarget")
+script = ExtResource("2_bxf5l")
 
 [node name="RightMiddleBackLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="20"]
 root_bone = &"Bone.006.R"
 tip_bone = &"Bone.007.R"
 use_magnet = true
 magnet = Vector3(0, 10, 0)
+target_node = NodePath("../../RightMiddleBackIKTarget")
+script = ExtResource("2_bxf5l")
 
 [node name="RightVeryFrontLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="21"]
 root_bone = &"Bone.002.R"
 tip_bone = &"Bone.003.R"
 use_magnet = true
 magnet = Vector3(0, 10, 0)
+target_node = NodePath("../../RightVeryFrontIKTarget")
+script = ExtResource("2_bxf5l")
 
 [node name="LeftMiddleBackLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="22"]
 root_bone = &"Bone.006.L"
 tip_bone = &"Bone.007.L"
 use_magnet = true
 magnet = Vector3(0, 10, 0)
+target_node = NodePath("../../LeftMiddleBackIKTarget")
+script = ExtResource("2_bxf5l")
 
 [node name="LeftMiddleFrontLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="23"]
 root_bone = &"Bone.008.L"
 tip_bone = &"Bone.009.L"
 use_magnet = true
 magnet = Vector3(0, 10, 0)
+target_node = NodePath("../../LeftMiddleFrontIKTarget")
+script = ExtResource("2_bxf5l")
 
 [node name="RightVeryBackLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="24"]
 root_bone = &"Bone.004.R"
 tip_bone = &"Bone.005.R"
 use_magnet = true
 magnet = Vector3(0, 10, 0)
+target_node = NodePath("../../RightVeryBackIKTarget")
+script = ExtResource("2_bxf5l")
 
 [node name="RightMiddleFrontLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="25"]
 root_bone = &"Bone.008.R"
 tip_bone = &"Bone.009.R"
 use_magnet = true
 magnet = Vector3(0, 10, 0)
+target_node = NodePath("../../RightMiddleFrontIKTarget")
+script = ExtResource("2_bxf5l")
 
 [node name="LeftVeryBackLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="26"]
 root_bone = &"Bone.004.L"
 tip_bone = &"Bone.005.L"
 use_magnet = true
 magnet = Vector3(0, 10, 0)
+target_node = NodePath("../../LeftVeryBackIKTarget")
+script = ExtResource("2_bxf5l")
+
+[node name="LeftVeryFrontIKTarget" type="Marker3D" parent="Harvestman/Armature" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -8, 9)
+top_level = true
+
+[node name="RightMiddleBackIKTarget" type="Marker3D" parent="Harvestman/Armature" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -6, -0.4)
+top_level = true
+
+[node name="RightVeryFrontIKTarget" type="Marker3D" parent="Harvestman/Armature" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -8, 9)
+top_level = true
+
+[node name="LeftMiddleBackIKTarget" type="Marker3D" parent="Harvestman/Armature" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -6, -0.4)
+top_level = true
+
+[node name="LeftMiddleFrontIKTarget" type="Marker3D" parent="Harvestman/Armature" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -6, 2.08165e-12)
+top_level = true
+
+[node name="RightVeryBackIKTarget" type="Marker3D" parent="Harvestman/Armature" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -8, -9)
+top_level = true
+
+[node name="RightMiddleFrontIKTarget" type="Marker3D" parent="Harvestman/Armature" index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -6, 2.08165e-12)
+top_level = true
+
+[node name="LeftVeryBackIKTarget" type="Marker3D" parent="Harvestman/Armature" index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -8, -9)
+top_level = true
+
+[node name="StepTargetContainer" type="Node3D" parent="Harvestman/Armature" index="9"]
+
+[node name="LeftVeryFrontStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -8, 9)
+
+[node name="RightMiddleBackStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -6, -0.4)
+
+[node name="RightVeryFrontStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -8, 9)
+
+[node name="LeftMiddleBackStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -6, -0.4)
+
+[node name="LeftMiddleFrontStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -6, 2.08165e-12)
+
+[node name="RightVeryBackStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -8, -9)
+
+[node name="RightMiddleFrontStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -6, 2.08165e-12)
+
+[node name="LeftVeryBackStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -8, -9)
 
 [editable path="Harvestman"]
