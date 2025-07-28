@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cub4exk8r440c"]
+[gd_scene load_steps=2 format=3 uid="uid://dnhh7oqmsqohb"]
 
-[ext_resource type="PackedScene" uid="uid://b22y8kl5r8am4" path="res://glb_imports/Harvestman.glb" id="1_1tav8"]
+[ext_resource type="PackedScene" uid="uid://b22y8kl5r8am4" path="res://glb_imports/Harvestman.glb" id="1_t28ah"]
 
-[node name="Harvestman" instance=ExtResource("1_1tav8")]
+[node name="Harvestman" instance=ExtResource("1_t28ah")]
 
 [node name="LeftVeryFrontShin" parent="Armature/Skeleton3D" index="0"]
 transform = Transform3D(1, 8.60217e-16, -7.68806e-10, -1.34838e-15, 1, -2.83832e-08, 3.01888e-08, 2.83832e-08, 1, 9.53674e-07, 1.01328e-06, 8.9407e-08)
@@ -79,67 +79,3 @@ bone_idx = 37
 [node name="Body" parent="Armature/Skeleton3D" index="18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.96046e-08, 0)
 bone_idx = 38
-
-[node name="LeftVeryFrontLeg" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="19"]
-root_bone = &"Bone.002.L"
-tip_bone = &"Bone.003.L"
-
-[node name="RightMiddleBackLeg" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="20"]
-root_bone = &"Bone.006.R"
-tip_bone = &"Bone.007.R"
-
-[node name="RightVeryFrontLeg" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="21"]
-root_bone = &"Bone.002.R"
-tip_bone = &"Bone.003.R"
-
-[node name="LeftMiddleBackLeg" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="22"]
-root_bone = &"Bone.006.L"
-tip_bone = &"Bone.007.L"
-
-[node name="LeftMiddleFrontLeg" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="23"]
-root_bone = &"Bone.008.L"
-tip_bone = &"Bone.009.L"
-
-[node name="RightVeryBackLeg" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="24"]
-root_bone = &"Bone.004.R"
-tip_bone = &"Bone.005.R"
-
-[node name="RightMiddleFrontLeg" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="25"]
-root_bone = &"Bone.008.R"
-tip_bone = &"Bone.009.R"
-
-[node name="LeftVeryBackLeg" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="26"]
-root_bone = &"Bone.004.L"
-tip_bone = &"Bone.005.L"
-
-[node name="LeftVeryFrontIKTarget" type="Marker3D" parent="Armature" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -5.5, 9)
-top_level = true
-
-[node name="RightMiddleBackIKTarget" type="Marker3D" parent="Armature" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -4.5, -0.4)
-top_level = true
-
-[node name="RightVeryFrontIKTarget" type="Marker3D" parent="Armature" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -5.5, 9)
-top_level = true
-
-[node name="LeftMiddleBackIKTarget" type="Marker3D" parent="Armature" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -4.5, -0.4)
-top_level = true
-
-[node name="LeftMiddleFrontIKTarget" type="Marker3D" parent="Armature" index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -4.5, 2.08165e-12)
-top_level = true
-
-[node name="RightVeryBackIKTarget" type="Marker3D" parent="Armature" index="6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -5.5, -9)
-top_level = true
-
-[node name="RightMiddleFrontIKTarget" type="Marker3D" parent="Armature" index="7"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -4.5, 2.08165e-12)
-top_level = true
-
-[node name="LeftVeryBackIKTarget" type="Marker3D" parent="Armature" index="8"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -5.5, -9)
-top_level = true
