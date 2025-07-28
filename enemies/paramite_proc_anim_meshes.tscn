@@ -30,7 +30,7 @@ lvb_sk = NodePath("ParamiteMeshes/Armature/Skeleton3D/LeftVeryBackLeg")
 [node name="ParamiteMeshes" parent="." instance=ExtResource("2_vqbi7")]
 
 [node name="LeftVeryBackShin" parent="ParamiteMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.763337, 0.326304, -0.557532, -0.329917, 0.545098, 0.770728, 0.555401, 0.772265, -0.30844, 2.50745, 2.21963, -1.58523)
+transform = Transform3D(-0.763337, 0.326304, -0.557532, -0.329917, 0.545098, 0.770728, 0.555401, 0.772265, -0.308441, 2.50745, 2.21963, -1.58523)
 
 [node name="LeftVeryBackThigh" parent="ParamiteMeshes/Armature/Skeleton3D" index="1"]
 transform = Transform3D(-0.109891, -0.99184, -0.064638, 0.989799, -0.103268, -0.0981555, 0.0906795, -0.074765, 0.99307, 0.349687, -2.12413, -0.171793)
@@ -48,7 +48,7 @@ transform = Transform3D(-0.946198, -0.320254, 0.0463447, 0.323492, -0.932644, 0.
 transform = Transform3D(0.182479, -0.983202, -0.00380718, 0.983209, 0.182481, -0.000159132, 0.000851197, -0.00371422, 0.999993, -0.150449, -1.8943, -0.00475946)
 
 [node name="RightVeryBackShin" parent="ParamiteMeshes/Armature/Skeleton3D" index="8"]
-transform = Transform3D(-0.763337, -0.326304, 0.557532, 0.329917, 0.545098, 0.770728, -0.555401, 0.772265, -0.30844, -2.50745, 2.21963, -1.58523)
+transform = Transform3D(-0.763337, -0.326304, 0.557532, 0.329917, 0.545098, 0.770728, -0.555401, 0.772265, -0.308441, -2.50745, 2.21963, -1.58523)
 
 [node name="RightVeryBackThigh" parent="ParamiteMeshes/Armature/Skeleton3D" index="9"]
 transform = Transform3D(-0.109891, 0.99184, 0.064638, -0.989799, -0.103268, -0.0981555, -0.0906795, -0.074765, 0.99307, -0.338697, -2.02515, -0.162726)
