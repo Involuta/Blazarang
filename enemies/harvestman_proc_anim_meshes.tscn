@@ -6,16 +6,12 @@
 [ext_resource type="Script" path="res://procedural_animation/ik_target.gd" id="4_te85f"]
 [ext_resource type="Script" path="res://procedural_animation/step_ray.gd" id="5_wk41b"]
 
-[node name="HarvestmanProcAnimMeshes" type="Node3D" node_paths=PackedStringArray("lvf_ik", "rmb_ik", "rvf_ik", "lmb_ik", "lmf_ik", "rvb_ik", "rmf_ik", "lvb_ik")]
+[node name="HarvestmanProcAnimMeshes" type="Node3D" node_paths=PackedStringArray("lvf_ik", "rvf_ik", "rvb_ik", "lvb_ik")]
 script = ExtResource("1_was61")
 ground_offset = 5.0
 lvf_ik = NodePath("Harvestman/Armature/LeftVeryFrontIKTarget")
-rmb_ik = NodePath("Harvestman/Armature/RightMiddleBackIKTarget")
 rvf_ik = NodePath("Harvestman/Armature/RightVeryFrontIKTarget")
-lmb_ik = NodePath("Harvestman/Armature/LeftMiddleBackIKTarget")
-lmf_ik = NodePath("Harvestman/Armature/LeftMiddleFrontIKTarget")
 rvb_ik = NodePath("Harvestman/Armature/RightVeryBackIKTarget")
-rmf_ik = NodePath("Harvestman/Armature/RightMiddleFrontIKTarget")
 lvb_ik = NodePath("Harvestman/Armature/LeftVeryBackIKTarget")
 
 [node name="Harvestman" parent="." instance=ExtResource("1_qjs1t")]
@@ -85,15 +81,7 @@ magnet = Vector3(0, 10, 0)
 target_node = NodePath("../../LeftVeryFrontIKTarget")
 script = ExtResource("2_bxf5l")
 
-[node name="RightMiddleBackLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="20"]
-root_bone = &"Bone.006.R"
-tip_bone = &"Bone.007.R"
-use_magnet = true
-magnet = Vector3(0, 10, 0)
-target_node = NodePath("../../RightMiddleBackIKTarget")
-script = ExtResource("2_bxf5l")
-
-[node name="RightVeryFrontLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="21"]
+[node name="RightVeryFrontLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="20"]
 root_bone = &"Bone.002.R"
 tip_bone = &"Bone.003.R"
 use_magnet = true
@@ -101,23 +89,7 @@ magnet = Vector3(0, 10, 0)
 target_node = NodePath("../../RightVeryFrontIKTarget")
 script = ExtResource("2_bxf5l")
 
-[node name="LeftMiddleBackLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="22"]
-root_bone = &"Bone.006.L"
-tip_bone = &"Bone.007.L"
-use_magnet = true
-magnet = Vector3(0, 10, 0)
-target_node = NodePath("../../LeftMiddleBackIKTarget")
-script = ExtResource("2_bxf5l")
-
-[node name="LeftMiddleFrontLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="23"]
-root_bone = &"Bone.008.L"
-tip_bone = &"Bone.009.L"
-use_magnet = true
-magnet = Vector3(0, 10, 0)
-target_node = NodePath("../../LeftMiddleFrontIKTarget")
-script = ExtResource("2_bxf5l")
-
-[node name="RightVeryBackLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="24"]
+[node name="RightVeryBackLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="21"]
 root_bone = &"Bone.004.R"
 tip_bone = &"Bone.005.R"
 use_magnet = true
@@ -125,15 +97,7 @@ magnet = Vector3(0, 10, 0)
 target_node = NodePath("../../RightVeryBackIKTarget")
 script = ExtResource("2_bxf5l")
 
-[node name="RightMiddleFrontLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="25"]
-root_bone = &"Bone.008.R"
-tip_bone = &"Bone.009.R"
-use_magnet = true
-magnet = Vector3(0, 10, 0)
-target_node = NodePath("../../RightMiddleFrontIKTarget")
-script = ExtResource("2_bxf5l")
-
-[node name="LeftVeryBackLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="26"]
+[node name="LeftVeryBackLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="22"]
 root_bone = &"Bone.004.L"
 tip_bone = &"Bone.005.L"
 use_magnet = true
@@ -148,56 +112,28 @@ script = ExtResource("4_te85f")
 step_target = NodePath("../StepTargetContainer/LeftVeryFrontRay/LeftVeryFrontStepTarget")
 adjacent_ik_target = NodePath("../RightVeryFrontIKTarget")
 
-[node name="RightMiddleBackIKTarget" type="Marker3D" parent="Harvestman/Armature" index="2" node_paths=PackedStringArray("step_target", "adjacent_ik_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -6, -0.4)
-top_level = true
-script = ExtResource("4_te85f")
-step_target = NodePath("../StepTargetContainer/RightMiddleBackRay/RightMiddleBackStepTarget")
-adjacent_ik_target = NodePath("../LeftMiddleBackIKTarget")
-
-[node name="RightVeryFrontIKTarget" type="Marker3D" parent="Harvestman/Armature" index="3" node_paths=PackedStringArray("step_target", "adjacent_ik_target")]
+[node name="RightVeryFrontIKTarget" type="Marker3D" parent="Harvestman/Armature" index="2" node_paths=PackedStringArray("step_target", "adjacent_ik_target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -8, 9)
 top_level = true
 script = ExtResource("4_te85f")
 step_target = NodePath("../StepTargetContainer/RightVeryFrontRay/RightVeryFrontStepTarget")
 adjacent_ik_target = NodePath("../LeftVeryFrontIKTarget")
 
-[node name="LeftMiddleBackIKTarget" type="Marker3D" parent="Harvestman/Armature" index="4" node_paths=PackedStringArray("step_target", "adjacent_ik_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -6, -0.4)
-top_level = true
-script = ExtResource("4_te85f")
-step_target = NodePath("../StepTargetContainer/LeftMiddleBackRay/LeftMiddleBackStepTarget")
-adjacent_ik_target = NodePath("../RightMiddleBackIKTarget")
-
-[node name="LeftMiddleFrontIKTarget" type="Marker3D" parent="Harvestman/Armature" index="5" node_paths=PackedStringArray("step_target", "adjacent_ik_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -6, 2.08165e-12)
-top_level = true
-script = ExtResource("4_te85f")
-step_target = NodePath("../StepTargetContainer/LeftMiddleFrontRay/LeftMiddleFrontStepTarget")
-adjacent_ik_target = NodePath("../RightMiddleFrontIKTarget")
-
-[node name="RightVeryBackIKTarget" type="Marker3D" parent="Harvestman/Armature" index="6" node_paths=PackedStringArray("step_target", "adjacent_ik_target")]
+[node name="RightVeryBackIKTarget" type="Marker3D" parent="Harvestman/Armature" index="3" node_paths=PackedStringArray("step_target", "adjacent_ik_target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -8, -9)
 top_level = true
 script = ExtResource("4_te85f")
 step_target = NodePath("../StepTargetContainer/RightVeryBackRay/RightVeryBackStepTarget")
 adjacent_ik_target = NodePath("../LeftVeryBackIKTarget")
 
-[node name="RightMiddleFrontIKTarget" type="Marker3D" parent="Harvestman/Armature" index="7" node_paths=PackedStringArray("step_target", "adjacent_ik_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -6, 2.08165e-12)
-top_level = true
-script = ExtResource("4_te85f")
-step_target = NodePath("../StepTargetContainer/RightMiddleFrontRay/RightMiddleFrontStepTarget")
-adjacent_ik_target = NodePath("../LeftMiddleFrontIKTarget")
-
-[node name="LeftVeryBackIKTarget" type="Marker3D" parent="Harvestman/Armature" index="8" node_paths=PackedStringArray("step_target", "adjacent_ik_target")]
+[node name="LeftVeryBackIKTarget" type="Marker3D" parent="Harvestman/Armature" index="4" node_paths=PackedStringArray("step_target", "adjacent_ik_target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -8, -9)
 top_level = true
 script = ExtResource("4_te85f")
 step_target = NodePath("../StepTargetContainer/LeftVeryBackRay/LeftVeryBackStepTarget")
 adjacent_ik_target = NodePath("../RightVeryBackIKTarget")
 
-[node name="StepTargetContainer" type="Node3D" parent="Harvestman/Armature" index="9"]
+[node name="StepTargetContainer" type="Node3D" parent="Harvestman/Armature" index="5"]
 
 [node name="LeftVeryFrontRay" type="RayCast3D" parent="Harvestman/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
 transform = Transform3D(0.999391, -0.00121797, 0.0348782, 3.48574e-16, 0.999391, 0.0348995, -0.0348995, -0.0348782, 0.998782, -11, 2, 9)
@@ -208,15 +144,6 @@ step_target = NodePath("LeftVeryFrontStepTarget")
 [node name="LeftVeryFrontStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer/LeftVeryFrontRay"]
 transform = Transform3D(0.999391, 3.67098e-11, -0.0348995, -0.00121797, 0.999391, -0.0348782, 0.0348782, 0.0348995, 0.998782, 0, -9.99391, -0.348995)
 
-[node name="RightMiddleBackRay" type="RayCast3D" parent="Harvestman/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
-transform = Transform3D(0.999391, 0.00121797, 0.0348782, 3.48574e-16, 0.999391, -0.0348995, -0.0348995, 0.0348782, 0.998782, 2.5, 4, -0.4)
-target_position = Vector3(0, -10, 0)
-script = ExtResource("5_wk41b")
-step_target = NodePath("RightMiddleBackStepTarget")
-
-[node name="RightMiddleBackStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer/RightMiddleBackRay"]
-transform = Transform3D(0.999391, -3.67098e-11, -0.0348995, 0.00121797, 0.999391, 0.0348782, 0.0348782, -0.0348995, 0.998782, 2.38419e-07, -9.99391, 0.348995)
-
 [node name="RightVeryFrontRay" type="RayCast3D" parent="Harvestman/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
 transform = Transform3D(0.999391, 0.00121797, -0.0348782, 3.48574e-16, 0.999391, 0.0348995, 0.0348995, -0.0348782, 0.998782, 11, 2, 9)
 target_position = Vector3(0, -10, 0)
@@ -226,24 +153,6 @@ step_target = NodePath("RightVeryFrontStepTarget")
 [node name="RightVeryFrontStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer/RightVeryFrontRay"]
 transform = Transform3D(0.999391, -3.67098e-11, 0.0348995, 0.00121797, 0.999391, -0.0348782, -0.0348782, 0.0348995, 0.998782, 0, -9.99391, -0.348995)
 
-[node name="LeftMiddleBackRay" type="RayCast3D" parent="Harvestman/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
-transform = Transform3D(0.999391, -0.00121797, -0.0348782, 3.48574e-16, 0.999391, -0.0348995, 0.0348995, 0.0348782, 0.998782, -2.5, 4, -0.4)
-target_position = Vector3(0, -10, 0)
-script = ExtResource("5_wk41b")
-step_target = NodePath("LeftMiddleBackStepTarget")
-
-[node name="LeftMiddleBackStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer/LeftMiddleBackRay"]
-transform = Transform3D(0.999391, 3.67098e-11, 0.0348995, -0.00121797, 0.999391, 0.0348782, -0.0348782, -0.0348995, 0.998782, -2.38419e-07, -9.99391, 0.348995)
-
-[node name="LeftMiddleFrontRay" type="RayCast3D" parent="Harvestman/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
-transform = Transform3D(0.999391, -0.00121797, 0.0348782, 3.48574e-16, 0.999391, 0.0348995, -0.0348995, -0.0348782, 0.998782, -2.5, 4, 2.08165e-12)
-target_position = Vector3(0, -10, 0)
-script = ExtResource("5_wk41b")
-step_target = NodePath("LeftMiddleFrontStepTarget")
-
-[node name="LeftMiddleFrontStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer/LeftMiddleFrontRay"]
-transform = Transform3D(0.999391, 3.67098e-11, -0.0348995, -0.00121797, 0.999391, -0.0348782, 0.0348782, 0.0348995, 0.998782, -2.38419e-07, -9.99391, -0.348995)
-
 [node name="RightVeryBackRay" type="RayCast3D" parent="Harvestman/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
 transform = Transform3D(0.999391, 0.00121797, 0.0348782, 3.48574e-16, 0.999391, -0.0348995, -0.0348995, 0.0348782, 0.998782, 11, 2, -9)
 target_position = Vector3(0, -10, 0)
@@ -252,15 +161,6 @@ step_target = NodePath("RightVeryBackStepTarget")
 
 [node name="RightVeryBackStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer/RightVeryBackRay"]
 transform = Transform3D(0.999391, -3.67098e-11, -0.0348995, 0.00121797, 0.999391, 0.0348782, 0.0348782, -0.0348995, 0.998782, 0, -9.99391, 0.348995)
-
-[node name="RightMiddleFrontRay" type="RayCast3D" parent="Harvestman/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
-transform = Transform3D(0.999391, 0.00121797, -0.0348782, 3.48574e-16, 0.999391, 0.0348995, 0.0348995, -0.0348782, 0.998782, 2.5, 4, 2.08165e-12)
-target_position = Vector3(0, -10, 0)
-script = ExtResource("5_wk41b")
-step_target = NodePath("RightMiddleFrontStepTarget")
-
-[node name="RightMiddleFrontStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer/RightMiddleFrontRay"]
-transform = Transform3D(0.999391, -3.67098e-11, 0.0348995, 0.00121797, 0.999391, -0.0348782, -0.0348782, 0.0348995, 0.998782, 2.38419e-07, -9.99391, -0.348995)
 
 [node name="LeftVeryBackRay" type="RayCast3D" parent="Harvestman/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
 transform = Transform3D(0.999391, -0.00121797, -0.0348782, 3.48574e-16, 0.999391, -0.0348995, 0.0348995, 0.0348782, 0.998782, -11, 2, -9)
