@@ -63,4 +63,52 @@ transform = Transform3D(-1, -2.02122e-07, 2.02679e-06, -2.26106e-07, 1, 5.72861e
 [node name="Body" parent="Harvestman/Armature/Skeleton3D" index="18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.96046e-08, 0)
 
+[node name="LeftVeryFrontLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="19"]
+root_bone = &"Bone.002.L"
+tip_bone = &"Bone.003.L"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+
+[node name="RightMiddleBackLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="20"]
+root_bone = &"Bone.006.R"
+tip_bone = &"Bone.007.R"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+
+[node name="RightVeryFrontLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="21"]
+root_bone = &"Bone.002.R"
+tip_bone = &"Bone.003.R"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+
+[node name="LeftMiddleBackLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="22"]
+root_bone = &"Bone.006.L"
+tip_bone = &"Bone.007.L"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+
+[node name="LeftMiddleFrontLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="23"]
+root_bone = &"Bone.008.L"
+tip_bone = &"Bone.009.L"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+
+[node name="RightVeryBackLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="24"]
+root_bone = &"Bone.004.R"
+tip_bone = &"Bone.005.R"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+
+[node name="RightMiddleFrontLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="25"]
+root_bone = &"Bone.008.R"
+tip_bone = &"Bone.009.R"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+
+[node name="LeftVeryBackLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="26"]
+root_bone = &"Bone.004.L"
+tip_bone = &"Bone.005.L"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+
 [editable path="Harvestman"]

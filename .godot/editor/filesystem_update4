@@ -21,3 +21,5 @@ res://ui/glitch.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
 res://general_scripts/skygradient.gdshader
 res://enemies/harvestman_proc_anim_meshes.tscn
+res://glb_inherited_scenes/paramite_meshes.tscn
+res://enemies/paramite_proc_anim_meshes.tscn
