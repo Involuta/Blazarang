@@ -24,3 +24,4 @@ res://enemies/harvestman_proc_anim_meshes.tscn
 res://glb_inherited_scenes/paramite_meshes.tscn
 res://enemies/paramite_proc_anim_meshes.tscn
 res://enemies/harvestman_proc_anim_test_mvmt.gd
+res://levels/test_level.tscn
