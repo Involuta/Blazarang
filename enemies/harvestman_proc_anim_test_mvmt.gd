@@ -13,21 +13,33 @@ extends Node3D
 @export var rvb_ik : Marker3D
 @export var lvb_ik : Marker3D
 
+@onready var parent := get_parent()
+var avg_normal := Vector3.UP # This is visible in the entire script so that the parent can see it; if it's Vector3.UP, the parent can leap
+
+var ik_stopped := false
+
 func _process(delta):
-	# Create 2 planes made from the 4 IK targets and get the average of their normals
-	var plane1 = Plane(lvb_ik.position, lvf_ik.position, rvf_ik.position)
-	var plane2 = Plane(rvf_ik.position, rvb_ik.position, lvb_ik.position)
-	var avg_normal = ((plane1.normal + plane2.normal) / 2).normalized()
+	# Raycast downward to get ground normal
+	var space_state := get_world_3d().direct_space_state
+	var sight_dir := Vector3.DOWN
+	var query = PhysicsRayQueryParameters3D.create(global_position, global_position + 30.0 * sight_dir)
+	query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
+	var result = space_state.intersect_ray(query)
+	if not result:
+		print("Raycast sees nothing")
+		return
+	avg_normal = result.normal
 	
-	# Convert the normal to a basis
+	# Convert the normal to a basis, then a quaternion to prevent a "Basis must be normalized" error, then convert the lerped quaternion back to a Basis
+	draw_vector_line(avg_normal * 10)
 	var target_basis = _basis_from_normal(avg_normal)
-	transform.basis = lerp(transform.basis, target_basis, run_speed * delta).orthonormalized()
+	rotation = lerp(transform.basis.get_rotation_quaternion(), target_basis.get_rotation_quaternion(), run_speed * delta).get_euler()
 	
 	# Offset body from the ground
 	var avg_ik_pos = (lvf_ik.position + rvf_ik.position + rvb_ik.position + lvb_ik.position) / 4
 	var target_pos = avg_ik_pos + transform.basis.y * ground_offset
 	# Dot product gets the difference in positions only in this direction
-	var dist_to_target_pos = transform.basis.y.dot(target_pos - position)
+	var dist_to_target_pos = transform.basis.y.dot(target_pos - global_position)
 	position = lerp(position, position + transform.basis.y * dist_to_target_pos, run_speed * delta)
 	
 	_movement(delta)
@@ -37,6 +49,20 @@ func _movement(delta):
 	translate(Vector3(0, 0, -move_dir.y) * run_speed * delta)
 	rotate_object_local(Vector3.UP, -move_dir.x * turn_speed * delta)
 
+# If you want to see the normal vec of the mite's body meshes, add a new MeshInstance3D child to the mite parent (sibling of paramite proc anim meshes), and don't give it a mesh property. Just drag it into the Inspector field in this script
+@export var normal_line : MeshInstance3D
+
+func draw_vector_line(vec: Vector3):
+	var mesh = ImmediateMesh.new()
+	mesh.clear_surfaces()
+	mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+	mesh.surface_add_vertex(Vector3.ZERO)
+	mesh.surface_add_vertex(Vector3.ZERO + vec)
+	mesh.surface_end()
+	if not normal_line:
+		return
+	normal_line.mesh = mesh
+
 func _basis_from_normal(normal: Vector3) -> Basis:
 	var result = Basis()
 	result.x = normal.cross(transform.basis.z)
@@ -44,8 +70,5 @@ func _basis_from_normal(normal: Vector3) -> Basis:
 	result.z = transform.basis.x.cross(normal)
 	
 	result = result.orthonormalized()
-	result.x *= scale.x
-	result.y *= scale.y
-	result.z *= scale.z
 	
 	return result

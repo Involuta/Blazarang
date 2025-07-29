@@ -1,4 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://d4wywx3bv11n"]
+[gd_scene load_steps=7 format=3 uid="uid://d4wywx3bv11n"]
+
+[ext_resource type="PackedScene" uid="uid://dcffjmoveconi" path="res://enemies/harvestman_proc_anim_meshes.tscn" id="1_gv0lu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tbmi2"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -29,7 +31,7 @@ shadow_enabled = true
 environment = SubResource("Environment_hlyg2")
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 3.48787e-16, 1, -4.37114e-08, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, 51.305, 10, 2.08165e-12)
+transform = Transform3D(0.565975, -0.824423, 9.01433e-17, 0.824423, 0.565975, -4.84953e-16, 3.48787e-16, 3.48787e-16, 1, 51.305, 10, 2.08165e-12)
 collision_layer = 2
 collision_mask = 0
 
@@ -51,3 +53,6 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_alqdx")
+
+[node name="HarvestmanProcAnimMeshes" parent="." instance=ExtResource("1_gv0lu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 20, 2.08165e-12)

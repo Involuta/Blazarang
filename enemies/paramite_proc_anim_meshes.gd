@@ -59,8 +59,6 @@ func _process(delta):
 	# Dot product gets the difference in positions only in this direction
 	var dist_to_target_pos = transform.basis.y.dot(target_pos - global_position)
 	position = lerp(position, position + transform.basis.y * dist_to_target_pos, run_speed * delta)
-	
-	return
 
 # If you want to see the normal vec of the mite's body meshes, add a new MeshInstance3D child to the mite parent (sibling of paramite proc anim meshes), and don't give it a mesh property. Just drag it into the Inspector field in this script
 @export var normal_line : MeshInstance3D
