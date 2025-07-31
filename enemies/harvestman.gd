@@ -5,6 +5,7 @@ extends CharacterBody3D
 @onready var body_meshes := $HarvestmanProcAnimMeshes
 @onready var anim_player := $HarvestmanProcAnimMeshes/HarvestmanMeshes/AnimationPlayer
 @onready var anim_tree := $AnimationTree
+@onready var hurtbox := $EnemyHurtbox
 @onready var root := $/root/ViewControl
 var rng := RandomNumberGenerator.new()
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -16,7 +17,6 @@ enum {
 	FOLLOW,
 	STRAFE,
 	BITE,
-	LEAP,
 }
 var behav_state := FOLLOW
 @export var target_distance := 1.0 # Dist from target necessary to bite
@@ -62,22 +62,23 @@ func _ready():
 	
 	bite_cooldown_remaining = bite_cooldown_secs
 	
-	add_to_group("lockonables")
+	# Ensure that homing attacks hit the hurtbox and not the parent node, which stays on the ground. For any enemy whose hurtbox is at the same position as the parent node, this line can just be add_to_group("lockonables")
+	hurtbox.add_to_group("lockonables")
 
 func _physics_process(delta):
 	match(behav_state):
-		FOLLOW: 
+		FOLLOW:
 			follow(delta)
 		STRAFE:
 			strafe(delta)
 		BITE:
 			stop_lateral_mvmt()
-		LEAP:
-			pass
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	move_and_slide()
+	
+	hurtbox.global_position = body_meshes.global_position
 
 # Equivalent of lerp_look_at_move_dir or lerp_look_at_target in other enemies. This func is necessary for mites bc the mesh itself needs to rotate independently of the parent
 # Rotate body meshes y rotation so that meshes look in the direction of the vector, which is a 3D vec whose y value is ignored
@@ -126,27 +127,6 @@ func follow(delta):
 		behav_state = BITE
 		await bite()
 		behav_state = FOLLOW
-	
-	if can_leap:
-		time_until_forced_leap -= delta
-		if time_until_forced_leap <= 0 or close_to_roserang():
-			time_until_forced_leap = can_leap_window
-			behav_state = LEAP
-			await leap()
-			behav_state = FOLLOW
-			can_leap = false
-	else:
-		time_until_can_leap -= delta
-		if time_until_can_leap <= 0:
-			time_until_can_leap = rng.randf_range(min_leap_cooldown, max_leap_cooldown)
-			can_leap = true
-
-func close_to_roserang():
-	var roserang = root.find_child("Roserang", true, false)
-	if roserang == null:
-		return false
-	else:
-		return global_position.distance_to(roserang.global_position) < roserang_leap_proximity
 
 func strafe(delta):
 	var dir_to_target := global_position.direction_to(target.global_position)
@@ -178,20 +158,6 @@ func strafe(delta):
 		behav_state = BITE
 		await bite()
 		behav_state = FOLLOW
-	
-	if can_leap:
-		time_until_forced_leap -= delta
-		if time_until_forced_leap <= 0 or close_to_roserang():
-			time_until_forced_leap = can_leap_window
-			behav_state = LEAP
-			await leap()
-			behav_state = FOLLOW
-			can_leap = false
-	else:
-		time_until_can_leap -= delta
-		if time_until_can_leap <= 0:
-			time_until_can_leap = rng.randf_range(min_leap_cooldown, max_leap_cooldown)
-			can_leap = true
 
 func bite():
 	stop_lateral_mvmt()
@@ -202,24 +168,6 @@ func bite():
 func stop_lateral_mvmt():
 	velocity.x = 0
 	velocity.z = 0
-
-func leap():
-	if body_meshes.avg_normal != Vector3.UP:
-		return
-	
-	# Stop IK
-	body_meshes.stop_ik()
-	#anim_tree.set("parameters/StateMachine/conditions/leap", true)
-	if global_position.distance_to(target_position) > leap_length_threshold:
-		velocity = (leap_long_lateral_speed + rng.randf_range(-.5,.5)) * body_meshes.transform.basis.z
-	else:
-		velocity = (leap_short_lateral_speed + rng.randf_range(-.5,.5)) * body_meshes.transform.basis.z
-	velocity.y = leap_vertical_speed + rng.randf_range(-.5,.5)
-	await get_tree().create_timer(leap_secs).timeout
-	stop_lateral_mvmt()
-	# Do IK again
-	body_meshes.start_ik()
-	#anim_tree.set("parameters/StateMachine/conditions/leap", false)
 
 func stop_aiming_at_target():
 	aiming_at_target = false

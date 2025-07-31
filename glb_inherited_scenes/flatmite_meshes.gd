@@ -7,7 +7,7 @@ extends Node3D
 # Check whether parent is leaping; if so, don't correct orientation and offset
 @onready var parent := get_parent()
 
-func _process(delta):
+func _process(_delta):
 	if parent.is_leaping() or not parent.is_on_floor():
 		position = Vector3.ZERO
 		return

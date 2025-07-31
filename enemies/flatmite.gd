@@ -182,7 +182,7 @@ func leap():
 	await get_tree().create_timer(leap_secs/2).timeout
 	stop_lateral_mvmt()
 
-func leap_frame(delta):
+func leap_frame(_delta):
 	rotate_y_to_vec(target_position - global_position, follow_turn_speed)
 
 func shoot_spitwebs():

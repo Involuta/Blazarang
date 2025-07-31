@@ -26,7 +26,7 @@ func _process(delta):
 	query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
 	var result = space_state.intersect_ray(query)
 	if not result:
-		print("Raycast sees nothing")
+		print("Harvestman raycast sees nothing; stopping movement")
 		return
 	avg_normal = result.normal
 	
@@ -42,7 +42,8 @@ func _process(delta):
 	var dist_to_target_pos = transform.basis.y.dot(target_pos - global_position)
 	position = lerp(position, position + transform.basis.y * dist_to_target_pos, run_speed * delta)
 	
-	_movement(delta)
+	# Uncomment this line to move harvestman using player controls
+	#_movement(delta)
 
 func _movement(delta):
 	var move_dir = Input.get_vector("WalkLeft", "WalkRight", "WalkForward", "WalkBackward")

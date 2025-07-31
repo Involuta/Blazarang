@@ -43,6 +43,9 @@ func dist_to_lockonable(a, b):
 	return icon.global_position.distance_to(a.global_position) < icon.global_position.distance_to(b.global_position)
 
 func homing_attack(target):
+	if not target or not is_instance_valid(target):
+		return
+	
 	# No matter what the distance is, the rang should return to the icon in .4 seconds
 	# Get original vector from icon to rang
 	var original_vec = global_position - target.global_position

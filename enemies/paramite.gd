@@ -42,6 +42,7 @@ func _ready():
 	#hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	anim_tree.active = true
 	
+	# Ensure that homing attacks hit the hurtbox and not the parent node, which stays on the ground. For any enemy whose hurtbox is at the same position as the parent node, this line can just be add_to_group("lockonables"), which makes the parent a lockonable
 	hurtbox.add_to_group("lockonables")
 	
 	switch_to_launch()

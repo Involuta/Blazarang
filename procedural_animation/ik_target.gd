@@ -15,7 +15,7 @@ extends Marker3D
 # Only step when you're not stepping
 var is_stepping := false
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not is_stepping and global_position.distance_to(step_target.global_position) > step_distance:
 		if not checking_adjacent or not adjacent_ik_target.is_stepping:
 			step()
