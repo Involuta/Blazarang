@@ -19,7 +19,6 @@ enum {
 	BITE,
 }
 var behav_state := FOLLOW
-@export var target_distance := 1.0 # Dist from target necessary to bite
 var target_position := Vector3.ZERO # Position mite moves to; set to target.global_position when not strafing and set to a point beside and behind the target when strafing ("fwd" = to the target)
 
 var strafing_left := true
@@ -107,26 +106,26 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 func follow(delta):
 	target_position = target.global_position
 	
-	rotate_y_to_vec(velocity, follow_turn_speed)
-	nav_agent.set_target_position(target_position)
+	rotate_y_to_vec(target_position - global_position, follow_turn_speed)
+	if global_position.distance_to(target_position) <= nav_agent.target_desired_distance:
+		nav_agent.set_target_position(global_position)
+	else:
+		nav_agent.set_target_position(target_position)
 	var next_position = nav_agent.get_next_path_position()
 	var new_velocity = (next_position - global_position).normalized() * follow_speed
 	
 	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
 	nav_agent.velocity = new_velocity
 	
-	# If player isn't in sight, reduce target distance to a very small number
-	if can_see_target():
-		nav_agent.target_desired_distance = target_distance
-	else:
-		nav_agent.target_desired_distance = .1
-		
+	# Turn this into mite spitting
+	"""
 	bite_cooldown_remaining -= delta
 	if bite_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < bite_dist:
 		bite_cooldown_remaining = bite_cooldown_secs
 		behav_state = BITE
 		await bite()
 		behav_state = FOLLOW
+	"""
 
 func strafe(delta):
 	var dir_to_target := global_position.direction_to(target.global_position)
@@ -145,12 +144,6 @@ func strafe(delta):
 	
 	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
 	nav_agent.velocity = new_velocity
-	
-	# If player isn't in sight, reduce target distance to a very small number
-	if can_see_target():
-		nav_agent.target_desired_distance = target_distance
-	else:
-		nav_agent.target_desired_distance = .1
 		
 	bite_cooldown_remaining -= delta
 	if bite_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < bite_dist:
