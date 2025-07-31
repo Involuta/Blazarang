@@ -12,7 +12,9 @@ extends Marker3D
 @export var step_target : Node3D
 @export var step_distance := 1.5
 @export var adjacent_ik_target : Node3D
+@export var opposite_ik_target : Node3D
 @export var checking_adjacent := true # if this is true, check if the adjacent leg is stepping before you step
+@export var checking_opposite := true # if this is true, when you step, make your opposite leg step as well
 
 # Adjacent target = IK target horizontally opposite this IK target
 # Only step when you're not stepping
@@ -22,6 +24,8 @@ func _physics_process(_delta):
 	if not is_stepping and global_position.distance_to(step_target.global_position) > step_distance:
 		if not checking_adjacent or not adjacent_ik_target.is_stepping:
 			step()
+			if checking_opposite:
+				opposite_ik_target.step()
 
 # Called by main parent script after landing from a leap to instantly bring IK targets to step targets, which prevents odd interpolation from old pre-leap IK target position to new post-leap step target position
 func recalculate_ik_target():
