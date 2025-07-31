@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://lci3o51duono" path="res://glb_imports/Harvestman.glb" id="1_t28ah"]
 
-[node name="Harvestman" instance=ExtResource("1_t28ah")]
+[node name="HarvestmanMeshes" instance=ExtResource("1_t28ah")]
 
 [node name="LeftVeryFrontShin" parent="Armature/Skeleton3D" index="0"]
 transform = Transform3D(1, 8.60217e-16, -7.68806e-10, -1.34838e-15, 1, -2.83832e-08, 3.01888e-08, 2.83832e-08, 1, 9.53674e-07, 1.01328e-06, 8.9407e-08)

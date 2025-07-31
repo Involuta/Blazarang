@@ -10,14 +10,14 @@
 [node name="HarvestmanProcAnimMeshes" type="Node3D" node_paths=PackedStringArray("lvf_ik", "rvf_ik", "rvb_ik", "lvb_ik")]
 script = ExtResource("1_was61")
 ground_offset = 8.0
-lvf_ik = NodePath("Harvestman/Armature/LeftVeryFrontIKTarget")
-rvf_ik = NodePath("Harvestman/Armature/RightVeryFrontIKTarget")
-rvb_ik = NodePath("Harvestman/Armature/LeftVeryBackIKTarget")
-lvb_ik = NodePath("Harvestman/Armature/RightVeryBackIKTarget")
+lvf_ik = NodePath("HarvestmanMeshes/Armature/LeftVeryFrontIKTarget")
+rvf_ik = NodePath("HarvestmanMeshes/Armature/RightVeryFrontIKTarget")
+rvb_ik = NodePath("HarvestmanMeshes/Armature/LeftVeryBackIKTarget")
+lvb_ik = NodePath("HarvestmanMeshes/Armature/RightVeryBackIKTarget")
 
-[node name="Harvestman" parent="." instance=ExtResource("1_qjs1t")]
+[node name="HarvestmanMeshes" parent="." instance=ExtResource("1_qjs1t")]
 
-[node name="Skeleton3D" parent="Harvestman/Armature" index="0"]
+[node name="Skeleton3D" parent="HarvestmanMeshes/Armature" index="0"]
 bones/2/rotation = Quaternion(0.352901, -0.148012, -0.851978, 0.357333)
 bones/3/rotation = Quaternion(-0.701563, -0.392149, 0.0262079, 0.594425)
 bones/7/rotation = Quaternion(0.146742, -0.353431, -0.354266, 0.853258)
@@ -39,64 +39,64 @@ bones/36/position = Vector3(-1.19709, 2.0951, 0.024352)
 bones/36/rotation = Quaternion(-0.267577, -0.422378, 0.729213, 0.467171)
 bones/37/rotation = Quaternion(-0.488593, 0.215434, 0.00255909, 0.845493)
 
-[node name="LeftVeryFrontShin" parent="Harvestman/Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.353553, 0.866026, -0.353553, -0.853834, 0.453154, 0.256162, 0.382056, 0.211309, 0.899656, 2.84588, 11.7022, 2.46779)
+[node name="LeftVeryFrontShin" parent="HarvestmanMeshes/Armature/Skeleton3D" index="0"]
+transform = Transform3D(0.375568, 0.869883, -0.31977, -0.878583, 0.444, 0.175941, 0.295025, 0.214867, 0.931017, 2.78695, 13.4089, 1.73438)
 
-[node name="LeftVeryFrontThigh" parent="Harvestman/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.5, -0.707107, -0.5, 0.5, 0.707107, -0.5, 0.707107, -1.23383e-07, 0.707107, 0.261826, -0.588031, -0.696483)
+[node name="LeftVeryFrontThigh" parent="HarvestmanMeshes/Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.520359, -0.764675, -0.380128, 0.676277, 0.640816, -0.363323, 0.521417, -0.0680139, 0.850587, 0.134927, -0.914044, -0.599532)
 
-[node name="LeftVeryBackShin" parent="Harvestman/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.353554, 0.866025, 0.353554, -0.853834, 0.453154, -0.256162, -0.382057, -0.211309, 0.899656, 2.94968, 11.5696, -2.45128)
+[node name="LeftVeryBackShin" parent="HarvestmanMeshes/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.363645, 0.875791, 0.317416, -0.887334, 0.429379, -0.168144, -0.28355, -0.22051, 0.933261, 3.38024, 13.1161, -1.77372)
 
-[node name="LeftVeryBackThigh" parent="Harvestman/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.5, -0.707107, 0.5, 0.5, 0.707107, 0.5, -0.707107, 9.25652e-08, 0.707107, 0.411955, -0.481431, 0.652069)
+[node name="LeftVeryBackThigh" parent="HarvestmanMeshes/Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.566345, -0.737021, 0.368854, 0.64436, 0.675007, 0.359396, -0.513862, 0.0341325, 0.857194, 0.210962, -0.786631, 0.552339)
 
-[node name="LeftMiddleBackShin" parent="Harvestman/Armature/Skeleton3D" index="4"]
-transform = Transform3D(-0.5, 0.866025, 1.03594e-07, -0.866025, -0.5, -3.31287e-07, -3.76865e-07, -2.68258e-07, 1, 6.06415, -0.151117, -0.781803)
+[node name="LeftMiddleBackShin" parent="HarvestmanMeshes/Armature/Skeleton3D" index="4"]
+transform = Transform3D(-0.500001, 0.866025, -2.1864e-07, -0.866025, -0.5, -1.05585e-06, -1.20638e-06, -3.46573e-07, 1, 6.06415, -0.151117, -0.781803)
 
-[node name="LeftMiddleBackThigh" parent="Harvestman/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.453154, 0.784885, 0.422619, -0.866025, 0.5, -1.14163e-07, -0.211309, -0.365998, 0.906308, 1.45923, 0.648885, -0.0681072)
+[node name="LeftMiddleBackThigh" parent="HarvestmanMeshes/Armature/Skeleton3D" index="5"]
+transform = Transform3D(0.453154, 0.784885, 0.422619, -0.866025, 0.5, -8.28483e-07, -0.21131, -0.365998, 0.906308, 1.45923, 0.648885, -0.0681081)
 
-[node name="LeftMiddleFrontShin" parent="Harvestman/Armature/Skeleton3D" index="6"]
-transform = Transform3D(-0.5, 0.866025, 1.69475e-08, -0.866025, -0.500001, -3.57446e-07, -1.05941e-07, -2.33133e-07, 1, 6.06405, -0.151119, 0.794249)
+[node name="LeftMiddleFrontShin" parent="HarvestmanMeshes/Armature/Skeleton3D" index="6"]
+transform = Transform3D(-0.500001, 0.866025, -1.51709e-07, -0.866024, -0.500001, -9.27065e-07, -8.65553e-07, -2.86351e-07, 1, 6.06405, -0.151124, 0.794246)
 
-[node name="LeftMiddleFrontThigh" parent="Harvestman/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.453154, 0.784886, -0.422618, -0.866026, 0.5, 4.27893e-08, 0.211309, 0.365998, 0.906308, 1.29098, 0.648885, 0.0432733)
+[node name="LeftMiddleFrontThigh" parent="HarvestmanMeshes/Armature/Skeleton3D" index="7"]
+transform = Transform3D(0.453153, 0.784886, -0.422618, -0.866026, 0.499999, -2.24962e-07, 0.211309, 0.365998, 0.906308, 1.29098, 0.648885, 0.0432692)
 
-[node name="LeftMandible" parent="Harvestman/Armature/Skeleton3D" index="8"]
+[node name="LeftMandible" parent="HarvestmanMeshes/Armature/Skeleton3D" index="8"]
 transform = Transform3D(1, 2.03565e-07, -2.02493e-06, -2.26106e-07, 1, 5.5796e-07, 2.05959e-06, 3.59458e-07, 1, 0.100001, 0.000381708, 4.57764e-05)
 
-[node name="RightVeryFrontShin" parent="Harvestman/Armature/Skeleton3D" index="9"]
-transform = Transform3D(-0.353553, -0.866026, 0.353553, -0.853834, 0.453154, 0.256162, 0.382056, 0.211309, 0.899656, -2.84588, 11.7022, 2.46778)
+[node name="RightVeryFrontShin" parent="HarvestmanMeshes/Armature/Skeleton3D" index="9"]
+transform = Transform3D(-0.375568, -0.869883, 0.31977, -0.878584, 0.444, 0.175941, 0.295026, 0.214867, 0.931017, -2.78695, 13.4089, 1.73437)
 
-[node name="RightVeryFrontThigh" parent="Harvestman/Armature/Skeleton3D" index="10"]
-transform = Transform3D(-0.5, 0.707107, 0.5, 0.5, 0.707107, -0.5, 0.707107, -9.64553e-08, 0.707107, -0.261826, -0.588031, -0.696483)
+[node name="RightVeryFrontThigh" parent="HarvestmanMeshes/Armature/Skeleton3D" index="10"]
+transform = Transform3D(-0.520359, 0.764676, 0.380128, 0.676277, 0.640816, -0.363323, 0.521416, -0.0680137, 0.850587, -0.134927, -0.914044, -0.599532)
 
-[node name="RightVeryBackShin" parent="Harvestman/Armature/Skeleton3D" index="11"]
-transform = Transform3D(-0.353553, -0.866025, -0.353553, -0.853834, 0.453154, -0.256162, -0.382057, -0.211309, 0.899656, -2.94968, 11.5696, -2.45128)
+[node name="RightVeryBackShin" parent="HarvestmanMeshes/Armature/Skeleton3D" index="11"]
+transform = Transform3D(-0.363645, -0.875791, -0.317416, -0.887334, 0.429379, -0.168144, -0.28355, -0.220509, 0.933261, -3.38024, 13.1161, -1.77372)
 
-[node name="RightVeryBackThigh" parent="Harvestman/Armature/Skeleton3D" index="12"]
-transform = Transform3D(-0.5, 0.707107, -0.5, 0.5, 0.707107, 0.5, -0.707107, 3.87775e-08, 0.707107, -0.411955, -0.481431, 0.652069)
+[node name="RightVeryBackThigh" parent="HarvestmanMeshes/Armature/Skeleton3D" index="12"]
+transform = Transform3D(-0.566345, 0.737021, -0.368854, 0.644359, 0.675008, 0.359396, -0.513862, 0.0341325, 0.857194, -0.210961, -0.786631, 0.552339)
 
-[node name="RightMiddleBackShin" parent="Harvestman/Armature/Skeleton3D" index="13"]
-transform = Transform3D(0.500001, -0.866025, -7.2106e-09, -0.866025, -0.500001, -1.51759e-07, -7.80254e-08, -5.40036e-09, 1, -6.06415, -0.151118, -0.781802)
+[node name="RightMiddleBackShin" parent="HarvestmanMeshes/Armature/Skeleton3D" index="13"]
+transform = Transform3D(0.500001, -0.866025, 1.08545e-06, -0.866025, -0.500001, -3.15204e-07, -8.46076e-07, 8.29928e-07, 1, -6.06415, -0.151121, -0.7818)
 
-[node name="RightMiddleBackThigh" parent="Harvestman/Armature/Skeleton3D" index="14"]
-transform = Transform3D(-0.453154, -0.784886, -0.422618, -0.866026, 0.5, -8.12843e-08, -0.211309, -0.365998, 0.906308, -1.45923, 0.648885, -0.0681074)
+[node name="RightMiddleBackThigh" parent="HarvestmanMeshes/Armature/Skeleton3D" index="14"]
+transform = Transform3D(-0.453153, -0.784886, -0.422618, -0.866026, 0.5, -4.09108e-07, -0.211309, -0.365998, 0.906308, -1.45923, 0.648885, -0.0681089)
 
-[node name="RightMiddleFrontShin" parent="Harvestman/Armature/Skeleton3D" index="15"]
-transform = Transform3D(0.5, -0.866025, -6.25235e-09, -0.866025, -0.500001, -2.1536e-07, -1.95233e-07, 1.13573e-08, 1, -6.06405, -0.151119, 0.794249)
+[node name="RightMiddleFrontShin" parent="HarvestmanMeshes/Armature/Skeleton3D" index="15"]
+transform = Transform3D(0.500002, -0.866025, 3.94449e-07, -0.866024, -0.500002, -7.3335e-07, -8.06006e-07, 4.17052e-08, 1, -6.06405, -0.151124, 0.794246)
 
-[node name="RightMiddleFrontThigh" parent="Harvestman/Armature/Skeleton3D" index="16"]
-transform = Transform3D(-0.453154, -0.784886, 0.422618, -0.866026, 0.5, -1.84046e-07, 0.211309, 0.365998, 0.906308, -1.29098, 0.648885, 0.0432736)
+[node name="RightMiddleFrontThigh" parent="HarvestmanMeshes/Armature/Skeleton3D" index="16"]
+transform = Transform3D(-0.453153, -0.784886, 0.422618, -0.866026, 0.499999, -3.62392e-07, 0.211308, 0.365998, 0.906308, -1.29098, 0.648885, 0.0432692)
 
-[node name="RightMandible" parent="Harvestman/Armature/Skeleton3D" index="17"]
+[node name="RightMandible" parent="HarvestmanMeshes/Armature/Skeleton3D" index="17"]
 transform = Transform3D(-1, -2.02122e-07, 2.02679e-06, -2.26106e-07, 1, 5.72861e-07, 2.05629e-06, 4.69958e-07, 1, -1.51992e-06, 0, 0)
 
-[node name="Body" parent="Harvestman/Armature/Skeleton3D" index="18"]
+[node name="Body" parent="HarvestmanMeshes/Armature/Skeleton3D" index="18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.96046e-08, 0)
 
-[node name="LeftVeryFrontLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="19"]
+[node name="LeftVeryFrontLeg" type="SkeletonIK3D" parent="HarvestmanMeshes/Armature/Skeleton3D" index="19"]
 process_priority = 1
 root_bone = &"Bone.002.L"
 tip_bone = &"Bone.003.L.001"
@@ -105,7 +105,7 @@ magnet = Vector3(0, 10, 0)
 target_node = NodePath("../../LeftVeryFrontIKTarget")
 script = ExtResource("2_bxf5l")
 
-[node name="RightVeryFrontLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="20"]
+[node name="RightVeryFrontLeg" type="SkeletonIK3D" parent="HarvestmanMeshes/Armature/Skeleton3D" index="20"]
 process_priority = 1
 root_bone = &"Bone.002.R"
 tip_bone = &"Bone.003.R.001"
@@ -114,7 +114,7 @@ magnet = Vector3(0, 10, 0)
 target_node = NodePath("../../RightVeryFrontIKTarget")
 script = ExtResource("2_bxf5l")
 
-[node name="LeftVeryBackLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="21"]
+[node name="LeftVeryBackLeg" type="SkeletonIK3D" parent="HarvestmanMeshes/Armature/Skeleton3D" index="21"]
 process_priority = 1
 root_bone = &"Bone.004.L"
 tip_bone = &"Bone.005.L.001"
@@ -123,7 +123,7 @@ magnet = Vector3(0, 10, 0)
 target_node = NodePath("../../LeftVeryBackIKTarget")
 script = ExtResource("2_bxf5l")
 
-[node name="RightVeryBackLeg" type="SkeletonIK3D" parent="Harvestman/Armature/Skeleton3D" index="22"]
+[node name="RightVeryBackLeg" type="SkeletonIK3D" parent="HarvestmanMeshes/Armature/Skeleton3D" index="22"]
 process_priority = 1
 root_bone = &"Bone.004.R"
 tip_bone = &"Bone.005.R.001"
@@ -132,7 +132,7 @@ magnet = Vector3(0, 10, 0)
 target_node = NodePath("../../RightVeryBackIKTarget")
 script = ExtResource("2_bxf5l")
 
-[node name="LeftVeryFrontIKTarget" type="Marker3D" parent="Harvestman/Armature" index="1" node_paths=PackedStringArray("step_target", "adjacent_ik_target")]
+[node name="LeftVeryFrontIKTarget" type="Marker3D" parent="HarvestmanMeshes/Armature" index="1" node_paths=PackedStringArray("step_target", "adjacent_ik_target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -8, 9)
 top_level = true
 script = ExtResource("4_kqs3p")
@@ -140,7 +140,7 @@ step_target = NodePath("../StepTargetContainer/LeftVeryFrontRay/LeftVeryFrontSte
 step_distance = 10.0
 adjacent_ik_target = NodePath("../RightVeryFrontIKTarget")
 
-[node name="RightVeryFrontIKTarget" type="Marker3D" parent="Harvestman/Armature" index="2" node_paths=PackedStringArray("step_target", "adjacent_ik_target")]
+[node name="RightVeryFrontIKTarget" type="Marker3D" parent="HarvestmanMeshes/Armature" index="2" node_paths=PackedStringArray("step_target", "adjacent_ik_target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -8, 9)
 top_level = true
 script = ExtResource("4_kqs3p")
@@ -148,7 +148,7 @@ step_target = NodePath("../StepTargetContainer/RightVeryFrontRay/RightVeryFrontS
 step_distance = 10.0
 adjacent_ik_target = NodePath("../LeftVeryFrontIKTarget")
 
-[node name="LeftVeryBackIKTarget" type="Marker3D" parent="Harvestman/Armature" index="3" node_paths=PackedStringArray("step_target", "adjacent_ik_target")]
+[node name="LeftVeryBackIKTarget" type="Marker3D" parent="HarvestmanMeshes/Armature" index="3" node_paths=PackedStringArray("step_target", "adjacent_ik_target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -8, -9)
 top_level = true
 script = ExtResource("4_kqs3p")
@@ -156,7 +156,7 @@ step_target = NodePath("../StepTargetContainer/LeftVeryBackRay/LeftVeryBackStepT
 step_distance = 10.0
 adjacent_ik_target = NodePath("../RightVeryBackIKTarget")
 
-[node name="RightVeryBackIKTarget" type="Marker3D" parent="Harvestman/Armature" index="4" node_paths=PackedStringArray("step_target", "adjacent_ik_target")]
+[node name="RightVeryBackIKTarget" type="Marker3D" parent="HarvestmanMeshes/Armature" index="4" node_paths=PackedStringArray("step_target", "adjacent_ik_target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -8, -9)
 top_level = true
 script = ExtResource("4_kqs3p")
@@ -164,55 +164,52 @@ step_target = NodePath("../StepTargetContainer/RightVeryBackRay/RightVeryBackSte
 step_distance = 10.0
 adjacent_ik_target = NodePath("../LeftVeryBackIKTarget")
 
-[node name="StepTargetContainer" type="Node3D" parent="Harvestman/Armature" index="5"]
+[node name="StepTargetContainer" type="Node3D" parent="HarvestmanMeshes/Armature" index="5"]
 script = ExtResource("4_qrf2c")
 offset = 36.0
 
-[node name="LeftVeryFrontRay" type="RayCast3D" parent="Harvestman/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
+[node name="LeftVeryFrontRay" type="RayCast3D" parent="HarvestmanMeshes/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
 transform = Transform3D(0.999391, -0.00121797, 0.0348782, 3.48574e-16, 0.999391, 0.0348995, -0.0348995, -0.0348782, 0.998782, -11, 2, 9)
 target_position = Vector3(0, -20, 0)
 collision_mask = 2
 script = ExtResource("5_wk41b")
 step_target = NodePath("LeftVeryFrontStepTarget")
 
-[node name="LeftVeryFrontStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer/LeftVeryFrontRay"]
+[node name="LeftVeryFrontStepTarget" type="Marker3D" parent="HarvestmanMeshes/Armature/StepTargetContainer/LeftVeryFrontRay"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -8, 9)
 top_level = true
 
-[node name="RightVeryFrontRay" type="RayCast3D" parent="Harvestman/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
+[node name="RightVeryFrontRay" type="RayCast3D" parent="HarvestmanMeshes/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
 transform = Transform3D(0.999391, 0.00121797, -0.0348782, 3.48574e-16, 0.999391, 0.0348995, 0.0348995, -0.0348782, 0.998782, 11, 2, 9)
 target_position = Vector3(0, -20, 0)
 collision_mask = 2
 script = ExtResource("5_wk41b")
 step_target = NodePath("RightVeryFrontStepTarget")
 
-[node name="RightVeryFrontStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer/RightVeryFrontRay"]
+[node name="RightVeryFrontStepTarget" type="Marker3D" parent="HarvestmanMeshes/Armature/StepTargetContainer/RightVeryFrontRay"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -8, 9)
 top_level = true
 
-[node name="LeftVeryBackRay" type="RayCast3D" parent="Harvestman/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
+[node name="LeftVeryBackRay" type="RayCast3D" parent="HarvestmanMeshes/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
 transform = Transform3D(0.999391, -0.00121797, -0.0348782, 3.48574e-16, 0.999391, -0.0348995, 0.0348995, 0.0348782, 0.998782, -11, 2, -9)
 target_position = Vector3(0, -20, 0)
 collision_mask = 2
 script = ExtResource("5_wk41b")
 step_target = NodePath("LeftVeryBackStepTarget")
 
-[node name="LeftVeryBackStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer/LeftVeryBackRay"]
+[node name="LeftVeryBackStepTarget" type="Marker3D" parent="HarvestmanMeshes/Armature/StepTargetContainer/LeftVeryBackRay"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -8, -9)
 top_level = true
 
-[node name="RightVeryBackRay" type="RayCast3D" parent="Harvestman/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
+[node name="RightVeryBackRay" type="RayCast3D" parent="HarvestmanMeshes/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
 transform = Transform3D(0.999391, 0.00121797, 0.0348782, 3.48574e-16, 0.999391, -0.0348995, -0.0348995, 0.0348782, 0.998782, 11, 2, -9)
 target_position = Vector3(0, -20, 0)
 collision_mask = 2
 script = ExtResource("5_wk41b")
 step_target = NodePath("RightVeryBackStepTarget")
 
-[node name="RightVeryBackStepTarget" type="Marker3D" parent="Harvestman/Armature/StepTargetContainer/RightVeryBackRay"]
+[node name="RightVeryBackStepTarget" type="Marker3D" parent="HarvestmanMeshes/Armature/StepTargetContainer/RightVeryBackRay"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -8, -9)
 top_level = true
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, -1.92196e-08, -8.52839e-08, -4.71535e-08, 0.940044, 0.341052, 7.36158e-08, 0.341052, -0.940044, 0, 13.4062, -24.8855)
-
-[editable path="Harvestman"]
+[editable path="HarvestmanMeshes"]
