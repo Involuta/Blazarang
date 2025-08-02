@@ -216,3 +216,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2, -10)
 
 [node name="Harvestman" parent="." instance=ExtResource("9_l8j57")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2, 2.176)
+
+[node name="Harvestman2" parent="." instance=ExtResource("9_l8j57")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 3, 2.08165e-12)
