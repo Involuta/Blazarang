@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-#var tiny_mite := preload("res://enemies/mite_death_particle.tscn")
+var tiny_mite := preload("res://enemies/tiny_mite.tscn")
 @onready var nav_agent := $NavigationAgent3D
 @onready var body_meshes := $HarvestmanProcAnimMeshes
 @onready var anim_player := $HarvestmanProcAnimMeshes/HarvestmanMeshes/AnimationPlayer
@@ -10,7 +10,7 @@ extends CharacterBody3D
 var rng := RandomNumberGenerator.new()
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var level : Node3D
-var hitbox : Node3D
+var mouth : Node3D # Position from which mites are spat from
 var target : Node3D
 var aiming_at_target := true
 enum {
@@ -43,6 +43,8 @@ var time_until_forced_leap := 5.0 # Set to can_leap_window when reset
 @export var follow_turn_speed := .1
 @export var spit_dist := 16.0
 @export var spit_secs := 2.0
+@export var spit_projectile_count := 10.0
+@export var spit_projectile_spread := 1.0 # Max dist (on a single axis) btwn target pos and actual projectile landing pos
 @export var spit_cooldown_secs := 8.0
 var spit_cooldown_remaining := 2.5
 
@@ -51,8 +53,7 @@ var spit_cooldown_remaining := 2.5
 func _ready():
 	level = root.find_child("Level")
 	target = root.find_child("Icon")
-	hitbox = find_child("MeleeHitboxPivot")
-	#hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+	mouth = find_child("Mouth")
 	anim_tree.active = true
 	nav_agent.target_desired_distance = spit_dist - 1.0
 	
@@ -151,11 +152,27 @@ func strafe(delta):
 		await spit()
 		behav_state = FOLLOW
 
+func random_spread(s: float) -> Vector3:
+	return Vector3(rng.randf_range(-s, s), rng.randf_range(-s, s), rng.randf_range(-s, s))
+
 func spit():
 	stop_lateral_mvmt()
-	#anim_tree.set("parameters/StateMachine/conditions/spit", true)
-	await get_tree().create_timer(spit_secs).timeout
-	#anim_tree.set("parameters/StateMachine/conditions/spit", false)
+	for i in range(spit_projectile_count):
+		# Projectile must travel lateral dist to target in t time
+		# t is time it takes for projectile to fall to the ground from its current height
+		# d0 + s0t + 1/2at^2 = d
+		# 1/2gt^2 = d
+		# t^2 = 2 * body_meshes.height / gravity
+		var tm_landing_pos = target_position + random_spread(spit_projectile_spread)
+		var t = sqrt(2 * body_meshes.position.y / gravity)
+		var tm_speed = global_position.distance_to(tm_landing_pos) / t
+		var tm_dir = global_position.direction_to(tm_landing_pos)
+		var tm_inst = tiny_mite.instantiate()
+		level.add_child.call_deferred(tm_inst)
+		await tm_inst.tree_entered
+		tm_inst.global_position = mouth.global_position
+		tm_inst.velocity = tm_speed * global_position.direction_to(tm_landing_pos)
+		await get_tree().create_timer(spit_secs / spit_projectile_count).timeout
 
 func stop_lateral_mvmt():
 	velocity.x = 0

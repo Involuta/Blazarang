@@ -35,6 +35,8 @@ node_connections = [&"output", 0, &"StateMachine"]
 collision_layer = 8
 collision_mask = 90
 script = ExtResource("1_f700x")
+spit_projectile_count = 20.0
+spit_projectile_spread = 3.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_4hvl6")
@@ -42,6 +44,9 @@ shape = SubResource("CapsuleShape3D_4hvl6")
 [node name="HarvestmanProcAnimMeshes" parent="." instance=ExtResource("1_lkikj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 5, 2.08165e-12)
 ground_offset = 9.0
+
+[node name="Mouth" type="Node3D" parent="HarvestmanProcAnimMeshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -1, 2.3)
 
 [node name="Skeleton3D" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature" index="0"]
 bones/2/rotation = Quaternion(1.00793e-08, 9.99038e-09, -0.703965, 0.710234)
@@ -66,13 +71,13 @@ bones/36/rotation = Quaternion(1.00604e-08, -1.00094e-08, 0.705307, 0.708902)
 bones/37/rotation = Quaternion(-2.68822e-18, -8.88184e-16, 0.0030267, 0.999995)
 
 [node name="LeftVeryFrontShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.14991, 0.986705, 0.0627576, -0.986985, -0.145612, -0.0682436, -0.0581981, -0.0721713, 0.995692, 4.07179, 16.6752, 0.851938)
+transform = Transform3D(-0.14991, 0.986704, 0.0627578, -0.986983, -0.145612, -0.0682436, -0.058198, -0.0721713, 0.995691, 4.07179, 16.6752, 0.851938)
 
 [node name="LeftVeryFrontShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/LeftVeryFrontShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
 
 [node name="LeftVeryFrontThigh" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.0855339, -0.995968, -0.0270644, 0.995396, 0.0866011, -0.041081, 0.0432592, -0.023426, 0.998789, 0.296241, -1.88704, -0.069266)
+transform = Transform3D(0.0855342, -0.995968, -0.0270644, 0.995396, 0.0866014, -0.0410811, 0.0432593, -0.023426, 0.998789, 0.296241, -1.88704, -0.0692662)
 
 [node name="LeftVeryFrontThigh" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/LeftVeryFrontThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
@@ -120,13 +125,13 @@ transform = Transform3D(1, 2.03565e-07, -2.02493e-06, -2.26106e-07, 1, 5.5796e-0
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
 
 [node name="RightVeryFrontShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="9"]
-transform = Transform3D(0.14991, -0.986705, -0.0627576, -0.986985, -0.145612, -0.0682436, -0.0581981, -0.0721713, 0.995692, -4.07179, 16.6752, 0.851937)
+transform = Transform3D(0.14991, -0.986704, -0.0627578, -0.986983, -0.145612, -0.0682435, -0.058198, -0.0721713, 0.995691, -4.07179, 16.6752, 0.851938)
 
 [node name="RightVeryFrontShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/RightVeryFrontShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
 
 [node name="RightVeryFrontThigh" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="10"]
-transform = Transform3D(-0.0855338, 0.995967, 0.0270642, 0.995396, 0.086601, -0.041081, 0.0432591, -0.0234258, 0.998789, -0.296241, -1.88704, -0.0692661)
+transform = Transform3D(-0.085534, 0.995968, 0.0270642, 0.995395, 0.0866012, -0.0410811, 0.0432593, -0.0234258, 0.998789, -0.296241, -1.88704, -0.0692663)
 
 [node name="RightVeryFrontThigh" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/RightVeryFrontThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
@@ -183,8 +188,6 @@ surface_material_override/1 = SubResource("StandardMaterial3D_fnmvl")
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_vlbl8")
 anim_player = NodePath("../HarvestmanProcAnimMeshes/HarvestmanMeshes/AnimationPlayer")
-
-[node name="MeleeHitboxPivot" type="Node3D" parent="."]
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 target_desired_distance = 15.0
