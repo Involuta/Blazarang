@@ -4,6 +4,7 @@ var tiny_mite := preload("res://enemies/tiny_mite.tscn")
 @onready var nav_agent := $NavigationAgent3D
 @onready var body_meshes := $HarvestmanProcAnimMeshes
 @onready var anim_player := $HarvestmanProcAnimMeshes/HarvestmanMeshes/AnimationPlayer
+@onready var poke_hitbox := $HarvestmanProcAnimMeshes/DamageOverTimeArea
 @onready var anim_tree := $AnimationTree
 @onready var hurtbox := $EnemyHurtbox
 @onready var root := $/root/ViewControl
@@ -15,7 +16,6 @@ var target : Node3D
 var aiming_at_target := true
 enum {
 	FOLLOW,
-	STRAFE,
 	SPIT,
 }
 var behav_state := FOLLOW
@@ -69,11 +69,12 @@ func _ready():
 	hurtbox.add_to_group("lockonables")
 
 func _physics_process(delta):
+	# Target position is used during both follow and spit states
+	target_position = target.global_position
+	
 	match(behav_state):
 		FOLLOW:
 			follow(delta)
-		STRAFE:
-			strafe(delta)
 		SPIT:
 			stop_lateral_mvmt()
 	
@@ -82,6 +83,13 @@ func _physics_process(delta):
 	move_and_slide()
 	
 	hurtbox.global_position = body_meshes.global_position
+	
+	if poke_hitbox.global_position.distance_to(target_position) < poke_dist:
+		if poke_hitbox.process_mode != Node.PROCESS_MODE_INHERIT:
+			poke_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
+	else:
+		if poke_hitbox.process_mode != Node.PROCESS_MODE_DISABLED:
+			poke_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 
 # Equivalent of lerp_look_at_move_dir or lerp_look_at_target in other enemies. This func is necessary for mites bc the mesh itself needs to rotate independently of the parent
 # Rotate body meshes y rotation so that meshes look in the direction of the vector, which is a 3D vec whose y value is ignored
@@ -108,8 +116,6 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	move_and_slide()
 
 func follow(delta):
-	target_position = target.global_position
-	
 	rotate_y_to_vec(target_position - global_position, follow_turn_speed)
 	if global_position.distance_to(target_position) <= nav_agent.target_desired_distance:
 		nav_agent.set_target_position(global_position)
@@ -122,31 +128,6 @@ func follow(delta):
 	nav_agent.velocity = new_velocity
 	
 	# Turn this into mite spitting
-	spit_cooldown_remaining -= delta
-	if spit_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < spit_dist:
-		spit_cooldown_remaining = spit_cooldown_secs
-		behav_state = SPIT
-		await spit()
-		behav_state = FOLLOW
-
-func strafe(delta):
-	var dir_to_target := global_position.direction_to(target.global_position)
-	var dir_to_target2D := Vector2(dir_to_target.x, dir_to_target.z)
-	var icon_vec := dir_to_target2D.orthogonal()
-	if strafing_left:
-		icon_vec *= -1
-	target_position = target.global_position + strafe_radius * Vector3(icon_vec.x, 0, icon_vec.y)
-	
-	rotate_y_to_vec(velocity, follow_turn_speed)
-	global_rotation.x = 0
-	global_rotation.z = 0
-	nav_agent.set_target_position(target_position)
-	var next_position = nav_agent.get_next_path_position()
-	var new_velocity = (next_position - global_position).normalized() * follow_speed
-	
-	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
-	nav_agent.velocity = new_velocity
-		
 	spit_cooldown_remaining -= delta
 	if spit_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < spit_dist:
 		spit_cooldown_remaining = spit_cooldown_secs

@@ -26,3 +26,5 @@ res://levels/mite_level/section_nodes/mite_level_main_arena.tscn
 res://enemies/tiny_mite.tscn
 res://enemies/spitweb.tscn
 res://enemies/harvestman.gd
+res://general_scripts/damage_over_time_area.gd
+res://cotu/cotu_cb_main.tscn
