@@ -16,7 +16,7 @@ var aiming_at_target := true
 enum {
 	FOLLOW,
 	STRAFE,
-	BITE,
+	SPIT,
 }
 var behav_state := FOLLOW
 var target_position := Vector3.ZERO # Position mite moves to; set to target.global_position when not strafing and set to a point beside and behind the target when strafing ("fwd" = to the target)
@@ -41,10 +41,10 @@ var time_until_forced_leap := 5.0 # Set to can_leap_window when reset
 
 @export var follow_speed := 3.5
 @export var follow_turn_speed := .1
-@export var bite_dist := 1.0
-@export var bite_secs := .5
-@export var bite_cooldown_secs := 2.5
-var bite_cooldown_remaining := 2.5
+@export var spit_dist := 16.0
+@export var spit_secs := 2.0
+@export var spit_cooldown_secs := 8.0
+var spit_cooldown_remaining := 2.5
 
 @export var dp_impulse_limit := 5.0
 
@@ -54,12 +54,13 @@ func _ready():
 	hitbox = find_child("MeleeHitboxPivot")
 	#hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	anim_tree.active = true
+	nav_agent.target_desired_distance = spit_dist - 1.0
 	
 	time_until_can_leap = rng.randf_range(min_leap_cooldown, max_leap_cooldown)
 	can_leap = true
 	time_until_forced_leap = can_leap_window
 	
-	bite_cooldown_remaining = bite_cooldown_secs
+	spit_cooldown_remaining = spit_cooldown_secs
 	
 	# Ensure that homing attacks hit the hurtbox and not the parent node, which stays on the ground. For any enemy whose hurtbox is at the same position as the parent node, this line can just be add_to_group("lockonables")
 	hurtbox.add_to_group("lockonables")
@@ -70,7 +71,7 @@ func _physics_process(delta):
 			follow(delta)
 		STRAFE:
 			strafe(delta)
-		BITE:
+		SPIT:
 			stop_lateral_mvmt()
 	
 	if not is_on_floor():
@@ -118,14 +119,12 @@ func follow(delta):
 	nav_agent.velocity = new_velocity
 	
 	# Turn this into mite spitting
-	"""
-	bite_cooldown_remaining -= delta
-	if bite_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < bite_dist:
-		bite_cooldown_remaining = bite_cooldown_secs
-		behav_state = BITE
-		await bite()
+	spit_cooldown_remaining -= delta
+	if spit_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < spit_dist:
+		spit_cooldown_remaining = spit_cooldown_secs
+		behav_state = SPIT
+		await spit()
 		behav_state = FOLLOW
-	"""
 
 func strafe(delta):
 	var dir_to_target := global_position.direction_to(target.global_position)
@@ -145,18 +144,18 @@ func strafe(delta):
 	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
 	nav_agent.velocity = new_velocity
 		
-	bite_cooldown_remaining -= delta
-	if bite_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < bite_dist:
-		bite_cooldown_remaining = bite_cooldown_secs
-		behav_state = BITE
-		await bite()
+	spit_cooldown_remaining -= delta
+	if spit_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < spit_dist:
+		spit_cooldown_remaining = spit_cooldown_secs
+		behav_state = SPIT
+		await spit()
 		behav_state = FOLLOW
 
-func bite():
+func spit():
 	stop_lateral_mvmt()
-	#anim_tree.set("parameters/StateMachine/conditions/bite", true)
-	await get_tree().create_timer(bite_secs).timeout
-	#anim_tree.set("parameters/StateMachine/conditions/bite", false)
+	#anim_tree.set("parameters/StateMachine/conditions/spit", true)
+	await get_tree().create_timer(spit_secs).timeout
+	#anim_tree.set("parameters/StateMachine/conditions/spit", false)
 
 func stop_lateral_mvmt():
 	velocity.x = 0
