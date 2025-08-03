@@ -48,6 +48,8 @@ var time_until_forced_leap := 5.0 # Set to can_leap_window when reset
 @export var spit_cooldown_secs := 8.0
 var spit_cooldown_remaining := 2.5
 
+@export var poke_dist := 3.0 # Dist from harvestman's parent node necessary to start poking with the middle legs
+
 @export var dp_impulse_limit := 5.0
 
 func _ready():
