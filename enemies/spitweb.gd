@@ -37,7 +37,6 @@ func _on_body_entered(body):
 		become_ground_web()
 	else:
 		destroy_self()
-	
 
 func become_ground_web():
 	grounded = true

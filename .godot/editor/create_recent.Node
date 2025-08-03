@@ -1,15 +1,16 @@
+Node3D
+CollisionShape3D
+Area3D
+RigidBody3D
 MeshInstance3D
 AnimationTree
 NavigationAgent3D
-Node3D
-CollisionShape3D
 Hurtbox
 CharacterBody3D
 Camera3D
 RayCast3D
 Marker3D
 SkeletonIK3D
-Area3D
 RemoteTransform3D
 FuncGodotMap
 StaticBody3D
@@ -29,4 +30,3 @@ GPUParticlesAttractorSphere3D
 BoneAttachment3D
 BallSpawner
 OmniLight3D
-RigidBody3D

@@ -166,7 +166,6 @@ func spit():
 		var tm_landing_pos = target_position + random_spread(spit_projectile_spread)
 		var t = sqrt(2 * body_meshes.position.y / gravity)
 		var tm_speed = global_position.distance_to(tm_landing_pos) / t
-		var tm_dir = global_position.direction_to(tm_landing_pos)
 		var tm_inst = tiny_mite.instantiate()
 		level.add_child.call_deferred(tm_inst)
 		await tm_inst.tree_entered

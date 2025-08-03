@@ -6,6 +6,7 @@ var velocity := Vector3.ONE
 var invincible := true # prevents bullet from hitting self
 var invincibility_secs := .05
 var grounded := false
+@export var grounded_secs := 1.0 # Time tiny mite spends on ground before disappearing
 @export var bullet_explosion_secs := 1.0
 var destroyed := false
 
@@ -29,17 +30,12 @@ func _on_body_entered(body):
 	if Globals.compare_layers(body.collision_layer, Globals.ENEMY_COL_LAYER):
 		pass
 	elif Globals.compare_layers(body.collision_layer, Globals.ARENA_COL_LAYER):
+		velocity.y = 0
+		await get_tree().create_timer(grounded_secs).timeout
 		destroy_self()
 	else:
 		destroy_self()
-	
 
 func destroy_self():
 	destroyed = true
-	# For whatever reason, high velocity apparently makes the particles disappear early
-	velocity = Vector3.ZERO
-	for child in get_children():
-		if not "Explosion" in child.name:
-			child.queue_free()
-	await get_tree().create_timer(bullet_explosion_secs).timeout
 	queue_free()

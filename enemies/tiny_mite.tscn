@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://dii1e2lchv8ui"]
+[gd_scene load_steps=6 format=3 uid="uid://dii1e2lchv8ui"]
 
 [ext_resource type="ArrayMesh" uid="uid://br567pfuxhxs3" path="res://obj_imports/TinyMite.obj" id="1_d8tmv"]
 [ext_resource type="Script" path="res://enemies/tiny_mite.gd" id="1_eyaub"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="3_cs0qv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l7xva"]
 albedo_color = Color(0.403922, 0.141176, 0, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d5rws"]
+radius = 0.4
 
 [node name="TinyMite" type="Node3D"]
 script = ExtResource("1_eyaub")
@@ -13,3 +17,14 @@ script = ExtResource("1_eyaub")
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 mesh = ExtResource("1_d8tmv")
 surface_material_override/0 = SubResource("StandardMaterial3D_l7xva")
+
+[node name="EnemyHitbox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 18
+script = ExtResource("3_cs0qv")
+damage = 6
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHitbox"]
+shape = SubResource("SphereShape3D_d5rws")
+
+[connection signal="body_entered" from="EnemyHitbox" to="." method="_on_body_entered"]
