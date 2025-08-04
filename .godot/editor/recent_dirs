@@ -1,3 +1,4 @@
+res://enemies/enemy_anims
 res://levels/mite_level
 res://enemies
 res://glb_inherited_scenes
@@ -8,7 +9,6 @@ res://levels/x_boss_level
 res://level_maps
 res://procedural_animation
 res://
-res://enemies/enemy_anims
 res://enemies/spawners
 res://rang
 res://cotu/cotu_anims

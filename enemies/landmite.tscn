@@ -77,8 +77,6 @@ collision_layer = 8
 collision_mask = 90
 script = ExtResource("1_unap6")
 leap_secs = 1.05
-bite_proximity = 2.0
-bite_body_dist = 2.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -0.3)
@@ -116,7 +114,7 @@ bones/41/rotation = Quaternion(0.703012, -0.194601, -0.674925, 0.111272)
 bones/44/rotation = Quaternion(0.703012, 0.194601, 0.674925, 0.111272)
 
 [node name="LeftVeryBackShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.761312, 0.389085, 0.518668, -0.327274, -0.921154, 0.210635, 0.559728, -0.00938785, 0.828622, 3.41356, 0.582582, -1.31727)
+transform = Transform3D(-0.761312, 0.389085, 0.518668, -0.327274, -0.921154, 0.210635, 0.559728, -0.00938776, 0.828622, 3.41356, 0.582582, -1.31727)
 
 [node name="LeftVeryBackShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/LeftVeryBackShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_8ihky")
@@ -152,7 +150,7 @@ transform = Transform3D(0.58627, -0.770356, -0.250675, 0.799048, 0.600853, 0.022
 surface_material_override/0 = SubResource("StandardMaterial3D_8ihky")
 
 [node name="LeftVeryFrontShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(-0.902085, 0.00593718, -0.431518, -0.113794, -0.967791, 0.22457, -0.416286, 0.251686, 0.873705, 3.17957, -0.729549, 1.30501)
+transform = Transform3D(-0.902085, 0.00593712, -0.431518, -0.113794, -0.967791, 0.22457, -0.416286, 0.251686, 0.873705, 3.17957, -0.729549, 1.30501)
 
 [node name="LeftVeryFrontShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/LeftVeryFrontShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_8ihky")
@@ -188,7 +186,7 @@ transform = Transform3D(0.117075, 0.968654, -0.219098, -0.991993, 0.124582, 0.02
 surface_material_override/0 = SubResource("StandardMaterial3D_8ihky")
 
 [node name="RightMiddleFrontShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D" index="12"]
-transform = Transform3D(-0.949692, 0.207178, -0.234866, -0.308842, -0.495086, 0.812099, 0.0519703, 0.843781, 0.534165, -2.67267, -1.41751, 0.984492)
+transform = Transform3D(-0.949692, 0.207178, -0.234865, -0.308842, -0.495086, 0.812099, 0.0519704, 0.843781, 0.534165, -2.67267, -1.41751, 0.984492)
 
 [node name="RightMiddleFrontShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/RightMiddleFrontShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_8ihky")
@@ -212,13 +210,13 @@ transform = Transform3D(0.177534, 0.904419, 0.387953, -0.979816, 0.199249, -0.01
 surface_material_override/0 = SubResource("StandardMaterial3D_8ihky")
 
 [node name="LeftMandible" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D" index="16"]
-transform = Transform3D(0.999992, 0.00381309, 0.000458584, -0.00382536, 0.999521, 0.0307203, -0.000341233, -0.0307218, 0.999528, 0.00438087, -0.0235648, -0.0377045)
+transform = Transform3D(0.999992, 0.00381308, 0.000458614, -0.00382536, 0.999521, 0.0307203, -0.000341233, -0.0307218, 0.999528, 0.004381, -0.0235648, -0.0377045)
 
 [node name="LeftMandible" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/LeftMandible" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_8ihky")
 
 [node name="RightMandible" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D" index="17"]
-transform = Transform3D(0.999992, -0.00381309, -0.000458584, 0.00382536, 0.999521, 0.0307203, 0.000341233, -0.0307218, 0.999528, -0.00438087, -0.0235648, -0.0377045)
+transform = Transform3D(0.999992, -0.00381308, -0.000458614, 0.00382536, 0.999521, 0.0307203, 0.000341233, -0.0307218, 0.999528, -0.004381, -0.0235648, -0.0377045)
 
 [node name="RightMandible" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/RightMandible" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_8ihky")
