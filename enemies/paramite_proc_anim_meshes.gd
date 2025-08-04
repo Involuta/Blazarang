@@ -32,7 +32,9 @@ extends Node3D
 @onready var parent := get_parent()
 var avg_normal := Vector3.UP # This is visible in the entire script so that the parent can see it; if it's Vector3.UP, the parent can leap
 
-var ik_stopped := false
+var ik_stopped := false # IK is stopped when leaping
+
+var biting := false
 
 func _process(delta):
 	if ik_stopped:
@@ -52,6 +54,10 @@ func _process(delta):
 	draw_vector_line(avg_normal * 10)
 	var target_basis = _basis_from_normal(avg_normal)
 	rotation = lerp(transform.basis.get_rotation_quaternion(), target_basis.get_rotation_quaternion(), run_speed * delta).get_euler()
+	
+	# Biting moves body meshes' position, so if biting, this script should not change position
+	if biting:
+		return
 	
 	# Offset body from the ground
 	var avg_ik_pos = (lvf_ik.position + rmb_ik.position + rvf_ik.position + lmb_ik.position + lmf_ik.position + rvb_ik.position + rmf_ik.position + lvb_ik.position) / 8

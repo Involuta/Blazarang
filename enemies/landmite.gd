@@ -42,8 +42,9 @@ var time_until_forced_leap := 5.0 # Set to can_leap_window when reset
 
 @export var follow_speed := 3.5
 @export var follow_turn_speed := .1
-@export var bite_dist := 1.0
-@export var bite_secs := .5
+@export var bite_proximity := 1.5 # Proximity to target required to start bite
+@export var bite_body_dist := 2.2 # Dist fwd mite's body moves when biting
+@export var bite_secs := .24
 @export var bite_cooldown_secs := 2.5
 var bite_cooldown_remaining := 2.5
 
@@ -121,7 +122,7 @@ func follow(delta):
 		nav_agent.target_desired_distance = .1
 		
 	bite_cooldown_remaining -= delta
-	if bite_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < bite_dist:
+	if bite_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < bite_proximity:
 		bite_cooldown_remaining = bite_cooldown_secs
 		behav_state = BITE
 		await bite()
@@ -173,7 +174,7 @@ func strafe(delta):
 		nav_agent.target_desired_distance = .1
 		
 	bite_cooldown_remaining -= delta
-	if bite_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < bite_dist:
+	if bite_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < bite_proximity:
 		bite_cooldown_remaining = bite_cooldown_secs
 		behav_state = BITE
 		await bite()
@@ -194,10 +195,13 @@ func strafe(delta):
 			can_leap = true
 
 func bite():
+	body_meshes.biting = true
 	stop_lateral_mvmt()
-	#anim_tree.set("parameters/StateMachine/conditions/bite", true)
-	await get_tree().create_timer(bite_secs).timeout
-	#anim_tree.set("parameters/StateMachine/conditions/bite", false)
+	var bite_tween = get_tree().create_tween()
+	bite_tween.tween_property(body_meshes, "position", bite_body_dist*body_meshes.transform.basis.z, bite_secs / 2).as_relative()
+	bite_tween.tween_property(body_meshes, "position", -bite_body_dist*body_meshes.transform.basis.z, bite_secs / 2).as_relative()
+	await bite_tween.finished
+	body_meshes.biting = false
 
 func stop_lateral_mvmt():
 	velocity.x = 0

@@ -90,13 +90,13 @@ bones/36/rotation = Quaternion(1.00604e-08, -1.00094e-08, 0.705307, 0.708902)
 bones/37/rotation = Quaternion(-2.68822e-18, -8.88184e-16, 0.0030267, 0.999995)
 
 [node name="LeftVeryFrontShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.149909, 0.986699, 0.0627571, -0.986978, -0.145611, -0.0682431, -0.0581976, -0.0721706, 0.995686, 4.07178, 16.6752, 0.851936)
+transform = Transform3D(-0.149909, 0.986699, 0.0627573, -0.986978, -0.145611, -0.0682432, -0.0581976, -0.0721709, 0.995686, 4.07178, 16.6752, 0.851936)
 
 [node name="LeftVeryFrontShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/LeftVeryFrontShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
 
 [node name="LeftVeryFrontThigh" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.0855339, -0.995968, -0.0270645, 0.995396, 0.0866011, -0.041081, 0.0432592, -0.0234261, 0.998789, 0.296241, -1.88704, -0.0692661)
+transform = Transform3D(0.085534, -0.995968, -0.0270647, 0.995396, 0.0866012, -0.041081, 0.0432592, -0.0234263, 0.998789, 0.296241, -1.88704, -0.0692663)
 
 [node name="LeftVeryFrontThigh" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/LeftVeryFrontThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
@@ -144,13 +144,13 @@ transform = Transform3D(1, 2.03565e-07, -2.02493e-06, -2.26106e-07, 1, 5.5796e-0
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
 
 [node name="RightVeryFrontShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="9"]
-transform = Transform3D(0.149909, -0.986699, -0.0627571, -0.986978, -0.145611, -0.0682431, -0.0581976, -0.0721706, 0.995686, -4.07177, 16.6752, 0.851936)
+transform = Transform3D(0.149909, -0.986699, -0.0627573, -0.986978, -0.145611, -0.0682431, -0.0581976, -0.0721708, 0.995686, -4.07178, 16.6752, 0.851936)
 
 [node name="RightVeryFrontShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/RightVeryFrontShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
 
 [node name="RightVeryFrontThigh" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="10"]
-transform = Transform3D(-0.0855338, 0.995967, 0.0270643, 0.995396, 0.086601, -0.041081, 0.0432592, -0.0234259, 0.998789, -0.296241, -1.88704, -0.0692662)
+transform = Transform3D(-0.0855339, 0.995967, 0.0270644, 0.995395, 0.0866011, -0.041081, 0.0432592, -0.023426, 0.998789, -0.296241, -1.88704, -0.0692664)
 
 [node name="RightVeryFrontThigh" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/RightVeryFrontThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
