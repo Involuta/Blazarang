@@ -22,3 +22,4 @@ res://ui/glitch.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
 res://general_scripts/skygradient.gdshader
 res://enemies/paramite.gd
+res://enemies/landmite.tscn

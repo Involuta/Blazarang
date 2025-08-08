@@ -128,7 +128,7 @@ func launch_frame(delta):
 func switch_to_follow():
 	var skythread_tween = get_tree().create_tween()
 	skythread_tween.tween_property(skythread, "visible", true, 0)
-	skythread_tween.tween_property(skythread, "position", 100*Vector3.UP, .3)
+	skythread_tween.tween_property(skythread, "position", Vector3(0, 101, -1.2), .3)
 	
 	# Set mesh and colliders' y pos to global pos's y dist from ground obtained from raycast
 	# Set parent object global position to the ground by moving it down the height obtained from raycast
