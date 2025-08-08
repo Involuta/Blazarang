@@ -3,6 +3,7 @@ extends CharacterBody3D
 var spitweb := preload("res://enemies/spitweb.tscn")
 @onready var nav_agent := $NavigationAgent3D
 @onready var body_meshes := $ParamiteProcAnimMeshes
+@onready var skythread := $ParamiteProcAnimMeshes/SkyThread
 @onready var physical_collider := $CollisionShape3D
 @onready var hurtbox := $EnemyHurtbox
 @onready var anim_player := $ParamiteProcAnimMeshes/ParamiteMeshes/AnimationPlayer
@@ -35,7 +36,12 @@ var target_position := Vector3.ZERO # Position mite moves to; set to target.glob
 @export var retreat_speed := 6.0
 var ground_normal := Vector3.UP # Normal of the ground, determined by the avg normal of the planes formed by points where feet hit the ground
 
+@export var skythread_withdraw_height := 200.0 # y pos skythread ascends to when connection is cut from paramite
+
 func _ready():
+	skythread.position = skythread_withdraw_height * Vector3.UP
+	skythread.visible = false
+	
 	level = root.find_child("Level")
 	target = root.find_child("Icon")
 	hitbox = find_child("MeleeHitboxPivot")
@@ -120,6 +126,10 @@ func launch_frame(delta):
 		velocity.y -= gravity * delta
 
 func switch_to_follow():
+	var skythread_tween = get_tree().create_tween()
+	skythread_tween.tween_property(skythread, "visible", true, 0)
+	skythread_tween.tween_property(skythread, "position", 100*Vector3.UP, .3)
+	
 	# Set mesh and colliders' y pos to global pos's y dist from ground obtained from raycast
 	# Set parent object global position to the ground by moving it down the height obtained from raycast
 	anim_tree.set("parameters/StateMachine/conditions/following", true)
@@ -171,6 +181,10 @@ func shoot_spitweb():
 	sw_inst.velocity = sw_speed * global_position.direction_to(target_position)
 
 func switch_to_fall():
+	var skythread_tween = get_tree().create_tween()
+	skythread_tween.tween_property(skythread, "position", skythread_withdraw_height*Vector3.UP, .3)
+	skythread_tween.tween_property(skythread, "visible", false, 0)
+	
 	anim_tree.set("parameters/StateMachine/conditions/following", false)
 	
 	global_position.y += body_meshes.position.y
