@@ -32,6 +32,7 @@ var can_leap := true
 @export var min_leap_cooldown := .25 # Min time after a leap ends before you can leap again
 var time_until_can_leap := 5.0 # Set to random(min_leap_cooldown, max_leap_cooldown) when reset
 @export var roserang_leap_proximity := 30.0 # When the rang is this close or closer to the mite, the mite leaps
+@export var leap_y_proximity := 2.5 # When (abs of) difference in y pos btwn target and mite is within leap_y_proximity, leap is canceled
 @export var can_leap_window := 5.0 # Time you are able to leap on your own before a forced leap occurs
 var time_until_forced_leap := 5.0 # Set to can_leap_window when reset
 @export var leap_secs := 1.0
@@ -212,7 +213,7 @@ func stop_lateral_mvmt():
 	velocity.z = 0
 
 func start_leap():
-	if body_meshes.avg_normal != Vector3.UP:
+	if abs(target_position.y - global_position.y) > leap_y_proximity:
 		return
 	
 	# Stop IK
