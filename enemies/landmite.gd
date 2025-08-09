@@ -74,7 +74,7 @@ func _physics_process(delta):
 		BITE:
 			stop_lateral_mvmt()
 		LEAP:
-			pass
+			leap_frame()
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -133,14 +133,19 @@ func follow(delta):
 		if time_until_forced_leap <= 0 or close_to_roserang():
 			time_until_forced_leap = can_leap_window
 			behav_state = LEAP
-			await leap()
-			behav_state = FOLLOW
-			can_leap = false
+			start_leap()
 	else:
 		time_until_can_leap -= delta
 		if time_until_can_leap <= 0:
 			time_until_can_leap = rng.randf_range(min_leap_cooldown, max_leap_cooldown)
 			can_leap = true
+
+func leap_frame():
+	if is_on_floor():
+		behav_state = FOLLOW
+		can_leap = false
+		stop_lateral_mvmt()
+		body_meshes.start_ik()
 
 func close_to_roserang():
 	var roserang = root.find_child("Roserang", true, false)
@@ -185,9 +190,7 @@ func strafe(delta):
 		if time_until_forced_leap <= 0 or close_to_roserang():
 			time_until_forced_leap = can_leap_window
 			behav_state = LEAP
-			await leap()
-			behav_state = FOLLOW
-			can_leap = false
+			start_leap()
 	else:
 		time_until_can_leap -= delta
 		if time_until_can_leap <= 0:
@@ -208,23 +211,17 @@ func stop_lateral_mvmt():
 	velocity.x = 0
 	velocity.z = 0
 
-func leap():
+func start_leap():
 	if body_meshes.avg_normal != Vector3.UP:
 		return
 	
 	# Stop IK
 	body_meshes.stop_ik()
-	#anim_tree.set("parameters/StateMachine/conditions/leap", true)
 	if global_position.distance_to(target_position) > leap_length_threshold:
 		velocity = (leap_long_lateral_speed + rng.randf_range(-.5,.5)) * body_meshes.transform.basis.z
 	else:
 		velocity = (leap_short_lateral_speed + rng.randf_range(-.5,.5)) * body_meshes.transform.basis.z
 	velocity.y = leap_vertical_speed + rng.randf_range(-.5,.5)
-	await get_tree().create_timer(leap_secs).timeout
-	stop_lateral_mvmt()
-	# Do IK again
-	body_meshes.start_ik()
-	#anim_tree.set("parameters/StateMachine/conditions/leap", false)
 
 func stop_aiming_at_target():
 	aiming_at_target = false

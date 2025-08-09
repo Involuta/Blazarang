@@ -190,13 +190,12 @@ func switch_to_fall():
 	global_position.y += body_meshes.position.y
 	set_mesh_and_colliders_y_pos(0)
 	behav_state = FALL
-	
-	await get_tree().create_timer(.75).timeout
-	switch_to_retreat()
 
 func fall_frame(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+	else:
+		switch_to_retreat()
 
 func switch_to_retreat():
 	# Start IK
