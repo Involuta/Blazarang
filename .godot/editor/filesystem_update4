@@ -1,4 +1,4 @@
-res://enemies/paramite.tscn
+res://enemies/harvestman.tscn
 res://enemies/enemy_hurtbox.gd
 res://glb_inherited_scenes/outline.gdshader
 res://glb_inherited_scenes/black_outline.gdshader
@@ -21,6 +21,7 @@ res://ui/glow.gdshader
 res://ui/glitch.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
 res://general_scripts/skygradient.gdshader
-res://enemies/paramite.gd
 res://enemies/landmite.tscn
-res://enemies/landmite.gd
+res://enemies/paramite.tscn
+res://enemies/harvestman.gd
+res://enemies/paramite_proc_anim_meshes.tscn
