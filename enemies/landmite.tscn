@@ -162,7 +162,7 @@ transform = Transform3D(0.177534, -0.904419, -0.387954, 0.979816, 0.19925, -0.01
 surface_material_override/0 = SubResource("StandardMaterial3D_8ihky")
 
 [node name="RightVeryBackShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D" index="8"]
-transform = Transform3D(-0.761312, -0.389084, -0.518669, 0.327274, -0.921154, 0.210634, -0.559728, -0.0093888, 0.828623, -3.41356, 0.58258, -1.31727)
+transform = Transform3D(-0.761312, -0.389084, -0.518669, 0.327274, -0.921154, 0.210634, -0.559728, -0.0093888, 0.828623, -3.41356, 0.582581, -1.31727)
 
 [node name="RightVeryBackShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/RightVeryBackShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_8ihky")

@@ -113,7 +113,7 @@ transform = Transform3D(0.0855337, -0.995968, -0.0270644, 0.995396, 0.0866009, -
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
 
 [node name="LeftVeryBackShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(-0.139106, 0.987235, -0.0775546, -0.986458, -0.131275, 0.0983, 0.0868642, 0.0901787, 0.992129, 3.79355, 16.6941, -1.07829)
+transform = Transform3D(-0.139106, 0.987233, -0.0775545, -0.986455, -0.131275, 0.0982998, 0.0868639, 0.0901785, 0.992128, 3.79355, 16.6941, -1.07829)
 
 [node name="LeftVeryBackShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/LeftVeryBackShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
@@ -167,7 +167,7 @@ transform = Transform3D(-0.0855336, 0.995968, 0.0270642, 0.995396, 0.0866008, -0
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
 
 [node name="RightVeryBackShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="11"]
-transform = Transform3D(0.139106, -0.987235, 0.0775546, -0.986458, -0.131275, 0.0983, 0.0868642, 0.0901788, 0.992129, -3.79355, 16.6941, -1.07829)
+transform = Transform3D(0.139106, -0.987233, 0.0775545, -0.986455, -0.131275, 0.0982997, 0.0868638, 0.0901786, 0.992128, -3.79355, 16.6941, -1.07829)
 
 [node name="RightVeryBackShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/RightVeryBackShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
