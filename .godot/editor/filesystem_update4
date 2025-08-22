@@ -1,3 +1,4 @@
+res://enemies/jumping_spider_proc_anim_meshes.tscn
 res://enemies/enemy_hurtbox.gd
 res://glb_inherited_scenes/outline.gdshader
 res://glb_inherited_scenes/black_outline.gdshader
@@ -20,8 +21,4 @@ res://ui/glow.gdshader
 res://ui/glitch.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
 res://general_scripts/skygradient.gdshader
-res://glb_inherited_scenes/jumping_spider_meshes.tscn
-res://enemies/jumping_spider_proc_anim_meshes.tscn
-res://enemies/landmite.tscn
-res://enemies/paramite.tscn
-res://enemies/paramite_proc_anim_meshes.tscn
+res://enemies/harvestman_proc_anim_meshes.tscn
