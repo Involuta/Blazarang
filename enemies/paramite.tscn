@@ -108,7 +108,7 @@ bones/41/rotation = Quaternion(0.703012, -0.194601, -0.674925, 0.111272)
 bones/44/rotation = Quaternion(0.703012, 0.194601, 0.674925, 0.111272)
 
 [node name="LeftVeryBackShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.763337, 0.326304, -0.557532, -0.329917, 0.545099, 0.770728, 0.555402, 0.772265, -0.308441, 2.50745, 2.21963, -1.58523)
+transform = Transform3D(-0.763337, 0.326304, -0.557532, -0.329917, 0.545099, 0.770729, 0.555402, 0.772265, -0.308441, 2.50745, 2.21963, -1.58524)
 
 [node name="LeftVeryBackShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/LeftVeryBackShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")
@@ -120,7 +120,7 @@ transform = Transform3D(-0.109891, -0.99184, -0.0646381, 0.989798, -0.103268, -0
 surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")
 
 [node name="LeftMiddleBackShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(-0.930845, -0.210187, -0.298911, 0.143313, 0.542482, -0.827753, 0.336137, -0.813348, -0.474844, 2.51235, -0.272438, -1.95519)
+transform = Transform3D(-0.930845, -0.210187, -0.298911, 0.143313, 0.542482, -0.827753, 0.336137, -0.813348, -0.474844, 2.51235, -0.272438, -1.9552)
 
 [node name="LeftMiddleBackShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/LeftMiddleBackShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")
@@ -156,7 +156,7 @@ transform = Transform3D(0.178793, -0.980129, -0.0859097, 0.979321, 0.185686, -0.
 surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")
 
 [node name="RightVeryBackShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D" index="8"]
-transform = Transform3D(-0.763337, -0.326304, 0.557532, 0.329917, 0.545098, 0.770728, -0.555401, 0.772265, -0.308441, -2.50745, 2.21963, -1.58523)
+transform = Transform3D(-0.763337, -0.326304, 0.557532, 0.329917, 0.545098, 0.770728, -0.555401, 0.772265, -0.308441, -2.50745, 2.21963, -1.58524)
 
 [node name="RightVeryBackShin" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/RightVeryBackShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")

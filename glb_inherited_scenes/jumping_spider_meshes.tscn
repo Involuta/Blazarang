@@ -1,0 +1,133 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0va0ohayydf"]
+
+[ext_resource type="PackedScene" uid="uid://7l51y8hyqpcc" path="res://glb_imports/JumpingSpider.glb" id="1_j6g5n"]
+
+[node name="JumpingSpiderMeshes" instance=ExtResource("1_j6g5n")]
+
+[node name="VeryFrontLeftLeg_002" parent="Armature/Skeleton3D" index="0"]
+transform = Transform3D(1, -6.66824e-08, 1.1707e-07, 8.80119e-08, 1, 1.48775e-07, -5.49271e-08, -9.88345e-08, 1, -2.38419e-07, -1.49012e-08, 7.15256e-07)
+bone_idx = 6
+
+[node name="VeryFrontLeftLeg_001" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(1, 1.63379e-09, 4.33114e-09, 2.13033e-08, 1, 1.93309e-08, 4.33109e-09, -1.12584e-09, 1, -3.57628e-07, -2.23517e-08, -2.38419e-07)
+bone_idx = 7
+
+[node name="VeryFrontLeftLeg_000" parent="Armature/Skeleton3D" index="2"]
+transform = Transform3D(1, 8.82633e-09, 6.09526e-08, -5.25517e-09, 1, -7.9836e-08, -8.09982e-08, 1.20542e-07, 1, -2.38419e-07, -1.49012e-08, -2.38419e-07)
+bone_idx = 8
+
+[node name="MiddleFrontLeftLeg_002" parent="Armature/Skeleton3D" index="3"]
+transform = Transform3D(1, 4.66433e-08, 4.11764e-08, -4.6843e-08, 1, -9.79919e-08, 1.39404e-09, 1.22959e-07, 1, 7.15256e-07, 2.23517e-08, 4.76837e-07)
+bone_idx = 12
+
+[node name="MiddleFrontLeftLeg_001" parent="Armature/Skeleton3D" index="4"]
+transform = Transform3D(1, -3.30716e-09, 7.46945e-08, 8.16527e-08, 1, -4.07261e-08, -7.19735e-08, 2.76209e-08, 1, 4.76837e-07, 7.45058e-09, 2.98023e-07)
+bone_idx = 13
+
+[node name="MiddleFrontLeftLeg_000" parent="Armature/Skeleton3D" index="5"]
+transform = Transform3D(1, 3.57868e-09, 3.64132e-08, 4.49446e-08, 1, 2.44153e-08, 6.29076e-08, -1.67563e-09, 1, -2.38419e-07, 7.45058e-09, 1.78814e-07)
+bone_idx = 14
+
+[node name="MiddleBackLeftLeg_002" parent="Armature/Skeleton3D" index="6"]
+transform = Transform3D(1, 2.29974e-07, -1.23432e-08, -1.78299e-07, 1, 7.13362e-09, 3.17551e-08, -7.04661e-08, 1, -2.38419e-07, -2.98023e-08, -1.78814e-07)
+bone_idx = 18
+
+[node name="MiddleBackLeftLeg_001" parent="Armature/Skeleton3D" index="7"]
+transform = Transform3D(1, 1.02342e-07, -7.66054e-08, -1.4423e-07, 1, 1.25628e-07, 1.00598e-07, -1.09952e-07, 1, 7.15256e-07, -2.98023e-08, -3.53903e-07)
+bone_idx = 19
+
+[node name="MiddleBackLeftLeg_000" parent="Armature/Skeleton3D" index="8"]
+transform = Transform3D(1, -8.63423e-08, 7.10897e-08, 2.17654e-08, 1, 7.30757e-08, -1.28733e-08, -1.79537e-08, 1, 0, -3.72529e-08, -2.5332e-07)
+bone_idx = 20
+
+[node name="VeryBackLeftLeg_002" parent="Armature/Skeleton3D" index="9"]
+transform = Transform3D(1, 1.0581e-07, 1.22475e-07, -1.053e-07, 1, 1.14339e-08, 1.74658e-07, -3.41061e-11, 1, 0, 0, 7.15256e-07)
+bone_idx = 24
+
+[node name="VeryBackLeftLeg_001" parent="Armature/Skeleton3D" index="10"]
+transform = Transform3D(1, 8.98107e-08, 1.18946e-07, -1.01599e-07, 1, 1.2519e-07, 1.98421e-07, -8.31792e-08, 1, -4.76837e-07, -7.45058e-09, -1.19209e-07)
+bone_idx = 25
+
+[node name="VeryBackLeftLeg_000" parent="Armature/Skeleton3D" index="11"]
+transform = Transform3D(1, -1.69565e-07, 1.80967e-07, 1.64231e-07, 1, -1.86348e-07, 2.07306e-07, 1.79133e-07, 1, 2.98023e-07, 7.45058e-09, -1.19209e-07)
+bone_idx = 26
+
+[node name="PedipalpLeft_001" parent="Armature/Skeleton3D" index="12"]
+transform = Transform3D(1, 2.54439e-08, -1.13647e-08, 2.00134e-09, 1, 1.39745e-07, 5.3076e-08, -1.17176e-07, 1, 1.78814e-07, -1.49012e-08, 1.19209e-07)
+bone_idx = 29
+
+[node name="PedipalpLeft_000" parent="Armature/Skeleton3D" index="13"]
+transform = Transform3D(1, -8.01026e-09, 2.03338e-08, 7.15283e-09, 1, 2.45257e-07, 1.2529e-08, -2.46518e-07, 1, 5.96046e-08, 0, 1.19209e-07)
+bone_idx = 30
+
+[node name="FangLeft" parent="Armature/Skeleton3D" index="14"]
+transform = Transform3D(1, 3.64271e-09, -1.3992e-08, 1.40029e-08, 1, 6.29662e-08, 6.37222e-08, -7.41979e-08, 1, 1.19209e-07, -8.9407e-08, 2.38419e-07)
+bone_idx = 32
+
+[node name="VeryFrontRightLeg_002" parent="Armature/Skeleton3D" index="15"]
+transform = Transform3D(1, 6.66823e-08, -1.1707e-07, -8.80117e-08, 1, 1.48775e-07, 5.49271e-08, -9.88345e-08, 1, 2.38419e-07, 1.49012e-08, 7.15256e-07)
+bone_idx = 36
+
+[node name="VeryFrontRightLeg_001" parent="Armature/Skeleton3D" index="16"]
+transform = Transform3D(1, -1.63379e-09, -1.02494e-07, -2.13032e-08, 1, 1.93306e-08, 8.50759e-08, -1.12584e-09, 1, 3.57628e-07, -7.45058e-09, -2.38419e-07)
+bone_idx = 37
+
+[node name="VeryFrontRightLeg_000" parent="Armature/Skeleton3D" index="17"]
+transform = Transform3D(1, 8.07559e-08, -1.20557e-07, -1.05551e-08, 1, 7.715e-08, 8.09982e-08, -7.44344e-08, 1, 2.38419e-07, 1.49012e-08, -2.38419e-07)
+bone_idx = 38
+
+[node name="MiddleFrontRightLeg_002" parent="Armature/Skeleton3D" index="18"]
+transform = Transform3D(1, -3.42087e-09, -3.3596e-08, -1.27617e-08, 1, 2.12176e-08, -3.83007e-08, -3.16021e-08, 1, -2.38419e-07, 1.49012e-08, 5.96046e-07)
+bone_idx = 42
+
+[node name="MiddleFrontRightLeg_001" parent="Armature/Skeleton3D" index="19"]
+transform = Transform3D(1, -3.77915e-09, -1.4232e-07, 7.75428e-09, 1, 1.88788e-08, 8.68745e-08, -3.15611e-08, 1, -4.76837e-07, 0, 2.98023e-07)
+bone_idx = 43
+
+[node name="MiddleFrontRightLeg_000" parent="Armature/Skeleton3D" index="20"]
+transform = Transform3D(1, 1.1102e-08, -8.85673e-08, 6.74575e-08, 1, 2.50171e-08, -6.29078e-08, 8.6782e-08, 1, 2.38419e-07, 7.45058e-09, 1.78814e-07)
+bone_idx = 44
+
+[node name="MiddleBackRightLeg_002" parent="Armature/Skeleton3D" index="21"]
+transform = Transform3D(1, 1.01037e-08, 9.66927e-08, 2.92863e-08, 1, 1.26342e-07, -1.54943e-07, -6.07549e-08, 1, 0, 2.98023e-08, -2.98023e-07)
+bone_idx = 48
+
+[node name="MiddleBackRightLeg_001" parent="Armature/Skeleton3D" index="22"]
+transform = Transform3D(1, -9.73824e-08, 9.06757e-08, 1.14427e-07, 1, 1.25628e-07, -1.0584e-07, -1.39339e-07, 1, 4.76837e-07, 3.72529e-08, -2.6077e-08)
+bone_idx = 49
+
+[node name="MiddleBackRightLeg_000" parent="Armature/Skeleton3D" index="23"]
+transform = Transform3D(1, -1.98453e-07, 5.19921e-08, 1.73547e-07, 1, 1.42586e-09, 1.22162e-08, -3.47966e-08, 1, -2.38419e-07, 2.23517e-08, -2.23517e-07)
+bone_idx = 50
+
+[node name="VeryBackRightLeg_002" parent="Armature/Skeleton3D" index="24"]
+transform = Transform3D(1, -1.05809e-07, -1.22475e-07, 1.05298e-07, 1, 1.14353e-08, -1.74658e-07, -3.51292e-11, 1, 0, -2.23517e-08, 7.15256e-07)
+bone_idx = 54
+
+[node name="VeryBackRightLeg_001" parent="Armature/Skeleton3D" index="25"]
+transform = Transform3D(1, -8.98095e-08, -1.18946e-07, 1.01597e-07, 1, 1.25192e-07, -1.98421e-07, -8.31802e-08, 1, 4.76837e-07, -2.98023e-08, -1.19209e-07)
+bone_idx = 55
+
+[node name="VeryBackRightLeg_000" parent="Armature/Skeleton3D" index="26"]
+transform = Transform3D(1, -1.79507e-07, -1.80967e-07, 2.00669e-07, 1, 1.21679e-07, -2.07307e-07, -9.82051e-08, 1, -2.98023e-07, -2.23517e-08, -1.19209e-07)
+bone_idx = 56
+
+[node name="PedipalpRight_001" parent="Armature/Skeleton3D" index="27"]
+transform = Transform3D(1, -2.54435e-08, -1.84376e-08, 1.28994e-08, 1, 1.39745e-07, -2.4803e-08, -1.17176e-07, 1, -1.19209e-07, -5.96046e-08, 1.19209e-07)
+bone_idx = 59
+
+[node name="PedipalpRight_000" parent="Armature/Skeleton3D" index="28"]
+transform = Transform3D(1, -3.69675e-09, -2.03332e-08, 9.56152e-09, 1, -1.26305e-07, -1.25291e-08, 1.26843e-07, 1, -5.96046e-08, -2.98023e-08, 1.19209e-07)
+bone_idx = 60
+
+[node name="FangRight" parent="Armature/Skeleton3D" index="29"]
+transform = Transform3D(1, -1.29329e-08, 4.96407e-08, 9.32687e-09, 1, -3.05223e-08, -4.48909e-08, 4.87643e-08, 1, -1.19209e-07, 1.49012e-08, 2.38419e-07)
+bone_idx = 62
+
+[node name="Cephalothorax_2" parent="Armature/Skeleton3D" index="30"]
+transform = Transform3D(1, 1.13687e-13, -1.43255e-16, -1.13687e-13, 1, 1.47434e-22, 1.43255e-16, -1.47434e-22, 1, -1.25775e-13, 0, 0)
+bone_idx = 63
+
+[node name="Abdomen_2" parent="Armature/Skeleton3D" index="31"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.34735e-13, 0, 0.00120807)
+bone_idx = 64
