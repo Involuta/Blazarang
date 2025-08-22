@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c0afijgiv302t"]
 
-[ext_resource type="PackedScene" uid="uid://c0va0ohayydf" path="res://glb_inherited_scenes/jumping_spider_meshes.tscn" id="1_bisfd"]
+[ext_resource type="PackedScene" uid="uid://bab1fjwggka3h" path="res://glb_inherited_scenes/jumping_spider_meshes.tscn" id="1_bisfd"]
 
 [node name="JumpingSpiderProcAnimMeshes" type="Node3D"]
 
