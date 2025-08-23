@@ -2,12 +2,12 @@ res://enemies/jumping_spider_proc_anim_meshes.tscn
 res://enemies/enemy_hurtbox.gd
 res://glb_inherited_scenes/outline.gdshader
 res://glb_inherited_scenes/black_outline.gdshader
+res://levels/x_boss_level/background_nodes/diamond.tres
 res://rang/roserang_shader.tres
 res://GPUTrail-main/shaders/trail.gdshader
 res://GPUTrail-main/shaders/trail_draw_pass.gdshader
 res://GPUTrail-main/defaults/texture.tres
 res://GPUTrail-main/defaults/curve.tres
-res://levels/x_boss_level/background_nodes/diamond.tres
 res://textures/x_arrow.tres
 res://textures/small_solid_white.tres
 res://textures/clear_tile.tres

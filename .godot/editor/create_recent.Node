@@ -1,3 +1,4 @@
+SkeletonIK3D
 MeshInstance3D
 Node3D
 CollisionShape3D
@@ -10,7 +11,6 @@ CharacterBody3D
 Camera3D
 RayCast3D
 Marker3D
-SkeletonIK3D
 RemoteTransform3D
 FuncGodotMap
 StaticBody3D
