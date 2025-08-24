@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://d4wywx3bv11n"]
 
-[ext_resource type="PackedScene" uid="uid://dcffjmoveconi" path="res://enemies/harvestman_proc_anim_meshes.tscn" id="1_gv0lu"]
+[ext_resource type="PackedScene" uid="uid://c0afijgiv302t" path="res://enemies/jumping_spider_proc_anim_meshes.tscn" id="1_j2mrg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tbmi2"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -54,5 +54,6 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_alqdx")
 
-[node name="HarvestmanProcAnimMeshes" parent="." instance=ExtResource("1_gv0lu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 20, 2.08165e-12)
+[node name="JumpingSpiderProcAnimMeshes" parent="." instance=ExtResource("1_j2mrg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.3231, 0)
+run_speed = 30.0

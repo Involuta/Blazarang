@@ -1,12 +1,31 @@
-[gd_scene load_steps=6 format=3 uid="uid://c0afijgiv302t"]
+[gd_scene load_steps=7 format=3 uid="uid://c0afijgiv302t"]
 
+[ext_resource type="Script" path="res://enemies/jumping_spider_proc_anim_meshes.gd" id="1_bd65n"]
 [ext_resource type="PackedScene" uid="uid://c5qmeumu4dc6e" path="res://glb_inherited_scenes/jumping_spider_meshes.tscn" id="1_bisfd"]
 [ext_resource type="Script" path="res://procedural_animation/start_ik.gd" id="2_6nwhs"]
 [ext_resource type="Script" path="res://procedural_animation/jumping_spider_ik_target.gd" id="3_uln3m"]
 [ext_resource type="Script" path="res://procedural_animation/step_target_container.gd" id="4_qvnj4"]
 [ext_resource type="Script" path="res://procedural_animation/step_ray.gd" id="5_hkvbl"]
 
-[node name="JumpingSpiderProcAnimMeshes" type="Node3D"]
+[node name="JumpingSpiderProcAnimMeshes" type="Node3D" node_paths=PackedStringArray("lvf_ik", "rmb_ik", "rvf_ik", "lmb_ik", "lmf_ik", "rvb_ik", "rmf_ik", "lvb_ik", "lvf_sk", "rmb_sk", "rvf_sk", "lmb_sk", "lmf_sk", "rvb_sk", "rmf_sk", "lvb_sk")]
+script = ExtResource("1_bd65n")
+run_speed = 15.0
+lvf_ik = NodePath("JumpingSpiderMeshes/Armature/VeryFrontLeftIKTarget")
+rmb_ik = NodePath("JumpingSpiderMeshes/Armature/MiddleBackRightIKTarget")
+rvf_ik = NodePath("JumpingSpiderMeshes/Armature/VeryFrontRightIKTarget")
+lmb_ik = NodePath("JumpingSpiderMeshes/Armature/MiddleBackLeftIKTarget")
+lmf_ik = NodePath("JumpingSpiderMeshes/Armature/MiddleFrontLeftIKTarget")
+rvb_ik = NodePath("JumpingSpiderMeshes/Armature/VeryBackRightIKTarget")
+rmf_ik = NodePath("JumpingSpiderMeshes/Armature/MiddleFrontRightIKTarget")
+lvb_ik = NodePath("JumpingSpiderMeshes/Armature/VeryBackLeftIKTarget")
+lvf_sk = NodePath("JumpingSpiderMeshes/Armature/Skeleton3D/VeryFrontLeftLeg")
+rmb_sk = NodePath("JumpingSpiderMeshes/Armature/Skeleton3D/MiddleBackRightLeg")
+rvf_sk = NodePath("JumpingSpiderMeshes/Armature/Skeleton3D/VeryFrontRightLeg")
+lmb_sk = NodePath("JumpingSpiderMeshes/Armature/Skeleton3D/MiddleBackLeftLeg")
+lmf_sk = NodePath("JumpingSpiderMeshes/Armature/Skeleton3D/MiddleFrontLeftLeg")
+rvb_sk = NodePath("JumpingSpiderMeshes/Armature/Skeleton3D/VeryBackRightLeg")
+rmf_sk = NodePath("JumpingSpiderMeshes/Armature/Skeleton3D/MiddleFrontRightLeg")
+lvb_sk = NodePath("JumpingSpiderMeshes/Armature/Skeleton3D/VeryBackLeftLeg")
 
 [node name="JumpingSpiderMeshes" parent="." instance=ExtResource("1_bisfd")]
 
@@ -174,65 +193,73 @@ script = ExtResource("2_6nwhs")
 top_level = true
 script = ExtResource("3_uln3m")
 step_target = NodePath("../StepTargetContainer/VeryBackLeftRay/VeryBackLeftStepTarget")
-step_distance = 2.0
+step_distance = 3.0
 adjacent_ik_target = NodePath("../VeryBackRightIKTarget")
 opposite_ik_target = NodePath("../MiddleFrontRightIKTarget")
+checking_opposite = false
 
 [node name="MiddleBackLeftIKTarget" type="Marker3D" parent="JumpingSpiderMeshes/Armature" index="2" node_paths=PackedStringArray("step_target", "adjacent_ik_target", "opposite_ik_target")]
 top_level = true
 script = ExtResource("3_uln3m")
 step_target = NodePath("../StepTargetContainer/MiddleBackLeftRay/MiddleBackLeftStepTarget")
-step_distance = 2.0
+step_distance = 3.0
 adjacent_ik_target = NodePath("../MiddleBackRightIKTarget")
 opposite_ik_target = NodePath("../VeryFrontLeftIKTarget")
+checking_opposite = false
 
 [node name="MiddleFrontLeftIKTarget" type="Marker3D" parent="JumpingSpiderMeshes/Armature" index="3" node_paths=PackedStringArray("step_target", "adjacent_ik_target", "opposite_ik_target")]
 top_level = true
 script = ExtResource("3_uln3m")
 step_target = NodePath("../StepTargetContainer/MiddleFrontLeftRay/MiddleFrontLeftStepTarget")
-step_distance = 2.0
+step_distance = 3.0
 adjacent_ik_target = NodePath("../MiddleFrontRightIKTarget")
 opposite_ik_target = NodePath("../VeryBackRightIKTarget")
+checking_opposite = false
 
 [node name="VeryFrontLeftIKTarget" type="Marker3D" parent="JumpingSpiderMeshes/Armature" index="4" node_paths=PackedStringArray("step_target", "adjacent_ik_target", "opposite_ik_target")]
 top_level = true
 script = ExtResource("3_uln3m")
 step_target = NodePath("../StepTargetContainer/VeryFrontLeftRay/VeryFrontLeftStepTarget")
-step_distance = 2.0
+step_distance = 3.0
 adjacent_ik_target = NodePath("../VeryFrontRightIKTarget")
 opposite_ik_target = NodePath("../MiddleBackRightIKTarget")
+checking_opposite = false
 
 [node name="VeryBackRightIKTarget" type="Marker3D" parent="JumpingSpiderMeshes/Armature" index="5" node_paths=PackedStringArray("step_target", "adjacent_ik_target", "opposite_ik_target")]
 top_level = true
 script = ExtResource("3_uln3m")
 step_target = NodePath("../StepTargetContainer/VeryBackRightRay/VeryBackRightStepTarget")
-step_distance = 2.0
+step_distance = 3.0
 adjacent_ik_target = NodePath("../VeryBackLeftIKTarget")
 opposite_ik_target = NodePath("../MiddleFrontLeftIKTarget")
+checking_opposite = false
 
 [node name="MiddleBackRightIKTarget" type="Marker3D" parent="JumpingSpiderMeshes/Armature" index="6" node_paths=PackedStringArray("step_target", "adjacent_ik_target", "opposite_ik_target")]
 top_level = true
 script = ExtResource("3_uln3m")
 step_target = NodePath("../StepTargetContainer/MiddleBackRightRay/MiddleBackRightStepTarget")
-step_distance = 2.0
+step_distance = 3.0
 adjacent_ik_target = NodePath("../MiddleBackLeftIKTarget")
 opposite_ik_target = NodePath("../VeryFrontLeftIKTarget")
+checking_opposite = false
 
 [node name="MiddleFrontRightIKTarget" type="Marker3D" parent="JumpingSpiderMeshes/Armature" index="7" node_paths=PackedStringArray("step_target", "adjacent_ik_target", "opposite_ik_target")]
 top_level = true
 script = ExtResource("3_uln3m")
 step_target = NodePath("../StepTargetContainer/MiddleFrontRightRay/MiddleFrontRightStepTarget")
-step_distance = 2.0
+step_distance = 3.0
 adjacent_ik_target = NodePath("../MiddleFrontLeftIKTarget")
 opposite_ik_target = NodePath("../VeryBackLeftIKTarget")
+checking_opposite = false
 
 [node name="VeryFrontRightIKTarget" type="Marker3D" parent="JumpingSpiderMeshes/Armature" index="8" node_paths=PackedStringArray("step_target", "adjacent_ik_target", "opposite_ik_target")]
 top_level = true
 script = ExtResource("3_uln3m")
 step_target = NodePath("../StepTargetContainer/VeryFrontRightRay/VeryFrontRightStepTarget")
-step_distance = 2.0
+step_distance = 3.0
 adjacent_ik_target = NodePath("../VeryFrontLeftIKTarget")
 opposite_ik_target = NodePath("../MiddleBackLeftIKTarget")
+checking_opposite = false
 
 [node name="StepTargetContainer" type="Node3D" parent="JumpingSpiderMeshes/Armature" index="9"]
 script = ExtResource("4_qvnj4")
@@ -324,5 +351,8 @@ step_target = NodePath("VeryFrontRightStepTarget")
 [node name="VeryFrontRightStepTarget" type="Marker3D" parent="JumpingSpiderMeshes/Armature/StepTargetContainer/VeryFrontRightRay"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -1.5, 3.5)
 top_level = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, -3.5558e-08, 7.98647e-08, 3.18633e-16, 0.913545, 0.406737, -8.74228e-08, 0.406737, -0.913545, 2.08165e-12, 7, -10)
 
 [editable path="JumpingSpiderMeshes"]

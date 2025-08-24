@@ -1,3 +1,4 @@
+Camera3D
 Marker3D
 RayCast3D
 Node3D
@@ -10,7 +11,6 @@ AnimationTree
 NavigationAgent3D
 Hurtbox
 CharacterBody3D
-Camera3D
 RemoteTransform3D
 FuncGodotMap
 StaticBody3D

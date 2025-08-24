@@ -37,6 +37,6 @@ func step():
 	is_stepping = true
 	
 	var step_tween = get_tree().create_tween()
-	step_tween.tween_property(self, "global_position", half_way + owner.basis.y, .02)
-	step_tween.tween_property(self, "global_position", target_pos, .02)
+	step_tween.tween_property(self, "global_position", half_way + owner.basis.y, .0167)
+	step_tween.tween_property(self, "global_position", target_pos, .0167)
 	step_tween.tween_callback(func(): is_stepping = false)

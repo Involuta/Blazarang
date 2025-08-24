@@ -25,3 +25,5 @@ res://enemies/harvestman_proc_anim_meshes.tscn
 res://enemies/landmite.tscn
 res://procedural_animation/jumping_spider_ik_target.gd
 res://enemies/paramite_proc_anim_meshes.tscn
+res://enemies/jumping_spider_proc_anim_meshes.gd
+res://levels/test_level.tscn
