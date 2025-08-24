@@ -263,6 +263,7 @@ checking_opposite = false
 
 [node name="StepTargetContainer" type="Node3D" parent="JumpingSpiderMeshes/Armature" index="9"]
 script = ExtResource("4_qvnj4")
+offset = 5.0
 
 [node name="VeryBackLeftRay" type="RayCast3D" parent="JumpingSpiderMeshes/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
 transform = Transform3D(0.999391, -0.0348995, 3.48574e-16, 0.0348782, 0.998782, -0.0348995, 0.00121797, 0.0348782, 0.999391, 3, 2.08165e-12, -3)
@@ -353,6 +354,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -1.5, 3.5)
 top_level = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, -3.5558e-08, 7.98647e-08, 3.18633e-16, 0.913545, 0.406737, -8.74228e-08, 0.406737, -0.913545, 2.08165e-12, 7, -10)
+transform = Transform3D(1, -4.90651e-16, 3.18633e-16, 3.18633e-16, 0.913545, 0.406737, -4.90651e-16, -0.406737, 0.913545, 2.08165e-12, 7, 10)
 
 [editable path="JumpingSpiderMeshes"]
