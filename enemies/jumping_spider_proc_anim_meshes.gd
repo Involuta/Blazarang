@@ -67,7 +67,7 @@ func _process(delta):
 	position = lerp(position, position + transform.basis.y * dist_to_target_pos, run_speed * delta)
 	
 	# Uncomment this line to move spider using player controls
-	_movement(delta)
+	#_movement(delta)
 
 func _movement(delta):
 	var move_dir = Input.get_vector("WalkLeft", "WalkRight", "WalkForward", "WalkBackward")

@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://bwprkfc4thy5d"]
+
+[ext_resource type="Script" path="res://enemies/jumping_spider.gd" id="1_aa0qj"]
+[ext_resource type="PackedScene" uid="uid://c0afijgiv302t" path="res://enemies/jumping_spider_proc_anim_meshes.tscn" id="1_kjfxt"]
+[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_jd3t8"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_y5yyh"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ftxja"]
+radius = 0.3
+
+[node name="JumpingSpider" type="CharacterBody3D"]
+collision_layer = 64
+collision_mask = 90
+script = ExtResource("1_aa0qj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.324916, 0)
+shape = SubResource("SphereShape3D_y5yyh")
+
+[node name="JumpingSpiderProcAnimMeshes" parent="." instance=ExtResource("1_kjfxt")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.08165e-12, 2.08165e-12, -0.25)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="EnemyHurtbox" type="Area3D" parent="."]
+script = ExtResource("2_jd3t8")
+enemy_name = "JumpingSpider"
+opponent_hitboxes = ["PlayerHitbox"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHurtbox"]
+shape = SubResource("SphereShape3D_y5yyh")
+
+[node name="MeleeHitboxPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.576767)
+
+[node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
+collision_layer = 8
+collision_mask = 18
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeleeHitboxPivot/EnemyHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.18323)
+shape = SubResource("SphereShape3D_ftxja")
