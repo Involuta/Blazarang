@@ -1,10 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://bwprkfc4thy5d"]
+[gd_scene load_steps=8 format=3 uid="uid://bwprkfc4thy5d"]
 
 [ext_resource type="Script" path="res://enemies/jumping_spider.gd" id="1_aa0qj"]
 [ext_resource type="PackedScene" uid="uid://c0afijgiv302t" path="res://enemies/jumping_spider_proc_anim_meshes.tscn" id="1_kjfxt"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_jd3t8"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_y5yyh"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_p50wc"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_a1rff"]
+graph_offset = Vector2(-32.64, 53.76)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_p50wc")
+nodes/StateMachine/position = Vector2(120, 150)
+node_connections = [&"output", 0, &"StateMachine"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ftxja"]
 radius = 0.3
@@ -58,7 +66,7 @@ transform = Transform3D(0.118698, 0.518721, 0.846664, 0.774539, -0.58191, 0.2479
 transform = Transform3D(0.77581, -0.548132, 0.31252, 0.552885, 0.351896, -0.755306, 0.304033, 0.758762, 0.576059, 0.465114, -0.937349, -0.632378)
 
 [node name="VeryFrontRightLeg_002" parent="JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/Armature/Skeleton3D" index="15"]
-transform = Transform3D(0.532193, -0.352558, 0.769722, 0.705791, -0.317366, -0.633354, 0.467578, 0.88033, 0.0799319, -1.71225, 5.20329, 1.57651)
+transform = Transform3D(0.532193, -0.352558, 0.769722, 0.705791, -0.317366, -0.633354, 0.467578, 0.88033, 0.0799318, -1.71225, 5.20329, 1.57651)
 
 [node name="VeryFrontRightLeg_001" parent="JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/Armature/Skeleton3D" index="16"]
 transform = Transform3D(-0.157194, -0.587282, 0.793971, -0.959882, -0.0981699, -0.262656, 0.232197, -0.803407, -0.54829, -3.44738, -0.109813, 3.26965)
@@ -94,6 +102,8 @@ transform = Transform3D(0.118698, -0.518721, -0.846664, -0.774539, -0.58191, 0.2
 transform = Transform3D(0.77581, 0.548133, -0.31252, -0.552885, 0.351896, -0.755306, -0.304033, 0.758762, 0.576059, -0.465114, -0.937349, -0.632378)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_a1rff")
+anim_player = NodePath("../JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/AnimationPlayer")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
