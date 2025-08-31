@@ -26,3 +26,6 @@ res://enemies/jumping_spider.tscn
 res://globals.gd
 res://enemies/jumping_spider.gd
 res://levels/test_level.tscn
+res://enemies/paramite.gd
+res://enemies/paramite.tscn
+res://enemies/paramite_proc_anim_meshes.tscn
