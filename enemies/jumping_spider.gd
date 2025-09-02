@@ -23,6 +23,8 @@ enum {
 }
 var behav_state := WALK
 
+var target_fov_angle := PI/4 # Max angle btwn target's body's fwd dir and dir from target to spider necessary for spider to be considered in target's FOV
+
 var walk_dest := Vector3.ZERO
 var walk_turn_speed := .5
 var walk_speed := 30.0
@@ -32,8 +34,13 @@ var aim_turning_start_vec_angle := PI/4 # Min y-axis angle btwn spider's fwd vec
 var aim_turning := false # Activated when vec angle > start_vec_angle, deactivated when vec angle < stop_vec_angle
 var aim_turning_stop_vec_angle := .05 # Max vec angle necessary to stop aim turning
 var aim_duration := 1.0 # Set to a random number btwn min and max aim duration
-var aim_min_duration := 2.5
-var aim_max_duration := 5.0
+var aim_min_duration := 2.0
+var aim_max_duration := 4.0
+
+var ready_turn_speed := .25
+var ready_duration := 1.0 # Set to a random number btwn min and max aim duration
+var ready_min_duration := 2.5
+var ready_max_duration := 5.0
 
 func _ready():
 	level = root.find_child("Level")
@@ -75,6 +82,18 @@ func rotate_y_to_vec(to_vec, turn_speed):
 	var rotation_amt = body_mesh_basis_z_2d.angle_to(to_vec_2d)
 	body_meshes.rotate_object_local(Vector3.UP, -rotation_amt * turn_speed)
 
+# Get abs of angle btwn two 3D vecs that extend from the same point
+func angle_btwn_3d_vecs(v1, v2) -> float:
+	var v1_2D := Vector2(v1.x, v1.z)
+	var v2_2D := Vector2(v2.x, v2.z)
+	return abs(v1_2D.angle_to(v2_2D))
+
+# Check whether a global position is within target's field of view (FOV)
+func point_in_target_fov(pt: Vector3) -> bool:
+	var target_to_pt_dir := target.global_position.direction_to(pt)
+	var target_fwd_dir := -target.transform.basis.z
+	return angle_btwn_3d_vecs(target_to_pt_dir, target_fwd_dir) < target_fov_angle
+
 func _on_navigation_agent_3d_target_reached():
 	pass
 
@@ -88,7 +107,10 @@ func switch_to_walk():
 	body_meshes.start_ik()
 	behav_state = WALK
 	# Set walk dest
-	walk_dest = target.global_position # TEST CODE
+	"""
+	THE BELOW CODE IS TEST CODE. CHANGE IT
+	"""
+	walk_dest = target.global_position
 
 func walk_frame(delta):
 	rotate_y_to_vec(walk_dest - global_position, walk_turn_speed)
@@ -110,25 +132,31 @@ func aim_frame(delta):
 	velocity = Vector3.ZERO
 	#  If y-axis angle btwn spider's forward dir and the dir from spider to target ("vec angle") is too high, turn towards target
 	var body_fwd_dir := -transform.basis.z
-	var body_fwd_dir2D := Vector2(body_fwd_dir.x, body_fwd_dir.z)
 	var dir_to_target := global_position.direction_to(target.global_position)
-	var dir_to_target2D := Vector2(dir_to_target.x, dir_to_target.z)
+	var angle_btwn_vecs := angle_btwn_3d_vecs(body_fwd_dir, dir_to_target)
 	# Start turning when vec angle is above start_vec_angle
-	if not aim_turning and abs(body_fwd_dir2D.angle_to(dir_to_target2D)) > aim_turning_start_vec_angle:
+	if not aim_turning and angle_btwn_vecs > aim_turning_start_vec_angle:
 		aim_turning = true
 	if aim_turning:
 		rotate_y_to_vec(target.global_position - global_position, aim_turn_speed)
 		# Stop turning when vec angle is below stop_vec_angle
-		if abs(body_fwd_dir2D.angle_to(dir_to_target2D)) < aim_turning_stop_vec_angle:
+		if angle_btwn_vecs < aim_turning_stop_vec_angle:
 			aim_turning = false
 	
 	aim_duration -= delta
+	if aim_duration <= 0:
+		switch_to_ready()
 
 func switch_to_ready():
 	behav_state = READY
+	ready_duration = rng.randf_range(ready_min_duration, ready_max_duration)
 
 func ready_frame(delta):
-	pass
+	velocity = Vector3.ZERO
+	rotate_y_to_vec(target.global_position - global_position, ready_turn_speed)
+	ready_duration -= delta
+	if ready_duration <= 0:
+		switch_to_ready()
 
 func switch_to_attack():
 	behav_state = ATTACK

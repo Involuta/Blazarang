@@ -48,10 +48,10 @@ transform = Transform3D(-0.935997, -0.35102, -0.0263464, 0.148892, -0.462619, 0.
 transform = Transform3D(0.35366, -0.932673, -0.0710346, 0.934375, 0.348753, 0.0729028, -0.0432209, -0.0921557, 0.994806, 0.938009, -1.13174, 0.0660663)
 
 [node name="MiddleBackLeftLeg_002" parent="JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(-0.331604, 0.935268, 0.123747, -0.88951, -0.353659, 0.289306, 0.314342, -0.0141388, 0.949204, 1.61038, 4.5847, -0.581249)
+transform = Transform3D(-0.331604, 0.935268, 0.123747, -0.88951, -0.353659, 0.289306, 0.314342, -0.0141389, 0.949204, 1.61038, 4.5847, -0.581249)
 
 [node name="MiddleBackLeftLeg_001" parent="JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/Armature/Skeleton3D" index="7"]
-transform = Transform3D(-0.930291, -0.347053, 0.1188, 0.0605295, -0.464657, -0.883419, 0.361794, -0.814646, 0.453273, 3.8207, 0.991309, -0.792552)
+transform = Transform3D(-0.930291, -0.347053, 0.1188, 0.0605295, -0.464657, -0.88342, 0.361794, -0.814646, 0.453273, 3.8207, 0.991309, -0.792552)
 
 [node name="MiddleBackLeftLeg_000" parent="JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/Armature/Skeleton3D" index="8"]
 transform = Transform3D(0.444475, -0.874662, 0.193413, 0.895707, 0.436916, -0.0825426, -0.0123082, 0.209929, 0.977639, 0.710284, -0.978103, -0.00368425)
@@ -66,7 +66,7 @@ transform = Transform3D(0.118698, 0.518721, 0.846664, 0.774539, -0.58191, 0.2479
 transform = Transform3D(0.77581, -0.548132, 0.31252, 0.552885, 0.351896, -0.755306, 0.304033, 0.758762, 0.576059, 0.465114, -0.937349, -0.632378)
 
 [node name="VeryFrontRightLeg_002" parent="JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/Armature/Skeleton3D" index="15"]
-transform = Transform3D(0.532193, -0.352558, 0.769722, 0.705791, -0.317366, -0.633354, 0.467578, 0.88033, 0.0799318, -1.71225, 5.20329, 1.57651)
+transform = Transform3D(0.532193, -0.352558, 0.769722, 0.705791, -0.317366, -0.633354, 0.467578, 0.88033, 0.0799319, -1.71225, 5.20329, 1.57651)
 
 [node name="VeryFrontRightLeg_001" parent="JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/Armature/Skeleton3D" index="16"]
 transform = Transform3D(-0.157194, -0.587282, 0.793971, -0.959882, -0.0981699, -0.262656, 0.232197, -0.803407, -0.54829, -3.44738, -0.109813, 3.26965)
