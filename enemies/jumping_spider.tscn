@@ -115,8 +115,11 @@ anim_player = NodePath("../JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/Anima
 advance_expression_base_node = NodePath("..")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+target_desired_distance = 10.0
 avoidance_enabled = true
 max_speed = 30.0
+avoidance_layers = 0
+avoidance_mask = 0
 
 [node name="EnemyHurtbox" type="Area3D" parent="."]
 script = ExtResource("2_jd3t8")
@@ -137,7 +140,7 @@ collision_mask = 18
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.18323)
 shape = SubResource("SphereShape3D_ftxja")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="WalkDestMesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_ouqyl")
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]

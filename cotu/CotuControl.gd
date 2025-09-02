@@ -486,3 +486,7 @@ func shoot_arc_projectile():
 	arc_inst.global_position = global_position
 	arc_inst.velocity = arc_slash_projectile_speed * armature.transform.basis.z
 	arc_inst.rotation.y = PI + armature.rotation.y
+
+# Used by jumping spider to get Cotu's fwd facing direction
+func get_fwd_dir():
+	return armature.transform.basis.z

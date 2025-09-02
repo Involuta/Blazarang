@@ -12,6 +12,7 @@ var rng := RandomNumberGenerator.new()
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var level : Node3D
 var hitbox : Node3D
+var walk_dest_mesh : Node3D
 var target : Node3D
 enum {
 	CURIOUS,
@@ -53,6 +54,8 @@ func _ready():
 	# Jumping spider targets Cotu's body, not icon
 	target = root.find_child("cotuCB")
 	hitbox = find_child("MeleeHitboxPivot")
+	# Walk dest mesh may or may not exist
+	walk_dest_mesh = root.find_child("WalkDestMesh")
 	#hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	anim_tree.active = true
 	
@@ -89,7 +92,8 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	
-	$MeshInstance3D.global_position = walk_dest
+	if walk_dest_mesh:
+		walk_dest_mesh.global_position = walk_dest
 	move_and_slide()
 
 # Equivalent of lerp_look_at_move_dir or lerp_look_at_target in other enemies. This func is necessary for mites bc the mesh itself needs to rotate independently of the parent
@@ -110,7 +114,7 @@ func angle_btwn_3d_vecs(v1, v2) -> float:
 # Check whether a global position is within target's field of view (FOV)
 func point_in_target_fov(pt: Vector3) -> bool:
 	var target_to_pt_dir := target.global_position.direction_to(pt)
-	var target_fwd_dir := target.transform.basis.z
+	var target_fwd_dir = target.get_fwd_dir()
 	return angle_btwn_3d_vecs(target_to_pt_dir, target_fwd_dir) < target_fov_angle
 
 func _on_navigation_agent_3d_target_reached():
@@ -129,9 +133,9 @@ func choose_walk_dest():
 	If it's a valid pt, choose it. If not, increase the size of the area, get another random pt, and fire another ray. Repeat until the pt is valid
 	Failsafe: set walk_dest to global pos
 	"""
-	var target_face_dir := target.transform.basis.z
-	var walk_dest_center := target.global_position - walk_dest_dist_from_target * target_face_dir
-	var walk_dest_candidate := walk_dest_center
+	var target_face_dir = target.get_fwd_dir()
+	var walk_dest_center = target.global_position - walk_dest_dist_from_target * target_face_dir
+	var walk_dest_candidate = walk_dest_center
 	var temp_walk_dest_radius := walk_dest_radius
 	var result = false
 	var attempts := 10
