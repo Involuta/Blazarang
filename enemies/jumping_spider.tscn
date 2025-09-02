@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bwprkfc4thy5d"]
+[gd_scene load_steps=10 format=3 uid="uid://bwprkfc4thy5d"]
 
 [ext_resource type="Script" path="res://enemies/jumping_spider.gd" id="1_aa0qj"]
 [ext_resource type="PackedScene" uid="uid://c0afijgiv302t" path="res://enemies/jumping_spider_proc_anim_meshes.tscn" id="1_kjfxt"]
@@ -17,11 +17,18 @@ node_connections = [&"output", 0, &"StateMachine"]
 [sub_resource type="SphereShape3D" id="SphereShape3D_ftxja"]
 radius = 0.3
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qyu5s"]
+shading_mode = 0
+
+[sub_resource type="SphereMesh" id="SphereMesh_ouqyl"]
+material = SubResource("StandardMaterial3D_qyu5s")
+radius = 1.0
+
 [node name="JumpingSpider" type="CharacterBody3D"]
 collision_layer = 64
 collision_mask = 90
 script = ExtResource("1_aa0qj")
-aim_max_duration = 4000.0
+walk_speed = 30.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.324916, 0)
@@ -49,7 +56,7 @@ transform = Transform3D(-0.915141, -0.328759, 0.232686, 0.112118, 0.346863, 0.93
 transform = Transform3D(0.299573, -0.942909, -0.145526, 0.953804, 0.299605, 0.0222214, 0.0226476, -0.14546, 0.989105, 1.0657, -1.10908, -0.00412232)
 
 [node name="MiddleBackLeftLeg_002" parent="JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(-0.322251, 0.920669, 0.220279, -0.92086, -0.358815, 0.152541, 0.219479, -0.153689, 0.963436, 1.61379, 4.67234, -0.340432)
+transform = Transform3D(-0.322251, 0.920669, 0.220279, -0.920859, -0.358815, 0.152541, 0.219479, -0.153689, 0.963436, 1.61379, 4.67234, -0.340432)
 
 [node name="MiddleBackLeftLeg_001" parent="JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/Armature/Skeleton3D" index="7"]
 transform = Transform3D(-0.922473, -0.125154, 0.365214, 0.316433, -0.787051, 0.529548, 0.221167, 0.604059, 0.765636, 3.84395, 0.505515, -0.472426)
@@ -109,7 +116,7 @@ advance_expression_base_node = NodePath("..")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 avoidance_enabled = true
-max_speed = 50.0
+max_speed = 30.0
 
 [node name="EnemyHurtbox" type="Area3D" parent="."]
 script = ExtResource("2_jd3t8")
@@ -129,6 +136,9 @@ collision_mask = 18
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeleeHitboxPivot/EnemyHitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.18323)
 shape = SubResource("SphereShape3D_ftxja")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_ouqyl")
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

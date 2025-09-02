@@ -14,7 +14,7 @@ var recovery_active := false # This really means "Cotu is trying to recover". If
 
 var damage_indicator_value := 100.0
 
-var destab_invin_time := 2.0
+var destab_invin_time := 1.0
 
 # When Cotu gets grabbed, his position is set to the hitbox's parent
 @export var opponent_grab_hitboxes := []

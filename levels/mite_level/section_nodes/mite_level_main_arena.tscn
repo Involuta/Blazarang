@@ -207,3 +207,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2, 2.176)
 
 [node name="JumpingSpider" parent="." instance=ExtResource("9_08e57")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.86168, 21.3442)
+target_fov_angle = 0.785398
+walk_dest_dist_from_target = 30.0
+walk_dest_radius = 10.0
+walk_turn_speed = 0.5
+walk_speed = 50.0
+aim_turn_speed = 0.25
+aim_turning_stop_vec_angle = 0.05
+aim_min_duration = 2.0
+ready_turn_speed = 0.25
+ready_min_duration = 2.5
+ready_max_duration = 5.0
+retreat_min_dist = 30.0

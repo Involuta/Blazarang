@@ -32,7 +32,9 @@ var walk_dest := Vector3.ZERO
 @export var walk_speed := 50.0
 
 @export var aim_turn_speed := .25
-@export var aim_turning_start_vec_angle := PI/4 # Min y-axis angle btwn spider's fwd vec and vec from spider to target ("vec angle") necessary to start aim turning
+@export var aim_turning_start_vec_angle_max := PI/3.5
+@export var aim_turning_start_vec_angle_min := PI/9
+var aim_turning_start_vec_angle := PI/4 # Min y-axis angle btwn spider's fwd vec and vec from spider to target ("vec angle") necessary to start aim turning. Set to a random value btwn its max and min every turn
 var aim_turning := false # Activated when vec angle > start_vec_angle, deactivated when vec angle < stop_vec_angle
 @export var aim_turning_stop_vec_angle := .05 # Max vec angle necessary to stop aim turning
 var aim_duration := 1.0 # Set to a random number btwn min and max aim duration
@@ -87,6 +89,7 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	
+	$MeshInstance3D.global_position = walk_dest
 	move_and_slide()
 
 # Equivalent of lerp_look_at_move_dir or lerp_look_at_target in other enemies. This func is necessary for mites bc the mesh itself needs to rotate independently of the parent
@@ -124,13 +127,16 @@ func choose_walk_dest():
 	Get a flat circle (or square) around this point w radius walk_dest_radius.
 	Get a random pt inside this area, then fire a ray from high above onto the pt.
 	If it's a valid pt, choose it. If not, increase the size of the area, get another random pt, and fire another ray. Repeat until the pt is valid
+	Failsafe: set walk_dest to global pos
 	"""
 	var target_face_dir := target.transform.basis.z
 	var walk_dest_center := target.global_position - walk_dest_dist_from_target * target_face_dir
 	var walk_dest_candidate := walk_dest_center
 	var temp_walk_dest_radius := walk_dest_radius
 	var result = false
-	while not result:
+	var attempts := 10
+	while not result or attempts > 0:
+		attempts -= 1
 		walk_dest_candidate.x = walk_dest_center.x + rng.randf_range(-temp_walk_dest_radius, temp_walk_dest_radius)
 		walk_dest_candidate.z = walk_dest_center.z + rng.randf_range(-temp_walk_dest_radius, temp_walk_dest_radius)
 		var space_state := get_world_3d().direct_space_state
@@ -139,15 +145,19 @@ func choose_walk_dest():
 		result = space_state.intersect_ray(query)
 		if result:
 			walk_dest = result.position
+			return
 		else:
 			# Increase temp_walk_dest_radius by 10% if ray result isn't valid
 			temp_walk_dest_radius += walk_dest_radius * .1
+	# Failsafe: set walk_dest to current position
+	walk_dest = global_position
 
 func switch_to_walk():
 	# Stop IK since you're leaving the ground
 	body_meshes.start_ik()
 	behav_state = WALK
 	# Set walk dest
+	print("switched to walk")
 	choose_walk_dest()
 
 func walk_frame(delta):
@@ -174,6 +184,7 @@ func aim_frame(delta):
 	var angle_btwn_vecs := angle_btwn_3d_vecs(body_fwd_dir, dir_to_target)
 	# Start turning when vec angle is above start_vec_angle
 	if not aim_turning and angle_btwn_vecs > aim_turning_start_vec_angle:
+		aim_turning_start_vec_angle = rng.randf_range(aim_turning_start_vec_angle_min, aim_turning_start_vec_angle_max)
 		aim_turning = true
 	if aim_turning:
 		rotate_y_to_vec(target.global_position - global_position, aim_turn_speed)
@@ -194,7 +205,7 @@ func ready_frame(delta):
 	rotate_y_to_vec(target.global_position - global_position, ready_turn_speed)
 	ready_duration -= delta
 	if ready_duration <= 0:
-		switch_to_ready()
+		switch_to_attack()
 
 func switch_to_attack():
 	behav_state = ATTACK
@@ -212,9 +223,10 @@ func choose_retreat_dest():
 	Failsafe: if a valid point is not found, set walk_dest to global pos
 	"""
 	# Raycast downward until you get result
-	var retreat_vec := retreat_min_dist * target.global_position.direction_to(global_position)
+	var temp_retreat_min_dist := retreat_min_dist
 	var result = false
-	while not result or retreat_vec.length() > 0:
+	while not result and temp_retreat_min_dist > 0:
+		var retreat_vec := temp_retreat_min_dist * target.global_position.direction_to(global_position)
 		var retreat_pt_candidate := target.global_position + retreat_vec
 		var space_state := get_world_3d().direct_space_state
 		var query = PhysicsRayQueryParameters3D.create(retreat_pt_candidate + 100.0 * Vector3.UP, retreat_pt_candidate + 200.0 * Vector3.DOWN)
@@ -222,13 +234,15 @@ func choose_retreat_dest():
 		result = space_state.intersect_ray(query)
 		if result:
 			walk_dest = result.position
-		else:
-			# Reduce vec by 10% if ray result isn't valid
-			retreat_vec -= retreat_min_dist * .1 * retreat_vec.normalized()
+			return
+		# Reduce vec by 10% if ray result isn't valid
+		temp_retreat_min_dist -= retreat_min_dist * .1
+	# Failsafe: set walk_dest to current position
 	walk_dest = global_position
 
 func switch_to_retreat():
 	behav_state = RETREAT
+	print("switched to retreat")
 	choose_retreat_dest()
 
 func retreat_frame(delta):
