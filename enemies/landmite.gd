@@ -30,7 +30,8 @@ var ground_normal := Vector3.UP # Normal of the ground, determined by the avg no
 var can_leap := true
 @export var max_leap_cooldown := 3.0 # Max time after a leap ends before you can leap again
 @export var min_leap_cooldown := .25 # Min time after a leap ends before you can leap again
-var time_until_can_leap := 5.0 # Set to random(min_leap_cooldown, max_leap_cooldown) when reset
+var time_until_can_leap := 5.0 # Set to random(min_leap_cooldown, max_leap_cooldown) when reset. Sometimes not reset if a leap refresh randomly occurs
+@export var leap_refresh_chance := .25 # Random chance to not reset time_until_can_leap after mite can leap, allowing it to potentially jump multiple times in quick succession
 @export var roserang_leap_proximity := 30.0 # When the rang is this close or closer to the mite, the mite leaps
 @export var leap_y_proximity := 2.5 # When (abs of) difference in y pos btwn target and mite is within leap_y_proximity, leap is canceled
 @export var can_leap_window := 5.0 # Time you are able to leap on your own before a forced leap occurs
@@ -138,7 +139,9 @@ func follow(delta):
 	else:
 		time_until_can_leap -= delta
 		if time_until_can_leap <= 0:
-			time_until_can_leap = rng.randf_range(min_leap_cooldown, max_leap_cooldown)
+			# Random chance for mite be able to leap immediately after a leap
+			if rng.randf() > leap_refresh_chance:
+				time_until_can_leap = rng.randf_range(min_leap_cooldown, max_leap_cooldown)
 			can_leap = true
 
 func leap_frame():

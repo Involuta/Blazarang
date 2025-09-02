@@ -34,3 +34,5 @@ res://levels/mite_level/section_nodes/mite_level_main_arena.tscn
 res://cotu/cotu_cb_main.tscn
 res://cotu/CotuHurtbox.gd
 res://cotu/CotuControl.gd
+res://enemies/landmite.tscn
+res://enemies/landmite.gd
