@@ -23,24 +23,28 @@ enum {
 }
 var behav_state := WALK
 
-var target_fov_angle := PI/4 # Max angle btwn target's body's fwd dir and dir from target to spider necessary for spider to be considered in target's FOV
+@export var target_fov_angle := PI/4 # Max angle btwn target's body's fwd dir and dir from target to spider necessary for spider to be considered in target's FOV
 
 var walk_dest := Vector3.ZERO
-var walk_turn_speed := .5
-var walk_speed := 30.0
+@export var walk_dest_dist_from_target := 30.0 # Starting from the target, go walk_dest_dist_from_target opposite the dir the target is facing. Get a flat circle around this point w radius walk_dest_dist_from_target. Get a random pt inside this circle, then fire a ray from high above onto the pt. If it's a valid pt, choose it. If not, increase the size of the circle, get another random pt, and fire another ray. Repeat until the pt is valid
+@export var walk_dest_radius := 10.0
+@export var walk_turn_speed := .5
+@export var walk_speed := 50.0
 
-var aim_turn_speed := .25
-var aim_turning_start_vec_angle := PI/4 # Min y-axis angle btwn spider's fwd vec and vec from spider to target ("vec angle") necessary to start aim turning
+@export var aim_turn_speed := .25
+@export var aim_turning_start_vec_angle := PI/4 # Min y-axis angle btwn spider's fwd vec and vec from spider to target ("vec angle") necessary to start aim turning
 var aim_turning := false # Activated when vec angle > start_vec_angle, deactivated when vec angle < stop_vec_angle
-var aim_turning_stop_vec_angle := .05 # Max vec angle necessary to stop aim turning
+@export var aim_turning_stop_vec_angle := .05 # Max vec angle necessary to stop aim turning
 var aim_duration := 1.0 # Set to a random number btwn min and max aim duration
-var aim_min_duration := 2.0
-var aim_max_duration := 4.0
+@export var aim_min_duration := 2.0
+@export var aim_max_duration := 4.0
 
-var ready_turn_speed := .25
+@export var ready_turn_speed := .25
 var ready_duration := 1.0 # Set to a random number btwn min and max aim duration
-var ready_min_duration := 2.5
-var ready_max_duration := 5.0
+@export var ready_min_duration := 2.5
+@export var ready_max_duration := 5.0
+
+@export var retreat_min_dist := 30.0 # Min dist spider runs away from target when retreating
 
 func _ready():
 	level = root.find_child("Level")
@@ -56,6 +60,18 @@ func _ready():
 	switch_to_walk()
 
 func _physics_process(delta):
+	if Input.is_action_just_pressed("Special"):
+		match(behav_state):
+			WALK: 
+				print("walk")
+			AIM:
+				print("aim")
+			READY:
+				print("ready")
+			ATTACK:
+				print("attack")
+			RETREAT:
+				print("retreat")
 	match(behav_state):
 		WALK: 
 			walk_frame(delta)
@@ -91,7 +107,7 @@ func angle_btwn_3d_vecs(v1, v2) -> float:
 # Check whether a global position is within target's field of view (FOV)
 func point_in_target_fov(pt: Vector3) -> bool:
 	var target_to_pt_dir := target.global_position.direction_to(pt)
-	var target_fwd_dir := -target.transform.basis.z
+	var target_fwd_dir := target.transform.basis.z
 	return angle_btwn_3d_vecs(target_to_pt_dir, target_fwd_dir) < target_fov_angle
 
 func _on_navigation_agent_3d_target_reached():
@@ -102,15 +118,37 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 		velocity = velocity.move_toward(safe_velocity, .5)
 	move_and_slide()
 
+func choose_walk_dest():
+	"""
+	Starting from the target, go walk_dest_dist_from_target opposite the dir the target is facing.
+	Get a flat circle (or square) around this point w radius walk_dest_radius.
+	Get a random pt inside this area, then fire a ray from high above onto the pt.
+	If it's a valid pt, choose it. If not, increase the size of the area, get another random pt, and fire another ray. Repeat until the pt is valid
+	"""
+	var target_face_dir := target.transform.basis.z
+	var walk_dest_center := target.global_position - walk_dest_dist_from_target * target_face_dir
+	var walk_dest_candidate := walk_dest_center
+	var temp_walk_dest_radius := walk_dest_radius
+	var result = false
+	while not result:
+		walk_dest_candidate.x = walk_dest_center.x + rng.randf_range(-temp_walk_dest_radius, temp_walk_dest_radius)
+		walk_dest_candidate.z = walk_dest_center.z + rng.randf_range(-temp_walk_dest_radius, temp_walk_dest_radius)
+		var space_state := get_world_3d().direct_space_state
+		var query = PhysicsRayQueryParameters3D.create(walk_dest_candidate + 100.0 * Vector3.UP, walk_dest_candidate + 200.0 * Vector3.DOWN)
+		query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
+		result = space_state.intersect_ray(query)
+		if result:
+			walk_dest = result.position
+		else:
+			# Increase temp_walk_dest_radius by 10% if ray result isn't valid
+			temp_walk_dest_radius += walk_dest_radius * .1
+
 func switch_to_walk():
 	# Stop IK since you're leaving the ground
 	body_meshes.start_ik()
 	behav_state = WALK
 	# Set walk dest
-	"""
-	THE BELOW CODE IS TEST CODE. CHANGE IT
-	"""
-	walk_dest = target.global_position
+	choose_walk_dest()
 
 func walk_frame(delta):
 	rotate_y_to_vec(walk_dest - global_position, walk_turn_speed)
@@ -131,7 +169,7 @@ func switch_to_aim():
 func aim_frame(delta):
 	velocity = Vector3.ZERO
 	#  If y-axis angle btwn spider's forward dir and the dir from spider to target ("vec angle") is too high, turn towards target
-	var body_fwd_dir := -transform.basis.z
+	var body_fwd_dir = body_meshes.transform.basis.z
 	var dir_to_target := global_position.direction_to(target.global_position)
 	var angle_btwn_vecs := angle_btwn_3d_vecs(body_fwd_dir, dir_to_target)
 	# Start turning when vec angle is above start_vec_angle
@@ -160,12 +198,48 @@ func ready_frame(delta):
 
 func switch_to_attack():
 	behav_state = ATTACK
+	print("I just attacked!")
 
 func attack_frame(delta):
-	pass
+	switch_to_retreat()
+
+func choose_retreat_dest():
+	"""
+	Take the dir from target to spider, and starting from the target, go retreat_min_dist in that direction.
+	Fire a ray from high above this point straight down.
+	If it hits the arena, then set the walk dest to this.
+	If not, reduce the dist by 10% and check again. Repeat until a valid point is obtained
+	Failsafe: if a valid point is not found, set walk_dest to global pos
+	"""
+	# Raycast downward until you get result
+	var retreat_vec := retreat_min_dist * target.global_position.direction_to(global_position)
+	var result = false
+	while not result or retreat_vec.length() > 0:
+		var retreat_pt_candidate := target.global_position + retreat_vec
+		var space_state := get_world_3d().direct_space_state
+		var query = PhysicsRayQueryParameters3D.create(retreat_pt_candidate + 100.0 * Vector3.UP, retreat_pt_candidate + 200.0 * Vector3.DOWN)
+		query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
+		result = space_state.intersect_ray(query)
+		if result:
+			walk_dest = result.position
+		else:
+			# Reduce vec by 10% if ray result isn't valid
+			retreat_vec -= retreat_min_dist * .1 * retreat_vec.normalized()
+	walk_dest = global_position
 
 func switch_to_retreat():
 	behav_state = RETREAT
+	choose_retreat_dest()
 
 func retreat_frame(delta):
-	pass
+	rotate_y_to_vec(walk_dest - global_position, walk_turn_speed)
+	if global_position.distance_to(walk_dest) <= nav_agent.target_desired_distance:
+		switch_to_walk()
+	else:
+		nav_agent.set_target_position(walk_dest)
+	var next_position = nav_agent.get_next_path_position()
+	var new_velocity = (next_position - global_position).normalized() * walk_speed
+	
+	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
+	nav_agent.velocity = new_velocity
+

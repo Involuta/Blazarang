@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bknq8cqwurygt" path="res://enemies/landmite.tscn" id="5_a3mh6"]
 [ext_resource type="PackedScene" uid="uid://s18sdq53k2im" path="res://enemies/paramite.tscn" id="6_3d33o"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="7_cwqry"]
-[ext_resource type="PackedScene" uid="uid://dfc0tigy6k7el" path="res://enemies/flatmite.tscn" id="8_q0xmf"]
+[ext_resource type="PackedScene" uid="uid://bwprkfc4thy5d" path="res://enemies/jumping_spider.tscn" id="9_08e57"]
 [ext_resource type="PackedScene" uid="uid://j3nmxyjb1n5y" path="res://enemies/harvestman.tscn" id="9_l8j57"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_mcv4c"]
@@ -181,17 +181,8 @@ transform = Transform3D(1, 0, 3.48787e-16, 0, 1, 0, -3.48787e-16, 0, 1, 0, 2.029
 [node name="Landmite2" parent="." instance=ExtResource("5_a3mh6")]
 transform = Transform3D(1, 0, 3.48787e-16, 0, 1, 0, -3.48787e-16, 0, 1, 5.11211, 2.02984, 8.23371)
 
-[node name="Landmite3" parent="." instance=ExtResource("5_a3mh6")]
-transform = Transform3D(1, 0, 3.48787e-16, 0, 1, 0, -3.48787e-16, 0, 1, -9.41334, 2.02984, 8.23371)
-
-[node name="Landmite4" parent="." instance=ExtResource("5_a3mh6")]
-transform = Transform3D(1, 0, 3.48787e-16, 0, 1, 0, -3.48787e-16, 0, 1, -4.83437, 2.02984, 8.23371)
-
 [node name="Paramite" parent="." instance=ExtResource("6_3d33o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.446, 1.8, 2.08165e-12)
-
-[node name="Paramite2" parent="." instance=ExtResource("6_3d33o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.418, 1.8, -0.093)
 
 [node name="MiteCloudPivot" type="Node3D" parent="."]
 
@@ -211,11 +202,8 @@ amount = 12
 process_material = SubResource("ParticleProcessMaterial_nwdal")
 draw_pass_1 = SubResource("SphereMesh_qq31a")
 
-[node name="Flatmite" parent="." instance=ExtResource("8_q0xmf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2, -10)
-
 [node name="Harvestman" parent="." instance=ExtResource("9_l8j57")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2, 2.176)
 
-[node name="Harvestman2" parent="." instance=ExtResource("9_l8j57")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 3, 2.08165e-12)
+[node name="JumpingSpider" parent="." instance=ExtResource("9_08e57")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.86168, 21.3442)
