@@ -47,6 +47,11 @@ var ready_duration := 1.0 # Set to a random number btwn min and max aim duration
 @export var ready_min_duration := 2.5
 @export var ready_max_duration := 5.0
 
+@export var attack_duration := 1.0
+@export var attack_time_remaining := 1.0 # Decreases every frame, reset to attack_duration every attack
+@export var attack_jump_speed := 100.0
+var attack_jump_completed := false # Set to true when landing after jump, set to false at start of attack
+
 @export var retreat_min_dist := 30.0 # Min dist spider runs away from target when retreating
 
 func _ready():
@@ -161,7 +166,6 @@ func switch_to_walk():
 	body_meshes.start_ik()
 	behav_state = WALK
 	# Set walk dest
-	print("switched to walk")
 	choose_walk_dest()
 
 func walk_frame(delta):
@@ -213,10 +217,25 @@ func ready_frame(delta):
 
 func switch_to_attack():
 	behav_state = ATTACK
-	print("I just attacked!")
+	# Reset attack_time_remaining and attack_jump_completed
+	attack_time_remaining = attack_duration
+	attack_jump_completed = false
+	# Stop body meshes IK
+	body_meshes.stop_ik()
+	# Jump towards target
+	# Vel = distance / seconds
+	velocity = .9 * (target.global_position - global_position) / .25
 
 func attack_frame(delta):
-	switch_to_retreat()
+	# If spider landed, stop checking if spider landed, turn on body meshes IK, and set vel to 0
+	if not attack_jump_completed and global_position.distance_to(target.global_position) < nav_agent.target_desired_distance * .5:
+		attack_jump_completed = true
+		body_meshes.start_ik()
+		velocity = Vector3.ZERO
+	# Decrease attack time remaining. If it's <= 0, switch to retreat
+	attack_time_remaining -= delta
+	if attack_time_remaining <= 0:
+		switch_to_retreat()
 
 func choose_retreat_dest():
 	"""
@@ -246,7 +265,6 @@ func choose_retreat_dest():
 
 func switch_to_retreat():
 	behav_state = RETREAT
-	print("switched to retreat")
 	choose_retreat_dest()
 
 func retreat_frame(delta):

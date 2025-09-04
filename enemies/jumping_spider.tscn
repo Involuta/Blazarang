@@ -1,21 +1,53 @@
-[gd_scene load_steps=10 format=3 uid="uid://bwprkfc4thy5d"]
+[gd_scene load_steps=18 format=3 uid="uid://bwprkfc4thy5d"]
 
 [ext_resource type="Script" path="res://enemies/jumping_spider.gd" id="1_aa0qj"]
 [ext_resource type="PackedScene" uid="uid://c0afijgiv302t" path="res://enemies/jumping_spider_proc_anim_meshes.tscn" id="1_kjfxt"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_jd3t8"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="4_e6gx3"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_y5yyh"]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_etnvr"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ggu58"]
+animation = &"jump"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c442g"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ne8kp"]
+advance_mode = 2
+advance_expression = "behav_state == ATTACK"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lghxj"]
+xfade_time = 0.15
+advance_mode = 2
+advance_expression = "behav_state != ATTACK"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_p50wc"]
+states/idle/node = SubResource("AnimationNodeAnimation_etnvr")
+states/idle/position = Vector2(312.5, 101)
+states/jump/node = SubResource("AnimationNodeAnimation_ggu58")
+states/jump/position = Vector2(433.5, 100.5)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_c442g"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_ne8kp"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_lghxj")]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_a1rff"]
-graph_offset = Vector2(-32.64, 53.76)
+graph_offset = Vector2(-18.24, 126.72)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_p50wc")
 nodes/StateMachine/position = Vector2(120, 150)
 node_connections = [&"output", 0, &"StateMachine"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_ftxja"]
-radius = 0.3
+[sub_resource type="SphereShape3D" id="SphereShape3D_ey056"]
+radius = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bttgh"]
+shading_mode = 0
+
+[sub_resource type="SphereMesh" id="SphereMesh_4d7sf"]
+material = SubResource("StandardMaterial3D_bttgh")
+radius = 1.0
+height = 2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qyu5s"]
 shading_mode = 0
@@ -130,15 +162,20 @@ opponent_hitboxes = ["PlayerHitbox"]
 shape = SubResource("SphereShape3D_y5yyh")
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.576767)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 0.9)
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
 collision_layer = 8
 collision_mask = 18
+script = ExtResource("4_e6gx3")
+damage = 90
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeleeHitboxPivot/EnemyHitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.18323)
-shape = SubResource("SphereShape3D_ftxja")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+shape = SubResource("SphereShape3D_ey056")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeleeHitboxPivot"]
+mesh = SubResource("SphereMesh_4d7sf")
 
 [node name="WalkDestMesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_ouqyl")

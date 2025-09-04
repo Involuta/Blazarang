@@ -36,7 +36,6 @@ var time_until_can_leap := 5.0 # Set to random(min_leap_cooldown, max_leap_coold
 @export var leap_y_proximity := 2.5 # When (abs of) difference in y pos btwn target and mite is within leap_y_proximity, leap is canceled
 @export var can_leap_window := 5.0 # Time you are able to leap on your own before a forced leap occurs
 var time_until_forced_leap := 5.0 # Set to can_leap_window when reset
-@export var leap_secs := 1.0
 @export var leap_length_threshold := 12.0 # If mite is farther than this value from target, it'll do long leap; otherwise, short leap
 @export var leap_short_lateral_speed := 9.0
 @export var leap_long_lateral_speed := 18.0
