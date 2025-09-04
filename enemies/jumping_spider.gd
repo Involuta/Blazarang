@@ -47,9 +47,10 @@ var ready_duration := 1.0 # Set to a random number btwn min and max aim duration
 @export var ready_min_duration := 2.5
 @export var ready_max_duration := 5.0
 
-@export var attack_duration := 1.0
+@export var attack_total_duration := 1.0 # Duration of jump + endlag in secs
 @export var attack_time_remaining := 1.0 # Decreases every frame, reset to attack_duration every attack
-@export var attack_jump_speed := 100.0
+@export var attack_jump_duration := .25 # Duration of jump in secs
+@export var attack_stop_dist := 3.3 # Max dist from spider to target needed to stop jump mvmt
 var attack_jump_completed := false # Set to true when landing after jump, set to false at start of attack
 
 @export var retreat_min_dist := 30.0 # Min dist spider runs away from target when retreating
@@ -218,17 +219,17 @@ func ready_frame(delta):
 func switch_to_attack():
 	behav_state = ATTACK
 	# Reset attack_time_remaining and attack_jump_completed
-	attack_time_remaining = attack_duration
+	attack_time_remaining = attack_total_duration
 	attack_jump_completed = false
 	# Stop body meshes IK
 	body_meshes.stop_ik()
 	# Jump towards target
 	# Vel = distance / seconds
-	velocity = .9 * (target.global_position - global_position) / .25
+	velocity = .9 * (target.global_position - global_position) / attack_jump_duration
 
 func attack_frame(delta):
 	# If spider landed, stop checking if spider landed, turn on body meshes IK, and set vel to 0
-	if not attack_jump_completed and global_position.distance_to(target.global_position) < nav_agent.target_desired_distance * .5:
+	if not attack_jump_completed and global_position.distance_to(target.global_position) < attack_stop_dist:
 		attack_jump_completed = true
 		body_meshes.start_ik()
 		velocity = Vector3.ZERO
