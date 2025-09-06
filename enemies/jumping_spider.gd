@@ -11,7 +11,8 @@ var spitweb := preload("res://enemies/spitweb.tscn")
 var rng := RandomNumberGenerator.new()
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var level : Node3D
-var hitbox : Node3D
+var inner_hitbox : Node3D
+var outer_hitbox : Node3D
 var walk_dest_mesh : Node3D
 var target : Node3D
 enum {
@@ -43,9 +44,12 @@ var aim_duration := 1.0 # Set to a random number btwn min and max aim duration
 @export var aim_max_duration := 4.0
 
 @export var ready_turn_speed := .25
-var ready_duration := 1.0 # Set to a random number btwn min and max aim duration
 @export var ready_min_duration := 2.5
 @export var ready_max_duration := 5.0
+var ready_duration := 1.0 # Set to a random number btwn min and max ready duration when ready state starts
+var ready_triggered := false # Set to true when Cotu does an action that triggers the spider to initiate an attack
+@export var ready_max_trigger_duration := .25
+var ready_trigger_duration := .25 # Set to ready_max_trigger_duration when ready state begins. Only decreases when ready_triggered is true
 
 @export var attack_total_duration := 1.0 # Duration of jump + endlag in secs
 @export var attack_time_remaining := 1.0 # Decreases every frame, reset to attack_duration every attack
@@ -59,14 +63,19 @@ func _ready():
 	level = root.find_child("Level")
 	# Jumping spider targets Cotu's body, not icon
 	target = root.find_child("cotuCB")
-	hitbox = find_child("MeleeHitboxPivot")
+	inner_hitbox = find_child("InnerMeleeHitboxPivot")
+	outer_hitbox = find_child("OuterMeleeHitboxPivot")
 	# Walk dest mesh may or may not exist
 	walk_dest_mesh = root.find_child("WalkDestMesh")
-	#hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+	inner_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+	outer_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	anim_tree.active = true
 	
 	# Ensure that homing attacks hit the hurtbox and not the parent node, which stays on the ground. For any enemy whose hurtbox is at the same position as the parent node, this line can just be add_to_group("lockonables"), which makes the parent a lockonable
 	hurtbox.add_to_group("lockonables")
+	
+	Globals.cotu_dodge.connect(ready_action_trigger)
+	Globals.cotu_normal_throw_rose.connect(ready_action_trigger)
 	
 	switch_to_walk()
 
@@ -205,19 +214,31 @@ func aim_frame(delta):
 	if aim_duration <= 0:
 		switch_to_ready()
 
+func ready_action_trigger():
+	if behav_state == READY:
+		ready_triggered = true
+
 func switch_to_ready():
 	behav_state = READY
 	ready_duration = rng.randf_range(ready_min_duration, ready_max_duration)
+	ready_trigger_duration = ready_max_trigger_duration
 
 func ready_frame(delta):
 	velocity = Vector3.ZERO
 	rotate_y_to_vec(target.global_position - global_position, ready_turn_speed)
 	ready_duration -= delta
-	if ready_duration <= 0:
+	if ready_triggered:
+		ready_trigger_duration -= delta
+	if ready_duration <= 0.0 or ready_trigger_duration <= 0.0:
+		#print("Ready duration: ", ready_duration)
+		#print("Ready trigger duration: ", ready_trigger_duration)
+		ready_triggered = false
 		switch_to_attack()
 
 func switch_to_attack():
 	behav_state = ATTACK
+	inner_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
+	outer_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
 	# Reset attack_time_remaining and attack_jump_completed
 	attack_time_remaining = attack_total_duration
 	attack_jump_completed = false
@@ -225,7 +246,7 @@ func switch_to_attack():
 	body_meshes.stop_ik()
 	# Jump towards target
 	# Vel = distance / seconds
-	velocity = .9 * (target.global_position - global_position) / attack_jump_duration
+	velocity = .91 * (target.global_position - global_position) / attack_jump_duration
 
 func attack_frame(delta):
 	# If spider landed, stop checking if spider landed, turn on body meshes IK, and set vel to 0
@@ -236,6 +257,8 @@ func attack_frame(delta):
 	# Decrease attack time remaining. If it's <= 0, switch to retreat
 	attack_time_remaining -= delta
 	if attack_time_remaining <= 0:
+		inner_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+		outer_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 		switch_to_retreat()
 
 func choose_retreat_dest():

@@ -1,7 +1,7 @@
+Node3D
 MeshInstance3D
 CollisionShape3D
 Area3D
-Node3D
 EnemyHurtbox
 NavigationAgent3D
 AnimationTree

@@ -120,7 +120,7 @@ func _ready():
 	
 	Globals.destabilize.connect(on_destabilize)
 	Globals.stabilize.connect(on_stabilize)
-	# This line fixes a bug that happens when X destroys Cotu with his grab punish (XBossGrab is true, but since Cotu was destroyed, he can't be released from the grab; the grab release sets this bool to false). Then Cotu retries the fight. If X tries another DashGrab, he'll think he successfully grabbed Cotu even though he didn't bc XBossGrab is still true from last time
+	# This line fixes a bug that happens when X destroys Cotu with his grab punish (XBossGrab is true, but since Cotu was destroyed, he can't set XBossGrab to false; the grab release sets this bool to false). Then Cotu retries the fight. If X tries another DashGrab, he'll think he successfully grabbed Cotu even though he didn't bc XBossGrab is still true from last time
 	Globals.XBossGrab = false
 	
 	anim_tree.active = true
@@ -303,9 +303,10 @@ func _physics_process(delta):
 	# Roserang throw
 	if Input.is_action_just_pressed("ThrowRoserang"):
 		if roserang_instance == null and can_throw_roserang:
-			# Manual throw
+			# Normal throw
 			if not destabilized:
 				hurtbox.self_hit(throw_roserang_self_damage)
+			Globals.cotu_normal_throw_rose.emit()
 			throw_roserang_with_script(rose_script)
 		elif not roserang_throw_queued:
 			start_roserang_instant_rethrow_timer()
@@ -377,6 +378,7 @@ func lock_off():
 	locked_on = false
 
 func step_dodge():
+	Globals.cotu_dodge.emit()
 	can_dodge = false
 	can_throw_roserang = false
 	can_throw_axrang = false
