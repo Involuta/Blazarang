@@ -26,8 +26,12 @@ enum {
 var behav_state := WALK
 
 @export var target_fov_angle := PI/4 # Max angle btwn target's body's fwd dir and dir from target to spider necessary for spider to be considered in target's FOV
+@export var leg_step_time_moving := .0167 # Time it takes for each leg to make a step when spider is walking/retreating
+@export var leg_step_time_stationary := .1 # Time it takes for each leg to make a step when spider is aiming/ready
 
 var walk_dest := Vector3.ZERO
+@export var walk_max_duration := 7.0 # If spider keeps recalculating walk dest and never makes it to the dest, it stops walking after this many seconds
+var walk_duration := 7.0 # Set to walk_max_duration at start of walk state
 @export var walk_dest_dist_from_target := 30.0 # Starting from the target, go walk_dest_dist_from_target opposite the dir the target is facing. Get a flat circle around this point w radius walk_dest_dist_from_target. Get a random pt inside this circle, then fire a ray from high above onto the pt. If it's a valid pt, choose it. If not, increase the size of the circle, get another random pt, and fire another ray. Repeat until the pt is valid
 @export var walk_dest_radius := 10.0
 @export var walk_turn_speed := .5
@@ -44,12 +48,13 @@ var aim_duration := 1.0 # Set to a random number btwn min and max aim duration
 @export var aim_max_duration := 4.0
 
 @export var ready_turn_speed := .25
-@export var ready_min_duration := 2.5
-@export var ready_max_duration := 5.0
-var ready_duration := 1.0 # Set to a random number btwn min and max ready duration when ready state starts
-var ready_triggered := false # Set to true when Cotu does an action that triggers the spider to initiate an attack
-@export var ready_max_trigger_duration := .25
-var ready_trigger_duration := .25 # Set to ready_max_trigger_duration when ready state begins. Only decreases when ready_triggered is true
+@export var ready_min_full_duration := 2.5
+@export var ready_max_full_duration := 5.0
+var ready_full_duration := 1.0 # The duration of the ready state when no action triggers the spider to jump. Set to a random number btwn min and max ready duration when ready state starts. Always decreases during Ready state
+var ready_triggered := false # Set to true when Cotu does an action that triggers the spider jump
+@export var ready_max_trigger_duration := .4
+var ready_trigger_duration := .25 # The duration of the ready state when an action triggers the spider to jump. Set to ready_max_trigger_duration when ready state begins. Only decreases when ready_triggered is true
+@export var ready_front_leg_raise_time := .2 # When either ready_duration is <= ready_front_leg_raise_time, front legs begin to rise. Actual time it takes for front legs to rise is set in transition from idle to ready state in anim tree
 
 @export var attack_total_duration := 1.0 # Duration of jump + endlag in secs
 @export var attack_time_remaining := 1.0 # Decreases every frame, reset to attack_duration every attack
@@ -175,10 +180,16 @@ func switch_to_walk():
 	# Stop IK since you're leaving the ground
 	body_meshes.start_ik()
 	behav_state = WALK
+	# Set max walk time
+	walk_duration = walk_max_duration
 	# Set walk dest
 	choose_walk_dest()
+	body_meshes.set_leg_step_time(leg_step_time_moving)
 
 func walk_frame(delta):
+	if point_in_target_fov(walk_dest):
+		choose_walk_dest()
+	
 	rotate_y_to_vec(walk_dest - global_position, walk_turn_speed)
 	if global_position.distance_to(walk_dest) <= nav_agent.target_desired_distance:
 		switch_to_aim()
@@ -189,10 +200,15 @@ func walk_frame(delta):
 	
 	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
 	nav_agent.velocity = new_velocity
+	
+	walk_duration -= delta
+	if walk_duration <= 0:
+		switch_to_aim()
 
 func switch_to_aim():
 	behav_state = AIM
 	aim_duration = rng.randf_range(aim_min_duration, aim_max_duration)
+	body_meshes.set_leg_step_time(leg_step_time_stationary)
 
 func aim_frame(delta):
 	velocity = Vector3.ZERO
@@ -220,20 +236,19 @@ func ready_action_trigger():
 
 func switch_to_ready():
 	behav_state = READY
-	ready_duration = rng.randf_range(ready_min_duration, ready_max_duration)
+	ready_full_duration = rng.randf_range(ready_min_full_duration, ready_max_full_duration)
 	ready_trigger_duration = ready_max_trigger_duration
+	body_meshes.set_leg_step_time(leg_step_time_stationary)
 
 func ready_frame(delta):
 	velocity = Vector3.ZERO
 	rotate_y_to_vec(target.global_position - global_position, ready_turn_speed)
-	ready_duration -= delta
+	ready_full_duration -= delta
 	if ready_triggered:
 		ready_trigger_duration -= delta
-	if ready_duration <= .2 or ready_trigger_duration <= .2:
+	if ready_full_duration <= ready_front_leg_raise_time or ready_trigger_duration <= ready_front_leg_raise_time:
 		body_meshes.stop_ik_front_legs()
-	if ready_duration <= 0.0 or ready_trigger_duration <= 0.0:
-		#print("Ready duration: ", ready_duration)
-		#print("Ready trigger duration: ", ready_trigger_duration)
+	if ready_full_duration <= 0.0 or ready_trigger_duration <= 0.0:
 		ready_triggered = false
 		switch_to_attack()
 
@@ -292,6 +307,7 @@ func choose_retreat_dest():
 func switch_to_retreat():
 	behav_state = RETREAT
 	choose_retreat_dest()
+	body_meshes.set_leg_step_time(leg_step_time_moving)
 
 func retreat_frame(delta):
 	rotate_y_to_vec(walk_dest - global_position, walk_turn_speed)

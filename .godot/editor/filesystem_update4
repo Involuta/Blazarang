@@ -25,3 +25,5 @@ res://enemies/jumping_spider.gd
 res://enemies/jumping_spider.tscn
 res://levels/mite_level/section_nodes/mite_level_main_arena.tscn
 res://enemies/jumping_spider_proc_anim_meshes.gd
+res://procedural_animation/step_target_container.gd
+res://procedural_animation/jumping_spider_ik_target.gd

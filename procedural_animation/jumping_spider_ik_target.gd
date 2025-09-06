@@ -11,6 +11,7 @@ extends Marker3D
 
 @export var step_target : Node3D
 @export var step_distance := 1.5
+@export var step_time := .0167
 @export var adjacent_ik_target : Node3D
 @export var opposite_ik_target : Node3D
 @export var checking_adjacent := true # if this is true, check if the adjacent leg is stepping before you step
@@ -38,5 +39,5 @@ func step():
 	
 	var step_tween = get_tree().create_tween()
 	step_tween.tween_property(self, "global_position", half_way + owner.basis.y, .0167)
-	step_tween.tween_property(self, "global_position", target_pos, .0167)
+	step_tween.tween_property(self, "global_position", target_pos, step_time)
 	step_tween.tween_callback(func(): is_stepping = false)

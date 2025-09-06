@@ -30,6 +30,7 @@ extends Node3D
 @export var lvb_sk : SkeletonIK3D
 
 @onready var parent := get_parent()
+@onready var armature := $JumpingSpiderMeshes/Armature
 var avg_normal := Vector3.UP # This is visible in the entire script so that the parent can see it; if it's Vector3.UP, the parent can leap
 
 var ik_stopped := false # IK is stopped when leaping
@@ -97,6 +98,16 @@ func _basis_from_normal(normal: Vector3) -> Basis:
 	result = result.orthonormalized()
 	
 	return result
+
+func set_leg_step_time(time: float):
+	lvf_ik.step_time = time
+	rmb_ik.step_time = time
+	rvf_ik.step_time = time
+	lmb_ik.step_time = time
+	lmf_ik.step_time = time
+	rvb_ik.step_time = time
+	rmf_ik.step_time = time
+	lvb_ik.step_time = time
 
 func stop_ik_front_legs():
 	lvf_sk.stop()
