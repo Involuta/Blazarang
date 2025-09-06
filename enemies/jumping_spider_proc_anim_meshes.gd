@@ -98,6 +98,22 @@ func _basis_from_normal(normal: Vector3) -> Basis:
 	
 	return result
 
+func stop_ik_front_legs():
+	lvf_sk.stop()
+	rvf_sk.stop()
+	lmf_sk.stop()
+	rmf_sk.stop()
+
+func start_ik_front_legs():
+	lvf_sk.start()
+	lvf_ik.recalculate_ik_target()
+	rvf_sk.start()
+	rvf_ik.recalculate_ik_target()
+	lmf_sk.start()
+	lmf_ik.recalculate_ik_target()
+	rmf_sk.start()
+	rmf_ik.recalculate_ik_target()
+
 func stop_ik():
 	ik_stopped = true
 	lvf_sk.stop()

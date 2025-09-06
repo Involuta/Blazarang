@@ -24,3 +24,4 @@ res://general_scripts/skygradient.gdshader
 res://enemies/jumping_spider.gd
 res://enemies/jumping_spider.tscn
 res://levels/mite_level/section_nodes/mite_level_main_arena.tscn
+res://enemies/jumping_spider_proc_anim_meshes.gd

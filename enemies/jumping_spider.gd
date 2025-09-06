@@ -229,6 +229,8 @@ func ready_frame(delta):
 	ready_duration -= delta
 	if ready_triggered:
 		ready_trigger_duration -= delta
+	if ready_duration <= .2 or ready_trigger_duration <= .2:
+		body_meshes.stop_ik_front_legs()
 	if ready_duration <= 0.0 or ready_trigger_duration <= 0.0:
 		#print("Ready duration: ", ready_duration)
 		#print("Ready trigger duration: ", ready_trigger_duration)
