@@ -33,8 +33,6 @@ var camera_pitch_input := .0
 var locked_on := false
 var lock_on_target = null
 
-var look_angle := 0.0
-var look_angle2 := 0.0
 var max_cam_dist := 6.0 # dist btwn player and camera when camera's not colliding with geometry; player can modify this in-game
 
 @export var max_slow_duration := 3.5
@@ -175,9 +173,6 @@ func start_grab_anim(hitbox_name):
 			print("Error in CotuControl: hitbox name from CotuHurtbox not found")
 
 func _physics_process(delta):
-	# Set look angle
-	look_angle = camera_twist_pivot.basis.get_euler().y
-	
 	# Camera movement/orientation; ui_cancel means esc
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -312,6 +307,7 @@ func _physics_process(delta):
 			start_roserang_instant_rethrow_timer()
 	if roserang_throw_queued and roserang_instance == null and can_throw_roserang:
 		# Instant rethrow
+		Globals.cotu_instant_rethrow_rose.emit()
 		anim_tree.set(anim_tree_param_path_base + "just_instant_rethrew", true)
 		roserang_throw_queued = false
 		
@@ -489,6 +485,14 @@ func shoot_arc_projectile():
 	arc_inst.velocity = arc_slash_projectile_speed * armature.transform.basis.z
 	arc_inst.rotation.y = PI + armature.rotation.y
 
-# Used by jumping spider to get Cotu's fwd facing direction
+# Used by roserang.gd to get Cotu's rang throw angle (the angle input of the rose equation)
+func get_rang_throw_y_angle():
+	return camera_twist_pivot.basis.get_euler().y
+
+# Used by X to get Cotu's rang throw direction
+func get_camera_fwd_dir():
+	return -camera_twist_pivot.global_transform.basis.z
+
+# Used by Jumping Spider to get Cotu's fwd facing direction
 func get_fwd_dir():
 	return armature.transform.basis.z

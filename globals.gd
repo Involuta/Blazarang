@@ -10,6 +10,7 @@ signal cam_rot_updated(new_rot: Vector3)
 signal score_updated(score_change: int)
 signal cotu_dodge
 signal cotu_normal_throw_rose
+signal cotu_instant_rethrow_rose
 signal destabilize
 signal stabilize
 signal health_segment_lost(seg_num: int)

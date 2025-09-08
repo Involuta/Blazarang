@@ -53,6 +53,10 @@ var phase := PHASE.PHASE1
 @export var aggro_distance := -1
 
 @export var follow_speed := 15.0
+@export var dodge_angle_tolerance := PI/5 # Max y angle difference btwn vec from Cotu to X and player camera fwd dir that triggers X to dodge
+var rang_thrown := false # Set to true when Cotu throws non-special roserang at X while he's following
+@export var dodge_speed := 17.5
+var dodged := false # Set to true after a dodge, set to false after a non-dodge
 @export var shortrange_attack_distance := 7.5
 
 @export var attack_duration_secs := 2.5
@@ -231,6 +235,7 @@ var diamond := preload("res://levels/x_boss_level/background_nodes/x_diamond.tsc
 @onready var root := $/root/ViewControl
 var level : Node3D
 var target : Node3D
+var cotu : Node3D # X only attacks the target; cotu is only referenced here to help X calculate whether to dodge when Cotu throws a roserang
 var left_arm : Node3D
 var right_arm : Node3D
 var x_icon : Node3D
@@ -243,12 +248,15 @@ func _ready():
 		behav_state = WAIT
 	level = root.find_child("Level")
 	target = level.find_child("Icon")
+	cotu = level.find_child("cotuCB")
 	left_arm = level.find_child("FloatingXLeftArm")
 	right_arm = level.find_child("FloatingXRightArm")
 	x_icon = level.find_child("XIcon")
 	x_icon_pos = level.find_child("XIconPos")
 	laser_combo_ball = level.find_child("XLaserComboBall")
 	
+	Globals.cotu_normal_throw_rose.connect(trigger_dodge)
+	Globals.cotu_instant_rethrow_rose.connect(trigger_dodge)
 	Globals.health_segment_lost.connect(on_health_segment_lost)
 	
 	min_long_dist_wait = phase1_min_long_dist_wait
@@ -344,14 +352,29 @@ func multiply_follow_speed_over_interval(multiplier : float, duration: float):
 	var speed_tween := get_tree().create_tween()
 	speed_tween.tween_property(self, "follow_speed", follow_speed * multiplier, duration)
 
+func trigger_dodge():
+	if behav_state == FOLLOW:
+		rang_thrown = true
+
 func follow():
 	lerp_look_at_position(target.global_position, follow_turn_speed)
 	var move_dir = global_position.direction_to(target.global_position)
 	velocity.x = follow_speed / 2 * move_dir.x
 	velocity.z = follow_speed / 2 * move_dir.z
 	
+	# If Cotu throws the rang at you, dodge it if you haven't done a dodge already
+	var cotu_to_X_vec := cotu.global_position.direction_to(global_position)
+	var cx2D := Vector2(cotu_to_X_vec.x, cotu_to_X_vec.z)
+	var cotu_cam_vec = cotu.get_camera_fwd_dir()
+	var ccv2D := Vector2(cotu_cam_vec.x, cotu_cam_vec.z)
+	if rang_thrown and not dodged and abs(cx2D.angle_to(ccv2D)) < dodge_angle_tolerance:
+		queue_dodge()
+		return
+	rang_thrown = false
+	
 	if not attack_queued and behav_state != ATTACK and global_position.distance_to(target.global_position) < shortrange_attack_distance:
 		queue_attack(DIST_TYPE.SHORT_DIST)
+		return
 	
 	# This code block ensures start_long_dist_attack is only called once
 	if long_dist_wait_remaining <= 0:
@@ -391,6 +414,7 @@ func cotu_grabbed():
 	return Globals.XBossGrab
 
 func queue_attack(dist_type):
+	dodged = false
 	attack_queued = true
 	match(phase):
 		PHASE.POST_LASER_COMBO:
@@ -439,6 +463,11 @@ func queue_attack(dist_type):
 					anim_tree.set(choose_attack(long_dist_right_arm_deployed_attack_chances), true)
 				DIST_TYPE.LONG_DIST_RIGHT_ARM_NOT_DEPLOYED:
 					anim_tree.set(choose_attack(long_dist_right_arm_not_deployed_attack_chances), true)
+
+func queue_dodge():
+	dodged = true
+	attack_queued = true
+	anim_tree.set(param_path_base + "HorizontalDodge", true)
 
 func on_health_segment_lost(seg_num):
 	if seg_num == 3:
@@ -499,6 +528,7 @@ func end_attack():
 	stop_checking = false
 	attack_queued = false
 	no_attack_queued.emit()
+	anim_tree.set(param_path_base + "HorizontalDodge", false)
 	for attack in phase2_short_dist_attack_chances.keys():
 		anim_tree.set(param_path_base + attack, false)
 	for attack in phase2_long_dist_right_arm_deployed_attack_chances.keys():
@@ -513,6 +543,10 @@ func end_attack():
 		anim_tree.set(param_path_base + attack, false)
 	long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	behav_state = FOLLOW
+
+func end_dodge():
+	end_attack()
+	long_dist_wait_remaining = .5
 
 func end_attack_instant_followup():
 	end_attack()
@@ -561,6 +595,15 @@ func diagonal_dash():
 		icon_vec *= -1
 	var dash_dir2D := (1.7 * dir_to_target2D + icon_vec).normalized()
 	velocity = diagonal_dash_speed * Vector3(dash_dir2D.x, 0, dash_dir2D.y).normalized()
+
+func dodge(left: bool):
+	var dir_to_target := global_position.direction_to(target.global_position)
+	var dir_to_target2D := Vector2(dir_to_target.x, dir_to_target.z)
+	var icon_vec := dir_to_target2D.orthogonal()
+	if not left:
+		icon_vec *= -1
+	var dash_dir2D := (icon_vec).normalized()
+	velocity = dodge_speed * Vector3(dash_dir2D.x, 0, dash_dir2D.y).normalized()
 
 func slowdown(duration_secs : float):
 	var mvmt_tween = get_tree().create_tween()

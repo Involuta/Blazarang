@@ -67,7 +67,7 @@ func _ready():
 	target.roserang_queued = false
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, true)
 	set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, true)
-	rose_eqn_initial_throw_angle = rose_eqn_petals*cotu.look_angle + rose_eqn_initial_throw_angle_offset
+	rose_eqn_initial_throw_angle = rose_eqn_petals*cotu.get_rang_throw_y_angle() + rose_eqn_initial_throw_angle_offset
 	set_direction()
 	global_position = target.global_position
 	change_color(rose_color)
