@@ -11,6 +11,7 @@ signal score_updated(score_change: int)
 signal cotu_dodge
 signal cotu_normal_throw_rose
 signal cotu_instant_rethrow_rose
+signal cotu_throw_ax
 signal destabilize
 signal stabilize
 signal health_segment_lost(seg_num: int)
@@ -102,7 +103,7 @@ const enemy_hurtbox_data = {
 	"BallWalkerArmor" : [100, 1.0, 1.0],
 	"BallWalker" : [200, 1.0, 1.0],
 	
-	"XBoss" : [2000, 1.0, 100.0],
+	"XBoss" : [200, 1.0, 100.0],
 	
 	"Landmite" : [75, 1.0, 1.0],
 	"Paramite" : [35, 1.0, 1.0],

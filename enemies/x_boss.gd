@@ -53,9 +53,12 @@ var phase := PHASE.PHASE1
 @export var aggro_distance := -1
 
 @export var follow_speed := 15.0
-@export var dodge_angle_tolerance := PI/5 # Max y angle difference btwn vec from Cotu to X and player camera fwd dir that triggers X to dodge
-var rang_thrown := false # Set to true when Cotu throws non-special roserang at X while he's following
-@export var dodge_speed := 17.5
+@export var follow_time_before_dodge := .1 # Min time necessary to spend in follow state before dodge is possible
+var current_follow_time := 0.0 # Reset after attack or dodge is queued
+@export var dodge_angle_tolerance := PI/5 # Max y angle difference btwn vec from Cotu to X and player camera fwd vec that triggers X to dodge
+var rose_thrown := false # Set to true when Cotu throws non-special roserang while X is following. Set to false when dodge ends (end_dodge). Why isn't this set to false every frame where a rose throw doesn't happen? Because the anim tree horz dodge transition expressions need to read rose_thrown as true to know which direction to dodge, and that happens at least 1 frame after a dodge is triggered via queue_dodge
+var ax_thrown := false # Set to true when Cotu throws non-special axrang while X is following. Set to false when dodge ends (end_dodge) for the same reason as rose_thrown
+@export var dodge_speed := 22.0
 var dodged := false # Set to true after a dodge, set to false after a non-dodge
 @export var shortrange_attack_distance := 7.5
 
@@ -255,8 +258,9 @@ func _ready():
 	x_icon_pos = level.find_child("XIconPos")
 	laser_combo_ball = level.find_child("XLaserComboBall")
 	
-	Globals.cotu_normal_throw_rose.connect(trigger_dodge)
-	Globals.cotu_instant_rethrow_rose.connect(trigger_dodge)
+	Globals.cotu_normal_throw_rose.connect(trigger_rose_dodge)
+	Globals.cotu_instant_rethrow_rose.connect(trigger_rose_dodge)
+	Globals.cotu_throw_ax.connect(trigger_ax_dodge)
 	Globals.health_segment_lost.connect(on_health_segment_lost)
 	
 	min_long_dist_wait = phase1_min_long_dist_wait
@@ -352,25 +356,35 @@ func multiply_follow_speed_over_interval(multiplier : float, duration: float):
 	var speed_tween := get_tree().create_tween()
 	speed_tween.tween_property(self, "follow_speed", follow_speed * multiplier, duration)
 
-func trigger_dodge():
+func trigger_rose_dodge():
 	if behav_state == FOLLOW:
-		rang_thrown = true
+		rose_thrown = true
+
+func trigger_ax_dodge():
+	if behav_state == FOLLOW:
+		ax_thrown = true
+
+# y angle difference btwn vec from Cotu to X and player camera fwd vec
+func rang_throw_angle_to_me():
+	var cotu_to_X_vec := cotu.global_position.direction_to(global_position)
+	var cx2D := Vector2(cotu_to_X_vec.x, cotu_to_X_vec.z)
+	var cotu_cam_vec = cotu.get_camera_fwd_dir()
+	var ccv2D := Vector2(cotu_cam_vec.x, cotu_cam_vec.z)
+	return cx2D.angle_to(ccv2D)
 
 func follow():
+	current_follow_time += get_physics_process_delta_time()
+	
 	lerp_look_at_position(target.global_position, follow_turn_speed)
 	var move_dir = global_position.direction_to(target.global_position)
 	velocity.x = follow_speed / 2 * move_dir.x
 	velocity.z = follow_speed / 2 * move_dir.z
 	
-	# If Cotu throws the rang at you, dodge it if you haven't done a dodge already
-	var cotu_to_X_vec := cotu.global_position.direction_to(global_position)
-	var cx2D := Vector2(cotu_to_X_vec.x, cotu_to_X_vec.z)
-	var cotu_cam_vec = cotu.get_camera_fwd_dir()
-	var ccv2D := Vector2(cotu_cam_vec.x, cotu_cam_vec.z)
-	if rang_thrown and not dodged and abs(cx2D.angle_to(ccv2D)) < dodge_angle_tolerance:
+	# If Cotu throws the rose or ax at you, dodge it if you haven't done a dodge already and follow_time_before_dodge secs have passed
+	# Dodge direction (left/right) is determined in anim tree state transitions
+	if not dodged and (rose_thrown or ax_thrown) and current_follow_time >= follow_time_before_dodge and abs(rang_throw_angle_to_me()) < dodge_angle_tolerance:
 		queue_dodge()
 		return
-	rang_thrown = false
 	
 	if not attack_queued and behav_state != ATTACK and global_position.distance_to(target.global_position) < shortrange_attack_distance:
 		queue_attack(DIST_TYPE.SHORT_DIST)
@@ -414,7 +428,7 @@ func cotu_grabbed():
 	return Globals.XBossGrab
 
 func queue_attack(dist_type):
-	dodged = false
+	dodged = false # X can dodge when he reaches follow state again
 	attack_queued = true
 	match(phase):
 		PHASE.POST_LASER_COMBO:
@@ -465,8 +479,8 @@ func queue_attack(dist_type):
 					anim_tree.set(choose_attack(long_dist_right_arm_not_deployed_attack_chances), true)
 
 func queue_dodge():
-	dodged = true
-	attack_queued = true
+	dodged = true # When X reaches follow state again after dodge, he can no longer dodge. dodged = false only after X attacks
+	attack_queued = true # X isn't attacking, but this line prevents other actions from queuing during a dodge
 	anim_tree.set(param_path_base + "HorizontalDodge", true)
 
 func on_health_segment_lost(seg_num):
@@ -516,7 +530,7 @@ func set_base_turn_speed():
 
 func start_strafe():
 	behav_state = STRAFE_FOLLOW
-	strafing_left = rng.randf() < .5
+	strafing_left = !cotu.moving_right
 
 func start_attack():
 	# Without this await, the animation player would call end_attack at the end of the previous animation on the exact same frame as when the AnimationPlayer.play func is called below. Since an animation was currently in progress, the func call would do nothing, leaving the enemy in ATTACK mode but with no animation playing to free it from ATTACK mode, causing it to stand still indefinitely
@@ -542,11 +556,15 @@ func end_attack():
 	for attack in long_dist_right_arm_not_deployed_attack_chances.keys():
 		anim_tree.set(param_path_base + attack, false)
 	long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
+	current_follow_time = 0
+	# After an attack or dodge ends, check when the rose or ax is thrown again
+	rose_thrown = false
+	ax_thrown = false
 	behav_state = FOLLOW
 
 func end_dodge():
 	end_attack()
-	long_dist_wait_remaining = .5
+	long_dist_wait_remaining = min_long_dist_wait
 
 func end_attack_instant_followup():
 	end_attack()
@@ -591,16 +609,16 @@ func diagonal_dash():
 	var dir_to_target := global_position.direction_to(target.global_position)
 	var dir_to_target2D := Vector2(dir_to_target.x, dir_to_target.z)
 	var icon_vec := dir_to_target2D.orthogonal()
-	if not x_icon_tp_to_left:
+	if cotu.moving_right:
 		icon_vec *= -1
 	var dash_dir2D := (1.7 * dir_to_target2D + icon_vec).normalized()
 	velocity = diagonal_dash_speed * Vector3(dash_dir2D.x, 0, dash_dir2D.y).normalized()
 
-func dodge(left: bool):
+func dodge(right: bool):
 	var dir_to_target := global_position.direction_to(target.global_position)
 	var dir_to_target2D := Vector2(dir_to_target.x, dir_to_target.z)
 	var icon_vec := dir_to_target2D.orthogonal()
-	if not left:
+	if right:
 		icon_vec *= -1
 	var dash_dir2D := (icon_vec).normalized()
 	velocity = dodge_speed * Vector3(dash_dir2D.x, 0, dash_dir2D.y).normalized()

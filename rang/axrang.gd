@@ -38,7 +38,7 @@ func _ready():
 	explosion_hitbox.damage = Globals.player_hitbox_data.AxrangBaseExplosionDamage
 	
 	global_position = target.global_position
-	rotation.y = cotu.look_angle + PI
+	rotation.y = cotu.get_rang_throw_y_angle() + PI
 	velocity = fwd_speed * transform.basis.z
 	
 	explosion_hitbox.process_mode = Node.PROCESS_MODE_DISABLED

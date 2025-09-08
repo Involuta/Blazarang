@@ -268,12 +268,13 @@ func _physics_process(delta):
 	else:
 		rang_pointer_pivot.transform.basis = camera_twist_pivot.transform.basis
 	
-	# Special throw (takes precedence over instant rethrow)
+	# Special rose throw (takes precedence over instant rethrow)
 	if Input.is_action_just_pressed("Special") and not roserang_special_queued and roserang_instance != null:
 		start_roserang_special_timer()
 	if roserang_special_queued and roserang_instance == null:
 		throw_roserang_with_script(current_roserang_special_script)
 	
+	# Special ax throw
 	if Input.is_action_just_pressed("Special") and not axrang_special_queued and axrang_instance != null:
 		start_axrang_special_timer()
 	if axrang_special_queued and axrang_instance == null:
@@ -284,11 +285,13 @@ func _physics_process(delta):
 	else:
 		anim_tree.set(anim_tree_param_path_base + "melee_ax", false)
 	
+	# Axrang throw
 	if Input.is_action_just_pressed("ThrowAxrang"):
 		if axrang_instance == null and can_throw_axrang:
 			# Throw
 			if not destabilized and not axrang_perfect_caught:
 				hurtbox.self_hit(throw_axrang_self_damage)
+			Globals.cotu_throw_ax.emit()
 			throw_axrang()
 		elif axrang_instance != null and not axrang_instance.is_returning():
 			axrang_instance.advance_state()

@@ -33,3 +33,5 @@ res://enemies/enemy_anims/x_left_dodge.res
 res://enemies/enemy_anims/x_right_dodge.res
 res://textures/solid_light_gray_tile.tres
 res://levels/x_boss_level/x_boss_level1_viewcontrol.tscn
+res://rang/axrang.gd
+res://levels/x_boss_level/background_nodes/x_diamond.tscn
