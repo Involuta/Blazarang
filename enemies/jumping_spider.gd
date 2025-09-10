@@ -261,9 +261,10 @@ func switch_to_attack():
 	attack_jump_completed = false
 	# Stop body meshes IK
 	body_meshes.stop_ik()
-	# Jump towards target
+	# Jump towards jump dest (target + its vel)
 	# Vel = distance / seconds
-	velocity = .91 * (target.global_position - global_position) / attack_jump_duration
+	var jump_dest = target.global_position + (target.velocity * get_physics_process_delta_time())
+	velocity = .91 * (jump_dest - global_position) / attack_jump_duration
 
 func attack_frame(delta):
 	# If spider landed, stop checking if spider landed, turn on body meshes IK, and set vel to 0

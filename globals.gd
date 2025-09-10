@@ -94,14 +94,14 @@ const enemy_hurtbox_data = {
 	"GauntletStationaryGunner" : [10, 1.0, 1.0],
 	"GauntletMiniboss" : [500, 1.0, 10.0],
 	
-	"RollerBall" : [10, 1.0, 1.0],
+	"RollerBall" : [100, 1.0, 1.0],
 	"BouncerBall" : [10, 1.0, 2.0],
 	"GiantRollerBall" : [30, 1.0, 2.0],
 	"GiantBouncerBall" : [10, 1.0, 2.0],
-	"SkullBall" : [60, 1.0, 3.0],
+	"SkullBall" : [70, 1.0, 3.0],
 	"PopperBall" : [10, 1.0, 1.0],
 	"BallWalkerArmor" : [100, 1.0, 1.0],
-	"BallWalker" : [200, 1.0, 1.0],
+	"BallWalker" : [2000, 1.0, 1.0],
 	
 	"XBoss" : [200, 1.0, 100.0],
 	
