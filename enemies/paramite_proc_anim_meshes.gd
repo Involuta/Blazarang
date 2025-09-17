@@ -55,6 +55,7 @@ func _process(delta):
 	var target_basis = _basis_from_normal(avg_normal)
 	rotation = lerp(transform.basis.get_rotation_quaternion(), target_basis.get_rotation_quaternion(), run_speed * delta).get_euler()
 	
+	# Landmite also uses paramite proc anim meshes
 	# Biting moves body meshes' position, so if biting, this script should not change position
 	if biting:
 		return

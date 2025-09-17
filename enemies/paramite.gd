@@ -56,6 +56,8 @@ func _ready():
 func switch_to_launch():
 	# Stop IK since you're leaving the ground
 	body_meshes.stop_ik()
+	# Remove any body orientation tilt
+	body_meshes.rotation = body_meshes.rotation.y * Vector3.UP
 	
 	behav_state = LAUNCH
 	set_mesh_and_colliders_y_pos(0)
