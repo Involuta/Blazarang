@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://ce3jswl2dgnq1"]
+
+[ext_resource type="Script" path="res://enemies/mite_egg.gd" id="1_008di"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nt7cu"]
+radius = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_3bpga"]
+radius = 2.0
+height = 6.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a2woi"]
+
+[sub_resource type="Animation" id="Animation_rmeg4"]
+resource_name = "explode"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oo373"]
+_data = {
+"explode": SubResource("Animation_rmeg4")
+}
+
+[node name="MiteEggTier1" type="Node3D"]
+script = ExtResource("1_008di")
+
+[node name="NeutralHitbox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NeutralHitbox"]
+shape = SubResource("SphereShape3D_nt7cu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_3bpga")
+surface_material_override/0 = SubResource("StandardMaterial3D_a2woi")
+
+[node name="FlightParticles" type="GPUParticles3D" parent="."]
+
+[node name="ImpactParticles" type="GPUParticles3D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_oo373")
+}
+
+[connection signal="body_entered" from="NeutralHitbox" to="." method="_on_body_entered"]

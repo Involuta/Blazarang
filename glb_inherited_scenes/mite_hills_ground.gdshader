@@ -1,7 +1,7 @@
 shader_type spatial; // use "canvas_item" if it's 2D
 
 uniform vec4 sand_color : source_color = vec4(0.9, 0.85, 0.6, 1.0);
-uniform float grain_scale : hint_range(1.0, 100.0) = 20.0;
+uniform float grain_scale = 20.0;
 uniform float grain_strength : hint_range(0.0, 1.0) = 0.2;
 
 float hash(vec2 p) {
