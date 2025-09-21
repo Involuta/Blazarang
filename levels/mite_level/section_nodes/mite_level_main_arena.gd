@@ -4,8 +4,17 @@ extends Node3D
 var time_btwn_infest_switch_secs := 5.0 # Should be less than half the time it takes for debuff to disappear
 var time_to_next_infest_switch_secs := 5.0
 
+@onready var landmite := preload("res://enemies/landmite.tscn")
+@onready var paramite := preload("res://enemies/paramite.tscn")
+@onready var flatmite := preload("res://enemies/flatmite.tscn")
+@onready var harvestman := preload("res://enemies/harvestman.tscn")
+
+@onready var root := $/root/ViewControl
+var level : Node3D
+
 func _ready():
 	time_to_next_infest_switch_secs = time_btwn_infest_switch_secs
+	level = root.find_child("Level")
 
 func _physics_process(delta):
 	time_to_next_infest_switch_secs -= delta
@@ -15,3 +24,9 @@ func _physics_process(delta):
 			arena_infest_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
 		else:
 			arena_infest_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+
+func spawn_mites_from_egg_at(pos: Vector3):
+	var lm_inst = landmite.instantiate()
+	level.add_child.call_deferred(lm_inst)
+	await lm_inst.tree_entered
+	lm_inst.global_position = pos

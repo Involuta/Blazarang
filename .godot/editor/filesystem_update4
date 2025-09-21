@@ -24,3 +24,8 @@ res://general_scripts/skygradient.gdshader
 res://enemies/mite_egg_tier1.tscn
 res://enemies/mite_egg.gd
 res://levels/mite_level/section_nodes/mite_level_main_arena.tscn
+res://levels/mite_level/section_nodes/mite_level_main_arena.gd
+res://enemies/paramite.tscn
+res://levels/mite_level/mite_level.tscn
+res://enemies/landmite.tscn
+res://enemies/landmite.gd

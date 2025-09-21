@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://enemies/mite_egg.gd" id="1_008di"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_nt7cu"]
-radius = 2.0
+radius = 1.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_3bpga"]
 radius = 2.0

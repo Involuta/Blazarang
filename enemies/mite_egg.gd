@@ -11,7 +11,12 @@ var destroyed := false
 @onready var flight_particles := $FlightParticles
 @onready var impact_particles := $ImpactParticles
 
+@onready var root := $/root/ViewControl
+var mite_arena : Node3D
+
 func _ready():
+	mite_arena = root.find_child("MiteLevelMainArena")
+	
 	flight_particles.emitting = true
 	impact_particles.emitting = false
 	await get_tree().create_timer(invincibility_secs).timeout
@@ -33,10 +38,13 @@ func _on_body_entered(body):
 	if Globals.compare_layers(body.collision_layer, Globals.ENEMY_COL_LAYER):
 		pass
 	elif Globals.compare_layers(body.collision_layer, Globals.ARENA_COL_LAYER):
+		mite_arena.spawn_mites_from_egg_at(global_position)
+		#get_parent().spawn_mites_from_egg_at(global_position)
 		destroy_self()
 
 func destroy_self():
 	$AnimationPlayer.play("explode")
+	visible = false # FOR TESTING; TO SEE IF MITE LEAPS AFTER EGG LANDS
 	flight_particles.emitting = false
 	impact_particles.emitting = true
 	destroyed = true

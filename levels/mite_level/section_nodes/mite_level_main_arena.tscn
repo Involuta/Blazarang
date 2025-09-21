@@ -136,4 +136,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.86168, 21.3442)
 walk_speed = 50.0
 
 [node name="MiteEggTier1" parent="." instance=ExtResource("6_4qcxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.75273, 40.5352, -42.2566)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.776, 25, -18.5624)

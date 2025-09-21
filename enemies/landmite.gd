@@ -46,7 +46,7 @@ var time_until_forced_leap := 5.0 # Set to can_leap_window when reset
 @export var bite_proximity := 2.0 # Proximity to target required to start bite
 @export var bite_body_dist := 2.2 # Dist fwd mite's body moves when biting
 @export var bite_secs := .24
-@export var bite_cooldown_secs := 2.5
+@export var bite_cooldown_secs := .5
 var bite_cooldown_remaining := 2.5
 
 @export var dp_impulse_limit := 5.0
@@ -55,12 +55,13 @@ func _ready():
 	level = root.find_child("Level")
 	target = root.find_child("Icon")
 	hitbox = find_child("MeleeHitboxPivot")
-	#hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+	# Hitbox is disabled by default, and is enabled then disabled during bite
+	hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	anim_tree.active = true
 	
 	time_until_can_leap = rng.randf_range(min_leap_cooldown, max_leap_cooldown)
 	can_leap = true
-	time_until_forced_leap = can_leap_window
+	time_until_forced_leap = 0 # Mite leaps immediately upon spawning
 	
 	bite_cooldown_remaining = bite_cooldown_secs
 	
@@ -73,7 +74,7 @@ func _physics_process(delta):
 		STRAFE:
 			strafe(delta)
 		BITE:
-			stop_lateral_mvmt()
+			rotate_y_to_vec(global_position.direction_to(target.global_position), follow_turn_speed)
 		LEAP:
 			leap_frame()
 	
@@ -145,13 +146,13 @@ func follow(delta):
 
 func leap_frame():
 	if is_on_floor():
+		body_meshes.start_ik()
 		behav_state = FOLLOW
 		can_leap = false
 		stop_lateral_mvmt()
-		body_meshes.start_ik()
 
 func close_to_roserang():
-	var roserang = root.find_child("Roserang", true, false)
+	var roserang = level.find_child("Roserang", true, false)
 	if roserang == null:
 		return false
 	else:
@@ -200,13 +201,20 @@ func strafe(delta):
 			time_until_can_leap = rng.randf_range(min_leap_cooldown, max_leap_cooldown)
 			can_leap = true
 
+func toggle_bite_hitbox():
+	if hitbox.process_mode == Node.PROCESS_MODE_DISABLED:
+		hitbox.process_mode = Node.PROCESS_MODE_INHERIT
+	else:
+		hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+
 func bite():
 	body_meshes.biting = true
 	stop_lateral_mvmt()
 	var bite_tween = get_tree().create_tween()
-	#await get_tree().create_timer(bite_secs).timeout
+	bite_tween.tween_callback(toggle_bite_hitbox)
 	bite_tween.tween_property(body_meshes, "position", bite_body_dist*body_meshes.transform.basis.z, bite_secs / 2).as_relative()
 	bite_tween.tween_property(body_meshes, "position", -bite_body_dist*body_meshes.transform.basis.z, bite_secs / 2).as_relative()
+	bite_tween.tween_callback(toggle_bite_hitbox)
 	await bite_tween.finished
 	body_meshes.biting = false
 
