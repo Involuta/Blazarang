@@ -201,20 +201,21 @@ func strafe(delta):
 			time_until_can_leap = rng.randf_range(min_leap_cooldown, max_leap_cooldown)
 			can_leap = true
 
-func toggle_bite_hitbox():
-	if hitbox.process_mode == Node.PROCESS_MODE_DISABLED:
-		hitbox.process_mode = Node.PROCESS_MODE_INHERIT
-	else:
-		hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+# Why not use a single toggle function? Sometimes the hitbox's process mode ends up in the wrong state when using that
+func enable_bite_hitbox():
+	hitbox.process_mode = Node.PROCESS_MODE_INHERIT
+
+func disable_bite_hitbox():
+	hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 
 func bite():
 	body_meshes.biting = true
 	stop_lateral_mvmt()
 	var bite_tween = get_tree().create_tween()
-	bite_tween.tween_callback(toggle_bite_hitbox)
+	bite_tween.tween_callback(enable_bite_hitbox)
 	bite_tween.tween_property(body_meshes, "position", bite_body_dist*body_meshes.transform.basis.z, bite_secs / 2).as_relative()
 	bite_tween.tween_property(body_meshes, "position", -bite_body_dist*body_meshes.transform.basis.z, bite_secs / 2).as_relative()
-	bite_tween.tween_callback(toggle_bite_hitbox)
+	bite_tween.tween_callback(disable_bite_hitbox)
 	await bite_tween.finished
 	body_meshes.biting = false
 

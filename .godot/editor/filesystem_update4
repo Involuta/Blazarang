@@ -29,3 +29,4 @@ res://enemies/paramite.tscn
 res://levels/mite_level/mite_level.tscn
 res://enemies/landmite.tscn
 res://enemies/landmite.gd
+res://enemies/jumping_spider.tscn
