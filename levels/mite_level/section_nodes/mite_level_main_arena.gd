@@ -25,8 +25,15 @@ func _physics_process(delta):
 		else:
 			arena_infest_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 
-func spawn_mites_from_egg_at(pos: Vector3):
-	var lm_inst = landmite.instantiate()
-	level.add_child.call_deferred(lm_inst)
-	await lm_inst.tree_entered
-	lm_inst.global_position = pos
+func spawn_mites_from_egg_at(pos: Vector3, mite_num: int):
+	var mite_jump_dir := pos.direction_to(Vector3.ZERO)
+	mite_jump_dir = mite_jump_dir.rotated(Vector3.UP, -PI/4)
+	
+	# Spawn mites so they leap out in an arc
+	for i in range(mite_num):
+		var lm_inst = landmite.instantiate()
+		level.add_child.call_deferred(lm_inst)
+		await lm_inst.tree_entered
+		lm_inst.global_position = pos
+		lm_inst.init_leap_dir = mite_jump_dir
+		mite_jump_dir = mite_jump_dir.rotated(Vector3.UP, PI/2/mite_num)

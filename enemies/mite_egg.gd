@@ -8,6 +8,8 @@ var invincibility_secs := .05
 @export var bullet_explosion_secs := 1.0
 var destroyed := false
 
+@export var mite_num := 10
+
 @onready var flight_particles := $FlightParticles
 @onready var impact_particles := $ImpactParticles
 
@@ -38,7 +40,7 @@ func _on_body_entered(body):
 	if Globals.compare_layers(body.collision_layer, Globals.ENEMY_COL_LAYER):
 		pass
 	elif Globals.compare_layers(body.collision_layer, Globals.ARENA_COL_LAYER):
-		mite_arena.spawn_mites_from_egg_at(global_position)
+		mite_arena.spawn_mites_from_egg_at(global_position, mite_num)
 		#get_parent().spawn_mites_from_egg_at(global_position)
 		destroy_self()
 

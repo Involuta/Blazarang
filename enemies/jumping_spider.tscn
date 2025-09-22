@@ -77,7 +77,7 @@ shape = SubResource("SphereShape3D_y5yyh")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -0.25)
 
 [node name="VeryFrontLeftLeg_002" parent="JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.526616, 0.403999, -0.74797, -0.634604, -0.398617, -0.662104, -0.565643, 0.82334, 0.0464611, 1.6275, 5.11115, 1.8045)
+transform = Transform3D(0.526616, 0.403999, -0.74797, -0.634604, -0.398617, -0.662103, -0.565643, 0.823339, 0.046461, 1.6275, 5.11115, 1.8045)
 
 [node name="VeryFrontLeftLeg_001" parent="JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/Armature/Skeleton3D" index="1"]
 transform = Transform3D(-0.00162412, 0.566957, -0.823746, 0.878671, -0.392469, -0.271856, -0.477426, -0.724243, -0.497531, 3.1497, 0.124941, 3.56091)
@@ -140,7 +140,7 @@ transform = Transform3D(-0.915262, 0.328802, -0.232716, -0.112133, 0.346909, 0.9
 transform = Transform3D(0.299573, 0.942909, 0.145526, -0.953804, 0.299605, 0.0222216, -0.0226474, -0.14546, 0.989105, -1.0657, -1.10908, -0.00412226)
 
 [node name="MiddleBackRightLeg_002" parent="JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/Armature/Skeleton3D" index="21"]
-transform = Transform3D(-0.322252, -0.920669, -0.220279, 0.92086, -0.358816, 0.152541, -0.219479, -0.15369, 0.963436, -1.61379, 4.67234, -0.340432)
+transform = Transform3D(-0.322252, -0.920669, -0.220279, 0.920861, -0.358816, 0.152541, -0.219479, -0.15369, 0.963436, -1.61379, 4.67234, -0.340432)
 
 [node name="MiddleBackRightLeg_001" parent="JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/Armature/Skeleton3D" index="22"]
 transform = Transform3D(-0.922458, 0.125153, -0.365209, -0.316429, -0.787039, 0.529539, -0.221164, 0.604049, 0.765625, -3.84391, 0.505524, -0.472417)

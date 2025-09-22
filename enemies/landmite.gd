@@ -27,6 +27,7 @@ var strafing_left := true
 
 var ground_normal := Vector3.UP # Normal of the ground, determined by the avg normal of the planes formed by points where feet hit the ground
 
+var init_leap_dir := Vector3.ONE # Set by arena script to a nonzero value when egg spawns mite. In start_leap(), if this var is not Vector3.ZERO, then landmite leaps in init_leap_dir, then sets init_leap_dir to Vector3.ZERO. If it is Vector3.ZERO, landmite leaps in body_meshes.transform.z
 var can_leap := true
 @export var max_leap_cooldown := 3.0 # Max time after a leap ends before you can leap again
 @export var min_leap_cooldown := .25 # Min time after a leap ends before you can leap again
@@ -229,10 +230,20 @@ func start_leap():
 	
 	# Stop IK
 	body_meshes.stop_ik()
-	if global_position.distance_to(target_position) > leap_length_threshold:
-		velocity = (leap_long_lateral_speed + rng.randf_range(-.5,.5)) * body_meshes.transform.basis.z
+	
+	# The first leap is in the init_leap_dir. Subsequent leaps are in body_meshes fwd dir
+	var leap_dir : Vector3
+	if init_leap_dir != Vector3.ZERO:
+		rotate_y_to_vec(init_leap_dir, 1)
+		leap_dir = init_leap_dir
+		init_leap_dir = Vector3.ZERO
 	else:
-		velocity = (leap_short_lateral_speed + rng.randf_range(-.5,.5)) * body_meshes.transform.basis.z
+		leap_dir = body_meshes.transform.basis.z
+	
+	if global_position.distance_to(target_position) > leap_length_threshold:
+		velocity = (leap_long_lateral_speed + rng.randf_range(-.5,.5)) * leap_dir
+	else:
+		velocity = (leap_short_lateral_speed + rng.randf_range(-.5,.5)) * leap_dir
 	velocity.y = leap_vertical_speed + rng.randf_range(-.5,.5)
 
 func stop_aiming_at_target():

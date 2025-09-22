@@ -134,7 +134,7 @@ transform = Transform3D(-0.919759, -0.268677, 0.286104, 0.171146, -0.930558, -0.
 surface_material_override/0 = SubResource("StandardMaterial3D_8ihky")
 
 [node name="LeftMiddleBackThigh" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.117075, -0.968653, 0.219098, 0.991993, 0.124582, 0.0207182, -0.0473644, 0.214918, 0.975483, 0.132728, -1.85354, 0.23876)
+transform = Transform3D(0.117075, -0.968653, 0.219098, 0.991993, 0.124582, 0.0207182, -0.0473644, 0.214918, 0.975483, 0.132729, -1.85354, 0.23876)
 
 [node name="LeftMiddleBackThigh" parent="ParamiteProcAnimMeshes/ParamiteMeshes/Armature/Skeleton3D/LeftMiddleBackThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_8ihky")
