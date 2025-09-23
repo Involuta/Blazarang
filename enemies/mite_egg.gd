@@ -5,10 +5,8 @@ var velocity := Vector3.ONE
 @export var max_lifetime_secs := 9.0
 var invincible := true # prevents bullet from hitting self
 var invincibility_secs := .05
-@export var bullet_explosion_secs := 1.0
+@export var egg_explosion_secs := 1.0
 var destroyed := false
-
-@export var mite_num := 10
 
 @onready var flight_particles := $FlightParticles
 @onready var impact_particles := $ImpactParticles
@@ -40,8 +38,7 @@ func _on_body_entered(body):
 	if Globals.compare_layers(body.collision_layer, Globals.ENEMY_COL_LAYER):
 		pass
 	elif Globals.compare_layers(body.collision_layer, Globals.ARENA_COL_LAYER):
-		mite_arena.spawn_mites_from_egg_at(global_position, mite_num)
-		#get_parent().spawn_mites_from_egg_at(global_position)
+		mite_arena.spawn_mites_from_egg_at(global_position, 1) # 1 bc this is a Tier 1 egg
 		destroy_self()
 
 func destroy_self():
@@ -52,5 +49,5 @@ func destroy_self():
 	destroyed = true
 	# For whatever reason, high velocity apparently makes the particles disappear early
 	velocity = Vector3.ZERO
-	await get_tree().create_timer(bullet_explosion_secs).timeout
+	await get_tree().create_timer(egg_explosion_secs).timeout
 	queue_free()

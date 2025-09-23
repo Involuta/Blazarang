@@ -21,7 +21,6 @@ _data = {
 
 [node name="MiteEggTier1" type="Node3D"]
 script = ExtResource("1_008di")
-mite_num = 20
 
 [node name="NeutralHitbox" type="Area3D" parent="."]
 collision_layer = 8
