@@ -2,8 +2,8 @@ extends CharacterBody3D
 
 var spitweb := preload("res://enemies/spitweb.tscn")
 @onready var nav_agent := $NavigationAgent3D
-@onready var body_meshes := $ParamiteProcAnimMeshes
-@onready var skythread := $ParamiteProcAnimMeshes/SkyThread
+@onready var body_meshes := $ParamiteMeshes
+@onready var skythread := $ParamiteMeshes/SkyThread
 @onready var physical_collider := $CollisionShape3D
 @onready var hurtbox := $EnemyHurtbox
 @onready var anim_player := $ParamiteProcAnimMeshes/ParamiteMeshes/AnimationPlayer
@@ -54,8 +54,8 @@ func _ready():
 	switch_to_launch()
 
 func switch_to_launch():
-	# Stop IK since you're leaving the ground
-	body_meshes.stop_ik()
+	# Stop aligning body to the ground slope
+	body_meshes.alignment_disabled = true
 	# Remove any body orientation tilt
 	body_meshes.rotation = body_meshes.rotation.y * Vector3.UP
 	
@@ -200,8 +200,8 @@ func fall_frame(delta):
 		switch_to_retreat()
 
 func switch_to_retreat():
-	# Start IK
-	body_meshes.start_ik()
+	# Start aligning body to the ground slope
+	body_meshes.alignment_disabled = false
 	behav_state = RETREAT
 
 func retreat(_delta):
