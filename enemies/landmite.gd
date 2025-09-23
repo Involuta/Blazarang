@@ -2,8 +2,8 @@ extends CharacterBody3D
 
 #var tiny_mite := preload("res://enemies/mite_death_particle.tscn")
 @onready var nav_agent := $NavigationAgent3D
-@onready var body_meshes := $ParamiteProcAnimMeshes
-@onready var anim_player := $ParamiteProcAnimMeshes/ParamiteMeshes/AnimationPlayer
+@onready var body_meshes := $ParamiteMeshes
+@onready var anim_player := $ParamiteMeshes/AnimationPlayer
 @onready var anim_tree := $AnimationTree
 @onready var root := $/root/ViewControl
 var rng := RandomNumberGenerator.new()
@@ -118,6 +118,9 @@ func follow(delta):
 	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
 	nav_agent.velocity = new_velocity
 	
+	# Scale anim playback speed based on movement speed
+	anim_tree.set("parameters/playback_speed", velocity.length() / follow_speed)
+	
 	# If player isn't in sight, reduce target distance to a very small number
 	if can_see_target():
 		nav_agent.target_desired_distance = target_distance
@@ -147,7 +150,7 @@ func follow(delta):
 
 func leap_frame():
 	if is_on_floor():
-		body_meshes.start_ik()
+		body_meshes.alignment_disabled = false
 		behav_state = FOLLOW
 		can_leap = false
 		stop_lateral_mvmt()
@@ -210,7 +213,6 @@ func disable_bite_hitbox():
 	hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 
 func bite():
-	body_meshes.biting = true
 	stop_lateral_mvmt()
 	var bite_tween = get_tree().create_tween()
 	bite_tween.tween_callback(enable_bite_hitbox)
@@ -218,7 +220,6 @@ func bite():
 	bite_tween.tween_property(body_meshes, "position", -bite_body_dist*body_meshes.transform.basis.z, bite_secs / 2).as_relative()
 	bite_tween.tween_callback(disable_bite_hitbox)
 	await bite_tween.finished
-	body_meshes.biting = false
 
 func stop_lateral_mvmt():
 	velocity.x = 0
@@ -228,9 +229,6 @@ func start_leap():
 	if abs(target_position.y - global_position.y) > leap_y_proximity:
 		return
 	
-	# Stop IK
-	body_meshes.stop_ik()
-	
 	# The first leap is in the init_leap_dir. Subsequent leaps are in body_meshes fwd dir
 	var leap_dir : Vector3
 	if init_leap_dir != Vector3.ZERO:
@@ -239,6 +237,8 @@ func start_leap():
 		init_leap_dir = Vector3.ZERO
 	else:
 		leap_dir = body_meshes.transform.basis.z
+	
+	body_meshes.alignment_disabled = true
 	
 	if global_position.distance_to(target_position) > leap_length_threshold:
 		velocity = (leap_long_lateral_speed + rng.randf_range(-.5,.5)) * leap_dir
