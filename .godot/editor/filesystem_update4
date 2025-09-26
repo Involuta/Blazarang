@@ -1,6 +1,3 @@
-res://enemies/enemy_anims/paramite_bite.res
-res://enemies/enemy_anims/paramite_flip.res
-res://enemies/enemy_anims/paramite_glide.res
 res://enemies/landmite.tscn
 res://enemies/enemy_hurtbox.gd
 res://glb_inherited_scenes/mite_hills_ground.gdshader
@@ -25,6 +22,10 @@ res://ui/glow.gdshader
 res://ui/glitch.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
 res://general_scripts/skygradient.gdshader
+res://enemies/enemy_anims/paramite_bite.res
+res://enemies/enemy_anims/paramite_flip.res
+res://enemies/enemy_anims/paramite_glide.res
+res://enemies/landmite.gd
 res://levels/mite_level/section_nodes/mite_level_main_arena.tscn
 res://enemies/paramite.tscn
 res://enemies/jumping_spider.tscn

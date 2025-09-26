@@ -1,6 +1,6 @@
+MeshInstance3D
 AnimationPlayer
 GPUParticles3D
-MeshInstance3D
 CollisionShape3D
 Area3D
 StaticBody3D

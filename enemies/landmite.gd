@@ -75,7 +75,8 @@ func _physics_process(delta):
 		STRAFE:
 			strafe(delta)
 		BITE:
-			rotate_y_to_vec(global_position.direction_to(target.global_position), follow_turn_speed)
+			pass
+			#rotate_y_to_vec(global_position.direction_to(target.global_position), follow_turn_speed)
 		LEAP:
 			leap_frame()
 	
@@ -205,21 +206,11 @@ func strafe(delta):
 			time_until_can_leap = rng.randf_range(min_leap_cooldown, max_leap_cooldown)
 			can_leap = true
 
-# Why not use a single toggle function? Sometimes the hitbox's process mode ends up in the wrong state when using that
-func enable_bite_hitbox():
-	hitbox.process_mode = Node.PROCESS_MODE_INHERIT
-
-func disable_bite_hitbox():
-	hitbox.process_mode = Node.PROCESS_MODE_DISABLED
-
 func bite():
 	stop_lateral_mvmt()
-	var bite_tween = get_tree().create_tween()
-	bite_tween.tween_callback(enable_bite_hitbox)
-	bite_tween.tween_property(body_meshes, "position", bite_body_dist*body_meshes.transform.basis.z, bite_secs / 2).as_relative()
-	bite_tween.tween_property(body_meshes, "position", -bite_body_dist*body_meshes.transform.basis.z, bite_secs / 2).as_relative()
-	bite_tween.tween_callback(disable_bite_hitbox)
-	await bite_tween.finished
+	#bite_tween.tween_property(body_meshes, "position", bite_body_dist*body_meshes.transform.basis.z, bite_secs / 2).as_relative()
+	#bite_tween.tween_property(body_meshes, "position", -bite_body_dist*body_meshes.transform.basis.z, bite_secs / 2).as_relative()
+	await get_tree().create_timer(.5).timeout
 
 func stop_lateral_mvmt():
 	velocity.x = 0
