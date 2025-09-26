@@ -19,7 +19,6 @@ enum {
 	LEAP,
 }
 var behav_state := FOLLOW
-@export var target_distance := 1.0 # Dist from target necessary to bite
 var target_position := Vector3.ZERO # Position mite moves to; set to target.global_position when not strafing and set to a point beside and behind the target when strafing ("fwd" = to the target)
 
 var strafing_left := true
@@ -45,7 +44,6 @@ var time_until_forced_leap := 5.0 # Set to can_leap_window when reset
 @export var follow_speed := 3.5
 @export var follow_turn_speed := .1
 @export var bite_proximity := 2.0 # Proximity to target required to start bite
-@export var bite_body_dist := 2.2 # Dist fwd mite's body moves when biting
 @export var bite_secs := .24
 @export var bite_cooldown_secs := .5
 var bite_cooldown_remaining := 2.5
@@ -56,9 +54,9 @@ func _ready():
 	level = root.find_child("Level")
 	target = root.find_child("Icon")
 	hitbox = find_child("MeleeHitboxPivot")
-	# Hitbox is disabled by default, and is enabled then disabled during bite
-	hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	anim_tree.active = true
+	
+	nav_agent.target_desired_distance = bite_proximity
 	
 	time_until_can_leap = rng.randf_range(min_leap_cooldown, max_leap_cooldown)
 	can_leap = true
@@ -76,13 +74,15 @@ func _physics_process(delta):
 			strafe(delta)
 		BITE:
 			pass
-			#rotate_y_to_vec(global_position.direction_to(target.global_position), follow_turn_speed)
 		LEAP:
 			leap_frame()
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	move_and_slide()
+	
+	if global_position.y < -100:
+		queue_free()
 
 # Equivalent of lerp_look_at_move_dir or lerp_look_at_target in other enemies. This func is necessary for mites bc the mesh itself needs to rotate independently of the parent
 # Rotate body meshes y rotation so that meshes look in the direction of the vector, which is a 3D vec whose y value is ignored
@@ -122,12 +122,6 @@ func follow(delta):
 	# Scale anim playback speed based on movement speed
 	anim_tree.set("parameters/playback_speed", velocity.length() / follow_speed)
 	
-	# If player isn't in sight, reduce target distance to a very small number
-	if can_see_target():
-		nav_agent.target_desired_distance = target_distance
-	else:
-		nav_agent.target_desired_distance = .1
-		
 	bite_cooldown_remaining -= delta
 	if bite_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < bite_proximity:
 		bite_cooldown_remaining = bite_cooldown_secs
@@ -181,12 +175,6 @@ func strafe(delta):
 	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
 	nav_agent.velocity = new_velocity
 	
-	# If player isn't in sight, reduce target distance to a very small number
-	if can_see_target():
-		nav_agent.target_desired_distance = target_distance
-	else:
-		nav_agent.target_desired_distance = .1
-		
 	bite_cooldown_remaining -= delta
 	if bite_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < bite_proximity:
 		bite_cooldown_remaining = bite_cooldown_secs
@@ -208,8 +196,6 @@ func strafe(delta):
 
 func bite():
 	stop_lateral_mvmt()
-	#bite_tween.tween_property(body_meshes, "position", bite_body_dist*body_meshes.transform.basis.z, bite_secs / 2).as_relative()
-	#bite_tween.tween_property(body_meshes, "position", -bite_body_dist*body_meshes.transform.basis.z, bite_secs / 2).as_relative()
 	await get_tree().create_timer(.5).timeout
 
 func stop_lateral_mvmt():

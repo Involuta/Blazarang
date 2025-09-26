@@ -238,6 +238,7 @@ anim_player = NodePath("../HarvestmanProcAnimMeshes/HarvestmanMeshes/AnimationPl
 advance_expression_base_node = NodePath("..")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 2.0
 target_desired_distance = 15.0
 avoidance_enabled = true
 radius = 10.0
