@@ -71,7 +71,7 @@ transitions = ["glide", "flip", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(3.01716e-05, 41.685)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_mxa20"]
-graph_offset = Vector2(-35.52, 97.92)
+graph_offset = Vector2(-24.96, 105.6)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_v8kte")
 nodes/StateMachine/position = Vector2(100, 150)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -83,6 +83,7 @@ radius = 0.3
 collision_layer = 8
 collision_mask = 90
 script = ExtResource("1_sdbgq")
+retreat_dest = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_tej0w")

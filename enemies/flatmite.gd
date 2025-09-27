@@ -170,6 +170,8 @@ func stop_lateral_mvmt():
 	velocity.z = 0
 
 func leap():
+	body_meshes.alignment_disabled = true
+	
 	if global_position.distance_to(target_position) > leap_length_threshold:
 		velocity = (leap_long_lateral_speed + rng.randf_range(-.5,.5)) * body_meshes.transform.basis.z
 	else:
@@ -180,6 +182,7 @@ func leap():
 	shoot_spitwebs()
 	physical_collider.process_mode = Node.PROCESS_MODE_INHERIT
 	await get_tree().create_timer(leap_secs/2).timeout
+	body_meshes.alignment_disabled = false
 	stop_lateral_mvmt()
 
 func leap_frame(_delta):

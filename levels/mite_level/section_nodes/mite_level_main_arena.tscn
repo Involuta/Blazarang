@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://levels/mite_level/section_nodes/mite_level_main_arena.gd" id="1_tjf6h"]
 [ext_resource type="PackedScene" uid="uid://0y87606fdbah" path="res://glb_inherited_scenes/mite_bowl.tscn" id="2_0jglk"]
-[ext_resource type="PackedScene" uid="uid://s18sdq53k2im" path="res://enemies/paramite.tscn" id="6_3d33o"]
+[ext_resource type="PackedScene" uid="uid://dfc0tigy6k7el" path="res://enemies/flatmite.tscn" id="5_04na6"]
 [ext_resource type="PackedScene" uid="uid://ce3jswl2dgnq1" path="res://enemies/mite_egg_tier1.tscn" id="6_4qcxw"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="7_cwqry"]
 
@@ -56,9 +56,6 @@ navigation_mesh = SubResource("NavigationMesh_mcv4c")
 [node name="MiteBowl" parent="NavigationRegion3D" instance=ExtResource("2_0jglk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -13, 2.08165e-12)
 
-[node name="Paramite" parent="." instance=ExtResource("6_3d33o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.446, 1.8, 2.08165e-12)
-
 [node name="MiteCloudPivot" type="Node3D" parent="."]
 
 [node name="EnemyHitbox" type="Area3D" parent="MiteCloudPivot"]
@@ -79,3 +76,5 @@ draw_pass_1 = SubResource("SphereMesh_qq31a")
 
 [node name="MiteEggTier1" parent="." instance=ExtResource("6_4qcxw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.776, 25, -18.5624)
+
+[node name="Flatmite" parent="." instance=ExtResource("5_04na6")]

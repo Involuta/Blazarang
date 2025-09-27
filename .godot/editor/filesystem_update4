@@ -38,3 +38,5 @@ res://general_scripts/align_body_to_slope.gd
 res://enemies/harvestman_proc_anim_test_mvmt.gd
 res://enemies/jumping_spider_proc_anim_meshes.gd
 res://glb_inherited_scenes/flatmite_meshes.gd
+res://enemies/flatmite.gd
+res://enemies/paramite.gd

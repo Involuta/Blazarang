@@ -6,9 +6,6 @@ extends Node3D
 @export var turn_speed := 1.0
 @export var ground_offset := 1.5 # Height of mite's body from the ground
 
-@onready var parent := get_parent()
-var avg_normal := Vector3.UP # This is visible in the entire script so that the parent can see it; if it's Vector3.UP, the parent can leap
-
 var alignment_disabled := false
 
 func _process(delta):
@@ -23,11 +20,10 @@ func _process(delta):
 	var result = space_state.intersect_ray(query)
 	if not result:
 		return
-	avg_normal = result.normal
 	
 	# Convert the normal to a basis, then a quaternion to prevent a "Basis must be normalized" error, then convert the lerped quaternion back to a Basis
-	draw_vector_line(avg_normal * 10)
-	var target_basis = Globals.basis_from_normal(transform, avg_normal)
+	draw_vector_line(result.normal * 10)
+	var target_basis = Globals.basis_from_normal(transform, result.normal)
 	rotation = lerp(transform.basis.get_rotation_quaternion(), target_basis.get_rotation_quaternion(), run_speed * delta).get_euler()
 	
 	# Offset body from the ground

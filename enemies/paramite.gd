@@ -216,10 +216,9 @@ func switch_to_retreat():
 	# Start aligning body to the ground slope
 	body_meshes.alignment_disabled = false
 	behav_state = RETREAT
+	target_position = retreat_dest
 
 func retreat(_delta):
-	target_position = retreat_dest
-	
 	# Paramites randomly spin while retreating to make them look panicked and disoriented
 	rotate_y_to_vec_random_spins(velocity, follow_turn_speed)
 	if global_position.distance_to(target_position) <= nav_agent.target_desired_distance:
