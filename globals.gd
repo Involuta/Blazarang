@@ -121,3 +121,13 @@ func award_score(points):
 	# Apply multipliers/modifiers
 	score += points * multiplier
 	score_updated.emit(points)
+
+func basis_from_normal(transform, normal: Vector3) -> Basis:
+	var result = Basis()
+	result.x = normal.cross(transform.basis.z)
+	result.y = normal
+	result.z = transform.basis.x.cross(normal)
+	
+	result = result.orthonormalized()
+	
+	return result

@@ -23,7 +23,7 @@ func _process(_delta):
 	
 	# Convert the normal to a basis, then a quaternion to prevent a "Basis must be normalized" error, then convert the lerped quaternion back to a Basis
 	draw_vector_line(avg_normal * 10)
-	var target_basis = _basis_from_normal(avg_normal)
+	var target_basis = Globals.basis_from_normal(transform, avg_normal)
 	rotation = lerp(transform.basis.get_rotation_quaternion(), target_basis.get_rotation_quaternion(), .2).get_euler()
 	
 	# Offset body from the ground
@@ -47,13 +47,3 @@ func draw_vector_line(vec: Vector3):
 	if not normal_line:
 		return
 	normal_line.mesh = mesh
-
-func _basis_from_normal(normal: Vector3) -> Basis:
-	var result = Basis()
-	result.x = normal.cross(transform.basis.z)
-	result.y = normal
-	result.z = transform.basis.x.cross(normal)
-	
-	result = result.orthonormalized()
-	
-	return result
