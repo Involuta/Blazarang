@@ -75,6 +75,7 @@ func death_effect():
 		dp.apply_central_impulse(Vector3(rng.randf_range(-dp_impulse_limit, dp_impulse_limit), dp_impulse_limit*rng.randf(), rng.randf_range(-dp_impulse_limit, dp_impulse_limit)))
 
 func die():
+	Globals.enemy_killed.emit(name)
 	Globals.award_score(kill_score)
 	death_effect()
 	super()

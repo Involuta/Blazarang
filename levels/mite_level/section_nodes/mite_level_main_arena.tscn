@@ -47,7 +47,8 @@ material = SubResource("StandardMaterial3D_uxjbv")
 
 [node name="MiteLevelMainArena" type="Node3D"]
 script = ExtResource("1_tjf6h")
-mite_num_tier1 = 30
+max_time_until_next_egg = 2.0
+mite_num_tier1 = 15
 paramite_chance_tier1 = 0.15
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]

@@ -1,9 +1,6 @@
 extends Node3D
 
-@onready var arena_infest_hitbox := $MiteCloudPivot/EnemyHitbox
-var time_btwn_infest_switch_secs := 5.0 # Should be less than half the time it takes for debuff to disappear
-var time_to_next_infest_switch_secs := 5.0
-
+@onready var egg_tier1 := preload("res://enemies/mite_egg_tier1.tscn")
 @onready var landmite := preload("res://enemies/landmite.tscn")
 @onready var paramite := preload("res://enemies/paramite.tscn")
 @onready var flatmite := preload("res://enemies/flatmite.tscn")
@@ -13,21 +10,48 @@ var time_to_next_infest_switch_secs := 5.0
 var rng := RandomNumberGenerator.new()
 var level : Node3D
 
+@onready var arena_infest_hitbox := $MiteCloudPivot/EnemyHitbox
+@export var max_time_until_next_infest_switch := 5.0 # Should be less than half the time it takes for debuff to disappear
+var time_until_next_infest_switch_secs := 5.0
+
+@export var max_time_until_next_egg := 20.0
+var time_until_next_egg := 20.0
+@export var max_living_enemies := 50
+var living_enemies := 0
+
 @export var mite_num_tier1 := 20 # Number of mites spawned from a Tier 1 egg
 @export var paramite_chance_tier1 := .2 # Probability that a mite spawned from a Tier 1 egg is a paramite instead of a landmite
 
 func _ready():
-	time_to_next_infest_switch_secs = time_btwn_infest_switch_secs
+	time_until_next_infest_switch_secs = max_time_until_next_infest_switch
 	level = root.find_child("Level")
+	
+	Globals.enemy_killed.connect(decrement_living_enemies)
 
 func _physics_process(delta):
-	time_to_next_infest_switch_secs -= delta
-	if time_to_next_infest_switch_secs <= 0:
-		time_to_next_infest_switch_secs = time_btwn_infest_switch_secs
+	time_until_next_infest_switch_secs -= delta
+	if time_until_next_infest_switch_secs <= 0:
+		time_until_next_infest_switch_secs = max_time_until_next_infest_switch
 		if arena_infest_hitbox.process_mode == Node.PROCESS_MODE_DISABLED:
 			arena_infest_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
 		else:
 			arena_infest_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+	
+	if living_enemies + mite_num_tier1 < max_living_enemies:
+		time_until_next_egg -= delta
+	if time_until_next_egg <= 0:
+		time_until_next_egg = max_time_until_next_egg
+		spawn_egg()
+
+func spawn_egg():
+	var egg_inst = egg_tier1.instantiate()
+	level.add_child.call_deferred(egg_inst)
+	await egg_inst.tree_entered
+	egg_inst.global_position = 100 * Vector3.UP
+
+func decrement_living_enemies(_enemy_name):
+	# enemy_name is a parameter of the enemy_killed signal, but isn't used in this func
+	living_enemies -= 1
 
 func spawn_mites_from_egg_at(pos: Vector3, egg_tier: int):
 	var paramite_chance : float
@@ -39,6 +63,8 @@ func spawn_mites_from_egg_at(pos: Vector3, egg_tier: int):
 		_:
 			mite_num = mite_num_tier1
 			paramite_chance = paramite_chance_tier1
+	
+	living_enemies += mite_num
 	
 	var mite_jump_dir := pos.direction_to(Vector3.ZERO)
 	mite_jump_dir = mite_jump_dir.rotated(Vector3.UP, -PI/4)

@@ -66,4 +66,4 @@ func receive_hit(damage: float, _hitter):
 		die()
 
 func die():
-	parent.queue_free()
+	parent.queue_free.call_deferred()

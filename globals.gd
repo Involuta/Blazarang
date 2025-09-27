@@ -12,6 +12,7 @@ signal cotu_dodge
 signal cotu_normal_throw_rose
 signal cotu_instant_rethrow_rose
 signal cotu_throw_ax
+signal enemy_killed(enemy_name: String)
 signal destabilize
 signal stabilize
 signal health_segment_lost(seg_num: int)
