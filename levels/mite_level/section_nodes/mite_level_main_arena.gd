@@ -22,11 +22,43 @@ var living_enemies := 0
 @export var mite_num_tier1 := 20 # Number of mites spawned from a Tier 1 egg
 @export var paramite_chance_tier1 := .2 # Probability that a mite spawned from a Tier 1 egg is a paramite instead of a landmite
 
+@export var real_num_landmites := 40 # How many landmite scenes are loaded into the level
+@export var real_num_paramites := 8
+@export var real_num_flatmites := 2
+@export var real_num_harvestmen := 4
+var non_elites_dict = {} # Key is instance name, value is bool of whether its alive or dead
+var elites_dict = {}
+
 func _ready():
 	time_until_next_infest_switch_secs = max_time_until_next_infest_switch
+	time_until_next_egg = max_time_until_next_egg
 	level = root.find_child("Level")
 	
 	Globals.enemy_killed.connect(decrement_living_enemies)
+	# Instantiate enemies
+	for i in range(real_num_landmites):
+		var inst = await load_scene_at_pos(landmite, Vector3(i * 5, 20, 0))
+		non_elites_dict[inst.name] = false
+	for i in range(real_num_paramites):
+		var inst = await load_scene_at_pos(paramite, Vector3(i * 5, 30, 0))
+		non_elites_dict[inst.name] = false
+	for i in range(real_num_flatmites):
+		var inst = await load_scene_at_pos(flatmite, Vector3(i * 5, 40, 0))
+		elites_dict[inst.name] = false
+	for i in range(real_num_harvestmen):
+		var inst = await load_scene_at_pos(harvestman, Vector3(i * 5, 60, 0))
+		elites_dict[inst.name] = false
+
+func load_scene_at_pos(scene, pos: Vector3, active : bool = false):
+	var inst = scene.instantiate()
+	level.add_child.call_deferred(inst)
+	await inst.tree_entered
+	inst.global_position = pos
+	inst.set_process(active)
+	inst.set_physics_process(active)
+	if not active:
+		inst.process_mode = Node.PROCESS_MODE_DISABLED
+	return inst
 
 func _physics_process(delta):
 	time_until_next_infest_switch_secs -= delta
@@ -41,28 +73,19 @@ func _physics_process(delta):
 		time_until_next_egg -= delta
 	if time_until_next_egg <= 0:
 		time_until_next_egg = max_time_until_next_egg
-		spawn_egg()
-
-func spawn_egg():
-	var egg_inst = egg_tier1.instantiate()
-	level.add_child.call_deferred(egg_inst)
-	await egg_inst.tree_entered
-	egg_inst.global_position = 100 * Vector3.UP
+		load_scene_at_pos(egg_tier1, 100*Vector3.UP, true)
 
 func decrement_living_enemies(_enemy_name):
 	# enemy_name is a parameter of the enemy_killed signal, but isn't used in this func
 	living_enemies -= 1
 
 func spawn_mites_from_egg_at(pos: Vector3, egg_tier: int):
-	var paramite_chance : float
 	var mite_num : int
 	match(egg_tier):
 		1:
 			mite_num = mite_num_tier1
-			paramite_chance = paramite_chance_tier1
 		_:
 			mite_num = mite_num_tier1
-			paramite_chance = paramite_chance_tier1
 	
 	living_enemies += mite_num
 	
@@ -70,21 +93,19 @@ func spawn_mites_from_egg_at(pos: Vector3, egg_tier: int):
 	mite_jump_dir = mite_jump_dir.rotated(Vector3.UP, -PI/4)
 	var init_mite_jump_dir = mite_jump_dir
 	
-	# Spawn mites so they leap out in an arc
+	# Spawn mites so they leap out in a circle, reducing the chance of them pushing against each other
 	for i in range(mite_num):
-		mite_jump_dir = init_mite_jump_dir.rotated(Vector3.UP, PI/2/mite_num*i)
-		
-		var mite_inst
-		var is_paramite := false
-		if rng.randf() > paramite_chance:
-			mite_inst = landmite.instantiate()
-		else:
-			is_paramite = true
-			mite_inst = paramite.instantiate()
-		level.add_child.call_deferred(mite_inst)
-		await mite_inst.tree_entered
-		mite_inst.global_position = pos + mite_jump_dir
-		mite_inst.init_leap_dir = mite_jump_dir
-		
-		if is_paramite:
-			mite_inst.global_position += Vector3.UP
+		mite_jump_dir = init_mite_jump_dir.rotated(Vector3.UP, 2*PI/mite_num*i)
+		# Pick a random dead non-elite
+		var dead_non_elites = []
+		for non_elite in non_elites_dict.keys():
+			if not non_elites_dict[non_elite]: # Check if non-elit is dead, i.e. value is false
+				dead_non_elites.append(non_elite)
+		# If all non-elites are alive, return
+		if dead_non_elites.is_empty():
+			return
+		var inst_name = dead_non_elites.pick_random()
+		non_elites_dict[inst_name] = true
+		var inst = level.find_child(inst_name, false, false)
+		inst.global_position = pos + 4*mite_jump_dir + 4*Vector3.UP
+		inst.init_leap_dir = mite_jump_dir

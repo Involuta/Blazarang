@@ -1,9 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://bnylrq5nmpcv"]
+[gd_scene load_steps=11 format=3 uid="uid://bnylrq5nmpcv"]
 
 [ext_resource type="Script" path="res://levels/mite_level/section_nodes/mite_level_main_arena.gd" id="1_tjf6h"]
 [ext_resource type="PackedScene" uid="uid://0y87606fdbah" path="res://glb_inherited_scenes/mite_bowl.tscn" id="2_0jglk"]
-[ext_resource type="PackedScene" uid="uid://dfc0tigy6k7el" path="res://enemies/flatmite.tscn" id="5_04na6"]
-[ext_resource type="PackedScene" uid="uid://ce3jswl2dgnq1" path="res://enemies/mite_egg_tier1.tscn" id="6_4qcxw"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="7_cwqry"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_mcv4c"]
@@ -47,8 +45,8 @@ material = SubResource("StandardMaterial3D_uxjbv")
 
 [node name="MiteLevelMainArena" type="Node3D"]
 script = ExtResource("1_tjf6h")
-max_time_until_next_egg = 2.0
-mite_num_tier1 = 15
+max_time_until_next_egg = 1.0
+mite_num_tier1 = 8
 paramite_chance_tier1 = 0.15
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
@@ -74,8 +72,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 6, 2.08165e-12)
 amount = 12
 process_material = SubResource("ParticleProcessMaterial_nwdal")
 draw_pass_1 = SubResource("SphereMesh_qq31a")
-
-[node name="MiteEggTier1" parent="." instance=ExtResource("6_4qcxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.776, 25, -18.5624)
-
-[node name="Flatmite" parent="." instance=ExtResource("5_04na6")]

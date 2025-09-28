@@ -107,7 +107,7 @@ func _physics_process(delta):
 		RETREAT:
 			retreat(delta)
 	
-	move_and_slide()
+	#move_and_slide()
 
 # Equivalent of lerp_look_at_move_dir or lerp_look_at_target in other enemies. This func is necessary for mites bc the mesh itself needs to rotate independently of the parent
 # Rotate body meshes y rotation so that its meshes look in the direction of the vector, which is a 3D vec whose y value is ignored

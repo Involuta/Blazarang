@@ -80,7 +80,7 @@ func _physics_process(delta):
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-	move_and_slide()
+	#move_and_slide()
 	
 	hurtbox.global_position = body_meshes.global_position
 	
