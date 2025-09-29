@@ -11,6 +11,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var level : Node3D
 var hitbox : Node3D
 var target : Node3D
+var is_active := false # Set by mite level main arena to activate/deactivate mite upon its spawning/death
 var aiming_at_target := true
 enum {
 	FOLLOW,
@@ -83,6 +84,15 @@ func _physics_process(delta):
 	
 	if global_position.y < -100:
 		queue_free()
+
+func set_active(active):
+	set_process(active)
+	set_physics_process(active)
+	if active:
+		process_mode = Node.PROCESS_MODE_INHERIT
+	else:
+		global_position.y = -50
+		process_mode = Node.PROCESS_MODE_DISABLED 
 
 # Equivalent of lerp_look_at_move_dir or lerp_look_at_target in other enemies. This func is necessary for mites bc the mesh itself needs to rotate independently of the parent
 # Rotate body meshes y rotation so that meshes look in the direction of the vector, which is a 3D vec whose y value is ignored

@@ -15,7 +15,7 @@ var level : Node3D
 var time_until_next_infest_switch_secs := 5.0
 
 @export var max_time_until_next_egg := 20.0
-var time_until_next_egg := 20.0
+var time_until_next_egg := 1.0
 @export var max_living_enemies := 50
 var living_enemies := 0
 
@@ -31,7 +31,7 @@ var elites_dict = {}
 
 func _ready():
 	time_until_next_infest_switch_secs = max_time_until_next_infest_switch
-	time_until_next_egg = max_time_until_next_egg
+	#time_until_next_egg = max_time_until_next_egg
 	level = root.find_child("Level")
 	
 	Globals.enemy_killed.connect(decrement_living_enemies)
@@ -40,13 +40,13 @@ func _ready():
 		var inst = await load_scene_at_pos(landmite, Vector3(i * 5, 20, 0))
 		non_elites_dict[inst.name] = false
 	for i in range(real_num_paramites):
-		var inst = await load_scene_at_pos(paramite, Vector3(i * 5, 30, 0))
+		var inst = await load_scene_at_pos(landmite, Vector3(i * 5, 30, 0))
 		non_elites_dict[inst.name] = false
 	for i in range(real_num_flatmites):
-		var inst = await load_scene_at_pos(flatmite, Vector3(i * 5, 40, 0))
+		var inst = await load_scene_at_pos(landmite, Vector3(i * 5, 40, 0))
 		elites_dict[inst.name] = false
 	for i in range(real_num_harvestmen):
-		var inst = await load_scene_at_pos(harvestman, Vector3(i * 5, 60, 0))
+		var inst = await load_scene_at_pos(landmite, Vector3(i * 5, 60, 0))
 		elites_dict[inst.name] = false
 
 func load_scene_at_pos(scene, pos: Vector3, active : bool = false):
@@ -54,10 +54,7 @@ func load_scene_at_pos(scene, pos: Vector3, active : bool = false):
 	level.add_child.call_deferred(inst)
 	await inst.tree_entered
 	inst.global_position = pos
-	inst.set_process(active)
-	inst.set_physics_process(active)
-	if not active:
-		inst.process_mode = Node.PROCESS_MODE_DISABLED
+	inst.set_active(active)
 	return inst
 
 func _physics_process(delta):
@@ -99,7 +96,7 @@ func spawn_mites_from_egg_at(pos: Vector3, egg_tier: int):
 		# Pick a random dead non-elite
 		var dead_non_elites = []
 		for non_elite in non_elites_dict.keys():
-			if not non_elites_dict[non_elite]: # Check if non-elit is dead, i.e. value is false
+			if not non_elites_dict[non_elite]: # Check if non-elite is dead, i.e. value is false
 				dead_non_elites.append(non_elite)
 		# If all non-elites are alive, return
 		if dead_non_elites.is_empty():
@@ -109,3 +106,4 @@ func spawn_mites_from_egg_at(pos: Vector3, egg_tier: int):
 		var inst = level.find_child(inst_name, false, false)
 		inst.global_position = pos + 4*mite_jump_dir + 4*Vector3.UP
 		inst.init_leap_dir = mite_jump_dir
+		inst.set_active(true)

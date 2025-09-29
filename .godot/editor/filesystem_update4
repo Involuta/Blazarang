@@ -32,3 +32,5 @@ res://enemies/paramite.gd
 res://enemies/harvestman.gd
 res://enemies/paramite.tscn
 res://enemies/harvestman.tscn
+res://enemies/mite_egg_tier1.tscn
+res://enemies/mite_egg.gd

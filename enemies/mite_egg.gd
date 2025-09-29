@@ -25,6 +25,10 @@ func _ready():
 	if not destroyed and self:
 		destroy_self()
 
+# Func is called by mite_level_main_arena on both enemies and eggs, so eggs need this func
+func set_active(_active):
+	pass
+
 func _physics_process(delta):
 	if not destroyed:
 		global_position += velocity * delta
