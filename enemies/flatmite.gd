@@ -78,7 +78,7 @@ func _physics_process(delta):
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-	#move_and_slide()
+	move_and_slide()
 
 # Equivalent of lerp_look_at_move_dir or lerp_look_at_target in other enemies. This func is necessary for mites bc the mesh itself needs to rotate independently of the parent
 # Rotate body meshes y rotation so that it meshes look in the direction of the vector, which is a 3D vec whose y value is ignored
@@ -124,7 +124,6 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 			var move_dir = global_position.direction_to(target_position)
 			velocity.x = follow_speed * move_dir.x
 			velocity.z = follow_speed * move_dir.z
-	move_and_slide()
 
 func follow(delta):
 	if in_leap_startup:

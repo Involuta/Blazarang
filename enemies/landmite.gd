@@ -116,7 +116,6 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 			var move_dir = global_position.direction_to(target_position)
 			velocity.x = follow_speed * move_dir.x
 			velocity.z = follow_speed * move_dir.z
-	move_and_slide()
 
 func follow(delta):
 	target_position = target.global_position

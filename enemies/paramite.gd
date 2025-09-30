@@ -30,7 +30,7 @@ var behav_state := LAUNCH
 
 var target_position := Vector3.ZERO # Position mite moves to; set to target.global_position when not strafing and set to a point beside and behind the target when strafing ("fwd" = to the target)
 
-@export var follow_speed := 3.0
+@export var follow_speed := 10.0
 @export var follow_turn_speed := .1
 @export var spit_chance := .01 # Chance that spitweb is shot in the current physics frame
 
@@ -107,7 +107,7 @@ func _physics_process(delta):
 		RETREAT:
 			retreat(delta)
 	
-	#move_and_slide()
+	move_and_slide()
 
 # Equivalent of lerp_look_at_move_dir or lerp_look_at_target in other enemies. This func is necessary for mites bc the mesh itself needs to rotate independently of the parent
 # Rotate body meshes y rotation so that its meshes look in the direction of the vector, which is a 3D vec whose y value is ignored
@@ -131,7 +131,6 @@ func _on_navigation_agent_3d_target_reached():
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	if behav_state == FOLLOW or behav_state == RETREAT:
 		velocity = velocity.move_toward(safe_velocity, .25)
-	move_and_slide()
 
 func launch_frame(delta):
 	if velocity.y <= 0:

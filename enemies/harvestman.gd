@@ -39,7 +39,7 @@ var time_until_forced_leap := 5.0 # Set to can_leap_window when reset
 @export var leap_long_lateral_speed := 18.0
 @export var leap_vertical_speed := 5.0
 
-@export var follow_speed := 3.5
+@export var follow_speed := 7.0
 @export var follow_turn_speed := .1
 @export var spit_dist := 16.0
 @export var spit_secs := 2.0
@@ -80,7 +80,7 @@ func _physics_process(delta):
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-	#move_and_slide()
+	move_and_slide()
 	
 	hurtbox.global_position = body_meshes.global_position
 	
@@ -113,7 +113,6 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 			var move_dir = global_position.direction_to(target_position)
 			velocity.x = follow_speed * move_dir.x
 			velocity.z = follow_speed * move_dir.z
-	move_and_slide()
 
 func follow(delta):
 	rotate_y_to_vec(target_position - global_position, follow_turn_speed)
