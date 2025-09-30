@@ -34,7 +34,7 @@ func _ready():
 	#time_until_next_egg = max_time_until_next_egg
 	level = root.find_child("Level")
 	
-	Globals.enemy_killed.connect(decrement_living_enemies)
+	Globals.enemy_killed.connect(set_enemy_to_dead)
 	# Instantiate enemies
 	for i in range(real_num_landmites):
 		var inst = await load_scene_at_pos(landmite, Vector3(i * 5, 20, 0))
@@ -57,6 +57,13 @@ func load_scene_at_pos(scene, pos: Vector3, active : bool = false):
 	inst.set_active(active)
 	return inst
 
+func set_enemy_to_dead(enemy_name: String):
+	living_enemies -= 1
+	if enemy_name in non_elites_dict.keys():
+		non_elites_dict[enemy_name] = false
+	else:
+		elites_dict[enemy_name] = false
+
 func _physics_process(delta):
 	time_until_next_infest_switch_secs -= delta
 	if time_until_next_infest_switch_secs <= 0:
@@ -71,10 +78,6 @@ func _physics_process(delta):
 	if time_until_next_egg <= 0:
 		time_until_next_egg = max_time_until_next_egg
 		load_scene_at_pos(egg_tier1, 100*Vector3.UP, true)
-
-func decrement_living_enemies(_enemy_name):
-	# enemy_name is a parameter of the enemy_killed signal, but isn't used in this func
-	living_enemies -= 1
 
 func spawn_mites_from_egg_at(pos: Vector3, egg_tier: int):
 	var mite_num : int
