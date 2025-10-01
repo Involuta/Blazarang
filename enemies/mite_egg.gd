@@ -42,7 +42,7 @@ func _on_body_entered(body):
 	if Globals.compare_layers(body.collision_layer, Globals.ENEMY_COL_LAYER):
 		pass
 	elif Globals.compare_layers(body.collision_layer, Globals.ARENA_COL_LAYER):
-		mite_arena.spawn_mites_from_egg_at(global_position, 1) # 1 bc this is a Tier 1 egg
+		mite_arena.spawn_enemies_from_egg_at(global_position, 1) # 1 bc this is a Tier 1 egg
 		destroy_self()
 
 func destroy_self():

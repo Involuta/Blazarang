@@ -29,3 +29,5 @@ res://enemies/mite_egg_tier1.tscn
 res://enemies/landmite.gd
 res://enemies/paramite.gd
 res://enemies/paramite.tscn
+res://enemies/mite_egg_tier2.tscn
+res://enemies/mite_egg.gd
