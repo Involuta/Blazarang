@@ -109,6 +109,15 @@ func _physics_process(delta):
 	
 	move_and_slide()
 
+func set_active(active):
+	set_process(active)
+	set_physics_process(active)
+	if active:
+		process_mode = Node.PROCESS_MODE_INHERIT
+	else:
+		global_position.y = -50
+		process_mode = Node.PROCESS_MODE_DISABLED
+
 # Equivalent of lerp_look_at_move_dir or lerp_look_at_target in other enemies. This func is necessary for mites bc the mesh itself needs to rotate independently of the parent
 # Rotate body meshes y rotation so that its meshes look in the direction of the vector, which is a 3D vec whose y value is ignored
 # Why not do rotation_amt = atan2(to_vec.x, to_vec.z) - body_meshes.rotation.y? It causes mites to spin around randomly for some reason
@@ -175,6 +184,9 @@ func follow(_delta):
 	
 	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
 	nav_agent.velocity = new_velocity
+	
+	# Scale anim playback speed based on movement speed
+	anim_tree.set("parameters/playback_speed", velocity.length() / follow_speed)
 	
 	# Spit web rarely
 	if rng.randf() < spit_chance:

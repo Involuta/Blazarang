@@ -51,6 +51,7 @@ advance_mode = 2
 advance_expression = "behav_state == RETREAT"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qianl"]
+xfade_time = 0.1
 advance_mode = 2
 advance_expression = "behav_state == LAUNCH"
 
@@ -70,7 +71,7 @@ transitions = ["glide", "flip", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(3.01716e-05, 41.685)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_mxa20"]
-graph_offset = Vector2(-24.96, 105.6)
+graph_offset = Vector2(-31.68, 133.44)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_v8kte")
 nodes/StateMachine/position = Vector2(100, 150)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -82,7 +83,10 @@ radius = 0.3
 collision_layer = 8
 collision_mask = 90
 script = ExtResource("1_sdbgq")
+launch_vert_speed = 20.0
+follow_speed = 8.0
 retreat_dest = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+retreat_speed = 12.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_tej0w")

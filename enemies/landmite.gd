@@ -92,7 +92,7 @@ func set_active(active):
 		process_mode = Node.PROCESS_MODE_INHERIT
 	else:
 		global_position.y = -50
-		process_mode = Node.PROCESS_MODE_DISABLED 
+		process_mode = Node.PROCESS_MODE_DISABLED
 
 # Equivalent of lerp_look_at_move_dir or lerp_look_at_target in other enemies. This func is necessary for mites bc the mesh itself needs to rotate independently of the parent
 # Rotate body meshes y rotation so that meshes look in the direction of the vector, which is a 3D vec whose y value is ignored

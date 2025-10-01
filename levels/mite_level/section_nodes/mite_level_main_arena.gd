@@ -40,7 +40,7 @@ func _ready():
 		var inst = await load_scene_at_pos(landmite, Vector3(i * 5, 20, 0))
 		non_elites_dict[inst.name] = false
 	for i in range(real_num_paramites):
-		var inst = await load_scene_at_pos(landmite, Vector3(i * 5, 30, 0))
+		var inst = await load_scene_at_pos(paramite, Vector3(i * 5, 30, 0))
 		non_elites_dict[inst.name] = false
 	for i in range(real_num_flatmites):
 		var inst = await load_scene_at_pos(landmite, Vector3(i * 5, 40, 0))
