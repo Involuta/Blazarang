@@ -46,7 +46,7 @@ material = SubResource("StandardMaterial3D_uxjbv")
 
 [node name="MiteLevelMainArena" type="Node3D"]
 script = ExtResource("1_tjf6h")
-max_time_until_next_egg = 4.0
+max_time_until_next_egg = 5.0
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_mcv4c")

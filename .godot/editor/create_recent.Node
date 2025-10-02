@@ -1,5 +1,5 @@
-Hitbox
 MeshInstance3D
+Hitbox
 AnimationPlayer
 GPUParticles3D
 CollisionShape3D

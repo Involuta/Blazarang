@@ -11,7 +11,6 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var level : Node3D
 var hitbox : Node3D
 var target : Node3D
-var is_active := false # Set by mite level main arena to activate/deactivate mite upon its spawning/death
 var aiming_at_target := true
 enum {
 	FOLLOW,

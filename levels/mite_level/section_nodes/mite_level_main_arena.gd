@@ -2,6 +2,8 @@ extends Node3D
 
 @onready var egg_tier1 := preload("res://enemies/mite_egg_tier1.tscn")
 @onready var egg_tier2 := preload("res://enemies/mite_egg_tier2.tscn")
+@onready var egg_tier3 := preload("res://enemies/mite_egg_tier3.tscn")
+@onready var egg_tier4 := preload("res://enemies/mite_egg_tier4.tscn")
 @onready var landmite := preload("res://enemies/landmite.tscn")
 @onready var paramite := preload("res://enemies/paramite.tscn")
 @onready var flatmite := preload("res://enemies/flatmite.tscn")
@@ -20,12 +22,13 @@ var time_until_next_egg := 1.0
 @export var max_living_enemies := 50
 var living_enemies := 0
 
-@export var mite_nums := [4, 8, 1] # Number of mites spawned from a Tier [Index+1] egg
+@export var mite_nums := [4, 8, 1, 1] # Number of mites spawned from a Tier [Index+1] egg
 
 @export var real_num_landmites := 40 # How many landmite scenes are loaded into the level
 @export var real_num_paramites := 8
 @export var real_num_flatmites := 2
 @export var real_num_harvestmen := 4
+var egg_list
 var non_elites_dict = {} # Key is instance name, value is bool of whether its alive or dead
 var flatmites_dict = {}
 var harvestmen_dict = {}
@@ -44,13 +47,15 @@ func _ready():
 		var inst = await load_scene_at_pos(paramite, Vector3(i * 5, 30, 0))
 		non_elites_dict[inst.name] = false
 	for i in range(real_num_flatmites):
-		var inst = await load_scene_at_pos(landmite, Vector3(i * 5, 40, 0))
+		var inst = await load_scene_at_pos(flatmite, Vector3(i * 5, 40, 0))
 		flatmites_dict[inst.name] = false
 	for i in range(real_num_harvestmen):
-		var inst = await load_scene_at_pos(landmite, Vector3(i * 5, 60, 0))
+		var inst = await load_scene_at_pos(harvestman, Vector3(i * 5, 60, 0))
 		harvestmen_dict[inst.name] = false
+	
+	egg_list = [egg_tier1, egg_tier2, egg_tier3, egg_tier4]
 
-func load_scene_at_pos(scene, pos: Vector3, active : bool = false):
+func load_scene_at_pos(scene, pos: Vector3, active: bool = false):
 	var inst = scene.instantiate()
 	level.add_child.call_deferred(inst)
 	await inst.tree_entered
@@ -80,7 +85,7 @@ func _physics_process(delta):
 		time_until_next_egg -= delta
 	if time_until_next_egg <= 0:
 		time_until_next_egg = max_time_until_next_egg
-		load_scene_at_pos(egg_tier2, 100*Vector3.UP, true)
+		load_scene_at_pos(egg_list.pick_random(), 100*Vector3.UP, true)
 
 func spawn_enemies_from_egg_at(pos: Vector3, egg_tier: int):
 	var mite_num = mite_nums[egg_tier-1]
@@ -137,14 +142,16 @@ func spawn_flatmite(pos: Vector3):
 			var inst = level.find_child(inst_name, false, false)
 			inst.global_position = pos
 			inst.set_active(true)
+			break
 	# If all flatmites are alive, do nothing
 
 func spawn_harvestman(pos: Vector3):
 	# Pick the first dead harvestman you find
-	for inst_name in flatmites_dict.keys():
-		if not flatmites_dict[inst_name]: # Check if enemy is dead, i.e. value is false
+	for inst_name in harvestmen_dict.keys():
+		if not harvestmen_dict[inst_name]: # Check if enemy is dead, i.e. value is false
 			harvestmen_dict[inst_name] = true
 			var inst = level.find_child(inst_name, false, false)
-			inst.global_position = pos
 			inst.set_active(true)
+			inst.global_position = pos + Vector3.UP*8.0
+			break
 	# If all harvestmen are alive, do nothing

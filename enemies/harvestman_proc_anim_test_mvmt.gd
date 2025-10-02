@@ -13,16 +13,25 @@ extends Node3D
 @export var rvb_ik : Marker3D
 @export var lvb_ik : Marker3D
 
+# Skeleton IK nodes; disabled when mite leaves the ground
+@export var lvf_sk : SkeletonIK3D
+@export var rvf_sk : SkeletonIK3D
+@export var rvb_sk : SkeletonIK3D
+@export var lvb_sk : SkeletonIK3D
+
 @onready var parent := get_parent()
 var avg_normal := Vector3.UP # This is visible in the entire script so that the parent can see it; if it's Vector3.UP, the parent can leap
 
-var ik_stopped := false
+var ik_stopped := true
 
 func _process(delta):
+	if ik_stopped:
+		return
+	
 	# Raycast downward to get ground normal
 	var space_state := get_world_3d().direct_space_state
 	var sight_dir := Vector3.DOWN
-	var query = PhysicsRayQueryParameters3D.create(global_position, global_position + 30.0 * sight_dir)
+	var query = PhysicsRayQueryParameters3D.create(global_position, global_position + 10.0 * sight_dir)
 	query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
 	var result = space_state.intersect_ray(query)
 	if not result:
@@ -63,3 +72,23 @@ func draw_vector_line(vec: Vector3):
 	if not normal_line:
 		return
 	normal_line.mesh = mesh
+
+func stop_ik():
+	ik_stopped = true
+	lvf_sk.stop()
+	rvf_sk.stop()
+	rvb_sk.stop()
+	lvb_sk.stop()
+
+func start_ik():
+	ik_stopped = false
+	
+	lvf_ik.recalculate_ik_target()
+	rvf_ik.recalculate_ik_target()
+	rvb_ik.recalculate_ik_target()
+	lvb_ik.recalculate_ik_target()
+	
+	lvf_sk.start()
+	rvf_sk.start()
+	rvb_sk.start()
+	lvb_sk.start()

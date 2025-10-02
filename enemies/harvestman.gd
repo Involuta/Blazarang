@@ -26,24 +26,11 @@ var strafing_left := true
 
 var ground_normal := Vector3.UP # Normal of the ground, determined by the avg normal of the planes formed by points where feet hit the ground
 
-var can_leap := true
-@export var max_leap_cooldown := 3.0 # Max time after a leap ends before you can leap again
-@export var min_leap_cooldown := .25 # Min time after a leap ends before you can leap again
-var time_until_can_leap := 5.0 # Set to random(min_leap_cooldown, max_leap_cooldown) when reset
-@export var roserang_leap_proximity := 30.0 # When the rang is this close or closer to the mite, the mite leaps
-@export var can_leap_window := 5.0 # Time you are able to leap on your own before a forced leap occurs
-var time_until_forced_leap := 5.0 # Set to can_leap_window when reset
-@export var leap_secs := 1.0
-@export var leap_length_threshold := 12.0 # If mite is farther than this value from target, it'll do long leap; otherwise, short leap
-@export var leap_short_lateral_speed := 9.0
-@export var leap_long_lateral_speed := 18.0
-@export var leap_vertical_speed := 5.0
-
-@export var follow_speed := 7.0
+@export var follow_speed := 9.0
 @export var follow_turn_speed := .1
 @export var spit_dist := 16.0
 @export var spit_secs := 2.0
-@export var spit_projectile_count := 20.0
+@export var spit_projectile_count := 20
 @export var spit_projectile_spread := 3.0 # Max dist (on a single axis) btwn target pos and actual projectile landing pos
 @export var spit_cooldown_secs := 8.0
 var spit_cooldown_remaining := 2.5
@@ -58,10 +45,6 @@ func _ready():
 	mouth = find_child("Mouth")
 	anim_tree.active = true
 	nav_agent.target_desired_distance = spit_dist - 1.0
-	
-	time_until_can_leap = rng.randf_range(min_leap_cooldown, max_leap_cooldown)
-	can_leap = true
-	time_until_forced_leap = can_leap_window
 	
 	spit_cooldown_remaining = spit_cooldown_secs
 	
@@ -90,6 +73,19 @@ func _physics_process(delta):
 	else:
 		if poke_hitbox.process_mode != Node.PROCESS_MODE_DISABLED:
 			poke_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+
+func set_active(active):
+	set_process(active)
+	set_physics_process(active)
+	if body_meshes == null:
+		body_meshes = $HarvestmanProcAnimMeshes
+	if active:
+		process_mode = Node.PROCESS_MODE_INHERIT
+		body_meshes.start_ik()
+	else:
+		global_position.y = -50
+		process_mode = Node.PROCESS_MODE_DISABLED
+		body_meshes.stop_ik()
 
 # Equivalent of lerp_look_at_move_dir or lerp_look_at_target in other enemies. This func is necessary for mites bc the mesh itself needs to rotate independently of the parent
 # Rotate body meshes y rotation so that meshes look in the direction of the vector, which is a 3D vec whose y value is ignored
