@@ -18,7 +18,7 @@ var level : Node3D
 var time_until_next_infest_switch_secs := 5.0
 
 @export var max_time_until_next_egg := 20.0
-var time_until_next_egg := 1.0
+var time_until_next_egg := .5
 @export var max_living_enemies := 50
 var living_enemies := 0
 
@@ -85,7 +85,8 @@ func _physics_process(delta):
 		time_until_next_egg -= delta
 	if time_until_next_egg <= 0:
 		time_until_next_egg = max_time_until_next_egg
-		load_scene_at_pos(egg_list.pick_random(), 100*Vector3.UP, true)
+		#load_scene_at_pos(egg_list.pick_random(), 100*Vector3.UP, true)
+		load_scene_at_pos(egg_tier4, 10*Vector3.UP, true)
 
 func spawn_enemies_from_egg_at(pos: Vector3, egg_tier: int):
 	var mite_num = mite_nums[egg_tier-1]
@@ -152,6 +153,6 @@ func spawn_harvestman(pos: Vector3):
 			harvestmen_dict[inst_name] = true
 			var inst = level.find_child(inst_name, false, false)
 			inst.set_active(true)
-			inst.global_position = pos + Vector3.UP*8.0
+			inst.global_position = pos
 			break
 	# If all harvestmen are alive, do nothing

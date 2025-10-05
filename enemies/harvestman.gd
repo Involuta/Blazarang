@@ -21,9 +21,6 @@ enum {
 var behav_state := FOLLOW
 var target_position := Vector3.ZERO # Position mite moves to; set to target.global_position when not strafing and set to a point beside and behind the target when strafing ("fwd" = to the target)
 
-var strafing_left := true
-@export var strafe_radius := 15.0 # Dist btwn target and strafe dest
-
 var ground_normal := Vector3.UP # Normal of the ground, determined by the avg normal of the planes formed by points where feet hit the ground
 
 @export var follow_speed := 9.0
@@ -44,7 +41,7 @@ func _ready():
 	target = root.find_child("Icon")
 	mouth = find_child("Mouth")
 	anim_tree.active = true
-	nav_agent.target_desired_distance = spit_dist - 1.0
+	nav_agent.target_desired_distance = spit_dist
 	
 	spit_cooldown_remaining = spit_cooldown_secs
 	
@@ -83,9 +80,9 @@ func set_active(active):
 		process_mode = Node.PROCESS_MODE_INHERIT
 		body_meshes.start_ik()
 	else:
+		body_meshes.stop_ik()
 		global_position.y = -50
 		process_mode = Node.PROCESS_MODE_DISABLED
-		body_meshes.stop_ik()
 
 # Equivalent of lerp_look_at_move_dir or lerp_look_at_target in other enemies. This func is necessary for mites bc the mesh itself needs to rotate independently of the parent
 # Rotate body meshes y rotation so that meshes look in the direction of the vector, which is a 3D vec whose y value is ignored
@@ -122,7 +119,6 @@ func follow(delta):
 	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
 	nav_agent.velocity = new_velocity
 	
-	# Turn this into mite spitting
 	spit_cooldown_remaining -= delta
 	if spit_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < spit_dist:
 		spit_cooldown_remaining = spit_cooldown_secs
@@ -148,7 +144,8 @@ func spit():
 		level.add_child.call_deferred(tm_inst)
 		await tm_inst.tree_entered
 		tm_inst.global_position = mouth.global_position
-		tm_inst.velocity = tm_speed * global_position.direction_to(tm_landing_pos)
+		# .95 multiplier increases accuracy
+		tm_inst.velocity = .95 * tm_speed * global_position.direction_to(tm_landing_pos)
 		await get_tree().create_timer(spit_secs / spit_projectile_count).timeout
 
 func stop_lateral_mvmt():

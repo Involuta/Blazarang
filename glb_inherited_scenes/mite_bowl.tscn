@@ -13,6 +13,7 @@ shader_parameter/grain_strength = 0.03
 [node name="MiteBowl" instance=ExtResource("1_pf48n")]
 
 [node name="SingleHole" parent="." index="0"]
+transparency = 0.4
 surface_material_override/0 = SubResource("ShaderMaterial_qtbds")
 
 [node name="StaticBody3D" parent="SingleHole" index="0"]
