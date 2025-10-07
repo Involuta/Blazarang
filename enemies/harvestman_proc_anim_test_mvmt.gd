@@ -28,14 +28,14 @@ func _ready():
 	#Engine.time_scale = .1
 	pass
 
-func _physics_process(delta):
+func _process(delta):
 	if ik_stopped:
 		return
 	
 	# Raycast downward to get ground normal
 	var space_state := get_world_3d().direct_space_state
 	var sight_dir := Vector3.DOWN
-	var query = PhysicsRayQueryParameters3D.create(global_position - 10.0*sight_dir, global_position + 50.0*sight_dir)
+	var query = PhysicsRayQueryParameters3D.create(global_position, global_position + 30.0 * sight_dir)
 	query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
 	var result = space_state.intersect_ray(query)
 	if not result:
@@ -46,19 +46,14 @@ func _physics_process(delta):
 	# Convert the normal to a basis, then a quaternion to prevent a "Basis must be normalized" error, then convert the lerped quaternion back to a Basis
 	draw_vector_line(avg_normal * 10)
 	var target_basis = Globals.basis_from_normal(transform, avg_normal)
-	rotation = lerp(transform.basis.get_rotation_quaternion(), target_basis.get_rotation_quaternion(), 1).get_euler()
+	rotation = lerp(transform.basis.get_rotation_quaternion(), target_basis.get_rotation_quaternion(), run_speed * delta).get_euler()
 	
 	# Offset body from the ground
 	var avg_ik_pos = (lvf_ik.position + rvf_ik.position + rvb_ik.position + lvb_ik.position) / 4
 	var target_pos = avg_ik_pos + transform.basis.y * ground_offset
-	print("Avg foot pos: ", avg_ik_pos)
-	print("My pos: ", position)
-	print("Target pos: ", target_pos)
 	# Dot product gets the difference in positions only in this direction
 	var dist_to_target_pos = transform.basis.y.dot(target_pos - global_position)
-	print("Dist to target pos: ", dist_to_target_pos)
-	print("Goal: ", position + transform.basis.y * dist_to_target_pos)
-	position = lerp(position, position + transform.basis.y * dist_to_target_pos, .5)
+	position = lerp(position, position + transform.basis.y * dist_to_target_pos, run_speed * delta)
 	
 	# Uncomment this line to move harvestman using player controls
 	#_movement(delta)
@@ -101,3 +96,8 @@ func start_ik():
 	rvf_sk.start()
 	rvb_sk.start()
 	lvb_sk.start()
+	
+	lvf_ik.step()
+	rvf_ik.step()
+	rvb_ik.step()
+	lvb_ik.step()

@@ -64,9 +64,11 @@ nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_5sdyg")
 nodes/StateMachine/position = Vector2(110, 150)
 node_connections = [&"output", 0, &"StateMachine"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_b7x3f"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_uu6od"]
+size = Vector3(3, 1.5, 3)
 
-[sub_resource type="BoxMesh" id="BoxMesh_wfcbn"]
+[sub_resource type="BoxMesh" id="BoxMesh_o7ywk"]
+size = Vector3(3, 1.5, 3)
 
 [node name="Harvestman" type="CharacterBody3D"]
 collision_layer = 8
@@ -240,6 +242,7 @@ avoidance_layers = 4
 avoidance_mask = 4
 
 [node name="EnemyHurtbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 collision_layer = 8
 collision_mask = 265
 script = ExtResource("2_7jh5r")
@@ -248,15 +251,12 @@ hit_particle_color = Color(0.270588, 0.0666667, 0, 1)
 opponent_hitboxes = ["PlayerHitbox", "HealingHitbox"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHurtbox"]
-shape = SubResource("CapsuleShape3D_4hvl6")
+shape = SubResource("BoxShape3D_uu6od")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="EnemyHurtbox"]
 visible = false
-mesh = SubResource("CapsuleMesh_b7x3f")
+mesh = SubResource("BoxMesh_o7ywk")
 skeleton = NodePath("../..")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_wfcbn")
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

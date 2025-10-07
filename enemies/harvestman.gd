@@ -62,7 +62,7 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 	move_and_slide()
 	
-	hurtbox.global_position = body_meshes.global_position
+	hurtbox.global_position = body_meshes.global_position + Vector3.DOWN
 	
 	if poke_hitbox.global_position.distance_to(target_position) < poke_dist:
 		if poke_hitbox.process_mode != Node.PROCESS_MODE_INHERIT:
@@ -72,12 +72,16 @@ func _physics_process(delta):
 			poke_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 
 func set_active(active):
+	# Wait for harvestman to move to egg pos before enabling it
+	await get_tree().create_timer(get_physics_process_delta_time()).timeout
 	set_process(active)
 	set_physics_process(active)
 	if body_meshes == null:
 		body_meshes = $HarvestmanProcAnimMeshes
 	if active:
 		process_mode = Node.PROCESS_MODE_INHERIT
+		# Wait for raycasts to activate and/or positions to update before starting IK
+		await get_tree().create_timer(2*get_physics_process_delta_time()).timeout
 		body_meshes.start_ik()
 	else:
 		body_meshes.stop_ik()
