@@ -149,12 +149,9 @@ func spawn_flatmite(pos: Vector3):
 func spawn_harvestman(pos: Vector3):
 	# Pick the first dead harvestman you find
 	for inst_name in harvestmen_dict.keys():
-		print(inst_name)
 		if not harvestmen_dict[inst_name]: # Check if enemy is dead, i.e. value is false
 			harvestmen_dict[inst_name] = true
-			print("Inst name: ", inst_name)
 			var inst = level.find_child(inst_name, false, false)
-			print("found!")
 			inst.set_active(true)
 			inst.global_position = pos
 			break

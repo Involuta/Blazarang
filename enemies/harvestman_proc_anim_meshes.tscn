@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dcffjmoveconi"]
+[gd_scene load_steps=7 format=3 uid="uid://dcffjmoveconi"]
 
 [ext_resource type="PackedScene" uid="uid://dcnrtub32dk8f" path="res://glb_inherited_scenes/harvestman_meshes.tscn" id="1_qjs1t"]
 [ext_resource type="Script" path="res://enemies/harvestman_proc_anim_test_mvmt.gd" id="1_was61"]
@@ -6,8 +6,6 @@
 [ext_resource type="Script" path="res://procedural_animation/harvestman_ik_target.gd" id="4_kqs3p"]
 [ext_resource type="Script" path="res://procedural_animation/step_target_container.gd" id="4_qrf2c"]
 [ext_resource type="Script" path="res://procedural_animation/step_ray.gd" id="5_wk41b"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_wrucf"]
 
 [node name="HarvestmanProcAnimMeshes" type="Node3D" node_paths=PackedStringArray("lvf_ik", "rvf_ik", "rvb_ik", "lvb_ik", "lvf_sk", "rvf_sk", "rvb_sk", "lvb_sk")]
 script = ExtResource("1_was61")
@@ -182,8 +180,10 @@ checking_opposite = false
 script = ExtResource("4_qrf2c")
 offset = 36.0
 
-[node name="LeftVeryFrontRay" type="Node3D" parent="HarvestmanMeshes/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
+[node name="LeftVeryFrontRay" type="RayCast3D" parent="HarvestmanMeshes/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
 transform = Transform3D(0.999391, -0.00121797, 0.0348782, 3.48574e-16, 0.999391, 0.0348995, -0.0348995, -0.0348782, 0.998782, -11, 2, 9)
+target_position = Vector3(0, -20, 0)
+collision_mask = 2
 script = ExtResource("5_wk41b")
 step_target = NodePath("LeftVeryFrontStepTarget")
 
@@ -191,11 +191,10 @@ step_target = NodePath("LeftVeryFrontStepTarget")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -8, 9)
 top_level = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="HarvestmanMeshes/Armature/StepTargetContainer/LeftVeryFrontRay/LeftVeryFrontStepTarget"]
-mesh = SubResource("BoxMesh_wrucf")
-
-[node name="RightVeryFrontRay" type="Node3D" parent="HarvestmanMeshes/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
+[node name="RightVeryFrontRay" type="RayCast3D" parent="HarvestmanMeshes/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
 transform = Transform3D(0.999391, 0.00121797, -0.0348782, 3.48574e-16, 0.999391, 0.0348995, 0.0348995, -0.0348782, 0.998782, 11, 2, 9)
+target_position = Vector3(0, -20, 0)
+collision_mask = 2
 script = ExtResource("5_wk41b")
 step_target = NodePath("RightVeryFrontStepTarget")
 
@@ -203,8 +202,10 @@ step_target = NodePath("RightVeryFrontStepTarget")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -8, 9)
 top_level = true
 
-[node name="LeftVeryBackRay" type="Node3D" parent="HarvestmanMeshes/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
+[node name="LeftVeryBackRay" type="RayCast3D" parent="HarvestmanMeshes/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
 transform = Transform3D(0.999391, -0.00121797, -0.0348782, 3.48574e-16, 0.999391, -0.0348995, 0.0348995, 0.0348782, 0.998782, -11, 2, -9)
+target_position = Vector3(0, -20, 0)
+collision_mask = 2
 script = ExtResource("5_wk41b")
 step_target = NodePath("LeftVeryBackStepTarget")
 
@@ -212,8 +213,10 @@ step_target = NodePath("LeftVeryBackStepTarget")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -8, -9)
 top_level = true
 
-[node name="RightVeryBackRay" type="Node3D" parent="HarvestmanMeshes/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
+[node name="RightVeryBackRay" type="RayCast3D" parent="HarvestmanMeshes/Armature/StepTargetContainer" node_paths=PackedStringArray("step_target")]
 transform = Transform3D(0.999391, 0.00121797, 0.0348782, 3.48574e-16, 0.999391, -0.0348995, -0.0348995, 0.0348782, 0.998782, 11, 2, -9)
+target_position = Vector3(0, -20, 0)
+collision_mask = 2
 script = ExtResource("5_wk41b")
 step_target = NodePath("RightVeryBackStepTarget")
 
