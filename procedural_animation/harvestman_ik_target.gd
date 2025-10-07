@@ -9,7 +9,7 @@ extends Marker3D
 # Stepping takes more time (.2 instead of .05)
 # Legs are raised by 2 units instead of 1
 
-@export var step_target : Node3D
+@export var step_ray : Node3D
 @export var step_distance := 1.5
 @export var adjacent_ik_target : Node3D
 @export var opposite_ik_target : Node3D
@@ -21,7 +21,7 @@ extends Marker3D
 var is_stepping := false
 
 func _physics_process(_delta):
-	if not is_stepping and global_position.distance_to(step_target.global_position) > step_distance:
+	if not is_stepping and global_position.distance_to(step_ray.step_target) > step_distance:
 		if not checking_adjacent or not adjacent_ik_target.is_stepping:
 			step()
 			if checking_opposite:
@@ -29,11 +29,11 @@ func _physics_process(_delta):
 
 # Called by main parent script after landing from a leap to instantly bring IK targets to step targets, which prevents odd interpolation from old pre-leap IK target position to new post-leap step target position
 func recalculate_ik_target():
-	global_position = step_target.global_position
+	global_position = step_ray.step_target
 
 func step():
-	var target_pos = step_target.global_position
-	var half_way = (global_position + step_target.global_position) / 2
+	var target_pos = step_ray.step_target
+	var half_way = (global_position + step_ray.step_target) / 2
 	is_stepping = true
 	
 	var step_tween = get_tree().create_tween()
