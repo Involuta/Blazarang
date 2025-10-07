@@ -71,7 +71,7 @@ transform = Transform3D(0.453153, 0.784886, -0.422618, -0.866026, 0.499999, -2.2
 transform = Transform3D(1, 2.03496e-07, -2.0212e-06, -2.24944e-07, 1, 5.5796e-07, 2.05594e-06, 3.61296e-07, 1, 0.100001, 0.00038147, 4.57764e-05)
 
 [node name="RightVeryFrontShin" parent="HarvestmanMeshes/Armature/Skeleton3D" index="9"]
-transform = Transform3D(-0.375568, -0.869883, 0.31977, -0.878584, 0.444, 0.175941, 0.295026, 0.214867, 0.931017, -2.78695, 13.4089, 1.73437)
+transform = Transform3D(-0.375568, -0.869883, 0.31977, -0.878583, 0.444, 0.175941, 0.295026, 0.214867, 0.931017, -2.78695, 13.4089, 1.73437)
 
 [node name="RightVeryFrontThigh" parent="HarvestmanMeshes/Armature/Skeleton3D" index="10"]
 transform = Transform3D(-0.520359, 0.764676, 0.380128, 0.676277, 0.640816, -0.363323, 0.521416, -0.0680137, 0.850587, -0.134927, -0.914044, -0.599532)

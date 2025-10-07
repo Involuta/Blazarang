@@ -44,31 +44,23 @@ func _process(delta):
 	# Raycast downward to get ground normal
 	var space_state := get_world_3d().direct_space_state
 	var sight_dir := Vector3.DOWN
-	var query = PhysicsRayQueryParameters3D.create(global_position, global_position + 10.0 * sight_dir)
+	var query = PhysicsRayQueryParameters3D.create(global_position - 10.0*sight_dir, global_position + 20.0*sight_dir)
 	query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
 	var result = space_state.intersect_ray(query)
 	if not result:
 		return
-	avg_normal = result.normal
 	
 	# Convert the normal to a basis, then a quaternion to prevent a "Basis must be normalized" error, then convert the lerped quaternion back to a Basis
-	draw_vector_line(avg_normal * 10)
-	var target_basis = Globals.basis_from_normal(transform, avg_normal)
+	draw_vector_line(result.normal * 10)
+	var target_basis = Globals.basis_from_normal(transform, result.normal)
 	rotation = lerp(transform.basis.get_rotation_quaternion(), target_basis.get_rotation_quaternion(), run_speed * delta).get_euler()
 	
-	# Biting moves body meshes' position, so if biting, this script should not change position
-	if biting:
-		return
-	
 	# Offset body from the ground
-	var avg_ik_pos = (lvf_ik.position + rmb_ik.position + rvf_ik.position + lmb_ik.position + lmf_ik.position + rvb_ik.position + rmf_ik.position + lvb_ik.position) / 8
+	var avg_ik_pos = result.position
 	var target_pos = avg_ik_pos + transform.basis.y * ground_offset
 	# Dot product gets the difference in positions only in this direction
 	var dist_to_target_pos = transform.basis.y.dot(target_pos - global_position)
-	position = lerp(position, position + transform.basis.y * dist_to_target_pos, run_speed * delta)
-	
-	# Uncomment this line to move spider using player controls
-	#_movement(delta)
+	position += transform.basis.y * dist_to_target_pos
 
 func _movement(delta):
 	var move_dir = Input.get_vector("WalkLeft", "WalkRight", "WalkForward", "WalkBackward")
@@ -145,3 +137,12 @@ func start_ik():
 	rvb_ik.recalculate_ik_target()
 	rmf_ik.recalculate_ik_target()
 	lvb_ik.recalculate_ik_target()
+	
+	lvf_ik.step()
+	rmb_ik.step()
+	rvf_ik.step()
+	lmb_ik.step()
+	lmf_ik.step()
+	rvb_ik.step()
+	rmf_ik.step()
+	lvb_ik.step()

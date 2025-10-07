@@ -32,3 +32,8 @@ res://procedural_animation/step_ray.gd
 res://levels/mite_level/section_nodes/mite_level_main_arena.gd
 res://procedural_animation/harvestman_ik_target.gd
 res://enemies/jumping_spider_proc_anim_meshes.tscn
+res://procedural_animation/jumping_spider_ik_target.gd
+res://enemies/jumping_spider.tscn
+res://enemies/jumping_spider_proc_anim_meshes.gd
+res://enemies/jumping_spider.gd
+res://enemies/tiny_mite.tscn
