@@ -12,6 +12,7 @@ extends Node3D
 @onready var root := $/root/ViewControl
 var rng := RandomNumberGenerator.new()
 var level : Node3D
+var target : Node3D
 
 @onready var arena_infest_hitbox := $MiteCloudPivot/EnemyHitbox
 @export var max_time_until_next_infest_switch := 5.0 # Should be less than half the time it takes for debuff to disappear
@@ -19,16 +20,63 @@ var time_until_next_infest_switch_secs := 5.0
 
 @export var max_time_until_next_egg := 20.0
 var time_until_next_egg := 2.0
+@export var egg_drop_height := 100.0
 @export var max_living_enemies := 50
 var living_enemies := 0
 
-@export var mite_nums := [4, 8, 1, 1] # Number of mites spawned from a Tier [Index+1] egg
+@export var mite_nums_per_egg := [4, 8, 1, 1] # Number of mites spawned from a Tier [Index+1] egg
+
+var current_wave := 0
+var eggs_remaining_this_wave := 4 # Wave increases after this num becomes 0, then this num is set to new wave's egg num
+# Num of eggs spawned per wave = random_int(num-var, num+var). Egg spawned = random choice among "Tier" keys
+@export var egg_waves := [
+	{
+		"Num":4,
+		"Var":1,
+		"Chances":[1,0,0,0],
+	},
+	{
+		"Num":4,
+		"Var":2,
+		"Chances":[.6,.4,0,0],
+	},
+	{
+		"Num":1,
+		"Var":0,
+		"Chances":[0,0,1,0],
+	},
+	{
+		"Num":4,
+		"Var":2,
+		"Chances":[.5,.5,0,0],
+	},
+	{
+		"Num":1,
+		"Var":0,
+		"Chances":[0,0,0,1],
+	},
+	{
+		"Num":2,
+		"Var":1,
+		"Chances":[1,0,0,0],
+	},
+	{
+		"Num":1,
+		"Var":0,
+		"Chances":[0,0,0,1],
+	},
+	{
+		"Num":8,
+		"Var":1,
+		"Chances":[.4,.4,.1,.1],
+	}
+]
 
 @export var real_num_landmites := 40 # How many landmite scenes are loaded into the level
 @export var real_num_paramites := 8
 @export var real_num_flatmites := 2
 @export var real_num_harvestmen := 4
-var egg_list
+var egg_list := []
 var non_elites_dict = {} # Key is instance name, value is bool of whether its alive or dead
 var flatmites_dict = {}
 var harvestmen_dict = {}
@@ -37,6 +85,13 @@ func _ready():
 	time_until_next_infest_switch_secs = max_time_until_next_infest_switch
 	#time_until_next_egg = max_time_until_next_egg
 	level = root.find_child("Level")
+	# Egg dropper targets Cotu's body, not icon
+	target = root.find_child("cotuCB")
+	
+	# Set eggs remaining this wave
+	var wave_egg_num = egg_waves[current_wave]["Num"]
+	var wave_egg_var = egg_waves[current_wave]["Var"]
+	eggs_remaining_this_wave = rng.randi_range(wave_egg_num-wave_egg_var, wave_egg_num+wave_egg_var)
 	
 	Globals.enemy_killed.connect(set_enemy_to_dead)
 	# Instantiate enemies
@@ -54,6 +109,15 @@ func _ready():
 		harvestmen_dict[inst.name] = false
 	
 	egg_list = [egg_tier1, egg_tier2, egg_tier3, egg_tier4]
+
+func choose_egg(egg_chances: Array):
+	var choice := rng.randf()
+	var cumulative_weight := 0.0
+	for i in range(egg_chances.size()):
+		cumulative_weight += egg_chances[i]
+		if choice <= cumulative_weight:
+			return egg_list[i]
+	return egg_list[0]
 
 func load_scene_at_pos(scene, pos: Vector3, active: bool = false):
 	var inst = scene.instantiate()
@@ -81,15 +145,29 @@ func _physics_process(delta):
 		else:
 			arena_infest_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	
-	if living_enemies + mite_nums[1] < max_living_enemies:
+	if living_enemies + mite_nums_per_egg[1] < max_living_enemies:
 		time_until_next_egg -= delta
 	if time_until_next_egg <= 0:
 		time_until_next_egg = max_time_until_next_egg
-		#load_scene_at_pos(egg_list.pick_random(), 100*Vector3.UP, true)
-		load_scene_at_pos(egg_tier4, 10*Vector3.UP, true)
+		drop_egg()
+
+func drop_egg():
+	var drop_pos := Vector3(target.global_position.x, egg_drop_height, target.global_position.z)
+	var egg_chances = egg_waves[current_wave]["Chances"]
+	load_scene_at_pos(choose_egg(egg_chances), drop_pos, true)
+	eggs_remaining_this_wave -= 1
+	print("Eggs remaining: ", eggs_remaining_this_wave)
+	if eggs_remaining_this_wave <= 0:
+		# Progress to next wave and set eggs remaining this wave
+		current_wave += 1
+		print("Current wave: ", current_wave)
+		var wave_egg_num = egg_waves[current_wave]["Num"]
+		var wave_egg_var = egg_waves[current_wave]["Var"]
+		eggs_remaining_this_wave = rng.randi_range(wave_egg_num-wave_egg_var, wave_egg_num+wave_egg_var)
+		print("Set eggs remaining to: ", eggs_remaining_this_wave)
 
 func spawn_enemies_from_egg_at(pos: Vector3, egg_tier: int):
-	var mite_num = mite_nums[egg_tier-1]
+	var mite_num = mite_nums_per_egg[egg_tier-1]
 	living_enemies += mite_num
 	match egg_tier:
 		1, 2:
