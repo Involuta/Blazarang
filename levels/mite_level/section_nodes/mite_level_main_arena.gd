@@ -19,7 +19,7 @@ var target : Node3D
 var time_until_next_infest_switch_secs := 5.0
 
 @export var max_time_until_next_egg := 20.0
-var time_until_next_egg := 2.0
+var time_until_next_egg := 200.0
 @export var egg_drop_height := 100.0
 @export var max_living_enemies := 50
 var living_enemies := 0

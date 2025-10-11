@@ -263,12 +263,13 @@ func switch_to_attack():
 	body_meshes.stop_ik()
 	# Jump towards jump dest (target + its vel)
 	# Vel = distance / seconds
-	var jump_dest = target.global_position + (target.velocity * get_physics_process_delta_time())
-	velocity = .91 * (jump_dest - global_position) / attack_jump_duration
+	# walk_dest functions as jump_dest here
+	walk_dest = target.global_position + (target.velocity * get_physics_process_delta_time())
+	velocity = .91 * (walk_dest - global_position) / attack_jump_duration
 
 func attack_frame(delta):
 	# If spider landed, stop checking if spider landed, turn on body meshes IK, and set vel to 0
-	if not attack_jump_completed and global_position.distance_to(target.global_position) < attack_stop_dist:
+	if not attack_jump_completed and global_position.distance_to(walk_dest) < attack_stop_dist:
 		attack_jump_completed = true
 		body_meshes.start_ik()
 		velocity = Vector3.ZERO
