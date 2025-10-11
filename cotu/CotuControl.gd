@@ -93,6 +93,7 @@ var axrang_instance = null
 @onready var camera_pitch_pivot := $CameraTwistPivot/CameraPitchPivot
 @onready var camera := $CameraTwistPivot/CameraPitchPivot/CameraVisualObject
 @onready var rang_pointer_pivot := $RangPointerPivot
+@onready var roserang_particles := $RoserangTinyParticles/GPUParticles3D
 @onready var armature := $CotuAnims/Armature
 @onready var anim_tree := $AnimationTree
 @onready var hurtbox := $Hurtbox
@@ -262,11 +263,17 @@ func _physics_process(delta):
 	# Recovery rate
 	hurtbox.set_fast_recovery_rate(walk_input == Vector2.ZERO and is_on_floor())
 	
-	# Rang Pointer movement; this block must come before the roserang throw bc if you instantiate the rang, then try to look_at(it) on the same frame, look_at will fail
+	# Rose pointer movement; this block must come before the roserang throw bc if you instantiate the rang, then try to look_at(it) on the same frame, look_at will fail
+	# Also enable/disable roserang particles
 	if roserang_instance != null:
 		rang_pointer_pivot.look_at(roserang_instance.global_position)
+		roserang_particles.global_position = roserang_instance.global_position
+		if not roserang_particles.emitting:
+			roserang_particles.emitting = true
 	else:
 		rang_pointer_pivot.transform.basis = camera_twist_pivot.transform.basis
+		if roserang_particles.emitting:
+			roserang_particles.emitting = false
 	
 	# Special rose throw (takes precedence over instant rethrow)
 	if Input.is_action_just_pressed("Special") and not roserang_special_queued and roserang_instance != null:

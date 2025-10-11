@@ -46,7 +46,7 @@ var target : Node3D
 @onready var hitbox = $PlayerHitbox
 @onready var mesh = $RoserangMesh
 @onready var trail = $Trail
-@onready var base_particle_gradient = $RangParticlesBase/GPUParticles3D.process_material.color_ramp.gradient
+@onready var base_particle_gradient = $RoserangParticlesBase/GPUParticles3D.process_material.color_ramp.gradient
 @onready var rang_glow_shader = $RoserangMesh/Boomerang3DModelV1.get_surface_override_material(0)
 @export var rotate_speed := 3.6
 @export var rose_color := Color(1,0,.8)

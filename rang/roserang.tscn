@@ -244,8 +244,6 @@ bus = &"SFX"
 [node name="HitboxCollider" type="CollisionShape3D" parent="HitSFXPlayer"]
 shape = SubResource("CylinderShape3D_o5dk8")
 
-[node name="RangParticlesBase" parent="." instance=ExtResource("6_44m4u")]
-
 [node name="RoserangMesh" parent="." instance=ExtResource("6_c0jd5")]
 transform = Transform3D(-1.00536e-09, 0.023, 8.0221e-18, -0.023, -1.00536e-09, -8.0221e-18, -8.0221e-18, -8.0221e-18, 0.023, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 
@@ -277,6 +275,9 @@ color_ramp = SubResource("GradientTexture1D_aaqkt")
 curve = SubResource("CurveTexture_s4uxv")
 _defaults_have_been_set = true
 
+[node name="RoserangParticlesBase" parent="." instance=ExtResource("6_44m4u")]
+
 [connection signal="body_entered" from="CotuCollider" to="CotuCollider" method="_on_body_entered"]
 
 [editable path="RoserangMesh"]
+[editable path="RoserangParticlesBase"]

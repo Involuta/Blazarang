@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://icbfj05gq8vk"]
+[gd_scene load_steps=69 format=3 uid="uid://icbfj05gq8vk"]
 
 [ext_resource type="Script" path="res://cotu/CotuControl.gd" id="1_aleek"]
 [ext_resource type="PackedScene" uid="uid://jv0ogh4h31nr" path="res://cotu/shakeable_camera.tscn" id="2_b6h2k"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://duanou50282es" path="res://glb_inherited_scenes/cotu_anims_24.tscn" id="4_gcwfx"]
 [ext_resource type="PackedScene" uid="uid://ilwv1c8q8cjc" path="res://glb_inherited_scenes/ax.tscn" id="6_gbgyu"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="7_scmca"]
+[ext_resource type="PackedScene" uid="uid://xsh6t6rpr2st" path="res://rang/rang_particles_base.tscn" id="8_34htd"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kxw61"]
 radius = 0.25
@@ -332,7 +333,6 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 
 [node name="RangPointerPivot" type="Node3D" parent="."]
-visible = false
 
 [node name="RangPointer" type="MeshInstance3D" parent="RangPointerPivot"]
 transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 2.08165e-12, 2.08165e-12, -2)
@@ -463,5 +463,8 @@ damage = 100
 transform = Transform3D(1, -7.49586e-24, 4.7125e-10, -1.30168e-23, 1, 2.26047e-23, 7.93085e-10, -1.81539e-24, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 shape = SubResource("CylinderShape3D_kywm8")
 
+[node name="RoserangTinyParticles" parent="." instance=ExtResource("8_34htd")]
+
 [editable path="DeathParticles"]
 [editable path="CotuAnims"]
+[editable path="RoserangTinyParticles"]
