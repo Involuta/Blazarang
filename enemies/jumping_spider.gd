@@ -57,7 +57,7 @@ var ready_trigger_duration := .25 # The duration of the ready state when an acti
 @export var ready_front_leg_raise_time := .2 # When either ready_duration is <= ready_front_leg_raise_time, front legs begin to rise. Actual time it takes for front legs to rise is set in transition from idle to ready state in anim tree
 
 @export var attack_total_duration := 1.0 # Duration of jump + endlag in secs
-@export var attack_time_remaining := 1.0 # Decreases every frame, reset to attack_duration every attack
+var attack_time_remaining := 1.0 # Decreases every frame, reset to attack_duration every attack
 @export var attack_jump_duration := .25 # Duration of jump in secs
 @export var attack_stop_dist := 3.3 # Max dist from spider to target needed to stop jump mvmt
 var attack_jump_completed := false # Set to true when landing after jump, set to false at start of attack
@@ -141,7 +141,7 @@ func _on_navigation_agent_3d_target_reached():
 	pass
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
-	if behav_state == WALK or behav_state == RETREAT:
+	if behav_state == WALK or behav_state == RETREAT or (behav_state == ATTACK and attack_jump_completed):
 		velocity = velocity.move_toward(safe_velocity, .5)
 	move_and_slide()
 
@@ -279,6 +279,14 @@ func attack_frame(delta):
 		inner_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 		outer_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 		switch_to_retreat()
+	
+	# Chase target
+	rotate_y_to_vec(target.global_position - global_position, walk_turn_speed)
+	nav_agent.set_target_position(target.global_position)
+	var next_position = nav_agent.get_next_path_position()
+	var new_velocity = (next_position - global_position).normalized() * walk_speed
+	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
+	nav_agent.velocity = new_velocity
 
 func choose_retreat_dest():
 	"""
