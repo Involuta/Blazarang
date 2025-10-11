@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://j3nmxyjb1n5y"]
+[gd_scene load_steps=21 format=3 uid="uid://j3nmxyjb1n5y"]
 
 [ext_resource type="Script" path="res://enemies/harvestman.gd" id="1_f700x"]
 [ext_resource type="PackedScene" uid="uid://dcffjmoveconi" path="res://enemies/harvestman_proc_anim_meshes.tscn" id="1_lkikj"]
@@ -67,9 +67,6 @@ node_connections = [&"output", 0, &"StateMachine"]
 [sub_resource type="BoxShape3D" id="BoxShape3D_uu6od"]
 size = Vector3(3, 1.5, 3)
 
-[sub_resource type="BoxMesh" id="BoxMesh_o7ywk"]
-size = Vector3(3, 1.5, 3)
-
 [node name="Harvestman" type="CharacterBody3D"]
 collision_layer = 8
 collision_mask = 90
@@ -105,106 +102,115 @@ bones/36/rotation = Quaternion(1.00604e-08, -1.00094e-08, 0.705307, 0.708902)
 bones/37/rotation = Quaternion(-2.68822e-18, -8.88184e-16, 0.0030267, 0.999995)
 
 [node name="LeftVeryFrontShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.304417, 0.921919, -0.239571, -0.921242, 0.348892, 0.172009, 0.242163, 0.168341, 0.95552, 4.5142, 4.34416, 2.96279)
+transform = Transform3D(0.304417, 0.921919, -0.239571, -0.921241, 0.348892, 0.172009, 0.242162, 0.168341, 0.955519, 4.5142, 4.34415, 2.96279)
 
 [node name="LeftVeryFrontShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/LeftVeryFrontShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
 
 [node name="LeftVeryFrontThigh" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.64468, 0.457727, -0.612269, -0.45471, 0.873438, 0.174195, 0.614513, 0.166105, 0.771221, 1.07599, 0.353334, -0.484602)
+transform = Transform3D(0.64468, 0.457727, -0.612269, -0.45471, 0.873439, 0.174195, 0.614513, 0.166105, 0.771221, 1.07599, 0.353334, -0.484602)
 
 [node name="LeftVeryFrontThigh" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/LeftVeryFrontThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
 
 [node name="LeftVeryBackShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.324938, 0.908371, 0.263205, -0.909844, 0.376199, -0.175097, -0.258071, -0.18258, 0.948717, 4.28763, 3.56606, -2.34091)
+transform = Transform3D(0.324938, 0.908371, 0.263205, -0.909843, 0.376199, -0.175098, -0.258071, -0.182579, 0.948717, 4.28763, 3.56605, -2.34091)
 
 [node name="LeftVeryBackShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/LeftVeryBackShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
 
 [node name="LeftVeryBackThigh" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.633409, 0.536228, 0.5579, -0.535617, 0.824163, -0.184038, -0.558487, -0.182249, 0.809245, 1.28553, 0.380886, 0.398861)
+transform = Transform3D(0.633409, 0.536229, 0.5579, -0.535617, 0.824163, -0.184039, -0.558487, -0.182249, 0.809245, 1.28553, 0.380886, 0.398861)
 
 [node name="LeftVeryBackThigh" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/LeftVeryBackThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
 
 [node name="LeftMiddleBackShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(1, -2.38271e-07, 6.00989e-08, 8.9407e-08, 1, -2.83832e-08, -1.49447e-07, -2.58002e-09, 1, -4.76837e-07, 8.34465e-07, -8.9407e-08)
+transform = Transform3D(1, -2.38271e-07, -2.97059e-07, 8.9407e-08, 1, -2.83832e-08, 2.07891e-07, -2.5801e-09, 1, 2.86102e-06, 8.34465e-07, -2.89083e-06)
 
 [node name="LeftMiddleBackShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/LeftMiddleBackShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
 
 [node name="LeftMiddleBackThigh" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(1, 1.19419e-07, 2.98178e-08, -5.96046e-08, 1, 9.08261e-08, 1.54867e-11, -3.07995e-08, 1, 1.19209e-07, 3.57628e-07, 0)
+transform = Transform3D(1, 1.19419e-07, -3.27575e-07, -5.96047e-08, 1, 9.08261e-08, 3.57433e-07, -3.07994e-08, 1, 2.98023e-06, 3.57628e-07, -2.80142e-06)
 
 [node name="LeftMiddleBackThigh" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/LeftMiddleBackThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
 
 [node name="LeftMiddleFrontShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(1, -1.19065e-07, -7.99813e-08, 8.9407e-08, 1, 9.08261e-08, 4.98212e-08, -1.20744e-07, 1, 1.43051e-06, 1.19209e-07, -1.32248e-07)
+transform = Transform3D(1, -1.19065e-07, -1.2836e-06, 8.94069e-08, 1, 9.08262e-08, 1.25338e-06, -1.20744e-07, 1, 2.38419e-06, 1.19209e-07, -6.36559e-06)
 
 [node name="LeftMiddleFrontShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/LeftMiddleFrontShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
 
 [node name="LeftMiddleFrontThigh" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="7"]
-transform = Transform3D(1, 1.18753e-07, -6.00229e-08, -2.98023e-08, 1, 9.08261e-08, 1.19558e-07, -6.16289e-08, 1, -5.96046e-07, -1.19209e-07, 3.77186e-08)
+transform = Transform3D(1, 1.18753e-07, -1.2521e-06, -2.98024e-08, 1, 9.08262e-08, 1.31195e-06, -6.16288e-08, 1, 8.34465e-07, -1.19209e-07, -6.14161e-06)
 
 [node name="LeftMiddleFrontThigh" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/LeftMiddleFrontThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
+
+[node name="LeftMandible" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="8"]
+transform = Transform3D(1, 2.03496e-07, -2.0212e-06, -2.24944e-07, 1, 5.5796e-07, 2.05594e-06, 3.61296e-07, 1, 0.100001, 0.00038147, 4.57764e-05)
 
 [node name="LeftMandible" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/LeftMandible" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
 
 [node name="RightVeryFrontShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="9"]
-transform = Transform3D(-0.304417, -0.921919, 0.239571, -0.921242, 0.348892, 0.172009, 0.242163, 0.168341, 0.95552, -4.51419, 4.34416, 2.96279)
+transform = Transform3D(-0.304417, -0.921919, 0.239571, -0.921241, 0.348892, 0.172009, 0.242162, 0.168341, 0.955519, -4.5142, 4.34415, 2.96279)
 
 [node name="RightVeryFrontShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/RightVeryFrontShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
 
 [node name="RightVeryFrontThigh" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="10"]
-transform = Transform3D(-0.64468, -0.457727, 0.61227, -0.45471, 0.873438, 0.174195, 0.614513, 0.166105, 0.771221, -1.07599, 0.353334, -0.484602)
+transform = Transform3D(-0.64468, -0.457727, 0.612269, -0.45471, 0.873439, 0.174195, 0.614513, 0.166105, 0.771221, -1.07599, 0.353334, -0.484602)
 
 [node name="RightVeryFrontThigh" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/RightVeryFrontThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
 
 [node name="RightVeryBackShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="11"]
-transform = Transform3D(-0.324937, -0.908371, -0.263205, -0.909844, 0.376199, -0.175097, -0.258071, -0.18258, 0.948717, -4.28763, 3.56606, -2.34092)
+transform = Transform3D(-0.324937, -0.908371, -0.263205, -0.909843, 0.376199, -0.175098, -0.258071, -0.182579, 0.948717, -4.28763, 3.56605, -2.34091)
 
 [node name="RightVeryBackShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/RightVeryBackShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
 
 [node name="RightVeryBackThigh" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="12"]
-transform = Transform3D(-0.633409, -0.536229, -0.5579, -0.535617, 0.824163, -0.184039, -0.558487, -0.182249, 0.809245, -1.28553, 0.380887, 0.398861)
+transform = Transform3D(-0.633409, -0.536229, -0.5579, -0.535617, 0.824162, -0.184039, -0.558487, -0.182249, 0.809245, -1.28553, 0.380886, 0.398861)
 
 [node name="RightVeryBackThigh" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/RightVeryBackThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
 
 [node name="RightMiddleBackShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="13"]
-transform = Transform3D(-1, -2.90303e-10, -9.00766e-08, 5.96047e-08, 1, 9.08261e-08, -1.49447e-07, -3.12208e-08, 1, 0, 1.07288e-06, 2.98023e-08)
+transform = Transform3D(-1, -2.90334e-10, 2.67081e-07, 5.96046e-08, 1, 9.08261e-08, 2.07891e-07, -3.12208e-08, 1, -3.33786e-06, 1.07288e-06, -2.77162e-06)
 
 [node name="RightMiddleBackShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/RightMiddleBackShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
 
 [node name="RightMiddleBackThigh" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="14"]
-transform = Transform3D(-1, -1.054e-10, -5.98309e-08, -2.98023e-08, 1, -2.83832e-08, -2.17342e-10, -1.41897e-09, 1, -2.38419e-07, 2.38419e-07, 2.68221e-07)
+transform = Transform3D(-1, -1.05421e-10, 2.97562e-07, -2.98023e-08, 1, -2.83832e-08, 3.572e-07, -1.41896e-09, 1, -3.09944e-06, 2.38419e-07, -2.5332e-06)
 
 [node name="RightMiddleBackThigh" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/RightMiddleBackThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
 
 [node name="RightMiddleFrontShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="15"]
-transform = Transform3D(-1, -1.19065e-07, 7.99813e-08, -8.9407e-08, 1, -1.47592e-07, 4.98212e-08, 1.7751e-07, 1, -9.53674e-07, 8.9407e-07, -2.79397e-08)
+transform = Transform3D(-1, -1.19065e-07, 1.2836e-06, -8.9407e-08, 1, -1.47592e-07, 1.25338e-06, 1.7751e-07, 1, -1.90735e-06, 8.9407e-07, -6.26128e-06)
 
 [node name="RightMiddleFrontShin" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/RightMiddleFrontShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
 
 [node name="RightMiddleFrontThigh" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="16"]
-transform = Transform3D(-1, -3.03102e-10, -2.99902e-08, 5.96046e-08, 1, -2.83832e-08, -6.01847e-08, 8.7987e-08, 1, 1.19209e-07, 5.96046e-08, -1.55065e-07)
+transform = Transform3D(-1, -3.0306e-10, 1.16209e-06, 5.96046e-08, 1, -2.83831e-08, 1.13221e-06, 8.79869e-08, 1, -1.3113e-06, 5.96046e-08, -6.33392e-06)
 
 [node name="RightMiddleFrontThigh" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/RightMiddleFrontThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
 
+[node name="RightMandible" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="17"]
+transform = Transform3D(-1, -2.01122e-07, 2.02306e-06, -2.25989e-07, 1, 5.72861e-07, 2.05443e-06, 4.71796e-07, 1, -1.60933e-06, -1.19209e-07, -2.38419e-07)
+
 [node name="RightMandible" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/RightMandible" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
+
+[node name="Body" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D" index="18"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.96046e-08, 0)
 
 [node name="Body" parent="HarvestmanProcAnimMeshes/HarvestmanMeshes/Armature/Skeleton3D/Body" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ou2ei")
@@ -252,11 +258,6 @@ opponent_hitboxes = ["PlayerHitbox", "HealingHitbox"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHurtbox"]
 shape = SubResource("BoxShape3D_uu6od")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="EnemyHurtbox"]
-visible = false
-mesh = SubResource("BoxMesh_o7ywk")
-skeleton = NodePath("../..")
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

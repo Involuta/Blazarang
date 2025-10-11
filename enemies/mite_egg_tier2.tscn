@@ -17,8 +17,8 @@ _data = {
 "explode": SubResource("Animation_rmeg4")
 }
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_nt7cu"]
-radius = 1.0
+[sub_resource type="BoxShape3D" id="BoxShape3D_nfwme"]
+size = Vector3(4, 6, 4)
 
 [node name="MiteEggTier2" type="Node3D"]
 script = ExtResource("1_qbel5")
@@ -44,7 +44,7 @@ script = ExtResource("2_0ai60")
 damage = 40
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHitbox"]
-shape = SubResource("SphereShape3D_nt7cu")
+shape = SubResource("BoxShape3D_nfwme")
 
 [node name="PlayerHitbox" type="Area3D" parent="."]
 collision_mask = 74
@@ -52,6 +52,6 @@ script = ExtResource("2_0ai60")
 damage = 50
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerHitbox"]
-shape = SubResource("SphereShape3D_nt7cu")
+shape = SubResource("BoxShape3D_nfwme")
 
 [connection signal="body_entered" from="EnemyHitbox" to="." method="_on_body_entered"]

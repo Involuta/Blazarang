@@ -3,11 +3,13 @@
 [ext_resource type="Script" path="res://enemies/mite_egg.gd" id="1_tn247"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="2_wi4qn"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_3bpga"]
-radius = 1.0
-height = 2.0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vsfuv"]
+albedo_color = Color(0.105882, 0.105882, 0.105882, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a2woi"]
+[sub_resource type="SphereMesh" id="SphereMesh_3bpga"]
+material = SubResource("StandardMaterial3D_vsfuv")
+radius = 1.0
+height = 1.5
 
 [sub_resource type="Animation" id="Animation_rmeg4"]
 resource_name = "explode"
@@ -26,7 +28,6 @@ tier = 3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_3bpga")
-surface_material_override/0 = SubResource("StandardMaterial3D_a2woi")
 
 [node name="FlightParticles" type="GPUParticles3D" parent="."]
 
