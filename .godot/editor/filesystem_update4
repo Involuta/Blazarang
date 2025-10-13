@@ -36,3 +36,4 @@ res://cotu/CotuControl.gd
 res://rang/rang_particles_base.tscn
 res://levels/mite_level/section_nodes/mite_level_main_arena.gd
 res://enemies/jumping_spider.gd
+res://enemies/enemy_anims/jumping_spider_bite.res
