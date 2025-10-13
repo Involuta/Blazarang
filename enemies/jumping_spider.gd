@@ -273,6 +273,8 @@ func switch_to_attack():
 	velocity = .91 * (walk_dest - global_position) / attack_jump_duration
 
 func receive_hit_from_hurtbox():
+	if behav_state == AIM:
+		switch_to_walk()
 	if behav_state == ATTACK:
 		hit_received_while_attacking = true
 

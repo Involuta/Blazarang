@@ -19,13 +19,14 @@ var target : Node3D
 var time_until_next_infest_switch_secs := 5.0
 
 @export var max_time_until_next_egg := 20.0
-var time_until_next_egg := 200.0
+var time_until_next_egg := 10.0
 @export var egg_drop_height := 100.0
 @export var max_living_enemies := 50
 var living_enemies := 0
 
 @export var mite_nums_per_egg := [4, 8, 1, 1] # Number of mites spawned from a Tier [Index+1] egg
 
+@export var starting_wave := 8 # FOR TESTING ONLY: manually set the first wave when the level starts
 var current_wave := 0
 var eggs_remaining_this_wave := 4 # Wave increases after this num becomes 0, then this num is set to new wave's egg num
 # Num of eggs spawned per wave = random_int(num-var, num+var). Egg spawned = random choice among "Tier" keys
@@ -69,6 +70,11 @@ var eggs_remaining_this_wave := 4 # Wave increases after this num becomes 0, the
 		"Num":8,
 		"Var":1,
 		"Chances":[.4,.4,.1,.1],
+	},
+	{
+		"Num":100,
+		"Var":0,
+		"Chances":[.8,0,.1,.1]
 	}
 ]
 
@@ -83,10 +89,14 @@ var harvestmen_dict = {}
 
 func _ready():
 	time_until_next_infest_switch_secs = max_time_until_next_infest_switch
-	#time_until_next_egg = max_time_until_next_egg
+	time_until_next_egg = max_time_until_next_egg
 	level = root.find_child("Level")
 	# Egg dropper targets Cotu's body, not icon
 	target = root.find_child("cotuCB")
+	
+	# Set starting wave if applicable
+	if starting_wave > 0:
+		current_wave = starting_wave
 	
 	# Set eggs remaining this wave
 	var wave_egg_num = egg_waves[current_wave]["Num"]
