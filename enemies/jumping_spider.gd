@@ -32,7 +32,7 @@ var behav_state := WALK
 var walk_dest := Vector3.ZERO
 @export var walk_max_duration := 7.0 # If spider keeps recalculating walk dest and never makes it to the dest, it stops walking after this many seconds
 var walk_duration := 7.0 # Set to walk_max_duration at start of walk state
-@export var walk_dest_dist_from_target := 30.0 # Starting from the target, go walk_dest_dist_from_target opposite the dir the target is facing. Get a flat circle around this point w radius walk_dest_dist_from_target. Get a random pt inside this circle, then fire a ray from high above onto the pt. If it's a valid pt, choose it. If not, increase the size of the circle, get another random pt, and fire another ray. Repeat until the pt is valid
+@export var walk_dest_dist_from_target := 30.0 # Starting from the target, go walk_dest_dist_from_target opposite the dir the target is facing. Get a flat circle around this point w radius walk_dest_radius. Get a random cardinal pt on the circumference of this circle, then fire a ray from high above onto the pt. If it's a valid pt, choose it. If not, increase the size of the circle, get another random pt, and fire another ray. Repeat until the pt is valid
 @export var walk_dest_radius := 10.0
 @export var walk_turn_speed := .5
 @export var walk_speed := 50.0
@@ -81,7 +81,8 @@ func _ready():
 	hurtbox.add_to_group("lockonables")
 	
 	Globals.cotu_dodge.connect(ready_action_trigger)
-	Globals.cotu_normal_throw_rose.connect(ready_action_trigger)
+	# Spider doesn't attack when you throw because the rose stuns it
+	#Globals.cotu_normal_throw_rose.connect(ready_action_trigger)
 	hurtbox.hit_received.connect(receive_hit_from_hurtbox)
 	
 	switch_to_walk()
@@ -159,7 +160,7 @@ func choose_walk_dest():
 	var walk_dest_center = target.global_position - walk_dest_dist_from_target * target_face_dir
 	var walk_dest_candidate = walk_dest_center
 	# The longer the spider's been walking, the farther away it tries to get
-	var temp_walk_dest_radius := walk_dest_radius * (1 + (walk_max_duration - walk_duration))
+	var temp_walk_dest_radius := walk_dest_radius * (1 + 1.5 * (walk_max_duration - walk_duration))
 	var result = false
 	var attempts := 10
 	while not result or attempts > 0:
@@ -182,7 +183,6 @@ func choose_walk_dest():
 	walk_dest = global_position
 
 func switch_to_walk():
-	# Stop IK since you're leaving the ground
 	body_meshes.start_ik()
 	behav_state = WALK
 	# Set max walk time
@@ -266,35 +266,46 @@ func switch_to_attack():
 	attack_jump_completed = false
 	# Stop body meshes IK
 	body_meshes.stop_ik()
-	# Jump towards jump dest (target + its vel)
+	# Jump towards jump dest (target + its vel - vec from spider to jump dest)
 	# Vel = distance / seconds
 	# walk_dest functions as jump_dest here
 	walk_dest = target.global_position + (target.velocity * get_physics_process_delta_time())
+	# Subtract spider to jump dest vec slghtly so that spider doesn't aim directly for the jump dest, but slightly back from it
+	walk_dest -= .5 * global_position.direction_to(walk_dest)
 	velocity = .91 * (walk_dest - global_position) / attack_jump_duration
 
 func receive_hit_from_hurtbox():
 	if behav_state == AIM:
 		switch_to_walk()
-	if behav_state == ATTACK:
+	if behav_state == ATTACK and attack_jump_completed:
 		hit_received_while_attacking = true
 
 func attack_frame(delta):
-	# If spider landed, stop checking if spider landed, turn on body meshes IK, and set vel to 0
-	if not attack_jump_completed and global_position.distance_to(walk_dest) < attack_stop_dist:
+	# If spider reached its dest (either jump dest (walk_dest) or target), stop checking if spider reached its dest, turn on body meshes IK, and set vel to 0
+	if not attack_jump_completed and (global_position.distance_to(walk_dest) < attack_stop_dist or global_position.distance_to(target.global_position) < attack_stop_dist):
 		attack_jump_completed = true
 		body_meshes.start_ik()
 		velocity = Vector3.ZERO
-	# Decrease attack time remaining. If it's <= 0, switch to retreat
+	
+	# Decrease attack time remaining. If it's <= 0 or you got hit and fell to the floor, switch to retreat
 	attack_time_remaining -= delta
 	if attack_time_remaining <= 0 or hit_received_while_attacking:
 		hit_received_while_attacking = false
 		inner_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 		outer_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
-		# When switching states, spider could be moving, so set its speed to 0
-		velocity = Vector3.ZERO
+		# When switching states, spider could be moving, so set its lateral speed to 0 and remove upward speed
+		velocity.x = 0
+		velocity.z = 0
+		if velocity.y > 0:
+			velocity.y = 0
 		switch_to_retreat()
 	
-	# Chase target
+	# While in the air, look in the direction you're moving so that if you bounce off of something, it'll still look like you're moving forward and you meant to do that
+	if not attack_jump_completed:
+		rotate_y_to_vec(velocity, 1)
+		return
+	
+	# If you already landed, chase target
 	rotate_y_to_vec(target.global_position - global_position, walk_turn_speed)
 	nav_agent.set_target_position(target.global_position)
 	var next_position = nav_agent.get_next_path_position()
@@ -329,6 +340,8 @@ func choose_retreat_dest():
 	walk_dest = global_position
 
 func switch_to_retreat():
+	# If you were hit mid-jump, your IK is still off
+	body_meshes.start_ik()
 	behav_state = RETREAT
 	choose_retreat_dest()
 	body_meshes.set_leg_step_time(leg_step_time_moving)

@@ -40,3 +40,11 @@ res://enemies/enemy_anims/jumping_spider_bite.res
 res://general_scripts/hurtbox.gd
 res://globals.gd
 res://glb_inherited_scenes/landmite_meshes.tscn
+res://enemies/landmite.tscn
+res://enemies/landmite.gd
+res://enemies/paramite.tscn
+res://enemies/paramite.gd
+res://enemies/flatmite.tscn
+res://enemies/flatmite.gd
+res://enemies/harvestman.gd
+res://glb_inherited_scenes/jumping_spider_meshes.tscn

@@ -89,9 +89,11 @@ func set_active(active):
 	set_physics_process(active)
 	if active:
 		process_mode = Node.PROCESS_MODE_INHERIT
+		add_to_group("lockonables")
 	else:
 		global_position.y = -50
 		process_mode = Node.PROCESS_MODE_DISABLED
+		remove_from_group("lockonables")
 
 # Equivalent of lerp_look_at_move_dir or lerp_look_at_target in other enemies. This func is necessary for mites bc the mesh itself needs to rotate independently of the parent
 # Rotate body meshes y rotation so that meshes look in the direction of the vector, which is a 3D vec whose y value is ignored

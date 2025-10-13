@@ -80,6 +80,8 @@ func set_active(active):
 		body_meshes = $HarvestmanProcAnimMeshes
 	if active:
 		process_mode = Node.PROCESS_MODE_INHERIT
+		if hurtbox:
+			hurtbox.add_to_group("lockonables")
 		# Wait for raycasts to activate and/or positions to update before starting IK
 		await get_tree().create_timer(2*get_physics_process_delta_time()).timeout
 		body_meshes.start_ik()
@@ -87,6 +89,8 @@ func set_active(active):
 		body_meshes.stop_ik()
 		global_position.y = -50
 		process_mode = Node.PROCESS_MODE_DISABLED
+		if hurtbox:
+			hurtbox.remove_from_group("lockonables")
 
 # Equivalent of lerp_look_at_move_dir or lerp_look_at_target in other enemies. This func is necessary for mites bc the mesh itself needs to rotate independently of the parent
 # Rotate body meshes y rotation so that meshes look in the direction of the vector, which is a 3D vec whose y value is ignored
