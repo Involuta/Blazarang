@@ -4,6 +4,8 @@ extends Area3D
 # Changing the name of a hurtbox node is fine (UNLESS IT'S A BOSS HURTBOX DISPLAYED IN UI); nothing looks at a hurtbox name (EXCEPT FOR UI ON A DISPLAYED HURTBOX)
 # You shouldn't change the name of a hitbox since that's what hurtboxes look at
 
+signal hit_received
+
 var rng := RandomNumberGenerator.new()
 @export var dp_impulse_limit := 5
 @export var dp_count := 5
@@ -61,6 +63,7 @@ func receive_heal(heal_amt: int):
 		health = max_health
 
 func receive_hit(damage: float, _hitter):
+	hit_received.emit()
 	health -= damage
 	if health <= 0:
 		die()

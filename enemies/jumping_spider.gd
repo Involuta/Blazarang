@@ -4,7 +4,7 @@ var spitweb := preload("res://enemies/spitweb.tscn")
 @onready var nav_agent := $NavigationAgent3D
 @onready var body_meshes := $JumpingSpiderProcAnimMeshes
 @onready var physical_collider := $CollisionShape3D
-@onready var hurtbox := $EnemyHurtbox
+@onready var hurtbox := $JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/EnemyHurtbox
 @onready var anim_player := $JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/AnimationPlayer
 @onready var anim_tree := $AnimationTree
 @onready var root := $/root/ViewControl
@@ -56,11 +56,12 @@ var ready_triggered := false # Set to true when Cotu does an action that trigger
 var ready_trigger_duration := .25 # The duration of the ready state when an action triggers the spider to jump. Set to ready_max_trigger_duration when ready state begins. Only decreases when ready_triggered is true
 @export var ready_front_leg_raise_time := .2 # When either ready_duration is <= ready_front_leg_raise_time, front legs begin to rise. Actual time it takes for front legs to rise is set in transition from idle to ready state in anim tree
 
-@export var attack_total_duration := 1.0 # Duration of jump + endlag in secs
-var attack_time_remaining := 1.0 # Decreases every frame, reset to attack_duration every attack
 @export var attack_jump_duration := .25 # Duration of jump in secs
-@export var attack_stop_dist := 3.3 # Max dist from spider to target needed to stop jump mvmt
+@export var attack_stop_dist := 3.3 # Max dist from spider to jump dest needed to stop jump mvmt
 var attack_jump_completed := false # Set to true when landing after jump, set to false at start of attack
+@export var attack_total_duration := 5.0 # Duration of jump + chase in secs
+var attack_time_remaining := 5.0 # Decreases every frame, reset to attack_total_duration before every jump
+var hit_received_while_attacking := false # Set to true when spider is hit while attacking, false outside of attack state
 
 @export var retreat_min_dist := 30.0 # Min dist spider runs away from target when retreating
 
@@ -81,6 +82,7 @@ func _ready():
 	
 	Globals.cotu_dodge.connect(ready_action_trigger)
 	Globals.cotu_normal_throw_rose.connect(ready_action_trigger)
+	hurtbox.hit_received.connect(receive_hit_from_hurtbox)
 	
 	switch_to_walk()
 
@@ -149,20 +151,23 @@ func choose_walk_dest():
 	"""
 	Starting from the target, go walk_dest_dist_from_target opposite the dir the target is facing.
 	Get a flat circle (or square) around this point w radius walk_dest_radius.
-	Get a random pt inside this area, then fire a ray from high above onto the pt.
+	Get a random cardinal pt on the circumference of the circle (north, south, east, west), then fire a ray from high above onto the pt.
 	If it's a valid pt, choose it. If not, increase the size of the area, get another random pt, and fire another ray. Repeat until the pt is valid
 	Failsafe: set walk_dest to global pos
 	"""
 	var target_face_dir = target.get_fwd_dir()
 	var walk_dest_center = target.global_position - walk_dest_dist_from_target * target_face_dir
 	var walk_dest_candidate = walk_dest_center
-	var temp_walk_dest_radius := walk_dest_radius
+	# The longer the spider's been walking, the farther away it tries to get
+	var temp_walk_dest_radius := walk_dest_radius * (1 + (walk_max_duration - walk_duration))
 	var result = false
 	var attempts := 10
 	while not result or attempts > 0:
 		attempts -= 1
-		walk_dest_candidate.x = walk_dest_center.x + rng.randf_range(-temp_walk_dest_radius, temp_walk_dest_radius)
-		walk_dest_candidate.z = walk_dest_center.z + rng.randf_range(-temp_walk_dest_radius, temp_walk_dest_radius)
+		var randx = -1 if rng.randf() < .5 else 1
+		var randz = -1 if rng.randf() < .5 else 1
+		walk_dest_candidate.x = walk_dest_center.x + randx * temp_walk_dest_radius
+		walk_dest_candidate.z = walk_dest_center.z + randz * temp_walk_dest_radius
 		var space_state := get_world_3d().direct_space_state
 		var query = PhysicsRayQueryParameters3D.create(walk_dest_candidate + 100.0 * Vector3.UP, walk_dest_candidate + 200.0 * Vector3.DOWN)
 		query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
@@ -267,6 +272,10 @@ func switch_to_attack():
 	walk_dest = target.global_position + (target.velocity * get_physics_process_delta_time())
 	velocity = .91 * (walk_dest - global_position) / attack_jump_duration
 
+func receive_hit_from_hurtbox():
+	if behav_state == ATTACK:
+		hit_received_while_attacking = true
+
 func attack_frame(delta):
 	# If spider landed, stop checking if spider landed, turn on body meshes IK, and set vel to 0
 	if not attack_jump_completed and global_position.distance_to(walk_dest) < attack_stop_dist:
@@ -275,9 +284,12 @@ func attack_frame(delta):
 		velocity = Vector3.ZERO
 	# Decrease attack time remaining. If it's <= 0, switch to retreat
 	attack_time_remaining -= delta
-	if attack_time_remaining <= 0:
+	if attack_time_remaining <= 0 or hit_received_while_attacking:
+		hit_received_while_attacking = false
 		inner_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 		outer_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+		# When switching states, spider could be moving, so set its speed to 0
+		velocity = Vector3.ZERO
 		switch_to_retreat()
 	
 	# Chase target

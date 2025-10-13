@@ -16,15 +16,15 @@ curve = SubResource("Curve_34bjw")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lrenx"]
 emission_shape = 6
-emission_ring_axis = Vector3(2.08165e-12, 1, 2.08165e-12)
+emission_ring_axis = Vector3(2.08165e-12, 0.9, 2.08165e-12)
 emission_ring_height = 0.1
 emission_ring_radius = 2.0
 emission_ring_inner_radius = 0.0
 spread = 180.0
 flatness = 0.95
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-initial_velocity_min = 10.0
-initial_velocity_max = 15.0
+initial_velocity_min = 8.0
+initial_velocity_max = 12.0
 linear_accel_min = -10.0
 linear_accel_max = -10.0
 angle_max = 45.0
