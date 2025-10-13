@@ -44,9 +44,6 @@ func _ready():
 	nav_agent.target_desired_distance = spit_dist
 	
 	spit_cooldown_remaining = spit_cooldown_secs
-	
-	# Ensure that homing attacks hit the hurtbox and not the parent node, which stays on the ground. For any enemy whose hurtbox is at the same position as the parent node, this line can just be add_to_group("lockonables")
-	hurtbox.add_to_group("lockonables")
 
 func _physics_process(delta):
 	# Target position is used during both follow and spit states
@@ -81,6 +78,7 @@ func set_active(active):
 	if active:
 		process_mode = Node.PROCESS_MODE_INHERIT
 		if hurtbox:
+			# Ensure that homing attacks hit the hurtbox and not the parent node, which stays on the ground. For any enemy whose hurtbox is at the same position as the parent node, this line can just be add_to_group("lockonables")
 			hurtbox.add_to_group("lockonables")
 		# Wait for raycasts to activate and/or positions to update before starting IK
 		await get_tree().create_timer(2*get_physics_process_delta_time()).timeout

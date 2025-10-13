@@ -115,6 +115,7 @@ func set_active(active):
 	if active:
 		process_mode = Node.PROCESS_MODE_INHERIT
 		if hurtbox:
+			# Ensure that homing attacks hit the hurtbox and not the parent node, which stays on the ground. For any enemy whose hurtbox is at the same position as the parent node, this line can just be add_to_group("lockonables")
 			hurtbox.add_to_group("lockonables")
 	else:
 		global_position.y = -50

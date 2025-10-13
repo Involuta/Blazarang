@@ -63,8 +63,6 @@ func _ready():
 	time_until_forced_leap = 0 # Mite leaps immediately upon spawning
 	
 	bite_cooldown_remaining = bite_cooldown_secs
-	
-	add_to_group("lockonables")
 
 func _physics_process(delta):
 	match(behav_state):

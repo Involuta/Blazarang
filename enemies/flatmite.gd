@@ -61,8 +61,6 @@ func _ready():
 	
 	await get_tree().create_timer(1.0).timeout
 	set_new_target_random_dest()
-	
-	add_to_group("lockonables")
 
 # Called by flatmite meshes to know whether to do ground slope orientation & offset correction
 func is_leaping():
