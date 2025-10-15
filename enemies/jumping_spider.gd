@@ -18,6 +18,7 @@ var target : Node3D
 enum {
 	CURIOUS,
 	WALK,
+	FARAWAY,
 	AIM,
 	READY,
 	ATTACK,
@@ -25,17 +26,19 @@ enum {
 }
 var behav_state := WALK
 
+@export var arena_max_radius := 100.0 # Spider won't set walk dest to any point laterally outside this value
+
 @export var target_fov_angle := PI/4 # Max angle btwn target's body's fwd dir and dir from target to spider necessary for spider to be considered in target's FOV
 @export var leg_step_time_moving := .0167 # Time it takes for each leg to make a step when spider is walking/retreating
 @export var leg_step_time_stationary := .1 # Time it takes for each leg to make a step when spider is aiming/ready
 
 var walk_dest := Vector3.ZERO
-@export var walk_max_duration := 7.0 # If spider keeps recalculating walk dest and never makes it to the dest, it stops walking after this many seconds
-var walk_duration := 7.0 # Set to walk_max_duration at start of walk state
-@export var walk_dest_dist_from_target := 30.0 # Starting from the target, go walk_dest_dist_from_target opposite the dir the target is facing. Get a flat circle around this point w radius walk_dest_radius. Get a random cardinal pt on the circumference of this circle, then fire a ray from high above onto the pt. If it's a valid pt, choose it. If not, increase the size of the circle, get another random pt, and fire another ray. Repeat until the pt is valid
+@export var walk_max_duration := 6.0 # If spider keeps recalculating walk dest and never makes it to the dest, it stops walking after this many seconds
+var walk_duration := 6.0 # Set to walk_max_duration at start of walk state
+@export var walk_dest_dist_from_target := 60.0 # Starting from the target, go walk_dest_dist_from_target opposite the dir the target is facing. Get a flat circle around this point w radius walk_dest_radius. Get a random cardinal pt on the circumference of this circle, then fire a ray from high above onto the pt. If it's a valid pt, choose it. If not, increase the size of the circle, get another random pt, and fire another ray. Repeat until the pt is valid
 @export var walk_dest_radius := 10.0
 @export var walk_turn_speed := .5
-@export var walk_speed := 50.0
+@export var walk_speed := 30.0
 
 @export var aim_turn_speed := .25
 @export var aim_turning_start_vec_angle_max := PI/3.5
@@ -57,13 +60,13 @@ var ready_trigger_duration := .25 # The duration of the ready state when an acti
 @export var ready_front_leg_raise_time := .2 # When either ready_duration is <= ready_front_leg_raise_time, front legs begin to rise. Actual time it takes for front legs to rise is set in transition from idle to ready state in anim tree
 
 @export var attack_jump_duration := .25 # Duration of jump in secs
-@export var attack_stop_dist := 3.3 # Max dist from spider to jump dest needed to stop jump mvmt
+@export var attack_stop_dist := 3.0 # Max dist from spider to jump dest needed to stop jump mvmt
 var attack_jump_completed := false # Set to true when landing after jump, set to false at start of attack
-@export var attack_total_duration := 5.0 # Duration of jump + chase in secs
+@export var attack_total_duration := 3.0 # Duration of jump + chase in secs
 var attack_time_remaining := 5.0 # Decreases every frame, reset to attack_total_duration before every jump
 var hit_received_while_attacking := false # Set to true when spider is hit while attacking, false outside of attack state
 
-@export var retreat_min_dist := 30.0 # Min dist spider runs away from target when retreating
+@export var retreat_min_dist := 60.0 # Min dist spider runs away from target when retreating
 
 func _ready():
 	level = root.find_child("Level")
@@ -82,7 +85,7 @@ func _ready():
 	
 	Globals.cotu_dodge.connect(ready_action_trigger)
 	# Spider doesn't attack when you throw because the rose stuns it
-	#Globals.cotu_normal_throw_rose.connect(ready_action_trigger)
+	Globals.cotu_normal_throw_rose.connect(ready_action_trigger)
 	hurtbox.hit_received.connect(receive_hit_from_hurtbox)
 	
 	switch_to_walk()
@@ -92,6 +95,8 @@ func _physics_process(delta):
 		match(behav_state):
 			WALK: 
 				print("walk")
+			FARAWAY:
+				print("faraway")
 			AIM:
 				print("aim")
 			READY:
@@ -103,6 +108,8 @@ func _physics_process(delta):
 	match(behav_state):
 		WALK: 
 			walk_frame(delta)
+		FARAWAY:
+			faraway_frame(delta)
 		AIM:
 			aim_frame(delta)
 		READY:
@@ -163,12 +170,17 @@ func choose_walk_dest():
 	var temp_walk_dest_radius := walk_dest_radius * (1 + 1.5 * (walk_max_duration - walk_duration))
 	var result = false
 	var attempts := 10
-	while not result or attempts > 0:
+	while not result and attempts > 0:
 		attempts -= 1
 		var randx = -1 if rng.randf() < .5 else 1
 		var randz = -1 if rng.randf() < .5 else 1
 		walk_dest_candidate.x = walk_dest_center.x + randx * temp_walk_dest_radius
 		walk_dest_candidate.z = walk_dest_center.z + randz * temp_walk_dest_radius
+		if Vector2(walk_dest_candidate.x, walk_dest_candidate.z).length() > arena_max_radius:
+			# Increase temp_walk_dest_radius by 10% if walk_dest_candidate isn't valid
+			temp_walk_dest_radius += walk_dest_radius * .1
+			print(attempts)
+			continue
 		var space_state := get_world_3d().direct_space_state
 		var query = PhysicsRayQueryParameters3D.create(walk_dest_candidate + 100.0 * Vector3.UP, walk_dest_candidate + 200.0 * Vector3.DOWN)
 		query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
@@ -209,6 +221,30 @@ func walk_frame(delta):
 	walk_duration -= delta
 	if walk_duration <= 0:
 		switch_to_aim()
+
+func choose_faraway_dest():
+	pass
+
+func switch_to_faraway():
+	body_meshes.start_ik()
+	behav_state = FARAWAY
+	# Set walk dest (choose_faraway_dest sets walk_dest)
+	choose_faraway_dest()
+	nav_agent.set_target_position(walk_dest)
+	body_meshes.set_leg_step_time(leg_step_time_moving)
+
+func faraway_frame(delta):
+	rotate_y_to_vec(walk_dest - global_position, walk_turn_speed)
+	if global_position.distance_to(walk_dest) <= nav_agent.target_desired_distance:
+		# TO DO: SWITCH TO POST-FARAWAY STATE (EGG, LEAVE, AIM)
+		switch_to_aim()
+	else:
+		nav_agent.set_target_position(walk_dest)
+	var next_position = nav_agent.get_next_path_position()
+	var new_velocity = (next_position - global_position).normalized() * walk_speed
+	
+	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
+	nav_agent.velocity = new_velocity
 
 func switch_to_aim():
 	behav_state = AIM
