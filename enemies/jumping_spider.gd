@@ -38,8 +38,12 @@ var walk_duration := 6.0 # Set to walk_max_duration at start of walk state
 @export var walk_dest_dist_from_target := 60.0 # Starting from the target, go walk_dest_dist_from_target opposite the dir the target is facing. Get a flat circle around this point w radius walk_dest_radius. Get a random cardinal pt on the circumference of this circle, then fire a ray from high above onto the pt. If it's a valid pt, choose it. If not, increase the size of the circle, get another random pt, and fire another ray. Repeat until the pt is valid
 @export var walk_dest_radius := 10.0
 @export var walk_turn_speed := .5
-@export var walk_speed := 30.0
-@export var walk_min_speed := 10.0 # Unless the spider wants to move at least this fast, it doesn't move at all. This prevents it from drifting slowly when changing direction and makes its mvmt more erratic
+@export var walk_speed := 60.0
+@export var walk_min_speed := 30.0 # Unless the spider wants to move at least this fast, it doesn't move at all. This prevents it from drifting slowly when changing direction and makes its mvmt more erratic
+var can_stop := false # Once the spider reaches above walk_min_speed, can_stop is true. When the spider goes below walk_min_speed and can_stop, it stops moving instead of moving slowly, and can_stop is set to false. After being stopped for a bit, it's allowed to accelerate again
+@export var stop_time_min := .1 # Min length of time spider stops moving due to reaching low speed
+@export var stop_time_max := 1.0 # Min length of time spider stops moving due to reaching low speed
+var stop_time_remaining := 1.0 # Stop time remaining before spider can accelerate again
 
 @export var faraway_chance := .5 # Chance of choosing faraway instead of walk
 @export var faraway_dest_radius := 90.0 # Dist from arena center that a faraway dest usually is
@@ -80,8 +84,8 @@ func _ready():
 	outer_hitbox = find_child("OuterMeleeHitboxPivot")
 	# Walk dest mesh may or may not exist
 	walk_dest_mesh = root.find_child("WalkDestMesh")
-	inner_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
-	outer_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+	inner_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
+	outer_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
 	anim_tree.active = true
 	
 	# Ensure that homing attacks hit the hurtbox and not the parent node, which stays on the ground. For any enemy whose hurtbox is at the same position as the parent node, this line can just be add_to_group("lockonables"), which makes the parent a lockonable
@@ -96,6 +100,10 @@ func _ready():
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("Special"):
+		if can_stop:
+			print("I can stop! ", stop_time_remaining)
+		else:
+			print("I can't stop! ", stop_time_remaining)
 		match(behav_state):
 			WALK: 
 				print("walk")
@@ -125,6 +133,11 @@ func _physics_process(delta):
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+	
+	if stop_time_remaining > 0:
+		stop_time_remaining -= delta
+		if stop_time_remaining <= 0:
+			can_stop = false
 	
 	if walk_dest_mesh:
 		walk_dest_mesh.global_position = walk_dest
@@ -156,8 +169,24 @@ func _on_navigation_agent_3d_target_reached():
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	if behav_state == WALK or behav_state == FARAWAY or behav_state == RETREAT or (behav_state == ATTACK and attack_jump_completed):
-		# If you're not planning to move at least at the min speed, don't move at all
-		velocity = velocity.move_toward(safe_velocity, .9)
+		# If you are already stopped, stay stopped
+		# Note: the only stop time functionality not stored here is setting can_stop to false when stop_time_remaining ends, which occurs in physics_process since it can decrement stop_time_remaining using delta
+		if stop_time_remaining > 0:
+			velocity = Vector3.ZERO
+		# If you're not already stopped, and you can stop, and are below the min speed, stop moving and start the stop timer
+		elif can_stop and velocity.length() < walk_min_speed:
+			stop_time_remaining = rng.randf_range(stop_time_min, stop_time_max)
+			velocity = Vector3.ZERO
+		# If you're not already stopped, and you can stop, and are above the min speed, keep moving as normal
+		elif can_stop and velocity.length() >= walk_min_speed:
+			velocity = velocity.move_toward(safe_velocity, .9)
+		# If you cannot stop, allow yourself to accelerate again and accelerate quickly
+		elif not can_stop:
+			velocity = safe_velocity
+			# If you cannot stop and your speed is over the min speed, you can stop again
+			if velocity.length() >= walk_min_speed + 5:
+				can_stop = true
+		
 
 func choose_walk_dest():
 	"""
@@ -345,8 +374,9 @@ func attack_frame(delta):
 	attack_time_remaining -= delta
 	if attack_time_remaining <= 0 or hit_received_while_attacking:
 		hit_received_while_attacking = false
-		inner_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
-		outer_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+		# Hitboxes are enabled by default to make spider a threat even when just running to a destination
+		inner_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
+		outer_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
 		# When switching states, spider could be moving, so set its lateral speed to 0 and remove upward speed
 		velocity.x = 0
 		velocity.z = 0
