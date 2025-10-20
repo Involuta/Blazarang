@@ -39,6 +39,10 @@ var walk_duration := 6.0 # Set to walk_max_duration at start of walk state
 @export var walk_dest_radius := 10.0
 @export var walk_turn_speed := .5
 @export var walk_speed := 30.0
+@export var walk_min_speed := 10.0 # Unless the spider wants to move at least this fast, it doesn't move at all. This prevents it from drifting slowly when changing direction and makes its mvmt more erratic
+
+@export var faraway_chance := .5 # Chance of choosing faraway instead of walk
+@export var faraway_dest_radius := 90.0 # Dist from arena center that a faraway dest usually is
 
 @export var aim_turn_speed := .25
 @export var aim_turning_start_vec_angle_max := PI/3.5
@@ -151,9 +155,9 @@ func _on_navigation_agent_3d_target_reached():
 	pass
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
-	if behav_state == WALK or behav_state == RETREAT or (behav_state == ATTACK and attack_jump_completed):
-		velocity = velocity.move_toward(safe_velocity, .5)
-	move_and_slide()
+	if behav_state == WALK or behav_state == FARAWAY or behav_state == RETREAT or (behav_state == ATTACK and attack_jump_completed):
+		# If you're not planning to move at least at the min speed, don't move at all
+		velocity = velocity.move_toward(safe_velocity, .9)
 
 func choose_walk_dest():
 	"""
@@ -179,7 +183,6 @@ func choose_walk_dest():
 		if Vector2(walk_dest_candidate.x, walk_dest_candidate.z).length() > arena_max_radius:
 			# Increase temp_walk_dest_radius by 10% if walk_dest_candidate isn't valid
 			temp_walk_dest_radius += walk_dest_radius * .1
-			print(attempts)
 			continue
 		var space_state := get_world_3d().direct_space_state
 		var query = PhysicsRayQueryParameters3D.create(walk_dest_candidate + 100.0 * Vector3.UP, walk_dest_candidate + 200.0 * Vector3.DOWN)
@@ -223,17 +226,32 @@ func walk_frame(delta):
 		switch_to_aim()
 
 func choose_faraway_dest():
-	pass
+	"""
+	Starting from the arena center, look in a random lateral dir, then move fwd faraway_dest_radius. At this lateral pos, get the y pos of the ground using a raycast from high above.
+	Failsafe: set walk_dest to global pos
+	"""
+	var arena_center := Vector3.ZERO
+	var faraway_dest_dir = Vector3.FORWARD
+	faraway_dest_dir = faraway_dest_dir.rotated(Vector3.UP, rng.randf_range(0, 2*PI))
+	var faraway_dest = faraway_dest_radius * faraway_dest_dir + arena_center
+	var space_state := get_world_3d().direct_space_state
+	var query = PhysicsRayQueryParameters3D.create(faraway_dest + Vector3.UP * 100, faraway_dest + Vector3.DOWN * 200)
+	query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
+	var result = space_state.intersect_ray(query)
+	if result:
+		walk_dest = result.position
+		return
+	# Failsafe: set walk_dest to current position
+	walk_dest = global_position
 
 func switch_to_faraway():
 	body_meshes.start_ik()
 	behav_state = FARAWAY
 	# Set walk dest (choose_faraway_dest sets walk_dest)
 	choose_faraway_dest()
-	nav_agent.set_target_position(walk_dest)
 	body_meshes.set_leg_step_time(leg_step_time_moving)
 
-func faraway_frame(delta):
+func faraway_frame(_delta):
 	rotate_y_to_vec(walk_dest - global_position, walk_turn_speed)
 	if global_position.distance_to(walk_dest) <= nav_agent.target_desired_distance:
 		# TO DO: SWITCH TO POST-FARAWAY STATE (EGG, LEAVE, AIM)
@@ -382,10 +400,13 @@ func switch_to_retreat():
 	choose_retreat_dest()
 	body_meshes.set_leg_step_time(leg_step_time_moving)
 
-func retreat_frame(delta):
+func retreat_frame(_delta):
 	rotate_y_to_vec(walk_dest - global_position, walk_turn_speed)
 	if global_position.distance_to(walk_dest) <= nav_agent.target_desired_distance:
-		switch_to_walk()
+		if rng.randf() > faraway_chance:
+			switch_to_walk()
+		else:
+			switch_to_faraway()
 	else:
 		nav_agent.set_target_position(walk_dest)
 	var next_position = nav_agent.get_next_path_position()
