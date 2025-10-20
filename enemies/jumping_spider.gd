@@ -168,7 +168,7 @@ func _on_navigation_agent_3d_target_reached():
 	pass
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
-	if behav_state == WALK or behav_state == FARAWAY or behav_state == RETREAT or (behav_state == ATTACK and attack_jump_completed):
+	if behav_state == WALK or behav_state == FARAWAY:
 		# If you are already stopped, stay stopped
 		# Note: the only stop time functionality not stored here is setting can_stop to false when stop_time_remaining ends, which occurs in physics_process since it can decrement stop_time_remaining using delta
 		if stop_time_remaining > 0:
@@ -186,7 +186,12 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 			# If you cannot stop and your speed is over the min speed, you can stop again
 			if velocity.length() >= walk_min_speed + 5:
 				can_stop = true
-		
+	# When attacking, don't stop so you can continuously chase. Since it's a short range walk, move smoothly
+	elif (behav_state == ATTACK and attack_jump_completed):
+		velocity = velocity.move_toward(safe_velocity, .5)
+	# When retreating, don't stop so you can escape danger quickly. Since it's a long range walk, move abruptly
+	elif behav_state == RETREAT:
+		velocity = safe_velocity
 
 func choose_walk_dest():
 	"""
@@ -239,7 +244,7 @@ func walk_frame(delta):
 	if point_in_target_fov(walk_dest):
 		choose_walk_dest()
 	
-	rotate_y_to_vec(walk_dest - global_position, walk_turn_speed)
+	rotate_y_to_vec(velocity, walk_turn_speed)
 	if global_position.distance_to(walk_dest) <= nav_agent.target_desired_distance:
 		switch_to_aim()
 	else:
@@ -281,7 +286,7 @@ func switch_to_faraway():
 	body_meshes.set_leg_step_time(leg_step_time_moving)
 
 func faraway_frame(_delta):
-	rotate_y_to_vec(walk_dest - global_position, walk_turn_speed)
+	rotate_y_to_vec(velocity, walk_turn_speed)
 	if global_position.distance_to(walk_dest) <= nav_agent.target_desired_distance:
 		# TO DO: SWITCH TO POST-FARAWAY STATE (EGG, LEAVE, AIM)
 		switch_to_aim()
