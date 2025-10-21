@@ -25,3 +25,4 @@ res://general_scripts/skygradient.gdshader
 res://enemies/jumping_spider.gd
 res://levels/mite_level/section_nodes/mite_level_main_arena.tscn
 res://glb_inherited_scenes/mite_bowl.tscn
+res://enemies/enemy_anims/jumping_spider_bite.res

@@ -269,8 +269,7 @@ func choose_far_dest(on_rim: bool):
 	"""
 	var dest_dist := arena_max_radius if on_rim else faraway_dest_radius
 	var arena_center := Vector3.ZERO
-	var faraway_dest_dir = Vector3.FORWARD
-	faraway_dest_dir = faraway_dest_dir.rotated(Vector3.UP, rng.randf_range(0, 2*PI))
+	var faraway_dest_dir = Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI))
 	var faraway_dest = dest_dist * faraway_dest_dir + arena_center
 	var space_state := get_world_3d().direct_space_state
 	var query = PhysicsRayQueryParameters3D.create(faraway_dest + Vector3.UP * 100, faraway_dest + Vector3.DOWN * 200)
@@ -378,7 +377,7 @@ func switch_to_attack():
 	if aiming_at_target:
 		attack_time_remaining = attack_total_duration
 	else:
-		attack_time_remaining = attack_total_duration / 3 # Let the spider jump, but not chase
+		attack_time_remaining = attack_total_duration # Let the spider jump, but not chase
 	attack_jump_completed = false
 	# Stop body meshes IK
 	body_meshes.stop_ik()
@@ -460,10 +459,23 @@ func choose_retreat_dest():
 	# Failsafe: set walk_dest to current position
 	walk_dest = global_position
 
+func teleport_outside_arena():
+	"""
+	Starting from the arena center, look in a random lateral dir, then move fwd arena_max_radius * 1.15. Teleport to this lateral pos
+	Failsafe: set walk_dest to global pos
+	"""
+	var arena_center := Vector3.ZERO
+	var tp_dest_dir = Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI))
+	var tp_dest = 1.15 * arena_max_radius * tp_dest_dir + arena_center
+	global_position = tp_dest
+
 func switch_to_retreat():
 	# This is here if attack_time_remaining finishes and spider didn't complete its jump, which happens when it leaves the arena
 	body_meshes.start_ik()
 	behav_state = RETREAT
+	# If you just left the arena, teleport to a random pos
+	if not aiming_at_target:
+		teleport_outside_arena()
 	choose_retreat_dest()
 	body_meshes.set_leg_step_time(leg_step_time_moving)
 
