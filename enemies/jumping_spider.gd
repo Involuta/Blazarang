@@ -19,6 +19,7 @@ enum {
 	CURIOUS,
 	WALK,
 	FARAWAY,
+	HISS,
 	AIM,
 	READY,
 	ATTACK,
@@ -26,7 +27,7 @@ enum {
 }
 var behav_state := WALK
 
-@export var arena_max_radius := 100.0 # Spider won't set walk dest to any point laterally outside this value
+@export var arena_max_radius := 120.0 # Spider won't set walk dest to any point laterally outside this value
 
 @export var target_fov_angle := PI/4 # Max angle btwn target's body's fwd dir and dir from target to spider necessary for spider to be considered in target's FOV
 @export var leg_step_time_moving := .0167 # Time it takes for each leg to make a step when spider is walking/retreating
@@ -48,6 +49,7 @@ var stop_time_remaining := 1.0 # Stop time remaining before spider can accelerat
 @export var faraway_chance := .5 # Chance of choosing faraway instead of walk
 @export var faraway_dest_radius := 90.0 # Dist from arena center that a faraway dest usually is
 
+var aiming_at_target := true # If this is false, then aim, ready, and jump states aim at walk_dest instead of target
 @export var aim_turn_speed := .25
 @export var aim_turning_start_vec_angle_max := PI/3.5
 @export var aim_turning_start_vec_angle_min := PI/9
@@ -288,7 +290,7 @@ func switch_to_faraway():
 func faraway_frame(_delta):
 	rotate_y_to_vec(velocity, walk_turn_speed)
 	if global_position.distance_to(walk_dest) <= nav_agent.target_desired_distance:
-		# TO DO: SWITCH TO POST-FARAWAY STATE (EGG, LEAVE, AIM)
+		# TO DO: SWITCH TO POST-FARAWAY STATE (LEAVE, AIM)
 		switch_to_aim()
 	else:
 		nav_agent.set_target_position(walk_dest)
@@ -300,21 +302,32 @@ func faraway_frame(_delta):
 
 func switch_to_aim():
 	behav_state = AIM
+	if rng.randf() > .5:
+		aiming_at_target = true
+	else:
+		aiming_at_target = false
+		choose_faraway_dest()
 	aim_duration = rng.randf_range(aim_min_duration, aim_max_duration)
 	body_meshes.set_leg_step_time(leg_step_time_stationary)
 
 func aim_frame(delta):
+	var target_pos : Vector3
+	if aiming_at_target:
+		target_pos = target.global_position
+	else:
+		target_pos = walk_dest
+	
 	velocity = Vector3.ZERO
 	#  If y-axis angle btwn spider's forward dir and the dir from spider to target ("vec angle") is too high, turn towards target
 	var body_fwd_dir = body_meshes.transform.basis.z
-	var dir_to_target := global_position.direction_to(target.global_position)
+	var dir_to_target := global_position.direction_to(target_pos)
 	var angle_btwn_vecs := angle_btwn_3d_vecs(body_fwd_dir, dir_to_target)
 	# Start turning when vec angle is above start_vec_angle
 	if not aim_turning and angle_btwn_vecs > aim_turning_start_vec_angle:
 		aim_turning_start_vec_angle = rng.randf_range(aim_turning_start_vec_angle_min, aim_turning_start_vec_angle_max)
 		aim_turning = true
 	if aim_turning:
-		rotate_y_to_vec(target.global_position - global_position, aim_turn_speed)
+		rotate_y_to_vec(target_pos - global_position, aim_turn_speed)
 		# Stop turning when vec angle is below stop_vec_angle
 		if angle_btwn_vecs < aim_turning_stop_vec_angle:
 			aim_turning = false
@@ -334,8 +347,14 @@ func switch_to_ready():
 	body_meshes.set_leg_step_time(leg_step_time_stationary)
 
 func ready_frame(delta):
+	var target_pos : Vector3
+	if aiming_at_target:
+		target_pos = target.global_position
+	else:
+		target_pos = walk_dest
+	
 	velocity = Vector3.ZERO
-	rotate_y_to_vec(target.global_position - global_position, ready_turn_speed)
+	rotate_y_to_vec(target_pos - global_position, ready_turn_speed)
 	ready_full_duration -= delta
 	if ready_triggered:
 		ready_trigger_duration -= delta
@@ -357,7 +376,8 @@ func switch_to_attack():
 	# Jump towards jump dest (target + its vel - vec from spider to jump dest)
 	# Vel = distance / seconds
 	# walk_dest functions as jump_dest here
-	walk_dest = target.global_position + (target.velocity * get_physics_process_delta_time())
+	if aiming_at_target:
+		walk_dest = target.global_position + (target.velocity * get_physics_process_delta_time())
 	# Subtract spider to jump dest vec slghtly so that spider doesn't aim directly for the jump dest, but slightly back from it
 	walk_dest -= .5 * global_position.direction_to(walk_dest)
 	velocity = .91 * (walk_dest - global_position) / attack_jump_duration
@@ -369,15 +389,20 @@ func receive_hit_from_hurtbox():
 		hit_received_while_attacking = true
 
 func attack_frame(delta):
-	# If spider reached its dest (either jump dest (walk_dest) or target), stop checking if spider reached its dest, turn on body meshes IK, and set vel to 0
-	if not attack_jump_completed and (global_position.distance_to(walk_dest) < attack_stop_dist or global_position.distance_to(target.global_position) < attack_stop_dist):
+	# Give attack_stop_dist 2 meters of leeway when not aiming_at_target to prevent missing the dest and sliding
+	var temp_attack_stop_dist := attack_stop_dist
+	if not aiming_at_target:
+		temp_attack_stop_dist += 2
+	
+	# If spider reached its dest, stop checking if spider reached its dest, turn on body meshes IK, and set vel to 0
+	if not attack_jump_completed and global_position.distance_to(walk_dest) < temp_attack_stop_dist:
 		attack_jump_completed = true
 		body_meshes.start_ik()
 		velocity = Vector3.ZERO
 	
-	# Decrease attack time remaining. If it's <= 0 or you got hit and fell to the floor, switch to retreat
+	# Decrease attack time remaining. If it's <= 0 or you touched the floor and got hit or (you completed your jump and are not aiming at the target), switch to retreat
 	attack_time_remaining -= delta
-	if attack_time_remaining <= 0 or hit_received_while_attacking:
+	if attack_time_remaining <= 0 or hit_received_while_attacking or (attack_jump_completed and not aiming_at_target):
 		hit_received_while_attacking = false
 		# Hitboxes are enabled by default to make spider a threat even when just running to a destination
 		inner_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
@@ -394,7 +419,7 @@ func attack_frame(delta):
 		rotate_y_to_vec(velocity, 1)
 		return
 	
-	# If you already landed, chase target
+	# If you already landed and are still attacking, chase target
 	rotate_y_to_vec(target.global_position - global_position, walk_turn_speed)
 	nav_agent.set_target_position(target.global_position)
 	var next_position = nav_agent.get_next_path_position()
@@ -436,7 +461,7 @@ func switch_to_retreat():
 	body_meshes.set_leg_step_time(leg_step_time_moving)
 
 func retreat_frame(_delta):
-	rotate_y_to_vec(walk_dest - global_position, walk_turn_speed)
+	rotate_y_to_vec(velocity, walk_turn_speed)
 	if global_position.distance_to(walk_dest) <= nav_agent.target_desired_distance:
 		if rng.randf() > faraway_chance:
 			switch_to_walk()
