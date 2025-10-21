@@ -49,6 +49,7 @@ var stop_time_remaining := 1.0 # Stop time remaining before spider can accelerat
 @export var faraway_chance := .5 # Chance of choosing faraway instead of walk
 @export var faraway_dest_radius := 90.0 # Dist from arena center that a faraway dest usually is
 
+@export var leave_chance := .5 # Chance of jumping out of arena (i.e. at walk_dest at edge of arena) instead of at target whenever entering aim state
 var aiming_at_target := true # If this is false, then aim, ready, and jump states aim at walk_dest instead of target
 @export var aim_turn_speed := .25
 @export var aim_turning_start_vec_angle_max := PI/3.5
@@ -261,15 +262,16 @@ func walk_frame(delta):
 	if walk_duration <= 0:
 		switch_to_aim()
 
-func choose_faraway_dest():
+func choose_far_dest(on_rim: bool):
 	"""
 	Starting from the arena center, look in a random lateral dir, then move fwd faraway_dest_radius. At this lateral pos, get the y pos of the ground using a raycast from high above.
 	Failsafe: set walk_dest to global pos
 	"""
+	var dest_dist := arena_max_radius if on_rim else faraway_dest_radius
 	var arena_center := Vector3.ZERO
 	var faraway_dest_dir = Vector3.FORWARD
 	faraway_dest_dir = faraway_dest_dir.rotated(Vector3.UP, rng.randf_range(0, 2*PI))
-	var faraway_dest = faraway_dest_radius * faraway_dest_dir + arena_center
+	var faraway_dest = dest_dist * faraway_dest_dir + arena_center
 	var space_state := get_world_3d().direct_space_state
 	var query = PhysicsRayQueryParameters3D.create(faraway_dest + Vector3.UP * 100, faraway_dest + Vector3.DOWN * 200)
 	query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
@@ -283,8 +285,8 @@ func choose_faraway_dest():
 func switch_to_faraway():
 	body_meshes.start_ik()
 	behav_state = FARAWAY
-	# Set walk dest (choose_faraway_dest sets walk_dest)
-	choose_faraway_dest()
+	# Set walk dest (choose_far_dest sets walk_dest)
+	choose_far_dest(false)
 	body_meshes.set_leg_step_time(leg_step_time_moving)
 
 func faraway_frame(_delta):
@@ -302,12 +304,13 @@ func faraway_frame(_delta):
 
 func switch_to_aim():
 	behav_state = AIM
-	if rng.randf() > .5:
+	if rng.randf() > leave_chance:
 		aiming_at_target = true
+		aim_duration = rng.randf_range(aim_min_duration, aim_max_duration)
 	else:
 		aiming_at_target = false
-		choose_faraway_dest()
-	aim_duration = rng.randf_range(aim_min_duration, aim_max_duration)
+		aim_duration = aim_min_duration / 2
+		choose_far_dest(true) # Set walk dist to pt on rim
 	body_meshes.set_leg_step_time(leg_step_time_stationary)
 
 func aim_frame(delta):
@@ -342,7 +345,10 @@ func ready_action_trigger():
 
 func switch_to_ready():
 	behav_state = READY
-	ready_full_duration = rng.randf_range(ready_min_full_duration, ready_max_full_duration)
+	if aiming_at_target:
+		ready_full_duration = rng.randf_range(ready_min_full_duration, ready_max_full_duration)
+	else:
+		ready_full_duration = ready_min_full_duration / 2
 	ready_trigger_duration = ready_max_trigger_duration
 	body_meshes.set_leg_step_time(leg_step_time_stationary)
 
@@ -368,8 +374,11 @@ func switch_to_attack():
 	behav_state = ATTACK
 	inner_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
 	outer_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
-	# Reset attack_time_remaining and attack_jump_completed
-	attack_time_remaining = attack_total_duration
+	# Reset attack_time_remaining and attack_jump_completed. Remember that attack_time_remaining includes both the jump and chase
+	if aiming_at_target:
+		attack_time_remaining = attack_total_duration
+	else:
+		attack_time_remaining = attack_total_duration / 3 # Let the spider jump, but not chase
 	attack_jump_completed = false
 	# Stop body meshes IK
 	body_meshes.stop_ik()
@@ -389,10 +398,8 @@ func receive_hit_from_hurtbox():
 		hit_received_while_attacking = true
 
 func attack_frame(delta):
-	# Give attack_stop_dist 2 meters of leeway when not aiming_at_target to prevent missing the dest and sliding
-	var temp_attack_stop_dist := attack_stop_dist
-	if not aiming_at_target:
-		temp_attack_stop_dist += 2
+	# Make attack_stop_dist very low when not aiming at target so spider slides out of arena
+	var temp_attack_stop_dist := attack_stop_dist if aiming_at_target else 0.0
 	
 	# If spider reached its dest, stop checking if spider reached its dest, turn on body meshes IK, and set vel to 0
 	if not attack_jump_completed and global_position.distance_to(walk_dest) < temp_attack_stop_dist:
@@ -402,7 +409,7 @@ func attack_frame(delta):
 	
 	# Decrease attack time remaining. If it's <= 0 or you touched the floor and got hit or (you completed your jump and are not aiming at the target), switch to retreat
 	attack_time_remaining -= delta
-	if attack_time_remaining <= 0 or hit_received_while_attacking or (attack_jump_completed and not aiming_at_target):
+	if attack_time_remaining <= 0 or hit_received_while_attacking:
 		hit_received_while_attacking = false
 		# Hitboxes are enabled by default to make spider a threat even when just running to a destination
 		inner_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
@@ -454,7 +461,7 @@ func choose_retreat_dest():
 	walk_dest = global_position
 
 func switch_to_retreat():
-	# If you were hit mid-jump, your IK is still off
+	# This is here if attack_time_remaining finishes and spider didn't complete its jump, which happens when it leaves the arena
 	body_meshes.start_ik()
 	behav_state = RETREAT
 	choose_retreat_dest()

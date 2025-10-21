@@ -6,14 +6,14 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtbds"]
 render_priority = 0
 shader = ExtResource("2_qpr6x")
-shader_parameter/sand_color = Color(0.25098, 0.25098, 0.25098, 1)
+shader_parameter/sand_color = Color(0.12549, 0, 0, 1)
 shader_parameter/grain_scale = 20.0
 shader_parameter/grain_strength = 0.03
 
 [node name="MiteBowl" instance=ExtResource("1_pf48n")]
 
 [node name="SingleHole" parent="." index="0"]
-transparency = 0.5
+cast_shadow = 0
 surface_material_override/0 = SubResource("ShaderMaterial_qtbds")
 
 [node name="StaticBody3D" parent="SingleHole" index="0"]
