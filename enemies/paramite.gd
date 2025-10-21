@@ -118,6 +118,8 @@ func set_active(active):
 			# Ensure that homing attacks hit the hurtbox and not the parent node, which stays on the ground. For any enemy whose hurtbox is at the same position as the parent node, this line can just be add_to_group("lockonables")
 			hurtbox.add_to_group("lockonables")
 	else:
+		if skythread:
+			skythread.visible = false
 		global_position.y = -50
 		process_mode = Node.PROCESS_MODE_DISABLED
 		if hurtbox:

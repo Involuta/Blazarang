@@ -28,7 +28,7 @@ enum {
 }
 var behav_state := WALK
 
-@export var arena_max_radius := 120.0 # Spider won't set walk dest to any point laterally outside this value
+@export var arena_max_radius := 130.0 # Spider won't set walk dest to any point laterally outside this value
 
 @export var target_fov_angle := PI/4 # Max angle btwn target's body's fwd dir and dir from target to spider necessary for spider to be considered in target's FOV
 @export var leg_step_time_moving := .0167 # Time it takes for each leg to make a step when spider is walking/retreating
@@ -46,6 +46,7 @@ var can_stop := false # Once the spider reaches above walk_min_speed, can_stop i
 @export var stop_time_min := .1 # Min length of time spider stops moving due to reaching low speed
 @export var stop_time_max := 1.0 # Min length of time spider stops moving due to reaching low speed
 var stop_time_remaining := 1.0 # Stop time remaining before spider can accelerate again
+@export var walk_to_faraway_proximity := 40.0 # If walk state ends and spider is within this dist to the target, it switches to faraway state
 
 @export var faraway_chance := .5 # Chance of choosing faraway instead of walk
 @export var faraway_dest_radius := 90.0 # Dist from arena center that a faraway dest usually is
@@ -251,7 +252,10 @@ func walk_frame(delta):
 	
 	rotate_y_to_vec(velocity, walk_turn_speed)
 	if global_position.distance_to(walk_dest) <= nav_agent.target_desired_distance:
-		switch_to_aim()
+		if walk_dest.distance_to(target.global_position) < walk_to_faraway_proximity:
+			switch_to_faraway()
+		else:
+			switch_to_aim()
 	else:
 		nav_agent.set_target_position(walk_dest)
 	var next_position = nav_agent.get_next_path_position()
@@ -293,7 +297,7 @@ func switch_to_faraway():
 func faraway_frame(_delta):
 	rotate_y_to_vec(velocity, walk_turn_speed)
 	if global_position.distance_to(walk_dest) <= nav_agent.target_desired_distance:
-		# TO DO: SWITCH TO POST-FARAWAY STATE (LEAVE, AIM)
+		aiming_at_target = rng.randf() > leave_chance
 		switch_to_aim()
 	else:
 		nav_agent.set_target_position(walk_dest)
@@ -305,11 +309,9 @@ func faraway_frame(_delta):
 
 func switch_to_aim():
 	behav_state = AIM
-	if rng.randf() > leave_chance:
-		aiming_at_target = true
+	if aiming_at_target:
 		aim_duration = rng.randf_range(aim_min_duration, aim_max_duration)
 	else:
-		aiming_at_target = false
 		aim_duration = aim_min_duration / 2
 		choose_far_dest(true) # Set walk dist to pt on rim
 	body_meshes.set_leg_step_time(leg_step_time_stationary)
