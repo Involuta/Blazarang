@@ -11,6 +11,7 @@ var spitweb := preload("res://enemies/spitweb.tscn")
 var rng := RandomNumberGenerator.new()
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var level : Node3D
+var arena : Node3D
 var inner_hitbox : Node3D
 var outer_hitbox : Node3D
 var walk_dest_mesh : Node3D
@@ -81,6 +82,7 @@ var hit_received_while_attacking := false # Set to true when spider is hit while
 
 func _ready():
 	level = root.find_child("Level")
+	arena = level.find_child("MiteLevelMainArena")
 	# Jumping spider targets Cotu's body, not icon
 	target = root.find_child("cotuCB")
 	inner_hitbox = find_child("InnerMeleeHitboxPivot")
@@ -377,7 +379,8 @@ func switch_to_attack():
 	if aiming_at_target:
 		attack_time_remaining = attack_total_duration
 	else:
-		attack_time_remaining = attack_total_duration # Let the spider jump, but not chase
+		arena.drop_egg()
+		attack_time_remaining = attack_total_duration * .75 # Let the spider jump, but not chase
 	attack_jump_completed = false
 	# Stop body meshes IK
 	body_meshes.stop_ik()
