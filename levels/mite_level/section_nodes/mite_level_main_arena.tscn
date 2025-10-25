@@ -49,6 +49,7 @@ height = 0.5
 [node name="MiteLevelMainArena" type="Node3D"]
 script = ExtResource("1_tjf6h")
 max_time_until_next_egg = 200.0
+starting_wave = 1
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_mcv4c")

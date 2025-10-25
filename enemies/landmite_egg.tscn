@@ -1,15 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqyrg7nscaj3q"]
+[gd_scene load_steps=8 format=3 uid="uid://ce3jswl2dgnq1"]
 
-[ext_resource type="Script" path="res://enemies/mite_egg.gd" id="1_tn247"]
-[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="2_wi4qn"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vsfuv"]
-albedo_color = Color(0.105882, 0.105882, 0.105882, 1)
+[ext_resource type="Script" path="res://enemies/mite_egg.gd" id="1_ws2dx"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="2_aiw6u"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_3bpga"]
-material = SubResource("StandardMaterial3D_vsfuv")
-radius = 1.0
-height = 1.5
+radius = 1.5
+height = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a2woi"]
+albedo_color = Color(0.764706, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_rmeg4"]
 resource_name = "explode"
@@ -20,14 +19,14 @@ _data = {
 }
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_pww74"]
-radius = 1.0
+radius = 2.0
 
-[node name="MiteEggTier3" type="Node3D"]
-script = ExtResource("1_tn247")
-tier = 3
+[node name="LandmiteEgg" type="Node3D"]
+script = ExtResource("1_ws2dx")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_3bpga")
+surface_material_override/0 = SubResource("StandardMaterial3D_a2woi")
 
 [node name="FlightParticles" type="GPUParticles3D" parent="."]
 
@@ -41,7 +40,7 @@ libraries = {
 [node name="EnemyHitbox" type="Area3D" parent="."]
 collision_layer = 8
 collision_mask = 90
-script = ExtResource("2_wi4qn")
+script = ExtResource("2_aiw6u")
 damage = 40
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHitbox"]
@@ -49,7 +48,7 @@ shape = SubResource("SphereShape3D_pww74")
 
 [node name="PlayerHitbox" type="Area3D" parent="."]
 collision_mask = 74
-script = ExtResource("2_wi4qn")
+script = ExtResource("2_aiw6u")
 damage = 50
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerHitbox"]

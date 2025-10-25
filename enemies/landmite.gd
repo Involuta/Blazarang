@@ -37,14 +37,14 @@ var time_until_can_leap := 5.0 # Set to random(min_leap_cooldown, max_leap_coold
 @export var can_leap_window := 5.0 # Time you are able to leap on your own before a forced leap occurs
 var time_until_forced_leap := 5.0 # Set to can_leap_window when reset
 @export var leap_length_threshold := 12.0 # If mite is farther than this value from target, it'll do long leap; otherwise, short leap
-@export var leap_short_lateral_speed := 9.0
-@export var leap_long_lateral_speed := 18.0
-@export var leap_vertical_speed := 5.0
+@export var leap_short_lateral_speed := 24.0
+@export var leap_long_lateral_speed := 36.0
+@export var leap_vertical_speed := 6.0
 
-@export var follow_speed := 3.5
-@export var follow_turn_speed := .1
-@export var bite_proximity := 2.0 # Proximity to target required to start bite
-@export var bite_secs := .24
+@export var follow_speed := 10.0
+@export var follow_turn_speed := .15
+@export var bite_proximity := 3.4 # Proximity to target required to start bite
+@export var bite_secs := .2
 @export var bite_cooldown_secs := .5
 var bite_cooldown_remaining := 2.5
 

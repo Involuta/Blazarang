@@ -86,13 +86,6 @@ transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-
 collision_layer = 8
 collision_mask = 90
 script = ExtResource("1_unap6")
-leap_short_lateral_speed = 24.0
-leap_long_lateral_speed = 36.0
-leap_vertical_speed = 6.0
-follow_speed = 12.0
-follow_turn_speed = 0.15
-bite_proximity = 3.4
-bite_secs = 0.2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -0.3)

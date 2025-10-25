@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://c4x238eay8bhm"]
 
-[ext_resource type="Script" path="res://enemies/mite_egg.gd" id="1_r7c2i"]
-[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="2_7knxa"]
+[ext_resource type="Script" path="res://enemies/mite_egg.gd" id="1_cfkaa"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="2_83k0k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qg0gt"]
 albedo_color = Color(0.407843, 0.0980392, 0, 1)
@@ -22,9 +22,9 @@ _data = {
 [sub_resource type="SphereShape3D" id="SphereShape3D_pww74"]
 radius = 3.0
 
-[node name="MiteEggTier4" type="Node3D"]
-script = ExtResource("1_r7c2i")
-tier = 4
+[node name="HarvestmanEgg" type="Node3D"]
+script = ExtResource("1_cfkaa")
+type = 4
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_3bpga")
@@ -41,7 +41,7 @@ libraries = {
 [node name="EnemyHitbox" type="Area3D" parent="."]
 collision_layer = 8
 collision_mask = 90
-script = ExtResource("2_7knxa")
+script = ExtResource("2_83k0k")
 damage = 40
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHitbox"]
@@ -49,7 +49,7 @@ shape = SubResource("SphereShape3D_pww74")
 
 [node name="PlayerHitbox" type="Area3D" parent="."]
 collision_mask = 74
-script = ExtResource("2_7knxa")
+script = ExtResource("2_83k0k")
 damage = 50
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerHitbox"]

@@ -14,7 +14,8 @@ var destroyed := false
 @onready var root := $/root/ViewControl
 var mite_arena : Node3D
 
-@export var tier := 1
+# 1 = landmite, 2 = paramite, 3 = flatmite, 4 = harvestman
+@export var type := 1
 
 func _ready():
 	mite_arena = root.find_child("MiteLevelMainArena")
@@ -46,7 +47,7 @@ func _on_body_entered(body):
 	elif Globals.compare_layers(body.collision_layer, Globals.ARENA_COL_LAYER):
 		# Disable hitbox so spawned mites aren't hurt by egg
 		$PlayerHitbox.process_mode = Node.PROCESS_MODE_DISABLED
-		mite_arena.spawn_enemies_from_egg_at(global_position, tier)
+		mite_arena.spawn_enemy_from_egg_at(global_position, type)
 		destroy_self()
 
 func destroy_self():

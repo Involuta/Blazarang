@@ -236,6 +236,10 @@ surface_material_override/0 = SubResource("StandardMaterial3D_fn0ra")
 mesh = SubResource("BoxMesh_a4ni0")
 skeleton = NodePath("../..")
 
+[node name="MeleeHitboxPivot" type="Node3D" parent="ParamiteMeshes"]
+
+[node name="TongueMesh" type="Node3D" parent="ParamiteMeshes/MeleeHitboxPivot"]
+
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_mxa20")
 anim_player = NodePath("../ParamiteMeshes/AnimationPlayer")

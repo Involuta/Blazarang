@@ -26,3 +26,9 @@ res://levels/mite_level/section_nodes/mite_level_main_arena.tscn
 res://enemies/landmite.tscn
 res://enemies/paramite.tscn
 res://levels/mite_level/section_nodes/mite_level_main_arena.gd
+res://enemies/landmite_egg.tscn
+res://enemies/paramite_egg.tscn
+res://enemies/flatmite_egg.tscn
+res://enemies/harvestman_egg.tscn
+res://enemies/mite_egg.gd
+res://enemies/landmite.gd
