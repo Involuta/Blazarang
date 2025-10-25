@@ -382,7 +382,7 @@ func switch_to_attack():
 		attack_time_remaining = attack_total_duration
 	else:
 		arena.drop_egg()
-		attack_time_remaining = attack_total_duration * .75 # Let the spider jump, but not chase
+		attack_time_remaining = attack_total_duration * .75 # Make attack_time_remaining shorter bc the full attack duration takes too long when spider is returning from outside
 	attack_jump_completed = false
 	# Stop body meshes IK
 	body_meshes.stop_ik()
@@ -393,7 +393,9 @@ func switch_to_attack():
 		walk_dest = target.global_position + (target.velocity * get_physics_process_delta_time())
 	# Subtract spider to jump dest vec slghtly so that spider doesn't aim directly for the jump dest, but slightly back from it
 	walk_dest -= .5 * global_position.direction_to(walk_dest)
+	# Why isn't a tween used? CharacterBody3D snaps to the ground during tween, and setting floor snap length to 0, not calling is_on_floor, and adding upward vel didn't stop floor snapping
 	velocity = .91 * (walk_dest - global_position) / attack_jump_duration
+	collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
 
 func receive_hit_from_hurtbox():
 	if behav_state == AIM:
@@ -405,8 +407,9 @@ func attack_frame(delta):
 	# Make attack_stop_dist very low when not aiming at target so spider slides out of arena
 	var temp_attack_stop_dist := attack_stop_dist if aiming_at_target else 0.0
 	
-	# If spider reached its dest, stop checking if spider reached its dest, turn on body meshes IK, and set vel to 0
+	# If spider reached its dest, stop checking if spider reached its dest, turn on body meshes IK, turn on physical collision with Cotu and enemies, and set vel to 0
 	if not attack_jump_completed and global_position.distance_to(walk_dest) < temp_attack_stop_dist:
+		collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER, Globals.ENEMY_COL_LAYER, Globals.COTU_COL_LAYER, Globals.THICK_ENEMY_COL_LAYER])
 		attack_jump_completed = true
 		body_meshes.start_ik()
 		velocity = Vector3.ZERO

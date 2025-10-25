@@ -20,10 +20,8 @@ enum {
 	FALL,
 	RETREAT,
 }
-var behav_state := LAUNCH
+var behav_state := RETREAT
 
-# Why isn't this called init_launch_dir? Because it's set by mite_level_main_arena, and mite_level_main_arena doesn't know whether the mite it's spawning is a landmite or paramite. init_leap_dir is the equivalent var the landmite uses
-@export var init_leap_dir := Vector3.ONE # Set by arena script to a nonzero value when egg spawns mite. In switch_to_launch(), if this var is not Vector3.ZERO, then landmite leaps in init_leap_dir, then sets init_leap_dir to Vector3.ZERO. If it is Vector3.ZERO, paramite leaps in whatever dir it was already traveling in
 @export var launch_vert_speed := 12.0 # Initial vertical launch speed (lateral speed is set by paramite spawner)
 @export var follow_duration := 10.0 # Time mite spends following before falling
 @export var fall_height := 6.0 # Height above the ground mite descends to before falling
@@ -69,11 +67,6 @@ func switch_to_launch():
 	behav_state = LAUNCH
 	set_mesh_and_colliders_y_pos(0)
 	
-	# The first leap is in the init_leap_dir. Subsequent leaps are in body_meshes fwd dir
-	if init_leap_dir != Vector3.ZERO:
-		rotate_y_to_vec(init_leap_dir, 1)
-		velocity = 2 * follow_speed * init_leap_dir
-		init_leap_dir = Vector3.ZERO
 	velocity.y = launch_vert_speed
 
 func set_mesh_and_colliders_y_pos(new_y_pos: float):

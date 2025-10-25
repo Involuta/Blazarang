@@ -27,7 +27,7 @@ var strafing_left := true
 var ground_normal := Vector3.UP # Normal of the ground, determined by the avg normal of the planes formed by points where feet hit the ground
 
 var init_leap_dir := Vector3.ONE # Set by arena script to a nonzero value when egg spawns mite. In start_leap(), if this var is not Vector3.ZERO, then landmite leaps in init_leap_dir, then sets init_leap_dir to Vector3.ZERO. If it is Vector3.ZERO, landmite leaps in body_meshes.transform.z
-var can_leap := true
+var can_leap := false # Landmite isn't supposed to leap immediately upon spawning (but it can)
 @export var max_leap_cooldown := 3.0 # Max time after a leap ends before you can leap again
 @export var min_leap_cooldown := .25 # Min time after a leap ends before you can leap again
 var time_until_can_leap := 5.0 # Set to random(min_leap_cooldown, max_leap_cooldown) when reset. Sometimes not reset if a leap refresh randomly occurs
@@ -58,9 +58,8 @@ func _ready():
 	
 	nav_agent.target_desired_distance = bite_proximity
 	
+	# Landmite isn't supposed to leap immediately upon spawning (but it can)
 	time_until_can_leap = rng.randf_range(min_leap_cooldown, max_leap_cooldown)
-	can_leap = true
-	time_until_forced_leap = 0 # Mite leaps immediately upon spawning
 	
 	bite_cooldown_remaining = bite_cooldown_secs
 
@@ -214,14 +213,7 @@ func start_leap():
 	if abs(target_position.y - global_position.y) > leap_y_proximity:
 		return
 	
-	# The first leap is in the init_leap_dir. Subsequent leaps are in body_meshes fwd dir
-	var leap_dir : Vector3
-	if init_leap_dir != Vector3.ZERO:
-		rotate_y_to_vec(init_leap_dir, 1)
-		leap_dir = init_leap_dir
-		init_leap_dir = Vector3.ZERO
-	else:
-		leap_dir = body_meshes.transform.basis.z
+	var leap_dir = body_meshes.transform.basis.z
 	
 	body_meshes.alignment_disabled = true
 	

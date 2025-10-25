@@ -19,12 +19,13 @@ var target : Node3D
 var time_until_next_infest_switch_secs := 5.0
 
 @export var max_time_until_next_egg := 20.0
+var time_btwn_eggs_this_wave := 4.0
 var time_until_next_egg := 10.0
 @export var egg_drop_height := 100.0
 @export var max_living_enemies := 50
 var living_enemies := 0
 
-@export var mite_nums_per_egg := [4, 8, 1, 1] # Number of mites spawned from a Tier [Index+1] egg
+@export var mite_nums_per_egg := [1, 1, 1, 1] # Number of mites spawned from a Tier [Index+1] egg
 
 @export var starting_wave := 8 # FOR TESTING ONLY: manually set the first wave when the level starts
 var current_wave := 0
@@ -32,46 +33,55 @@ var eggs_remaining_this_wave := 4 # Wave increases after this num becomes 0, the
 # Num of eggs spawned per wave = random_int(num-var, num+var). Egg spawned = random choice among "Tier" keys
 @export var egg_waves := [
 	{
-		"Num":4,
+		"Duration":20.0,
+		"Num":16,
 		"Var":1,
 		"Chances":[1,0,0,0],
 	},
 	{
-		"Num":4,
+		"Duration":20.0,
+		"Num":22,
 		"Var":2,
 		"Chances":[.6,.4,0,0],
 	},
 	{
+		"Duration":20.0,
 		"Num":1,
 		"Var":0,
 		"Chances":[0,0,1,0],
 	},
 	{
-		"Num":4,
+		"Duration":20.0,
+		"Num":24,
 		"Var":2,
 		"Chances":[.5,.5,0,0],
 	},
 	{
+		"Duration":20.0,
 		"Num":1,
 		"Var":0,
 		"Chances":[0,0,0,1],
 	},
 	{
-		"Num":2,
+		"Duration":16.0,
+		"Num":8,
 		"Var":1,
 		"Chances":[1,0,0,0],
 	},
 	{
+		"Duration":20.0,
 		"Num":1,
 		"Var":0,
 		"Chances":[0,0,0,1],
 	},
 	{
-		"Num":8,
+		"Duration":20.0,
+		"Num":40,
 		"Var":1,
 		"Chances":[.4,.4,.1,.1],
 	},
 	{
+		"Duration":100.0,
 		"Num":100,
 		"Var":0,
 		"Chances":[.8,0,.1,.1]
@@ -89,7 +99,7 @@ var harvestmen_dict = {}
 
 func _ready():
 	time_until_next_infest_switch_secs = max_time_until_next_infest_switch
-	time_until_next_egg = max_time_until_next_egg
+	time_until_next_egg = egg_waves[current_wave]["Duration"] / eggs_remaining_this_wave#max_time_until_next_egg
 	level = root.find_child("Level")
 	# Egg dropper targets Cotu's body, not icon
 	target = root.find_child("cotuCB")
@@ -102,6 +112,7 @@ func _ready():
 	var wave_egg_num = egg_waves[current_wave]["Num"]
 	var wave_egg_var = egg_waves[current_wave]["Var"]
 	eggs_remaining_this_wave = rng.randi_range(wave_egg_num-wave_egg_var, wave_egg_num+wave_egg_var)
+	time_btwn_eggs_this_wave = egg_waves[current_wave]["Duration"] / eggs_remaining_this_wave
 	
 	Globals.enemy_killed.connect(set_enemy_to_dead)
 	# Instantiate enemies
@@ -158,7 +169,7 @@ func _physics_process(delta):
 	if living_enemies + mite_nums_per_egg[1] < max_living_enemies:
 		time_until_next_egg -= delta
 	if time_until_next_egg <= 0:
-		time_until_next_egg = max_time_until_next_egg
+		time_until_next_egg = time_btwn_eggs_this_wave
 		drop_egg()
 
 func drop_egg():
@@ -168,12 +179,13 @@ func drop_egg():
 	eggs_remaining_this_wave -= 1
 	print("Eggs remaining: ", eggs_remaining_this_wave)
 	if eggs_remaining_this_wave <= 0:
-		# Progress to next wave and set eggs remaining this wave
+		# Progress to next wave and set eggs remaining this wave and time btwn eggs this wave
 		current_wave += 1
 		print("Current wave: ", current_wave)
 		var wave_egg_num = egg_waves[current_wave]["Num"]
 		var wave_egg_var = egg_waves[current_wave]["Var"]
 		eggs_remaining_this_wave = rng.randi_range(wave_egg_num-wave_egg_var, wave_egg_num+wave_egg_var)
+		time_btwn_eggs_this_wave = egg_waves[current_wave]["Duration"] / eggs_remaining_this_wave
 		print("Set eggs remaining to: ", eggs_remaining_this_wave)
 
 func spawn_enemies_from_egg_at(pos: Vector3, egg_tier: int):
@@ -190,19 +202,13 @@ func spawn_enemies_from_egg_at(pos: Vector3, egg_tier: int):
 			spawn_non_elites(pos, mite_num)
 
 func spawn_non_elites(pos: Vector3, mite_num: int):
-	var mite_jump_dir = pos.direction_to(Vector3.ZERO)
-	mite_jump_dir = mite_jump_dir.rotated(Vector3.UP, -PI/4)
-	var init_mite_jump_dir = mite_jump_dir
-	
 	var shuffled_keys = non_elites_dict.keys()
 	shuffled_keys.shuffle()
 	# Keep track of the index in shuffled_keys so you don't look at the same mites twice (this would happen if you did "for inst_name in shuffled_keys")
 	var shuffled_keys_index := 0
 	var shuffled_keys_len = shuffled_keys.size()
 	
-	# Spawn mites so they leap out in a circle, reducing the chance of them pushing against each other
 	for i in range(mite_num):
-		mite_jump_dir = init_mite_jump_dir.rotated(Vector3.UP, 2*PI/mite_num*i)
 		var spawned_mite := false
 		# Pick the first dead non-elite you encounter in the shuffled key order
 		while shuffled_keys_index < shuffled_keys_len:
@@ -213,8 +219,7 @@ func spawn_non_elites(pos: Vector3, mite_num: int):
 				spawned_mite = true
 				non_elites_dict[inst_name] = true
 				var inst = level.find_child(inst_name, false, false)
-				inst.global_position = pos + 4*mite_jump_dir + 4*Vector3.UP
-				inst.init_leap_dir = mite_jump_dir
+				inst.global_position = pos
 				inst.set_active(true)
 				# After spawning a mite, exit this loop so you don't traverse the entire dict and spawn all mites
 				break
