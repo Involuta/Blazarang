@@ -124,3 +124,4 @@ process_material = SubResource("ParticleProcessMaterial_nwdal")
 draw_pass_1 = SubResource("SphereMesh_qq31a")
 
 [node name="JumpingSpider" parent="." instance=ExtResource("4_0o0my")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -32)

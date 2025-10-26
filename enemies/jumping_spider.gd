@@ -28,6 +28,9 @@ enum {
 }
 var behav_state := WALK
 
+var base_path_desired_dist := 2.0 # Used in normal mvmt circumstances (anything except attack chase)
+var base_target_desired_dist := 10.0 # Used in normal mvmt circumstances (anything except attack chase)
+
 @export var arena_max_radius := 130.0 # Spider won't set walk dest to any point laterally outside this value
 
 @export var target_fov_angle := PI/4 # Max angle btwn target's body's fwd dir and dir from target to spider necessary for spider to be considered in target's FOV
@@ -46,9 +49,13 @@ var can_stop := false # Once the spider reaches above walk_min_speed, can_stop i
 @export var stop_time_min := .1 # Min length of time spider stops moving due to reaching low speed
 @export var stop_time_max := 1.0 # Min length of time spider stops moving due to reaching low speed
 var stop_time_remaining := 1.0 # Stop time remaining before spider can accelerate again
+@export var walk_to_attack_proximity := 20.0 # If spider stops this close to the target, it immediately attacks
 @export var walk_to_faraway_proximity := 40.0 # If walk state ends and spider is within this dist to the target, it switches to faraway state
 
-@export var faraway_chance := .5 # Chance of choosing faraway instead of walk
+# When switching out of retreat, spider can aim, faraway, or walk
+@export var retreat_to_aim_chance := .33 # When switching out of retreat state, chance of choosing aim
+@export var retreat_to_faraway_chance := .33 # When switching out of retreat state, chance of choosing faraway
+
 @export var faraway_dest_radius := 90.0 # Dist from arena center that a faraway dest usually is
 
 @export var leave_chance := .5 # Chance of jumping out of arena (i.e. at walk_dest at edge of arena) instead of at target whenever entering aim state
@@ -97,6 +104,9 @@ func _ready():
 	# Ensure that homing attacks hit the hurtbox and not the parent node, which stays on the ground. For any enemy whose hurtbox is at the same position as the parent node, this line can just be add_to_group("lockonables"), which makes the parent a lockonable
 	hurtbox.add_to_group("lockonables")
 	
+	nav_agent.path_desired_distance = base_path_desired_dist
+	nav_agent.target_desired_distance = base_path_desired_dist
+	
 	Globals.cotu_dodge.connect(ready_action_trigger)
 	# Spider doesn't attack when you throw because the rose stuns it
 	Globals.cotu_normal_throw_rose.connect(ready_action_trigger)
@@ -144,6 +154,10 @@ func _physics_process(delta):
 		stop_time_remaining -= delta
 		if stop_time_remaining <= 0:
 			can_stop = false
+			# If you start moving again close the target, go to ready state and attack ASAP
+			if global_position.distance_to(target.global_position) < walk_to_attack_proximity:
+				switch_to_ready()
+				ready_full_duration = ready_min_full_duration
 	
 	if walk_dest_mesh:
 		walk_dest_mesh.global_position = walk_dest
@@ -194,7 +208,7 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 				can_stop = true
 	# When attacking, don't stop so you can continuously chase. Since it's a short range walk, move smoothly
 	elif (behav_state == ATTACK and attack_jump_completed):
-		velocity = velocity.move_toward(safe_velocity, .9)
+		velocity = velocity.move_toward(safe_velocity, .95)
 	# When retreating, don't stop so you can escape danger quickly. Since it's a long range walk, move abruptly
 	elif behav_state == RETREAT:
 		velocity = safe_velocity
@@ -240,6 +254,8 @@ func choose_walk_dest():
 func switch_to_walk():
 	body_meshes.start_ik()
 	behav_state = WALK
+	# Spider is aiming at target by default if it's in walk state
+	aiming_at_target = true
 	# Set max walk time
 	walk_duration = walk_max_duration
 	# Set walk dest
@@ -381,7 +397,6 @@ func switch_to_attack():
 	if aiming_at_target:
 		attack_time_remaining = attack_total_duration
 	else:
-		arena.drop_egg()
 		attack_time_remaining = attack_total_duration * .75 # Make attack_time_remaining shorter bc the full attack duration takes too long when spider is returning from outside
 	attack_jump_completed = false
 	# Stop body meshes IK
@@ -396,6 +411,9 @@ func switch_to_attack():
 	# Why isn't a tween used? CharacterBody3D snaps to the ground during tween, and setting floor snap length to 0, not calling is_on_floor, and adding upward vel didn't stop floor snapping
 	velocity = .91 * (walk_dest - global_position) / attack_jump_duration
 	collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
+	# When spider is chasing, it should try to get very close
+	nav_agent.path_desired_distance = 1
+	nav_agent.target_desired_distance = 1
 
 func receive_hit_from_hurtbox():
 	if behav_state == AIM:
@@ -407,8 +425,8 @@ func attack_frame(delta):
 	# Make attack_stop_dist very low when not aiming at target so spider slides out of arena
 	var temp_attack_stop_dist := attack_stop_dist if aiming_at_target else 0.0
 	
-	# If spider reached its dest, stop checking if spider reached its dest, turn on body meshes IK, turn on physical collision with Cotu and enemies, and set vel to 0
-	if not attack_jump_completed and global_position.distance_to(walk_dest) < temp_attack_stop_dist:
+	# If spider reached its dest or jumped for max jump time, stop checking if spider reached its dest, turn on body meshes IK, turn on physical collision with Cotu and enemies, and set vel to 0
+	if not attack_jump_completed and (attack_time_remaining <= attack_total_duration - attack_jump_duration or global_position.distance_to(walk_dest) < temp_attack_stop_dist):
 		collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER, Globals.ENEMY_COL_LAYER, Globals.COTU_COL_LAYER, Globals.THICK_ENEMY_COL_LAYER])
 		attack_jump_completed = true
 		body_meshes.start_ik()
@@ -478,6 +496,10 @@ func teleport_outside_arena():
 	global_position = tp_dest
 
 func switch_to_retreat():
+	# switch_to_attack changes path_desired_dist and target_desired_distance to a low number. Change them back
+	nav_agent.path_desired_distance = base_path_desired_dist
+	nav_agent.target_desired_distance = base_path_desired_dist
+	
 	# This is here if attack_time_remaining finishes and spider didn't complete its jump, which happens when it leaves the arena
 	body_meshes.start_ik()
 	behav_state = RETREAT
@@ -490,10 +512,13 @@ func switch_to_retreat():
 func retreat_frame(_delta):
 	rotate_y_to_vec(velocity, walk_turn_speed)
 	if global_position.distance_to(walk_dest) <= nav_agent.target_desired_distance:
-		if rng.randf() > faraway_chance:
+		var choice = rng.randf()
+		if choice > retreat_to_aim_chance + retreat_to_faraway_chance:
 			switch_to_walk()
-		else:
+		elif choice > retreat_to_aim_chance:
 			switch_to_faraway()
+		else:
+			switch_to_aim()
 	else:
 		nav_agent.set_target_position(walk_dest)
 	var next_position = nav_agent.get_next_path_position()

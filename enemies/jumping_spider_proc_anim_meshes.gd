@@ -39,6 +39,7 @@ var biting := false
 
 func _process(delta):
 	if ik_stopped:
+		position = .5 * Vector3.UP
 		return
 	
 	# Raycast downward to get ground normal
