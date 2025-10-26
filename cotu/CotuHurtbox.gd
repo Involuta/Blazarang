@@ -41,8 +41,8 @@ func reset_recovery_delay():
 
 func on_hit(hitbox):
 	if hitbox.name in opponent_grab_hitboxes:
-		parent.grab_pos_node = hitbox.grab_pos_node
-		parent.start_grab_anim(hitbox.name)
+		hb_owner.grab_pos_node = hitbox.grab_pos_node
+		hb_owner.start_grab_anim(hitbox.name)
 	else:
 		super(hitbox)
 
@@ -76,7 +76,7 @@ func _physics_process(delta):
 	if recovery_delay_remaining < 0:
 		recovery_active = true
 	if not recovery_disabled and recovery_active and health < max_health:
-		if parent.active_debuffs[Globals.DEBUFFS.INFEST] > 0:
+		if hb_owner.active_debuffs[Globals.DEBUFFS.INFEST] > 0:
 			health += recovery_rate / 3
 		else:
 			health += recovery_rate
@@ -84,9 +84,9 @@ func _physics_process(delta):
 
 func die():
 	# AKA destabilize
-	if parent.destabilized:
+	if hb_owner.destabilized:
 		Engine.time_scale = .1
-		parent.get_node("DeathParticles/GPUParticles3D").emitting = true
+		hb_owner.get_node("DeathParticles/GPUParticles3D").emitting = true
 		await get_tree().create_timer(.5).timeout
 		Engine.time_scale = 1
 		get_tree().change_scene_to_file("res://levels/hub/hub_viewcontrol.tscn")

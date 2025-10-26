@@ -25,6 +25,7 @@ var time_until_next_egg := 10.0
 @export var max_living_enemies := 50
 var living_enemies := 0
 
+@export var can_drop := true # If this is false, no eggs spawn. Set to false after progressing past final wave listed in egg_waves OR set to false in testing
 @export var starting_wave := 8 # FOR TESTING ONLY: manually set the first wave when the level starts
 var current_wave := 0
 var eggs_remaining_this_wave := 4 # Wave increases after this num becomes 0, then this num is set to new wave's egg num
@@ -174,6 +175,9 @@ func _physics_process(delta):
 		drop_egg()
 
 func drop_egg():
+	if not can_drop:
+		return
+	
 	var drop_pos := Vector3(target.global_position.x, egg_drop_height, target.global_position.z)
 	var egg_chances = egg_waves[current_wave]["Chances"]
 	load_scene_at_pos(choose_egg(egg_chances), drop_pos, true)
@@ -182,6 +186,9 @@ func drop_egg():
 	if eggs_remaining_this_wave <= 0:
 		# Progress to next wave and set eggs remaining this wave and time btwn eggs this wave
 		current_wave += 1
+		# If there are no more waves left, stop dropping eggs
+		if current_wave >= len(egg_waves):
+			can_drop = false
 		print("Current wave: ", current_wave)
 		var wave_egg_num = egg_waves[current_wave]["Num"]
 		var wave_egg_var = egg_waves[current_wave]["Var"]

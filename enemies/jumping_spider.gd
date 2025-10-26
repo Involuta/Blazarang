@@ -194,7 +194,7 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 				can_stop = true
 	# When attacking, don't stop so you can continuously chase. Since it's a short range walk, move smoothly
 	elif (behav_state == ATTACK and attack_jump_completed):
-		velocity = velocity.move_toward(safe_velocity, .5)
+		velocity = velocity.move_toward(safe_velocity, .9)
 	# When retreating, don't stop so you can escape danger quickly. Since it's a long range walk, move abruptly
 	elif behav_state == RETREAT:
 		velocity = safe_velocity

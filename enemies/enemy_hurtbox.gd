@@ -64,8 +64,8 @@ func award_score(hitter):
 			Globals.award_score(Globals.HOMING_HIT_SCORE)
 
 func death_effect():
-	if "death_effect" in parent:
-		parent.death_effect()
+	if "death_effect" in hb_owner:
+		hb_owner.death_effect()
 		return
 	for i in range(dp_count):
 		var dp = death_particle.instantiate()
@@ -75,13 +75,13 @@ func death_effect():
 		dp.apply_central_impulse(Vector3(rng.randf_range(-dp_impulse_limit, dp_impulse_limit), dp_impulse_limit*rng.randf(), rng.randf_range(-dp_impulse_limit, dp_impulse_limit)))
 
 func die():
-	Globals.enemy_killed.emit(parent.name)
+	Globals.enemy_killed.emit(hb_owner.name)
 	Globals.award_score(kill_score)
 	death_effect()
-	if parent.has_method("set_active"):
+	if hb_owner.has_method("set_active"):
 		# set_active(false) moves the parent under the map, so if it's called immediately after the enemy takes the killing hit, the hitter/death effects happen under the map
 		# The delay ensures the effects come out before the enemy is moved down
 		await get_tree().create_timer(get_physics_process_delta_time()).timeout
-		parent.set_active(false)
+		hb_owner.set_active(false)
 	else:
 		super()

@@ -90,7 +90,7 @@ func _physics_process(_delta):
 	glitch_shader.set_shader_parameter("shake_power", glitch_shader_shake_power)
 	glitch_shader.set_shader_parameter("shake_color_rate", glitch_shader_shake_color_rate)
 	
-	if cotu_hurtbox.parent.global_position.y < 0:
+	if cotu_hurtbox.hb_owner.global_position.y < 0:
 		$BlackScreenAnimations.play("death_fall")
 
 func return_to_hub():

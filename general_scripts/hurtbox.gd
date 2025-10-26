@@ -13,7 +13,8 @@ var health := 100.0
 var max_health := 100.0 # This is only set by the Globals script or the CotuHurtbox script.
 var current_opponent_hitboxes
 @export var opponent_hitboxes := ["default"] # opponent is a misnomer; this is a list any hitboxes that could affect this entity, opponent, ally, or neutral
-@onready var parent := get_parent()
+@export var hurtbox_owner : Node3D # If this isn't set, parent is used as hurtbox owner
+var hb_owner : Node3D
 
 @onready var root := $/root/ViewControl
 var level : Node3D
@@ -23,6 +24,8 @@ func _ready():
 	area_entered.connect(on_hit)
 	current_opponent_hitboxes = opponent_hitboxes
 	assert(opponent_hitboxes != ["default"], "opponent hitboxes not changed from default")
+	
+	hb_owner = hurtbox_owner if hurtbox_owner != null else get_parent()
 
 func set_invincibility(val: bool):
 	if val:
@@ -35,8 +38,8 @@ func _physics_process(_delta):
 
 func on_hit(hitbox):
 	if hitbox.name in current_opponent_hitboxes:
-		if "is_dodging" in parent:
-			if not parent.is_dodging:
+		if "is_dodging" in hb_owner:
+			if not hb_owner.is_dodging:
 				receive_debuff(hitbox.debuff)
 				receive_heal(hitbox.heal_amt)
 				receive_hit(hitbox.damage, hitbox.get_parent())
@@ -48,12 +51,12 @@ func on_hit(hitbox):
 			receive_hit(hitbox.damage, hitbox.get_parent())
 
 func receive_debuff(debuff):
-	if debuff != Globals.DEBUFFS.NONE and "active_debuffs" in parent and parent.active_debuffs[debuff] <= 0:
+	if debuff != Globals.DEBUFFS.NONE and "active_debuffs" in hb_owner and hb_owner.active_debuffs[debuff] <= 0:
 		match(debuff):
 			Globals.DEBUFFS.SLOW:
-				parent.receive_debuff_slow()
+				hb_owner.receive_debuff_slow()
 			Globals.DEBUFFS.INFEST:
-				parent.receive_debuff_infest()
+				hb_owner.receive_debuff_infest()
 			_:
 				pass
 
@@ -69,4 +72,4 @@ func receive_hit(damage: float, _hitter):
 		die()
 
 func die():
-	parent.queue_free.call_deferred()
+	hb_owner.queue_free.call_deferred()
