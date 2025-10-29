@@ -49,7 +49,7 @@ var can_stop := false # Once the spider reaches above walk_min_speed, can_stop i
 @export var stop_time_min := .1 # Min length of time spider stops moving due to reaching low speed
 @export var stop_time_max := 1.0 # Min length of time spider stops moving due to reaching low speed
 var stop_time_remaining := 1.0 # Stop time remaining before spider can accelerate again
-@export var walk_to_attack_proximity := 20.0 # If spider stops this close to the target, it immediately attacks
+@export var walk_to_attack_proximity := 36.0 # If spider stops this close to the target, it immediately attacks
 @export var walk_to_faraway_proximity := 40.0 # If walk state ends and spider is within this dist to the target, it switches to faraway state
 
 # When switching out of retreat, spider can aim, faraway, or walk
@@ -79,6 +79,8 @@ var ready_triggered := false # Set to true when Cotu does an action that trigger
 var ready_trigger_duration := .25 # The duration of the ready state when an action triggers the spider to jump. Set to ready_max_trigger_duration when ready state begins. Only decreases when ready_triggered is true
 @export var ready_front_leg_raise_time := .2 # When either ready_duration is <= ready_front_leg_raise_time, front legs begin to rise. Actual time it takes for front legs to rise is set in transition from idle to ready state in anim tree
 
+@export var double_jump_chance := .5 # Chance that spider jumps behind target, then to target instead of directly to target
+var will_double_jump := false # Set to true when spider decides to double jump and spider hasn't already decided to double jump
 @export var attack_jump_duration := .25 # Duration of jump in secs
 @export var attack_stop_dist := 3.0 # Max dist from spider to jump dest needed to stop jump mvmt
 var attack_jump_completed := false # Set to true when landing after jump, set to false at start of attack
@@ -208,7 +210,7 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 				can_stop = true
 	# When attacking, don't stop so you can continuously chase. Since it's a short range walk, move smoothly
 	elif (behav_state == ATTACK and attack_jump_completed):
-		velocity = velocity.move_toward(safe_velocity, .95)
+		velocity = velocity.move_toward(safe_velocity, .8)
 	# When retreating, don't stop so you can escape danger quickly. Since it's a long range walk, move abruptly
 	elif behav_state == RETREAT:
 		velocity = safe_velocity
@@ -284,14 +286,19 @@ func walk_frame(delta):
 	if walk_duration <= 0:
 		switch_to_aim()
 
-func choose_far_dest(on_rim: bool):
+func choose_far_dest(on_rim: bool, behind_target: bool):
 	"""
 	Starting from the arena center, look in a random lateral dir, then move fwd faraway_dest_radius. At this lateral pos, get the y pos of the ground using a raycast from high above.
 	Failsafe: set walk_dest to global pos
 	"""
 	var dest_dist := arena_max_radius if on_rim else faraway_dest_radius
 	var arena_center := Vector3.ZERO
-	var faraway_dest_dir = Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI))
+	var faraway_dest_dir : Vector3
+	if behind_target:
+		faraway_dest_dir = global_position.direction_to(target.global_position)
+		faraway_dest_dir.y = 0
+	else:
+		faraway_dest_dir = Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI))
 	var faraway_dest = dest_dist * faraway_dest_dir + arena_center
 	var space_state := get_world_3d().direct_space_state
 	var query = PhysicsRayQueryParameters3D.create(faraway_dest + Vector3.UP * 100, faraway_dest + Vector3.DOWN * 200)
@@ -307,7 +314,7 @@ func switch_to_faraway():
 	body_meshes.start_ik()
 	behav_state = FARAWAY
 	# Set walk dest (choose_far_dest sets walk_dest)
-	choose_far_dest(false)
+	choose_far_dest(false, false)
 	body_meshes.set_leg_step_time(leg_step_time_moving)
 
 func faraway_frame(_delta):
@@ -329,7 +336,7 @@ func switch_to_aim():
 		aim_duration = rng.randf_range(aim_min_duration, aim_max_duration)
 	else:
 		aim_duration = aim_min_duration / 2
-		choose_far_dest(true) # Set walk dist to pt on rim
+		choose_far_dest(true, false) # Set walk dist to pt on rim
 	body_meshes.set_leg_step_time(leg_step_time_stationary)
 
 func aim_frame(delta):
@@ -405,11 +412,17 @@ func switch_to_attack():
 	# Vel = distance / seconds
 	# walk_dest functions as jump_dest here
 	if aiming_at_target:
-		walk_dest = target.global_position + (target.velocity * get_physics_process_delta_time())
+		# Chance to jump at point behind target instead
+		if rng.randf() <= double_jump_chance and not will_double_jump:
+			will_double_jump = true
+			choose_far_dest(false, true)
+		else:
+			will_double_jump = false
+			walk_dest = target.global_position + (target.velocity * get_physics_process_delta_time())
 	# Subtract spider to jump dest vec slghtly so that spider doesn't aim directly for the jump dest, but slightly back from it
 	walk_dest -= .5 * global_position.direction_to(walk_dest)
 	# Why isn't a tween used? CharacterBody3D snaps to the ground during tween, and setting floor snap length to 0, not calling is_on_floor, and adding upward vel didn't stop floor snapping
-	velocity = .91 * (walk_dest - global_position) / attack_jump_duration
+	velocity = .95 * (walk_dest - global_position) / attack_jump_duration
 	collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
 	# When spider is chasing, it should try to get very close
 	nav_agent.path_desired_distance = 1
@@ -431,6 +444,10 @@ func attack_frame(delta):
 		attack_jump_completed = true
 		body_meshes.start_ik()
 		velocity = Vector3.ZERO
+		# If you plan to double jump, switch back to ready and jump ASAP
+		if will_double_jump:
+			switch_to_ready()
+			ready_full_duration = ready_min_full_duration
 	
 	# Decrease attack time remaining. If it's <= 0 or you touched the floor and got hit or (you completed your jump and are not aiming at the target), switch to retreat
 	attack_time_remaining -= delta
@@ -452,7 +469,7 @@ func attack_frame(delta):
 		return
 	
 	# If you already landed and are still attacking, chase target
-	rotate_y_to_vec(target.global_position - global_position, walk_turn_speed)
+	rotate_y_to_vec(target.global_position - global_position, .8)
 	nav_agent.set_target_position(target.global_position)
 	var next_position = nav_agent.get_next_path_position()
 	var new_velocity = (next_position - global_position).normalized() * walk_speed

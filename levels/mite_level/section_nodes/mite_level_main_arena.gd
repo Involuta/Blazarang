@@ -174,6 +174,25 @@ func _physics_process(delta):
 		time_until_next_egg = time_btwn_eggs_this_wave
 		drop_egg()
 
+func flatmite_alive():
+	# Used by jumping spider to check if ≥1 flatmite is alive
+	return true in flatmites_dict.values()
+
+func drop_egg_of_type(egg_type: int):
+	var drop_pos := Vector3(target.global_position.x, egg_drop_height, target.global_position.z)
+	match egg_type:
+		1:
+			load_scene_at_pos(landmite_egg, drop_pos, true)
+		2:
+			load_scene_at_pos(paramite_egg, drop_pos, true)
+		3:
+			load_scene_at_pos(flatmite_egg, drop_pos, true)
+		4:
+			load_scene_at_pos(harvestman_egg, drop_pos, true)
+		_:
+			# Flatmite is default bc this func is used by jumping spider to spawn specifically flatmites. Any type can be inputted in this func just in case it's used in the future
+			load_scene_at_pos(flatmite_egg, drop_pos, true)
+
 func drop_egg():
 	if not can_drop:
 		return
