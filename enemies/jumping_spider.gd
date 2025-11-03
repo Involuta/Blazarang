@@ -82,10 +82,11 @@ var ready_trigger_duration := .25 # The duration of the ready state when an acti
 @export var double_jump_chance := .5 # Chance that spider jumps behind target, then to target instead of directly to target
 var will_double_jump := false # Set to true when spider decides to double jump and spider hasn't already decided to double jump
 @export var attack_jump_duration := .25 # Duration of jump in secs
+var jump_time_remaining := .25 # Decreases every frame while jumping, reset to attack_jump_duration before each jump
 @export var attack_stop_dist := 3.0 # Max dist from spider to jump dest needed to stop jump mvmt
 var attack_jump_completed := false # Set to true when landing after jump, set to false at start of attack
-@export var attack_total_duration := 3.0 # Duration of jump + chase in secs
-var attack_time_remaining := 5.0 # Decreases every frame, reset to attack_total_duration before every jump
+@export var attack_total_duration := 2.75 # Duration of jump + chase in secs
+var attack_time_remaining := 2.75 # Decreases every frame, reset to attack_total_duration when a jump ends
 var hit_received_while_attacking := false # Set to true when spider is hit while attacking, false outside of attack state
 
 @export var retreat_min_dist := 60.0 # Min dist spider runs away from target when retreating
@@ -315,12 +316,17 @@ func switch_to_faraway():
 	behav_state = FARAWAY
 	# Set walk dest (choose_far_dest sets walk_dest)
 	choose_far_dest(false, false)
+	# If walk dest is too far (faraway_dest_radius + around 30% of faraway_dest_radius), just jump to it
+	if global_position.distance_to(walk_dest) > .1 * faraway_dest_radius:
+		aiming_at_target = false
+		switch_to_aim()
 	body_meshes.set_leg_step_time(leg_step_time_moving)
 
 func faraway_frame(_delta):
 	rotate_y_to_vec(velocity, walk_turn_speed)
 	if global_position.distance_to(walk_dest) <= nav_agent.target_desired_distance:
-		aiming_at_target = rng.randf() > leave_chance
+		# After reaching the dest, attack target
+		aiming_at_target = true
 		switch_to_aim()
 	else:
 		nav_agent.set_target_position(walk_dest)
@@ -336,7 +342,6 @@ func switch_to_aim():
 		aim_duration = rng.randf_range(aim_min_duration, aim_max_duration)
 	else:
 		aim_duration = aim_min_duration / 2
-		choose_far_dest(true, false) # Set walk dist to pt on rim
 	body_meshes.set_leg_step_time(leg_step_time_stationary)
 
 func aim_frame(delta):
@@ -400,11 +405,8 @@ func switch_to_attack():
 	behav_state = ATTACK
 	inner_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
 	outer_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
-	# Reset attack_time_remaining and attack_jump_completed. Remember that attack_time_remaining includes both the jump and chase
-	if aiming_at_target:
-		attack_time_remaining = attack_total_duration
-	else:
-		attack_time_remaining = attack_total_duration * .75 # Make attack_time_remaining shorter bc the full attack duration takes too long when spider is returning from outside
+	# Reset jump_time_remaining and attack_jump_completed. Remember that attack_time_remaining only includes the chase, not the jump
+	jump_time_remaining = attack_jump_duration
 	attack_jump_completed = false
 	# Stop body meshes IK
 	body_meshes.stop_ik()
@@ -419,6 +421,7 @@ func switch_to_attack():
 		else:
 			will_double_jump = false
 			walk_dest = target.global_position + (target.velocity * get_physics_process_delta_time())
+	# If you're not aiming at the target, walk_dest was set in an earlier state, likely in faraway_frame
 	# Subtract spider to jump dest vec slghtly so that spider doesn't aim directly for the jump dest, but slightly back from it
 	walk_dest -= .5 * global_position.direction_to(walk_dest)
 	# Why isn't a tween used? CharacterBody3D snaps to the ground during tween, and setting floor snap length to 0, not calling is_on_floor, and adding upward vel didn't stop floor snapping
@@ -435,22 +438,29 @@ func receive_hit_from_hurtbox():
 		hit_received_while_attacking = true
 
 func attack_frame(delta):
-	# Make attack_stop_dist very low when not aiming at target so spider slides out of arena
-	var temp_attack_stop_dist := attack_stop_dist if aiming_at_target else 0.0
-	
-	# If spider reached its dest or jumped for max jump time, stop checking if spider reached its dest, turn on body meshes IK, turn on physical collision with Cotu and enemies, and set vel to 0
-	if not attack_jump_completed and (attack_time_remaining <= attack_total_duration - attack_jump_duration or global_position.distance_to(walk_dest) < temp_attack_stop_dist):
-		collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER, Globals.ENEMY_COL_LAYER, Globals.COTU_COL_LAYER, Globals.THICK_ENEMY_COL_LAYER])
+	# If spider reached its dest or jumped for max jump time, complete jump
+	if not attack_jump_completed and (jump_time_remaining <= 0 or global_position.distance_to(walk_dest) < attack_stop_dist):
+		# Stop checking if spider reached its dest, turn on body meshes IK, turn on physical collision with Cotu and enemies, set vel to 0, and start attack_time_remaining
 		attack_jump_completed = true
+		collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER, Globals.ENEMY_COL_LAYER, Globals.COTU_COL_LAYER, Globals.THICK_ENEMY_COL_LAYER])
 		body_meshes.start_ik()
 		velocity = Vector3.ZERO
+		attack_time_remaining = attack_total_duration
 		# If you plan to double jump, switch back to ready and jump ASAP
 		if will_double_jump:
 			switch_to_ready()
 			ready_full_duration = ready_min_full_duration
 	
-	# Decrease attack time remaining. If it's <= 0 or you touched the floor and got hit or (you completed your jump and are not aiming at the target), switch to retreat
-	attack_time_remaining -= delta
+	# If you landed, decrease attack time remaining
+	if attack_jump_completed:
+		attack_time_remaining -= delta
+	# Otherwise, decrease jump time and look in the direction you're moving so that if you bounce off of something, it'll still look like you're moving forward and you meant to do that
+	else:
+		jump_time_remaining -= delta
+		rotate_y_to_vec(velocity, 1)
+		return
+	
+	# If attack_time_remaining <= 0 or you touched the floor and got hit or (you completed your jump and are not aiming at the target), switch to retreat
 	if attack_time_remaining <= 0 or hit_received_while_attacking:
 		hit_received_while_attacking = false
 		# Hitboxes are enabled by default to make spider a threat even when just running to a destination
@@ -462,11 +472,6 @@ func attack_frame(delta):
 		if velocity.y > 0:
 			velocity.y = 0
 		switch_to_retreat()
-	
-	# While in the air, look in the direction you're moving so that if you bounce off of something, it'll still look like you're moving forward and you meant to do that
-	if not attack_jump_completed:
-		rotate_y_to_vec(velocity, 1)
-		return
 	
 	# If you already landed and are still attacking, chase target
 	rotate_y_to_vec(target.global_position - global_position, .8)
@@ -522,7 +527,8 @@ func switch_to_retreat():
 	behav_state = RETREAT
 	# If you just left the arena, teleport to a random pos
 	if not aiming_at_target:
-		teleport_outside_arena()
+		pass
+		#teleport_outside_arena()
 	choose_retreat_dest()
 	body_meshes.set_leg_step_time(leg_step_time_moving)
 
