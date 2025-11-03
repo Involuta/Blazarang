@@ -313,14 +313,14 @@ func choose_far_dest(on_rim: bool, behind_target: bool):
 
 func switch_to_faraway():
 	body_meshes.start_ik()
+	body_meshes.set_leg_step_time(leg_step_time_moving)
 	behav_state = FARAWAY
 	# Set walk dest (choose_far_dest sets walk_dest)
 	choose_far_dest(false, false)
-	# If walk dest is too far (faraway_dest_radius + around 30% of faraway_dest_radius), just jump to it
-	if global_position.distance_to(walk_dest) > .1 * faraway_dest_radius:
+	# If walk dest is too far (slightly farther than faraway_dest_radius), just jump to it
+	if global_position.distance_to(walk_dest) > 1.2 * faraway_dest_radius:
 		aiming_at_target = false
 		switch_to_aim()
-	body_meshes.set_leg_step_time(leg_step_time_moving)
 
 func faraway_frame(_delta):
 	rotate_y_to_vec(velocity, walk_turn_speed)
@@ -446,6 +446,10 @@ func attack_frame(delta):
 		body_meshes.start_ik()
 		velocity = Vector3.ZERO
 		attack_time_remaining = attack_total_duration
+		# If you weren't attacking the target and were just jumping to a faraway pt, switch to aim state
+		if not aiming_at_target:
+			aiming_at_target = true
+			switch_to_aim()
 		# If you plan to double jump, switch back to ready and jump ASAP
 		if will_double_jump:
 			switch_to_ready()
