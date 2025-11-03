@@ -161,6 +161,10 @@ func _physics_process(delta):
 			if global_position.distance_to(target.global_position) < walk_to_attack_proximity:
 				switch_to_ready()
 				ready_full_duration = ready_min_full_duration
+			# If you start moving again and you're far from your dest (maybe faraway_dest_radius distance), jump to it
+			if global_position.distance_to(walk_dest) > faraway_dest_radius:
+				aiming_at_target = false
+				switch_to_aim()
 	
 	if walk_dest_mesh:
 		walk_dest_mesh.global_position = walk_dest
@@ -271,6 +275,7 @@ func walk_frame(delta):
 	
 	rotate_y_to_vec(velocity, walk_turn_speed)
 	if global_position.distance_to(walk_dest) <= nav_agent.target_desired_distance:
+		# If you stop walking and end up too close to the target, switch to faraway
 		if walk_dest.distance_to(target.global_position) < walk_to_faraway_proximity:
 			switch_to_faraway()
 		else:
