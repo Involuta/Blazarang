@@ -1,4 +1,4 @@
-res://enemies/jumping_spider.tscn
+res://levels/mite_level/section_nodes/mite_level_main_arena.tscn
 res://enemies/enemy_hurtbox.gd
 res://glb_inherited_scenes/mite_hills_ground.gdshader
 res://glb_inherited_scenes/outline.gdshader
@@ -23,4 +23,4 @@ res://ui/glitch.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
 res://general_scripts/skygradient.gdshader
 res://enemies/jumping_spider.gd
-res://levels/mite_level/section_nodes/mite_level_main_arena.tscn
+res://enemies/jumping_spider.tscn

@@ -20,45 +20,40 @@ enum {
 	CURIOUS,
 	WALK,
 	FARAWAY,
-	HISS,
 	AIM,
 	READY,
 	ATTACK,
 	RETREAT,
+	LEAVE
 }
 var behav_state := WALK
 
-var base_path_desired_dist := 2.0 # Used in normal mvmt circumstances (anything except attack chase)
-var base_target_desired_dist := 10.0 # Used in normal mvmt circumstances (anything except attack chase)
+@export var base_path_desired_dist := 2.0 # Used in normal mvmt circumstances (anything except attack chase)
+@export var base_target_desired_dist := 10.0 # Used in normal mvmt circumstances (anything except attack chase)
 
-@export var arena_max_radius := 130.0 # Spider won't set walk dest to any point laterally outside this value
+@export var arena_max_radius := 115.0 # Spider won't set walk dest to any point laterally outside this value
 
 @export var target_fov_angle := PI/4 # Max angle btwn target's body's fwd dir and dir from target to spider necessary for spider to be considered in target's FOV
 @export var leg_step_time_moving := .0167 # Time it takes for each leg to make a step when spider is walking/retreating
 @export var leg_step_time_stationary := .1 # Time it takes for each leg to make a step when spider is aiming/ready
 
 var walk_dest := Vector3.ZERO
-@export var walk_max_duration := 6.0 # If spider keeps recalculating walk dest and never makes it to the dest, it stops walking after this many seconds
+@export var walk_max_duration := 4.5 # If spider keeps recalculating walk dest and never makes it to the dest, it stops walking after this many seconds
 var walk_duration := 6.0 # Set to walk_max_duration at start of walk state
 @export var walk_dest_dist_from_target := 60.0 # Starting from the target, go walk_dest_dist_from_target opposite the dir the target is facing. Get a flat circle around this point w radius walk_dest_radius. Get a random cardinal pt on the circumference of this circle, then fire a ray from high above onto the pt. If it's a valid pt, choose it. If not, increase the size of the circle, get another random pt, and fire another ray. Repeat until the pt is valid
 @export var walk_dest_radius := 10.0
 @export var walk_turn_speed := .5
-@export var walk_speed := 60.0
+@export var walk_speed := 50.0
 @export var walk_min_speed := 30.0 # Unless the spider wants to move at least this fast, it doesn't move at all. This prevents it from drifting slowly when changing direction and makes its mvmt more erratic
 var can_stop := false # Once the spider reaches above walk_min_speed, can_stop is true. When the spider goes below walk_min_speed and can_stop, it stops moving instead of moving slowly, and can_stop is set to false. After being stopped for a bit, it's allowed to accelerate again
 @export var stop_time_min := .1 # Min length of time spider stops moving due to reaching low speed
-@export var stop_time_max := 1.0 # Min length of time spider stops moving due to reaching low speed
+@export var stop_time_max := .75 # Min length of time spider stops moving due to reaching low speed
 var stop_time_remaining := 1.0 # Stop time remaining before spider can accelerate again
 @export var walk_to_attack_proximity := 36.0 # If spider stops this close to the target, it immediately attacks
 @export var walk_to_faraway_proximity := 40.0 # If walk state ends and spider is within this dist to the target, it switches to faraway state
 
-# When switching out of retreat, spider can aim, faraway, or walk
-@export var retreat_to_aim_chance := .33 # When switching out of retreat state, chance of choosing aim
-@export var retreat_to_faraway_chance := .33 # When switching out of retreat state, chance of choosing faraway
-
 @export var faraway_dest_radius := 90.0 # Dist from arena center that a faraway dest usually is
 
-@export var leave_chance := .5 # Chance of jumping out of arena (i.e. at walk_dest at edge of arena) instead of at target whenever entering aim state
 var aiming_at_target := true # If this is false, then aim, ready, and jump states aim at walk_dest instead of target
 @export var aim_turn_speed := .25
 @export var aim_turning_start_vec_angle_max := PI/3.5
@@ -67,12 +62,12 @@ var aim_turning_start_vec_angle := PI/4 # Min y-axis angle btwn spider's fwd vec
 var aim_turning := false # Activated when vec angle > start_vec_angle, deactivated when vec angle < stop_vec_angle
 @export var aim_turning_stop_vec_angle := .05 # Max vec angle necessary to stop aim turning
 var aim_duration := 1.0 # Set to a random number btwn min and max aim duration
-@export var aim_min_duration := 2.0
-@export var aim_max_duration := 4.0
+@export var aim_min_duration := 1.0
+@export var aim_max_duration := 2.5
 
 @export var ready_turn_speed := .25
-@export var ready_min_full_duration := 2.5
-@export var ready_max_full_duration := 5.0
+@export var ready_min_full_duration := 1.0
+@export var ready_max_full_duration := 3.5
 var ready_full_duration := 1.0 # The duration of the ready state when no action triggers the spider to jump. Set to a random number btwn min and max ready duration when ready state starts. Always decreases during Ready state
 var ready_triggered := false # Set to true when Cotu does an action that triggers the spider jump
 @export var ready_max_trigger_duration := .4
@@ -83,13 +78,33 @@ var ready_trigger_duration := .25 # The duration of the ready state when an acti
 var will_double_jump := false # Set to true when spider decides to double jump and spider hasn't already decided to double jump
 @export var attack_jump_duration := .25 # Duration of jump in secs
 var jump_time_remaining := .25 # Decreases every frame while jumping, reset to attack_jump_duration before each jump
-@export var attack_stop_dist := 3.0 # Max dist from spider to jump dest needed to stop jump mvmt
+@export var attack_stop_dist := 1.6 # Max dist from spider to jump dest needed to stop jump mvmt
 var attack_jump_completed := false # Set to true when landing after jump, set to false at start of attack
 @export var attack_total_duration := 2.75 # Duration of jump + chase in secs
 var attack_time_remaining := 2.75 # Decreases every frame, reset to attack_total_duration when a jump ends
 var hit_received_while_attacking := false # Set to true when spider is hit while attacking, false outside of attack state
 
 @export var retreat_min_dist := 60.0 # Min dist spider runs away from target when retreating
+# When switching out of retreat, spider can leave, aim, faraway, or walk
+@export var retreat_to_aim_chance := .2 # When switching out of retreat state, chance of choosing aim
+@export var retreat_to_faraway_chance := .3 # When switching out of retreat state, chance of choosing faraway
+@export var retreat_to_leave_chance := .2 # Chance of climbing out of arena after retreating
+
+@export var leave_points := { # Points on arena where spider can climb up and out
+	"Right": Vector3(0,29,135),
+	"Left": Vector3(0,29,-135),
+	"Forward": Vector3(135,29,0),
+	"Back": Vector3(-135,29,0)
+}
+var leave_point_chosen := "Left"
+enum LEAVE_STATE {
+	WALK,
+	ASCEND,
+	WAIT,
+	DESCEND
+}
+var leave_behav_state := LEAVE_STATE.WALK
+
 
 func _ready():
 	level = root.find_child("Level")
@@ -136,6 +151,9 @@ func _physics_process(delta):
 				print("attack")
 			RETREAT:
 				print("retreat")
+			LEAVE:
+				print("leave")
+				print(global_position.distance_to(walk_dest))
 	match(behav_state):
 		WALK: 
 			walk_frame(delta)
@@ -149,6 +167,8 @@ func _physics_process(delta):
 			attack_frame(delta)
 		RETREAT:
 			retreat_frame(delta)
+		LEAVE:
+			leave_frame(delta)
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -195,7 +215,7 @@ func _on_navigation_agent_3d_target_reached():
 	pass
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
-	if behav_state == WALK or behav_state == FARAWAY:
+	if behav_state == WALK or behav_state == FARAWAY or (behav_state == LEAVE and leave_behav_state == LEAVE_STATE.WALK):
 		# If you are already stopped, stay stopped
 		# Note: the only stop time functionality not stored here is setting can_stop to false when stop_time_remaining ends, which occurs in physics_process since it can decrement stop_time_remaining using delta
 		if stop_time_remaining > 0:
@@ -219,6 +239,9 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	# When retreating, don't stop so you can escape danger quickly. Since it's a long range walk, move abruptly
 	elif behav_state == RETREAT:
 		velocity = safe_velocity
+	# When leaving and leave state isn't walk, let leave state frame decide velocity
+	elif behav_state == LEAVE:
+		pass
 
 func choose_walk_dest():
 	"""
@@ -530,14 +553,8 @@ func switch_to_retreat():
 	# switch_to_attack changes path_desired_dist and target_desired_distance to a low number. Change them back
 	nav_agent.path_desired_distance = base_path_desired_dist
 	nav_agent.target_desired_distance = base_path_desired_dist
-	
-	# This is here if attack_time_remaining finishes and spider didn't complete its jump, which happens when it leaves the arena
-	body_meshes.start_ik()
+
 	behav_state = RETREAT
-	# If you just left the arena, teleport to a random pos
-	if not aiming_at_target:
-		pass
-		#teleport_outside_arena()
 	choose_retreat_dest()
 	body_meshes.set_leg_step_time(leg_step_time_moving)
 
@@ -545,8 +562,10 @@ func retreat_frame(_delta):
 	rotate_y_to_vec(velocity, walk_turn_speed)
 	if global_position.distance_to(walk_dest) <= nav_agent.target_desired_distance:
 		var choice = rng.randf()
-		if choice > retreat_to_aim_chance + retreat_to_faraway_chance:
+		if choice > retreat_to_aim_chance + retreat_to_faraway_chance + retreat_to_leave_chance:
 			switch_to_walk()
+		elif choice > retreat_to_aim_chance + retreat_to_faraway_chance:
+			switch_to_leave()
 		elif choice > retreat_to_aim_chance:
 			switch_to_faraway()
 		else:
@@ -559,3 +578,69 @@ func retreat_frame(_delta):
 	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
 	nav_agent.velocity = new_velocity
 
+func choose_leave_dest():
+	# Get closest leave point to current global position
+	leave_point_chosen = leave_points.keys()[0]
+	walk_dest = leave_points[leave_point_chosen]
+	for i in range(1, len(leave_points.keys())):
+		var current_leave_point = leave_points.keys()[i]
+		if global_position.distance_to(leave_points[current_leave_point]) < global_position.distance_to(walk_dest):
+			leave_point_chosen = current_leave_point
+			walk_dest = leave_points[leave_point_chosen]
+
+func switch_to_leave():
+	behav_state = LEAVE
+	leave_behav_state = LEAVE_STATE.WALK
+	choose_leave_dest()
+	body_meshes.set_leg_step_time(leg_step_time_moving)
+
+func leave_frame(_delta):
+	match(leave_behav_state):
+		LEAVE_STATE.WALK:
+			leave_frame_walk()
+		LEAVE_STATE.ASCEND:
+			leave_frame_ascend()
+		LEAVE_STATE.WAIT:
+			leave_state_wait()
+		LEAVE_STATE.DESCEND:
+			leave_state_descend()
+
+func leave_frame_walk():
+	rotate_y_to_vec(velocity, walk_turn_speed)
+	if global_position.distance_to(walk_dest) <= nav_agent.target_desired_distance:
+		switch_to_leave_ascend()
+	else:
+		nav_agent.set_target_position(walk_dest)
+	var next_position = nav_agent.get_next_path_position()
+	var new_velocity = (next_position - global_position).normalized() * walk_speed
+	
+	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
+	nav_agent.velocity = new_velocity
+
+func switch_to_leave_ascend():
+	leave_behav_state = LEAVE_STATE.ASCEND
+	body_meshes.stop_ik()
+	# Teleport to base of ascend path
+	global_position = walk_dest
+	# Rotate towards ascend path
+	match(leave_point_chosen):
+		"Left":
+			body_meshes.rotation = Vector3.LEFT
+		"Right":
+			body_meshes.rotation = Vector3.RIGHT
+		"Forward":
+			body_meshes.rotation = Vector3.FORWARD
+		"Back":
+			body_meshes.rotation = Vector3.BACK
+	# Rotate to look up NOTE: THIS MAY NOT WORK IF PROC ANIM MESHES SCRIPT STOPS IT FROM LOOKING UP
+	#body_meshes.look_at
+
+func leave_frame_ascend():
+	# Move up at a constant rate
+	velocity = walk_speed * Vector3.UP
+
+func leave_state_wait():
+	pass
+
+func leave_state_descend():
+	pass
