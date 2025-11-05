@@ -622,22 +622,20 @@ func switch_to_leave_ascend():
 	body_meshes.stop_ik()
 	# Teleport to base of ascend path
 	global_position = walk_dest
-	# Rotate towards ascend path
-	match(leave_point_chosen):
-		"Left":
-			body_meshes.rotation = Vector3.LEFT
-		"Right":
-			body_meshes.rotation = Vector3.RIGHT
-		"Forward":
-			body_meshes.rotation = Vector3.FORWARD
-		"Back":
-			body_meshes.rotation = Vector3.BACK
-	# Rotate to look up NOTE: THIS MAY NOT WORK IF PROC ANIM MESHES SCRIPT STOPS IT FROM LOOKING UP
-	#body_meshes.look_at
 
 func leave_frame_ascend():
 	# Move up at a constant rate
+	# Rotate towards ascend path
 	velocity = walk_speed * Vector3.UP
+	match(leave_point_chosen):
+		"Left":
+			body_meshes.rotation = .5 * PI * Vector3(-1, 1, 1)
+		"Right":
+			body_meshes.rotation = .5 * PI * Vector3(-1, -1, 1)
+		"Forward":
+			body_meshes.rotation = .5 * PI * Vector3(-1, 0, 1)
+		"Back":
+			body_meshes.rotation = .5 * PI * Vector3(-1, 2, 1)
 
 func leave_state_wait():
 	pass
