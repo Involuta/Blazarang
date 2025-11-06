@@ -90,13 +90,6 @@ var hit_received_while_attacking := false # Set to true when spider is hit while
 @export var retreat_to_faraway_chance := .3 # When switching out of retreat state, chance of choosing faraway
 @export var retreat_to_leave_chance := .2 # Chance of climbing out of arena after retreating
 
-@export var leave_points := { # Points on arena where spider can climb up and out
-	"Right": Vector3(0,29,135),
-	"Left": Vector3(0,29,-135),
-	"Forward": Vector3(135,29,0),
-	"Back": Vector3(-135,29,0)
-}
-var leave_point_chosen := "Left"
 enum LEAVE_STATE {
 	WALK,
 	ASCEND,
@@ -104,7 +97,17 @@ enum LEAVE_STATE {
 	DESCEND
 }
 var leave_behav_state := LEAVE_STATE.WALK
-
+@export var leave_points := { # Points on arena where spider can climb up and out
+	"Right": Vector3(0,29,135),
+	"Left": Vector3(0,29,-135),
+	"Forward": Vector3(135,29,0),
+	"Back": Vector3(-135,29,0)
+}
+var leave_point_chosen := "Left"
+var leave_height := 100.0 # global y level where spider leaves to
+@export var leave_wait_time := 4.0
+var leave_wait_time_remaining := 4.0
+var leave_descend_speed := 40.0
 
 func _ready():
 	level = root.find_child("Level")
@@ -153,7 +156,6 @@ func _physics_process(delta):
 				print("retreat")
 			LEAVE:
 				print("leave")
-				print(global_position.distance_to(walk_dest))
 	match(behav_state):
 		WALK: 
 			walk_frame(delta)
@@ -170,7 +172,7 @@ func _physics_process(delta):
 		LEAVE:
 			leave_frame(delta)
 	
-	if not is_on_floor():
+	if not is_on_floor() and not (behav_state == LEAVE and (leave_behav_state == LEAVE_STATE.ASCEND or leave_behav_state == LEAVE_STATE.DESCEND)):
 		velocity.y -= gravity * delta
 	
 	if stop_time_remaining > 0:
@@ -268,12 +270,9 @@ func choose_walk_dest():
 			# Increase temp_walk_dest_radius by 10% if walk_dest_candidate isn't valid
 			temp_walk_dest_radius += walk_dest_radius * .1
 			continue
-		var space_state := get_world_3d().direct_space_state
-		var query = PhysicsRayQueryParameters3D.create(walk_dest_candidate + 100.0 * Vector3.UP, walk_dest_candidate + 200.0 * Vector3.DOWN)
-		query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
-		result = space_state.intersect_ray(query)
-		if result:
-			walk_dest = result.position
+		var ray_result = get_ray_result(walk_dest_candidate + 100.0 * Vector3.UP, walk_dest_candidate + 200.0 * Vector3.DOWN, [Globals.ARENA_COL_LAYER])
+		if ray_result:
+			walk_dest = ray_result.position
 			return
 		else:
 			# Increase temp_walk_dest_radius by 10% if ray result isn't valid
@@ -329,12 +328,9 @@ func choose_far_dest(on_rim: bool, behind_target: bool):
 	else:
 		faraway_dest_dir = Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI))
 	var faraway_dest = dest_dist * faraway_dest_dir + arena_center
-	var space_state := get_world_3d().direct_space_state
-	var query = PhysicsRayQueryParameters3D.create(faraway_dest + Vector3.UP * 100, faraway_dest + Vector3.DOWN * 200)
-	query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
-	var result = space_state.intersect_ray(query)
-	if result:
-		walk_dest = result.position
+	var ray_result = get_ray_result(faraway_dest + Vector3.UP * 100, faraway_dest + Vector3.DOWN * 200, [Globals.ARENA_COL_LAYER])
+	if ray_result:
+		walk_dest = ray_result.position
 		return
 	# Failsafe: set walk_dest to current position
 	walk_dest = global_position
@@ -527,12 +523,9 @@ func choose_retreat_dest():
 	while not result and temp_retreat_min_dist > 0:
 		var retreat_vec := temp_retreat_min_dist * target.global_position.direction_to(global_position)
 		var retreat_pt_candidate := target.global_position + retreat_vec
-		var space_state := get_world_3d().direct_space_state
-		var query = PhysicsRayQueryParameters3D.create(retreat_pt_candidate + 100.0 * Vector3.UP, retreat_pt_candidate + 200.0 * Vector3.DOWN)
-		query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
-		result = space_state.intersect_ray(query)
-		if result:
-			walk_dest = result.position
+		var ray_result = get_ray_result(retreat_pt_candidate + 100.0 * Vector3.UP, retreat_pt_candidate + 200.0 * Vector3.DOWN, [Globals.ARENA_COL_LAYER])
+		if ray_result:
+			walk_dest = ray_result.position
 			return
 		# Reduce vec by 10% if ray result isn't valid
 		temp_retreat_min_dist -= retreat_min_dist * .1
@@ -594,14 +587,14 @@ func switch_to_leave():
 	choose_leave_dest()
 	body_meshes.set_leg_step_time(leg_step_time_moving)
 
-func leave_frame(_delta):
+func leave_frame(delta):
 	match(leave_behav_state):
 		LEAVE_STATE.WALK:
 			leave_frame_walk()
 		LEAVE_STATE.ASCEND:
 			leave_frame_ascend()
 		LEAVE_STATE.WAIT:
-			leave_state_wait()
+			leave_state_wait(delta)
 		LEAVE_STATE.DESCEND:
 			leave_state_descend()
 
@@ -637,9 +630,45 @@ func leave_frame_ascend():
 			body_meshes.rotation = .5 * PI * Vector3(-1, 0, 1)
 		"Back":
 			body_meshes.rotation = .5 * PI * Vector3(-1, 2, 1)
+	if global_position.y > leave_height:
+		switch_to_leave_wait()
 
-func leave_state_wait():
-	pass
+func switch_to_leave_wait():
+	leave_behav_state = LEAVE_STATE.WAIT
+	body_meshes.set_can_rotate(true)
+	leave_wait_time_remaining = leave_wait_time
 
+func leave_state_wait(delta):
+	velocity = Vector3.ZERO
+	leave_wait_time -= delta
+	if leave_wait_time <= 0:
+		switch_to_leave_descend()
+
+func switch_to_leave_descend():
+	leave_behav_state = LEAVE_STATE.DESCEND
+	# Teleport to random position above arena
+	var dest_dist := rng.randf_range(0, faraway_dest_radius)
+	var arena_center := Vector3.ZERO
+	var faraway_dest_dir : Vector3
+	faraway_dest_dir = Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI))
+	global_position = dest_dist * faraway_dest_dir + arena_center
+	
 func leave_state_descend():
-	pass
+	# Descend until you're close to the ground
+	velocity = leave_descend_speed * Vector3.DOWN
+	var ray_result = get_ray_result(global_position, global_position + Vector3.DOWN, [Globals.ARENA_COL_LAYER])
+	if ray_result:
+		global_position = ray_result.position
+		aiming_at_target = true
+		switch_to_aim()
+
+# Get result of casting a ray from "from" to "to". Will detect collisions with any object whose col layer is in the col_layer_list (e.g. [Globals.ARENA_COL_LAYER])
+func get_ray_result(from: Vector3, to: Vector3, col_layer_list: Array):
+	var space_state := get_world_3d().direct_space_state
+	var query = PhysicsRayQueryParameters3D.create(from, to)
+	query.collision_mask = Globals.make_mask(col_layer_list)
+	var result = space_state.intersect_ray(query)
+	if result:
+		return result
+	else:
+		return false
