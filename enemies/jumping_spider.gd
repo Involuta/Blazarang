@@ -234,7 +234,7 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 				can_stop = true
 	# When attacking, don't stop so you can continuously chase. Since it's a short range walk, move smoothly
 	elif (behav_state == ATTACK and attack_jump_completed):
-		velocity = velocity.move_toward(safe_velocity, .8)
+		velocity = velocity.move_toward(safe_velocity, .9)
 	# When retreating, don't stop so you can escape danger quickly. Since it's a long range walk, move abruptly
 	elif behav_state == RETREAT:
 		velocity = safe_velocity
@@ -451,7 +451,7 @@ func switch_to_attack():
 	velocity = .95 * (walk_dest - global_position) / attack_jump_duration
 	collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
 	# When spider is chasing, it should try to get very close
-	nav_agent.path_desired_distance = 1
+	nav_agent.path_desired_distance = 1.5 # Why is this not 1? Sometimes (usually near slope changes) the spider chased a stationary point, which meant it was trying to get to a path point but was too far
 	nav_agent.target_desired_distance = 1
 
 func receive_hit_from_hurtbox():
@@ -501,7 +501,7 @@ func attack_frame(delta):
 		switch_to_retreat()
 	
 	# If you already landed and are still attacking, chase target
-	rotate_y_to_vec(target.global_position - global_position, .8)
+	rotate_y_to_vec(target.global_position - global_position, .9)
 	nav_agent.set_target_position(target.global_position)
 	var next_position = nav_agent.get_next_path_position()
 	var new_velocity = (next_position - global_position).normalized() * walk_speed
@@ -656,14 +656,14 @@ func switch_to_leave_descend():
 	global_position = dest_dist * dest_dir + arena_center + Vector3.UP * leave_height
 	
 func leave_state_descend():
-	# Descend until you're close to the ground
-	velocity = leave_descend_speed * Vector3.DOWN
 	var ray_result = get_ray_result(global_position + 3 * Vector3.UP, global_position + 6 * Vector3.DOWN, [Globals.ARENA_COL_LAYER])
 	if ray_result:
 		# Teleporting it .5 units up from the ground is essential for it not to get stuck in/below the ground
-		global_position = ray_result.position + .5 * Vector3.UP
+		global_position = ray_result.position + 1 * ray_result.normal
 		aiming_at_target = true
 		switch_to_aim()
+	# Descend until you're close to the ground
+	velocity = leave_descend_speed * Vector3.DOWN
 
 # Get result of casting a ray from "from" to "to". Will detect collisions with any object whose col layer is in the col_layer_list (e.g. [Globals.ARENA_COL_LAYER])
 func get_ray_result(from: Vector3, to: Vector3, col_layer_list: Array):
