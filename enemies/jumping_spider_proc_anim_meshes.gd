@@ -34,12 +34,13 @@ extends Node3D
 var avg_normal := Vector3.UP # This is visible in the entire script so that the parent can see it; if it's Vector3.UP, the parent can leap
 
 var ik_stopped := false # IK is stopped when leaping
+var can_rotate := true # Rotation is stopped but not IK when climbing up arena walls
 
 var biting := false
 
 func _process(delta):
-	if ik_stopped:
-		position = .5 * Vector3.UP
+	if ik_stopped or not can_rotate:
+		position = 0 * Vector3.UP
 		return
 	
 	# Raycast downward to get ground normal
@@ -91,6 +92,9 @@ func set_leg_step_time(time: float):
 	rvb_ik.step_time = time
 	rmf_ik.step_time = time
 	lvb_ik.step_time = time
+
+func set_can_rotate(state: bool):
+	can_rotate = state
 
 func stop_ik_front_legs():
 	lvf_sk.stop()

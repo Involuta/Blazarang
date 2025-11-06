@@ -1,12 +1,12 @@
 MeshInstance3D
+CollisionShape3D
+StaticBody3D
 Node3D
 RayCast3D
 Hitbox
 AnimationPlayer
 GPUParticles3D
-CollisionShape3D
 Area3D
-StaticBody3D
 EnemyHurtbox
 NavigationAgent3D
 AnimationTree

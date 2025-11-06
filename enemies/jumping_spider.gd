@@ -619,14 +619,15 @@ func leave_frame_walk():
 
 func switch_to_leave_ascend():
 	leave_behav_state = LEAVE_STATE.ASCEND
-	body_meshes.stop_ik()
+	body_meshes.set_can_rotate(false)
+	
 	# Teleport to base of ascend path
 	global_position = walk_dest
 
 func leave_frame_ascend():
 	# Move up at a constant rate
 	# Rotate towards ascend path
-	velocity = walk_speed * Vector3.UP
+	velocity = 1.5 * walk_speed * Vector3.UP
 	match(leave_point_chosen):
 		"Left":
 			body_meshes.rotation = .5 * PI * Vector3(-1, 1, 1)
