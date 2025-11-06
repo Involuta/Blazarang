@@ -14,7 +14,7 @@ var destroyed := false
 @onready var root := $/root/ViewControl
 var mite_arena : Node3D
 
-# 1 = landmite, 2 = paramite, 3 = flatmite, 4 = harvestman
+# 1 = landmite, 2 = paramite, 3 = flatmite, 4 = harvestman, 5 = web
 @export var type := 1
 
 func _ready():
@@ -52,7 +52,6 @@ func _on_body_entered(body):
 
 func destroy_self():
 	$AnimationPlayer.play("explode")
-	visible = false # FOR TESTING; TO SEE IF MITE LEAPS AFTER EGG LANDS
 	flight_particles.emitting = false
 	impact_particles.emitting = true
 	destroyed = true

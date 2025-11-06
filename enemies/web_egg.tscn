@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://k7sahr3jdc8y"]
+
+[ext_resource type="Script" path="res://enemies/mite_egg.gd" id="1_71e5h"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="2_7ibc8"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_3bpga"]
+radius = 1.5
+height = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_frb2h"]
+albedo_color = Color(1, 1, 0.941176, 1)
+
+[sub_resource type="Animation" id="Animation_rmeg4"]
+resource_name = "explode"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oo373"]
+_data = {
+"explode": SubResource("Animation_rmeg4")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pww74"]
+radius = 2.0
+
+[node name="WebEgg" type="Node3D"]
+script = ExtResource("1_71e5h")
+type = 5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_3bpga")
+surface_material_override/0 = SubResource("StandardMaterial3D_frb2h")
+
+[node name="FlightParticles" type="GPUParticles3D" parent="."]
+
+[node name="ImpactParticles" type="GPUParticles3D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_oo373")
+}
+
+[node name="EnemyHitbox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 90
+script = ExtResource("2_7ibc8")
+damage = 40
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHitbox"]
+shape = SubResource("SphereShape3D_pww74")
+
+[node name="PlayerHitbox" type="Area3D" parent="."]
+collision_mask = 74
+script = ExtResource("2_7ibc8")
+damage = 30
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerHitbox"]
+shape = SubResource("SphereShape3D_pww74")
+
+[connection signal="body_entered" from="EnemyHitbox" to="." method="_on_body_entered"]

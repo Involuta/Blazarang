@@ -637,6 +637,9 @@ func switch_to_leave_wait():
 	leave_wait_time_remaining = leave_wait_time
 	body_meshes.set_can_rotate(true)
 	body_meshes.stop_ik()
+	for i in range(8):
+		await get_tree().create_timer(leave_wait_time / 2 / 8).timeout
+		arena.drop_egg_of_type(5, false) # false parameter ensures eggs are dropped near arena center
 
 func leave_state_wait(delta):
 	velocity = Vector3.ZERO
@@ -655,7 +658,7 @@ func switch_to_leave_descend():
 func leave_state_descend():
 	# Descend until you're close to the ground
 	velocity = leave_descend_speed * Vector3.DOWN
-	var ray_result = get_ray_result(global_position, global_position + Vector3.DOWN, [Globals.ARENA_COL_LAYER])
+	var ray_result = get_ray_result(global_position + 3 * Vector3.UP, global_position + 6 * Vector3.DOWN, [Globals.ARENA_COL_LAYER])
 	if ray_result:
 		# Teleporting it .5 units up from the ground is essential for it not to get stuck in/below the ground
 		global_position = ray_result.position + .5 * Vector3.UP
