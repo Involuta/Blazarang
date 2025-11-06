@@ -137,10 +137,6 @@ func _ready():
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("Special"):
-		if can_stop:
-			print("I can stop! ", stop_time_remaining)
-		else:
-			print("I can't stop! ", stop_time_remaining)
 		match(behav_state):
 			WALK: 
 				print("walk")
@@ -156,6 +152,7 @@ func _physics_process(delta):
 				print("retreat")
 			LEAVE:
 				print("leave")
+				print(global_position)
 	match(behav_state):
 		WALK: 
 			walk_frame(delta)
@@ -281,8 +278,8 @@ func choose_walk_dest():
 	walk_dest = global_position
 
 func switch_to_walk():
-	body_meshes.start_ik()
 	behav_state = WALK
+	body_meshes.start_ik()
 	# Spider is aiming at target by default if it's in walk state
 	aiming_at_target = true
 	# Set max walk time
@@ -362,11 +359,13 @@ func faraway_frame(_delta):
 
 func switch_to_aim():
 	behav_state = AIM
+	# Body meshes IK may be stopped due to coming out of leave-descend state
+	body_meshes.start_ik()
+	body_meshes.set_leg_step_time(leg_step_time_stationary)
 	if aiming_at_target:
 		aim_duration = rng.randf_range(aim_min_duration, aim_max_duration)
 	else:
 		aim_duration = aim_min_duration / 2
-	body_meshes.set_leg_step_time(leg_step_time_stationary)
 
 func aim_frame(delta):
 	var target_pos : Vector3
@@ -635,13 +634,14 @@ func leave_frame_ascend():
 
 func switch_to_leave_wait():
 	leave_behav_state = LEAVE_STATE.WAIT
-	body_meshes.set_can_rotate(true)
 	leave_wait_time_remaining = leave_wait_time
+	body_meshes.set_can_rotate(true)
+	body_meshes.stop_ik()
 
 func leave_state_wait(delta):
 	velocity = Vector3.ZERO
-	leave_wait_time -= delta
-	if leave_wait_time <= 0:
+	leave_wait_time_remaining -= delta
+	if leave_wait_time_remaining <= 0:
 		switch_to_leave_descend()
 
 func switch_to_leave_descend():
@@ -649,16 +649,16 @@ func switch_to_leave_descend():
 	# Teleport to random position above arena
 	var dest_dist := rng.randf_range(0, faraway_dest_radius)
 	var arena_center := Vector3.ZERO
-	var faraway_dest_dir : Vector3
-	faraway_dest_dir = Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI))
-	global_position = dest_dist * faraway_dest_dir + arena_center
+	var dest_dir := Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI))
+	global_position = dest_dist * dest_dir + arena_center + Vector3.UP * leave_height
 	
 func leave_state_descend():
 	# Descend until you're close to the ground
 	velocity = leave_descend_speed * Vector3.DOWN
 	var ray_result = get_ray_result(global_position, global_position + Vector3.DOWN, [Globals.ARENA_COL_LAYER])
 	if ray_result:
-		global_position = ray_result.position
+		# Teleporting it .5 units up from the ground is essential for it not to get stuck in/below the ground
+		global_position = ray_result.position + .5 * Vector3.UP
 		aiming_at_target = true
 		switch_to_aim()
 

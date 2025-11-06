@@ -45,8 +45,7 @@ func _process(delta):
 	
 	# Raycast downward to get ground normal
 	var space_state := get_world_3d().direct_space_state
-	var sight_dir := Vector3.DOWN
-	var query = PhysicsRayQueryParameters3D.create(global_position - 10.0*sight_dir, global_position + 20.0*sight_dir)
+	var query = PhysicsRayQueryParameters3D.create(global_position + 15 * Vector3.UP, global_position + 30 * Vector3.DOWN)
 	query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
 	var result = space_state.intersect_ray(query)
 	if not result:
