@@ -152,7 +152,6 @@ func _physics_process(delta):
 				print("retreat")
 			LEAVE:
 				print("leave")
-				print(global_position)
 	match(behav_state):
 		WALK: 
 			walk_frame(delta)
@@ -654,16 +653,22 @@ func switch_to_leave_descend():
 	var arena_center := Vector3.ZERO
 	var dest_dir := Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI))
 	global_position = dest_dist * dest_dir + arena_center + Vector3.UP * leave_height
-	
-func leave_state_descend():
-	var ray_result = get_ray_result(global_position + 3 * Vector3.UP, global_position + 6 * Vector3.DOWN, [Globals.ARENA_COL_LAYER])
-	if ray_result:
-		# Teleporting it .5 units up from the ground is essential for it not to get stuck in/below the ground
-		global_position = ray_result.position + 1 * ray_result.normal
-		aiming_at_target = true
-		switch_to_aim()
 	# Descend until you're close to the ground
 	velocity = leave_descend_speed * Vector3.DOWN
+	touched_ground = false
+
+var touched_ground := false
+
+func leave_state_descend():
+	var ray_result = get_ray_result(global_position + 3 * Vector3.UP, global_position + 6 * Vector3.DOWN, [Globals.ARENA_COL_LAYER])
+	if ray_result and not touched_ground:
+		# Teleport it to the ground
+		global_position = ray_result.position + 1.5 * ray_result.normal
+		touched_ground = true
+		# Wait before switching to aim to give proc anim meshes time to receive current global position
+		await get_tree().create_timer(2 * get_physics_process_delta_time()).timeout
+		aiming_at_target = true
+		switch_to_aim()
 
 # Get result of casting a ray from "from" to "to". Will detect collisions with any object whose col layer is in the col_layer_list (e.g. [Globals.ARENA_COL_LAYER])
 func get_ray_result(from: Vector3, to: Vector3, col_layer_list: Array):
