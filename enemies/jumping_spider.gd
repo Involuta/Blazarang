@@ -7,11 +7,13 @@ var spitweb := preload("res://enemies/spitweb.tscn")
 @onready var hurtbox := $JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/EnemyHurtbox
 @onready var anim_player := $JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/AnimationPlayer
 @onready var anim_tree := $AnimationTree
+@onready var fake_meshes := $FakeMeshes
 @onready var root := $/root/ViewControl
 var rng := RandomNumberGenerator.new()
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var level : Node3D
 var arena : Node3D
+var actual_collision_layer := collision_layer # collision_layer is set to actual_collision_layer upon spider becoming tangible at end of leave-descend state
 var inner_hitbox : Node3D
 var outer_hitbox : Node3D
 var walk_dest_mesh : Node3D
@@ -133,6 +135,9 @@ func _ready():
 	Globals.cotu_normal_throw_rose.connect(ready_action_trigger)
 	hurtbox.hit_received.connect(receive_hit_from_hurtbox)
 	
+	# Disable fake meshes to save a little computation
+	fake_meshes.process_mode = Node.PROCESS_MODE_DISABLED
+	
 	switch_to_walk()
 
 func _physics_process(delta):
@@ -234,8 +239,8 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	# When attacking, don't stop so you can continuously chase. Since it's a short range walk, move smoothly
 	elif (behav_state == ATTACK and attack_jump_completed):
 		velocity = velocity.move_toward(safe_velocity, .9)
-	# When retreating, don't stop so you can escape danger quickly. Since it's a long range walk, move abruptly
-	elif behav_state == RETREAT:
+	# When retreating, don't stop so you can escape danger quickly. In leave-wait state, you're invisible so no need to move abruptly
+	elif behav_state == RETREAT or (behav_state == LEAVE and leave_behav_state == LEAVE_STATE.WAIT):
 		velocity = safe_velocity
 	# When leaving and leave state isn't walk, let leave state frame decide velocity
 	elif behav_state == LEAVE:
@@ -325,11 +330,8 @@ func choose_far_dest(on_rim: bool, behind_target: bool):
 		faraway_dest_dir = Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI))
 	var faraway_dest = dest_dist * faraway_dest_dir + arena_center
 	var ray_result = get_ray_result(faraway_dest + Vector3.UP * 100, faraway_dest + Vector3.DOWN * 200, [Globals.ARENA_COL_LAYER])
-	if ray_result:
-		walk_dest = ray_result.position
-		return
 	# Failsafe: set walk_dest to current position
-	walk_dest = global_position
+	walk_dest = ray_result.position if ray_result else global_position
 
 func switch_to_faraway():
 	body_meshes.start_ik()
@@ -614,34 +616,64 @@ func switch_to_leave_ascend():
 	
 	# Teleport to base of ascend path
 	global_position = walk_dest
+	
+	# Make main spider body invisible and intangible
+	body_meshes.visible = false
+	collision_layer = 0
+	
+	# Disable mouth hitboxes
+	inner_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+	outer_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+	
+	# Make fake meshes active and visible
+	fake_meshes.process_mode = Node.PROCESS_MODE_INHERIT
+	fake_meshes.visible = true
 
 func leave_frame_ascend():
-	# Move up at a constant rate
-	# Rotate towards ascend path
-	velocity = 1.5 * walk_speed * Vector3.UP
+	# Move fake spider meshes up at a constant rate. Since walk_speed is in m/s and this func is called every frame, convert to m/f
+	# Rotate fake spider towards ascend path
+	fake_meshes.position += 1.5 * walk_speed * get_physics_process_delta_time() * Vector3.UP
 	match(leave_point_chosen):
 		"Left":
-			body_meshes.rotation = .5 * PI * Vector3(-1, 1, 1)
+			fake_meshes.rotation = .5 * PI * Vector3(-1, 1, 1)
 		"Right":
-			body_meshes.rotation = .5 * PI * Vector3(-1, -1, 1)
+			fake_meshes.rotation = .5 * PI * Vector3(-1, -1, 1)
 		"Forward":
-			body_meshes.rotation = .5 * PI * Vector3(-1, 0, 1)
+			fake_meshes.rotation = .5 * PI * Vector3(-1, 0, 1)
 		"Back":
-			body_meshes.rotation = .5 * PI * Vector3(-1, 2, 1)
-	if global_position.y > leave_height:
+			fake_meshes.rotation = .5 * PI * Vector3(-1, 2, 1)
+	if fake_meshes.global_position.y > leave_height:
 		switch_to_leave_wait()
 
 func switch_to_leave_wait():
 	leave_behav_state = LEAVE_STATE.WAIT
 	leave_wait_time_remaining = leave_wait_time
-	body_meshes.set_can_rotate(true)
-	body_meshes.stop_ik()
-	for i in range(8):
-		await get_tree().create_timer(leave_wait_time / 2 / 8).timeout
+	
+	# Set walk_dest to random position
+	var dest_dist := rng.randf_range(0, faraway_dest_radius)
+	var arena_center := Vector3.ZERO
+	var dest_dir := Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI))
+	var lateral_walk_dest = dest_dist * dest_dir + arena_center + Vector3.UP * leave_height
+	var ray_result = get_ray_result(lateral_walk_dest + 50 * Vector3.UP, global_position + 100 * Vector3.DOWN, [Globals.ARENA_COL_LAYER])
+	# If the ray fails for some reason (it should never fail) just use arena_center
+	walk_dest = ray_result.position if ray_result else arena_center
+	for i in range(4):
+		await get_tree().create_timer(leave_wait_time / 2 / 4).timeout
 		arena.drop_egg_of_type(5, false) # false parameter ensures eggs are dropped near arena center
 
 func leave_state_wait(delta):
-	velocity = Vector3.ZERO
+	rotate_y_to_vec(velocity, walk_turn_speed)
+	if global_position.distance_to(walk_dest) <= nav_agent.target_desired_distance:
+		velocity = Vector3.ZERO
+		return
+	else:
+		nav_agent.set_target_position(walk_dest)
+	var next_position = nav_agent.get_next_path_position()
+	var new_velocity = (next_position - global_position).normalized() * walk_speed
+	
+	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
+	nav_agent.velocity = new_velocity
+	
 	leave_wait_time_remaining -= delta
 	if leave_wait_time_remaining <= 0:
 		switch_to_leave_descend()
@@ -655,16 +687,12 @@ func switch_to_leave_descend():
 	global_position = dest_dist * dest_dir + arena_center + Vector3.UP * leave_height
 	# Descend until you're close to the ground
 	velocity = leave_descend_speed * Vector3.DOWN
-	touched_ground = false
-
-var touched_ground := false
 
 func leave_state_descend():
 	var ray_result = get_ray_result(global_position + 3 * Vector3.UP, global_position + 6 * Vector3.DOWN, [Globals.ARENA_COL_LAYER])
-	if ray_result and not touched_ground:
+	if ray_result:
 		# Teleport it to the ground
 		global_position = ray_result.position + 1.5 * ray_result.normal
-		touched_ground = true
 		# Wait before switching to aim to give proc anim meshes time to receive current global position
 		await get_tree().create_timer(2 * get_physics_process_delta_time()).timeout
 		aiming_at_target = true
