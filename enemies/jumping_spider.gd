@@ -8,6 +8,7 @@ var spitweb := preload("res://enemies/spitweb.tscn")
 @onready var anim_player := $JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/AnimationPlayer
 @onready var anim_tree := $AnimationTree
 @onready var fake_meshes := $FakeMeshes
+@onready var fake_meshes_anim_player := $FakeMeshes/AnimationPlayer
 @onready var root := $/root/ViewControl
 var rng := RandomNumberGenerator.new()
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -241,7 +242,7 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 		velocity = velocity.move_toward(safe_velocity, .9)
 	# When retreating, don't stop so you can escape danger quickly. In leave-wait state, you're invisible so no need to move abruptly
 	elif behav_state == RETREAT or (behav_state == LEAVE and leave_behav_state == LEAVE_STATE.WAIT):
-		velocity = safe_velocity
+		velocity = Vector3.ZERO if global_position.distance_to(walk_dest) <= nav_agent.target_desired_distance else safe_velocity
 	# When leaving and leave state isn't walk, let leave state frame decide velocity
 	elif behav_state == LEAVE:
 		pass
@@ -612,10 +613,9 @@ func leave_frame_walk():
 
 func switch_to_leave_ascend():
 	leave_behav_state = LEAVE_STATE.ASCEND
-	body_meshes.set_can_rotate(false)
 	
-	# Teleport to base of ascend path
-	global_position = walk_dest
+	# Teleport to base of ascend path and stop mvmt
+	velocity = Vector3.ZERO
 	
 	# Make main spider body invisible and intangible
 	body_meshes.visible = false
@@ -628,11 +628,8 @@ func switch_to_leave_ascend():
 	# Make fake meshes active and visible
 	fake_meshes.process_mode = Node.PROCESS_MODE_INHERIT
 	fake_meshes.visible = true
-
-func leave_frame_ascend():
-	# Move fake spider meshes up at a constant rate. Since walk_speed is in m/s and this func is called every frame, convert to m/f
+	
 	# Rotate fake spider towards ascend path
-	fake_meshes.position += 1.5 * walk_speed * get_physics_process_delta_time() * Vector3.UP
 	match(leave_point_chosen):
 		"Left":
 			fake_meshes.rotation = .5 * PI * Vector3(-1, 1, 1)
@@ -642,6 +639,10 @@ func leave_frame_ascend():
 			fake_meshes.rotation = .5 * PI * Vector3(-1, 0, 1)
 		"Back":
 			fake_meshes.rotation = .5 * PI * Vector3(-1, 2, 1)
+
+func leave_frame_ascend():
+	# Move fake spider meshes up at a constant rate. Since walk_speed is in m/s and this func is called every frame, convert to m/f
+	fake_meshes.position += 1.5 * walk_speed * get_physics_process_delta_time() * Vector3.UP
 	if fake_meshes.global_position.y > leave_height:
 		switch_to_leave_wait()
 
@@ -649,11 +650,14 @@ func switch_to_leave_wait():
 	leave_behav_state = LEAVE_STATE.WAIT
 	leave_wait_time_remaining = leave_wait_time
 	
+	# Hide fake meshes since spider's far above the arena
+	fake_meshes.visible = false
+	
 	# Set walk_dest to random position
 	var dest_dist := rng.randf_range(0, faraway_dest_radius)
 	var arena_center := Vector3.ZERO
 	var dest_dir := Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI))
-	var lateral_walk_dest = dest_dist * dest_dir + arena_center + Vector3.UP * leave_height
+	var lateral_walk_dest = dest_dist * dest_dir + arena_center
 	var ray_result = get_ray_result(lateral_walk_dest + 50 * Vector3.UP, global_position + 100 * Vector3.DOWN, [Globals.ARENA_COL_LAYER])
 	# If the ray fails for some reason (it should never fail) just use arena_center
 	walk_dest = ray_result.position if ray_result else arena_center
@@ -663,11 +667,10 @@ func switch_to_leave_wait():
 
 func leave_state_wait(delta):
 	rotate_y_to_vec(velocity, walk_turn_speed)
-	if global_position.distance_to(walk_dest) <= nav_agent.target_desired_distance:
-		velocity = Vector3.ZERO
-		return
-	else:
-		nav_agent.set_target_position(walk_dest)
+	
+	# Movement stoppage when reaching walk_dest occurs in velocity_computed func
+	
+	nav_agent.set_target_position(walk_dest)
 	var next_position = nav_agent.get_next_path_position()
 	var new_velocity = (next_position - global_position).normalized() * walk_speed
 	
@@ -680,22 +683,27 @@ func leave_state_wait(delta):
 
 func switch_to_leave_descend():
 	leave_behav_state = LEAVE_STATE.DESCEND
-	# Teleport to random position above arena
-	var dest_dist := rng.randf_range(0, faraway_dest_radius)
-	var arena_center := Vector3.ZERO
-	var dest_dir := Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI))
-	global_position = dest_dist * dest_dir + arena_center + Vector3.UP * leave_height
-	# Descend until you're close to the ground
-	velocity = leave_descend_speed * Vector3.DOWN
+	# Show fake meshes and play descend anim (idle pose for now) as spider descends
+	fake_meshes.visible = true
+	fake_meshes_anim_player.play("idle")
 
 func leave_state_descend():
-	var ray_result = get_ray_result(global_position + 3 * Vector3.UP, global_position + 6 * Vector3.DOWN, [Globals.ARENA_COL_LAYER])
-	if ray_result:
-		# Teleport it to the ground
-		global_position = ray_result.position + 1.5 * ray_result.normal
-		# Wait before switching to aim to give proc anim meshes time to receive current global position
-		await get_tree().create_timer(2 * get_physics_process_delta_time()).timeout
-		aiming_at_target = true
+	fake_meshes.position += .75 * walk_speed * get_physics_process_delta_time() * Vector3.DOWN
+	# Once the fake spider is close to the main spider,
+	if fake_meshes.position.y < 1:
+		# Make main spider body visible and tangible
+		body_meshes.visible = true
+		collision_layer = actual_collision_layer
+		
+		# Enable mouth hitboxes
+		inner_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
+		outer_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
+		
+		# Make fake meshes invisible and inactive
+		fake_meshes.visible = false
+		fake_meshes.process_mode = Node.PROCESS_MODE_DISABLED
+		
+		# After descending, aim
 		switch_to_aim()
 
 # Get result of casting a ray from "from" to "to". Will detect collisions with any object whose col layer is in the col_layer_list (e.g. [Globals.ARENA_COL_LAYER])
