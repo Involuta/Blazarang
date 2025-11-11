@@ -626,9 +626,10 @@ func switch_to_leave_ascend():
 	inner_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	outer_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	
-	# Make fake meshes active and visible
+	# Make fake meshes active and visible and move them to main spider's pos (fake meshes are top level, so they don't inherit main spider's transform)
 	fake_meshes.process_mode = Node.PROCESS_MODE_INHERIT
 	fake_meshes.visible = true
+	fake_meshes.global_position = global_position
 	# Play ascend anim
 	fake_meshes_anim_player.play("ascend")
 	
@@ -645,7 +646,7 @@ func switch_to_leave_ascend():
 
 func leave_frame_ascend():
 	# Move fake spider meshes up at a constant rate. Since walk_speed is in m/s and this func is called every frame, convert to m/f
-	fake_meshes.position += 1.5 * walk_speed * get_physics_process_delta_time() * Vector3.UP
+	fake_meshes.global_position += 1.5 * walk_speed * get_physics_process_delta_time() * Vector3.UP
 	if fake_meshes.global_position.y > leave_height:
 		switch_to_leave_wait()
 
@@ -670,8 +671,6 @@ func switch_to_leave_wait():
 		arena.drop_egg_of_type(5)
 
 func leave_state_wait(delta):
-	rotate_y_to_vec(velocity, walk_turn_speed)
-	
 	# Movement stoppage when reaching walk_dest occurs in velocity_computed func
 	
 	nav_agent.set_target_position(walk_dest)
@@ -687,15 +686,25 @@ func leave_state_wait(delta):
 
 func switch_to_leave_descend():
 	leave_behav_state = LEAVE_STATE.DESCEND
-	# Show and activate fake meshes and play descend anim as spider descends
+	# Show and activate fake meshes, move fake meshes above main spider, and play descend anim as spider descends
 	fake_meshes.process_mode = Node.PROCESS_MODE_INHERIT
 	fake_meshes.visible = true
+	fake_meshes.global_position = global_position + leave_height * Vector3.UP
 	fake_meshes_anim_player.play("descend")
+	# Reset fake meshes rotation so rotate_object_local during descent works as intended
+	fake_meshes.rotation = Vector3.ZERO
 
 func leave_state_descend():
-	fake_meshes.position += .75 * walk_speed * get_physics_process_delta_time() * Vector3.DOWN
+	fake_meshes.global_position += .75 * walk_speed * get_physics_process_delta_time() * Vector3.DOWN
+	# Rotate fake meshes y towards target
+	var to_vec := global_position.direction_to(target.global_position)
+	var to_vec_2d = Vector2(to_vec.x, to_vec.z)
+	var body_mesh_basis_z_2d = Vector2(fake_meshes.transform.basis.z.x, fake_meshes.transform.basis.z.z)
+	var rotation_amt = body_mesh_basis_z_2d.angle_to(to_vec_2d)
+	fake_meshes.rotate_object_local(Vector3.UP, -rotation_amt * walk_turn_speed)
+	
 	# Once the fake spider is close to the main spider,
-	if fake_meshes.position.y < 1:
+	if fake_meshes.global_position.y - global_position.y < 1:
 		# Make main spider body visible and tangible
 		body_meshes.visible = true
 		collision_layer = actual_collision_layer
