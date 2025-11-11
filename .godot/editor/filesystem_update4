@@ -27,3 +27,4 @@ res://enemies/web_egg.tscn
 res://enemies/bigweb.tscn
 res://enemies/jumping_spider.gd
 res://enemies/jumping_spider_proc_anim_meshes.gd
+res://enemies/enemy_anims/jumping_spider_bite.res

@@ -109,6 +109,7 @@ var leave_behav_state := LEAVE_STATE.WALK
 var leave_point_chosen := "Left"
 var leave_height := 100.0 # global y level where spider leaves to
 @export var leave_wait_time := 4.0
+@export var leave_wait_time_var := 1.0 # leave_wait_time_remaining is set to leave_wait_time + rng within ±leave_wait_time_var
 var leave_wait_time_remaining := 4.0
 var leave_descend_speed := 40.0
 
@@ -628,6 +629,8 @@ func switch_to_leave_ascend():
 	# Make fake meshes active and visible
 	fake_meshes.process_mode = Node.PROCESS_MODE_INHERIT
 	fake_meshes.visible = true
+	# Play ascend anim
+	fake_meshes_anim_player.play("ascend")
 	
 	# Rotate fake spider towards ascend path
 	match(leave_point_chosen):
@@ -648,9 +651,10 @@ func leave_frame_ascend():
 
 func switch_to_leave_wait():
 	leave_behav_state = LEAVE_STATE.WAIT
-	leave_wait_time_remaining = leave_wait_time
+	leave_wait_time_remaining = leave_wait_time + rng.randf_range(-leave_wait_time_var, leave_wait_time_var)
 	
-	# Hide fake meshes since spider's far above the arena
+	# Hide and disable fake meshes since spider's far above the arena
+	fake_meshes.process_mode = Node.PROCESS_MODE_DISABLED
 	fake_meshes.visible = false
 	
 	# Set walk_dest to random position
@@ -663,7 +667,7 @@ func switch_to_leave_wait():
 	walk_dest = ray_result.position if ray_result else arena_center
 	for i in range(4):
 		await get_tree().create_timer(leave_wait_time / 2 / 4).timeout
-		arena.drop_egg_of_type(5, false) # false parameter ensures eggs are dropped near arena center
+		arena.drop_egg_of_type(5, false)
 
 func leave_state_wait(delta):
 	rotate_y_to_vec(velocity, walk_turn_speed)
@@ -683,9 +687,10 @@ func leave_state_wait(delta):
 
 func switch_to_leave_descend():
 	leave_behav_state = LEAVE_STATE.DESCEND
-	# Show fake meshes and play descend anim (idle pose for now) as spider descends
+	# Show and activate fake meshes and play descend anim as spider descends
+	fake_meshes.process_mode = Node.PROCESS_MODE_INHERIT
 	fake_meshes.visible = true
-	fake_meshes_anim_player.play("idle")
+	fake_meshes_anim_player.play("descend")
 
 func leave_state_descend():
 	fake_meshes.position += .75 * walk_speed * get_physics_process_delta_time() * Vector3.DOWN
