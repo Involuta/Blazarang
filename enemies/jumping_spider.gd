@@ -665,9 +665,9 @@ func switch_to_leave_wait():
 	var ray_result = get_ray_result(lateral_walk_dest + 50 * Vector3.UP, global_position + 100 * Vector3.DOWN, [Globals.ARENA_COL_LAYER])
 	# If the ray fails for some reason (it should never fail) just use arena_center
 	walk_dest = ray_result.position if ray_result else arena_center
-	for i in range(4):
+	for i in range(rng.randi_range(4, 8)):
 		await get_tree().create_timer(leave_wait_time / 2 / 4).timeout
-		arena.drop_egg_of_type(5, false)
+		arena.drop_egg_of_type(5)
 
 func leave_state_wait(delta):
 	rotate_y_to_vec(velocity, walk_turn_speed)

@@ -28,3 +28,4 @@ res://enemies/bigweb.tscn
 res://enemies/jumping_spider.gd
 res://enemies/jumping_spider_proc_anim_meshes.gd
 res://enemies/enemy_anims/jumping_spider_bite.res
+res://levels/mite_level/section_nodes/mite_level_main_arena.gd

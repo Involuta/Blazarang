@@ -28,7 +28,7 @@ var time_until_next_egg := 10.0
 var living_enemies := 0
 
 @export var can_drop := true # If this is false, no eggs spawn. Set to false after progressing past final wave listed in egg_waves OR set to false in testing
-@export var near_center_drop_max_radius := 40.0 # Max radius of egg drop near arena center. Used by jumping spider when dropping web eggs
+@export var near_target_drop_max_radius := 12.0 # Max radius of egg drop near target
 @export var starting_wave := 8 # FOR TESTING ONLY: manually set the first wave when the level starts
 var current_wave := 0
 var eggs_remaining_this_wave := 4 # Wave increases after this num becomes 0, then this num is set to new wave's egg num
@@ -181,15 +181,10 @@ func flatmite_alive():
 	# Used by jumping spider to check if ≥1 flatmite is alive
 	return true in flatmites_dict.values()
 
-func drop_egg_of_type(egg_type: int, on_target: bool = false):
-	var drop_pos : Vector3
-	if not on_target:
-		# Get random pt around center of arena
-		var drop_dist := rng.randf_range(0, near_center_drop_max_radius)
-		var arena_center := Vector3.ZERO
-		drop_pos = drop_dist * Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI)) + egg_drop_height * Vector3.UP
-	else:
-		drop_pos = Vector3(target.global_position.x, egg_drop_height, target.global_position.z)
+func drop_egg_of_type(egg_type: int):
+	# Get random pt around target
+	var drop_dist := rng.randf_range(0, near_target_drop_max_radius)
+	var drop_pos = drop_dist * Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI)) + egg_drop_height * Vector3.UP + target.global_position # This adds target's y pos to the drop pos, but since it's so high up, who cares
 	match egg_type:
 		1:
 			load_scene_at_pos(landmite_egg, drop_pos, true)
@@ -209,7 +204,9 @@ func drop_egg():
 	if not can_drop:
 		return
 	
-	var drop_pos := Vector3(target.global_position.x, egg_drop_height, target.global_position.z)
+	# Get random pt around target
+	var drop_dist := rng.randf_range(0, near_target_drop_max_radius)
+	var drop_pos = drop_dist * Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI)) + egg_drop_height * Vector3.UP + target.global_position # This adds target's y pos to the drop pos, but since it's so high up, who cares
 	var egg_chances = egg_waves[current_wave]["Chances"]
 	load_scene_at_pos(choose_egg(egg_chances), drop_pos, true)
 	eggs_remaining_this_wave -= 1
