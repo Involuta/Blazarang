@@ -7,8 +7,9 @@ var spitweb := preload("res://enemies/spitweb.tscn")
 @onready var hurtbox := $JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/EnemyHurtbox
 @onready var anim_player := $JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/AnimationPlayer
 @onready var anim_tree := $AnimationTree
-@onready var fake_meshes := $FakeMeshes
-@onready var fake_meshes_anim_player := $FakeMeshes/AnimationPlayer
+@onready var fake_meshes_pivot := $FakeMeshesPivot
+@onready var fake_meshes := $FakeMeshesPivot/FakeMeshes
+@onready var fake_meshes_anim_player := $FakeMeshesPivot/FakeMeshes/AnimationPlayer
 @onready var root := $/root/ViewControl
 var rng := RandomNumberGenerator.new()
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -137,8 +138,8 @@ func _ready():
 	Globals.cotu_normal_throw_rose.connect(ready_action_trigger)
 	hurtbox.hit_received.connect(receive_hit_from_hurtbox)
 	
-	# Disable fake meshes to save a little computation
-	fake_meshes.process_mode = Node.PROCESS_MODE_DISABLED
+	# Disable fake spider to save a little computation
+	fake_meshes_pivot.process_mode = Node.PROCESS_MODE_DISABLED
 	
 	switch_to_walk()
 
@@ -627,27 +628,29 @@ func switch_to_leave_ascend():
 	outer_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	
 	# Make fake meshes active and visible and move them to main spider's pos (fake meshes are top level, so they don't inherit main spider's transform)
-	fake_meshes.process_mode = Node.PROCESS_MODE_INHERIT
-	fake_meshes.visible = true
-	fake_meshes.global_position = global_position
+	fake_meshes_pivot.process_mode = Node.PROCESS_MODE_INHERIT
+	fake_meshes_pivot.visible = true
+	fake_meshes_pivot.global_position = global_position
 	# Play ascend anim
 	fake_meshes_anim_player.play("ascend")
 	
+	# Tilt fake meshes upward
+	fake_meshes.rotation = .5 * PI * Vector3.LEFT
 	# Rotate fake spider towards ascend path
 	match(leave_point_chosen):
 		"Left":
-			fake_meshes.rotation = .5 * PI * Vector3(-1, 1, 1)
+			fake_meshes_pivot.rotation = 0 * Vector3(0,1,0)
 		"Right":
-			fake_meshes.rotation = .5 * PI * Vector3(-1, -1, 1)
+			fake_meshes_pivot.rotation = PI * Vector3(0,1,0)
 		"Forward":
-			fake_meshes.rotation = .5 * PI * Vector3(-1, 0, 1)
+			fake_meshes_pivot.rotation = .5 * PI * Vector3(0,1,0)
 		"Back":
-			fake_meshes.rotation = .5 * PI * Vector3(-1, 2, 1)
+			fake_meshes_pivot.rotation = 1.5 * PI * Vector3(0,1,0)
 
 func leave_frame_ascend():
 	# Move fake spider meshes up at a constant rate. Since walk_speed is in m/s and this func is called every frame, convert to m/f
-	fake_meshes.global_position += 1.5 * walk_speed * get_physics_process_delta_time() * Vector3.UP
-	if fake_meshes.global_position.y > leave_height:
+	fake_meshes_pivot.global_position += 1.5 * walk_speed * get_physics_process_delta_time() * Vector3.UP
+	if fake_meshes_pivot.global_position.y > leave_height:
 		switch_to_leave_wait()
 
 func switch_to_leave_wait():
@@ -655,8 +658,8 @@ func switch_to_leave_wait():
 	leave_wait_time_remaining = leave_wait_time + rng.randf_range(-leave_wait_time_var, leave_wait_time_var)
 	
 	# Hide and disable fake meshes since spider's far above the arena
-	fake_meshes.process_mode = Node.PROCESS_MODE_DISABLED
-	fake_meshes.visible = false
+	fake_meshes_pivot.process_mode = Node.PROCESS_MODE_DISABLED
+	fake_meshes_pivot.visible = false
 	
 	# Set walk_dest to random position
 	var dest_dist := rng.randf_range(0, faraway_dest_radius)
@@ -687,24 +690,24 @@ func leave_state_wait(delta):
 func switch_to_leave_descend():
 	leave_behav_state = LEAVE_STATE.DESCEND
 	# Show and activate fake meshes, move fake meshes above main spider, and play descend anim as spider descends
-	fake_meshes.process_mode = Node.PROCESS_MODE_INHERIT
-	fake_meshes.visible = true
-	fake_meshes.global_position = global_position + leave_height * Vector3.UP
+	fake_meshes_pivot.process_mode = Node.PROCESS_MODE_INHERIT
+	fake_meshes_pivot.visible = true
+	fake_meshes_pivot.global_position = global_position + leave_height * Vector3.UP
 	fake_meshes_anim_player.play("descend")
-	# Reset fake meshes rotation so rotate_object_local during descent works as intended
-	fake_meshes.rotation = Vector3.ZERO
+	# Tilt fake meshes down
+	fake_meshes.rotation = .5 * PI * Vector3.RIGHT
 
 func leave_state_descend():
-	fake_meshes.global_position += .75 * walk_speed * get_physics_process_delta_time() * Vector3.DOWN
+	fake_meshes_pivot.global_position += .75 * walk_speed * get_physics_process_delta_time() * Vector3.DOWN
 	# Rotate fake meshes y towards target
 	var to_vec := global_position.direction_to(target.global_position)
 	var to_vec_2d = Vector2(to_vec.x, to_vec.z)
-	var body_mesh_basis_z_2d = Vector2(fake_meshes.transform.basis.z.x, fake_meshes.transform.basis.z.z)
+	var body_mesh_basis_z_2d = Vector2(fake_meshes_pivot.transform.basis.z.x, fake_meshes_pivot.transform.basis.z.z)
 	var rotation_amt = body_mesh_basis_z_2d.angle_to(to_vec_2d)
-	fake_meshes.rotate_object_local(Vector3.UP, -rotation_amt * walk_turn_speed)
+	fake_meshes_pivot.rotate_object_local(Vector3.UP, -rotation_amt * walk_turn_speed)
 	
 	# Once the fake spider is close to the main spider,
-	if fake_meshes.global_position.y - global_position.y < 1:
+	if fake_meshes_pivot.global_position.y - global_position.y < 1:
 		# Make main spider body visible and tangible
 		body_meshes.visible = true
 		collision_layer = actual_collision_layer
@@ -714,8 +717,8 @@ func leave_state_descend():
 		outer_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
 		
 		# Make fake meshes invisible and inactive
-		fake_meshes.visible = false
-		fake_meshes.process_mode = Node.PROCESS_MODE_DISABLED
+		fake_meshes_pivot.visible = false
+		fake_meshes_pivot.process_mode = Node.PROCESS_MODE_DISABLED
 		
 		# After descending, aim
 		switch_to_aim()
