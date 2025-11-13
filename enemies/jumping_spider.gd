@@ -670,7 +670,7 @@ func switch_to_leave_wait():
 	# If the ray fails for some reason (it should never fail) just use arena_center
 	walk_dest = ray_result.position if ray_result else arena_center
 	for i in range(rng.randi_range(4, 8)):
-		await get_tree().create_timer(leave_wait_time / 2 / 4).timeout
+		pass#await get_tree().create_timer(leave_wait_time / 2 / 4).timeout
 		arena.drop_egg_of_type(5)
 
 func leave_state_wait(delta):
