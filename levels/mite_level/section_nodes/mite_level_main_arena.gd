@@ -28,7 +28,7 @@ var time_until_next_egg := 10.0
 var living_enemies := 0
 
 @export var can_drop := true # If this is false, no eggs spawn. Set to false after progressing past final wave listed in egg_waves OR set to false in testing
-@export var near_target_drop_max_radius := 12.0 # Max radius of egg drop near target
+@export var near_target_drop_max_radius := 12.0 # Radius of egg drop near target
 @export var starting_wave := 8 # FOR TESTING ONLY: manually set the first wave when the level starts
 var current_wave := 0
 var eggs_remaining_this_wave := 4 # Wave increases after this num becomes 0, then this num is set to new wave's egg num
@@ -183,8 +183,7 @@ func flatmite_alive():
 
 func drop_egg_of_type(egg_type: int):
 	# Get random pt around target
-	var drop_dist := rng.randf_range(0, near_target_drop_max_radius)
-	var drop_pos = drop_dist * Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI)) + egg_drop_height * Vector3.UP + target.global_position # This adds target's y pos to the drop pos, but since it's so high up, who cares
+	var drop_pos = near_target_drop_max_radius * Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI)) + egg_drop_height * Vector3.UP + target.global_position # This adds target's y pos to the drop pos, but since it's so high up, who cares
 	match egg_type:
 		1:
 			load_scene_at_pos(landmite_egg, drop_pos, true)

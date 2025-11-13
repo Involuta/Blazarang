@@ -113,6 +113,7 @@ var leave_height := 100.0 # global y level where spider leaves to
 @export var leave_wait_time_var := 1.0 # leave_wait_time_remaining is set to leave_wait_time + rng within ±leave_wait_time_var
 var leave_wait_time_remaining := 4.0
 var leave_descend_speed := 40.0
+@export var descend_ground_contact_height := 30.0
 
 func _ready():
 	level = root.find_child("Level")
@@ -447,7 +448,10 @@ func switch_to_attack():
 			choose_far_dest(false, true)
 		else:
 			will_double_jump = false
-			walk_dest = target.global_position + (target.velocity * get_physics_process_delta_time())
+			# Set walk dest to ground pos beneath target + target's velocity. If ground pos not found, set walk dest to target pos + target vel
+			var target_dest = target.global_position + target.velocity * get_physics_process_delta_time()
+			var target_ground_ray_result = get_ray_result(target_dest + 15 * Vector3.UP, target_dest + 30 * Vector3.DOWN, [Globals.ARENA_COL_LAYER])
+			walk_dest = target_ground_ray_result.position if target_ground_ray_result else target_dest
 	# If you're not aiming at the target, walk_dest was set in an earlier state, likely in faraway_frame
 	# Subtract spider to jump dest vec slghtly so that spider doesn't aim directly for the jump dest, but slightly back from it
 	walk_dest -= .5 * global_position.direction_to(walk_dest)
@@ -722,6 +726,10 @@ func leave_state_descend():
 		
 		# After descending, aim
 		switch_to_aim()
+	# When the fake spider is almost close to the main spider,
+	elif fake_meshes_pivot.global_position.y - global_position.y < descend_ground_contact_height:
+		# Start ground contact anim
+		fake_meshes_anim_player.play("ground_contact")
 
 # Get result of casting a ray from "from" to "to". Will detect collisions with any object whose col layer is in the col_layer_list (e.g. [Globals.ARENA_COL_LAYER])
 func get_ray_result(from: Vector3, to: Vector3, col_layer_list: Array):
