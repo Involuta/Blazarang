@@ -102,10 +102,10 @@ enum LEAVE_STATE {
 }
 var leave_behav_state := LEAVE_STATE.WALK
 @export var leave_points := { # Points on arena where spider can climb up and out
-	"Right": Vector3(0,29,135),
-	"Left": Vector3(0,29,-135),
-	"Forward": Vector3(135,29,0),
-	"Back": Vector3(-135,29,0)
+	"Right": Vector3(0,36.5,132),
+	"Left": Vector3(0,36.5,-132),
+	"Forward": Vector3(132,36.5,0),
+	"Back": Vector3(-132,36.5,0)
 }
 var leave_point_chosen := "Left"
 var leave_height := 100.0 # global y level where spider leaves to
@@ -242,7 +242,7 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 				can_stop = true
 	# When attacking, don't stop so you can continuously chase. Since it's a short range walk, move smoothly
 	elif (behav_state == ATTACK and attack_jump_completed):
-		velocity = velocity.move_toward(safe_velocity, .9)
+		velocity = velocity.move_toward(safe_velocity, .93)
 	# When retreating, don't stop so you can escape danger quickly. In leave-wait state, you're invisible so no need to move abruptly
 	elif behav_state == RETREAT or (behav_state == LEAVE and leave_behav_state == LEAVE_STATE.WAIT):
 		velocity = Vector3.ZERO if global_position.distance_to(walk_dest) <= nav_agent.target_desired_distance else safe_velocity
@@ -448,13 +448,13 @@ func switch_to_attack():
 			choose_far_dest(false, true)
 		else:
 			will_double_jump = false
-			# Set walk dest to ground pos beneath target + target's velocity. If ground pos not found, set walk dest to target pos + target vel
-			var target_dest = target.global_position + target.velocity * get_physics_process_delta_time()
+			# Set walk dest to ground pos beneath target + target's velocity * attack_jump_duration. If ground pos not found, set walk dest to target pos + target vel * attack_jump_duration
+			var target_dest = target.global_position + target.velocity * attack_jump_duration
+			# Subtract spider to jump dest vec slghtly so that spider doesn't aim directly for the jump dest, but slightly back from it
+			target_dest -= 1 * global_position.direction_to(walk_dest)
 			var target_ground_ray_result = get_ray_result(target_dest + 15 * Vector3.UP, target_dest + 30 * Vector3.DOWN, [Globals.ARENA_COL_LAYER])
 			walk_dest = target_ground_ray_result.position if target_ground_ray_result else target_dest
 	# If you're not aiming at the target, walk_dest was set in an earlier state, likely in faraway_frame
-	# Subtract spider to jump dest vec slghtly so that spider doesn't aim directly for the jump dest, but slightly back from it
-	walk_dest -= .5 * global_position.direction_to(walk_dest)
 	# Why isn't a tween used? CharacterBody3D snaps to the ground during tween, and setting floor snap length to 0, not calling is_on_floor, and adding upward vel didn't stop floor snapping
 	velocity = .95 * (walk_dest - global_position) / attack_jump_duration
 	collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
@@ -509,7 +509,7 @@ func attack_frame(delta):
 		switch_to_retreat()
 	
 	# If you already landed and are still attacking, chase target
-	rotate_y_to_vec(target.global_position - global_position, .9)
+	rotate_y_to_vec(target.global_position - global_position, .93)
 	nav_agent.set_target_position(target.global_position)
 	var next_position = nav_agent.get_next_path_position()
 	var new_velocity = (next_position - global_position).normalized() * walk_speed
@@ -673,8 +673,9 @@ func switch_to_leave_wait():
 	var ray_result = get_ray_result(lateral_walk_dest + 50 * Vector3.UP, global_position + 100 * Vector3.DOWN, [Globals.ARENA_COL_LAYER])
 	# If the ray fails for some reason (it should never fail) just use arena_center
 	walk_dest = ray_result.position if ray_result else arena_center
-	for i in range(rng.randi_range(4, 8)):
-		pass#await get_tree().create_timer(leave_wait_time / 2 / 4).timeout
+	var egg_num := rng.randi_range(4, 8)
+	for i in range(egg_num):
+		await get_tree().create_timer(leave_wait_time / 2 / egg_num).timeout
 		arena.drop_egg_of_type(5)
 
 func leave_state_wait(delta):
@@ -711,7 +712,7 @@ func leave_state_descend():
 	fake_meshes_pivot.rotate_object_local(Vector3.UP, -rotation_amt * walk_turn_speed)
 	
 	# Once the fake spider is close to the main spider,
-	if fake_meshes_pivot.global_position.y - global_position.y < 1:
+	if fake_meshes_pivot.global_position.y - global_position.y < .8:
 		# Make main spider body visible and tangible
 		body_meshes.visible = true
 		collision_layer = actual_collision_layer
