@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-var spitweb := preload("res://enemies/spitweb.tscn")
+var silkthread_scene := preload("res://enemies/silkthread.tscn")
 @onready var nav_agent := $NavigationAgent3D
 @onready var body_meshes := $JumpingSpiderProcAnimMeshes
 @onready var physical_collider := $CollisionShape3D
@@ -9,6 +9,7 @@ var spitweb := preload("res://enemies/spitweb.tscn")
 @onready var anim_tree := $AnimationTree
 @onready var fake_meshes_pivot := $FakeMeshesPivot
 @onready var fake_meshes := $FakeMeshesPivot/FakeMeshes
+@onready var silkthread_mesh := $FakeMeshesPivot/SilkThreadMesh
 @onready var fake_meshes_anim_player := $FakeMeshesPivot/FakeMeshes/AnimationPlayer
 @onready var root := $/root/ViewControl
 var rng := RandomNumberGenerator.new()
@@ -108,7 +109,7 @@ var leave_behav_state := LEAVE_STATE.WALK
 	"Back": Vector3(-132,36.5,0)
 }
 var leave_point_chosen := "Left"
-var leave_height := 100.0 # global y level where spider leaves to
+@export var leave_height := 100.0 # global y level where spider leaves to
 @export var leave_wait_time := 4.0
 @export var leave_wait_time_var := 1.0 # leave_wait_time_remaining is set to leave_wait_time + rng within ±leave_wait_time_var
 var leave_wait_time_remaining := 4.0
@@ -141,6 +142,9 @@ func _ready():
 	
 	# Disable fake spider to save a little computation
 	fake_meshes_pivot.process_mode = Node.PROCESS_MODE_DISABLED
+	
+	# Make silk thread mesh invisible
+	silkthread_mesh.visible = false
 	
 	switch_to_walk()
 
@@ -673,9 +677,13 @@ func switch_to_leave_wait():
 	var ray_result = get_ray_result(lateral_walk_dest + 50 * Vector3.UP, global_position + 100 * Vector3.DOWN, [Globals.ARENA_COL_LAYER])
 	# If the ray fails for some reason (it should never fail) just use arena_center
 	walk_dest = ray_result.position if ray_result else arena_center
+	drop_eggs()
+
+# This is a separate func and not just part of switch_to_leave_wait so that spider doesn't have to wait for all eggs to drop before starting descend
+func drop_eggs():
 	var egg_num := rng.randi_range(4, 8)
 	for i in range(egg_num):
-		await get_tree().create_timer(leave_wait_time / 2 / egg_num).timeout
+		await get_tree().create_timer(leave_wait_time / egg_num).timeout
 		arena.drop_egg_of_type(5)
 
 func leave_state_wait(delta):
@@ -701,6 +709,8 @@ func switch_to_leave_descend():
 	fake_meshes_anim_player.play("descend")
 	# Tilt fake meshes down
 	fake_meshes.rotation = .5 * PI * Vector3.RIGHT
+	# Show silk thread mesh
+	silkthread_mesh.visible = true
 
 func leave_state_descend():
 	fake_meshes_pivot.global_position += .75 * walk_speed * get_physics_process_delta_time() * Vector3.DOWN
@@ -727,6 +737,15 @@ func leave_state_descend():
 		
 		# After descending, aim
 		switch_to_aim()
+		
+		# Instantiate silkthread scene (this is after switch_to_aim just in case, during the await, another descend frame runs and the if statement code is run again. By switching to aim before the await, the very next frame won't be a descend frame)
+		var silkthread_inst := silkthread_scene.instantiate()
+		level.add_child.call_deferred(silkthread_inst)
+		await silkthread_inst.tree_entered
+		silkthread_inst.global_position = silkthread_mesh.global_position
+		
+		# Make spider's silk thread invisible again
+		silkthread_mesh.visible = false
 	# When the fake spider is almost close to the main spider,
 	elif fake_meshes_pivot.global_position.y - global_position.y < descend_ground_contact_height:
 		# Start ground contact anim

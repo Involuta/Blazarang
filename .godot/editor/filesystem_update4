@@ -28,3 +28,5 @@ res://levels/mite_level/section_nodes/mite_level_main_arena.tscn
 res://enemies/web_egg.tscn
 res://enemies/bigweb.tscn
 res://levels/mite_level/section_nodes/mite_level_main_arena.gd
+res://glb_inherited_scenes/mite_giant_mouth.tscn
+res://enemies/silkthread.tscn

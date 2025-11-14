@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7c87e8akgjfw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ane1"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_a2wfd"]
+material = SubResource("StandardMaterial3D_6ane1")
+size = Vector3(0.1, 150, 0.1)
+
+[node name="SilkThread" type="Node3D"]
+
+[node name="SilkThreadMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 8, 2.08165e-12)
+mesh = SubResource("BoxMesh_a2wfd")
