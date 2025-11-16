@@ -14,9 +14,9 @@ var target : Node3D
 var aiming_at_target := true
 enum {
 	FOLLOW,
-	STRAFE,
 	BITE,
 	LEAP,
+	LEAVE,
 }
 var behav_state := FOLLOW
 var target_position := Vector3.ZERO # Position mite moves to; set to target.global_position when not strafing and set to a point beside and behind the target when strafing ("fwd" = to the target)
@@ -48,6 +48,8 @@ var time_until_forced_leap := 5.0 # Set to can_leap_window when reset
 @export var bite_cooldown_secs := .5
 var bite_cooldown_remaining := 2.5
 
+var jumping_spider_spawned := false # Set to true when jumping spider spawns. Used to know whether to leave arena
+
 @export var dp_impulse_limit := 5.0
 
 func _ready():
@@ -63,16 +65,19 @@ func _ready():
 	
 	bite_cooldown_remaining = bite_cooldown_secs
 
+func jumping_spider_just_spawned():
+	jumping_spider_spawned = true
+
 func _physics_process(delta):
 	match(behav_state):
 		FOLLOW: 
-			follow(delta)
-		STRAFE:
-			strafe(delta)
+			follow_frame(delta)
 		BITE:
 			pass
 		LEAP:
 			leap_frame()
+		LEAVE:
+			leave_frame()
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -115,7 +120,12 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 			velocity.x = follow_speed * move_dir.x
 			velocity.z = follow_speed * move_dir.z
 
-func follow(delta):
+func follow_frame(delta):
+	if jumping_spider_spawned:
+		target_position = Vector3(-132, 36.5, 0)
+		behav_state = LEAVE
+		return
+	
 	target_position = target.global_position
 	
 	rotate_y_to_vec(velocity, follow_turn_speed)
@@ -164,43 +174,6 @@ func close_to_roserang():
 	else:
 		return global_position.distance_to(roserang.global_position) < roserang_leap_proximity
 
-func strafe(delta):
-	var dir_to_target := global_position.direction_to(target.global_position)
-	var dir_to_target2D := Vector2(dir_to_target.x, dir_to_target.z)
-	var icon_vec := dir_to_target2D.orthogonal()
-	if strafing_left:
-		icon_vec *= -1
-	target_position = target.global_position + strafe_radius * Vector3(icon_vec.x, 0, icon_vec.y)
-	
-	rotate_y_to_vec(velocity, follow_turn_speed)
-	global_rotation.x = 0
-	global_rotation.z = 0
-	nav_agent.set_target_position(target_position)
-	var next_position = nav_agent.get_next_path_position()
-	var new_velocity = (next_position - global_position).normalized() * follow_speed
-	
-	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
-	nav_agent.velocity = new_velocity
-	
-	bite_cooldown_remaining -= delta
-	if bite_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < bite_proximity:
-		bite_cooldown_remaining = bite_cooldown_secs
-		behav_state = BITE
-		await bite()
-		behav_state = FOLLOW
-	
-	if can_leap:
-		time_until_forced_leap -= delta
-		if time_until_forced_leap <= 0 or close_to_roserang():
-			time_until_forced_leap = can_leap_window
-			behav_state = LEAP
-			start_leap()
-	else:
-		time_until_can_leap -= delta
-		if time_until_can_leap <= 0:
-			time_until_can_leap = rng.randf_range(min_leap_cooldown, max_leap_cooldown)
-			can_leap = true
-
 func bite():
 	stop_lateral_mvmt()
 	await get_tree().create_timer(.5).timeout
@@ -239,6 +212,23 @@ func can_see_target():
 		return false
 	else:
 		return true
+
+func leave_frame():
+	rotate_y_to_vec(velocity, follow_turn_speed)
+	nav_agent.set_target_position(target_position)
+	var next_position = nav_agent.get_next_path_position()
+	var new_velocity = (next_position - global_position).normalized() * follow_speed
+	
+	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
+	nav_agent.velocity = new_velocity
+	
+	# Scale anim playback speed based on movement speed
+	anim_tree.set("parameters/playback_speed", velocity.length() / follow_speed)
+	
+	if global_position.distance_to(target.global_position) < bite_proximity:
+		# No need to set time until forced leap/can leap bc this leap should kill the mite
+		behav_state = LEAP
+		start_leap()
 
 func death_effect():
 	"""

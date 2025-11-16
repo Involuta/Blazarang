@@ -82,12 +82,6 @@ var eggs_remaining_this_wave := 4 # Wave increases after this num becomes 0, the
 		"Var":1,
 		"Chances":[.67,.13,.1,.1],
 	},
-	{
-		"Duration":100.0,
-		"Num":100,
-		"Var":0,
-		"Chances":[.67,.13,.1,.1]
-	}
 ]
 
 @export var real_num_landmites := 40 # How many landmite scenes are loaded into the level
@@ -176,10 +170,6 @@ func _physics_process(delta):
 	if time_until_next_egg <= 0:
 		time_until_next_egg = time_btwn_eggs_this_wave
 		drop_egg()
-
-func flatmite_alive():
-	# Used by jumping spider to check if ≥1 flatmite is alive
-	return true in flatmites_dict.values()
 
 func drop_egg_of_type(egg_type: int):
 	# Get random pt around target
