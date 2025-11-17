@@ -34,6 +34,8 @@ var spit_cooldown_remaining := 2.5
 
 @export var poke_dist := 5.0 # Dist from harvestman's parent node necessary to start poking with the middle legs
 
+var evicted := false # Used to know whether to leave arena
+
 @export var dp_impulse_limit := 5.0
 
 func _ready():
@@ -44,6 +46,10 @@ func _ready():
 	nav_agent.target_desired_distance = spit_dist
 	
 	spit_cooldown_remaining = spit_cooldown_secs
+
+# Called by mite level main arena to clear arena for jumping spider
+func evict():
+	evicted = true
 
 func _physics_process(delta):
 	# Target position is used during both follow and spit states

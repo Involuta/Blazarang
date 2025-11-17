@@ -47,6 +47,8 @@ var in_leap_startup := false # Becomes true during leap startup; used to know wh
 @export var follow_turn_speed := .2
 @export var follow_random_dest_radius := 15.0 # Radius around target that mite target position can be within
 
+var evicted := false # Used to know whether to leave arena
+
 @export var dp_impulse_limit := 5.0
 
 func _ready():
@@ -61,6 +63,10 @@ func _ready():
 	
 	await get_tree().create_timer(1.0).timeout
 	set_new_target_random_dest()
+
+# Called by mite level main arena to clear arena for jumping spider
+func evict():
+	evicted = true
 
 # Called by flatmite meshes to know whether to do ground slope orientation & offset correction
 func is_leaping():

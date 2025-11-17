@@ -48,7 +48,7 @@ var time_until_forced_leap := 5.0 # Set to can_leap_window when reset
 @export var bite_cooldown_secs := .5
 var bite_cooldown_remaining := 2.5
 
-var jumping_spider_spawned := false # Set to true when jumping spider spawns. Used to know whether to leave arena
+var evicted := false # Used to know whether to leave arena
 
 @export var dp_impulse_limit := 5.0
 
@@ -65,8 +65,9 @@ func _ready():
 	
 	bite_cooldown_remaining = bite_cooldown_secs
 
-func jumping_spider_just_spawned():
-	jumping_spider_spawned = true
+# Called by mite level main arena to clear arena for jumping spider
+func evict():
+	evicted = true
 
 func _physics_process(delta):
 	match(behav_state):
@@ -121,8 +122,8 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 			velocity.z = follow_speed * move_dir.z
 
 func follow_frame(delta):
-	if jumping_spider_spawned:
-		target_position = Vector3(-132, 36.5, 0)
+	if evicted:
+		target_position = Vector3(-130, 36.5, 20)
 		behav_state = LEAVE
 		return
 	

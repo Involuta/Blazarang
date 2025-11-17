@@ -4,6 +4,7 @@ extends Node3D
 @onready var paramite_egg := preload("res://enemies/paramite_egg.tscn")
 @onready var flatmite_egg := preload("res://enemies/flatmite_egg.tscn")
 @onready var harvestman_egg := preload("res://enemies/harvestman_egg.tscn")
+@onready var jumping_spider := preload("res://enemies/jumping_spider.tscn")
 @onready var web_egg := preload("res://enemies/web_egg.tscn")
 @onready var landmite := preload("res://enemies/landmite.tscn")
 @onready var paramite := preload("res://enemies/paramite.tscn")
@@ -29,7 +30,7 @@ var living_enemies := 0
 
 @export var can_drop := true # If this is false, no eggs spawn. Set to false after progressing past final wave listed in egg_waves OR set to false in testing
 @export var near_target_drop_max_radius := 12.0 # Radius of egg drop near target
-@export var starting_wave := 8 # FOR TESTING ONLY: manually set the first wave when the level starts
+@export var starting_wave := 7 # FOR TESTING ONLY: manually set the first wave when the level starts
 var current_wave := 0
 var eggs_remaining_this_wave := 4 # Wave increases after this num becomes 0, then this num is set to new wave's egg num
 # Waves start counting from 0. Num of eggs spawned per wave = random_int(num-var, num+var). Egg spawned = random choice among "type" keys
@@ -93,10 +94,13 @@ var landmites_dict = {} # For all enemy dicts, key is instance name, value is bo
 var paramites_dict = {}
 var flatmites_dict = {}
 var harvestmen_dict = {}
+var enemy_dicts := [landmites_dict, paramites_dict, flatmites_dict, harvestmen_dict] # Dictionaries are passed by reference, not copy. If you need to apply the same code to all dicts, you can iterate through this list
+
+@export var time_btwn_final_enemy_and_eviction := 20.0 # Seconds between the final enemy egg being spawned and the mass eviction
+@export var time_btwn_eviction_and_js_spawn := 16.0 # Seconds between start of mass eviction and jumping spider spawning
 
 func _ready():
 	time_until_next_infest_switch_secs = max_time_until_next_infest_switch
-	time_until_next_egg = egg_waves[current_wave]["Duration"] / eggs_remaining_this_wave#max_time_until_next_egg
 	level = root.find_child("Level")
 	# Egg dropper targets Cotu's body, not icon
 	target = root.find_child("cotuCB")
@@ -110,6 +114,7 @@ func _ready():
 	var wave_egg_var = egg_waves[current_wave]["Var"]
 	eggs_remaining_this_wave = rng.randi_range(wave_egg_num-wave_egg_var, wave_egg_num+wave_egg_var)
 	time_btwn_eggs_this_wave = egg_waves[current_wave]["Duration"] / eggs_remaining_this_wave
+	time_until_next_egg = time_btwn_eggs_this_wave
 	
 	Globals.enemy_killed.connect(set_enemy_to_dead)
 	# Instantiate enemies
@@ -147,14 +152,9 @@ func load_scene_at_pos(scene, pos: Vector3, active: bool = false):
 
 func set_enemy_to_dead(enemy_name: String):
 	living_enemies -= 1
-	if enemy_name in landmites_dict.keys():
-		landmites_dict[enemy_name] = false
-	elif enemy_name in paramites_dict.keys():
-		paramites_dict[enemy_name] = false
-	elif enemy_name in flatmites_dict.keys():
-		flatmites_dict[enemy_name] = false
-	else:
-		harvestmen_dict[enemy_name] = false
+	for dict in enemy_dicts:
+		if enemy_name in dict.keys():
+			dict[enemy_name] = false
 
 func _physics_process(delta):
 	time_until_next_infest_switch_secs -= delta
@@ -165,6 +165,9 @@ func _physics_process(delta):
 		else:
 			arena_infest_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	
+	# If you can no longer drop eggs, don't tick down the egg timer or reset it
+	if not can_drop:
+		return
 	if living_enemies < max_living_enemies:
 		time_until_next_egg -= delta
 	if time_until_next_egg <= 0:
@@ -189,10 +192,8 @@ func drop_egg_of_type(egg_type: int):
 			# Web egg is default bc this func is used by jumping spider to spawn specifically web eggs. Any type can be inputted in this func just in case it's used in the future
 			load_scene_at_pos(web_egg, drop_pos, true)
 
+# Drop an egg and progress to the next wave if the last egg of the current wave was dropped
 func drop_egg():
-	if not can_drop:
-		return
-	
 	# Get random pt around target
 	var drop_dist := rng.randf_range(0, near_target_drop_max_radius)
 	var drop_pos = drop_dist * Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI)) + egg_drop_height * Vector3.UP + target.global_position # This adds target's y pos to the drop pos, but since it's so high up, who cares
@@ -203,9 +204,10 @@ func drop_egg():
 	if eggs_remaining_this_wave <= 0:
 		# Progress to next wave and set eggs remaining this wave and time btwn eggs this wave
 		current_wave += 1
-		# If there are no more waves left, stop dropping eggs
+		# If there are no more waves left, start jumping spider wave
 		if current_wave >= len(egg_waves):
-			can_drop = false
+			start_jumping_spider_wave()
+			return
 		print("Current wave: ", current_wave)
 		var wave_egg_num = egg_waves[current_wave]["Num"]
 		var wave_egg_var = egg_waves[current_wave]["Var"]
@@ -240,3 +242,23 @@ func spawn_enemy_from_dict(pos: Vector3, dict: Dictionary):
 			inst.set_active(true)
 			break
 	# If all enemies are alive, do nothing
+
+func start_jumping_spider_wave():
+	# Stop dropping eggs
+	can_drop = false
+	# Wait for final egg of the last wave to hit the ground AND let that final enemy and the remaining enemies attack for a bit
+	await get_tree().create_timer(time_btwn_final_enemy_and_eviction).timeout
+	# Evict enemies
+	evict_enemies()
+	# Wait for most enemies to leave
+	await get_tree().create_timer(time_btwn_eviction_and_js_spawn).timeout
+	# Spawn jumping spider
+	load_scene_at_pos(jumping_spider, 15 * Vector3.UP, true)
+
+# Call funcs in enemies so they leave
+func evict_enemies():
+	for dict in enemy_dicts:
+		for inst_name in dict.keys():
+			if dict[inst_name]: # Check if enemy is alive, i.e. value is true
+				var inst = level.find_child(inst_name, false, false)
+				inst.evict()

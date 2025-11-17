@@ -148,6 +148,10 @@ func _ready():
 	
 	switch_to_walk()
 
+# Used by mite level main arena when it instantiates jumping spider
+func set_active(_active: bool):
+	pass
+
 func _physics_process(delta):
 	if Input.is_action_just_pressed("Special"):
 		match(behav_state):

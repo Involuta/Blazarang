@@ -38,6 +38,8 @@ var ground_normal := Vector3.UP # Normal of the ground, determined by the avg no
 
 @export var skythread_withdraw_height := 200.0 # y pos skythread ascends to when connection is cut from paramite
 
+var evicted := false # Used to know whether to leave arena
+
 func _ready():
 	skythread.position = skythread_withdraw_height * Vector3.UP
 	skythread.visible = false
@@ -57,6 +59,10 @@ func _ready():
 	physical_collider.disabled = true
 	await get_tree().create_timer(.5).timeout
 	physical_collider.disabled = false
+
+# Called by mite level main arena to clear arena for jumping spider
+func evict():
+	evicted = true
 
 func switch_to_launch():
 	# Stop aligning body to the ground slope
