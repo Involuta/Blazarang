@@ -29,9 +29,11 @@ var behav_state := RETREAT
 
 var target_position := Vector3.ZERO # Position mite moves to; set to target.global_position when not strafing and set to a point beside and behind the target when strafing ("fwd" = to the target)
 
+var follow_initial_height := 16.0 # Set at start of follow state to lerp values from this height to the final fall height. This declaration value is just an estimate
 @export var follow_speed := 10.0
 @export var follow_turn_speed := .1
 @export var spit_chance := .01 # Chance that spitweb is shot in the current physics frame
+@export var follow_time_elapsed := 0.0 # Increases over the course of follow state. Used to lerp values (e.g. body meshes pos) from their initial to final states (lerp value is follow_time_elapsed / follow_duration)
 
 @export var retreat_dest := 30*Vector3.FORWARD
 @export var retreat_speed := 6.0
@@ -108,7 +110,7 @@ func _physics_process(delta):
 		LAUNCH: 
 			launch_frame(delta)
 		FOLLOW:
-			follow_frame()
+			follow_frame(delta)
 		FALL:
 			fall_frame(delta)
 		RETREAT:
@@ -117,6 +119,9 @@ func _physics_process(delta):
 			leave_frame()
 	
 	move_and_slide()
+	
+	if global_position.y < -100:
+		hurtbox.die()
 
 func set_active(active):
 	set_process(active)
@@ -178,21 +183,14 @@ func switch_to_follow():
 	# Set parent object global position to the ground by moving it down the height obtained from raycast
 	anim_tree.set("parameters/StateMachine/conditions/following", true)
 	
-	var height_from_ground = get_height_from_ground()
-	global_position.y -= height_from_ground
-	set_mesh_and_colliders_y_pos(height_from_ground)
+	follow_initial_height = get_height_from_ground()
+	global_position.y -= follow_initial_height
+	set_mesh_and_colliders_y_pos(follow_initial_height)
 	behav_state = FOLLOW
 	
-	var glide_descend_tween = get_tree().create_tween()
-	glide_descend_tween.set_parallel()
-	glide_descend_tween.tween_property(body_meshes, "position", Vector3(0,fall_height,-.5), follow_duration)
-	glide_descend_tween.tween_property(physical_collider, "position", Vector3(0,fall_height,0), follow_duration)
-	glide_descend_tween.tween_property(hurtbox, "position", Vector3(0,fall_height,0), follow_duration)
-	glide_descend_tween.tween_property(hitbox, "position", Vector3(0,fall_height-.6,-1), follow_duration)
-	await glide_descend_tween.finished
-	switch_to_fall()
+	follow_time_elapsed = 0
 
-func follow_frame():
+func follow_frame(delta):
 	# Paramites immediately fall to the ground if they’re in follow state
 	if leaving:
 		switch_to_fall()
@@ -217,6 +215,16 @@ func follow_frame():
 	# Spit web rarely
 	if rng.randf() < spit_chance:
 		shoot_spitweb()
+	
+	follow_time_elapsed += delta
+	if follow_time_elapsed >= follow_duration:
+		switch_to_fall()
+		return
+	var follow_progress := follow_time_elapsed / follow_duration
+	body_meshes.position = lerp(Vector3(0,follow_initial_height,-.5), Vector3(0,fall_height,-.5), follow_progress)
+	physical_collider.position = lerp(Vector3(0,follow_initial_height,0), Vector3(0,fall_height,0), follow_progress)
+	hurtbox.position = lerp(Vector3(0,follow_initial_height,0), Vector3(0,fall_height,0), follow_progress)
+	hitbox.position = lerp(Vector3(0,follow_initial_height-.6,-1), Vector3(0,fall_height-.6,-1), follow_progress)
 
 func shoot_spitweb():
 	var sw_inst = spitweb.instantiate()

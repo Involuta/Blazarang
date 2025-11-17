@@ -5,6 +5,7 @@ extends CharacterBody3D
 @onready var body_meshes := $ParamiteMeshes
 @onready var anim_player := $ParamiteMeshes/AnimationPlayer
 @onready var anim_tree := $AnimationTree
+@onready var hurtbox := $EnemyHurtbox # When mite falls off the map, it calls hurtbox's die func
 @onready var root := $/root/ViewControl
 var rng := RandomNumberGenerator.new()
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -91,7 +92,7 @@ func _physics_process(delta):
 	move_and_slide()
 	
 	if global_position.y < -100:
-		queue_free()
+		hurtbox.die()
 
 func set_active(active):
 	set_process(active)

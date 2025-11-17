@@ -5,7 +5,7 @@ var spitweb := preload("res://enemies/spitweb.tscn")
 @onready var nav_agent := $NavigationAgent3D
 @onready var body_meshes := $FlatmiteMeshes
 @onready var target_pos_mesh := $TargetPosMesh
-#@onready var anim_player := $FlatmiteMeshes/AnimationPlayer
+@onready var hurtbox := $EnemyHurtbox # When mite falls off the map, it calls hurtbox's die func
 @onready var anim_tree := $AnimationTree
 @onready var root := $/root/ViewControl
 var rng := RandomNumberGenerator.new()
@@ -92,6 +92,9 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	move_and_slide()
+	
+	if global_position.y < -100:
+		hurtbox.die()
 
 func set_active(active):
 	set_process(active)
