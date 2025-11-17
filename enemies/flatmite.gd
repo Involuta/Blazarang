@@ -17,6 +17,7 @@ var aiming_at_target := true
 enum {
 	FOLLOW,
 	LEAP,
+	LEAVE
 }
 var behav_state := FOLLOW
 @export var target_position_distance := 2.0 # Dist from target position mite must be within in order to consider that location visited
@@ -47,7 +48,13 @@ var in_leap_startup := false # Becomes true during leap startup; used to know wh
 @export var follow_turn_speed := .2
 @export var follow_random_dest_radius := 15.0 # Radius around target that mite target position can be within
 
-var evicted := false # Used to know whether to leave arena
+var leaving := false # Used to know whether to leave arena
+@export var leave_points := [ # Mite runs to the nearest point when evicted
+	Vector3(96,28,96),
+	Vector3(-96,28,96),
+	Vector3(96,28,-96),
+	Vector3(-96,28,-96),
+]
 
 @export var dp_impulse_limit := 5.0
 
@@ -66,7 +73,7 @@ func _ready():
 
 # Called by mite level main arena to clear arena for jumping spider
 func evict():
-	evicted = true
+	leaving = true
 
 # Called by flatmite meshes to know whether to do ground slope orientation & offset correction
 func is_leaping():
@@ -76,9 +83,11 @@ func _physics_process(delta):
 	target_pos_mesh.global_position = target_position
 	match(behav_state):
 		FOLLOW: 
-			follow(delta)
+			follow_frame(delta)
 		LEAP:
 			leap_frame(delta)
+		LEAVE:
+			leave_frame()
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -88,9 +97,11 @@ func set_active(active):
 	set_process(active)
 	set_physics_process(active)
 	if active:
+		visible = true
 		process_mode = Node.PROCESS_MODE_INHERIT
 		add_to_group("lockonables")
 	else:
+		visible = false
 		global_position.y = -50
 		process_mode = Node.PROCESS_MODE_DISABLED
 		remove_from_group("lockonables")
@@ -140,7 +151,17 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 			velocity.x = follow_speed * move_dir.x
 			velocity.z = follow_speed * move_dir.z
 
-func follow(delta):
+func follow_frame(delta):
+	if leaving:
+		# Get closest leave point to current global position
+		target_position = leave_points[0]
+		for i in range(1, len(leave_points)):
+			var current_leave_point = leave_points[i]
+			if global_position.distance_to(current_leave_point) < global_position.distance_to(target_position):
+				target_position = current_leave_point
+		behav_state = LEAVE
+		return
+	
 	if in_leap_startup:
 		target_position = target.global_position
 	
@@ -229,6 +250,35 @@ func can_see_target():
 		return false
 	else:
 		return true
+
+func leave_frame():
+	rotate_y_to_vec(velocity, follow_turn_speed)
+	if global_position.distance_to(target_position) < leap_length_threshold:
+		# When close to the target position, maintain velocity (do nothing)
+		behav_state = LEAP
+		start_leave_leap()
+		return
+	
+	nav_agent.set_target_position(target_position)
+	var next_position = nav_agent.get_next_path_position()
+	var new_velocity = (next_position - global_position).normalized() * follow_speed
+	
+	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
+	nav_agent.velocity = new_velocity
+	
+	# Scale anim playback speed based on movement speed
+	anim_tree.set("parameters/playback_speed", velocity.length() / follow_speed)
+
+func start_leave_leap():
+	var arena_center := Vector3.ZERO
+	var leap_dir = arena_center.direction_to(global_position)
+	
+	body_meshes.alignment_disabled = true
+	
+	velocity = (leap_short_lateral_speed + rng.randf_range(-.5,.5)) * leap_dir
+	velocity.y = 2 * leap_vertical_speed + rng.randf_range(-.5,.5)
+	
+	rotate_y_to_vec(velocity, 1)
 
 func death_effect():
 	"""
