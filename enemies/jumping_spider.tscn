@@ -131,7 +131,7 @@ bones/40/rotation = Quaternion(0.16239, 0.143093, 0.0162577, 0.976161)
 bones/41/rotation = Quaternion(0.322626, 0.272981, 0.00310291, 0.906303)
 
 [node name="VeryFrontLeftLeg_002" parent="JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.377518, 0.680306, -0.628218, -0.511518, -0.41231, -0.753886, -0.771896, 0.605952, 0.192334, 1.54416, 5.12547, 1.83888)
+transform = Transform3D(0.377518, 0.680306, -0.628218, -0.511518, -0.41231, -0.753885, -0.771896, 0.605952, 0.192334, 1.54416, 5.12547, 1.83888)
 
 [node name="VeryFrontLeftLeg_001" parent="JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/Armature/Skeleton3D" index="1"]
 transform = Transform3D(-0.0418775, 0.63876, -0.768266, 0.934052, -0.247932, -0.257053, -0.354673, -0.728365, -0.586252, 3.03653, -0.0676765, 3.55661)

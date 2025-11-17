@@ -31,7 +31,7 @@ enum {
 	RETREAT,
 	LEAVE
 }
-var behav_state := WALK
+var behav_state := LEAVE
 
 @export var base_path_desired_dist := 2.0 # Used in normal mvmt circumstances (anything except attack chase)
 @export var base_target_desired_dist := 10.0 # Used in normal mvmt circumstances (anything except attack chase)
@@ -101,7 +101,7 @@ enum LEAVE_STATE {
 	WAIT,
 	DESCEND
 }
-var leave_behav_state := LEAVE_STATE.WALK
+var leave_behav_state := LEAVE_STATE.DESCEND
 @export var leave_points := { # Points on arena where spider can climb up and out
 	"Right": Vector3(0,36.5,132),
 	"Left": Vector3(0,36.5,-132),
@@ -140,13 +140,9 @@ func _ready():
 	Globals.cotu_normal_throw_rose.connect(ready_action_trigger)
 	hurtbox.hit_received.connect(receive_hit_from_hurtbox)
 	
-	# Disable fake spider to save a little computation
-	fake_meshes_pivot.process_mode = Node.PROCESS_MODE_DISABLED
-	
-	# Make silk thread mesh invisible
-	silkthread_mesh.visible = false
-	
-	switch_to_walk()
+	# Spider starts in leave-descend state; make main spider invisible
+	body_meshes.visible = false
+	switch_to_leave_descend()
 
 # Used by mite level main arena when it instantiates jumping spider
 func set_active(_active: bool):

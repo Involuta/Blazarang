@@ -253,7 +253,7 @@ func start_jumping_spider_wave():
 	# Wait for most enemies to leave
 	await get_tree().create_timer(time_btwn_eviction_and_js_spawn).timeout
 	# Spawn jumping spider
-	load_scene_at_pos(jumping_spider, 15 * Vector3.UP, true)
+	load_scene_at_pos(jumping_spider, Vector3(0, 10, 40), true)
 
 # Call funcs in enemies so they leave
 func evict_enemies():
