@@ -48,7 +48,7 @@ advance_expression = "behav_state == FOLLOW"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tw57r"]
 switch_mode = 2
 advance_mode = 2
-advance_expression = "behav_state == RETREAT"
+advance_expression = "behav_state == RETREAT or behav_state == LEAVE"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qianl"]
 xfade_time = 0.1

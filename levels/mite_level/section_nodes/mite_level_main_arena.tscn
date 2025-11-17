@@ -93,9 +93,9 @@ egg_waves = [{
 "Num": 1,
 "Var": 0
 }, {
-"Chances": [2.08165e-12, 1.0, 2.08165e-12, 2.08165e-12],
+"Chances": [0.4, 0.4, 0.2, 2.08165e-12],
 "Duration": 4.0,
-"Num": 4,
+"Num": 16,
 "Var": 0
 }]
 time_btwn_final_enemy_and_eviction = 8.0

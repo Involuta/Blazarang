@@ -460,6 +460,8 @@ func switch_to_attack():
 	# If you're not aiming at the target, walk_dest was set in an earlier state, likely in faraway_frame
 	# Why isn't a tween used? CharacterBody3D snaps to the ground during tween, and setting floor snap length to 0, not calling is_on_floor, and adding upward vel didn't stop floor snapping
 	velocity = .95 * (walk_dest - global_position) / attack_jump_duration
+	# Turn towards velocity so spider isn't looking at you as it jumps
+	rotate_y_to_vec(velocity, 1)
 	collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
 	# When spider is chasing, it should try to get very close
 	nav_agent.path_desired_distance = 1.5 # Why is this not 1? Sometimes (usually near slope changes) the spider chased a stationary point, which meant it was trying to get to a path point but was too far
