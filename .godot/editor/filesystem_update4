@@ -33,3 +33,5 @@ res://enemies/harvestman.gd
 res://enemies/jumping_spider.gd
 res://enemies/flatmite.tscn
 res://enemies/paramite.tscn
+res://enemies/harvestman.tscn
+res://enemies/mite_explosion.tscn

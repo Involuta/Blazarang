@@ -17,6 +17,7 @@ var aiming_at_target := true
 enum {
 	FOLLOW,
 	SPIT,
+	LEAVE,
 }
 var behav_state := FOLLOW
 var target_position := Vector3.ZERO # Position mite moves to; set to target.global_position when not strafing and set to a point beside and behind the target when strafing ("fwd" = to the target)
@@ -34,7 +35,7 @@ var spit_cooldown_remaining := 2.5
 
 @export var poke_dist := 5.0 # Dist from harvestman's parent node necessary to start poking with the middle legs
 
-var evicted := false # Used to know whether to leave arena
+var leaving := false # Used to know whether to leave arena
 
 @export var dp_impulse_limit := 5.0
 
@@ -49,7 +50,7 @@ func _ready():
 
 # Called by mite level main arena to clear arena for jumping spider
 func evict():
-	evicted = true
+	leaving = true
 
 func _physics_process(delta):
 	# Target position is used during both follow and spit states
@@ -57,9 +58,11 @@ func _physics_process(delta):
 	
 	match(behav_state):
 		FOLLOW:
-			follow(delta)
+			follow_frame(delta)
 		SPIT:
 			stop_lateral_mvmt()
+		LEAVE:
+			pass
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -119,7 +122,10 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 			velocity.x = follow_speed * move_dir.x
 			velocity.z = follow_speed * move_dir.z
 
-func follow(delta):
+func follow_frame(delta):
+	if leaving:
+		switch_to_leave()
+		return
 	rotate_y_to_vec(target_position - global_position, follow_turn_speed)
 	if global_position.distance_to(target_position) <= nav_agent.target_desired_distance:
 		nav_agent.set_target_position(global_position)
@@ -136,7 +142,9 @@ func follow(delta):
 		spit_cooldown_remaining = spit_cooldown_secs
 		behav_state = SPIT
 		await spit()
-		behav_state = FOLLOW
+		# If you come out of spit state and leaving is true, don't return to follow state
+		if not leaving:
+			behav_state = FOLLOW
 
 func random_spread(s: float) -> Vector3:
 	return Vector3(rng.randf_range(-s, s), rng.randf_range(-s, s), rng.randf_range(-s, s))
@@ -167,19 +175,12 @@ func stop_lateral_mvmt():
 func stop_aiming_at_target():
 	aiming_at_target = false
 
-func can_see_target():
-	var space_state := get_world_3d().direct_space_state
-	var sight_dir := global_position.direction_to(target.global_position)
-	var query = PhysicsRayQueryParameters3D.create(global_position, global_position + nav_agent.neighbor_distance * sight_dir)
-	query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER, Globals.TARGET_COL_LAYER])
-	query.collide_with_areas = true
-	var result = space_state.intersect_ray(query)
-	if not result:
-		return true
-	if result.collider.collision_layer == Globals.ARENA_COL_LAYER:
-		return false
-	else:
-		return true
+func switch_to_leave():
+	behav_state = LEAVE
+	stop_lateral_mvmt()
+	# Do twitch anim and die
+	await get_tree().create_timer(1).timeout
+	hurtbox.die()
 
 func death_effect():
 	"""
@@ -188,11 +189,9 @@ func death_effect():
 	await me_inst.tree_entered
 	me_inst.global_position = global_position
 	"""
-	"""
 	for i in range(10):
 		var tm_inst = tiny_mite.instantiate()
 		level.add_child.call_deferred(tm_inst)
 		await tm_inst.tree_entered
-		tm_inst.global_position = global_position
-		tm_inst.apply_central_impulse(Vector3(rng.randf_range(-dp_impulse_limit, dp_impulse_limit), dp_impulse_limit*rng.randf(), rng.randf_range(-dp_impulse_limit, dp_impulse_limit)))
-	"""
+		tm_inst.global_position = mouth.global_position
+		tm_inst.velocity = Vector3(rng.randf_range(-dp_impulse_limit, dp_impulse_limit), dp_impulse_limit*rng.randf(), rng.randf_range(-dp_impulse_limit, dp_impulse_limit))
