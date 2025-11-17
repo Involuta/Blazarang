@@ -48,7 +48,13 @@ var time_until_forced_leap := 5.0 # Set to can_leap_window when reset
 @export var bite_cooldown_secs := .5
 var bite_cooldown_remaining := 2.5
 
-var evicted := false # Used to know whether to leave arena
+var leaving := false # Used to know whether to leave arena
+@export var leave_points := [ # Mite runs to the nearest point when evicted
+	Vector3(96,28,96),
+	Vector3(-96,28,96),
+	Vector3(96,28,-96),
+	Vector3(-96,28,-96),
+]
 
 @export var dp_impulse_limit := 5.0
 
@@ -67,7 +73,7 @@ func _ready():
 
 # Called by mite level main arena to clear arena for jumping spider
 func evict():
-	evicted = true
+	leaving = true
 
 func _physics_process(delta):
 	match(behav_state):
@@ -120,10 +126,20 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 			var move_dir = global_position.direction_to(target_position)
 			velocity.x = follow_speed * move_dir.x
 			velocity.z = follow_speed * move_dir.z
+	elif behav_state == LEAVE:
+		if global_position.distance_to(target_position) >= leap_length_threshold:
+			# This line accelerates the agent rather than setting its velocity to its desired velocity directly, preventing it from getting caught on corners
+			velocity = velocity.move_toward(safe_velocity, .25)
+		# When close to the target position, maintain velocity so that you fall off the arena (do nothing)
 
 func follow_frame(delta):
-	if evicted:
-		target_position = Vector3(-130, 36.5, 20)
+	if leaving:
+		# Get closest leave point to current global position
+		target_position = leave_points[0]
+		for i in range(1, len(leave_points)):
+			var current_leave_point = leave_points[i]
+			if global_position.distance_to(current_leave_point) < global_position.distance_to(target_position):
+				target_position = current_leave_point
 		behav_state = LEAVE
 		return
 	
@@ -216,6 +232,12 @@ func can_see_target():
 
 func leave_frame():
 	rotate_y_to_vec(velocity, follow_turn_speed)
+	if global_position.distance_to(target_position) < leap_length_threshold:
+		# When close to the target position, maintain velocity (do nothing)
+		behav_state = LEAP
+		start_leave_leap()
+		return
+	
 	nav_agent.set_target_position(target_position)
 	var next_position = nav_agent.get_next_path_position()
 	var new_velocity = (next_position - global_position).normalized() * follow_speed
@@ -225,11 +247,17 @@ func leave_frame():
 	
 	# Scale anim playback speed based on movement speed
 	anim_tree.set("parameters/playback_speed", velocity.length() / follow_speed)
+
+func start_leave_leap():
+	var arena_center := Vector3.ZERO
+	var leap_dir = arena_center.direction_to(global_position)
 	
-	if global_position.distance_to(target.global_position) < bite_proximity:
-		# No need to set time until forced leap/can leap bc this leap should kill the mite
-		behav_state = LEAP
-		start_leap()
+	body_meshes.alignment_disabled = true
+	
+	velocity = (leap_short_lateral_speed + rng.randf_range(-.5,.5)) * leap_dir
+	velocity.y = 2 * leap_vertical_speed + rng.randf_range(-.5,.5)
+	
+	rotate_y_to_vec(velocity, 1)
 
 func death_effect():
 	"""

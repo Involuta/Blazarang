@@ -127,7 +127,7 @@ process_material = SubResource("ParticleProcessMaterial_nwdal")
 draw_pass_1 = SubResource("SphereMesh_qq31a")
 
 [node name="TestBlock" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -1, 40)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96, 28, 96)
 mesh = SubResource("BoxMesh_ekn18")
 
 [node name="LeftVerticalPath" type="StaticBody3D" parent="."]

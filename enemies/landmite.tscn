@@ -53,7 +53,7 @@ advance_expression = "behav_state == LEAP"
 xfade_time = 0.1
 switch_mode = 2
 advance_mode = 2
-advance_expression = "behav_state == FOLLOW"
+advance_expression = "behav_state == FOLLOW or behav_state == LEAVE"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_84cpq"]
 xfade_time = 0.1
@@ -63,7 +63,7 @@ advance_expression = "behav_state == BITE"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x1kct"]
 switch_mode = 2
 advance_mode = 2
-advance_expression = "behav_state == FOLLOW"
+advance_expression = "behav_state == FOLLOW or behav_state == LEAVE"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_kybh1"]
 states/bite/node = SubResource("AnimationNodeAnimation_110vj")
@@ -76,7 +76,7 @@ transitions = ["Start", "run", SubResource("AnimationNodeStateMachineTransition_
 graph_offset = Vector2(-35.4825, -32.7525)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_14737"]
-graph_offset = Vector2(-37.44, 153.6)
+graph_offset = Vector2(-46.08, 137.28)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_kybh1")
 nodes/StateMachine/position = Vector2(80, 150)
 node_connections = [&"output", 0, &"StateMachine"]

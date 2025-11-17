@@ -140,8 +140,7 @@ func _ready():
 	Globals.cotu_normal_throw_rose.connect(ready_action_trigger)
 	hurtbox.hit_received.connect(receive_hit_from_hurtbox)
 	
-	# Spider starts in leave-descend state; make main spider invisible
-	body_meshes.visible = false
+	# Spider starts in leave-descend state
 	switch_to_leave_descend()
 
 # Used by mite level main arena when it instantiates jumping spider
