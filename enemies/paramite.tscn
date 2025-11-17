@@ -71,6 +71,7 @@ transitions = ["glide", "flip", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(3.01716e-05, 41.685)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_mxa20"]
+graph_offset = Vector2(-40.32, 116.16)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_v8kte")
 nodes/StateMachine/position = Vector2(100, 150)
 node_connections = [&"output", 0, &"StateMachine"]

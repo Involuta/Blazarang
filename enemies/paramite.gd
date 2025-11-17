@@ -19,6 +19,7 @@ enum {
 	FOLLOW,
 	FALL,
 	RETREAT,
+	LEAVE,
 }
 var behav_state := RETREAT
 
@@ -38,7 +39,14 @@ var ground_normal := Vector3.UP # Normal of the ground, determined by the avg no
 
 @export var skythread_withdraw_height := 200.0 # y pos skythread ascends to when connection is cut from paramite
 
-var evicted := false # Used to know whether to leave arena
+var leaving := false # Used to know whether to leave arena
+@export var leave_points := [ # Mite runs to the nearest point when evicted
+	Vector3(96,28,96),
+	Vector3(-96,28,96),
+	Vector3(96,28,-96),
+	Vector3(-96,28,-96),
+]
+@export var leave_leap_threshold := 12.0 # Dist from leave point when paramite leaps
 
 func _ready():
 	skythread.position = skythread_withdraw_height * Vector3.UP
@@ -62,7 +70,7 @@ func _ready():
 
 # Called by mite level main arena to clear arena for jumping spider
 func evict():
-	evicted = true
+	leaving = true
 
 func switch_to_launch():
 	# Stop aligning body to the ground slope
@@ -100,11 +108,13 @@ func _physics_process(delta):
 		LAUNCH: 
 			launch_frame(delta)
 		FOLLOW:
-			follow(delta)
+			follow_frame()
 		FALL:
 			fall_frame(delta)
 		RETREAT:
-			retreat(delta)
+			retreat_frame()
+		LEAVE:
+			leave_frame()
 	
 	move_and_slide()
 
@@ -146,9 +156,14 @@ func _on_navigation_agent_3d_target_reached():
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	if behav_state == FOLLOW or behav_state == RETREAT:
 		velocity = velocity.move_toward(safe_velocity, .25)
+	elif behav_state == LEAVE:
+		if global_position.distance_to(target_position) >= leave_leap_threshold:
+			# This line accelerates the agent rather than setting its velocity to its desired velocity directly, preventing it from getting caught on corners
+			velocity = velocity.move_toward(safe_velocity, .25)
+		# When close to the target position, maintain velocity so that you fall off the arena (do nothing)
 
 func launch_frame(delta):
-	if velocity.y <= 0:
+	if velocity.y <= 0 and not leaving:
 		switch_to_follow()
 	
 	if not is_on_floor():
@@ -177,7 +192,12 @@ func switch_to_follow():
 	await glide_descend_tween.finished
 	switch_to_fall()
 
-func follow(_delta):
+func follow_frame():
+	# Paramites immediately fall to the ground if they’re in follow state
+	if leaving:
+		switch_to_fall()
+		return
+	
 	target_position = target.global_position
 	
 	rotate_y_to_vec(target_position - global_position, follow_turn_speed)
@@ -235,7 +255,12 @@ func switch_to_retreat():
 	behav_state = RETREAT
 	target_position = retreat_dest
 
-func retreat(_delta):
+func retreat_frame():
+	# If leaving and retreating, switch to leave state
+	if leaving:
+		switch_to_leave()
+		return
+	
 	# Paramites randomly spin while retreating to make them look panicked and disoriented
 	rotate_y_to_vec_random_spins(velocity, follow_turn_speed)
 	if global_position.distance_to(target_position) <= nav_agent.target_desired_distance:
@@ -247,6 +272,44 @@ func retreat(_delta):
 	
 	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
 	nav_agent.velocity = new_velocity
+
+func switch_to_leave():
+	# Get closest leave point to current global position
+	target_position = leave_points[0]
+	for i in range(1, len(leave_points)):
+		var current_leave_point = leave_points[i]
+		if global_position.distance_to(current_leave_point) < global_position.distance_to(target_position):
+			target_position = current_leave_point
+	behav_state = LEAVE
+	
+func leave_frame():
+	rotate_y_to_vec(velocity, follow_turn_speed)
+	if global_position.distance_to(target_position) < leave_leap_threshold:
+		# When close to the target position, maintain velocity (do nothing)
+		behav_state = LAUNCH
+		start_leave_leap()
+		return
+	
+	nav_agent.set_target_position(target_position)
+	var next_position = nav_agent.get_next_path_position()
+	var new_velocity = (next_position - global_position).normalized() * follow_speed
+	
+	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
+	nav_agent.velocity = new_velocity
+	
+	# Scale anim playback speed based on movement speed
+	anim_tree.set("parameters/playback_speed", velocity.length() / follow_speed)
+
+func start_leave_leap():
+	var arena_center := Vector3.ZERO
+	var leap_dir = arena_center.direction_to(global_position)
+	
+	body_meshes.alignment_disabled = true
+	
+	velocity = (follow_speed + rng.randf_range(-.5,.5)) * leap_dir
+	velocity.y = launch_vert_speed + rng.randf_range(-.5,.5)
+	
+	rotate_y_to_vec(velocity, 1)
 
 func death_effect():
 	var sw_inst = spitweb.instantiate()
