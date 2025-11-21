@@ -15,11 +15,12 @@ var mouth : Node3D # Position from which mites are spat from
 var target : Node3D
 var aiming_at_target := true
 enum {
+	HATCH,
 	FOLLOW,
 	SPIT,
 	LEAVE,
 }
-var behav_state := FOLLOW
+var behav_state := HATCH
 var target_position := Vector3.ZERO # Position mite moves to; set to target.global_position when not strafing and set to a point beside and behind the target when strafing ("fwd" = to the target)
 
 var ground_normal := Vector3.UP # Normal of the ground, determined by the avg normal of the planes formed by points where feet hit the ground
@@ -57,6 +58,8 @@ func _physics_process(delta):
 	target_position = target.global_position
 	
 	match(behav_state):
+		HATCH:
+			pass
 		FOLLOW:
 			follow_frame(delta)
 		SPIT:
@@ -90,8 +93,13 @@ func set_active(active):
 			# Ensure that homing attacks hit the hurtbox and not the parent node, which stays on the ground. For any enemy whose hurtbox is at the same position as the parent node, this line can just be add_to_group("lockonables")
 			hurtbox.add_to_group("lockonables")
 		# Wait for raycasts to activate and/or positions to update before starting IK
-		await get_tree().create_timer(2*get_physics_process_delta_time()).timeout
+		#await get_tree().create_timer(2*get_physics_process_delta_time()).timeout
+		body_meshes.stop_ik()
+		behav_state = HATCH
+		# Wait for hatch anim to end
+		await get_tree().create_timer(.7).timeout
 		body_meshes.start_ik()
+		behav_state = FOLLOW
 	else:
 		body_meshes.stop_ik()
 		global_position.y = -50

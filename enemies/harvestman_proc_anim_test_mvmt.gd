@@ -22,7 +22,7 @@ extends Node3D
 @onready var parent := get_parent()
 var avg_normal := Vector3.UP # This is visible in the entire script so that the parent can see it; if it's Vector3.UP, the parent can leap
 
-var ik_stopped := true
+var ik_stopped := false
 
 func _ready():
 	#Engine.time_scale = .1
@@ -48,6 +48,7 @@ func _process(delta):
 	var target_basis = Globals.basis_from_normal(transform, avg_normal)
 	rotation = lerp(transform.basis.get_rotation_quaternion(), target_basis.get_rotation_quaternion(), run_speed * delta).get_euler()
 	
+	return
 	# Offset body from the ground
 	var avg_ik_pos = (lvf_ik.position + rvf_ik.position + rvb_ik.position + lvb_ik.position) / 4
 	var target_pos = avg_ik_pos + transform.basis.y * ground_offset
@@ -96,8 +97,3 @@ func start_ik():
 	rvf_sk.start()
 	rvb_sk.start()
 	lvb_sk.start()
-	
-	lvf_ik.step()
-	rvf_ik.step()
-	rvb_ik.step()
-	lvb_ik.step()
