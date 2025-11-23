@@ -24,6 +24,10 @@ var rose_switch_angle_offset_left := rose_eqn_petals*PI-PI/2 # rang switched fro
 # look_angle: right = -pi/2, fwd = 0, left = pi/2, back = ±pi
 # (-pi, pi/2) (-pi/2, 0) (0, -pi/2) (pi/2, -pi) (pi, -3pi/2)
 
+var can_ricochet := true # Set to false immediately after a ricochet to prevent rang from getting stuck in terrain by rapidly ricocheting inside of it
+var base_time_until_can_ricochet := 0.02 # After a ricochet, wait this amount of time (~1 physics frame) before you can ricochet again
+var remaining_time_until_can_ricochet := 0.0 # If there's still time before the ricochet time hits 0, decrease it by delta
+
 enum {
 	ROSE,
 	RICOCHET,
@@ -96,6 +100,10 @@ func _physics_process(delta):
 	mesh.rotate_y(rotate_speed)
 	current_loop_angle += abs(rose_eqn_angle_speed) * delta
 	invincible = current_loop_angle < PI/(5*rose_eqn_petals)
+	if not can_ricochet:
+		remaining_time_until_can_ricochet -= delta
+		if remaining_time_until_can_ricochet <= 0:
+			can_ricochet = true
 	match(mvmt_state):
 		ROSE:
 			var new_pos = rose(delta)
@@ -163,6 +171,8 @@ func switch_to_rose():
 
 func ricochet(collision):
 	velocity = velocity - 2 * velocity.project(collision.get_normal())
+	can_ricochet = false
+	remaining_time_until_can_ricochet = base_time_until_can_ricochet
 
 func rose_handle_collision(collision, vel_vec, delta):
 	if collision and (Globals.compare_layers(collision.get_collider().collision_layer, Globals.ARENA_COL_LAYER) or Globals.compare_layers(collision.get_collider().collision_layer, Globals.THICK_ENEMY_COL_LAYER)):
@@ -177,7 +187,7 @@ func rose_handle_collision(collision, vel_vec, delta):
 	return false
 
 func ricochet_handle_collision(collision):
-	if collision and (Globals.compare_layers(collision.get_collider().collision_layer, Globals.ARENA_COL_LAYER) or Globals.compare_layers(collision.get_collider().collision_layer, Globals.THICK_ENEMY_COL_LAYER)):
+	if can_ricochet and collision and (Globals.compare_layers(collision.get_collider().collision_layer, Globals.ARENA_COL_LAYER) or Globals.compare_layers(collision.get_collider().collision_layer, Globals.THICK_ENEMY_COL_LAYER)):
 		ricochet(collision)
 		emit_ricochet_particles(collision.get_normal())
 		ricochet_sfx.play()
