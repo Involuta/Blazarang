@@ -132,6 +132,13 @@ func _ready():
 		harvestmen_dict[inst.name] = false
 	
 	egg_list = [landmite_egg, paramite_egg, flatmite_egg, harvestman_egg]
+	
+	# Make mite fog thicken over time
+	var total_duration := 0
+	for wave in egg_waves:
+		total_duration += wave["Duration"]
+	var fog_tween := get_tree().create_tween()
+	fog_tween.tween_property($MiteFog.material, "density", .018, total_duration)
 
 func choose_egg(egg_chances: Array):
 	var choice := rng.randf()

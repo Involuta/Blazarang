@@ -8,6 +8,10 @@
 [sub_resource type="Environment" id="Environment_lon07"]
 ambient_light_source = 1
 glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_anisotropy = -3.46945e-18
+volumetric_fog_length = 44.0
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_ppvaj")

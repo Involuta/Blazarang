@@ -1,4 +1,4 @@
-res://enemies/jumping_spider.tscn
+res://levels/mite_level/section_nodes/mite_fog.tscn
 res://enemies/enemy_hurtbox.gd
 res://glb_inherited_scenes/mite_hills_ground.gdshader
 res://glb_inherited_scenes/outline.gdshader
@@ -22,7 +22,12 @@ res://ui/glow.gdshader
 res://ui/glitch.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
 res://general_scripts/skygradient.gdshader
-res://enemies/harvestman.gd
 res://levels/mite_level/section_nodes/mite_level_main_arena.tscn
-res://enemies/harvestman.tscn
-res://enemies/harvestman_proc_anim_test_mvmt.gd
+res://levels/mite_level/mite_level.tscn
+res://enemies/flatmite.tscn
+res://general_scripts/align_body_to_slope.gd
+res://glb_inherited_scenes/mite_giant_mouth.tscn
+res://enemies/jumping_spider.tscn
+res://enemies/paramite.tscn
+res://enemies/paramite.gd
+res://levels/mite_level/section_nodes/mite_level_main_arena.gd

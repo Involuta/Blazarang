@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://bnylrq5nmpcv"]
+[gd_scene load_steps=16 format=3 uid="uid://bnylrq5nmpcv"]
 
 [ext_resource type="Script" path="res://levels/mite_level/section_nodes/mite_level_main_arena.gd" id="1_tjf6h"]
 [ext_resource type="PackedScene" uid="uid://0y87606fdbah" path="res://glb_inherited_scenes/mite_bowl.tscn" id="2_0jglk"]
+[ext_resource type="PackedScene" uid="uid://by2rmryeqeq4o" path="res://levels/mite_level/section_nodes/mite_fog.tscn" id="5_5xsjg"]
 [ext_resource type="PackedScene" uid="uid://bd8mwm20l3psu" path="res://glb_inherited_scenes/mite_giant_mouth.tscn" id="5_h7bbf"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="7_cwqry"]
 
@@ -57,6 +58,7 @@ size = Vector3(1, 100, 15)
 
 [node name="MiteLevelMainArena" type="Node3D"]
 script = ExtResource("1_tjf6h")
+starting_wave = 0
 egg_waves = [{
 "Chances": [1, 0, 0, 0],
 "Duration": 20.0,
@@ -184,3 +186,6 @@ mesh = SubResource("BoxMesh_hpi0p")
 
 [node name="MiteGiantMouth" parent="." instance=ExtResource("5_h7bbf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -12, 2.08165e-12)
+
+[node name="MiteFog" parent="." instance=ExtResource("5_5xsjg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)

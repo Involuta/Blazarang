@@ -21,7 +21,7 @@ albedo_color = Color(0.384314, 0.384314, 0.384314, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_a4ni0"]
 material = SubResource("StandardMaterial3D_ldduu")
-size = Vector3(0.05, 100, 0.05)
+size = Vector3(0.05, 140, 0.05)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ftkg5"]
 animation = &"flip"
