@@ -1,11 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://by2rmryeqeq4o"]
+[gd_scene load_steps=3 format=3 uid="uid://by2rmryeqeq4o"]
 
-[sub_resource type="FogMaterial" id="FogMaterial_hh8hi"]
-density = 0.012
-albedo = Color(1, 0.329412, 0.266667, 1)
-height_falloff = 0.001
+[ext_resource type="Shader" path="res://shaders/smoke.gdshader" id="1_a66b6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5v1r2"]
+shader = ExtResource("1_a66b6")
+shader_parameter/density = 0.0159998
+shader_parameter/albedo = Color(1, 0.329412, 0.262745, 1)
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/height_falloff = 0.0
+shader_parameter/edge_fade = 0.1
 
 [node name="MiteFog" type="FogVolume"]
 size = Vector3(200, 30, 200)
 shape = 0
-material = SubResource("FogMaterial_hh8hi")
+material = SubResource("ShaderMaterial_5v1r2")

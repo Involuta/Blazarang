@@ -17,6 +17,8 @@ var rng := RandomNumberGenerator.new()
 var level : Node3D
 var target : Node3D
 
+@onready var mite_fog := $MiteFog
+
 @onready var arena_infest_hitbox := $MiteCloudPivot/EnemyHitbox
 @export var max_time_until_next_infest_switch := 5.0 # Should be less than half the time it takes for debuff to disappear
 var time_until_next_infest_switch_secs := 5.0
@@ -137,8 +139,15 @@ func _ready():
 	var total_duration := 0
 	for wave in egg_waves:
 		total_duration += wave["Duration"]
+	var mite_fog_material = mite_fog.material
+	var start_density = mite_fog_material.get_shader_parameter("density")
 	var fog_tween := get_tree().create_tween()
-	fog_tween.tween_property($MiteFog.material, "density", .018, total_duration)
+	fog_tween.tween_method(
+		func(v): mite_fog_material.set_shader_parameter("density", v),
+		start_density,
+		0.024,
+		total_duration
+	)
 
 func choose_egg(egg_chances: Array):
 	var choice := rng.randf()
