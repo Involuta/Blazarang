@@ -58,6 +58,7 @@ size = Vector3(1, 100, 15)
 
 [node name="MiteLevelMainArena" type="Node3D"]
 script = ExtResource("1_tjf6h")
+egg_drop_height = 160.0
 starting_wave = 0
 egg_waves = [{
 "Chances": [1, 0, 0, 0],
@@ -67,37 +68,37 @@ egg_waves = [{
 }, {
 "Chances": [0.83, 0.17, 0, 0],
 "Duration": 20.0,
-"Num": 22,
-"Var": 2
-}, {
-"Chances": [0, 0, 1, 0],
-"Duration": 20.0,
-"Num": 1,
-"Var": 0
-}, {
-"Chances": [0.83, 0.17, 0, 0],
-"Duration": 20.0,
 "Num": 24,
 "Var": 2
 }, {
-"Chances": [0, 0, 0, 1],
-"Duration": 20.0,
+"Chances": [0, 0, 1, 0],
+"Duration": 8.0,
 "Num": 1,
 "Var": 0
 }, {
 "Chances": [0.83, 0.17, 0, 0],
 "Duration": 16.0,
-"Num": 8,
-"Var": 1
+"Num": 24,
+"Var": 2
 }, {
 "Chances": [0, 0, 0, 1],
-"Duration": 20.0,
+"Duration": 4.0,
 "Num": 1,
 "Var": 0
 }, {
-"Chances": [2.08165e-12, 2.08165e-12, 2.08165e-12, 1.0],
+"Chances": [0.83, 0.17, 0, 0],
+"Duration": 8.0,
+"Num": 16,
+"Var": 1
+}, {
+"Chances": [0, 0, 0, 1],
 "Duration": 4.0,
-"Num": 3,
+"Num": 1,
+"Var": 0
+}, {
+"Chances": [0.67, 0.13, 0.1, 0.1],
+"Duration": 24.0,
+"Num": 40,
 "Var": 0
 }]
 time_btwn_final_enemy_and_eviction = 8.0

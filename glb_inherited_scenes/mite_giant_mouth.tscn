@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bd8mwm20l3psu"]
+[gd_scene load_steps=7 format=3 uid="uid://bd8mwm20l3psu"]
 
 [ext_resource type="PackedScene" uid="uid://d2r150xvi4alw" path="res://glb_imports/MiteGiantMouth.glb" id="1_x0us6"]
 
@@ -11,7 +11,17 @@ albedo_color = Color(0.0392157, 0, 0, 1)
 metallic = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fbjym"]
+transparency = 4
 albedo_color = Color(0.12549, 0, 0, 1)
+metallic_specular = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3a2wl"]
+transparency = 4
+albedo_color = Color(0.54902, 0, 0, 1)
+metallic_specular = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_anmyo"]
+albedo_color = Color(0.823529, 0, 0, 1)
 
 [node name="MiteGiantMouth" instance=ExtResource("1_x0us6")]
 
@@ -20,3 +30,2891 @@ cast_shadow = 0
 surface_material_override/0 = SubResource("StandardMaterial3D_ywtdg")
 surface_material_override/1 = SubResource("StandardMaterial3D_hkyl6")
 surface_material_override/2 = SubResource("StandardMaterial3D_fbjym")
+
+[node name="EggPlane" parent="." index="1"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_3a2wl")
+
+[node name="Egg" parent="EggPlane" index="0"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg2" parent="EggPlane" index="1"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg3" parent="EggPlane" index="2"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg4" parent="EggPlane" index="3"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg5" parent="EggPlane" index="4"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg6" parent="EggPlane" index="5"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg7" parent="EggPlane" index="6"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg8" parent="EggPlane" index="7"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg9" parent="EggPlane" index="8"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg10" parent="EggPlane" index="9"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg11" parent="EggPlane" index="10"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg12" parent="EggPlane" index="11"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg13" parent="EggPlane" index="12"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg14" parent="EggPlane" index="13"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg15" parent="EggPlane" index="14"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg16" parent="EggPlane" index="15"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg17" parent="EggPlane" index="16"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg18" parent="EggPlane" index="17"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg19" parent="EggPlane" index="18"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg20" parent="EggPlane" index="19"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg21" parent="EggPlane" index="20"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg22" parent="EggPlane" index="21"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg23" parent="EggPlane" index="22"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg24" parent="EggPlane" index="23"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg25" parent="EggPlane" index="24"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg26" parent="EggPlane" index="25"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg27" parent="EggPlane" index="26"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg28" parent="EggPlane" index="27"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg29" parent="EggPlane" index="28"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg30" parent="EggPlane" index="29"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg31" parent="EggPlane" index="30"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg32" parent="EggPlane" index="31"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg33" parent="EggPlane" index="32"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg34" parent="EggPlane" index="33"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg35" parent="EggPlane" index="34"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg36" parent="EggPlane" index="35"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg37" parent="EggPlane" index="36"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg38" parent="EggPlane" index="37"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg39" parent="EggPlane" index="38"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg40" parent="EggPlane" index="39"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg41" parent="EggPlane" index="40"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg42" parent="EggPlane" index="41"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg43" parent="EggPlane" index="42"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg44" parent="EggPlane" index="43"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg45" parent="EggPlane" index="44"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg46" parent="EggPlane" index="45"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg47" parent="EggPlane" index="46"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg48" parent="EggPlane" index="47"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg49" parent="EggPlane" index="48"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg50" parent="EggPlane" index="49"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg51" parent="EggPlane" index="50"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg52" parent="EggPlane" index="51"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg53" parent="EggPlane" index="52"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg54" parent="EggPlane" index="53"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg55" parent="EggPlane" index="54"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg56" parent="EggPlane" index="55"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg57" parent="EggPlane" index="56"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg58" parent="EggPlane" index="57"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg59" parent="EggPlane" index="58"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg60" parent="EggPlane" index="59"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg61" parent="EggPlane" index="60"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg62" parent="EggPlane" index="61"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg63" parent="EggPlane" index="62"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg64" parent="EggPlane" index="63"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg65" parent="EggPlane" index="64"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg66" parent="EggPlane" index="65"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg67" parent="EggPlane" index="66"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg68" parent="EggPlane" index="67"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg69" parent="EggPlane" index="68"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg70" parent="EggPlane" index="69"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg71" parent="EggPlane" index="70"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg72" parent="EggPlane" index="71"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg73" parent="EggPlane" index="72"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg74" parent="EggPlane" index="73"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg75" parent="EggPlane" index="74"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg76" parent="EggPlane" index="75"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg77" parent="EggPlane" index="76"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg78" parent="EggPlane" index="77"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg79" parent="EggPlane" index="78"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg80" parent="EggPlane" index="79"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg81" parent="EggPlane" index="80"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg82" parent="EggPlane" index="81"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg83" parent="EggPlane" index="82"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg84" parent="EggPlane" index="83"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg85" parent="EggPlane" index="84"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg86" parent="EggPlane" index="85"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg87" parent="EggPlane" index="86"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg88" parent="EggPlane" index="87"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg89" parent="EggPlane" index="88"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg90" parent="EggPlane" index="89"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg91" parent="EggPlane" index="90"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg92" parent="EggPlane" index="91"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg93" parent="EggPlane" index="92"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg94" parent="EggPlane" index="93"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg95" parent="EggPlane" index="94"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg96" parent="EggPlane" index="95"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg97" parent="EggPlane" index="96"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg98" parent="EggPlane" index="97"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg99" parent="EggPlane" index="98"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg100" parent="EggPlane" index="99"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg101" parent="EggPlane" index="100"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg102" parent="EggPlane" index="101"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg103" parent="EggPlane" index="102"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg104" parent="EggPlane" index="103"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg105" parent="EggPlane" index="104"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg106" parent="EggPlane" index="105"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg107" parent="EggPlane" index="106"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg108" parent="EggPlane" index="107"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg109" parent="EggPlane" index="108"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg110" parent="EggPlane" index="109"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg111" parent="EggPlane" index="110"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg112" parent="EggPlane" index="111"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg113" parent="EggPlane" index="112"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg114" parent="EggPlane" index="113"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg115" parent="EggPlane" index="114"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg116" parent="EggPlane" index="115"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg117" parent="EggPlane" index="116"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg118" parent="EggPlane" index="117"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg119" parent="EggPlane" index="118"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg120" parent="EggPlane" index="119"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg121" parent="EggPlane" index="120"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg122" parent="EggPlane" index="121"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg123" parent="EggPlane" index="122"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg124" parent="EggPlane" index="123"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg125" parent="EggPlane" index="124"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg126" parent="EggPlane" index="125"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg127" parent="EggPlane" index="126"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg128" parent="EggPlane" index="127"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg129" parent="EggPlane" index="128"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg130" parent="EggPlane" index="129"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg131" parent="EggPlane" index="130"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg132" parent="EggPlane" index="131"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg133" parent="EggPlane" index="132"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg134" parent="EggPlane" index="133"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg135" parent="EggPlane" index="134"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg136" parent="EggPlane" index="135"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg137" parent="EggPlane" index="136"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg138" parent="EggPlane" index="137"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg139" parent="EggPlane" index="138"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg140" parent="EggPlane" index="139"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg141" parent="EggPlane" index="140"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg142" parent="EggPlane" index="141"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg143" parent="EggPlane" index="142"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg144" parent="EggPlane" index="143"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg145" parent="EggPlane" index="144"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg146" parent="EggPlane" index="145"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg147" parent="EggPlane" index="146"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg148" parent="EggPlane" index="147"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg149" parent="EggPlane" index="148"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg150" parent="EggPlane" index="149"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg151" parent="EggPlane" index="150"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg152" parent="EggPlane" index="151"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg153" parent="EggPlane" index="152"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg154" parent="EggPlane" index="153"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg155" parent="EggPlane" index="154"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg156" parent="EggPlane" index="155"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg157" parent="EggPlane" index="156"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg158" parent="EggPlane" index="157"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg159" parent="EggPlane" index="158"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg160" parent="EggPlane" index="159"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg161" parent="EggPlane" index="160"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg162" parent="EggPlane" index="161"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg163" parent="EggPlane" index="162"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg164" parent="EggPlane" index="163"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg165" parent="EggPlane" index="164"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg166" parent="EggPlane" index="165"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg167" parent="EggPlane" index="166"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg168" parent="EggPlane" index="167"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg169" parent="EggPlane" index="168"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg170" parent="EggPlane" index="169"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg171" parent="EggPlane" index="170"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg172" parent="EggPlane" index="171"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg173" parent="EggPlane" index="172"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg174" parent="EggPlane" index="173"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg175" parent="EggPlane" index="174"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg176" parent="EggPlane" index="175"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg177" parent="EggPlane" index="176"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg178" parent="EggPlane" index="177"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg179" parent="EggPlane" index="178"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg180" parent="EggPlane" index="179"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg181" parent="EggPlane" index="180"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg182" parent="EggPlane" index="181"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg183" parent="EggPlane" index="182"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg184" parent="EggPlane" index="183"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg185" parent="EggPlane" index="184"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg186" parent="EggPlane" index="185"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg187" parent="EggPlane" index="186"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg188" parent="EggPlane" index="187"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg189" parent="EggPlane" index="188"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg190" parent="EggPlane" index="189"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg191" parent="EggPlane" index="190"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg192" parent="EggPlane" index="191"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg193" parent="EggPlane" index="192"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg194" parent="EggPlane" index="193"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg195" parent="EggPlane" index="194"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg196" parent="EggPlane" index="195"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg197" parent="EggPlane" index="196"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg198" parent="EggPlane" index="197"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg199" parent="EggPlane" index="198"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg200" parent="EggPlane" index="199"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg201" parent="EggPlane" index="200"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg202" parent="EggPlane" index="201"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg203" parent="EggPlane" index="202"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg204" parent="EggPlane" index="203"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg205" parent="EggPlane" index="204"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg206" parent="EggPlane" index="205"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg207" parent="EggPlane" index="206"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg208" parent="EggPlane" index="207"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg209" parent="EggPlane" index="208"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg210" parent="EggPlane" index="209"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg211" parent="EggPlane" index="210"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg212" parent="EggPlane" index="211"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg213" parent="EggPlane" index="212"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg214" parent="EggPlane" index="213"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg215" parent="EggPlane" index="214"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg216" parent="EggPlane" index="215"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg217" parent="EggPlane" index="216"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg218" parent="EggPlane" index="217"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg219" parent="EggPlane" index="218"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg220" parent="EggPlane" index="219"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg221" parent="EggPlane" index="220"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg222" parent="EggPlane" index="221"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg223" parent="EggPlane" index="222"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg224" parent="EggPlane" index="223"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg225" parent="EggPlane" index="224"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg226" parent="EggPlane" index="225"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg227" parent="EggPlane" index="226"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg228" parent="EggPlane" index="227"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg229" parent="EggPlane" index="228"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg230" parent="EggPlane" index="229"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg231" parent="EggPlane" index="230"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg232" parent="EggPlane" index="231"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg233" parent="EggPlane" index="232"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg234" parent="EggPlane" index="233"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg235" parent="EggPlane" index="234"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg236" parent="EggPlane" index="235"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg237" parent="EggPlane" index="236"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg238" parent="EggPlane" index="237"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg239" parent="EggPlane" index="238"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg240" parent="EggPlane" index="239"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg241" parent="EggPlane" index="240"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg242" parent="EggPlane" index="241"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg243" parent="EggPlane" index="242"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg244" parent="EggPlane" index="243"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg245" parent="EggPlane" index="244"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg246" parent="EggPlane" index="245"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg247" parent="EggPlane" index="246"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg248" parent="EggPlane" index="247"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg249" parent="EggPlane" index="248"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg250" parent="EggPlane" index="249"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg251" parent="EggPlane" index="250"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg252" parent="EggPlane" index="251"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg253" parent="EggPlane" index="252"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg254" parent="EggPlane" index="253"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg255" parent="EggPlane" index="254"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg256" parent="EggPlane" index="255"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg257" parent="EggPlane" index="256"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg258" parent="EggPlane" index="257"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg259" parent="EggPlane" index="258"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg260" parent="EggPlane" index="259"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg261" parent="EggPlane" index="260"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg262" parent="EggPlane" index="261"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg263" parent="EggPlane" index="262"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg264" parent="EggPlane" index="263"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg265" parent="EggPlane" index="264"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg266" parent="EggPlane" index="265"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg267" parent="EggPlane" index="266"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg268" parent="EggPlane" index="267"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg269" parent="EggPlane" index="268"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg270" parent="EggPlane" index="269"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg271" parent="EggPlane" index="270"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg272" parent="EggPlane" index="271"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg273" parent="EggPlane" index="272"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg274" parent="EggPlane" index="273"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg275" parent="EggPlane" index="274"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg276" parent="EggPlane" index="275"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg277" parent="EggPlane" index="276"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg278" parent="EggPlane" index="277"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg279" parent="EggPlane" index="278"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg280" parent="EggPlane" index="279"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg281" parent="EggPlane" index="280"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg282" parent="EggPlane" index="281"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg283" parent="EggPlane" index="282"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg284" parent="EggPlane" index="283"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg285" parent="EggPlane" index="284"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg286" parent="EggPlane" index="285"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg287" parent="EggPlane" index="286"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg288" parent="EggPlane" index="287"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg289" parent="EggPlane" index="288"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg290" parent="EggPlane" index="289"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg291" parent="EggPlane" index="290"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg292" parent="EggPlane" index="291"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg293" parent="EggPlane" index="292"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg294" parent="EggPlane" index="293"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg295" parent="EggPlane" index="294"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg296" parent="EggPlane" index="295"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg297" parent="EggPlane" index="296"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg298" parent="EggPlane" index="297"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg299" parent="EggPlane" index="298"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg300" parent="EggPlane" index="299"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg301" parent="EggPlane" index="300"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg302" parent="EggPlane" index="301"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg303" parent="EggPlane" index="302"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg304" parent="EggPlane" index="303"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg305" parent="EggPlane" index="304"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg306" parent="EggPlane" index="305"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg307" parent="EggPlane" index="306"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg308" parent="EggPlane" index="307"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg309" parent="EggPlane" index="308"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg310" parent="EggPlane" index="309"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg311" parent="EggPlane" index="310"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg312" parent="EggPlane" index="311"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg313" parent="EggPlane" index="312"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg314" parent="EggPlane" index="313"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg315" parent="EggPlane" index="314"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg316" parent="EggPlane" index="315"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg317" parent="EggPlane" index="316"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg318" parent="EggPlane" index="317"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg319" parent="EggPlane" index="318"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg320" parent="EggPlane" index="319"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg321" parent="EggPlane" index="320"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg322" parent="EggPlane" index="321"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg323" parent="EggPlane" index="322"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg324" parent="EggPlane" index="323"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg325" parent="EggPlane" index="324"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg326" parent="EggPlane" index="325"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg327" parent="EggPlane" index="326"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg328" parent="EggPlane" index="327"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg329" parent="EggPlane" index="328"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg330" parent="EggPlane" index="329"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg331" parent="EggPlane" index="330"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg332" parent="EggPlane" index="331"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg333" parent="EggPlane" index="332"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg334" parent="EggPlane" index="333"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg335" parent="EggPlane" index="334"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg336" parent="EggPlane" index="335"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg337" parent="EggPlane" index="336"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg338" parent="EggPlane" index="337"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg339" parent="EggPlane" index="338"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg340" parent="EggPlane" index="339"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg341" parent="EggPlane" index="340"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg342" parent="EggPlane" index="341"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg343" parent="EggPlane" index="342"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg344" parent="EggPlane" index="343"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg345" parent="EggPlane" index="344"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg346" parent="EggPlane" index="345"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg347" parent="EggPlane" index="346"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg348" parent="EggPlane" index="347"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg349" parent="EggPlane" index="348"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg350" parent="EggPlane" index="349"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg351" parent="EggPlane" index="350"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg352" parent="EggPlane" index="351"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg353" parent="EggPlane" index="352"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg354" parent="EggPlane" index="353"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg355" parent="EggPlane" index="354"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg356" parent="EggPlane" index="355"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg357" parent="EggPlane" index="356"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg358" parent="EggPlane" index="357"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg359" parent="EggPlane" index="358"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg360" parent="EggPlane" index="359"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg361" parent="EggPlane" index="360"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg362" parent="EggPlane" index="361"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg363" parent="EggPlane" index="362"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg364" parent="EggPlane" index="363"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg365" parent="EggPlane" index="364"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg366" parent="EggPlane" index="365"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg367" parent="EggPlane" index="366"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg368" parent="EggPlane" index="367"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg369" parent="EggPlane" index="368"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg370" parent="EggPlane" index="369"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg371" parent="EggPlane" index="370"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg372" parent="EggPlane" index="371"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg373" parent="EggPlane" index="372"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg374" parent="EggPlane" index="373"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg375" parent="EggPlane" index="374"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg376" parent="EggPlane" index="375"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg377" parent="EggPlane" index="376"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg378" parent="EggPlane" index="377"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg379" parent="EggPlane" index="378"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg380" parent="EggPlane" index="379"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg381" parent="EggPlane" index="380"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg382" parent="EggPlane" index="381"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg383" parent="EggPlane" index="382"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg384" parent="EggPlane" index="383"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg385" parent="EggPlane" index="384"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg386" parent="EggPlane" index="385"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg387" parent="EggPlane" index="386"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg388" parent="EggPlane" index="387"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg389" parent="EggPlane" index="388"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg390" parent="EggPlane" index="389"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg391" parent="EggPlane" index="390"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg392" parent="EggPlane" index="391"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg393" parent="EggPlane" index="392"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg394" parent="EggPlane" index="393"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg395" parent="EggPlane" index="394"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg396" parent="EggPlane" index="395"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg397" parent="EggPlane" index="396"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg398" parent="EggPlane" index="397"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg399" parent="EggPlane" index="398"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg400" parent="EggPlane" index="399"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg401" parent="EggPlane" index="400"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg402" parent="EggPlane" index="401"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg403" parent="EggPlane" index="402"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg404" parent="EggPlane" index="403"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg405" parent="EggPlane" index="404"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg406" parent="EggPlane" index="405"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg407" parent="EggPlane" index="406"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg408" parent="EggPlane" index="407"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg409" parent="EggPlane" index="408"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg410" parent="EggPlane" index="409"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg411" parent="EggPlane" index="410"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg412" parent="EggPlane" index="411"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg413" parent="EggPlane" index="412"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg414" parent="EggPlane" index="413"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg415" parent="EggPlane" index="414"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg416" parent="EggPlane" index="415"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg417" parent="EggPlane" index="416"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg418" parent="EggPlane" index="417"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg419" parent="EggPlane" index="418"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg420" parent="EggPlane" index="419"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg421" parent="EggPlane" index="420"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg422" parent="EggPlane" index="421"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg423" parent="EggPlane" index="422"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg424" parent="EggPlane" index="423"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg425" parent="EggPlane" index="424"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg426" parent="EggPlane" index="425"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg427" parent="EggPlane" index="426"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg428" parent="EggPlane" index="427"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg429" parent="EggPlane" index="428"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg430" parent="EggPlane" index="429"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg431" parent="EggPlane" index="430"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg432" parent="EggPlane" index="431"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg433" parent="EggPlane" index="432"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg434" parent="EggPlane" index="433"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg435" parent="EggPlane" index="434"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg436" parent="EggPlane" index="435"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg437" parent="EggPlane" index="436"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg438" parent="EggPlane" index="437"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg439" parent="EggPlane" index="438"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg440" parent="EggPlane" index="439"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg441" parent="EggPlane" index="440"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg442" parent="EggPlane" index="441"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg443" parent="EggPlane" index="442"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg444" parent="EggPlane" index="443"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg445" parent="EggPlane" index="444"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg446" parent="EggPlane" index="445"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg447" parent="EggPlane" index="446"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg448" parent="EggPlane" index="447"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg449" parent="EggPlane" index="448"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg450" parent="EggPlane" index="449"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg451" parent="EggPlane" index="450"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg452" parent="EggPlane" index="451"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg453" parent="EggPlane" index="452"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg454" parent="EggPlane" index="453"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg455" parent="EggPlane" index="454"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg456" parent="EggPlane" index="455"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg457" parent="EggPlane" index="456"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg458" parent="EggPlane" index="457"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg459" parent="EggPlane" index="458"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg460" parent="EggPlane" index="459"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg461" parent="EggPlane" index="460"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg462" parent="EggPlane" index="461"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg463" parent="EggPlane" index="462"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg464" parent="EggPlane" index="463"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg465" parent="EggPlane" index="464"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg466" parent="EggPlane" index="465"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg467" parent="EggPlane" index="466"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg468" parent="EggPlane" index="467"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg469" parent="EggPlane" index="468"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg470" parent="EggPlane" index="469"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg471" parent="EggPlane" index="470"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg472" parent="EggPlane" index="471"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg473" parent="EggPlane" index="472"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg474" parent="EggPlane" index="473"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg475" parent="EggPlane" index="474"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg476" parent="EggPlane" index="475"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg477" parent="EggPlane" index="476"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg478" parent="EggPlane" index="477"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg479" parent="EggPlane" index="478"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg480" parent="EggPlane" index="479"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg481" parent="EggPlane" index="480"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg482" parent="EggPlane" index="481"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg483" parent="EggPlane" index="482"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg484" parent="EggPlane" index="483"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg485" parent="EggPlane" index="484"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg486" parent="EggPlane" index="485"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg487" parent="EggPlane" index="486"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg488" parent="EggPlane" index="487"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg489" parent="EggPlane" index="488"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg490" parent="EggPlane" index="489"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg491" parent="EggPlane" index="490"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg492" parent="EggPlane" index="491"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg493" parent="EggPlane" index="492"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg494" parent="EggPlane" index="493"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg495" parent="EggPlane" index="494"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg496" parent="EggPlane" index="495"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg497" parent="EggPlane" index="496"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg498" parent="EggPlane" index="497"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg499" parent="EggPlane" index="498"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg500" parent="EggPlane" index="499"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg501" parent="EggPlane" index="500"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg502" parent="EggPlane" index="501"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg503" parent="EggPlane" index="502"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg504" parent="EggPlane" index="503"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg505" parent="EggPlane" index="504"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg506" parent="EggPlane" index="505"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg507" parent="EggPlane" index="506"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg508" parent="EggPlane" index="507"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg509" parent="EggPlane" index="508"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg510" parent="EggPlane" index="509"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg511" parent="EggPlane" index="510"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg512" parent="EggPlane" index="511"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg513" parent="EggPlane" index="512"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg514" parent="EggPlane" index="513"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg515" parent="EggPlane" index="514"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg516" parent="EggPlane" index="515"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg517" parent="EggPlane" index="516"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg518" parent="EggPlane" index="517"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg519" parent="EggPlane" index="518"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg520" parent="EggPlane" index="519"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg521" parent="EggPlane" index="520"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg522" parent="EggPlane" index="521"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg523" parent="EggPlane" index="522"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg524" parent="EggPlane" index="523"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg525" parent="EggPlane" index="524"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg526" parent="EggPlane" index="525"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg527" parent="EggPlane" index="526"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg528" parent="EggPlane" index="527"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg529" parent="EggPlane" index="528"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg530" parent="EggPlane" index="529"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg531" parent="EggPlane" index="530"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg532" parent="EggPlane" index="531"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg533" parent="EggPlane" index="532"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg534" parent="EggPlane" index="533"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg535" parent="EggPlane" index="534"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg536" parent="EggPlane" index="535"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg537" parent="EggPlane" index="536"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg538" parent="EggPlane" index="537"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg539" parent="EggPlane" index="538"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg540" parent="EggPlane" index="539"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg541" parent="EggPlane" index="540"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg542" parent="EggPlane" index="541"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg543" parent="EggPlane" index="542"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg544" parent="EggPlane" index="543"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg545" parent="EggPlane" index="544"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg546" parent="EggPlane" index="545"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg547" parent="EggPlane" index="546"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg548" parent="EggPlane" index="547"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg549" parent="EggPlane" index="548"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg550" parent="EggPlane" index="549"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg551" parent="EggPlane" index="550"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg552" parent="EggPlane" index="551"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg553" parent="EggPlane" index="552"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg554" parent="EggPlane" index="553"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg555" parent="EggPlane" index="554"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg556" parent="EggPlane" index="555"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg557" parent="EggPlane" index="556"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg558" parent="EggPlane" index="557"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg559" parent="EggPlane" index="558"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg560" parent="EggPlane" index="559"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg561" parent="EggPlane" index="560"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg562" parent="EggPlane" index="561"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg563" parent="EggPlane" index="562"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg564" parent="EggPlane" index="563"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg565" parent="EggPlane" index="564"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg566" parent="EggPlane" index="565"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg567" parent="EggPlane" index="566"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg568" parent="EggPlane" index="567"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg569" parent="EggPlane" index="568"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg570" parent="EggPlane" index="569"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg571" parent="EggPlane" index="570"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg572" parent="EggPlane" index="571"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg573" parent="EggPlane" index="572"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg574" parent="EggPlane" index="573"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg575" parent="EggPlane" index="574"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg576" parent="EggPlane" index="575"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg577" parent="EggPlane" index="576"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg578" parent="EggPlane" index="577"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg579" parent="EggPlane" index="578"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg580" parent="EggPlane" index="579"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg581" parent="EggPlane" index="580"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg582" parent="EggPlane" index="581"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg583" parent="EggPlane" index="582"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg584" parent="EggPlane" index="583"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg585" parent="EggPlane" index="584"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg586" parent="EggPlane" index="585"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg587" parent="EggPlane" index="586"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg588" parent="EggPlane" index="587"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg589" parent="EggPlane" index="588"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg590" parent="EggPlane" index="589"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg591" parent="EggPlane" index="590"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg592" parent="EggPlane" index="591"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg593" parent="EggPlane" index="592"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg594" parent="EggPlane" index="593"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg595" parent="EggPlane" index="594"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg596" parent="EggPlane" index="595"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg597" parent="EggPlane" index="596"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg598" parent="EggPlane" index="597"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg599" parent="EggPlane" index="598"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg600" parent="EggPlane" index="599"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg601" parent="EggPlane" index="600"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg602" parent="EggPlane" index="601"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg603" parent="EggPlane" index="602"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg604" parent="EggPlane" index="603"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg605" parent="EggPlane" index="604"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg606" parent="EggPlane" index="605"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg607" parent="EggPlane" index="606"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg608" parent="EggPlane" index="607"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg609" parent="EggPlane" index="608"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg610" parent="EggPlane" index="609"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg611" parent="EggPlane" index="610"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg612" parent="EggPlane" index="611"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg613" parent="EggPlane" index="612"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg614" parent="EggPlane" index="613"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg615" parent="EggPlane" index="614"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg616" parent="EggPlane" index="615"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg617" parent="EggPlane" index="616"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg618" parent="EggPlane" index="617"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg619" parent="EggPlane" index="618"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg620" parent="EggPlane" index="619"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg621" parent="EggPlane" index="620"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg622" parent="EggPlane" index="621"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg623" parent="EggPlane" index="622"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg624" parent="EggPlane" index="623"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg625" parent="EggPlane" index="624"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg626" parent="EggPlane" index="625"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg627" parent="EggPlane" index="626"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg628" parent="EggPlane" index="627"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg629" parent="EggPlane" index="628"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg630" parent="EggPlane" index="629"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg631" parent="EggPlane" index="630"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg632" parent="EggPlane" index="631"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg633" parent="EggPlane" index="632"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg634" parent="EggPlane" index="633"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg635" parent="EggPlane" index="634"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg636" parent="EggPlane" index="635"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg637" parent="EggPlane" index="636"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg638" parent="EggPlane" index="637"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg639" parent="EggPlane" index="638"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg640" parent="EggPlane" index="639"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg641" parent="EggPlane" index="640"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg642" parent="EggPlane" index="641"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg643" parent="EggPlane" index="642"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg644" parent="EggPlane" index="643"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg645" parent="EggPlane" index="644"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg646" parent="EggPlane" index="645"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg647" parent="EggPlane" index="646"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg648" parent="EggPlane" index="647"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg649" parent="EggPlane" index="648"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg650" parent="EggPlane" index="649"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg651" parent="EggPlane" index="650"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg652" parent="EggPlane" index="651"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg653" parent="EggPlane" index="652"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg654" parent="EggPlane" index="653"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg655" parent="EggPlane" index="654"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg656" parent="EggPlane" index="655"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg657" parent="EggPlane" index="656"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg658" parent="EggPlane" index="657"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg659" parent="EggPlane" index="658"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg660" parent="EggPlane" index="659"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg661" parent="EggPlane" index="660"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg662" parent="EggPlane" index="661"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg663" parent="EggPlane" index="662"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg664" parent="EggPlane" index="663"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg665" parent="EggPlane" index="664"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg666" parent="EggPlane" index="665"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg667" parent="EggPlane" index="666"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg668" parent="EggPlane" index="667"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg669" parent="EggPlane" index="668"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg670" parent="EggPlane" index="669"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg671" parent="EggPlane" index="670"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg672" parent="EggPlane" index="671"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg673" parent="EggPlane" index="672"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg674" parent="EggPlane" index="673"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg675" parent="EggPlane" index="674"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg676" parent="EggPlane" index="675"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg677" parent="EggPlane" index="676"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg678" parent="EggPlane" index="677"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg679" parent="EggPlane" index="678"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg680" parent="EggPlane" index="679"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg681" parent="EggPlane" index="680"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg682" parent="EggPlane" index="681"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg683" parent="EggPlane" index="682"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg684" parent="EggPlane" index="683"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg685" parent="EggPlane" index="684"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg686" parent="EggPlane" index="685"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg687" parent="EggPlane" index="686"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg688" parent="EggPlane" index="687"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg689" parent="EggPlane" index="688"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg690" parent="EggPlane" index="689"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg691" parent="EggPlane" index="690"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg692" parent="EggPlane" index="691"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg693" parent="EggPlane" index="692"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg694" parent="EggPlane" index="693"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg695" parent="EggPlane" index="694"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg696" parent="EggPlane" index="695"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg697" parent="EggPlane" index="696"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg698" parent="EggPlane" index="697"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg699" parent="EggPlane" index="698"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg700" parent="EggPlane" index="699"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg701" parent="EggPlane" index="700"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg702" parent="EggPlane" index="701"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg703" parent="EggPlane" index="702"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg704" parent="EggPlane" index="703"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg705" parent="EggPlane" index="704"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg706" parent="EggPlane" index="705"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg707" parent="EggPlane" index="706"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg708" parent="EggPlane" index="707"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg709" parent="EggPlane" index="708"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg710" parent="EggPlane" index="709"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg711" parent="EggPlane" index="710"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg712" parent="EggPlane" index="711"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg713" parent="EggPlane" index="712"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg714" parent="EggPlane" index="713"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg715" parent="EggPlane" index="714"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg716" parent="EggPlane" index="715"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg717" parent="EggPlane" index="716"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg718" parent="EggPlane" index="717"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg719" parent="EggPlane" index="718"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg720" parent="EggPlane" index="719"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
+
+[node name="Egg721" parent="." index="2"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")

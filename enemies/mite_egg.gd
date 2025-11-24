@@ -1,7 +1,7 @@
 extends Node3D
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var velocity := Vector3.ONE
+var velocity := 4 * Vector3.DOWN # Eggs have initial downward speed bc they spawn from so high up
 @export var max_lifetime_secs := 9.0
 var invincible := true # prevents bullet from hitting self
 var invincibility_secs := .05
