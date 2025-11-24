@@ -11,7 +11,7 @@ glow_enabled = true
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
 volumetric_fog_anisotropy = -3.46945e-18
-volumetric_fog_length = 150.0
+volumetric_fog_length = 280.0
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_ppvaj")

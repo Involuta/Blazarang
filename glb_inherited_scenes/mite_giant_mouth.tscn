@@ -2916,5 +2916,6 @@ cast_shadow = 0
 surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")
 
 [node name="Egg721" parent="." index="2"]
+visible = false
 cast_shadow = 0
 surface_material_override/0 = SubResource("StandardMaterial3D_anmyo")

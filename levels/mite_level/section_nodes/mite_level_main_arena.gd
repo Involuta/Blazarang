@@ -155,7 +155,7 @@ func _ready():
 	fog_tween.tween_method(
 		func(v): mite_fog_material.set_shader_parameter("density", v),
 		start_density,
-		0.02,
+		0.016,
 		total_duration
 	)
 
