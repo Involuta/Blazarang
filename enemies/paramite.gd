@@ -210,7 +210,7 @@ func follow_frame(delta):
 	nav_agent.velocity = new_velocity
 	
 	# Scale anim playback speed based on movement speed
-	anim_tree.set("parameters/playback_speed", velocity.length() / follow_speed)
+	anim_tree.set("parameters/playback_speed", clamp(velocity.length() / follow_speed, 0.01, 10))
 	
 	# Spit web rarely
 	if rng.randf() < spit_chance:

@@ -155,7 +155,7 @@ func follow_frame(delta):
 	nav_agent.velocity = new_velocity
 	
 	# Scale anim playback speed based on movement speed
-	anim_tree.set("parameters/playback_speed", velocity.length() / follow_speed)
+	anim_tree.set("parameters/playback_speed", clamp(velocity.length() / follow_speed, 0.01, 10))
 	
 	bite_cooldown_remaining -= delta
 	if bite_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < bite_proximity:

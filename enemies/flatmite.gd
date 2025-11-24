@@ -270,7 +270,7 @@ func leave_frame():
 	nav_agent.velocity = new_velocity
 	
 	# Scale anim playback speed based on movement speed
-	anim_tree.set("parameters/playback_speed", velocity.length() / follow_speed)
+	anim_tree.set("parameters/playback_speed", clamp(velocity.length() / follow_speed, 0.01, 10))
 
 func start_leave_leap():
 	var arena_center := Vector3.ZERO

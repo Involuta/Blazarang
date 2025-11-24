@@ -59,6 +59,7 @@ size = Vector3(1, 100, 15)
 [node name="MiteLevelMainArena" type="Node3D"]
 script = ExtResource("1_tjf6h")
 egg_fog_chance_pre_jumping_spider = 0.04
+egg_fog_chance_post_jumping_spider = 0.4
 starting_wave = 0
 egg_waves = [{
 "Chances": [1, 0, 0, 0],

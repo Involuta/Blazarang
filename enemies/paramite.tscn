@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://s18sdq53k2im"]
+[gd_scene load_steps=23 format=3 uid="uid://s18sdq53k2im"]
 
 [ext_resource type="Script" path="res://enemies/paramite.gd" id="1_sdbgq"]
 [ext_resource type="PackedScene" uid="uid://dcy7ebw6m5b1v" path="res://glb_inherited_scenes/paramite_meshes.tscn" id="2_5otae"]
@@ -41,6 +41,7 @@ advance_mode = 2
 advance_expression = "behav_state == FALL"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qtxky"]
+xfade_time = 0.2
 switch_mode = 2
 advance_mode = 2
 advance_expression = "behav_state == FOLLOW"
@@ -58,6 +59,10 @@ advance_expression = "behav_state == LAUNCH"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nxaog"]
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_28gt5"]
+advance_mode = 2
+advance_expression = "behav_state == LEAVE"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_v8kte"]
 states/flip/node = SubResource("AnimationNodeAnimation_ftkg5")
 states/flip/position = Vector2(453.5, 100)
@@ -66,12 +71,12 @@ states/glide/position = Vector2(340.5, 100)
 states/panicked_run/node = SubResource("AnimationNodeAnimation_e5ubn")
 states/panicked_run/position = Vector2(602.5, 101.048)
 states/paramite_leap/node = SubResource("AnimationNodeAnimation_oq1ms")
-states/paramite_leap/position = Vector2(405.5, 192.595)
-transitions = ["glide", "flip", SubResource("AnimationNodeStateMachineTransition_t765v"), "paramite_leap", "glide", SubResource("AnimationNodeStateMachineTransition_qtxky"), "flip", "panicked_run", SubResource("AnimationNodeStateMachineTransition_tw57r"), "panicked_run", "paramite_leap", SubResource("AnimationNodeStateMachineTransition_qianl"), "Start", "paramite_leap", SubResource("AnimationNodeStateMachineTransition_nxaog")]
-graph_offset = Vector2(3.01716e-05, 41.685)
+states/paramite_leap/position = Vector2(486.5, 226.095)
+transitions = ["glide", "flip", SubResource("AnimationNodeStateMachineTransition_t765v"), "paramite_leap", "glide", SubResource("AnimationNodeStateMachineTransition_qtxky"), "flip", "panicked_run", SubResource("AnimationNodeStateMachineTransition_tw57r"), "panicked_run", "paramite_leap", SubResource("AnimationNodeStateMachineTransition_qianl"), "Start", "paramite_leap", SubResource("AnimationNodeStateMachineTransition_nxaog"), "paramite_leap", "panicked_run", SubResource("AnimationNodeStateMachineTransition_28gt5")]
+graph_offset = Vector2(48.27, 44.6625)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_mxa20"]
-graph_offset = Vector2(-40.32, 116.16)
+graph_offset = Vector2(-28.8, 193.92)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_v8kte")
 nodes/StateMachine/position = Vector2(100, 150)
 node_connections = [&"output", 0, &"StateMachine"]
