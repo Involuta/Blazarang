@@ -11,6 +11,7 @@ extends Node3D
 @onready var flatmite := preload("res://enemies/flatmite.tscn")
 @onready var harvestman := preload("res://enemies/harvestman.tscn")
 @onready var bigweb := preload("res://enemies/bigweb.tscn")
+@onready var egg_fog := preload("res://enemies/mite_egg_fog.tscn")
 
 @onready var root := $/root/ViewControl
 var rng := RandomNumberGenerator.new()
@@ -26,12 +27,19 @@ var time_until_next_infest_switch_secs := 5.0
 @export var max_time_until_next_egg := 20.0
 var time_btwn_eggs_this_wave := 4.0
 var time_until_next_egg := 10.0
-@export var egg_drop_height := 100.0
+
+@export var egg_drop_height := 160.0
+
+@export var egg_fog_chance_pre_jumping_spider := .08 # Chance of fog appearing from an egg before spider spawns
+@export var egg_fog_chance_post_jumping_spider := .5
+var egg_fog_chance := .08 # Current egg fog chance. Changes to post-spider chance when spider spawns
+
 @export var max_living_enemies := 50
 var living_enemies := 0
-
 @export var can_drop := true # If this is false, no eggs spawn. Set to false after progressing past final wave listed in egg_waves OR set to false in testing
+
 @export var near_target_drop_max_radius := 12.0 # Radius of egg drop near target
+
 @export var starting_wave := 7 # FOR TESTING ONLY: manually set the first wave when the level starts
 var current_wave := 0
 var eggs_remaining_this_wave := 4 # Wave increases after this num becomes 0, then this num is set to new wave's egg num
@@ -98,8 +106,8 @@ var flatmites_dict = {}
 var harvestmen_dict = {}
 var enemy_dicts := [landmites_dict, paramites_dict, flatmites_dict, harvestmen_dict] # Dictionaries are passed by reference, not copy. If you need to apply the same code to all dicts, you can iterate through this list
 
-@export var time_btwn_final_enemy_and_eviction := 20.0 # Seconds between the final enemy egg being spawned and the mass eviction
-@export var time_btwn_eviction_and_js_spawn := 16.0 # Seconds between start of mass eviction and jumping spider spawning
+@export var time_btwn_final_enemy_and_eviction := 8.0 # Seconds between the final enemy egg being spawned and the mass eviction
+@export var time_btwn_eviction_and_js_spawn := 3.0 # Seconds between start of mass eviction and jumping spider spawning
 
 func _ready():
 	time_until_next_infest_switch_secs = max_time_until_next_infest_switch
@@ -135,6 +143,8 @@ func _ready():
 	
 	egg_list = [landmite_egg, paramite_egg, flatmite_egg, harvestman_egg]
 	
+	egg_fog_chance = egg_fog_chance_pre_jumping_spider
+	
 	# Make mite fog thicken over time
 	var total_duration := 0
 	for wave in egg_waves:
@@ -145,7 +155,7 @@ func _ready():
 	fog_tween.tween_method(
 		func(v): mite_fog_material.set_shader_parameter("density", v),
 		start_density,
-		0.024,
+		0.02,
 		total_duration
 	)
 
@@ -247,6 +257,9 @@ func spawn_enemy_from_egg_at(pos: Vector3, egg_type: int):
 			load_scene_at_pos(bigweb, pos, true)
 		_:
 			spawn_enemy_from_dict(pos, landmites_dict)
+	# Low chance to also spawn fog from an egg
+	if rng.randf() < egg_fog_chance:
+		load_scene_at_pos(egg_fog, pos, true)
 
 func spawn_enemy_from_dict(pos: Vector3, dict: Dictionary):
 	# Pick the first dead enemy you find
@@ -270,7 +283,9 @@ func start_jumping_spider_wave():
 	await get_tree().create_timer(time_btwn_eviction_and_js_spawn).timeout
 	# Spawn jumping spider
 	load_scene_at_pos(jumping_spider, Vector3(0, 10, 40), true)
-
+	# Change egg fog chance
+	egg_fog_chance = egg_fog_chance_post_jumping_spider
+	
 # Call funcs in enemies so they leave
 func evict_enemies():
 	for dict in enemy_dicts:

@@ -4,7 +4,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5v1r2"]
 shader = ExtResource("1_a66b6")
-shader_parameter/density = 0.0159998
+shader_parameter/density = 0.0099998
 shader_parameter/albedo = Color(1, 0.329412, 0.262745, 1)
 shader_parameter/emission = Color(0, 0, 0, 1)
 shader_parameter/height_falloff = 0.0

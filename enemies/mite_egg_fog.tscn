@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8ap3xuxjoboh"]
+
+[ext_resource type="Shader" path="res://shaders/smoke.gdshader" id="1_5gi2f"]
+[ext_resource type="Script" path="res://general_scripts/DisappearNode.gd" id="2_55yx1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j8kkl"]
+shader = ExtResource("1_5gi2f")
+shader_parameter/density = 0.4
+shader_parameter/albedo = Color(1, 0.556863, 0.494118, 1)
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/height_falloff = 0.0
+shader_parameter/edge_fade = 0.1
+
+[node name="MiteEggFog" type="FogVolume"]
+size = Vector3(32, 8, 32)
+shape = 0
+material = SubResource("ShaderMaterial_j8kkl")
+script = ExtResource("2_55yx1")
+disappear_secs = 16.0
