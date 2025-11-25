@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhdekntejmrdi"]
+[gd_scene load_steps=8 format=3 uid="uid://dhdekntejmrdi"]
 
 [ext_resource type="Script" path="res://levels/balls_level/balls_level_background.gd" id="1_qm7qv"]
 [ext_resource type="Script" path="res://general_scripts/bg_camera.gd" id="2_m88ah"]
@@ -22,6 +22,14 @@ sky_rotation = Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j1c5p"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hq848"]
+material = SubResource("StandardMaterial3D_j1c5p")
+top_radius = 0.1
+bottom_radius = 0.05
+height = 50.0
+
 [node name="MiteLevelBackground" type="Node3D"]
 script = ExtResource("1_qm7qv")
 star_num = 2.08165e-12
@@ -32,3 +40,31 @@ environment = SubResource("Environment_1inmc")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 script = ExtResource("2_m88ah")
+
+[node name="WebStrand1" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.969727, -0.24419, 0, 0.24419, 0.969727, 0, 0, 0, 1, 1.52516, -1.90735e-06, -3.71641)
+mesh = SubResource("CylinderMesh_hq848")
+
+[node name="WebStrand2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.382326, 0.164208, 0.90932, -0.0885778, 0.973038, -0.212957, -0.919772, -0.161965, -0.357473, -1.97293, -1.90735e-06, -2.4137)
+mesh = SubResource("CylinderMesh_hq848")
+
+[node name="WebStrand3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.226058, 0.0941425, -0.969554, -0.327363, 0.944773, 0.0154091, 0.917459, 0.313913, 0.244393, 2.0469, -1.90735e-06, -1.7901)
+mesh = SubResource("CylinderMesh_hq848")
+
+[node name="WebStrand4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.12403, -0.144555, 0.981692, 0.230552, 0.966455, 0.113183, -0.965123, 0.212293, 0.153197, 1.58195, -2.86102e-06, 0.437047)
+mesh = SubResource("CylinderMesh_hq848")
+
+[node name="WebStrand5" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.298088, 0.235908, 0.924928, -0.0165423, 0.967557, -0.252112, -0.954395, -0.0904519, -0.284514, -1.02048, -2.86102e-06, 1.22235)
+mesh = SubResource("CylinderMesh_hq848")
+
+[node name="WebStrand6" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.406565, -0.289315, 0.866603, 0.0949356, 0.930024, 0.355027, -0.908676, 0.226613, -0.350649, -2.53255, -2.86102e-06, -0.769135)
+mesh = SubResource("CylinderMesh_hq848")
+
+[node name="WebStrand7" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.978294, 0.0367342, -0.203937, -0.0425173, 0.92764, 0.371048, 0.202811, 0.371665, -0.905943, -3.96389, -3.33786e-06, -4.1283)
+mesh = SubResource("CylinderMesh_hq848")

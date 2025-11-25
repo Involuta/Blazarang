@@ -136,7 +136,6 @@ func _ready():
 	nav_agent.target_desired_distance = base_path_desired_dist
 	
 	Globals.cotu_dodge.connect(ready_action_trigger)
-	# Spider doesn't attack when you throw because the rose stuns it
 	Globals.cotu_normal_throw_rose.connect(ready_action_trigger)
 	hurtbox.hit_received.connect(receive_hit_from_hurtbox)
 	
