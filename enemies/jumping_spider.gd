@@ -116,6 +116,12 @@ var leave_wait_time_remaining := 4.0
 var leave_descend_speed := 40.0
 @export var descend_ground_contact_height := 30.0
 
+var normal_rose_throw_responses := 0 # Num of times spider jumped in response to a normal rose throw in phase 1
+var dodge_responses := 0 # Num of times spider jumped in response to dodge in phase 1
+
+@export var phase2_health_threshold := .4 # Proportion of health remaining for phase2 to begin
+var phase2 := false # Set to true when phase 2 begins. Checked in receive hit from hurtbox func
+
 func _ready():
 	level = root.find_child("Level")
 	arena = level.find_child("MiteLevelMainArena")
@@ -135,8 +141,8 @@ func _ready():
 	nav_agent.path_desired_distance = base_path_desired_dist
 	nav_agent.target_desired_distance = base_path_desired_dist
 	
-	Globals.cotu_dodge.connect(ready_action_trigger)
-	Globals.cotu_normal_throw_rose.connect(ready_action_trigger)
+	Globals.cotu_dodge.connect(cotu_dodge_response)
+	Globals.cotu_normal_throw_rose.connect(cotu_normal_rose_throw_response)
 	hurtbox.hit_received.connect(receive_hit_from_hurtbox)
 	
 	# Spider starts in leave-descend state
@@ -400,8 +406,23 @@ func aim_frame(delta):
 	if aim_duration <= 0:
 		switch_to_ready()
 
-func ready_action_trigger():
+func cotu_normal_rose_throw_response():
+	# In phase 2, don't respond to normal rose throws if you responded more to normal rose throws in phase 1
+	if phase2 and normal_rose_throw_responses > dodge_responses:
+		return
+	
 	if behav_state == READY:
+		if not phase2:
+			normal_rose_throw_responses += 1
+		ready_triggered = true
+
+func cotu_dodge_response():
+	# In phase 2, don't respond to dodges if you responded more to dodges in phase 1
+	if phase2 and dodge_responses > normal_rose_throw_responses:
+		return
+	if behav_state == READY:
+		if not phase2:
+			dodge_responses += 1
 		ready_triggered = true
 
 func switch_to_ready():
@@ -467,10 +488,22 @@ func switch_to_attack():
 	nav_agent.target_desired_distance = 1
 
 func receive_hit_from_hurtbox():
+	if hurtbox.health <= hurtbox.max_health * phase2_health_threshold:
+		start_phase2()
+	
 	if behav_state == AIM:
 		switch_to_walk()
 	if behav_state == ATTACK and attack_jump_completed:
 		hit_received_while_attacking = true
+
+func start_phase2():
+	phase2 = true
+	# If the player dodged and threw the same num of times, choose one to stop responding to randomly
+	if dodge_responses == normal_rose_throw_responses:
+		if rng.randf() > .5:
+			dodge_responses += 1
+		else:
+			normal_rose_throw_responses += 1
 
 func attack_frame(delta):
 	# If spider reached its dest or jumped for max jump time, complete jump

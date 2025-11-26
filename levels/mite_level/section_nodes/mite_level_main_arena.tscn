@@ -60,7 +60,6 @@ size = Vector3(1, 100, 15)
 script = ExtResource("1_tjf6h")
 egg_fog_chance_pre_jumping_spider = 0.04
 egg_fog_chance_post_jumping_spider = 0.4
-starting_wave = 0
 egg_waves = [{
 "Chances": [1, 0, 0, 0],
 "Duration": 20.0,
@@ -98,8 +97,8 @@ egg_waves = [{
 "Var": 0
 }, {
 "Chances": [0.67, 0.13, 0.1, 0.1],
-"Duration": 24.0,
-"Num": 40,
+"Duration": 2.0,
+"Num": 1,
 "Var": 0
 }]
 
