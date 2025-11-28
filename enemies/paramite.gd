@@ -173,6 +173,8 @@ func launch_frame(delta):
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+	else:
+		switch_to_leave()
 
 func switch_to_follow():
 	var skythread_tween = get_tree().create_tween()

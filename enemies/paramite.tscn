@@ -60,6 +60,7 @@ advance_expression = "behav_state == LAUNCH"
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_28gt5"]
+switch_mode = 2
 advance_mode = 2
 advance_expression = "behav_state == LEAVE"
 
@@ -76,7 +77,7 @@ transitions = ["glide", "flip", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(48.27, 44.6625)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_mxa20"]
-graph_offset = Vector2(-28.8, 193.92)
+graph_offset = Vector2(-11.52, 96)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_v8kte")
 nodes/StateMachine/position = Vector2(100, 150)
 node_connections = [&"output", 0, &"StateMachine"]

@@ -10,7 +10,8 @@ shader_parameter/emission = Color(0, 0, 0, 1)
 shader_parameter/height_falloff = 0.0
 shader_parameter/edge_fade = 0.1
 
-[node name="MiteFog" type="FogVolume"]
-size = Vector3(200, 30, 200)
+[node name="GroundFog" type="FogVolume"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 20, 2.08165e-12)
+size = Vector3(200, 40, 200)
 shape = 0
 material = SubResource("ShaderMaterial_5v1r2")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bnylrq5nmpcv"]
+[gd_scene load_steps=19 format=3 uid="uid://bnylrq5nmpcv"]
 
 [ext_resource type="Script" path="res://levels/mite_level/section_nodes/mite_level_main_arena.gd" id="1_tjf6h"]
 [ext_resource type="PackedScene" uid="uid://0y87606fdbah" path="res://glb_inherited_scenes/mite_bowl.tscn" id="2_0jglk"]
@@ -22,13 +22,13 @@ curve = SubResource("Curve_bitw0")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nwdal"]
 emission_shape = 3
-emission_box_extents = Vector3(60, 6, 60)
-direction = Vector3(2.08165e-12, 1, 2.08165e-12)
-spread = 180.0
+emission_box_extents = Vector3(60, 60, 60)
+direction = Vector3(2.08165e-12, -1, 2.08165e-12)
+spread = 0.0
 flatness = 0.5
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-initial_velocity_min = 0.5
-initial_velocity_max = 2.0
+initial_velocity_min = 0.8
+initial_velocity_max = 3.2
 scale_min = 0.4
 scale_curve = SubResource("CurveTexture_q0f0j")
 color = Color(1.50196, 0.843137, 0.34902, 1)
@@ -56,10 +56,29 @@ size = Vector3(1, 100, 15)
 [sub_resource type="BoxMesh" id="BoxMesh_hpi0p"]
 size = Vector3(1, 100, 15)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k7uf4"]
+emission_shape = 6
+emission_ring_axis = Vector3(2.08165e-12, 1, 2.08165e-12)
+emission_ring_height = 1.0
+emission_ring_radius = 148.0
+emission_ring_inner_radius = 128.0
+direction = Vector3(2.08165e-12, -1, 2.08165e-12)
+spread = 0.0
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gaqot"]
+shading_mode = 0
+albedo_color = Color(0.454902, 0.172549, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ck0xt"]
+material = SubResource("StandardMaterial3D_gaqot")
+
 [node name="MiteLevelMainArena" type="Node3D"]
 script = ExtResource("1_tjf6h")
 egg_fog_chance_pre_jumping_spider = 0.04
 egg_fog_chance_post_jumping_spider = 0.4
+starting_wave = 0
 egg_waves = [{
 "Chances": [1, 0, 0, 0],
 "Duration": 20.0,
@@ -122,9 +141,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 20, 2.08165e-12)
 shape = SubResource("BoxShape3D_qc10l")
 
 [node name="MiteCloudParticles" type="GPUParticles3D" parent="MiteCloudPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 6, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 30, 2.08165e-12)
 cast_shadow = 0
-amount = 12
+custom_aabb = AABB(-400, -400, -400, 800, 800, 800)
+amount = 20
 process_material = SubResource("ParticleProcessMaterial_nwdal")
 draw_pass_1 = SubResource("SphereMesh_qq31a")
 
@@ -189,3 +209,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -12, 2.08165e-12
 
 [node name="MiteFog" parent="." instance=ExtResource("5_5xsjg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
+
+[node name="VenomRain" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 185.936, 0)
+cast_shadow = 0
+custom_aabb = AABB(-400, -400, -400, 800, 800, 800)
+amount = 800
+lifetime = 4.5
+process_material = SubResource("ParticleProcessMaterial_k7uf4")
+draw_pass_1 = SubResource("SphereMesh_ck0xt")

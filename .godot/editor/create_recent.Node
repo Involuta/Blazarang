@@ -1,12 +1,12 @@
-MeshInstance3D
 FogVolume
+GPUParticles3D
+MeshInstance3D
 Node3D
 CollisionShape3D
 StaticBody3D
 RayCast3D
 Hitbox
 AnimationPlayer
-GPUParticles3D
 Area3D
 EnemyHurtbox
 NavigationAgent3D
