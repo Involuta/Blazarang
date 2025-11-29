@@ -127,11 +127,14 @@ func set_active(active):
 	set_process(active)
 	set_physics_process(active)
 	if active:
+		visible = true
 		process_mode = Node.PROCESS_MODE_INHERIT
 		if hurtbox:
 			# Ensure that homing attacks hit the hurtbox and not the parent node, which stays on the ground. For any enemy whose hurtbox is at the same position as the parent node, this line can just be add_to_group("lockonables")
 			hurtbox.add_to_group("lockonables")
+			hurtbox.health = hurtbox.max_health
 	else:
+		visible = false
 		if skythread:
 			skythread.visible = false
 		global_position.y = -50

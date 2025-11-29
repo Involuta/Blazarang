@@ -103,6 +103,8 @@ func set_active(active):
 		visible = true
 		process_mode = Node.PROCESS_MODE_INHERIT
 		add_to_group("lockonables")
+		if hurtbox:
+			hurtbox.health = hurtbox.max_health
 	else:
 		visible = false
 		global_position.y = -50

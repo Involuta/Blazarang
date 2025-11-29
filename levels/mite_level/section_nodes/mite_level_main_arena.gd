@@ -38,7 +38,9 @@ var egg_fog_chance := .08 # Current egg fog chance. Changes to post-spider chanc
 var living_enemies := 0
 @export var can_drop := true # If this is false, no eggs spawn. Set to false after progressing past final wave listed in egg_waves OR set to false in testing
 
-@export var near_target_drop_max_radius := 12.0 # Radius of egg drop near target
+@export var near_target_drop_max_radius := 12.0 # Max radius of egg drop near target
+@export var random_drop_pos_max_radius := 90.0 # Max radius of egg drop when dropping randomly around arena center
+var egg_random_drop_pos_chance := .25 # Chance for an egg to be dropped near target instead of randomly around the arena. Chance varies depending on the wave
 
 @export var starting_wave := 7 # FOR TESTING ONLY: manually set the first wave when the level starts
 var current_wave := 0
@@ -50,48 +52,56 @@ var eggs_remaining_this_wave := 4 # Wave increases after this num becomes 0, the
 		"Num":16,
 		"Var":1,
 		"Chances":[1,0,0,0],
+		"RandomDropPosChance": .75,
 	},
 	{
 		"Duration":20.0,
 		"Num":24,
 		"Var":2,
 		"Chances":[.83,.17,0,0],
+		"RandomDropPosChance": .5,
 	},
 	{
 		"Duration":8.0,
 		"Num":1,
 		"Var":0,
 		"Chances":[0,0,1,0],
+		"RandomDropPosChance": .5,
 	},
 	{
 		"Duration":16.0,
 		"Num":24,
 		"Var":2,
 		"Chances":[.83,.17,0,0],
+		"RandomDropPosChance": .5,
 	},
 	{
 		"Duration":4.0,
 		"Num":1,
 		"Var":0,
 		"Chances":[0,0,0,1],
+		"RandomDropPosChance": 1.0,
 	},
 	{
 		"Duration":8.0,
 		"Num":16,
 		"Var":1,
 		"Chances":[.83,.17,0,0],
+		"RandomDropPosChance": 0,
 	},
 	{
 		"Duration":4.0,
 		"Num":1,
 		"Var":0,
 		"Chances":[0,0,0,1],
+		"RandomDropPosChance": 1.0,
 	},
 	{
 		"Duration":24.0,
 		"Num":40,
 		"Var":1,
 		"Chances":[.67,.13,.1,.1],
+		"RandomDropPosChance": .5,
 	},
 ]
 
@@ -220,26 +230,40 @@ func drop_egg_of_type(egg_type: int):
 
 # Drop an egg and progress to the next wave if the last egg of the current wave was dropped
 func drop_egg():
-	# Get random pt around target
-	var drop_dist := rng.randf_range(0, near_target_drop_max_radius)
-	var drop_pos = drop_dist * Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI)) + egg_drop_height * Vector3.UP + target.global_position # This adds target's y pos to the drop pos, but since it's so high up, who cares
 	var egg_chances = egg_waves[current_wave]["Chances"]
-	load_scene_at_pos(choose_egg(egg_chances), drop_pos, true)
+	var egg_chosen = choose_egg(egg_chances)
+	var near_target := true # Whether the egg will be dropped near the target or randomly around the arena
+	if egg_chosen == harvestman_egg or rng.randf() < egg_random_drop_pos_chance:
+		near_target = false
+	
+	var drop_pos : Vector3
+	var drop_dist : float
+	if near_target:
+		# Get random pt around target
+		drop_dist = rng.randf_range(0, near_target_drop_max_radius)
+		drop_pos = drop_dist * Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI)) + egg_drop_height * Vector3.UP + target.global_position # This adds target's y pos to the drop pos, but since it's so high up, who cares
+	else:
+		# Get random pt from arena center
+		var arena_center := Vector3.ZERO
+		drop_dist = rng.randf_range(0, random_drop_pos_max_radius)
+		drop_pos = drop_dist * Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI)) + egg_drop_height * Vector3.UP + arena_center # This adds target's y pos to the drop pos, but since it's so high up, who cares
+	
+	load_scene_at_pos(egg_chosen, drop_pos, true)
+	
 	eggs_remaining_this_wave -= 1
-	print("Eggs remaining: ", eggs_remaining_this_wave)
 	if eggs_remaining_this_wave <= 0:
-		# Progress to next wave and set eggs remaining this wave and time btwn eggs this wave
+		# Progress to next wave and set eggs remaining this wave, time btwn eggs this wave, and random drop pos chance
 		current_wave += 1
 		# If there are no more waves left, start jumping spider wave
 		if current_wave >= len(egg_waves):
 			start_jumping_spider_wave()
 			return
-		print("Current wave: ", current_wave)
-		var wave_egg_num = egg_waves[current_wave]["Num"]
-		var wave_egg_var = egg_waves[current_wave]["Var"]
+		var new_wave = egg_waves[current_wave]
+		var wave_egg_num =  new_wave["Num"]
+		var wave_egg_var = new_wave["Var"]
 		eggs_remaining_this_wave = rng.randi_range(wave_egg_num-wave_egg_var, wave_egg_num+wave_egg_var)
-		time_btwn_eggs_this_wave = egg_waves[current_wave]["Duration"] / eggs_remaining_this_wave
-		print("Set eggs remaining to: ", eggs_remaining_this_wave)
+		time_btwn_eggs_this_wave = new_wave["Duration"] / eggs_remaining_this_wave
+		egg_random_drop_pos_chance = new_wave["RandomDropPosChance"]
 
 func spawn_enemy_from_egg_at(pos: Vector3, egg_type: int):
 	living_enemies += 1

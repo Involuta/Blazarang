@@ -98,9 +98,13 @@ func set_active(active):
 	set_process(active)
 	set_physics_process(active)
 	if active:
+		visible = true
 		process_mode = Node.PROCESS_MODE_INHERIT
 		add_to_group("lockonables")
+		if hurtbox:
+			hurtbox.health = hurtbox.max_health
 	else:
+		visible = false
 		global_position.y = -50
 		process_mode = Node.PROCESS_MODE_DISABLED
 		remove_from_group("lockonables")

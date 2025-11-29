@@ -33,8 +33,9 @@ var ground_normal := Vector3.UP # Normal of the ground, determined by the avg no
 @export var spit_projectile_spread := 3.0 # Max dist (on a single axis) btwn target pos and actual projectile landing pos
 @export var spit_cooldown_secs := 8.0
 var spit_cooldown_remaining := 2.5
-
 @export var poke_dist := 5.0 # Dist from harvestman's parent node necessary to start poking with the middle legs
+
+@export var max_lateral_dist_from_arena_center := 115 # Max lateral dist from arena center before harvestman stops following target
 
 var leaving := false # Used to know whether to leave arena
 
@@ -88,12 +89,12 @@ func set_active(active):
 	if body_meshes == null:
 		body_meshes = $HarvestmanProcAnimMeshes
 	if active:
+		visible = true
 		process_mode = Node.PROCESS_MODE_INHERIT
 		if hurtbox:
 			# Ensure that homing attacks hit the hurtbox and not the parent node, which stays on the ground. For any enemy whose hurtbox is at the same position as the parent node, this line can just be add_to_group("lockonables")
 			hurtbox.add_to_group("lockonables")
-		# Wait for raycasts to activate and/or positions to update before starting IK
-		#await get_tree().create_timer(2*get_physics_process_delta_time()).timeout
+			hurtbox.health = hurtbox.max_health
 		body_meshes.stop_ik()
 		behav_state = HATCH
 		# Wait for hatch anim to end
@@ -101,6 +102,7 @@ func set_active(active):
 		body_meshes.start_ik()
 		behav_state = FOLLOW
 	else:
+		visible = false
 		body_meshes.stop_ik()
 		global_position.y = -50
 		process_mode = Node.PROCESS_MODE_DISABLED
@@ -135,7 +137,11 @@ func follow_frame(delta):
 		switch_to_leave()
 		return
 	rotate_y_to_vec(target_position - global_position, follow_turn_speed)
-	if global_position.distance_to(target_position) <= nav_agent.target_desired_distance:
+	# Get lateral dist from arena center
+	var arena_center := Vector3.ZERO
+	var vec_from_arena_center := global_position - arena_center
+	var lateral_dist_from_arena_center := Vector3(vec_from_arena_center.x, 0, vec_from_arena_center.z).length()
+	if global_position.distance_to(target_position) <= nav_agent.target_desired_distance or lateral_dist_from_arena_center >= max_lateral_dist_from_arena_center:
 		nav_agent.set_target_position(global_position)
 	else:
 		nav_agent.set_target_position(target_position)
