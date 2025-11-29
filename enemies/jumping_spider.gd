@@ -414,6 +414,7 @@ func cotu_normal_rose_throw_response():
 	if behav_state == READY:
 		if not phase2:
 			normal_rose_throw_responses += 1
+		# Show reaction effect
 		ready_triggered = true
 
 func cotu_dodge_response():
@@ -423,6 +424,7 @@ func cotu_dodge_response():
 	if behav_state == READY:
 		if not phase2:
 			dodge_responses += 1
+		# Show reaction effect
 		ready_triggered = true
 
 func switch_to_ready():

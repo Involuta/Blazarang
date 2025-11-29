@@ -34,3 +34,4 @@ res://enemies/flatmite.tscn
 res://enemies/flatmite.gd
 res://enemies/paramite.tscn
 res://enemies/paramite.gd
+res://enemies/jumping_spider.gd
