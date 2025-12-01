@@ -2,6 +2,9 @@ extends CharacterBody3D
 
 var reaction_effect_scene := preload("res://enemies/enemy_2d_anims/jumping_spider_reaction_effect.tscn")
 var silkthread_scene := preload("res://enemies/silkthread.tscn")
+var high_long_hiss := preload("res://enemies/enemy_sfx/HighLongHiss.mp3")
+var high_short_hiss := preload("res://enemies/enemy_sfx/HighShortHiss.mp3")
+var low_short_hiss := preload("res://enemies/enemy_sfx/LowShortHiss.mp3")
 @onready var nav_agent := $NavigationAgent3D
 @onready var body_meshes := $JumpingSpiderProcAnimMeshes
 @onready var physical_collider := $CollisionShape3D
@@ -12,6 +15,7 @@ var silkthread_scene := preload("res://enemies/silkthread.tscn")
 @onready var fake_meshes := $FakeMeshesPivot/FakeMeshes
 @onready var silkthread_mesh := $FakeMeshesPivot/SilkThreadMesh
 @onready var fake_meshes_anim_player := $FakeMeshesPivot/FakeMeshes/AnimationPlayer
+@onready var audio_player := $AudioStreamPlayer
 @onready var root := $/root/ViewControl
 var rng := RandomNumberGenerator.new()
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -413,6 +417,9 @@ func show_reaction_effect():
 	await reaction_inst.tree_entered
 	reaction_inst.global_position = global_position + 4 * Vector3.UP
 
+func play_reaction_sfx():
+	audio_player.play()
+
 func cotu_normal_rose_throw_response():
 	# In phase 2, don't respond to normal rose throws if you responded more to normal rose throws in phase 1
 	if phase2 and normal_rose_throw_responses > dodge_responses:
@@ -422,6 +429,7 @@ func cotu_normal_rose_throw_response():
 		if not phase2:
 			normal_rose_throw_responses += 1
 		show_reaction_effect()
+		play_reaction_sfx()
 		ready_triggered = true
 
 func cotu_dodge_response():
@@ -432,6 +440,7 @@ func cotu_dodge_response():
 		if not phase2:
 			dodge_responses += 1
 		show_reaction_effect()
+		play_reaction_sfx()
 		ready_triggered = true
 
 func switch_to_ready():

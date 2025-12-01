@@ -1,3 +1,4 @@
+AudioStreamPlayer
 AnimatedSprite3D
 FogVolume
 GPUParticles3D
@@ -23,11 +24,9 @@ FuncGodotMap
 Node2D
 WorldEnvironment
 NavigationRegion3D
-AudioStreamPlayer
 PhysicalBone3D
 Skeleton3D
 TextureRect
 GPUTrail3D
 GPUParticlesAttractorSphere3D
 BoneAttachment3D
-BallSpawner
