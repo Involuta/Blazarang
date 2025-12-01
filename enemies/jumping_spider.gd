@@ -2,9 +2,6 @@ extends CharacterBody3D
 
 var reaction_effect_scene := preload("res://enemies/enemy_2d_anims/jumping_spider_reaction_effect.tscn")
 var silkthread_scene := preload("res://enemies/silkthread.tscn")
-var high_long_hiss := preload("res://enemies/enemy_sfx/HighLongHiss.mp3")
-var high_short_hiss := preload("res://enemies/enemy_sfx/HighShortHiss.mp3")
-var low_short_hiss := preload("res://enemies/enemy_sfx/LowShortHiss.mp3")
 @onready var nav_agent := $NavigationAgent3D
 @onready var body_meshes := $JumpingSpiderProcAnimMeshes
 @onready var physical_collider := $CollisionShape3D
