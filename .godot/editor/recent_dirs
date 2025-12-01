@@ -1,4 +1,5 @@
 res://general_scripts
+res://enemies/enemy_2d_anims
 res://enemies
 res://shaders
 res://glb_inherited_scenes
@@ -19,7 +20,6 @@ res://skyboxes
 res://levels/x_boss_level/background_nodes
 res://levels/
 res://levels/hub
-res://textures
 /Users/ryanbascos/GameDevMiscAssets
 /Users/ryanbascos/Library/Application Support/TrenchBroom/games
 /Users/ryanbascos/GodotBuilds

@@ -71,7 +71,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"default",
-"speed": 30.0
+"speed": 60.0
 }]
 
 [node name="HitEffect1" type="AnimatedSprite3D"]

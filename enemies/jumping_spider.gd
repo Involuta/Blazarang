@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+var reaction_effect_scene := preload("res://enemies/enemy_2d_anims/jumping_spider_reaction_effect.tscn")
 var silkthread_scene := preload("res://enemies/silkthread.tscn")
 @onready var nav_agent := $NavigationAgent3D
 @onready var body_meshes := $JumpingSpiderProcAnimMeshes
@@ -406,6 +407,12 @@ func aim_frame(delta):
 	if aim_duration <= 0:
 		switch_to_ready()
 
+func show_reaction_effect():
+	var reaction_inst := reaction_effect_scene.instantiate()
+	level.add_child.call_deferred(reaction_inst)
+	await reaction_inst.tree_entered
+	reaction_inst.global_position = global_position + 4 * Vector3.UP
+
 func cotu_normal_rose_throw_response():
 	# In phase 2, don't respond to normal rose throws if you responded more to normal rose throws in phase 1
 	if phase2 and normal_rose_throw_responses > dodge_responses:
@@ -414,7 +421,7 @@ func cotu_normal_rose_throw_response():
 	if behav_state == READY:
 		if not phase2:
 			normal_rose_throw_responses += 1
-		# Show reaction effect
+		show_reaction_effect()
 		ready_triggered = true
 
 func cotu_dodge_response():
@@ -424,7 +431,7 @@ func cotu_dodge_response():
 	if behav_state == READY:
 		if not phase2:
 			dodge_responses += 1
-		# Show reaction effect
+		show_reaction_effect()
 		ready_triggered = true
 
 func switch_to_ready():

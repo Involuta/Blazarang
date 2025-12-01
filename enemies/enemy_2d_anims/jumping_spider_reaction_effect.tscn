@@ -1,0 +1,75 @@
+[gd_scene load_steps=12 format=3 uid="uid://bpchq6cfko3r4"]
+
+[ext_resource type="Texture2D" uid="uid://cx4j36rvb1xkh" path="res://enemies/enemy_2d_anims/jumping_spider_reaction_effect.png" id="1_gdo10"]
+[ext_resource type="Script" path="res://general_scripts/DisappearNode.gd" id="2_cax1a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fruau"]
+atlas = ExtResource("1_gdo10")
+region = Rect2(0, 0, 680, 680)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_00okw"]
+atlas = ExtResource("1_gdo10")
+region = Rect2(1360, 0, 680, 680)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p34ql"]
+atlas = ExtResource("1_gdo10")
+region = Rect2(4080, 0, 680, 680)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h24qs"]
+atlas = ExtResource("1_gdo10")
+region = Rect2(2040, 0, 680, 680)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3us2d"]
+atlas = ExtResource("1_gdo10")
+region = Rect2(3400, 0, 680, 680)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebjjo"]
+atlas = ExtResource("1_gdo10")
+region = Rect2(2720, 0, 680, 680)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjjjo"]
+atlas = ExtResource("1_gdo10")
+region = Rect2(4760, 0, 680, 680)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p51y0"]
+atlas = ExtResource("1_gdo10")
+region = Rect2(680, 0, 680, 680)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vxqpc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fruau")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_00okw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p34ql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h24qs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3us2d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ebjjo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tjjjo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p51y0")
+}],
+"loop": false,
+"name": &"default",
+"speed": 30.0
+}]
+
+[node name="JumpingSpiderReactionEffect" type="AnimatedSprite3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+billboard = 1
+sprite_frames = SubResource("SpriteFrames_vxqpc")
+autoplay = "default"
+script = ExtResource("2_cax1a")

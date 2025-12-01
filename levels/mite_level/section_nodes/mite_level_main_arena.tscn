@@ -60,7 +60,55 @@ size = Vector3(1, 100, 15)
 script = ExtResource("1_tjf6h")
 egg_fog_chance_pre_jumping_spider = 0.04
 egg_fog_chance_post_jumping_spider = 0.4
-starting_wave = 0
+egg_waves = [{
+"Chances": [1, 0, 0, 0],
+"Duration": 20.0,
+"Num": 16,
+"RandomDropPosChance": 0.75,
+"Var": 1
+}, {
+"Chances": [0.83, 0.17, 0, 0],
+"Duration": 20.0,
+"Num": 24,
+"RandomDropPosChance": 0.5,
+"Var": 2
+}, {
+"Chances": [0, 0, 1, 0],
+"Duration": 8.0,
+"Num": 1,
+"RandomDropPosChance": 0.5,
+"Var": 0
+}, {
+"Chances": [0.83, 0.17, 0, 0],
+"Duration": 16.0,
+"Num": 24,
+"RandomDropPosChance": 0.5,
+"Var": 2
+}, {
+"Chances": [0, 0, 0, 1],
+"Duration": 4.0,
+"Num": 1,
+"RandomDropPosChance": 1.0,
+"Var": 0
+}, {
+"Chances": [0.83, 0.17, 0, 0],
+"Duration": 8.0,
+"Num": 16,
+"RandomDropPosChance": 0,
+"Var": 1
+}, {
+"Chances": [0, 0, 0, 1],
+"Duration": 4.0,
+"Num": 1,
+"RandomDropPosChance": 1.0,
+"Var": 0
+}, {
+"Chances": [0.67, 0.13, 0.1, 0.1],
+"Duration": 1.0,
+"Num": 1,
+"RandomDropPosChance": 0.5,
+"Var": 0
+}]
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_mcv4c")

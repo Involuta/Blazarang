@@ -35,3 +35,6 @@ res://enemies/flatmite.gd
 res://enemies/paramite.tscn
 res://enemies/paramite.gd
 res://enemies/jumping_spider.gd
+res://rang/roserang.tscn
+res://rang/hit_effect1.tscn
+res://enemies/enemy_2d_anims/jumping_spider_reaction_effect.tscn
