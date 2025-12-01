@@ -9,6 +9,8 @@ extends Marker3D
 # Stepping takes more time (.2 instead of .05)
 # Legs are raised by 2 units instead of 1
 
+var rng := RandomNumberGenerator.new()
+
 @export var step_ray : Node3D
 @export var step_distance := 1.5
 @export var step_time := .0167
@@ -21,9 +23,17 @@ extends Marker3D
 # Only step when you're not stepping
 var is_stepping := false
 
+var step_audio : AudioStreamPlayer3D
+
+func _ready():
+	step_audio = get_parent().find_child("StepAudio")
+
 func _physics_process(_delta):
 	if not is_stepping and global_position.distance_to(step_ray.step_target) > step_distance:
 		if not checking_adjacent or not adjacent_ik_target.is_stepping:
+			# Steps are only played 50% of the time so sounds are more distinct. SFX isn't played in step func so that 2 sounds aren't played at once per step (adjacent legs step simultaneously)
+			if rng.randf() > .5:
+				step_audio.play()
 			step()
 			if checking_opposite:
 				opposite_ik_target.step()

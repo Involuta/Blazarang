@@ -25,3 +25,6 @@ res://glb_inherited_scenes/cotu_outline.gdshader
 res://general_scripts/skygradient.gdshader
 res://enemies/jumping_spider.gd
 res://levels/mite_level/section_nodes/mite_level_main_arena.tscn
+res://enemies/jumping_spider_proc_anim_meshes.tscn
+res://procedural_animation/jumping_spider_ik_target.gd
+res://levels/mite_level/section_nodes/mite_level_main_arena.gd

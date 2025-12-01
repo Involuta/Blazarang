@@ -30,8 +30,8 @@ var time_until_next_egg := 10.0
 
 @export var egg_drop_height := 160.0
 
-@export var egg_fog_chance_pre_jumping_spider := .08 # Chance of fog appearing from an egg before spider spawns
-@export var egg_fog_chance_post_jumping_spider := .5
+@export var egg_fog_chance_pre_jumping_spider := .04 # Chance of fog appearing from an egg before spider spawns
+@export var egg_fog_chance_post_jumping_spider := .4
 var egg_fog_chance := .08 # Current egg fog chance. Changes to post-spider chance when spider spawns
 
 @export var max_living_enemies := 50
@@ -40,6 +40,7 @@ var living_enemies := 0
 
 @export var near_target_drop_max_radius := 12.0 # Max radius of egg drop near target
 @export var random_drop_pos_max_radius := 90.0 # Max radius of egg drop when dropping randomly around arena center
+@export var js_random_drop_pos_chance := .33 # Egg random drop pos chance for the jumping spider wave
 var egg_random_drop_pos_chance := .25 # Chance for an egg to be dropped near target instead of randomly around the arena. Chance varies depending on the wave
 
 @export var starting_wave := 7 # FOR TESTING ONLY: manually set the first wave when the level starts
@@ -210,9 +211,26 @@ func _physics_process(delta):
 		time_until_next_egg = time_btwn_eggs_this_wave
 		drop_egg()
 
+func get_egg_drop_pos(near_target : bool) -> Vector3:
+	var drop_pos : Vector3
+	var drop_dist : float
+	if near_target:
+		# Get random pt around target
+		drop_dist = rng.randf_range(0, near_target_drop_max_radius)
+		drop_pos = drop_dist * Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI)) + egg_drop_height * Vector3.UP + target.global_position # This adds target's y pos to the drop pos, but since it's so high up, who cares
+	else:
+		# Get random pt from arena center
+		var arena_center := Vector3.ZERO
+		drop_dist = rng.randf_range(0, random_drop_pos_max_radius)
+		drop_pos = drop_dist * Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI)) + egg_drop_height * Vector3.UP + arena_center
+	return drop_pos
+
 func drop_egg_of_type(egg_type: int):
-	# Get random pt around target
-	var drop_pos = near_target_drop_max_radius * Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI)) + egg_drop_height * Vector3.UP + target.global_position # This adds target's y pos to the drop pos, but since it's so high up, who cares
+	var near_target := true # Whether the egg will be dropped near the target or randomly around the arena
+	if rng.randf() < egg_random_drop_pos_chance:
+		near_target = false
+	var drop_pos := get_egg_drop_pos(near_target)
+	
 	match egg_type:
 		1:
 			load_scene_at_pos(landmite_egg, drop_pos, true)
@@ -235,18 +253,7 @@ func drop_egg():
 	var near_target := true # Whether the egg will be dropped near the target or randomly around the arena
 	if egg_chosen == harvestman_egg or rng.randf() < egg_random_drop_pos_chance:
 		near_target = false
-	
-	var drop_pos : Vector3
-	var drop_dist : float
-	if near_target:
-		# Get random pt around target
-		drop_dist = rng.randf_range(0, near_target_drop_max_radius)
-		drop_pos = drop_dist * Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI)) + egg_drop_height * Vector3.UP + target.global_position # This adds target's y pos to the drop pos, but since it's so high up, who cares
-	else:
-		# Get random pt from arena center
-		var arena_center := Vector3.ZERO
-		drop_dist = rng.randf_range(0, random_drop_pos_max_radius)
-		drop_pos = drop_dist * Vector3.FORWARD.rotated(Vector3.UP, rng.randf_range(0, 2*PI)) + egg_drop_height * Vector3.UP + arena_center # This adds target's y pos to the drop pos, but since it's so high up, who cares
+	var drop_pos := get_egg_drop_pos(near_target)
 	
 	load_scene_at_pos(egg_chosen, drop_pos, true)
 	
@@ -309,6 +316,8 @@ func start_jumping_spider_wave():
 	load_scene_at_pos(jumping_spider, Vector3(0, 10, 40), true)
 	# Change egg fog chance
 	egg_fog_chance = egg_fog_chance_post_jumping_spider
+	# Change egg random drop pos chance
+	egg_random_drop_pos_chance = js_random_drop_pos_chance
 	
 # Call funcs in enemies so they leave
 func evict_enemies():
