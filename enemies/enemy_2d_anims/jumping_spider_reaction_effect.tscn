@@ -64,7 +64,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"default",
-"speed": 30.0
+"speed": 36.0
 }]
 
 [node name="JumpingSpiderReactionEffect" type="AnimatedSprite3D"]

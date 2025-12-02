@@ -103,7 +103,7 @@ enum LEAVE_STATE {
 	WAIT,
 	DESCEND
 }
-var leave_behav_state := LEAVE_STATE.DESCEND
+var leave_behav_state := LEAVE_STATE.WAIT # Start in wait state so that descend state func doesn't run before initial switch to descend func in _ready
 @export var leave_points := { # Points on arena where spider can climb up and out
 	"Right": Vector3(0,36.5,132),
 	"Left": Vector3(0,36.5,-132),
@@ -136,6 +136,13 @@ func _ready():
 	inner_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
 	outer_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
 	anim_tree.active = true
+	
+	# Set default visibilities, which includes setting fake meshes pivot's process mode so it and its children's visibilites can change
+	visible = true
+	body_meshes.visible = false
+	fake_meshes_pivot.process_mode = Node.PROCESS_MODE_INHERIT
+	fake_meshes_pivot.visible = true
+	silkthread_mesh.visible = false
 	
 	# Ensure that homing attacks hit the hurtbox and not the parent node, which stays on the ground. For any enemy whose hurtbox is at the same position as the parent node, this line can just be add_to_group("lockonables"), which makes the parent a lockonable
 	hurtbox.add_to_group("lockonables")
@@ -729,7 +736,7 @@ func switch_to_leave_wait():
 
 # This is a separate func and not just part of switch_to_leave_wait so that spider doesn't have to wait for all eggs to drop before starting descend
 func drop_eggs():
-	var egg_num := rng.randi_range(4, 8)
+	var egg_num := rng.randi_range(12, 16)
 	for i in range(egg_num):
 		await get_tree().create_timer(leave_wait_time / egg_num).timeout
 		arena.drop_egg_of_type(5)
