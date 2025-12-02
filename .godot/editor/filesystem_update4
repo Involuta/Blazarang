@@ -27,3 +27,6 @@ res://enemies/jumping_spider.gd
 res://levels/mite_level/section_nodes/mite_level_main_arena.tscn
 res://globals.gd
 res://enemies/enemy_2d_anims/jumping_spider_reaction_effect.tscn
+res://enemies/landmite.tscn
+res://enemies/landmite.gd
+res://levels/mite_level/section_nodes/mite_level_main_arena.gd

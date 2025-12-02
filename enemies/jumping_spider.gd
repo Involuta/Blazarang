@@ -137,13 +137,6 @@ func _ready():
 	outer_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
 	anim_tree.active = true
 	
-	# Set default visibilities, which includes setting fake meshes pivot's process mode so it and its children's visibilites can change
-	visible = true
-	body_meshes.visible = false
-	fake_meshes_pivot.process_mode = Node.PROCESS_MODE_INHERIT
-	fake_meshes_pivot.visible = true
-	silkthread_mesh.visible = false
-	
 	# Ensure that homing attacks hit the hurtbox and not the parent node, which stays on the ground. For any enemy whose hurtbox is at the same position as the parent node, this line can just be add_to_group("lockonables"), which makes the parent a lockonable
 	hurtbox.add_to_group("lockonables")
 	
@@ -153,13 +146,26 @@ func _ready():
 	Globals.cotu_dodge.connect(cotu_dodge_response)
 	Globals.cotu_normal_throw_rose.connect(cotu_normal_rose_throw_response)
 	hurtbox.hit_received.connect(receive_hit_from_hurtbox)
-	
-	# Spider starts in leave-descend state
-	switch_to_leave_descend()
 
 # Used by mite level main arena when it instantiates jumping spider
-func set_active(_active: bool):
-	pass
+func set_active(active: bool):
+	if active:
+		process_mode = Node.PROCESS_MODE_INHERIT
+		add_to_group("lockonables")
+		if hurtbox:
+			hurtbox.health = hurtbox.max_health
+		# Set pre-leave-descend visibilities
+		body_meshes.visible = false
+		# Spider starts in leave-descend state
+		switch_to_leave_descend()
+	else:
+		process_mode = Node.PROCESS_MODE_DISABLED
+		remove_from_group("lockonables")
+		# Spider stays in leave-wait while inactive, but never changes state bc the timer never decreases bc physics process doesn't run while inactive
+		switch_to_leave_wait()
+	visible = active
+	set_process(active)
+	set_physics_process(active)
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("Special"):
@@ -721,8 +727,10 @@ func switch_to_leave_wait():
 	leave_wait_time_remaining = leave_wait_time + rng.randf_range(-leave_wait_time_var, leave_wait_time_var)
 	
 	# Hide and disable fake meshes since spider's far above the arena
-	fake_meshes_pivot.process_mode = Node.PROCESS_MODE_DISABLED
-	fake_meshes_pivot.visible = false
+	# Pivot might not exist bc it's declared in ready func but used in set_active before ready completes
+	if fake_meshes_pivot:
+		fake_meshes_pivot.process_mode = Node.PROCESS_MODE_DISABLED
+		fake_meshes_pivot.visible = false
 	
 	# Set walk_dest to random position
 	var dest_dist := rng.randf_range(0, faraway_dest_radius)

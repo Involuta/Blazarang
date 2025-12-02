@@ -116,6 +116,7 @@ var paramites_dict = {}
 var flatmites_dict = {}
 var harvestmen_dict = {}
 var enemy_dicts := [landmites_dict, paramites_dict, flatmites_dict, harvestmen_dict] # Dictionaries are passed by reference, not copy. If you need to apply the same code to all dicts, you can iterate through this list
+var jumping_spider_inst : Node3D
 
 @export var time_btwn_final_enemy_and_eviction := 8.0 # Seconds between the final enemy egg being spawned and the mass eviction
 @export var time_btwn_eviction_and_js_spawn := 3.0 # Seconds between start of mass eviction and jumping spider spawning
@@ -151,6 +152,7 @@ func _ready():
 	for i in range(real_num_harvestmen):
 		var inst = await load_scene_at_pos(harvestman, Vector3(i * 5, 60, 0))
 		harvestmen_dict[inst.name] = false
+	jumping_spider_inst = await load_scene_at_pos(jumping_spider, Vector3(0, 10, 40), false)
 	
 	egg_list = [landmite_egg, paramite_egg, flatmite_egg, harvestman_egg]
 	
@@ -312,8 +314,8 @@ func start_jumping_spider_wave():
 	evict_enemies()
 	# Wait for most enemies to leave
 	await get_tree().create_timer(time_btwn_eviction_and_js_spawn).timeout
-	# Spawn jumping spider
-	load_scene_at_pos(jumping_spider, Vector3(0, 10, 40), true)
+	# Make jumping spider active
+	jumping_spider_inst.set_active(true)
 	# Change egg fog chance
 	egg_fog_chance = egg_fog_chance_post_jumping_spider
 	# Change egg random drop pos chance
