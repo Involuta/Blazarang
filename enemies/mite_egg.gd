@@ -47,7 +47,8 @@ func _on_body_entered(body):
 	elif Globals.compare_layers(body.collision_layer, Globals.ARENA_COL_LAYER):
 		# Disable hitbox so spawned mites aren't hurt by egg
 		$PlayerHitbox.process_mode = Node.PROCESS_MODE_DISABLED
-		mite_arena.spawn_enemy_from_egg_at(global_position, type)
+		# Spawn mite slightly above egg so it doesn't potentially spawn in the floor
+		mite_arena.spawn_enemy_from_egg_at(global_position + .5 * Vector3.UP, type)
 		destroy_self()
 
 func destroy_self():

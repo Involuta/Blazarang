@@ -43,6 +43,7 @@ var in_leap_startup := false # Becomes true during leap startup; used to know wh
 @export var spitweb_num := 10 # Number of spitweb projectiles shot
 @export var spitweb_speed := 20.0 # Speed of a spitweb projectile
 @export var spitweb_spread := .5 # X and Z vel of projectiles are changed by a random num btwn -spitweb_spread and spitweb_spread
+var spitwebs_shot := false # Set to true after spitwebs are shot during leap; used to know whether to switch to follow upon touching floor
 
 @export var follow_speed := 13.0
 @export var follow_turn_speed := .2
@@ -99,6 +100,7 @@ func _physics_process(delta):
 func set_active(active):
 	if active:
 		process_mode = Node.PROCESS_MODE_INHERIT
+		physical_collider.process_mode = Node.PROCESS_MODE_INHERIT
 		add_to_group("lockonables")
 		if hurtbox:
 			hurtbox.health = hurtbox.max_health
@@ -138,9 +140,7 @@ func get_result_from_downray_at(ray_origin_pos : Vector3) -> Dictionary:
 func _on_navigation_agent_3d_target_reached():
 	if in_leap_startup:
 		in_leap_startup = false
-		behav_state = LEAP
-		await leap()
-		behav_state = FOLLOW
+		switch_to_leap()
 	else:
 		set_new_target_random_dest()
 
@@ -157,13 +157,7 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 
 func follow_frame(delta):
 	if leaving:
-		# Get closest leave point to current global position
-		target_position = leave_points[0]
-		for i in range(1, len(leave_points)):
-			var current_leave_point = leave_points[i]
-			if global_position.distance_to(current_leave_point) < global_position.distance_to(target_position):
-				target_position = current_leave_point
-		behav_state = LEAVE
+		switch_to_leave()
 		return
 	
 	if in_leap_startup:
@@ -178,13 +172,10 @@ func follow_frame(delta):
 	nav_agent.velocity = new_velocity
 	
 	# If player isn't in sight, reduce target distance to a very small number
-	if can_see_target():
-		if in_leap_startup:
-			nav_agent.target_desired_distance = leap_startup_proximity
-		else:
-			nav_agent.target_desired_distance = target_position_distance
+	if in_leap_startup:
+		nav_agent.target_desired_distance = leap_startup_proximity
 	else:
-		nav_agent.target_desired_distance = .1
+		nav_agent.target_desired_distance = target_position_distance
 	
 	if can_leap:
 		if far_from_roserang():
@@ -208,8 +199,10 @@ func stop_lateral_mvmt():
 	velocity.x = 0
 	velocity.z = 0
 
-func leap():
+func switch_to_leap():
+	behav_state = LEAP
 	body_meshes.alignment_disabled = true
+	spitwebs_shot = false
 	
 	if global_position.distance_to(target_position) > leap_length_threshold:
 		velocity = (leap_long_lateral_speed + rng.randf_range(-.5,.5)) * body_meshes.transform.basis.z
@@ -219,13 +212,8 @@ func leap():
 	physical_collider.process_mode = Node.PROCESS_MODE_DISABLED
 	await get_tree().create_timer(leap_secs/2).timeout
 	shoot_spitwebs()
+	spitwebs_shot = true
 	physical_collider.process_mode = Node.PROCESS_MODE_INHERIT
-	await get_tree().create_timer(leap_secs/2).timeout
-	body_meshes.alignment_disabled = false
-	stop_lateral_mvmt()
-
-func leap_frame(_delta):
-	rotate_y_to_vec(target_position - global_position, follow_turn_speed)
 
 func shoot_spitwebs():
 	target_position = target.global_position
@@ -238,28 +226,32 @@ func shoot_spitwebs():
 		spit_dir += Vector3(rng.randf_range(-spitweb_spread, spitweb_spread), rng.randf_range(0, spitweb_spread/2), rng.randf_range(-spitweb_spread, spitweb_spread))
 		sw_inst.velocity = spitweb_speed * spit_dir
 
+func leap_frame(_delta):
+	rotate_y_to_vec(target_position - global_position, follow_turn_speed)
+	if spitwebs_shot and is_on_floor():
+		switch_to_follow()
+
+func switch_to_follow():
+	behav_state = FOLLOW
+	body_meshes.alignment_disabled = false
+	stop_lateral_mvmt()
+
 func stop_aiming_at_target():
 	aiming_at_target = false
 
-func can_see_target():
-	var space_state := get_world_3d().direct_space_state
-	var sight_dir := global_position.direction_to(target.global_position)
-	var query = PhysicsRayQueryParameters3D.create(global_position, global_position + nav_agent.neighbor_distance * sight_dir)
-	query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER, Globals.TARGET_COL_LAYER])
-	query.collide_with_areas = true
-	var result = space_state.intersect_ray(query)
-	if not result:
-		return true
-	if result.collider.collision_layer == Globals.ARENA_COL_LAYER:
-		return false
-	else:
-		return true
+func switch_to_leave():
+	behav_state = LEAVE
+	# Get closest leave point to current global position
+	target_position = leave_points[0]
+	for i in range(1, len(leave_points)):
+		var current_leave_point = leave_points[i]
+		if global_position.distance_to(current_leave_point) < global_position.distance_to(target_position):
+			target_position = current_leave_point
 
 func leave_frame():
 	rotate_y_to_vec(velocity, follow_turn_speed)
 	if global_position.distance_to(target_position) < leap_length_threshold:
 		# When close to the target position, maintain velocity (do nothing)
-		behav_state = LEAP
 		start_leave_leap()
 		return
 	
@@ -274,6 +266,7 @@ func leave_frame():
 	anim_tree.set("parameters/playback_speed", clamp(velocity.length() / follow_speed, 0.01, 10))
 
 func start_leave_leap():
+	behav_state = LEAP
 	var arena_center := Vector3.ZERO
 	var leap_dir = arena_center.direction_to(global_position)
 	
