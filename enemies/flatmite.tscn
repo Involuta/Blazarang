@@ -82,123 +82,123 @@ turn_speed = 1.0
 ground_offset = 1.5
 
 [node name="Skeleton3D" parent="FlatmiteMeshes/Armature" index="0"]
-bones/1/rotation = Quaternion(0.280713, 0.330245, -0.527428, 0.730724)
-bones/2/rotation = Quaternion(-0.0781001, 0.0444461, -0.560313, 0.823392)
-bones/3/rotation = Quaternion(-0.104151, -0.00128087, -0.0899659, 0.990483)
-bones/6/rotation = Quaternion(0.166839, 0.473259, -0.505411, 0.701962)
-bones/7/rotation = Quaternion(-0.0660419, 0.0822779, -0.350706, 0.930523)
-bones/8/rotation = Quaternion(0.0176947, -0.00189436, 0.0459334, 0.998786)
-bones/11/rotation = Quaternion(0.491821, 0.0663175, -0.557706, 0.665341)
-bones/12/rotation = Quaternion(0.0615299, -0.107041, -0.545045, 0.829266)
-bones/13/rotation = Quaternion(0.00775692, -0.000268044, 0.0234849, 0.999694)
-bones/16/rotation = Quaternion(0.468776, 0.189318, -0.491975, 0.708779)
-bones/17/rotation = Quaternion(0.14211, -0.00576663, -0.654783, 0.742315)
-bones/18/rotation = Quaternion(0.116668, -0.000504571, -0.0668673, 0.990917)
-bones/21/rotation = Quaternion(0.0483441, -0.528492, 0.578494, 0.619439)
-bones/22/rotation = Quaternion(-0.035423, -0.118706, 0.10999, 0.986183)
-bones/23/rotation = Quaternion(-0.00473476, -0.000158348, -0.0268632, 0.999628)
-bones/26/rotation = Quaternion(0.333889, -0.238803, 0.451556, 0.792205)
-bones/27/rotation = Quaternion(-0.0385288, 0.0309609, 0.642188, 0.764952)
-bones/28/rotation = Quaternion(0.00310959, -0.000492439, -0.0840374, 0.996458)
-bones/31/rotation = Quaternion(0.476165, -0.133336, 0.35141, 0.794984)
-bones/32/rotation = Quaternion(0.00506725, -0.0388012, 0.760063, 0.648671)
-bones/33/rotation = Quaternion(-0.00325559, 0.00268008, -0.048215, 0.998828)
-bones/36/rotation = Quaternion(0.521222, -0.0637789, 0.641891, 0.55878)
-bones/37/rotation = Quaternion(0.0762447, 0.109524, 0.408163, 0.903102)
-bones/38/rotation = Quaternion(-0.0108169, 4.91824e-05, 0.013061, 0.999856)
+bones/1/rotation = Quaternion(0.2891, 0.319755, -0.522363, 0.735741)
+bones/2/rotation = Quaternion(-0.0612201, 0.0395465, -0.57683, 0.813606)
+bones/3/rotation = Quaternion(-0.104874, -0.00207695, -0.0973951, 0.989703)
+bones/6/rotation = Quaternion(0.152477, 0.490474, -0.507742, 0.691653)
+bones/7/rotation = Quaternion(-0.0679859, 0.0916062, -0.324444, 0.939001)
+bones/8/rotation = Quaternion(0.0166571, -0.00196776, 0.0496885, 0.998624)
+bones/11/rotation = Quaternion(0.493636, 0.0569949, -0.571873, 0.652714)
+bones/12/rotation = Quaternion(0.0670335, -0.121358, -0.526898, 0.838545)
+bones/13/rotation = Quaternion(0.00862807, -0.000321438, 0.0274206, 0.999587)
+bones/16/rotation = Quaternion(0.466609, 0.18959, -0.476708, 0.720473)
+bones/17/rotation = Quaternion(0.124972, 0.00204894, -0.678169, 0.724199)
+bones/18/rotation = Quaternion(0.115653, 0.000292249, -0.0725745, 0.990635)
+bones/21/rotation = Quaternion(0.0308647, -0.540682, 0.583063, 0.605597)
+bones/22/rotation = Quaternion(-0.0381122, -0.122082, 0.0647161, 0.989674)
+bones/23/rotation = Quaternion(-0.00645945, -0.000124122, -0.0332729, 0.999425)
+bones/26/rotation = Quaternion(0.347073, -0.21834, 0.444109, 0.79664)
+bones/27/rotation = Quaternion(-0.0355365, 0.0405115, 0.664176, 0.745631)
+bones/28/rotation = Quaternion(0.00663563, -0.000762005, -0.0829393, 0.996532)
+bones/31/rotation = Quaternion(0.472683, -0.139513, 0.333575, 0.803638)
+bones/32/rotation = Quaternion(0.000171694, -0.0516454, 0.774118, 0.630931)
+bones/33/rotation = Quaternion(-0.00458971, 0.00272614, -0.0478671, 0.998839)
+bones/36/rotation = Quaternion(0.522191, -0.0582511, 0.654839, 0.543239)
+bones/37/rotation = Quaternion(0.076538, 0.115539, 0.374624, 0.91676)
+bones/38/rotation = Quaternion(-0.0103653, 3.78593e-05, 0.00812038, 0.999913)
 
 [node name="LeftVeryBackShin" parent="FlatmiteMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.515908, 0.804563, 0.29414, -0.824258, 0.559743, -0.0853596, -0.23332, -0.19841, 0.951943, 1.94132, 1.73723, 0.114296)
+transform = Transform3D(0.519022, 0.817102, 0.250919, -0.834038, 0.548374, -0.0605482, -0.187072, -0.17785, 0.966113, 1.90647, 1.80012, 0.0564349)
 
 [node name="LeftVeryBackShin" parent="FlatmiteMeshes/Armature/Skeleton3D/LeftVeryBackShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_j4ubx")
 
 [node name="LeftVeryBackThigh" parent="FlatmiteMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.958056, -0.226679, 0.175344, 0.221384, 0.973932, 0.0494574, -0.181984, -0.00856473, 0.983264, -0.0958784, -0.241327, 0.192991)
+transform = Transform3D(0.95512, -0.250966, 0.157361, 0.245773, 0.967934, 0.0519526, -0.165353, -0.0109458, 0.986174, -0.12611, -0.272749, 0.173889)
 
 [node name="LeftVeryBackThigh" parent="FlatmiteMeshes/Armature/Skeleton3D/LeftVeryBackThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_j4ubx")
 
 [node name="LeftMiddleBackShin" parent="FlatmiteMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.585292, 0.605139, 0.539666, -0.605083, 0.769027, -0.206087, -0.539729, -0.205922, 0.816265, 1.41363, 0.840991, 0.343831)
+transform = Transform3D(0.570962, 0.601023, 0.559261, -0.580958, 0.777115, -0.242033, -0.580078, -0.186715, 0.792873, 1.43165, 0.768679, 0.403876)
 
 [node name="LeftMiddleBackShin" parent="FlatmiteMeshes/Armature/Skeleton3D/LeftMiddleBackShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_j4ubx")
 
 [node name="LeftMiddleBackThigh" parent="FlatmiteMeshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.865179, -0.0575428, 0.49815, 0.0748047, 0.997089, -0.0147429, -0.495852, 0.0500193, 0.866965, 0.281451, -0.0879636, 0.522932)
+transform = Transform3D(0.850098, -0.0196334, 0.526258, 0.0428884, 0.998566, -0.0320265, -0.524874, 0.049796, 0.849722, 0.343153, -0.0592484, 0.547018)
 
 [node name="LeftMiddleBackThigh" parent="FlatmiteMeshes/Armature/Skeleton3D/LeftMiddleBackThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_j4ubx")
 
 [node name="LeftMiddleFrontShin" parent="FlatmiteMeshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.505305, 0.679075, -0.53247, -0.694011, 0.686508, 0.216921, 0.51285, 0.259929, 0.818181, 1.46216, 1.20201, -0.331317)
+transform = Transform3D(0.481895, 0.67447, -0.559345, -0.673304, 0.693549, 0.256222, 0.560748, 0.253137, 0.788342, 1.49615, 1.15613, -0.403206)
 
 [node name="LeftMiddleFrontShin" parent="FlatmiteMeshes/Armature/Skeleton3D/LeftMiddleFrontShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_j4ubx")
 
 [node name="LeftMiddleFrontThigh" parent="FlatmiteMeshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.802894, -0.380719, -0.458709, 0.417618, 0.908333, -0.0229257, 0.425389, -0.173158, 0.88829, -0.178707, -0.539073, -0.630612)
+transform = Transform3D(0.798814, -0.350966, -0.488589, 0.395623, 0.918323, -0.0128346, 0.453187, -0.183045, 0.872419, -0.143059, -0.505454, -0.670214)
 
 [node name="LeftMiddleFrontThigh" parent="FlatmiteMeshes/Armature/Skeleton3D/LeftMiddleFrontThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_j4ubx")
 
 [node name="LeftVeryFrontShin" parent="FlatmiteMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.473465, 0.81215, -0.340944, -0.848985, 0.523896, 0.068977, 0.234639, 0.256798, 0.93755, 1.94727, 1.78058, 0.0821539)
+transform = Transform3D(0.472907, 0.831309, -0.292034, -0.862049, 0.505095, 0.0418479, 0.182293, 0.231957, 0.955492, 1.93503, 1.83662, 0.134923)
 
 [node name="LeftVeryFrontShin" parent="FlatmiteMeshes/Armature/Skeleton3D/LeftVeryFrontShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_j4ubx")
 
 [node name="LeftVeryFrontThigh" parent="FlatmiteMeshes/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.870271, -0.451227, -0.197542, 0.436625, 0.892307, -0.114663, 0.228007, 0.0135363, 0.973565, -0.274473, -0.448182, -0.175182)
+transform = Transform3D(0.859115, -0.480482, -0.176232, 0.467216, 0.876879, -0.113105, 0.208879, 0.0148318, 0.977829, -0.304167, -0.491839, -0.158805)
 
 [node name="LeftVeryFrontThigh" parent="FlatmiteMeshes/Armature/Skeleton3D/LeftVeryFrontThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_j4ubx")
 
 [node name="RightVeryBackShin" parent="FlatmiteMeshes/Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.642057, -0.526133, -0.557626, 0.444194, 0.848118, -0.288769, 0.624864, -0.0622877, 0.778245, -1.40732, 0.360264, 0.49919)
+transform = Transform3D(0.643212, -0.504212, -0.576237, 0.396379, 0.863151, -0.312814, 0.655104, -0.0272027, 0.755048, -1.36736, 0.196877, 0.555927)
 
 [node name="RightVeryBackShin" parent="FlatmiteMeshes/Armature/Skeleton3D/RightVeryBackShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_j4ubx")
 
 [node name="RightVeryBackThigh" parent="FlatmiteMeshes/Armature/Skeleton3D" index="9"]
-transform = Transform3D(0.775179, -0.227421, -0.589387, 0.250116, 0.967204, -0.0442458, 0.58012, -0.113117, 0.806638, -0.886279, 0.206632, 0.378229)
+transform = Transform3D(0.747268, -0.264163, -0.60976, 0.288446, 0.955583, -0.0604882, 0.598656, -0.130682, 0.790274, -0.961734, 0.225563, 0.371087)
 
 [node name="RightVeryBackThigh" parent="FlatmiteMeshes/Armature/Skeleton3D/RightVeryBackThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_j4ubx")
 
 [node name="RightMiddleBackShin" parent="FlatmiteMeshes/Armature/Skeleton3D" index="10"]
-transform = Transform3D(0.613014, -0.775008, -0.15355, 0.789652, 0.594667, 0.151066, -0.025766, -0.213857, 0.976525, -1.38049, 1.44068, -0.336662)
+transform = Transform3D(0.597781, -0.793455, -0.114399, 0.798622, 0.57701, 0.171063, -0.0697208, -0.19362, 0.978596, -1.39857, 1.47245, -0.373316)
 
 [node name="RightMiddleBackShin" parent="FlatmiteMeshes/Armature/Skeleton3D/RightMiddleBackShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_j4ubx")
 
 [node name="RightMiddleBackThigh" parent="FlatmiteMeshes/Armature/Skeleton3D" index="11"]
-transform = Transform3D(0.867669, 0.491324, -0.0758388, -0.483553, 0.869497, 0.100756, 0.115445, -0.0507508, 0.992016, 0.282091, -0.596252, 0.0731527)
+transform = Transform3D(0.85156, 0.522854, -0.038321, -0.517344, 0.849915, 0.0999968, 0.0848534, -0.0653282, 0.994249, 0.308325, -0.650533, 0.0280285)
 
 [node name="RightMiddleBackThigh" parent="FlatmiteMeshes/Armature/Skeleton3D/RightMiddleBackThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_j4ubx")
 
 [node name="RightMiddleFrontShin" parent="FlatmiteMeshes/Armature/Skeleton3D" index="12"]
-transform = Transform3D(0.561459, -0.814671, 0.145171, 0.826028, 0.541287, -0.157117, 0.0494196, 0.20813, 0.976852, -1.41126, 1.51013, 0.413744)
+transform = Transform3D(0.549743, -0.828757, 0.104613, 0.829877, 0.527562, -0.181607, 0.0953182, 0.186653, 0.977791, -1.43359, 1.51803, 0.456385)
 
 [node name="RightMiddleFrontShin" parent="FlatmiteMeshes/Armature/Skeleton3D/RightMiddleFrontShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_j4ubx")
 
 [node name="RightMiddleFrontThigh" parent="FlatmiteMeshes/Armature/Skeleton3D" index="13"]
-transform = Transform3D(0.675752, 0.727119, 0.121067, -0.721722, 0.686048, -0.0919531, -0.149918, -0.0252391, 0.988376, 0.407792, -1.09225, -0.185513)
+transform = Transform3D(0.65773, 0.747912, 0.0895443, -0.742451, 0.663761, -0.0904875, -0.127113, -0.00696589, 0.991863, 0.410653, -1.13745, -0.14234)
 
 [node name="RightMiddleFrontThigh" parent="FlatmiteMeshes/Armature/Skeleton3D/RightMiddleFrontThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_j4ubx")
 
 [node name="RightVeryFrontShin" parent="FlatmiteMeshes/Armature/Skeleton3D" index="14"]
-transform = Transform3D(0.490796, -0.654365, 0.575262, 0.58958, 0.735558, 0.333692, -0.641495, 0.175388, 0.746809, -1.73053, 1.05335, -0.326608)
+transform = Transform3D(0.488262, -0.63897, 0.594405, 0.550394, 0.754038, 0.358461, -0.677249, 0.152134, 0.719853, -1.71348, 0.945534, -0.386934)
 
 [node name="RightVeryFrontShin" parent="FlatmiteMeshes/Armature/Skeleton3D/RightVeryFrontShin" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_j4ubx")
 
 [node name="RightVeryFrontThigh" parent="FlatmiteMeshes/Armature/Skeleton3D" index="15"]
-transform = Transform3D(0.778864, 0.174702, 0.602371, -0.192702, 0.980624, -0.035241, -0.596856, -0.0886302, 0.797438, -0.264539, -0.174837, -0.532237)
+transform = Transform3D(0.767439, 0.142417, 0.625103, -0.164012, 0.986183, -0.0233236, -0.619788, -0.0846251, 0.780194, -0.31784, -0.148812, -0.540976)
 
 [node name="RightVeryFrontThigh" parent="FlatmiteMeshes/Armature/Skeleton3D/RightVeryFrontThigh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_j4ubx")

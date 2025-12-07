@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cmuu5mmvjulgd"]
 
-[ext_resource type="PackedScene" uid="uid://bq1mw3215mb2j" path="res://enemies/big_x.tscn" id="2_of13a"]
+[ext_resource type="PackedScene" uid="uid://crgknsp41sjyc" path="res://enemies/big_t.tscn" id="1_aqh1a"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_taasp"]
 load_path = "res://.godot/imported/BlackStarryBG.webp-42cfbe646311ffffd0833896f1e64777.s3tc.ctex"
@@ -24,10 +24,10 @@ glow_hdr_threshold = 1.5
 
 [node name="ViewControl" type="Node3D"]
 
-[node name="BigX" parent="." instance=ExtResource("2_of13a")]
-transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 2.08165e-12, 2.08165e-12, -1)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_kg1qa")
 
 [node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="BigT" parent="." instance=ExtResource("1_aqh1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15718, -7.33307)
