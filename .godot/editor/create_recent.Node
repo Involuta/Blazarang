@@ -1,14 +1,14 @@
+GPUParticles3D
+CollisionShape3D
+Hitbox
 AudioStreamPlayer3D
 AudioStreamPlayer
 AnimatedSprite3D
 FogVolume
-GPUParticles3D
 MeshInstance3D
 Node3D
-CollisionShape3D
 StaticBody3D
 RayCast3D
-Hitbox
 AnimationPlayer
 Area3D
 EnemyHurtbox
@@ -30,4 +30,3 @@ Skeleton3D
 TextureRect
 GPUTrail3D
 GPUParticlesAttractorSphere3D
-BoneAttachment3D

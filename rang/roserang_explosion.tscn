@@ -1,0 +1,89 @@
+[gd_scene load_steps=16 format=3 uid="uid://dsjonv34uh6f"]
+
+[ext_resource type="Script" path="res://general_scripts/DisappearNode.gd" id="1_2y0dt"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="2_ni48j"]
+
+[sub_resource type="Curve" id="Curve_2mbbu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.504915, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_blkbs"]
+curve = SubResource("Curve_2mbbu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mdy1x"]
+spread = 180.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 4.0
+initial_velocity_max = 10.0
+linear_accel_min = -5.0
+linear_accel_max = -5.0
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_blkbs")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6xyxp"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_h3m0e"]
+material = SubResource("StandardMaterial3D_6xyxp")
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_f8nmv"]
+radius = 2.0
+
+[sub_resource type="Gradient" id="Gradient_7xdbu"]
+offsets = PackedFloat32Array(0, 0.447977, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fvrt0"]
+gradient = SubResource("Gradient_7xdbu")
+
+[sub_resource type="Curve" id="Curve_5nthj"]
+max_value = 6.0
+_data = [Vector2(0, 1), 0.0, 14.4241, 0, 0, Vector2(1, 6), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gavwt"]
+curve = SubResource("Curve_5nthj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ku2bn"]
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+scale_curve = SubResource("CurveTexture_gavwt")
+color_ramp = SubResource("GradientTexture1D_fvrt0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_up3is"]
+transparency = 4
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_2h446"]
+material = SubResource("StandardMaterial3D_up3is")
+
+[node name="RoserangExplosion" type="Node3D"]
+script = ExtResource("1_2y0dt")
+disappear_secs = 0.9
+
+[node name="SparkParticles" type="GPUParticles3D" parent="."]
+amount = 15
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_mdy1x")
+draw_pass_1 = SubResource("QuadMesh_h3m0e")
+
+[node name="PlayerHitbox" type="Area3D" parent="."]
+script = ExtResource("2_ni48j")
+damage = 10
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerHitbox"]
+shape = SubResource("SphereShape3D_f8nmv")
+
+[node name="MeshParticle" type="GPUParticles3D" parent="."]
+amount = 1
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_ku2bn")
+draw_pass_1 = SubResource("SphereMesh_2h446")

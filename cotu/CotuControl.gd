@@ -68,6 +68,7 @@ var rose_script := preload("res://rang/roserang.gd")
 var homing_script := preload("res://rang/roserang_homing.gd")
 var rapidorbit_script := preload("res://rang/special_rapidorbit.gd")
 var special_homing_script := preload("res://rang/special_homing.gd")
+var special_homing_explosive_script := preload("res://rang/special_explosive_homing.gd")
 var current_roserang_special_script
 var roserang_special_queued := false
 
@@ -114,7 +115,7 @@ func _ready():
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
-	current_roserang_special_script = special_homing_script
+	current_roserang_special_script = special_homing_explosive_script
 	current_axrang_special = "AxArcSlash"
 	
 	Globals.destabilize.connect(on_destabilize)

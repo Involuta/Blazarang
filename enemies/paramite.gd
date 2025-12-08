@@ -134,9 +134,9 @@ func set_active(active):
 		if skythread:
 			skythread.visible = false
 		global_position.y = -50
-		process_mode = Node.PROCESS_MODE_DISABLED
 		if hurtbox:
 			hurtbox.remove_from_group("lockonables")
+		process_mode = Node.PROCESS_MODE_DISABLED
 	visible = active
 	set_process(active)
 	set_physics_process(active)

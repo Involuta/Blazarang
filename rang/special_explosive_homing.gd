@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+var explosion := preload("res://rang/roserang_explosion.tscn")
+
 # Song BPMs:
 # Champion of the Universe - 113
 # It's Just You - 120
@@ -7,9 +9,8 @@ extends CharacterBody3D
 
 var BPM := 113.0
 var rotate_speed := 3.6
-var base_max_targets := 1
-var current_max_targets := 1
-var max_target_proximity := 30.0 # Farthest dist lockonable can be from rang (when it's spawned in) for it to be targeted; should be same or similar to rose's max radius
+var base_max_targets := 11
+var current_max_targets := 11 # No max proximity exists; any lockonable in the entire level can be targeted
 var homing_time := .12 # Time it takes for rang to move from 1 target to another
 
 var invincible := true
@@ -19,6 +20,7 @@ var invincible := true
 @onready var root := $/root/ViewControl
 var cotu : Node3D
 var icon : Node3D
+var level : Node3D
 
 func _init():
 	# When this script is assigned to roserang, _init() is called, but not _ready() bc the roserang is already in the scene tree, and _ready() is only called when a node enters the scene tree for the first time. To get the @onready values, you must call _ready() manually
@@ -27,25 +29,20 @@ func _init():
 func _ready():
 	cotu = root.find_child("cotuCB")
 	icon = root.find_child("Icon")
-	
-	current_max_targets = base_max_targets
+	level = root.find_child("Level")
 	
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, false)
 	set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, false)
 	var all_lockonables = get_tree().get_nodes_in_group("lockonables")
-	all_lockonables = all_lockonables.filter(within_proximity)
 	if not all_lockonables.is_empty():
 		all_lockonables.sort_custom(dist_to_lockonable)
 		var i := 0
 		while i < current_max_targets and i < all_lockonables.size():
 			await homing_attack(all_lockonables[i])
+			spawn_explosion()
 			i += 1
 	invincible = false # Allow rang to be deleted when it touches Cotu
 	await homing_attack(icon)
-	queue_free()
-
-func within_proximity(lockonable):
-	return icon.global_position.distance_to(lockonable.global_position) < max_target_proximity
 
 func dist_to_lockonable(a, b):
 	return icon.global_position.distance_to(a.global_position) < icon.global_position.distance_to(b.global_position)
@@ -69,6 +66,12 @@ func homing_attack(target):
 		var progress_vec = ((1 - progress) * original_vec)
 		global_position = target.global_position + progress_vec
 		await get_tree().create_timer(get_physics_process_delta_time()).timeout
+
+func spawn_explosion():
+	var inst = explosion.instantiate()
+	level.add_child.call_deferred(inst)
+	await inst.tree_entered
+	inst.global_position = global_position
 
 func _physics_process(_delta):
 	mesh.rotate_y(rotate_speed)

@@ -38,8 +38,6 @@ var current_loop_angle := 0.0 # shows how far into the current loop the rang is 
 const RETURN_ACC := 1.2
 const MAX_RETURN_SPEED := 55
 
-var rapidorbit_script := preload("res://rang/special_rapidorbit.gd")
-var homing_script := preload("res://rang/special_homing.gd")
 var ricochet_particles := preload("res://rang/rang_particles_ricochet.tscn")
 
 @onready var root := $/root/ViewControl
