@@ -12,6 +12,7 @@ var rotate_speed := 3.6
 var base_max_targets := 11
 var current_max_targets := 11 # No max proximity exists; any lockonable in the entire level can be targeted
 var homing_time := .12 # Time it takes for rang to move from 1 target to another
+var icon_homing_time := .4 # Time it takes for rang to return to icon after hitting all targets
 
 var invincible := true
 
@@ -38,25 +39,29 @@ func _ready():
 		all_lockonables.sort_custom(dist_to_lockonable)
 		var i := 0
 		while i < current_max_targets and i < all_lockonables.size():
-			await homing_attack(all_lockonables[i])
+			await homing_attack(all_lockonables[i], false)
 			spawn_explosion()
 			i += 1
 	invincible = false # Allow rang to be deleted when it touches Cotu
-	await homing_attack(icon)
+	await homing_attack(icon, true)
+	# PLACEHOLDER: ROSE MAY NOT ALWAYS DELETE ITSELF IMMEDIATELY UPON TOUCHING ICON AT END OF HOMING IN THE FUTURE
+	queue_free()
 
 func dist_to_lockonable(a, b):
 	return icon.global_position.distance_to(a.global_position) < icon.global_position.distance_to(b.global_position)
 
-func homing_attack(target):
-	if not target.is_in_group("lockonables") or not target or not is_instance_valid(target):
+func homing_attack(target, to_icon: bool):
+	if to_icon:
+		homing_time = icon_homing_time
+	elif not target.is_in_group("lockonables") or not target or not is_instance_valid(target):
 		return
 	
-	# No matter what the distance is, the rang should return to the icon in .4 seconds
-	# Get original vector from icon to rang
+	# Get original vector from target to current pos
 	var original_vec = global_position - target.global_position
+	# Imagine a vec pointing from the target to rang's current pos; this vec decreases in size every frame, eventually leading the rang to the target
 	# Progress = value btwn 0 and 1 where 0 is beginning of path and 1 is end
-	# At every frame, set rang's position to icon's position + icon_to_rang vec - (progress * icon_to_rang_vec)
-	# Progress reaches 1 at .4 seconds = .4 / delta = n frames
+	# At every frame, set rang's position to target_pos + ((1-progress) * target_to_current_pos vec)
+	# Progress reaches 1 at homing_time seconds = homing_time/delta frames = n frames
 	var n = int(homing_time/get_physics_process_delta_time())
 	# 1 is added to n bc the rang won't reach if the dist btwn icon and the target increases during the rang mvmt
 	for i in range(n+1):

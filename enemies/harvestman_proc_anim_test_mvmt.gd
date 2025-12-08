@@ -39,7 +39,7 @@ func _process(delta):
 	query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
 	var result = space_state.intersect_ray(query)
 	if not result:
-		print("Harvestman raycast sees nothing; stopping movement")
+		#print("Harvestman raycast sees nothing; stopping movement")
 		return
 	avg_normal = result.normal
 	

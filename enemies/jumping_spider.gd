@@ -137,9 +137,6 @@ func _ready():
 	outer_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
 	anim_tree.active = true
 	
-	# Ensure that homing attacks hit the hurtbox and not the parent node, which stays on the ground. For any enemy whose hurtbox is at the same position as the parent node, this line can just be add_to_group("lockonables"), which makes the parent a lockonable
-	hurtbox.add_to_group("lockonables")
-	
 	nav_agent.path_desired_distance = base_path_desired_dist
 	nav_agent.target_desired_distance = base_path_desired_dist
 	
@@ -159,8 +156,8 @@ func set_active(active: bool):
 		# Spider starts in leave-descend state
 		switch_to_leave_descend()
 	else:
-		process_mode = Node.PROCESS_MODE_DISABLED
 		remove_from_group("lockonables")
+		process_mode = Node.PROCESS_MODE_DISABLED
 		# Spider stays in leave-wait while inactive, but never changes state bc the timer never decreases bc physics process doesn't run while inactive
 		switch_to_leave_wait()
 	visible = active

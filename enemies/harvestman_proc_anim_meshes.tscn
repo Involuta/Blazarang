@@ -47,58 +47,58 @@ bones/37/rotation = Quaternion(-0.488593, 0.215434, 0.00255909, 0.845493)
 transform = Transform3D(0.375568, 0.869883, -0.31977, -0.878583, 0.444, 0.175941, 0.295025, 0.214867, 0.931017, 2.78695, 13.4089, 1.73438)
 
 [node name="LeftVeryFrontThigh" parent="HarvestmanMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.520359, -0.764675, -0.380128, 0.676277, 0.640816, -0.363323, 0.521417, -0.0680139, 0.850587, 0.134927, -0.914044, -0.599532)
+transform = Transform3D(0.520359, -0.764676, -0.380128, 0.676278, 0.640816, -0.363323, 0.521417, -0.0680137, 0.850587, 0.134925, -0.914044, -0.599533)
 
 [node name="LeftVeryBackShin" parent="HarvestmanMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.363645, 0.875791, 0.317416, -0.887334, 0.429379, -0.168144, -0.28355, -0.22051, 0.933261, 3.38024, 13.1161, -1.77372)
+transform = Transform3D(0.363645, 0.875791, 0.317416, -0.887334, 0.429379, -0.168144, -0.28355, -0.220509, 0.933261, 3.38023, 13.1161, -1.77372)
 
 [node name="LeftVeryBackThigh" parent="HarvestmanMeshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.566345, -0.737021, 0.368854, 0.64436, 0.675007, 0.359396, -0.513862, 0.0341325, 0.857194, 0.210962, -0.786631, 0.552339)
+transform = Transform3D(0.566345, -0.737021, 0.368854, 0.64436, 0.675008, 0.359396, -0.513862, 0.0341325, 0.857194, 0.21096, -0.786631, 0.552339)
 
 [node name="LeftMiddleBackShin" parent="HarvestmanMeshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(-0.500001, 0.866025, -2.1864e-07, -0.866025, -0.5, -1.05585e-06, -1.20638e-06, -3.46573e-07, 1, 6.06415, -0.151117, -0.781803)
+transform = Transform3D(-0.500001, 0.866025, -2.33629e-07, -0.866025, -0.5, -1.08167e-06, -1.20638e-06, -3.75794e-07, 1, 6.06415, -0.151116, -0.781803)
 
 [node name="LeftMiddleBackThigh" parent="HarvestmanMeshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.453154, 0.784885, 0.422619, -0.866025, 0.5, -8.28483e-07, -0.21131, -0.365998, 0.906308, 1.45923, 0.648885, -0.0681081)
+transform = Transform3D(0.453154, 0.784885, 0.422618, -0.866025, 0.5, -8.88088e-07, -0.21131, -0.365998, 0.906308, 1.45923, 0.648884, -0.0681081)
 
 [node name="LeftMiddleFrontShin" parent="HarvestmanMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(-0.500001, 0.866025, -1.51709e-07, -0.866024, -0.500001, -9.27065e-07, -8.65553e-07, -2.86351e-07, 1, 6.06405, -0.151124, 0.794246)
+transform = Transform3D(-0.500002, 0.866024, -3.73087e-07, -0.866024, -0.500002, -8.33642e-07, -8.65553e-07, -1.78995e-08, 1, 6.06405, -0.151124, 0.794246)
 
 [node name="LeftMiddleFrontThigh" parent="HarvestmanMeshes/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.453153, 0.784886, -0.422618, -0.866026, 0.499999, -2.24962e-07, 0.211309, 0.365998, 0.906308, 1.29098, 0.648885, 0.0432692)
+transform = Transform3D(0.453153, 0.784886, -0.422618, -0.866026, 0.499999, -2.50836e-07, 0.211309, 0.365998, 0.906308, 1.29098, 0.648884, 0.0432691)
 
 [node name="LeftMandible" parent="HarvestmanMeshes/Armature/Skeleton3D" index="8"]
-transform = Transform3D(1, 2.03496e-07, -2.0212e-06, -2.24944e-07, 1, 5.5796e-07, 2.05594e-06, 3.61296e-07, 1, 0.100001, 0.00038147, 4.57764e-05)
+transform = Transform3D(1, 2.03565e-07, -2.02493e-06, -2.26106e-07, 1, 5.5796e-07, 2.05959e-06, 3.59458e-07, 1, 0.100001, 0.000380993, 4.55379e-05)
 
 [node name="RightVeryFrontShin" parent="HarvestmanMeshes/Armature/Skeleton3D" index="9"]
-transform = Transform3D(-0.375568, -0.869883, 0.31977, -0.878583, 0.444, 0.175941, 0.295026, 0.214867, 0.931017, -2.78695, 13.4089, 1.73437)
+transform = Transform3D(-0.375567, -0.869883, 0.31977, -0.878583, 0.444, 0.175941, 0.295026, 0.214867, 0.931017, -2.78695, 13.4089, 1.73437)
 
 [node name="RightVeryFrontThigh" parent="HarvestmanMeshes/Armature/Skeleton3D" index="10"]
-transform = Transform3D(-0.520359, 0.764676, 0.380128, 0.676277, 0.640816, -0.363323, 0.521416, -0.0680137, 0.850587, -0.134927, -0.914044, -0.599532)
+transform = Transform3D(-0.520359, 0.764676, 0.380128, 0.676278, 0.640816, -0.363323, 0.521417, -0.0680138, 0.850587, -0.134927, -0.914044, -0.599532)
 
 [node name="RightVeryBackShin" parent="HarvestmanMeshes/Armature/Skeleton3D" index="11"]
-transform = Transform3D(-0.363645, -0.875791, -0.317416, -0.887334, 0.429379, -0.168144, -0.28355, -0.220509, 0.933261, -3.38024, 13.1161, -1.77372)
+transform = Transform3D(-0.363645, -0.875791, -0.317416, -0.887334, 0.429379, -0.168144, -0.28355, -0.220509, 0.933261, -3.38023, 13.1161, -1.77372)
 
 [node name="RightVeryBackThigh" parent="HarvestmanMeshes/Armature/Skeleton3D" index="12"]
-transform = Transform3D(-0.566345, 0.737021, -0.368854, 0.644359, 0.675008, 0.359396, -0.513862, 0.0341325, 0.857194, -0.210961, -0.786631, 0.552339)
+transform = Transform3D(-0.566345, 0.737021, -0.368854, 0.64436, 0.675007, 0.359396, -0.513862, 0.0341325, 0.857194, -0.210962, -0.786632, 0.552339)
 
 [node name="RightMiddleBackShin" parent="HarvestmanMeshes/Armature/Skeleton3D" index="13"]
-transform = Transform3D(0.500001, -0.866025, 1.08545e-06, -0.866025, -0.500001, -3.15204e-07, -8.46076e-07, 8.29928e-07, 1, -6.06415, -0.151121, -0.7818)
+transform = Transform3D(0.500001, -0.866025, 1.15894e-06, -0.866025, -0.500001, -2.03948e-07, -7.27334e-07, 8.29637e-07, 1, -6.06415, -0.15112, -0.7818)
 
 [node name="RightMiddleBackThigh" parent="HarvestmanMeshes/Armature/Skeleton3D" index="14"]
-transform = Transform3D(-0.453153, -0.784886, -0.422618, -0.866026, 0.5, -4.09108e-07, -0.211309, -0.365998, 0.906308, -1.45923, 0.648885, -0.0681089)
+transform = Transform3D(-0.453153, -0.784886, -0.422618, -0.866026, 0.5, -3.83314e-07, -0.211309, -0.365997, 0.906308, -1.45923, 0.648885, -0.0681089)
 
 [node name="RightMiddleFrontShin" parent="HarvestmanMeshes/Armature/Skeleton3D" index="15"]
-transform = Transform3D(0.500002, -0.866025, 3.94449e-07, -0.866024, -0.500002, -7.3335e-07, -8.06006e-07, 4.17052e-08, 1, -6.06405, -0.151124, 0.794246)
+transform = Transform3D(0.500002, -0.866024, 3.94449e-07, -0.866024, -0.500002, -7.3335e-07, -8.06006e-07, 4.17052e-08, 1, -6.06405, -0.151123, 0.794246)
 
 [node name="RightMiddleFrontThigh" parent="HarvestmanMeshes/Armature/Skeleton3D" index="16"]
-transform = Transform3D(-0.453153, -0.784886, 0.422618, -0.866026, 0.499999, -3.62392e-07, 0.211308, 0.365998, 0.906308, -1.29098, 0.648885, 0.0432692)
+transform = Transform3D(-0.453153, -0.784886, 0.422618, -0.866026, 0.499999, -3.10441e-07, 0.211309, 0.365998, 0.906308, -1.29098, 0.648884, 0.0432694)
 
 [node name="RightMandible" parent="HarvestmanMeshes/Armature/Skeleton3D" index="17"]
-transform = Transform3D(-1, -2.01122e-07, 2.02306e-06, -2.25989e-07, 1, 5.72861e-07, 2.05443e-06, 4.71796e-07, 1, -1.60933e-06, -1.19209e-07, -2.38419e-07)
+transform = Transform3D(-1, -2.02122e-07, 2.02679e-06, -2.26106e-07, 1, 5.72861e-07, 2.05629e-06, 4.69958e-07, 1, -1.51992e-06, 2.38419e-07, -2.38419e-07)
 
 [node name="Body" parent="HarvestmanMeshes/Armature/Skeleton3D" index="18"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.96046e-08, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.78814e-07, 0)
 
 [node name="LeftVeryFrontLeg" type="SkeletonIK3D" parent="HarvestmanMeshes/Armature/Skeleton3D" index="19"]
 process_priority = 1

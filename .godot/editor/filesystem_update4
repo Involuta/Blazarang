@@ -39,3 +39,8 @@ res://enemies/harvestman.tscn
 res://enemies/harvestman.gd
 res://rang/roserang_homing.gd
 res://rang/special_homing.gd
+res://enemies/harvestman_proc_anim_meshes.tscn
+res://enemies/harvestman_proc_anim_test_mvmt.gd
+res://enemies/paramite.tscn
+res://enemies/jumping_spider.tscn
+res://enemies/jumping_spider.gd
