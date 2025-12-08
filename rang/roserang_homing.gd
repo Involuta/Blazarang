@@ -17,6 +17,9 @@ var invincible := true
 
 @onready var mesh = $RoserangMesh
 @onready var hitbox = $PlayerHitbox
+@onready var trail = $Trail
+@onready var base_particle_gradient = $RoserangParticlesBase/GPUParticles3D.process_material.color_ramp.gradient
+@onready var rang_glow_shader = $RoserangMesh/Boomerang3DModelV1.get_surface_override_material(0)
 @onready var root := $/root/ViewControl
 var cotu : Node3D
 var icon : Node3D
@@ -30,6 +33,10 @@ func _ready():
 	icon = root.find_child("Icon")
 	
 	current_max_targets = base_max_targets
+	
+	trail.color_ramp.gradient.colors[1] = Color.DEEP_SKY_BLUE
+	base_particle_gradient.set_color(1, Color.DEEP_SKY_BLUE)
+	rang_glow_shader.set_shader_parameter("ColorParameter", Color.DEEP_SKY_BLUE)
 	
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, false)
 	set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, false)

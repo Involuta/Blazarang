@@ -207,7 +207,7 @@ transform = Transform3D(0.469443, 0.8793, -0.0803341, -0.877842, 0.455001, -0.14
 transform = Transform3D(0.570007, -0.454159, -0.684712, 0.601054, -0.337701, 0.724356, -0.560201, -0.824437, 0.0804824, -0.905296, 5.2562, -1.28302)
 
 [node name="VeryBackRightLeg_001" parent="JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/Armature/Skeleton3D" index="25"]
-transform = Transform3D(-0.128323, -0.625218, -0.769823, -0.939361, -0.172278, 0.296501, -0.318002, 0.761193, -0.565201, -2.84778, 0.248552, -2.64192)
+transform = Transform3D(-0.128323, -0.625218, -0.769823, -0.939361, -0.172278, 0.296501, -0.318002, 0.761193, -0.5652, -2.84778, 0.248552, -2.64192)
 
 [node name="VeryBackRightLeg_000" parent="JumpingSpiderProcAnimMeshes/JumpingSpiderMeshes/Armature/Skeleton3D" index="26"]
 transform = Transform3D(0.786902, 0.573108, -0.228762, -0.508189, 0.391579, -0.767079, -0.350041, 0.719871, 0.599381, -0.404324, -0.906145, -0.657641)
