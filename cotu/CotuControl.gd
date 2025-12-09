@@ -276,14 +276,17 @@ func _physics_process(delta):
 		if roserang_particles.emitting:
 			roserang_particles.emitting = false
 	
-	# Special rose throw (takes precedence over instant rethrow)
-	if Input.is_action_just_pressed("Special") and not roserang_special_queued and roserang_instance != null:
+	# Special rose throw (takes precedence over instant rethrow). Requires all buffs to be active
+	var all_roserang_buffs_active := next_roserang_buff_index >= roserang_buff_list.size()
+	if Input.is_action_just_pressed("Special") and not roserang_special_queued and all_roserang_buffs_active and roserang_instance != null:
 		start_roserang_special_timer()
 	if roserang_special_queued and roserang_instance == null:
 		throw_roserang_with_script(current_roserang_special_script)
+		print("Threw special roserang")
 	
 	# Special ax throw
-	if Input.is_action_just_pressed("Special") and not axrang_special_queued and axrang_instance != null:
+	var all_axrang_buffs_active := next_axrang_buff_index >= axrang_buff_list.size()
+	if Input.is_action_just_pressed("Special") and not axrang_special_queued and all_axrang_buffs_active and axrang_instance != null:
 		start_axrang_special_timer()
 	if axrang_special_queued and axrang_instance == null:
 		throw_special_axrang()
@@ -341,9 +344,7 @@ func _physics_process(delta):
 	# Clear roserang buffs (and make target/Icon follow Cotu again) if an instant rethrow didn't just occur (i.e. if roserang_instance is still null after an instant rethrow would have reassigned it)
 	if roserang_instance == null:
 		target.start_following_cotu()
-		next_roserang_buff_index = 0
-		if not ui.roserang_buffs_cleared():
-			ui.clear_roserang_buffs()
+		clear_roserang_buffs()
 	
 	if Input.is_action_just_pressed("UseItem"):
 		anim_tree.set(anim_tree_param_path_base + "use_item", true)
@@ -404,6 +405,7 @@ func step_dodge():
 	can_throw_axrang = true
 
 func throw_roserang_with_script(script):
+	roserang_special_queued = false
 	roserang_instance = roserang.instantiate()
 	add_sibling(roserang_instance)
 	roserang_instance.set_script(script)
@@ -430,6 +432,11 @@ func apply_buffs_to_roserang_instance():
 			Globals.ROSERANG_BUFFS.HOMING:
 				roserang_instance.buff_homing_targets(homing_targets_added)
 
+func clear_roserang_buffs():
+	next_roserang_buff_index = 0
+	if not ui.roserang_buffs_cleared():
+		ui.clear_roserang_buffs()
+
 func start_roserang_special_timer():
 	roserang_special_queued = true
 	await get_tree().create_timer(rang_catch_input_buffer_secs).timeout
@@ -448,10 +455,7 @@ func on_catch_axrang():
 					ui.apply_axrang_buff1()
 	else:
 		# Clear axrang buffs if axrang wasn't perfect caught
-		axrang_perfect_caught = false
-		next_axrang_buff_index = 0
-		if not ui.axrang_buffs_cleared():
-			ui.clear_axrang_buffs()
+		clear_axrang_buffs()
 
 func throw_axrang():
 	axrang_instance = axrang.instantiate()
@@ -482,6 +486,12 @@ func start_axrang_special_timer():
 	axrang_special_queued = true
 	await get_tree().create_timer(rang_catch_input_buffer_secs).timeout
 	axrang_special_queued = false
+
+func clear_axrang_buffs():
+	axrang_perfect_caught = false
+	next_axrang_buff_index = 0
+	if not ui.axrang_buffs_cleared():
+		ui.clear_axrang_buffs()
 
 func end_attack():
 	anim_tree.set(anim_tree_param_path_base + "AxOverhead", false)
