@@ -5,10 +5,9 @@ res://GPUTrail-main/shaders/trail_draw_pass.gdshader
 res://GPUTrail-main/defaults/texture.tres
 res://GPUTrail-main/defaults/curve.tres
 res://enemies/enemy_hurtbox.gd
-res://shaders/smoke.gdshader
-res://glb_inherited_scenes/mite_hills_ground.gdshader
 res://glb_inherited_scenes/outline.gdshader
 res://glb_inherited_scenes/black_outline.gdshader
+res://shaders/smoke.gdshader
 res://levels/x_boss_level/background_nodes/diamond.tres
 res://textures/x_arrow.tres
 res://textures/small_solid_white.tres
@@ -23,6 +22,5 @@ res://ui/glow.gdshader
 res://ui/glitch.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
 res://general_scripts/skygradient.gdshader
+res://glb_inherited_scenes/mite_hills_ground.gdshader
 res://cotu/CotuControl.gd
-res://ui/ui_root.tscn
-res://ui/ui_root.gd

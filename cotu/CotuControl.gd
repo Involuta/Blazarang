@@ -71,6 +71,7 @@ var special_homing_script := preload("res://rang/special_homing.gd")
 var special_homing_explosive_script := preload("res://rang/special_explosive_homing.gd")
 var current_roserang_special_script
 var roserang_special_queued := false
+var roserang_special_just_used := false # Used in instant rethrow code to know whether the IR is happening immediately after a special, in which case buffs should be reset. Set to true when special is used, set to false in IR code
 
 var axrang_special_queued := false
 var axrang_specials = [
@@ -79,6 +80,7 @@ var axrang_specials = [
 ]
 var current_axrang_special := "AxOverhead"
 @export var arc_slash_projectile_speed := 20.0
+var axrang_special_just_used := false # Used by apply_buffs_to_axrang to know whether a perfect catch is happening immediately after a special, in which case buffs should be reset. Set to true when special is used, set to false in apply_buffs_to_axrang
 
 var destabilized := false
 var grabbed := false
@@ -115,7 +117,7 @@ func _ready():
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
-	current_roserang_special_script = special_homing_explosive_script
+	current_roserang_special_script = rapidorbit_script
 	current_axrang_special = "AxArcSlash"
 	
 	Globals.destabilize.connect(on_destabilize)
@@ -281,8 +283,8 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("Special") and not roserang_special_queued and all_roserang_buffs_active and roserang_instance != null:
 		start_roserang_special_timer()
 	if roserang_special_queued and roserang_instance == null:
+		roserang_special_just_used = true
 		throw_roserang_with_script(current_roserang_special_script)
-		print("Threw special roserang")
 	
 	# Special ax throw
 	var all_axrang_buffs_active := next_axrang_buff_index >= axrang_buff_list.size()
@@ -321,6 +323,10 @@ func _physics_process(delta):
 			start_roserang_instant_rethrow_timer()
 	if roserang_throw_queued and roserang_instance == null and can_throw_roserang:
 		# Instant rethrow
+		if roserang_special_just_used:
+			roserang_special_just_used = false
+			clear_roserang_buffs()
+		
 		Globals.cotu_instant_rethrow_rose.emit()
 		anim_tree.set(anim_tree_param_path_base + "just_instant_rethrew", true)
 		roserang_throw_queued = false
@@ -420,7 +426,7 @@ func add_roserang_buff(): # Called by target/Icon when roserang hits it
 	if next_roserang_buff_index < roserang_buff_list.size():
 		next_roserang_buff_index += 1
 
-func apply_buffs_to_roserang_instance():
+func apply_buffs_to_roserang_instance():	
 	if next_roserang_buff_index <= 0 and not ui.roserang_buffs_cleared():
 		ui.clear_roserang_buffs()
 	# Apply buffs to the roserang instance and UI simultaneously
