@@ -18,7 +18,10 @@ var roserang_buff_icons := [] # List of icon nodes
 var roserang_buff_applied := [] # List of bools, where bool i is whether buff i has been applied
 
 @onready var axrang_buff_icon0 := $AxrangBuffIcon0Pivot/AxrangBuffIcon0
-var axrang_buff1_applied := false
+@onready var axrang_buff_icon1 := $AxrangBuffIcon1Pivot/AxrangBuffIcon1
+@onready var axrang_buff_icon2 := $AxrangBuffIcon2Pivot/AxrangBuffIcon2
+var axrang_buff_icons := [] # List of icon nodes
+var axrang_buff_applied := [] # List of bools, where bool i is whether buff i has been applied
 
 @onready var roserang_buff_anims := $RoserangBuffAnimations
 @onready var axrang_buff_anims := $AxrangBuffAnimations
@@ -49,6 +52,9 @@ func _ready():
 	roserang_buff_icons = [roserang_buff_icon0, roserang_buff_icon1, roserang_buff_icon2]
 	roserang_buff_applied = [false, false, false]
 	
+	axrang_buff_icons = [axrang_buff_icon0, axrang_buff_icon1, axrang_buff_icon2]
+	axrang_buff_applied = [false, false, false]
+	
 	Globals.score_updated.connect(on_score_updated)
 	Globals.destabilize.connect(on_destabilize)
 	Globals.stabilize.connect(on_stabilize)
@@ -61,10 +67,10 @@ func _ready():
 				roserang_buff_icons[i].texture = load("res://textures/buff_HMG-clear.png")
 			_:
 				pass
-	for ax_buff in cotu.axrang_buff_list:
-		match(ax_buff):
+	for i in range(len(cotu.axrang_buff_list)):
+		match(cotu.axrang_buff_list[i]):
 			Globals.AXRANG_BUFFS.DAMAGE:
-				axrang_buff_icon0.texture = load("res://textures/buff_DMG-clear.png")
+				axrang_buff_icons[i].texture = load("res://textures/buff_DMG-clear.png")
 			_:
 				pass
 
@@ -72,7 +78,7 @@ func roserang_buffs_cleared():
 	return not (true in roserang_buff_applied)
 
 func axrang_buffs_cleared():
-	return not axrang_buff1_applied
+	return not (true in axrang_buff_applied)
 
 func awaken():
 	$BlackScreenAnimations.play("awaken")
@@ -128,10 +134,10 @@ func apply_roserang_buff(buff_index: int):
 		roserang_buff_anims.play("apply_roserang_buff" + str(buff_index))
 
 func clear_axrang_buffs():
-	axrang_buff1_applied = false
+	axrang_buff_applied.fill(false)
 	axrang_buff_anims.play("clear_axrang_buffs")
 
-func apply_axrang_buff1():
-	if not axrang_buff1_applied:
-		axrang_buff1_applied = true
-		axrang_buff_anims.play("apply_axrang_buff1")
+func apply_axrang_buff(buff_index: int):
+	if not axrang_buff_applied[buff_index]:
+		axrang_buff_applied[buff_index] = true
+		axrang_buff_anims.play("apply_axrang_buff" + str(buff_index))

@@ -452,7 +452,7 @@ func on_catch_axrang():
 		for i in range(next_axrang_buff_index):
 			match(axrang_buff_list[i]):
 				Globals.AXRANG_BUFFS.DAMAGE:
-					ui.apply_axrang_buff1()
+					ui.apply_axrang_buff(i)
 	else:
 		# Clear axrang buffs if axrang wasn't perfect caught
 		clear_axrang_buffs()
@@ -473,6 +473,8 @@ func add_axrang_buff(): # Called by Cotu when he catches the axrang
 		next_axrang_buff_index += 1
 
 func apply_buffs_to_axrang_instance():
+	if next_axrang_buff_index <= 0 and not ui.axrang_buffs_cleared():
+		ui.clear_axrang_buffs()
 	# Apply buffs to the ax instance itself, but not the UI because the buffs were already applied in the UI in the previous perfect catch
 	for i in range(next_axrang_buff_index):
 		match(axrang_buff_list[i]):
