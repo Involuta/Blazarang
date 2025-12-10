@@ -315,6 +315,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ThrowRoserang"):
 		if roserang_instance == null and can_throw_roserang:
 			# Normal throw
+			roserang_special_just_used = false
 			if not destabilized:
 				hurtbox.self_hit(throw_roserang_self_damage)
 			Globals.cotu_normal_throw_rose.emit()
@@ -453,6 +454,11 @@ func on_catch_axrang():
 		# Perfect catch
 		axrang_perfect_catch_queued = false
 		axrang_perfect_caught = true
+		# If you caught the axrang after it came back from using a special (in which it was thrown, of course), clear the buffs. Why not just check axrang_special_just_used in the outer if statement since the else block also clears buffs? We need axrang perfect caught to be true if it was perfectly caught, since perfect catching ax has some benefits, e.g. instant ax throw anim
+		if axrang_special_just_used:
+			axrang_special_just_used = false
+			clear_axrang_buffs()
+			return
 		add_axrang_buff()
 		# Apply buffs visually in the UI, but not the ax itself because the ax instance doesn't exist yet (catching the axrang sets axrang_instance to null)
 		for i in range(next_axrang_buff_index):

@@ -24,3 +24,4 @@ res://glb_inherited_scenes/cotu_outline.gdshader
 res://general_scripts/skygradient.gdshader
 res://glb_inherited_scenes/mite_hills_ground.gdshader
 res://cotu/CotuControl.gd
+res://levels/Level.gd
