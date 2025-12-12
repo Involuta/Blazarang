@@ -118,7 +118,7 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	current_roserang_special_script = rapidorbit_script
-	current_axrang_special = "AxArcSlash"
+	current_axrang_special = "AxOverhead"
 	
 	Globals.destabilize.connect(on_destabilize)
 	Globals.stabilize.connect(on_stabilize)
@@ -283,6 +283,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("Special") and not roserang_special_queued and all_roserang_buffs_active and roserang_instance != null:
 		start_roserang_special_timer()
 	if roserang_special_queued and roserang_instance == null:
+		roserang_special_queued = false
 		roserang_special_just_used = true
 		throw_roserang_with_script(current_roserang_special_script)
 	
@@ -290,8 +291,7 @@ func _physics_process(delta):
 	var all_axrang_buffs_active := next_axrang_buff_index >= axrang_buff_list.size()
 	if Input.is_action_just_pressed("Special") and not axrang_special_queued and all_axrang_buffs_active and axrang_instance != null:
 		start_axrang_special_timer()
-	if axrang_special_queued and axrang_instance == null:
-		throw_special_axrang()
+	# Why not check if axrang_special_queued and axrang_instance == null to call throw_special_axrang like rose? Because on_catch_axrang can be used instead
 	
 	if Input.is_action_just_pressed("MeleeAxrang"):
 		anim_tree.set(anim_tree_param_path_base + "melee_ax", true)
@@ -324,13 +324,15 @@ func _physics_process(delta):
 			start_roserang_instant_rethrow_timer()
 	if roserang_throw_queued and roserang_instance == null and can_throw_roserang:
 		# Instant rethrow
+		roserang_throw_queued = false
+		
+		# If you're instant rethrowing after a roserang special was just used, clear roserang buffs
 		if roserang_special_just_used:
 			roserang_special_just_used = false
 			clear_roserang_buffs()
 		
 		Globals.cotu_instant_rethrow_rose.emit()
 		anim_tree.set(anim_tree_param_path_base + "just_instant_rethrew", true)
-		roserang_throw_queued = false
 		
 		# Set throw type
 		homing_targets_added = roserang_buff_list.slice(0, next_roserang_buff_index).count(Globals.ROSERANG_BUFFS.HOMING)
@@ -450,7 +452,11 @@ func start_roserang_special_timer():
 	roserang_special_queued = false
 
 func on_catch_axrang():
-	if axrang_perfect_catch_queued:
+	# If player inputted special right before catching ax, use special axrang and don't clear buffs until the special finishes
+	if axrang_special_queued:
+		axrang_special_queued = false
+		throw_special_axrang()
+	elif axrang_perfect_catch_queued:
 		# Perfect catch
 		axrang_perfect_catch_queued = false
 		axrang_perfect_caught = true
@@ -466,7 +472,7 @@ func on_catch_axrang():
 				Globals.AXRANG_BUFFS.DAMAGE:
 					ui.apply_axrang_buff(i)
 	else:
-		# Clear axrang buffs if axrang wasn't perfect caught
+		# Clear axrang buffs if axrang wasn't perfect caught or player isn't using special
 		clear_axrang_buffs()
 
 func throw_axrang():
@@ -494,6 +500,7 @@ func apply_buffs_to_axrang_instance():
 				axrang_instance.buff_damage()
 
 func throw_special_axrang():
+	axrang_special_just_used = true
 	anim_tree.set(anim_tree_param_path_base + current_axrang_special, true)
 
 func start_axrang_special_timer():

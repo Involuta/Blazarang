@@ -1,4 +1,5 @@
 res://levels/hub
+res://levels/mite_level
 res://levels
 res://general_scripts
 res://enemies
@@ -6,7 +7,6 @@ res://enemies/enemy_anims
 res://enemies/enemy_2d_anims
 res://shaders
 res://glb_inherited_scenes
-res://levels/mite_level
 res://levels/x_boss_level
 res://levels/balls_level
 res://level_maps

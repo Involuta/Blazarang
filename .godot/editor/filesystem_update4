@@ -1,4 +1,4 @@
-res://cotu/cotu_cb_main.tscn
+res://levels/mite_level/section_nodes/mite_level_main_arena.tscn
 res://rang/roserang_shader.tres
 res://GPUTrail-main/shaders/trail.gdshader
 res://GPUTrail-main/shaders/trail_draw_pass.gdshader
@@ -23,5 +23,7 @@ res://ui/glitch.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
 res://general_scripts/skygradient.gdshader
 res://glb_inherited_scenes/mite_hills_ground.gdshader
+res://cotu/cotu_cb_main.tscn
 res://cotu/CotuControl.gd
-res://levels/Level.gd
+res://cotu/cotu_anims/ax_arcslash.res
+res://cotu/cotu_anims/ax_overhead.res

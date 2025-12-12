@@ -1,13 +1,13 @@
-GPUParticles3D
+StaticBody3D
 CollisionShape3D
+MeshInstance3D
+GPUParticles3D
 Hitbox
 AudioStreamPlayer3D
 AudioStreamPlayer
 AnimatedSprite3D
 FogVolume
-MeshInstance3D
 Node3D
-StaticBody3D
 RayCast3D
 AnimationPlayer
 Area3D
