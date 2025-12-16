@@ -7,8 +7,8 @@ var default_gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var gravity = default_gravity
 const WALK_SPEED := 10.0
 const STEP_DODGE_SPEED := 15.0
-const STEP_DODGE_DURATION_SECS := .5
-const STEP_DODGE_COOLDOWN_SECS := .1
+const step_dodge_duration_secs := .5
+const step_dodge_cooldown_secs := .1
 const JUMP_SPEED := 14.0
 const MAX_JUMP_CHARGE_SECS := .5
 # Seconds it takes for Cotu to decelerate to 0 speed when not walking
@@ -78,7 +78,7 @@ var axrang_specials = [
 	"AxOverhead",
 	"AxArcSlash"
 ]
-var current_axrang_special := "AxOverhead"
+var current_axrang_special := "AxArcSlash"
 @export var arc_slash_projectile_speed := 20.0
 var axrang_special_just_used := false # Used by apply_buffs_to_axrang to know whether a perfect catch is happening immediately after a special, in which case buffs should be reset. Set to true when special is used, set to false in apply_buffs_to_axrang
 
@@ -131,11 +131,18 @@ func _ready():
 	can_rotate = true
 	can_dodge = true
 
+	can_throw_roserang = true
+	can_throw_axrang = true
+
 func on_destabilize():
 	destabilized = true
 
 func on_stabilize():
 	destabilized = false
+
+func set_can_throw_weapons(state: bool):
+	can_throw_roserang = state
+	can_throw_axrang = state
 
 func emit_stabilize():
 	Globals.stabilize.emit()
@@ -397,21 +404,19 @@ func lock_off():
 func step_dodge():
 	Globals.cotu_dodge.emit()
 	can_dodge = false
-	can_throw_roserang = false
-	can_throw_axrang = false
+	set_can_throw_weapons(false)
 	is_dodging = true
 	if not destabilized:
 		hurtbox.self_hit(dodge_self_damage)
 	set_collision_mask_value(Globals.ENEMY_COL_LAYER, false)
 	if roserang_instance != null:
 		target.stop_following_cotu()
-	await get_tree().create_timer(STEP_DODGE_DURATION_SECS).timeout
+	await get_tree().create_timer(step_dodge_duration_secs).timeout
 	is_dodging = false
 	set_collision_mask_value(Globals.ENEMY_COL_LAYER, true)
-	await get_tree().create_timer(STEP_DODGE_COOLDOWN_SECS).timeout
+	await get_tree().create_timer(step_dodge_cooldown_secs).timeout
 	can_dodge = true
-	can_throw_roserang = true
-	can_throw_axrang = true
+	set_can_throw_weapons(true)
 
 func throw_roserang_with_script(script):
 	roserang_special_queued = false
