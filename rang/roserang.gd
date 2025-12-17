@@ -43,7 +43,7 @@ var ricochet_particles := preload("res://rang/rang_particles_ricochet.tscn")
 @onready var root := $/root/ViewControl
 var level : Node3D
 var cotu : Node3D
-var target : Node3D
+var icon : Node3D
 
 @onready var hitbox = $PlayerHitbox
 @onready var mesh = $RoserangMesh
@@ -61,17 +61,17 @@ var target : Node3D
 func _ready():
 	level = root.find_child("Level")
 	cotu = root.find_child("cotuCB")
-	target = level.find_child("Icon")
+	icon = level.find_child("Icon")
 	
 	hitbox.damage = Globals.player_hitbox_data.RoserangBaseDamage
 	
 	flying_sfx.play()
-	target.roserang_queued = false
+	icon.roserang_queued = false
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, true)
 	set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, true)
 	rose_eqn_initial_throw_angle = rose_eqn_petals*cotu.get_rang_throw_y_angle() + rose_eqn_initial_throw_angle_offset
 	set_direction()
-	global_position = target.global_position
+	global_position = icon.global_position
 	change_color(rose_color)
 
 func set_direction():
@@ -87,7 +87,7 @@ func rose(delta):
 	rose_eqn_current_angle += rose_eqn_angle_speed * delta
 	rose_eqn_current_radius = rose_eqn_max_radius * sin(rose_eqn_petals * rose_eqn_current_angle + rose_eqn_initial_throw_angle)
 	var angle_vec := Vector2.from_angle(rose_eqn_current_angle)
-	return target.global_position + rose_eqn_current_radius * Vector3(angle_vec.x, 0, angle_vec.y)
+	return icon.global_position + rose_eqn_current_radius * Vector3(angle_vec.x, 0, angle_vec.y)
 
 func change_color(color: Color):
 	trail.color_ramp.gradient.colors[1] = color
@@ -124,7 +124,7 @@ func _physics_process(delta):
 			else:
 				change_color(return_color)
 		RICOCHET:
-			if target.roserang_queued:
+			if icon.roserang_queued:
 				switch_to_rose()
 			look_at(global_position + velocity)
 			ricochet_handle_collision(move_and_collide(velocity * delta))
@@ -134,13 +134,13 @@ func _physics_process(delta):
 				change_color(return_color)
 				mvmt_state = RETURN
 		RETURN:
-			if target.roserang_queued:
+			if icon.roserang_queued:
 				switch_to_rose()
 				return
 			if velocity.length() < MAX_RETURN_SPEED:
-				velocity = (velocity.length() + RETURN_ACC) * global_position.direction_to(target.global_position)
+				velocity = (velocity.length() + RETURN_ACC) * global_position.direction_to(icon.global_position)
 			else:
-				velocity = MAX_RETURN_SPEED * global_position.direction_to(target.global_position)
+				velocity = MAX_RETURN_SPEED * global_position.direction_to(icon.global_position)
 			look_at(global_position + velocity)
 			move_and_slide()
 
@@ -153,7 +153,7 @@ func buff_homing_targets(_targets_added: int):
 	pass
 
 func switch_to_rose():
-	target.roserang_queued = false
+	icon.roserang_queued = false
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, true)
 	set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, true)
 	mvmt_state = ROSE

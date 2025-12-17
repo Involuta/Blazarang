@@ -22,7 +22,7 @@ signal caught
 @onready var root := $/root/ViewControl
 var level : Node3D
 var cotu : Node3D
-var target : Node3D
+var icon : Node3D
 
 @onready var hitbox := $PlayerHitbox
 @onready var pivot := $Pivot
@@ -34,12 +34,12 @@ var target : Node3D
 func _ready():
 	level = root.find_child("Level")
 	cotu = root.find_child("cotuCB")
-	target = level.find_child("Icon")
+	icon = level.find_child("Icon")
 	
 	hitbox.damage = Globals.player_hitbox_data.AxrangBaseDirectDamage
 	explosion_hitbox.damage = Globals.player_hitbox_data.AxrangBaseExplosionDamage
 	
-	global_position = target.global_position
+	global_position = cotu.global_position
 	rotation.y = cotu.get_rang_throw_y_angle() + PI
 	velocity = fwd_speed * transform.basis.z
 	
