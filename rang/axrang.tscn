@@ -1,9 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://bd3ofyt7xl0jo"]
+[gd_scene load_steps=23 format=3 uid="uid://bd3ofyt7xl0jo"]
 
 [ext_resource type="Script" path="res://rang/axrang.gd" id="1_wabwy"]
 [ext_resource type="PackedScene" uid="uid://ilwv1c8q8cjc" path="res://glb_inherited_scenes/ax.tscn" id="2_b1lvs"]
 [ext_resource type="Script" path="res://rang/destroy_on_cotu_hit.gd" id="3_5hupc"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="4_lmpjw"]
+[ext_resource type="Script" path="res://rang/hit_sfx_player.gd" id="5_qjyai"]
+[ext_resource type="AudioStream" uid="uid://y2t2k8f41igx" path="res://audio/sfx/HitSound3.wav" id="6_i7joa"]
+[ext_resource type="AudioStream" uid="uid://c6kwran0tovv1" path="res://audio/sfx/flying_rang.wav" id="7_3uo6e"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gby86"]
 size = Vector3(0.2, 2, 1)
@@ -112,6 +115,15 @@ _data = {
 "explode": SubResource("Animation_cr2p0")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vnyht"]
+streams_count = 1
+stream_0/stream = ExtResource("6_i7joa")
+stream_0/weight = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jvbch"]
+height = 0.5
+radius = 1.4
+
 [node name="Axrang" type="CharacterBody3D"]
 script = ExtResource("1_wabwy")
 rotate_speed = 0.5
@@ -176,5 +188,28 @@ mesh = SubResource("SphereMesh_6wqxc")
 libraries = {
 "": SubResource("AnimationLibrary_jn434")
 }
+
+[node name="HitSFXPlayer" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.34, 2.08165e-12)
+collision_layer = 0
+collision_mask = 72
+script = ExtResource("5_qjyai")
+
+[node name="HitAudioStream" type="AudioStreamPlayer3D" parent="HitSFXPlayer"]
+stream = SubResource("AudioStreamRandomizer_vnyht")
+attenuation_model = 2
+volume_db = -33.0
+unit_size = 90.0
+max_db = -2.0
+bus = &"SFX"
+
+[node name="HitboxCollider" type="CollisionShape3D" parent="HitSFXPlayer"]
+transform = Transform3D(-4.37114e-08, -1, 3.48787e-16, 1, -4.37114e-08, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_jvbch")
+
+[node name="FlyingAudioStream" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_3uo6e")
+volume_db = -14.0
+bus = &"SFX"
 
 [connection signal="body_entered" from="CotuCollider" to="CotuCollider" method="_on_body_entered"]

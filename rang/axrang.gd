@@ -29,6 +29,8 @@ var target : Node3D
 @onready var explosion_hitbox := $ExplosionPivot/PlayerHitbox
 @onready var explosion_particles := $ExplosionPivot/GPUParticles3D
 
+@onready var flying_sfx := $FlyingAudioStream
+
 func _ready():
 	level = root.find_child("Level")
 	cotu = root.find_child("cotuCB")
@@ -42,6 +44,8 @@ func _ready():
 	velocity = fwd_speed * transform.basis.z
 	
 	explosion_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+	
+	flying_sfx.play()
 	
 	await get_tree().create_timer(1).timeout
 	invincible = false
@@ -82,10 +86,12 @@ func advance_state():
 
 func switch_to_explode():
 	mvmt_state = EXPLODE
+	flying_sfx.stop()
 	$AnimationPlayer.play("explode")
 
 func switch_to_return():
 	mvmt_state = RETURN
+	flying_sfx.play()
 
 func is_returning():
 	return mvmt_state == RETURN

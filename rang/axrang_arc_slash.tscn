@@ -5,7 +5,7 @@
 [ext_resource type="Shader" path="res://GPUTrail-main/shaders/trail.gdshader" id="2_k1lcd"]
 [ext_resource type="Texture2D" uid="uid://crk6pkb7e5rwc" path="res://GPUTrail-main/defaults/texture.tres" id="4_3fayh"]
 [ext_resource type="Script" path="res://GPUTrail-main/GPUTrail3D.gd" id="5_hpq5l"]
-[ext_resource type="Script" path="res://hitbox.gd" id="6_y5ulk"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="6_y5ulk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xhio8"]
 shader = ExtResource("2_k1lcd")

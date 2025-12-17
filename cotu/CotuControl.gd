@@ -73,6 +73,7 @@ var current_roserang_special_script
 var roserang_special_queued := false
 var roserang_special_just_used := false # Used in instant rethrow code to know whether the IR is happening immediately after a special, in which case buffs should be reset. Set to true when special is used, set to false in IR code
 
+var arc_slash_projectile := preload("res://rang/axrang_arc_slash.tscn")
 var axrang_special_queued := false
 var axrang_specials = [
 	"AxOverhead",
@@ -81,6 +82,10 @@ var axrang_specials = [
 var current_axrang_special := "AxArcSlash"
 @export var arc_slash_projectile_speed := 20.0
 var axrang_special_just_used := false # Used by apply_buffs_to_axrang to know whether a perfect catch is happening immediately after a special, in which case buffs should be reset. Set to true when special is used, set to false in apply_buffs_to_axrang
+var axrang_melee_hit := false # Set to false right before a special is used. Set to true by ax's hitbox if it hits something during a special
+var axrang_special_hit_buff_saving := false # Set to true when player equips Redux, which temporarily keeps axrang buffs if the ax melee hits an enemy during an ax special
+@export var axrang_special_buff_save_duration := 6.7
+var axrang_special_buff_save_time_remaining := 0.0
 
 var destabilized := false
 var grabbed := false
@@ -118,7 +123,7 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	current_roserang_special_script = rapidorbit_script
-	current_axrang_special = "AxOverhead"
+	current_axrang_special = "AxArcSlash"
 	
 	Globals.destabilize.connect(on_destabilize)
 	Globals.stabilize.connect(on_stabilize)
@@ -299,6 +304,12 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("Special") and not axrang_special_queued and all_axrang_buffs_active and axrang_instance != null:
 		start_axrang_special_timer()
 	# Why not check if axrang_special_queued and axrang_instance == null to call throw_special_axrang like rose? Because on_catch_axrang can be used instead
+	# Redux ax buff expiration
+	if axrang_special_buff_save_time_remaining > 0.0:
+		axrang_special_buff_save_time_remaining -= delta
+		if axrang_special_buff_save_time_remaining <= 0.0:
+			# Timer just expired → clear buffs once
+			clear_axrang_buffs()
 	
 	if Input.is_action_just_pressed("MeleeAxrang"):
 		anim_tree.set(anim_tree_param_path_base + "melee_ax", true)
@@ -513,6 +524,23 @@ func start_axrang_special_timer():
 	await get_tree().create_timer(rang_catch_input_buffer_secs).timeout
 	axrang_special_queued = false
 
+func reset_axrang_melee_hit():
+	# Reset whether axrang melee hit or not. Called on the first keyframe of every axrang special anim
+	axrang_melee_hit = false
+
+func _on_axrang_melee_hit(_body):
+	# Called every time axrang hits something (it can only detect collisions with enemies)
+	axrang_melee_hit = true
+
+func clear_or_save_axrang_buffs():
+	# If Redux isn't unlocked, or special didn't hit anything, clear buffs immediately
+	if not axrang_special_hit_buff_saving or not axrang_melee_hit:
+		clear_axrang_buffs()
+		return
+	
+	# Redux is active and special hit → preserve buffs temporarily
+	axrang_special_buff_save_time_remaining = axrang_special_buff_save_duration
+
 func clear_axrang_buffs():
 	axrang_perfect_caught = false
 	next_axrang_buff_index = 0
@@ -524,8 +552,7 @@ func end_attack():
 	anim_tree.set(anim_tree_param_path_base + "AxArcSlash", false)
 
 func shoot_arc_projectile():
-	var arc_file := load("res://rang/axrang_arc_slash.tscn")
-	var arc_inst = arc_file.instantiate()
+	var arc_inst = arc_slash_projectile.instantiate()
 	level.add_child.call_deferred(arc_inst)
 	await arc_inst.tree_entered
 	arc_inst.global_position = global_position

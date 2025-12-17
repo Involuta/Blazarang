@@ -230,7 +230,7 @@ shape = SubResource("CylinderShape3D_vx8km")
 
 [node name="HitSFXPlayer" type="Area3D" parent="."]
 collision_layer = 0
-collision_mask = 8
+collision_mask = 72
 script = ExtResource("4_s5v25")
 
 [node name="HitAudioStream" type="AudioStreamPlayer3D" parent="HitSFXPlayer"]

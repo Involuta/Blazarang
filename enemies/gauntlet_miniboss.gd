@@ -86,14 +86,6 @@ func _ready():
 		behav_state = WAIT
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("Special"):
-		match(behav_state):
-			WAIT:
-				print("WAIT")
-			FOLLOW:
-				print("FOLLOW")
-			SHORT_DIST_ATTACK:
-				print("ATTACK")
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	match(behav_state):

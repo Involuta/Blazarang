@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="3_nqo7i"]
 [ext_resource type="PackedScene" uid="uid://cjxdm8v82qb3v" path="res://levels/gauntlet_level/section_nodes/gauntlet_arena1.tscn" id="4_ncis8"]
 [ext_resource type="AudioStream" uid="uid://br0a4rin6vcg3" path="res://audio/music/COTU.wav" id="5_t71pa"]
-[ext_resource type="Script" path="res://DisappearRB.gd" id="6_qnm0e"]
+[ext_resource type="Script" path="res://general_scripts/DisappearRB.gd" id="6_qnm0e"]
 [ext_resource type="Material" uid="uid://vsefhkxljqg8" path="res://textures/small_solid_black.tres" id="7_ngyv0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2oney"]
