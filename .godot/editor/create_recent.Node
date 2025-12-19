@@ -1,8 +1,9 @@
-StaticBody3D
 CollisionShape3D
-MeshInstance3D
-GPUParticles3D
 Hitbox
+MeshInstance3D
+CharacterBody3D
+StaticBody3D
+GPUParticles3D
 AudioStreamPlayer3D
 AudioStreamPlayer
 AnimatedSprite3D
@@ -14,7 +15,6 @@ Area3D
 EnemyHurtbox
 NavigationAgent3D
 AnimationTree
-CharacterBody3D
 Camera3D
 Marker3D
 SkeletonIK3D

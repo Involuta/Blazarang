@@ -83,6 +83,7 @@ const player_hitbox_data = {
 	"AxrangDirectDamageBuff1" : 50,
 	"AxrangExplosionDamageBuff1" : 20,
 	"AxrangBaseOverheadDamage" : 100,
+	"ShurikenBaseDamage" : 1,
 }
 
 # health, hit score, kill score
@@ -104,7 +105,7 @@ const enemy_hurtbox_data = {
 	"BallWalkerArmor" : [100, 1.0, 1.0],
 	"BallWalker" : [2000, 1.0, 1.0],
 	
-	"XBoss" : [200, 1.0, 100.0],
+	"XBoss" : [3000, 1.0, 100.0],
 	
 	"Landmite" : [75, 1.0, 1.0],
 	"Paramite" : [35, 1.0, 1.0],

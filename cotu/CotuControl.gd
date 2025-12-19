@@ -87,6 +87,21 @@ var axrang_special_hit_buff_saving := false # Set to true when player equips Red
 @export var axrang_special_buff_save_duration := 6.7
 var axrang_special_buff_save_time_remaining := 0.0
 
+var shuriken_scene := preload("res://rang/shuriken.tscn")
+var shuriken_deploy_queued := false
+@export var max_shurikens := 4
+var shurikens := []
+
+var mark_scene := preload("res://rang/mark.tscn")
+var active_mark = null
+
+enum SHURIKEN_MARKLESS_MODE {
+	NEAREST,
+	HIGHEST_HP,
+	LOWEST_HP
+}
+@export var shuriken_markless_behavior := SHURIKEN_MARKLESS_MODE.NEAREST
+
 var destabilized := false
 var grabbed := false
 var stunned := false
@@ -110,14 +125,14 @@ var axrang_instance = null
 
 @onready var root := $/root/ViewControl
 var level : Node3D
-var target: Node3D
+var icon: Node3D
 var ui: Control
 
 const LERP_VAL := .15 # The rate at which lerp funcs change; used for body mvmt animations
 
 func _ready():
 	level = root.find_child("Level")
-	target = level.find_child("Icon")
+	icon = level.find_child("Icon")
 	ui = root.find_child("UIRoot")
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -370,13 +385,31 @@ func _physics_process(delta):
 		anim_tree.set(anim_tree_param_path_base + "just_instant_rethrew", false)
 	# Clear roserang buffs (and make target/Icon follow Cotu again) if an instant rethrow didn't just occur (i.e. if roserang_instance is still null after an instant rethrow would have reassigned it)
 	if roserang_instance == null:
-		target.start_following_cotu()
+		icon.start_following_cotu()
 		clear_roserang_buffs()
+	
+	if Input.is_action_just_pressed("ThrowShuriken"):
+		if shurikens.size() < max_shurikens:
+			var s = shuriken_scene.instantiate()
+			add_sibling(s)
+			shurikens.append(s)
 	
 	if Input.is_action_just_pressed("UseItem"):
 		anim_tree.set(anim_tree_param_path_base + "use_item", true)
 	else:
 		anim_tree.set(anim_tree_param_path_base + "use_item", false)
+	
+	if Input.is_action_just_pressed("PlaceMark"):
+		if active_mark:
+			active_mark.queue_free()
+		var m = mark_scene.instantiate()
+		add_sibling(m)
+		if m.try_place_from_camera(camera):
+			active_mark = m
+			m.mark_applied.connect(_on_mark_applied)
+			m.mark_removed.connect(_on_mark_removed)
+		else:
+			m.queue_free()
 	
 	# Animation tree parameters
 	var vel2D = Vector2(velocity.x, velocity.z)
@@ -421,7 +454,7 @@ func step_dodge():
 		hurtbox.self_hit(dodge_self_damage)
 	set_collision_mask_value(Globals.ENEMY_COL_LAYER, false)
 	if roserang_instance != null:
-		target.stop_following_cotu()
+		icon.stop_following_cotu()
 	await get_tree().create_timer(step_dodge_duration_secs).timeout
 	is_dodging = false
 	set_collision_mask_value(Globals.ENEMY_COL_LAYER, true)
@@ -441,7 +474,7 @@ func start_roserang_instant_rethrow_timer():
 	await get_tree().create_timer(rang_catch_input_buffer_secs).timeout
 	roserang_throw_queued = false
 
-func add_roserang_buff(): # Called by target/Icon when roserang hits it
+func add_roserang_buff(): # Called by icon when roserang hits it
 	if next_roserang_buff_index < roserang_buff_list.size():
 		next_roserang_buff_index += 1
 
@@ -558,6 +591,83 @@ func shoot_arc_projectile():
 	arc_inst.global_position = global_position
 	arc_inst.velocity = arc_slash_projectile_speed * armature.transform.basis.z
 	arc_inst.rotation.y = PI + armature.rotation.y
+
+func get_nearest_target(targets: Array, origin: Vector3) -> Node3D:
+	var best_target: Node3D = null
+	var best_dist := INF
+
+	for t in targets:
+		if not is_instance_valid(t):
+			continue
+
+		var d = origin.distance_to(t.global_position)
+		if d < best_dist:
+			best_dist = d
+			best_target = t
+
+	return best_target
+
+func get_highest_health_target(targets: Array) -> Node3D:
+	var best_target: Node3D = null
+	var best_hp := -INF
+
+	for t in targets:
+		if not is_instance_valid(t):
+			continue
+		
+		# To do: verify that all enemies have a hurtbox reference
+		if t.hurtbox.health > best_hp:
+			best_hp = t.health
+			best_target = t
+
+	return best_target
+
+func get_lowest_health_target(targets: Array) -> Node3D:
+	var best_target: Node3D = null
+	var best_hp := INF
+
+	for t in targets:
+		if not is_instance_valid(t):
+			continue
+		
+		# To do: verify that all enemies have a hurtbox reference
+		if t.hurtbox.health < best_hp:
+			best_hp = t.health
+			best_target = t
+
+	return best_target
+
+func get_shuriken_target() -> Node3D:
+	if active_mark:
+		return active_mark
+	
+	var targets = level.get_tree().get_nodes_in_group("lockonables")
+	if targets.is_empty():
+		return null
+	
+	match shuriken_markless_behavior:
+		SHURIKEN_MARKLESS_MODE.NEAREST:
+			return get_nearest_target(targets, global_position)
+		SHURIKEN_MARKLESS_MODE.HIGHEST_HP:
+			return get_highest_health_target(targets)
+		SHURIKEN_MARKLESS_MODE.LOWEST_HP:
+			return get_lowest_health_target(targets)
+	
+	return null
+
+func deploy_shurikens():
+	var target := get_shuriken_target()
+	if target == null:
+		return
+
+	for s in shurikens:
+		s.deploy_to_target(target)
+
+func _on_mark_applied(target):
+	active_mark = target
+
+func _on_mark_removed():
+	active_mark = null
 
 # Used by roserang.gd to get Cotu's rang throw angle (the angle input of the rose equation)
 func get_rang_throw_y_angle():

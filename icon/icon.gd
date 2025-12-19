@@ -49,3 +49,4 @@ func _on_body_entered(body):
 		cotu.add_roserang_buff()
 		# Why is apply_buffs_to_roserang_instance here? Roserang is applied buffs when the roserang hits the icon
 		cotu.apply_buffs_to_roserang_instance()
+		cotu.deploy_shurikens()

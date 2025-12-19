@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://b50qshurjjmtf"]
+
+[ext_resource type="Script" path="res://rang/shuriken.gd" id="1_adi1h"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="2_msfg6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yqlfu"]
+shading_mode = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_1jflr"]
+material = SubResource("StandardMaterial3D_yqlfu")
+size = Vector3(0.5, 0.05, 0.1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ytbbs"]
+height = 0.5
+radius = 0.3
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_nv1ty"]
+height = 0.5
+radius = 0.3
+
+[node name="Shuriken" type="CharacterBody3D"]
+script = ExtResource("1_adi1h")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_1jflr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_ytbbs")
+
+[node name="PlayerHitbox" type="Area3D" parent="."]
+script = ExtResource("2_msfg6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerHitbox"]
+shape = SubResource("CylinderShape3D_nv1ty")
