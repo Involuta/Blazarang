@@ -20,6 +20,7 @@ radius = 0.3
 
 [node name="Shuriken" type="CharacterBody3D"]
 script = ExtResource("1_adi1h")
+time_per_slash = 0.5
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_1jflr")
