@@ -20,7 +20,7 @@ var target: Node3D
 
 # --- Mesh Rotation Parameters ---
 @export var min_spin_speed := 4.0 # Rotation speed (radians/s) during ORBIT
-@export var max_spin_speed := 30.0 # Rotation speed (radians/s) during SLASH/APPROACH/RECALL
+@export var max_spin_speed := 10.0 # Rotation speed (radians/s) during SLASH/APPROACH/RECALL
 var current_spin_speed: float = 0.0
 # --------------------------------
 
@@ -37,8 +37,8 @@ var approach_target_pos := Vector3.ZERO
 # --- Rose Curve Variables ---
 @export var time_per_slash := 1.0 # Duration of a single petal loop
 var slash_time := 0.0 
-@export var slash_radius_h := 3.0 # Max horizontal offset
-@export var slash_radius_v := 3.0 # Max vertical offset
+@export var slash_radius_h := 3.5 # Max horizontal offset
+@export var slash_radius_v := 1.0 # Max vertical offset
 
 @export var total_slashes := 3 # Number of petals in the rose pattern
 var total_slash_duration: float 

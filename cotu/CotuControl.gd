@@ -203,7 +203,15 @@ func start_grab_anim(hitbox_name):
 		_:
 			print("Error in CotuControl: hitbox name from CotuHurtbox not found")
 
+var slow = false
 func _physics_process(delta):
+	if Input.is_action_just_pressed("Special"):
+		if slow:
+			slow = false
+			Engine.time_scale = 1
+		else:
+			slow = true
+			Engine.time_scale = .1
 	# Camera movement/orientation; ui_cancel means esc
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

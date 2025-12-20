@@ -1,8 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://b50qshurjjmtf"]
+[gd_scene load_steps=14 format=3 uid="uid://b50qshurjjmtf"]
 
 [ext_resource type="Script" path="res://rang/shuriken.gd" id="1_adi1h"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="2_msfg6"]
 [ext_resource type="PackedScene" uid="uid://bwoqvmq50voib" path="res://glb_inherited_scenes/shuriken_mesh.tscn" id="3_5tdus"]
+[ext_resource type="Shader" path="res://GPUTrail-main/shaders/trail.gdshader" id="4_8xoly"]
+[ext_resource type="Shader" path="res://GPUTrail-main/shaders/trail_draw_pass.gdshader" id="5_nc1i7"]
+[ext_resource type="Script" path="res://GPUTrail-main/GPUTrail3D.gd" id="6_yl0ol"]
+[ext_resource type="Texture2D" uid="uid://crk6pkb7e5rwc" path="res://GPUTrail-main/defaults/texture.tres" id="7_fuw0n"]
+[ext_resource type="Texture2D" uid="uid://ct31fhxvcragr" path="res://GPUTrail-main/defaults/curve.tres" id="8_khjih"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ytbbs"]
 height = 0.5
@@ -11,6 +16,21 @@ radius = 0.3
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_nv1ty"]
 height = 0.5
 radius = 0.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nragk"]
+shader = ExtResource("4_8xoly")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tu8d3"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_nc1i7")
+shader_parameter/emmission_transform = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+shader_parameter/flags = 44
+shader_parameter/color_ramp = ExtResource("7_fuw0n")
+shader_parameter/curve = ExtResource("8_khjih")
+
+[sub_resource type="QuadMesh" id="QuadMesh_i1jr4"]
+material = SubResource("ShaderMaterial_tu8d3")
 
 [node name="Shuriken" type="CharacterBody3D"]
 script = ExtResource("1_adi1h")
@@ -27,3 +47,17 @@ shape = SubResource("CylinderShape3D_nv1ty")
 
 [node name="ShurikenMesh" parent="." instance=ExtResource("3_5tdus")]
 transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0)
+
+[node name="GPUTrail3D" type="GPUParticles3D" parent="."]
+amount = 10
+lifetime = 10.0
+explosiveness = 1.0
+fixed_fps = 0
+process_material = SubResource("ShaderMaterial_nragk")
+draw_pass_1 = SubResource("QuadMesh_i1jr4")
+script = ExtResource("6_yl0ol")
+length = 10
+color_ramp = ExtResource("7_fuw0n")
+curve = ExtResource("8_khjih")
+billboard = true
+_defaults_have_been_set = true

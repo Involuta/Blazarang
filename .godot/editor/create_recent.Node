@@ -1,3 +1,5 @@
+GPUTrail3D
+Trail3D
 CollisionShape3D
 Hitbox
 MeshInstance3D
@@ -28,5 +30,3 @@ NavigationRegion3D
 PhysicalBone3D
 Skeleton3D
 TextureRect
-GPUTrail3D
-GPUParticlesAttractorSphere3D
