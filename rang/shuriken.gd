@@ -18,6 +18,12 @@ var cotu: Node3D
 var icon: Node3D
 var target: Node3D
 
+# --- Mesh Rotation Parameters ---
+@export var min_spin_speed := 4.0 # Rotation speed (radians/s) during ORBIT
+@export var max_spin_speed := 30.0 # Rotation speed (radians/s) during SLASH/APPROACH/RECALL
+var current_spin_speed: float = 0.0
+# --------------------------------
+
 @export var orbit_radius := 1.2
 @export var orbit_speed := 4.0
 var orbit_angle := 0.0
@@ -31,10 +37,10 @@ var approach_target_pos := Vector3.ZERO
 # --- Rose Curve Variables ---
 @export var time_per_slash := 1.0 # Duration of a single petal loop
 var slash_time := 0.0 
-@export var slash_radius_h := 4.5 # Max horizontal offset
+@export var slash_radius_h := 3.0 # Max horizontal offset
 @export var slash_radius_v := 3.0 # Max vertical offset
 
-@export var total_slashes := 3 # Number of petals in the rose pattern (number of hits + 1, because the first hit doesn't come from a slash but from the initial approach)
+@export var total_slashes := 3 # Number of petals in the rose pattern
 var total_slash_duration: float 
 
 @export var recall_speed := 40.0
@@ -47,6 +53,8 @@ func _ready():
 	icon = level.find_child("Icon")
 	
 	hitbox.damage = Globals.player_hitbox_data.ShurikenBaseDamage
+	# Initialize spin speed to the minimum when the script starts
+	current_spin_speed = min_spin_speed 
 
 # -------------------------------------------------
 # Core loop
@@ -63,7 +71,9 @@ func _physics_process(delta):
 			slash_frame(delta)
 		State.RECALL:
 			recall_frame(delta)
-	mesh.rotate_y(4 * delta)
+	
+	# Apply continuous rotation using the current speed
+	mesh.rotate_y(current_spin_speed * delta)
 
 # -------------------------------------------------
 # ORBIT
@@ -79,6 +89,8 @@ func orbit_frame(delta):
 func switch_to_orbit():
 	state = State.ORBIT
 	target = null
+	# Reset spin speed to minimum
+	current_spin_speed = min_spin_speed
 
 # -------------------------------------------------
 # SPINUP
@@ -90,6 +102,10 @@ func spinup_frame(delta):
 
 	spinup_time += delta
 	look_at(target.global_position)
+
+	# Interpolate spin speed from min_spin_speed to max_spin_speed
+	var t = min(spinup_time / spinup_duration, 1.0)
+	current_spin_speed = lerp(min_spin_speed, max_spin_speed, t)
 
 	if spinup_time >= spinup_duration:
 		switch_to_approach()
@@ -111,6 +127,9 @@ func approach_frame(delta):
 		approach_target_pos,
 		approach_speed * delta
 	)
+	
+	# Maintain max spin speed
+	current_spin_speed = max_spin_speed
 
 	look_at(target.global_position)
 
@@ -138,6 +157,9 @@ func slash_frame(delta):
 		return
 
 	slash_time += delta
+	
+	# Maintain max spin speed
+	current_spin_speed = max_spin_speed
 	
 	if slash_time >= total_slash_duration:
 		switch_to_recall()
@@ -206,6 +228,9 @@ func recall_frame(delta):
 		recall_speed * delta
 	)
 	look_at(icon.global_position)
+	
+	# Maintain max spin speed
+	current_spin_speed = max_spin_speed
 
 	if global_position.distance_to(icon.global_position) < 0.3:
 		switch_to_orbit()
@@ -217,4 +242,5 @@ func switch_to_recall():
 # External API
 # -------------------------------------------------
 func deploy_to_target(new_target: Node3D):
-	switch_to_spinup(new_target)
+	if state == State.ORBIT:
+		switch_to_spinup(new_target)
