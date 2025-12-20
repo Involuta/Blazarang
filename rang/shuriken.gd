@@ -12,7 +12,7 @@ var state: State = State.ORBIT
 
 @onready var root := $/root/ViewControl
 @onready var hitbox := $PlayerHitbox
-@onready var mesh := $MeshInstance3D
+@onready var mesh := $ShurikenMesh
 var level : Node3D
 var cotu: Node3D
 var icon: Node3D
