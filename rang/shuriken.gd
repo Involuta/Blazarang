@@ -35,18 +35,19 @@ var spinup_time := 0.0
 var approach_target_pos := Vector3.ZERO
 
 # --- Rose Curve Variables ---
-@export var time_per_slash := 2.0 
+@export var slash_path_speed := 15.0 # Speed of travel along the curve (units/sec)
+var time_per_slash := 1.0 
 var slash_time := 0.0 
-@export var slash_radius_h := 4.5 
-@export var slash_radius_v := 3.0 
 
-@export var total_slashes := 3
+@export var slash_radius_h := 4.0 
+@export var slash_radius_v := 2.0 
+
+@export var total_slashes := 3 
 var total_slash_duration: float 
 
 # --- Randomization Variables ---
 var random_angle_offset := 0.0 
 var random_tilt_amount_deg := 0.0
-# Determines if the curve is traversed clockwise (1.0) or counter-clockwise (-1.0)
 var path_direction := 1.0 
 # -------------------------------
 
@@ -143,15 +144,10 @@ func switch_to_approach():
 		switch_to_recall()
 		return
 	
-	# --- Generate Random Path Parameters ---
 	random_angle_offset = randf_range(0.0, TAU)
 	random_tilt_amount_deg = randf_range(-30.0, 30.0)
-	
-	# Randomize direction: 50% chance for 1.0, 50% chance for -1.0
 	path_direction = 1.0 if randf() > 0.5 else -1.0
-	# ---------------------------------------
 		
-	# Target a position offset from the enemy to seamlessly begin the curve
 	var direction_to_target = (target.global_position - global_position).normalized()
 	approach_target_pos = target.global_position - direction_to_target * slash_radius_h * 1.5
 
@@ -166,7 +162,6 @@ func slash_frame(delta):
 		return
 
 	slash_time += delta
-	
 	current_spin_speed = max_spin_speed
 	
 	if slash_time >= total_slash_duration:
@@ -177,22 +172,17 @@ func slash_frame(delta):
 	var t_cycle = fmod(slash_time, time_per_slash) / time_per_slash
 	var envelope = sin(t_cycle * PI)
 	
-	# Base Curve Calculation
-	# Multiply theta by path_direction to control clockwise vs counter-clockwise movement
 	var theta = t_cycle * 2.0 * PI * path_direction
 	
 	var local_x = envelope * slash_radius_h * cos(theta)
 	var local_y = envelope * slash_radius_v * sin(theta)
 	var local_z = envelope * cos(theta) * slash_radius_h * 0.1 
 	
-	# Petal Rotation
 	var petal_angle = (current_slash_index * (2.0 * PI / float(total_slashes))) + random_angle_offset
 	
-	# Apply 2D rotation
 	var final_x = local_x * cos(petal_angle) - local_y * sin(petal_angle)
 	var final_y = local_x * sin(petal_angle) + local_y * cos(petal_angle)
 	
-	# Transform to world space
 	var local_offset = Vector3(final_x, final_y, local_z)
 	var world_offset = initial_rotation * local_offset
 	
@@ -203,11 +193,21 @@ func switch_to_slash():
 	if not is_instance_valid(target):
 		switch_to_recall()
 		return
-
+	
+	# --- AUTO-CALCULATE DURATION ---
+	# Approximate the length of one loop (roughly a circle based on average radius)
+	var avg_radius = (slash_radius_h + slash_radius_v) / 2.0
+	var approx_path_length = PI * avg_radius
+	
+	# Time = Distance / Speed
+	# Prevent division by zero if user sets speed to 0
+	if slash_path_speed <= 0.01: slash_path_speed = 0.01
+	time_per_slash = approx_path_length / slash_path_speed
+	
 	total_slash_duration = total_slashes * time_per_slash
 	slash_time = 0.0
+	# -------------------------------
 	
-	# 1. Calculate standard orientation facing the target
 	var forward_dir = (target.global_position - global_position).normalized()
 	var right_dir = forward_dir.cross(Vector3.UP).normalized()
 	if right_dir == Vector3.ZERO:
@@ -216,11 +216,9 @@ func switch_to_slash():
 	
 	initial_rotation = Basis(right_dir, up_dir, forward_dir)
 
-	# 2. Apply Random Plane Tilt
 	var tilt_quat = Quaternion(forward_dir, deg_to_rad(random_tilt_amount_deg))
 	initial_rotation = Basis(tilt_quat) * initial_rotation
 	
-	# Snap to starting position
 	var start_offset_local = Vector3(0, 0, 0)
 	global_position = target.global_position + initial_rotation * start_offset_local
 

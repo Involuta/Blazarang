@@ -34,7 +34,6 @@ material = SubResource("ShaderMaterial_tu8d3")
 
 [node name="Shuriken" type="CharacterBody3D"]
 script = ExtResource("1_adi1h")
-time_per_slash = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_ytbbs")
