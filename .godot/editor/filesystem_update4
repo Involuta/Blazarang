@@ -32,3 +32,5 @@ res://cotu/CotuControl.gd
 res://rang/shuriken_trail.gdshader
 res://rang/roserang.tscn
 res://enemies/x_left_head_piece_rb.tscn
+res://rang/mark.gd
+res://enemies/gauntlet_melee_tier1.tscn

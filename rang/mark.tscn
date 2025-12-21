@@ -3,10 +3,14 @@
 [ext_resource type="Script" path="res://rang/mark.gd" id="1_lb1we"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7bep4"]
+no_depth_test = true
 shading_mode = 0
+billboard_mode = 1
 
 [sub_resource type="SphereMesh" id="SphereMesh_k1xnt"]
 material = SubResource("StandardMaterial3D_7bep4")
+radius = 0.1
+height = 0.2
 
 [node name="Mark" type="Node3D"]
 script = ExtResource("1_lb1we")

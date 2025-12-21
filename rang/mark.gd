@@ -1,6 +1,6 @@
 extends Node3D
 
-signal mark_applied(enemy)
+signal mark_applied(lockonable)
 signal mark_removed()
 
 enum State {
@@ -9,18 +9,24 @@ enum State {
 	RECALL
 }
 
-var state: State
+var state: State # The current operational state of the mark
 
-var cotu: Node3D
-var target: Node3D
+@onready var root := $/root/ViewControl
+var cotu: Node3D # Reference to the character of the user (or owner of the mark)
+var target: Node3D # The enemy currently locked onto by the mark
 
-@export var max_mark_distance := 20.0
-@export var aim_cone_dot := 0.96 # ~15 degrees
-@export var travel_speed := 25.0
-@export var recall_speed := 30.0
-@export var los_check_interval := 0.15
+@export var max_mark_distance := 60.0
+@export var aim_cone_dot := .8 # The required dot product for the target to be within the camera's aiming cone (~15 degrees)
+@export var target_mark_offset := .5 * Vector3.UP # Offset from target's global pos to get the actual pos mark locks onto (without this, the mark goes to X's dong, which is distracting)
+@export var travel_speed := 60.0 # Speed at which the mark travels to the target
+@export var recall_speed := 60.0 # Speed at which the mark returns to the owner
+@export var los_check_interval := 0.15 # Time between line-of-sight checks in the LOCKED state
 
 var los_timer := 0.0
+
+func _ready():
+	# Finds the specific Node3D representing the owner/user ('cotu')
+	cotu = root.find_child("cotuCB")
 
 # -------------------------------------------------
 # Core loop
@@ -38,91 +44,108 @@ func _physics_process(delta):
 # Placement
 # -------------------------------------------------
 func try_place_from_camera(cam: Node3D) -> bool:
-	var enemy := find_best_enemy_in_cone(cam)
-	if enemy == null:
+	var lockonable := find_best_lockonable_in_cone(cam)
+	
+	if lockonable == null:
 		return false
 
-	target = enemy
+	# Set the target and transition state upon successful target acquisition
+	target = lockonable
 	state = State.TRAVEL_TO_TARGET
 	global_position = cam.global_position
 
 	emit_signal("mark_applied", target)
 	return true
 
-func find_best_enemy_in_cone(cam: Node3D) -> Node3D:
+func find_best_lockonable_in_cone(cam: Node3D) -> Node3D:
 	var enemies = get_tree().get_nodes_in_group("lockonables")
 	var cam_fwd = -cam.global_transform.basis.z
 	var cam_pos = cam.global_position
 
-	var best_enemy = null
+	var best_lockonable = null
 	var best_dist = INF
-
+	
 	for e in enemies:
-		var to_enemy = e.global_position - cam_pos
-		var dist = to_enemy.length()
+		print(e.name)
+		var to_lockonable = e.global_position - cam_pos
+		var dist = to_lockonable.length()
 		if dist > max_mark_distance:
 			continue
 
-		var dir = to_enemy.normalized()
+		var dir = to_lockonable.normalized()
+		# Check if the enemy is within the defined aiming cone
 		if cam_fwd.dot(dir) < aim_cone_dot:
 			continue
 
-		if not has_los(cam_pos, e.global_position):
+		# Check for line-of-sight from the camera to the potential target 'e'
+		if not has_los(cam_pos, e.global_position, e):
 			continue
 
+		# Select the closest valid target
 		if dist < best_dist:
 			best_dist = dist
-			best_enemy = e
+			best_lockonable = e
 
-	return best_enemy
+	return best_lockonable
 
 # -------------------------------------------------
 # TRAVEL
 # -------------------------------------------------
 func travel_frame(delta):
+	# If the target is no longer valid, initiate recall
 	if not is_instance_valid(target):
 		switch_to_recall()
 		return
+	
+	var target_pos = target.global_position + target_mark_offset
 
+	# Move the mark towards the target's position
 	global_position = global_position.move_toward(
-		target.global_position,
+		target_pos,
 		travel_speed * delta
 	)
 
-	if global_position.distance_to(target.global_position) < 0.2:
+	# Transition to the LOCKED state when close enough
+	if global_position.distance_to(target_pos) < 0.2:
 		switch_to_locked()
 
 # -------------------------------------------------
 # LOCKED
 # -------------------------------------------------
 func locked_frame(delta):
+	# If the target is no longer valid, initiate recall
 	if not is_instance_valid(target):
 		switch_to_recall()
 		return
 
-	global_position = target.global_position
+	# Keep the mark fixed to the target's position
+	global_position = target.global_position + target_mark_offset
 
 	los_timer += delta
+	# Periodically check distance and line-of-sight from the owner
 	if los_timer >= los_check_interval:
 		los_timer = 0.0
 
-		if owner.global_position.distance_to(target.global_position) > max_mark_distance:
+		if cotu.global_position.distance_to(target.global_position) > max_mark_distance:
 			switch_to_recall()
 			return
 
-		if not has_los(owner.global_position, target.global_position):
+		# Check for line-of-sight from the owner to the current target
+		if not has_los(cotu.global_position, target.global_position, target):
 			switch_to_recall()
 
 # -------------------------------------------------
 # RECALL
 # -------------------------------------------------
 func recall_frame(delta):
+	# Move the mark towards the owner's position
 	global_position = global_position.move_toward(
-		owner.global_position,
+		cotu.global_position,
 		recall_speed * delta
 	)
 
-	if global_position.distance_to(owner.global_position) < 0.3:
+	# Remove the mark when it reaches the owner
+	if global_position.distance_to(cotu.global_position) < 0.3:
 		emit_signal("mark_removed")
 		queue_free()
 
@@ -130,13 +153,37 @@ func switch_to_locked():
 	state = State.LOCKED
 
 func switch_to_recall():
+	# Clear the target reference when recalling the mark
+	if is_instance_valid(target):
+		target = null
 	state = State.RECALL
 
 # -------------------------------------------------
 # LOS helper
 # -------------------------------------------------
-func has_los(from: Vector3, to: Vector3) -> bool:
+# Performs a raycast from 'from' to 'to' and checks if the first object hit is 'lockonable'
+func has_los(from: Vector3, to: Vector3, lockonable: Node3D) -> bool:
+	# Immediately return false if the intended target is invalid
+	if not is_instance_valid(lockonable):
+		return false
+		
 	var space = get_world_3d().direct_space_state
+	# NOTE: Raycasts for LOS often benefit from having separate collision layers 
+	# for environmental obstacles versus the target itself.
+	
 	var q = PhysicsRayQueryParameters3D.create(from, to)
+	# The collision mask includes layers that could potentially block LOS
+	q.collision_mask = Globals.make_mask([Globals.ENEMY_COL_LAYER, Globals.THICK_ENEMY_COL_LAYER])
+	q.collide_with_areas = false
+	
 	var hit = space.intersect_ray(q)
-	return hit and hit.collider == target
+	
+	# Line-of-sight is maintained if the ray hits nothing,
+	# or if the first object the ray hits is the intended lockonable (target).
+	if not hit:
+		# If no hit, the path is clear up to the 'to' point
+		return true
+
+	# LOS is only true if the ray's first collision is with the specific lockonable, 
+	# meaning no obstacle came between the start and the target.
+	return hit.collider == lockonable
