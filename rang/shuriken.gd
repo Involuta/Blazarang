@@ -19,8 +19,8 @@ var icon: Node3D
 var target: Node3D
 
 # --- Mesh Rotation Parameters ---
-@export var min_spin_speed := 4.0 
-@export var max_spin_speed := 30.0 
+@export var min_spin_speed := 4.0 # Rotation speed (radians/s) during ORBIT
+@export var max_spin_speed := 30.0 # Rotation speed (radians/s) during SLASH/APPROACH/RECALL
 var current_spin_speed: float = 0.0
 # --------------------------------
 
