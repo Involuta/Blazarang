@@ -52,7 +52,7 @@ func try_place_from_camera(cam: Node3D) -> bool:
 	# Set the target and transition state upon successful target acquisition
 	target = lockonable
 	state = State.TRAVEL_TO_TARGET
-	global_position = cam.global_position
+	global_position = cotu.global_position
 
 	emit_signal("mark_applied", target)
 	return true
