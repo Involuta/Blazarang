@@ -96,8 +96,9 @@ func find_best_lockonable_in_cone(cam: Node3D) -> Node3D:
 # TRAVEL
 # -------------------------------------------------
 func travel_frame(delta):
-	# If the target is no longer valid, initiate recall
-	if not is_instance_valid(target):
+	# If the target is invalid OR has its processing disabled, initiate recall
+	if not is_instance_valid(target) \
+	or target.process_mode == Node.PROCESS_MODE_DISABLED:
 		switch_to_recall()
 		return
 	
@@ -117,8 +118,9 @@ func travel_frame(delta):
 # LOCKED
 # -------------------------------------------------
 func locked_frame(delta):
-	# If the target is no longer valid, initiate recall
-	if not is_instance_valid(target):
+	# If the target is invalid OR has its processing disabled, initiate recall
+	if not is_instance_valid(target) \
+	or target.process_mode == Node.PROCESS_MODE_DISABLED:
 		switch_to_recall()
 		return
 
@@ -167,8 +169,9 @@ func switch_to_recall():
 # -------------------------------------------------
 # Performs a raycast from 'from' to 'to' and checks if the line-of-sight is blocked by ARENA collision.
 func has_los(from: Vector3, to: Vector3, lockonable: Node3D) -> bool:
-	# Immediately return false if the intended target is invalid
-	if not is_instance_valid(lockonable):
+	# Immediately return false if the target is invalid OR has its processing disabled
+	if not is_instance_valid(lockonable) \
+	or lockonable.process_mode == Node.PROCESS_MODE_DISABLED:
 		return false
 		
 	var space = get_world_3d().direct_space_state
@@ -183,14 +186,9 @@ func has_los(from: Vector3, to: Vector3, lockonable: Node3D) -> bool:
 	
 	var hit = space.intersect_ray(q)
 	
-	# Line-of-sight is maintained if:
-	# 1. No hit occurred (the path is clear up to the 'to' point)
-	# 2. A hit occurred, but the hit distance is greater than the distance to the target (implying the ray hit something behind the target, which shouldn't happen if 'to' is the target's position, but is a robust check).
-	
+	# Line-of-sight is maintained if no arena collision occurred.
 	if not hit:
-		# No arena collision found between 'from' and 'to'. LOS is clear.
 		return true
 
-	# If we got a hit, it means an ARENA object blocked the path, so LOS is broken.
-	# We don't check 'hit.collider == lockonable' anymore because the mask excludes enemies.
+	# If we got a hit, an ARENA object blocked the path, so LOS is broken.
 	return false

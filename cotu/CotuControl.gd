@@ -217,7 +217,8 @@ func _physics_process(delta):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
 	# Lock on logic; if target no longer exists, lock off
-	if !lock_on_target:
+	if lock_on_target \
+	and is_effectively_invalid(lock_on_target):
 		lock_off()
 	if using_controller:
 		camera_twist_input = Input.get_axis("LookRight", "LookLeft") * joystick_camera_sensitivity
@@ -605,7 +606,8 @@ func get_nearest_target(targets: Array, origin: Vector3) -> Node3D:
 	var best_dist := INF
 
 	for t in targets:
-		if not is_instance_valid(t):
+		# Skip targets that are invalid OR have processing disabled
+		if is_effectively_invalid(t):
 			continue
 
 		var d = origin.distance_to(t.global_position)
@@ -620,7 +622,8 @@ func get_highest_health_target(targets: Array) -> Node3D:
 	var best_hp := -INF
 
 	for t in targets:
-		if not is_instance_valid(t):
+		# Skip targets that are invalid OR have processing disabled
+		if is_effectively_invalid(t):
 			continue
 		
 		# To do: verify that all enemies have a hurtbox reference
@@ -635,7 +638,8 @@ func get_lowest_health_target(targets: Array) -> Node3D:
 	var best_hp := INF
 
 	for t in targets:
-		if not is_instance_valid(t):
+		# Skip targets that are invalid OR have processing disabled
+		if is_effectively_invalid(t):
 			continue
 		
 		# To do: verify that all enemies have a hurtbox reference
@@ -670,6 +674,9 @@ func deploy_shurikens():
 
 	for s in shurikens:
 		s.deploy_to_target(target)
+
+func is_effectively_invalid(n: Node) -> bool:
+	return not is_instance_valid(n) or n.process_mode == Node.PROCESS_MODE_DISABLED
 
 func _on_mark_applied(target):
 	active_mark = target

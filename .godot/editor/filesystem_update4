@@ -31,3 +31,5 @@ res://enemies/x_blade.tscn
 res://enemies/gauntlet_melee_tier1.tscn
 res://enemies/x_boss.tscn
 res://rang/mark.gd
+res://rang/shuriken.gd
+res://cotu/CotuControl.gd

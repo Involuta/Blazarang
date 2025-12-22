@@ -101,7 +101,9 @@ func switch_to_orbit():
 # SPINUP
 # -------------------------------------------------
 func spinup_frame(delta):
-	if not is_instance_valid(target):
+	# If the target is invalid OR has its processing disabled, recall
+	if not is_instance_valid(target) \
+	or target.process_mode == Node.PROCESS_MODE_DISABLED:
 		switch_to_recall()
 		return
 
@@ -123,7 +125,9 @@ func switch_to_spinup(new_target: Node3D):
 # APPROACH
 # -------------------------------------------------
 func approach_frame(delta):
-	if not is_instance_valid(target):
+	# If the target is invalid OR has its processing disabled, recall
+	if not is_instance_valid(target) \
+	or target.process_mode == Node.PROCESS_MODE_DISABLED:
 		switch_to_recall()
 		return
 
@@ -133,14 +137,15 @@ func approach_frame(delta):
 	)
 	
 	current_spin_speed = max_spin_speed
-
 	look_at(target.global_position)
 
 	if global_position.distance_to(approach_target_pos) < 0.1:
 		switch_to_slash()
 
 func switch_to_approach():
-	if not is_instance_valid(target):
+	# Abort if the target is invalid OR has its processing disabled
+	if not is_instance_valid(target) \
+	or target.process_mode == Node.PROCESS_MODE_DISABLED:
 		switch_to_recall()
 		return
 	
@@ -157,7 +162,9 @@ func switch_to_approach():
 # SLASH
 # -------------------------------------------------
 func slash_frame(delta):
-	if not is_instance_valid(target):
+	# If the target is invalid OR has its processing disabled, recall
+	if not is_instance_valid(target) \
+	or target.process_mode == Node.PROCESS_MODE_DISABLED:
 		switch_to_recall()
 		return
 
@@ -190,7 +197,9 @@ func slash_frame(delta):
 	look_at(target.global_position)
 
 func switch_to_slash():
-	if not is_instance_valid(target):
+	# Abort if the target is invalid OR has its processing disabled
+	if not is_instance_valid(target) \
+	or target.process_mode == Node.PROCESS_MODE_DISABLED:
 		switch_to_recall()
 		return
 	
@@ -201,7 +210,8 @@ func switch_to_slash():
 	
 	# Time = Distance / Speed
 	# Prevent division by zero if user sets speed to 0
-	if slash_path_speed <= 0.01: slash_path_speed = 0.01
+	if slash_path_speed <= 0.01:
+		slash_path_speed = 0.01
 	time_per_slash = approx_path_length / slash_path_speed
 	
 	total_slash_duration = total_slashes * time_per_slash
@@ -219,9 +229,7 @@ func switch_to_slash():
 	var tilt_quat = Quaternion(forward_dir, deg_to_rad(random_tilt_amount_deg))
 	initial_rotation = Basis(tilt_quat) * initial_rotation
 	
-	var start_offset_local = Vector3(0, 0, 0)
-	global_position = target.global_position + initial_rotation * start_offset_local
-
+	global_position = target.global_position
 	state = State.SLASH
 
 # -------------------------------------------------
