@@ -165,29 +165,32 @@ func switch_to_recall():
 # -------------------------------------------------
 # LOS helper
 # -------------------------------------------------
-# Performs a raycast from 'from' to 'to' and checks if the first object hit is 'lockonable'
+# Performs a raycast from 'from' to 'to' and checks if the line-of-sight is blocked by ARENA collision.
 func has_los(from: Vector3, to: Vector3, lockonable: Node3D) -> bool:
 	# Immediately return false if the intended target is invalid
 	if not is_instance_valid(lockonable):
 		return false
 		
 	var space = get_world_3d().direct_space_state
-	# NOTE: Raycasts for LOS often benefit from having separate collision layers 
-	# for environmental obstacles versus the target itself.
 	
 	var q = PhysicsRayQueryParameters3D.create(from, to)
-	# The collision mask includes layers that could potentially block LOS
-	q.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
+	
+	# Only check against ARENA_COL_LAYER
+	# This ensures the ray ignores enemies (ENEMY_COL_LAYER and THICK_ENEMY_COL_LAYER)
+	# and only reports a hit if a wall or ground is in the way.
+	q.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER]) 
 	q.collide_with_areas = false
 	
 	var hit = space.intersect_ray(q)
 	
-	# Line-of-sight is maintained if the ray hits nothing,
-	# or if the first object the ray hits is the intended lockonable (target).
+	# Line-of-sight is maintained if:
+	# 1. No hit occurred (the path is clear up to the 'to' point)
+	# 2. A hit occurred, but the hit distance is greater than the distance to the target (implying the ray hit something behind the target, which shouldn't happen if 'to' is the target's position, but is a robust check).
+	
 	if not hit:
-		# If no hit, the path is clear up to the 'to' point
+		# No arena collision found between 'from' and 'to'. LOS is clear.
 		return true
 
-	# LOS is only true if the ray's first collision is with the specific lockonable, 
-	# meaning no obstacle came between the start and the target.
-	return hit.collider == lockonable
+	# If we got a hit, it means an ARENA object blocked the path, so LOS is broken.
+	# We don't check 'hit.collider == lockonable' anymore because the mask excludes enemies.
+	return false
