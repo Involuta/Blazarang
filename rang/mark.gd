@@ -16,8 +16,8 @@ var cotu: Node3D # Reference to the character of the user (or owner of the mark)
 var target: Node3D # The enemy currently locked onto by the mark
 
 @export var max_mark_distance := 60.0
-@export var aim_cone_dot := .8 # The required dot product for the target to be within the camera's aiming cone (~15 degrees)
-@export var target_mark_offset := .5 * Vector3.UP # Offset from target's global pos to get the actual pos mark locks onto (without this, the mark goes to X's dong, which is distracting)
+@export var aim_cone_dot := 0.8 # The required dot product for the target to be within the camera's aiming cone (~15 degrees). The smaller this num, the bigger the cone
+@export var target_mark_offset := 0.5 * Vector3.UP # Offset from target's global pos to get the actual pos mark locks onto (without this, the mark goes to X's dong, which is distracting)
 @export var travel_speed := 60.0 # Speed at which the mark travels to the target
 @export var recall_speed := 60.0 # Speed at which the mark returns to the owner
 @export var los_check_interval := 0.15 # Time between line-of-sight checks in the LOCKED state
@@ -63,27 +63,31 @@ func find_best_lockonable_in_cone(cam: Node3D) -> Node3D:
 	var cam_pos = cam.global_position
 
 	var best_lockonable = null
-	var best_dist = INF
+	# Changed selection metric: now we track the highest dot product (closest to center)
+	var best_dot_product = aim_cone_dot 
 	
 	for e in enemies:
-		print(e.name)
 		var to_lockonable = e.global_position - cam_pos
 		var dist = to_lockonable.length()
 		if dist > max_mark_distance:
 			continue
 
 		var dir = to_lockonable.normalized()
-		# Check if the enemy is within the defined aiming cone
-		if cam_fwd.dot(dir) < aim_cone_dot:
+		var current_dot_product = cam_fwd.dot(dir)
+		
+		# 1. Check if the enemy is within the defined aiming cone
+		if current_dot_product < aim_cone_dot:
 			continue
 
-		# Check for line-of-sight from the camera to the potential target 'e'
+		# 2. Check for line-of-sight from the camera to the potential target 'e'
 		if not has_los(cam_pos, e.global_position, e):
 			continue
 
-		# Select the closest valid target
-		if dist < best_dist:
-			best_dist = dist
+		# 3. Selection: Choose the enemy with the HIGHEST dot product.
+		# A higher dot product means a smaller angle, meaning the target is closer
+		# to the exact center of the screen/camera's look direction.
+		if current_dot_product > best_dot_product:
+			best_dot_product = current_dot_product
 			best_lockonable = e
 
 	return best_lockonable
@@ -168,12 +172,12 @@ func has_los(from: Vector3, to: Vector3, lockonable: Node3D) -> bool:
 		return false
 		
 	var space = get_world_3d().direct_space_state
-	# NOTE: Raycasts for LOS often benefit from having separate collision layers 
+	# NOTE: Raycasts for LOS often benefit from having separate collision layers 
 	# for environmental obstacles versus the target itself.
 	
 	var q = PhysicsRayQueryParameters3D.create(from, to)
 	# The collision mask includes layers that could potentially block LOS
-	q.collision_mask = Globals.make_mask([Globals.ENEMY_COL_LAYER, Globals.THICK_ENEMY_COL_LAYER])
+	q.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
 	q.collide_with_areas = false
 	
 	var hit = space.intersect_ray(q)
@@ -184,6 +188,6 @@ func has_los(from: Vector3, to: Vector3, lockonable: Node3D) -> bool:
 		# If no hit, the path is clear up to the 'to' point
 		return true
 
-	# LOS is only true if the ray's first collision is with the specific lockonable, 
+	# LOS is only true if the ray's first collision is with the specific lockonable, 
 	# meaning no obstacle came between the start and the target.
 	return hit.collider == lockonable
