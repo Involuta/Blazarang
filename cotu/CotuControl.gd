@@ -94,6 +94,7 @@ var shurikens := []
 
 var mark_scene := preload("res://rang/mark.tscn")
 var active_mark = null
+var mark_shuriken_deploy := true # Set to true when player equips Seeking, which allows them to deploy shurikens by marking an enemy
 
 enum SHURIKEN_MARKLESS_MODE {
 	NEAREST,
@@ -419,6 +420,9 @@ func _physics_process(delta):
 			m.mark_removed.connect(_on_mark_removed)
 		else:
 			m.queue_free()
+		# If mark shuriken deploy is unlocked, then when mark is placed, deploy shurikens
+		if mark_shuriken_deploy:
+			deploy_shurikens()
 	
 	# Animation tree parameters
 	var vel2D = Vector2(velocity.x, velocity.z)
@@ -668,6 +672,9 @@ func get_shuriken_target() -> Node3D:
 	return null
 
 func deploy_shurikens():
+	if len(shurikens) == 0:
+		return
+	
 	var target := get_shuriken_target()
 	if target == null:
 		return
