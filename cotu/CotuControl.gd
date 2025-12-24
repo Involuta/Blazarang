@@ -91,10 +91,11 @@ var shuriken_scene := preload("res://rang/shuriken.tscn")
 var shuriken_deploy_queued := false
 @export var max_shurikens := 4
 var shurikens := []
+@export var throw_shuriken_self_damage := 1.0
 
 var mark_scene := preload("res://rang/mark.tscn")
 var active_mark = null
-var mark_shuriken_deploy := true # Set to true when player equips Seeking, which allows them to deploy shurikens by marking an enemy
+var mark_shuriken_deploy := true # Set to true when player equips Restlessness, which allows them to deploy shurikens by marking an enemy
 
 enum SHURIKEN_MARKLESS_MODE {
 	NEAREST,
@@ -398,8 +399,11 @@ func _physics_process(delta):
 		icon.start_following_cotu()
 		clear_roserang_buffs()
 	
+	# Shuriken throw
 	if Input.is_action_just_pressed("ThrowShuriken"):
 		if shurikens.size() < max_shurikens:
+			if not destabilized and not axrang_perfect_caught:
+				hurtbox.self_hit(throw_shuriken_self_damage)
 			var s = shuriken_scene.instantiate()
 			add_sibling(s)
 			shurikens.append(s)
