@@ -685,22 +685,22 @@ func deploy_shurikens():
 	if target == null:
 		return
 	
+	for s in shurikens:
+		s.deploy_to_target(target)
+	
 	# Resolve/Thrill skills logic start
 	if shurikens.size() == 3:
 		if mid_stability_bonus_shurikens and hurtbox.health < (hurtbox.max_health * 0.5):
 			# Spawn 3 bonus shurikens
 			for i in range(3):
-				await get_tree().create_timer(.5).timeout
 				var bonus_s = shuriken_scene.instantiate()
 				add_sibling(bonus_s)
-				# Immediately deploy them to the target
+				# After letting the shuriken orbit for .5 seconds, deploy it
+				await get_tree().create_timer(.3).timeout
 				bonus_s.deploy_to_target(target)
 				shurikens.append(bonus_s)
 				bonus_s.returned.connect(_on_shuriken_returned)
 	# Resolve/Thrill skills logic end
-
-	for s in shurikens:
-		s.deploy_to_target(target)
 
 func is_effectively_invalid(n: Node) -> bool:
 	return not is_instance_valid(n) or n.process_mode == Node.PROCESS_MODE_DISABLED
