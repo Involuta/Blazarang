@@ -92,6 +92,7 @@ var shuriken_deploy_queued := false
 @export var max_shurikens := 4
 var shurikens := []
 @export var throw_shuriken_self_damage := 1.0
+var mid_stability_bonus_shurikens := true # Set to true when player equips Resolve, which immediately spawns and deploys 3 shurikens if the player's health is below 50% and deploys exactly 3 shurikens in a single icon hit
 
 var mark_scene := preload("res://rang/mark.tscn")
 var active_mark = null
@@ -682,6 +683,19 @@ func deploy_shurikens():
 	var target := get_shuriken_target()
 	if target == null:
 		return
+	
+	# Resolve/Thrill skills logic start
+	if shurikens.size() == 3:
+		if mid_stability_bonus_shurikens and hurtbox.health < (hurtbox.max_health * 0.5):
+			# Spawn 3 bonus shurikens
+			for i in range(3):
+				await get_tree().create_timer(.5).timeout
+				var bonus_s = shuriken_scene.instantiate()
+				add_sibling(bonus_s)
+				# Immediately deploy them to the target
+				bonus_s.deploy_to_target(target)
+				shurikens.append(bonus_s)
+	# Resolve/Thrill skills logic end
 
 	for s in shurikens:
 		s.deploy_to_target(target)
