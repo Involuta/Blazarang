@@ -1,5 +1,7 @@
 extends Node3D
 
+signal returned(shuriken_node)
+
 enum State {
 	ORBIT,
 	SPINUP,
@@ -245,7 +247,9 @@ func recall_frame(delta):
 	current_spin_speed = max_spin_speed
 
 	if global_position.distance_to(icon.global_position) < 0.3:
-		switch_to_orbit()
+		# Emit signal passing 'self' so Cotu knows which instance to remove
+		returned.emit(self)
+		queue_free()
 
 func switch_to_recall():
 	state = State.RECALL

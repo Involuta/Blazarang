@@ -408,6 +408,7 @@ func _physics_process(delta):
 			var s = shuriken_scene.instantiate()
 			add_sibling(s)
 			shurikens.append(s)
+			s.returned.connect(_on_shuriken_returned)
 	
 	if Input.is_action_just_pressed("UseItem"):
 		anim_tree.set(anim_tree_param_path_base + "use_item", true)
@@ -695,6 +696,7 @@ func deploy_shurikens():
 				# Immediately deploy them to the target
 				bonus_s.deploy_to_target(target)
 				shurikens.append(bonus_s)
+				bonus_s.returned.connect(_on_shuriken_returned)
 	# Resolve/Thrill skills logic end
 
 	for s in shurikens:
@@ -702,6 +704,10 @@ func deploy_shurikens():
 
 func is_effectively_invalid(n: Node) -> bool:
 	return not is_instance_valid(n) or n.process_mode == Node.PROCESS_MODE_DISABLED
+
+func _on_shuriken_returned(s_node):
+	if s_node in shurikens:
+		shurikens.erase(s_node)
 
 func _on_mark_applied(target):
 	active_mark = target
