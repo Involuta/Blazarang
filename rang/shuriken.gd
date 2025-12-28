@@ -31,10 +31,15 @@ var current_spin_speed: float = 0.0
 @export var orbit_speed := 4.0
 var orbit_angle := 0.0
 
-@export var spinup_duration := 0.4
+# --- Spinup / Launch Parameters ---
+@export var spinup_duration := 0.6 # Increased slightly default to accommodate launch
+@export var spinup_launch_speed := 12.0 # Speed to launch outward/upward
+@export var spinup_decel_time := 0.4 # Time to slow to a halt (must be < spinup_duration for full stop)
 var spinup_time := 0.0
-@export var approach_speed := 40.0
+var current_spinup_velocity := Vector3.ZERO
+# ----------------------------------
 
+@export var approach_speed := 40.0
 var approach_target_pos := Vector3.ZERO
 
 # --- Rose Curve Variables ---
@@ -57,7 +62,7 @@ var path_direction := 1.0
 @export var recall_speed := 40.0
 
 # --- Explosion Variables ---
-@export var explode_secs := 0.5 # 2. Added explosion duration
+@export var explode_secs := 0.5 
 # ---------------------------
 
 var initial_rotation: Basis
@@ -85,7 +90,7 @@ func _physics_process(delta):
 			slash_frame(delta)
 		State.RECALL:
 			recall_frame(delta)
-		State.EXPLODE: # 3. Added match case
+		State.EXPLODE:
 			explode_frame(delta)
 	
 	mesh.rotate_y(current_spin_speed * delta)
@@ -112,12 +117,24 @@ func switch_to_orbit():
 func spinup_frame(delta):
 	if not is_instance_valid(target) \
 	or target.process_mode == Node.PROCESS_MODE_DISABLED:
-		switch_to_explode()
+		switch_to_recall()
 		return
 
 	spinup_time += delta
+	
+	# --- 1. Handle Launch Physics ---
+	if spinup_decel_time > 0.0:
+		# Apply Velocity
+		global_position += current_spinup_velocity * delta
+		
+		# Decelerate linearly to zero
+		var friction = (spinup_launch_speed / spinup_decel_time) * delta
+		current_spinup_velocity = current_spinup_velocity.move_toward(Vector3.ZERO, friction)
+	# --------------------------------
+
 	look_at(target.global_position)
 
+	# Ramp up mesh rotation speed
 	var t = min(spinup_time / spinup_duration, 1.0)
 	current_spin_speed = lerp(min_spin_speed, max_spin_speed, t)
 
@@ -128,6 +145,17 @@ func switch_to_spinup(new_target: Node3D):
 	target = new_target
 	spinup_time = 0.0
 	state = State.SPINUP
+	
+	# --- Calculate Outward + Upward Vector ---
+	var outward_dir = (global_position - icon.global_position)
+	outward_dir.y = 0 # Flatten to horizontal plane
+	outward_dir = outward_dir.normalized()
+	
+	# Combine outward with UP and normalize again
+	var launch_dir = (outward_dir + Vector3.UP).normalized()
+	
+	current_spinup_velocity = launch_dir * spinup_launch_speed
+	# -----------------------------------------
 
 # -------------------------------------------------
 # APPROACH
@@ -135,7 +163,7 @@ func switch_to_spinup(new_target: Node3D):
 func approach_frame(delta):
 	if not is_instance_valid(target) \
 	or target.process_mode == Node.PROCESS_MODE_DISABLED:
-		switch_to_explode()
+		switch_to_recall()
 		return
 
 	global_position = global_position.move_toward(
@@ -152,7 +180,7 @@ func approach_frame(delta):
 func switch_to_approach():
 	if not is_instance_valid(target) \
 	or target.process_mode == Node.PROCESS_MODE_DISABLED:
-		switch_to_explode()
+		switch_to_recall()
 		return
 	
 	random_angle_offset = randf_range(0.0, TAU)
@@ -170,14 +198,14 @@ func switch_to_approach():
 func slash_frame(delta):
 	if not is_instance_valid(target) \
 	or target.process_mode == Node.PROCESS_MODE_DISABLED:
-		switch_to_explode()
+		switch_to_recall()
 		return
 
 	slash_time += delta
 	current_spin_speed = max_spin_speed
 	
 	if slash_time >= total_slash_duration:
-		switch_to_explode()
+		switch_to_explode() 
 		return
 	
 	var current_slash_index = int(slash_time / time_per_slash)
@@ -204,7 +232,7 @@ func slash_frame(delta):
 func switch_to_slash():
 	if not is_instance_valid(target) \
 	or target.process_mode == Node.PROCESS_MODE_DISABLED:
-		switch_to_explode()
+		switch_to_recall()
 		return
 	
 	var avg_radius = (slash_radius_h + slash_radius_v) / 2.0
@@ -257,10 +285,7 @@ func explode_frame(_delta):
 
 func switch_to_explode():
 	state = State.EXPLODE
-	# Note: If you want visual effects (particles), spawn them here.
-	
 	await get_tree().create_timer(explode_secs).timeout
-	
 	if is_instance_valid(self):
 		destroy_self()
 
