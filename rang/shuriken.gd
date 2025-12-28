@@ -1,13 +1,14 @@
 extends Node3D
 
-signal returned(shuriken_node)
+signal destroyed(shuriken_node)
 
 enum State {
 	ORBIT,
 	SPINUP,
 	APPROACH,
 	SLASH,
-	RECALL
+	RECALL,
+	EXPLODE
 }
 
 var state: State = State.ORBIT
@@ -21,8 +22,8 @@ var icon: Node3D
 var target: Node3D
 
 # --- Mesh Rotation Parameters ---
-@export var min_spin_speed := 4.0 # Rotation speed (radians/s) during ORBIT
-@export var max_spin_speed := 30.0 # Rotation speed (radians/s) during SLASH/APPROACH/RECALL
+@export var min_spin_speed := 4.0 
+@export var max_spin_speed := 30.0 
 var current_spin_speed: float = 0.0
 # --------------------------------
 
@@ -37,25 +38,29 @@ var spinup_time := 0.0
 var approach_target_pos := Vector3.ZERO
 
 # --- Rose Curve Variables ---
-@export var slash_path_speed := 15.0 # Speed of travel along the curve (units/sec)
-var time_per_slash := 1.0 
-var slash_time := 0.0 
+@export var slash_path_speed := 15.0 
+var time_per_slash := 1.0
+var slash_time := 0.0
 
-@export var slash_radius_h := 4.0 
-@export var slash_radius_v := 2.0 
+@export var slash_radius_h := 4.0
+@export var slash_radius_v := 2.0
 
-@export var total_slashes := 3 
-var total_slash_duration: float 
+@export var total_slashes := 3
+var total_slash_duration: float
 
 # --- Randomization Variables ---
-var random_angle_offset := 0.0 
+var random_angle_offset := 0.0
 var random_tilt_amount_deg := 0.0
-var path_direction := 1.0 
+var path_direction := 1.0
 # -------------------------------
 
 @export var recall_speed := 40.0
 
-var initial_rotation: Basis 
+# --- Explosion Variables ---
+@export var explode_secs := 0.5 # 2. Added explosion duration
+# ---------------------------
+
+var initial_rotation: Basis
 
 func _ready():
 	level = root.find_child("Level")
@@ -63,7 +68,7 @@ func _ready():
 	icon = level.find_child("Icon")
 	
 	hitbox.damage = Globals.player_hitbox_data.ShurikenBaseDamage
-	current_spin_speed = min_spin_speed 
+	current_spin_speed = min_spin_speed
 
 # -------------------------------------------------
 # Core loop
@@ -80,6 +85,8 @@ func _physics_process(delta):
 			slash_frame(delta)
 		State.RECALL:
 			recall_frame(delta)
+		State.EXPLODE: # 3. Added match case
+			explode_frame(delta)
 	
 	mesh.rotate_y(current_spin_speed * delta)
 
@@ -103,10 +110,9 @@ func switch_to_orbit():
 # SPINUP
 # -------------------------------------------------
 func spinup_frame(delta):
-	# If the target is invalid OR has its processing disabled, recall
 	if not is_instance_valid(target) \
 	or target.process_mode == Node.PROCESS_MODE_DISABLED:
-		switch_to_recall()
+		switch_to_explode()
 		return
 
 	spinup_time += delta
@@ -127,10 +133,9 @@ func switch_to_spinup(new_target: Node3D):
 # APPROACH
 # -------------------------------------------------
 func approach_frame(delta):
-	# If the target is invalid OR has its processing disabled, recall
 	if not is_instance_valid(target) \
 	or target.process_mode == Node.PROCESS_MODE_DISABLED:
-		switch_to_recall()
+		switch_to_explode()
 		return
 
 	global_position = global_position.move_toward(
@@ -145,10 +150,9 @@ func approach_frame(delta):
 		switch_to_slash()
 
 func switch_to_approach():
-	# Abort if the target is invalid OR has its processing disabled
 	if not is_instance_valid(target) \
 	or target.process_mode == Node.PROCESS_MODE_DISABLED:
-		switch_to_recall()
+		switch_to_explode()
 		return
 	
 	random_angle_offset = randf_range(0.0, TAU)
@@ -164,17 +168,16 @@ func switch_to_approach():
 # SLASH
 # -------------------------------------------------
 func slash_frame(delta):
-	# If the target is invalid OR has its processing disabled, recall
 	if not is_instance_valid(target) \
 	or target.process_mode == Node.PROCESS_MODE_DISABLED:
-		switch_to_recall()
+		switch_to_explode()
 		return
 
 	slash_time += delta
 	current_spin_speed = max_spin_speed
 	
 	if slash_time >= total_slash_duration:
-		switch_to_recall()
+		switch_to_explode()
 		return
 	
 	var current_slash_index = int(slash_time / time_per_slash)
@@ -185,7 +188,7 @@ func slash_frame(delta):
 	
 	var local_x = envelope * slash_radius_h * cos(theta)
 	var local_y = envelope * slash_radius_v * sin(theta)
-	var local_z = envelope * cos(theta) * slash_radius_h * 0.1 
+	var local_z = envelope * cos(theta) * slash_radius_h * 0.1
 	
 	var petal_angle = (current_slash_index * (2.0 * PI / float(total_slashes))) + random_angle_offset
 	
@@ -199,26 +202,20 @@ func slash_frame(delta):
 	look_at(target.global_position)
 
 func switch_to_slash():
-	# Abort if the target is invalid OR has its processing disabled
 	if not is_instance_valid(target) \
 	or target.process_mode == Node.PROCESS_MODE_DISABLED:
-		switch_to_recall()
+		switch_to_explode()
 		return
 	
-	# --- AUTO-CALCULATE DURATION ---
-	# Approximate the length of one loop (roughly a circle based on average radius)
 	var avg_radius = (slash_radius_h + slash_radius_v) / 2.0
 	var approx_path_length = PI * avg_radius
 	
-	# Time = Distance / Speed
-	# Prevent division by zero if user sets speed to 0
 	if slash_path_speed <= 0.01:
 		slash_path_speed = 0.01
 	time_per_slash = approx_path_length / slash_path_speed
 	
 	total_slash_duration = total_slashes * time_per_slash
 	slash_time = 0.0
-	# -------------------------------
 	
 	var forward_dir = (target.global_position - global_position).normalized()
 	var right_dir = forward_dir.cross(Vector3.UP).normalized()
@@ -247,12 +244,25 @@ func recall_frame(delta):
 	current_spin_speed = max_spin_speed
 
 	if global_position.distance_to(icon.global_position) < 0.3:
-		# Emit signal passing 'self' so Cotu knows which instance to remove
-		returned.emit(self)
-		queue_free()
+		destroy_self()
 
 func switch_to_recall():
 	state = State.RECALL
+
+# -------------------------------------------------
+# EXPLODE
+# -------------------------------------------------
+func explode_frame(_delta):
+	pass
+
+func switch_to_explode():
+	state = State.EXPLODE
+	# Note: If you want visual effects (particles), spawn them here.
+	
+	await get_tree().create_timer(explode_secs).timeout
+	
+	if is_instance_valid(self):
+		destroy_self()
 
 # -------------------------------------------------
 # External API
@@ -260,3 +270,7 @@ func switch_to_recall():
 func deploy_to_target(new_target: Node3D):
 	if state == State.ORBIT:
 		switch_to_spinup(new_target)
+
+func destroy_self():
+	destroyed.emit(self)
+	queue_free()
