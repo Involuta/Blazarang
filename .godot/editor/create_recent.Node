@@ -1,10 +1,10 @@
+GPUParticles3D
 GPUTrail3D
 CollisionShape3D
 Hitbox
 MeshInstance3D
 CharacterBody3D
 StaticBody3D
-GPUParticles3D
 AudioStreamPlayer3D
 AudioStreamPlayer
 AnimatedSprite3D

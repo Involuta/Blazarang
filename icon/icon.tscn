@@ -281,7 +281,7 @@ collision_layer = 32
 script = ExtResource("1_fgjod")
 
 [node name="TriangleIconMesh" parent="." instance=ExtResource("2_qle8n")]
-transform = Transform3D(0.125303, 0.891233, 0.00177255, 3.25602e-06, 0.00178953, -0.899998, -0.891235, 0.125303, 0.000245923, 2.08165e-12, -0.998732, 2.08165e-12)
+transform = Transform3D(-0.0439075, 0.898926, 0.00178721, 3.68485e-06, 0.00178953, -0.899998, -0.898928, -0.0439074, -9.09845e-05, 2.08165e-12, -0.998732, 2.08165e-12)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_qvdqm")

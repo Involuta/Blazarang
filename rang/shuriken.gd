@@ -16,6 +16,7 @@ var state: State = State.ORBIT
 @onready var root := $/root/ViewControl
 @onready var hitbox := $PlayerHitbox
 @onready var mesh := $ShurikenMesh
+@onready var explosion_particles := $ExplosionParticles
 var level : Node3D
 var cotu: Node3D
 var icon: Node3D
@@ -285,6 +286,8 @@ func explode_frame(_delta):
 
 func switch_to_explode():
 	state = State.EXPLODE
+	mesh.visible = false
+	explosion_particles.emitting = true
 	await get_tree().create_timer(explode_secs).timeout
 	if is_instance_valid(self):
 		destroy_self()

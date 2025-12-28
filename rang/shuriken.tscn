@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b50qshurjjmtf"]
+[gd_scene load_steps=21 format=3 uid="uid://b50qshurjjmtf"]
 
 [ext_resource type="Script" path="res://rang/shuriken.gd" id="1_adi1h"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="2_msfg6"]
@@ -44,6 +44,33 @@ shader_parameter/curve = SubResource("CurveTexture_ny2ev")
 [sub_resource type="QuadMesh" id="QuadMesh_5ug1y"]
 material = SubResource("ShaderMaterial_6qw7b")
 
+[sub_resource type="Curve" id="Curve_ccuod"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.898136, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_r620n"]
+curve = SubResource("Curve_ccuod")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qpk77"]
+direction = Vector3(2.08165e-12, 2.08165e-12, -1)
+spread = 30.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 8.0
+initial_velocity_max = 14.0
+scale_curve = SubResource("CurveTexture_r620n")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xk15e"]
+shading_mode = 0
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_n5enk"]
+material = SubResource("StandardMaterial3D_xk15e")
+size = Vector2(0.5, 0.5)
+
 [node name="Shuriken" type="CharacterBody3D"]
 script = ExtResource("1_adi1h")
 
@@ -72,3 +99,11 @@ color_ramp = SubResource("GradientTexture1D_4lnfl")
 curve = SubResource("CurveTexture_ny2ev")
 billboard = true
 _defaults_have_been_set = true
+
+[node name="ExplosionParticles" type="GPUParticles3D" parent="."]
+emitting = false
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_qpk77")
+draw_pass_1 = SubResource("QuadMesh_n5enk")
