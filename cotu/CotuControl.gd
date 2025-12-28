@@ -93,6 +93,8 @@ var shuriken_deploy_queued := false
 var shurikens := []
 @export var throw_shuriken_self_damage := 1.0
 var mid_stability_bonus_shurikens := true # Set to true when player equips Resolve, which immediately spawns and deploys 3 shurikens if the player's health is below 50% and deploys exactly 3 shurikens in a single icon hit
+var fireball_scene := preload("res://rang/fireball.tscn")
+var low_stability_fireball := true # Set to true when player equips Thrill, which immediately spawns and deploys a fireball if the player's health is below 25% and deploys exactly 3 shurikens in a single icon hit
 
 var mark_scene := preload("res://rang/mark.tscn")
 var active_mark = null
@@ -700,6 +702,13 @@ func deploy_shurikens():
 				bonus_s.deploy_to_target(target)
 				shurikens.append(bonus_s)
 				bonus_s.destroyed.connect(_on_shuriken_destroyed)
+		
+		if low_stability_fireball and hurtbox.health < (hurtbox.max_health * 0.33):
+			# Spawn 1 fireball and immediately deploy it
+			var fb = fireball_scene.instantiate()
+			add_sibling(fb)
+			fb.global_position = icon.global_position # Spawn at Icon location
+			fb.deploy_to_target(target)
 	# Resolve/Thrill skills logic end
 
 func is_effectively_invalid(n: Node) -> bool:

@@ -28,3 +28,6 @@ res://rang/shuriken.tscn
 res://rang/mark.tscn
 res://icon/icon.tscn
 res://rang/shuriken.gd
+res://rang/fireball.tscn
+res://rang/fireball.gd
+res://globals.gd

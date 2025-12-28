@@ -37,7 +37,7 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_e04st")
 shader_parameter/emmission_transform = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
-shader_parameter/flags = 44
+shader_parameter/flags = 40
 shader_parameter/color_ramp = SubResource("GradientTexture1D_4lnfl")
 shader_parameter/curve = SubResource("CurveTexture_ny2ev")
 
@@ -97,7 +97,6 @@ script = ExtResource("6_4pcol")
 length = 15
 color_ramp = SubResource("GradientTexture1D_4lnfl")
 curve = SubResource("CurveTexture_ny2ev")
-billboard = true
 _defaults_have_been_set = true
 
 [node name="ExplosionParticles" type="GPUParticles3D" parent="."]

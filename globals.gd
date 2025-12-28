@@ -84,6 +84,7 @@ const player_hitbox_data = {
 	"AxrangExplosionDamageBuff1" : 20,
 	"AxrangBaseOverheadDamage" : 100,
 	"ShurikenBaseDamage" : 1,
+	"FireballBaseDamage" : 100,
 }
 
 # health, hit score, kill score

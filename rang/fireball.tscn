@@ -1,0 +1,147 @@
+[gd_scene load_steps=16 format=3 uid="uid://c25ffe3n623yg"]
+
+[ext_resource type="Script" path="res://rang/fireball.gd" id="1_vkfgg"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="2_7xo2h"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4tn2i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vqfxi"]
+shading_mode = 0
+albedo_color = Color(2, 2, 2, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_cukrs"]
+material = SubResource("StandardMaterial3D_vqfxi")
+radius = 0.75
+height = 1.5
+
+[sub_resource type="Curve" id="Curve_lh4tc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nfn8f"]
+curve = SubResource("Curve_lh4tc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_swcgp"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(2.08165e-12, 2.08165e-12, 1)
+spread = 0.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 1.0
+initial_velocity_max = 3.0
+scale_curve = SubResource("CurveTexture_nfn8f")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xk15e"]
+shading_mode = 0
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_n5enk"]
+material = SubResource("StandardMaterial3D_xk15e")
+size = Vector2(0.5, 0.5)
+
+[sub_resource type="Curve" id="Curve_y25ni"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_wboj8"]
+curve = SubResource("Curve_y25ni")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x05fd"]
+spread = 180.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 8.0
+initial_velocity_max = 16.0
+scale_curve = SubResource("CurveTexture_wboj8")
+
+[sub_resource type="Animation" id="Animation_q4m21"]
+resource_name = "explode"
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BallMesh:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BallMesh:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(4, 4, 4)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FlightParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ExplosionParticles:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2pjf4"]
+_data = {
+"explode": SubResource("Animation_q4m21")
+}
+
+[node name="Fireball" type="Node3D"]
+script = ExtResource("1_vkfgg")
+
+[node name="PlayerHitbox" type="Area3D" parent="."]
+script = ExtResource("2_7xo2h")
+damage = 40
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerHitbox"]
+shape = SubResource("SphereShape3D_4tn2i")
+
+[node name="BallMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_cukrs")
+
+[node name="FlightParticles" type="GPUParticles3D" parent="."]
+amount = 32
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_swcgp")
+draw_pass_1 = SubResource("QuadMesh_n5enk")
+
+[node name="ExplosionParticles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_x05fd")
+draw_pass_1 = SubResource("QuadMesh_n5enk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2pjf4")
+}

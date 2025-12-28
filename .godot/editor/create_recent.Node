@@ -1,8 +1,9 @@
+AnimationPlayer
 GPUParticles3D
-GPUTrail3D
 CollisionShape3D
-Hitbox
 MeshInstance3D
+Hitbox
+GPUTrail3D
 CharacterBody3D
 StaticBody3D
 AudioStreamPlayer3D
@@ -11,7 +12,6 @@ AnimatedSprite3D
 FogVolume
 Node3D
 RayCast3D
-AnimationPlayer
 Area3D
 EnemyHurtbox
 NavigationAgent3D
