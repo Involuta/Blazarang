@@ -15,6 +15,7 @@ var state: State = State.ORBIT
 
 @onready var root := $/root/ViewControl
 @onready var hitbox := $PlayerHitbox
+@onready var explosion_hitbox := $ExplosionPivot/PlayerHitbox
 @onready var mesh := $ShurikenMesh
 @onready var explosion_particles := $ExplosionParticles
 var level : Node3D
@@ -73,6 +74,8 @@ func _ready():
 	icon = level.find_child("Icon")
 	
 	hitbox.damage = Globals.player_hitbox_data.ShurikenBaseDamage
+	explosion_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+	explosion_hitbox.damage = hitbox.damage * 2
 	current_spin_speed = min_spin_speed
 
 func _physics_process(delta):
@@ -285,6 +288,7 @@ func explode_frame(_delta):
 
 func switch_to_explode():
 	state = State.EXPLODE
+	explosion_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
 	mesh.visible = false
 	explosion_particles.emitting = true
 	await get_tree().create_timer(explode_secs).timeout

@@ -108,3 +108,13 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_qpk77")
 draw_pass_1 = SubResource("QuadMesh_n5enk")
+
+[node name="ExplosionPivot" type="Node3D" parent="."]
+
+[node name="PlayerHitbox" type="Area3D" parent="ExplosionPivot"]
+process_mode = 4
+script = ExtResource("2_msfg6")
+damage = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExplosionPivot/PlayerHitbox"]
+shape = SubResource("CylinderShape3D_nv1ty")

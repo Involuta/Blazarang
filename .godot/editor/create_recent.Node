@@ -1,6 +1,7 @@
+CollisionShape3D
+Node3D
 AnimationPlayer
 GPUParticles3D
-CollisionShape3D
 MeshInstance3D
 Hitbox
 GPUTrail3D
@@ -10,7 +11,6 @@ AudioStreamPlayer3D
 AudioStreamPlayer
 AnimatedSprite3D
 FogVolume
-Node3D
 RayCast3D
 Area3D
 EnemyHurtbox
