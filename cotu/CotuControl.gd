@@ -97,6 +97,7 @@ var fireball_scene := preload("res://rang/fireball.tscn")
 var low_stability_fireball := true # Set to true when player equips Thrill, which immediately spawns and deploys a fireball if the player's health is below 25% and deploys exactly 3 shurikens in a single icon hit
 var shuriken_base_slashes := 3 # Number of times shuriken will slash its target after reaching it
 var shuriken_marked_bonus_slashes := 6 # When player equips Hunger, shurikens will slash a marked target this number of extra times. Unlike other equippable skills/perks, this one isn't a bool; it's a number. The skill is inactive if the number is 0 and active if it's ≥ 0
+var shuriken_self_destruction := false # True = Explode, False = Recall
 
 var mark_scene := preload("res://rang/mark.tscn")
 var active_mark = null
@@ -694,7 +695,7 @@ func deploy_shurikens():
 	
 	for s in shurikens:
 		# Configure the shuriken with the correct bonus for this specific target
-		s.configure_slashes(shuriken_base_slashes, marked_bonus_slashes)
+		s.configure(shuriken_base_slashes, marked_bonus_slashes, shuriken_self_destruction)
 		s.deploy_to_target(target)
 	
 	# Resolve/Thrill skills logic
@@ -705,7 +706,7 @@ func deploy_shurikens():
 				add_sibling(bonus_s)
 				
 				# Ensure bonus shurikens also get the correct configuration
-				bonus_s.configure_slashes(shuriken_base_slashes, marked_bonus_slashes)
+				bonus_s.configure(shuriken_base_slashes, marked_bonus_slashes, shuriken_self_destruction)
 				
 				await get_tree().create_timer(.3).timeout
 				bonus_s.deploy_to_target(target)

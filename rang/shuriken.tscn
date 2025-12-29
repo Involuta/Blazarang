@@ -87,6 +87,7 @@ shape = SubResource("CylinderShape3D_nv1ty")
 transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0)
 
 [node name="GPUTrail3D" type="GPUParticles3D" parent="."]
+custom_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
 amount = 15
 lifetime = 15.0
 explosiveness = 1.0

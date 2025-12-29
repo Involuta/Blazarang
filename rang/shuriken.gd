@@ -22,6 +22,8 @@ var cotu: Node3D
 var icon: Node3D
 var target: Node3D
 
+var shuriken_self_destruction := false # TRUE = Explode, FALSE = Recall
+
 # --- Mesh Rotation Parameters ---
 @export var min_spin_speed := 4.0 
 @export var max_spin_speed := 30.0 
@@ -182,7 +184,10 @@ func switch_to_approach():
 func slash_frame(delta):
 	if not is_instance_valid(target) \
 	or target.process_mode == Node.PROCESS_MODE_DISABLED:
-		switch_to_recall()
+		if shuriken_self_destruction:
+			switch_to_explode()
+		else:
+			switch_to_recall()
 		return
 
 	slash_time += delta
@@ -192,7 +197,10 @@ func slash_frame(delta):
 	var total_duration = actual_total_slashes * time_per_slash
 	
 	if slash_time >= total_duration:
-		switch_to_explode() 
+		if shuriken_self_destruction:
+			switch_to_explode()
+		else:
+			switch_to_recall()
 		return
 	
 	var current_slash_index = int(slash_time / time_per_slash)
@@ -290,9 +298,10 @@ func deploy_to_target(new_target: Node3D):
 	if state == State.ORBIT:
 		switch_to_spinup(new_target)
 
-func configure_slashes(base: int, marked_bonus: int):
+func configure(base: int, marked_bonus: int, should_self_destruct: bool):
 	base_slashes = base
 	marked_slashes_bonus = marked_bonus
+	shuriken_self_destruction = should_self_destruct
 
 func destroy_self():
 	destroyed.emit(self)
