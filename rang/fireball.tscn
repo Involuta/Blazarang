@@ -125,15 +125,18 @@ damage = 40
 shape = SubResource("SphereShape3D_4tn2i")
 
 [node name="BallMesh" type="MeshInstance3D" parent="."]
+cast_shadow = 0
 mesh = SubResource("SphereMesh_cukrs")
 
 [node name="FlightParticles" type="GPUParticles3D" parent="."]
+cast_shadow = 0
 amount = 32
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_swcgp")
 draw_pass_1 = SubResource("QuadMesh_n5enk")
 
 [node name="ExplosionParticles" type="GPUParticles3D" parent="."]
+cast_shadow = 0
 emitting = false
 amount = 20
 one_shot = true
