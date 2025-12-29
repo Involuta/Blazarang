@@ -31,3 +31,6 @@ res://rang/shuriken.gd
 res://rang/fireball.tscn
 res://rang/fireball.gd
 res://globals.gd
+res://rang/mark.gd
+res://enemies/x_boss.tscn
+res://enemies/x_boss.gd

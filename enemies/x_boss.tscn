@@ -1121,7 +1121,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.0
 shape = SubResource("CapsuleShape3D_7g15b")
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]
-transform = Transform3D(0.100327, -0.993156, -0.059802, 0.0804589, -0.0518099, 0.995411, -0.991694, -0.104678, 0.0747105, -0.666474, 0.406017, 0.298324)
+transform = Transform3D(0.999998, -6.97574e-16, -1.5246e-23, -1.52459e-23, -4.37114e-08, 1, -6.97572e-16, -1, -4.37114e-08, 2.08165e-12, 2.08165e-12, 0.8)
 
 [node name="EnemyHitbox" type="Area3D" parent="MeleeHitboxPivot"]
 process_mode = 4
@@ -1141,7 +1141,7 @@ cast_shadow = 0
 mesh = SubResource("CapsuleMesh_uo2xn")
 
 [node name="XBlade" parent="MeleeHitboxPivot" instance=ExtResource("4_jwe6g")]
-transform = Transform3D(0.1, -5.2318e-17, 1.14345e-23, 0, -6.55671e-09, -0.75, 3.48787e-17, 0.15, -3.27835e-08, -0.0167179, 0.499908, -0.0183741)
+transform = Transform3D(0.1, -5.23181e-17, 1.14345e-23, 0, -6.55671e-09, -0.75, 3.48787e-17, 0.15, -3.27835e-08, -0.0167179, 0.499908, -0.0183741)
 
 [node name="Blade" parent="MeleeHitboxPivot/XBlade" index="0"]
 transform = Transform3D(1, 3.80453e-12, 1.66301e-16, 0, -4.37114e-11, 1, 3.80453e-09, -0.001, -4.37114e-08, -8.20059e-20, -4.88244e-19, 0.000109134)
@@ -1242,34 +1242,35 @@ visible = false
 mesh = SubResource("BoxMesh_ghh5t")
 
 [node name="X_boss_meshes" parent="." instance=ExtResource("5_f83nc")]
-transform = Transform3D(-0.1, 3.48787e-17, -8.74228e-09, 3.48787e-17, 0.1, -3.48787e-17, 8.74228e-09, -3.48787e-17, -0.1, 2.08165e-12, -1.426, 2.08165e-12)
+transform = Transform3D(-0.1, 3.48787e-17, -8.74228e-09, 3.48787e-17, 0.1, -3.48787e-17, 8.74228e-09, -3.48787e-17, -0.1, 2.08165e-12, -1.3, 2.08165e-12)
 
 [node name="Skeleton3D" parent="X_boss_meshes/Armature" index="0"]
-bones/0/position = Vector3(0, 12, -1)
-bones/0/rotation = Quaternion(-0.260536, -0.0231161, 0.001521, 0.965186)
-bones/1/rotation = Quaternion(0.104638, 0.00134225, -0.00589505, 0.994492)
-bones/2/rotation = Quaternion(0.0435726, 0.00049948, -0.00195772, 0.999048)
+bones/0/position = Vector3(2.42062e-10, 13.3196, 0.227602)
+bones/0/rotation = Quaternion(-3.63501e-08, -5.16988e-26, -4.21753e-11, 1)
+bones/1/position = Vector3(-2.50135e-10, 1.53056, -0.0794429)
+bones/1/rotation = Quaternion(-0.025926, -1.09344e-12, 4.21611e-11, 0.999664)
+bones/2/rotation = Quaternion(-3.72529e-09, 0, 0, 1)
 bones/3/rotation = Quaternion(7.45058e-09, 0, 0, 1)
-bones/4/rotation = Quaternion(0.303037, -0.0194428, -0.0109093, 0.952718)
-bones/8/rotation = Quaternion(-0.0425917, 0.955931, -0.000145452, 0.290487)
-bones/9/rotation = Quaternion(2.84942e-08, -2.13832e-07, 0.00156636, 0.999999)
-bones/10/rotation = Quaternion(0.00844206, -0.944219, -0.0940692, 0.315484)
-bones/12/rotation = Quaternion(0.317903, -0.239655, 0.425218, 0.812831)
-bones/13/rotation = Quaternion(-1.1312e-06, 1.21714e-06, -0.692571, 0.721349)
-bones/14/rotation = Quaternion(-0.000872058, -0.754202, -0.248369, 0.607859)
-bones/15/rotation = Quaternion(0.322485, 0.0277447, -0.945075, 0.0454708)
-bones/15/scale = Vector3(0.999999, 1, 1)
-bones/16/rotation = Quaternion(-0.00143994, -4.10443e-06, 6.24616e-07, 0.999999)
-bones/17/rotation = Quaternion(0.485229, -0.272249, 0.167551, 0.813855)
-bones/18/rotation = Quaternion(0.301845, 0.231885, -0.0620018, 0.922645)
-bones/20/rotation = Quaternion(0.046277, -0.337292, 0.938702, 0.0541438)
-bones/20/scale = Vector3(0.999999, 1, 1)
-bones/21/rotation = Quaternion(-0.424508, 8.2773e-06, 4.72008e-06, 0.905424)
-bones/22/rotation = Quaternion(0.63406, -0.0502465, 0.00535184, 0.771631)
-bones/23/rotation = Quaternion(0.280701, -0.231213, 0.0698799, 0.928905)
+bones/4/rotation = Quaternion(0.025926, -1.03347e-25, -3.27731e-27, 0.999664)
+bones/8/rotation = Quaternion(0.545348, 0.298975, 0.0512187, 0.7814)
+bones/9/rotation = Quaternion(-1.2497e-08, -2.38313e-07, 0.187932, 0.982182)
+bones/10/rotation = Quaternion(0.0636621, 0.50911, -0.00334524, 0.858337)
+bones/12/rotation = Quaternion(0.556868, -0.327487, -0.0537849, 0.761418)
+bones/13/rotation = Quaternion(-3.96141e-07, 1.65376e-06, -0.231204, 0.972905)
+bones/14/rotation = Quaternion(0.0686443, -0.487103, 0.0556874, 0.86886)
+bones/15/rotation = Quaternion(0.0282742, -0.189878, -0.980151, 0.0495091)
+bones/15/scale = Vector3(1, 1, 0.999999)
+bones/16/rotation = Quaternion(-0.424101, -3.94779e-06, -1.19327e-06, 0.905615)
+bones/17/rotation = Quaternion(0.543881, -0.0500174, 0.0149768, 0.837537)
+bones/18/rotation = Quaternion(0.276961, 0.230053, -0.0684875, 0.930418)
+bones/20/rotation = Quaternion(0.0404664, 0.0760993, 0.995179, 0.0468008)
+bones/20/scale = Vector3(1, 1, 0.999999)
+bones/21/rotation = Quaternion(-0.170479, 9.22951e-06, 2.3733e-06, 0.985361)
+bones/22/rotation = Quaternion(0.248953, 0.0450927, -0.025747, 0.967123)
+bones/23/rotation = Quaternion(0.280711, -0.231213, 0.0698784, 0.928902)
 
 [node name="Head" parent="X_boss_meshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.996195, -0.00759608, -0.0868239, -0.0256824, 0.926377, -0.37572, 0.0832857, 0.37652, 0.922657, 0.0664022, 19.9738, -2.89417)
+transform = Transform3D(1, 2.24797e-20, 3.49925e-18, -1.19363e-27, 1, 7.05121e-08, -3.06615e-18, -7.24938e-08, 1, 1.21031e-10, 21.8654, -0.00187324)
 
 [node name="XHead" parent="X_boss_meshes/Armature/Skeleton3D/Head" index="0"]
 visible = true
@@ -1312,16 +1313,16 @@ surface_material_override/2 = SubResource("StandardMaterial3D_s05at")
 surface_material_override/5 = SubResource("StandardMaterial3D_h2w4t")
 
 [node name="LeftArm" parent="X_boss_meshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(-0.0297657, 0.986657, 0.16007, 0.735123, -0.0868995, 0.672341, 0.67728, 0.137683, -0.722727, 3.67232, 18.7432, -3.15301)
+transform = Transform3D(0.446638, 0.278945, -0.85012, 0.312189, -0.939028, -0.1441, -0.838483, -0.201038, -0.506489, 3.5919, 20.505, -0.186871)
 
 [node name="RightArm" parent="X_boss_meshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(-0.480504, -0.355913, 0.801524, -0.585941, -0.549733, -0.595371, 0.652525, -0.755724, 0.0556049, -3.50534, 18.7559, -3.45177)
+transform = Transform3D(0.498514, -0.255044, 0.828515, -0.33588, -0.937913, -0.0866222, 0.799167, -0.2351, -0.553226, -3.5919, 20.505, -0.152357)
 
 [node name="LeftHand" parent="X_boss_meshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.0421728, 0.997271, 0.0605943, -0.182253, 0.0673094, -0.980945, -0.982347, 0.0303256, 0.184594, 11.7795, 18.0197, -2.03048)
+transform = Transform3D(0.998418, 0.0401369, 0.0393835, 0.0404142, -0.999163, -0.0062709, 0.0390986, 0.0078527, -0.999204, 5.12474, 12.5884, -0.50735)
 
 [node name="RightHand" parent="X_boss_meshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.796231, -0.0322213, -0.604134, -0.500569, -0.595907, -0.627953, -0.339774, 0.802407, -0.490608, -7.00037, 13.9995, -3.99989)
+transform = Transform3D(0.998287, -0.0412035, -0.0415364, -0.0402063, -0.998889, 0.0245679, -0.0425024, -0.0228559, -0.998835, -4.65343, 12.5885, -0.50256)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_uk78c")

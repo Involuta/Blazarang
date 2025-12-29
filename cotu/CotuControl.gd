@@ -95,6 +95,8 @@ var shurikens := []
 var mid_stability_bonus_shurikens := true # Set to true when player equips Resolve, which immediately spawns and deploys 3 shurikens if the player's health is below 50% and deploys exactly 3 shurikens in a single icon hit
 var fireball_scene := preload("res://rang/fireball.tscn")
 var low_stability_fireball := true # Set to true when player equips Thrill, which immediately spawns and deploys a fireball if the player's health is below 25% and deploys exactly 3 shurikens in a single icon hit
+var shuriken_base_slashes := 3 # Number of times shuriken will slash its target after reaching it
+var shuriken_marked_bonus_slashes := 6 # When player equips Hunger, shurikens will slash a marked target this number of extra times. Unlike other equippable skills/perks, this one isn't a bool; it's a number. The skill is inactive if the number is 0 and active if it's ≥ 0
 
 var mark_scene := preload("res://rang/mark.tscn")
 var active_mark = null
@@ -687,29 +689,35 @@ func deploy_shurikens():
 	if target == null:
 		return
 	
+	# Check if the target is marked (i.e., if there is an active mark) and there are shuriken_marked_bonus_slashes
+	var marked_bonus_slashes = shuriken_marked_bonus_slashes if active_mark != null else 0
+	
 	for s in shurikens:
+		# Configure the shuriken with the correct bonus for this specific target
+		s.configure_slashes(shuriken_base_slashes, marked_bonus_slashes)
 		s.deploy_to_target(target)
 	
-	# Resolve/Thrill skills logic start
+	# Resolve/Thrill skills logic
 	if shurikens.size() == 3:
 		if mid_stability_bonus_shurikens and hurtbox.health < (hurtbox.max_health * 0.5):
-			# Spawn 3 bonus shurikens
 			for i in range(3):
 				var bonus_s = shuriken_scene.instantiate()
 				add_sibling(bonus_s)
-				# After letting the shuriken orbit for .5 seconds, deploy it
+				
+				# Ensure bonus shurikens also get the correct configuration
+				bonus_s.configure_slashes(shuriken_base_slashes, marked_bonus_slashes)
+				
 				await get_tree().create_timer(.3).timeout
 				bonus_s.deploy_to_target(target)
 				shurikens.append(bonus_s)
 				bonus_s.destroyed.connect(_on_shuriken_destroyed)
 		
-		if low_stability_fireball and hurtbox.health < (hurtbox.max_health * 0.33):
-			# Spawn 1 fireball and immediately deploy it
+		# Thrill fireball logic
+		if low_stability_fireball and hurtbox.health < (hurtbox.max_health * 0.25):
 			var fb = fireball_scene.instantiate()
 			add_sibling(fb)
-			fb.global_position = icon.global_position # Spawn at Icon location
+			fb.global_position = icon.global_position
 			fb.deploy_to_target(target)
-	# Resolve/Thrill skills logic end
 
 func is_effectively_invalid(n: Node) -> bool:
 	return not is_instance_valid(n) or n.process_mode == Node.PROCESS_MODE_DISABLED

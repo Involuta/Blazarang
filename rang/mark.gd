@@ -17,7 +17,6 @@ var target: Node3D # The enemy currently locked onto by the mark
 
 @export var max_mark_distance := 60.0
 @export var aim_cone_dot := 0.8 # The required dot product for the target to be within the camera's aiming cone (~15 degrees). The smaller this num, the bigger the cone
-@export var target_mark_offset := 0.5 * Vector3.UP # Offset from target's global pos to get the actual pos mark locks onto (without this, the mark goes to X's dong, which is distracting)
 @export var travel_speed := 60.0 # Speed at which the mark travels to the target
 @export var recall_speed := 60.0 # Speed at which the mark returns to the owner
 @export var los_check_interval := 0.15 # Time between line-of-sight checks in the LOCKED state
@@ -102,7 +101,7 @@ func travel_frame(delta):
 		switch_to_recall()
 		return
 	
-	var target_pos = target.global_position + target_mark_offset
+	var target_pos = target.global_position
 
 	# Move the mark towards the target's position
 	global_position = global_position.move_toward(
@@ -125,7 +124,7 @@ func locked_frame(delta):
 		return
 
 	# Keep the mark fixed to the target's position
-	global_position = target.global_position + target_mark_offset
+	global_position = target.global_position
 
 	los_timer += delta
 	# Periodically check distance and line-of-sight from the owner

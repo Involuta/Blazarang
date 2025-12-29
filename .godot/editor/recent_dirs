@@ -1,3 +1,4 @@
+res://levels/x_boss_level
 res://levels/mite_level
 res://glb_inherited_scenes
 res://general_scripts
@@ -7,7 +8,6 @@ res://enemies
 res://enemies/enemy_anims
 res://enemies/enemy_2d_anims
 res://shaders
-res://levels/x_boss_level
 res://levels/balls_level
 res://level_maps
 res://procedural_animation
