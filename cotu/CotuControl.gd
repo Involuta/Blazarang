@@ -407,13 +407,15 @@ func _physics_process(delta):
 	
 	# Shuriken throw
 	if Input.is_action_just_pressed("ThrowShuriken"):
-		if shurikens.size() < max_shurikens:
-			if not destabilized and not axrang_perfect_caught:
+		if not destabilized and not axrang_perfect_caught:
+			if shurikens.size() < max_shurikens:
 				hurtbox.self_hit(throw_shuriken_self_damage)
-			var s = shuriken_scene.instantiate()
-			add_sibling(s)
-			shurikens.append(s)
-			s.destroyed.connect(_on_shuriken_destroyed)
+			else:
+				hurtbox.self_hit(throw_axrang_self_damage)
+		var s = shuriken_scene.instantiate()
+		add_sibling(s)
+		shurikens.append(s)
+		s.destroyed.connect(_on_shuriken_destroyed)
 	
 	if Input.is_action_just_pressed("UseItem"):
 		anim_tree.set(anim_tree_param_path_base + "use_item", true)
