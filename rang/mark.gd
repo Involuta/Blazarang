@@ -6,14 +6,18 @@ signal mark_removed()
 enum State {
 	TRAVEL_TO_TARGET,
 	LOCKED,
-	RECALL
+	RECALL,
+	DETONATE
 }
 
-var state: State # The current operational state of the mark
+var state: State
 
 @onready var root := $/root/ViewControl
-var cotu: Node3D # Reference to the character of the user (or owner of the mark)
-var target: Node3D # The enemy currently locked onto by the mark
+@onready var anim_player := $AnimationPlayer
+@onready var explosion_spark_particles := $ExplosionSparkParticles
+@onready var hitbox := $PlayerHitbox
+var cotu: Node3D 
+var target: Node3D 
 
 @export var max_mark_distance := 60.0
 @export var aim_cone_dot := 0.8 # The required dot product for the target to be within the camera's aiming cone (~15 degrees). The smaller this num, the bigger the cone
@@ -24,8 +28,10 @@ var target: Node3D # The enemy currently locked onto by the mark
 var los_timer := 0.0
 
 func _ready():
-	# Finds the specific Node3D representing the owner/user ('cotu')
 	cotu = root.find_child("cotuCB")
+	explosion_spark_particles.emitting = false
+	hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+	hitbox.damage = Globals.player_hitbox_data.MarkDetonationDamage
 
 # -------------------------------------------------
 # Core loop
@@ -38,6 +44,8 @@ func _physics_process(delta):
 			locked_frame(delta)
 		State.RECALL:
 			recall_frame(delta)
+		State.DETONATE:
+			pass # Do nothing, wait for animation to finish
 
 # -------------------------------------------------
 # Placement
@@ -48,7 +56,6 @@ func try_place_from_camera(cam: Node3D) -> bool:
 	if lockonable == null:
 		return false
 
-	# Set the target and transition state upon successful target acquisition
 	target = lockonable
 	state = State.TRAVEL_TO_TARGET
 	global_position = cotu.global_position
@@ -62,7 +69,7 @@ func find_best_lockonable_in_cone(cam: Node3D) -> Node3D:
 	var cam_pos = cam.global_position
 
 	var best_lockonable = null
-	# Changed selection metric: now we track the highest dot product (closest to center)
+	# Track the highest dot product (closest to center)
 	var best_dot_product = aim_cone_dot 
 	
 	for e in enemies:
@@ -77,14 +84,12 @@ func find_best_lockonable_in_cone(cam: Node3D) -> Node3D:
 		# 1. Check if the enemy is within the defined aiming cone
 		if current_dot_product < aim_cone_dot:
 			continue
-
+		
 		# 2. Check for line-of-sight from the camera to the potential target 'e'
 		if not has_los(cam_pos, e.global_position, e):
 			continue
-
-		# 3. Selection: Choose the enemy with the HIGHEST dot product.
-		# A higher dot product means a smaller angle, meaning the target is closer
-		# to the exact center of the screen/camera's look direction.
+		
+		# 3. Selection: Choose the enemy with the HIGHEST dot product. A higher dot product means a smaller angle, meaning the target is closer to the exact center of the screen/camera's look direction.
 		if current_dot_product > best_dot_product:
 			best_dot_product = current_dot_product
 			best_lockonable = e
@@ -102,13 +107,13 @@ func travel_frame(delta):
 		return
 	
 	var target_pos = target.global_position
-
+	
 	# Move the mark towards the target's position
 	global_position = global_position.move_toward(
 		target_pos,
 		travel_speed * delta
 	)
-
+	
 	# Transition to the LOCKED state when close enough
 	if global_position.distance_to(target_pos) < 0.2:
 		switch_to_locked()
@@ -122,7 +127,7 @@ func locked_frame(delta):
 	or target.process_mode == Node.PROCESS_MODE_DISABLED:
 		switch_to_recall()
 		return
-
+	
 	# Keep the mark fixed to the target's position
 	global_position = target.global_position
 
@@ -134,7 +139,7 @@ func locked_frame(delta):
 		if cotu.global_position.distance_to(target.global_position) > max_mark_distance:
 			switch_to_recall()
 			return
-
+		
 		# Check for line-of-sight from the owner to the current target
 		if not has_los(cotu.global_position, target.global_position, target):
 			switch_to_recall()
@@ -149,8 +154,8 @@ func recall_frame(delta):
 		recall_speed * delta
 	)
 
-	# Remove the mark when it reaches the owner
 	if global_position.distance_to(cotu.global_position) < 0.3:
+		# Remove the mark when it reaches the owner
 		emit_signal("mark_removed")
 		queue_free()
 
@@ -164,6 +169,21 @@ func switch_to_recall():
 	state = State.RECALL
 
 # -------------------------------------------------
+# DETONATION
+# -------------------------------------------------
+func detonate():
+	# Stop movement and tracking
+	state = State.DETONATE
+	
+	# Play animation
+	anim_player.play("detonate")
+	# Wait for the animation to finish before destroying
+	await anim_player.animation_finished
+		
+	emit_signal("mark_removed")
+	queue_free()
+
+# -------------------------------------------------
 # LOS helper
 # -------------------------------------------------
 # Performs a raycast from 'from' to 'to' and checks if the line-of-sight is blocked by ARENA collision.
@@ -174,20 +194,14 @@ func has_los(from: Vector3, to: Vector3, lockonable: Node3D) -> bool:
 		return false
 		
 	var space = get_world_3d().direct_space_state
-	
 	var q = PhysicsRayQueryParameters3D.create(from, to)
-	
-	# Only check against ARENA_COL_LAYER
-	# This ensures the ray ignores enemies (ENEMY_COL_LAYER and THICK_ENEMY_COL_LAYER)
-	# and only reports a hit if a wall or ground is in the way.
 	q.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER]) 
 	q.collide_with_areas = false
-	
 	var hit = space.intersect_ray(q)
 	
 	# Line-of-sight is maintained if no arena collision occurred.
 	if not hit:
 		return true
-
+	
 	# If we got a hit, an ARENA object blocked the path, so LOS is broken.
 	return false

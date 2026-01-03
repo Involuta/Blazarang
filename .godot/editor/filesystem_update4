@@ -1,4 +1,4 @@
-res://cotu/cotu_cb_main.tscn
+res://rang/mark.tscn
 res://GPUTrail-main/shaders/trail.gdshader
 res://GPUTrail-main/defaults/texture.tres
 res://GPUTrail-main/shaders/trail_draw_pass.gdshader
@@ -23,14 +23,9 @@ res://ui/glitch.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
 res://general_scripts/skygradient.gdshader
 res://glb_inherited_scenes/mite_hills_ground.gdshader
-res://cotu/CotuControl.gd
-res://rang/shuriken.tscn
-res://rang/mark.tscn
-res://icon/icon.tscn
-res://rang/shuriken.gd
-res://rang/fireball.tscn
-res://rang/fireball.gd
 res://globals.gd
 res://rang/mark.gd
-res://enemies/x_boss.tscn
-res://enemies/x_boss.gd
+res://cotu/cotu_cb_main.tscn
+res://rang/shuriken.tscn
+res://icon/icon.tscn
+res://cotu/CotuControl.gd

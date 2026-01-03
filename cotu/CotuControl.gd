@@ -102,6 +102,8 @@ var shuriken_self_destruction := true # True = Explode, False = Recall
 var mark_scene := preload("res://rang/mark.tscn")
 var active_mark = null
 var mark_shuriken_deploy := true # Set to true when player equips Restlessness, which allows them to deploy shurikens by marking an enemy
+var mark_detonation := true # Set to true if "Sacrifice" ability is unlocked, which allows the player to detonate the mark, disabling it for the rest of the level
+var mark_destroyed := false # Runtime: Becomes true when detonated, resets on level restart
 
 enum SHURIKEN_MARKLESS_MODE {
 	NEAREST,
@@ -423,6 +425,8 @@ func _physics_process(delta):
 		anim_tree.set(anim_tree_param_path_base + "use_item", false)
 	
 	if Input.is_action_just_pressed("PlaceMark"):
+		if mark_destroyed:
+			return
 		if active_mark:
 			active_mark.queue_free()
 		var m = mark_scene.instantiate()
@@ -436,6 +440,19 @@ func _physics_process(delta):
 		# If mark shuriken deploy is unlocked, then when mark is placed, deploy shurikens
 		if mark_shuriken_deploy:
 			deploy_shurikens()
+	
+	if mark_detonation and not mark_destroyed and active_mark != null:
+		# If holding SPECIAL + pressing THROW SHURIKEN
+		if Input.is_action_pressed("Special") and Input.is_action_just_pressed("ThrowShuriken"):
+			
+			# 1. Trigger the detonation on the mark instance
+			active_mark.detonate()
+			
+			# 2. Mark is unusable for the rest of the level
+			mark_destroyed = true
+			
+			# 3. Disconnect reference so we don't try to recall it or use it for aiming
+			active_mark = null
 	
 	# Animation tree parameters
 	var vel2D = Vector2(velocity.x, velocity.z)

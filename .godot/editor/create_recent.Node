@@ -1,9 +1,10 @@
 CollisionShape3D
-Node3D
-AnimationPlayer
-GPUParticles3D
-MeshInstance3D
 Hitbox
+Area3D
+GPUParticles3D
+AnimationPlayer
+Node3D
+MeshInstance3D
 GPUTrail3D
 CharacterBody3D
 StaticBody3D
@@ -12,7 +13,6 @@ AudioStreamPlayer
 AnimatedSprite3D
 FogVolume
 RayCast3D
-Area3D
 EnemyHurtbox
 NavigationAgent3D
 AnimationTree
