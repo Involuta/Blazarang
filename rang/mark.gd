@@ -1,6 +1,5 @@
 extends Node3D
 
-signal mark_applied(lockonable)
 signal mark_removed()
 
 enum State {
@@ -58,9 +57,7 @@ func try_place_from_camera(cam: Node3D) -> bool:
 
 	target = lockonable
 	state = State.TRAVEL_TO_TARGET
-	global_position = cotu.global_position
 
-	emit_signal("mark_applied", target)
 	return true
 
 func find_best_lockonable_in_cone(cam: Node3D) -> Node3D:

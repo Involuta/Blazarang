@@ -428,15 +428,14 @@ func _physics_process(delta):
 		if mark_destroyed:
 			return
 		if active_mark:
-			active_mark.queue_free()
-		var m = mark_scene.instantiate()
-		add_sibling(m)
-		if m.try_place_from_camera(camera):
-			active_mark = m
-			m.mark_applied.connect(_on_mark_applied)
-			m.mark_removed.connect(_on_mark_removed)
+			active_mark.try_place_from_camera(camera)
 		else:
-			m.queue_free()
+			var m = mark_scene.instantiate()
+			add_sibling(m)
+			m.global_position = global_position
+			if m.try_place_from_camera(camera):
+				active_mark = m
+				m.mark_removed.connect(_on_mark_removed)
 		# If mark shuriken deploy is unlocked, then when mark is placed, deploy shurikens
 		if mark_shuriken_deploy:
 			deploy_shurikens()
@@ -745,9 +744,6 @@ func is_effectively_invalid(n: Node) -> bool:
 func _on_shuriken_destroyed(s_node):
 	if s_node in shurikens:
 		shurikens.erase(s_node)
-
-func _on_mark_applied(target):
-	active_mark = target
 
 func _on_mark_removed():
 	active_mark = null
