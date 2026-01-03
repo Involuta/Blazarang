@@ -345,6 +345,11 @@ func _physics_process(delta):
 			# Timer just expired → clear buffs once
 			clear_axrang_buffs()
 	
+	# TESTING SHURIKEN SPECIAL
+	if Input.is_action_just_pressed("Special"):
+		for s in shurikens:
+			s.switch_to_frenzy()
+	
 	if Input.is_action_just_pressed("MeleeAxrang"):
 		anim_tree.set(anim_tree_param_path_base + "melee_ax", true)
 	else:
