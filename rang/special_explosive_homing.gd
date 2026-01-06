@@ -60,7 +60,7 @@ func dist_to_lockonable(a, b):
 func homing_attack(target, to_icon: bool):
 	if to_icon:
 		homing_time = icon_homing_time
-	elif not target.is_in_group("lockonables") or not target or not is_instance_valid(target):
+	elif not target.is_in_group("lockonables") or not target or not is_instance_valid(target) or target.process_mode == Node.PROCESS_MODE_DISABLED:
 		return
 	
 	# Get original vector from target to current pos

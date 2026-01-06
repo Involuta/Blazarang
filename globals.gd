@@ -46,7 +46,11 @@ var combo_count := 0
 enum ROSERANG_BUFFS {
 	DAMAGE,
 	HOMING,
+	DUPLICATE,
 }
+
+# All roserang instances look at and use this
+var roserang_buff_list := [Globals.ROSERANG_BUFFS.DUPLICATE, Globals.ROSERANG_BUFFS.DUPLICATE, Globals.ROSERANG_BUFFS.DAMAGE]
 
 enum AXRANG_BUFFS {
 	DAMAGE,

@@ -40,7 +40,7 @@ func stop_following_cotu():
 	following_cotu = false
 
 func _on_body_entered(body):
-	if body.name.contains("Roserang") and not body.invincible:
+	if body is Roserang and not body.invincible:
 		if body.get_mvmt_state() != "ROSE":
 			roserang_queued = true
 		start_following_cotu()
@@ -48,5 +48,5 @@ func _on_body_entered(body):
 		Globals.award_score(Globals.DODGE_SCORE)
 		cotu.add_roserang_buff()
 		# Why is apply_buffs_to_roserang_instance here? Roserang is applied buffs when the roserang hits the icon
-		cotu.apply_buffs_to_roserang_instance()
+		cotu.apply_buffs_to_roserang_instance(body)
 		cotu.deploy_shurikens()

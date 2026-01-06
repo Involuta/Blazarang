@@ -53,7 +53,7 @@ enum ROSERANG_THROW_TYPES {
 }
 var roserang_throw_type := ROSERANG_THROW_TYPES.ROSE
 var homing_targets_added := 0 # Increments for every homing buff applied
-@export var roserang_buff_list := [Globals.ROSERANG_BUFFS.HOMING, Globals.ROSERANG_BUFFS.HOMING, Globals.ROSERANG_BUFFS.DAMAGE]
+# Buff list is in Globals
 var next_roserang_buff_index := 0
 var throw_roserang_self_damage := 18.0
 
@@ -118,7 +118,7 @@ var stunned := false
 var grab_pos_node : Node3D
 
 var roserang := preload("res://rang/roserang.tscn")
-var roserang_instance = null
+var roserang_instances = [] 
 var axrang := preload("res://rang/axrang.tscn")
 var axrang_instance = null
 @onready var physical_collider := $CollisionShape3D
@@ -314,9 +314,10 @@ func _physics_process(delta):
 	
 	# Rose pointer movement; this block must come before the roserang throw bc if you instantiate the rang, then try to look_at(it) on the same frame, look_at will fail
 	# Also enable/disable roserang particles
-	if roserang_instance != null:
-		rang_pointer_pivot.look_at(roserang_instance.global_position)
-		roserang_particles.global_position = roserang_instance.global_position
+	if not roserang_instances.is_empty():
+		# Track the most recently thrown roserang
+		rang_pointer_pivot.look_at(roserang_instances.back().global_position)
+		roserang_particles.global_position = roserang_instances.back().global_position
 		if not roserang_particles.emitting:
 			roserang_particles.emitting = true
 	else:
@@ -325,10 +326,10 @@ func _physics_process(delta):
 			roserang_particles.emitting = false
 	
 	# Special rose throw (takes precedence over instant rethrow). Requires all buffs to be active
-	var all_roserang_buffs_active := next_roserang_buff_index >= roserang_buff_list.size()
-	if Input.is_action_just_pressed("Special") and not roserang_special_queued and all_roserang_buffs_active and roserang_instance != null:
+	var all_roserang_buffs_active := next_roserang_buff_index >= Globals.roserang_buff_list.size()
+	if Input.is_action_just_pressed("Special") and not roserang_special_queued and all_roserang_buffs_active and not roserang_instances.is_empty():
 		start_roserang_special_timer()
-	if roserang_special_queued and roserang_instance == null:
+	if roserang_special_queued and roserang_instances.is_empty():
 		roserang_special_queued = false
 		roserang_special_just_used = true
 		throw_roserang_with_script(current_roserang_special_script)
@@ -370,7 +371,7 @@ func _physics_process(delta):
 	
 	# Roserang throw
 	if Input.is_action_just_pressed("ThrowRoserang"):
-		if roserang_instance == null and can_throw_roserang:
+		if roserang_instances.is_empty() and can_throw_roserang:
 			# Normal throw
 			roserang_special_just_used = false
 			if not destabilized:
@@ -379,7 +380,7 @@ func _physics_process(delta):
 			throw_roserang_with_script(rose_script)
 		elif not roserang_throw_queued:
 			start_roserang_instant_rethrow_timer()
-	if roserang_throw_queued and roserang_instance == null and can_throw_roserang:
+	if roserang_throw_queued and roserang_instances.is_empty() and can_throw_roserang:
 		# Instant rethrow
 		roserang_throw_queued = false
 		
@@ -392,7 +393,7 @@ func _physics_process(delta):
 		anim_tree.set(anim_tree_param_path_base + "just_instant_rethrew", true)
 		
 		# Set throw type
-		homing_targets_added = roserang_buff_list.slice(0, next_roserang_buff_index).count(Globals.ROSERANG_BUFFS.HOMING)
+		homing_targets_added = Globals.roserang_buff_list.slice(0, next_roserang_buff_index).count(Globals.ROSERANG_BUFFS.HOMING)
 		if homing_targets_added > 0:
 			roserang_throw_type = ROSERANG_THROW_TYPES.HOMING
 		else:
@@ -408,7 +409,7 @@ func _physics_process(delta):
 	else:
 		anim_tree.set(anim_tree_param_path_base + "just_instant_rethrew", false)
 	# Clear roserang buffs (and make target/Icon follow Cotu again) if an instant rethrow didn't just occur (i.e. if roserang_instance is still null after an instant rethrow would have reassigned it)
-	if roserang_instance == null:
+	if roserang_instances.is_empty():
 		icon.start_following_cotu()
 		clear_roserang_buffs()
 	
@@ -500,7 +501,7 @@ func step_dodge():
 	if not destabilized:
 		hurtbox.self_hit(dodge_self_damage)
 	set_collision_mask_value(Globals.ENEMY_COL_LAYER, false)
-	if roserang_instance != null:
+	if not roserang_instances.is_empty():
 		icon.stop_following_cotu()
 	await get_tree().create_timer(step_dodge_duration_secs).timeout
 	is_dodging = false
@@ -511,10 +512,24 @@ func step_dodge():
 
 func throw_roserang_with_script(script):
 	roserang_special_queued = false
-	roserang_instance = roserang.instantiate()
-	add_sibling(roserang_instance)
-	roserang_instance.set_script(script)
-	apply_buffs_to_roserang_instance()
+	
+	var new_roserang = roserang.instantiate()
+	add_sibling(new_roserang)
+	new_roserang.set_script(script)
+	
+	roserang_instances.append(new_roserang)
+	# Connect tree_exiting to handle cleanup when the node is freed/caught
+	new_roserang.tree_exiting.connect(_on_roserang_exiting.bind(new_roserang))
+	
+	apply_buffs_to_roserang_instance(new_roserang)
+	
+	# Unlike the damage buff, the homing buff (which sets homing targets) is only applied once: when the rang is instant rethrown for the first time in the buff cycle. Since it's only applied once per cycle, it's not applied in the same way as other buffs in apply_buffs_to_roserang_instance
+	if script == homing_script:
+		new_roserang.set_homing_targets(homing_targets_added)
+
+func _on_roserang_exiting(roserang_node):
+	roserang_instances.erase(roserang_node)
+	# Logic for clearing buffs/resetting icon happens in _physics_process based on is_empty()
 
 func start_roserang_instant_rethrow_timer():
 	roserang_throw_queued = true
@@ -522,22 +537,39 @@ func start_roserang_instant_rethrow_timer():
 	roserang_throw_queued = false
 
 func add_roserang_buff(): # Called by icon when roserang hits it
-	if next_roserang_buff_index < roserang_buff_list.size():
+	if next_roserang_buff_index < Globals.roserang_buff_list.size():
+		var newly_added_buff = Globals.roserang_buff_list[next_roserang_buff_index]
+		
+		# Check if the newly added buff is DUPLICATE
+		if newly_added_buff == Globals.ROSERANG_BUFFS.DUPLICATE:
+			# The duplicate manifests from the icon and is thrown.
+			# It uses the default 'rose_script' since it's a new throw,
+			# and it's marked as a duplicate to prevent infinite spawning.
+			throw_roserang_with_script(rose_script)
+		
 		next_roserang_buff_index += 1
 
-func apply_buffs_to_roserang_instance():	
+func apply_buffs_to_roserang_instance(target_roserang):
 	if next_roserang_buff_index <= 0 and not ui.roserang_buffs_cleared():
 		ui.clear_roserang_buffs()
+	
 	# Apply buffs to the roserang instance and UI simultaneously
 	for i in range(next_roserang_buff_index):
 		ui.apply_roserang_buff(i)
-		match(roserang_buff_list[i]):
+		match(Globals.roserang_buff_list[i]):
 			Globals.ROSERANG_BUFFS.DAMAGE:
-				roserang_instance.buff_damage()
+				target_roserang.buff_damage()
 			Globals.ROSERANG_BUFFS.HOMING:
-				roserang_instance.buff_homing_targets(homing_targets_added)
+				# Unlike the damage buff, the homing buff (which sets homing targets) is only applied once: when the rang is instant rethrown for the first time in the buff cycle. Since it's only applied once per cycle, it's not applied in the same way as other buffs in apply_buffs_to_roserang_instance
+				pass
+			Globals.ROSERANG_BUFFS.DUPLICATE:
+				# A duplicate spawns when a duplicate buff is added, not every time buffs are applied
+				pass
 
 func clear_roserang_buffs():
+	if not roserang_instances.is_empty():
+		return
+		
 	next_roserang_buff_index = 0
 	if not ui.roserang_buffs_cleared():
 		ui.clear_roserang_buffs()

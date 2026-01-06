@@ -9,7 +9,8 @@ func _ready():
 
 func _on_body_entered(body):
 	if not rang.invincible and body == cotu:
-		if rang.name == "Roserang" and not cotu.is_dodging:
+		# Class name is used instead of instance name bc duplicate rangs don't contain the name "Roserang"
+		if rang is Roserang and not cotu.is_dodging:
 			Globals.combo_count = 0
 			rang.queue_free()
 		elif rang.name == "Axrang":

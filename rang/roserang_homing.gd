@@ -50,7 +50,7 @@ func _ready():
 			i += 1
 	invincible = false # Allow rang to be deleted when it touches Cotu
 	await homing_attack(icon, true)
-	# PLACEHOLDER: ROSE MAY NOT ALWAYS DELETE ITSELF IMMEDIATELY UPON TOUCHING ICON AT END OF HOMING IN THE FUTURE
+	# THIS IS A PLACEHOLDER: ROSE MAY NOT ALWAYS DELETE ITSELF IMMEDIATELY UPON TOUCHING ICON AT END OF HOMING IN THE FUTURE
 	queue_free()
 
 func within_proximity(lockonable):
@@ -62,7 +62,7 @@ func dist_to_lockonable(a, b):
 func homing_attack(target, to_icon: bool):
 	if to_icon:
 		homing_time = icon_homing_time
-	elif not target.is_in_group("lockonables") or not target or not is_instance_valid(target):
+	elif not target.is_in_group("lockonables") or not target or not is_instance_valid(target) or target.process_mode == Node.PROCESS_MODE_DISABLED:
 		return
 	
 	# Get original vector from target to current pos
@@ -87,7 +87,7 @@ func _physics_process(_delta):
 func buff_damage():
 	hitbox.damage = Globals.player_hitbox_data.RoserangDamageBuff1
 
-func buff_homing_targets(targets_added: int):
+func set_homing_targets(targets_added: int):
 	# Why aren't we doing max_targets += targets_added? When the script is reloaded after every instant rethrow, variable values retain changes from previous scripts
 	current_max_targets = base_max_targets + targets_added
 

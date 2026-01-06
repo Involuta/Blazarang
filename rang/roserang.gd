@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name Roserang
 
 # Song BPMs:
 # Champion of the Universe - 113
