@@ -10,5 +10,5 @@ func _ready():
 	for i in range(60):
 		shake_dist = lerpf(max_shake_dist, 0, i / 60.0)
 		sun_mesh.position = Vector3(rng.randf_range(-shake_dist, shake_dist), rng.randf_range(-shake_dist, shake_dist), rng.randf_range(-shake_dist, shake_dist))
-		await get_tree().create_timer(get_physics_process_delta_time()).timeout
+		await get_tree().physics_frame
 	# queue_free is called by the head piece script

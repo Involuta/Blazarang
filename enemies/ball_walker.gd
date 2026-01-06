@@ -528,7 +528,7 @@ func jump():
 	await anim_player.animation_finished
 	# Wait for walker's feet to land
 	while not is_on_floor():
-		await get_tree().create_timer(get_physics_process_delta_time()).timeout
+		_process_delta_time()).timeout
 	# Instantly spawn 2 foot explosions on opposite feet, and both rim and core balls
 	await spawn_foot_explosion_rim_balls()
 	global_position += STANDING_FEET_DIST * -transform.basis.z

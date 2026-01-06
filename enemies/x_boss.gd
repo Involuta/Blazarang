@@ -658,7 +658,7 @@ func recover_head():
 	x_mesh_head.visible = true
 	while is_instance_valid(recovery_inst):
 		recovery_inst.global_position = x_mesh_head.global_position
-		await get_tree().create_timer(get_physics_process_delta_time()).timeout
+		await get_tree().physics_frame
 
 func slipnslice_rush():
 	stop_dist = slipnslice_stop_dist

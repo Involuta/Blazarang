@@ -83,7 +83,7 @@ func _physics_process(delta):
 
 func set_active(active):
 	# Wait for harvestman to move to egg pos before enabling it
-	await get_tree().create_timer(get_physics_process_delta_time()).timeout
+	await get_tree().physics_frame
 	if body_meshes == null:
 		body_meshes = $HarvestmanProcAnimMeshes
 	if active:
