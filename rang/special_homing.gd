@@ -9,7 +9,7 @@ var BPM := 113.0
 var rotate_speed := 3.6
 var base_max_targets := 11
 var current_max_targets := 11 # No max proximity exists; any lockonable in the entire level can be targeted
-var homing_time := .12 # Time it takes for rang to move from one target to another
+var target_homing_time := .12 # Time it takes for rang to move from one target to another
 var icon_homing_time := .4 # Time it takes for rang to return to icon after hitting all targets
 
 var invincible := true
@@ -53,6 +53,7 @@ func dist_to_lockonable(a, b):
 	return icon.global_position.distance_to(a.global_position) < icon.global_position.distance_to(b.global_position)
 
 func homing_attack(target, to_icon: bool):
+	var homing_time := target_homing_time
 	if to_icon:
 		homing_time = icon_homing_time
 	elif not target.is_in_group("lockonables") or not target or not is_instance_valid(target) or target.process_mode == Node.PROCESS_MODE_DISABLED:
@@ -72,7 +73,7 @@ func homing_attack(target, to_icon: bool):
 		var progress = float(i)/n
 		var progress_vec = ((1 - progress) * original_vec)
 		global_position = target.global_position + progress_vec
-		await get_tree().create_timer(get_physics_process_delta_time()).timeout
+		await get_tree().physics_frame
 
 func _physics_process(_delta):
 	mesh.rotate_y(rotate_speed)
