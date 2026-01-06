@@ -121,6 +121,9 @@ func _physics_process(delta):
 		hurtbox.die()
 
 func set_active(active):
+	visible = active
+	set_process(active)
+	set_physics_process(active)
 	if active:
 		process_mode = Node.PROCESS_MODE_INHERIT
 		if hurtbox:
@@ -130,13 +133,12 @@ func set_active(active):
 	else:
 		if skythread:
 			skythread.visible = false
-		global_position.y = -50
 		if hurtbox:
 			hurtbox.remove_from_group("lockonables")
 		process_mode = Node.PROCESS_MODE_DISABLED
-	visible = active
-	set_process(active)
-	set_physics_process(active)
+		# If the enemy moves underground at the same time it dies, a homing roserang would follow it underground
+		await get_tree().create_timer(1).timeout
+		global_position.y = -50
 
 # Equivalent of lerp_look_at_move_dir or lerp_look_at_target in other enemies. This func is necessary for mites bc the mesh itself needs to rotate independently of the parent
 # Rotate body meshes y rotation so that its meshes look in the direction of the vector, which is a 3D vec whose y value is ignored

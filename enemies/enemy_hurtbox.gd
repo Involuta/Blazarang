@@ -79,9 +79,6 @@ func die():
 	Globals.award_score(kill_score)
 	death_effect()
 	if hb_owner.has_method("set_active"):
-		# set_active(false) moves the parent under the map, so if it's called immediately after the enemy takes the killing hit, the hitter/death effects happen under the map
-		# The delay ensures the effects come out before the enemy is moved down
-		await get_tree().physics_frame
 		hb_owner.set_active(false)
 	else:
 		super()
