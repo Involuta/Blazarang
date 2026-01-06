@@ -41,7 +41,7 @@ func _ready():
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, false)
 	set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, false)
 	var all_lockonables = get_tree().get_nodes_in_group("lockonables")
-	all_lockonables = all_lockonables.filter(within_proximity)
+	all_lockonables = all_lockonables.filter(targetable_and_within_proximity)
 	if not all_lockonables.is_empty():
 		all_lockonables.sort_custom(dist_to_lockonable)
 		var i := 0
@@ -53,8 +53,12 @@ func _ready():
 	# THIS IS A PLACEHOLDER: ROSE MAY NOT ALWAYS DELETE ITSELF IMMEDIATELY UPON TOUCHING ICON AT END OF HOMING IN THE FUTURE
 	queue_free()
 
-func within_proximity(lockonable):
-	return icon.global_position.distance_to(lockonable.global_position) < max_target_proximity
+func targetable_and_within_proximity(lockonable):
+	var not_targetable = not is_instance_valid(lockonable) or lockonable.process_mode == Node.PROCESS_MODE_DISABLED
+	if lockonable.get_parent() != null:
+		not_targetable = not_targetable or lockonable.get_parent().process_mode == Node.PROCESS_MODE_DISABLED
+	var within_proximity := icon.global_position.distance_to(lockonable.global_position) < max_target_proximity
+	return not not_targetable and within_proximity
 
 func dist_to_lockonable(a, b):
 	return icon.global_position.distance_to(a.global_position) < icon.global_position.distance_to(b.global_position)
@@ -63,8 +67,6 @@ func homing_attack(target, to_icon: bool):
 	var homing_time := target_homing_time
 	if to_icon:
 		homing_time = icon_homing_time
-	elif not target.is_in_group("lockonables") or not target or not is_instance_valid(target) or target.process_mode == Node.PROCESS_MODE_DISABLED:
-		return
 	
 	# Get original vector from target to current pos
 	var original_vec = global_position - target.global_position
