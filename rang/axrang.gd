@@ -11,7 +11,7 @@ var invincible := true
 var invincibility_secs := .5
 signal caught
 
-@export var rotate_speed := .1
+@export var rotate_speed := .5
 
 @export var fwd_speed := 1.0
 @export var fwd_max_dist := 60.0
@@ -95,6 +95,10 @@ func switch_to_return():
 
 func is_returning():
 	return mvmt_state == RETURN
+
+# Used by CotuControl.gd for mutuality ability, which preserves roserang buffs as long as the axrang isn't stationary
+func is_stationary():
+	return mvmt_state == EXPLODE
 
 func buff_damage():
 	hitbox.damage = Globals.player_hitbox_data.AxrangDirectDamageBuff1

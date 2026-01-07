@@ -105,6 +105,8 @@ var mark_shuriken_deploy := true # Set to true when player equips Restlessness, 
 var mark_detonation := true # Set to true if "Sacrifice" ability is unlocked, which allows the player to detonate the mark, disabling it for the rest of the level
 var mark_destroyed := false # Runtime: Becomes true when detonated, resets on level restart
 
+var mutuality := true # Set to true when player equips Mutuality, where catching one weapon while the other is moving preserves buffs
+
 enum SHURIKEN_MARKLESS_MODE {
 	NEAREST,
 	HIGHEST_HP,
@@ -408,10 +410,12 @@ func _physics_process(delta):
 		Globals.award_score(Globals.INSTANT_RETHROW_SCORE)
 	else:
 		anim_tree.set(anim_tree_param_path_base + "just_instant_rethrew", false)
-	# Clear roserang buffs (and make target/Icon follow Cotu again) if an instant rethrow didn't just occur (i.e. if roserang_instance is still null after an instant rethrow would have reassigned it)
+	# Make icon follow Cotu again if an instant rethrow didn't just occur (i.e. if roserang_instance is still null after an instant rethrow would have reassigned it)
 	if roserang_instances.is_empty():
 		icon.start_following_cotu()
-		clear_roserang_buffs()
+		# Only clear buffs if Mutuality is inactive OR the axrang isn't currently out and moving
+		if not (mutuality and axrang_instance != null and not axrang_instance.is_stationary()):
+			clear_roserang_buffs()
 	
 	# Shuriken throw
 	if Input.is_action_just_pressed("ThrowShuriken"):
@@ -601,7 +605,9 @@ func on_catch_axrang():
 					ui.apply_axrang_buff(i)
 	else:
 		# Clear axrang buffs if axrang wasn't perfect caught or player isn't using special
-		clear_axrang_buffs()
+		# UNLESS Mutuality is active AND at least one roserang is flying
+		if not (mutuality and not roserang_instances.is_empty()):
+			clear_axrang_buffs()
 
 func throw_axrang():
 	axrang_instance = axrang.instantiate()

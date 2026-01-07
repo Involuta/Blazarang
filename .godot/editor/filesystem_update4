@@ -32,3 +32,6 @@ res://enemies/flatmite.gd
 res://enemies/paramite.gd
 res://enemies/harvestman.tscn
 res://enemies/harvestman.gd
+res://cotu/CotuControl.gd
+res://rang/axrang.tscn
+res://rang/axrang.gd
