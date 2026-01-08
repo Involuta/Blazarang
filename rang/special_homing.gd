@@ -87,3 +87,4 @@ func buff_homing_targets(targets_added: int):
 
 func get_mvmt_state():
 	return "HOMING"
+

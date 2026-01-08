@@ -19,6 +19,9 @@ signal caught
 @export var max_return_speed := 55
 @export var return_acc := 1.2
 
+var pre_multiplier_damage := 0.0 # Damage of the weapon before multipliers are applied
+var damage_multiplier := 0.0 # Hitbox's damage is pre_multiplier_damage * (1 + damage_multiplier)
+
 @onready var root := $/root/ViewControl
 var level : Node3D
 var cotu : Node3D
@@ -103,3 +106,7 @@ func is_stationary():
 func buff_damage():
 	hitbox.damage = Globals.player_hitbox_data.AxrangDirectDamageBuff1
 	explosion_hitbox.damage = Globals.player_hitbox_data.AxrangExplosionDamageBuff1
+
+func add_damage_multiplier(mult):
+	damage_multiplier += mult
+	hitbox.damage = pre_multiplier_damage * (1 + mult)

@@ -35,3 +35,5 @@ res://enemies/harvestman.gd
 res://cotu/CotuControl.gd
 res://rang/axrang.tscn
 res://rang/axrang.gd
+res://rang/roserang.gd
+res://rang/special_homing.gd
