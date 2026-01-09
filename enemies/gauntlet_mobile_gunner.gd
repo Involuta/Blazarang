@@ -131,7 +131,7 @@ func shoot_bullet():
 	await bullet_inst.tree_entered
 	bullet_inst.global_position = gun_mesh.global_position
 	bullet_inst.global_rotation = gun_mesh.global_rotation
-	bullet_inst.velocity = bullet_speed * -bullet_inst.get_global_transform().basis.z
+	bullet_inst.velocity = bullet_speed * global_position.direction_to(target.global_position)
 
 func can_see_target():
 	var space_state := get_world_3d().direct_space_state

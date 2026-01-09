@@ -13,10 +13,10 @@ signal caught
 
 @export var rotate_speed := .5
 
-@export var fwd_speed := 1.0
+@export var fwd_speed := 55.0
 @export var fwd_max_dist := 60.0
 
-@export var max_return_speed := 55
+@export var max_return_speed := 55.0
 @export var return_acc := 1.2
 
 # PMD = pre-multiplier damage
@@ -52,20 +52,21 @@ func _ready():
 	explosion_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	
 	flying_sfx.play()
-	
-	await get_tree().create_timer(1).timeout
-	invincible = false
 
 func _physics_process(_delta):
-	# Failsafe in case CotuCollider fails to make ax disappear when touching Cotu
+	# Deactivate invincibility once you're far enough from Cotu's body (diameter of CotuCollider)
+	if invincible and global_position.distance_to(cotu.global_position) > 2.8:
+		invincible = false
+	
+	# Emit caught signal
 	if not invincible and global_position.distance_to(cotu.global_position) < 1:
 		caught.emit()
 		queue_free()
 	match(mvmt_state):
 		FWD:
 			pivot.rotate_x(rotate_speed)
-			var vel_vec = fwd_speed * transform.basis.z
-			move_and_collide(vel_vec, false)
+			velocity = fwd_speed * transform.basis.z
+			move_and_slide()
 			
 			# If too far from Cotu, stop moving
 			if global_position.distance_to(cotu.global_position) > fwd_max_dist:

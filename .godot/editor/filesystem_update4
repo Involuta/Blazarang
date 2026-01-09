@@ -25,3 +25,7 @@ res://general_scripts/skygradient.gdshader
 res://glb_inherited_scenes/mite_hills_ground.gdshader
 res://rang/shuriken.gd
 res://cotu/CotuControl.gd
+res://rang/axrang.tscn
+res://rang/axrang.gd
+res://enemies/gauntlet_mobile_gunner.gd
+res://enemies/gauntlet_mobile_gunner.tscn

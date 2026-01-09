@@ -107,7 +107,7 @@ var mark_destroyed := false # Runtime: Becomes true when detonated, resets on le
 
 var mutuality := true # Set to true when player equips Mutuality, where catching one weapon while the other is moving preserves buffs
 var harmony := true # Set to true when player equips Harmony, which enhances the damage of all other rangs when a roserang is moving
-var harmony_damage_multiplier := .25
+var harmony_damage_multiplier := .25 # 25% boost
 
 enum SHURIKEN_MARKLESS_MODE {
 	NEAREST,
