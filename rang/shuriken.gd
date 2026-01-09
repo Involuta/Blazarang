@@ -73,6 +73,11 @@ var time_per_frenzy_slash := 1.0
 @export var recall_speed := 40.0
 @export var explode_secs := 0.5 
 
+# PMD = pre-multiplier damage
+var damage_multiplier := 0.0 # Each hitbox's damage is pre multiplier damage * (1 + damage_multiplier)
+var main_hitbox_pmd := 0.0
+var explosion_hitbox_pmd := 0.0
+
 var initial_rotation: Basis
 
 func _ready():
@@ -80,9 +85,10 @@ func _ready():
 	cotu = root.find_child("cotuCB")
 	icon = level.find_child("Icon")
 	
-	hitbox.damage = Globals.player_hitbox_data.ShurikenBaseDamage
+	main_hitbox_pmd = Globals.player_hitbox_data.ShurikenBaseDamage
+	explosion_hitbox_pmd = main_hitbox_pmd * 2
+	update_hitbox_damage()
 	explosion_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
-	explosion_hitbox.damage = hitbox.damage * 2
 	current_spin_speed = min_spin_speed
 
 func _physics_process(delta):
@@ -405,3 +411,14 @@ func configure(base: int, marked_bonus: int, should_self_destruct: bool):
 func destroy_self():
 	destroyed.emit(self)
 	queue_free()
+
+func update_hitbox_damage():
+	# If damage is boosted by 25%, damage_multiplier is .25, dm is 1.25
+	var dm = 1 + damage_multiplier
+	hitbox.damage = main_hitbox_pmd * dm
+	explosion_hitbox.damage = explosion_hitbox_pmd * dm
+
+func apply_damage_multiplier(mult: float):
+	# Multipliers accumulate multiplicatively
+	damage_multiplier *= 1 + mult
+	update_hitbox_damage()

@@ -13,6 +13,10 @@ var max_target_proximity := 30.0 # Farthest dist lockonable can be from rang (wh
 var target_homing_time := .12 # Time it takes for rang to move from 1 target to another
 var icon_homing_time := .4 # Time it takes for rang to return to icon after hitting all targets
 
+# PMD = pre-multiplier damage
+var damage_multiplier := 0.0 # Each hitbox's damage is pre multiplier damage * (1 + damage_multiplier)
+var hitbox_pmd := 0.0
+
 var invincible := true
 
 @onready var mesh = $RoserangMesh
@@ -33,6 +37,9 @@ func _ready():
 	icon = root.find_child("Icon")
 	
 	current_max_targets = base_max_targets
+	
+	hitbox_pmd = Globals.player_hitbox_data.RoserangBaseDamage
+	update_hitbox_damage()
 	
 	trail.color_ramp.gradient.colors[1] = Color.DEEP_SKY_BLUE
 	base_particle_gradient.set_color(1, Color.DEEP_SKY_BLUE)
@@ -88,7 +95,18 @@ func _physics_process(_delta):
 	mesh.rotate_y(rotate_speed)
 
 func buff_damage():
-	hitbox.damage = Globals.player_hitbox_data.RoserangDamageBuff1
+	hitbox_pmd = Globals.player_hitbox_data.RoserangDamageBuff1
+	update_hitbox_damage()
+
+func update_hitbox_damage():
+	# If damage is boosted by 25%, damage_multiplier is .25, dm is 1.25
+	var dm = 1 + damage_multiplier
+	hitbox.damage = hitbox_pmd * dm
+
+func apply_damage_multiplier(mult: float):
+	# Multipliers accumulate multiplicatively
+	damage_multiplier *= 1 + mult
+	update_hitbox_damage()
 
 func set_homing_targets(targets_added: int):
 	# Why aren't we doing max_targets += targets_added? When the script is reloaded after every instant rethrow, variable values retain changes from previous scripts

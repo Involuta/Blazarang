@@ -39,6 +39,10 @@ var current_loop_angle := 0.0 # shows how far into the current loop the rang is 
 const RETURN_ACC := 1.2
 const MAX_RETURN_SPEED := 55
 
+# PMD = pre-multiplier damage
+var damage_multiplier := 0.0 # Each hitbox's damage is pre multiplier damage * (1 + damage_multiplier)
+var hitbox_pmd := 0.0
+
 var ricochet_particles := preload("res://rang/rang_particles_ricochet.tscn")
 
 @onready var root := $/root/ViewControl
@@ -64,7 +68,8 @@ func _ready():
 	cotu = root.find_child("cotuCB")
 	icon = level.find_child("Icon")
 	
-	hitbox.damage = Globals.player_hitbox_data.RoserangBaseDamage
+	hitbox_pmd = Globals.player_hitbox_data.RoserangBaseDamage
+	update_hitbox_damage()
 	
 	flying_sfx.play()
 	icon.roserang_queued = false
@@ -147,7 +152,18 @@ func _physics_process(delta):
 
 func buff_damage():
 	current_loop_angle = 0
-	hitbox.damage = Globals.player_hitbox_data.RoserangDamageBuff1
+	hitbox_pmd = Globals.player_hitbox_data.RoserangDamageBuff1
+	update_hitbox_damage()
+
+func update_hitbox_damage():
+	# If damage is boosted by 25%, damage_multiplier is .25, dm is 1.25
+	var dm = 1 + damage_multiplier
+	hitbox.damage = hitbox_pmd * dm
+
+func apply_damage_multiplier(mult: float):
+	# Multipliers accumulate multiplicatively
+	damage_multiplier *= 1 + mult
+	update_hitbox_damage()
 
 func buff_homing_targets(_targets_added: int):
 	# This func exists so that if the rang hits the icon while in rose mode, and the homing buff is applied, the current living rang simply does nothing and continues in rose mode. The buff only takes effect when an instant rethrow occurs

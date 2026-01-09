@@ -19,15 +19,17 @@ signal caught
 @export var max_return_speed := 55
 @export var return_acc := 1.2
 
-var pre_multiplier_damage := 0.0 # Damage of the weapon before multipliers are applied
-var damage_multiplier := 0.0 # Hitbox's damage is pre_multiplier_damage * (1 + damage_multiplier)
+# PMD = pre-multiplier damage
+var damage_multiplier := 0.0 # Each hitbox's damage is pre multiplier damage * (1 + damage_multiplier)
+var main_hitbox_pmd := 0.0
+var explosion_hitbox_pmd := 0.0
 
 @onready var root := $/root/ViewControl
 var level : Node3D
 var cotu : Node3D
 var icon : Node3D
 
-@onready var hitbox := $PlayerHitbox
+@onready var main_hitbox := $PlayerHitbox
 @onready var pivot := $Pivot
 @onready var explosion_hitbox := $ExplosionPivot/PlayerHitbox
 @onready var explosion_particles := $ExplosionPivot/GPUParticles3D
@@ -39,8 +41,9 @@ func _ready():
 	cotu = root.find_child("cotuCB")
 	icon = level.find_child("Icon")
 	
-	hitbox.damage = Globals.player_hitbox_data.AxrangBaseDirectDamage
-	explosion_hitbox.damage = Globals.player_hitbox_data.AxrangBaseExplosionDamage
+	main_hitbox_pmd = Globals.player_hitbox_data.AxrangBaseDirectDamage
+	explosion_hitbox_pmd = Globals.player_hitbox_data.AxrangBaseExplosionDamage
+	update_hitbox_damage()
 	
 	global_position = cotu.global_position
 	rotation.y = cotu.get_rang_throw_y_angle() + PI
@@ -103,10 +106,17 @@ func is_returning():
 func is_stationary():
 	return mvmt_state == EXPLODE
 
-func buff_damage():
-	hitbox.damage = Globals.player_hitbox_data.AxrangDirectDamageBuff1
-	explosion_hitbox.damage = Globals.player_hitbox_data.AxrangExplosionDamageBuff1
+func update_hitbox_damage():
+	# If damage is boosted by 25%, damage_multiplier is .25, dm is 1.25
+	var dm = 1 + damage_multiplier
+	main_hitbox.damage = main_hitbox_pmd * dm
+	explosion_hitbox.damage = explosion_hitbox_pmd * dm
 
-func add_damage_multiplier(mult):
-	damage_multiplier += mult
-	hitbox.damage = pre_multiplier_damage * (1 + mult)
+func buff_damage():
+	main_hitbox_pmd = Globals.player_hitbox_data.AxrangDirectDamageBuff1
+	explosion_hitbox_pmd = Globals.player_hitbox_data.AxrangExplosionDamageBuff1
+	update_hitbox_damage()
+
+func apply_damage_multiplier(mult: float):
+	# Multipliers accumulate multiplicatively
+	damage_multiplier *= 1 + mult

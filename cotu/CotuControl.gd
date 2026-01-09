@@ -369,7 +369,7 @@ func _physics_process(delta):
 			Globals.cotu_throw_ax.emit()
 			throw_axrang()
 			if harmony and not roserang_instances.is_empty():
-				axrang_instance.add_damage_multiplier(harmony_damage_multiplier)
+				axrang_instance.apply_damage_multiplier(harmony_damage_multiplier)
 		elif axrang_instance != null and not axrang_instance.is_returning():
 			axrang_instance.advance_state()
 		elif axrang_instance != null and axrang_instance.is_returning():
@@ -433,7 +433,7 @@ func _physics_process(delta):
 		shurikens.append(s)
 		s.destroyed.connect(_on_shuriken_destroyed)
 		if harmony and not roserang_instances.is_empty():
-			s.add_damage_multiplier(harmony_damage_multiplier)
+			s.apply_damage_multiplier(harmony_damage_multiplier)
 	
 	if Input.is_action_just_pressed("UseItem"):
 		anim_tree.set(anim_tree_param_path_base + "use_item", true)
