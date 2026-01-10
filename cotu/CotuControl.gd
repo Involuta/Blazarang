@@ -105,9 +105,12 @@ var mark_shuriken_deploy := true # Set to true when player equips Restlessness, 
 var mark_detonation := true # Set to true if "Sacrifice" ability is unlocked, which allows the player to detonate the mark, disabling it for the rest of the level
 var mark_destroyed := false # Runtime: Becomes true when detonated, resets on level restart
 
+# Synergy buffs
 var mutuality := true # Set to true when player equips Mutuality, where catching one weapon while the other is moving preserves buffs
 var harmony := true # Set to true when player equips Harmony, which enhances the damage of all other rangs when a roserang is moving
 var harmony_damage_multiplier := .25 # 25% boost
+var symphony := true # Set to true when player equips Symphony, which enhances the damage of all other rangs when the ax is moving
+var symphony_damage_multiplier := .25
 
 enum SHURIKEN_MARKLESS_MODE {
 	NEAREST,
@@ -434,6 +437,8 @@ func _physics_process(delta):
 		s.destroyed.connect(_on_shuriken_destroyed)
 		if harmony and not roserang_instances.is_empty():
 			s.apply_damage_multiplier(harmony_damage_multiplier)
+		if symphony and axrang_instance != null and !axrang_instance.is_stationary():
+			s.apply_damage_multiplier(symphony_damage_multiplier)
 	
 	if Input.is_action_just_pressed("UseItem"):
 		anim_tree.set(anim_tree_param_path_base + "use_item", true)
@@ -536,6 +541,9 @@ func throw_roserang_with_script(script):
 	# Unlike the damage buff, the homing buff (which sets homing targets) is only applied once: when the rang is instant rethrown for the first time in the buff cycle. Since it's only applied once per cycle, it's not applied in the same way as other buffs in apply_buffs_to_roserang_instance
 	if script == homing_script:
 		new_roserang.set_homing_targets(homing_targets_added)
+	
+	if symphony and axrang_instance != null and not axrang_instance.is_stationary():
+		new_roserang.apply_damage_multiplier(symphony_damage_multiplier)
 
 func _on_roserang_exiting(roserang_node):
 	roserang_instances.erase(roserang_node)
