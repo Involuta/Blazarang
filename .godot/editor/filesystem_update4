@@ -29,3 +29,10 @@ res://rang/axrang.tscn
 res://rang/axrang.gd
 res://enemies/gauntlet_mobile_gunner.gd
 res://enemies/gauntlet_mobile_gunner.tscn
+res://rang/roserang.gd
+res://rang/roserang.tscn
+res://rang/roserang_homing.gd
+res://rang/special_explosive_homing.gd
+res://rang/special_homing.gd
+res://rang/shuriken.tscn
+res://rang/mark.gd

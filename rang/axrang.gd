@@ -10,6 +10,7 @@ var mvmt_state = FWD
 var invincible := true
 var invincibility_secs := .5
 signal caught
+signal hit_enemy
 
 @export var rotate_speed := .5
 
@@ -20,7 +21,7 @@ signal caught
 @export var return_acc := 1.2
 
 # PMD = pre-multiplier damage
-var damage_multiplier := 0.0 # Each hitbox's damage is pre multiplier damage * (1 + damage_multiplier)
+var damage_multiplier := 1.0 # Each hitbox's damage is pre multiplier damage * damage_multiplier)
 var main_hitbox_pmd := 0.0
 var explosion_hitbox_pmd := 0.0
 
@@ -108,10 +109,9 @@ func is_stationary():
 	return mvmt_state == EXPLODE
 
 func update_hitbox_damage():
-	# If damage is boosted by 25%, damage_multiplier is .25, dm is 1.25
-	var dm = 1 + damage_multiplier
-	main_hitbox.damage = main_hitbox_pmd * dm
-	explosion_hitbox.damage = explosion_hitbox_pmd * dm
+	# If damage is boosted by 25%, damage_multiplier is 1.25
+	main_hitbox.damage = main_hitbox_pmd * damage_multiplier
+	explosion_hitbox.damage = explosion_hitbox_pmd * damage_multiplier
 
 func buff_damage():
 	main_hitbox_pmd = Globals.player_hitbox_data.AxrangDirectDamageBuff1
@@ -121,3 +121,7 @@ func buff_damage():
 func apply_damage_multiplier(mult: float):
 	# Multipliers accumulate multiplicatively
 	damage_multiplier *= 1 + mult
+
+# Connected to main_hitbox's body_entered signal
+func _on_hit_enemy(_body):
+	hit_enemy.emit()

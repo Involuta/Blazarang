@@ -153,7 +153,7 @@ func recall_frame(delta):
 
 	if global_position.distance_to(cotu.global_position) < 0.3:
 		# Remove the mark when it reaches the owner
-		emit_signal("mark_removed")
+		mark_removed.emit()
 		queue_free()
 
 func switch_to_locked():
@@ -177,7 +177,7 @@ func detonate():
 	# Wait for the animation to finish before destroying
 	await anim_player.animation_finished
 		
-	emit_signal("mark_removed")
+	mark_removed.emit()
 	queue_free()
 
 # -------------------------------------------------

@@ -74,7 +74,7 @@ var time_per_frenzy_slash := 1.0
 @export var explode_secs := 0.5 
 
 # PMD = pre-multiplier damage
-var damage_multiplier := 0.0 # Each hitbox's damage is pre multiplier damage * (1 + damage_multiplier)
+var damage_multiplier := 1.0 # Each hitbox's damage is pre multiplier damage * damage_multiplier
 var main_hitbox_pmd := 0.0
 var explosion_hitbox_pmd := 0.0
 
@@ -413,10 +413,9 @@ func destroy_self():
 	queue_free()
 
 func update_hitbox_damage():
-	# If damage is boosted by 25%, damage_multiplier is .25, dm is 1.25
-	var dm = 1 + damage_multiplier
-	hitbox.damage = main_hitbox_pmd * dm
-	explosion_hitbox.damage = explosion_hitbox_pmd * dm
+	# If damage is boosted by 25%, damage_multiplier is 1.25
+	hitbox.damage = main_hitbox_pmd * damage_multiplier
+	explosion_hitbox.damage = explosion_hitbox_pmd * damage_multiplier
 
 func apply_damage_multiplier(mult: float):
 	# Multipliers accumulate multiplicatively

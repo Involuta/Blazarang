@@ -87,6 +87,12 @@ var axrang_special_hit_buff_saving := false # Set to true when player equips Red
 @export var axrang_special_buff_save_duration := 6.7
 var axrang_special_buff_save_time_remaining := 0.0
 
+var euphoria := true # Set to true when player equips Euphoria; when the ax hits an enemy, it activates a temporary buff that causes other rangs to deal significantly more damage. Buff wears off after a bit if ax doesn’t hit an enemy again
+var euphoria_active := false # Set to true when Euphoria buff is activated, set to false when the buff time runs out
+var euphoria_time_remaining := 0.0
+@export var euphoria_duration := 3.0
+@export var euphoria_damage_multiplier := .4 # +40% damage
+
 var shuriken_scene := preload("res://rang/shuriken.tscn")
 var shuriken_deploy_queued := false
 @export var max_shurikens := 4
@@ -353,6 +359,12 @@ func _physics_process(delta):
 			# Timer just expired → clear buffs once
 			clear_axrang_buffs()
 	
+	# Euphoria buff timing
+	if euphoria_active:
+		euphoria_time_remaining -= delta
+		if euphoria_time_remaining <= 0.0:
+			euphoria_active = false
+	
 	# TESTING SHURIKEN SPECIAL
 	if Input.is_action_just_pressed("Special"):
 		for s in shurikens:
@@ -371,8 +383,6 @@ func _physics_process(delta):
 				hurtbox.self_hit(throw_axrang_self_damage)
 			Globals.cotu_throw_ax.emit()
 			throw_axrang()
-			if harmony and not roserang_instances.is_empty():
-				axrang_instance.apply_damage_multiplier(harmony_damage_multiplier)
 		elif axrang_instance != null and not axrang_instance.is_returning():
 			axrang_instance.advance_state()
 		elif axrang_instance != null and axrang_instance.is_returning():
@@ -431,14 +441,7 @@ func _physics_process(delta):
 				hurtbox.self_hit(throw_shuriken_self_damage)
 			else:
 				hurtbox.self_hit(throw_axrang_self_damage)
-		var s = shuriken_scene.instantiate()
-		add_sibling(s)
-		shurikens.append(s)
-		s.destroyed.connect(_on_shuriken_destroyed)
-		if harmony and not roserang_instances.is_empty():
-			s.apply_damage_multiplier(harmony_damage_multiplier)
-		if symphony and axrang_instance != null and !axrang_instance.is_stationary():
-			s.apply_damage_multiplier(symphony_damage_multiplier)
+		throw_shuriken()
 	
 	if Input.is_action_just_pressed("UseItem"):
 		anim_tree.set(anim_tree_param_path_base + "use_item", true)
@@ -544,6 +547,8 @@ func throw_roserang_with_script(script):
 	
 	if symphony and axrang_instance != null and not axrang_instance.is_stationary():
 		new_roserang.apply_damage_multiplier(symphony_damage_multiplier)
+	if euphoria_active:
+		new_roserang.apply_damage_multiplier(euphoria_damage_multiplier)
 
 func _on_roserang_exiting(roserang_node):
 	roserang_instances.erase(roserang_node)
@@ -628,6 +633,9 @@ func throw_axrang():
 	add_sibling(axrang_instance)
 	apply_buffs_to_axrang_instance()
 	axrang_instance.caught.connect(on_catch_axrang)
+	axrang_instance.hit_enemy.connect(on_axrang_ranged_hit)
+	if harmony and not roserang_instances.is_empty():
+		axrang_instance.apply_damage_multiplier(harmony_damage_multiplier)
 
 func start_axrang_perfect_catch_timer():
 	axrang_perfect_catch_queued = true
@@ -659,6 +667,15 @@ func start_axrang_special_timer():
 func reset_axrang_melee_hit():
 	# Reset whether axrang melee hit or not. Called on the first keyframe of every axrang special anim
 	axrang_melee_hit = false
+
+func on_axrang_ranged_hit():
+	if euphoria:
+		activate_euphoria()
+
+# Activates or refreshes euphoria
+func activate_euphoria():
+	euphoria_active = true
+	euphoria_time_remaining = euphoria_duration
 
 func _on_axrang_melee_hit(_body):
 	# Called every time axrang hits something (it can only detect collisions with enemies)
@@ -756,6 +773,18 @@ func get_shuriken_target() -> Node3D:
 			return get_lowest_health_target(targets)
 	
 	return null
+
+func throw_shuriken():
+	var s = shuriken_scene.instantiate()
+	add_sibling(s)
+	shurikens.append(s)
+	s.destroyed.connect(_on_shuriken_destroyed)
+	if harmony and not roserang_instances.is_empty():
+		s.apply_damage_multiplier(harmony_damage_multiplier)
+	if symphony and axrang_instance != null and !axrang_instance.is_stationary():
+		s.apply_damage_multiplier(symphony_damage_multiplier)
+	if euphoria_active:
+		s.apply_damage_multiplier(euphoria_damage_multiplier)
 
 func deploy_shurikens():
 	if len(shurikens) == 0:

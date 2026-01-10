@@ -40,7 +40,7 @@ const RETURN_ACC := 1.2
 const MAX_RETURN_SPEED := 55
 
 # PMD = pre-multiplier damage
-var damage_multiplier := 0.0 # Each hitbox's damage is pre multiplier damage * (1 + damage_multiplier)
+var damage_multiplier := 1.0 # Each hitbox's damage is pre multiplier damage * damage_multiplier
 var hitbox_pmd := 0.0
 
 var ricochet_particles := preload("res://rang/rang_particles_ricochet.tscn")
@@ -156,9 +156,8 @@ func buff_damage():
 	update_hitbox_damage()
 
 func update_hitbox_damage():
-	# If damage is boosted by 25%, damage_multiplier is .25, dm is 1.25
-	var dm = 1 + damage_multiplier
-	hitbox.damage = hitbox_pmd * dm
+	# If damage is boosted by 25%, damage_multiplier is 1.25
+	hitbox.damage = hitbox_pmd * damage_multiplier
 
 func apply_damage_multiplier(mult: float):
 	# Multipliers accumulate multiplicatively
