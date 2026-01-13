@@ -62,6 +62,8 @@ var axrang_perfect_catch_queued := false
 var axrang_perfect_caught := false
 var axrang_buff_list := [Globals.AXRANG_BUFFS.DAMAGE, Globals.AXRANG_BUFFS.DAMAGE, Globals.AXRANG_BUFFS.DAMAGE]
 var next_axrang_buff_index := 0
+@export var axrang_buff_decay_interval := 4.0 # Seconds between losing buffs
+var axrang_buff_decay_timer := 0.0
 var throw_axrang_self_damage := 36.0
 
 var rose_script := preload("res://rang/roserang.gd")
@@ -388,6 +390,16 @@ func _physics_process(delta):
 		elif axrang_instance != null and axrang_instance.is_returning():
 			start_axrang_perfect_catch_timer()
 	
+	# Axrang buff decay
+	if axrang_instance != null and next_axrang_buff_index > 0:
+		axrang_buff_decay_timer += delta
+		if axrang_buff_decay_timer >= axrang_buff_decay_interval:
+			remove_axrang_buff()
+			axrang_buff_decay_timer = 0.0
+	else:
+		# Reset the timer when the ax is caught or if there are no buffs
+		axrang_buff_decay_timer = 0.0
+	
 	# Roserang throw
 	if Input.is_action_just_pressed("ThrowRoserang"):
 		if roserang_instances.is_empty() and can_throw_roserang:
@@ -646,9 +658,20 @@ func add_axrang_buff(): # Called by Cotu when he catches the axrang
 	if next_axrang_buff_index < axrang_buff_list.size():
 		next_axrang_buff_index += 1
 
+func remove_axrang_buff():
+	if next_axrang_buff_index > 0:
+		next_axrang_buff_index -= 1
+		ui.remove_axrang_buff(next_axrang_buff_index)
+		
+		# Update the current ax instance's damage
+		if axrang_instance != null:
+			apply_buffs_to_axrang_instance()
+
 func apply_buffs_to_axrang_instance():
 	if next_axrang_buff_index <= 0 and not ui.axrang_buffs_cleared():
 		ui.clear_axrang_buffs()
+	# CLear all buffs before buffing
+	axrang_instance.reset_buffs()
 	# Apply buffs to the ax instance itself, but not the UI because the buffs were already applied in the UI in the previous perfect catch
 	for i in range(next_axrang_buff_index):
 		match(axrang_buff_list[i]):

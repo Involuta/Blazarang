@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://kl1hpr0grn1v"]
+[gd_scene load_steps=44 format=3 uid="uid://kl1hpr0grn1v"]
 
 [ext_resource type="PackedScene" uid="uid://daj44qqb6dior" path="res://ui/health_bar.tscn" id="1_k5nv4"]
 [ext_resource type="Script" path="res://ui/ui_root.gd" id="1_s33yg"]
@@ -909,12 +909,171 @@ tracks/8/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_la4su"]
+resource_name = "remove_axrang_buff2"
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AxrangBuffIcon2Pivot/AxrangBuffIcon2:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1503),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AxrangBuffIcon2Pivot/AxrangBuffIcon2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1503),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AxrangBuffIcon2Pivot/AxrangBuffIcon2UpParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AxrangBuffIcon2Pivot/AxrangBuffIcon2DownParticles:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_gfqpj"]
+resource_name = "remove_axrang_buff1"
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AxrangBuffIcon1Pivot/AxrangBuffIcon1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1503),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AxrangBuffIcon1Pivot/AxrangBuffIcon1:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1503),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AxrangBuffIcon1Pivot/AxrangBuffIcon1UpParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AxrangBuffIcon1Pivot/AxrangBuffIcon1DownParticles:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_mr83e"]
+resource_name = "remove_axrang_buff0"
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AxrangBuffIcon0Pivot/AxrangBuffIcon0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1503),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AxrangBuffIcon0Pivot/AxrangBuffIcon0UpParticles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AxrangBuffIcon0Pivot/AxrangBuffIcon0DownParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AxrangBuffIcon0Pivot/AxrangBuffIcon0:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1503),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5p47o"]
 _data = {
 "apply_axrang_buff0": SubResource("Animation_o3q2i"),
 "apply_axrang_buff1": SubResource("Animation_rhkve"),
 "apply_axrang_buff2": SubResource("Animation_souor"),
-"clear_axrang_buffs": SubResource("Animation_8nqmm")
+"clear_axrang_buffs": SubResource("Animation_8nqmm"),
+"remove_axrang_buff0": SubResource("Animation_mr83e"),
+"remove_axrang_buff1": SubResource("Animation_gfqpj"),
+"remove_axrang_buff2": SubResource("Animation_la4su")
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_u1iil"]
@@ -1040,6 +1199,7 @@ expand_mode = 1
 [node name="RoserangBuffIcon0UpParticles" type="GPUParticles2D" parent="RoserangBuffIcon0Pivot"]
 position = Vector2(114, 127)
 rotation = 3.14159
+emitting = false
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_xax8r")
 texture = ExtResource("7_d3h4s")
@@ -1049,6 +1209,7 @@ explosiveness = 1.0
 
 [node name="RoserangBuffIcon0DownParticles" type="GPUParticles2D" parent="RoserangBuffIcon0Pivot"]
 position = Vector2(114, 127)
+emitting = false
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_xax8r")
 texture = ExtResource("7_d3h4s")
@@ -1123,7 +1284,6 @@ explosiveness = 1.0
 [node name="AxrangBuffIcon0Pivot" type="Node2D" parent="."]
 
 [node name="AxrangBuffIcon0" type="TextureRect" parent="AxrangBuffIcon0Pivot"]
-visible = false
 modulate = Color(1, 1, 1, 0)
 offset_left = 38.0
 offset_top = 100.0
@@ -1189,7 +1349,6 @@ explosiveness = 1.0
 
 [node name="AxrangBuffIcon2" type="TextureRect" parent="AxrangBuffIcon2Pivot"]
 visible = false
-modulate = Color(1, 1, 1, 0)
 offset_left = 288.0
 offset_top = 100.0
 offset_right = 435.0
@@ -1200,7 +1359,6 @@ expand_mode = 1
 [node name="AxrangBuffIcon2UpParticles" type="GPUParticles2D" parent="AxrangBuffIcon2Pivot"]
 position = Vector2(364, 175)
 rotation = 3.14159
-emitting = false
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_xax8r")
 texture = ExtResource("7_d3h4s")
@@ -1210,7 +1368,6 @@ explosiveness = 1.0
 
 [node name="AxrangBuffIcon2DownParticles" type="GPUParticles2D" parent="AxrangBuffIcon2Pivot"]
 position = Vector2(364, 175)
-emitting = false
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_xax8r")
 texture = ExtResource("7_d3h4s")

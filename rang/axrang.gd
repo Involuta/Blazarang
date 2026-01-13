@@ -113,6 +113,12 @@ func update_hitbox_damage():
 	main_hitbox.damage = main_hitbox_pmd * damage_multiplier
 	explosion_hitbox.damage = explosion_hitbox_pmd * damage_multiplier
 
+func reset_buffs():
+	# Reset damage
+	main_hitbox_pmd = Globals.player_hitbox_data.AxrangBaseDirectDamage
+	explosion_hitbox_pmd = Globals.player_hitbox_data.AxrangBaseExplosionDamage
+	update_hitbox_damage()
+
 func buff_damage():
 	main_hitbox_pmd = Globals.player_hitbox_data.AxrangDirectDamageBuff1
 	explosion_hitbox_pmd = Globals.player_hitbox_data.AxrangExplosionDamageBuff1

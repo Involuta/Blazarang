@@ -141,3 +141,8 @@ func apply_axrang_buff(buff_index: int):
 	if not axrang_buff_applied[buff_index]:
 		axrang_buff_applied[buff_index] = true
 		axrang_buff_anims.play("apply_axrang_buff" + str(buff_index))
+
+func remove_axrang_buff(buff_index: int):
+	if axrang_buff_applied[buff_index]:
+		axrang_buff_applied[buff_index] = false
+		axrang_buff_anims.play("remove_axrang_buff" + str(buff_index))
