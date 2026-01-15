@@ -125,8 +125,9 @@ height = 0.5
 radius = 1.4
 
 [node name="Axrang" type="CharacterBody3D"]
+collision_layer = 256
+collision_mask = 0
 script = ExtResource("1_wabwy")
-fwd_max_dist = 600.0
 
 [node name="HitboxManager" type="Node" parent="."]
 

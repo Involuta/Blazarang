@@ -58,6 +58,7 @@ var next_roserang_buff_index := 0
 var throw_roserang_self_damage := 18.0
 
 var can_throw_axrang := true
+var axrang_dodge_rethrow_queued := false
 var axrang_perfect_catch_queued := false
 var axrang_perfect_caught := false
 var axrang_buff_list := [Globals.AXRANG_BUFFS.DAMAGE, Globals.AXRANG_BUFFS.DAMAGE, Globals.AXRANG_BUFFS.DAMAGE]
@@ -535,6 +536,9 @@ func step_dodge():
 		icon.stop_following_cotu()
 	await get_tree().create_timer(step_dodge_duration_secs).timeout
 	is_dodging = false
+	if axrang_dodge_rethrow_queued:
+		axrang_dodge_rethrow_queued = false
+		throw_axrang(armature.transform.basis.z)
 	set_collision_mask_value(Globals.ENEMY_COL_LAYER, true)
 	await get_tree().create_timer(step_dodge_cooldown_secs).timeout
 	can_dodge = true
@@ -615,32 +619,38 @@ func start_roserang_special_timer():
 	roserang_special_queued = false
 
 func on_catch_axrang():
-	# If player inputted special right before catching ax, use special axrang and don't clear buffs until the special finishes
+	# If player inputted special right before catching ax, use special axrang and don't clear buffs until the special finishes. Special is checked before perfect catch since it's a more impactful action
 	if axrang_special_queued:
 		axrang_special_queued = false
 		throw_special_axrang()
-	elif axrang_perfect_catch_queued:
-		# Perfect catch
-		axrang_perfect_catch_queued = false
-		axrang_perfect_caught = true
-		# If you caught the axrang after it came back from using a special (in which it was thrown, of course), clear the buffs. Why not just check axrang_special_just_used in the outer if statement since the else block also clears buffs? We need axrang perfect caught to be true if it was perfectly caught, since perfect catching ax has some benefits, e.g. instant ax throw anim
-		if axrang_special_just_used:
-			axrang_special_just_used = false
-			clear_axrang_buffs()
-			return
-		add_axrang_buff()
-		# Apply buffs visually in the UI, but not the ax itself because the ax instance doesn't exist yet (catching the axrang sets axrang_instance to null)
-		for i in range(next_axrang_buff_index):
-			match(axrang_buff_list[i]):
-				Globals.AXRANG_BUFFS.DAMAGE:
-					ui.apply_axrang_buff(i)
 	else:
-		# Clear axrang buffs if axrang wasn't perfect caught or player isn't using special
-		# UNLESS Mutuality is active AND at least one roserang is flying
-		if not (mutuality and not roserang_instances.is_empty()):
-			clear_axrang_buffs()
+		# Check this condition first; if perfect catch buff adding is checked first, then perfect_catch_queued is set to false, THEN this condition would check and clear the buffs
+		if not axrang_perfect_catch_queued and not is_dodging:
+			# Clear axrang buffs if axrang wasn't perfect caught or player isn't using special
+			# UNLESS Mutuality is active AND at least one roserang is flying
+			if not (mutuality and not roserang_instances.is_empty()):
+				clear_axrang_buffs()
+			return
+		if axrang_perfect_catch_queued:
+			# Perfect catch
+			axrang_perfect_catch_queued = false
+			axrang_perfect_caught = true
+			# If you caught the axrang after it came back from using a special (in which it was thrown, of course), clear the buffs. Why not just check axrang_special_just_used in the outer if statement since the else block also clears buffs? We need axrang perfect caught to be true if it was perfectly caught, since perfect catching ax has some benefits, e.g. instant ax throw anim
+			if axrang_special_just_used:
+				axrang_special_just_used = false
+				clear_axrang_buffs()
+				return
+			add_axrang_buff()
+			# Apply buffs visually in the UI, but not the ax itself because the ax instance doesn't exist yet (catching the axrang sets axrang_instance to null)
+			for i in range(next_axrang_buff_index):
+				match(axrang_buff_list[i]):
+					Globals.AXRANG_BUFFS.DAMAGE:
+						ui.apply_axrang_buff(i)
+		# If you're dodging, you queue an axrang dodge rethrow. Since dodging is important for survival, it gets the highest priority action
+		if is_dodging:
+			axrang_dodge_rethrow_queued = true
 
-func throw_axrang():
+func throw_axrang(dir := Vector3.ZERO):
 	axrang_instance = axrang.instantiate()
 	add_sibling(axrang_instance)
 	apply_buffs_to_axrang_instance()
@@ -648,6 +658,9 @@ func throw_axrang():
 	axrang_instance.hit_enemy.connect(on_axrang_ranged_hit)
 	if harmony and not roserang_instances.is_empty():
 		axrang_instance.apply_damage_multiplier(harmony_damage_multiplier)
+	if dir != Vector3.ZERO:
+		# Axrang instance travels in Cotu's rang throw direction by default (i.e. if not set by set_direction)
+		axrang_instance.set_direction(dir)
 
 func start_axrang_perfect_catch_timer():
 	axrang_perfect_catch_queued = true

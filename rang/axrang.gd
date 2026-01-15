@@ -54,6 +54,9 @@ func _ready():
 	
 	flying_sfx.play()
 
+func set_direction(dir : Vector3):
+	velocity = fwd_speed * dir
+
 func _physics_process(_delta):
 	# Deactivate invincibility once you're far enough from Cotu's body (diameter of CotuCollider)
 	if invincible and global_position.distance_to(cotu.global_position) > 2.8:
@@ -66,7 +69,7 @@ func _physics_process(_delta):
 	match(mvmt_state):
 		FWD:
 			pivot.rotate_x(rotate_speed)
-			velocity = fwd_speed * transform.basis.z
+			look_at(global_position + velocity)
 			move_and_slide()
 			
 			# If too far from Cotu, stop moving
@@ -76,10 +79,7 @@ func _physics_process(_delta):
 			pass
 		RETURN:
 			pivot.rotate_x(-rotate_speed)
-			if velocity.length() < max_return_speed:
-				velocity = (velocity.length() + return_acc) * global_position.direction_to(cotu.global_position)
-			else:
-				velocity = max_return_speed * global_position.direction_to(cotu.global_position)
+			velocity = max_return_speed * global_position.direction_to(cotu.global_position)
 			look_at(global_position + velocity)
 			move_and_slide()
 
@@ -95,6 +95,7 @@ func advance_state():
 func switch_to_explode():
 	mvmt_state = EXPLODE
 	flying_sfx.stop()
+	velocity = Vector3.ZERO
 	$AnimationPlayer.play("explode")
 
 func switch_to_return():
