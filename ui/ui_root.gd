@@ -71,6 +71,8 @@ func _ready():
 		match(cotu.axrang_buff_list[i]):
 			Globals.AXRANG_BUFFS.DAMAGE:
 				axrang_buff_icons[i].texture = load("res://textures/buff_DMG-clear.png")
+			Globals.AXRANG_BUFFS.SPEED:
+				axrang_buff_icons[i].texture = load("res://textures/buff_SPD-clear.png")
 			_:
 				axrang_buff_icons[i].texture = load("res://textures/buff_DMG-clear.png")
 
