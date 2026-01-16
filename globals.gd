@@ -54,6 +54,7 @@ var roserang_buff_list := [Globals.ROSERANG_BUFFS.HOMING, Globals.ROSERANG_BUFFS
 
 enum AXRANG_BUFFS {
 	DAMAGE,
+	SPEED,
 }
 
 enum DEBUFFS {
@@ -90,6 +91,17 @@ const player_hitbox_data = {
 	"ShurikenBaseDamage" : 1,
 	"FireballBaseDamage" : 100,
 	"MarkDetonationDamage" : 200,
+}
+
+const player_speed_data = {
+	"AxrangFwdSpeedBase" : 55,
+	"AxrangReturnSpeedBase" : 50,
+	"AxrangFwdSpeedBuff1" : 110,
+	"AxrangReturnSpeedBuff1" : 100,
+	"AxrangFwdSpeedBuff2" : 165,
+	"AxrangReturnSpeedBuff2" : 140,
+	"AxrangFwdSpeedBuff3" : 210,
+	"AxrangReturnSpeedBuff3" : 190,
 }
 
 # health, hit score, kill score

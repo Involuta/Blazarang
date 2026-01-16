@@ -9,16 +9,16 @@ var mvmt_state = FWD
 
 var invincible := true
 var invincibility_secs := .5
+var cotu_collider_radius := 1.4 # Used to know whether ax is touching Cotu
 signal caught
 signal hit_enemy
 
 @export var rotate_speed := .5
 
+var speed_buff_level := 0 # 0 = base, 1, 2, 3 = buffed
 @export var fwd_speed := 55.0
 @export var fwd_max_dist := 60.0
-
-@export var max_return_speed := 55.0
-@export var return_acc := 1.2
+@export var return_speed := 55.0
 
 # PMD = pre-multiplier damage
 var damage_multiplier := 1.0 # Each hitbox's damage is pre multiplier damage * damage_multiplier)
@@ -59,11 +59,11 @@ func set_direction(dir : Vector3):
 
 func _physics_process(_delta):
 	# Deactivate invincibility once you're far enough from Cotu's body (diameter of CotuCollider)
-	if invincible and global_position.distance_to(cotu.global_position) > 2.8:
+	if invincible and global_position.distance_to(cotu.global_position) > cotu_collider_radius:
 		invincible = false
 	
 	# Emit caught signal
-	if not invincible and global_position.distance_to(cotu.global_position) < 1:
+	if not invincible and global_position.distance_to(cotu.global_position) < cotu_collider_radius:
 		caught.emit()
 		queue_free()
 	match(mvmt_state):
@@ -79,7 +79,7 @@ func _physics_process(_delta):
 			pass
 		RETURN:
 			pivot.rotate_x(-rotate_speed)
-			velocity = max_return_speed * global_position.direction_to(cotu.global_position)
+			velocity = return_speed * global_position.direction_to(cotu.global_position)
 			look_at(global_position + velocity)
 			move_and_slide()
 
@@ -119,6 +119,11 @@ func reset_buffs():
 	main_hitbox_pmd = Globals.player_hitbox_data.AxrangBaseDirectDamage
 	explosion_hitbox_pmd = Globals.player_hitbox_data.AxrangBaseExplosionDamage
 	update_hitbox_damage()
+	
+	# Reset Speed
+	speed_buff_level = 0
+	fwd_speed = Globals.player_speed_data.AxrangFwdSpeedBase
+	return_speed = Globals.player_speed_data.AxrangReturnSpeedBase
 
 func buff_damage():
 	main_hitbox_pmd = Globals.player_hitbox_data.AxrangDirectDamageBuff1
@@ -128,6 +133,29 @@ func buff_damage():
 func apply_damage_multiplier(mult: float):
 	# Multipliers accumulate multiplicatively
 	damage_multiplier *= 1 + mult
+
+func buff_speed():
+	speed_buff_level = clampi(speed_buff_level + 1, 0, 3)
+	match speed_buff_level:
+		1:
+			fwd_speed = Globals.player_speed_data.AxrangFwdSpeedBuff1
+			return_speed = Globals.player_speed_data.AxrangReturnSpeedBuff1
+		2:
+			fwd_speed = Globals.player_speed_data.AxrangFwdSpeedBuff2
+			return_speed = Globals.player_speed_data.AxrangReturnSpeedBuff2
+		3:
+			fwd_speed = Globals.player_speed_data.AxrangFwdSpeedBuff3
+			return_speed = Globals.player_speed_data.AxrangReturnSpeedBuff3
+	update_speed()
+
+func update_speed():
+	if mvmt_state == FWD:
+		# Maintain current direction but apply new forward speed
+		velocity = velocity.normalized() * fwd_speed
+	elif mvmt_state == RETURN:
+		# Return logic calculates velocity dynamically, 
+		# but we can cap it immediately to prevent a "jump" next frame
+		velocity = velocity.limit_length(return_speed)
 
 # Connected to main_hitbox's body_entered signal
 func _on_hit_enemy(_body):

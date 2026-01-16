@@ -72,7 +72,7 @@ func _ready():
 			Globals.AXRANG_BUFFS.DAMAGE:
 				axrang_buff_icons[i].texture = load("res://textures/buff_DMG-clear.png")
 			_:
-				pass
+				axrang_buff_icons[i].texture = load("res://textures/buff_DMG-clear.png")
 
 func roserang_buffs_cleared():
 	return not (true in roserang_buff_applied)

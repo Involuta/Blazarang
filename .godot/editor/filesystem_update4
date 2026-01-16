@@ -46,3 +46,4 @@ res://textures/small_solid_black.tres
 res://levels/gauntlet_level/section_nodes/gauntlet_arena1.gd
 res://levels/gauntlet_level/gauntlet_level1.tscn
 res://enemies/gauntlet_melee_tier3.tscn
+res://rang/destroy_on_cotu_hit.gd

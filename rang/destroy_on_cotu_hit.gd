@@ -16,3 +16,4 @@ func _on_body_entered(body):
 		elif rang.name == "Axrang":
 			Globals.combo_count = 0
 			# A distance checker in the Axrang script handles deletion because unlike the Roserang, the Ax can enter Cotu's body while he's dodging, then permanently stay there because on_body_entered is never called again. The Roserang would just fly away after Cotu's dodge, preventing this issue
+			

@@ -61,7 +61,7 @@ var can_throw_axrang := true
 var axrang_dodge_rethrow_queued := false
 var axrang_perfect_catch_queued := false
 var axrang_perfect_caught := false
-var axrang_buff_list := [Globals.AXRANG_BUFFS.DAMAGE, Globals.AXRANG_BUFFS.DAMAGE, Globals.AXRANG_BUFFS.DAMAGE]
+var axrang_buff_list := [Globals.AXRANG_BUFFS.SPEED, Globals.AXRANG_BUFFS.SPEED, Globals.AXRANG_BUFFS.SPEED]
 var next_axrang_buff_index := 0
 @export var axrang_buff_decay_interval := 4.0 # Seconds between losing buffs
 var axrang_buff_decay_timer := 0.0
@@ -643,9 +643,7 @@ func on_catch_axrang():
 			add_axrang_buff()
 			# Apply buffs visually in the UI, but not the ax itself because the ax instance doesn't exist yet (catching the axrang sets axrang_instance to null)
 			for i in range(next_axrang_buff_index):
-				match(axrang_buff_list[i]):
-					Globals.AXRANG_BUFFS.DAMAGE:
-						ui.apply_axrang_buff(i)
+				ui.apply_axrang_buff(i)
 		# If you're dodging, you queue an axrang dodge rethrow. Since dodging is important for survival, it gets the highest priority action
 		if is_dodging:
 			axrang_dodge_rethrow_queued = true
@@ -690,6 +688,8 @@ func apply_buffs_to_axrang_instance():
 		match(axrang_buff_list[i]):
 			Globals.AXRANG_BUFFS.DAMAGE:
 				axrang_instance.buff_damage()
+			Globals.AXRANG_BUFFS.SPEED:
+				axrang_instance.buff_speed()
 
 func throw_special_axrang():
 	axrang_special_just_used = true

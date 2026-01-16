@@ -909,13 +909,13 @@ tracks/8/keys = {
 "values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_la4su"]
-resource_name = "remove_axrang_buff2"
+[sub_resource type="Animation" id="Animation_mr83e"]
+resource_name = "remove_axrang_buff0"
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AxrangBuffIcon2Pivot/AxrangBuffIcon2:visible")
+tracks/0/path = NodePath("AxrangBuffIcon0Pivot/AxrangBuffIcon0:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -927,19 +927,19 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AxrangBuffIcon2Pivot/AxrangBuffIcon2:modulate")
+tracks/1/path = NodePath("AxrangBuffIcon0Pivot/AxrangBuffIcon0UpParticles:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1503),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AxrangBuffIcon2Pivot/AxrangBuffIcon2UpParticles:emitting")
+tracks/2/path = NodePath("AxrangBuffIcon0Pivot/AxrangBuffIcon0DownParticles:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -951,14 +951,14 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AxrangBuffIcon2Pivot/AxrangBuffIcon2DownParticles:emitting")
+tracks/3/path = NodePath("AxrangBuffIcon0Pivot/AxrangBuffIcon0:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"times": PackedFloat32Array(0, 0.1503),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_gfqpj"]
@@ -1013,13 +1013,13 @@ tracks/3/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_mr83e"]
-resource_name = "remove_axrang_buff0"
+[sub_resource type="Animation" id="Animation_la4su"]
+resource_name = "remove_axrang_buff2"
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AxrangBuffIcon0Pivot/AxrangBuffIcon0:visible")
+tracks/0/path = NodePath("AxrangBuffIcon2Pivot/AxrangBuffIcon2:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1031,19 +1031,19 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AxrangBuffIcon0Pivot/AxrangBuffIcon0UpParticles:emitting")
+tracks/1/path = NodePath("AxrangBuffIcon2Pivot/AxrangBuffIcon2:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"times": PackedFloat32Array(0, 0.1503),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AxrangBuffIcon0Pivot/AxrangBuffIcon0DownParticles:emitting")
+tracks/2/path = NodePath("AxrangBuffIcon2Pivot/AxrangBuffIcon2UpParticles:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1055,14 +1055,14 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AxrangBuffIcon0Pivot/AxrangBuffIcon0:modulate")
+tracks/3/path = NodePath("AxrangBuffIcon2Pivot/AxrangBuffIcon2DownParticles:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1503),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5p47o"]
