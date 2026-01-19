@@ -56,8 +56,8 @@ func _ready():
 			await homing_attack(all_lockonables[i], false)
 			spawn_explosion()
 			i += 1
-	invincible = false # Allow rang to be deleted when it touches Cotu
-	await homing_attack(icon, true)
+		invincible = false # Allow rang to be deleted when it touches Cotu
+		await homing_attack(icon, true)
 	# PLACEHOLDER: ROSE MAY NOT ALWAYS DELETE ITSELF IMMEDIATELY UPON TOUCHING ICON AT END OF HOMING IN THE FUTURE
 	queue_free()
 
