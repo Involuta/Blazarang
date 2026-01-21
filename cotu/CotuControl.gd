@@ -86,15 +86,14 @@ var current_axrang_special := "AxArcSlash"
 @export var arc_slash_projectile_speed := 20.0
 var axrang_special_just_used := false # Used by apply_buffs_to_axrang to know whether a perfect catch is happening immediately after a special, in which case buffs should be reset. Set to true when special is used, set to false in apply_buffs_to_axrang
 var axrang_melee_hit := false # Set to false right before a special is used. Set to true by ax's hitbox if it hits something during a special
-var axrang_special_hit_buff_saving := false # Set to true when player equips Redux, which temporarily keeps axrang buffs if the ax melee hits an enemy during an ax special
+var axrang_special_hit_buff_saving := false # Set to true when player equips skill which temporarily keeps axrang buffs if the ax melee hits an enemy during an ax special (Redux)
 @export var axrang_special_buff_save_duration := 6.7
 var axrang_special_buff_save_time_remaining := 0.0
 
-var euphoria := true # Set to true when player equips Euphoria; when the ax hits an enemy, it activates a temporary buff that causes other rangs to deal significantly more damage. Buff wears off after a bit if ax doesn’t hit an enemy again
-var euphoria_active := false # Set to true when Euphoria buff is activated, set to false when the buff time runs out
-var euphoria_time_remaining := 0.0
-@export var euphoria_duration := 3.0
-@export var euphoria_damage_multiplier := .4 # +40% damage
+var axrang_hit_buffs_other_rangs_damage := true # Set to true when player equips skill where, when the ax hits an enemy, it activates a temporary buff that causes other rangs to deal significantly more damage. Buff wears off after a bit if ax doesn’t hit an enemy again (Euphoria (?))
+var axrang_hit_buffs_other_rangs_damage_time_remaining := 0.0 # Buff is considered active if time_remaining > 0, inactive otherwise
+@export var axrang_hit_buffs_other_rangs_damage_duration := 3.0
+@export var axrang_hit_buffs_other_rangs_damage_multiplier := .4 # +40% damage
 
 var shuriken_scene := preload("res://rang/shuriken.tscn")
 var shuriken_deploy_queued := false
@@ -115,11 +114,11 @@ var mark_detonation := true # Set to true if "Sacrifice" ability is unlocked, wh
 var mark_destroyed := false # Runtime: Becomes true when detonated, resets on level restart
 
 # Synergy buffs
-var mutuality := true # Set to true when player equips Mutuality, where catching one weapon while the other is moving preserves buffs
-var harmony := true # Set to true when player equips Harmony, which enhances the damage of all other rangs when a roserang is moving
-var harmony_damage_multiplier := .25 # 25% boost
-var symphony := true # Set to true when player equips Symphony, which enhances the damage of all other rangs when the ax is moving
-var symphony_damage_multiplier := .25
+var rang_mvmt_buff_preservation := true # Set to true when player equips skill where catching one weapon while the other is moving preserves buffs (Mutuality)
+var roserang_mvmt_buffs_other_rangs_damage := true # Set to true when player equips skill which enhances the damage of all other rangs when a roserang is moving (Harmony)
+var roserang_mvmt_buffs_other_rangs_damage_multiplier := .25 # 25% boost
+var axrang_mvmt_buffs_other_rangs_damage := true # Set to true when player equips skill which enhances the damage of all other rangs when the ax is moving (Symphony)
+var axrang_mvmt_buffs_other_rangs_damage_multiplier := .25
 
 enum SHURIKEN_MARKLESS_MODE {
 	NEAREST,
@@ -355,18 +354,18 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("Special") and not axrang_special_queued and all_axrang_buffs_active and axrang_instance != null:
 		start_axrang_special_timer()
 	# Why not check if axrang_special_queued and axrang_instance == null to call throw_special_axrang like rose? Because on_catch_axrang can be used instead
-	# Redux ax buff expiration
+	# axrang_special_buff_saving ax buff expiration
 	if axrang_special_buff_save_time_remaining > 0.0:
 		axrang_special_buff_save_time_remaining -= delta
 		if axrang_special_buff_save_time_remaining <= 0.0:
 			# Timer just expired → clear buffs once
 			clear_axrang_buffs()
 	
-	# Euphoria buff timing
-	if euphoria_active:
-		euphoria_time_remaining -= delta
-		if euphoria_time_remaining <= 0.0:
-			euphoria_active = false
+	# axrang_hit_buffs_other_rangs_damage buff timing
+	if axrang_hit_buffs_other_rangs_damage_time_remaining > 0:
+		axrang_hit_buffs_other_rangs_damage_time_remaining -= delta
+		#if axrang_hit_buffs_other_rangs_damage_time_remaining <= 0.0:
+			#axrang_hit_buffs_other_rangs_damage_active = false
 	
 	# TESTING SHURIKEN SPECIAL
 	if Input.is_action_just_pressed("Special"):
@@ -443,8 +442,8 @@ func _physics_process(delta):
 	# Make icon follow Cotu again if an instant rethrow didn't just occur (i.e. if roserang_instance is still null after an instant rethrow would have reassigned it)
 	if roserang_instances.is_empty():
 		icon.start_following_cotu()
-		# Only clear buffs if Mutuality is inactive OR the axrang isn't currently out and moving
-		if not (mutuality and axrang_instance != null and not axrang_instance.is_stationary()):
+		# Only clear buffs if rang_mvmt_buff_preservation is inactive OR the axrang isn't currently out and moving
+		if not (rang_mvmt_buff_preservation and axrang_instance != null and not axrang_instance.is_stationary()):
 			clear_roserang_buffs()
 	
 	# Shuriken throw
@@ -561,10 +560,10 @@ func throw_roserang_with_script(script):
 	if script == homing_script:
 		new_roserang.set_homing_targets(homing_targets_added)
 	
-	if symphony and axrang_instance != null and not axrang_instance.is_stationary():
-		new_roserang.apply_damage_multiplier(symphony_damage_multiplier)
-	if euphoria_active:
-		new_roserang.apply_damage_multiplier(euphoria_damage_multiplier)
+	if axrang_mvmt_buffs_other_rangs_damage and axrang_instance != null and not axrang_instance.is_stationary():
+		new_roserang.apply_damage_multiplier(axrang_mvmt_buffs_other_rangs_damage_multiplier)
+	if axrang_hit_buffs_other_rangs_damage_time_remaining:
+		new_roserang.apply_damage_multiplier(axrang_hit_buffs_other_rangs_damage_multiplier)
 
 func _on_roserang_exiting(roserang_node):
 	roserang_instances.erase(roserang_node)
@@ -627,8 +626,8 @@ func on_catch_axrang():
 		# Check this condition first; if perfect catch buff adding is checked first, then perfect_catch_queued is set to false, THEN this condition would check and clear the buffs
 		if not axrang_perfect_catch_queued and not is_dodging:
 			# Clear axrang buffs if axrang wasn't perfect caught or player isn't using special
-			# UNLESS Mutuality is active AND at least one roserang is flying
-			if not (mutuality and not roserang_instances.is_empty()):
+			# UNLESS rang_mvmt_buff_preservation is active AND at least one roserang is flying
+			if not (rang_mvmt_buff_preservation and not roserang_instances.is_empty()):
 				clear_axrang_buffs()
 			return
 		if axrang_perfect_catch_queued:
@@ -654,8 +653,8 @@ func throw_axrang(dir := Vector3.ZERO):
 	apply_buffs_to_axrang_instance()
 	axrang_instance.caught.connect(on_catch_axrang)
 	axrang_instance.hit_enemy.connect(on_axrang_ranged_hit)
-	if harmony and not roserang_instances.is_empty():
-		axrang_instance.apply_damage_multiplier(harmony_damage_multiplier)
+	if roserang_mvmt_buffs_other_rangs_damage and not roserang_instances.is_empty():
+		axrang_instance.apply_damage_multiplier(roserang_mvmt_buffs_other_rangs_damage_multiplier)
 	if dir != Vector3.ZERO:
 		# Axrang instance travels in Cotu's rang throw direction by default (i.e. if not set by set_direction)
 		axrang_instance.set_direction(dir)
@@ -705,25 +704,24 @@ func reset_axrang_melee_hit():
 	axrang_melee_hit = false
 
 func on_axrang_ranged_hit():
-	if euphoria:
-		activate_euphoria()
+	if axrang_hit_buffs_other_rangs_damage:
+		activate_axrang_hit_buffs_other_rangs_damage()
 
-# Activates or refreshes euphoria
-func activate_euphoria():
-	euphoria_active = true
-	euphoria_time_remaining = euphoria_duration
+# Activates or refreshes axrang_hit_buffs_other_rangs_damage
+func activate_axrang_hit_buffs_other_rangs_damage():
+	axrang_hit_buffs_other_rangs_damage_time_remaining = axrang_hit_buffs_other_rangs_damage_duration
 
 func _on_axrang_melee_hit(_body):
 	# Called every time axrang hits something (it can only detect collisions with enemies)
 	axrang_melee_hit = true
 
 func clear_or_save_axrang_buffs():
-	# If Redux isn't unlocked, or special didn't hit anything, clear buffs immediately
+	# If axrang_special_hit_buff_saving isn't unlocked, or special didn't hit anything, clear buffs immediately
 	if not axrang_special_hit_buff_saving or not axrang_melee_hit:
 		clear_axrang_buffs()
 		return
 	
-	# Redux is active and special hit → preserve buffs temporarily
+	# axrang_special_hit_buff_saving is active and special hit → preserve buffs temporarily
 	axrang_special_buff_save_time_remaining = axrang_special_buff_save_duration
 
 func clear_axrang_buffs():
@@ -815,12 +813,12 @@ func throw_shuriken():
 	add_sibling(s)
 	shurikens.append(s)
 	s.destroyed.connect(_on_shuriken_destroyed)
-	if harmony and not roserang_instances.is_empty():
-		s.apply_damage_multiplier(harmony_damage_multiplier)
-	if symphony and axrang_instance != null and !axrang_instance.is_stationary():
-		s.apply_damage_multiplier(symphony_damage_multiplier)
-	if euphoria_active:
-		s.apply_damage_multiplier(euphoria_damage_multiplier)
+	if roserang_mvmt_buffs_other_rangs_damage and not roserang_instances.is_empty():
+		s.apply_damage_multiplier(roserang_mvmt_buffs_other_rangs_damage_multiplier)
+	if axrang_mvmt_buffs_other_rangs_damage and axrang_instance != null and !axrang_instance.is_stationary():
+		s.apply_damage_multiplier(axrang_mvmt_buffs_other_rangs_damage_multiplier)
+	if axrang_hit_buffs_other_rangs_damage_time_remaining > 0: # Buff is active when time remaining > 0
+		s.apply_damage_multiplier(axrang_hit_buffs_other_rangs_damage_multiplier)
 
 func deploy_shurikens():
 	if len(shurikens) == 0:
