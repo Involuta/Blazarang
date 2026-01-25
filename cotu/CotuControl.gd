@@ -119,6 +119,10 @@ var roserang_mvmt_buffs_other_rangs_damage := true # Set to true when player equ
 var roserang_mvmt_buffs_other_rangs_damage_multiplier := .25 # 25% boost
 var axrang_mvmt_buffs_other_rangs_damage := true # Set to true when player equips skill which enhances the damage of all other rangs when the ax is moving (Symphony)
 var axrang_mvmt_buffs_other_rangs_damage_multiplier := .25
+var roserang_mvmt_buffs_axrang_damage_on_perfect_catch := true # Set to true when player equips skill where perfect catching the axrang while at least 1 rose is moving buffs the axrang's damage (Mania)
+var roserang_mvmt_buffs_axrang_damage_on_perfect_catch_damage_multiplier := .4
+var roserang_mvmt_buffs_axrang_damage_on_perfect_catch_time_remaining := 0.0 # Buff is considered active if time_remaining > 0, inactive otherwise
+@export var roserang_mvmt_buffs_axrang_damage_on_perfect_catch_duration := 8.0
 
 enum SHURIKEN_MARKLESS_MODE {
 	NEAREST,
@@ -364,8 +368,10 @@ func _physics_process(delta):
 	# axrang_hit_buffs_other_rangs_damage buff timing
 	if axrang_hit_buffs_other_rangs_damage_time_remaining > 0:
 		axrang_hit_buffs_other_rangs_damage_time_remaining -= delta
-		#if axrang_hit_buffs_other_rangs_damage_time_remaining <= 0.0:
-			#axrang_hit_buffs_other_rangs_damage_active = false
+	
+	# roserang_mvmt_buffs_axrang_damage_on_perfect_catch buff timing
+	if roserang_mvmt_buffs_axrang_damage_on_perfect_catch_time_remaining > 0:
+		roserang_mvmt_buffs_axrang_damage_on_perfect_catch_time_remaining -= delta
 	
 	# TESTING SHURIKEN SPECIAL
 	if Input.is_action_just_pressed("Special"):
@@ -564,7 +570,7 @@ func throw_roserang_with_script(script):
 	
 	if axrang_mvmt_buffs_other_rangs_damage and axrang_instance != null and not axrang_instance.is_stationary():
 		new_roserang.apply_damage_multiplier(axrang_mvmt_buffs_other_rangs_damage_multiplier)
-	if axrang_hit_buffs_other_rangs_damage_time_remaining:
+	if axrang_hit_buffs_other_rangs_damage_time_remaining > 0:
 		new_roserang.apply_damage_multiplier(axrang_hit_buffs_other_rangs_damage_multiplier)
 
 func _on_roserang_exiting(roserang_node):
@@ -624,30 +630,32 @@ func on_catch_axrang():
 	if axrang_special_queued:
 		axrang_special_queued = false
 		throw_special_axrang()
-	else:
-		# Check this condition first; if perfect catch buff adding is checked first, then perfect_catch_queued is set to false, THEN this condition would check and clear the buffs
-		if not axrang_perfect_catch_queued and not is_dodging:
-			# Clear axrang buffs if axrang wasn't perfect caught or player isn't using special
-			# UNLESS rang_mvmt_buff_preservation is active AND at least one roserang is flying
-			if not (rang_mvmt_buff_preservation and not roserang_instances.is_empty()):
-				clear_axrang_buffs()
+		return
+	# Check this condition first; if perfect catch buff adding is checked first, then perfect_catch_queued is set to false, THEN this condition would check and clear the buffs
+	if not axrang_perfect_catch_queued and not is_dodging:
+		# Clear axrang buffs if axrang wasn't perfect caught or player isn't using special
+		# UNLESS rang_mvmt_buff_preservation is active AND at least one roserang is flying
+		if not (rang_mvmt_buff_preservation and not roserang_instances.is_empty()):
+			clear_axrang_buffs()
+		return
+	if axrang_perfect_catch_queued:
+		# Perfect catch
+		axrang_perfect_catch_queued = false
+		axrang_perfect_caught = true
+		# If you caught the axrang after it came back from using a special (in which it was thrown, of course), clear the buffs. Why not just check axrang_special_just_used in the outer if statement since the else block also clears buffs? We need axrang perfect caught to be true if it was perfectly caught, since perfect catching ax has some benefits, e.g. instant ax throw anim
+		if axrang_special_just_used:
+			axrang_special_just_used = false
+			clear_axrang_buffs()
 			return
-		if axrang_perfect_catch_queued:
-			# Perfect catch
-			axrang_perfect_catch_queued = false
-			axrang_perfect_caught = true
-			# If you caught the axrang after it came back from using a special (in which it was thrown, of course), clear the buffs. Why not just check axrang_special_just_used in the outer if statement since the else block also clears buffs? We need axrang perfect caught to be true if it was perfectly caught, since perfect catching ax has some benefits, e.g. instant ax throw anim
-			if axrang_special_just_used:
-				axrang_special_just_used = false
-				clear_axrang_buffs()
-				return
-			add_axrang_buff()
-			# Apply buffs visually in the UI, but not the ax itself because the ax instance doesn't exist yet (catching the axrang sets axrang_instance to null)
-			for i in range(next_axrang_buff_index):
-				ui.apply_axrang_buff(i)
-		# If you're dodging, you queue an axrang dodge rethrow. Since dodging is important for survival, it gets the highest priority action
-		if is_dodging:
-			axrang_dodge_rethrow_queued = true
+		add_axrang_buff()
+		# Apply buffs visually in the UI, but not the ax itself because the ax instance doesn't exist yet (catching the axrang sets axrang_instance to null)
+		for i in range(next_axrang_buff_index):
+			ui.apply_axrang_buff(i)
+		if roserang_mvmt_buffs_axrang_damage_on_perfect_catch and not roserang_instances.is_empty():
+			roserang_mvmt_buffs_axrang_damage_on_perfect_catch_time_remaining = roserang_mvmt_buffs_axrang_damage_on_perfect_catch_duration
+	# If you're dodging, you queue an axrang dodge rethrow. Since dodging is important for survival, it gets the highest priority action
+	if is_dodging:
+		axrang_dodge_rethrow_queued = true
 
 func throw_axrang_with_self_damage():
 	hurtbox.self_hit(throw_axrang_self_damage)
@@ -662,6 +670,8 @@ func throw_axrang(dir := Vector3.ZERO):
 	axrang_instance.hit_enemy.connect(on_axrang_ranged_hit)
 	if roserang_mvmt_buffs_other_rangs_damage and not roserang_instances.is_empty():
 		axrang_instance.apply_damage_multiplier(roserang_mvmt_buffs_other_rangs_damage_multiplier)
+	if roserang_mvmt_buffs_axrang_damage_on_perfect_catch_time_remaining > 0:
+		axrang_instance.apply_damage_multiplier(roserang_mvmt_buffs_axrang_damage_on_perfect_catch_damage_multiplier)
 	if dir != Vector3.ZERO:
 		# Axrang instance travels in Cotu's rang throw direction by default (i.e. if not set by set_direction)
 		axrang_instance.set_direction(dir)

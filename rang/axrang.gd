@@ -133,6 +133,7 @@ func buff_damage():
 func apply_damage_multiplier(mult: float):
 	# Multipliers accumulate multiplicatively
 	damage_multiplier *= 1 + mult
+	update_hitbox_damage()
 
 func buff_speed():
 	speed_buff_level = clampi(speed_buff_level + 1, 0, 3)
