@@ -50,7 +50,7 @@ enum ROSERANG_BUFFS {
 }
 
 # All roserang instances look at and use this
-var roserang_buff_list := [Globals.ROSERANG_BUFFS.HOMING, Globals.ROSERANG_BUFFS.DUPLICATE, Globals.ROSERANG_BUFFS.DAMAGE]
+var roserang_buff_list := [Globals.ROSERANG_BUFFS.DAMAGE, Globals.ROSERANG_BUFFS.DUPLICATE, Globals.ROSERANG_BUFFS.DAMAGE]
 
 enum AXRANG_BUFFS {
 	DAMAGE,

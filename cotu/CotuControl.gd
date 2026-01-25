@@ -404,11 +404,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ThrowRoserang"):
 		if roserang_instances.is_empty() and can_throw_roserang:
 			# Normal throw
-			roserang_special_just_used = false
-			if not destabilized:
-				hurtbox.self_hit(throw_roserang_self_damage)
-			Globals.cotu_normal_throw_rose.emit()
-			throw_roserang_with_script(rose_script)
+			anim_tree.set(anim_tree_param_path_base + "NormalThrowRoserang", true)
 		elif not roserang_throw_queued:
 			start_roserang_instant_rethrow_timer()
 	if roserang_throw_queued and roserang_instances.is_empty() and can_throw_roserang:
@@ -542,6 +538,13 @@ func step_dodge():
 	await get_tree().create_timer(step_dodge_cooldown_secs).timeout
 	can_dodge = true
 	set_can_throw_weapons(true)
+
+func roserang_normal_throw():
+	roserang_special_just_used = false
+	if not destabilized:
+		hurtbox.self_hit(throw_roserang_self_damage)
+	Globals.cotu_normal_throw_rose.emit()
+	throw_roserang_with_script(rose_script)
 
 func throw_roserang_with_script(script):
 	roserang_special_queued = false
@@ -731,6 +734,7 @@ func clear_axrang_buffs():
 		ui.clear_axrang_buffs()
 
 func end_attack():
+	anim_tree.set(anim_tree_param_path_base + "NormalThrowRoserang", false)
 	anim_tree.set(anim_tree_param_path_base + "AxOverhead", false)
 	anim_tree.set(anim_tree_param_path_base + "AxArcSlash", false)
 
