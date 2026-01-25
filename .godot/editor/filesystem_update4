@@ -37,3 +37,6 @@ res://rang/axrang.tscn
 res://ui/ui_root.tscn
 res://cotu/cotu_anims/normal_throw_axrang.res
 res://globals.gd
+res://glb_inherited_scenes/cotu_anims_24.tscn
+res://cotu/cotu_anims/perfect_throw_axrang.res
+res://rang/roserang.tscn

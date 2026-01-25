@@ -380,11 +380,10 @@ func _physics_process(delta):
 	# Axrang throw
 	if Input.is_action_just_pressed("ThrowAxrang"):
 		if axrang_instance == null and can_throw_axrang:
-			# Throw
 			if not destabilized and not axrang_perfect_caught:
-				hurtbox.self_hit(throw_axrang_self_damage)
-			Globals.cotu_throw_ax.emit()
-			throw_axrang()
+				anim_tree.set(anim_tree_param_path_base + "NormalThrowAxrang", true)
+			else:
+				anim_tree.set(anim_tree_param_path_base + "PerfectThrowAxrang", true)
 		elif axrang_instance != null and not axrang_instance.is_returning():
 			axrang_instance.advance_state()
 		elif axrang_instance != null and axrang_instance.is_returning():
@@ -650,7 +649,12 @@ func on_catch_axrang():
 		if is_dodging:
 			axrang_dodge_rethrow_queued = true
 
+func throw_axrang_with_self_damage():
+	hurtbox.self_hit(throw_axrang_self_damage)
+	throw_axrang()
+
 func throw_axrang(dir := Vector3.ZERO):
+	Globals.cotu_throw_ax.emit()
 	axrang_instance = axrang.instantiate()
 	add_sibling(axrang_instance)
 	apply_buffs_to_axrang_instance()
@@ -735,6 +739,8 @@ func clear_axrang_buffs():
 
 func end_attack():
 	anim_tree.set(anim_tree_param_path_base + "NormalThrowRoserang", false)
+	anim_tree.set(anim_tree_param_path_base + "NormalThrowAxrang", false)
+	anim_tree.set(anim_tree_param_path_base + "PerfectThrowAxrang", false)
 	anim_tree.set(anim_tree_param_path_base + "AxOverhead", false)
 	anim_tree.set(anim_tree_param_path_base + "AxArcSlash", false)
 
