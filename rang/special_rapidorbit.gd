@@ -16,10 +16,13 @@ var duration_secs := 1.5
 
 var invincible := true
 
+@export var rotate_speed := 3.6
+
 @onready var root := $/root/ViewControl
 var cotu : Node3D
 var icon : Node3D
 
+@onready var mesh := $RoserangMesh
 @onready var hitbox = $PlayerHitbox
 
 func _init():
@@ -44,6 +47,7 @@ func rapidorbit(delta):
 	global_position = icon.global_position + radius * Vector3(angle_vec.x, 0, angle_vec.y)
 
 func _physics_process(delta):
+	mesh.rotate_y(rotate_speed)
 	rapidorbit(delta)
 
 func buff_damage():
