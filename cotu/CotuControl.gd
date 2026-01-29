@@ -45,7 +45,7 @@ var active_debuffs = {
 var rang_catch_input_buffer_secs := .2 # max possible time btwn player inputting throw and rang hitting Cotu that still causes an instant rethrow or catch. Also max possible time btwn player inputting special and the rang hitting Cotu that still causes a special
 
 var can_throw_roserang := true
-var roserang_throw_queued := false
+var roserang_instant_rethrow_queued := false
 enum ROSERANG_THROW_TYPES {
 	ROSE,
 	HOMING,
@@ -56,6 +56,10 @@ var homing_targets_added := 0 # Increments for every homing buff applied
 # Buff list is in Globals
 var next_roserang_buff_index := 0
 var throw_roserang_self_damage := 18.0
+@export var roserang_power_throw_min_charge_time := 0.25
+@export var roserang_power_throw_max_charge_time := 0.75
+var roserang_power_throw_charge_time := 0.0
+var roserang_charging_power_throw := false
 
 var can_throw_axrang := true
 var axrang_dodge_rethrow_queued := false
@@ -405,42 +409,51 @@ func _physics_process(delta):
 		# Reset the timer when the ax is caught or if there are no buffs
 		axrang_buff_decay_timer = 0.0
 	
-	# Roserang throw
-	if Input.is_action_just_pressed("ThrowRoserang"):
-		if roserang_instances.is_empty() and can_throw_roserang:
-			# Normal throw
-			anim_tree.set(anim_tree_param_path_base + "NormalThrowRoserang", true)
-		elif not roserang_throw_queued:
-			start_roserang_instant_rethrow_timer()
-	if roserang_throw_queued and roserang_instances.is_empty() and can_throw_roserang:
-		# Instant rethrow
-		roserang_throw_queued = false
-		
-		# If you're instant rethrowing after a roserang special was just used, clear roserang buffs
-		if roserang_special_just_used:
-			roserang_special_just_used = false
-			clear_roserang_buffs()
-		
-		Globals.cotu_instant_rethrow_rose.emit()
-		anim_tree.set(anim_tree_param_path_base + "just_instant_rethrew", true)
-		
-		# Set throw type
-		homing_targets_added = Globals.roserang_buff_list.slice(0, next_roserang_buff_index).count(Globals.ROSERANG_BUFFS.HOMING)
-		if homing_targets_added > 0:
-			roserang_throw_type = ROSERANG_THROW_TYPES.HOMING
-		else:
-			roserang_throw_type = ROSERANG_THROW_TYPES.ROSE
-		
-		match(roserang_throw_type):
-			ROSERANG_THROW_TYPES.ROSE:
-				throw_roserang_with_script(rose_script)
-			ROSERANG_THROW_TYPES.HOMING:
-				throw_roserang_with_script(homing_script)
-		
-		Globals.award_score(Globals.INSTANT_RETHROW_SCORE)
-	else:
-		anim_tree.set(anim_tree_param_path_base + "just_instant_rethrew", false)
-	# Make icon follow Cotu again if an instant rethrow didn't just occur (i.e. if roserang_instance is still null after an instant rethrow would have reassigned it)
+	if roserang_instances.is_empty():
+		if roserang_instant_rethrow_queued and can_throw_roserang:
+			# Instant rethrow
+			roserang_instant_rethrow_queued = false
+			
+			# If you're instant rethrowing after a roserang special was just used, clear roserang buffs
+			if roserang_special_just_used:
+				roserang_special_just_used = false
+				clear_roserang_buffs()
+			
+			Globals.cotu_instant_rethrow_rose.emit()
+			anim_tree.set(anim_tree_param_path_base + "InstantRethrowRoserang", true)
+			
+			# Set throw type
+			homing_targets_added = Globals.roserang_buff_list.slice(0, next_roserang_buff_index).count(Globals.ROSERANG_BUFFS.HOMING)
+			if homing_targets_added > 0:
+				roserang_throw_type = ROSERANG_THROW_TYPES.HOMING
+			else:
+				roserang_throw_type = ROSERANG_THROW_TYPES.ROSE
+			
+			match(roserang_throw_type):
+				ROSERANG_THROW_TYPES.ROSE:
+					throw_roserang_with_script(rose_script)
+				ROSERANG_THROW_TYPES.HOMING:
+					throw_roserang_with_script(homing_script)
+			Globals.award_score(Globals.INSTANT_RETHROW_SCORE)
+		elif Input.is_action_pressed("ThrowRoserang"):
+			# Power throw charge
+			roserang_power_throw_charge_time += delta
+		# Normal and power throw are triggered on button release
+		elif Input.is_action_just_released("ThrowRoserang") and can_throw_roserang:
+			if roserang_power_throw_charge_time >= roserang_power_throw_min_charge_time:
+				# Roserang power throw
+				roserang_power_throw_charge_time = 0.0
+				throw_power_roserang()
+				return
+			else:
+				# Roserang normal throw
+				roserang_power_throw_charge_time = 0.0
+				anim_tree.set(anim_tree_param_path_base + "NormalThrowRoserang", true)
+	# Instant rethrow is triggered on button press
+	elif Input.is_action_just_pressed("ThrowRoserang") and not roserang_instant_rethrow_queued:
+		start_roserang_instant_rethrow_timer()
+	
+	# Make icon follow Cotu again if an instant rethrow didn't just occur (i.e. if roserang_instances is still empty after an instant rethrow would have reassigned it)
 	if roserang_instances.is_empty():
 		icon.start_following_cotu()
 		# Only clear buffs if rang_mvmt_buff_preservation is inactive OR the axrang isn't currently out and moving
@@ -551,6 +564,29 @@ func roserang_normal_throw():
 	Globals.cotu_normal_throw_rose.emit()
 	throw_roserang_with_script(rose_script)
 
+func throw_power_roserang():
+	# Do NOT clear buffs
+	roserang_special_just_used = false
+	roserang_instant_rethrow_queued = false
+	
+	if not destabilized:
+		hurtbox.self_hit(throw_roserang_self_damage)
+
+	Globals.cotu_normal_throw_rose.emit()
+
+	var new_roserang = roserang.instantiate()
+	add_sibling(new_roserang)
+
+	# Always straight-line script (no buffs, no arc)
+	#new_roserang.set_script(rose_script)
+
+	roserang_instances.append(new_roserang)
+	new_roserang.tree_exiting.connect(_on_roserang_exiting.bind(new_roserang))
+
+	# Force straight trajectory
+	var dir = get_camera_fwd_dir().normalized()
+	new_roserang.velocity = dir * 40
+
 func throw_roserang_with_script(script):
 	roserang_special_queued = false
 	
@@ -578,9 +614,9 @@ func _on_roserang_exiting(roserang_node):
 	# Logic for clearing buffs/resetting icon happens in _physics_process based on is_empty()
 
 func start_roserang_instant_rethrow_timer():
-	roserang_throw_queued = true
+	roserang_instant_rethrow_queued = true
 	await get_tree().create_timer(rang_catch_input_buffer_secs).timeout
-	roserang_throw_queued = false
+	roserang_instant_rethrow_queued = false
 
 func add_roserang_buff(): # Called by icon when roserang hits it
 	if next_roserang_buff_index < Globals.roserang_buff_list.size():
@@ -749,6 +785,7 @@ func clear_axrang_buffs():
 
 func end_attack():
 	anim_tree.set(anim_tree_param_path_base + "NormalThrowRoserang", false)
+	anim_tree.set(anim_tree_param_path_base + "InstantRethrowRoserang", false)
 	anim_tree.set(anim_tree_param_path_base + "NormalThrowAxrang", false)
 	anim_tree.set(anim_tree_param_path_base + "PerfectThrowAxrang", false)
 	anim_tree.set(anim_tree_param_path_base + "AxOverhead", false)
