@@ -1,46 +1,50 @@
 extends CharacterBody3D
-class_name Roserang
+class_name RoserangPower
 
 # Song BPMs:
 # Champion of the Universe - 113
 # It's Just You - 120
 # BIZARROBOT - 120, 90
-const SPECIAL_DIST := 13 # max dist from Cotu where doing special input will perform a special move
+const SPECIAL_DIST := 13 
 
 var BPM := 120.0
 var rose_eqn_max_radius := 30
 var rose_eqn_petals := 5
 
 var rose_eqn_angle_speed := PI / (rose_eqn_petals * 120 / BPM)
-var rose_eqn_current_angle := 0.0 # angle to calculate radius
-var rose_eqn_current_radius := 0.0 # dist from rose center at angle
+var rose_eqn_current_angle := 0.0 
+var rose_eqn_current_radius := 0.0 
 
-var invincible := true # This var prevents the rang from being destroyed right after Cotu throws it (and also stops the Icon from buffing the rang as soon as the rang is thrown)
+var invincible := true 
 var invincibility_secs := .5
 var rose_eqn_initial_throw_angle := 0.0
-var rose_eqn_initial_throw_angle_offset := rose_eqn_petals*PI-.05 # rang is thrown
-var rose_switch_angle_offset_right := rose_eqn_petals*PI+2*PI/3 # curve to left
-var rose_switch_angle_offset_left := rose_eqn_petals*PI-PI/2 # rang switched from ricochet or return to rose
-# vel.angle(): right = 0, fwd = -pi/2, left = ±pi, back = pi/2
-# look_angle: right = -pi/2, fwd = 0, left = pi/2, back = ±pi
-# (-pi, pi/2) (-pi/2, 0) (0, -pi/2) (pi/2, -pi) (pi, -3pi/2)
+var rose_eqn_initial_throw_angle_offset := rose_eqn_petals*PI-.05 
+var rose_switch_angle_offset_right := rose_eqn_petals*PI+2*PI/3 
+var rose_switch_angle_offset_left := rose_eqn_petals*PI-PI/2 
 
-var can_ricochet := true # Set to false immediately after a ricochet to prevent rang from getting stuck in terrain by rapidly ricocheting inside of it
-var base_time_until_can_ricochet := 0.02 # After a ricochet, wait this amount of time (~1 physics frame) before you can ricochet again
-var remaining_time_until_can_ricochet := 0.0 # If there's still time before the ricochet time hits 0, decrease it by delta
+var can_ricochet := true 
+var base_time_until_can_ricochet := 0.02 
+var remaining_time_until_can_ricochet := 0.0 
+
+# New Travel State Variables
+var travel_speed := 60.0
+var travel_max_dist := 25.0
+var travel_start_pos := Vector3.ZERO
+var travel_returning := false
 
 enum {
+	TRAVEL, # Added Travel State
 	ROSE,
 	RICOCHET,
 	RETURN
 }
-var mvmt_state = ROSE
-var current_loop_angle := 0.0 # shows how far into the current loop the rang is (i.e. how far it would be if it were still in rose mode) to know whether to start returning during ricochet
+var mvmt_state = TRAVEL # Starts in TRAVEL
+var current_loop_angle := 0.0 
 const RETURN_ACC := 1.2
 const MAX_RETURN_SPEED := 55
 
 # PMD = pre-multiplier damage
-var damage_multiplier := 1.0 # Each hitbox's damage is pre multiplier damage * damage_multiplier
+var damage_multiplier := 1.0 
 var hitbox_pmd := 0.0
 
 var ricochet_particles := preload("res://rang/rang_particles_ricochet.tscn")
@@ -59,9 +63,14 @@ var icon : Node3D
 @export var rose_color := Color(1,0,.8)
 @export var ricochet_color := Color(0,.8,0)
 @export var return_color := Color(0,0,1)
+@export var travel_color := Color(1, 1, 0) # Gold/Yellow for travel
 
 @onready var flying_sfx := $FlyingAudioStream
 @onready var ricochet_sfx := $RicochetAudioStream
+
+func _init():
+	# When this script is assigned to roserang, _init() is called, but not _ready() bc the roserang is already in the scene tree, and _ready() is only called when a node enters the scene tree for the first time. To get the @onready values, you must call _ready() manually
+	_ready()
 
 func _ready():
 	level = root.find_child("Level")
@@ -73,19 +82,22 @@ func _ready():
 	
 	flying_sfx.play()
 	icon.roserang_queued = false
-	set_collision_mask_value(Globals.ARENA_COL_LAYER, true)
-	set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, true)
-	rose_eqn_initial_throw_angle = rose_eqn_petals*cotu.get_rang_throw_y_angle() + rose_eqn_initial_throw_angle_offset
-	set_direction()
+	
+	# Initial travel setup
 	global_position = icon.global_position
-	change_color(rose_color)
+	travel_start_pos = global_position
+	
+	# Calculate travel velocity based on throw angle
+	var throw_angle = cotu.get_rang_throw_y_angle()
+	velocity = Vector3(sin(throw_angle), 0, cos(throw_angle)).normalized() * -travel_speed
+	
+	change_color(travel_color)
 
 func set_direction():
 	if cotu.moving_right:
 		rose_eqn_angle_speed = -1*(PI / (rose_eqn_petals * 120 / BPM))
 		rose_eqn_current_angle = (-2*PI - rose_eqn_initial_throw_angle) / rose_eqn_petals
 	else:
-		# initial angle = (2PI - initial_throw_angle) / petals
 		rose_eqn_angle_speed = PI / (rose_eqn_petals * 120 / BPM)
 		rose_eqn_current_angle = (2*PI - rose_eqn_initial_throw_angle) / rose_eqn_petals
 
@@ -95,58 +107,73 @@ func rose(delta):
 	var angle_vec := Vector2.from_angle(rose_eqn_current_angle)
 	return icon.global_position + rose_eqn_current_radius * Vector3(angle_vec.x, 0, angle_vec.y)
 
-func change_color(color: Color):
-	trail.color_ramp.gradient.colors[1] = color
-	base_particle_gradient.set_color(1, color)
-	rang_glow_shader.set_shader_parameter("ColorParameter", color)
-
 func _physics_process(delta):
 	mesh.rotate_y(rotate_speed)
 	current_loop_angle += abs(rose_eqn_angle_speed) * delta
-	invincible = current_loop_angle < PI/(5*rose_eqn_petals)
+	
 	if not can_ricochet:
 		remaining_time_until_can_ricochet -= delta
 		if remaining_time_until_can_ricochet <= 0:
 			can_ricochet = true
+
 	match(mvmt_state):
+		TRAVEL:
+			if not travel_returning:
+				# Move out
+				var collision = move_and_collide(velocity * delta)
+				if collision or global_position.distance_to(travel_start_pos) >= travel_max_dist:
+					travel_returning = true
+					change_color(return_color)
+			else:
+				# Return to Icon
+				var dir = global_position.direction_to(icon.global_position)
+				velocity = dir * travel_speed
+				move_and_collide(velocity * delta)
+				
+				# If we hit the icon, switch to ROSE mode permanently
+				if global_position.distance_to(icon.global_position) < 1.0:
+					# Initialize Rose variables for the first time
+					rose_eqn_initial_throw_angle = rose_eqn_petals * cotu.get_rang_throw_y_angle() + rose_eqn_initial_throw_angle_offset
+					set_direction()
+					invincible = false
+					mvmt_state = ROSE
+					current_loop_angle = 0
+					change_color(rose_color)
+			
+			if velocity.length() > 0:
+				look_at(global_position + velocity)
+
 		ROSE:
 			var new_pos = rose(delta)
-			# vel_vec is in meters per frame, which is what move_and_collide wants
-			# CharacterBody3D's velocity is in meters per second
 			var vel_vec = new_pos - global_position
 			look_at(new_pos)
 			var hit_arena = rose_handle_collision(move_and_collide(vel_vec, true), vel_vec, delta)
 			if hit_arena:
 				set_collision_mask_value(Globals.ARENA_COL_LAYER, true)
-				set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, true)
 				mvmt_state = RICOCHET
 				return
 			global_position = new_pos
+			
 			var reached_return := current_loop_angle < PI/(2*rose_eqn_petals)
-			set_collision_mask_value(Globals.ARENA_COL_LAYER, reached_return)
-			set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, reached_return)
 			if reached_return:
 				change_color(rose_color)
 			else:
 				change_color(return_color)
+
 		RICOCHET:
 			if icon.roserang_queued:
 				switch_to_rose()
 			look_at(global_position + velocity)
 			ricochet_handle_collision(move_and_collide(velocity * delta))
 			if current_loop_angle >= PI/(2*rose_eqn_petals):
-				set_collision_mask_value(Globals.ARENA_COL_LAYER, false)
-				set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, false)
-				change_color(return_color)
 				mvmt_state = RETURN
+
 		RETURN:
 			if icon.roserang_queued:
 				switch_to_rose()
 				return
-			if velocity.length() < MAX_RETURN_SPEED:
-				velocity = (velocity.length() + RETURN_ACC) * global_position.direction_to(icon.global_position)
-			else:
-				velocity = MAX_RETURN_SPEED * global_position.direction_to(icon.global_position)
+			var target_vel = global_position.direction_to(icon.global_position)
+			velocity = velocity.move_toward(target_vel * MAX_RETURN_SPEED, RETURN_ACC)
 			look_at(global_position + velocity)
 			move_and_slide()
 
@@ -224,3 +251,8 @@ func get_mvmt_state():
 			return "RICOCHET"
 		RETURN:
 			return "RETURN"
+
+func change_color(color: Color):
+	trail.color_ramp.gradient.colors[1] = color
+	base_particle_gradient.set_color(1, color)
+	rang_glow_shader.set_shader_parameter("ColorParameter", color)

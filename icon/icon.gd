@@ -40,7 +40,7 @@ func stop_following_cotu():
 	following_cotu = false
 
 func _on_body_entered(body):
-	if body is Roserang and not body.invincible:
+	if (body is Roserang or body is RoserangPower) and not body.invincible:
 		if body.get_mvmt_state() != "ROSE":
 			roserang_queued = true
 		start_following_cotu()

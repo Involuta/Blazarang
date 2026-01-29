@@ -72,6 +72,7 @@ var axrang_buff_decay_timer := 0.0
 var throw_axrang_self_damage := 36.0
 
 var rose_script := preload("res://rang/roserang.gd")
+var rose_power_throw_script := preload("res://rang/roserang_power.gd")
 var homing_script := preload("res://rang/roserang_homing.gd")
 var rapidorbit_script := preload("res://rang/special_rapidorbit.gd")
 var special_homing_script := preload("res://rang/special_homing.gd")
@@ -443,8 +444,7 @@ func _physics_process(delta):
 			if roserang_power_throw_charge_time >= roserang_power_throw_min_charge_time:
 				# Roserang power throw
 				roserang_power_throw_charge_time = 0.0
-				throw_power_roserang()
-				return
+				throw_roserang_with_script(rose_power_throw_script)
 			else:
 				# Roserang normal throw
 				roserang_power_throw_charge_time = 0.0
@@ -563,29 +563,6 @@ func roserang_normal_throw():
 		hurtbox.self_hit(throw_roserang_self_damage)
 	Globals.cotu_normal_throw_rose.emit()
 	throw_roserang_with_script(rose_script)
-
-func throw_power_roserang():
-	# Do NOT clear buffs
-	roserang_special_just_used = false
-	roserang_instant_rethrow_queued = false
-	
-	if not destabilized:
-		hurtbox.self_hit(throw_roserang_self_damage)
-
-	Globals.cotu_normal_throw_rose.emit()
-
-	var new_roserang = roserang.instantiate()
-	add_sibling(new_roserang)
-
-	# Always straight-line script (no buffs, no arc)
-	#new_roserang.set_script(rose_script)
-
-	roserang_instances.append(new_roserang)
-	new_roserang.tree_exiting.connect(_on_roserang_exiting.bind(new_roserang))
-
-	# Force straight trajectory
-	var dir = get_camera_fwd_dir().normalized()
-	new_roserang.velocity = dir * 40
 
 func throw_roserang_with_script(script):
 	roserang_special_queued = false

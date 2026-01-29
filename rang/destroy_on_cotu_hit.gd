@@ -10,10 +10,9 @@ func _ready():
 func _on_body_entered(body):
 	if not rang.invincible and body == cotu:
 		# Class name is used instead of instance name bc duplicate rangs don't contain the name "Roserang"
-		if rang is Roserang and not cotu.is_dodging:
+		if (rang is Roserang or rang is RoserangPower) and not cotu.is_dodging:
 			Globals.combo_count = 0
 			rang.queue_free()
 		elif rang.name == "Axrang":
 			Globals.combo_count = 0
 			# A distance checker in the Axrang script handles deletion because unlike the Roserang, the Ax can enter Cotu's body while he's dodging, then permanently stay there because on_body_entered is never called again. The Roserang would just fly away after Cotu's dodge, preventing this issue
-			
