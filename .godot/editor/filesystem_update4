@@ -1,10 +1,10 @@
 res://cotu/cotu_cb_main.tscn
+res://enemies/enemy_hurtbox.gd
 res://GPUTrail-main/shaders/trail.gdshader
 res://GPUTrail-main/defaults/texture.tres
 res://GPUTrail-main/shaders/trail_draw_pass.gdshader
 res://GPUTrail-main/defaults/curve.tres
 res://rang/roserang_shader.tres
-res://enemies/enemy_hurtbox.gd
 res://glb_inherited_scenes/outline.gdshader
 res://glb_inherited_scenes/black_outline.gdshader
 res://shaders/smoke.gdshader
@@ -24,6 +24,5 @@ res://glb_inherited_scenes/cotu_outline.gdshader
 res://general_scripts/skygradient.gdshader
 res://glb_inherited_scenes/mite_hills_ground.gdshader
 res://rang/roserang.tscn
+res://rang/roserang.gd
 res://rang/roserang_power.gd
-res://rang/destroy_on_cotu_hit.gd
-res://icon/icon.gd
