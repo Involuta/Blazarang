@@ -41,7 +41,6 @@ const TRAVEL_SPEED := 67.0
 const MAX_TRAVEL_DIST := 40.0
 var travel_start_pos: Vector3
 var travel_direction: Vector3
-var has_started_rose_cycle := false # Flags if we have finished the initial Travel->Return sequence
 
 var current_loop_angle := 0.0 
 const RETURN_ACC := 1.2
@@ -149,10 +148,8 @@ func _physics_process(delta):
 			if global_position.distance_to(travel_start_pos) >= MAX_TRAVEL_DIST:
 				set_collision_mask_value(Globals.ARENA_COL_LAYER, false)
 				set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, false)
-				mvmt_state = RETURN
-				# Ensure the angle is past the return threshold so it's "ready" to hit Icon
-				current_loop_angle = PI / rose_eqn_petals 
 				change_color(return_color)
+				mvmt_state = RETURN
 
 		ROSE:
 			var new_pos = rose(delta)
@@ -185,11 +182,7 @@ func _physics_process(delta):
 				mvmt_state = RETURN
 
 		RETURN:
-			var dist_to_icon = global_position.distance_to(icon.global_position)
-			
-			# INCREASED DETECTION RADIUS: Ensures it doesn't fly past the Icon 
-			# if moving at MAX_RETURN_SPEED
-			if icon.roserang_queued or (not has_started_rose_cycle and dist_to_icon < 3.0):
+			if icon.roserang_queued:
 				switch_to_rose()
 				return
 			
@@ -216,7 +209,6 @@ func buff_homing_targets(_targets_added: int):
 	pass
 
 func switch_to_rose():
-	has_started_rose_cycle = true # Mark that we have entered the main loop
 	icon.roserang_queued = false
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, true)
 	set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, true)
