@@ -288,7 +288,7 @@ transitions = ["GroundBlendSpace", "AerialEvadeFast", SubResource("AnimationNode
 graph_offset = Vector2(-36.9995, 95.0171)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wg7n8"]
-graph_offset = Vector2(-60.48, 441.72)
+graph_offset = Vector2(-49.92, 425.28)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_auidk")
 nodes/StateMachine/position = Vector2(70, 150)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -418,35 +418,36 @@ emitting = false
 
 [node name="Skeleton3D" parent="CotuAnims/Armature" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.988, 2.08165e-12)
-bones/0/position = Vector3(0.0104332, 1.04186, -0.0613586)
-bones/0/rotation = Quaternion(0.00818328, 0.00044477, -0.00218806, 0.999964)
+bones/0/position = Vector3(6.77109e-05, 0.83984, 0.497659)
+bones/0/rotation = Quaternion(0.242871, 0.00223686, 0.00498096, 0.970043)
 bones/1/position = Vector3(0, 0.0922872, -0.0106759)
-bones/1/rotation = Quaternion(0.00139416, 0.0105681, -0.00611713, 0.999924)
-bones/2/rotation = Quaternion(-0.00335496, -0.0156757, -0.000427413, 0.999871)
-bones/3/rotation = Quaternion(-0.00199327, 0.00116517, 0.00503772, 0.999985)
-bones/4/rotation = Quaternion(0.236329, 0.0163558, 0.000981956, 0.971535)
+bones/1/rotation = Quaternion(0.0627431, 0.0103979, -0.00504172, 0.997963)
+bones/2/rotation = Quaternion(-2.60752e-08, 2.32831e-10, -5.23869e-10, 1)
+bones/3/rotation = Quaternion(1.86355e-08, 1.17382e-10, 1.48435e-10, 1)
+bones/4/rotation = Quaternion(0.0697322, 0.000240947, 0.000844718, 0.997565)
 bones/7/position = Vector3(0.0663164, 0.115124, 0.0320527)
 bones/7/rotation = Quaternion(-0.589018, -0.462308, 0.537802, -0.387424)
-bones/8/rotation = Quaternion(0.5938, 0.127744, -0.152488, 0.779635)
-bones/9/rotation = Quaternion(-1.1821e-07, -5.54196e-07, 0.534486, 0.845177)
-bones/10/rotation = Quaternion(0.0179783, -0.00164615, -0.367858, 0.929707)
+bones/8/rotation = Quaternion(0.692067, 0.0268271, 0.217997, 0.687605)
+bones/9/rotation = Quaternion(-9.82322e-08, -5.77404e-07, 0.48419, 0.874963)
+bones/10/rotation = Quaternion(-0.207692, 0.0195785, -0.331069, 0.920258)
 bones/31/position = Vector3(-0.0617998, 0.116818, 0.0315781)
 bones/31/rotation = Quaternion(0.56203, -0.490113, 0.534719, 0.397475)
-bones/32/rotation = Quaternion(0.551763, -0.257217, 0.0493806, 0.791807)
-bones/33/rotation = Quaternion(-1.98862e-07, -5.828e-08, -0.516317, 0.856398)
-bones/34/rotation = Quaternion(-0.00718179, 0.158103, 0.158453, 0.9746)
-bones/55/rotation = Quaternion(0.0620064, -0.090958, -0.993514, 0.0284807)
+bones/32/rotation = Quaternion(0.602356, 0.357974, -0.48883, 0.51968)
+bones/33/rotation = Quaternion(-1.89283e-07, 5.21564e-08, -0.00224656, 0.999997)
+bones/34/rotation = Quaternion(-0.128, -0.00907081, 0.320898, 0.938381)
+bones/55/rotation = Quaternion(-0.0502143, -0.650216, -0.7557, 0.060131)
 bones/55/scale = Vector3(1, 0.999997, 0.999999)
-bones/56/rotation = Quaternion(-0.333709, 3.69582e-07, -5.96834e-08, 0.942676)
-bones/57/rotation = Quaternion(0.537861, 0.0693895, 0.00964917, 0.840118)
+bones/56/rotation = Quaternion(-0.616573, 3.74384e-07, 6.01018e-08, 0.787297)
+bones/57/rotation = Quaternion(0.631086, 0.079434, -0.0449423, 0.770325)
 bones/58/rotation = Quaternion(0.291365, -0.0948204, 0.02573, 0.951553)
-bones/60/rotation = Quaternion(0.0591493, 0.0579887, -0.996562, 0.00137808)
+bones/60/rotation = Quaternion(-0.195717, -0.0596368, 0.97687, 0.0621567)
 bones/60/scale = Vector3(1, 1, 0.999997)
-bones/61/rotation = Quaternion(-0.000110536, -2.73155e-06, 1.03776e-08, 1)
-bones/62/rotation = Quaternion(0.445732, -0.0722631, 0.0304012, 0.891727)
-bones/63/rotation = Quaternion(0.336754, 0.095167, -0.0232634, 0.936482)
+bones/61/rotation = Quaternion(-0.105712, -2.73106e-06, -2.67108e-07, 0.994397)
+bones/62/rotation = Quaternion(0.588019, -0.17534, 0.0857629, 0.784942)
+bones/63/rotation = Quaternion(0.513398, 0.0978698, -0.0031914, 0.852545)
 
 [node name="AxrangPivot" type="Node3D" parent="CotuAnims/Armature" index="1"]
+transform = Transform3D(1, 0, 0, 0, -0.0842517, -0.996445, 0, 0.996445, -0.0842517, 0, -0.293427, 0.796823)
 
 [node name="Axrang" parent="CotuAnims/Armature/AxrangPivot" instance=ExtResource("6_gbgyu")]
 transform = Transform3D(-8.74228e-09, 6.97577e-17, 0.200001, 6.97574e-17, 0.200001, -6.97577e-17, -0.2, 6.97577e-17, -8.74232e-09, 2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -465,6 +466,7 @@ transform = Transform3D(1, -7.49586e-24, 4.7125e-10, -1.30168e-23, 1, 2.26047e-2
 shape = SubResource("BoxShape3D_3abu6")
 
 [node name="ExplosionPivot" type="Node3D" parent="CotuAnims/Armature" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.9, 3)
 
 [node name="SlamFallingParticles" type="GPUParticles3D" parent="CotuAnims/Armature/ExplosionPivot"]
 transform = Transform3D(0.2, -6.97576e-17, 6.97576e-17, 6.97574e-17, 0.200001, -6.97576e-17, -6.97574e-17, 6.97576e-17, 0.200001, 2.08165e-12, 2.08165e-12, 2.08165e-12)

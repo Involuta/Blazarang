@@ -1832,7 +1832,7 @@ _subresources={
 "AerialEvadeFast": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": true,
-"save_to_file/path": "",
+"save_to_file/path": "res://cotu/cotu_anims/aerial_evade_fast.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -19822,7 +19822,7 @@ _subresources={
 "FrontTwistFlipFast": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": true,
-"save_to_file/path": "",
+"save_to_file/path": "res://cotu/cotu_anims/front_twist_flip_fast.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,

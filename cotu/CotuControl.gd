@@ -16,12 +16,14 @@ const WALK_DECEL_SECS := .25
 
 var anim_tree_param_path_base := "parameters/StateMachine/conditions/"
 
+# True when Cotu is doing any animation EXCEPT instant rethrow
+var busy := false
+
 var walk_input := Vector2.ZERO
 var moving_right := true # Did the player last try to walk right?
 var grounded_speed := 0.0
 @export var can_walk := true # Exported so it can be set via anim
 @export var can_rotate := true # Exported so it can be set via anim
-var can_dodge := true
 var is_dodging := false
 var dodge_self_damage := 18.0
 
@@ -44,7 +46,6 @@ var active_debuffs = {
 
 var rang_catch_input_buffer_secs := .2 # max possible time btwn player inputting throw and rang hitting Cotu that still causes an instant rethrow or catch. Also max possible time btwn player inputting special and the rang hitting Cotu that still causes a special
 
-var can_throw_roserang := true
 var roserang_instant_rethrow_queued := false
 enum ROSERANG_THROW_TYPES {
 	ROSE,
@@ -61,7 +62,6 @@ var power_throw_roserang_self_damage := 24.0
 @export var roserang_power_throw_max_charge_time := 0.75
 var roserang_power_throw_charge_time := 0.0
 
-var can_throw_axrang := true
 var axrang_dodge_rethrow_queued := false
 var axrang_perfect_catch_queued := false
 var axrang_perfect_caught := false
@@ -183,20 +183,15 @@ func _ready():
 	
 	can_walk = true
 	can_rotate = true
-	can_dodge = true
 
-	can_throw_roserang = true
-	can_throw_axrang = true
+func set_busy(state: bool):
+	busy = state
 
 func on_destabilize():
 	destabilized = true
 
 func on_stabilize():
 	destabilized = false
-
-func set_can_throw_weapons(state: bool):
-	can_throw_roserang = state
-	can_throw_axrang = state
 
 func emit_stabilize():
 	Globals.stabilize.emit()
@@ -293,7 +288,7 @@ func _physics_process(delta):
 		return
 	
 	# Dodge logic
-	if Input.is_action_just_pressed("StepDodge") and can_dodge and roserang_power_throw_charge_time <= 0:
+	if Input.is_action_just_pressed("StepDodge") and !busy and roserang_power_throw_charge_time <= 0:
 		anim_tree.set(anim_tree_param_path_base + "just_dodged", true)
 		step_dodge()
 	else:
@@ -390,7 +385,7 @@ func _physics_process(delta):
 	
 	# Axrang throw
 	if Input.is_action_just_pressed("ThrowAxrang"):
-		if axrang_instance == null and can_throw_axrang:
+		if axrang_instance == null and !busy:
 			if not destabilized and not axrang_perfect_caught:
 				anim_tree.set(anim_tree_param_path_base + "NormalThrowAxrang", true)
 			else:
@@ -411,7 +406,7 @@ func _physics_process(delta):
 		axrang_buff_decay_timer = 0.0
 	
 	if roserang_instances.is_empty():
-		if roserang_instant_rethrow_queued and can_throw_roserang:
+		if roserang_instant_rethrow_queued:
 			# Instant rethrow
 			roserang_instant_rethrow_queued = false
 			
@@ -437,15 +432,20 @@ func _physics_process(delta):
 					throw_roserang_with_script(homing_script)
 			Globals.award_score(Globals.INSTANT_RETHROW_SCORE)
 		elif Input.is_action_pressed("ThrowRoserang"):
+			# Prevent other actions while charging power throw
+			if roserang_power_throw_charge_time <= 0:
+				busy = true
 			# Power throw charge
 			roserang_power_throw_charge_time += delta
 		# Normal and power throw are triggered on button release
-		elif Input.is_action_just_released("ThrowRoserang") and can_throw_roserang:
+		elif Input.is_action_just_released("ThrowRoserang"):
 			if roserang_power_throw_charge_time >= roserang_power_throw_min_charge_time:
 				# Roserang power throw
 				roserang_power_throw_charge_time = 0.0
-				# Replace this with an anim tree line once you have the power throw anim
+				# Replace these 3 lines with an anim tree line once you have the power throw anim
+				set_busy(true)
 				roserang_power_throw()
+				set_busy(false)
 			else:
 				# Roserang normal throw
 				roserang_power_throw_charge_time = 0.0
@@ -540,8 +540,7 @@ func lock_off():
 
 func step_dodge():
 	Globals.cotu_dodge.emit()
-	can_dodge = false
-	set_can_throw_weapons(false)
+	busy = true
 	is_dodging = true
 	if not destabilized:
 		hurtbox.self_hit(dodge_self_damage)
@@ -555,8 +554,7 @@ func step_dodge():
 		throw_axrang(armature.transform.basis.z)
 	set_collision_mask_value(Globals.ENEMY_COL_LAYER, true)
 	await get_tree().create_timer(step_dodge_cooldown_secs).timeout
-	can_dodge = true
-	set_can_throw_weapons(true)
+	busy = false
 
 func roserang_normal_throw():
 	roserang_special_just_used = false
@@ -647,6 +645,10 @@ func start_roserang_special_timer():
 	roserang_special_queued = false
 
 func on_catch_axrang():
+	# If you're dodging, you queue an axrang dodge rethrow. Since dodging is important for survival, it gets the highest priority action
+	if is_dodging:
+		axrang_dodge_rethrow_queued = true
+		return
 	# If player inputted special right before catching ax, use special axrang and don't clear buffs until the special finishes. Special is checked before perfect catch since it's a more impactful action
 	if axrang_special_queued:
 		axrang_special_queued = false
@@ -674,9 +676,6 @@ func on_catch_axrang():
 			ui.apply_axrang_buff(i)
 		if roserang_mvmt_buffs_axrang_damage_on_perfect_catch and not roserang_instances.is_empty():
 			roserang_mvmt_buffs_axrang_damage_on_perfect_catch_time_remaining = roserang_mvmt_buffs_axrang_damage_on_perfect_catch_duration
-	# If you're dodging, you queue an axrang dodge rethrow. Since dodging is important for survival, it gets the highest priority action
-	if is_dodging:
-		axrang_dodge_rethrow_queued = true
 
 func throw_axrang_with_self_damage():
 	hurtbox.self_hit(throw_axrang_self_damage)

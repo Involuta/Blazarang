@@ -29,3 +29,17 @@ res://enemies/x_boss.gd
 res://rang/roserang.tscn
 res://icon/icon.tscn
 res://enemies/x_boss.tscn
+res://cotu/cotu_anims/ax_arcslash.res
+res://cotu/cotu_anims/ax_melee1.res
+res://cotu/cotu_anims/ax_melee2.res
+res://cotu/cotu_anims/ax_melee_run1.res
+res://cotu/cotu_anims/ax_melee_run2.res
+res://cotu/cotu_anims/ax_overhead.res
+res://cotu/cotu_anims/normal_throw_axrang.res
+res://cotu/cotu_anims/normal_throw_roserang.res
+res://cotu/cotu_anims/perfect_throw_axrang.res
+res://cotu/cotu_anims/quick_spin_ccw_backwards.res
+res://cotu/cotu_anims/quick_spin_cw.res
+res://cotu/cotu_anims/use_item_stabilizer.res
+res://cotu/cotu_anims/x_boss_grab.res
+res://cotu/cotu_anims/aerial_evade_fast.res
