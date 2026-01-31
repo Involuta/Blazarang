@@ -55,11 +55,11 @@ var roserang_throw_type := ROSERANG_THROW_TYPES.ROSE
 var homing_targets_added := 0 # Increments for every homing buff applied
 # Buff list is in Globals
 var next_roserang_buff_index := 0
-var throw_roserang_self_damage := 18.0
+var normal_throw_roserang_self_damage := 18.0
+var power_throw_roserang_self_damage := 24.0
 @export var roserang_power_throw_min_charge_time := 0.25
 @export var roserang_power_throw_max_charge_time := 0.75
 var roserang_power_throw_charge_time := 0.0
-var roserang_charging_power_throw := false
 
 var can_throw_axrang := true
 var axrang_dodge_rethrow_queued := false
@@ -293,7 +293,7 @@ func _physics_process(delta):
 		return
 	
 	# Dodge logic
-	if Input.is_action_just_pressed("StepDodge") and can_dodge:
+	if Input.is_action_just_pressed("StepDodge") and can_dodge and roserang_power_throw_charge_time <= 0:
 		anim_tree.set(anim_tree_param_path_base + "just_dodged", true)
 		step_dodge()
 	else:
@@ -444,7 +444,8 @@ func _physics_process(delta):
 			if roserang_power_throw_charge_time >= roserang_power_throw_min_charge_time:
 				# Roserang power throw
 				roserang_power_throw_charge_time = 0.0
-				throw_roserang_with_script(rose_power_throw_script)
+				# Replace this with an anim tree line once you have the power throw anim
+				roserang_power_throw()
 			else:
 				# Roserang normal throw
 				roserang_power_throw_charge_time = 0.0
@@ -560,9 +561,16 @@ func step_dodge():
 func roserang_normal_throw():
 	roserang_special_just_used = false
 	if not destabilized:
-		hurtbox.self_hit(throw_roserang_self_damage)
+		hurtbox.self_hit(normal_throw_roserang_self_damage)
 	Globals.cotu_normal_throw_rose.emit()
 	throw_roserang_with_script(rose_script)
+
+func roserang_power_throw():
+	roserang_special_just_used = false
+	if not destabilized:
+		hurtbox.self_hit(power_throw_roserang_self_damage)
+	Globals.cotu_power_throw_rose.emit()
+	throw_roserang_with_script(rose_power_throw_script)
 
 func throw_roserang_with_script(script):
 	roserang_special_queued = false

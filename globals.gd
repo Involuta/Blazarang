@@ -10,6 +10,7 @@ signal cam_rot_updated(new_rot: Vector3)
 signal score_updated(score_change: int)
 signal cotu_dodge
 signal cotu_normal_throw_rose
+signal cotu_power_throw_rose
 signal cotu_instant_rethrow_rose
 signal cotu_throw_ax
 signal enemy_killed(enemy_name: String)

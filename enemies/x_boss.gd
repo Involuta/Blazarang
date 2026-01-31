@@ -259,6 +259,7 @@ func _ready():
 	laser_combo_ball = level.find_child("XLaserComboBall")
 	
 	Globals.cotu_normal_throw_rose.connect(trigger_rose_dodge)
+	Globals.cotu_power_throw_rose.connect(trigger_rose_dodge)
 	Globals.cotu_instant_rethrow_rose.connect(trigger_rose_dodge)
 	Globals.cotu_throw_ax.connect(trigger_ax_dodge)
 	Globals.health_segment_lost.connect(on_health_segment_lost)
