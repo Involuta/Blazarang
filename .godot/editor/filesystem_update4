@@ -43,3 +43,9 @@ res://cotu/cotu_anims/quick_spin_cw.res
 res://cotu/cotu_anims/use_item_stabilizer.res
 res://cotu/cotu_anims/x_boss_grab.res
 res://cotu/cotu_anims/aerial_evade_fast.res
+res://enemies/training_dummy.tscn
+res://enemies/spawners/gauntlet_enemy_spawner.tscn
+res://textures/white_border_black_center.tres
+res://textures/white_border_black_solid_square.tres
+res://levels/gauntlet_level/section_nodes/gauntlet_arena1.gd
+res://levels/gauntlet_level/section_nodes/gauntlet_arena1.tscn

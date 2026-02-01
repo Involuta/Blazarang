@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://beva7c2cj0th2"]
+
+[ext_resource type="PackedScene" uid="uid://beil16obygg30" path="res://glb_imports/TrainingDummy.glb" id="1_0aqiu"]
+
+[node name="TrainingDummy" instance=ExtResource("1_0aqiu")]

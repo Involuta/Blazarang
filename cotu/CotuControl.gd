@@ -234,7 +234,7 @@ func start_grab_anim(hitbox_name):
 
 var slow = false
 func _physics_process(delta):
-	if Input.is_action_just_pressed("Special"):
+	if Input.is_action_just_pressed("PlaceMark"):
 		if slow:
 			slow = false
 			Engine.time_scale = 1

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1b86c42x2kcu"]
+
+[ext_resource type="PackedScene" uid="uid://beva7c2cj0th2" path="res://glb_inherited_scenes/training_dummy.tscn" id="1_2jy5t"]
+[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_mhxn4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dnbej"]
+size = Vector3(3, 8, 2)
+
+[node name="TrainingDummy" type="Node3D"]
+
+[node name="TrainingDummyMeshes" parent="." instance=ExtResource("1_2jy5t")]
+
+[node name="EnemyHurtbox" type="Area3D" parent="."]
+script = ExtResource("2_mhxn4")
+enemy_name = "TrainingDummy"
+hit_particle_color = Color(1, 1, 0, 1)
+opponent_hitboxes = ["PlayerHitbox"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHurtbox"]
+shape = SubResource("BoxShape3D_dnbej")

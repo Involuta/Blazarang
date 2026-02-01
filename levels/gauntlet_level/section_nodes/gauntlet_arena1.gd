@@ -34,7 +34,7 @@ func _ready():
 		pillars.append(get_node("NavigationRegion3D/Pillar"+str(i+1)))
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("Special") and not sequence_begun:
+	if Input.is_action_just_pressed("PlaceMark") and not sequence_begun:
 		begin_sequence()
 	if sequence_begun:
 		spawner_spinner.rotate_y(spin_speed * delta)

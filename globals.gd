@@ -108,6 +108,8 @@ const player_speed_data = {
 # health, hit score, kill score
 # Each key corresponds to an enemy's "entity name"
 const enemy_hurtbox_data = {
+	"TrainingDummy" : [999999999, 1.0, 1.0],
+	
 	"GauntletMeleeTier1" : [20, 1.0, 1.0],
 	"GauntletMeleeTier2" : [30, 1.0, 1.5],
 	"GauntletMeleeTier3" : [40, 1.5, 2.0],
