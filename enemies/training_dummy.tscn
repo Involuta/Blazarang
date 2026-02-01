@@ -12,10 +12,12 @@ size = Vector3(3, 8, 2)
 
 [node name="EnemyHurtbox" type="Area3D" parent="."]
 collision_layer = 8
-collision_mask = 257
+collision_mask = 265
 script = ExtResource("2_mhxn4")
 enemy_name = "TrainingDummy"
 hit_particle_color = Color(1, 1, 0, 1)
+dp_impulse_limit = null
+dp_count = null
 opponent_hitboxes = ["PlayerHitbox"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHurtbox"]

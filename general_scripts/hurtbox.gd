@@ -1,12 +1,15 @@
 class_name Hurtbox
 extends Area3D
 
+var damage_text := preload("res://vfx/damage_text.tscn")
+
 # Changing the name of a hurtbox node is fine (UNLESS IT'S A BOSS HURTBOX DISPLAYED IN UI); nothing looks at a hurtbox name (EXCEPT FOR UI ON A DISPLAYED HURTBOX)
 # You shouldn't change the name of a hitbox since that's what hurtboxes look at
 
 signal hit_received
 
 var rng := RandomNumberGenerator.new()
+@export var hit_particle_color := Color.RED
 @export var dp_impulse_limit := 5
 @export var dp_count := 5
 var health := 100.0
@@ -68,6 +71,16 @@ func receive_heal(heal_amt: int):
 func receive_hit(damage: float, _hitter):
 	hit_received.emit()
 	health -= damage
+	
+	# Spawn the damage number
+	var number = damage_text.instantiate()
+	# Add it to the level so it doesn't move with the player
+	level.add_child.call_deferred(number)
+	await number.tree_entered
+	# Start it at the hurtbox's current position
+	number.global_position = global_position 
+	number.setup(damage)
+	
 	if health <= 0:
 		die()
 

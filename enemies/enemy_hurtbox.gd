@@ -3,8 +3,6 @@ extends Hurtbox
 
 @export var enemy_name := "GauntletMeleeTier1"
 
-@export var hit_particle_color := Color.RED
-
 var hit_score := 1.0
 var kill_score := 1.0
 var hit_particles := preload("res://enemies/enemy_hit_particles.tscn")

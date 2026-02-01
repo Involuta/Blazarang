@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://xbhes1sj2shj"]
+
+[ext_resource type="Script" path="res://vfx/damage_text.gd" id="1_c30dp"]
+
+[node name="DamageText" type="Label3D"]
+billboard = 1
+no_depth_test = true
+text = "0"
+font_size = 340
+outline_size = 40
+script = ExtResource("1_c30dp")
