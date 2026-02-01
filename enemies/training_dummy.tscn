@@ -11,6 +11,8 @@ size = Vector3(3, 8, 2)
 [node name="TrainingDummyMeshes" parent="." instance=ExtResource("1_2jy5t")]
 
 [node name="EnemyHurtbox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 257
 script = ExtResource("2_mhxn4")
 enemy_name = "TrainingDummy"
 hit_particle_color = Color(1, 1, 0, 1)
