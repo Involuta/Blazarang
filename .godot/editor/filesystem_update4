@@ -27,3 +27,7 @@ res://enemies/training_dummy.tscn
 res://vfx/damage_text.tscn
 res://enemies/gauntlet_melee_tier3.tscn
 res://vfx/damage_text.gd
+res://ui/ui_root.tscn
+res://ui/ui_root.gd
+res://enemies/training_dummy.gd
+res://general_scripts/hurtbox.gd

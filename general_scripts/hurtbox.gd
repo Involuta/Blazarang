@@ -6,7 +6,7 @@ var damage_text := preload("res://vfx/damage_text.tscn")
 # Changing the name of a hurtbox node is fine (UNLESS IT'S A BOSS HURTBOX DISPLAYED IN UI); nothing looks at a hurtbox name (EXCEPT FOR UI ON A DISPLAYED HURTBOX)
 # You shouldn't change the name of a hitbox since that's what hurtboxes look at
 
-signal hit_received
+signal hit_received(damage: int)
 
 var rng := RandomNumberGenerator.new()
 @export var hit_particle_color := Color.RED
@@ -69,7 +69,7 @@ func receive_heal(heal_amt: int):
 		health = max_health
 
 func receive_hit(damage: float, _hitter):
-	hit_received.emit()
+	hit_received.emit(damage)
 	health -= damage
 	
 	# Spawn the damage number

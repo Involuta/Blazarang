@@ -9,6 +9,9 @@ extends Control
 @onready var glitch_shader = $GlitchBox.material
 @onready var time_left := $TimeLeft
 
+@onready var damage_counter := $DamageCounter
+var total_damage_dealt := 0
+
 @onready var update_score_anim := $UpdateScoreAnimation
 
 @onready var roserang_buff_icon0 := $RoserangBuffIcon0Pivot/RoserangBuffIcon0
@@ -125,6 +128,14 @@ func on_score_updated(score_change):
 	
 	Globals.combo_count += 1
 	combo_display.text = str("COMBO: ", Globals.combo_count)
+
+func reset_damage_counter():
+	total_damage_dealt = 0
+	damage_counter.text = "Total Damage Dealt: 0"
+
+func update_damage_counter(damage: int):
+	total_damage_dealt += damage
+	damage_counter.text = "Total Damage Dealt: " + str(total_damage_dealt)
 
 func clear_roserang_buffs():
 	roserang_buff_applied.fill(false)

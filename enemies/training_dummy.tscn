@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1b86c42x2kcu"]
+[gd_scene load_steps=5 format=3 uid="uid://d1b86c42x2kcu"]
 
 [ext_resource type="PackedScene" uid="uid://beva7c2cj0th2" path="res://glb_inherited_scenes/training_dummy.tscn" id="1_2jy5t"]
+[ext_resource type="Script" path="res://enemies/training_dummy.gd" id="1_3jifb"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_mhxn4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dnbej"]
 size = Vector3(3, 8, 2)
 
 [node name="TrainingDummy" type="Node3D"]
+script = ExtResource("1_3jifb")
 
 [node name="TrainingDummyMeshes" parent="." instance=ExtResource("1_2jy5t")]
 

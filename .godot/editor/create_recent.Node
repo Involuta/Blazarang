@@ -1,3 +1,4 @@
+Label
 Label3D
 CollisionShape3D
 Area3D
@@ -30,4 +31,3 @@ WorldEnvironment
 NavigationRegion3D
 PhysicalBone3D
 Skeleton3D
-TextureRect
