@@ -1,6 +1,8 @@
+Node3D
+CollisionShape3D
+CharacterBody3D
 Label
 Label3D
-CollisionShape3D
 Area3D
 EnemyHurtbox
 Node
@@ -8,9 +10,7 @@ MeshInstance3D
 Hitbox
 GPUParticles3D
 AnimationPlayer
-Node3D
 GPUTrail3D
-CharacterBody3D
 StaticBody3D
 AudioStreamPlayer3D
 AudioStreamPlayer
@@ -30,4 +30,3 @@ Node2D
 WorldEnvironment
 NavigationRegion3D
 PhysicalBone3D
-Skeleton3D

@@ -307,9 +307,9 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InvisibleWalls/BackWall"]
 shape = SubResource("BoxShape3D_ufggu")
 
-[node name="TrainingDummy" parent="." instance=ExtResource("8_44pii")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 14.5, -22)
-
 [node name="GauntletMeleeTier2" parent="." instance=ExtResource("9_c1g6m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.84674, 12.957, -21.1864)
 aggro_distance = 1
+
+[node name="TrainingDummy" parent="." instance=ExtResource("8_44pii")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 14.5, -22)

@@ -6,6 +6,7 @@ var ui: Control
 
 func _ready():
 	ui = root.find_child("UIRoot")
+	hurtbox.add_to_group("lockonables")
 	hurtbox.hit_received.connect(update_damage_counter)
 
 func update_damage_counter(damage: int):
