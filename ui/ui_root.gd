@@ -11,6 +11,9 @@ extends Control
 
 @onready var damage_counter := $DamageCounter
 var total_damage_dealt := 0
+@onready var dps_counter := $DPSCounter
+var total_damage_time := 0.0
+var tracking_dps := false # Controls whether total_damage_time increments every frame. Set to false when damage counter resets, set to true when the first hit lands afterward
 
 @onready var update_score_anim := $UpdateScoreAnimation
 
@@ -91,7 +94,7 @@ func awaken():
 func hide_black_screen():
 	$BlackScreen.modulate = Color(0,0,0,0)
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	time_left.text = str("Time left: ", Globals.time_left)
 	
 	cotu_health_bar.max_value = cotu_hurtbox.max_health
@@ -100,6 +103,9 @@ func _physics_process(_delta):
 	destab_shader.set_shader_parameter("opacity", destab_shader_opacity)
 	glitch_shader.set_shader_parameter("shake_power", glitch_shader_shake_power)
 	glitch_shader.set_shader_parameter("shake_color_rate", glitch_shader_shake_color_rate)
+	
+	if tracking_dps:
+		total_damage_time += delta
 	
 	if cotu_hurtbox.hb_owner.global_position.y < 0:
 		$BlackScreenAnimations.play("death_fall")
@@ -131,11 +137,22 @@ func on_score_updated(score_change):
 
 func reset_damage_counter():
 	total_damage_dealt = 0
+	total_damage_time = 0.0        # Reset time
+	tracking_dps = false           # Stop the clock
 	damage_counter.text = "Total Damage Dealt: 0"
+	dps_counter.text = "DPS: 0"    # Reset display
 
 func update_damage_counter(damage: int):
 	total_damage_dealt += damage
 	damage_counter.text = "Total Damage Dealt: " + str(total_damage_dealt)
+	# Start the timer when the first hit of damage is dealt
+	if not tracking_dps and damage > 0:
+		tracking_dps = true
+	# Prevent division by zero just in case
+	if total_damage_time > 0:
+		var dps = total_damage_dealt / total_damage_time
+		# Using snapped() to keep the UI clean (1 decimal place)
+		dps_counter.text = "DPS: " + str(snapped(dps, 0.1))
 
 func clear_roserang_buffs():
 	roserang_buff_applied.fill(false)

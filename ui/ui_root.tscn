@@ -1425,3 +1425,12 @@ offset_right = 265.0
 offset_bottom = 226.0
 scale = Vector2(1.5, 1.5)
 text = "Total Damage Dealt: "
+
+[node name="DPSCounter" type="Label" parent="."]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 250.0
+offset_right = 265.0
+offset_bottom = 276.0
+scale = Vector2(1.5, 1.5)
+text = "DPS: "

@@ -31,3 +31,9 @@ res://ui/ui_root.tscn
 res://ui/ui_root.gd
 res://enemies/training_dummy.gd
 res://general_scripts/hurtbox.gd
+res://cotu/CotuControl.gd
+res://rang/axrang.tscn
+res://textures/white_border_black_center.tres
+res://textures/white_border_black_solid_square.tres
+res://levels/gauntlet_level/section_nodes/gauntlet_arena1.tscn
+res://enemies/gauntlet_melee_tier2.tscn

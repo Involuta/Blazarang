@@ -4,8 +4,9 @@
 [ext_resource type="Script" path="res://enemies/training_dummy.gd" id="1_3jifb"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_mhxn4"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_dnbej"]
-size = Vector3(3, 8, 2)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sj2is"]
+radius = 0.75
+height = 2.35
 
 [node name="TrainingDummy" type="Node3D"]
 script = ExtResource("1_3jifb")
@@ -13,7 +14,7 @@ script = ExtResource("1_3jifb")
 [node name="TrainingDummyMeshes" parent="." instance=ExtResource("1_2jy5t")]
 
 [node name="EnemyHurtbox" type="Area3D" parent="."]
-collision_layer = 8
+collision_layer = 0
 collision_mask = 265
 script = ExtResource("2_mhxn4")
 enemy_name = "TrainingDummy"
@@ -23,4 +24,5 @@ dp_count = null
 opponent_hitboxes = ["PlayerHitbox"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHurtbox"]
-shape = SubResource("BoxShape3D_dnbej")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.3298, 0)
+shape = SubResource("CapsuleShape3D_sj2is")
