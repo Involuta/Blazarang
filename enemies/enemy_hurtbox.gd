@@ -22,7 +22,7 @@ func receive_hit(damage: float, hitter):
 	if damage > 0:
 		emit_hit_particles(hitter)
 		award_score(hitter)
-	if hitter.name == "Roserang":
+	if hitter is Roserang or hitter is RoserangPower:
 		emit_hitter_effect(hitter)
 	super(damage, hitter)
 

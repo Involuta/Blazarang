@@ -58,7 +58,7 @@ var current_follow_time := 0.0 # Reset after attack or dodge is queued
 @export var dodge_angle_tolerance := PI/5 # Max y angle difference btwn vec from Cotu to X and player camera fwd vec that triggers X to dodge
 var rose_thrown := false # Set to true when Cotu throws non-special roserang while X is following. Set to false when dodge ends (end_dodge). Why isn't this set to false every frame where a rose throw doesn't happen? Because the anim tree horz dodge transition expressions need to read rose_thrown as true to know which direction to dodge, and that happens at least 1 frame after a dodge is triggered via queue_dodge
 var ax_thrown := false # Set to true when Cotu throws non-special axrang while X is following. Set to false when dodge ends (end_dodge) for the same reason as rose_thrown
-@export var dodge_speed := 22.0
+@export var dodge_speed := 20.0
 var dodged := false # Set to true after a dodge, set to false after a non-dodge
 @export var shortrange_attack_distance := 7.5
 

@@ -1,12 +1,12 @@
-Node3D
-CollisionShape3D
+MeshInstance3D
 CharacterBody3D
+CollisionShape3D
+Node3D
 Label
 Label3D
 Area3D
 EnemyHurtbox
 Node
-MeshInstance3D
 Hitbox
 GPUParticles3D
 AnimationPlayer
