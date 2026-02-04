@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+
 @onready var hurtbox := $EnemyHurtbox
 @onready var root := $/root/ViewControl
 var ui: Control
@@ -13,5 +15,8 @@ func update_damage_counter(damage: int):
 	ui.update_damage_counter(damage)
 
 func _physics_process(_delta):
+	velocity.y -= gravity
 	if Input.is_action_just_pressed("ResetDamageCounter"):
 		ui.reset_damage_counter()
+	# move_and_slide is necessary for training dummy to be hit by axrang explosion hitbox for whatever reason
+	move_and_slide()
