@@ -39,12 +39,13 @@ var max_cam_dist := 6.0 # dist btwn player and camera when camera's not collidin
 
 @export var max_slow_duration := 3.5
 @export var max_infest_duration := 10.0
+@export var infest_stability_regen_reduction := .33
 var active_debuffs = {
 	Globals.DEBUFFS.SLOW: 0.0,
 	Globals.DEBUFFS.INFEST: 0.0,
 }
 
-var rang_catch_input_buffer_secs := .2 # max possible time btwn player inputting throw and rang hitting Cotu that still causes an instant rethrow or catch. Also max possible time btwn player inputting special and the rang hitting Cotu that still causes a special
+@export var rang_catch_input_buffer_secs := .2 # max possible time btwn player inputting throw and rang hitting Cotu that still causes an instant rethrow or catch. Also max possible time btwn player inputting special and the rang hitting Cotu that still causes a special
 
 var roserang_instant_rethrow_queued := false
 enum ROSERANG_THROW_TYPES {
@@ -137,11 +138,14 @@ enum SHURIKEN_MARKLESS_MODE {
 @export var shuriken_markless_behavior := SHURIKEN_MARKLESS_MODE.NEAREST
 
 # Define how many slots the player has
-@export var sigil_slots: Array[Globals.SIGILS] = [Globals.SIGILS.AUTO_ROSERANG_BUFF, Globals.SIGILS.MAX_STABILITY_BOOST, Globals.SIGILS.REGENERATOR]
+@export var sigil_list: Array[Globals.SIGILS] = [Globals.SIGILS.AUTO_ROSERANG_BUFF, Globals.SIGILS.REGENERATOR]
+@export var sigil_auto_roserang_buff_chance := .2
+@export var sigil_max_stability_boost_amt := .2
+@export var sigil_regenerator_stability_regen_multiplier := 2.0 # Debuffs like Infest reduce stability regen by multiplying the stab recovered per frame by a fraction (e.g. .33). To reduce the regen reduction, the fraction is multiplied by this num, which must be > 1
 
 # Helper to check if a specific sigil is equipped
 func has_sigil(sigil: Globals.SIGILS) -> bool:
-	return sigil_slots.has(sigil)
+	return sigil_list.has(sigil)
 
 var destabilized := false
 var grabbed := false
@@ -565,7 +569,7 @@ func step_dodge():
 
 func roserang_normal_throw():
 	if has_sigil(Globals.SIGILS.AUTO_ROSERANG_BUFF) and next_roserang_buff_index == 0:
-		if randf() <= 0.2:
+		if randf() <= sigil_auto_roserang_buff_chance:
 			next_roserang_buff_index = 1
 	
 	roserang_special_just_used = false

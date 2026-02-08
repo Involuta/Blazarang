@@ -82,9 +82,9 @@ func _physics_process(delta):
 	if not recovery_disabled and recovery_active and health < max_health:
 		if hb_owner.active_debuffs[Globals.DEBUFFS.INFEST] > 0:
 			if hb_owner.has_method("has_sigil") and hb_owner.has_sigil(Globals.SIGILS.REGENERATOR):
-				health += recovery_rate / 2
+				health += recovery_rate * hb_owner.infest_stability_regen_reduction * hb_owner.sigil_regenerator_stability_regen_multiplier
 			else:
-				health += recovery_rate / 3
+				health += recovery_rate * hb_owner.infest_stability_regen_reduction
 		else:
 			health += recovery_rate
 		damage_indicator_value -= recovery_rate
