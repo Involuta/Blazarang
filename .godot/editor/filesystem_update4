@@ -24,3 +24,7 @@ res://glb_inherited_scenes/cotu_outline.gdshader
 res://general_scripts/skygradient.gdshader
 res://glb_inherited_scenes/mite_hills_ground.gdshader
 res://cotu/cotu_cb_main.tscn
+res://textures/solid_light_gray_tile.tres
+res://levels/x_boss_level/x_boss_level1.tscn
+res://enemies/x_boss.tscn
+res://enemies/enemy_anims/x_rightarmslice.res
