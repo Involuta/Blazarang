@@ -9,19 +9,22 @@ var mvmt_state = FWD
 
 var invincible := true
 var invincibility_secs := .5
-var cotu_collider_radius := 1.4 # Used to know whether ax is touching Cotu
+var cotu_collider_radius := 1.4 
 signal caught
 signal hit_enemy
 
 @export var rotate_speed := .5
 
-var speed_buff_level := 0 # 0 = base, 1, 2, 3 = buffed
+var speed_buff_level := 0 
 @export var fwd_speed := 55.0
 @export var fwd_max_dist := 60.0
 @export var return_speed := 55.0
 
+@export var min_detonation_dist := 5.0 # Minimum distance required to detonate
+@onready var start_pos := global_position
+
 # PMD = pre-multiplier damage
-var damage_multiplier := 1.0 # Each hitbox's damage is pre multiplier damage * damage_multiplier)
+var damage_multiplier := 1.0 
 var main_hitbox_pmd := 0.0
 var explosion_hitbox_pmd := 0.0
 
@@ -47,6 +50,7 @@ func _ready():
 	update_hitbox_damage()
 	
 	global_position = cotu.global_position
+	start_pos = global_position # Initialize the start position
 	rotation.y = cotu.get_rang_throw_y_angle() + PI
 	velocity = fwd_speed * transform.basis.z
 	
@@ -58,21 +62,19 @@ func set_direction(dir : Vector3):
 	velocity = fwd_speed * dir
 
 func _physics_process(_delta):
-	# Deactivate invincibility once you're far enough from Cotu's body (diameter of CotuCollider)
 	if invincible and global_position.distance_to(cotu.global_position) > cotu_collider_radius:
 		invincible = false
 	
-	# Emit caught signal
 	if not invincible and global_position.distance_to(cotu.global_position) < cotu_collider_radius:
 		caught.emit()
 		queue_free()
+
 	match(mvmt_state):
 		FWD:
 			pivot.rotate_x(rotate_speed)
 			look_at(global_position + velocity)
 			move_and_slide()
 			
-			# If too far from Cotu, stop moving
 			if global_position.distance_to(cotu.global_position) > fwd_max_dist:
 				advance_state()
 		EXPLODE:
@@ -86,7 +88,9 @@ func _physics_process(_delta):
 func advance_state():
 	match(mvmt_state):
 		FWD:
-			switch_to_explode()
+			# Check if we have traveled far enough from the starting point
+			if global_position.distance_to(start_pos) >= min_detonation_dist:
+				switch_to_explode()
 		EXPLODE:
 			switch_to_return()
 		RETURN:

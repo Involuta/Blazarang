@@ -136,6 +136,13 @@ enum SHURIKEN_MARKLESS_MODE {
 }
 @export var shuriken_markless_behavior := SHURIKEN_MARKLESS_MODE.NEAREST
 
+# Define how many slots the player has
+@export var sigil_slots: Array[Globals.SIGILS] = [Globals.SIGILS.AUTO_ROSERANG_BUFF, Globals.SIGILS.MAX_STABILITY_BOOST, Globals.SIGILS.REGENERATOR]
+
+# Helper to check if a specific sigil is equipped
+func has_sigil(sigil: Globals.SIGILS) -> bool:
+	return sigil_slots.has(sigil)
+
 var destabilized := false
 var grabbed := false
 var stunned := false
@@ -463,7 +470,7 @@ func _physics_process(delta):
 	
 	# Shuriken throw
 	if Input.is_action_just_pressed("ThrowShuriken"):
-		if not destabilized and not axrang_perfect_caught:
+		if not destabilized:
 			if shurikens.size() < max_shurikens:
 				hurtbox.self_hit(throw_shuriken_self_damage)
 			else:
@@ -557,6 +564,10 @@ func step_dodge():
 	busy = false
 
 func roserang_normal_throw():
+	if has_sigil(Globals.SIGILS.AUTO_ROSERANG_BUFF) and next_roserang_buff_index == 0:
+		if randf() <= 0.2:
+			next_roserang_buff_index = 1
+	
 	roserang_special_just_used = false
 	if not destabilized:
 		hurtbox.self_hit(normal_throw_roserang_self_damage)
@@ -564,6 +575,9 @@ func roserang_normal_throw():
 	throw_roserang_with_script(rose_script)
 
 func roserang_power_throw():
+	if has_sigil(Globals.SIGILS.AUTO_ROSERANG_BUFF) and next_roserang_buff_index == 0:
+		if randf() <= 0.2:
+			next_roserang_buff_index = 1
 	roserang_special_just_used = false
 	if not destabilized:
 		hurtbox.self_hit(power_throw_roserang_self_damage)

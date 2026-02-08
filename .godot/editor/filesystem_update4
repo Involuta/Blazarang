@@ -1,13 +1,11 @@
 res://cotu/cotu_cb_main.tscn
-res://enemies/enemy_hurtbox.gd
 res://GPUTrail-main/shaders/trail.gdshader
 res://GPUTrail-main/defaults/texture.tres
 res://GPUTrail-main/shaders/trail_draw_pass.gdshader
 res://GPUTrail-main/defaults/curve.tres
 res://rang/roserang_shader.tres
+res://enemies/enemy_hurtbox.gd
 res://glb_inherited_scenes/black_outline.gdshader
-res://textures/white_border_black_center.tres
-res://textures/white_border_black_solid_square.tres
 res://shaders/black_outline.gdshader
 res://glb_inherited_scenes/outline.gdshader
 res://shaders/smoke.gdshader
@@ -25,7 +23,6 @@ res://ui/glitch.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
 res://general_scripts/skygradient.gdshader
 res://glb_inherited_scenes/mite_hills_ground.gdshader
-res://enemies/training_dummy.gd
-res://enemies/training_dummy.tscn
-res://enemies/gauntlet_melee_tier2.tscn
-res://levels/gauntlet_level/section_nodes/gauntlet_arena1.tscn
+res://cotu/CotuControl.gd
+res://cotu/CotuHurtbox.gd
+res://globals.gd

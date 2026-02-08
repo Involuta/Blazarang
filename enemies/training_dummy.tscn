@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_mhxn4"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_2nami"]
-size = Vector3(3, 7, 3)
+size = Vector3(3, 3, 3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ynmfh"]
 size = Vector3(3, 5, 3)
@@ -17,6 +17,7 @@ collision_mask = 2
 script = ExtResource("1_3jifb")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.415758, 0)
 mesh = SubResource("BoxMesh_2nami")
 
 [node name="EnemyHurtbox" type="Area3D" parent="."]

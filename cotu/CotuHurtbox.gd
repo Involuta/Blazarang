@@ -22,6 +22,10 @@ var destab_invin_time := 1.0
 func _ready():
 	super()
 	original_max_health = Globals.cotu_max_health
+	if hb_owner.has_method("has_sigil") and hb_owner.has_sigil(Globals.SIGILS.MAX_STABILITY_BOOST):
+		# Assuming you have a max_stability variable in Globals or locally
+		original_max_health *= 1.2
+	max_health = original_max_health
 	base_recovery_rate = Globals.cotu_base_regen_rate
 	fast_recovery_rate = Globals.cotu_fast_regen_rate
 	recovery_delay = Globals.cotu_regen_delay
@@ -77,7 +81,10 @@ func _physics_process(delta):
 		recovery_active = true
 	if not recovery_disabled and recovery_active and health < max_health:
 		if hb_owner.active_debuffs[Globals.DEBUFFS.INFEST] > 0:
-			health += recovery_rate / 3
+			if hb_owner.has_method("has_sigil") and hb_owner.has_sigil(Globals.SIGILS.REGENERATOR):
+				health += recovery_rate / 2
+			else:
+				health += recovery_rate / 3
 		else:
 			health += recovery_rate
 		damage_indicator_value -= recovery_rate

@@ -356,6 +356,22 @@ radius = 1.0
 collision_layer = 16
 collision_mask = 74
 script = ExtResource("1_aleek")
+can_walk = null
+can_rotate = null
+max_slow_duration = null
+max_infest_duration = null
+roserang_power_throw_min_charge_time = null
+roserang_power_throw_max_charge_time = null
+axrang_buff_decay_interval = null
+arc_slash_projectile_speed = null
+axrang_special_buff_save_duration = null
+axrang_hit_buffs_other_rangs_damage_duration = null
+axrang_hit_buffs_other_rangs_damage_multiplier = null
+max_shurikens = null
+throw_shuriken_self_damage = null
+roserang_mvmt_buffs_axrang_damage_on_perfect_catch_duration = null
+shuriken_markless_behavior = null
+sigil_slots = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_kxw61")
