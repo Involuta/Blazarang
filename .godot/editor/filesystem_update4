@@ -1,4 +1,4 @@
-res://cotu/cotu_cb_main.tscn
+res://enemies/x_blade.tscn
 res://GPUTrail-main/shaders/trail.gdshader
 res://GPUTrail-main/defaults/texture.tres
 res://GPUTrail-main/shaders/trail_draw_pass.gdshader
@@ -23,5 +23,4 @@ res://ui/glitch.gdshader
 res://glb_inherited_scenes/cotu_outline.gdshader
 res://general_scripts/skygradient.gdshader
 res://glb_inherited_scenes/mite_hills_ground.gdshader
-res://cotu/CotuControl.gd
-res://cotu/CotuHurtbox.gd
+res://cotu/cotu_cb_main.tscn
