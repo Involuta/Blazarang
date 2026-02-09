@@ -19,6 +19,9 @@ func _ready():
 	tween.chain().tween_callback(queue_free)
 
 func setup(amount: float, color: Color = Color.LIGHT_SALMON):
+	if amount == 0:
+		queue_free()
+		return
 	text = str(round(amount))
 	modulate = color
 	# Optional: Change color based on damage amount or type

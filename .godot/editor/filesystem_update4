@@ -72,3 +72,11 @@ res://general_scripts/skygradient.gdshader
 res://glb_inherited_scenes/mite_hills_ground.gdshader
 res://cotu/cotu_cb_main.tscn
 res://levels/x_boss_level/x_boss_level1.tscn
+res://enemies/spitweb.tscn
+res://enemies/spitweb.gd
+res://glb_inherited_scenes/spitweb_projectile.tscn
+res://levels/mite_level/section_nodes/mite_level_main_arena.tscn
+res://vfx/damage_text.tscn
+res://vfx/damage_text.gd
+res://enemies/paramite.tscn
+res://enemies/paramite.gd

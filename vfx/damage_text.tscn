@@ -6,6 +6,6 @@
 billboard = 1
 no_depth_test = true
 text = "0"
-font_size = 340
-outline_size = 40
+font_size = 220
+outline_size = 30
 script = ExtResource("1_c30dp")

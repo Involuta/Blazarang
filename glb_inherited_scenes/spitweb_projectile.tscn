@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dx51qlqjdeihh"]
+
+[ext_resource type="PackedScene" uid="uid://bxfhrm15fkg2s" path="res://glb_imports/SpitwebProjectile.glb" id="1_xn286"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pag03"]
+shading_mode = 0
+
+[node name="SpitwebProjectile" instance=ExtResource("1_xn286")]
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_pag03")

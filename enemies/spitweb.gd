@@ -24,6 +24,7 @@ func _ready():
 func _physics_process(delta):
 	if not grounded:
 		global_position += velocity * delta
+		look_at(global_position - velocity, Vector3.UP)
 		velocity.y -= gravity * delta
 
 func _on_body_entered(body):

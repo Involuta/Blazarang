@@ -12,7 +12,6 @@ var spitweb := preload("res://enemies/spitweb.tscn")
 var rng := RandomNumberGenerator.new()
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var level : Node3D
-var hitbox : Node3D
 var target : Node3D
 enum {
 	LAUNCH,
@@ -56,8 +55,6 @@ func _ready():
 	
 	level = root.find_child("Level")
 	target = root.find_child("Icon")
-	hitbox = find_child("MeleeHitboxPivot")
-	#hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	anim_tree.active = true
 	
 	switch_to_launch()
@@ -86,7 +83,6 @@ func set_mesh_and_colliders_y_pos(new_y_pos: float):
 	body_meshes.position.y = new_y_pos
 	physical_collider.position.y = new_y_pos
 	hurtbox.position.y = new_y_pos
-	hitbox.position.y = new_y_pos
 
 func get_height_from_ground():
 	var space_state := get_world_3d().direct_space_state
@@ -227,13 +223,12 @@ func follow_frame(delta):
 	body_meshes.position = lerp(Vector3(0,follow_initial_height,-.5), Vector3(0,fall_height,-.5), follow_progress)
 	physical_collider.position = lerp(Vector3(0,follow_initial_height,0), Vector3(0,fall_height,0), follow_progress)
 	hurtbox.position = lerp(Vector3(0,follow_initial_height,0), Vector3(0,fall_height,0), follow_progress)
-	hitbox.position = lerp(Vector3(0,follow_initial_height-.6,-1), Vector3(0,fall_height-.6,-1), follow_progress)
 
 func shoot_spitweb():
 	var sw_inst = spitweb.instantiate()
 	level.add_child.call_deferred(sw_inst)
 	await sw_inst.tree_entered
-	sw_inst.global_position = hitbox.global_position
+	sw_inst.global_position = hurtbox.global_position
 	# Projectile must travel lateral dist to target in t time
 	# t is time it takes for projectile to fall to the ground from its current height
 	# d0 + s0t + 1/2at^2 = d
@@ -326,5 +321,6 @@ func death_effect():
 	var sw_inst = spitweb.instantiate()
 	level.add_child.call_deferred(sw_inst)
 	await sw_inst.tree_entered
-	sw_inst.global_position = hitbox.global_position
-	sw_inst.velocity = 5 * Vector3.UP
+	sw_inst.global_position = hurtbox.global_position
+	# velocity is added to Vector3.DOWN bc the spitweb's look_at code bugs out when the look dir is parallel to the up dir
+	sw_inst.velocity = Vector3.DOWN + .1 * velocity.normalized()
