@@ -17,7 +17,7 @@ size = Vector3(260, 50, 260)
 _data = [Vector2(0, 0.102957), 0.0, 0.0, 0, 0, Vector2(0.224312, 0.796458), 0.0, 0.0, 0, 0, Vector2(1, 0.0976633), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_q0f0j"]
+[sub_resource type="CurveTexture" id="CurveTexture_qp7pi"]
 curve = SubResource("Curve_bitw0")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nwdal"]
@@ -30,10 +30,10 @@ gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 0.8
 initial_velocity_max = 3.2
 scale_min = 0.4
-scale_curve = SubResource("CurveTexture_q0f0j")
-color = Color(1.50196, 0.843137, 0.34902, 1)
+scale_curve = SubResource("CurveTexture_qp7pi")
+color = Color(1.50196, 0.588235, 0.34902, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uxjbv"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h5d5g"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
 disable_receive_shadows = true
@@ -44,7 +44,7 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="SphereMesh" id="SphereMesh_qq31a"]
-material = SubResource("StandardMaterial3D_uxjbv")
+material = SubResource("StandardMaterial3D_h5d5g")
 radius = 0.25
 height = 0.5
 

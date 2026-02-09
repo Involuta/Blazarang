@@ -1,3 +1,4 @@
+GPUParticles3D
 MeshInstance3D
 CharacterBody3D
 CollisionShape3D
@@ -8,7 +9,6 @@ Area3D
 EnemyHurtbox
 Node
 Hitbox
-GPUParticles3D
 AnimationPlayer
 GPUTrail3D
 StaticBody3D
