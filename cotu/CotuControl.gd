@@ -6,15 +6,16 @@ var using_controller = false # only affects camera motion
 var default_gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var gravity = default_gravity
 const WALK_SPEED := 10.0
+const WALK_DECEL_SECS := .25 # Seconds it takes for Cotu to decelerate to 0 speed when not walking
 const STEP_DODGE_SPEED := 15.0
 const step_dodge_duration_secs := .5
 const step_dodge_cooldown_secs := .1
+
 var super_jump_charge_time := 0.0 # Time passed in the current jump charge
+@export var super_jump_min_charge_time := .1
 @export var super_jump_full_charge_time := 1.0
 var super_jump_fully_charged := false
 @export var super_jump_speed := 18.0 # Higher than JUMP_SPEED for that "Super" feel
-# Seconds it takes for Cotu to decelerate to 0 speed when not walking
-const WALK_DECEL_SECS := .25
 
 var anim_tree_param_path_base := "parameters/StateMachine/conditions/"
 
@@ -311,7 +312,7 @@ func _physics_process(delta):
 		super_jump_charge_time += delta
 		
 		# Once the player starts charging, they become "busy" and stop moving
-		if super_jump_charge_time > 0.1: # Small buffer so a tap doesn't freeze you
+		if super_jump_charge_time > super_jump_min_charge_time: # Small buffer so a tap doesn't freeze you
 			can_walk = false
 			can_rotate = false
 			set_busy(true)

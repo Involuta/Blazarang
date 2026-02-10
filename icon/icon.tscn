@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://skntmavu4xsw"]
+[gd_scene load_steps=28 format=3 uid="uid://skntmavu4xsw"]
 
 [ext_resource type="Script" path="res://icon/icon.gd" id="1_fgjod"]
 [ext_resource type="PackedScene" uid="uid://b5fggubx1ibk6" path="res://glb_inherited_scenes/icon_mesh.tscn" id="2_qle8n"]
@@ -25,6 +25,9 @@ blend_point_0/pos = 0.5
 blend_point_1/node = SubResource("AnimationNodeAnimation_v6cun")
 blend_point_1/pos = 0.0
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c2iav"]
+animation = &"SuperJumpCharge"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ycmm1"]
 advance_mode = 2
 
@@ -37,7 +40,7 @@ advance_mode = 2
 advance_expression = "cotu.is_on_floor()"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s8d4n"]
-xfade_time = 0.15
+xfade_time = 0.1
 advance_mode = 2
 advance_expression = "cotu.walk_input == Vector2(0,0)"
 
@@ -50,23 +53,39 @@ advance_expression = "cotu.walk_input != Vector2(0,0)"
 advance_mode = 2
 advance_expression = "cotu.is_on_floor()"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r7aix"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jgn5w"]
+advance_mode = 2
+advance_expression = "cotu.super_jump_charge_time > cotu.super_jump_min_charge_time"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tlp76"]
+advance_mode = 2
+advance_expression = "cotu.super_jump_charge_time <= cotu.super_jump_min_charge_time"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rd1nn"]
+xfade_time = 0.15
 advance_mode = 2
 advance_expression = "!cotu.is_on_floor() and cotu.walk_input == Vector2(0,0)"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_150kp"]
+xfade_time = 0.15
+advance_mode = 2
+advance_expression = "!cotu.is_on_floor() and cotu.walk_input != Vector2(0,0)"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_g6st4"]
 states/AirFollow/node = SubResource("AnimationNodeAnimation_fnpre")
-states/AirFollow/position = Vector2(280.625, 191.336)
+states/AirFollow/position = Vector2(473.594, 275.521)
 states/AirNoLateralMvmt/node = SubResource("AnimationNodeAnimation_mswn1")
-states/AirNoLateralMvmt/position = Vector2(673.5, 192.082)
+states/AirNoLateralMvmt/position = Vector2(763.468, 276.801)
 states/CotuGroundedBlendSpace/node = SubResource("AnimationNodeBlendSpace1D_0ent3")
 states/CotuGroundedBlendSpace/position = Vector2(473.562, 99.7188)
 states/Start/position = Vector2(187.5, 100)
-transitions = ["Start", "CotuGroundedBlendSpace", SubResource("AnimationNodeStateMachineTransition_ycmm1"), "CotuGroundedBlendSpace", "AirFollow", SubResource("AnimationNodeStateMachineTransition_0hj64"), "AirFollow", "CotuGroundedBlendSpace", SubResource("AnimationNodeStateMachineTransition_d68sb"), "AirFollow", "AirNoLateralMvmt", SubResource("AnimationNodeStateMachineTransition_s8d4n"), "AirNoLateralMvmt", "AirFollow", SubResource("AnimationNodeStateMachineTransition_y3jw4"), "AirNoLateralMvmt", "CotuGroundedBlendSpace", SubResource("AnimationNodeStateMachineTransition_t102e"), "CotuGroundedBlendSpace", "AirNoLateralMvmt", SubResource("AnimationNodeStateMachineTransition_r7aix")]
-graph_offset = Vector2(9.39752, 38.925)
+states/SuperJumpCharge/node = SubResource("AnimationNodeAnimation_c2iav")
+states/SuperJumpCharge/position = Vector2(763.451, 99.4918)
+transitions = ["Start", "CotuGroundedBlendSpace", SubResource("AnimationNodeStateMachineTransition_ycmm1"), "CotuGroundedBlendSpace", "AirFollow", SubResource("AnimationNodeStateMachineTransition_0hj64"), "AirFollow", "CotuGroundedBlendSpace", SubResource("AnimationNodeStateMachineTransition_d68sb"), "AirFollow", "AirNoLateralMvmt", SubResource("AnimationNodeStateMachineTransition_s8d4n"), "AirNoLateralMvmt", "AirFollow", SubResource("AnimationNodeStateMachineTransition_y3jw4"), "AirNoLateralMvmt", "CotuGroundedBlendSpace", SubResource("AnimationNodeStateMachineTransition_t102e"), "CotuGroundedBlendSpace", "SuperJumpCharge", SubResource("AnimationNodeStateMachineTransition_jgn5w"), "SuperJumpCharge", "CotuGroundedBlendSpace", SubResource("AnimationNodeStateMachineTransition_tlp76"), "SuperJumpCharge", "AirNoLateralMvmt", SubResource("AnimationNodeStateMachineTransition_rd1nn"), "SuperJumpCharge", "AirFollow", SubResource("AnimationNodeStateMachineTransition_150kp")]
+graph_offset = Vector2(339.42, 120.435)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_b7lgh"]
-graph_offset = Vector2(-14.4, 34.56)
+graph_offset = Vector2(-58.56, 133.44)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_g6st4")
 nodes/StateMachine/position = Vector2(70, 150)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -136,6 +155,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CircleIconMesh:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.69, 0.69, 0.69)]
+}
 
 [sub_resource type="Animation" id="Animation_cpnbj"]
 resource_name = "Floored"
@@ -201,6 +232,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(2.08165e-12, -1, 2.08165e-12)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CircleIconMesh:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.69, 0.69, 0.69)]
 }
 
 [sub_resource type="Animation" id="Animation_1n5ka"]
@@ -268,12 +311,102 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CircleIconMesh:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.69, 0.69, 0.69)]
+}
+
+[sub_resource type="Animation" id="Animation_k0mc0"]
+resource_name = "SuperJumpCharge"
+length = 0.900002
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TriangleIconMesh:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.5708, 3.48787e-16, 3.48787e-16), Vector3(1.5708, 10.472, 3.48787e-16)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TriangleIconMesh:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, -1, 2.08165e-12)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TriangleIconMesh:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.9, 0.9, 0.9), Vector3(3, 3, 3)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CircleIconMesh:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5708, 3.48787e-16, 3.48787e-16)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CircleIconMesh:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, -1, 2.08165e-12)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CircleIconMesh:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.69, 0.69, 0.69), Vector3(2.2, 2.2, 2.2)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5do6e"]
 _data = {
 "AirNoLateralMvmt": SubResource("Animation_3sruw"),
 "Floored": SubResource("Animation_cpnbj"),
-"Follow": SubResource("Animation_1n5ka")
+"Follow": SubResource("Animation_1n5ka"),
+"SuperJumpCharge": SubResource("Animation_k0mc0")
 }
 
 [node name="Icon" type="Area3D"]
@@ -281,7 +414,7 @@ collision_layer = 32
 script = ExtResource("1_fgjod")
 
 [node name="TriangleIconMesh" parent="." instance=ExtResource("2_qle8n")]
-transform = Transform3D(-0.824034, 0.361894, 0.000713893, 6.20611e-06, 0.00178952, -0.899998, -0.361895, -0.824032, -0.00164097, 2.08165e-12, -0.998732, 2.08165e-12)
+transform = Transform3D(0.771129, -0.464069, -0.000911523, 1.30626e-05, 0.00178948, -0.899998, 0.46407, 0.771127, 0.00153998, 2.08165e-12, -0.998732, 2.08165e-12)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_qvdqm")
