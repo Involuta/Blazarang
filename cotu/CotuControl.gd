@@ -9,8 +9,10 @@ const WALK_SPEED := 10.0
 const STEP_DODGE_SPEED := 15.0
 const step_dodge_duration_secs := .5
 const step_dodge_cooldown_secs := .1
-const JUMP_SPEED := 14.0
-const MAX_JUMP_CHARGE_SECS := .5
+var super_jump_charge_time := 0.0 # Time passed in the current jump charge
+@export var super_jump_full_charge_time := 1.0
+var super_jump_fully_charged := false
+@export var super_jump_speed := 18.0 # Higher than JUMP_SPEED for that "Super" feel
 # Seconds it takes for Cotu to decelerate to 0 speed when not walking
 const WALK_DECEL_SECS := .25
 
@@ -304,9 +306,34 @@ func _physics_process(delta):
 		step_dodge()
 	else:
 		anim_tree.set(anim_tree_param_path_base + "just_dodged", false)
-	if Input.is_action_just_pressed("Jump") and is_on_floor():
-		velocity.y = JUMP_SPEED
+	
+	if Input.is_action_pressed("Jump") and is_on_floor():
+		super_jump_charge_time += delta
 		
+		# Once the player starts charging, they become "busy" and stop moving
+		if super_jump_charge_time > 0.1: # Small buffer so a tap doesn't freeze you
+			can_walk = false
+			can_rotate = false
+			set_busy(true)
+			velocity.x = 0
+			velocity.z = 0
+		
+		if super_jump_charge_time >= super_jump_full_charge_time:
+			super_jump_fully_charged = true
+			# You could add a particle effect or sound trigger here for "Charge Complete"
+	
+	if Input.is_action_just_released("Jump"):
+		if super_jump_fully_charged:
+			velocity.y = super_jump_speed
+			# Optional: add a 'jump' trigger to your AnimTree here
+		
+		# Always reset state on release
+		super_jump_charge_time = 0.0
+		super_jump_fully_charged = false
+		set_busy(false)
+		can_walk = true
+		can_rotate = true
+	
 	if is_dodging:
 		grounded_speed = STEP_DODGE_SPEED
 	else:
@@ -389,7 +416,7 @@ func _physics_process(delta):
 		for s in shurikens:
 			s.switch_to_frenzy()
 	
-	if Input.is_action_just_pressed("MeleeAxrang"):
+	if Input.is_action_just_pressed("MeleeAxrang") and !busy:
 		anim_tree.set(anim_tree_param_path_base + "melee_ax", true)
 	else:
 		anim_tree.set(anim_tree_param_path_base + "melee_ax", false)
@@ -445,7 +472,7 @@ func _physics_process(delta):
 		elif Input.is_action_pressed("ThrowRoserang"):
 			# Prevent other actions while charging power throw
 			if roserang_power_throw_charge_time <= 0:
-				busy = true
+				set_busy(true)
 			# Power throw charge
 			roserang_power_throw_charge_time += delta
 		# Normal and power throw are triggered on button release
@@ -473,7 +500,7 @@ func _physics_process(delta):
 			clear_roserang_buffs()
 	
 	# Shuriken throw
-	if Input.is_action_just_pressed("ThrowShuriken"):
+	if Input.is_action_just_pressed("ThrowShuriken") and !busy:
 		if not destabilized:
 			if shurikens.size() < max_shurikens:
 				hurtbox.self_hit(throw_shuriken_self_damage)
@@ -481,7 +508,7 @@ func _physics_process(delta):
 				hurtbox.self_hit(throw_axrang_self_damage)
 		throw_shuriken()
 	
-	if Input.is_action_just_pressed("UseItem"):
+	if Input.is_action_just_pressed("UseItem") and !busy:
 		anim_tree.set(anim_tree_param_path_base + "use_item", true)
 	else:
 		anim_tree.set(anim_tree_param_path_base + "use_item", false)
@@ -551,7 +578,7 @@ func lock_off():
 
 func step_dodge():
 	Globals.cotu_dodge.emit()
-	busy = true
+	set_busy(true)
 	is_dodging = true
 	if not destabilized:
 		hurtbox.self_hit(dodge_self_damage)
@@ -565,7 +592,7 @@ func step_dodge():
 		throw_axrang(armature.transform.basis.z)
 	set_collision_mask_value(Globals.ENEMY_COL_LAYER, true)
 	await get_tree().create_timer(step_dodge_cooldown_secs).timeout
-	busy = false
+	set_busy(false)
 
 func roserang_normal_throw():
 	if has_sigil(Globals.SIGILS.AUTO_ROSERANG_BUFF) and next_roserang_buff_index == 0:

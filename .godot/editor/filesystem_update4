@@ -81,3 +81,5 @@ res://vfx/damage_text.gd
 res://enemies/paramite.tscn
 res://enemies/paramite.gd
 res://enemies/mite_egg_fog.tscn
+res://cotu/CotuControl.gd
+res://rang/axrang.tscn
