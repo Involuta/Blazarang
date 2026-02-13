@@ -493,12 +493,10 @@ func _physics_process(delta):
 	elif Input.is_action_just_pressed("ThrowRoserang") and not roserang_instant_rethrow_queued:
 		start_roserang_instant_rethrow_timer()
 	
-	# Make icon follow Cotu again if an instant rethrow didn't just occur (i.e. if roserang_instances is still empty after an instant rethrow would have reassigned it)
-	if roserang_instances.is_empty():
-		icon.start_following_cotu()
-		# Only clear buffs if rang_mvmt_buff_preservation is inactive OR the axrang isn't currently out and moving
-		if not (rang_mvmt_buff_preservation and axrang_instance != null and not axrang_instance.is_stationary()):
-			clear_roserang_buffs()
+	# Clear buffs if an instant rethrow didn't just occur (i.e. if roserang_instances is still empty after an instant rethrow would have reassigned it)
+	# Only clear buffs if rang_mvmt_buff_preservation is inactive OR the axrang isn't currently out and moving
+	if roserang_instances.is_empty() and not (rang_mvmt_buff_preservation and axrang_instance != null and not axrang_instance.is_stationary()):
+		clear_roserang_buffs()
 	
 	# Shuriken throw
 	if Input.is_action_just_pressed("ThrowShuriken") and !busy:
@@ -641,6 +639,8 @@ func throw_roserang_with_script(script):
 func _on_roserang_exiting(roserang_node):
 	roserang_instances.erase(roserang_node)
 	# Logic for clearing buffs/resetting icon happens in _physics_process based on is_empty()
+	if roserang_instances.is_empty():
+		icon.stop_following_cotu
 
 func start_roserang_instant_rethrow_timer():
 	roserang_instant_rethrow_queued = true

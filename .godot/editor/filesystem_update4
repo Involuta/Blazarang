@@ -84,3 +84,5 @@ res://enemies/mite_egg_fog.tscn
 res://cotu/CotuControl.gd
 res://rang/axrang.tscn
 res://icon/icon.tscn
+res://icon/icon.gd
+res://glb_inherited_scenes/cotu_icon_circle.tscn
