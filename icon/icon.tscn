@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://skntmavu4xsw"]
+[gd_scene load_steps=41 format=3 uid="uid://skntmavu4xsw"]
 
 [ext_resource type="Script" path="res://icon/icon.gd" id="1_fgjod"]
 [ext_resource type="PackedScene" uid="uid://b5fggubx1ibk6" path="res://glb_inherited_scenes/icon_mesh.tscn" id="2_qle8n"]
@@ -91,7 +91,7 @@ states/SuperJumpCharge/position = Vector2(763.451, 99.4918)
 states/SuperJumpRelease/node = SubResource("AnimationNodeAnimation_865du")
 states/SuperJumpRelease/position = Vector2(763.825, 179.832)
 transitions = ["Start", "CotuGroundedBlendSpace", SubResource("AnimationNodeStateMachineTransition_ycmm1"), "CotuGroundedBlendSpace", "AirFollow", SubResource("AnimationNodeStateMachineTransition_0hj64"), "AirFollow", "CotuGroundedBlendSpace", SubResource("AnimationNodeStateMachineTransition_d68sb"), "AirNoLateralMvmt", "CotuGroundedBlendSpace", SubResource("AnimationNodeStateMachineTransition_t102e"), "CotuGroundedBlendSpace", "SuperJumpCharge", SubResource("AnimationNodeStateMachineTransition_jgn5w"), "SuperJumpCharge", "CotuGroundedBlendSpace", SubResource("AnimationNodeStateMachineTransition_tlp76"), "AirFollow", "AirNoLateralMvmt", SubResource("AnimationNodeStateMachineTransition_s8d4n"), "AirNoLateralMvmt", "AirFollow", SubResource("AnimationNodeStateMachineTransition_y3jw4"), "SuperJumpCharge", "SuperJumpRelease", SubResource("AnimationNodeStateMachineTransition_ceseh"), "SuperJumpRelease", "AirNoLateralMvmt", SubResource("AnimationNodeStateMachineTransition_nj5x1"), "SuperJumpRelease", "AirFollow", SubResource("AnimationNodeStateMachineTransition_u7mid")]
-graph_offset = Vector2(398.918, 50.3699)
+graph_offset = Vector2(219.705, -43.0501)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_b7lgh"]
 graph_offset = Vector2(-58.56, 133.44)
@@ -476,7 +476,7 @@ tracks/8/path = NodePath(".")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0.283333),
+"times": PackedFloat32Array(0.9),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -611,11 +611,31 @@ tracks/9/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_yys0s"]
+resource_name = "StartFollowingCotu"
+length = 0.0166683
+step = 0.0166667
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start_following_cotu"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5do6e"]
 _data = {
 "AirNoLateralMvmt": SubResource("Animation_3sruw"),
 "Floored": SubResource("Animation_cpnbj"),
 "Follow": SubResource("Animation_1n5ka"),
+"StartFollowingCotu": SubResource("Animation_yys0s"),
 "SuperJumpCharge": SubResource("Animation_k0mc0"),
 "SuperJumpRelease": SubResource("Animation_vyov1")
 }
@@ -688,7 +708,7 @@ collision_layer = 32
 script = ExtResource("1_fgjod")
 
 [node name="TriangleIconMesh" parent="." instance=ExtResource("2_qle8n")]
-transform = Transform3D(-0.479351, -0.761722, -0.00151959, 9.44347e-06, 0.0017895, -0.899998, 0.761723, -0.47935, -0.00094512, 2.08165e-12, -0.998732, 2.08165e-12)
+transform = Transform3D(-0.612518, 0.659409, 0.00130755, 5.27687e-06, 0.00178952, -0.899998, -0.65941, -0.612517, -0.00122177, 2.08165e-12, -0.998732, 2.08165e-12)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_qvdqm")

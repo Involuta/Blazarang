@@ -308,7 +308,7 @@ func _physics_process(delta):
 	else:
 		anim_tree.set(anim_tree_param_path_base + "just_dodged", false)
 	
-	if Input.is_action_pressed("Jump") and is_on_floor():
+	if Input.is_action_pressed("Jump") and is_on_floor() and icon.following_cotu:
 		super_jump_charge_time += delta
 		
 		# Once the player starts charging, they become "busy" and stop moving
@@ -640,7 +640,7 @@ func _on_roserang_exiting(roserang_node):
 	roserang_instances.erase(roserang_node)
 	# Logic for clearing buffs/resetting icon happens in _physics_process based on is_empty()
 	if roserang_instances.is_empty():
-		icon.stop_following_cotu
+		icon.start_following_cotu()
 
 func start_roserang_instant_rethrow_timer():
 	roserang_instant_rethrow_queued = true
