@@ -91,7 +91,7 @@ states/SuperJumpCharge/position = Vector2(763.451, 99.4918)
 states/SuperJumpRelease/node = SubResource("AnimationNodeAnimation_865du")
 states/SuperJumpRelease/position = Vector2(763.825, 179.832)
 transitions = ["Start", "CotuGroundedBlendSpace", SubResource("AnimationNodeStateMachineTransition_ycmm1"), "CotuGroundedBlendSpace", "AirFollow", SubResource("AnimationNodeStateMachineTransition_0hj64"), "AirFollow", "CotuGroundedBlendSpace", SubResource("AnimationNodeStateMachineTransition_d68sb"), "AirNoLateralMvmt", "CotuGroundedBlendSpace", SubResource("AnimationNodeStateMachineTransition_t102e"), "CotuGroundedBlendSpace", "SuperJumpCharge", SubResource("AnimationNodeStateMachineTransition_jgn5w"), "SuperJumpCharge", "CotuGroundedBlendSpace", SubResource("AnimationNodeStateMachineTransition_tlp76"), "AirFollow", "AirNoLateralMvmt", SubResource("AnimationNodeStateMachineTransition_s8d4n"), "AirNoLateralMvmt", "AirFollow", SubResource("AnimationNodeStateMachineTransition_y3jw4"), "SuperJumpCharge", "SuperJumpRelease", SubResource("AnimationNodeStateMachineTransition_ceseh"), "SuperJumpRelease", "AirNoLateralMvmt", SubResource("AnimationNodeStateMachineTransition_nj5x1"), "SuperJumpRelease", "AirFollow", SubResource("AnimationNodeStateMachineTransition_u7mid")]
-graph_offset = Vector2(219.705, -43.0501)
+graph_offset = Vector2(-38.7523, 30.9074)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_b7lgh"]
 graph_offset = Vector2(-58.56, 133.44)
@@ -708,7 +708,7 @@ collision_layer = 32
 script = ExtResource("1_fgjod")
 
 [node name="TriangleIconMesh" parent="." instance=ExtResource("2_qle8n")]
-transform = Transform3D(-0.612518, 0.659409, 0.00130755, 5.27687e-06, 0.00178952, -0.899998, -0.65941, -0.612517, -0.00122177, 2.08165e-12, -0.998732, 2.08165e-12)
+transform = Transform3D(-0.886214, -0.156924, -0.000319451, 7.54633e-06, 0.00178951, -0.899998, 0.156924, -0.886212, -0.00176079, 2.08165e-12, -0.998732, 2.08165e-12)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_qvdqm")
@@ -733,6 +733,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_mbvf3")
 
 [node name="FlashParticles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -1.3, 2.08165e-12)
+emitting = false
 amount = 32
 lifetime = 0.6
 one_shot = true

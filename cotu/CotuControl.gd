@@ -11,6 +11,11 @@ const STEP_DODGE_SPEED := 15.0
 const step_dodge_duration_secs := .5
 const step_dodge_cooldown_secs := .1
 
+# Hoverboard constants
+const HOVERBOARD_SPEED := 15.0 # Faster than walk speed
+const HOVERBOARD_ASCENT_SPEED := 8.0
+const HOVERBOARD_DESCENT_SPEED := 8.0
+
 var super_jump_charge_time := 0.0 # Time passed in the current jump charge
 @export var super_jump_min_charge_time := .1
 @export var super_jump_full_charge_time := 1.0
@@ -29,6 +34,8 @@ var grounded_speed := 0.0
 @export var can_rotate := true # Exported so it can be set via anim
 var is_dodging := false
 var dodge_self_damage := 18.0
+var dodge_held := false # Tracks if dodge button is held during dodge
+var is_hoverboarding := false
 
 var mouse_camera_sensitivity := .001
 var joystick_camera_sensitivity := .1
@@ -99,7 +106,7 @@ var axrang_special_hit_buff_saving := false # Set to true when player equips ski
 @export var axrang_special_buff_save_duration := 6.7
 var axrang_special_buff_save_time_remaining := 0.0
 
-var axrang_hit_buffs_other_rangs_damage := true # Set to true when player equips skill where, when the ax hits an enemy, it activates a temporary buff that causes other rangs to deal significantly more damage. Buff wears off after a bit if ax doesn’t hit an enemy again (Euphoria (?))
+var axrang_hit_buffs_other_rangs_damage := true # Set to true when player equips skill where, when the ax hits an enemy, it activates a temporary buff that causes other rangs to deal significantly more damage. Buff wears off after a bit if ax doesn't hit an enemy again (Euphoria (?))
 var axrang_hit_buffs_other_rangs_damage_time_remaining := 0.0 # Buff is considered active if time_remaining > 0, inactive otherwise
 @export var axrang_hit_buffs_other_rangs_damage_duration := 3.0
 @export var axrang_hit_buffs_other_rangs_damage_multiplier := .4 # +40% damage
@@ -292,6 +299,18 @@ func _physics_process(delta):
 		global_position = grab_pos_node.global_position - .5 * Vector3.UP
 		return
 	
+	# Hoverboard dismount logic - pressing ThrowShuriken exits hoverboard mode
+	if is_hoverboarding and Input.is_action_just_pressed("ThrowShuriken"):
+		is_hoverboarding = false
+		# Restore gravity
+		gravity = default_gravity
+	
+	# Hoverboard movement
+	if is_hoverboarding:
+		handle_hoverboard_movement(delta)
+		move_and_slide()
+		return
+	
 	# Falling
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -301,12 +320,17 @@ func _physics_process(delta):
 		move_and_slide()
 		return
 	
-	# Dodge logic
+	# Dodge logic with hoverboard activation
 	if Input.is_action_just_pressed("StepDodge") and !busy and roserang_power_throw_charge_time <= 0:
 		anim_tree.set(anim_tree_param_path_base + "just_dodged", true)
+		dodge_held = true
 		step_dodge()
 	else:
 		anim_tree.set(anim_tree_param_path_base + "just_dodged", false)
+	
+	# Track if dodge button is released during dodge
+	if is_dodging and not Input.is_action_pressed("StepDodge"):
+		dodge_held = false
 	
 	if Input.is_action_pressed("Jump") and is_on_floor() and icon.following_cotu:
 		super_jump_charge_time += delta
@@ -498,7 +522,7 @@ func _physics_process(delta):
 	if roserang_instances.is_empty() and not (rang_mvmt_buff_preservation and axrang_instance != null and not axrang_instance.is_stationary()):
 		clear_roserang_buffs()
 	
-	# Shuriken throw
+	# Shuriken throw - skip in hoverboard mode
 	if Input.is_action_just_pressed("ThrowShuriken") and !busy:
 		if not destabilized:
 			if shurikens.size() < max_shurikens:
@@ -547,6 +571,39 @@ func _physics_process(delta):
 	anim_tree.set("parameters/StateMachine/GroundBlendSpace/blend_position", move_blend_space)
 	anim_tree.set("parameters/StateMachine/AerialBlendSpace/blend_position", Vector3.UP*velocity.y)
 
+func handle_hoverboard_movement(_delta):
+	# Get horizontal movement input
+	walk_input = Input.get_vector("WalkLeft", "WalkRight", "WalkForward", "WalkBackward")
+	if walk_input.x != 0:
+		moving_right = walk_input.x > 0
+	
+	var mvmt_dir = Vector3(walk_input.x, 0, walk_input.y)
+	var oriented_mvmt_dir = (camera_twist_pivot.basis * mvmt_dir).normalized()
+	
+	# Horizontal movement
+	if oriented_mvmt_dir:
+		velocity.x = lerp(velocity.x, oriented_mvmt_dir.x * HOVERBOARD_SPEED, LERP_VAL)
+		velocity.z = lerp(velocity.z, oriented_mvmt_dir.z * HOVERBOARD_SPEED, LERP_VAL)
+		if can_rotate:
+			armature.rotation.y = lerp_angle(armature.rotation.y, atan2(oriented_mvmt_dir.x, oriented_mvmt_dir.z), LERP_VAL)
+	else:
+		velocity.x = lerp(velocity.x, 0.0, LERP_VAL)
+		velocity.z = lerp(velocity.z, 0.0, LERP_VAL)
+	
+	# Vertical movement
+	var ascending = Input.is_action_pressed("Jump")
+	var descending = Input.is_action_pressed("StepDodge")
+	
+	if ascending and not descending:
+		# Ascend
+		velocity.y = HOVERBOARD_ASCENT_SPEED
+	elif descending and not ascending:
+		# Descend
+		velocity.y = -HOVERBOARD_DESCENT_SPEED
+	else:
+		# Hovering (both pressed, neither pressed, or any other case)
+		velocity.y = 0.0
+
 func _unhandled_input(event: InputEvent) -> void:
 	if not using_controller:
 		if event is InputEventMouseMotion:
@@ -586,12 +643,20 @@ func step_dodge():
 		icon.stop_following_cotu()
 	await get_tree().create_timer(step_dodge_duration_secs).timeout
 	is_dodging = false
+	
+	# Check if dodge was held throughout - if so, activate hoverboard
+	if dodge_held and Input.is_action_pressed("StepDodge"):
+		is_hoverboarding = true
+		gravity = 0 # Disable gravity while hoverboarding
+		velocity.y = 0 # Stop vertical momentum
+	
 	if axrang_dodge_rethrow_queued:
 		axrang_dodge_rethrow_queued = false
 		throw_axrang(armature.transform.basis.z)
 	set_collision_mask_value(Globals.ENEMY_COL_LAYER, true)
 	await get_tree().create_timer(step_dodge_cooldown_secs).timeout
 	set_busy(false)
+	dodge_held = false # Reset for next dodge
 
 func roserang_normal_throw():
 	if has_sigil(Globals.SIGILS.AUTO_ROSERANG_BUFF) and next_roserang_buff_index == 0:
