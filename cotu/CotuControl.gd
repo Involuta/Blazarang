@@ -12,7 +12,7 @@ const step_dodge_duration_secs := .5
 const step_dodge_cooldown_secs := .1
 
 # Hoverboard constants
-const HOVERBOARD_SPEED := 15.0 # Faster than walk speed
+const HOVERBOARD_SPEED := 20.0 # Faster than walk speed
 const HOVERBOARD_ASCENT_SPEED := 8.0
 const HOVERBOARD_DESCENT_SPEED := 8.0
 
@@ -567,8 +567,8 @@ func _physics_process(delta):
 	
 	# Animation tree parameters
 	var vel2D = Vector2(velocity.x, velocity.z)
-	var move_blend_space := Vector2(vel2D.length(), 0)
-	anim_tree.set("parameters/StateMachine/GroundBlendSpace/blend_position", move_blend_space)
+	var ground_blend_space := Vector2(vel2D.length(), 0)
+	anim_tree.set("parameters/StateMachine/GroundBlendSpace/blend_position", ground_blend_space)
 	anim_tree.set("parameters/StateMachine/AerialBlendSpace/blend_position", Vector3.UP*velocity.y)
 
 func handle_hoverboard_movement(_delta):
@@ -596,13 +596,18 @@ func handle_hoverboard_movement(_delta):
 	
 	if ascending and not descending:
 		# Ascend
-		velocity.y = HOVERBOARD_ASCENT_SPEED
+		velocity.y = lerp(velocity.y, HOVERBOARD_ASCENT_SPEED, LERP_VAL)
 	elif descending and not ascending:
 		# Descend
-		velocity.y = -HOVERBOARD_DESCENT_SPEED
+		velocity.y = lerp(velocity.y, -HOVERBOARD_DESCENT_SPEED, LERP_VAL)
 	else:
 		# Hovering (both pressed, neither pressed, or any other case)
-		velocity.y = 0.0
+		velocity.y = lerp(velocity.y, 0.0, LERP_VAL)
+	
+	# Animation tree parameters
+	var vel2D = Vector2(velocity.x, velocity.z)
+	var hover_blend_space := Vector2(vel2D.length(), velocity.y)
+	anim_tree.set("parameters/StateMachine/HoverBlendSpace/blend_position", hover_blend_space)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not using_controller:
