@@ -12,7 +12,7 @@ const step_dodge_duration_secs := .5
 const step_dodge_cooldown_secs := .1
 
 # Hoverboard constants
-const HOVERBOARD_SPEED := 20.0 # Faster than walk speed
+const HOVERBOARD_SPEED := 15.0 # Faster than walk speed
 const HOVERBOARD_ASCENT_SPEED := 8.0
 const HOVERBOARD_DESCENT_SPEED := 8.0
 
@@ -299,20 +299,22 @@ func _physics_process(delta):
 		global_position = grab_pos_node.global_position - .5 * Vector3.UP
 		return
 	
-	# Hoverboard dismount logic - pressing ThrowShuriken exits hoverboard mode
-	if is_hoverboarding and Input.is_action_just_pressed("ThrowShuriken"):
+	# Hoverboard dismount logic - pressing Special exits hoverboard mode
+	# This check happens before special ability checks so dismount always works
+	if is_hoverboarding and Input.is_action_just_pressed("Special"):
 		is_hoverboarding = false
 		# Restore gravity
 		gravity = default_gravity
+		# Don't process special abilities this frame if we just dismounted
+		# (let the dismount action complete first)
 	
 	# Hoverboard movement
 	if is_hoverboarding:
 		handle_hoverboard_movement(delta)
-		move_and_slide()
-		return
+		# Don't return - allow rang throwing and other actions while hoverboarding
 	
-	# Falling
-	if not is_on_floor():
+	# Falling (skip if hoverboarding)
+	if not is_on_floor() and not is_hoverboarding:
 		velocity.y -= gravity * delta
 	
 	# Stunned logic
@@ -320,8 +322,8 @@ func _physics_process(delta):
 		move_and_slide()
 		return
 	
-	# Dodge logic with hoverboard activation
-	if Input.is_action_just_pressed("StepDodge") and !busy and roserang_power_throw_charge_time <= 0:
+	# Dodge logic with hoverboard activation (can't dodge while already hoverboarding)
+	if Input.is_action_just_pressed("StepDodge") and !busy and roserang_power_throw_charge_time <= 0 and !is_hoverboarding:
 		anim_tree.set(anim_tree_param_path_base + "just_dodged", true)
 		dodge_held = true
 		step_dodge()
@@ -332,7 +334,7 @@ func _physics_process(delta):
 	if is_dodging and not Input.is_action_pressed("StepDodge"):
 		dodge_held = false
 	
-	if Input.is_action_pressed("Jump") and is_on_floor() and icon.following_cotu:
+	if Input.is_action_pressed("Jump") and is_on_floor() and icon.following_cotu and !is_hoverboarding:
 		super_jump_charge_time += delta
 		
 		# Once the player starts charging, they become "busy" and stop moving
@@ -347,7 +349,7 @@ func _physics_process(delta):
 			super_jump_fully_charged = true
 			# You could add a particle effect or sound trigger here for "Charge Complete"
 	
-	if Input.is_action_just_released("Jump"):
+	if Input.is_action_just_released("Jump") and !is_hoverboarding:
 		if super_jump_fully_charged:
 			velocity.y = super_jump_speed
 			# Optional: add a 'jump' trigger to your AnimTree here
@@ -371,24 +373,25 @@ func _physics_process(delta):
 	if active_debuffs[Globals.DEBUFFS.INFEST] > 0:
 		active_debuffs[Globals.DEBUFFS.INFEST] -= delta
 	
-	# Cotu movement
-	walk_input = Input.get_vector("WalkLeft", "WalkRight", "WalkForward", "WalkBackward")
-	if walk_input.x != 0:
-		moving_right = walk_input.x > 0
-	var mvmt_dir = Vector3(walk_input.x, 0, walk_input.y)
-	var oriented_mvmt_dir = (camera_twist_pivot.basis * mvmt_dir).normalized()
-	if oriented_mvmt_dir:
-		if can_walk:
-			velocity.x = lerp(velocity.x, oriented_mvmt_dir.x * grounded_speed, LERP_VAL)
-			velocity.z = lerp(velocity.z, oriented_mvmt_dir.z * grounded_speed, LERP_VAL)
-		if can_rotate:
-			if is_on_floor():
-				armature.rotation.y = lerp_angle(armature.rotation.y, atan2(oriented_mvmt_dir.x, oriented_mvmt_dir.z), LERP_VAL)
-			else:
-				armature.rotation.y = lerp_angle(armature.rotation.y, atan2(oriented_mvmt_dir.x, oriented_mvmt_dir.z), LERP_VAL / 5)
-	if not oriented_mvmt_dir or not can_walk:
-		velocity.x = lerp(velocity.x, 0.0, LERP_VAL)
-		velocity.z = lerp(velocity.z, 0.0, LERP_VAL)
+	# Cotu movement (skip normal movement if hoverboarding, as it's handled separately)
+	if not is_hoverboarding:
+		walk_input = Input.get_vector("WalkLeft", "WalkRight", "WalkForward", "WalkBackward")
+		if walk_input.x != 0:
+			moving_right = walk_input.x > 0
+		var mvmt_dir = Vector3(walk_input.x, 0, walk_input.y)
+		var oriented_mvmt_dir = (camera_twist_pivot.basis * mvmt_dir).normalized()
+		if oriented_mvmt_dir:
+			if can_walk:
+				velocity.x = lerp(velocity.x, oriented_mvmt_dir.x * grounded_speed, LERP_VAL)
+				velocity.z = lerp(velocity.z, oriented_mvmt_dir.z * grounded_speed, LERP_VAL)
+			if can_rotate:
+				if is_on_floor():
+					armature.rotation.y = lerp_angle(armature.rotation.y, atan2(oriented_mvmt_dir.x, oriented_mvmt_dir.z), LERP_VAL)
+				else:
+					armature.rotation.y = lerp_angle(armature.rotation.y, atan2(oriented_mvmt_dir.x, oriented_mvmt_dir.z), LERP_VAL / 5)
+		if not oriented_mvmt_dir or not can_walk:
+			velocity.x = lerp(velocity.x, 0.0, LERP_VAL)
+			velocity.z = lerp(velocity.z, 0.0, LERP_VAL)
 	move_and_slide()
 	
 	# Recovery rate
@@ -409,7 +412,8 @@ func _physics_process(delta):
 	
 	# Special rose throw (takes precedence over instant rethrow). Requires all buffs to be active
 	var all_roserang_buffs_active := next_roserang_buff_index >= Globals.roserang_buff_list.size()
-	if Input.is_action_just_pressed("Special") and not roserang_special_queued and all_roserang_buffs_active and not roserang_instances.is_empty():
+	# Skip if hoverboarding (player is using Special to dismount)
+	if Input.is_action_just_pressed("Special") and not is_hoverboarding and not roserang_special_queued and all_roserang_buffs_active and not roserang_instances.is_empty():
 		start_roserang_special_timer()
 	if roserang_special_queued and roserang_instances.is_empty():
 		roserang_special_queued = false
@@ -418,7 +422,8 @@ func _physics_process(delta):
 	
 	# Special ax throw
 	var all_axrang_buffs_active := next_axrang_buff_index >= axrang_buff_list.size()
-	if Input.is_action_just_pressed("Special") and not axrang_special_queued and all_axrang_buffs_active and axrang_instance != null:
+	# Skip if hoverboarding (player is using Special to dismount)
+	if Input.is_action_just_pressed("Special") and not is_hoverboarding and not axrang_special_queued and all_axrang_buffs_active and axrang_instance != null:
 		start_axrang_special_timer()
 	# Why not check if axrang_special_queued and axrang_instance == null to call throw_special_axrang like rose? Because on_catch_axrang can be used instead
 	# axrang_special_buff_saving ax buff expiration
@@ -435,11 +440,6 @@ func _physics_process(delta):
 	# roserang_mvmt_buffs_axrang_damage_on_perfect_catch buff timing
 	if roserang_mvmt_buffs_axrang_damage_on_perfect_catch_time_remaining > 0:
 		roserang_mvmt_buffs_axrang_damage_on_perfect_catch_time_remaining -= delta
-	
-	# TESTING SHURIKEN SPECIAL
-	if Input.is_action_just_pressed("Special"):
-		for s in shurikens:
-			s.switch_to_frenzy()
 	
 	if Input.is_action_just_pressed("MeleeAxrang") and !busy:
 		anim_tree.set(anim_tree_param_path_base + "melee_ax", true)
@@ -567,8 +567,8 @@ func _physics_process(delta):
 	
 	# Animation tree parameters
 	var vel2D = Vector2(velocity.x, velocity.z)
-	var ground_blend_space := Vector2(vel2D.length(), 0)
-	anim_tree.set("parameters/StateMachine/GroundBlendSpace/blend_position", ground_blend_space)
+	var move_blend_space := Vector2(vel2D.length(), 0)
+	anim_tree.set("parameters/StateMachine/GroundBlendSpace/blend_position", move_blend_space)
 	anim_tree.set("parameters/StateMachine/AerialBlendSpace/blend_position", Vector3.UP*velocity.y)
 
 func handle_hoverboard_movement(_delta):
