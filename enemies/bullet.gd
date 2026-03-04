@@ -29,6 +29,12 @@ func destroy_self():
 	for child in get_children():
 		if not "Explosion" in child.name:
 			child.queue_free()
+	# Reset rotation so that ring particle faces correct direction
+	#rotation = Vector3.ZERO
+	if find_child("ExplosionRingParticle") != null:
+		var ring := $ExplosionRingParticle
+		ring.look_at(Vector3.FORWARD)
+		ring.emitting = true
 	$ExplosionParticles.emitting = true
 	$ExplosionBall.emitting = true
 	if explosion_hitbox != null:

@@ -28,3 +28,6 @@ res://textures/white_border_black_solid_square.tres
 res://levels/gauntlet_level/section_nodes/gauntlet_arena1.gd
 res://levels/gauntlet_level/section_nodes/gauntlet_arena1.tscn
 res://glb_inherited_scenes/first_miniboss_meshes.tscn
+res://enemies/enemy_mega_bullet.tscn
+res://enemies/bullet.gd
+res://enemies/gauntlet_miniboss.tscn
