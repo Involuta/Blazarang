@@ -45,7 +45,7 @@ albedo_color = Color(1, 1, 0, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d6ihy"]
 render_priority = 0
 shader = ExtResource("3_7inua")
-shader_parameter/outline_color = Color(0.780392, 0.780392, 0.780392, 1)
+shader_parameter/outline_color = Color(0.388235, 0.388235, 0.388235, 1)
 shader_parameter/outline_width = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jnqhs"]
@@ -56,7 +56,7 @@ roughness = 0.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kr1ll"]
 render_priority = 0
 shader = ExtResource("3_7inua")
-shader_parameter/outline_color = Color(0.780392, 0.780392, 0.780392, 1)
+shader_parameter/outline_color = Color(0.392157, 0.392157, 0.392157, 1)
 shader_parameter/outline_width = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kw6hv"]
@@ -73,14 +73,14 @@ surface_material_override/1 = SubResource("StandardMaterial3D_v5hn8")
 [node name="BodySpinner1" parent="." index="1"]
 surface_material_override/0 = SubResource("StandardMaterial3D_jnqhs")
 
-[node name="BodySpinner2" parent="." index="2"]
-surface_material_override/0 = SubResource("StandardMaterial3D_jnqhs")
-
-[node name="BodySpinner3" parent="." index="3"]
-surface_material_override/0 = SubResource("StandardMaterial3D_jnqhs")
-
-[node name="BladeSpinner" parent="." index="4"]
+[node name="BladeSpinner" parent="." index="2"]
 surface_material_override/0 = SubResource("StandardMaterial3D_kw6hv")
 
-[node name="TopSpinner" parent="." index="5"]
+[node name="BodySpinner2" parent="." index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_jnqhs")
+
+[node name="BodySpinner3" parent="." index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_jnqhs")
+
+[node name="Top" parent="." index="5"]
 surface_material_override/0 = SubResource("StandardMaterial3D_jnqhs")
