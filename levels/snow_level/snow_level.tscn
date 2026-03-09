@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://nwyg2u2h4waf"]
+
+[ext_resource type="PackedScene" uid="uid://bncqrp8eeujo3" path="res://levels/snow_level/section_nodes/clarity_boss_arena1.tscn" id="1_mfea8"]
+[ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="2_po5lc"]
+[ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="3_f8ye4"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_p1rwj"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_4kc4h"]
+sky_material = SubResource("ProceduralSkyMaterial_p1rwj")
+
+[sub_resource type="Environment" id="Environment_fxt2w"]
+background_mode = 2
+sky = SubResource("Sky_4kc4h")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Level" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fxt2w")
+
+[node name="ClarityBossArena1" parent="." instance=ExtResource("1_mfea8")]
+
+[node name="Icon" parent="." instance=ExtResource("2_po5lc")]
+
+[node name="cotuCB" parent="." instance=ExtResource("3_f8ye4")]

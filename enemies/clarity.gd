@@ -7,7 +7,7 @@ enum {
 	LEFT,
 	ATTACK,
 }
-var behav_state := FORWARD
+var behav_state := LEFT
 
 enum DIST_TYPE {
 	SHORT_DIST,
@@ -31,7 +31,7 @@ var phase := PHASE.PHASE1
 
 @export var min_y_pos := 11.4 # y pos of arena floor, ie X's minimum y position
 
-@export var follow_speed := 15.0
+@export var follow_speed := 3.0
 @export var follow_time_before_parry := .1 # Min time necessary to spend in follow state before parry is possible
 var current_follow_time := 0.0 # Reset after attack or parry is queued
 @export var parry_angle_tolerance := PI/5 # Max y angle difference btwn vec from Cotu to Clarity and player camera fwd vec that triggers Clarity to parry
@@ -39,7 +39,7 @@ var current_follow_time := 0.0 # Reset after attack or parry is queued
 var rose_thrown := false # Set to true when Cotu throws non-special roserang while Clarity is following. Set to false when parry ends (end_parry). Why isn't this set to false every frame where a rose throw doesn't happen? Because the anim tree parry transition expressions need to read rose_thrown as true to know parry anim to play, and that happens at least 1 frame after a parry is triggered via queue_parry
 var ax_thrown := false # Set to true when Cotu throws non-special axrang while Clarity is following. Set to false when parry ends (end_parry) for the same reason as rose_thrown
 var parried := false # Set to true after a parry, set to false after a non-parry
-@export var shortrange_attack_distance := 7.5
+@export var follow_left_distance := 15.0
 
 @export var follow_turn_speed := .05
 @export var base_attack_turn_speed := .15
@@ -120,3 +120,84 @@ func trigger_rose_parry():
 func trigger_ax_parry():
 	if behav_state == FORWARD or behav_state == LEFT:
 		ax_thrown = true
+
+func follow_forward():
+	current_follow_time += get_physics_process_delta_time()
+	
+	lerp_look_at_position(target.global_position, follow_turn_speed)
+	var move_dir = global_position.direction_to(target.global_position)
+	velocity.x = follow_speed / 2 * move_dir.x
+	velocity.z = follow_speed / 2 * move_dir.z
+	"""
+	# If Cotu throws the rose or ax at you, dodge it if you haven't done a dodge already and follow_time_before_dodge secs have passed
+	# Dodge direction (left/right) is determined in anim tree state transitions
+	if not dodged and (rose_thrown or ax_thrown) and current_follow_time >= follow_time_before_dodge and abs(rang_throw_angle_to_me()) < dodge_angle_tolerance:
+		queue_dodge()
+		return
+	
+	if not attack_queued and behav_state != ATTACK and global_position.distance_to(target.global_position) < follow_left_distance:
+		queue_attack(DIST_TYPE.SHORT_DIST)
+		return
+	
+	# This code block ensures start_long_dist_attack is only called once
+	if long_dist_wait_remaining <= 0:
+		return
+	else:
+		long_dist_wait_remaining -= get_physics_process_delta_time()
+		if not attack_queued and long_dist_wait_remaining <= 0:
+			queue_attack(DIST_TYPE.SHORT_DIST)
+	"""
+
+# Add these variables to your script if they aren't there
+var orbit_angle: float = 0.0
+
+func follow_left(delta: float):
+	# 1. Update the angle based on speed and distance
+	# Circumference = 2 * PI * radius. We adjust the angle accordingly.
+	var angular_speed = follow_speed / follow_left_distance
+	orbit_angle += angular_speed * delta
+	
+	# 2. Calculate the new target position on the circle
+	var offset = Vector3(
+		cos(orbit_angle) * follow_left_distance,
+		0,
+		sin(orbit_angle) * follow_left_distance
+	)
+	var circle_dest = target.global_position + offset
+	
+	# 3. Handle rotation
+	lerp_look_at_position(target.global_position, follow_turn_speed)
+	
+	# 4. Move the character
+	# We use velocity to move toward the specific point calculated on the circle
+	var move_dir = global_position.direction_to(circle_dest)
+	
+	# We use the full follow_speed to ensure it keeps up with the orbit calculation
+	velocity.x = move_dir.x * follow_speed
+	velocity.z = move_dir.z * follow_speed
+	
+	# Optional: If you want to snap the character to the circle to prevent drifting
+	# global_position.x = circle_dest.x
+	# global_position.z = circle_dest.z
+
+func _physics_process(delta):
+	match(behav_state):
+		FORWARD:
+			follow_forward()
+		LEFT:
+			follow_left(delta)
+	move_and_slide()
+
+func lerp_look_at_position(target_pos, turn_speed):
+	var vec3_to_target := global_position.direction_to(target_pos)
+	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
+	
+	"""
+	var old_head_rotation = x_mesh_head.rotation
+	x_mesh_head.look_at(Vector3(target.global_position.x, min_y_pos, target.global_position.z), Vector3.UP, true)
+	var head_target_rotation = x_mesh_head.rotation
+	x_mesh_head.rotation = old_head_rotation
+	x_mesh_head.rotation.y = lerp_angle(x_mesh_head.rotation.y, head_target_rotation.y, 2 * turn_speed)
+	x_mesh_head.rotation.x = lerp_angle(x_mesh_head.rotation.x, head_target_rotation.x, 2 * turn_speed)
+	x_mesh_head.rotation.z = lerp_angle(x_mesh_head.rotation.z, head_target_rotation.z, 2 * turn_speed)
+	"""

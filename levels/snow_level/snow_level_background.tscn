@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6kho0xiea8y0"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o2vos"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_bottom_color = Color(0, 0.741176, 1, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_d33do"]
+sky_material = SubResource("ProceduralSkyMaterial_o2vos")
+
+[sub_resource type="Environment" id="Environment_q3nmo"]
+background_mode = 2
+sky = SubResource("Sky_d33do")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="SnowLevelBackground" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_q3nmo")
+
+[node name="Camera3D" type="Camera3D" parent="."]

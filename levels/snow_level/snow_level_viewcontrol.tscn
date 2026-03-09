@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://cm2w1drpxvkk8"]
+
+[ext_resource type="PackedScene" uid="uid://b6kho0xiea8y0" path="res://levels/snow_level/snow_level_background.tscn" id="1_c5cbw"]
+[ext_resource type="PackedScene" uid="uid://nwyg2u2h4waf" path="res://levels/snow_level/snow_level.tscn" id="2_2xnrh"]
+[ext_resource type="Script" path="res://levels/level_viewport_container.gd" id="2_taii7"]
+[ext_resource type="PackedScene" uid="uid://kl1hpr0grn1v" path="res://ui/ui_root.tscn" id="4_gwlst"]
+
+[node name="ViewControl" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BGViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="BGViewportContainer"]
+own_world_3d = true
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="SnowLevelBackground" parent="BGViewportContainer/SubViewport" instance=ExtResource("1_c5cbw")]
+
+[node name="LevelViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_taii7")
+
+[node name="SubViewport" type="SubViewport" parent="LevelViewportContainer"]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+audio_listener_enable_3d = true
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="Level" parent="LevelViewportContainer/SubViewport" instance=ExtResource("2_2xnrh")]
+
+[node name="UIRoot" parent="." instance=ExtResource("4_gwlst")]
+layout_mode = 1

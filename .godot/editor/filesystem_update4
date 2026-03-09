@@ -29,3 +29,10 @@ res://cotu/cotu_cb_main.tscn
 res://enemies/x_boss.tscn
 res://enemies/clarity.gd
 res://enemies/x_boss.gd
+res://textures/solid_light_gray_tile.tres
+res://levels/snow_level/section_nodes/clarity_boss_arena1.tscn
+res://levels/snow_level/clarity_level.tscn
+res://levels/snow_level/snow_level.tscn
+res://levels/snow_level/snow_level_viewcontrol.tscn
+res://levels/snow_level/snow_level_background.tscn
+res://levels/x_boss_level/section_nodes/x_boss_arena1.tscn
