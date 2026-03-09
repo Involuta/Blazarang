@@ -1,6 +1,7 @@
+res://enemies
+res://shaders
 res://levels/gauntlet_level
 res://levels/mite_level
-res://enemies
 res://levels/x_boss_level
 res://glb_inherited_scenes
 res://cotu/cotu_anims
@@ -9,7 +10,6 @@ res://levels/hub
 res://levels
 res://enemies/enemy_anims
 res://enemies/enemy_2d_anims
-res://shaders
 res://levels/balls_level
 res://level_maps
 res://procedural_animation

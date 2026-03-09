@@ -1,0 +1,95 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwejhmociib43"]
+
+[ext_resource type="PackedScene" uid="uid://vxr5o770vx2w" path="res://glb_imports/Clarity.glb" id="1_d5by6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c8oi3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7lkse"]
+next_pass = SubResource("ShaderMaterial_c8oi3")
+transparency = 4
+albedo_color = Color(0.560784, 0.803922, 1, 0.705882)
+
+[node name="ClarityMeshes" instance=ExtResource("1_d5by6")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(1.76067, 4.49276, 0.0847608)
+bones/0/rotation = Quaternion(0.212631, 0.67438, -0.212631, 0.67438)
+bones/1/position = Vector3(2.00314e-09, 8.69174, -1.49919e-07)
+bones/1/rotation = Quaternion(-0.166661, -0.0027076, 0.00795607, 0.985978)
+bones/3/position = Vector3(-3.7482, 3.46871, -1.39226)
+bones/3/rotation = Quaternion(-0.423835, -0.19124, 0.875561, 0.131089)
+bones/6/position = Vector3(-0.0687633, 2.23724, -3.21414)
+bones/6/rotation = Quaternion(0.709175, -0.267997, 0.643878, 0.10329)
+bones/8/position = Vector3(2.05835, 1.00152, -1.38255)
+bones/8/rotation = Quaternion(0.661637, -0.177561, 0.728479, 0.00519963)
+bones/10/position = Vector3(-2.03123, 3.27691, -1.21063)
+bones/10/rotation = Quaternion(0.642088, -0.360734, 0.651586, 0.181738)
+bones/12/position = Vector3(-0.0233362, 2.23691, 3.36119)
+bones/12/rotation = Quaternion(0.648776, -0.101466, 0.704708, 0.268666)
+bones/14/position = Vector3(2.07827, 1.00137, 1.50025)
+bones/14/rotation = Quaternion(0.733042, -0.00400622, 0.656588, 0.177555)
+bones/16/position = Vector3(-2.0133, 3.27677, 1.38508)
+bones/16/rotation = Quaternion(0.656025, -0.179274, 0.637562, 0.361948)
+
+[node name="Hat_2" parent="Armature/Skeleton3D" index="0"]
+transform = Transform3D(0.0167564, 0.389522, 1.37582, 0.0172313, 1.37576, -0.389715, -1.4298, 0.0211451, 0.0114272, 7.02307, 12.9016, 0.082465)
+bone_idx = 2
+
+[node name="Hat_2" parent="Armature/Skeleton3D/Hat_2" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
+
+[node name="Arm_2" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.287023, 0.896841, 0.336591, -0.74594, 0.429703, -0.508849, -0.600991, -0.105025, 0.792325, 1.34077, 7.54585, 3.99514)
+bone_idx = 4
+
+[node name="Arm_2" parent="Armature/Skeleton3D/Arm_2" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
+
+[node name="Center_2" parent="Armature/Skeleton3D" index="2"]
+transform = Transform3D(-1.62327e-07, 0.573577, 0.819152, 1.91074e-07, 0.819152, -0.573577, -1, 8.94069e-08, -2.38419e-07, 4.85006, 9.05265, 0.0636871)
+bone_idx = 5
+
+[node name="Center_2" parent="Armature/Skeleton3D/Center_2" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
+
+[node name="MiddleLeft" parent="Armature/Skeleton3D" index="3"]
+transform = Transform3D(-0.180448, 0.478129, 0.859553, 5.06297e-05, 0.873903, -0.4861, -0.983585, -0.0876721, -0.157718, -0.531516, 0.309438, 0.213268)
+bone_idx = 7
+
+[node name="MiddleLeft" parent="Armature/Skeleton3D/MiddleLeft" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
+
+[node name="FrontLeft" parent="Armature/Skeleton3D" index="4"]
+transform = Transform3D(-0.00690915, 0.486089, 0.873882, 5.07169e-05, 0.873903, -0.4861, -0.999976, -0.00331442, -0.00606258, -1.11965, 0.309438, 0.080843)
+bone_idx = 9
+
+[node name="FrontLeft" parent="Armature/Skeleton3D/FrontLeft" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
+
+[node name="BackLeft" parent="Armature/Skeleton3D" index="5"]
+transform = Transform3D(-0.0069087, 0.486089, 0.873882, 5.04818e-05, 0.873903, -0.4861, -0.999976, -0.00331424, -0.0060621, -1.11965, 0.309438, 0.0808403)
+bone_idx = 11
+
+[node name="BackLeft" parent="Armature/Skeleton3D/BackLeft" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
+
+[node name="MiddleRight" parent="Armature/Skeleton3D" index="6"]
+transform = Transform3D(0.16684, 0.47928, 0.861658, 5.05792e-05, 0.873903, -0.4861, -0.985984, 0.0811447, 0.145778, -0.533368, 0.309439, -0.0596962)
+bone_idx = 13
+
+[node name="MiddleRight" parent="Armature/Skeleton3D/MiddleRight" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
+
+[node name="FrontRight" parent="Armature/Skeleton3D" index="7"]
+transform = Transform3D(-0.00690852, 0.486089, 0.873882, 5.04973e-05, 0.873903, -0.4861, -0.999976, -0.00331396, -0.00606196, -1.11965, 0.309438, 0.0808408)
+bone_idx = 15
+
+[node name="FrontRight" parent="Armature/Skeleton3D/FrontRight" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
+
+[node name="BackRight" parent="Armature/Skeleton3D" index="8"]
+transform = Transform3D(-0.00690895, 0.486089, 0.873882, 5.05233e-05, 0.873903, -0.4861, -0.999976, -0.00331419, -0.00606217, -1.11965, 0.309438, 0.0808419)
+bone_idx = 17
+
+[node name="BackRight" parent="Armature/Skeleton3D/BackRight" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
