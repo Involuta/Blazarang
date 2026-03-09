@@ -62,8 +62,6 @@ var ax_thrown := false # Set to true when Cotu throws non-special axrang while X
 var dodged := false # Set to true after a dodge, set to false after a non-dodge
 @export var shortrange_attack_distance := 7.5
 
-@export var attack_duration_secs := 2.5
-
 @export var follow_turn_speed := .05
 var attack_turn_speed := 0.15
 @export var base_attack_turn_speed := .15

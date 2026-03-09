@@ -1,8 +1,8 @@
+Node3D
 CollisionShape3D
 CharacterBody3D
 GPUParticles3D
 MeshInstance3D
-Node3D
 Label
 Label3D
 Area3D

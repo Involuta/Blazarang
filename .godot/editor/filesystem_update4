@@ -26,3 +26,6 @@ res://shaders/sobel_outline.gdshader
 res://glb_imports/clarity_meshes.tscn
 res://enemies/clarity.tscn
 res://cotu/cotu_cb_main.tscn
+res://enemies/x_boss.tscn
+res://enemies/clarity.gd
+res://enemies/x_boss.gd
