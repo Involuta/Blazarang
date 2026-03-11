@@ -47,18 +47,17 @@ var attack_turn_speed := 0.15
 
 var aiming_at_target := true
 
-@export var short_dist_attack_chances = {
+@export var phase1_forward_attack_chances = {
 	"SlipnSlice" : .25,
 	"Superman" : .25,
 	"RightArmSlice" : .4,
 	"Triangle" : .1
 }
 
-@export var long_dist_attack_chances = {
-	"SlipnSlice" : .4,
-	"Superman" : .4,
-	"Triangle" : .1,
-	"DiagonalDash" : .1
+@export var phase1_left_attack_chances = {
+	"SingleSlice" : .34,
+	"SingleShot" : .33,
+	"Spiral" : .33
 }
 
 @export var diagonal_dash_speed := 22.0
@@ -121,6 +120,21 @@ func trigger_ax_parry():
 	if behav_state == FORWARD or behav_state == LEFT:
 		ax_thrown = true
 
+func _physics_process(delta):
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+		if global_position.y < min_y_pos:
+			velocity.y = 0
+			global_position.y = min_y_pos
+	move_and_slide()
+	match(behav_state):
+		FORWARD:
+			follow_forward()
+		LEFT:
+			follow_left(delta)
+		ATTACK:
+			attack_frame()
+
 func follow_forward():
 	current_follow_time += get_physics_process_delta_time()
 	
@@ -176,22 +190,62 @@ func follow_left(delta: float):
 	velocity.x = move_dir.x * follow_speed
 	velocity.z = move_dir.z * follow_speed
 	
-	# Optional: If you want to snap the character to the circle to prevent drifting
-	# global_position.x = circle_dest.x
-	# global_position.z = circle_dest.z
+	# This code block ensures start_long_dist_attack is only called once
+	if long_dist_wait_remaining <= 0:
+		return
+	else:
+		long_dist_wait_remaining -= get_physics_process_delta_time()
+		if not attack_queued and long_dist_wait_remaining <= 0:
+			queue_attack()
 
-func _physics_process(delta):
-	if not is_on_floor():
-		velocity.y -= gravity * delta
-		if global_position.y < min_y_pos:
-			velocity.y = 0
-			global_position.y = min_y_pos
-	move_and_slide()
-	match(behav_state):
-		FORWARD:
-			follow_forward()
-		LEFT:
-			follow_left(delta)
+func attack_frame():
+	if aiming_at_target:
+		lerp_look_at_position(target.global_position, attack_turn_speed)
+
+func queue_attack():
+	parried = false # Clarity can parry when he reaches follow state again
+	attack_queued = true
+	match(phase):
+		PHASE.PHASE1:
+			match(behav_state):
+				FORWARD:
+					anim_tree.set(choose_attack(phase1_forward_attack_chances), true)
+				LEFT:
+					anim_tree.set(choose_attack(phase1_left_attack_chances), true)
+		PHASE.PHASE2:
+			pass # pass until phase2 is confirmed to exist
+
+func choose_attack(attack_chances) -> String:
+	var choice := rng.randf()
+	var cumulative_weight := 0.0
+	for attack in attack_chances:
+		cumulative_weight += attack_chances[attack]
+		if choice <= cumulative_weight:
+			return param_path_base + attack
+	return param_path_base + attack_chances.keys()[0]
+
+func start_attack():
+	# Without this await, the animation player would call end_attack at the end of the previous animation on the exact same frame as when the AnimationPlayer.play func is called below. Since an animation was currently in progress, the func call would do nothing, leaving the enemy in ATTACK mode but with no animation playing to free it from ATTACK mode, causing it to stand still indefinitely
+	await get_tree().physics_frame
+	behav_state = ATTACK
+	aiming_at_target = true
+
+func end_attack():
+	attack_queued = false
+	no_attack_queued.emit()
+	for attack in phase1_forward_attack_chances.keys():
+		anim_tree.set(param_path_base + attack, false)
+	for attack in phase1_left_attack_chances.keys():
+		anim_tree.set(param_path_base + attack, false)
+	long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
+	current_follow_time = 0
+	# After an attack or dodge ends, check when the rose or ax is thrown again
+	rose_thrown = false
+	ax_thrown = false
+	"""
+	FOR TESTING: behav_state is only left
+	"""
+	behav_state = LEFT
 
 func lerp_look_at_position(target_pos, turn_speed):
 	var vec3_to_target := global_position.direction_to(target_pos)

@@ -533,7 +533,7 @@ func start_strafe():
 
 func start_attack():
 	# Without this await, the animation player would call end_attack at the end of the previous animation on the exact same frame as when the AnimationPlayer.play func is called below. Since an animation was currently in progress, the func call would do nothing, leaving the enemy in ATTACK mode but with no animation playing to free it from ATTACK mode, causing it to stand still indefinitely
-	await get_tree().create_timer(get_process_delta_time()).timeout
+	await get_tree().physics_frame
 	behav_state = ATTACK
 	aiming_at_target = true
 
