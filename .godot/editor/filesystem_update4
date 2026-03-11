@@ -36,3 +36,6 @@ res://levels/snow_level/snow_level.tscn
 res://levels/snow_level/snow_level_viewcontrol.tscn
 res://levels/snow_level/snow_level_background.tscn
 res://levels/x_boss_level/section_nodes/x_boss_arena1.tscn
+res://cotu/CotuControl.gd
+res://levels/x_boss_level/x_boss_level1.tscn
+res://levels/x_boss_level/x_boss_level1_viewcontrol.tscn

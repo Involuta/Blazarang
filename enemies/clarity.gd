@@ -31,7 +31,7 @@ var phase := PHASE.PHASE1
 
 @export var min_y_pos := 11.4 # y pos of arena floor, ie X's minimum y position
 
-@export var follow_speed := 3.0
+@export var follow_speed := 1.5
 @export var follow_time_before_parry := .1 # Min time necessary to spend in follow state before parry is possible
 var current_follow_time := 0.0 # Reset after attack or parry is queued
 @export var parry_angle_tolerance := PI/5 # Max y angle difference btwn vec from Cotu to Clarity and player camera fwd vec that triggers Clarity to parry
@@ -39,7 +39,7 @@ var current_follow_time := 0.0 # Reset after attack or parry is queued
 var rose_thrown := false # Set to true when Cotu throws non-special roserang while Clarity is following. Set to false when parry ends (end_parry). Why isn't this set to false every frame where a rose throw doesn't happen? Because the anim tree parry transition expressions need to read rose_thrown as true to know parry anim to play, and that happens at least 1 frame after a parry is triggered via queue_parry
 var ax_thrown := false # Set to true when Cotu throws non-special axrang while Clarity is following. Set to false when parry ends (end_parry) for the same reason as rose_thrown
 var parried := false # Set to true after a parry, set to false after a non-parry
-@export var follow_left_distance := 15.0
+@export var follow_left_distance := 7.5
 
 @export var follow_turn_speed := .05
 @export var base_attack_turn_speed := .15
@@ -181,12 +181,17 @@ func follow_left(delta: float):
 	# global_position.z = circle_dest.z
 
 func _physics_process(delta):
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+		if global_position.y < min_y_pos:
+			velocity.y = 0
+			global_position.y = min_y_pos
+	move_and_slide()
 	match(behav_state):
 		FORWARD:
 			follow_forward()
 		LEFT:
 			follow_left(delta)
-	move_and_slide()
 
 func lerp_look_at_position(target_pos, turn_speed):
 	var vec3_to_target := global_position.direction_to(target_pos)

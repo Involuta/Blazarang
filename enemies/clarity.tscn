@@ -17,7 +17,10 @@ states/WalkLeftPassive/position = Vector2(368, 100.125)
 transitions = ["Start", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_pgktn")]
 
 [node name="Clarity" type="CharacterBody3D"]
+collision_layer = 8
+collision_mask = 146
 script = ExtResource("1_172k1")
+min_y_pos = 10.0
 
 [node name="ClarityMeshes" parent="." instance=ExtResource("1_4e0of")]
 transform = Transform3D(-0.33, 1.151e-16, -4.98286e-08, 1.151e-16, 0.33, -1.151e-16, 4.98286e-08, -1.151e-16, -0.33, 0, 0, 0)
@@ -70,7 +73,7 @@ transform = Transform3D(0.984808, -0.157379, 0.0733868, 0.173648, 0.892539, -0.4
 transform = Transform3D(1, 1.73825e-08, -4.1977e-08, -6.95467e-08, 0.906308, -0.422618, -2.6334e-08, 0.422618, 0.906308, -1.19209e-06, 0.234416, -0.910979)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -2.88725, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -2.4, 2.08165e-12)
 shape = SubResource("CapsuleShape3D_o5urh")
 
 [node name="MeleeHitboxPivot" type="Node3D" parent="."]

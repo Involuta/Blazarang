@@ -1,13 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwejhmociib43"]
+[gd_scene load_steps=5 format=3 uid="uid://cwejhmociib43"]
 
 [ext_resource type="PackedScene" uid="uid://vxr5o770vx2w" path="res://glb_imports/Clarity.glb" id="1_d5by6"]
+[ext_resource type="Shader" path="res://shaders/black_outline.gdshader" id="2_ga04g"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c8oi3"]
+render_priority = 0
+shader = ExtResource("2_ga04g")
+shader_parameter/outline_color = Color(0.603922, 0.847059, 1, 1)
+shader_parameter/outline_width = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7lkse"]
 next_pass = SubResource("ShaderMaterial_c8oi3")
 transparency = 4
-albedo_color = Color(0.560784, 0.803922, 1, 0.705882)
+albedo_color = Color(0.560784, 0.803922, 1, 1)
 
 [node name="ClarityMeshes" instance=ExtResource("1_d5by6")]
 

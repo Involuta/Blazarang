@@ -23,7 +23,9 @@ glow_enabled = true
 environment = SubResource("Environment_fxt2w")
 
 [node name="ClarityBossArena1" parent="." instance=ExtResource("1_mfea8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
 
 [node name="Icon" parent="." instance=ExtResource("2_po5lc")]
 
 [node name="cotuCB" parent="." instance=ExtResource("3_f8ye4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 11, 2.08165e-12)
