@@ -76,7 +76,7 @@ var aiming_at_target := true
 @export var flyingkick_speed := 200.0
 @export var flyingkick_hit_frames := 10 # Put the # of frames that the hitbox is active in the animation here
 
-var param_path_base := "parameters/StateMachine/conditions/"
+var param_path_base := "parameters/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 var transparent_mat := preload("res://textures/clear_tile.tres")
@@ -106,6 +106,7 @@ func _ready():
 	
 	min_long_dist_wait = phase1_min_long_dist_wait
 	max_long_dist_wait = phase1_max_long_dist_wait
+	long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	
 	attack_turn_speed = base_attack_turn_speed
 	

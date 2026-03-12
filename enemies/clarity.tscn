@@ -68,6 +68,8 @@ graph_offset = Vector2(-59.7375, -26.7975)
 collision_layer = 8
 collision_mask = 146
 script = ExtResource("1_172k1")
+phase1_min_long_dist_wait = 2.0
+phase1_max_long_dist_wait = 4.0
 min_y_pos = 10.0
 
 [node name="ClarityMeshes" parent="." instance=ExtResource("1_4e0of")]
@@ -94,7 +96,7 @@ bones/16/position = Vector3(-2.39, 2.94367, -0.755941)
 bones/16/rotation = Quaternion(0.321999, -0.24697, 0.885482, 0.226373)
 
 [node name="Hat_2" parent="ClarityMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1.42986, 0.00998905, -0.0170401, -0.0125258, 1.41244, -0.223079, 0.0152725, 0.223207, 1.41239, 0.918732, 14.4374, 0.659003)
+transform = Transform3D(1.42986, 0.00998902, -0.0170401, -0.0125258, 1.41244, -0.223079, 0.0152725, 0.223207, 1.41239, 0.918732, 14.4374, 0.659003)
 
 [node name="Arm_2" parent="ClarityMeshes/Armature/Skeleton3D" index="1"]
 transform = Transform3D(0.400614, 0.902941, 0.155577, -0.907557, 0.414382, -0.0680211, -0.125888, -0.113945, 0.985479, -4.53806, 8.64707, 0.998591)
@@ -129,6 +131,7 @@ shape = SubResource("CapsuleShape3D_o5urh")
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_quqet")
 anim_player = NodePath("../ClarityMeshes/AnimationPlayer")
+advance_expression_base_node = NodePath("..")
 parameters/conditions/SingleShot = false
 parameters/conditions/SingleSlice = false
 parameters/conditions/Spiral = false

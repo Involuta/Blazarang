@@ -39,3 +39,6 @@ res://levels/x_boss_level/section_nodes/x_boss_arena1.tscn
 res://cotu/CotuControl.gd
 res://levels/x_boss_level/x_boss_level1.tscn
 res://levels/x_boss_level/x_boss_level1_viewcontrol.tscn
+res://enemies/enemy_anims/clarity_singleshot_left.res
+res://enemies/enemy_anims/clarity_singleslice_left_entirety.res
+res://enemies/enemy_anims/clarity_spiral.res

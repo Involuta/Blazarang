@@ -1,3 +1,4 @@
+res://enemies/enemy_anims
 res://enemies
 res://shaders
 res://levels/gauntlet_level
@@ -8,7 +9,6 @@ res://cotu/cotu_anims
 res://general_scripts
 res://levels/hub
 res://levels
-res://enemies/enemy_anims
 res://enemies/enemy_2d_anims
 res://levels/balls_level
 res://level_maps
