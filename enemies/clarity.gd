@@ -55,9 +55,10 @@ var aiming_at_target := true
 }
 
 @export var phase1_left_attack_chances = {
-	"SingleSlice" : .34,
-	"SingleShot" : .33,
-	"Spiral" : .33
+	"SingleSlice" : .25,
+	"DoubleSlice" : .25,
+	"SingleShot" : .25,
+	"Spiral" : .25,
 }
 
 @export var diagonal_dash_speed := 22.0
