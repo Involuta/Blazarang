@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=22 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -6,13 +6,16 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o5urh"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vawuj"]
-animation = &"DoubleSliceLeftEntirety"
+animation = &"DoubleSliceLeftDelayed"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hw786"]
+animation = &"DoubleSliceLeftImmediate"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i7pds"]
 animation = &"SingleShotLeft"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cm53l"]
-animation = &"SingleSliceLeftEntirety"
+animation = &"SingleSliceLeft"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m6gyu"]
 animation = &"Spiral"
@@ -59,16 +62,29 @@ advance_mode = 2
 xfade_time = 0.15
 advance_mode = 2
 advance_condition = &"DoubleSlice"
-advance_expression = "behav_state == LEFT"
+advance_expression = "behav_state == LEFT and rng.randf() > .5"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nluli"]
 xfade_time = 0.15
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3qy52"]
+xfade_time = 0.15
+advance_mode = 2
+advance_condition = &"DoubleSlice"
+advance_expression = "behav_state == LEFT and rng.randf() <= .5"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b1d7j"]
+xfade_time = 0.15
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_quqet"]
-states/DoubleSliceLeftEntirety/node = SubResource("AnimationNodeAnimation_vawuj")
-states/DoubleSliceLeftEntirety/position = Vector2(177.435, 168.522)
+states/DoubleSliceLeftDelayed/node = SubResource("AnimationNodeAnimation_vawuj")
+states/DoubleSliceLeftDelayed/position = Vector2(177.435, 168.522)
+states/DoubleSliceLeftImmediate/node = SubResource("AnimationNodeAnimation_hw786")
+states/DoubleSliceLeftImmediate/position = Vector2(527.728, 168)
 states/SingleShotLeft/node = SubResource("AnimationNodeAnimation_i7pds")
 states/SingleShotLeft/position = Vector2(467.37, -2.29188)
 states/SingleSliceLeftEntirety/node = SubResource("AnimationNodeAnimation_cm53l")
@@ -77,8 +93,8 @@ states/Spiral/node = SubResource("AnimationNodeAnimation_m6gyu")
 states/Spiral/position = Vector2(345.633, -2.83125)
 states/WalkLeftPassive/node = SubResource("AnimationNodeAnimation_4l45u")
 states/WalkLeftPassive/position = Vector2(368, 100.125)
-transitions = ["Start", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_pgktn"), "WalkLeftPassive", "SingleSliceLeftEntirety", SubResource("AnimationNodeStateMachineTransition_m6tw1"), "SingleSliceLeftEntirety", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_sa1ir"), "WalkLeftPassive", "Spiral", SubResource("AnimationNodeStateMachineTransition_dqawf"), "Spiral", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_i802x"), "WalkLeftPassive", "SingleShotLeft", SubResource("AnimationNodeStateMachineTransition_4sm0h"), "SingleShotLeft", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_tkkm2"), "WalkLeftPassive", "DoubleSliceLeftEntirety", SubResource("AnimationNodeStateMachineTransition_bea46"), "DoubleSliceLeftEntirety", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_nluli")]
-graph_offset = Vector2(11.2275, 17.865)
+transitions = ["Start", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_pgktn"), "WalkLeftPassive", "SingleSliceLeftEntirety", SubResource("AnimationNodeStateMachineTransition_m6tw1"), "SingleSliceLeftEntirety", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_sa1ir"), "WalkLeftPassive", "Spiral", SubResource("AnimationNodeStateMachineTransition_dqawf"), "Spiral", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_i802x"), "WalkLeftPassive", "SingleShotLeft", SubResource("AnimationNodeStateMachineTransition_4sm0h"), "SingleShotLeft", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_tkkm2"), "WalkLeftPassive", "DoubleSliceLeftDelayed", SubResource("AnimationNodeStateMachineTransition_bea46"), "DoubleSliceLeftDelayed", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_nluli"), "WalkLeftPassive", "DoubleSliceLeftImmediate", SubResource("AnimationNodeStateMachineTransition_3qy52"), "DoubleSliceLeftImmediate", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_b1d7j")]
+graph_offset = Vector2(-107.048, 47.64)
 
 [node name="Clarity" type="CharacterBody3D"]
 collision_layer = 8
