@@ -1,6 +1,4 @@
-res://enemies/enemy_anims/clarity_singleshot_left.res
-res://enemies/enemy_anims/clarity_spiral.res
-res://enemies/clarity.tscn
+res://cotu/cotu_cb_main.tscn
 res://textures/clear_tile.tres
 res://enemies/enemy_hurtbox.gd
 res://GPUTrail-main/shaders/trail.gdshader
@@ -26,6 +24,14 @@ res://glb_inherited_scenes/cotu_outline.gdshader
 res://general_scripts/skygradient.gdshader
 res://glb_inherited_scenes/mite_hills_ground.gdshader
 res://shaders/sobel_outline.gdshader
-res://enemies/clarity.gd
-res://cotu/cotu_cb_main.tscn
+res://enemies/clarity.tscn
 res://levels/snow_level/section_nodes/clarity_boss_arena1.tscn
+res://enemies/landmite.gd
+res://enemies/landmite.tscn
+res://enemies/paramite.tscn
+res://enemies/paramite.gd
+res://levels/mite_level/mite_level_viewcontrol.tscn
+res://enemies/enemy_anims/paramite_bite.res
+res://enemies/enemy_anims/paramite_flip.res
+res://enemies/enemy_anims/paramite_glide.res
+res://enemies/enemy_anims/landmite_leap.res
