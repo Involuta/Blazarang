@@ -31,6 +31,8 @@ var phase := PHASE.PHASE1
 
 @export var min_y_pos := 11.4 # y pos of arena floor, ie X's minimum y position
 
+@export var walk_speed := 1.5
+var walk_dir := Vector3.FORWARD # Randomly set when switching to walk state
 @export var follow_speed := 1.5
 @export var follow_time_before_parry := .1 # Min time necessary to spend in follow state before parry is possible
 var current_follow_time := 0.0 # Reset after attack or parry is queued
@@ -132,9 +134,36 @@ func _physics_process(delta):
 		FORWARD:
 			follow_forward()
 		LEFT:
-			follow_left(delta)
+			walk_in_dir(walk_dir)
+			#follow_left(delta)
 		ATTACK:
 			attack_frame()
+
+func get_random_flat_unit_vector() -> Vector3:
+	# 1. Pick a random angle in radians (0 to 2*PI)
+	var angle = randf() * TAU 
+	
+	# 2. Calculate X and Z using trigonometry
+	var x = cos(angle)
+	var z = sin(angle)
+	
+	# 3. Return the resulting Vector3
+	return Vector3(x, 0, z)
+
+func switch_to_left():
+	behav_state = LEFT
+	walk_dir = get_random_flat_unit_vector()
+
+func walk_in_dir(dir: Vector3):
+	velocity = walk_speed * dir
+	
+	# This code block ensures start_long_dist_attack is only called once
+	if long_dist_wait_remaining <= 0:
+		return
+	else:
+		long_dist_wait_remaining -= get_physics_process_delta_time()
+		if not attack_queued and long_dist_wait_remaining <= 0:
+			queue_attack()
 
 func follow_forward():
 	current_follow_time += get_physics_process_delta_time()
@@ -190,14 +219,6 @@ func follow_left(delta: float):
 	# We use the full follow_speed to ensure it keeps up with the orbit calculation
 	velocity.x = move_dir.x * follow_speed
 	velocity.z = move_dir.z * follow_speed
-	
-	# This code block ensures start_long_dist_attack is only called once
-	if long_dist_wait_remaining <= 0:
-		return
-	else:
-		long_dist_wait_remaining -= get_physics_process_delta_time()
-		if not attack_queued and long_dist_wait_remaining <= 0:
-			queue_attack()
 
 func attack_frame():
 	if aiming_at_target:
@@ -246,7 +267,7 @@ func end_attack():
 	"""
 	FOR TESTING: behav_state is only left
 	"""
-	behav_state = LEFT
+	switch_to_left()
 
 func lerp_look_at_position(target_pos, turn_speed):
 	var vec3_to_target := global_position.direction_to(target_pos)
