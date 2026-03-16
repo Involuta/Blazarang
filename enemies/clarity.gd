@@ -87,8 +87,10 @@ var rng := RandomNumberGenerator.new()
 var transparent_mat := preload("res://textures/clear_tile.tres")
 @onready var anim_tree := $AnimationTree
 @onready var mhp := $MeleeHitboxPivot
-@onready var head_bone := $ClarityMeshes/Armature/Skeleton3D/Hat_2
-@onready var head_mesh := $ClarityMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
+@onready var upper_meshes := $ClarityUpperMeshes
+@onready var lower_meshes := $ClarityLowerMeshes
+@onready var head_bone := $ClarityUpperMeshes/Armature/Skeleton3D/Hat_2
+@onready var head_mesh := $ClarityUpperMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
 
 @onready var root := $/root/ViewControl
 var level : Node3D
@@ -161,6 +163,11 @@ func switch_to_left():
 func walk_in_dir(dir: Vector3):
 	velocity = walk_speed * dir
 	
+	# Lower meshes faces walk dir
+	lower_meshes.rotation.y = lerp_angle(lower_meshes.rotation.y, PI + atan2(-dir.x, -dir.z), head_turn_speed)
+	# Upper meshes moves to match walk dir
+	upper_meshes.position = .48 * dir
+	
 	lerp_look_at_position(target.global_position, head_turn_speed)
 	
 	# This code block ensures start_long_dist_attack is only called once
@@ -227,6 +234,8 @@ func follow_left(delta: float):
 	velocity.z = move_dir.z * follow_speed
 
 func attack_frame():
+	# Upper meshes moves to match walk dir
+	upper_meshes.position = .48 * velocity.normalized()
 	if aiming_at_target:
 		lerp_look_at_position(target.global_position, attack_turn_speed)
 
@@ -259,6 +268,7 @@ func start_attack():
 	aiming_at_target = true
 
 func end_attack():
+	print(upper_meshes.position)
 	attack_queued = false
 	no_attack_queued.emit()
 	for attack in phase1_forward_attack_chances.keys():
@@ -274,8 +284,12 @@ func end_attack():
 	FOR TESTING: behav_state is only left
 	"""
 	switch_to_left()
+	print(upper_meshes.position)
 
 func lerp_look_at_position(target_pos, turn_speed):
+	var vec3_to_target := -global_position.direction_to(target_pos)
+	upper_meshes.rotation.y = lerp_angle(upper_meshes.rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
+	
 	# Head mesh isn't a child of head bone so it doesn't inherit rotation from head bone
 	head_mesh.global_position = head_bone.global_position
 	var old_head_rotation = head_mesh.rotation
