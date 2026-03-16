@@ -33,6 +33,9 @@ var phase := PHASE.PHASE1
 
 @export var walk_speed := 1.5
 var walk_dir := Vector3.FORWARD # Randomly set when switching to walk state
+
+@export var head_turn_speed := .2
+
 @export var follow_speed := 1.5
 @export var follow_time_before_parry := .1 # Min time necessary to spend in follow state before parry is possible
 var current_follow_time := 0.0 # Reset after attack or parry is queued
@@ -83,8 +86,9 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 var transparent_mat := preload("res://textures/clear_tile.tres")
 @onready var anim_tree := $AnimationTree
-@onready var anim_player := $X_boss_meshes/AnimationPlayer
 @onready var mhp := $MeleeHitboxPivot
+@onready var head_bone := $ClarityMeshes/Armature/Skeleton3D/Hat_2
+@onready var head_mesh := $ClarityMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
 
 @onready var root := $/root/ViewControl
 var level : Node3D
@@ -156,6 +160,8 @@ func switch_to_left():
 
 func walk_in_dir(dir: Vector3):
 	velocity = walk_speed * dir
+	
+	lerp_look_at_position(target.global_position, head_turn_speed)
 	
 	# This code block ensures start_long_dist_attack is only called once
 	if long_dist_wait_remaining <= 0:
@@ -270,15 +276,12 @@ func end_attack():
 	switch_to_left()
 
 func lerp_look_at_position(target_pos, turn_speed):
-	var vec3_to_target := global_position.direction_to(target_pos)
-	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
-	
-	"""
-	var old_head_rotation = x_mesh_head.rotation
-	x_mesh_head.look_at(Vector3(target.global_position.x, min_y_pos, target.global_position.z), Vector3.UP, true)
-	var head_target_rotation = x_mesh_head.rotation
-	x_mesh_head.rotation = old_head_rotation
-	x_mesh_head.rotation.y = lerp_angle(x_mesh_head.rotation.y, head_target_rotation.y, 2 * turn_speed)
-	x_mesh_head.rotation.x = lerp_angle(x_mesh_head.rotation.x, head_target_rotation.x, 2 * turn_speed)
-	x_mesh_head.rotation.z = lerp_angle(x_mesh_head.rotation.z, head_target_rotation.z, 2 * turn_speed)
-	"""
+	# Head mesh isn't a child of head bone so it doesn't inherit rotation from head bone
+	head_mesh.global_position = head_bone.global_position
+	var old_head_rotation = head_mesh.rotation
+	head_mesh.look_at(Vector3(target.global_position.x, min_y_pos, target.global_position.z), Vector3.UP, true)
+	var head_target_rotation = head_mesh.rotation
+	head_mesh.rotation = old_head_rotation
+	head_mesh.rotation.y = lerp_angle(head_mesh.rotation.y, head_target_rotation.y, turn_speed)
+	# Look down/up at the player. Not too low so the head doesn't look straight down
+	head_mesh.rotation.x = min(lerp_angle(head_mesh.rotation.x, head_target_rotation.x, turn_speed), .67)

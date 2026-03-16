@@ -1,11 +1,12 @@
-Camera3D
+AnimationPlayer
 AnimationTree
+Node3D
+MeshInstance3D
+Camera3D
 WorldEnvironment
 CollisionShape3D
-MeshInstance3D
 StaticBody3D
 NavigationRegion3D
-Node3D
 CharacterBody3D
 GPUParticles3D
 Label
@@ -14,7 +15,6 @@ Area3D
 EnemyHurtbox
 Node
 Hitbox
-AnimationPlayer
 GPUTrail3D
 AudioStreamPlayer3D
 AudioStreamPlayer

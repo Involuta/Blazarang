@@ -30,3 +30,9 @@ res://enemies/enemy_anims/clarity_singleshot_left.res
 res://enemies/enemy_anims/clarity_spiral.res
 res://enemies/enemy_anims/clarity_doubleslice_left_delayed.res
 res://enemies/enemy_anims/clarity_doubleslice_left_immediate.res
+res://enemies/clarity_head.tscn
+res://glb_imports/clarity_meshes.tscn
+res://enemies/x_boss.tscn
+res://glb_inherited_scenes/x_boss_meshes.tscn
+res://enemies/landmite.tscn
+res://enemies/landmite.gd
