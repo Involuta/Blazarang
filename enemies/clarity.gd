@@ -208,7 +208,7 @@ func follow_forward():
 # Add these variables to your script if they aren't there
 var orbit_angle: float = 0.0
 
-func follow_left(delta: float):
+func walk_clockwise(delta: float):
 	# 1. Update the angle based on speed and distance
 	# Circumference = 2 * PI * radius. We adjust the angle accordingly.
 	var angular_speed = follow_speed / follow_left_distance
