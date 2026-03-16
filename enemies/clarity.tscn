@@ -54,7 +54,7 @@ advance_mode = 2
 xfade_time = 0.15
 advance_mode = 2
 advance_condition = &"SingleShot"
-advance_expression = "behav_state == LEFT"
+advance_expression = "behav_state == CURVED"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tkkm2"]
 xfade_time = 0.15
@@ -65,13 +65,13 @@ advance_mode = 2
 xfade_time = 0.15
 advance_mode = 2
 advance_condition = &"DoubleSlice"
-advance_expression = "behav_state == LEFT and rng.randf() > .5"
+advance_expression = "behav_state == CURVED and rng.randf() > .5"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3qy52"]
 xfade_time = 0.15
 advance_mode = 2
 advance_condition = &"DoubleSlice"
-advance_expression = "behav_state == LEFT and rng.randf() <= .5"
+advance_expression = "behav_state == CURVED and rng.randf() <= .5"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lo2t7"]
 switch_mode = 2
@@ -101,7 +101,7 @@ states/WalkForwardPassive/position = Vector2(367.371, 237.595)
 states/WalkLeftAggressive/node = SubResource("AnimationNodeAnimation_4l45u")
 states/WalkLeftAggressive/position = Vector2(366.685, 99.7812)
 transitions = ["Start", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_pgktn"), "WalkLeftAggressive", "SingleSliceLeftEntirety", SubResource("AnimationNodeStateMachineTransition_m6tw1"), "SingleSliceLeftEntirety", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_sa1ir"), "WalkLeftAggressive", "Spiral", SubResource("AnimationNodeStateMachineTransition_dqawf"), "Spiral", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_i802x"), "WalkLeftAggressive", "SingleShotLeft", SubResource("AnimationNodeStateMachineTransition_4sm0h"), "SingleShotLeft", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_tkkm2"), "WalkLeftAggressive", "DoubleSliceForwardDelayed", SubResource("AnimationNodeStateMachineTransition_bea46"), "WalkLeftAggressive", "DoubleSliceForwardImmediate", SubResource("AnimationNodeStateMachineTransition_3qy52"), "DoubleSliceForwardDelayed", "WalkForwardPassive", SubResource("AnimationNodeStateMachineTransition_lo2t7"), "DoubleSliceForwardImmediate", "WalkForwardPassive", SubResource("AnimationNodeStateMachineTransition_v8u7u"), "WalkForwardPassive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_yym1r")]
-graph_offset = Vector2(84.112, 26.7975)
+graph_offset = Vector2(48.2695, 95.28)
 
 [node name="Clarity" type="CharacterBody3D"]
 collision_layer = 8
@@ -111,10 +111,9 @@ phase1_min_long_dist_wait = 2.0
 phase1_max_long_dist_wait = 4.0
 min_y_pos = 10.0
 follow_left_distance = 9.0
-phase1_left_attack_chances = {
+phase1_curved_attack_chances = {
 "DoubleSlice": 1.0,
 "SingleShot": 2.08167e-12,
-"SingleSlice": 2.08167e-12,
 "Spiral": 2.08167e-12
 }
 
@@ -142,33 +141,32 @@ bones/16/position = Vector3(-1.29789, 3.12999, -2.02269)
 bones/16/rotation = Quaternion(0.00532235, -0.350304, 0.927814, 0.128142)
 
 [node name="Hat_2" parent="ClarityLowerMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1.43, -8.58979e-09, 5.82494e-10, 8.271e-09, 1.34376, -0.489089, 2.39042e-09, 0.489089, 1.34376, 2.04891e-08, 14.3176, 1.96434)
-visible = false
+transform = Transform3D(1.43, -8.8226e-09, 1.55565e-09, 8.82261e-09, 1.34376, -0.489089, 1.55559e-09, 0.489089, 1.34376, -4.09782e-08, 14.3176, 1.96434)
 
 [node name="Arm_2" parent="ClarityLowerMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.422618, 0.906308, 8.54872e-09, -0.892539, 0.416197, -0.173648, -0.157379, 0.0733868, 0.984808, -5.05484, 8.26074, 0.663088)
+transform = Transform3D(0.422618, 0.906307, -1.21742e-09, -0.892539, 0.416197, -0.173648, -0.157379, 0.0733868, 0.984808, -5.05484, 8.26074, 0.663088)
 visible = false
 
 [node name="Center_2" parent="ClarityLowerMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(1, -3.38463e-10, -9.03921e-09, -1.23631e-09, 0.984808, -0.173648, 8.96061e-09, 0.173648, 0.984808, -1.24797e-07, 9.93106, 0.95761)
+transform = Transform3D(1, -3.13242e-09, 2.74042e-10, 3.13242e-09, 0.984808, -0.173648, 2.74014e-10, 0.173648, 0.984808, -2.04891e-08, 9.93105, 0.957609)
 
 [node name="MiddleLeft" parent="ClarityLowerMeshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(1, -1.07852e-07, 8.90321e-08, 1.12189e-07, 0.906308, -0.422618, -4.09386e-08, 0.422618, 0.906308, -4.76837e-07, 0.234416, -0.910978)
+transform = Transform3D(1, -1.08861e-07, 1.17437e-07, 9.28251e-08, 0.906308, -0.422618, -8.07546e-08, 0.422618, 0.906308, 0, 0.234416, -0.910978)
 
 [node name="FrontLeft" parent="ClarityLowerMeshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.984808, 0.157379, -0.0733868, -0.173648, 0.892539, -0.416198, -1.32376e-08, 0.422618, 0.906308, -0.137393, 0.498655, -0.910979)
+transform = Transform3D(0.984808, 0.157379, -0.0733868, -0.173648, 0.892539, -0.416198, -5.00023e-08, 0.422618, 0.906308, -0.137394, 0.498655, -0.910979)
 
 [node name="BackLeft" parent="ClarityLowerMeshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(1, 4.14804e-08, 2.09379e-09, 9.69158e-09, 0.906308, -0.422618, 1.87488e-08, 0.422618, 0.906308, 1.19209e-07, 0.234414, -0.910979)
+transform = Transform3D(1, 3.48553e-08, -2.56342e-08, 3.26288e-10, 0.906308, -0.422618, 5.43074e-08, 0.422619, 0.906308, 7.15256e-07, 0.234416, -0.91098)
 
 [node name="MiddleRight" parent="ClarityLowerMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(1, 1.07019e-07, -5.27181e-08, -1.09615e-07, 0.906308, -0.422618, 1.80405e-08, 0.422618, 0.906308, 4.76837e-07, 0.234416, -0.910978)
+transform = Transform3D(1, 1.09532e-07, -4.28721e-09, -8.92695e-08, 0.906308, -0.422618, -2.48774e-08, 0.422618, 0.906308, 2.38419e-07, 0.234416, -0.910978)
 
 [node name="FrontRight" parent="ClarityLowerMeshes/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.984808, -0.157379, 0.0733868, 0.173648, 0.892539, -0.416198, 4.23889e-08, 0.422618, 0.906308, 0.137393, 0.498655, -0.910979)
+transform = Transform3D(0.984808, -0.157379, 0.0733868, 0.173648, 0.892539, -0.416198, 5.00023e-08, 0.422618, 0.906308, 0.137394, 0.498655, -0.910979)
 
 [node name="BackRight" parent="ClarityLowerMeshes/Armature/Skeleton3D" index="8"]
-transform = Transform3D(1, 1.00683e-07, -3.24521e-08, -1.09056e-07, 0.906307, -0.422618, -2.9992e-08, 0.422618, 0.906307, -2.14577e-06, 0.234416, -0.91098)
+transform = Transform3D(1, 1.73825e-08, -4.1977e-08, -6.95467e-08, 0.906308, -0.422618, -2.6334e-08, 0.422618, 0.906308, -1.19209e-06, 0.234416, -0.910979)
 
 [node name="ClarityUpperMeshes" parent="." instance=ExtResource("1_4e0of")]
 transform = Transform3D(-0.33, 1.151e-16, -4.98286e-08, 1.151e-16, 0.33, -1.151e-16, 4.98286e-08, -1.151e-16, -0.33, 0, 0, 0)
@@ -176,7 +174,7 @@ transform = Transform3D(-0.33, 1.151e-16, -4.98286e-08, 1.151e-16, 0.33, -1.151e
 [node name="Skeleton3D" parent="ClarityUpperMeshes/Armature" index="0"]
 bones/0/position = Vector3(-0.0210742, 4.49276, 0.0847608)
 bones/0/rotation = Quaternion(0.0301653, 0.0796906, -0.0501057, 0.995102)
-bones/1/position = Vector3(1.02726e-07, 8.69174, -7.95303e-08)
+bones/1/position = Vector3(-1.58209e-09, 8.69174, 9.87667e-09)
 bones/1/rotation = Quaternion(0.0484073, -0.0812806, 0.0524297, 0.994133)
 bones/3/position = Vector3(-3.7482, 4.38423, -0.0847618)
 bones/3/rotation = Quaternion(0.00101031, -0.00552394, 0.86527, 0.501275)
@@ -194,37 +192,38 @@ bones/16/position = Vector3(-2.39, 2.94367, -0.755941)
 bones/16/rotation = Quaternion(0.321999, -0.24697, 0.885482, 0.226373)
 
 [node name="Hat_2" parent="ClarityUpperMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1.42986, 0.00998905, -0.0170401, -0.0125258, 1.41244, -0.223079, 0.0152725, 0.223207, 1.41239, 0.918732, 14.4374, 0.659002)
+transform = Transform3D(1.42986, 0.00998905, -0.0170401, -0.0125258, 1.41244, -0.223079, 0.0152725, 0.223207, 1.41239, 0.918732, 14.4374, 0.659003)
+visible = false
 
 [node name="Arm_2" parent="ClarityUpperMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.339741, 0.92836, 0.15074, -0.932056, 0.353784, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
+transform = Transform3D(0.339741, 0.92836, 0.15074, -0.932056, 0.353784, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57238, 8.73293, 0.998591)
 
 [node name="Center_2" parent="ClarityUpperMeshes/Armature/Skeleton3D" index="2"]
 transform = Transform3D(0.982278, 0.104529, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
 visible = false
 
 [node name="MiddleLeft" parent="ClarityUpperMeshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 1.18725e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.521673, 0.156011, -0.548505)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 9.6063e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.521672, 0.156011, -0.548505)
 visible = false
 
 [node name="FrontLeft" parent="ClarityUpperMeshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 8.1839e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.521674, 0.156011, -0.548506)
+transform = Transform3D(0.766044, 0.219847, 0.604023, -5.10031e-09, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.521674, 0.156011, -0.548507)
 visible = false
 
 [node name="BackLeft" parent="ClarityUpperMeshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 4.14429e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.521673, 0.156009, -0.548506)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 3.46197e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.521673, 0.156011, -0.548507)
 visible = false
 
 [node name="MiddleRight" parent="ClarityUpperMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 6.51412e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.521673, 0.156011, -0.548508)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 8.16685e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.521674, 0.156012, -0.548507)
 visible = false
 
 [node name="FrontRight" parent="ClarityUpperMeshes/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -1.26024e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.521675, 0.156011, -0.548506)
+transform = Transform3D(0.766044, 0.219846, 0.604023, -6.55971e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.521675, 0.156011, -0.548506)
 visible = false
 
 [node name="BackRight" parent="ClarityUpperMeshes/Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -3.64784e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.521676, 0.156011, -0.548507)
+transform = Transform3D(0.766044, 0.219846, 0.604023, -1.28875e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.521674, 0.156011, -0.548507)
 visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

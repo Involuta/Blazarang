@@ -3,11 +3,11 @@ extends CharacterBody3D
 @export var entity_name := "Clarity" # Used by globals to assign hit score, kill score, etc. (Health is determined by hurtbox. entity_name doesn't affect health so that hurtboxes have more control over health)
 
 enum {
-	FORWARD,
-	LEFT,
+	STRAIGHT,
+	CURVED,
 	ATTACK,
 }
-var behav_state := LEFT
+var behav_state := CURVED
 
 enum DIST_TYPE {
 	SHORT_DIST,
@@ -31,8 +31,10 @@ var phase := PHASE.PHASE1
 
 @export var min_y_pos := 11.4 # y pos of arena floor, ie X's minimum y position
 
-@export var walk_speed := 1.5
-var walk_dir := Vector3.FORWARD # Randomly set when switching to walk state
+@export var walk_speed := 2.0
+var walk_dir := Vector3.FORWARD # Randomly set when switching to walk straight
+@export var walk_curved_radius := 9.0 # Radius of circle Clarity walks on
+
 
 @export var head_turn_speed := .2
 
@@ -52,14 +54,13 @@ var attack_turn_speed := 0.15
 
 var aiming_at_target := true
 
-@export var phase1_forward_attack_chances = {
-	"SlipnSlice" : .25,
-	"Superman" : .25,
-	"RightArmSlice" : .4,
-	"Triangle" : .1
+@export var phase1_straight_attack_chances = {
+	"DoubleSlice" : .34,
+	"SingleShot" : .33,
+	"Spiral" : .33,
 }
 
-@export var phase1_left_attack_chances = {
+@export var phase1_curved_attack_chances = {
 	"DoubleSlice" : .34,
 	"SingleShot" : .33,
 	"Spiral" : .33,
@@ -89,8 +90,8 @@ var transparent_mat := preload("res://textures/clear_tile.tres")
 @onready var mhp := $MeleeHitboxPivot
 @onready var upper_meshes := $ClarityUpperMeshes
 @onready var lower_meshes := $ClarityLowerMeshes
-@onready var head_bone := $ClarityUpperMeshes/Armature/Skeleton3D/Hat_2
-@onready var head_mesh := $ClarityUpperMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
+@onready var head_bone := $ClarityLowerMeshes/Armature/Skeleton3D/Hat_2
+@onready var head_mesh := $ClarityLowerMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
 
 @onready var root := $/root/ViewControl
 var level : Node3D
@@ -122,11 +123,11 @@ func _ready():
 	mhp.visible = false
 
 func trigger_rose_parry():
-	if behav_state == FORWARD or behav_state == LEFT:
+	if behav_state == STRAIGHT or behav_state == CURVED:
 		rose_thrown = true
 
 func trigger_ax_parry():
-	if behav_state == FORWARD or behav_state == LEFT:
+	if behav_state == STRAIGHT or behav_state == CURVED:
 		ax_thrown = true
 
 func _physics_process(delta):
@@ -137,11 +138,10 @@ func _physics_process(delta):
 			global_position.y = min_y_pos
 	move_and_slide()
 	match(behav_state):
-		FORWARD:
-			follow_forward()
-		LEFT:
-			walk_in_dir(walk_dir)
-			#follow_left(delta)
+		STRAIGHT:
+			walk_straight(walk_dir)
+		CURVED:
+			walk_curved(delta)
 		ATTACK:
 			attack_frame()
 
@@ -156,11 +156,20 @@ func get_random_flat_unit_vector() -> Vector3:
 	# 3. Return the resulting Vector3
 	return Vector3(x, 0, z)
 
-func switch_to_left():
-	behav_state = LEFT
+func long_dist_attack_check():
+	# This code block ensures start_long_dist_attack is only called once
+	if long_dist_wait_remaining <= 0:
+		return
+	else:
+		long_dist_wait_remaining -= get_physics_process_delta_time()
+		if not attack_queued and long_dist_wait_remaining <= 0:
+			queue_attack()
+
+func switch_to_straight():
+	behav_state = STRAIGHT
 	walk_dir = get_random_flat_unit_vector()
 
-func walk_in_dir(dir: Vector3):
+func walk_straight(dir: Vector3):
 	velocity = walk_speed * dir
 	
 	# Lower meshes faces walk dir
@@ -170,57 +179,30 @@ func walk_in_dir(dir: Vector3):
 	
 	lerp_look_at_position(target.global_position, head_turn_speed)
 	
-	# This code block ensures start_long_dist_attack is only called once
-	if long_dist_wait_remaining <= 0:
-		return
-	else:
-		long_dist_wait_remaining -= get_physics_process_delta_time()
-		if not attack_queued and long_dist_wait_remaining <= 0:
-			queue_attack()
+	long_dist_attack_check()
 
-func follow_forward():
-	current_follow_time += get_physics_process_delta_time()
-	
-	lerp_look_at_position(target.global_position, follow_turn_speed)
-	var move_dir = global_position.direction_to(target.global_position)
-	velocity.x = follow_speed / 2 * move_dir.x
-	velocity.z = follow_speed / 2 * move_dir.z
-	"""
-	# If Cotu throws the rose or ax at you, dodge it if you haven't done a dodge already and follow_time_before_dodge secs have passed
-	# Dodge direction (left/right) is determined in anim tree state transitions
-	if not dodged and (rose_thrown or ax_thrown) and current_follow_time >= follow_time_before_dodge and abs(rang_throw_angle_to_me()) < dodge_angle_tolerance:
-		queue_dodge()
-		return
-	
-	if not attack_queued and behav_state != ATTACK and global_position.distance_to(target.global_position) < follow_left_distance:
-		queue_attack(DIST_TYPE.SHORT_DIST)
-		return
-	
-	# This code block ensures start_long_dist_attack is only called once
-	if long_dist_wait_remaining <= 0:
-		return
-	else:
-		long_dist_wait_remaining -= get_physics_process_delta_time()
-		if not attack_queued and long_dist_wait_remaining <= 0:
-			queue_attack(DIST_TYPE.SHORT_DIST)
-	"""
+func switch_to_curved():
+	behav_state = CURVED
 
 # Add these variables to your script if they aren't there
 var orbit_angle: float = 0.0
 
-func walk_clockwise(delta: float):
+func walk_curved(delta: float):
+	# Get orthogonal vector to vel (clockwise)
+	var center := walk_curved_radius * Vector3(-velocity.z, 0, velocity.x).normalized()
+	
 	# 1. Update the angle based on speed and distance
 	# Circumference = 2 * PI * radius. We adjust the angle accordingly.
-	var angular_speed = follow_speed / follow_left_distance
+	var angular_speed = walk_speed / walk_curved_radius
 	orbit_angle += angular_speed * delta
 	
 	# 2. Calculate the new target position on the circle
 	var offset = Vector3(
-		cos(orbit_angle) * follow_left_distance,
+		cos(orbit_angle) * walk_curved_radius,
 		0,
-		sin(orbit_angle) * follow_left_distance
+		sin(orbit_angle) * walk_curved_radius
 	)
-	var circle_dest = target.global_position + offset
+	var circle_dest = center + offset
 	
 	# 3. Handle rotation
 	lerp_look_at_position(target.global_position, follow_turn_speed)
@@ -229,9 +211,11 @@ func walk_clockwise(delta: float):
 	# We use velocity to move toward the specific point calculated on the circle
 	var move_dir = global_position.direction_to(circle_dest)
 	
-	# We use the full follow_speed to ensure it keeps up with the orbit calculation
-	velocity.x = move_dir.x * follow_speed
-	velocity.z = move_dir.z * follow_speed
+	# We use the full walk_speed to ensure it keeps up with the orbit calculation
+	velocity.x = move_dir.x * walk_speed
+	velocity.z = move_dir.z * walk_speed
+	
+	long_dist_attack_check()
 
 func attack_frame():
 	# Upper meshes moves to match walk dir
@@ -245,10 +229,10 @@ func queue_attack():
 	match(phase):
 		PHASE.PHASE1:
 			match(behav_state):
-				FORWARD:
-					anim_tree.set(choose_attack(phase1_forward_attack_chances), true)
-				LEFT:
-					anim_tree.set(choose_attack(phase1_left_attack_chances), true)
+				STRAIGHT:
+					anim_tree.set(choose_attack(phase1_straight_attack_chances), true)
+				CURVED:
+					anim_tree.set(choose_attack(phase1_curved_attack_chances), true)
 		PHASE.PHASE2:
 			pass # pass until phase2 is confirmed to exist
 
@@ -268,12 +252,11 @@ func start_attack():
 	aiming_at_target = true
 
 func end_attack():
-	print(upper_meshes.position)
 	attack_queued = false
 	no_attack_queued.emit()
-	for attack in phase1_forward_attack_chances.keys():
+	for attack in phase1_straight_attack_chances.keys():
 		anim_tree.set(param_path_base + attack, false)
-	for attack in phase1_left_attack_chances.keys():
+	for attack in phase1_curved_attack_chances.keys():
 		anim_tree.set(param_path_base + attack, false)
 	long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	current_follow_time = 0
@@ -281,10 +264,9 @@ func end_attack():
 	rose_thrown = false
 	ax_thrown = false
 	"""
-	FOR TESTING: behav_state is only left
+	FOR TESTING: behav_state is chosen here manually instead of randomly btwn str and cur
 	"""
-	switch_to_left()
-	print(upper_meshes.position)
+	switch_to_curved()
 
 func lerp_look_at_position(target_pos, turn_speed):
 	var vec3_to_target := -global_position.direction_to(target_pos)
