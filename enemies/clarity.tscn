@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=31 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -135,12 +135,14 @@ states/WalkForwardPassive/position = Vector2(367.371, 237.595)
 transitions = ["Start", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_pgktn"), "WalkForwardAggressive", "SingleSliceLeftEntirety", SubResource("AnimationNodeStateMachineTransition_m6tw1"), "SingleSliceLeftEntirety", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_sa1ir"), "WalkForwardAggressive", "Spiral", SubResource("AnimationNodeStateMachineTransition_dqawf"), "Spiral", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_i802x"), "WalkForwardAggressive", "SingleShotLeft", SubResource("AnimationNodeStateMachineTransition_4sm0h"), "SingleShotLeft", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_tkkm2"), "WalkForwardAggressive", "DoubleSliceForwardDelayed", SubResource("AnimationNodeStateMachineTransition_bea46"), "WalkForwardAggressive", "DoubleSliceForwardImmediate", SubResource("AnimationNodeStateMachineTransition_3qy52"), "DoubleSliceForwardDelayed", "WalkForwardPassive", SubResource("AnimationNodeStateMachineTransition_lo2t7"), "DoubleSliceForwardImmediate", "WalkForwardPassive", SubResource("AnimationNodeStateMachineTransition_v8u7u"), "WalkForwardPassive", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_yym1r"), "WalkForwardAggressive", "DoubleSliceLeftImmediate", SubResource("AnimationNodeStateMachineTransition_co877"), "DoubleSliceLeftImmediate", "WalkForwardPassive", SubResource("AnimationNodeStateMachineTransition_o0vcm"), "WalkForwardAggressive", "DoubleSliceLeftDelayed", SubResource("AnimationNodeStateMachineTransition_5pxcq"), "DoubleSliceLeftDelayed", "WalkForwardPassive", SubResource("AnimationNodeStateMachineTransition_0mhgw")]
 graph_offset = Vector2(36.322, 65.5049)
 
+[sub_resource type="PrismMesh" id="PrismMesh_ocn5u"]
+
 [node name="Clarity" type="CharacterBody3D"]
 collision_layer = 8
 collision_mask = 146
 script = ExtResource("1_172k1")
-phase1_min_long_dist_wait = 2.0
-phase1_max_long_dist_wait = 4.0
+phase1_min_long_dist_wait = 20.0
+phase1_max_long_dist_wait = 40.0
 min_y_pos = 10.0
 follow_left_distance = 9.0
 phase1_straight_attack_chances = {
@@ -277,6 +279,10 @@ parameters/conditions/DoubleSlice = false
 parameters/conditions/SingleShot = false
 parameters/conditions/SingleSlice = false
 parameters/conditions/Spiral = false
+
+[node name="Marker" type="MeshInstance3D" parent="."]
+top_level = true
+mesh = SubResource("PrismMesh_ocn5u")
 
 [editable path="ClarityLowerMeshes"]
 [editable path="ClarityLowerMeshes/Armature/Skeleton3D/Hat_2/ClarityHead"]

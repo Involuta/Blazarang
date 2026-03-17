@@ -1,7 +1,7 @@
+MeshInstance3D
 Node3D
 AnimationPlayer
 AnimationTree
-MeshInstance3D
 Camera3D
 WorldEnvironment
 CollisionShape3D

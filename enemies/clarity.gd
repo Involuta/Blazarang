@@ -7,7 +7,7 @@ enum {
 	CURVED,
 	ATTACK,
 }
-var behav_state := STRAIGHT
+var behav_state := CURVED
 
 enum DIST_TYPE {
 	SHORT_DIST,
@@ -183,38 +183,30 @@ func walk_straight(dir: Vector3):
 
 func switch_to_curved():
 	behav_state = CURVED
+	
+	# Set center of circular path
+	var direction_to_center = velocity.cross(Vector3.UP).normalized()
+	var vec_to_center = walk_curved_radius * direction_to_center
+	curve_center_pos = global_position + vec_to_center
+	$Marker.global_position = curve_center_pos
 
-# Add these variables to your script if they aren't there
-var orbit_angle: float = 0.0
+var curve_center_pos := Vector3.FORWARD
 
 func walk_curved(delta: float):
-	# Get orthogonal vector to vel (clockwise)
-	var center := walk_curved_radius * Vector3(-velocity.z, 0, velocity.x).normalized()
+	# 2. Calculate the vector from center to current position (the Radius)
+	var radius_vec = (global_position - curve_center_pos).normalized()
 	
-	# 1. Update the angle based on speed and distance
-	# Circumference = 2 * PI * radius. We adjust the angle accordingly.
-	var angular_speed = walk_speed / walk_curved_radius
-	orbit_angle += angular_speed * delta
+	# 3. Calculate the Tangent (the direction of travel)
+	# Rotating the radius vector 90 degrees on the Y axis
+	var tangent_dir = Vector3(-radius_vec.z, 0, radius_vec.x)
 	
-	# 2. Calculate the new target position on the circle
-	var offset = Vector3(
-		cos(orbit_angle) * walk_curved_radius,
-		0,
-		sin(orbit_angle) * walk_curved_radius
-	)
-	var circle_dest = center + offset
+	# 4. Set velocity directly
+	# This ensures the movement is always perfectly perpendicular to the center
+	velocity.x = tangent_dir.x * walk_speed
+	velocity.z = tangent_dir.z * walk_speed
 	
-	# 3. Handle rotation
+	# 5. Maintain existing logic
 	lerp_look_at_position(target.global_position, follow_turn_speed)
-	
-	# 4. Move the character
-	# We use velocity to move toward the specific point calculated on the circle
-	var move_dir = global_position.direction_to(circle_dest)
-	
-	# We use the full walk_speed to ensure it keeps up with the orbit calculation
-	velocity.x = move_dir.x * walk_speed
-	velocity.z = move_dir.z * walk_speed
-	
 	long_dist_attack_check()
 
 func attack_frame():
@@ -266,7 +258,7 @@ func end_attack():
 	"""
 	FOR TESTING: behav_state is chosen here manually instead of randomly btwn str and cur
 	"""
-	if rng.randf() > .5:
+	if rng.randf() > 1:
 		switch_to_straight()
 	else:
 		switch_to_curved()
