@@ -5,6 +5,7 @@ extends CharacterBody3D
 enum {
 	STRAIGHT,
 	CURVED,
+	CIRCLING,
 	ATTACK,
 }
 var behav_state := CURVED
@@ -61,6 +62,12 @@ var aiming_at_target := true
 }
 
 @export var phase1_curved_attack_chances = {
+	"DoubleSlice" : .34,
+	"SingleShot" : .33,
+	"Spiral" : .33,
+}
+
+@export var phase1_circling_attack_chances = {
 	"DoubleSlice" : .34,
 	"SingleShot" : .33,
 	"Spiral" : .33,
@@ -143,7 +150,9 @@ func _physics_process(delta):
 		STRAIGHT:
 			walk_straight(walk_dir)
 		CURVED:
-			walk_curved(delta)
+			walk_curved(false)
+		CIRCLING:
+			walk_curved(true)
 		ATTACK:
 			attack_frame()
 
@@ -174,12 +183,8 @@ func switch_to_straight():
 func walk_straight(dir: Vector3):
 	velocity = walk_speed * dir
 	
-	# Lower meshes faces walk dir
-	lower_meshes.rotation.y = lerp_angle(lower_meshes.rotation.y, PI + atan2(-dir.x, -dir.z), head_turn_speed)
-	# Upper meshes moves to match walk dir
-	upper_meshes.position = .48 * dir
-	
-	lerp_look_at_position(target.global_position, head_turn_speed)
+	head_and_arm_look_at_position(target.global_position, head_turn_speed)
+	body_look_in_direction(dir)
 	
 	long_dist_attack_check()
 
@@ -194,36 +199,37 @@ func switch_to_curved():
 
 var curve_center_pos := Vector3.FORWARD
 
-func walk_curved(delta: float):
-	# To make Clarity constantly circle the target, uncomment this
-	#curve_center_pos = target.global_position
+func walk_curved(circling_target: bool):
+	if circling_target:
+		curve_center_pos = target.global_position
 	
-	# 2. Calculate the vector from center to current position (the Radius)
+	# Calculate the vector from center to current position (the Radius)
 	var radius_vec = (global_position - curve_center_pos).normalized()
 	
-	# 3. Calculate the Tangent (the direction of travel)
+	# Calculate the Tangent (the direction of travel)
 	# Rotating the radius vector 90 degrees on the Y axis
 	var tangent_dir = Vector3(-radius_vec.z, 0, radius_vec.x)
 	
-	# 4. Set velocity directly
+	# Set velocity directly
 	# This ensures the movement is always perfectly perpendicular to the center
 	velocity.x = tangent_dir.x * walk_speed
 	velocity.z = tangent_dir.z * walk_speed
 	
-	# Lower meshes faces center
-	lower_meshes.rotation.y = lerp_angle(lower_meshes.rotation.y, PI + atan2(radius_vec.x, radius_vec.z), head_turn_speed)
-	# Upper meshes moves to match walk dir
-	upper_meshes.position = .48 * -radius_vec
+	# Turn head and body toward target
+	head_and_arm_look_at_position(target.global_position, follow_turn_speed)
+	# If circling around target, body should face target (since walk left is used). Otherwise look in mvmt dir
+	body_look_in_direction(-radius_vec if circling_target else velocity)
 	
-	# 5. Maintain existing logic
-	lerp_look_at_position(target.global_position, follow_turn_speed)
 	long_dist_attack_check()
+
+func switch_to_circling():
+	behav_state = CIRCLING
 
 func attack_frame():
 	# Upper meshes moves to match walk dir
 	upper_meshes.position = .48 * velocity.normalized()
 	if aiming_at_target:
-		lerp_look_at_position(target.global_position, attack_turn_speed)
+		head_and_arm_look_at_position(target.global_position, attack_turn_speed)
 
 func queue_attack():
 	parried = false # Clarity can parry when he reaches follow state again
@@ -235,6 +241,8 @@ func queue_attack():
 					arm_anim_tree.set(choose_attack(phase1_straight_attack_chances), true)
 				CURVED:
 					arm_anim_tree.set(choose_attack(phase1_curved_attack_chances), true)
+				CIRCLING:
+					arm_anim_tree.set(choose_attack(phase1_circling_attack_chances), true)
 		PHASE.PHASE2:
 			pass # pass until phase2 is confirmed to exist
 
@@ -269,12 +277,15 @@ func end_attack():
 	"""
 	FOR TESTING: behav_state is chosen here manually instead of randomly btwn str and cur
 	"""
-	if rng.randf() > .5:
-		switch_to_straight()
-	else:
-		switch_to_curved()
+	match(behav_state):
+		STRAIGHT:
+			switch_to_curved()
+		CURVED:
+			switch_to_circling()
+		CIRCLING:
+			switch_to_straight()
 
-func lerp_look_at_position(target_pos, turn_speed):
+func head_and_arm_look_at_position(target_pos, turn_speed):
 	var vec3_to_target := -global_position.direction_to(target_pos)
 	upper_meshes.rotation.y = lerp_angle(upper_meshes.rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
 	
@@ -287,3 +298,8 @@ func lerp_look_at_position(target_pos, turn_speed):
 	head_mesh.rotation.y = lerp_angle(head_mesh.rotation.y, head_target_rotation.y, turn_speed)
 	# Look down/up at the player. Not too low so the head doesn't look straight down
 	head_mesh.rotation.x = min(lerp_angle(head_mesh.rotation.x, head_target_rotation.x, turn_speed), .67)
+
+func body_look_in_direction(dir: Vector3):
+	lower_meshes.rotation.y = lerp_angle(lower_meshes.rotation.y, PI + atan2(-dir.x, -dir.z), head_turn_speed)
+	# Head and arm positions move to match body dir
+	upper_meshes.position = .48 * dir

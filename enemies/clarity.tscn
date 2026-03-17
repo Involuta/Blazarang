@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=36 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -17,15 +17,6 @@ animation = &"DoubleSliceLeftDelayed"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vtprg"]
 animation = &"DoubleSliceLeftImmediate"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i7pds"]
-animation = &"SingleShotLeft"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cm53l"]
-animation = &"SingleSliceLeft"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m6gyu"]
-animation = &"Spiral"
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4l45u"]
 animation = &"WalkForwardAggressive"
 
@@ -40,51 +31,19 @@ animation = &"WalkLeftPassive"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pgktn"]
 advance_mode = 2
-advance_expression = "behav_state == STRAIGHT"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m6tw1"]
-xfade_time = 0.15
-advance_mode = 2
-advance_condition = &"SingleSlice"
-advance_expression = "behav_state == CURVED"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sa1ir"]
-xfade_time = 0.15
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dqawf"]
-xfade_time = 0.15
-advance_mode = 2
-advance_condition = &"Spiral"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_i802x"]
-xfade_time = 0.15
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4sm0h"]
-xfade_time = 0.15
-advance_mode = 2
-advance_condition = &"SingleShot"
-advance_expression = "behav_state == CURVED"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tkkm2"]
-xfade_time = 0.15
-switch_mode = 2
-advance_mode = 2
+advance_expression = "behav_state != CIRCLING"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bea46"]
 xfade_time = 0.15
 advance_mode = 2
 advance_condition = &"DoubleSlice"
-advance_expression = "behav_state == STRAIGHT and rng.randf() > .5"
+advance_expression = "rng.randf() > .5"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3qy52"]
 xfade_time = 0.15
 advance_mode = 2
 advance_condition = &"DoubleSlice"
-advance_expression = "behav_state == STRAIGHT and rng.randf() <= .5"
+advance_expression = "rng.randf() <= .5"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lo2t7"]
 switch_mode = 2
@@ -101,17 +60,17 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3iee8"]
 advance_mode = 2
-advance_expression = "behav_state == CURVED"
+advance_expression = "behav_state == CIRCLING"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j26xo"]
 advance_mode = 2
 advance_condition = &"DoubleSlice"
-advance_expression = "behav_state == CURVED and rng.randf() > .5"
+advance_expression = "rng.randf() > .5"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1fa2q"]
 advance_mode = 2
 advance_condition = &"DoubleSlice"
-advance_expression = "behav_state == CURVED and rng.randf() <= .5"
+advance_expression = "rng.randf() <= .5"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3w0r0"]
 switch_mode = 2
@@ -129,12 +88,12 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gk2ku"]
 xfade_time = 1.0
 advance_mode = 2
-advance_expression = "behav_state == STRAIGHT"
+advance_expression = "behav_state != CIRCLING"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h5eo1"]
 xfade_time = 1.0
 advance_mode = 2
-advance_expression = "behav_state == CURVED"
+advance_expression = "behav_state == CIRCLING"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_quqet"]
 states/DoubleSliceForwardDelayed/node = SubResource("AnimationNodeAnimation_vawuj")
@@ -142,15 +101,9 @@ states/DoubleSliceForwardDelayed/position = Vector2(418.467, 171.852)
 states/DoubleSliceForwardImmediate/node = SubResource("AnimationNodeAnimation_hw786")
 states/DoubleSliceForwardImmediate/position = Vector2(419.025, 237.091)
 states/DoubleSliceLeftDelayed/node = SubResource("AnimationNodeAnimation_timhd")
-states/DoubleSliceLeftDelayed/position = Vector2(-330.892, 169.943)
+states/DoubleSliceLeftDelayed/position = Vector2(-330.844, 171.595)
 states/DoubleSliceLeftImmediate/node = SubResource("AnimationNodeAnimation_vtprg")
 states/DoubleSliceLeftImmediate/position = Vector2(-330.797, 240.686)
-states/SingleShotLeft/node = SubResource("AnimationNodeAnimation_i7pds")
-states/SingleShotLeft/position = Vector2(467.37, -2.29188)
-states/SingleSliceLeftEntirety/node = SubResource("AnimationNodeAnimation_cm53l")
-states/SingleSliceLeftEntirety/position = Vector2(200, 31)
-states/Spiral/node = SubResource("AnimationNodeAnimation_m6gyu")
-states/Spiral/position = Vector2(345.633, -2.83125)
 states/Start/position = Vector2(5, 37.9453)
 states/WalkForwardAggressive/node = SubResource("AnimationNodeAnimation_4l45u")
 states/WalkForwardAggressive/position = Vector2(346.331, 100.218)
@@ -160,8 +113,8 @@ states/WalkLeftAggressive/node = SubResource("AnimationNodeAnimation_3eyf1")
 states/WalkLeftAggressive/position = Vector2(-274.421, 100.436)
 states/WalkLeftPassive/node = SubResource("AnimationNodeAnimation_nefrk")
 states/WalkLeftPassive/position = Vector2(-540.924, 169.815)
-transitions = ["Start", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_pgktn"), "WalkForwardAggressive", "SingleSliceLeftEntirety", SubResource("AnimationNodeStateMachineTransition_m6tw1"), "SingleSliceLeftEntirety", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_sa1ir"), "WalkForwardAggressive", "Spiral", SubResource("AnimationNodeStateMachineTransition_dqawf"), "Spiral", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_i802x"), "WalkForwardAggressive", "SingleShotLeft", SubResource("AnimationNodeStateMachineTransition_4sm0h"), "SingleShotLeft", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_tkkm2"), "WalkForwardAggressive", "DoubleSliceForwardDelayed", SubResource("AnimationNodeStateMachineTransition_bea46"), "WalkForwardAggressive", "DoubleSliceForwardImmediate", SubResource("AnimationNodeStateMachineTransition_3qy52"), "DoubleSliceForwardDelayed", "WalkForwardPassive", SubResource("AnimationNodeStateMachineTransition_lo2t7"), "DoubleSliceForwardImmediate", "WalkForwardPassive", SubResource("AnimationNodeStateMachineTransition_v8u7u"), "WalkForwardPassive", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_yym1r"), "Start", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_3iee8"), "WalkLeftAggressive", "DoubleSliceLeftDelayed", SubResource("AnimationNodeStateMachineTransition_j26xo"), "WalkLeftAggressive", "DoubleSliceLeftImmediate", SubResource("AnimationNodeStateMachineTransition_1fa2q"), "DoubleSliceLeftDelayed", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_3w0r0"), "WalkLeftPassive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_8v8bx"), "DoubleSliceLeftImmediate", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_oosjn"), "WalkLeftAggressive", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_gk2ku"), "WalkForwardAggressive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_h5eo1")]
-graph_offset = Vector2(-596.897, 43.6349)
+transitions = ["Start", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_pgktn"), "WalkForwardAggressive", "DoubleSliceForwardDelayed", SubResource("AnimationNodeStateMachineTransition_bea46"), "WalkForwardAggressive", "DoubleSliceForwardImmediate", SubResource("AnimationNodeStateMachineTransition_3qy52"), "DoubleSliceForwardDelayed", "WalkForwardPassive", SubResource("AnimationNodeStateMachineTransition_lo2t7"), "DoubleSliceForwardImmediate", "WalkForwardPassive", SubResource("AnimationNodeStateMachineTransition_v8u7u"), "WalkForwardPassive", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_yym1r"), "Start", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_3iee8"), "WalkLeftAggressive", "DoubleSliceLeftDelayed", SubResource("AnimationNodeStateMachineTransition_j26xo"), "WalkLeftAggressive", "DoubleSliceLeftImmediate", SubResource("AnimationNodeStateMachineTransition_1fa2q"), "DoubleSliceLeftDelayed", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_3w0r0"), "WalkLeftPassive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_8v8bx"), "DoubleSliceLeftImmediate", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_oosjn"), "WalkLeftAggressive", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_gk2ku"), "WalkForwardAggressive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_h5eo1")]
+graph_offset = Vector2(25.085, 67.4549)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u1nw5"]
 animation = &"WalkForwardAggressive"
@@ -171,19 +124,21 @@ animation = &"WalkLeftAggressive"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uxh1w"]
 advance_mode = 2
-advance_expression = "behav_state == STRAIGHT"
+advance_expression = "behav_state != CIRCLING"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4u7pf"]
 advance_mode = 2
-advance_expression = "behav_state == CURVED"
+advance_expression = "behav_state == CIRCLING"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2bfm5"]
+xfade_time = 3.0
 advance_mode = 2
-advance_expression = "behav_state == STRAIGHT"
+advance_expression = "behav_state != CIRCLING"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p1gf3"]
+xfade_time = 3.0
 advance_mode = 2
-advance_expression = "behav_state == CURVED"
+advance_expression = "behav_state == CIRCLING"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_35adq"]
 states/WalkForwardAggressive/node = SubResource("AnimationNodeAnimation_u1nw5")
@@ -215,6 +170,11 @@ phase1_straight_attack_chances = {
 "Spiral": 2.08167e-12
 }
 phase1_curved_attack_chances = {
+"DoubleSlice": 1.0,
+"SingleShot": 2.08167e-12,
+"Spiral": 2.08167e-12
+}
+phase1_circling_attack_chances = {
 "DoubleSlice": 1.0,
 "SingleShot": 2.08167e-12,
 "Spiral": 2.08167e-12
@@ -340,9 +300,6 @@ tree_root = SubResource("AnimationNodeStateMachine_quqet")
 anim_player = NodePath("../ClarityUpperMeshes/AnimationPlayer")
 advance_expression_base_node = NodePath("..")
 parameters/conditions/DoubleSlice = false
-parameters/conditions/SingleShot = false
-parameters/conditions/SingleSlice = false
-parameters/conditions/Spiral = false
 
 [node name="BodyAnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_fhmms")
