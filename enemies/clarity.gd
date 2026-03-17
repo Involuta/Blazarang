@@ -86,7 +86,7 @@ var param_path_base := "parameters/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 var transparent_mat := preload("res://textures/clear_tile.tres")
-@onready var anim_tree := $AnimationTree
+@onready var anim_tree := $ArmAnimationTree
 @onready var mhp := $MeleeHitboxPivot
 @onready var upper_meshes := $ClarityUpperMeshes
 @onready var lower_meshes := $ClarityLowerMeshes
@@ -193,6 +193,9 @@ func switch_to_curved():
 var curve_center_pos := Vector3.FORWARD
 
 func walk_curved(delta: float):
+	# To make Clarity constantly circle the target, uncomment this
+	#curve_center_pos = target.global_position
+	
 	# 2. Calculate the vector from center to current position (the Radius)
 	var radius_vec = (global_position - curve_center_pos).normalized()
 	
@@ -204,6 +207,11 @@ func walk_curved(delta: float):
 	# This ensures the movement is always perfectly perpendicular to the center
 	velocity.x = tangent_dir.x * walk_speed
 	velocity.z = tangent_dir.z * walk_speed
+	
+	# Lower meshes faces center
+	lower_meshes.rotation.y = lerp_angle(lower_meshes.rotation.y, PI + atan2(radius_vec.x, radius_vec.z), head_turn_speed)
+	# Upper meshes moves to match walk dir
+	upper_meshes.position = .48 * -radius_vec
 	
 	# 5. Maintain existing logic
 	lerp_look_at_position(target.global_position, follow_turn_speed)
@@ -240,7 +248,8 @@ func choose_attack(attack_chances) -> String:
 func start_attack():
 	# Without this await, the animation player would call end_attack at the end of the previous animation on the exact same frame as when the AnimationPlayer.play func is called below. Since an animation was currently in progress, the func call would do nothing, leaving the enemy in ATTACK mode but with no animation playing to free it from ATTACK mode, causing it to stand still indefinitely
 	await get_tree().physics_frame
-	behav_state = ATTACK
+	# Keep doing the mvmt state you had pre-attack
+	#behav_state = ATTACK
 	aiming_at_target = true
 
 func end_attack():
