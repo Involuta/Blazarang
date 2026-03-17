@@ -7,7 +7,7 @@ enum {
 	CURVED,
 	ATTACK,
 }
-var behav_state := CURVED
+var behav_state := STRAIGHT
 
 enum DIST_TYPE {
 	SHORT_DIST,
@@ -266,7 +266,7 @@ func end_attack():
 	"""
 	FOR TESTING: behav_state is chosen here manually instead of randomly btwn str and cur
 	"""
-	switch_to_curved()
+	switch_to_straight()
 
 func lerp_look_at_position(target_pos, turn_speed):
 	var vec3_to_target := -global_position.direction_to(target_pos)
