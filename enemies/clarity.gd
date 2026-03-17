@@ -302,4 +302,5 @@ func head_and_arm_look_at_position(target_pos, turn_speed):
 func body_look_in_direction(dir: Vector3):
 	lower_meshes.rotation.y = lerp_angle(lower_meshes.rotation.y, PI + atan2(-dir.x, -dir.z), head_turn_speed)
 	# Head and arm positions move to match body dir
-	upper_meshes.position = .48 * dir
+	var current_forward = -lower_meshes.global_transform.basis.z
+	upper_meshes.position = 0.48 * current_forward
