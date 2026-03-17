@@ -266,7 +266,10 @@ func end_attack():
 	"""
 	FOR TESTING: behav_state is chosen here manually instead of randomly btwn str and cur
 	"""
-	switch_to_straight()
+	if rng.randf() > .5:
+		switch_to_straight()
+	else:
+		switch_to_curved()
 
 func lerp_look_at_position(target_pos, turn_speed):
 	var vec3_to_target := -global_position.direction_to(target_pos)
