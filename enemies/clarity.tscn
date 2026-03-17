@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=45 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -163,6 +163,42 @@ states/WalkLeftPassive/position = Vector2(-540.924, 169.815)
 transitions = ["Start", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_pgktn"), "WalkForwardAggressive", "SingleSliceLeftEntirety", SubResource("AnimationNodeStateMachineTransition_m6tw1"), "SingleSliceLeftEntirety", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_sa1ir"), "WalkForwardAggressive", "Spiral", SubResource("AnimationNodeStateMachineTransition_dqawf"), "Spiral", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_i802x"), "WalkForwardAggressive", "SingleShotLeft", SubResource("AnimationNodeStateMachineTransition_4sm0h"), "SingleShotLeft", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_tkkm2"), "WalkForwardAggressive", "DoubleSliceForwardDelayed", SubResource("AnimationNodeStateMachineTransition_bea46"), "WalkForwardAggressive", "DoubleSliceForwardImmediate", SubResource("AnimationNodeStateMachineTransition_3qy52"), "DoubleSliceForwardDelayed", "WalkForwardPassive", SubResource("AnimationNodeStateMachineTransition_lo2t7"), "DoubleSliceForwardImmediate", "WalkForwardPassive", SubResource("AnimationNodeStateMachineTransition_v8u7u"), "WalkForwardPassive", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_yym1r"), "Start", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_3iee8"), "WalkLeftAggressive", "DoubleSliceLeftDelayed", SubResource("AnimationNodeStateMachineTransition_j26xo"), "WalkLeftAggressive", "DoubleSliceLeftImmediate", SubResource("AnimationNodeStateMachineTransition_1fa2q"), "DoubleSliceLeftDelayed", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_3w0r0"), "WalkLeftPassive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_8v8bx"), "DoubleSliceLeftImmediate", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_oosjn"), "WalkLeftAggressive", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_gk2ku"), "WalkForwardAggressive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_h5eo1")]
 graph_offset = Vector2(-596.897, 43.6349)
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u1nw5"]
+animation = &"WalkForwardAggressive"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h14go"]
+animation = &"WalkLeftAggressive"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uxh1w"]
+advance_mode = 2
+advance_expression = "behav_state == STRAIGHT"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4u7pf"]
+advance_mode = 2
+advance_expression = "behav_state == CURVED"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2bfm5"]
+advance_mode = 2
+advance_expression = "behav_state == STRAIGHT"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p1gf3"]
+advance_mode = 2
+advance_expression = "behav_state == CURVED"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_35adq"]
+states/WalkForwardAggressive/node = SubResource("AnimationNodeAnimation_u1nw5")
+states/WalkForwardAggressive/position = Vector2(439, 196)
+states/WalkLeftAggressive/node = SubResource("AnimationNodeAnimation_h14go")
+states/WalkLeftAggressive/position = Vector2(12.0775, 196.029)
+transitions = ["Start", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_uxh1w"), "Start", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_4u7pf"), "WalkLeftAggressive", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_2bfm5"), "WalkForwardAggressive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_p1gf3")]
+graph_offset = Vector2(-131.423, 50.6175)
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_fhmms"]
+graph_offset = Vector2(-82.56, 107.52)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_35adq")
+nodes/StateMachine/position = Vector2(100, 150)
+node_connections = [&"output", 0, &"StateMachine"]
+
 [sub_resource type="PrismMesh" id="PrismMesh_ocn5u"]
 
 [node name="Clarity" type="CharacterBody3D"]
@@ -307,6 +343,11 @@ parameters/conditions/DoubleSlice = false
 parameters/conditions/SingleShot = false
 parameters/conditions/SingleSlice = false
 parameters/conditions/Spiral = false
+
+[node name="BodyAnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_fhmms")
+anim_player = NodePath("../ClarityLowerMeshes/AnimationPlayer")
+advance_expression_base_node = NodePath("..")
 
 [node name="Marker" type="MeshInstance3D" parent="."]
 top_level = true

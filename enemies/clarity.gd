@@ -86,7 +86,8 @@ var param_path_base := "parameters/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 var transparent_mat := preload("res://textures/clear_tile.tres")
-@onready var anim_tree := $ArmAnimationTree
+@onready var arm_anim_tree := $ArmAnimationTree # Controls arm attacks
+@onready var body_anim_tree := $BodyAnimationTree # Controls walk anim
 @onready var mhp := $MeleeHitboxPivot
 @onready var upper_meshes := $ClarityUpperMeshes
 @onready var lower_meshes := $ClarityLowerMeshes
@@ -119,7 +120,8 @@ func _ready():
 	
 	attack_turn_speed = base_attack_turn_speed
 	
-	anim_tree.active = true
+	arm_anim_tree.active = true
+	body_anim_tree.active = true
 	mhp.visible = false
 
 func trigger_rose_parry():
@@ -230,9 +232,9 @@ func queue_attack():
 		PHASE.PHASE1:
 			match(behav_state):
 				STRAIGHT:
-					anim_tree.set(choose_attack(phase1_straight_attack_chances), true)
+					arm_anim_tree.set(choose_attack(phase1_straight_attack_chances), true)
 				CURVED:
-					anim_tree.set(choose_attack(phase1_curved_attack_chances), true)
+					arm_anim_tree.set(choose_attack(phase1_curved_attack_chances), true)
 		PHASE.PHASE2:
 			pass # pass until phase2 is confirmed to exist
 
@@ -256,9 +258,9 @@ func end_attack():
 	attack_queued = false
 	no_attack_queued.emit()
 	for attack in phase1_straight_attack_chances.keys():
-		anim_tree.set(param_path_base + attack, false)
+		arm_anim_tree.set(param_path_base + attack, false)
 	for attack in phase1_curved_attack_chances.keys():
-		anim_tree.set(param_path_base + attack, false)
+		arm_anim_tree.set(param_path_base + attack, false)
 	long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	current_follow_time = 0
 	# After an attack or dodge ends, check when the rose or ax is thrown again
@@ -267,7 +269,7 @@ func end_attack():
 	"""
 	FOR TESTING: behav_state is chosen here manually instead of randomly btwn str and cur
 	"""
-	if rng.randf() > 1:
+	if rng.randf() > .5:
 		switch_to_straight()
 	else:
 		switch_to_curved()
