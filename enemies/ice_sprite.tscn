@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://i2xuy407tpbj"]
+[gd_scene load_steps=10 format=3 uid="uid://i2xuy407tpbj"]
 
 [ext_resource type="Script" path="res://enemies/ice_sprite.gd" id="1_h7jw6"]
 
@@ -8,7 +8,72 @@
 albedo_color = Color(0.552941, 0.941176, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_adun2"]
+resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_35ehe")
+
+[sub_resource type="Animation" id="Animation_m58tf"]
+resource_name = "explode"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SnowParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.552941, 0.941176, 1, 1), Color(1.5, 1.5, 1.5, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7uy7i"]
+_data = {
+"explode": SubResource("Animation_m58tf")
+}
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j2xt2"]
+direction = Vector3(2.08165e-12, 1, 2.08165e-12)
+spread = 67.0
+gravity = Vector3(2.08165e-12, -9.8, 2.08165e-12)
+initial_velocity_min = 9.0
+initial_velocity_max = 18.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vo4f3"]
+shading_mode = 0
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_6gqvu"]
+material = SubResource("StandardMaterial3D_vo4f3")
+size = Vector2(0.5, 0.5)
 
 [node name="IceSprite" type="CharacterBody3D"]
 collision_layer = 8
@@ -24,6 +89,21 @@ mesh = SubResource("BoxMesh_adun2")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 avoidance_enabled = true
 radius = 2.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7uy7i")
+}
+
+[node name="SnowParticles" type="GPUParticles3D" parent="."]
+cast_shadow = 0
+emitting = false
+amount = 18
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_j2xt2")
+draw_pass_1 = SubResource("QuadMesh_6gqvu")
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

@@ -9,18 +9,21 @@ enum {
 var behav_state = FOLLOW
 
 var follow_speed := 5.0 # Ice sprite follow speed is set to be very similar to if not identical to Cotu's walk speed
-@export var target_distance := 3.0
+@export var target_distance := 6.0
 @export var follow_turn_speed := .15
 @export var attack_turn_speed := .5
 @export var jump_vertical_speed := 5.0
 @export var jump_lateral_speed := 9.0
 
+@export var explode_secs := 7.0
+
 var aiming_at_target := true
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
-@onready var nav_agent = $NavigationAgent3D
-@onready var visual_mesh = $VisualMesh
+@onready var nav_agent := $NavigationAgent3D
+@onready var visual_mesh := $VisualMesh
+@onready var anim_player := $AnimationPlayer
 @onready var root := $/root/ViewControl
 
 var target : Node3D
@@ -38,9 +41,6 @@ func _physics_process(delta):
 	match(behav_state):
 		FOLLOW:
 			follow()
-		ATTACK:
-			attack()
-			
 	if global_position.y < -100:
 		queue_free()
 
@@ -81,18 +81,9 @@ func follow():
 	nav_agent.velocity = new_velocity
 
 func start_attack():
-	behav_state = ATTACK
-	aiming_at_target = true
-	await get_tree().create_timer(.5).timeout
-	behav_state = FOLLOW
-
-func stop_lateral_mvmt():
-	velocity.x = 0
-	velocity.z = 0
-
-func attack():
-	nav_agent.velocity.x = 0
-	nav_agent.velocity.z = 0
+	anim_player.play("explode")
+	await get_tree().create_timer(explode_secs).timeout
+	queue_free()
 
 # Keep this here until it's confirmed that Clarity's arena won't have obstacles
 func can_see_target():

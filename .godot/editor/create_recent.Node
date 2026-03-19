@@ -1,15 +1,15 @@
+GPUParticles3D
+AnimationPlayer
 NavigationAgent3D
 MeshInstance3D
 CollisionShape3D
 CharacterBody3D
 AnimationTree
 Node3D
-AnimationPlayer
 Camera3D
 WorldEnvironment
 StaticBody3D
 NavigationRegion3D
-GPUParticles3D
 Label
 Label3D
 Area3D
