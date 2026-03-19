@@ -5,7 +5,7 @@ var using_controller = false # only affects camera motion
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var default_gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var gravity = default_gravity
-const WALK_SPEED := 10.0
+var walk_speed := 10.0
 const WALK_DECEL_SECS := .25 # Seconds it takes for Cotu to decelerate to 0 speed when not walking
 const STEP_DODGE_SPEED := 15.0
 const step_dodge_duration_secs := .5
@@ -364,7 +364,7 @@ func _physics_process(delta):
 	if is_dodging:
 		grounded_speed = STEP_DODGE_SPEED
 	else:
-		grounded_speed = WALK_SPEED
+		grounded_speed = walk_speed
 	
 	if active_debuffs[Globals.DEBUFFS.SLOW] > 0:
 		grounded_speed *= .5

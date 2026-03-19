@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://i2xuy407tpbj"]
+[gd_scene load_steps=5 format=3 uid="uid://i2xuy407tpbj"]
+
+[ext_resource type="Script" path="res://enemies/ice_sprite.gd" id="1_h7jw6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s45hv"]
 
@@ -11,9 +13,17 @@ material = SubResource("StandardMaterial3D_35ehe")
 [node name="IceSprite" type="CharacterBody3D"]
 collision_layer = 8
 collision_mask = 26
+script = ExtResource("1_h7jw6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_s45hv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_adun2")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
+radius = 2.0
+
+[connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
+[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

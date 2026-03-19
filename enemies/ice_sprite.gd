@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var entity_name := "GauntletMeleeTier1" # Used by globals to assign hit score, kill score, etc. (Health is determined by hurtbox. entity_name doesn't affect health so that hurtboxes have more control over health)
+@export var entity_name := "IceSprite" # Used by globals to assign hit score, kill score, etc. (Health is determined by hurtbox. entity_name doesn't affect health so that hurtboxes have more control over health)
 
 enum {
 	FOLLOW,
@@ -8,32 +8,29 @@ enum {
 }
 var behav_state = FOLLOW
 
-@export var follow_speed := 5.0
+var follow_speed := 5.0 # Ice sprite follow speed is set to be very similar to if not identical to Cotu's walk speed
 @export var target_distance := 3.0
-@export var sweep_chance := .2
 @export var follow_turn_speed := .15
 @export var attack_turn_speed := .5
+@export var jump_vertical_speed := 5.0
+@export var jump_lateral_speed := 9.0
 
 var aiming_at_target := true
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 @onready var nav_agent = $NavigationAgent3D
-@onready var anim_tree = $AnimationTree
 @onready var visual_mesh = $VisualMesh
 @onready var root := $/root/ViewControl
 
 var target : Node3D
-
-var anim_tree_exists := true
+var cotu : Node3D # Used to get player's vel. Enemy moves when the player moves
 
 func _ready():
 	target = root.find_child("Icon")
+	cotu = root.find_child("cotuCB")
+	follow_speed = cotu.walk_speed * .67
 	add_to_group("lockonables")
-	if not find_child("AnimationTree", false, false):
-		anim_tree_exists = false
-	else:
-		anim_tree.active = true
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -46,9 +43,6 @@ func _physics_process(delta):
 			
 	if global_position.y < -100:
 		queue_free()
-		
-	if anim_tree_exists:
-		anim_tree.set("parameters/StateMachine/WalkSpace/blend_position", nav_agent.velocity.length())
 
 func lerp_look_at_target(turn_speed):
 	var vec3_to_target := global_position.direction_to(target.global_position)
@@ -64,8 +58,13 @@ func _on_navigation_agent_3d_target_reached():
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	if behav_state == FOLLOW:
 		if is_on_floor():
-			# This line accelerates the agent rather than setting its velocity to its desired velocity directly, preventing it from getting caught on corners
-			velocity = velocity.move_toward(safe_velocity, .25)
+			if cotu.walk_input.length() > 0:
+				velocity = safe_velocity
+				lerp_look_at_walk_dir(follow_turn_speed)
+				global_rotation.x = 0
+				global_rotation.z = 0
+			else:
+				velocity = Vector3.ZERO
 		else:
 			# If the enemy is in the air, don't use navigation agent at all
 			var move_dir = global_position.direction_to(target.global_position)
@@ -74,59 +73,28 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	move_and_slide()
 
 func follow():
-	lerp_look_at_walk_dir(follow_turn_speed)
-	global_rotation.x = 0
-	global_rotation.z = 0
 	nav_agent.set_target_position(target.global_position)
 	var next_position = nav_agent.get_next_path_position()
 	var new_velocity = (next_position - global_position).normalized() * follow_speed
 	
 	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
 	nav_agent.velocity = new_velocity
-	
-	# If player isn't in sight, reduce target distance to a very small number
-	if can_see_target():
-		nav_agent.target_desired_distance = target_distance
-	else:
-		nav_agent.target_desired_distance = .1
 
 func start_attack():
 	behav_state = ATTACK
 	aiming_at_target = true
-	choose_attack()
+	await get_tree().create_timer(.5).timeout
+	behav_state = FOLLOW
 
 func stop_lateral_mvmt():
 	velocity.x = 0
 	velocity.z = 0
 
-func end_attack():
-	if anim_tree_exists:
-		anim_tree.set("parameters/StateMachine/conditions/overhead", false)
-		anim_tree.set("parameters/StateMachine/conditions/sweep", false)
-	behav_state = FOLLOW
-
-func choose_attack() -> String:
-	var choice := rng.randf()
-	if choice <= sweep_chance:
-		if anim_tree_exists:
-			anim_tree.set("parameters/StateMachine/conditions/sweep", true)
-		return "sweep"
-	else:
-		if anim_tree_exists:
-			anim_tree.set("parameters/StateMachine/conditions/overhead", true)
-		return "overhead"
-
 func attack():
 	nav_agent.velocity.x = 0
 	nav_agent.velocity.z = 0
-	if aiming_at_target:
-		lerp_look_at_target(attack_turn_speed)
-		global_rotation.x = 0
-		global_rotation.z = 0
-	
-func stop_aiming_at_target():
-	aiming_at_target = false
 
+# Keep this here until it's confirmed that Clarity's arena won't have obstacles
 func can_see_target():
 	var space_state := get_world_3d().direct_space_state
 	var sight_dir := global_position.direction_to(target.global_position)

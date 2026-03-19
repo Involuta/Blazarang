@@ -1,3 +1,4 @@
+NavigationAgent3D
 MeshInstance3D
 CollisionShape3D
 CharacterBody3D
@@ -21,7 +22,6 @@ AudioStreamPlayer
 AnimatedSprite3D
 FogVolume
 RayCast3D
-NavigationAgent3D
 Marker3D
 SkeletonIK3D
 RigidBody3D
