@@ -1,13 +1,13 @@
-AnimationTree
 MeshInstance3D
+CollisionShape3D
+CharacterBody3D
+AnimationTree
 Node3D
 AnimationPlayer
 Camera3D
 WorldEnvironment
-CollisionShape3D
 StaticBody3D
 NavigationRegion3D
-CharacterBody3D
 GPUParticles3D
 Label
 Label3D
