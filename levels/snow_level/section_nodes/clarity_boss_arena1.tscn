@@ -37,7 +37,10 @@ shape = SubResource("BoxShape3D_vqxk0")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.69336, 4.12245, 11.1807)
 
 [node name="IceSprite" parent="." instance=ExtResource("2_c2tp7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.3978, 5.80164, -3.3439)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5791, 5.80164, -16.5972)
 
 [node name="IceSprite2" parent="." instance=ExtResource("2_c2tp7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9188, 5.13747, -7.42881)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.2206, 5.13747, -5.13362)
+
+[node name="IceSprite3" parent="." instance=ExtResource("2_c2tp7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.45716, 5.12442, -23.8566)
