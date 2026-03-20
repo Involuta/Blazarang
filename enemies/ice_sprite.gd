@@ -41,6 +41,8 @@ func _physics_process(delta):
 	match(behav_state):
 		FOLLOW:
 			follow()
+		ATTACK:
+			follow()
 	if global_position.y < -100:
 		queue_free()
 
@@ -53,10 +55,10 @@ func lerp_look_at_walk_dir(turn_speed):
 
 func _on_navigation_agent_3d_target_reached():
 	if behav_state != ATTACK:
-		start_attack()
+		pass
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
-	if behav_state == FOLLOW:
+	if behav_state == FOLLOW or behav_state == ATTACK:
 		if is_on_floor():
 			if cotu.walk_input.length() > 0:
 				velocity = safe_velocity
@@ -79,8 +81,12 @@ func follow():
 	
 	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
 	nav_agent.velocity = new_velocity
+	
+	if global_position.distance_to(target.global_position) < target_distance and behav_state != ATTACK:
+		start_attack()
 
 func start_attack():
+	behav_state = ATTACK
 	anim_player.play("explode")
 	await get_tree().create_timer(explode_secs).timeout
 	queue_free()
