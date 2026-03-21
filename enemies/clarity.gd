@@ -56,15 +56,11 @@ var attack_turn_speed := 0.15
 var aiming_at_target := true
 
 @export var phase1_straight_attack_chances = {
-	"DoubleSlice" : .34,
-	"SingleShot" : .33,
-	"Spiral" : .33,
+	"Stomp" : 1.0
 }
 
 @export var phase1_curved_attack_chances = {
-	"DoubleSlice" : .34,
-	"SingleShot" : .33,
-	"Spiral" : .33,
+	"Stomp" : 1.0
 }
 
 @export var phase1_circling_attack_chances = {
@@ -96,10 +92,10 @@ var transparent_mat := preload("res://textures/clear_tile.tres")
 @onready var arm_anim_tree := $ArmAnimationTree # Controls arm attacks
 @onready var body_anim_tree := $BodyAnimationTree # Controls walk anim
 @onready var mhp := $MeleeHitboxPivot
-@onready var upper_meshes := $ClarityUpperMeshes
-@onready var lower_meshes := $ClarityLowerMeshes
-@onready var head_bone := $ClarityLowerMeshes/Armature/Skeleton3D/Hat_2
-@onready var head_mesh := $ClarityLowerMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
+@onready var arm_meshes := $ClarityArmMeshes
+@onready var body_meshes := $ClarityBodyMeshes
+@onready var head_bone := $ClarityBodyMeshes/Armature/Skeleton3D/Hat_2
+@onready var head_mesh := $ClarityBodyMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
 
 @onready var root := $/root/ViewControl
 var level : Node3D
@@ -226,8 +222,8 @@ func switch_to_circling():
 	behav_state = CIRCLING
 
 func attack_frame():
-	# Upper meshes moves to match walk dir
-	upper_meshes.position = .48 * velocity.normalized()
+	# Arm meshes moves to match walk dir
+	arm_meshes.position = .48 * velocity.normalized()
 	if aiming_at_target:
 		head_and_arm_look_at_position(target.global_position, attack_turn_speed)
 
@@ -287,7 +283,7 @@ func end_attack():
 
 func head_and_arm_look_at_position(target_pos, turn_speed):
 	var vec3_to_target := -global_position.direction_to(target_pos)
-	upper_meshes.rotation.y = lerp_angle(upper_meshes.rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
+	arm_meshes.rotation.y = lerp_angle(arm_meshes.rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
 	
 	# Head mesh isn't a child of head bone so it doesn't inherit rotation from head bone
 	head_mesh.global_position = head_bone.global_position
@@ -300,7 +296,4 @@ func head_and_arm_look_at_position(target_pos, turn_speed):
 	head_mesh.rotation.x = min(lerp_angle(head_mesh.rotation.x, head_target_rotation.x, turn_speed), .67)
 
 func body_look_in_direction(dir: Vector3):
-	lower_meshes.rotation.y = lerp_angle(lower_meshes.rotation.y, PI + atan2(-dir.x, -dir.z), head_turn_speed)
-	# Head and arm positions move to match body dir
-	var current_forward = -lower_meshes.global_transform.basis.z
-	upper_meshes.position = 0.48 * current_forward
+	body_meshes.rotation.y = lerp_angle(body_meshes.rotation.y, PI + atan2(-dir.x, -dir.z), head_turn_speed)
