@@ -1,4 +1,4 @@
-Blazarang Ideas Doc Backup - 3/14/2026
+Blazarang Ideas Doc Backup - 3/21/2026
 
 Production Processes
 
@@ -336,8 +336,8 @@ X
 Evade attacks with running and some dodging
 Attack with mostly rose instant rethrows and run away to get to optimal dps distance
 Clarity
-Evade attacks with staying close and dodging, running is less helpful
-Attack with mostly the ax
+Evade attacks with dodging and some running
+Attack with mostly rose power throws or the ax
 
 
 
@@ -1377,7 +1377,7 @@ To launch some balls, the walker balances on one foot while the other extends it
 Heavy ball - launched by foot mortar
 Swarm balls - shot from foot gun at each stomp
 Skull ball - can be shot in every situation that a roller is shot, but is much rarer. Chases the target and explodes at close proximity
-State progression
+Dist states
 Long dist: walker is far from target
 Stand to foot cannon or mortar anim plays
 Walker continuously fires at target
@@ -2419,16 +2419,78 @@ Replace/rework Parry Counterslice
 Replace it with Flick Slice, where she drags her tip across the floor, then flicks up suddenly, then raises the blade again and slashes down diagonally back to starting position
 Consider reworking slices entirely, at least with their style. Since her most iconic moves are long, complex, sine wave-like attacks like jump shot (she bends down to accelerate, then rises up smoothly, maybe she should have wave-like attacks with her slashes as well
 Keep long, possibly multi-stage slice windups because they force the player to split their attention between her minions and her blade
-Remove arm self-axis rotation from slice windups since they mess up the blade’s path during the slice
-Current task
+Keep arm self-axis rotation from slice windups since they don’t mess up the blade’s path during the slice like you thought they did
 Long Slice: she raises her arm high, then slices behind her, then in front of her like the first hit of X’s right arm slice
-Idea: Clarity controls the fight. She doesn’t follow the player, the player follows her. She moves on her own set path and the player has to stick by her side or get caught in the storm
-She stays in Walk Left mode continuously and moves her head to look at the target as it moves around her. No shards move when she’s just looking at the player
+Clarity controls the fight. She doesn’t follow the player, the player follows her. She moves on her own set path and the player has to stick by her side or get caught in the storm
+She stays in Walk mode continuously and moves her head to look at the target as it moves around her. No shards move when she’s just looking at the player
+Her head looks directly at the player like X’s head
+To tilt side to side/forward and back, an anim player in her head’s scene plays an anim to perform the rotation (as opposed to complicated rotation code and node setups)
+It turns out that side tilts don’t show up well when Clarity’s looking down at the player, so just do forward/back tilts
 The attacks she does correspond to where the player is around her (to her left, to her right, to her front, etc.)
+Idea: to hit in any direction around her, she turns her arm to correspond to her head’s direction
+Try making Clarity always face you while she’s moving, then make her lower half invisible. Then add a second Clarity meshes instance that only shows the dress shards and simply stays on the walk forward anim and points in the walk dir
+You once considered not making Clarity’s arm face you as you move around her. Instead, it would have stayed in one place, and Clarity would have used different attack anims depending on where you are standing relative to her at the time the attack begins. The only problem with this is that if you move around her during the windup of a move, the windup cannot rotate with you, meaning you’re way out of the way as long as you successfully rotate around her
+Currently, she just walks in straight lines in random directions. Allow her to walk clockwise, in which case she uses the walk left anims instead of the walk forward anims
+You recently changed the chest and hat keyframes of the double slice anims to match walk forward. Make 2 more double slice anims to match walk left
+Make walk clockwise code. You already have code that makes Clarity orbit around the target, now make code that treats Clarity’s current vel as a tangent vec of a circle, then makes her orbit around the circle center
+Get perpendicular vec to her vel with length equal to walk_circle_radius, then set her orbit center to her global pos + that perp vec
+Give Clarity the same Godot keyframes for DoubleSliceForward as DoubleSliceLeft
+Add walk left anims/transitions to anim tree
+Walk left passive
+Walk left aggressive
+Double slice delayed
+Double slice immediate
+Add body anim tree (in addition to arm anim tree) so that walk anim matches mvmt state
+Add 3rd state: circling (around the player)
+Clarity can move in a straight line, move in a circle around a set point, and move in a circle around the player. When circling around the player, Clarity’s body should use the walk left anim. Otherwise the body should use the walk forward anim
+When in straight or curved state, Clarity’s body should face the direction she’s moving. When circling, the body should face the target
+The transition between non circling and circling is abrupt and jarring, find a way to mask this in the future. Maybe when the angle between her and the target is just right?
+Add close range dress shard attacks, which mostly stomp on the ground and create frost fields that increase frostbite
+Make anims in Blender
+Front stomp: front 4 shards
+Left stomp: left 3 shards (Clarity’s left side)
+Right stomp: right 3 shards (Clarity’s right side)
+Back stomp: back 2 shards
 Add minion enemies
-Idea: Ice Sprites, small nuisance enemies that follow the target and try to jump on it like the Ice Spirit from Clash Royale
-These contrast with Clarity by being small and cute, unlike the Tiny Dancers
 Idea; Tiny Dancers, Cotu-sized playful warriors who spiral around Cotu before approaching him and doing melee attacks
+Only move when the target moves for same reason as ice sprites
+Giggle creepily
+Decided not to use this design since it’s somewhat redundant with Clarity herself being an elegant dancer-like enemy. Ice sprites hint at a more playful, whimsical personality
+Idea: Ice Sprites, small nuisance enemies that follow and surround the target and try to explode on it like the Ice Spirit from Clash Royale
+These contrast with Clarity by being small and cute, unlike the Tiny Dancers
+Only move when the target moves, making the player choose between staying still to keep the sprites away and moving to stay within Clarity’s safe zone
+Make the initial scene + placeholder mesh
+Make basic script where all it does is follow you until it reaches a desired dist, and it only moves when the target moves
+In reality, it moves when Cotu’s walk input magnitude > 0. The target’s velocity isn’t set (its global pos is set directly) so you can’t get the target’s vel
+Make ice sprites attack
+Once in attack range, they continue following the target only when it moves, but after some amount of time, they explode
+Make the sprites circle around and surround you, perhaps they try to get a minimum distance away from each other, Clarity, and the target before approaching the target?
+On second thought, what exactly does this add to the gameplay? They can already be circumvented by the player not moving, so making them circle around before approaching only makes them feel like a non-threat for most of their lifetime, making them feel boring. It also makes them harder to predict and therefore more frustrating/luck-based, or at least they’ll feel that way to a new player
+Idea: make ice sprites jump to move. If the player is pressing a walk input at any time an ice sprite is grounded, it’ll jump. It moves in the safe velocity calculated by nav agent 3D velocity computed so it avoids other enemies
+Make script-level variable safe_vel
+3D vel computed only sets safe_vel now
+If the ice sprite is grounded, its vel is set to safe_vel + jump_speed
+Idea: make the jump_speed somewhat low so it does a bunch of little hops like butterfly flutters
+Add hitboxes later when you make the frostbite mechanic
+Fix Clarity’s arm/shoulder looking off-center when looking beside/behind herself. Maybe she should only be able to turn her arm meshes toward the target while circling, since the rest of her body rotates towards the target too?
+Maybe she should only stomp or do big mvmt attacks when moving straight? This makes sense for the fight bc when she moves straight, the player needs to chase her, which encourages the player to get close, putting them at higher risk of getting hit
+Current task
+Make stomps choosable via anim tree and attack code
+Stomps should stop Clarity from moving once the shards are embedded in the ground, then let her move again when the shards are pulled out
+Maybe she could do thrust attacks when moving straight? Then the shoulder orientation won’t stand out
+When would Clarity ever use the projectile attacks if she’s rarely facing toward the player? After she uses Square and lands from the sky. She’ll land facing the player at just the right dist to use any projectile attack. This’ll be a staple combo of hers: Square → projectile attack
+Also consider taking the retreat from RegenShards and using that as a way for her to transition from a walk state to a projectile attack
+Make Clarity staggerable when hit in face weak spot with power throw and ax
+Create the blizzard that’s everywhere except for the area right around Clarity
+Blizzard safe zone extends just barely past Clarity’s blade
+Make big-movement attacks like jump shot clear the blizzard, then the blizzard slowly creeps back in over time
+Give each dress shard its own hurtbox. Each dress shard can break after taking enough damage, and if enough shards are broken, Clarity must regenerate them
+The optimal range for the roserang to hit all the shards is also the optimal range for Clarity to hit you
+Add melee hitboxes
+Make melee hitbox pivot a child of Clarity meshes, not the Clarity boss bc Clarity boss’s global rotation y doesn’t change, so when the Clarity upper body meshes rotate, the melee hitbox pivot needs to rotate with it
+
+Power Throw to Mark Rang Upgrade
+Power throw automatically homes to mark position when mark is active
 
 Add Hidden Techniques
 Hidden techniques are things the player can innately do, but the player doesn’t know how to do them. Spend skill points to unlock the knowledge on how to do them
@@ -2619,6 +2681,22 @@ If the teleport attack is fully charged, an image of the cactus grotesquely fuse
 Simone Says + Wraith
 Colorful kid-friendly host tells you simple instructions Simon-says/Warioware style
 A wraith appears and slowly becomes bigger and faster over time
+
+Math Boss
+Crazy-looking wraith with a number face. 2 other ball-like faces with circles painted on them, and a wraith-like body like Specter Knight from Shovel Knight
+Boss’s face has a randomly selected number in some range (maybe 1-30)?
+Does crazy twitching and constantly whispers about “the numbers”
+Player doesn’t know how the following attacks work, they only see the numbers, then the attacks
+3 pillars: left, center, right
+Left and right pillars randomly select a number from 1-30 (inclusive)
+Middle pillar randomly selects a number from 2-12 (inclusive) by rolling 2 dice into the arena
+Player must calculate how many of the middle # it takes to get from the left # to the right #
+e.g. 22, 4, 7. How many 4’s does it take to get from 22 to 7?
+22 - 4x = 7 → x = 3 remainder 3
+Player uses the quotient to anticipate the next attack
+Boss uses the remainder in their prime factorization
+Boss’s goal is to assemble all numbers used in the prime factorization of their face number (e.g. if it’s 12, the factors are 2, 2, and 3)
+Once the prime factorization (PF) is complete, the boss celebrates and does a supermove before choosing another random face number
 
 Projectile Spammer: Microwave
 Idea: before the fight, you can unlock an endgame-level super powerful upgrade that deflects or destroys projectiles somehow. Undecided if this is done through the icon, one of the rangs, or something else entirely
@@ -2911,22 +2989,22 @@ Front kick ragdoll: Pilot appears from a portal perpendicular to Cotu’s stumbl
 Baseball bat: steps out of the portal close to Cotu’s back and swings at his head horizontally with his current melee weapon. Simultaneously, no name steps out of a portal in front of Cotu and does a ducking liver punch. If one hit lands, the other must have landed as well. If one missed, both must have missed. If the hits land, there’s heavy hitstop during the impact (only do this if it’s not too difficult), then Cotu frontflips and lands on his butt
 One-time gags: only used once per playthrough, typically as a joke. In an interaction between 2 brothers, the third hyperaggressively attacks the target (typically no name)
 Pocketwatch: Greg holds a pocketwatch in his hands and looks at its back
-Greg: “WHAT?! Muahahahaha! Behold! Power over time itself!”
+Greg: “WHAT?! Muahahahaha! Behold! The power of time itself!”
 The game pauses
 The player unpauses
 Greg: “...”
 Cotu: “Did something happen?”
 Greg: “Yo, it didn’t do anything? The inscription on the back said it stops time. Welp. Can’t trust everything you read.” *tosses the watch into a portal*
-Legendary Blade of Iliandor: a flickering golden greatsword appears from a portal and floats in front of Greg
-Greg: “The Legendary Blade of Ilia?! Oh crap…I think I forgot to charge it last night.”
+Legendary Blade of Topuria: a flickering golden greatsword appears from a portal and floats in front of Greg
+Greg: “The Legendary Blade of Topuria?! Oh crap…I think I forgot to charge it last night.”
 The blade flickers and shuts off
 Greg: “Sorry Pilot!”
-Pilot (sad): “(sighs) It’s fine… :(”
-Piece of the Anti-Life Equation: a little piece of paper
+Pilot (sad): “(sighs) Oh well…maybe another time… :(”
+Piece of the Death Equation: a little piece of paper
 Pilot: “Found this at the center of a black hole. What is it, Greg?”
-Greg: “A piece of the “Anti-Life Equation”…”
+Greg: “A piece of the “Death Equation”…”
 Pilot: “?” *pop sound effect*
-Greg: “Well that’s too bad, we can’t do anything without the whole formula. Put it in the vault.”
+Greg: “Well that’s too bad, we can’t do anything without the whole thing. Put it in the vault.”
 Pilot: “Okay then.”
 No name: ninja
 Terrible at using realm items, but expert hand-to-hand fighter
@@ -2965,7 +3043,35 @@ https://www.youtube.com/watch?v=n92FzsXmJKY at 0:03
 Slide sweep: slides out of the portal and sweeps the target. If it lands and Greg has some bullets left, Greg comes out and shoots Cotu while he’s grounded
 Scissor: no name does a flip or something and restrains Cotu by locking him between his legs. While Cotu’s restrained, Greg runs up to them. Then Pilot falls from a portal above and slams onto Cotu. Pilot bounces high into the air while Cotu bounces up moderately. While Cotu’s in midair, Greg blows him with a giant tuba and Cotu enters a portal, and then gets hit with a no name kick after coming out the other portal
 Pilot and Greg sometimes tell the others to do specific actions or switch behaviors
-When no name is given an order, a random name (e.g. Jeff, Bob) is used
+When no name is given an order, a random name starting with N (e.g. Nathan, Neo) is used
+Greg’s names often reference other media, but he claims he’s just making them up
+In every scene where Greg calls no name by “name”, Greg randomly chooses a name
+Nathan
+Nelson
+Nigel
+Noah
+Nino
+Niño
+Nanny
+Nonagon
+Nigeria
+Nuclear silo
+Notepad
+Nut butter
+New user
+Nelly
+Nickleback
+Neo
+Nobara
+Nanami
+Naruto
+Nana
+Nami
+Niffty
+Nebuchadnezzar
+Nameless King (used in combat)
+Numbskull (not randomly selected; invites physical retaliation from no name)
+Knucklehead (not randomly selected; invites physical retaliation from no name)
 Pilot and Greg named themselves (as does everyone in this universe). No name can’t name himself, but the brothers refused to name him bc they thought that would be unfair, so they call him “no name”. The brothers want to explore the realms for a cure for no name’s aphasia
 After the fight, no name writes his name on a sign on the wall behind him where he hangs out: “Zero”
 Greg: *on the verge of tears* “Zero, huh? It’s no Greg, but, it’s a lot better than Pilot.”
@@ -3368,12 +3474,17 @@ Idea: in her second phase, Jester uses the last of her magic to transform hersel
 Story ideas:
 Was originally a shy introvert who learned to hide her vulnerability with humor
 Trained alongside the gauntlet during the tournament, gaining their trust
-Secretly madly in love with Greg
+Secretly madly in love (or lust) with Greg
 
 Story Progression Arcs/Episodes
-Cotu goes on a journey for whatever reason and encounters progressively more antagonistic antagonists
-Idea: destination is a convention/mock tournament. Mock tournament could be like pantheons from Hollow Knight where you fight several bosses in a row
+Cotu goes on a journey and encounters progressively more antagonistic antagonists
+Destination is a gala for top competitors. Gala is like a pantheon from Hollow Knight where you fight several bosses in a row
 Idea: you have the option of telling the event organizers about the kidnappers. If you tell them, they don’t participate in the tournament
+Idea: Player only has a limited number of fight attempts and stabilizers across the entire journey before the gala begins. As the player completes subsequent runs, they’ll have more and more attempts and stabilizers that they can use to practice against later bosses
+Certain gods (e.g. mites) force the player to defeat them or use many stabilizers to charge the ship’s stability shields to escape their realms. Surviving their encounters for a certain length of time grants experience that you can use to unlock skills, but doesn’t progress the journey past them
+Progressing through the journey quickly (i.e. beating bosses with less attempts) will allow the crew to catch up to other gods making their way to the gala. The player may encounter gods they didn’t encounter in previous runs due to taking too long
+Player can save at a checkpoint with a limited number of slots
+Order of encounters:
 Cotu’s friends (supporting Cotu)
 Gauntlet
 Ball Walker (maybe)
@@ -3389,18 +3500,45 @@ Blackstar
 Microwave
 Notes:
 Mites were originally planned to be a cute friendly faction with their creator being a friend who wants Cotu to play with their toys, but Ball Walker’s shape and toy-like nature fits that better. Mites were meant to send the message that someone could have a strange appearance but friendly personality, but Ball Walker can do the same since the contraption is strange looking but subconsciously friend-shaped
+Steps for the journey:
+The Return
+Cotu comes back from vacation and warms up by fighting gauntlet var 1 (+ var 5 with the gauntlet tower miniboss)
+Cotu fights X, who’s a bit peeved that he had to wait for Cotu instead of heading to the gala early. He’s hiding the fact that he wanted to see Cotu again
+Cotu and the triplets start heading off to the gala
+The Void
+After some time, Cotu and the triplets are given a choice: take the long route to the gala through the web strand of light and matter, or take the shortcut through the Great Void. Going through the void is risky since there’s no way to communicate with the rest of the universe when you’re deep enough in the void, but if they take the long way, Cotu won’t have as much time to fight other gods (in game, he won’t have as many attempts) before the gala begins. The crew doesn’t have the time to spare since they spent too much time on vacation
+In reality, the universe is actually built like a web, with strands of light and matter and vast voids between the strands
+The crew not having time to spare explains why none of Cotu’s overpowered friends help him along the journey; they’re already at the gala and are busy practicing or on the way to the gala ahead of him. Also Cotu needs the experience fighting people to get strong again
+If the player chooses the void, the crew encounters Clarity’s realm. They didn’t expect to see any form of life so deep in the void. The player has to defeat Clarity  or the journey ends here
+Why don’t stability shields work? I want the Clarity shortcut to be actually risky for the player
+(Alternative to the Void) The Web
+If the player chooses the long route on the web, I’m unsure what exactly will happen
+Idea: along the way, the player has the option to fight minor or gimmick bosses, which can give Cotu experience in exchange for time, or the player can skip the minor bosses to have more time to get to the gala
+Minor/gimmick bosses:
+Elite Gunner and Sentinel
+Cactus and bird?
+Simone Says?
+Idea: at some point along the web, the crew is attacked by the mites, and either Cotu destroys the mitriarch or the crew consumes a lot of stabilizers to charge the shields so they can escape
+The Kidnapping
+Cotu gets kidnapped by Future Blade (just an idea) and has to defeat him or the journey ends here OR somebody kicks Future Blade’s ass and saves Cotu
+Idea: The crew sees an advertisement for extremely cheap stabilizers, so they go to Future Blade’s booth to buy them, then get kidnapped. Greg argues that even if it’s a scam, Cotu can just beat up the scammer
+The Gala
+The player gets only 1 attempt to fight Tempered X, Blackstar, and (hopefully) Turbo Jester OR the player can use their remaining attempts to practice fighting Tempered X and Blackstar before initiating the gala like the Radahn festival, but the player only gets that one attempt at the gala
+Post-Gala
+Player can fight Microwave, the one competitor disqualified from the tournament
+
 
 Notes for full version:
 Idea: for certain levels/bosses, give the player a limited number of attempts before the level/boss becomes unavailable for the rest of the playthrough
-Always available: Cotu’s crew
+Mostly available: Cotu’s crew
 Triplets
 Microwave
-Unavailable after defeating them: mostly Cotu’s closest friends
+Unavailable after defeating them: Cotu’s closest friends
 Gauntlet
 X
 Unavailable after many attempts: Cotu’s less close friends/acquaintances
 Mites
-Snowflake
+Clarity
 Levels/bosses that will become unavailable after a few attempts: rare/special bosses
 Ball Walker
 Create animation for when FirstMiniboss is destroyed by Cotu
@@ -3599,6 +3737,7 @@ Cotu loses his power on purpose to go on vacation with his friends without being
 At the gala, he fights at least the following 2 gods:
 Tempered X, who wants to show the universe what he’s achieved
 Blackstar, who wants to prove that she’s ready for the tournament by fighting the champion
+Jester? Would be fun but can remove if out of scope
 Microwave possibly makes a surprise appearance? Maybe as a bonus event as in this timeline, Blackstar is the rank 2. Microwave was disqualified for making a deal with the Creator: incredible power in exchange for a tiny chance to critically malfunction
 On the trip, gods fight Cotu for various reasons
 Cotu asks the Gauntlet to train him, and they love fighting and helping others
@@ -3651,6 +3790,35 @@ Pilot: “We’ll do our best to help in any way we can, just give us the word!�
 Cotu: “*sigh*...I love you guys.”
 Greg: “Oh stop, you’ll make Pilot blush.”
 Pilot: “I already am. *squee*”
+Pilot’s first scene alternate scenario: Pilot’s by himself at first, then Greg and no name are introduced
+Assumed game sequence for this scene: player starts the game in gauntlet, then either wins or loses to return to the ship. The following script is for a win
+Cotu’s feeling good but wants a bigger challenge
+Pilot wants to congratulate Cotu for beating the gauntlet just after vacation
+Pilot is offscreen and speaking through the ship’s PA system
+Greg and no name are offscreen
+Cotu steps out of the portal from the gauntlet into the bridge
+Pilot: “Welcome back, Cotu. Congratulations for conquering the gauntlet!”
+Cotu smiles and chuckles
+Cotu: “Thanks, but that was just the first variant. And I’m pretty sure they were going easy on me.”
+Pilot: “Hey in all seriousness, it wasn’t bad for your first fight out of vacation. I haven’t seen you use moves like that since the tournament!”
+Cotu: “Maybe. But just you wait until I fight the top fighters again. At the gala. Then you’ll see some moves.”
+Pilot: “Well someone’s excited. Unfortunately, it’ll be a while before we make it all the way back to the Center of the Universe. We traveled pretty far for that vacay.”
+Cotu: “It was worth it though.”
+Said in a way that could be interpreted as a quick insert, but also as a foreboding line hinting at some hidden reason why the vacation was worth it
+Cotu: “But…I don’t know if I’ll have enough time to get back to full strength by the time we get there. I’ll have to train hard along the way.”
+Pilot: “We’ll do our best to help in any way we can, just give us the word!”
+Cotu: “*sigh*...I love you guys.”
+Pilot: “Oh stop, you’ll make me blush.”
+Cotu: “Where are the others anyway?”
+Pilot: “Oh, they’re still working on that training dummy I requested, but they should be done soon.”
+Cotu: “Where is it?”
+Pilot: “It’ll be in the big spare room to your right.”
+Cotu enters the room and sees Greg and no name getting attacked by the dummy. Chaos ensues. Possibly Cotu (the player) steps in to help
+…
+The dummy is eventually contained
+Greg: “All the stats’ll show up on the big screen. You can see your total damage dealt, damage per shot-”
+No name bumps Greg’s arm.
+Greg: “Huh? Oh damage per second, my bad. And uh, total number of hits. You can reset it with that button over there. And that’s pretty much it.”
 The Gauntlet and Blackstar
 Each variant of soldiers the gauntlet makes is also called an incarnation
 The gauntlet constantly strives to make new variants (i.e. the variants constantly strive to reincarnate); that is their sole purpose
@@ -3759,7 +3927,7 @@ No name wants to win in any way possible no matter the consequences, mostly to m
 Greg’s trying to take a break from thinking about the future
 X: “Impossible! You MUST be cheating!”
 Greg: “X, X, X. You just don’t recognize skill when you see it.”
-X: *leans forward* “I will hurl you a hundred light years into the void.”
+X: *leans forward* “I will hurl you a hundred light years into the Great Void.”
 Greg: *puts his finger to X’s lips* “Shh…Just hush and take this beating like a good boy.”
 X: “WHAT?!” *X’s face flames up*
 Greg: *pulls his finger away in pain* “ow, oof, ah”
@@ -3901,11 +4069,11 @@ Greg: “Hm?”
 Cotu: “Can I ask…why doesn’t no name use weapons?”
 Greg: “He just prefers not to. I’ve offered him weapons before but he’s refused them every time.”
 Cotu: “Ah. Perhaps he wants to master unarmed combat first. If only we could ask him directly.”
-Greg: “Yeah. Also there’s the fact that like, the vast majority of our stash is magic, so little Billy can’t use them.”
+Greg: “Yeah. Also there’s the fact that like, the vast majority of our stash is magic, so little Niffty can’t use them.”
 Cotu: “Really? Why all the magic weapons?”
 Pilot: “Um, if I may butt in, any weapon that’s not infused with magic will most likely be weaker than our bodies. As far as I’ve seen, our bodies are made of one of the strongest materials in the universe.”
 Cotu: “I see.”
-Greg: “Wait. Why didn’t I think of that? That’s why Bobby doesn’t use weapons. Damn. I’m dumb.”
+Greg: “Wait. Why didn’t I think of that? That’s why Nelson doesn’t use weapons. Damn. I’m dumb.”
 Pilot: “Well, it can be easy to forget how durable we are without a frame of reference.”
 Greg: “...yo, we should call snowflake and X, and have snowy shoot a shard at me and X at the same time and see who gets hurt more.”
 Pilot: “Umm…I think it’s best for your health that you just take my word that, uh, we’re tough.”
