@@ -8,6 +8,7 @@ enum {
 }
 var behav_state = FOLLOW
 
+var safe_vel := Vector3.FORWARD # safe velocity is calculated by nav agent 3D on velocity computed
 var follow_speed := 5.0 # Ice sprite follow speed is set to be very similar to if not identical to Cotu's walk speed
 @export var target_distance := 6.0
 @export var follow_turn_speed := .15
@@ -15,6 +16,7 @@ var follow_speed := 5.0 # Ice sprite follow speed is set to be very similar to i
 @export var jump_vertical_speed := 5.0
 @export var jump_lateral_speed := 9.0
 
+var explosion_triggered := false
 @export var explode_secs := 7.0
 
 var aiming_at_target := true
@@ -33,16 +35,14 @@ func _ready():
 	target = root.find_child("Icon")
 	cotu = root.find_child("cotuCB")
 	follow_speed = cotu.walk_speed * .67
+	nav_agent.target_desired_distance = target_distance
 	add_to_group("lockonables")
 
 func _physics_process(delta):
 	if not is_on_floor():
-		velocity.y -= gravity * delta
-	match(behav_state):
-		FOLLOW:
-			follow()
-		ATTACK:
-			follow()
+		velocity.y -= 3 * rng.randf() * gravity * delta
+	follow()
+	move_and_slide()
 	if global_position.y < -100:
 		queue_free()
 
@@ -54,39 +54,30 @@ func lerp_look_at_walk_dir(turn_speed):
 	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(velocity.x, velocity.z), turn_speed)
 
 func _on_navigation_agent_3d_target_reached():
-	if behav_state != ATTACK:
-		pass
+	if not explosion_triggered:
+		start_attack()
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
-	if behav_state == FOLLOW or behav_state == ATTACK:
-		if is_on_floor():
-			if cotu.walk_input.length() > 0:
-				velocity = safe_velocity
-				lerp_look_at_walk_dir(follow_turn_speed)
-				global_rotation.x = 0
-				global_rotation.z = 0
-			else:
-				velocity = Vector3.ZERO
-		else:
-			# If the enemy is in the air, don't use navigation agent at all
-			var move_dir = global_position.direction_to(target.global_position)
-			velocity.x = follow_speed * move_dir.x
-			velocity.z = follow_speed * move_dir.z
-	move_and_slide()
+	safe_vel = safe_velocity
 
 func follow():
 	nav_agent.set_target_position(target.global_position)
 	var next_position = nav_agent.get_next_path_position()
 	var new_velocity = (next_position - global_position).normalized() * follow_speed
-	
 	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
 	nav_agent.velocity = new_velocity
 	
-	if global_position.distance_to(target.global_position) < target_distance and behav_state != ATTACK:
-		start_attack()
+	if is_on_floor():
+		if cotu.walk_input.length() > 0:
+			velocity = safe_vel + jump_vertical_speed * Vector3.UP
+			lerp_look_at_walk_dir(follow_turn_speed)
+			global_rotation.x = 0
+			global_rotation.z = 0
+		else:
+			velocity = Vector3.ZERO
 
 func start_attack():
-	behav_state = ATTACK
+	explosion_triggered = true
 	anim_player.play("explode")
 	await get_tree().create_timer(explode_secs).timeout
 	queue_free()

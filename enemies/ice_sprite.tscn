@@ -6,7 +6,7 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_35ehe"]
 resource_local_to_scene = true
-albedo_color = Color(0.647647, 0.997059, 1.05, 1)
+albedo_color = Color(0.552941, 0.941176, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_adun2"]
 resource_local_to_scene = true
@@ -59,7 +59,7 @@ _data = {
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j2xt2"]
 direction = Vector3(2.08165e-12, 1, 2.08165e-12)
-spread = 67.0
+spread = 60.0
 gravity = Vector3(2.08165e-12, -9.8, 2.08165e-12)
 initial_velocity_min = 9.0
 initial_velocity_max = 18.0
@@ -74,7 +74,7 @@ particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_6gqvu"]
 material = SubResource("StandardMaterial3D_vo4f3")
-size = Vector2(0.5, 0.5)
+size = Vector2(0.3, 0.3)
 
 [node name="IceSprite" type="CharacterBody3D"]
 collision_layer = 8
@@ -86,7 +86,7 @@ target_distance = 4.5
 shape = SubResource("CapsuleShape3D_s45hv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.629612, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh = SubResource("BoxMesh_adun2")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
@@ -102,7 +102,7 @@ libraries = {
 cast_shadow = 0
 emitting = false
 amount = 18
-lifetime = 5.0
+lifetime = 4.5
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_j2xt2")

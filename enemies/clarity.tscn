@@ -114,7 +114,7 @@ states/WalkLeftAggressive/position = Vector2(-274.421, 100.436)
 states/WalkLeftPassive/node = SubResource("AnimationNodeAnimation_nefrk")
 states/WalkLeftPassive/position = Vector2(-540.924, 169.815)
 transitions = ["Start", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_pgktn"), "WalkForwardAggressive", "DoubleSliceForwardDelayed", SubResource("AnimationNodeStateMachineTransition_bea46"), "WalkForwardAggressive", "DoubleSliceForwardImmediate", SubResource("AnimationNodeStateMachineTransition_3qy52"), "DoubleSliceForwardDelayed", "WalkForwardPassive", SubResource("AnimationNodeStateMachineTransition_lo2t7"), "DoubleSliceForwardImmediate", "WalkForwardPassive", SubResource("AnimationNodeStateMachineTransition_v8u7u"), "WalkForwardPassive", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_yym1r"), "Start", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_3iee8"), "WalkLeftAggressive", "DoubleSliceLeftDelayed", SubResource("AnimationNodeStateMachineTransition_j26xo"), "WalkLeftAggressive", "DoubleSliceLeftImmediate", SubResource("AnimationNodeStateMachineTransition_1fa2q"), "DoubleSliceLeftDelayed", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_3w0r0"), "WalkLeftPassive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_8v8bx"), "DoubleSliceLeftImmediate", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_oosjn"), "WalkLeftAggressive", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_gk2ku"), "WalkForwardAggressive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_h5eo1")]
-graph_offset = Vector2(25.085, 67.4549)
+graph_offset = Vector2(-428.92, 25.7699)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u1nw5"]
 animation = &"WalkForwardAggressive"
@@ -131,12 +131,12 @@ advance_mode = 2
 advance_expression = "behav_state == CIRCLING"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2bfm5"]
-xfade_time = 3.0
+xfade_time = 0.3
 advance_mode = 2
 advance_expression = "behav_state != CIRCLING"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p1gf3"]
-xfade_time = 3.0
+xfade_time = 0.3
 advance_mode = 2
 advance_expression = "behav_state == CIRCLING"
 
@@ -146,10 +146,10 @@ states/WalkForwardAggressive/position = Vector2(439, 196)
 states/WalkLeftAggressive/node = SubResource("AnimationNodeAnimation_h14go")
 states/WalkLeftAggressive/position = Vector2(12.0775, 196.029)
 transitions = ["Start", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_uxh1w"), "Start", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_4u7pf"), "WalkLeftAggressive", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_2bfm5"), "WalkForwardAggressive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_p1gf3")]
-graph_offset = Vector2(-131.423, 50.6175)
+graph_offset = Vector2(-155.318, 62.5275)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_fhmms"]
-graph_offset = Vector2(-82.56, 107.52)
+graph_offset = Vector2(-22.08, 108.48)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_35adq")
 nodes/StateMachine/position = Vector2(100, 150)
 node_connections = [&"output", 0, &"StateMachine"]
