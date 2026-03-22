@@ -8,7 +8,7 @@ enum {
 	CIRCLING,
 	SPECIAL,
 }
-var behav_state := CURVED
+var behav_state := STRAIGHT
 var attacking := false # Set to true when attacking to prevent another attack from being queued
 
 enum DIST_TYPE {
@@ -33,10 +33,10 @@ var phase := PHASE.PHASE1
 
 @export var min_y_pos := 11.4 # y pos of arena floor, ie X's minimum y position
 
+var stationary := false
 @export var walk_speed := 2.0
 var walk_dir := Vector3.FORWARD # Randomly set when switching to walk straight
 @export var walk_curved_radius := 9.0 # Radius of circle Clarity walks on
-
 
 @export var head_turn_speed := .2
 
@@ -103,7 +103,6 @@ var level : Node3D
 var target : Node3D
 var cotu : Node3D # Clarity only attacks the target; cotu is only referenced here to help Clarity calculate whether to parry when Cotu throws a roserang
 var clarity_icon : Node3D
-var clarity_icon_pos : Node3D
 
 func _ready():
 	add_to_group("lockonables")
@@ -111,12 +110,6 @@ func _ready():
 	target = level.find_child("Icon")
 	cotu = level.find_child("cotuCB")
 	clarity_icon = level.find_child("ClarityIcon")
-	clarity_icon_pos = level.find_child("ClarityIconPos")
-	
-	Globals.cotu_normal_throw_rose.connect(trigger_rose_parry)
-	Globals.cotu_power_throw_rose.connect(trigger_rose_parry)
-	Globals.cotu_instant_rethrow_rose.connect(trigger_rose_parry)
-	Globals.cotu_throw_ax.connect(trigger_ax_parry)
 	
 	min_long_dist_wait = phase1_min_long_dist_wait
 	max_long_dist_wait = phase1_max_long_dist_wait
@@ -128,18 +121,7 @@ func _ready():
 	body_anim_tree.active = true
 	mhp.visible = false
 
-func trigger_rose_parry():
-	if behav_state == STRAIGHT or behav_state == CURVED:
-		rose_thrown = true
-
-func trigger_ax_parry():
-	if behav_state == STRAIGHT or behav_state == CURVED:
-		ax_thrown = true
-
-func head_and_arm_look_at_position(target_pos, turn_speed):
-	var vec3_to_target := -global_position.direction_to(target_pos)
-	arm_meshes.rotation.y = lerp_angle(arm_meshes.rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
-	
+func head_look_at_position(target_pos, turn_speed):
 	# Head mesh isn't a child of head bone so it doesn't inherit rotation from head bone
 	head_mesh.global_position = head_bone.global_position
 	var old_head_rotation = head_mesh.rotation
@@ -149,6 +131,10 @@ func head_and_arm_look_at_position(target_pos, turn_speed):
 	head_mesh.rotation.y = lerp_angle(head_mesh.rotation.y, head_target_rotation.y, turn_speed)
 	# Look down/up at the player. Not too low so the head doesn't look straight down
 	head_mesh.rotation.x = min(lerp_angle(head_mesh.rotation.x, head_target_rotation.x, turn_speed), .67)
+
+func arm_look_at_position(target_pos, turn_speed):
+	var vec3_to_target := -global_position.direction_to(target_pos)
+	arm_meshes.rotation.y = lerp_angle(arm_meshes.rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
 
 func body_look_in_direction(dir: Vector3):
 	body_meshes.rotation.y = lerp_angle(body_meshes.rotation.y, PI + atan2(-dir.x, -dir.z), head_turn_speed)
@@ -160,15 +146,21 @@ func _physics_process(delta):
 			velocity.y = 0
 			global_position.y = min_y_pos
 	move_and_slide()
-	match(behav_state):
-		STRAIGHT:
-			walk_straight(walk_dir)
-		CURVED:
-			walk_curved(false)
-		CIRCLING:
-			walk_curved(true)
-		SPECIAL:
-			pass
+	if stationary:
+		head_look_at_position(target.global_position, head_turn_speed)
+		arm_look_at_position(target.global_position, head_turn_speed)
+		velocity.x = 0
+		velocity.z = 0
+	else:
+		match(behav_state):
+			STRAIGHT:
+				walk_straight(walk_dir)
+			CURVED:
+				walk_curved(false)
+			CIRCLING:
+				walk_curved(true)
+			SPECIAL:
+				pass
 
 func get_random_flat_unit_vector() -> Vector3:
 	# 1. Pick a random angle in radians (0 to 2*PI)
@@ -199,7 +191,8 @@ func switch_to_straight():
 func walk_straight(dir: Vector3):
 	velocity = walk_speed * dir
 	
-	head_and_arm_look_at_position(target.global_position, head_turn_speed)
+	head_look_at_position(target.global_position, head_turn_speed)
+	arm_look_at_position(target.global_position, head_turn_speed)
 	body_look_in_direction(dir)
 	
 	long_dist_attack_check()
@@ -232,7 +225,8 @@ func walk_curved(circling_target: bool):
 	velocity.z = tangent_dir.z * walk_speed
 	
 	# Turn head and body toward target
-	head_and_arm_look_at_position(target.global_position, follow_turn_speed)
+	head_look_at_position(target.global_position, head_turn_speed)
+	arm_look_at_position(target.global_position, head_turn_speed)
 	# If circling around target, body should face target (since walk left is used). Otherwise look in mvmt dir
 	body_look_in_direction(-radius_vec if circling_target else velocity)
 	
@@ -245,7 +239,8 @@ func attack_frame():
 	# Arm meshes moves to match walk dir
 	arm_meshes.position = .48 * velocity.normalized()
 	if aiming_at_target:
-		head_and_arm_look_at_position(target.global_position, attack_turn_speed)
+		head_look_at_position(target.global_position, head_turn_speed)
+		arm_look_at_position(target.global_position, head_turn_speed)
 
 func queue_attack():
 	parried = false # Clarity can parry when he reaches follow state again
@@ -287,10 +282,11 @@ func end_attack():
 	attacking = false
 	attack_queued = false
 	no_attack_queued.emit()
-	for attack in phase1_straight_attack_chances.keys():
-		arm_anim_tree.set(param_path_base + attack, false)
-	for attack in phase1_curved_attack_chances.keys():
-		arm_anim_tree.set(param_path_base + attack, false)
+	var attack_chances = [phase1_straight_attack_chances, phase1_curved_attack_chances, phase1_circling_attack_chances]
+	for ac in attack_chances:
+		for attack in ac.keys():
+			arm_anim_tree.set(param_path_base + attack, false)
+			body_anim_tree.set(param_path_base + attack, false)
 	long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	current_follow_time = 0
 	# After an attack or dodge ends, check when the rose or ax is thrown again
@@ -307,19 +303,26 @@ func end_attack():
 		CIRCLING:
 			switch_to_straight()
 
+func set_stationary(state: bool):
+	stationary = state
+
 func choose_stomp_direction() -> String:
-	var to_target = (target.global_position - global_position).normalized()
+	var to_target = global_position.direction_to(target.global_position)
 	
 	# Calculate how much the target aligns with Forward and Right axes
 	# Results range from -1.0 to 1.0
-	var forward_dot = (-global_transform.basis.z).dot(to_target)
-	var right_dot = global_transform.basis.x.dot(to_target)
+	var forward_dot = (-body_meshes.global_transform.basis.z).dot(to_target)
+	var right_dot = body_meshes.global_transform.basis.x.dot(to_target)
 
 	if forward_dot > 0.5:
+		print("Front")
 		return "Front"
 	elif forward_dot < -0.5:
+		print("Back")
 		return "Back"
 	elif right_dot > 0.5:
+		print("Right")
 		return "Right"
 	else:
+		print("Left")
 		return "Left"
