@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=48 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -116,105 +116,95 @@ states/WalkLeftAggressive/position = Vector2(-274.421, 100.436)
 states/WalkLeftPassive/node = SubResource("AnimationNodeAnimation_nefrk")
 states/WalkLeftPassive/position = Vector2(-540.924, 169.815)
 transitions = ["Start", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_pgktn"), "WalkForwardAggressive", "DoubleSliceForwardDelayed", SubResource("AnimationNodeStateMachineTransition_bea46"), "WalkForwardAggressive", "DoubleSliceForwardImmediate", SubResource("AnimationNodeStateMachineTransition_3qy52"), "DoubleSliceForwardDelayed", "WalkForwardPassive", SubResource("AnimationNodeStateMachineTransition_lo2t7"), "DoubleSliceForwardImmediate", "WalkForwardPassive", SubResource("AnimationNodeStateMachineTransition_v8u7u"), "WalkForwardPassive", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_yym1r"), "Start", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_3iee8"), "WalkLeftAggressive", "DoubleSliceLeftDelayed", SubResource("AnimationNodeStateMachineTransition_j26xo"), "WalkLeftAggressive", "DoubleSliceLeftImmediate", SubResource("AnimationNodeStateMachineTransition_1fa2q"), "DoubleSliceLeftDelayed", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_3w0r0"), "WalkLeftPassive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_8v8bx"), "DoubleSliceLeftImmediate", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_oosjn"), "WalkLeftAggressive", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_gk2ku"), "WalkForwardAggressive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_h5eo1")]
-graph_offset = Vector2(-345.288, 85.3199)
+graph_offset = Vector2(-156.048, -18.8926)
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_17756"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8hxkp"]
 animation = &"StompBack"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_620i0"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jmgbt"]
 animation = &"StompFront"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_plpkv"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ilobu"]
 animation = &"StompLeft"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xc4uu"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6g8h6"]
 animation = &"StompRight"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u1nw5"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f0ccn"]
 animation = &"WalkForwardAggressive"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h14go"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0kj3c"]
 animation = &"WalkLeftAggressive"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uxh1w"]
-advance_mode = 2
-advance_expression = "behav_state != CIRCLING"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4u7pf"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_an84p"]
 advance_mode = 2
 advance_expression = "behav_state == CIRCLING"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2bfm5"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x14do"]
+advance_mode = 2
+advance_expression = "behav_state != CIRCLING"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ysh00"]
 xfade_time = 0.3
 advance_mode = 2
 advance_expression = "behav_state != CIRCLING"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p1gf3"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h1np3"]
 xfade_time = 0.3
 advance_mode = 2
 advance_expression = "behav_state == CIRCLING"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t85un"]
-advance_mode = 2
-advance_condition = &"Stomp"
-advance_expression = "choose_stomp_direction() == \"Front\""
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tswvv"]
-advance_mode = 2
-advance_condition = &"Stomp"
-advance_expression = "choose_stomp_direction() == \"Right\""
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ke8py"]
-advance_mode = 2
-advance_condition = &"Stomp"
-advance_expression = "choose_stomp_direction() == \"Back\""
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_30kyk"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_01fal"]
 advance_mode = 2
 advance_condition = &"Stomp"
 advance_expression = "choose_stomp_direction() == \"Left\""
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xtdy3"]
-xfade_time = 0.3
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qj5wv"]
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_13sa7"]
-xfade_time = 0.3
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hnecr"]
+advance_mode = 2
+advance_condition = &"Stomp"
+advance_expression = "choose_stomp_direction() == \"Right\""
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4pyd5"]
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_16ymv"]
-xfade_time = 0.3
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_482ug"]
+advance_mode = 2
+advance_condition = &"Stomp"
+advance_expression = "choose_stomp_direction() == \"Front\""
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oq01q"]
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yyw7x"]
-xfade_time = 0.3
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gwi8d"]
+advance_mode = 2
+advance_condition = &"Stomp"
+advance_expression = "choose_stomp_direction() == \"Back\""
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jfkwf"]
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_35adq"]
-states/StompBack/node = SubResource("AnimationNodeAnimation_17756")
-states/StompBack/position = Vector2(607.974, 106.93)
-states/StompFront/node = SubResource("AnimationNodeAnimation_620i0")
-states/StompFront/position = Vector2(348.106, 100.177)
-states/StompLeft/node = SubResource("AnimationNodeAnimation_plpkv")
-states/StompLeft/position = Vector2(661.474, 158.96)
-states/StompRight/node = SubResource("AnimationNodeAnimation_xc4uu")
-states/StompRight/position = Vector2(479.974, 100.355)
-states/WalkForwardAggressive/node = SubResource("AnimationNodeAnimation_u1nw5")
-states/WalkForwardAggressive/position = Vector2(439, 196)
-states/WalkLeftAggressive/node = SubResource("AnimationNodeAnimation_h14go")
-states/WalkLeftAggressive/position = Vector2(12.0775, 196.029)
-transitions = ["Start", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_uxh1w"), "Start", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_4u7pf"), "WalkLeftAggressive", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_2bfm5"), "WalkForwardAggressive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_p1gf3"), "WalkForwardAggressive", "StompFront", SubResource("AnimationNodeStateMachineTransition_t85un"), "WalkForwardAggressive", "StompRight", SubResource("AnimationNodeStateMachineTransition_tswvv"), "WalkForwardAggressive", "StompBack", SubResource("AnimationNodeStateMachineTransition_ke8py"), "WalkForwardAggressive", "StompLeft", SubResource("AnimationNodeStateMachineTransition_30kyk"), "StompFront", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_xtdy3"), "StompRight", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_13sa7"), "StompBack", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_16ymv"), "StompLeft", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_yyw7x")]
-graph_offset = Vector2(119.474, 71.46)
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_fhmms"]
-graph_offset = Vector2(-40.32, 127.68)
-nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_35adq")
-nodes/StateMachine/position = Vector2(100, 150)
-node_connections = [&"output", 0, &"StateMachine"]
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_7ssfo"]
+states/StompBack/node = SubResource("AnimationNodeAnimation_8hxkp")
+states/StompBack/position = Vector2(539.662, 209.617)
+states/StompFront/node = SubResource("AnimationNodeAnimation_jmgbt")
+states/StompFront/position = Vector2(540.412, 137.617)
+states/StompLeft/node = SubResource("AnimationNodeAnimation_ilobu")
+states/StompLeft/position = Vector2(318.413, 89.5587)
+states/StompRight/node = SubResource("AnimationNodeAnimation_6g8h6")
+states/StompRight/position = Vector2(450.913, 89.9631)
+states/WalkForwardAggressive/node = SubResource("AnimationNodeAnimation_f0ccn")
+states/WalkForwardAggressive/position = Vector2(360.588, 169.663)
+states/WalkLeftAggressive/node = SubResource("AnimationNodeAnimation_0kj3c")
+states/WalkLeftAggressive/position = Vector2(46.0875, 169.913)
+transitions = ["Start", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_an84p"), "Start", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_x14do"), "WalkLeftAggressive", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_ysh00"), "WalkForwardAggressive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_h1np3"), "WalkForwardAggressive", "StompLeft", SubResource("AnimationNodeStateMachineTransition_01fal"), "StompLeft", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_qj5wv"), "WalkForwardAggressive", "StompRight", SubResource("AnimationNodeStateMachineTransition_hnecr"), "StompRight", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_4pyd5"), "WalkForwardAggressive", "StompFront", SubResource("AnimationNodeStateMachineTransition_482ug"), "StompFront", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_oq01q"), "WalkForwardAggressive", "StompBack", SubResource("AnimationNodeStateMachineTransition_gwi8d"), "StompBack", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_jfkwf")]
+graph_offset = Vector2(177.413, 50.6175)
 
 [sub_resource type="PrismMesh" id="PrismMesh_ocn5u"]
 
@@ -296,18 +286,18 @@ bones/1/position = Vector3(-1.58209e-09, 8.69174, 9.87667e-09)
 bones/1/rotation = Quaternion(0.0871558, 1.48224e-14, 2.23517e-08, 0.996195)
 bones/3/position = Vector3(-3.7482, 4.38423, -0.0847617)
 bones/3/rotation = Quaternion(-1.88782e-07, -5.33575e-08, 0.859699, 0.5108)
-bones/6/position = Vector3(2.65567, 3.43886, 0.750209)
-bones/6/rotation = Quaternion(-0.0187351, -0.0806993, 0.992683, -0.0878482)
-bones/8/position = Vector3(1.55355, 1.78708, 4.57926)
-bones/8/rotation = Quaternion(-0.0553624, -0.00461868, 0.998187, -0.0231473)
-bones/10/position = Vector3(1.23551, 4.80249, -3.45962)
-bones/10/rotation = Quaternion(0.00287277, -0.16168, 0.984, -0.0748087)
+bones/6/position = Vector3(3.28774, 2.23363, 0.0226153)
+bones/6/rotation = Quaternion(-0.0356963, -0.216644, 0.965339, -0.141109)
+bones/8/position = Vector3(1.44144, 1.15174, 2.21967)
+bones/8/rotation = Quaternion(-0.0542636, -0.0893127, 0.993815, -0.0375526)
+bones/10/position = Vector3(1.29789, 3.12999, -2.02269)
+bones/10/rotation = Quaternion(-0.00532234, -0.350304, 0.927814, -0.128142)
 bones/12/position = Vector3(-3.28774, 2.23363, 0.0226156)
 bones/12/rotation = Quaternion(0.0356963, -0.216644, 0.965339, 0.141109)
 bones/14/position = Vector3(-1.44144, 1.15174, 2.21967)
 bones/14/rotation = Quaternion(0.0542636, -0.0893127, 0.993815, 0.0375526)
 bones/16/position = Vector3(-1.29789, 3.12999, -2.02269)
-bones/16/rotation = Quaternion(0.00532235, -0.350304, 0.927814, 0.128142)
+bones/16/rotation = Quaternion(0.00532234, -0.350304, 0.927814, 0.128142)
 
 [node name="Hat_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="0"]
 transform = Transform3D(1.43, -8.8226e-09, 1.55565e-09, 8.82261e-09, 1.34376, -0.489089, 1.55559e-09, 0.489089, 1.34376, -4.28408e-08, 14.3176, 2.76757)
@@ -327,15 +317,15 @@ visible = false
 surface_material_override/0 = SubResource("StandardMaterial3D_chxic")
 
 [node name="MiddleLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.993438, 0.113438, -0.0145724, -0.114312, 0.98077, -0.158188, -0.00365237, 0.158816, 0.987301, -0.860775, 1.65086, 0.410593)
+transform = Transform3D(1, -1.08861e-07, 1.17437e-07, 9.28251e-08, 0.906308, -0.422618, -8.07546e-08, 0.422618, 0.906308, 0, 0.234416, -0.910978)
 visible = false
 
 [node name="FrontLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.977354, 0.190815, -0.0914782, -0.208258, 0.943986, -0.255967, 0.0375119, 0.269221, 0.962348, -0.0422567, 0.680527, 1.58775)
+transform = Transform3D(0.984808, 0.157379, -0.0733868, -0.173648, 0.892539, -0.416198, -5.00023e-08, 0.422618, 0.906308, -0.137394, 0.498655, -0.910979)
 visible = false
 
 [node name="BackLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.993979, 0.10749, -0.0212623, -0.108293, 0.993268, -0.0411181, 0.0166994, 0.043173, 0.998928, -0.333591, 2.71135, -1.34543)
+transform = Transform3D(1, 1.46275e-08, 7.5628e-08, 6.46934e-08, 0.906308, -0.422618, -5.29728e-09, 0.422618, 0.906308, 1.3113e-06, 0.234416, -0.910979)
 visible = false
 
 [node name="MiddleRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="6"]
@@ -347,7 +337,7 @@ transform = Transform3D(0.984808, -0.157379, 0.0733868, 0.173648, 0.892539, -0.4
 visible = false
 
 [node name="BackRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="8"]
-transform = Transform3D(1, 1.73825e-08, -4.1977e-08, -6.95467e-08, 0.906308, -0.422618, -2.6334e-08, 0.422618, 0.906308, -1.19209e-06, 0.234416, -0.910979)
+transform = Transform3D(1, 2.34509e-08, -7.08655e-08, -8.44478e-08, 0.906308, -0.422618, -3.98228e-09, 0.422618, 0.906308, -1.07288e-06, 0.234416, -0.910979)
 visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -363,10 +353,10 @@ advance_expression_base_node = NodePath("..")
 parameters/conditions/DoubleSlice = false
 
 [node name="BodyAnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeBlendTree_fhmms")
+tree_root = SubResource("AnimationNodeStateMachine_7ssfo")
 anim_player = NodePath("../ClarityBodyMeshes/AnimationPlayer")
 advance_expression_base_node = NodePath("..")
-parameters/StateMachine/conditions/Stomp = false
+parameters/conditions/Stomp = false
 
 [node name="Marker" type="MeshInstance3D" parent="."]
 top_level = true

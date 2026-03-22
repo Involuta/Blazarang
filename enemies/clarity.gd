@@ -86,7 +86,7 @@ var aiming_at_target := true
 @export var flyingkick_speed := 200.0
 @export var flyingkick_hit_frames := 10 # Put the # of frames that the hitbox is active in the animation here
 
-var param_path_base := "parameters/StateMachine/conditions/"
+var param_path_base := "parameters/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 var transparent_mat := preload("res://textures/clear_tile.tres")
@@ -250,7 +250,6 @@ func queue_attack():
 			match(behav_state):
 				STRAIGHT:
 					var attack = choose_attack(phase1_straight_attack_chances)
-					print(attack)
 					arm_anim_tree.set(attack, true)
 					body_anim_tree.set(attack, true)
 				CURVED:
@@ -312,8 +311,8 @@ func choose_stomp_direction() -> String:
 	
 	# Calculate how much the target aligns with Forward and Right axes
 	# Results range from -1.0 to 1.0
-	var forward_dot = (-body_meshes.transform.basis.z).dot(to_target)
-	var right_dot = body_meshes.transform.basis.x.dot(to_target)
+	var forward_dot = (body_meshes.transform.basis.z).dot(to_target)
+	var right_dot = -body_meshes.transform.basis.x.dot(to_target)
 
 	# Compare the absolute values to see which axis is more "dominant"
 	if abs(forward_dot) > abs(right_dot):
