@@ -37,3 +37,8 @@ res://enemies/enemy_anims/clarity_doubleslice_left_immediate.res
 res://enemies/enemy_anims/clarity_singleshot_left.res
 res://enemies/enemy_anims/clarity_spiral.res
 res://enemies/clarity.gd
+res://enemies/enemy_anims/clarity_stomp_back.res
+res://enemies/enemy_anims/clarity_stomp_front.res
+res://enemies/enemy_anims/clarity_stomp_full.res
+res://enemies/enemy_anims/clarity_stomp_left.res
+res://enemies/enemy_anims/clarity_stomp_right.res

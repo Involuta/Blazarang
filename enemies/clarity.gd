@@ -6,9 +6,10 @@ enum {
 	STRAIGHT,
 	CURVED,
 	CIRCLING,
-	ATTACK,
+	SPECIAL,
 }
 var behav_state := CURVED
+var attacking := false # Set to true when attacking to prevent another attack from being queued
 
 enum DIST_TYPE {
 	SHORT_DIST,
@@ -135,6 +136,23 @@ func trigger_ax_parry():
 	if behav_state == STRAIGHT or behav_state == CURVED:
 		ax_thrown = true
 
+func head_and_arm_look_at_position(target_pos, turn_speed):
+	var vec3_to_target := -global_position.direction_to(target_pos)
+	arm_meshes.rotation.y = lerp_angle(arm_meshes.rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
+	
+	# Head mesh isn't a child of head bone so it doesn't inherit rotation from head bone
+	head_mesh.global_position = head_bone.global_position
+	var old_head_rotation = head_mesh.rotation
+	head_mesh.look_at(Vector3(target.global_position.x, min_y_pos, target.global_position.z), Vector3.UP, true)
+	var head_target_rotation = head_mesh.rotation
+	head_mesh.rotation = old_head_rotation
+	head_mesh.rotation.y = lerp_angle(head_mesh.rotation.y, head_target_rotation.y, turn_speed)
+	# Look down/up at the player. Not too low so the head doesn't look straight down
+	head_mesh.rotation.x = min(lerp_angle(head_mesh.rotation.x, head_target_rotation.x, turn_speed), .67)
+
+func body_look_in_direction(dir: Vector3):
+	body_meshes.rotation.y = lerp_angle(body_meshes.rotation.y, PI + atan2(-dir.x, -dir.z), head_turn_speed)
+
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -149,8 +167,8 @@ func _physics_process(delta):
 			walk_curved(false)
 		CIRCLING:
 			walk_curved(true)
-		ATTACK:
-			attack_frame()
+		SPECIAL:
+			pass
 
 func get_random_flat_unit_vector() -> Vector3:
 	# 1. Pick a random angle in radians (0 to 2*PI)
@@ -164,6 +182,8 @@ func get_random_flat_unit_vector() -> Vector3:
 	return Vector3(x, 0, z)
 
 func long_dist_attack_check():
+	if attacking:
+		return
 	# This code block ensures start_long_dist_attack is only called once
 	if long_dist_wait_remaining <= 0:
 		return
@@ -234,11 +254,17 @@ func queue_attack():
 		PHASE.PHASE1:
 			match(behav_state):
 				STRAIGHT:
-					arm_anim_tree.set(choose_attack(phase1_straight_attack_chances), true)
+					var attack = choose_attack(phase1_straight_attack_chances)
+					arm_anim_tree.set(attack, true)
+					body_anim_tree.set(attack, true)
 				CURVED:
-					arm_anim_tree.set(choose_attack(phase1_curved_attack_chances), true)
+					var attack = choose_attack(phase1_curved_attack_chances)
+					arm_anim_tree.set(attack, true)
+					body_anim_tree.set(attack, true)
 				CIRCLING:
-					arm_anim_tree.set(choose_attack(phase1_circling_attack_chances), true)
+					var attack = choose_attack(phase1_circling_attack_chances)
+					arm_anim_tree.set(attack, true)
+					body_anim_tree.set(attack, true)
 		PHASE.PHASE2:
 			pass # pass until phase2 is confirmed to exist
 
@@ -254,11 +280,11 @@ func choose_attack(attack_chances) -> String:
 func start_attack():
 	# Without this await, the animation player would call end_attack at the end of the previous animation on the exact same frame as when the AnimationPlayer.play func is called below. Since an animation was currently in progress, the func call would do nothing, leaving the enemy in ATTACK mode but with no animation playing to free it from ATTACK mode, causing it to stand still indefinitely
 	await get_tree().physics_frame
-	# Keep doing the mvmt state you had pre-attack
-	#behav_state = ATTACK
+	attacking = true # Prevent another attack from being queued
 	aiming_at_target = true
 
 func end_attack():
+	attacking = false
 	attack_queued = false
 	no_attack_queued.emit()
 	for attack in phase1_straight_attack_chances.keys():
@@ -281,19 +307,19 @@ func end_attack():
 		CIRCLING:
 			switch_to_straight()
 
-func head_and_arm_look_at_position(target_pos, turn_speed):
-	var vec3_to_target := -global_position.direction_to(target_pos)
-	arm_meshes.rotation.y = lerp_angle(arm_meshes.rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
+func choose_stomp_direction() -> String:
+	var to_target = (target.global_position - global_position).normalized()
 	
-	# Head mesh isn't a child of head bone so it doesn't inherit rotation from head bone
-	head_mesh.global_position = head_bone.global_position
-	var old_head_rotation = head_mesh.rotation
-	head_mesh.look_at(Vector3(target.global_position.x, min_y_pos, target.global_position.z), Vector3.UP, true)
-	var head_target_rotation = head_mesh.rotation
-	head_mesh.rotation = old_head_rotation
-	head_mesh.rotation.y = lerp_angle(head_mesh.rotation.y, head_target_rotation.y, turn_speed)
-	# Look down/up at the player. Not too low so the head doesn't look straight down
-	head_mesh.rotation.x = min(lerp_angle(head_mesh.rotation.x, head_target_rotation.x, turn_speed), .67)
+	# Calculate how much the target aligns with Forward and Right axes
+	# Results range from -1.0 to 1.0
+	var forward_dot = (-global_transform.basis.z).dot(to_target)
+	var right_dot = global_transform.basis.x.dot(to_target)
 
-func body_look_in_direction(dir: Vector3):
-	body_meshes.rotation.y = lerp_angle(body_meshes.rotation.y, PI + atan2(-dir.x, -dir.z), head_turn_speed)
+	if forward_dot > 0.5:
+		return "Front"
+	elif forward_dot < -0.5:
+		return "Back"
+	elif right_dot > 0.5:
+		return "Right"
+	else:
+		return "Left"
