@@ -138,10 +138,24 @@ func head_look_at_position(target_pos, turn_speed):
 
 func arm_look_at_position(target_pos, turn_speed):
 	var vec3_to_target := -global_position.direction_to(target_pos)
+	arm_meshes.rotation.x = lerp_angle(arm_meshes.rotation.x, 0, head_turn_speed)
 	arm_meshes.rotation.y = lerp_angle(arm_meshes.rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
+	arm_meshes.rotation.z = lerp_angle(arm_meshes.rotation.z, 0, head_turn_speed)
 
 func body_look_in_direction(dir: Vector3):
+	body_meshes.rotation.x = lerp_angle(body_meshes.rotation.x, 0, head_turn_speed)
 	body_meshes.rotation.y = lerp_angle(body_meshes.rotation.y, PI + atan2(-dir.x, -dir.z), head_turn_speed)
+	body_meshes.rotation.z = lerp_angle(body_meshes.rotation.z, 0, head_turn_speed)
+
+func body_face_position_directly(target_pos, turn_speed):
+	for m in [arm_meshes, body_meshes]:
+		var old_rotation = m.rotation
+		m.look_at(m.global_position + m.global_position.direction_to(target_pos), Vector3.UP, true)
+		var target_rotation = m.rotation
+		m.rotation = old_rotation
+		m.rotation.x = lerp_angle(m.rotation.x, target_rotation.x, turn_speed)
+		m.rotation.y = lerp_angle(m.rotation.y, target_rotation.y, turn_speed)
+		m.rotation.z = lerp_angle(m.rotation.z, target_rotation.z, turn_speed)
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -151,8 +165,6 @@ func _physics_process(delta):
 			global_position.y = min_y_pos
 	move_and_slide()
 	if stationary:
-		head_look_at_position(target.global_position, head_turn_speed)
-		arm_look_at_position(target.global_position, head_turn_speed)
 		velocity.x = 0
 		velocity.z = 0
 	else:
@@ -164,7 +176,15 @@ func _physics_process(delta):
 			CIRCLING:
 				walk_curved(true)
 			SPECIAL:
-				pass
+				if body_facing_target_directly:
+					body_face_position_directly(target.global_position, head_turn_speed / 1.8)
+				else:
+					body_look_in_direction(global_position.direction_to(target.global_position))
+					arm_look_at_position(target.global_position, head_turn_speed)
+
+var body_facing_target_directly := false
+func set_body_facing_target_directly(state: bool):
+	body_facing_target_directly = state
 
 func get_random_flat_unit_vector() -> Vector3:
 	# 1. Pick a random angle in radians (0 to 2*PI)
@@ -239,13 +259,6 @@ func walk_curved(circling_target: bool):
 
 func switch_to_circling():
 	behav_state = CIRCLING
-
-func attack_frame():
-	# Arm meshes moves to match walk dir
-	arm_meshes.position = .48 * velocity.normalized()
-	if aiming_at_target:
-		head_look_at_position(target.global_position, head_turn_speed)
-		arm_look_at_position(target.global_position, head_turn_speed)
 
 func queue_attack():
 	parried = false # Clarity can parry when he reaches follow state again
@@ -342,10 +355,11 @@ func jump_shot_forward_dash():
 	var full_dash_speed = velocity * 9
 	t.tween_property(self, "velocity", full_dash_speed, 60 * get_physics_process_delta_time())
 	t.tween_property(self, "velocity", full_dash_speed + 9 * Vector3.UP, 30 * get_physics_process_delta_time())
-	t.tween_property(self, "velocity", Vector3.ZERO, 135 * get_physics_process_delta_time())
+	t.tween_property(self, "velocity", Vector3.ZERO, 120 * get_physics_process_delta_time())
 	t.tween_property(self, "gravity", 0, 0)
-	t.tween_interval(45 * get_physics_process_delta_time())
+	t.tween_interval(15 * get_physics_process_delta_time())
 	# Instead of using natural gravity, try manually accelerating her downward
-	t.tween_property(self, "gravity", ProjectSettings.get_setting("physics/3d/default_gravity"), 0)
+	#t.tween_property(self, "velocity", 6 * Vector3.DOWN, 45 * get_physics_process_delta_time())
+	t.tween_property(self, "gravity", .5 * ProjectSettings.get_setting("physics/3d/default_gravity"), 0)
 	t.tween_interval(130 * get_physics_process_delta_time())
 	t.tween_property(self, "behav_state", STRAIGHT, 0)
