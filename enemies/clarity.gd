@@ -40,6 +40,9 @@ var walk_dir := Vector3.FORWARD # Randomly set when switching to walk straight
 
 @export var head_turn_speed := .2
 
+# Distance in front of herself Clarity looks in order to match anim head looking forward
+@export var look_forward_dist := 12.0
+
 @export var follow_speed := 1.5
 @export var follow_time_before_parry := .1 # Min time necessary to spend in follow state before parry is possible
 var current_follow_time := 0.0 # Reset after attack or parry is queued
@@ -125,7 +128,7 @@ func head_look_at_position(target_pos, turn_speed):
 	# Head mesh isn't a child of head bone so it doesn't inherit rotation from head bone
 	head_mesh.global_position = head_bone.global_position
 	var old_head_rotation = head_mesh.rotation
-	head_mesh.look_at(Vector3(target.global_position.x, min_y_pos, target.global_position.z), Vector3.UP, true)
+	head_mesh.look_at(Vector3(target_pos.x, min_y_pos, target_pos.z), Vector3.UP, true)
 	var head_target_rotation = head_mesh.rotation
 	head_mesh.rotation = old_head_rotation
 	head_mesh.rotation.y = lerp_angle(head_mesh.rotation.y, head_target_rotation.y, turn_speed)
@@ -191,8 +194,9 @@ func switch_to_straight():
 func walk_straight(dir: Vector3):
 	velocity = walk_speed * dir
 	
-	head_look_at_position(target.global_position, head_turn_speed)
-	arm_look_at_position(target.global_position, head_turn_speed)
+	var look_pos = global_position + look_forward_dist * velocity.normalized()
+	head_look_at_position(look_pos, head_turn_speed)
+	arm_look_at_position(look_pos, head_turn_speed)
 	body_look_in_direction(dir)
 	
 	long_dist_attack_check()
@@ -295,6 +299,8 @@ func end_attack():
 	"""
 	FOR TESTING: behav_state is chosen here manually instead of randomly btwn str and cur
 	"""
+	switch_to_straight()
+	"""
 	match(behav_state):
 		STRAIGHT:
 			switch_to_curved()
@@ -302,6 +308,7 @@ func end_attack():
 			switch_to_circling()
 		CIRCLING:
 			switch_to_straight()
+	"""
 
 func set_stationary(state: bool):
 	stationary = state

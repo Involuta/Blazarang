@@ -248,6 +248,9 @@ bones/16/rotation = Quaternion(-0.00334642, -0.147787, 0.986554, 0.0697039)
 [node name="Hat_2" parent="ClarityBodyMeshes/Armature/Skeleton3D" index="0"]
 transform = Transform3D(1.43, -7.65847e-09, 1.63023e-09, 7.7542e-09, 1.34376, -0.489089, 1.08735e-09, 0.489089, 1.34376, -7.45058e-09, 14.3176, 2.76757)
 
+[node name="Hat_2" parent="ClarityBodyMeshes/Armature/Skeleton3D/Hat_2" index="0"]
+visible = true
+
 [node name="MeshInstance3D" parent="ClarityBodyMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/BaseOffsetRotation" index="0"]
 transform = Transform3D(1, -4.04288e-16, 3.15865e-16, 3.15865e-16, 0.970296, 0.241922, -4.04288e-16, -0.241922, 0.970296, 0, 0, 0)
 
@@ -301,6 +304,9 @@ bones/16/rotation = Quaternion(0.321999, -0.24697, 0.885482, 0.226373)
 
 [node name="Hat_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="0"]
 transform = Transform3D(1.43, -7.65847e-09, 1.63023e-09, 7.7542e-09, 1.34376, -0.489089, 1.08735e-09, 0.489089, 1.34376, -7.45058e-09, 14.3176, 2.76757)
+visible = false
+
+[node name="ClarityHead" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2" index="1"]
 visible = false
 
 [node name="MeshInstance3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/BaseOffsetRotation" index="0"]
