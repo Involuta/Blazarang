@@ -335,3 +335,17 @@ func choose_stomp_direction() -> String:
 			return "Right"
 		else:
 			return "Left"
+
+func jump_shot_forward_dash():
+	behav_state = SPECIAL
+	var t = get_tree().create_tween()
+	var full_dash_speed = velocity * 9
+	t.tween_property(self, "velocity", full_dash_speed, 60 * get_physics_process_delta_time())
+	t.tween_property(self, "velocity", full_dash_speed + 9 * Vector3.UP, 30 * get_physics_process_delta_time())
+	t.tween_property(self, "velocity", Vector3.ZERO, 135 * get_physics_process_delta_time())
+	t.tween_property(self, "gravity", 0, 0)
+	t.tween_interval(45 * get_physics_process_delta_time())
+	# Instead of using natural gravity, try manually accelerating her downward
+	t.tween_property(self, "gravity", ProjectSettings.get_setting("physics/3d/default_gravity"), 0)
+	t.tween_interval(130 * get_physics_process_delta_time())
+	t.tween_property(self, "behav_state", STRAIGHT, 0)
