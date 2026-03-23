@@ -60,7 +60,8 @@ var attack_turn_speed := 0.15
 var aiming_at_target := true
 
 @export var phase1_straight_attack_chances = {
-	"Stomp" : 1.0
+	"Stomp" : .75,
+	"JumpShot" : .25
 }
 
 @export var phase1_curved_attack_chances = {
