@@ -13,12 +13,12 @@ var attacking := false # Set to true when attacking to prevent another attack fr
 
 enum LOOK_STATE {
 	DIR,
-	TARGET_HEAD,
-	TARGET_HEAD_ARM,
-	TARGET_BODY
+	TARGET_HEAD, # Used when Clarity stops aiming at target while attacking but still looks at target with her head
+	TARGET_HEAD_ARM, # Used when Clarity's traveling in a direction but her head and arm still look at the target. May not be used ever since arm becomes offset from body
+	TARGET_HEAD_ARM_BODY, # Used when Clarity's circling around target
+	TARGET_BODY_FULL_ROTATION # Used when Clarity's body rotates toward target on all axes, not just y. Used when she becomes a gun/cannon
 }
 var look_state := LOOK_STATE.DIR
-var look_dir := Vector3.FORWARD # Set by funcs
 
 enum DIST_TYPE {
 	SHORT_DIST,
@@ -178,14 +178,18 @@ func _physics_process(delta):
 			var look_pos = global_position + look_forward_dist * velocity.normalized()
 			head_look_at_position(look_pos, head_turn_speed)
 			arm_look_at_position(look_pos, head_turn_speed)
-			body_look_in_direction(look_dir)
+			body_look_in_direction(velocity)
 		LOOK_STATE.TARGET_HEAD:
-			pass
+			head_look_at_position(target.global_position, head_turn_speed)
 		LOOK_STATE.TARGET_HEAD_ARM:
 			head_look_at_position(target.global_position, head_turn_speed)
 			arm_look_at_position(target.global_position, head_turn_speed)
-			body_look_in_direction(look_dir)
-		LOOK_STATE.TARGET_BODY:
+			body_look_in_direction(velocity)
+		LOOK_STATE.TARGET_HEAD_ARM_BODY:
+			head_look_at_position(target.global_position, head_turn_speed)
+			arm_look_at_position(target.global_position, head_turn_speed)
+			body_look_in_direction(global_position.direction_to(target.global_position))
+		LOOK_STATE.TARGET_BODY_FULL_ROTATION:
 			body_face_position_directly(target.global_position, head_turn_speed / 1.8)
 	if stationary:
 		velocity.x = 0
@@ -235,8 +239,6 @@ func switch_to_straight():
 func walk_straight(dir: Vector3):
 	velocity = walk_speed * dir
 	
-	look_dir = dir
-	
 	long_dist_attack_check()
 
 func switch_to_curved():
@@ -262,9 +264,6 @@ func walk_curved(circling_target: bool):
 	# Rotating the radius vector 90 degrees on the Y axis
 	var tangent_dir = Vector3(-radius_vec.z, 0, radius_vec.x)
 	
-	# If circling around target, body should face target (since walk left is used). Otherwise look in mvmt dir
-	look_dir = -radius_vec if circling_target else velocity
-	
 	# Set velocity directly
 	# This ensures the movement is always perfectly perpendicular to the center
 	velocity.x = tangent_dir.x * walk_speed
@@ -274,6 +273,7 @@ func walk_curved(circling_target: bool):
 
 func switch_to_circling():
 	behav_state = CIRCLING
+	look_state = LOOK_STATE.TARGET_HEAD_ARM_BODY
 
 func queue_attack():
 	parried = false # Clarity can parry when he reaches follow state again
@@ -369,12 +369,13 @@ func jump_shot_forward_dash():
 	var t = get_tree().create_tween()
 	var full_dash_speed = velocity * 9
 	t.tween_property(self, "velocity", full_dash_speed, 60 * get_physics_process_delta_time())
-	t.tween_property(self, "look_state", LOOK_STATE.TARGET_BODY, 0)
+	t.tween_property(self, "look_state", LOOK_STATE.TARGET_BODY_FULL_ROTATION, 0)
 	t.tween_property(self, "velocity", full_dash_speed + 9 * Vector3.UP, 30 * get_physics_process_delta_time())
 	t.tween_property(self, "velocity", Vector3.ZERO, 120 * get_physics_process_delta_time())
 	t.tween_property(self, "gravity", 0, 0)
 	t.tween_interval(15 * get_physics_process_delta_time())
-	t.tween_property(self, "look_state", LOOK_STATE.TARGET_HEAD_ARM, 0)
 	t.tween_property(self, "gravity", .5 * ProjectSettings.get_setting("physics/3d/default_gravity"), 0)
-	t.tween_interval(130 * get_physics_process_delta_time())
+	t.tween_interval(30 * get_physics_process_delta_time())
+	t.tween_property(self, "look_state", LOOK_STATE.TARGET_HEAD_ARM_BODY, 0)
+	t.tween_interval(100 * get_physics_process_delta_time())
 	t.tween_property(self, "behav_state", STRAIGHT, 0)
