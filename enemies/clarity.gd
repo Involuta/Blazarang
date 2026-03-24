@@ -48,6 +48,7 @@ var walk_dir := Vector3.FORWARD # Randomly set when switching to walk straight
 @export var walk_curved_radius := 9.0 # Radius of circle Clarity walks on
 
 @export var head_turn_speed := .2
+@export var body_turn_speed := .12
 
 # Distance in front of herself Clarity looks in order to match anim head looking forward
 @export var look_forward_dist := 12.0
@@ -134,27 +135,27 @@ func _ready():
 	body_anim_tree.active = true
 	mhp.visible = false
 
-func head_look_at_position(target_pos, turn_speed):
+func head_look_at_position(target_pos):
 	# Head mesh isn't a child of head bone so it doesn't inherit rotation from head bone
 	head_mesh.global_position = head_bone.global_position
 	var old_head_rotation = head_mesh.rotation
 	head_mesh.look_at(Vector3(target_pos.x, min_y_pos, target_pos.z), Vector3.UP, true)
 	var head_target_rotation = head_mesh.rotation
 	head_mesh.rotation = old_head_rotation
-	head_mesh.rotation.y = lerp_angle(head_mesh.rotation.y, head_target_rotation.y, turn_speed)
+	head_mesh.rotation.y = lerp_angle(head_mesh.rotation.y, head_target_rotation.y, head_turn_speed)
 	# Look down/up at the player. Not too low so the head doesn't look straight down
-	head_mesh.rotation.x = min(lerp_angle(head_mesh.rotation.x, head_target_rotation.x, turn_speed), .67)
+	head_mesh.rotation.x = min(lerp_angle(head_mesh.rotation.x, head_target_rotation.x, head_turn_speed), .67)
 
-func arm_look_at_position(target_pos, turn_speed):
+func arm_look_at_position(target_pos):
 	var vec3_to_target := -global_position.direction_to(target_pos)
 	arm_meshes.rotation.x = lerp_angle(arm_meshes.rotation.x, 0, head_turn_speed)
-	arm_meshes.rotation.y = lerp_angle(arm_meshes.rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
+	arm_meshes.rotation.y = lerp_angle(arm_meshes.rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), head_turn_speed)
 	arm_meshes.rotation.z = lerp_angle(arm_meshes.rotation.z, 0, head_turn_speed)
 
 func body_look_in_direction(dir: Vector3):
-	body_meshes.rotation.x = lerp_angle(body_meshes.rotation.x, 0, head_turn_speed)
-	body_meshes.rotation.y = lerp_angle(body_meshes.rotation.y, PI + atan2(-dir.x, -dir.z), head_turn_speed)
-	body_meshes.rotation.z = lerp_angle(body_meshes.rotation.z, 0, head_turn_speed)
+	body_meshes.rotation.x = lerp_angle(body_meshes.rotation.x, 0, body_turn_speed)
+	body_meshes.rotation.y = lerp_angle(body_meshes.rotation.y, PI + atan2(-dir.x, -dir.z), body_turn_speed)
+	body_meshes.rotation.z = lerp_angle(body_meshes.rotation.z, 0, body_turn_speed)
 
 func body_face_position_directly(target_pos, turn_speed):
 	for m in [arm_meshes, body_meshes]:
@@ -176,18 +177,18 @@ func _physics_process(delta):
 	match(look_state):
 		LOOK_STATE.DIR:
 			var look_pos = global_position + look_forward_dist * velocity.normalized()
-			head_look_at_position(look_pos, head_turn_speed)
-			arm_look_at_position(look_pos, head_turn_speed)
+			head_look_at_position(look_pos)
+			arm_look_at_position(look_pos)
 			body_look_in_direction(velocity)
 		LOOK_STATE.TARGET_HEAD:
-			head_look_at_position(target.global_position, head_turn_speed)
+			head_look_at_position(target.global_position)
 		LOOK_STATE.TARGET_HEAD_ARM:
-			head_look_at_position(target.global_position, head_turn_speed)
-			arm_look_at_position(target.global_position, head_turn_speed)
+			head_look_at_position(target.global_position)
+			arm_look_at_position(target.global_position)
 			body_look_in_direction(velocity)
 		LOOK_STATE.TARGET_HEAD_ARM_BODY:
-			head_look_at_position(target.global_position, head_turn_speed)
-			arm_look_at_position(target.global_position, head_turn_speed)
+			head_look_at_position(target.global_position)
+			arm_look_at_position(target.global_position)
 			body_look_in_direction(global_position.direction_to(target.global_position))
 		LOOK_STATE.TARGET_BODY_FULL_ROTATION:
 			body_face_position_directly(target.global_position, head_turn_speed / 1.8)
