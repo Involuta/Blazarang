@@ -11,6 +11,15 @@ enum {
 var behav_state := STRAIGHT
 var attacking := false # Set to true when attacking to prevent another attack from being queued
 
+enum LOOK_STATE {
+	DIR,
+	TARGET_HEAD,
+	TARGET_HEAD_ARM,
+	TARGET_BODY
+}
+var look_state := LOOK_STATE.DIR
+var look_dir := Vector3.FORWARD # Set by funcs
+
 enum DIST_TYPE {
 	SHORT_DIST,
 	LONG_DIST
@@ -164,6 +173,20 @@ func _physics_process(delta):
 			velocity.y = 0
 			global_position.y = min_y_pos
 	move_and_slide()
+	match(look_state):
+		LOOK_STATE.DIR:
+			var look_pos = global_position + look_forward_dist * velocity.normalized()
+			head_look_at_position(look_pos, head_turn_speed)
+			arm_look_at_position(look_pos, head_turn_speed)
+			body_look_in_direction(look_dir)
+		LOOK_STATE.TARGET_HEAD:
+			pass
+		LOOK_STATE.TARGET_HEAD_ARM:
+			head_look_at_position(target.global_position, head_turn_speed)
+			arm_look_at_position(target.global_position, head_turn_speed)
+			body_look_in_direction(look_dir)
+		LOOK_STATE.TARGET_BODY:
+			body_face_position_directly(target.global_position, head_turn_speed / 1.8)
 	if stationary:
 		velocity.x = 0
 		velocity.z = 0
@@ -176,11 +199,7 @@ func _physics_process(delta):
 			CIRCLING:
 				walk_curved(true)
 			SPECIAL:
-				if body_facing_target_directly:
-					body_face_position_directly(target.global_position, head_turn_speed / 1.8)
-				else:
-					body_look_in_direction(global_position.direction_to(target.global_position))
-					arm_look_at_position(target.global_position, head_turn_speed)
+				pass
 
 var body_facing_target_directly := false
 func set_body_facing_target_directly(state: bool):
@@ -210,20 +229,19 @@ func long_dist_attack_check():
 
 func switch_to_straight():
 	behav_state = STRAIGHT
+	look_state = LOOK_STATE.DIR
 	walk_dir = get_random_flat_unit_vector()
 
 func walk_straight(dir: Vector3):
 	velocity = walk_speed * dir
 	
-	var look_pos = global_position + look_forward_dist * velocity.normalized()
-	head_look_at_position(look_pos, head_turn_speed)
-	arm_look_at_position(look_pos, head_turn_speed)
-	body_look_in_direction(dir)
+	look_dir = dir
 	
 	long_dist_attack_check()
 
 func switch_to_curved():
 	behav_state = CURVED
+	look_state = LOOK_STATE.TARGET_HEAD_ARM
 	
 	# Set center of circular path
 	var direction_to_center = velocity.cross(Vector3.UP).normalized()
@@ -244,16 +262,13 @@ func walk_curved(circling_target: bool):
 	# Rotating the radius vector 90 degrees on the Y axis
 	var tangent_dir = Vector3(-radius_vec.z, 0, radius_vec.x)
 	
+	# If circling around target, body should face target (since walk left is used). Otherwise look in mvmt dir
+	look_dir = -radius_vec if circling_target else velocity
+	
 	# Set velocity directly
 	# This ensures the movement is always perfectly perpendicular to the center
 	velocity.x = tangent_dir.x * walk_speed
 	velocity.z = tangent_dir.z * walk_speed
-	
-	# Turn head and body toward target
-	head_look_at_position(target.global_position, head_turn_speed)
-	arm_look_at_position(target.global_position, head_turn_speed)
-	# If circling around target, body should face target (since walk left is used). Otherwise look in mvmt dir
-	body_look_in_direction(-radius_vec if circling_target else velocity)
 	
 	long_dist_attack_check()
 
@@ -354,12 +369,12 @@ func jump_shot_forward_dash():
 	var t = get_tree().create_tween()
 	var full_dash_speed = velocity * 9
 	t.tween_property(self, "velocity", full_dash_speed, 60 * get_physics_process_delta_time())
+	t.tween_property(self, "look_state", LOOK_STATE.TARGET_BODY, 0)
 	t.tween_property(self, "velocity", full_dash_speed + 9 * Vector3.UP, 30 * get_physics_process_delta_time())
 	t.tween_property(self, "velocity", Vector3.ZERO, 120 * get_physics_process_delta_time())
 	t.tween_property(self, "gravity", 0, 0)
 	t.tween_interval(15 * get_physics_process_delta_time())
-	# Instead of using natural gravity, try manually accelerating her downward
-	#t.tween_property(self, "velocity", 6 * Vector3.DOWN, 45 * get_physics_process_delta_time())
+	t.tween_property(self, "look_state", LOOK_STATE.TARGET_HEAD_ARM, 0)
 	t.tween_property(self, "gravity", .5 * ProjectSettings.get_setting("physics/3d/default_gravity"), 0)
 	t.tween_interval(130 * get_physics_process_delta_time())
 	t.tween_property(self, "behav_state", STRAIGHT, 0)
