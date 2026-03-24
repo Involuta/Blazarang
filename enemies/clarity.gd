@@ -48,7 +48,7 @@ var walk_dir := Vector3.FORWARD # Randomly set when switching to walk straight
 @export var walk_curved_radius := 9.0 # Radius of circle Clarity walks on
 
 @export var head_turn_speed := .2
-@export var body_turn_speed := .12
+@export var body_turn_speed := .09
 
 # Distance in front of herself Clarity looks in order to match anim head looking forward
 @export var look_forward_dist := 12.0
@@ -157,15 +157,15 @@ func body_look_in_direction(dir: Vector3):
 	body_meshes.rotation.y = lerp_angle(body_meshes.rotation.y, PI + atan2(-dir.x, -dir.z), body_turn_speed)
 	body_meshes.rotation.z = lerp_angle(body_meshes.rotation.z, 0, body_turn_speed)
 
-func body_face_position_directly(target_pos, turn_speed):
+func body_face_position_directly(target_pos):
 	for m in [arm_meshes, body_meshes]:
 		var old_rotation = m.rotation
 		m.look_at(m.global_position + m.global_position.direction_to(target_pos), Vector3.UP, true)
 		var target_rotation = m.rotation
 		m.rotation = old_rotation
-		m.rotation.x = lerp_angle(m.rotation.x, target_rotation.x, turn_speed)
-		m.rotation.y = lerp_angle(m.rotation.y, target_rotation.y, turn_speed)
-		m.rotation.z = lerp_angle(m.rotation.z, target_rotation.z, turn_speed)
+		m.rotation.x = lerp_angle(m.rotation.x, target_rotation.x, body_turn_speed)
+		m.rotation.y = lerp_angle(m.rotation.y, target_rotation.y, body_turn_speed)
+		m.rotation.z = lerp_angle(m.rotation.z, target_rotation.z, body_turn_speed)
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -191,7 +191,7 @@ func _physics_process(delta):
 			arm_look_at_position(target.global_position)
 			body_look_in_direction(global_position.direction_to(target.global_position))
 		LOOK_STATE.TARGET_BODY_FULL_ROTATION:
-			body_face_position_directly(target.global_position, head_turn_speed / 1.8)
+			body_face_position_directly(target.global_position)
 	if stationary:
 		velocity.x = 0
 		velocity.z = 0
@@ -369,7 +369,7 @@ func jump_shot_forward_dash():
 	behav_state = SPECIAL
 	var t = get_tree().create_tween()
 	var full_dash_speed = velocity * 9
-	t.tween_property(self, "velocity", full_dash_speed, 60 * get_physics_process_delta_time())
+	t.tween_property(self, "velocity", full_dash_speed, 90 * get_physics_process_delta_time())
 	t.tween_property(self, "look_state", LOOK_STATE.TARGET_BODY_FULL_ROTATION, 0)
 	t.tween_property(self, "velocity", full_dash_speed + 9 * Vector3.UP, 30 * get_physics_process_delta_time())
 	t.tween_property(self, "velocity", Vector3.ZERO, 120 * get_physics_process_delta_time())
