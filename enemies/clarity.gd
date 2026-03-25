@@ -143,8 +143,8 @@ func head_look_at_position(target_pos):
 	var head_target_rotation = head_mesh.rotation
 	head_mesh.rotation = old_head_rotation
 	head_mesh.rotation.y = lerp_angle(head_mesh.rotation.y, head_target_rotation.y, head_turn_speed)
-	# Look down/up at the player. Not too low so the head doesn't look straight down
-	head_mesh.rotation.x = min(lerp_angle(head_mesh.rotation.x, head_target_rotation.x, head_turn_speed), .67)
+	# Look down/up at the player. Not too low (i.e. angle can't be too high) so the head doesn't look straight down
+	head_mesh.rotation.x = clampf(lerp_angle(head_mesh.rotation.x, head_target_rotation.x, head_turn_speed), .6, .96)
 
 func arm_look_at_position(target_pos):
 	var vec3_to_target := -global_position.direction_to(target_pos)
@@ -163,9 +163,9 @@ func body_face_position_directly(target_pos):
 		m.look_at(m.global_position + m.global_position.direction_to(target_pos), Vector3.UP, true)
 		var target_rotation = m.rotation
 		m.rotation = old_rotation
-		m.rotation.x = lerp_angle(m.rotation.x, target_rotation.x, body_turn_speed)
-		m.rotation.y = lerp_angle(m.rotation.y, target_rotation.y, body_turn_speed)
-		m.rotation.z = lerp_angle(m.rotation.z, target_rotation.z, body_turn_speed)
+		m.rotation.x = lerp_angle(m.rotation.x, target_rotation.x, body_turn_speed / 2.1)
+		m.rotation.y = lerp_angle(m.rotation.y, target_rotation.y, body_turn_speed / 2.1)
+		m.rotation.z = lerp_angle(m.rotation.z, target_rotation.z, body_turn_speed / 2.1)
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -191,7 +191,8 @@ func _physics_process(delta):
 			arm_look_at_position(target.global_position)
 			body_look_in_direction(global_position.direction_to(target.global_position))
 		LOOK_STATE.TARGET_BODY_FULL_ROTATION:
-			body_face_position_directly(target.global_position)
+			if aiming_at_target:
+				body_face_position_directly(target.global_position)
 	if stationary:
 		velocity.x = 0
 		velocity.z = 0
@@ -205,10 +206,6 @@ func _physics_process(delta):
 				walk_curved(true)
 			SPECIAL:
 				pass
-
-var body_facing_target_directly := false
-func set_body_facing_target_directly(state: bool):
-	body_facing_target_directly = state
 
 func get_random_flat_unit_vector() -> Vector3:
 	# 1. Pick a random angle in radians (0 to 2*PI)
@@ -329,7 +326,7 @@ func end_attack():
 	"""
 	FOR TESTING: behav_state is chosen here manually instead of randomly btwn str and cur
 	"""
-	switch_to_straight()
+	switch_to_circling()
 	"""
 	match(behav_state):
 		STRAIGHT:
@@ -365,18 +362,35 @@ func choose_stomp_direction() -> String:
 		else:
 			return "Left"
 
-func jump_shot_forward_dash():
+func get_dir_to_target_LR():
+	# 1. Get the direction vector from character to target
+	var to_target = global_position.direction_to(target.global_position)
+	
+	# 2. Get the character's local Right vector
+	var character_right = -body_meshes.transform.basis.x
+	
+	# 3. Use the Dot Product
+	var side_dot = character_right.dot(to_target)
+	
+	# side_dot > 0 means the target is to the Right
+	# side_dot < 0 means the target is to the Left
+	return "Left" if side_dot < 0 else "Right"
+
+func set_aiming_at_target(state: bool):
+	aiming_at_target = state
+
+func set_look_state(new_state: LOOK_STATE):
+	look_state = new_state
+
+func jump_shot_mvmt():
 	behav_state = SPECIAL
 	var t = get_tree().create_tween()
 	var full_dash_speed = velocity * 9
-	t.tween_property(self, "velocity", full_dash_speed, 90 * get_physics_process_delta_time())
-	t.tween_property(self, "look_state", LOOK_STATE.TARGET_BODY_FULL_ROTATION, 0)
+	t.tween_property(self, "velocity", full_dash_speed, 97 * get_physics_process_delta_time())
+	#t.tween_property(self, "look_state", LOOK_STATE.TARGET_BODY_FULL_ROTATION, 0)
 	t.tween_property(self, "velocity", full_dash_speed + 9 * Vector3.UP, 30 * get_physics_process_delta_time())
 	t.tween_property(self, "velocity", Vector3.ZERO, 120 * get_physics_process_delta_time())
 	t.tween_property(self, "gravity", 0, 0)
 	t.tween_interval(15 * get_physics_process_delta_time())
 	t.tween_property(self, "gravity", .5 * ProjectSettings.get_setting("physics/3d/default_gravity"), 0)
-	t.tween_interval(30 * get_physics_process_delta_time())
-	t.tween_property(self, "look_state", LOOK_STATE.TARGET_HEAD_ARM_BODY, 0)
-	t.tween_interval(100 * get_physics_process_delta_time())
-	t.tween_property(self, "behav_state", STRAIGHT, 0)
+
