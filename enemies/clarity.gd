@@ -325,6 +325,7 @@ func end_attack():
 	ax_thrown = false
 	"""
 	FOR TESTING: behav_state is chosen here manually instead of randomly btwn str and cur
+	NOTE: certain attacks always go to certain states (e.g. any jump shot to walk left must switch to circling)
 	"""
 	switch_to_circling()
 	"""
@@ -391,6 +392,6 @@ func jump_shot_mvmt():
 	t.tween_property(self, "velocity", full_dash_speed + 9 * Vector3.UP, 30 * get_physics_process_delta_time())
 	t.tween_property(self, "velocity", Vector3.ZERO, 120 * get_physics_process_delta_time())
 	t.tween_property(self, "gravity", 0, 0)
-	t.tween_interval(15 * get_physics_process_delta_time())
+	t.tween_interval(49 * get_physics_process_delta_time())
 	t.tween_property(self, "gravity", .5 * ProjectSettings.get_setting("physics/3d/default_gravity"), 0)
 
