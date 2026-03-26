@@ -29,3 +29,4 @@ res://enemies/clarity_head.tscn
 res://glb_imports/clarity_meshes.tscn
 res://levels/snow_level/section_nodes/clarity_boss_arena1.tscn
 res://enemies/ice_sprite.tscn
+res://enemies/enemy_anims/clarity_singleshot_left.res
