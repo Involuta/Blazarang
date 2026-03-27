@@ -389,7 +389,7 @@ func jump_shot_mvmt():
 	var full_dash_speed = velocity * 9
 	t.tween_property(self, "velocity", full_dash_speed, 97 * get_physics_process_delta_time())
 	#t.tween_property(self, "look_state", LOOK_STATE.TARGET_BODY_FULL_ROTATION, 0)
-	t.tween_property(self, "velocity", full_dash_speed + 9 * Vector3.UP, 30 * get_physics_process_delta_time())
+	t.tween_property(self, "velocity", full_dash_speed + 9 * Vector3.UP, 30 * get_physics_process_delta_time()).set_ease(Tween.EASE_IN_OUT)
 	t.tween_property(self, "velocity", Vector3.ZERO, 120 * get_physics_process_delta_time())
 	t.tween_property(self, "gravity", 0, 0)
 	t.tween_interval(49 * get_physics_process_delta_time())
