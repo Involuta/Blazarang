@@ -43,7 +43,7 @@ var phase := PHASE.PHASE1
 @export var min_y_pos := 11.4 # y pos of arena floor, ie X's minimum y position
 
 var stationary := false
-@export var walk_speed := 2.0
+@export var walk_speed := 1.8
 var walk_dir := Vector3.FORWARD # Randomly set when switching to walk straight
 @export var walk_curved_radius := 9.0 # Radius of circle Clarity walks on
 
@@ -61,7 +61,6 @@ var current_follow_time := 0.0 # Reset after attack or parry is queued
 var rose_thrown := false # Set to true when Cotu throws non-special roserang while Clarity is following. Set to false when parry ends (end_parry). Why isn't this set to false every frame where a rose throw doesn't happen? Because the anim tree parry transition expressions need to read rose_thrown as true to know parry anim to play, and that happens at least 1 frame after a parry is triggered via queue_parry
 var ax_thrown := false # Set to true when Cotu throws non-special axrang while Clarity is following. Set to false when parry ends (end_parry) for the same reason as rose_thrown
 var parried := false # Set to true after a parry, set to false after a non-parry
-@export var follow_left_distance := 7.5
 
 @export var follow_turn_speed := .05
 @export var base_attack_turn_speed := .15

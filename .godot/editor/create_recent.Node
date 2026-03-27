@@ -1,8 +1,9 @@
+CollisionShape3D
+Hitbox
+MeshInstance3D
 GPUParticles3D
 AnimationPlayer
 NavigationAgent3D
-MeshInstance3D
-CollisionShape3D
 CharacterBody3D
 AnimationTree
 Node3D
@@ -15,7 +16,6 @@ Label3D
 Area3D
 EnemyHurtbox
 Node
-Hitbox
 GPUTrail3D
 AudioStreamPlayer3D
 AudioStreamPlayer
