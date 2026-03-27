@@ -8,7 +8,7 @@ enum {
 	CIRCLING,
 	SPECIAL,
 }
-var behav_state := STRAIGHT
+var behav_state := CIRCLING
 var attacking := false # Set to true when attacking to prevent another attack from being queued
 
 enum LOOK_STATE {
@@ -131,6 +131,8 @@ func _ready():
 	
 	attack_turn_speed = base_attack_turn_speed
 	
+	switch_to_circling()
+	
 	arm_anim_tree.active = true
 	body_anim_tree.active = true
 	mhp.visible = false
@@ -144,7 +146,7 @@ func head_look_at_position(target_pos):
 	head_mesh.rotation = old_head_rotation
 	head_mesh.rotation.y = lerp_angle(head_mesh.rotation.y, head_target_rotation.y, head_turn_speed)
 	# Look down/up at the player. Not too low (i.e. angle can't be too high) so the head doesn't look straight down
-	head_mesh.rotation.x = clampf(lerp_angle(head_mesh.rotation.x, head_target_rotation.x, head_turn_speed), .6, .96)
+	head_mesh.rotation.x = clampf(lerp_angle(head_mesh.rotation.x, head_target_rotation.x, head_turn_speed), .6, .75)
 
 func arm_look_at_position(target_pos):
 	var vec3_to_target := -global_position.direction_to(target_pos)
