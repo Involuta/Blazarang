@@ -17,7 +17,8 @@ enum LOOK_STATE {
 	TARGET_HEAD, # Used when Clarity stops aiming at target while attacking but still looks at target with her head
 	TARGET_HEAD_ARM, # Used when Clarity's traveling in a direction but her head and arm still look at the target. May not be used ever since arm becomes offset from body
 	TARGET_HEAD_ARM_BODY, # Used when Clarity's circling around target
-	TARGET_BODY_FULL_ROTATION # Used when Clarity's body rotates toward target on all axes, not just y. Used when she becomes a gun/cannon
+	TARGET_BODY_FULL_ROTATION, # Used when Clarity's body rotates toward target on all axes, not just y. Used when she becomes a gun/cannon
+	STOP
 }
 var look_state := LOOK_STATE.DIR
 
@@ -49,7 +50,7 @@ var walk_dir := Vector3.FORWARD # Randomly set when switching to walk straight
 @export var walk_curved_radius := 9.0 # Radius of circle Clarity walks on
 @export var full_dash_speed := 18.0
 
-@export var head_turn_speed := .09
+@export var head_turn_speed := .06
 @export var body_turn_speed := .09
 
 # Distance in front of herself Clarity looks in order to match anim head looking forward
@@ -141,8 +142,9 @@ func on_head_hit(damage: int):
 		switch_to_staggered()
 
 func switch_to_staggered():
-	# Set behav_state
+	# Set behav_state and look_state
 	behav_state = STAGGERED
+	look_state = LOOK_STATE.TARGET_HEAD_ARM_BODY
 	# Switch anim trees inactive
 	arm_anim_tree.active = false
 	body_anim_tree.active = false
@@ -153,9 +155,11 @@ func switch_to_staggered():
 	t.tween_property(self, "velocity", 3 * walk_speed * target.global_position.direction_to(global_position), 0)
 	t.tween_property(self, "velocity", 0, frames(156))
 	await arm_anim_player.animation_finished
-	switch_to_circling()
+	arm_anim_player.play("WalkLeftAggressive")
+	body_anim_player.play("WalkLeftAggressive")
 	arm_anim_tree.active = true
 	body_anim_tree.active = true
+	switch_to_circling()
 
 func set_head_rotation(rot_deg: Vector3):
 	# Set rotation of dynamic head (the head that looks at the player)
@@ -218,6 +222,8 @@ func _physics_process(delta):
 		LOOK_STATE.TARGET_BODY_FULL_ROTATION:
 			if aiming_at_target:
 				body_face_position_directly(target.global_position)
+		LOOK_STATE.STOP:
+			pass
 	if stationary:
 		velocity.x = 0
 		velocity.z = 0
@@ -346,7 +352,6 @@ func end_attack():
 	FOR TESTING: behav_state is chosen here manually instead of randomly btwn str and cur
 	NOTE: certain attacks always go to certain states (e.g. any jump shot to walk left must switch to circling)
 	"""
-	long_dist_wait_remaining = 10
 	switch_to_circling()
 	"""
 	match(behav_state):

@@ -45,3 +45,4 @@ res://icon/icon.gd
 res://enemies/enemy_anims/clarity_stagger.res
 res://glb_imports/clarity_meshes.tscn
 res://enemies/x_boss.tscn
+res://cotu/CotuControl.gd

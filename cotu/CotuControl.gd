@@ -120,7 +120,7 @@ var mid_stability_bonus_shurikens := true # Set to true when player equips Resol
 var fireball_scene := preload("res://rang/fireball.tscn")
 var low_stability_fireball := true # Set to true when player equips Thrill, which immediately spawns and deploys a fireball if the player's health is below 25% and deploys exactly 3 shurikens in a single icon hit
 var shuriken_base_slashes := 3 # Number of times shuriken will slash its target after reaching it
-var shuriken_marked_bonus_slashes := 6 # When player equips Hunger, shurikens will slash a marked target this number of extra times. Unlike other equippable skills/perks, this one isn't a bool; it's a number. The skill is inactive if the number is 0 and active if it's ≥ 0
+var shuriken_marked_bonus_slashes := 0 # When player equips Hunger, shurikens will slash a marked target this number of extra times. Unlike other equippable skills/perks, this one isn't a bool; it's a number. The skill is inactive if the number is 0 and active if it's ≥ 0
 var shuriken_self_destruction := true # True = Explode, False = Recall
 
 var mark_scene := preload("res://rang/mark.tscn")
