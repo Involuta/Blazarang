@@ -133,13 +133,15 @@ const enemy_hurtbox_data = {
 	"BallWalkerArmor" : [100, 1.0, 1.0],
 	"BallWalker" : [2000, 1.0, 1.0],
 	
-	"XBoss" : [3000, 1.0, 100.0],
+	"XBoss" : [4000, 1.0, 100.0],
 	
 	"Landmite" : [75, 1.0, 1.0],
 	"Paramite" : [35, 1.0, 1.0],
 	"Flatmite" : [25, 1.0, 1.0],
 	"Harvestman" : [10, 1.0, 1.0],
 	"JumpingSpider" : [80, 1.0, 1.0],
+	
+	"Clarity" : [3000, 1.0, 100.0],
 }
 
 func rotate_toward(from: float, to: float, delta: float) -> float:

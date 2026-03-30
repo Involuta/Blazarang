@@ -1,4 +1,5 @@
 CollisionShape3D
+BossHurtbox
 Hitbox
 MeshInstance3D
 GPUParticles3D
@@ -29,4 +30,3 @@ Hurtbox
 RemoteTransform3D
 FuncGodotMap
 Node2D
-PhysicalBone3D

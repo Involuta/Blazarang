@@ -7,6 +7,7 @@ enum {
 	CURVED,
 	CIRCLING,
 	SPECIAL,
+	STAGGERED,
 }
 var behav_state := CIRCLING
 var attacking := false # Set to true when attacking to prevent another attack from being queued
@@ -46,6 +47,7 @@ var stationary := false
 @export var walk_speed := 1.8
 var walk_dir := Vector3.FORWARD # Randomly set when switching to walk straight
 @export var walk_curved_radius := 9.0 # Radius of circle Clarity walks on
+@export var full_dash_speed := 18.0
 
 @export var head_turn_speed := .2
 @export var body_turn_speed := .09
@@ -53,20 +55,9 @@ var walk_dir := Vector3.FORWARD # Randomly set when switching to walk straight
 # Distance in front of herself Clarity looks in order to match anim head looking forward
 @export var look_forward_dist := 12.0
 
-@export var follow_speed := 1.5
-@export var follow_time_before_parry := .1 # Min time necessary to spend in follow state before parry is possible
-var current_follow_time := 0.0 # Reset after attack or parry is queued
-@export var parry_angle_tolerance := PI/5 # Max y angle difference btwn vec from Cotu to Clarity and player camera fwd vec that triggers Clarity to parry
-@export var parry_proximity := 1.5 # Max dist btwn Clarity and rose/ax to trigger parry
-var rose_thrown := false # Set to true when Cotu throws non-special roserang while Clarity is following. Set to false when parry ends (end_parry). Why isn't this set to false every frame where a rose throw doesn't happen? Because the anim tree parry transition expressions need to read rose_thrown as true to know parry anim to play, and that happens at least 1 frame after a parry is triggered via queue_parry
-var ax_thrown := false # Set to true when Cotu throws non-special axrang while Clarity is following. Set to false when parry ends (end_parry) for the same reason as rose_thrown
-var parried := false # Set to true after a parry, set to false after a non-parry
-
-@export var follow_turn_speed := .05
-@export var base_attack_turn_speed := .15
-var attack_turn_speed := 0.15
-
 var aiming_at_target := true
+
+@export var stagger_damage_threshold := 10.0 # Single hit damage to head necessary to stagger
 
 @export var phase1_straight_attack_chances = {
 	"Stomp" : .75,
@@ -104,12 +95,16 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 var transparent_mat := preload("res://textures/clear_tile.tres")
 @onready var arm_anim_tree := $ArmAnimationTree # Controls arm attacks
+@onready var arm_anim_player := $ClarityArmMeshes/AnimationPlayer # Plays stagger anim after anim tree is set inactive
 @onready var body_anim_tree := $BodyAnimationTree # Controls walk anim
+@onready var body_anim_player := $ClarityBodyMeshes/AnimationPlayer # Plays stagger anim after anim tree is set inactive
 @onready var mhp := $MeleeHitboxPivot
 @onready var arm_meshes := $ClarityArmMeshes
 @onready var body_meshes := $ClarityBodyMeshes
 @onready var head_bone := $ClarityBodyMeshes/Armature/Skeleton3D/Hat_2
 @onready var head_mesh := $ClarityBodyMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
+
+var head_hurtbox : Node3D
 
 @onready var root := $/root/ViewControl
 var level : Node3D
@@ -118,7 +113,9 @@ var cotu : Node3D # Clarity only attacks the target; cotu is only referenced her
 var clarity_icon : Node3D
 
 func _ready():
-	add_to_group("lockonables")
+	head_hurtbox = find_child("EnemyHurtbox")
+	
+	head_hurtbox.add_to_group("lockonables")
 	level = root.find_child("Level")
 	target = level.find_child("Icon")
 	cotu = level.find_child("cotuCB")
@@ -128,24 +125,54 @@ func _ready():
 	max_long_dist_wait = phase1_max_long_dist_wait
 	long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	
-	attack_turn_speed = base_attack_turn_speed
-	
-	switch_to_circling()
+	switch_to_straight()
 	
 	arm_anim_tree.active = true
 	body_anim_tree.active = true
 	mhp.visible = false
+	
+	head_hurtbox.hit_received.connect(on_head_hit)
+
+func frames(num: int) -> float:
+	return num * get_physics_process_delta_time()
+
+func on_head_hit(damage: int):
+	if damage >= stagger_damage_threshold and behav_state != STAGGERED:
+		switch_to_staggered()
+
+func switch_to_staggered():
+	# Set behav_state
+	behav_state = STAGGERED
+	# Switch anim trees inactive
+	arm_anim_tree.active = false
+	body_anim_tree.active = false
+	# Play stagger anim
+	arm_anim_player.play("Stagger")
+	body_anim_player.play("Stagger")
+	var t = get_tree().create_tween()
+	t.tween_property(self, "velocity", 3 * walk_speed * target.global_position.direction_to(global_position), 0)
+	t.tween_property(self, "velocity", 0, frames(156))
+	await arm_anim_player.animation_finished
+	switch_to_circling()
+	arm_anim_tree.active = true
+	body_anim_tree.active = true
+
+func reset_head_rotation_walk_left():
+	# Reset rotation of dynamic head (the head that looks at the player) to match anim meshes head
+	var target_pos = global_position + look_forward_dist * global_position.direction_to(target.global_position)
+	head_mesh.global_position = head_bone.global_position
+	head_mesh.look_at(Vector3(target_pos.x, min_y_pos, target_pos.z), Vector3.UP, true)
+	# Look down/up at the player. Not too low (i.e. angle can't be too high) so the head doesn't look straight down
+	#head_mesh.rotation.x = clampf(head_mesh.rotation.x, -2.7, 2.7)
 
 func head_look_at_position(target_pos):
 	# Head mesh isn't a child of head bone so it doesn't inherit rotation from head bone
 	head_mesh.global_position = head_bone.global_position
-	var old_head_rotation = head_mesh.rotation
-	head_mesh.look_at(Vector3(target_pos.x, min_y_pos, target_pos.z), Vector3.UP, true)
-	var head_target_rotation = head_mesh.rotation
-	head_mesh.rotation = old_head_rotation
+	var head_target_rotation = head_mesh.transform.looking_at(target.global_position).basis.get_euler()
 	head_mesh.rotation.y = lerp_angle(head_mesh.rotation.y, head_target_rotation.y, head_turn_speed)
+	head_mesh.rotation.z = lerp_angle(head_mesh.rotation.z, head_target_rotation.z, head_turn_speed)
 	# Look down/up at the player. Not too low (i.e. angle can't be too high) so the head doesn't look straight down
-	head_mesh.rotation.x = clampf(lerp_angle(head_mesh.rotation.x, head_target_rotation.x, head_turn_speed), .6, .75)
+	head_mesh.rotation.x = clampf(lerp_angle(head_mesh.rotation.x, head_target_rotation.x, head_turn_speed), 0, 1.5)
 
 func arm_look_at_position(target_pos):
 	var vec3_to_target := -global_position.direction_to(target_pos)
@@ -205,7 +232,7 @@ func _physics_process(delta):
 				walk_curved(false)
 			CIRCLING:
 				walk_curved(true)
-			SPECIAL:
+			SPECIAL, STAGGERED:
 				pass
 
 func get_random_flat_unit_vector() -> Vector3:
@@ -237,7 +264,6 @@ func switch_to_straight():
 
 func walk_straight(dir: Vector3):
 	velocity = walk_speed * dir
-	
 	long_dist_attack_check()
 
 func switch_to_curved():
@@ -275,7 +301,6 @@ func switch_to_circling():
 	look_state = LOOK_STATE.TARGET_HEAD_ARM_BODY
 
 func queue_attack():
-	parried = false # Clarity can parry when he reaches follow state again
 	attack_queued = true
 	match(phase):
 		PHASE.PHASE1:
@@ -320,14 +345,11 @@ func end_attack():
 			arm_anim_tree.set(param_path_base + attack, false)
 			body_anim_tree.set(param_path_base + attack, false)
 	long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
-	current_follow_time = 0
-	# After an attack or dodge ends, check when the rose or ax is thrown again
-	rose_thrown = false
-	ax_thrown = false
 	"""
 	FOR TESTING: behav_state is chosen here manually instead of randomly btwn str and cur
 	NOTE: certain attacks always go to certain states (e.g. any jump shot to walk left must switch to circling)
 	"""
+	long_dist_wait_remaining = 10
 	switch_to_circling()
 	"""
 	match(behav_state):
@@ -387,12 +409,11 @@ func set_look_state(new_state: LOOK_STATE):
 func jump_shot_mvmt():
 	behav_state = SPECIAL
 	var t = get_tree().create_tween()
-	var full_dash_speed = velocity * 9
-	t.tween_property(self, "velocity", full_dash_speed, 97 * get_physics_process_delta_time())
-	#t.tween_property(self, "look_state", LOOK_STATE.TARGET_BODY_FULL_ROTATION, 0)
-	t.tween_property(self, "velocity", full_dash_speed + 9 * Vector3.UP, 30 * get_physics_process_delta_time()).set_ease(Tween.EASE_IN_OUT)
-	t.tween_property(self, "velocity", Vector3.ZERO, 120 * get_physics_process_delta_time())
+	var full_dash_vec = full_dash_speed * velocity.normalized()
+	t.tween_property(self, "velocity", full_dash_vec, frames(97))
+	t.tween_property(self, "velocity", full_dash_vec + 9 * Vector3.UP, frames(30)).set_ease(Tween.EASE_OUT)
+	t.tween_property(self, "velocity", Vector3.ZERO, frames(120))
 	t.tween_property(self, "gravity", 0, 0)
-	t.tween_interval(49 * get_physics_process_delta_time())
+	t.tween_interval(frames(49))
 	t.tween_property(self, "gravity", .5 * ProjectSettings.get_setting("physics/3d/default_gravity"), 0)
 

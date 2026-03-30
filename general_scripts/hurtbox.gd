@@ -15,7 +15,7 @@ var rng := RandomNumberGenerator.new()
 var health := 100.0
 var max_health := 100.0 # This is only set by the Globals script or the CotuHurtbox script.
 var current_opponent_hitboxes
-@export var opponent_hitboxes := ["default"] # opponent is a misnomer; this is a list any hitboxes that could affect this entity, opponent, ally, or neutral
+@export var opponent_hitboxes := ["default"] # opponent is a misnomer; this is a list any hitboxes that could affect this entity, opponent, ally, or neutral, e.g. PlayerHitbox, EnemyHitbox
 @export var hurtbox_owner : Node3D # If this isn't set, parent is used as hurtbox owner
 var hb_owner : Node3D
 

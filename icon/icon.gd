@@ -26,9 +26,6 @@ func _physics_process(_delta):
 	if following_cotu and not cotu.grabbed and not cotu.stunned:
 		global_position += dir_to_cotu * (dist_to_cotu / 4)
 	
-	if Input.is_action_just_pressed("ThrowShuriken"):
-		print(following_cotu)
-	
 	if following_cotu:
 		if (cotu.is_on_floor() and dist_to_cotu < follow_cotu_min_dist) or (!cotu.is_on_floor() and cotu.walk_input == Vector2.ZERO):
 			rotation = Vector3.ZERO

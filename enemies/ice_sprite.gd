@@ -34,7 +34,7 @@ var cotu : Node3D # Used to get player's vel. Enemy moves when the player moves
 func _ready():
 	target = root.find_child("Icon")
 	cotu = root.find_child("cotuCB")
-	follow_speed = cotu.walk_speed * .67
+	follow_speed = cotu.walk_speed * .76
 	nav_agent.target_desired_distance = target_distance
 	add_to_group("lockonables")
 
