@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwejhmociib43"]
+[gd_scene load_steps=5 format=3 uid="uid://cwejhmociib43"]
 
 [ext_resource type="PackedScene" uid="uid://vxr5o770vx2w" path="res://glb_imports/Clarity.glb" id="1_d5by6"]
 [ext_resource type="Shader" path="res://shaders/black_outline.gdshader" id="2_ga04g"]
-[ext_resource type="PackedScene" uid="uid://b70he2vkcfalc" path="res://enemies/clarity_head.tscn" id="2_gnqg3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c8oi3"]
 render_priority = 0
@@ -38,16 +37,12 @@ bones/16/position = Vector3(-2.0133, 3.27677, 1.38508)
 bones/16/rotation = Quaternion(0.656025, -0.179274, 0.637562, 0.361948)
 
 [node name="Hat_2" parent="Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.0167569, 0.38952, 1.37582, 0.0172308, 1.37576, -0.389713, -1.4298, 0.0211447, 0.0114279, 7.02307, 12.9016, 0.0824638)
+transform = Transform3D(0.0167569, 0.38952, 1.37582, 0.0172308, 1.37576, -0.389713, -1.4298, 0.0211447, 0.0114279, 7.02307, 12.9016, 0.082464)
 bone_idx = 2
 
 [node name="Hat_2" parent="Armature/Skeleton3D/Hat_2" index="0"]
 visible = false
 surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
-
-[node name="ClarityHead" parent="Armature/Skeleton3D/Hat_2" index="1" instance=ExtResource("2_gnqg3")]
-transform = Transform3D(1, -5.36558e-09, -2.6437e-09, 5.36558e-09, 1, 8.63738e-08, 2.6437e-09, -8.63738e-08, 1, 0, 0, 0)
-top_level = true
 
 [node name="Arm_2" parent="Armature/Skeleton3D" index="1"]
 transform = Transform3D(0.287023, 0.896841, 0.336591, -0.74594, 0.429704, -0.508849, -0.600991, -0.105025, 0.792325, 1.34076, 7.54585, 3.99514)
@@ -104,5 +99,3 @@ bone_idx = 17
 
 [node name="BackRight" parent="Armature/Skeleton3D/BackRight" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
-
-[editable path="Armature/Skeleton3D/Hat_2/ClarityHead"]

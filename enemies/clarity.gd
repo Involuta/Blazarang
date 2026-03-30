@@ -49,7 +49,7 @@ var walk_dir := Vector3.FORWARD # Randomly set when switching to walk straight
 @export var walk_curved_radius := 9.0 # Radius of circle Clarity walks on
 @export var full_dash_speed := 18.0
 
-@export var head_turn_speed := .2
+@export var head_turn_speed := .09
 @export var body_turn_speed := .09
 
 # Distance in front of herself Clarity looks in order to match anim head looking forward
@@ -157,22 +157,19 @@ func switch_to_staggered():
 	arm_anim_tree.active = true
 	body_anim_tree.active = true
 
-func reset_head_rotation_walk_left():
-	# Reset rotation of dynamic head (the head that looks at the player) to match anim meshes head
-	var target_pos = global_position + look_forward_dist * global_position.direction_to(target.global_position)
-	head_mesh.global_position = head_bone.global_position
-	head_mesh.look_at(Vector3(target_pos.x, min_y_pos, target_pos.z), Vector3.UP, true)
-	# Look down/up at the player. Not too low (i.e. angle can't be too high) so the head doesn't look straight down
-	#head_mesh.rotation.x = clampf(head_mesh.rotation.x, -2.7, 2.7)
+func set_head_rotation(rot_deg: Vector3):
+	# Set rotation of dynamic head (the head that looks at the player)
+	head_mesh.rotation_degrees = rot_deg
 
-func head_look_at_position(target_pos):
-	# Head mesh isn't a child of head bone so it doesn't inherit rotation from head bone
-	head_mesh.global_position = head_bone.global_position
-	var head_target_rotation = head_mesh.transform.looking_at(target.global_position).basis.get_euler()
+func head_look_at_position(target_pos: Vector3):
+	var old_head_rotation = head_mesh.rotation
+	head_mesh.look_at(Vector3(target_pos.x, min_y_pos, target_pos.z), Vector3.UP, true)
+	var head_target_rotation = head_mesh.rotation
+	head_mesh.rotation = old_head_rotation
 	head_mesh.rotation.y = lerp_angle(head_mesh.rotation.y, head_target_rotation.y, head_turn_speed)
+	# Stop head from looking too far down (i.e. stop angle from being too high) and looking too far up
+	head_mesh.rotation.x = clampf(lerp_angle(head_mesh.rotation.x, head_target_rotation.x, head_turn_speed), -.3, .45)
 	head_mesh.rotation.z = lerp_angle(head_mesh.rotation.z, head_target_rotation.z, head_turn_speed)
-	# Look down/up at the player. Not too low (i.e. angle can't be too high) so the head doesn't look straight down
-	head_mesh.rotation.x = clampf(lerp_angle(head_mesh.rotation.x, head_target_rotation.x, head_turn_speed), 0, 1.5)
 
 func arm_look_at_position(target_pos):
 	var vec3_to_target := -global_position.direction_to(target_pos)
