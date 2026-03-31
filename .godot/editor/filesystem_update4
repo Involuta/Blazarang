@@ -53,3 +53,4 @@ res://levels/snow_level/section_nodes/clarity_boss_arena1.gd
 res://enemies/square_particle.tscn
 res://textures/solid_light_gray_tile.tres
 res://levels/x_boss_level/x_boss_level1_viewcontrol.tscn
+res://glb_meshes/snowflake_particle_mesh.res

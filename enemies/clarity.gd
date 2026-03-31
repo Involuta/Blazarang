@@ -126,7 +126,7 @@ func _ready():
 	max_long_dist_wait = phase1_max_long_dist_wait
 	long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	
-	switch_to_straight()
+	switch_to_circling()
 	
 	arm_anim_tree.active = true
 	body_anim_tree.active = true

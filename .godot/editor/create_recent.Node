@@ -1,10 +1,10 @@
+GPUParticles3D
 Node3D
 CollisionShape3D
 Area3D
 BossHurtbox
 Hitbox
 MeshInstance3D
-GPUParticles3D
 AnimationPlayer
 NavigationAgent3D
 CharacterBody3D

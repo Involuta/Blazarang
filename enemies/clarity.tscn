@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=80 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" path="res://shaders/black_outline.gdshader" id="3_n5kqh"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="4_5f0ps"]
 [ext_resource type="Script" path="res://enemies/boss_hurtbox.gd" id="5_j584x"]
+[ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="7_i53v5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c8oi3"]
 render_priority = 0
@@ -326,6 +327,20 @@ graph_offset = Vector2(-37.642, -25.606)
 
 [sub_resource type="PrismMesh" id="PrismMesh_ocn5u"]
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bteud"]
+emission_shape = 6
+emission_ring_axis = Vector3(2.08165e-12, -1, 2.08165e-12)
+emission_ring_height = 1.0
+emission_ring_radius = 30.0
+emission_ring_inner_radius = 15.0
+direction = Vector3(2.08165e-12, 1, 2.08165e-12)
+spread = 3.0
+gravity = Vector3(2.08165e-12, -1.5, 2.08165e-12)
+initial_velocity_min = -12.0
+initial_velocity_max = -12.0
+scale_min = 0.03
+scale_max = 0.15
+
 [node name="Clarity" type="CharacterBody3D"]
 collision_layer = 8
 collision_mask = 146
@@ -518,6 +533,16 @@ parameters/conditions/Stomp = false
 [node name="Marker" type="MeshInstance3D" parent="."]
 top_level = true
 mesh = SubResource("PrismMesh_ocn5u")
+
+[node name="BlizzardParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 30, 2.08165e-12)
+cast_shadow = 0
+custom_aabb = AABB(-2000, -2000, -2000, 4000, 4000, 4000)
+amount = 180
+lifetime = 6.0
+visibility_aabb = AABB(-2000, -2000, -2000, 4000, 4000, 4000)
+process_material = SubResource("ParticleProcessMaterial_bteud")
+draw_pass_1 = ExtResource("7_i53v5")
 
 [editable path="ClarityBodyMeshes"]
 [editable path="ClarityBodyMeshes/Armature/Skeleton3D/Hat_2/ClarityHead"]

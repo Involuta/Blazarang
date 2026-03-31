@@ -1,3 +1,4 @@
+res://glb_meshes
 res://levels/snow_level/section_nodes
 res://enemies/enemy_anims
 res://enemies
@@ -19,7 +20,6 @@ res://enemies/spawners
 res://rang
 res://photo_scenes
 res://icon
-res://skyboxes
 /Users/ryanbascos/GameDevMiscAssets
 /Users/ryanbascos/Library/Application Support/TrenchBroom/games
 /Users/ryanbascos/GodotBuilds
