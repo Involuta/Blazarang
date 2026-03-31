@@ -1,21 +1,15 @@
 [gd_scene load_steps=14 format=3 uid="uid://d14mq7afv37xd"]
 
-[ext_resource type="Script" path="res://enemies/square_particle.gd" id="1_f83y5"]
+[ext_resource type="Script" path="res://general_scripts/DisappearRB.gd" id="1_ehsnn"]
 [ext_resource type="Script" path="res://GPUTrail-main/GPUTrail3D.gd" id="2_8bm15"]
+[ext_resource type="ArrayMesh" uid="uid://viwu0ni76qsc" path="res://obj_imports/DiamondParticle.obj" id="2_8mbgs"]
 [ext_resource type="Texture2D" uid="uid://ct31fhxvcragr" path="res://GPUTrail-main/defaults/curve.tres" id="3_rqfqs"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n40ht"]
 shading_mode = 0
 albedo_color = Color(2, 0.54, 0, 1)
-billboard_mode = 3
+billboard_mode = 1
 billboard_keep_scale = true
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="QuadMesh" id="QuadMesh_ntvx4"]
-material = SubResource("StandardMaterial3D_n40ht")
-size = Vector2(0.6, 0.6)
 
 [sub_resource type="Shader" id="Shader_fjoe2"]
 code = "shader_type particles;
@@ -219,11 +213,14 @@ material = SubResource("ShaderMaterial_5stvq")
 gravity_scale = 2.66454e-15
 linear_velocity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 angular_velocity = Vector3(0.0261799, 3.63316e-14, 3.63316e-14)
-script = ExtResource("1_f83y5")
+script = ExtResource("1_ehsnn")
+disappear_secs = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.28, 0, 0, 0, 0.28, 0, 0, 0, 0.28, 0, 0, 0)
 cast_shadow = 0
-mesh = SubResource("QuadMesh_ntvx4")
+mesh = ExtResource("2_8mbgs")
+surface_material_override/0 = SubResource("StandardMaterial3D_n40ht")
 
 [node name="GPUTrail3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)

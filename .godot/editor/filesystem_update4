@@ -50,3 +50,6 @@ res://levels/snow_level/section_nodes/clarity_boss_arena1.tscn
 res://general_scripts/damage_over_time_area.gd
 res://levels/mite_level/section_nodes/mite_level_main_arena.tscn
 res://levels/snow_level/section_nodes/clarity_boss_arena1.gd
+res://enemies/square_particle.tscn
+res://textures/solid_light_gray_tile.tres
+res://levels/x_boss_level/x_boss_level1_viewcontrol.tscn
