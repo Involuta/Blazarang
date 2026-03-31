@@ -145,21 +145,21 @@ func switch_to_staggered():
 	# Set behav_state and look_state
 	behav_state = STAGGERED
 	look_state = LOOK_STATE.TARGET_HEAD_ARM_BODY
-	# Switch anim trees inactive
-	arm_anim_tree.active = false
-	body_anim_tree.active = false
-	# Play stagger anim
-	arm_anim_player.play("Stagger")
-	body_anim_player.play("Stagger")
+	# Switch to Stagger anim
+	var arm_state_machine = arm_anim_tree["parameters/playback"]
+	arm_state_machine.travel("Stagger")
+	var body_state_machine = body_anim_tree["parameters/playback"]
+	body_state_machine.travel("Stagger")
+	# Move backward
 	var t = get_tree().create_tween()
-	t.tween_property(self, "velocity", 3 * walk_speed * target.global_position.direction_to(global_position), 0)
-	t.tween_property(self, "velocity", 0, frames(156))
-	await arm_anim_player.animation_finished
-	arm_anim_player.play("WalkLeftAggressive")
-	body_anim_player.play("WalkLeftAggressive")
-	arm_anim_tree.active = true
-	body_anim_tree.active = true
+	var move_dir := 3 * walk_speed * target.global_position.direction_to(global_position)
+	t.tween_property(self, "velocity", Vector3(move_dir.x, 0, move_dir.z), 0)
+	t.tween_property(self, "velocity", Vector3.ZERO, frames(162)).finished
+	await get_tree().create_timer(frames(196)).timeout
+	# Return to normal anim tree/state machine behavior
 	switch_to_circling()
+	arm_state_machine.travel("WalkLeftAggressive")
+	body_state_machine.travel("WalkLeftAggressive")
 
 func set_head_rotation(rot_deg: Vector3):
 	# Set rotation of dynamic head (the head that looks at the player)

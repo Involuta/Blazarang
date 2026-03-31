@@ -1,4 +1,6 @@
+Node3D
 CollisionShape3D
+Area3D
 BossHurtbox
 Hitbox
 MeshInstance3D
@@ -7,14 +9,12 @@ AnimationPlayer
 NavigationAgent3D
 CharacterBody3D
 AnimationTree
-Node3D
 Camera3D
 WorldEnvironment
 StaticBody3D
 NavigationRegion3D
 Label
 Label3D
-Area3D
 EnemyHurtbox
 Node
 GPUTrail3D

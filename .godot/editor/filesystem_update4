@@ -46,3 +46,7 @@ res://enemies/enemy_anims/clarity_stagger.res
 res://glb_imports/clarity_meshes.tscn
 res://enemies/x_boss.tscn
 res://cotu/CotuControl.gd
+res://levels/snow_level/section_nodes/clarity_boss_arena1.tscn
+res://general_scripts/damage_over_time_area.gd
+res://levels/mite_level/section_nodes/mite_level_main_arena.tscn
+res://levels/snow_level/section_nodes/clarity_boss_arena1.gd

@@ -1,6 +1,6 @@
 extends Node3D
 
-# Script used in Ball Walker Radiation Zone, Harvestman
+# Script used in Ball Walker Radiation Zone, Harvestman, Blizzard
 
 # This node should contain EnemyHitbox. Why isn't this node's own process_mode changed?
 # It's in case this node needs to make any changes to itself or any outer node needs to change it 
