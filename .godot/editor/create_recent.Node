@@ -1,3 +1,5 @@
+FogVolume
+OmniLight3D
 GPUParticles3D
 Node3D
 CollisionShape3D
@@ -21,7 +23,6 @@ GPUTrail3D
 AudioStreamPlayer3D
 AudioStreamPlayer
 AnimatedSprite3D
-FogVolume
 RayCast3D
 Marker3D
 SkeletonIK3D
@@ -29,4 +30,3 @@ RigidBody3D
 Hurtbox
 RemoteTransform3D
 FuncGodotMap
-Node2D

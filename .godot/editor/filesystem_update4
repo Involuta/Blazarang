@@ -54,3 +54,7 @@ res://enemies/square_particle.tscn
 res://textures/solid_light_gray_tile.tres
 res://levels/x_boss_level/x_boss_level1_viewcontrol.tscn
 res://glb_meshes/snowflake_particle_mesh.res
+res://levels/snow_level/snow_level_background.tscn
+res://enemies/ice_sprite.tscn
+res://levels/snow_level/snow_level.tscn
+res://cotu/cotu_anims_eyes.tres

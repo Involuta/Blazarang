@@ -1,9 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6kho0xiea8y0"]
+[gd_scene load_steps=7 format=3 uid="uid://b6kho0xiea8y0"]
+
+[ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="1_qcukq"]
+[ext_resource type="Script" path="res://general_scripts/bg_camera.gd" id="1_uh47y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o2vos"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_bottom_color = Color(0, 0.741176, 1, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+sky_horizon_color = Color(0.337255, 0.403922, 0.490196, 1)
+ground_bottom_color = Color(0.301961, 0.364706, 0.447059, 1)
+ground_horizon_color = Color(0.337255, 0.403922, 0.490196, 1)
+ground_curve = 0.113137
 
 [sub_resource type="Sky" id="Sky_d33do"]
 sky_material = SubResource("ProceduralSkyMaterial_o2vos")
@@ -12,7 +16,20 @@ sky_material = SubResource("ProceduralSkyMaterial_o2vos")
 background_mode = 2
 sky = SubResource("Sky_d33do")
 tonemap_mode = 2
-glow_enabled = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ngput"]
+emission_shape = 6
+emission_ring_axis = Vector3(2.08165e-12, 1, 2.08165e-12)
+emission_ring_height = 1.0
+emission_ring_radius = 6.0
+emission_ring_inner_radius = 12.0
+direction = Vector3(2.08165e-12, 1, 2.08165e-12)
+spread = 0.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = -4.5
+initial_velocity_max = -1.5
+scale_min = 0.01
+scale_max = 0.06
 
 [node name="SnowLevelBackground" type="Node3D"]
 
@@ -20,3 +37,11 @@ glow_enabled = true
 environment = SubResource("Environment_q3nmo")
 
 [node name="Camera3D" type="Camera3D" parent="."]
+script = ExtResource("1_uh47y")
+
+[node name="BlizzardParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 6, 2.08165e-12)
+amount = 180
+lifetime = 6.0
+process_material = SubResource("ParticleProcessMaterial_ngput")
+draw_pass_1 = ExtResource("1_qcukq")
