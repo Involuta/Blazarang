@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="3_f8ye4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_p1rwj"]
+sky_top_color = Color(0.384314, 0.454902, 0.54902, 1)
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
