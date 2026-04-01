@@ -102,8 +102,8 @@ var transparent_mat := preload("res://textures/clear_tile.tres")
 @onready var mhp := $MeleeHitboxPivot
 @onready var arm_meshes := $ClarityArmMeshes
 @onready var body_meshes := $ClarityBodyMeshes
-@onready var head_bone := $ClarityBodyMeshes/Armature/Skeleton3D/Hat_2
-@onready var head_mesh := $ClarityBodyMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
+@onready var head_bone := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2
+@onready var head_mesh := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
 
 var head_hurtbox : Node3D
 
