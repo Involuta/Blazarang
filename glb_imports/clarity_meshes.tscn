@@ -13,6 +13,8 @@ shader_parameter/outline_width = 1.0
 next_pass = SubResource("ShaderMaterial_c8oi3")
 transparency = 4
 albedo_color = Color(0.560784, 0.803922, 1, 1)
+roughness = 0.12
+refraction_enabled = true
 
 [node name="ClarityMeshes" instance=ExtResource("1_d5by6")]
 
