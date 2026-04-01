@@ -24,7 +24,6 @@ var aiming_at_target := true
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 @onready var nav_agent := $NavigationAgent3D
-@onready var visual_mesh := $VisualMesh
 @onready var anim_player := $AnimationPlayer
 @onready var root := $/root/ViewControl
 

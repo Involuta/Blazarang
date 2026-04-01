@@ -58,3 +58,5 @@ res://levels/snow_level/snow_level_background.tscn
 res://enemies/ice_sprite.tscn
 res://levels/snow_level/snow_level.tscn
 res://cotu/cotu_anims_eyes.tres
+res://enemies/clarity_head.tscn
+res://enemies/ice_sprite.gd
