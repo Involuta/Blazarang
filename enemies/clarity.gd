@@ -58,6 +58,9 @@ var walk_dir := Vector3.FORWARD # Randomly set when switching to walk straight
 
 var aiming_at_target := true
 
+@export var base_head_brightness := 0
+@export var full_head_brightness := 6.0
+
 @export var stagger_damage_threshold := 10.0 # Single hit damage to head necessary to stagger
 
 @export var phase1_straight_attack_chances = {
@@ -102,6 +105,7 @@ var transparent_mat := preload("res://textures/clear_tile.tres")
 @onready var mhp := $MeleeHitboxPivot
 @onready var arm_meshes := $ClarityArmMeshes
 @onready var body_meshes := $ClarityBodyMeshes
+@onready var head_light := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/OmniLight3D
 @onready var head_bone := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2
 @onready var head_mesh := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
 
@@ -137,6 +141,12 @@ func _ready():
 func frames(num: int) -> float:
 	return num * get_physics_process_delta_time()
 
+func head_light_high():
+	get_tree().create_tween().tween_property(head_light, "light_size", full_head_brightness, .3)
+
+func head_light_low():
+	get_tree().create_tween().tween_property(head_light, "light_size", base_head_brightness, .3)
+
 func on_head_hit(damage: int):
 	if damage >= stagger_damage_threshold and behav_state != STAGGERED:
 		switch_to_staggered()
@@ -154,7 +164,7 @@ func switch_to_staggered():
 	var t = get_tree().create_tween()
 	var move_dir := 3 * walk_speed * target.global_position.direction_to(global_position)
 	t.tween_property(self, "velocity", Vector3(move_dir.x, 0, move_dir.z), 0)
-	t.tween_property(self, "velocity", Vector3.ZERO, frames(162)).finished
+	t.tween_property(self, "velocity", Vector3.ZERO, frames(162))
 	await get_tree().create_timer(frames(196)).timeout
 	# Return to normal anim tree/state machine behavior
 	switch_to_circling()
