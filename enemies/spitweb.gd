@@ -2,7 +2,7 @@ extends Node3D
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var velocity := Vector3.ONE
-@export var max_lifetime_secs := 9.0
+@export var max_lifetime_secs := 32.0
 var invincible := true # prevents bullet from hitting self
 var invincibility_secs := .05
 var grounded := false

@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var max_lifetime_secs := 100.0
+@export var max_lifetime_secs := 1800.0 # 30 minutes so it essentially never disappears
 var destroyed := false
 
 @onready var impact_particles := $ImpactParticles

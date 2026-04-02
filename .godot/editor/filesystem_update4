@@ -36,3 +36,10 @@ res://enemies/enemy_anims/clarity_doubleslice_forward_immediate.res
 res://enemies/enemy_anims/clarity_doubleslice_left_delayed.res
 res://enemies/enemy_anims/clarity_doubleslice_left_immediate.res
 res://enemies/clarity.gd
+res://enemies/bigweb.tscn
+res://enemies/bigweb.gd
+res://levels/mite_level/section_nodes/mite_level_main_arena.tscn
+res://levels/mite_level/mite_level_viewcontrol.tscn
+res://enemies/spitweb.tscn
+res://enemies/spitweb.gd
+res://levels/mite_level/section_nodes/mite_level_main_arena.gd

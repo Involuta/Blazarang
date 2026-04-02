@@ -121,7 +121,6 @@ scale_max = 0.5
 
 [node name="Spitweb" type="Node3D"]
 script = ExtResource("1_t5eaf")
-max_lifetime_secs = 30.0
 
 [node name="EnemyHitbox" type="Area3D" parent="."]
 collision_layer = 8

@@ -38,9 +38,9 @@ var egg_fog_chance := .08 # Current egg fog chance. Changes to post-spider chanc
 var living_enemies := 0
 @export var can_drop := true # If this is false, no eggs spawn. Set to false after progressing past final wave listed in egg_waves OR set to false in testing
 
-@export var near_target_drop_max_radius := 12.0 # Max radius of egg drop near target
+@export var near_target_drop_max_radius := 16.0 # Max radius of egg drop near target
 @export var random_drop_pos_max_radius := 90.0 # Max radius of egg drop when dropping randomly around arena center
-@export var js_random_drop_pos_chance := .33 # Egg random drop pos chance for the jumping spider wave
+@export var js_random_drop_pos_chance := .4 # Egg random drop pos chance for the jumping spider wave
 var egg_random_drop_pos_chance := .25 # Chance for an egg to be dropped near target instead of randomly around the arena. Chance varies depending on the wave
 
 @export var starting_wave := 7 # FOR TESTING ONLY: manually set the first wave when the level starts

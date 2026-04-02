@@ -58,7 +58,7 @@ size = Vector3(1, 100, 15)
 
 [node name="MiteLevelMainArena" type="Node3D"]
 script = ExtResource("1_tjf6h")
-js_random_drop_pos_chance = 0.4
+near_target_drop_max_radius = 24.0
 starting_wave = 0
 egg_waves = [{
 "Chances": [0, 1, 0, 0],
