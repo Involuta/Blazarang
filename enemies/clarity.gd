@@ -142,10 +142,10 @@ func frames(num: int) -> float:
 	return num * get_physics_process_delta_time()
 
 func head_light_high():
-	get_tree().create_tween().tween_property(head_light, "light_size", full_head_brightness, .3)
+	get_tree().create_tween().tween_property(head_light, "light_energy", full_head_brightness, .3)
 
 func head_light_low():
-	get_tree().create_tween().tween_property(head_light, "light_size", base_head_brightness, .3)
+	get_tree().create_tween().tween_property(head_light, "light_energy", base_head_brightness, .3)
 
 func on_head_hit(damage: int):
 	if damage >= stagger_damage_threshold and behav_state != STAGGERED:

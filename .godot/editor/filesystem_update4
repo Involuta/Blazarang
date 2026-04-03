@@ -32,3 +32,4 @@ res://enemies/clarity_head.tscn
 res://levels/snow_level/snow_level.tscn
 res://levels/snow_level/snow_level_viewcontrol.tscn
 res://levels/snow_level/snow_level_background.tscn
+res://enemies/clarity.gd

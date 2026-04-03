@@ -4,23 +4,29 @@
 [ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="2_po5lc"]
 [ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="3_f8ye4"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_p1rwj"]
-sky_top_color = Color(0.384314, 0.454902, 0.54902, 1)
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o2vos"]
+sky_top_color = Color(0.396078, 0.462745, 0.560784, 1)
+sky_horizon_color = Color(0.352941, 0.423529, 0.509804, 1)
+ground_bottom_color = Color(0.301961, 0.364706, 0.447059, 1)
+ground_horizon_color = Color(0.352941, 0.423529, 0.509804, 1)
+ground_curve = 0.113137
 
-[sub_resource type="Sky" id="Sky_4kc4h"]
-sky_material = SubResource("ProceduralSkyMaterial_p1rwj")
+[sub_resource type="Sky" id="Sky_d33do"]
+sky_material = SubResource("ProceduralSkyMaterial_o2vos")
 
 [sub_resource type="Environment" id="Environment_fxt2w"]
 background_mode = 2
-sky = SubResource("Sky_4kc4h")
+sky = SubResource("Sky_d33do")
 ambient_light_color = Color(0.56, 0.9, 1, 1)
 tonemap_mode = 2
 glow_enabled = true
-fog_sky_affect = 0.1
+fog_enabled = true
+fog_light_color = Color(0.352941, 0.423529, 0.509804, 1)
+fog_sky_affect = 0.6
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.0
+volumetric_fog_density = 0.036
+volumetric_fog_albedo = Color(0.396078, 0.462745, 0.560784, 1)
+volumetric_fog_emission = Color(0.396078, 0.462745, 0.560784, 1)
 volumetric_fog_anisotropy = 0.6
 
 [node name="Level" type="Node3D"]
