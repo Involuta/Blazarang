@@ -326,8 +326,8 @@ spread = 6.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = -12.0
 initial_velocity_max = -6.0
-scale_min = 0.03
-scale_max = 0.06
+scale_min = 0.01
+scale_max = 0.03
 
 [sub_resource type="FogMaterial" id="FogMaterial_unqot"]
 emission = Color(0.717647, 0.717647, 0.717647, 1)
@@ -538,7 +538,7 @@ mesh = SubResource("PrismMesh_ocn5u")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 60, 2.08165e-12)
 cast_shadow = 0
 custom_aabb = AABB(-2000, -2000, -2000, 4000, 4000, 4000)
-amount = 120
+amount = 180
 lifetime = 12.0
 visibility_aabb = AABB(-2000, -2000, -2000, 4000, 4000, 4000)
 process_material = SubResource("ParticleProcessMaterial_bteud")

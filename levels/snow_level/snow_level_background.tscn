@@ -30,7 +30,7 @@ gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = -4.5
 initial_velocity_max = -1.5
 scale_min = 0.01
-scale_max = 0.06
+scale_max = 0.03
 
 [node name="SnowLevelBackground" type="Node3D"]
 

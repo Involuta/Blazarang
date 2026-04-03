@@ -1,4 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://b70he2vkcfalc"]
+[gd_scene load_steps=17 format=3 uid="uid://b70he2vkcfalc"]
+
+[ext_resource type="Texture2D" uid="uid://namwvkk58jhe" path="res://sprites/blurry_circle.png" id="1_221de"]
 
 [sub_resource type="Animation" id="Animation_7waiw"]
 resource_name = "BackToCenterMedium"
@@ -31,6 +33,66 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(-0.523599, 3.48787e-16, 3.48787e-16), Vector3(0, 0, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BaseOffsetRotation/HeadMesh/HeadLight/HeadSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.462745, 0.811765, 1, 1), Color(0.42, 0.69, 1.6, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BaseOffsetRotation/HeadMesh/HeadLight/HeadSphere:mesh:material:emission")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.419608, 0.690196, 1, 1), Color(0, 0.415686, 0.768627, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BaseOffsetRotation/HeadMesh/HeadLight/HeadSprite:transparency")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BaseOffsetRotation/HeadMesh/HeadLight/HeadSprite:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.81, 0.81, 0.81), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BaseOffsetRotation/HeadMesh/HeadLight/HeadSphere:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
+}
 
 [sub_resource type="Animation" id="Animation_t00eq"]
 resource_name = "CenterToBackMedium"
@@ -62,6 +124,66 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(-0.523599, 3.48787e-16, 3.48787e-16)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BaseOffsetRotation/HeadMesh/HeadLight/HeadSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.42, 0.69, 1.6, 1), Color(0.462745, 0.811765, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BaseOffsetRotation/HeadMesh/HeadLight/HeadSphere:mesh:material:emission")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0.415686, 0.768627, 1), Color(0.419608, 0.690196, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BaseOffsetRotation/HeadMesh/HeadLight/HeadSprite:transparency")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BaseOffsetRotation/HeadMesh/HeadLight/HeadSprite:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(0.81, 0.81, 0.81)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BaseOffsetRotation/HeadMesh/HeadLight/HeadSphere:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_d44v0"]
@@ -177,9 +299,8 @@ roughness = 0.12
 refraction_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_idhv3"]
-albedo_color = Color(0.419608, 0.690196, 1, 1)
 emission_enabled = true
-emission = Color(0.419608, 0.690196, 1, 1)
+emission = Color(0, 0.415686, 0.768627, 1)
 emission_energy_multiplier = 2.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_vc7yt"]
@@ -213,5 +334,15 @@ omni_range = 3.0
 omni_attenuation = 0.06
 omni_shadow_mode = 0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="BaseOffsetRotation/HeadMesh/HeadLight"]
+[node name="HeadSprite" type="Sprite3D" parent="BaseOffsetRotation/HeadMesh/HeadLight"]
+transform = Transform3D(2.08165e-12, -7.26051e-28, 7.26051e-28, 7.26051e-28, 2.08165e-12, -7.26051e-28, -7.26051e-28, 7.26051e-28, 2.08165e-12, 0, 0, 0)
+transparency = 1.0
+modulate = Color(0.42, 0.69, 1.6, 1)
+billboard = 1
+shaded = true
+double_sided = false
+texture = ExtResource("1_221de")
+
+[node name="HeadSphere" type="MeshInstance3D" parent="BaseOffsetRotation/HeadMesh/HeadLight"]
+transform = Transform3D(2.08165e-12, 0, 0, 0, 2.08165e-12, 0, 0, 0, 2.08165e-12, 0, 0, 0)
 mesh = SubResource("SphereMesh_vc7yt")
