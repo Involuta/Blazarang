@@ -105,7 +105,7 @@ var transparent_mat := preload("res://textures/clear_tile.tres")
 @onready var mhp := $MeleeHitboxPivot
 @onready var arm_meshes := $ClarityArmMeshes
 @onready var body_meshes := $ClarityBodyMeshes
-@onready var head_light := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/HeadLight
+@onready var head_light := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/BaseOffsetRotation/HeadMesh/HeadLight
 @onready var head_bone := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2
 @onready var head_mesh := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
 
@@ -142,10 +142,10 @@ func frames(num: int) -> float:
 	return num * get_physics_process_delta_time()
 
 func head_light_high():
-	get_tree().create_tween().tween_property(head_light, "light_energy", full_head_brightness, .3)
+	get_tree().create_tween().tween_property(head_light, "light_size", full_head_brightness, .3)
 
 func head_light_low():
-	get_tree().create_tween().tween_property(head_light, "light_energy", base_head_brightness, .3)
+	get_tree().create_tween().tween_property(head_light, "light_size", base_head_brightness, .3)
 
 func on_head_hit(damage: int):
 	if damage >= stagger_damage_threshold and behav_state != STAGGERED:

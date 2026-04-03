@@ -1,3 +1,4 @@
+MeshInstance3D
 FogVolume
 OmniLight3D
 GPUParticles3D
@@ -6,7 +7,6 @@ CollisionShape3D
 Area3D
 BossHurtbox
 Hitbox
-MeshInstance3D
 AnimationPlayer
 NavigationAgent3D
 CharacterBody3D
