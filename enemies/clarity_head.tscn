@@ -43,7 +43,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.462745, 0.811765, 1, 1), Color(0.42, 0.69, 1.6, 1)]
+"values": [Color(0.709804, 0.894118, 1, 1), Color(0.42, 0.69, 1.6, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -79,7 +79,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0.81, 0.81, 0.81), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
+"values": [Vector3(1, 1, 1), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -135,7 +135,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.42, 0.69, 1.6, 1), Color(0.462745, 0.811765, 1, 1)]
+"values": [Color(0.42, 0.69, 1.6, 1), Color(0.709804, 0.894118, 1, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -171,7 +171,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(0.81, 0.81, 0.81)]
+"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -299,9 +299,11 @@ roughness = 0.12
 refraction_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_idhv3"]
+roughness = 0.6
 emission_enabled = true
 emission = Color(0, 0.415686, 0.768627, 1)
 emission_energy_multiplier = 2.0
+subsurf_scatter_strength = 0.01
 
 [sub_resource type="SphereMesh" id="SphereMesh_vc7yt"]
 material = SubResource("StandardMaterial3D_idhv3")
@@ -337,12 +339,14 @@ omni_shadow_mode = 0
 [node name="HeadSprite" type="Sprite3D" parent="BaseOffsetRotation/HeadMesh/HeadLight"]
 transform = Transform3D(2.08165e-12, -7.26051e-28, 7.26051e-28, 7.26051e-28, 2.08165e-12, -7.26051e-28, -7.26051e-28, 7.26051e-28, 2.08165e-12, 0, 0, 0)
 transparency = 1.0
+cast_shadow = 0
 modulate = Color(0.42, 0.69, 1.6, 1)
 billboard = 1
-shaded = true
 double_sided = false
+no_depth_test = true
 texture = ExtResource("1_221de")
 
 [node name="HeadSphere" type="MeshInstance3D" parent="BaseOffsetRotation/HeadMesh/HeadLight"]
 transform = Transform3D(2.08165e-12, 0, 0, 0, 2.08165e-12, 0, 0, 0, 2.08165e-12, 0, 0, 0)
+cast_shadow = 0
 mesh = SubResource("SphereMesh_vc7yt")

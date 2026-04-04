@@ -1,6 +1,6 @@
+FogVolume
 Sprite3D
 MeshInstance3D
-FogVolume
 OmniLight3D
 GPUParticles3D
 Node3D
@@ -30,4 +30,3 @@ SkeletonIK3D
 RigidBody3D
 Hurtbox
 RemoteTransform3D
-FuncGodotMap
