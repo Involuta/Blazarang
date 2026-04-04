@@ -33,3 +33,7 @@ res://levels/snow_level/snow_level.tscn
 res://levels/snow_level/snow_level_viewcontrol.tscn
 res://levels/snow_level/snow_level_background.tscn
 res://enemies/clarity.gd
+res://enemies/enemy_anims/clarity_doubleslice_forward_delayed.res
+res://enemies/enemy_anims/clarity_doubleslice_forward_immediate.res
+res://enemies/enemy_anims/clarity_doubleslice_left_delayed.res
+res://enemies/enemy_anims/clarity_doubleslice_left_immediate.res
