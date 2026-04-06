@@ -436,7 +436,7 @@ bones/16/position = Vector3(-2.39, 2.94367, -0.755941)
 bones/16/rotation = Quaternion(0.321999, -0.24697, 0.885482, 0.226373)
 
 [node name="Hat_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1.43, -8.8226e-09, 1.55568e-09, 8.82262e-09, 1.34376, -0.489089, 1.55556e-09, 0.489089, 1.34376, -4.28408e-08, 14.3176, 2.76757)
+transform = Transform3D(1.43, -8.82231e-09, 1.55654e-09, 8.82264e-09, 1.34376, -0.489089, 1.55467e-09, 0.489089, 1.34376, -5.58794e-09, 14.3176, 2.76757)
 
 [node name="ClarityHead" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2" index="1" instance=ExtResource("3_05q7x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -466,7 +466,7 @@ opponent_hitboxes = ["PlayerHitbox"]
 shape = SubResource("SphereShape3D_g3bkq")
 
 [node name="Arm_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.26121, 0.964811, -0.0301537, -0.952366, 0.252496, -0.17101, -0.157379, 0.0733868, 0.984808, -5.13331, 8.87891, 1.46631)
+transform = Transform3D(0.26121, 0.964811, -0.0301536, -0.952366, 0.252496, -0.17101, -0.157379, 0.0733867, 0.984808, -5.13331, 8.87891, 1.46631)
 
 [node name="EnemyHitbox" type="Area3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2" index="1"]
 transform = Transform3D(0.996105, -0.0881817, 1.49527e-15, 0.0881823, 0.996105, -1.5173e-14, -3.13584e-15, -1.27004e-14, 0.999999, 1.53031, -16.5495, 1.07427e-07)
@@ -479,34 +479,34 @@ damage = 1
 shape = SubResource("CapsuleShape3D_bvea4")
 
 [node name="Center_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(1, -3.13242e-09, 2.74071e-10, 3.13243e-09, 0.984808, -0.173648, 2.73986e-10, 0.173648, 0.984808, -2.42144e-08, 9.93105, 1.76084)
+transform = Transform3D(1, -3.13242e-09, 2.74696e-10, 3.13254e-09, 0.984808, -0.173648, 2.73389e-10, 0.173648, 0.984808, 1.30385e-08, 9.93105, 1.76083)
 
 [node name="Center_2" parent="ClarityArmMeshes/Armature/Skeleton3D/Center_2" index="0"]
 visible = false
 surface_material_override/0 = SubResource("StandardMaterial3D_chxic")
 
 [node name="MiddleLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 9.20232e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.521672, 0.156011, -0.548505)
+transform = Transform3D(0.766044, 0.219846, 0.604023, -5.58128e-08, 0.939693, -0.34202, -0.642788, 0.262002, 0.719846, -0.521672, 0.156014, -0.548502)
 visible = false
 
 [node name="FrontLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 8.12646e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.521674, 0.156011, -0.548507)
+transform = Transform3D(0.766045, 0.219846, 0.604022, 2.60171e-08, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.521668, 0.156011, -0.548509)
 visible = false
 
 [node name="BackLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 4.95209e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.521672, 0.15601, -0.548507)
+transform = Transform3D(0.766045, 0.219846, 0.604023, -3.1905e-07, 0.939693, -0.342019, -0.642788, 0.262002, 0.719847, -0.521672, 0.156011, -0.548502)
 visible = false
 
 [node name="MiddleRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 8.16685e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.521674, 0.156011, -0.548507)
+transform = Transform3D(0.766045, 0.219846, 0.604022, 2.49775e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719846, -0.52167, 0.156015, -0.548505)
 visible = false
 
 [node name="FrontRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -1.52428e-07, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.521675, 0.156011, -0.548506)
+transform = Transform3D(0.766045, 0.219847, 0.604023, -6.22055e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719847, -0.521674, 0.15601, -0.548503)
 visible = false
 
 [node name="BackRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 6.35848e-09, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.521675, 0.156011, -0.548506)
+transform = Transform3D(0.766045, 0.219847, 0.604022, -9.28266e-07, 0.939692, -0.34202, -0.642787, 0.262002, 0.719847, -0.521674, 0.156008, -0.548504)
 visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
