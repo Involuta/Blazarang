@@ -34,3 +34,5 @@ res://levels/snow_level/snow_level_viewcontrol.tscn
 res://levels/snow_level/snow_level_background.tscn
 res://enemies/x_boss.tscn
 res://enemies/x_laser_combo_ball_projectile.tscn
+res://textures/solid_light_gray_tile.tres
+res://levels/x_boss_level/x_boss_level1_viewcontrol.tscn
