@@ -3,18 +3,26 @@ extends Hurtbox
 
 var original_max_health := 100.0
 
-var base_recovery_rate := .25
-var fast_recovery_rate := .5
+@export var base_recovery_rate := .25
+@export var fast_recovery_rate := .5
 var recovery_rate := .5
-
-var recovery_delay := 1.0
+@export var recovery_delay := 1.0 # Time after getting hit before recovery begins
 var recovery_delay_remaining := 1.0
 @export var recovery_disabled := false # Exported so that it can be set via anim keyframes
 var recovery_active := false # This really means "Cotu is trying to recover". If recovery_disabled, recovery_active does not recover stability
 
 var damage_indicator_value := 100.0
 
-var destab_invin_time := 1.0
+@export var destab_invin_time := 1.0
+
+var frostbite_buildup := 0.0 # Once this number hits the current frostbite stage threshold, frostbite stage increments
+var current_frostbite_stage_threshold := 0.0 # frostbite buildup needed to progress frostbite stage
+var current_frostbite_stage := 0 # 0 = no frostbite, 1-3 = frostbite. This is the index into the frostbite_stage_thresholds list
+@export var frostbite_stage_thresholds := [ # Each attack will deal around 10 frostbite buildup on average on a clean direct hit
+	15.0,
+	30.0,
+	30.0,
+]
 
 # When Cotu gets grabbed, his position is set to the hitbox's parent
 @export var opponent_grab_hitboxes := []
@@ -54,6 +62,13 @@ func receive_hit(damage: float, hitter):
 	if recovery_active:
 		damage_indicator_value = health
 	reset_recovery_delay()
+	
+	"""
+	if hitbox.frostbite_buildup + frostbite_buildup > current_frostbite_threshold:
+		current_frostbite_stage += 1
+		frostbite_buildup = 0
+	"""
+	
 	super(damage, hitter)
 
 func self_hit(damage: float):

@@ -36,3 +36,7 @@ res://enemies/x_boss.tscn
 res://enemies/x_laser_combo_ball_projectile.tscn
 res://textures/solid_light_gray_tile.tres
 res://levels/x_boss_level/x_boss_level1_viewcontrol.tscn
+res://cotu/CotuControl.gd
+res://general_scripts/hitbox.gd
+res://cotu/CotuHurtbox.gd
+res://general_scripts/hurtbox.gd
