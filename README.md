@@ -1,4 +1,4 @@
-Blazarang Ideas Doc Backup - 3/21/2026
+Blazarang Ideas Doc Backup - 3/27/2026
 
 Production Processes
 
@@ -473,12 +473,15 @@ Flatmite
 Make mites reorient and adjust their height based on the angle of the plane they’re walking on (in ParamiteProcAnimMeshes script)
 Allow flatmite to run so fast it can go flying off the slope it’s on
 Make paramites rotate smoothly when following but randomly spin when retreating, making them look panicked and disoriented
-Ground texture
+Mite attacks with front legs and jaws instead of a tongue stab
+Front pairs rise menacingly and mouth opens. Feet converge at a point in front of the mite, pulling the prey to the mouth that closes
+Consider making the hit stop the player’s mvmt
+Replace jumping spider front hitbox with grab anim
 Web textures
 Spitweb (projectile fired by paramite and flatmite)
 Bigweb (web released from bigweb egg dropped during jumping spider phase)
 Egg break particles/anims
-Mite footstep particles and/or footprints
+Ground texture
 Make Cotu’s running dodge more clear that it’s a dodge (at the time of writing this, he puts his hands behind his back and bends forward)
 Axrang overhead slam, arc slash, and melee hitbox increase in damage for every damage buff the axrang has (do this once you add damage indicator UI)
 Improve enemy hit effects
@@ -2161,7 +2164,7 @@ Idea: defeating Snowflake gives player option of either flight/hovering (fast mv
 Gateway boss between low-mid level grunts and insane planet destroyers
 First instance of a god not being friendly and/or communicative towards Cotu. Transition character from his friends/acquaintances (Gauntlet, X, Mite Lord?) to strangers/enemies (possible kidnapper bosses who try to stop Cotu from gaining the experience to win the next tourney)
 Story:
-The crew is trying to get somewhere (destination undecided), but Clarity’s gigantic realm is in the way, and the blizzard in it is so turbulent and cold that the ship can’t fly through it. The crew attempt to contact anyone in the realm via wireless signal, but get no response/noise. Since the triplets are too important and take too long to regenerate, Cotu enters the realm to ask the god to take down the blizzard if possible.
+The crew is trying to get through the Great Void, but along the way they happen to encounter a stray comet on a collision course with the ship. Despite the crew’s evasive maneuvers, the comet seems to follow them, which is when they realize it’s actually a realm. By the time they realize it, it’s too late and they’re trapped in the realm’s raging blizzard. The crew attempt to contact anyone in the realm via wireless signal, but get no response/noise. Since the triplets are too important and take too long to regenerate, Cotu enters the realm to ask the god to take down the blizzard if possible.
 When Cotu first enters the realm, he encounters nothing but a frigid snow wasteland in the dead of night with a heavy blizzard. The only light source is himself; the sky can’t be seen through the blizzard fog. Eventually, he encounters a collection of floating shards with an eyeball in the center, watching him. He notices that embedded in the iris is a soul, confirming to him that this is the realm’s god and not an auto-sentry. He tries talking to the god, but it doesn’t speak nor move. He gives a shard the lightest touch, and it slashes him as the god awakens
 In Phase 1, the soul is messy: a distorted hexagon with spikes, tears, and other flaws around it. Its body is a creepy chaotic collection of floating shards in heavy snowfall, almost like a 3D snowflake. The sky becomes a bit brighter than it was during the boss intro
 In phase 2, its soul becomes more (but not fully) symmetrical/cleans itself somewhat, its shards reshape to form a dress, and the eye reforms into/grows a wide-brimmed hat atop the dress. The sky brightens up to a morning fog feel and the snowfall becomes normal
@@ -2205,23 +2208,41 @@ Cotu: “Set the microwave to freezer mode.”
 Greg: “Roger.”
 Camera cuts to snowflake’s face in Cotu’s palms, then cuts to snowflake inside the freezer-microwave. The freezer is facing a window; snowflake is staring into space
 Greg: “Pretty nice view, huh?”
-Clarity: “Seeing my realm from the outside for the first time, it’s…surreal. And somehow, softly,” she says in a whispered breath: “terrifying.” Camera is pointed towards the realm, making it look small and distant.
+Clarity: “Seeing my realm from the outside for the first time, it’s…surreal. And somehow,” she says in a whispered breath: “terrifying.” Camera is pointed towards the realm, making it look small and distant.
 Greg: “Woah.”
 Clarity: “...”
 Greg: “That just gave me chills.” Pause. “Hehe. Get it?”
-Clarity: “What’s more terrifying, is that I don’t have the strength to entomb you in permafrost for your impudence.”
+Clarity: “What’s more terrifying, is that I don’t have the strength to permafreeze you for your impudence.”
 Greg: “...You remind me of someone. I gotta introduce him to you someday.”
 Cut to Cotu and Pilot.
 Pilot: “It’s nice having another guest onboard.”
 Cotu: “I’m glad you feel that way, ‘cause she’s here to stay.”
-Pilot: “What will happen once her 3 days are up? Do you know?”
-Cotu: “No. I asked her, but she doesn’t know. She’ll probably just turn into pieces and wake up back home again.”
+Pilot: “What will happen once her 3 days are up?”
+Cotu: “She doesn’t know. She’ll probably just turn into pieces and wake up in her realm again.”
 Pilot: A short pause. Pilot looks a bit sad for a moment. “Then we’d better show her as much of the universe as we can before then, right captain?”
 Cotu: “Obviously.”
 Pilot smiles.
+Story Idea: Defeat
+Cotu and Pilot are buried in snow on the ship
+Cotu: “Somebody’s gonna notice we’re gone and come looking for us. Once they enter the void, this realm will find them, like it found us.”
+Pilot: “...yeah.”
+Cotu: “...We’re not going to be trapped here forever. But…we’re probably not going to make it to the gala.”
+Pilot: “...You know, I remember looking at this void a while back, on a map. It was never this big, as far as I can remember.”
+Cotu looks at Pilot
+Pilot: “There were more stars. Dotted all along the edges. But now they’re gone.”
+Cotu: “Maybe they fused with the nearby strands.”
+Pilot: “No, gravity doesn’t work that fast. What must have happened was…this blizzard consumed them all. It ate the stars.”
+Cotu: “...That’s crazy.”
+A long silence.
+Cotu: “Anything else you want to talk about?”
+Pilot doesn’t respond
+Cotu: “Pilot?”
+Cotu: “...”
+Cotu: “X…can you-”
+Cotu freezes
 Cotu’s frostbite status naturally builds up over time. Some thing(s) in the fight (could be certain attacks, environment zones/hazards, etc.) increase Cotu’s frostbite status on contact
 Frostbite has 3 stages:
-Stage 0 (no frostbite): Cotu behaves normally, but after enough cold is accumulated, he reaches stage 1
+Stage 0 (no frostbite): Cotu behaves normally, but after enough frostbite buildup is accumulated, he reaches stage 1
 Stage 1 (Ominous): Stability regen and movement are slightly slowed, but stability cost of all abilities (dodging, attacking, etc.) decreases
 Reaching Stage 1 is expected, almost inevitable in the fight unless you play nearly perfectly
 Stability regen debuff is about half as potent as mite infestation
@@ -2288,6 +2309,8 @@ Make early sketches
 
 
 Her body kind of resembles an upside down hand; maybe lean into this concept a bit more
+Lion’s mane jellyfish motif
+
 Make Blender 3D sketches
 
 Both pics have the same dress shard angles. Left: all dress shards point to head. Right: freestyle design according to what I liked
@@ -2319,6 +2342,7 @@ SSLHalfWindup
 SSLFullWindup
 SSLRelease
 SSLEntirety
+Feedback from the future: the problem with these single slice stages is that progression between stages takes way too long. The stage transitions are slow in order to be subtle, and combined with the pauses between stages, Clarity will spend far too long doing nothing threatening. This would only work if a bunch of enemies were spawning
 Make shard hexagonal instead of rhombic
 Make more complicated melee attacks
 Parry Countercombo
@@ -2474,20 +2498,161 @@ Idea: make the jump_speed somewhat low so it does a bunch of little hops like bu
 Add hitboxes later when you make the frostbite mechanic
 Fix Clarity’s arm/shoulder looking off-center when looking beside/behind herself. Maybe she should only be able to turn her arm meshes toward the target while circling, since the rest of her body rotates towards the target too?
 Maybe she should only stomp or do big mvmt attacks when moving straight? This makes sense for the fight bc when she moves straight, the player needs to chase her, which encourages the player to get close, putting them at higher risk of getting hit
-Current task
-Make stomps choosable via anim tree and attack code
+To test this, implement stomp anims
+Re-center the center shard so it’s aligned with the middle dress shards. The asymmetry formed by the center shard didn’t appear intentional since there aren’t other striking asymmetrical aspects of Clarity’s design
+Reimport stomp anims with the new center shard
+For left and right stomps, make stomp shards go straight down instead of sideways so there aren’t any gaps in the frost clouds where the player can stay close
+Make stomps choosable in anim tree and add stomp to anim tree conditions and attack code
+Make each stomp get chosen depending on where the target is relative to Clarity
+Stop Clarity from only choosing the left stomp no matter where the target is
+Turns out this bug was simply caused by me forgetting to put the “Stomp” condition in the anim tree transition
 Stomps should stop Clarity from moving once the shards are embedded in the ground, then let her move again when the shards are pulled out
+Update code to stop Clarity from moving if a new var “stationary” is true
+Add func set_stationary to set stationary to true
+Add anim keyframes in stomp anims that call set_stationary when shards are embedded in floor and when they’re pulled out. When Clarity pulls out the shards, the mvmt she was doing pre-embed should continue
+For more testing, implement big move anim selection and mvmt
+Implement Jump Shot
+Make Blender anim that’s a copy of jump shot to walk left named JumpShotToWalkLeftNoActions. One anim tree will use the normal jump shot anim, which has functional keyframes like method calls, and the other will use the no actions version so that same actions aren’t done twice
+Before jump shot, fake head (head that faces towards player) and arm meshes turn forward, then fake head goes invisible and body anim tree head becomes visible
+Both body and arm anim tree do the same anim at the same time
+Jump shot mvmt
+Accelerate forward
+Jump high
+Start facing player decelerating to a stop mid-air
+Gently float down
+Make the direction her head/arm/body look (look_state) independent of her behav_state
+The look dir during the curved state is set with information obtained within the curve frame func, so isn’t look state not independent of behav_state? Correct. Retool code to not use look dir; each look state code block should decide its own look dir
+Check/clean up code so that turn speed is used consistently in look state funcs
+Add transition from walk to run forward
+Add landing anim (dress shards spread and recompress and chest goes down and up upon hitting the ground)
+Clarity’s rotation during the ascent looks unnatural when viewed from her right since she rotates (in y axis) counterclockwise in the anim, then clockwise towards the target. Make another jump shot anim mirrored across her forward axis for when the player’s to her right
+Make the anim selectable in anim tree depending on whether the player’s to her left or right
+Make blade linger longer in the ground. Remember to move forward all Godot action keyframes that happen after the blade de-penetrates
+Make jump shot end attack sooner so she starts circling while recovering from the landing. When she starts circling after the landing recovery it looks sudden and rigid
+When Clarity decides to do a jump shot, she should do the dip and rise anim, THEN check whether the target is to her left or right, then do the appropriate rotation. Currently, she checks where the target is before the dip and rise, during which time the player can walk around to her other side
+Create new anims JumpShotDipRise and JumpShotDipRiseNoActions in Blender and import them to Godot
+Copy functional keyframes from the dip-rise sections of original jump shot anims to the new dip-rise anims
+Remove dip-rise functional keyframes from original jump shot anims and move remaining functional keyframes back 75 frames
+In Blender, remove dip-rise keyframes from jump shot anims and remove non dip-rise keyframes from dip-rise anims
+In anim tree, make the JumpShot condition cause a transition to JumpShotDipRise (or noactions version in body anim tree) then JumpShotDipRise transitions to normal or CW
+As it turns out, there’s a bit of delay between the dip rise anim and the rest of the jump shot when transitioning between the 2 anims in the anim tree. Just keep everything in 1 anim. If the player happens to cross Clarity’s forward vec in between her rush forward and jump, it is what it is. The animation when she rotates the opposite direction to where the player is looks good too
+Undo all diprise-related changes above
+Will also remove CW version of jump shot because the normal CCW version has much more arm movement, and the CCW version doesn’t even look bad when viewed from the right. The only angle where it looks bad is when the player is behind Clarity to her right, but that can be rectified by making Clarity do a different attack when the player is behind her to her right, like Square
 Maybe she could do thrust attacks when moving straight? Then the shoulder orientation won’t stand out
-When would Clarity ever use the projectile attacks if she’s rarely facing toward the player? After she uses Square and lands from the sky. She’ll land facing the player at just the right dist to use any projectile attack. This’ll be a staple combo of hers: Square → projectile attack
+The problem is thrust attacks are difficult to land given that she’s so much bigger than Cotu. Come back to this later and do the ideas you’re more certain about first
+Maybe she could have an attack where she drags the tip of her blade across the ground to create a frost field hazard, summon enemies, or both?
+Not a bad idea, but come back to this later and do the ideas you’re more certain about first
+When would Clarity ever use the projectile attacks if she’s rarely facing toward the player? After she uses Square or Jump Shot. She’ll land facing the player at just the right dist to use any projectile attack. These will be a staple combos of hers: Square/Jump Shot → projectile attack. Jump Shot leads into Walk Left attacks (so I don’t have to animate Jump Shot to Walk Forward) and Square leads into Walk Forward attacks
+Check if you can put a hitbox/hurtbox on a bone attachment, which would save you a ton of time by removing the need to animate hitbox position/rotation keyframes
+You can! But you had to make the hitbox much bigger and longer than her arm. This is fine since her arm moves so quickly in her attacks and is completely out of the way when she’s not attacking
+Why didn’t I do this for X or the Gauntlet enemies? I SHOULD HAVE. I would have lost a bit of fine-tuned control in exchange for loads of time. I thought I spent a lot of time trying to get bone attachments to work for X, and I never followed through on it for some reason I don’t remember. I thought it was something to do with rotations being off, but when I tried attaching fake blade meshes (just capsules) to the hand bone attachments, they worked perfectly as blades! I tested RightArmSlice, SlipnSlice, StrafeSlice, and DualBladeDash and it worked well for all of them! The blade wasn’t rotated correctly for some parts, but they could be fixed just by adjusting X’s hand rotation in Blender. Yes, it wouldn’t work for attacks where the arm detaches from X like ChainSlice, but I could just make blade keyframes for those attacks specifically as special exceptions. Either I wanted too much control over tiny details that weren’t worth the time, or I just didn’t know about bone attachments
+Implement Single Shot anim (do Walk Left version so you can test JumpShotToWalkLeft to SingleShot)
+Add Single Shot anim to anim tree
+Issue: when Clarity rotates around while the projectile shard is penetrated in the ground, the shard also moves, which looks kinda funny. Not that noticeable since Clarity moves so slowly and the ground doesn’t really have frames of reference to show how far the shard moved
+Solution 1: stop Clarity from moving while shard is in the ground. Kinda lame since she has no gameplay nor story reason to stop moving (it’s just so the animation doesn’t look wonky)
+Solution 2: make the shard stay in the ground and become an enemy. Clarity then won’t retract it though, which sucks because the anim looks cool
+Single shot won’t accomplish nearly as much as spiral or spread, so is it even worth using? Possibly not. Implement spiral or spread first
+Implement Spiral anim
+Possible Issue: Spiral has such a long startup that by the time she fires the shards, the player will already be at her side. Test this by making Clarity choose Spiral immediately after Jump Shot finishes
+This is true; even with Cotu’s walk speed halved, Clarity’s dash speed increased 33%, and her long-dist wait (the time btwn her landing and choosing Spiral) reduced to 0-0.1, Cotu gets to Clarity long before spiral fires the shards
+The point of this task “When would Clarity ever use the projectile attacks…” is to see what a big mvmt → projectile attack would look/feel like. Now that you have jump shot to spiral, you don’t need to implement square nor spiral yet. Prioritize more core features like head stun and blizzard
+Implement Square anim + mvmt (later)
 Also consider taking the retreat from RegenShards and using that as a way for her to transition from a walk state to a projectile attack
-Make Clarity staggerable when hit in face weak spot with power throw and ax
-Create the blizzard that’s everywhere except for the area right around Clarity
-Blizzard safe zone extends just barely past Clarity’s blade
+The problem with this is that the retreat is a short burst instead of a long swoosh wave-like mvmt, and there’s no cool attack during the retreat, unlike js and square
+Make Clarity staggered when she gets hit in the head while vulnerable
+Make Clarity stagger anim
+Make head hurtbox
+In Clarity’s script, add an on_head_hit func that connects to head hurtbox’s hit_received signal
+If damage is over stagger_damage_threshold, stagger occurs
+Stagger func deactivates anim tree and plays stagger anim on anim player. This would be cleaner if anim tree root was a blend tree instead of state machine so you could overwrite the state machine output but that wouldn’t be worth the time
+Stagger func sets behav_state to STAGGERED
+Stagger func makes Clarity move backward a bit
+Fix bug where Clarity has 1 glitched weird frame when anim trees are reactivated after stagger
+You proved that the anim tree reactivation causes the glitch by reactivating them before and after the stagger anim completed, which always caused the glitch frame
+Try using state_machine.travel(“Stagger”), which either takes the shortest path to an anim or teleports to it
+var state_machine = animation_tree["parameters/playback"]
+state_machine.travel("SomeState")
+When Stagger occurs, try programmatically adding a Stagger node, adding a transition from the current node to that node, then taking the transition path, then deleting the node and going back to the previous node after Stagger anim ends - didn’t try this since state_machine.travel worked and made more sense
+Try making a default anim that’s the same as WalkLeftAggressive  - didn’t try this since state_machine.travel worked and made more sense
+When Clarity’s anim meshes head switches visibility with her dynamic head, there’s a noticeable instant change. To fix this, make reset head rotation func
+Dynamic head’s rotation is set to a default rotation towards the player
+Instead of this, the head’s rotation is now set manually via a func parameter. The plan for switching head visibility is for me to go to the keyframe where I want the transition to happen, make both heads visible, rotate the dynamic head so that it matches the anim meshes head, get the dynamic head’s current rotation, then put that into the set head rotation func
+For some reason, when I reset the head’s rotation, then start calling the lerp function, the head instantly snaps into its final position instead of smoothly moving towards the final position
+I still don’t know what caused the instant snapping because the final solution’s code is the same, but to fix the issue, I just had to make ClarityHead not top level
+Create the blizzard that’s everywhere except for the area right around Clarity. Blizzard safe zone extends just barely past Clarity’s blade
+Before making the frostbite mechanic, make the blizzard. For now, the blizzard simply deals damage over time
+Make a gigantic damage-over-time hitbox that covers the entire arena
+Make a Clarity arena script. In this script, check the distance btwn Cotu (not the target) and Clarity. If Cotu’s too far away (i.e. just out of Clarity blade range), activate the DOT hitbox. If he’s close, deactivate it
+Add blizzard particles
+Make snowflake mesh
+Create particles node parented to Clarity
+Ring emission shape; inner radius extends just beyond Clarity’s blade, outer radius is huge but doesn’t have to be the size of the arena
+Draw pass has snowflake mesh
+Make blizzard in background scene to add more layers to the snow
+Make head’s glowing weak spot
+Fix bug where head doesn’t look up during double slice → this happened bc head was parented to body meshes and not arm meshes, but body meshes doesn't play the attack animation, and the anim playback track on arm meshes couldn’t find the head
+Fix bug where OmniLight doesn’t appear
+Try deleting and re-adding omni light anim tracks. Since ClarityHead anims are also possibly problematic/glitchy since the anim player tracks didn’t originally point to it, try deleting ClarityHead tracks too
+110-180, 300-360/276-336
+Deleting the omni light tracks successfully restored the light
+Try setting light energy in RESET track → the light still didn’t show up, but in the absence of other omni light energy keyframes, the RESET track does successfully set light energy
+Try using tweens to set head brightness
+Make head mesh
+Make hat concave instead of a flat bottom
+Make head hollow on the top like a bowl, then put a long horizontal slit btwn the head and the hat to form an opening, then put the head light in the bowl
+This is better than the 2 eyes design from the sketches bc the 2 eyes design looks too human; this design is more inhuman. Human parallels should be vague and apparently unintentional
+It’s not possible to tell there’s a slit (it just looks like a slightly lower-rimmed bowl), but even if it were possible (e.g. by making a top on the gem, it would look more like a tough mask (like on a Dark Souls boss) than a soft weak spot
+Try making head a flat gem like the flatmite’s body, but more round
+The current diamond head with the pointed bottom fits in with the rest of the design’s sharp edges, but the head needs to look significantly weaker/softer than the rest of the body so it looks like a weak spot and it needs to catch the player’s attention by looking different
+The flat gem looks uninteresting af. Not ugly, but boring. At least the diamond looked interesting
+Try making head just a light and nothing else
+Try first with a sphere, then use a Sprite3D of a blurry circle
+Try adding fog around the head that falls down from it → fog hardly showed up in tests so I’ll work on other things for now
+Make head grow/shrink anims separate from head tilt so head can be tilted up and head can shrink between double slice slices
+Make the frostbite mechanic
+Add frostbite properties to Cotu
+Add frostbite_buildup property to Cotu
+Add current_frostbite_stage_threshold and current_frostbite_stage properties to Cotu
+Add export var frostbite_stage_thresholds, a list of the thresholds needed to progress to each new frostbite stage
+If each hit deals on average 10 frostbite buildup,
+Stage 1 begins after just 1-2 hits
+15 buildup, so 1 full hit and 1 minor mistake
+Stage 2 begins after 3 more hits (30)
+Stage 3 begins after 3 more hits (30)
+Add frostbite_buildup to hitbox code
+Give blizzard frostbite
+Give Clarity’s arm hitbox frostbite
+Make frostbite stage progression code in Cotu’s hurtbox
+Move all current frostbite properties from Cotu to his hurtbox since frostbite increases on hit. All Cotu himself needs to worry about is which frostbite stage he’s on so he knows what debuff applies, and for that, the hurtbox can tell Cotu when the frostbite progresses
+In on_hit, if hitbox.frostbite_buildup + frostbite_buildup > current_frostbite_threshold, current_frostbite_stage += 1 (if it’s less than len of frostbite_stage_thresholds), frostbite_buildup = 0, and current_frostbite_threshold is selected using current_frostbite_stage
+Move all “receive” code in hurtbox.gd to one func: receive_hit(hitbox, hitter). This way, you won’t have to make and call a separate method for each property of the hitbox (heal, damage, debuff, frostbite buildup)
+Make a blue health bar connected to Cotu’s frostbite
+Make a snow level script to control the frostbite bar, just like how the X boss level 1 script controls the X health bar
+In hindsight, shouldn’t both of these scripts be in the view control scene and not the level scene? The UI is at the viewcontrol level, not the level level. This doesn’t matter enough for me to care about fixing it
+Add health bar as a child of UIRoot in snow level view control
+Current task
+Make frostbite debuffs
+Frostbite doesn’t slow movement; the snow does. This way, the player doesn’t have to deal with mvmt speed that changes, which can be annoying and isn’t part of the challenge. The challenge is dodging and staying within Clarity’s attack range with lower mvmt speed
+Stage 1: Stability regen is slightly slowed, but stability cost of all abilities (dodging, attacking, etc.) decreases slightly
+Stability regen debuff is about half as potent as mite infestation
+Stage 2: Stability regen is slowed further, stability cost of abilities decreases slightly again, and damage taken from any attack is slightly increased
+Stability regen debuff is about as strong as mite infestation
+Stage 3: Stability regen stops and damage taken is slightly increased
 Make big-movement attacks like jump shot clear the blizzard, then the blizzard slowly creeps back in over time
+(Ideally) existing snow particles are blown away from Clarity via a particle attractor, then they stop falling around her
+When head is exposed but not brightened (e.g. between slashes in double slash), hitting it will deal damage but not stagger. When head is exposed and brightened, hitting it will stagger
 Give each dress shard its own hurtbox. Each dress shard can break after taking enough damage, and if enough shards are broken, Clarity must regenerate them
 The optimal range for the roserang to hit all the shards is also the optimal range for Clarity to hit you
-Add melee hitboxes
-Make melee hitbox pivot a child of Clarity meshes, not the Clarity boss bc Clarity boss’s global rotation y doesn’t change, so when the Clarity upper body meshes rotate, the melee hitbox pivot needs to rotate with it
+Let the player aim the power throw and axrang
+Implement Square anim + mvmt
+Issue: Clarity’s supposed to be intimidating, and with the current concept for Square, she flies high into the sky and stays unseen for a long time before landing, making her less oppressive (because she’s not there) and making the gameplay more tedious
+Solution 1: instead of flying high into the sky, she elegantly backflips into the air while flying backwards and slides back onto the ground instead of slamming. This also makes her more unique than X, who does a similar straight up → straight down slam (Triangle while headless → Volcano Dive)
+Idea: Spin
+Like an ice skater, Clarity leaps into the air, tucks in her arm and dress shards, and spins rapidly while decelerating to a stop midair. All of her dress shards then fire out in all directions, land, and become ice sprites. She then dives straight down into the ground and regenerates the shards
+Idea: Jump Shot creates a huge frost field that summons 3 ice sprites at once
+Idea: Whiteout - fog thickens, ice sprites spawn from the blizzard at an alarming rate, and gain the ability to approach Cotu even while he’s stationary. Clarity meanwhile does single slice stage progression (start passive → pause → subtle transition to aggressive → pause → subtle half windup → pause → subtle full windup → pause → attack)
+Idea: occasionally, songbird-like ice creatures will fly onto Clarity and stare at the target. They all fly away when she attacks, but there’s a slight chance they fly away beforehand to explore around
+Idea: Cotu can make snowballs and throw them with no stability cost (but making a snowball isn’t fast). Hitting an ice sprite with a snowball triggers its explosion
 
 Power Throw to Mark Rang Upgrade
 Power throw automatically homes to mark position when mark is active
@@ -2515,6 +2680,14 @@ Maybe give mobile gunner a scope mask
 Add Enemy Stun and Knockback
 All weapon hits except from shurikens stun gauntlet enemies momentarily, including axrang explosion
 Roserang power throw knocks a single enemy backward upon impact and stuns them. Knockback is decreased the larger the enemy is
+
+Body Upgrades
+Chosen in skill tree just like any other unlockable skill
+Body material (e.g. SiO2 glass, quartz, obsidian) - increases max health
+Faster reconstruction - increases num of attempts across entire run (indirectly increases attempts for each boss)
+Consider keeping upgrade system simple to avoid feature creep; before adding any more crazy synergy buffs, focus on direct health and damage upgrades
+
+Rush Buff: the less attempts the player has for a fight, the stronger they get
 
 Ultimate attacks
 Charged like an Ultimate Art in Elden Ring Nightreign. Charge accrues by:
@@ -2697,6 +2870,17 @@ Player uses the quotient to anticipate the next attack
 Boss uses the remainder in their prime factorization
 Boss’s goal is to assemble all numbers used in the prime factorization of their face number (e.g. if it’s 12, the factors are 2, 2, and 3)
 Once the prime factorization (PF) is complete, the boss celebrates and does a supermove before choosing another random face number
+
+Candy Cat
+Giant cat monster made of sugar crystals and candy bits
+Top of its head is 3 giant spikes forming a mask above its mouth, and its mouth looks like Denji’s from Chainsaw Man with big teeth and a wicked grin
+Mask spikes can fold back to form a mane, revealing crazy eyes underneath
+Head can twist around and upside down to make new expressions to frighten its enemy
+Back is covered in candy bits, chest is guarded by chocolate plates
+Tail is undecided, perhaps its soul is floats on its tail like a ring?
+Moves smoothly and seductively
+Idea: guards a secret wormhole that leads from the beginning of the game (gauntlet var 1) straight ot the gala
+Uses the candy bits on its body as projectiles
 
 Projectile Spammer: Microwave
 Idea: before the fight, you can unlock an endgame-level super powerful upgrade that deflects or destroys projectiles somehow. Undecided if this is done through the icon, one of the rangs, or something else entirely
@@ -3415,16 +3599,21 @@ Lore: no one has ever beaten The Edge except for Microwave
 
 3 Boss: Blackstar, Champion of the Gauntlet
 Thin black humanoid with diamond-like limbs and spiked gold mask
-Face concept art:
+Early face concept art:
 
 Body concept art (3D art by ChatGPT 5):
 
-Ropes loop around her back in 2 loops like short fly wings
+Idea: ropes loop around her back in 2 loops like short fly wings
 Make her shorter, rounder, and more compact to fit her personality and fighting style (she feels small and is hyperactive like a small animal or child)
 Fights using extremely long golden ropes, which she uses to grapple onto background elements and fly around or throw things at her enemy
 Can grapple onto her star-shaped soul. If her soul is at her position, she can grapple it and swing around it to change her momentum instantly
 Parries most projectiles most of the time (e.g. she parries shurikens while she’s not attacking)
 Outspeeds homing projectiles after gaining enough momentum
+Idea: stamina in speed mode and health in strength mode
+When she parries an attack, she loses stamina, which works like posture in Sekiro: Shadows Die Twice. She regenerates it slowly over time if she doesn’t parry. The more damage the attack has, the more stamina she loses when she parries
+If she’s hit by an attack while she’s mid attack, she doesn’t parry it. She takes both stamina and stability damage (not health damage)
+When she’s in strength mode, she cannot lose nor gain stamina, but she can now receive strength mode health damage, which doesn’t regenerate
+Depleting her health or stamina will stagger her, making her very vulnerable for a brief period of time
 Arena has the same look and feel as Gauntlet Arena
 Pillars may not be exactly the same, but if they are present, they are way taller
 Background looks close to the arena and is made up of large black irregular triangles connected by edges
@@ -3432,9 +3621,10 @@ Ground is made of reflective black ice; Blackstar skates on it like a needle on 
 Background is filled with irregular black shapes floating all around
 Phase 1 Design Idea 1: switching between speed and strength modes
 Has 2 modes: strength and speed mode
-Strength: wears bear-like heavy armor that allows her to move big rocks and possibly the entire arena
-Alt strength: has bear-like giant arm, massive face like a machine crawler’s from Intrusion 2, and giant whip tail like a machine crawler’s. Can summon any of the 3 parts individually or sometimes in combination with each other
+Strength: wears bear-like heavy armor that allows her to move big rocks and possibly the entire arena OR has bear-like giant arm, massive face like a machine crawler’s from Intrusion 2, and giant whip tail like a machine crawler’s. Can summon any of the 3 parts individually or sometimes in combination with each other
+Strength mode has large targets, making it vulnerable to the ax
 Speed: wears no armor, allowing her to grapple around very quickly
+Speed mode can only be hit reliably with homing attacks, but is more susceptible to damage
 Cross slash attack (just an idea) - strength: she lifts her left hand from her right hip to above her head, then does the same movement but mirrored with her right arm, sending the ropes in her hands high into the sky. She waits for the ropes to ascend for a bit, then slashes with her left then right arm almost identically to Promised Consort Radahn’s left-right cross-slash attack pre-nerf (the time between the left and right slashes is slightly shorter than Radahn’s, making it easier to use just one dodge instead of 2) which causes the ropes to mirror the same motion across the entire arena. The only consistent way to dodge this move is not to dodge the left then right ropes individually, but to stay on your left side of the arena, then dodge when her left rope is about to hit you, which dodges the right rope at the same time. She can also do this attack with the right arm first, then left
 Meteor - both: she grapples a rock from afar such that the vec from the rock to her points roughly to the target. She pulls the rock towards the arena, then detaches the rock rope(s) to make the rope(s) whip directly forward. The rock then hits the arena, exploding on impact
 Strength: she grapples the rock with both hands while planting her feet firmly in the ground. The rock takes less time to accelerate
@@ -3456,6 +3646,8 @@ Grappling, speed/momentum, parrying, background, and phase 2 are the same as des
 She charges her ult’s power by gaining momentum, then converting all of that momentum into ult charge
 You can prevent her ult from becoming stronger by interrupting her when she tries to gain speed
 Her ult charge doesn’t determine when her ult comes out, but how strong it is. Her ult always arrives at the same times in the fight
+Idea: when she ults, her max stability is permanently set to her current stability
+Idea: ult form is a humanoid body similar to her speed form, but bigger and with large Wolverine-like hand claws. She slashes the space around her with the claws, which summons huge floating claw slashes made of light that travel in the same paths at the same time. These look like the Revenant’s claw slashes from Elden Ring Nightreign. Each slash creates an emitter for a superlaser that slowly charges up before firing in a continuous violent straight blast that travels in the same direction as the slash. Her movements are wild and have huge windups, unrefined but packing huge power. She sways like a drunken boxer after every swing, suggesting that her claws are extremely heavy and that it takes a wild energy/mindset to use the claws to their fullest potential. She can use the explosions from the backs of the superlaser emitters to launch herself where she wants to go
 
 Jester Boss: The Greatest Magician
 Looks like Jevil from Deltarune (similar proportions but toothier Hazbin Hotel-like grin), but has a hat so big it covers her eyes, has a poofier shirt that resembles a dress, and doesn’t have a tail
@@ -3483,6 +3675,9 @@ Idea: you have the option of telling the event organizers about the kidnappers. 
 Idea: Player only has a limited number of fight attempts and stabilizers across the entire journey before the gala begins. As the player completes subsequent runs, they’ll have more and more attempts and stabilizers that they can use to practice against later bosses
 Certain gods (e.g. mites) force the player to defeat them or use many stabilizers to charge the ship’s stability shields to escape their realms. Surviving their encounters for a certain length of time grants experience that you can use to unlock skills, but doesn’t progress the journey past them
 Progressing through the journey quickly (i.e. beating bosses with less attempts) will allow the crew to catch up to other gods making their way to the gala. The player may encounter gods they didn’t encounter in previous runs due to taking too long
+If the player initiates the gala while still possessing attempts and stabilizers, the leftovers can be converted into skill points and other unlockables before the start of the next run
+The player is told about this game mechanic at the start of the entire game so they know they should do it
+Idea: each gala battle win multiplies the SP/unlockable potential of the leftover attempts and stabilizers
 Player can save at a checkpoint with a limited number of slots
 Order of encounters:
 Cotu’s friends (supporting Cotu)
@@ -4043,7 +4238,7 @@ Pilot: “I can do more than you think! Check this out, I can do a little shimmy
 Pilot shifts a little forward on the ground
 Greg: *bursts into laughter* “WHAT IS THAT”
 Pilot: “Oh so you think that’s funny, huh? Just you wait till I get over there, you punk! Engh. Engh! Huh, engh!”
-Greg: “Eahh, get away from me, you freaky!”
+Greg: “Eahh, get away from me!”
 Cotu: “In all seriousness, this is great progress. How’d you manage this?”
 Pilot: “Oh, well…how about I tell you all later?”
 Cotu shrugs
