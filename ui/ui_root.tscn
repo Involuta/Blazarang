@@ -1403,6 +1403,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TimeLeft" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -1418,6 +1419,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="DamageCounter" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 65.0
 offset_top = 200.0
@@ -1427,6 +1429,7 @@ scale = Vector2(1.5, 1.5)
 text = "Total Damage Dealt: "
 
 [node name="DPSCounter" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 65.0
 offset_top = 250.0

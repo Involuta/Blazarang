@@ -17,14 +17,14 @@ func _ready():
 	kill_score = Globals.enemy_hurtbox_data[enemy_name][2]
 	super()
 
-func receive_hit(damage: float, hitter):
+func receive_hit(hitbox, hitter):
 	# Check if this is a healing hit
-	if damage > 0:
+	if hitbox.damage > 0:
 		emit_hit_particles(hitter)
 		award_score(hitter)
 	if hitter is Roserang or hitter is RoserangPower:
 		emit_hitter_effect(hitter)
-	super(damage, hitter)
+	super(hitbox, hitter)
 
 func emit_hit_particles(hitter):
 	var inst := hit_particles.instantiate()

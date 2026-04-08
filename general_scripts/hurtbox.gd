@@ -43,43 +43,37 @@ func on_hit(hitbox):
 	if hitbox.name in current_opponent_hitboxes:
 		if "is_dodging" in hb_owner:
 			if not hb_owner.is_dodging:
-				receive_debuff(hitbox.debuff)
-				receive_heal(hitbox.heal_amt)
-				receive_hit(hitbox.damage, hitbox.get_parent())
+				receive_hit(hitbox, hitbox.get_parent())
 			else:
 				return
 		else:
-			receive_debuff(hitbox.debuff)
-			receive_heal(hitbox.heal_amt)
-			receive_hit(hitbox.damage, hitbox.get_parent())
+			receive_hit(hitbox, hitbox.get_parent())
 
-func receive_debuff(debuff):
-	if debuff != Globals.DEBUFFS.NONE and "active_debuffs" in hb_owner and hb_owner.active_debuffs[debuff] <= 0:
-		match(debuff):
+func receive_hit(hitbox, _hitter):
+	# Damage
+	hit_received.emit(hitbox.damage)
+	health -= hitbox.damage
+	# Spawn damage number
+	var number = damage_text.instantiate()
+	level.add_child.call_deferred(number)
+	await number.tree_entered
+	number.global_position = global_position 
+	number.setup(hitbox.damage)
+	
+	# Heal
+	health += hitbox.heal_amt
+	if health > max_health:
+		health = max_health
+	
+	# Debuff
+	if hitbox.debuff != Globals.DEBUFFS.NONE and "active_debuffs" in hb_owner and hb_owner.active_debuffs[hitbox.debuff] <= 0:
+		match(hitbox.debuff):
 			Globals.DEBUFFS.SLOW:
 				hb_owner.receive_debuff_slow()
 			Globals.DEBUFFS.INFEST:
 				hb_owner.receive_debuff_infest()
 			_:
 				pass
-
-func receive_heal(heal_amt: int):
-	health += heal_amt
-	if health > max_health:
-		health = max_health
-
-func receive_hit(damage: float, _hitter):
-	hit_received.emit(damage)
-	health -= damage
-	
-	# Spawn the damage number
-	var number = damage_text.instantiate()
-	# Add it to the level so it doesn't move with the player
-	level.add_child.call_deferred(number)
-	await number.tree_entered
-	# Start it at the hurtbox's current position
-	number.global_position = global_position 
-	number.setup(damage)
 	
 	if health <= 0:
 		die()

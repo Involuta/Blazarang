@@ -81,6 +81,12 @@ func _ready():
 				axrang_buff_icons[i].texture = load("res://textures/buff_SPD-clear.png")
 			_:
 				axrang_buff_icons[i].texture = load("res://textures/buff_DMG-clear.png")
+	
+	# Placeholder training dummy code
+	if root.find_child("TrainingDummy") != null:
+		$TimeLeft.visible = true
+		$DamageCounter.visible = true
+		$DPSCounter.visible = true
 
 func roserang_buffs_cleared():
 	return not (true in roserang_buff_applied)

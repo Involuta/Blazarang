@@ -16,7 +16,7 @@ var damage_indicator_value := 100.0
 @export var destab_invin_time := 1.0
 
 var frostbite_buildup := 0.0 # Once this number hits the current frostbite stage threshold, frostbite stage increments
-var current_frostbite_stage_threshold := 0.0 # frostbite buildup needed to progress frostbite stage
+var current_frostbite_threshold := 15.0 # frostbite buildup needed to progress frostbite stage
 var current_frostbite_stage := 0 # 0 = no frostbite, 1-3 = frostbite. This is the index into the frostbite_stage_thresholds list
 @export var frostbite_stage_thresholds := [ # Each attack will deal around 10 frostbite buildup on average on a clean direct hit
 	15.0,
@@ -41,6 +41,8 @@ func _ready():
 	
 	damage_indicator_value = max_health
 	Globals.stabilize.connect(on_stabilize)
+	
+	current_frostbite_threshold = frostbite_stage_thresholds[current_frostbite_stage]
 
 func on_stabilize():
 	max_health = original_max_health
@@ -58,18 +60,19 @@ func on_hit(hitbox):
 	else:
 		super(hitbox)
 
-func receive_hit(damage: float, hitter):
+func receive_hit(hitbox, hitter):
 	if recovery_active:
 		damage_indicator_value = health
 	reset_recovery_delay()
 	
-	"""
-	if hitbox.frostbite_buildup + frostbite_buildup > current_frostbite_threshold:
-		current_frostbite_stage += 1
+	frostbite_buildup += hitbox.frostbite_buildup
+	if frostbite_buildup > current_frostbite_threshold:
+		if current_frostbite_stage < frostbite_stage_thresholds.size():
+			current_frostbite_stage += 1
+			current_frostbite_threshold = frostbite_stage_thresholds[current_frostbite_stage]
 		frostbite_buildup = 0
-	"""
 	
-	super(damage, hitter)
+	super(hitbox, hitter)
 
 func self_hit(damage: float):
 	if recovery_active:

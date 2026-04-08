@@ -215,7 +215,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.709804, 0.894118, 1, 1), Color(0.42, 0.69, 1.6, 1)]
+"values": [Color(0.831373, 0.909804, 1, 1), Color(0.42, 0.69, 1.6, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -224,10 +224,10 @@ tracks/1/path = NodePath("BaseOffsetRotation/HeadMesh/HeadLight/HeadSphere:mesh:
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.419608, 0.690196, 1, 1), Color(0, 0.415686, 0.768627, 1)]
+"values": [Color(0.419608, 0.690196, 1, 1), Color(0, 0.211765, 0.415686, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -278,7 +278,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.501961, 0.858824, 1, 1), Color(0.42, 0.69, 1.6, 1)]
+"values": [Color(0.592157, 0.882353, 1, 1), Color(0.42, 0.69, 1.6, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -287,10 +287,10 @@ tracks/1/path = NodePath("BaseOffsetRotation/HeadMesh/HeadLight/HeadSphere:mesh:
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.419608, 0.690196, 1, 1), Color(0, 0.415686, 0.768627, 1)]
+"values": [Color(0.419608, 0.690196, 1, 1), Color(0, 0.211765, 0.415686, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -343,7 +343,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.75),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.501961, 0.905882, 1, 1), Color(0.298039, 0.631373, 1, 1)]
+"values": [Color(0.592157, 0.882353, 1, 1), Color(0.298039, 0.631373, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -352,10 +352,10 @@ tracks/1/path = NodePath("BaseOffsetRotation/HeadMesh/HeadLight/HeadSphere:mesh:
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0, 0.35),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.419608, 0.690196, 1, 1), Color(0, 0.415686, 0.768627, 1)]
+"values": [Color(0.419608, 0.690196, 1, 1), Color(0, 0.211765, 0.415686, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -406,7 +406,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.42, 0.69, 1.6, 1), Color(0.501961, 0.858824, 1, 1)]
+"values": [Color(0.42, 0.69, 1.6, 1), Color(0.592157, 0.882353, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -470,7 +470,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.298039, 0.631373, 1, 1), Color(0.501961, 0.858824, 1, 1)]
+"values": [Color(0.298039, 0.631373, 1, 1), Color(0.592157, 0.882353, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -506,7 +506,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0.6, 0.6, 0.6), Vector3(1.5, 1.5, 1.5)]
+"values": [Vector3(0.6, 0.6, 0.6), Vector3(1.75, 1.75, 1.75)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -533,7 +533,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.298039, 0.631373, 1, 1), Color(0.298039, 0.631373, 1, 1)]
+"values": [Color(0.298039, 0.631373, 1, 1), Color(0.831373, 0.909804, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -569,7 +569,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0.6, 0.6, 0.6), Vector3(1, 1, 1)]
+"values": [Vector3(0.6, 0.6, 0.6), Vector3(1.75, 1.75, 1.75)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -633,7 +633,7 @@ refraction_enabled = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_idhv3"]
 roughness = 0.6
 emission_enabled = true
-emission = Color(0, 0.415686, 0.768627, 1)
+emission = Color(0, 0.211765, 0.415686, 1)
 emission_energy_multiplier = 2.0
 subsurf_scatter_strength = 0.01
 

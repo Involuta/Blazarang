@@ -41,8 +41,10 @@ environment = SubResource("Environment_q3nmo")
 script = ExtResource("1_uh47y")
 
 [node name="BlizzardParticles" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 6, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 12, 2.08165e-12)
+custom_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
 amount = 180
-lifetime = 6.0
+lifetime = 12.0
+preprocess = 6.0
 process_material = SubResource("ParticleProcessMaterial_ngput")
 draw_pass_1 = ExtResource("1_qcukq")

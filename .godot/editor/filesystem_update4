@@ -40,3 +40,8 @@ res://cotu/CotuControl.gd
 res://general_scripts/hitbox.gd
 res://cotu/CotuHurtbox.gd
 res://general_scripts/hurtbox.gd
+res://enemies/boss_hurtbox.gd
+res://enemies/multi_hurtbox_child.gd
+res://levels/snow_level/snow_level.gd
+res://ui/ui_root.tscn
+res://ui/ui_root.gd

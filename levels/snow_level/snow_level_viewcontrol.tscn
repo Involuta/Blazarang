@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cm2w1drpxvkk8"]
+[gd_scene load_steps=6 format=3 uid="uid://cm2w1drpxvkk8"]
 
 [ext_resource type="PackedScene" uid="uid://b6kho0xiea8y0" path="res://levels/snow_level/snow_level_background.tscn" id="1_c5cbw"]
 [ext_resource type="PackedScene" uid="uid://nwyg2u2h4waf" path="res://levels/snow_level/snow_level.tscn" id="2_2xnrh"]
 [ext_resource type="Script" path="res://levels/level_viewport_container.gd" id="2_taii7"]
 [ext_resource type="PackedScene" uid="uid://kl1hpr0grn1v" path="res://ui/ui_root.tscn" id="4_gwlst"]
+[ext_resource type="PackedScene" uid="uid://daj44qqb6dior" path="res://ui/health_bar.tscn" id="5_nt6qo"]
 
 [node name="ViewControl" type="Control"]
 layout_mode = 3
@@ -44,3 +45,20 @@ render_target_update_mode = 4
 
 [node name="UIRoot" parent="." instance=ExtResource("4_gwlst")]
 layout_mode = 1
+
+[node name="FrostbiteBar" parent="UIRoot" instance=ExtResource("5_nt6qo")]
+modulate = Color(0.776471, 1, 1, 1)
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 60.0
+offset_top = 210.0
+offset_right = 780.0
+offset_bottom = 274.0
+grow_horizontal = 1
+grow_vertical = 1
+scale = Vector2(0.4, 0.4)
+value = 0.0
