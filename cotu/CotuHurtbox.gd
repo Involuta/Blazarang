@@ -23,6 +23,11 @@ var current_frostbite_stage := 0 # 0 = no frostbite, 1-3 = frostbite. This is th
 	30.0,
 	30.0,
 ]
+@export var frostbite_regen_reduction_list := [ # Regen reduction at each stage of frostbite (starting at stage 1 at index 0)
+	.67,
+	.33,
+	0,
+]
 
 # When Cotu gets grabbed, his position is set to the hitbox's parent
 @export var opponent_grab_hitboxes := []
@@ -65,12 +70,14 @@ func receive_hit(hitbox, hitter):
 		damage_indicator_value = health
 	reset_recovery_delay()
 	
+	# Progress frostbite stages. This code looks unintuitive but saves lines compared to nested if statements
 	frostbite_buildup += hitbox.frostbite_buildup
-	if frostbite_buildup > current_frostbite_threshold:
-		if current_frostbite_stage < frostbite_stage_thresholds.size():
-			current_frostbite_stage += 1
-			current_frostbite_threshold = frostbite_stage_thresholds[current_frostbite_stage]
+	if frostbite_buildup >= current_frostbite_threshold:
 		frostbite_buildup = 0
+		# Increment stage, but cap it at the max index of the array
+		current_frostbite_stage = min(current_frostbite_stage + 1, frostbite_stage_thresholds.size() - 1)
+		# Update threshold using the new stage index
+		current_frostbite_threshold = frostbite_stage_thresholds[current_frostbite_stage]
 	
 	super(hitbox, hitter)
 
@@ -97,14 +104,16 @@ func _physics_process(delta):
 	recovery_delay_remaining -= delta
 	if recovery_delay_remaining < 0:
 		recovery_active = true
+	
+	var recovery_amt := recovery_rate
 	if not recovery_disabled and recovery_active and health < max_health:
+		if hb_owner.has_method("has_sigil") and hb_owner.has_sigil(Globals.SIGILS.REGENERATOR):
+			recovery_amt *= hb_owner.sigil_regenerator_stability_regen_multiplier
 		if hb_owner.active_debuffs[Globals.DEBUFFS.INFEST] > 0:
-			if hb_owner.has_method("has_sigil") and hb_owner.has_sigil(Globals.SIGILS.REGENERATOR):
-				health += recovery_rate * hb_owner.infest_stability_regen_reduction * hb_owner.sigil_regenerator_stability_regen_multiplier
-			else:
-				health += recovery_rate * hb_owner.infest_stability_regen_reduction
-		else:
-			health += recovery_rate
+			recovery_amt *= hb_owner.infest_stability_regen_reduction
+		if current_frostbite_stage > 0:
+			recovery_amt *= frostbite_regen_reduction_list[current_frostbite_stage-1]
+		health += recovery_amt
 		damage_indicator_value -= recovery_rate
 
 func die():
