@@ -70,14 +70,14 @@ func receive_hit(hitbox, hitter):
 		damage_indicator_value = health
 	reset_recovery_delay()
 	
-	# Progress frostbite stages. This code looks unintuitive but saves lines compared to nested if statements
-	frostbite_buildup += hitbox.frostbite_buildup
-	if frostbite_buildup >= current_frostbite_threshold:
-		frostbite_buildup = 0
-		# Increment stage, but cap it at the max index of the array
-		current_frostbite_stage = min(current_frostbite_stage + 1, frostbite_stage_thresholds.size() - 1)
-		# Update threshold using the new stage index
-		current_frostbite_threshold = frostbite_stage_thresholds[current_frostbite_stage]
+	# Frostbite handling
+	if current_frostbite_stage < frostbite_stage_thresholds.size():
+		frostbite_buildup += hitbox.frostbite_buildup
+		if frostbite_buildup >= current_frostbite_threshold:
+			current_frostbite_stage += 1
+			if current_frostbite_stage < frostbite_stage_thresholds.size():
+				frostbite_buildup = 0
+				current_frostbite_threshold = frostbite_stage_thresholds[current_frostbite_stage]
 	
 	super(hitbox, hitter)
 
