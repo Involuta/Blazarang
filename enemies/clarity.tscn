@@ -1,10 +1,11 @@
-[gd_scene load_steps=78 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=80 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
 [ext_resource type="PackedScene" uid="uid://b70he2vkcfalc" path="res://enemies/clarity_head.tscn" id="3_05q7x"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="4_5f0ps"]
 [ext_resource type="Script" path="res://enemies/boss_hurtbox.gd" id="5_j584x"]
+[ext_resource type="Script" path="res://general_scripts/damage_over_time_area.gd" id="7_ffp3t"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="7_i53v5"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g3bkq"]
@@ -333,6 +334,9 @@ scale_max = 0.03
 emission = Color(0.717647, 0.717647, 0.717647, 1)
 edge_fade = 0.984915
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_2hwhq"]
+size = Vector3(150, 30, 150)
+
 [node name="Clarity" type="CharacterBody3D"]
 collision_layer = 8
 collision_mask = 146
@@ -555,6 +559,22 @@ visible = false
 size = Vector3(18, 1.5, 18)
 shape = 0
 material = SubResource("FogMaterial_unqot")
+
+[node name="BlizzardDOTArea" type="Node3D" parent="."]
+script = ExtResource("7_ffp3t")
+time_btwn_damage_ticks = 0.3
+
+[node name="EnemyHitbox" type="Area3D" parent="BlizzardDOTArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.3036, 0)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("4_5f0ps")
+damage = 1
+frostbite_buildup = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlizzardDOTArea/EnemyHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+shape = SubResource("BoxShape3D_2hwhq")
 
 [editable path="ClarityBodyMeshes"]
 [editable path="ClarityBodyMeshes/Armature/Skeleton3D/Hat_2/ClarityHead"]

@@ -44,6 +44,8 @@ var phase := PHASE.PHASE1
 
 @export var min_y_pos := 11.4 # y pos of arena floor, ie X's minimum y position
 
+@export var blizzard_safezone_radius := 15.0
+
 var stationary := false
 @export var walk_speed := 1.8
 var walk_dir := Vector3.FORWARD # Randomly set when switching to walk straight
@@ -108,6 +110,7 @@ var transparent_mat := preload("res://textures/clear_tile.tres")
 @onready var head_light := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/BaseOffsetRotation/HeadMesh/HeadLight
 @onready var head_bone := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2
 @onready var head_mesh := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
+@onready var blizzard_area := $BlizzardDOTArea
 
 var head_hurtbox : Node3D
 
@@ -207,6 +210,11 @@ func body_face_position_directly(target_pos):
 		m.rotation.z = lerp_angle(m.rotation.z, target_rotation.z, body_turn_speed / 2.1)
 
 func _physics_process(delta):
+	if cotu.global_position.distance_to(global_position) > blizzard_safezone_radius:
+		blizzard_area.process_mode = Node.PROCESS_MODE_INHERIT
+	else:
+		blizzard_area.process_mode = Node.PROCESS_MODE_DISABLED
+	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 		if global_position.y < min_y_pos:

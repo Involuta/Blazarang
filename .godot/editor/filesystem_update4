@@ -1,4 +1,4 @@
-res://cotu/cotu_cb_main.tscn
+res://enemies/clarity.tscn
 res://GPUTrail-main/shaders/trail.gdshader
 res://GPUTrail-main/defaults/texture.tres
 res://GPUTrail-main/shaders/trail_draw_pass.gdshader
@@ -24,10 +24,10 @@ res://glb_inherited_scenes/cotu_outline.gdshader
 res://general_scripts/skygradient.gdshader
 res://glb_inherited_scenes/mite_hills_ground.gdshader
 res://shaders/sobel_outline.gdshader
-res://globals.gd
-res://cotu/CotuControl.gd
-res://cotu/CotuHurtbox.gd
-res://enemies/clarity.tscn
+res://enemies/clarity.gd
 res://levels/snow_level/section_nodes/clarity_boss_arena1.tscn
+res://levels/snow_level/section_nodes/clarity_boss_arena1.gd
+res://cotu/cotu_cb_main.tscn
 res://levels/snow_level/snow_level.tscn
 res://levels/snow_level/snow_level_background.tscn
+res://general_scripts/damage_over_time_area.gd
