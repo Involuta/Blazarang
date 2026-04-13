@@ -61,7 +61,7 @@ script = ExtResource("1_tjf6h")
 near_target_drop_max_radius = 24.0
 starting_wave = 0
 egg_waves = [{
-"Chances": [0, 1, 0, 0],
+"Chances": [1, 0, 0, 0],
 "Duration": 20.0,
 "Num": 16,
 "RandomDropPosChance": 0.75,

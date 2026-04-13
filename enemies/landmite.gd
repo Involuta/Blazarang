@@ -164,6 +164,7 @@ func follow_frame(delta):
 	
 	bite_cooldown_remaining -= delta
 	if bite_cooldown_remaining <= 0 and global_position.distance_to(target.global_position) < bite_proximity:
+		anim_tree.set("parameters/TimeScale/scale", 1)
 		bite_cooldown_remaining = bite_cooldown_secs
 		behav_state = BITE
 		await bite()
