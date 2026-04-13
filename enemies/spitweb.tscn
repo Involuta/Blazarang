@@ -3,20 +3,13 @@
 [ext_resource type="Script" path="res://enemies/spitweb.gd" id="1_t5eaf"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="2_fr24x"]
 [ext_resource type="PackedScene" uid="uid://dx51qlqjdeihh" path="res://glb_inherited_scenes/spitweb_projectile.tscn" id="3_vbxai"]
+[ext_resource type="Texture2D" uid="uid://bswup1yj6fmgv" path="res://sprites/spiderweb.png" id="4_mk4nh"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jj7ya"]
 radius = 0.3
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_3hk0v"]
-top_radius = 0.75
-bottom_radius = 0.75
-height = 0.1
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pag03"]
-shading_mode = 0
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_gc6no"]
-radius = 0.75
+radius = 1.0
 
 [sub_resource type="Animation" id="Animation_uwkem"]
 resource_name = "become_ground_web"
@@ -36,31 +29,31 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("GroundWebMesh:visible")
+tracks/1/path = NodePath("EnemyHitbox/CollisionShape3D:shape")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.0166667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false, true]
+"values": [SubResource("SphereShape3D_jj7ya"), SubResource("SphereShape3D_gc6no")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("EnemyHitbox/CollisionShape3D:shape")
+tracks/2/path = NodePath("FlightParticles:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.0166667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [SubResource("SphereShape3D_jj7ya"), SubResource("SphereShape3D_gc6no")]
+"values": [true, false]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("FlightParticles:emitting")
+tracks/3/path = NodePath("ImpactParticles:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -72,14 +65,14 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("ImpactParticles:emitting")
+tracks/4/path = NodePath("GroundWebSprite:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.0166667),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true, false]
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vav58"]
@@ -106,6 +99,11 @@ gravity = Vector3(2.08165e-12, -2, 2.08165e-12)
 scale_min = 0.25
 scale_max = 0.5
 scale_curve = SubResource("CurveTexture_nhc3q")
+color = Color(0.843137, 0.843137, 0.843137, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pag03"]
+shading_mode = 0
+albedo_color = Color(0.843137, 0.843137, 0.843137, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_orfq0"]
 material = SubResource("StandardMaterial3D_pag03")
@@ -118,11 +116,13 @@ initial_velocity_min = 5.0
 initial_velocity_max = 5.0
 scale_min = 0.25
 scale_max = 0.5
+color = Color(0.843137, 0.843137, 0.843137, 1)
 
 [node name="Spitweb" type="Node3D"]
 script = ExtResource("1_t5eaf")
 
 [node name="EnemyHitbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.24, 2.08165e-12)
 collision_layer = 8
 collision_mask = 18
 script = ExtResource("2_fr24x")
@@ -133,11 +133,10 @@ shape = SubResource("SphereShape3D_jj7ya")
 
 [node name="ProjectileMesh" parent="." instance=ExtResource("3_vbxai")]
 
-[node name="GroundWebMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.25, 2.08165e-12)
+[node name="GroundWebSprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.16, -1.06628e-31, 4.66084e-39, 0, -6.99382e-09, -0.16, 1.06628e-31, 0.16, -6.99382e-09, 2.08165e-12, -0.24, 2.08165e-12)
 visible = false
-mesh = SubResource("CylinderMesh_3hk0v")
-surface_material_override/0 = SubResource("StandardMaterial3D_pag03")
+texture = ExtResource("4_mk4nh")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -145,6 +144,7 @@ libraries = {
 }
 
 [node name="HealingHitbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 collision_layer = 8
 collision_mask = 8
 script = ExtResource("2_fr24x")

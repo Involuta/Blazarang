@@ -44,7 +44,11 @@ var phase := PHASE.PHASE1
 
 @export var min_y_pos := 11.4 # y pos of arena floor, ie X's minimum y position
 
-@export var blizzard_safezone_radius := 15.0
+@export var blizzard_safezone_base_radius := 15.0
+@export var blizzard_safezone_expanded_radius := 150.0 # Blizzard safezone expands on jumps
+var blizzard_safezone_radius := 15.0
+@export var body_light_base_radius := 18.0
+@export var body_light_expanded_radius := 180.0 # Light expands on jumps to show new safezone
 
 var stationary := false
 @export var walk_speed := 1.8
@@ -80,22 +84,6 @@ var aiming_at_target := true
 	"Spiral" : .33,
 }
 
-@export var diagonal_dash_speed := 22.0
-@export var dash_speed := 40.0
-@export var dash_back_speed := 36.0
-@export var side_teleport_dist_from_target := 7.5
-@export var front_teleport_dist_from_target := 9.0
-@export var slipnslice_speed := 20.0
-@export var slipnslice_stop_dist := 1.0
-@export var superman_fwd_speed := 20.0
-@export var superman_up_speed := 5.0
-@export var superman_down_speed := 7.0
-@export var triangle_arm_angle := 36.0
-@export var triangle_arm_dist := 90.0
-@export var triangle_axkick_dist := 3.5
-@export var flyingkick_speed := 200.0
-@export var flyingkick_hit_frames := 10 # Put the # of frames that the hitbox is active in the animation here
-
 var param_path_base := "parameters/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
@@ -110,6 +98,7 @@ var transparent_mat := preload("res://textures/clear_tile.tres")
 @onready var head_light := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/BaseOffsetRotation/HeadMesh/HeadLight
 @onready var head_bone := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2
 @onready var head_mesh := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
+@onready var body_light := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/BodyLight
 @onready var blizzard_area := $BlizzardDOTArea
 
 var head_hurtbox : Node3D
@@ -129,11 +118,14 @@ func _ready():
 	cotu = level.find_child("cotuCB")
 	clarity_icon = level.find_child("ClarityIcon")
 	
+	blizzard_safezone_radius = blizzard_safezone_base_radius
+	body_light.omni_range = body_light_base_radius
+	
 	min_long_dist_wait = phase1_min_long_dist_wait
 	max_long_dist_wait = phase1_max_long_dist_wait
 	long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	
-	switch_to_circling()
+	switch_to_straight()
 	
 	arm_anim_tree.active = true
 	body_anim_tree.active = true
@@ -437,3 +429,12 @@ func jump_shot_mvmt():
 	t.tween_interval(frames(49))
 	t.tween_property(self, "gravity", .5 * ProjectSettings.get_setting("physics/3d/default_gravity"), 0)
 
+func expand_blizzard_safezone():
+	var t = get_tree().create_tween().set_parallel()
+	t.tween_property(self, "blizzard_safezone_radius", blizzard_safezone_expanded_radius, frames(144))
+	t.tween_property(body_light, "omni_range", body_light_expanded_radius, frames(144))
+
+func contract_blizzard_safezone():
+	var t = get_tree().create_tween().set_parallel()
+	t.tween_property(self, "blizzard_safezone_radius", blizzard_safezone_base_radius, frames(360))
+	t.tween_property(body_light, "omni_range", body_light_base_radius, frames(360))
