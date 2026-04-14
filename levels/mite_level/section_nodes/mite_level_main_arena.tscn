@@ -59,7 +59,6 @@ size = Vector3(1, 100, 15)
 [node name="MiteLevelMainArena" type="Node3D"]
 script = ExtResource("1_tjf6h")
 near_target_drop_max_radius = 24.0
-starting_wave = 0
 egg_waves = [{
 "Chances": [1, 0, 0, 0],
 "Duration": 20.0,
