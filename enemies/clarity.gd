@@ -107,6 +107,7 @@ var head_hurtbox : Node3D
 var level : Node3D
 var target : Node3D
 var cotu : Node3D # Clarity only attacks the target; cotu is only referenced here to help Clarity calculate whether to parry when Cotu throws a roserang
+var camera : Node3D
 var clarity_icon : Node3D
 var bg_env : Environment
 var bg_sky : ProceduralSkyMaterial
@@ -121,6 +122,7 @@ func _ready():
 	level = root.find_child("Level")
 	target = level.find_child("Icon")
 	cotu = level.find_child("cotuCB")
+	camera = cotu.find_child("Camera3D")
 	clarity_icon = level.find_child("ClarityIcon")
 	
 	bg_env = root.find_child("SnowLevelBackground").find_child("WorldEnvironment").environment
@@ -128,6 +130,7 @@ func _ready():
 	
 	level_env = root.find_child("Level").find_child("WorldEnvironment").environment
 	level_sky = level_env.sky.sky_material
+	camera.environment = level_env
 	
 	blizzard_safezone_radius = blizzard_safezone_base_radius
 	body_light.omni_range = body_light_base_radius
@@ -444,20 +447,26 @@ func expand_blizzard_safezone():
 	var t = get_tree().create_tween().set_parallel()
 	t.tween_property(self, "blizzard_safezone_radius", blizzard_safezone_expanded_radius, frames(144))
 	t.tween_property(body_light, "omni_range", body_light_expanded_radius, frames(144))
+	t.tween_property(body_light, "light_color", Color.DARK_GRAY, frames(144))
 	t.tween_property(bg_sky, "sky_top_color", Color("#8394ae"), frames(144))
 	#t.tween_property(sky, "sky_horizon_color", Color("#6a7b95"), frames(144))
 	#t.tween_property(sky, "ground_horizon_color", Color("#6a7b95"), frames(144))
-	t.tween_property(bg_sky, "sky_horizon_color", Color.GHOST_WHITE, frames(144))
-	t.tween_property(bg_sky, "ground_horizon_color", Color.DARK_GRAY, frames(144))
-	t.tween_property(level_sky, "sky_top_color", Color.GHOST_WHITE, frames(144))
-	t.tween_property(level_env, "fog_light_color", Color.GHOST_WHITE, frames(144))
+	t.tween_property(bg_sky, "sky_horizon_color", Color.WEB_GRAY, frames(144))
+	t.tween_property(bg_sky, "ground_horizon_color", Color.WEB_GRAY, frames(144))
+	t.tween_property(level_sky, "sky_top_color", Color.GRAY, frames(144))
+	t.tween_property(level_env, "fog_light_color", Color.GRAY, frames(144))
+	t.tween_property(level_env, "fog_density", 0, frames(144))
+	t.tween_property(level_env, "volumetric_fog_density", 0, frames(144))
 
 func contract_blizzard_safezone():
 	var t = get_tree().create_tween().set_parallel()
 	t.tween_property(self, "blizzard_safezone_radius", blizzard_safezone_base_radius, frames(360))
 	t.tween_property(body_light, "omni_range", body_light_base_radius, frames(360))
+	t.tween_property(body_light, "light_color", Color("#007ce4"), frames(360))
 	t.tween_property(bg_sky, "sky_top_color", Color("#65768f"), frames(360))
 	t.tween_property(bg_sky, "sky_horizon_color", Color("#5a6c82"), frames(360))
 	t.tween_property(bg_sky, "ground_horizon_color", Color("#5a6c82"), frames(360))
 	t.tween_property(level_sky, "sky_top_color", Color("#65768f"), frames(360))
 	t.tween_property(level_env, "fog_light_color", Color("#5a6c82"), frames(360))
+	t.tween_property(level_env, "fog_density", 0.01, frames(360))
+	t.tween_property(level_env, "volumetric_fog_density", 0.036, frames(360))

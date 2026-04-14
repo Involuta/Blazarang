@@ -32,3 +32,5 @@ res://enemies/jumping_spider.tscn
 res://enemies/clarity.gd
 res://levels/snow_level/snow_level_viewcontrol.tscn
 res://levels/snow_level/snow_level.tscn
+res://enemies/clarity_head.tscn
+res://cotu/shakeable_camera.tscn
