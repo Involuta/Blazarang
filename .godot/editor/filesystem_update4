@@ -34,3 +34,16 @@ res://levels/snow_level/snow_level_viewcontrol.tscn
 res://levels/snow_level/snow_level.tscn
 res://enemies/clarity_head.tscn
 res://cotu/shakeable_camera.tscn
+res://enemies/enemy_anims/clarity_doubleslice_forward_delayed.res
+res://enemies/enemy_anims/clarity_doubleslice_forward_immediate.res
+res://enemies/enemy_anims/clarity_doubleslice_left_delayed.res
+res://enemies/enemy_anims/clarity_doubleslice_left_immediate.res
+res://enemies/enemy_anims/clarity_jumpshot_towalkleft.res
+res://enemies/enemy_anims/clarity_singleshot_left.res
+res://enemies/enemy_anims/clarity_spiral.res
+res://enemies/enemy_anims/clarity_stagger.res
+res://enemies/enemy_anims/clarity_stomp_back.res
+res://enemies/enemy_anims/clarity_stomp_front.res
+res://enemies/enemy_anims/clarity_stomp_full.res
+res://enemies/enemy_anims/clarity_stomp_left.res
+res://enemies/enemy_anims/clarity_stomp_right.res

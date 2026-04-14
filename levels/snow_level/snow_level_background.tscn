@@ -48,3 +48,7 @@ lifetime = 12.0
 preprocess = 6.0
 process_material = SubResource("ParticleProcessMaterial_ngput")
 draw_pass_1 = ExtResource("1_qcukq")
+
+[node name="ParticleAttractor" type="GPUParticlesAttractorSphere3D" parent="."]
+strength = 2.66454e-15
+radius = 30.0

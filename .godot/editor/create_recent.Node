@@ -1,3 +1,4 @@
+GPUParticlesAttractorSphere3D
 Sprite3D
 AnimationPlayer
 FogVolume
@@ -29,4 +30,3 @@ Marker3D
 SkeletonIK3D
 RigidBody3D
 Hurtbox
-RemoteTransform3D

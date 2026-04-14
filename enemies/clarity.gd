@@ -100,6 +100,7 @@ var transparent_mat := preload("res://textures/clear_tile.tres")
 @onready var head_mesh := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
 @onready var body_light := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/BodyLight
 @onready var blizzard_area := $BlizzardDOTArea
+@onready var particle_attractor := $ParticleAttractor
 
 var head_hurtbox : Node3D
 
@@ -111,6 +112,7 @@ var camera : Node3D
 var clarity_icon : Node3D
 var bg_env : Environment
 var bg_sky : ProceduralSkyMaterial
+var bg_particle_attractor : GPUParticlesAttractor3D
 var level_env : Environment
 var level_sky : ProceduralSkyMaterial
 var level_fog : FogMaterial
@@ -125,8 +127,10 @@ func _ready():
 	camera = cotu.find_child("Camera3D")
 	clarity_icon = level.find_child("ClarityIcon")
 	
-	bg_env = root.find_child("SnowLevelBackground").find_child("WorldEnvironment").environment
+	var bg = root.find_child("SnowLevelBackground")
+	bg_env = bg.find_child("WorldEnvironment").environment
 	bg_sky = bg_env.sky.sky_material
+	bg_particle_attractor = bg.find_child("ParticleAttractor")
 	
 	level_env = root.find_child("Level").find_child("WorldEnvironment").environment
 	level_sky = level_env.sky.sky_material
@@ -451,12 +455,14 @@ func expand_blizzard_safezone():
 	t.tween_property(bg_sky, "sky_top_color", Color("#8394ae"), frames(144))
 	#t.tween_property(sky, "sky_horizon_color", Color("#6a7b95"), frames(144))
 	#t.tween_property(sky, "ground_horizon_color", Color("#6a7b95"), frames(144))
-	t.tween_property(bg_sky, "sky_horizon_color", Color.WEB_GRAY, frames(144))
-	t.tween_property(bg_sky, "ground_horizon_color", Color.WEB_GRAY, frames(144))
+	t.tween_property(bg_sky, "sky_horizon_color", Color.DARK_GRAY, frames(144))
+	t.tween_property(bg_sky, "ground_horizon_color", Color.DARK_GRAY, frames(144))
 	t.tween_property(level_sky, "sky_top_color", Color.GRAY, frames(144))
 	t.tween_property(level_env, "fog_light_color", Color.GRAY, frames(144))
 	t.tween_property(level_env, "fog_density", 0, frames(144))
 	t.tween_property(level_env, "volumetric_fog_density", 0, frames(144))
+	t.tween_property(particle_attractor, "strength", -30, 0)
+	t.tween_property(bg_particle_attractor, "strength", -30, 0)
 
 func contract_blizzard_safezone():
 	var t = get_tree().create_tween().set_parallel()
@@ -470,3 +476,5 @@ func contract_blizzard_safezone():
 	t.tween_property(level_env, "fog_light_color", Color("#5a6c82"), frames(360))
 	t.tween_property(level_env, "fog_density", 0.01, frames(360))
 	t.tween_property(level_env, "volumetric_fog_density", 0.036, frames(360))
+	t.tween_property(particle_attractor, "strength", 0, frames(180))
+	t.tween_property(bg_particle_attractor, "strength", 0, frames(180))
