@@ -25,12 +25,12 @@ glow_bloom = 0.6
 fog_enabled = true
 fog_light_color = Color(0.352941, 0.423529, 0.509804, 1)
 fog_sky_affect = 0.6
+fog_height = 10.0
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.036
 volumetric_fog_albedo = Color(0.396078, 0.462745, 0.560784, 1)
 volumetric_fog_emission = Color(0.396078, 0.462745, 0.560784, 1)
 volumetric_fog_anisotropy = 0.6
-adjustment_enabled = true
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_t0pq7")

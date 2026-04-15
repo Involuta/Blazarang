@@ -51,7 +51,7 @@ var blizzard_safezone_radius := 15.0
 @export var body_light_expanded_radius := 180.0 # Light expands on jumps to show new safezone
 @export var min_fog_radius := 9.0 # Dist from Clarity where fog is minimized
 @export var max_fog_radius := 18.0 # Dist from Clarity where fog is maximized
-var fog_autochange := true # Fog automatically changes depending on Cotu's dist to Clarity unless the blizzard is expanding/contracting
+var env_autochange := true # Fog automatically changes depending on Cotu's dist to Clarity unless the blizzard is expanding/contracting
 
 var stationary := false
 @export var walk_speed := 1.8
@@ -224,12 +224,13 @@ func body_face_position_directly(target_pos):
 
 func _physics_process(delta):
 	var dist_to_cotu = cotu.global_position.distance_to(global_position)
+	print(dist_to_cotu)
 	if dist_to_cotu > blizzard_safezone_radius:
 		blizzard_area.process_mode = Node.PROCESS_MODE_INHERIT
 	else:
 		blizzard_area.process_mode = Node.PROCESS_MODE_DISABLED
 	
-	if fog_autochange:
+	if env_autochange:
 		var min_fog_density := .01
 		var max_fog_density := .09
 		# Set fog density based on dist from Cotu
@@ -241,8 +242,19 @@ func _physics_process(delta):
 		# y = (.03/6)*x - (.03/6)*min_rad --> clamp((.03/6)*x - (.03/6)*min_rad)
 		var fog_roc := (max_fog_density - min_fog_density)/(max_fog_radius - min_fog_radius)
 		var target_fog_density = clampf(fog_roc * dist_to_cotu - fog_roc * min_fog_radius, min_fog_density, max_fog_density)
-		level_env.fog_density = move_toward(level_env.fog_density, target_fog_density, .15 * delta)
-	
+		level_env.fog_density = move_toward(level_env.fog_density, target_fog_density, delta)
+		
+		# Repeat the above for sky color
+		var near_sky_top_color := Color("#65768f")
+		var far_sky_top_color := Color("#232c38")
+		var near_sky_horizon_color := Color("#5a6c82")
+		var far_sky_horizon_color := Color("#1d2730")
+		var sky_top_roc := (far_sky_top_color.v - near_sky_top_color.v)/(max_fog_radius - min_fog_radius)
+		bg_sky.sky_top_color.v = clampf(sky_top_roc * dist_to_cotu - sky_top_roc * min_fog_radius, far_sky_top_color.v, near_sky_top_color.v)
+		var sky_horizon_roc := (far_sky_horizon_color.v - near_sky_horizon_color.v)/(max_fog_radius - min_fog_radius)
+		bg_sky.sky_horizon_color.v = clampf(sky_horizon_roc * dist_to_cotu - sky_horizon_roc * min_fog_radius, far_sky_horizon_color.v, near_sky_horizon_color.v)
+		bg_sky.ground_horizon_color.v = clampf(sky_horizon_roc * dist_to_cotu - sky_horizon_roc * min_fog_radius, far_sky_horizon_color.v, near_sky_horizon_color.v)
+		
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 		if global_position.y < min_y_pos:
@@ -466,7 +478,7 @@ func jump_shot_mvmt():
 	t.tween_property(self, "gravity", .5 * ProjectSettings.get_setting("physics/3d/default_gravity"), 0)
 
 func expand_blizzard_safezone():
-	fog_autochange = false
+	env_autochange = false
 	
 	var t = get_tree().create_tween().set_parallel()
 	t.tween_property(self, "blizzard_safezone_radius", blizzard_safezone_expanded_radius, frames(144))
@@ -500,4 +512,4 @@ func contract_blizzard_safezone():
 	t.tween_property(bg_particle_attractor, "strength", 0, frames(180))
 
 	await get_tree().create_timer(frames(360)).timeout
-	fog_autochange = true
+	env_autochange = true

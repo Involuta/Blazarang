@@ -27,10 +27,10 @@ emission_ring_inner_radius = 12.0
 direction = Vector3(2.08165e-12, 1, 2.08165e-12)
 spread = 0.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-initial_velocity_min = -4.5
+initial_velocity_min = -3.0
 initial_velocity_max = -1.5
 scale_min = 0.01
-scale_max = 0.03
+scale_max = 0.02
 
 [node name="SnowLevelBackground" type="Node3D"]
 
