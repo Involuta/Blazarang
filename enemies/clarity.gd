@@ -42,13 +42,16 @@ enum PHASE {
 }
 var phase := PHASE.PHASE1
 
-@export var min_y_pos := 11.4 # y pos of arena floor, ie X's minimum y position
+@export var min_y_pos := 10.0 # y pos of arena floor, ie X's minimum y position
 
 @export var blizzard_safezone_base_radius := 15.0
 @export var blizzard_safezone_expanded_radius := 150.0 # Blizzard safezone expands on jumps
 var blizzard_safezone_radius := 15.0
 @export var body_light_base_radius := 18.0
 @export var body_light_expanded_radius := 180.0 # Light expands on jumps to show new safezone
+@export var min_fog_radius := 9.0 # Dist from Clarity where fog is minimized
+@export var max_fog_radius := 18.0 # Dist from Clarity where fog is maximized
+var fog_autochange := true # Fog automatically changes depending on Cotu's dist to Clarity unless the blizzard is expanding/contracting
 
 var stationary := false
 @export var walk_speed := 1.8
@@ -220,10 +223,25 @@ func body_face_position_directly(target_pos):
 		m.rotation.z = lerp_angle(m.rotation.z, target_rotation.z, body_turn_speed / 2.1)
 
 func _physics_process(delta):
-	if cotu.global_position.distance_to(global_position) > blizzard_safezone_radius:
+	var dist_to_cotu = cotu.global_position.distance_to(global_position)
+	if dist_to_cotu > blizzard_safezone_radius:
 		blizzard_area.process_mode = Node.PROCESS_MODE_INHERIT
 	else:
 		blizzard_area.process_mode = Node.PROCESS_MODE_DISABLED
+	
+	if fog_autochange:
+		var min_fog_density := .01
+		var max_fog_density := .09
+		# Set fog density based on dist from Cotu
+		# fd is min_density at min_fog_radius, max_density at max_fog_radius
+		# (x=min_rad, y=min_den) (x=max_rad, y=max_den) --> dy/dx = (max_den-min_den)/(max_rad-min_rad)
+		# for brevity, max_den-min_den = .03, max_rad-min_rad = 6
+		# y = (.03/6)*x + b --> b = ?
+		# 0 = (.03/6)*min_rad + b --> b = -(.03/6)*min_rad
+		# y = (.03/6)*x - (.03/6)*min_rad --> clamp((.03/6)*x - (.03/6)*min_rad)
+		var fog_roc := (max_fog_density - min_fog_density)/(max_fog_radius - min_fog_radius)
+		var target_fog_density = clampf(fog_roc * dist_to_cotu - fog_roc * min_fog_radius, min_fog_density, max_fog_density)
+		level_env.fog_density = move_toward(level_env.fog_density, target_fog_density, .15 * delta)
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -448,6 +466,8 @@ func jump_shot_mvmt():
 	t.tween_property(self, "gravity", .5 * ProjectSettings.get_setting("physics/3d/default_gravity"), 0)
 
 func expand_blizzard_safezone():
+	fog_autochange = false
+	
 	var t = get_tree().create_tween().set_parallel()
 	t.tween_property(self, "blizzard_safezone_radius", blizzard_safezone_expanded_radius, frames(144))
 	t.tween_property(body_light, "omni_range", body_light_expanded_radius, frames(144))
@@ -478,3 +498,6 @@ func contract_blizzard_safezone():
 	t.tween_property(level_env, "volumetric_fog_density", 0.036, frames(360))
 	t.tween_property(particle_attractor, "strength", 0, frames(180))
 	t.tween_property(bg_particle_attractor, "strength", 0, frames(180))
+
+	await get_tree().create_timer(frames(360)).timeout
+	fog_autochange = true
