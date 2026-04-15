@@ -224,7 +224,6 @@ func body_face_position_directly(target_pos):
 
 func _physics_process(delta):
 	var dist_to_cotu = cotu.global_position.distance_to(global_position)
-	print(dist_to_cotu)
 	if dist_to_cotu > blizzard_safezone_radius:
 		blizzard_area.process_mode = Node.PROCESS_MODE_INHERIT
 	else:
@@ -236,12 +235,13 @@ func _physics_process(delta):
 		# Set fog density based on dist from Cotu
 		# fd is min_density at min_fog_radius, max_density at max_fog_radius
 		# (x=min_rad, y=min_den) (x=max_rad, y=max_den) --> dy/dx = (max_den-min_den)/(max_rad-min_rad)
-		# for brevity, max_den-min_den = .03, max_rad-min_rad = 6
-		# y = (.03/6)*x + b --> b = ?
-		# 0 = (.03/6)*min_rad + b --> b = -(.03/6)*min_rad
-		# y = (.03/6)*x - (.03/6)*min_rad --> clamp((.03/6)*x - (.03/6)*min_rad)
+		# for brevity, max_den-min_den = .03, max_rad-min_rad = 6, min_den = .01
+		# y = (.03/6)*x + b --> roc = (.03/6), b = ?
+		# .01 = roc*min_rad + b --> b = .01-roc*min_rad
+		# y = (.03/6)*x - (.01-(.03/6)*min_rad) --> clamp((.03/6)*x - (.01-(.03/6)*min_rad))
 		var fog_roc := (max_fog_density - min_fog_density)/(max_fog_radius - min_fog_radius)
-		var target_fog_density = clampf(fog_roc * dist_to_cotu - fog_roc * min_fog_radius, min_fog_density, max_fog_density)
+		var fog_yint := min_fog_density - fog_roc * min_fog_radius
+		var target_fog_density = clampf(fog_roc * dist_to_cotu + fog_yint, min_fog_density, max_fog_density)
 		level_env.fog_density = move_toward(level_env.fog_density, target_fog_density, delta)
 		
 		# Repeat the above for sky color
@@ -250,10 +250,12 @@ func _physics_process(delta):
 		var near_sky_horizon_color := Color("#5a6c82")
 		var far_sky_horizon_color := Color("#1d2730")
 		var sky_top_roc := (far_sky_top_color.v - near_sky_top_color.v)/(max_fog_radius - min_fog_radius)
-		bg_sky.sky_top_color.v = clampf(sky_top_roc * dist_to_cotu - sky_top_roc * min_fog_radius, far_sky_top_color.v, near_sky_top_color.v)
+		var sky_top_yint := near_sky_top_color.v - sky_top_roc * min_fog_radius
+		bg_sky.sky_top_color.v = clampf(sky_top_roc * dist_to_cotu + sky_top_yint, far_sky_top_color.v, near_sky_top_color.v)
 		var sky_horizon_roc := (far_sky_horizon_color.v - near_sky_horizon_color.v)/(max_fog_radius - min_fog_radius)
-		bg_sky.sky_horizon_color.v = clampf(sky_horizon_roc * dist_to_cotu - sky_horizon_roc * min_fog_radius, far_sky_horizon_color.v, near_sky_horizon_color.v)
-		bg_sky.ground_horizon_color.v = clampf(sky_horizon_roc * dist_to_cotu - sky_horizon_roc * min_fog_radius, far_sky_horizon_color.v, near_sky_horizon_color.v)
+		var sky_horizon_yint := near_sky_top_color.v - sky_horizon_roc * min_fog_radius
+		bg_sky.sky_horizon_color.v = clampf(sky_horizon_roc * dist_to_cotu + sky_horizon_yint, far_sky_horizon_color.v, near_sky_horizon_color.v)
+		bg_sky.ground_horizon_color.v = clampf(sky_horizon_roc * dist_to_cotu + sky_horizon_yint * min_fog_radius, far_sky_horizon_color.v, near_sky_horizon_color.v)
 		
 	if not is_on_floor():
 		velocity.y -= gravity * delta
