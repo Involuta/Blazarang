@@ -231,7 +231,7 @@ func _physics_process(delta):
 	
 	if env_autochange:
 		var min_fog_density := .01
-		var max_fog_density := .5
+		var max_fog_density := .3
 		# Set fog density based on dist from Cotu
 		# fd is min_density at min_fog_radius, max_density at max_fog_radius
 		# (x=min_rad, y=min_den) (x=max_rad, y=max_den) --> dy/dx = (max_den-min_den)/(max_rad-min_rad)

@@ -21,3 +21,4 @@ noise = SubResource("FastNoiseLite_yjypn")
 shape = SubResource("SphereShape3D_sfrut")
 
 [node name="Camera3D" type="Camera3D" parent="."]
+far = 600.0

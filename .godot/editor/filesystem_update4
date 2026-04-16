@@ -48,3 +48,4 @@ res://enemies/enemy_anims/clarity_stomp_full.res
 res://enemies/enemy_anims/clarity_stomp_left.res
 res://enemies/enemy_anims/clarity_stomp_right.res
 res://levels/snow_level/section_nodes/clarity_boss_arena1.tscn
+res://general_scripts/hurtbox.gd
