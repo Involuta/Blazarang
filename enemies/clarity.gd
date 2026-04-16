@@ -231,7 +231,7 @@ func _physics_process(delta):
 	
 	if env_autochange:
 		var min_fog_density := .01
-		var max_fog_density := .09
+		var max_fog_density := .5
 		# Set fog density based on dist from Cotu
 		# fd is min_density at min_fog_radius, max_density at max_fog_radius
 		# (x=min_rad, y=min_den) (x=max_rad, y=max_den) --> dy/dx = (max_den-min_den)/(max_rad-min_rad)
@@ -244,7 +244,7 @@ func _physics_process(delta):
 		var target_fog_density = clampf(fog_roc * dist_to_cotu + fog_yint, min_fog_density, max_fog_density)
 		level_env.fog_density = move_toward(level_env.fog_density, target_fog_density, delta)
 		
-		# Repeat the above for sky color
+		# Repeat the above for sky and fog colors
 		var near_sky_top_color := Color("#65768f")
 		var far_sky_top_color := Color("#232c38")
 		var near_sky_horizon_color := Color("#5a6c82")
@@ -255,7 +255,9 @@ func _physics_process(delta):
 		var sky_horizon_roc := (far_sky_horizon_color.v - near_sky_horizon_color.v)/(max_fog_radius - min_fog_radius)
 		var sky_horizon_yint := near_sky_top_color.v - sky_horizon_roc * min_fog_radius
 		bg_sky.sky_horizon_color.v = clampf(sky_horizon_roc * dist_to_cotu + sky_horizon_yint, far_sky_horizon_color.v, near_sky_horizon_color.v)
-		bg_sky.ground_horizon_color.v = clampf(sky_horizon_roc * dist_to_cotu + sky_horizon_yint * min_fog_radius, far_sky_horizon_color.v, near_sky_horizon_color.v)
+		bg_sky.ground_horizon_color.v = bg_sky.sky_horizon_color.v
+		# Fog color is the same as horizon color
+		level_env.fog_light_color.v = bg_sky.sky_horizon_color.v
 		
 	if not is_on_floor():
 		velocity.y -= gravity * delta
