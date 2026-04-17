@@ -19,11 +19,11 @@ var current_opponent_hitboxes
 @export var hurtbox_owner : Node3D # If this isn't set, parent is used as hurtbox owner
 var hb_owner : Node3D
 
-@onready var root := $/root/ViewControl
+@onready var root := get_tree().root
 var level : Node3D
 
 func _ready():
-	level = root.find_child("Level")
+	level = root.find_child("Level", true, false)
 	area_entered.connect(on_hit)
 	current_opponent_hitboxes = opponent_hitboxes
 	assert(opponent_hitboxes != ["default"], "opponent hitboxes not changed from default")

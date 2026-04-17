@@ -9,7 +9,7 @@ var rang_thrown := true # the roserang script has just readied; was the rang thr
 
 @onready var anim_tree = $AnimationTree
 
-@onready var root := $/root/ViewControl
+@onready var root := get_tree().root
 var cotu : Node3D
 var cotu_hurtbox : Node3D
 
@@ -17,7 +17,7 @@ var cotu_hurtbox : Node3D
 @export var next_buff_index := 0
 
 func _ready():
-	cotu = root.find_child("cotuCB")
+	cotu = root.find_child("cotuCB", true, false)
 	cotu_hurtbox = cotu.find_child("Hurtbox")
 
 func _physics_process(_delta):

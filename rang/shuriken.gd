@@ -14,7 +14,7 @@ enum State {
 
 var state: State = State.ORBIT
 
-@onready var root := $/root/ViewControl
+@onready var root := get_tree().root
 @onready var hitbox := $PlayerHitbox
 @onready var explosion_hitbox := $ExplosionPivot/PlayerHitbox
 @onready var mesh := $ShurikenMesh
@@ -81,8 +81,8 @@ var explosion_hitbox_pmd := 0.0
 var initial_rotation: Basis
 
 func _ready():
-	level = root.find_child("Level")
-	cotu = root.find_child("cotuCB")
+	level = root.find_child("Level", true, false)
+	cotu = root.find_child("cotuCB", true, false)
 	icon = level.find_child("Icon")
 	
 	main_hitbox_pmd = Globals.player_hitbox_data.ShurikenBaseDamage

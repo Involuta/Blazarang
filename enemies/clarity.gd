@@ -107,7 +107,7 @@ var transparent_mat := preload("res://textures/clear_tile.tres")
 
 var head_hurtbox : Node3D
 
-@onready var root := $/root/ViewControl
+@onready var root := get_tree().root
 var level : Node3D
 var target : Node3D
 var cotu : Node3D # Clarity only attacks the target; cotu is only referenced here to help Clarity calculate whether to parry when Cotu throws a roserang
@@ -124,18 +124,18 @@ func _ready():
 	head_hurtbox = find_child("EnemyHurtbox")
 	
 	head_hurtbox.add_to_group("lockonables")
-	level = root.find_child("Level")
+	level = root.find_child("Level", true, false)
 	target = level.find_child("Icon")
 	cotu = level.find_child("cotuCB")
 	camera = cotu.find_child("Camera3D")
 	clarity_icon = level.find_child("ClarityIcon")
 	
-	var bg = root.find_child("SnowLevelBackground")
+	var bg = level
 	bg_env = bg.find_child("WorldEnvironment").environment
 	bg_sky = bg_env.sky.sky_material
 	bg_particle_attractor = bg.find_child("ParticleAttractor")
 	
-	level_env = root.find_child("Level").find_child("WorldEnvironment").environment
+	level_env = level.find_child("WorldEnvironment").environment
 	level_sky = level_env.sky.sky_material
 	camera.environment = level_env
 	
@@ -246,18 +246,21 @@ func _physics_process(delta):
 		
 		# Repeat the above for sky and fog colors
 		var near_sky_top_color := Color("#65768f")
-		var far_sky_top_color := Color("#232c38")
+		var far_sky_top_color := Color("#3c485a")
 		var near_sky_horizon_color := Color("#5a6c82")
 		var far_sky_horizon_color := Color("#1d2730")
 		var sky_top_roc := (far_sky_top_color.v - near_sky_top_color.v)/(max_fog_radius - min_fog_radius)
 		var sky_top_yint := near_sky_top_color.v - sky_top_roc * min_fog_radius
-		bg_sky.sky_top_color.v = clampf(sky_top_roc * dist_to_cotu + sky_top_yint, far_sky_top_color.v, near_sky_top_color.v)
+		var target_sky_top_color_v = clampf(sky_top_roc * dist_to_cotu + sky_top_yint, far_sky_top_color.v, near_sky_top_color.v)
+		bg_sky.sky_top_color.v = move_toward(bg_sky.sky_top_color.v, target_sky_top_color_v, delta)
 		var sky_horizon_roc := (far_sky_horizon_color.v - near_sky_horizon_color.v)/(max_fog_radius - min_fog_radius)
 		var sky_horizon_yint := near_sky_top_color.v - sky_horizon_roc * min_fog_radius
-		bg_sky.sky_horizon_color.v = clampf(sky_horizon_roc * dist_to_cotu + sky_horizon_yint, far_sky_horizon_color.v, near_sky_horizon_color.v)
+		var target_sky_horizon_color_v = clampf(sky_horizon_roc * dist_to_cotu + sky_horizon_yint, far_sky_horizon_color.v, near_sky_horizon_color.v)
+		bg_sky.sky_horizon_color.v = move_toward(bg_sky.sky_horizon_color.v, target_sky_horizon_color_v, delta)
 		bg_sky.ground_horizon_color.v = bg_sky.sky_horizon_color.v
 		# Fog color is the same as horizon color
 		level_env.fog_light_color.v = bg_sky.sky_horizon_color.v
+		level_env.volumetric_fog_emission.v = bg_sky.sky_horizon_color.v
 		
 	if not is_on_floor():
 		velocity.y -= gravity * delta

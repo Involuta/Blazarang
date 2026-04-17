@@ -32,7 +32,7 @@ var axrang_buff_applied := [] # List of bools, where bool i is whether buff i ha
 @onready var roserang_buff_anims := $RoserangBuffAnimations
 @onready var axrang_buff_anims := $AxrangBuffAnimations
 
-@onready var root := $/root/ViewControl
+@onready var root := get_tree().root
 var cotu : Node3D
 var cotu_hurtbox : Node3D
 var cotu_icon : Node3D
@@ -45,7 +45,7 @@ var cotu_icon : Node3D
 @onready var score_num_display := $ScoreNumDisplay
 
 func _ready():
-	cotu = root.find_child("cotuCB")
+	cotu = root.find_child("cotuCB", true ,false)
 	cotu_hurtbox = cotu.find_child("Hurtbox")
 	cotu_icon = root.find_child("Icon")
 

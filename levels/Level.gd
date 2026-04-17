@@ -5,13 +5,13 @@ var cotu_look_direction := Vector3.FORWARD
 @export var map_import_scale_factor := 32
 @export var lockonable_limit := 20
 
-@onready var root := $/root/ViewControl
-var cotu
+@onready var root := get_tree().root
+var cotu : Node3D
 var camera_twist_pivot : Node3D
 var camera : Node3D
 
 func _ready():
-	cotu = root.find_child("cotuCB")
+	cotu = root.find_child("cotuCB", true, false)
 	camera_twist_pivot = cotu.find_child("CameraTwistPivot")
 	camera = cotu.find_child("Camera3D")
 

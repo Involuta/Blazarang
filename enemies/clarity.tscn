@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=81 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://enemies/boss_hurtbox.gd" id="5_j584x"]
 [ext_resource type="Script" path="res://general_scripts/damage_over_time_area.gd" id="7_ffp3t"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="7_i53v5"]
+[ext_resource type="Shader" path="res://shaders/smoke.gdshader" id="7_pdkmx"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g3bkq"]
 radius = 1.5
@@ -330,9 +331,13 @@ initial_velocity_max = -6.0
 scale_min = 0.01
 scale_max = 0.03
 
-[sub_resource type="FogMaterial" id="FogMaterial_unqot"]
-emission = Color(0.717647, 0.717647, 0.717647, 1)
-edge_fade = 0.984915
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ngjdx"]
+shader = ExtResource("7_pdkmx")
+shader_parameter/density = 1.0
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/emission = Color(0.67451, 0.827451, 1, 1)
+shader_parameter/height_falloff = 0.0
+shader_parameter/edge_fade = 0.1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2hwhq"]
 size = Vector3(150, 30, 150)
@@ -343,8 +348,8 @@ collision_mask = 146
 script = ExtResource("1_172k1")
 phase1_min_long_dist_wait = 3.0
 phase1_max_long_dist_wait = 4.0
-min_fog_radius = 13.5
-max_fog_radius = 21.0
+min_fog_radius = 12.0
+max_fog_radius = 24.0
 stagger_damage_threshold = 1.0
 phase1_straight_attack_chances = {
 "JumpShot": 1.0,
@@ -558,11 +563,11 @@ process_material = SubResource("ParticleProcessMaterial_bteud")
 draw_pass_1 = ExtResource("7_i53v5")
 
 [node name="FogVolume" type="FogVolume" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -3.50745, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.85701, 2.08165e-12)
 visible = false
-size = Vector3(18, 1.5, 18)
+size = Vector3(18, 15, 18)
 shape = 0
-material = SubResource("FogMaterial_unqot")
+material = SubResource("ShaderMaterial_ngjdx")
 
 [node name="BlizzardDOTArea" type="Node3D" parent="."]
 script = ExtResource("7_ffp3t")

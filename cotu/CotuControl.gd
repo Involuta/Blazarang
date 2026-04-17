@@ -178,7 +178,7 @@ var axrang_instance = null
 @onready var axrang_melee_hitbox := $CotuAnims/Armature/AxrangPivot/Axrang/PlayerHitbox
 @onready var axrang_overhead_explosion_hitbox := $CotuAnims/Armature/ExplosionPivot/PlayerHitbox
 
-@onready var root := $/root/ViewControl
+@onready var root := get_tree().root
 var level : Node3D
 var icon: Node3D
 var ui: Control
@@ -186,9 +186,9 @@ var ui: Control
 const LERP_VAL := .15 # The rate at which lerp funcs change; used for body mvmt animations
 
 func _ready():
-	level = root.find_child("Level")
+	level = root.find_child("Level", true, false)
 	icon = level.find_child("Icon")
-	ui = root.find_child("UIRoot")
+	ui = root.find_child("UIRoot", true, false)
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	

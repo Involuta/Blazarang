@@ -1,11 +1,11 @@
 extends Area3D
 
-@onready var root := $/root/ViewControl
+@onready var root := get_tree().root
 var cotu : Node3D
 @onready var rang = get_parent()
 
 func _ready():
-	cotu = root.find_child("cotuCB")
+	cotu = root.find_child("cotuCB", true, false)
 
 func _on_body_entered(body):
 	if not rang.invincible and body == cotu:

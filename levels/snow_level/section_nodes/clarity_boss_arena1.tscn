@@ -10,7 +10,7 @@ polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Arr
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hfnve"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rl6bh"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uvw7i"]
 albedo_color = Color(0.85098, 0.909804, 1, 1)
 metallic_specular = 0.7
 roughness = 0.9
@@ -21,7 +21,7 @@ clearcoat_texture = SubResource("NoiseTexture2D_hfnve")
 subsurf_scatter_strength = 0.1
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_6sbu1"]
-material = SubResource("StandardMaterial3D_rl6bh")
+material = SubResource("StandardMaterial3D_uvw7i")
 size = Vector2(600, 600)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vqxk0"]

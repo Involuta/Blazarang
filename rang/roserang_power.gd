@@ -52,7 +52,7 @@ var hitbox_pmd := 0.0
 
 var ricochet_particles := preload("res://rang/rang_particles_ricochet.tscn")
 
-@onready var root := $/root/ViewControl
+@onready var root := get_tree().root
 var level : Node3D
 var cotu : Node3D
 var icon : Node3D
@@ -75,8 +75,8 @@ func _init():
 	_ready()
 
 func _ready():
-	level = root.find_child("Level")
-	cotu = root.find_child("cotuCB")
+	level = root.find_child("Level", true, false)
+	cotu = root.find_child("cotuCB", true, false)
 	icon = level.find_child("Icon")
 	
 	hitbox_pmd = Globals.player_hitbox_data.RoserangBaseDamage

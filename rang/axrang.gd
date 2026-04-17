@@ -28,7 +28,7 @@ var damage_multiplier := 1.0
 var main_hitbox_pmd := 0.0
 var explosion_hitbox_pmd := 0.0
 
-@onready var root := $/root/ViewControl
+@onready var root := get_tree().root
 var level : Node3D
 var cotu : Node3D
 var icon : Node3D
@@ -41,8 +41,8 @@ var icon : Node3D
 @onready var flying_sfx := $FlyingAudioStream
 
 func _ready():
-	level = root.find_child("Level")
-	cotu = root.find_child("cotuCB")
+	level = root.find_child("Level", true, false)
+	cotu = root.find_child("cotuCB", true, false)
 	icon = level.find_child("Icon")
 	
 	main_hitbox_pmd = Globals.player_hitbox_data.AxrangBaseDirectDamage
