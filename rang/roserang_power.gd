@@ -94,7 +94,7 @@ func _ready():
 	
 	# Calculate Travel Direction (Straight forward based on throw angle)
 	var throw_angle = cotu.get_rang_throw_y_angle()
-	travel_direction = Vector3.FORWARD.rotated(Vector3.UP, throw_angle)
+	travel_direction = cotu.get_camera_fwd_dir()#Vector3.FORWARD.rotated(Vector3.UP, throw_angle)
 	
 	# Pre-calculate Rose settings (for when we eventually switch to Rose)
 	rose_eqn_initial_throw_angle = rose_eqn_petals*throw_angle + rose_eqn_initial_throw_angle_offset

@@ -70,3 +70,4 @@ res://textures/solid_light_gray_tile.tres
 res://levels/x_boss_level/x_boss_level1_viewcontrol.tscn
 res://enemies/x_boss.tscn
 res://levels/gauntlet_level/gauntlet_level1.gd
+res://enemies/x_boss.gd

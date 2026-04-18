@@ -1066,12 +1066,16 @@ func _on_shuriken_destroyed(s_node):
 func _on_mark_removed():
 	active_mark = null
 
-# Used by roserang.gd to get Cotu's rang throw angle (the angle input of the rose equation)
+# Used by roserang script to get Cotu's rang throw angle (the angle input of the rose equation)
 func get_rang_throw_y_angle():
 	return camera_twist_pivot.basis.get_euler().y
 
-# Used by X to get Cotu's rang throw direction
+# Used by roserang power throw script to get camera's fwd vec
 func get_camera_fwd_dir():
+	return -camera.global_transform.basis.z
+
+# Used by X to get Cotu's rang throw direction in the lateral plane only
+func get_camera_fwd_dir_lateral():
 	return -camera_twist_pivot.global_transform.basis.z
 
 # Used by Jumping Spider to get Cotu's fwd facing direction

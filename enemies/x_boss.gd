@@ -367,7 +367,7 @@ func trigger_ax_dodge():
 func rang_throw_angle_to_me():
 	var cotu_to_X_vec := cotu.global_position.direction_to(global_position)
 	var cx2D := Vector2(cotu_to_X_vec.x, cotu_to_X_vec.z)
-	var cotu_cam_vec = cotu.get_camera_fwd_dir()
+	var cotu_cam_vec = cotu.get_camera_fwd_dir_lateral()
 	var ccv2D := Vector2(cotu_cam_vec.x, cotu_cam_vec.z)
 	return cx2D.angle_to(ccv2D)
 
