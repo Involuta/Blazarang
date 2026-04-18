@@ -28,10 +28,8 @@ func _ready():
 	starlight_tween.tween_property($Star, "scale", Vector3.ONE, 3)
 	bg = root.find_child("XBossLevelBackground")
 	for i in range(big_diamond_num):
-		await get_tree().create_timer(.1).timeout
 		spawn_big_diamond()
 	for i in range(small_diamond_num):
-		await get_tree().create_timer(2).timeout
 		spawn_small_diamond()
 
 func spawn_small_diamond():

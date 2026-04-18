@@ -44,8 +44,17 @@ var camera_twist_input := .0
 var camera_pitch_input := .0
 var locked_on := false
 var lock_on_target = null
-
+@export var default_max_cam_dist := 6.0
 var max_cam_dist := 6.0 # dist btwn player and camera when camera's not colliding with geometry; player can modify this in-game
+
+@export var default_fov := 75.0
+@export var power_throw_zoom_fov := 60.0
+@export var power_throw_zoom_in_duration := 0.25
+@export var power_throw_zoom_out_duration := 0.15
+var power_throw_zoomed_in := false
+@export var power_throw_zoom_alpha := .35
+@export var power_throw_shoulder_offset := Vector2(0.6, 0.2) # x = right, y = up
+@export var power_throw_zoom_cam_dist := 3.5  # vs default max_cam_dist of 6.0
 
 @export var max_slow_duration := 3.5
 @export var max_infest_duration := 10.0
@@ -169,7 +178,7 @@ var axrang_instance = null
 @onready var physical_collider := $CollisionShape3D
 @onready var camera_twist_pivot := $CameraTwistPivot
 @onready var camera_pitch_pivot := $CameraTwistPivot/CameraPitchPivot
-@onready var camera := $CameraTwistPivot/CameraPitchPivot/CameraVisualObject
+@onready var camera_pos := $CameraTwistPivot/CameraPitchPivot/CameraVisualObject
 @onready var rang_pointer_pivot := $RangPointerPivot
 @onready var roserang_particles := $RoserangTinyParticles/GPUParticles3D
 @onready var armature := $CotuAnims/Armature
@@ -182,6 +191,7 @@ var axrang_instance = null
 var level : Node3D
 var icon: Node3D
 var ui: Control
+var camera : Node3D
 
 const LERP_VAL := .15 # The rate at which lerp funcs change; used for body mvmt animations
 
@@ -189,6 +199,7 @@ func _ready():
 	level = root.find_child("Level", true, false)
 	icon = level.find_child("Icon")
 	ui = root.find_child("UIRoot", true, false)
+	camera = camera_pos.find_child("Camera3D")
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
@@ -204,6 +215,8 @@ func _ready():
 	
 	can_walk = true
 	can_rotate = true
+	
+	max_cam_dist = default_max_cam_dist
 
 func set_busy(state: bool):
 	busy = state
@@ -500,8 +513,16 @@ func _physics_process(delta):
 				set_busy(true)
 			# Power throw charge
 			roserang_power_throw_charge_time += delta
+			# Zoom in once charge crosses the power throw threshold
+			if not power_throw_zoomed_in and roserang_power_throw_charge_time >= roserang_power_throw_min_charge_time:
+				power_throw_zoomed_in = true
+				power_throw_zoom_in()
 		# Normal and power throw are triggered on button release
 		elif Input.is_action_just_released("ThrowRoserang"):
+			# Always zoom back out on release, regardless of throw type
+			if power_throw_zoomed_in:
+				power_throw_zoomed_in = false
+				power_throw_zoom_out()
 			if roserang_power_throw_charge_time >= roserang_power_throw_min_charge_time:
 				# Roserang power throw
 				roserang_power_throw_charge_time = 0.0
@@ -540,12 +561,12 @@ func _physics_process(delta):
 		if mark_destroyed:
 			return
 		if active_mark:
-			active_mark.try_place_from_camera(camera)
+			active_mark.try_place_from_camera(camera_pos)
 		else:
 			var m = mark_scene.instantiate()
 			add_sibling(m)
 			m.global_position = global_position
-			if m.try_place_from_camera(camera):
+			if m.try_place_from_camera(camera_pos):
 				active_mark = m
 				m.mark_removed.connect(_on_mark_removed)
 		# If mark shuriken deploy is unlocked, then when mark is placed, deploy shurikens
@@ -624,11 +645,11 @@ func place_camera():
 	query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER])
 	var result = space_state.intersect_ray(query)
 	if result:
-		camera.position = Vector3.ZERO
+		camera_pos.position = Vector3.ZERO
 		# Make the camera move slightly closer to Cotu after going to the raycast hit to prevent the camera from seeing below the floor
-		camera.global_position = result.position + .2 * result.position.direction_to(global_position)
+		camera_pos.global_position = result.position + .2 * result.position.direction_to(global_position)
 	else:
-		camera.position = Vector3.BACK * max_cam_dist
+		camera_pos.position = Vector3.BACK * max_cam_dist
 
 func lock_on(node):
 	locked_on = true
@@ -636,6 +657,26 @@ func lock_on(node):
 
 func lock_off():
 	locked_on = false
+
+func power_throw_zoom_in():
+	var t = get_tree().create_tween().set_parallel()
+	t.tween_property(camera, "fov", power_throw_zoom_fov, power_throw_zoom_in_duration)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	#t.tween_property(armature, "modulate:a", power_throw_zoom_alpha, power_throw_zoom_in_duration)\.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	t.tween_property(camera_pitch_pivot, "position", Vector3(power_throw_shoulder_offset.x, power_throw_shoulder_offset.y, 0.0),
+		power_throw_zoom_in_duration)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	t.tween_property(self, "max_cam_dist", power_throw_zoom_cam_dist, power_throw_zoom_in_duration)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+func power_throw_zoom_out():
+	var t = get_tree().create_tween()
+	t.tween_property(camera, "fov", default_fov, power_throw_zoom_out_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	#t.tween_property(armature, "modulate:a", 1.0, power_throw_zoom_in_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	t.tween_property(camera_pitch_pivot, "position", Vector3.ZERO, power_throw_zoom_out_duration)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	t.tween_property(self, "max_cam_dist", default_max_cam_dist, power_throw_zoom_out_duration)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
 func step_dodge():
 	Globals.cotu_dodge.emit()

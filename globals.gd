@@ -87,8 +87,8 @@ const HOMING_HIT_SCORE = 1
 # These are vars in case they change as the player progresses
 var cotu_max_health := 100.0
 var cotu_regen_delay := 1.0 # time after a loss in stability before regen begins
-var cotu_base_regen_rate := .25
-var cotu_fast_regen_rate := .5
+var cotu_base_regen_rate := .15
+var cotu_fast_regen_rate := .3
 var cotu_destabilize_invincibility_time := 2.0
 
 const player_hitbox_data = {

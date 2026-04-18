@@ -406,6 +406,10 @@ radius = 1.0
 collision_layer = 16
 collision_mask = 74
 script = ExtResource("1_aleek")
+power_throw_zoom_fov = 45.0
+power_throw_zoom_in_duration = 0.2
+power_throw_shoulder_offset = Vector2(0.4, 0.6)
+power_throw_zoom_cam_dist = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_kxw61")

@@ -65,3 +65,8 @@ res://enemies/x_laser_combo_ball_projectile.tscn
 res://levels/x_boss_level/background_nodes/small_diamond.tscn
 res://levels/x_boss_level/background_nodes/flat_diamond.tscn
 res://enemies/x_top_head_piece_rb.tscn
+res://cotu/CotuHurtbox.gd
+res://textures/solid_light_gray_tile.tres
+res://levels/x_boss_level/x_boss_level1_viewcontrol.tscn
+res://enemies/x_boss.tscn
+res://levels/gauntlet_level/gauntlet_level1.gd

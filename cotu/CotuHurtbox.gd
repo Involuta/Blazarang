@@ -3,8 +3,8 @@ extends Hurtbox
 
 var original_max_health := 100.0
 
-@export var base_recovery_rate := .25
-@export var fast_recovery_rate := .5
+var base_recovery_rate := .2 # Set by globals
+var fast_recovery_rate := .4 # Set by globals
 var recovery_rate := .5
 @export var recovery_delay := 1.0 # Time after getting hit before recovery begins
 var recovery_delay_remaining := 1.0
