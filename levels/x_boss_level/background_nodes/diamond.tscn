@@ -1,15 +1,82 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqwo81yvpd1ok"]
+[gd_scene load_steps=7 format=3 uid="uid://bqwo81yvpd1ok"]
 
 [ext_resource type="PackedScene" uid="uid://cqxg20m4bx02k" path="res://glb_imports/Diamond.glb" id="1_y6ybw"]
-[ext_resource type="Material" uid="uid://2cmcsevpwc0f" path="res://levels/x_boss_level/background_nodes/diamond.tres" id="2_admw2"]
+[ext_resource type="Shader" path="res://levels/x_boss_level/background_nodes/reveal_from_middle.gdshader" id="2_gsaei"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xjvwq"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_gsaei")
+shader_parameter/albedo_color = Color(0.490196, 0.294118, 0.243137, 1)
+shader_parameter/reveal_amount = 1.0
+shader_parameter/mesh_height = 6.0
+shader_parameter/glow_width = 0.05
+shader_parameter/glow_color = Color(1, 0.301961, 0, 1)
+
+[sub_resource type="Animation" id="Animation_y1tpo"]
+resource_name = "reveal"
+length = 2.0
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Top:surface_material_override/0:shader_parameter/reveal_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_fovad"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Top:surface_material_override/0:shader_parameter/reveal_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7g0o0"]
+_data = {
+"RESET": SubResource("Animation_fovad"),
+"reveal": SubResource("Animation_y1tpo")
+}
 
 [node name="Diamond" instance=ExtResource("1_y6ybw")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+visible = false
 
 [node name="Top" parent="." index="0"]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-surface_material_override/0 = ExtResource("2_admw2")
+surface_material_override/0 = SubResource("ShaderMaterial_xjvwq")
 
 [node name="Bottom" parent="." index="1"]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-surface_material_override/0 = ExtResource("2_admw2")
+surface_material_override/0 = SubResource("ShaderMaterial_xjvwq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+autoplay = "reveal"
+libraries = {
+"": SubResource("AnimationLibrary_7g0o0")
+}

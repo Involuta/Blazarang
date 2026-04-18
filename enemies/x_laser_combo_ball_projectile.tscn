@@ -552,12 +552,14 @@ libraries = {
 emitting = false
 amount = 20
 lifetime = 2.0
+visibility_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
 process_material = SubResource("ParticleProcessMaterial_0huv0")
 draw_pass_1 = SubResource("ArrayMesh_5wu13")
 
 [node name="FastDots" type="GPUParticles3D" parent="."]
 emitting = false
 amount = 50
+visibility_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
 process_material = SubResource("ParticleProcessMaterial_b2wh0")
 draw_pass_1 = SubResource("ArrayMesh_5wu13")
 

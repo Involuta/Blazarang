@@ -1,7 +1,7 @@
+AnimationPlayer
 GPUParticlesAttractorSphere3D
 FogVolume
 Sprite3D
-AnimationPlayer
 MeshInstance3D
 OmniLight3D
 GPUParticles3D
