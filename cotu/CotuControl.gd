@@ -48,13 +48,13 @@ var lock_on_target = null
 var max_cam_dist := 6.0 # dist btwn player and camera when camera's not colliding with geometry; player can modify this in-game
 
 @export var default_fov := 75.0
-@export var power_throw_zoom_fov := 60.0
+@export var power_throw_zoom_fov := 45.0
 @export var power_throw_zoom_in_duration := 0.25
-@export var power_throw_zoom_out_duration := 0.15
+@export var power_throw_zoom_out_duration := 0.12
 var power_throw_zoomed_in := false
-@export var power_throw_zoom_alpha := .35
-@export var power_throw_shoulder_offset := Vector2(0.6, 0.2) # x = right, y = up
-@export var power_throw_zoom_cam_dist := 3.5  # vs default max_cam_dist of 6.0
+@export var power_throw_zoom_alpha := .35 # Opacity of Cotu while zoomed in
+@export var power_throw_shoulder_offset := Vector2(0.4, 0.64) # x = right, y = up
+@export var power_throw_zoom_cam_dist := 1.0  # vs default max_cam_dist of 6.0
 
 @export var max_slow_duration := 3.5
 @export var max_infest_duration := 10.0
@@ -670,7 +670,7 @@ func power_throw_zoom_in():
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 func power_throw_zoom_out():
-	var t = get_tree().create_tween()
+	var t = get_tree().create_tween().set_parallel()
 	t.tween_property(camera, "fov", default_fov, power_throw_zoom_out_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	#t.tween_property(armature, "modulate:a", 1.0, power_throw_zoom_in_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	t.tween_property(camera_pitch_pivot, "position", Vector3.ZERO, power_throw_zoom_out_duration)\
