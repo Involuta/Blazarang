@@ -142,7 +142,7 @@ const enemy_hurtbox_data = {
 	"Paramite" : [35, 1.0, 1.0],
 	"Flatmite" : [25, 1.0, 1.0],
 	"Harvestman" : [10, 1.0, 1.0],
-	"JumpingSpider" : [80, 1.0, 1.0],
+	"JumpingSpider" : [800, 1.0, 1.0],
 	
 	"Clarity" : [3000, 1.0, 100.0],
 }

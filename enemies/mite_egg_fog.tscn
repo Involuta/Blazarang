@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b8ap3xuxjoboh"]
+[gd_scene load_steps=4 format=3 uid="uid://b8ap3xuxjoboh"]
 
 [ext_resource type="Shader" path="res://shaders/smoke.gdshader" id="1_5gi2f"]
 [ext_resource type="Script" path="res://general_scripts/DisappearNode.gd" id="2_55yx1"]
@@ -6,45 +6,10 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j8kkl"]
 shader = ExtResource("1_5gi2f")
 shader_parameter/density = 0.4
-shader_parameter/albedo = Color(1, 0.556863, 0.494118, 1)
+shader_parameter/albedo = Color(1, 0.454902, 0.407843, 1)
 shader_parameter/emission = Color(0, 0, 0, 1)
 shader_parameter/height_falloff = 0.0
 shader_parameter/edge_fade = 0.1
-
-[sub_resource type="Curve" id="Curve_edm2p"]
-_data = [Vector2(0, 0.102957), 0.0, 0.0, 0, 0, Vector2(0.234576, 0.399416), 0.0, 0.0, 0, 0, Vector2(1, 0.0976633), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_pgbqu"]
-curve = SubResource("Curve_edm2p")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wvb2r"]
-emission_shape = 3
-emission_box_extents = Vector3(10, 4, 10)
-direction = Vector3(2.08165e-12, -1, 2.08165e-12)
-spread = 0.0
-flatness = 0.5
-gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-initial_velocity_min = 0.1
-initial_velocity_max = 1.0
-scale_min = 0.4
-scale_curve = SubResource("CurveTexture_pgbqu")
-color = Color(1, 0, 0.101961, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uxjbv"]
-shading_mode = 0
-vertex_color_use_as_albedo = true
-disable_receive_shadows = true
-billboard_mode = 3
-billboard_keep_scale = true
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="SphereMesh" id="SphereMesh_vvfhc"]
-material = SubResource("StandardMaterial3D_uxjbv")
-radius = 0.25
-height = 0.5
 
 [node name="MiteEggFog" type="FogVolume"]
 size = Vector3(32, 8, 32)
@@ -52,12 +17,3 @@ shape = 0
 material = SubResource("ShaderMaterial_j8kkl")
 script = ExtResource("2_55yx1")
 disappear_secs = 16.0
-
-[node name="MiteCloudParticles" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-cast_shadow = 0
-custom_aabb = AABB(-400, -400, -400, 800, 800, 800)
-amount = 10
-lifetime = 0.5
-process_material = SubResource("ParticleProcessMaterial_wvb2r")
-draw_pass_1 = SubResource("SphereMesh_vvfhc")

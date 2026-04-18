@@ -13,7 +13,7 @@ extends Node3D
 @onready var bigweb := preload("res://enemies/bigweb.tscn")
 @onready var egg_fog := preload("res://enemies/mite_egg_fog.tscn")
 
-@onready var root := $/root/ViewControl
+@onready var root := get_tree().root
 var rng := RandomNumberGenerator.new()
 var level : Node3D
 var target : Node3D
@@ -123,9 +123,9 @@ var jumping_spider_inst : Node3D
 
 func _ready():
 	time_until_next_infest_switch_secs = max_time_until_next_infest_switch
-	level = root.find_child("Level")
+	level = root.find_child("Level", true, false)
 	# Egg dropper targets Cotu's body, not icon
-	target = root.find_child("cotuCB")
+	target = level.find_child("cotuCB", true, false)
 	
 	# Set starting wave if applicable
 	if starting_wave > 0:

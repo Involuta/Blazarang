@@ -7,7 +7,7 @@ var tiny_mite := preload("res://enemies/tiny_mite.tscn")
 @onready var poke_hitbox := $HarvestmanProcAnimMeshes/DamageOverTimeArea
 @onready var anim_tree := $AnimationTree
 @onready var hurtbox := $EnemyHurtbox
-@onready var root := $/root/ViewControl
+@onready var root := get_tree().root
 var rng := RandomNumberGenerator.new()
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var level : Node3D
@@ -42,8 +42,8 @@ var leaving := false # Used to know whether to leave arena
 @export var dp_impulse_limit := 5.0
 
 func _ready():
-	level = root.find_child("Level")
-	target = root.find_child("Icon")
+	level = root.find_child("Level", true, false)
+	target = root.find_child("Icon", true, false)
 	mouth = find_child("Mouth")
 	anim_tree.active = true
 	nav_agent.target_desired_distance = spit_dist

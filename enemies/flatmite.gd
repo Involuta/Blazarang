@@ -7,7 +7,7 @@ var spitweb := preload("res://enemies/spitweb.tscn")
 @onready var target_pos_mesh := $TargetPosMesh
 @onready var hurtbox := $EnemyHurtbox # When mite falls off the map, it calls hurtbox's die func
 @onready var anim_tree := $AnimationTree
-@onready var root := $/root/ViewControl
+@onready var root := get_tree().root
 var rng := RandomNumberGenerator.new()
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var level : Node3D
@@ -60,8 +60,8 @@ var leaving := false # Used to know whether to leave arena
 @export var dp_impulse_limit := 5.0
 
 func _ready():
-	level = root.find_child("Level")
-	target = root.find_child("Icon")
+	level = root.find_child("Level", true, false)
+	target = root.find_child("Icon", true, false)
 	hitbox = find_child("MeleeHitboxPivot")
 	#hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	anim_tree.active = true

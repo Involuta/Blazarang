@@ -7,10 +7,10 @@ var x_hurtbox : Node3D
 
 func _ready():
 	super()
-	ui_root = root.find_child("UIRoot")
+	ui_root = root.find_child("UIRoot", true, false)
 	x_health_bar = ui_root.find_child("XHealthBar")
 	x_damage_indicator = x_health_bar.find_child("DamageIndicator")
-	x_hurtbox = root.find_child("XBoss").find_child("EnemyHurtbox")
+	x_hurtbox = root.find_child("XBoss", true, false).find_child("EnemyHurtbox")
 	ui_root.hide_black_screen()
 	x_damage_indicator.max_value = x_hurtbox.max_health
 

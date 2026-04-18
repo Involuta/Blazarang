@@ -13,7 +13,7 @@ var silkthread_scene := preload("res://enemies/silkthread.tscn")
 @onready var silkthread_mesh := $FakeMeshesPivot/SilkThreadMesh
 @onready var fake_meshes_anim_player := $FakeMeshesPivot/FakeMeshes/AnimationPlayer
 @onready var audio_player := $AudioStreamPlayer
-@onready var root := $/root/ViewControl
+@onready var root := get_tree().root
 var rng := RandomNumberGenerator.new()
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var level : Node3D
@@ -125,10 +125,10 @@ var dodge_responses := 0 # Num of times spider jumped in response to dodge in ph
 var phase2 := false # Set to true when phase 2 begins. Checked in receive hit from hurtbox func
 
 func _ready():
-	level = root.find_child("Level")
+	level = root.find_child("Level", true, false)
 	arena = level.find_child("MiteLevelMainArena")
 	# Jumping spider targets Cotu's body, not icon
-	target = root.find_child("cotuCB")
+	target = root.find_child("cotuCB", true, false)
 	inner_hitbox = find_child("InnerMeleeHitboxPivot")
 	outer_hitbox = find_child("OuterMeleeHitboxPivot")
 	# Walk dest mesh may or may not exist

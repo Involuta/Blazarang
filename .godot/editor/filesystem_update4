@@ -43,3 +43,17 @@ res://rang/roserang.gd
 res://rang/roserang_power.gd
 res://rang/axrang.gd
 res://rang/shuriken.gd
+res://levels/mite_level/mite_level_background.tscn
+res://levels/mite_level/mite_level_test_env.tscn
+res://levels/mite_level/section_nodes/mite_level_main_arena.gd
+res://enemies/landmite.gd
+res://enemies/paramite.gd
+res://enemies/flatmite.gd
+res://enemies/harvestman.gd
+res://enemies/jumping_spider.gd
+res://enemies/mite_egg.gd
+res://enemies/spitweb.tscn
+res://globals.gd
+res://enemies/mite_egg_fog.tscn
+res://levels/mite_level/section_nodes/mite_level_main_arena.tscn
+res://levels/x_boss_level/x_boss_level1.gd

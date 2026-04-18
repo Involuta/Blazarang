@@ -11,14 +11,14 @@ var destroyed := false
 @onready var flight_particles := $FlightParticles
 @onready var impact_particles := $ImpactParticles
 
-@onready var root := $/root/ViewControl
+@onready var root := get_tree().root
 var mite_arena : Node3D
 
 # 1 = landmite, 2 = paramite, 3 = flatmite, 4 = harvestman, 5 = web
 @export var type := 1
 
 func _ready():
-	mite_arena = root.find_child("MiteLevelMainArena")
+	mite_arena = root.find_child("MiteLevelMainArena", true, false)
 	
 	flight_particles.emitting = true
 	impact_particles.emitting = false

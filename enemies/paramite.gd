@@ -8,7 +8,7 @@ var spitweb := preload("res://enemies/spitweb.tscn")
 @onready var hurtbox := $EnemyHurtbox
 @onready var anim_player := $ParamiteMeshes/AnimationPlayer
 @onready var anim_tree := $AnimationTree
-@onready var root := $/root/ViewControl
+@onready var root := get_tree().root
 var rng := RandomNumberGenerator.new()
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var level : Node3D
@@ -53,8 +53,8 @@ func _ready():
 	skythread.position = skythread_withdraw_height * Vector3.UP
 	skythread.visible = false
 	
-	level = root.find_child("Level")
-	target = root.find_child("Icon")
+	level = root.find_child("Level", true, false)
+	target = root.find_child("Icon", true, false)
 	anim_tree.active = true
 	
 	switch_to_launch()
