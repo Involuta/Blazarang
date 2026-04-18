@@ -30,6 +30,6 @@ void fragment() {
 
     // Orange Emission Glow at the leading edges
     if (abs(local_y) > threshold - glow_width) {
-        EMISSION = glow_color * 5.0; 
+        EMISSION = glow_color * 4.0; 
     }
 }

@@ -63,3 +63,5 @@ res://levels/x_boss_level/x_boss_level_background.tscn
 res://levels/x_boss_level/background_nodes/spawn_bg_diamonds.gd
 res://enemies/x_laser_combo_ball_projectile.tscn
 res://levels/x_boss_level/background_nodes/small_diamond.tscn
+res://levels/x_boss_level/background_nodes/flat_diamond.tscn
+res://enemies/x_top_head_piece_rb.tscn

@@ -16,7 +16,6 @@ extends Node3D
 
 var rng := RandomNumberGenerator.new()
 var diamond := preload("res://levels/x_boss_level/background_nodes/diamond.tscn")
-var small_diamond := preload("res://levels/x_boss_level/background_nodes/small_diamond.tscn")
 @onready var root := $/root/ViewControl
 var bg : Node3D
 var big_diamond_list := []
@@ -29,14 +28,14 @@ func _ready():
 	starlight_tween.tween_property($Star, "scale", Vector3.ONE, 3)
 	bg = root.find_child("XBossLevelBackground")
 	for i in range(big_diamond_num):
-		await get_tree().create_timer(.4).timeout
+		await get_tree().create_timer(.1).timeout
 		spawn_big_diamond()
 	for i in range(small_diamond_num):
-		await get_tree().create_timer(4).timeout
+		await get_tree().create_timer(2).timeout
 		spawn_small_diamond()
 
 func spawn_small_diamond():
-	var d = small_diamond.instantiate()
+	var d = diamond.instantiate()
 	bg.add_child.call_deferred(d)
 	await d.tree_entered
 	while true:
