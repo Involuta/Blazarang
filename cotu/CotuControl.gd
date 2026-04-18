@@ -186,6 +186,7 @@ var axrang_instance = null
 @onready var hurtbox := $Hurtbox
 @onready var axrang_melee_hitbox := $CotuAnims/Armature/AxrangPivot/Axrang/PlayerHitbox
 @onready var axrang_overhead_explosion_hitbox := $CotuAnims/Armature/ExplosionPivot/PlayerHitbox
+@onready var crosshair := $Crosshair
 
 @onready var root := get_tree().root
 var level : Node3D
@@ -660,6 +661,7 @@ func lock_off():
 
 func power_throw_zoom_in():
 	var t = get_tree().create_tween().set_parallel()
+	crosshair.visible = true
 	t.tween_property(camera, "fov", power_throw_zoom_fov, power_throw_zoom_in_duration)\
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	#t.tween_property(armature, "modulate:a", power_throw_zoom_alpha, power_throw_zoom_in_duration)\.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
@@ -671,6 +673,7 @@ func power_throw_zoom_in():
 
 func power_throw_zoom_out():
 	var t = get_tree().create_tween().set_parallel()
+	crosshair.visible = false
 	t.tween_property(camera, "fov", default_fov, power_throw_zoom_out_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	#t.tween_property(armature, "modulate:a", 1.0, power_throw_zoom_in_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	t.tween_property(camera_pitch_pivot, "position", Vector3.ZERO, power_throw_zoom_out_duration)\
