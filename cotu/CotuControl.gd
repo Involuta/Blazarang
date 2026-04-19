@@ -48,13 +48,13 @@ var lock_on_target = null
 var max_cam_dist := 6.0 # dist btwn player and camera when camera's not colliding with geometry; player can modify this in-game
 
 @export var default_fov := 75.0
-@export var power_throw_zoom_fov := 45.0
-@export var power_throw_zoom_in_duration := 0.25
-@export var power_throw_zoom_out_duration := 0.12
-var power_throw_zoomed_in := false
-@export var power_throw_zoom_alpha := .35 # Opacity of Cotu while zoomed in
-@export var power_throw_shoulder_offset := Vector2(0.4, 0.64) # x = right, y = up
-@export var power_throw_zoom_cam_dist := 1.0  # vs default max_cam_dist of 6.0
+@export var shoulder_zoom_fov := 45.0
+@export var shoulder_zoom_in_duration := 0.25
+@export var shoulder_zoom_out_duration := 0.12
+var shoulder_zoomed_in := false
+@export var shoulder_zoom_alpha := .35 # Opacity of Cotu while zoomed in
+@export var shoulder_zoom_offset := Vector2(0.4, 0.64) # x = right, y = up
+@export var shoulder_zoom_cam_dist := 1.0  # vs default max_cam_dist of 6.0
 
 @export var max_slow_duration := 3.5
 @export var max_infest_duration := 10.0
@@ -78,13 +78,16 @@ var homing_targets_added := 0 # Increments for every homing buff applied
 var next_roserang_buff_index := 0
 var normal_throw_roserang_self_damage := 18.0
 var power_throw_roserang_self_damage := 24.0
+var roserang_throw_charging := false # Set to true when throw roserang button is pressed, set to false when released
 @export var roserang_power_throw_min_charge_time := 0.25
-@export var roserang_power_throw_max_charge_time := 0.75
-var roserang_power_throw_charge_time := 0.0
+var roserang_throw_charge_time := 0.0
 
 var axrang_dodge_rethrow_queued := false
 var axrang_perfect_catch_queued := false
 var axrang_perfect_caught := false
+var axrang_throw_charging := false # Set to true when throw axrang button is pressed, set to false when released
+@export var axrang_throw_min_charge_time := .25
+var axrang_throw_charge_time := 0.0 # Axrang doesn't have a power throw, but holding down the throw button makes the throw omnidirection (as opposed to just in the lateral plane)
 var axrang_buff_list := [Globals.AXRANG_BUFFS.DAMAGE, Globals.AXRANG_BUFFS.SPEED, Globals.AXRANG_BUFFS.SPEED]
 var next_axrang_buff_index := 0
 @export var axrang_buff_decay_interval := 4.0 # Seconds between losing buffs
@@ -337,7 +340,7 @@ func _physics_process(delta):
 		return
 	
 	# Dodge logic with hoverboard activation (can't dodge while already hoverboarding)
-	if Input.is_action_just_pressed("StepDodge") and !busy and roserang_power_throw_charge_time <= 0 and !is_hoverboarding:
+	if Input.is_action_just_pressed("StepDodge") and !busy and roserang_throw_charge_time <= 0 and !is_hoverboarding:
 		anim_tree.set(anim_tree_param_path_base + "just_dodged", true)
 		dodge_held = true
 		step_dodge()
@@ -348,7 +351,7 @@ func _physics_process(delta):
 	if is_dodging and not Input.is_action_pressed("StepDodge"):
 		dodge_held = false
 	
-	if Input.is_action_pressed("Jump") and is_on_floor() and icon.following_cotu and !is_hoverboarding:
+	if Input.is_action_pressed("Jump") and !busy and is_on_floor() and icon.following_cotu and !is_hoverboarding:
 		super_jump_charge_time += delta
 		
 		# Once the player starts charging, they become "busy" and stop moving
@@ -363,11 +366,9 @@ func _physics_process(delta):
 			super_jump_fully_charged = true
 			# You could add a particle effect or sound trigger here for "Charge Complete"
 	
-	if Input.is_action_just_released("Jump") and !is_hoverboarding:
-		if super_jump_fully_charged:
-			velocity.y = super_jump_speed
-			# Optional: add a 'jump' trigger to your AnimTree here
-		
+	if Input.is_action_just_released("Jump") and super_jump_fully_charged and !is_hoverboarding:
+		velocity.y = super_jump_speed
+		# Optional: add a 'jump' trigger to your AnimTree here
 		# Always reset state on release
 		super_jump_charge_time = 0.0
 		super_jump_fully_charged = false
@@ -461,16 +462,38 @@ func _physics_process(delta):
 		anim_tree.set(anim_tree_param_path_base + "melee_ax", false)
 	
 	# Axrang throw
-	if Input.is_action_just_pressed("ThrowAxrang"):
-		if axrang_instance == null and !busy:
-			if not destabilized and not axrang_perfect_caught:
+	if Input.is_action_just_pressed("ThrowAxrang") and !busy:
+		if axrang_instance == null:
+			# There's no ax yet, so you're about to throw it, not advance state
+			axrang_throw_charging = true
+			set_busy(true)
+		else:
+			if not axrang_instance.is_returning():
+				axrang_instance.advance_state()
+			else:
+				start_axrang_perfect_catch_timer()
+	# Why not just use is_action_pressed? Because you must only check whether Cotu is busy on the first frame the button is pressed, not afterward (because he'd already be busy); i.e. you can't do "is_action_pressed and !busy" to increment charge time
+	if axrang_throw_charging:
+		# Ax throw charge
+		axrang_throw_charge_time += delta
+		# Zoom in once charge crosses the min threshold
+		if not shoulder_zoomed_in and axrang_throw_charge_time >= axrang_throw_min_charge_time:
+			shoulder_zoomed_in = true
+			shoulder_zoom_in()
+	# Ax throws are triggered on button release
+	if Input.is_action_just_released("ThrowAxrang") and axrang_throw_charging:
+		axrang_throw_charging = false
+		if shoulder_zoomed_in:
+			shoulder_zoomed_in = false
+			shoulder_zoom_out()
+		if axrang_instance == null:
+			# After charging the throw beyond a certain point (min charge time), the throw comes out instantly as if it were perfect caught
+			if not destabilized and not axrang_perfect_caught and axrang_throw_charge_time < axrang_throw_min_charge_time:
 				anim_tree.set(anim_tree_param_path_base + "NormalThrowAxrang", true)
 			else:
 				anim_tree.set(anim_tree_param_path_base + "PerfectThrowAxrang", true)
-		elif axrang_instance != null and not axrang_instance.is_returning():
-			axrang_instance.advance_state()
-		elif axrang_instance != null and axrang_instance.is_returning():
-			start_axrang_perfect_catch_timer()
+		# Reset charge time after the throw bc chg time is used to know whether to throw instantly or with the full anim
+		axrang_throw_charge_time = 0.0
 	
 	# Axrang buff decay
 	if axrang_instance != null and next_axrang_buff_index > 0:
@@ -482,6 +505,9 @@ func _physics_process(delta):
 		# Reset the timer when the ax is caught or if there are no buffs
 		axrang_buff_decay_timer = 0.0
 	
+	if Input.is_action_just_pressed("ThrowRoserang") and !busy:
+		roserang_throw_charging = true
+		set_busy(true)
 	if roserang_instances.is_empty():
 		if roserang_instant_rethrow_queued:
 			# Instant rethrow
@@ -508,33 +534,29 @@ func _physics_process(delta):
 				ROSERANG_THROW_TYPES.HOMING:
 					throw_roserang_with_script(homing_script)
 			Globals.award_score(Globals.INSTANT_RETHROW_SCORE)
-		elif Input.is_action_pressed("ThrowRoserang"):
-			# Prevent other actions while charging power throw
-			if roserang_power_throw_charge_time <= 0:
-				set_busy(true)
+		# Why not just use is_action_pressed? Because you must only check whether Cotu is busy on the first frame the button is pressed, not afterward (because he'd already be busy); i.e. you can't do "is_action_pressed and !busy" to increment charge time
+		elif roserang_throw_charging:
 			# Power throw charge
-			roserang_power_throw_charge_time += delta
+			roserang_throw_charge_time += delta
 			# Zoom in once charge crosses the power throw threshold
-			if not power_throw_zoomed_in and roserang_power_throw_charge_time >= roserang_power_throw_min_charge_time:
-				power_throw_zoomed_in = true
-				power_throw_zoom_in()
+			if not shoulder_zoomed_in and roserang_throw_charge_time >= roserang_power_throw_min_charge_time:
+				shoulder_zoomed_in = true
+				shoulder_zoom_in()
 		# Normal and power throw are triggered on button release
-		elif Input.is_action_just_released("ThrowRoserang"):
+		if Input.is_action_just_released("ThrowRoserang") and roserang_throw_charging:
+			roserang_throw_charging = false
 			# Always zoom back out on release, regardless of throw type
-			if power_throw_zoomed_in:
-				power_throw_zoomed_in = false
-				power_throw_zoom_out()
-			if roserang_power_throw_charge_time >= roserang_power_throw_min_charge_time:
-				# Roserang power throw
-				roserang_power_throw_charge_time = 0.0
+			if shoulder_zoomed_in:
+				shoulder_zoomed_in = false
+				shoulder_zoom_out()
+			if roserang_throw_charge_time >= roserang_power_throw_min_charge_time:
 				# Replace these 3 lines with an anim tree line once you have the power throw anim
 				set_busy(true)
 				roserang_power_throw()
 				set_busy(false)
 			else:
-				# Roserang normal throw
-				roserang_power_throw_charge_time = 0.0
 				anim_tree.set(anim_tree_param_path_base + "NormalThrowRoserang", true)
+			roserang_throw_charge_time = 0.0
 	# Instant rethrow is triggered on button press
 	elif Input.is_action_just_pressed("ThrowRoserang") and not roserang_instant_rethrow_queued:
 		start_roserang_instant_rethrow_timer()
@@ -659,26 +681,26 @@ func lock_on(node):
 func lock_off():
 	locked_on = false
 
-func power_throw_zoom_in():
+func shoulder_zoom_in():
 	var t = get_tree().create_tween().set_parallel()
 	crosshair.visible = true
-	t.tween_property(camera, "fov", power_throw_zoom_fov, power_throw_zoom_in_duration)\
+	t.tween_property(camera, "fov", shoulder_zoom_fov, shoulder_zoom_in_duration)\
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	#t.tween_property(armature, "modulate:a", power_throw_zoom_alpha, power_throw_zoom_in_duration)\.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	t.tween_property(camera_pitch_pivot, "position", Vector3(power_throw_shoulder_offset.x, power_throw_shoulder_offset.y, 0.0),
-		power_throw_zoom_in_duration)\
+	#t.tween_property(armature, "modulate:a", power_throw_zoom_alpha, shoulder_zoom_in_duration)\.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	t.tween_property(camera_pitch_pivot, "position", Vector3(shoulder_zoom_offset.x, shoulder_zoom_offset.y, 0.0),
+		shoulder_zoom_in_duration)\
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	t.tween_property(self, "max_cam_dist", power_throw_zoom_cam_dist, power_throw_zoom_in_duration)\
+	t.tween_property(self, "max_cam_dist", shoulder_zoom_cam_dist, shoulder_zoom_in_duration)\
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
-func power_throw_zoom_out():
+func shoulder_zoom_out():
 	var t = get_tree().create_tween().set_parallel()
 	crosshair.visible = false
-	t.tween_property(camera, "fov", default_fov, power_throw_zoom_out_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
-	#t.tween_property(armature, "modulate:a", 1.0, power_throw_zoom_in_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	t.tween_property(camera_pitch_pivot, "position", Vector3.ZERO, power_throw_zoom_out_duration)\
+	t.tween_property(camera, "fov", default_fov, shoulder_zoom_out_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	#t.tween_property(armature, "modulate:a", 1.0, shoulder_zoom_in_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	t.tween_property(camera_pitch_pivot, "position", Vector3.ZERO, shoulder_zoom_out_duration)\
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
-	t.tween_property(self, "max_cam_dist", default_max_cam_dist, power_throw_zoom_out_duration)\
+	t.tween_property(self, "max_cam_dist", default_max_cam_dist, shoulder_zoom_out_duration)\
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
 func step_dodge():
