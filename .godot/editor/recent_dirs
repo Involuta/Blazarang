@@ -1,3 +1,4 @@
+res://glb_inherited_scenes
 res://glb_meshes
 res://levels/snow_level/section_nodes
 res://enemies/enemy_anims
@@ -6,7 +7,6 @@ res://shaders
 res://levels/gauntlet_level
 res://levels/mite_level
 res://levels/x_boss_level
-res://glb_inherited_scenes
 res://cotu/cotu_anims
 res://general_scripts
 res://levels/hub
