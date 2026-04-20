@@ -483,15 +483,28 @@ func _physics_process(delta):
 	# Ax throws are triggered on button release
 	if Input.is_action_just_released("ThrowAxrang") and axrang_throw_charging:
 		axrang_throw_charging = false
+		if axrang_instance == null:
+			# Normal throw anim
+			# Note: after charging the throw beyond a certain point (min charge time), the throw comes out instantly as if it were perfect caught
+			if not destabilized and not axrang_perfect_caught and axrang_throw_charge_time < axrang_throw_min_charge_time:
+				# Axrang is thrown partway through the normal throw anim, so don't call throw_axrang at this point in code—call it in a keyframe
+				anim_tree.set(anim_tree_param_path_base + "NormalThrowAxrang", true)
+			# Perfect throw anim (but this doesn't necessarily mean it's a real perfect throw; the same anim is used for both a charged throw and a perfect throw)
+			else:
+				# Axrang is thrown at the very start of the perfect throw anim, but it may or may not be omnidirectional
+				if shoulder_zoomed_in:
+					throw_axrang(get_camera_fwd_dir())
+				else:
+					# Ax moves in Cotu's lateral cam dir by default
+					throw_axrang()
+				# If this is a charged throw and not a perfect throw, deal self damage
+				if not axrang_perfect_caught:
+					hurtbox.self_hit(throw_axrang_self_damage)
+				anim_tree.set(anim_tree_param_path_base + "PerfectThrowAxrang", true)
+		# Reset zoom in state after the throw bc it's used to know whether to throw laterally or omnidirectionally
 		if shoulder_zoomed_in:
 			shoulder_zoomed_in = false
 			shoulder_zoom_out()
-		if axrang_instance == null:
-			# After charging the throw beyond a certain point (min charge time), the throw comes out instantly as if it were perfect caught
-			if not destabilized and not axrang_perfect_caught and axrang_throw_charge_time < axrang_throw_min_charge_time:
-				anim_tree.set(anim_tree_param_path_base + "NormalThrowAxrang", true)
-			else:
-				anim_tree.set(anim_tree_param_path_base + "PerfectThrowAxrang", true)
 		# Reset charge time after the throw bc chg time is used to know whether to throw instantly or with the full anim
 		axrang_throw_charge_time = 0.0
 	
