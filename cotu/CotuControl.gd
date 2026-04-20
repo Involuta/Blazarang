@@ -304,6 +304,13 @@ func _physics_process(delta):
 	camera_twist_input = 0
 	camera_pitch_input = 0
 	
+	if Input.is_action_just_pressed("ShoulderZoom") and not shoulder_zoomed_in:
+		shoulder_zoomed_in = true
+		shoulder_zoom_in()
+	elif Input.is_action_just_released("ShoulderZoom") and shoulder_zoomed_in:
+		shoulder_zoomed_in = false
+		shoulder_zoom_out()
+	
 	# Send updates to background camera
 	Globals.cam_pos_updated.emit(global_position)
 	Globals.cam_rot_updated.emit(camera_twist_pivot.rotation + camera_pitch_pivot.rotation)
@@ -472,14 +479,10 @@ func _physics_process(delta):
 				axrang_instance.advance_state()
 			else:
 				start_axrang_perfect_catch_timer()
+	# Ax throw charge
 	# Why not just use is_action_pressed? Because you must only check whether Cotu is busy on the first frame the button is pressed, not afterward (because he'd already be busy); i.e. you can't do "is_action_pressed and !busy" to increment charge time
 	if axrang_throw_charging:
-		# Ax throw charge
 		axrang_throw_charge_time += delta
-		# Zoom in once charge crosses the min threshold
-		if not shoulder_zoomed_in and axrang_throw_charge_time >= axrang_throw_min_charge_time:
-			shoulder_zoomed_in = true
-			shoulder_zoom_in()
 	# Ax throws are triggered on button release
 	if Input.is_action_just_released("ThrowAxrang") and axrang_throw_charging:
 		axrang_throw_charging = false
@@ -491,20 +494,12 @@ func _physics_process(delta):
 				anim_tree.set(anim_tree_param_path_base + "NormalThrowAxrang", true)
 			# Perfect throw anim (but this doesn't necessarily mean it's a real perfect throw; the same anim is used for both a charged throw and a perfect throw)
 			else:
-				# Axrang is thrown at the very start of the perfect throw anim, but it may or may not be omnidirectional
-				if shoulder_zoomed_in:
-					throw_axrang(get_camera_fwd_dir())
-				else:
-					# Ax moves in Cotu's lateral cam dir by default
-					throw_axrang()
+				# Axrang is thrown at the very start of the perfect throw anim
+				throw_axrang()
 				# If this is a charged throw and not a perfect throw, deal self damage
 				if not axrang_perfect_caught:
 					hurtbox.self_hit(throw_axrang_self_damage)
 				anim_tree.set(anim_tree_param_path_base + "PerfectThrowAxrang", true)
-		# Reset zoom in state after the throw bc it's used to know whether to throw laterally or omnidirectionally
-		if shoulder_zoomed_in:
-			shoulder_zoomed_in = false
-			shoulder_zoom_out()
 		# Reset charge time after the throw bc chg time is used to know whether to throw instantly or with the full anim
 		axrang_throw_charge_time = 0.0
 	
@@ -547,21 +542,13 @@ func _physics_process(delta):
 				ROSERANG_THROW_TYPES.HOMING:
 					throw_roserang_with_script(homing_script)
 			Globals.award_score(Globals.INSTANT_RETHROW_SCORE)
+		# Power throw charge
 		# Why not just use is_action_pressed? Because you must only check whether Cotu is busy on the first frame the button is pressed, not afterward (because he'd already be busy); i.e. you can't do "is_action_pressed and !busy" to increment charge time
 		elif roserang_throw_charging:
-			# Power throw charge
 			roserang_throw_charge_time += delta
-			# Zoom in once charge crosses the power throw threshold
-			if not shoulder_zoomed_in and roserang_throw_charge_time >= roserang_power_throw_min_charge_time:
-				shoulder_zoomed_in = true
-				shoulder_zoom_in()
 		# Normal and power throw are triggered on button release
 		if Input.is_action_just_released("ThrowRoserang") and roserang_throw_charging:
 			roserang_throw_charging = false
-			# Always zoom back out on release, regardless of throw type
-			if shoulder_zoomed_in:
-				shoulder_zoomed_in = false
-				shoulder_zoom_out()
 			if roserang_throw_charge_time >= roserang_power_throw_min_charge_time:
 				# Replace these 3 lines with an anim tree line once you have the power throw anim
 				set_busy(true)
@@ -779,6 +766,9 @@ func throw_roserang_with_script(script):
 	# Unlike the damage buff, the homing buff (which sets homing targets) is only applied once: when the rang is instant rethrown for the first time in the buff cycle. Since it's only applied once per cycle, it's not applied in the same way as other buffs in apply_buffs_to_roserang_instance
 	if script == homing_script:
 		new_roserang.set_homing_targets(homing_targets_added)
+	# If power throwing and zoomed in, throw omnidirectionally
+	elif script == rose_power_throw_script and shoulder_zoomed_in:
+		new_roserang.set_omnidirectional()
 	
 	if axrang_mvmt_buffs_other_rangs_damage and axrang_instance != null and not axrang_instance.is_stationary():
 		new_roserang.apply_damage_multiplier(axrang_mvmt_buffs_other_rangs_damage_multiplier)
@@ -887,9 +877,14 @@ func throw_axrang(dir := Vector3.ZERO):
 		axrang_instance.apply_damage_multiplier(roserang_mvmt_buffs_other_rangs_damage_multiplier)
 	if roserang_mvmt_buffs_axrang_damage_on_perfect_catch_time_remaining > 0:
 		axrang_instance.apply_damage_multiplier(roserang_mvmt_buffs_axrang_damage_on_perfect_catch_damage_multiplier)
+	# Axrang instance travels in Cotu's lateral rang throw direction by default (i.e. if not set by set_direction)
+	# No args + !shoulder_zoomed_in --> lateral throw
+	# No args + shoulder_zoomed_in --> omnidirectional throw
+	# Arg --> throw in arg direction
 	if dir != Vector3.ZERO:
-		# Axrang instance travels in Cotu's rang throw direction by default (i.e. if not set by set_direction)
 		axrang_instance.set_direction(dir)
+	elif shoulder_zoomed_in:
+		axrang_instance.set_direction(get_camera_fwd_dir())
 
 func start_axrang_perfect_catch_timer():
 	axrang_perfect_catch_queued = true

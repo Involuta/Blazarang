@@ -94,13 +94,17 @@ func _ready():
 	
 	# Calculate Travel Direction (Straight forward based on throw angle)
 	var throw_angle = cotu.get_rang_throw_y_angle()
-	travel_direction = cotu.get_camera_fwd_dir()#Vector3.FORWARD.rotated(Vector3.UP, throw_angle)
+	travel_direction = Vector3.FORWARD.rotated(Vector3.UP, throw_angle)
 	
 	# Pre-calculate Rose settings (for when we eventually switch to Rose)
 	rose_eqn_initial_throw_angle = rose_eqn_petals*throw_angle + rose_eqn_initial_throw_angle_offset
 	set_direction() # Sets rotation speed variables
 	
 	change_color(rose_color)
+
+# Used when player is aiming power throw with shoulder zoom-in, which makes it move omnidirectionally (instead of just laterally)
+func set_omnidirectional():
+	travel_direction = cotu.get_camera_fwd_dir()
 
 func set_direction():
 	if cotu.moving_right:
