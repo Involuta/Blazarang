@@ -304,11 +304,10 @@ func _physics_process(delta):
 	camera_twist_input = 0
 	camera_pitch_input = 0
 	
-	if Input.is_action_just_pressed("ShoulderZoom") and not shoulder_zoomed_in:
-		shoulder_zoomed_in = true
+	var wants_zoom := Input.is_action_pressed("ShoulderZoom")
+	if wants_zoom and not shoulder_zoomed_in:
 		shoulder_zoom_in()
-	elif Input.is_action_just_released("ShoulderZoom") and shoulder_zoomed_in:
-		shoulder_zoomed_in = false
+	elif not wants_zoom and shoulder_zoomed_in:
 		shoulder_zoom_out()
 	
 	# Send updates to background camera
@@ -692,16 +691,21 @@ func shoulder_zoom_in():
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	t.tween_property(self, "max_cam_dist", shoulder_zoom_cam_dist, shoulder_zoom_in_duration)\
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	await t.finished
+	shoulder_zoomed_in = true
 
 func shoulder_zoom_out():
 	var t = get_tree().create_tween().set_parallel()
 	crosshair.visible = false
-	t.tween_property(camera, "fov", default_fov, shoulder_zoom_out_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	t.tween_property(camera, "fov", default_fov, shoulder_zoom_out_duration)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	#t.tween_property(armature, "modulate:a", 1.0, shoulder_zoom_in_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	t.tween_property(camera_pitch_pivot, "position", Vector3.ZERO, shoulder_zoom_out_duration)\
-		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	t.tween_property(self, "max_cam_dist", default_max_cam_dist, shoulder_zoom_out_duration)\
-		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	await t.finished
+	shoulder_zoomed_in = false
 
 func step_dodge():
 	Globals.cotu_dodge.emit()
