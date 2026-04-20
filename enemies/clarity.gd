@@ -70,6 +70,7 @@ var aiming_at_target := true
 @export var base_head_brightness := 0.0
 @export var full_head_brightness := 6.0
 
+var staggerable := false # When head is exposed but not glowing, 
 @export var stagger_damage_threshold := 10.0 # Single hit damage to head necessary to stagger
 
 @export var phase1_straight_attack_chances = {
@@ -163,6 +164,15 @@ func head_light_high():
 func head_light_low():
 	get_tree().create_tween().tween_property(head_light, "light_energy", base_head_brightness, .3)
 
+func set_head_hurtbox_active(state: bool):
+	if state:
+		head_hurtbox.process_mode = PROCESS_MODE_INHERIT
+	else:
+		head_hurtbox.process_mode = PROCESS_MODE_DISABLED
+
+func set_staggerable(state: bool):
+	staggerable = state
+
 func on_head_hit(damage: int):
 	if damage >= stagger_damage_threshold and behav_state != STAGGERED:
 		switch_to_staggered()
@@ -225,9 +235,9 @@ func body_face_position_directly(target_pos):
 func _physics_process(delta):
 	var dist_to_cotu = cotu.global_position.distance_to(global_position)
 	if dist_to_cotu > blizzard_safezone_radius:
-		blizzard_area.process_mode = Node.PROCESS_MODE_INHERIT
+		blizzard_area.process_mode = PROCESS_MODE_INHERIT
 	else:
-		blizzard_area.process_mode = Node.PROCESS_MODE_DISABLED
+		blizzard_area.process_mode = PROCESS_MODE_DISABLED
 	
 	if env_autochange:
 		var min_fog_density := .01
