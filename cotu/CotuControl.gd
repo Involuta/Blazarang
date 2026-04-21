@@ -512,9 +512,6 @@ func _physics_process(delta):
 		# Reset the timer when the ax is caught or if there are no buffs
 		axrang_buff_decay_timer = 0.0
 	
-	if Input.is_action_just_pressed("ThrowRoserang") and !busy:
-		roserang_throw_charging = true
-		set_busy(true)
 	if roserang_instances.is_empty():
 		if roserang_instant_rethrow_queued:
 			# Instant rethrow
@@ -543,10 +540,11 @@ func _physics_process(delta):
 			Globals.award_score(Globals.INSTANT_RETHROW_SCORE)
 		# Power throw charge
 		# Why not just use is_action_pressed? Because you must only check whether Cotu is busy on the first frame the button is pressed, not afterward (because he'd already be busy); i.e. you can't do "is_action_pressed and !busy" to increment charge time
-		elif roserang_throw_charging:
-			roserang_throw_charge_time += delta
+		elif Input.is_action_just_pressed("ThrowRoserang") and !busy:
+			roserang_throw_charging = true
+			set_busy(true)
 		# Normal and power throw are triggered on button release
-		if Input.is_action_just_released("ThrowRoserang") and roserang_throw_charging:
+		elif Input.is_action_just_released("ThrowRoserang") and roserang_throw_charging:
 			roserang_throw_charging = false
 			if roserang_throw_charge_time >= roserang_power_throw_min_charge_time:
 				# Replace these 3 lines with an anim tree line once you have the power throw anim
@@ -559,6 +557,9 @@ func _physics_process(delta):
 	# Instant rethrow is triggered on button press
 	elif Input.is_action_just_pressed("ThrowRoserang") and not roserang_instant_rethrow_queued:
 		start_roserang_instant_rethrow_timer()
+	# The code blocks above handle instant rethrow, throw charge initiation, and throw charge release. The increase in charge is unrelated to the actions above. The actions above are all related bc they're mutually exclusive
+	if roserang_throw_charging:
+		roserang_throw_charge_time += delta
 	
 	# Clear buffs if an instant rethrow didn't just occur (i.e. if roserang_instances is still empty after an instant rethrow would have reassigned it)
 	# Only clear buffs if rang_mvmt_buff_preservation is inactive OR the axrang isn't currently out and moving
