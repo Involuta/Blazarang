@@ -68,8 +68,4 @@ func destroy_self():
 	destroyed = true
 	# For whatever reason, high velocity apparently makes the particles disappear early
 	velocity = Vector3.ZERO
-	for child in get_children():
-		if not "Explosion" in child.name:
-			child.queue_free()
-	await get_tree().create_timer(bullet_explosion_secs).timeout
 	queue_free()

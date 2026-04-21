@@ -49,3 +49,15 @@ res://enemies/enemy_anims/clarity_stomp_left.res
 res://enemies/enemy_anims/clarity_stomp_right.res
 res://glb_inherited_scenes/clarity_body_meshes.tscn
 res://glb_imports/clarity_meshes.tscn
+res://glb_inherited_scenes/landmite_meshes.tscn
+res://enemies/landmite.tscn
+res://enemies/enemy_anims/paramite_bite.res
+res://enemies/enemy_anims/landmite_bite.res
+res://enemies/landmite.gd
+res://levels/mite_level/section_nodes/mite_level_main_arena.tscn
+res://general_scripts/align_body_to_slope.gd
+res://enemies/paramite.tscn
+res://enemies/spitweb.gd
+res://enemies/spitweb.tscn
+res://levels/mite_level/mite_level_test_env.tscn
+res://rang/special_rapidorbit.gd

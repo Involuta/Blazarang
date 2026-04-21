@@ -18,7 +18,7 @@ var invincible := true
 
 @export var rotate_speed := 3.6
 
-@onready var root := $/root/ViewControl
+@onready var root := get_tree().root
 var cotu : Node3D
 var icon : Node3D
 
@@ -28,8 +28,8 @@ var icon : Node3D
 func _init():
 	# When this script is assigned to roserang, _init() is called, but not _ready() bc the roserang is already in the scene tree, and _ready() is only called when a node enters the scene tree for the first time. To get the @onready values, you must call _ready() manually
 	_ready()
-	cotu = root.find_child("cotuCB")
-	icon = root.find_child("Icon")
+	cotu = root.find_child("cotuCB", true, false)
+	icon = root.find_child("Icon", true, false)
 
 func _ready():
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, false)

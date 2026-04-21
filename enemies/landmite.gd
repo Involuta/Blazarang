@@ -2,8 +2,8 @@ extends CharacterBody3D
 
 #var tiny_mite := preload("res://enemies/mite_death_particle.tscn")
 @onready var nav_agent := $NavigationAgent3D
-@onready var body_meshes := $ParamiteMeshes
-@onready var anim_player := $ParamiteMeshes/AnimationPlayer
+@onready var body_meshes := $LandmiteMeshes
+@onready var anim_player := $LandmiteMeshes/AnimationPlayer
 @onready var anim_tree := $AnimationTree
 @onready var hurtbox := $EnemyHurtbox # When mite falls off the map, it calls hurtbox's die func
 @onready var root := get_tree().root

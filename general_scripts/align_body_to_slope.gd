@@ -2,8 +2,7 @@ extends Node3D
 
 # Huge thanks to Crigz Vs Game Dev on YouTube for the Spider Bot Procedural Animation tutorial!
 
-@export var run_speed := 10.0
-@export var turn_speed := 1.0
+@export var turn_speed := 10.0
 @export var ground_offset := 1.5 # Height of mite's body from the ground
 
 var alignment_disabled := false
@@ -24,7 +23,7 @@ func _process(delta):
 	# Convert the normal to a basis, then a quaternion to prevent a "Basis must be normalized" error, then convert the lerped quaternion back to a Basis
 	draw_vector_line(result.normal * 10)
 	var target_basis = Globals.basis_from_normal(transform, result.normal)
-	rotation = lerp(transform.basis.get_rotation_quaternion(), target_basis.get_rotation_quaternion(), run_speed * delta).get_euler()
+	rotation = lerp(transform.basis.get_rotation_quaternion(), target_basis.get_rotation_quaternion(), turn_speed * delta).get_euler()
 	
 	# Offset body from the ground
 	var avg_ik_pos = result.position

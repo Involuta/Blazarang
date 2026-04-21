@@ -40,4 +40,4 @@ environment = SubResource("Environment_lon07")
 
 [node name="MiteLevelMainArena" parent="." instance=ExtResource("4_gc12d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
-starting_wave = 0
+starting_wave = 3

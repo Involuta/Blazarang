@@ -193,8 +193,8 @@ visible = false
 cast_shadow = 0
 mesh = SubResource("BoxMesh_hpi0p")
 
-[node name="MiteGiantMouth" parent="." instance=ExtResource("5_h7bbf")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.08165e-12, -12, 2.08165e-12)
-
 [node name="MiteFog" parent="." instance=ExtResource("5_5xsjg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
+
+[node name="MiteGiantMouth" parent="." instance=ExtResource("5_h7bbf")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.08165e-12, -12, 2.08165e-12)
