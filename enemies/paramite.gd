@@ -78,6 +78,9 @@ func switch_to_launch():
 	set_mesh_and_colliders_y_pos(0)
 	
 	velocity.y = launch_vert_speed
+	
+	# Reset anim playback speed if it changed in follow state
+	anim_tree.set("parameters/TimeScale/scale", 1.0)
 
 func set_mesh_and_colliders_y_pos(new_y_pos: float):
 	body_meshes.position.y = new_y_pos
@@ -208,9 +211,6 @@ func follow_frame(delta):
 	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
 	nav_agent.velocity = new_velocity
 	
-	# Scale anim playback speed based on movement speed
-	anim_tree.set("parameters/TimeScale/scale", clamp(1.8 * velocity.length() / follow_speed, 0.25, 8))
-	
 	# Spit web rarely
 	if rng.randf() < spit_chance:
 		shoot_spitweb()
@@ -244,6 +244,8 @@ func switch_to_fall():
 	skythread_tween.tween_property(skythread, "visible", false, 0)
 	
 	anim_tree.set("parameters/StateMachine/conditions/following", false)
+	# Reset anim playback speed if it changed in follow state
+	anim_tree.set("parameters/TimeScale/scale", 1.0)
 	
 	global_position.y += body_meshes.position.y
 	set_mesh_and_colliders_y_pos(0)
@@ -278,6 +280,9 @@ func retreat_frame():
 	
 	# Sets new wanted velocity, not actual velocity. Wanted velocity is used to compute new safe velocity
 	nav_agent.velocity = new_velocity
+	
+	# Scale anim playback speed based on movement speed
+	anim_tree.set("parameters/TimeScale/scale", clamp(1.8 * velocity.length() / follow_speed, 0.25, 8))
 
 func switch_to_leave():
 	# Get closest leave point to current global position
@@ -304,7 +309,7 @@ func leave_frame():
 	nav_agent.velocity = new_velocity
 	
 	# Scale anim playback speed based on movement speed
-	anim_tree.set("parameters/playback_speed", velocity.length() / follow_speed)
+	anim_tree.set("parameters/TimeScale/scale", clamp(1.8 * velocity.length() / follow_speed, 0.25, 8))
 
 func start_leave_leap():
 	var arena_center := Vector3.ZERO
