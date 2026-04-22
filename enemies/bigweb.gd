@@ -1,6 +1,7 @@
 extends Node3D
 
 @export var max_lifetime_secs := 1800.0 # 30 minutes so it essentially never disappears
+var lifetime := 0.0
 var destroyed := false
 
 @onready var impact_particles := $ImpactParticles
@@ -8,13 +9,16 @@ var destroyed := false
 func _ready():
 	impact_particles.emitting = true
 	become_ground_web()
-	await get_tree().create_timer(max_lifetime_secs).timeout
-	if not destroyed and self:
-		destroy_self()
 
 # Func is called by mite_level_main_arena on both enemies and bigwebs, so bigwebs need this func
 func set_active(_active):
 	pass
+
+func _physics_process(delta):
+	# Why not use a tween? When the web is destroyed, the tween is destroyed early, which creates an error message and likely some overhead deallocation/destruction that causes lag
+	lifetime += delta
+	if lifetime > max_lifetime_secs and not destroyed and self:
+		destroy_self()
 
 func _on_body_entered(body):
 	# Prevents collision with other ground webs and paramites; all non-paramites are thick enemies

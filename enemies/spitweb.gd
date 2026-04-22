@@ -5,6 +5,7 @@ var velocity := Vector3.ONE
 @export var max_lifetime_secs := 32.0
 var invincible := true # prevents bullet from hitting self
 var invincibility_secs := .05
+var lifetime := 0.0
 var grounded := false
 @export var bullet_explosion_secs := 1.0
 var destroyed := false
@@ -12,16 +13,15 @@ var destroyed := false
 @onready var flight_particles := $FlightParticles
 @onready var impact_particles := $ImpactParticles
 
-func _ready():
-	flight_particles.emitting = true
-	impact_particles.emitting = false
-	await get_tree().create_timer(invincibility_secs).timeout
-	invincible = false
-	await get_tree().create_timer(max_lifetime_secs).timeout
-	if not destroyed and self:
-		destroy_self()
-
 func _physics_process(delta):
+	# Why not use a tween? When the web is destroyed, the tween is destroyed early, which creates an error message and likely some overhead deallocation/destruction that causes lag
+	lifetime += delta
+	if lifetime > invincibility_secs and invincible:
+		invincible = false
+	if lifetime > max_lifetime_secs and not destroyed and self:
+		destroy_self()
+		return
+	
 	if not grounded:
 		global_position += velocity * delta
 		look_at(global_position - velocity, Vector3.UP)

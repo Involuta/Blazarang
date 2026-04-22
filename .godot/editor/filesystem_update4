@@ -61,3 +61,6 @@ res://enemies/spitweb.gd
 res://enemies/spitweb.tscn
 res://levels/mite_level/mite_level_test_env.tscn
 res://rang/special_rapidorbit.gd
+res://enemies/bigweb.tscn
+res://enemies/bigweb.gd
+res://enemies/mite_egg.gd

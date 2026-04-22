@@ -40,4 +40,53 @@ environment = SubResource("Environment_lon07")
 
 [node name="MiteLevelMainArena" parent="." instance=ExtResource("4_gc12d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
-starting_wave = 3
+starting_wave = 0
+egg_waves = [{
+"Chances": [0, 1, 0, 0],
+"Duration": 60.0,
+"Num": 24,
+"RandomDropPosChance": 0.75,
+"Var": 1
+}, {
+"Chances": [0.83, 0.17, 0, 0],
+"Duration": 20.0,
+"Num": 24,
+"RandomDropPosChance": 0.5,
+"Var": 2
+}, {
+"Chances": [0, 0, 1, 0],
+"Duration": 8.0,
+"Num": 1,
+"RandomDropPosChance": 0.5,
+"Var": 0
+}, {
+"Chances": [0.83, 0.17, 0, 0],
+"Duration": 16.0,
+"Num": 24,
+"RandomDropPosChance": 0.5,
+"Var": 2
+}, {
+"Chances": [0, 0, 0, 1],
+"Duration": 4.0,
+"Num": 1,
+"RandomDropPosChance": 1.0,
+"Var": 0
+}, {
+"Chances": [0.83, 0.17, 0, 0],
+"Duration": 8.0,
+"Num": 16,
+"RandomDropPosChance": 0,
+"Var": 1
+}, {
+"Chances": [0, 0, 0, 1],
+"Duration": 4.0,
+"Num": 1,
+"RandomDropPosChance": 1.0,
+"Var": 0
+}, {
+"Chances": [0.67, 0.13, 0.1, 0.1],
+"Duration": 1.0,
+"Num": 1,
+"RandomDropPosChance": 0.5,
+"Var": 0
+}]

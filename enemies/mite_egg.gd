@@ -5,6 +5,7 @@ var velocity := 4 * Vector3.DOWN # Eggs have initial downward speed bc they spaw
 @export var max_lifetime_secs := 9.0
 var invincible := true # prevents bullet from hitting self
 var invincibility_secs := .05
+var lifetime := 0.0
 @export var egg_explosion_secs := 1.0
 var destroyed := false
 
@@ -22,17 +23,20 @@ func _ready():
 	
 	flight_particles.emitting = true
 	impact_particles.emitting = false
-	await get_tree().create_timer(invincibility_secs).timeout
-	invincible = false
-	await get_tree().create_timer(max_lifetime_secs).timeout
-	if not destroyed and self:
-		destroy_self()
 
 # Func is called by mite_level_main_arena on both enemies and eggs, so eggs need this func
 func set_active(_active):
 	pass
 
 func _physics_process(delta):
+	# Why not use a tween? When the egg is destroyed, the tween is destroyed early, which creates an error message and likely some overhead deallocation/destruction that causes lag
+	lifetime += delta
+	if lifetime > invincibility_secs and invincible:
+		invincible = false
+	if lifetime > max_lifetime_secs and not destroyed and self:
+		destroy_self()
+		return
+	
 	if not destroyed:
 		global_position += velocity * delta
 		velocity.y -= gravity * delta
