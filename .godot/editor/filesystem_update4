@@ -28,3 +28,6 @@ res://enemies/clarity_head.tscn
 res://enemies/clarity.tscn
 res://rang/roserang_power.gd
 res://cotu/CotuControl.gd
+res://enemies/ice_sprite.tscn
+res://levels/snow_level/snow_level_test_env.tscn
+res://enemies/ice_sprite.gd

@@ -25,14 +25,14 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 @onready var nav_agent := $NavigationAgent3D
 @onready var anim_player := $AnimationPlayer
-@onready var root := $/root/ViewControl
+@onready var root := get_tree().root
 
 var target : Node3D
 var cotu : Node3D # Used to get player's vel. Enemy moves when the player moves
 
 func _ready():
-	target = root.find_child("Icon")
-	cotu = root.find_child("cotuCB")
+	target = root.find_child("Icon", true, false)
+	cotu = root.find_child("cotuCB", true, false)
 	follow_speed = cotu.walk_speed * .76
 	nav_agent.target_desired_distance = target_distance
 	add_to_group("lockonables")
@@ -67,6 +67,7 @@ func follow():
 	nav_agent.velocity = new_velocity
 	
 	if is_on_floor():
+		"""
 		if cotu.walk_input.length() > 0:
 			velocity = safe_vel + jump_vertical_speed * Vector3.UP
 			lerp_look_at_walk_dir(follow_turn_speed)
@@ -74,6 +75,14 @@ func follow():
 			global_rotation.z = 0
 		else:
 			velocity = Vector3.ZERO
+		"""
+		jump()
+
+func jump():
+	velocity = safe_vel + jump_vertical_speed * Vector3.UP
+	lerp_look_at_walk_dir(follow_turn_speed)
+	global_rotation.x = 0
+	global_rotation.z = 0
 
 func start_attack():
 	explosion_triggered = true

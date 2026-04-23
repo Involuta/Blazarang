@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://i2xuy407tpbj"]
+[gd_scene load_steps=12 format=3 uid="uid://i2xuy407tpbj"]
 
 [ext_resource type="Script" path="res://enemies/ice_sprite.gd" id="1_h7jw6"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="2_6lw04"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="3_ovd7j"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s45hv"]
 
@@ -18,7 +19,7 @@ material = SubResource("StandardMaterial3D_qf6aq")
 
 [sub_resource type="Animation" id="Animation_m58tf"]
 resource_name = "explode"
-length = 3.00001
+length = 4.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -55,9 +56,73 @@ tracks/2/keys = {
 "update": 0,
 "values": [Color(0.45098, 0.701961, 1, 0.74902), Color(1.5, 1.5, 1.5, 1)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("EnemyHitbox:process_mode")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 0, 4]
+}
+
+[sub_resource type="Animation" id="Animation_mbtp2"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SnowParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.45098, 0.701961, 1, 0.74902)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("EnemyHitbox:process_mode")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7uy7i"]
 _data = {
+"RESET": SubResource("Animation_mbtp2"),
 "explode": SubResource("Animation_m58tf")
 }
 
@@ -69,6 +134,9 @@ initial_velocity_min = 9.0
 initial_velocity_max = 18.0
 scale_min = 0.1
 scale_max = 0.1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xhnoi"]
+radius = 4.5
 
 [node name="IceSprite" type="CharacterBody3D"]
 collision_layer = 8
@@ -88,6 +156,7 @@ avoidance_enabled = true
 radius = 3.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "RESET"
 libraries = {
 "": SubResource("AnimationLibrary_7uy7i")
 }
@@ -101,6 +170,17 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_j2xt2")
 draw_pass_1 = ExtResource("2_6lw04")
+
+[node name="EnemyHitbox" type="Area3D" parent="."]
+process_mode = 4
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("3_ovd7j")
+damage = 24
+frostbite_buildup = 9
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHitbox"]
+shape = SubResource("SphereShape3D_xhnoi")
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
