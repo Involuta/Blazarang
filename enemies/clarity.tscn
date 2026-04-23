@@ -1,14 +1,27 @@
-[gd_scene load_steps=82 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=86 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
 [ext_resource type="PackedScene" uid="uid://dagqjd43tcfch" path="res://glb_inherited_scenes/clarity_body_meshes.tscn" id="2_ovnif"]
 [ext_resource type="PackedScene" uid="uid://b70he2vkcfalc" path="res://enemies/clarity_head.tscn" id="3_05q7x"]
+[ext_resource type="Script" path="res://enemies/clarity_shard_hurtbox.gd" id="3_cemfj"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="4_5f0ps"]
 [ext_resource type="Script" path="res://enemies/boss_hurtbox.gd" id="5_j584x"]
 [ext_resource type="Script" path="res://general_scripts/damage_over_time_area.gd" id="7_ffp3t"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="7_i53v5"]
 [ext_resource type="Shader" path="res://shaders/smoke.gdshader" id="7_pdkmx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7112o"]
+radius = 1.0
+height = 18.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1pjfc"]
+radius = 1.0
+height = 12.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a428p"]
+radius = 1.0
+height = 21.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g3bkq"]
 radius = 1.5
@@ -365,20 +378,125 @@ phase1_circling_attack_chances = {
 [node name="ClarityBodyMeshes" parent="." instance=ExtResource("2_ovnif")]
 transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
 
+[node name="Hat_2" parent="ClarityBodyMeshes/Armature/Skeleton3D" index="0"]
+transform = Transform3D(1.43, 2.32828e-10, -9.73159e-10, -2.32828e-10, 1.43, 2.44041e-08, 9.73139e-10, -2.4404e-08, 1.43, 5.40167e-08, 14.5, -7.30157e-07)
+
+[node name="Arm_2" parent="ClarityBodyMeshes/Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.5, 0.866025, 2.61446e-09, -0.866025, 0.5, 3.35955e-09, 1.60216e-09, -3.94399e-09, 1, -5, 8.19405, -1.98199e-07)
+
 [node name="Arm_2" parent="ClarityBodyMeshes/Armature/Skeleton3D/Arm_2" index="0"]
 transform = Transform3D(1, -1.87228e-11, 9.66053e-17, -1.64536e-08, 1, 1.19524e-16, -3.23221e-16, -7.08343e-17, 1, 0, 0, 0)
 visible = false
+
+[node name="Center_2" parent="ClarityBodyMeshes/Armature/Skeleton3D" index="2"]
+transform = Transform3D(1, 2.79397e-09, -9.31327e-09, -2.79397e-09, 1, -1.86262e-09, 9.31324e-09, 1.86263e-09, 1, -1.08033e-07, 10, -4.24683e-07)
+
+[node name="MiddleLeft" parent="ClarityBodyMeshes/Armature/Skeleton3D" index="3"]
+transform = Transform3D(1, -8.66932e-09, -2.69116e-08, 3.33235e-08, 1, -7.83232e-09, 2.71101e-08, 8.26298e-09, 1, -9.53674e-07, 0, 2.10945e-07)
+
+[node name="ClarityShardHurtbox" type="Area3D" parent="ClarityBodyMeshes/Armature/Skeleton3D/MiddleLeft" index="1" node_paths=PackedStringArray("hurtbox_owner")]
+collision_layer = 8
+collision_mask = 257
+script = ExtResource("3_cemfj")
+enemy_name = "ClarityBodyShard"
+hit_particle_color = Color(0.458824, 0.713726, 1, 1)
+opponent_hitboxes = ["PlayerHitbox"]
+hurtbox_owner = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClarityBodyMeshes/Armature/Skeleton3D/MiddleLeft/ClarityShardHurtbox"]
+transform = Transform3D(0.965423, -0.26069, -2.53229e-16, 0.26069, 0.965422, 3.74134e-16, 1.86351e-14, 9.05592e-15, 1, 5.4, -5.82, 2.08165e-12)
+shape = SubResource("CapsuleShape3D_7112o")
+
+[node name="FrontLeft" parent="ClarityBodyMeshes/Armature/Skeleton3D" index="4"]
+transform = Transform3D(1, 1.01641e-07, -4.69251e-09, 7.72951e-08, 1, -4.2813e-09, -1.78096e-08, 8.54298e-08, 1, -1.19209e-07, 2.38419e-07, 0)
+
+[node name="ClarityShardHurtbox" type="Area3D" parent="ClarityBodyMeshes/Armature/Skeleton3D/FrontLeft" index="1" node_paths=PackedStringArray("hurtbox_owner")]
+collision_layer = 8
+collision_mask = 257
+script = ExtResource("3_cemfj")
+enemy_name = "ClarityBodyShard"
+hit_particle_color = Color(0.458824, 0.713726, 1, 1)
+opponent_hitboxes = ["PlayerHitbox"]
+hurtbox_owner = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClarityBodyMeshes/Armature/Skeleton3D/FrontLeft/ClarityShardHurtbox"]
+transform = Transform3D(0.965423, -0.252934, -0.0631151, 0.26069, 0.9367, 0.233737, 6.18416e-09, -0.242108, 0.970249, 3, -3.8, 4)
+shape = SubResource("CapsuleShape3D_1pjfc")
+
+[node name="BackLeft" parent="ClarityBodyMeshes/Armature/Skeleton3D" index="5"]
+transform = Transform3D(1, 6.52144e-08, 3.84329e-08, -3.11627e-08, 1, -2.09304e-09, -2.83223e-08, 8.96478e-09, 1, -1.19209e-07, -7.15256e-07, 2.38419e-07)
+
+[node name="ClarityShardHurtbox" type="Area3D" parent="ClarityBodyMeshes/Armature/Skeleton3D/BackLeft" index="1" node_paths=PackedStringArray("hurtbox_owner")]
+collision_layer = 8
+collision_mask = 257
+script = ExtResource("3_cemfj")
+enemy_name = "ClarityBodyShard"
+hit_particle_color = Color(0.482353, 0.721569, 1, 1)
+opponent_hitboxes = ["PlayerHitbox"]
+hurtbox_owner = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClarityBodyMeshes/Armature/Skeleton3D/BackLeft/ClarityShardHurtbox"]
+transform = Transform3D(0.965923, -0.258818, -3.25186e-08, 0.249999, 0.93301, -0.258818, 0.0669871, 0.249999, 0.965924, 3.8, -6.9, -4.7)
+shape = SubResource("CapsuleShape3D_a428p")
+
+[node name="MiddleRight" parent="ClarityBodyMeshes/Armature/Skeleton3D" index="6"]
+transform = Transform3D(1, 8.52083e-09, -4.48023e-08, 5.07066e-09, 1, 1.08819e-08, 4.32013e-08, -1.08282e-08, 1, 9.53674e-07, 2.38419e-07, 1.77417e-07)
+
+[node name="ClarityShardHurtbox" type="Area3D" parent="ClarityBodyMeshes/Armature/Skeleton3D/MiddleRight" index="1" node_paths=PackedStringArray("hurtbox_owner")]
+collision_layer = 8
+collision_mask = 257
+script = ExtResource("3_cemfj")
+enemy_name = "ClarityBodyShard"
+hit_particle_color = Color(0.458824, 0.713726, 1, 1)
+opponent_hitboxes = ["PlayerHitbox"]
+hurtbox_owner = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClarityBodyMeshes/Armature/Skeleton3D/MiddleRight/ClarityShardHurtbox"]
+transform = Transform3D(0.965473, 0.260504, 3.48787e-16, -0.260504, 0.965472, -3.48787e-16, -4.27605e-16, 2.45884e-16, 1, -5.4, -5.82, 2.08165e-12)
+shape = SubResource("CapsuleShape3D_7112o")
+
+[node name="FrontRight" parent="ClarityBodyMeshes/Armature/Skeleton3D" index="7"]
+transform = Transform3D(1, -1.284e-07, -2.09315e-09, -4.04777e-08, 1, -6.0233e-09, 3.92528e-08, 1.58573e-07, 1, 0, 7.15256e-07, -2.38419e-07)
+
+[node name="ClarityShardHurtbox" type="Area3D" parent="ClarityBodyMeshes/Armature/Skeleton3D/FrontRight" index="1" node_paths=PackedStringArray("hurtbox_owner")]
+collision_layer = 8
+collision_mask = 257
+script = ExtResource("3_cemfj")
+enemy_name = "ClarityBodyShard"
+hit_particle_color = Color(0.431373, 0.682353, 1, 1)
+opponent_hitboxes = ["PlayerHitbox"]
+hurtbox_owner = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClarityBodyMeshes/Armature/Skeleton3D/FrontRight/ClarityShardHurtbox"]
+transform = Transform3D(0.957104, 0.282869, -0.0627493, -0.26149, 0.93655, 0.233445, 0.124802, -0.207023, 0.970343, -3, -3.8, 4)
+shape = SubResource("CapsuleShape3D_1pjfc")
+
+[node name="BackRight" parent="ClarityBodyMeshes/Armature/Skeleton3D" index="8"]
+transform = Transform3D(1, 3.29872e-08, -3.86813e-09, -3.92975e-08, 1, 1.40892e-08, -8.32139e-09, 7.74639e-09, 1, -1.3113e-06, 2.38419e-07, -1.66893e-06)
+
+[node name="ClarityShardHurtbox" type="Area3D" parent="ClarityBodyMeshes/Armature/Skeleton3D/BackRight" index="1" node_paths=PackedStringArray("hurtbox_owner")]
+collision_layer = 8
+collision_mask = 257
+script = ExtResource("3_cemfj")
+enemy_name = "ClarityBodyShard"
+hit_particle_color = Color(0.4, 0.678431, 1, 1)
+opponent_hitboxes = ["PlayerHitbox"]
+hurtbox_owner = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClarityBodyMeshes/Armature/Skeleton3D/BackRight/ClarityShardHurtbox"]
+transform = Transform3D(0.965923, 0.258818, 3.36902e-16, -0.249999, 0.93301, -0.258819, -0.0669871, 0.249999, 0.965924, -3.8, -6.9, -4.7)
+shape = SubResource("CapsuleShape3D_a428p")
 
 [node name="ClarityArmMeshes" parent="." instance=ExtResource("1_4e0of")]
 transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
 
 [node name="Skeleton3D" parent="ClarityArmMeshes/Armature" index="0"]
-bones/0/position = Vector3(-0.0210742, 4.49276, 0.887986)
-bones/0/rotation = Quaternion(0.0871557, 1.18756e-07, 1.1962e-08, 0.996195)
-bones/1/position = Vector3(-1.58209e-09, 8.69174, 9.87667e-09)
-bones/1/rotation = Quaternion(0.0871558, 1.48224e-14, 2.23517e-08, 0.996195)
-bones/3/position = Vector3(-3.7482, 4.76473, -0.151854)
-bones/3/rotation = Quaternion(-0.0130112, -0.00773072, 0.812585, 0.582646)
+bones/0/position = Vector3(-0.0210742, 4.49276, 0.0847608)
+bones/0/rotation = Quaternion(0.0301653, 0.0796906, -0.0501057, 0.995102)
+bones/1/position = Vector3(1.02726e-07, 8.69174, -7.95303e-08)
+bones/1/rotation = Quaternion(0.0484073, -0.0812806, 0.0524297, 0.994133)
+bones/3/position = Vector3(-3.7482, 4.38423, -0.0847618)
+bones/3/rotation = Quaternion(0.00101031, -0.00552394, 0.86527, 0.501275)
 bones/6/position = Vector3(2.4827, 2.22899, -2.08285)
 bones/6/rotation = Quaternion(0.305356, -0.212565, 0.925231, -0.0743114)
 bones/8/position = Vector3(2.53583, 1.3427, 0.8528)
@@ -393,7 +511,7 @@ bones/16/position = Vector3(-2.39, 2.94367, -0.755941)
 bones/16/rotation = Quaternion(0.321999, -0.24697, 0.885482, 0.226373)
 
 [node name="Hat_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1.43, -8.58979e-09, 5.82494e-10, 8.271e-09, 1.34376, -0.489089, 2.39042e-09, 0.489089, 1.34376, 1.86265e-08, 14.3176, 2.76757)
+transform = Transform3D(1.42986, 0.00998905, -0.0170401, -0.0125258, 1.41244, -0.223079, 0.0152725, 0.223207, 1.41239, 0.918732, 14.4374, 0.659002)
 
 [node name="BodyLight" type="OmniLight3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2" index="1"]
 transform = Transform3D(2.11909, 1.79336e-14, 1.2478e-13, -8.23062e-16, 2.11909, 1.38572e-07, 1.14452e-16, -3.74104e-08, 2.11909, 2.08544e-12, -2.5, -1.19209e-07)
@@ -424,21 +542,21 @@ opponent_hitboxes = ["PlayerHitbox"]
 shape = SubResource("SphereShape3D_g3bkq")
 
 [node name="Arm_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.26121, 0.964811, -0.0301537, -0.952366, 0.252496, -0.17101, -0.157379, 0.0733868, 0.984808, -5.13331, 8.87891, 1.46631)
+transform = Transform3D(0.339741, 0.92836, 0.15074, -0.932056, 0.353784, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
 
 [node name="EnemyHitbox" type="Area3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2" index="1"]
 transform = Transform3D(0.996105, -0.0881817, 1.49527e-15, 0.0881823, 0.996105, -1.5173e-14, -3.13584e-15, -1.27004e-14, 0.999999, 1.53031, -16.5495, 1.07427e-07)
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("4_5f0ps")
-damage = 1
-frostbite_buildup = 10
+damage = 30
+frostbite_buildup = 15
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2/EnemyHitbox"]
 shape = SubResource("CapsuleShape3D_bvea4")
 
 [node name="Center_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(1, -3.38463e-10, -9.03921e-09, -1.23631e-09, 0.984808, -0.173648, 8.96061e-09, 0.173648, 0.984808, -1.2666e-07, 9.93106, 1.76084)
+transform = Transform3D(0.982278, 0.104529, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
 
 [node name="Center_2" parent="ClarityArmMeshes/Armature/Skeleton3D/Center_2" index="0"]
 visible = false

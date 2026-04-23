@@ -1,3 +1,6 @@
+CollisionShape3D
+ClarityShardHurtbox
+EnemyHurtbox
 Sprite2D
 AnimationPlayer
 GPUParticlesAttractorSphere3D
@@ -7,7 +10,6 @@ MeshInstance3D
 OmniLight3D
 GPUParticles3D
 Node3D
-CollisionShape3D
 Area3D
 BossHurtbox
 Hitbox
@@ -20,7 +22,6 @@ StaticBody3D
 NavigationRegion3D
 Label
 Label3D
-EnemyHurtbox
 Node
 GPUTrail3D
 AudioStreamPlayer3D
@@ -29,5 +30,3 @@ AnimatedSprite3D
 RayCast3D
 Marker3D
 SkeletonIK3D
-RigidBody3D
-Hurtbox

@@ -5,7 +5,7 @@ extends Hurtbox
 
 var hit_score := 1.0
 var kill_score := 1.0
-var hit_particles := preload("res://enemies/enemy_hit_particles.tscn")
+@export var hit_particles := preload("res://enemies/enemy_hit_particles.tscn")
 var rang_hit_particles := preload("res://rang/rang_hit_particles.tscn")
 var rang_hit_effect := preload("res://rang/hit_effect1.tscn")
 var death_particle := preload("res://enemies/death_particle.tscn")

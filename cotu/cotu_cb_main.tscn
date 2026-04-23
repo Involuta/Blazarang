@@ -440,8 +440,6 @@ skeleton = NodePath("../..")
 [node name="Hurtbox" type="Area3D" parent="."]
 collision_mask = 11
 script = ExtResource("2_fvpfg")
-frostbite_stage_thresholds = [3.0, 4.0, 5.0]
-opponent_grab_hitboxes = ["XBossGrab"]
 opponent_hitboxes = ["EnemyHitbox", "DeathHitbox"]
 
 [node name="HurtboxCollider" type="CollisionShape3D" parent="Hurtbox"]
@@ -479,8 +477,6 @@ bones/0/rotation = Quaternion(0.00357044, 0.0033643, 0.00430058, 0.999979)
 bones/1/position = Vector3(0, 0.0922872, -0.0106759)
 bones/1/rotation = Quaternion(0.00139416, 0.0105681, -0.00611713, 0.999924)
 bones/2/rotation = Quaternion(0.00519858, -0.0156406, -0.000322708, 0.999864)
-bones/3/rotation = Quaternion(-0.0794417, -0.00918478, -0.0154666, 0.996677)
-bones/4/rotation = Quaternion(0.0697322, 0.000240947, 0.000844717, 0.997565)
 bones/7/position = Vector3(0.0663166, 0.115124, 0.0320527)
 bones/7/rotation = Quaternion(-0.589018, -0.462308, 0.537803, -0.387424)
 bones/8/rotation = Quaternion(0.518452, -0.23804, 0.235976, 0.786677)
@@ -566,7 +562,7 @@ shape = SubResource("CylinderShape3D_kywm8")
 
 [node name="Crosshair" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(1000, 500)
+position = Vector2(960, 540)
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("9_4rep4")
 

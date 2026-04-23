@@ -145,6 +145,7 @@ const enemy_hurtbox_data = {
 	"JumpingSpider" : [800, 1.0, 1.0],
 	
 	"Clarity" : [3000, 1.0, 100.0],
+	"ClarityBodyShard" : [600, 1.0, 20.0]
 }
 
 func rotate_toward(from: float, to: float, delta: float) -> float:

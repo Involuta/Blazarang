@@ -103,8 +103,11 @@ func _ready():
 	change_color(rose_color)
 
 # Used when player is aiming power throw with shoulder zoom-in, which makes it move omnidirectionally (instead of just laterally)
-func set_omnidirectional():
+func set_omnidirectional(camera_pos: Vector3):
 	travel_direction = cotu.get_camera_fwd_dir()
+	# Start moving from camera_pos so there's no discrepancy btwn crosshair and rang
+	global_position = camera_pos
+	travel_start_pos = camera_pos
 
 func set_direction():
 	if cotu.moving_right:

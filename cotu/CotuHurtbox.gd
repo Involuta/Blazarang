@@ -30,7 +30,7 @@ var current_frostbite_stage := 0 # 0 = no frostbite, 1-3 = frostbite. This is th
 ]
 
 # When Cotu gets grabbed, his position is set to the hitbox's parent
-@export var opponent_grab_hitboxes := []
+@export var opponent_grab_hitboxes := ["XBossGrab"]
 
 func _ready():
 	super()

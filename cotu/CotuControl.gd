@@ -694,6 +694,7 @@ func shoulder_zoom_in():
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await t.finished
 	shoulder_zoomed_in = true
+	visible = false
 
 func shoulder_zoom_out():
 	var t = get_tree().create_tween().set_parallel()
@@ -707,6 +708,7 @@ func shoulder_zoom_out():
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	await t.finished
 	shoulder_zoomed_in = false
+	visible = true
 
 func step_dodge():
 	Globals.cotu_dodge.emit()
@@ -773,7 +775,7 @@ func throw_roserang_with_script(script):
 		new_roserang.set_homing_targets(homing_targets_added)
 	# If power throwing and zoomed in, throw omnidirectionally
 	elif script == rose_power_throw_script and shoulder_zoomed_in:
-		new_roserang.set_omnidirectional()
+		new_roserang.set_omnidirectional(camera_pos.global_position)
 	
 	if axrang_mvmt_buffs_other_rangs_damage and axrang_instance != null and not axrang_instance.is_stationary():
 		new_roserang.apply_damage_multiplier(axrang_mvmt_buffs_other_rangs_damage_multiplier)
