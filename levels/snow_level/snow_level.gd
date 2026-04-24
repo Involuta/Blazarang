@@ -31,7 +31,7 @@ func _physics_process(delta):
 	# Update UI
 	frostbite_bar.max_value = cotu_hurtbox.current_frostbite_threshold
 	frostbite_bar.value = cotu_hurtbox.frostbite_buildup
-	blizzard_particles.global_position = cotu.global_position + 30 * Vector3.UP
+	blizzard_particles.global_position = cotu.global_position + 15*Vector3.UP + cotu.get_camera_fwd_dir_lateral()
 	
 	# Spawning Logic
 	spawn_timer += delta

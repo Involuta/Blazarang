@@ -34,15 +34,15 @@ fog_height = 10.0
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.036
 volumetric_fog_albedo = Color(0.396078, 0.462745, 0.560784, 1)
-volumetric_fog_emission = Color(0.396078, 0.462745, 0.560784, 1)
+volumetric_fog_emission = Color(0.584314, 0.647059, 0.741176, 1)
 volumetric_fog_anisotropy = 0.6
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_87vf4"]
 emission_shape = 6
 emission_ring_axis = Vector3(2.08165e-12, 1, 2.08165e-12)
 emission_ring_height = 1.0
-emission_ring_radius = 7.5
-emission_ring_inner_radius = 4.5
+emission_ring_radius = 18.0
+emission_ring_inner_radius = 2.08165e-12
 direction = Vector3(2.08165e-12, 1, 2.08165e-12)
 spread = 0.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -129,10 +129,9 @@ radius = 30.0
 [node name="BlizzardParticles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 27.2579, 2.08165e-12)
 custom_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
-amount = 180
+amount = 480
 lifetime = 12.0
 preprocess = 6.0
-speed_scale = 1.5
 process_material = SubResource("ParticleProcessMaterial_87vf4")
 draw_pass_1 = ExtResource("6_tixh2")
 

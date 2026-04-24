@@ -114,11 +114,9 @@ var target : Node3D
 var cotu : Node3D # Clarity only attacks the target; cotu is only referenced here to help Clarity calculate whether to parry when Cotu throws a roserang
 var camera : Node3D
 var clarity_icon : Node3D
-var bg_env : Environment
-var bg_sky : ProceduralSkyMaterial
-var bg_particle_attractor : GPUParticlesAttractor3D
 var level_env : Environment
-var level_sky : ProceduralSkyMaterial
+var sky : ProceduralSkyMaterial
+var bg_particle_attractor : GPUParticlesAttractor3D
 var level_fog : FogMaterial
 
 func _ready():
@@ -131,14 +129,9 @@ func _ready():
 	camera = cotu.find_child("Camera3D")
 	clarity_icon = level.find_child("ClarityIcon")
 	
-	var bg = level
-	bg_env = bg.find_child("WorldEnvironment").environment
-	bg_sky = bg_env.sky.sky_material
-	bg_particle_attractor = bg.find_child("ParticleAttractor")
-	
 	level_env = level.find_child("WorldEnvironment").environment
-	level_sky = level_env.sky.sky_material
-	camera.environment = level_env
+	sky = level_env.sky.sky_material
+	bg_particle_attractor = level.find_child("ParticleAttractor")
 	
 	blizzard_safezone_radius = blizzard_safezone_base_radius
 	body_light.omni_range = body_light_base_radius
@@ -262,15 +255,15 @@ func _physics_process(delta):
 		var sky_top_roc := (far_sky_top_color.v - near_sky_top_color.v)/(max_fog_radius - min_fog_radius)
 		var sky_top_yint := near_sky_top_color.v - sky_top_roc * min_fog_radius
 		var target_sky_top_color_v = clampf(sky_top_roc * dist_to_cotu + sky_top_yint, far_sky_top_color.v, near_sky_top_color.v)
-		bg_sky.sky_top_color.v = move_toward(bg_sky.sky_top_color.v, target_sky_top_color_v, delta)
+		sky.sky_top_color.v = move_toward(sky.sky_top_color.v, target_sky_top_color_v, delta)
 		var sky_horizon_roc := (far_sky_horizon_color.v - near_sky_horizon_color.v)/(max_fog_radius - min_fog_radius)
 		var sky_horizon_yint := near_sky_top_color.v - sky_horizon_roc * min_fog_radius
 		var target_sky_horizon_color_v = clampf(sky_horizon_roc * dist_to_cotu + sky_horizon_yint, far_sky_horizon_color.v, near_sky_horizon_color.v)
-		bg_sky.sky_horizon_color.v = move_toward(bg_sky.sky_horizon_color.v, target_sky_horizon_color_v, delta)
-		bg_sky.ground_horizon_color.v = bg_sky.sky_horizon_color.v
+		sky.sky_horizon_color.v = move_toward(sky.sky_horizon_color.v, target_sky_horizon_color_v, delta)
+		sky.ground_horizon_color.v = sky.sky_horizon_color.v
 		# Fog color is the same as horizon color
-		level_env.fog_light_color.v = bg_sky.sky_horizon_color.v
-		level_env.volumetric_fog_emission.v = bg_sky.sky_horizon_color.v
+		level_env.fog_light_color.v = sky.sky_horizon_color.v
+		level_env.volumetric_fog_emission.v = sky.sky_horizon_color.v
 		
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -500,16 +493,15 @@ func expand_blizzard_safezone():
 	var t = get_tree().create_tween().set_parallel()
 	t.tween_property(self, "blizzard_safezone_radius", blizzard_safezone_expanded_radius, frames(144))
 	t.tween_property(body_light, "omni_range", body_light_expanded_radius, frames(144))
-	t.tween_property(body_light, "light_color", Color.DARK_GRAY, frames(144))
-	t.tween_property(bg_sky, "sky_top_color", Color("#8394ae"), frames(144))
-	#t.tween_property(sky, "sky_horizon_color", Color("#6a7b95"), frames(144))
-	#t.tween_property(sky, "ground_horizon_color", Color("#6a7b95"), frames(144))
-	t.tween_property(bg_sky, "sky_horizon_color", Color.DARK_GRAY, frames(144))
-	t.tween_property(bg_sky, "ground_horizon_color", Color.DARK_GRAY, frames(144))
-	t.tween_property(level_sky, "sky_top_color", Color.GRAY, frames(144))
-	t.tween_property(level_env, "fog_light_color", Color.GRAY, frames(144))
-	t.tween_property(level_env, "fog_density", 0, frames(144))
-	t.tween_property(level_env, "volumetric_fog_density", 0, frames(144))
+	t.tween_property(body_light, "light_color", Color.SNOW, frames(144))
+	t.tween_property(body_light, "light_volumetric_fog_energy", 12.0, frames(144))
+	t.tween_property(sky, "sky_top_color", Color.LIGHT_SKY_BLUE, frames(144))
+	t.tween_property(sky, "sky_horizon_color", Color.SKY_BLUE, frames(144))
+	t.tween_property(sky, "ground_horizon_color", Color.SKY_BLUE, frames(144))
+	t.tween_property(level_env, "fog_light_color", Color.SNOW, frames(144))
+	t.tween_property(level_env, "fog_density", 0.0015, frames(144))
+	t.tween_property(level_env, "volumetric_fog_density", .0009, frames(144))
+	t.tween_property(level_env, "volumetric_fog_emission", Color("#95a5bd"), frames(144))
 	t.tween_property(particle_attractor, "strength", -30, 0)
 	t.tween_property(bg_particle_attractor, "strength", -30, 0)
 
@@ -518,13 +510,14 @@ func contract_blizzard_safezone():
 	t.tween_property(self, "blizzard_safezone_radius", blizzard_safezone_base_radius, frames(360))
 	t.tween_property(body_light, "omni_range", body_light_base_radius, frames(360))
 	t.tween_property(body_light, "light_color", Color("#007ce4"), frames(360))
-	t.tween_property(bg_sky, "sky_top_color", Color("#65768f"), frames(360))
-	t.tween_property(bg_sky, "sky_horizon_color", Color("#5a6c82"), frames(360))
-	t.tween_property(bg_sky, "ground_horizon_color", Color("#5a6c82"), frames(360))
-	t.tween_property(level_sky, "sky_top_color", Color("#65768f"), frames(360))
+	t.tween_property(body_light, "light_volumetric_fog_energy", 6.0, frames(360))
+	t.tween_property(sky, "sky_top_color", Color("#65768f"), frames(360))
+	t.tween_property(sky, "sky_horizon_color", Color("#5a6c82"), frames(360))
+	t.tween_property(sky, "ground_horizon_color", Color("#5a6c82"), frames(360))
 	t.tween_property(level_env, "fog_light_color", Color("#5a6c82"), frames(360))
 	t.tween_property(level_env, "fog_density", 0.01, frames(360))
 	t.tween_property(level_env, "volumetric_fog_density", 0.036, frames(360))
+	t.tween_property(level_env, "volumetric_fog_emission", Color("#65768f"), frames(360))
 	t.tween_property(particle_attractor, "strength", 0, frames(180))
 	t.tween_property(bg_particle_attractor, "strength", 0, frames(180))
 

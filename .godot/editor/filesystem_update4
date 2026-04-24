@@ -30,3 +30,5 @@ res://levels/snow_level/snow_level_test_env.tscn
 res://glb_inherited_scenes/clarity_body_meshes.tscn
 res://levels/mite_level/mite_level_test_env.tscn
 res://levels/snow_level/snow_level.gd
+res://enemies/clarity.gd
+res://cotu/cotu_cb_main.tscn
