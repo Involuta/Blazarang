@@ -34,7 +34,7 @@ var time_until_next_egg := 10.0
 @export var egg_fog_chance_post_jumping_spider := .4
 var egg_fog_chance := .08 # Current egg fog chance. Changes to post-spider chance when spider spawns
 
-@export var max_living_enemies := 50
+@export var max_living_enemies := 48
 var living_enemies := 0
 @export var can_drop := true # If this is false, no eggs spawn. Set to false after progressing past final wave listed in egg_waves OR set to false in testing
 
@@ -106,7 +106,7 @@ var eggs_remaining_this_wave := 4 # Wave increases after this num becomes 0, the
 	},
 ]
 
-@export var real_num_landmites := 40 # How many landmite scenes are loaded into the level
+@export var real_num_landmites := 32 # How many landmite scenes are loaded into the level
 @export var real_num_paramites := 8
 @export var real_num_flatmites := 2
 @export var real_num_harvestmen := 4

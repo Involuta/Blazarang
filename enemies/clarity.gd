@@ -399,7 +399,7 @@ func queue_attack():
 			pass # pass until phase2 is confirmed to exist
 
 func choose_attack(attack_chances) -> String:
-	var choice := rng.randf()
+	var choice := randf()
 	var cumulative_weight := 0.0
 	for attack in attack_chances:
 		cumulative_weight += attack_chances[attack]
