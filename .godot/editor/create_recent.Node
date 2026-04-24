@@ -1,6 +1,7 @@
-NavigationRegion3D
 CollisionShape3D
 Hitbox
+Node3D
+NavigationRegion3D
 ClarityShardHurtbox
 EnemyHurtbox
 Sprite2D
@@ -11,7 +12,6 @@ Sprite3D
 MeshInstance3D
 OmniLight3D
 GPUParticles3D
-Node3D
 Area3D
 BossHurtbox
 NavigationAgent3D

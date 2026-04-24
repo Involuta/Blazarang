@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=87 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -356,6 +356,9 @@ shader_parameter/edge_fade = 0.1
 [sub_resource type="BoxShape3D" id="BoxShape3D_2hwhq"]
 size = Vector3(150, 30, 150)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_8r702"]
+radius = 4.5
+
 [node name="Clarity" type="CharacterBody3D"]
 collision_layer = 8
 collision_mask = 146
@@ -620,6 +623,21 @@ shape = SubResource("BoxShape3D_2hwhq")
 [node name="ParticleAttractor" type="GPUParticlesAttractorSphere3D" parent="."]
 strength = 2.66454e-15
 radius = 30.0
+
+[node name="FootDOTArea" type="Node3D" parent="."]
+script = ExtResource("7_ffp3t")
+time_btwn_damage_ticks = 0.3
+
+[node name="EnemyHitbox" type="Area3D" parent="FootDOTArea"]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("4_5f0ps")
+damage = 1
+frostbite_buildup = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FootDOTArea/EnemyHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.34172, 0)
+shape = SubResource("SphereShape3D_8r702")
 
 [editable path="ClarityBodyMeshes"]
 [editable path="ClarityArmMeshes"]
