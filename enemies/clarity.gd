@@ -236,18 +236,14 @@ func _physics_process(delta):
 	
 	
 	if env_autochange:
+		# Keep dist to Cotu value within fog bounds
+		var clamped_cotu_dist = clampf(dist_to_cotu, min_fog_radius, max_fog_radius)
+		# Set fog density based on dist from Cotu
 		var min_fog_density := .01
 		var max_fog_density := .3
-		# Set fog density based on dist from Cotu
-		# fd is min_density at min_fog_radius, max_density at max_fog_radius
-		# (x=min_rad, y=min_den) (x=max_rad, y=max_den) --> dy/dx = (max_den-min_den)/(max_rad-min_rad)
-		# for brevity, max_den-min_den = .03, max_rad-min_rad = 6, min_den = .01
-		# y = (.03/6)*x + b --> roc = (.03/6), b = ?
-		# .01 = roc*min_rad + b --> b = .01-roc*min_rad
-		# y = (.03/6)*x - (.01-(.03/6)*min_rad) --> clamp((.03/6)*x - (.01-(.03/6)*min_rad))
-		var fog_roc := (max_fog_density - min_fog_density)/(max_fog_radius - min_fog_radius)
-		var fog_yint := min_fog_density - fog_roc * min_fog_radius
-		var target_fog_density = clampf(fog_roc * dist_to_cotu + fog_yint, min_fog_density, max_fog_density)
+		var target_fog_density = remap(clamped_cotu_dist, 
+		min_fog_radius, max_fog_radius,
+		min_fog_density, max_fog_density)
 		level_env.fog_density = move_toward(level_env.fog_density, target_fog_density, delta)
 		
 		# Repeat the above for sky and fog colors
@@ -271,16 +267,10 @@ func _physics_process(delta):
 		# Blizzard particle intensity
 		var min_blizzard_particles_speed_scale = 1.0
 		var max_blizzard_particles_speed_scale = 3.0
-		# 1. Calculate the weight based on distance.
-		# remap takes the distance and maps it from the [min, max] range to [0, 1].
-		# clamp ensures the weight doesn't go below 0 or above 1 if distance is out of bounds.
-		var weight: float = remap(dist_to_cotu, min_fog_radius, max_fog_radius, 0.0, 1.0)
-		weight = clamp(weight, 0.0, 1.0)
-		# 2. Lerp the speed scale using that weight.
-		var blizzard_particles_speed_scale: float = lerp(min_blizzard_particles_speed_scale, max_blizzard_particles_speed_scale, weight)
-		# 3. Apply to your GPUParticles3D or CPUParticles3D node
-		blizzard_particles.speed_scale = blizzard_particles_speed_scale
-		
+		blizzard_particles.speed_scale = remap(clamped_cotu_dist, 
+		min_fog_radius, max_fog_radius,
+		min_blizzard_particles_speed_scale, max_blizzard_particles_speed_scale)
+	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 		if global_position.y < min_y_pos:
