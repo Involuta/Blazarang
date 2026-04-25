@@ -12,7 +12,6 @@ var frostbite_bar : Control
 var frostbite_bar_damage_indicator : Control
 var cotu_hurtbox : Node3D
 var clarity : Node3D
-@onready var blizzard_particles := $BlizzardParticles
 
 # Timer to track the 1-second interval
 var spawn_timer := 0.0
@@ -31,7 +30,6 @@ func _physics_process(delta):
 	# Update UI
 	frostbite_bar.max_value = cotu_hurtbox.current_frostbite_threshold
 	frostbite_bar.value = cotu_hurtbox.frostbite_buildup
-	blizzard_particles.global_position = cotu.global_position + 15*Vector3.UP + cotu.get_camera_fwd_dir_lateral()
 	
 	# Spawning Logic
 	spawn_timer += delta

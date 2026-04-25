@@ -49,8 +49,8 @@ var phase := PHASE.PHASE1
 var blizzard_safezone_radius := 15.0
 @export var body_light_base_radius := 18.0
 @export var body_light_expanded_radius := 180.0 # Light expands on jumps to show new safezone
-@export var min_fog_radius := 9.0 # Dist from Clarity where fog is minimized
-@export var max_fog_radius := 18.0 # Dist from Clarity where fog is maximized
+@export var min_fog_radius := 12.0 # Dist from Clarity where fog is minimized
+@export var max_fog_radius := 24.0 # Dist from Clarity where fog is maximized
 var env_autochange := true # Fog automatically changes depending on Cotu's dist to Clarity unless the blizzard is expanding/contracting
 
 var stationary := false
@@ -104,6 +104,7 @@ var transparent_mat := preload("res://textures/clear_tile.tres")
 @onready var head_mesh := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
 @onready var body_light := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/BodyLight
 @onready var blizzard_hitbox := $BlizzardDOT
+@onready var blizzard_particles := $BlizzardParticles
 @onready var particle_attractor := $ParticleAttractor
 
 var head_hurtbox : Node3D
@@ -231,6 +232,8 @@ func _physics_process(delta):
 		blizzard_hitbox.process_mode = PROCESS_MODE_INHERIT
 	else:
 		blizzard_hitbox.process_mode = PROCESS_MODE_DISABLED
+	blizzard_particles.global_position = cotu.global_position + 15*Vector3.UP + cotu.get_camera_fwd_dir_lateral()
+	
 	
 	if env_autochange:
 		var min_fog_density := .01
@@ -264,6 +267,19 @@ func _physics_process(delta):
 		# Fog color is the same as horizon color
 		level_env.fog_light_color.v = sky.sky_horizon_color.v
 		level_env.volumetric_fog_emission.v = sky.sky_horizon_color.v
+		
+		# Blizzard particle intensity
+		var min_blizzard_particles_speed_scale = 1.0
+		var max_blizzard_particles_speed_scale = 3.0
+		# 1. Calculate the weight based on distance.
+		# remap takes the distance and maps it from the [min, max] range to [0, 1].
+		# clamp ensures the weight doesn't go below 0 or above 1 if distance is out of bounds.
+		var weight: float = remap(dist_to_cotu, min_fog_radius, max_fog_radius, 0.0, 1.0)
+		weight = clamp(weight, 0.0, 1.0)
+		# 2. Lerp the speed scale using that weight.
+		var blizzard_particles_speed_scale: float = lerp(min_blizzard_particles_speed_scale, max_blizzard_particles_speed_scale, weight)
+		# 3. Apply to your GPUParticles3D or CPUParticles3D node
+		blizzard_particles.speed_scale = blizzard_particles_speed_scale
 		
 	if not is_on_floor():
 		velocity.y -= gravity * delta
