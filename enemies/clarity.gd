@@ -226,6 +226,8 @@ func body_face_position_directly(target_pos):
 		m.rotation.y = lerp_angle(m.rotation.y, target_rotation.y, body_turn_speed / 2.1)
 		m.rotation.z = lerp_angle(m.rotation.z, target_rotation.z, body_turn_speed / 2.1)
 
+# Lerp val (float btwn 0 and 1) to be used for value transitions
+var cotu_dist_lerp_val := .5
 func _physics_process(delta):
 	var dist_to_cotu = cotu.global_position.distance_to(global_position)
 	if dist_to_cotu > blizzard_safezone_radius:
@@ -234,42 +236,41 @@ func _physics_process(delta):
 		blizzard_hitbox.process_mode = PROCESS_MODE_DISABLED
 	blizzard_particles.global_position = cotu.global_position + 15*Vector3.UP + cotu.get_camera_fwd_dir_lateral()
 	
-	
 	if env_autochange:
 		# Keep dist to Cotu value within fog bounds
 		var clamped_cotu_dist = clampf(dist_to_cotu, min_fog_radius, max_fog_radius)
+		# Convert dist to Cotu to a float btwn 0 and 1 (lerp val)
+		var target_cotu_dist_lerp_val = remap(clamped_cotu_dist,
+		min_fog_radius, max_fog_radius,
+		0.0, 1.0)
+		# Move sample val toward the target so transitions happen smoothly
+		cotu_dist_lerp_val = move_toward(cotu_dist_lerp_val, target_cotu_dist_lerp_val, delta / 3)
+		
 		# Set fog density based on dist from Cotu
 		var min_fog_density := .01
 		var max_fog_density := .3
-		var target_fog_density = remap(clamped_cotu_dist, 
-		min_fog_radius, max_fog_radius,
-		min_fog_density, max_fog_density)
-		level_env.fog_density = move_toward(level_env.fog_density, target_fog_density, delta)
+		level_env.fog_density = lerpf(min_fog_density, max_fog_density, cotu_dist_lerp_val)
 		
-		# Repeat the above for sky and fog colors
-		var near_sky_top_color := Color("#65768f")
-		var far_sky_top_color := Color("#3c485a")
-		var near_sky_horizon_color := Color("#5a6c82")
-		var far_sky_horizon_color := Color("#1d2730")
-		var sky_top_roc := (far_sky_top_color.v - near_sky_top_color.v)/(max_fog_radius - min_fog_radius)
-		var sky_top_yint := near_sky_top_color.v - sky_top_roc * min_fog_radius
-		var target_sky_top_color_v = clampf(sky_top_roc * dist_to_cotu + sky_top_yint, far_sky_top_color.v, near_sky_top_color.v)
-		sky.sky_top_color.v = move_toward(sky.sky_top_color.v, target_sky_top_color_v, delta)
-		var sky_horizon_roc := (far_sky_horizon_color.v - near_sky_horizon_color.v)/(max_fog_radius - min_fog_radius)
-		var sky_horizon_yint := near_sky_top_color.v - sky_horizon_roc * min_fog_radius
-		var target_sky_horizon_color_v = clampf(sky_horizon_roc * dist_to_cotu + sky_horizon_yint, far_sky_horizon_color.v, near_sky_horizon_color.v)
-		sky.sky_horizon_color.v = move_toward(sky.sky_horizon_color.v, target_sky_horizon_color_v, delta)
-		sky.ground_horizon_color.v = sky.sky_horizon_color.v
+		# Repeat the above for sky and fog colors (0 is near, 1 is far)
+		# Sky top color
+		var sky_top_gradient = Gradient.new()
+		sky_top_gradient.set_color(0, Color("#65768f"))
+		sky_top_gradient.set_color(1, Color("#3c485a"))
+		sky.sky_top_color = sky_top_gradient.sample(cotu_dist_lerp_val)
+		# Sky/ground horizon color
+		var sky_horizon_gradient = Gradient.new()
+		sky_horizon_gradient.set_color(0, Color("#5a6c82"))
+		sky_horizon_gradient.set_color(1, Color("#1d2730"))
+		sky.sky_horizon_color = sky_horizon_gradient.sample(cotu_dist_lerp_val)
+		sky.ground_horizon_color = sky.sky_horizon_color
 		# Fog color is the same as horizon color
-		level_env.fog_light_color.v = sky.sky_horizon_color.v
-		level_env.volumetric_fog_emission.v = sky.sky_horizon_color.v
+		level_env.fog_light_color = sky.sky_horizon_color
+		level_env.volumetric_fog_emission = sky.sky_horizon_color
 		
 		# Blizzard particle intensity
 		var min_blizzard_particles_speed_scale = 1.0
 		var max_blizzard_particles_speed_scale = 3.0
-		blizzard_particles.speed_scale = remap(clamped_cotu_dist, 
-		min_fog_radius, max_fog_radius,
-		min_blizzard_particles_speed_scale, max_blizzard_particles_speed_scale)
+		blizzard_particles.speed_scale = lerpf(min_blizzard_particles_speed_scale, max_blizzard_particles_speed_scale, cotu_dist_lerp_val)
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -528,4 +529,6 @@ func contract_blizzard_safezone():
 	t.tween_property(bg_particle_attractor, "strength", 0, frames(180))
 
 	await get_tree().create_timer(frames(360)).timeout
+	# contract_blizzard_safezone transitions to the env the autochanging env would be if Cotu were within min_fog_dist, aka when cotu_dist_lerp_val is 0
+	cotu_dist_lerp_val = 0.0
 	env_autochange = true
