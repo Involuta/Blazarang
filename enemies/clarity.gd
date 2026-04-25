@@ -495,6 +495,7 @@ func jump_shot_mvmt():
 	t.tween_property(self, "gravity", .5 * ProjectSettings.get_setting("physics/3d/default_gravity"), 0)
 
 func expand_blizzard_safezone():
+	blizzard_particles.emitting = false
 	env_autochange = false
 	
 	var t = get_tree().create_tween().set_parallel()
@@ -531,4 +532,5 @@ func contract_blizzard_safezone():
 	await get_tree().create_timer(frames(360)).timeout
 	# contract_blizzard_safezone transitions to the env the autochanging env would be if Cotu were within min_fog_dist, aka when cotu_dist_lerp_val is 0
 	cotu_dist_lerp_val = 0.0
+	blizzard_particles.emitting = true
 	env_autochange = true
