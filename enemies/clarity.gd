@@ -103,7 +103,7 @@ var transparent_mat := preload("res://textures/clear_tile.tres")
 @onready var head_bone := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2
 @onready var head_mesh := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
 @onready var body_light := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/BodyLight
-@onready var blizzard_area := $BlizzardDOTArea
+@onready var blizzard_hitbox := $BlizzardDOT
 @onready var particle_attractor := $ParticleAttractor
 
 var head_hurtbox : Node3D
@@ -228,9 +228,9 @@ func body_face_position_directly(target_pos):
 func _physics_process(delta):
 	var dist_to_cotu = cotu.global_position.distance_to(global_position)
 	if dist_to_cotu > blizzard_safezone_radius:
-		blizzard_area.process_mode = PROCESS_MODE_INHERIT
+		blizzard_hitbox.process_mode = PROCESS_MODE_INHERIT
 	else:
-		blizzard_area.process_mode = PROCESS_MODE_DISABLED
+		blizzard_hitbox.process_mode = PROCESS_MODE_DISABLED
 	
 	if env_autochange:
 		var min_fog_density := .01

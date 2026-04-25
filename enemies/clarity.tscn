@@ -353,7 +353,7 @@ shader_parameter/emission = Color(0.67451, 0.827451, 1, 1)
 shader_parameter/height_falloff = 0.0
 shader_parameter/edge_fade = 0.1
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_2hwhq"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_5v2xg"]
 size = Vector3(150, 30, 150)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8r702"]
@@ -604,11 +604,11 @@ size = Vector3(18, 15, 18)
 shape = 0
 material = SubResource("ShaderMaterial_ngjdx")
 
-[node name="BlizzardDOTArea" type="Node3D" parent="."]
+[node name="BlizzardDOT" type="Node3D" parent="."]
 script = ExtResource("7_ffp3t")
 time_btwn_damage_ticks = 0.3
 
-[node name="EnemyHitbox" type="Area3D" parent="BlizzardDOTArea"]
+[node name="EnemyHitbox" type="Area3D" parent="BlizzardDOT"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.3036, 0)
 collision_layer = 8
 collision_mask = 0
@@ -616,9 +616,9 @@ script = ExtResource("4_5f0ps")
 damage = 1
 frostbite_buildup = 1
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BlizzardDOTArea/EnemyHitbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlizzardDOT/EnemyHitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-shape = SubResource("BoxShape3D_2hwhq")
+shape = SubResource("BoxShape3D_5v2xg")
 
 [node name="ParticleAttractor" type="GPUParticlesAttractorSphere3D" parent="."]
 strength = 2.66454e-15
@@ -638,6 +638,9 @@ frostbite_buildup = 1
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FootDOTArea/EnemyHitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.34172, 0)
 shape = SubResource("SphereShape3D_8r702")
+
+[node name="HatSnowParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.00904, 0)
 
 [editable path="ClarityBodyMeshes"]
 [editable path="ClarityArmMeshes"]
