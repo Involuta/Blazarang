@@ -1,15 +1,15 @@
 Sprite3D
+Node3D
+FogVolume
 GPUParticles3D
 CollisionShape3D
 Hitbox
-Node3D
 NavigationRegion3D
 ClarityShardHurtbox
 EnemyHurtbox
 Sprite2D
 AnimationPlayer
 GPUParticlesAttractorSphere3D
-FogVolume
 MeshInstance3D
 OmniLight3D
 Area3D
