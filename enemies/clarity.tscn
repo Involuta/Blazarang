@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=105 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://enemies/clarity_shard_hurtbox.gd" id="3_cemfj"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="4_5f0ps"]
 [ext_resource type="Script" path="res://enemies/boss_hurtbox.gd" id="5_j584x"]
+[ext_resource type="Shader" uid="uid://vvgsovx2psnk" path="res://shaders/smoke_LOD.tres" id="5_w48cf"]
 [ext_resource type="Script" path="res://general_scripts/damage_over_time_area.gd" id="7_ffp3t"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="7_i53v5"]
 [ext_resource type="Shader" path="res://shaders/smoke.gdshader" id="7_pdkmx"]
@@ -43,8 +44,55 @@ initial_velocity_min = 3.0
 initial_velocity_max = 4.5
 scale_min = 0.01
 scale_max = 0.02
-color = Color(0.694118, 0.843137, 0.976471, 1)
+color = Color(0.729412, 0.862745, 0.980392, 1)
 color_ramp = SubResource("GradientTexture1D_xfxxd")
+
+[sub_resource type="Gradient" id="Gradient_ninjf"]
+offsets = PackedFloat32Array(0, 0.864162, 1)
+colors = PackedColorArray(0, 0, 0, 0.423529, 0.784314, 0.784314, 0.784314, 0.188235, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8rvx1"]
+gradient = SubResource("Gradient_ninjf")
+
+[sub_resource type="Curve" id="Curve_gnlh5"]
+_data = [Vector2(0, 0.18766), 0.0, 0.0, 0, 0, Vector2(0.323051, 0.648229), 0.0, 0.0, 0, 0, Vector2(0.708898, 0.658817), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_ae1jp"]
+curve = SubResource("Curve_gnlh5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_22vdl"]
+emission_shape = 6
+emission_ring_axis = Vector3(2.08165e-12, -1, 2.08165e-12)
+emission_ring_height = 2.08165e-12
+emission_ring_radius = 1.2
+emission_ring_inner_radius = 0.75
+direction = Vector3(0.45, -1, 2.08165e-12)
+spread = 20.0
+gravity = Vector3(2.08165e-12, 0.5, 2.08165e-12)
+initial_velocity_min = 2.4
+initial_velocity_max = 3.3
+scale_min = 2.4
+scale_max = 3.6
+scale_curve = SubResource("CurveTexture_ae1jp")
+color_ramp = SubResource("GradientTexture1D_8rvx1")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6f3ts"]
+render_priority = 0
+shader = ExtResource("5_w48cf")
+shader_parameter/ColorParameter = Color(0.611765, 0.8, 1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_7dp0r"]
+material = SubResource("ShaderMaterial_6f3ts")
+size = Vector2(1.6, 1.3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xs806"]
+shader = ExtResource("7_pdkmx")
+shader_parameter/density = 3.0
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/emission = Color(1, 1, 1, 1)
+shader_parameter/height_falloff = 0.0
+shader_parameter/edge_fade = 0.1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g3bkq"]
 radius = 1.5
@@ -366,6 +414,7 @@ emission_ring_axis = Vector3(2.08165e-12, -1, 2.08165e-12)
 emission_ring_height = 1.0
 emission_ring_radius = 18.0
 emission_ring_inner_radius = 2.08165e-12
+particle_flag_align_y = true
 direction = Vector3(2.08165e-12, -1, 2.08165e-12)
 spread = 0.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -385,12 +434,120 @@ shader_parameter/height_falloff = 0.0
 shader_parameter/edge_fade = 0.6
 shader_parameter/density_texture = SubResource("NoiseTexture3D_lxkea")
 
-[sub_resource type="FogMaterial" id="FogMaterial_t32dk"]
-density = 0.15
-albedo = Color(0.705882, 0.854902, 1, 1)
-emission = Color(0.705882, 0.854902, 1, 1)
-height_falloff = 0.3
-edge_fade = 0.3
+[sub_resource type="Shader" id="Shader_8bx8m"]
+code = "shader_type fog;
+
+uniform float density : hint_range(-8, 8, 0.0001) = 1.0;
+uniform vec4 albedo : source_color = vec4(1.0);
+uniform vec4 emission : source_color = vec4(0, 0, 0, 1);
+uniform float height_falloff = 0.0;
+uniform float edge_fade = 0.1;
+uniform sampler3D density_texture: hint_default_white;
+
+vec3 random3(vec3 c) {
+	float j = 4096.0*sin(dot(c,vec3(17.0, 59.4, 15.0)));
+	vec3 r;
+	r.z = fract(512.0*j);
+	j *= .125;
+	r.x = fract(512.0*j);
+	j *= .125;
+	r.y = fract(512.0*j);
+	return r-0.5;
+}
+
+/* skew constants for 3d simplex functions */
+const float F3 =  0.3333333;
+const float G3 =  0.1666667;
+
+/* 3d simplex noise */
+float simplex3d(vec3 p) {
+	 /* 1. find current tetrahedron T and its four vertices */
+	 /* s, s+i1, s+i2, s+1.0 - absolute skewed (integer) coordinates of T vertices */
+	 /* x, x1, x2, x3 - unskewed coordinates of p relative to each of T vertices*/
+	 p = p * 5.0;
+	 /* calculate s and x */
+	 vec3 s = floor(p + dot(p, vec3(F3)));
+	 vec3 x = p - s + dot(s, vec3(G3));
+	 
+	 /* calculate i1 and i2 */
+	 vec3 e = step(vec3(0.0), x - x.yzx);
+	 vec3 i1 = e*(1.0 - e.zxy);
+	 vec3 i2 = 1.0 - e.zxy*(1.0 - e);
+	 	
+	 /* x1, x2, x3 */
+	 vec3 x1 = x - i1 + G3;
+	 vec3 x2 = x - i2 + 2.0*G3;
+	 vec3 x3 = x - 1.0 + 3.0*G3;
+	 
+	 /* 2. find four surflets and store them in d */
+	 vec4 w, d;
+	 
+	 /* calculate surflet weights */
+	 w.x = dot(x, x);
+	 w.y = dot(x1, x1);
+	 w.z = dot(x2, x2);
+	 w.w = dot(x3, x3);
+	 
+	 /* w fades from 0.6 at the center of the surflet to 0.0 at the margin */
+	 w = max(0.6 - w, 0.0);
+	 
+	 /* calculate surflet components */
+	 d.x = dot(random3(s), x);
+	 d.y = dot(random3(s + i1), x1);
+	 d.z = dot(random3(s + i2), x2);
+	 d.w = dot(random3(s + 1.0), x3);
+	 
+	 /* multiply d by w^4 */
+	 w *= w;
+	 w *= w;
+	 d *= w;
+	 
+	 /* 3. return the sum of the four surflets */
+	 return dot(d, vec4(52.0));
+}
+
+/* const matrices for 3d rotation */
+const mat3 rot1 = mat3(vec3(-0.37, 0.36, 0.85),vec3(-0.14,-0.93, 0.34), vec3(0.92, 0.01, 0.4));
+const mat3 rot2 = mat3(vec3(-0.55,-0.39, 0.74), vec3(0.33,-0.91,-0.24), vec3(0.77, 0.12,0.63));
+const mat3 rot3 = mat3(vec3(-0.71, 0.52,-0.47), vec3(-0.08,-0.72,-0.68), vec3(-0.7,-0.45,0.56));
+
+/* directional artifacts can be reduced by rotating each octave */
+float simplex3d_fractal(vec3 m) {
+    return   0.5333333*simplex3d(m*rot1)
+			+0.2666667*simplex3d(2.0*m*rot2)
+			+0.1333333*simplex3d(4.0*m*rot3)
+			+0.0666667*simplex3d(8.0*m);
+}
+
+
+void fog() {
+    DENSITY = density * clamp(exp2(-height_falloff * (WORLD_POSITION.y - OBJECT_POSITION.y)), 0.0, 1.0);
+    DENSITY *= texture(density_texture, UVW).r;
+    DENSITY *= pow(clamp(-2.0 * SDF / min(min(SIZE.x, SIZE.y), SIZE.z), 0.0, 1.0), edge_fade);
+	
+	float n = simplex3d_fractal(vec3(UVW.x, UVW.y + TIME * 0.1, UVW.z));
+	n = 0.5 + 0.5 * n;
+	
+	n = n - smoothstep(0.3, 0.7, distance(UVW, vec3(0.5)));
+	// boost density in bright areas, thin out dark areas
+	n = pow(n, 0.6);                 // increase contrast
+	n = smoothstep(0.15, 0.95, n);   // clamp low values, preserve highs
+	DENSITY *= n;
+	
+    ALBEDO = albedo.rgb;
+    EMISSION = emission.rgb;
+}"
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_gslxl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7lg1y"]
+shader = SubResource("Shader_8bx8m")
+shader_parameter/density = 0.6
+shader_parameter/albedo = Color(0.768627, 0.890196, 1, 1)
+shader_parameter/emission = Color(0.768627, 0.890196, 1, 1)
+shader_parameter/height_falloff = 0.0
+shader_parameter/edge_fade = 0.6
+shader_parameter/density_texture = SubResource("NoiseTexture3D_gslxl")
 
 [sub_resource type="FogMaterial" id="FogMaterial_jmgge"]
 density = 0.03
@@ -423,6 +580,11 @@ transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
 bones/6/rotation = Quaternion(-0.00430867, -0.00257057, 0.989347, -0.14549)
 bones/8/rotation = Quaternion(-0.018332, 0.122093, 0.983651, -0.131102)
 bones/10/rotation = Quaternion(0.0225388, -0.141184, 0.981641, -0.126256)
+
+[node name="ParticleAttractor" type="GPUParticlesAttractorSphere3D" parent="ClarityBodyMeshes/Armature/Skeleton3D/Hat_2" index="1"]
+transform = Transform3D(2, -3.24884e-14, -2.84217e-14, 3.24884e-14, 2, -5.6687e-08, 2.84217e-14, 5.6687e-08, 2, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+strength = 2.66454e-15
+radius = 30.0
 
 [node name="Arm_2" parent="ClarityBodyMeshes/Armature/Skeleton3D/Arm_2" index="0"]
 transform = Transform3D(1, -1.87228e-11, 9.66053e-17, -1.64536e-08, 1, 1.19524e-16, -3.23221e-16, -7.08343e-17, 1, 0, 0, 0)
@@ -506,6 +668,21 @@ amount = 360
 lifetime = 2.7
 process_material = SubResource("ParticleProcessMaterial_pcb0r")
 draw_pass_1 = ExtResource("7_i53v5")
+
+[node name="MistCloudParticles" type="GPUParticles3D" parent="ClarityBodyMeshes"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 2.08165e-12, 12.3, 2.08165e-12)
+cast_shadow = 0
+amount = 60
+lifetime = 3.9
+preprocess = 1.5
+process_material = SubResource("ParticleProcessMaterial_22vdl")
+draw_pass_1 = SubResource("QuadMesh_7dp0r")
+
+[node name="HeadFog" type="FogVolume" parent="ClarityBodyMeshes"]
+transform = Transform3D(3, -1.04636e-15, 1.04636e-15, 1.04636e-15, 3, -1.04636e-15, -1.04636e-15, 1.04636e-15, 3, 2.08165e-12, 12, 2.08165e-12)
+size = Vector3(1.2, 1.2, 1.2)
+shape = 0
+material = SubResource("ShaderMaterial_xs806")
 
 [node name="ClarityArmMeshes" parent="." instance=ExtResource("1_4e0of")]
 transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
@@ -651,13 +828,9 @@ frostbite_buildup = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 shape = SubResource("BoxShape3D_5v2xg")
 
-[node name="ParticleAttractor" type="GPUParticlesAttractorSphere3D" parent="."]
-strength = 2.66454e-15
-radius = 30.0
-
 [node name="FootDOTArea" type="Node3D" parent="."]
 script = ExtResource("7_ffp3t")
-time_btwn_damage_ticks = 0.3
+time_btwn_damage_ticks = 0.15
 
 [node name="EnemyHitbox" type="Area3D" parent="FootDOTArea"]
 collision_layer = 8
@@ -688,10 +861,10 @@ shape = 1
 material = SubResource("ShaderMaterial_ngjdx")
 
 [node name="FeetFog" type="FogVolume" parent="FogVolume"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -3.6, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -3.3, 2.08165e-12)
 size = Vector3(12, 1.8, 12)
 shape = 0
-material = SubResource("FogMaterial_t32dk")
+material = SubResource("ShaderMaterial_7lg1y")
 
 [node name="BodyCloud" type="FogVolume" parent="FogVolume"]
 visible = false

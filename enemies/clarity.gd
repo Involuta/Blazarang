@@ -105,7 +105,7 @@ var transparent_mat := preload("res://textures/clear_tile.tres")
 @onready var body_light := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/BodyLight
 @onready var blizzard_hitbox := $BlizzardDOT
 @onready var blizzard_particles := $BlizzardParticles
-@onready var particle_attractor := $ParticleAttractor
+@onready var particle_attractor := $ClarityBodyMeshes/Armature/Skeleton3D/Hat_2/ParticleAttractor
 @onready var body_cone_fog := $FogVolume/BodyCone
 @onready var feet_fog := $FogVolume/FeetFog
 @onready var body_cloud := $FogVolume/BodyCloud
@@ -120,7 +120,6 @@ var camera : Node3D
 var clarity_icon : Node3D
 var level_env : Environment
 var sky : ProceduralSkyMaterial
-var bg_particle_attractor : GPUParticlesAttractor3D
 var level_fog : FogMaterial
 
 func _ready():
@@ -135,7 +134,6 @@ func _ready():
 	
 	level_env = level.find_child("WorldEnvironment").environment
 	sky = level_env.sky.sky_material
-	bg_particle_attractor = level.find_child("ParticleAttractor")
 	
 	blizzard_safezone_radius = blizzard_safezone_base_radius
 	body_light.omni_range = body_light_base_radius
@@ -279,13 +277,14 @@ func _physics_process(delta):
 		# Body fog doesn't change
 		# Feet fog goes to 0 at far dist
 		var near_feet_fog_density := .6
-		#feet_fog.material.set_shader_parameter("density", lerpf(near_feet_fog_density, 0, cotu_dist_lerp_val))
-		feet_fog.material.density = lerpf(near_feet_fog_density, 0, cotu_dist_lerp_val)
+		feet_fog.material.set_shader_parameter("density", lerpf(near_feet_fog_density, 0, cotu_dist_lerp_val))
+		#feet_fog.material.density = lerpf(near_feet_fog_density, 0, cotu_dist_lerp_val)
 		var body_fog_gradient = Gradient.new()
 		body_fog_gradient.set_color(0, Color("aad3ff"))
 		body_fog_gradient.set_color(1, body_light.light_color)
 		body_cone_fog.material.set_shader_parameter("emission", body_fog_gradient.sample(cotu_dist_lerp_val))
-		feet_fog.material.emission = body_fog_gradient.sample(cotu_dist_lerp_val)
+		#feet_fog.material.emission = body_fog_gradient.sample(cotu_dist_lerp_val)
+		feet_fog.material.set_shader_parameter("emission", body_fog_gradient.sample(cotu_dist_lerp_val))
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -525,8 +524,7 @@ func expand_blizzard_safezone():
 	t.tween_property(level_env, "fog_density", 0.0015, frames(144))
 	t.tween_property(level_env, "volumetric_fog_density", .0009, frames(144))
 	t.tween_property(level_env, "volumetric_fog_emission", Color("#95a5bd"), frames(144))
-	t.tween_property(particle_attractor, "strength", -30, 0)
-	t.tween_property(bg_particle_attractor, "strength", -30, 0)
+	t.tween_property(particle_attractor, "strength", 300, frames(144))
 	# Body fog
 	t.tween_property(body_cone_fog.material, "shader_parameter/density", 0.0, frames(144))
 	t.tween_property(feet_fog.material, "shader_parameter/density", 0.0, frames(144))
@@ -546,7 +544,6 @@ func contract_blizzard_safezone():
 	t.tween_property(level_env, "volumetric_fog_density", 0.036, frames(360))
 	t.tween_property(level_env, "volumetric_fog_emission", Color("#65768f"), frames(360))
 	t.tween_property(particle_attractor, "strength", 0, frames(180))
-	t.tween_property(bg_particle_attractor, "strength", 0, frames(180))
 	# Body fog
 	t.tween_property(body_cone_fog.material, "shader_parameter/density", 0.09, frames(180))
 	t.tween_property(feet_fog.material, "shader_parameter/density", 0.15, frames(180))

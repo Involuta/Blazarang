@@ -82,3 +82,5 @@ res://enemies/enemy_anims/x_triangle_volcano.res
 res://enemies/enemy_anims/x_very_far_strafe_laser.res
 res://enemies/enemy_anims/clarity_doubleslice_forward_immediate.res
 res://enemies/enemy_anims/clarity_singleshot_left.res
+res://shaders/smoke_LOD.tres
+res://textures/noise_texture_2d.tres
