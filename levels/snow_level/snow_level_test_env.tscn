@@ -15,6 +15,7 @@ sky_horizon_color = Color(0.352941, 0.423529, 0.509804, 1)
 ground_bottom_color = Color(0.301961, 0.364706, 0.447059, 1)
 ground_horizon_color = Color(0.352941, 0.423529, 0.509804, 1)
 ground_curve = 0.113137
+sun_angle_max = 0.0
 
 [sub_resource type="Sky" id="Sky_d33do"]
 sky_material = SubResource("ProceduralSkyMaterial_o2vos")
