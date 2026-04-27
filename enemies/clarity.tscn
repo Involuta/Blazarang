@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=129 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -110,7 +110,7 @@ gradient = SubResource("Gradient_ddgtd")
 
 [sub_resource type="Curve" id="Curve_lu7j8"]
 max_value = 3.0
-_data = [Vector2(0, 0.721796), 0.0, 0.0, 0, 0, Vector2(1, 1.57941), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1.19825), 0.0, 0.0, 0, 0, Vector2(1, 1.72234), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_nmhf7"]
@@ -118,10 +118,12 @@ curve = SubResource("Curve_lu7j8")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fnncc"]
 emission_shape = 3
-emission_box_extents = Vector3(0.75, 24, 0.75)
-direction = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+emission_box_extents = Vector3(0.75, 21, 3)
+direction = Vector3(-1, 2.08165e-12, 2.08165e-12)
 spread = 0.0
-gravity = Vector3(2.08165e-12, -1.2, 2.08165e-12)
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 1.5
+initial_velocity_max = 4.5
 scale_min = 1.5
 scale_max = 3.0
 scale_curve = SubResource("CurveTexture_nmhf7")
@@ -286,7 +288,27 @@ shader_parameter/ColorParameter = Color(0.611765, 0.8, 1, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_jq84n"]
 material = SubResource("ShaderMaterial_jrng5")
-size = Vector2(0.75, 0.75)
+size = Vector2(0.6, 0.6)
+
+[sub_resource type="Gradient" id="Gradient_j3tok"]
+colors = PackedColorArray(1, 1, 1, 1, 0.416798, 0.702309, 0.933106, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gh3q1"]
+gradient = SubResource("Gradient_j3tok")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_udlod"]
+emission_shape = 3
+emission_box_extents = Vector3(1.2, 24, 1.2)
+direction = Vector3(2.08165e-12, -1, 2.08165e-12)
+spread = 30.0
+gravity = Vector3(2.08165e-12, -1, 2.08165e-12)
+initial_velocity_min = 6.0
+initial_velocity_max = 9.0
+scale_min = 0.01
+scale_max = 0.02
+color = Color(0.729412, 0.862745, 0.980392, 1)
+color_ramp = SubResource("GradientTexture1D_gh3q1")
+attractor_interaction_enabled = false
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chxic"]
 
@@ -919,8 +941,8 @@ bones/0/position = Vector3(-0.0210742, 4.49276, 0.0847608)
 bones/0/rotation = Quaternion(0.0301653, 0.0796906, -0.0501057, 0.995102)
 bones/1/position = Vector3(-1.58209e-09, 8.69174, 9.87667e-09)
 bones/1/rotation = Quaternion(0.0484073, -0.0812806, 0.0524297, 0.994133)
-bones/3/position = Vector3(-3.7482, 4.38423, -0.0847618)
-bones/3/rotation = Quaternion(-0.00133295, 0.00728551, 0.900648, 0.434487)
+bones/3/position = Vector3(3.80271, 6.1959, 0.147576)
+bones/3/rotation = Quaternion(-0.648979, -0.721534, 0.138328, -0.197689)
 bones/6/position = Vector3(2.01413, 2.22899, -2.08285)
 bones/6/rotation = Quaternion(0.305356, -0.212565, 0.925231, -0.0743114)
 bones/8/position = Vector3(2.06725, 1.3427, 0.8528)
@@ -966,7 +988,7 @@ opponent_hitboxes = ["PlayerHitbox"]
 shape = SubResource("SphereShape3D_g3bkq")
 
 [node name="Arm_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.478189, 0.86339, 0.160914, -0.869188, 0.491502, -0.0542028, -0.125888, -0.113945, 0.985479, -4.48425, 8.53762, 0.998591)
+transform = Transform3D(0.119992, -0.989441, -0.0812896, -0.911904, -0.0774774, -0.403022, 0.392469, 0.122488, -0.911573, 5.77443, 10.4062, -0.243689)
 
 [node name="EnemyHitbox" type="Area3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2" index="1"]
 transform = Transform3D(0.996105, -0.0881817, 1.49527e-15, 0.0881823, 0.996105, -1.5173e-14, -3.13584e-15, -1.27004e-14, 0.999999, 1.53031, -16.5495, 1.07427e-07)
@@ -980,12 +1002,25 @@ frostbite_buildup = 15
 shape = SubResource("CapsuleShape3D_bvea4")
 
 [node name="ArmMistCloudParticles" type="GPUParticles3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2" index="2"]
-transform = Transform3D(0.996719, -0.0809837, 0.000370043, 0.0809822, 0.996713, -0.00415486, -3.21878e-05, 0.00417149, 0.999991, 1.64831, -15.2655, -0.0778832)
+transform = Transform3D(0.99625, -0.0865671, 0.000370043, 0.0865656, 0.996245, -0.00415486, -8.69076e-06, 0.00417187, 0.999991, 1.52971, -17.4348, 0.0845352)
 custom_aabb = AABB(-300, -300, -300, 600, 600, 600)
-amount = 180
+amount = 240
 lifetime = 1.2
+randomness = 0.5
 process_material = SubResource("ParticleProcessMaterial_fnncc")
 draw_pass_1 = SubResource("QuadMesh_jq84n")
+
+[node name="ArmSnowParticles" type="GPUParticles3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2" index="3"]
+transform = Transform3D(0.996514, -0.0834347, 2.40303e-09, 0.0834344, 0.996514, 2.30453e-09, 7.08375e-09, 1.02798e-07, 1, 1.76745, -18.6105, -7.36713e-05)
+amount = 120
+visibility_aabb = AABB(-300, -300, -300, 600, 600, 600)
+process_material = SubResource("ParticleProcessMaterial_udlod")
+draw_pass_1 = ExtResource("7_i53v5")
+
+[node name="GPUParticlesAttractorBox3D" type="GPUParticlesAttractorBox3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2" index="4"]
+transform = Transform3D(2.98823, -0.265484, -7.12151e-08, 0.265484, 2.98823, -1.82191e-07, 7.74851e-08, 2.5867e-07, 3, 1.83846, -18.5381, -2.31701)
+strength = 2.66454e-15
+size = Vector3(2, 12, 2)
 
 [node name="Center_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="2"]
 transform = Transform3D(0.982278, 0.104529, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)

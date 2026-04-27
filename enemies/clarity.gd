@@ -520,7 +520,7 @@ func expand_blizzard_safezone():
 	t.tween_property(sky, "sky_top_color", Color.LIGHT_SKY_BLUE, frames(144))
 	t.tween_property(sky, "sky_horizon_color", Color.SKY_BLUE, frames(144))
 	t.tween_property(sky, "ground_horizon_color", Color.SKY_BLUE, frames(144))
-	t.tween_property(level_env, "fog_light_color", Color.SNOW, frames(144))
+	t.tween_property(level_env, "fog_light_color", Color.DARK_GOLDENROD, frames(144))
 	t.tween_property(level_env, "fog_density", 0.0015, frames(144))
 	t.tween_property(level_env, "volumetric_fog_density", .0009, frames(144))
 	t.tween_property(level_env, "volumetric_fog_emission", Color("#95a5bd"), frames(144))

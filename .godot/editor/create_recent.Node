@@ -1,3 +1,5 @@
+GPUParticlesAttractorBox3D
+GPUParticlesAttractorVectorField3D
 GPUParticles3D
 FogVolume
 Sprite3D
@@ -29,4 +31,3 @@ AudioStreamPlayer
 AnimatedSprite3D
 RayCast3D
 Marker3D
-SkeletonIK3D
