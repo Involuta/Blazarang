@@ -1,6 +1,7 @@
+GPUParticles3D
+GPUParticlesAttractorSphere3D
 GPUParticlesAttractorBox3D
 GPUParticlesAttractorVectorField3D
-GPUParticles3D
 FogVolume
 Sprite3D
 Node3D
@@ -11,7 +12,6 @@ ClarityShardHurtbox
 EnemyHurtbox
 Sprite2D
 AnimationPlayer
-GPUParticlesAttractorSphere3D
 MeshInstance3D
 OmniLight3D
 Area3D
@@ -30,4 +30,3 @@ AudioStreamPlayer3D
 AudioStreamPlayer
 AnimatedSprite3D
 RayCast3D
-Marker3D

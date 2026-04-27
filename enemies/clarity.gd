@@ -277,14 +277,14 @@ func _physics_process(delta):
 		# Body fog doesn't change
 		# Feet fog goes to 0 at far dist
 		var near_feet_fog_density := .6
-		feet_fog.material.set_shader_parameter("density", lerpf(near_feet_fog_density, 0, cotu_dist_lerp_val))
+		#feet_fog.material.set_shader_parameter("density", lerpf(near_feet_fog_density, 0, cotu_dist_lerp_val))
 		#feet_fog.material.density = lerpf(near_feet_fog_density, 0, cotu_dist_lerp_val)
 		var body_fog_gradient = Gradient.new()
 		body_fog_gradient.set_color(0, Color("aad3ff"))
 		body_fog_gradient.set_color(1, body_light.light_color)
-		body_cone_fog.material.set_shader_parameter("emission", body_fog_gradient.sample(cotu_dist_lerp_val))
+		body_cone_fog.material.set_shader_parameter("emission", body_fog_gradient.sample(cotu_dist_lerp_val-.1))
 		#feet_fog.material.emission = body_fog_gradient.sample(cotu_dist_lerp_val)
-		feet_fog.material.set_shader_parameter("emission", body_fog_gradient.sample(cotu_dist_lerp_val))
+		#feet_fog.material.set_shader_parameter("emission", body_fog_gradient.sample(cotu_dist_lerp_val))
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -520,15 +520,14 @@ func expand_blizzard_safezone():
 	t.tween_property(sky, "sky_top_color", Color.LIGHT_SKY_BLUE, frames(144))
 	t.tween_property(sky, "sky_horizon_color", Color.SKY_BLUE, frames(144))
 	t.tween_property(sky, "ground_horizon_color", Color.SKY_BLUE, frames(144))
-	t.tween_property(level_env, "fog_light_color", Color.DARK_GOLDENROD, frames(144))
+	t.tween_property(level_env, "fog_light_color", Color.NAVY_BLUE, frames(144))
 	t.tween_property(level_env, "fog_density", 0.0015, frames(144))
 	t.tween_property(level_env, "volumetric_fog_density", .0009, frames(144))
 	t.tween_property(level_env, "volumetric_fog_emission", Color("#95a5bd"), frames(144))
 	t.tween_property(particle_attractor, "strength", 300, frames(144))
 	# Body fog
 	t.tween_property(body_cone_fog.material, "shader_parameter/density", 0.0, frames(144))
-	t.tween_property(feet_fog.material, "shader_parameter/density", 0.0, frames(144))
-	t.tween_property(body_cloud.material, "density", 0.06, frames(144))
+	#t.tween_property(feet_fog.material, "shader_parameter/density", 0.0, frames(144))
 
 func contract_blizzard_safezone():
 	var t = get_tree().create_tween().set_parallel()
@@ -545,9 +544,8 @@ func contract_blizzard_safezone():
 	t.tween_property(level_env, "volumetric_fog_emission", Color("#65768f"), frames(360))
 	t.tween_property(particle_attractor, "strength", 0, frames(180))
 	# Body fog
-	t.tween_property(body_cone_fog.material, "shader_parameter/density", 0.09, frames(180))
-	t.tween_property(feet_fog.material, "shader_parameter/density", 0.15, frames(180))
-	t.tween_property(body_cloud.material, "density", 0.0, frames(180))
+	t.tween_property(body_cone_fog.material, "shader_parameter/density", 0.3, frames(180))
+	#t.tween_property(feet_fog.material, "shader_parameter/density", 0.15, frames(180))
 
 	await get_tree().create_timer(frames(360)).timeout
 	# contract_blizzard_safezone transitions to the env the autochanging env would be if Cotu were within min_fog_dist, aka when cotu_dist_lerp_val is 0

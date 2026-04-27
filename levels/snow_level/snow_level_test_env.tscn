@@ -95,7 +95,7 @@ environment = SubResource("Environment_fxt2w")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
-light_color = Color(1, 1, 0.94902, 1)
+light_color = Color(0.756863, 0.870588, 1, 1)
 light_energy = 0.3
 shadow_enabled = true
 

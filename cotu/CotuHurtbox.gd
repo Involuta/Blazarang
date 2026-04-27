@@ -53,6 +53,9 @@ func on_stabilize():
 	max_health = original_max_health
 	health = original_max_health
 	damage_indicator_value = max_health
+	current_frostbite_stage = 0
+	current_frostbite_threshold = frostbite_stage_thresholds[current_frostbite_stage]
+	frostbite_buildup = 0
 
 func reset_recovery_delay():
 	recovery_delay_remaining = recovery_delay
