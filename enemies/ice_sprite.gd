@@ -17,7 +17,7 @@ var follow_speed := 5.0 # Ice sprite follow speed is set to be very similar to i
 @export var jump_lateral_speed := 9.0
 
 var explosion_triggered := false
-@export var explode_secs := 7.0
+@export var explode_secs := 6.0
 
 var aiming_at_target := true
 
@@ -87,6 +87,7 @@ func jump():
 func start_attack():
 	explosion_triggered = true
 	anim_player.play("explode")
+	await anim_player.animation_finished
 	await get_tree().create_timer(explode_secs).timeout
 	queue_free()
 

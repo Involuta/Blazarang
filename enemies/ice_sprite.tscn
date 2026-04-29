@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://i2xuy407tpbj"]
+[gd_scene load_steps=31 format=3 uid="uid://i2xuy407tpbj"]
 
 [ext_resource type="Script" path="res://enemies/ice_sprite.gd" id="1_h7jw6"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="2_6lw04"]
@@ -16,6 +16,69 @@ refraction_enabled = true
 [sub_resource type="BoxMesh" id="BoxMesh_adun2"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_qf6aq")
+
+[sub_resource type="Animation" id="Animation_mbtp2"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SnowParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.45098, 0.701961, 1, 0.74902)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("EnemyHitbox:process_mode")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FogClumps:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_m58tf"]
 resource_name = "explode"
@@ -68,56 +131,17 @@ tracks/3/keys = {
 "update": 1,
 "values": [4, 0, 4]
 }
-
-[sub_resource type="Animation" id="Animation_mbtp2"]
-resource_name = "RESET"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SnowParticles:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MeshInstance3D:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FogClumps:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(3),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.45098, 0.701961, 1, 0.74902)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("EnemyHitbox:process_mode")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7uy7i"]
@@ -137,6 +161,182 @@ scale_max = 0.1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xhnoi"]
 radius = 4.5
+
+[sub_resource type="Gradient" id="Gradient_ninjf"]
+offsets = PackedFloat32Array(0, 0.138728, 0.517341, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.490196, 0.82606, 0.82606, 0.82606, 0.54902, 0.843184, 0.843184, 0.843184, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8rvx1"]
+gradient = SubResource("Gradient_ninjf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_47sp6"]
+emission_shape = 1
+emission_sphere_radius = 4.5
+direction = Vector3(2.08165e-12, 1, 2.08165e-12)
+spread = 180.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+color_ramp = SubResource("GradientTexture1D_8rvx1")
+
+[sub_resource type="Gradient" id="Gradient_pxa7d"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0.137255)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ja1oy"]
+noise_type = 3
+frequency = 0.015
+offset = Vector3(2.08167e-08, 2.08167e-08, 2.08167e-08)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_in7cl"]
+invert = true
+color_ramp = SubResource("Gradient_pxa7d")
+noise = SubResource("FastNoiseLite_ja1oy")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_q0f6u"]
+expanded_output_ports = [0]
+texture = SubResource("NoiseTexture2D_in7cl")
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_c4ipl"]
+expanded_output_ports = [0]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeRemap" id="VisualShaderNodeRemap_1dk4c"]
+default_input_values = [1, 0.0, 2, 1.0, 3, 3.0, 4, 8.0]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pkngm"]
+load_path = "res://.godot/imported/blurry_circle.png-28c9b3767e93468af3b0b31a45e9924b.ctex"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_g82mv"]
+expanded_output_ports = [0]
+texture = SubResource("CompressedTexture2D_pkngm")
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_f8e6n"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_kfdlj"]
+expanded_output_ports = [0]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_riby4"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_edn76"]
+parameter_name = "ColorParameter"
+
+[sub_resource type="VisualShaderNodeBillboard" id="VisualShaderNodeBillboard_lugl5"]
+billboard_type = 3
+keep_scale = true
+
+[sub_resource type="VisualShader" id="VisualShader_pkxgs"]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx, unshaded;
+
+uniform vec4 ColorParameter : source_color;
+uniform sampler2D tex_frg_2;
+uniform sampler2D tex_frg_5;
+
+
+
+void vertex() {
+	mat4 n_out2p0;
+// GetBillboardMatrix:2
+	{
+		mat4 __wm = mat4(normalize(INV_VIEW_MATRIX[0]), normalize(INV_VIEW_MATRIX[1]), normalize(INV_VIEW_MATRIX[2]), MODEL_MATRIX[3]);
+		__wm = __wm * mat4(vec4(cos(INSTANCE_CUSTOM.x), -sin(INSTANCE_CUSTOM.x), 0.0, 0.0), vec4(sin(INSTANCE_CUSTOM.x), cos(INSTANCE_CUSTOM.x), 0.0, 0.0), vec4(0.0, 0.0, 1.0, 0.0), vec4(0.0, 0.0, 0.0, 1.0));
+		__wm = __wm * mat4(vec4(length(MODEL_MATRIX[0].xyz), 0.0, 0.0, 0.0), vec4(0.0, length(MODEL_MATRIX[1].xyz), 0.0, 0.0), vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0), vec4(0.0, 0.0, 0.0, 1.0));
+		n_out2p0 = VIEW_MATRIX * __wm;
+	}
+
+
+// Output:0
+	MODELVIEW_MATRIX = n_out2p0;
+
+
+}
+
+void fragment() {
+// ColorParameter:9
+	vec4 n_out9p0 = ColorParameter;
+
+
+// Input:3
+	vec4 n_out3p0 = COLOR;
+	float n_out3p1 = n_out3p0.r;
+
+
+	float n_out4p0;
+// Remap:4
+	float n_in4p1 = 0.00000;
+	float n_in4p2 = 1.00000;
+	float n_in4p3 = 3.00000;
+	float n_in4p4 = 8.00000;
+	{
+		float __input_range = n_in4p2 - n_in4p1;
+		float __output_range = n_in4p4 - n_in4p3;
+		n_out4p0 = n_in4p3 + __output_range * ((n_out3p1 - n_in4p1) / __input_range);
+	}
+
+
+// Texture2D:2
+	vec4 n_out2p0 = textureLod(tex_frg_2, UV, n_out4p0);
+	float n_out2p1 = n_out2p0.r;
+
+
+// Texture2D:5
+	vec4 n_out5p0 = texture(tex_frg_5, UV);
+	float n_out5p4 = n_out5p0.a;
+
+
+// FloatOp:6
+	float n_out6p0 = n_out2p1 * n_out5p4;
+
+
+// Input:7
+	vec4 n_out7p0 = COLOR;
+	float n_out7p4 = n_out7p0.a;
+
+
+// FloatOp:8
+	float n_out8p0 = n_out6p0 * n_out7p4;
+
+
+// Output:0
+	ALBEDO = vec3(n_out9p0.xyz);
+	ALPHA = n_out8p0;
+
+
+}
+"
+graph_offset = Vector2(-447.539, 291.765)
+flags/unshaded = true
+nodes/vertex/2/node = SubResource("VisualShaderNodeBillboard_lugl5")
+nodes/vertex/2/position = Vector2(-680, 520)
+nodes/vertex/connections = PackedInt32Array(2, 0, 0, 10)
+nodes/fragment/0/position = Vector2(620, 160)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_q0f6u")
+nodes/fragment/2/position = Vector2(-960, 280)
+nodes/fragment/3/node = SubResource("VisualShaderNodeInput_c4ipl")
+nodes/fragment/3/position = Vector2(-2120, 820)
+nodes/fragment/4/node = SubResource("VisualShaderNodeRemap_1dk4c")
+nodes/fragment/4/position = Vector2(-1400, 840)
+nodes/fragment/5/node = SubResource("VisualShaderNodeTexture_g82mv")
+nodes/fragment/5/position = Vector2(-960, 1020)
+nodes/fragment/6/node = SubResource("VisualShaderNodeFloatOp_f8e6n")
+nodes/fragment/6/position = Vector2(-279.448, 862.013)
+nodes/fragment/7/node = SubResource("VisualShaderNodeInput_kfdlj")
+nodes/fragment/7/position = Vector2(-440, 1520)
+nodes/fragment/8/node = SubResource("VisualShaderNodeFloatOp_riby4")
+nodes/fragment/8/position = Vector2(180, 1060)
+nodes/fragment/9/node = SubResource("VisualShaderNodeColorParameter_edn76")
+nodes/fragment/9/position = Vector2(-220, 80)
+nodes/fragment/connections = PackedInt32Array(3, 1, 4, 0, 4, 0, 2, 1, 2, 1, 6, 0, 6, 0, 8, 0, 7, 4, 8, 1, 8, 0, 0, 1, 9, 0, 0, 0, 5, 4, 6, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_youx8"]
+render_priority = 0
+shader = SubResource("VisualShader_pkxgs")
+shader_parameter/ColorParameter = Color(0.611765, 0.8, 1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_g85f8"]
+material = SubResource("ShaderMaterial_youx8")
+size = Vector2(6, 6)
 
 [node name="IceSprite" type="CharacterBody3D"]
 collision_layer = 8
@@ -181,6 +381,15 @@ frostbite_buildup = 9
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHitbox"]
 shape = SubResource("SphereShape3D_xhnoi")
+
+[node name="FogClumps" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 30
+lifetime = 6.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_47sp6")
+draw_pass_1 = SubResource("QuadMesh_g85f8")
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
