@@ -1,4 +1,4 @@
-Blazarang Ideas Doc Backup - 4/7/2026
+Blazarang Ideas Doc Backup 4/29/26
 
 Production Processes
 
@@ -422,9 +422,13 @@ Fixed by making the advance expressions for DashGrab transitions check a func th
 Bug Turned Feature List
 You can lock onto enemies through walls; shouldn’t be an issue since there’s no reason to hide enemies at all
 
+Playtester Questions
+
+
 
 Polish List
-[Optional; only do after everything else] make jumping spider ground contact anim dynamic depending on the surface it’s landing on
+Make rose and ax throw charges cancellable by dodging
+Frostbite effect text (like a mini version of DESTABILIZED)
 Cotu grounded main anims
 Rose normal throw
 Ax normal throw
@@ -451,7 +455,11 @@ Roserang particles upgrade
 Make particles last longer like glintstone spell particles in Elden Ring
 Make particles linger even after the rang ricochets and is caught
 Cotu himself contains rang particles. When the roserang is in flight, his script activates the particles and moves them to the rang’s position
+Clarity polishing
+Make snowflake “tattoo” on underside of hat (and possibly beyond) materialize in an intricate animation as the head tilts up and starts glowing in double slice anims
+Ice sprite lingering explosion hitbox has particles and fog
 Mite Level Polishing
+Give landmite a separate glb import instead of making paramite and landmite share the same meshes. This way there won’t be errors with missing anim tracks in paramite
 Program landmite/paramite walk anim (Procedural anim video progress: complete)
 At 7:22, how do you calculate the average normal for 8 legs instead of 4? Try only using 4 legs to calculate the normal like in the vid and just ignore the other 4
 Animate landmite actions
@@ -476,11 +484,27 @@ Make paramites rotate smoothly when following but randomly spin when retreating,
 Mite attacks with front legs and jaws instead of a tongue stab
 Front pairs rise menacingly and mouth opens. Feet converge at a point in front of the mite, pulling the prey to the mouth that closes
 Consider making the hit stop the player’s mvmt
+Consider making the arena one big tube instead of a mouth with jaws
+I like this change because it fits the mites’ theme more: a ton of creepy enemies in a small crowded space. The arena having open walls conflicts with the feeling of horror and claustrophobia of being in a pit of mites. Keep the mite mouth asset for other situations like cutscenes or a faraway environmental setpiece
+Create a separate mite mouth blender project so you can use the mite map experiments blender project for the tube
+Try lining the walls with eggs and keeping the ceiling just pitch black instead of visible, so it can be more mysterious how the paramites move around
+This arena design puts a lot of emphasis on the eggs, which means the egg models have to be really good for the design to work. Save this for further polishing later
+Consider not having the jumping spider as the boss of the mite level since its gameplay is so different from the enemies’. It was designed as a gimmick boss, so don’t put it in a non-gimmick level
+Idea: jumping spider is the true ultimate warrior of the mites, and is being saved for a more serious or special scenario (possibly the gala?). The mite level only consists of simple infantry and a much easier boss: the megamite
+Alt idea: the jumping spider goes rogue from the rest of the mites, and they scour the surrounding area to search for it. The spider ends up on Cotu’s ship and befriends the crew
+Texture jumping spider
+Try coloring its faces a random assortment of black, gray, and brown
+Try coloring it just gray
 Replace jumping spider front hitbox with grab anim
+On second thought, don’t do this since the player should be allowed to make mistakes against it without losing player control for a long time
 Web textures
 Spitweb (projectile fired by paramite and flatmite)
 Bigweb (web released from bigweb egg dropped during jumping spider phase)
+Remake level from the ground up to get fog to appear correctly (it’s always been just a color filter instead of properly obscuring faraway elements)
+Make web and egg deletions happen through manual timer code instead of tweens to prevent error messages/overhead caused by deleting a node with an active tween
+Paramites run to and jump from high ground instead of the arena center, making them harder to kill
 Egg break particles/anims
+Idea: egg explodes and fades out into tiny particles and dust, suggesting that it was made of mites or some other tiny material
 Ground texture
 Make Cotu’s running dodge more clear that it’s a dodge (at the time of writing this, he puts his hands behind his back and bends forward)
 Axrang overhead slam, arc slash, and melee hitbox increase in damage for every damage buff the axrang has (do this once you add damage indicator UI)
@@ -498,7 +522,12 @@ Make it pointy in the front and flat in the back
 Make enemy hit SFX
 Make gauntlet enemies stagger when they’re hit
 (Optional, only do this if performance is poor) instead of instantiating objects and deleting them (especially enemies), try putting them below the map or hiding them before they need to be spawned
-8164 Polishing
+Current task (polish)
+Add footstep noises using the footsteps addon from the AssetLib https://www.youtube.com/watch?v=zFgYhZyGRw0
+Cotu gauntlet
+Cotu snow
+X Polishing
+Make Sweep look less awkward (smoother chest mvmt)
 Make X dodge to the side when Cotu throws a non-shuriken rang. He can only dodge 1 time at most after each of his attacks
 Make an expanding/contracting cube at X shoulder joints whenever he reattaches an arm
 Decided not to do cubes for when he detaches an arm to make detaching his arms look more nonchalant and natural
@@ -528,8 +557,13 @@ In both cases, the diamond also makes it more difficult to see where X is, unlik
 If X very rarely runs into the diamond, this isn’t an issue
 ^ X never runs into the diamond. The 1 or 2 times he did was caused by intense lag
 Try adding orange smoke to the background to look like nebulas
+Try making background diamonds appear in flashes over time instead of all spawning in when the level loads
+Idea: they continuously spawn at a consistent rate in phase 1, then spawn rate increases in phase 2. Spawn rate stays the same until diamond limit is reached, at which point diamonds simply stop spawning
+I decided that the large ones would all spawn in at once, then the small ones would spawn in intermittently/more slowly
 Make Lasercombo Big X not follow X when he does the final kick
 Make all square particles into diamonds (just rotate all squares 45 deg)
+I had to make a new diamond mesh in Blender and import it
+Add shockwave ring to laser combo ball when the laser is fired
 Add SFX
 Add music
 Give FirstMiniboss some particle effects
@@ -1862,6 +1896,13 @@ Thick mites (size is btwn landmite and jumping spider, slightly smaller than hop
 Dies in 5 once-damage-buffed rose hits or 2 unbuffed axrang hits + 1 unbuffed axrang explosion
 Has somewhat more health than a landmite, but is easier to hit since it’s a big target and can’t jump
 Runs significantly faster than landmites but can’t jump
+Jumping Spider is a gimmick boss that doesn’t fit the rest of the level. Replace it with the Megamite
+Gigantic thick mite with a back full of eggs like a Surinam toad, but instead of a set of holes, it’s one big hole that acts like a bowl (this makes modeling easier)
+Slowly walks on walls and floors with the same code as the procedural anim spider (instead of a nav agent, set the mite’s walk and turn inputs to make it walk around the arena)
+Periodically launches eggs from its back
+Has a weak point on its face
+Tasks:
+Decrease size of arena. Arena was big originally because I thought the mites should have a Helldivers 2-like open map, but now I want it to be like a claustrophobic pit nest
 
 Homing Instant Rethrow Rang Buff
 Add 2nd and 3rd roserang buff slots to UI
@@ -2542,6 +2583,7 @@ Maybe she could do thrust attacks when moving straight? Then the shoulder orient
 The problem is thrust attacks are difficult to land given that she’s so much bigger than Cotu. Come back to this later and do the ideas you’re more certain about first
 Maybe she could have an attack where she drags the tip of her blade across the ground to create a frost field hazard, summon enemies, or both?
 Not a bad idea, but come back to this later and do the ideas you’re more certain about first
+After testing, I’ve decided that when she’s not attacking or about to attack, Clarity shouldn’t move straight at all. She should not have a straight neutral state. And when she is moving straight, she should look forward in the direction she’s moving. There’s no way for her to look at the player with her head and/or arm while her body moves straight and have that look graceful/elegant. When she looks straight forward while moving straight, it looks like she’s not paying attention to the player and becomes unintimidating, which is fine in short periods before a straight mvmt attack (e.g. jump shot, dragging sweep) but not as a long-duration neutral state, which makes her seem unaware and removes the tension of the fight. She should feel like a predator or duelist eyeing her prey, not helpless prey or a mindless drone
 When would Clarity ever use the projectile attacks if she’s rarely facing toward the player? After she uses Square or Jump Shot. She’ll land facing the player at just the right dist to use any projectile attack. These will be a staple combos of hers: Square/Jump Shot → projectile attack. Jump Shot leads into Walk Left attacks (so I don’t have to animate Jump Shot to Walk Forward) and Square leads into Walk Forward attacks
 Check if you can put a hitbox/hurtbox on a bone attachment, which would save you a ton of time by removing the need to animate hitbox position/rotation keyframes
 You can! But you had to make the hitbox much bigger and longer than her arm. This is fine since her arm moves so quickly in her attacks and is completely out of the way when she’s not attacking
@@ -2557,6 +2599,10 @@ Possible Issue: Spiral has such a long startup that by the time she fires the sh
 This is true; even with Cotu’s walk speed halved, Clarity’s dash speed increased 33%, and her long-dist wait (the time btwn her landing and choosing Spiral) reduced to 0-0.1, Cotu gets to Clarity long before spiral fires the shards
 The point of this task “When would Clarity ever use the projectile attacks…” is to see what a big mvmt → projectile attack would look/feel like. Now that you have jump shot to spiral, you don’t need to implement square nor spiral yet. Prioritize more core features like head stun and blizzard
 Implement Square anim + mvmt (later)
+After implementing head stun and blizzard, I confirmed the Possible Issue described above: Cotu gets to Clarity long before Spiral (or any projectile attack for that matter) has a chance to deal damage at a range
+Solution 1: make Clarity dash much farther. This may seem unfun bc the player has to spend a long time running back to her, which is the biggest reason why players hated the Elden Beast boss fight in Elden Ring (before Torrent was permitted in the boss room). However, the Elden Beast running away was only tedious because it didn’t cause any real threat, it only dragged out the fight (yes it created the threat of that one projectile combo, but once the player memorizes it, the threat disappears). By closing in the blizzard, Clarity running actually creates an attack that forces the player to respond immediately.
+With the way the jump shot is animated, Clarity dashing much farther would look unnatural, so keep the jump shot dash vel roughly the same. This does mean that after a jump shot, she can’t get far away enough to do a projectile attack, but that’s ok bc now there’s variety: when she dashes away, either she does a jump shot and ends up at melee distance, or she does a different move and ends up at ranged distance.
+Next task: make a move where she ends up at ranged distance
 Also consider taking the retreat from RegenShards and using that as a way for her to transition from a walk state to a projectile attack
 The problem with this is that the retreat is a short burst instead of a long swoosh wave-like mvmt, and there’s no cool attack during the retreat, unlike js and square
 Make Clarity staggered when she gets hit in the head while vulnerable
@@ -2626,31 +2672,93 @@ Make frostbite stage progression code in Cotu’s hurtbox
 Move all current frostbite properties from Cotu to his hurtbox since frostbite increases on hit. All Cotu himself needs to worry about is which frostbite stage he’s on so he knows what debuff applies, and for that, the hurtbox can tell Cotu when the frostbite progresses
 In on_hit, if hitbox.frostbite_buildup + frostbite_buildup > current_frostbite_threshold, current_frostbite_stage += 1 (if it’s less than len of frostbite_stage_thresholds), frostbite_buildup = 0, and current_frostbite_threshold is selected using current_frostbite_stage
 Move all “receive” code in hurtbox.gd to one func: receive_hit(hitbox, hitter). This way, you won’t have to make and call a separate method for each property of the hitbox (heal, damage, debuff, frostbite buildup)
+Change code so that when the threshold is met on stage 2, stage switches to 3 but the bar stays full instead of resetting to 0
 Make a blue health bar connected to Cotu’s frostbite
 Make a snow level script to control the frostbite bar, just like how the X boss level 1 script controls the X health bar
 In hindsight, shouldn’t both of these scripts be in the view control scene and not the level scene? The UI is at the viewcontrol level, not the level level. This doesn’t matter enough for me to care about fixing it
 Add health bar as a child of UIRoot in snow level view control
-Current task
 Make frostbite debuffs
+Changes from initial concept
 Frostbite doesn’t slow movement; the snow does. This way, the player doesn’t have to deal with mvmt speed that changes, which can be annoying and isn’t part of the challenge. The challenge is dodging and staying within Clarity’s attack range with lower mvmt speed
-Stage 1: Stability regen is slightly slowed, but stability cost of all abilities (dodging, attacking, etc.) decreases slightly
-Stability regen debuff is about half as potent as mite infestation
-Stage 2: Stability regen is slowed further, stability cost of abilities decreases slightly again, and damage taken from any attack is slightly increased
-Stability regen debuff is about as strong as mite infestation
-Stage 3: Stability regen stops and damage taken is slightly increased
+Stability cost of actions doesn’t decrease and damage taken doesn’t increase; these pretty much cancel out, so both effects were removed to make the situation easier to understand. Also, both of these effects combined would make the fight emphasize proper dodging instead of both proper dodging and proper stability management, and the latter is more compelling
+Stage 1: Stability regen is slightly slowed (about half as potent as mite infestation)
+Stage 2: Stability regen is slowed further (about as strong as mite infestation)
+Stage 3: Stability regen stops
+Add frostbite stages as debuffs
+In stability regen code, check current frostbite stage to know how much to slow it by
 Make big-movement attacks like jump shot clear the blizzard, then the blizzard slowly creeps back in over time
+Make clear blizzard func (turned into expand and contract blizzard safezone funcs)
 (Ideally) existing snow particles are blown away from Clarity via a particle attractor, then they stop falling around her
+The arena script currently checks the player’s dist from Clarity to know whether to activate the DOT hitbox. To clear the blizzard, simply increase this dist when Clarity jumps, then decrease the dist over time
+Make blizzard hitbox a child of Clarity to make it easier to control
+Increase the range of the body light, then decrease it over time
+Brighten the color and light of the sky, then decrease it over time
+Brighten and clear the fog, then bring it back
+Environment dims (sky darkens, fog light darkens) and fog greatly increases when Cotu stands outside the blizzard safezone
+In physics process, set fog density using a clamp and Cotu’s dist from Clarity. Min fog is when Cotu’s in the safezone, med fog is when Cotu’s approaching the edge, max fog when Cotu is at least 3m outside the safezone
+Change the above code so that instead of setting fog density to the target density cdirectly, you’re moving toward the target value every frame
+Do the same 2 steps for environment sky color and fog light
+Keep the fog values in the blizzard contract func the same since the blizzard has to close in first before the fog increases again
+Remake Snow Level from the ground up to make fog in game match fog in editor. The fog in game currently doesn’t obscure faraway objects or terrain, just changes color
+I got the fog to appear correctly using just a Level at the outermost layer, which directly contains WorldEnvironment, UIRoot, cotuCB, Clarity, Icon, and the arena floor. From here on out, levels that are filled with fog or don’t have massive background elements (mites, snow) should just be a Level and not a viewcontrol hierarchy. Viewcontrol hierarchy should only be used when necessary to show background features. Code in cotuCB, Clarity, Cotu’s weapons, hurtbox, and Level have been changed to account for either viewcontrol hierarchy or simple Level
+Let the player aim the power throw and axrang
+Holding down throw button long enough to initiate power throw mode zooms in the camera (try decreasing FOV → there are parameters that allow you to both decrease FOV and move the camera forward physically. Tweak to your liking after testing)
+Power throw throws the roserang at the camera direction in the vertical axis instead of just the lateral plane
+Zoom in makes a UI crosshair visible (and same with zoom out)
+Repeat the above for the axrang
+Make it so that the axrang is only thrown when the throw button is released instead of pressed
+Claude’s code restructured the if statements of the ax throw code, which broke things. Try just recreating the power throw code → this worked
+Make zoom in occur after same amt of time as rose min power throw charge time → it does, but it’s controlled by a different var just in case
+Make ax throwable omnidirectionally instead of just laterally
+When power throw/charged axrang throw is released, the camera zooms out on its own. Is this nauseating?
+No, but it makes it hard to tell whether the attack landed bc the camera zooms out and Cotu’s body gets in the way. It’d be way nicer if the player could zoom on their own separately from charging a throw. Then, the roserang power throw and ax would only move omnidirectionally if the player’s zooming
+Let the player zoom in/out by holding right-click
+Zooming in/out won’t make the player busy, but charging a throw will
+If the player’s zooming, then any ax throw (normal, perfect, or charged) will move omnidirectionally
+If the player’s zooming, then roserang power throw will move omnidirectionally. If not, the power throw will move laterally
+Fix bug where zooming breaks when you spam zoom button → fixed by making zoom state only toggle after the tweens complete, so a state can’t change while a tween is still in progress
 When head is exposed but not brightened (e.g. between slashes in double slash), hitting it will deal damage but not stagger. When head is exposed and brightened, hitting it will stagger
+Add keyframes to double slice anim that activate and deactivate hurtbox
+Add keyframes to double slice anim that toggle staggerable state
+Make it so that Clarity body meshes and arm meshes each have their own glb import. Them sharing the same glb import is causing buggy behavior with ClarityHead (their anim players are confused which ClarityHead to activate, changing ClarityHead keyframes removes the ice material)
+Export Clarity Blender project as ClarityBodyMeshes.glb to create the second glb
 Give each dress shard its own hurtbox. Each dress shard can break after taking enough damage, and if enough shards are broken, Clarity must regenerate them
 The optimal range for the roserang to hit all the shards is also the optimal range for Clarity to hit you
-Let the player aim the power throw and axrang
+Make dress shard hurtbox script (child of EnemyHurtbox) where die just makes the shard invisible
+Ice sprites spawn naturally from the blizzard, not from shards. This way, the player can’t easily predict when an enemy will attack
+To add to the surprise, ice sprites should also move regardless of whether Cotu’s moving, rather than only when Cotu moves
+The blizzard already tells the player to stop moving, so if ice sprites also tell the player to stop moving, there’s no conflict between the desire to move vs not move; it’s an easy choice to just not move (except for when Clarity runs away occasionally). The ice sprites create an interesting conflict between moving and not moving → move away from ice sprites, but stay close to blizzard safezone
+Ice sprites invading Cotu’s space also causes conflict between zooming in on Clarity’s head and looking around for sprites
+Sprites do damage
+In snow level:
+Add ice sprite spawn rate
+Instead of spawning every ____ seconds, which would make their spawning predictable, there’s a [spawn rate] chance of one spawning every second
+Prevent player from walking right up to Clarity’s legs
+Add falling snow/mist from Clarity’s head to her feet
+Snow particles
+Snow mist/fog (try using this: https://www.youtube.com/watch?v=e_6ZA-xa_DQ → I used method 3, LOD + shader)
+Add DOT hitbox at Clarity’s feet
+Clarity stomps while circling → this really isn’t necessary since the close rang DOT is so high
 Implement Square anim + mvmt
+This anim can be used when the player happens to be standing behind and to the right of Clarity, which is where jump shot looks bad
 Issue: Clarity’s supposed to be intimidating, and with the current concept for Square, she flies high into the sky and stays unseen for a long time before landing, making her less oppressive (because she’s not there) and making the gameplay more tedious
-Solution 1: instead of flying high into the sky, she elegantly backflips into the air while flying backwards and slides back onto the ground instead of slamming. This also makes her more unique than X, who does a similar straight up → straight down slam (Triangle while headless → Volcano Dive)
+Solution 1: instead of flying high into the sky, she crouches down, then elegantly backflips into the air (potentially spinning into the jump) while flying backwards and slides back onto the ground instead of slamming. This also makes her more unique than X, who does a similar straight up → straight down slam (Triangle while headless → Volcano Dive)
+Inspired by Kuroki’s huge backflip when transitioning to phase 2 in Sifu
+Current task
+Make Backflip anim
+Make attacks that send Clarity so far away that she can do a projectile attack afterward instead of a melee
+This is to solve an older issue where Clarity doesn’t get far enough to do projectile attacks after jump shot (“Cotu gets to Clarity long before Spiral…”)
+Idea: bird form attacks. Clarity becomes a bird and poses in bird form for a little while (to telegraph that she’s doing something dangerous) before flying far away
+Idea: Swoop attack
+Mvmt is almost the same if not identical to sword Crucible Knight’s flying thrust in Elden Ring. Clarity flies in a straight line at the target and ends up far behind it. While flying, Clarity’s wings are spread, which cover her path in snow that acts the same as the blizzard
 Idea: Spin
 Like an ice skater, Clarity leaps into the air, tucks in her arm and dress shards, and spins rapidly while decelerating to a stop midair. All of her dress shards then fire out in all directions, land, and become ice sprites. She then dives straight down into the ground and regenerates the shards
-Idea: Jump Shot creates a huge frost field that summons 3 ice sprites at once
-Idea: Whiteout - fog thickens, ice sprites spawn from the blizzard at an alarming rate, and gain the ability to approach Cotu even while he’s stationary. Clarity meanwhile does single slice stage progression (start passive → pause → subtle transition to aggressive → pause → subtle half windup → pause → subtle full windup → pause → attack)
+Idea: Clarity turns into a bird by making her leg shards into wings (maybe the hat is the chest?) and does attacks in bird form
+The issue here is that 
+Jump Shot creates a huge frost field on impact
+Idea: Whiteout - fog thickens, ice sprites spawn from the blizzard at an alarming rate. Clarity meanwhile does single slice stage progression (start passive → pause → subtle transition to aggressive → pause → subtle half windup → pause → subtle full windup → pause → attack)
+Idea: phase transition
+Clarity causes a huge whiteout, brightens the sky, and runs away. The player has a limited amt of time to find her before the sky begins to darken and the snow intensifies. When the sky gets too dark, the blizzard is reactivated. Somewhere in the snow, Clarity is in a tall sceptre form. The player must hit her head, which sits at the head of the staff, to deactivate the attack
 Idea: occasionally, songbird-like ice creatures will fly onto Clarity and stare at the target. They all fly away when she attacks, but there’s a slight chance they fly away beforehand to explore around
 Idea: Cotu can make snowballs and throw them with no stability cost (but making a snowball isn’t fast). Hitting an ice sprite with a snowball triggers its explosion
 
@@ -2703,7 +2811,7 @@ Unlockable Skill
 Gauntlet Boss: Elite Gunner + Sentinel
 Phase 1: EG is laying prone on top of FirstMiniboss while FirstMiniboss constantly tornadoes
 Explosive slug
-Phase 2: EG runs around on foot
+Phase 2: EG runs around on footb
 Run 360: EG strafes around the target, then jumps while spinning about the y-axis 360 degrees. When she faces away from the target, her shotgun’s muzzle flashes with light. The second time EG faces the target (not the target + its mvmt dir), she fires. She lands facing the direction she was originally running in. Does extra damage
 Spawn Grenade: EG throws 1-3 cubic grenades around the target, each of which has a tiny beacon to the sky. 5 seconds after a grenade is thrown, a spawner box from Gauntlet 1 flies vertically from far above onto the grenade’s x and z pos, spawns a random enemy from the choices below, then flies back into the sky
 Sentinel
@@ -2764,6 +2872,13 @@ Destroy Jumping Spider without using any stabilizers
 Super
 Destroy Jumping Spider hitless (destabilized the entire fight + no stabilizers, other items ok)
 
+Mark Rework
+Instead of marking an enemy the same way you discord orb an enemy using Zenyatta in Overwatch, marking requires you to aim at an enemy for some time, then press the mark button
+When you want to mark (maybe by pressing mark button once), camera switches to semi first-person aim mode like power throw and charged ax throw
+When aiming, a UI circle in the middle of the screen appears. You must keep the enemy’s center inside the circle for some time as the circle shrinks
+Once the enemy has been in the circle long enough, an effect plays and the circle stops shrinking. Press the mark button to mark the enemy
+While aiming, Cotu holds his icon in front of him with one hand and holds the mark in his other hand. The hand/arm positions are reminiscent of a bow and arrow, but his hands are openb
+
 Items
 Shop has a menu of items
 Shop window
@@ -2794,6 +2909,10 @@ Huge: size is comparable to Golden Hippopotamus from Elden Ring
 Giga: too big to fit in the arena; he hangs onto the floor with his hands and attacks with his head
 Slide: runs at target, then slides on the wet floor
 Ambush: runs at target in tiny mode, then grows to normal mode when close to the target and bites. If successful, target is grabbed and a punish anim plays
+Idea: When hit, one of Cotu’s arms is ripped off
+When one arm is gone, the ax can no longer be thrown
+When both arms are gone, no rangs can be thrown
+Stabilizing restores both arms
 Shockwave: in huge or giga mode, gator slowly opens its jaw wide, then slams it shut instantly, sending out an omnidirectional shockwave of pressurized air
 Idea: for 2nd phase, it can swim through the ground and walls and attack from them
 Floor Chomp: swims under the floor, then chomps up at target from below in either Big or Huge mode. Huge mode has longer chargeup time and a different sound effect
@@ -2820,6 +2939,10 @@ Combined
 Centipede does the same sequence of actions in every attempt
 Lore: fight is pre-recorded bc the real Centipede is busy elsewhere
 Each behavior state (purple, blue, black, combined, etc.) has its own section in the boss song. When a section of the boss song plays, its corresponding behavior state is active
+
+Party Pillars
+Arena consists of a ton of small pillars and one giant pillar in the center with flashy people dancing on it
+One big dancer in the center does dance moves corresponding with movement patterns of the pillars below (e.g. arm/leg mvmts left → all pillars move to the left, spin → all pillars rotate)
 
 Future Blade
 Large swordsman who does huge slashes and moves in quick, long dashes, but has “before-images” that show what he’s going to do a while before he does it
@@ -2877,10 +3000,23 @@ Top of its head is 3 giant spikes forming a mask above its mouth, and its mouth 
 Mask spikes can fold back to form a mane, revealing crazy eyes underneath
 Head can twist around and upside down to make new expressions to frighten its enemy
 Back is covered in candy bits, chest is guarded by chocolate plates
-Tail is undecided, perhaps its soul is floats on its tail like a ring?
+Tail is undecided, perhaps its soul floats on its tail like a ring?
 Moves smoothly and seductively
+Speaks Spanish with a deep distorted voice
 Idea: guards a secret wormhole that leads from the beginning of the game (gauntlet var 1) straight ot the gala
 Uses the candy bits on its body as projectiles
+Song is calming, seductive, and insidious
+Idea: song has deep distorted lyrics
+So soft, so sweet, so nice
+And it could be yours for a low low price,
+Come a little closer, don’t be shy
+Why should a god be afraid to die?
+
+Chakram Rang
+No concrete concepts yet, just that Cotu should use 1 or 2 chakrams in some way
+Idea: 2 dual chakrams used for melee and ranged attacks
+Idea: 1 giant chakram made from the icon itself. The ultimate (or penultimate) rang
+b
 
 Projectile Spammer: Microwave
 Idea: before the fight, you can unlock an endgame-level super powerful upgrade that deflects or destroys projectiles somehow. Undecided if this is done through the icon, one of the rangs, or something else entirely
@@ -3061,6 +3197,11 @@ Eventually, Cotu gets the option to store a lot of extra items inside a fridge f
 When taken out of a fridge, an item isn’t as strong as it is when made fresh from the microwave
 
 Triplets Boss
+3 stickmen made out of an unknown seemingly indestructible material
+They don’t know where their realm is, and because nothing has been able to destroy them and thus make them respawn at their realm, they may never know. They all feel deeply insecure about their lack of a realm
+Part of the reason they befriended Cotu was because Cotu also lacked a realm (or so they thought) and/or Cotu’s realm is one of the smallest in the universe and they sympathized with him
+If the above is true, why would Cotu remove his powers? Shouldn’t he keep them to protect the triplets from being lost in space? Idea: he didn’t choose to lose his powers; the reason why he lost them is a mystery they’re trying to solve
+Idea: Cotu lost his powers because after defeating Blackstar, Cotu began to question why he fought so hard in the first place if his objective in the tournament was just to have fun. The internal conflict in his soul between having fun and challenging himself caused his powers to disappear. Cotu realizes this fact after telling Blackstar (at the gala, in a flashback, or something else) that true strength comes from the soul, and encountering this conflict yet again threatens his powers. He keeps them for good when the player makes the choice themself. The player should know that this choice won’t affect gameplay so that they can reflect on how they’d answer this question themself
 Pilot: support
 Creates portals between realms and fetches hazards and minions from them
 All items are either free assets from the Internet or assets already in the game
@@ -3193,8 +3334,10 @@ Pilot: “Okay then.”
 No name: ninja
 Terrible at using realm items, but expert hand-to-hand fighter
 Can use realm items that are simply an extension of his body
+Fights like Bruce Lee/Jon Jones since he has long thin limbs
 Makes himself inconspicuous and moves frequently to lose your attention and sneak into attack range
-Cannot speak, write, or sign, but comprehension and instruction following is fine. Essentially has expressive aphasia
+Cannot speak, write, or sign (except for basic expressions/gestures like yes, no, and maybe), but comprehension and instruction following is fine. Essentially has expressive aphasia
+When he tries to speak, it sounds like quiet white noise. Greg and Pilot tried to decode it to no avail
 Left handed; does most fast kicks with his right leg and strong kicks with his left
 Mvmt options (fwd = dir from no name to target):
 Follow: walks forward with one side of his body facing the target like a fighter
@@ -3598,6 +3741,12 @@ Alt idea: gameplay is the same as the original concept, but arena is patrolled b
 Lore: no one has ever beaten The Edge except for Microwave
 
 3 Boss: Blackstar, Champion of the Gauntlet
+Story:
+After Cotu arrives at the gala and before their fight, Blackstar approaches Cotu and tells him that even though the gala’s not a serious competition, she wants him to promise her not to hold back, as this is her last chance to reincarnate before the next tournament
+X is jealous that she pulled Cotu aside
+She is extremely personally motivated to fight Cotu at his best
+Public opinion of the Gauntlet has decreased ever since her loss to Cotu in the tournament. People say the Gauntlet’s been on a decline and/or stagnating and/or out of its prime
+Blackstar can take being insulted herself, but she’s pained by her family being talked about negatively. She doesn’t want to restore her glory—she wants to restore theirs, and secure the Gauntlet’s future by reincarnating
 Thin black humanoid with diamond-like limbs and spiked gold mask
 Early face concept art:
 
@@ -3647,6 +3796,7 @@ She charges her ult’s power by gaining momentum, then converting all of that m
 You can prevent her ult from becoming stronger by interrupting her when she tries to gain speed
 Her ult charge doesn’t determine when her ult comes out, but how strong it is. Her ult always arrives at the same times in the fight
 Idea: when she ults, her max stability is permanently set to her current stability
+Idea: there’s a color difference between when she’s ulting and when she’s not (e.g. desaturated colors normal, restored colors ult, normal colors normal, altered colors ult like JoJo’s Bizarre Adventure)
 Idea: ult form is a humanoid body similar to her speed form, but bigger and with large Wolverine-like hand claws. She slashes the space around her with the claws, which summons huge floating claw slashes made of light that travel in the same paths at the same time. These look like the Revenant’s claw slashes from Elden Ring Nightreign. Each slash creates an emitter for a superlaser that slowly charges up before firing in a continuous violent straight blast that travels in the same direction as the slash. Her movements are wild and have huge windups, unrefined but packing huge power. She sways like a drunken boxer after every swing, suggesting that her claws are extremely heavy and that it takes a wild energy/mindset to use the claws to their fullest potential. She can use the explosions from the backs of the superlaser emitters to launch herself where she wants to go
 
 Jester Boss: The Greatest Magician
@@ -3678,6 +3828,26 @@ Progressing through the journey quickly (i.e. beating bosses with less attempts)
 If the player initiates the gala while still possessing attempts and stabilizers, the leftovers can be converted into skill points and other unlockables before the start of the next run
 The player is told about this game mechanic at the start of the entire game so they know they should do it
 Idea: each gala battle win multiplies the SP/unlockable potential of the leftover attempts and stabilizers
+Idea: using stabilizers in the gala is against the rules, so when entering the gala, the player has the option to convert them to XP to level up/upgrade skills before the first gala fight, or save them to be converted to skill points, items, etc. for the next run
+Idea: leftover stabilizers post-gala can be converted to super stabilizers in the next run (e.g. 4 stabilizers → 1 super stabilizer). Super stabilizer may provide a damage boost + temporary invincibility (via infinite stability) + no startup time on weapon throws + …
+Idea: Skill Tracks
+At the gala, participants can sign up for the Casual or Hardcore track. In the Casual track, participants can use any number of stabilizers they want. In the Hardcore track, stabilizers are forbidden
+OR fighters in the Casual track have a limited number of stabilizers they can use throughout the entire gala. This can be justified in-universe by saying they’re hard to come by
+Casual fighters (including but not limited to):
+Grower Gator
+Future Blade
+Triplets (as a surprise)
+Hardcore fighters (including but not limited to):
+Tempered X
+Turbo Jester
+Blackstar
+Whichever track the player joins, the player is allowed to train with members of the opposite track (i.e. fight them some number of times, limited or unlimited) before initiating the gala
+The player can only choose one track per run. If they want to try the other track, they have to start the journey from the beginning
+Idea: the player gets some kind of bonus, e.g. more XP per defeated boss, after each journey, but for story reasons, the player always starts with 0 XP and 0 upgrades at the start of each run
+If the player joins the Casual track, they can train with TX and Blackstar, but they won’t go all out
+TX won’t use his supermoves or enter his final tryhard phase
+Blackstar won’t use her ultimate form
+Idea: Jester refuses to train with you, but maybe she harasses/teases you in the hub room instead
 Player can save at a checkpoint with a limited number of slots
 Order of encounters:
 Cotu’s friends (supporting Cotu)
@@ -4403,10 +4573,20 @@ Jumping spiders have some of the most advanced eyes in the animal kingdom, which
 Microwave
 Originally just a funny gimmick that also fit my idea of an ideal robot soldier (small size so it can move quickly and be difficult to hit)
 Coincidentally, it matched the universe’s cosmic microwave background, a concept I learned about after thinking of the microwave boss
-Magic System
+Science System
+The Creator is using a universe simulation software on his computer to create his own universe pet project
+He entrusted an AI copilot built into the software to pseudo-randomly generate the gods
+The Creator told the AI to make the gods immortal
+The Creator made some changes to the virtual universe from his own universe, which has the same rules as ours
+Vastly increased the speed of light to make interstellar travel/communication easier
+Added stability
+Stability
+Gods naturally produce stability from their icons
+Only their own stability is compatible with their body, they can’t use others’ stability
+Magic
 Inspired by the idea that some people are just funnier than others. In a lot of fiction with a magic system, some people just have higher potential for it than others
 Also inspired by the debate of whether your sense of humor can be improved or if there’s nothing you can do to change it, just like magic in many stories
-Explains why only Greg and the Jester can use magic
+Explains why Greg and the Jester are the only magic users in the story
 Seer
 Interesting concept so I wanted to include some dialogue involving them, but they will most likely be unused since they create logic holes: can’t the Seer speak for no name by interpreting his future actions? And can’t the Seer immediately tell the team where to go to find the best deals on helping Pilot move and no name communicate? And can’t the Seer tell Cotu exactly how to win in every tournament?
 Cotu talking to the Seer in his closet
