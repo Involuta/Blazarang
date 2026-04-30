@@ -47,6 +47,9 @@ var phase := PHASE.PHASE1
 @export var blizzard_safezone_base_radius := 15.0
 @export var blizzard_safezone_expanded_radius := 150.0 # Blizzard safezone expands on jumps
 var blizzard_safezone_radius := 15.0
+@export var safezone_expand_frames_jump_shot := 144
+@export var safezone_contract_frames_jump_shot := 360
+
 @export var body_light_base_radius := 18.0
 @export var body_light_expanded_radius := 180.0 # Light expands on jumps to show new safezone
 @export var min_fog_radius := 12.0 # Dist from Clarity where fog is minimized
@@ -508,46 +511,52 @@ func jump_shot_mvmt():
 	t.tween_interval(frames(49))
 	t.tween_property(self, "gravity", .5 * ProjectSettings.get_setting("physics/3d/default_gravity"), 0)
 
-func expand_blizzard_safezone():
+func expand_blizzard_safezone_jump_shot():
+	expand_blizzard_safezone(safezone_expand_frames_jump_shot)
+
+func contract_blizzard_safezone_jump_shot():
+	contract_blizzard_safezone(safezone_contract_frames_jump_shot)
+
+func expand_blizzard_safezone(frame_duration: int):
 	blizzard_particles.emitting = false
 	env_autochange = false
 	
 	var t = get_tree().create_tween().set_parallel()
-	t.tween_property(self, "blizzard_safezone_radius", blizzard_safezone_expanded_radius, frames(144))
-	t.tween_property(body_light, "omni_range", body_light_expanded_radius, frames(144))
-	t.tween_property(body_light, "light_color", Color.SNOW, frames(144))
-	t.tween_property(body_light, "light_volumetric_fog_energy", 12.0, frames(144))
-	t.tween_property(sky, "sky_top_color", Color.LIGHT_SKY_BLUE, frames(144))
-	t.tween_property(sky, "sky_horizon_color", Color.SKY_BLUE, frames(144))
-	t.tween_property(sky, "ground_horizon_color", Color.SKY_BLUE, frames(144))
-	t.tween_property(level_env, "fog_light_color", Color.NAVY_BLUE, frames(144))
-	t.tween_property(level_env, "fog_density", 0.0015, frames(144))
-	t.tween_property(level_env, "volumetric_fog_density", .0009, frames(144))
-	t.tween_property(level_env, "volumetric_fog_emission", Color("#95a5bd"), frames(144))
-	t.tween_property(particle_attractor, "strength", 300, frames(144))
+	t.tween_property(self, "blizzard_safezone_radius", blizzard_safezone_expanded_radius, frames(frame_duration))
+	t.tween_property(body_light, "omni_range", body_light_expanded_radius, frames(frame_duration))
+	t.tween_property(body_light, "light_color", Color.SNOW, frames(frame_duration))
+	t.tween_property(body_light, "light_volumetric_fog_energy", 12.0, frames(frame_duration))
+	t.tween_property(sky, "sky_top_color", Color.LIGHT_SKY_BLUE, frames(frame_duration))
+	t.tween_property(sky, "sky_horizon_color", Color.SKY_BLUE, frames(frame_duration))
+	t.tween_property(sky, "ground_horizon_color", Color.SKY_BLUE, frames(frame_duration))
+	t.tween_property(level_env, "fog_light_color", Color.NAVY_BLUE, frames(frame_duration))
+	t.tween_property(level_env, "fog_density", 0.0015, frames(frame_duration))
+	t.tween_property(level_env, "volumetric_fog_density", .0009, frames(frame_duration))
+	t.tween_property(level_env, "volumetric_fog_emission", Color("#95a5bd"), frames(frame_duration))
+	t.tween_property(particle_attractor, "strength", 300, frames(frame_duration))
 	# Body fog
-	t.tween_property(body_cone_fog.material, "shader_parameter/density", 0.0, frames(144))
-	#t.tween_property(feet_fog.material, "shader_parameter/density", 0.0, frames(144))
+	t.tween_property(body_cone_fog.material, "shader_parameter/density", 0.0, frames(frame_duration))
+	#t.tween_property(feet_fog.material, "shader_parameter/density", 0.0, frames(frame_duration))
 
-func contract_blizzard_safezone():
+func contract_blizzard_safezone(frame_duration: int):
 	var t = get_tree().create_tween().set_parallel()
-	t.tween_property(self, "blizzard_safezone_radius", blizzard_safezone_base_radius, frames(360))
-	t.tween_property(body_light, "omni_range", body_light_base_radius, frames(360))
-	t.tween_property(body_light, "light_color", Color("#007ce4"), frames(360))
-	t.tween_property(body_light, "light_volumetric_fog_energy", 6.0, frames(360))
-	t.tween_property(sky, "sky_top_color", Color("#65768f"), frames(360))
-	t.tween_property(sky, "sky_horizon_color", Color("#5a6c82"), frames(360))
-	t.tween_property(sky, "ground_horizon_color", Color("#5a6c82"), frames(360))
-	t.tween_property(level_env, "fog_light_color", Color("#5a6c82"), frames(360))
-	t.tween_property(level_env, "fog_density", 0.01, frames(360))
-	t.tween_property(level_env, "volumetric_fog_density", 0.036, frames(360))
-	t.tween_property(level_env, "volumetric_fog_emission", Color("#65768f"), frames(360))
-	t.tween_property(particle_attractor, "strength", 0, frames(180))
+	t.tween_property(self, "blizzard_safezone_radius", blizzard_safezone_base_radius, frames(frame_duration))
+	t.tween_property(body_light, "omni_range", body_light_base_radius, frames(frame_duration))
+	t.tween_property(body_light, "light_color", Color("#007ce4"), frames(frame_duration))
+	t.tween_property(body_light, "light_volumetric_fog_energy", 6.0, frames(frame_duration))
+	t.tween_property(sky, "sky_top_color", Color("#65768f"), frames(frame_duration))
+	t.tween_property(sky, "sky_horizon_color", Color("#5a6c82"), frames(frame_duration))
+	t.tween_property(sky, "ground_horizon_color", Color("#5a6c82"), frames(frame_duration))
+	t.tween_property(level_env, "fog_light_color", Color("#5a6c82"), frames(frame_duration))
+	t.tween_property(level_env, "fog_density", 0.01, frames(frame_duration))
+	t.tween_property(level_env, "volumetric_fog_density", 0.036, frames(frame_duration))
+	t.tween_property(level_env, "volumetric_fog_emission", Color("#65768f"), frames(frame_duration))
+	t.tween_property(particle_attractor, "strength", 0, frames(frame_duration/2))
 	# Body fog
-	t.tween_property(body_cone_fog.material, "shader_parameter/density", 0.3, frames(180))
-	#t.tween_property(feet_fog.material, "shader_parameter/density", 0.15, frames(180))
+	t.tween_property(body_cone_fog.material, "shader_parameter/density", 0.3, frames(frame_duration/2))
+	#t.tween_property(feet_fog.material, "shader_parameter/density", 0.15, frames(frames/2))
 
-	await get_tree().create_timer(frames(360)).timeout
+	await get_tree().create_timer(frames(frame_duration)).timeout
 	# contract_blizzard_safezone transitions to the env the autochanging env would be if Cotu were within min_fog_dist, aka when cotu_dist_lerp_val is 0
 	cotu_dist_lerp_val = 0.0
 	blizzard_particles.emitting = true

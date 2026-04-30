@@ -32,3 +32,5 @@ res://enemies/clarity_head.tscn
 res://enemies/clarity.tscn
 res://levels/snow_level/snow_level_test_env.tscn
 res://levels/x_boss_level/background_nodes/x_diamond.tscn
+res://enemies/clarity.gd
+res://enemies/enemy_anims/clarity_jumpshot_towalkleft.res
