@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b70he2vkcfalc"]
+[gd_scene load_steps=27 format=3 uid="uid://b70he2vkcfalc"]
 
 [ext_resource type="Texture2D" uid="uid://namwvkk58jhe" path="res://sprites/blurry_circle.png" id="1_221de"]
 
@@ -97,6 +97,7 @@ tracks/5/keys = {
 [sub_resource type="Animation" id="Animation_t00eq"]
 resource_name = "CenterToBackMedium"
 length = 0.50001
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -222,6 +223,7 @@ _data = {
 [sub_resource type="Animation" id="Animation_yam0n"]
 resource_name = "BigToNothingMedium"
 length = 0.6
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -349,7 +351,7 @@ tracks/4/keys = {
 [sub_resource type="Animation" id="Animation_vl2aq"]
 resource_name = "BigToSmallMedium"
 length = 0.75
-step = 0.05
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -665,6 +667,71 @@ tracks/4/keys = {
 "values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_1jndo"]
+resource_name = "SmallToBigMedium"
+length = 0.500002
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BaseOffsetRotation/HeadMesh/HeadLight/HeadSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.298039, 0.631373, 1, 1), Color(0.59, 0.88, 1.2, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BaseOffsetRotation/HeadMesh/HeadLight/HeadSphere:mesh:material:emission")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0.415686, 0.768627, 1), Color(0.419608, 0.690196, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BaseOffsetRotation/HeadMesh/HeadLight/HeadSprite:transparency")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.6, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BaseOffsetRotation/HeadMesh/HeadLight/HeadSprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.6, 0.6, 0.6), Vector3(1.75, 1.75, 1.75)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BaseOffsetRotation/HeadMesh/HeadLight/HeadSphere:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w8qwd"]
 _data = {
 "BigToNothingMedium": SubResource("Animation_yam0n"),
@@ -673,6 +740,7 @@ _data = {
 "NothingToBigSlow": SubResource("Animation_ro2jj"),
 "RESET": SubResource("Animation_dp11t"),
 "SmallToBigFast": SubResource("Animation_ldwll"),
+"SmallToBigMedium": SubResource("Animation_1jndo"),
 "SmallToBigSlow": SubResource("Animation_i6ve8")
 }
 
