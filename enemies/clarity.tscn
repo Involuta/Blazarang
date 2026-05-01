@@ -1,4 +1,4 @@
-[gd_scene load_steps=142 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=114 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -11,6 +11,9 @@
 [ext_resource type="Script" path="res://general_scripts/damage_over_time_area.gd" id="7_ffp3t"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="7_i53v5"]
 [ext_resource type="Shader" path="res://shaders/smoke.gdshader" id="7_pdkmx"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_g3bkq"]
+radius = 1.5
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7112o"]
 radius = 1.0
@@ -84,230 +87,6 @@ shader_parameter/ColorParameter = Color(0.611765, 0.8, 1, 1)
 [sub_resource type="QuadMesh" id="QuadMesh_7dp0r"]
 material = SubResource("ShaderMaterial_6f3ts")
 size = Vector2(1.6, 1.3)
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_g3bkq"]
-radius = 1.5
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bvea4"]
-radius = 6.0
-height = 60.0
-
-[sub_resource type="Gradient" id="Gradient_ddgtd"]
-offsets = PackedFloat32Array(0, 0.130058, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0.545098, 0.545098, 0.545098, 0.545098, 0.676879, 0.676879, 0.676879, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_dn6t6"]
-gradient = SubResource("Gradient_ddgtd")
-
-[sub_resource type="Curve" id="Curve_lu7j8"]
-max_value = 3.0
-_data = [Vector2(0, 1.19825), 0.0, 0.0, 0, 0, Vector2(1, 1.72234), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_nmhf7"]
-curve = SubResource("Curve_lu7j8")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fnncc"]
-emission_shape = 3
-emission_box_extents = Vector3(0.75, 21, 3)
-direction = Vector3(1, 2.08165e-12, 2.08165e-12)
-spread = 0.0
-gravity = Vector3(2.08165e-12, -1.5, 2.08165e-12)
-initial_velocity_min = 1.5
-initial_velocity_max = 4.5
-scale_min = 1.5
-scale_max = 3.0
-scale_curve = SubResource("CurveTexture_nmhf7")
-color_ramp = SubResource("GradientTexture1D_dn6t6")
-
-[sub_resource type="Gradient" id="Gradient_jf44y"]
-colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0.137255)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_rp58b"]
-noise_type = 3
-frequency = 0.015
-offset = Vector3(2.08167e-08, 2.08167e-08, 2.08167e-08)
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_aunnp"]
-invert = true
-color_ramp = SubResource("Gradient_jf44y")
-noise = SubResource("FastNoiseLite_rp58b")
-
-[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_7nyii"]
-expanded_output_ports = [0]
-texture = SubResource("NoiseTexture2D_aunnp")
-
-[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_marsr"]
-expanded_output_ports = [0]
-input_name = "color"
-
-[sub_resource type="VisualShaderNodeRemap" id="VisualShaderNodeRemap_amyuj"]
-default_input_values = [1, 0.0, 2, 1.0, 3, 3.0, 4, 8.0]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_uwimq"]
-load_path = "res://.godot/imported/blurry_circle.png-28c9b3767e93468af3b0b31a45e9924b.ctex"
-
-[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_mof8v"]
-expanded_output_ports = [0]
-texture = SubResource("CompressedTexture2D_uwimq")
-
-[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_d30t3"]
-operator = 2
-
-[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_nxvc7"]
-expanded_output_ports = [0]
-input_name = "color"
-
-[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_lpyhq"]
-operator = 2
-
-[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_4j8un"]
-parameter_name = "ColorParameter"
-
-[sub_resource type="VisualShaderNodeBillboard" id="VisualShaderNodeBillboard_e4rsk"]
-billboard_type = 3
-keep_scale = true
-
-[sub_resource type="VisualShader" id="VisualShader_uber4"]
-code = "shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx, unshaded;
-
-uniform vec4 ColorParameter : source_color;
-uniform sampler2D tex_frg_2;
-uniform sampler2D tex_frg_5;
-
-
-
-void vertex() {
-	mat4 n_out2p0;
-// GetBillboardMatrix:2
-	{
-		mat4 __wm = mat4(normalize(INV_VIEW_MATRIX[0]), normalize(INV_VIEW_MATRIX[1]), normalize(INV_VIEW_MATRIX[2]), MODEL_MATRIX[3]);
-		__wm = __wm * mat4(vec4(cos(INSTANCE_CUSTOM.x), -sin(INSTANCE_CUSTOM.x), 0.0, 0.0), vec4(sin(INSTANCE_CUSTOM.x), cos(INSTANCE_CUSTOM.x), 0.0, 0.0), vec4(0.0, 0.0, 1.0, 0.0), vec4(0.0, 0.0, 0.0, 1.0));
-		__wm = __wm * mat4(vec4(length(MODEL_MATRIX[0].xyz), 0.0, 0.0, 0.0), vec4(0.0, length(MODEL_MATRIX[1].xyz), 0.0, 0.0), vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0), vec4(0.0, 0.0, 0.0, 1.0));
-		n_out2p0 = VIEW_MATRIX * __wm;
-	}
-
-
-// Output:0
-	MODELVIEW_MATRIX = n_out2p0;
-
-
-}
-
-void fragment() {
-// ColorParameter:9
-	vec4 n_out9p0 = ColorParameter;
-
-
-// Input:3
-	vec4 n_out3p0 = COLOR;
-	float n_out3p1 = n_out3p0.r;
-
-
-	float n_out4p0;
-// Remap:4
-	float n_in4p1 = 0.00000;
-	float n_in4p2 = 1.00000;
-	float n_in4p3 = 3.00000;
-	float n_in4p4 = 8.00000;
-	{
-		float __input_range = n_in4p2 - n_in4p1;
-		float __output_range = n_in4p4 - n_in4p3;
-		n_out4p0 = n_in4p3 + __output_range * ((n_out3p1 - n_in4p1) / __input_range);
-	}
-
-
-// Texture2D:2
-	vec4 n_out2p0 = textureLod(tex_frg_2, UV, n_out4p0);
-	float n_out2p1 = n_out2p0.r;
-
-
-// Texture2D:5
-	vec4 n_out5p0 = texture(tex_frg_5, UV);
-	float n_out5p4 = n_out5p0.a;
-
-
-// FloatOp:6
-	float n_out6p0 = n_out2p1 * n_out5p4;
-
-
-// Input:7
-	vec4 n_out7p0 = COLOR;
-	float n_out7p4 = n_out7p0.a;
-
-
-// FloatOp:8
-	float n_out8p0 = n_out6p0 * n_out7p4;
-
-
-// Output:0
-	ALBEDO = vec3(n_out9p0.xyz);
-	ALPHA = n_out8p0;
-
-
-}
-"
-graph_offset = Vector2(-447.539, 291.765)
-flags/unshaded = true
-nodes/vertex/2/node = SubResource("VisualShaderNodeBillboard_e4rsk")
-nodes/vertex/2/position = Vector2(-680, 520)
-nodes/vertex/connections = PackedInt32Array(2, 0, 0, 10)
-nodes/fragment/0/position = Vector2(620, 160)
-nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_7nyii")
-nodes/fragment/2/position = Vector2(-960, 280)
-nodes/fragment/3/node = SubResource("VisualShaderNodeInput_marsr")
-nodes/fragment/3/position = Vector2(-2120, 820)
-nodes/fragment/4/node = SubResource("VisualShaderNodeRemap_amyuj")
-nodes/fragment/4/position = Vector2(-1400, 840)
-nodes/fragment/5/node = SubResource("VisualShaderNodeTexture_mof8v")
-nodes/fragment/5/position = Vector2(-960, 1020)
-nodes/fragment/6/node = SubResource("VisualShaderNodeFloatOp_d30t3")
-nodes/fragment/6/position = Vector2(-279.448, 862.013)
-nodes/fragment/7/node = SubResource("VisualShaderNodeInput_nxvc7")
-nodes/fragment/7/position = Vector2(-440, 1520)
-nodes/fragment/8/node = SubResource("VisualShaderNodeFloatOp_lpyhq")
-nodes/fragment/8/position = Vector2(180, 1060)
-nodes/fragment/9/node = SubResource("VisualShaderNodeColorParameter_4j8un")
-nodes/fragment/9/position = Vector2(-220, 80)
-nodes/fragment/connections = PackedInt32Array(3, 1, 4, 0, 4, 0, 2, 1, 2, 1, 6, 0, 6, 0, 8, 0, 7, 4, 8, 1, 8, 0, 0, 1, 9, 0, 0, 0, 5, 4, 6, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jrng5"]
-render_priority = 0
-shader = SubResource("VisualShader_uber4")
-shader_parameter/ColorParameter = Color(0.611765, 0.8, 1, 1)
-
-[sub_resource type="QuadMesh" id="QuadMesh_jq84n"]
-material = SubResource("ShaderMaterial_jrng5")
-size = Vector2(0.6, 0.6)
-
-[sub_resource type="Gradient" id="Gradient_j3tok"]
-colors = PackedColorArray(1, 1, 1, 1, 0.416798, 0.702309, 0.933106, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_gh3q1"]
-gradient = SubResource("Gradient_j3tok")
-
-[sub_resource type="Curve" id="Curve_bb0ur"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.200169, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_0ptqc"]
-curve = SubResource("Curve_bb0ur")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_udlod"]
-emission_shape = 3
-emission_box_extents = Vector3(1.5, 21, 1.5)
-direction = Vector3(2.08165e-12, -1, 2.08165e-12)
-spread = 6.0
-gravity = Vector3(2.08165e-12, -0.6, 2.08165e-12)
-scale_min = 0.03
-scale_max = 0.03
-scale_curve = SubResource("CurveTexture_0ptqc")
-color = Color(0.73, 0.86, 1, 1)
-color_ramp = SubResource("GradientTexture1D_gh3q1")
-attractor_interaction_enabled = false
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chxic"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o5urh"]
 
@@ -815,7 +594,7 @@ size = Vector2(1.5, 1.5)
 
 [node name="Clarity" type="CharacterBody3D"]
 collision_layer = 8
-collision_mask = 146
+collision_mask = 2
 script = ExtResource("1_172k1")
 phase1_min_long_dist_wait = 3.0
 phase1_max_long_dist_wait = 4.0
@@ -829,6 +608,91 @@ phase1_circling_attack_chances = {
 "SingleShot": 1.0,
 "Spiral": 2.08167e-12
 }
+
+[node name="ClarityArmMeshes" parent="." instance=ExtResource("1_4e0of")]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
+
+[node name="Skeleton3D" parent="ClarityArmMeshes/Armature" index="0"]
+bones/0/position = Vector3(-0.0293456, 4.49276, 1.584)
+bones/0/rotation = Quaternion(0.300706, 1.55373e-07, 5.356e-08, 0.953717)
+bones/1/position = Vector3(-1.8471e-09, 8.69174, 2.34397e-10)
+bones/1/rotation = Quaternion(-0.166661, -0.0027076, 0.00795607, 0.985978)
+bones/3/position = Vector3(-3.7482, 3.46871, -1.39226)
+bones/3/rotation = Quaternion(-0.423835, -0.19124, 0.875561, 0.131089)
+bones/6/position = Vector3(3.26956, 2.23724, -0.245436)
+bones/6/rotation = Quaternion(0.0461724, -0.26254, 0.956753, -0.116465)
+bones/8/position = Vector3(1.43797, 1.00152, 1.88168)
+bones/8/rotation = Quaternion(-0.047265, -0.129231, 0.98296, -0.121878)
+bones/10/position = Vector3(1.26604, 3.27691, -2.2079)
+bones/10/rotation = Quaternion(-0.00671605, -0.383586, 0.914766, -0.12657)
+bones/12/position = Vector3(-3.30577, 2.23691, -0.200009)
+bones/12/rotation = Quaternion(-0.0395493, -0.261723, 0.957058, 0.118228)
+bones/14/position = Vector3(-1.44484, 1.00137, 1.9016)
+bones/14/rotation = Quaternion(0.0540614, -0.128384, 0.982617, 0.122718)
+bones/16/position = Vector3(-1.32967, 3.27677, -2.18997)
+bones/16/rotation = Quaternion(0.0130551, -0.382702, 0.914704, 0.12917)
+
+[node name="Hat_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="0"]
+transform = Transform3D(1.4298, -0.0211449, -0.0114273, 0.0172311, 1.37576, -0.389714, 0.0167565, 0.389522, 1.37582, -0.0270489, 12.9016, 6.8464)
+
+[node name="BodyLight" type="OmniLight3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -2.5, 2.08165e-12)
+light_color = Color(0, 0.486275, 0.894118, 1)
+light_energy = 1.3
+light_volumetric_fog_energy = 6.0
+light_specular = 0.0
+light_bake_mode = 0
+omni_range = 18.0
+omni_attenuation = 0.06
+omni_shadow_mode = 0
+
+[node name="ClarityHead" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2" index="2" instance=ExtResource("3_05q7x")]
+visible = false
+
+[node name="EnemyHurtbox" type="Area3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2" index="3"]
+collision_layer = 8
+collision_mask = 257
+script = ExtResource("5_j584x")
+recovery_rate = 0.1
+recovery_delay = 6.0
+health_segment_thresholds = [0.0, 1.0]
+enemy_name = "Clarity"
+hit_particle_color = Color(0.847059, 1, 1, 1)
+opponent_hitboxes = ["PlayerHitbox"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2/EnemyHurtbox"]
+shape = SubResource("SphereShape3D_g3bkq")
+
+[node name="Arm_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.600991, 0.105025, -0.792325, -0.745941, 0.429703, -0.508849, 0.287023, 0.896841, 0.33659, -3.93972, 7.54585, 1.16409)
+
+[node name="Center_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="2"]
+transform = Transform3D(1, -5.92506e-09, 8.08438e-08, 5.12237e-08, 0.819152, -0.573577, -6.28249e-08, 0.573577, 0.819152, -0.00827153, 9.05265, 4.67339)
+visible = false
+
+[node name="MiddleLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.983585, 0.0876721, 0.157718, 5.06767e-05, 0.873903, -0.4861, -0.180448, 0.478129, 0.859553, -0.157853, 0.309438, -0.708189)
+visible = false
+
+[node name="FrontLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="4"]
+transform = Transform3D(0.999976, 0.00331425, 0.00606239, 5.07225e-05, 0.873903, -0.4861, -0.00690894, 0.486089, 0.873882, -0.025427, 0.309437, -1.29632)
+visible = false
+
+[node name="BackLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="5"]
+transform = Transform3D(0.999976, 0.00331418, 0.00606205, 5.05134e-05, 0.873903, -0.4861, -0.00690865, 0.486089, 0.873882, -0.025426, 0.309437, -1.29632)
+visible = false
+
+[node name="MiddleRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="6"]
+transform = Transform3D(0.985984, -0.0811446, -0.145778, 5.05416e-05, 0.873903, -0.4861, 0.16684, 0.479279, 0.861658, 0.115112, 0.309438, -0.710041)
+visible = false
+
+[node name="FrontRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="7"]
+transform = Transform3D(0.999976, 0.00331413, 0.00606191, 5.03311e-05, 0.873903, -0.4861, -0.00690858, 0.486089, 0.873882, -0.025426, 0.309438, -1.29632)
+visible = false
+
+[node name="BackRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="8"]
+transform = Transform3D(0.999976, 0.00331416, 0.00606221, 5.05687e-05, 0.873903, -0.4861, -0.0069088, 0.486089, 0.873882, -0.0254269, 0.309439, -1.29632)
+visible = false
 
 [node name="ClarityBodyMeshes" parent="." instance=ExtResource("2_ovnif")]
 transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
@@ -853,6 +717,9 @@ bones/16/rotation = Quaternion(0.321999, -0.24697, 0.885482, 0.226373)
 
 [node name="Hat_2" parent="ClarityBodyMeshes/Armature/Skeleton3D" index="0"]
 transform = Transform3D(1.42986, 0.00998886, -0.0170402, -0.0125256, 1.41244, -0.22308, 0.0152726, 0.223208, 1.41239, 0.918731, 14.4374, 0.659003)
+
+[node name="Hat_2" parent="ClarityBodyMeshes/Armature/Skeleton3D/Hat_2" index="0"]
+visible = true
 
 [node name="ParticleAttractor" type="GPUParticlesAttractorSphere3D" parent="ClarityBodyMeshes/Armature/Skeleton3D/Hat_2" index="1"]
 transform = Transform3D(2, -3.24884e-14, -2.84217e-14, 3.24884e-14, 2, -5.6687e-08, 2.84217e-14, 5.6687e-08, 2, 2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -979,128 +846,6 @@ draw_pass_1 = SubResource("QuadMesh_7dp0r")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.77212, 0)
 amount = 9
 
-[node name="ClarityArmMeshes" parent="." instance=ExtResource("1_4e0of")]
-transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
-
-[node name="Skeleton3D" parent="ClarityArmMeshes/Armature" index="0"]
-bones/0/position = Vector3(-0.0210742, 4.49276, 0.0847608)
-bones/0/rotation = Quaternion(0.0301653, 0.0796906, -0.0501057, 0.995102)
-bones/1/position = Vector3(1.02726e-07, 8.69174, -7.95303e-08)
-bones/1/rotation = Quaternion(0.0484073, -0.0812806, 0.0524297, 0.994133)
-bones/3/position = Vector3(-3.7482, 4.38423, -0.0847618)
-bones/3/rotation = Quaternion(0.00101031, -0.00552394, 0.86527, 0.501275)
-bones/6/position = Vector3(2.4827, 2.22899, -2.08285)
-bones/6/rotation = Quaternion(0.305356, -0.212565, 0.925231, -0.0743114)
-bones/8/position = Vector3(2.53583, 1.3427, 0.8528)
-bones/8/rotation = Quaternion(0.300211, -0.0905908, 0.944171, -0.101036)
-bones/10/position = Vector3(-0.401524, 2.94367, -2.42447)
-bones/10/rotation = Quaternion(0.322511, -0.334699, 0.885296, -0.0146623)
-bones/12/position = Vector3(-2.55441, 2.22899, 2.14379)
-bones/12/rotation = Quaternion(0.360811, -0.115068, 0.905047, 0.19356)
-bones/14/position = Vector3(0.327415, 1.3427, 2.70588)
-bones/14/rotation = Quaternion(0.376926, -0.00445188, 0.916249, 0.135629)
-bones/16/position = Vector3(-2.39, 2.94367, -0.755941)
-bones/16/rotation = Quaternion(0.321999, -0.24697, 0.885482, 0.226373)
-
-[node name="Hat_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1.42986, 0.00998905, -0.0170401, -0.0125258, 1.41244, -0.223079, 0.0152725, 0.223207, 1.41239, 0.918732, 14.4374, 0.659002)
-
-[node name="BodyLight" type="OmniLight3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2" index="1"]
-transform = Transform3D(2.11909, 1.79336e-14, 1.2478e-13, -8.23062e-16, 2.11909, 1.38572e-07, 1.14452e-16, -3.74104e-08, 2.11909, 2.08544e-12, -2.5, -1.19209e-07)
-light_color = Color(0, 0.486275, 0.894118, 1)
-light_energy = 1.3
-light_volumetric_fog_energy = 6.0
-light_specular = 0.0
-light_bake_mode = 0
-omni_range = 18.0
-omni_attenuation = 0.06
-omni_shadow_mode = 0
-
-[node name="ClarityHead" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2" index="2" instance=ExtResource("3_05q7x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="EnemyHurtbox" type="Area3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2" index="3"]
-collision_layer = 8
-collision_mask = 257
-script = ExtResource("5_j584x")
-recovery_rate = 0.1
-recovery_delay = 6.0
-health_segment_thresholds = [0.0, 1.0]
-enemy_name = "Clarity"
-hit_particle_color = Color(0.847059, 1, 1, 1)
-opponent_hitboxes = ["PlayerHitbox"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2/EnemyHurtbox"]
-shape = SubResource("SphereShape3D_g3bkq")
-
-[node name="Arm_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.339741, 0.92836, 0.15074, -0.932056, 0.353784, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
-
-[node name="EnemyHitbox" type="Area3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2" index="1"]
-transform = Transform3D(0.996105, -0.0881817, 1.49527e-15, 0.0881823, 0.996105, -1.5173e-14, -3.13584e-15, -1.27004e-14, 0.999999, 1.53031, -16.5495, 1.07427e-07)
-collision_layer = 8
-collision_mask = 0
-script = ExtResource("4_5f0ps")
-damage = 30
-frostbite_buildup = 15
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2/EnemyHitbox"]
-shape = SubResource("CapsuleShape3D_bvea4")
-
-[node name="ArmMistCloudParticles" type="GPUParticles3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2" index="2"]
-transform = Transform3D(0.99625, -0.0865671, 0.000370043, 0.0865656, 0.996245, -0.00415486, -8.69076e-06, 0.00417187, 0.999991, 1.52971, -17.4348, 0.0845352)
-visible = false
-amount = 240
-lifetime = 3.0
-randomness = 0.5
-visibility_aabb = AABB(-300, -300, -300, 600, 600, 600)
-process_material = SubResource("ParticleProcessMaterial_fnncc")
-draw_pass_1 = SubResource("QuadMesh_jq84n")
-
-[node name="ArmSnowParticles" type="GPUParticles3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2" index="3"]
-transform = Transform3D(0.996514, -0.0834347, 1.48026e-07, 0.0834343, 0.996514, 8.56429e-08, -6.39224e-08, -9.30318e-09, 1, 1.44748, -15.5896, -7.24792e-05)
-amount = 15
-lifetime = 3.0
-visibility_aabb = AABB(-300, -300, -300, 600, 600, 600)
-process_material = SubResource("ParticleProcessMaterial_udlod")
-draw_pass_1 = ExtResource("7_i53v5")
-
-[node name="GPUParticlesAttractorBox3D" type="GPUParticlesAttractorBox3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2" index="4"]
-transform = Transform3D(2.98823, -0.265484, -7.12151e-08, 0.265484, 2.98823, -1.82191e-07, 7.74851e-08, 2.5867e-07, 3, 1.83846, -18.5381, -2.31701)
-strength = 2.66454e-15
-size = Vector3(2, 12, 2)
-
-[node name="Center_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.982278, 0.104529, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
-
-[node name="Center_2" parent="ClarityArmMeshes/Armature/Skeleton3D/Center_2" index="0"]
-visible = false
-surface_material_override/0 = SubResource("StandardMaterial3D_chxic")
-
-[node name="MiddleLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 1.18725e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.521673, 0.156011, -0.548506)
-visible = false
-
-[node name="FrontLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 8.1839e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.521674, 0.156011, -0.548506)
-visible = false
-
-[node name="BackLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 4.14429e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.521673, 0.156009, -0.548506)
-visible = false
-
-[node name="MiddleRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 6.51412e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.521673, 0.156011, -0.548508)
-visible = false
-
-[node name="FrontRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -1.26024e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.521675, 0.156011, -0.548506)
-visible = false
-
-[node name="BackRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -3.64784e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.521675, 0.156011, -0.548507)
-visible = false
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -2.4, 2.08165e-12)
 shape = SubResource("CapsuleShape3D_o5urh")
@@ -1109,7 +854,6 @@ shape = SubResource("CapsuleShape3D_o5urh")
 
 [node name="ArmAnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_quqet")
-anim_player = NodePath("../ClarityArmMeshes/AnimationPlayer")
 advance_expression_base_node = NodePath("..")
 parameters/conditions/DoubleSlice = false
 parameters/conditions/JumpShot = false
@@ -1185,6 +929,6 @@ amount = 60
 process_material = SubResource("ParticleProcessMaterial_0x76h")
 draw_pass_1 = SubResource("QuadMesh_2doqn")
 
-[editable path="ClarityBodyMeshes"]
 [editable path="ClarityArmMeshes"]
 [editable path="ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead"]
+[editable path="ClarityBodyMeshes"]
