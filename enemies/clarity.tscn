@@ -51,7 +51,7 @@ color_ramp = SubResource("GradientTexture1D_xfxxd")
 
 [sub_resource type="Gradient" id="Gradient_ninjf"]
 offsets = PackedFloat32Array(0, 0.138728, 0.517341, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.490196, 0.82606, 0.82606, 0.82606, 0.54902, 0.843184, 0.843184, 0.843184, 0)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.423529, 0.827451, 0.827451, 0.827451, 0.341176, 0.843184, 0.843184, 0.843184, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_8rvx1"]
 gradient = SubResource("Gradient_ninjf")
@@ -239,7 +239,7 @@ states/WalkLeftAggressive/position = Vector2(-274.421, 99.9455)
 states/WalkLeftPassive/node = SubResource("AnimationNodeAnimation_nefrk")
 states/WalkLeftPassive/position = Vector2(-623.924, 99.9727)
 transitions = ["Start", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_3iee8"), "WalkLeftAggressive", "RaiseRightSlice", SubResource("AnimationNodeStateMachineTransition_1fa2q"), "WalkLeftPassive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_8v8bx"), "JumpShotToWalkLeft", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_1xoqv"), "WalkLeftAggressive", "SingleShotLeft", SubResource("AnimationNodeStateMachineTransition_s11a8"), "SingleShotLeft", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_hq72y"), "WalkLeftAggressive", "Spiral", SubResource("AnimationNodeStateMachineTransition_puc76"), "Spiral", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_xwdw6"), "Start", "Stagger", SubResource("AnimationNodeStateMachineTransition_7k4fw"), "Start", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_pgktn"), "WalkLeftAggressive", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_gk2ku"), "WalkForwardAggressive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_h5eo1"), "WalkForwardAggressive", "JumpShotToWalkLeft", SubResource("AnimationNodeStateMachineTransition_escja"), "RaiseRightSlice", "WaitLoweredLeft", SubResource("AnimationNodeStateMachineTransition_tkqms"), "RaiseLeftFast", "WaitRaisedLeft", SubResource("AnimationNodeStateMachineTransition_3can7"), "RaiseLeftSlow", "WaitRaisedLeft", SubResource("AnimationNodeStateMachineTransition_vj02r"), "RaiseLeftSliceFast", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_st2r4"), "LeftSliceFromWait", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_m3sfk")]
-graph_offset = Vector2(-690.384, 136.215)
+graph_offset = Vector2(-962.417, 291.045)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tiybn"]
 animation = &"JumpShotToWalkLeft"
@@ -415,7 +415,7 @@ shader_parameter/density_texture = SubResource("NoiseTexture3D_lxkea")
 emission_shape = 6
 emission_ring_axis = Vector3(2.08165e-12, 1, 2.08165e-12)
 emission_ring_height = 1.0
-emission_ring_radius = 5.7
+emission_ring_radius = 5.1
 emission_ring_inner_radius = 0.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 scale_min = 2.4
@@ -596,8 +596,8 @@ phase1_straight_attack_chances = {
 "Stomp": 2.08167e-12
 }
 phase1_circling_attack_chances = {
-"DoubleSlice": 2.08167e-12,
-"SingleShot": 1.0,
+"DoubleSlice": 1.0,
+"SingleShot": 2.08167e-12,
 "Spiral": 2.08167e-12
 }
 
@@ -609,8 +609,8 @@ bones/0/position = Vector3(-0.0210742, 4.49276, 0.0847608)
 bones/0/rotation = Quaternion(0.0301653, 0.0796906, -0.0501057, 0.995102)
 bones/1/position = Vector3(-1.58209e-09, 8.69174, 9.87667e-09)
 bones/1/rotation = Quaternion(0.0484073, -0.0812806, 0.0524297, 0.994133)
-bones/3/position = Vector3(3.55217, 4.65005, 0.114262)
-bones/3/rotation = Quaternion(-0.815142, -0.558884, 0.1077, -0.107666)
+bones/3/position = Vector3(3.80271, 6.1959, 0.147576)
+bones/3/rotation = Quaternion(-0.648979, -0.721534, 0.138328, -0.197689)
 bones/6/position = Vector3(2.01413, 2.22899, -2.08285)
 bones/6/rotation = Quaternion(0.305356, -0.212565, 0.925231, -0.0743114)
 bones/8/position = Vector3(2.06725, 1.3427, 0.8528)
@@ -655,7 +655,7 @@ opponent_hitboxes = ["PlayerHitbox"]
 shape = SubResource("SphereShape3D_g3bkq")
 
 [node name="Arm_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(-0.336551, -0.912243, -0.23355, -0.894401, 0.387259, -0.223778, 0.294584, 0.133575, -0.946244, 5.26385, 8.24249, -0.329748)
+transform = Transform3D(0.119992, -0.989441, -0.0812896, -0.911904, -0.0774774, -0.403022, 0.392469, 0.122488, -0.911572, 5.77443, 10.4062, -0.243688)
 
 [node name="Center_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="2"]
 transform = Transform3D(0.982278, 0.104529, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)

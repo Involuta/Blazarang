@@ -76,6 +76,11 @@ var aiming_at_target := true
 var staggerable := false # When head is exposed but not glowing, 
 @export var stagger_damage_threshold := 10.0 # Single hit damage to head necessary to stagger
 
+@export var wait_lowered_left_min_secs := .6
+@export var wait_lowered_left_max_secs := 6.0
+@export var wait_raised_left_min_secs := .6
+@export var wait_raised_left_max_secs := 6.0
+
 @export var phase1_straight_attack_chances = {
 	"Stomp" : .75,
 	"JumpShot" : .25
@@ -124,6 +129,8 @@ var clarity_icon : Node3D
 var level_env : Environment
 var sky : ProceduralSkyMaterial
 var level_fog : FogMaterial
+var arm_state_machine : AnimationNodeStateMachinePlayback
+var body_state_machine : AnimationNodeStateMachinePlayback
 
 func _ready():
 	head_hurtbox = find_child("EnemyHurtbox")
@@ -146,6 +153,9 @@ func _ready():
 	long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	
 	switch_to_straight()
+	
+	arm_state_machine = arm_anim_tree["parameters/playback"]
+	body_state_machine = body_anim_tree["parameters/playback"]
 	
 	arm_anim_tree.active = true
 	body_anim_tree.active = true
@@ -180,9 +190,7 @@ func switch_to_staggered():
 	behav_state = STAGGERED
 	look_state = LOOK_STATE.TARGET_HEAD_ARM_BODY
 	# Switch to Stagger anim
-	var arm_state_machine = arm_anim_tree["parameters/playback"]
 	arm_state_machine.travel("Stagger")
-	var body_state_machine = body_anim_tree["parameters/playback"]
 	body_state_machine.travel("Stagger")
 	# Move backward
 	var t = get_tree().create_tween()
@@ -499,6 +507,26 @@ func set_aiming_at_target(state: bool):
 
 func set_look_state(new_state: LOOK_STATE):
 	look_state = new_state
+
+func wait_lowered_left():
+	var wait_time := randf_range(wait_lowered_left_min_secs, wait_lowered_left_max_secs)
+	await get_tree().create_timer(wait_time).timeout
+	# Choose RaiseLeftSliceFast, RaiseLeftFast, or RaiseLeftSlow
+	var choice := randf()
+	var cumulative_weight := 0.0
+	var next_moves := ["RaiseLeftSliceFast", "RaiseLeftFast", "RaiseLeftSlow"]
+	for move in next_moves:
+		# All next moves have equal weight
+		cumulative_weight += 1.0 / next_moves.size()
+		if choice <= cumulative_weight:
+			arm_state_machine.travel(move)
+			return
+	arm_state_machine.travel(next_moves[0])
+
+func wait_raised_left():
+	var wait_time := randf_range(wait_raised_left_min_secs, wait_raised_left_max_secs)
+	await get_tree().create_timer(wait_time).timeout
+	arm_state_machine.travel("LeftSliceFromWait")
 
 func jump_shot_mvmt():
 	behav_state = SPECIAL
