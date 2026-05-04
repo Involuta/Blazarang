@@ -561,7 +561,7 @@ func expand_blizzard_safezone(frame_duration: int):
 	t.tween_property(level_env, "fog_density", 0.0015, frames(frame_duration))
 	t.tween_property(level_env, "volumetric_fog_density", .0009, frames(frame_duration))
 	t.tween_property(level_env, "volumetric_fog_emission", Color("#95a5bd"), frames(frame_duration))
-	t.tween_property(particle_attractor, "strength", 300, frames(frame_duration))
+	#t.tween_property(particle_attractor, "strength", 300, frames(frame_duration))
 	# Body fog
 	t.tween_property(body_cone_fog.material, "shader_parameter/density", 0.0, frames(frame_duration))
 	#t.tween_property(feet_fog.material, "shader_parameter/density", 0.0, frames(frame_duration))
@@ -579,7 +579,7 @@ func contract_blizzard_safezone(frame_duration: int):
 	t.tween_property(level_env, "fog_density", 0.01, frames(frame_duration))
 	t.tween_property(level_env, "volumetric_fog_density", 0.036, frames(frame_duration))
 	t.tween_property(level_env, "volumetric_fog_emission", Color("#65768f"), frames(frame_duration))
-	t.tween_property(particle_attractor, "strength", 0, frames(frame_duration/2))
+	#t.tween_property(particle_attractor, "strength", 0, frames(frame_duration/2))
 	# Body fog
 	t.tween_property(body_cone_fog.material, "shader_parameter/density", 0.3, frames(frame_duration/2))
 	#t.tween_property(feet_fog.material, "shader_parameter/density", 0.15, frames(frames/2))
@@ -594,10 +594,9 @@ func backflip_mvmt():
 	behav_state = SPECIAL
 	var t = get_tree().create_tween()
 	var full_dash_vec = 3*full_dash_speed*-body_meshes.transform.basis.z + .6*full_dash_speed*Vector3.UP
-	t.tween_property(self, "velocity", full_dash_vec, frames(40))
-	t.tween_property(self, "velocity", Vector3.ZERO, frames(100))
 	t.tween_property(self, "gravity", 0, 0)
-	t.tween_interval(frames(17))
+	t.tween_property(self, "velocity", full_dash_vec, frames(27))
+	t.tween_property(self, "velocity", Vector3.ZERO, frames(130))
 	t.tween_property(self, "velocity", full_dash_speed*3 * Vector3.DOWN, 0)
 	t.tween_property(self, "gravity", .5 * ProjectSettings.get_setting("physics/3d/default_gravity"), 0)
 	t.tween_interval(frames(100))

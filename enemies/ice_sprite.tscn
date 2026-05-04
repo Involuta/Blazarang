@@ -162,12 +162,12 @@ scale_max = 0.1
 [sub_resource type="SphereShape3D" id="SphereShape3D_xhnoi"]
 radius = 4.5
 
-[sub_resource type="Gradient" id="Gradient_ninjf"]
-offsets = PackedFloat32Array(0, 0.138728, 0.517341, 1)
+[sub_resource type="Gradient" id="Gradient_ltlji"]
+offsets = PackedFloat32Array(0, 0.205202, 0.517341, 1)
 colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.490196, 0.82606, 0.82606, 0.82606, 0.54902, 0.843184, 0.843184, 0.843184, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_8rvx1"]
-gradient = SubResource("Gradient_ninjf")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_w8wxo"]
+gradient = SubResource("Gradient_ltlji")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_47sp6"]
 emission_shape = 1
@@ -175,7 +175,7 @@ emission_sphere_radius = 4.5
 direction = Vector3(2.08165e-12, 1, 2.08165e-12)
 spread = 180.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-color_ramp = SubResource("GradientTexture1D_8rvx1")
+color_ramp = SubResource("GradientTexture1D_w8wxo")
 
 [sub_resource type="Gradient" id="Gradient_pxa7d"]
 colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0.137255)
