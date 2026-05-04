@@ -91,9 +91,9 @@ var staggerable := false # When head is exposed but not glowing,
 }
 
 @export var phase1_circling_attack_chances = {
-	"DoubleSlice" : .34,
-	"SingleShot" : .33,
-	"Spiral" : .33,
+	"DoubleSlice" : .6,
+	"JumpShot" : .2,
+	"Backflip" : .2,
 }
 
 var param_path_base := "parameters/conditions/"
@@ -589,3 +589,15 @@ func contract_blizzard_safezone(frame_duration: int):
 	cotu_dist_lerp_val = 0.0
 	blizzard_particles.emitting = true
 	env_autochange = true
+
+func backflip_mvmt():
+	behav_state = SPECIAL
+	var t = get_tree().create_tween()
+	var full_dash_vec = full_dash_speed/2 * transform.basis.z + full_dash_speed * Vector3.UP
+	t.tween_property(self, "velocity", full_dash_speed, 0)
+	t.tween_property(self, "velocity", Vector3.ZERO, frames(105))
+	t.tween_interval(frames(13))
+	t.tween_property(self, "velocity", full_dash_speed * Vector3.DOWN, 0)
+	t.tween_interval(frames(65))
+	# Return to base pose starts after the above interval
+	t.tween_property(self, "velocity", full_dash_speed * Vector3.ZERO, 0)
