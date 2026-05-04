@@ -593,11 +593,13 @@ func contract_blizzard_safezone(frame_duration: int):
 func backflip_mvmt():
 	behav_state = SPECIAL
 	var t = get_tree().create_tween()
-	var full_dash_vec = 2*full_dash_speed * transform.basis.z + full_dash_speed * Vector3.UP
-	t.tween_property(self, "velocity", full_dash_vec, 0)
-	t.tween_property(self, "velocity", Vector3.ZERO, frames(105))
-	t.tween_interval(frames(13))
+	var full_dash_vec = 3*full_dash_speed*-body_meshes.transform.basis.z + .6*full_dash_speed*Vector3.UP
+	t.tween_property(self, "velocity", full_dash_vec, frames(40))
+	t.tween_property(self, "velocity", Vector3.ZERO, frames(100))
+	t.tween_property(self, "gravity", 0, 0)
+	t.tween_interval(frames(17))
 	t.tween_property(self, "velocity", full_dash_speed*3 * Vector3.DOWN, 0)
-	t.tween_interval(frames(65))
+	t.tween_property(self, "gravity", .5 * ProjectSettings.get_setting("physics/3d/default_gravity"), 0)
+	t.tween_interval(frames(100))
 	# Return to base pose starts after the above interval
 	t.tween_property(self, "velocity", full_dash_speed * Vector3.ZERO, 0)
