@@ -152,7 +152,7 @@ func _ready():
 	max_long_dist_wait = phase1_max_long_dist_wait
 	long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	
-	switch_to_straight()
+	switch_to_circling()
 	
 	arm_state_machine = arm_anim_tree["parameters/playback"]
 	body_state_machine = body_anim_tree["parameters/playback"]
@@ -593,11 +593,11 @@ func contract_blizzard_safezone(frame_duration: int):
 func backflip_mvmt():
 	behav_state = SPECIAL
 	var t = get_tree().create_tween()
-	var full_dash_vec = full_dash_speed/2 * transform.basis.z + full_dash_speed * Vector3.UP
-	t.tween_property(self, "velocity", full_dash_speed, 0)
+	var full_dash_vec = 2*full_dash_speed * transform.basis.z + full_dash_speed * Vector3.UP
+	t.tween_property(self, "velocity", full_dash_vec, 0)
 	t.tween_property(self, "velocity", Vector3.ZERO, frames(105))
 	t.tween_interval(frames(13))
-	t.tween_property(self, "velocity", full_dash_speed * Vector3.DOWN, 0)
+	t.tween_property(self, "velocity", full_dash_speed*3 * Vector3.DOWN, 0)
 	t.tween_interval(frames(65))
 	# Return to base pose starts after the above interval
 	t.tween_property(self, "velocity", full_dash_speed * Vector3.ZERO, 0)
