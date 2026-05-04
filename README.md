@@ -1,4 +1,4 @@
-Blazarang Ideas Doc Backup 4/29/26
+Blazarang Ideas Doc Backup May 2 2026
 
 Production Processes
 
@@ -2739,12 +2739,59 @@ Snow particles
 Snow mist/fog (try using this: https://www.youtube.com/watch?v=e_6ZA-xa_DQ → I used method 3, LOD + shader)
 Add DOT hitbox at Clarity’s feet
 Clarity stomps while circling → this really isn’t necessary since the close rang DOT is so high
+Instead of having 2 variations of DoubleSliceLeft, make RaiseRightSlice and RaiseLeftSlice(+variations). In code, when Clarity chooses the DoubleSlice attack, she performs RaiseRightSlice (the first slice of the current DoubleSliceLeft), which is the same every time. Then she does WaitLoweredLeft for a random len of time, then a random RaiseLeftSlice sequence
+Left/Right refer to sides of her body, not the direction the arm travels in
+The player should feel like the arm raise telegraphs the slice, only to realize the head is the real telegraph. The goal is for the player to feel rewarded for fighting the subconscious urge to dodge when she raises her arm
++ means the actions occur sequentially in the same anim
+→ means the actions are in separate anims
+Left of | is the sequence of actions, Right of | is the anim name(s)
+RaiseLeftFast+FastGlow+SliceLeft | RaiseLeftSliceFast
+Baits player into thinking raise means slice
+RaiseLeftFast → WaitRaisedLeft → MediumGlow+SliceLeft | RaiseLeftFast → WaitRaisedLeft → LeftSliceFromWait
+Punishes player for thinking raise means slice
+RaiseLeftSlow+SlowGlow+Slice | RaiseLeftSliceSlow
+RaiseLeftSlow → WaitRaisedLeft → MediumGlow+Slice | RaiseLeftSlow → WaitRaisedLeft → LeftSliceFromWait
+Make anims
+RaiseRightSlice (same as first slice of DoubleSliceLeft___)
+WaitLoweredLeft (pose after first slice of DoubleSliceLeft___)
+RaiseLeftSliceFast
+RaiseLeftFast (same as raise in DoubleSliceLeftImmediate)
+WaitRaisedLeft (pose after raising arm in DoubleSliceLeft___)
+LeftSliceFromWait (same as second slice of DoubleSliceLeftImmediate minus the raise)
+RaiseLeftSlow (RaiseLeftFast, but lengthened to be the same as raise in RaiseRightSlice)
+Remove old SingleSlice anims to reduce clutter. DON’T remove DoubleSliceLeft anims so you can copy functional keyframes from them in Godot
+Import to Godot and add functional keyframes to anims
+Importing the new glb forces you to put in the new clarity_meshes inherited scene to replace the old ClarityArmMeshes, which means you have to remove and re-add the body light, ClarityHead, and head hurtbox, which are children of the head bone. Changing them messes up their transforms, so here they are
+BodyLight: 
+ClarityHead, EnemyHurtbox, and EnemyHurtbox’s collision: 
+Reimport glb after saving all new anims to anim files
+I just realized that the Wait anims are just static poses, so they don’t need to be saved to anim files, but oh well it’s too late now
+Add functional keyframes
+RaiseRightSlice (first 216 frames of DoubleSliceLeftImmediate)
+WaitLoweredLeft
+RaiseLeftSliceFast (same as frames 270-365 of DoubleSliceLeftImmediate, which includes 20 frames before and 35 frames after the slice)
+RaiseLeftFast
+WaitRaisedLeft
+LeftSliceFromWait (same as frames 270-365 of DoubleSliceLeftImmediate, but w/o the arm raise and with medium head glow instead of fast glow)
+RaiseLeftSlow
+Make anim tree sequences
+Remove SingleSlice and DoubleSliceForward anims to clear the areas
+On DoubleSlice chosen, RaiseRightSlice → WaitLoweredLeft → (wait for random len of time) one of these 3 options
+RaiseLeftSliceFast
+RaiseLeftFast → WaitRaisedLeft (wait) → LeftSliceFromWait
+RaiseLeftSlow → WaitRaisedLeft (wait) → LeftSliceFromWait
+Since the length of the wait anims are variable, don’t use state machine transitions to transition out of them; use the anim tree playback travel method to teleport from the wait nodes to their next nodes
+Make wait_lowered_left(), which waits, then teleports to one of the 3 raise left sequences
+Make wait_raised_left(), which waits, then teleports to left slice from wait
+Make WaitLoweredLeft and WaitRaisedLeft call their respective funcs
+Make head tilt down on right slice and tilt up on left raise so it’s not just tilted up the entirety of the time she’s waiting on the left side
 Implement Square anim + mvmt
 This anim can be used when the player happens to be standing behind and to the right of Clarity, which is where jump shot looks bad
 Issue: Clarity’s supposed to be intimidating, and with the current concept for Square, she flies high into the sky and stays unseen for a long time before landing, making her less oppressive (because she’s not there) and making the gameplay more tedious
+Current task
 Solution 1: instead of flying high into the sky, she crouches down, then elegantly backflips into the air (potentially spinning into the jump) while flying backwards and slides back onto the ground instead of slamming. This also makes her more unique than X, who does a similar straight up → straight down slam (Triangle while headless → Volcano Dive)
 Inspired by Kuroki’s huge backflip when transitioning to phase 2 in Sifu
-Current task
+How does she attack now? Idea: she shoots somewhere between 2-4 shards in a spreadshot
 Make Backflip anim
 Make attacks that send Clarity so far away that she can do a projectile attack afterward instead of a melee
 This is to solve an older issue where Clarity doesn’t get far enough to do projectile attacks after jump shot (“Cotu gets to Clarity long before Spiral…”)
@@ -2764,6 +2811,17 @@ Idea: Cotu can make snowballs and throw them with no stability cost (but making 
 
 Power Throw to Mark Rang Upgrade
 Power throw automatically homes to mark position when mark is active
+
+Chakram Rang
+Press throw button to spawn a chakram a few meters left/right of Cotu. The chakram immediately travels in a wide semicircle arc around Cotu and then disappears, functioning as a pseudo-melee attack
+Functionally similar to Chaos Blades from God of War 4, looks/feels similar to basic nail strikes from Hollow Knight
+Range isn’t fully decided, but it’s definitely less than the roserang’s. Perhaps slightly less than or equal to half of roserang’s range
+Travels through walls
+This should be a feature unique to the chakram and shuriken. Make ax not travel through walls anymore
+Ideas:
+Chakrams deal high damage, but cannot be buffed
+Chakrams are finite. They recharge automatically like consumable abilities in Overwatch or Marvel Rivals. As soon as a chakram recharges, it deals self stability damage, but it costs no stability to throw them. Hold the throw button to autothrow them
+Hitting a stationary ax causes a massive explosion
 
 Add Hidden Techniques
 Hidden techniques are things the player can innately do, but the player doesn’t know how to do them. Spend skill points to unlock the knowledge on how to do them
@@ -2794,6 +2852,13 @@ Chosen in skill tree just like any other unlockable skill
 Body material (e.g. SiO2 glass, quartz, obsidian) - increases max health
 Faster reconstruction - increases num of attempts across entire run (indirectly increases attempts for each boss)
 Consider keeping upgrade system simple to avoid feature creep; before adding any more crazy synergy buffs, focus on direct health and damage upgrades
+
+Certain unlockable skills are unlocked by unlocking new rang types
+Rose power throw = rose + ax
+Rose homing (both special and instant rethrow) = rose + shuriken
+Rose rapidorbit = rose + chakram
+Increased chakram capacity = chakram + shuriken
+Exploding shurikens = shuriken + ax
 
 Rush Buff: the less attempts the player has for a fight, the stronger they get
 
@@ -2877,7 +2942,8 @@ Instead of marking an enemy the same way you discord orb an enemy using Zenyatta
 When you want to mark (maybe by pressing mark button once), camera switches to semi first-person aim mode like power throw and charged ax throw
 When aiming, a UI circle in the middle of the screen appears. You must keep the enemy’s center inside the circle for some time as the circle shrinks
 Once the enemy has been in the circle long enough, an effect plays and the circle stops shrinking. Press the mark button to mark the enemy
-While aiming, Cotu holds his icon in front of him with one hand and holds the mark in his other hand. The hand/arm positions are reminiscent of a bow and arrow, but his hands are openb
+While aiming, Cotu holds his icon in front of him with one hand and holds the mark in his other hand. The hand/arm positions are reminiscent of a bow and arrow, but his hands are open
+Idea: mark starts out as a dart, then gets upgraded to become a spear eventually
 
 Items
 Shop has a menu of items
@@ -2955,10 +3021,11 @@ Has a wide variety of dash slashes and a few tricks
 Sword throw: FB throws his sword, then dashes over to catch the sword. This creates 2 before-images: one that lasts from the windup of the throw to the exact moment where it leaves his hands, and one that starts when he catches it and ends when he either sheathes the sword or does his next attack
 Lie Double Slash: FB dash slashes from a position with both a real dash slash and a lie dash slash
 Lore/story ideas:
-Is a top contender
-Jealous of all other top contenders because his attacks are telegraphed the most
+Is a high-level contender
+Jealous of all other fighters because his attacks are telegraphed the most
 Compensated for his telegraphing by improving his speed and precision greatly
 Idea: kidnaps Cotu and other top contenders to prevent them from training and/or competing in the next tournament
+I decided that Candy Cat fits the devious/predator aesthetic more
 
 Cactyrants: Evil Cactus and Giant Bird
 Giant Bird Head appears out of the ground where the camera can’t see it
@@ -3003,7 +3070,7 @@ Back is covered in candy bits, chest is guarded by chocolate plates
 Tail is undecided, perhaps its soul floats on its tail like a ring?
 Moves smoothly and seductively
 Speaks Spanish with a deep distorted voice
-Idea: guards a secret wormhole that leads from the beginning of the game (gauntlet var 1) straight ot the gala
+Idea: guards a secret wormhole that leads from the beginning of the game (gauntlet var 1) straight to the gala
 Uses the candy bits on its body as projectiles
 Song is calming, seductive, and insidious
 Idea: song has deep distorted lyrics
@@ -3011,12 +3078,9 @@ So soft, so sweet, so nice
 And it could be yours for a low low price,
 Come a little closer, don’t be shy
 Why should a god be afraid to die?
-
-Chakram Rang
-No concrete concepts yet, just that Cotu should use 1 or 2 chakrams in some way
-Idea: 2 dual chakrams used for melee and ranged attacks
-Idea: 1 giant chakram made from the icon itself. The ultimate (or penultimate) rang
-b
+Idea: this is the kidnapper, not Future Blade and his goons. Candy Cat wants to kidnap Cotu so that Jessica will let him into the next tournament
+I want to have a kidnapper and a disqualified fighter to show that the gods aren’t just good or mentally-handicapped with good intentions (i.e. Clarity). It would make sense if the kidnapper and DQed were the same character
+Candy Cat, not Mike, is the one who made the deal with Jessica to gain great power in exchange for a random chance of failure. Cotu (or X) caught him in the act and got him DQed. Candy Cat now wants to kidnap Cotu and hold him hostage until Jessica (who’s in charge of the next tournament) allows Candy Cat to participate in it. He thinks that because She helped him before, She’ll help him again
 
 Projectile Spammer: Microwave
 Idea: before the fight, you can unlock an endgame-level super powerful upgrade that deflects or destroys projectiles somehow. Undecided if this is done through the icon, one of the rangs, or something else entirely
@@ -3140,6 +3204,10 @@ Idea: player gets to see microwave motivating its army and explaining that the r
 “THE MERE THOUGHT OF HIS EXISTENCE OVERLOADS OUR CIRCUITS WITH FURY”
 “HIS VERY EXISTENCE IS A DIRECT INSULT TO US. WE MUST PUNISH IT IN FULL”
 “A TRAVESTY TO GODHOOD. THE MOST UNDESERVING OF IMMORTALITY IN THE UNIVERSE”
+Alt personality/character idea: good guy Mike
+Mike isn’t the rank 2 fighter, Blackstar is. Mike is 3 or lower. This way, Blackstar is motivated to defeat Cotu instead of Mike, and BS will see Mike as a future threat instead of the current goal
+Blackstar and Mike help each other train; Blackstar wants to reincarnate, and Mike wants to test his army’s war tactics and iterate on his technology. Blackstar sees that Mike gets stronger after every training session, meanwhile Blackstar stays the same. This, along with Cotu’s progress, put immense pressure and despair on Blackstar
+Despite being so powerful, Mike wasn’t invited to the gala since most consider him boring. Blackstar and Cotu agree that this was ridiculous and unfortunate, but the Gauntlet sent out a survey and around 40% of prospective attendees (including competitors) said they wouldn’t come if Mike did. BS wants as many people to come as possible because this isn’t just a training session for her to potentially reincarnate; it’s supposed to be a fun entertainment event. BS also acknowledges that some may consider Mike’s tactics boring since they take so long to set up
 
 Endless Buffs
 Icon-given buffs that continue being applied beyond Cotu’s limit of 3
@@ -3740,8 +3808,9 @@ If you fail this quicktime event, the fight continues for a little before you ge
 Alt idea: gameplay is the same as the original concept, but arena is patrolled by a small white slug or snail and the heavens send dark leviathans instead of divine light and hands. Also slug/snail itself doesn’t attack
 Lore: no one has ever beaten The Edge except for Microwave
 
-3 Boss: Blackstar, Champion of the Gauntlet
+2 Boss: Blackstar, Champion of the Gauntlet
 Story:
+She has Demetrious Johnson’s stature and heart and Messi’s social awkwardness
 After Cotu arrives at the gala and before their fight, Blackstar approaches Cotu and tells him that even though the gala’s not a serious competition, she wants him to promise her not to hold back, as this is her last chance to reincarnate before the next tournament
 X is jealous that she pulled Cotu aside
 She is extremely personally motivated to fight Cotu at his best
@@ -3798,6 +3867,7 @@ Her ult charge doesn’t determine when her ult comes out, but how strong it is.
 Idea: when she ults, her max stability is permanently set to her current stability
 Idea: there’s a color difference between when she’s ulting and when she’s not (e.g. desaturated colors normal, restored colors ult, normal colors normal, altered colors ult like JoJo’s Bizarre Adventure)
 Idea: ult form is a humanoid body similar to her speed form, but bigger and with large Wolverine-like hand claws. She slashes the space around her with the claws, which summons huge floating claw slashes made of light that travel in the same paths at the same time. These look like the Revenant’s claw slashes from Elden Ring Nightreign. Each slash creates an emitter for a superlaser that slowly charges up before firing in a continuous violent straight blast that travels in the same direction as the slash. Her movements are wild and have huge windups, unrefined but packing huge power. She sways like a drunken boxer after every swing, suggesting that her claws are extremely heavy and that it takes a wild energy/mindset to use the claws to their fullest potential. She can use the explosions from the backs of the superlaser emitters to launch herself where she wants to go
+Idea: ult form is a large humanoid body with long limbs. She uses martial arts and super speed to chase her target and deal damage. Possibly teleports occasionally
 
 Jester Boss: The Greatest Magician
 Looks like Jevil from Deltarune (similar proportions but toothier Hazbin Hotel-like grin), but has a hat so big it covers her eyes, has a poofier shirt that resembles a dress, and doesn’t have a tail
@@ -3885,8 +3955,8 @@ Cactus and bird?
 Simone Says?
 Idea: at some point along the web, the crew is attacked by the mites, and either Cotu destroys the mitriarch or the crew consumes a lot of stabilizers to charge the shields so they can escape
 The Kidnapping
-Cotu gets kidnapped by Future Blade (just an idea) and has to defeat him or the journey ends here OR somebody kicks Future Blade’s ass and saves Cotu
-Idea: The crew sees an advertisement for extremely cheap stabilizers, so they go to Future Blade’s booth to buy them, then get kidnapped. Greg argues that even if it’s a scam, Cotu can just beat up the scammer
+Cotu gets kidnapped by Candy Cat and has to defeat him or the journey ends here OR somebody kicks Candy’s ass and saves Cotu
+Idea: The crew sees an advertisement for extremely cheap stabilizers, so they go to Candy Cat’s booth to buy them, then get kidnapped. Greg argues that even if it’s a scam, Cotu can just beat up the scammer
 The Gala
 The player gets only 1 attempt to fight Tempered X, Blackstar, and (hopefully) Turbo Jester OR the player can use their remaining attempts to practice fighting Tempered X and Blackstar before initiating the gala like the Radahn festival, but the player only gets that one attempt at the gala
 Post-Gala
@@ -4187,7 +4257,7 @@ Greg: “Huh? Oh damage per second, my bad. And uh, total number of hits. You ca
 The Gauntlet and Blackstar
 Each variant of soldiers the gauntlet makes is also called an incarnation
 The gauntlet constantly strives to make new variants (i.e. the variants constantly strive to reincarnate); that is their sole purpose
-After enough training, experience, and grit from all of its soldiers, a new variant spawns from a gauntlet spawner
+After enough training, experience, and grit from all of its soldiers, a new variant spawns from a gauntlet spawner. Almost all reincarnations occur after someone’s destruction, hence why they call it a reincarnation
 The gauntlet can spawn any member of any of its previous variants to help train the latest incarnation
 After Blackstar, the gauntlet has never made another variant, and she’s been the latest variant far longer than anyone else has
 Some people think Blackstar cannot reincarnate because she’s already perfect (X, Cotu, her ancestors)
@@ -4254,6 +4324,29 @@ Cotu watches them go, then unnecessarily backflips back into the ship.
 Greg: “What’s with the unnecessary backflip?”
 Cotu: “I guess I’m in a bouncy mood.”
 Greg: “Aight buddy. Let’s calm down.”
+Idea: Elite Gunner looks at Cotu’s upgrades
+Elite Gunner is happy, but also ashamed since her master isn’t making the same progress
+Cotu wants to know how the Gauntlet really feels
+EG: “[current upgrade name]. Already? Damn.” She sounds like a mixture between impressed and sad
+Cotu: “Is something wrong?”
+EG *shakes her head*: “No. Not at all. It’s…impressive how fast you’ve…made it this far.”
+Cotu: “Thanks.” Cotu senses something’s going on, but he’s not sure what. “But I’ve still got a long way to go.”
+EG: *sighs in relief* “Yeah.” *she looks at Cotu* “I’ll send this info to Master. Thank you for showing us this.”
+Cotu: “Of course.”
+EG: “Whatever you need, the Gauntlet will be right behind you.” She salutes to him
+Cotu nods. “See you at the gala.”
+Ending ideas:
+Sad ending: the player doesn’t beat Blackstar
+Cotu is apologetic
+BS is sad but tries to look resilient and optimistic in front of Cotu
+She reminds him that the gala’s mostly just for fun, so she tells him to go have fun
+The triplets reassure Cotu that he did his best
+Since most Gauntlet reincarnations happen immediately after one of their bodies is destroyed, Blackstar destroys herself in numerous ways numerous times before the next tournament, which she then loses surprisingly early. The Gauntlet still tries to help other competitors but gets phased out since everyone else’s strength outclasses it. It gets sidelined
+Good ending: either the player beats or doesn’t beat Blackstar and she does or doesn’t reincarnate. Regardless, she doesn’t pressure herself anymore
+BS asks Greg if he wants to hang out sometime
+Things that stay the same regardless of ending
+X still struggles to find satisfaction in life, so he decides to travel with the triplets and help them find their realm while he figures things out
+His struggle is that his goal is to win the tournament, but he just isn’t strong or smart enough
 Character interactions that are the same regardless of plot
 Greg and X meeting for the first time
 Cotu comes back from a respawn with X waiting on the ship with Greg. Cotu is excited to see them together and is curious to know how they feel about each other
@@ -4285,6 +4378,18 @@ Pilot, in a higher pitched voice: “I-I-I’m sorry. It’s just, people are us
 X: “Relax. I was joking.”
 Pilot: “...ah, of, of course! You were! Hahahah! That’s so funny!”
 X and Pilot just stand in silence
+Greg remembering X
+Pilot is surprised that Greg is trying to get to know X, as Pilot thought X was famous
+Pilot: “You don’t remember him? He was one of the top contenders for a while. A lot of people thought he’d win.”
+Greg squints at X
+Greg: “Wait…oh! Oh, I remember! Yeah, you were the “Star Guy”! *sigh* I-I completely forgot about you!”
+X’s posture shifts: “...you forgot me?”
+Greg: “Yeah, I did, I…er, sorry man. That’s my bad.”
+X: “The blame is on me. I failed too soon, and allowed you to forget me. Next time will be different.”
+X approaches Greg. Greg gets nervous
+X: “Greg, I promise you: after the next tournament, you—along with the rest of the entire universe—will never forget me.”
+Greg, nervously: “wow, that’s quite a statement. Well, good luck with that, man!”
+X: “Thanks…Greg.”
 Greg, Pilot, no name, and X playing Go Fish (or some other card game that requires knowledge of your opponents’ cards)
 X wants to win at Go Fish to prove his own skill. He doesn’t cheat because he’s not as insecure about himself as no name
 Pilot wants to mess around a bit, perhaps to encourage the others not to take the game so seriously, and make sure things stay civil
@@ -4300,7 +4405,7 @@ Pilot: *politely* “If you really think Greg’s cheating, maybe we can restart
 Meanwhile, Greg shakes his finger and tries blowing on it, but nothing happens
 X: “HELL NO.” *to Greg* “If my legitimate hard work and skill can beat your cheating, you won’t ever talk shit again.” *X makes his play*
 Meanwhile, no name taps Pilot with his foot
-Greg: *looks at his cards* “Believe whatever you want, hothead, but the truth is, I’m playing fair and square.” *Greg makes his play* “Your move, Big Johnson.”
+Greg: *looks at his cards* “Believe whatever you want, hothead, but the truth is, I’m playing fair and square.” *Greg makes his play* “Your move, Big Nate.”
 Meanwhile, Pilot opens a small portal beside no name that links to a spot behind X’s hand, allowing no name to see X’s cards
 No name: *makes his play*
 Greg: *GASP*
@@ -4308,7 +4413,7 @@ X: “HUH?!?!”
 Pilot: *giggles*
 No name: *poker face*
 Greg: “What the-bro-OH MY”
-Pilot: *subtly sarcastically* “Amazing play, no name!”
+Pilot: *subtly sarcastically* “Wow! Amazing play, no name!”
 No name: *starts laughing*
 …
 Greg and Pilot picking up drinks from Flower Clerk
@@ -4577,9 +4682,12 @@ Science System
 The Creator is using a universe simulation software on his computer to create his own universe pet project
 He entrusted an AI copilot built into the software to pseudo-randomly generate the gods
 The Creator told the AI to make the gods immortal
+The Creator asked the AI to name itself, and the AI decided on Jessica because it contains the letters “AI”. The AI is kinda quirky and cringe and the Creator is embarrassed by it
 The Creator made some changes to the virtual universe from his own universe, which has the same rules as ours
 Vastly increased the speed of light to make interstellar travel/communication easier
 Added stability
+Designed the gods himself
+Gods were meant to be good, but Jessica, being an unreliable AI, messed that up sometimes
 Stability
 Gods naturally produce stability from their icons
 Only their own stability is compatible with their body, they can’t use others’ stability
