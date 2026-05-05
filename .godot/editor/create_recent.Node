@@ -1,3 +1,5 @@
+CollisionShape3D
+Hitbox
 FogVolume
 GPUParticles3D
 GPUParticlesAttractorSphere3D
@@ -5,8 +7,6 @@ GPUParticlesAttractorBox3D
 GPUParticlesAttractorVectorField3D
 Sprite3D
 Node3D
-CollisionShape3D
-Hitbox
 NavigationRegion3D
 ClarityShardHurtbox
 EnemyHurtbox

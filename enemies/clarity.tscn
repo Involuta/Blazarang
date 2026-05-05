@@ -1,4 +1,4 @@
-[gd_scene load_steps=147 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=148 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -14,6 +14,10 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g3bkq"]
 radius = 1.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wjs3c"]
+radius = 1.5
+height = 15.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7112o"]
 radius = 1.0
@@ -839,11 +843,11 @@ phase1_straight_attack_chances = {
 "Stomp": 2.08167e-12
 }
 phase1_circling_attack_chances = {
-"Backflip": 0.1,
-"DoubleSlice": 0.3,
-"FlickSlice": 0.3,
-"JumpShot": 0.1,
-"LongSlice": 0.2
+"Backflip": 2.08167e-12,
+"DoubleSlice": 2.08167e-12,
+"FlickSlice": 1.0,
+"JumpShot": 2.08167e-12,
+"LongSlice": 2.08167e-12
 }
 
 [node name="ClarityArmMeshes" parent="." instance=ExtResource("1_4e0of")]
@@ -854,8 +858,8 @@ bones/0/position = Vector3(-0.0210742, 4.49276, 0.0847608)
 bones/0/rotation = Quaternion(0.0301653, 0.0796906, -0.0501057, 0.995102)
 bones/1/position = Vector3(-1.58209e-09, 8.69174, 9.87667e-09)
 bones/1/rotation = Quaternion(0.0484073, -0.0812806, 0.0524297, 0.994133)
-bones/3/position = Vector3(-3.88754, 5.57988, -1.84987)
-bones/3/rotation = Quaternion(-0.0908001, -0.197995, 0.741656, 0.634428)
+bones/3/position = Vector3(3.80271, 6.1959, 0.147576)
+bones/3/rotation = Quaternion(-0.648979, -0.721534, 0.138328, -0.197689)
 bones/6/position = Vector3(2.01413, 2.22899, -2.08285)
 bones/6/rotation = Quaternion(0.305356, -0.212565, 0.925231, -0.0743114)
 bones/8/position = Vector3(2.06725, 1.3427, 0.8528)
@@ -886,7 +890,7 @@ omni_shadow_mode = 0
 [node name="ClarityHead" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2" index="2" instance=ExtResource("3_05q7x")]
 
 [node name="HeadLight" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/BaseOffsetRotation/HeadMesh" index="0"]
-light_energy = 2.8
+light_energy = 0.0
 
 [node name="HeadSprite" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/BaseOffsetRotation/HeadMesh/HeadLight" index="0"]
 transform = Transform3D(2.08165e-12, -7.26051e-28, 7.26051e-28, 7.26051e-28, 2.08165e-12, -7.26051e-28, -7.26051e-28, 7.26051e-28, 2.08165e-12, 0, 0, 0)
@@ -906,7 +910,17 @@ opponent_hitboxes = ["PlayerHitbox"]
 shape = SubResource("SphereShape3D_g3bkq")
 
 [node name="Arm_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(-0.00502304, 0.966421, -0.256915, -0.977576, -0.0588326, -0.202194, -0.210519, 0.250138, 0.945046, -4.90419, 10.6355, -1.16648)
+transform = Transform3D(0.119992, -0.989441, -0.0812896, -0.911904, -0.0774774, -0.403022, 0.392469, 0.122488, -0.911573, 5.77443, 10.4062, -0.243689)
+
+[node name="EnemyHitbox" type="Area3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2" index="1"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+script = ExtResource("4_5f0ps")
+damage = 30
+frostbite_buildup = 10
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2/EnemyHitbox"]
+transform = Transform3D(0.996195, -0.0871557, 4.28562e-16, 0.0871557, 0.996195, -1.78015e-16, -1.35457e-16, -3.71025e-16, 1, 0.67, -7.5, 2.08165e-12)
+shape = SubResource("CapsuleShape3D_wjs3c")
 
 [node name="Center_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="2"]
 transform = Transform3D(0.982278, 0.104529, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)

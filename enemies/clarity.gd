@@ -168,12 +168,6 @@ func _ready():
 func frames(num: int) -> float:
 	return num * get_physics_process_delta_time()
 
-func head_light_high():
-	get_tree().create_tween().tween_property(head_light, "light_energy", full_head_brightness, .3)
-
-func head_light_low():
-	get_tree().create_tween().tween_property(head_light, "light_energy", base_head_brightness, .3)
-
 func set_head_hurtbox_active(state: bool):
 	if state:
 		head_hurtbox.process_mode = PROCESS_MODE_INHERIT
