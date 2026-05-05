@@ -60,7 +60,7 @@ var stationary := false
 @export var walk_speed := 1.8
 var walk_dir := Vector3.FORWARD # Randomly set when switching to walk straight
 @export var walk_curved_radius := 9.0 # Radius of circle Clarity walks on
-@export var full_dash_speed := 18.0
+@export var full_dash_speed := 24.0
 
 @export var head_turn_speed := .06
 @export var body_turn_speed := .09

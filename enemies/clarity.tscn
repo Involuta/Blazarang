@@ -278,7 +278,7 @@ states/WalkLeftAggressive/position = Vector2(-274.421, 99.9455)
 states/WalkLeftPassive/node = SubResource("AnimationNodeAnimation_nefrk")
 states/WalkLeftPassive/position = Vector2(-615.424, 99.9727)
 transitions = ["Start", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_3iee8"), "WalkLeftAggressive", "RaiseRightSlice", SubResource("AnimationNodeStateMachineTransition_1fa2q"), "WalkLeftPassive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_8v8bx"), "JumpShotToWalkLeft", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_1xoqv"), "WalkLeftAggressive", "SingleShotLeft", SubResource("AnimationNodeStateMachineTransition_s11a8"), "SingleShotLeft", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_hq72y"), "WalkLeftAggressive", "Spiral", SubResource("AnimationNodeStateMachineTransition_puc76"), "Spiral", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_xwdw6"), "Start", "Stagger", SubResource("AnimationNodeStateMachineTransition_7k4fw"), "Start", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_pgktn"), "WalkLeftAggressive", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_gk2ku"), "WalkForwardAggressive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_h5eo1"), "WalkForwardAggressive", "JumpShotToWalkLeft", SubResource("AnimationNodeStateMachineTransition_escja"), "RaiseRightSlice", "WaitLoweredLeft", SubResource("AnimationNodeStateMachineTransition_tkqms"), "RaiseLeftFast", "WaitRaisedLeft", SubResource("AnimationNodeStateMachineTransition_3can7"), "RaiseLeftSlow", "WaitRaisedLeft", SubResource("AnimationNodeStateMachineTransition_vj02r"), "RaiseLeftSliceFast", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_st2r4"), "LeftSliceFromWait", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_m3sfk"), "WalkLeftAggressive", "Backflip", SubResource("AnimationNodeStateMachineTransition_lg27b"), "Backflip", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_ghibe"), "WalkLeftAggressive", "FlickSlice", SubResource("AnimationNodeStateMachineTransition_2bist"), "WalkLeftAggressive", "LongSlice", SubResource("AnimationNodeStateMachineTransition_51kde"), "LongSlice", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_14msq"), "FlickSlice", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_h1aag")]
-graph_offset = Vector2(-750.513, -29.8125)
+graph_offset = Vector2(-750.513, 23.7825)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_iyo4p"]
 animation = &"Backflip"
@@ -834,17 +834,16 @@ collision_mask = 2
 script = ExtResource("1_172k1")
 phase1_min_long_dist_wait = 3.0
 phase1_max_long_dist_wait = 4.0
-full_dash_speed = 24.0
 phase1_straight_attack_chances = {
 "JumpShot": 1.0,
 "Stomp": 2.08167e-12
 }
 phase1_circling_attack_chances = {
-"Backflip": 2.08167e-12,
-"DoubleSlice": 2.08167e-12,
-"FlickSlice": 2.08167e-12,
-"JumpShot": 2.08167e-12,
-"LongSlice": 1.0
+"Backflip": 0.1,
+"DoubleSlice": 0.3,
+"FlickSlice": 0.3,
+"JumpShot": 0.1,
+"LongSlice": 0.2
 }
 
 [node name="ClarityArmMeshes" parent="." instance=ExtResource("1_4e0of")]
@@ -853,10 +852,10 @@ transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
 [node name="Skeleton3D" parent="ClarityArmMeshes/Armature" index="0"]
 bones/0/position = Vector3(-0.0210742, 4.49276, 0.0847608)
 bones/0/rotation = Quaternion(0.0301653, 0.0796906, -0.0501057, 0.995102)
-bones/1/position = Vector3(1.5488e-07, 8.69174, -4.9728e-08)
+bones/1/position = Vector3(-1.58209e-09, 8.69174, 9.87667e-09)
 bones/1/rotation = Quaternion(0.0484073, -0.0812806, 0.0524297, 0.994133)
-bones/3/position = Vector3(-3.7482, 4.38423, -0.0847617)
-bones/3/rotation = Quaternion(0.00101032, -0.00552393, 0.86527, 0.501275)
+bones/3/position = Vector3(-3.88754, 5.57988, -1.84987)
+bones/3/rotation = Quaternion(-0.0908001, -0.197995, 0.741656, 0.634428)
 bones/6/position = Vector3(2.01413, 2.22899, -2.08285)
 bones/6/rotation = Quaternion(0.305356, -0.212565, 0.925231, -0.0743114)
 bones/8/position = Vector3(2.06725, 1.3427, 0.8528)
@@ -871,7 +870,7 @@ bones/16/position = Vector3(-2.85858, 2.94367, -0.755941)
 bones/16/rotation = Quaternion(0.321999, -0.24697, 0.885482, 0.226373)
 
 [node name="Hat_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1.42986, 0.00998904, -0.0170401, -0.0125258, 1.41244, -0.223079, 0.0152725, 0.223207, 1.41239, 0.918732, 14.4374, 0.659002)
+transform = Transform3D(1.42986, 0.00998905, -0.0170401, -0.0125258, 1.41244, -0.223079, 0.0152725, 0.223207, 1.41239, 0.918732, 14.4374, 0.659002)
 
 [node name="BodyLight" type="OmniLight3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -2.5, 2.08165e-12)
@@ -885,6 +884,9 @@ omni_attenuation = 0.06
 omni_shadow_mode = 0
 
 [node name="ClarityHead" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2" index="2" instance=ExtResource("3_05q7x")]
+
+[node name="HeadLight" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/BaseOffsetRotation/HeadMesh" index="0"]
+light_energy = 2.8
 
 [node name="HeadSprite" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/BaseOffsetRotation/HeadMesh/HeadLight" index="0"]
 transform = Transform3D(2.08165e-12, -7.26051e-28, 7.26051e-28, 7.26051e-28, 2.08165e-12, -7.26051e-28, -7.26051e-28, 7.26051e-28, 2.08165e-12, 0, 0, 0)
@@ -904,10 +906,10 @@ opponent_hitboxes = ["PlayerHitbox"]
 shape = SubResource("SphereShape3D_g3bkq")
 
 [node name="Arm_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.339741, 0.92836, 0.150741, -0.932056, 0.353784, -0.0781571, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
+transform = Transform3D(-0.00502304, 0.966421, -0.256915, -0.977576, -0.0588326, -0.202194, -0.210519, 0.250138, 0.945046, -4.90419, 10.6355, -1.16648)
 
 [node name="Center_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.982278, 0.104528, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520492, 0.985479, 0.562103, 9.96609, 0.284472)
+transform = Transform3D(0.982278, 0.104529, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
 visible = false
 
 [node name="MiddleLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="3"]
@@ -923,7 +925,7 @@ transform = Transform3D(0.766044, 0.219846, 0.604023, 4.14429e-08, 0.939693, -0.
 visible = false
 
 [node name="MiddleRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 3.65041e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548508)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 6.51412e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548508)
 visible = false
 
 [node name="FrontRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="7"]
@@ -1182,7 +1184,7 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_e8535")
 draw_pass_1 = SubResource("QuadMesh_tgaps")
 
-[node name="FogVolume" type="FogVolume" parent="FogVolume"]
+[node name="BodyCloud" type="FogVolume" parent="FogVolume"]
 size = Vector3(30, 30, 30)
 shape = 0
 material = SubResource("FogMaterial_hru1u")
