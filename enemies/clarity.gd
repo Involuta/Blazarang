@@ -91,9 +91,11 @@ var staggerable := false # When head is exposed but not glowing,
 }
 
 @export var phase1_circling_attack_chances = {
-	"DoubleSlice" : .6,
+	"DoubleSlice" : .2,
 	"JumpShot" : .2,
 	"Backflip" : .2,
+	"FlickSlice" : .2,
+	"LongSlice" : .2
 }
 
 var param_path_base := "parameters/conditions/"

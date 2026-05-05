@@ -1,4 +1,4 @@
-[gd_scene load_steps=141 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=147 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -93,11 +93,17 @@ size = Vector2(1.6, 1.3)
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fqj62"]
 animation = &"Backflip"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xrp55"]
+animation = &"FlickSlice"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r5h83"]
 animation = &"JumpShotToWalkLeft"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_voiwd"]
 animation = &"LeftSliceFromWait"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a5jnv"]
+animation = &"LongSlice"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o0xel"]
 animation = &"RaiseLeftFast"
@@ -219,13 +225,33 @@ advance_condition = &"Backflip"
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2bist"]
+advance_mode = 2
+advance_condition = &"FlickSlice"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_51kde"]
+advance_mode = 2
+advance_condition = &"LongSlice"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_14msq"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h1aag"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_quqet"]
 states/Backflip/node = SubResource("AnimationNodeAnimation_fqj62")
-states/Backflip/position = Vector2(-465.335, 26.4035)
+states/Backflip/position = Vector2(-697.88, -2.26385)
+states/FlickSlice/node = SubResource("AnimationNodeAnimation_xrp55")
+states/FlickSlice/position = Vector2(-473.618, -12.4573)
 states/JumpShotToWalkLeft/node = SubResource("AnimationNodeAnimation_r5h83")
 states/JumpShotToWalkLeft/position = Vector2(31.4542, 167.598)
 states/LeftSliceFromWait/node = SubResource("AnimationNodeAnimation_voiwd")
 states/LeftSliceFromWait/position = Vector2(-522.467, 396.488)
+states/LongSlice/node = SubResource("AnimationNodeAnimation_a5jnv")
+states/LongSlice/position = Vector2(-418.916, 165.993)
 states/RaiseLeftFast/node = SubResource("AnimationNodeAnimation_o0xel")
 states/RaiseLeftFast/position = Vector2(-351.715, 321.283)
 states/RaiseLeftSliceFast/node = SubResource("AnimationNodeAnimation_a5lba")
@@ -235,9 +261,9 @@ states/RaiseLeftSlow/position = Vector2(-190.815, 320.92)
 states/RaiseRightSlice/node = SubResource("AnimationNodeAnimation_vtprg")
 states/RaiseRightSlice/position = Vector2(-274.609, 168.707)
 states/SingleShotLeft/node = SubResource("AnimationNodeAnimation_aj5hf")
-states/SingleShotLeft/position = Vector2(-179.491, -25.891)
+states/SingleShotLeft/position = Vector2(-182.491, -26.391)
 states/Spiral/node = SubResource("AnimationNodeAnimation_6m55y")
-states/Spiral/position = Vector2(-150.341, 26.5688)
+states/Spiral/position = Vector2(-127.841, 27.6525)
 states/Stagger/node = SubResource("AnimationNodeAnimation_mcj0r")
 states/Stagger/position = Vector2(5.01043, -48.0926)
 states/Start/position = Vector2(5, 37.9453)
@@ -250,9 +276,9 @@ states/WalkForwardAggressive/position = Vector2(346.331, 100.218)
 states/WalkLeftAggressive/node = SubResource("AnimationNodeAnimation_3eyf1")
 states/WalkLeftAggressive/position = Vector2(-274.421, 99.9455)
 states/WalkLeftPassive/node = SubResource("AnimationNodeAnimation_nefrk")
-states/WalkLeftPassive/position = Vector2(-623.924, 99.9727)
-transitions = ["Start", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_3iee8"), "WalkLeftAggressive", "RaiseRightSlice", SubResource("AnimationNodeStateMachineTransition_1fa2q"), "WalkLeftPassive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_8v8bx"), "JumpShotToWalkLeft", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_1xoqv"), "WalkLeftAggressive", "SingleShotLeft", SubResource("AnimationNodeStateMachineTransition_s11a8"), "SingleShotLeft", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_hq72y"), "WalkLeftAggressive", "Spiral", SubResource("AnimationNodeStateMachineTransition_puc76"), "Spiral", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_xwdw6"), "Start", "Stagger", SubResource("AnimationNodeStateMachineTransition_7k4fw"), "Start", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_pgktn"), "WalkLeftAggressive", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_gk2ku"), "WalkForwardAggressive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_h5eo1"), "WalkForwardAggressive", "JumpShotToWalkLeft", SubResource("AnimationNodeStateMachineTransition_escja"), "RaiseRightSlice", "WaitLoweredLeft", SubResource("AnimationNodeStateMachineTransition_tkqms"), "RaiseLeftFast", "WaitRaisedLeft", SubResource("AnimationNodeStateMachineTransition_3can7"), "RaiseLeftSlow", "WaitRaisedLeft", SubResource("AnimationNodeStateMachineTransition_vj02r"), "RaiseLeftSliceFast", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_st2r4"), "LeftSliceFromWait", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_m3sfk"), "WalkLeftAggressive", "Backflip", SubResource("AnimationNodeStateMachineTransition_lg27b"), "Backflip", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_ghibe")]
-graph_offset = Vector2(-642.985, -54.3447)
+states/WalkLeftPassive/position = Vector2(-615.424, 99.9727)
+transitions = ["Start", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_3iee8"), "WalkLeftAggressive", "RaiseRightSlice", SubResource("AnimationNodeStateMachineTransition_1fa2q"), "WalkLeftPassive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_8v8bx"), "JumpShotToWalkLeft", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_1xoqv"), "WalkLeftAggressive", "SingleShotLeft", SubResource("AnimationNodeStateMachineTransition_s11a8"), "SingleShotLeft", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_hq72y"), "WalkLeftAggressive", "Spiral", SubResource("AnimationNodeStateMachineTransition_puc76"), "Spiral", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_xwdw6"), "Start", "Stagger", SubResource("AnimationNodeStateMachineTransition_7k4fw"), "Start", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_pgktn"), "WalkLeftAggressive", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_gk2ku"), "WalkForwardAggressive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_h5eo1"), "WalkForwardAggressive", "JumpShotToWalkLeft", SubResource("AnimationNodeStateMachineTransition_escja"), "RaiseRightSlice", "WaitLoweredLeft", SubResource("AnimationNodeStateMachineTransition_tkqms"), "RaiseLeftFast", "WaitRaisedLeft", SubResource("AnimationNodeStateMachineTransition_3can7"), "RaiseLeftSlow", "WaitRaisedLeft", SubResource("AnimationNodeStateMachineTransition_vj02r"), "RaiseLeftSliceFast", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_st2r4"), "LeftSliceFromWait", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_m3sfk"), "WalkLeftAggressive", "Backflip", SubResource("AnimationNodeStateMachineTransition_lg27b"), "Backflip", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_ghibe"), "WalkLeftAggressive", "FlickSlice", SubResource("AnimationNodeStateMachineTransition_2bist"), "WalkLeftAggressive", "LongSlice", SubResource("AnimationNodeStateMachineTransition_51kde"), "LongSlice", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_14msq"), "FlickSlice", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_h1aag")]
+graph_offset = Vector2(-750.513, -29.8125)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_iyo4p"]
 animation = &"Backflip"
@@ -814,9 +840,11 @@ phase1_straight_attack_chances = {
 "Stomp": 2.08167e-12
 }
 phase1_circling_attack_chances = {
-"Backflip": 1.0,
+"Backflip": 2.08167e-12,
 "DoubleSlice": 2.08167e-12,
-"JumpShot": 2.08167e-12
+"FlickSlice": 2.08167e-12,
+"JumpShot": 2.08167e-12,
+"LongSlice": 1.0
 }
 
 [node name="ClarityArmMeshes" parent="." instance=ExtResource("1_4e0of")]
@@ -876,7 +904,7 @@ opponent_hitboxes = ["PlayerHitbox"]
 shape = SubResource("SphereShape3D_g3bkq")
 
 [node name="Arm_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.339741, 0.92836, 0.15074, -0.932056, 0.353784, -0.0781571, -0.125888, -0.113945, 0.985479, -4.57238, 8.73293, 0.998591)
+transform = Transform3D(0.339741, 0.92836, 0.150741, -0.932056, 0.353784, -0.0781571, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
 
 [node name="Center_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="2"]
 transform = Transform3D(0.982278, 0.104528, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520492, 0.985479, 0.562103, 9.96609, 0.284472)
@@ -1069,7 +1097,9 @@ anim_player = NodePath("../ClarityArmMeshes/AnimationPlayer")
 advance_expression_base_node = NodePath("..")
 parameters/conditions/Backflip = false
 parameters/conditions/DoubleSlice = false
+parameters/conditions/FlickSlice = false
 parameters/conditions/JumpShot = false
+parameters/conditions/LongSlice = false
 parameters/conditions/SingleShot = false
 parameters/conditions/Spiral = false
 
