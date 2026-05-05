@@ -1,7 +1,7 @@
+GPUParticles3D
 CollisionShape3D
 Hitbox
 FogVolume
-GPUParticles3D
 GPUParticlesAttractorSphere3D
 GPUParticlesAttractorBox3D
 GPUParticlesAttractorVectorField3D

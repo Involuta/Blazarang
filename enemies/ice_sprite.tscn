@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://i2xuy407tpbj"]
+[gd_scene load_steps=33 format=3 uid="uid://i2xuy407tpbj"]
 
 [ext_resource type="Script" path="res://enemies/ice_sprite.gd" id="1_h7jw6"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="2_6lw04"]
@@ -150,14 +150,23 @@ _data = {
 "explode": SubResource("Animation_m58tf")
 }
 
+[sub_resource type="Curve" id="Curve_s1u3t"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0576271, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_4dpie"]
+curve = SubResource("Curve_s1u3t")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j2xt2"]
+emission_shape = 1
+emission_sphere_radius = 6.7
 direction = Vector3(2.08165e-12, 1, 2.08165e-12)
-spread = 60.0
-gravity = Vector3(2.08165e-12, -9.8, 2.08165e-12)
-initial_velocity_min = 9.0
-initial_velocity_max = 18.0
-scale_min = 0.1
-scale_max = 0.1
+spread = 180.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+scale_min = 0.04
+scale_max = 0.06
+scale_curve = SubResource("CurveTexture_4dpie")
+color = Color(0.827451, 0.929412, 1, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xhnoi"]
 radius = 4.5
@@ -364,10 +373,10 @@ libraries = {
 [node name="SnowParticles" type="GPUParticles3D" parent="."]
 cast_shadow = 0
 emitting = false
-amount = 18
-lifetime = 4.5
+amount = 30
+lifetime = 6.0
 one_shot = true
-explosiveness = 1.0
+explosiveness = 0.98
 process_material = SubResource("ParticleProcessMaterial_j2xt2")
 draw_pass_1 = ExtResource("2_6lw04")
 
