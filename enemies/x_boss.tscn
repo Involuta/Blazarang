@@ -1099,12 +1099,6 @@ collision_layer = 8
 collision_mask = 146
 platform_floor_layers = 4294901762
 script = ExtResource("1_u3wem")
-short_dist_attack_chances = {
-"RightArmSlice": 2.08167e-12,
-"SlipnSlice": 2.08167e-12,
-"Superman": 2.08167e-12,
-"Triangle": 1.0
-}
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -1268,7 +1262,7 @@ bones/22/rotation = Quaternion(0.743381, -0.0394219, -0.0494015, 0.665876)
 bones/23/rotation = Quaternion(0.280697, -0.231212, 0.0698829, 0.928906)
 
 [node name="Head" parent="X_boss_meshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.996195, -0.0225575, -0.0841856, 6.37114e-08, 0.965926, -0.258819, 0.0871553, 0.257834, 0.96225, 0.362949, 20.4429, 3.08176)
+transform = Transform3D(0.996195, -0.0225576, -0.0841859, 4.49278e-08, 0.965926, -0.258819, 0.0871556, 0.257834, 0.96225, 0.362948, 20.4429, 3.08175)
 
 [node name="XHead" parent="X_boss_meshes/Armature/Skeleton3D/Head" index="0"]
 visible = true
@@ -1296,16 +1290,16 @@ surface_material_override/2 = SubResource("StandardMaterial3D_s05at")
 surface_material_override/5 = SubResource("StandardMaterial3D_h2w4t")
 
 [node name="LeftArm" parent="X_boss_meshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.561614, 0.500935, -0.658524, 0.385181, 0.546103, 0.743914, 0.732274, -0.671443, 0.113748, 0.414472, 18.845, 6.2276)
+transform = Transform3D(0.561614, 0.500934, -0.658525, 0.385182, 0.546103, 0.743913, 0.732274, -0.671444, 0.113749, 0.414471, 18.845, 6.22759)
 
 [node name="RightArm" parent="X_boss_meshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(-0.627911, -0.697972, 0.34433, 0.66457, -0.711098, -0.229535, 0.405062, 0.0847042, 0.910357, 0.379957, 19.4711, -0.928875)
+transform = Transform3D(-0.627911, -0.697972, 0.34433, 0.66457, -0.711098, -0.229535, 0.405061, 0.0847043, 0.910357, 0.379956, 19.4711, -0.92888)
 
 [node name="LeftHand" parent="X_boss_meshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.63398, -0.661145, 0.401193, 0.592645, 0.748633, 0.297187, -0.49683, 0.0493544, 0.866443, 4.5231, 23.327, 0.701305)
+transform = Transform3D(0.633979, -0.661147, 0.401193, 0.592647, 0.748631, 0.297187, -0.49683, 0.0493554, 0.866443, 4.52309, 23.327, 0.701297)
 
 [node name="RightHand" parent="X_boss_meshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.929273, -0.137112, -0.343005, -0.340122, -0.679865, -0.649693, -0.144116, 0.720405, -0.678415, -6.25005, 15.3295, 0.53458)
+transform = Transform3D(0.929273, -0.137112, -0.343005, -0.340122, -0.679864, -0.649694, -0.144116, 0.720406, -0.678414, -6.25005, 15.3295, 0.534574)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_uk78c")

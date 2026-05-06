@@ -53,3 +53,6 @@ res://enemies/enemy_anims/clarity_wait_raised_left.res
 res://enemies/enemy_anims/clarity_longslice.res
 res://enemies/enemy_anims/clarity_flickslice.res
 res://enemies/x_blade.tscn
+res://textures/solid_light_gray_tile.tres
+res://levels/x_boss_level/x_boss_level1_viewcontrol.tscn
+res://enemies/x_boss.tscn

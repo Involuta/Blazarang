@@ -1,4 +1,4 @@
-[gd_scene load_steps=176 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=167 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://enemies/boss_hurtbox.gd" id="5_j584x"]
 [ext_resource type="Shader" uid="uid://vvgsovx2psnk" path="res://shaders/smoke_LOD.tres" id="5_w48cf"]
 [ext_resource type="Shader" path="res://GPUTrail-main/shaders/trail.gdshader" id="6_rnief"]
-[ext_resource type="Shader" path="res://GPUTrail-main/shaders/trail_draw_pass.gdshader" id="7_dayr0"]
 [ext_resource type="Script" path="res://general_scripts/damage_over_time_area.gd" id="7_ffp3t"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="7_i53v5"]
 [ext_resource type="Shader" path="res://shaders/smoke.gdshader" id="7_pdkmx"]
@@ -203,24 +202,23 @@ void fragment(){
 	}
 }"
 
-[sub_resource type="Gradient" id="Gradient_ca04r"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.493973, 0.775118, 1, 1)
+[sub_resource type="Gradient" id="Gradient_ge53q"]
+colors = PackedColorArray(0.587489, 0.814145, 1, 1, 0.709069, 0.867982, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_vuptm"]
-gradient = SubResource("Gradient_ca04r")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5ngyp"]
+gradient = SubResource("Gradient_ge53q")
 
-[sub_resource type="Curve" id="Curve_6tp2r"]
-_data = [Vector2(0, 1), 0.0, -1.18082, 0, 0, Vector2(1, 0.0129609), -0.943115, 0.0, 0, 0]
-point_count = 2
+[sub_resource type="Curve" id="Curve_lcv0h"]
+_data = [Vector2(0, 1), 0.0, 0.0170963, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0129609), -0.943115, 0.0, 0, 0]
+point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_sgmgt"]
+[sub_resource type="CurveTexture" id="CurveTexture_vxuhc"]
 width = 32
-curve = SubResource("Curve_6tp2r")
+curve = SubResource("Curve_lcv0h")
 
 [sub_resource type="Gradient" id="Gradient_r7jy5"]
 offsets = PackedFloat32Array(0)
-colors = PackedColorArray(1, 0.25098, 0, 1)
+colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_mdpbw"]
 gradient = SubResource("Gradient_r7jy5")
@@ -232,46 +230,11 @@ shader = SubResource("Shader_b81fo")
 shader_parameter/emmission_transform = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
 shader_parameter/flags = 40
 shader_parameter/tex = SubResource("GradientTexture1D_mdpbw")
-shader_parameter/color_ramp = SubResource("GradientTexture1D_vuptm")
-shader_parameter/curve = SubResource("CurveTexture_sgmgt")
-
-[sub_resource type="QuadMesh" id="QuadMesh_w4b3d"]
-material = SubResource("ShaderMaterial_4duwi")
-
-[sub_resource type="Gradient" id="Gradient_ge53q"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.493973, 0.775118, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_5ngyp"]
-gradient = SubResource("Gradient_ge53q")
-
-[sub_resource type="Curve" id="Curve_lcv0h"]
-_data = [Vector2(0, 1), 0.0, -1.18082, 0, 0, Vector2(1, 0.0129609), -0.943115, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_vxuhc"]
-width = 32
-curve = SubResource("Curve_lcv0h")
-
-[sub_resource type="Gradient" id="Gradient_q0pwl"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(1, 0.25098, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_qqk7j"]
-gradient = SubResource("Gradient_q0pwl")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_orvt4"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("7_dayr0")
-shader_parameter/emmission_transform = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
-shader_parameter/flags = 40
-shader_parameter/tex = SubResource("GradientTexture1D_qqk7j")
 shader_parameter/color_ramp = SubResource("GradientTexture1D_5ngyp")
 shader_parameter/curve = SubResource("CurveTexture_vxuhc")
 
-[sub_resource type="QuadMesh" id="QuadMesh_2cgfi"]
-material = SubResource("ShaderMaterial_orvt4")
+[sub_resource type="QuadMesh" id="QuadMesh_w4b3d"]
+material = SubResource("ShaderMaterial_4duwi")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7112o"]
 radius = 1.0
@@ -1143,6 +1106,9 @@ omni_shadow_mode = 0
 
 [node name="ClarityHead" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2" index="2" instance=ExtResource("3_05q7x")]
 
+[node name="HeadLight" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/BaseOffsetRotation/HeadMesh" index="0"]
+light_energy = 0.666666
+
 [node name="HeadSprite" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/BaseOffsetRotation/HeadMesh/HeadLight" index="0"]
 transform = Transform3D(2.08165e-12, -7.26051e-28, 7.26051e-28, 7.26051e-28, 2.08165e-12, -7.26051e-28, -7.26051e-28, 7.26051e-28, 2.08165e-12, 0, 0, 0)
 
@@ -1175,6 +1141,7 @@ shape = SubResource("CapsuleShape3D_wjs3c")
 
 [node name="ArmParticles" type="GPUParticles3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2" index="2"]
 transform = Transform3D(0.996195, -0.0871557, 4.59405e-08, 0.0871557, 0.996195, 2.8598e-09, -4.60149e-08, 1.15506e-09, 1, 1.8, -18, 4.76837e-07)
+visible = false
 amount = 30
 lifetime = 1.5
 process_material = SubResource("ParticleProcessMaterial_p74wy")
@@ -1184,7 +1151,7 @@ draw_pass_1 = SubResource("ArrayMesh_oke6o")
 transform = Transform3D(0.996195, -0.0871557, 3.48787e-16, 0.0871557, 0.996195, -3.48787e-16, -3.17061e-16, 3.77858e-16, 1, 0, 0, 0)
 
 [node name="GPUTrail3D" type="GPUParticles3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2/Trails"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.089e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -36, 2.08165e-12)
 amount = 67
 lifetime = 67.0
 explosiveness = 1.0
@@ -1204,7 +1171,7 @@ lifetime = 67.0
 explosiveness = 1.0
 fixed_fps = 0
 process_material = SubResource("ShaderMaterial_fw1xx")
-draw_pass_1 = SubResource("QuadMesh_2cgfi")
+draw_pass_1 = SubResource("QuadMesh_w4b3d")
 script = ExtResource("9_xxn08")
 length = 67
 color_ramp = SubResource("GradientTexture1D_5ngyp")
@@ -1218,7 +1185,7 @@ lifetime = 67.0
 explosiveness = 1.0
 fixed_fps = 0
 process_material = SubResource("ShaderMaterial_fw1xx")
-draw_pass_1 = SubResource("QuadMesh_2cgfi")
+draw_pass_1 = SubResource("QuadMesh_w4b3d")
 script = ExtResource("9_xxn08")
 length = 67
 color_ramp = SubResource("GradientTexture1D_5ngyp")
@@ -1232,7 +1199,7 @@ lifetime = 67.0
 explosiveness = 1.0
 fixed_fps = 0
 process_material = SubResource("ShaderMaterial_fw1xx")
-draw_pass_1 = SubResource("QuadMesh_2cgfi")
+draw_pass_1 = SubResource("QuadMesh_w4b3d")
 script = ExtResource("9_xxn08")
 length = 67
 color_ramp = SubResource("GradientTexture1D_5ngyp")
@@ -1246,7 +1213,7 @@ lifetime = 67.0
 explosiveness = 1.0
 fixed_fps = 0
 process_material = SubResource("ShaderMaterial_fw1xx")
-draw_pass_1 = SubResource("QuadMesh_2cgfi")
+draw_pass_1 = SubResource("QuadMesh_w4b3d")
 script = ExtResource("9_xxn08")
 length = 67
 color_ramp = SubResource("GradientTexture1D_5ngyp")
@@ -1260,7 +1227,7 @@ lifetime = 67.0
 explosiveness = 1.0
 fixed_fps = 0
 process_material = SubResource("ShaderMaterial_fw1xx")
-draw_pass_1 = SubResource("QuadMesh_2cgfi")
+draw_pass_1 = SubResource("QuadMesh_w4b3d")
 script = ExtResource("9_xxn08")
 length = 67
 color_ramp = SubResource("GradientTexture1D_5ngyp")
@@ -1284,7 +1251,7 @@ transform = Transform3D(0.766044, 0.219846, 0.604023, 4.14429e-08, 0.939693, -0.
 visible = false
 
 [node name="MiddleRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 3.65041e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548508)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 6.51412e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548508)
 visible = false
 
 [node name="FrontRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="7"]
