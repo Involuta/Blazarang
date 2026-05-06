@@ -1,8 +1,9 @@
+CollisionShape3D
+EnemyHurtbox
 Node3D
 GPUTrail3D
 Trail3D
 GPUParticles3D
-CollisionShape3D
 Hitbox
 FogVolume
 GPUParticlesAttractorSphere3D
@@ -11,7 +12,6 @@ GPUParticlesAttractorVectorField3D
 Sprite3D
 NavigationRegion3D
 ClarityShardHurtbox
-EnemyHurtbox
 Sprite2D
 AnimationPlayer
 MeshInstance3D

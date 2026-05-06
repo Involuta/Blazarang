@@ -25,6 +25,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 @onready var nav_agent := $NavigationAgent3D
 @onready var anim_player := $AnimationPlayer
+@onready var hurtbox := $EnemyHurtbox
 @onready var root := get_tree().root
 
 var target : Node3D
@@ -86,22 +87,17 @@ func jump():
 
 func start_attack():
 	explosion_triggered = true
+	anim_player.play("chargeup")
+
+# Called by hurtbox OR chargeup anim
+func death_effect():
+	explosion_triggered = true
 	anim_player.play("explode")
+	hurtbox.process_mode = Node.PROCESS_MODE_DISABLED
 	await anim_player.animation_finished
 	await get_tree().create_timer(explode_secs).timeout
 	queue_free()
 
-# Keep this here until it's confirmed that Clarity's arena won't have obstacles
-func can_see_target():
-	var space_state := get_world_3d().direct_space_state
-	var sight_dir := global_position.direction_to(target.global_position)
-	var query = PhysicsRayQueryParameters3D.create(global_position, global_position + nav_agent.neighbor_distance * sight_dir)
-	query.collision_mask = Globals.make_mask([Globals.ARENA_COL_LAYER, Globals.TARGET_COL_LAYER])
-	query.collide_with_areas = true
-	var result = space_state.intersect_ray(query)
-	if not result:
-		return true
-	if result.collider.collision_layer == Globals.ARENA_COL_LAYER:
-		return false
-	else:
-		return true
+# This func is here so that when EnemyHurtbox calls its die func, set_active is called instead of queue freeing this Ice Sprite node
+func set_active(_state: bool):
+	return

@@ -1,10 +1,12 @@
-[gd_scene load_steps=35 format=3 uid="uid://i2xuy407tpbj"]
+[gd_scene load_steps=36 format=3 uid="uid://i2xuy407tpbj"]
 
 [ext_resource type="Script" path="res://enemies/ice_sprite.gd" id="1_h7jw6"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="2_6lw04"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="3_ovd7j"]
+[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="4_kf4e5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s45hv"]
+height = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qf6aq"]
 resource_local_to_scene = true
@@ -17,8 +19,75 @@ refraction_enabled = true
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_qf6aq")
 
-[sub_resource type="Animation" id="Animation_mbtp2"]
-resource_name = "RESET"
+[sub_resource type="Animation" id="Animation_m58tf"]
+resource_name = "explode"
+length = 1.3
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SnowParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1.5, 1.5, 1.5, 1), Color(0.627451, 0.792157, 1, 1), Color(1.5, 1.5, 1.5, 1), Color(0.627451, 0.792157, 1, 1), Color(1.5, 1.5, 1.5, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("EnemyHitbox:process_mode")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 0, 4]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FogClumps:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_2adtf"]
+resource_name = "chargeup"
+length = 3.0
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -50,10 +119,10 @@ tracks/2/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 2.76667),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.45098, 0.701961, 1, 0.74902)]
+"values": [Color(0.45098, 0.701961, 1, 0.74902), Color(1.5, 1.5, 1.5, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -67,87 +136,24 @@ tracks/3/keys = {
 "update": 1,
 "values": [4]
 }
-tracks/4/type = "value"
+tracks/4/type = "method"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("FogClumps:emitting")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_m58tf"]
-resource_name = "explode"
-length = 4.0
-step = 0.0166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SnowParticles:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MeshInstance3D:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0.45098, 0.701961, 1, 0.74902), Color(1.5, 1.5, 1.5, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("EnemyHitbox:process_mode")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 3, 4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [4, 0, 4]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("FogClumps:emitting")
+tracks/4/path = NodePath(".")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(3),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"values": [{
+"args": [],
+"method": &"death_effect"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7uy7i"]
 _data = {
-"RESET": SubResource("Animation_mbtp2"),
+"chargeup": SubResource("Animation_2adtf"),
 "explode": SubResource("Animation_m58tf")
 }
 
@@ -169,8 +175,8 @@ curve = SubResource("Curve_s1u3t")
 direction = Vector3(2.08165e-12, 1, 2.08165e-12)
 spread = 180.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-initial_velocity_min = 4.8
-initial_velocity_max = 4.8
+initial_velocity_min = 4.5
+initial_velocity_max = 4.5
 linear_accel_min = -3.3
 linear_accel_max = -3.3
 linear_accel_curve = SubResource("CurveTexture_86ww5")
@@ -376,7 +382,6 @@ avoidance_enabled = true
 radius = 3.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "RESET"
 libraries = {
 "": SubResource("AnimationLibrary_7uy7i")
 }
@@ -410,6 +415,17 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_47sp6")
 draw_pass_1 = SubResource("QuadMesh_g85f8")
+
+[node name="EnemyHurtbox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 257
+script = ExtResource("4_kf4e5")
+enemy_name = "IceSprite"
+hit_particle_color = Color(0.592157, 0.788235, 1, 1)
+opponent_hitboxes = ["PlayerHitbox"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHurtbox"]
+shape = SubResource("CapsuleShape3D_s45hv")
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
