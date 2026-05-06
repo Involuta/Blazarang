@@ -1,3 +1,6 @@
+Node3D
+GPUTrail3D
+Trail3D
 GPUParticles3D
 CollisionShape3D
 Hitbox
@@ -6,7 +9,6 @@ GPUParticlesAttractorSphere3D
 GPUParticlesAttractorBox3D
 GPUParticlesAttractorVectorField3D
 Sprite3D
-Node3D
 NavigationRegion3D
 ClarityShardHurtbox
 EnemyHurtbox
@@ -25,8 +27,6 @@ StaticBody3D
 Label
 Label3D
 Node
-GPUTrail3D
 AudioStreamPlayer3D
 AudioStreamPlayer
 AnimatedSprite3D
-RayCast3D
