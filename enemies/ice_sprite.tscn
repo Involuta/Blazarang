@@ -266,7 +266,7 @@ curve = SubResource("Curve_s1u3t")
 direction = Vector3(2.08165e-12, 1, 2.08165e-12)
 spread = 180.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-initial_velocity_min = 4.5
+initial_velocity_min = 3.0
 initial_velocity_max = 4.5
 linear_accel_min = -3.3
 linear_accel_max = -3.3
@@ -459,7 +459,6 @@ radius = 4.5
 collision_layer = 8
 collision_mask = 26
 script = ExtResource("1_h7jw6")
-target_distance = 4.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_s45hv")
@@ -467,10 +466,6 @@ shape = SubResource("CapsuleShape3D_s45hv")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh = SubResource("BoxMesh_adun2")
-
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-avoidance_enabled = true
-radius = 3.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "spawn"
@@ -522,6 +517,3 @@ frostbite_buildup = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DamageOverTimeArea/EnemyHitbox"]
 shape = SubResource("SphereShape3D_xhnoi")
-
-[connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
-[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
