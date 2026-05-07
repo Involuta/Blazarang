@@ -68,6 +68,8 @@ func jump():
 
 func start_attack():
 	explosion_triggered = true
+	follow_speed *= 1.25
+	jump_vertical_speed *= .75
 	anim_player.play("chargeup")
 
 # Called by hurtbox OR chargeup anim

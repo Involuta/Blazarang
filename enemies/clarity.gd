@@ -92,7 +92,6 @@ var staggerable := false # When head is exposed but not glowing,
 
 @export var phase1_circling_attack_chances = {
 	"DoubleSlice" : .2,
-	"JumpShot" : .2,
 	"Backflip" : .2,
 	"FlickSlice" : .2,
 	"LongSlice" : .2
@@ -529,7 +528,7 @@ func wait_raised_left():
 func jump_shot_mvmt():
 	behav_state = SPECIAL
 	var t = get_tree().create_tween()
-	var full_dash_vec = full_dash_speed * velocity.normalized()
+	var full_dash_vec = full_dash_speed * body_meshes.transform.basis.z
 	t.tween_property(self, "velocity", full_dash_vec, frames(97))
 	t.tween_property(self, "velocity", full_dash_vec + 9 * Vector3.UP, frames(30)).set_ease(Tween.EASE_OUT)
 	t.tween_property(self, "velocity", Vector3.ZERO, frames(120))
