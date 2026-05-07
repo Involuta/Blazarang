@@ -278,7 +278,7 @@ func _physics_process(delta):
 		# Blizzard particle intensity
 		var min_blizzard_particles_speed_scale = 1.0
 		var max_blizzard_particles_speed_scale = 3.0
-		blizzard_particles.speed_scale = lerpf(min_blizzard_particles_speed_scale, max_blizzard_particles_speed_scale, cotu_dist_lerp_val)
+		#blizzard_particles.speed_scale = lerpf(min_blizzard_particles_speed_scale, max_blizzard_particles_speed_scale, cotu_dist_lerp_val)
 		
 		# Body/feet fog
 		# Body fog doesn't change

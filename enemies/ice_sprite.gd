@@ -16,7 +16,8 @@ var follow_speed := 5.0 # Ice sprite follow speed is set to be very similar to i
 @export var jump_vertical_speed := 5.0
 @export var jump_lateral_speed := 9.0
 
-var explosion_triggered := false
+var explosion_triggered := false # Set to true when close to player
+var explosion_started := false # Set to true when explosion starts. Exported so it's changeable via anim player
 @export var explode_secs := 6.0
 
 var aiming_at_target := true
@@ -39,10 +40,11 @@ func _ready():
 	add_to_group("lockonables")
 
 func _physics_process(delta):
-	if not is_on_floor():
-		velocity.y -= 3 * rng.randf() * gravity * delta
-	follow()
-	move_and_slide()
+	if not explosion_started:
+		if not is_on_floor():
+			velocity.y -= 3 * rng.randf() * gravity * delta
+		follow()
+		move_and_slide()
 	if global_position.y < -100:
 		queue_free()
 
@@ -92,11 +94,15 @@ func start_attack():
 # Called by hurtbox OR chargeup anim
 func death_effect():
 	explosion_triggered = true
+	# explosion_started is set by anim keyframe, not here. This is bc the explode anim also contains the flashing telegraph; after that, the explosion starts and explosion_started is set to true
 	anim_player.play("explode")
 	hurtbox.process_mode = Node.PROCESS_MODE_DISABLED
 	await anim_player.animation_finished
 	await get_tree().create_timer(explode_secs).timeout
 	queue_free()
+
+func set_explosion_started():
+	explosion_started = true
 
 # This func is here so that when EnemyHurtbox calls its die func, set_active is called instead of queue freeing this Ice Sprite node
 func set_active(_state: bool):

@@ -1,9 +1,10 @@
-[gd_scene load_steps=36 format=3 uid="uid://i2xuy407tpbj"]
+[gd_scene load_steps=38 format=3 uid="uid://i2xuy407tpbj"]
 
 [ext_resource type="Script" path="res://enemies/ice_sprite.gd" id="1_h7jw6"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="2_6lw04"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="3_ovd7j"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="4_kf4e5"]
+[ext_resource type="Script" path="res://general_scripts/damage_over_time_area.gd" id="4_n1e1v"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s45hv"]
 height = 1.0
@@ -11,7 +12,7 @@ height = 1.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qf6aq"]
 resource_local_to_scene = true
 transparency = 4
-albedo_color = Color(0.45098, 0.701961, 1, 0.74902)
+albedo_color = Color(1.5, 1.5, 1.5, 1)
 roughness = 0.12
 refraction_enabled = true
 
@@ -21,7 +22,7 @@ material = SubResource("StandardMaterial3D_qf6aq")
 
 [sub_resource type="Animation" id="Animation_m58tf"]
 resource_name = "explode"
-length = 1.3
+length = 5.0
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -62,32 +63,100 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("EnemyHitbox:process_mode")
+tracks/3/path = NodePath("FogClumps:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.3, 1.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [4, 0, 4]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("FogClumps:emitting")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0.3),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:collision_layer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [8, 0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("DamageOverTimeArea:process_mode")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.3, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 0, 4]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_explosion_started"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_2adtf"]
 resource_name = "chargeup"
 length = 3.0
 step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.76667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.45098, 0.701961, 1, 0.74902), Color(1.5, 1.5, 1.5, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"death_effect"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:collision_layer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="Animation" id="Animation_lsn44"]
+resource_name = "spawn"
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -119,42 +188,64 @@ tracks/2/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 2.76667),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0.45098, 0.701961, 1, 0.74902), Color(1.5, 1.5, 1.5, 1)]
+"values": [Color(0.45098, 0.701961, 1, 0.74902)]
 }
-tracks/3/type = "value"
+tracks/3/type = "method"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("EnemyHitbox:process_mode")
+tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:collision_layer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("FogClumps:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("DamageOverTimeArea:process_mode")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [4]
 }
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(3),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"death_effect"
-}]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7uy7i"]
 _data = {
 "chargeup": SubResource("Animation_2adtf"),
-"explode": SubResource("Animation_m58tf")
+"explode": SubResource("Animation_m58tf"),
+"spawn": SubResource("Animation_lsn44")
 }
 
 [sub_resource type="Curve" id="Curve_8ln7e"]
@@ -184,9 +275,6 @@ scale_min = 0.04
 scale_max = 0.06
 scale_curve = SubResource("CurveTexture_4dpie")
 color = Color(0.827451, 0.929412, 1, 1)
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_xhnoi"]
-radius = 4.5
 
 [sub_resource type="Gradient" id="Gradient_ltlji"]
 offsets = PackedFloat32Array(0, 0.205202, 0.517341, 1)
@@ -364,6 +452,9 @@ shader_parameter/ColorParameter = Color(0.611765, 0.8, 1, 1)
 material = SubResource("ShaderMaterial_youx8")
 size = Vector2(6, 6)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_xhnoi"]
+radius = 4.5
+
 [node name="IceSprite" type="CharacterBody3D"]
 collision_layer = 8
 collision_mask = 26
@@ -382,30 +473,19 @@ avoidance_enabled = true
 radius = 3.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "spawn"
 libraries = {
 "": SubResource("AnimationLibrary_7uy7i")
 }
 
 [node name="SnowParticles" type="GPUParticles3D" parent="."]
 cast_shadow = 0
-emitting = false
 amount = 30
 lifetime = 6.0
 one_shot = true
 explosiveness = 0.98
 process_material = SubResource("ParticleProcessMaterial_j2xt2")
 draw_pass_1 = ExtResource("2_6lw04")
-
-[node name="EnemyHitbox" type="Area3D" parent="."]
-process_mode = 4
-collision_layer = 8
-collision_mask = 0
-script = ExtResource("3_ovd7j")
-damage = 24
-frostbite_buildup = 9
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHitbox"]
-shape = SubResource("SphereShape3D_xhnoi")
 
 [node name="FogClumps" type="GPUParticles3D" parent="."]
 emitting = false
@@ -426,6 +506,22 @@ opponent_hitboxes = ["PlayerHitbox"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHurtbox"]
 shape = SubResource("CapsuleShape3D_s45hv")
+
+[node name="DamageOverTimeArea" type="Node3D" parent="."]
+process_mode = 4
+script = ExtResource("4_n1e1v")
+time_btwn_damage_ticks = 0.3
+
+[node name="EnemyHitbox" type="Area3D" parent="DamageOverTimeArea"]
+process_mode = 4
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("3_ovd7j")
+damage = 3
+frostbite_buildup = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DamageOverTimeArea/EnemyHitbox"]
+shape = SubResource("SphereShape3D_xhnoi")
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

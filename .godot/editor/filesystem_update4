@@ -58,3 +58,4 @@ res://levels/x_boss_level/x_boss_level1_viewcontrol.tscn
 res://enemies/x_boss.tscn
 res://globals.gd
 res://enemies/ice_sprite.gd
+res://general_scripts/damage_over_time_area.gd
