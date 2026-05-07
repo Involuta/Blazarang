@@ -114,6 +114,7 @@ var transparent_mat := preload("res://textures/clear_tile.tres")
 @onready var head_mesh := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
 @onready var body_light := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/BodyLight
 @onready var blizzard_hitbox := $BlizzardDOT
+@onready var snowfall_particles := $SnowfallParticles
 @onready var blizzard_particles := $BlizzardParticles
 @onready var particle_attractor := $ClarityBodyMeshes/Armature/Skeleton3D/Hat_2/ParticleAttractor
 @onready var body_cone_fog := $FogVolume/BodyCone
@@ -242,7 +243,7 @@ func _physics_process(delta):
 		blizzard_hitbox.process_mode = PROCESS_MODE_INHERIT
 	else:
 		blizzard_hitbox.process_mode = PROCESS_MODE_DISABLED
-	blizzard_particles.global_position = cotu.global_position + 15*Vector3.UP + cotu.get_camera_fwd_dir_lateral()
+	snowfall_particles.global_position = cotu.global_position + 15*Vector3.UP
 	
 	if env_autochange:
 		# Keep dist to Cotu value within fog bounds
@@ -275,10 +276,11 @@ func _physics_process(delta):
 		level_env.fog_light_color = sky.sky_horizon_color
 		level_env.volumetric_fog_emission = sky.sky_horizon_color
 		
-		# Blizzard particle intensity
-		var min_blizzard_particles_speed_scale = 1.0
-		var max_blizzard_particles_speed_scale = 3.0
-		#blizzard_particles.speed_scale = lerpf(min_blizzard_particles_speed_scale, max_blizzard_particles_speed_scale, cotu_dist_lerp_val)
+		# Snowfall particle intensity. Amount isn't changed bc that causes glitchy behavior
+		snowfall_particles.lifetime = lerpf(12, 6, cotu_dist_lerp_val)
+		snowfall_particles.process_material.initial_velocity_min = lerpf(1.2, 6, cotu_dist_lerp_val)
+		snowfall_particles.process_material.initial_velocity_max = lerpf(2.4, 9, cotu_dist_lerp_val)
+		snowfall_particles.process_material.emission_ring_radius = lerpf(18, 9, cotu_dist_lerp_val)
 		
 		# Body/feet fog
 		# Body fog doesn't change
@@ -542,7 +544,7 @@ func contract_blizzard_safezone_jump_shot():
 	contract_blizzard_safezone(safezone_contract_frames_jump_shot)
 
 func expand_blizzard_safezone(frame_duration: int):
-	blizzard_particles.emitting = false
+	snowfall_particles.emitting = false
 	env_autochange = false
 	
 	var t = get_tree().create_tween().set_parallel()
@@ -583,7 +585,7 @@ func contract_blizzard_safezone(frame_duration: int):
 	await get_tree().create_timer(frames(frame_duration)).timeout
 	# contract_blizzard_safezone transitions to the env the autochanging env would be if Cotu were within min_fog_dist, aka when cotu_dist_lerp_val is 0
 	cotu_dist_lerp_val = 0.0
-	blizzard_particles.emitting = true
+	snowfall_particles.emitting = true
 	env_autochange = true
 
 func backflip_mvmt():

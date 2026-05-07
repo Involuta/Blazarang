@@ -1,10 +1,10 @@
+GPUParticles3D
 DamageOverTimeArea
 CollisionShape3D
 EnemyHurtbox
 Node3D
 GPUTrail3D
 Trail3D
-GPUParticles3D
 Hitbox
 FogVolume
 GPUParticlesAttractorSphere3D
@@ -30,4 +30,3 @@ Label3D
 Node
 AudioStreamPlayer3D
 AudioStreamPlayer
-AnimatedSprite3D
