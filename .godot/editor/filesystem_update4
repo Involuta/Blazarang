@@ -53,3 +53,5 @@ res://enemies/enemy_anims/clarity_stomp_right.res
 res://enemies/enemy_anims/clarity_wait_lowered_left.res
 res://enemies/enemy_anims/clarity_wait_raised_left.res
 res://enemies/clarity.gd
+res://enemies/ice_sprite.gd
+res://enemies/boss_hurtbox.gd

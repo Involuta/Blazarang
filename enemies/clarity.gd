@@ -75,7 +75,7 @@ var aiming_at_target := true
 @export var base_head_brightness := 0.0
 @export var full_head_brightness := 6.0
 
-var staggerable := false # When head is exposed but not glowing, 
+var staggerable := false # When head is exposed but not glowing, staggerable is false
 @export var stagger_damage_threshold := 10.0 # Single hit damage to head necessary to stagger
 
 @export var wait_lowered_left_min_secs := .6
@@ -181,7 +181,7 @@ func set_staggerable(state: bool):
 	staggerable = state
 
 func on_head_hit(damage: int):
-	if damage >= stagger_damage_threshold and behav_state != STAGGERED:
+	if staggerable and damage >= stagger_damage_threshold and behav_state != STAGGERED:
 		switch_to_staggered()
 
 func switch_to_staggered():
