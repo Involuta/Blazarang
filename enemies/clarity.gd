@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 @export var entity_name := "Clarity" # Used by globals to assign hit score, kill score, etc. (Health is determined by hurtbox. entity_name doesn't affect health so that hurtboxes have more control over health)
 
+# Behav state is controlled within code bc multiple attacks can occur w/o a change in behav state (e.g. a series of blade attacks in circling state)
 enum {
 	STRAIGHT,
 	CURVED,
@@ -12,6 +13,7 @@ enum {
 var behav_state := CIRCLING
 var attacking := false # Set to true when attacking to prevent another attack from being queued
 
+# Look state is controlled within anim keyframes bc one anim can have multiple look states (e.g. jump shot, which goes from STOP or DIR to BODY FULL ROT to TARGET HEAD ARM BODY (which may be renamed TARGET LATERAL))
 enum LOOK_STATE {
 	DIR,
 	TARGET_HEAD, # Used when Clarity stops aiming at target while attacking but still looks at target with her head
@@ -94,7 +96,8 @@ var staggerable := false # When head is exposed but not glowing,
 	"DoubleSlice" : .2,
 	"Backflip" : .2,
 	"FlickSlice" : .2,
-	"LongSlice" : .2
+	"LongSlice" : .2,
+	"RegenShards" : .2,
 }
 
 var param_path_base := "parameters/conditions/"
@@ -102,9 +105,9 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 var transparent_mat := preload("res://textures/clear_tile.tres")
 @onready var arm_anim_tree := $ArmAnimationTree # Controls arm attacks
-@onready var arm_anim_player := $ClarityArmMeshes/AnimationPlayer # Plays stagger anim after anim tree is set inactive
+@onready var arm_anim_player := $ClarityArmMeshes/AnimationPlayer # Depends on Clarity.glb. Plays stagger anim after anim tree is set inactive
 @onready var body_anim_tree := $BodyAnimationTree # Controls walk anim
-@onready var body_anim_player := $ClarityBodyMeshes/AnimationPlayer # Plays stagger anim after anim tree is set inactive
+@onready var body_anim_player := $ClarityBodyMeshes/AnimationPlayer # Depends on ClarityBodyMeshes.glb. Plays stagger anim after anim tree is set inactive
 @onready var mhp := $MeleeHitboxPivot
 @onready var arm_meshes := $ClarityArmMeshes
 @onready var body_meshes := $ClarityBodyMeshes
@@ -400,6 +403,10 @@ func switch_to_circling():
 	behav_state = CIRCLING
 	look_state = LOOK_STATE.TARGET_HEAD_ARM_BODY
 
+func switch_to_special():
+	behav_state = SPECIAL
+	# Look state isn't set bc look state often changes in special attacks (e.g. jump shot goes from STOP to BODY FULL ROTATION to TARGET HEAD ARM BODY ROTATION)
+
 func queue_attack():
 	attack_queued = true
 	match(phase):
@@ -526,7 +533,7 @@ func wait_raised_left():
 	arm_state_machine.travel("LeftSliceFromWait")
 
 func jump_shot_mvmt():
-	behav_state = SPECIAL
+	switch_to_special()
 	var t = get_tree().create_tween()
 	var full_dash_vec = full_dash_speed * body_meshes.transform.basis.z
 	t.tween_property(self, "velocity", full_dash_vec, frames(97))
@@ -578,7 +585,7 @@ func contract_blizzard_safezone(frame_duration: int):
 	t.tween_property(level_env, "volumetric_fog_emission", Color("#65768f"), frames(frame_duration))
 	#t.tween_property(particle_attractor, "strength", 0, frames(frame_duration/2))
 	# Body fog
-	t.tween_property(body_cone_fog.material, "shader_parameter/density", 0.3, frames(frame_duration/2))
+	t.tween_property(body_cone_fog.material, "shader_parameter/density", 0.3, frames(frame_duration/2.0))
 	#t.tween_property(feet_fog.material, "shader_parameter/density", 0.15, frames(frames/2))
 
 	await get_tree().create_timer(frames(frame_duration)).timeout
@@ -588,7 +595,7 @@ func contract_blizzard_safezone(frame_duration: int):
 	env_autochange = true
 
 func backflip_mvmt():
-	behav_state = SPECIAL
+	switch_to_special()
 	var t = get_tree().create_tween()
 	var full_dash_vec = 3*full_dash_speed*-body_meshes.transform.basis.z + .6*full_dash_speed*Vector3.UP
 	t.tween_property(self, "gravity", 0, 0)
@@ -599,3 +606,11 @@ func backflip_mvmt():
 	t.tween_interval(frames(100))
 	# Return to base pose starts after the above interval
 	t.tween_property(self, "velocity", full_dash_speed * Vector3.ZERO, 0)
+
+func regen_shards_mvmt():
+	switch_to_special()
+	var t = get_tree().create_tween()
+	var move_dir := 3 * walk_speed * target.global_position.direction_to(global_position)
+	t.tween_property(self, "velocity", Vector3(move_dir.x, 0, move_dir.z), 0)
+	t.tween_property(self, "velocity", Vector3.ZERO, frames(162))
+	await get_tree().create_timer(frames(375)).timeout
