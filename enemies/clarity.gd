@@ -612,5 +612,4 @@ func regen_shards_mvmt():
 	var t = get_tree().create_tween()
 	var move_dir := 3 * walk_speed * target.global_position.direction_to(global_position)
 	t.tween_property(self, "velocity", Vector3(move_dir.x, 0, move_dir.z), 0)
-	t.tween_property(self, "velocity", Vector3.ZERO, frames(162))
-	await get_tree().create_timer(frames(375)).timeout
+	t.tween_property(self, "velocity", Vector3.ZERO, frames(84))
