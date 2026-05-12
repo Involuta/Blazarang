@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://i2xuy407tpbj"]
+[gd_scene load_steps=39 format=3 uid="uid://i2xuy407tpbj"]
 
 [ext_resource type="Script" path="res://enemies/ice_sprite.gd" id="1_h7jw6"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="2_6lw04"]
@@ -6,13 +6,12 @@
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="4_kf4e5"]
 [ext_resource type="Script" path="res://general_scripts/damage_over_time_area.gd" id="4_n1e1v"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s45hv"]
-height = 1.0
+[sub_resource type="BoxShape3D" id="BoxShape3D_fp5fu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qf6aq"]
 resource_local_to_scene = true
 transparency = 4
-albedo_color = Color(1.5, 1.5, 1.5, 1)
+albedo_color = Color(0.45098, 0.701961, 1, 0.74902)
 roughness = 0.12
 refraction_enabled = true
 
@@ -86,10 +85,10 @@ tracks/1/path = NodePath("MeshInstance3D:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true, false]
+"values": [false]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -98,10 +97,10 @@ tracks/2/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1.5, 1.5, 1.5, 1), Color(0.627451, 0.792157, 1, 1), Color(1.5, 1.5, 1.5, 1), Color(0.627451, 0.792157, 1, 1), Color(1.5, 1.5, 1.5, 1)]
+"values": [Color(1.5, 1.5, 1.5, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -110,7 +109,7 @@ tracks/3/path = NodePath("FogClumps:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.3),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -122,10 +121,10 @@ tracks/4/path = NodePath(".:collision_layer")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [8, 0]
+"values": [0]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -134,10 +133,10 @@ tracks/5/path = NodePath("DamageOverTimeArea:process_mode")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.3, 5),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [4, 0, 4]
+"values": [0, 4]
 }
 tracks/6/type = "method"
 tracks/6/imported = false
@@ -146,7 +145,7 @@ tracks/6/path = NodePath(".")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0.3),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -452,6 +451,9 @@ shader_parameter/ColorParameter = Color(0.611765, 0.8, 1, 1)
 material = SubResource("ShaderMaterial_youx8")
 size = Vector2(6, 6)
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s45hv"]
+height = 1.0
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_xhnoi"]
 radius = 4.5
 
@@ -461,10 +463,11 @@ collision_mask = 26
 script = ExtResource("1_h7jw6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_s45hv")
+shape = SubResource("BoxShape3D_fp5fu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+visible = false
 mesh = SubResource("BoxMesh_adun2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -505,7 +508,6 @@ opponent_hitboxes = ["PlayerHitbox"]
 shape = SubResource("CapsuleShape3D_s45hv")
 
 [node name="DamageOverTimeArea" type="Node3D" parent="."]
-process_mode = 4
 script = ExtResource("4_n1e1v")
 time_btwn_damage_ticks = 0.3
 
