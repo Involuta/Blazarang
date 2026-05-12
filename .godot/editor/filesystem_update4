@@ -1,10 +1,8 @@
-res://enemies/clarity.tscn
+res://enemies/clarity_head.tscn
 res://textures/clear_tile.tres
-res://enemies/enemy_hurtbox.gd
 res://ui/flash.gdshader
 res://ui/glitch.gdshader
 res://glb_meshes/snowflake_particle_mesh.res
-res://enemies/enemy_anims/clarity_regenshards.res
 res://shaders/black_outline.gdshader
 res://textures/noise_texture_2d.tres
 res://shaders/smoke_LOD.tres
@@ -28,9 +26,9 @@ res://glb_inherited_scenes/cotu_outline.gdshader
 res://general_scripts/skygradient.gdshader
 res://glb_inherited_scenes/mite_hills_ground.gdshader
 res://shaders/sobel_outline.gdshader
-res://enemies/clarity_head.tscn
 res://levels/snow_level/snow_level_test_env.tscn
 res://enemies/ice_sprite.tscn
+res://enemies/clarity.tscn
 res://enemies/enemy_anims/clarity_backflip.res
 res://enemies/enemy_anims/clarity_doubleslice_left_delayed.res
 res://enemies/enemy_anims/clarity_doubleslice_left_immediate.res
@@ -42,6 +40,7 @@ res://enemies/enemy_anims/clarity_raise_left_fast.res
 res://enemies/enemy_anims/clarity_raise_left_slice_fast.res
 res://enemies/enemy_anims/clarity_raise_left_slow.res
 res://enemies/enemy_anims/clarity_raise_right_slice.res
+res://enemies/enemy_anims/clarity_regenshards.res
 res://enemies/enemy_anims/clarity_singleshot_left.res
 res://enemies/enemy_anims/clarity_spiral.res
 res://enemies/enemy_anims/clarity_stagger.res
@@ -53,5 +52,3 @@ res://enemies/enemy_anims/clarity_stomp_right.res
 res://enemies/enemy_anims/clarity_wait_lowered_left.res
 res://enemies/enemy_anims/clarity_wait_raised_left.res
 res://enemies/clarity.gd
-res://enemies/ice_sprite.gd
-res://enemies/boss_hurtbox.gd

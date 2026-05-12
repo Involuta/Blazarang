@@ -475,9 +475,11 @@ libraries = {
 
 [node name="SnowParticles" type="GPUParticles3D" parent="."]
 cast_shadow = 0
+emitting = false
 amount = 30
 lifetime = 6.0
 one_shot = true
+preprocess = 0.3
 explosiveness = 0.98
 process_material = SubResource("ParticleProcessMaterial_j2xt2")
 draw_pass_1 = ExtResource("2_6lw04")
