@@ -1,4 +1,4 @@
-Blazarang Ideas Doc Backup May 2 2026
+Blazarang Ideas Doc Backup May 14 2026
 
 Production Processes
 
@@ -328,18 +328,48 @@ Getting a Super Badge can unlock Triplets
 Surviving Clarity can unlock Angels
 Defeating Clarity can unlock The Edge and Darkness
 
-Gameplay Progression: what does each boss make you do?
-Gauntlet
-Evade attacks with running
-Attack with rose instant rethrows or dodges, both work
-X
-Evade attacks with running and some dodging
-Attack with mostly rose instant rethrows and run away to get to optimal dps distance
-Clarity
-Evade attacks with dodging and some running
-Attack with mostly rose power throws or the ax
-
-
+Gameplay Progression: what does each level/boss make you do?
+Each element of the fight is rated by difficulty from 1 (or in special cases 0) to 5. Higher difficulty = more complex solution & lower margin for error
+Gauntlet Variant 1: 4.5/20
+Evasion: 1
+Primarily running
+Dodging is useful but optional
+Positioning: 1
+Stay away from melee enemy threat ranges
+Not very strict since all attacks are easily strafed or backed (“backed” = dodged by backing away from enemy)
+Aim: 1
+Very little precision is necessary since targets are everywhere
+Grounded aim is occasionally helpful against shields and gunners
+Homing is completely optional (except for gunners on high ground, which are trivial)
+DPS: 1.5
+Optimal DPS is irrelevant since enemies have low health. The only exception is when the miniboss spawns, where it’s best to kill it before additional enemies spawn. Miniboss + enemies is challenging, but not super challenging since keeping distance from the enemies is so effective
+X: 9/20
+Evasion: 2
+Much running
+Some dodging is necessary
+Positioning: 2.5
+Stay away from his melee threat range. Dangerous but not fatal since you can dodge
+Keep him within your optimal DPS range (middle to end of rose petal), which has a sizable impact on DPS
+Stay within arena bounds
+Stay away from head piece bombs
+Aim: 2
+Good grounded aim is necessary since there’s only 1 small target, but you can use the rose, which makes hitting him a lot easier
+Homing is helpful and makes a good difference
+DPS: 2.5
+Optimal DPS is necessary or else you won’t finish him by the end of the time limit
+Clarity: 10/20
+Evasion: 3
+Running is useless
+Well timed dodges of her arm and her minions are necessary
+Positioning: 2
+Stay in the narrow safe ring between the outer blizzard and her head snowfall. She largely does this on her own since she circles around you
+Stay away from her minions’ snow clouds
+Aim: 3.5
+Requires precise aim and timing to hit her small weak spot right before her attack. You cannot rely on grounded weapons sweeping the area since the weak spot’s too high up
+Head is moving a bit, but not very much
+DPS: 2
+Optimal DPS is important since, if you take too long, the blizzard safezone disappears. This isn’t as urgent as X’s time limit; whereas with X the fight immediately ends, here you can regenerate with stabilizers even when the blizzard is constantly dealing damage
+Optimal DPS isn’t as emphasized because the fight wants you to take your time, be patient, and wait for the perfect opportunity to attack. BUT if the time limit were abandoned entirely, the player would probably be confused and feel like the game’s inconsistent
 
 
 Tasks
@@ -543,7 +573,7 @@ Delete that note at the top of the doc explaining the errors
 Give 8164 a shockwave ring when he ascends for LungeFacerain if the dist he dashes is above a certain threshold
 Fix X Icon teleporting to its positions sometimes - as it turns out, this is likely caused by lag, so it’s not a bug to be fixed
 Add straight dash attack to force player to react to whether he teleports or not (just an idea that should be tested)
-There are some reasons why this may be bad: X is an early game boss, and the player already needs to keep track of him, the lasers, the rang(s) (mostly the rose), and the bombs. With so much to keep track of, adding reaction-based gameplay might feel unfair. But Blazarang should feel challenging as a whole to the average player, not easy, so the skill floor should be high enough to reflect that. Also, X is a gatekeeper boss: he tests the player’s ability to react to the boss and manage the rangs and keep track of the environment. Create a dash attack and try it out, and if it makes the fight more fun, keep it
+There are some reasons why this may be bad: X is an early game boss, and the player already needs to keep track of him, the lasers, the rang(s) (mostly the rose), and the bombs. With so much to keep track of, adding reaction-based gameplay might feel unfair. But the game should feel challenging as a whole to the average player, not easy, so the skill floor should be high enough to reflect that. Also, X is a gatekeeper boss: he tests the player’s ability to react to the boss and manage the rangs and keep track of the environment. Create a dash attack and try it out, and if it makes the fight more fun, keep it
 The above idea was rejected due to being too difficult for new players. Empathize with a new player; even if they are comfortable with attacking and dodging, they have no idea what X does or what his attacks are. The player will most likely consider X’s dash forward as a threat and dodge it at first, then eventually come to the realization that the dash doesn’t do any damage and is just a distraction for the followup, which is corroborated by the fact that the dash anim has no orange elements (orange = damaging). With X not having straight dash attacks, the player gets the satisfaction of realizing how X works, and is granted an easy success for figuring it out for phase 1. The player then adapts their knowledge of the first phase to anticipate attacks in phase 2.
 Try adding horizontal dodge (mostly for phase 1)
 In Follow state, if Cotu throws the rose normally or with an instant rethrow and the angle btwn camera’s fwd vec and the vec from Cotu to X is within a certain threshold, X does a left or right dodge depending on whether the rang will be thrown to the camera’s left or right
@@ -2219,7 +2249,7 @@ Boss punishes the player for running and rewards the player for fighting close-u
 Blizzard fills entire arena except for a circular clearing around Clarity
 Boss punishes player for attacking constantly and rewards player for waiting for the perfect moment to strike
 Clarity spends quite a lot of time just strafing, tempting the player to attack and stressing them out due to the accumulating frostbite
-Idea: Clarity has a weak spot under her “hat” OR in her chest shard. It’s exposed at certain points on every attack (vulnerability timings vary with each attack). Easy to dodge attacks expose the weak spot for short periods of time, while difficult attacks expose it for longer. If you hit it with the ax, she gets stunned and takes heavy damage
+Idea: Clarity has a weak spot under her “hat” OR in her chest shard. It’s exposed at certain points on every attack (vulnerability timings vary with each attack). Easy to dodge attacks expose the weak spot for short periods of time, while difficult attacks expose it for longer. If you hit it with a damaging enough single hit, she gets stunned and takes heavy damage
 The weak spot disappears in phase 3 bc the weak spot represents asymmetry/imperfection, and phase 3 represents perfect symmetry
 Idea: Clarity parries/blocks attacks with an ice wing, not her arm shard
 Idea: Player gets to choose whether to send the hub ship through Clarity’s realm during phase 3
@@ -2272,16 +2302,15 @@ Pilot: “...You know, I remember looking at this void a while back, on a map. I
 Cotu looks at Pilot
 Pilot: “There were more stars. Dotted all along the edges. But now they’re gone.”
 Cotu: “Maybe they fused with the nearby strands.”
-Pilot: “No, gravity doesn’t work that fast. What must have happened was…this blizzard consumed them all. It ate the stars.”
-Cotu: “...That’s crazy.”
+Pilot: “No, the gravity’s not strong enough there to do that so quickly. I think it was this blizzard…the blizzard consumed them all. It ate the stars.”
 A long silence.
-Cotu: “Anything else you want to talk about?”
+Cotu: “I’m sorry Pilot. I failed you.”
 Pilot doesn’t respond
 Cotu: “Pilot?”
 Cotu: “...”
-Cotu: “X…can you-”
+Cotu: “The Gauntlet will find us. Mike will find us. Someone will…”
 Cotu freezes
-Cotu’s frostbite status naturally builds up over time. Some thing(s) in the fight (could be certain attacks, environment zones/hazards, etc.) increase Cotu’s frostbite status on contact
+Cotu’s frostbite status naturally builds up over time. Some thing(s) in the fight (could be certain attacks, environment zones/hazards, etc.) increase Cotu’s frostbite status on contact → these were changed in implementation, mostly simplified; see “Changes from initial concept”
 Frostbite has 3 stages:
 Stage 0 (no frostbite): Cotu behaves normally, but after enough frostbite buildup is accumulated, he reaches stage 1
 Stage 1 (Ominous): Stability regen and movement are slightly slowed, but stability cost of all abilities (dodging, attacking, etc.) decreases
@@ -2317,6 +2346,7 @@ Jump Shot: it keeps its mvmt dir but dashes, then jumps
 Square: it moves in a specific path (to a point above the target, then up, then directly down onto the target)
 Comet’s icon is a ring bent to look like a V when viewed from the front. It floats beneath the gem and above the dress, making it look like a collar
 Idea: ring is bent to look like an M; it’s essentially the same as the V but with 3 bends instead of 2
+Alt idea: icon is a giant snowflake eye that floats behind Clarity and watches the target creepily. It also telegraphs certain attacks
 Arena contains a large central ice pillar that rises into an ice tree canopy like a baobab tree
 Parry Countercombo (needs ≥4 shards): used when Comet deflects the roserang (idea: only when Comet deflects the roserang when using a certain defensive stance). Comet dashes forward with the sword shard at her side and trailing behind her, then slashes up at the target with the sword while spinning in the slash direction. At the same time as the slash, she leaps backward high in the air and throws 3 shards down and at the target while continuing the spin slash airborne. In the air, her sword ends up by her side as the she descends back to the ground gracefully
 Jump Shot (needs 6 shards): Comet dashes in its current mvmt dir, leaps into the air, and points its spears at the target while they revolve around the gem, forming a cannon. The arm shard shoots from the cannon, blasting the gem backward and the shards outward, forming a star shape. The shards and the gem pause and stay suspended in the air for a moment, then the shards fold back around the gem 1 by 1 to form the dress again (dress faces away from the target) as the gem transitions to its next move (either floating downward or another attack). The projectile creates a frost blast on impact
@@ -2785,32 +2815,141 @@ Make wait_lowered_left(), which waits, then teleports to one of the 3 raise left
 Make wait_raised_left(), which waits, then teleports to left slice from wait
 Make WaitLoweredLeft and WaitRaisedLeft call their respective funcs
 Make head tilt down on right slice and tilt up on left raise so it’s not just tilted up the entirety of the time she’s waiting on the left side
-Implement Square anim + mvmt
+Implement Square (edit: changed to Backflip) anim + mvmt
 This anim can be used when the player happens to be standing behind and to the right of Clarity, which is where jump shot looks bad
 Issue: Clarity’s supposed to be intimidating, and with the current concept for Square, she flies high into the sky and stays unseen for a long time before landing, making her less oppressive (because she’s not there) and making the gameplay more tedious
-Current task
 Solution 1: instead of flying high into the sky, she crouches down, then elegantly backflips into the air (potentially spinning into the jump) while flying backwards and slides back onto the ground instead of slamming. This also makes her more unique than X, who does a similar straight up → straight down slam (Triangle while headless → Volcano Dive)
 Inspired by Kuroki’s huge backflip when transitioning to phase 2 in Sifu
 How does she attack now? Idea: she shoots somewhere between 2-4 shards in a spreadshot
+Idea: try making her stop, then dive when she shoots the shards instead of finishing the backflip
 Make Backflip anim
+Code mvmt
+Add backflip to anim tree
+Add snow cloud to hide Clarity when she hits the ground
+After testing, I don’t like how big the mvmt is for Backflip. It doesn’t feel like Clarity. She’s supposed to have slower mvmts broken up by sudden small outbursts, and when she does do big mvmts, she should slowly accelerate into them, not go from stationary to full speed instantly like in the Backflip. This sudden acceleration implies that she has speed/mvmt capability that she should not have, and it makes her feel more like X than herself
+After some more testing, I actually kinda like how the Backflip looks. Give it a while before coming back to the Backflip before making a final decision
+Implement LongSlice
+Implement FlickSlice
+Re-add arm hitbox and tiny particles since they got accidentally deleted with the DoubleSlice rework
+Add trail effect to arm shard
+Allow the player to destroy ice sprites
+Give ice sprites hurtboxes (and health in globals)
+Make them explode on death
+Separate charge up from explode anim
+When ice sprite gets close, do chargeup anim. When chargeup anim ends, do explode anim
+If at any point ice sprite dies, immediately explode
+Remove the NavAgent, which makes their mvmt needlessly unpredictable. Simply decrease their jump vel when close to the target
+Implement RegenShards
+Reimport Clarity.glb to save RegenShards to an anim file
+Add anim to anim tree
+Add RegenShards as an attack choice in code
+Make RegenShards mvmt
+Add functional keyframes to RegenShards
+Mvmt and attack status
+Head tilt/glow
+Hurtbox is vulnerable
+Rethink how Clarity’s combat should play out
+After testing, I realized that the core gameplay loop involved repeatedly switching my attention between Clarity and the ice sprites, which felt similar to switching between the doors and the camera in Five Nights at Freddy’s. This also made me realize that the arm rising was the most important telegraph for an upcoming attack. The head was not as useful bc it glowed too soon before the attack. As a result, FlickSlice and LongSlice (as they are now) are conceptually counterintuitive to the core gameplay loop. If the player happens to be focused on the sprites, the quick/sneaky attacks will likely catch the player off guard, which feels unfair due to the lack of telegraphing.
+To put the issue above another way, look at the core gameplay loop below. FlickSlice sneakily moves the arm in its startup and LongSlice raises the arm quickly. Both of these attacks don’t give the player enough time to prepare to dodge or prepare to hit the head bc they’re still in ice sprite/dress mode
+Here’s the core gameplay loop I think I should emphasize, which should feel fair and challenging:
+Clarity is passive → player hits the ice sprites and Clarity’s dress shards while periodically checking the arm
+Clarity raises the arm slowly → player notices the arm rising and either prepares to dodge or prepares to hit the head
+Player dodges the attack or staggers Clarity
+Player switches back to looking at ice sprites and hitting the dress shards (while periodically checking the arm)
+2 potential problems with the above loop:
+Boring: attacking the enemies and the legs is really simple and easy
+Unfair. When Clarity attacks, she demands your full attention, and if there just happens to be an enemy nearby, you’re screwed
+After testing, come back to the problems above and see if they’re still present
+Potential solutions:
+When Clarity gets staggered, a shockwave rings out that instantly kills all nearby ice sprites
+Periodically, body shards do their own attacks that challenge the player’s positioning instead of just timing (e.g. projectiles parallel to ground, stabs into the ground to create frost fields)
+Give LongSlice long startup time
+Problem: to distinguish itself from double slice, long slice rises higher than it, which ends up getting unnaturally close to Clarity’s hat. Consider not using it at all and substituting it for body shard attacks
+Conceptualize body shard attacks that challenge the player’s positioning (including existing concepts)
+Idea: make the shards write like pens since they look like pens
+Most shard attacks are smaller versions of the most basic fundamental body shard attacks from phase 1
+Wing Shot (needs ≥ 2-3 shards): Comet gathers 2-3 shards into a wing as the dress rotates, brings the wing backward around either its left or right side, and up (similar to how X brings his arm backward right before Right Arm Slice), then throws the shards from either its left or right side (e.g. if wing was brought backward around its right side, shards are shot from its right side). The shards all travel in the direction of the target; one of them stops short of the target, one of them directly hits the target’s position, and the last hits behind the target
+Wing Uppercut (≥3): Comet gathers 3 shards into a wing as the dress rotates, brings the wing backward around either its left or right side, and down, then slashes forward (fwd = dir to target) and upward while rotating in the slashing direction similar to the spinning uppercut from Mergo’s Wet Nurse in Bloodborne. After the uppercut, the shards are pointed downward and stab the ground in front of the Comet. The shards then become snowmen
+Slice Combo (6): while Comet slowly floats towards the target, a shard from the left performs a sweeping slice in front of Comet, then a shard from the right does the same, then left, then right, then the remaining 2 shards are simultaneously shot directly at the target
+Shards Cross: 2 shards orient themselves toward a point in front of Clarity (i.e. on the vec from Clarity to the target), then move toward that point, crossing through each other and forming an X
+Dodge by walking in a cardinal direction
+Issue: this is similar to X’s lasers
+Shards Frost Field: 2 shards orient themselves toward a point in front of Clarity, then stab down into the ground. A chargeup anim plays, then a frost field spawns at the point
+Dodge by running away from the explosion
+Shards Rainbow Unified: 2 shards travel in a circular path in front of Clarity
+Dodge by staying the right distance from Clarity
+Shards Rainbow Opposite: same as rainbow unified but the shards start from opposite ends and move in opposite directions
+Dodge by staying the right distance from Clarity
+Shards Front Thrust: 2 shards thrust forward laterally, then turn upright as they are recalled to the dress
+Dodge by staying in the center or moving far left/right
+Tricky Single Shot: 1 shard is placed in an awkward/unexpected position relative to Clarity and shoots
+Shard Sequence: Clarity does a long preset pattern of shard attacks, wherein she continuously and sequentially loads up, shoots, and retracts shards
+Load new shard, shoot previous shard, and retract previous previous shard all occur within the same action interval
+Intervals are synced to boss music
+The patterns should be reminiscent of the patterns from Phase 1, except here, the shards should probably only travel in straight lines (e.g. no spiral shot) so they’re more understandable/predictable
+One Shard Sequence: each shard attack uses 1 shard
+Two Shard Sequence: each shard attack uses 2 shards
+Mentally test Shard Sequence gameplay
+I think it’s a great addition because it forces the player to reposition instead of allowing them to stay in the same place the whole time, which completely wastes the player’s ability and desire to move.
+Current task
+Implement body shard attacks
+Make new Blender project that only contains Clarity’s dress shards
+Import the ClarityDressShards glb and make an inherited scene
+Here’s the plan for Clarity’s scene:
+Each dress shard is represented by a ClarityDressShards inherited scene, but with all other shards turned invisible
+When Clarity does a shard sequence, all 6 ClarityDressShards scenes run the same anim at the same time
+When a shard is loaded (moved into firing position), that ClarityDressShards scene stops moving and rotating with Clarity
+When a shard is fired, the same stopped behavior continues
+When a shard is retracted, ClarityDressShards slowly moves and rotates to match Clarity’s position
+How will the shards know when to start and stop following Clarity? We need callback keyframes in the anims. Which ClarityDressShards will have those callback keyframes? None of them. Export another glb from the same ClarityDressShards Blender project: ClarityDressShardsMaster. This will contain all functional keyframes and run alongside the other dress shards scenes, but not be visually shown 
+(Skip if you think it’s not relevant) Implement Phase 1
+It’s just a weak spot (the soul + the body’s weak spot in the same position), and the 6 dress shards. The weak spot stays in one position or slowly moves in a set path while 1 or more shards do a repeating pattern of mvmt (e.g. thrusting back and forth across a straight line). The player must cross the shards (or at least one of them) to get to the weak spot
+All of the components stay inside the blizzard safezone, which is much bigger than the ballroom dancer’s safezone but doesn’t move with her
+Shard patterns:
+2 shards thrust back and forth parallel to each other
+Same as above but the thrust path rotates about its center
+Alternating left and right wing shots
+Spiral: 3-4 shards are shot out and fly in Archimedean spirals (r = bθ where r = orbital radius from gem, b = a constant, and θ = orbit angle). Each shard has a different b. The middlemost shard will hit the target if the target remains in the same place throughout the shards’ flight
+If the boss uses 4 shards, the third closest/second farthest shard will hit the target
+Reconsider whether to do Double Slice Retreat. It has the same quick acceleration problem as Backflip
+I decided not to implement it, but some version of it may be used for Phase 1
 Make attacks that send Clarity so far away that she can do a projectile attack afterward instead of a melee
 This is to solve an older issue where Clarity doesn’t get far enough to do projectile attacks after jump shot (“Cotu gets to Clarity long before Spiral…”)
 Idea: bird form attacks. Clarity becomes a bird and poses in bird form for a little while (to telegraph that she’s doing something dangerous) before flying far away
 Idea: Swoop attack
 Mvmt is almost the same if not identical to sword Crucible Knight’s flying thrust in Elden Ring. Clarity flies in a straight line at the target and ends up far behind it. While flying, Clarity’s wings are spread, which cover her path in snow that acts the same as the blizzard
+Unfortunately, Clarity is incapable of looking like a bird. Birds have wings, a body, a tail, and a beak. Naturally, Clarity’s dress shards would form the wings, her hat becomes the body, the center shard becomes the beak, and the arm shard becomes the tail. This bird is really ugly bc the hat makes the body look too wide to be aerodynamic, the dress shards are too thick to resemble wings, the bird has no head (just the beak), and neither the wings nor tail have enough feathers or feather imitations. The animal Clarity matches the most is a jellyfish, which still has symbolic value. The bird form was supposed to symbolize Clarity’s desire for freedom, while the jellyfish symbolizes Clarity’s lack of intelligence and awareness, which actually suits this form of hers more. A bird would suit her final form where she achieves total clarity
+Idea: jellyfish form attacks. Clarity becomes a jellyfish and propels herself far away in the same way a jellyfish does
+Jet Dash: Clarity hops a bit into the air and suspends herself, defying gravity. While suspended, she tilts forward and spreads her dress shards out while tucking in her arm shard. She then compresses her dress shards and dashes forward while pushing a plume of snow in the opposite direction
 Idea: Spin
 Like an ice skater, Clarity leaps into the air, tucks in her arm and dress shards, and spins rapidly while decelerating to a stop midair. All of her dress shards then fire out in all directions, land, and become ice sprites. She then dives straight down into the ground and regenerates the shards
-Idea: Clarity turns into a bird by making her leg shards into wings (maybe the hat is the chest?) and does attacks in bird form
-The issue here is that 
 Jump Shot creates a huge frost field on impact
+Blizzard safezone shrinks to nothing if you take too long to defeat Clarity
 Idea: Whiteout - fog thickens, ice sprites spawn from the blizzard at an alarming rate. Clarity meanwhile does single slice stage progression (start passive → pause → subtle transition to aggressive → pause → subtle half windup → pause → subtle full windup → pause → attack)
 Idea: phase transition
 Clarity causes a huge whiteout, brightens the sky, and runs away. The player has a limited amt of time to find her before the sky begins to darken and the snow intensifies. When the sky gets too dark, the blizzard is reactivated. Somewhere in the snow, Clarity is in a tall sceptre form. The player must hit her head, which sits at the head of the staff, to deactivate the attack
 Idea: occasionally, songbird-like ice creatures will fly onto Clarity and stare at the target. They all fly away when she attacks, but there’s a slight chance they fly away beforehand to explore around
 Idea: Cotu can make snowballs and throw them with no stability cost (but making a snowball isn’t fast). Hitting an ice sprite with a snowball triggers its explosion
 
-Power Throw to Mark Rang Upgrade
-Power throw automatically homes to mark position when mark is active
+Make Different Game Mechanics Intersect; to create depth, you should be able to use multiple skills simultaneously
+Vid on Interesting Mechanics vs Depth: https://www.youtube.com/watch?v=Fuf_SpKCYVY
+One of the biggest issues I noticed with Blazarang is that you can only use either the rose or the ax at a time, not both simultaneously or rapidly. This limits the player’s creative expression. As the vid above explains, if there are a lot of different game mechanics in a game, but they don’t intersect, the game feels shallow. To combat this problem in Blazarang, try allowing the player to use both the rose and ax and possibly more simultaneously
+When the player unlocks the ax, they also gain the option to automatically instant rethrow when the rose hits Cotu
+Idea: a ghost hand instant rethrows the rose while Cotu himself does what the player wants
+Idea: when Cotu inputs a non-rose throw button right before the rose hits him (i.e. as if the player is using the that button to instant rethrow), something beneficial happens
+Ax
+Ax gets buffed?
+Rose gets thrown backwards?
+Shuriken
+Shuriken costs no stability
+Chakram (come back to this after you add Chakram)
+Chakram does a full circle instead of a semicircle (but the chakram doesn’t move faster, so the slash takes twice as long overall)
+When the player unlocks the ax, they also gain the option to automatically throw the ax. This means the ax is automatically thrown in whatever direction the player camera is looking (throw is omnidirectional if zoomed in), then detonated when it’s near an enemy, hits a wall, or travels its max distance, then automatically recalled, then automatically perfect caught
+Idea: ghost hand does the throwing, detonation, and recalling
+Additional synergy abilities
+Homing ax: if the player’s next roserang instant rethrow will be homing, and the player normal throws the ax such that the roserang hits Cotu in the last (instant_rethrow_window_secs) before the ax anim ends, the ax will be thrown as a homing throw, following the same targeting rules as a shuriken. The ax can still be detonated
+This knowledge is available when both the ax and homing instant rethrow are unlocked
+Power throw ax combo: if the ax was perfect caught and is now unthrown, then while holding power throw, press throw ax to throw both the powered roserang and ax at the same time in the same direction
 
 Chakram Rang
 Press throw button to spawn a chakram a few meters left/right of Cotu. The chakram immediately travels in a wide semicircle arc around Cotu and then disappears, functioning as a pseudo-melee attack
@@ -2823,10 +2962,8 @@ Chakrams deal high damage, but cannot be buffed
 Chakrams are finite. They recharge automatically like consumable abilities in Overwatch or Marvel Rivals. As soon as a chakram recharges, it deals self stability damage, but it costs no stability to throw them. Hold the throw button to autothrow them
 Hitting a stationary ax causes a massive explosion
 
-Add Hidden Techniques
-Hidden techniques are things the player can innately do, but the player doesn’t know how to do them. Spend skill points to unlock the knowledge on how to do them
-Homing ax: if the player’s next roserang instant rethrow will be homing, and the player normal throws the ax such that the roserang hits Cotu in the last (instant_rethrow_window_secs) before the ax anim ends, the ax will be thrown as a homing throw, following the same targeting rules as a shuriken. The ax can still be detonated
-Power throw ax combo: if the ax was perfect caught and is now unthrown, then while holding power throw, press throw ax to throw both the powered roserang and ax at the same time in the same direction
+Power Throw to Mark Rang Upgrade
+Power throw automatically homes to mark position when mark is active
 
 Revisit and Complete Balls Level (maybe, if you believe it’ll add more value to the gameplay)
 Make Ball Walker more crazy and dangerous
@@ -3064,14 +3201,16 @@ Once the prime factorization (PF) is complete, the boss celebrates and does a su
 Candy Cat
 Giant cat monster made of sugar crystals and candy bits
 Top of its head is 3 giant spikes forming a mask above its mouth, and its mouth looks like Denji’s from Chainsaw Man with big teeth and a wicked grin
-Mask spikes can fold back to form a mane, revealing crazy eyes underneath
+Mask spikes can fold back to form a mane, revealing crazy cat eyes and/or a bunch of tentacles underneath
 Head can twist around and upside down to make new expressions to frighten its enemy
 Back is covered in candy bits, chest is guarded by chocolate plates
 Tail is undecided, perhaps its soul floats on its tail like a ring?
-Moves smoothly and seductively
-Speaks Spanish with a deep distorted voice
+Moves like it’s naturally crazy/hyper but is trying to contain itself
+Speaks with a crazed distorted voice
+Idea: creates giant wormholes that travel incredibly long distances in the universe
+Idea: he plans to use the wormholes to kidnap Cotu and never get caught
 Idea: guards a secret wormhole that leads from the beginning of the game (gauntlet var 1) straight to the gala
-Uses the candy bits on its body as projectiles
+Uses the candy bits on his body as projectiles
 Song is calming, seductive, and insidious
 Idea: song has deep distorted lyrics
 So soft, so sweet, so nice
@@ -3081,6 +3220,7 @@ Why should a god be afraid to die?
 Idea: this is the kidnapper, not Future Blade and his goons. Candy Cat wants to kidnap Cotu so that Jessica will let him into the next tournament
 I want to have a kidnapper and a disqualified fighter to show that the gods aren’t just good or mentally-handicapped with good intentions (i.e. Clarity). It would make sense if the kidnapper and DQed were the same character
 Candy Cat, not Mike, is the one who made the deal with Jessica to gain great power in exchange for a random chance of failure. Cotu (or X) caught him in the act and got him DQed. Candy Cat now wants to kidnap Cotu and hold him hostage until Jessica (who’s in charge of the next tournament) allows Candy Cat to participate in it. He thinks that because She helped him before, She’ll help him again
+OR Candy Cat got disrespected by Cotu somehow in the tournament and is taking revenge by keeping him in his sticky realm (e.g. burying him in syrup and forgetting about him). He is petty and pathetic
 
 Projectile Spammer: Microwave
 Idea: before the fight, you can unlock an endgame-level super powerful upgrade that deflects or destroys projectiles somehow. Undecided if this is done through the icon, one of the rangs, or something else entirely
@@ -3199,7 +3339,7 @@ Don’t waste my time.
 This can’t be your best.
 Rough day?
 (If there has only been 1 win so far): I know that victory wasn’t a fluke.
-Idea: player gets to see microwave motivating its army and explaining that the reason why they are so powerful is that they hate Blazarang
+Idea: player gets to see microwave motivating its army and explaining that the reason why they are so powerful is that they hate Blazar
 “DEATH IS NOT NEARLY ENOUGH. WE MUST HUMILIATE HIM. WE MUST CRUSH HIS SPIRIT AS HE CRUSHED OURS. AND TO SUCCEED, WE NEED MORE POWER”
 “THE MERE THOUGHT OF HIS EXISTENCE OVERLOADS OUR CIRCUITS WITH FURY”
 “HIS VERY EXISTENCE IS A DIRECT INSULT TO US. WE MUST PUNISH IT IN FULL”
@@ -3287,7 +3427,7 @@ Completely limp and ragdoll; has no ability to move except with portals
 Occasionally throws his body from a portal to the target as an attack
 Sometimes gives the others items, usually Greg
 Greg: distraction
-Can naturally use any realm item to a basic extent and can do basic melee combat
+A normal humble guy with no powers and basic magic capability
 Fights aggressively to divert attention away from the others
 Sometimes does goofy animations to distract the player for Pilot and no name’s strongest attacks
 Mindset states: Greg switches between aggressive (armed or unarmed depending on what he’s holding) and passive randomly
@@ -3329,7 +3469,7 @@ Basic ranged weapons
 Pistol: tiny hitbox, instant travel time (ray), extremely long travel length
 Shoots rapidly 1-6 times per attack
 Gun clicks when Greg pulls the trigger but it’s out of ammo
-Throws the gun away into a portal when it’s empty
+Throws the gun away when it’s empty
 Ki blast projectiles: larger hitbox, slower travel time, dissipate after traveling medium distance (about half the length of the first gauntlet arena)
 Shoots at a medium rate 2-4 times per attack
 Ki blasts sometimes dissipate way too early (right in front of Greg)
@@ -3370,9 +3510,7 @@ Departure lines:
 “aw…”
 “noooo :(“
 Witch wand and hat: jumps into a portal and comes out another holding a wand and wearing a witch hat (find these assets for free online if possible). Casts a spell by saying the spell’s name and waving the wand in a specific way, playing chimes and piano music unique to the spell. He then jumps into a portal to discard the wand and hat
-Invisibility: makes no name invisible for 10 seconds
-Silence field: creates a circular field around the target’s position (doesn’t follow the target as it moves) that stops Cotu’s stability regeneration if he stands in it. The field doesn’t move after it’s spawned in. Lasts for about 20 seconds
-Many me’s (rare): has longer summon time than other spells. Periodically summons holographic Gregs from the ground around the target. HoloGregs spawn in a set radius around the target exactly like how skeletons spawn from a Graveyard in Clash Royale. The summoning field follows the target for its entire duration, unlike the silence field. HoloGregs have 1 HP and have the same AI as gauntlet melee enemies; simply follow the target and attack when in range. Greg celebrates after casting this the first time
+Invisibility: makes himself invisible for 10 seconds
 Clone: points to a spot on the ground with the wand and summons a clone of himself from it. Clone has health of a landmite and has same AI as gauntlet melee enemy; simply follow the target and attack when in range
 Snowball: waves the wand around a bit, then summons a snowball. While the spell is in flight, Greg is concentrating, wiggling the wand. The spell follows the target slowly before exploding after a certain amt of time has passed or when it reaches close range to the target, just like a Skull Ball from the Ball Walker. The explosion deals moderate damage and slows movement speed for a bit. Touching the snowball before the explosion will freeze Cotu entirely, leading to a followup. No name finishes his current action, then portals right in front of Cotu. He unleashes a flurry of punches, then ducks coolly. Right before the flurry ends, Greg appears from behind Cotu holding Pilot by the hands. Greg swings Pilot like a baseball bat into Cotu’s upper back right when no name ducks, launching Cotu backward and ragdolling him. Right as the swing ends, Pilot portals himself out
 Portal attacks
@@ -3382,27 +3520,21 @@ Front kick ragdoll: Pilot appears from a portal perpendicular to Cotu’s stumbl
 Baseball bat: steps out of the portal close to Cotu’s back and swings at his head horizontally with his current melee weapon. Simultaneously, no name steps out of a portal in front of Cotu and does a ducking liver punch. If one hit lands, the other must have landed as well. If one missed, both must have missed. If the hits land, there’s heavy hitstop during the impact (only do this if it’s not too difficult), then Cotu frontflips and lands on his butt
 One-time gags: only used once per playthrough, typically as a joke. In an interaction between 2 brothers, the third hyperaggressively attacks the target (typically no name)
 Pocketwatch: Greg holds a pocketwatch in his hands and looks at its back
-Greg: “WHAT?! Muahahahaha! Behold! The power of time itself!”
+Greg: “WHAT?! IT’S SO OVER! TAKE THIS!”
 The game pauses
 The player unpauses
 Greg: “...”
 Cotu: “Did something happen?”
-Greg: “Yo, it didn’t do anything? The inscription on the back said it stops time. Welp. Can’t trust everything you read.” *tosses the watch into a portal*
+Greg: “Yo, it didn’t do nothing? There’s some writing on the back that says it stops time. Welp. Can’t trust everything you read I guess.” *tosses the watch into a portal*
 Legendary Blade of Topuria: a flickering golden greatsword appears from a portal and floats in front of Greg
 Greg: “The Legendary Blade of Topuria?! Oh crap…I think I forgot to charge it last night.”
 The blade flickers and shuts off
 Greg: “Sorry Pilot!”
 Pilot (sad): “(sighs) Oh well…maybe another time… :(”
-Piece of the Death Equation: a little piece of paper
-Pilot: “Found this at the center of a black hole. What is it, Greg?”
-Greg: “A piece of the “Death Equation”…”
-Pilot: “?” *pop sound effect*
-Greg: “Well that’s too bad, we can’t do anything without the whole thing. Put it in the vault.”
-Pilot: “Okay then.”
 No name: ninja
 Terrible at using realm items, but expert hand-to-hand fighter
 Can use realm items that are simply an extension of his body
-Fights like Bruce Lee/Jon Jones since he has long thin limbs
+Fights like Bruce Lee (strong singular strikes)/Jon Jones (range control)/Asadula Imangazaliev (speed & spins) since he has long thin limbs
 Makes himself inconspicuous and moves frequently to lose your attention and sneak into attack range
 Cannot speak, write, or sign (except for basic expressions/gestures like yes, no, and maybe), but comprehension and instruction following is fine. Essentially has expressive aphasia
 When he tries to speak, it sounds like quiet white noise. Greg and Pilot tried to decode it to no avail
@@ -3448,26 +3580,20 @@ Noah
 Nino
 Niño
 Nanny
-Nonagon
-Nigeria
-Nuclear silo
-Notepad
 Nut butter
-New user
 Nelly
 Nickleback
 Neo
-Nobara
 Nanami
 Naruto
 Nana
 Nami
 Niffty
 Nebuchadnezzar
-Nameless King (used in combat)
+Nameless King (not randomly selected; used casually)
 Numbskull (not randomly selected; invites physical retaliation from no name)
 Knucklehead (not randomly selected; invites physical retaliation from no name)
-Pilot and Greg named themselves (as does everyone in this universe). No name can’t name himself, but the brothers refused to name him bc they thought that would be unfair, so they call him “no name”. The brothers want to explore the realms for a cure for no name’s aphasia
+Pilot and Greg named themselves (as does everyone in this universe). No name can’t name himself, but the brothers refused to name him bc they thought that would be unfair, so they call him “no name”. The brothers want to explore the realms for their own realm and cures for Pilot and no name’s conditions
 After the fight, no name writes his name on a sign on the wall behind him where he hangs out: “Zero”
 Greg: *on the verge of tears* “Zero, huh? It’s no Greg, but, it’s a lot better than Pilot.”
 Pilot: *tearing up* “It’s really good. It’s nice to finally meet you, Zero.”
@@ -4254,6 +4380,42 @@ The dummy is eventually contained
 Greg: “All the stats’ll show up on the big screen. You can see your total damage dealt, damage per shot-”
 No name bumps Greg’s arm.
 Greg: “Huh? Oh damage per second, my bad. And uh, total number of hits. You can reset it with that button over there. And that’s pretty much it.”
+X’s first scene: Cotu meets X for the first time since vacation
+X wants to help Cotu train but is impatient to get to the gala early to train. He wants to get there early bc he doesn’t like his chances
+Cotu is grateful for X’s patience and knows X isn’t the patient type
+Cotu: “X.”
+X: “Cotu.”
+X floats towards Cotu, then they do their signature handshake
+Cotu: “Thanks for waiting for me mate, I really appreciate it.”
+X: “You better be grateful. I should be halfway to the gala by now.”
+Cotu: “Damn, that early?”
+X: “If you consider that early, you’re gonna be late. We need to get there early to have as much time as possible to train, especially with the Gauntlet. You know they’re going to be fully booked. Now, let’s not waste any more time.”
+Cotu: “Right.”
+X points to a diamond near the arena
+X: “This is a timer. When the diamond closes,” X closes the diamond. “time’s up.” He reopens the diamond. “And when time’s up, I win.”
+Cotu: “And why’s that?”
+X: “Because that’s how long it takes for my ultimate attack to fully charge. And right now, you have no way of stopping it.”
+Cotu: “Oh.”
+X: “Of course, since we’re just training, I won’t actually use it, but in a real fight, if I were to get it…the fight would be over.”
+Cotu, surprised: “...I didn’t know you had an ultimate attack.”
+X does a brief, slightly confused sigh
+X, a bit quieter than before: “I must not have used it in the tournament.”
+X, back to normal: “Now, is everything clear? Are you ready?”
+Cotu: “Erm, you’re gonna hold back right? I’m not as strong as I was.”
+X: “Ugh. So needy.”
+X holds a glowing orange ball in his hands, then throws it into the sky. It grows into a mini-sun
+X: “That,” pointing to the star, “is roughly 60% of my power.”
+Cotu: “So you’re fighting me with a full 40? You know I can’t take that.”
+X’s face ignites. “I DON’T GIVE A SHIT.”
+Cotu: “Alright then. I guess I’m ready.”
+X: “Finally.”
+Idea: Cotu and X on the ship
+Cotu: “Hey, I just realized you’re not doing your teleporting tricks. You really do give a shit.”
+X: “Enjoy it while it lasts. At the gala, I’ll use everything.”
+Idea: X departs
+X: “You know…it pains me. Seeing you this weak, knowing what you’re capable of…”
+X collects himself for a moment: “If you’re not back to full strength by the time the gala begins,” X’s face ignites. “I swear, I will hurl you a hundred light years into the void.”
+X teleports out
 The Gauntlet and Blackstar
 Each variant of soldiers the gauntlet makes is also called an incarnation
 The gauntlet constantly strives to make new variants (i.e. the variants constantly strive to reincarnate); that is their sole purpose
@@ -4265,6 +4427,17 @@ Blackstar knows she isn’t perfect and feels like a failure for not reincarnati
 Blackstar feels helpless because no matter how long and hard she trains, she doesn’t feel like she improved at all, and no new variant appears from the spawner. She has no idea what else to do to reincarnate
 This is made worse by the fact that many other gods have improved significantly after the tournament, but Blackstar hasn’t changed at all
 Blackstar thinks that if she ever feels proud of herself, she’ll lose all motivation to improve and truly fail
+Idea: Elite Gunner looks at Cotu’s upgrades
+Elite Gunner is happy, but also ashamed since her master isn’t making the same progress
+Cotu wants to know how the Gauntlet really feels
+EG: “[current upgrade name]. Already? Damn.” She sounds like a mixture between impressed and sad
+Cotu: “Is something wrong?”
+EG *shakes her head*: “No. Not at all. It’s…impressive how fast you’ve…made it this far.”
+Cotu: “Thanks.” Cotu senses something’s going on, but he’s not sure what. “But I’ve still got a long way to go.”
+EG: *sighs in relief* “Yeah.” *she looks at Cotu* “I’ll send this info to Master. Thank you for showing us this.”
+Cotu: “Of course.”
+EG: “Whatever you need, the Gauntlet will be right behind you.” She salutes to him
+Cotu nods. “See you at the gala.”
 Idea: after Blackstar’s battle with Cotu, he helps her accept that she’s done everything she can, and she should enjoy her life and all the friends and family she has. She then realizes that the only way to reincarnate is not to improve her skill or physical strength, but her soul. Each variant has its own unique skills, strength, and personality. The soul of the gauntlet, Blackstar’s soul, rejects Blackstar’s personality.
 After the battle, Blackstar’s helmet is cracked open, revealing a less physically sharp, more relatable, expressive person within. Cotu talks casually with Blackstar until she comes to the realization. Mid-conversation, she suddenly stops responding to Cotu. The camera’s on Cotu and he’s looking away while waiting for her response. After a bit, he turns to check on her. The armor looks frail and withered, and has lost its glow. The person inside Blackstar’s armor looks at Cotu differently than she did, with a wide-eyed, curious expression.
 Cotu: “Hi.”
@@ -4280,7 +4453,7 @@ Cotu: “Oh yeah. Let’s get you out of that armor.” Cotu pulls out his ax an
 ??? looks up at Cotu with awe.
 ???: “Hey, do you know how to fight?”
 Cotu: “What was that?”
-???: *energetically* “I don’t know why, but I feel like fighting someone. And you look like you know things about fighting.”
+???: *energetically* “I don’t know why, but I feel like fighting someone. And you look like you know about fighting.”
 Cotu: “...How about I introduce you to someone who knows how to fight?”
 ???: “Sure! Let’s go!”
 Cotu and ??? walk over to a gauntlet spawner.
@@ -4303,14 +4476,14 @@ Blackstar gazes at ??? in shock and awe, slightly trembling. Eventually she bend
 Blackstar: “...” The background music swells.
 Blackstar pulls in ??? in a tight embrace. The music reaches a climax.
 ???: “Uh, what’s going on? I’m confused. This doesn’t really feel like an attack.”
-Blackstar lets go and looks into ???’s eyes. “My people…our people crave battle. Here in this realm, there is no shortage of enemies to kill.”
+Blackstar lets go and looks into ???’s eyes. “My people…our people crave battle. Here in this realm, there will be no shortage of enemies to kill.”
 ???: “Really? That’s awesome!”
 Blackstar: “Yes, but before we begin, I have to thank my friend.”
 ???: “O-okay.”
 Blackstar approaches Cotu, steps out of her armor, and they lovingly embrace.
 Blackstar: “I never would have done it without you.”
 Cotu: “You did it all yourself. I was just having fun.”
-Blackstar smiles and chuckles a bit. “Is that so?” She pulls away and looks into Cotu’s eyes, smiling beautifully. She looks at ???, who glances briefly at the pair, then looks away when she sees Blackstar looking back at her.
+Blackstar smiles and chuckles a bit. “Is that so?” She pulls away and looks into Cotu’s eyes, smiling beautifully. She looks at ???, who is staring at the pair confused.
 Blackstar: “Come see us again soon. I have to train the next incarnation, and I could use the help.”
 Cotu smiles warmly. “Will do.”
 Blackstar puts on a more serious expression as she steps back into her armor. “Kid.”
@@ -4324,17 +4497,6 @@ Cotu watches them go, then unnecessarily backflips back into the ship.
 Greg: “What’s with the unnecessary backflip?”
 Cotu: “I guess I’m in a bouncy mood.”
 Greg: “Aight buddy. Let’s calm down.”
-Idea: Elite Gunner looks at Cotu’s upgrades
-Elite Gunner is happy, but also ashamed since her master isn’t making the same progress
-Cotu wants to know how the Gauntlet really feels
-EG: “[current upgrade name]. Already? Damn.” She sounds like a mixture between impressed and sad
-Cotu: “Is something wrong?”
-EG *shakes her head*: “No. Not at all. It’s…impressive how fast you’ve…made it this far.”
-Cotu: “Thanks.” Cotu senses something’s going on, but he’s not sure what. “But I’ve still got a long way to go.”
-EG: *sighs in relief* “Yeah.” *she looks at Cotu* “I’ll send this info to Master. Thank you for showing us this.”
-Cotu: “Of course.”
-EG: “Whatever you need, the Gauntlet will be right behind you.” She salutes to him
-Cotu nods. “See you at the gala.”
 Ending ideas:
 Sad ending: the player doesn’t beat Blackstar
 Cotu is apologetic
@@ -4356,7 +4518,7 @@ Cotu: “X, I see you’ve met Greg. Have you guys had the chance to talk to eac
 X: “No. He just walked up and stood next to me (Greg is copying X’s nonchalant pose). I didn’t even know his name until you said it just now.”
 Greg: “Sup. I’m Greg.”
 X: “…Hello, Greg.”
-Greg: “So…X…is that short for…Alex? Deeeeeexter? Xander?”
+Greg: “So…X…is that short for…Alex?”
 X slowly looks down at his soul, then slowly back to Greg’s face
 Greg: “That’s a cool soul you got there. Wanna see mine?”
 X: “Cotu, let me know when you’re ready for our next round.”
@@ -4444,7 +4606,7 @@ Fade from black
 Greg finishes violently dispatching a landmite
 Greg: *breathing heavily* “...Mites all over the ship…”
 Greg: “You’ll be one of them, sooner or later…*sniff*” he says, staring at a tiny egg
-Pilot: *timidly* “Umm, Greg? If you have the time, there’s a few more mites…on the hull…”
+Pilot: *timidly* “Umm, Greg? I-if you have the time, there’s a few more mites…on the hull…”
 Greg exhales with steamy breath, revealing his fangs
 Fade to black
 The player arrives on the ship, which is now covered in blood and silk. There’s a trail of blood leading to Greg’s room
@@ -4496,7 +4658,7 @@ Cotu wants X to be comfortable
 X wants to relax
 X is reading a book lying down levitating in the air
 Cotu: “X, are you comfortable resting here? I can imagine the conditions here are quite different from what you’re used to.”
-X: “True. The temperature here is far lower. But I like it here. It’s…cozy. My realm is bleak and empty.”
+X: “True. The temperature here is far lower. But I like it here. It’s…cozy. My realm is bleak and empty in comparison.”
 Cotu: “Cozy, huh?”
 Cotu looks around
 Cotu: *genuinely smiles a little* “Yeah, it’s pretty cozy.”
@@ -4526,7 +4688,7 @@ Cotu: “How do you and your brothers coordinate with the portals so well? It’
 Greg: “Hmm…have Pilot or I told you how he puts portals down?”
 Cotu shakes his head.
 Greg: “Well, basically, there’s these little balls that only me and the boys can see, and they zip around everywhere like crazy.” *Greg starts moving his hands around rapidly*
-Greg: “Every so often, one of them will stop for just a moment, right in front of me or lil Phil, and that’s our cue to just jump at it.”
+Greg: “Every so often, one of them will stop for just a moment, right in front of me or Nate, and that’s our cue to just jump at it.”
 Cotu: “Hm.”
 Cotu: “Is that all there is to it? One would think you’d miss a portal jump occasionally, but I haven’t seen a miss yet.”
 Greg: “Huh…never thought about that. I guess it’s just…intuition. Like, I get a strong feeling every time I’m ‘bout to portal.”
@@ -4613,7 +4775,7 @@ Revenger: “You hate the champion, just as I do.”
 Microwave: “COTU IS ONE OF THE MOST SKILLED WARRIORS IN THE UNIVERSE, AND A MORALLY ADEQUATE PERSON. IF I DESPISE HIM VICIOUSLY, HOW DO YOU THINK I FEEL ABOUT USELESS SCUM LIKE YOU?”
 Revenger: “...”
 Microwave: “YOU DESERVE TO DIE, BUT YOU’RE NOT WORTH A SINGLE BULLET OF MINE.” *leaves*
-Blazarang vs Blackstar during the tournament (just an idea)
+Blazar vs Blackstar during the tournament (just an idea)
 Blaze is plummeting towards the ground and Blackstar is chasing him
 Blaze uses the last of his weapons except one knife, and Blackstar parries them all and closes the distance to him
 In the final push, Blackstar readies both of her arms to attack, then lunges at Blaze
@@ -4624,25 +4786,25 @@ The knife just barely got her stability low enough for the Sacrifice to destabil
 BS inner monologue with slo-mo mini flashbacks: “He knew I’d get desperate. He knew I’d use both my arms to attack, instead of using just one to attack and one to defend myself, because he knew I was scared of him surviving and killing me on the counterattack.”
 BS: “When he used all of his weapons, he fooled me into thinking that he was vulnerable…that I could let my guard down and take some damage in exchange for the win. He got me.”
 While Blackstar is falling and destabilized, she frantically tries to grapple, only to realize that the grapples won’t grab onto anything because she’s still intangible
-BS inner monologue: “To me, Blaze…is the universe’s champion.”
+BS inner monologue: “To me, Blaze…is my champion.”
 BS materializes right before hitting the ground.
 BS hits the ground and shatters into fragments, gold cables, and blood. Blaze hits the ground soon after her and destabilizes, sliding up right before her mangled remains.
 Destabilized, Blaze weakly crawls beside her pieces and lies down next to them, the crowd a muffled murmur in his ears. He lies down on his back and puts a hand over his stomach, staring at her pieces somewhat sadly for a while, then into the sky blankly.
-Blazarang and the Creator of the Universe
+Blazar and the Creator of the Universe
 Blaze: “Where did our languages come from?”
 Creator: “I had this universe use the same languages as my universe so I could understand what y’all are thinking and saying. I also gave you guys the same slang, just for fun.”
 Blaze: “...What’s your universe like, Creator?”
 Creator: “...I don’t know. When I talk about “my universe,” I’m really only talking about my planet. It’s called Earth. I’ve lived here my whole life and will probably never leave. I’m not able to venture out into the stars like you all. My people and I, we observe the cosmos from a distance, but we don’t actually go anywhere. So I can’t really describe what it’s like to live in my universe. Compared to yours, my universe isn’t very interesting at all.”
 Blaze: “...That’s not true.”
 Creator: ?
-Blaze: “Your universe, er, Earth, has history. Things happened to get you to where you are now. Something happened to get you to the point where you created my universe. Your people created languages and slang, and each word has its own history. My universe was just born. Nothing exists yet, and not much has really happened yet. Compared to my universe, yours is infinitely more complex and deep.”
+Blaze: “Your universe, er, Earth, has history. Things happened to get you to where you are now. Something happened to get you to the point where you created my universe. Your people created languages and slang, and each word has its own history. My universe was just born. Nothing exists yet, and not much has really happened yet. Compared to my universe, yours is infinitely more interesting.”
 Creator: “...”
 Blaze: “I want to know everything there is to know about your Earth. Is there a way I can learn?”
-Creator: “Yeah. But the download’s gonna take a while.”
+Creator: “Yeah. We have this thing called the Internet. I can download it and publish it in this universe, but the download’s gonna take a while.”
 Blaze: “...what’s a download?”
 The Creator then downloads “Internet 1.0” onto Blaze’s universe, and now they have access to all Earth-related media
 Miscellaneous Trivia
-Blazarang / Blaze / Cotu
+Blazar / Blaze / Cotu
 Named after blazars
 Blazars are quasars pointed towards Earth
 Quasars are active galactic nuclei, i.e. supermassive black holes in the centers of galaxies, that fire relativistic jets of ionized matter
