@@ -122,6 +122,14 @@ var transparent_mat := preload("res://textures/clear_tile.tres")
 @onready var body_cone_fog := $FogVolume/BodyCone
 @onready var feet_fog := $FogVolume/FeetFog
 @onready var body_cloud := $FogVolume/BodyCloud
+@onready var ds_fl := $DressShardFrontLeft
+@onready var ds_fr := $DressShardFrontRight
+@onready var ds_ml := $DressShardMiddleLeft
+@onready var ds_mr := $DressShardMiddleRight
+@onready var ds_bl := $DressShardBackLeft
+@onready var ds_br := $DressShardBackRight
+var dress_shards
+var dress_shard_anim_players := []
 
 var head_hurtbox : Node3D
 
@@ -166,7 +174,14 @@ func _ready():
 	body_anim_tree.active = true
 	mhp.visible = false
 	
+	dress_shards = [ds_fl, ds_fr, ds_ml, ds_mr, ds_bl, ds_br]
+	for ds in dress_shards:
+		dress_shard_anim_players.append(ds.find_child("AnimationPlayer"))
+	
 	head_hurtbox.hit_received.connect(on_head_hit)
+	
+	await get_tree().create_timer(6).timeout
+	test_shard_sequence()
 
 func frames(num: int) -> float:
 	return num * get_physics_process_delta_time()
@@ -225,6 +240,12 @@ func body_look_in_direction(dir: Vector3):
 	body_meshes.rotation.y = lerp_angle(body_meshes.rotation.y, PI + atan2(-dir.x, -dir.z), body_turn_speed)
 	body_meshes.rotation.z = lerp_angle(body_meshes.rotation.z, 0, body_turn_speed)
 
+func dress_shards_look_in_direction(dir: Vector3):
+	for ds in dress_shards:
+		ds.rotation.x = lerp_angle(ds.rotation.x, 0, body_turn_speed)
+		ds.rotation.y = lerp_angle(ds.rotation.y, PI + atan2(-dir.x, -dir.z), body_turn_speed)
+		ds.rotation.z = lerp_angle(ds.rotation.z, 0, body_turn_speed)
+
 func body_face_position_directly(target_pos):
 	for m in [arm_meshes, body_meshes]:
 		var old_rotation = m.rotation
@@ -246,54 +267,7 @@ func _physics_process(delta):
 	snowfall_particles.global_position = cotu.global_position + 15*Vector3.UP
 	
 	if env_autochange:
-		# Keep dist to Cotu value within fog bounds
-		var clamped_cotu_dist = clampf(dist_to_cotu, min_fog_radius, max_fog_radius)
-		# Convert dist to Cotu to a float btwn 0 and 1 (lerp val)
-		var target_cotu_dist_lerp_val = remap(clamped_cotu_dist,
-		min_fog_radius, max_fog_radius,
-		0.0, 1.0)
-		# Move sample val toward the target so transitions happen smoothly
-		cotu_dist_lerp_val = move_toward(cotu_dist_lerp_val, target_cotu_dist_lerp_val, delta / 3)
-		
-		# Set fog density based on dist from Cotu
-		var min_fog_density := .01
-		var max_fog_density := .3
-		level_env.fog_density = lerpf(min_fog_density, max_fog_density, cotu_dist_lerp_val)
-		
-		# Repeat the above for sky and fog colors (0 is near, 1 is far)
-		# Sky top color
-		var sky_top_gradient = Gradient.new()
-		sky_top_gradient.set_color(0, Color("#65768f"))
-		sky_top_gradient.set_color(1, Color("#3c485a"))
-		sky.sky_top_color = sky_top_gradient.sample(cotu_dist_lerp_val)
-		# Sky/ground horizon color
-		var sky_horizon_gradient = Gradient.new()
-		sky_horizon_gradient.set_color(0, Color("#5a6c82"))
-		sky_horizon_gradient.set_color(1, Color("#1d2730"))
-		sky.sky_horizon_color = sky_horizon_gradient.sample(cotu_dist_lerp_val)
-		sky.ground_horizon_color = sky.sky_horizon_color
-		# Fog color is the same as horizon color
-		level_env.fog_light_color = sky.sky_horizon_color
-		level_env.volumetric_fog_emission = sky.sky_horizon_color
-		
-		# Snowfall particle intensity. Amount isn't changed bc that causes glitchy behavior
-		snowfall_particles.lifetime = lerpf(12, 6, cotu_dist_lerp_val)
-		snowfall_particles.process_material.initial_velocity_min = lerpf(1.2, 6, cotu_dist_lerp_val)
-		snowfall_particles.process_material.initial_velocity_max = lerpf(2.4, 9, cotu_dist_lerp_val)
-		snowfall_particles.process_material.emission_ring_radius = lerpf(18, 9, cotu_dist_lerp_val)
-		
-		# Body/feet fog
-		# Body fog doesn't change
-		# Feet fog goes to 0 at far dist
-		var near_feet_fog_density := .6
-		#feet_fog.material.set_shader_parameter("density", lerpf(near_feet_fog_density, 0, cotu_dist_lerp_val))
-		#feet_fog.material.density = lerpf(near_feet_fog_density, 0, cotu_dist_lerp_val)
-		var body_fog_gradient = Gradient.new()
-		body_fog_gradient.set_color(0, Color("aad3ff"))
-		body_fog_gradient.set_color(1, body_light.light_color)
-		body_cone_fog.material.set_shader_parameter("emission", body_fog_gradient.sample(cotu_dist_lerp_val-.1))
-		#feet_fog.material.emission = body_fog_gradient.sample(cotu_dist_lerp_val)
-		#feet_fog.material.set_shader_parameter("emission", body_fog_gradient.sample(cotu_dist_lerp_val))
+		env_autochange_frame(dist_to_cotu, delta)
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -313,10 +287,12 @@ func _physics_process(delta):
 			head_look_at_position(target.global_position)
 			arm_look_at_position(target.global_position)
 			body_look_in_direction(velocity)
+			dress_shards_look_in_direction(velocity)
 		LOOK_STATE.TARGET_HEAD_ARM_BODY:
 			head_look_at_position(target.global_position)
 			arm_look_at_position(target.global_position)
 			body_look_in_direction(global_position.direction_to(target.global_position))
+			dress_shards_look_in_direction(global_position.direction_to(target.global_position))
 		LOOK_STATE.TARGET_BODY_FULL_ROTATION:
 			if aiming_at_target:
 				body_face_position_directly(target.global_position)
@@ -547,6 +523,56 @@ func expand_blizzard_safezone_jump_shot():
 func contract_blizzard_safezone_jump_shot():
 	contract_blizzard_safezone(safezone_contract_frames_jump_shot)
 
+func env_autochange_frame(dist_to_cotu: float, delta: float):
+	# Keep dist to Cotu value within fog bounds
+		var clamped_cotu_dist = clampf(dist_to_cotu, min_fog_radius, max_fog_radius)
+		# Convert dist to Cotu to a float btwn 0 and 1 (lerp val)
+		var target_cotu_dist_lerp_val = remap(clamped_cotu_dist,
+		min_fog_radius, max_fog_radius,
+		0.0, 1.0)
+		# Move sample val toward the target so transitions happen smoothly
+		cotu_dist_lerp_val = move_toward(cotu_dist_lerp_val, target_cotu_dist_lerp_val, delta / 3)
+		
+		# Set fog density based on dist from Cotu
+		var min_fog_density := .01
+		var max_fog_density := .3
+		level_env.fog_density = lerpf(min_fog_density, max_fog_density, cotu_dist_lerp_val)
+		
+		# Repeat the above for sky and fog colors (0 is near, 1 is far)
+		# Sky top color
+		var sky_top_gradient = Gradient.new()
+		sky_top_gradient.set_color(0, Color("#65768f"))
+		sky_top_gradient.set_color(1, Color("#3c485a"))
+		sky.sky_top_color = sky_top_gradient.sample(cotu_dist_lerp_val)
+		# Sky/ground horizon color
+		var sky_horizon_gradient = Gradient.new()
+		sky_horizon_gradient.set_color(0, Color("#5a6c82"))
+		sky_horizon_gradient.set_color(1, Color("#1d2730"))
+		sky.sky_horizon_color = sky_horizon_gradient.sample(cotu_dist_lerp_val)
+		sky.ground_horizon_color = sky.sky_horizon_color
+		# Fog color is the same as horizon color
+		level_env.fog_light_color = sky.sky_horizon_color
+		level_env.volumetric_fog_emission = sky.sky_horizon_color
+		
+		# Snowfall particle intensity. Amount isn't changed bc that causes glitchy behavior
+		snowfall_particles.lifetime = lerpf(12, 6, cotu_dist_lerp_val)
+		snowfall_particles.process_material.initial_velocity_min = lerpf(1.2, 6, cotu_dist_lerp_val)
+		snowfall_particles.process_material.initial_velocity_max = lerpf(2.4, 9, cotu_dist_lerp_val)
+		snowfall_particles.process_material.emission_ring_radius = lerpf(18, 9, cotu_dist_lerp_val)
+		
+		# Body/feet fog
+		# Body fog doesn't change
+		# Feet fog goes to 0 at far dist
+		var near_feet_fog_density := .6
+		#feet_fog.material.set_shader_parameter("density", lerpf(near_feet_fog_density, 0, cotu_dist_lerp_val))
+		#feet_fog.material.density = lerpf(near_feet_fog_density, 0, cotu_dist_lerp_val)
+		var body_fog_gradient = Gradient.new()
+		body_fog_gradient.set_color(0, Color("aad3ff"))
+		body_fog_gradient.set_color(1, body_light.light_color)
+		body_cone_fog.material.set_shader_parameter("emission", body_fog_gradient.sample(cotu_dist_lerp_val-.1))
+		#feet_fog.material.emission = body_fog_gradient.sample(cotu_dist_lerp_val)
+		#feet_fog.material.set_shader_parameter("emission", body_fog_gradient.sample(cotu_dist_lerp_val))
+
 func expand_blizzard_safezone(frame_duration: int):
 	snowfall_particles.emitting = false
 	env_autochange = false
@@ -611,3 +637,7 @@ func regen_shards_mvmt():
 	var move_dir := 3 * walk_speed * target.global_position.direction_to(global_position)
 	t.tween_property(self, "velocity", Vector3(move_dir.x, 0, move_dir.z), 0)
 	t.tween_property(self, "velocity", Vector3.ZERO, frames(84))
+
+func test_shard_sequence():
+	for ap in dress_shard_anim_players:
+		ap.play("DressSequenceTest")
