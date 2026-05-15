@@ -122,16 +122,9 @@ var transparent_mat := preload("res://textures/clear_tile.tres")
 @onready var body_cone_fog := $FogVolume/BodyCone
 @onready var feet_fog := $FogVolume/FeetFog
 @onready var body_cloud := $FogVolume/BodyCloud
-@onready var ds_fl := $DressShardFrontLeft
-@onready var ds_fr := $DressShardFrontRight
-@onready var ds_ml := $DressShardMiddleLeft
-@onready var ds_mr := $DressShardMiddleRight
-@onready var ds_bl := $DressShardBackLeft
-@onready var ds_br := $DressShardBackRight
-var dress_shards
-var dress_shard_anim_players := []
 
 var head_hurtbox : Node3D
+var dress_shards := {}
 
 @onready var root := get_tree().root
 var level : Node3D
@@ -144,6 +137,31 @@ var sky : ProceduralSkyMaterial
 var level_fog : FogMaterial
 var arm_state_machine : AnimationNodeStateMachinePlayback
 var body_state_machine : AnimationNodeStateMachinePlayback
+
+class DressShard extends Node3D:
+	var node : Node
+	var anim_player : AnimationPlayer
+	# Tweened from 0 to body_turn_speed when shard is recalled
+	var body_turn_speed : float
+	var turn_speed : float = 0.0
+	# Since this is an inner class, it doesn't have access to get_tree()
+	var ds_tween : Tween
+	
+	func _init(n: Node, bts: float):
+		self.node = n
+		self.anim_player = n.find_child("AnimationPlayer")
+		self.body_turn_speed = bts
+		self.turn_speed = bts
+	
+	func stop():
+		self.node.top_level = true
+		self.turn_speed = 0
+	
+	func recall():
+		self.node.top_level = false
+		self.ds_tween = self.node.get_tree().create_tween().set_parallel()
+		ds_tween.tween_property(self.node, "position", Vector3.ZERO, 1.0)
+		ds_tween.tween_property(self, "turn_speed", body_turn_speed, 1.0)
 
 func _ready():
 	head_hurtbox = find_child("EnemyHurtbox")
@@ -174,14 +192,14 @@ func _ready():
 	body_anim_tree.active = true
 	mhp.visible = false
 	
-	dress_shards = [ds_fl, ds_fr, ds_ml, ds_mr, ds_bl, ds_br]
-	for ds in dress_shards:
-		dress_shard_anim_players.append(ds.find_child("AnimationPlayer"))
+	dress_shards["FrontLeft"] = DressShard.new($DressShardFrontLeft, body_turn_speed)
+	dress_shards["FrontRight"] = DressShard.new($DressShardFrontRight, body_turn_speed)
+	dress_shards["MiddleLeft"] = DressShard.new($DressShardMiddleLeft, body_turn_speed)
+	dress_shards["MiddleRight"] = DressShard.new($DressShardMiddleRight, body_turn_speed)
+	dress_shards["BackLeft"] = DressShard.new($DressShardBackLeft, body_turn_speed)
+	dress_shards["BackRight"] = DressShard.new($DressShardBackRight, body_turn_speed)
 	
 	head_hurtbox.hit_received.connect(on_head_hit)
-	
-	await get_tree().create_timer(6).timeout
-	test_shard_sequence()
 
 func frames(num: int) -> float:
 	return num * get_physics_process_delta_time()
@@ -241,10 +259,12 @@ func body_look_in_direction(dir: Vector3):
 	body_meshes.rotation.z = lerp_angle(body_meshes.rotation.z, 0, body_turn_speed)
 
 func dress_shards_look_in_direction(dir: Vector3):
-	for ds in dress_shards:
-		ds.rotation.x = lerp_angle(ds.rotation.x, 0, body_turn_speed)
-		ds.rotation.y = lerp_angle(ds.rotation.y, PI + atan2(-dir.x, -dir.z), body_turn_speed)
-		ds.rotation.z = lerp_angle(ds.rotation.z, 0, body_turn_speed)
+	for ds in dress_shards.values():
+		if ds.node.top_level:
+			return
+		ds.node.rotation.x = lerp_angle(ds.node.rotation.x, 0, ds.turn_speed)
+		ds.node.rotation.y = lerp_angle(ds.node.rotation.y, PI + atan2(-dir.x, -dir.z), ds.turn_speed)
+		ds.node.rotation.z = lerp_angle(ds.node.rotation.z, 0, ds.turn_speed)
 
 func body_face_position_directly(target_pos):
 	for m in [arm_meshes, body_meshes]:
@@ -638,6 +658,12 @@ func regen_shards_mvmt():
 	t.tween_property(self, "velocity", Vector3(move_dir.x, 0, move_dir.z), 0)
 	t.tween_property(self, "velocity", Vector3.ZERO, frames(84))
 
-func test_shard_sequence():
-	for ap in dress_shard_anim_players:
-		ap.play("DressSequenceTest")
+func stop_dress_shard(s: String):
+	dress_shards[s].stop()
+
+func recall_dress_shard(s: String):
+	dress_shards[s].recall()
+
+func play_anim_all_dress_shards(s: String):
+	for ds in dress_shards.values():
+		ds.anim_player.play(s)
