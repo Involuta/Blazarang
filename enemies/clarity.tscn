@@ -1,4 +1,4 @@
-[gd_scene load_steps=181 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=182 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -14,6 +14,7 @@
 [ext_resource type="Shader" path="res://shaders/smoke.gdshader" id="7_pdkmx"]
 [ext_resource type="Script" path="res://GPUTrail-main/GPUTrail3D.gd" id="9_xxn08"]
 [ext_resource type="PackedScene" uid="uid://luimf8n4rk70" path="res://glb_inherited_scenes/clarity_dress_shards_meshes.tscn" id="12_y7646"]
+[ext_resource type="PackedScene" uid="uid://cm3mndrep3gns" path="res://glb_inherited_scenes/clarity_dress_shards_master.tscn" id="13_2l47j"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g3bkq"]
 radius = 1.5
@@ -1147,8 +1148,8 @@ bones/0/position = Vector3(-0.0210742, 4.49276, 0.0847608)
 bones/0/rotation = Quaternion(0.0301653, 0.0796906, -0.0501057, 0.995102)
 bones/1/position = Vector3(-1.58209e-09, 8.69174, 9.87667e-09)
 bones/1/rotation = Quaternion(0.0484073, -0.0812806, 0.0524297, 0.994133)
-bones/3/position = Vector3(-3.79334, 4.76011, -0.640875)
-bones/3/rotation = Quaternion(-0.0303839, -0.0657936, 0.833419, 0.54787)
+bones/3/position = Vector3(-3.74878, 4.38903, -0.0918629)
+bones/3/rotation = Quaternion(0.000599246, -0.00629163, 0.864905, 0.501896)
 bones/6/position = Vector3(2.01413, 2.22899, -2.08285)
 bones/6/rotation = Quaternion(0.305356, -0.212565, 0.925231, -0.0743114)
 bones/8/position = Vector3(2.06725, 1.3427, 0.8528)
@@ -1193,7 +1194,7 @@ opponent_hitboxes = ["PlayerHitbox"]
 shape = SubResource("SphereShape3D_g3bkq")
 
 [node name="Arm_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.231535, 0.972494, 0.0253979, -0.96358, 0.232847, -0.131509, -0.133806, 0.00597613, 0.99099, -4.72347, 9.3193, 0.308836)
+transform = Transform3D(0.338385, 0.929107, 0.14918, -0.932549, 0.35231, -0.078921, -0.125884, -0.112412, 0.985656, -4.57457, 8.74032, 0.989778)
 
 [node name="EnemyHitbox" type="Area3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2" index="1"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
@@ -1794,6 +1795,53 @@ visible = false
 [node name="BackRight" parent="DressShardBackRight/Armature/Skeleton3D" index="8"]
 transform = Transform3D(0.766044, 0.219846, 0.604023, -3.64784e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548507)
 
+[node name="DressShardMaster" parent="." instance=ExtResource("13_2l47j")]
+visible = false
+
+[node name="Skeleton3D" parent="DressShardMaster/Armature" index="0"]
+bones/0/rotation = Quaternion(0.0301653, 0.0796906, -0.0501057, 0.995102)
+bones/1/rotation = Quaternion(0.0484073, -0.0812806, 0.0524297, 0.994133)
+bones/3/rotation = Quaternion(0.00101031, -0.00552394, 0.86527, 0.501275)
+bones/6/position = Vector3(2.01413, 2.22899, -2.08285)
+bones/6/rotation = Quaternion(0.305356, -0.212565, 0.925231, -0.0743114)
+bones/8/position = Vector3(2.06725, 1.3427, 0.8528)
+bones/8/rotation = Quaternion(0.300211, -0.0905908, 0.944171, -0.101036)
+bones/10/position = Vector3(-0.870095, 2.94367, -2.42447)
+bones/10/rotation = Quaternion(0.322511, -0.334699, 0.885296, -0.0146623)
+bones/12/position = Vector3(-3.02298, 2.22899, 2.14379)
+bones/12/rotation = Quaternion(0.360811, -0.115068, 0.905047, 0.19356)
+bones/14/position = Vector3(-0.141156, 1.3427, 2.70588)
+bones/14/rotation = Quaternion(0.376926, -0.00445188, 0.916249, 0.135629)
+bones/16/position = Vector3(-2.85858, 2.94367, -0.755941)
+bones/16/rotation = Quaternion(0.321999, -0.24697, 0.885482, 0.226373)
+
+[node name="Hat_2" parent="DressShardMaster/Armature/Skeleton3D" index="0"]
+transform = Transform3D(1.42986, 0.00998905, -0.0170401, -0.0125258, 1.41244, -0.223079, 0.0152725, 0.223207, 1.41239, 0.918732, 14.4374, 0.659002)
+
+[node name="Arm_2" parent="DressShardMaster/Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.339741, 0.92836, 0.15074, -0.932056, 0.353784, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
+
+[node name="Center_2" parent="DressShardMaster/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.982278, 0.104529, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
+
+[node name="MiddleLeft" parent="DressShardMaster/Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.766044, 0.219846, 0.604023, 1.18725e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548505)
+
+[node name="FrontLeft" parent="DressShardMaster/Armature/Skeleton3D" index="4"]
+transform = Transform3D(0.766044, 0.219846, 0.604023, 8.1839e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990245, 0.156011, -0.548507)
+
+[node name="BackLeft" parent="DressShardMaster/Armature/Skeleton3D" index="5"]
+transform = Transform3D(0.766044, 0.219846, 0.604023, 4.14429e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156009, -0.548506)
+
+[node name="MiddleRight" parent="DressShardMaster/Armature/Skeleton3D" index="6"]
+transform = Transform3D(0.766044, 0.219846, 0.604023, 6.51412e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548508)
+
+[node name="FrontRight" parent="DressShardMaster/Armature/Skeleton3D" index="7"]
+transform = Transform3D(0.766044, 0.219846, 0.604023, -1.26024e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548506)
+
+[node name="BackRight" parent="DressShardMaster/Armature/Skeleton3D" index="8"]
+transform = Transform3D(0.766044, 0.219846, 0.604023, -3.64784e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548507)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -2.4, 2.08165e-12)
 shape = SubResource("CapsuleShape3D_o5urh")
@@ -1911,3 +1959,4 @@ material = SubResource("FogMaterial_hru1u")
 [editable path="DressShardMiddleRight"]
 [editable path="DressShardBackLeft"]
 [editable path="DressShardBackRight"]
+[editable path="DressShardMaster"]

@@ -198,8 +198,12 @@ func _ready():
 	dress_shards["MiddleRight"] = DressShard.new($DressShardMiddleRight, body_turn_speed)
 	dress_shards["BackLeft"] = DressShard.new($DressShardBackLeft, body_turn_speed)
 	dress_shards["BackRight"] = DressShard.new($DressShardBackRight, body_turn_speed)
+	dress_shards["Master"] = DressShard.new($DressShardMaster, body_turn_speed)
 	
 	head_hurtbox.hit_received.connect(on_head_hit)
+	
+	await get_tree().create_timer(3).timeout
+	play_anim_all_dress_shards("DressSequenceTest")
 
 func frames(num: int) -> float:
 	return num * get_physics_process_delta_time()
@@ -261,7 +265,7 @@ func body_look_in_direction(dir: Vector3):
 func dress_shards_look_in_direction(dir: Vector3):
 	for ds in dress_shards.values():
 		if ds.node.top_level:
-			return
+			continue
 		ds.node.rotation.x = lerp_angle(ds.node.rotation.x, 0, ds.turn_speed)
 		ds.node.rotation.y = lerp_angle(ds.node.rotation.y, PI + atan2(-dir.x, -dir.z), ds.turn_speed)
 		ds.node.rotation.z = lerp_angle(ds.node.rotation.z, 0, ds.turn_speed)
