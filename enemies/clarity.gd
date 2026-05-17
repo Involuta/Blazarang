@@ -61,11 +61,11 @@ var env_autochange := true # Fog automatically changes depending on Cotu's dist 
 var stationary := false
 @export var walk_speed := 1.8
 var walk_dir := Vector3.FORWARD # Randomly set when switching to walk straight
-@export var walk_curved_radius := 9.0 # Radius of circle Clarity walks on
+@export var walk_curved_radius := 10.0 # Radius of circle Clarity walks on
 @export var full_dash_speed := 24.0
 
 @export var head_turn_speed := .06
-@export var body_turn_speed := .09
+@export var body_turn_speed := .06
 
 # Distance in front of herself Clarity looks in order to match anim head looking forward
 @export var look_forward_dist := 12.0
@@ -153,15 +153,18 @@ class DressShard extends Node3D:
 		self.body_turn_speed = bts
 		self.turn_speed = bts
 	
+	func frames(num: int) -> float:
+		return num * get_physics_process_delta_time()
+	
 	func stop():
 		self.node.top_level = true
-		self.turn_speed = 0
+		self.turn_speed = 0.0
 	
 	func recall():
 		self.node.top_level = false
 		self.ds_tween = self.node.get_tree().create_tween().set_parallel()
-		ds_tween.tween_property(self.node, "position", Vector3.ZERO, 1.0)
-		ds_tween.tween_property(self, "turn_speed", body_turn_speed, 1.0)
+		ds_tween.tween_property(self.node, "position", Vector3.ZERO, frames(36)).set_ease(Tween.EASE_IN_OUT)
+		ds_tween.tween_property(self, "turn_speed", body_turn_speed, frames(36)).set_ease(Tween.EASE_IN_OUT)
 
 func _ready():
 	head_hurtbox = find_child("EnemyHurtbox")
@@ -203,7 +206,7 @@ func _ready():
 	head_hurtbox.hit_received.connect(on_head_hit)
 	
 	await get_tree().create_timer(3).timeout
-	play_anim_all_dress_shards("DressSequenceTest")
+	play_anim_all_dress_shards("SingleShardSequence1")
 
 func frames(num: int) -> float:
 	return num * get_physics_process_delta_time()

@@ -11,7 +11,7 @@ enum State {
 
 var state: State
 
-@onready var root := $/root/ViewControl
+@onready var root := get_tree().root
 @onready var anim_player := $AnimationPlayer
 @onready var explosion_spark_particles := $ExplosionSparkParticles
 @onready var hitbox := $PlayerHitbox
@@ -27,7 +27,7 @@ var target: Node3D
 var los_timer := 0.0
 
 func _ready():
-	cotu = root.find_child("cotuCB")
+	cotu = root.find_child("cotuCB", true, false)
 	explosion_spark_particles.emitting = false
 	hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	hitbox.damage = Globals.player_hitbox_data.MarkDetonationDamage

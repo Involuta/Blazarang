@@ -53,3 +53,5 @@ res://enemies/enemy_anims/clarity_wait_lowered_left.res
 res://enemies/enemy_anims/clarity_wait_raised_left.res
 res://enemies/clarity.gd
 res://enemies/enemy_anims/clarity_dress_shard_test_sequence.res
+res://enemies/enemy_anims/clarity_single_shard_sequence1.res
+res://rang/mark.gd

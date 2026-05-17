@@ -1122,8 +1122,6 @@ collision_mask = 146
 script = ExtResource("1_172k1")
 phase1_min_long_dist_wait = 3.0
 phase1_max_long_dist_wait = 4.0
-walk_curved_radius = 10.0
-body_turn_speed = 0.06
 wait_lowered_left_min_secs = 0.3
 wait_lowered_left_max_secs = 3.0
 wait_raised_left_min_secs = 0.3
@@ -1796,6 +1794,7 @@ visible = false
 transform = Transform3D(0.766044, 0.219846, 0.604023, -3.64784e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548507)
 
 [node name="DressShardMaster" parent="." instance=ExtResource("13_2l47j")]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
 visible = false
 
 [node name="Skeleton3D" parent="DressShardMaster/Armature" index="0"]
