@@ -141,30 +141,24 @@ var body_state_machine : AnimationNodeStateMachinePlayback
 class DressShard extends Node3D:
 	var node : Node
 	var anim_player : AnimationPlayer
-	# Tweened from 0 to body_turn_speed when shard is recalled
-	var body_turn_speed : float
-	var turn_speed : float = 0.0
 	# Since this is an inner class, it doesn't have access to get_tree()
 	var ds_tween : Tween
 	
-	func _init(n: Node, bts: float):
+	func _init(n: Node):
 		self.node = n
 		self.anim_player = n.find_child("AnimationPlayer")
-		self.body_turn_speed = bts
-		self.turn_speed = bts
 	
 	func frames(num: int) -> float:
 		return num * get_physics_process_delta_time()
 	
 	func stop():
 		self.node.top_level = true
-		self.turn_speed = 0.0
 	
 	func recall():
 		self.node.top_level = false
 		self.ds_tween = self.node.get_tree().create_tween().set_parallel()
-		ds_tween.tween_property(self.node, "position", Vector3.ZERO, frames(36)).set_ease(Tween.EASE_IN_OUT)
-		ds_tween.tween_property(self, "turn_speed", body_turn_speed, frames(36)).set_ease(Tween.EASE_IN_OUT)
+		ds_tween.tween_property(self.node, "position", Vector3.ZERO, frames(45)).set_ease(Tween.EASE_IN_OUT)
+		ds_tween.tween_property(self.node, "rotation", Vector3.ZERO, frames(45)).set_ease(Tween.EASE_IN_OUT)
 
 func _ready():
 	head_hurtbox = find_child("EnemyHurtbox")
@@ -195,13 +189,13 @@ func _ready():
 	body_anim_tree.active = true
 	mhp.visible = false
 	
-	dress_shards["FrontLeft"] = DressShard.new($DressShardFrontLeft, body_turn_speed)
-	dress_shards["FrontRight"] = DressShard.new($DressShardFrontRight, body_turn_speed)
-	dress_shards["MiddleLeft"] = DressShard.new($DressShardMiddleLeft, body_turn_speed)
-	dress_shards["MiddleRight"] = DressShard.new($DressShardMiddleRight, body_turn_speed)
-	dress_shards["BackLeft"] = DressShard.new($DressShardBackLeft, body_turn_speed)
-	dress_shards["BackRight"] = DressShard.new($DressShardBackRight, body_turn_speed)
-	dress_shards["Master"] = DressShard.new($DressShardMaster, body_turn_speed)
+	dress_shards["FrontLeft"] = DressShard.new(find_child("DressShardFrontLeft"))
+	dress_shards["FrontRight"] = DressShard.new(find_child("DressShardFrontRight"))
+	dress_shards["MiddleLeft"] = DressShard.new(find_child("DressShardMiddleLeft"))
+	dress_shards["MiddleRight"] = DressShard.new(find_child("DressShardMiddleRight"))
+	dress_shards["BackLeft"] = DressShard.new(find_child("DressShardBackLeft"))
+	dress_shards["BackRight"] = DressShard.new(find_child("DressShardBackRight"))
+	dress_shards["Master"] = DressShard.new(find_child("DressShardMaster"))
 	
 	head_hurtbox.hit_received.connect(on_head_hit)
 	
@@ -266,12 +260,10 @@ func body_look_in_direction(dir: Vector3):
 	body_meshes.rotation.z = lerp_angle(body_meshes.rotation.z, 0, body_turn_speed)
 
 func dress_shards_look_in_direction(dir: Vector3):
-	for ds in dress_shards.values():
-		if ds.node.top_level:
-			continue
-		ds.node.rotation.x = lerp_angle(ds.node.rotation.x, 0, ds.turn_speed)
-		ds.node.rotation.y = lerp_angle(ds.node.rotation.y, PI + atan2(-dir.x, -dir.z), ds.turn_speed)
-		ds.node.rotation.z = lerp_angle(ds.node.rotation.z, 0, ds.turn_speed)
+	var ds_master = dress_shards["Master"]
+	ds_master.node.rotation.x = lerp_angle(ds_master.node.rotation.x, 0, body_turn_speed)
+	ds_master.node.rotation.y = lerp_angle(ds_master.node.rotation.y, PI + atan2(-dir.x, -dir.z), body_turn_speed)
+	ds_master.node.rotation.z = lerp_angle(ds_master.node.rotation.z, 0, body_turn_speed)
 
 func body_face_position_directly(target_pos):
 	for m in [arm_meshes, body_meshes]:
