@@ -200,7 +200,7 @@ func _ready():
 	head_hurtbox.hit_received.connect(on_head_hit)
 	
 	await get_tree().create_timer(3).timeout
-	play_anim_all_dress_shards("SingleShardSequence1")
+	play_anim_all_dress_shards("DoubleShardSequence1")
 
 func frames(num: int) -> float:
 	return num * get_physics_process_delta_time()
