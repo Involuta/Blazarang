@@ -1198,7 +1198,7 @@ transform = Transform3D(0.338384, 0.929108, 0.14918, -0.93255, 0.352309, -0.0789
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 script = ExtResource("4_5f0ps")
 damage = 30
-frostbite_buildup = 10
+frostbite_buildup = 15
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2/EnemyHitbox"]
 transform = Transform3D(0.996195, -0.0871557, 4.28562e-16, 0.0871557, 0.996195, -1.78015e-16, -1.35457e-16, -3.71025e-16, 1, 0.67, -7.5, 2.08165e-12)
@@ -1512,6 +1512,7 @@ collision_layer = 8
 collision_mask = 0
 script = ExtResource("4_5f0ps")
 damage = 18
+frostbite_buildup = 9
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardFrontLeft/Armature/Skeleton3D/FrontLeft/EnemyHitbox"]
 transform = Transform3D(0.962033, -0.265622, -0.0627493, 0.272912, 0.933285, 0.233445, -0.00344532, -0.241707, 0.970343, 3.11, -3.826, 4)
@@ -1598,6 +1599,7 @@ collision_layer = 8
 collision_mask = 0
 script = ExtResource("4_5f0ps")
 damage = 18
+frostbite_buildup = 9
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardFrontRight/Armature/Skeleton3D/FrontRight/EnemyHitbox"]
 transform = Transform3D(0.958577, 0.280169, -0.0513431, -0.256566, 0.927588, 0.271577, 0.123712, -0.247155, 0.961046, -2.9844, -3.93397, 4.03116)
@@ -1655,6 +1657,7 @@ collision_layer = 8
 collision_mask = 0
 script = ExtResource("4_5f0ps")
 damage = 18
+frostbite_buildup = 9
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardMiddleLeft/Armature/Skeleton3D/MiddleLeft/EnemyHitbox"]
 transform = Transform3D(0.965423, -0.26069, -2.53229e-16, 0.26069, 0.965422, 3.74134e-16, 1.86351e-14, 9.05592e-15, 1, 5.4, -5.82, 2.08165e-12)
@@ -1741,6 +1744,7 @@ collision_layer = 8
 collision_mask = 0
 script = ExtResource("4_5f0ps")
 damage = 18
+frostbite_buildup = 9
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardMiddleRight/Armature/Skeleton3D/MiddleRight/EnemyHitbox"]
 transform = Transform3D(0.965473, 0.260504, 3.48787e-16, -0.260504, 0.965472, -3.48787e-16, -4.27605e-16, 2.45884e-16, 1, -5.4, -5.82, 2.08165e-12)
@@ -1810,6 +1814,7 @@ collision_layer = 8
 collision_mask = 0
 script = ExtResource("4_5f0ps")
 damage = 18
+frostbite_buildup = 9
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardBackLeft/Armature/Skeleton3D/BackLeft/EnemyHitbox"]
 transform = Transform3D(0.965923, -0.258818, -3.25186e-08, 0.249999, 0.93301, -0.258818, 0.0669871, 0.249999, 0.965924, 3.8, -6.9, -4.7)
@@ -1895,6 +1900,7 @@ collision_layer = 8
 collision_mask = 0
 script = ExtResource("4_5f0ps")
 damage = 18
+frostbite_buildup = 9
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardBackRight/Armature/Skeleton3D/BackRight/EnemyHitbox"]
 transform = Transform3D(0.965923, 0.258818, 3.36902e-16, -0.249999, 0.93301, -0.258819, -0.0669871, 0.249999, 0.965924, -3.8, -6.9, -4.7)
