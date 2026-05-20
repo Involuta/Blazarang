@@ -1,11 +1,11 @@
+Hitbox
+CollisionShape3D
 GPUParticles3D
 DamageOverTimeArea
-CollisionShape3D
 EnemyHurtbox
 Node3D
 GPUTrail3D
 Trail3D
-Hitbox
 FogVolume
 GPUParticlesAttractorSphere3D
 GPUParticlesAttractorBox3D
