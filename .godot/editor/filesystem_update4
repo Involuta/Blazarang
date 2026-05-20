@@ -32,3 +32,4 @@ res://shaders/sobel_outline.gdshader
 res://levels/snow_level/snow_level_test_env.tscn
 res://enemies/ice_sprite.tscn
 res://enemies/clarity.tscn
+res://enemies/clarity.gd

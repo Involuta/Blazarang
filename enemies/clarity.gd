@@ -149,7 +149,7 @@ class DressShard extends Node3D:
 		self.anim_player = n.find_child("AnimationPlayer")
 	
 	func frames(num: int) -> float:
-		return num * get_physics_process_delta_time()
+		return num * self.node.get_physics_process_delta_time()
 	
 	func stop():
 		self.node.top_level = true

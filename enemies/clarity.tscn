@@ -1412,6 +1412,9 @@ draw_pass_1 = SubResource("QuadMesh_7dp0r")
 [node name="DressShardMaster" parent="." instance=ExtResource("13_2l47j")]
 transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
 
+[node name="Armature" parent="DressShardMaster" index="0"]
+visible = false
+
 [node name="Skeleton3D" parent="DressShardMaster/Armature" index="0"]
 bones/0/rotation = Quaternion(0.0301653, 0.0796906, -0.0501057, 0.995102)
 bones/1/rotation = Quaternion(0.0484073, -0.0812806, 0.0524297, 0.994133)
