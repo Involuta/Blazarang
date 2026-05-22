@@ -1192,9 +1192,10 @@ opponent_hitboxes = ["PlayerHitbox"]
 shape = SubResource("SphereShape3D_g3bkq")
 
 [node name="Arm_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.338384, 0.929108, 0.14918, -0.93255, 0.352309, -0.078921, -0.125884, -0.112412, 0.985655, -4.57457, 8.74032, 0.989779)
+transform = Transform3D(0.338384, 0.929108, 0.14918, -0.93255, 0.352309, -0.078921, -0.125884, -0.112412, 0.985656, -4.57457, 8.74032, 0.989779)
 
 [node name="EnemyHitbox" type="Area3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2" index="1"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 script = ExtResource("4_5f0ps")
 damage = 30
 frostbite_buildup = 15
@@ -1302,27 +1303,27 @@ transform = Transform3D(0.982278, 0.104528, 0.155578, -0.0949129, 0.993159, -0.0
 visible = false
 
 [node name="MiddleLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -5.58128e-08, 0.939693, -0.34202, -0.642788, 0.262002, 0.719846, -0.990242, 0.156014, -0.548502)
+transform = Transform3D(0.766044, 0.219846, 0.604023, -2.9111e-08, 0.939693, -0.34202, -0.642788, 0.262002, 0.719846, -0.990243, 0.156014, -0.548502)
 visible = false
 
 [node name="FrontLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.766045, 0.219846, 0.604022, 2.60171e-08, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990248, 0.156011, -0.548509)
+transform = Transform3D(0.766045, 0.219846, 0.604022, 2.61259e-08, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990248, 0.15601, -0.548509)
 visible = false
 
 [node name="BackLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.766045, 0.219846, 0.604023, -3.1905e-07, 0.939693, -0.342019, -0.642788, 0.262002, 0.719847, -0.990243, 0.156011, -0.548502)
+transform = Transform3D(0.766044, 0.219846, 0.604023, -3.27128e-07, 0.939693, -0.342019, -0.642788, 0.262002, 0.719846, -0.990243, 0.15601, -0.548501)
 visible = false
 
 [node name="MiddleRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.766045, 0.219846, 0.604022, 2.49775e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719846, -0.99024, 0.156015, -0.548505)
+transform = Transform3D(0.766045, 0.219846, 0.604022, 2.33248e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719846, -0.990239, 0.156015, -0.548505)
 visible = false
 
 [node name="FrontRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.766045, 0.219847, 0.604023, -6.22055e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719847, -0.990245, 0.15601, -0.548503)
+transform = Transform3D(0.766045, 0.219847, 0.604023, -5.96117e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990245, 0.15601, -0.548503)
 visible = false
 
 [node name="BackRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.766045, 0.219847, 0.604022, -9.28266e-07, 0.939692, -0.34202, -0.642787, 0.262002, 0.719847, -0.990254, 0.156008, -0.548504)
+transform = Transform3D(0.766045, 0.219847, 0.604022, -9.71103e-07, 0.939692, -0.34202, -0.642787, 0.262002, 0.719847, -0.990254, 0.156008, -0.548505)
 visible = false
 
 [node name="ClarityBodyMeshes" parent="." instance=ExtResource("2_ovnif")]
@@ -1501,7 +1502,6 @@ visible = false
 transform = Transform3D(0.766045, 0.219846, 0.604022, 2.61259e-08, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990248, 0.15601, -0.548509)
 
 [node name="ClarityShardHurtbox" type="Area3D" parent="DressShardMaster/DressShardFrontLeft/Armature/Skeleton3D/FrontLeft" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 collision_layer = 8
 collision_mask = 257
 script = ExtResource("3_cemfj")
