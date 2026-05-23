@@ -1,8 +1,7 @@
-[gd_scene load_steps=182 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=144 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
-[ext_resource type="PackedScene" uid="uid://dagqjd43tcfch" path="res://glb_inherited_scenes/clarity_body_meshes.tscn" id="2_ovnif"]
 [ext_resource type="PackedScene" uid="uid://b70he2vkcfalc" path="res://enemies/clarity_head.tscn" id="3_05q7x"]
 [ext_resource type="Script" path="res://enemies/clarity_shard_hurtbox.gd" id="3_cemfj"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="4_5f0ps"]
@@ -238,6 +237,18 @@ shader_parameter/curve = SubResource("CurveTexture_vxuhc")
 [sub_resource type="QuadMesh" id="QuadMesh_w4b3d"]
 material = SubResource("ShaderMaterial_4duwi")
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1pjfc"]
+radius = 1.0
+height = 15.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7112o"]
+radius = 1.5
+height = 18.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a428p"]
+radius = 1.0
+height = 21.0
+
 [sub_resource type="Gradient" id="Gradient_6uq3t"]
 offsets = PackedFloat32Array(0, 0.526012, 1)
 colors = PackedColorArray(0.344767, 0.660412, 0.914527, 1, 0.548962, 0.772177, 0.963378, 1, 0.231014, 0.563762, 0.812967, 1)
@@ -278,7 +289,7 @@ curve = SubResource("Curve_gnlh5")
 emission_shape = 6
 emission_ring_axis = Vector3(2.08165e-12, -1, 2.08165e-12)
 emission_ring_height = 2.08165e-12
-emission_ring_radius = 1.2
+emission_ring_radius = 1.5
 emission_ring_inner_radius = 0.75
 direction = Vector3(0.45, -1, 2.08165e-12)
 spread = 36.0
@@ -328,18 +339,6 @@ scale_min = 3.6
 scale_max = 3.6
 scale_curve = SubResource("CurveTexture_k7hq0")
 color_ramp = SubResource("GradientTexture1D_e6812")
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1pjfc"]
-radius = 1.0
-height = 15.0
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7112o"]
-radius = 1.5
-height = 18.0
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a428p"]
-radius = 1.0
-height = 21.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o5urh"]
 
@@ -549,172 +548,6 @@ states/WalkLeftPassive/node = SubResource("AnimationNodeAnimation_nefrk")
 states/WalkLeftPassive/position = Vector2(-615.424, 99.9727)
 transitions = ["Start", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_3iee8"), "WalkLeftAggressive", "RaiseRightSlice", SubResource("AnimationNodeStateMachineTransition_1fa2q"), "WalkLeftPassive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_8v8bx"), "JumpShotToWalkLeft", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_1xoqv"), "WalkLeftAggressive", "SingleShotLeft", SubResource("AnimationNodeStateMachineTransition_s11a8"), "SingleShotLeft", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_hq72y"), "WalkLeftAggressive", "Spiral", SubResource("AnimationNodeStateMachineTransition_puc76"), "Spiral", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_xwdw6"), "Start", "Stagger", SubResource("AnimationNodeStateMachineTransition_7k4fw"), "Start", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_pgktn"), "WalkLeftAggressive", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_gk2ku"), "WalkForwardAggressive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_h5eo1"), "WalkForwardAggressive", "JumpShotToWalkLeft", SubResource("AnimationNodeStateMachineTransition_escja"), "RaiseRightSlice", "WaitLoweredLeft", SubResource("AnimationNodeStateMachineTransition_tkqms"), "RaiseLeftFast", "WaitRaisedLeft", SubResource("AnimationNodeStateMachineTransition_3can7"), "RaiseLeftSlow", "WaitRaisedLeft", SubResource("AnimationNodeStateMachineTransition_vj02r"), "RaiseLeftSliceFast", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_st2r4"), "LeftSliceFromWait", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_m3sfk"), "WalkLeftAggressive", "Backflip", SubResource("AnimationNodeStateMachineTransition_lg27b"), "Backflip", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_ghibe"), "WalkLeftAggressive", "FlickSlice", SubResource("AnimationNodeStateMachineTransition_2bist"), "WalkLeftAggressive", "LongSlice", SubResource("AnimationNodeStateMachineTransition_51kde"), "LongSlice", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_14msq"), "FlickSlice", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_h1aag"), "WalkLeftAggressive", "RegenShards", SubResource("AnimationNodeStateMachineTransition_tosqw"), "RegenShards", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_8hwl8"), "Stagger", "WalkLeftPassive", SubResource("AnimationNodeStateMachineTransition_aog5r")]
 graph_offset = Vector2(-704.492, -59.5875)
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_iyo4p"]
-animation = &"Backflip"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tiybn"]
-animation = &"JumpShotToWalkLeft"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gxtpo"]
-animation = &"RegenShards"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_phwpq"]
-animation = &"SingleShotLeft"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_irwvo"]
-animation = &"Spiral"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_butmb"]
-animation = &"Stagger"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8hxkp"]
-animation = &"StompBack"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jmgbt"]
-animation = &"StompFront"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ilobu"]
-animation = &"StompLeft"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6g8h6"]
-animation = &"StompRight"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f0ccn"]
-animation = &"WalkForwardAggressive"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0kj3c"]
-animation = &"WalkLeftAggressive"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_an84p"]
-advance_mode = 2
-advance_expression = "behav_state == CIRCLING"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x14do"]
-advance_mode = 2
-advance_expression = "behav_state != CIRCLING"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ysh00"]
-xfade_time = 0.3
-advance_mode = 2
-advance_expression = "behav_state == STRAIGHT"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h1np3"]
-xfade_time = 0.3
-advance_mode = 2
-advance_expression = "behav_state == CIRCLING"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_01fal"]
-advance_mode = 2
-advance_condition = &"Stomp"
-advance_expression = "choose_stomp_direction() == \"Left\""
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qj5wv"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hnecr"]
-advance_mode = 2
-advance_condition = &"Stomp"
-advance_expression = "choose_stomp_direction() == \"Right\""
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4pyd5"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_482ug"]
-advance_mode = 2
-advance_condition = &"Stomp"
-advance_expression = "choose_stomp_direction() == \"Front\""
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oq01q"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gwi8d"]
-advance_mode = 2
-advance_condition = &"Stomp"
-advance_expression = "choose_stomp_direction() == \"Back\""
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jfkwf"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g4kdt"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ofg36"]
-advance_mode = 2
-advance_condition = &"SingleShot"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eqy2o"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vkuw5"]
-advance_mode = 2
-advance_condition = &"JumpShot"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xxe52"]
-advance_mode = 2
-advance_condition = &"Spiral"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1cucn"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_octvo"]
-advance_mode = 2
-advance_expression = "behav_state == STAGGERED"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3xyu8"]
-advance_mode = 2
-advance_condition = &"Backflip"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1o5iv"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_51d2x"]
-advance_mode = 2
-advance_condition = &"RegenShards"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1k3cd"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lqh6v"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_7ssfo"]
-states/Backflip/node = SubResource("AnimationNodeAnimation_iyo4p")
-states/Backflip/position = Vector2(-178.024, 169.788)
-states/JumpShotToWalkLeft/node = SubResource("AnimationNodeAnimation_tiybn")
-states/JumpShotToWalkLeft/position = Vector2(187.309, 237.825)
-states/RegenShards/node = SubResource("AnimationNodeAnimation_gxtpo")
-states/RegenShards/position = Vector2(-126.94, 238.109)
-states/SingleShotLeft/node = SubResource("AnimationNodeAnimation_phwpq")
-states/SingleShotLeft/position = Vector2(46.8969, 99.2337)
-states/Spiral/node = SubResource("AnimationNodeAnimation_irwvo")
-states/Spiral/position = Vector2(46.8749, 238.394)
-states/Stagger/node = SubResource("AnimationNodeAnimation_butmb")
-states/Stagger/position = Vector2(199.84, 18.394)
-states/StompBack/node = SubResource("AnimationNodeAnimation_8hxkp")
-states/StompBack/position = Vector2(539.662, 209.617)
-states/StompFront/node = SubResource("AnimationNodeAnimation_jmgbt")
-states/StompFront/position = Vector2(540.412, 137.617)
-states/StompLeft/node = SubResource("AnimationNodeAnimation_ilobu")
-states/StompLeft/position = Vector2(318.413, 89.7609)
-states/StompRight/node = SubResource("AnimationNodeAnimation_6g8h6")
-states/StompRight/position = Vector2(450.913, 89.9631)
-states/WalkForwardAggressive/node = SubResource("AnimationNodeAnimation_f0ccn")
-states/WalkForwardAggressive/position = Vector2(360.588, 169.663)
-states/WalkLeftAggressive/node = SubResource("AnimationNodeAnimation_0kj3c")
-states/WalkLeftAggressive/position = Vector2(46.0875, 169.913)
-transitions = ["Start", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_an84p"), "Start", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_x14do"), "WalkLeftAggressive", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_ysh00"), "WalkForwardAggressive", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_h1np3"), "WalkForwardAggressive", "StompLeft", SubResource("AnimationNodeStateMachineTransition_01fal"), "StompLeft", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_qj5wv"), "WalkForwardAggressive", "StompRight", SubResource("AnimationNodeStateMachineTransition_hnecr"), "StompRight", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_4pyd5"), "WalkForwardAggressive", "StompFront", SubResource("AnimationNodeStateMachineTransition_482ug"), "StompFront", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_oq01q"), "WalkForwardAggressive", "StompBack", SubResource("AnimationNodeStateMachineTransition_gwi8d"), "StompBack", "WalkForwardAggressive", SubResource("AnimationNodeStateMachineTransition_jfkwf"), "JumpShotToWalkLeft", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_g4kdt"), "WalkLeftAggressive", "SingleShotLeft", SubResource("AnimationNodeStateMachineTransition_ofg36"), "SingleShotLeft", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_eqy2o"), "WalkForwardAggressive", "JumpShotToWalkLeft", SubResource("AnimationNodeStateMachineTransition_vkuw5"), "WalkLeftAggressive", "Spiral", SubResource("AnimationNodeStateMachineTransition_xxe52"), "Spiral", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_1cucn"), "Start", "Stagger", SubResource("AnimationNodeStateMachineTransition_octvo"), "WalkLeftAggressive", "Backflip", SubResource("AnimationNodeStateMachineTransition_3xyu8"), "Backflip", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_1o5iv"), "WalkLeftAggressive", "RegenShards", SubResource("AnimationNodeStateMachineTransition_51d2x"), "RegenShards", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_1k3cd"), "Stagger", "WalkLeftAggressive", SubResource("AnimationNodeStateMachineTransition_lqh6v")]
-graph_offset = Vector2(-220.493, 51.8085)
 
 [sub_resource type="PrismMesh" id="PrismMesh_ocn5u"]
 
@@ -1118,7 +951,7 @@ edge_fade = 3.0
 
 [node name="Clarity" type="CharacterBody3D"]
 collision_layer = 8
-collision_mask = 146
+collision_mask = 2
 script = ExtResource("1_172k1")
 phase1_min_long_dist_wait = 3.0
 phase1_max_long_dist_wait = 4.0
@@ -1144,10 +977,10 @@ transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
 [node name="Skeleton3D" parent="ClarityArmMeshes/Armature" index="0"]
 bones/0/position = Vector3(-0.0210742, 4.49276, 0.0847608)
 bones/0/rotation = Quaternion(0.0301653, 0.0796906, -0.0501057, 0.995102)
-bones/1/position = Vector3(1.5488e-07, 8.69174, -4.9728e-08)
+bones/1/position = Vector3(-1.58209e-09, 8.69174, 9.87667e-09)
 bones/1/rotation = Quaternion(0.0484073, -0.0812806, 0.0524297, 0.994133)
-bones/3/position = Vector3(-3.7482, 4.38423, -0.0847617)
-bones/3/rotation = Quaternion(0.00101032, -0.00552393, 0.86527, 0.501275)
+bones/3/position = Vector3(-3.7482, 4.38423, -0.0847618)
+bones/3/rotation = Quaternion(0.00101031, -0.00552394, 0.86527, 0.501275)
 bones/6/position = Vector3(2.01413, 2.22899, -2.08285)
 bones/6/rotation = Quaternion(0.305356, -0.212565, 0.925231, -0.0743114)
 bones/8/position = Vector3(2.06725, 1.3427, 0.8528)
@@ -1162,7 +995,7 @@ bones/16/position = Vector3(-2.85858, 2.94367, -0.755941)
 bones/16/rotation = Quaternion(0.321999, -0.24697, 0.885482, 0.226373)
 
 [node name="Hat_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1.42986, 0.00998904, -0.0170401, -0.0125258, 1.41244, -0.223079, 0.0152725, 0.223207, 1.41239, 0.918732, 14.4374, 0.659002)
+transform = Transform3D(1.42986, 0.00998905, -0.0170401, -0.0125258, 1.41244, -0.223079, 0.0152725, 0.223207, 1.41239, 0.918732, 14.4374, 0.659002)
 
 [node name="BodyLight" type="OmniLight3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2" index="1"]
 light_color = Color(0, 0.486275, 0.894118, 1)
@@ -1192,7 +1025,7 @@ opponent_hitboxes = ["PlayerHitbox"]
 shape = SubResource("SphereShape3D_g3bkq")
 
 [node name="Arm_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.339741, 0.92836, 0.150741, -0.932056, 0.353784, -0.0781571, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
+transform = Transform3D(0.339741, 0.92836, 0.15074, -0.932056, 0.353784, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
 
 [node name="EnemyHitbox" type="Area3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2" index="1"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
@@ -1299,8 +1132,7 @@ curve = SubResource("CurveTexture_vxuhc")
 _defaults_have_been_set = true
 
 [node name="Center_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.982278, 0.104528, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520492, 0.985479, 0.562103, 9.96609, 0.284472)
-visible = false
+transform = Transform3D(0.982278, 0.104529, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
 
 [node name="MiddleLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="3"]
 transform = Transform3D(0.766044, 0.219846, 0.604023, 1.18725e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548505)
@@ -1315,7 +1147,7 @@ transform = Transform3D(0.766044, 0.219846, 0.604023, 4.14429e-08, 0.939693, -0.
 visible = false
 
 [node name="MiddleRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 3.65041e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548508)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 6.51412e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548508)
 visible = false
 
 [node name="FrontRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="7"]
@@ -1325,96 +1157,6 @@ visible = false
 [node name="BackRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="8"]
 transform = Transform3D(0.766044, 0.219846, 0.604023, -3.64784e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548507)
 visible = false
-
-[node name="ClarityBodyMeshes" parent="." instance=ExtResource("2_ovnif")]
-transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
-
-[node name="Skeleton3D" parent="ClarityBodyMeshes/Armature" index="0"]
-bones/0/rotation = Quaternion(0.0301653, 0.0796906, -0.0501057, 0.995102)
-bones/1/rotation = Quaternion(0.0484073, -0.0812806, 0.0524297, 0.994133)
-bones/3/position = Vector3(-3.7482, 4.38423, -0.0847618)
-bones/3/rotation = Quaternion(0.00101031, -0.00552394, 0.86527, 0.501275)
-bones/6/position = Vector3(2.01413, 2.22899, -2.08285)
-bones/6/rotation = Quaternion(0.305356, -0.212565, 0.925231, -0.0743114)
-bones/8/position = Vector3(2.06725, 1.3427, 0.8528)
-bones/8/rotation = Quaternion(0.300211, -0.0905908, 0.944171, -0.101036)
-bones/10/position = Vector3(-0.870095, 2.94367, -2.42447)
-bones/10/rotation = Quaternion(0.322511, -0.334699, 0.885296, -0.0146623)
-bones/12/position = Vector3(-3.02298, 2.22899, 2.14379)
-bones/12/rotation = Quaternion(0.360811, -0.115068, 0.905047, 0.19356)
-bones/14/position = Vector3(-0.141156, 1.3427, 2.70588)
-bones/14/rotation = Quaternion(0.376926, -0.00445188, 0.916249, 0.135629)
-bones/16/position = Vector3(-2.85858, 2.94367, -0.755941)
-bones/16/rotation = Quaternion(0.321999, -0.24697, 0.885482, 0.226373)
-
-[node name="Hat_2" parent="ClarityBodyMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1.42986, 0.00998886, -0.0170402, -0.0125256, 1.41244, -0.22308, 0.0152726, 0.223208, 1.41239, 0.918731, 14.4374, 0.659002)
-visible = false
-
-[node name="ParticleAttractor" type="GPUParticlesAttractorSphere3D" parent="ClarityBodyMeshes/Armature/Skeleton3D/Hat_2" index="1"]
-transform = Transform3D(2, -3.24884e-14, -2.84217e-14, 3.24884e-14, 2, -5.6687e-08, 2.84217e-14, 5.6687e-08, 2, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-strength = 2.66454e-15
-radius = 30.0
-
-[node name="Arm_2" parent="ClarityBodyMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.339741, 0.928361, 0.150741, -0.932056, 0.353783, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57238, 8.73293, 0.998591)
-visible = false
-
-[node name="Arm_2" parent="ClarityBodyMeshes/Armature/Skeleton3D/Arm_2" index="0"]
-transform = Transform3D(1, -1.87228e-11, 9.66053e-17, -1.64536e-08, 1, 1.19524e-16, -3.23221e-16, -7.08343e-17, 1, 0, 0, 0)
-visible = false
-
-[node name="Center_2" parent="ClarityBodyMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.982278, 0.104528, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
-
-[node name="MiddleLeft" parent="ClarityBodyMeshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -2.9111e-08, 0.939693, -0.34202, -0.642788, 0.262002, 0.719846, -0.990243, 0.156013, -0.548501)
-visible = false
-
-[node name="FrontLeft" parent="ClarityBodyMeshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.766045, 0.219846, 0.604022, 2.61259e-08, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990248, 0.15601, -0.548509)
-visible = false
-
-[node name="BackLeft" parent="ClarityBodyMeshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -3.27128e-07, 0.939693, -0.342019, -0.642788, 0.262002, 0.719846, -0.990243, 0.15601, -0.548501)
-visible = false
-
-[node name="MiddleRight" parent="ClarityBodyMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.766045, 0.219846, 0.604022, 2.33248e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719846, -0.990239, 0.156015, -0.548505)
-visible = false
-
-[node name="FrontRight" parent="ClarityBodyMeshes/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.766045, 0.219847, 0.604023, -5.96117e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990245, 0.15601, -0.548503)
-visible = false
-
-[node name="BackRight" parent="ClarityBodyMeshes/Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.766045, 0.219847, 0.604022, -9.71103e-07, 0.939692, -0.34202, -0.642787, 0.262002, 0.719847, -0.990255, 0.156009, -0.548505)
-visible = false
-
-[node name="HatSnowParticles" type="GPUParticles3D" parent="ClarityBodyMeshes"]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 2.08165e-12, 10.5, 2.08165e-12)
-amount = 210
-lifetime = 2.7
-process_material = SubResource("ParticleProcessMaterial_pcb0r")
-draw_pass_1 = ExtResource("7_i53v5")
-
-[node name="HatFallingClouds" type="GPUParticles3D" parent="ClarityBodyMeshes"]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 2.08165e-12, 12, 2.08165e-12)
-cast_shadow = 0
-amount = 240
-lifetime = 4.8
-preprocess = 1.5
-process_material = SubResource("ParticleProcessMaterial_22vdl")
-draw_pass_1 = SubResource("QuadMesh_7dp0r")
-
-[node name="ChestClouds" type="GPUParticles3D" parent="ClarityBodyMeshes"]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 2.08165e-12, 12, 2.08165e-12)
-visible = false
-amount = 60
-lifetime = 6.0
-preprocess = 1.5
-process_material = SubResource("ParticleProcessMaterial_fdt0x")
-draw_pass_1 = SubResource("QuadMesh_7dp0r")
 
 [node name="DressShardMaster" parent="." instance=ExtResource("13_2l47j")]
 transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
@@ -1912,6 +1654,31 @@ frostbite_buildup = 9
 transform = Transform3D(0.965923, 0.258818, 3.36902e-16, -0.249999, 0.93301, -0.258819, -0.0669871, 0.249999, 0.965924, -3.8, -6.9, -4.7)
 shape = SubResource("CapsuleShape3D_a428p")
 
+[node name="HatSnowParticles" type="GPUParticles3D" parent="DressShardMaster"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 2.08165e-12, 10.5, 2.08165e-12)
+amount = 210
+lifetime = 2.7
+process_material = SubResource("ParticleProcessMaterial_pcb0r")
+draw_pass_1 = ExtResource("7_i53v5")
+
+[node name="HatFallingClouds" type="GPUParticles3D" parent="DressShardMaster"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 2.08165e-12, 12.6, 2.08165e-12)
+cast_shadow = 0
+amount = 240
+lifetime = 4.8
+preprocess = 1.5
+process_material = SubResource("ParticleProcessMaterial_22vdl")
+draw_pass_1 = SubResource("QuadMesh_7dp0r")
+
+[node name="ChestClouds" type="GPUParticles3D" parent="DressShardMaster"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 2.08165e-12, 12, 2.08165e-12)
+visible = false
+amount = 60
+lifetime = 6.0
+preprocess = 1.5
+process_material = SubResource("ParticleProcessMaterial_fdt0x")
+draw_pass_1 = SubResource("QuadMesh_7dp0r")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -2.4, 2.08165e-12)
 shape = SubResource("CapsuleShape3D_o5urh")
@@ -1930,17 +1697,6 @@ parameters/conditions/LongSlice = false
 parameters/conditions/RegenShards = false
 parameters/conditions/SingleShot = false
 parameters/conditions/Spiral = false
-
-[node name="BodyAnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_7ssfo")
-anim_player = NodePath("../ClarityBodyMeshes/AnimationPlayer")
-advance_expression_base_node = NodePath("..")
-parameters/conditions/Backflip = false
-parameters/conditions/JumpShot = false
-parameters/conditions/RegenShards = false
-parameters/conditions/SingleShot = false
-parameters/conditions/Spiral = false
-parameters/conditions/Stomp = false
 
 [node name="Marker" type="MeshInstance3D" parent="."]
 top_level = true
@@ -2022,7 +1778,6 @@ material = SubResource("FogMaterial_hru1u")
 
 [editable path="ClarityArmMeshes"]
 [editable path="ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead"]
-[editable path="ClarityBodyMeshes"]
 [editable path="DressShardMaster"]
 [editable path="DressShardMaster/DressShardFrontLeft"]
 [editable path="DressShardMaster/DressShardFrontRight"]

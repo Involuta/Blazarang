@@ -106,11 +106,9 @@ var rng := RandomNumberGenerator.new()
 var transparent_mat := preload("res://textures/clear_tile.tres")
 @onready var arm_anim_tree := $ArmAnimationTree # Controls arm attacks
 @onready var arm_anim_player := $ClarityArmMeshes/AnimationPlayer # Depends on Clarity.glb. Plays stagger anim after anim tree is set inactive
-@onready var body_anim_tree := $BodyAnimationTree # Controls walk anim
-@onready var body_anim_player := $ClarityBodyMeshes/AnimationPlayer # Depends on ClarityBodyMeshes.glb. Plays stagger anim after anim tree is set inactive
 @onready var mhp := $MeleeHitboxPivot
 @onready var arm_meshes := $ClarityArmMeshes
-@onready var body_meshes := $ClarityBodyMeshes
+@onready var body_meshes := $DressShardMaster
 @onready var head_light := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/BaseOffsetRotation/HeadMesh/HeadLight
 @onready var head_bone := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2
 @onready var head_mesh := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
@@ -118,7 +116,6 @@ var transparent_mat := preload("res://textures/clear_tile.tres")
 @onready var blizzard_hitbox := $BlizzardDOT
 @onready var snowfall_particles := $SnowfallParticles
 @onready var blizzard_particles := $BlizzardParticles
-@onready var particle_attractor := $ClarityBodyMeshes/Armature/Skeleton3D/Hat_2/ParticleAttractor
 @onready var body_cone_fog := $FogVolume/BodyCone
 @onready var feet_fog := $FogVolume/FeetFog
 @onready var body_cloud := $FogVolume/BodyCloud
@@ -136,7 +133,6 @@ var level_env : Environment
 var sky : ProceduralSkyMaterial
 var level_fog : FogMaterial
 var arm_state_machine : AnimationNodeStateMachinePlayback
-var body_state_machine : AnimationNodeStateMachinePlayback
 
 class DressShard extends Node3D:
 	var node : Node
@@ -183,10 +179,8 @@ func _ready():
 	switch_to_circling()
 	
 	arm_state_machine = arm_anim_tree["parameters/playback"]
-	body_state_machine = body_anim_tree["parameters/playback"]
 	
 	arm_anim_tree.active = true
-	body_anim_tree.active = true
 	mhp.visible = false
 	
 	dress_shards["FrontLeft"] = DressShard.new(find_child("DressShardFrontLeft"))
@@ -224,7 +218,6 @@ func switch_to_staggered():
 	look_state = LOOK_STATE.TARGET_HEAD_ARM_BODY
 	# Switch to Stagger anim
 	arm_state_machine.travel("Stagger")
-	body_state_machine.travel("Stagger")
 	# Move backward
 	var t = get_tree().create_tween()
 	var move_dir := 3 * walk_speed * target.global_position.direction_to(global_position)
@@ -408,15 +401,12 @@ func queue_attack():
 				STRAIGHT:
 					var attack = choose_attack(phase1_straight_attack_chances)
 					arm_anim_tree.set(attack, true)
-					body_anim_tree.set(attack, true)
 				CURVED:
 					var attack = choose_attack(phase1_curved_attack_chances)
 					arm_anim_tree.set(attack, true)
-					body_anim_tree.set(attack, true)
 				CIRCLING:
 					var attack = choose_attack(phase1_circling_attack_chances)
 					arm_anim_tree.set(attack, true)
-					body_anim_tree.set(attack, true)
 		PHASE.PHASE2:
 			pass # pass until phase2 is confirmed to exist
 
@@ -443,7 +433,6 @@ func end_attack():
 	for ac in attack_chances:
 		for attack in ac.keys():
 			arm_anim_tree.set(param_path_base + attack, false)
-			body_anim_tree.set(param_path_base + attack, false)
 	long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	"""
 	FOR TESTING: behav_state is chosen here manually instead of randomly btwn str and cur

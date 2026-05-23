@@ -52,3 +52,4 @@ res://enemies/enemy_anims/clarity_wait_raised_left.res
 res://enemies/clarity_head.tscn
 res://levels/snow_level/snow_level_test_env.tscn
 res://enemies/ice_sprite.tscn
+res://enemies/clarity.gd
