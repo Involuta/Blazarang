@@ -952,14 +952,14 @@ bones/1/rotation = Quaternion(0.0484073, -0.0812806, 0.0524297, 0.994133)
 bones/3/rotation = Quaternion(0.00101031, -0.00552394, 0.86527, 0.501275)
 bones/6/position = Vector3(2.01413, 2.22899, -2.08285)
 bones/6/rotation = Quaternion(0.305356, -0.212565, 0.925231, -0.0743114)
-bones/8/position = Vector3(2.06725, 1.3427, 0.8528)
-bones/8/rotation = Quaternion(0.300211, -0.0905908, 0.944171, -0.101036)
+bones/8/position = Vector3(1.92774, -7.81786, 50.7041)
+bones/8/rotation = Quaternion(-0.560468, 0.427109, 0.433068, -0.562054)
 bones/10/position = Vector3(-0.870095, 2.94367, -2.42447)
 bones/10/rotation = Quaternion(0.322511, -0.334699, 0.885296, -0.0146623)
 bones/12/position = Vector3(-3.02298, 2.22899, 2.14379)
 bones/12/rotation = Quaternion(0.360811, -0.115068, 0.905047, 0.19356)
-bones/14/position = Vector3(-0.141156, 1.3427, 2.70588)
-bones/14/rotation = Quaternion(0.376926, -0.00445188, 0.916249, 0.135629)
+bones/14/position = Vector3(-1.92774, -7.81787, 50.7041)
+bones/14/rotation = Quaternion(0.560468, 0.427109, 0.433069, 0.562054)
 bones/16/position = Vector3(-2.85858, 2.94367, -0.755941)
 bones/16/rotation = Quaternion(0.321999, -0.24697, 0.885482, 0.226373)
 
@@ -976,16 +976,16 @@ transform = Transform3D(0.982278, 0.104529, 0.155578, -0.0949129, 0.993159, -0.0
 transform = Transform3D(0.766044, 0.219846, 0.604023, 1.18725e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548505)
 
 [node name="FrontLeft" parent="DressShardMaster/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 8.1839e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990245, 0.156011, -0.548507)
+transform = Transform3D(-0.18317, -0.303055, -0.935204, 0.948596, 0.195269, -0.24907, 0.258098, -0.932753, 0.251709, 5.13561, -8.99576, 51.725)
 
 [node name="BackLeft" parent="DressShardMaster/Armature/Skeleton3D" index="5"]
 transform = Transform3D(0.766044, 0.219846, 0.604023, 4.14429e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156009, -0.548506)
 
 [node name="MiddleRight" parent="DressShardMaster/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 6.51412e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548508)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 7.62894e-09, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548507)
 
 [node name="FrontRight" parent="DressShardMaster/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -1.26024e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548506)
+transform = Transform3D(-0.18317, 0.303055, 0.935204, -0.948596, 0.195269, -0.24907, -0.258099, -0.932752, 0.251709, -5.1356, -8.99577, 51.725)
 
 [node name="BackRight" parent="DressShardMaster/Armature/Skeleton3D" index="8"]
 transform = Transform3D(0.766044, 0.219846, 0.604023, -3.64784e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548507)

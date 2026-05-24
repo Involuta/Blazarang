@@ -37,3 +37,6 @@ res://enemies/clarity.gd
 res://enemies/enemy_anims/clarity_raise_left_slice_fast.res
 res://enemies/enemy_anims/clarity_left_slice_from_wait.res
 res://enemies/enemy_anims/clarity_longslice.res
+res://enemies/enemy_anims/clarity_dress_shard_test_sequence.res
+res://enemies/enemy_anims/clarity_single_shard_sequence1.res
+res://enemies/enemy_anims/clarity_double_shard_sequence1.res

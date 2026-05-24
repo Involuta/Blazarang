@@ -171,6 +171,7 @@ func _ready():
 	min_long_dist_wait = phase1_min_long_dist_wait
 	max_long_dist_wait = phase1_max_long_dist_wait
 	arm_long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
+	snowflake_long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	
 	switch_to_circling()
 	
