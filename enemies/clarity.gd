@@ -93,7 +93,7 @@ var staggerable := false # When head is exposed but not glowing, staggerable is 
 }
 
 @export var phase1_circling_attack_chances = {
-	"DoubleSlice" : .2,
+	"RaiseRightSlice" : .2,
 	"Backflip" : .2,
 	"FlickSlice" : .2,
 	"LongSlice" : .2,
@@ -104,11 +104,10 @@ var param_path_base := "parameters/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 var transparent_mat := preload("res://textures/clear_tile.tres")
-@onready var arm_anim_tree := $ArmAnimationTree # Controls arm attacks
 @onready var arm_anim_player := $ClarityArmMeshes/AnimationPlayer # Depends on Clarity.glb. Plays stagger anim after anim tree is set inactive
 @onready var mhp := $MeleeHitboxPivot
 @onready var arm_meshes := $ClarityArmMeshes
-@onready var body_meshes := $DressShardMaster
+@onready var body_meshes := $DressShardMaster # Depends on ClarityDressMeshes.glb. Plays dress shard anims
 @onready var head_light := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/BaseOffsetRotation/HeadMesh/HeadLight
 @onready var head_bone := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2
 @onready var head_mesh := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
@@ -132,7 +131,6 @@ var clarity_icon : Node3D
 var level_env : Environment
 var sky : ProceduralSkyMaterial
 var level_fog : FogMaterial
-var arm_state_machine : AnimationNodeStateMachinePlayback
 
 class DressShard extends Node3D:
 	var node : Node
@@ -178,9 +176,6 @@ func _ready():
 	
 	switch_to_circling()
 	
-	arm_state_machine = arm_anim_tree["parameters/playback"]
-	
-	arm_anim_tree.active = true
 	mhp.visible = false
 	
 	dress_shards["FrontLeft"] = DressShard.new(find_child("DressShardFrontLeft"))
@@ -192,6 +187,9 @@ func _ready():
 	dress_shards["Master"] = DressShard.new(find_child("DressShardMaster"))
 	
 	head_hurtbox.hit_received.connect(on_head_hit)
+	
+	# Set up all states pre-fight. This may eventually be replaced by either a PreFight anim or an anim that spawns the snowflake entity
+	arm_anim_player.play("WalkLeftAggressive")
 	
 	await get_tree().create_timer(3).timeout
 	play_anim_all_dress_shards("SingleShardSequence1")
@@ -217,7 +215,7 @@ func switch_to_staggered():
 	behav_state = STAGGERED
 	look_state = LOOK_STATE.TARGET_HEAD_ARM_BODY
 	# Switch to Stagger anim
-	arm_state_machine.travel("Stagger")
+	arm_anim_player.play("Stagger")
 	# Move backward
 	var t = get_tree().create_tween()
 	var move_dir := 3 * walk_speed * target.global_position.direction_to(global_position)
@@ -400,13 +398,13 @@ func queue_attack():
 			match(behav_state):
 				STRAIGHT:
 					var attack = choose_attack(phase1_straight_attack_chances)
-					arm_anim_tree.set(attack, true)
+					arm_anim_player.play(attack)
 				CURVED:
 					var attack = choose_attack(phase1_curved_attack_chances)
-					arm_anim_tree.set(attack, true)
+					arm_anim_player.play(attack)
 				CIRCLING:
 					var attack = choose_attack(phase1_circling_attack_chances)
-					arm_anim_tree.set(attack, true)
+					arm_anim_player.play(attack)
 		PHASE.PHASE2:
 			pass # pass until phase2 is confirmed to exist
 
@@ -416,8 +414,8 @@ func choose_attack(attack_chances) -> String:
 	for attack in attack_chances:
 		cumulative_weight += attack_chances[attack]
 		if choice <= cumulative_weight:
-			return param_path_base + attack
-	return param_path_base + attack_chances.keys()[0]
+			return attack
+	return attack_chances.keys()[0]
 
 func start_attack():
 	# Without this await, the animation player would call end_attack at the end of the previous animation on the exact same frame as when the AnimationPlayer.play func is called below. Since an animation was currently in progress, the func call would do nothing, leaving the enemy in ATTACK mode but with no animation playing to free it from ATTACK mode, causing it to stand still indefinitely
@@ -429,10 +427,6 @@ func end_attack():
 	attacking = false
 	attack_queued = false
 	no_attack_queued.emit()
-	var attack_chances = [phase1_straight_attack_chances, phase1_curved_attack_chances, phase1_circling_attack_chances]
-	for ac in attack_chances:
-		for attack in ac.keys():
-			arm_anim_tree.set(param_path_base + attack, false)
 	long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	"""
 	FOR TESTING: behav_state is chosen here manually instead of randomly btwn str and cur
@@ -505,14 +499,14 @@ func wait_lowered_left():
 		# All next moves have equal weight
 		cumulative_weight += 1.0 / next_moves.size()
 		if choice <= cumulative_weight:
-			arm_state_machine.travel(move)
+			arm_anim_player.play(move)
 			return
-	arm_state_machine.travel(next_moves[0])
+	arm_anim_player.play(next_moves[0])
 
 func wait_raised_left():
 	var wait_time := randf_range(wait_raised_left_min_secs, wait_raised_left_max_secs)
 	await get_tree().create_timer(wait_time).timeout
-	arm_state_machine.travel("LeftSliceFromWait")
+	arm_anim_player.play("LeftSliceFromWait")
 
 func jump_shot_mvmt():
 	switch_to_special()
