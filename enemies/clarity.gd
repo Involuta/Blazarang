@@ -11,7 +11,8 @@ enum {
 	STAGGERED,
 }
 var behav_state := CIRCLING
-var attacking := false # Set to true when attacking to prevent another attack from being queued
+var arm_attacking := false # Set to true when arm is attacking to prevent another attack from being queued
+var snowflake_attacking := false # Same as arm_attacking but for the snowflake
 
 # Look state is controlled within anim keyframes bc one anim can have multiple look states (e.g. jump shot, which goes from STOP or DIR to BODY FULL ROT to TARGET HEAD ARM BODY (which may be renamed TARGET LATERAL))
 enum LOOK_STATE {
@@ -34,9 +35,12 @@ enum DIST_TYPE {
 @export var phase2_max_long_dist_wait := 1
 var min_long_dist_wait := .5
 var max_long_dist_wait := 2.5
-var long_dist_wait_remaining := 2.5
-var attack_queued := false
-signal no_attack_queued
+var arm_long_dist_wait_remaining := 2.5
+var snowflake_long_dist_wait_remaining := 2.5
+var arm_attack_queued := false
+var snowflake_attack_queued := false
+signal no_arm_attack_queued
+signal no_snowflake_attack_queued
 
 enum PHASE {
 	PHASE1,
@@ -83,21 +87,15 @@ var staggerable := false # When head is exposed but not glowing, staggerable is 
 @export var wait_raised_left_min_secs := .6
 @export var wait_raised_left_max_secs := 6.0
 
-@export var phase1_straight_attack_chances = {
-	"Stomp" : .75,
-	"JumpShot" : .25
+@export var arm_attack_chances = {
+	"RaiseRightSlice" : .5,
+	"LongSlice" : .5,
+	"RegenShards" : 0.0,
 }
 
-@export var phase1_curved_attack_chances = {
-	"Stomp" : 1.0
-}
-
-@export var phase1_circling_attack_chances = {
-	"RaiseRightSlice" : .2,
-	"Backflip" : .2,
-	"FlickSlice" : .2,
-	"LongSlice" : .2,
-	"RegenShards" : .2,
+@export var snowflake_attack_chances = {
+	"DoubleShardSequence1" : .5,
+	"SingleShardSequence1" : .5,
 }
 
 var param_path_base := "parameters/conditions/"
@@ -172,7 +170,7 @@ func _ready():
 	
 	min_long_dist_wait = phase1_min_long_dist_wait
 	max_long_dist_wait = phase1_max_long_dist_wait
-	long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
+	arm_long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	
 	switch_to_circling()
 	
@@ -333,16 +331,27 @@ func get_random_flat_unit_vector() -> Vector3:
 	# 3. Return the resulting Vector3
 	return Vector3(x, 0, z)
 
-func long_dist_attack_check():
-	if attacking:
+func arm_long_dist_attack_check():
+	if arm_attacking:
 		return
 	# This code block ensures start_long_dist_attack is only called once
-	if long_dist_wait_remaining <= 0:
+	if arm_long_dist_wait_remaining <= 0:
 		return
 	else:
-		long_dist_wait_remaining -= get_physics_process_delta_time()
-		if not attack_queued and long_dist_wait_remaining <= 0:
-			queue_attack()
+		arm_long_dist_wait_remaining -= get_physics_process_delta_time()
+		if not arm_attack_queued and arm_long_dist_wait_remaining <= 0:
+			queue_arm_attack()
+
+func snowflake_long_dist_attack_check():
+	if snowflake_attacking:
+		return
+	# This code block queue_attack is only called once
+	if snowflake_long_dist_wait_remaining <= 0:
+		return
+	else:
+		snowflake_long_dist_wait_remaining -= get_physics_process_delta_time()
+		if not snowflake_attack_queued and snowflake_long_dist_wait_remaining <= 0:
+			queue_snowflake_attack()
 
 func switch_to_straight():
 	behav_state = STRAIGHT
@@ -351,7 +360,7 @@ func switch_to_straight():
 
 func walk_straight(dir: Vector3):
 	velocity = walk_speed * dir
-	long_dist_attack_check()
+	arm_long_dist_attack_check()
 
 func switch_to_curved():
 	behav_state = CURVED
@@ -381,7 +390,8 @@ func walk_curved(circling_target: bool):
 	velocity.x = tangent_dir.x * walk_speed
 	velocity.z = tangent_dir.z * walk_speed
 	
-	long_dist_attack_check()
+	arm_long_dist_attack_check()
+	snowflake_long_dist_attack_check()
 
 func switch_to_circling():
 	behav_state = CIRCLING
@@ -391,20 +401,25 @@ func switch_to_special():
 	behav_state = SPECIAL
 	# Look state isn't set bc look state often changes in special attacks (e.g. jump shot goes from STOP to BODY FULL ROTATION to TARGET HEAD ARM BODY ROTATION)
 
-func queue_attack():
-	attack_queued = true
+func queue_arm_attack():
+	arm_attack_queued = true
 	match(phase):
 		PHASE.PHASE1:
 			match(behav_state):
-				STRAIGHT:
-					var attack = choose_attack(phase1_straight_attack_chances)
-					arm_anim_player.play(attack)
-				CURVED:
-					var attack = choose_attack(phase1_curved_attack_chances)
-					arm_anim_player.play(attack)
 				CIRCLING:
-					var attack = choose_attack(phase1_circling_attack_chances)
+					var attack = choose_attack(arm_attack_chances)
 					arm_anim_player.play(attack)
+		PHASE.PHASE2:
+			pass # pass until phase2 is confirmed to exist
+
+func queue_snowflake_attack():
+	snowflake_attack_queued = true
+	match(phase):
+		PHASE.PHASE1:
+			match(behav_state):
+				CIRCLING:
+					var attack = choose_attack(snowflake_attack_chances)
+					play_anim_all_dress_shards(attack)
 		PHASE.PHASE2:
 			pass # pass until phase2 is confirmed to exist
 
@@ -417,17 +432,42 @@ func choose_attack(attack_chances) -> String:
 			return attack
 	return attack_chances.keys()[0]
 
-func start_attack():
+func start_arm_attack():
 	# Without this await, the animation player would call end_attack at the end of the previous animation on the exact same frame as when the AnimationPlayer.play func is called below. Since an animation was currently in progress, the func call would do nothing, leaving the enemy in ATTACK mode but with no animation playing to free it from ATTACK mode, causing it to stand still indefinitely
 	await get_tree().physics_frame
-	attacking = true # Prevent another attack from being queued
+	arm_attacking = true # Prevent another arm attack from being queued
 	aiming_at_target = true
 
-func end_attack():
-	attacking = false
-	attack_queued = false
-	no_attack_queued.emit()
-	long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
+func start_snowflake_attack():
+	# Without this await, the animation player would call end_attack at the end of the previous animation on the exact same frame as when the AnimationPlayer.play func is called below. Since an animation was currently in progress, the func call would do nothing, leaving the enemy in ATTACK mode but with no animation playing to free it from ATTACK mode, causing it to stand still indefinitely
+	await get_tree().physics_frame
+	snowflake_attacking = true # Prevent another arm attack from being queued
+
+func end_arm_attack():
+	arm_attacking = false
+	arm_attack_queued = false
+	no_arm_attack_queued.emit()
+	arm_long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
+	"""
+	FOR TESTING: behav_state is chosen here manually instead of randomly btwn str and cur
+	NOTE: certain attacks always go to certain states (e.g. any jump shot to walk left must switch to circling)
+	"""
+	switch_to_circling()
+	"""
+	match(behav_state):
+		STRAIGHT:
+			switch_to_curved()
+		CURVED:
+			switch_to_circling()
+		CIRCLING:
+			switch_to_straight()
+	"""
+
+func end_snowflake_attack():
+	snowflake_attacking = false
+	snowflake_attack_queued = false
+	no_snowflake_attack_queued.emit()
+	snowflake_long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	"""
 	FOR TESTING: behav_state is chosen here manually instead of randomly btwn str and cur
 	NOTE: certain attacks always go to certain states (e.g. any jump shot to walk left must switch to circling)

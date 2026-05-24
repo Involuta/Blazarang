@@ -34,3 +34,6 @@ res://enemies/clarity.tscn
 res://enemies/enemy_anims/clarity_raise_left_fast.res
 res://enemies/enemy_anims/clarity_raise_left_slow.res
 res://enemies/clarity.gd
+res://enemies/enemy_anims/clarity_raise_left_slice_fast.res
+res://enemies/enemy_anims/clarity_left_slice_from_wait.res
+res://enemies/enemy_anims/clarity_longslice.res
