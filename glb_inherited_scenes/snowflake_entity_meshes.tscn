@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://cyguldrcukgxk"]
+
+[ext_resource type="PackedScene" uid="uid://cx5rx4acw6xna" path="res://glb_imports/SnowflakeEntity.glb" id="1_xrs3j"]
+
+[sub_resource type="Shader" id="Shader_uu2fc"]
+code = "shader_type spatial;
+render_mode cull_front, unshaded;
+
+uniform vec4 outline_color : source_color;
+uniform float outline_width = 1.0;
+
+void vertex() {
+	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
+	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
+	
+	vec2 offset = normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
+	
+	clip_position.xy += offset;
+	
+	POSITION = clip_position;
+}
+
+void fragment() {
+	ALBEDO = outline_color.rgb;
+	if (outline_color.a < 1.0) {
+		ALPHA = outline_color.a;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1l8q7"]
+render_priority = 0
+shader = SubResource("Shader_uu2fc")
+shader_parameter/outline_color = Color(0.815686, 0.92549, 1, 1)
+shader_parameter/outline_width = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3cxnu"]
+next_pass = SubResource("ShaderMaterial_1l8q7")
+transparency = 4
+albedo_color = Color(0.784314, 0.901961, 1, 1)
+roughness = 0.12
+refraction_enabled = true
+
+[node name="SnowflakeEntityMeshes" instance=ExtResource("1_xrs3j")]
+
+[node name="Spikes" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_3cxnu")
+
+[node name="CentralEye" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_3cxnu")

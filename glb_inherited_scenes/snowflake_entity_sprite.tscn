@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dhtdubq3e6ehk"]
+
+[ext_resource type="PackedScene" uid="uid://dmclvr8dflgu" path="res://glb_imports/SnowflakeEntityFlat.glb" id="1_vl41p"]
+[ext_resource type="Texture2D" uid="uid://namwvkk58jhe" path="res://sprites/blurry_circle.png" id="2_5ddhm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_evht3"]
+shading_mode = 0
+albedo_color = Color(0.584314, 0.792157, 1, 1)
+
+[node name="SnowflakeEntitySprite" instance=ExtResource("1_vl41p")]
+
+[node name="FlatSpikes" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_evht3")
+
+[node name="FlatCentralEye" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_evht3")
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="3"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+transparency = 0.7
+modulate = Color(0.603922, 0.839216, 1, 1)
+texture = ExtResource("2_5ddhm")
