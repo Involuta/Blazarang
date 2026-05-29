@@ -106,6 +106,7 @@ var transparent_mat := preload("res://textures/clear_tile.tres")
 @onready var mhp := $MeleeHitboxPivot
 @onready var arm_meshes := $ClarityArmMeshes
 @onready var body_meshes := $DressShardMaster # Depends on ClarityDressMeshes.glb. Plays dress shard anims
+@onready var snowflake := $ClarityArmMeshes/SnowflakeEntity
 @onready var head_light := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/BaseOffsetRotation/HeadMesh/HeadLight
 @onready var head_bone := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2
 @onready var head_mesh := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
@@ -249,13 +250,16 @@ func body_look_in_direction(dir: Vector3):
 	body_meshes.rotation.y = lerp_angle(body_meshes.rotation.y, PI + atan2(-dir.x, -dir.z), body_turn_speed)
 	body_meshes.rotation.z = lerp_angle(body_meshes.rotation.z, 0, body_turn_speed)
 
-func dress_shards_look_in_direction(dir: Vector3):
-	var ds_master = dress_shards["Master"]
-	ds_master.node.rotation.x = lerp_angle(ds_master.node.rotation.x, 0, body_turn_speed)
-	ds_master.node.rotation.y = lerp_angle(ds_master.node.rotation.y, PI + atan2(-dir.x, -dir.z), body_turn_speed)
-	ds_master.node.rotation.z = lerp_angle(ds_master.node.rotation.z, 0, body_turn_speed)
+func snowflake_face_position(target_pos: Vector3):
+	var old_rotation = snowflake.rotation
+	snowflake.look_at(snowflake.global_position + snowflake.global_position.direction_to(target_pos), Vector3.UP, true)
+	var target_rotation = snowflake.rotation
+	snowflake.rotation = old_rotation
+	snowflake.rotation.x = lerp_angle(snowflake.rotation.x, target_rotation.x, body_turn_speed / 2.1)
+	snowflake.rotation.y = lerp_angle(snowflake.rotation.y, target_rotation.y, body_turn_speed / 2.1)
+	snowflake.rotation.z = lerp_angle(snowflake.rotation.z, target_rotation.z, body_turn_speed / 2.1)
 
-func body_face_position_directly(target_pos):
+func body_face_position_directly(target_pos: Vector3):
 	for m in [arm_meshes, body_meshes]:
 		var old_rotation = m.rotation
 		m.look_at(m.global_position + m.global_position.direction_to(target_pos), Vector3.UP, true)
@@ -284,6 +288,10 @@ func _physics_process(delta):
 			velocity.y = 0
 			global_position.y = min_y_pos
 	move_and_slide()
+	
+	# Change this when you add snowflake look states
+	snowflake_face_position(target.global_position)
+	
 	match(look_state):
 		LOOK_STATE.DIR:
 			var look_pos = global_position + look_forward_dist * velocity.normalized()
@@ -296,12 +304,10 @@ func _physics_process(delta):
 			head_look_at_position(target.global_position)
 			arm_look_at_position(target.global_position)
 			body_look_in_direction(velocity)
-			dress_shards_look_in_direction(velocity)
 		LOOK_STATE.TARGET_HEAD_ARM_BODY:
 			head_look_at_position(target.global_position)
 			arm_look_at_position(target.global_position)
 			body_look_in_direction(global_position.direction_to(target.global_position))
-			dress_shards_look_in_direction(global_position.direction_to(target.global_position))
 		LOOK_STATE.TARGET_BODY_FULL_ROTATION:
 			if aiming_at_target:
 				body_face_position_directly(target.global_position)

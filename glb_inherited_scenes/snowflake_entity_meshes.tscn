@@ -45,5 +45,5 @@ refraction_enabled = true
 [node name="Spikes" parent="." index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_3cxnu")
 
-[node name="CentralEye" parent="." index="1"]
+[node name="CentralEye" parent="." index="2"]
 surface_material_override/0 = SubResource("StandardMaterial3D_3cxnu")

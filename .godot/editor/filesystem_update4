@@ -34,3 +34,4 @@ res://enemies/ice_sprite.tscn
 res://cotu/cotu_cb_main.tscn
 res://glb_inherited_scenes/snowflake_entity_sprite.tscn
 res://enemies/enemy_anims/clarity_longslice.res
+res://enemies/clarity.gd
