@@ -1,49 +1,127 @@
-[gd_scene load_steps=5 format=3 uid="uid://cyguldrcukgxk"]
+[gd_scene load_steps=10 format=3 uid="uid://cyguldrcukgxk"]
 
 [ext_resource type="PackedScene" uid="uid://cx5rx4acw6xna" path="res://glb_imports/SnowflakeEntity.glb" id="1_xrs3j"]
+[ext_resource type="Shader" path="res://shaders/black_outline.gdshader" id="2_ta7da"]
+[ext_resource type="Texture2D" uid="uid://namwvkk58jhe" path="res://sprites/blurry_circle.png" id="2_x83ru"]
 
-[sub_resource type="Shader" id="Shader_uu2fc"]
-code = "shader_type spatial;
-render_mode cull_front, unshaded;
-
-uniform vec4 outline_color : source_color;
-uniform float outline_width = 1.0;
-
-void vertex() {
-	vec4 clip_position = PROJECTION_MATRIX * (MODELVIEW_MATRIX * vec4(VERTEX, 1.0));
-	vec3 clip_normal = mat3(PROJECTION_MATRIX) * (mat3(MODELVIEW_MATRIX) * NORMAL);
-	
-	vec2 offset = normalize(clip_normal.xy) / VIEWPORT_SIZE * clip_position.w * outline_width * 2.0;
-	
-	clip_position.xy += offset;
-	
-	POSITION = clip_position;
-}
-
-void fragment() {
-	ALBEDO = outline_color.rgb;
-	if (outline_color.a < 1.0) {
-		ALPHA = outline_color.a;
-	}
-}"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1l8q7"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c8oi3"]
 render_priority = 0
-shader = SubResource("Shader_uu2fc")
-shader_parameter/outline_color = Color(0.815686, 0.92549, 1, 1)
+shader = ExtResource("2_ta7da")
+shader_parameter/outline_color = Color(0.603922, 0.847059, 1, 1)
 shader_parameter/outline_width = 1.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3cxnu"]
-next_pass = SubResource("ShaderMaterial_1l8q7")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7lkse"]
+next_pass = SubResource("ShaderMaterial_c8oi3")
 transparency = 4
-albedo_color = Color(0.784314, 0.901961, 1, 1)
+albedo_color = Color(0.560784, 0.803922, 1, 1)
 roughness = 0.12
 refraction_enabled = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vryks"]
+shading_mode = 0
+albedo_color = Color(0.337255, 0.745098, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_idhv3"]
+roughness = 0.12
+emission_enabled = true
+emission = Color(0, 0.415686, 0.768627, 1)
+emission_energy_multiplier = 2.0
+subsurf_scatter_strength = 0.01
+
+[sub_resource type="SphereMesh" id="SphereMesh_76tcq"]
+material = SubResource("StandardMaterial3D_idhv3")
+radius = 0.375
+height = 0.75
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fhk40"]
+shading_mode = 0
+albedo_color = Color(0.698039, 1, 1, 1)
+
 [node name="SnowflakeEntityMeshes" instance=ExtResource("1_xrs3j")]
 
-[node name="Spikes" parent="." index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_3cxnu")
+[node name="CentralEye" parent="Armature/Skeleton3D" index="0"]
+transform = Transform3D(1, -3.74218e-14, -5.40003e-14, -3.74218e-14, 1, -7.10543e-15, -5.40003e-14, -7.10543e-15, 1, -2.86885e-15, -1.78814e-08, 7.45058e-09)
+bone_idx = 1
 
-[node name="CentralEye" parent="." index="2"]
-surface_material_override/0 = SubResource("StandardMaterial3D_3cxnu")
+[node name="CentralEye" parent="Armature/Skeleton3D/CentralEye" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
+surface_material_override/1 = SubResource("StandardMaterial3D_vryks")
+surface_material_override/2 = SubResource("StandardMaterial3D_7lkse")
+
+[node name="Spike1" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(1, 1.29455e-07, 1.40303e-08, -1.36006e-07, 1, 2.50594e-07, 2.22868e-08, -2.78644e-07, 1, -2.98023e-07, 1.49012e-07, -9.49949e-08)
+bone_idx = 4
+
+[node name="Spike1" parent="Armature/Skeleton3D/Spike1" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
+
+[node name="Spike0" parent="Armature/Skeleton3D" index="2"]
+transform = Transform3D(1, -2.95194e-11, -2.86548e-11, 8.98167e-11, 1, 8.63144e-08, -7.58462e-11, -8.68599e-08, 1, 1.39698e-09, 2.38419e-07, -1.11759e-07)
+bone_idx = 6
+
+[node name="Spike0" parent="Armature/Skeleton3D/Spike0" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
+
+[node name="Spike3" parent="Armature/Skeleton3D" index="3"]
+transform = Transform3D(1, 7.79996e-10, -6.45173e-11, 2.12414e-10, 1, 3.04442e-07, 2.31881e-11, -2.44511e-07, 1, -9.31323e-10, 3.57628e-07, -1.52737e-07)
+bone_idx = 8
+
+[node name="Spike3" parent="Armature/Skeleton3D/Spike3" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
+
+[node name="Spike2" parent="Armature/Skeleton3D" index="4"]
+transform = Transform3D(1, 1.30972e-07, -2.66062e-08, -7.31878e-08, 1, 3.16183e-07, 4.31745e-08, -1.87387e-07, 1, -2.38419e-07, 1.78814e-07, -1.69501e-07)
+bone_idx = 10
+
+[node name="Spike2" parent="Armature/Skeleton3D/Spike2" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
+
+[node name="Spike4" parent="Armature/Skeleton3D" index="5"]
+transform = Transform3D(1, 2.10555e-08, 3.89687e-08, 9.21793e-08, 1, 1.60854e-07, 1.24336e-08, -6.175e-08, 1, -5.96046e-08, 5.96046e-07, -3.1665e-08)
+bone_idx = 12
+
+[node name="Spike4" parent="Armature/Skeleton3D/Spike4" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
+
+[node name="Spike5" parent="Armature/Skeleton3D" index="6"]
+transform = Transform3D(1, 2.12283e-07, -8.24196e-08, -1.52257e-07, 1, 8.29976e-08, 2.01027e-07, -7.79459e-08, 1, -2.38419e-07, 2.08616e-07, -7.07805e-08)
+bone_idx = 14
+
+[node name="Spike5" parent="Armature/Skeleton3D/Spike5" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
+
+[node name="FacePlate" parent="Armature/Skeleton3D" index="7"]
+transform = Transform3D(1, -5.16326e-14, -2.55786e-14, -5.16326e-14, 1, -7.10543e-15, -2.55786e-14, -7.10543e-15, 1, 6.42155e-14, 1.78814e-07, -5.96046e-08)
+bone_idx = 16
+
+[node name="FacePlate" parent="Armature/Skeleton3D/FacePlate" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
+
+[node name="HeadLight" type="OmniLight3D" parent="." index="1"]
+transform = Transform3D(1, 3.4746e-16, -3.79186e-16, -3.79186e-16, 0.996194, -0.0871556, 3.4746e-16, 0.0871556, 0.996194, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+light_color = Color(0.298039, 0.631373, 1, 1)
+light_energy = 0.0
+light_volumetric_fog_energy = 6.0
+light_specular = 0.0
+light_bake_mode = 0
+omni_range = 3.0
+omni_attenuation = 0.06
+omni_shadow_mode = 0
+
+[node name="HeadSprite" type="Sprite3D" parent="HeadLight" index="0"]
+transform = Transform3D(2.08165e-12, -7.26051e-28, 7.26051e-28, 7.26051e-28, 2.08165e-12, -7.26051e-28, -7.26051e-28, 7.26051e-28, 2.08165e-12, 0, 0, 0)
+transparency = 1.0
+cast_shadow = 0
+modulate = Color(0.42, 0.69, 1.6, 1)
+billboard = 1
+double_sided = false
+no_depth_test = true
+texture = ExtResource("2_x83ru")
+
+[node name="HeadSphere" type="MeshInstance3D" parent="HeadLight" index="1"]
+transform = Transform3D(2.08165e-12, 0, 0, 0, 2.08165e-12, 0, 0, 0, 2.08165e-12, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("SphereMesh_76tcq")
+
+[node name="Pupil" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_fhk40")
