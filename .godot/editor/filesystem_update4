@@ -31,4 +31,3 @@ res://levels/snow_level/snow_level_test_env.tscn
 res://enemies/ice_sprite.tscn
 res://enemies/clarity.tscn
 res://glb_inherited_scenes/snowflake_entity_meshes.tscn
-res://glb_inherited_scenes/snowflake_entity_sprite.tscn
