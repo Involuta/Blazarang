@@ -190,9 +190,6 @@ func _ready():
 	
 	# Set up all states pre-fight. This may eventually be replaced by either a PreFight anim or an anim that spawns the snowflake entity
 	arm_anim_player.play("WalkLeftAggressive")
-	
-	await get_tree().create_timer(3).timeout
-	play_anim_all_dress_shards("SingleShardSequence1")
 
 func frames(num: int) -> float:
 	return num * get_physics_process_delta_time()
@@ -426,7 +423,7 @@ func queue_snowflake_attack():
 			match(behav_state):
 				CIRCLING:
 					var attack = choose_attack(snowflake_attack_chances)
-					play_anim_all_dress_shards(attack)
+					#play_anim_all_dress_shards(attack)
 		PHASE.PHASE2:
 			pass # pass until phase2 is confirmed to exist
 
