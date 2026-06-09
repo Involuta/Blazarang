@@ -107,6 +107,7 @@ var transparent_mat := preload("res://textures/clear_tile.tres")
 @onready var arm_meshes := $ClarityArmMeshes
 @onready var body_meshes := $DressShardMaster # Depends on ClarityDressMeshes.glb. Plays dress shard anims
 @onready var snowflake := $ClarityArmMeshes/SnowflakeEntity
+@onready var snowflake_anim_tree := $ClarityArmMeshes/SnowflakeEntity/AnimationTree
 @onready var head_light := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/BaseOffsetRotation/HeadMesh/HeadLight
 @onready var head_bone := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2
 @onready var head_mesh := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
@@ -190,6 +191,7 @@ func _ready():
 	
 	# Set up all states pre-fight. This may eventually be replaced by either a PreFight anim or an anim that spawns the snowflake entity
 	arm_anim_player.play("WalkLeftAggressive")
+	snowflake_anim_tree.active = true
 
 func frames(num: int) -> float:
 	return num * get_physics_process_delta_time()
@@ -693,3 +695,9 @@ func recall_dress_shard(s: String):
 func play_anim_all_dress_shards(s: String):
 	for ds in dress_shards.values():
 		ds.anim_player.play(s)
+
+func snowflake_glow_flash():
+	var t = get_tree().create_tween()
+	var snowflake_light = snowflake.find_child("HeadLight")
+	t.tween_property(snowflake_light, "light_energy", 9.0, 0)
+	t.tween_property(snowflake_light, "light_energy", 0, .6)
