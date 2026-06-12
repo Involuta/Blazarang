@@ -488,7 +488,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0, 0.415686, 0.768627, 1), Color(0.42, 0.69, 1, 1)]
+"values": [Color(0, 0.415686, 0.768627, 1), Color(0.419608, 0.690196, 1, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -561,10 +561,10 @@ tracks/1/path = NodePath("BaseOffsetRotation/HeadMesh/HeadLight/HeadSphere:mesh:
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.1, 0.6),
+"times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0, 0.415686, 0.768627, 1), Color(0.42, 0.69, 1, 1)]
+"values": [Color(0, 0.415686, 0.768627, 1), Color(0.419608, 0.690196, 1, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -576,7 +576,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [1.0, 0.0]
+"values": [1.0, 0.67]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -636,10 +636,10 @@ tracks/1/path = NodePath("BaseOffsetRotation/HeadMesh/HeadLight/HeadSphere:mesh:
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.5, 1),
+"times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0, 0.415686, 0.768627, 1), Color(0.42, 0.69, 1, 1)]
+"values": [Color(0, 0.415686, 0.768627, 1), Color(0.419608, 0.690196, 1, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
