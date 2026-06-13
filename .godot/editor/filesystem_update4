@@ -30,3 +30,7 @@ res://shaders/sobel_outline.gdshader
 res://enemies/clarity_head.tscn
 res://levels/snow_level/snow_level_test_env.tscn
 res://enemies/ice_sprite.tscn
+res://enemies/clarity.gd
+res://enemies/enemy_anims/snowflake_entity_rotateslow_3seg.res
+res://enemies/enemy_anims/snowflake_entity_doubleshardseq1.res
+res://enemies/enemy_anims/snowflake_entity_singleshardseq1.res

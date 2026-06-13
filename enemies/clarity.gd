@@ -696,6 +696,11 @@ func play_anim_all_dress_shards(s: String):
 	for ds in dress_shards.values():
 		ds.anim_player.play(s)
 
+func snowflake_brighten(brightness: float, duration: float):
+	var t = get_tree().create_tween()
+	var snowflake_light = snowflake.find_child("HeadLight")
+	t.tween_property(snowflake_light, "light_energy", brightness, duration)
+
 func snowflake_glow_flash():
 	var t = get_tree().create_tween()
 	var snowflake_light = snowflake.find_child("HeadLight")
