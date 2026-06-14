@@ -82,6 +82,9 @@ var aiming_at_target := true
 var staggerable := false # When head is exposed but not glowing, staggerable is false
 @export var stagger_damage_threshold := 10.0 # Single hit damage to head necessary to stagger
 
+@export var snowflake_entity_hit_head_damage := 20 # When snowflake entity is hit while vulnerable, this is how the damage done to Clarity's health
+@export var snowflake_entity_hit_dress_shard_damage := 60
+
 @export var wait_lowered_left_min_secs := .6
 @export var wait_lowered_left_max_secs := 6.0
 @export var wait_raised_left_min_secs := .6
@@ -158,9 +161,8 @@ class DressShard extends Node3D:
 		ds_tween.tween_property(self.node, "position", Vector3.ZERO, frames(45)).set_ease(Tween.EASE_IN_OUT)
 		ds_tween.tween_property(self.node, "rotation", Vector3.ZERO, frames(45)).set_ease(Tween.EASE_IN_OUT)
 	
-	func self_damage():
-		self.hurtbox.receive_hit_no_hitbox(9)
-
+	func self_damage(damage: int):
+		self.hurtbox.receive_hit_no_hitbox(damage)
 
 func _ready():
 	head_hurtbox = find_child("EnemyHurtbox")
@@ -711,9 +713,17 @@ func link_dress_shard_to_snowflake(s: String):
 func damage_all_snowflake_linked_shards(a: Area3D):
 	if a.name != "PlayerHitbox":
 		return
+	
+	# If at least 1 shard is linked, snowflake entity is vulnerable
+	var snowflake_vulnerable = false
 	for ds in dress_shards.values():
 		if ds.snowflake_linked:
-			ds.self_damage()
+			snowflake_vulnerable = true
+			ds.self_damage(snowflake_entity_hit_dress_shard_damage)
+	
+	# Damage Clarity if snowflake entity is vulnerable
+	if snowflake_vulnerable:
+		head_hurtbox.receive_hit_no_hitbox(snowflake_entity_hit_head_damage)
 
 func unlink_all_dress_shards_from_snowflake():
 	for ds in dress_shards.values():
