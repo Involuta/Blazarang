@@ -136,7 +136,7 @@ class DressShard extends Node3D:
 	var node : Node
 	var snowflake_linked : bool
 	var anim_player : AnimationPlayer
-	var self_damage_hitbox : Hitbox
+	var hurtbox : Area3D
 	# Since this is an inner class, it doesn't have access to get_tree()
 	var ds_tween : Tween
 	
@@ -144,7 +144,7 @@ class DressShard extends Node3D:
 		self.node = n
 		self.snowflake_linked = false
 		self.anim_player = n.find_child("AnimationPlayer")
-		self.self_damage_hitbox = n.find_child("SelfDamageHitbox")
+		self.hurtbox = n.find_child("ClarityShardHurtbox")
 	
 	func frames(num: int) -> float:
 		return num * self.node.get_physics_process_delta_time()
@@ -159,9 +159,7 @@ class DressShard extends Node3D:
 		ds_tween.tween_property(self.node, "rotation", Vector3.ZERO, frames(45)).set_ease(Tween.EASE_IN_OUT)
 	
 	func self_damage():
-		self.self_damage_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
-		await self.node.get_tree().create_timer(.1).timeout
-		self.self_damage_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+		self.hurtbox.receive_hit_no_hitbox(9)
 
 
 func _ready():
@@ -710,7 +708,9 @@ func link_dress_shard_to_snowflake(s: String):
 	dress_shards[s].snowflake_linked = true
 
 # Called by SnowflakeHurtbox when snowflake entity is hit
-func damage_all_snowflake_linked_shards(_a: Area3D):
+func damage_all_snowflake_linked_shards(a: Area3D):
+	if a.name != "PlayerHitbox":
+		return
 	for ds in dress_shards.values():
 		if ds.snowflake_linked:
 			ds.self_damage()

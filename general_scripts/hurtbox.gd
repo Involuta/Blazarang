@@ -49,16 +49,18 @@ func on_hit(hitbox):
 		else:
 			receive_hit(hitbox, hitbox.get_parent())
 
-func receive_hit(hitbox, _hitter):
-	# Damage
-	hit_received.emit(hitbox.damage)
-	health -= hitbox.damage
-	# Spawn damage number
+func spawn_damage_number(damage):
 	var number = damage_text.instantiate()
 	level.add_child.call_deferred(number)
 	await number.tree_entered
 	number.global_position = global_position 
-	number.setup(hitbox.damage)
+	number.setup(damage)
+
+func receive_hit(hitbox, _hitter):
+	# Damage
+	hit_received.emit(hitbox.damage)
+	health -= hitbox.damage
+	spawn_damage_number(hitbox.damage)
 	
 	# Heal
 	health += hitbox.heal_amt

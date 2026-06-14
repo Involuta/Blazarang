@@ -18,7 +18,6 @@ func _ready():
 	super()
 
 func receive_hit(hitbox, hitter):
-	print(hitbox.name, hitter.name)
 	# Check if this is a healing hit
 	if hitbox.damage > 0:
 		emit_hit_particles(hitter)
@@ -27,12 +26,22 @@ func receive_hit(hitbox, hitter):
 		emit_hitter_effect(hitter)
 	super(hitbox, hitter)
 
-func emit_hit_particles(hitter):
+# Only take damage. Called by code instead of triggered by signal
+# Used by Clarity to damage Clarity and her dress shards when her snowflake entity is hit
+func receive_hit_no_hitbox(damage):
+	print(get_parent().name)
+	emit_hit_particles()
+	hit_received.emit(damage)
+	health -= damage
+	spawn_damage_number(damage)
+
+func emit_hit_particles(hitter = null):
 	var inst := hit_particles.instantiate()
 	level.add_child.call_deferred(inst)
 	await inst.tree_entered
 	inst.global_position = global_position
-	inst.global_rotation.y = hitter.global_rotation.y + PI
+	if hitter != null:
+		inst.global_rotation.y = hitter.global_rotation.y + PI
 	var particle_settings = inst.get_node("GPUParticles3D")
 	particle_settings.emitting = true
 	particle_settings.process_material.color = hit_particle_color
