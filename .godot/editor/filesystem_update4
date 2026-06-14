@@ -35,3 +35,7 @@ res://enemies/enemy_anims/snowflake_entity_rotateslow_3seg.res
 res://enemies/enemy_anims/snowflake_entity_doubleshardseq1.res
 res://enemies/enemy_anims/snowflake_entity_singleshardseq1.res
 res://glb_inherited_scenes/snowflake_entity_meshes.tscn
+res://general_scripts/hurtbox.gd
+res://enemies/boss_hurtbox.gd
+res://enemies/snowflake_entity_hurtbox.gd
+res://enemies/clarity_shard_hurtbox.gd

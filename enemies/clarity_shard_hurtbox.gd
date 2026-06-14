@@ -19,6 +19,6 @@ func die():
 	process_mode = Node.PROCESS_MODE_DISABLED
 
 func regen():
-	# To do: make effect for death
+	# To do: make effect for regen
 	hb_owner.visible = true
 	process_mode = Node.PROCESS_MODE_INHERIT

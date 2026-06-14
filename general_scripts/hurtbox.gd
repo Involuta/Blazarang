@@ -16,8 +16,8 @@ var health := 100.0
 var max_health := 100.0 # This is only set by the Globals script or the CotuHurtbox script.
 var current_opponent_hitboxes
 @export var opponent_hitboxes := ["default"] # opponent is a misnomer; this is a list any hitboxes that could affect this entity, opponent, ally, or neutral, e.g. PlayerHitbox, EnemyHitbox
-@export var hurtbox_owner : Node3D # If this isn't set, parent is used as hurtbox owner
-var hb_owner : Node3D
+@export var hurtbox_owner : Node3D # If this isn't set, parent is used as hurtbox owner. Sets hb_owner
+var hb_owner : Node3D # Controls dodging invinc, debuffs, death
 
 @onready var root := get_tree().root
 var level : Node3D

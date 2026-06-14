@@ -1,11 +1,12 @@
+CollisionShape3D
+Hitbox
+Area3D
+EnemyHurtbox
 AnimationTree
 Sprite3D
 Node3D
-Hitbox
-CollisionShape3D
 GPUParticles3D
 DamageOverTimeArea
-EnemyHurtbox
 GPUTrail3D
 Trail3D
 FogVolume
@@ -18,7 +19,6 @@ Sprite2D
 AnimationPlayer
 MeshInstance3D
 OmniLight3D
-Area3D
 BossHurtbox
 NavigationAgent3D
 CharacterBody3D

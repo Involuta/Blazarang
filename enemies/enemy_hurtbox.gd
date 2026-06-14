@@ -18,6 +18,7 @@ func _ready():
 	super()
 
 func receive_hit(hitbox, hitter):
+	print(hitbox.name, hitter.name)
 	# Check if this is a healing hit
 	if hitbox.damage > 0:
 		emit_hit_particles(hitter)
