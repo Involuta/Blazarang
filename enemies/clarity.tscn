@@ -1,4 +1,4 @@
-[gd_scene load_steps=112 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=111 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -291,9 +291,6 @@ radius = 0.81
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1pjfc"]
 radius = 1.0
 height = 15.0
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_vr561"]
-radius = 1.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7112o"]
 radius = 1.5
@@ -1146,6 +1143,7 @@ visible = false
 transform = Transform3D(0.766045, 0.219846, 0.604022, 2.61259e-08, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990248, 0.15601, -0.548509)
 
 [node name="ClarityShardHurtbox" type="Area3D" parent="DressShardMaster/DressShardFrontLeft/Armature/Skeleton3D/FrontLeft" index="1"]
+transform = Transform3D(0.962033, -0.265623, -0.0627493, 0.272912, 0.933286, 0.233445, -0.00344532, -0.241707, 0.970343, 3.11, -3.826, 4)
 collision_layer = 8
 collision_mask = 265
 script = ExtResource("3_cemfj")
@@ -1154,7 +1152,6 @@ hit_particle_color = Color(0.458824, 0.713726, 1, 1)
 opponent_hitboxes = ["PlayerHitbox", "SelfDamageHitbox"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardFrontLeft/Armature/Skeleton3D/FrontLeft/ClarityShardHurtbox"]
-transform = Transform3D(0.962033, -0.265622, -0.0627493, 0.272912, 0.933285, 0.233445, -0.00344532, -0.241707, 0.970343, 3.11, -3.826, 4)
 shape = SubResource("CapsuleShape3D_1pjfc")
 
 [node name="EnemyHitbox" type="Area3D" parent="DressShardMaster/DressShardFrontLeft/Armature/Skeleton3D/FrontLeft" index="2"]
@@ -1167,16 +1164,6 @@ frostbite_buildup = 9
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardFrontLeft/Armature/Skeleton3D/FrontLeft/EnemyHitbox"]
 transform = Transform3D(0.962033, -0.265622, -0.0627493, 0.272912, 0.933285, 0.233445, -0.00344532, -0.241707, 0.970343, 3.11, -3.826, 4)
 shape = SubResource("CapsuleShape3D_1pjfc")
-
-[node name="SelfDamageHitbox" type="Area3D" parent="DressShardMaster/DressShardFrontLeft/Armature/Skeleton3D/FrontLeft" index="3"]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11, -3.826, 4)
-collision_mask = 0
-script = ExtResource("4_5f0ps")
-damage = 60
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardFrontLeft/Armature/Skeleton3D/FrontLeft/SelfDamageHitbox"]
-shape = SubResource("SphereShape3D_vr561")
 
 [node name="BackLeft" parent="DressShardMaster/DressShardFrontLeft/Armature/Skeleton3D" index="5"]
 transform = Transform3D(0.766044, 0.219846, 0.604023, -3.27128e-07, 0.939693, -0.342019, -0.642788, 0.262002, 0.719846, -0.990243, 0.15601, -0.548501)
@@ -1242,7 +1229,7 @@ visible = false
 transform = Transform3D(0.766045, 0.219847, 0.604023, -5.96117e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990245, 0.15601, -0.548503)
 
 [node name="ClarityShardHurtbox" type="Area3D" parent="DressShardMaster/DressShardFrontRight/Armature/Skeleton3D/FrontRight" index="1"]
-transform = Transform3D(0.999594, -0.0284661, -0.000895525, 0.0284798, 0.999099, 0.031468, -5.56076e-07, -0.0314805, 0.999504, -0.248412, -0.0747527, 0.0125123)
+transform = Transform3D(0.963931, 0.258358, -0.063925, -0.233347, 0.935906, 0.263873, 0.128002, -0.239439, 0.962436, -3.248, -3.875, 4.013)
 collision_layer = 8
 collision_mask = 265
 script = ExtResource("3_cemfj")
@@ -1251,7 +1238,6 @@ hit_particle_color = Color(0.431373, 0.682353, 1, 1)
 opponent_hitboxes = ["PlayerHitbox", "SelfDamageHitbox"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardFrontRight/Armature/Skeleton3D/FrontRight/ClarityShardHurtbox"]
-transform = Transform3D(0.957104, 0.282869, -0.0627493, -0.26149, 0.93655, 0.233445, 0.124802, -0.207023, 0.970343, -3, -3.8, 4)
 shape = SubResource("CapsuleShape3D_1pjfc")
 
 [node name="EnemyHitbox" type="Area3D" parent="DressShardMaster/DressShardFrontRight/Armature/Skeleton3D/FrontRight" index="2"]
@@ -1264,16 +1250,6 @@ frostbite_buildup = 9
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardFrontRight/Armature/Skeleton3D/FrontRight/EnemyHitbox"]
 transform = Transform3D(0.958577, 0.280169, -0.0513431, -0.256566, 0.927588, 0.271577, 0.123712, -0.247155, 0.961046, -2.9844, -3.93397, 4.03116)
 shape = SubResource("CapsuleShape3D_1pjfc")
-
-[node name="SelfDamageHitbox" type="Area3D" parent="DressShardMaster/DressShardFrontRight/Armature/Skeleton3D/FrontRight" index="3"]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -3.8, 4)
-collision_mask = 0
-script = ExtResource("4_5f0ps")
-damage = 60
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardFrontRight/Armature/Skeleton3D/FrontRight/SelfDamageHitbox"]
-shape = SubResource("SphereShape3D_vr561")
 
 [node name="BackRight" parent="DressShardMaster/DressShardFrontRight/Armature/Skeleton3D" index="8"]
 transform = Transform3D(0.766045, 0.219847, 0.604022, -9.71103e-07, 0.939692, -0.34202, -0.642787, 0.262002, 0.719847, -0.990254, 0.156008, -0.548505)
@@ -1311,6 +1287,7 @@ transform = Transform3D(0.982278, 0.104528, 0.155578, -0.0949129, 0.993159, -0.0
 transform = Transform3D(0.766044, 0.219846, 0.604023, -2.9111e-08, 0.939693, -0.34202, -0.642788, 0.262002, 0.719846, -0.990243, 0.156014, -0.548502)
 
 [node name="ClarityShardHurtbox" type="Area3D" parent="DressShardMaster/DressShardMiddleLeft/Armature/Skeleton3D/MiddleLeft" index="1"]
+transform = Transform3D(0.965423, -0.26069, -1.563e-14, 0.26069, 0.965423, -1.36008e-14, 1.86351e-14, 9.05593e-15, 1, 5.4, -5.82, 2.08165e-12)
 collision_layer = 8
 collision_mask = 265
 script = ExtResource("3_cemfj")
@@ -1319,7 +1296,6 @@ hit_particle_color = Color(0.458824, 0.713726, 1, 1)
 opponent_hitboxes = ["PlayerHitbox", "SelfDamageHitbox"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardMiddleLeft/Armature/Skeleton3D/MiddleLeft/ClarityShardHurtbox"]
-transform = Transform3D(0.965423, -0.26069, -2.53229e-16, 0.26069, 0.965422, 3.74134e-16, 1.86351e-14, 9.05592e-15, 1, 5.4, -5.82, 2.08165e-12)
 shape = SubResource("CapsuleShape3D_7112o")
 
 [node name="EnemyHitbox" type="Area3D" parent="DressShardMaster/DressShardMiddleLeft/Armature/Skeleton3D/MiddleLeft" index="2"]
@@ -1332,16 +1308,6 @@ frostbite_buildup = 9
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardMiddleLeft/Armature/Skeleton3D/MiddleLeft/EnemyHitbox"]
 transform = Transform3D(0.965423, -0.26069, -2.53229e-16, 0.26069, 0.965422, 3.74134e-16, 1.86351e-14, 9.05592e-15, 1, 5.4, -5.82, 2.08165e-12)
 shape = SubResource("CapsuleShape3D_7112o")
-
-[node name="SelfDamageHitbox" type="Area3D" parent="DressShardMaster/DressShardMiddleLeft/Armature/Skeleton3D/MiddleLeft" index="3"]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4, -5.82, 2.08165e-12)
-collision_mask = 0
-script = ExtResource("4_5f0ps")
-damage = 60
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardMiddleLeft/Armature/Skeleton3D/MiddleLeft/SelfDamageHitbox"]
-shape = SubResource("SphereShape3D_vr561")
 
 [node name="FrontLeft" parent="DressShardMaster/DressShardMiddleLeft/Armature/Skeleton3D" index="4"]
 transform = Transform3D(0.766045, 0.219846, 0.604022, 2.61259e-08, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990248, 0.15601, -0.548509)
@@ -1407,7 +1373,7 @@ visible = false
 transform = Transform3D(0.766045, 0.219846, 0.604022, 2.33248e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719846, -0.990239, 0.156015, -0.548505)
 
 [node name="ClarityShardHurtbox" type="Area3D" parent="DressShardMaster/DressShardMiddleRight/Armature/Skeleton3D/MiddleRight" index="1"]
-transform = Transform3D(1, 3.91618e-07, 5.55498e-07, -2.98154e-07, 1, 1.29499e-07, -3.1962e-07, -1.95951e-07, 1, -2.5034e-06, -5.34952e-06, -3.57628e-06)
+transform = Transform3D(0.965473, 0.260504, 3.48787e-16, -0.260504, 0.965473, -3.48787e-16, -4.27605e-16, 2.45884e-16, 1, -5.4, -5.82, 2.08165e-12)
 collision_layer = 8
 collision_mask = 265
 script = ExtResource("3_cemfj")
@@ -1416,7 +1382,7 @@ hit_particle_color = Color(0.458824, 0.713726, 1, 1)
 opponent_hitboxes = ["PlayerHitbox", "SelfDamageHitbox"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardMiddleRight/Armature/Skeleton3D/MiddleRight/ClarityShardHurtbox"]
-transform = Transform3D(0.965473, 0.260504, 3.48787e-16, -0.260504, 0.965472, -3.48787e-16, -4.27605e-16, 2.45884e-16, 1, -5.4, -5.82, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_7112o")
 
 [node name="EnemyHitbox" type="Area3D" parent="DressShardMaster/DressShardMiddleRight/Armature/Skeleton3D/MiddleRight" index="2"]
@@ -1429,16 +1395,6 @@ frostbite_buildup = 9
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardMiddleRight/Armature/Skeleton3D/MiddleRight/EnemyHitbox"]
 transform = Transform3D(0.965473, 0.260504, 3.48787e-16, -0.260504, 0.965472, -3.48787e-16, -4.27605e-16, 2.45884e-16, 1, -5.4, -5.82, 2.08165e-12)
 shape = SubResource("CapsuleShape3D_7112o")
-
-[node name="SelfDamageHitbox" type="Area3D" parent="DressShardMaster/DressShardMiddleRight/Armature/Skeleton3D/MiddleRight" index="3"]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4, -5.82, 2.08165e-12)
-collision_mask = 0
-script = ExtResource("4_5f0ps")
-damage = 60
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardMiddleRight/Armature/Skeleton3D/MiddleRight/SelfDamageHitbox"]
-shape = SubResource("SphereShape3D_vr561")
 
 [node name="FrontRight" parent="DressShardMaster/DressShardMiddleRight/Armature/Skeleton3D" index="7"]
 transform = Transform3D(0.766045, 0.219847, 0.604023, -5.96117e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990245, 0.15601, -0.548503)
@@ -1488,6 +1444,7 @@ visible = false
 transform = Transform3D(0.766044, 0.219846, 0.604023, 4.14429e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156009, -0.548506)
 
 [node name="ClarityShardHurtbox" type="Area3D" parent="DressShardMaster/DressShardBackLeft/Armature/Skeleton3D/BackLeft" index="1"]
+transform = Transform3D(0.965926, -0.258819, -1.3307e-07, 0.25, 0.933013, -0.258819, 0.0669873, 0.25, 0.965926, 3.8, -6.9, -4.7)
 collision_layer = 8
 collision_mask = 265
 script = ExtResource("3_cemfj")
@@ -1496,7 +1453,7 @@ hit_particle_color = Color(0.482353, 0.721569, 1, 1)
 opponent_hitboxes = ["PlayerHitbox", "SelfDamageHitbox"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardBackLeft/Armature/Skeleton3D/BackLeft/ClarityShardHurtbox"]
-transform = Transform3D(0.965923, -0.258818, -3.25186e-08, 0.249999, 0.93301, -0.258818, 0.0669871, 0.249999, 0.965924, 3.8, -6.9, -4.7)
+transform = Transform3D(0.999997, 0, 0, 0, 0.999997, 0, 0, 0, 0.999998, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_a428p")
 
 [node name="EnemyHitbox" type="Area3D" parent="DressShardMaster/DressShardBackLeft/Armature/Skeleton3D/BackLeft" index="2"]
@@ -1509,16 +1466,6 @@ frostbite_buildup = 9
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardBackLeft/Armature/Skeleton3D/BackLeft/EnemyHitbox"]
 transform = Transform3D(0.965923, -0.258818, -3.25186e-08, 0.249999, 0.93301, -0.258818, 0.0669871, 0.249999, 0.965924, 3.8, -6.9, -4.7)
 shape = SubResource("CapsuleShape3D_a428p")
-
-[node name="SelfDamageHitbox" type="Area3D" parent="DressShardMaster/DressShardBackLeft/Armature/Skeleton3D/BackLeft" index="3"]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8, -6.9, -4.7)
-collision_mask = 0
-script = ExtResource("4_5f0ps")
-damage = 60
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardBackLeft/Armature/Skeleton3D/BackLeft/SelfDamageHitbox"]
-shape = SubResource("SphereShape3D_vr561")
 
 [node name="MiddleRight" parent="DressShardMaster/DressShardBackLeft/Armature/Skeleton3D" index="6"]
 transform = Transform3D(0.668558, -0.178681, -0.721875, 0.694272, -0.197883, 0.691974, -0.26649, -0.963802, -0.00824242, -5.3225, -3.67816, 52.3819)
@@ -1584,6 +1531,7 @@ visible = false
 transform = Transform3D(0.766044, 0.219846, 0.604023, -3.64784e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548507)
 
 [node name="ClarityShardHurtbox" type="Area3D" parent="DressShardMaster/DressShardBackRight/Armature/Skeleton3D/BackRight" index="1"]
+transform = Transform3D(0.965926, 0.258819, 1.35336e-07, -0.25, 0.933013, -0.258819, -0.0669873, 0.25, 0.965926, -3.8, -6.9, -4.7)
 collision_layer = 8
 collision_mask = 265
 script = ExtResource("3_cemfj")
@@ -1592,7 +1540,6 @@ hit_particle_color = Color(0.4, 0.678431, 1, 1)
 opponent_hitboxes = ["PlayerHitbox", "SelfDamageHitbox"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardBackRight/Armature/Skeleton3D/BackRight/ClarityShardHurtbox"]
-transform = Transform3D(0.965923, 0.258818, 3.36902e-16, -0.249999, 0.93301, -0.258819, -0.0669871, 0.249999, 0.965924, -3.8, -6.9, -4.7)
 shape = SubResource("CapsuleShape3D_a428p")
 
 [node name="EnemyHitbox" type="Area3D" parent="DressShardMaster/DressShardBackRight/Armature/Skeleton3D/BackRight" index="2"]
@@ -1605,16 +1552,6 @@ frostbite_buildup = 9
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardBackRight/Armature/Skeleton3D/BackRight/EnemyHitbox"]
 transform = Transform3D(0.965923, 0.258818, 3.36902e-16, -0.249999, 0.93301, -0.258819, -0.0669871, 0.249999, 0.965924, -3.8, -6.9, -4.7)
 shape = SubResource("CapsuleShape3D_a428p")
-
-[node name="SelfDamageHitbox" type="Area3D" parent="DressShardMaster/DressShardBackRight/Armature/Skeleton3D/BackRight" index="3"]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8, -6.9, -4.7)
-collision_mask = 0
-script = ExtResource("4_5f0ps")
-damage = 60
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardBackRight/Armature/Skeleton3D/BackRight/SelfDamageHitbox"]
-shape = SubResource("SphereShape3D_vr561")
 
 [node name="HatSnowParticles" type="GPUParticles3D" parent="DressShardMaster"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 2.08165e-12, 10.5, 2.08165e-12)
