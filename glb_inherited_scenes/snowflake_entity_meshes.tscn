@@ -68,49 +68,49 @@ bone_name = "CentralEye0"
 bone_idx = 1
 
 [node name="Spike1" parent="Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.993676, 0.112283, 1.65836e-07, -0.112283, 0.993676, 7.08814e-08, -1.19274e-07, -9.98299e-08, 1, -2.38419e-07, 5.96046e-08, 5.7742e-08)
+transform = Transform3D(0.993676, 0.112283, 1.43484e-07, -0.112283, 0.993676, -1.07933e-07, -1.19274e-07, 7.8984e-08, 1, 1.19209e-07, -1.49012e-07, -1.45659e-06)
 bone_idx = 7
 
 [node name="Spike1" parent="Armature/Skeleton3D/Spike1" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
 
 [node name="Spike0" parent="Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.993676, 0.112283, 1.3342e-07, -0.112283, 0.993676, -9.07805e-08, -1.41637e-07, 9.19541e-08, 1, 1.19209e-07, -2.38419e-07, -6.33299e-08)
+transform = Transform3D(0.993676, 0.112283, 1.11069e-07, -0.112283, 0.993676, -2.69594e-07, -1.41637e-07, 2.70768e-07, 1, 6.4075e-07, 4.52995e-06, -1.44355e-06)
 bone_idx = 9
 
 [node name="Spike0" parent="Armature/Skeleton3D/Spike0" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
 
 [node name="Spike3" parent="Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.993676, 0.112283, 1.57877e-07, -0.112283, 0.993676, 1.25972e-07, -1.41538e-07, -6.56966e-08, 1, 1.63913e-07, 1.19209e-07, -1.04308e-07)
+transform = Transform3D(0.993676, 0.112283, 1.35525e-07, -0.112283, 0.993676, -5.28418e-08, -1.41538e-07, 1.13117e-07, 1, 1.49012e-07, 0, -5.21541e-08)
 bone_idx = 11
 
 [node name="Spike3" parent="Armature/Skeleton3D/Spike3" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
 
 [node name="Spike2" parent="Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.993676, 0.112283, 1.32821e-07, -0.112283, 0.993676, 1.40618e-07, -9.83866e-08, -8.57291e-09, 1, -5.96046e-08, 5.96046e-08, 2.98023e-08)
+transform = Transform3D(0.993676, 0.112283, 1.10469e-07, -0.112283, 0.993676, -3.81955e-08, -9.83864e-08, 1.70241e-07, 1, -5.96046e-08, -1.78814e-07, -3.72529e-09)
 bone_idx = 13
 
 [node name="Spike2" parent="Armature/Skeleton3D/Spike2" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
 
 [node name="Spike4" parent="Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.993676, 0.112283, 2.11806e-07, -0.112283, 0.993676, -2.56836e-09, -1.26419e-07, 1.21135e-07, 1, 1.78814e-07, 3.57628e-07, 1.71363e-07)
+transform = Transform3D(0.993676, 0.112283, 1.89572e-07, -0.112283, 0.993676, -1.81852e-07, -1.35902e-07, 3.08091e-07, 1, -2.38419e-07, 5.96046e-08, -9.35048e-07)
 bone_idx = 15
 
 [node name="Spike4" parent="Armature/Skeleton3D/Spike4" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
 
 [node name="Spike5" parent="Armature/Skeleton3D" index="9"]
-transform = Transform3D(0.993676, 0.112283, 7.08405e-08, -0.112283, 0.993676, -8.19197e-08, 5.08772e-08, 9.11302e-08, 1, -1.19209e-07, 5.96046e-08, 8.75443e-08)
+transform = Transform3D(0.993676, 0.112283, 2.6137e-08, -0.112283, 0.993676, -2.61465e-07, 4.80318e-08, 2.75402e-07, 1, -5.96046e-08, 1.78814e-07, -1.66707e-06)
 bone_idx = 17
 
 [node name="Spike5" parent="Armature/Skeleton3D/Spike5" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
 
 [node name="FacePlate" parent="Armature/Skeleton3D" index="10"]
-transform = Transform3D(0.993676, 0.112283, 1.23757e-07, -0.112283, 0.993676, -1.76552e-07, -1.41561e-07, 1.78814e-07, 1, 1.47181e-07, 9.42322e-10, 0)
+transform = Transform3D(0.993676, 0.112283, 1.01405e-07, -0.112283, 0.993676, -3.55366e-07, -1.41561e-07, 3.57628e-07, 1, 1.2483e-07, -1.77872e-07, 0)
 bone_idx = 19
 
 [node name="FacePlate" parent="Armature/Skeleton3D/FacePlate" index="0"]

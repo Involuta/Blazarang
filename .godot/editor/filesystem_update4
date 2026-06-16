@@ -1,10 +1,9 @@
-res://glb_meshes/snowflake_particle_mesh.res
 res://enemies/clarity.tscn
-res://enemies/enemy_hurtbox.gd
+res://textures/clear_tile.tres
 res://ui/flash.gdshader
 res://ui/glitch.gdshader
+res://glb_meshes/snowflake_particle_mesh.res
 res://shaders/black_outline.gdshader
-res://textures/clear_tile.tres
 res://textures/noise_texture_2d.tres
 res://shaders/smoke_LOD.tres
 res://GPUTrail-main/shaders/trail.gdshader
@@ -30,13 +29,5 @@ res://shaders/sobel_outline.gdshader
 res://enemies/clarity_head.tscn
 res://levels/snow_level/snow_level_test_env.tscn
 res://enemies/ice_sprite.tscn
-res://enemies/clarity.gd
-res://enemies/enemy_anims/snowflake_entity_rotateslow_3seg.res
-res://enemies/enemy_anims/snowflake_entity_doubleshardseq1.res
-res://enemies/enemy_anims/snowflake_entity_singleshardseq1.res
 res://glb_inherited_scenes/snowflake_entity_meshes.tscn
 res://general_scripts/hurtbox.gd
-res://enemies/boss_hurtbox.gd
-res://enemies/snowflake_entity_hurtbox.gd
-res://enemies/clarity_shard_hurtbox.gd
-res://enemies/enemy_anims/snowflake_entity_stagger.res

@@ -14,6 +14,10 @@ var rng := RandomNumberGenerator.new()
 @export var dp_count := 5
 var health := 100.0
 var max_health := 100.0 # This is only set by the Globals script or the CotuHurtbox script.
+
+# Dmg taken = max(hitbox dmg - defense, 1)
+@export var defense := 0
+
 var current_opponent_hitboxes
 @export var opponent_hitboxes := ["default"] # opponent is a misnomer; this is a list any hitboxes that could affect this entity, opponent, ally, or neutral, e.g. PlayerHitbox, EnemyHitbox
 @export var hurtbox_owner : Node3D # If this isn't set, parent is used as hurtbox owner. Sets hb_owner
@@ -58,9 +62,10 @@ func spawn_damage_number(damage):
 
 func receive_hit(hitbox, _hitter):
 	# Damage
-	hit_received.emit(hitbox.damage)
-	health -= hitbox.damage
-	spawn_damage_number(hitbox.damage)
+	var damage_received = max(hitbox.damage - defense, 1)
+	hit_received.emit(damage_received)
+	health -= damage_received
+	spawn_damage_number(damage_received)
 	
 	# Heal
 	health += hitbox.heal_amt
