@@ -722,7 +722,7 @@ func link_dress_shard_to_snowflake_hit(s: String):
 
 # Called by SnowflakeHurtbox when snowflake entity is hit
 func on_snowflake_hit(a: Area3D):
-	if a.name != "PlayerHitbox":
+	if a.name != "PlayerHitbox" or a.damage < stagger_damage_threshold:
 		return
 	
 	# Damage dress shards (if at least 1 shard is linked, which means snowflake entity is vulnerable)

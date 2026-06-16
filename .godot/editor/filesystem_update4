@@ -39,3 +39,4 @@ res://general_scripts/hurtbox.gd
 res://enemies/boss_hurtbox.gd
 res://enemies/snowflake_entity_hurtbox.gd
 res://enemies/clarity_shard_hurtbox.gd
+res://enemies/enemy_anims/snowflake_entity_stagger.res
