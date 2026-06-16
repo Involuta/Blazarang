@@ -1,4 +1,4 @@
-[gd_scene load_steps=111 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=113 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -248,6 +248,9 @@ animation = &"RotateSlow3Seg"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lfxj3"]
 animation = &"SingleShardSequence1"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_inroi"]
+animation = &"Stagger"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gjge1"]
 advance_mode = 2
 
@@ -269,6 +272,10 @@ advance_expression = "rng.randf() > .5"
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_spy4q"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_qlhjd"]
 states/DoubleShardSequence1/node = SubResource("AnimationNodeAnimation_tes26")
 states/DoubleShardSequence1/position = Vector2(636.052, 158.613)
@@ -276,8 +283,10 @@ states/RotateSlow/node = SubResource("AnimationNodeAnimation_8ise2")
 states/RotateSlow/position = Vector2(408, 100)
 states/SingleShardSequence1/node = SubResource("AnimationNodeAnimation_lfxj3")
 states/SingleShardSequence1/position = Vector2(635.889, 40.9212)
-transitions = ["Start", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_gjge1"), "RotateSlow", "SingleShardSequence1", SubResource("AnimationNodeStateMachineTransition_f7uow"), "SingleShardSequence1", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_kjcu6"), "RotateSlow", "DoubleShardSequence1", SubResource("AnimationNodeStateMachineTransition_v0ape"), "DoubleShardSequence1", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_ag18a")]
-graph_offset = Vector2(194.88, 1.6125)
+states/Stagger/node = SubResource("AnimationNodeAnimation_inroi")
+states/Stagger/position = Vector2(406.966, 6.7925)
+transitions = ["Start", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_gjge1"), "RotateSlow", "SingleShardSequence1", SubResource("AnimationNodeStateMachineTransition_f7uow"), "SingleShardSequence1", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_kjcu6"), "RotateSlow", "DoubleShardSequence1", SubResource("AnimationNodeStateMachineTransition_v0ape"), "DoubleShardSequence1", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_ag18a"), "Stagger", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_spy4q")]
+graph_offset = Vector2(88.4325, -22.2075)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_siwsy"]
 graph_offset = Vector2(-73.92, 96)
@@ -1000,50 +1009,52 @@ transform = Transform3D(4.49577, 0.0455649, -0.189668, -0.123978, 4.04555, -1.96
 transform = Transform3D(1, 5.8286e-10, 1.01449e-09, -2.48745e-10, 1, 1.59747e-08, 1.42833e-10, 1.67609e-08, 1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature" index="0"]
-bones/0/rotation = Quaternion(0.0181768, 0.706873, 0.706873, 0.0181768)
-bones/5/rotation = Quaternion(0.68316, -0.18246, -0.18246, 0.683161)
+bones/0/rotation = Quaternion(3.06266e-07, 0.707107, 0.707107, 3.06266e-07)
+bones/5/rotation = Quaternion(0.683164, -0.182446, -0.182446, 0.683164)
 bones/6/position = Vector3(0.828085, 1.02211, -0.462035)
-bones/8/position = Vector3(0.00288295, 1.02211, -1.22206)
+bones/8/position = Vector3(0.00320047, 1.02211, -1.0554)
 bones/10/position = Vector3(-0.00379542, 1.02211, 0.950407)
 bones/12/position = Vector3(0.825767, 1.02211, 0.477676)
+bones/14/position = Vector3(-0.823051, 1.02211, 0.473662)
+bones/16/position = Vector3(-0.820733, 1.02211, -0.466049)
 
 [node name="CentralEye0" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.998679, -0.0513942, 5.34161e-09, 0.0513942, -0.998678, -1.19682e-07, 9.31305e-09, -5.96046e-08, 1, -1.14682e-09, -2.97393e-08, 0)
+transform = Transform3D(-1, -2.38419e-07, 8.2422e-14, 2.38419e-07, -1, -2.38419e-07, 7.01082e-14, -1.19209e-07, 1, -3.03754e-15, -1.78814e-08, 0)
 visible = false
 
 [node name="CentralEye0" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D/CentralEye0" index="0"]
 visible = true
 
 [node name="CentralEye1" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(-0.998679, -0.0513942, 5.34161e-09, 0.0513942, -0.998678, -1.19682e-07, 9.31305e-09, -5.96046e-08, 1, -1.14682e-09, -2.97393e-08, 0)
+transform = Transform3D(-1, -2.38419e-07, 8.2422e-14, 2.38419e-07, -1, -2.38419e-07, 7.01082e-14, -1.19209e-07, 1, -3.03754e-15, -1.78814e-08, 0)
 
 [node name="CentralEye2" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(-0.998679, -0.0513942, 5.34161e-09, 0.0513942, -0.998678, -1.19682e-07, 9.31305e-09, -5.96046e-08, 1, -1.14682e-09, -2.97393e-08, 0)
+transform = Transform3D(-1, -2.38419e-07, 8.2422e-14, 2.38419e-07, -1, -2.38419e-07, 7.01082e-14, -1.19209e-07, 1, -3.03754e-15, -1.78814e-08, 0)
 
 [node name="CentralEye3" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(-0.998679, -0.0513942, 5.34161e-09, 0.0513942, -0.998678, -1.19682e-07, 9.31305e-09, -5.96046e-08, 1, -1.14682e-09, -2.97393e-08, 0)
+transform = Transform3D(-1, -2.38419e-07, 8.2422e-14, 2.38419e-07, -1, -2.38419e-07, 7.01082e-14, -1.19209e-07, 1, -3.03754e-15, -1.78814e-08, 0)
 visible = true
 
 [node name="Spike1" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.866833, 0.498598, 1.22708e-07, -0.498598, 0.866833, 7.90379e-08, -5.22191e-08, -1.59435e-07, 1, -1.19209e-07, 1.77883e-07, 1.49012e-07)
+transform = Transform3D(0.866854, 0.498562, 1.22712e-07, -0.498562, 0.866854, -4.01731e-08, -5.2219e-08, -4.02253e-08, 1, -1.78814e-07, 7.91624e-08, 3.29688e-07)
 
 [node name="Spike0" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.866833, 0.498598, 2.86114e-08, -0.498598, 0.866833, -5.63552e-08, -7.45817e-08, 3.23495e-08, 1, 0.0828242, 0.14463, 1.19209e-07)
+transform = Transform3D(0.866854, 0.498562, 2.86212e-08, -0.498562, 0.866854, -1.7557e-07, -7.45816e-08, 1.51559e-07, 1, -5.96046e-08, -3.57628e-07, 2.29105e-07)
 
 [node name="Spike3" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.866833, 0.498598, 1.37339e-07, -0.498598, 0.866833, 1.32743e-07, -7.44826e-08, -1.25301e-07, 1, 1.78814e-07, 1.78814e-07, 7.82311e-08)
+transform = Transform3D(0.866854, 0.498562, 1.37341e-07, -0.498562, 0.866854, 1.35329e-08, -7.44826e-08, -6.092e-09, 1, 1.78814e-07, 5.96046e-08, 1.8999e-07)
 
 [node name="Spike2" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.866833, 0.498598, 1.20185e-07, -0.498598, 0.866833, 1.56154e-07, -3.13314e-08, -6.81776e-08, 1, -1.19209e-07, 0, 6.51926e-08)
+transform = Transform3D(0.866854, 0.498562, 1.20186e-07, -0.498562, 0.866854, 3.69428e-08, -3.13313e-08, 5.10317e-08, 1, -1.49012e-07, -5.96046e-08, 1.19209e-07)
 
 [node name="Spike4" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.866833, 0.498598, 9.74025e-08, -0.498598, 0.866833, -7.53936e-09, -4.71711e-08, 2.7657e-08, 1, 2.38419e-07, 3.43774e-07, 1.99303e-07)
+transform = Transform3D(0.866854, 0.498562, 1.16017e-07, -0.498562, 0.866854, -1.41885e-07, -4.24293e-08, 1.12993e-07, 1, 2.38419e-07, 2.08005e-07, 2.5332e-07)
 
 [node name="Spike5" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="9"]
-transform = Transform3D(0.866833, 0.498598, -1.9694e-08, -0.498598, 0.866833, -2.57298e-08, 1.11051e-07, 2.14933e-08, 1, -1.49012e-07, 2.38419e-07, 1.67638e-07)
+transform = Transform3D(0.866854, 0.498562, -4.14412e-08, -0.498562, 0.866854, -1.38466e-07, 1.24245e-07, 1.55898e-07, 1, -5.96046e-08, 5.96046e-08, 3.48315e-07)
 
 [node name="FacePlate" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="10"]
-transform = Transform3D(0.866833, 0.498598, -1.43999e-08, -0.498598, 0.866833, -1.3119e-07, -7.45059e-08, 1.19209e-07, 1, 8.96158e-08, 1.98434e-08, 0)
+transform = Transform3D(0.866854, 0.498562, -1.43871e-08, -0.498562, 0.866854, -2.50406e-07, -7.45058e-08, 2.38419e-07, 1, 8.96212e-08, -9.9369e-08, 5.96046e-08)
 
 [node name="AnimationTree" type="AnimationTree" parent="ClarityArmMeshes/SnowflakeEntity"]
 tree_root = SubResource("AnimationNodeBlendTree_siwsy")
@@ -1662,7 +1673,7 @@ size = Vector3(30, 30, 30)
 shape = 0
 material = SubResource("FogMaterial_hru1u")
 
-[connection signal="area_entered" from="ClarityArmMeshes/SnowflakeEntity/SnowflakeHurtbox" to="." method="damage_all_snowflake_linked_shards"]
+[connection signal="area_entered" from="ClarityArmMeshes/SnowflakeEntity/SnowflakeHurtbox" to="." method="on_snowflake_hit"]
 
 [editable path="ClarityArmMeshes"]
 [editable path="ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead"]
