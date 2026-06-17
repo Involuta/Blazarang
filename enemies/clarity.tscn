@@ -1,4 +1,4 @@
-[gd_scene load_steps=124 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=121 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -13,7 +13,6 @@
 [ext_resource type="Shader" path="res://shaders/smoke.gdshader" id="7_pdkmx"]
 [ext_resource type="PackedScene" uid="uid://dhtdubq3e6ehk" path="res://glb_inherited_scenes/snowflake_entity_sprite.tscn" id="9_ajxjw"]
 [ext_resource type="Script" path="res://GPUTrail-main/GPUTrail3D.gd" id="9_xxn08"]
-[ext_resource type="ArrayMesh" uid="uid://d1vjlc1x8tyik" path="res://glb_meshes/long_hexagon_particle_mesh.res" id="10_iqpf4"]
 [ext_resource type="PackedScene" uid="uid://luimf8n4rk70" path="res://glb_inherited_scenes/clarity_dress_shards_meshes.tscn" id="12_y7646"]
 [ext_resource type="PackedScene" uid="uid://cm3mndrep3gns" path="res://glb_inherited_scenes/clarity_dress_shards_master.tscn" id="13_2l47j"]
 [ext_resource type="PackedScene" uid="uid://cyguldrcukgxk" path="res://glb_inherited_scenes/snowflake_entity_meshes.tscn" id="15_o8h64"]
@@ -297,37 +296,6 @@ node_connections = [&"output", 0, &"StateMachine"]
 [sub_resource type="SphereShape3D" id="SphereShape3D_prtmo"]
 radius = 0.81
 
-[sub_resource type="Curve" id="Curve_wolth"]
-_data = [Vector2(0.148559, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_d40do"]
-curve = SubResource("Curve_wolth")
-
-[sub_resource type="Curve" id="Curve_31gkv"]
-_data = [Vector2(0.200169, 0.0129609), 0.0, 0.0, 0, 0, Vector2(0.327966, 1), 0.0, 0.0, 0, 0, Vector2(0.519661, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
-
-[sub_resource type="CurveTexture" id="CurveTexture_0slj7"]
-curve = SubResource("Curve_31gkv")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0fk4e"]
-emission_shape = 1
-emission_sphere_radius = 5.0
-direction = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-spread = 180.0
-gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-radial_accel_min = 0.7
-radial_accel_max = 0.7
-radial_accel_curve = SubResource("CurveTexture_d40do")
-damping_min = 0.5
-damping_max = 0.5
-scale_min = 0.12
-scale_max = 0.12
-scale_curve = SubResource("CurveTexture_0slj7")
-color = Color(0.560784, 0.803922, 1, 1)
-attractor_interaction_enabled = false
-
 [sub_resource type="Gradient" id="Gradient_dgiri"]
 offsets = PackedFloat32Array(0.182081, 0.361272)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
@@ -336,25 +304,68 @@ colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
 gradient = SubResource("Gradient_dgiri")
 
 [sub_resource type="Curve" id="Curve_20xea"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25178, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0699153, 1), 0.0, 0.0, 0, 0, Vector2(0.25178, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="CurveTexture" id="CurveTexture_w6rlv"]
 curve = SubResource("Curve_20xea")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oo8uk"]
+particle_flag_align_y = true
 direction = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 spread = 180.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-initial_velocity_min = 1.2
-initial_velocity_max = 2.4
-damping_min = 0.1
-damping_max = 0.1
+initial_velocity_min = 2.0
+initial_velocity_max = 7.0
+damping_min = 0.4
+damping_max = 0.4
 scale_min = 0.08
 scale_max = 0.16
 scale_curve = SubResource("CurveTexture_w6rlv")
 color = Color(0.792157, 0.92549, 1, 1)
 color_ramp = SubResource("GradientTexture1D_r3kuk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_50nh7"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.647059, 0.886275, 1, 1)
+roughness = 0.1
+emission_enabled = true
+emission = Color(0.584314, 0.843137, 1, 1)
+backlight_enabled = true
+backlight = Color(0.584314, 0.843137, 1, 1)
+billboard_keep_scale = true
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_682vj"]
+_surfaces = [{
+"aabb": AABB(-0.6, -2, 0, 1.2, 4, 0.20001),
+"format": 4097,
+"index_count": 60,
+"index_data": PackedByteArray(6, 0, 11, 0, 7, 0, 6, 0, 10, 0, 11, 0, 2, 0, 4, 0, 3, 0, 4, 0, 6, 0, 7, 0, 6, 0, 2, 0, 5, 0, 4, 0, 2, 0, 6, 0, 2, 0, 9, 0, 5, 0, 2, 0, 1, 0, 9, 0, 3, 0, 1, 0, 2, 0, 3, 0, 0, 0, 1, 0, 5, 0, 10, 0, 6, 0, 5, 0, 9, 0, 10, 0, 8, 0, 1, 0, 0, 0, 1, 0, 10, 0, 9, 0, 10, 0, 8, 0, 11, 0, 1, 0, 8, 0, 10, 0, 7, 0, 8, 0, 4, 0, 7, 0, 11, 0, 8, 0, 4, 0, 0, 0, 3, 0, 4, 0, 8, 0, 0, 0),
+"lods": [0.254633, PackedByteArray(2, 0, 4, 0, 3, 0, 4, 0, 2, 0, 6, 0, 6, 0, 2, 0, 5, 0, 4, 0, 6, 0, 7, 0, 2, 0, 6, 0, 5, 0, 2, 0, 4, 0, 6, 0, 6, 0, 4, 0, 7, 0, 4, 0, 2, 0, 3, 0), 0.442418, PackedByteArray(2, 0, 4, 0, 3, 0, 4, 0, 2, 0, 6, 0, 2, 0, 4, 0, 6, 0, 4, 0, 2, 0, 3, 0)],
+"name": "Material",
+"primitive": 3,
+"vertex_count": 12,
+"vertex_data": PackedByteArray(193, 95, 204, 62, 203, 79, 42, 191, 205, 204, 76, 62, 193, 95, 204, 62, 203, 79, 42, 63, 205, 204, 76, 62, 154, 153, 25, 63, 0, 0, 128, 63, 0, 0, 0, 128, 154, 153, 25, 63, 0, 0, 128, 191, 0, 0, 0, 128, 0, 0, 0, 0, 0, 0, 0, 192, 0, 0, 0, 128, 0, 0, 0, 0, 0, 0, 0, 64, 0, 0, 0, 128, 154, 153, 25, 191, 0, 0, 128, 63, 0, 0, 0, 128, 154, 153, 25, 191, 0, 0, 128, 191, 0, 0, 0, 128, 0, 0, 0, 0, 203, 79, 170, 191, 205, 204, 76, 62, 0, 0, 0, 0, 203, 79, 170, 63, 205, 204, 76, 62, 193, 95, 204, 190, 203, 79, 42, 63, 205, 204, 76, 62, 193, 95, 204, 190, 203, 79, 42, 191, 205, 204, 76, 62)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_n7ntp"]
+resource_name = "LongHexagon_Cube"
+_surfaces = [{
+"aabb": AABB(-0.6, -2, 0, 1.2, 4, 0.20001),
+"attribute_data": PackedByteArray(0, 0, 192, 62, 0, 0, 128, 62, 0, 0, 192, 62, 0, 0, 128, 62, 0, 0, 192, 62, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 192, 62, 0, 0, 128, 62, 0, 0, 192, 62, 0, 0, 128, 62, 0, 0, 192, 62, 0, 0, 128, 62, 0, 0, 192, 62, 0, 0, 0, 62, 0, 0, 192, 62, 0, 0, 0, 62, 0, 0, 192, 62, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 0, 0, 0, 32, 63, 0, 0, 0, 0, 0, 0, 32, 63, 0, 0, 0, 0, 0, 0, 192, 62, 0, 0, 0, 0, 0, 0, 192, 62, 0, 0, 0, 0, 0, 0, 192, 62, 0, 0, 0, 0, 0, 0, 192, 62, 0, 0, 0, 62, 0, 0, 192, 62, 0, 0, 0, 62, 0, 0, 192, 62, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 0, 0, 0, 32, 63, 0, 0, 0, 0, 0, 0, 32, 63, 0, 0, 0, 0, 0, 0, 192, 62, 0, 0, 0, 0, 0, 0, 192, 62, 0, 0, 0, 0, 0, 0, 192, 62, 0, 0, 0, 0),
+"format": 4119,
+"index_count": 60,
+"index_data": PackedByteArray(18, 0, 33, 0, 21, 0, 18, 0, 30, 0, 33, 0, 6, 0, 13, 0, 9, 0, 13, 0, 20, 0, 23, 0, 20, 0, 6, 0, 16, 0, 13, 0, 6, 0, 20, 0, 7, 0, 29, 0, 17, 0, 7, 0, 4, 0, 29, 0, 11, 0, 5, 0, 8, 0, 11, 0, 2, 0, 5, 0, 15, 0, 31, 0, 19, 0, 15, 0, 27, 0, 31, 0, 25, 0, 3, 0, 0, 0, 3, 0, 32, 0, 28, 0, 32, 0, 25, 0, 35, 0, 3, 0, 25, 0, 32, 0, 22, 0, 24, 0, 12, 0, 22, 0, 34, 0, 24, 0, 14, 0, 1, 0, 10, 0, 14, 0, 26, 0, 1, 0),
+"lods": [0.254633, PackedByteArray(6, 0, 13, 0, 9, 0, 13, 0, 6, 0, 20, 0, 20, 0, 6, 0, 16, 0, 13, 0, 20, 0, 23, 0, 7, 0, 18, 0, 15, 0, 7, 0, 12, 0, 18, 0, 18, 0, 12, 0, 21, 0, 12, 0, 7, 0, 10, 0), 0.442418, PackedByteArray(6, 0, 13, 0, 9, 0, 13, 0, 6, 0, 20, 0, 7, 0, 12, 0, 18, 0, 12, 0, 7, 0, 10, 0)],
+"material": SubResource("StandardMaterial3D_50nh7"),
+"name": "Material",
+"primitive": 3,
+"vertex_count": 36,
+"vertex_data": PackedByteArray(193, 95, 204, 62, 203, 79, 42, 191, 205, 204, 76, 62, 255, 127, 255, 127, 255, 127, 255, 255, 193, 95, 204, 62, 203, 79, 42, 191, 205, 204, 76, 62, 120, 163, 182, 106, 255, 255, 255, 63, 193, 95, 204, 62, 203, 79, 42, 191, 205, 204, 76, 62, 220, 191, 255, 127, 255, 255, 255, 63, 193, 95, 204, 62, 203, 79, 42, 63, 205, 204, 76, 62, 255, 127, 255, 127, 255, 127, 255, 255, 193, 95, 204, 62, 203, 79, 42, 63, 205, 204, 76, 62, 120, 163, 72, 149, 255, 255, 255, 63, 193, 95, 204, 62, 203, 79, 42, 63, 205, 204, 76, 62, 220, 191, 255, 127, 255, 255, 255, 63, 154, 153, 25, 63, 0, 0, 128, 63, 0, 0, 0, 128, 255, 255, 255, 255, 255, 127, 0, 0, 154, 153, 25, 63, 0, 0, 128, 63, 0, 0, 0, 128, 120, 163, 72, 149, 255, 255, 255, 63, 154, 153, 25, 63, 0, 0, 128, 63, 0, 0, 0, 128, 220, 191, 255, 127, 255, 255, 255, 63, 154, 153, 25, 63, 0, 0, 128, 191, 0, 0, 0, 128, 255, 255, 255, 255, 255, 127, 0, 0, 154, 153, 25, 63, 0, 0, 128, 191, 0, 0, 0, 128, 120, 163, 182, 106, 255, 255, 255, 63, 154, 153, 25, 63, 0, 0, 128, 191, 0, 0, 0, 128, 220, 191, 255, 127, 255, 255, 255, 63, 0, 0, 0, 0, 0, 0, 0, 192, 0, 0, 0, 128, 134, 92, 182, 106, 255, 255, 255, 63, 0, 0, 0, 0, 0, 0, 0, 192, 0, 0, 0, 128, 255, 255, 255, 255, 255, 127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 192, 0, 0, 0, 128, 120, 163, 182, 106, 255, 255, 255, 63, 0, 0, 0, 0, 0, 0, 0, 64, 0, 0, 0, 128, 134, 92, 72, 149, 255, 255, 255, 63, 0, 0, 0, 0, 0, 0, 0, 64, 0, 0, 0, 128, 255, 255, 255, 255, 255, 255, 255, 191, 0, 0, 0, 0, 0, 0, 0, 64, 0, 0, 0, 128, 120, 163, 72, 149, 255, 255, 255, 63, 154, 153, 25, 191, 0, 0, 128, 63, 0, 0, 0, 128, 34, 64, 255, 127, 255, 255, 255, 63, 154, 153, 25, 191, 0, 0, 128, 63, 0, 0, 0, 128, 134, 92, 72, 149, 255, 255, 255, 63, 154, 153, 25, 191, 0, 0, 128, 63, 0, 0, 0, 128, 255, 255, 255, 255, 255, 127, 0, 0, 154, 153, 25, 191, 0, 0, 128, 191, 0, 0, 0, 128, 34, 64, 255, 127, 255, 255, 255, 63, 154, 153, 25, 191, 0, 0, 128, 191, 0, 0, 0, 128, 134, 92, 182, 106, 255, 255, 255, 63, 154, 153, 25, 191, 0, 0, 128, 191, 0, 0, 0, 128, 255, 255, 255, 255, 255, 127, 0, 0, 0, 0, 0, 0, 203, 79, 170, 191, 205, 204, 76, 62, 134, 92, 182, 106, 255, 255, 255, 63, 0, 0, 0, 0, 203, 79, 170, 191, 205, 204, 76, 62, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 0, 0, 203, 79, 170, 191, 205, 204, 76, 62, 120, 163, 182, 106, 255, 255, 255, 63, 0, 0, 0, 0, 203, 79, 170, 63, 205, 204, 76, 62, 134, 92, 72, 149, 255, 255, 255, 63, 0, 0, 0, 0, 203, 79, 170, 63, 205, 204, 76, 62, 255, 127, 255, 127, 255, 255, 255, 63, 0, 0, 0, 0, 203, 79, 170, 63, 205, 204, 76, 62, 120, 163, 72, 149, 255, 255, 255, 63, 193, 95, 204, 190, 203, 79, 42, 63, 205, 204, 76, 62, 34, 64, 255, 127, 255, 255, 255, 63, 193, 95, 204, 190, 203, 79, 42, 63, 205, 204, 76, 62, 134, 92, 72, 149, 255, 255, 255, 63, 193, 95, 204, 190, 203, 79, 42, 63, 205, 204, 76, 62, 255, 127, 255, 127, 255, 127, 255, 255, 193, 95, 204, 190, 203, 79, 42, 191, 205, 204, 76, 62, 34, 64, 255, 127, 255, 255, 255, 63, 193, 95, 204, 190, 203, 79, 42, 191, 205, 204, 76, 62, 134, 92, 182, 106, 255, 255, 255, 63, 193, 95, 204, 190, 203, 79, 42, 191, 205, 204, 76, 62, 255, 127, 255, 127, 255, 127, 255, 255)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_682vj")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1pjfc"]
 radius = 1.0
@@ -896,7 +907,7 @@ bones/16/position = Vector3(-2.85858, 2.94367, -0.755941)
 bones/16/rotation = Quaternion(0.321999, -0.24697, 0.885482, 0.226373)
 
 [node name="Hat_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1.42986, 0.00998904, -0.0170401, -0.0125258, 1.41244, -0.223079, 0.0152725, 0.223207, 1.41239, 0.918732, 14.4374, 0.659002)
+transform = Transform3D(1.42986, 0.00998886, -0.0170402, -0.0125256, 1.41244, -0.22308, 0.0152726, 0.223208, 1.41239, 0.918731, 14.4374, 0.659003)
 
 [node name="BodyLight" type="OmniLight3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2" index="1"]
 light_color = Color(0, 0.486275, 0.894118, 1)
@@ -926,7 +937,7 @@ opponent_hitboxes = ["PlayerHitbox"]
 shape = SubResource("SphereShape3D_g3bkq")
 
 [node name="Arm_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.339741, 0.92836, 0.150741, -0.932056, 0.353784, -0.0781571, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
+transform = Transform3D(0.339741, 0.928361, 0.150741, -0.932056, 0.353783, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57238, 8.73293, 0.998592)
 
 [node name="EnemyHitbox" type="Area3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2" index="1"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
@@ -1033,30 +1044,30 @@ curve = SubResource("CurveTexture_vxuhc")
 _defaults_have_been_set = true
 
 [node name="Center_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.982278, 0.104528, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520492, 0.985479, 0.562103, 9.96609, 0.284472)
+transform = Transform3D(0.982278, 0.104528, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
 
 [node name="MiddleLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 1.18725e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548505)
+transform = Transform3D(0.766044, 0.219846, 0.604023, -2.9111e-08, 0.939693, -0.34202, -0.642788, 0.262002, 0.719846, -0.990243, 0.156014, -0.548502)
 visible = false
 
 [node name="FrontLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 8.1839e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990245, 0.156011, -0.548507)
+transform = Transform3D(0.766045, 0.219846, 0.604022, 2.61259e-08, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990248, 0.15601, -0.548509)
 visible = false
 
 [node name="BackLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 4.14429e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156009, -0.548506)
+transform = Transform3D(0.766044, 0.219846, 0.604023, -3.27128e-07, 0.939693, -0.342019, -0.642788, 0.262002, 0.719846, -0.990243, 0.15601, -0.548501)
 visible = false
 
 [node name="MiddleRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 3.65041e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548508)
+transform = Transform3D(0.766045, 0.219846, 0.604022, 2.33248e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719846, -0.990239, 0.156015, -0.548505)
 visible = false
 
 [node name="FrontRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -1.26024e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548506)
+transform = Transform3D(0.766045, 0.219847, 0.604023, -5.96117e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990245, 0.15601, -0.548503)
 visible = false
 
 [node name="BackRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -3.64784e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548507)
+transform = Transform3D(0.766045, 0.219847, 0.604022, -9.71103e-07, 0.939692, -0.34202, -0.642787, 0.262002, 0.719847, -0.990254, 0.156008, -0.548505)
 visible = false
 
 [node name="SnowflakeEntity" type="Node3D" parent="ClarityArmMeshes"]
@@ -1077,12 +1088,20 @@ bones/14/position = Vector3(-0.823051, 1.02211, 0.473662)
 bones/16/position = Vector3(-0.820733, 1.02211, -0.466049)
 
 [node name="CentralEye0" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="0"]
+transform = Transform3D(1, -3.74218e-14, -5.40003e-14, -3.74218e-14, 1, -7.10543e-15, -5.40003e-14, -7.10543e-15, 1, -2.86885e-15, -1.78814e-08, 7.45058e-09)
 visible = false
 
 [node name="CentralEye0" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D/CentralEye0" index="0"]
 visible = true
 
+[node name="CentralEye1" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="1"]
+transform = Transform3D(1, -3.74218e-14, -5.40003e-14, -3.74218e-14, 1, -7.10543e-15, -5.40003e-14, -7.10543e-15, 1, -2.86885e-15, -1.78814e-08, 7.45058e-09)
+
+[node name="CentralEye2" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="2"]
+transform = Transform3D(1, -3.74218e-14, -5.40003e-14, -3.74218e-14, 1, -7.10543e-15, -5.40003e-14, -7.10543e-15, 1, -2.86885e-15, -1.78814e-08, 7.45058e-09)
+
 [node name="CentralEye3" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="3"]
+transform = Transform3D(1, -3.74218e-14, -5.40003e-14, -3.74218e-14, 1, -7.10543e-15, -5.40003e-14, -7.10543e-15, 1, -2.86885e-15, -1.78814e-08, 7.45058e-09)
 visible = true
 
 [node name="Spike1" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="4"]
@@ -1121,27 +1140,14 @@ shape = SubResource("SphereShape3D_prtmo")
 [node name="StaggerHexagonParticles" type="GPUParticles3D" parent="ClarityArmMeshes/SnowflakeEntity"]
 cast_shadow = 0
 emitting = false
-amount = 30
-lifetime = 6.0
-one_shot = true
-preprocess = 0.9
-explosiveness = 1.0
-local_coords = true
-process_material = SubResource("ParticleProcessMaterial_0fk4e")
-draw_pass_1 = ExtResource("10_iqpf4")
-
-[node name="StaggerSnowflakeParticles" type="GPUParticles3D" parent="ClarityArmMeshes/SnowflakeEntity"]
-visible = false
-cast_shadow = 0
-emitting = false
-amount = 60
+amount = 90
 lifetime = 3.0
 one_shot = true
 preprocess = 0.3
 explosiveness = 1.0
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_oo8uk")
-draw_pass_1 = ExtResource("7_i53v5")
+draw_pass_1 = SubResource("ArrayMesh_n7ntp")
 
 [node name="DressShardMaster" parent="." instance=ExtResource("13_2l47j")]
 transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
