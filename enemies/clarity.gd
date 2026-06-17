@@ -226,10 +226,13 @@ func switch_to_staggered():
 	# Switch to Stagger anim
 	arm_anim_player.play("Stagger")
 	# Move backward
+	"""
 	var t = get_tree().create_tween()
 	var move_dir := 3 * walk_speed * target.global_position.direction_to(global_position)
 	t.tween_property(self, "velocity", Vector3(move_dir.x, 0, move_dir.z), 0)
 	t.tween_property(self, "velocity", Vector3.ZERO, frames(162))
+	"""
+	velocity = Vector3.ZERO
 	await get_tree().create_timer(frames(196)).timeout
 	# Return to normal anim tree/state machine behavior
 	switch_to_circling()
@@ -410,6 +413,7 @@ func walk_curved(circling_target: bool):
 	snowflake_long_dist_attack_check()
 
 func switch_to_circling():
+	arm_long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	behav_state = CIRCLING
 	look_state = LOOK_STATE.TARGET_HEAD_ARM_BODY
 
@@ -460,10 +464,9 @@ func start_snowflake_attack():
 	snowflake_attacking = true # Prevent another arm attack from being queued
 
 func end_arm_attack():
+	no_arm_attack_queued.emit()
 	arm_attacking = false
 	arm_attack_queued = false
-	no_arm_attack_queued.emit()
-	arm_long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	"""
 	FOR TESTING: behav_state is chosen here manually instead of randomly btwn str and cur
 	NOTE: certain attacks always go to certain states (e.g. any jump shot to walk left must switch to circling)
