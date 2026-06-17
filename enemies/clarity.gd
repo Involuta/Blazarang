@@ -735,10 +735,8 @@ func on_snowflake_hit(a: Area3D):
 	# Damage Clarity (if snowflake entity is vulnerable)
 	if snowflake_vulnerable:
 		head_hurtbox.receive_hit_no_hitbox(snowflake_hit_head_damage)
-	
-	unlink_all_dress_shards_from_snowflake()
-	
-	snowflake_stagger()
+		snowflake_stagger()
+		unlink_all_dress_shards_from_snowflake()
 
 func unlink_all_dress_shards_from_snowflake():
 	for ds in dress_shards.values():

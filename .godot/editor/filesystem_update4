@@ -31,3 +31,6 @@ res://levels/snow_level/snow_level_test_env.tscn
 res://enemies/ice_sprite.tscn
 res://glb_inherited_scenes/snowflake_entity_meshes.tscn
 res://general_scripts/hurtbox.gd
+res://glb_meshes/long_hexagon_particle_mesh.res
+res://enemies/enemy_anims/snowflake_entity_stagger.res
+res://enemies/clarity.gd

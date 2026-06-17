@@ -1,11 +1,11 @@
+GPUParticles3D
+Node3D
 CollisionShape3D
 Hitbox
 Area3D
 EnemyHurtbox
 AnimationTree
 Sprite3D
-Node3D
-GPUParticles3D
 DamageOverTimeArea
 GPUTrail3D
 Trail3D
