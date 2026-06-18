@@ -1,6 +1,12 @@
 class_name ClarityShardHurtbox
 extends EnemyHurtbox
 
+var mesh : Node3D
+
+func _ready():
+	super()
+	mesh = hb_owner.find_children("*", "MeshInstance3D", false, false)[0]
+
 func death_effect():
 	if "death_effect" in hb_owner:
 		hb_owner.death_effect()
@@ -22,3 +28,11 @@ func regen():
 	# To do: make effect for regen
 	hb_owner.visible = true
 	process_mode = Node.PROCESS_MODE_INHERIT
+
+func receive_hit(hitbox, hitter):
+	# Glow to dim effect
+	var mat = mesh.get_surface_override_material(0)
+	var t = get_tree().create_tween()
+	t.tween_property(mat, "emission_energy_multiplier", 1, 0)
+	t.tween_property(mat, "emission_energy_multiplier", 0.0, 0.6)
+	super(hitbox, hitter)
