@@ -1,10 +1,10 @@
+res://glb_meshes/long_hexagon_particle_mesh.res
 res://enemies/clarity.tscn
 res://textures/clear_tile.tres
 res://enemies/enemy_hurtbox.gd
 res://ui/flash.gdshader
 res://ui/glitch.gdshader
 res://glb_meshes/snowflake_particle_mesh.res
-res://enemies/enemy_anims/clarity_stagger.res
 res://shaders/black_outline.gdshader
 res://textures/noise_texture_2d.tres
 res://shaders/smoke_LOD.tres
@@ -32,4 +32,3 @@ res://enemies/clarity_head.tscn
 res://levels/snow_level/snow_level_test_env.tscn
 res://enemies/ice_sprite.tscn
 res://glb_inherited_scenes/snowflake_entity_meshes.tscn
-res://enemies/clarity.gd
