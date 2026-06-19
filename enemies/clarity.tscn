@@ -1,4 +1,4 @@
-[gd_scene load_steps=142 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=143 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://GPUTrail-main/GPUTrail3D.gd" id="9_xxn08"]
 [ext_resource type="PackedScene" uid="uid://luimf8n4rk70" path="res://glb_inherited_scenes/clarity_dress_shards_meshes.tscn" id="12_y7646"]
 [ext_resource type="PackedScene" uid="uid://cm3mndrep3gns" path="res://glb_inherited_scenes/clarity_dress_shards_master.tscn" id="13_2l47j"]
+[ext_resource type="PackedScene" uid="uid://dotk8qi7oo127" path="res://enemies/clarity_dress_shard_hit_particles.tscn" id="14_luiy3"]
 [ext_resource type="PackedScene" uid="uid://cyguldrcukgxk" path="res://glb_inherited_scenes/snowflake_entity_meshes.tscn" id="15_o8h64"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g3bkq"]
@@ -1326,20 +1327,12 @@ bones/5/rotation = Quaternion(0.683013, -0.183013, -0.183013, 0.683013)
 bones/8/position = Vector3(0.00320047, 1.02211, -1.0554)
 
 [node name="CentralEye0" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1, -3.74218e-14, -5.40003e-14, -3.74218e-14, 1, -7.10543e-15, -5.40003e-14, -7.10543e-15, 1, -2.86885e-15, -1.78814e-08, 7.45058e-09)
 visible = false
 
 [node name="CentralEye0" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D/CentralEye0" index="0"]
 visible = true
 
-[node name="CentralEye1" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(1, -3.74218e-14, -5.40003e-14, -3.74218e-14, 1, -7.10543e-15, -5.40003e-14, -7.10543e-15, 1, -2.86885e-15, -1.78814e-08, 7.45058e-09)
-
-[node name="CentralEye2" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(1, -3.74218e-14, -5.40003e-14, -3.74218e-14, 1, -7.10543e-15, -5.40003e-14, -7.10543e-15, 1, -2.86885e-15, -1.78814e-08, 7.45058e-09)
-
 [node name="CentralEye3" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(1, -3.74218e-14, -5.40003e-14, -3.74218e-14, 1, -7.10543e-15, -5.40003e-14, -7.10543e-15, 1, -2.86885e-15, -1.78814e-08, 7.45058e-09)
 visible = true
 
 [node name="Spike1" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="4"]
@@ -1481,7 +1474,8 @@ collision_layer = 8
 collision_mask = 265
 script = ExtResource("3_cemfj")
 enemy_name = "ClarityBodyShard"
-hit_particle_color = Color(0.458824, 0.713726, 1, 1)
+hit_particles = ExtResource("14_luiy3")
+hit_particle_color = Color(0.713726, 0.870588, 1, 1)
 defense = 6
 opponent_hitboxes = ["PlayerHitbox", "SelfDamageHitbox"]
 
@@ -1571,7 +1565,8 @@ collision_layer = 8
 collision_mask = 265
 script = ExtResource("3_cemfj")
 enemy_name = "ClarityBodyShard"
-hit_particle_color = Color(0.431373, 0.682353, 1, 1)
+hit_particles = ExtResource("14_luiy3")
+hit_particle_color = Color(0.713726, 0.870588, 1, 1)
 defense = 6
 opponent_hitboxes = ["PlayerHitbox", "SelfDamageHitbox"]
 
@@ -1633,7 +1628,8 @@ collision_layer = 8
 collision_mask = 265
 script = ExtResource("3_cemfj")
 enemy_name = "ClarityBodyShard"
-hit_particle_color = Color(0.458824, 0.713726, 1, 1)
+hit_particles = ExtResource("14_luiy3")
+hit_particle_color = Color(0.713726, 0.870588, 1, 1)
 defense = 6
 opponent_hitboxes = ["PlayerHitbox", "SelfDamageHitbox"]
 
@@ -1723,7 +1719,8 @@ collision_layer = 8
 collision_mask = 265
 script = ExtResource("3_cemfj")
 enemy_name = "ClarityBodyShard"
-hit_particle_color = Color(0.458824, 0.713726, 1, 1)
+hit_particles = ExtResource("14_luiy3")
+hit_particle_color = Color(0.713726, 0.870588, 1, 1)
 defense = 6
 opponent_hitboxes = ["PlayerHitbox", "SelfDamageHitbox"]
 
@@ -1798,7 +1795,8 @@ collision_layer = 8
 collision_mask = 265
 script = ExtResource("3_cemfj")
 enemy_name = "ClarityBodyShard"
-hit_particle_color = Color(0.482353, 0.721569, 1, 1)
+hit_particles = ExtResource("14_luiy3")
+hit_particle_color = Color(0.713726, 0.870588, 1, 1)
 defense = 6
 opponent_hitboxes = ["PlayerHitbox", "SelfDamageHitbox"]
 
@@ -1889,7 +1887,8 @@ collision_layer = 8
 collision_mask = 265
 script = ExtResource("3_cemfj")
 enemy_name = "ClarityBodyShard"
-hit_particle_color = Color(0.4, 0.678431, 1, 1)
+hit_particles = ExtResource("14_luiy3")
+hit_particle_color = Color(0.713726, 0.870588, 1, 1)
 defense = 6
 opponent_hitboxes = ["PlayerHitbox", "SelfDamageHitbox"]
 
