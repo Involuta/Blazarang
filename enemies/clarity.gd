@@ -233,9 +233,7 @@ func switch_to_staggered():
 	t.tween_property(self, "velocity", Vector3.ZERO, frames(162))
 	"""
 	velocity = Vector3.ZERO
-	await get_tree().create_timer(frames(196)).timeout
-	# Return to normal anim tree/state machine behavior
-	switch_to_circling()
+	# Attack reset code (setting long dist wait, attacking state, etc.) is called in Stagger anim keyframes
 
 func set_head_rotation(rot_deg: Vector3):
 	# Set rotation of dynamic head (the head that looks at the player)

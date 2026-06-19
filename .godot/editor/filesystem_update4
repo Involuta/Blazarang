@@ -33,3 +33,5 @@ res://enemies/ice_sprite.tscn
 res://enemies/clarity.tscn
 res://glb_inherited_scenes/snowflake_entity_meshes.tscn
 res://enemies/clarity_shard_hurtbox.gd
+res://enemies/clarity.gd
+res://enemies/enemy_anims/clarity_stagger.res
