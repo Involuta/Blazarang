@@ -1,11 +1,12 @@
-GPUParticles3D
+MeshInstance3D
+Sprite3D
 Node3D
+GPUParticles3D
 CollisionShape3D
 Hitbox
 Area3D
 EnemyHurtbox
 AnimationTree
-Sprite3D
 DamageOverTimeArea
 GPUTrail3D
 Trail3D
@@ -17,7 +18,6 @@ NavigationRegion3D
 ClarityShardHurtbox
 Sprite2D
 AnimationPlayer
-MeshInstance3D
 OmniLight3D
 BossHurtbox
 NavigationAgent3D
