@@ -320,7 +320,6 @@ transitions = ["Start", "RotateSlow", SubResource("AnimationNodeStateMachineTran
 graph_offset = Vector2(218.535, -25.185)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_siwsy"]
-graph_offset = Vector2(-65.28, 117.12)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_qlhjd")
 nodes/StateMachine/position = Vector2(80, 150)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -1114,6 +1113,7 @@ collision_mask = 2
 script = ExtResource("1_172k1")
 phase1_min_long_dist_wait = 3.0
 phase1_max_long_dist_wait = 4.0
+snowflake_hit_dress_shard_damage = 120
 wait_lowered_left_min_secs = 0.3
 wait_lowered_left_max_secs = 3.0
 wait_raised_left_min_secs = 0.3
