@@ -1292,7 +1292,7 @@ _defaults_have_been_set = true
 transform = Transform3D(0.982278, 0.104529, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
 
 [node name="MiddleLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 1.18725e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548505)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 1.18725e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548504)
 visible = false
 
 [node name="FrontLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="4"]
@@ -1312,7 +1312,7 @@ transform = Transform3D(0.766044, 0.219846, 0.604023, -1.26024e-07, 0.939692, -0
 visible = false
 
 [node name="BackRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -3.64784e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548507)
+transform = Transform3D(0.766044, 0.219846, 0.604023, -3.64784e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990247, 0.156011, -0.548507)
 visible = false
 
 [node name="SnowflakeEntity" type="Node3D" parent="ClarityArmMeshes"]
