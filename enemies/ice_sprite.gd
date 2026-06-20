@@ -57,11 +57,11 @@ func lerp_look_at_walk_dir(turn_speed):
 func follow():
 	if is_on_floor():
 		jump()
+	lerp_look_at_walk_dir(follow_turn_speed)
 
 func jump():
 	velocity = follow_speed*global_position.direction_to(target.global_position)
 	velocity.y = jump_vertical_speed
-	lerp_look_at_walk_dir(follow_turn_speed)
 	global_rotation.x = 0
 	global_rotation.z = 0
 

@@ -12,7 +12,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qf6aq"]
 resource_local_to_scene = true
 transparency = 4
-albedo_color = Color(0.45098, 0.701961, 1, 0.74902)
+albedo_color = Color(0.560784, 0.803922, 1, 0.74902)
 roughness = 0.12
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
@@ -37,7 +37,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0.45098, 0.701961, 1, 0.74902)]
+"values": [Color(0.560784, 0.803922, 1, 0.74902)]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -206,7 +206,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0.45098, 0.701961, 1, 0.74902)]
+"values": [Color(0.560784, 0.803922, 1, 0.74902)]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
