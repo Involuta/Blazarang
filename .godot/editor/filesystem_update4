@@ -35,3 +35,5 @@ res://enemies/clarity_dress_shard_hit_particles.tscn
 res://enemies/ice_sprite.gd
 res://enemies/enemy_anims/snowflake_entity_stagger.res
 res://enemies/enemy_anims/snowflake_entity_singleshardseq1.res
+res://enemies/clarity_shard_hurtbox.gd
+res://enemies/x_boss.tscn
