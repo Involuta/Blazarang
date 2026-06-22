@@ -1,4 +1,4 @@
-[gd_scene load_steps=145 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=152 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -365,6 +365,44 @@ scale_max = 0.16
 scale_curve = SubResource("CurveTexture_w6rlv")
 color = Color(0.792157, 0.92549, 1, 1)
 color_ramp = SubResource("GradientTexture1D_r3kuk")
+
+[sub_resource type="Gradient" id="Gradient_4stni"]
+colors = PackedColorArray(1, 1, 1, 1, 0.336053, 0.71451, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5db1d"]
+gradient = SubResource("Gradient_4stni")
+
+[sub_resource type="Curve" id="Curve_0jcr3"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_tskar"]
+curve = SubResource("Curve_0jcr3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b26ke"]
+lifetime_randomness = 0.5
+emission_shape = 3
+emission_box_extents = Vector3(0.1, 2, 0.1)
+particle_flag_align_y = true
+direction = Vector3(2.08165e-12, 1, 2.08165e-12)
+spread = 75.0
+gravity = Vector3(2.08165e-12, -9.8, 2.08165e-12)
+initial_velocity_min = 6.0
+initial_velocity_max = 9.0
+angular_velocity_min = 60.0
+angular_velocity_max = 60.0
+scale_min = 0.2
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_tskar")
+color = Color(0.792157, 0.92549, 1, 1)
+color_ramp = SubResource("GradientTexture1D_5db1d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_juu8c"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_ltq1a"]
+material = SubResource("StandardMaterial3D_juu8c")
 
 [sub_resource type="Shader" id="Shader_d0tm6"]
 code = "shader_type spatial;
@@ -1153,7 +1191,7 @@ bones/16/position = Vector3(-2.85858, 2.94367, -0.755941)
 bones/16/rotation = Quaternion(0.321999, -0.24697, 0.885482, 0.226373)
 
 [node name="Hat_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1.42986, 0.00998904, -0.0170401, -0.0125258, 1.41244, -0.223079, 0.0152725, 0.223207, 1.41239, 0.918732, 14.4374, 0.659001)
+transform = Transform3D(1.42986, 0.00998886, -0.0170402, -0.0125256, 1.41244, -0.22308, 0.0152726, 0.223208, 1.41239, 0.918731, 14.4374, 0.659002)
 
 [node name="BodyLight" type="OmniLight3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2" index="1"]
 light_color = Color(0, 0.486275, 0.894118, 1)
@@ -1192,7 +1230,7 @@ process_material = SubResource("ParticleProcessMaterial_1ffcq")
 draw_pass_1 = ExtResource("5_1f67e")
 
 [node name="Arm_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.339741, 0.92836, 0.150741, -0.932056, 0.353784, -0.0781571, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
+transform = Transform3D(0.339741, 0.928361, 0.150741, -0.932056, 0.353783, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57238, 8.73293, 0.998592)
 
 [node name="EnemyHitbox" type="Area3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2" index="1"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
@@ -1299,30 +1337,30 @@ curve = SubResource("CurveTexture_vxuhc")
 _defaults_have_been_set = true
 
 [node name="Center_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.982278, 0.104528, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520492, 0.985479, 0.562103, 9.96609, 0.284472)
+transform = Transform3D(0.982278, 0.104528, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
 
 [node name="MiddleLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 1.18725e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548504)
+transform = Transform3D(0.766044, 0.219846, 0.604023, -2.9111e-08, 0.939693, -0.34202, -0.642788, 0.262002, 0.719846, -0.990243, 0.156013, -0.548501)
 visible = false
 
 [node name="FrontLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 8.1839e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990245, 0.156011, -0.548507)
+transform = Transform3D(0.766045, 0.219846, 0.604022, 2.61259e-08, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990248, 0.15601, -0.548509)
 visible = false
 
 [node name="BackLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 4.14429e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156009, -0.548506)
+transform = Transform3D(0.766044, 0.219846, 0.604023, -3.27128e-07, 0.939693, -0.342019, -0.642788, 0.262002, 0.719846, -0.990243, 0.15601, -0.548501)
 visible = false
 
 [node name="MiddleRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 3.65041e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548508)
+transform = Transform3D(0.766045, 0.219846, 0.604022, 2.33248e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719846, -0.990239, 0.156015, -0.548505)
 visible = false
 
 [node name="FrontRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -1.26024e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548506)
+transform = Transform3D(0.766045, 0.219847, 0.604023, -5.96117e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990245, 0.15601, -0.548503)
 visible = false
 
 [node name="BackRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -3.64784e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990247, 0.156011, -0.548507)
+transform = Transform3D(0.766045, 0.219847, 0.604022, -9.71103e-07, 0.939692, -0.34202, -0.642787, 0.262002, 0.719847, -0.990255, 0.156009, -0.548505)
 visible = false
 
 [node name="SnowflakeEntity" type="Node3D" parent="ClarityArmMeshes"]
@@ -1334,35 +1372,47 @@ transform = Transform3D(4.49577, 0.0455649, -0.189668, -0.123978, 4.04555, -1.96
 transform = Transform3D(1, 5.8286e-10, 1.01449e-09, -2.48745e-10, 1, 1.59747e-08, 1.42833e-10, 1.67609e-08, 1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature" index="0"]
+bones/0/rotation = Quaternion(3.06266e-07, 0.707107, 0.707107, 3.06266e-07)
 bones/5/rotation = Quaternion(0.707107, -3.06266e-07, -3.06266e-07, 0.707107)
-bones/6/position = Vector3(0.828085, 1.02211, -0.462035)
 bones/8/position = Vector3(0.0032005, 1.02211, -1.0554)
-bones/14/position = Vector3(-0.823051, 1.02211, 0.473662)
-bones/16/position = Vector3(-0.820733, 1.02211, -0.466049)
+bones/10/position = Vector3(-0.00379543, 1.02211, 0.950407)
+bones/12/position = Vector3(0.825767, 1.02211, 0.477676)
+
+[node name="CentralEye0" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="0"]
+transform = Transform3D(-1, -2.38418e-07, 2.2453e-13, 2.38418e-07, -1, 3.57628e-07, 8.52651e-14, 3.57628e-07, 1, -1.72484e-14, -7.7486e-08, 0)
 
 [node name="CentralEye0" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D/CentralEye0" index="0"]
 visible = true
 
+[node name="CentralEye1" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="1"]
+transform = Transform3D(-1, -2.38418e-07, 2.2453e-13, 2.38418e-07, -1, 3.57628e-07, 8.52651e-14, 3.57628e-07, 1, -1.72484e-14, -7.7486e-08, 0)
+
+[node name="CentralEye2" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="2"]
+transform = Transform3D(-1, -2.38418e-07, 2.2453e-13, 2.38418e-07, -1, 3.57628e-07, 8.52651e-14, 3.57628e-07, 1, -1.72484e-14, -7.7486e-08, 0)
+
+[node name="CentralEye3" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="3"]
+transform = Transform3D(-1, -2.38418e-07, 2.2453e-13, 2.38418e-07, -1, 3.57628e-07, 8.52651e-14, 3.57628e-07, 1, -1.72484e-14, -7.7486e-08, 0)
+
 [node name="Spike1" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(1, 1.29455e-07, 1.40303e-08, -1.36006e-07, 1, 2.50594e-07, 2.22868e-08, -2.78644e-07, 1, -2.98023e-07, 1.49012e-07, -9.49949e-08)
+transform = Transform3D(1, 1.29455e-07, 1.40302e-08, -1.65906e-07, 1, -1.07034e-07, 2.22869e-08, 7.89839e-08, 1, 0, -1.19209e-07, -1.45473e-06)
 
 [node name="Spike0" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(1, -2.95194e-11, -2.86548e-11, 8.98167e-11, 1, 8.63144e-08, -7.58462e-11, -8.68599e-08, 1, 1.39698e-09, 2.38419e-07, -1.11759e-07)
+transform = Transform3D(1, -2.95194e-11, -2.87969e-11, 8.9714e-11, 1, -2.71313e-07, -7.57154e-11, 2.70768e-07, 1, 5.58794e-09, 4.52995e-06, -1.44355e-06)
 
 [node name="Spike3" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(1, 7.79996e-10, -6.45173e-11, 2.12414e-10, 1, 3.04442e-07, 2.31881e-11, -2.44511e-07, 1, -9.31323e-10, 3.57628e-07, -1.52737e-07)
+transform = Transform3D(1, 7.79996e-10, -6.46594e-11, 2.12475e-10, 1, -5.31854e-08, 2.33626e-11, 1.13117e-07, 1, -4.65661e-09, 5.96046e-08, -1.48267e-06)
 
 [node name="Spike2" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="7"]
-transform = Transform3D(1, 1.30972e-07, -2.66062e-08, -7.31878e-08, 1, 3.16183e-07, 4.31745e-08, -1.87387e-07, 1, -2.38419e-07, 1.78814e-07, -1.69501e-07)
+transform = Transform3D(1, 1.30972e-07, -2.66064e-08, -7.32863e-08, 1, -4.1445e-08, 4.31746e-08, 1.70241e-07, 1, -5.96046e-07, -6.85453e-07, -1.43237e-06)
 
 [node name="Spike4" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="8"]
-transform = Transform3D(1, 2.10555e-08, 3.89687e-08, 9.21793e-08, 1, 1.60854e-07, 1.24336e-08, -6.175e-08, 1, -5.96046e-08, 5.96046e-07, -3.1665e-08)
+transform = Transform3D(1, 2.10555e-08, 3.89687e-08, 8.33715e-08, 1, -2.1285e-07, 2.94996e-09, 3.0402e-07, 1, -4.76837e-07, 0, -9.36911e-07)
 
 [node name="Spike5" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="9"]
-transform = Transform3D(1, 2.12283e-07, -8.24196e-08, -1.52257e-07, 1, 8.29976e-08, 2.01027e-07, -7.79459e-08, 1, -2.38419e-07, 2.08616e-07, -7.07805e-08)
+transform = Transform3D(1, 2.12283e-07, -8.24196e-08, -1.24731e-07, 1, -2.76093e-07, 1.81004e-07, 2.50763e-07, 1, -2.38419e-07, 1.78814e-07, -1.66893e-06)
 
 [node name="FacePlate" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="10"]
-transform = Transform3D(1, -5.16326e-14, -2.55786e-14, -5.16326e-14, 1, -7.10543e-15, -2.55786e-14, -7.10543e-15, 1, 6.42155e-14, 1.78814e-07, -5.96046e-08)
+transform = Transform3D(1, -6.20067e-13, -1.67687e-13, 5.68434e-13, 1, -3.57628e-07, 1.42109e-13, 3.57628e-07, 1, -7.78929e-14, -1.78814e-07, 0)
 
 [node name="FrontRightLinkParticle" type="Node3D" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes"]
 transform = Transform3D(1, 5.8286e-10, 1.01449e-09, -8.2523e-09, 1, 1.59747e-08, 5.41419e-08, 1.67609e-08, 1, -2.1, 3.7, 0.5)
@@ -1443,58 +1493,124 @@ process_material = SubResource("ParticleProcessMaterial_oo8uk")
 draw_pass_1 = ExtResource("5_1f67e")
 
 [node name="FrontRightLinkParticle" type="Node3D" parent="ClarityArmMeshes"]
-transform = Transform3D(3, 2.47569e-08, -1.62426e-07, -2.47569e-08, 3, -5.02826e-08, 1.62426e-07, 5.02826e-08, 3, -1.41666, -3.6, 6.17703)
+transform = Transform3D(3, 2.47569e-08, -1.62426e-07, -2.47569e-08, 3, -5.02826e-08, 1.62426e-07, 5.02826e-08, 3, -1.41666, -3.6, 4.54867)
 visible = false
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ClarityArmMeshes/FrontRightLinkParticle"]
-transform = Transform3D(1, 9.48288e-10, -7.96192e-10, -9.8971e-11, 1, -1.18253e-08, 3.84745e-10, 2.82518e-08, 1, -4.76837e-07, -4.76837e-07, -0.437695)
+[node name="FrontRightMeshInstance3D" type="MeshInstance3D" parent="ClarityArmMeshes/FrontRightLinkParticle"]
+transform = Transform3D(1, 9.48288e-10, -7.96192e-10, -9.8971e-11, 1, -1.18253e-08, 3.84745e-10, 2.82518e-08, 1, 0, 0, 0)
+visible = false
 mesh = SubResource("SphereMesh_numd5")
 surface_material_override/0 = SubResource("StandardMaterial3D_3w4m8")
 
-[node name="FrontLeftLinkParticle" type="Node3D" parent="ClarityArmMeshes"]
-transform = Transform3D(3, 2.47569e-08, -1.62426e-07, -2.47569e-08, 3, -5.02826e-08, 1.62426e-07, 5.02826e-08, 3, 2.76932, -3.6, 2.63)
-visible = false
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ClarityArmMeshes/FrontLeftLinkParticle"]
-transform = Transform3D(1, 9.48289e-10, -7.96192e-10, -9.8971e-11, 1, -1.18253e-08, 3.84749e-10, 2.82518e-08, 1, -5.36442e-07, -4.76837e-07, -0.437695)
-mesh = SubResource("SphereMesh_numd5")
-surface_material_override/0 = SubResource("StandardMaterial3D_3w4m8")
-
-[node name="MiddleLeftLinkParticle" type="Node3D" parent="ClarityArmMeshes"]
-transform = Transform3D(3, 2.47569e-08, -1.62426e-07, -2.47569e-08, 3, -5.02826e-08, 1.62426e-07, 5.02826e-08, 3, 2, -3.6, -1.2)
-visible = false
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ClarityArmMeshes/MiddleLeftLinkParticle"]
-transform = Transform3D(1, 9.48289e-10, -7.96192e-10, -9.8971e-11, 1, -1.18253e-08, 3.84749e-10, 2.82518e-08, 1, -5.36442e-07, -4.76837e-07, -0.437694)
-mesh = SubResource("SphereMesh_numd5")
-surface_material_override/0 = SubResource("StandardMaterial3D_3w4m8")
+[node name="FrontRightLinkHitParticles" type="GPUParticles3D" parent="ClarityArmMeshes/FrontRightLinkParticle"]
+transform = Transform3D(0.963429, 0.267285, 0.0190233, -0.267961, 0.960998, 0.0683963, -1.08811e-09, -0.0709926, 0.997476, -0.112252, -0.238536, -0.47942)
+emitting = false
+amount = 24
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_b26ke")
+draw_pass_1 = SubResource("BoxMesh_ltq1a")
 
 [node name="MiddleRightLinkParticle" type="Node3D" parent="ClarityArmMeshes"]
-transform = Transform3D(3, 2.47569e-08, -1.62426e-07, -2.47569e-08, 3, -5.02826e-08, 1.62426e-07, 5.02826e-08, 3, -5.6, -3.6, 4.4)
+transform = Transform3D(3, 2.47569e-08, -1.62426e-07, -2.47569e-08, 3, -5.02826e-08, 1.62426e-07, 5.02826e-08, 3, -5.6, -3.6, 2.77164)
 visible = false
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ClarityArmMeshes/MiddleRightLinkParticle"]
-transform = Transform3D(1, 9.48289e-10, -7.96192e-10, -9.8971e-11, 1, -1.18253e-08, 3.84749e-10, 2.82518e-08, 1, -5.96046e-07, -4.76837e-07, -0.437695)
+[node name="MiddleRightMeshInstance3D" type="MeshInstance3D" parent="ClarityArmMeshes/MiddleRightLinkParticle"]
+transform = Transform3D(1, 9.48289e-10, -7.96192e-10, -9.8971e-11, 1, -1.18253e-08, 3.84749e-10, 2.82518e-08, 1, 0, 0, 0)
+visible = false
 mesh = SubResource("SphereMesh_numd5")
 surface_material_override/0 = SubResource("StandardMaterial3D_3w4m8")
 
-[node name="BackLeftLinkParticle" type="Node3D" parent="ClarityArmMeshes"]
-transform = Transform3D(3, 2.47569e-08, -1.62426e-07, -2.47569e-08, 3, -5.02826e-08, 1.62426e-07, 5.02826e-08, 3, -2, -3.6, -4.1)
-visible = false
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ClarityArmMeshes/BackLeftLinkParticle"]
-transform = Transform3D(1, 9.48289e-10, -7.96192e-10, -9.8971e-11, 1, -1.18253e-08, 3.84749e-10, 2.82518e-08, 1, -5.36442e-07, -4.76837e-07, -0.437695)
-mesh = SubResource("SphereMesh_numd5")
-surface_material_override/0 = SubResource("StandardMaterial3D_3w4m8")
+[node name="MiddleRightLinkHitParticles" type="GPUParticles3D" parent="ClarityArmMeshes/MiddleRightLinkParticle"]
+transform = Transform3D(0.872263, 0.472197, 0.127212, -0.460469, 0.880641, -0.111517, -0.164686, 0.0386959, 0.985585, -0.156548, 0.0854299, -0.340667)
+emitting = false
+amount = 24
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_b26ke")
+draw_pass_1 = SubResource("BoxMesh_ltq1a")
 
 [node name="BackRightLinkParticle" type="Node3D" parent="ClarityArmMeshes"]
-transform = Transform3D(3, 2.47569e-08, -1.62426e-07, -2.47569e-08, 3, -5.02826e-08, 1.62426e-07, 5.02826e-08, 3, -7.42916, -3.6, -0.7)
+transform = Transform3D(3, 2.47569e-08, -1.62426e-07, -2.47569e-08, 3, -5.02826e-08, 1.62426e-07, 5.02826e-08, 3, -7.42916, -3.6, -2.32836)
 visible = false
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ClarityArmMeshes/BackRightLinkParticle"]
-transform = Transform3D(1, 9.48289e-10, -7.96192e-10, -9.8971e-11, 1, -1.18253e-08, 3.84749e-10, 2.82518e-08, 1, -4.76837e-07, -4.76837e-07, -0.437695)
+[node name="BackRightMeshInstance3D" type="MeshInstance3D" parent="ClarityArmMeshes/BackRightLinkParticle"]
+transform = Transform3D(1, 9.48289e-10, -7.96192e-10, -9.8971e-11, 1, -1.18253e-08, 3.84749e-10, 2.82518e-08, 1, 0, 0, 0)
+visible = false
 mesh = SubResource("SphereMesh_numd5")
 surface_material_override/0 = SubResource("StandardMaterial3D_3w4m8")
+
+[node name="BackRightLinkHitParticles" type="GPUParticles3D" parent="ClarityArmMeshes/BackRightLinkParticle"]
+transform = Transform3D(0.848415, 0.507624, 0.150024, -0.414084, 0.813035, -0.409275, -0.329733, 0.285113, 0.899992, -0.043731, -0.0593427, -0.241283)
+emitting = false
+amount = 24
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_b26ke")
+draw_pass_1 = SubResource("BoxMesh_ltq1a")
+
+[node name="BackLeftLinkParticle" type="Node3D" parent="ClarityArmMeshes"]
+transform = Transform3D(3, 2.47569e-08, -1.62426e-07, -2.47569e-08, 3, -5.02826e-08, 1.62426e-07, 5.02826e-08, 3, -2, -3.6, -5.72836)
+visible = false
+
+[node name="BackLeftMeshInstance3D" type="MeshInstance3D" parent="ClarityArmMeshes/BackLeftLinkParticle"]
+transform = Transform3D(1, 9.48289e-10, -7.96192e-10, -9.8971e-11, 1, -1.18253e-08, 3.84749e-10, 2.82518e-08, 1, 0, 0, 0)
+visible = false
+mesh = SubResource("SphereMesh_numd5")
+surface_material_override/0 = SubResource("StandardMaterial3D_3w4m8")
+
+[node name="BackLeftLinkHitParticles" type="GPUParticles3D" parent="ClarityArmMeshes/BackLeftLinkParticle"]
+transform = Transform3D(0.982687, 0.132379, 0.129606, -0.0251737, 0.788508, -0.614506, -0.183544, 0.600605, 0.778192, 0.0373109, 0.0160086, -0.628003)
+emitting = false
+amount = 24
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_b26ke")
+draw_pass_1 = SubResource("BoxMesh_ltq1a")
+
+[node name="MiddleLeftLinkParticle" type="Node3D" parent="ClarityArmMeshes"]
+transform = Transform3D(3, 2.47569e-08, -1.62426e-07, -2.47569e-08, 3, -5.02826e-08, 1.62426e-07, 5.02826e-08, 3, 2, -3.6, -2.82836)
+visible = false
+
+[node name="MiddleLeftMeshInstance3D" type="MeshInstance3D" parent="ClarityArmMeshes/MiddleLeftLinkParticle"]
+transform = Transform3D(1, 9.48289e-10, -7.96192e-10, -9.8971e-11, 1, -1.18253e-08, 3.84749e-10, 2.82518e-08, 1, 0, 0, 0)
+visible = false
+mesh = SubResource("SphereMesh_numd5")
+surface_material_override/0 = SubResource("StandardMaterial3D_3w4m8")
+
+[node name="MiddleLeftLinkHitParticles" type="GPUParticles3D" parent="ClarityArmMeshes/MiddleLeftLinkParticle"]
+transform = Transform3D(0.991045, 0.00412491, 0.133451, 0.0549, 0.898523, -0.435476, -0.121705, 0.438904, 0.890252, 0.0315964, 0.07136, -0.722777)
+emitting = false
+amount = 24
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_b26ke")
+draw_pass_1 = SubResource("BoxMesh_ltq1a")
+
+[node name="FrontLeftLinkParticle" type="Node3D" parent="ClarityArmMeshes"]
+transform = Transform3D(3, 2.47569e-08, -1.62426e-07, -2.47569e-08, 3, -5.02826e-08, 1.62426e-07, 5.02826e-08, 3, 2.76932, -3.6, 1.00164)
+visible = false
+
+[node name="FrontLeftMeshInstance3D" type="MeshInstance3D" parent="ClarityArmMeshes/FrontLeftLinkParticle"]
+transform = Transform3D(1, 9.48289e-10, -7.96192e-10, -9.8971e-11, 1, -1.18253e-08, 3.84749e-10, 2.82518e-08, 1, 0, 0, 0)
+visible = false
+mesh = SubResource("SphereMesh_numd5")
+surface_material_override/0 = SubResource("StandardMaterial3D_3w4m8")
+
+[node name="FrontLeftLinkHitParticles" type="GPUParticles3D" parent="ClarityArmMeshes/FrontLeftLinkParticle"]
+transform = Transform3D(0.97633, -0.192917, 0.0977802, 0.209642, 0.955282, -0.20853, -0.0531788, 0.224093, 0.973115, 0.0998149, -0.0660334, -0.463762)
+emitting = false
+amount = 24
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_b26ke")
+draw_pass_1 = SubResource("BoxMesh_ltq1a")
 
 [node name="DressShardMaster" parent="." instance=ExtResource("13_2l47j")]
 transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
@@ -1506,45 +1622,45 @@ visible = false
 bones/0/rotation = Quaternion(0.0301653, 0.0796906, -0.0501057, 0.995102)
 bones/1/rotation = Quaternion(0.0484073, -0.0812806, 0.0524297, 0.994133)
 bones/3/rotation = Quaternion(0.00101031, -0.00552394, 0.86527, 0.501275)
-bones/6/position = Vector3(7.30192, -5.49948, 45.5971)
-bones/6/rotation = Quaternion(0.298011, 0.586325, 0.713348, 0.241965)
-bones/8/position = Vector3(1.88207, -1.8253, 1.50508)
-bones/8/rotation = Quaternion(-0.00337758, 0.112644, 0.939436, -0.323667)
+bones/6/position = Vector3(2.01413, 2.22899, -2.08285)
+bones/6/rotation = Quaternion(0.305356, -0.212565, 0.925231, -0.0743114)
+bones/8/position = Vector3(2.06725, 1.3427, 0.8528)
+bones/8/rotation = Quaternion(0.300211, -0.0905908, 0.944171, -0.101036)
 bones/10/position = Vector3(-0.870095, 2.94367, -2.42447)
 bones/10/rotation = Quaternion(0.322511, -0.334699, 0.885296, -0.0146623)
-bones/12/position = Vector3(-7.40684, -5.49948, 46.0367)
-bones/12/rotation = Quaternion(-0.229511, 0.607555, 0.723799, -0.233058)
-bones/14/position = Vector3(-0.633956, -1.8253, 2.70588)
-bones/14/rotation = Quaternion(0.477478, 0.159462, 0.806915, 0.308992)
+bones/12/position = Vector3(-3.02298, 2.22899, 2.14379)
+bones/12/rotation = Quaternion(0.360811, -0.115068, 0.905047, 0.19356)
+bones/14/position = Vector3(-0.141156, 1.3427, 2.70588)
+bones/14/rotation = Quaternion(0.376926, -0.00445188, 0.916249, 0.135629)
 bones/16/position = Vector3(-2.85858, 2.94367, -0.755941)
 bones/16/rotation = Quaternion(0.321999, -0.24697, 0.885482, 0.226373)
 
 [node name="Hat_2" parent="DressShardMaster/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1.42986, 0.00998905, -0.0170401, -0.0125258, 1.41244, -0.223079, 0.0152725, 0.223207, 1.41239, 0.918732, 14.4374, 0.659002)
+transform = Transform3D(1.42986, 0.00998886, -0.0170402, -0.0125256, 1.41244, -0.22308, 0.0152726, 0.223208, 1.41239, 0.918731, 14.4374, 0.659003)
 
 [node name="Arm_2" parent="DressShardMaster/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.339741, 0.92836, 0.15074, -0.932056, 0.353784, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
+transform = Transform3D(0.339741, 0.928361, 0.150741, -0.932056, 0.353783, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
 
 [node name="Center_2" parent="DressShardMaster/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.982278, 0.104529, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
+transform = Transform3D(0.982278, 0.104528, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
 
 [node name="MiddleLeft" parent="DressShardMaster/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.671111, 0.194454, 0.7154, -0.726865, -0.0172779, 0.686563, 0.145866, -0.980759, 0.129747, 4.66555, -3.07244, 47.2814)
+transform = Transform3D(0.766044, 0.219846, 0.604023, -2.9111e-08, 0.939693, -0.34202, -0.642788, 0.262002, 0.719846, -0.990243, 0.156014, -0.548502)
 
 [node name="FrontLeft" parent="DressShardMaster/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.92208, -0.37963, 0.0751601, 0.379384, 0.925063, 0.0180883, -0.0763946, 0.0118357, 0.997007, 1.18672, -4.40947, -0.85262)
+transform = Transform3D(0.766045, 0.219846, 0.604022, 2.61259e-08, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990248, 0.15601, -0.548509)
 
 [node name="BackLeft" parent="DressShardMaster/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 4.14429e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156009, -0.548506)
+transform = Transform3D(0.766044, 0.219846, 0.604023, -3.27128e-07, 0.939693, -0.342019, -0.642788, 0.262002, 0.719846, -0.990243, 0.15601, -0.548501)
 
 [node name="MiddleRight" parent="DressShardMaster/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.731085, -0.278375, -0.622913, 0.640236, -0.0356541, 0.76735, -0.23582, -0.95981, 0.15216, -4.38823, -3.31681, 47.379)
+transform = Transform3D(0.766045, 0.219846, 0.604022, 2.33248e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719846, -0.990239, 0.156015, -0.548505)
 
 [node name="FrontRight" parent="DressShardMaster/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.487658, 0.436079, 0.756323, -0.438537, 0.871445, -0.219699, -0.7549, -0.224538, 0.616204, -2.72327, -3.79672, 0.592004)
+transform = Transform3D(0.766045, 0.219847, 0.604023, -5.96117e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990245, 0.15601, -0.548503)
 
 [node name="BackRight" parent="DressShardMaster/Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -3.64784e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548507)
+transform = Transform3D(0.766045, 0.219847, 0.604022, -9.71103e-07, 0.939692, -0.34202, -0.642787, 0.262002, 0.719847, -0.990254, 0.156008, -0.548505)
 
 [node name="DressShardFrontLeft" parent="DressShardMaster" instance=ExtResource("12_y7646")]
 
