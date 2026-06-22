@@ -409,7 +409,7 @@ material = SubResource("StandardMaterial3D_juu8c")
 render_priority = 0
 shader = ExtResource("13_t5snm")
 shader_parameter/outline_color = Color(0, 0.4, 1, 0.823529)
-shader_parameter/outline_thickness = 0.532
+shader_parameter/outline_thickness = 0.067
 shader_parameter/outline_alpha = 0.85
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c3a8y"]
@@ -451,7 +451,7 @@ void fragment() {
 render_priority = 0
 shader = SubResource("Shader_83w78")
 shader_parameter/outline_color = Color(0, 0.4, 1, 0.823529)
-shader_parameter/outline_thickness = 0.564
+shader_parameter/outline_thickness = 0.067
 shader_parameter/outline_alpha = 0.85
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hmp2k"]
@@ -489,7 +489,7 @@ void fragment() {
 render_priority = 0
 shader = SubResource("Shader_dkqk5")
 shader_parameter/outline_color = Color(0, 0.4, 1, 0.823529)
-shader_parameter/outline_thickness = 0.532
+shader_parameter/outline_thickness = 0.067
 shader_parameter/outline_alpha = 0.85
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uykw5"]
@@ -531,7 +531,7 @@ void fragment() {
 render_priority = 0
 shader = SubResource("Shader_dtxjq")
 shader_parameter/outline_color = Color(0, 0.4, 1, 0.823529)
-shader_parameter/outline_thickness = 0.532
+shader_parameter/outline_thickness = 0.067
 shader_parameter/outline_alpha = 0.85
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vhify"]
@@ -569,7 +569,7 @@ void fragment() {
 render_priority = 0
 shader = SubResource("Shader_8g01h")
 shader_parameter/outline_color = Color(0, 0.4, 1, 0.823529)
-shader_parameter/outline_thickness = 0.368
+shader_parameter/outline_thickness = 0.067
 shader_parameter/outline_alpha = 0.85
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gc1di"]
@@ -611,8 +611,8 @@ void fragment() {
 render_priority = 0
 shader = SubResource("Shader_y80eb")
 shader_parameter/outline_color = Color(0, 0.4, 1, 0.823529)
-shader_parameter/outline_thickness = 0.368
-shader_parameter/outline_alpha = 1.0
+shader_parameter/outline_thickness = 0.067
+shader_parameter/outline_alpha = 0.85
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yivem"]
 next_pass = SubResource("ShaderMaterial_1qgr0")
@@ -1609,31 +1609,31 @@ bones/16/position = Vector3(-2.85858, 2.94367, -0.755941)
 bones/16/rotation = Quaternion(0.321999, -0.24697, 0.885482, 0.226373)
 
 [node name="Hat_2" parent="DressShardMaster/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1.42986, 0.00998886, -0.0170402, -0.0125256, 1.41244, -0.22308, 0.0152726, 0.223208, 1.41239, 0.918731, 14.4374, 0.659003)
+transform = Transform3D(1.42986, 0.00998905, -0.0170401, -0.0125258, 1.41244, -0.223079, 0.0152725, 0.223207, 1.41239, 0.918732, 14.4374, 0.659002)
 
 [node name="Arm_2" parent="DressShardMaster/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.339741, 0.928361, 0.150741, -0.932056, 0.353783, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
+transform = Transform3D(0.339741, 0.92836, 0.15074, -0.932056, 0.353784, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
 
 [node name="Center_2" parent="DressShardMaster/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.982278, 0.104528, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
+transform = Transform3D(0.982278, 0.104529, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
 
 [node name="MiddleLeft" parent="DressShardMaster/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -2.9111e-08, 0.939693, -0.34202, -0.642788, 0.262002, 0.719846, -0.990243, 0.156014, -0.548502)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 1.18725e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548505)
 
 [node name="FrontLeft" parent="DressShardMaster/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.766045, 0.219846, 0.604022, 2.61259e-08, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990248, 0.15601, -0.548509)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 8.1839e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990245, 0.156011, -0.548507)
 
 [node name="BackLeft" parent="DressShardMaster/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -3.27128e-07, 0.939693, -0.342019, -0.642788, 0.262002, 0.719846, -0.990243, 0.15601, -0.548501)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 4.14429e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156009, -0.548506)
 
 [node name="MiddleRight" parent="DressShardMaster/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.766045, 0.219846, 0.604022, 2.33248e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719846, -0.990239, 0.156015, -0.548505)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 6.51412e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548508)
 
 [node name="FrontRight" parent="DressShardMaster/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.766045, 0.219847, 0.604023, -5.96117e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990245, 0.15601, -0.548503)
+transform = Transform3D(0.766044, 0.219846, 0.604023, -1.26024e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548506)
 
 [node name="BackRight" parent="DressShardMaster/Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.766045, 0.219847, 0.604022, -9.71103e-07, 0.939692, -0.34202, -0.642787, 0.262002, 0.719847, -0.990254, 0.156008, -0.548505)
+transform = Transform3D(0.766044, 0.219846, 0.604023, -3.64784e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548507)
 
 [node name="DressShardFrontLeft" parent="DressShardMaster" instance=ExtResource("12_y7646")]
 

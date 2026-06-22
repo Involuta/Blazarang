@@ -162,22 +162,36 @@ class DressShard extends Node3D:
 		t.tween_property(self.node, "position", Vector3.ZERO, frames(45)).set_ease(Tween.EASE_IN_OUT)
 		t.tween_property(self.node, "rotation", Vector3.ZERO, frames(45)).set_ease(Tween.EASE_IN_OUT)
 	
-	func link_to_snowflake_hit():
-		self.snowflake_hit_linked = true
-		# Get outline shader material
+	func _get_outline_shader() -> ShaderMaterial:
 		var shard_name = self.node.name.trim_prefix("DressShard")
+		# When unlink_all_dress_shards is called, unlink_snowflake_hit is also called on Master, which doesn't have the outline shader bc it has no materials
+		# Why is Master even necessary in the shard dict? bc play_anim_all_dress_shards needs to play the anim on Master bc it has all the functional keyframes
+		if shard_name == "Master":
+			return
 		var mesh = self.node.find_children(shard_name, "MeshInstance3D")[0]
 		var link_outline_shader = mesh.get_surface_override_material(0).next_pass as ShaderMaterial
+		return link_outline_shader
+	
+	func link_snowflake_hit():
+		self.snowflake_hit_linked = true
 		# Materialize link outline
+		var link_outline_shader = self._get_outline_shader()
 		var t = self.node.get_tree().create_tween()
-		t.tween_property(link_outline_shader, "shader_parameter/outline_thickness", 4.0, 0)
+		t.tween_property(link_outline_shader, "shader_parameter/outline_thickness", 3.6, 0)
 		t.tween_property(link_outline_shader, "shader_parameter/outline_alpha", 0.0, 0)
 		t.set_parallel()
-		t.tween_property(link_outline_shader, "shader_parameter/outline_thickness", 0.5, .6)
-		t.tween_property(link_outline_shader, "shader_parameter/outline_alpha", 0.85, .6)
-		
+		t.tween_property(link_outline_shader, "shader_parameter/outline_thickness", 0.4, .3)
+		t.tween_property(link_outline_shader, "shader_parameter/outline_alpha", 0.85, .3)
+	
 	func self_damage(damage: int):
 		self.hurtbox.receive_hit_no_hitbox(damage)
+	
+	func unlink_snowflake_hit():
+		self.snowflake_hit_linked = false
+		# Shrink link outline to make it barely noticeable
+		var link_outline_shader = self._get_outline_shader()
+		var t = self.node.get_tree().create_tween()
+		t.tween_property(link_outline_shader, "shader_parameter/outline_thickness", 0.067, .3)
 
 func _ready():
 	head_hurtbox = find_child("EnemyHurtbox")
@@ -734,7 +748,7 @@ func snowflake_glow_flash():
 	t.tween_property(snowflake_light, "light_energy", 0, .6)
 
 func link_dress_shard_to_snowflake_hit(s: String):
-	dress_shards[s].link_to_snowflake_hit()
+	dress_shards[s].link_snowflake_hit()
 
 # Called by SnowflakeHurtbox when snowflake entity is hit
 func on_snowflake_hit(a: Area3D):
@@ -756,7 +770,7 @@ func on_snowflake_hit(a: Area3D):
 
 func unlink_all_dress_shards_from_snowflake():
 	for ds in dress_shards.values():
-		ds.snowflake_hit_linked = false
+		ds.unlink_snowflake_hit()
 
 func snowflake_stagger():
 	var state_machine = snowflake_anim_tree.get("parameters/StateMachine/playback")
