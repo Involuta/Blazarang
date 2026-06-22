@@ -157,10 +157,25 @@ class DressShard extends Node3D:
 	
 	func recall():
 		self.node.top_level = false
-		self.ds_tween = self.node.get_tree().create_tween().set_parallel()
-		ds_tween.tween_property(self.node, "position", Vector3.ZERO, frames(45)).set_ease(Tween.EASE_IN_OUT)
-		ds_tween.tween_property(self.node, "rotation", Vector3.ZERO, frames(45)).set_ease(Tween.EASE_IN_OUT)
+		var t = node.get_tree().create_tween()
+		t.set_parallel()
+		t.tween_property(self.node, "position", Vector3.ZERO, frames(45)).set_ease(Tween.EASE_IN_OUT)
+		t.tween_property(self.node, "rotation", Vector3.ZERO, frames(45)).set_ease(Tween.EASE_IN_OUT)
 	
+	func link_to_snowflake_hit():
+		self.snowflake_hit_linked = true
+		# Get outline shader material
+		var shard_name = self.node.name.trim_prefix("DressShard")
+		var mesh = self.node.find_children(shard_name, "MeshInstance3D")[0]
+		var link_outline_shader = mesh.get_surface_override_material(0).next_pass as ShaderMaterial
+		# Materialize link outline
+		var t = self.node.get_tree().create_tween()
+		t.tween_property(link_outline_shader, "shader_parameter/outline_thickness", 4.0, 0)
+		t.tween_property(link_outline_shader, "shader_parameter/outline_alpha", 0.0, 0)
+		t.set_parallel()
+		t.tween_property(link_outline_shader, "shader_parameter/outline_thickness", 0.5, .6)
+		t.tween_property(link_outline_shader, "shader_parameter/outline_alpha", 0.85, .6)
+		
 	func self_damage(damage: int):
 		self.hurtbox.receive_hit_no_hitbox(damage)
 
@@ -719,7 +734,7 @@ func snowflake_glow_flash():
 	t.tween_property(snowflake_light, "light_energy", 0, .6)
 
 func link_dress_shard_to_snowflake_hit(s: String):
-	dress_shards[s].snowflake_hit_linked = true
+	dress_shards[s].link_to_snowflake_hit()
 
 # Called by SnowflakeHurtbox when snowflake entity is hit
 func on_snowflake_hit(a: Area3D):
