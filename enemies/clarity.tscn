@@ -1420,6 +1420,7 @@ visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/FrontRightLinkParticle"]
 transform = Transform3D(1, 4.44044e-09, 1.21591e-09, -1.90001e-09, 1, -6.80894e-08, -5.09098e-09, 4.38733e-08, 1, -4.76837e-07, -9.53674e-07, -0.437694)
+visible = false
 mesh = SubResource("SphereMesh_numd5")
 surface_material_override/0 = SubResource("StandardMaterial3D_3w4m8")
 
@@ -1429,6 +1430,7 @@ visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/FrontLeftLinkParticle"]
 transform = Transform3D(1, 3.09717e-09, -6.46737e-10, 1.06092e-09, 1, -3.82871e-08, -4.69977e-09, 7.81164e-09, 1, -4.76837e-07, -4.76837e-07, -0.437694)
+visible = false
 mesh = SubResource("SphereMesh_numd5")
 surface_material_override/0 = SubResource("StandardMaterial3D_3w4m8")
 
@@ -1438,6 +1440,7 @@ visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/MiddleLeftLinkParticle"]
 transform = Transform3D(1, 3.09717e-09, -6.46737e-10, 1.06092e-09, 1, -3.82871e-08, -4.69977e-09, 7.81164e-09, 1, -4.76837e-07, -4.76837e-07, -0.437695)
+visible = false
 mesh = SubResource("SphereMesh_numd5")
 surface_material_override/0 = SubResource("StandardMaterial3D_3w4m8")
 
@@ -1447,6 +1450,7 @@ visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/MiddleRightLinkParticle"]
 transform = Transform3D(1, 3.09717e-09, -6.46737e-10, 1.06092e-09, 1, -3.82871e-08, -4.69977e-09, 7.81164e-09, 1, 0, -2.38419e-07, -0.437695)
+visible = false
 mesh = SubResource("SphereMesh_numd5")
 surface_material_override/0 = SubResource("StandardMaterial3D_3w4m8")
 
@@ -1456,6 +1460,7 @@ visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/BackLeftLinkParticle"]
 transform = Transform3D(1, 3.09717e-09, -6.46737e-10, 1.06092e-09, 1, -3.82871e-08, -4.69977e-09, 7.81164e-09, 1, -4.76837e-07, -4.17233e-07, -0.437694)
+visible = false
 mesh = SubResource("SphereMesh_numd5")
 surface_material_override/0 = SubResource("StandardMaterial3D_3w4m8")
 
@@ -1465,6 +1470,7 @@ visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/BackRightLinkParticle"]
 transform = Transform3D(1, 3.09717e-09, -6.46737e-10, 1.06092e-09, 1, -3.82871e-08, -4.69977e-09, 7.81164e-09, 1, 0, -3.57628e-07, -0.437695)
+visible = false
 mesh = SubResource("SphereMesh_numd5")
 surface_material_override/0 = SubResource("StandardMaterial3D_3w4m8")
 
