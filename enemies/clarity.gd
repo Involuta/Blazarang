@@ -192,6 +192,7 @@ class DressShard extends Node3D:
 		var link_outline_shader = self._get_outline_shader()
 		var t = self.node.get_tree().create_tween()
 		t.tween_property(link_outline_shader, "shader_parameter/outline_thickness", 0.067, .3)
+		t.tween_property(link_outline_shader, "shader_parameter/outline_alpha", 1.0, .3)
 
 func _ready():
 	head_hurtbox = find_child("EnemyHurtbox")
