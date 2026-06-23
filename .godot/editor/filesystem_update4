@@ -35,3 +35,7 @@ res://glb_inherited_scenes/snowflake_entity_meshes.tscn
 res://enemies/clarity_dress_shard_hit_particles.tscn
 res://enemies/snowflake_link_outline.gdshader
 res://enemies/clarity.gd
+res://enemies/enemy_anims/snowflake_entity_doubleshardseq1.res
+res://enemies/enemy_anims/snowflake_entity_rotateslow_3seg.res
+res://enemies/enemy_anims/snowflake_entity_singleshardseq1.res
+res://enemies/enemy_anims/snowflake_entity_stagger.res

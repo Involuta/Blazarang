@@ -298,7 +298,7 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f7uow"]
 switch_mode = 2
 advance_mode = 2
-advance_expression = "rng.randf() <= .9"
+advance_expression = "rng.randf() <= .1"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kjcu6"]
 switch_mode = 2
@@ -307,7 +307,7 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v0ape"]
 switch_mode = 2
 advance_mode = 2
-advance_expression = "rng.randf() > .9"
+advance_expression = "rng.randf() > .1"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ag18a"]
 switch_mode = 2
@@ -330,7 +330,7 @@ transitions = ["Start", "RotateSlow", SubResource("AnimationNodeStateMachineTran
 graph_offset = Vector2(218.535, -25.185)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_siwsy"]
-graph_offset = Vector2(-68.16, 82.56)
+graph_offset = Vector2(-33.6, 119.04)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_qlhjd")
 nodes/StateMachine/position = Vector2(80, 150)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -1153,7 +1153,7 @@ bones/16/position = Vector3(-2.85858, 2.94367, -0.755941)
 bones/16/rotation = Quaternion(0.321999, -0.24697, 0.885482, 0.226373)
 
 [node name="Hat_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1.42986, 0.00998886, -0.0170402, -0.0125256, 1.41244, -0.22308, 0.0152726, 0.223208, 1.41239, 0.918731, 14.4374, 0.659002)
+transform = Transform3D(1.42986, 0.00998904, -0.0170401, -0.0125258, 1.41244, -0.223079, 0.0152725, 0.223207, 1.41239, 0.918732, 14.4374, 0.659001)
 
 [node name="BodyLight" type="OmniLight3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2" index="1"]
 light_color = Color(0, 0.486275, 0.894118, 1)
@@ -1192,7 +1192,7 @@ process_material = SubResource("ParticleProcessMaterial_1ffcq")
 draw_pass_1 = ExtResource("5_1f67e")
 
 [node name="Arm_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.339741, 0.928361, 0.150741, -0.932056, 0.353783, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57238, 8.73293, 0.998592)
+transform = Transform3D(0.339741, 0.92836, 0.150741, -0.932056, 0.353784, -0.0781571, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
 
 [node name="EnemyHitbox" type="Area3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2" index="1"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
@@ -1299,30 +1299,30 @@ curve = SubResource("CurveTexture_vxuhc")
 _defaults_have_been_set = true
 
 [node name="Center_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.982278, 0.104528, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
+transform = Transform3D(0.982278, 0.104528, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520492, 0.985479, 0.562103, 9.96609, 0.284472)
 
 [node name="MiddleLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -2.9111e-08, 0.939693, -0.34202, -0.642788, 0.262002, 0.719846, -0.990243, 0.156013, -0.548501)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 1.18725e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548504)
 visible = false
 
 [node name="FrontLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.766045, 0.219846, 0.604022, 2.61259e-08, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990248, 0.15601, -0.548509)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 8.1839e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990245, 0.156011, -0.548507)
 visible = false
 
 [node name="BackLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -3.27128e-07, 0.939693, -0.342019, -0.642788, 0.262002, 0.719846, -0.990243, 0.15601, -0.548501)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 4.14429e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156009, -0.548506)
 visible = false
 
 [node name="MiddleRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.766045, 0.219846, 0.604022, 2.33248e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719846, -0.990239, 0.156015, -0.548505)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 3.65041e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548508)
 visible = false
 
 [node name="FrontRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.766045, 0.219847, 0.604023, -5.96117e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990245, 0.15601, -0.548503)
+transform = Transform3D(0.766044, 0.219846, 0.604023, -1.26024e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548506)
 visible = false
 
 [node name="BackRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.766045, 0.219847, 0.604022, -9.71103e-07, 0.939692, -0.34202, -0.642787, 0.262002, 0.719847, -0.990255, 0.156009, -0.548505)
+transform = Transform3D(0.766044, 0.219846, 0.604023, -3.64784e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990247, 0.156011, -0.548507)
 visible = false
 
 [node name="SnowflakeEntity" type="Node3D" parent="ClarityArmMeshes"]
@@ -1338,51 +1338,48 @@ bones/0/rotation = Quaternion(0.707107, -2.21972e-07, -2.21972e-07, 0.707107)
 bones/5/rotation = Quaternion(0.683013, -0.183013, -0.183013, 0.683013)
 bones/6/position = Vector3(0.828085, 1.02211, -0.462035)
 bones/8/position = Vector3(0.00320047, 1.02211, -1.0554)
-bones/10/position = Vector3(-0.00379542, 1.02211, 0.950407)
-bones/12/position = Vector3(0.825767, 1.02211, 0.477676)
+bones/10/position = Vector3(-0.00379543, 1.02211, 0.950407)
+bones/12/position = Vector3(0.825767, 1.02211, 0.477675)
 bones/14/position = Vector3(-0.823051, 1.02211, 0.473662)
 bones/16/position = Vector3(-0.820733, 1.02211, -0.466049)
 
 [node name="CentralEye0" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1, 7.62651e-14, -2.55786e-14, -1.13687e-13, 1, -5.96047e-08, 1.18432e-14, 5.96047e-08, 1, -5.71101e-15, -1.19209e-08, 0)
-visible = false
+transform = Transform3D(1, -3.74218e-14, -5.40003e-14, -3.74218e-14, 1, -7.10543e-15, -5.40003e-14, -7.10543e-15, 1, -2.86885e-15, -1.78814e-08, 7.45058e-09)
 
 [node name="CentralEye0" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D/CentralEye0" index="0"]
 visible = true
 
 [node name="CentralEye1" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(1, 7.62651e-14, -2.55786e-14, -1.13687e-13, 1, -5.96047e-08, 1.18432e-14, 5.96047e-08, 1, -5.71101e-15, -1.19209e-08, 0)
+transform = Transform3D(1, -3.74218e-14, -5.40003e-14, -3.74218e-14, 1, -7.10543e-15, -5.40003e-14, -7.10543e-15, 1, -2.86885e-15, -1.78814e-08, 7.45058e-09)
 
 [node name="CentralEye2" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(1, 7.62651e-14, -2.55786e-14, -1.13687e-13, 1, -5.96047e-08, 1.18432e-14, 5.96047e-08, 1, -5.71101e-15, -1.19209e-08, 0)
+transform = Transform3D(1, -3.74218e-14, -5.40003e-14, -3.74218e-14, 1, -7.10543e-15, -5.40003e-14, -7.10543e-15, 1, -2.86885e-15, -1.78814e-08, 7.45058e-09)
 
 [node name="CentralEye3" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(1, 7.62651e-14, -2.55786e-14, -1.13687e-13, 1, -5.96047e-08, 1.18432e-14, 5.96047e-08, 1, -5.71101e-15, -1.19209e-08, 0)
-visible = true
+transform = Transform3D(1, -3.74218e-14, -5.40003e-14, -3.74218e-14, 1, -7.10543e-15, -5.40003e-14, -7.10543e-15, 1, -2.86885e-15, -1.78814e-08, 7.45058e-09)
 
-[node name="Spike1" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.866025, 0.5, 1.37447e-07, -0.5, 0.866025, 7.91047e-08, -3.73179e-08, -1.59435e-07, 1, -5.96046e-08, 1.99303e-07, 2.55182e-07)
+[node name="MiddleLeft" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="4"]
+transform = Transform3D(0.866025, 0.5, 1.37447e-07, -0.5, 0.866025, 7.91047e-08, -3.73179e-08, -1.59435e-07, 1, -1.19209e-07, 1.95578e-07, 2.5332e-07)
 
-[node name="Spike0" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.866025, 0.5, 4.31322e-08, -0.5, 0.866025, -5.61359e-08, -5.96806e-08, 3.23494e-08, 1, -1.19209e-07, -2.98023e-07, 1.19209e-07)
+[node name="FrontLeft" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="5"]
+transform = Transform3D(0.866025, 0.5, 4.31323e-08, -0.5, 0.866025, -5.6136e-08, -5.96806e-08, 3.23494e-08, 1, 5.96046e-08, -1.78814e-07, 1.17347e-07)
 
-[node name="Spike3" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.866025, 0.5, 1.52165e-07, -0.5, 0.866025, 1.32786e-07, -5.95815e-08, -1.25301e-07, 1, 2.08616e-07, 2.38419e-07, 7.82311e-08)
+[node name="BackRight" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="6"]
+transform = Transform3D(0.866025, 0.5, 1.52165e-07, -0.5, 0.866025, 1.32786e-07, -5.95815e-08, -1.25301e-07, 1, 2.08616e-07, 2.98023e-07, -3.72529e-08)
 
-[node name="Spike2" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.866025, 0.5, 1.3505e-07, -0.5, 0.866025, 1.56225e-07, -1.64302e-08, -6.81776e-08, 1, -1.19209e-07, 0, 1.71363e-07)
+[node name="BackLeft" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="7"]
+transform = Transform3D(0.866025, 0.5, 1.3505e-07, -0.5, 0.866025, 1.56225e-07, -1.64302e-08, -6.81776e-08, 1, 0, 1.78814e-07, 4.84288e-08)
 
-[node name="Spike4" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.866025, 0.5, 1.33989e-07, -0.5, 0.866025, -3.39493e-08, -3.22699e-08, 2.7657e-08, 1, 2.98023e-07, 3.7381e-07, 2.12342e-07)
+[node name="MiddleRight" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="8"]
+transform = Transform3D(0.866025, 0.5, 1.33939e-07, -0.5, 0.866025, -5.88597e-09, 2.02364e-08, -7.6886e-08, 1, 4.17233e-07, 2.46451e-07, 2.12342e-07)
 
-[node name="Spike5" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="9"]
-transform = Transform3D(0.866025, 0.5, -1.99128e-08, -0.5, 0.866025, -1.94163e-08, 1.25952e-07, 6.59214e-09, 1, -1.49012e-07, 1.78814e-07, 6.14673e-08)
+[node name="FrontRight" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="9"]
+transform = Transform3D(0.866025, 0.5, -1.99128e-08, -0.5, 0.866025, -1.94163e-08, 1.25952e-07, 5.1294e-09, 1, 2.98023e-08, 1.19209e-07, 5.7742e-08)
 
 [node name="FacePlate" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="10"]
-transform = Transform3D(0.866025, 0.5, -2.06057e-13, -0.5, 0.866025, -1.30901e-07, -5.96047e-08, 1.19209e-07, 1, 1.04308e-07, 1.99638e-08, 0)
+transform = Transform3D(0.866025, 0.5, -2.06057e-13, -0.5, 0.866025, -1.30901e-07, -5.96047e-08, 1.19209e-07, 1, 1.04308e-07, 1.99638e-08, 5.96046e-08)
 
 [node name="FrontRightLinkParticle" type="Node3D" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes"]
-transform = Transform3D(1, 5.8286e-10, 1.01449e-09, -8.2523e-09, 1, 1.59747e-08, 5.41419e-08, 1.67609e-08, 1, -2.1, 3.7, 0.5)
 visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/FrontRightLinkParticle"]
@@ -1392,7 +1389,6 @@ mesh = SubResource("SphereMesh_numd5")
 surface_material_override/0 = SubResource("StandardMaterial3D_3w4m8")
 
 [node name="FrontLeftLinkParticle" type="Node3D" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes"]
-transform = Transform3D(1, 5.8286e-10, 1.01449e-09, -8.2523e-09, 1, 1.59747e-08, 5.41419e-08, 1.67609e-08, 1, 2.1, 3.7, 0.5)
 visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/FrontLeftLinkParticle"]
@@ -1402,7 +1398,6 @@ mesh = SubResource("SphereMesh_numd5")
 surface_material_override/0 = SubResource("StandardMaterial3D_3w4m8")
 
 [node name="MiddleLeftLinkParticle" type="Node3D" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes"]
-transform = Transform3D(1, 5.8286e-10, 1.01449e-09, -8.2523e-09, 1, 1.59747e-08, 5.41419e-08, 1.67609e-08, 1, 4.2, 2.08165e-12, 0.5)
 visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/MiddleLeftLinkParticle"]
@@ -1412,7 +1407,6 @@ mesh = SubResource("SphereMesh_numd5")
 surface_material_override/0 = SubResource("StandardMaterial3D_3w4m8")
 
 [node name="MiddleRightLinkParticle" type="Node3D" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes"]
-transform = Transform3D(1, 5.8286e-10, 1.01449e-09, -8.2523e-09, 1, 1.59747e-08, 5.41419e-08, 1.67609e-08, 1, -4.2, -2.38419e-07, 0.5)
 visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/MiddleRightLinkParticle"]
@@ -1422,7 +1416,6 @@ mesh = SubResource("SphereMesh_numd5")
 surface_material_override/0 = SubResource("StandardMaterial3D_3w4m8")
 
 [node name="BackLeftLinkParticle" type="Node3D" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes"]
-transform = Transform3D(1, 5.8286e-10, 1.01449e-09, -8.2523e-09, 1, 1.59747e-08, 5.41419e-08, 1.67609e-08, 1, 2.1, -3.7, 0.5)
 visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/BackLeftLinkParticle"]
@@ -1432,7 +1425,6 @@ mesh = SubResource("SphereMesh_numd5")
 surface_material_override/0 = SubResource("StandardMaterial3D_3w4m8")
 
 [node name="BackRightLinkParticle" type="Node3D" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes"]
-transform = Transform3D(1, 5.8286e-10, 1.01449e-09, -8.2523e-09, 1, 1.59747e-08, 5.41419e-08, 1.67609e-08, 1, -2.1, -3.6, 0.5)
 visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/BackRightLinkParticle"]
