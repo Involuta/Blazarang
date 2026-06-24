@@ -39,3 +39,8 @@ res://enemies/enemy_anims/snowflake_entity_doubleshardseq1.res
 res://enemies/enemy_anims/snowflake_entity_rotateslow_3seg.res
 res://enemies/enemy_anims/snowflake_entity_singleshardseq1.res
 res://enemies/enemy_anims/snowflake_entity_stagger.res
+res://cotu/cotu_cb_main.tscn
+res://cotu/CotuControl.gd
+res://textures/solid_light_gray_tile.tres
+res://levels/x_boss_level/x_boss_level1_viewcontrol.tscn
+res://globals.gd

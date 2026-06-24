@@ -694,7 +694,7 @@ func shoulder_zoom_in():
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await t.finished
 	shoulder_zoomed_in = true
-	visible = false
+	#visible = false
 
 func shoulder_zoom_out():
 	var t = get_tree().create_tween().set_parallel()
