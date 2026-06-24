@@ -176,8 +176,8 @@ class DressShard extends Node3D:
 		t.tween_property(link_outline_shader, "shader_parameter/outline_thickness", 3.6, 0)
 		t.tween_property(link_outline_shader, "shader_parameter/outline_alpha", 0.0, 0)
 		t.set_parallel()
-		t.tween_property(link_outline_shader, "shader_parameter/outline_thickness", 0.4, .6)
-		t.tween_property(link_outline_shader, "shader_parameter/outline_alpha", 0.85, .6)
+		t.tween_property(link_outline_shader, "shader_parameter/outline_thickness", 0.4, .3)
+		t.tween_property(link_outline_shader, "shader_parameter/outline_alpha", 0.85, .3)
 	
 	func self_damage(damage: int):
 		self.hurtbox.receive_hit_no_hitbox(damage)
