@@ -1,6 +1,7 @@
 class_name ClarityShardHurtbox
 extends EnemyHurtbox
 
+var shard_destroyed := false
 var mesh : Node3D
 
 func _ready():
@@ -21,12 +22,14 @@ func death_effect():
 		dp.apply_central_impulse(Vector3(rng.randf_range(-dp_impulse_limit, dp_impulse_limit), dp_impulse_limit*rng.randf(), rng.randf_range(-dp_impulse_limit, dp_impulse_limit)))
 
 func die():
+	shard_destroyed = true
 	# To do: make effect for death
 	hb_owner.visible = false
-	# Even when process mode is disabled, this script can have its methods called by outside scripts, so Clarity can call regen()
+	# Note: even when process mode is disabled, this script can have its methods called by outside scripts, so Clarity can call regen()
 	process_mode = Node.PROCESS_MODE_DISABLED
 
 func regen():
+	shard_destroyed = false
 	# To do: make effect for regen
 	hb_owner.visible = true
 	process_mode = Node.PROCESS_MODE_INHERIT

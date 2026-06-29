@@ -93,13 +93,14 @@ var staggerable := false # When head is exposed but not glowing, staggerable is 
 @export var arm_attack_chances = {
 	"RaiseRightSlice" : .5,
 	"LongSlice" : .5,
-	"RegenShards" : 0.0,
 }
 
 @export var snowflake_attack_chances = {
 	"DoubleShardSequence1" : .5,
 	"SingleShardSequence1" : .5,
 }
+
+@export var regen_shards_max_chance := .5 # When all 6 shards are destroyed, this is the chance that the next arm attack will be RegenShards
 
 var param_path_base := "parameters/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -189,6 +190,9 @@ class DressShard extends Node3D:
 		var t = self.node.get_tree().create_tween()
 		t.tween_property(link_outline_shader, "shader_parameter/outline_thickness", 0.067, .3)
 		t.tween_property(link_outline_shader, "shader_parameter/outline_alpha", 1.0, .3)
+	
+	func is_destroyed():
+		return self.hurtbox.shard_destroyed
 
 func _ready():
 	head_hurtbox = find_child("EnemyHurtbox")
@@ -451,8 +455,18 @@ func queue_arm_attack():
 		PHASE.PHASE1:
 			match(behav_state):
 				CIRCLING:
-					var attack = choose_attack(arm_attack_chances)
-					arm_anim_player.play(attack)
+					var num_shards_destroyed := 0
+					for shard in dress_shards.values():
+						if shard.is_destroyed():
+							num_shards_destroyed += 1
+					var regen_shards_chance := num_shards_destroyed * regen_shards_max_chance / 6.0
+					# all_chances = arm attack chances + regen shards chance
+					var all_chances = {}
+					for attack in arm_attack_chances:
+						all_chances[attack] = arm_attack_chances[attack] - regen_shards_chance / float(arm_attack_chances.size())
+					all_chances["RegenShards"] = regen_shards_chance
+					var chosen_attack = choose_attack(all_chances)
+					arm_anim_player.play(chosen_attack)
 		PHASE.PHASE2:
 			pass # pass until phase2 is confirmed to exist
 
