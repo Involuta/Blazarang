@@ -149,6 +149,7 @@ class DressShard extends Node3D:
 		self.snowflake_hit_linked = false
 		self.anim_player = n.find_child("AnimationPlayer")
 		self.hurtbox = n.find_child("ClarityShardHurtbox")
+		self.hurtbox.add_to_group("lockonables")
 	
 	func frames(num: int) -> float:
 		return num * self.node.get_physics_process_delta_time()
@@ -198,6 +199,7 @@ func _ready():
 	head_hurtbox = find_child("EnemyHurtbox")
 	
 	head_hurtbox.add_to_group("lockonables")
+	snowflake.add_to_group("lockonables")
 	level = root.find_child("Level", true, false)
 	target = level.find_child("Icon")
 	cotu = level.find_child("cotuCB")

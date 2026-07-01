@@ -13,6 +13,8 @@ var max_target_proximity := 30.0 # Farthest dist lockonable can be from rang (wh
 var target_homing_time := .12 # Time it takes for rang to move from 1 target to another
 var icon_homing_time := .4 # Time it takes for rang to return to icon after hitting all targets
 
+@export var aim_cone_dot := 0.8 # The required dot product for a lockonable to be within the camera's aiming cone (~15 degrees). The smaller this num, the bigger the cone
+
 # PMD = pre-multiplier damage
 var damage_multiplier := 1.0 # Each hitbox's damage is pre multiplier damage * damage_multiplier
 var hitbox_pmd := 0.0
@@ -24,17 +26,19 @@ var invincible := true
 @onready var trail = $Trail
 @onready var base_particle_gradient = $RoserangParticlesBase/GPUParticles3D.process_material.color_ramp.gradient
 @onready var rang_glow_shader = $RoserangMesh/Boomerang3DModelV1.get_surface_override_material(0)
-@onready var root := $/root/ViewControl
+@onready var root := get_tree().root
 var cotu : Node3D
 var icon : Node3D
+var cam : Camera3D
 
 func _init():
 	# When this script is assigned to roserang, _init() is called, but not _ready() bc the roserang is already in the scene tree, and _ready() is only called when a node enters the scene tree for the first time. To get the @onready values, you must call _ready() manually
 	_ready()
 
 func _ready():
-	cotu = root.find_child("cotuCB")
-	icon = root.find_child("Icon")
+	cotu = root.find_child("cotuCB", true, false)
+	icon = root.find_child("Icon", true, false)
+	cam = get_viewport().get_camera_3d()
 	
 	current_max_targets = base_max_targets
 	
@@ -65,7 +69,18 @@ func targetable_and_within_proximity(lockonable):
 	if lockonable.get_parent() != null:
 		not_targetable = not_targetable or lockonable.get_parent().process_mode == Node.PROCESS_MODE_DISABLED
 	var within_proximity := icon.global_position.distance_to(lockonable.global_position) < max_target_proximity
-	return not not_targetable and within_proximity
+	return not not_targetable and within_proximity and within_aim_cone(lockonable)
+
+# Checks if 'lockonable' falls within the camera's aiming cone, same logic as mark.gd's cone check
+func within_aim_cone(lockonable) -> bool:
+	if cam == null:
+		return true # No camera to reference (e.g. headless/test run); don't filter anything out
+
+	var cam_fwd = -cam.global_transform.basis.z
+	var to_lockonable = lockonable.global_position - cam.global_position
+	var dir = to_lockonable.normalized()
+
+	return cam_fwd.dot(dir) >= aim_cone_dot
 
 func dist_to_lockonable(a, b):
 	return icon.global_position.distance_to(a.global_position) < icon.global_position.distance_to(b.global_position)
@@ -113,4 +128,3 @@ func set_homing_targets(targets_added: int):
 
 func get_mvmt_state():
 	return "HOMING"
-
