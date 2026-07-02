@@ -13,7 +13,7 @@ var max_target_proximity := 30.0 # Farthest dist lockonable can be from rang (wh
 var target_homing_time := .12 # Time it takes for rang to move from 1 target to another
 var icon_homing_time := .4 # Time it takes for rang to return to icon after hitting all targets
 
-@export var aim_cone_dot := 0.8 # The required dot product for a lockonable to be within the camera's aiming cone (~15 degrees). The smaller this num, the bigger the cone
+var aim_cone_dot := 0.75 # The required dot product for a lockonable to be within the camera's aiming cone (~15 degrees). The smaller this num, the bigger the cone
 
 # PMD = pre-multiplier damage
 var damage_multiplier := 1.0 # Each hitbox's damage is pre multiplier damage * damage_multiplier
@@ -54,7 +54,7 @@ func _ready():
 	var all_lockonables = get_tree().get_nodes_in_group("lockonables")
 	all_lockonables = all_lockonables.filter(targetable_and_within_proximity)
 	if not all_lockonables.is_empty():
-		all_lockonables.sort_custom(dist_to_lockonable)
+		all_lockonables.sort_custom(lockonable_dist_to_aim_cone_center)
 		var i := 0
 		while i < current_max_targets and i < all_lockonables.size():
 			await homing_attack(all_lockonables[i], false)
@@ -77,13 +77,17 @@ func within_aim_cone(lockonable) -> bool:
 		return true # No camera to reference (e.g. headless/test run); don't filter anything out
 
 	var cam_fwd = -cam.global_transform.basis.z
-	var to_lockonable = lockonable.global_position - cam.global_position
-	var dir = to_lockonable.normalized()
+	var to_lockonable = cam.global_position.direction_to(lockonable.global_position)
 
-	return cam_fwd.dot(dir) >= aim_cone_dot
+	return cam_fwd.dot(to_lockonable) >= aim_cone_dot
 
-func dist_to_lockonable(a, b):
-	return icon.global_position.distance_to(a.global_position) < icon.global_position.distance_to(b.global_position)
+func lockonable_dist_to_aim_cone_center(a, b):
+	# a comes before b --> a is closer to aim cone center than b --> a has larger dot product than b
+	var cam_fwd = -cam.global_transform.basis.z
+	var to_a = cam.global_position.direction_to(a.global_position)
+	var to_b = cam.global_position.direction_to(b.global_position)
+
+	return cam_fwd.dot(to_a) > cam_fwd.dot(to_b)
 
 func homing_attack(target, to_icon: bool):
 	var homing_time := target_homing_time

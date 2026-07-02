@@ -38,7 +38,7 @@ func receive_hit(hitbox, hitter):
 	# Glow to dim effect
 	var mat = mesh.get_surface_override_material(0)
 	var t = get_tree().create_tween()
-	t.tween_property(mat, "emission_energy_multiplier", 0.72, 0)
+	t.tween_property(mat, "emission_energy_multiplier", 0.73, 0)
 	t.tween_property(mat, "emission_energy_multiplier", 0.0, 0.6)
 	super(hitbox, hitter)
 
