@@ -135,6 +135,7 @@ var clarity_icon : Node3D
 var level_env : Environment
 var sky : ProceduralSkyMaterial
 var level_fog : FogMaterial
+var arm_meshes_dress_shards := {} # List of dress shards meshes in ArmMeshes
 
 class DressShard extends Node3D:
 	var node : Node
@@ -228,6 +229,11 @@ func _ready():
 	dress_shards["BackLeft"] = DressShard.new(find_child("DressShardBackLeft"))
 	dress_shards["BackRight"] = DressShard.new(find_child("DressShardBackRight"))
 	dress_shards["Master"] = DressShard.new(find_child("DressShardMaster"))
+	
+	# Arm meshes dress shards are used to set visibility of dress shards in arm meshes, so master isn't necessary to include (master isn't associated with any shard)
+	for shard in dress_shards:
+		if shard != "Master":
+			arm_meshes_dress_shards[shard] = arm_meshes.find_child(shard, true, false)
 	
 	head_hurtbox.hit_received.connect(on_head_hit)
 	
@@ -738,6 +744,15 @@ func regen_shards_mvmt():
 	var move_dir := 3 * walk_speed * target.global_position.direction_to(global_position)
 	t.tween_property(self, "velocity", Vector3(move_dir.x, 0, move_dir.z), 0)
 	t.tween_property(self, "velocity", Vector3.ZERO, frames(84))
+
+func regen_shards_set_arm_meshes_visibility():
+	# Set visibility of dress shards in arm meshes depending on whether their corresponding shard in dress shards (aka child of DressShardsMaster) is destroyed
+	for shard in arm_meshes_dress_shards:
+		arm_meshes_dress_shards[shard].visible = dress_shards[shard].is_destroyed()
+
+func set_all_arm_meshes_dress_shards_visible():
+	for shard in arm_meshes_dress_shards:
+		arm_meshes_dress_shards[shard].visible = true
 
 func stop_dress_shard(s: String):
 	dress_shards[s].stop()
