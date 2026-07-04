@@ -260,17 +260,16 @@ func set_staggerable(state: bool):
 
 func on_head_hit(damage: int):
 	if staggerable and damage >= stagger_damage_threshold and behav_state != STOP:
-		switch_to_stopped()
+		switch_to_stop()
+		# Switch to Stagger anim
+		arm_anim_player.play("Stagger")
+		velocity = Vector3.ZERO
+		# Attack reset code (setting long dist wait, attacking state, etc.) is called in Stagger anim keyframes
 
-func switch_to_stopped():
+func switch_to_stop():
 	# Set behav_state and look_state
 	behav_state = STOP
-	look_state = LOOK_STATE.TARGET_HEAD_ARM_BODY
-	# Switch to Stagger anim
-	arm_anim_player.play("Stagger")
-	# Move backward
-	velocity = Vector3.ZERO
-	# Attack reset code (setting long dist wait, attacking state, etc.) is called in Stagger anim keyframes
+	look_state = LOOK_STATE.STOP
 
 func set_head_rotation(rot_deg: Vector3):
 	# Set rotation of dynamic head (the head that looks at the player)
@@ -396,17 +395,6 @@ func arm_long_dist_attack_check():
 		if not arm_attack_queued and arm_long_dist_wait_remaining <= 0:
 			queue_arm_attack()
 
-func snowflake_long_dist_attack_check():
-	if snowflake_attacking:
-		return
-	# This code block ensures queue_attack is only called once
-	if snowflake_long_dist_wait_remaining <= 0:
-		return
-	else:
-		snowflake_long_dist_wait_remaining -= get_physics_process_delta_time()
-		if not snowflake_attack_queued and snowflake_long_dist_wait_remaining <= 0:
-			queue_snowflake_attack()
-
 func switch_to_straight():
 	behav_state = STRAIGHT
 	look_state = LOOK_STATE.DIR
@@ -445,7 +433,6 @@ func walk_curved(circling_target: bool):
 	velocity.z = tangent_dir.z * walk_speed
 	
 	arm_long_dist_attack_check()
-	snowflake_long_dist_attack_check()
 
 func switch_to_circling():
 	arm_long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
@@ -464,12 +451,9 @@ func queue_arm_attack():
 				CIRCLING:
 					# If a dress shard anim is playing or the snowflake isn't neutral, don't include RegenShards as a choice
 					if dress_shards["Master"].anim_player.is_playing() or snowflake_anim_playback.get_current_node() != "RotateSlow":
-						print(snowflake_anim_playback.get_current_node())
 						var chosen_attack = choose_attack(arm_attack_chances)
 						arm_anim_player.play(chosen_attack)
 						return
-					else:
-						print("Yoo!")
 					
 					# Include RegenShards in arm attack choices
 					var num_shards_destroyed := 0
@@ -483,24 +467,10 @@ func queue_arm_attack():
 						all_chances[attack] = arm_attack_chances[attack] - regen_shards_chance / float(arm_attack_chances.size())
 					all_chances["RegenShards"] = regen_shards_chance
 					var chosen_attack = choose_attack(all_chances)
-					print(chosen_attack)
 					if chosen_attack == "RegenShards":
 						# Prevent arm and snowflake attacks from being chosen during the attack
-						behav_state = STOP
-						look_state = LOOK_STATE.STOP
+						switch_to_stop()
 					arm_anim_player.play(chosen_attack)
-		PHASE.PHASE2:
-			pass # pass until phase2 is confirmed to exist
-
-func queue_snowflake_attack():
-	snowflake_attack_queued = true
-	match(phase):
-		PHASE.PHASE1:
-			match(behav_state):
-				CIRCLING:
-					var attack = choose_attack(snowflake_attack_chances)
-					#play_anim_all_dress_shards(attack)
-				
 		PHASE.PHASE2:
 			pass # pass until phase2 is confirmed to exist
 
