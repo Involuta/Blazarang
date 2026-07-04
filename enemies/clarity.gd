@@ -132,7 +132,6 @@ var clarity_icon : Node3D
 var level_env : Environment
 var sky : ProceduralSkyMaterial
 var level_fog : FogMaterial
-var arm_meshes_dress_shards := {} # List of dress shards meshes in ArmMeshes
 var snowflake_anim_playback : AnimationNodeStateMachinePlayback
 
 class DressShard extends Node3D:
@@ -230,11 +229,6 @@ func _ready():
 	dress_shards["BackLeft"] = DressShard.new(find_child("DressShardBackLeft"))
 	dress_shards["BackRight"] = DressShard.new(find_child("DressShardBackRight"))
 	dress_shards["Master"] = DressShard.new(find_child("DressShardMaster"))
-	
-	# Arm meshes dress shards are used to set visibility of dress shards in arm meshes, so master isn't necessary to include (master isn't associated with any shard)
-	for shard in dress_shards:
-		if shard != "Master":
-			arm_meshes_dress_shards[shard] = arm_meshes.find_child(shard, true, false)
 	
 	head_hurtbox.hit_received.connect(on_head_hit)
 	
@@ -467,6 +461,7 @@ func queue_arm_attack():
 					if chosen_attack == "RegenShards":
 						# Prevent arm and snowflake attacks from being chosen during the attack
 						switch_to_stop()
+						play_anim_all_dress_shards(chosen_attack)
 					arm_anim_player.play(chosen_attack)
 		PHASE.PHASE2:
 			pass # pass until phase2 is confirmed to exist
@@ -701,18 +696,6 @@ func regen_shards_mvmt():
 	var move_dir := 3 * walk_speed * target.global_position.direction_to(global_position)
 	t.tween_property(self, "velocity", Vector3(move_dir.x, 0, move_dir.z), 0)
 	t.tween_property(self, "velocity", Vector3.ZERO, frames(84))
-
-func regen_shards_switch_to_arm_meshes():
-	# Set visibility of dress shards in arm meshes depending on whether their corresponding shard in dress shards (aka child of DressShardsMaster) is destroyed
-	for shard_name in arm_meshes_dress_shards:
-		arm_meshes_dress_shards[shard_name].visible = !dress_shards[shard_name].is_destroyed()
-		# Dress shards must be invisible and invincible during RegenShards
-		# Why invincible? So that if a dress shard is destroyed during RegenShards, I don't have to make the corresponding shard in arm meshes become invisible
-		dress_shards[shard_name].hurtbox.die()
-
-func set_all_arm_meshes_dress_shards_visibility(state: bool):
-	for shard in arm_meshes_dress_shards.values():
-		shard.visible = state
 
 func regen_dress_shards():
 	for shard in dress_shards.values():
