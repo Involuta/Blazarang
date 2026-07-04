@@ -733,13 +733,14 @@ func regen_shards_mvmt():
 func regen_shards_set_arm_meshes_visibility():
 	# Set visibility of dress shards in arm meshes depending on whether their corresponding shard in dress shards (aka child of DressShardsMaster) is destroyed
 	for shard_name in arm_meshes_dress_shards:
-		arm_meshes_dress_shards[shard_name].visible = dress_shards[shard_name].is_destroyed()
+		arm_meshes_dress_shards[shard_name].visible = !dress_shards[shard_name].is_destroyed()
+		dress_shards[shard_name].node.visible = false
 
 func set_all_arm_meshes_dress_shards_visible():
 	for shard in arm_meshes_dress_shards.values():
 		shard.visible = true
 
-func regenerate_dress_shards():
+func regen_dress_shards():
 	for shard in dress_shards.values():
 		shard.regen()
 

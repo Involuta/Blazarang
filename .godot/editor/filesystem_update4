@@ -40,3 +40,4 @@ res://enemies/enemy_anims/snowflake_entity_doubleshardseq1.res
 res://enemies/enemy_anims/snowflake_entity_rotateslow_3seg.res
 res://enemies/enemy_anims/snowflake_entity_singleshardseq1.res
 res://enemies/enemy_anims/snowflake_entity_stagger.res
+res://enemies/clarity_shard_hurtbox.gd
