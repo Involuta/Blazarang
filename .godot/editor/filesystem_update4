@@ -41,3 +41,5 @@ res://enemies/enemy_anims/snowflake_entity_rotateslow_3seg.res
 res://enemies/enemy_anims/snowflake_entity_singleshardseq1.res
 res://enemies/enemy_anims/snowflake_entity_stagger.res
 res://enemies/clarity_shard_hurtbox.gd
+res://enemies/enemy_anims/clarity_double_shard_sequence1.res
+res://enemies/enemy_anims/clarity_single_shard_sequence1.res

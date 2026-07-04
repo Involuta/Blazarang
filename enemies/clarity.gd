@@ -12,7 +12,6 @@ enum {
 }
 var behav_state := CIRCLING
 var arm_attacking := false # Set to true when arm is attacking to prevent another attack from being queued
-var snowflake_attacking := false # Same as arm_attacking but for the snowflake
 
 # Look state is controlled within anim keyframes bc one anim can have multiple look states (e.g. jump shot, which goes from STOP or DIR to BODY FULL ROT to TARGET HEAD ARM BODY (which may be renamed TARGET LATERAL))
 enum LOOK_STATE {
@@ -38,9 +37,7 @@ var max_long_dist_wait := 2.5
 var arm_long_dist_wait_remaining := 2.5
 var snowflake_long_dist_wait_remaining := 2.5
 var arm_attack_queued := false
-var snowflake_attack_queued := false
 signal no_arm_attack_queued
-signal no_snowflake_attack_queued
 
 enum PHASE {
 	PHASE1,
@@ -489,35 +486,10 @@ func start_arm_attack():
 	arm_attacking = true # Prevent another arm attack from being queued
 	aiming_at_target = true
 
-func start_snowflake_attack():
-	# Without this await, the animation player would call end_attack at the end of the previous animation on the exact same frame as when the AnimationPlayer.play func is called below. Since an animation was currently in progress, the func call would do nothing, leaving the enemy in ATTACK mode but with no animation playing to free it from ATTACK mode, causing it to stand still indefinitely
-	await get_tree().physics_frame
-	snowflake_attacking = true # Prevent another arm attack from being queued
-
 func end_arm_attack():
 	no_arm_attack_queued.emit()
 	arm_attacking = false
 	arm_attack_queued = false
-	"""
-	FOR TESTING: behav_state is chosen here manually instead of randomly btwn str and cur
-	NOTE: certain attacks always go to certain states (e.g. any jump shot to walk left must switch to circling)
-	"""
-	switch_to_circling()
-	"""
-	match(behav_state):
-		STRAIGHT:
-			switch_to_curved()
-		CURVED:
-			switch_to_circling()
-		CIRCLING:
-			switch_to_straight()
-	"""
-
-func end_snowflake_attack():
-	snowflake_attacking = false
-	snowflake_attack_queued = false
-	no_snowflake_attack_queued.emit()
-	snowflake_long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	"""
 	FOR TESTING: behav_state is chosen here manually instead of randomly btwn str and cur
 	NOTE: certain attacks always go to certain states (e.g. any jump shot to walk left must switch to circling)
@@ -734,7 +706,9 @@ func regen_shards_switch_to_arm_meshes():
 	# Set visibility of dress shards in arm meshes depending on whether their corresponding shard in dress shards (aka child of DressShardsMaster) is destroyed
 	for shard_name in arm_meshes_dress_shards:
 		arm_meshes_dress_shards[shard_name].visible = !dress_shards[shard_name].is_destroyed()
-		dress_shards[shard_name].hurtbox.die() # Dress shards must be invisible during RegenShards
+		# Dress shards must be invisible and invincible during RegenShards
+		# Why invincible? So that if a dress shard is destroyed during RegenShards, I don't have to make the corresponding shard in arm meshes become invisible
+		dress_shards[shard_name].hurtbox.die()
 
 func set_all_arm_meshes_dress_shards_visibility(state: bool):
 	for shard in arm_meshes_dress_shards.values():
