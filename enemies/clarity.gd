@@ -8,7 +8,7 @@ enum {
 	CURVED,
 	CIRCLING,
 	SPECIAL,
-	STAGGERED,
+	STOP,
 }
 var behav_state := CIRCLING
 var arm_attacking := false # Set to true when arm is attacking to prevent another attack from being queued
@@ -136,6 +136,7 @@ var level_env : Environment
 var sky : ProceduralSkyMaterial
 var level_fog : FogMaterial
 var arm_meshes_dress_shards := {} # List of dress shards meshes in ArmMeshes
+var snowflake_anim_playback : AnimationNodeStateMachinePlayback
 
 class DressShard extends Node3D:
 	var node : Node
@@ -195,6 +196,9 @@ class DressShard extends Node3D:
 	
 	func is_destroyed():
 		return self.hurtbox.shard_destroyed
+	
+	func regen():
+		self.hurtbox.regen()
 
 func _ready():
 	head_hurtbox = find_child("EnemyHurtbox")
@@ -240,6 +244,7 @@ func _ready():
 	# Set up all states pre-fight. This may eventually be replaced by either a PreFight anim or an anim that spawns the snowflake entity
 	arm_anim_player.play("WalkLeftAggressive")
 	snowflake_anim_tree.active = true
+	snowflake_anim_playback = snowflake_anim_tree.get("parameters/StateMachine/playback")
 
 func frames(num: int) -> float:
 	return num * get_physics_process_delta_time()
@@ -254,22 +259,16 @@ func set_staggerable(state: bool):
 	staggerable = state
 
 func on_head_hit(damage: int):
-	if staggerable and damage >= stagger_damage_threshold and behav_state != STAGGERED:
-		switch_to_staggered()
+	if staggerable and damage >= stagger_damage_threshold and behav_state != STOP:
+		switch_to_stopped()
 
-func switch_to_staggered():
+func switch_to_stopped():
 	# Set behav_state and look_state
-	behav_state = STAGGERED
+	behav_state = STOP
 	look_state = LOOK_STATE.TARGET_HEAD_ARM_BODY
 	# Switch to Stagger anim
 	arm_anim_player.play("Stagger")
 	# Move backward
-	"""
-	var t = get_tree().create_tween()
-	var move_dir := 3 * walk_speed * target.global_position.direction_to(global_position)
-	t.tween_property(self, "velocity", Vector3(move_dir.x, 0, move_dir.z), 0)
-	t.tween_property(self, "velocity", Vector3.ZERO, frames(162))
-	"""
 	velocity = Vector3.ZERO
 	# Attack reset code (setting long dist wait, attacking state, etc.) is called in Stagger anim keyframes
 
@@ -372,7 +371,7 @@ func _physics_process(delta):
 				walk_curved(false)
 			CIRCLING:
 				walk_curved(true)
-			SPECIAL, STAGGERED:
+			SPECIAL, STOP:
 				pass
 
 func get_random_flat_unit_vector() -> Vector3:
@@ -400,7 +399,7 @@ func arm_long_dist_attack_check():
 func snowflake_long_dist_attack_check():
 	if snowflake_attacking:
 		return
-	# This code block queue_attack is only called once
+	# This code block ensures queue_attack is only called once
 	if snowflake_long_dist_wait_remaining <= 0:
 		return
 	else:
@@ -463,6 +462,16 @@ func queue_arm_attack():
 		PHASE.PHASE1:
 			match(behav_state):
 				CIRCLING:
+					# If a dress shard anim is playing or the snowflake isn't neutral, don't include RegenShards as a choice
+					if dress_shards["Master"].anim_player.is_playing() or snowflake_anim_playback.get_current_node() != "RotateSlow":
+						print(snowflake_anim_playback.get_current_node())
+						var chosen_attack = choose_attack(arm_attack_chances)
+						arm_anim_player.play(chosen_attack)
+						return
+					else:
+						print("Yoo!")
+					
+					# Include RegenShards in arm attack choices
 					var num_shards_destroyed := 0
 					for shard in dress_shards.values():
 						if shard.is_destroyed():
@@ -474,6 +483,11 @@ func queue_arm_attack():
 						all_chances[attack] = arm_attack_chances[attack] - regen_shards_chance / float(arm_attack_chances.size())
 					all_chances["RegenShards"] = regen_shards_chance
 					var chosen_attack = choose_attack(all_chances)
+					print(chosen_attack)
+					if chosen_attack == "RegenShards":
+						# Prevent arm and snowflake attacks from being chosen during the attack
+						behav_state = STOP
+						look_state = LOOK_STATE.STOP
 					arm_anim_player.play(chosen_attack)
 		PHASE.PHASE2:
 			pass # pass until phase2 is confirmed to exist
@@ -486,6 +500,7 @@ func queue_snowflake_attack():
 				CIRCLING:
 					var attack = choose_attack(snowflake_attack_chances)
 					#play_anim_all_dress_shards(attack)
+				
 		PHASE.PHASE2:
 			pass # pass until phase2 is confirmed to exist
 
@@ -747,12 +762,16 @@ func regen_shards_mvmt():
 
 func regen_shards_set_arm_meshes_visibility():
 	# Set visibility of dress shards in arm meshes depending on whether their corresponding shard in dress shards (aka child of DressShardsMaster) is destroyed
-	for shard in arm_meshes_dress_shards:
-		arm_meshes_dress_shards[shard].visible = dress_shards[shard].is_destroyed()
+	for shard_name in arm_meshes_dress_shards:
+		arm_meshes_dress_shards[shard_name].visible = dress_shards[shard_name].is_destroyed()
 
 func set_all_arm_meshes_dress_shards_visible():
-	for shard in arm_meshes_dress_shards:
-		arm_meshes_dress_shards[shard].visible = true
+	for shard in arm_meshes_dress_shards.values():
+		shard.visible = true
+
+func regenerate_dress_shards():
+	for shard in dress_shards.values():
+		shard.regen()
 
 func stop_dress_shard(s: String):
 	dress_shards[s].stop()
@@ -820,6 +839,5 @@ func unlink_all_dress_shards_from_snowflake():
 		t.tween_property(link_outline_shader, "shader_parameter/outline_alpha", 0.85, .6)
 
 func snowflake_stagger():
-	var state_machine = snowflake_anim_tree.get("parameters/StateMachine/playback")
-	state_machine.travel("Stagger")
+	snowflake_anim_playback.travel("Stagger")
 	snowflake_brighten(0, .6)
