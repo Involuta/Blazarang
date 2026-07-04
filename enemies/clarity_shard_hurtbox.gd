@@ -33,6 +33,7 @@ func regen():
 	# To do: make effect for regen
 	hb_owner.visible = true
 	process_mode = Node.PROCESS_MODE_INHERIT
+	health = max_health
 
 func receive_hit(hitbox, hitter):
 	# Glow to dim effect
