@@ -44,3 +44,6 @@ res://enemies/clarity_shard_hurtbox.gd
 res://enemies/enemy_anims/clarity_double_shard_sequence1.res
 res://enemies/enemy_anims/clarity_single_shard_sequence1.res
 res://enemies/enemy_hurtbox.gd
+res://enemies/enemy_anims/clarity_dress_shard_test_sequence.res
+res://glb_inherited_scenes/clarity_dress_shards_master.tscn
+res://enemies/enemy_anims/clarity_dressshards_regenshards.res

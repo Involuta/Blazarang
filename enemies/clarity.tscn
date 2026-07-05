@@ -1,4 +1,4 @@
-[gd_scene load_steps=155 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=158 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -440,6 +440,32 @@ refraction_enabled = true
 radius = 1.0
 height = 15.0
 
+[sub_resource type="Gradient" id="Gradient_6uq3t"]
+offsets = PackedFloat32Array(0, 0.526012, 1)
+colors = PackedColorArray(0.344767, 0.660412, 0.914527, 1, 0.548962, 0.772177, 0.963378, 1, 0.231014, 0.563762, 0.812967, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xfxxd"]
+gradient = SubResource("Gradient_6uq3t")
+
+[sub_resource type="Curve" id="Curve_w581e"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.327966, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_adj5q"]
+curve = SubResource("Curve_w581e")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yrwtq"]
+lifetime_randomness = 0.15
+direction = Vector3(2.08165e-12, 1, 2.08165e-12)
+spread = 18.0
+gravity = Vector3(2.08165e-12, -9.8, 2.08165e-12)
+initial_velocity_min = 18.0
+initial_velocity_max = 30.0
+scale_min = 0.15
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_adj5q")
+color_ramp = SubResource("GradientTexture1D_xfxxd")
+
 [sub_resource type="Shader" id="Shader_83w78"]
 code = "shader_type spatial;
 render_mode cull_front, unshaded, blend_add;
@@ -637,13 +663,6 @@ emission_enabled = true
 emission = Color(0.560784, 0.803922, 1, 1)
 emission_energy_multiplier = 0.0
 refraction_enabled = true
-
-[sub_resource type="Gradient" id="Gradient_6uq3t"]
-offsets = PackedFloat32Array(0, 0.526012, 1)
-colors = PackedColorArray(0.344767, 0.660412, 0.914527, 1, 0.548962, 0.772177, 0.963378, 1, 0.231014, 0.563762, 0.812967, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_xfxxd"]
-gradient = SubResource("Gradient_6uq3t")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pcb0r"]
 emission_shape = 6
@@ -1150,10 +1169,10 @@ transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
 [node name="Skeleton3D" parent="ClarityArmMeshes/Armature" index="0"]
 bones/0/position = Vector3(-0.0210742, 4.49276, 0.0847608)
 bones/0/rotation = Quaternion(0.0301653, 0.0796906, -0.0501057, 0.995102)
-bones/1/position = Vector3(-1.58209e-09, 8.69174, 9.87667e-09)
+bones/1/position = Vector3(1.5488e-07, 8.69174, -4.9728e-08)
 bones/1/rotation = Quaternion(0.0484073, -0.0812806, 0.0524297, 0.994133)
-bones/3/position = Vector3(-3.7482, 4.38423, -0.0847618)
-bones/3/rotation = Quaternion(0.00101031, -0.00552394, 0.86527, 0.501275)
+bones/3/position = Vector3(-3.7482, 4.38423, -0.0847617)
+bones/3/rotation = Quaternion(0.00101032, -0.00552393, 0.86527, 0.501275)
 bones/6/position = Vector3(2.01413, 2.22899, -2.08285)
 bones/6/rotation = Quaternion(0.305356, -0.212565, 0.925231, -0.0743114)
 bones/8/position = Vector3(2.06725, 1.3427, 0.8528)
@@ -1168,7 +1187,7 @@ bones/16/position = Vector3(-2.85858, 2.94367, -0.755941)
 bones/16/rotation = Quaternion(0.321999, -0.24697, 0.885482, 0.226373)
 
 [node name="Hat_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1.42986, 0.00998905, -0.0170401, -0.0125258, 1.41244, -0.223079, 0.0152725, 0.223207, 1.41239, 0.918732, 14.4374, 0.659002)
+transform = Transform3D(1.42986, 0.00998904, -0.0170401, -0.0125258, 1.41244, -0.223079, 0.0152725, 0.223207, 1.41239, 0.918732, 14.4374, 0.659002)
 
 [node name="BodyLight" type="OmniLight3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2" index="1"]
 light_color = Color(0, 0.486275, 0.894118, 1)
@@ -1207,7 +1226,7 @@ process_material = SubResource("ParticleProcessMaterial_1ffcq")
 draw_pass_1 = ExtResource("5_1f67e")
 
 [node name="Arm_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.339741, 0.92836, 0.15074, -0.932056, 0.353784, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
+transform = Transform3D(0.339741, 0.92836, 0.150741, -0.932056, 0.353784, -0.0781571, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
 
 [node name="EnemyHitbox" type="Area3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2" index="1"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
@@ -1314,7 +1333,7 @@ curve = SubResource("CurveTexture_vxuhc")
 _defaults_have_been_set = true
 
 [node name="Center_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.982278, 0.104529, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
+transform = Transform3D(0.982278, 0.104528, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520492, 0.985479, 0.562103, 9.96609, 0.284472)
 
 [node name="MiddleLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="3"]
 transform = Transform3D(0.766044, 0.219846, 0.604023, 1.18725e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548505)
@@ -1329,7 +1348,7 @@ transform = Transform3D(0.766044, 0.219846, 0.604023, 4.14429e-08, 0.939693, -0.
 visible = false
 
 [node name="MiddleRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 6.51412e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548508)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 3.65041e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548508)
 visible = false
 
 [node name="FrontRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="7"]
@@ -1545,8 +1564,11 @@ transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
 visible = false
 
 [node name="Skeleton3D" parent="DressShardMaster/Armature" index="0"]
+bones/0/position = Vector3(-0.0210742, 4.49276, 0.0847608)
 bones/0/rotation = Quaternion(0.0301653, 0.0796906, -0.0501057, 0.995102)
+bones/1/position = Vector3(1.02726e-07, 8.69174, -7.95303e-08)
 bones/1/rotation = Quaternion(0.0484073, -0.0812806, 0.0524297, 0.994133)
+bones/3/position = Vector3(-3.7482, 4.38423, -0.0847618)
 bones/3/rotation = Quaternion(0.00101031, -0.00552394, 0.86527, 0.501275)
 bones/6/position = Vector3(2.01413, 2.22899, -2.08285)
 bones/6/rotation = Quaternion(0.305356, -0.212565, 0.925231, -0.0743114)
@@ -1580,7 +1602,7 @@ transform = Transform3D(0.766044, 0.219846, 0.604023, 8.1839e-08, 0.939692, -0.3
 transform = Transform3D(0.766044, 0.219846, 0.604023, 4.14429e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156009, -0.548506)
 
 [node name="MiddleRight" parent="DressShardMaster/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 6.51412e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548508)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 3.65041e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548508)
 
 [node name="FrontRight" parent="DressShardMaster/Armature/Skeleton3D" index="7"]
 transform = Transform3D(0.766044, 0.219846, 0.604023, -1.26024e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548506)
@@ -1591,8 +1613,11 @@ transform = Transform3D(0.766044, 0.219846, 0.604023, -3.64784e-08, 0.939692, -0
 [node name="DressShardFrontLeft" parent="DressShardMaster" instance=ExtResource("12_y7646")]
 
 [node name="Skeleton3D" parent="DressShardMaster/DressShardFrontLeft/Armature" index="0"]
+bones/0/position = Vector3(-0.0210742, 4.49276, 0.0847608)
 bones/0/rotation = Quaternion(0.0301653, 0.0796906, -0.0501057, 0.995102)
+bones/1/position = Vector3(1.02726e-07, 8.69174, -7.95303e-08)
 bones/1/rotation = Quaternion(0.0484073, -0.0812806, 0.0524297, 0.994133)
+bones/3/position = Vector3(-3.7482, 4.38423, -0.0847618)
 bones/3/rotation = Quaternion(0.00101031, -0.00552394, 0.86527, 0.501275)
 bones/6/position = Vector3(2.01413, 2.22899, -2.08285)
 bones/6/rotation = Quaternion(0.305356, -0.212565, 0.925231, -0.0743114)
@@ -1651,12 +1676,23 @@ frostbite_buildup = 9
 transform = Transform3D(0.962033, -0.265622, -0.0627493, 0.272912, 0.933285, 0.233445, -0.00344532, -0.241707, 0.970343, 3.11, -3.826, 4)
 shape = SubResource("CapsuleShape3D_1pjfc")
 
+[node name="GroundPenetrateParticles" type="GPUParticles3D" parent="DressShardMaster/DressShardFrontLeft/Armature/Skeleton3D/FrontLeft" index="3"]
+transform = Transform3D(0.962033, -0.265623, -0.0627492, 0.272912, 0.933286, 0.233445, -0.00344533, -0.241707, 0.970343, 3.11, -3.826, 4)
+emitting = false
+amount = 18
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB(-400, -400, -400, 800, 800, 800)
+process_material = SubResource("ParticleProcessMaterial_yrwtq")
+draw_pass_1 = SubResource("BoxMesh_ltq1a")
+
 [node name="BackLeft" parent="DressShardMaster/DressShardFrontLeft/Armature/Skeleton3D" index="5"]
 transform = Transform3D(0.766044, 0.219846, 0.604023, 4.14429e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156009, -0.548506)
 visible = false
 
 [node name="MiddleRight" parent="DressShardMaster/DressShardFrontLeft/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 6.51412e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548508)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 3.65041e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548508)
 visible = false
 
 [node name="FrontRight" parent="DressShardMaster/DressShardFrontLeft/Armature/Skeleton3D" index="7"]
@@ -1670,8 +1706,11 @@ visible = false
 [node name="DressShardFrontRight" parent="DressShardMaster" instance=ExtResource("12_y7646")]
 
 [node name="Skeleton3D" parent="DressShardMaster/DressShardFrontRight/Armature" index="0"]
+bones/0/position = Vector3(-0.0210742, 4.49276, 0.0847608)
 bones/0/rotation = Quaternion(0.0301653, 0.0796906, -0.0501057, 0.995102)
+bones/1/position = Vector3(1.02726e-07, 8.69174, -7.95303e-08)
 bones/1/rotation = Quaternion(0.0484073, -0.0812806, 0.0524297, 0.994133)
+bones/3/position = Vector3(-3.7482, 4.38423, -0.0847618)
 bones/3/rotation = Quaternion(0.00101031, -0.00552394, 0.86527, 0.501275)
 bones/6/position = Vector3(2.01413, 2.22899, -2.08285)
 bones/6/rotation = Quaternion(0.305356, -0.212565, 0.925231, -0.0743114)
@@ -1687,32 +1726,32 @@ bones/16/position = Vector3(-2.85858, 2.94367, -0.755941)
 bones/16/rotation = Quaternion(0.321999, -0.24697, 0.885482, 0.226373)
 
 [node name="Hat_2" parent="DressShardMaster/DressShardFrontRight/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1.42986, 0.00998886, -0.0170402, -0.0125256, 1.41244, -0.22308, 0.0152726, 0.223208, 1.41239, 0.918731, 14.4374, 0.659003)
+transform = Transform3D(1.42986, 0.00998905, -0.0170401, -0.0125258, 1.41244, -0.223079, 0.0152725, 0.223207, 1.41239, 0.918732, 14.4374, 0.659002)
 
 [node name="Arm_2" parent="DressShardMaster/DressShardFrontRight/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.339741, 0.928361, 0.150741, -0.932056, 0.353783, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
+transform = Transform3D(0.339741, 0.92836, 0.15074, -0.932056, 0.353784, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
 
 [node name="Center_2" parent="DressShardMaster/DressShardFrontRight/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.982278, 0.104528, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
+transform = Transform3D(0.982278, 0.104529, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
 
 [node name="MiddleLeft" parent="DressShardMaster/DressShardFrontRight/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -2.9111e-08, 0.939693, -0.34202, -0.642788, 0.262002, 0.719846, -0.990243, 0.156014, -0.548502)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 1.18725e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548505)
 visible = false
 
 [node name="FrontLeft" parent="DressShardMaster/DressShardFrontRight/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.766045, 0.219846, 0.604022, 2.61259e-08, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990248, 0.15601, -0.548509)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 8.1839e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990245, 0.156011, -0.548507)
 visible = false
 
 [node name="BackLeft" parent="DressShardMaster/DressShardFrontRight/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -3.27128e-07, 0.939693, -0.342019, -0.642788, 0.262002, 0.719846, -0.990243, 0.15601, -0.548501)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 4.14429e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156009, -0.548506)
 visible = false
 
 [node name="MiddleRight" parent="DressShardMaster/DressShardFrontRight/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.766045, 0.219846, 0.604022, 2.33248e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719846, -0.990239, 0.156015, -0.548505)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 3.65041e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548508)
 visible = false
 
 [node name="FrontRight" parent="DressShardMaster/DressShardFrontRight/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.766045, 0.219847, 0.604023, -5.96117e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990245, 0.15601, -0.548503)
+transform = Transform3D(0.766044, 0.219846, 0.604023, -1.26024e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548506)
 
 [node name="FrontRight" parent="DressShardMaster/DressShardFrontRight/Armature/Skeleton3D/FrontRight" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_hmp2k")
@@ -1742,8 +1781,19 @@ frostbite_buildup = 9
 transform = Transform3D(0.958577, 0.280169, -0.0513431, -0.256566, 0.927588, 0.271577, 0.123712, -0.247155, 0.961046, -2.9844, -3.93397, 4.03116)
 shape = SubResource("CapsuleShape3D_1pjfc")
 
+[node name="GroundPenetrateParticles" type="GPUParticles3D" parent="DressShardMaster/DressShardFrontRight/Armature/Skeleton3D/FrontRight" index="3"]
+transform = Transform3D(0.963932, 0.258358, -0.0639255, -0.233347, 0.935906, 0.263873, 0.128002, -0.239439, 0.962437, -3.248, -3.875, 4.013)
+emitting = false
+amount = 18
+lifetime = 1.2
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB(-400, -400, -400, 800, 800, 800)
+process_material = SubResource("ParticleProcessMaterial_yrwtq")
+draw_pass_1 = SubResource("BoxMesh_ltq1a")
+
 [node name="BackRight" parent="DressShardMaster/DressShardFrontRight/Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.766045, 0.219847, 0.604022, -9.71103e-07, 0.939692, -0.34202, -0.642787, 0.262002, 0.719847, -0.990254, 0.156008, -0.548505)
+transform = Transform3D(0.766044, 0.219846, 0.604023, -3.64784e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548507)
 visible = false
 
 [node name="DressShardMiddleLeft" parent="DressShardMaster" instance=ExtResource("12_y7646")]
@@ -1805,6 +1855,17 @@ frostbite_buildup = 9
 transform = Transform3D(0.965423, -0.26069, -2.53229e-16, 0.26069, 0.965422, 3.74134e-16, 1.86351e-14, 9.05592e-15, 1, 5.4, -5.82, 2.08165e-12)
 shape = SubResource("CapsuleShape3D_7112o")
 
+[node name="GroundPenetrateParticles" type="GPUParticles3D" parent="DressShardMaster/DressShardMiddleLeft/Armature/Skeleton3D/MiddleLeft" index="3"]
+transform = Transform3D(0.965423, -0.26069, -1.56299e-14, 0.26069, 0.965423, -1.36008e-14, 1.86351e-14, 9.05593e-15, 1, 5.4, -5.82, 2.08165e-12)
+emitting = false
+amount = 18
+lifetime = 1.2
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB(-400, -400, -400, 800, 800, 800)
+process_material = SubResource("ParticleProcessMaterial_yrwtq")
+draw_pass_1 = SubResource("BoxMesh_ltq1a")
+
 [node name="FrontLeft" parent="DressShardMaster/DressShardMiddleLeft/Armature/Skeleton3D" index="4"]
 transform = Transform3D(0.766045, 0.219846, 0.604022, 2.61259e-08, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990248, 0.15601, -0.548509)
 visible = false
@@ -1845,28 +1906,28 @@ bones/16/position = Vector3(-2.85858, 2.94367, -0.755941)
 bones/16/rotation = Quaternion(0.321999, -0.24697, 0.885482, 0.226373)
 
 [node name="Hat_2" parent="DressShardMaster/DressShardMiddleRight/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1.42986, 0.00998886, -0.0170402, -0.0125256, 1.41244, -0.22308, 0.0152726, 0.223208, 1.41239, 0.918731, 14.4374, 0.659003)
+transform = Transform3D(1.42986, 0.00998905, -0.0170401, -0.0125258, 1.41244, -0.223079, 0.0152725, 0.223207, 1.41239, 0.918732, 14.4374, 0.659002)
 
 [node name="Arm_2" parent="DressShardMaster/DressShardMiddleRight/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.339741, 0.928361, 0.150741, -0.932056, 0.353783, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
+transform = Transform3D(0.339741, 0.92836, 0.15074, -0.932056, 0.353784, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
 
 [node name="Center_2" parent="DressShardMaster/DressShardMiddleRight/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.982278, 0.104528, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
+transform = Transform3D(0.982278, 0.104529, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
 
 [node name="MiddleLeft" parent="DressShardMaster/DressShardMiddleRight/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -2.9111e-08, 0.939693, -0.34202, -0.642788, 0.262002, 0.719846, -0.990243, 0.156014, -0.548502)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 1.18725e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548505)
 visible = false
 
 [node name="FrontLeft" parent="DressShardMaster/DressShardMiddleRight/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.766045, 0.219846, 0.604022, 2.61259e-08, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990248, 0.15601, -0.548509)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 8.1839e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990245, 0.156011, -0.548507)
 visible = false
 
 [node name="BackLeft" parent="DressShardMaster/DressShardMiddleRight/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -3.27128e-07, 0.939693, -0.342019, -0.642788, 0.262002, 0.719846, -0.990243, 0.15601, -0.548501)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 4.14429e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156009, -0.548506)
 visible = false
 
 [node name="MiddleRight" parent="DressShardMaster/DressShardMiddleRight/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.766045, 0.219846, 0.604022, 2.33248e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719846, -0.990239, 0.156015, -0.548505)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 6.51412e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548508)
 
 [node name="MiddleRight" parent="DressShardMaster/DressShardMiddleRight/Armature/Skeleton3D/MiddleRight" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_vhify")
@@ -1897,12 +1958,23 @@ frostbite_buildup = 9
 transform = Transform3D(0.965473, 0.260504, 3.48787e-16, -0.260504, 0.965472, -3.48787e-16, -4.27605e-16, 2.45884e-16, 1, -5.4, -5.82, 2.08165e-12)
 shape = SubResource("CapsuleShape3D_7112o")
 
+[node name="GroundPenetrateParticles" type="GPUParticles3D" parent="DressShardMaster/DressShardMiddleRight/Armature/Skeleton3D/MiddleRight" index="3"]
+transform = Transform3D(0.965473, 0.260504, 3.48787e-16, -0.260504, 0.965473, -3.48787e-16, -4.27605e-16, 2.45884e-16, 1, -5.4, -5.82, 2.08165e-12)
+emitting = false
+amount = 18
+lifetime = 1.2
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB(-400, -400, -400, 800, 800, 800)
+process_material = SubResource("ParticleProcessMaterial_yrwtq")
+draw_pass_1 = SubResource("BoxMesh_ltq1a")
+
 [node name="FrontRight" parent="DressShardMaster/DressShardMiddleRight/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.766045, 0.219847, 0.604023, -5.96117e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990245, 0.15601, -0.548503)
+transform = Transform3D(0.766044, 0.219846, 0.604023, -1.26024e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548506)
 visible = false
 
 [node name="BackRight" parent="DressShardMaster/DressShardMiddleRight/Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.766045, 0.219847, 0.604022, -9.71103e-07, 0.939692, -0.34202, -0.642787, 0.262002, 0.719847, -0.990254, 0.156008, -0.548505)
+transform = Transform3D(0.766044, 0.219846, 0.604023, -3.64784e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548507)
 visible = false
 
 [node name="DressShardBackLeft" parent="DressShardMaster" instance=ExtResource("12_y7646")]
@@ -1959,7 +2031,6 @@ defense = 6
 opponent_hitboxes = ["PlayerHitbox", "SelfDamageHitbox"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardBackLeft/Armature/Skeleton3D/BackLeft/ClarityShardHurtbox"]
-transform = Transform3D(0.999997, 0, 0, 0, 0.999997, 0, 0, 0, 0.999998, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_a428p")
 
 [node name="EnemyHitbox" type="Area3D" parent="DressShardMaster/DressShardBackLeft/Armature/Skeleton3D/BackLeft" index="2"]
@@ -1972,6 +2043,17 @@ frostbite_buildup = 9
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardBackLeft/Armature/Skeleton3D/BackLeft/EnemyHitbox"]
 transform = Transform3D(0.965923, -0.258818, -3.25186e-08, 0.249999, 0.93301, -0.258818, 0.0669871, 0.249999, 0.965924, 3.8, -6.9, -4.7)
 shape = SubResource("CapsuleShape3D_a428p")
+
+[node name="GroundPenetrateParticles" type="GPUParticles3D" parent="DressShardMaster/DressShardBackLeft/Armature/Skeleton3D/BackLeft" index="3"]
+transform = Transform3D(0.965926, -0.258819, -1.3307e-07, 0.25, 0.933013, -0.258819, 0.0669873, 0.25, 0.965926, 3.8, -6.9, -4.7)
+emitting = false
+amount = 18
+lifetime = 1.2
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB(-400, -400, -400, 800, 800, 800)
+process_material = SubResource("ParticleProcessMaterial_yrwtq")
+draw_pass_1 = SubResource("BoxMesh_ltq1a")
 
 [node name="MiddleRight" parent="DressShardMaster/DressShardBackLeft/Armature/Skeleton3D" index="6"]
 transform = Transform3D(0.668558, -0.178681, -0.721875, 0.694272, -0.197882, 0.691975, -0.266489, -0.963803, -0.00824254, -5.3225, -3.67817, 52.3819)
@@ -1988,53 +2070,56 @@ visible = false
 [node name="DressShardBackRight" parent="DressShardMaster" instance=ExtResource("12_y7646")]
 
 [node name="Skeleton3D" parent="DressShardMaster/DressShardBackRight/Armature" index="0"]
+bones/0/position = Vector3(-0.0210742, 4.49276, 0.0847608)
 bones/0/rotation = Quaternion(0.0301653, 0.0796906, -0.0501057, 0.995102)
+bones/1/position = Vector3(1.02726e-07, 8.69174, -7.95303e-08)
 bones/1/rotation = Quaternion(0.0484073, -0.0812806, 0.0524297, 0.994133)
+bones/3/position = Vector3(-3.7482, 4.38423, -0.0847618)
 bones/3/rotation = Quaternion(0.00101031, -0.00552394, 0.86527, 0.501275)
-bones/6/position = Vector3(7.91568, -6.39653, 51.1314)
-bones/6/rotation = Quaternion(0.282346, 0.64991, 0.653297, 0.266648)
+bones/6/position = Vector3(2.01413, 2.22899, -2.08285)
+bones/6/rotation = Quaternion(0.305356, -0.212565, 0.925231, -0.0743114)
 bones/8/position = Vector3(2.06725, 1.3427, 0.8528)
 bones/8/rotation = Quaternion(0.300211, -0.0905908, 0.944171, -0.101036)
 bones/10/position = Vector3(-0.870095, 2.94367, -2.42447)
 bones/10/rotation = Quaternion(0.322511, -0.334699, 0.885296, -0.0146623)
-bones/12/position = Vector3(-7.91568, -6.39653, 51.1314)
-bones/12/rotation = Quaternion(-0.282346, 0.64991, 0.653297, -0.266648)
+bones/12/position = Vector3(-3.02298, 2.22899, 2.14379)
+bones/12/rotation = Quaternion(0.360811, -0.115068, 0.905047, 0.19356)
 bones/14/position = Vector3(-0.141156, 1.3427, 2.70588)
 bones/14/rotation = Quaternion(0.376926, -0.00445188, 0.916249, 0.135629)
 bones/16/position = Vector3(-2.85858, 2.94367, -0.755941)
 bones/16/rotation = Quaternion(0.321999, -0.24697, 0.885482, 0.226373)
 
 [node name="Hat_2" parent="DressShardMaster/DressShardBackRight/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1.42986, 0.00998886, -0.0170402, -0.0125256, 1.41244, -0.22308, 0.0152726, 0.223208, 1.41239, 0.918731, 14.4374, 0.659003)
+transform = Transform3D(1.42986, 0.00998905, -0.0170401, -0.0125258, 1.41244, -0.223079, 0.0152725, 0.223207, 1.41239, 0.918732, 14.4374, 0.659002)
 
 [node name="Arm_2" parent="DressShardMaster/DressShardBackRight/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.339741, 0.928361, 0.150741, -0.932056, 0.353783, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
+transform = Transform3D(0.339741, 0.92836, 0.15074, -0.932056, 0.353784, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
 
 [node name="Center_2" parent="DressShardMaster/DressShardBackRight/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.982278, 0.104528, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
+transform = Transform3D(0.982278, 0.104529, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
 
 [node name="MiddleLeft" parent="DressShardMaster/DressShardBackRight/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.668558, 0.178681, 0.721875, -0.694272, -0.197882, 0.691975, 0.266489, -0.963803, -0.00824254, 5.3225, -3.67817, 52.3819)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 1.18725e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548505)
 visible = false
 
 [node name="FrontLeft" parent="DressShardMaster/DressShardBackRight/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.766045, 0.219846, 0.604022, 2.61259e-08, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990248, 0.15601, -0.548509)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 8.1839e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990245, 0.156011, -0.548507)
 visible = false
 
 [node name="BackLeft" parent="DressShardMaster/DressShardBackRight/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -3.27128e-07, 0.939693, -0.342019, -0.642788, 0.262002, 0.719846, -0.990243, 0.15601, -0.548501)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 4.14429e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156009, -0.548506)
 visible = false
 
 [node name="MiddleRight" parent="DressShardMaster/DressShardBackRight/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.668558, -0.178681, -0.721875, 0.694272, -0.197882, 0.691975, -0.266489, -0.963803, -0.00824254, -5.3225, -3.67817, 52.3819)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 3.65041e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548508)
 visible = false
 
 [node name="FrontRight" parent="DressShardMaster/DressShardBackRight/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.766045, 0.219847, 0.604023, -5.96117e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990245, 0.15601, -0.548503)
+transform = Transform3D(0.766044, 0.219846, 0.604023, -1.26024e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548506)
 visible = false
 
 [node name="BackRight" parent="DressShardMaster/DressShardBackRight/Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.766045, 0.219847, 0.604022, -9.71103e-07, 0.939692, -0.34202, -0.642787, 0.262002, 0.719847, -0.990254, 0.156008, -0.548505)
+transform = Transform3D(0.766044, 0.219846, 0.604023, -3.64784e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548507)
 
 [node name="BackRight" parent="DressShardMaster/DressShardBackRight/Armature/Skeleton3D/BackRight" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_yivem")
@@ -2063,6 +2148,17 @@ frostbite_buildup = 9
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardBackRight/Armature/Skeleton3D/BackRight/EnemyHitbox"]
 transform = Transform3D(0.965923, 0.258818, 3.36902e-16, -0.249999, 0.93301, -0.258819, -0.0669871, 0.249999, 0.965924, -3.8, -6.9, -4.7)
 shape = SubResource("CapsuleShape3D_a428p")
+
+[node name="GroundPenetrateParticles" type="GPUParticles3D" parent="DressShardMaster/DressShardBackRight/Armature/Skeleton3D/BackRight" index="3"]
+transform = Transform3D(0.965926, 0.258819, 1.9938e-08, -0.25, 0.933013, -0.258819, -0.0669873, 0.25, 0.965926, -3.8, -6.9, -4.7)
+emitting = false
+amount = 18
+lifetime = 1.2
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB(-400, -400, -400, 800, 800, 800)
+process_material = SubResource("ParticleProcessMaterial_yrwtq")
+draw_pass_1 = SubResource("BoxMesh_ltq1a")
 
 [node name="HatSnowParticles" type="GPUParticles3D" parent="DressShardMaster"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 2.08165e-12, 10.5, 2.08165e-12)
