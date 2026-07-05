@@ -27,7 +27,7 @@ func receive_hit(hitbox, hitter):
 	super(hitbox, hitter)
 
 # Only take damage. Called by code instead of triggered by signal
-# Used by Clarity to damage Clarity and her dress shards when her snowflake entity is hit
+# Used by Clarity to damage her dress shards when her snowflake entity is hit
 func receive_hit_no_hitbox(damage):
 	emit_hit_particles()
 	hit_received.emit(damage)

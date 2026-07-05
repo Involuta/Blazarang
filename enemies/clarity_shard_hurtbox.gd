@@ -2,13 +2,15 @@ class_name ClarityShardHurtbox
 extends EnemyHurtbox
 
 var shard_destroyed := false
-var mesh : Node3D
+var mesh : MeshInstance3D
+var hitbox : Area3D
 
 func _ready():
 	super()
 	# This is adjusted in code instead of inspector to save time (otherwise I'd have to click into every ClarityShardHurtbox and change all their colors individually)
 	hit_particle_color = Color8(182, 222, 255)
 	mesh = hb_owner.find_children("*", "MeshInstance3D", false, false)[0]
+	hitbox = hb_owner.find_children("EnemyHitbox", "Area3D", false, false)[0]
 
 func death_effect():
 	if "death_effect" in hb_owner:
@@ -25,14 +27,19 @@ func die():
 	shard_destroyed = true
 	# To do: make effect for death
 	hb_owner.visible = false
-	# Note: even when process mode is disabled, this script can have its methods called by outside scripts, so Clarity can call regen()
-	process_mode = Node.PROCESS_MODE_DISABLED
+	# Disable collision
+	# set_deferred ensures that monitoring is only set outside of a physics frame, not during. If monitoring is set during a physics frame, the game breaks bc it has to calculate collision
+	set_deferred("monitoring", false)
+	hitbox.set_deferred("monitorable", false)
 
 func regen():
 	shard_destroyed = false
 	# To do: make effect for regen
 	hb_owner.visible = true
-	process_mode = Node.PROCESS_MODE_INHERIT
+	# Restore collision
+	# set_deferred ensures that monitoring is only set outside of a physics frame, not during. If monitoring is set during a physics frame, the game breaks bc it has to calculate collision
+	set_deferred("monitoring", true)
+	hitbox.set_deferred("monitorable", true)
 	health = max_health
 
 func receive_hit(hitbox, hitter):
