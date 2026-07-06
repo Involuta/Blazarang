@@ -8,9 +8,9 @@ uniform vec4 emission_color : source_color = vec4(0.56, 0.8, 1.0, 1.0);
 uniform float emission_energy = 0.0;
 
 uniform vec4 ground_glow_color : source_color = vec4(0.56, 0.8, 1.0, 1.0); // Molten orange/red default
-uniform float ground_y = -3.6;       // The Y level of your floor
-uniform float ground_glow_gradient_height = 1.2;    // How far up the mesh the glow extends
-uniform float ground_glow_intensity = 6.0; // Overdrive for the emission (bloom)
+uniform float ground_y = 10.6;       // The Y level of your floor (you have to test this by seeing the glow in the level scene)
+uniform float ground_glow_gradient_height = 0.0;    // How far up the mesh the glow extends
+uniform float ground_glow_intensity = 3.0; // Overdrive for the emission (bloom)
 
 // --- Varyings ---
 varying float world_y;

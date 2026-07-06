@@ -26,14 +26,14 @@ ambient_light_color = Color(0.56, 0.8, 1, 1)
 tonemap_mode = 2
 glow_enabled = true
 glow_mix = 0.954
+glow_bloom = 0.3
 fog_enabled = true
-fog_light_color = Color(0.352941, 0.423529, 0.509804, 1)
-fog_sky_affect = 0.6
+fog_light_color = Color(0.3, 0.42, 0.54, 1)
 fog_height = 10.0
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.036
 volumetric_fog_albedo = Color(0.396078, 0.462745, 0.560784, 1)
-volumetric_fog_emission = Color(0.584314, 0.647059, 0.741176, 1)
+volumetric_fog_emission = Color(0.396078, 0.462745, 0.560784, 1)
 volumetric_fog_anisotropy = 0.6
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_xylej"]
@@ -63,7 +63,7 @@ size = Vector3(600, 1, 600)
 script = ExtResource("1_w4dpu")
 
 [node name="Clarity" parent="." instance=ExtResource("1_x8ml6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.5218, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 14.4954, 2.08165e-12)
 
 [node name="UIRoot" parent="." instance=ExtResource("1_i7wjo")]
 

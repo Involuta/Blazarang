@@ -1,4 +1,4 @@
-[gd_scene load_steps=157 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=164 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -16,7 +16,6 @@
 [ext_resource type="Script" path="res://GPUTrail-main/GPUTrail3D.gd" id="9_xxn08"]
 [ext_resource type="PackedScene" uid="uid://luimf8n4rk70" path="res://glb_inherited_scenes/clarity_dress_shards_meshes.tscn" id="12_y7646"]
 [ext_resource type="PackedScene" uid="uid://cm3mndrep3gns" path="res://glb_inherited_scenes/clarity_dress_shards_master.tscn" id="13_2l47j"]
-[ext_resource type="Shader" path="res://enemies/clarity_dress_shard.gdshader" id="13_4v131"]
 [ext_resource type="PackedScene" uid="uid://dotk8qi7oo127" path="res://enemies/clarity_dress_shard_hit_particles.tscn" id="14_luiy3"]
 [ext_resource type="PackedScene" uid="uid://cyguldrcukgxk" path="res://glb_inherited_scenes/snowflake_entity_meshes.tscn" id="15_o8h64"]
 
@@ -419,7 +418,7 @@ vertex_color_use_as_albedo = true
 [sub_resource type="BoxMesh" id="BoxMesh_ltq1a"]
 material = SubResource("StandardMaterial3D_juu8c")
 
-[sub_resource type="Shader" id="Shader_83w78"]
+[sub_resource type="Shader" id="Shader_byc0u"]
 code = "shader_type spatial;
 render_mode cull_front, unshaded, blend_add;
 
@@ -440,24 +439,66 @@ void fragment() {
 	ALPHA = outline_alpha;
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1mmjq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oihsm"]
 render_priority = 0
-shader = SubResource("Shader_83w78")
+shader = SubResource("Shader_byc0u")
 shader_parameter/outline_color = Color(0, 0.4, 1, 0.823529)
 shader_parameter/outline_thickness = 0.067
 shader_parameter/outline_alpha = 0.85
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_shll0"]
+[sub_resource type="Shader" id="Shader_cf5g6"]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+// --- Uniforms ---
+// Renaming base_color to \"albedo\" breaks the color
+uniform vec4 base_color : source_color = vec4(0.56, 0.8, 1.0, 1.0);
+uniform vec4 emission_color : source_color = vec4(0.56, 0.8, 1.0, 1.0);
+uniform float emission_energy = 0.0;
+
+uniform vec4 ground_glow_color : source_color = vec4(0.56, 0.8, 1.0, 1.0); // Molten orange/red default
+uniform float ground_y = 10.6;       // The Y level of your floor (you have to test this by seeing the glow in the level scene)
+uniform float ground_glow_gradient_height = 0.0;    // How far up the mesh the glow extends
+uniform float ground_glow_intensity = 3.0; // Overdrive for the emission (bloom)
+
+// --- Varyings ---
+varying float world_y;
+
+void vertex() {
+	// Calculate the vertex position in World Space so it stays accurate 
+	// even if the mesh moves, rotates, or scales.
+	world_y = (MODEL_MATRIX * vec4(VERTEX, 1.0)).y;
+}
+
+void fragment() {
+	// Default material properties
+	ALBEDO = base_color.rgb;
+	EMISSION = emission_color.rgb * emission_energy;
+	ROUGHNESS = 0.12;
+	
+	float distance_from_ground = world_y - ground_y;
+	// smoothstep converts the range (0, ground_glow_gradient_height) to (0, 1), then outputs where distance_from_ground is in the new range
+	// 1 - smoothstep makes glow_factor 1 at the ground and 0 at/above ground_glow_gradient_height above the ground
+	float glow_factor = 1.0 - smoothstep(0.0, ground_glow_gradient_height, distance_from_ground);
+	
+	// Calculate this new glow and add it to your existing EMISSION
+	vec3 final_ground_glow = ground_glow_color.rgb * glow_factor * ground_glow_intensity;
+	
+	// \"+=\" ensures we don't erase any emission your ice already has
+	EMISSION += final_ground_glow;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pcn7e"]
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_1mmjq")
-shader = ExtResource("13_4v131")
+next_pass = SubResource("ShaderMaterial_oihsm")
+shader = SubResource("Shader_cf5g6")
 shader_parameter/base_color = Color(0.56, 0.8, 1, 1)
 shader_parameter/emission_color = Color(0.56, 0.8, 1, 1)
 shader_parameter/emission_energy = 0.0
 shader_parameter/ground_glow_color = Color(0.56, 0.8, 1, 1)
-shader_parameter/ground_y = -2.0
-shader_parameter/ground_glow_gradient_height = 1.2
-shader_parameter/ground_glow_intensity = 6.0
+shader_parameter/ground_y = 10.6
+shader_parameter/ground_glow_gradient_height = 2.08165e-12
+shader_parameter/ground_glow_intensity = 3.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1pjfc"]
 radius = 1.0
@@ -489,17 +530,7 @@ scale_max = 0.24
 scale_curve = SubResource("CurveTexture_adj5q")
 color_ramp = SubResource("GradientTexture1D_xfxxd")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hmp2k"]
-next_pass = SubResource("ShaderMaterial_1mmjq")
-transparency = 4
-albedo_color = Color(0.560784, 0.803922, 1, 1)
-roughness = 0.12
-emission_enabled = true
-emission = Color(0.560784, 0.803922, 1, 1)
-emission_energy_multiplier = 0.0
-refraction_enabled = true
-
-[sub_resource type="Shader" id="Shader_dkqk5"]
+[sub_resource type="Shader" id="Shader_nps65"]
 code = "shader_type spatial;
 render_mode cull_front, unshaded, blend_add;
 
@@ -520,28 +551,154 @@ void fragment() {
 	ALPHA = outline_alpha;
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_550dq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v8lry"]
 render_priority = 0
-shader = SubResource("Shader_dkqk5")
+shader = SubResource("Shader_nps65")
 shader_parameter/outline_color = Color(0, 0.4, 1, 0.823529)
 shader_parameter/outline_thickness = 0.067
 shader_parameter/outline_alpha = 0.85
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uykw5"]
-next_pass = SubResource("ShaderMaterial_550dq")
-transparency = 4
-albedo_color = Color(0.560784, 0.803922, 1, 1)
-roughness = 0.12
-emission_enabled = true
-emission = Color(0.560784, 0.803922, 1, 1)
-emission_energy_multiplier = 0.0
-refraction_enabled = true
+[sub_resource type="Shader" id="Shader_pgxfd"]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+// --- Uniforms ---
+// Renaming base_color to \"albedo\" breaks the color
+uniform vec4 base_color : source_color = vec4(0.56, 0.8, 1.0, 1.0);
+uniform vec4 emission_color : source_color = vec4(0.56, 0.8, 1.0, 1.0);
+uniform float emission_energy = 0.0;
+
+uniform vec4 ground_glow_color : source_color = vec4(0.56, 0.8, 1.0, 1.0); // Molten orange/red default
+uniform float ground_y = 10.6;       // The Y level of your floor (you have to test this by seeing the glow in the level scene)
+uniform float ground_glow_gradient_height = 0.0;    // How far up the mesh the glow extends
+uniform float ground_glow_intensity = 3.0; // Overdrive for the emission (bloom)
+
+// --- Varyings ---
+varying float world_y;
+
+void vertex() {
+	// Calculate the vertex position in World Space so it stays accurate 
+	// even if the mesh moves, rotates, or scales.
+	world_y = (MODEL_MATRIX * vec4(VERTEX, 1.0)).y;
+}
+
+void fragment() {
+	// Default material properties
+	ALBEDO = base_color.rgb;
+	EMISSION = emission_color.rgb * emission_energy;
+	ROUGHNESS = 0.12;
+	
+	float distance_from_ground = world_y - ground_y;
+	// smoothstep converts the range (0, ground_glow_gradient_height) to (0, 1), then outputs where distance_from_ground is in the new range
+	// 1 - smoothstep makes glow_factor 1 at the ground and 0 at/above ground_glow_gradient_height above the ground
+	float glow_factor = 1.0 - smoothstep(0.0, ground_glow_gradient_height, distance_from_ground);
+	
+	// Calculate this new glow and add it to your existing EMISSION
+	vec3 final_ground_glow = ground_glow_color.rgb * glow_factor * ground_glow_intensity;
+	
+	// \"+=\" ensures we don't erase any emission your ice already has
+	EMISSION += final_ground_glow;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_anp0j"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_v8lry")
+shader = SubResource("Shader_pgxfd")
+shader_parameter/base_color = Color(0.56, 0.8, 1, 1)
+shader_parameter/emission_color = Color(0.56, 0.8, 1, 1)
+shader_parameter/emission_energy = 0.0
+shader_parameter/ground_glow_color = Color(0.56, 0.8, 1, 1)
+shader_parameter/ground_y = 10.6
+shader_parameter/ground_glow_gradient_height = 2.08165e-12
+shader_parameter/ground_glow_intensity = 3.0
+
+[sub_resource type="Shader" id="Shader_k81au"]
+code = "shader_type spatial;
+render_mode cull_front, unshaded, blend_add;
+
+uniform vec4 outline_color : source_color = vec4(0.0, 0.4, 1.0, 1.0);
+uniform float outline_thickness : hint_range(0.0, 6.0) = 0.05;
+uniform float outline_alpha : hint_range(0.0, 1.0) = 0.85;
+
+void vertex() {
+	// Push the vertices outward along their normals to create the hull
+	VERTEX += NORMAL * outline_thickness;
+}
+
+void fragment() {
+	// Apply the color multiplied by the intensity for a glow effect
+	ALBEDO = outline_color.rgb;
+	
+	// Faint/soft alpha adjustment (Optional: gives it a slightly softer look)
+	ALPHA = outline_alpha;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1wubo"]
+render_priority = 0
+shader = SubResource("Shader_k81au")
+shader_parameter/outline_color = Color(0, 0.4, 1, 0.823529)
+shader_parameter/outline_thickness = 0.067
+shader_parameter/outline_alpha = 0.85
+
+[sub_resource type="Shader" id="Shader_hcmbl"]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+// --- Uniforms ---
+// Renaming base_color to \"albedo\" breaks the color
+uniform vec4 base_color : source_color = vec4(0.56, 0.8, 1.0, 1.0);
+uniform vec4 emission_color : source_color = vec4(0.56, 0.8, 1.0, 1.0);
+uniform float emission_energy = 0.0;
+
+uniform vec4 ground_glow_color : source_color = vec4(0.56, 0.8, 1.0, 1.0); // Molten orange/red default
+uniform float ground_y = 10.6;       // The Y level of your floor (you have to test this by seeing the glow in the level scene)
+uniform float ground_glow_gradient_height = 0.0;    // How far up the mesh the glow extends
+uniform float ground_glow_intensity = 3.0; // Overdrive for the emission (bloom)
+
+// --- Varyings ---
+varying float world_y;
+
+void vertex() {
+	// Calculate the vertex position in World Space so it stays accurate 
+	// even if the mesh moves, rotates, or scales.
+	world_y = (MODEL_MATRIX * vec4(VERTEX, 1.0)).y;
+}
+
+void fragment() {
+	// Default material properties
+	ALBEDO = base_color.rgb;
+	EMISSION = emission_color.rgb * emission_energy;
+	ROUGHNESS = 0.12;
+	
+	float distance_from_ground = world_y - ground_y;
+	// smoothstep converts the range (0, ground_glow_gradient_height) to (0, 1), then outputs where distance_from_ground is in the new range
+	// 1 - smoothstep makes glow_factor 1 at the ground and 0 at/above ground_glow_gradient_height above the ground
+	float glow_factor = 1.0 - smoothstep(0.0, ground_glow_gradient_height, distance_from_ground);
+	
+	// Calculate this new glow and add it to your existing EMISSION
+	vec3 final_ground_glow = ground_glow_color.rgb * glow_factor * ground_glow_intensity;
+	
+	// \"+=\" ensures we don't erase any emission your ice already has
+	EMISSION += final_ground_glow;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bn55s"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_1wubo")
+shader = SubResource("Shader_hcmbl")
+shader_parameter/base_color = Color(0.56, 0.8, 1, 1)
+shader_parameter/emission_color = Color(0.56, 0.8, 1, 1)
+shader_parameter/emission_energy = 0.0
+shader_parameter/ground_glow_color = Color(0.56, 0.8, 1, 1)
+shader_parameter/ground_y = 10.6
+shader_parameter/ground_glow_gradient_height = 2.08165e-12
+shader_parameter/ground_glow_intensity = 3.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7112o"]
 radius = 1.5
 height = 18.0
 
-[sub_resource type="Shader" id="Shader_dtxjq"]
+[sub_resource type="Shader" id="Shader_bgagr"]
 code = "shader_type spatial;
 render_mode cull_front, unshaded, blend_add;
 
@@ -562,24 +719,68 @@ void fragment() {
 	ALPHA = outline_alpha;
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_p3jk4"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o02bj"]
 render_priority = 0
-shader = SubResource("Shader_dtxjq")
+shader = SubResource("Shader_bgagr")
 shader_parameter/outline_color = Color(0, 0.4, 1, 0.823529)
 shader_parameter/outline_thickness = 0.067
 shader_parameter/outline_alpha = 0.85
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vhify"]
-next_pass = SubResource("ShaderMaterial_p3jk4")
-transparency = 4
-albedo_color = Color(0.560784, 0.803922, 1, 1)
-roughness = 0.12
-emission_enabled = true
-emission = Color(0.560784, 0.803922, 1, 1)
-emission_energy_multiplier = 0.0
-refraction_enabled = true
+[sub_resource type="Shader" id="Shader_on6e6"]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
 
-[sub_resource type="Shader" id="Shader_8g01h"]
+// --- Uniforms ---
+// Renaming base_color to \"albedo\" breaks the color
+uniform vec4 base_color : source_color = vec4(0.56, 0.8, 1.0, 1.0);
+uniform vec4 emission_color : source_color = vec4(0.56, 0.8, 1.0, 1.0);
+uniform float emission_energy = 0.0;
+
+uniform vec4 ground_glow_color : source_color = vec4(0.56, 0.8, 1.0, 1.0); // Molten orange/red default
+uniform float ground_y = 10.6;       // The Y level of your floor (you have to test this by seeing the glow in the level scene)
+uniform float ground_glow_gradient_height = 0.0;    // How far up the mesh the glow extends
+uniform float ground_glow_intensity = 3.0; // Overdrive for the emission (bloom)
+
+// --- Varyings ---
+varying float world_y;
+
+void vertex() {
+	// Calculate the vertex position in World Space so it stays accurate 
+	// even if the mesh moves, rotates, or scales.
+	world_y = (MODEL_MATRIX * vec4(VERTEX, 1.0)).y;
+}
+
+void fragment() {
+	// Default material properties
+	ALBEDO = base_color.rgb;
+	EMISSION = emission_color.rgb * emission_energy;
+	ROUGHNESS = 0.12;
+	
+	float distance_from_ground = world_y - ground_y;
+	// smoothstep converts the range (0, ground_glow_gradient_height) to (0, 1), then outputs where distance_from_ground is in the new range
+	// 1 - smoothstep makes glow_factor 1 at the ground and 0 at/above ground_glow_gradient_height above the ground
+	float glow_factor = 1.0 - smoothstep(0.0, ground_glow_gradient_height, distance_from_ground);
+	
+	// Calculate this new glow and add it to your existing EMISSION
+	vec3 final_ground_glow = ground_glow_color.rgb * glow_factor * ground_glow_intensity;
+	
+	// \"+=\" ensures we don't erase any emission your ice already has
+	EMISSION += final_ground_glow;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mjlqr"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_o02bj")
+shader = SubResource("Shader_on6e6")
+shader_parameter/base_color = Color(0.56, 0.8, 1, 1)
+shader_parameter/emission_color = Color(0.56, 0.8, 1, 1)
+shader_parameter/emission_energy = 0.0
+shader_parameter/ground_glow_color = Color(0.56, 0.8, 1, 1)
+shader_parameter/ground_y = 10.6
+shader_parameter/ground_glow_gradient_height = 2.08165e-12
+shader_parameter/ground_glow_intensity = 3.0
+
+[sub_resource type="Shader" id="Shader_351j3"]
 code = "shader_type spatial;
 render_mode cull_front, unshaded, blend_add;
 
@@ -600,28 +801,72 @@ void fragment() {
 	ALPHA = outline_alpha;
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3qfiy"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6g34a"]
 render_priority = 0
-shader = SubResource("Shader_8g01h")
+shader = SubResource("Shader_351j3")
 shader_parameter/outline_color = Color(0, 0.4, 1, 0.823529)
 shader_parameter/outline_thickness = 0.067
 shader_parameter/outline_alpha = 0.85
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gc1di"]
-next_pass = SubResource("ShaderMaterial_3qfiy")
-transparency = 4
-albedo_color = Color(0.560784, 0.803922, 1, 1)
-roughness = 0.12
-emission_enabled = true
-emission = Color(0.560784, 0.803922, 1, 1)
-emission_energy_multiplier = 0.0
-refraction_enabled = true
+[sub_resource type="Shader" id="Shader_xf5nv"]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+// --- Uniforms ---
+// Renaming base_color to \"albedo\" breaks the color
+uniform vec4 base_color : source_color = vec4(0.56, 0.8, 1.0, 1.0);
+uniform vec4 emission_color : source_color = vec4(0.56, 0.8, 1.0, 1.0);
+uniform float emission_energy = 0.0;
+
+uniform vec4 ground_glow_color : source_color = vec4(0.56, 0.8, 1.0, 1.0); // Molten orange/red default
+uniform float ground_y = 10.6;       // The Y level of your floor (you have to test this by seeing the glow in the level scene)
+uniform float ground_glow_gradient_height = 0.0;    // How far up the mesh the glow extends
+uniform float ground_glow_intensity = 3.0; // Overdrive for the emission (bloom)
+
+// --- Varyings ---
+varying float world_y;
+
+void vertex() {
+	// Calculate the vertex position in World Space so it stays accurate 
+	// even if the mesh moves, rotates, or scales.
+	world_y = (MODEL_MATRIX * vec4(VERTEX, 1.0)).y;
+}
+
+void fragment() {
+	// Default material properties
+	ALBEDO = base_color.rgb;
+	EMISSION = emission_color.rgb * emission_energy;
+	ROUGHNESS = 0.12;
+	
+	float distance_from_ground = world_y - ground_y;
+	// smoothstep converts the range (0, ground_glow_gradient_height) to (0, 1), then outputs where distance_from_ground is in the new range
+	// 1 - smoothstep makes glow_factor 1 at the ground and 0 at/above ground_glow_gradient_height above the ground
+	float glow_factor = 1.0 - smoothstep(0.0, ground_glow_gradient_height, distance_from_ground);
+	
+	// Calculate this new glow and add it to your existing EMISSION
+	vec3 final_ground_glow = ground_glow_color.rgb * glow_factor * ground_glow_intensity;
+	
+	// \"+=\" ensures we don't erase any emission your ice already has
+	EMISSION += final_ground_glow;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_01oh0"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_6g34a")
+shader = SubResource("Shader_xf5nv")
+shader_parameter/base_color = Color(0.56, 0.8, 1, 1)
+shader_parameter/emission_color = Color(0.56, 0.8, 1, 1)
+shader_parameter/emission_energy = 0.0
+shader_parameter/ground_glow_color = Color(0.56, 0.8, 1, 1)
+shader_parameter/ground_y = 10.6
+shader_parameter/ground_glow_gradient_height = 2.08165e-12
+shader_parameter/ground_glow_intensity = 3.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a428p"]
 radius = 1.0
 height = 21.0
 
-[sub_resource type="Shader" id="Shader_y80eb"]
+[sub_resource type="Shader" id="Shader_c5ud7"]
 code = "shader_type spatial;
 render_mode cull_front, unshaded, blend_add;
 
@@ -642,22 +887,66 @@ void fragment() {
 	ALPHA = outline_alpha;
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1qgr0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gurt1"]
 render_priority = 0
-shader = SubResource("Shader_y80eb")
+shader = SubResource("Shader_c5ud7")
 shader_parameter/outline_color = Color(0, 0.4, 1, 0.823529)
 shader_parameter/outline_thickness = 0.067
 shader_parameter/outline_alpha = 0.85
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yivem"]
-next_pass = SubResource("ShaderMaterial_1qgr0")
-transparency = 4
-albedo_color = Color(0.560784, 0.803922, 1, 1)
-roughness = 0.12
-emission_enabled = true
-emission = Color(0.560784, 0.803922, 1, 1)
-emission_energy_multiplier = 0.0
-refraction_enabled = true
+[sub_resource type="Shader" id="Shader_hvkug"]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+// --- Uniforms ---
+// Renaming base_color to \"albedo\" breaks the color
+uniform vec4 base_color : source_color = vec4(0.56, 0.8, 1.0, 1.0);
+uniform vec4 emission_color : source_color = vec4(0.56, 0.8, 1.0, 1.0);
+uniform float emission_energy = 0.0;
+
+uniform vec4 ground_glow_color : source_color = vec4(0.56, 0.8, 1.0, 1.0); // Molten orange/red default
+uniform float ground_y = 10.6;       // The Y level of your floor (you have to test this by seeing the glow in the level scene)
+uniform float ground_glow_gradient_height = 0.0;    // How far up the mesh the glow extends
+uniform float ground_glow_intensity = 3.0; // Overdrive for the emission (bloom)
+
+// --- Varyings ---
+varying float world_y;
+
+void vertex() {
+	// Calculate the vertex position in World Space so it stays accurate 
+	// even if the mesh moves, rotates, or scales.
+	world_y = (MODEL_MATRIX * vec4(VERTEX, 1.0)).y;
+}
+
+void fragment() {
+	// Default material properties
+	ALBEDO = base_color.rgb;
+	EMISSION = emission_color.rgb * emission_energy;
+	ROUGHNESS = 0.12;
+	
+	float distance_from_ground = world_y - ground_y;
+	// smoothstep converts the range (0, ground_glow_gradient_height) to (0, 1), then outputs where distance_from_ground is in the new range
+	// 1 - smoothstep makes glow_factor 1 at the ground and 0 at/above ground_glow_gradient_height above the ground
+	float glow_factor = 1.0 - smoothstep(0.0, ground_glow_gradient_height, distance_from_ground);
+	
+	// Calculate this new glow and add it to your existing EMISSION
+	vec3 final_ground_glow = ground_glow_color.rgb * glow_factor * ground_glow_intensity;
+	
+	// \"+=\" ensures we don't erase any emission your ice already has
+	EMISSION += final_ground_glow;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1spaa"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_gurt1")
+shader = SubResource("Shader_hvkug")
+shader_parameter/base_color = Color(0.56, 0.8, 1, 1)
+shader_parameter/emission_color = Color(0.56, 0.8, 1, 1)
+shader_parameter/emission_energy = 0.0
+shader_parameter/ground_glow_color = Color(0.56, 0.8, 1, 1)
+shader_parameter/ground_y = 10.6
+shader_parameter/ground_glow_gradient_height = 2.08165e-12
+shader_parameter/ground_glow_intensity = 3.0
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pcb0r"]
 emission_shape = 6
@@ -1576,7 +1865,7 @@ transform = Transform3D(0.766045, 0.219846, 0.604022, 2.61259e-08, 0.939692, -0.
 
 [node name="FrontLeft" parent="DressShardMaster/DressShardFrontLeft/Armature/Skeleton3D/FrontLeft" index="0"]
 transform = Transform3D(1, -6.08649e-10, -1.70129e-07, 7.97955e-08, 1, 8.03146e-08, -1.83355e-07, 4.58077e-07, 1, 0, 0, 0)
-surface_material_override/0 = SubResource("ShaderMaterial_shll0")
+surface_material_override/0 = SubResource("ShaderMaterial_pcn7e")
 
 [node name="ClarityShardHurtbox" type="Area3D" parent="DressShardMaster/DressShardFrontLeft/Armature/Skeleton3D/FrontLeft" index="1"]
 transform = Transform3D(0.962033, -0.265623, -0.0627493, 0.272912, 0.933286, 0.233445, -0.00344532, -0.241707, 0.970343, 3.11, -3.826, 4)
@@ -1681,7 +1970,7 @@ visible = false
 transform = Transform3D(0.766045, 0.219847, 0.604023, -5.96117e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990245, 0.15601, -0.548503)
 
 [node name="FrontRight" parent="DressShardMaster/DressShardFrontRight/Armature/Skeleton3D/FrontRight" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_hmp2k")
+surface_material_override/0 = SubResource("ShaderMaterial_anp0j")
 
 [node name="ClarityShardHurtbox" type="Area3D" parent="DressShardMaster/DressShardFrontRight/Armature/Skeleton3D/FrontRight" index="1"]
 transform = Transform3D(0.963931, 0.258358, -0.063925, -0.233347, 0.935906, 0.263873, 0.128002, -0.239439, 0.962436, -3.248, -3.875, 4.013)
@@ -1755,7 +2044,7 @@ transform = Transform3D(0.982278, 0.104528, 0.155578, -0.0949129, 0.993159, -0.0
 transform = Transform3D(0.766044, 0.219846, 0.604023, -2.9111e-08, 0.939693, -0.34202, -0.642788, 0.262002, 0.719846, -0.990243, 0.156014, -0.548502)
 
 [node name="MiddleLeft" parent="DressShardMaster/DressShardMiddleLeft/Armature/Skeleton3D/MiddleLeft" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_uykw5")
+surface_material_override/0 = SubResource("ShaderMaterial_bn55s")
 
 [node name="ClarityShardHurtbox" type="Area3D" parent="DressShardMaster/DressShardMiddleLeft/Armature/Skeleton3D/MiddleLeft" index="1"]
 transform = Transform3D(0.965423, -0.26069, -1.563e-14, 0.26069, 0.965423, -1.36008e-14, 1.86351e-14, 9.05593e-15, 1, 5.4, -5.82, 2.08165e-12)
@@ -1857,7 +2146,7 @@ visible = false
 transform = Transform3D(0.766045, 0.219846, 0.604022, 2.33248e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719846, -0.990239, 0.156015, -0.548505)
 
 [node name="MiddleRight" parent="DressShardMaster/DressShardMiddleRight/Armature/Skeleton3D/MiddleRight" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_vhify")
+surface_material_override/0 = SubResource("ShaderMaterial_mjlqr")
 
 [node name="ClarityShardHurtbox" type="Area3D" parent="DressShardMaster/DressShardMiddleRight/Armature/Skeleton3D/MiddleRight" index="1"]
 transform = Transform3D(0.965473, 0.260504, 3.48787e-16, -0.260504, 0.965473, -3.48787e-16, -4.27605e-16, 2.45884e-16, 1, -5.4, -5.82, 2.08165e-12)
@@ -1944,7 +2233,7 @@ visible = false
 transform = Transform3D(0.766044, 0.219846, 0.604023, -3.27128e-07, 0.939693, -0.342019, -0.642788, 0.262002, 0.719846, -0.990243, 0.15601, -0.548501)
 
 [node name="BackLeft" parent="DressShardMaster/DressShardBackLeft/Armature/Skeleton3D/BackLeft" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_gc1di")
+surface_material_override/0 = SubResource("ShaderMaterial_01oh0")
 
 [node name="ClarityShardHurtbox" type="Area3D" parent="DressShardMaster/DressShardBackLeft/Armature/Skeleton3D/BackLeft" index="1"]
 transform = Transform3D(0.965926, -0.258819, -1.3307e-07, 0.25, 0.933013, -0.258819, 0.0669873, 0.25, 0.965926, 3.8, -6.9, -4.7)
@@ -2049,7 +2338,7 @@ visible = false
 transform = Transform3D(0.766045, 0.219847, 0.604022, -9.71103e-07, 0.939692, -0.34202, -0.642787, 0.262002, 0.719847, -0.990254, 0.156008, -0.548505)
 
 [node name="BackRight" parent="DressShardMaster/DressShardBackRight/Armature/Skeleton3D/BackRight" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_yivem")
+surface_material_override/0 = SubResource("ShaderMaterial_1spaa")
 
 [node name="ClarityShardHurtbox" type="Area3D" parent="DressShardMaster/DressShardBackRight/Armature/Skeleton3D/BackRight" index="1"]
 transform = Transform3D(0.965926, 0.258819, 1.35336e-07, -0.25, 0.933013, -0.258819, -0.0669873, 0.25, 0.965926, -3.8, -6.9, -4.7)

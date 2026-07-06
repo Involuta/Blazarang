@@ -37,3 +37,4 @@ res://glb_inherited_scenes/snowflake_entity_meshes.tscn
 res://cotu/cotu_cb_main.tscn
 res://glb_inherited_scenes/clarity_dress_shards_master.tscn
 res://enemies/clarity_shard_hurtbox.gd
+res://enemies/clarity.gd

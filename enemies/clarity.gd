@@ -594,7 +594,7 @@ func env_autochange_frame(dist_to_cotu: float, delta: float):
 		
 		# Set fog density based on dist from Cotu
 		var min_fog_density := .01
-		var max_fog_density := .3
+		var max_fog_density := .48
 		level_env.fog_density = lerpf(min_fog_density, max_fog_density, cotu_dist_lerp_val)
 		
 		# Repeat the above for sky and fog colors (0 is near, 1 is far)
