@@ -12,7 +12,6 @@ res://shaders/smoke.gdshader
 res://GPUTrail-main/shaders/trail_draw_pass.gdshader
 res://GPUTrail-main/defaults/texture.tres
 res://GPUTrail-main/defaults/curve.tres
-res://enemies/snowflake_link_outline.gdshader
 res://rang/roserang_shader.tres
 res://glb_inherited_scenes/outline.gdshader
 res://glb_inherited_scenes/black_outline.gdshader
@@ -28,13 +27,14 @@ res://glb_inherited_scenes/cotu_outline.gdshader
 res://general_scripts/skygradient.gdshader
 res://glb_inherited_scenes/mite_hills_ground.gdshader
 res://shaders/sobel_outline.gdshader
+res://enemies/snowflake_link_outline.gdshader
 res://enemies/ground_glow.gdshader
 res://enemies/clarity_dress_shard.gdshader
+res://enemies/clarity_shard_hurtbox.gd
 res://enemies/clarity_head.tscn
 res://levels/snow_level/snow_level_test_env.tscn
 res://enemies/ice_sprite.tscn
 res://glb_inherited_scenes/snowflake_entity_meshes.tscn
 res://cotu/cotu_cb_main.tscn
 res://glb_inherited_scenes/clarity_dress_shards_master.tscn
-res://enemies/clarity_shard_hurtbox.gd
-res://enemies/clarity.gd
+res://enemies/enemy_anims/clarity_dressshards_regenshards.res

@@ -46,7 +46,8 @@ func regen():
 	
 	# Make shards glow near ground level as they're pulled out of the ground
 	var t = get_tree().create_tween()
-	t.tween_property(mat, "shader_parameter/ground_glow_gradient_height", 3.0, 0)
+	t.tween_property(mat, "shader_parameter/ground_glow_intensity", 2.4, 0)
+	t.tween_property(mat, "shader_parameter/ground_glow_gradient_height", 3.6, 0)
 	t.tween_property(mat, "shader_parameter/ground_glow_gradient_height", 0.0, 10.0)
 
 func receive_hit(hitbox, hitter):
