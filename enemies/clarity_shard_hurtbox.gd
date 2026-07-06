@@ -3,6 +3,7 @@ extends EnemyHurtbox
 
 var shard_destroyed := false
 var mesh : MeshInstance3D
+var mat : Material
 var hitbox : Area3D
 
 func _ready():
@@ -10,6 +11,7 @@ func _ready():
 	# This is adjusted in code instead of inspector to save time (otherwise I'd have to click into every ClarityShardHurtbox and change all their colors individually)
 	hit_particle_color = Color8(182, 222, 255)
 	mesh = hb_owner.find_children("*", "MeshInstance3D", false, false)[0]
+	mat = mesh.get_surface_override_material(0)
 	hitbox = hb_owner.find_children("EnemyHitbox", "Area3D", false, false)[0]
 
 func death_effect():
@@ -41,13 +43,20 @@ func regen():
 	set_deferred("monitoring", true)
 	hitbox.set_deferred("monitorable", true)
 	health = max_health
+	
+	# Make shards glow near ground level as they're pulled out of the ground
+	var t = get_tree().create_tween()
+	t.tween_property(mat, "shader_parameter/ground_glow_gradient_height", 1.2, 0)
+	t.tween_property(mat, "shader_parameter/ground_glow_gradient_height", 0.0, 3)
 
 func receive_hit(hitbox, hitter):
 	# Glow to dim effect
 	var mat = mesh.get_surface_override_material(0)
 	var t = get_tree().create_tween()
-	t.tween_property(mat, "emission_energy_multiplier", 0.73, 0)
-	t.tween_property(mat, "emission_energy_multiplier", 0.0, 0.6)
+	#t.tween_property(mat, "emission_energy_multiplier", 0.73, 0)
+	t.tween_property(mat, "shader_parameter/emission_energy", 0.73, 0)
+	#t.tween_property(mat, "emission_energy_multiplier", 0.0, 0.6)
+	t.tween_property(mat, "shader_parameter/emission_energy", 0.0, 0.6)
 	super(hitbox, hitter)
 
 func receive_hit_no_hitbox(damage):

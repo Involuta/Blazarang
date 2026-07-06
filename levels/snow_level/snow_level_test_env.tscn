@@ -22,10 +22,10 @@ sky_material = SubResource("ProceduralSkyMaterial_o2vos")
 [sub_resource type="Environment" id="Environment_fxt2w"]
 background_mode = 2
 sky = SubResource("Sky_d33do")
-ambient_light_color = Color(0.56, 0.9, 1, 1)
+ambient_light_color = Color(0.56, 0.8, 1, 1)
 tonemap_mode = 2
 glow_enabled = true
-glow_bloom = 0.6
+glow_mix = 0.954
 fog_enabled = true
 fog_light_color = Color(0.352941, 0.423529, 0.509804, 1)
 fog_sky_affect = 0.6
@@ -63,7 +63,7 @@ size = Vector3(600, 1, 600)
 script = ExtResource("1_w4dpu")
 
 [node name="Clarity" parent="." instance=ExtResource("1_x8ml6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 14.5431, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.5218, 0)
 
 [node name="UIRoot" parent="." instance=ExtResource("1_i7wjo")]
 
