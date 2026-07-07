@@ -38,3 +38,9 @@ res://glb_inherited_scenes/snowflake_entity_meshes.tscn
 res://cotu/cotu_cb_main.tscn
 res://glb_inherited_scenes/clarity_dress_shards_master.tscn
 res://enemies/enemy_anims/clarity_dressshards_regenshards.res
+res://enemies/x_laser_combo_ball_projectile.tscn
+res://enemies/x_boss.tscn
+res://levels/x_boss_level/background_nodes/x_diamond.tscn
+res://globals.gd
+res://enemies/x_teleport_in.tscn
+res://enemies/x_volcano.tscn

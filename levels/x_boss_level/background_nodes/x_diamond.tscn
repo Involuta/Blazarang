@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cs10twlummdtg"]
+[gd_scene load_steps=19 format=3 uid="uid://cs10twlummdtg"]
 
 [ext_resource type="Script" path="res://levels/x_boss_level/background_nodes/x_diamond.gd" id="1_4fbxl"]
 [ext_resource type="PackedScene" uid="uid://bqwo81yvpd1ok" path="res://levels/x_boss_level/background_nodes/diamond.tscn" id="1_oi60u"]
@@ -25,23 +25,19 @@ albedo_color = Color(1.25098, 0.368627, 0, 1)
 metallic = 0.5
 roughness = 0.5
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_38sst"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bulnv"]
 shading_mode = 0
-albedo_color = Color(2, 1, 0.66, 1)
+albedo_color = Color(1.08, 1, 0.66, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_jec7k"]
-material = SubResource("StandardMaterial3D_38sst")
+material = SubResource("StandardMaterial3D_bulnv")
 radius = 0.3
 height = 0.6
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bulnv"]
-shading_mode = 0
-albedo_color = Color(2, 1, 0.66, 1)
-
 [sub_resource type="CylinderMesh" id="CylinderMesh_28v83"]
 material = SubResource("StandardMaterial3D_bulnv")
-top_radius = 0.25
-bottom_radius = 0.25
+top_radius = 0.24
+bottom_radius = 0.24
 height = 1000.0
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_6t0av"]
@@ -527,6 +523,7 @@ transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 2.08165e-12, 0.01, 2.08
 surface_material_override/0 = SubResource("StandardMaterial3D_xia16")
 
 [node name="Bottom" parent="Diamond" index="1"]
+transform = Transform3D(-2.89599e-06, -2.79029e-16, -0.8, 2.7903e-16, 0.8, -2.7903e-16, 0.8, -2.79031e-16, -2.89599e-06, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 surface_material_override/0 = SubResource("StandardMaterial3D_0lssr")
 
 [node name="EyeMesh" type="MeshInstance3D" parent="."]
@@ -536,7 +533,7 @@ mesh = SubResource("CapsuleMesh_jec7k")
 skeleton = NodePath("../..")
 
 [node name="LaserMesh" type="MeshInstance3D" parent="EyeMesh"]
-transform = Transform3D(0.01, -6.97574e-16, -3.04919e-25, 0, -4.37114e-08, 0.01, -6.97574e-18, -1, -4.37114e-10, 2.08165e-12, 2.08165e-12, -500)
+transform = Transform3D(1, -6.97574e-16, -3.04919e-23, 0, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 2.08165e-12, 2.08165e-12, -500)
 visible = false
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_28v83")
