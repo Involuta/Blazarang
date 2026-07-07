@@ -44,3 +44,5 @@ res://levels/x_boss_level/background_nodes/x_diamond.tscn
 res://globals.gd
 res://enemies/x_teleport_in.tscn
 res://enemies/x_volcano.tscn
+res://glb_inherited_scenes/x_boss_meshes.tscn
+res://enemies/x_head_recovery.tscn

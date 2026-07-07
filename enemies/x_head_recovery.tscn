@@ -4,7 +4,7 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dk2pf"]
 shading_mode = 0
-albedo_color = Color(1.5, 1.5, 1, 1)
+albedo_color = Color(1.04, 1.04, 1, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_h2kxi"]
 material = SubResource("StandardMaterial3D_dk2pf")
@@ -13,7 +13,7 @@ height = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3f04o"]
 shading_mode = 0
-albedo_color = Color(1.5, 1.5, 1, 1)
+albedo_color = Color(1.04, 1.04, 1, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_wvmy3"]
 material = SubResource("StandardMaterial3D_3f04o")

@@ -26,7 +26,7 @@ inner_radius = 0.7
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bulnv"]
 shading_mode = 0
-albedo_color = Color(1.08, 1, 0.66, 1)
+albedo_color = Color(1.06, 1, 0.66, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_8frlv"]
 material = SubResource("StandardMaterial3D_bulnv")
@@ -188,7 +188,7 @@ tracks/7/path = NodePath("TPColumn:scale")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.266667),
+"times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(3, 50, 3), Vector3(0.5, 50, 0.5)]
@@ -200,7 +200,7 @@ tracks/8/path = NodePath("TPColumn:transparency")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 0.133334, 0.266667),
+"times": PackedFloat32Array(0, 0.133334, 0.25),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 0.0, 1.0]
