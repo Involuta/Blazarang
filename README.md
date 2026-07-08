@@ -1,4 +1,4 @@
-Blazarang Ideas Doc Backup Jun 15 2026
+Blazarang Ideas Doc Backup Jul 8 2026
 
 Production Processes
 
@@ -318,8 +318,6 @@ Center of the bowl goes to another level segment
 
 
 
-
-
 Boss Progression Tree
 
 Version 1: Everyone Is Isolated, Goal is to Train Cotu
@@ -341,7 +339,7 @@ Primarily running
 Dodging is useful but optional
 Positioning: 1
 Stay away from melee enemy threat ranges
-Not very strict since all attacks are easily strafed or backed (“backed” = dodged by backing away from enemy)
+Not very strict since all attacks are easily strafed or spaced (“spaced” = dodged by backing away from enemy)
 Aim: 1
 Very little precision is necessary since targets are everywhere
 Grounded aim is occasionally helpful against shields and gunners
@@ -350,7 +348,7 @@ DPS: 1.5
 Optimal DPS is irrelevant since enemies have low health. The only exception is when the miniboss spawns, where it’s best to kill it before additional enemies spawn. Miniboss + enemies is challenging, but not super challenging since keeping distance from the enemies is so effective
 X: 9/20
 Evasion: 2
-Much running
+Lots of running
 Some dodging is necessary
 Positioning: 2.5
 Stay away from his melee threat range. Dangerous but not fatal since you can dodge
@@ -362,16 +360,17 @@ Good grounded aim is necessary since there’s only 1 small target, but you can 
 Homing is helpful and makes a good difference
 DPS: 2.5
 Optimal DPS is necessary or else you won’t finish him by the end of the time limit
-Clarity: 10/20
-Evasion: 3
+Clarity: 12/20
+Evasion: 3.5
 Running is useless
-Well timed dodges of her arm and her minions are necessary
-Positioning: 2
+Well timed dodges of her arm, dress shards, and minions are necessary
+Positioning: 3
 Stay in the narrow safe ring between the outer blizzard and her head snowfall. She largely does this on her own since she circles around you
 Stay away from her minions’ snow clouds
+Avoid her dress shard combos; this would be rated higher if not for the fact that you can stun the snowflake to stop the combos
 Aim: 3.5
 Requires precise aim and timing to hit her small weak spot right before her attack. You cannot rely on grounded weapons sweeping the area since the weak spot’s too high up
-Head is moving a bit, but not very much
+Head and snowflake are moving, but they’re slow and well within throwing range
 DPS: 2
 Optimal DPS is important since, if you take too long, the blizzard safezone disappears. This isn’t as urgent as X’s time limit; whereas with X the fight immediately ends, here you can regenerate with stabilizers even when the blizzard is constantly dealing damage
 Optimal DPS isn’t as emphasized because the fight wants you to take your time, be patient, and wait for the perfect opportunity to attack. BUT if the time limit were abandoned entirely, the player would probably be confused and feel like the game’s inconsistent
@@ -2831,8 +2830,9 @@ Make Backflip anim
 Code mvmt
 Add backflip to anim tree
 Add snow cloud to hide Clarity when she hits the ground
-After testing, I don’t like how big the mvmt is for Backflip. It doesn’t feel like Clarity. She’s supposed to have slower mvmts broken up by sudden small outbursts, and when she does do big mvmts, she should slowly accelerate into them, not go from stationary to full speed instantly like in the Backflip. This sudden acceleration implies that she has speed/mvmt capability that she should not have, and it makes her feel more like X than herself
+After testing, I don’t like how big the mvmt is for Backflip. It doesn’t feel like Clarity. She’s supposed to have slower, suspenseful mvmts broken up by sudden small outbursts, and when she does do full body mvmts, she should slowly accelerate into them, not go from stationary to full speed instantly like in the Backflip. This sudden acceleration implies that she has speed/mvmt capability that she should not have, and it makes her feel more like X than herself
 After some more testing, I actually kinda like how the Backflip looks. Give it a while before coming back to the Backflip before making a final decision
+My final decision is that Backflip does look good, but it doesn’t suit her character, feel, or gameplay
 Implement LongSlice
 Implement FlickSlice
 Re-add arm hitbox and tiny particles since they got accidentally deleted with the DoubleSlice rework
@@ -2853,7 +2853,7 @@ Add functional keyframes to RegenShards
 Mvmt and attack status
 Head tilt/glow
 Hurtbox is vulnerable
-Rethink how Clarity’s combat should play out
+Rethink how Clarity’s combat should play out (highlighted so you can return to this later)
 After testing, I realized that the core gameplay loop involved repeatedly switching my attention between Clarity and the ice sprites, which felt similar to switching between the doors and the camera in Five Nights at Freddy’s. This also made me realize that the arm rising was the most important telegraph for an upcoming attack. The head was not as useful bc it glowed too soon before the attack. As a result, FlickSlice and LongSlice (as they are now) are conceptually counterintuitive to the core gameplay loop. If the player happens to be focused on the sprites, the quick/sneaky attacks will likely catch the player off guard, which feels unfair due to the lack of telegraphing.
 To put the issue above another way, look at the core gameplay loop below. FlickSlice sneakily moves the arm in its startup and LongSlice raises the arm quickly. Both of these attacks don’t give the player enough time to prepare to dodge or prepare to hit the head bc they’re still in ice sprite/dress mode
 Here’s the core gameplay loop I think I should emphasize, which should feel fair and challenging:
@@ -2864,7 +2864,7 @@ Player switches back to looking at ice sprites and hitting the dress shards (whi
 2 potential problems with the above loop:
 Boring: attacking the enemies and the legs is really simple and easy
 Unfair. When Clarity attacks, she demands your full attention, and if there just happens to be an enemy nearby, you’re screwed
-After testing, come back to the problems above and see if they’re still present
+After testing, come back to the problems above and see if they’re still present → they are
 Potential solutions:
 When Clarity gets staggered, a shockwave rings out that instantly kills all nearby ice sprites
 Periodically, body shards do their own attacks that challenge the player’s positioning instead of just timing (e.g. projectiles parallel to ground, stabs into the ground to create frost fields)
@@ -3088,17 +3088,116 @@ Dim snowflake
 Add stagger state to anim tree
 Make stagger anim close snowflake’s eye
 Ensure that only player hits > Clarity stagger threshold cause snowflake to stagger
-Current task
-Idea: snowflake shoots projectiles far into the distance that become ice sprites
-Idea: snowflake shoots projectiles OR a continuous plume of snow (like Clarity’s body snow clouds) directly at the target
 Give dress shards med-to-high defense to communicate that it’s not optimal to hit the dress shards the whole time
-Hit particle effects
-Clarity head stagger
+Defense subtracts from hitbox dmg
+My first idea for defense was to make it absorb a percentage of dmg taken instead of a constant, but then I realized it doesn’t make sense for defense to absorb a lot more damage for bigger hits
+Dmg taken = max(hitbox dmg - defense, 1)
+Additional particle and glow effects
+Create long hexagon particles
+Tiny snowflake particle burst (made it, but not sure I wanna keep it)
 Snowflake entity stagger
+Hexagon particles spawn periodically in a wide sphere around snowflake and slowly radiate out
+Tiny snowflake particle burst
+Change the above to just hexagon particles bursting out
+Clarity head stagger
+Hexagon particles spawn periodically in a wide sphere around snowflake and slowly radiate out
+Tiny snowflake particle burst
+Change the above to just hexagon particles bursting out
 Dress shard normal hit
+Glow effects (glow bright, then dim)
+Particles (no more liquid splash, but snow/ice bits)
+Snowflake link particles (or something else that shows that the snowflake has linked itself to a dress shard)
+When a snowflake shard fully extends, a dot (“snowflake link particle”) appears at the tip of the shard. This dot travels from its spawn location to the front of its corresponding dress shard
+Each dot is a node3D initially located at the position of its fully extended tip
+In each telegraph anim, when a snowflake shard fully extends, the dot is set to visible and moved via position keyframes from its current location to its location on Clarity’s dress
+OR an equivalent dot appears on Clarity’s dress at the same time as the snowflake dot. This solution is better bc when the snowflake dot is set to visible and it starts moving on the same frame, it’s hard to tell that the dot’s even on the snowflake in the first place
+After implementing the above, the dots look weird and break immersion when they’re drawn in front of everything else. Even if they’re not drawn in front of everything else, they still don’t really communicate the link between the snowflake and the dress shards bc they appear and disappear (on both the snowflake and dress) too quickly for the player to really think about and understand what they’re supposed to mean, which makes them feel random
+To mitigate how unnoticeable they are, perhaps change the highlight/outline color of the shards on both the snowflake and shards instead of using tiny hard-to-see dots
+Give linked snowflake and dress shards a faint blue highlight, outline, or glow, which is much clearer than the tiny link particles
+Make a shader material and put it on all dress shard meshes as a next pass (instead of the current cartoon shader)
+In DressShard class, make a new link_to_snowflake_hit func. In it, set the link state and tween the shader parameters over time to make the outline materialize (increase opacity and shrink around the shard)
+Also in DressShard class, make a new unlink_to_snowflake_hit func. In it, set the link state and tween the shader parameters over time to make the outline disappear (either expand the outline outward and make it disappear, or simply shrink it so it’s a subtle outline
+Put shader material on snowflake shards
+In the Clarity func (not the DressShard func) that links a shard to snowflake, also make the outline materialize on the corresponding snowflake shard
+Update unlink all shards to dematerialize/shrink snowflake shards
+Remove old link particles (but keep the stagger particles that come from hitting the snowflake)
 Dress shard snowflake link hit (more particles)
-Dress shards glowing to show that they’re now linked to the snowflake entity
-Dress shards stop glowing when snowflake entity locks in the attack and unlinks all shards
+Add a GPUParticles3D node to all dress shard link particles, and make the particles emit when stagger occurs
+Dress shards also light up when snowflake link hit lands
+After testing, I realized that it’s hard to tell that the dress shards take damage when the snowflake is hit bc when the player hits the snowflake, their camera is zoomed into the snowflake, so the dress shards are out of frame. To make matters worse, the player is probably also looking at/thinking about Clarity’s head/shoulder to know whether they’re in immediate danger of a slice, giving another reason to not look at the dress shards and thus not know that they take damage when the snowflake does. Perhaps it’s better to simplify things by making the snowflake simply link to Clarity’s health
+On the other hand, the snowflake linking more and more shards as the telegraph anim progresses poses a unique and interesting challenge for the player; get greedy and damage more shards, or play it safe and stun the snowflake so that you’re safe from the next attack. Although it’s not easy to notice that the dress shards take damage when the snowflake is hit, there are 2 things that can help quite a bit with that: reduce the zoom in distance when aiming, and make a unique sound when the dress shards are hit by a snowflake link hit
+Reduce the zoom in dist and make zoom in over-the-shoulder again like in The Legend of Zelda: Breath of the Wild
+Regen shards’s likeliness of being chosen as an attack increases the more shards are destroyed
+Note: since regen shards uses both the arms and dress shards, it should only be chosen when both the snowflake and main body are in neutral state, making regen shards even rarer (which is a good thing; it should happen rarely)
+Regen shards is chosen by queue_arm_attack. In queue_arm_attack, a new attack_chances dict is made that contains the arm_attack_chances sfet in the inspector combined with a new local var regen_shards chance, which is determined by math and the regen_shards_max_chance set in the inspector
+Regen shards chance is a number in range (0, regen_shards_max_chance). Each destroyed dress shard increases regen_shards_chance by ⅙*regen_shards_max_chance → regen_shards_chance = num_of_destroyed_shards * regen_shards_max_chance / 6
+regen_shards_chance is partially subtracted from every chance in arm_attack_chances → for attack, chance in arm_attack_chances, make a new entry in a new attack chances dict (“all_chances”) where all_chances[attack] = chance - regen_shards_chance / float(arm_attack_chances.size())
+After the for loop, new attack chances[“RegenShards”] = regen_shards_chance
+Regen shards chance is being calculated directly, but all chances ends up adding to > 1. Why is this?
+Turns out I forgot to remove RegenShards from arm_attack_chances. arm_attack_chances isn’t supposed to contain it under this new system
+Before working any further on RegenShards, re-examine the relationship btwn the snowflake, head, and dress, and consider whether everything makes sense. Also fill in any gaps in knowledge
+Hit snowflake to damage dress shards and stop dress shard attack (+ slight Clarity damage)
+Hit head to damage Clarity herself and stop arm attack
+Why is the damage received from the snowflake and head inconsistent? Currently, it’s because the snowflake is used primarily to damage dress shards, which leads to RegenShards, which allows the player to attack the head. Instead of being its own hurtbox for Clarity, it leads to Clarity’s head hurtbox. → Okay, so why does it damage Clarity at all? So the player doesn’t feel like they’re missing out on damaging Clarity by going for the snowflake. The player essentially gets constant progress on the boss healthbar regardless of whether they target the snowflake or head. This does create an additional source of dopamine/uptime, but it comes at the cost of being confusing and unintuitive during initial learning (“Why does hitting the snowflake also hit the boss? Bigger question, why does hitting the snowflake deal so much less damage than hitting the head? Should I be targeting the snowflake instead of the head?”), which would create a bad first impression of the fight and greatly reduce subsequent dopamine hits
+Simplify the fight and emphasize the snowflake process (snowflake → dress shards → head) by removing snowflake’s damage to Clarity
+What’s stopping the player from just using homing attacks on the head and snowflake? That’s the way the player’s been taught to deal with high targets thus far → nothing; the player should use homing attacks to hit high targets. However, I’ve only tested Clarity thus far with manual aim; do homing attacks break the balancing of the level? Let’s look at each case individually
+Power throw → balanced bc it must be aimed and timed
+Ax throw → balanced bc it’s mechanically equal (or almost equal) to power throw
+Homing instant rethrow → test this (I’m leaning balanced bc you have to aim it to some degree) → it’s balanced bc it’s hard to time several instant rethrows in a row simultaneously while aiming
+Currently, the homing instant rethrow doesn’t need to be aimed at all; it just autotargets the nearest target. Change it so that the enemy has to be within your aiming cone like mark placement, and make the targets get sorted by their proximity to the screen’s center (i.e. by the dot product of the cam to target vec and the cam fwd vec)
+After implementing and testing, it turns out that homing instant rethrow is sensibly balanced for this fight, but not just because you have to aim it; it’s because you have to time it. Timing several instant rethrows in a row is difficult when you’re also concentrating on Clarity, the snowflake, and the enemies, so sustaining your instant rethrow chain until the snowflake is vulnerable and aiming the camera so that the snowflake’s in the center and thus most likely to be targeted is understandably difficult. Also, aside from easier aim, the biggest advantage homing attacks have over manual aim attacks is damage, but since the snowflake and Clarity’s head are only vulnerable for a single hit, any manual throw is at least as effective as a homing hit. This satisfies my goals for the gameplay; I didn’t want the player to fight Clarity the same way they’d fight any other aerial enemy (by using homing instant rethrow). I wanted the player to manually and carefully aim and throw, so the fact that manual aim is actually the most effective tactic here is the best case scenario for the gameplay I’m intending
+Homing special → balanced bc you have to build up buffs and time a button press, and its damage <= the damage of a manual throw
+In conclusion, the Clarity fight doesn’t need to be changed at all to nerf homing attacks bc manually thrown attacks are at least as effective as them
+It’s difficult to determine what the snowflake will do during RegenShards, and it may be easier to visualize different options after implementing RegenShards non-snowflake functionality, so do that first
+What will the snowflake do during RegenShards? One of its primary gameplay purposes is to (eventually) make the head vulnerable, so making the snowflake a target (and thus taking attention away from the head) seems counterintuitive. Should it do nothing during the regen? Or defend the head?
+What is it required to do?
+Not do its usual rotation, which would imply that a dress shard attack is coming
+Idea: snowflake spawns ice sprites or shoots a snow plume at the target periodically
+Regen shards functionality (aside from snowflake anim during RegenShards)
+Dress shards perform RegenShards anim
+After looking at RegenShards again, it appears to have a sudden start, which doesn’t fit Clarity’s slow mvmt. Change the anim to have a slow start
+Is it easier to recreate RegenShards in ClarityDressShards Blender project or make Clarity (aka ClarityArmMeshes in Godot) fully visible + make her dead shards invisible? I currently think the latter
+Write func that makes ClarityArmMeshes visible but all dead dress shards invisible
+RegenShards is only chosen as an arm attack when dress shard anim isn’t playing and snowflake is in neutral state
+Snowflake is in neutral state when anim tree’s state machine playback’s get_current_node() == “RotateSlow”
+Make RegenShards and Staggered share a new behav state: STOP
+When RegenShards is chosen as an arm attack, behav state is set to STOP so that no arm attacks are chosen during the anim. Switch_to_stopped is not called since that calls the Stagger anim (for now)
+RegenShards calls end_arm_attack at the end to switch back to circling
+Make func to regenerate dress shards (calls regen func for each DressShards object)
+Make sure snowflake doesn’t trigger a dress shards anim during RegenShards. Recall that snowflake anims are controlled automatically by tree transitions, not through code
+Make snowflake do a temporary test anim during RegenShards. Replace this anim later
+Shard visibility logic
+Arm meshes becomes visible, but the shards in arm meshes corresponding to dead dress shards are kept invisible. At the same time, all dress shards die to become invisible (so they’re not seen stationary during the anim) and invincible
+Why do dress shards need to be invincible? So that if a dress shard is destroyed during RegenShards, I don't have to make the corresponding shard in arm meshes become invisible. Note that this isn’t an issue if arm meshes is never visible
+Arm meshes dress shards all become visible underground
+At end of anim when Clarity returns to base pose, arm meshes dress shards become invisible and dress master dress shards regenerate (regen_dress_shards)
+After implementing shard visibility logic, I think that having both arm meshes dress shards and dress master dress shards be visibly used in the same anim creates needless complexity. I think recreating RegenShards in the ClarityDressShards Blender project is simpler now. What is the new visibility logic? Dress shards regenerate underground → that’s it
+Create RegenShards in ClarityDressShards Blender project → turns out this is super easy since the rigs are the same across both projects; simply use Append
+Update the code and anim keyframes to use dress master dress shards
+Update switch_to_stop so that it doesn’t play the arm stagger anim nor sets velocity. It only changes behav and look states. The on_head_hit func should call switch_to_stop, then play the arm stagger (and not set vel either; that should be done by the anim callback keyframes since it’s not related to state and related to visual mvmt). When RegenShards is chosen as an arm attack, the code should also call switch_to_stop
+Head is continuously exposed until anim ends
+Visual effects
+Snow particles when shards penetrate into ground
+Shader that makes shards glow brightly near ground level
+Fix bug where a snowflake link hit can stagger the head
+Snowflake hits no longer damage the head; this makes things simpler for the player bc now there won’t be the confusion of why snowflake hits also damage Clarity
+Fix bug where dress shards have functional hitboxes and hurtboxes when destroyed
+Toggle hurtbox collision by setting monitoring. You could have moved the hurtbox under the map like you do with mites when they die, but toggling monitoring to false is easier to code
+Toggle hitbox collision by getting a reference to the hitbox in the hurtbox script, then setting the hitbox’s monitorable property
+Current task
+Snowflake anim during RegenShards
+Snowflake invulnerability anims
+Idea: make face plate spin on the y axis when hit by a projectile while invulnerable
+Currently, this doesn’t work bc the face plate is right behind the central eye’s spikes. This could work if the central eye’s spikes could detach and move outward, allowing the face plate to spin
+Add shrinking outline onto face plate when it’s vulnerable
+Add Jump Shot to moveset
+Animate snowflake in jump shot
+Remove RaiseLeftSliceFast and RaiseLeftFast since Clarity must infuse the arm with energy before moving it quickly, and she shouldn’t infuse the arm just to lift it quickly
+Add effect where head covers arm in snow and/or infuses it with glowing energy
+This is to answer the question: why does Clarity expose her head’s weak spot right before she swings if it provides no clear advantage to her? Neil asked this when introduced to Clarity for the first time. The answer is that the head gives the arm its high velocity. When the arm raises, it’s slow bc it has no infused energy yet
+Make dress shards emit a sound when hit by a weapon and a different sound when hit by a snowflake link hit
+Idea: make arm infusion attacks where the arm swing leaves behind a continuous cloud of deadly fog like the fog from enemies
+Idea: snowflake shoots projectiles OR a continuous plume of snow (like Clarity’s body snow clouds) directly at the target
 (Skip if you think it’s not relevant for now) Implement Phase 1
 Body is a 3D snowflake with many branches
 Concept art from ChatGPT (note that this looks more flat than what the snowflake should be)
@@ -3131,6 +3230,10 @@ Idea: phase transition
 Clarity causes a huge whiteout, brightens the sky, and runs away. The player has a limited amt of time to find her before the sky begins to darken and the snow intensifies. When the sky gets too dark, the blizzard is reactivated. Somewhere in the snow, Clarity is in a tall sceptre form. The player must hit her head, which sits at the head of the staff, to deactivate the attack
 Idea: occasionally, songbird-like ice creatures will fly onto Clarity and stare at the target. They all fly away when she attacks, but there’s a slight chance they fly away beforehand to explore around
 Idea: Cotu can make snowballs and throw them with no stability cost (but making a snowball isn’t fast). Hitting an ice sprite with a snowball triggers its explosion
+
+Remove SFX from Roserang since it should be present in hurtboxes
+
+Add UI icon or crosshair to show how close to the center of the screen a target needs to be in order for homing instant rethrow to target it (like what Soldier 76’s ultimate does)
 
 Reconsider whether the player should be able to restabilize during the invincibility period after destabilization
 Currently, if the player destabilizes, there’s absolutely no skill involved in restabilizing. If you use a stabilizer during the invincibility period, you’re right back to normal. Wouldn’t it be more thrilling and challenging if the player had to wait until they were vulnerable again before being able to use a stabilizer?
@@ -3193,8 +3296,15 @@ Chakrams deal high damage, but cannot be buffed
 Chakrams are finite. They recharge automatically like consumable abilities in Overwatch or Marvel Rivals. As soon as a chakram recharges, it deals self stability damage, but it costs no stability to throw them. Hold the throw button to autothrow them
 Hitting a stationary ax causes a massive explosion
 
+Gauntlet enemies light up like Clarity’s dress shards when you hit them
+Tween their materials’ emission property
+
 Power Throw to Mark Rang Upgrade
 Power throw automatically homes to mark position when mark is active
+
+Revisit Mites
+Try making them flat and round like real mites instead of having the pointed high butt
+Make them too short to be hit by the rose
 
 Revisit and Complete Balls Level (maybe, if you believe it’ll add more value to the gameplay)
 Make Ball Walker more crazy and dangerous
@@ -3313,26 +3423,21 @@ Once the enemy has been in the circle long enough, an effect plays and the circl
 While aiming, Cotu holds his icon in front of him with one hand and holds the mark in his other hand. The hand/arm positions are reminiscent of a bow and arrow, but his hands are open
 Idea: mark starts out as a plumbata, then gets upgraded to become a spear eventually
 
-Items
-Shop has a menu of items
-Shop window
-Menu
-All item placeholder textures
-Selected panel (item panel or level panel) is highlighted in some way
-Items can be used in a level for an effect
+Stabilizer anim
+Animation: a ball revolves around Cotu while decreasing its orbital radius and rising above him over time, settling directly above his head. It then slams into his head
+
+Unlockable Skill: temporary buff item that recharges every time you rest or respawn, like the Flask of Wondrous Physick from Elden Ring
 Icon Shockwaves
 Temporarily, when the roserang hits the icon, a shockwave bursts from the icon
-Stabilizer (health potion)
-Use item animation placeholder
-Item effect implemented
-Animation: a ball revolves around Cotu while decreasing its orbital radius and rising above him over time, settling directly above his head. It then slams into his head
-Chaos (chaos potion)
-Temporarily, every hit puts a mark on the enemy’s current health after dealing damage. The enemy is unable to heal past the chaos mark
-Use item animation placeholder
-Item effect implemented
 Super Stabilizer: restores all stability and makes you invincible for a short period of time
 Multirose: temporarily allows you to have up to n (3?) roserangs
 All rangs still consume stability unless you consume a Super Stabilizer
+
+Mia (pronounced “my-ah”) the Mite Queen
+Inspired by Susan, the silly, loud, laid-back middle-aged Australian lady who plays pickleball with my family
+Fights in Gauntlet Gym 1 for fun, not for serious competition
+Line idea: “If you want serious, fight them. If you want fun, fight me.”
+She asked a babysitter to take care of her realm while she fights here. Unbeknownst to her, the mites captured her babysitter and are causing chaos in a huge area. When the player encounters the mites, the player should feel the desire to go back to Gauntlet Gym 1 to ask Miya to get her kids under control, and possibly hijinks ensue (e.g. she’s nowhere to be found and Cotu has to gather breadcrumbs to find her)
 
 Grow-a-Gator
 Fast giant alligator with the ability to grow and shrink
@@ -3378,9 +3483,9 @@ Party Pillars
 Arena consists of a ton of small pillars and one giant pillar in the center with flashy people dancing on it
 One big dancer in the center does dance moves corresponding with movement patterns of the pillars below (e.g. arm/leg mvmts left → all pillars move to the left, spin → all pillars rotate)
 
-Future Blade
-Large swordsman with robber fly motif; long wing-like cloak threads/scarves and long snout
-Idea: scarves have eyes on them that glow before an attack
+Future Blade Boss
+Tall, skinny swordsman with robber fly motif; long wing-like cloak threads/scarves, long snout, long fake antennae on back of his head like Trobbio from Hollow Knight Silksong, and short stubby real antennae on his forehead
+Moves in sudden bursts of speed like an insect, even in casual settings (although with less speed)
 Does huge slashes and moves in quick, long dashes, but has “before-images” that show what he’s going to do a while before he does it
 Moves so frequently and quickly that the lingering before-images make it look/feel like several enemies are fighting you
 Only shows before-images when the sword is unsheathed and in his hands
@@ -3391,18 +3496,86 @@ After sending out a before-image, FB can change his mind and do something else, 
 Has a wide variety of dash slashes and a few tricks
 Sword throw: FB throws his sword, then dashes over to catch the sword. This creates 2 before-images: one that lasts from the windup of the throw to the exact moment where it leaves his hands, and one that starts when he catches it and ends when he either sheathes the sword or does his next attack
 Lie Double Slash: FB dash slashes from a position with both a real dash slash and a lie dash slash
+Phase 2: FB transforms even more into a robber fly, discards some of his fashion, grows wings and possibly exposes an additional pair of limbs, and becomes even faster and generates even more images. He also coats his sword in paralyzing venom using his beak
+Phase 2 attacks:
+Pocket glitter: FB scoops some glitter from inside his cloak and throws it forward in a short, small burst in front of him. Similar area to Owl’s item disabling cloud from Sekiro: Shadows Die Twice, but with longer and wider forward coverage. If Cotu is hit, he receives the temporary glitter debuff, which makes real and fake before-images look nearly identical and makes sparkles appear chaotically all over the screen (not the environment; the sparkles act as if they’re directly on the camera lens)
+Flying thrust: FB sometimes flies up into the air and dive thrusts to the ground to attack. This creates a before-image in the air with FB’s wings exposed . Hitting a wing is one of the only ways (or the only way) to damage FB in phase 2
+Tackle: FB sheaths the sword and flies directly at the target to tackle it with his robber fly legs. Since the sword is sheathed, FB creates no before-image but moves much more slowly. Upon landing the tackle on Cotu, a grab animation plays where FB injects Cotu with his venomous beak
+Idea: FB grows an extremely durable exoskeleton. The only way to damage FB is to hit him in midair while his wings are exposed. This is most likely to occur when FB shows a before-image in flight with his wings wide open
+Idea: chats with friends while waiting for you to challenge him. Conversations are long and organic; they’re the type of conversation you’d hear between girls in public and want to eavesdrop on
+FB: smart, toxic, and responsible. Sassy
+Miss Serpentine (a snake): dumb, well-meaning, and responsible. Gentle
+Flora (flower girl in a pot of dirt): semi-smart, toxic, and irresponsible. Smooth
+Conversation ideas:
+Future Blade’s name
+FB is undecided on his name and everyone brainstorms what it should be
+FB mentions that in another conversation about his name (he thinks it might have been gauntlet gym 2), some random guy came out of nowhere and suggested a dumb name, butting into the conversation awkwardly. This was actually whipspider/crab, whom the player had met before. FB makes fun of his appearance and demeanor and the girls laugh. MS laughs slightly less and a bit differently compared to the others. They also make fun of the name he suggested and they all laugh loudly (e.g. “FUBA!!! AHAHAHAHA!!!”)
+Flora comments that they’re all dumb for laughing this much about the name. Flora mentions that people in Korean TV shows on the Internet need alcohol to get this dumb
+FB asks everyone if they’d drink if they could get drunk
+Flora says she’d drink out of her mind and become an alcoholic. She chants: “Go crazy! Go stupid! Go crazy! Go stupid!” MS begs her not to. FB agrees with Flora, and they both chant: “Go crazy! Go stupid!”
+MS whimpers and vows to never let FB and Flora become alcoholics. FB remarks that MS would have to pry the bottles out of his 6 cold dead hands
+Future Blade talking with X
+FB: “...So I talked with X recently…”
+Flora: “STOP.”
+MS: “No, go on! What’d you guys talk about?”
+FB says they made small talk and eventually sparred together. Afterward, X told FB that he respects him as a fighter. FB enunciates this like it’s a huge deal
+Flora: “That’s it?”
+FB: “AND, he said I’m a ‘wise tactician.’”
+Flora: “...girl.”
+FB: “Now I know it doesn’t sound like much, but X doesn’t compliment people, so for him to say all this, maybe it means…something else, you know?”
+Flora: “...girl, he does.”
+FB: “Does what?”
+Flora: “Give out compliments. He does that to everyone he trains with.”
+FB: “WHAT THE HELL?”
+MS: “Really? I always thought he was kinda scary.”
+Flora: “You guys totally won’t believe me, but he’s actually a really nice guy. I haven’t seen him around the gyms, like, super often, but whenever I see him, he’s always kind and respectful. I’ve never seen him say anything mean to anyone, just to be mean. It’s always like, constructive criticism.”
+FB: “So what was up with that whole tough guy persona he had during the tournament?”
+Flora: “That was just to hype up the crowd for his fights, but that’s not who he is in real life. Have you ever even talked to him outside of this one conversation?”
+FB: “...oh my god. Oh my GOD.”
+MS: “What’s wrong Foobie? Shouldn’t you like him even more now? I know I do!”
+FB: “Girl, I thought he was toxic like me! How am I supposed to relate to him now?”
+…
+Note: After overhearing the part of the conversation where Flora says X is nice, the player can confront X about it at the gala. X says that he has to be nice for people to want to train with him, and it’d be stupid to be mean to everyone. He can only be himself around you and his closest friends, and in the arena, when he talks to the crowd. What’s left out of his explanation is the fact that in the gyms, he’s Tempered X, who has a more gentle personality. The player can infer this themself
+Everyone talking about Cotu
+Subtext: in this case, Cotu didn’t choose to lose his powers, and the way that he lost his powers is shrouded in mystery
+Everyone speaks in more hushed tones
+MS: “I mean, it wasn’t his fault, right?”
+FB: “We don’t know that for sure. We don’t know anything. He didn’t make anything public.”
+Flora: “I heard one of the gods did it.”
+FB: “What? Which one?”
+MS: “Is that even possible?”
+Flora: “Okay, don’t tell him I told you this, but,” she scans around the room and notices Cotu has respawned. “Shit, he’s here.”
+FB raises his voice: “Oh my god, Snakes, you have got to tell us about…what it’s like to be part of a hive mind.”
+Miss Serpentine talking about what it’s like to be part of a hive mind
+
+
+Everyone talking about the idea of adding weight divisions to the gala
+
+
+Misc ideas:
+FB tells Flora to shut up before he tips over her pot
+MS giggles at something
 Lore/story ideas:
 Is a high-level contender
 Zesty, sparkly, clearly put effort into his own visual design
-Jealous of all other fighters because his attacks are telegraphed the most
-Line idea: “Ugh, I’m just…so jealous, of, like, literally everyone who isn’t me, ‘cause, like look at this.” He swiftly raises his blade right in front of Cotu, which gets telegraphed with a before-image
-Compensated for his telegraphing by improving his speed and precision greatly
-Idea: kidnaps Cotu and other top contenders to prevent them from training and/or competing in the next tournament
-I decided that Candy Cat fits the devious/predator aesthetic more
+Observant and has high fight IQ; frequently comments on his and others’ combat capabilities and strategies, often sassily. Others often come to him for advice, and he’s looked up to as a great coach
+Line idea: “When I see people train, I have a tendency to just, like, tell them whatever I’m thinking, and I think they’re confusing it for coaching. Now people keep coming to me for advice, and like…don’t get me wrong, it feels nice to help, but like…*sigh*...sometimes they bite my ankles.” (referring to Grow-a-Gator)
+Rolls his eyes (metaphorically and literally) at Cotu bc Cotu’s weapon is overpowered
+Jealous of all other fighters because his attacks are telegraphed the most. Leads to self doubt
+Line idea: “Ugh, I’m just…so jealous, of, like, literally everyone who isn’t me, ‘cause, like look at this.” He swiftly raises his blade and dashes right in front of Cotu, which gets telegraphed with a before-image
+Convo idea:
+FB: “*groan* I have so many bad habits. I talk too much, I’m too honest too fast, I say ‘like’ too often and it’s like…damn, look, it’s…do I just suck at life? Am I just dumb?”
+Cotu: “No, of course not. You’re one of the smartest people I know.”
+FB: “*sigh* people keep telling me that, but I know they’re all wrong because I know I’m stupid. But wait, if I’m stupid, doesn’t that mean I’m wrong and they’re right, and I’m actually smart? …Whatever. Nothing about me is actually different so I know I still suck.”
+Convo idea after defeat:
+FB: “No matter how hard I train…no matter how many moves I learn, no matter how much I try to mix things up, you will always know my next move. How is that fair at all?”
+Cotu: “...you can still keep up with me. You’re still on the level of the elite contenders. It’s impressive what you’ve been able to accomplish despite telegraphing your every move. You should be proud.”
+FB: “I’ll be proud…when I…get a win over you in the tournament.”
+His telegraphing is balanced by his incredibly high speed, precision, and strength
 Relates to and quickly grows attached to Cotu as he’s the first person he’s met who really seems interested in their own visual design like FB is
 FB only comments on this if the player chooses a non-default skin
 FB: “Oh my god. You have no idea how many gods thought I was CRAZY for changing my looks this much.”
-Cotu: “Really? I didn’t know it was that big of a deal to people. I never got comments like that.”
+Cotu: “Really? I didn’t know it was that big of a deal to people.”
 FB: “*sigh* I wish I had your blissful ignorance.”
 
 Cactyrants: Evil Cactus and Giant Bird
@@ -3427,17 +3600,28 @@ Math Boss
 Crazy-looking wraith with a number face. 2 other ball-like faces with circles painted on them, and a wraith-like body like Specter Knight from Shovel Knight
 Boss’s face has a randomly selected number in some range (maybe 1-30)?
 Does crazy twitching and constantly whispers about “the numbers”
-Player doesn’t know how the following attacks work, they only see the numbers, then the attacks
-3 pillars: left, center, right
+Player doesn’t know how the following system works; they only see the numbers, then the attacks
+Arena is comprised of large square tiles
+3 large background pillars: left, center, right
 Left and right pillars randomly select a number from 1-30 (inclusive)
 Middle pillar randomly selects a number from 2-12 (inclusive) by rolling 2 dice into the arena
 Player must calculate how many of the middle # it takes to get from the left # to the right #
 e.g. 22, 4, 7. How many 4’s does it take to get from 22 to 7?
 22 - 4x = 7 → x = 3 remainder 3
-Player uses the quotient to anticipate the next attack
-Boss uses the remainder in their prime factorization
-Boss’s goal is to assemble all numbers used in the prime factorization of their face number (e.g. if it’s 12, the factors are 2, 2, and 3)
-Once the prime factorization (PF) is complete, the boss celebrates and does a supermove before choosing another random face number
+Player must stand on a tile containing the quotient to dodge the arena attack
+Boss must stand on a tile containing the remainder to put it in their prime factorization
+Boss’s goal is to assemble all numbers used in the prime factorization (PF) of their face number (e.g. if it’s 12, the factors are 2, 2, and 3)
+Once the PF is complete, the boss celebrates and does a supermove before choosing another random face number
+Problem solving phase
+After the pillars select their numbers, each square in the arena’s grid of squares is randomly filled with some number of circles
+The player is given some time to solve for x before one of the 3 heads from the wraith descends to the arena and begins attacking the player. Each head has its own moveset that:
+Is simple enough to fight and do mental math at the same time
+Forces the player to move around the arena
+Allows the player to guide the boss to where they want the boss to go (to some extent)
+The player must attack the boss and monitor their surroundings to find the nearest squares with the quotient on them
+After some time fighting the boss, all squares containing incorrect quotient answers are attacked continuously, dealing enough damage to destabilize in 1 hit. This is called the “arena attack”
+When the arena attack occurs, if the boss happens to be standing on a tile that contains the remainder, it’s added to the PF
+The tile that the boss is considered to be standing on (i.e. the tile the boss is closest to) is constantly highlighted as the boss moves around
 
 Candy Cat
 Giant cat monster made of sugar crystals and candy bits
@@ -3449,15 +3633,14 @@ Tail is undecided, perhaps its soul floats on its tail like a ring?
 Moves like it’s naturally crazy/hyper but is trying to contain itself
 Speaks with a crazed distorted voice
 Represents the number 9 (4 legs + tail + 4 mask spikes)
-Idea: can extend its neck, shoulders, and torso to lengthen itself disturbingly
+Can extend its neck, shoulders, and torso to lengthen itself disturbingly
 Idea: this is a super high-ranking god (e.g. 7), making it a real threat to Cotu
 Idea: constantly feints to terrify the player. Every 9th feint is an actual attack that is nearly impossible to react to unless you were keeping count
 I considered the idea that the count gets reset after certain moves (e.g. a special retreat anim or special move), but I realized that it’d be cool for the player to survive a special move and have to keep the current number memorized the entire time
-Idea: creates giant wormholes that travel incredibly long distances in the universe
-Idea: he plans to use the wormholes to kidnap Cotu and never get caught
-Idea: guards a secret wormhole that leads from the beginning of the game (gauntlet var 1) straight to the gala
+Alt idea: instead of feinting, Candy Cat initially performs a series of easy-to-dodge/counter attacks to bore the player and give them a false sense of security. Perhaps Candy Cat also displays a pretty and soothing pattern in the air and/or in the background using its hypnotic eye, further soothing the player. CC occasionally breaks up the monotony with terrifying ferocious attacks
 Uses the candy bits on his body as projectiles
-Idea: hypnosis ability
+Lunge Splash: CC extends its torso to move its head and front paws in an arc up, forward, then behind the target. Its front paws land at a spot around a rose petal’s dist behind the target. On impact, molasses immediately spread from the impact site to a huge circular area around it, greatly slowing Cotu (more than snow and mite infestation) if he’s standing in it. The area covered by molasses then grows upward into sharp sugar crystals in an instant like rock spikes from Promised Consort Radahn’s spiral slam in Elden Ring
+Hypnosis ability
 When it opens its mask, Candy Cat exposes tentacles and/or a twitching eye, which emits hypnotic waves that distort its prey’s mind
 Hypnosis makes the stability bar and buffs look like they’re increasing and changes their colors - it looks like Cotu has more stability and buffs he actually has
 SFX and music fade into the background, and a child’s voice reverberates clearly to say relaxing words
@@ -3468,23 +3651,27 @@ SFX and music fade into the background, and a child’s voice reverberates clear
 “I love you.”
 “Don’t worry.”
 Used immediately before a powerful attack
-Uses molasses to slow its victims
 Song is calming, seductive, and insidious
 Idea: song has deep distorted lyrics
 So soft, so sweet, so nice
-And it could be yours for a low low price,
+And it could be yours for a low low price
 Come a little closer, don’t be shy
 Why should a god be afraid to die?
+So soft, so sweet, so kind
+Even though you’re not a person in my eyes
+I like that you’re with me tonight
+Come into my realm and I can make you mine
+Idea: Candy Cat offers Cotu a good sensation he has never felt before and he didn’t know he was capable of feeling, possibly in an intro cutscene
 Idea: this is the kidnapper, not Future Blade and his goons. Candy Cat wants to kidnap Cotu so that Jessica will let him into the next tournament
 I want to have a kidnapper and a disqualified fighter to show that the gods aren’t just good or mentally-handicapped with good intentions (i.e. Clarity). It would make sense if the kidnapper and DQed were the same character
 Candy Cat, not Mike, is the one who made the deal with Jessica to gain great power in exchange for a random chance of failure. Cotu (or X) caught him in the act and got him DQed. Candy Cat now wants to kidnap Cotu and hold him hostage until Jessica (who’s in charge of the next tournament) allows Candy Cat to participate in it. He thinks that because She helped him before, She’ll help him again
-This doesn’t make sense bc the gauntlet, Blaze, and other strong gods would keep an eye on Candy Cat, ensuring that he won’t do anything dangerous. In any case where Candy Cat poses a real threat to other gods, ask yourself if it’s possible for other gods to intervene and stop him. If so, why are they wasting time with the gala instead of addressing the elephant in the room? If not, that means Candy Cat poses a threat to all of the strongest good-willed gods combined, which makes them look weak and breaks the power balance of the lore
+This doesn’t make sense bc the gauntlet, Blaze, and other strong gods would keep an eye on Candy Cat, ensuring that he won’t do anything dangerous. In any case where Candy Cat poses a real threat to other gods, ask yourself if it’s possible for other gods to intervene and stop him. If so, why are they wasting time with the gala instead of addressing the elephant in the room? If not, that means Candy Cat poses a threat to all of the strongest gods combined, which makes them look weak and breaks the power balance of the lore
 Alt idea: Candy Cat got disrespected by Cotu somehow in the tournament and is taking revenge by keeping him in his sticky realm (e.g. burying him in syrup and forgetting about him). He is petty and pathetic
 This makes sense but wastes Candy Cat’s visual design. If it’s pathetic, why is it so big and intimidating?
 Alt idea: Candy Cat feels incredibly good when victims are submerged in his syrup-filled stomach, so he’s been kidnapping people and putting them in his syrup. He lures them in by offering training better than the gauntlet’s. The people at the gala are wondering why some gods aren’t showing up yet
 This doesn’t make much sense bc surely the gods can team up to beat Candy Cat and stop him from doing this
 Alt idea: Candy Cat is a prisoner
-Candy Cat is locked away in gauntlet central bc it kept attacking gods whose bodies or realms contained some trace of sugar, and it showed no willingness to change (due to having the mind of a voracious beast). It traveled great distances using its wormholes, ate sugar, and turned the sugar into its body parts, enhancing them. The gauntlet keeps it in one place only by filling its holding chamber with sugar alcohols, which satisfy it and stifle its power.
+Candy Cat is locked away in gauntlet central bc it kept attacking gods whose bodies or realms contained some trace of sugar, and it showed no willingness to change (due to having the mind of a voracious beast). It traveled great distances using its wormholes, ate sugar, and turned the sugar into its body parts, enhancing them. The gauntlet keeps it in one place only by filling its holding chamber with allulose, which satisfies it and disables it bc allulose doesn’t crystalize, unlike sugar and sugar alcohols
 To train, gods can fight Candy Cat in a gauntlet holding cell. The gauntlet grants special access to that particular god, then gives Candy Cat a controlled dosage of sugar, then covers the challenger in sugar
 Story Idea: Candy Cat’s escape
 In a back corner of gauntlet central, 2 lively NPCs are sitting and chatting. When Cotu approaches them and tries to talk to them, they get up and walk away without looking at him. Cotu comments on their rudeness. Typically, gauntlet gym NPCs are friendly and open to meeting new people
@@ -3495,11 +3682,13 @@ Idea: to win the game, the player must bring Clarity or the mites to Candy Cat�
 Neuron Boss: Neuro
 Shaped like a neuron where 1 axon terminal is the head and 1 axon terminal is a set of feet. The head and feet are constantly flickering and changing shape. They have no arms. Their base form is tall, so they have to hunch down to talk to others at face level. They can also “sprint” by running with both their head and feet on the ground
 Can move incredibly quickly, fly, and change size extremely (e.g. they can grow their head to fill up the entire sky)
+Idea: arena is a particle accelerator (the inside of a gigantic donut)
+At some point in the fight, the player must continuously run forward through the accelerator to avoid something chasing them (e.g. energy field, a monster, etc.)
 Zip: Neuro dashes from one position to another in the blink of an eye. This is their bread and butter
 Laughs and screams when zipping several times in a row
 Lightning: Neuro does a weird pose, stops moving, and electric buzzing noise slowly loudens. The entire screen then flashes white, then quickly dims to reveal the remnants of a lightning bolt fired from Neuro directly to the target
 Caltrops: Neuro floats in the air, moving so slowly it almost looks like they’re not moving, then drops a bunch of sparking electric caltrops to the ground
-Switches from their base blue mode to pink/purple in phase 2
+Switches from their purple glow to red in phase 2
 Idea: occasionally twitches (jerks around suddenly, cancels a move, etc.)
 Inspired by UFC fighter Dustin Poirier’s habit of pulling up his shorts
 Idea: talks trash throughout the entire fight to discourage Cotu
@@ -3519,10 +3708,15 @@ When using your last stabilizer in phase 1
 “Out of heals already? OH NO!”
 “UH OH! Was that your last heal?”
 “HAHAHAHAHAHA. You’re FINISHED!”
+Final cutscene or attack:
+“I AM THE GREATEST FIGHTER IN THE UNIVERSE! HISTORY JUST HASN’T LEARNED IT YET!”
+Idea: normally doesn’t have arms, but can briefly create super long arms, hands, and fingers using arc lightning
+Frequently uses crooked hand poses like claws
+Idea: has an ugly and small soul
 Lore/Story Ideas:
 One of the highest ranking gods from the tournament
 Voice sounds like Bill Cipher from Gravity Falls, but pushed a bit in the direction of Skeletor’s voice, and electrically synthesized
-Loud, narcissistic, witty fast talker who constantly proclaims themself to be the greatest in the universe
+Loud, narcissistic, witty, and funny fast talker who constantly proclaims themself to be the greatest in the universe
 Blames their loss on bad luck
 Brags about how they defeated X, a favorite to win in the tournament. In reality, Neuro had an excellent matchup against X because Neuro uses electric attacks and X is made of steel. X himself complains about this
 Neuro actually did lose due to a bad matchup like X did (I’m undecided on what that bad matchup is)
@@ -3538,6 +3732,10 @@ Undecided: “Because having friends is nice. They care about you.”
 Neuro crackles. “Easy for you to say. Your friends are better than you. If you were as great and awesome as me, you’d realize that nobody around you is worth your time.”
 Undecided isn’t convinced but says nothing.
 Neuro: “I’m done wasting time with your asinine inquiries. Go talk to your friends instead.” Neuro zips away
+This convo shouldn’t be included for a few reasons:
+The convo feels too long, probably because the theme is so simple that it doesn’t need this much dialogue to explain
+The undecided speaker is unlikable because they’re being condescending and acting polite about it, which is distracting and counterintuitive to the convo’s purpose of showing that Neuro is unlikable to the average person (this is not an average person; this is a hater). The convo may work if it’s used to establish two characters simultaneously; the passive aggressive jerk speaker and the aggressive direct jerk Neuro. The speaker is further established as a jerk because their opinion is more negative than the general public’s
+I’m including this convo in this doc to show what not to do or in case it can be repurposed
 
 Projectile Spammer: Microwave
 Idea: before the fight, you can unlock an endgame-level super powerful upgrade that deflects or destroys projectiles somehow. Undecided if this is done through the icon, one of the rangs, or something else entirely
@@ -3979,7 +4177,7 @@ Medium voltage: electricity begins to arc throughout his body. Higher voltage �
 High voltage: Cotu’s body glows yellow and white and emits fire. He then takes massive damage over time that will destabilize him quickly
 When Cotu destabilizes, the scientist immediately turns off the voltage and stabilizes him
 Boss talks to Cotu
-Your body isn’t controlled by electricity like many mortals’ bodies are, which is why you can move freely (currently at low and medium voltage). But what happens if we up the voltage?
+You can move freely (currently at low and medium voltage) because your body isn’t controlled by electricity like many mortals’ bodies are. But what happens if we up the voltage?
 (After observing first high voltage reaction) As I suspected; judging by the reaction, your body seems to be made of glass.
 Don’t try to escape. I told all of your contacts that you were taking an extended trip alone, and taking a vow of silence. It would be easier for you to accept that your body is now and forever will be dedicated to research alone.
 
@@ -4212,7 +4410,7 @@ When threatened, a handsome CEO appears to defend them
 Appears in Gauntlet Central, implying that they’re one of the strongest in the universe
 Frenemy of The Chosen One
 
-TrueX OR Tempered X Boss
+Tempered X Boss
 Pre-fight quote: “Tell me, Cotu…Can you read me?”
 Face is modeled after a T shape instead of an X
 Soul is a plus sign with pointed tips and with the top segment (the one facing away from the target) removed, i.e. a T whose stalk is as long as the branches. Soul faces in the direction X wants to attack in
@@ -4277,6 +4475,41 @@ TP Sweep: X is in a side squat with his left foot extended. His left arm is poin
 TP Sweep Trick: X is in the TP Sweep starting position, but instead of igniting his foot, he charges up his left hand with an energy burst, then punches his left arm fwd to release the burst. He then teleports away while still side squatting. Selected more rarely than TP Sweep
 Near-end attacks:
 Solar Flare: a wave of blue energy rises in the distance for a long time. Eventually, it crashes into the arena
+Lore/Story Ideas:
+What if X breaks up with Cotu after the tournament? X is empty, as shown by his realm. He’s not sure what he wants to do with his life. All he knows is that he’s naturally gifted and violent, and that he was popular in the first tournament. In the absence of other things, he made the tournament his one goal in life—not particularly because he wanted to win, but because he was afraid of facing himself and seeing nothing. X is upset at Cotu for taking away his one purpose in life, but he’s also sort of grateful to Cotu for making him realize that maybe his purpose is wrong. X still can’t bear to be around Cotu, and resolves to tell him that he needs space
+When defeated:
+Cotu approaches X
+X: “This tournament…was my one…purpose in life…and you took that from me.”
+Cotu raises his weapon.
+X: “Cotu….I hate you.”
+Cotu pauses.
+Cotu kills X
+After the tourney:
+Cotu: “X, did you…mean…what you said?”
+X: “...”
+X: “This tournament was everything to me. Without it, I don’t know who I am.”
+Cotu: “...I’m sorry X. I never wanted you to feel this way.”
+X: “Don’t be. You just made me realize what I should have known from the start. That my purpose was…unrealistic.”
+X: “I have billions of years of life ahead of me. Now I need to figure out what to do with them.”
+X: “Cotu, you’re a good person. Thank you for all you’ve done for me. But right now, I can’t stand the sight of you. This is goodbye.”
+Cotu: “...”
+X turns to leave.
+Cotu: “X…if you ever want to see me again, I’ll be here.”
+X: “...” he leaves.
+Issues with the breakup:
+It makes X look dumb because he blames Cotu for his loss
+Would he just automatically hate whoever beats him in any tournament?
+He looks like a quitter instead of a strong person who can take defeat
+It’s too serious for the unserious tone of the game
+X accepts defeat with strength
+X: “I did everything within my power to win and still lost. You were simply the better fighter. I have no choice but to accept that.” He sounds angry at himself.
+Cotu: “So what’s next for you?”
+X: “More training, more innovation, and more planning. But before then, I have some bullshit to do.”
+Cotu: “What is it?”
+X: “The idiot trio asked me to join them in the search for their realm. Unfortunately, I had nothing better to do, so I obliged. I was originally going to take time to clear my mind, but I anticipate that traveling with them will do exactly the opposite.”
+Cotu: “Yet you’re going anyway.”
+X: “Correct, because you’re coming too.”
+Cotu: “Wha-I didn’t sign up for this.”
 
 4 Boss: The Edge
 SFX and music are periodically muffled/unmuffled and pitch shifted
@@ -4309,17 +4542,24 @@ If you fail this quicktime event, the fight continues for a little before you ge
 Alt idea: gameplay is the same as the original concept, but arena is patrolled by a small white slug or snail and the heavens send dark leviathans instead of divine light and hands. Also slug/snail itself doesn’t attack
 Lore: no one has ever beaten The Edge except for Microwave
 
-2 Boss: Blackstar, Champion of the Gauntlet
+2 Boss OR Champion of the Universe: Blackstar, Gauntlet Incarnate
 Story:
 She has Demetrius Johnson’s stature, Kobe Bryant’s mamba mentality (harsh self-criticism and relentless drive for self-improvement), and Messi’s lack of casual social skill
-After Cotu arrives at the gala and before their fight, Blackstar approaches Cotu and tells him that even though the gala’s not a serious competition, she wants him to promise her not to hold back, as this is her last chance to reincarnate before the next tournament
-X is jealous that she pulled Cotu aside
 She is extremely personally motivated to fight Cotu at his best
+Idea 1: Poor Reputation After Tournament Loss
 Public opinion of the Gauntlet has decreased ever since her loss to Cotu in the tournament. People say the Gauntlet’s been on a decline and/or stagnating and/or out of its prime
 Blackstar can take being insulted herself, but she’s pained by her family being talked about negatively. She doesn’t want to restore her glory—she wants to restore theirs, and secure the Gauntlet’s future by reincarnating
-Alt idea: Blackstar and the Gauntlet don’t care about pride. The reason they care so much about becoming stronger is because their entire identity is training others, but if all the gods become far stronger than them, then no one would want to hang out with them anymore
-With this idea, Blackstar’s character flaw is that she believes friendship is transactional
-Problem: the Gauntlet still has plenty of weaker gods to train
+Idea 2: Blackstar won the tournament, but only because Blazar let her win
+Blackstar believes that she’s not reincarnating because Blaze didn’t fight her at his best
+She also feels like a fraud who’s lying to everybody, and the clout she has isn’t deserved
+Sub idea: Blackstar must concentrate her mind to not let the knowledge that Blaze let her win flow back into the Gauntlet’s soul, which would transmit the memory to all of her predecessors. This concentration makes her unable to reincarnate
+Blaze knew how much the tournament meant to Blackstar, so he lost on purpose to give peace to her and her followers. He was also just fighting for fun, so he didn’t mind losing
+Throughout almost all of the fight, Blaze was genuinely fighting to win to give her a real fight, but when Blackstar was extremely close to winning at one point, Blaze allowed her to, even though he had one last ability he could have used to save himself and continue the fight (let’s say this was Mark Sacrifice). Blaze never used this attack in a tournament game, so no one knew that he had it except for Blackstar and himself
+Blackstar somehow knew that he had this ability at the time he fought her, and she knew the damage it did. If Blaze used it, Blackstar would have destabilized and most likely lost
+After Cotu arrives at the gala and before their fight, Blackstar approaches Cotu and tells him that even though the gala’s not a serious competition, she wants him to promise her not to hold back, as this is her last chance to reincarnate before the next tournament
+(If using motivation Idea 2 above): Blackstar reveals to Blaze and the player that she knows that he let her win. Blaze asks how she knows and she explains how
+Idea: Blackstar asks to meet in Blaze’s realm so that no one can hear her say Blaze let her win
+X is jealous that she pulled Cotu aside
 Thin black humanoid with diamond-like limbs and spiked gold mask
 Early face concept art:
 
@@ -4404,7 +4644,7 @@ Blackstar gains total control over all bits in the realm at once, becoming able 
 Cotu must activate and skillfully use an ultimate ability of his own to survive the onslaught
 Idea: Dominion skill, which uses some rang to parry all tiny projectiles around him
 
-Jester Boss: The Greatest Magician
+Turbo Jester Boss: The Greatest Magician
 Looks like Jevil from Deltarune (similar proportions but toothier Hazbin Hotel-like grin), but has a hat so big it covers her eyes, has a poofier shirt that resembles a dress, and doesn’t have a tail
 In the marathon, appears after every fight to mock or belittle you (no matter how well you did), or do a funny gag (e.g. becoming a beach ball by inflating her costume)
 Attacking the Jester causes her to fight you as a boss
@@ -4416,9 +4656,13 @@ Idea: she’s criticized and ostracized by most practicing magicians for “gate
 Transformation spells: change Cotu’s body
 Embiggen: make Cotu super fat, making him larger (bigger hurtbox), slower, and no longer invincible when dodging, but take less damage
 Enshrinken: make Cotu tiny, making him smaller and faster, but take more damage
-Jellify: briefly turn Cotu into gelatin, which causes him to melt and take damage if he touches his weapons (no throw nor instant rethrow)
+Jelliten: briefly turn Cotu into gelatin, which causes him to melt and take damage if he touches his weapons (no throw nor instant rethrow)
 Umbrella: rises into the air quickly and drifts downward slowly. Used as a general utility mvmt
-Idea: in her second phase, Jester uses the last of her magic to transform herself into a ravenous beast, revealing her eyes and hair
+Counter: she does a funny dance to trick you into hitting her. If she’s hit with any projectile, then time slows down, she teleports behind you, she grows her hand to giant size, then slaps your back with it, launching you into the ground
+In her second phase, Jester summons a gambling device (e.g. wheel, slot machine, deck of cards, etc.) as a framework for the battle
+Jester explains that all humor stems from unexpectedness, and nothing encapsulates “the unexpected” more than a gambling machine
+Jester wears a barbershop quartet outfit and holds a cane
+Jester says “Let’s go gambling!” to reference raxdflipnote https://www.youtube.com/shorts/QPzSbFejdwE
 Story ideas:
 Was originally a shy introvert who learned to hide her vulnerability with humor
 Trained alongside the gauntlet during the tournament, gaining their trust
@@ -4674,6 +4918,9 @@ X: “...Are you sure this is going to work?”
 BS: “I don’t know if I have another choice. If you have a better idea, I’d love to hear it.”
 X: “...”
 BS: *motivational sendoff here*
+Issues with this plot:
+There is no motivation for any god to become stronger; only weaker, which is lame. This reason alone is enough to rework the plot
+Preparing to fight each other is not the only way to deal with the threat of Chaos. Can’t the gods just stop upgrading themselves, shed their power, or hide it? Chaos is supposed to represent death, which is inevitable. Chaos in this case is preventable
 Plot Idea 2: Cotu Loses His Power, and Others Try to Stop Him From Getting It Back
 Cotu loses his power somehow and goes on a quest to retrieve it before the next universe tournament
 Other gods either help Cotu or try to stop him
@@ -4708,12 +4955,22 @@ Cotu wants to explain
 Greg: “Did you know it was the microwave the whole time?”
 Cotu: “I predicted it was, but I wasn’t 100% sure.”
 Greg: “Damn.”
+Issues with this plot:
+Cotu is friends with some of the strongest gods. They would protect him. Even if they aren’t his friends, they have good morals and would ensure that Cotu is given a fair chance to compete. If I make the strongest gods bad guys, that goes against the casual, fun mood I’m going for. This reason alone is enough to rework the plot
+Why do Cotu’s opps take this tournament so seriously? They’re gods, they don’t need the prize(s) to survive. Maybe they’re petty and want to win no matter what, but are there really going to be so many petty gods that they can fill up the first half of the game?
 Plot Idea 3A: Trip to the Gala (labeled 3A to differentiate from 3B, which has major changes)
-Cotu loses his power on purpose to go on vacation with his friends without being bothered by other contenders. Cotu trains with others in his weakened form to get strong enough to fight in the exhibition gala, the last big combat event before the next tourney. Throughout the course of the game, he travels to the gala and eventually competes in it
+Cotu loses his power on purpose to go on vacation with his friends without being bothered by other contenders OR to fight weaker opponents fairly. Cotu trains with others in his weakened form to get strong enough to fight in the exhibition gala, the last big combat event before the next tourney. Throughout the course of the game, he travels to the gala and eventually competes in it
 The gala is a huge fighting competition organized purely for entertainment. Through it, the audience can see their favorite fighters in action again, and in matchups that never happened in the tournament and may never happen in serious competition due to power differences
+The gala has 2 phases: the mixaround, and mini-tournament
+Mixaround: casual matchup for all skill levels
 Low tiers fight top tiers, individuals fight teams, fighters eliminated early in the tournament get their chance to shine, fighters who were weak but improved a lot after the tournament get their chance to shine
 This is the equivalent of a casual martial arts competition with crazy matchups and everybody is in their prime, e.g. Demetrious Johnson vs Jon Jones (DJ is much smaller), Islam Makhachev vs Khabib Nurmagomedov (they’re best friends), Mike Tyson vs Muhammad Ali (2 of the best heavyweight boxers in history but from different eras), Tom Aspinall vs Valentina Shevchenko and Kayla Harrison (heavyweight champion vs 2 best women), Bruce Lee vs Jackie Chan vs Donnie Yen vs Jet Li (4 celebrity martial artist actors)
-The gala leans into all of the things human beings can’t do but gods can
+Mini-Tournament: a small group consisting of the best fighters at the gala fight in a series of 1v1s. Instead of using an elimination bracket, a pre-determined set of matchups plays out according to what the fans voted for before the gala. In the mini-tournament, each fighter gets a performance score. Performance points are given for damaging, destabilizing, and destroying their opponents. Whoever has the most points at the end wins
+Sequence of fights (WIP):
+Neuro vs Tempered X
+Cotu vs Tempered X
+Cotu vs Blackstar
+The gala overall leans into all of the things human beings can’t do but gods can
 Fighters can sustain irreparable damage
 Fighters are all in their prime because the concept of a prime doesn’t exist for them (or if it does, it works completely differently from a human’s, e.g. a fighter repeatedly enters and exits their prime on a cyclical basis, a fighter’s body/performance is randomly determined)
 At the gala, he fights at least the following 2 gods:
@@ -4850,15 +5107,15 @@ Blackstar thinks that if she ever feels proud of herself, she’ll lose all moti
 Idea: Elite Gunner looks at Cotu’s upgrades
 Elite Gunner is happy, but also ashamed since her master isn’t making the same progress
 Cotu wants to know how the Gauntlet really feels
-EG: “[current upgrade name]. Already? Damn.” She sounds like a mixture between impressed and sad
+EG: “[current upgrade name]. Already?” She sounds like a mixture between impressed and sad
 Cotu: “Is something wrong?”
-EG *shakes her head*: “No. Not at all. It’s…impressive how fast you’ve…made it this far.”
-Cotu: “Thanks.” Cotu senses something’s going on, but he’s not sure what. “But I’ve still got a long way to go.”
-EG: *sighs in relief* “Yeah.” *she looks at Cotu* “I’ll send this info to Master. Thank you for showing us this.”
+EG *shakes her head*: “No. Not at all. It’s impressive how fast you’ve made it this far.”
+Cotu: “Thanks.” Cotu senses something’s going on, but he’s not sure what. “But I’ve still got a long way to go before the gala.”
+EG takes another look at the upgrades. “Indeed.” *she looks at Cotu* “I’ll send this info to Master. Thank you for showing us this.”
 Cotu: “Of course.”
 EG: “Whatever you need, the Gauntlet will be right behind you.” She salutes to him
-Cotu nods. “See you at the gala.”
-Idea: after Blackstar’s battle with Cotu, he helps her accept that she’s done everything she can, and she should enjoy her life and all the friends and family she has. She then realizes that the only way to reincarnate is not to improve her skill or physical strength, but her soul. Each variant has its own unique skills, strength, and personality. The soul of the gauntlet, Blackstar’s soul, rejects Blackstar’s personality.
+Cotu nods. “See you soon.”
+Idea: after Blackstar’s battle with Cotu, he helps her accept that she’s done everything she can, and she should enjoy her life and all the friends and family she has. She then realizes that the only way to reincarnate is not to improve her skill or physical strength, but her soul. Each variant has its own unique skills, strength, and personality. The soul of the gauntlet, Blackstar’s soul, rejects Blackstar’s personality.j
 After the battle, Blackstar’s helmet is cracked open, revealing a less physically sharp, more relatable, expressive person within. Cotu talks casually with Blackstar until she comes to the realization. Mid-conversation, she suddenly stops responding to Cotu. The camera’s on Cotu and he’s looking away while waiting for her response. After a bit, he turns to check on her. The armor looks frail and withered, and has lost its glow. The person inside Blackstar’s armor looks at Cotu differently than she did, with a wide-eyed, curious expression.
 Cotu: “Hi.”
 ???: “...hello.” Her voice sounds different from Blackstar’s. More childlike. She also looks different from the person who was just inside the armor. A bit smaller.
@@ -4929,11 +5186,13 @@ BS asks Greg if he wants to hang out sometime
 Things that stay the same regardless of ending
 X still struggles to find satisfaction in life, so he decides to travel with the triplets and help them find their realm while he figures things out
 His struggle is that his goal is to win the tournament, but he just isn’t strong or smart enough
+Issues with this plot: see issues with Plot Idea 3B
 Plot Idea 3B: Trip to the Gala B
 Same as Plot Idea 3A, but with some major changes
 The general concept is the same: Cotu trains with others in his weakened form to get strong enough to fight in the exhibition gala, the last casual combat event before the next tourney. Throughout the course of the game, he travels to the gala and eventually competes in it
 After the tourney, Cotu lost his power naturally as a function of his body instead of on purpose
 Why would Cotu get rid of his own powers without pressure from Mike? It doesn’t make sense for Mike to pressure him bc Blackstar would defend Cotu’s actions
+After more thought, it does make sense for Cotu to get rid of his own powers if being able to fight weaker people meant more to him than winning competitions
 The triplets don’t travel with Cotu to the gala
 There’s now a contrast between the dark desolate nothingness and danger of the pre-gala journey and the fun of the gala
 The triplets are now a reward for making it to the gala instead of an accompaniment useless to the story
@@ -4956,6 +5215,39 @@ Triplets fight Cotu for fun
 (an idea for now) Mites are wild animals that want to spread and conquer (although they’re treated like fully sapient gods by other characters)
 (an idea for now) Future Blade wants to kidnap/sabotage Cotu to prevent him from fighting in the tourney
 Grow-a-gator helps Future Blade because he likes chaos
+Angels just want to play catch
+Some want the privilege of fighting the champion
+Some weaker gods are more motivated now that he’s closer to their level
+Issues with Plot Ideas 3A and 3B:
+The gala is a casual competition, and nobody (which includes the player and the fighters) cares about competitions unless the rankings are official
+Plot Idea 3C: Trip to the Gala C
+Same as Plot Idea 3A, but with some major changes
+The general concept is the same: Cotu trains with others in his weakened form to get strong enough to fight in the gala, then eventually competes in it. The primary difference here is that the gala is no longer a casual event; it is an official event to determine rankings
+I was wondering why I couldn’t get as emotionally invested in the gala as much as UFC fights, and I thought maybe it’s because the gala is unranked. I imagined what it’d be like if a UFC fight were also unranked and realized that I would care about it a lot less, and so would the fighters
+Why is it still called a gala? The gala can still be a name for an official sporting event, e.g. the Golden Gala
+Idea: the tournament was originally called “the tournament” because the creator of the universe only imagined it as a tournament, nothing more. Afterward, the gods agreed that they may add other events to the tournament, so they renamed it to “the gala”
+I’m undecided between several options for how Cotu lost his powers:
+They were taken from him by Darkness, his arch-nemesis who is now on the run from every god in the universe OR locked away in Gauntlet Central like Candy Cat
+It is a mystery how his powers were taken
+This would make for a good talking point among all characters: the biggest controversy/drama with the current champion, sparking all kinds of discussion and rumors
+An investigation into the mystery might be good for a DLC or sequel, as an investigation sidequest is unnecessary in this game if the primary plot is about the gala. An investigation can be hinted at at the end of the game as a cliffhanger
+Mike helps investigate since it considers the power stealing a threat, and Mike doesn’t seem interested in the gala for whatever reason (it’s too strong for anyone in the gala)
+Cotu removed them on purpose to interact with weaker gods OR because he became so strong after the tournament that he thought he would easily dominate other gods in future tourneys
+This kinda removes the stakes since we know Cotu’s capable of beating everyone. It also sounds like cheap fanservice power fantasy, which may make the player roll their eyes
+Cotu still travels alone (which is also healthy for scope)
+The player must still use their time wisely to get as strong as possible before the gala begins, a la Persona 5
+(If within scope) Cotu can still meet Clarity along the way and get her to the gala as a side quest
+Making companion characters other than Clarity is probably not worth the time and effort
+On the trip, gods fight Cotu for various reasons
+Gauntlet loves to train people
+Gauntlet has the added bonus of having a ton of fighters at different skill and power levels who aren’t participating in the gala
+Before the events of the game, X agreed to train Cotu before the gala at Cotu’s request
+When they meet, instead of saying that he’s going to the gala early, X says he’s going to Gauntlet Central early
+Idea: instead of fighting in X’s realm, X meets Cotu at Gauntlet Gym 1. Everyone there is astonished that both Cotu and X are at such a low level gym
+Clarity’s body and realm are autonomous and attack anything that gets near them
+Triplets fight Cotu for fun
+Mites are wild animals that want to spread and conquer in the absence of their queen, who left them with a babysitter who got captured
+Future Blade wants to train
 Angels just want to play catch
 Some want the privilege of fighting the champion
 Some weaker gods are more motivated now that he’s closer to their level
@@ -5009,7 +5301,7 @@ No name wants to win in any way possible no matter the consequences, mostly to m
 Greg’s trying to take a break from thinking about the future
 X: “Impossible! You MUST be cheating!”
 Greg: “X, X, X. You just don’t recognize skill when you see it.”
-X: *leans forward* “I will hurl you five hundred light years into the void.”
+X: *leans forward* “I will hurl you a thousand light years into the void.”
 Greg: *puts his finger to X’s face* “Shh…Just hush and take this beating like a good boy.”
 X: “WHAT?!” *X’s face flames up*
 Greg: *pulls his finger away in pain* “ow, oof, ah”
@@ -5240,24 +5532,38 @@ Greg violently rips his head off, revealing a minigun on his neck stump. He then
 Greg breathes heavily as he touches his face and looks around the lab
 Jester is in disbelief
 Idea: Jester’s true form is introduced
-Jester calls Greg “weirdly attractive” in an offhand comment in her usual antics, then reverts back to her true form (codenamed “Tripty” for now) in private
-Tripty leans her back to the wall and puts her hands on her forehead: “...why did I say that shit…”
-Tripty slides down the wall and sits against the corner. “I’d be surprised if he showed up to the lab again.”
+Jester’s just trying to be funny
+Jester: “Alright Greg, how do you think today went?”
+Greg: “Awful.”
+Jester: “ENGH! Wrong!”
+Greg: “W-what? What do you mean wrong? I didn’t cast a single spell the whole day.”
+Jester: “It’s part of the process, bub. You can only cast a spell the right way after doing it every single wrong way.”
+Greg glances up and left: “...Really?”
+Jester: “No, ya stink.” Greg silently chuckles and covers his mouth partially. “But wat da hell are we supposed to do about it?”
+Greg: “Okay damn, *shrugs* it is what it is…so, same stuff tomorrow?”
+Jester: “Ehh, depends on what the magic wants. Anyway whaddaya still doin’ here? Scram, ya walking lollipop, before I start to lick ya. BLEHHH” She starts whipping her tongue back and forth
+Greg: “Aight chill, I’m going. See ya.”
+Jester goes back to her room and transforms into Tripty. There’s a mirror in the room showing her reflection, but she doesn’t look at it
+Tripty leans her back to the wall and puts a hand on her forehead. “*long sigh*...before I start to” Her hand slowly slides down her face. “...why did I say that shit…”
+Tripty slides down the wall and sits against the corner. “I wouldn’t be surprised if he doesn’t show up tomorrow.”
 The next day, Greg shows up
-…
+Tripty, internally: I could get away with saying some crazy stuff as Jester…should I push my luck?
+Jester: “Salutations, slimeball. Ready for some action?”
+Greg: “Oh you bet I am. Let’s freaking go.”
+Tripty: It kinda scares me that I’m getting away with this so easily.
 Idea: Greg meets Jester’s true form
-Jester is tired and doesn’t want to maintain her funny form, but doesn’t want Greg to see her in her true form because she thinks her true form is cringe, unattractive, and unfunny
+Jester is tired and doesn’t want to maintain her funny form, but doesn’t want Greg to see her in her true form because she thinks her true form is cringe and unfunny
 Greg likes to make new friends, so he wants to befriend Tripty, but he’s also wary that she could be an intruder
 Greg is unusually early for his session with Jester and shows up unannounced. He’s surprised to see a stranger in the lab
 Greg: “Huh?”
 Tripty’s voice cracks: “Wah!”
 Greg stares at her inquisitively. “oh sup. Have we…met before?”
-Tripty, assertive: “NO.”
-Greg stares blankly for a moment, then snaps back into his relaxed confidence. “Then hey, I’m Greg. I help out around the lab.” He extends his hand.
+Tripty: “NO.”
+Greg stares blankly for a moment, then snaps back into his relaxed confidence. “Then hey, I’m Greg. I help out around the lab and learn magic from Jester. It’s nice to meet ya.” He extends his hand.
 Tripty looks at his hand, confused whether it’s an open hand or closed fist. She cautiously pats it.
 Greg: “How ‘bout you?”
-Tripty glances around and backs away slowly, accelerating a bit over time. “Prefer not to say. In fact, pretend I was never he-ugh-” she bumps into a desk, causing her to fold forward clumsily in shock and make a funny noise
-Greg chuckles lightly and raises an eyebrow . “So what are you, a thief?”
+Tripty glances around and backs away slowly, accelerating a bit over time. “Errr…I choose to remain anonymous. In fact, just pretend I was never he-ugh-” she bumps into a desk, causing her to fold forward clumsily in shock and make a funny noise
+Greg chuckles lightly and raises an eyebrow condescendingly. “So what are you, a thief?”
 Tripty: “NO. No I’m not.”
 Greg’s expression turns skeptical.
 Tripty: “I’m, uhhhhh…an assistant! I’m Jester’s lab assistant!”
@@ -5268,26 +5574,26 @@ Tripty: “Obviously!”
 Greg: “Cast a spell then.”
 Tripty is visibly worried since she hasn’t cast a spell outside of her Jester form in a very long time (or maybe ever). She tries to concentrate magic between her hands, but gets winded and breaks form.
 Greg crosses his arms and narrows his gaze. “Having trouble?”
-Tripty: “I’m just rusty, give me a second!” She starts fidgeting and shifting around, trying to find any shred of magic and failing miserably. Her expression brightens subtly as she comes up with an idea. She approaches Greg and reaches into the air in front of him, pretending to cast a spell. She’s embarrassed and blushing and internally begs that Greg is fooled
+Tripty: “I’m-I’m just rusty, give me a second!” She starts fidgeting and shifting around, trying to find any shred of magic and failing miserably. Her expression brightens subtly as she comes up with an idea. She approaches Greg and reaches into the air in front of him, pretending to cast a spell. She’s embarrassed and blushing and internally begs that Greg is fooled
 Greg looks down at her hand, then around the room. “Did something happen? I didn’t see.”
 Tripty looks up at Greg and stares at his face. She’s closer to him than she’s ever been before as Tripty. “It was…an invisible spell.”
 Greg: “What did it do?”
-Tripty: “I cast…the friendship spell! It makes the target friends with the caster, even if they don’t know each other at all!”
+Tripty: “I cast…the…friendship spell! It makes the target friends with the caster, even if they don’t know each other at all!”
 Greg is really confused. “So…we’re friends now?”
 Tripty: “YES…and that’s why, I will run away and you won’t tell anyone I was here!”
 Greg: “...okay?”
-Tripty: “IT’S CONFIRMED!” She sprints out of the room.
+Tripty: “CONFIRMED!” She clumsily sprints out of the room.
 Greg sits down on a lab stool and calmly ponders.
 Shortly thereafter, Jester comes bouncing in.
-Jester: “Gregory! What are you idling about for? I don’t pay you nothing to do nothing!”
-Greg: “Sorry boss. A thief broke into the lab just now.”
-Jester: “A thief? That’s impossible. No one gets into the lab without my permission.”
+Jester: “Gregory! Whaddaya sitting on yer ass fer? I don’t pay you nothing to do nothing!”
+Greg: “Sorry boss. Someone broke into the lab just now.”
+Jester: “Eh? That’s not possible. No one gets into the lab without my permission.”
 Greg: “Oh, so…you actually have another lab assistant?”
-Jester: “Of course I do! In fact, one of them should have ended their shift just now. You might’ve seen a mopey-looking hobgoblin stumble her way out.”
+Jester: “Of course I do! Whaddaya think happens when you’re not here? In fact, one of them should have ended her shift just now. You might’ve seen a stupid mopey-looking loser idiot stumble her way out.”
 Greg: “Hey, that’s no way to talk about your lab assistant.”
-Jester: “What, you don’t agree? Have you seen her?”
-Greg: “Yeah, she’s alright. Kinda cute, if I’m being honest.”
-Jester looks confused for a second. “Hey! Don’t get distracted now, you bum, we got work to do!”
+Jester: “Ah don’t worry, I’d never talk about you that way.”
+Greg: “That doesn’t change-” Greg looks down and to the left for a moment, confused. “That doesn’t change the fact that it’s wrong to-”
+Jester: “Enough yapping, bum. We got bigger fish to filet.”
 Idea: Jester tries to gauge Greg’s feelings about her
 Tripty thinks Jester is obtrusive and obnoxious and that everyone secretly hates her but tolerates her because she’s powerful. She wants to know if Greg thinks this way, but is too shy to ask him directly, so she dances around the subject while slowly inching towards the real question
 Greg genuinely likes Jester as she is and defends her. He still thinks Tripty is a lab assistant
@@ -5461,3 +5767,53 @@ No rose buffing - challenges player to buff the rose on the ground before taking
 No dodging - relatively minor/moderate setback since Cotu moves so fast he can dodge things just by moving
 Could be feature creep since it’s a broken ability that deviates a LOT from the original game. I turned a ground-based hack-n-slash game to a flying one with a completely different gameplay loop. Work on the hoverboard in the future only if necessary
 Icon Shield (blocking? parrying?)
+
+Real Life Fighter Inspiration
+
+Khabib Nurmagomedov
+Stoic, honorable man who lives by a strict moral code (Islam)
+Learned everything from his father, whom he honors greatly. He quit fighting when his father died at the request of his mother
+Now coaches his close childhood friend Islam Makhachev, the greatest MMA fighter of all time
+
+Dustin Poirier
+Good man who trash talks
+Has a bad habit of pulling up his shorts during fights
+Doesn’t know what exactly to do with his life now that he’s retired
+Always wants to stay connected to fighting in some way because it’s given him so much in life: he learned about himself, he met new people, he did things he never would have done before (e.g. charity, being a host on live TV, going on podcasts, meeting celebrities, starring in commercials, talking to grandmas and soccer moms, etc.)
+
+Conor McGregor
+Arrogant, disrespectful loudmouth with a ton of fans, charisma, and money
+Crazy and impulsive; attacked a bus when beefing with Khabib
+Turned to drinking after leaving fighting
+
+Joshua Van
+Chill, nice dude who likes to show off his wealth and prestige
+Attacks quickly and precisely and is hype to watch
+
+Georges St-Pierre
+Filled with fear; he couldn’t sleep before his fights because he was so scared and nervous
+Khabib always slept before his fights
+Realized later on that nobody cares whether he wins or loses, so neither should he
+One of the greatest fighters in history
+
+Mike Tyson
+Struggles with conflicting feelings of remorse and hatred; he uses darkness to destroy his opponents, but feels guilty for the damage he causes
+Was bullied when he was younger, which motivated him to fight to take revenge on his bullies
+
+Islam Makhachev
+The greatest fighter of all time, coached by someone projected to be the greatest of all time before he quit early (Khabib)
+Humble; owes his success to Khabib. He says that having Khabib in his corner is like having a cheat code
+Funny and self-deprecating; doesn’t take himself or the sport seriously
+(In an interview with his friend and former fighter Daniel Cormier) “Brother, if you want your son, high level wrestling, send him 2-3 years Dagestan and forget” (Islam and his team are from Dagestan)
+(In the cage after winning a fight) “I wanna fight with Brock Lesnar!” (Brock is a huge former WWE wrestler way outside Islam’s weight class)
+“Me vs Ian Garry is like Khabib vs Conor from Alibaba” (because both pairs are Dagestan vs Ireland, but Khabib vs Conor was a worldwide phenomenon)
+Note that Islam is being humble here. Yes, neither he nor Ian Garry have the stardom that Khabib and Conor had, but if Islam wins this fight (this is being written Jul 3 2026), he would break the record for longest win streak in UFC history (current record is 16 wins) and defeat Ian Garry, an elite opponent with a 17-1 record and who recently defeated former champion Belal Muhammad
+
+Why Fighters Might Want to Change Gyms
+What all of these reasons have in common is that the fighter has great potential
+They’ve reached a skill ceiling that their coach is limiting them at (e.g. Sean O’Malley)
+They’ve been training at the same gym they started their career with (e.g. Jamahal Hill)
+They’ve clearly fallen into a bad habit and their coach isn’t rectifying it (e.g. Tai Tuivasa, who became obese)
+They suffer a bad loss (e.g. Ryan Span)
+Their current gym is run down (e.g. Malcolm Wellmaker)
+Their game plan is clearly limited (e.g. Marlon Vera)
