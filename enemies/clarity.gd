@@ -236,6 +236,10 @@ func _ready():
 	arm_anim_player.play("WalkLeftAggressive")
 	snowflake_anim_tree.active = true
 	snowflake_anim_playback = snowflake_anim_tree.get("parameters/StateMachine/playback")
+	
+	# Ensure all shards are full health and hurtable when Clarity spawns
+	regen_dress_shards()
+
 
 func frames(num: int) -> float:
 	return num * get_physics_process_delta_time()
