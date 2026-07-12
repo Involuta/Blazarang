@@ -10,9 +10,9 @@ func _ready():
 	super()
 	# This is adjusted in code instead of inspector to save time (otherwise I'd have to click into every ClarityShardHurtbox and change all their colors individually)
 	hit_particle_color = Color8(182, 222, 255)
-	mesh = hb_owner.find_children("*", "MeshInstance3D", false, false)[0]
+	mesh = hb_owner.find_children("*", "MeshInstance3D", true, false)[0]
 	mat = mesh.get_surface_override_material(0)
-	hitbox = hb_owner.find_children("EnemyHitbox", "Area3D", false, false)[0]
+	hitbox = hb_owner.find_children("EnemyHitbox", "Area3D", true, false)[0]
 
 func death_effect():
 	if "death_effect" in hb_owner:
