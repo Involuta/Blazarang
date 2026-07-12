@@ -337,7 +337,7 @@ bone_idx = 15
 surface_material_override/0 = SubResource("StandardMaterial3D_d1nc3")
 
 [node name="FrontRight" parent="Armature/Skeleton3D" index="9"]
-transform = Transform3D(0.866026, 0.5, -2.12165e-07, -0.5, 0.866026, -1.8918e-07, 1.81004e-07, 2.493e-07, 1, 5.96046e-08, 2.38419e-07, -1.67079e-06)
+transform = Transform3D(0.866026, 0.5, -2.12165e-07, -0.5, 0.866026, -1.8918e-07, 1.81004e-07, 2.493e-07, 1, 2.98023e-08, 2.98023e-07, -1.67266e-06)
 bone_idx = 17
 
 [node name="FrontRight" parent="Armature/Skeleton3D/FrontRight" index="0"]
