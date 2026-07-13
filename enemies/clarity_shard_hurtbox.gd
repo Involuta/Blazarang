@@ -8,6 +8,10 @@ var hitbox : Area3D
 
 func _ready():
 	super()
+	# ClarityShardHurtbox is child of ShardOffset, which is a child of the dress shard bone, which contains everything needed by this script
+	# Why not just put the DS bone in this script's Hurtbox Owner slot in the inspector? Because it keeps getting cleared whenever I reimport ClarityDressShards.glb for some reason
+	
+	hb_owner = get_parent().get_parent()
 	# This is adjusted in code instead of inspector to save time (otherwise I'd have to click into every ClarityShardHurtbox and change all their colors individually)
 	hit_particle_color = Color8(182, 222, 255)
 	mesh = hb_owner.find_children("*", "MeshInstance3D", true, false)[0]
@@ -52,7 +56,6 @@ func regen():
 
 func receive_hit(hitbox, hitter):
 	# Glow to dim effect
-	var mat = mesh.get_surface_override_material(0)
 	var t = get_tree().create_tween()
 	t.tween_property(mat, "shader_parameter/emission_energy", 0.75, 0)
 	t.tween_property(mat, "shader_parameter/emission_energy", 0.0, 0.6)
@@ -60,7 +63,6 @@ func receive_hit(hitbox, hitter):
 
 func receive_hit_no_hitbox(damage):
 	# Glow to dim effect
-	var mat = mesh.get_surface_override_material(0)
 	var t = get_tree().create_tween()
 	t.tween_property(mat, "emission_energy_multiplier", 1.2, 0)
 	t.tween_property(mat, "emission_energy_multiplier", 0.0, 0.6)

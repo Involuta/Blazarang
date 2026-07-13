@@ -1953,7 +1953,7 @@ hit_particles = ExtResource("14_luiy3")
 hit_particle_color = Color(0.713726, 0.870588, 1, 1)
 defense = 6
 opponent_hitboxes = ["PlayerHitbox", "SelfDamageHitbox"]
-hurtbox_owner = NodePath("../..")
+hurtbox_owner = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardFrontLeft/Armature/Skeleton3D/FrontLeft/ShardOffset/ClarityShardHurtbox"]
 shape = SubResource("CapsuleShape3D_1pjfc")
@@ -2059,7 +2059,7 @@ hit_particles = ExtResource("14_luiy3")
 hit_particle_color = Color(0.713726, 0.870588, 1, 1)
 defense = 6
 opponent_hitboxes = ["PlayerHitbox", "SelfDamageHitbox"]
-hurtbox_owner = NodePath("../..")
+hurtbox_owner = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardFrontRight/Armature/Skeleton3D/FrontRight/ShardOffset/ClarityShardHurtbox"]
 shape = SubResource("CapsuleShape3D_1pjfc")
@@ -2137,7 +2137,7 @@ hit_particles = ExtResource("14_luiy3")
 hit_particle_color = Color(0.713726, 0.870588, 1, 1)
 defense = 6
 opponent_hitboxes = ["PlayerHitbox", "SelfDamageHitbox"]
-hurtbox_owner = NodePath("../..")
+hurtbox_owner = NodePath("../../../../../../DressShardFrontLeft")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardMiddleLeft/Armature/Skeleton3D/MiddleLeft/ShardOffset/ClarityShardHurtbox"]
 shape = SubResource("CapsuleShape3D_7112o")
@@ -2233,7 +2233,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_4lxqc")
 [node name="ShardOffset" type="Node3D" parent="DressShardMaster/DressShardMiddleRight/Armature/Skeleton3D/MiddleRight" index="1"]
 transform = Transform3D(0.965473, 0.260504, 3.48787e-16, -0.260504, 0.965473, -3.48787e-16, -4.27605e-16, 2.45884e-16, 1, -5.4, -5.82, 2.08165e-12)
 
-[node name="ClarityShardHurtbox" type="Area3D" parent="DressShardMaster/DressShardMiddleRight/Armature/Skeleton3D/MiddleRight/ShardOffset" node_paths=PackedStringArray("hurtbox_owner")]
+[node name="ClarityShardHurtbox" type="Area3D" parent="DressShardMaster/DressShardMiddleRight/Armature/Skeleton3D/MiddleRight/ShardOffset"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 collision_layer = 8
 collision_mask = 265
@@ -2243,7 +2243,6 @@ hit_particles = ExtResource("14_luiy3")
 hit_particle_color = Color(0.713726, 0.870588, 1, 1)
 defense = 6
 opponent_hitboxes = ["PlayerHitbox", "SelfDamageHitbox"]
-hurtbox_owner = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardMiddleRight/Armature/Skeleton3D/MiddleRight/ShardOffset/ClarityShardHurtbox"]
 transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 1, 0, 0, 0)
@@ -2335,7 +2334,7 @@ hit_particles = ExtResource("14_luiy3")
 hit_particle_color = Color(0.713726, 0.870588, 1, 1)
 defense = 6
 opponent_hitboxes = ["PlayerHitbox", "SelfDamageHitbox"]
-hurtbox_owner = NodePath("../..")
+hurtbox_owner = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardBackLeft/Armature/Skeleton3D/BackLeft/ShardOffset/ClarityShardHurtbox"]
 shape = SubResource("CapsuleShape3D_a428p")
@@ -2442,7 +2441,7 @@ hit_particles = ExtResource("14_luiy3")
 hit_particle_color = Color(0.713726, 0.870588, 1, 1)
 defense = 6
 opponent_hitboxes = ["PlayerHitbox", "SelfDamageHitbox"]
-hurtbox_owner = NodePath("../..")
+hurtbox_owner = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DressShardMaster/DressShardBackRight/Armature/Skeleton3D/BackRight/ShardOffset/ClarityShardHurtbox"]
 shape = SubResource("CapsuleShape3D_a428p")
