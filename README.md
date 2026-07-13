@@ -1,4 +1,4 @@
-Blazarang Ideas Doc Backup Jul 8 2026
+Blazarang Ideas Doc Backup Jul 13 2026
 
 Production Processes
 
@@ -3153,6 +3153,9 @@ What will the snowflake do during RegenShards? One of its primary gameplay purpo
 What is it required to do?
 Not do its usual rotation, which would imply that a dress shard attack is coming
 Idea: snowflake spawns ice sprites or shoots a snow plume at the target periodically
+Make snowflake descend to ground and get stabbed by the arm shard
+Stop facing the player
+Move snowflake to the floor at Clarity’s center
 Regen shards functionality (aside from snowflake anim during RegenShards)
 Dress shards perform RegenShards anim
 After looking at RegenShards again, it appears to have a sudden start, which doesn’t fit Clarity’s slow mvmt. Change the anim to have a slow start
@@ -3184,14 +3187,39 @@ Snowflake hits no longer damage the head; this makes things simpler for the play
 Fix bug where dress shards have functional hitboxes and hurtboxes when destroyed
 Toggle hurtbox collision by setting monitoring. You could have moved the hurtbox under the map like you do with mites when they die, but toggling monitoring to false is easier to code
 Toggle hitbox collision by getting a reference to the hitbox in the hurtbox script, then setting the hitbox’s monitorable property
+Add more depth to Clarity’s current basic attacks
+Animate Dress Shards TripleShardSequence1 in Blender
+Animate Snowflake TripleShardSequence1 in Blender
+Import dress shards anim to Godot
+Make dress shards anim keyframes
+Import snowflake anim to Godot
+Make snowflake anim keyframes
+Add TripleShardSequence1 attack to snowflake attack chances
+Move dress shard hurtbox, hitbox, and ground penetrate particles into shared parent node so that you don’t have to copy the same transform to all of them whenever the transform gets reset for some reason (when you imported the new ClarityDressShards, the hurtbox transform got reset, but not the hitbox)
+The shared parent node will have the transform to move the hurtbox, hitbox, and ground penetrate particles from the center of Clarity's crotch to its dress shard. For now, these components have their own transforms which are identical (except ground penetrate particles are slightly lower than the center of the shard)
+Ground penetrate particles each have an offset of -2.4 in the parent node’s y dir
+Rework TripleShardSequence1 to differentiate it from DoubleShardSequence1 → shards now criss-cross instead of going straight (Single1 tests continuous awareness, Double1 tests weaving, and Triple1 tests distancing)
 Current task
+Add Jump Shot to moveset
+Make Jump Shot start from WalkLeft, not WalkForward
+Make Jump Shot choosable when both arm and snowflake are in neutral
+Animate snowflake in jump shot
+Figure out what snowflake should do
+Idea: ice sprite rework
+Ice sprites aren’t threatening at all. You can easily walk away from them to dodge their attack. I want the player to actually think about the ice sprites. I also want this fight to symbolize the power of ice: slow, creeping power that builds up over time until it’s overwhelming. Simple, but brutal and effective if left unchecked.
+Core concept: ice sprites build up over time until they’re everywhere
+Instead of being spawned in the blizzard, they’re spawned via projectile from a spire, a structure that spawns at the impact site of a jump shot OR a giant snowflake icon on the ground that appears at the site of a jump shot
+An ice sprite starts out as a hopper, which behaves identically to the current ice sprite, except if the ice sprite is destroyed before it destroys itself, it doesn’t create the snow hitbox
+If the ice sprite destroys itself, glowing snow particles slowly rise into the air, then settle at a point high up (around top of snowflake level or higher). At this point, the ice sprite fairy starts manifesting
+The ice sprite fairy starts off as a glowing blue-white dot. It gets brighter over time, and right before it spawns, it plays a telegraph anim of some kind (e.g. a bunch of particles emitted or received). During this telegraph anim, if you hit the ice sprite fairy, it dies in one hit
+When the ice sprite fairy fully spawns, it mostly just meanders randomly in Clarity’s vicinity and occasionally shoots fast projectiles that create a snow cloud just like the ice sprite explosion. It dies in 3 rose (or ax) hits, but right before it fires a projectile, it glows brightly, and when it glows brightly, you can hit it to kill it in 1 hit
 Snowflake anim during RegenShards
+Snowflake looks boring just lying there getting stabbed; try making a branching snowflake pattern form on the ground as it’s stabbed
+Idea: make a big snowflake mesh in Blender, then use a shader to expand the visible area of the snowflake mesh starting from the center to outward. This expanding area is preferably a hexagon so the snowflake’s branches appear evenly
 Snowflake invulnerability anims
 Idea: make face plate spin on the y axis when hit by a projectile while invulnerable
 Currently, this doesn’t work bc the face plate is right behind the central eye’s spikes. This could work if the central eye’s spikes could detach and move outward, allowing the face plate to spin
 Add shrinking outline onto face plate when it’s vulnerable
-Add Jump Shot to moveset
-Animate snowflake in jump shot
 Remove RaiseLeftSliceFast and RaiseLeftFast since Clarity must infuse the arm with energy before moving it quickly, and she shouldn’t infuse the arm just to lift it quickly
 Add effect where head covers arm in snow and/or infuses it with glowing energy
 This is to answer the question: why does Clarity expose her head’s weak spot right before she swings if it provides no clear advantage to her? Neil asked this when introduced to Clarity for the first time. The answer is that the head gives the arm its high velocity. When the arm raises, it’s slow bc it has no infused energy yet
@@ -5251,7 +5279,47 @@ Future Blade wants to train
 Angels just want to play catch
 Some want the privilege of fighting the champion
 Some weaker gods are more motivated now that he’s closer to their level
+Cotu goes from gym to gym to get stronger before the gala
+Gym 1: Beginners and Casuals
+Gauntlet Variant 1, the gentle guides
+Whipspider/Crab, a nervous beginner who’s unsure of what his long term plans are for fighting
+Mite Queen, who fights as a fun hobby
+Gym 2: Bullies and Ambitious Rising Stars
+Grow-a-Gator
+Grow-a-Gator’s victims
+Elite Gunner and Sentinel, the cool managers/coaches
+Gauntlet Central (+ nearby gods): Elite Athletes
+Future Blade: a self-deprecating drag queen
+Fire Dancer (?)
+Angels: folks who just want to play catch
+Gala: Championship Contenders
+Neuro
+Tempered X
+Blackstar
+Turbo Jester (?)
+Fire Dancer (?)
 Character interactions that are the same regardless of plot
+Idea: Grow-a-gator/Grower Gator arc
+When the player arrives at Gauntlet Gym 2, they see a cutscene of the first ever appearance of Gator. While its hype theme song plays (inspired by Laser Dance from Ocean’s Twelve), it steps off of a pile of dead bodies containing everyone from Gauntlet Gym 1, dances into and hijacks a nearby gauntlet shuttle, then flies it into space while head-dancing (moving its head back and forth in an arc) on the console. A title appears: [number] [time units] UNTIL IT ARRIVES. The camera then cuts back to the player
+When Gator steps off the pile, a soul can be seen flying out of the pile
+In the shuttle, to put in the coordinates for Gauntlet Gym 2, Gator simply spins on top of the console in a static pose
+When Gator arrives at Gauntlet Gym 2, Cotu finds it dancing on top of another pile of dead bodies
+On top of the dead bodies, Gator screams: “BITE EVERYBODY! KILL EVERYBODY!”
+After Cotu defeats Gator, Gator struggles against Cotu’s grip.
+Gator: “KILL EVERYBODY! KILL! KILL! KILL!”
+Cotu holds up his weapon and starts to strike, which causes Gator to freeze. Cotu realizes Gator’s frozen and stops.
+Cotu: “Stay.”
+Gator looks at Cotu
+Cotu gets up and backs away. Gator lies motionless on the ground. [Camera is on Cotu] Cotu slowly lowers his weapon.
+[Cut to Gator] Gator suddenly raises its head and looks up at Cotu. [Cut to Cotu] Cotu instantly raises and flashes his weapon.
+[Cut to Gator] Gator is lying motionless on the ground in the exact same pose it was in before. It then goes “bleh” and sticks its tongue out
+Cotu: “If you want to kill somebody, ask for permission first.”
+Gator: “...”
+Cotu: “Understand?”
+Gator: “...bleh.”
+Cotu slowly puts away his weapon. Gator lies still
+Idea: Sean Strickland god overhears Future Blade and his friends gossiping about him and starts beef
+After fighting FB or one of his friends, Sean god becomes friends with them because he respects them as fighters
 Greg and X meeting for the first time
 Cotu comes back from a respawn with X waiting on the ship with Greg. Cotu is excited to see them together and is curious to know how they feel about each other
 Greg wants to impress X because he looks up to him
@@ -5808,6 +5876,24 @@ Funny and self-deprecating; doesn’t take himself or the sport seriously
 (In the cage after winning a fight) “I wanna fight with Brock Lesnar!” (Brock is a huge former WWE wrestler way outside Islam’s weight class)
 “Me vs Ian Garry is like Khabib vs Conor from Alibaba” (because both pairs are Dagestan vs Ireland, but Khabib vs Conor was a worldwide phenomenon)
 Note that Islam is being humble here. Yes, neither he nor Ian Garry have the stardom that Khabib and Conor had, but if Islam wins this fight (this is being written Jul 3 2026), he would break the record for longest win streak in UFC history (current record is 16 wins) and defeat Ian Garry, an elite opponent with a 17-1 record and who recently defeated former champion Belal Muhammad
+
+Sean Strickland
+Real life GTA character
+Loud tough guy who suffers from toxic masculinity pressure due to abuse from his father that he still hasn’t moved on from
+Generally well-meaning, but is too honest and unfiltered, which gets him into trouble in public. Isn’t afraid to stand his ground and argue
+Goes too hard against normal civilians and when sparring in the gym
+Super tactical; one of, if not the best defense of all fighters
+Only attacks with a jab and a teep
+Slowly marches forward to deal pressure
+Iconic quotes:
+“Here’s the thing you guys,” or “Here’s the thing about ___ you guys,”
+“___ is a fucking pussy”
+
+Khamzat Chimaev
+Violent gremlin who fights dirty and constantly shoots takedowns. Hunts for complete dominance/submissions
+Completely unhinged, making him unintentionally hilarious
+“SMASH EVERYBODY! KILL EVERYBODY!”
+Has an awesome theme song: Laser Dance from Ocean’s Twelve
 
 Why Fighters Might Want to Change Gyms
 What all of these reasons have in common is that the fighter has great potential
