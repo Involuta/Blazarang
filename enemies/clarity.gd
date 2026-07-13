@@ -330,9 +330,6 @@ func _physics_process(delta):
 			global_position.y = min_y_pos
 	move_and_slide()
 	
-	# Change this when you add snowflake look states
-	snowflake_face_position(target.global_position)
-	
 	match(look_state):
 		LOOK_STATE.DIR:
 			var look_pos = global_position + look_forward_dist * velocity.normalized()
@@ -349,6 +346,7 @@ func _physics_process(delta):
 			head_look_at_position(target.global_position)
 			arm_look_at_position(target.global_position)
 			body_look_in_direction(global_position.direction_to(target.global_position))
+			snowflake_face_position(target.global_position)
 		LOOK_STATE.TARGET_BODY_FULL_ROTATION:
 			if aiming_at_target:
 				body_face_position_directly(target.global_position)
@@ -695,11 +693,20 @@ func backflip_mvmt():
 	t.tween_property(self, "velocity", full_dash_speed * Vector3.ZERO, 0)
 
 func regen_shards_mvmt():
-	switch_to_special()
 	var t = get_tree().create_tween()
 	var move_dir := 3 * walk_speed * target.global_position.direction_to(global_position)
 	t.tween_property(self, "velocity", Vector3(move_dir.x, 0, move_dir.z), 0)
 	t.tween_property(self, "velocity", Vector3.ZERO, frames(84))
+
+func snowflake_descend():
+	var t = get_tree().create_tween().set_parallel()
+	t.tween_property(snowflake, "position", Vector3(0, -9.7, 5.4), 2.5).set_ease(Tween.EASE_IN_OUT)
+	t.tween_property(snowflake, "rotation_degrees", Vector3(-90, 0, 0), 2.5).set_ease(Tween.EASE_IN_OUT)
+
+func snowflake_return():
+	var t = get_tree().create_tween().set_parallel()
+	t.tween_property(snowflake, "position", Vector3(-19, 17, -5.4), 2.5).set_ease(Tween.EASE_IN_OUT)
+	t.tween_property(snowflake, "rotation_degrees", Vector3(26, -2.7, -1.8), 2).set_ease(Tween.EASE_IN_OUT)
 
 func regen_dress_shards():
 	for shard in dress_shards.values():
