@@ -1,3 +1,8 @@
+res://enemies/enemy_anims/snowflake_entity_doubleshardseq1.res
+res://enemies/enemy_anims/snowflake_entity_rotateslow_3seg.res
+res://enemies/enemy_anims/snowflake_entity_singleshardseq1.res
+res://enemies/enemy_anims/snowflake_entity_stagger.res
+res://enemies/enemy_anims/snowflake_entity_tripleshardseq1.res
 res://enemies/clarity.tscn
 res://ui/flash.gdshader
 res://ui/glitch.gdshader
@@ -12,7 +17,6 @@ res://shaders/smoke.gdshader
 res://GPUTrail-main/shaders/trail_draw_pass.gdshader
 res://GPUTrail-main/defaults/texture.tres
 res://GPUTrail-main/defaults/curve.tres
-res://enemies/enemy_anims/clarity_quad_shard_sequence1.res
 res://rang/roserang_shader.tres
 res://textures/x_boss_body.tres
 res://levels/x_boss_level/background_nodes/reveal_from_middle.gdshader
@@ -31,6 +35,7 @@ res://shaders/sobel_outline.gdshader
 res://enemies/snowflake_link_outline.gdshader
 res://enemies/ground_glow.gdshader
 res://enemies/clarity_dress_shard.gdshader
+res://enemies/enemy_anims/snowflake_entity_quadshardseq1.res
 res://enemies/clarity_head.tscn
 res://levels/snow_level/snow_level_test_env.tscn
 res://enemies/ice_sprite.tscn
