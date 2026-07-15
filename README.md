@@ -1,4 +1,4 @@
-Blazarang Ideas Doc Backup Jul 13 2026
+Blazarang Ideas Doc Jul 14 2026
 
 Production Processes
 
@@ -3198,11 +3198,19 @@ Add TripleShardSequence1 attack to snowflake attack chances
 Move dress shard hurtbox, hitbox, and ground penetrate particles into shared parent node so that you don’t have to copy the same transform to all of them whenever the transform gets reset for some reason (when you imported the new ClarityDressShards, the hurtbox transform got reset, but not the hitbox)
 The shared parent node will have the transform to move the hurtbox, hitbox, and ground penetrate particles from the center of Clarity's crotch to its dress shard. For now, these components have their own transforms which are identical (except ground penetrate particles are slightly lower than the center of the shard)
 Ground penetrate particles each have an offset of -2.4 in the parent node’s y dir
-Rework TripleShardSequence1 to differentiate it from DoubleShardSequence1 → shards now criss-cross instead of going straight (Single1 tests continuous awareness, Double1 tests weaving, and Triple1 tests distancing)
+Rework TripleShardSequence1 to differentiate it from DoubleShardSequence1
+Add QuadShardSequence1
+Single1 tests continuous awareness, Double1 tests precise positioning, Triple1 tests precise positioning from a weird angle, and Quad1 tests precise positioning/distancing
+Animate snowflake entity and dress shards
+Import anims and add them to moveset
 Current task
 Add Jump Shot to moveset
-Make Jump Shot start from WalkLeft, not WalkForward
-Make Jump Shot choosable when both arm and snowflake are in neutral
+Make Jump Shot anim start from WalkLeft, not WalkForward
+List all jump shot requirements to know how to implement it
+Only usable when both arm and snowflake are in neutral
+Must be used at least once during the fight
+If it’s used more than once, it cannot be shot in the same place twice
+Must be powerful and impactful
 Animate snowflake in jump shot
 Figure out what snowflake should do
 Idea: ice sprite rework
@@ -3382,7 +3390,7 @@ Unlockable Skill
 Gauntlet Boss: Elite Gunner + Sentinel
 Phase 1: EG is laying prone on top of FirstMiniboss while FirstMiniboss constantly tornadoes
 Explosive slug
-Phase 2: EG runs around on footb
+Phase 2: EG runs around on foot
 Run 360: EG strafes around the target, then jumps while spinning about the y-axis 360 degrees. When she faces away from the target, her shotgun’s muzzle flashes with light. The second time EG faces the target (not the target + its mvmt dir), she fires. She lands facing the direction she was originally running in. Does extra damage
 Spawn Grenade: EG throws 1-3 cubic grenades around the target, each of which has a tiny beacon to the sky. 5 seconds after a grenade is thrown, a spawner box from Gauntlet 1 flies vertically from far above onto the grenade’s x and z pos, spawns a random enemy from the choices below, then flies back into the sky
 Sentinel
@@ -3390,13 +3398,15 @@ Frag Grenade: EG throws 1 spherical grenade directly at the target’s pos + Cot
 Slide Buckshot: EG strafes around the target, then slides into a crouching position while taking aim at the target. She then fires at the target + Cotu’s mvmt dir
 Switch Strafe: EG abruptly pivots and starts running in the opposite direction. Chosen when Cotu throws the rang
 Slide Buckshot: EG slides towards the target (dodging underneath the rang), exits the slide in a crouching position, then fires straight ahead in the direction she’s facing
-Pull Up Cover: EG stomps the ground, causing a black rectangular prism to rise from the ground. This prism is part of the arena, so the rang cannot pass through it. The prism will slowly sink into the ground over time, eventually disappearing. This move usually leads into her reloading her shotgun
+Pull Up Cover: EG stomps the ground, causing a black rectangular prism to rise from the ground. This prism is part of the arena, so the rose cannot pass through it. The prism will slowly sink into the ground over time, eventually disappearing. This move usually leads into her reloading her shotgun
 Smoke Pillar Grenade: EG throws an odd-looking grenade that turns into a smoke pillar on impact. It does no damage but creates a big plume of stylized cubic smoke that is extremely difficult to see through. It lasts for about 30 seconds
 Sentinel
 Cyan melee supporting enemy
-Wields a big thick sword with a blade about as tall as GauntletMeleeTier1’s body
+Wields a big thick halberd about as tall as GauntletMeleeTier1’s body
 About 2 heads taller than GauntletMeleeTier3 and even bulkier
 Runs at the target, then performs a dash slash that looks similar to the Little Prince’s guardian ability from Clash Royale
+Combos:
+EG Iso (“Isolation”): Sentinel dashes back and plants his halberd into the ground, causing EG to become more aggressive. This is meant to trick the player into thinking they’re supposed to focus on EG, when they’re actually supposed to attack Sentinel, as he’s charging up his halberd to do more powerful attacks 
 
 Badges (“Mastery”)
 The player wins experience points (XP) for accomplishing certain feats in a boss fight
@@ -3537,7 +3547,7 @@ Flora (flower girl in a pot of dirt): semi-smart, toxic, and irresponsible. Smoo
 Conversation ideas:
 Future Blade’s name
 FB is undecided on his name and everyone brainstorms what it should be
-FB mentions that in another conversation about his name (he thinks it might have been gauntlet gym 2), some random guy came out of nowhere and suggested a dumb name, butting into the conversation awkwardly. This was actually whipspider/crab, whom the player had met before. FB makes fun of his appearance and demeanor and the girls laugh. MS laughs slightly less and a bit differently compared to the others. They also make fun of the name he suggested and they all laugh loudly (e.g. “FUBA!!! AHAHAHAHA!!!”)
+FB mentions that in another conversation about his name (he thinks it might have been gauntlet gym 2), some random guy came out of nowhere and suggested a dumb name, butting into the conversation awkwardly. This was actually Jab Crab, whom the player had met before. FB makes fun of his appearance and demeanor and the girls laugh. MS laughs slightly less and a bit differently compared to the others. They also make fun of the name he suggested and they all laugh loudly (e.g. “FUBA!!! AHAHAHAHA!!!”)
 Flora comments that they’re all dumb for laughing this much about the name. Flora mentions that people in Korean TV shows on the Internet need alcohol to get this dumb
 FB asks everyone if they’d drink if they could get drunk
 Flora says she’d drink out of her mind and become an alcoholic. She chants: “Go crazy! Go stupid! Go crazy! Go stupid!” MS begs her not to. FB agrees with Flora, and they both chant: “Go crazy! Go stupid!”
@@ -4160,15 +4170,38 @@ Pilot portals above them to join the hug
 Pilot: “You get in here too, Cotu!”
 Cotu: *joins the hug and closes his eyes*
 
-Whipspider/Crab Boss (just an idea)
+Jab Crab Boss (just an idea)
 Heavily armored crab in a tiny arena surrounded by walls/floor spikes/floor shark teeth/whatever
+Has 2 big claws attached by long extendable/retractable tube arms
 Can catch the rose and throw it aside and/or parry it
 Approaches slowly and cautiously with jabs (reaching out and clasping with the claw)
 Feints constantly
+Damage he takes depends on his stance when you hit him
+If both hands are blocking: he perfect parries and takes very little arm damage
+If one hand is blocking and the other is jabbing, and you hit his blocking side: he blocks it and the rose is deflected, but takes partial damage to the claw
+If one hand is blocking and the other is jabbing, and you hit his jabbing side: he takes full damage
+If you hit him behind or around his claws: he takes full damage
+Claw can break after blocking too much
 Occasionally unexpectedly dashes in with open claws
 Inspired by UFC fighters
 Reference: Alex Pereira vs Khalil Rountree
-Idea: in phase 2, instead of staying low to the ground, it gets up on its hind legs (walking on 4 legs instead of 6 or 8), allowing it to lunge forward with its chest and its arms instead of just the arms
+Idea: in phase 2, instead of staying low to the ground, he gets up on his hind legs (walking on 4 legs instead of 6 or 8), allowing him to lunge forward with its chest and his arms instead of just the arms
+Idea: tether tag
+When close enough, JC attaches a tether to your body. It deals damage over time when JC is too far from you. To remove the tether, you must touch JC with your body
+JC plans to dash in aggressively, attach a tether, then constantly back away while jabbing
+
+Jab Crab’s Goofy Friend
+Goofy, weak looking character who wants nothing to do with fighting and is only with Jab Crab for emotional support (and to give him his honest feedback)
+Jab Crab brings him along for his honesty, good insight, and companionship
+Has the speaking demeanor of YouTuber JrPlays (sample: https://www.youtube.com/watch?v=snErVEdm9Yc)
+Speaks at an unusually consistent, even pace
+Medium pitch
+Sometimes voice cracks
+Says goofy lines (e.g. “Ew ew ewwww!” “Holy moly!”), possibly uses “Holy moly!” as a catchphrase
+Loves to glaze, but isn’t afraid to say when something is terrible
+Convo idea:
+Cotu: “You up for a spar?”
+GF: “Absolutely not. Please don’t hit me, I beg you.”
 
 RPG Boss (just an idea)
 Special gamemode where it’s a turn-based RPG that looks like Mother/Earthbound
@@ -4699,82 +4732,61 @@ Secretly madly in love (or lust) with Greg
 Story Progression Arcs/Episodes
 Cotu goes on a journey and encounters progressively more antagonistic antagonists
 Destination is a gala for top competitors. Gala is like a pantheon from Hollow Knight where you fight several bosses in a row
-Idea: you have the option of telling the event organizers about the kidnappers. If you tell them, they don’t participate in the tournament
-Idea: Player only has a limited number of fight attempts and stabilizers across the entire journey before the gala begins. As the player completes subsequent runs, they’ll have more and more attempts and stabilizers that they can use to practice against later bosses
-Certain gods (e.g. mites) force the player to defeat them or use many stabilizers to charge the ship’s stability shields to escape their realms. Surviving their encounters for a certain length of time grants experience that you can use to unlock skills, but doesn’t progress the journey past them
-Progressing through the journey quickly (i.e. beating bosses with less attempts) will allow the crew to catch up to other gods making their way to the gala. The player may encounter gods they didn’t encounter in previous runs due to taking too long
-If the player initiates the gala while still possessing attempts and stabilizers, the leftovers can be converted into skill points and other unlockables before the start of the next run
-The player is told about this game mechanic at the start of the entire game so they know they should do it
-Idea: each gala battle win multiplies the SP/unlockable potential of the leftover attempts and stabilizers
-Idea: using stabilizers in the gala is against the rules, so when entering the gala, the player has the option to convert them to XP to level up/upgrade skills before the first gala fight, or save them to be converted to skill points, items, etc. for the next run
-Idea: leftover stabilizers post-gala can be converted to super stabilizers in the next run (e.g. 4 stabilizers → 1 super stabilizer). Super stabilizer may provide a damage boost + temporary invincibility (via infinite stability) + no startup time on weapon throws + …
-Idea: Skill Tracks
-At the gala, participants can sign up for the Casual or Hardcore track. In the Casual track, participants can use any number of stabilizers they want. In the Hardcore track, stabilizers are forbidden
-OR fighters in the Casual track have a limited number of stabilizers they can use throughout the entire gala. This can be justified in-universe by saying they’re hard to come by
-Casual fighters (including but not limited to):
-Grower Gator
-Future Blade
-Triplets (as a surprise)
-Hardcore fighters (including but not limited to):
-Tempered X
-Turbo Jester
-Blackstar
-Whichever track the player joins, the player is allowed to train with members of the opposite track (i.e. fight them some number of times, limited or unlimited) before initiating the gala
-The player can only choose one track per run. If they want to try the other track, they have to start the journey from the beginning
-Idea: the player gets some kind of bonus, e.g. more XP per defeated boss, after each journey, but for story reasons, the player always starts with 0 XP and 0 upgrades at the start of each run
-If the player joins the Casual track, they can train with TX and Blackstar, but they won’t go all out
+Idea: Player only has a limited number of fight attempts across the entire journey before the gala begins. As the player completes subsequent runs, they’ll have more and more attempts that they can use to practice against later bosses
+Certain gods (e.g. mites) force the player to defeat them to escape their realms. Surviving their encounters for a certain length of time grants experience that you can use to unlock skills, but doesn’t progress the journey past them
+Progressing through the journey quickly (i.e. beating bosses with less attempts) will allow Cotu to catch up to other gods making their way to the gala. The player may encounter gods they didn’t encounter in previous runs due to taking too long
+Leftover attempts can be used to practice with gods at the gala before the gala begins, but in practice fights, gods won’t go all out
 TX won’t use his supermoves or enter his final tryhard phase
 Blackstar won’t use her ultimate form
 Idea: Jester refuses to train with you, but maybe she harasses/teases you in the hub room instead
-The idea that stabilizers are consumables usable by everyone creates some issues:
-If every god has a unique form of stability, how are they all stabilized by the same object? A stabilizer that works for one god shouldn’t work for another
-Saving all your stabilizers until you get to the gala feels like cheating against the competition. You’re bringing in an advantage originating from outside the gala
-It’s probably better for the player’s sense of accomplishment if stabilizers worked like Pulse Cells from Lies of P; you’re given a set number of them whenever you respawn/rest (in this case, maybe when you return to your realm), you can upgrade how many stabilizers you spawn with, and you can regain stabilizers mid fight somehow
+Note: stabilizers work like Pulse Cells from Lies of P; you’re given a set number of them whenever you respawn/rest (in this case, maybe when you return to your realm), you can upgrade how many stabilizers you spawn with, and you can regain stabilizers mid fight somehow
 This also makes Cotu more unique as a god; he trades maximum HP in exchange for the ability to stabilize after being destabilized
 Player can save at a checkpoint with a limited number of slots
-Order of encounters:
-Cotu’s friends (supporting Cotu)
-Gauntlet
-Ball Walker (maybe)
-X
-Clarity (neutral)
-Mites (opposing, but nonintimidating)
-Angels (optional, fun distraction)
-Kidnappers (opposing and intimidating)
-Centipede (maybe)
-Darkness (maybe)
-Tempered X
-Blackstar
-Microwave
-Notes:
-Mites were originally planned to be a cute friendly faction with their creator being a friend who wants Cotu to play with their toys, but Ball Walker’s shape and toy-like nature fits that better. Mites were meant to send the message that someone could have a strange appearance but friendly personality, but Ball Walker can do the same since the contraption is strange looking but subconsciously friend-shaped
 Steps for the journey:
 The Return
 Cotu comes back from vacation and warms up by fighting gauntlet var 1 (+ var 5 with the gauntlet tower miniboss)
-Cotu fights X, who’s a bit peeved that he had to wait for Cotu instead of heading to the gala early. He’s hiding the fact that he wanted to see Cotu again
-Cotu and the triplets start heading off to the gala
-The Void
-After some time, Cotu and the triplets are given a choice: take the long route to the gala through the web strand of light and matter, or take the shortcut through the Great Void. Going through the void is risky since there’s no way to communicate with the rest of the universe when you’re deep enough in the void, but if they take the long way, Cotu won’t have as much time to fight other gods (in game, he won’t have as many attempts) before the gala begins. The crew doesn’t have the time to spare since they spent too much time on vacation
-In reality, the universe is actually built like a web, with strands of light and matter and vast voids between the strands
-The crew not having time to spare explains why none of Cotu’s overpowered friends help him along the journey; they’re already at the gala and are busy practicing or on the way to the gala ahead of him. Also Cotu needs the experience fighting people to get strong again
-If the player chooses the void, the crew encounters Clarity’s realm. They didn’t expect to see any form of life so deep in the void. The player has to defeat Clarity  or the journey ends here
-Why don’t stability shields work? I want the Clarity shortcut to be actually risky for the player
-(Alternative to the Void) The Web
-If the player chooses the long route on the web, I’m unsure what exactly will happen
-Idea: along the way, the player has the option to fight minor or gimmick bosses, which can give Cotu experience in exchange for time, or the player can skip the minor bosses to have more time to get to the gala
-Minor/gimmick bosses:
-Elite Gunner and Sentinel
-Cactus and bird?
+Cotu can fight any Gauntlet Gym 1 boss afterward, including:
+Gauntlet Variant 1 + 5
+Jab Crab
+Mite Queen
+Cotu fights X, who’s a bit peeved that he had to wait for Cotu instead of heading to the gala early. He’s also covertly happy to see Cotu again
+Mite Realm (optional)
+Cotu can visit the Mite Queen’s realm after fighting her
+On arrival, Cotu is ensnared in the realm’s webs and must fight his way out by destroying the source and saving the trapped babysitter
+Gauntlet Gym 2
+Cotu arrives at Gauntlet Gym 2, which is when the player sees a cutscene of Grower Gator obliterating everyone at Gauntlet Gym 1
+Cotu can fight:
+Elite Gunner + Sentinel
+Cactus and Bird?
 Simone Says?
-Idea: at some point along the web, the crew is attacked by the mites, and either Cotu destroys the mitriarch or the crew consumes a lot of stabilizers to charge the shields so they can escape
-The Kidnapping
-Cotu gets kidnapped by Candy Cat and has to defeat him or the journey ends here OR somebody kicks Candy’s ass and saves Cotu
-Idea: The crew sees an advertisement for extremely cheap stabilizers, so they go to Candy Cat’s booth to buy them, then get kidnapped. Greg argues that even if it’s a scam, Cotu can just beat up the scammer
+Math god?
+???
+After some time, Grower Gator arrives at Gauntlet Gym 2. Cotu defeats it and befriends it
+(Alt step 2): The Void
+Instead of going to Gauntlet Gym 2, Cotu can cut through the Great Void. Going through the void is risky since there’s no way to communicate with the rest of the universe when you’re deep enough in the void, but it saves a ton of time on the way to the gala
+In real life, the universe is actually built like a web, with strands of light and matter and vast voids between the strands
+Cotu not having time to spare explains why Cotu’s overpowered friends don’t help him along the journey; they’re already at the gala and are busy practicing or on the way to the gala ahead of him. Also Cotu needs the experience fighting people to get strong again
+Cotu unexpectedly encounters Clarity’s realm. He didn’t expect to see any form of life so deep in the void. The player must defeat Clarity or the journey ends here
+Gauntlet Central
+Cotu arrives at Gauntlet Central
+Cotu can fight:
+Future Blade
+Candy Cat, which requires going deep into the basement
+Flora, FB’s friend (?)
+Sean Strickland god, who beefs with FB and trains Jab Crab (?)
 The Gala
-The player gets only 1 attempt to fight Tempered X, Blackstar, and (hopefully) Turbo Jester OR the player can use their remaining attempts to practice fighting Tempered X and Blackstar before initiating the gala like the Radahn festival, but the player only gets that one attempt at the gala
+Player can use their remaining attempts to practice fighting gala gods before initiating the gala like the Radahn festival, but the player only gets that one attempt at the gala
+Idea: there’s a giant tower in the middle of Gauntlet Central. The gala takes place here, and the higher your rank, the higher your combat floor in the tower
+Cotu fights several bosses in a row:
+Neuro
+Tempered X
+Blackstar
 Post-Gala
-Player can fight Microwave, the one competitor disqualified from the tournament
+Player can fight Microwave, the who believes it’s far stronger than everyone in the gala
 
+Boss Selection Menu Idea:
+Instead of each gym being a hub area where you can talk to the bosses before fighting them, it’s just a basic scrolling menu like world selection in Angry Birds. It’s as minimalist as possible
+This would make the dialogue in cutscenes stand out so much more. Without hubs and the freedom to talk to NPCs as much as you want, dialogue is so scarce that cutscene dialogue become far more intriguing
 
 Notes for full version:
 Idea: for certain levels/bosses, give the player a limited number of attempts before the level/boss becomes unavailable for the rest of the playthrough
@@ -5282,7 +5294,7 @@ Some weaker gods are more motivated now that he’s closer to their level
 Cotu goes from gym to gym to get stronger before the gala
 Gym 1: Beginners and Casuals
 Gauntlet Variant 1, the gentle guides
-Whipspider/Crab, a nervous beginner who’s unsure of what his long term plans are for fighting
+Jab Crab, a nervous beginner who’s unsure of what his long term plans are for fighting
 Mite Queen, who fights as a fun hobby
 Gym 2: Bullies and Ambitious Rising Stars
 Grow-a-Gator
