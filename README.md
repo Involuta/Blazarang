@@ -1,4 +1,4 @@
-Blazarang Ideas Doc Jul 14 2026
+Blazarang Ideas Doc Jul 16 2026
 
 Production Processes
 
@@ -2237,18 +2237,33 @@ Design notes:
 Final boss of the first half of the game. A pivotal opponent that gives Cotu a major movement ability
 Idea: defeating Snowflake gives player option of either flight/hovering (fast mvmt with locked altitude or limited altitude control) or high jump + double jump
 Gateway boss between low-mid level grunts and insane planet destroyers
-First instance of a god not being friendly and/or communicative towards Cotu. Transition character from his friends/acquaintances (Gauntlet, X, Mite Lord?) to strangers/enemies (possible kidnapper bosses who try to stop Cotu from gaining the experience to win the next tourney)
+First instance of a god not being friendly and/or communicative towards Cotu
+Thinks differently from all other gods you encounter
+First (or one of the only) instance(s) of a god not caring about competition at all. Falls completely outside the spectrum of casual gym goer → tryhard athlete
+In her base form, which is most of the time, she’s focused on a mindless, repetitive, cyclic task: expanding her realm (i.e. adding ice to it). She only fights you after you damage her enough to break her out of her work cycle, which is when she defends her realm and herself
+Occasionally, her body experiences an “error” that exposes a weak point. In her base form, this mistake can cause her self damage, which allows her to eventually progress forms, achieve Clarity, and break free from her cycle, but not long enough before the realm recaptures her
+These “errors” are her true self trying to break free from the cycle by hurting herself
+She is trying to break free by making herself vulnerable, literally and metaphorically (“being vulnerable” = opening up about her emotions and realizing her work is for nothing)
 Story:
-The crew is trying to get through the Great Void, but along the way they happen to encounter a stray comet on a collision course with the ship. Despite the crew’s evasive maneuvers, the comet seems to follow them, which is when they realize it’s actually a realm. By the time they realize it, it’s too late and they’re trapped in the realm’s raging blizzard. The crew attempt to contact anyone in the realm via wireless signal, but get no response/noise. Since the triplets are too important and take too long to regenerate, Cotu enters the realm to ask the god to take down the blizzard if possible.
-When Cotu first enters the realm, he encounters nothing but a frigid snow wasteland in the dead of night with a heavy blizzard. The only light source is himself; the sky can’t be seen through the blizzard fog. Eventually, he encounters a collection of floating shards with an eyeball in the center, watching him. He notices that embedded in the iris is a soul, confirming to him that this is the realm’s god and not an auto-sentry. He tries talking to the god, but it doesn’t speak nor move. He gives a shard the lightest touch, and it slashes him as the god awakens
-In Phase 1, the soul is messy: a distorted hexagon with spikes, tears, and other flaws around it. Its body is a creepy chaotic collection of floating shards in heavy snowfall, almost like a 3D snowflake. The sky becomes a bit brighter than it was during the boss intro
-In phase 2, its soul becomes more (but not fully) symmetrical/cleans itself somewhat, its shards reshape to form a dress, and the eye reforms into/grows a wide-brimmed hat atop the dress. The sky brightens up to a morning fog feel and the snowfall becomes normal
-Idea: the soul is a large pointed hexagon snowflake-like shape that follows behind Comet like Cotu’s soul when he moves
-In phase 3, the soul becomes perfect and symmetrical. The hat shrinks and folds inward, taking the appearance of a radially symmetric arrowhead/bird covered in pointed eyes, and the dress shards shrink and fuse to create a lattice-like mesh. The sky becomes crystal clear, revealing stars and nebulas
+Cotu is trying to cross the Great Void, but along the way he happens to encounter a stray comet on a collision course with the ship. Despite his evasive maneuvers, the comet seems to follow him, which is when he realizes it’s actually a realm. By the time he realizes it, it’s too late and he’s trapped in the realm’s raging blizzard. He attempts to contact anyone in the realm via wireless signal, but get no response/noise. Cotu enters the realm to ask the god to stop the blizzard
+When Cotu first enters the realm, he encounters nothing but a frigid snow wasteland in the dead of night with a heavy blizzard. The only light source is himself; the sky can’t be seen through the blizzard fog. Eventually, he encounters a collection of floating shards repeating a simple pattern of movement atop a giant hexagonal ice platform in the snow. He guesses that this is the realm’s god. He tries talking to it, but it doesn’t speak nor change patterns
+The player must hit the shards to force the god to regenerate them, which is when it exposes its weak spot. The god occasionally switches between patterns
+In Phase 1, the body looks mindless and formless: a creepy and chaotic spiky ball of shards, almost like a 3D snowflake. At the center of the spiky ball lies a hidden soft weak point: a giant eyeball. The spiky ball is surrounded by spikes pointing towards and away from it. It’s also surrounded by many eyeballs encased in ice (“caged eyes”) that constantly scan the environment, which explains how the realm found and chased Cotu. The snowfall is heavy
+In phase 2, it discards much of its shards into the snow and reshapes the remaining shards to form a dress. The ice platform below rises and shrinks forms a hat, while the center of the spiky ball (the soul) becomes Clarity’s snowflake, a large pointed hexagon snowflake-like shape that follows behind Comet like Cotu’s soul when he moves. The sky brightens up to a morning fog feel and the snowfall becomes normal
+In phase 3, the hat shrinks and folds inward, taking the appearance of a radially symmetric arrowhead/bird covered in pointed eyes, and the dress shards shrink and fuse to create a lattice-like mesh. The sky becomes crystal clear, revealing stars and nebulas
 In phase 3, ground is covered in ice, allowing Cotu to ice skate on it like Mario in Super Mario Galaxy 2
 Cotu automatically moves in the direction the player last moved
 Movement speed (including dodge speed) is increased
 Idea: special dodge anim has Cotu soaring into the air, going higher than he usually does on a dodge
+If Cotu dies…
+In phase 1, then nothing changes. The work continues
+In phase 2, she falls apart and returns to phase 1, as the threat to her work is gone
+In phase 3, she falls back to the ground and is trapped in ice before being returned to phase 1
+Represents the consequences of choosing work over human interaction
+In her base form, Comet works constantly on a mindless task for no reason
+As she progresses through her forms, she slowly gains more and more intelligence and humanity, which gives her perspective (i.e. Clarity)
+When she realizes that her work is for nothing (i.e. nearly achieves true Clarity), she tries to escape her realm by riding ice pillars into the sky, only to inevitably fall back to the ground and end up frozen in ice once again. She is then returned to her base form and begins the cycle again
+Inspired by my own dumb decision to refuse a vacation with family in order to work and save money instead. What’s the point of saving money if it’s not used for things like this?
 Boss punishes the player for running and rewards the player for fighting close-up. This contrasts with X and the Gauntlet, which reward the player for running away
 Blizzard fills entire arena except for a circular clearing around Clarity
 Boss punishes player for attacking constantly and rewards player for waiting for the perfect moment to strike
@@ -3204,6 +3219,23 @@ Single1 tests continuous awareness, Double1 tests precise positioning, Triple1 t
 Animate snowflake entity and dress shards
 Import anims and add them to moveset
 Current task
+Think about the fight’s story as a whole so you know how to create gameplay to tell the story. You already have the gameplay essentials: aiming, timing, target selection, precise positioning, and precise dodging; the remaining gameplay to make moving forward should be in service of the story
+List all memorable moments/elements sorted by emotional power and logical sense
+3rd phase Clarity looking around, realizing she’s in her realm, and running away into the sky
+Player is shocked that she has emotions and she doesn’t want to fight you anymore. Player feels surprise and sympathy
+If she’s running away, what is the threat to the player in the 3rd phase? → When she creates her giant ice pillar, the goal can become getting to the ship while dodging and/or breaking falling ice chunks from the pillar → if Cotu and Clarity are moving in different directions in phase 3, how do we get the moment where Cotu meets true Clarity? What reason do they have to meet up again? Maybe player can choose whether to fly to her in the ship or leave?
+Cotu walks away after he believes he killed Clarity, only for true Clarity to call out to him as a tiny snowflake. They talk for a bit before Cotu forgives her and carries her to his ship
+Player is surprised that Clarity can talk and think, and feels sympathy for her
+Player feels tension when Cotu initially hesitates to approach her, then relief when Cotu chooses to forgive her (or when the player gets the choice to forgive her)
+Wouldn’t Cotu only have lost his patience if she killed him several times? What if Cotu defeated her on the first or second try?
+List story ideas that incorporate all of the memorable moments
+
+
+Find the most engaging story idea from the list
+Idea: snowflake progresses through shard sequences, and jump shot is at 6: Single → Double → Triple → Quad → ??? → Jump Shot
+Will hitting the snowflake cause it to progress forward a sequence?
+Ensures that the snowflake isn’t hard stuck at the same seq due to the player stunning it every time
+Punishes the player for doing the right thing
 Add Jump Shot to moveset
 Make Jump Shot anim start from WalkLeft, not WalkForward
 List all jump shot requirements to know how to implement it
@@ -3219,7 +3251,7 @@ Core concept: ice sprites build up over time until they’re everywhere
 Instead of being spawned in the blizzard, they’re spawned via projectile from a spire, a structure that spawns at the impact site of a jump shot OR a giant snowflake icon on the ground that appears at the site of a jump shot
 An ice sprite starts out as a hopper, which behaves identically to the current ice sprite, except if the ice sprite is destroyed before it destroys itself, it doesn’t create the snow hitbox
 If the ice sprite destroys itself, glowing snow particles slowly rise into the air, then settle at a point high up (around top of snowflake level or higher). At this point, the ice sprite fairy starts manifesting
-The ice sprite fairy starts off as a glowing blue-white dot. It gets brighter over time, and right before it spawns, it plays a telegraph anim of some kind (e.g. a bunch of particles emitted or received). During this telegraph anim, if you hit the ice sprite fairy, it dies in one hit
+The ice sprite fairjy starts off as a glowing blue-white dot. It gets brighter over time, and right before it spawns, it plays a telegraph anim of some kind (e.g. a bunch of particles emitted or received). During this telegraph anim, if you hit the ice sprite fairy, it dies in one hit
 When the ice sprite fairy fully spawns, it mostly just meanders randomly in Clarity’s vicinity and occasionally shoots fast projectiles that create a snow cloud just like the ice sprite explosion. It dies in 3 rose (or ax) hits, but right before it fires a projectile, it glows brightly, and when it glows brightly, you can hit it to kill it in 1 hit
 Snowflake anim during RegenShards
 Snowflake looks boring just lying there getting stabbed; try making a branching snowflake pattern form on the ground as it’s stabbed
@@ -3234,7 +3266,7 @@ This is to answer the question: why does Clarity expose her head’s weak spot r
 Make dress shards emit a sound when hit by a weapon and a different sound when hit by a snowflake link hit
 Idea: make arm infusion attacks where the arm swing leaves behind a continuous cloud of deadly fog like the fog from enemies
 Idea: snowflake shoots projectiles OR a continuous plume of snow (like Clarity’s body snow clouds) directly at the target
-(Skip if you think it’s not relevant for now) Implement Phase 1
+Implement Phase 1
 Body is a 3D snowflake with many branches
 Concept art from ChatGPT (note that this looks more flat than what the snowflake should be)
 
@@ -3477,7 +3509,7 @@ Fights in Gauntlet Gym 1 for fun, not for serious competition
 Line idea: “If you want serious, fight them. If you want fun, fight me.”
 She asked a babysitter to take care of her realm while she fights here. Unbeknownst to her, the mites captured her babysitter and are causing chaos in a huge area. When the player encounters the mites, the player should feel the desire to go back to Gauntlet Gym 1 to ask Miya to get her kids under control, and possibly hijinks ensue (e.g. she’s nowhere to be found and Cotu has to gather breadcrumbs to find her)
 
-Grow-a-Gator
+Grow-a-Gator (named “Groa” maybe? And then it calls itself “Groa”)
 Fast giant alligator with the ability to grow and shrink
 Tiny: size of Dwarf Caiman, used for dodges and quick positioning
 Normal: size of American alligator
@@ -4729,7 +4761,7 @@ Was originally a shy introvert who learned to hide her vulnerability with humor
 Trained alongside the gauntlet during the tournament, gaining their trust
 Secretly madly in love (or lust) with Greg
 
-Story Progression Arcs/Episodes
+Story Progression Arcs/Episodes (Plot Idea 3C)
 Cotu goes on a journey and encounters progressively more antagonistic antagonists
 Destination is a gala for top competitors. Gala is like a pantheon from Hollow Knight where you fight several bosses in a row
 Idea: Player only has a limited number of fight attempts across the entire journey before the gala begins. As the player completes subsequent runs, they’ll have more and more attempts that they can use to practice against later bosses
@@ -4784,9 +4816,67 @@ Blackstar
 Post-Gala
 Player can fight Microwave, the who believes it’s far stronger than everyone in the gala
 
-Boss Selection Menu Idea:
+Boss Selection Menu Idea (Plot Idea 4)
 Instead of each gym being a hub area where you can talk to the bosses before fighting them, it’s just a basic scrolling menu like world selection in Angry Birds. It’s as minimalist as possible
 This would make the dialogue in cutscenes stand out so much more. Without hubs and the freedom to talk to NPCs as much as you want, dialogue is so scarce that cutscene dialogue become far more intriguing
+
+Cutscenes/Boss Intro Dialogue (Plot Idea 4)
+Jab Crab fight intro: simple dialogue (in-game or in a brief cutscene?)
+Cotu: “Ready?”
+JC: “Don’t hold back, alright?”
+Cotu: “*laughs* I’d never.”
+X fight intro: cutscene with different camera angles
+Note: for Cotu’s joke to land with the player, the player needs to know that Cotu knows that his running speed can’t change
+X doesn’t want to hold back but does so to help his friend
+Cotu knows X doesn’t usually hold back, and is grateful
+X is floating in the sky, staring into the distance. He turns to face Cotu after Cotu arrives
+Cotu: “Hey, take it easy on me, alright? I’m a little out of shape.”
+X considers for a moment, then brings his hands together, and a vibrating glowing orange ball appears between them. He then holds it above his head with his left hand. It grows into a mini-sun, which he then shoots into the sky. The shot sends out a wave of energy and a shockwave that shakes the entire realm. The quick recoil pushes his hand downward, and he also raises his left knee up.
+X looks at Cotu, uses a cool gesture to send his icon to Cotu, and teleports to it. Cotu is calm and relaxed, and they do their signature handshake
+Cotu: “It’s good to see you again, mate.” Cotu points to the sun. “How much you put in there?”
+X: “60%.”
+Cotu is shocked. “You’re using a full 40% of your power? I can’t handle all that right now, you’ll disintegrate me!”
+X: “Don’t be a pussy. This will make you stronger.” (subtitles say “This will” so it looks better, but he actually says “This’ll” for brevity)
+Cotu: “Oh my god. You’re serious, aren’t you?”
+X growls. “Do you fear pain in a game of violence?”
+Cotu: “I fear destabilizing in the first 10 seconds.”
+X, impatiently: “All of my attacks are reactable. Just dodge at the right time and you’ll be fine.”
+Cotu scoffs. “X, you’re a real whack job, you know that?”
+X: “Are you ready or not?”
+Cotu looks up at the sun. X shakes his head, as if to say, “what now?”
+Cotu, genuinely: “So…you really do think I can handle you at-
+X flares up and attacks (probably a Superman) as Cotu dodges backward
+X: “Enough. Talk after the fight.”
+Cotu draws his weapon and looks determined and excited simultaneously. “Alright, whack job. Let’s fight.”
+Cutscene that plays when you reach Gauntlet Gym 2
+While its hype theme song plays, Gator jumps up and down on top of a pile of dead bodies containing everyone from Gauntlet Gym 1
+Music inspiration: Laser Dance from Ocean’s Twelve, aka Khamzat Chimaev’s theme song: https://www.youtube.com/shorts/u8taxTK_6kw
+While Gator jumps on the pile, some souls can be seen flying out of the pile
+It runs into and hijacks a nearby gauntlet shuttle, punches in some coordinates, then flies it into space while head-dancing on the console
+In the shuttle, to put in the coordinates for Gauntlet Gym 2, Gator simply spins on top of the console in a static pose
+While dancing in the shuttle, Gator moves its head back and forth in a downward facing arc
+A title appears: [number] [time units] UNTIL IT ARRIVES. The camera then cuts back to the player
+Cutscene that plays when Grow-a-Gator reaches Gauntlet Gym 2
+Gator crash lands its ship, somehow ends up on top of a high place, and jumps up and down and clumsily/slightly unclearly screams to all the fighters: “I BITE EVERYBODY! I KILL EVERYBODY! ALL OF YOU! I KILL EVERYBODY! I KELELELAH (incoherent babbling) RAAAAAHHHHH!!!”
+Inspired by Khamzat Chimaev’s rambling after defeating Kevin Holland: https://www.youtube.com/shorts/h2Xqm1km6J8
+Everybody in the gym confronts Gator
+Cutscene that plays after you defeat Grow-a-Gator
+After Cotu defeats Gator, Gator struggles against Cotu’s grip.
+Gator: “KILL EVERYBODY! *incoherent babbling*”
+Cotu holds up his weapon and starts to strike, which causes Gator to freeze. Cotu realizes Gator’s frozen and stops.
+Cotu: “Stay.”
+Gator looks at Cotu
+Cotu gets up and backs away. Gator lies motionless on the ground. [Camera is on Cotu] Cotu slowly lowers his weapon.
+[Cut to Gator] Gator suddenly raises its head and looks up at Cotu. [Cut to Cotu] Cotu instantly raises and flashes his weapon.
+[Cut to Gator] Gator is lying motionless on the ground in the exact same pose it was in before. It then goes “bleh” and sticks its tongue out
+Cotu: “If you want to kill somebody, ask for permission first.”
+Gator: “...”
+Cotu: “Understand?”
+Gator: “...bleh.”
+Cotu slowly puts away his weapon. Gator lies still
+Cutscene that plays when Cotu makes it to a high rank in the gala: Blackstar’s first appearance
+Blackstar is grateful that Cotu made it this far so he can help her reincarnate. She’s also grateful that her friend is back
+She walks up to him and hugs him. After a moment of surprise and hesitation, he hugs her back
 
 Notes for full version:
 Idea: for certain levels/bosses, give the player a limited number of attempts before the level/boss becomes unavailable for the rest of the playthrough
@@ -5097,35 +5187,6 @@ The dummy is eventually contained
 Greg: “All the stats’ll show up on the big screen. You can see your total damage dealt, damage per shot-”
 No name bumps Greg’s arm.
 Greg: “Huh? Oh damage per second, my bad. And uh, total number of hits. You can reset it with that button over there. And that’s pretty much it.”
-X’s first scene: Cotu meets X for the first time since vacation
-X wants to help Cotu train but is impatient to get to the gala early to train. He wants to get there early bc he doesn’t like his chances
-Cotu is grateful for X’s patience and knows X isn’t the patient type
-Cotu: “X.”
-X: “Cotu.”
-X floats towards Cotu, then they do their signature handshake
-Cotu: “Thanks for waiting for me mate, I really appreciate it.”
-X: “You better be grateful. I should be halfway to the gala by now.”
-Cotu: “Damn, that early?”
-X: “If you consider that early, you’re gonna be late. We need to get there early to have as much time as possible to train, especially with the Gauntlet. You know they’re going to be fully booked. Now, let’s not waste any more time.”
-Cotu: “Right.”
-X points to a diamond near the arena
-X: “This is a timer. When the diamond closes,” X closes the diamond. “time’s up.” He reopens the diamond. “And when time’s up, I win.”
-Cotu: “And why’s that?”
-X: “Because that’s how long it takes for my ultimate attack to fully charge. And right now, you have no way of stopping it.”
-Cotu: “Oh.”
-X: “Of course, since we’re just training, I won’t actually use it, but in a real fight, if I were to get it…the fight would be over.”
-Cotu, surprised: “...I didn’t know you had an ultimate attack.”
-X does a brief, slightly confused sigh
-X, a bit quieter than before: “I must not have used it in the tournament.”
-X, back to normal: “Now, is everything clear? Are you ready?”
-Cotu: “Erm, you’re gonna hold back right? I’m not as strong as I was.”
-X: “Ugh. So needy.”
-X holds a glowing orange ball in his hands, then throws it into the sky. It grows into a mini-sun
-X: “That,” pointing to the star, “is roughly 60% of my power.”
-Cotu: “So you’re fighting me with a full 40? You know I can’t take that.”
-X’s face ignites. “I DON’T GIVE A SHIT.”
-Cotu: “Alright then. I guess I’m ready.”
-X: “Finally.”
 Idea: Cotu and X on the ship
 Cotu: “Hey, I just realized you’re not doing your teleporting tricks. You really do give a shit.”
 X: “Enjoy it while it lasts. At the gala, I’ll use everything.”
@@ -5310,26 +5371,34 @@ Tempered X
 Blackstar
 Turbo Jester (?)
 Fire Dancer (?)
+Plot Idea 4: Nothing (Minimal Plot)
+Cotu trains with others in his weakened form, but only to make himself stronger, not for a competition. As he progresses through the gyms, word spreads that the champion is getting back into fighting, and more and more people flock to the gyms to see him fight. Eventually, he unintentionally gathers a huge following after training at Gauntlet Central, and the Gauntlet organizes an unofficial mock tournament among the gods there just for fun
+Who Cotu travels with is kept ambiguous by the fact that the player only sees the current level menu (the catalogue of available fighters at the realm Cotu is currently in), not Cotu’s ship or any other hub world
+Gym progression is the same as Plot Idea 3C
+Gym 1: Beginners and Casuals
+Gauntlet Variant 1, the gentle guides
+Jab Crab, a nervous beginner who’s unsure of what his long term plans are for fighting
+Mite Queen, who fights as a fun hobby
+Gym 2: Bullies and Ambitious Rising Stars
+Grow-a-Gator
+Grow-a-Gator’s victims
+Elite Gunner and Sentinel, the cool managers/coaches
+Gauntlet Central: Competitive Elite Athletes
+Future Blade, a self-deprecating drag queen
+Fire Dancer (?)
+Tempered X
+Triplets, weaker folks who don’t really fit in here but want to explore their full potential by training with Turbo Jester
+Gala: Championship Contenders
+Neuro
+Blackstar
+Turbo Jester (?)
+Fire Dancer (?)
+Not Applicable (fighters who aren’t training or competing)
+Clarity, an autonomous being that attacks anything nearby
+Mites, wild animals that want to spread and conquer in the absence of their queen, who left them with a babysitter who got captured
+Angels, folks who just want to play catch
+Mike, who wants to use the next strongest god as a test subject for its military
 Character interactions that are the same regardless of plot
-Idea: Grow-a-gator/Grower Gator arc
-When the player arrives at Gauntlet Gym 2, they see a cutscene of the first ever appearance of Gator. While its hype theme song plays (inspired by Laser Dance from Ocean’s Twelve), it steps off of a pile of dead bodies containing everyone from Gauntlet Gym 1, dances into and hijacks a nearby gauntlet shuttle, then flies it into space while head-dancing (moving its head back and forth in an arc) on the console. A title appears: [number] [time units] UNTIL IT ARRIVES. The camera then cuts back to the player
-When Gator steps off the pile, a soul can be seen flying out of the pile
-In the shuttle, to put in the coordinates for Gauntlet Gym 2, Gator simply spins on top of the console in a static pose
-When Gator arrives at Gauntlet Gym 2, Cotu finds it dancing on top of another pile of dead bodies
-On top of the dead bodies, Gator screams: “BITE EVERYBODY! KILL EVERYBODY!”
-After Cotu defeats Gator, Gator struggles against Cotu’s grip.
-Gator: “KILL EVERYBODY! KILL! KILL! KILL!”
-Cotu holds up his weapon and starts to strike, which causes Gator to freeze. Cotu realizes Gator’s frozen and stops.
-Cotu: “Stay.”
-Gator looks at Cotu
-Cotu gets up and backs away. Gator lies motionless on the ground. [Camera is on Cotu] Cotu slowly lowers his weapon.
-[Cut to Gator] Gator suddenly raises its head and looks up at Cotu. [Cut to Cotu] Cotu instantly raises and flashes his weapon.
-[Cut to Gator] Gator is lying motionless on the ground in the exact same pose it was in before. It then goes “bleh” and sticks its tongue out
-Cotu: “If you want to kill somebody, ask for permission first.”
-Gator: “...”
-Cotu: “Understand?”
-Gator: “...bleh.”
-Cotu slowly puts away his weapon. Gator lies still
 Idea: Sean Strickland god overhears Future Blade and his friends gossiping about him and starts beef
 After fighting FB or one of his friends, Sean god becomes friends with them because he respects them as fighters
 Greg and X meeting for the first time
