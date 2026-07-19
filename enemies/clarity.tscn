@@ -306,7 +306,7 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f7uow"]
 switch_mode = 2
 advance_mode = 2
-advance_expression = "rng.randf() <= .33"
+advance_expression = "rng.randf() <= .25"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kjcu6"]
 switch_mode = 2
@@ -315,7 +315,7 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v0ape"]
 switch_mode = 2
 advance_mode = 2
-advance_expression = "rng.randf() > .33 and rng.randf() <= .67"
+advance_expression = "rng.randf() > .25 and rng.randf() <= .5"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ag18a"]
 switch_mode = 2
@@ -337,7 +337,7 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r51dd"]
 switch_mode = 2
 advance_mode = 2
-advance_expression = "rng.randf() > .67"
+advance_expression = "rng.randf() > .5 and rng.randf() <= .75"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s2ykg"]
 switch_mode = 2
@@ -346,7 +346,8 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y4w40"]
 switch_mode = 2
 advance_mode = 2
-advance_expression = "rng.randf() > 0"
+advance_expression = "rng.randf() > .75
+"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_20kpy"]
 switch_mode = 2
@@ -368,10 +369,10 @@ states/Test/position = Vector2(408.117, 185.977)
 states/TripleShardSequence1/node = SubResource("AnimationNodeAnimation_mn7jq")
 states/TripleShardSequence1/position = Vector2(636.016, 167.511)
 transitions = ["Start", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_gjge1"), "RotateSlow", "SingleShardSequence1", SubResource("AnimationNodeStateMachineTransition_f7uow"), "SingleShardSequence1", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_kjcu6"), "RotateSlow", "DoubleShardSequence1", SubResource("AnimationNodeStateMachineTransition_v0ape"), "DoubleShardSequence1", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_ag18a"), "Stagger", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_spy4q"), "RotateSlow", "Test", SubResource("AnimationNodeStateMachineTransition_4uvqa"), "Test", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_005vm"), "RotateSlow", "TripleShardSequence1", SubResource("AnimationNodeStateMachineTransition_r51dd"), "TripleShardSequence1", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_s2ykg"), "RotateSlow", "QuadShardSequence1", SubResource("AnimationNodeStateMachineTransition_y4w40"), "QuadShardSequence1", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_20kpy")]
-graph_offset = Vector2(177.676, 3.37498)
+graph_offset = Vector2(189.624, 9.32998)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_siwsy"]
-graph_offset = Vector2(-49.92, 76.8)
+graph_offset = Vector2(-43.2, 131.52)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_qlhjd")
 nodes/StateMachine/position = Vector2(80, 150)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -1483,8 +1484,8 @@ bones/0/position = Vector3(-0.0210742, 4.49276, 0.0847608)
 bones/0/rotation = Quaternion(0.0301653, 0.0796906, -0.0501057, 0.995102)
 bones/1/position = Vector3(-1.58209e-09, 8.69174, 9.87667e-09)
 bones/1/rotation = Quaternion(0.0484073, -0.0812806, 0.0524297, 0.994133)
-bones/3/position = Vector3(3.80271, 6.1959, 0.147576)
-bones/3/rotation = Quaternion(-0.648979, -0.721534, 0.138328, -0.197689)
+bones/3/position = Vector3(-3.7482, 4.38423, -0.0847618)
+bones/3/rotation = Quaternion(0.00101031, -0.00552394, 0.86527, 0.501275)
 bones/6/position = Vector3(2.01413, 2.22899, -2.08285)
 bones/6/rotation = Quaternion(0.305356, -0.212565, 0.925231, -0.0743114)
 bones/8/position = Vector3(2.06725, 1.3427, 0.8528)
@@ -1538,7 +1539,7 @@ process_material = SubResource("ParticleProcessMaterial_1ffcq")
 draw_pass_1 = ExtResource("5_1f67e")
 
 [node name="Arm_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.119992, -0.989441, -0.0812896, -0.911904, -0.0774774, -0.403022, 0.392469, 0.122488, -0.911573, 5.77443, 10.4062, -0.243689)
+transform = Transform3D(0.339741, 0.92836, 0.15074, -0.932056, 0.353784, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
 
 [node name="EnemyHitbox" type="Area3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2" index="1"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
@@ -1714,7 +1715,13 @@ transform = Transform3D(0.866025, 0.5, -2.06057e-13, -0.5, 0.866025, -1.30901e-0
 transform = Transform3D(1, -3.38931e-22, 1.48151e-29, 0, -4.37114e-08, -1, 3.38931e-22, 1, -4.37114e-08, 0, 0, 0)
 
 [node name="Hexagon" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D/FacePlate/FlatHexagon" index="0"]
-transform = Transform3D(3.11769, -4.59593e-16, 1.8, 1.25563e-15, 3.6, -1.25563e-15, -1.8, 1.71523e-15, 3.11769, 2.08165e-12, 0.3, 2.08165e-12)
+transform = Transform3D(3.6, 0, 0, 0, 3.6, 0, 0, 0, 3.6, 2.08165e-12, 0.3, 2.08165e-12)
+
+[node name="Hexagon" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D/FacePlate/FlatHexagon2" index="0"]
+transform = Transform3D(3.6, 0, 0, 0, 3.6, 0, 0, 0, 3.6, 2.08165e-12, 0.3, 2.08165e-12)
+
+[node name="Hexagon" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D/FacePlate/FlatHexagon3" index="0"]
+transform = Transform3D(3.6, 0, 0, 0, 3.6, 0, 0, 0, 3.6, 2.08165e-12, 0.3, 2.08165e-12)
 
 [node name="FrontRightLinkParticle" type="Node3D" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes"]
 visible = false
@@ -2556,6 +2563,8 @@ material = SubResource("FogMaterial_hru1u")
 [editable path="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntitySprite"]
 [editable path="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes"]
 [editable path="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D/FacePlate/FlatHexagon"]
+[editable path="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D/FacePlate/FlatHexagon2"]
+[editable path="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D/FacePlate/FlatHexagon3"]
 [editable path="DressShardMaster"]
 [editable path="DressShardMaster/DressShardFrontLeft"]
 [editable path="DressShardMaster/DressShardFrontRight"]

@@ -144,7 +144,7 @@ const enemy_hurtbox_data = {
 	"Harvestman" : [10, 1.0, 1.0],
 	"JumpingSpider" : [800, 1.0, 1.0],
 	
-	"ClarityBodyShard" : [60, 1.0, 15.0],
+	"ClarityBodyShard" : [450, 1.0, 15.0],
 	"IceSprite" : [66, 1.0, 60.0],
 	"Clarity" : [3000, 1.0, 1000.0],
 }
