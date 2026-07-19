@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cyguldrcukgxk"]
+[gd_scene load_steps=31 format=3 uid="uid://cyguldrcukgxk"]
 
 [ext_resource type="PackedScene" uid="uid://cx5rx4acw6xna" path="res://glb_imports/SnowflakeEntity.glb" id="1_xrs3j"]
 [ext_resource type="PackedScene" uid="uid://c35irt0wpfa0g" path="res://enemies/flat_hexagon.tscn" id="2_shy50"]
@@ -265,7 +265,125 @@ height = 0.75
 shading_mode = 0
 albedo_color = Color(0.698039, 1, 1, 1)
 
+[sub_resource type="Animation" id="Animation_qwuko"]
+resource_name = "TriggerArmSlice"
+length = 0.800002
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon/Hexagon:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 0.0, 0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon/Hexagon:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(3.6, 3.6, 3.6)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon2/Hexagon:transparency")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.15, 0.216667, 0.35, 0.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 0.0, 0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon2/Hexagon:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.15, 0.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(3.6, 3.6, 3.6)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon3/Hexagon:transparency")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.3, 0.366667, 0.5, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 0.0, 0.0, 1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon3/Hexagon:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.3, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(3.6, 3.6, 3.6)]
+}
+
+[sub_resource type="Animation" id="Animation_5advd"]
+resource_name = "TriggerArmRaise"
+length = 0.800002
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon/Hexagon:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon/Hexagon:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(3.6, 3.6, 3.6)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jnoeo"]
+_data = {
+"TriggerArmRaise": SubResource("Animation_5advd"),
+"TriggerArmSlice": SubResource("Animation_qwuko")
+}
+
 [node name="SnowflakeEntityMeshes" instance=ExtResource("1_xrs3j")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/5/rotation = Quaternion(0.683013, -0.183013, -0.183013, 0.683013)
+bones/6/position = Vector3(0.828085, 1.02211, -0.462035)
+bones/8/position = Vector3(0.00320047, 1.02211, -1.0554)
+bones/14/position = Vector3(-0.823051, 1.02211, 0.473662)
+bones/16/position = Vector3(-0.820733, 1.02211, -0.466049)
 
 [node name="CentralEye0" parent="Armature/Skeleton3D" index="0"]
 transform = Transform3D(1, -3.74218e-14, -5.40003e-14, -3.74218e-14, 1, -7.10543e-15, -5.40003e-14, -7.10543e-15, 1, -2.86885e-15, -1.78814e-08, 7.45058e-09)
@@ -293,49 +411,49 @@ bone_name = "CentralEye0"
 bone_idx = 1
 
 [node name="MiddleLeft" parent="Armature/Skeleton3D" index="4"]
-transform = Transform3D(1, 1.29455e-07, 1.40303e-08, -1.36006e-07, 1, 2.50594e-07, 2.22868e-08, -2.78644e-07, 1, -2.98023e-07, 1.49012e-07, -9.49949e-08)
+transform = Transform3D(0.866025, 0.5, 1.37447e-07, -0.5, 0.866025, 7.91047e-08, -3.73179e-08, -1.59435e-07, 1, -5.96046e-08, 1.99303e-07, 2.55182e-07)
 bone_idx = 7
 
 [node name="MiddleLeft" parent="Armature/Skeleton3D/MiddleLeft" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_yakaa")
 
 [node name="FrontLeft" parent="Armature/Skeleton3D" index="5"]
-transform = Transform3D(1, -2.95194e-11, -2.86548e-11, 8.98167e-11, 1, 8.63144e-08, -7.58462e-11, -8.68599e-08, 1, 1.39698e-09, 2.38419e-07, -1.11759e-07)
+transform = Transform3D(0.866025, 0.5, 4.31322e-08, -0.5, 0.866025, -5.61359e-08, -5.96806e-08, 3.23494e-08, 1, -1.19209e-07, -2.98023e-07, 1.19209e-07)
 bone_idx = 9
 
 [node name="FrontLeft" parent="Armature/Skeleton3D/FrontLeft" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_h2bxt")
 
 [node name="BackRight" parent="Armature/Skeleton3D" index="6"]
-transform = Transform3D(1, 7.79996e-10, -6.45173e-11, 2.12414e-10, 1, 3.04442e-07, 2.31881e-11, -2.44511e-07, 1, -9.31323e-10, 3.57628e-07, -1.52737e-07)
+transform = Transform3D(0.866025, 0.5, 1.52165e-07, -0.5, 0.866025, 1.32786e-07, -5.95815e-08, -1.25301e-07, 1, 1.78814e-07, 2.38419e-07, -4.09782e-08)
 bone_idx = 11
 
 [node name="BackRight" parent="Armature/Skeleton3D/BackRight" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fiurh")
 
 [node name="BackLeft" parent="Armature/Skeleton3D" index="7"]
-transform = Transform3D(1, 1.30972e-07, -2.66062e-08, -7.31878e-08, 1, 3.16183e-07, 4.31745e-08, -1.87387e-07, 1, -2.38419e-07, 1.78814e-07, -1.69501e-07)
+transform = Transform3D(0.866025, 0.5, 1.3505e-07, -0.5, 0.866025, 1.56225e-07, -1.64302e-08, -6.81776e-08, 1, -5.96046e-08, 1.19209e-07, 5.21541e-08)
 bone_idx = 13
 
 [node name="BackLeft" parent="Armature/Skeleton3D/BackLeft" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_3dvlp")
 
 [node name="MiddleRight" parent="Armature/Skeleton3D" index="8"]
-transform = Transform3D(1, 2.10555e-08, 3.89687e-08, 9.21793e-08, 1, 1.60854e-07, 1.24336e-08, -6.175e-08, 1, -5.96046e-08, 5.96046e-07, -3.1665e-08)
+transform = Transform3D(0.866025, 0.5, 1.33989e-07, -0.5, 0.866025, -3.39493e-08, -3.22699e-08, 2.7657e-08, 1, 2.98023e-07, 3.7381e-07, 2.12342e-07)
 bone_idx = 15
 
 [node name="MiddleRight" parent="Armature/Skeleton3D/MiddleRight" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_d1nc3")
 
 [node name="FrontRight" parent="Armature/Skeleton3D" index="9"]
-transform = Transform3D(1, 2.12283e-07, -8.24196e-08, -1.52257e-07, 1, 8.29976e-08, 2.01027e-07, -7.79459e-08, 1, -2.38419e-07, 2.08616e-07, -7.07805e-08)
+transform = Transform3D(0.866025, 0.5, -1.99128e-08, -0.5, 0.866025, -1.94163e-08, 1.25952e-07, 6.59214e-09, 1, -1.49012e-07, 1.78814e-07, 6.14673e-08)
 bone_idx = 17
 
 [node name="FrontRight" parent="Armature/Skeleton3D/FrontRight" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_yau8r")
 
 [node name="FacePlate" parent="Armature/Skeleton3D" index="10"]
-transform = Transform3D(1, -5.16326e-14, -2.55786e-14, -5.16326e-14, 1, -7.10543e-15, -2.55786e-14, -7.10543e-15, 1, 6.42155e-14, 1.78814e-07, -5.96046e-08)
+transform = Transform3D(0.866025, 0.5, -2.06057e-13, -0.5, 0.866025, -1.30901e-07, -5.96047e-08, 1.19209e-07, 1, 1.04308e-07, 1.99638e-08, 0)
 bone_idx = 19
 
 [node name="FacePlate" parent="Armature/Skeleton3D/FacePlate" index="0"]
@@ -345,6 +463,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
 transform = Transform3D(1, 2.033e-21, -1.11807e-21, -1.81747e-28, -4.37114e-08, -1, 3.38931e-22, 1, -4.37114e-08, 0, 0, 0)
 
 [node name="Hexagon" parent="Armature/Skeleton3D/FacePlate/FlatHexagon" index="0"]
+transform = Transform3D(3.6, 0, 0, 0, 3.6, 0, 0, 0, 3.6, 2.08165e-12, 0.3, 2.08165e-12)
 transparency = 1.0
 
 [node name="FlatHexagon2" parent="Armature/Skeleton3D/FacePlate" index="2" instance=ExtResource("2_shy50")]
@@ -387,6 +506,11 @@ mesh = SubResource("SphereMesh_76tcq")
 
 [node name="Pupil" parent="." index="2"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fhk40")
+
+[node name="HexagonAnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_jnoeo")
+}
 
 [editable path="Armature/Skeleton3D/FacePlate/FlatHexagon"]
 [editable path="Armature/Skeleton3D/FacePlate/FlatHexagon2"]

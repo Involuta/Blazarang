@@ -109,6 +109,7 @@ var transparent_mat := preload("res://textures/clear_tile.tres")
 @onready var body_meshes := $DressShardMaster # Depends on ClarityDressMeshes.glb. Plays dress shard anims
 @onready var snowflake := $ClarityArmMeshes/SnowflakeEntity
 @onready var snowflake_anim_tree := $ClarityArmMeshes/SnowflakeEntity/AnimationTree
+@onready var snowflake_hexagon_anim_player := $ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/HexagonAnimationPlayer
 @onready var head_light := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/BaseOffsetRotation/HeadMesh/HeadLight
 @onready var head_bone := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2
 @onready var head_mesh := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
@@ -444,6 +445,10 @@ func queue_arm_attack():
 				CIRCLING:
 					# If a dress shard anim is playing or the snowflake isn't neutral, don't include RegenShards as a choice
 					if dress_shards["Master"].anim_player.is_playing() or snowflake_anim_playback.get_current_node() != "RotateSlow":
+						# Play snowflake arm raise anim
+						snowflake_hexagon_anim_player.play("TriggerArmRaise")
+						await snowflake_hexagon_anim_player.animation_finished
+						# Play arm anim
 						var chosen_attack = choose_attack(arm_attack_chances)
 						arm_anim_player.play(chosen_attack)
 						return
@@ -464,6 +469,10 @@ func queue_arm_attack():
 						# Prevent arm and snowflake attacks from being chosen during the attack
 						switch_to_stop()
 						play_anim_all_dress_shards(chosen_attack)
+					# Play snowflake arm raise anim
+					snowflake_hexagon_anim_player.play("TriggerArmRaise")
+					await snowflake_hexagon_anim_player.animation_finished
+					# Play arm anim
 					arm_anim_player.play(chosen_attack)
 		PHASE.PHASE2:
 			pass # pass until phase2 is confirmed to exist
@@ -550,6 +559,9 @@ func set_look_state(new_state: LOOK_STATE):
 func wait_lowered_left():
 	var wait_time := randf_range(wait_lowered_left_min_secs, wait_lowered_left_max_secs)
 	await get_tree().create_timer(wait_time).timeout
+	# Play TriggerArmSlice anim
+	snowflake_hexagon_anim_player.play("TriggerArmRaise")
+	await snowflake_hexagon_anim_player.animation_finished
 	# Choose RaiseLeftSliceFast, RaiseLeftFast, or RaiseLeftSlow
 	var choice := randf()
 	var cumulative_weight := 0.0
