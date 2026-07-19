@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c35irt0wpfa0g"]
+
+[ext_resource type="PackedScene" uid="uid://dn7ueowf00q1l" path="res://glb_imports/FlatHexagon.glb" id="1_l8gfi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_juk57"]
+transparency = 4
+albedo_color = Color(0.584314, 0.792157, 1, 1)
+emission_enabled = true
+emission = Color(0.584314, 0.792157, 1, 1)
+
+[node name="FlatHexagon" instance=ExtResource("1_l8gfi")]
+
+[node name="Hexagon" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.3, 2.08165e-12)
+transparency = 1.0
+surface_material_override/0 = SubResource("StandardMaterial3D_juk57")
