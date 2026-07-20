@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cyguldrcukgxk"]
+[gd_scene load_steps=32 format=3 uid="uid://cyguldrcukgxk"]
 
 [ext_resource type="PackedScene" uid="uid://cx5rx4acw6xna" path="res://glb_imports/SnowflakeEntity.glb" id="1_xrs3j"]
 [ext_resource type="PackedScene" uid="uid://c35irt0wpfa0g" path="res://enemies/flat_hexagon.tscn" id="2_shy50"]
@@ -370,8 +370,48 @@ tracks/1/keys = {
 "values": [Vector3(1, 1, 1), Vector3(3.6, 3.6, 3.6)]
 }
 
+[sub_resource type="Animation" id="Animation_knbla"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon/Hexagon:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon2/Hexagon:transparency")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon3/Hexagon:transparency")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jnoeo"]
 _data = {
+"RESET": SubResource("Animation_knbla"),
 "TriggerArmRaise": SubResource("Animation_5advd"),
 "TriggerArmSlice": SubResource("Animation_qwuko")
 }
@@ -463,7 +503,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
 transform = Transform3D(1, 2.033e-21, -1.11807e-21, -1.81747e-28, -4.37114e-08, -1, 3.38931e-22, 1, -4.37114e-08, 0, 0, 0)
 
 [node name="Hexagon" parent="Armature/Skeleton3D/FacePlate/FlatHexagon" index="0"]
-transform = Transform3D(3.6, 0, 0, 0, 3.6, 0, 0, 0, 3.6, 2.08165e-12, 0.3, 2.08165e-12)
 transparency = 1.0
 
 [node name="FlatHexagon2" parent="Armature/Skeleton3D/FacePlate" index="2" instance=ExtResource("2_shy50")]

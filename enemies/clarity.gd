@@ -259,6 +259,8 @@ func on_head_hit(damage: int):
 		switch_to_stop()
 		# Switch to Stagger anim
 		arm_anim_player.play("Stagger")
+		# Hide snowflake hexagons
+		snowflake_hexagon_anim_player.play("RESET")
 		velocity = Vector3.ZERO
 		# Attack reset code (setting long dist wait, attacking state, etc.) is called in Stagger anim keyframes
 
@@ -577,7 +579,15 @@ func wait_lowered_left():
 func wait_raised_left():
 	var wait_time := randf_range(wait_raised_left_min_secs, wait_raised_left_max_secs)
 	await get_tree().create_timer(wait_time).timeout
-	arm_anim_player.play("LeftSliceFromWait")
+	# Choose between LeftSliceFromWait and TriggerArmSlice --> InfuseLeft --> LeftSliceFromInfuse
+	if randf() < .5:
+		arm_anim_player.play("LeftSliceFromWait")
+	else:
+		snowflake_hexagon_anim_player.play("TriggerArmRaise")
+		await snowflake_hexagon_anim_player.animation_finished
+		arm_anim_player.play("InfuseLeft")
+		await arm_anim_player.animation_finished
+		arm_anim_player.play("LeftSliceFromInfuse")
 
 func jump_shot_mvmt():
 	switch_to_special()
