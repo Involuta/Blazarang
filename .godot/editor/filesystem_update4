@@ -39,3 +39,9 @@ res://enemies/clarity.gd
 res://enemies/clarity_head.tscn
 res://levels/snow_level/snow_level_test_env.tscn
 res://cotu/cotu_cb_main.tscn
+res://enemies/enemy_anims/clarity_double_shard_sequence1.res
+res://enemies/enemy_anims/clarity_dress_shard_test_sequence.res
+res://enemies/enemy_anims/clarity_quad_shard_sequence1.res
+res://enemies/enemy_anims/clarity_dressshards_regenshards.res
+res://enemies/enemy_anims/clarity_single_shard_sequence1.res
+res://enemies/enemy_anims/clarity_triple_shard_sequence1.res
