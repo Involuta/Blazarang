@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwejhmociib43"]
+[gd_scene load_steps=7 format=3 uid="uid://cwejhmociib43"]
 
 [ext_resource type="PackedScene" uid="uid://vxr5o770vx2w" path="res://glb_imports/Clarity.glb" id="1_d5by6"]
 [ext_resource type="Shader" path="res://shaders/black_outline.gdshader" id="2_ga04g"]
+[ext_resource type="Shader" path="res://enemies/clarity_arm_shard.gdshader" id="3_5b4y1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c8oi3"]
 render_priority = 0
@@ -15,6 +16,18 @@ transparency = 4
 albedo_color = Color(0.560784, 0.803922, 1, 1)
 roughness = 0.12
 refraction_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ulld8"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_c8oi3")
+shader = ExtResource("3_5b4y1")
+shader_parameter/base_color = Color(0.56, 0.8, 1, 1)
+shader_parameter/glow_color = Color(0.56, 0.8, 1, 1)
+shader_parameter/max_brightness = 0.75
+shader_parameter/glow_progress = 0.5
+shader_parameter/arm_bottom = 2.375e-06
+shader_parameter/arm_top = -50.0
+shader_parameter/glow_fade_length = 0.2
 
 [node name="ClarityMeshes" instance=ExtResource("1_d5by6")]
 
@@ -51,7 +64,7 @@ transform = Transform3D(0.287023, 0.896841, 0.336591, -0.74594, 0.429704, -0.508
 bone_idx = 4
 
 [node name="Arm_2" parent="Armature/Skeleton3D/Arm_2" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
+surface_material_override/0 = SubResource("ShaderMaterial_ulld8")
 
 [node name="Center_2" parent="Armature/Skeleton3D" index="2"]
 transform = Transform3D(2.60932e-07, 0.573576, 0.819152, -1.44382e-07, 0.819152, -0.573576, -1, -2.79396e-09, 3.07336e-07, 4.85006, 9.05265, 0.0636866)
@@ -61,7 +74,7 @@ bone_idx = 5
 surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
 
 [node name="MiddleLeft" parent="Armature/Skeleton3D" index="3"]
-transform = Transform3D(-0.180447, 0.478129, 0.859553, 5.14732e-05, 0.873903, -0.4861, -0.983585, -0.0876709, -0.157718, -0.531519, 0.309431, 0.213269)
+transform = Transform3D(-0.180447, 0.478129, 0.859553, 5.14732e-05, 0.873903, -0.4861, -0.983585, -0.0876709, -0.157718, -0.53152, 0.309432, 0.213268)
 bone_idx = 7
 
 [node name="MiddleLeft" parent="Armature/Skeleton3D/MiddleLeft" index="0"]
@@ -82,21 +95,21 @@ bone_idx = 11
 surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
 
 [node name="MiddleRight" parent="Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.166841, 0.479279, 0.861658, 4.95847e-05, 0.873903, -0.4861, -0.985984, 0.0811442, 0.145779, -0.533364, 0.309434, -0.0596902)
+transform = Transform3D(0.166841, 0.479279, 0.861658, 4.95847e-05, 0.873903, -0.4861, -0.985984, 0.0811442, 0.145779, -0.533364, 0.309434, -0.0596905)
 bone_idx = 13
 
 [node name="MiddleRight" parent="Armature/Skeleton3D/MiddleRight" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
 
 [node name="FrontRight" parent="Armature/Skeleton3D" index="7"]
-transform = Transform3D(-0.00690798, 0.486088, 0.873883, 5.11236e-05, 0.873903, -0.486099, -0.999976, -0.00331309, -0.00606167, -1.11965, 0.309438, 0.0808344)
+transform = Transform3D(-0.00690798, 0.486088, 0.873883, 5.11236e-05, 0.873903, -0.486099, -0.999976, -0.00331309, -0.00606167, -1.11965, 0.309438, 0.0808343)
 bone_idx = 15
 
 [node name="FrontRight" parent="Armature/Skeleton3D/FrontRight" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
 
 [node name="BackRight" parent="Armature/Skeleton3D" index="8"]
-transform = Transform3D(-0.0069089, 0.486089, 0.873882, 5.1214e-05, 0.873903, -0.4861, -0.999976, -0.00331368, -0.00606272, -1.11966, 0.309435, 0.0808362)
+transform = Transform3D(-0.0069089, 0.486089, 0.873882, 5.1214e-05, 0.873903, -0.4861, -0.999976, -0.00331368, -0.00606272, -1.11966, 0.309435, 0.0808353)
 bone_idx = 17
 
 [node name="BackRight" parent="Armature/Skeleton3D/BackRight" index="0"]

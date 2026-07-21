@@ -265,6 +265,73 @@ height = 0.75
 shading_mode = 0
 albedo_color = Color(0.698039, 1, 1, 1)
 
+[sub_resource type="Animation" id="Animation_knbla"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon/Hexagon:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon2/Hexagon:transparency")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon3/Hexagon:transparency")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_5advd"]
+resource_name = "TriggerArmRaise"
+length = 0.800002
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon/Hexagon:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon/Hexagon:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(3.6, 3.6, 3.6)]
+}
+
 [sub_resource type="Animation" id="Animation_qwuko"]
 resource_name = "TriggerArmSlice"
 length = 0.800002
@@ -342,73 +409,6 @@ tracks/5/keys = {
 "values": [Vector3(1, 1, 1), Vector3(3.6, 3.6, 3.6)]
 }
 
-[sub_resource type="Animation" id="Animation_5advd"]
-resource_name = "TriggerArmRaise"
-length = 0.800002
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon/Hexagon:transparency")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [1.0, 0.0, 1.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon/Hexagon:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.8),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(1, 1, 1), Vector3(3.6, 3.6, 3.6)]
-}
-
-[sub_resource type="Animation" id="Animation_knbla"]
-resource_name = "RESET"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon/Hexagon:transparency")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon2/Hexagon:transparency")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon3/Hexagon:transparency")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jnoeo"]
 _data = {
 "RESET": SubResource("Animation_knbla"),
@@ -451,49 +451,49 @@ bone_name = "CentralEye0"
 bone_idx = 1
 
 [node name="MiddleLeft" parent="Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.866025, 0.5, 1.37447e-07, -0.5, 0.866025, 7.91047e-08, -3.73179e-08, -1.59435e-07, 1, -5.96046e-08, 1.99303e-07, 2.55182e-07)
+transform = Transform3D(0.866025, 0.5, -4.13665e-08, -0.5, 0.866026, -9.97093e-08, 2.22869e-08, 7.89839e-08, 1, -5.96046e-08, -7.72998e-08, -1.45473e-06)
 bone_idx = 7
 
 [node name="MiddleLeft" parent="Armature/Skeleton3D/MiddleLeft" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_yakaa")
 
 [node name="FrontLeft" parent="Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.866025, 0.5, 4.31322e-08, -0.5, 0.866025, -5.61359e-08, -5.96806e-08, 3.23494e-08, 1, -1.19209e-07, -2.98023e-07, 1.19209e-07)
+transform = Transform3D(0.866026, 0.5, -1.35682e-07, -0.5, 0.866025, -2.3495e-07, -7.57154e-11, 2.70768e-07, 1, 2.26498e-06, 3.8147e-06, -1.44355e-06)
 bone_idx = 9
 
 [node name="FrontLeft" parent="Armature/Skeleton3D/FrontLeft" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_h2bxt")
 
 [node name="BackRight" parent="Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.866025, 0.5, 1.52165e-07, -0.5, 0.866025, 1.32786e-07, -5.95815e-08, -1.25301e-07, 1, 1.78814e-07, 2.38419e-07, -4.09782e-08)
+transform = Transform3D(0.866026, 0.5, -2.66487e-08, -0.5, 0.866025, -4.60276e-08, 2.33626e-11, 1.13117e-07, 1, 2.98023e-08, 5.96046e-08, -5.21541e-08)
 bone_idx = 11
 
 [node name="BackRight" parent="Armature/Skeleton3D/BackRight" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fiurh")
 
 [node name="BackLeft" parent="Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.866025, 0.5, 1.3505e-07, -0.5, 0.866025, 1.56225e-07, -1.64302e-08, -6.81776e-08, 1, -5.96046e-08, 1.19209e-07, 5.21541e-08)
+transform = Transform3D(0.866026, 0.5, -4.37643e-08, -0.5, 0.866026, -2.25893e-08, 4.31746e-08, 1.70241e-07, 1, -3.27826e-07, 0, -1.86265e-09)
 bone_idx = 13
 
 [node name="BackLeft" parent="Armature/Skeleton3D/BackLeft" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_3dvlp")
 
 [node name="MiddleRight" parent="Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.866025, 0.5, 1.33989e-07, -0.5, 0.866025, -3.39493e-08, -3.22699e-08, 2.7657e-08, 1, 2.98023e-07, 3.7381e-07, 2.12342e-07)
+transform = Transform3D(0.866026, 0.5, -4.80428e-08, -0.5, 0.866026, -1.98567e-07, 2.94996e-09, 3.0402e-07, 1, -3.57628e-07, 2.08034e-07, -9.36911e-07)
 bone_idx = 15
 
 [node name="MiddleRight" parent="Armature/Skeleton3D/MiddleRight" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_d1nc3")
 
 [node name="FrontRight" parent="Armature/Skeleton3D" index="9"]
-transform = Transform3D(0.866025, 0.5, -1.99128e-08, -0.5, 0.866025, -1.94163e-08, 1.25952e-07, 6.59214e-09, 1, -1.49012e-07, 1.78814e-07, 6.14673e-08)
+transform = Transform3D(0.866026, 0.5, -2.12165e-07, -0.5, 0.866025, -1.8918e-07, 1.81004e-07, 2.50763e-07, 1, -1.19209e-07, 2.98023e-07, -1.66893e-06)
 bone_idx = 17
 
 [node name="FrontRight" parent="Armature/Skeleton3D/FrontRight" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_yau8r")
 
 [node name="FacePlate" parent="Armature/Skeleton3D" index="10"]
-transform = Transform3D(0.866025, 0.5, -2.06057e-13, -0.5, 0.866025, -1.30901e-07, -5.96047e-08, 1.19209e-07, 1, 1.04308e-07, 1.99638e-08, 0)
+transform = Transform3D(0.866026, 0.5, -1.78814e-07, -0.5, 0.866026, -3.09715e-07, 1.42109e-13, 3.57628e-07, 1, -7.45058e-08, -1.5885e-07, 0)
 bone_idx = 19
 
 [node name="FacePlate" parent="Armature/Skeleton3D/FacePlate" index="0"]
