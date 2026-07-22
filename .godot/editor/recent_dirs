@@ -1,3 +1,4 @@
+res://general_scripts
 res://enemies
 res://enemies/enemy_anims
 res://glb_meshes
@@ -9,7 +10,6 @@ res://levels/gauntlet_level
 res://levels/mite_level
 res://levels/x_boss_level
 res://cotu/cotu_anims
-res://general_scripts
 res://levels/hub
 res://levels
 res://enemies/enemy_2d_anims

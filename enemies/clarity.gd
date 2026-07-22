@@ -103,6 +103,7 @@ var param_path_base := "parameters/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 var transparent_mat := preload("res://textures/clear_tile.tres")
+var infused_slice_hitbox := preload("res://enemies/clarity_infused_slice_hitbox.tscn")
 @onready var arm_anim_player := $ClarityArmMeshes/AnimationPlayer # Depends on Clarity.glb. Plays stagger anim after anim tree is set inactive
 @onready var mhp := $MeleeHitboxPivot
 @onready var arm_meshes := $ClarityArmMeshes # The ClarityMeshes associated with the arm
@@ -581,7 +582,7 @@ func wait_raised_left():
 	var wait_time := randf_range(wait_raised_left_min_secs, wait_raised_left_max_secs)
 	await get_tree().create_timer(wait_time).timeout
 	# Choose between LeftSliceFromWait and TriggerArmSlice --> InfuseLeft --> LeftSliceFromInfuse
-	if randf() < .5:
+	if randf() < 0:
 		snowflake_hexagon_anim_player.play("TriggerFastArmSlice")
 		await snowflake_hexagon_anim_player.animation_finished
 		arm_anim_player.play("LeftSliceFromWait")
@@ -820,3 +821,9 @@ func defuse_arm():
 	# Shrink/dematerialize link outline
 	var t = get_tree().create_tween()
 	t.tween_property(arm_shader, "shader_parameter/glow_progress", 0.0, 2.4)
+
+func spawn_infuse_slice_hitbox():
+	var inst = infused_slice_hitbox.instantiate()
+	level.add_child.call_deferred(inst)
+	await inst.tree_entered
+	inst.global_position = global_position + 6 * arm_meshes.transform.basis.z

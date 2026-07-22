@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://davcqt7x8fi65"]
+
+[ext_resource type="Script" path="res://general_scripts/DisappearNode.gd" id="1_yd7o7"]
+[ext_resource type="Script" path="res://general_scripts/damage_over_time_area.gd" id="2_wb8v0"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="3_vkjku"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hbolv"]
+radius = 10.0
+height = 20.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b4cbj"]
+transparency = 4
+albedo_color = Color(1, 1, 1, 0.431373)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vpwnl"]
+material = SubResource("StandardMaterial3D_b4cbj")
+radius = 10.0
+height = 20.0
+
+[node name="ClarityInfusedSliceHitbox" type="Node3D"]
+script = ExtResource("1_yd7o7")
+disappear_secs = 9.0
+
+[node name="DamageOverTimeArea" type="Node3D" parent="."]
+script = ExtResource("2_wb8v0")
+time_btwn_damage_ticks = 0.3
+
+[node name="EnemyHitbox" type="Area3D" parent="DamageOverTimeArea"]
+script = ExtResource("3_vkjku")
+damage = 12
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DamageOverTimeArea/EnemyHitbox"]
+shape = SubResource("CapsuleShape3D_hbolv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DamageOverTimeArea"]
+mesh = SubResource("CapsuleMesh_vpwnl")

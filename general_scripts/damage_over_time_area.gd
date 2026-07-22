@@ -1,7 +1,7 @@
 extends Node3D
 class_name DamageOverTimeArea
 
-# Script used in Ball Walker Radiation Zone, Harvestman, Blizzard, Ice Sprite Frost Field
+# Script used in Ball Walker Radiation Zone, Harvestman, Blizzard, Ice Sprite Frost Field, etc.
 
 # This node should contain EnemyHitbox. Why isn't this node's own process_mode changed?
 # It's in case this node needs to make any changes to itself or any outer node needs to change it 
