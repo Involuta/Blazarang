@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cyguldrcukgxk"]
+[gd_scene load_steps=33 format=3 uid="uid://cyguldrcukgxk"]
 
 [ext_resource type="PackedScene" uid="uid://cx5rx4acw6xna" path="res://glb_imports/SnowflakeEntity.glb" id="1_xrs3j"]
 [ext_resource type="PackedScene" uid="uid://c35irt0wpfa0g" path="res://enemies/flat_hexagon.tscn" id="2_shy50"]
@@ -333,7 +333,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_qwuko"]
-resource_name = "TriggerArmSlice"
+resource_name = "TriggerFastArmSlice"
 length = 0.800002
 step = 0.0166667
 tracks/0/type = "value"
@@ -409,11 +409,89 @@ tracks/5/keys = {
 "values": [Vector3(1, 1, 1), Vector3(3.6, 3.6, 3.6)]
 }
 
+[sub_resource type="Animation" id="Animation_ecl2h"]
+resource_name = "TriggerSlowArmSlice"
+length = 2.4
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon/Hexagon:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 0.0, 0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon/Hexagon:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(3.6, 3.6, 3.6)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon2/Hexagon:transparency")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4008, 0.4676, 0.6012, 0.9018),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 0.0, 0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon2/Hexagon:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.4008, 0.9018),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(3.6, 3.6, 3.6)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon3/Hexagon:transparency")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.8016, 0.8684, 1.002, 1.3026),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 0.0, 0.0, 1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Armature/Skeleton3D/FacePlate/FlatHexagon3/Hexagon:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.8016, 1.3026),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(3.6, 3.6, 3.6)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jnoeo"]
 _data = {
 "RESET": SubResource("Animation_knbla"),
 "TriggerArmRaise": SubResource("Animation_5advd"),
-"TriggerArmSlice": SubResource("Animation_qwuko")
+"TriggerFastArmSlice": SubResource("Animation_qwuko"),
+"TriggerSlowArmSlice": SubResource("Animation_ecl2h")
 }
 
 [node name="SnowflakeEntityMeshes" instance=ExtResource("1_xrs3j")]
