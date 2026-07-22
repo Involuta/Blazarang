@@ -23,11 +23,11 @@ next_pass = SubResource("ShaderMaterial_c8oi3")
 shader = ExtResource("3_5b4y1")
 shader_parameter/base_color = Color(0.56, 0.8, 1, 1)
 shader_parameter/glow_color = Color(0.56, 0.8, 1, 1)
-shader_parameter/max_brightness = 0.75
-shader_parameter/glow_progress = 0.5
+shader_parameter/max_brightness = 3.0
+shader_parameter/glow_progress = 0.0
 shader_parameter/arm_bottom = 2.375e-06
 shader_parameter/arm_top = -50.0
-shader_parameter/glow_fade_length = 0.2
+shader_parameter/glow_fade_length = 0.6
 
 [node name="ClarityMeshes" instance=ExtResource("1_d5by6")]
 

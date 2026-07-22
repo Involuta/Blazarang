@@ -36,3 +36,6 @@ res://levels/snow_level/snow_level_test_env.tscn
 res://glb_inherited_scenes/snowflake_entity_meshes.tscn
 res://enemies/clarity.tscn
 res://cotu/cotu_cb_main.tscn
+res://enemies/clarity.gd
+res://enemies/enemy_anims/clarity_infuse_left.res
+res://enemies/enemy_anims/clarity_left_slice_from_infuse.res

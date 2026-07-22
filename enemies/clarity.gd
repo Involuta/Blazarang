@@ -105,8 +105,9 @@ var rng := RandomNumberGenerator.new()
 var transparent_mat := preload("res://textures/clear_tile.tres")
 @onready var arm_anim_player := $ClarityArmMeshes/AnimationPlayer # Depends on Clarity.glb. Plays stagger anim after anim tree is set inactive
 @onready var mhp := $MeleeHitboxPivot
-@onready var arm_meshes := $ClarityArmMeshes
+@onready var arm_meshes := $ClarityArmMeshes # The ClarityMeshes associated with the arm
 @onready var body_meshes := $DressShardMaster # Depends on ClarityDressMeshes.glb. Plays dress shard anims
+@onready var arm_shard_mesh := $ClarityArmMeshes/Armature/Skeleton3D/Arm_2/Arm_2 # The singular arm mesh
 @onready var snowflake := $ClarityArmMeshes/SnowflakeEntity
 @onready var snowflake_anim_tree := $ClarityArmMeshes/SnowflakeEntity/AnimationTree
 @onready var snowflake_hexagon_anim_player := $ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/HexagonAnimationPlayer
@@ -802,3 +803,18 @@ func unlink_all_dress_shards_from_snowflake():
 func snowflake_stagger():
 	snowflake_anim_playback.travel("Stagger")
 	snowflake_brighten(0, .6)
+
+func infuse_arm():
+	# Get snowflake shard outline shader
+	var arm_shader = arm_shard_mesh.get_surface_override_material(0) as ShaderMaterial
+	# Shrink/dematerialize link outline
+	var t = get_tree().create_tween()
+	t.tween_property(arm_shader, "shader_parameter/glow_progress", 0.0, 0)
+	t.tween_property(arm_shader, "shader_parameter/glow_progress", 1.0, 1.2)
+
+func defuse_arm():
+	# Get snowflake shard outline shader
+	var arm_shader = arm_shard_mesh.get_surface_override_material(0) as ShaderMaterial
+	# Shrink/dematerialize link outline
+	var t = get_tree().create_tween()
+	t.tween_property(arm_shader, "shader_parameter/glow_progress", 0.0, 2.4)
