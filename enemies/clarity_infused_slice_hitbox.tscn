@@ -20,8 +20,8 @@ radius = 9.0
 height = 18.0
 
 [sub_resource type="Gradient" id="Gradient_yukmc"]
-offsets = PackedFloat32Array(0, 0.138728, 0.586705, 1)
-colors = PackedColorArray(0, 0, 0, 0.188235, 0, 0, 0, 0.352941, 0.827451, 0.827451, 0.827451, 0.141176, 0.843184, 0.843184, 0.843184, 0)
+offsets = PackedFloat32Array(0, 0.138728, 0.586705, 0.812139, 1)
+colors = PackedColorArray(0, 0, 0, 0.188235, 0, 0, 0, 0.352941, 0.827451, 0.827451, 0.827451, 0.141176, 0.835294, 0.835294, 0.835294, 0.282353, 0.843184, 0.843184, 0.843184, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_yd3jc"]
 gradient = SubResource("Gradient_yukmc")
@@ -38,7 +38,7 @@ emission_shape = 6
 emission_ring_axis = Vector3(2.08165e-12, 1, -0.5)
 emission_ring_height = 2.08165e-12
 emission_ring_radius = 9.0
-emission_ring_inner_radius = 9.0
+emission_ring_inner_radius = 2.08165e-12
 direction = Vector3(2.08165e-12, 0.6, 2.08165e-12)
 spread = 0.0
 gravity = Vector3(2.08165e-12, -0.9, 2.08165e-12)
@@ -61,11 +61,11 @@ size = Vector2(1.6, 1.3)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_72qc7"]
 render_priority = 0
 shader = ExtResource("5_wfi0h")
-shader_parameter/albedo = Color(0.705882, 1, 1, 1)
-shader_parameter/progress = 0.6
+shader_parameter/albedo = Color(0.71, 1, 1, 1)
+shader_parameter/progress = 1.0
 shader_parameter/fade_alpha = 1.0
 shader_parameter/edge_softness = 0.02
-shader_parameter/glow_color = Color(0.705882, 1, 1, 1)
+shader_parameter/glow_color = Color(0.71, 1, 1, 1)
 shader_parameter/glow_width = 0.05
 shader_parameter/glow_intensity = 3.0
 

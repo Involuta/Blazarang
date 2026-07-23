@@ -2,7 +2,6 @@ shader_type spatial;
 render_mode cull_disabled, blend_mix, unshaded;
 
 uniform vec4 albedo : source_color = vec4(1.0, 1.0, 1.0, 1.0);
-uniform sampler2D texture_albedo : source_color, filter_linear_mipmap;
 
 // Sweep control (0.0 = empty, 1.0 = full ring traced)
 uniform float progress : hint_range(0.0, 1.0) = 1.0;
@@ -36,17 +35,22 @@ void fragment() {
 	float ring_coord = fract(angle / (2.0 * PI));
 	float ring_coord2 = fract(angle2 / (2.0 * PI));
 	
-	// 2. Circular sweep mask
+	// 2. Circular sweep mask. Smoothstep is only used for the edge softness.
+	// Note that when the bigger value is used as edge0, the output is inversed (0 when x>e0, 1 when x<e1). Essentially, output 0 is always on the left (e0), output 1 is always on the right (e1)
 	float sweep_mask = smoothstep(progress, progress - edge_softness, ring_coord);
 	float sweep_mask2 = smoothstep(progress, progress - edge_softness, ring_coord2);
 	
-	// Sample base color
-	vec4 tex_color = texture(texture_albedo, UV) * albedo;
+	// 3. Leading edge glow
+	float leading_edge = smoothstep(progress - glow_width - edge_softness, progress - edge_softness, ring_coord) 
+                       * (1.0 - sweep_mask);
+	float leading_edge2 = smoothstep(progress - glow_width - edge_softness, progress - edge_softness, ring_coord2) 
+                       * (1.0 - sweep_mask2);
+	//leading_edge = max(leading_edge, leading_edge2);
 	
 	// Combine base color and glow emission
-	ALBEDO = tex_color.rgb;
-	EMISSION = glow_color.rgb * glow_intensity;
+	ALBEDO = albedo.rgb * glow_intensity;
+	EMISSION = glow_color.rgb * leading_edge * glow_intensity;
 	
 	// 4. Combine sweep mask, texture alpha, and global fade_alpha
-	ALPHA = tex_color.a * max(sweep_mask, sweep_mask2) * fade_alpha;
+	ALPHA = albedo.a * max(sweep_mask, sweep_mask2) * fade_alpha;
 }
