@@ -30,24 +30,23 @@ void fragment() {
 	// atan(-x, z) reverses direction to Clockwise.
 	// Subtracting PI/2 offsets the start 90 degrees to the Right (-X as viewed from the front).
 	float angle = atan(-local_pos.x, local_pos.z) - (PI * 0.5);
+	float angle2 = -atan(-local_pos.x, local_pos.z) + (PI * 0.5);
 	
 	// Normalize angle into a clean 0.0 to 1.0 range
 	float ring_coord = fract(angle / (2.0 * PI));
+	float ring_coord2 = fract(angle2 / (2.0 * PI));
 	
 	// 2. Circular sweep mask
 	float sweep_mask = smoothstep(progress, progress - edge_softness, ring_coord);
-	
-	// 3. Leading edge glow
-	float leading_edge = smoothstep(progress - glow_width - edge_softness, progress - edge_softness, ring_coord) 
-                       * (1.0 - sweep_mask);
+	float sweep_mask2 = smoothstep(progress, progress - edge_softness, ring_coord2);
 	
 	// Sample base color
 	vec4 tex_color = texture(texture_albedo, UV) * albedo;
 	
 	// Combine base color and glow emission
-	ALBEDO = mix(tex_color.rgb, glow_color.rgb * glow_intensity, leading_edge);
-	EMISSION = glow_color.rgb * leading_edge * glow_intensity;
+	ALBEDO = tex_color.rgb;
+	EMISSION = glow_color.rgb * glow_intensity;
 	
 	// 4. Combine sweep mask, texture alpha, and global fade_alpha
-	ALPHA = tex_color.a * sweep_mask * fade_alpha;
+	ALPHA = tex_color.a * max(sweep_mask, sweep_mask2) * fade_alpha;
 }
