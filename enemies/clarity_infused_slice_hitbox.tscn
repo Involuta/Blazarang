@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://davcqt7x8fi65"]
+[gd_scene load_steps=18 format=3 uid="uid://davcqt7x8fi65"]
 
-[ext_resource type="Script" path="res://general_scripts/DisappearNode.gd" id="1_yd7o7"]
+[ext_resource type="Script" path="res://enemies/clarity_infused_slice_ring.gd" id="1_keucv"]
 [ext_resource type="Script" path="res://general_scripts/damage_over_time_area.gd" id="2_wb8v0"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="3_vkjku"]
 [ext_resource type="Shader" uid="uid://vvgsovx2psnk" path="res://shaders/smoke_LOD.tres" id="4_ydk3o"]
+[ext_resource type="Shader" path="res://shaders/ring_appear.gdshader" id="5_wfi0h"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hbolv"]
 radius = 9.0
@@ -57,19 +58,24 @@ shader_parameter/ColorParameter = Color(0.552941, 0.768627, 1, 1)
 material = SubResource("ShaderMaterial_6f3ts")
 size = Vector2(1.6, 1.3)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oors7"]
-transparency = 4
-shading_mode = 0
-albedo_color = Color(0.729412, 1, 1, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_72qc7"]
+render_priority = 0
+shader = ExtResource("5_wfi0h")
+shader_parameter/albedo = Color(0.705882, 1, 1, 1)
+shader_parameter/progress = 1.0
+shader_parameter/fade_alpha = 1.0
+shader_parameter/edge_softness = 0.001
+shader_parameter/glow_color = Color(0, 0.8, 1, 1)
+shader_parameter/glow_width = 0.05
+shader_parameter/glow_intensity = 3.0
 
 [sub_resource type="TorusMesh" id="TorusMesh_7hx48"]
-material = SubResource("StandardMaterial3D_oors7")
+material = SubResource("ShaderMaterial_72qc7")
 inner_radius = 9.0
 outer_radius = 9.1
 
 [node name="ClarityInfusedSliceHitbox" type="Node3D"]
-script = ExtResource("1_yd7o7")
-disappear_secs = 9.0
+script = ExtResource("1_keucv")
 
 [node name="DamageOverTimeArea" type="Node3D" parent="."]
 script = ExtResource("2_wb8v0")

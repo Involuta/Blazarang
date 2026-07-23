@@ -36,3 +36,6 @@ res://enemies/clarity.gd
 res://levels/snow_level/snow_level_test_env.tscn
 res://glb_inherited_scenes/snowflake_entity_meshes.tscn
 res://cotu/cotu_cb_main.tscn
+res://shaders/ring_appear.gdshader
+res://enemies/clarity_infused_slice_ring.gd
+res://enemies/enemy_anims/clarity_left_slice_from_infuse.res

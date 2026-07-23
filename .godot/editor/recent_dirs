@@ -1,10 +1,10 @@
-res://general_scripts
 res://enemies
+res://shaders
+res://general_scripts
 res://enemies/enemy_anims
 res://glb_meshes
 res://glb_inherited_scenes
 res://textures/
-res://shaders
 res://levels/snow_level/section_nodes
 res://levels/gauntlet_level
 res://levels/mite_level

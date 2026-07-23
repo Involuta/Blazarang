@@ -176,11 +176,9 @@ class DressShard extends Node3D:
 		# Materialize link outline
 		var link_outline_shader = self._get_outline_shader()
 		var t = self.node.get_tree().create_tween()
-		t.tween_property(link_outline_shader, "shader_parameter/outline_thickness", 3.6, 0)
-		t.tween_property(link_outline_shader, "shader_parameter/outline_alpha", 0.0, 0)
 		t.set_parallel()
-		t.tween_property(link_outline_shader, "shader_parameter/outline_thickness", 0.4, .3)
-		t.tween_property(link_outline_shader, "shader_parameter/outline_alpha", 0.85, .3)
+		t.tween_property(link_outline_shader, "shader_parameter/outline_thickness", 0.4, .3).from(3.6)
+		t.tween_property(link_outline_shader, "shader_parameter/outline_alpha", 0.85, .3).from(0.0)
 	
 	func self_damage(damage: int):
 		self.hurtbox.receive_hit_no_hitbox(damage)
@@ -721,8 +719,7 @@ func backflip_mvmt():
 func regen_shards_mvmt():
 	var t = get_tree().create_tween()
 	var move_dir := 3 * walk_speed * target.global_position.direction_to(global_position)
-	t.tween_property(self, "velocity", Vector3(move_dir.x, 0, move_dir.z), 0)
-	t.tween_property(self, "velocity", Vector3.ZERO, frames(84))
+	t.tween_property(self, "velocity", Vector3.ZERO, frames(84)).from(Vector3(move_dir.x, 0, move_dir.z))
 
 func snowflake_descend():
 	var t = get_tree().create_tween().set_parallel()
@@ -756,8 +753,7 @@ func snowflake_brighten(brightness: float, duration: float):
 func snowflake_glow_flash():
 	var t = get_tree().create_tween()
 	var snowflake_light = snowflake.find_child("HeadLight")
-	t.tween_property(snowflake_light, "light_energy", 12.0, 0)
-	t.tween_property(snowflake_light, "light_energy", 0, .6)
+	t.tween_property(snowflake_light, "light_energy", 0, .6).from(12.0)
 
 func link_dress_shard_to_snowflake_hit(s: String):
 	dress_shards[s].link_snowflake_hit()
@@ -812,8 +808,7 @@ func infuse_arm():
 	var arm_shader = arm_shard_mesh.get_surface_override_material(0) as ShaderMaterial
 	# Shrink/dematerialize link outline
 	var t = get_tree().create_tween()
-	t.tween_property(arm_shader, "shader_parameter/glow_progress", 0.0, 0)
-	t.tween_property(arm_shader, "shader_parameter/glow_progress", 1.0, 1.2)
+	t.tween_property(arm_shader, "shader_parameter/glow_progress", 1.0, 1.2).from(0.0)
 
 func defuse_arm():
 	# Get snowflake shard outline shader
