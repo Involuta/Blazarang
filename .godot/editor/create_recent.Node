@@ -1,10 +1,10 @@
 MeshInstance3D
+GPUParticles3D
 CollisionShape3D
 Hitbox
 DamageOverTimeArea
 AnimationPlayer
 Node3D
-GPUParticles3D
 Sprite3D
 Area3D
 EnemyHurtbox

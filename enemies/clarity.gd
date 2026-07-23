@@ -826,4 +826,7 @@ func spawn_infuse_slice_hitbox():
 	var inst = infused_slice_hitbox.instantiate()
 	level.add_child.call_deferred(inst)
 	await inst.tree_entered
-	inst.global_position = global_position + 6 * arm_meshes.transform.basis.z
+	inst.global_position = global_position + 9*body_meshes.transform.basis.z + 1.0*Vector3.UP
+	inst.look_at(target.global_position)
+	inst.rotation.x = 0
+	inst.rotation.z = 0
