@@ -1,56 +1,54 @@
 shader_type spatial;
-render_mode cull_disabled, blend_mix, unshaded;
+render_mode blend_add, depth_draw_opaque, cull_disabled;
 
-uniform vec4 albedo : source_color = vec4(1.0, 1.0, 1.0, 1.0);
-
-// Sweep control (0.0 = empty, 1.0 = full ring traced)
-uniform float progress : hint_range(0.0, 1.0) = 1.0;
-
-// Overall opacity control (1.0 = fully visible, 0.0 = completely transparent)
+// Controls overall opacity when fading out the entire ring (1.0 = fully visible, 0.0 = invisible)
 uniform float fade_alpha : hint_range(0.0, 1.0) = 1.0;
 
-// Softness of the trace line
-uniform float edge_softness : hint_range(0.001, 0.2) = 0.02;
+// Controls progress along the loop (0.0 to 1.2 to allow full spark fade-out)
+uniform float progress : hint_range(0.0, 1.2) = 0.0;
 
-// Glow / Leading edge
-uniform vec4 glow_color : source_color = vec4(0.0, 0.8, 1.0, 1.0);
-uniform float glow_width : hint_range(0.0, 0.2) = 0.05;
-uniform float glow_intensity : hint_range(1.0, 10.0) = 3.0;
+// Length of the intense sparkler tip transition zone
+uniform float spark_length : hint_range(0.01, 0.5) = 0.15;
 
-varying vec3 local_pos;
+// Sharpness/decay speed of the white-hot leading tip
+uniform float spark_sharpness : hint_range(1.0, 50.0) = 15.0;
 
-void vertex() {
-	local_pos = VERTEX;
-}
+// Shift starting position around the loop (0.25 usually maps to the right side)
+uniform float start_offset : hint_range(0.0, 1.0) = 0.25;
+
+// Colors
+uniform vec4 leading_color : source_color = vec4(4.0, 4.0, 4.0, 1.0); // HDR white-hot tip
+uniform vec4 trailing_color : source_color = vec4(1.0, 0.3, 0.0, 1.0); // Orange ember glow
 
 void fragment() {
-	// 1. Calculate angle around Y axis
-	// atan(x, z) gives 0 at Front (+Z). 
-	// atan(-x, z) reverses direction to Clockwise.
-	// Subtracting PI/2 offsets the start 90 degrees to the Right (-X as viewed from the front).
-	float angle = atan(-local_pos.x, local_pos.z) - (PI * 0.5);
-	float angle2 = -atan(-local_pos.x, local_pos.z) + (PI * 0.5);
-	
-	// Normalize angle into a clean 0.0 to 1.0 range
-	float ring_coord = fract(angle / (2.0 * PI));
-	float ring_coord2 = fract(angle2 / (2.0 * PI));
-	
-	// 2. Circular sweep mask. Smoothstep is only used for the edge softness.
-	// Note that when the bigger value is used as edge0, the output is inversed (0 when x>e0, 1 when x<e1). Essentially, output 0 is always on the left (e0), output 1 is always on the right (e1)
-	float sweep_mask = smoothstep(progress, progress - edge_softness, ring_coord);
-	float sweep_mask2 = smoothstep(progress, progress - edge_softness, ring_coord2);
-	
-	// 3. Leading edge glow
-	float leading_edge = smoothstep(progress - glow_width - edge_softness, progress - edge_softness, ring_coord) 
-                       * (1.0 - sweep_mask);
-	float leading_edge2 = smoothstep(progress - glow_width - edge_softness, progress - edge_softness, ring_coord2) 
-                       * (1.0 - sweep_mask2);
-	//leading_edge = max(leading_edge, leading_edge2);
-	
-	// Combine base color and glow emission
-	ALBEDO = albedo.rgb * glow_intensity;
-	EMISSION = glow_color.rgb * leading_edge * glow_intensity;
-	
-	// 4. Combine sweep mask, texture alpha, and global fade_alpha
-	ALPHA = albedo.a * max(sweep_mask, sweep_mask2) * fade_alpha;
+    if (fade_alpha <= 0.0) {
+        discard;
+    }
+
+    // 1. Invert (1.0 - UV.x) to reverse direction from counterclockwise to clockwise
+    // 2. Add start_offset to rotate the starting point to the right side
+    float current_u = fract((1.0 - UV.x) + start_offset);
+    
+    // Calculate distance behind progress with seamless circular wrapping
+    float dist = fract(progress - current_u);
+    
+    // Discard geometry ahead of the leading edge until the initial reveal finishes
+    if (progress <= 1.0 && current_u > progress) {
+        discard;
+    }
+    
+    // Calculate raw tip intensity (1.0 at tip, fading to 0.0 moving backward)
+    float tip_factor = clamp(1.0 - (dist / spark_length), 0.0, 1.0);
+    float spark_intensity = pow(tip_factor, spark_sharpness);
+    
+    // Fade out the spark tip entirely as progress moves from 1.0 to (1.0 + spark_length)
+    float spark_fade = 1.0 - clamp((progress - 1.0) / spark_length, 0.0, 1.0);
+    spark_intensity *= spark_fade;
+    
+    // Mix between the warm trailing body and the bright sparkler tip
+    vec3 final_color = mix(trailing_color.rgb, leading_color.rgb, spark_intensity);
+    
+    ALBEDO = final_color;
+    EMISSION = final_color * (1.0 + spark_intensity * 4.0) * fade_alpha;
+    ALPHA = fade_alpha;
 }

@@ -15,7 +15,7 @@ func ring_animation():
 	var t = create_tween()
 	# Reset fade_alpha so that when it always starts out visible
 	t.tween_property(mat, "shader_parameter/fade_alpha", 1.0, 0.0)
-	t.tween_property(mat, "shader_parameter/progress", .6, appear_time).from(0.0).set_ease(Tween.EASE_IN_OUT)
+	t.tween_property(mat, "shader_parameter/progress", 1.2, appear_time).from(0.0).set_ease(Tween.EASE_IN_OUT)
 	t.tween_interval(bright_time)
 	t.tween_property(cloud_particles, "emitting", false, 0.0)
 	t.tween_property(mat, "shader_parameter/fade_alpha", 0.0, fade_time).from(1.0)
