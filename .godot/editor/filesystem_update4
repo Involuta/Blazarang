@@ -37,3 +37,5 @@ res://glb_inherited_scenes/snowflake_entity_meshes.tscn
 res://cotu/cotu_cb_main.tscn
 res://enemies/clarity.tscn
 res://enemies/clarity_infused_slice_ring.gd
+res://enemies/enemy_anims/clarity_infuse_left.res
+res://enemies/enemy_anims/clarity_left_slice_from_infuse.res

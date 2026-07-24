@@ -67,7 +67,7 @@ shader_parameter/spark_length = 0.15
 shader_parameter/spark_sharpness = 1.0
 shader_parameter/start_offset = 0.25
 shader_parameter/leading_color = Color(3, 3, 3, 1)
-shader_parameter/trailing_color = Color(0.352941, 0.992157, 1, 1)
+shader_parameter/trailing_color = Color(0.470588, 0.992157, 1, 1)
 
 [sub_resource type="TorusMesh" id="TorusMesh_7hx48"]
 material = SubResource("ShaderMaterial_72qc7")
