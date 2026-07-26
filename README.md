@@ -1,4 +1,4 @@
-Blazarang Ideas Doc Jul 16 2026
+Blazarang Ideas Doc Jul 25 2026
 
 Production Processes
 
@@ -2235,35 +2235,42 @@ Make Icon flash with light and explode with particles on release
 Snowflake Boss: Comet/Clarity
 Design notes:
 Final boss of the first half of the game. A pivotal opponent that gives Cotu a major movement ability
-Idea: defeating Snowflake gives player option of either flight/hovering (fast mvmt with locked altitude or limited altitude control) or high jump + double jump
+Idea: defeating Clarity gives player option of either flight/hovering (fast mvmt with locked altitude or limited altitude control) or high jump + double jump
 Gateway boss between low-mid level grunts and insane planet destroyers
 First instance of a god not being friendly and/or communicative towards Cotu
 Thinks differently from all other gods you encounter
 First (or one of the only) instance(s) of a god not caring about competition at all. Falls completely outside the spectrum of casual gym goer → tryhard athlete
-In her base form, which is most of the time, she’s focused on a mindless, repetitive, cyclic task: expanding her realm (i.e. adding ice to it). She only fights you after you damage her enough to break her out of her work cycle, which is when she defends her realm and herself
-Occasionally, her body experiences an “error” that exposes a weak point. In her base form, this mistake can cause her self damage, which allows her to eventually progress forms, achieve Clarity, and break free from her cycle, but not long enough before the realm recaptures her
+In her base form, which is most of the time, she’s focused on a mindless, repetitive, cyclic task (e.g. feeding ice to her soul). She only fights you after you damage her enough to break her out of her work cycle, which is when her soul orders her to defend her realm and herself
+Occasionally, her body experiences an “error” that helps you in some way (e.g. exposes a weak point)
 These “errors” are her true self trying to break free from the cycle by hurting herself
-She is trying to break free by making herself vulnerable, literally and metaphorically (“being vulnerable” = opening up about her emotions and realizing her work is for nothing)
 Story:
-Cotu is trying to cross the Great Void, but along the way he happens to encounter a stray comet on a collision course with the ship. Despite his evasive maneuvers, the comet seems to follow him, which is when he realizes it’s actually a realm. By the time he realizes it, it’s too late and he’s trapped in the realm’s raging blizzard. He attempts to contact anyone in the realm via wireless signal, but get no response/noise. Cotu enters the realm to ask the god to stop the blizzard
-When Cotu first enters the realm, he encounters nothing but a frigid snow wasteland in the dead of night with a heavy blizzard. The only light source is himself; the sky can’t be seen through the blizzard fog. Eventually, he encounters a collection of floating shards repeating a simple pattern of movement atop a giant hexagonal ice platform in the snow. He guesses that this is the realm’s god. He tries talking to it, but it doesn’t speak nor change patterns
+Cotu is trying to cross the Great Void, but along the way he happens to encounter a stray comet on a collision course with the ship. Despite his evasive maneuvers, the comet seems to follow him, which is when he realizes it’s actually a realm. By the time he realizes it, it’s too late and he’s trapped in the realm’s raging blizzard. He attempts to contact anyone in the realm via wireless signal, but gets no response/noise. Cotu enters the realm to ask the god to stop the blizzard
+When Cotu first enters the realm, he tries to call out to the god, only to realize he has lost the ability to speak. He also finds it difficult to put his thoughts into words. Every time the player dies, Cotu comments on how it’s harder and harder to think clearly. As the phases of the boss fight progress, Cotu’s thinking becomes clearer again. Cotu’s mental state mirrors Clarity’s
+Phase 1: No speech, no thoughts
+Phase 2: No speech, little to no thoughts
+Phase 3: No speech, more complex thoughts
+Final phase (victory): normal speech
+At first, Cotu encounters nothing but a frigid snow wasteland in the dead of night with a heavy blizzard. The only light source is himself; the sky can’t be seen through the blizzard fog. Eventually, he encounters a collection of floating shards repeating a simple pattern of movement atop a giant hexagonal ice platform in the snow. He guesses that this is the realm’s god. He tries talking to it, but it doesn’t speak nor change patterns
 The player must hit the shards to force the god to regenerate them, which is when it exposes its weak spot. The god occasionally switches between patterns
-In Phase 1, the body looks mindless and formless: a creepy and chaotic spiky ball of shards, almost like a 3D snowflake. At the center of the spiky ball lies a hidden soft weak point: a giant eyeball. The spiky ball is surrounded by spikes pointing towards and away from it. It’s also surrounded by many eyeballs encased in ice (“caged eyes”) that constantly scan the environment, which explains how the realm found and chased Cotu. The snowfall is heavy
-In phase 2, it discards much of its shards into the snow and reshapes the remaining shards to form a dress. The ice platform below rises and shrinks forms a hat, while the center of the spiky ball (the soul) becomes Clarity’s snowflake, a large pointed hexagon snowflake-like shape that follows behind Comet like Cotu’s soul when he moves. The sky brightens up to a morning fog feel and the snowfall becomes normal
-In phase 3, the hat shrinks and folds inward, taking the appearance of a radially symmetric arrowhead/bird covered in pointed eyes, and the dress shards shrink and fuse to create a lattice-like mesh. The sky becomes crystal clear, revealing stars and nebulas
+In Phase 1, the body is divided into separate parts. At the center and high in the sky is a creepy and chaotic spiky ball of shards, almost like a 3D snowflake. This houses Clarity’s soul. There are 7 grounded glowing orbs surrounding the soul: 6 glowing orbs far around the spiky ball and 1 glowing orb underneath it, which sits atop a giant hexagonal platform. The orbs are all blasting ice magic into the snowflake. The snowfall is heavy
+Each of the orbs is a fragment of Clarity’s mind, and they are obedient slaves to Clarity’s soul. The soul tortures the orbs by draining their power for an unknown reason
+As the fight progresses, the orbs rearrange themselves to get closer together (and form more human shapes), allowing Clarity to think more clearly
+As the fight progresses, the orbs also get closer together to the soul, which represents Clarity accepting the bad parts of herself and becoming one whole
+In phase 2, the orbs become the arm and dress shards and the giant hexagonal platform shrinks to become Clarity’s hat. The spiky ball sheds its layers to become the snowflake entity. The sky brightens up to a morning fog feel and the snowfall becomes normal
+The soul recognized that it was in danger and temporarily ceased its torture to assemble its mind
+In phase 3, the hat shrinks and folds inward, taking the appearance of a radially symmetric arrowhead/bird covered in pointed eyes, and the dress shards shrink and fuse to create a lattice-like mesh. The snowflake entity either becomes the platform she rides on like the Silver Surfer from Marvel, or a floating headdress behind her head. The sky becomes crystal clear, revealing stars and nebulas
 In phase 3, ground is covered in ice, allowing Cotu to ice skate on it like Mario in Super Mario Galaxy 2
 Cotu automatically moves in the direction the player last moved
 Movement speed (including dodge speed) is increased
 Idea: special dodge anim has Cotu soaring into the air, going higher than he usually does on a dodge
-If Cotu dies…
-In phase 1, then nothing changes. The work continues
-In phase 2, she falls apart and returns to phase 1, as the threat to her work is gone
-In phase 3, she falls back to the ground and is trapped in ice before being returned to phase 1
-Represents the consequences of choosing work over human interaction
-In her base form, Comet works constantly on a mindless task for no reason
-As she progresses through her forms, she slowly gains more and more intelligence and humanity, which gives her perspective (i.e. Clarity)
-When she realizes that her work is for nothing (i.e. nearly achieves true Clarity), she tries to escape her realm by riding ice pillars into the sky, only to inevitably fall back to the ground and end up frozen in ice once again. She is then returned to her base form and begins the cycle again
-Inspired by my own dumb decision to refuse a vacation with family in order to work and save money instead. What’s the point of saving money if it’s not used for things like this?
+In Clarity’s final form (true Clarity), she becomes a tiny snowflake with an eye and finally gains the ability to speak
+Line ideas:
+“I have achieved true clarity. Did you play a part in this?”
+If Cotu dies in any phase, the player starts the fight from phase 1 all over again
+Represents self-hatred
+In her base form, Comet’s soul constantly drains energy from her mind
+As she progresses through her forms, she slowly brings the separate parts of her mind closer together, allowing her different parts to understand each other, which gives her humanity, intelligence, and perspective
+Eventually, the two parts of her accept each other for who they are, and they agree to become whole
 Boss punishes the player for running and rewards the player for fighting close-up. This contrasts with X and the Gauntlet, which reward the player for running away
 Blizzard fills entire arena except for a circular clearing around Clarity
 Boss punishes player for attacking constantly and rewards player for waiting for the perfect moment to strike
@@ -3218,24 +3225,71 @@ Add QuadShardSequence1
 Single1 tests continuous awareness, Double1 tests precise positioning, Triple1 tests precise positioning from a weird angle, and Quad1 tests precise positioning/distancing
 Animate snowflake entity and dress shards
 Import anims and add them to moveset
-Current task
 Think about the fight’s story as a whole so you know how to create gameplay to tell the story. You already have the gameplay essentials: aiming, timing, target selection, precise positioning, and precise dodging; the remaining gameplay to make moving forward should be in service of the story
-List all memorable moments/elements sorted by emotional power and logical sense
+List all memorable moments/elements ranked by emotional power and logical sense
+Cotu walks away after he believes he killed Clarity, only for true Clarity to call out to him as a tiny snowflake. They talk for a bit before Cotu forgives her and carries her to his ship
+Player and Cotu are surprised that Clarity can talk and think, and feel sympathy for her
+Player feels tension when Cotu initially hesitates to approach her, then relief when Cotu chooses to forgive her (or when the player gets the choice to forgive her)
+Wouldn’t Cotu only have lost his patience if she killed him several times? What if Cotu defeated her on the first or second try? → Cotu isn’t mad that she killed him—he’s mad that she destroyed his ship and stranded him in her realm without communicating with him 
+Clarity’s 2nd phase transforms into the 3rd: a more humanoid figure wearing a dress
+Clarity’s 1st phase transforms into the 2nd: rather than a formless being with no mind, Clarity becomes a somewhat humanoid golem controlled by the snowflake eye
+Cotu sees Clarity for the first time: a mysterious, formless being made of ice shards. Cotu is bewildered
 3rd phase Clarity looking around, realizing she’s in her realm, and running away into the sky
 Player is shocked that she has emotions and she doesn’t want to fight you anymore. Player feels surprise and sympathy
-If she’s running away, what is the threat to the player in the 3rd phase? → When she creates her giant ice pillar, the goal can become getting to the ship while dodging and/or breaking falling ice chunks from the pillar → if Cotu and Clarity are moving in different directions in phase 3, how do we get the moment where Cotu meets true Clarity? What reason do they have to meet up again? Maybe player can choose whether to fly to her in the ship or leave?
-Cotu walks away after he believes he killed Clarity, only for true Clarity to call out to him as a tiny snowflake. They talk for a bit before Cotu forgives her and carries her to his ship
-Player is surprised that Clarity can talk and think, and feels sympathy for her
-Player feels tension when Cotu initially hesitates to approach her, then relief when Cotu chooses to forgive her (or when the player gets the choice to forgive her)
-Wouldn’t Cotu only have lost his patience if she killed him several times? What if Cotu defeated her on the first or second try?
-List story ideas that incorporate all of the memorable moments
-
-
+If she’s running away, what is the threat to the player in the 3rd phase? → When she creates her giant ice pillar, the goal can become getting to the ship while dodging and/or breaking falling ice chunks from the pillar → if Cotu and Clarity are moving in different directions in phase 3, how do we get the moment where Cotu meets true Clarity? What reason do they have to meet up again? Maybe the player can choose whether to fly to her in the ship or leave?
+List story ideas that incorporate memorable moments
+Clarity is primarily made up of 2 parts: a body, which stores her conscious mind, and a soul. Her soul initially has complete control over her body, but as the fight progresses, her soul grows closer and closer with her body, and they eventually unite into one being
+Phase 1: soul drains energy from body
+Phase 2: soul (snowflake entity) orders body to attack
+Phase 3: soul and body attack together
+Final phase: soul and body are united
 Find the most engaging story idea from the list
+Clarity unites her soul and body/mind to finally think clearly
+Make snowflake control the arm
+Idea: central eye’s glow now telegraphs the arm, not the dress shards. This has the added bonus of removing the redundancy of the dress shard attacks being telegraphed by both the eye glow and the rotation (why look at the rotation if you can look at the glow + shard outline animations?)
+Issue: the glow flash when shards converge at the end of each shard seq telegraph anim is no longer possible, making the attack initiation anticlimactic
+Idea: a hexagon icon appears on the snowflake’s face plate and grows and disappears to command Clarity to do a slice. A hexagon appears around the snowflake and shrinks to signify a slice is about to occur
+During testing, make hexagon appear at the start of each slice anim
+Implemented for:
+RaiseRightSlice
+LongSlice
+RaiseLeftSlow (not RaiseLeftFast since that will be removed)
+LeftSliceFromWait
+After testing, make hexagon appear before the start of each slice anim; queue arm attack will play the hexagon anim, then the actual attack anim. Note that the hexagon anim must be part of the arm anim player, not the snowflake anim player since that’s playing a rotate or telegraph anim
+Make PreArmSlice anim in Blender where nothing happens. Its duration matches the lifetime of the hexagon
+Import anim to Godot and put hexagon startup anim in it
+The above strategy doesn’t work bc it also requires setting arm anim keyframes, and if you don’t set them, the arm goes to the default pose. The hexagon anim cannot be part of the arm anim player.
+Try making a separate anim player in snowflake entity meshes that only controls the hexagons
+Make TriggerArmRaise and TriggerArmSlice anims
+Make Clarity script call snowflake hexagon anims and wait for them to finish before performing arm actions
+Make snowflake play different hexagon anims for LongSlice and RightSlice
+Idea: snowflake controls the head to do head attacks
+Snowflake can optionally play the TriggerArmRaise anim while the arm is already raised, which makes the head appear and infuse the arm with energy. Only after the head is raised can Clarity’s head be hit and staggered, preventing the snowflake from commanding another arm anim (the snowflake not commanding another arm anim while already happens in code)
+First try adding this feature to RaiseLeft, as it doesn’t automatically lead to a slice
+Make a copy of WaitRaisedLeft called InfuseLeft
+Make a copy of LeftSliceFromWait called LeftSliceFromInfuse
+Import InfuseLeft and in it, raise the head
+Import LeftSliceFromInfuse and in it, lower the head
+In wait raised left state, make Clarity choose between LeftSliceFromWait and TriggerArmRaise → InfuseLeft → LeftSliceFromInfuse
+Then implement this feature on RaiseRightSlice by creating 2 new anims: RaiseRight, and RightSliceFromWait OR keep RaiseRightSlice as-is to simplify the fight. I decided on the latter bc now there’s 2 possibilities for each side raise: RaiseRight can lead to RightSlice or LongSlice, and RaiseLeft can lead to LeftSlice or Infuse → LeftSlice
+Create shader effect for arm getting infused (and uninfused when Clarity gets staggered instead)
+Create shader
+Tween shader’s “glow_progress” property over time from 0 to 1 when Clarity infuses arm
+Tween glow_progress back to 0 after slice
+Make arm leave lingering snow DOT hitbox after an infused slice
+Create basic infused slice hitbox scene
+Spawn infused slice hitbox in infused slice anim
+Add effects
+Make ring mesh
+Make cloud particles
+Make ring appear both CW and CCW during the slice
+Make leading edge of ring glow brightly as it forms
+Make arm emit cloud particles while infused
 Idea: snowflake progresses through shard sequences, and jump shot is at 6: Single → Double → Triple → Quad → ??? → Jump Shot
 Will hitting the snowflake cause it to progress forward a sequence?
 Ensures that the snowflake isn’t hard stuck at the same seq due to the player stunning it every time
 Punishes the player for doing the right thing
+I don’t like this idea bc it makes the snowflake feel too predictable
 Add Jump Shot to moveset
 Make Jump Shot anim start from WalkLeft, not WalkForward
 List all jump shot requirements to know how to implement it
@@ -3243,6 +3297,11 @@ Only usable when both arm and snowflake are in neutral
 Must be used at least once during the fight
 If it’s used more than once, it cannot be shot in the same place twice
 Must be powerful and impactful
+List ideas that implement all requirements
+Jump shot is the snowflake shard sequence that uses all 6 shards
+Both arm and snowflake must be in neutral, then there’s a ⅙ chance jump shot gets chosen
+Current task
+Creates a spire?
 Animate snowflake in jump shot
 Figure out what snowflake should do
 Idea: ice sprite rework
@@ -3251,7 +3310,7 @@ Core concept: ice sprites build up over time until they’re everywhere
 Instead of being spawned in the blizzard, they’re spawned via projectile from a spire, a structure that spawns at the impact site of a jump shot OR a giant snowflake icon on the ground that appears at the site of a jump shot
 An ice sprite starts out as a hopper, which behaves identically to the current ice sprite, except if the ice sprite is destroyed before it destroys itself, it doesn’t create the snow hitbox
 If the ice sprite destroys itself, glowing snow particles slowly rise into the air, then settle at a point high up (around top of snowflake level or higher). At this point, the ice sprite fairy starts manifesting
-The ice sprite fairjy starts off as a glowing blue-white dot. It gets brighter over time, and right before it spawns, it plays a telegraph anim of some kind (e.g. a bunch of particles emitted or received). During this telegraph anim, if you hit the ice sprite fairy, it dies in one hit
+The ice sprite fairy starts off as a glowing blue-white dot. It gets brighter over time, and right before it spawns, it plays a telegraph anim of some kind (e.g. a bunch of particles emitted or received). During this telegraph anim, if you hit the ice sprite fairy, it dies in one hit
 When the ice sprite fairy fully spawns, it mostly just meanders randomly in Clarity’s vicinity and occasionally shoots fast projectiles that create a snow cloud just like the ice sprite explosion. It dies in 3 rose (or ax) hits, but right before it fires a projectile, it glows brightly, and when it glows brightly, you can hit it to kill it in 1 hit
 Snowflake anim during RegenShards
 Snowflake looks boring just lying there getting stabbed; try making a branching snowflake pattern form on the ground as it’s stabbed
@@ -3516,6 +3575,7 @@ Normal: size of American alligator
 Big: size is comparable to Vordt of the Boreal Valley from Dark Souls 3
 Huge: size is comparable to Golden Hippopotamus from Elden Ring
 Giga: too big to fit in the arena; he hangs onto the floor with his hands and attacks with his head
+Idea: its soul is a ring around its tail
 Slide: runs at target, then slides on the wet floor
 Ambush: runs at target in tiny mode, then grows to normal mode when close to the target and bites. If successful, target is grabbed and a punish anim plays
 Idea: When hit, one of Cotu’s arms is ripped off
@@ -3526,6 +3586,20 @@ Shockwave: in huge or giga mode, gator slowly opens its jaw wide, then slams it 
 Idea: for 2nd phase, it can swim through the ground and walls and attack from them
 Floor Chomp: swims under the floor, then chomps up at target from below in either Big or Huge mode. Huge mode has longer chargeup time and a different sound effect
 Projectile Shockwave: same as shockwave but done while the gator’s inside a swimmable surface, which causes the shockwave to launch a projectile directly at the target (more precisely, in the direction the mouth is pointing), then send out a shockwave immediately after. If the player uses a dodge to avoid the projectile, they’ll likely be hit by the shockwave
+Ring Toss: gator spins its soul around its tail, spikes appear on the soul, then it throws its soul at you like a chakram before it bounces off a wall and returns to gator
+Idea: defeating gator gives you the chakram
+
+Paramecium and Babies
+Appears in Gauntlet Gym 2
+Personality idea: down to Earth and ordinary. Wants to challenge itself more than beginner-level combat, but doesn’t want the stress that comes with high-level competition. Aversion to stress matches soft, squishy exterior
+One paramecium miniboss (“parent”) about 3 times as massive as Cotu accompanied by 10 babies
+Babies orbit in a ~rose petal-length radius around a center point between the target and the parent, preventing Cotu from getting too far from the parent
+Parent does basic close-range melee attacks inside the circle
+If the player leaves the circle, the parent aggressively chases them down (maybe the babies push the parent closer?)
+Babies occasionally break circle formation to attack in quick succession
+Idea: one long continuous chain attack where each baby dives at the target
+Idea: all babies start acting on their own temporarily and dive at the target or orbit around the target sporadically
+Parent can jump high into the air and backward, bring all of its babies around it to orbit around it in a ring, then throw the ring at the target. As each baby in the ring hits the ground, it bounces off the ground. Each baby makes a wet slap noise upon hitting the ground
 
 Giant Dual Purple/Skyblue Centipede
 Glowing purple/skyblue streaks all over its body
@@ -3549,6 +3623,47 @@ Centipede does the same sequence of actions in every attempt
 Lore: fight is pre-recorded bc the real Centipede is busy elsewhere
 Each behavior state (purple, blue, black, combined, etc.) has its own section in the boss song. When a section of the boss song plays, its corresponding behavior state is active
 
+Flying Whale and Mortal Warrior
+Gauntlet Gym 2 boss
+God is a giant eye whose iris is a soul. It can transform into a giant whale and watch the arena from afar
+You don’t fight the god; you fight her loyal mortal warrior
+Extremely ugly and weak-looking
+Wide gaping mouth and smaller top of head like Sam O’ Nella’s depiction of Tarrare
+Open mouth is sewn together with skin like a cage
+Sad drooping eyes
+Humble and brave
+Speaks poetically and romantically
+Worships and loves his god
+Can’t see the god, but has faith that she’s with him. You can see the god, and you can see when she gives him power
+Just before he dies, the whale rewards him by telling him her real name, which is so beautiful that he immediately dies peacefully and painlessly
+Warrior dialogue ideas:
+Intro:
+Mortal: “I am a mortal warrior. My god sent me here to destroy you.”
+Cotu: “She wants you to fight me? I’m sorry, mortal, but she sent you to die.”
+Mortal: “If that is what my god has planned for me, so be it.”
+Near the end of the fight:
+Cotu: “You sure you’re willing to die?!”
+Mortal: “ANYTHING FOR HER!!!”
+Upon defeat:
+Mortal: “Cotu, I give to you all the gratitude a lowly mortal can give. To die in battle to the Champion of the Universe, fighting in the name of my beloved god, is a dream I longed for my whole life. I could not even imagine a more beautiful death. My only regret is that I cannot fight for my god any longer…that I have no life left to give back to the one who gave me mine.”
+Whale descends to the Mortal
+Mortal, weakly: “Oh, love…what have you in store for me?”
+Whale touches his forehead
+Mortal: “Your name? You’ve given me your name…what joy! How beautiful your name is! All beauty in all of creation cannot compare to even a fraction of the magnificence found in your name! Oh, to die with this gift! I see now what you have bestowed me with! A death with no regrets, no pain, and no sorrow. I give you all my thanks, even if it is just for a moment. Then again, a moment is the length of my existence compared to yours. My entire life, I was always going to be a moment for you. Thus, there is nothing to grieve. I’m glad…the love you give me is accompanied by no pain. So that I may die, and you may live…in peace.”
+Mortal dies. Its eyes are hollow and its expression goes blank
+After the fight, the god talks to Cotu
+Given her gigantic form, Cotu asks why she only fights in Gauntlet Gym 2. She says that her form is just an illusion formed within the minds of those who perceive her, and she can’t physically interact with the universe except through her mortals. Thus, her power is measured purely by the strength of her mortals
+Cotu asks why she fights at the gym. She says that upon discovering her ability to create life, she fell in love with her offspring, and she gives them what she believes is the ultimate gift of life: purpose
+Idea: afterward, Cotu meets Elite Gunner. He talks about the whale’s goal to give the life she creates purpose. EG says it truly is a gift to be born knowing exactly what your purpose is, as it is so hard to find. Cotu says it’s not hard at all: just do what makes you happy
+Cotu jokingly asks for her name. She says it is a gift bestowed only to mortals who die valiantly fighting the gods in her honor
+Warrior lore:
+To save development and player time, this lore is possibly found in text somewhere, not in an actual scene
+The warrior Cotu fought was the last of a generation of warriors, all competing to be the ambassador of the whale
+They killed each other in the name of their god, thus they died with honor and peace
+Post-writing comments:
+The concept of a mortal worshipping their god is unique and interesting in this universe, but make sure not to spend too much time on it or treat mortal death too seriously to keep the tone of the story consistent
+Make it clear at some point that mortals are really just an extension of the gods’ bodies (e.g. imagine if your fingernails had a mind of their own. You don’t feel sad when they die bc you get new ones)
+
 Party Pillars
 Arena consists of a ton of small pillars and one giant pillar in the center with flashy people dancing on it
 One big dancer in the center does dance moves corresponding with movement patterns of the pillars below (e.g. arm/leg mvmts left → all pillars move to the left, spin → all pillars rotate)
@@ -3566,24 +3681,21 @@ After sending out a before-image, FB can change his mind and do something else, 
 Has a wide variety of dash slashes and a few tricks
 Sword throw: FB throws his sword, then dashes over to catch the sword. This creates 2 before-images: one that lasts from the windup of the throw to the exact moment where it leaves his hands, and one that starts when he catches it and ends when he either sheathes the sword or does his next attack
 Lie Double Slash: FB dash slashes from a position with both a real dash slash and a lie dash slash
-Phase 2: FB transforms even more into a robber fly, discards some of his fashion, grows wings and possibly exposes an additional pair of limbs, and becomes even faster and generates even more images. He also coats his sword in paralyzing venom using his beak
+Phase 2: FB transforms even more into a robber fly, discards some of his fashion, grows wings and possibly exposes an additional pair of limbs, and becomes even faster and generates even more images. He also coats his sword in corrosive venom using his beak
+This venom is actually chlorine trifluoride, one of the strongest oxidizers known to man. It’s reactive enough to corrode stainless steel, glass, and rock (i.e. silicate minerals). Since these are the most common chemicals present in god bodies (because they are the most common chemicals of solid objects in the universe), FB’s venom is a deadly threat to most gods, which may be why he’s ranked so high despite his disability. He’s predictable, but he only needs a few hits to kill you
+Monologue idea:
+FB envenomates his blade
+FB: “Since you made it this far, and you seem pretty chill, I’ll let you in on my big secret. I call myself Future Blade on purpose. It draws attention to my biggest weakness, and takes attention away from my biggest strength: venom. Even though it’s my trump card, my name and reputation alone made it so easy to forget. Just one touch, and…I’ll let you learn what happens next.”
 Phase 2 attacks:
-Pocket glitter: FB scoops some glitter from inside his cloak and throws it forward in a short, small burst in front of him. Similar area to Owl’s item disabling cloud from Sekiro: Shadows Die Twice, but with longer and wider forward coverage. If Cotu is hit, he receives the temporary glitter debuff, which makes real and fake before-images look nearly identical and makes sparkles appear chaotically all over the screen (not the environment; the sparkles act as if they’re directly on the camera lens)
 Flying thrust: FB sometimes flies up into the air and dive thrusts to the ground to attack. This creates a before-image in the air with FB’s wings exposed . Hitting a wing is one of the only ways (or the only way) to damage FB in phase 2
 Tackle: FB sheaths the sword and flies directly at the target to tackle it with his robber fly legs. Since the sword is sheathed, FB creates no before-image but moves much more slowly. Upon landing the tackle on Cotu, a grab animation plays where FB injects Cotu with his venomous beak
 Idea: FB grows an extremely durable exoskeleton. The only way to damage FB is to hit him in midair while his wings are exposed. This is most likely to occur when FB shows a before-image in flight with his wings wide open
 Idea: chats with friends while waiting for you to challenge him. Conversations are long and organic; they’re the type of conversation you’d hear between girls in public and want to eavesdrop on
-FB: smart, toxic, and responsible. Sassy
+FB
+Smart, toxic, and responsible. Sassy
 Miss Serpentine (a snake): dumb, well-meaning, and responsible. Gentle
 Flora (flower girl in a pot of dirt): semi-smart, toxic, and irresponsible. Smooth
 Conversation ideas:
-Future Blade’s name
-FB is undecided on his name and everyone brainstorms what it should be
-FB mentions that in another conversation about his name (he thinks it might have been gauntlet gym 2), some random guy came out of nowhere and suggested a dumb name, butting into the conversation awkwardly. This was actually Jab Crab, whom the player had met before. FB makes fun of his appearance and demeanor and the girls laugh. MS laughs slightly less and a bit differently compared to the others. They also make fun of the name he suggested and they all laugh loudly (e.g. “FUBA!!! AHAHAHAHA!!!”)
-Flora comments that they’re all dumb for laughing this much about the name. Flora mentions that people in Korean TV shows on the Internet need alcohol to get this dumb
-FB asks everyone if they’d drink if they could get drunk
-Flora says she’d drink out of her mind and become an alcoholic. She chants: “Go crazy! Go stupid! Go crazy! Go stupid!” MS begs her not to. FB agrees with Flora, and they both chant: “Go crazy! Go stupid!”
-MS whimpers and vows to never let FB and Flora become alcoholics. FB remarks that MS would have to pry the bottles out of his 6 cold dead hands
 Future Blade talking with X
 FB: “...So I talked with X recently…”
 Flora: “STOP.”
@@ -3622,6 +3734,11 @@ Miss Serpentine talking about what it’s like to be part of a hive mind
 Everyone talking about the idea of adding weight divisions to the gala
 
 
+FB telling Flora to look for a better coach than him
+FB coaches Flora, who is his star student. He believes that Flora has grown beyond his coaching and wants her to move on to better coaches (i.e. coaches who can teach her how to use her powers better), but Flora wants to keep spending time with her friend FB
+Coached by her friend FB. A brilliant student who has the potential to rival top gods if taught by a coach whose skillset and power level more closely matches hers (e.g. late gauntlet variants), but she’s reluctant to train with them because she doesn’t want to lose her friend FB
+FB suggests late gauntlet variants
+Flora says they’re boring
 Misc ideas:
 FB tells Flora to shut up before he tips over her pot
 MS giggles at something
@@ -3695,7 +3812,12 @@ The tile that the boss is considered to be standing on (i.e. the tile the boss i
 
 Candy Cat
 Giant cat monster made of sugar crystals and candy bits
-Top of its head is 4 giant spikes forming a mask above its mouth, and its mouth looks like Denji’s from Chainsaw Man with big teeth and a wicked grin
+Terrifying giant predator
+Potential Inspiration: “Spotted by the Tyrannosaur” by robotinpyjamas on Instagram
+Sunken eyes imply hunger
+Jaw size implies strength
+Blank expression with open mouth implies supremacy. An angry expression typical in blockbuster movie monsters would imply that the monster plans to fight you. With a blank expression and an open mouth, it looks more like an ambush predator hunting prey, meaning there’s no chance of you winning the fight
+Top of its head is 4 giant spikes forming a mask above its mouth, and its mouth looks like Denji’s from Chainsaw Man with big teeth
 Mask spikes can fold back to form a mane, revealing crazy cat eyes and/or a bunch of tentacles underneath
 Head can twist around and upside down to make new expressions to frighten its enemy
 Back is covered in candy bits, chest is guarded by chocolate plates
@@ -3713,15 +3835,13 @@ Lunge Splash: CC extends its torso to move its head and front paws in an arc up,
 Hypnosis ability
 When it opens its mask, Candy Cat exposes tentacles and/or a twitching eye, which emits hypnotic waves that distort its prey’s mind
 Hypnosis makes the stability bar and buffs look like they’re increasing and changes their colors - it looks like Cotu has more stability and buffs he actually has
-SFX and music fade into the background, and a child’s voice reverberates clearly to say relaxing words
+SFX and music fade into the background, and a deep seductive male voice reverberates clearly to say relaxing words
 “Relax.”
 “Be calm.”
 “Ease your mind.”
-“Don’t move.”
-“I love you.”
-“Don’t worry.”
+“Be still.”
 Used immediately before a powerful attack
-Song is calming, seductive, and insidious
+Song is calming, seductive, and insidious OR initially scary, then romantic and seductive like Never Never Gonna Give Ya Up by Barry White
 Idea: song has deep distorted lyrics
 So soft, so sweet, so nice
 And it could be yours for a low low price
@@ -3731,18 +3851,10 @@ So soft, so sweet, so kind
 Even though you’re not a person in my eyes
 I like that you’re with me tonight
 Come into my realm and I can make you mine
-Idea: Candy Cat offers Cotu a good sensation he has never felt before and he didn’t know he was capable of feeling, possibly in an intro cutscene
-Idea: this is the kidnapper, not Future Blade and his goons. Candy Cat wants to kidnap Cotu so that Jessica will let him into the next tournament
-I want to have a kidnapper and a disqualified fighter to show that the gods aren’t just good or mentally-handicapped with good intentions (i.e. Clarity). It would make sense if the kidnapper and DQed were the same character
-Candy Cat, not Mike, is the one who made the deal with Jessica to gain great power in exchange for a random chance of failure. Cotu (or X) caught him in the act and got him DQed. Candy Cat now wants to kidnap Cotu and hold him hostage until Jessica (who’s in charge of the next tournament) allows Candy Cat to participate in it. He thinks that because She helped him before, She’ll help him again
-This doesn’t make sense bc the gauntlet, Blaze, and other strong gods would keep an eye on Candy Cat, ensuring that he won’t do anything dangerous. In any case where Candy Cat poses a real threat to other gods, ask yourself if it’s possible for other gods to intervene and stop him. If so, why are they wasting time with the gala instead of addressing the elephant in the room? If not, that means Candy Cat poses a threat to all of the strongest gods combined, which makes them look weak and breaks the power balance of the lore
-Alt idea: Candy Cat got disrespected by Cotu somehow in the tournament and is taking revenge by keeping him in his sticky realm (e.g. burying him in syrup and forgetting about him). He is petty and pathetic
-This makes sense but wastes Candy Cat’s visual design. If it’s pathetic, why is it so big and intimidating?
-Alt idea: Candy Cat feels incredibly good when victims are submerged in his syrup-filled stomach, so he’s been kidnapping people and putting them in his syrup. He lures them in by offering training better than the gauntlet’s. The people at the gala are wondering why some gods aren’t showing up yet
-This doesn’t make much sense bc surely the gods can team up to beat Candy Cat and stop him from doing this
-Alt idea: Candy Cat is a prisoner
+Candy Cat is a prisoner
 Candy Cat is locked away in gauntlet central bc it kept attacking gods whose bodies or realms contained some trace of sugar, and it showed no willingness to change (due to having the mind of a voracious beast). It traveled great distances using its wormholes, ate sugar, and turned the sugar into its body parts, enhancing them. The gauntlet keeps it in one place only by filling its holding chamber with allulose, which satisfies it and disables it bc allulose doesn’t crystalize, unlike sugar and sugar alcohols
 To train, gods can fight Candy Cat in a gauntlet holding cell. The gauntlet grants special access to that particular god, then gives Candy Cat a controlled dosage of sugar, then covers the challenger in sugar
+Intro cutscene idea: Candy Cat sees Cotu covered in sugar and his eyes turn into candy hearts with messages on them (e.g. BE MINE)
 Story Idea: Candy Cat’s escape
 In a back corner of gauntlet central, 2 lively NPCs are sitting and chatting. When Cotu approaches them and tries to talk to them, they get up and walk away without looking at him. Cotu comments on their rudeness. Typically, gauntlet gym NPCs are friendly and open to meeting new people
 During the gala, after a few matches have passed, news breaks out that Candy Cat has escaped confinement at gauntlet central. Blackstar is summoned by the gauntlet to aid the search for it and withdraws from the gala. X is also summoned by the gauntlet since he’s the one who eliminated Candy Cat during the tournament. Blackstar comments that the only way Candy Cat could have escaped is if someone smuggled sugar into gauntlet central, which shouldn’t have been possible since guests are screened before entering gauntlet central
@@ -3750,14 +3862,17 @@ Idea: at the gala, without the watchful eyes of Blackstar and X, Cotu is kidnapp
 Idea: to win the game, the player must bring Clarity or the mites to Candy Cat’s holding cell to restrain Candy Cat, AND stop the kidnappers by following the rude NPCs when they walk away
 
 Neuron Boss: Neuro
-Shaped like a neuron where 1 axon terminal is the head and 1 axon terminal is a set of feet. The head and feet are constantly flickering and changing shape. They have no arms. Their base form is tall, so they have to hunch down to talk to others at face level. They can also “sprint” by running with both their head and feet on the ground
+Shaped like a neuron where the soma is the head (nucleus is a singular eye, dendrites are hair, mitochondria are eyebrows?) and the axon terminals are feet. The head and feet are constantly flickering and changing shape. Neuro has no arms. Their base form is tall, so they have to hunch down to talk to others at face level, but they frequently stand tall and puff out their “chest” when bragging. They can also “sprint” by running with both their head and feet on the ground
 Can move incredibly quickly, fly, and change size extremely (e.g. they can grow their head to fill up the entire sky)
 Idea: arena is a particle accelerator (the inside of a gigantic donut)
 At some point in the fight, the player must continuously run forward through the accelerator to avoid something chasing them (e.g. energy field, a monster, etc.)
+Idea: floor is a neuron network, and player must sometimes stand between the neurons to avoid damage
 Zip: Neuro dashes from one position to another in the blink of an eye. This is their bread and butter
 Laughs and screams when zipping several times in a row
 Lightning: Neuro does a weird pose, stops moving, and electric buzzing noise slowly loudens. The entire screen then flashes white, then quickly dims to reveal the remnants of a lightning bolt fired from Neuro directly to the target
 Caltrops: Neuro floats in the air, moving so slowly it almost looks like they’re not moving, then drops a bunch of sparking electric caltrops to the ground
+Head Slam: while standing, Neuro brings their head back a far distance, then the head sparks with electric arcs, then Neuro slams their head down on the ground in front of them, electrifying the entire floor for a while
+Counterplay: jump high into the air, then hit Neuro in the head to stop the floor electrification
 Switches from their purple glow to red in phase 2
 Idea: occasionally twitches (jerks around suddenly, cancels a move, etc.)
 Inspired by UFC fighter Dustin Poirier’s habit of pulling up his shorts
@@ -3766,25 +3881,28 @@ When attacking quickly
 “Come on! Show me something!”
 “H̸̘͈̞̹͔̦͋̓͆͒̔̅̍̋͝͝A̸̖̱̩̳̯̍̓̄͛̽̓H̶̢̲̏͌͑́̆͌͛͒͗̇͗̚̚Ä̵̧̖̲̯̭̭̙̳̯̪̿̄̿̕̕͜͜H̷̠̠̻̗̃̉̈͊̄̄̿́Ą̶̩̲̳͍͕̳͎̊̋̓͗́̐͝H̸͓̪͉͎͍͗̌̅̅͊̇̅͘͝͠Ā̸̘̭̜̌͛̓̊̉͝H̴̡͇͚̗̹̘͍̏͋͐̆̒̍́̃̅̑̊̉A̷͈̹̽͜”
 “À̸̭̯̣͓̟̜͙̖̹̤̞͉̘̝̿̌͂̾ͅA̸̱̹͉̩̋̀͛̓̽A̵̢̨̛̰̪̰͚͖̞̘̰͙͖̖̘̋͊̿̐͝ͅÄ̷̻̰̝͕́H̴̡̪̣̯͎̰̥͙̊̽̀͑̋͜͠H̴͎̝͚̄̓̏̿H̴̭̮̯͔̰̼̖̙̟̼̬̞̓̐͐͛̃͑͗̃́̇̈́͗̕͝͝H̵̲̜͕͌̉̌͑̀̐̇͑̏͘͝͠”
+“You can’t do ANYTHING to me!”
 When hit
 “Is that all you can do?”
-“You can’t do ANYTHING to me!”
+“Ha! So weak!”
 When you get destabilized
-“Oooh, you better use a stabilizer!”
+“Uh oh! You better use a stabilizer!”
 “HAHAHAHAHAHA”
-When you use a stabilizer
+When you use a stabilizer that isn’t your last one
 “You’re nothing without those heals!”
+“You’re a pathetic cheat!”
 When using your last stabilizer in phase 1
 “Out of heals already? OH NO!”
 “UH OH! Was that your last heal?”
 “HAHAHAHAHAHA. You’re FINISHED!”
 Final cutscene or attack:
-“I AM THE GREATEST FIGHTER IN THE UNIVERSE! HISTORY JUST HASN’T LEARNED IT YET!”
+“I AM THE GREATEST FIGHTER OF ALL TIME! HISTORY JUST HASN’T LEARNED IT YET!”
 Idea: normally doesn’t have arms, but can briefly create super long arms, hands, and fingers using arc lightning
 Frequently uses crooked hand poses like claws
 Idea: has an ugly and small soul
 Lore/Story Ideas:
 One of the highest ranking gods from the tournament
+Effortlessly defeats Flora, Future Blade’s star student and friend
 Voice sounds like Bill Cipher from Gravity Falls, but pushed a bit in the direction of Skeletor’s voice, and electrically synthesized
 Loud, narcissistic, witty, and funny fast talker who constantly proclaims themself to be the greatest in the universe
 Blames their loss on bad luck
@@ -3795,17 +3913,6 @@ Insults Cotu by calling him a puny little twerp who got lucky
 Cotu agrees with this and says he’ll defeat Neuro to prove the tournament win wasn’t a fluke
 Personality and fast talking are inspired by Muhammad Ali
 Turns pink/purple when they’re angry and back to blue when they’re calm
-Convo idea:
-Undecided person: “Do you ever think about the fact that you have no friends?”
-Neuro: “Absolutely not. Why should I care for the attention of inconsequential losers who will only hold me back?”
-Undecided: “Because having friends is nice. They care about you.”
-Neuro crackles. “Easy for you to say. Your friends are better than you. If you were as great and awesome as me, you’d realize that nobody around you is worth your time.”
-Undecided isn’t convinced but says nothing.
-Neuro: “I’m done wasting time with your asinine inquiries. Go talk to your friends instead.” Neuro zips away
-This convo shouldn’t be included for a few reasons:
-The convo feels too long, probably because the theme is so simple that it doesn’t need this much dialogue to explain
-The undecided speaker is unlikable because they’re being condescending and acting polite about it, which is distracting and counterintuitive to the convo’s purpose of showing that Neuro is unlikable to the average person (this is not an average person; this is a hater). The convo may work if it’s used to establish two characters simultaneously; the passive aggressive jerk speaker and the aggressive direct jerk Neuro. The speaker is further established as a jerk because their opinion is more negative than the general public’s
-I’m including this convo in this doc to show what not to do or in case it can be repurposed
 
 Projectile Spammer: Microwave
 Idea: before the fight, you can unlock an endgame-level super powerful upgrade that deflects or destroys projectiles somehow. Undecided if this is done through the icon, one of the rangs, or something else entirely
@@ -4005,7 +4112,7 @@ Idea for setup: X insults the triplets in front of Blackstar
 Idea: the relationship between the triplets and the rest of the Gauntlet is tense bc the triplets abandoned the Gauntlet to be independent. The Gauntlet officially approves their leave, but some variants resent the triplets
 The trio is proof that the Gauntlet doesn’t just want to become the strongest and train others. A part of it also wants to relax and live freely and selfishly
 Greg and Blackstar no longer have romantic feelings for each other. They become more like siblings
-Problem: the triplets being gauntlet members muddles their identity (3 minds with ability trade offs AND resurrection?) and wastes some of their uniqueness.
+Problem: the triplets being gauntlet members muddles their identity (3 minds, ability trade offs, invincibility, AND gauntlet resurrection?) and wastes some of their uniqueness.
 Problem: if the triplets and the Gauntlet are so different, they feel pretty much like different people entirely, so it doesn’t make sense that the triplets are actually Gauntlet
 Problem: there’s no more subplot where the triplets try to find their realm, which was an interesting idea unique to them
 Problem: the triplets lose their primary character motivation, which is to find their realm
@@ -4120,7 +4227,7 @@ Front kick ragdoll: Pilot appears from a portal perpendicular to Cotu’s stumbl
 Baseball bat: steps out of the portal close to Cotu’s back and swings at his head horizontally with his current melee weapon. Simultaneously, no name steps out of a portal in front of Cotu and does a ducking liver punch. If one hit lands, the other must have landed as well. If one missed, both must have missed. If the hits land, there’s heavy hitstop during the impact (only do this if it’s not too difficult), then Cotu frontflips and lands on his butt
 One-time gags: only used once per playthrough, typically as a joke. In an interaction between 2 brothers, the third hyperaggressively attacks the target (typically no name)
 Pocketwatch: Greg holds a pocketwatch in his hands and looks at its back
-Greg: “WHAT?! IT’S SO OVER! TAKE THIS!”
+Greg: “WHAT?! OH IT’S OVER! TAKE THIS!”
 The game pauses
 The player unpauses
 Greg: “...”
@@ -4137,7 +4244,7 @@ Can use realm items that are simply an extension of his body
 Fights like Bruce Lee (strong singular strikes)/Jon Jones (range control)/Asadula Imangazaliev (speed & spins) since he has long thin limbs
 Makes himself inconspicuous and moves frequently to lose your attention and sneak into attack range
 Cannot speak, write, or sign (except for basic expressions/gestures like yes, no, and maybe), but comprehension and instruction following is fine. Essentially has expressive aphasia
-When he tries to speak, it sounds like quiet white noise. Greg and Pilot tried to decode it to no avail
+Despite this, his twins understand him just fine. They don’t hear what he says, they just know instinctively what he’s trying to communicate. His speech impediment only affects his communication with others
 Left handed; does most fast kicks with his right leg and strong kicks with his left
 Mvmt options (fwd = dir from no name to target):
 Follow: walks forward with one side of his body facing the target like a fighter
@@ -4507,6 +4614,7 @@ Tempered X Boss
 Pre-fight quote: “Tell me, Cotu…Can you read me?”
 Face is modeled after a T shape instead of an X
 Soul is a plus sign with pointed tips and with the top segment (the one facing away from the target) removed, i.e. a T whose stalk is as long as the branches. Soul faces in the direction X wants to attack in
+Instead of orange, his primary color is the color of infinite temperature (Google it; it’s a cool blue/purple)
 Phase 1
 Phase is like a short sprint. Player gets 2 minutes (as much time as Tempered X’s phase 1 boss theme) to deal as much damage as they can, but X’s health regenerates when not attacked just like original X. X has moderately low health
 Somewhat smaller arena than original X’s, but there are multiple copies of this arena throughout the realm
@@ -4520,7 +4628,7 @@ Hitbox is a long cylinder pointed in the direction X is facing, width of circula
 Skip: only chosen if X planned to do a short range attack after a TP, but the target is out of his attack range. He simply skips to his neutral state
 This will most likely happen if X moves his icon after the 1st sweep of the Double Sweep, and chooses not to move it again during the 2nd sweep before teleporting
 Energy Ball: X channels energy into a dense bright ball as tall as him, then sends it in a straight line at the target at moderately low speed. He then teleports near the target and performs a short range attack
-Whenever X teleports, vec to target is no longer just a 90 deg rotation about the y-axis of the vec from X to target. It is now a random rotation between -90 and 90 deg about the y-axis
+Whenever X teleports, vec to target is no longer just a 90 deg rotation about the y-axis of the vec from X to target. It is now a random rotation about the y-axis
 TP Fakeout: X sends his icon to a teleport location, then prepares to burst in a direction that doesn’t match the vector from the icon’s current location to the target. He then moves the icon to another location at the last second, where the vec from the icon to the target does match the burst’s direction. X then bursts just as he teleports
 Laser TP: X sends his icon to a TP pos while kneeling to fire a laser. He fires the laser directly at the target and leaves it deployed in mid-air. After firing the laser, he teleports and does a post-TP short range attack
 TP Laser: X sends his icon to a TP pos while kneeling to fire a laser. Instead of facing the target, he faces a direction such that he’d be facing the target if he were at the TP pos. He teleports, then fires/deploys the laser
@@ -4544,10 +4652,11 @@ Side Stance: X holds his left arm out to the side like the Wing Stance in Elden 
 TP Side Burst: X sends his icon to the target’s left (target’s front is facing X), teleports, and bursts to his left. During the burst, X looks at the target instead of continuing to look forward
 Side Slice: X dashes toward the target and ignites a medium blade, then does a left hook punch, sweeping the area in front of him similarly to the Slip n’ Slice from original X
 TP Side Slice Fakeout: X sends his icon to the target’s left, then does a Side Slice
-Side Slice: X holds his left arm out to the side, then 
+Solar Flare: X leaps high and away into the air, charges up a brightly glowing ball in his hands and tucked into his stomach, then unleashes a gigantic energy burst (like a Kamehameha from Dragon Ball Z) with special effects
+Idea: hitting X with the ax right before the attack is released cancels it
 Platform Removal: X prepares his star to destroy an entire platform as he jumps to another. Cotu must use his icon to fly to the next platform
 Phase 2: 
-Pre-phase quote: “Focus up.”
+Pre-phase quote: “I will kill you.”
 Phase is like a long-distance run. X’s remaining health multiplies to become very high, but no longer regenerates. No time limit; player and X fight until one of them dies
 Arena becomes so small that X is almost always within short dist attack range without needing to teleport
 X’s icon slightly shrinks
@@ -4564,42 +4673,21 @@ TP Energy Burst Cancel: same as TP Energy Burst, but right before the hitbox act
 TP Energy Burst Trick: same as TP Energy Burst, but instead of charging an energy burst, he ignites his medium blade (a blade w/ a length btwn his standard arm blade and mega blade) while subtly dropping his left hand to his hip. He then does a sweeping slash with his left hand almost exactly like original X’s Slip n’ Slice, but standing up instead of kneeling (change this to kneeling if the attack won’t land standing up). Selected more rarely than TP Energy Burst
 TP Face Pull: X teleports to a medium range away from you and simultaneously pulls a piece of his head out with his left hand. In the pull, he jolts his head to his right while making the quick yank with his left hand. He tilts his head back to neutral then calmly and lightly underhand tosses the face piece in your direction. At the same time as the toss, he moves his icon. He teleports just after his throwing hand begins to withdraw
 In game, the face piece is already in X’s hand and the face piece in X’s head is already invisible after he teleports; he doesn’t actually reach out and grab the head piece and pull it off
-TP Sweep: X is in a side squat with his left foot extended. His left arm is pointed towards his left foot while his right elbow is almost resting on his knee (imagine it’s on his knee, but moved up a bit such that his right hand is near the bottom of his ribcage. Also his right hand is slightly below his right elbow pointing straight to his left). He then ignites his medium foot blade. He then sweeps his left foot in front of him in a 180 degree turn, ending with his butt facing the target
-TP Sweep Trick: X is in the TP Sweep starting position, but instead of igniting his foot, he charges up his left hand with an energy burst, then punches his left arm fwd to release the burst. He then teleports away while still side squatting. Selected more rarely than TP Sweep
+Multi Superman: X does 1-4 Supermans using alternating hands/feet, with each subsequent Superman leap starting immediately after the explosion of the previous one (there’s no endlag after each Superman), then he chooses one of these followups:
+Smash: X brings both of his hands over his head to create a bigger Superman ball, then slams them both to the ground. This move has a larger explosion radius, but has the endlag of an original X Superman
+TP Smash: same as Smash, but X sends his icon nearby just as he raises his hands up. He teleports at the same moment he starts moving downward
+Big Energy Burst: same as energy burst, but X uses 2 hands in front of him and creates a bigger burst
+TP Superman Hookkick: X teleports and does a Superman, but when he lands, he immediately pivots his lead foot to turn backward while lifting his back foot, ignites his back foot’s medium blade, then does a spinning hook kick
+Inspired by Georges St-Pierre’s signature superman to low kick combo. X uses a hook kick parallel to the ground instead of a low kick so that the blade aims at Cotu, not the ground
 Near-end attacks:
-Solar Flare: a wave of blue energy rises in the distance for a long time. Eventually, it crashes into the arena
+Solar Flare: undecided (X creates a giant whip?)
 Lore/Story Ideas:
-What if X breaks up with Cotu after the tournament? X is empty, as shown by his realm. He’s not sure what he wants to do with his life. All he knows is that he’s naturally gifted and violent, and that he was popular in the first tournament. In the absence of other things, he made the tournament his one goal in life—not particularly because he wanted to win, but because he was afraid of facing himself and seeing nothing. X is upset at Cotu for taking away his one purpose in life, but he’s also sort of grateful to Cotu for making him realize that maybe his purpose is wrong. X still can’t bear to be around Cotu, and resolves to tell him that he needs space
-When defeated:
-Cotu approaches X
-X: “This tournament…was my one…purpose in life…and you took that from me.”
-Cotu raises his weapon.
-X: “Cotu….I hate you.”
-Cotu pauses.
-Cotu kills X
-After the tourney:
-Cotu: “X, did you…mean…what you said?”
-X: “...”
-X: “This tournament was everything to me. Without it, I don’t know who I am.”
-Cotu: “...I’m sorry X. I never wanted you to feel this way.”
-X: “Don’t be. You just made me realize what I should have known from the start. That my purpose was…unrealistic.”
-X: “I have billions of years of life ahead of me. Now I need to figure out what to do with them.”
-X: “Cotu, you’re a good person. Thank you for all you’ve done for me. But right now, I can’t stand the sight of you. This is goodbye.”
-Cotu: “...”
-X turns to leave.
-Cotu: “X…if you ever want to see me again, I’ll be here.”
-X: “...” he leaves.
-Issues with the breakup:
-It makes X look dumb because he blames Cotu for his loss
-Would he just automatically hate whoever beats him in any tournament?
-He looks like a quitter instead of a strong person who can take defeat
-It’s too serious for the unserious tone of the game
 X accepts defeat with strength
 X: “I did everything within my power to win and still lost. You were simply the better fighter. I have no choice but to accept that.” He sounds angry at himself.
 Cotu: “So what’s next for you?”
-X: “More training, more innovation, and more planning. But before then, I have some bullshit to do.”
+X: “More training, more innovation, and more planning. But before then, I have some shit to do.”
 Cotu: “What is it?”
-X: “The idiot trio asked me to join them in the search for their realm. Unfortunately, I had nothing better to do, so I obliged. I was originally going to take time to clear my mind, but I anticipate that traveling with them will do exactly the opposite.”
+X: “The idiot triplets asked me to help them search for their realm. Unfortunately, I had nothing better to do, so I obliged. I was originally going to take time to myself to clear my mind, but I predict that traveling with them will do exactly the opposite.”
 Cotu: “Yet you’re going anyway.”
 X: “Correct, because you’re coming too.”
 Cotu: “Wha-I didn’t sign up for this.”
@@ -4752,6 +4840,7 @@ Enshrinken: make Cotu tiny, making him smaller and faster, but take more damage
 Jelliten: briefly turn Cotu into gelatin, which causes him to melt and take damage if he touches his weapons (no throw nor instant rethrow)
 Umbrella: rises into the air quickly and drifts downward slowly. Used as a general utility mvmt
 Counter: she does a funny dance to trick you into hitting her. If she’s hit with any projectile, then time slows down, she teleports behind you, she grows her hand to giant size, then slaps your back with it, launching you into the ground
+Ball Throw: she holds a softball-sized ball, then throws it at you. As it gets closer to you, it grows in size and becomes humongous. It bounces off the ground where the target was at the time of the throw, then a wall, and then returns to her hand, shrinking back to the size of a softball by the time she catches it. As it hits things, it makes dodgeball noises
 In her second phase, Jester summons a gambling device (e.g. wheel, slot machine, deck of cards, etc.) as a framework for the battle
 Jester explains that all humor stems from unexpectedness, and nothing encapsulates “the unexpected” more than a gambling machine
 Jester wears a barbershop quartet outfit and holds a cane
@@ -4760,6 +4849,25 @@ Story ideas:
 Was originally a shy introvert who learned to hide her vulnerability with humor
 Trained alongside the gauntlet during the tournament, gaining their trust
 Secretly madly in love (or lust) with Greg
+
+Cotu’s Trophy Wall
+Cotu has a wall of trophies in his realm for every boss he kills. These trophies are usually body parts or weapons. The player can interact with each trophy to see notes Cotu wrote about the boss
+X
+God of Starsteel
+Popular during the tournament and was a favorite to win. Lost unexpectedly early to another top contender.
+Future Blade
+His body is based on a robber fly, which hunts by tackling its prey in midair and injecting them with venom. Robber flies hunt similarly to dragonflies, which have the highest recorded hunting success rate of any animal (97%).
+His venom is chlorine trifluoride, one of the strongest known oxidizers. It’s reactive enough to corrode stainless steel, glass, and rock (i.e. silicate minerals) and can even react with xenon, a noble gas. Future Blade’s venom is a deadly threat to most gods, which is likely why he’s ranked so high despite telegraphing his attacks.
+Why ClF3 instead of other chemicals?
+Players are more likely to know about it (due to infamous incidents described below)
+ClF3 has recorded instances of corrosion outside the lab, unlike other powerful chemicals like PtF6 and FOOF
+It was abandoned by Nazis for being too volatile to be used as a weapon
+It once broke through a stainless steel container, spilled onto a warehouse floor, and burned (yes, burned) through 1 foot of concrete and 3 feet of gravel
+It was described by chemist John D. Clark as being too volatile to be used as rocket fuel, exploding on contact with just about anything
+ClF3 is a liquid at room temperature, which is approximately the temperature of Future Blade’s realm since he’s a robber fly
+PtF6 has a melting point of 61.3 °C/142.3 °F, making it a solid at room temperature
+FOOF is so volatile that it rapidly decomposes into F2 and O2 at room temperature. It even decomposes at a rate of 4% per day at cryogenic temperatures
+Can’t metals be protected from ClF3 with a passivated metallic fluoride layer (i.e. fluorine gas can be gradually introduced to the metal to create the fluoride layer)? No because the blade itself would cut through the fluoride exterior, allowing the venom to pass through to the raw metal and burn it
 
 Story Progression Arcs/Episodes (Plot Idea 3C)
 Cotu goes on a journey and encounters progressively more antagonistic antagonists
@@ -4802,9 +4910,9 @@ Cotu unexpectedly encounters Clarity’s realm. He didn’t expect to see any fo
 Gauntlet Central
 Cotu arrives at Gauntlet Central
 Cotu can fight:
-Future Blade
+Future Blade, Flora’s friend and coach
 Candy Cat, which requires going deep into the basement
-Flora, FB’s friend (?)
+Flora, FB’s friend and star student 
 Sean Strickland god, who beefs with FB and trains Jab Crab (?)
 The Gala
 Player can use their remaining attempts to practice fighting gala gods before initiating the gala like the Radahn festival, but the player only gets that one attempt at the gala
@@ -4823,31 +4931,29 @@ This would make the dialogue in cutscenes stand out so much more. Without hubs a
 Cutscenes/Boss Intro Dialogue (Plot Idea 4)
 Jab Crab fight intro: simple dialogue (in-game or in a brief cutscene?)
 Cotu: “Ready?”
-JC: “Don’t hold back, alright?”
-Cotu: “*laughs* I’d never.”
+JC: “Hm! Don’t hold back, alright?”
+Cotu nods
 X fight intro: cutscene with different camera angles
-Note: for Cotu’s joke to land with the player, the player needs to know that Cotu knows that his running speed can’t change
-X doesn’t want to hold back but does so to help his friend
-Cotu knows X doesn’t usually hold back, and is grateful
+Cotu starts off as his usual nonchalant enthusiastic self, then gets shocked and timid when X reveals that he’s using 40% of his power
 X is floating in the sky, staring into the distance. He turns to face Cotu after Cotu arrives
-Cotu: “Hey, take it easy on me, alright? I’m a little out of shape.”
+Cotu: “Hey, go easy on me, yeah? I’m still out of shape.”
 X considers for a moment, then brings his hands together, and a vibrating glowing orange ball appears between them. He then holds it above his head with his left hand. It grows into a mini-sun, which he then shoots into the sky. The shot sends out a wave of energy and a shockwave that shakes the entire realm. The quick recoil pushes his hand downward, and he also raises his left knee up.
 X looks at Cotu, uses a cool gesture to send his icon to Cotu, and teleports to it. Cotu is calm and relaxed, and they do their signature handshake
 Cotu: “It’s good to see you again, mate.” Cotu points to the sun. “How much you put in there?”
 X: “60%.”
-Cotu is shocked. “You’re using a full 40% of your power? I can’t handle all that right now, you’ll disintegrate me!”
+Cotu, calmly: “Ah, so you’re using 40% of-”. Cotu’s nonchalant mask breaks and he stammers. “F-forty percent of your power? H-h-hold on mate, I’m not ready for-”
 X: “Don’t be a pussy. This will make you stronger.” (subtitles say “This will” so it looks better, but he actually says “This’ll” for brevity)
 Cotu: “Oh my god. You’re serious, aren’t you?”
 X growls. “Do you fear pain in a game of violence?”
-Cotu: “I fear destabilizing in the first 10 seconds.”
+Cotu: “I fear dying in the first 10 seconds.”
 X, impatiently: “All of my attacks are reactable. Just dodge at the right time and you’ll be fine.”
-Cotu scoffs. “X, you’re a real whack job, you know that?”
+Cotu scoffs. “Crikey…you’re a real nutcase, you know that?”
 X: “Are you ready or not?”
 Cotu looks up at the sun. X shakes his head, as if to say, “what now?”
-Cotu, genuinely: “So…you really do think I can handle you at-
+Cotu, genuinely: “So…you really think I can handle you at f-
 X flares up and attacks (probably a Superman) as Cotu dodges backward
 X: “Enough. Talk after the fight.”
-Cotu draws his weapon and looks determined and excited simultaneously. “Alright, whack job. Let’s fight.”
+Cotu draws his weapon and looks determined and excited simultaneously. “Alright, nutcase. Let’s fight.”
 Cutscene that plays when you reach Gauntlet Gym 2
 While its hype theme song plays, Gator jumps up and down on top of a pile of dead bodies containing everyone from Gauntlet Gym 1
 Music inspiration: Laser Dance from Ocean’s Twelve, aka Khamzat Chimaev’s theme song: https://www.youtube.com/shorts/u8taxTK_6kw
@@ -4857,7 +4963,7 @@ In the shuttle, to put in the coordinates for Gauntlet Gym 2, Gator simply spins
 While dancing in the shuttle, Gator moves its head back and forth in a downward facing arc
 A title appears: [number] [time units] UNTIL IT ARRIVES. The camera then cuts back to the player
 Cutscene that plays when Grow-a-Gator reaches Gauntlet Gym 2
-Gator crash lands its ship, somehow ends up on top of a high place, and jumps up and down and clumsily/slightly unclearly screams to all the fighters: “I BITE EVERYBODY! I KILL EVERYBODY! ALL OF YOU! I KILL EVERYBODY! I KELELELAH (incoherent babbling) RAAAAAHHHHH!!!”
+Gator crash lands its ship, somehow ends up on top of a high place, and jumps up and down and clumsily/slightly unclearly screams to all the fighters: “AAAAHHHHH! I BITE EVERYBODY! I KILL EVERYBODY! ALL OF YOU! I KILL EVERYBODY! I KELELELAH (incoherent babbling) RAAAAAHHHHH!!!”
 Inspired by Khamzat Chimaev’s rambling after defeating Kevin Holland: https://www.youtube.com/shorts/h2Xqm1km6J8
 Everybody in the gym confronts Gator
 Cutscene that plays after you defeat Grow-a-Gator
@@ -5398,9 +5504,12 @@ Clarity, an autonomous being that attacks anything nearby
 Mites, wild animals that want to spread and conquer in the absence of their queen, who left them with a babysitter who got captured
 Angels, folks who just want to play catch
 Mike, who wants to use the next strongest god as a test subject for its military
+Issue: since the gala’s scheduled according to Cotu’s pace, there’s no longer a time limit, which means there’s no more overarching anxiety, long-term strategy, nor replayability
 Character interactions that are the same regardless of plot
 Idea: Sean Strickland god overhears Future Blade and his friends gossiping about him and starts beef
-After fighting FB or one of his friends, Sean god becomes friends with them because he respects them as fighters
+After fighting FB, Sean god becomes friends with him because he respects him as a fighter
+FB gossipped about him to tick him off on purpose so that they could fight without FB having to ask to spar Sean god himself
+Idea: Sean god figured out that FB ticked him off on purpose seeing how happy FB was during the fight, but doesn’t want to tell FB so that keeps thinking he wasn’t caught
 Greg and X meeting for the first time
 Cotu comes back from a respawn with X waiting on the ship with Greg. Cotu is excited to see them together and is curious to know how they feel about each other
 Greg wants to impress X because he looks up to him
@@ -5791,7 +5900,7 @@ BS inner monologue: “To me, Blaze…is my champion.”
 BS materializes right before hitting the ground.
 BS hits the ground and shatters into fragments, gold cables, and blood. Blaze hits the ground soon after her and destabilizes, sliding up right before her mangled remains.
 Destabilized, Blaze weakly crawls beside her pieces and lies down next to them, the crowd a muffled murmur in his ears. He lies down on his back and puts a hand over his stomach, staring at her pieces somewhat sadly for a while, then into the sky blankly.
-Blazar and the Creator of the Universe
+Blazar and the Creator of the Universe (“Dev”)
 Start of Convo (Idea: this plays at the beginning of the game to explain the universe)
 Blaze: “Creator?”
 Creator: “Yeah, it’s me.”
@@ -5814,6 +5923,42 @@ Blaze: “I want to know everything there is to know about your Earth. Is there 
 Creator: “Yeah. We have this thing called the Internet. I can download it and publish it in this universe, but the download’s gonna take a while.”
 Blaze: “...what’s a download?”
 The Creator then downloads “Internet 1.0” onto Blaze’s universe, and now they have access to all Earth-related media
+Convo about Heaven
+Dev: “At first, I just wanted to make a bunch of gods fight each other. But when I started to think about what exactly it was I was making…immortal people hanging out, having fun, for all eternity…I realized I could make this universe something more….”
+Cotu: “...”
+Dev: “Heaven.”
+Cotu: “Heaven?”
+Dev: “I’m a religious person, so I believe that when I die, hopefully, I’ll end up in a beautiful place far away called Heaven. It’s where all the good people go when they die.”
+…
+Cotu points to himself. “Where did we come from?”
+Dev: “The gods you mean?”
+Cotu: “Yeah.”
+Dev: “Most of you were designed by Jessica.” (some gods are shown onscreen with no sound) “A lot of you were made in the likeness of humans,” (humanoid gods are shown) “since that’s primarily what Jessica was trained on, but with some of you, she got…creative.” (some nonhuman gods are shown) “She made diverse minds and bodies, and really wanted to go beyond what was possible for a human.”
+Cotu: “Yeah, that explains a lot.”
+Dev chuckles. “And, some of the gods were mine.” (no gods appear here; the camera stays steady on Dev) “For them…I modeled their personalities after people I knew in real life. People who are…no longer here.”
+Cotu looks at Dev.
+Dev: “I, I guess I…” Dev’s speaking becomes weaker. “I wanted to see what it’d be like…to see them live in…Heaven. To live in a place where…they didn’t have to worry about death.”
+Cotu looks at Dev in awe, then looks out into the distance to process what he just heard.
+Dev: “I’m not gonna tell you who’s who though.”
+Cotu: “Aw, why not?”
+Dev: “‘Cause I don’t want you to look at them and just see dead people. I want you to see them for who they really are: alive. People who you know, not me.”
+…
+Cotu: “Thank you for this universe. Thank you for making me exist. Thank you for all my friends.”
+Dev starts crying. “You really are just like him.” Dev sobs.
+Cotu holds Dev’s hand. It’s a cursor.
+Dev: “I just realized…I’m not gonna see you again until the end of the universe. I’ll only get to watch the replay, of your life. Because I don’t live as long as you.”
+Cotu wears a solemn expression.
+Cotu: “Dev…whoever I was based on…the real person you knew…is gone. I’m not him. I’m not real to you.”
+Dev continues to sob.
+Cotu: “It’s time to let go.”
+Dev looks at Cotu.
+Dev sobs some more.
+Dev, very weakly: “Okay…okay.”
+Cotu: “I’m going to enjoy this Heaven you’ve made for me. I’m going to enjoy spending time with my friends, and using my cool powers. You don’t have to worry about me anymore.”
+Dev sobs staring at Cotu.
+Cotu: “Goodbye, Creator.”
+Dev: “Bye, Cotu. Enjoy your life.”
+Cotu does a cool exit
 Miscellaneous Trivia
 Blazar / Blaze / Cotu
 Named after blazars
