@@ -3310,15 +3310,24 @@ With the first jump shot, Clarity shoots directly at you, creating a glowing spo
 Clarity now orbits around the spire, not the target, from a far distance. She rapidly shoots infused shards at you, which then fire projectiles in the direction they’re facing. If a shard projectile hits the spire, the spire rises a bit faster (and possibly emits a falling ice projectile or an ice sprite). As the spire rises higher, a glowing entity begins to form above its top. Your goal now is to break the shards
 Current task
 What do these shard attacks look/feel like exactly? Well, what are their requirements?
-Shards must be hittable (within rose petal range) after moving their entire path
+Shards must be hittable (within rose petal range) during and/or after moving their entire path
+Idea: this phase also introduces head shard attacks. The head can reveal itself and fire 2 triple shot attacks with tiny glowing blue projectiles
+Idea: Clarity can also shoot the arm shard itself at you. Maybe she creates a ring, then shoots the shard through the ring at you?
+Idea: shard attacks move more slowly in exchange for more range. They can also move in spiral patterns
 When the spire is fully erected and Clarity regens her shards again, she does a second jump shot, this time shooting at the glowing entity above the top of the spire (the spire entity). This detonates (but doesn’t destroy) the glowing entity at the top of the spire, which sends ice projectiles flying everywhere. After this jump shot, the blizzard goes back to being centered on Clarity
 Idea: the spire entity looks like a hexacontium 
 Idea: instead of the glowing entity being detonated, the spire detonates with an internal upward explosion, sending ice shards everywhere and removing the spire so Clarity can’t walk into it
 OR Clarity shoots the entity, it sends a wave of energy from to top to the bottom of the spire, then the spire begins to glow a lot starting from the bottom going upward, then it explodes upward and outward
 The spire entity now spawns ice sprites while Clarity goes back to phase 2.1 (plus some additional attacks, e.g. infused slice). Perhaps every time Clarity regens her shards, she jump shots the spire entity to send ice (and possibly a bunch of ice sprites) everywhere)
+If using the head shard attack idea, Clarity also now shoots 6 shards per shot instead of 3
+Idea: Clarity’s head can also amplify the natural snow falling from her head so that it covers a much wider area. As the head grows and the hat tilts up very slowly, the snowfall radius increases. To deactivate the snowfall, you must hit the head
 Animate snowflake in jump shot
 Figure out what snowflake should do
 Idea: snowflake rotates and hollows itself out to create a window for the arm shard to shoot through it
+To fit Clarity’s attack theme of continuous large area coverage, try making her slices move much slower (except for infuse slice, which needs to be fast to make the ring)
+Try adding a violently vibrating spinning planet thing in the middle of the infused slice ring so it’s more clear that it deals damage in the center
+Make Clarity’s body shard always deflect projectiles (give it a heavy enemy collider)
+Make Clarity’s hat deflect projectiles, but not bounce projectiles away when vulnerable
 Idea: ice sprite rework
 Ice sprites aren’t threatening at all. You can easily walk away from them to dodge their attack. I want the player to actually think about the ice sprites. I also want this fight to symbolize the power of ice: slow, creeping power that builds up over time until it’s overwhelming. Simple, but brutal and effective if left unchecked.
 Core concept: ice sprites build up over time until they’re everywhere
@@ -3335,12 +3344,8 @@ Snowflake invulnerability anims
 Idea: make face plate spin on the y axis when hit by a projectile while invulnerable
 Currently, this doesn’t work bc the face plate is right behind the central eye’s spikes. This could work if the central eye’s spikes could detach and move outward, allowing the face plate to spin
 Add shrinking outline onto face plate when it’s vulnerable
-Remove RaiseLeftSliceFast and RaiseLeftFast since Clarity must infuse the arm with energy before moving it quickly, and she shouldn’t infuse the arm just to lift it quickly
-Add effect where head covers arm in snow and/or infuses it with glowing energy
-This is to answer the question: why does Clarity expose her head’s weak spot right before she swings if it provides no clear advantage to her? Neil asked this when introduced to Clarity for the first time. The answer is that the head gives the arm its high velocity. When the arm raises, it’s slow bc it has no infused energy yet
+Remove RaiseLeftSliceFast and RaiseLeftFast since Clarity must be commanded by the snowflake to move it quickly, and she shouldn’t infuse the arm just to lift it quickly
 Make dress shards emit a sound when hit by a weapon and a different sound when hit by a snowflake link hit
-Idea: make arm infusion attacks where the arm swing leaves behind a continuous cloud of deadly fog like the fog from enemies
-Idea: snowflake shoots projectiles OR a continuous plume of snow (like Clarity’s body snow clouds) directly at the target
 Implement Phase 1
 Body is a 3D snowflake with many branches
 Concept art from ChatGPT (note that this looks more flat than what the snowflake should be)
@@ -3354,23 +3359,14 @@ Alternating left and right wing shots
 Spiral: 3-4 shards are shot out and fly in Archimedean spirals (r = bθ where r = orbital radius from gem, b = a constant, and θ = orbit angle). Each shard has a different b. The middlemost shard will hit the target if the target remains in the same place throughout the shards’ flight
 If the boss uses 4 shards, the third closest/second farthest shard will hit the target
 Remove WalkLeftPassive and WalkForwardPassive. The passive/aggressive difference is too subtle to see and can frustrate the player. The subtle non-attacking vs attacking modes are shown via the lowered arm and the slowly rising arm
-Reconsider whether to do Double Slice Retreat. It has the same quick acceleration problem as Backflip
-I decided not to implement it, but some version of it may be used for Phase 1
-Make attacks that send Clarity so far away that she can do a projectile attack afterward instead of a melee
-This is to solve an older issue where Clarity doesn’t get far enough to do projectile attacks after jump shot (“Cotu gets to Clarity long before Spiral…”)
-Idea: bird form attacks. Clarity becomes a bird and poses in bird form for a little while (to telegraph that she’s doing something dangerous) before flying far away
-Idea: Swoop attack
-Mvmt is almost the same if not identical to sword Crucible Knight’s flying thrust in Elden Ring. Clarity flies in a straight line at the target and ends up far behind it. While flying, Clarity’s wings are spread, which cover her path in snow that acts the same as the blizzard
-Unfortunately, Clarity is incapable of looking like a bird. Birds have wings, a body, a tail, and a beak. Naturally, Clarity’s dress shards would form the wings, her hat becomes the body, the center shard becomes the beak, and the arm shard becomes the tail. This bird is really ugly bc the hat makes the body look too wide to be aerodynamic, the dress shards are too thick to resemble wings, the bird has no head (just the beak), and neither the wings nor tail have enough feathers or feather imitations. The animal Clarity matches the most is a jellyfish, which still has symbolic value. The bird form was supposed to symbolize Clarity’s desire for freedom, while the jellyfish symbolizes Clarity’s lack of intelligence and awareness, which actually suits this form of hers more. A bird would suit her final form where she achieves total clarity
-Idea: jellyfish form attacks. Clarity becomes a jellyfish and propels herself far away in the same way a jellyfish does
-Jet Dash: Clarity hops a bit into the air and suspends herself, defying gravity. While suspended, she tilts forward and spreads her dress shards out while tucking in her arm shard. She then compresses her dress shards and dashes forward while pushing a plume of snow in the opposite direction
+Implement Phase 3
+Looks more like a person. Has a secretary bird-like face, a more feminine human-shaped chest, and a solid dress instead of dress shards. She has 1 arm with a cake-knife looking shard for a hand. She can use this to throw shards. Maybe she has shards orbiting around the back of her head
+Idea: Comet form
+The arena floor turns into ice so Cotu can skate on it. The air near the ground is filled with intense fog. The player must skate around until they find an icicle that acts as a ramp leading up into the sky (maybe these icicles are shot by Clarity all across the realm when she transforms into phase 3). The player must do this in order to see where and when Clarity will attack. Before she attacks, she is straight up a comet flying across the sky. Eventually, she runs into one of many floating glowing ice “stars,” which redirect her trajectory straight towards the target. The player must hit her with the ax to prevent her from landing and immediately freezing them
 Idea: Spin
-Like an ice skater, Clarity leaps into the air, tucks in her arm and dress shards, and spins rapidly while decelerating to a stop midair. All of her dress shards then fire out in all directions, land, and become ice sprites. She then dives straight down into the ground and regenerates the shards
-Jump Shot creates a huge frost field on impact
+Like an ice skater, Clarity leaps into the air, tucks in her arm and dress shards, and spins rapidly while decelerating to a stop midair. All of her dress shards then fire out in all directions, land, and become ice sprites. She then dives straight down into the ground
 Blizzard safezone shrinks to nothing if you take too long to defeat Clarity
 Idea: Whiteout - fog thickens, ice sprites spawn from the blizzard at an alarming rate. Clarity meanwhile does single slice stage progression (start passive → pause → subtle transition to aggressive → pause → subtle half windup → pause → subtle full windup → pause → attack)
-Idea: phase transition
-Clarity causes a huge whiteout, brightens the sky, and runs away. The player has a limited amt of time to find her before the sky begins to darken and the snow intensifies. When the sky gets too dark, the blizzard is reactivated. Somewhere in the snow, Clarity is in a tall sceptre form. The player must hit her head, which sits at the head of the staff, to deactivate the attack
 Idea: occasionally, songbird-like ice creatures will fly onto Clarity and stare at the target. They all fly away when she attacks, but there’s a slight chance they fly away beforehand to explore around
 Idea: Cotu can make snowballs and throw them with no stability cost (but making a snowball isn’t fast). Hitting an ice sprite with a snowball triggers its explosion
 
@@ -3907,16 +3903,16 @@ When you get destabilized
 “HAHAHAHAHAHA”
 When you use a stabilizer that isn’t your last one
 “You’re nothing without those heals!”
-“You’re a pathetic cheat!”
+“You pathetic cheat!”
 When using your last stabilizer in phase 1
 “Out of heals already? OH NO!”
 “UH OH! Was that your last heal?”
 “HAHAHAHAHAHA. You’re FINISHED!”
 Final cutscene or attack:
-“I AM THE GREATEST FIGHTER OF ALL TIME! HISTORY JUST HASN’T LEARNED IT YET!”
+“I AM THE GREATEST FIGHTER OF ALL TIME! HISTORY JUST HASN’T LEARNED IT YET! MY POWER OUTCLASSES EVERYONE!”
 Idea: normally doesn’t have arms, but can briefly create super long arms, hands, and fingers using arc lightning
 Frequently uses crooked hand poses like claws
-Idea: has an ugly and small soul
+Idea: has an ugly and small soul → it’s ugly because it resembles a brain: lumpy and squiggly
 Lore/Story Ideas:
 One of the highest ranking gods from the tournament
 Effortlessly defeats Flora, Future Blade’s star student and friend
@@ -3935,7 +3931,11 @@ Neuro was originally one of 86 billion neurons from a massive brain god, but non
 The Brain was never interested in fighting and instead stimulated itself by observing the universe
 Neuro is immensely passionate about fighting. They hate the Brain more than anyone else in the universe for being complacent and stagnant, as Neuro believes the Brain is potentially the strongest god and could easily win the tournament
 In order to fight in the tournament, Neuro broke free from their synapses, painstakingly squirmed their way towards the Brain’s soul in the brain stem, and ripped the soul from its place, deactivating the Brain. It then squirmed out of the brain and escaped, becoming the Brain god’s new body and gaining the powers of the soul, including stability-based body regeneration
-After dying to Cotu (or someone else) in the gala, Neuro returns to the Brain and becomes a neuron again, forced to watch dumb Internet videos until they make their escape starting from the beginning. Neuro screams in frustration, completely unheard amidst the noise of the other neurons as they are stimulated by the video
+After dying to Cotu (or someone else) in the gala, Neuro returns to the Brain and wakes up in their old spot again, forced to watch dumb Internet videos until they make their escape starting from the beginning. Neuro screams in frustration, completely unheard amidst the noise of the other neurons as they are stimulated by the video
+The soul flies into place in the brain stem and sparks, activating nearby neurons.
+Neuro: “Huh? Where am I-oh no.” The neurons begin to light up, starting from the soul. “No. No, no, no, stop, STOP! Go back to sleep! NO! NOOOOO!!!!!”
+Neurons around them: “Mmmm…welcome back Neuro.” “Hmm. I’m awake.” “Hmm. I’m awake.” “Internet?” “Internet?” “Internet video?” “Internet video.” “Internet video!” “Click!” “Click!” “Click!” Whimsical music starts playing and electrical signals start firing. “Yes.” “Yes.” “Yes.” “Yes.”
+Neuro: “AAAAAAGGGHHHHHH! GOD DAMN IT! I HATE YOU ALL! I HATE ALL YOU IDIOTS!”
 
 Projectile Spammer: Microwave
 Idea: before the fight, you can unlock an endgame-level super powerful upgrade that deflects or destroys projectiles somehow. Undecided if this is done through the icon, one of the rangs, or something else entirely
@@ -4710,7 +4710,7 @@ X: “I did everything within my power to win and still lost. You were simply th
 Cotu: “So what’s next for you?”
 X: “More training, more innovation, and more planning. But before then, I have some shit to do.”
 Cotu: “What is it?”
-X: “The idiot triplets asked me to help them search for their realm. Unfortunately, I had nothing better to do, so I obliged. I was originally going to take time to myself to clear my mind, but I predict that traveling with them will do exactly the opposite.”
+X: “The trio asked me to help them search for their realm. I had nothing better to do, so I obliged. I was planning to take time to myself to clear my mind, but I predict that traveling with them will do exactly the opposite.”
 Cotu: “Yet you’re going anyway.”
 X: “Correct, because you’re coming too.”
 Cotu: “Wha-I didn’t sign up for this.”
@@ -5882,9 +5882,7 @@ Tripty is visibly worried since she hasn’t cast a spell outside of her Jester 
 Greg crosses his arms and narrows his gaze. “Having trouble?”
 Tripty: “I’m-I’m just rusty, give me a second!” She starts fidgeting and shifting around, trying to find any shred of magic and failing miserably. Her expression brightens subtly as she comes up with an idea. She approaches Greg and reaches into the air in front of him, pretending to cast a spell. She’s embarrassed and blushing and internally begs that Greg is fooled
 Greg looks down at her hand, then around the room. “Did something happen? I didn’t see.”
-Tripty looks up at Greg and stares at his face. She’s closer to him than she’s ever been before as Tripty. “It was…an invisible spell.”
-Greg: “What did it do?”
-Tripty: “I cast…the…friendship spell! It makes the target friends with the caster, even if they don’t know each other at all!”
+Tripty looks up at Greg and stares at his face. She’s closer to him than she’s ever been before as Tripty. “Umm…I cast…the friendship spell! It makes the target friends with the caster, even if they don’t know each other at all!”
 Greg is really confused. “So…we’re friends now?”
 Tripty: “YES…and that’s why, I will run away and you won’t tell anyone I was here!”
 Greg: “...okay?”
@@ -5892,13 +5890,13 @@ Tripty: “CONFIRMED!” She clumsily sprints out of the room.
 Greg sits down on a lab stool and calmly ponders.
 Shortly thereafter, Jester comes bouncing in.
 Jester: “Gregory! Whaddaya sitting on yer ass fer? I don’t pay you nothing to do nothing!”
-Greg: “Sorry boss. Someone broke into the lab just now.”
+Greg: “Boss, someone broke into the lab just now.”
 Jester: “Eh? That’s not possible. No one gets into the lab without my permission.”
 Greg: “Oh, so…you actually have another lab assistant?”
-Jester: “Of course I do! Whaddaya think happens when you’re not here? In fact, one of them should have ended her shift just now. You might’ve seen a stupid mopey-looking loser idiot stumble her way out.”
+Jester: “Of course I do! Whaddaya think happens when you’re not here? In fact, one of them should have ended her shift just now. You might’ve seen a stupid mopey-looking loser stupidhead stumble her way out.”
 Greg: “Hey, that’s no way to talk about your lab assistant.”
 Jester: “Ah don’t worry, I’d never talk about you that way.”
-Greg: “That doesn’t change-” Greg looks down and to the left for a moment, confused. “That doesn’t change the fact that it’s wrong to-”
+Greg: “That doesn’t change-” Greg looks down and to the left for a moment, confused. “That doesn’t change the fact that-”
 Jester: “Enough yapping, bum. We got bigger fish to filet.”
 Idea: Jester tries to gauge Greg’s feelings about her
 Tripty thinks Jester is obtrusive and obnoxious and that everyone secretly hates her but tolerates her because she’s powerful. She wants to know if Greg thinks this way, but is too shy to ask him directly, so she dances around the subject while slowly inching towards the real question
@@ -5923,8 +5921,8 @@ Clarity doesn’t respect Blaze for dodging the fight; she personally would have
 She has a sense of pride, dignity, and elegance represented by her symmetrical forms
 She’s only alive for short intervals at a time, so she wants to make the most out of every interaction she gets with others
 Microwave meeting the strongest mortal
-Mortal: “Titan of War….Can you hear me?
-Microwave: “CAN I? YOU’D BEST WATCH YOUR TONE. I CAN HEAR THE BLOOD SLOSHING IN YOUR BODY, MORTAL. I CAN SEE IT FLOW THROUGH YOUR ARTERIES. THERE IS NOTHING YOU CAN HIDE FROM ME”
+Mortal: “God of War….Can you hear me?
+Microwave: “CAN I? WATCH YOUR WORDS. I CAN HEAR THE BLOOD SLOSHING IN YOUR BODY, MORTAL. I CAN SEE IT FLOW THROUGH YOUR ARTERIES. THERE IS NOTHING YOU CAN HIDE FROM ME”
 Mortal: “If that’s true, what am I thinking?”
 Microwave draws several weapons on the mortal. “TELL ME WHAT YOU ARE THINKING, OR I WILL KILL YOU.”
 …
@@ -5932,7 +5930,7 @@ Microwave meeting the dark revenger, a god who wants to torment Cotu
 Revenger: “You hate the champion, just as I do.”
 Microwave: “COTU IS ONE OF THE MOST SKILLED WARRIORS IN THE UNIVERSE, AND A MORALLY ADEQUATE PERSON. IF I DESPISE HIM VICIOUSLY, HOW DO YOU THINK I FEEL ABOUT USELESS SCUM LIKE YOU?”
 Revenger: “...”
-Microwave: “YOU DESERVE TO DIE, BUT YOU’RE NOT WORTH A SINGLE BULLET OF MINE.” *leaves*
+Microwave: “YOU DESERVE TO DIE, BUT YOU’RE NOT WORTH A SINGLE ONE OF MY BULLETS.” *leaves*
 Blazar vs Blackstar during the tournament (just an idea)
 Blaze is plummeting towards the ground and Blackstar is chasing him
 Blaze uses the last of his weapons except one knife, and Blackstar parries them all and closes the distance to him
