@@ -376,10 +376,10 @@ states/Test/position = Vector2(408.117, 185.977)
 states/TripleShardSequence1/node = SubResource("AnimationNodeAnimation_mn7jq")
 states/TripleShardSequence1/position = Vector2(636.016, 167.511)
 transitions = ["Start", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_gjge1"), "RotateSlow", "SingleShardSequence1", SubResource("AnimationNodeStateMachineTransition_f7uow"), "SingleShardSequence1", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_kjcu6"), "RotateSlow", "DoubleShardSequence1", SubResource("AnimationNodeStateMachineTransition_v0ape"), "DoubleShardSequence1", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_ag18a"), "Stagger", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_spy4q"), "RotateSlow", "Test", SubResource("AnimationNodeStateMachineTransition_4uvqa"), "Test", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_005vm"), "RotateSlow", "TripleShardSequence1", SubResource("AnimationNodeStateMachineTransition_r51dd"), "TripleShardSequence1", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_s2ykg"), "RotateSlow", "QuadShardSequence1", SubResource("AnimationNodeStateMachineTransition_y4w40"), "QuadShardSequence1", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_20kpy")]
-graph_offset = Vector2(189.624, 9.32998)
+graph_offset = Vector2(154.141, -8.53503)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_siwsy"]
-graph_offset = Vector2(-43.2, 131.52)
+graph_offset = Vector2(-14.4, 95.04)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_qlhjd")
 nodes/StateMachine/position = Vector2(80, 150)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -1481,10 +1481,6 @@ wait_lowered_left_min_secs = 0.3
 wait_lowered_left_max_secs = 3.0
 wait_raised_left_min_secs = 0.3
 wait_raised_left_max_secs = 3.0
-arm_attack_chances = {
-"LongSlice": 2.08167e-12,
-"RaiseRightSlice": 1.0
-}
 regen_shards_max_chance = 0.99
 
 [node name="ClarityArmMeshes" parent="." instance=ExtResource("1_4e0of")]
@@ -1493,8 +1489,8 @@ transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
 [node name="Skeleton3D" parent="ClarityArmMeshes/Armature" index="0"]
 bones/0/rotation = Quaternion(0.0301653, 0.0796906, -0.0501057, 0.995102)
 bones/1/rotation = Quaternion(0.0484073, -0.0812806, 0.0524297, 0.994133)
-bones/3/position = Vector3(-3.7482, 4.38423, -0.0847618)
-bones/3/rotation = Quaternion(0.00101031, -0.00552394, 0.86527, 0.501275)
+bones/3/position = Vector3(3.80271, 6.1959, 0.147576)
+bones/3/rotation = Quaternion(-0.648979, -0.721534, 0.138328, -0.197689)
 bones/6/position = Vector3(2.01413, 2.22899, -2.08285)
 bones/6/rotation = Quaternion(0.305356, -0.212565, 0.925231, -0.0743114)
 bones/8/position = Vector3(2.06725, 1.3427, 0.8528)
@@ -1548,7 +1544,7 @@ process_material = SubResource("ParticleProcessMaterial_1ffcq")
 draw_pass_1 = ExtResource("5_1f67e")
 
 [node name="Arm_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.339741, 0.92836, 0.15074, -0.932056, 0.353784, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57238, 8.73293, 0.99859)
+transform = Transform3D(0.119992, -0.989441, -0.0812896, -0.911904, -0.0774774, -0.403022, 0.392469, 0.122488, -0.911572, 5.77443, 10.4062, -0.243688)
 
 [node name="EnemyHitbox" type="Area3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2" index="1"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
@@ -1563,7 +1559,6 @@ shape = SubResource("CapsuleShape3D_wjs3c")
 [node name="ArmSnowParticles" type="GPUParticles3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2" index="2"]
 transform = Transform3D(0.996077, -0.0884945, -8.98321e-09, 0.0884944, 0.996077, 1.11574e-08, 1.41021e-07, 3.22615e-09, 1, 1.40833, -15.8519, 9.53674e-07)
 custom_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
-emitting = false
 amount = 36
 lifetime = 1.5
 process_material = SubResource("ParticleProcessMaterial_p74wy")
@@ -1571,7 +1566,6 @@ draw_pass_1 = ExtResource("7_i53v5")
 
 [node name="ArmCloudParticles" type="GPUParticles3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2" index="3"]
 transform = Transform3D(0.997123, -0.0758141, -2.58212e-09, 0.0758137, 0.997122, -1.06072e-08, 8.0283e-08, 6.13398e-09, 1, 1.21749, -15.1027, -2.08616e-07)
-emitting = false
 amount = 600
 lifetime = 6.0
 process_material = SubResource("ParticleProcessMaterial_8g33s")
@@ -1668,7 +1662,7 @@ _defaults_have_been_set = true
 transform = Transform3D(0.982278, 0.104529, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
 
 [node name="MiddleLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 1.18725e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548505)
+transform = Transform3D(0.766044, 0.219846, 0.604023, 1.18725e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548504)
 visible = false
 
 [node name="FrontLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="4"]
@@ -1688,7 +1682,7 @@ transform = Transform3D(0.766044, 0.219846, 0.604023, -1.26024e-07, 0.939692, -0
 visible = false
 
 [node name="BackRight" parent="ClarityArmMeshes/Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -3.64784e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548507)
+transform = Transform3D(0.766044, 0.219846, 0.604023, -3.64784e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990247, 0.156011, -0.548507)
 visible = false
 
 [node name="SnowflakeEntity" type="Node3D" parent="ClarityArmMeshes"]

@@ -567,7 +567,7 @@ func wait_lowered_left():
 	# Choose RaiseLeftSliceFast, RaiseLeftFast, or RaiseLeftSlow
 	var choice := randf()
 	var cumulative_weight := 0.0
-	var next_moves := ["RaiseLeftSlow"]#["RaiseLeftSliceFast", "RaiseLeftFast", "RaiseLeftSlow"]
+	var next_moves := ["RaiseLeftSlow"]
 	for move in next_moves:
 		# All next moves have equal weight
 		cumulative_weight += 1.0 / next_moves.size()
