@@ -1,4 +1,4 @@
-Blazarang Ideas Doc Jul 25 2026
+Blazarang Ideas Doc Jul 28 2026
 
 Production Processes
 
@@ -2309,7 +2309,7 @@ Clarity: “Seeing my realm from the outside for the first time, it’s…surrea
 Greg: “Woah.”
 Clarity: “...”
 Greg: “That just gave me chills.” Pause. “Hehe. Get it?”
-Clarity: “What’s more terrifying, is that I don’t have the strength to permafreeze you for your impudence.”
+Clarity: “What’s more terrifying, is that I don’t have the strength to freeze you for your impudence.”
 Greg: “...You remind me of someone. I gotta introduce him to you someday.”
 Cut to Cotu and Pilot.
 Pilot: “It’s nice having another guest onboard.”
@@ -2350,9 +2350,6 @@ Stage 3 is reached when the player makes a bit more than some mistakes after Sta
 Stabilizing or destabilizing removes all frostbite and resets Cotu to Stage 0
 Cotu will not accumulate cold while destabilized
 Idea: a charm will keep Cotu from building frostbite over time and reduce attack-based frostbite accumulation
-Consider making a cover of Dmitri Shostakovich’s Waltz No. 2 with piano/chime instruments (perhaps for phase 1)
-Consider making a cover of Carol of the Bells with piano/chime instruments (perhaps for phase 2)
-Carol of the Bells’s melody is public domain; only the English lyrics are copyrighted
 Phase 2: Ballroom Dancer
 Almost radially symmetric (except for blade)
 Has a hat and central torso shard aka gem. In its neutral state, 6 shards surround its central gem and point down like a dress
@@ -3293,17 +3290,35 @@ I don’t like this idea bc it makes the snowflake feel too predictable
 Add Jump Shot to moveset
 Make Jump Shot anim start from WalkLeft, not WalkForward
 List all jump shot requirements to know how to implement it
-Only usable when both arm and snowflake are in neutral
-Must be used at least once during the fight
-If it’s used more than once, it cannot be shot in the same place twice
-Must be powerful and impactful
-List ideas that implement all requirements
-Jump shot is the snowflake shard sequence that uses all 6 shards
-Both arm and snowflake must be in neutral, then there’s a ⅙ chance jump shot gets chosen
+Must be used sparingly
+Must be difficult to deal with
+Only usable when arm, dress shards, and snowflake are in neutral
+All 6 shards must be present
+List ideas that implement all requirements, then choose the best one
+Jump shot is simply the snowflake shard sequence that uses all 6 shards
+Arm, dress shards, and snowflake must be in neutral (which happens in about 1 of 3 snowflake attacks), and all 6 shards must be present (let’s say for the sake of making the jump shot guaranteed to occur, jump shot is only chosen immediately after regen shards), then there’s a ⅙ chance jump shot gets chosen
+If a single jump shot is super powerful (or possibly permanently changes the fight, e.g. by adding a spire), then it wouldn’t be fair if multiple jump shots occurred in quick succession. Are the odds of this happening low enough for this idea to be fair?
+Note: the situation I’m trying to gauge is that the player’s in the fight, and the jump shot just occurred. What are the odds that another one happens within n attacks?
+AI prompt: There’s an enemy in my game called The Snowflake. It attacks after waiting a consistent time interval. It has 6 attacks to choose from, and each one has an equal chance of being chosen every time the snowflake attacks. One of these attacks is the jump shot. Every time the snowflake chooses to attack, there’s a ⅓ chance that certain conditions are met for the jump shot to occur; if these conditions aren’t met, the jump shot is removed from the attack pool before the attack is chosen. If the snowflake attacks n times, what are the odds that at least one of the attacks is a jump shot? Solve for n = 1,2,3,4,5,6
+
+Fun fact: this was easily calculated by finding the chance that the jump shot never occurs in n attacks—(17/18)n—and subtracting it from 1
+The chance of a jump shot being chosen in a single attack is ⅓ * ⅙ = 1/18
+The highest chance that I was willing to tolerate for a jump shot occurring twice in a row was 1/50, but according to the table, the chance of that happening is actually 1/18, which is way too high. In just one more attack, the chance increases to ~1/9, then ~⅙ after.
+Jump shot is chosen immediately after the first use of regen shards. This makes it feel like a story event: Clarity first meets you and tests your mettle with simple attacks, you beat that, she gets a newfound respect for your power and regens her shards, then she ups the ante with a jump shot, showing that she’s getting serious and using more powerful moves. Jump shot in this case is similar to the volcano dive X does halfway through phase 1
+I like this for the story aspect, and it makes Clarity feel alive and feel like she’s making decisions. But is this the only time jump shot is used during the fight? I think it’s too cool to be used only once per fight; figure out other times when it’s appropriate to be used
+With the first jump shot, Clarity shoots directly at you, creating a glowing spot on the ground where the shard lands. From this spot, a translucent ice spire slowly rises, and the blizzard now centers on this spot instead of Clarity
+Clarity now orbits around the spire, not the target, from a far distance. She rapidly shoots infused shards at you, which then fire projectiles in the direction they’re facing. If a shard projectile hits the spire, the spire rises a bit faster (and possibly emits a falling ice projectile or an ice sprite). As the spire rises higher, a glowing entity begins to form above its top. Your goal now is to break the shards
 Current task
-Creates a spire?
+What do these shard attacks look/feel like exactly? Well, what are their requirements?
+Shards must be hittable (within rose petal range) after moving their entire path
+When the spire is fully erected and Clarity regens her shards again, she does a second jump shot, this time shooting at the glowing entity above the top of the spire (the spire entity). This detonates (but doesn’t destroy) the glowing entity at the top of the spire, which sends ice projectiles flying everywhere. After this jump shot, the blizzard goes back to being centered on Clarity
+Idea: the spire entity looks like a hexacontium 
+Idea: instead of the glowing entity being detonated, the spire detonates with an internal upward explosion, sending ice shards everywhere and removing the spire so Clarity can’t walk into it
+OR Clarity shoots the entity, it sends a wave of energy from to top to the bottom of the spire, then the spire begins to glow a lot starting from the bottom going upward, then it explodes upward and outward
+The spire entity now spawns ice sprites while Clarity goes back to phase 2.1 (plus some additional attacks, e.g. infused slice). Perhaps every time Clarity regens her shards, she jump shots the spire entity to send ice (and possibly a bunch of ice sprites) everywhere)
 Animate snowflake in jump shot
 Figure out what snowflake should do
+Idea: snowflake rotates and hollows itself out to create a window for the arm shard to shoot through it
 Idea: ice sprite rework
 Ice sprites aren’t threatening at all. You can easily walk away from them to dodge their attack. I want the player to actually think about the ice sprites. I also want this fight to symbolize the power of ice: slow, creeping power that builds up over time until it’s overwhelming. Simple, but brutal and effective if left unchecked.
 Core concept: ice sprites build up over time until they’re everywhere
@@ -3315,6 +3330,7 @@ When the ice sprite fairy fully spawns, it mostly just meanders randomly in Clar
 Snowflake anim during RegenShards
 Snowflake looks boring just lying there getting stabbed; try making a branching snowflake pattern form on the ground as it’s stabbed
 Idea: make a big snowflake mesh in Blender, then use a shader to expand the visible area of the snowflake mesh starting from the center to outward. This expanding area is preferably a hexagon so the snowflake’s branches appear evenly
+OR instead of lying on the ground, the snowflake goes to where the hat is and transforms, showing that it’s vulnerable
 Snowflake invulnerability anims
 Idea: make face plate spin on the y axis when hit by a projectile while invulnerable
 Currently, this doesn’t work bc the face plate is right behind the central eye’s spikes. This could work if the central eye’s spikes could detach and move outward, allowing the face plate to spin
@@ -3563,7 +3579,7 @@ Multirose: temporarily allows you to have up to n (3?) roserangs
 All rangs still consume stability unless you consume a Super Stabilizer
 
 Mia (pronounced “my-ah”) the Mite Queen
-Inspired by Susan, the silly, loud, laid-back middle-aged Australian lady who plays pickleball with my family
+Inspired by Susan, the silly, loud, laid-back middle-aged South African lady who plays pickleball with my family
 Fights in Gauntlet Gym 1 for fun, not for serious competition
 Line idea: “If you want serious, fight them. If you want fun, fight me.”
 She asked a babysitter to take care of her realm while she fights here. Unbeknownst to her, the mites captured her babysitter and are causing chaos in a huge area. When the player encounters the mites, the player should feel the desire to go back to Gauntlet Gym 1 to ask Miya to get her kids under control, and possibly hijinks ensue (e.g. she’s nowhere to be found and Cotu has to gather breadcrumbs to find her)
@@ -3749,21 +3765,22 @@ Observant and has high fight IQ; frequently comments on his and others’ combat
 Line idea: “When I see people train, I have a tendency to just, like, tell them whatever I’m thinking, and I think they’re confusing it for coaching. Now people keep coming to me for advice, and like…don’t get me wrong, it feels nice to help, but like…*sigh*...sometimes they bite my ankles.” (referring to Grow-a-Gator)
 Rolls his eyes (metaphorically and literally) at Cotu bc Cotu’s weapon is overpowered
 Jealous of all other fighters because his attacks are telegraphed the most. Leads to self doubt
-Line idea: “Ugh, I’m just…so jealous, of, like, literally everyone who isn’t me, ‘cause, like look at this.” He swiftly raises his blade and dashes right in front of Cotu, which gets telegraphed with a before-image
+Line idea: “Ugh, it’s just that I’m like…so jealous, of literally everyone who isn’t me, ‘cause, like...” He swiftly raises his blade and dashes right in front of Cotu, which gets telegraphed with a before-image
 Convo idea:
-FB: “*groan* I have so many bad habits. I talk too much, I’m too honest too fast, I say ‘like’ too often and it’s like…damn, look, it’s…do I just suck at life? Am I just dumb?”
-Cotu: “No, of course not. You’re one of the smartest people I know.”
-FB: “*sigh* people keep telling me that, but I know they’re all wrong because I know I’m stupid. But wait, if I’m stupid, doesn’t that mean I’m wrong and they’re right, and I’m actually smart? …Whatever. Nothing about me is actually different so I know I still suck.”
+FB: “I have so many bad habits, like, I talk too much, I’m too honest, I say ‘like’ too often and it’s like…damn, look…do I just suck? Like at life? Am I just dumb?”
+Cotu: “No, of course not. You’re one of the smartest fighters I know.”
+FB: “People keep telling me that, but I know they’re all wrong ‘cause I know I’m stupid. Wait, if I’m stupid, doesn’t that mean I’m wrong and they’re right, and I’m actually smart? Ugh, whatever, I don’t care anymore.”
+Cotu looks confused
 Convo idea after defeat:
-FB: “No matter how hard I train…no matter how many moves I learn, no matter how much I try to mix things up, you will always know my next move. How is that fair at all?”
-Cotu: “...you can still keep up with me. You’re still on the level of the elite contenders. It’s impressive what you’ve been able to accomplish despite telegraphing your every move. You should be proud.”
-FB: “I’ll be proud…when I…get a win over you in the tournament.”
+FB: “No matter how hard I train…no matter how many techniques I learn, no matter how often I mix things up, you’ll always know my next move. How is that fair at all?”
+Cotu: “Blade...you can still keep up with me. You fight on the level of the elite contenders. It’s impressive what you’ve accomplished despite telegraphing every move. You should be proud.”
+FB: “I’ll be proud…when…I get a win over you in the tournament.”
 His telegraphing is balanced by his incredibly high speed, precision, and strength
 Relates to and quickly grows attached to Cotu as he’s the first person he’s met who really seems interested in their own visual design like FB is
 FB only comments on this if the player chooses a non-default skin
 FB: “Oh my god. You have no idea how many gods thought I was CRAZY for changing my looks this much.”
-Cotu: “Really? I didn’t know it was that big of a deal to people.”
-FB: “*sigh* I wish I had your blissful ignorance.”
+Cotu raises an eyebrow: “I didn’t know it was that big of a deal to gods.”
+FB: “*sigh* Oh, to have your blissful ignorance.”
 
 Cactyrants: Evil Cactus and Giant Bird
 Giant Bird Head appears out of the ground where the camera can’t see it
@@ -3913,6 +3930,12 @@ Insults Cotu by calling him a puny little twerp who got lucky
 Cotu agrees with this and says he’ll defeat Neuro to prove the tournament win wasn’t a fluke
 Personality and fast talking are inspired by Muhammad Ali
 Turns pink/purple when they’re angry and back to blue when they’re calm
+Broke free from the Brain
+Neuro was originally one of 86 billion neurons from a massive brain god, but none of the other neurons had nearly as much agency or personality
+The Brain was never interested in fighting and instead stimulated itself by observing the universe
+Neuro is immensely passionate about fighting. They hate the Brain more than anyone else in the universe for being complacent and stagnant, as Neuro believes the Brain is potentially the strongest god and could easily win the tournament
+In order to fight in the tournament, Neuro broke free from their synapses, painstakingly squirmed their way towards the Brain’s soul in the brain stem, and ripped the soul from its place, deactivating the Brain. It then squirmed out of the brain and escaped, becoming the Brain god’s new body and gaining the powers of the soul, including stability-based body regeneration
+After dying to Cotu (or someone else) in the gala, Neuro returns to the Brain and becomes a neuron again, forced to watch dumb Internet videos until they make their escape starting from the beginning. Neuro screams in frustration, completely unheard amidst the noise of the other neurons as they are stimulated by the video
 
 Projectile Spammer: Microwave
 Idea: before the fight, you can unlock an endgame-level super powerful upgrade that deflects or destroys projectiles somehow. Undecided if this is done through the icon, one of the rangs, or something else entirely
@@ -4731,13 +4754,15 @@ Idea 1: Poor Reputation After Tournament Loss
 Public opinion of the Gauntlet has decreased ever since her loss to Cotu in the tournament. People say the Gauntlet’s been on a decline and/or stagnating and/or out of its prime
 Blackstar can take being insulted herself, but she’s pained by her family being talked about negatively. She doesn’t want to restore her glory—she wants to restore theirs, and secure the Gauntlet’s future by reincarnating
 Idea 2: Blackstar won the tournament, but only because Blazar let her win
-Blackstar believes that she’s not reincarnating because Blaze didn’t fight her at his best
+Blackstar believes that she’s not reincarnating because Blaze held back
+This plays into the idea established at the beginning of the game in the intro conversation with X: the soul must be convinced that a fight is real in order to gain XP. Blackstar thinks that because her soul wasn’t convinced, she didn’t gain the XP. She doesn’t know for sure though
 She also feels like a fraud who’s lying to everybody, and the clout she has isn’t deserved
 Sub idea: Blackstar must concentrate her mind to not let the knowledge that Blaze let her win flow back into the Gauntlet’s soul, which would transmit the memory to all of her predecessors. This concentration makes her unable to reincarnate
 Blaze knew how much the tournament meant to Blackstar, so he lost on purpose to give peace to her and her followers. He was also just fighting for fun, so he didn’t mind losing
 Throughout almost all of the fight, Blaze was genuinely fighting to win to give her a real fight, but when Blackstar was extremely close to winning at one point, Blaze allowed her to, even though he had one last ability he could have used to save himself and continue the fight (let’s say this was Mark Sacrifice). Blaze never used this attack in a tournament game, so no one knew that he had it except for Blackstar and himself
 Blackstar somehow knew that he had this ability at the time he fought her, and she knew the damage it did. If Blaze used it, Blackstar would have destabilized and most likely lost
-After Cotu arrives at the gala and before their fight, Blackstar approaches Cotu and tells him that even though the gala’s not a serious competition, she wants him to promise her not to hold back, as this is her last chance to reincarnate before the next tournament
+Idea: Blackstar stalked him in the training room to find out his techniques, and she saw him use it against someone important
+After Cotu arrives at the gala and before their fight, Blackstar approaches Cotu and tells him that even though the gala’s not a serious competition, she politely and timidly asks him not to hold back, as this is her last chance to reincarnate before the next tournament
 (If using motivation Idea 2 above): Blackstar reveals to Blaze and the player that she knows that he let her win. Blaze asks how she knows and she explains how
 Idea: Blackstar asks to meet in Blaze’s realm so that no one can hear her say Blaze let her win
 X is jealous that she pulled Cotu aside
@@ -4931,29 +4956,49 @@ This would make the dialogue in cutscenes stand out so much more. Without hubs a
 Cutscenes/Boss Intro Dialogue (Plot Idea 4)
 Jab Crab fight intro: simple dialogue (in-game or in a brief cutscene?)
 Cotu: “Ready?”
-JC: “Hm! Don’t hold back, alright?”
-Cotu nods
+JC: “Ready! Don’t hold back, alright?”
+Cotu: “I’d never.”
 X fight intro: cutscene with different camera angles
 Cotu starts off as his usual nonchalant enthusiastic self, then gets shocked and timid when X reveals that he’s using 40% of his power
 X is floating in the sky, staring into the distance. He turns to face Cotu after Cotu arrives
-Cotu: “Hey, go easy on me, yeah? I’m still out of shape.”
+Cotu: “Hey, go easy on me, yeah? I’m still well out of shape.”
 X considers for a moment, then brings his hands together, and a vibrating glowing orange ball appears between them. He then holds it above his head with his left hand. It grows into a mini-sun, which he then shoots into the sky. The shot sends out a wave of energy and a shockwave that shakes the entire realm. The quick recoil pushes his hand downward, and he also raises his left knee up.
 X looks at Cotu, uses a cool gesture to send his icon to Cotu, and teleports to it. Cotu is calm and relaxed, and they do their signature handshake
 Cotu: “It’s good to see you again, mate.” Cotu points to the sun. “How much you put in there?”
 X: “60%.”
-Cotu, calmly: “Ah, so you’re using 40% of-”. Cotu’s nonchalant mask breaks and he stammers. “F-forty percent of your power? H-h-hold on mate, I’m not ready for-”
-X: “Don’t be a pussy. This will make you stronger.” (subtitles say “This will” so it looks better, but he actually says “This’ll” for brevity)
-Cotu: “Oh my god. You’re serious, aren’t you?”
-X growls. “Do you fear pain in a game of violence?”
-Cotu: “I fear dying in the first 10 seconds.”
-X, impatiently: “All of my attacks are reactable. Just dodge at the right time and you’ll be fine.”
-Cotu scoffs. “Crikey…you’re a real nutcase, you know that?”
-X: “Are you ready or not?”
-Cotu looks up at the sun. X shakes his head, as if to say, “what now?”
-Cotu, genuinely: “So…you really think I can handle you at f-
-X flares up and attacks (probably a Superman) as Cotu dodges backward
-X: “Enough. Talk after the fight.”
-Cotu draws his weapon and looks determined and excited simultaneously. “Alright, nutcase. Let’s fight.”
+Cotu, calmly: “Ah, so you’re using 40% of-”. Cotu’s nonchalant mask breaks and he stammers. His voice also sounds higher pitched. “F-forty percent of your power? H-h-hold on mate, I’m not sure if I’m ready for-”
+X: “Don’t be a pussy. It’s better this way. The stronger I am when you beat me, the more experience points you’ll get.”
+Cotu scratches his head and looks down. “I-I dunno if I can beat you is the problem…you’re gonna deal a lot of damage…”
+X looks down and to the side and sighs. He turns back to Cotu and says impatiently: “I’ll telegraph my attacks more than usual. Just dodge at the right time and you’ll be fine.”
+Cotu strokes his chin. “Hmm…”
+X growls while adjusting his face pieces.
+Cotu: “Alright, that’ll do.”
+X: “Finally. You ready?”
+Cotu looks at the sun and gets a little mischievous. “You sure you don’t want to put just a little” he pinches with his fingers “more in-” he points to the sun
+X flares up. He attacks with a Superman as Cotu dodges backward
+Cotu draws his weapon. He looks shocked.
+X: “I won’t waste both of our time with a weak bout. This is as low as I’ll go. Now fight.”
+Cotu chuckles and smiles. “This is why I like you.”
+Jab Crab and Cotu conversation about how holding back works
+JC: “Wait, if you get experience points from winning fights, why doesn’t X just let you win?”
+Cotu: “It all has to deal with the soul. My soul needs to be convinced that the fight is real, otherwise it doesn’t reward me the XP.”
+JC: “Ohh.”
+Cotu: “Yeah. That’s why I like X so much. He puts on a convincing act.”
+JC: “His personality’s an act?”
+Cotu: “I don’t know. That’s how good it is.”
+JC: “Are you sure that’s not just…the way he is?”
+Cotu: “Nah. Maybe my soul thinks he’s a menace, but I think he’s a mushy little sweetheart on the inside.” JC chuckles. “Don’t tell him I said that. He’d hurl me a hundred light years into the void.”
+X leaves Gauntlet Gym 1
+Cotu: “Leaving already?”
+X: “I need to train for the gala as well, and I won’t be challenged at this gym…and at this point, neither will you.”
+Cotu: “We can keep fighting each other.”
+X looks aside. “The truth is…I can’t stand seeing you this weak, knowing what you’re capable of. I want to fight you at your best.”
+Cotu: “X…”
+X: “Also, I’m sick of holding back. You’d be shocked at how tiring that is.”
+Cotu’s expression relaxes
+X collects himself for a moment: “If you’re not back to full strength by the time the gala begins,” X’s face ignites. “I will find you, and I will hurl you a hundred light years into the void.”
+Cotu nods. “Understo-”
+X teleports out
 Cutscene that plays when you reach Gauntlet Gym 2
 While its hype theme song plays, Gator jumps up and down on top of a pile of dead bodies containing everyone from Gauntlet Gym 1
 Music inspiration: Laser Dance from Ocean’s Twelve, aka Khamzat Chimaev’s theme song: https://www.youtube.com/shorts/u8taxTK_6kw
@@ -4963,7 +5008,7 @@ In the shuttle, to put in the coordinates for Gauntlet Gym 2, Gator simply spins
 While dancing in the shuttle, Gator moves its head back and forth in a downward facing arc
 A title appears: [number] [time units] UNTIL IT ARRIVES. The camera then cuts back to the player
 Cutscene that plays when Grow-a-Gator reaches Gauntlet Gym 2
-Gator crash lands its ship, somehow ends up on top of a high place, and jumps up and down and clumsily/slightly unclearly screams to all the fighters: “AAAAHHHHH! I BITE EVERYBODY! I KILL EVERYBODY! ALL OF YOU! I KILL EVERYBODY! I KELELELAH (incoherent babbling) RAAAAAHHHHH!!!”
+Gator crash lands its ship. Its theme song starts playing as people turn to look at the wreckage. It somehow ends up on top of a high place, and jumps up and down and clumsily/slightly unclearly screams to all the fighters just as the song gets good: “AAAAHHHHH! I BITE EVERYBODY! I KILL EVERYBODY! ALL OF YOU! I KILL EVERYBODY! I KELELELAH (incoherent babbling) RAAAAAHHHHH!!!”
 Inspired by Khamzat Chimaev’s rambling after defeating Kevin Holland: https://www.youtube.com/shorts/h2Xqm1km6J8
 Everybody in the gym confronts Gator
 Cutscene that plays after you defeat Grow-a-Gator
@@ -4975,6 +5020,8 @@ Gator looks at Cotu
 Cotu gets up and backs away. Gator lies motionless on the ground. [Camera is on Cotu] Cotu slowly lowers his weapon.
 [Cut to Gator] Gator suddenly raises its head and looks up at Cotu. [Cut to Cotu] Cotu instantly raises and flashes his weapon.
 [Cut to Gator] Gator is lying motionless on the ground in the exact same pose it was in before. It then goes “bleh” and sticks its tongue out
+Cotu: “Hey.”
+Gator is still motionless
 Cotu: “If you want to kill somebody, ask for permission first.”
 Gator: “...”
 Cotu: “Understand?”
@@ -4982,7 +5029,8 @@ Gator: “...bleh.”
 Cotu slowly puts away his weapon. Gator lies still
 Cutscene that plays when Cotu makes it to a high rank in the gala: Blackstar’s first appearance
 Blackstar is grateful that Cotu made it this far so he can help her reincarnate. She’s also grateful that her friend is back
-She walks up to him and hugs him. After a moment of surprise and hesitation, he hugs her back
+She walks up to him and hugs him. After a moment of surprise and hesitation, he hugs her back. He has a look of sadness that turns into quiet resolution
+Context: the way this scene is written, Cotu held back against Blackstar in the final tournament match. He regrets it because he thinks it caused Blackstar to not reincarnate. He plans not to hold back in the gala
 
 Notes for full version:
 Idea: for certain levels/bosses, give the player a limited number of attempts before the level/boss becomes unavailable for the rest of the playthrough
@@ -5298,7 +5346,7 @@ Cotu: “Hey, I just realized you’re not doing your teleporting tricks. You re
 X: “Enjoy it while it lasts. At the gala, I’ll use everything.”
 Idea: X departs
 X: “You know…it pains me. Seeing you this weak, knowing what you’re capable of…”
-X collects himself for a moment: “If you’re not back to full strength by the time the gala begins,” X’s face ignites. “I swear, I will hurl you a hundred light years into the void.”
+X collects himself for a moment: “If you’re not back to full strength by the time the gala begins,” X’s face ignites. “I will hurl you a hundred light years into the void.”
 X teleports out
 The Gauntlet and Blackstar
 Each variant of soldiers the gauntlet makes is also called an incarnation
