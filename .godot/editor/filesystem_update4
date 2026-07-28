@@ -1,4 +1,4 @@
-res://enemies/clarity_infused_slice_hitbox.tscn
+res://enemies/clarity.tscn
 res://textures/clear_tile.tres
 res://textures/noise_texture_2d.tres
 res://shaders/smoke_LOD.tres
@@ -35,7 +35,6 @@ res://enemies/clarity_dress_shard.gdshader
 res://levels/snow_level/snow_level_test_env.tscn
 res://glb_inherited_scenes/snowflake_entity_meshes.tscn
 res://cotu/cotu_cb_main.tscn
-res://enemies/clarity.tscn
+res://enemies/clarity_infused_slice_hitbox.tscn
 res://enemies/clarity_infused_slice_ring.gd
-res://enemies/enemy_anims/clarity_infuse_left.res
-res://enemies/enemy_anims/clarity_left_slice_from_infuse.res
+res://enemies/clarity.gd

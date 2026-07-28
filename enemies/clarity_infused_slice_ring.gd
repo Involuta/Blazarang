@@ -1,6 +1,6 @@
 extends Node3D
 
-var appear_time := .2
+var appear_time := .36
 var bright_time := 4.5 # Time ring spends at full brightness
 var fade_time := 4.5 # Time ring spends fading to nothing
 var disappear_time := 2.0 # Time spent waiting for particles to disappear after ring disappears
