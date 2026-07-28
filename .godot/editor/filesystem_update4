@@ -38,3 +38,16 @@ res://cotu/cotu_cb_main.tscn
 res://enemies/clarity_infused_slice_hitbox.tscn
 res://enemies/clarity_infused_slice_ring.gd
 res://enemies/clarity.gd
+res://enemies/enemy_anims/clarity_infuse_left.res
+res://enemies/enemy_anims/clarity_jumpshot_towalkleft.res
+res://enemies/enemy_anims/clarity_left_slice_from_infuse.res
+res://enemies/enemy_anims/clarity_left_slice_from_wait.res
+res://enemies/enemy_anims/clarity_longslice.res
+res://enemies/enemy_anims/clarity_raise_left_fast.res
+res://enemies/enemy_anims/clarity_raise_left_slice_fast.res
+res://enemies/enemy_anims/clarity_raise_left_slow.res
+res://enemies/enemy_anims/clarity_raise_right_slice.res
+res://enemies/enemy_anims/clarity_regenshards.res
+res://enemies/enemy_anims/clarity_stagger.res
+res://enemies/enemy_anims/clarity_wait_lowered_left.res
+res://enemies/enemy_anims/clarity_wait_raised_left.res

@@ -580,7 +580,7 @@ func wait_raised_left():
 	var wait_time := randf_range(wait_raised_left_min_secs, wait_raised_left_max_secs)
 	await get_tree().create_timer(wait_time).timeout
 	# Choose between LeftSliceFromWait and TriggerArmSlice --> InfuseLeft --> LeftSliceFromInfuse
-	if randf() < 0:
+	if randf() < 0.5:
 		snowflake_hexagon_anim_player.play("TriggerFastArmSlice")
 		await snowflake_hexagon_anim_player.animation_finished
 		arm_anim_player.play("LeftSliceFromWait")
