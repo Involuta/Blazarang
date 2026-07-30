@@ -1,4 +1,4 @@
-Blazarang Ideas Doc Jul 29 2026
+Blazarang Ideas Doc
 
 Production Processes
 
@@ -3441,8 +3441,11 @@ Power Throw to Mark Rang Upgrade
 Power throw automatically homes to mark position when mark is active
 
 Revisit Mites
-Try making them flat and round like real mites instead of having the pointed high butt
-Make them too short to be hit by the rose
+Change their design to be more memorable
+Explanation: Every level in this game should be memorable. I define “memorable” as being describable with just 1-3 words. For example: X = intense, Clarity = intimidating and mysterious, Flying Whale/Mortal Warrior = surreal, tragic, and beautiful. Currently, how can the mites be described? They’re small, round (at least their silhouette is), and have short stubby legs, so they’re cute. But on the other hand, they have no eyes and have tiny creepy mouths, making them creepy. These feelings directly contradict each other, making the mites indescribable and thus unmemorable. I initially created them because I thought it was funny to juxtapose the mythical, surreal gods with ordinary/realistic bugs, but the humor—which is currently the only source of memorability—relies on the unexpected novelty. Once the player gets familiar with the mites and the novelty wears off, what is the player left with to remember the mites by? No particular idea or feeling stands out since they are neither cute nor scary. Pick a side
+Mites IRL are somewhat cute, but not cute enough to stand out as cute unless you change the way they look
+Spiders are more memorable because they’re scary, but they’re more common in media, which takes away from the uniqueness of the game, decreasing the justification for its existence and making it feel more boring
+Try making them too short to be hit by the rose
 
 Revisit and Complete Balls Level (maybe, if you believe it’ll add more value to the gameplay)
 Make Ball Walker more crazy and dangerous
@@ -3606,7 +3609,7 @@ Ring Toss: gator spins its soul around its tail, spikes appear on the soul, then
 Idea: defeating gator gives you the chakram
 
 Paramecium and Babies
-Appears in Gauntlet Gym 2
+Goofy and cute mild challenge boss in Gauntlet Gym 2
 Personality idea: down to Earth and ordinary. Wants to challenge itself more than beginner-level combat, but doesn’t want the stress that comes with high-level competition. Aversion to stress matches soft, squishy exterior
 One paramecium miniboss (“parent”) about 3 times as massive as Cotu accompanied by 10 babies
 Babies orbit in a ~rose petal-length radius around a center point between the target and the parent, preventing Cotu from getting too far from the parent
@@ -3640,7 +3643,7 @@ Lore: fight is pre-recorded bc the real Centipede is busy elsewhere
 Each behavior state (purple, blue, black, combined, etc.) has its own section in the boss song. When a section of the boss song plays, its corresponding behavior state is active
 
 Flying Whale and Mortal Warrior
-Gauntlet Gym 2 boss
+Surreal and tragic Gauntlet Gym 2 boss
 God is a giant eye whose iris is a soul. It can transform into a giant whale and watch the arena from afar
 You don’t fight the god; you fight her loyal mortal warrior
 Extremely ugly and weak-looking
@@ -3786,7 +3789,8 @@ FB: “Oh my god. You have no idea how many gods thought I was CRAZY for changin
 Cotu raises an eyebrow: “I didn’t know it was that big of a deal to gods.”
 FB: “*sigh* Oh, to have your blissful ignorance.”
 
-Cactyrants: Evil Cactus and Giant Bird
+Idea: Cactyrants - Evil Cactus and Giant Bird
+Surreal, funny, and disturbing Gauntlet Gym 2 boss
 Giant Bird Head appears out of the ground where the camera can’t see it
 Has an attack that just slams its head forward and down over and over again
 Evil Cactus
@@ -3805,6 +3809,7 @@ Colorful kid-friendly host tells you simple instructions Simon-says/Warioware st
 A wraith appears and slowly becomes bigger and faster over time
 
 Math Boss
+Bizarre Gauntlet Gym 2 boss
 Crazy-looking wraith with a number face. 2 other ball-like faces with circles painted on them, and a wraith-like body like Specter Knight from Shovel Knight
 Boss’s face has a randomly selected number in some range (maybe 1-30)?
 Does crazy twitching and constantly whispers about “the numbers”
