@@ -1,4 +1,4 @@
-Blazarang Ideas Doc Jul 28 2026
+Blazarang Ideas Doc
 
 Production Processes
 
@@ -3365,8 +3365,7 @@ Idea: Comet form
 The arena floor turns into ice so Cotu can skate on it. The air near the ground is filled with intense fog. The player must skate around until they find an icicle that acts as a ramp leading up into the sky (maybe these icicles are shot by Clarity all across the realm when she transforms into phase 3). The player must do this in order to see where and when Clarity will attack. Before she attacks, she is straight up a comet flying across the sky. Eventually, she runs into one of many floating glowing ice “stars,” which redirect her trajectory straight towards the target. The player must hit her with the ax to prevent her from landing and immediately freezing them
 Idea: Spin
 Like an ice skater, Clarity leaps into the air, tucks in her arm and dress shards, and spins rapidly while decelerating to a stop midair. All of her dress shards then fire out in all directions, land, and become ice sprites. She then dives straight down into the ground
-Blizzard safezone shrinks to nothing if you take too long to defeat Clarity
-Idea: Whiteout - fog thickens, ice sprites spawn from the blizzard at an alarming rate. Clarity meanwhile does single slice stage progression (start passive → pause → subtle transition to aggressive → pause → subtle half windup → pause → subtle full windup → pause → attack)
+Blizzard safezone shrinks to nothing if you take too long to defeat Clarity at the end of phase 2
 Idea: occasionally, songbird-like ice creatures will fly onto Clarity and stare at the target. They all fly away when she attacks, but there’s a slight chance they fly away beforehand to explore around
 Idea: Cotu can make snowballs and throw them with no stability cost (but making a snowball isn’t fast). Hitting an ice sprite with a snowball triggers its explosion
 
@@ -3580,6 +3579,11 @@ Fights in Gauntlet Gym 1 for fun, not for serious competition
 Line idea: “If you want serious, fight them. If you want fun, fight me.”
 She asked a babysitter to take care of her realm while she fights here. Unbeknownst to her, the mites captured her babysitter and are causing chaos in a huge area. When the player encounters the mites, the player should feel the desire to go back to Gauntlet Gym 1 to ask Miya to get her kids under control, and possibly hijinks ensue (e.g. she’s nowhere to be found and Cotu has to gather breadcrumbs to find her)
 
+Target Practice Room
+You’re standing on a small solitary platform raised high in the air surrounded by targets. The goal is to destroy them as fast as possible
+Each wave of targets gets harder than the last (faster, weirder paths, less predictable, farther away)
+Some targets are tough and require the ax
+
 Grow-a-Gator (named “Groa” maybe? And then it calls itself “Groa”)
 Fast giant alligator with the ability to grow and shrink
 Tiny: size of Dwarf Caiman, used for dodges and quick positioning
@@ -3648,33 +3652,37 @@ Speaks poetically and romantically
 Worships and loves his god
 Can’t see the god, but has faith that she’s with him. You can see the god, and you can see when she gives him power
 Just before he dies, the whale rewards him by telling him her real name, which is so beautiful that he immediately dies peacefully and painlessly
+Realm is a beautiful sanctuary basked in golden light. Its stone path and main building are inspired by Asian water temples like the Byodo-In temple in Oahu
 Warrior dialogue ideas:
 Intro:
-Mortal: “I am a mortal warrior. My god sent me here to destroy you.”
-Cotu: “She wants you to fight me? I’m sorry, mortal, but she sent you to die.”
-Mortal: “If that is what my god has planned for me, so be it.”
+Mortal: “I am a mortal. My God has honored me with the task to destroy you.”
+Cotu tilts his head. “Do you know who I am?”
+Mortal: “I do.”
+Cotu: “Then you know she sent you here to die.”
+Mortal: “If that is what She has planned for me, so be it. However, you do not decide my fate.”
 Near the end of the fight:
-Cotu: “You sure you’re willing to die?!”
+Cotu: “Are you really willing to die?!”
 Mortal: “ANYTHING FOR HER!!!”
 Upon defeat:
-Mortal: “Cotu, I give to you all the gratitude a lowly mortal can give. To die in battle to the Champion of the Universe, fighting in the name of my beloved god, is a dream I longed for my whole life. I could not even imagine a more beautiful death. My only regret is that I cannot fight for my god any longer…that I have no life left to give back to the one who gave me mine.”
+Mortal: “Cotu, I give to you all the gratitude a lowly mortal can give. To die fighting the Champion of the Universe, in the name of my beloved God…I could not even imagine a more beautiful death. My only regret is that I can fight no longer…that I have no more life to give back to the One who gave me mine.”
 Whale descends to the Mortal
-Mortal, weakly: “Oh, love…what have you in store for me?”
+Mortal, weakly: “Oh, love…is that…you?”
 Whale touches his forehead
-Mortal: “Your name? You’ve given me your name…what joy! How beautiful your name is! All beauty in all of creation cannot compare to even a fraction of the magnificence found in your name! Oh, to die with this gift! I see now what you have bestowed me with! A death with no regrets, no pain, and no sorrow. I give you all my thanks, even if it is just for a moment. Then again, a moment is the length of my existence compared to yours. My entire life, I was always going to be a moment for you. Thus, there is nothing to grieve. I’m glad…the love you give me is accompanied by no pain. So that I may die, and you may live…in peace.”
+Mortal: “What is this…your name? You’ve given me your name…” Mortal is moved to tears. “How beautiful it is! Oh, what a wondrous gift! To finally know you. My beloved. I…thank you. With your gift…I…am in endless…joy.”
 Mortal dies. Its eyes are hollow and its expression goes blank
-After the fight, the god talks to Cotu
+After the fight, the god covers the body in a golden cloak, then whisks the cloak away, revealing nothing underneath. The cloak flies away in the wind towards the sun. She talks to Cotu
+She explains that her name causes indescribable joy and satisfaction to the mortals who hear it, allowing them to die without pain, regret, or sadness
 Given her gigantic form, Cotu asks why she only fights in Gauntlet Gym 2. She says that her form is just an illusion formed within the minds of those who perceive her, and she can’t physically interact with the universe except through her mortals. Thus, her power is measured purely by the strength of her mortals
-Cotu asks why she fights at the gym. She says that upon discovering her ability to create life, she fell in love with her offspring, and she gives them what she believes is the ultimate gift of life: purpose
+Cotu asks why she fights. She says that upon discovering her ability to create life, she fell in love with her offspring, and she gives them what she believes is the ultimate gift of life: purpose
 Idea: afterward, Cotu meets Elite Gunner. He talks about the whale’s goal to give the life she creates purpose. EG says it truly is a gift to be born knowing exactly what your purpose is, as it is so hard to find. Cotu says it’s not hard at all: just do what makes you happy
-Cotu jokingly asks for her name. She says it is a gift bestowed only to mortals who die valiantly fighting the gods in her honor
+Cotu jokingly asks for her name. She says it is a gift bestowed only to mortals who die valiantly in her honor
 Warrior lore:
 To save development and player time, this lore is possibly found in text somewhere, not in an actual scene
 The warrior Cotu fought was the last of a generation of warriors, all competing to be the ambassador of the whale
 They killed each other in the name of their god, thus they died with honor and peace
 Post-writing comments:
 The concept of a mortal worshipping their god is unique and interesting in this universe, but make sure not to spend too much time on it or treat mortal death too seriously to keep the tone of the story consistent
-Make it clear at some point that mortals are really just an extension of the gods’ bodies (e.g. imagine if your fingernails had a mind of their own. You don’t feel sad when they die bc you get new ones)
+Make it clear at some point that to many gods, mortals are really just an extension of their bodies (e.g. imagine if your fingernails had a mind of their own. You don’t feel sad when they die bc you get new ones)
 
 Party Pillars
 Arena consists of a ton of small pillars and one giant pillar in the center with flashy people dancing on it
@@ -3758,7 +3766,7 @@ Lore/story ideas:
 Is a high-level contender
 Zesty, sparkly, clearly put effort into his own visual design
 Observant and has high fight IQ; frequently comments on his and others’ combat capabilities and strategies, often sassily. Others often come to him for advice, and he’s looked up to as a great coach
-Line idea: “When I see people train, I have a tendency to just, like, tell them whatever I’m thinking, and I think they’re confusing it for coaching. Now people keep coming to me for advice, and like…don’t get me wrong, it feels nice to help, but like…*sigh*...sometimes they bite my ankles.” (referring to Grow-a-Gator)
+Line idea: “When I see people train, I have a tendency to just, like, tell them whatever I’m thinking, and I think they’re confusing it for coaching. Now people keep coming to me for advice, and like…don’t get me wrong, it’s nice to help, but like…*sigh*...sometimes they bite my ankles.” (referring to Grow-a-Gator)
 Rolls his eyes (metaphorically and literally) at Cotu bc Cotu’s weapon is overpowered
 Jealous of all other fighters because his attacks are telegraphed the most. Leads to self doubt
 Line idea: “Ugh, it’s just that I’m like…so jealous, of literally everyone who isn’t me, ‘cause, like...” He swiftly raises his blade and dashes right in front of Cotu, which gets telegraphed with a before-image
@@ -4702,15 +4710,19 @@ TP Smash: same as Smash, but X sends his icon nearby just as he raises his hands
 Big Energy Burst: same as energy burst, but X uses 2 hands in front of him and creates a bigger burst
 TP Superman Hookkick: X teleports and does a Superman, but when he lands, he immediately pivots his lead foot to turn backward while lifting his back foot, ignites his back foot’s medium blade, then does a spinning hook kick
 Inspired by Georges St-Pierre’s signature superman to low kick combo. X uses a hook kick parallel to the ground instead of a low kick so that the blade aims at Cotu, not the ground
+Ultraman: as X does his usual attacks, his head suddenly starts emitting strange blue particles. A few attacks later, he leaps very high into the air and as he rises, his head glows brilliantly bright. When he reaches the apex of the leap, his face flashes and a 2D effect is emitted. He then dives to the floor and punches like a Superman. If he’s hit with the ax in between the time he hits the apex of his leap and when he hits the ground, he is staggered
 Near-end attacks:
 Solar Flare: undecided (X creates a giant whip?)
 Lore/Story Ideas:
-X accepts defeat with strength
-X: “I did everything within my power to win and still lost. You were simply the better fighter. I have no choice but to accept that.” He sounds angry at himself.
-Cotu: “So what’s next for you?”
-X: “More training, more innovation, and more planning. But before then, I have some shit to do.”
-Cotu: “What is it?”
-X: “The trio asked me to help them search for their realm. I had nothing better to do, so I obliged. I was planning to take time to myself to clear my mind, but I predict that traveling with them will do exactly the opposite.”
+X accepts defeat with strength and anger
+X: “Cotu.”
+Cotu looks at him. They embrace.
+X: “You fought an excellent fight. You have my respect.”
+Cotu: “Same to you. You really had my work cut out for me.” They embrace. “No hard feelings?”
+X: “No. I did everything within my power to win and still lost. You were simply the better fighter. I have no choice but to accept that.” He sounds bitter, but restrained.
+Cotu: “...so what’s next for you?”
+X: “More training and more planning. But before then,” Cotu looks intrigued. “the trio asked me to help them search for their realm. I had nothing better to do, so I obliged.”
+Cotu: I was planning to take time to myself to clear my mind, but I predict that traveling with them will do exactly the opposite.”
 Cotu: “Yet you’re going anyway.”
 X: “Correct, because you’re coming too.”
 Cotu: “Wha-I didn’t sign up for this.”
@@ -4880,6 +4892,10 @@ Cotu has a wall of trophies in his realm for every boss he kills. These trophies
 X
 God of Starsteel
 Popular during the tournament and was a favorite to win. Lost unexpectedly early to another top contender.
+Grow-a-Gator
+Giant tooth
+God of growth(?)
+Unpredictable and cunning. Still learning about boundaries. Not much else is known about it since it was just born.
 Future Blade
 His body is based on a robber fly, which hunts by tackling its prey in midair and injecting them with venom. Robber flies hunt similarly to dragonflies, which have the highest recorded hunting success rate of any animal (97%).
 His venom is chlorine trifluoride, one of the strongest known oxidizers. It’s reactive enough to corrode stainless steel, glass, and rock (i.e. silicate minerals) and can even react with xenon, a noble gas. Future Blade’s venom is a deadly threat to most gods, which is likely why he’s ranked so high despite telegraphing his attacks.
@@ -4894,10 +4910,77 @@ PtF6 has a melting point of 61.3 °C/142.3 °F, making it a solid at room temper
 FOOF is so volatile that it rapidly decomposes into F2 and O2 at room temperature. It even decomposes at a rate of 4% per day at cryogenic temperatures
 Can’t metals be protected from ClF3 with a passivated metallic fluoride layer (i.e. fluorine gas can be gradually introduced to the metal to create the fluoride layer)? No because the blade itself would cut through the fluoride exterior, allowing the venom to pass through to the raw metal and burn it
 
+Character Theme Stances
+Each character has a stance on the central theme question. The degree to which they agree or disagree with the protagonist’s stance, and their relationship to the protagonist, determines their story role
+Theme question: where should joy come from?
+Cotu
+Competitor who enjoys competition
+Theme stance: joy comes from the process (specifically: fighting, struggling)
+Protagonist
+The Gauntlet (excluding Blackstar) (Variant 1, Elite Gunner + Sentinel, ???)
+Theme stance: joy comes from fighting and helping others → aligned with Cotu
+Story role from TS: friend
+Blackstar
+Theme stance: joy comes from the goal (reincarnation), be unhappy otherwise → directly against Cotu
+Story role: Primary antagonist
+Stays at the top
+X
+Theme stance: joy comes from the goal (wants to win the tournament and is hard on himself when he doesn’t), be angry otherwise. Joy also comes from fighting, friendship, and helping others, though he’s not consciously aware of these latter desires → mostly against Cotu
+Story role: Foil
+Grow-a-Gator
+Cotu’s rival who becomes his friend
+Theme stance: live for violence, violence is fun → aligned with Cotu (live for fun), misaligned with Cotu (live harmlessly)
+Story role: Parallel Companion (goes on same journey as Cotu, just stopping at elite)
+Clarity
+Stranger
+Theme stance: live without thinking → against Cotu
+Story role: Secondary antagonist
+
+Character Passion and Growth
+Each character should have a unique starting and end point in their strength journey, and have their own level or type of passion for fighting
+Cotu
+Straight line from 0 to top
+Loves fighting and the struggle. Even if he doesn’t improve, he’s having fun
+The Gauntlet (excluding Blackstar)
+No growth whatsoever; level depends on individual
+Jab Crab
+Stuck at the bottom, but rises a bit to have potential for Gauntlet Gym 2
+Enjoys fighting; wants to be the best he can be
+Mite Queen
+Happily near the bottom
+Fights as a hobby; sees improvement as a hassle
+Blackstar
+Stuck at the top
+Sad and desperate to improve
+X
+Starts just outside the top contenders, ends as a top contender through skill/body upgrade (and by boosting resume with gala wins)
+Angry to improve
+Grow-a-Gator
+Explosive rise from 0 to elite
+Excited to improve
+Clarity
+No change in power
+Completely apathetic to improvement
+Future Blade
+Stuck at elite
+Works hard to improve, but doesn’t care that much since he expects not to succeed anyway
+Candy Cat
+Elite, potentially near the top
+Apathetic to improvement
+Neuro
+Starts (considered to be) elite, ends near the top. Didn’t improve in skill, but in reputation by boosting their resume with gala wins
+OR starts near the top, ends near the bottom due to returning to a Brain neuron
+Calmly determined to improve
+What’s missing?
+Stuck in the middle, aka Gauntlet Gym 2 (Flying Whale/Mortal Warrior? Math Boss? Ball of Tentacles? Simone Says?)
+Rises from middle to elite/top (Paramecium? Slicer? Cactus and Bird?)
+Decrease in power (Neuro?)
+TO DO: visual representation of start and end points here
+
 Story Progression Arcs/Episodes (Plot Idea 3C)
 Cotu goes on a journey and encounters progressively more antagonistic antagonists
 Destination is a gala for top competitors. Gala is like a pantheon from Hollow Knight where you fight several bosses in a row
-Idea: Player only has a limited number of fight attempts across the entire journey before the gala begins. As the player completes subsequent runs, they’ll have more and more attempts that they can use to practice against later bosses
+Player only has a limited number of fight attempts across the entire journey before the gala begins. As the player completes subsequent runs, they’ll have more and more attempts that they can use to practice against later bosses
 Certain gods (e.g. mites) force the player to defeat them to escape their realms. Surviving their encounters for a certain length of time grants experience that you can use to unlock skills, but doesn’t progress the journey past them
 Progressing through the journey quickly (i.e. beating bosses with less attempts) will allow Cotu to catch up to other gods making their way to the gala. The player may encounter gods they didn’t encounter in previous runs due to taking too long
 Leftover attempts can be used to practice with gods at the gala before the gala begins, but in practice fights, gods won’t go all out
@@ -4909,24 +4992,26 @@ This also makes Cotu more unique as a god; he trades maximum HP in exchange for 
 Player can save at a checkpoint with a limited number of slots
 Steps for the journey:
 The Return
-Cotu comes back from vacation and warms up by fighting gauntlet var 1 (+ var 5 with the gauntlet tower miniboss)
+Cotu warms up by fighting gauntlet var 1
 Cotu can fight any Gauntlet Gym 1 boss afterward, including:
-Gauntlet Variant 1 + 5
+Gauntlet Variant 1
 Jab Crab
 Mite Queen
-Cotu fights X, who’s a bit peeved that he had to wait for Cotu instead of heading to the gala early. He’s also covertly happy to see Cotu again
+Cotu fights X, who’s a bit peeved that he had to wait for Cotu instead of heading to Gauntlet Central early. He’s also covertly happy to see Cotu again
 Mite Realm (optional)
 Cotu can visit the Mite Queen’s realm after fighting her
 On arrival, Cotu is ensnared in the realm’s webs and must fight his way out by destroying the source and saving the trapped babysitter
 Gauntlet Gym 2
-Cotu arrives at Gauntlet Gym 2, which is when the player sees a cutscene of Grower Gator obliterating everyone at Gauntlet Gym 1
+Cotu arrives at Gauntlet Gym 2, which is when the player sees a cutscene of Grow-a-Gator obliterating everyone at Gauntlet Gym 1
 Cotu can fight:
 Elite Gunner + Sentinel
+Paramecium?
+Flying Whale/Mortal Warrior?
 Cactus and Bird?
 Simone Says?
-Math god?
+Math God?
 ???
-After some time, Grower Gator arrives at Gauntlet Gym 2. Cotu defeats it and befriends it
+After some time, Gator arrives at Gauntlet Gym 2. Cotu defeats it and befriends it
 (Alt step 2): The Void
 Instead of going to Gauntlet Gym 2, Cotu can cut through the Great Void. Going through the void is risky since there’s no way to communicate with the rest of the universe when you’re deep enough in the void, but it saves a ton of time on the way to the gala
 In real life, the universe is actually built like a web, with strands of light and matter and vast voids between the strands
@@ -4939,6 +5024,7 @@ Future Blade, Flora’s friend and coach
 Candy Cat, which requires going deep into the basement
 Flora, FB’s friend and star student 
 Sean Strickland god, who beefs with FB and trains Jab Crab (?)
+Potentially a Gauntlet Gym 2 god who improved in some way (e.g. Paramecium?)
 The Gala
 Player can use their remaining attempts to practice fighting gala gods before initiating the gala like the Radahn festival, but the player only gets that one attempt at the gala
 Idea: there’s a giant tower in the middle of Gauntlet Central. The gala takes place here, and the higher your rank, the higher your combat floor in the tower
@@ -5003,12 +5089,18 @@ Cutscene that plays when you reach Gauntlet Gym 2
 While its hype theme song plays, Gator jumps up and down on top of a pile of dead bodies containing everyone from Gauntlet Gym 1
 Music inspiration: Laser Dance from Ocean’s Twelve, aka Khamzat Chimaev’s theme song: https://www.youtube.com/shorts/u8taxTK_6kw
 While Gator jumps on the pile, some souls can be seen flying out of the pile
-It runs into and hijacks a nearby gauntlet shuttle, punches in some coordinates, then flies it into space while head-dancing on the console
+It spots a nearby gauntlet shuttle, gets a wicked grin, and sprints to it
+It pops its head up from under the desk and rests it on the console, punches in some coordinates, then flies the ship into space while head-dancing on the console
 In the shuttle, to put in the coordinates for Gauntlet Gym 2, Gator simply spins on top of the console in a static pose
 While dancing in the shuttle, Gator moves its head back and forth in a downward facing arc
 A title appears: [number] [time units] UNTIL IT ARRIVES. The camera then cuts back to the player
 Cutscene that plays when Grow-a-Gator reaches Gauntlet Gym 2
-Gator crash lands its ship. Its theme song starts playing as people turn to look at the wreckage. It somehow ends up on top of a high place, and jumps up and down and clumsily/slightly unclearly screams to all the fighters just as the song gets good: “AAAAHHHHH! I BITE EVERYBODY! I KILL EVERYBODY! ALL OF YOU! I KILL EVERYBODY! I KELELELAH (incoherent babbling) RAAAAAHHHHH!!!”
+Gator crash lands its ship. Its theme song starts playing as people turn to look at the wreckage. It somehow ends up on top of a high place, and jumps up and down and clumsily/slightly unclearly screams to all the fighters just as the song gets good: “rrrrrrrrrrAAAAHHHHH! I BITE EVERYBODY! I KILL EVERYBODY! ALL YOU! I KILL ALL YOU! I KILLA! I KELELELAH (incoherent babbling) RAAAAAHHHHH!!!”
+As Gator monologues, people prepare to fight it
+Slicer hunches down and ignites hand blades while Jumping Spider stands still
+Lobsters fist bump while Paramecium floats by
+Elite Gunner has her hand to her earpiece, nods, and pumps her shotgun as Sentinel steps forward beside her
+At Gator’s final scream, all the characters jump at Gator
 Inspired by Khamzat Chimaev’s rambling after defeating Kevin Holland: https://www.youtube.com/shorts/h2Xqm1km6J8
 Everybody in the gym confronts Gator
 Cutscene that plays after you defeat Grow-a-Gator
