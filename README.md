@@ -3230,31 +3230,7 @@ Alt idea: gameplay is the same as the original concept, but arena is patrolled b
 Lore: no one has ever beaten The Edge except for Microwave
 
 2 Boss OR Champion of the Universe: Blackstar, Gauntlet Incarnate
-Story:
 She has Demetrius Johnson’s stature, Kobe Bryant’s mamba mentality (harsh self-criticism and relentless drive for self-improvement), and Messi’s lack of casual social skill
-She is extremely personally motivated to fight Cotu at his best
-Idea 1: Poor Reputation After Tournament Loss
-Public opinion of the Gauntlet has decreased ever since her loss to Cotu in the tournament. People say the Gauntlet’s been on a decline and/or stagnating and/or out of its prime
-Blackstar can take being insulted herself, but she’s pained by her family being talked about negatively. She doesn’t want to restore her glory—she wants to restore theirs, and secure the Gauntlet’s future by reincarnating
-Idea 2: Blackstar won the tournament, but only because Blazar let her win
-Blackstar believes that she’s not reincarnating because Blaze held back
-This plays into the idea established at the beginning of the game in the intro conversation with X: the soul must be convinced that a fight is real in order to gain XP. Blackstar thinks that because her soul wasn’t convinced, she didn’t gain the XP. She doesn’t know for sure that’s the reason why she didn’t gain the XP, it’s just her best guess
-She also feels like a fraud who’s lying to everybody, and the clout she has isn’t deserved
-Sub idea: Blackstar must concentrate her mind to not let the knowledge that Blaze let her win flow back into the Gauntlet’s soul, which would transmit the memory to all of her predecessors. This concentration makes her unable to reincarnate
-Blaze knew how much the tournament meant to Blackstar, so he lost on purpose to give peace to her and her followers. He was also just fighting for fun, so he didn’t mind losing
-Throughout almost all of the fight, Blaze was genuinely fighting to win to give her a real fight, but when Blackstar was extremely close to winning at one point, Blaze allowed her to, even though he had one last ability he could have used to save himself and continue the fight (let’s say this was Mark Sacrifice). Blaze never used this attack in a tournament game, so no one knew that he had it except for Blackstar and himself
-Blackstar somehow knew that he had this ability at the time he fought her, and she knew the damage it did. If Blaze used it, Blackstar would have destabilized and most likely lost
-Idea: Blackstar stalked him in the training room to memorize his techniques, and she saw him use it against someone important
-Idea: Blaze now knows that in order for people to live their best lives, he needs to be honest with them. This includes fighting the people he cares about at full force
-Idea: throughout the game, the player has the option to tell the TRUTH or LIE to people when they ask him big questions (e.g. “Can I make it to the gala?”). The player is rewarded for picking TRUTH and punished for picking LIE
-Idea: the bosses who take the TRUTH well are rewarded by fate, but the ones who reject TRUTH are punished (e.g. Cotu tells someone they aren’t cut out for fighting, they lash out, and are humbled by their own hubris after moving up a gym level before they’re ready)
-Issue: isn’t this a bad message? Some lies really do have positive effects. Blaze’s original “lie” (letting Blackstar win) would have made everyone in the universe happy. Blackstar’s suffering is actually her fault; she’s rightfully getting punished for using underhanded tactics (spying on Blaze)
-Issue: doesn’t this distract from the main message that you shouldn’t take life so seriously and instead enjoy it as much as you can? This “honesty vs dishonesty” debate isn’t related to that
-Rework: Instead of the player having the options of TRUTH or LIE, the scenes simply play out with Cotu telling the truth every time. The player may control his combat actions, but not his words or real personality
-After Cotu arrives at the gala and before their fight, Blackstar approaches Cotu and tells him that even though the gala’s not a serious competition, she politely and timidly asks him not to hold back, as this is her last chance to reincarnate before the next tournament
-(If using motivation Idea 2 above): Blackstar reveals to Blaze and the player that she knows that he let her win. Blaze asks how she knows and she explains how
-Idea: Blackstar asks to meet in Blaze’s realm so that no one can hear her say Blaze let her win
-X is jealous that she pulled Cotu aside
 Thin black humanoid with diamond-like limbs and spiked gold mask
 Early face concept art:
 
@@ -3339,6 +3315,104 @@ Blackstar gains total control over all bits in the realm at once, becoming able 
 Cotu must activate and skillfully use an ultimate ability of his own to survive the onslaught
 Idea: Dominion skill, which uses some rang to parry all tiny projectiles around him
 Bit Blast: BS continuously calls bits to her and fires them at you like a machine gun. The only ways to avoid this move are to move laterally very quickly, or deflect the projectiles with a special ability like Dominion (deflecting tiny projectiles using shurikens or maybe the rose)
+Lore/story ideas:
+Each variant of soldiers the gauntlet makes is also called an incarnation
+The gauntlet constantly strives to make new variants (i.e. the variants constantly strive to reincarnate); that is their sole purpose
+After enough training, experience, and grit from all of its soldiers, a new variant spawns from a gauntlet spawner. Almost all reincarnations occur after someone’s destruction, hence why they call it a reincarnation
+The gauntlet can spawn any member of any of its previous variants to help train the latest incarnation
+After Blackstar, the gauntlet has never made another variant, and she’s been the latest variant far longer than anyone else has
+Some people think Blackstar cannot reincarnate because she’s already perfect (X, Cotu, her ancestors)
+Blackstar knows she isn’t perfect and feels like a failure for not reincarnating longer than any of her ancestors
+Blackstar feels helpless because no matter how long and hard she trains, she doesn’t feel like she improved at all, and no new variant appears from the spawner. She has no idea what else to do to reincarnate
+This is made worse by the fact that many other gods have improved significantly after the tournament, but Blackstar hasn’t changed at all
+Blackstar thinks that if she ever feels proud of herself, she’ll lose all motivation to improve and truly fail
+Idea: Elite Gunner looks at Cotu’s upgrades
+Elite Gunner is happy, but also ashamed since her master isn’t making the same progress
+Cotu wants to know how the Gauntlet really feels
+EG: “[current upgrade name]. Already?” She sounds like a mixture between impressed and sad
+Cotu: “Is something wrong?”
+EG *shakes her head*: “No. Not at all. It’s impressive how fast you’ve made it this far.”
+Cotu: “Thanks.” Cotu senses something’s going on, but he’s not sure what. “But I’ve still got a long way to go before the gala.”
+EG takes another look at the upgrades. “Indeed.” *she looks at Cotu* “I’ll send this info to Master. Thank you for showing us this.”
+Cotu: “Of course.”
+EG: “Whatever you need, the Gauntlet will be right behind you.” She salutes to him
+Cotu nods. “See you soon.”
+She is extremely personally motivated to fight Cotu at his best
+Idea 1: Poor Reputation After Tournament Loss
+Public opinion of the Gauntlet has decreased ever since her loss to Cotu in the tournament. People say the Gauntlet’s been on a decline and/or stagnating and/or out of its prime
+Blackstar can take being insulted herself, but she’s pained by her family being talked about negatively. She doesn’t want to restore her glory—she wants to restore theirs, and secure the Gauntlet’s future by reincarnating
+Idea 2: Blackstar won the tournament, but only because Blazar let her win
+Blackstar believes that she’s not reincarnating because Blaze held back
+This plays into the idea established at the beginning of the game in the intro conversation with X: the soul must be convinced that a fight is real in order to gain XP. Blackstar thinks that because her soul wasn’t convinced, she didn’t gain the XP. She doesn’t know for sure that’s the reason why she didn’t gain the XP, it’s just her best guess
+She also feels like a fraud who’s lying to everybody, and the clout she has isn’t deserved
+Sub idea: Blackstar must concentrate her mind to not let the knowledge that Blaze let her win flow back into the Gauntlet’s soul, which would transmit the memory to all of her predecessors. This concentration makes her unable to reincarnate
+Blaze knew how much the tournament meant to Blackstar, so he lost on purpose to give peace to her and her followers. He was also just fighting for fun, so he didn’t mind losing
+Throughout almost all of the fight, Blaze was genuinely fighting to win to give her a real fight, but when Blackstar was extremely close to winning at one point, Blaze allowed her to, even though he had one last ability he could have used to save himself and continue the fight (let’s say this was Mark Sacrifice). Blaze never used this attack in a tournament game, so no one knew that he had it except for Blackstar and himself
+Blackstar somehow knew that he had this ability at the time he fought her, and she knew the damage it did. If Blaze used it, Blackstar would have destabilized and most likely lost
+Idea: Blackstar stalked him in the training room to memorize his techniques, and she saw him use it against someone important
+After Cotu arrives at the gala and before their fight, Blackstar approaches Cotu and tells him that even though the gala’s not a serious competition, she politely and timidly asks him not to hold back, as this is her last chance to reincarnate before the next tournament
+(If using motivation Idea 2 above): Blackstar reveals to Blaze and the player that she knows that he let her win. Blaze asks how she knows and she explains how
+Idea: Blackstar asks to meet in Blaze’s realm so that no one can hear her say Blaze let her win
+X is jealous that she pulled Cotu aside
+Idea: after Blackstar’s battle with Cotu, he helps her accept that she’s done everything she can, and she should enjoy her life and all the friends and family she has. She then realizes that the only way to reincarnate is not to improve her skill or physical strength, but her soul. Each variant has its own unique skills, strength, and personality. The soul of the gauntlet, Blackstar’s soul, rejects Blackstar’s personality.
+After the battle, Blackstar’s helmet is cracked open, revealing a less physically sharp, more relatable, expressive person within. Cotu talks casually with Blackstar until she comes to the realization. Mid-conversation, she suddenly stops responding to Cotu. The camera’s on Cotu and he’s looking away while waiting for her response. After a bit, he turns to check on her. The armor looks frail and withered, and has lost its glow. The person inside Blackstar’s armor looks at Cotu differently than she did, with a wide-eyed, curious expression.
+Cotu: “Hi.”
+???: “...hello.” Her voice sounds different from Blackstar’s. More childlike. She also looks different from the person who was just inside the armor. A bit smaller.
+Cotu: “Do you…recognize me?”
+???: *with slightly more energy* “You look familiar, but I’m not really sure.”
+Cotu: “Do you know Blackstar?”
+???: *delicately, almost reverentially* “Blackstar…I don’t know, but a part of me feels…like she’s really important.”
+Cotu: “She was…”
+???: “...” She looks at the armor she’s encased in, a little confused.
+Cotu: “Oh yeah. Let’s get you out of that armor.” Cotu pulls out his ax and charges it up.
+???: “Woah!” She looks scared, but excited. With a single slash, Cotu breaks open Blackstar’s withered armor, freeing ???
+??? looks up at Cotu with awe.
+???: “Hey, do you know how to fight?”
+Cotu: “What was that?”
+???: *energetically* “I don’t know why, but I feel like fighting someone. And you look like you know about fighting.”
+Cotu: “...How about I introduce you to someone who knows how to fight?”
+???: “Sure! Let’s go!”
+Cotu and ??? walk over to a gauntlet spawner.
+???: “So, how good is this person at fighting?”
+Cotu: “Really good. Actually, the best I’ve ever known.”
+???: “Wow…I hope they go easy on me!”
+Cotu opens its console and spawns in variant 3000: Blackstar.
+Cotu: “This will only take a moment.”
+???: “Okay.”
+Cotu and ??? wait for Blackstar to spawn as ??? looks on in wonder
+Blackstar falls from the spawner.
+???: “Woah, that’s the thing I was stuck in!”
+Blackstar immediately grapples to Cotu and ??? upon seeing them. ??? assumes a fighting stance.
+Blackstar stops right in front of ??? in complete shock. Unable to accept what she’s seeing, she turns to Cotu.
+Blackstar: “Cotu, who is this?”
+Cotu: “Gauntlet 2, Variant 1.”
+???: “That’s my name? It’s kinda weird.”
+Blackstar gazes at ??? in shock and awe, slightly trembling. Eventually she bends down on one knee.
+???: “Um, excuse me, Cuh-Cotu said we were going to fight…do you wanna fight?”
+Blackstar: “...” The background music swells.
+Blackstar pulls in ??? in a tight embrace. The music reaches a climax.
+???: “Uh, what’s going on? I’m confused. This doesn’t really feel like an attack.”
+Blackstar lets go and looks into ???’s eyes. “My people…our people crave battle. Here in this realm, there will be no shortage of enemies to kill.”
+???: “Really? That’s awesome!”
+Blackstar: “Yes, but before we begin, I have to thank my friend.”
+???: “O-okay.”
+Blackstar approaches Cotu, steps out of her armor, and they lovingly embrace.
+Blackstar: “I never would have done it without you.”
+Cotu: “You did it all yourself. I was just having fun.”
+Blackstar smiles and chuckles a bit. “Is that so?” She pulls away and looks into Cotu’s eyes, smiling beautifully. She looks at ???, who is staring at the pair confused.
+Blackstar: “Come see us again soon. I have to train the next incarnation, and I could use the help.”
+Cotu smiles warmly. “Will do.”
+Blackstar puts on a more serious expression as she steps back into her armor. “Kid.”
+???: “Me?”
+Blackstar: “Say goodbye to Cotu. He created you.”
+Cotu: “Huh?”
+???: “Wha? Uh, bye Cotu! Thanks for making me.”
+Cotu: “Goodbye, you two.”
+Blackstar: “Now.” Blackstar ensnares ??? in her cables and grapples into the distance. ??? starts screaming, then laughing.
+Cotu watches them go, then unnecessarily backflips back into the ship.
+Greg: “What’s with the unnecessary backflip?”
+Cotu: “I guess I’m in a bouncy mood.”
+Greg: “Aight buddy. Let’s calm down.”
 
 Turbo Jester Boss: The Greatest Magician
 Looks like Jevil from Deltarune (similar proportions but toothier Hazbin Hotel-like grin), but has a hat so big it covers her eyes, has a poofier shirt that resembles a dress, and doesn’t have a tail
@@ -3646,32 +3720,6 @@ Clarity
 Levels/bosses that will become unavailable after a few attempts: rare/special bosses
 Ball Walker
 Create animation for when FirstMiniboss is destroyed by Cotu
-X Intro Cutscene
-X starts floating towards Cotu as the music starts. Cotu approaches X
-X and Cotu pause in front of each other
-Cotu: “Go easy on me, okay?”
-X nods subtly
-X raises his arm to the side. Cotu does the same. Right when the music goes silent, they slap their hands together back and forth twice before going in for a fist bump. Right before their hands collide (which would be painful for Cotu), their fists both stop in front of each other, then they open their hands and pull them back like an explosion happened between them.
-The camera cuts to X’s face, which ignites
-Cut to Cotu, whose eyes widen
-Cut to a camera near the ground that looks up at the two. X punches the air in front of him with a plasma sphere. Right before it hits Cotu, Cotu dodges backward. The plasma sphere explodes just as the music kicks in
-Camera returns to player’s POV
-Comet Intro Cutscene
-Comet descends elegantly from high above in an intricate, delicate dance, suggesting she is more of a cosmic force of nature than a person
-Script: Cotu and Comet are sassy
-…
-Comet: “A coward like yourself stands no chance in such a weakened state.”
-Cotu: “Coward? So you judge me as well.”
-Comet: “I have my reasons, do I not?”
-Cotu: “...No, you don’t.”
-Comet: “Hm! Our measures are about equal, currently. Let us settle this debate by the blade, champion.”
-Cotu: “Sure.”
-Alt script: Comet is more cold than sassy
-Comet: “So, you have chosen me to be your next opponent. A bold choice for a coward like yourself.”
-Cotu: “...”
-Comet: “Too afraid to talk back? Then I have but one request. Allow me to have this bout through to its chilling end. Don’t you dare run from me.”
-If the player exits the bout early, Comet will prevent them from trying again for a while
-Comet: “So you ran away. I will not entertain your attempts to insult me.”
 Make a Zelda-like big balls monster
 Dragon-robot head, 2 big balls as the neck
 Comes up from a hole in the ground
@@ -3679,405 +3727,41 @@ Attacks include throwing enemies at you and rolling its balls at you (it then re
 Allow player to change graphics settings
 Bloom
 Arena lore
-Duels between gods take place on a god arena, a special arena made by the creator of the universe
+Duels between gods take place in a realm room, a special arena made by the creator of the universe
 Each god has a body, soul, and realm
 A god arena automatically emulates the combination of realms of the gods who enter it
 The arena exhibits more traits of the more dominant realm, and exhibits them more strongly
-Cotu’s realm is very weak and passive, causing the arena to mostly conform to the realm of his opponent
-Marathon: fight all bosses in a row, only being able to refresh items every so often
-Player can only bring in a few items for each leg of the marathon
-Items can be replenished from storage after each leg
-There’s a break after each fight, and the player decides when to initiate the next one
-Hard mode option: Adds the Jester (see “Jester Boss: The Greatest Magician”)
-Sequence:
-Gauntlet Tower
-…
-Microwave
-Ultimate villain: Entropy aka Chaos
-“The Universe created you all by using me. And in exchange, I get to hunt you all down. One by one.”
-In the real universe, all life is born in order to convert the universe’s low entropy into high entropy at an accelerated rate.
-In Blazarang’s universe, all life is born using Entropy’s power (same as our reality). Whereas in our universe, entropy is simply the passage of time where our lives happen and then we die, in Blazarang’s universe, Entropy created the contenders to kill them eventually.
-Why does Entropy target the strongest first? The strongest have the most energy and therefore the most ordered structures. Destroying them means destroying the greatest sources of order, increasing the universe’s disorder the most.
-Why does Entropy want to kill everyone? It’s his life’s purpose: his art, and a game he finds fun. Entropy takes his role very seriously and greatly enjoys it; to the Big Bang, this universe is just a pet project
-Why is the “Universe” called the Universe? People call him that because he calls himself that. He calls himself the Universe (or the Voice of the Universe) because he thinks he’s the only ruler of the Universe
-The fact that everyone calls the Big Bang the Universe infuriates Entropy
-Entropy possesses the strongest champion like a ghost and uses them to slay other contenders
-Just for fun, Entropy may also possess a weaker champion whom he thinks has a chance of defeating the strongest, e.g. possessing Blaze to fight rank 3
-If the player fulfills the conditions for unlocking chaos, they unlock chaos damage, initiating their possession
-Current chaos condition: after starting a new game, the player visits 9 realms in a row without getting destroyed
-If not, Entropy possesses another contender. That contender then becomes the final boss, who acts the same as the original contender but can deal chaos damage (and possibly has other attacks or attack supplements)
-Final Boss A: Possessed Contender
-The player did not meet the conditions for unlocking chaos
-Current chaos condition: after starting a new game, the player visits 9 realms in a row without getting destroyed
-Entropy possesses a contender only after the player learns of the existence of Entropy and learns that Cotu’s traveling throughout the realms to train others on how to fight him
-The player should learn of Entropy’s existence early on
-The possessed contender acts the same as the original contender but can deal chaos damage (and possibly has other attacks or attack supplements)
-After defeating the possessed contender, Entropy tells the player (not Cotu) exactly how to get Entropy’s attention and unlock chaos damage
-Choices for possessed contender are WIP
-The Edge
-Non-choices for possessed contender:
-Blackstar: her love for her family is too strong
-Microwave: hates Entropy too much to be possessed
-Final Boss B: Player’s Choice
-The player met the conditions for unlocking chaos and either accepted it or failed to fight off the possession
-Entropy then forces Cotu (the player) to choose who to fight. After the player makes their choice, Entropy possesses Cotu. There is no discernable difference between Cotu pre and post possession (other than he stops talking/thinking for himself) and the possession itself has no visuals nor audio
-Entropy sees the free choice as a last act of kindness before the possessed vessel loses free will
-Why don’t other contenders come to help? Entropy created a barrier preventing all communication and travel to/from the chosen’s realm
-Potential dialogue:
-Cotu: “Chaos damage? But only Chaos can use Chaos damage…I was Chaos? This whole time?”
-Entropy: “Yes, as is everyone.”
-Final Boss C: ???
-The player met the conditions for unlocking chaos and fought off the possession, but didn’t meet the requirements for True X or The Hunter final bosses
-Final Boss D: True X
-The player met the conditions for unlocking chaos and fought off the possession, and the player defeated X on the first try this playthrough
-After Cotu defeats True X, X accepts chaos to try to defeat Cotu
-Final Boss E: The Hunter
-The player met the conditions for unlocking chaos and fought off the possession, and earned a super badge from every boss before then (doesn’t matter which playthrough they did it on)
-After failing to possess Cotu, Entropy possesses the contender with the best chance of defeating him
-Idea: the Seer
-One contender has the ability to see the future
-Whatever he genuinely believes will happen in the future is correct. This ability is used in the same way that a human uses their imagination, only the Seer is always correct
-The Seer can’t just imagine anything he wants and have that be the future (ie he doesn’t literally control the future)
-The Seer still has free will; he can imagine himself doing any action within his capabilities, then imagine the future that would happen if he did any of those actions
-Head is just a bunch of expressionless eyeballs
-Wears a mask that can emote
+Cotu’s realm is very weak and passive, causing the arena to conform entirely to the realm of his opponent
+Creation lore
+
+
 Plot Idea 1: Chaos Executes the Gods
-All gods know (or all gods are supposed to know) that an all-powerful being they call Chaos will possess one of them to fight one of the others
-How do they know this? The creator of the universe told them himself
-How does the creator know? This is what Chaos did to every single one of his earlier universes
-Cotu fights other top gods in the universe to prepare them to fight him, and to prepare himself to fight them. As Cotu, he is most likely to be possessed by Chaos
-Why is Chaos unpredictable? Chaos could possess someone other than Cotu if it believes that it’s a challenge to fight Cotu, or possess Cotu himself if it believes that Cotu is weaker than other gods and makes him more challenging to play as
-Before and during the events of the game, most of the strongest gods shed their power by destroying parts of themselves and refusing to regenerate them in their realms, leaving their realms unoccupied and filling the universe with the remains: stardust
-The gods you fight as Cotu are either selflessly keeping themselves powerful to protect the universe (8164, 3), are unaware that Chaos will possess the strong (mites), or don’t care/have some other motivation to be strong (2)
-Why is Cotu the captain of a crew of a ship? He needs his crew to transport him to people who request to fight him or people he requests to fight; he currently can’t transport himself
-Why is the rank 2 god (the microwave) aboard the ship if it can transport itself anywhere? To observe Cotu, analyze his opponents and give Cotu the intel mid-fight, and provide items to Cotu if he needs them. These items either prolong the fight (allowing Cotu to get more training in the same fight) or shorten the fight (allowing Cotu to train with others sooner)
-The microwave is only a small part of the bot’s true body. The rest of it is training against several gods at once
-Why doesn’t the microwave train with Cotu more often? Cotu doesn’t want to fight it, so you, the player, don’t have the option to fight it until late in the game
-Premise: Why do the events in the game happen?
-Cotu fights others and travels the universe for fun. This is the universe’s way of rewarding him before Chaos kills him
-He visits Blackstar to say hi
-He spars with X for fun
-He helps Ball Walker’s owner out of kindness
-He helps with the mites out of kindness; he really shouldn’t be dealing with them since they make life harder
-He fights the triplets for fun
-He fights Mike for closure
-Character Conversations: what are their motivations?
-Cotu and X
-X wants to have a long-term goal
-Cotu wants to know everything he can about his friends before he dies or kills someone
-Cotu: “X, what are your plans for the future?”
-X: “...I don’t know. I really don’t know. And that pisses me off. … But I know what I want for now. I want to keep being your friend. And hopefully beat you one day.”
-Cotu: “Oh, you’ve beaten me before.”
-X: “But I’m still not better than you. Not yet…maybe not ever.”
-Cotu: “Don’t underestimate yourself, friend.”
-X: “Don’t patronize me.” *sigh*
-X and Cotu
-X wants to get to know Cotu before he passes
-Cotu wants to share everything about himself before he passes
-X: “...Cotu?”
-Cotu: “You can call me Blaze, if you want.”
-X: “Blaze…why did you want to become champion?”
-Cotu: “...”
-Cotu: “The truth is, I love what I do.”
-Cotu: “Throwing the boomerangs, flying around, getting stronger, I loved all of it. That’s why I reset all my upgrades after winning the tournament…so I could unlock them all over again.”
-Cotu: “That tournament gave me the chance to be me, and pushed me to become the best version of myself. I was just lucky enough to win.”
-Cotu: “So the reason I became champion is really just selfish. I’d like to say I did it for others, and I do want to protect them, but that’s not the whole truth….I’m sorry. I thought you should know.”
-X: “...Cotu.”
-Cotu: “?”
-X: “I’m glad to have you as a friend.”
-Cotu: *smiles* “...Same here.”
-Cotu and Mite Monarchs
-Cotu wants to know everything he can about the universe before he dies or kills someone
-Mite monarchs want to cause as much havoc and mayhem as possible out of sheer pettiness from missing out in the tournament (WIP)
-Cotu: “Why are you doing this?”
-Queen: *bites Cotu*
-King: *shoots webs at Cotu*
-Cotu: “Ouch.”
-X and Blackstar
-X wants to have a long term goal. He looks up to Blackstar
-Blackstar wants to protect her family for as long as she can, but is unsure of herself
-X: “What’s your plan?”
-BS: “I’m creating as many different versions of ourself as I can, all at varying strength levels. So that maybe, instead of destroying our soul, it will destroy every individual body we make. That’s the plan, anyway. I still need to bargain with it and…get it to agree.”
-X: “...Are you sure this is going to work?”
-BS: “I don’t know if I have another choice. If you have a better idea, I’d love to hear it.”
-X: “...”
-BS: *motivational sendoff here*
+All gods know (or are supposed to know) that an all-powerful being they call Chaos will possess one of them to fight one of the others. Cotu fights other top gods in the universe to prepare them to fight him, and to prepare himself to fight them. As Cotu, he is most likely to be possessed by Chaos. The gods Cotu fights are either selflessly keeping themselves powerful to protect the universe (8164, 3), are unaware that Chaos will possess the strong (mites), or don’t care/have some other motivation to be strong (2)
 Issues with this plot:
-There is no motivation for any god to become stronger; only weaker, which is lame. This reason alone is enough to rework the plot
-Preparing to fight each other is not the only way to deal with the threat of Chaos. Can’t the gods just stop upgrading themselves, shed their power, or hide it? Chaos is supposed to represent death, which is inevitable. Chaos in this case is preventable
+Illogical — Preparing to fight each other is not the only way to deal with the threat of Chaos. The gods can also just stop upgrading themselves, shed their power, or hide it. This is what happened in real life with nuclear weapons: nations destroyed their nukes to prevent catastrophe. Chaos is supposed to represent death, which is inevitable. Chaos in this case is preventable. This reason alone is enough to rework the plot
+Lame — The best course of action for a god’s own survival and others’ is to become weaker, not stronger, which is lame
 Plot Idea 2: Cotu Loses His Power, and Others Try to Stop Him From Getting It Back
 Cotu loses his power somehow and goes on a quest to retrieve it before the next universe tournament
 Other gods either help Cotu or try to stop him
-Some gods look for his source(s) of power to hide, destroy, or use it/them
-Some gods try to kidnap Cotu and hold him captive until the next tournament ends
-Some gods try to intercept Cotu’s efforts to retrieve his power
-Greg and Cotu chilling after Cotu returns to full strength
-Greg is curious about why Cotu reset his powers
-Cotu is chilling
-Note: Cotu knows (or at least has a strong hunch) that the microwave is the runner up, but Greg doesn’t, likely because Cotu knows about the grudge and Greg is more optimistic
-Greg: “Hey, now that you’re back to full strength, I gotta know. Why’d you reset yourself in the first place?”
-Cotu: “...Mostly because I like the feeling of getting stronger.” Brief pause. Greg nods. “And I wanted to get away from the contenders. I didn’t want to get challenged by them as soon as I got out of the tournament.”
-Greg: “I thought you liked fighting.”
-Cotu: “I do. I just needed a break.”
-Greg: “...wouldn’t the other contenders also be on break?”
-Cotu: “Not all of them…some of them wanted to keep going.” Cotu’s tone becomes darker. “The runner up. It holds a grudge against me. I knew it would demand a rematch as soon as the tournament ended.”
-Greg: “Really? I didn’t think it would take it so personally.”
-Cotu: “It did. And now, it hates me. I hoped…” Cotu hesitates, embarrassed by what he’s about to say. “by the time I got back to full strength, it wouldn’t be mad anymore.”
-Greg: “Do you know? If it’s still mad?”
-Cotu: “I’m afraid to find out. But I’ll have to face it eventually. It deserves a rematch.”
-Greg: “No, dude. That win was fair and square. You don’t owe it anything.”
-Cotu: “I know. But I want to give it some closure.”
-Greg: *sigh* “...you’re a brave guy, Blaze. I hope things turn out ok.”
-Cotu: “...”
-Greg: “Actually wait, it hasn’t bothered us so far. The whole time while you were getting your strength back, it didn’t come check on you at all.”
-Cotu: “...”
-Greg: “Maybe it’s not so bad, eh?”
-Cotu: “...maybe not.”
-Greg and Cotu followup conversation about the runner up
-Greg is confused
-Cotu wants to explain
-Greg: “Did you know it was the microwave the whole time?”
-Cotu: “I predicted it was, but I wasn’t 100% sure.”
-Greg: “Damn.”
 Issues with this plot:
-Cotu is friends with some of the strongest gods. They would protect him. Even if they aren’t his friends, they have good morals and would ensure that Cotu is given a fair chance to compete. If I make the strongest gods bad guys, that goes against the casual, fun mood I’m going for. This reason alone is enough to rework the plot
+Cotu is friends with some of the strongest gods. They would protect him. Even if they aren’t his friends, they have good morals and/or are competitive, so they would ensure that Cotu is given a fair chance to compete. If I make the strongest gods bad guys, that goes against the casual, fun mood I’m going for. This reason alone is enough to rework the plot
 Why do Cotu’s opps take this tournament so seriously? They’re gods, they don’t need the prize(s) to survive. Maybe they’re petty and want to win no matter what, but are there really going to be so many petty gods that they can fill up the first half of the game?
 Plot Idea 3A: Trip to the Gala (labeled 3A to differentiate from 3B, which has major changes)
-Cotu loses his power on purpose to go on vacation with his friends without being bothered by other contenders OR to fight weaker opponents fairly. Cotu trains with others in his weakened form to get strong enough to fight in the exhibition gala, the last big combat event before the next tourney. Throughout the course of the game, he travels to the gala and eventually competes in it
+Cotu loses his power on purpose to go on vacation with his friends without being bothered by other contenders OR to fight weaker opponents fairly OR to get strong all over again. Cotu trains with others in his weakened form to get strong enough to fight in the exhibition gala, the last big combat event before the next tourney. Throughout the course of the game, he travels to the gala and eventually competes in it
 The gala is a huge fighting competition organized purely for entertainment. Through it, the audience can see their favorite fighters in action again, and in matchups that never happened in the tournament and may never happen in serious competition due to power differences
-The gala has 2 phases: the mixaround, and mini-tournament
-Mixaround: casual matchup for all skill levels
-Low tiers fight top tiers, individuals fight teams, fighters eliminated early in the tournament get their chance to shine, fighters who were weak but improved a lot after the tournament get their chance to shine
-This is the equivalent of a casual martial arts competition with crazy matchups and everybody is in their prime, e.g. Demetrious Johnson vs Jon Jones (DJ is much smaller), Islam Makhachev vs Khabib Nurmagomedov (they’re best friends), Mike Tyson vs Muhammad Ali (2 of the best heavyweight boxers in history but from different eras), Tom Aspinall vs Valentina Shevchenko and Kayla Harrison (heavyweight champion vs 2 best women), Bruce Lee vs Jackie Chan vs Donnie Yen vs Jet Li (4 celebrity martial artist actors)
-Mini-Tournament: a small group consisting of the best fighters at the gala fight in a series of 1v1s. Instead of using an elimination bracket, a pre-determined set of matchups plays out according to what the fans voted for before the gala. In the mini-tournament, each fighter gets a performance score. Performance points are given for damaging, destabilizing, and destroying their opponents. Whoever has the most points at the end wins
-Sequence of fights (WIP):
-Neuro vs Tempered X
-Cotu vs Tempered X
-Cotu vs Blackstar
-The gala overall leans into all of the things human beings can’t do but gods can
-Fighters can sustain irreparable damage
-Fighters are all in their prime because the concept of a prime doesn’t exist for them (or if it does, it works completely differently from a human’s, e.g. a fighter repeatedly enters and exits their prime on a cyclical basis, a fighter’s body/performance is randomly determined)
-At the gala, he fights at least the following 2 gods:
-Tempered X, who wants to show the universe what he’s truly capable of after being eliminated unexpectedly early in the tournament
-Blackstar, who wants to prove that she’s ready for the tournament by fighting the champion
-Jester? Would be fun but can remove if out of scope
-Microwave possibly makes a surprise appearance? Maybe as a bonus event as in this timeline, Blackstar is the rank 2. Microwave was disqualified for making a deal with the Creator: incredible power in exchange for a tiny chance to critically malfunction
-On the trip, gods fight Cotu for various reasons
-Cotu asks the Gauntlet to train him, and they love fighting and helping others
-X fights to help Cotu get stronger before the gala
-Clarity’s body and realm are autonomous and attack anything that gets near them
-Triplets fight Cotu for fun
-(an idea for now) Mites are wild animals that want to spread and conquer (although they’re treated like fully sapient gods by other characters)
-(an idea for now) Future Blade wants to kidnap/sabotage Cotu to prevent him from fighting in the tourney
-Grow-a-gator helps Future Blade because he likes chaos
-Angels just want to play catch
-Some want the privilege of fighting the champion
-Some weaker gods are more motivated now that he’s closer to their level
-Pilot and Greg’s first scene: post-gauntlet variant 1
-Assumed game sequence for this scene: player starts the game in gauntlet, then either wins or loses to return to the ship. The following script is for a win
-Cotu’s feeling good but wants a bigger challenge
-Pilot and Greg want to congratulate Cotu for beating the gauntlet just after vacation
-Pilot is offscreen and speaking through the ship’s PA system
-Greg’s chilling leaning against a wall
-Cotu steps out of the portal from the gauntlet into the bridge
-Pilot: “Welcome back, Cotu. Congratulations for conquering the gauntlet!”
-Cotu smiles and chuckles
-Greg: “Hey, not bad for your first fight outta vacation.” Greg daps up Cotu.
-Cotu: “Thanks guys, but that was just the first variant of the gauntlet. And they were going easy on me.”
-Greg waves off Cotu, dismissing his modesty. “It’s still something dude. You were really moving out there. Haven’t seen you move like that since the tournament.”
-Pilot: “True that!”
-Cotu: “Maybe. But you can really compliment me when I fight the top fighters again. At the gala.”
-Pilot: “Ooh, someone’s excited. Unfortunately, it’ll be a while before we make it all the way back to the Center of the Universe. We traveled pretty far for this vacay.”
-Greg (quickly and quietly): “Worth it though.”
-Interestingly, Gemini interpreted this line as a point of tension, instead of just a quick sitcom-like insert like how I originally intended it. Gemini thought that there’s some controversial reason why the friends went on vacation that will be revealed later.
-Cotu: “Even so, I don’t know if I’ll have enough time to get back to full strength by the time we get there. I’ll have to train hard along the way.”
-Pilot: “We’ll do our best to help in any way we can, just give us the word!”
-Cotu: “*sigh*...I love you guys.”
-Greg: “Oh stop, you’ll make Pilot blush.”
-Pilot: “I already am. *squee*”
-Pilot and Greg’s first scene alternate dialogue: less talking
-Same setup as original dialogue
-Pilot: “Welcome back, Cotu. Congratulations on winning your very first fight since the tournament!”
-Cotu smiles and chuckles
-Greg: “You still got the moves.” Greg daps up Cotu.
-Cotu: “Thanks guys, but that was just the first variant of the gauntlet.”
-Pilot: “It’s still impressive, especially since it’s your very first fight since the tournament.”
-Greg: “What he said.”
-Cotu: “Maybe. But you can compliment me when I fight the top fighters again. At the gala.”
-Pilot: “Ooh, someone’s excited. Unfortunately, it’ll be a while before we make it all the way back to the Center of the Universe. We traveled pretty far.”
-Greg (quickly and quietly): “Worth it though.”
-Interestingly, Gemini interpreted this line as a point of tension, instead of just a quick sitcom-like insert like how I originally intended it. Gemini thought that there’s some controversial reason why the friends went on vacation that will be revealed later.
-Cotu: “Even so, I don’t know if I’ll have enough time to get back to full strength by the time we get there. I’ll have to train hard along the way.”
-Pilot: “We’ll do our best to help in any way we can, just give us the word!”
-Cotu: “*sigh*...I love you guys.”
-Greg: “Oh stop, you’ll make Pilot blush.”
-Pilot: “I already am. *squee*”
-Pilot’s first scene alternate scenario: Pilot’s by himself at first, then Greg and no name are introduced
-Assumed game sequence for this scene: player starts the game in gauntlet, then either wins or loses to return to the ship. The following script is for a win
-Cotu’s feeling good but wants a bigger challenge
-Pilot wants to congratulate Cotu for beating the gauntlet just after vacation
-Pilot is offscreen and speaking through the ship’s PA system
-Greg and no name are offscreen
-Cotu steps out of the portal from the gauntlet into the bridge
-Pilot: “Welcome back, Cotu. Congratulations for conquering the gauntlet!”
-Cotu smiles and chuckles
-Cotu: “Thanks, but that was just the first variant. And I’m pretty sure they were going easy on me.”
-Pilot: “Hey in all seriousness, it wasn’t bad for your first fight out of vacation. I haven’t seen you use moves like that since the tournament!”
-Cotu: “Maybe. But just you wait until I fight the top fighters again. At the gala. Then you’ll see some moves.”
-Pilot: “Well someone’s excited. Unfortunately, it’ll be a while before we make it all the way back to the Center of the Universe. We traveled pretty far for that vacay.”
-Cotu: “It was worth it though.”
-Said in a way that could be interpreted as a quick insert, but also as a foreboding line hinting at some hidden reason why the vacation was worth it
-Cotu: “But…I don’t know if I’ll have enough time to get back to full strength by the time we get there. I’ll have to train hard along the way.”
-Pilot: “We’ll do our best to help in any way we can, just give us the word!”
-Cotu: “*sigh*...I love you guys.”
-Pilot: “Oh stop, you’ll make me blush.”
-Cotu: “Where are the others anyway?”
-Pilot: “Oh, they’re still working on that training dummy I requested, but they should be done soon.”
-Cotu: “Where is it?”
-Pilot: “It’ll be in the big spare room to your right.”
-Cotu enters the room and sees Greg and no name getting attacked by the dummy. Chaos ensues. Possibly Cotu (the player) steps in to help
-…
-The dummy is eventually contained
-Greg: “All the stats’ll show up on the big screen. You can see your total damage dealt, damage per shot-”
-No name bumps Greg’s arm.
-Greg: “Huh? Oh damage per second, my bad. And uh, total number of hits. You can reset it with that button over there. And that’s pretty much it.”
-Idea: Cotu and X on the ship
-Cotu: “Hey, I just realized you’re not doing your teleporting tricks. You really do give a shit.”
-X: “Enjoy it while it lasts. At the gala, I’ll use everything.”
-Idea: X departs
-X: “You know…it pains me. Seeing you this weak, knowing what you’re capable of…”
-X collects himself for a moment: “If you’re not back to full strength by the time the gala begins,” X’s face ignites. “I will hurl you a hundred light years into the void.”
-X teleports out
-The Gauntlet and Blackstar
-Each variant of soldiers the gauntlet makes is also called an incarnation
-The gauntlet constantly strives to make new variants (i.e. the variants constantly strive to reincarnate); that is their sole purpose
-After enough training, experience, and grit from all of its soldiers, a new variant spawns from a gauntlet spawner. Almost all reincarnations occur after someone’s destruction, hence why they call it a reincarnation
-The gauntlet can spawn any member of any of its previous variants to help train the latest incarnation
-After Blackstar, the gauntlet has never made another variant, and she’s been the latest variant far longer than anyone else has
-Some people think Blackstar cannot reincarnate because she’s already perfect (X, Cotu, her ancestors)
-Blackstar knows she isn’t perfect and feels like a failure for not reincarnating longer than any of her ancestors
-Blackstar feels helpless because no matter how long and hard she trains, she doesn’t feel like she improved at all, and no new variant appears from the spawner. She has no idea what else to do to reincarnate
-This is made worse by the fact that many other gods have improved significantly after the tournament, but Blackstar hasn’t changed at all
-Blackstar thinks that if she ever feels proud of herself, she’ll lose all motivation to improve and truly fail
-Idea: Elite Gunner looks at Cotu’s upgrades
-Elite Gunner is happy, but also ashamed since her master isn’t making the same progress
-Cotu wants to know how the Gauntlet really feels
-EG: “[current upgrade name]. Already?” She sounds like a mixture between impressed and sad
-Cotu: “Is something wrong?”
-EG *shakes her head*: “No. Not at all. It’s impressive how fast you’ve made it this far.”
-Cotu: “Thanks.” Cotu senses something’s going on, but he’s not sure what. “But I’ve still got a long way to go before the gala.”
-EG takes another look at the upgrades. “Indeed.” *she looks at Cotu* “I’ll send this info to Master. Thank you for showing us this.”
-Cotu: “Of course.”
-EG: “Whatever you need, the Gauntlet will be right behind you.” She salutes to him
-Cotu nods. “See you soon.”
-Idea: after Blackstar’s battle with Cotu, he helps her accept that she’s done everything she can, and she should enjoy her life and all the friends and family she has. She then realizes that the only way to reincarnate is not to improve her skill or physical strength, but her soul. Each variant has its own unique skills, strength, and personality. The soul of the gauntlet, Blackstar’s soul, rejects Blackstar’s personality.j
-After the battle, Blackstar’s helmet is cracked open, revealing a less physically sharp, more relatable, expressive person within. Cotu talks casually with Blackstar until she comes to the realization. Mid-conversation, she suddenly stops responding to Cotu. The camera’s on Cotu and he’s looking away while waiting for her response. After a bit, he turns to check on her. The armor looks frail and withered, and has lost its glow. The person inside Blackstar’s armor looks at Cotu differently than she did, with a wide-eyed, curious expression.
-Cotu: “Hi.”
-???: “...hello.” Her voice sounds different from Blackstar’s. More childlike. She also looks different from the person who was just inside the armor. A bit smaller.
-Cotu: “Do you…recognize me?”
-???: *with slightly more energy* “You look familiar, but I’m not really sure.”
-Cotu: “Do you know Blackstar?”
-???: *delicately, almost reverentially* “Blackstar…I don’t know, but a part of me feels…like she’s really important.”
-Cotu: “She was…”
-???: “...” She looks at the armor she’s encased in, a little confused.
-Cotu: “Oh yeah. Let’s get you out of that armor.” Cotu pulls out his ax and charges it up.
-???: “Woah!” She looks scared, but excited. With a single slash, Cotu breaks open Blackstar’s withered armor, freeing ???
-??? looks up at Cotu with awe.
-???: “Hey, do you know how to fight?”
-Cotu: “What was that?”
-???: *energetically* “I don’t know why, but I feel like fighting someone. And you look like you know about fighting.”
-Cotu: “...How about I introduce you to someone who knows how to fight?”
-???: “Sure! Let’s go!”
-Cotu and ??? walk over to a gauntlet spawner.
-???: “So, how good is this person at fighting?”
-Cotu: “Really good. Actually, the best I’ve ever known.”
-???: “Wow…I hope they go easy on me!”
-Cotu opens its console and spawns in variant 3000: Blackstar.
-Cotu: “This will only take a moment.”
-???: “Okay.”
-Cotu and ??? wait for Blackstar to spawn as ??? looks on in wonder
-Blackstar falls from the spawner.
-???: “Woah, that’s the thing I was stuck in!”
-Blackstar immediately grapples to Cotu and ??? upon seeing them. ??? assumes a fighting stance.
-Blackstar stops right in front of ??? in complete shock. Unable to accept what she’s seeing, she turns to Cotu.
-Blackstar: “Cotu, who is this?”
-Cotu: “Gauntlet 2, Variant 1.”
-???: “That’s my name? It’s kinda weird.”
-Blackstar gazes at ??? in shock and awe, slightly trembling. Eventually she bends down on one knee.
-???: “Um, excuse me, Cuh-Cotu said we were going to fight…do you wanna fight?”
-Blackstar: “...” The background music swells.
-Blackstar pulls in ??? in a tight embrace. The music reaches a climax.
-???: “Uh, what’s going on? I’m confused. This doesn’t really feel like an attack.”
-Blackstar lets go and looks into ???’s eyes. “My people…our people crave battle. Here in this realm, there will be no shortage of enemies to kill.”
-???: “Really? That’s awesome!”
-Blackstar: “Yes, but before we begin, I have to thank my friend.”
-???: “O-okay.”
-Blackstar approaches Cotu, steps out of her armor, and they lovingly embrace.
-Blackstar: “I never would have done it without you.”
-Cotu: “You did it all yourself. I was just having fun.”
-Blackstar smiles and chuckles a bit. “Is that so?” She pulls away and looks into Cotu’s eyes, smiling beautifully. She looks at ???, who is staring at the pair confused.
-Blackstar: “Come see us again soon. I have to train the next incarnation, and I could use the help.”
-Cotu smiles warmly. “Will do.”
-Blackstar puts on a more serious expression as she steps back into her armor. “Kid.”
-???: “Me?”
-Blackstar: “Say goodbye to Cotu. He created you.”
-Cotu: “Huh?”
-???: “Wha? Uh, bye Cotu! Thanks for making me.”
-Cotu: “Goodbye, you two.”
-Blackstar: “Now.” Blackstar ensnares ??? in her cables and grapples into the distance. ??? starts screaming, then laughing.
-Cotu watches them go, then unnecessarily backflips back into the ship.
-Greg: “What’s with the unnecessary backflip?”
-Cotu: “I guess I’m in a bouncy mood.”
-Greg: “Aight buddy. Let’s calm down.”
-Ending ideas:
-Sad ending: the player doesn’t beat Blackstar
-Cotu is apologetic
-BS is sad but tries to look resilient and optimistic in front of Cotu
-She reminds him that the gala’s mostly just for fun, so she tells him to go have fun
-The triplets reassure Cotu that he did his best
-Since most Gauntlet reincarnations happen immediately after one of their bodies is destroyed, Blackstar destroys herself in numerous ways numerous times before the next tournament, which she then loses surprisingly early. The Gauntlet still tries to help other competitors but gets phased out since everyone else’s strength outclasses it. It gets sidelined
-Good ending: either the player beats or doesn’t beat Blackstar and she does or doesn’t reincarnate. Regardless, she doesn’t pressure herself anymore
-BS asks Greg if he wants to hang out sometime
-Things that stay the same regardless of ending
-X still struggles to find satisfaction in life, so he decides to travel with the triplets and help them find their realm while he figures things out
-His struggle is that his goal is to win the tournament, but he just isn’t strong or smart enough
 Issues with this plot: see issues with Plot Idea 3B
 Plot Idea 3B: Trip to the Gala B
 Same as Plot Idea 3A, but with some major changes
 The general concept is the same: Cotu trains with others in his weakened form to get strong enough to fight in the exhibition gala, the last casual combat event before the next tourney. Throughout the course of the game, he travels to the gala and eventually competes in it
-After the tourney, Cotu lost his power naturally as a function of his body instead of on purpose
-Why would Cotu get rid of his own powers without pressure from Mike? It doesn’t make sense for Mike to pressure him bc Blackstar would defend Cotu’s actions
-After more thought, it does make sense for Cotu to get rid of his own powers if being able to fight weaker people meant more to him than winning competitions
-The triplets don’t travel with Cotu to the gala
-There’s now a contrast between the dark desolate nothingness and danger of the pre-gala journey and the fun of the gala
-The triplets are now a reward for making it to the gala instead of an accompaniment useless to the story
-The triplets and X playing cards is still possible, and it makes more sense here bc it’s a social event
+The triplets don’t travel with Cotu to the gala since they don’t contribute to the narrative
 The player has a limited amount of time, not time+stabilizers, to get to the gala. At the gala, the player can use the remaining time to do practice fights with gods before the real fights
 Stabilizers are no longer a precious resource usable by everyone; they’re a powerful tool exclusive to Cotu, which simplifies lore and eases player comprehension
-Inspired by long-term time management from Persona 5, where the player must balance using the time for IRL vs in-palace progression
 (If within scope) Cotu can meet Clarity along the way, and Cotu wants to get Clarity to the gala before she melts so that she can make new friends. The player must now balance getting Clarity to the gala quickly and spending time pre-gala getting stronger. Unbeknownst to Cotu (and the player on the first run), getting Clarity to the gala saves her life
-Making companion characters other than Clarity is probably not worth the time and effort
-At the gala, he fights at least the following 2 gods:
-Tempered X, who wants to show the universe what he’s achieved
-Blackstar, who wants to prove that she’s ready for the tournament by fighting the champion
-Jester? Would be fun but can remove if out of scope
-Microwave possibly makes a surprise appearance? Maybe as a bonus event as in this timeline, Blackstar is the rank 2. Microwave was disqualified for making a deal with the Creator: incredible power in exchange for a tiny chance to critically malfunction
-On the trip, gods fight Cotu for various reasons
-Cotu asks the Gauntlet to train him, and they love fighting and helping others
-X fights to help Cotu get stronger before the gala
-Clarity’s body and realm are autonomous and attack anything that gets near them
-Triplets fight Cotu for fun
-(an idea for now) Mites are wild animals that want to spread and conquer (although they’re treated like fully sapient gods by other characters)
-(an idea for now) Future Blade wants to kidnap/sabotage Cotu to prevent him from fighting in the tourney
-Grow-a-gator helps Future Blade because he likes chaos
-Angels just want to play catch
-Some want the privilege of fighting the champion
-Some weaker gods are more motivated now that he’s closer to their level
 Issues with Plot Ideas 3A and 3B:
 The gala is a casual competition, and nobody (which includes the player and the fighters) cares about competitions unless the rankings are official
 Plot Idea 3C: Trip to the Gala C
 Same as Plot Idea 3A, but with some major changes
-The general concept is the same: Cotu trains with others in his weakened form to get strong enough to fight in the gala, then eventually competes in it. The primary difference here is that the gala is no longer a casual event; it is an official event to determine rankings
+The general concept is the same: Cotu trains with others in his weakened form to get strong enough to fight in the gala, then eventually competes in it. The primary difference here is that the gala is no longer a casual event; it is an official event to determine rankings OR is one of a select number of galas throughout the universe to qualify for the tournament
 I was wondering why I couldn’t get as emotionally invested in the gala as much as UFC fights, and I thought maybe it’s because the gala is unranked. I imagined what it’d be like if a UFC fight were also unranked and realized that I would care about it a lot less, and so would the fighters
 Why is it still called a gala? The gala can still be a name for an official sporting event, e.g. the Golden Gala
 Idea: the tournament was originally called “the tournament” because the creator of the universe only imagined it as a tournament, nothing more. Afterward, the gods agreed that they may add other events to the tournament, so they renamed it to “the gala”
@@ -4089,10 +3773,9 @@ An investigation into the mystery might be good for a DLC or sequel, as an inves
 Mike helps investigate since it considers the power stealing a threat, and Mike doesn’t seem interested in the gala for whatever reason (it’s too strong for anyone in the gala)
 Cotu removed them on purpose to interact with weaker gods OR because he became so strong after the tournament that he thought he would easily dominate other gods in future tourneys
 This kinda removes the stakes since we know Cotu’s capable of beating everyone. It also sounds like cheap fanservice power fantasy, which may make the player roll their eyes
-Cotu still travels alone (which is also healthy for scope)
+Cotu removed them on purpose because he likes the journey from the bottom to the top. It’s sort of like starting Elden Ring over again from the beginning to see how much of it you can do better. You’ll be surprised just how quickly you can beat the game on the second run since you know how to beat the bosses
+Who Cotu travels with is kept ambiguous by the fact that the player only sees the current level menu (the catalogue of available fighters at the realm Cotu is currently in), not Cotu’s ship or any other hub world
 The player must still use their time wisely to get as strong as possible before the gala begins, a la Persona 5
-(If within scope) Cotu can still meet Clarity along the way and get her to the gala as a side quest
-Making companion characters other than Clarity is probably not worth the time and effort
 On the trip, gods fight Cotu for various reasons
 Gauntlet loves to train people
 Gauntlet has the added bonus of having a ton of fighters at different skill and power levels who aren’t participating in the gala
@@ -4127,32 +3810,9 @@ Turbo Jester (?)
 Fire Dancer (?)
 Plot Idea 4: Nothing (Minimal Plot)
 Cotu trains with others in his weakened form, but only to make himself stronger, not for a competition. As he progresses through the gyms, word spreads that the champion is getting back into fighting, and more and more people flock to the gyms to see him fight. Eventually, he unintentionally gathers a huge following after training at Gauntlet Central, and the Gauntlet organizes an unofficial mock tournament among the gods there just for fun
-Who Cotu travels with is kept ambiguous by the fact that the player only sees the current level menu (the catalogue of available fighters at the realm Cotu is currently in), not Cotu’s ship or any other hub world
-Gym progression is the same as Plot Idea 3C
-Gym 1: Beginners and Casuals
-Gauntlet Variant 1, the gentle guides
-Jab Crab, a nervous beginner who’s unsure of what his long term plans are for fighting
-Mite Queen, who fights as a fun hobby
-Gym 2: Bullies and Ambitious Rising Stars
-Grow-a-Gator
-Grow-a-Gator’s victims
-Elite Gunner and Sentinel, the cool managers/coaches
-Gauntlet Central: Competitive Elite Athletes
-Future Blade, a self-deprecating drag queen
-Fire Dancer (?)
-Tempered X
-Triplets, weaker folks who don’t really fit in here but want to explore their full potential by training with Turbo Jester
-Gala: Championship Contenders
-Neuro
-Blackstar
-Turbo Jester (?)
-Fire Dancer (?)
-Not Applicable (fighters who aren’t training or competing)
-Clarity, an autonomous being that attacks anything nearby
-Mites, wild animals that want to spread and conquer in the absence of their queen, who left them with a babysitter who got captured
-Angels, folks who just want to play catch
-Mike, who wants to use the next strongest god as a test subject for its military
-Issue: since the gala’s scheduled according to Cotu’s pace, there’s no longer a time limit, which means there’s no more overarching anxiety, long-term strategy, nor replayability
+Issues with this plot:
+Since the gala’s scheduled according to Cotu’s pace, there’s no longer a time limit, which means there’s no more long-term strategy, overarching anxiety, nor replayability
+Just like with Plot Ideas 3A and 3B, the gala is a casual competition, and nobody (which includes the player and the fighters) cares about competitions unless the rankings are official
 Character interactions that are the same regardless of plot
 Idea: Sean Strickland god overhears Future Blade and his friends gossiping about him and starts beef
 After fighting FB, Sean god becomes friends with him because he respects him as a fighter
