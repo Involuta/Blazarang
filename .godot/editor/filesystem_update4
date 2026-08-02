@@ -6,8 +6,7 @@ res://shaders/ring_appear.gdshader
 res://ui/flash.gdshader
 res://ui/glitch.gdshader
 res://glb_meshes/snowflake_particle_mesh.res
-res://enemies/enemy_anims/clarity_infuse_left.res
-res://enemies/enemy_anims/clarity_left_slice_from_infuse.res
+res://enemies/enemy_anims/clarity_jumpshot_towalkleft.res
 res://shaders/black_outline.gdshader
 res://enemies/clarity_arm_shard.gdshader
 res://glb_meshes/long_hexagon_particle_mesh.res
@@ -16,6 +15,7 @@ res://shaders/smoke.gdshader
 res://GPUTrail-main/shaders/trail_draw_pass.gdshader
 res://GPUTrail-main/defaults/texture.tres
 res://GPUTrail-main/defaults/curve.tres
+res://enemies/enemy_anims/snowflake_jumpshot.res
 res://rang/roserang_shader.tres
 res://glb_inherited_scenes/outline.gdshader
 res://glb_inherited_scenes/black_outline.gdshader
@@ -34,6 +34,7 @@ res://shaders/sobel_outline.gdshader
 res://enemies/snowflake_link_outline.gdshader
 res://enemies/ground_glow.gdshader
 res://enemies/clarity_dress_shard.gdshader
+res://enemies/clarity.gd
 res://levels/snow_level/snow_level_test_env.tscn
 res://glb_inherited_scenes/snowflake_entity_meshes.tscn
 res://cotu/cotu_cb_main.tscn

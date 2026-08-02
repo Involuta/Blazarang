@@ -471,11 +471,14 @@ func queue_arm_attack():
 						# Prevent arm and snowflake attacks from being chosen during the attack
 						switch_to_stop()
 						play_anim_all_dress_shards(chosen_attack)
-					# Play snowflake arm raise anim
-					snowflake_hexagon_anim_player.play("TriggerArmRaise")
-					await snowflake_hexagon_anim_player.animation_finished
-					# Play arm anim
-					arm_anim_player.play(chosen_attack)
+						arm_anim_player.play(chosen_attack)
+						# JumpShot always occurs after RegenShards. Snowflake's anim tree calls funcs to start JumpShot
+					else:
+						# Play snowflake arm raise anim
+						snowflake_hexagon_anim_player.play("TriggerArmRaise")
+						await snowflake_hexagon_anim_player.animation_finished
+						# Play arm anim
+						arm_anim_player.play(chosen_attack)
 		PHASE.PHASE2:
 			pass # pass until phase2 is confirmed to exist
 
@@ -489,7 +492,7 @@ func choose_attack(attack_chances) -> String:
 	return attack_chances.keys()[0]
 
 func start_arm_attack():
-	# Without this await, the animation player would call end_attack at the end of the previous animation on the exact same frame as when the AnimationPlayer.play func is called below. Since an animation was currently in progress, the func call would do nothing, leaving the enemy in ATTACK mode but with no animation playing to free it from ATTACK mode, causing it to stand still indefinitely
+	# Without this await, the animation player would call end_arm_attack at the end of the previous animation on the exact same frame as when the AnimationPlayer.play func is called below. Since an animation was currently in progress, the func call would do nothing, leaving the enemy in ATTACK mode but with no animation playing to free it from ATTACK mode, causing it to stand still indefinitely
 	await get_tree().physics_frame
 	arm_attacking = true # Prevent another arm attack from being queued
 	aiming_at_target = true
@@ -590,6 +593,11 @@ func wait_raised_left():
 		arm_anim_player.play("InfuseLeft")
 		await arm_anim_player.animation_finished
 		arm_anim_player.play("LeftSliceFromInfuse")
+
+# Called by snowflake anim player in its JumpShot anim
+func start_jump_shot_anim():
+	play_anim_all_dress_shards("JumpShotToWalkLeft")
+	arm_anim_player.play("JumpShotToWalkLeft")
 
 func jump_shot_mvmt():
 	switch_to_special()
