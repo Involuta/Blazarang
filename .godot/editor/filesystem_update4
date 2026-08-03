@@ -39,3 +39,5 @@ res://levels/snow_level/snow_level_test_env.tscn
 res://glb_inherited_scenes/snowflake_entity_meshes.tscn
 res://cotu/cotu_cb_main.tscn
 res://enemies/clarity_infused_slice_hitbox.tscn
+res://enemies/flat_hexagon.tscn
+res://enemies/ice_sprite_spawner.tscn

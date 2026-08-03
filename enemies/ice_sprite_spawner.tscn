@@ -1,0 +1,200 @@
+[gd_scene load_steps=5 format=3 uid="uid://bg48lfbn1h34h"]
+
+[ext_resource type="PackedScene" uid="uid://c35irt0wpfa0g" path="res://enemies/flat_hexagon.tscn" id="1_fa0ep"]
+
+[sub_resource type="Animation" id="Animation_epxs3"]
+resource_name = "UndulateLoop"
+length = 1.20001
+loop_mode = 1
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlatHexagon1:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FlatHexagon2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.5, 0.5, 0.5), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1), Vector3(0.5, 0.5, 0.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FlatHexagon3:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.666667, 0.666667, 0.666667), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1), Vector3(0.666667, 0.666667, 0.666667)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FlatHexagon4:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FlatHexagon5:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.667, 0.667, 0.667), Vector3(1, 1, 1), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(0.667, 0.667, 0.667)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("FlatHexagon6:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.4, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.333, 0.333, 0.333), Vector3(1, 1, 1), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(0.333, 0.333, 0.333)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("FlatHexagon1:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(3.14159, 3.48787e-16, 3.48787e-16)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("FlatHexagon2:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1.20001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-3.14159, 3.48787e-16, 3.48787e-16)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("FlatHexagon3:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(3.48787e-16, 3.48787e-16, 1.5708), Vector3(3.48787e-16, 3.14159, 1.5708)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("FlatHexagon4:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(3.48787e-16, 3.48787e-16, 1.5708), Vector3(3.48787e-16, -3.14159, 1.5708)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("FlatHexagon5:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.5708, -1.75238e-05, 0), Vector3(4.71239, 3.48787e-16, 3.48787e-16)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("FlatHexagon6:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.5708, 3.48787e-16, 3.48787e-16), Vector3(-1.5708, 3.48787e-16, 3.48787e-16)]
+}
+
+[sub_resource type="Animation" id="Animation_lctmp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlatHexagon5:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5708, -1.75238e-05, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_osngl"]
+_data = {
+"RESET": SubResource("Animation_lctmp"),
+"UndulateLoop": SubResource("Animation_epxs3")
+}
+
+[node name="IceSpriteSpawner" type="Node3D"]
+transform = Transform3D(1, -1.83891e-16, 1.83891e-16, 1.83891e-16, 1, -1.83891e-16, -1.83891e-16, 1.83891e-16, 1, 0, 0, 0)
+
+[node name="FlatHexagon1" parent="." instance=ExtResource("1_fa0ep")]
+transform = Transform3D(2.08165e-12, 0, 0, 0, 2.08165e-12, 0, 0, 0, 2.08165e-12, 0, 0, 0)
+
+[node name="FlatHexagon2" parent="." instance=ExtResource("1_fa0ep")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="FlatHexagon3" parent="." instance=ExtResource("1_fa0ep")]
+transform = Transform3D(-2.91409e-08, -0.666667, 2.32525e-16, 0.666667, -2.91409e-08, -2.32525e-16, 2.32525e-16, 2.32525e-16, 0.666667, 0, 0, 0)
+
+[node name="FlatHexagon4" parent="." instance=ExtResource("1_fa0ep")]
+transform = Transform3D(-4.37114e-08, -1, 3.48787e-16, 1, -4.37114e-08, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, 0, 0, 0)
+
+[node name="FlatHexagon5" parent="." instance=ExtResource("1_fa0ep")]
+transform = Transform3D(0.667, -1.16884e-05, 5.10914e-13, 0, -2.91555e-08, -0.667, 1.16884e-05, 0.667, -2.91555e-08, 0, 0, 0)
+
+[node name="FlatHexagon6" parent="." instance=ExtResource("1_fa0ep")]
+transform = Transform3D(0.333, 0, -5.0769e-24, -5.0769e-24, -1.45559e-08, -0.333, 0, 0.333, -1.45559e-08, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_osngl")
+}

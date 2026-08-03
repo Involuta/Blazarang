@@ -1,9 +1,9 @@
+AnimationPlayer
 GPUParticles3D
 MeshInstance3D
 CollisionShape3D
 Hitbox
 DamageOverTimeArea
-AnimationPlayer
 Node3D
 Sprite3D
 Area3D
