@@ -1,3 +1,4 @@
+AnimationTree
 AnimationPlayer
 GPUParticles3D
 MeshInstance3D
@@ -8,7 +9,6 @@ Node3D
 Sprite3D
 Area3D
 EnemyHurtbox
-AnimationTree
 GPUTrail3D
 Trail3D
 FogVolume
