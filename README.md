@@ -1,4 +1,4 @@
-Blazarang Ideas Doc Aug 2 2026
+Blazarang Ideas Doc Aug 3 2026
 
 Production Processes
 
@@ -1834,6 +1834,12 @@ Reconsider whether the player should be able to restabilize during the invincibi
 Currently, if the player destabilizes, there’s absolutely no skill involved in restabilizing. If you use a stabilizer during the invincibility period, you’re right back to normal. Wouldn’t it be more thrilling and challenging if the player had to wait until they were vulnerable again before being able to use a stabilizer?
 I still like the idea of being able to use a stabilizer while you’re still stable in order to become invincible temporarily (e.g. during a grab), but wouldn’t it be confusing or nonsensical to the player if the stabilizer was usable all the time except that brief period right after destabilization?
 Perhaps at the start of the game, stabilizers should only be usable when destabilized. Eventually, you can upgrade yourself so that stabilizers give a boost of some kind? Although this feels like scope creep and you might need to keep it simple, silly
+
+Idea: ax counterstrike — the ax melee attack makes you briefly invincible, and its damage significantly increases if an enemy is hit at some point during the attack (i.e. the enemy hit by the ax receives damage a second time). Startup, invincibility/reflection time window, and endlag are similar if not identical to Ganondorf’s forward smash attack in Smash Ultimate
+Slash is a wide diagonal slash
+Doing another slash immediately after makes Cotu raise the ax and slash the same way in the opposite direction. Basically a 2-slash looping combo
+Unlockable Skill
+“Ax Counterstrike”
 
 Make Different Game Mechanics Intersect; to create depth, you should be able to use multiple skills simultaneously
 Vid on Interesting Mechanics vs Depth: https://www.youtube.com/watch?v=Fuf_SpKCYVY
@@ -3930,10 +3936,10 @@ Pilot: “Cotu, you should try some mortal activities! I highly recommend sleepi
 Cotu: “What’s sleeping?”
 …
 Greg and Cotu chilling (can be cut to save animation time)
-Greg: “I’ve been doin’ some training with no name.” Greg bounces on his feet, prepping himself. “Ready?”
+Greg: “No name told me it’s all about the footwork.” Greg bounces on his feet, prepping himself. “Ready?”
 Cotu: “Yep.”
 Greg: “Alright! Take THIS!”
-Greg winds up a huge right cross, then hurls it right into Cotu’s face. The punch is strong, but imperfect, slightly clumsy. Cotu reels back a bit and loses about 15-20% of his stability
+Greg winds up a huge overhand right, then hurls it right into Cotu’s face. The punch is strong, but imperfect, slightly clumsy. Cotu reels back a bit and loses about 15-20% of his stability
 Cotu: “Urgh, not bad.” He takes a second to recover. “Now, my turn.”
 Greg: “Alright, champ, show me what you got.”
 Cotu steps back a few steps and crouches down, then runs to Greg as Greg worriedly tenses up. Cotu delivers a massive straight punch from below directly to Greg’s jaw. Greg’s head is knocked back a bit, but his feet remain planted.
@@ -3942,8 +3948,8 @@ Cotu has a surprised expression on his face. He looks at Greg’s face, then to 
 Cotu: “Argh!”
 Greg: “Oh crap!”
 Cotu’s streaks disappear as he naturally heals the damage
-Greg: “Welp. I guess your vessel’s not really meant for hand-to-hand, huh.”
-Cotu: “Guess not, but I wasn’t expecting it to be this weak….”
+Greg: “Welp. I guess your body’s not really meant for hand-to-hand, huh.”
+Cotu: “Guess not, but I wasn’t expecting to be this weak….”
 Greg: “...my bad, dude. I shouldn’t have let you try it.”
 Cotu: “No. I’m bad.”
 Greg and Cotu chilling
@@ -3952,9 +3958,9 @@ Cotu: “Hey Greg.”
 Greg: “What up?”
 Cotu: “You and Pilot picked your own names, right?”
 Greg: “Heck yeah we did.”
-Cotu: “Out of all the names in the universe, why’d you settle on the name ‘Greg’”?
+Cotu: “How’d you settle on the name ‘Greg’”?
 Greg: “Simple. It was either that or Josh, and there was no way I was gonna be Josh, so it had to be Greg.”
-Cotu: “...er, why were those the only 2 options?”
+Cotu: “...why were those the only 2 options?”
 Greg looks at Cotu like he’s crazy.
 Greg: “You serious?”
 Cotu: “...”
@@ -3968,7 +3974,7 @@ Pilot: “No, see, *explanation*”
 Greg: “Oooohhhh, bruhhhhhh…” Greg slumps over in his chair.
 Cotu suddenly arrives on the ship in a hurry and looks at Greg.
 Cotu: “Pilot, I need your help with something.”
-Pilot: “Sure thing, captain. What seems to be the problem?”
+Pilot: “Sure thing, what seems to be the problem?”
 Cotu: “It’s something with the-”
 Greg suddenly jolts awake and yells: “BAH!!!”
 Cotu screams “AAAHHH!!!!” and jumps back
@@ -4069,6 +4075,33 @@ Greg in his thoughts: “*sigh* She’s way outta my league, I’m not even gonn
 Greg approaches Blackstar
 Greg: “Sup, Blackstar, welcome to the ship.”
 Blackstar: “...hi.”
+Cotu and Pilot talking about the future
+Pilot’s unsure of what to do with his life, and he’s scared of not knowing
+Cotu always lives life in the present and enjoys what he does
+Pilot: “This is…kind of a big question, but…”
+Cotu looks at Pilot. “It’s alright, you can tell me.”
+Pilot: “Have you ever thought about…what you’re going to do with the rest of your life?”
+Cotu: “Yeah. I’ll compete. And I’ll win. Or lose.”
+Pilot: “But…aren’t you going to get bored of that eventually?”
+Cotu: ?
+Pilot: “We’re going to live for billions of years. With that amount of time, eventually, we’re going to lose interest in everything we do. So, what’s the point in-”
+Cotu: “Maybe I’ll lose interest in fighting. If that happens, I’ll move on to the next thing. Then if I get bored of that, I’ll move on to the next, then the next, then…I’ll just keep going, until the universe ends and we all die.”
+Pilot: “What if we run out of things to do?”
+Cotu is staring into the distance. He looks scared and sad for just a moment. “I’ve thought about that before.” He looks at Pilot. “It’s a scary thought.” He processes for a bit. “And to be honest, that might happen. But look around.”
+Camera cuts to wide shot
+Cotu: “Things are constantly changing. The Gauntlet’s building new roads. Mike’s developing new technology. Everybody’s moving around and getting new powers, and we still have yet to explore every part of the universe. We’re always going to do new things and find new ways to entertain ourselves.”
+Pilot: “...”
+Cotu: “Being a god means more than just living a really long time. It means changing and growing and evolving throughout our whole lives. It’s possible that we’ll run out of things to do, but there’s so many reasons to have hope that that won’t happen.”
+Pilot: “That’s true. Everything you said is true. There’s a lot to do, and more things will keep coming.”
+Cotu smiles.
+Pilot: “But, umm,”
+Cotu raises an eyebrow.
+Pilot: “I’m sorry, I don’t mean to come off as negative or anything-”
+Cotu: “Oh don’t worry about that. It’s helpful to think about these sorts of things.”
+Pilot nods. “I just think…if you keep moving on to new things, will anything feel ‘new’ anymore? Are you still going to enjoy what you do?”
+[Pilot realizes just how negative he’s really being; he’s arguing against the concept of joy itself]
+[Cotu forgives him since these are realistic thoughts; the future is long, and it’s scary to think about what could happen to their minds]
+[Pilot confesses his insecurity/jealousy of seeing the people around him, e.g. Cotu, X, and Greg, get new powers while he stays the same]
 Idea: Greg and Jester discussing magic
 Greg wants to learn about magic to help him and his brothers become competitively viable in future 
 Jester’s teaching Greg because she’s passionate about magic (and maybe she likes him)
