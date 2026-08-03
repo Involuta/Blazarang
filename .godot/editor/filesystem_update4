@@ -41,3 +41,4 @@ res://cotu/cotu_cb_main.tscn
 res://enemies/clarity_infused_slice_hitbox.tscn
 res://enemies/flat_hexagon.tscn
 res://enemies/ice_sprite_spawner.tscn
+res://enemies/ice_sprite_spawner.gd

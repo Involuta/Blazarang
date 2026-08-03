@@ -1,12 +1,12 @@
 [gd_scene load_steps=5 format=3 uid="uid://bg48lfbn1h34h"]
 
 [ext_resource type="PackedScene" uid="uid://c35irt0wpfa0g" path="res://enemies/flat_hexagon.tscn" id="1_fa0ep"]
+[ext_resource type="Script" path="res://enemies/ice_sprite_spawner.gd" id="1_p5m4w"]
 
 [sub_resource type="Animation" id="Animation_epxs3"]
 resource_name = "UndulateLoop"
 length = 1.20001
 loop_mode = 1
-step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -137,7 +137,7 @@ tracks/10/keys = {
 "times": PackedFloat32Array(0, 1.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(1.5708, -1.75238e-05, 0), Vector3(4.71239, 3.48787e-16, 3.48787e-16)]
+"values": [Vector3(1.5708, 1.5708, -1.5708), Vector3(-1.5708, 1.5708, -1.5708)]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
@@ -149,32 +149,16 @@ tracks/11/keys = {
 "times": PackedFloat32Array(0, 1.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(1.5708, 3.48787e-16, 3.48787e-16), Vector3(-1.5708, 3.48787e-16, 3.48787e-16)]
-}
-
-[sub_resource type="Animation" id="Animation_lctmp"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("FlatHexagon5:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1.5708, -1.75238e-05, 0)]
+"values": [Vector3(1.5708, -1.5708, 1.5708), Vector3(-1.5708, -1.5708, 1.5708)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_osngl"]
 _data = {
-"RESET": SubResource("Animation_lctmp"),
 "UndulateLoop": SubResource("Animation_epxs3")
 }
 
 [node name="IceSpriteSpawner" type="Node3D"]
-transform = Transform3D(1, -1.83891e-16, 1.83891e-16, 1.83891e-16, 1, -1.83891e-16, -1.83891e-16, 1.83891e-16, 1, 0, 0, 0)
+script = ExtResource("1_p5m4w")
 
 [node name="FlatHexagon1" parent="." instance=ExtResource("1_fa0ep")]
 transform = Transform3D(2.08165e-12, 0, 0, 0, 2.08165e-12, 0, 0, 0, 2.08165e-12, 0, 0, 0)
@@ -189,12 +173,13 @@ transform = Transform3D(-2.91409e-08, -0.666667, 2.32525e-16, 0.666667, -2.91409
 transform = Transform3D(-4.37114e-08, -1, 3.48787e-16, 1, -4.37114e-08, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, 0, 0, 0)
 
 [node name="FlatHexagon5" parent="." instance=ExtResource("1_fa0ep")]
-transform = Transform3D(0.667, -1.16884e-05, 5.10914e-13, 0, -2.91555e-08, -0.667, 1.16884e-05, 0.667, -2.91555e-08, 0, 0, 0)
+transform = Transform3D(-0.667, -5.8311e-08, -2.91555e-08, 2.91555e-08, 1.27443e-15, -0.667, 5.8311e-08, -0.667, 1.27443e-15, 0, 0, 0)
 
 [node name="FlatHexagon6" parent="." instance=ExtResource("1_fa0ep")]
-transform = Transform3D(0.333, 0, -5.0769e-24, -5.0769e-24, -1.45559e-08, -0.333, 0, 0.333, -1.45559e-08, 0, 0, 0)
+transform = Transform3D(-0.333, 2.91118e-08, 1.45559e-08, -1.45559e-08, 6.36258e-16, -0.333, -2.91118e-08, -0.333, 6.36258e-16, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "UndulateLoop"
 libraries = {
 "": SubResource("AnimationLibrary_osngl")
 }
