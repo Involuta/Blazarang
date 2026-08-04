@@ -104,6 +104,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 var transparent_mat := preload("res://textures/clear_tile.tres")
 var infused_slice_hitbox := preload("res://enemies/clarity_infused_slice_hitbox.tscn")
+var ice_sprite_spawner := preload("res://enemies/ice_sprite_spawner.tscn")
 @onready var arm_anim_player := $ClarityArmMeshes/AnimationPlayer # Depends on Clarity.glb. Plays stagger anim after anim tree is set inactive
 @onready var mhp := $MeleeHitboxPivot
 @onready var arm_meshes := $ClarityArmMeshes # The ClarityMeshes associated with the arm
@@ -833,3 +834,9 @@ func spawn_infuse_slice_hitbox():
 	inst.look_at(target.global_position)
 	inst.rotation.x = 0
 	inst.rotation.z = 0
+
+func spawn_ice_sprite_spawner():
+	var inst = ice_sprite_spawner.instantiate()
+	level.add_child.call_deferred(inst)
+	await inst.tree_entered
+	inst.global_position = arm_shard_mesh.global_position

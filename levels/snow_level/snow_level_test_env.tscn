@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cvudwfcvq701b"]
+[gd_scene load_steps=16 format=3 uid="uid://cvudwfcvq701b"]
 
 [ext_resource type="Script" path="res://general_scripts/bg_camera.gd" id="1_536rm"]
 [ext_resource type="PackedScene" uid="uid://kl1hpr0grn1v" path="res://ui/ui_root.tscn" id="1_i7wjo"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://skntmavu4xsw" path="res://icon/icon.tscn" id="3_0wesa"]
 [ext_resource type="PackedScene" uid="uid://daj44qqb6dior" path="res://ui/health_bar.tscn" id="3_bfhsg"]
 [ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="4_y0ibd"]
-[ext_resource type="PackedScene" uid="uid://bg48lfbn1h34h" path="res://enemies/ice_sprite_spawner.tscn" id="8_7dq33"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o2vos"]
 sky_top_color = Color(0.396078, 0.462745, 0.560784, 1)
@@ -121,6 +120,3 @@ mesh = SubResource("PlaneMesh_2im7k")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/TestFloor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.05, 2.08165e-12)
 shape = SubResource("BoxShape3D_dfqnq")
-
-[node name="IceSpriteSpawner" parent="." instance=ExtResource("8_7dq33")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.55766, 19.381, 2.57211)

@@ -1,3 +1,5 @@
+OmniLight3D
+Node3D
 AnimationTree
 AnimationPlayer
 GPUParticles3D
@@ -5,7 +7,6 @@ MeshInstance3D
 CollisionShape3D
 Hitbox
 DamageOverTimeArea
-Node3D
 Sprite3D
 Area3D
 EnemyHurtbox
@@ -18,7 +19,6 @@ GPUParticlesAttractorVectorField3D
 NavigationRegion3D
 ClarityShardHurtbox
 Sprite2D
-OmniLight3D
 BossHurtbox
 NavigationAgent3D
 CharacterBody3D
