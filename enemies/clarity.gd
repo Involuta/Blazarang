@@ -49,6 +49,7 @@ var phase := PHASE.PHASE1
 
 @export var blizzard_safezone_base_radius := 15.0
 @export var blizzard_safezone_expanded_radius := 150.0 # Blizzard safezone expands on jumps
+@export var blizzard_safezone_ice_sprite_spawner_radius := 36.0 # When blizzard centers on ice sprite spawner
 var blizzard_safezone_radius := 15.0
 @export var safezone_expand_frames_jump_shot := 144
 @export var safezone_contract_frames_jump_shot := 360
@@ -105,6 +106,7 @@ var rng := RandomNumberGenerator.new()
 var transparent_mat := preload("res://textures/clear_tile.tres")
 var infused_slice_hitbox := preload("res://enemies/clarity_infused_slice_hitbox.tscn")
 var ice_sprite_spawner := preload("res://enemies/ice_sprite_spawner.tscn")
+@onready var blizzard_center : Node3D = self
 @onready var arm_anim_player := $ClarityArmMeshes/AnimationPlayer # Depends on Clarity.glb. Plays stagger anim after anim tree is set inactive
 @onready var mhp := $MeleeHitboxPivot
 @onready var arm_meshes := $ClarityArmMeshes # The ClarityMeshes associated with the arm
@@ -317,7 +319,9 @@ func body_face_position_directly(target_pos: Vector3):
 # Lerp val (float btwn 0 and 1) to be used for value transitions
 var cotu_dist_lerp_val := .5
 func _physics_process(delta):
-	var dist_to_cotu = cotu.global_position.distance_to(global_position)
+	body_light.global_position = blizzard_center.global_position
+	# dist_to_cotu only used for blizzard
+	var dist_to_cotu = cotu.global_position.distance_to(blizzard_center.global_position)
 	if dist_to_cotu > blizzard_safezone_radius:
 		blizzard_hitbox.process_mode = PROCESS_MODE_INHERIT
 	else:
@@ -619,53 +623,53 @@ func contract_blizzard_safezone_jump_shot():
 
 func env_autochange_frame(dist_to_cotu: float, delta: float):
 	# Keep dist to Cotu value within fog bounds
-		var clamped_cotu_dist = clampf(dist_to_cotu, min_fog_radius, max_fog_radius)
-		# Convert dist to Cotu to a float btwn 0 and 1 (lerp val)
-		var target_cotu_dist_lerp_val = remap(clamped_cotu_dist,
-		min_fog_radius, max_fog_radius,
-		0.0, 1.0)
-		# Move sample val toward the target so transitions happen smoothly
-		cotu_dist_lerp_val = move_toward(cotu_dist_lerp_val, target_cotu_dist_lerp_val, delta / 3)
-		
-		# Set fog density based on dist from Cotu
-		var min_fog_density := .01
-		var max_fog_density := .48
-		level_env.fog_density = lerpf(min_fog_density, max_fog_density, cotu_dist_lerp_val)
-		
-		# Repeat the above for sky and fog colors (0 is near, 1 is far)
-		# Sky top color
-		var sky_top_gradient = Gradient.new()
-		sky_top_gradient.set_color(0, Color("#65768f"))
-		sky_top_gradient.set_color(1, Color("#3c485a"))
-		sky.sky_top_color = sky_top_gradient.sample(cotu_dist_lerp_val)
-		# Sky/ground horizon color
-		var sky_horizon_gradient = Gradient.new()
-		sky_horizon_gradient.set_color(0, Color("#5a6c82"))
-		sky_horizon_gradient.set_color(1, Color("#1d2730"))
-		sky.sky_horizon_color = sky_horizon_gradient.sample(cotu_dist_lerp_val)
-		sky.ground_horizon_color = sky.sky_horizon_color
-		# Fog color is the same as horizon color
-		level_env.fog_light_color = sky.sky_horizon_color
-		level_env.volumetric_fog_emission = sky.sky_horizon_color
-		
-		# Snowfall particle intensity. Amount isn't changed bc that causes glitchy behavior
-		snowfall_particles.lifetime = lerpf(12, 6, cotu_dist_lerp_val)
-		snowfall_particles.process_material.initial_velocity_min = lerpf(1.2, 6, cotu_dist_lerp_val)
-		snowfall_particles.process_material.initial_velocity_max = lerpf(2.4, 9, cotu_dist_lerp_val)
-		snowfall_particles.process_material.emission_ring_radius = lerpf(18, 9, cotu_dist_lerp_val)
-		
-		# Body/feet fog
-		# Body fog doesn't change
-		# Feet fog goes to 0 at far dist
-		var near_feet_fog_density := .6
-		#feet_fog.material.set_shader_parameter("density", lerpf(near_feet_fog_density, 0, cotu_dist_lerp_val))
-		#feet_fog.material.density = lerpf(near_feet_fog_density, 0, cotu_dist_lerp_val)
-		var body_fog_gradient = Gradient.new()
-		body_fog_gradient.set_color(0, Color("aad3ff"))
-		body_fog_gradient.set_color(1, body_light.light_color)
-		body_cone_fog.material.set_shader_parameter("emission", body_fog_gradient.sample(cotu_dist_lerp_val-.1))
-		#feet_fog.material.emission = body_fog_gradient.sample(cotu_dist_lerp_val)
-		#feet_fog.material.set_shader_parameter("emission", body_fog_gradient.sample(cotu_dist_lerp_val))
+	var clamped_cotu_dist = clampf(dist_to_cotu, min_fog_radius, max_fog_radius)
+	# Convert dist to Cotu to a float btwn 0 and 1 (lerp val)
+	var target_cotu_dist_lerp_val = remap(clamped_cotu_dist,
+	min_fog_radius, max_fog_radius,
+	0.0, 1.0)
+	# Move sample val toward the target so transitions happen smoothly
+	cotu_dist_lerp_val = move_toward(cotu_dist_lerp_val, target_cotu_dist_lerp_val, delta / 3)
+	
+	# Set fog density based on dist from Cotu
+	var min_fog_density := .01
+	var max_fog_density := .48
+	level_env.fog_density = lerpf(min_fog_density, max_fog_density, cotu_dist_lerp_val)
+	
+	# Repeat the above for sky and fog colors (0 is near, 1 is far)
+	# Sky top color
+	var sky_top_gradient = Gradient.new()
+	sky_top_gradient.set_color(0, Color("#65768f"))
+	sky_top_gradient.set_color(1, Color("#3c485a"))
+	sky.sky_top_color = sky_top_gradient.sample(cotu_dist_lerp_val)
+	# Sky/ground horizon color
+	var sky_horizon_gradient = Gradient.new()
+	sky_horizon_gradient.set_color(0, Color("#5a6c82"))
+	sky_horizon_gradient.set_color(1, Color("#1d2730"))
+	sky.sky_horizon_color = sky_horizon_gradient.sample(cotu_dist_lerp_val)
+	sky.ground_horizon_color = sky.sky_horizon_color
+	# Fog color is the same as horizon color
+	level_env.fog_light_color = sky.sky_horizon_color
+	level_env.volumetric_fog_emission = sky.sky_horizon_color
+	
+	# Snowfall particle intensity. Amount isn't changed bc that causes glitchy behavior
+	snowfall_particles.lifetime = lerpf(12, 6, cotu_dist_lerp_val)
+	snowfall_particles.process_material.initial_velocity_min = lerpf(1.2, 6, cotu_dist_lerp_val)
+	snowfall_particles.process_material.initial_velocity_max = lerpf(2.4, 9, cotu_dist_lerp_val)
+	snowfall_particles.process_material.emission_ring_radius = lerpf(18, 9, cotu_dist_lerp_val)
+	
+	# Body/feet fog
+	# Body fog doesn't change
+	# Feet fog goes to 0 at far dist
+	var near_feet_fog_density := .6
+	#feet_fog.material.set_shader_parameter("density", lerpf(near_feet_fog_density, 0, cotu_dist_lerp_val))
+	#feet_fog.material.density = lerpf(near_feet_fog_density, 0, cotu_dist_lerp_val)
+	var body_fog_gradient = Gradient.new()
+	body_fog_gradient.set_color(0, Color("aad3ff"))
+	body_fog_gradient.set_color(1, body_light.light_color)
+	body_cone_fog.material.set_shader_parameter("emission", body_fog_gradient.sample(cotu_dist_lerp_val-.1))
+	#feet_fog.material.emission = body_fog_gradient.sample(cotu_dist_lerp_val)
+	#feet_fog.material.set_shader_parameter("emission", body_fog_gradient.sample(cotu_dist_lerp_val))
 
 func expand_blizzard_safezone(frame_duration: int):
 	snowfall_particles.emitting = false
@@ -690,8 +694,12 @@ func expand_blizzard_safezone(frame_duration: int):
 
 func contract_blizzard_safezone(frame_duration: int):
 	var t = get_tree().create_tween().set_parallel()
-	t.tween_property(self, "blizzard_safezone_radius", blizzard_safezone_base_radius, frames(frame_duration))
-	t.tween_property(body_light, "omni_range", body_light_base_radius, frames(frame_duration))
+	if blizzard_center == self:
+		t.tween_property(self, "blizzard_safezone_radius", blizzard_safezone_base_radius, frames(frame_duration))
+		t.tween_property(body_light, "omni_range", body_light_base_radius, frames(frame_duration))
+	else:
+		t.tween_property(self, "blizzard_safezone_radius", blizzard_safezone_ice_sprite_spawner_radius, frames(frame_duration))
+		t.tween_property(body_light, "omni_range", 0, frames(frame_duration))
 	t.tween_property(body_light, "light_color", Color("#007ce4"), frames(frame_duration))
 	t.tween_property(body_light, "light_volumetric_fog_energy", 6.0, frames(frame_duration))
 	t.tween_property(sky, "sky_top_color", Color("#65768f"), frames(frame_duration))
@@ -840,3 +848,4 @@ func spawn_ice_sprite_spawner():
 	level.add_child.call_deferred(inst)
 	await inst.tree_entered
 	inst.global_position = arm_shard_mesh.global_position
+	blizzard_center = inst
