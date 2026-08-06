@@ -56,8 +56,9 @@ var blizzard_safezone_radius := 15.0
 
 @export var body_light_base_radius := 18.0
 @export var body_light_expanded_radius := 180.0 # Light expands on jumps to show new safezone
-@export var min_fog_radius := 12.0 # Dist from Clarity where fog is minimized
-@export var max_fog_radius := 24.0 # Dist from Clarity where fog is maximized
+# Fog radii are set in physics process
+var min_fog_radius : float # Dist from Clarity where fog is minimized
+var max_fog_radius : float # Dist from Clarity where fog is maximized
 var env_autochange := true # Fog automatically changes depending on Cotu's dist to Clarity unless the blizzard is expanding/contracting
 
 var stationary := false
@@ -319,6 +320,9 @@ func body_face_position_directly(target_pos: Vector3):
 # Lerp val (float btwn 0 and 1) to be used for value transitions
 var cotu_dist_lerp_val := .5
 func _physics_process(delta):
+	min_fog_radius = blizzard_safezone_radius * .8 # Dist from Clarity where fog is minimized
+	max_fog_radius = blizzard_safezone_radius * 1.6 # Dist from Clarity where fog is maximized
+	
 	body_light.global_position = blizzard_center.global_position
 	# dist_to_cotu only used for blizzard
 	var dist_to_cotu = cotu.global_position.distance_to(blizzard_center.global_position)
