@@ -350,22 +350,22 @@ script = ExtResource("1_p5m4w")
 max_height = 30.0
 
 [node name="FlatHexagon1" parent="." instance=ExtResource("1_fa0ep")]
-transform = Transform3D(0.730926, -8.1989e-18, 3.82173e-17, 3.82173e-17, 0.299817, -0.666605, -8.1989e-18, 0.666605, 0.299817, 0, 0, 0)
+transform = Transform3D(0.296286, -4.85243e-17, -7.86684e-17, -7.86684e-17, -0.264773, -0.132968, -4.85243e-17, 0.132968, -0.264773, 0, 0, 0)
 
 [node name="FlatHexagon2" parent="." instance=ExtResource("1_fa0ep")]
-transform = Transform3D(0.397593, -9.69004e-17, 2.07889e-17, 2.07889e-17, 0.163091, 0.362603, -9.69004e-17, -0.362603, 0.163091, 0, 0, 0)
+transform = Transform3D(0.0555713, -2.3921e-17, -1.47553e-17, -1.47553e-17, -0.0496613, 0.0249384, -2.3921e-17, -0.0249384, -0.0496613, 0, 0, 0)
 
 [node name="FlatHexagon3" parent="." instance=ExtResource("1_fa0ep")]
-transform = Transform3D(-1.15216e-09, -0.0263584, 0.0586045, 0.0642593, -2.80886e-09, -2.24128e-17, 2.56168e-09, 0.0586045, 0.0263584, 0, 0, 0)
+transform = Transform3D(1.44679e-08, 0.330987, 0.166221, 0.370381, -1.61899e-08, -1.29184e-16, 7.26575e-09, 0.166221, -0.330987, 0, 0, 0)
 
 [node name="FlatHexagon4" parent="." instance=ExtResource("1_fa0ep")]
-transform = Transform3D(-4.82447e-09, -0.110371, -0.245396, 0.269074, -1.17616e-08, -9.38495e-17, -1.07266e-08, -0.245396, 0.110371, 0, 0, 0)
+transform = Transform3D(2.74887e-08, 0.628867, -0.315816, 0.703714, -3.07603e-08, -2.45446e-16, -1.38047e-08, -0.315816, -0.628867, 0, 0, 0)
 
 [node name="FlatHexagon5" parent="." instance=ExtResource("1_fa0ep")]
-transform = Transform3D(-0.2471, -3.71332e-08, 0.549396, -0.549396, -2.40149e-08, -0.2471, 3.71332e-08, -0.602407, -2.40149e-08, 0, 0, 0)
+transform = Transform3D(0.860566, -4.47707e-09, 0.432175, -0.432175, -1.88909e-08, 0.860566, 4.47707e-09, -0.96299, -1.88909e-08, 0, 0, 0)
 
 [node name="FlatHexagon6" parent="." instance=ExtResource("1_fa0ep")]
-transform = Transform3D(-0.38383, 5.76803e-08, -0.853396, 0.853396, -3.73031e-08, -0.38383, -5.76803e-08, -0.935741, -3.73031e-08, 0, 0, 0)
+transform = Transform3D(0.562487, 2.92633e-09, -0.28248, 0.28248, -1.23476e-08, 0.562487, -2.92633e-09, -0.629434, -1.23476e-08, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Appear"

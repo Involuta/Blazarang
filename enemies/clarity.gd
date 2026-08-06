@@ -132,6 +132,7 @@ var dress_shards := {}
 
 @onready var root := get_tree().root
 var level : Node3D
+var icon : Node3D
 var target : Node3D
 var cotu : Node3D # Clarity only attacks the target; cotu is only referenced here to help Clarity calculate whether to parry when Cotu throws a roserang
 var camera : Node3D
@@ -207,7 +208,8 @@ func _ready():
 	head_hurtbox.add_to_group("lockonables")
 	snowflake.add_to_group("lockonables")
 	level = root.find_child("Level", true, false)
-	target = level.find_child("Icon")
+	icon = level.find_child("Icon")
+	target = icon # Over the course of the fight, target switches from icon to ice sprite spawner then back to icon
 	cotu = level.find_child("cotuCB")
 	camera = cotu.find_child("Camera3D")
 	clarity_icon = level.find_child("ClarityIcon")
@@ -682,7 +684,6 @@ func expand_blizzard_safezone(frame_duration: int):
 	
 	var t = get_tree().create_tween().set_parallel()
 	t.tween_property(self, "blizzard_safezone_radius", blizzard_safezone_expanded_radius, frames(frame_duration))
-	t.tween_property(blizzard_light, "omni_range", blizzard_light_expanded_radius, frames(frame_duration))
 	t.tween_property(blizzard_light, "light_color", Color.SNOW, frames(frame_duration))
 	t.tween_property(blizzard_light, "light_volumetric_fog_energy", 12.0, frames(frame_duration))
 	t.tween_property(sky, "sky_top_color", Color.LIGHT_SKY_BLUE, frames(frame_duration))
@@ -852,3 +853,5 @@ func spawn_ice_sprite_spawner():
 	await inst.tree_entered
 	inst.global_position = arm_shard_mesh.global_position
 	blizzard_center = inst
+	# Clarity now faces the ice sprite spawner
+	target = inst
