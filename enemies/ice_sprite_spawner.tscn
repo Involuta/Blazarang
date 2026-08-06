@@ -350,22 +350,22 @@ script = ExtResource("1_p5m4w")
 max_height = 30.0
 
 [node name="FlatHexagon1" parent="." instance=ExtResource("1_fa0ep")]
-transform = Transform3D(0.101064, -1.49967e-18, 1.75886e-18, 1.75886e-18, 0.0997936, -0.0159768, -1.49967e-18, 0.0159768, 0.0997936, 0, 0, 0)
+transform = Transform3D(0.730926, -8.1989e-18, 3.82173e-17, 3.82173e-17, 0.299817, -0.666605, -8.1989e-18, 0.666605, 0.299817, 0, 0, 0)
 
 [node name="FlatHexagon2" parent="." instance=ExtResource("1_fa0ep")]
-transform = Transform3D(0.575798, -1.17529e-17, 1.00209e-17, 1.00209e-17, 0.568558, 0.0910262, -1.17529e-17, -0.0910262, 0.568558, 0, 0, 0)
+transform = Transform3D(0.397593, -9.69004e-17, 2.07889e-17, 2.07889e-17, 0.163091, 0.362603, -9.69004e-17, -0.362603, 0.163091, 0, 0, 0)
 
 [node name="FlatHexagon3" parent="." instance=ExtResource("1_fa0ep")]
-transform = Transform3D(-3.31366e-08, -0.758077, 0.121367, 0.767731, -3.35586e-08, -2.67774e-16, 5.30513e-09, 0.121367, 0.758077, 0, 0, 0)
+transform = Transform3D(-1.15216e-09, -0.0263584, 0.0586045, 0.0642593, -2.80886e-09, -2.24128e-17, 2.56168e-09, 0.0586045, 0.0263584, 0, 0, 0)
 
 [node name="FlatHexagon4" parent="." instance=ExtResource("1_fa0ep")]
-transform = Transform3D(-3.87996e-08, -0.887632, -0.142109, 0.898936, -3.92937e-08, -3.13537e-16, -6.21177e-09, -0.142109, 0.887632, 0, 0, 0)
+transform = Transform3D(-4.82447e-09, -0.110371, -0.245396, 0.269074, -1.17616e-08, -9.38495e-17, -1.07266e-08, -0.245396, 0.110371, 0, 0, 0)
 
 [node name="FlatHexagon5" parent="." instance=ExtResource("1_fa0ep")]
-transform = Transform3D(-0.558769, -4.91602e-08, 0.0894583, -0.0894583, -3.91035e-09, -0.558769, 4.91602e-08, -0.565885, -3.91035e-09, 0, 0, 0)
+transform = Transform3D(-0.2471, -3.71332e-08, 0.549396, -0.549396, -2.40149e-08, -0.2471, 3.71332e-08, -0.602407, -2.40149e-08, 0, 0, 0)
 
 [node name="FlatHexagon6" parent="." instance=ExtResource("1_fa0ep")]
-transform = Transform3D(-0.229119, 2.01578e-08, -0.0366817, 0.0366817, -1.60341e-09, -0.229119, -2.01578e-08, -0.232037, -1.60341e-09, 0, 0, 0)
+transform = Transform3D(-0.38383, 5.76803e-08, -0.853396, 0.853396, -3.73031e-08, -0.38383, -5.76803e-08, -0.935741, -3.73031e-08, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Appear"
@@ -387,6 +387,7 @@ mesh = SubResource("SphereMesh_38oom")
 skeleton = NodePath("../OmniLight")
 
 [node name="OmniLight" type="OmniLight3D" parent="."]
+visible = false
 light_color = Color(0.509804, 0.733333, 1, 1)
 light_energy = 0.0
 light_volumetric_fog_energy = 6.0

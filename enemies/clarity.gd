@@ -54,8 +54,8 @@ var blizzard_safezone_radius := 15.0
 @export var safezone_expand_frames_jump_shot := 144
 @export var safezone_contract_frames_jump_shot := 360
 
-@export var body_light_base_radius := 18.0
-@export var body_light_expanded_radius := 180.0 # Light expands on jumps to show new safezone
+@export var blizzard_light_base_radius := 18.0
+@export var blizzard_light_expanded_radius := 180.0 # Light expands on jumps to show new safezone
 # Fog radii are set in physics process
 var min_fog_radius : float # Dist from Clarity where fog is minimized
 var max_fog_radius : float # Dist from Clarity where fog is maximized
@@ -119,7 +119,7 @@ var ice_sprite_spawner := preload("res://enemies/ice_sprite_spawner.tscn")
 @onready var head_light := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/BaseOffsetRotation/HeadMesh/HeadLight
 @onready var head_bone := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2
 @onready var head_mesh := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
-@onready var body_light := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/BodyLight
+@onready var blizzard_light := $ClarityArmMeshes/BlizzardLight
 @onready var blizzard_hitbox := $BlizzardDOT
 @onready var snowfall_particles := $SnowfallParticles
 @onready var blizzard_particles := $BlizzardParticles
@@ -216,7 +216,7 @@ func _ready():
 	sky = level_env.sky.sky_material
 	
 	blizzard_safezone_radius = blizzard_safezone_base_radius
-	body_light.omni_range = body_light_base_radius
+	blizzard_light.omni_range = blizzard_light_base_radius
 	
 	min_long_dist_wait = phase1_min_long_dist_wait
 	max_long_dist_wait = phase1_max_long_dist_wait
@@ -322,8 +322,9 @@ var cotu_dist_lerp_val := .5
 func _physics_process(delta):
 	min_fog_radius = blizzard_safezone_radius * .8 # Dist from Clarity where fog is minimized
 	max_fog_radius = blizzard_safezone_radius * 1.6 # Dist from Clarity where fog is maximized
+	blizzard_light.omni_range = blizzard_safezone_radius * 1.2
 	
-	body_light.global_position = blizzard_center.global_position
+	blizzard_light.global_position = blizzard_center.global_position
 	# dist_to_cotu only used for blizzard
 	var dist_to_cotu = cotu.global_position.distance_to(blizzard_center.global_position)
 	if dist_to_cotu > blizzard_safezone_radius:
@@ -670,7 +671,7 @@ func env_autochange_frame(dist_to_cotu: float, delta: float):
 	#feet_fog.material.density = lerpf(near_feet_fog_density, 0, cotu_dist_lerp_val)
 	var body_fog_gradient = Gradient.new()
 	body_fog_gradient.set_color(0, Color("aad3ff"))
-	body_fog_gradient.set_color(1, body_light.light_color)
+	body_fog_gradient.set_color(1, blizzard_light.light_color)
 	body_cone_fog.material.set_shader_parameter("emission", body_fog_gradient.sample(cotu_dist_lerp_val-.1))
 	#feet_fog.material.emission = body_fog_gradient.sample(cotu_dist_lerp_val)
 	#feet_fog.material.set_shader_parameter("emission", body_fog_gradient.sample(cotu_dist_lerp_val))
@@ -681,9 +682,9 @@ func expand_blizzard_safezone(frame_duration: int):
 	
 	var t = get_tree().create_tween().set_parallel()
 	t.tween_property(self, "blizzard_safezone_radius", blizzard_safezone_expanded_radius, frames(frame_duration))
-	t.tween_property(body_light, "omni_range", body_light_expanded_radius, frames(frame_duration))
-	t.tween_property(body_light, "light_color", Color.SNOW, frames(frame_duration))
-	t.tween_property(body_light, "light_volumetric_fog_energy", 12.0, frames(frame_duration))
+	t.tween_property(blizzard_light, "omni_range", blizzard_light_expanded_radius, frames(frame_duration))
+	t.tween_property(blizzard_light, "light_color", Color.SNOW, frames(frame_duration))
+	t.tween_property(blizzard_light, "light_volumetric_fog_energy", 12.0, frames(frame_duration))
 	t.tween_property(sky, "sky_top_color", Color.LIGHT_SKY_BLUE, frames(frame_duration))
 	t.tween_property(sky, "sky_horizon_color", Color.SKY_BLUE, frames(frame_duration))
 	t.tween_property(sky, "ground_horizon_color", Color.SKY_BLUE, frames(frame_duration))
@@ -700,12 +701,10 @@ func contract_blizzard_safezone(frame_duration: int):
 	var t = get_tree().create_tween().set_parallel()
 	if blizzard_center == self:
 		t.tween_property(self, "blizzard_safezone_radius", blizzard_safezone_base_radius, frames(frame_duration))
-		t.tween_property(body_light, "omni_range", body_light_base_radius, frames(frame_duration))
 	else:
 		t.tween_property(self, "blizzard_safezone_radius", blizzard_safezone_ice_sprite_spawner_radius, frames(frame_duration))
-		t.tween_property(body_light, "omni_range", 0, frames(frame_duration))
-	t.tween_property(body_light, "light_color", Color("#007ce4"), frames(frame_duration))
-	t.tween_property(body_light, "light_volumetric_fog_energy", 6.0, frames(frame_duration))
+	t.tween_property(blizzard_light, "light_color", Color("#007ce4"), frames(frame_duration))
+	t.tween_property(blizzard_light, "light_volumetric_fog_energy", 6.0, frames(frame_duration))
 	t.tween_property(sky, "sky_top_color", Color("#65768f"), frames(frame_duration))
 	t.tween_property(sky, "sky_horizon_color", Color("#5a6c82"), frames(frame_duration))
 	t.tween_property(sky, "ground_horizon_color", Color("#5a6c82"), frames(frame_duration))
