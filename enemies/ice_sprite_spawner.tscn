@@ -48,7 +48,6 @@ mesh = SubResource("SphereMesh_38oom")
 skeleton = NodePath("../OmniLight")
 
 [node name="OmniLight" type="OmniLight3D" parent="Visuals"]
-visible = false
 light_color = Color(0.509804, 0.733333, 1, 1)
 light_energy = 6.0
 light_volumetric_fog_energy = 6.0

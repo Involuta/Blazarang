@@ -202,6 +202,8 @@ class DressShard extends Node3D:
 	func regen():
 		self.hurtbox.regen()
 
+# For testing
+var jump_shot_manual_trigger := true
 func _ready():
 	head_hurtbox = find_child("EnemyHurtbox")
 	
@@ -218,7 +220,6 @@ func _ready():
 	sky = level_env.sky.sky_material
 	
 	blizzard_safezone_radius = blizzard_safezone_base_radius
-	blizzard_light.omni_range = blizzard_light_base_radius
 	
 	min_long_dist_wait = phase1_min_long_dist_wait
 	max_long_dist_wait = phase1_max_long_dist_wait
@@ -246,8 +247,10 @@ func _ready():
 	
 	# Ensure all shards are full health and hurtable when Clarity spawns
 	regen_dress_shards()
-
-
+	
+	await get_tree().create_timer(.1).timeout
+	jump_shot_manual_trigger = false
+	
 func frames(num: int) -> float:
 	return num * get_physics_process_delta_time()
 
@@ -457,6 +460,11 @@ func queue_arm_attack():
 		PHASE.PHASE1:
 			match(behav_state):
 				CIRCLING:
+					var chosen_attack = "RegenShards"
+					switch_to_stop()
+					play_anim_all_dress_shards(chosen_attack)
+					arm_anim_player.play(chosen_attack)
+					return
 					"""
 					# If a dress shard anim is playing or the snowflake isn't neutral, don't include RegenShards as a choice
 					if dress_shards["Master"].anim_player.is_playing() or snowflake_anim_playback.get_current_node() != "RotateSlow":
@@ -474,9 +482,6 @@ func queue_arm_attack():
 						if shard.is_destroyed():
 							num_shards_destroyed += 1
 					var regen_shards_chance := num_shards_destroyed * regen_shards_max_chance / 6.0
-					"""
-					### GUARANTEED REGEN_SHARDS FOR TESTING
-					var regen_shards_chance := 1.0
 					# all_chances = arm attack chances + regen shards chance
 					var all_chances = {}
 					for attack in arm_attack_chances:
@@ -495,6 +500,7 @@ func queue_arm_attack():
 						await snowflake_hexagon_anim_player.animation_finished
 						# Play arm anim
 						arm_anim_player.play(chosen_attack)
+					"""
 		PHASE.PHASE2:
 			pass # pass until phase2 is confirmed to exist
 
@@ -534,42 +540,6 @@ func end_arm_attack():
 
 func set_stationary(state: bool):
 	stationary = state
-
-func choose_stomp_direction() -> String:
-	var to_target = global_position.direction_to(target.global_position)
-	
-	# Calculate how much the target aligns with Forward and Right axes
-	# Results range from -1.0 to 1.0
-	var forward_dot = (body_meshes.transform.basis.z).dot(to_target)
-	var right_dot = -body_meshes.transform.basis.x.dot(to_target)
-
-	# Compare the absolute values to see which axis is more "dominant"
-	if abs(forward_dot) > abs(right_dot):
-		# Target is more in front or more behind than they are to the sides
-		if forward_dot > 0:
-			return "Front"
-		else:
-			return "Back"
-	else:
-		# Target is more to the sides than they are in front or back
-		if right_dot > 0:
-			return "Right"
-		else:
-			return "Left"
-
-func get_dir_to_target_LR():
-	# 1. Get the direction vector from character to target
-	var to_target = global_position.direction_to(target.global_position)
-	
-	# 2. Get the character's local Right vector
-	var character_right = -body_meshes.transform.basis.x
-	
-	# 3. Use the Dot Product
-	var side_dot = character_right.dot(to_target)
-	
-	# side_dot > 0 means the target is to the Right
-	# side_dot < 0 means the target is to the Left
-	return "Left" if side_dot < 0 else "Right"
 
 func set_aiming_at_target(state: bool):
 	aiming_at_target = state

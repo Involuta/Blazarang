@@ -1,4 +1,4 @@
-[gd_scene load_steps=175 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=176 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -367,6 +367,10 @@ advance_mode = 2
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_atysk"]
+advance_mode = 2
+advance_expression = "jump_shot_manual_trigger"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_qlhjd"]
 states/DoubleShardSequence1/node = SubResource("AnimationNodeAnimation_tes26")
 states/DoubleShardSequence1/position = Vector2(636.021, 100.028)
@@ -384,8 +388,8 @@ states/Test/node = SubResource("AnimationNodeAnimation_2wykb")
 states/Test/position = Vector2(407.559, 185.977)
 states/TripleShardSequence1/node = SubResource("AnimationNodeAnimation_mn7jq")
 states/TripleShardSequence1/position = Vector2(636.016, 167.511)
-transitions = ["Start", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_gjge1"), "RotateSlow", "SingleShardSequence1", SubResource("AnimationNodeStateMachineTransition_f7uow"), "SingleShardSequence1", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_kjcu6"), "RotateSlow", "DoubleShardSequence1", SubResource("AnimationNodeStateMachineTransition_v0ape"), "DoubleShardSequence1", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_ag18a"), "Stagger", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_spy4q"), "RotateSlow", "Test", SubResource("AnimationNodeStateMachineTransition_4uvqa"), "RotateSlow", "TripleShardSequence1", SubResource("AnimationNodeStateMachineTransition_r51dd"), "TripleShardSequence1", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_s2ykg"), "RotateSlow", "QuadShardSequence1", SubResource("AnimationNodeStateMachineTransition_y4w40"), "QuadShardSequence1", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_20kpy"), "Test", "JumpShot", SubResource("AnimationNodeStateMachineTransition_wvpho"), "JumpShot", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_f7guv")]
-graph_offset = Vector2(82.696, 27.1949)
+transitions = ["Start", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_gjge1"), "RotateSlow", "SingleShardSequence1", SubResource("AnimationNodeStateMachineTransition_f7uow"), "SingleShardSequence1", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_kjcu6"), "RotateSlow", "DoubleShardSequence1", SubResource("AnimationNodeStateMachineTransition_v0ape"), "DoubleShardSequence1", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_ag18a"), "Stagger", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_spy4q"), "RotateSlow", "Test", SubResource("AnimationNodeStateMachineTransition_4uvqa"), "RotateSlow", "TripleShardSequence1", SubResource("AnimationNodeStateMachineTransition_r51dd"), "TripleShardSequence1", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_s2ykg"), "RotateSlow", "QuadShardSequence1", SubResource("AnimationNodeStateMachineTransition_y4w40"), "QuadShardSequence1", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_20kpy"), "Test", "JumpShot", SubResource("AnimationNodeStateMachineTransition_wvpho"), "JumpShot", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_f7guv"), "RotateSlow", "JumpShot", SubResource("AnimationNodeStateMachineTransition_atysk")]
+graph_offset = Vector2(82.696, 56.9699)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_siwsy"]
 graph_offset = Vector2(-26.88, 64.32)
@@ -1485,6 +1489,7 @@ collision_mask = 146
 script = ExtResource("1_172k1")
 phase1_min_long_dist_wait = 3.0
 phase1_max_long_dist_wait = 4.0
+blizzard_safezone_ice_sprite_spawner_radius = 21.0
 full_dash_speed = 36.0
 snowflake_hit_dress_shard_damage = 120
 wait_lowered_left_min_secs = 0.3
@@ -1710,8 +1715,41 @@ transform = Transform3D(4.49571, 0.0483118, -0.190526, -0.127043, 4.04257, -1.97
 [node name="SnowflakeEntityMeshes" parent="ClarityArmMeshes/SnowflakeEntity" instance=ExtResource("15_o8h64")]
 transform = Transform3D(1, 5.8286e-10, 1.01449e-09, -2.48745e-10, 1, 1.59747e-08, 1.42833e-10, 1.67609e-08, 1, 0, 0, 0)
 
+[node name="Skeleton3D" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature" index="0"]
+bones/5/rotation = Quaternion(0.683013, -0.183013, -0.183013, 0.683013)
+bones/6/position = Vector3(0.828085, 1.02211, -0.462035)
+bones/8/position = Vector3(0.00320047, 1.02211, -1.0554)
+bones/14/position = Vector3(-0.823051, 1.02211, 0.473662)
+
+[node name="CentralEye0" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="0"]
+visible = false
+
 [node name="CentralEye0" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D/CentralEye0" index="0"]
 visible = true
+
+[node name="CentralEye3" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="3"]
+visible = true
+
+[node name="MiddleLeft" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="4"]
+transform = Transform3D(0.866025, 0.5, 1.37447e-07, -0.5, 0.866025, 7.91047e-08, -3.73179e-08, -1.59435e-07, 1, -1.19209e-07, 1.95578e-07, 2.5332e-07)
+
+[node name="FrontLeft" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="5"]
+transform = Transform3D(0.866025, 0.5, 4.31323e-08, -0.5, 0.866025, -5.6136e-08, -5.96806e-08, 3.23494e-08, 1, 5.96046e-08, -1.78814e-07, 1.17347e-07)
+
+[node name="BackRight" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="6"]
+transform = Transform3D(0.866025, 0.5, 1.52165e-07, -0.5, 0.866025, 1.32786e-07, -5.95815e-08, -1.25301e-07, 1, 2.08616e-07, 2.98023e-07, -3.72529e-08)
+
+[node name="BackLeft" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="7"]
+transform = Transform3D(0.866025, 0.5, 1.3505e-07, -0.5, 0.866025, 1.56225e-07, -1.64302e-08, -6.81776e-08, 1, 0, 1.78814e-07, 4.84288e-08)
+
+[node name="MiddleRight" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="8"]
+transform = Transform3D(0.866025, 0.5, 1.33939e-07, -0.5, 0.866025, -5.88597e-09, 2.02364e-08, -7.6886e-08, 1, 4.17233e-07, 2.46451e-07, 2.12342e-07)
+
+[node name="FrontRight" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="9"]
+transform = Transform3D(0.866025, 0.5, -1.99128e-08, -0.5, 0.866025, -1.94163e-08, 1.25952e-07, 5.1294e-09, 1, 2.98023e-08, 1.19209e-07, 5.7742e-08)
+
+[node name="FacePlate" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="10"]
+transform = Transform3D(0.866025, 0.5, -2.06057e-13, -0.5, 0.866025, -1.30901e-07, -5.96047e-08, 1.19209e-07, 1, 1.04308e-07, 1.99638e-08, 5.96046e-08)
 
 [node name="FlatHexagon" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D/FacePlate" index="1"]
 transform = Transform3D(1, -3.38931e-22, 1.48151e-29, 0, -4.37114e-08, -1, 3.38931e-22, 1, -4.37114e-08, 0, 0, 0)
@@ -1813,7 +1851,6 @@ draw_pass_1 = SubResource("BoxMesh_ltq1a")
 
 [node name="MiddleRightLinkHitParticles" type="GPUParticles3D" parent="ClarityArmMeshes"]
 transform = Transform3D(2.61679, 1.41659, 0.381636, -1.38141, 2.64192, -0.334551, -0.494058, 0.116088, 2.95675, -6.06964, -3.34371, 1.74964)
-visible = false
 emitting = false
 amount = 24
 lifetime = 2.0
@@ -1845,7 +1882,6 @@ draw_pass_1 = SubResource("BoxMesh_ltq1a")
 
 [node name="MiddleLeftLinkHitParticles" type="GPUParticles3D" parent="ClarityArmMeshes"]
 transform = Transform3D(2.97313, 0.0123747, 0.400353, 0.1647, 2.69557, -1.30643, -0.365115, 1.31671, 2.67076, 2.09479, -3.38592, -4.99669)
-visible = false
 emitting = false
 amount = 24
 lifetime = 2.0
