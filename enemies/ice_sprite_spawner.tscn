@@ -1,337 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://bg48lfbn1h34h"]
+[gd_scene load_steps=6 format=3 uid="uid://bg48lfbn1h34h"]
 
 [ext_resource type="PackedScene" uid="uid://c35irt0wpfa0g" path="res://enemies/flat_hexagon.tscn" id="1_fa0ep"]
 [ext_resource type="Script" path="res://enemies/ice_sprite_spawner.gd" id="1_p5m4w"]
 [ext_resource type="Texture2D" uid="uid://namwvkk58jhe" path="res://sprites/blurry_circle.png" id="3_gms0c"]
-
-[sub_resource type="Animation" id="Animation_epxs3"]
-resource_name = "UndulateLoop"
-length = 2.40001
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("FlatHexagon1:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6, 1.2, 1.8, 2.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("FlatHexagon2:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.8, 1.2, 1.4, 2, 2.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0.5, 0.5, 0.5), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1), Vector3(0.5, 0.5, 0.5), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1), Vector3(0.5, 0.5, 0.5)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("FlatHexagon3:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.4, 1, 1.2, 1.6, 2.2, 2.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0.666667, 0.666667, 0.666667), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1), Vector3(0.666667, 0.666667, 0.666667), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1), Vector3(0.666667, 0.666667, 0.666667)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("FlatHexagon4:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.6, 1.2, 1.8, 2.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(1, 1, 1), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("FlatHexagon5:scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.8, 1.2, 1.4, 2, 2.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0.667, 0.667, 0.667), Vector3(1, 1, 1), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(0.667, 0.667, 0.667), Vector3(1, 1, 1), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(0.667, 0.667, 0.667)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("FlatHexagon6:scale")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.4, 1, 1.2, 1.6, 2.2, 2.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0.333, 0.333, 0.333), Vector3(1, 1, 1), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(0.333, 0.333, 0.333), Vector3(1, 1, 1), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(0.333, 0.333, 0.333)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("FlatHexagon1:rotation")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 1.2, 2.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(3.14159, 3.48787e-16, 3.48787e-16), Vector3(0, 0, 0)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("FlatHexagon2:rotation")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0, 1.20001, 2.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-3.14159, 3.48787e-16, 3.48787e-16), Vector3(0, 0, 0)]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("FlatHexagon3:rotation")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0, 1.2, 2.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(3.48787e-16, 3.48787e-16, 1.5708), Vector3(3.48787e-16, 3.14159, 1.5708), Vector3(3.48787e-16, 3.48787e-16, 1.5708)]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("FlatHexagon4:rotation")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0, 1.2, 2.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(3.48787e-16, 3.48787e-16, 1.5708), Vector3(3.48787e-16, -3.14159, 1.5708), Vector3(3.48787e-16, 3.48787e-16, 1.5708)]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("FlatHexagon5:rotation")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0, 1.2, 2.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(1.5708, 1.5708, -1.5708), Vector3(-1.5708, 1.5708, -1.5708), Vector3(1.5708, 1.5708, -1.5708)]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("FlatHexagon6:rotation")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0, 1.2, 2.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(1.5708, -1.5708, 1.5708), Vector3(-1.5708, -1.5708, 1.5708), Vector3(1.5708, -1.5708, 1.5708)]
-}
-
-[sub_resource type="Animation" id="Animation_v4ufd"]
-resource_name = "Appear"
-length = 1.20001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("FlatHexagon1:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("FlatHexagon2:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.8, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1), Vector3(0.5, 0.5, 0.5)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("FlatHexagon3:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.4, 1, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1), Vector3(0.666667, 0.666667, 0.666667)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("FlatHexagon4:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.6, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("FlatHexagon5:scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.8, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(0.667, 0.667, 0.667)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("FlatHexagon6:scale")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 1, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(0.333, 0.333, 0.333)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("FlatHexagon1:rotation")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 1.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(3.14159, 3.48787e-16, 3.48787e-16)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("FlatHexagon2:rotation")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0, 1.20001),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-3.14159, 3.48787e-16, 3.48787e-16)]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("FlatHexagon3:rotation")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0, 1.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(3.48787e-16, 3.48787e-16, 1.5708), Vector3(3.48787e-16, 3.14159, 1.5708)]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("FlatHexagon4:rotation")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0, 1.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(3.48787e-16, 3.48787e-16, 1.5708), Vector3(3.48787e-16, -3.14159, 1.5708)]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("FlatHexagon5:rotation")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0, 1.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(1.5708, 1.5708, -1.5708), Vector3(-1.5708, 1.5708, -1.5708)]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("FlatHexagon6:rotation")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0, 1.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(1.5708, -1.5708, 1.5708), Vector3(-1.5708, -1.5708, 1.5708)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_osngl"]
-_data = {
-"Appear": SubResource("Animation_v4ufd"),
-"UndulateLoop": SubResource("Animation_epxs3")
-}
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kbv0i"]
-animation = &"Appear"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jtkao"]
-animation = &"UndulateLoop"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gkdlm"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qg47j"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_cjuj3"]
-states/Appear/node = SubResource("AnimationNodeAnimation_kbv0i")
-states/Appear/position = Vector2(326.5, 100.25)
-states/UndulateLoop/node = SubResource("AnimationNodeAnimation_jtkao")
-states/UndulateLoop/position = Vector2(481.5, 100.188)
-transitions = ["Start", "Appear", SubResource("AnimationNodeStateMachineTransition_gkdlm"), "Appear", "UndulateLoop", SubResource("AnimationNodeStateMachineTransition_qg47j")]
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_xqre4"]
-graph_offset = Vector2(-27.84, 93.12)
-nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_cjuj3")
-nodes/StateMachine/position = Vector2(120, 150)
-node_connections = [&"output", 0, &"StateMachine"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_idhv3"]
 roughness = 0.12
@@ -349,55 +20,45 @@ height = 0.75
 script = ExtResource("1_p5m4w")
 max_height = 30.0
 
-[node name="FlatHexagon1" parent="." instance=ExtResource("1_fa0ep")]
-transform = Transform3D(0.296286, -4.85243e-17, -7.86684e-17, -7.86684e-17, -0.264773, -0.132968, -4.85243e-17, 0.132968, -0.264773, 0, 0, 0)
+[node name="Visuals" type="Node3D" parent="."]
 
-[node name="FlatHexagon2" parent="." instance=ExtResource("1_fa0ep")]
-transform = Transform3D(0.0555713, -2.3921e-17, -1.47553e-17, -1.47553e-17, -0.0496613, 0.0249384, -2.3921e-17, -0.0249384, -0.0496613, 0, 0, 0)
+[node name="FlatHexagon1" parent="Visuals" instance=ExtResource("1_fa0ep")]
+transform = Transform3D(0.839734, -3.87625e-18, 3.06322e-17, 3.06322e-17, 0.209173, -0.813264, -3.87625e-18, 0.813264, 0.209173, 0, 0, 0)
 
-[node name="FlatHexagon3" parent="." instance=ExtResource("1_fa0ep")]
-transform = Transform3D(1.44679e-08, 0.330987, 0.166221, 0.370381, -1.61899e-08, -1.29184e-16, 7.26575e-09, 0.166221, -0.330987, 0, 0, 0)
+[node name="FlatHexagon2" parent="Visuals" instance=ExtResource("1_fa0ep")]
+transform = Transform3D(0.826933, -2.38384e-16, 3.01642e-17, 3.01642e-17, 0.205976, 0.80087, -2.38384e-16, -0.80087, 0.205976, 0, 0, 0)
 
-[node name="FlatHexagon4" parent="." instance=ExtResource("1_fa0ep")]
-transform = Transform3D(2.74887e-08, 0.628867, -0.315816, 0.703714, -3.07603e-08, -2.45446e-16, -1.38047e-08, -0.315816, -0.628867, 0, 0, 0)
+[node name="FlatHexagon3" parent="Visuals" instance=ExtResource("1_fa0ep")]
+transform = Transform3D(-5.37445e-09, -0.122953, 0.478041, 0.4936, -2.15759e-08, -1.72161e-16, 2.08958e-08, 0.478041, 0.122953, 0, 0, 0)
 
-[node name="FlatHexagon5" parent="." instance=ExtResource("1_fa0ep")]
-transform = Transform3D(0.860566, -4.47707e-09, 0.432175, -0.432175, -1.88909e-08, 0.860566, 4.47707e-09, -0.96299, -1.88909e-08, 0, 0, 0)
+[node name="FlatHexagon4" parent="Visuals" instance=ExtResource("1_fa0ep")]
+transform = Transform3D(-1.74502e-09, -0.0399215, -0.155215, 0.160266, -7.00547e-09, -5.58988e-17, -6.78465e-09, -0.155215, 0.0399215, 0, 0, 0)
 
-[node name="FlatHexagon6" parent="." instance=ExtResource("1_fa0ep")]
-transform = Transform3D(0.562487, 2.92633e-09, -0.28248, 0.28248, -1.23476e-08, 0.562487, -2.92633e-09, -0.629434, -1.23476e-08, 0, 0, 0)
+[node name="FlatHexagon5" parent="Visuals" instance=ExtResource("1_fa0ep")]
+transform = Transform3D(-0.0431101, -9.4494e-09, 0.167612, -0.167612, -7.32654e-09, -0.0431101, 9.4494e-09, -0.173067, -7.32654e-09, 0, 0, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "Appear"
-libraries = {
-"": SubResource("AnimationLibrary_osngl")
-}
+[node name="FlatHexagon6" parent="Visuals" instance=ExtResource("1_fa0ep")]
+transform = Transform3D(-0.126142, 2.76493e-08, -0.490438, 0.490438, -2.14377e-08, -0.126142, -2.76493e-08, -0.5064, -2.14377e-08, 0, 0, 0)
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeBlendTree_xqre4")
-anim_player = NodePath("../AnimationPlayer")
-advance_expression_base_node = NodePath("..")
-active = true
-
-[node name="HeadSphere" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+[node name="HeadSphere" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 transparency = 0.15
 cast_shadow = 0
 mesh = SubResource("SphereMesh_38oom")
 skeleton = NodePath("../OmniLight")
 
-[node name="OmniLight" type="OmniLight3D" parent="."]
+[node name="OmniLight" type="OmniLight3D" parent="Visuals"]
 visible = false
 light_color = Color(0.509804, 0.733333, 1, 1)
-light_energy = 0.0
+light_energy = 6.0
 light_volumetric_fog_energy = 6.0
 light_specular = 0.0
 light_bake_mode = 0
-omni_range = 36.0
+omni_range = 6.0
 omni_attenuation = 0.6
 omni_shadow_mode = 0
 
-[node name="HeadSprite" type="Sprite3D" parent="OmniLight"]
+[node name="HeadSprite" type="Sprite3D" parent="Visuals/OmniLight"]
 transform = Transform3D(1, -3.48786e-16, 3.48786e-16, 3.48786e-16, 1, -3.48786e-16, -3.48786e-16, 3.48786e-16, 1, 0, 0, 0)
 visible = false
 cast_shadow = 0

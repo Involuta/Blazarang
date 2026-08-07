@@ -49,7 +49,7 @@ var phase := PHASE.PHASE1
 
 @export var blizzard_safezone_base_radius := 15.0
 @export var blizzard_safezone_expanded_radius := 150.0 # Blizzard safezone expands on jumps
-@export var blizzard_safezone_ice_sprite_spawner_radius := 36.0 # When blizzard centers on ice sprite spawner
+@export var blizzard_safezone_ice_sprite_spawner_radius := 24.0 # When blizzard centers on ice sprite spawner
 var blizzard_safezone_radius := 15.0
 @export var safezone_expand_frames_jump_shot := 144
 @export var safezone_contract_frames_jump_shot := 360
@@ -457,6 +457,7 @@ func queue_arm_attack():
 		PHASE.PHASE1:
 			match(behav_state):
 				CIRCLING:
+					"""
 					# If a dress shard anim is playing or the snowflake isn't neutral, don't include RegenShards as a choice
 					if dress_shards["Master"].anim_player.is_playing() or snowflake_anim_playback.get_current_node() != "RotateSlow":
 						# Play snowflake arm raise anim
@@ -473,6 +474,9 @@ func queue_arm_attack():
 						if shard.is_destroyed():
 							num_shards_destroyed += 1
 					var regen_shards_chance := num_shards_destroyed * regen_shards_max_chance / 6.0
+					"""
+					### GUARANTEED REGEN_SHARDS FOR TESTING
+					var regen_shards_chance := 1.0
 					# all_chances = arm attack chances + regen shards chance
 					var all_chances = {}
 					for attack in arm_attack_chances:
@@ -852,6 +856,7 @@ func spawn_ice_sprite_spawner():
 	level.add_child.call_deferred(inst)
 	await inst.tree_entered
 	inst.global_position = arm_shard_mesh.global_position
+	inst.global_position.y = min_y_pos
 	blizzard_center = inst
 	# Clarity now faces the ice sprite spawner
 	target = inst
