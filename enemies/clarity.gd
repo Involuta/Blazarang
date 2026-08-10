@@ -460,7 +460,7 @@ func queue_arm_attack():
 		PHASE.PHASE1:
 			match(behav_state):
 				CIRCLING:
-					var chosen_attack = "RegenShards"
+					var chosen_attack = "RaiseRightSlice"
 					switch_to_stop()
 					play_anim_all_dress_shards(chosen_attack)
 					arm_anim_player.play(chosen_attack)
@@ -738,7 +738,11 @@ func recall_dress_shard(s: String):
 
 func play_anim_all_dress_shards(s: String):
 	for ds in dress_shards.values():
-		ds.anim_player.play(s)
+		# ds.anim_player.play(s)
+		if s == "JumpShotToWalkLeft":
+			ds.anim_player.play(s)
+		else:
+			ds.anim_player.play("TripleShardSemicircleSequence1")
 
 func snowflake_brighten(brightness: float, duration: float):
 	var t = get_tree().create_tween()
