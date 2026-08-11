@@ -778,7 +778,7 @@ func play_anim_all_dress_shards(s: String):
 		if s == "JumpShotToWalkLeft":
 			ds.anim_player.play(s)
 		else:
-			ds.anim_player.play("QuadShardSemicircleSequence2")
+			ds.anim_player.play("QuadShardFanSequence1")
 
 func snowflake_brighten(brightness: float, duration: float):
 	var t = get_tree().create_tween()
