@@ -5,12 +5,12 @@ extends CharacterBody3D
 # Behav state is controlled within code bc multiple attacks can occur w/o a change in behav state (e.g. a series of blade attacks in circling state)
 enum {
 	STRAIGHT,
-	CURVED,
-	CIRCLING,
+	CIRCLE_ICON,
+	CIRCLE_SPAWNER,
 	SPECIAL,
 	STOP,
 }
-var behav_state := CIRCLING
+var behav_state := CIRCLE_ICON
 var arm_attacking := false # Set to true when arm is attacking to prevent another attack from being queued
 
 # Look state is controlled within anim keyframes bc one anim can have multiple look states (e.g. jump shot, which goes from STOP or DIR to BODY FULL ROT to TARGET HEAD ARM BODY (which may be renamed TARGET LATERAL))
@@ -226,7 +226,7 @@ func _ready():
 	arm_long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	snowflake_long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	
-	switch_to_circling()
+	switch_to_circle_icon()
 	
 	mhp.visible = false
 	
@@ -377,10 +377,10 @@ func _physics_process(delta):
 		match(behav_state):
 			STRAIGHT:
 				walk_straight(walk_dir)
-			CURVED:
-				walk_curved(false)
-			CIRCLING:
-				walk_curved(true)
+			CIRCLE_ICON:
+				walk_circle_icon()
+			CIRCLE_SPAWNER:
+				walk_circle_spawner()
 			SPECIAL, STOP:
 				pass
 
@@ -415,21 +415,9 @@ func walk_straight(dir: Vector3):
 	velocity = walk_speed * dir
 	arm_long_dist_attack_check()
 
-func switch_to_curved():
-	behav_state = CURVED
-	look_state = LOOK_STATE.TARGET_HEAD_ARM
-	
-	# Set center of circular path
-	var direction_to_center = velocity.cross(Vector3.UP).normalized()
-	var vec_to_center = walk_curved_radius * direction_to_center
-	curve_center_pos = global_position + vec_to_center
-	$Marker.global_position = curve_center_pos
-
 var curve_center_pos := Vector3.FORWARD
-
-func walk_curved(circling_target: bool):
-	if circling_target:
-		curve_center_pos = target.global_position
+func walk_circle_icon():
+	curve_center_pos = target.global_position
 	
 	# Calculate the vector from center to current position (the Radius)
 	var radius_vec = (global_position - curve_center_pos).normalized()
@@ -445,9 +433,55 @@ func walk_curved(circling_target: bool):
 	
 	arm_long_dist_attack_check()
 
-func switch_to_circling():
+func walk_circle_spawner():
+	# 1. Calculate vector from the center to our current position
+	var offset = global_position - target.global_position
+
+	# We assume standard 3D ground movement (flat on the XZ plane). 
+	# If your circle is vertical, adjust this to ignore x or z instead.
+	offset.y = 0 
+
+	# Prevent divide-by-zero if the character spawns at the exact center
+	if offset.is_zero_approx():
+		offset = Vector3.RIGHT
+
+	var current_radius = offset.length()
+	var dir_from_center = offset / current_radius
+
+	# 2. Find the exact closest point on the circle's edge
+	var closest_point = target.global_position + (dir_from_center * blizzard_safezone_radius)
+	closest_point.y = global_position.y # Maintain our current Y height
+
+	var vector_to_path = closest_point - global_position
+	var distance_to_path = vector_to_path.length()
+
+	var move_dir: Vector3
+
+	# 3. If we are not on the path (using a small margin), move towards it
+	if distance_to_path > 0.1:
+		move_dir = vector_to_path.normalized()
+	else:
+		# 4. If on the path, move tangentially to form a circle
+		# Cross product with UP gives a vector perfectly perpendicular to the center
+		var tangent = Vector3.UP.cross(dir_from_center).normalized()
+		
+		# We blend the tangent with the slight distance gap.
+		# This acts as a micro-correction to prevent the character from slowly 
+		# drifting outward over time due to linear frame-by-frame movement.
+		move_dir = -(tangent + vector_to_path).normalized()
+
+	# 5. Apply linear speed and let CharacterBody3D handle movement
+	velocity = move_dir * walk_speed
+	move_and_slide()
+
+func switch_to_circle_icon():
 	arm_long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
-	behav_state = CIRCLING
+	behav_state = CIRCLE_ICON
+	look_state = LOOK_STATE.TARGET_HEAD_ARM_BODY
+
+func switch_to_circle_spawner():
+	arm_long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
+	behav_state = CIRCLE_SPAWNER
 	look_state = LOOK_STATE.TARGET_HEAD_ARM_BODY
 
 func switch_to_special():
@@ -459,7 +493,7 @@ func queue_arm_attack():
 	match(phase):
 		PHASE.PHASE1:
 			match(behav_state):
-				CIRCLING:
+				CIRCLE_ICON:
 					var chosen_attack = "RaiseRightSlice"
 					switch_to_stop()
 					play_anim_all_dress_shards(chosen_attack)
@@ -524,17 +558,19 @@ func end_arm_attack():
 	arm_attacking = false
 	arm_attack_queued = false
 	"""
-	FOR TESTING: behav_state is chosen here manually instead of randomly btwn str and cur
-	NOTE: certain attacks always go to certain states (e.g. any jump shot to walk left must switch to circling)
+	FOR TESTING: behav_state is chosen here manually instead of randomly
 	"""
-	switch_to_circling()
+	if target == icon:
+		switch_to_circle_icon()
+	else:
+		switch_to_circle_spawner()
 	"""
 	match(behav_state):
 		STRAIGHT:
 			switch_to_curved()
 		CURVED:
 			switch_to_circling()
-		CIRCLING:
+		CIRCLE_ICON:
 			switch_to_straight()
 	"""
 
