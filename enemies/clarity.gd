@@ -773,12 +773,18 @@ func recall_dress_shard(s: String):
 	dress_shards[s].recall()
 
 func play_anim_all_dress_shards(s: String):
+	var prefix = ["Triple", "Quad"].pick_random()
+	var body = ["ShardSemicircleSequence", "ShardFanSequence"].pick_random()
+	var suffix = ["1", "2"].pick_random()
+	var test_attack = prefix + body + suffix
+	
 	for ds in dress_shards.values():
 		# ds.anim_player.play(s)
 		if s == "JumpShotToWalkLeft":
 			ds.anim_player.play(s)
 		else:
-			ds.anim_player.play("TripleShardFanSequence2")
+			
+			ds.anim_player.play(test_attack)
 
 func snowflake_brighten(brightness: float, duration: float):
 	var t = get_tree().create_tween()
