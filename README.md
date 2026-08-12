@@ -1,4 +1,4 @@
-Blazarang Ideas Doc Aug 3 2026
+Blazarang Ideas Doc
 
 Production Processes
 
@@ -491,7 +491,12 @@ Make particles last longer like glintstone spell particles in Elden Ring
 Make particles linger even after the rang ricochets and is caught
 Cotu himself contains rang particles. When the roserang is in flight, his script activates the particles and moves them to the rang’s position
 Clarity polishing
-Make snowflake “tattoo” on underside of hat (and possibly beyond) materialize in an intricate animation as the head tilts up and starts glowing in double slice anims
+Make snowflake “tattoo” on underside of hat (and possibly beyond) materialize in an intricate animation as the head tilts up and starts glowing
+Current task (polish)
+Make Jump Shot start from the correct pose (WalkLeft instead of WalkForward)
+Ice sprite spawner
+Idea: each hexagon rotates in a random direction upon appearing instead of following the same patterns every time
+Idea: large concentric rotating rings appear one after another as the spawner rises and grows. The more rings there are, the closer the spawner is to full height
 Ice sprite lingering explosion hitbox has particles and fog
 Mite Level Polishing
 Give landmite a separate glb import instead of making paramite and landmite share the same meshes. This way there won’t be errors with missing anim tracks in paramite
@@ -557,7 +562,6 @@ Make it pointy in the front and flat in the back
 Make enemy hit SFX
 Make gauntlet enemies stagger when they’re hit
 (Optional, only do this if performance is poor) instead of instantiating objects and deleting them (especially enemies), try putting them below the map or hiding them before they need to be spawned
-Current task (polish)
 Add footstep noises using the footsteps addon from the AssetLib https://www.youtube.com/watch?v=zFgYhZyGRw0
 Cotu gauntlet
 Cotu snow
@@ -1833,13 +1837,15 @@ Now, the only advantage of instant rethrowing the rose is to prevent the long st
 Reconsider whether the player should be able to restabilize during the invincibility period after destabilization
 Currently, if the player destabilizes, there’s absolutely no skill involved in restabilizing. If you use a stabilizer during the invincibility period, you’re right back to normal. Wouldn’t it be more thrilling and challenging if the player had to wait until they were vulnerable again before being able to use a stabilizer?
 I still like the idea of being able to use a stabilizer while you’re still stable in order to become invincible temporarily (e.g. during a grab), but wouldn’t it be confusing or nonsensical to the player if the stabilizer was usable all the time except that brief period right after destabilization?
-Perhaps at the start of the game, stabilizers should only be usable when destabilized. Eventually, you can upgrade yourself so that stabilizers give a boost of some kind? Although this feels like scope creep and you might need to keep it simple, silly
+If you use a stabilizer while you’re still stable, you’re briefly invincible AND your next attack is boosted greatly like Royal Knight’s Resolve from Elden Ring. Perhaps make the damage boost an unlockable skill
 
-Idea: ax counterstrike — the ax melee attack makes you briefly invincible, and its damage significantly increases if an enemy is hit at some point during the attack (i.e. the enemy hit by the ax receives damage a second time). Startup, invincibility/reflection time window, and endlag are similar if not identical to Ganondorf’s forward smash attack in Smash Ultimate
+Consider ax reworks to make it more fun and usable
+Idea: ax’s current vertical throw is a fast attack, but the player can hold the throw button to spin the ax around their back like a Clash Royale Valkyrie and throw the ax horizontally
+Idea: ax counterstrike — right when the ax is horizontally thrown, Cotu becomes briefly invincible OR the ax has a separate melee attack, and that can be upgraded to a counterstrike
 Slash is a wide diagonal slash
-Doing another slash immediately after makes Cotu raise the ax and slash the same way in the opposite direction. Basically a 2-slash looping combo
 Unlockable Skill
 “Ax Counterstrike”
+Idea: detonating the ax also recalls it, removing the floating ax continuous attack and increasing gameplay momentum (which also fits Cotu’s character more)
 
 Make Different Game Mechanics Intersect; to create depth, you should be able to use multiple skills simultaneously
 Vid on Interesting Mechanics vs Depth: https://www.youtube.com/watch?v=Fuf_SpKCYVY
@@ -2182,28 +2188,28 @@ Smart, toxic, and responsible. Sassy
 Miss Serpentine (a snake): dumb, well-meaning, and responsible. Gentle
 Flora (flower girl in a pot of dirt): semi-smart, toxic, and irresponsible. Smooth
 Conversation ideas:
-Future Blade talking with X
-FB: “...So I talked with X recently…”
-Flora: “STOP.”
+Flora talking with X
+Flora: “...So I talked with X recently…”
+FB: “STOP.”
 MS: “No, go on! What’d you guys talk about?”
-FB says they made small talk and eventually sparred together. Afterward, X told FB that he respects him as a fighter. FB enunciates this like it’s a huge deal
-Flora: “That’s it?”
-FB: “AND, he said I’m a ‘wise tactician.’”
-Flora: “...girl.”
-FB: “Now I know it doesn’t sound like much, but X doesn’t compliment people, so for him to say all this, maybe it means…something else, you know?”
-Flora: “...girl, he does.”
-FB: “Does what?”
-Flora: “Give out compliments. He does that to everyone he trains with.”
-FB: “WHAT THE HELL?”
-MS: “Really? I always thought he was kinda scary.”
-Flora: “You guys totally won’t believe me, but he’s actually a really nice guy. I haven’t seen him around the gyms, like, super often, but whenever I see him, he’s always kind and respectful. I’ve never seen him say anything mean to anyone, just to be mean. It’s always like, constructive criticism.”
-FB: “So what was up with that whole tough guy persona he had during the tournament?”
-Flora: “That was just to hype up the crowd for his fights, but that’s not who he is in real life. Have you ever even talked to him outside of this one conversation?”
-FB: “...oh my god. Oh my GOD.”
-MS: “What’s wrong Foobie? Shouldn’t you like him even more now? I know I do!”
-FB: “Girl, I thought he was toxic like me! How am I supposed to relate to him now?”
+Flora says they made small talk and eventually sparred together. Afterward, X told Flora that he respects her as a fighter. Flora enunciates this like it’s a huge deal
+FB: “That’s it?”
+Flora: “AND, he said I’m a ‘wise tactician.’”
+FB: “...girl.”
+Flora: “Now I know it doesn’t sound like much, but X doesn’t compliment people, so for him to say all this, maybe it means…something else, you know?”
+FB: “...girl, he does.”
+Flora: “Does what?”
+FB: “Give out compliments. He does that to everyone he trains with.”
+Flora: “WHAT THE HELL?”
+MS: “Really? I thought he was too mean for that.”
+FB: “You guys totally won’t believe me, but he’s actually a really nice guy. I haven’t seen him around the gyms, like, super often, but whenever I see him, he’s always kind and respectful. I’ve never seen him say anything mean to anyone, just to be mean. It’s always like, constructive criticism.”
+Flora: “So what was up with that whole tough guy persona he had during the tournament?”
+FB: “That was just to hype up the crowd for his fights, but that’s not who he is in real life. Have you ever even talked to him outside of this one conversation?”
+Flora: “...oh my god. Oh my GOD.”
+MS: “What’s wrong Flora? Shouldn’t you like him even more now? I know I do!”
+Flora: “Girl, him being mean is what made him hot!”
 …
-Note: After overhearing the part of the conversation where Flora says X is nice, the player can confront X about it at the gala. X says that he has to be nice for people to want to train with him, and it’d be stupid to be mean to everyone. He can only be himself around you and his closest friends, and in the arena, when he talks to the crowd. What’s left out of his explanation is the fact that in the gyms, he’s Tempered X, who has a more gentle personality. The player can infer this themself
+Note: After overhearing the part of the conversation where FB says X is nice, the player can confront X about it at the gala. X says that he has to be nice for people to want to train with him, and it’d be stupid to be mean to everyone. He can only be himself around you and his closest friends, and in the arena, when he talks to the crowd. What’s left out of his explanation is the fact that in the gyms, he’s Tempered X, who has a more gentle personality. The player can infer this themself
 Everyone talking about Cotu
 Subtext: in this case, Cotu didn’t choose to lose his powers, and the way that he lost his powers is shrouded in mystery
 Everyone speaks in more hushed tones
@@ -2300,6 +2306,7 @@ When the arena attack occurs, if the boss happens to be standing on a tile that 
 The tile that the boss is considered to be standing on (i.e. the tile the boss is closest to) is constantly highlighted as the boss moves around
 
 Candy Cat
+Gauntlet Central boss
 Giant cat monster made of sugar crystals and candy bits
 Terrifying giant predator
 Potential Inspiration: “Spotted by the Tyrannosaur” by robotinpyjamas on Instagram
@@ -2350,9 +2357,46 @@ During the gala, after a few matches have passed, news breaks out that Candy Cat
 Idea: at the gala, without the watchful eyes of Blackstar and X, Cotu is kidnapped, ending the game
 Idea: to win the game, the player must bring Clarity or the mites to Candy Cat’s holding cell to restrain Candy Cat, AND stop the kidnappers by following the rude NPCs when they walk away
 
+Flower Boss/Flower Clerk: Flora
+Gala boss
+Also an NPC who runs a shop that sells flower-based goods
+Boss theme is beautiful, uplifting classical music that moves your heart and makes you cry
+Inspirations:
+When You Believe from The Prince of Egypt
+Humoresque No. 7 by Antonín Dvořák
+Arena is a beautiful sunlit grassy landscape with blue sky
+Daisy Bombs: daisies of various colors appear far away in the sky to fire projectiles at the target
+Grass Barrier: tall blades of grass appear in a wall and move sideways quickly like a train, shielding incoming attacks and injuring you if you touch them
+Cutscene Idea: Cotu kills Flora
+Cotu just landed the killing blow and was declared the winner
+Beautiful bittersweet classical music plays
+Future Blade dashes into the arena with Snake on his shoulder and he holds Flora in his hands
+FB: “Flora!”
+FB looks down at Flora
+FB: “Flora…I’m so sorry.”
+Flora: “What are you sorry for?”
+FB looks down. He’s sobbing and can’t meet her eyes. “I shouldn’t have let you train with me. I should’ve given you a better coach. You needed-you deserved someone at your level. Not someone weak like-”
+Flora: “Phoebe…”
+FB looks at Flora
+Flora smiles at FB. “I didn’t come here to win. I’m here so I can spend time with you.”
+Flora looks at Snake. Snake is tearfully smiling.
+Flora: “All I ever wanted…was to have fun with my friends. I couldn’t ask for anything more.”
+FB sobs and embraces Flora closer.
+FB: “We love you, Flora.”
+Flora: “I love you t-”
+Flora’s soul floats away. FB is holding a flower in his hands.
+Cut to a wide shot of FB kneeling in the grass dramatically looking down at the flower in his hands, very similarly to the Elden Ring thumbnail. The flower’s petals float away in the wind
+Cut to a shot from above looking down at FB and Snake. Snake looks up at the petals with FB. “See you soon, friend.”
+FB and Snake turn around to face Cotu, who watched from a distance
+FB and Snake nod.
+Cotu raises his hand for a motionless wave at them
+
 Neuron Boss: Neuro
+Gala boss
 Shaped like a neuron where the soma is the head (nucleus is a singular eye, dendrites are hair, mitochondria are eyebrows?) and the axon terminals are feet. The head and feet are constantly flickering and changing shape. Neuro has no arms. Their base form is tall, so they have to hunch down to talk to others at face level, but they frequently stand tall and puff out their “chest” when bragging. They can also “sprint” by running with both their head and feet on the ground
 Can move incredibly quickly, fly, and change size extremely (e.g. they can grow their head to fill up the entire sky)
+Very low health, but very few/difficult opportunities to hit it. If you know how to hit it, you can end the fight very quickly
+Idea: Neuro can use a lightning charge to destroy any boomerang near it. The LC recharges over time. To hit Neuro, you must force it to consume a LC, then hit it with another boomerang before the charge returns. Shurikens require very little energy to destroy, so Neuro doesn’t consume an LC to destroy them
 Idea: arena is a particle accelerator (the inside of a gigantic donut)
 At some point in the fight, the player must continuously run forward through the accelerator to avoid something chasing them (e.g. energy field, a monster, etc.)
 Idea: floor is a neuron network, and player must sometimes stand between the neurons to avoid damage
@@ -2390,8 +2434,8 @@ Idea: normally doesn’t have arms, but can briefly create super long arms, hand
 Frequently uses crooked hand poses like claws
 Idea: has an ugly and small soul → it’s ugly because it resembles a brain: lumpy and squiggly
 Lore/Story Ideas:
-One of the highest ranking gods from the tournament
-Effortlessly defeats Flora, Future Blade’s star student and friend
+They didn’t participate in the tournament bc they were stuck in the Brain, making them unranked and unknown to most people
+Effortlessly defeats Flora, Future Blade’s star student and friend, if Cotu doesn’t fight her
 Voice sounds like Bill Cipher from Gravity Falls, but pushed a bit in the direction of Skeletor’s voice, and electrically synthesized
 Loud, narcissistic, witty, and funny fast talker who constantly proclaims themself to be the greatest in the universe
 Blames their loss on bad luck
@@ -2817,7 +2861,7 @@ Greg didn’t take the tournament as seriously as Pilot, causing friction betwee
 No name is passionate about fighting and wants to become elite (i.e. enter the gala), but he’s also passionate because he feels insecure about holding his brothers back since he can’t use magic or portals
 No name used to be subservient to his brothers (mainly Pilot since he was bossy) because he had no voice. After Pilot and Greg worked out their differences, no name gained the freedom to think for himself and self-actualized. He realized he was genuinely passionate about fighting and became the brothers’ leader. He communicates to his brothers mainly by doing some vague gesture that the brothers miraculously interpret correctly every time
 
-Jab Crab Boss (just an idea)
+Jab Crab aka Jack Boss (just an idea)
 Heavily armored crab in a tiny arena surrounded by walls/floor spikes/floor shark teeth/whatever
 Has 2 big claws attached by long extendable/retractable tube arms
 Can catch the rose and throw it aside and/or parry it
@@ -2849,6 +2893,16 @@ Loves to glaze, but isn’t afraid to say when something is terrible
 Convo idea:
 Cotu: “You up for a spar?”
 GF: “Absolutely not. Please don’t hit me, I beg you.”
+
+Long Arms
+Ball/polyhedron with extremely big and long arms with huge tri-finger claws with glowing dots in the palms. Legs are 2 short stubby legs or 4 crab-like legs. Has a huge eye in the center
+Fights by standing at a distance and holding its claws out in front of you, ready to catch your attacks or strike
+Inspired by Conor McGregor holding out his open hands to control his opponent’s hands (great examples in his fight vs Eddie Alvarez)
+This could possibly be the Sean Strickland god who trains Jab Crab and beefs with Future Blade
+Idea: has a little translator screen that speaks for him. It sounds like Sean Strickland and makes facial expressions
+On the other hand, it would also be cool to lean into the Conor McGregor parallels and make him act more like McGregor
+Idea: while training Jab Crab, Long Arms calls him Jack, referencing Sean Strickland talking to Jack Marshman in R3 of their fight
+Idea: he’s actually around the strength of a Gauntlet 2 boss, but he rides a dragon in Gauntlet Central to fight at their level
 
 RPG Boss (just an idea)
 Special gamemode where it’s a turn-based RPG that looks like Mother/Earthbound
@@ -3814,6 +3868,29 @@ Tempered X
 Blackstar
 Turbo Jester (?)
 Fire Dancer (?)
+Plot Idea 3D: The Gala
+Same as Plot Idea 3C, but with major changes
+The general concept is the same: Cotu trains with others in his weakened form to get stronger, and the gala is an official event to qualify for the tournament. The primary differences here are 1: there are no non-gala subplots (trapped with mites, trapped with Clarity, Candy Cat’s escape) and 2: all Gauntlet gyms are participating in the gala; every single gym is a qualifier for the next stage
+The player can practice fighting any boss they’ve encountered before in a free play mode, exactly like how you can fight any boss you encountered in Hollow Knight’s Godhome or Sekiro’s Reflections of Strength
+Idea: Cotu records bosses he fights in a journal. This journal stays the same even after the player loses the gala
+Gym 1: Beginners and Casuals
+Gauntlet Variant 1, the gentle guides
+Jab Crab, an ambitious beginner
+X, who’s not supposed to be here but trains you
+Gym 2: Bullies and Ambitious Rising Stars
+Elite Gunner and Sentinel, the cool coaches
+Mites. It’s funny to see a bunch of wild animals training
+Clarity
+Grow-a-Gator, the gym bully
+Gauntlet Central: Elite Athletes
+Future Blade: a self-deprecating drag queen
+Candy Cat, the captive sparring partner
+Gala: Championship Contenders
+Flora
+Neuro
+Tempered X
+Blackstar
+Turbo Jester (?)
 Plot Idea 4: Nothing (Minimal Plot)
 Cotu trains with others in his weakened form, but only to make himself stronger, not for a competition. As he progresses through the gyms, word spreads that the champion is getting back into fighting, and more and more people flock to the gyms to see him fight. Eventually, he unintentionally gathers a huge following after training at Gauntlet Central, and the Gauntlet organizes an unofficial mock tournament among the gods there just for fun
 Issues with this plot:
