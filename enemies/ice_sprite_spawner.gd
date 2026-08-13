@@ -14,12 +14,13 @@ extends Node3D
 
 @onready var root := get_tree().root
 @onready var visuals := $Visuals
-@onready var hex1 := $Visuals/FlatHexagon1
-@onready var hex2 := $Visuals/FlatHexagon2
-@onready var hex3 := $Visuals/FlatHexagon3
-@onready var hex4 := $Visuals/FlatHexagon4
-@onready var hex5 := $Visuals/FlatHexagon5
-@onready var hex6 := $Visuals/FlatHexagon6
+@onready var visuals_scalable := $Visuals/Scalable
+@onready var hex1 := $Visuals/Scalable/FlatHexagon1
+@onready var hex2 := $Visuals/Scalable/FlatHexagon2
+@onready var hex3 := $Visuals/Scalable/FlatHexagon3
+@onready var hex4 := $Visuals/Scalable/FlatHexagon4
+@onready var hex5 := $Visuals/Scalable/FlatHexagon5
+@onready var hex6 := $Visuals/Scalable/FlatHexagon6
 @onready var light := $OmniLight
 
 @onready var ice_sprite := preload("res://enemies/ice_sprite.tscn")
@@ -41,7 +42,7 @@ func _ready():
 	cam = root.find_child("Camera3D", true, false)
 	var t = get_tree().create_tween().set_parallel()
 	t.tween_property(visuals, "position", max_height*Vector3.UP, rise_time).as_relative().from(6*Vector3.DOWN)
-	t.tween_property(visuals, "scale", max_scale*Vector3.ONE, rise_time).from(min_scale)
+	t.tween_property(visuals_scalable, "scale", max_scale*Vector3.ONE, rise_time).from(min_scale)
 	
 	# Group hexes and initialize their timing/rotation arrays
 	hexes = [hex1, hex2, hex3, hex4, hex5, hex6]

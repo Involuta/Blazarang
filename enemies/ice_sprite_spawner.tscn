@@ -1,8 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://bg48lfbn1h34h"]
+[gd_scene load_steps=21 format=3 uid="uid://bg48lfbn1h34h"]
 
 [ext_resource type="PackedScene" uid="uid://c35irt0wpfa0g" path="res://enemies/flat_hexagon.tscn" id="1_fa0ep"]
 [ext_resource type="Script" path="res://enemies/ice_sprite_spawner.gd" id="1_p5m4w"]
 [ext_resource type="Texture2D" uid="uid://namwvkk58jhe" path="res://sprites/blurry_circle.png" id="3_gms0c"]
+[ext_resource type="Script" path="res://general_scripts/damage_over_time_area.gd" id="4_1uke8"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="5_aeffj"]
+[ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="6_j8l7h"]
+[ext_resource type="Shader" uid="uid://vvgsovx2psnk" path="res://shaders/smoke_LOD.tres" id="7_bu7u5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_idhv3"]
 roughness = 0.12
@@ -16,36 +20,103 @@ material = SubResource("StandardMaterial3D_idhv3")
 radius = 0.375
 height = 0.75
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_pmbbr"]
+height = 60.0
+radius = 1.5
+
+[sub_resource type="Gradient" id="Gradient_lgt54"]
+offsets = PackedFloat32Array(0, 0.526012, 1)
+colors = PackedColorArray(0.344767, 0.660412, 0.914527, 1, 0.548962, 0.772177, 0.963378, 1, 0.231014, 0.563762, 0.812967, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_paov1"]
+gradient = SubResource("Gradient_lgt54")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gyud0"]
+emission_shape = 6
+emission_ring_axis = Vector3(2.08165e-12, -1, 2.08165e-12)
+emission_ring_height = 2.08165e-12
+emission_ring_radius = 0.6
+emission_ring_inner_radius = 0.3
+direction = Vector3(2.08165e-12, -1, 2.08165e-12)
+spread = 15.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 0.6
+initial_velocity_max = 1.2
+scale_min = 0.02
+scale_max = 0.03
+color_ramp = SubResource("GradientTexture1D_paov1")
+
+[sub_resource type="Gradient" id="Gradient_lt7b8"]
+offsets = PackedFloat32Array(0, 0.138728, 0.586705, 1)
+colors = PackedColorArray(0, 0, 0, 0.188235, 0, 0, 0, 0.352941, 0.827451, 0.827451, 0.827451, 0.141176, 0.843184, 0.843184, 0.843184, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_in7qc"]
+gradient = SubResource("Gradient_lt7b8")
+
+[sub_resource type="Curve" id="Curve_pegw1"]
+_data = [Vector2(0, 0.18766), 0.0, 0.0, 0, 0, Vector2(0.182966, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_7uscm"]
+curve = SubResource("Curve_pegw1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i1gg2"]
+emission_shape = 6
+emission_ring_axis = Vector3(2.08165e-12, -1, 2.08165e-12)
+emission_ring_height = 2.08165e-12
+emission_ring_radius = 0.6
+emission_ring_inner_radius = 0.3
+direction = Vector3(2.08165e-12, -1, 2.08165e-12)
+spread = 15.0
+gravity = Vector3(2.08165e-12, 0.45, 2.08165e-12)
+initial_velocity_min = 0.6
+initial_velocity_max = 1.2
+scale_min = 2.4
+scale_max = 3.6
+scale_curve = SubResource("CurveTexture_7uscm")
+color_ramp = SubResource("GradientTexture1D_in7qc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jswwv"]
+render_priority = 0
+shader = ExtResource("7_bu7u5")
+shader_parameter/ColorParameter = Color(0.552941, 0.768627, 1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_wxrcu"]
+material = SubResource("ShaderMaterial_jswwv")
+size = Vector2(1.6, 1.3)
+
 [node name="IceSpriteSpawner" type="Node3D"]
 script = ExtResource("1_p5m4w")
 max_height = 30.0
 
 [node name="Visuals" type="Node3D" parent="."]
 
-[node name="FlatHexagon1" parent="Visuals" instance=ExtResource("1_fa0ep")]
+[node name="Scalable" type="Node3D" parent="Visuals"]
+
+[node name="FlatHexagon1" parent="Visuals/Scalable" instance=ExtResource("1_fa0ep")]
 transform = Transform3D(0.839734, -3.87625e-18, 3.06322e-17, 3.06322e-17, 0.209173, -0.813264, -3.87625e-18, 0.813264, 0.209173, 0, 0, 0)
 
-[node name="FlatHexagon2" parent="Visuals" instance=ExtResource("1_fa0ep")]
+[node name="FlatHexagon2" parent="Visuals/Scalable" instance=ExtResource("1_fa0ep")]
 transform = Transform3D(0.826933, -2.38384e-16, 3.01642e-17, 3.01642e-17, 0.205976, 0.80087, -2.38384e-16, -0.80087, 0.205976, 0, 0, 0)
 
-[node name="FlatHexagon3" parent="Visuals" instance=ExtResource("1_fa0ep")]
+[node name="FlatHexagon3" parent="Visuals/Scalable" instance=ExtResource("1_fa0ep")]
 transform = Transform3D(-5.37445e-09, -0.122953, 0.478041, 0.4936, -2.15759e-08, -1.72161e-16, 2.08958e-08, 0.478041, 0.122953, 0, 0, 0)
 
-[node name="FlatHexagon4" parent="Visuals" instance=ExtResource("1_fa0ep")]
+[node name="FlatHexagon4" parent="Visuals/Scalable" instance=ExtResource("1_fa0ep")]
 transform = Transform3D(-1.74502e-09, -0.0399215, -0.155215, 0.160266, -7.00547e-09, -5.58988e-17, -6.78465e-09, -0.155215, 0.0399215, 0, 0, 0)
 
-[node name="FlatHexagon5" parent="Visuals" instance=ExtResource("1_fa0ep")]
+[node name="FlatHexagon5" parent="Visuals/Scalable" instance=ExtResource("1_fa0ep")]
 transform = Transform3D(-0.0431101, -9.4494e-09, 0.167612, -0.167612, -7.32654e-09, -0.0431101, 9.4494e-09, -0.173067, -7.32654e-09, 0, 0, 0)
 
-[node name="FlatHexagon6" parent="Visuals" instance=ExtResource("1_fa0ep")]
+[node name="FlatHexagon6" parent="Visuals/Scalable" instance=ExtResource("1_fa0ep")]
 transform = Transform3D(-0.126142, 2.76493e-08, -0.490438, 0.490438, -2.14377e-08, -0.126142, -2.76493e-08, -0.5064, -2.14377e-08, 0, 0, 0)
 
-[node name="HeadSphere" type="MeshInstance3D" parent="Visuals"]
+[node name="HeadSphere" type="MeshInstance3D" parent="Visuals/Scalable"]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 transparency = 0.15
 cast_shadow = 0
 mesh = SubResource("SphereMesh_38oom")
-skeleton = NodePath("../OmniLight")
+skeleton = NodePath("../../OmniLight")
 
 [node name="OmniLight" type="OmniLight3D" parent="Visuals"]
 light_color = Color(0.509804, 0.733333, 1, 1)
@@ -66,3 +137,35 @@ billboard = 1
 double_sided = false
 no_depth_test = true
 texture = ExtResource("3_gms0c")
+
+[node name="FootDOTArea" type="Node3D" parent="Visuals"]
+script = ExtResource("4_1uke8")
+time_btwn_damage_ticks = 0.15
+
+[node name="EnemyHitbox" type="Area3D" parent="Visuals/FootDOTArea"]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("5_aeffj")
+damage = 3
+debuff = 1
+frostbite_buildup = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Visuals/FootDOTArea/EnemyHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -30, 2.08165e-12)
+shape = SubResource("CylinderShape3D_pmbbr")
+
+[node name="HatSnowParticles" type="GPUParticles3D" parent="Visuals"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+amount = 210
+lifetime = 4.0
+process_material = SubResource("ParticleProcessMaterial_gyud0")
+draw_pass_1 = ExtResource("6_j8l7h")
+
+[node name="HatFallingClouds" type="GPUParticles3D" parent="Visuals"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+cast_shadow = 0
+amount = 240
+lifetime = 7.5
+preprocess = 1.5
+process_material = SubResource("ParticleProcessMaterial_i1gg2")
+draw_pass_1 = SubResource("QuadMesh_wxrcu")
