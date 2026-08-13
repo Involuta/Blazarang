@@ -3896,6 +3896,35 @@ Cotu trains with others in his weakened form, but only to make himself stronger,
 Issues with this plot:
 Since the gala’s scheduled according to Cotu’s pace, there’s no longer a time limit, which means there’s no more long-term strategy, overarching anxiety, nor replayability
 Just like with Plot Ideas 3A and 3B, the gala is a casual competition, and nobody (which includes the player and the fighters) cares about competitions unless the rankings are official
+Plot Idea 5: For The Gauntlet
+Cotu retired from fighting after winning the tournament, but gets back into training after learning that Blackstar isn’t resurrecting even after fighting all the strongest gods. He trains with others in his weakened form to get strong enough to challenge her
+There is no gala; the player is simply moving up the gyms to fight stronger opponents and can take their time. Feels more like Cuphead (infinite attempts) than Persona 5 (limited days and energy)
+All gods are training for the tournament. We never see them in competition like in the gala plots
+Gyms have limited capacity (limited realm rooms), so the gala tests gods (maybe forces them to fight?) to know whether they’re qualified for the gym they want to enter OR to kick them out and make room for another god
+Cotu’s motivation isn’t directly told to the player; the player must piece it together with cutscene dialogue. It’s fine for the player to not know Cotu’s motivation for a couple reasons:
+The player can think about their own motivation: beat the game
+On the surface, Cotu’s motivation is simply to have fun since he enjoys himself while fighting
+Gods preparing for the tournament is an allegory for people preparing for Heaven
+Gods frequently stress about their ranking in the tournament
+As Cotu fights people, they learn capital virtues
+Candy Cat learns chastity
+Grow-a-Gator learns temperance
+Mite Queen learns diligence
+Idea: Clarity learns kindness. She’s back to being the diva in the original ideas for her character
+X learns patience
+Blackstar learns humility (she doesn’t need to resurrect to feel fulfilled in life)
+Cotu is charity
+Neuro learns nothing and is trapped and punished
+Cotu represents the 3 theological virtues
+Faith: Cotu is friends with Dev
+Hope: Cotu has hope that Blackstar will resurrect, that others will improve, and that Dev has good plans for him
+Love: Cotu starts training again to help Blackstar and loves himself
+The Gauntlet represents the 4 cardinal virtues
+Fortitude: Gauntlet Variant 1 fights no matter how outclassed they are. The gauntlet overall is made of brave warriors
+Prudence: Elite Gunner and Sentinel strategize and manage the chaos. The gauntlet overall constantly researches combat and technology
+Justice: Gauntlet Central imprisons Candy Cat for his crimes. The gauntlet overall doesn’t tolerate combat outside of realm rooms
+Temperance: the gauntlet overall is serious and just trains instead of having fun
+Idea: Cotu must defeat himself at the end of the game. It turns out the reason why he removed his powers was because they were corrupting his soul, turning it into a black hole
 Character interactions that are the same regardless of plot
 Idea: Sean Strickland god overhears Future Blade and his friends gossiping about him and starts beef
 After fighting FB, Sean god becomes friends with him because he respects him as a fighter
