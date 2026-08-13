@@ -472,7 +472,6 @@ func walk_circle_spawner():
 
 	# 5. Apply linear speed and let CharacterBody3D handle movement
 	velocity = move_dir * walk_speed
-	move_and_slide()
 
 func switch_to_circle_icon():
 	arm_long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
