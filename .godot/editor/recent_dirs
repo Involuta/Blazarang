@@ -1,4 +1,5 @@
 res://enemies/enemy_anims
+res://
 res://enemies
 res://shaders
 res://general_scripts
@@ -16,7 +17,6 @@ res://enemies/enemy_2d_anims
 res://levels/balls_level
 res://level_maps
 res://procedural_animation
-res://
 res://enemies/spawners
 res://rang
 res://photo_scenes

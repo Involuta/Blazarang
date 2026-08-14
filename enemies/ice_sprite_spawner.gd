@@ -3,8 +3,8 @@ extends Node3D
 @export var max_brightness := 12.0
 @export var min_brightness := 6.0
 @export var appear_dim_time := 12.0
-@export var max_height := 60.0
-@export var rise_time := 60.0
+@export var max_height := 18.0
+@export var rise_time := 120.0
 @export var min_scale := 1.0
 @export var max_scale := 6.0
 

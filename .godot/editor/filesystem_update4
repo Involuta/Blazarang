@@ -50,3 +50,12 @@ res://levels/snow_level/snow_level_test_env.tscn
 res://enemies/clarity.gd
 res://glb_inherited_scenes/snowflake_entity_meshes.tscn
 res://enemies/ice_sprite_spawner.tscn
+res://enemies/enemy_anims/snowflake_entity_doubleshardseq1.res
+res://enemies/enemy_anims/snowflake_jumpshot.res
+res://enemies/enemy_anims/snowflake_entity_quadshardseq1.res
+res://enemies/enemy_anims/snowflake_entity_rotateslow_3seg.res
+res://enemies/enemy_anims/snowflake_entity_singleshardseq1.res
+res://enemies/enemy_anims/snowflake_entity_stagger.res
+res://enemies/enemy_anims/snowflake_entity_tripleshardseq1.res
+res://enemies/enemy_anims/snowflake_entity_rotateslow_1seg.res
+res://enemies/ice_sprite_spawner.gd
