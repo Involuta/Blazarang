@@ -2254,9 +2254,10 @@ FB: “I’ll be proud…when…I get a win over you in the tournament.”
 His telegraphing is balanced by his incredibly high speed, precision, and strength
 Relates to and quickly grows attached to Cotu as he’s the first person he’s met who really seems interested in their own visual design like FB is
 FB only comments on this if the player chooses a non-default skin
-FB: “Oh my god. You have no idea how many gods thought I was CRAZY for changing my looks this much.”
-Cotu raises an eyebrow: “I didn’t know it was that big of a deal to gods.”
-FB: “*sigh* Oh, to have your blissful ignorance.”
+FB: “Oh my god. People said I was CRAZY for changing my looks this much.”
+Cotu raises an eyebrow: “I didn’t know it was that big of a deal.”
+FB: “*sigh* You have no idea.”
+Idea: FB has a locket with Trobbio’s face in it (ask Team Cherry first)
 
 Idea: Cactyrants - Evil Cactus and Giant Bird
 Surreal, funny, and disturbing Gauntlet Gym 2 boss
@@ -2357,7 +2358,7 @@ During the gala, after a few matches have passed, news breaks out that Candy Cat
 Idea: at the gala, without the watchful eyes of Blackstar and X, Cotu is kidnapped, ending the game
 Idea: to win the game, the player must bring Clarity or the mites to Candy Cat’s holding cell to restrain Candy Cat, AND stop the kidnappers by following the rude NPCs when they walk away
 
-Flower Boss/Flower Clerk: Flora
+Flower Boss: (and/or Flower Clerk) Flora
 Gala boss
 Also an NPC who runs a shop that sells flower-based goods
 Boss theme is beautiful, uplifting classical music that moves your heart and makes you cry
@@ -2365,8 +2366,17 @@ Inspirations:
 When You Believe from The Prince of Egypt
 Humoresque No. 7 by Antonín Dvořák
 Arena is a beautiful sunlit grassy landscape with blue sky
+Uses plants and flowers that were likely found in the Garden of Eden
+Fun fact: only fig leaves were specifically mentioned in the Bible; the rest were in the Levant/Mesopotamia area
+Fig leaves (fun fact: fig plants have no flowers. Figs are actually hollow stems where flowers grow on the inside; this structure is called a syconium)
+Almonds
+Dates
+Olives
+Pomegranates
+Grapes
 Daisy Bombs: daisies of various colors appear far away in the sky to fire projectiles at the target
 Grass Barrier: tall blades of grass appear in a wall and move sideways quickly like a train, shielding incoming attacks and injuring you if you touch them
+Petal Barrage: hundreds of olive (or date) flowers shoot petals at you like bullets OR date/olive flower petals fly everywhere as special effects
 Cutscene Idea: Cotu kills Flora
 Cotu just landed the killing blow and was declared the winner
 Beautiful bittersweet classical music plays
@@ -3825,6 +3835,23 @@ The general concept is the same: Cotu trains with others in his weakened form to
 I was wondering why I couldn’t get as emotionally invested in the gala as much as UFC fights, and I thought maybe it’s because the gala is unranked. I imagined what it’d be like if a UFC fight were also unranked and realized that I would care about it a lot less, and so would the fighters
 Why is it still called a gala? The gala can still be a name for an official sporting event, e.g. the Golden Gala
 Idea: the tournament was originally called “the tournament” because the creator of the universe only imagined it as a tournament, nothing more. Afterward, the gods agreed that they may add other events to the tournament, so they renamed it to “the gala”
+Gameplay loop:
+The player repeatedly attempts the gala, strategizing while getting further and further every time
+The above loop makes Blazarang sound like a roguelike, but Blazarang also seems close in style to Cuphead in that it’s a boss rush with little player ability variety, so what should the game lean more towards? I want to keep the strategy involved in long-term planning and reward the player for beating a boss in only a few attempts bc it shows the player’s increase in skill, so I’ll keep the roguelike aspect of repeating the gala from the start. However, it’s vital to note that roguelikes work bc they have a lot of gameplay/build variety. Since Blazarang doesn’t have as much variety, make the full run attempts longer so that the player isn’t forced into the same gameplay too much
+You may also feel inspired to make Blazarang feel similar to the gauntlets in Hollow Knight and Sekiro since you like those, but don’t make Blazarang work exactly like that. The gauntlets only work in those games bc you already mastered the bosses beforehand (plus, the gauntlets aren’t the main draw in those games; they’re just bonuses). Instead, give the player time to learn the bosses individually just like in Hollow Knight and Sekiro
+Idea: at the end of each run, you can go into battle memory mode where you can attempt any boss you’ve ever fought across all runs as many times as you want with any of the upgrades you unlocked across all runs, but once you start a new run, you can’t practice anymore
+Alt idea: to unlock free play mode, you must first reach the gala. This way, the player isn’t tempted to replay the easy bosses too many times before making another run attempt
+Expected progress for the average player:
+Attempt 1: Late Gym 2-Early Central
+Attempt 2: Start of Gala. New bosses encountered due to speed
+Between attempts 2 and 3: practice Gym 2, Central, and early Gala bosses
+Attempt 3: Late Central-Mid Gala. Alternate bosses encountered
+Btwn attempts 3 & 4: practice alternate and/or gala bosses
+Attempt 4: Mid Gala. Either Gauntlet or alternate route(s) used
+Btwn attempts 4 & 5: practice gala bosses
+Attempt 5: Late Gala
+Btwn attempts 5 & 6: practice late gala bosses
+Attempt 6: Win
 I’m undecided between several options for how Cotu lost his powers:
 They were taken from him by Darkness, his arch-nemesis who is now on the run from every god in the universe OR locked away in Gauntlet Central like Candy Cat
 It is a mystery how his powers were taken
@@ -3870,9 +3897,8 @@ Turbo Jester (?)
 Fire Dancer (?)
 Plot Idea 3D: The Gala
 Same as Plot Idea 3C, but with major changes
-The general concept is the same: Cotu trains with others in his weakened form to get stronger, and the gala is an official event to qualify for the tournament. The primary differences here are 1: there are no non-gala subplots (trapped with mites, trapped with Clarity, Candy Cat’s escape) and 2: all Gauntlet gyms are participating in the gala; every single gym is a qualifier for the next stage
-The player can practice fighting any boss they’ve encountered before in a free play mode, exactly like how you can fight any boss you encountered in Hollow Knight’s Godhome or Sekiro’s Reflections of Strength
-Idea: Cotu records bosses he fights in a journal. This journal stays the same even after the player loses the gala
+The general concept is the same: Cotu trains with others in his weakened form to get stronger, and the gala is an official event to qualify for the tournament. The primary differences here are 1: there are no non-gala subplots (trapped with mites, trapped with Clarity, Candy Cat’s escape) and 2: all Gauntlet gyms are participating in the gala; every single gym is a qualifier for the next stage. To progress to the next stage, each fighter must defeat a certain number of other fighters
+Idea: reaching the gala unlocks the battle memory system, where you’re able to fight every boss you’ve encountered so far. This way, you can practice against gala bosses even though in a real competition, it wouldn’t make sense for them to practice with you
 Gym 1: Beginners and Casuals
 Gauntlet Variant 1, the gentle guides
 Jab Crab, an ambitious beginner
@@ -3882,15 +3908,20 @@ Elite Gunner and Sentinel, the cool coaches
 Mites. It’s funny to see a bunch of wild animals training
 Clarity
 Grow-a-Gator, the gym bully
+Triplets (if you’re fast enough)
 Gauntlet Central: Elite Athletes
-Future Blade: a self-deprecating drag queen
+Future Blade, a self-deprecating drag queen
 Candy Cat, the captive sparring partner
+Triplets, who aren’t supposed to be here but help you
 Gala: Championship Contenders
 Flora
 Neuro
 Tempered X
 Blackstar
 Turbo Jester (?)
+Issues with this plot:
+No non-gala subplots makes the universe feel lame and small
+Forcing the player to complete previous gyms before entering the gala takes away some player freedom and strategy (do I skip straight to Gauntlet Central to practice against the harder bosses? Or go through the easier bosses to increase my stats?)
 Plot Idea 4: Nothing (Minimal Plot)
 Cotu trains with others in his weakened form, but only to make himself stronger, not for a competition. As he progresses through the gyms, word spreads that the champion is getting back into fighting, and more and more people flock to the gyms to see him fight. Eventually, he unintentionally gathers a huge following after training at Gauntlet Central, and the Gauntlet organizes an unofficial mock tournament among the gods there just for fun
 Issues with this plot:
@@ -3907,10 +3938,12 @@ On the surface, Cotu’s motivation is simply to have fun since he enjoys himsel
 Gods preparing for the tournament is an allegory for people preparing for Heaven
 Gods frequently stress about their ranking in the tournament
 As Cotu fights people, they learn capital virtues
-Candy Cat learns chastity
-Grow-a-Gator learns temperance
-Mite Queen learns diligence
-Idea: Clarity learns kindness. She’s back to being the diva in the original ideas for her character
+Candy Cat fails to learn chastity and remains imprisoned
+Grow-a-Gator learns temperance and befriends Cotu and Future Blade (idea: if you don’t defeat Gator in time, the gauntlet imprisons it)
+Idea: Clarity learns diligence
+Her mind became automatic due to lack of thought, symbolizing how people can become preoccupied with work without thinking about why, which is a spiritual form of sloth
+Maybe she had a foolish dream to fill up the void with snow, then forgot why she wanted to do it? Maybe she thought: “making snow is what I do, so that’s what I’ll do forever”?
+Future Blade learns kindness (from Flora)
 X learns patience
 Blackstar learns humility (she doesn’t need to resurrect to feel fulfilled in life)
 Cotu is charity
@@ -3924,7 +3957,16 @@ Fortitude: Gauntlet Variant 1 fights no matter how outclassed they are. The gaun
 Prudence: Elite Gunner and Sentinel strategize and manage the chaos. The gauntlet overall constantly researches combat and technology
 Justice: Gauntlet Central imprisons Candy Cat for his crimes. The gauntlet overall doesn’t tolerate combat outside of realm rooms
 Temperance: the gauntlet overall is serious and just trains instead of having fun
+Some characters are chill and just want to have fun, embodying the good vibes of Heaven
+Jab Crab shows humility and kindness (knowing that he’s weak but fighting just because he’s passionate about it)
+Triplets show healthy friendship and brotherhood
+Mite Queen is laid back, and it’s humorous to have an army of mites fighting in a gym
+Turbo Jester is purely for fun
 Idea: Cotu must defeat himself at the end of the game. It turns out the reason why he removed his powers was because they were corrupting his soul, turning it into a black hole
+Issues with this plot:
+Since there’s no gala, there’s no longer a time limit, which means there’s no more long-term strategy, overarching anxiety, nor replayability
+Counterpoint: the lack of repetition may be a good thing. Blazarang is closer in style to Cuphead in that it’s a boss rush with little player ability variety. The repetitive gameplay structure of progressing through the gala is more reminiscent of roguelikes like Slay the Spire, Risk of Rain 2, Enter the Gungeon, etc. However, these games work bc they have a lot of gameplay/build variety. Also, the continuous gauntlet (where you have to start from the beginning when you lose) also only works in Hollow Knight and Sekiro bc the games make you fight the bosses individually in the world first, and the gauntlets aren’t the main draw in those games
+This feels more serious than Blazarang should be; it’s about a bunch of gods hanging out and competing for fun, so why is Blackstar’s ascension taken so seriously?
 Character interactions that are the same regardless of plot
 Idea: Sean Strickland god overhears Future Blade and his friends gossiping about him and starts beef
 After fighting FB, Sean god becomes friends with him because he respects him as a fighter
@@ -4241,13 +4283,13 @@ Jester’s just trying to be funny
 Jester: “Alright Greg, how do you think today went?”
 Greg: “Awful.”
 Jester: “ENGH! Wrong!”
-Greg: “W-what? What do you mean wrong? I didn’t cast a single spell the whole day.”
+Greg: “W-what? What do you mean wrong? I didn’t cast a single friggin’ spell the whole day.”
 Jester: “It’s part of the process, bub. You can only cast a spell the right way after doing it every single wrong way.”
 Greg glances up and left: “...Really?”
-Jester: “No, ya stink.” Greg silently chuckles and covers his mouth partially. “But wat da hell are we supposed to do about it?”
-Greg: “Okay damn, *shrugs* it is what it is…so, same stuff tomorrow?”
+Jester: “No. Ya stink.” Greg covers his face in shame. “But wat da hell are we supposed to do about it?”
+Greg: “Okay damn…well, same stuff tomorrow?”
 Jester: “Ehh, depends on what the magic wants. Anyway whaddaya still doin’ here? Scram, ya walking lollipop, before I start to lick ya. BLEHHH” She starts whipping her tongue back and forth
-Greg: “Aight chill, I’m going. See ya.”
+Greg: “Yo chill, I’m going. See ya.”
 Jester goes back to her room and transforms into Tripty. There’s a mirror in the room showing her reflection, but she doesn’t look at it
 Tripty leans her back to the wall and puts a hand on her forehead. “*long sigh*...before I start to” Her hand slowly slides down her face. “...why did I say that shit…”
 Tripty slides down the wall and sits against the corner. “I wouldn’t be surprised if he doesn’t show up tomorrow.”
@@ -4264,10 +4306,10 @@ Greg: “Huh?”
 Tripty’s voice cracks: “Wah!”
 Greg stares at her inquisitively. “oh sup. Have we…met before?”
 Tripty: “NO.”
-Greg stares blankly for a moment, then snaps back into his relaxed confidence. “Then hey, I’m Greg. I help out around the lab and learn magic from Jester. It’s nice to meet ya.” He extends his hand.
+Greg stares blankly for a moment, then snaps back into his relaxed confidence. “Then hey, I’m Greg. I help out around the lab. It’s nice to meet ya.” He extends his hand.
 Tripty looks at his hand, confused whether it’s an open hand or closed fist. She cautiously pats it.
 Greg: “How ‘bout you?”
-Tripty glances around and backs away slowly, accelerating a bit over time. “Errr…I choose to remain anonymous. In fact, just pretend I was never he-ugh-” she bumps into a desk, causing her to fold forward clumsily in shock and make a funny noise
+Tripty glances around and backs away slowly, accelerating a bit over time. “Errr…I choose to remain anonymous. In fact, pretend I was never he-ugh-” she bumps into a desk, causing her to fold forward clumsily in shock and make a funny noise
 Greg chuckles lightly and raises an eyebrow condescendingly. “So what are you, a thief?”
 Tripty: “NO. No I’m not.”
 Greg’s expression turns skeptical.
@@ -4288,7 +4330,7 @@ Greg: “...okay?”
 Tripty: “CONFIRMED!” She clumsily sprints out of the room.
 Greg sits down on a lab stool and calmly ponders.
 Shortly thereafter, Jester comes bouncing in.
-Jester: “Gregory! Whaddaya sitting on yer ass fer? I don’t pay you nothing to do nothing!”
+Jester: “Gregory! Whaddaya sitting still for? I don’t pay you nothing to do nothing!”
 Greg: “Boss, someone broke into the lab just now.”
 Jester: “Eh? That’s not possible. No one gets into the lab without my permission.”
 Greg: “Oh, so…you actually have another lab assistant?”
@@ -4297,6 +4339,7 @@ Greg: “Hey, that’s no way to talk about your lab assistant.”
 Jester: “Ah don’t worry, I’d never talk about you that way.”
 Greg: “That doesn’t change-” Greg looks down and to the left for a moment, confused. “That doesn’t change the fact that-”
 Jester: “Enough yapping, bum. We got bigger fish to filet.”
+Issue: Greg betraying Tripty comes off as mean since we’re supposed to like Tripty
 Idea: Jester tries to gauge Greg’s feelings about her
 Tripty thinks Jester is obtrusive and obnoxious and that everyone secretly hates her but tolerates her because she’s powerful. She wants to know if Greg thinks this way, but is too shy to ask him directly, so she dances around the subject while slowly inching towards the real question
 Greg genuinely likes Jester as she is and defends her. He still thinks Tripty is a lab assistant
@@ -4354,11 +4397,11 @@ Creator: “I opened up the universe simulation software on my computer, made a 
 Blaze: “The gods?”
 Creator: “Yup. You and the rest of the gods were AI generated.”
 Blaze: “Huh, so that’s all it took...Why did you create us?”
-Creator: *nervous blaughter* “I was wondering what I was going to tell you when you asked that question, but then I realized you’re not real and I don’t care about your feelings. The truth is, I just wanted to see you guys fight each other. There’s really nothing else to it. And I got what I came for, so…now, I guess…do whatever you want.”
+Creator: *nervous laughter* “I was wondering what I was going to tell you when you asked that question, but then I realized you’re not real and I don’t care about your feelings. The truth is, I just wanted to see you guys fight each other. There’s really nothing else to it. And I got what I came for, so…now, I guess…do whatever you want.”
 Random Convo
 Blaze: “Where did our languages come from?”
 Creator: “I had this universe use the same languages as my universe so I could understand what y’all are thinking and saying. I also gave you guys the same slang, just for fun.”
-Blaze: “...What’s your universe like, Creator?”
+Blaze: “Ah...what’s your universe like, Creator?”
 Creator: “...I don’t know. When I talk about “my universe,” I’m really only talking about my planet. It’s called Earth. I’ve lived here my whole life and will probably never leave. I’m not able to venture out into the stars like you all. My people and I, we observe the cosmos from a distance, but we don’t actually go anywhere. So I can’t really describe what it’s like to live in my universe. Compared to yours, my universe isn’t very interesting at all.”
 Blaze: “...That’s not true.”
 Creator: ?
