@@ -776,13 +776,15 @@ func trigger_snowflake_rotate_slow():
 	snowflake_anim_player.play("RotateSlow1Seg")
 
 func trigger_snowflake_short_range_attack():
-	#var prefix = ["Triple", "Quad"].pick_random()
-	#var body = ["ShardSemicircleSequence", "ShardFanSequence"].pick_random()
-	#var suffix = ["1", "2"].pick_random()
-	#var test_attack = prefix + body + suffix
-	#snowflake_anim_player.play(test_attack)
 	var prefix = ["Single", "Double", "Triple", "Quad"].pick_random()
 	var attack = prefix + "ShardSequence1"
+	snowflake_anim_player.play(attack)
+
+func trigger_snowflake_long_range_attack():
+	var prefix = ["Triple", "Quad"].pick_random()
+	var body = ["ShardSemicircleSequence", "ShardFanSequence"].pick_random()
+	var suffix = ["1", "2"].pick_random()
+	var attack = prefix + body + suffix
 	snowflake_anim_player.play(attack)
 
 func play_anim_all_dress_shards(s: String = ""):
