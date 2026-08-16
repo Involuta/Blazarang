@@ -1612,9 +1612,12 @@ transform = Transform3D(4.49571, 0.0483118, -0.190526, -0.127043, 4.04257, -1.97
 transform = Transform3D(1, 5.8286e-10, 1.01449e-09, -2.48745e-10, 1, 1.59747e-08, 1.42833e-10, 1.67609e-08, 1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature" index="0"]
+bones/0/rotation = Quaternion(0.707107, -2.21972e-07, -2.21972e-07, 0.707107)
 bones/5/rotation = Quaternion(0.684153, -0.178704, -0.178704, 0.684153)
 bones/6/position = Vector3(0.828085, 1.02211, -0.462035)
 bones/8/position = Vector3(0.0032005, 1.02211, -1.0554)
+bones/10/position = Vector3(-0.00379543, 1.02211, 0.950407)
+bones/12/position = Vector3(0.825767, 1.02211, 0.477675)
 bones/14/position = Vector3(-0.823051, 1.02211, 0.473662)
 bones/16/position = Vector3(-0.820733, 1.02211, -0.466049)
 
@@ -1749,6 +1752,7 @@ draw_pass_1 = ExtResource("5_1f67e")
 
 [node name="FrontRightLinkHitParticles" type="GPUParticles3D" parent="ClarityArmMeshes"]
 transform = Transform3D(2.89029, 0.801855, 0.0570697, -0.803883, 2.88299, 0.205189, 1.39748e-07, -0.212978, 2.99243, -1.75342, -4.31561, 3.11041)
+visible = false
 emitting = false
 amount = 24
 lifetime = 2.0
@@ -1759,6 +1763,7 @@ draw_pass_1 = SubResource("BoxMesh_ltq1a")
 
 [node name="MiddleRightLinkHitParticles" type="GPUParticles3D" parent="ClarityArmMeshes"]
 transform = Transform3D(2.61679, 1.41659, 0.381636, -1.38141, 2.64192, -0.334551, -0.494058, 0.116088, 2.95675, -6.06964, -3.34371, 1.74964)
+visible = false
 emitting = false
 amount = 24
 lifetime = 2.0
@@ -1789,6 +1794,7 @@ draw_pass_1 = SubResource("BoxMesh_ltq1a")
 
 [node name="MiddleLeftLinkHitParticles" type="GPUParticles3D" parent="ClarityArmMeshes"]
 transform = Transform3D(2.97313, 0.0123747, 0.400353, 0.1647, 2.69557, -1.30643, -0.365115, 1.31671, 2.67076, 2.09479, -3.38592, -4.99669)
+visible = false
 emitting = false
 amount = 24
 lifetime = 2.0
@@ -1799,6 +1805,7 @@ draw_pass_1 = SubResource("BoxMesh_ltq1a")
 
 [node name="FrontLeftLinkHitParticles" type="GPUParticles3D" parent="ClarityArmMeshes"]
 transform = Transform3D(2.92899, -0.578751, 0.29334, 0.628926, 2.86585, -0.62559, -0.159536, 0.672279, 2.91935, 3.06876, -3.7981, -0.389646)
+visible = false
 emitting = false
 amount = 24
 lifetime = 2.0
