@@ -1,4 +1,4 @@
-[gd_scene load_steps=182 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=158 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -285,117 +285,6 @@ height = 0.3
 no_depth_test = true
 shading_mode = 0
 albedo_color = Color(0.560784, 0.803922, 1, 1)
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tes26"]
-animation = &"DoubleShardSequence1"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_51fo7"]
-animation = &"JumpShot"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mnu67"]
-animation = &"QuadShardSequence1"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8ise2"]
-animation = &"RotateSlow1Seg"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lfxj3"]
-animation = &"SingleShardSequence1"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_inroi"]
-animation = &"Stagger"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2wykb"]
-animation = &"Test"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mn7jq"]
-animation = &"TripleShardSequence1"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gjge1"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f7uow"]
-switch_mode = 2
-advance_mode = 2
-advance_expression = "rng.randf() <= .25"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kjcu6"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v0ape"]
-switch_mode = 2
-advance_mode = 2
-advance_expression = "rng.randf() > .25 and rng.randf() <= .5"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ag18a"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_spy4q"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4uvqa"]
-xfade_time = 0.6
-advance_mode = 2
-advance_expression = "arm_anim_player.current_animation == \"RegenShards\""
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r51dd"]
-switch_mode = 2
-advance_mode = 2
-advance_expression = "rng.randf() > .5 and rng.randf() <= .75"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s2ykg"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y4w40"]
-switch_mode = 2
-advance_mode = 2
-advance_expression = "rng.randf() > .75
-"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_20kpy"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wvpho"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f7guv"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_atysk"]
-advance_mode = 2
-advance_expression = "jump_shot_manual_trigger"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_qlhjd"]
-states/DoubleShardSequence1/node = SubResource("AnimationNodeAnimation_tes26")
-states/DoubleShardSequence1/position = Vector2(636.021, 100.028)
-states/JumpShot/node = SubResource("AnimationNodeAnimation_51fo7")
-states/JumpShot/position = Vector2(284.036, 186.016)
-states/QuadShardSequence1/node = SubResource("AnimationNodeAnimation_mnu67")
-states/QuadShardSequence1/position = Vector2(636.016, 241.245)
-states/RotateSlow/node = SubResource("AnimationNodeAnimation_8ise2")
-states/RotateSlow/position = Vector2(408, 100)
-states/SingleShardSequence1/node = SubResource("AnimationNodeAnimation_lfxj3")
-states/SingleShardSequence1/position = Vector2(636.011, 6.57467)
-states/Stagger/node = SubResource("AnimationNodeAnimation_inroi")
-states/Stagger/position = Vector2(408.233, 6.7925)
-states/Test/node = SubResource("AnimationNodeAnimation_2wykb")
-states/Test/position = Vector2(407.559, 185.977)
-states/TripleShardSequence1/node = SubResource("AnimationNodeAnimation_mn7jq")
-states/TripleShardSequence1/position = Vector2(636.016, 167.511)
-transitions = ["Start", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_gjge1"), "RotateSlow", "SingleShardSequence1", SubResource("AnimationNodeStateMachineTransition_f7uow"), "SingleShardSequence1", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_kjcu6"), "RotateSlow", "DoubleShardSequence1", SubResource("AnimationNodeStateMachineTransition_v0ape"), "DoubleShardSequence1", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_ag18a"), "Stagger", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_spy4q"), "RotateSlow", "Test", SubResource("AnimationNodeStateMachineTransition_4uvqa"), "RotateSlow", "TripleShardSequence1", SubResource("AnimationNodeStateMachineTransition_r51dd"), "TripleShardSequence1", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_s2ykg"), "RotateSlow", "QuadShardSequence1", SubResource("AnimationNodeStateMachineTransition_y4w40"), "QuadShardSequence1", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_20kpy"), "Test", "JumpShot", SubResource("AnimationNodeStateMachineTransition_wvpho"), "JumpShot", "RotateSlow", SubResource("AnimationNodeStateMachineTransition_f7guv"), "RotateSlow", "JumpShot", SubResource("AnimationNodeStateMachineTransition_atysk")]
-graph_offset = Vector2(130.486, 24.2174)
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_siwsy"]
-graph_offset = Vector2(-26.88, 64.32)
-nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_qlhjd")
-nodes/StateMachine/position = Vector2(80, 150)
-node_connections = [&"output", 0, &"StateMachine"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_prtmo"]
 radius = 0.81
@@ -1545,6 +1434,9 @@ transform = Transform3D(1.42986, 0.00998905, -0.0170401, -0.0125258, 1.41244, -0
 
 [node name="ClarityHead" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2" index="1" instance=ExtResource("3_05q7x")]
 
+[node name="HeadLight" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/BaseOffsetRotation/HeadMesh" index="0"]
+light_energy = 0.000263929
+
 [node name="EnemyHurtbox" type="Area3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2" index="2"]
 collision_layer = 8
 collision_mask = 257
@@ -1734,9 +1626,11 @@ transform = Transform3D(4.49571, 0.0483118, -0.190526, -0.127043, 4.04257, -1.97
 transform = Transform3D(1, 5.8286e-10, 1.01449e-09, -2.48745e-10, 1, 1.59747e-08, 1.42833e-10, 1.67609e-08, 1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature" index="0"]
-bones/5/rotation = Quaternion(0.707107, -3.06266e-07, -3.06266e-07, 0.707107)
+bones/5/rotation = Quaternion(0.683013, -0.183013, -0.183013, 0.683013)
 bones/6/position = Vector3(0.828085, 1.02211, -0.462035)
-bones/8/position = Vector3(0.0032005, 1.02211, -1.0554)
+bones/8/position = Vector3(0.00320047, 1.02211, -1.0554)
+bones/10/position = Vector3(-0.00379542, 1.02211, 0.950407)
+bones/12/position = Vector3(0.825767, 1.02211, 0.477676)
 bones/14/position = Vector3(-0.823051, 1.02211, 0.473662)
 bones/16/position = Vector3(-0.820733, 1.02211, -0.466049)
 
@@ -1756,25 +1650,25 @@ transform = Transform3D(1, -3.74218e-14, -5.40003e-14, -3.74218e-14, 1, -7.10543
 transform = Transform3D(1, -3.74218e-14, -5.40003e-14, -3.74218e-14, 1, -7.10543e-15, -5.40003e-14, -7.10543e-15, 1, -2.86885e-15, -1.78814e-08, 7.45058e-09)
 
 [node name="MiddleLeft" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(1, 1.29455e-07, 1.40303e-08, -1.36006e-07, 1, 2.50594e-07, 2.22868e-08, -2.78644e-07, 1, -2.98023e-07, 1.49012e-07, -9.49949e-08)
+transform = Transform3D(0.866025, 0.5, 1.37447e-07, -0.5, 0.866025, 7.91047e-08, -3.73179e-08, -1.59435e-07, 1, -5.96046e-08, 1.99303e-07, 2.55182e-07)
 
 [node name="FrontLeft" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(1, -2.95194e-11, -2.86548e-11, 8.98167e-11, 1, 8.63144e-08, -7.58462e-11, -8.68599e-08, 1, 1.39698e-09, 2.38419e-07, -1.11759e-07)
+transform = Transform3D(0.866025, 0.5, 4.31322e-08, -0.5, 0.866025, -5.61359e-08, -5.96806e-08, 3.23494e-08, 1, -1.19209e-07, -2.98023e-07, 1.19209e-07)
 
 [node name="BackRight" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(1, 7.79996e-10, -6.45173e-11, 2.12414e-10, 1, 3.04442e-07, 2.31881e-11, -2.44511e-07, 1, -9.31323e-10, 3.57628e-07, -1.52737e-07)
+transform = Transform3D(0.866025, 0.5, 1.52165e-07, -0.5, 0.866025, 1.32786e-07, -5.95815e-08, -1.25301e-07, 1, 2.08616e-07, 2.38419e-07, 7.82311e-08)
 
 [node name="BackLeft" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="7"]
-transform = Transform3D(1, 1.30972e-07, -2.66062e-08, -7.31878e-08, 1, 3.16183e-07, 4.31745e-08, -1.87387e-07, 1, -2.38419e-07, 1.78814e-07, -1.69501e-07)
+transform = Transform3D(0.866025, 0.5, 1.3505e-07, -0.5, 0.866025, 1.56225e-07, -1.64302e-08, -6.81776e-08, 1, -1.19209e-07, 0, 1.71363e-07)
 
 [node name="MiddleRight" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="8"]
-transform = Transform3D(1, 2.10555e-08, 3.89687e-08, 9.21793e-08, 1, 1.60854e-07, 1.24336e-08, -6.175e-08, 1, -5.96046e-08, 5.96046e-07, -3.1665e-08)
+transform = Transform3D(0.866025, 0.5, 1.33989e-07, -0.5, 0.866025, -3.39493e-08, -3.22699e-08, 2.7657e-08, 1, 2.98023e-07, 3.7381e-07, 2.12342e-07)
 
 [node name="FrontRight" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="9"]
-transform = Transform3D(1, 2.12283e-07, -8.24196e-08, -1.52257e-07, 1, 8.29976e-08, 2.01027e-07, -7.79459e-08, 1, -2.38419e-07, 2.08616e-07, -7.07805e-08)
+transform = Transform3D(0.866025, 0.5, -1.99128e-08, -0.5, 0.866025, -1.94163e-08, 1.25952e-07, 6.59214e-09, 1, -1.49012e-07, 1.78814e-07, 6.14673e-08)
 
 [node name="FacePlate" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="10"]
-transform = Transform3D(1, -5.16326e-14, -2.55786e-14, -5.16326e-14, 1, -7.10543e-15, -2.55786e-14, -7.10543e-15, 1, 6.42155e-14, 1.78814e-07, -5.96046e-08)
+transform = Transform3D(0.866025, 0.5, -2.06057e-13, -0.5, 0.866025, -1.30901e-07, -5.96047e-08, 1.19209e-07, 1, 1.04308e-07, 1.99638e-08, 0)
 
 [node name="FlatHexagon" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D/FacePlate" index="1"]
 transform = Transform3D(1, -3.38931e-22, 1.48151e-29, 0, -4.37114e-08, -1, 3.38931e-22, 1, -4.37114e-08, 0, 0, 0)
@@ -1847,11 +1741,6 @@ transform = Transform3D(1, 3.09717e-09, -6.46737e-10, 1.06092e-09, 1, -3.82871e-
 visible = false
 mesh = SubResource("SphereMesh_numd5")
 surface_material_override/0 = SubResource("StandardMaterial3D_3w4m8")
-
-[node name="AnimationTree" type="AnimationTree" parent="ClarityArmMeshes/SnowflakeEntity"]
-tree_root = SubResource("AnimationNodeBlendTree_siwsy")
-anim_player = NodePath("../SnowflakeEntityMeshes/AnimationPlayer")
-advance_expression_base_node = NodePath("../../..")
 
 [node name="SnowflakeHurtbox" type="Area3D" parent="ClarityArmMeshes/SnowflakeEntity"]
 collision_layer = 8
@@ -1944,49 +1833,32 @@ transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
 [node name="Armature" parent="DressShardMaster" index="0"]
 visible = false
 
-[node name="Skeleton3D" parent="DressShardMaster/Armature" index="0"]
-bones/0/rotation = Quaternion(0.0301653, 0.0796906, -0.0501057, 0.995102)
-bones/1/rotation = Quaternion(0.0484073, -0.0812806, 0.0524297, 0.994133)
-bones/3/rotation = Quaternion(0.00101031, -0.00552394, 0.86527, 0.501275)
-bones/6/position = Vector3(2.01413, 2.22899, -2.08285)
-bones/6/rotation = Quaternion(0.305356, -0.212565, 0.925231, -0.0743114)
-bones/8/position = Vector3(2.06725, 1.3427, 0.8528)
-bones/8/rotation = Quaternion(0.300211, -0.0905908, 0.944171, -0.101036)
-bones/10/position = Vector3(-0.870095, 2.94367, -2.42447)
-bones/10/rotation = Quaternion(0.322511, -0.334699, 0.885296, -0.0146623)
-bones/12/position = Vector3(-3.02298, 2.22899, 2.14379)
-bones/12/rotation = Quaternion(0.360811, -0.115068, 0.905047, 0.19356)
-bones/14/position = Vector3(-0.141156, 1.3427, 2.70588)
-bones/14/rotation = Quaternion(0.376926, -0.00445188, 0.916249, 0.135629)
-bones/16/position = Vector3(-2.85858, 2.94367, -0.755941)
-bones/16/rotation = Quaternion(0.321999, -0.24697, 0.885482, 0.226373)
-
 [node name="Hat_2" parent="DressShardMaster/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1.42986, 0.00998905, -0.0170401, -0.0125258, 1.41244, -0.223079, 0.0152725, 0.223207, 1.41239, 0.918732, 14.4374, 0.659002)
+transform = Transform3D(1.42986, 0.00998886, -0.0170402, -0.0125256, 1.41244, -0.22308, 0.0152726, 0.223208, 1.41239, 0.918731, 14.4374, 0.659003)
 
 [node name="Arm_2" parent="DressShardMaster/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.339741, 0.92836, 0.15074, -0.932056, 0.353784, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
+transform = Transform3D(0.339741, 0.928361, 0.150741, -0.932056, 0.353783, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
 
 [node name="Center_2" parent="DressShardMaster/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.982278, 0.104529, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
+transform = Transform3D(0.982278, 0.104528, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
 
 [node name="MiddleLeft" parent="DressShardMaster/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 1.18725e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548505)
+transform = Transform3D(0.766044, 0.219846, 0.604023, -2.9111e-08, 0.939693, -0.34202, -0.642788, 0.262002, 0.719846, -0.990243, 0.156014, -0.548502)
 
 [node name="FrontLeft" parent="DressShardMaster/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 8.1839e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990245, 0.156011, -0.548507)
+transform = Transform3D(0.766045, 0.219846, 0.604022, 2.61259e-08, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990248, 0.15601, -0.548509)
 
 [node name="BackLeft" parent="DressShardMaster/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 4.14429e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156009, -0.548506)
+transform = Transform3D(0.766044, 0.219846, 0.604023, -3.27128e-07, 0.939693, -0.342019, -0.642788, 0.262002, 0.719846, -0.990243, 0.15601, -0.548501)
 
 [node name="MiddleRight" parent="DressShardMaster/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, 6.51412e-08, 0.939693, -0.34202, -0.642788, 0.262003, 0.719846, -0.990244, 0.156011, -0.548508)
+transform = Transform3D(0.766045, 0.219846, 0.604022, 2.33248e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719846, -0.990239, 0.156015, -0.548505)
 
 [node name="FrontRight" parent="DressShardMaster/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -1.26024e-07, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548506)
+transform = Transform3D(0.766045, 0.219847, 0.604023, -5.96117e-07, 0.939692, -0.34202, -0.642787, 0.262003, 0.719847, -0.990245, 0.15601, -0.548503)
 
 [node name="BackRight" parent="DressShardMaster/Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.766044, 0.219846, 0.604023, -3.64784e-08, 0.939692, -0.34202, -0.642788, 0.262003, 0.719846, -0.990246, 0.156011, -0.548507)
+transform = Transform3D(0.766045, 0.219847, 0.604022, -9.71103e-07, 0.939692, -0.34202, -0.642787, 0.262002, 0.719847, -0.990254, 0.156008, -0.548505)
 
 [node name="DressShardFrontLeft" parent="DressShardMaster" instance=ExtResource("12_y7646")]
 

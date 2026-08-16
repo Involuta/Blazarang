@@ -114,7 +114,7 @@ var ice_sprite_spawner := preload("res://enemies/ice_sprite_spawner.tscn")
 @onready var body_meshes := $DressShardMaster # Depends on ClarityDressMeshes.glb. Plays dress shard anims
 @onready var arm_shard_mesh := $ClarityArmMeshes/Armature/Skeleton3D/Arm_2/Arm_2 # The singular arm mesh
 @onready var snowflake := $ClarityArmMeshes/SnowflakeEntity
-@onready var snowflake_anim_tree := $ClarityArmMeshes/SnowflakeEntity/AnimationTree
+@onready var snowflake_anim_player := $ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/AnimationPlayer
 @onready var snowflake_hexagon_anim_player := $ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/HexagonAnimationPlayer
 @onready var head_light := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/BaseOffsetRotation/HeadMesh/HeadLight
 @onready var head_bone := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2
@@ -140,7 +140,6 @@ var clarity_icon : Node3D
 var level_env : Environment
 var sky : ProceduralSkyMaterial
 var level_fog : FogMaterial
-var snowflake_anim_playback : AnimationNodeStateMachinePlayback
 
 class DressShard extends Node3D:
 	var node : Node
@@ -242,11 +241,12 @@ func _ready():
 	
 	# Set up all states pre-fight. This may eventually be replaced by either a PreFight anim or an anim that spawns the snowflake entity
 	arm_anim_player.play("WalkLeftAggressive")
-	snowflake_anim_tree.active = true
-	snowflake_anim_playback = snowflake_anim_tree.get("parameters/StateMachine/playback")
 	
 	# Ensure all shards are full health and hurtable when Clarity spawns
 	regen_dress_shards()
+	
+	# FOR TESTING: Jump Shot to reach phase 2 immediately
+	snowflake_anim_player.play("JumpShot")
 	
 	await get_tree().create_timer(.1).timeout
 	jump_shot_manual_trigger = false
@@ -495,7 +495,7 @@ func queue_arm_attack():
 				CIRCLE_ICON:
 					var chosen_attack = "RaiseRightSlice"
 					switch_to_stop()
-					play_anim_all_dress_shards(chosen_attack)
+					play_anim_all_dress_shards("JumpShotToWalkLeft")
 					arm_anim_player.play(chosen_attack)
 					return
 					"""
@@ -771,19 +771,27 @@ func stop_dress_shard(s: String):
 func recall_dress_shard(s: String):
 	dress_shards[s].recall()
 
-func play_anim_all_dress_shards(s: String):
-	var prefix = ["Triple", "Quad"].pick_random()
-	var body = ["ShardSemicircleSequence", "ShardFanSequence"].pick_random()
-	var suffix = ["1", "2"].pick_random()
-	var test_attack = prefix + body + suffix
-	
-	for ds in dress_shards.values():
-		# ds.anim_player.play(s)
-		if s == "JumpShotToWalkLeft":
+func trigger_snowflake_rotate_slow():
+	# TEST ANIM - code will eventually choose btwn Rotate1 and Rotate3 somehow
+	snowflake_anim_player.play("RotateSlow1Seg")
+
+func trigger_snowflake_short_range_attack():
+	#var prefix = ["Triple", "Quad"].pick_random()
+	#var body = ["ShardSemicircleSequence", "ShardFanSequence"].pick_random()
+	#var suffix = ["1", "2"].pick_random()
+	#var test_attack = prefix + body + suffix
+	#snowflake_anim_player.play(test_attack)
+	var prefix = ["Single", "Double", "Triple", "Quad"].pick_random()
+	var attack = prefix + "ShardSequence1"
+	snowflake_anim_player.play(attack)
+
+func play_anim_all_dress_shards(s: String = ""):
+	if s != "":
+		for ds in dress_shards.values():
 			ds.anim_player.play(s)
-		else:
-			
-			ds.anim_player.play(test_attack)
+	else:
+		for ds in dress_shards.values():
+			ds.anim_player.play(snowflake_anim_player.current_animation)
 
 func snowflake_brighten(brightness: float, duration: float):
 	var t = get_tree().create_tween()
@@ -840,7 +848,7 @@ func unlink_all_dress_shards_from_snowflake():
 		t.tween_property(link_outline_shader, "shader_parameter/outline_alpha", 0.85, .6)
 
 func snowflake_stagger():
-	snowflake_anim_playback.travel("Stagger")
+	snowflake_anim_player.play("Stagger")
 	snowflake_brighten(0, .6)
 
 func infuse_arm():
