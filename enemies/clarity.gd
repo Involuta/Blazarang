@@ -787,12 +787,20 @@ func trigger_snowflake_rotate_slow():
 	snowflake_anim_player.play("RotateSlow1Seg")
 
 func trigger_snowflake_short_range_attack_or_regen_shards():
-	var chosen_attack = trigger_regen_shards_or_return_attack_string(snowflake_short_range_attack_chances)
-	if chosen_attack != null:
-		snowflake_anim_player.play(chosen_attack)
+	trigger_snowflake_attack_or_regen_shards(snowflake_short_range_attack_chances)
 
 func trigger_snowflake_long_range_attack_or_regen_shards():
-	var chosen_attack = trigger_regen_shards_or_return_attack_string(snowflake_long_range_attack_chances)
+	trigger_snowflake_attack_or_regen_shards(snowflake_long_range_attack_chances)
+
+func trigger_snowflake_attack_or_regen_shards(ac: Dictionary):
+	# If the arm is attacking, don't include RegenShards as a choice
+	if arm_attacking:
+		# Play snowflake anim
+		var chosen_attack = choose_attack(ac)
+		snowflake_anim_player.play(chosen_attack)
+		return
+	
+	var chosen_attack = trigger_regen_shards_or_return_attack_string(ac)
 	if chosen_attack != null:
 		snowflake_anim_player.play(chosen_attack)
 
