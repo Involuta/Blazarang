@@ -98,9 +98,22 @@ var staggerable := false # When head is exposed but not glowing, staggerable is 
 	"RaiseRightSlice" : .5 # PLACEHOLDER: replace with spawner boost
 }
 
-@export var snowflake_attack_chances = {
-	"DoubleShardSequence1" : .5,
-	"SingleShardSequence1" : .5,
+@export var snowflake_short_range_attack_chances = {
+	"SingleShardSequence1": .25,
+	"DoubleShardSequence1": .25,
+	"TripleShardSequence1": .25,
+	"QuadShardSequence1": .25,
+}
+
+@export var snowflake_long_range_attack_chances = {
+	"TripleShardFanSequence1": .125,
+	"TripleShardFanSequence2": .125,
+	"TripleShardSemicircleSequence1": .125,
+	"TripleShardSemicircleSequence2": .125,
+	"QuadShardFanSequence1": .125,
+	"QuadShardFanSequence2": .125,
+	"QuadShardSemicircleSequence1": .125,
+	"QuadShardSemicircleSequence2": .125,
 }
 
 @export var regen_shards_max_chance := .5 # When all 6 shards are destroyed, this is the chance that the next arm attack will be RegenShards
@@ -505,24 +518,15 @@ func queue_arm_attack():
 		PHASE.PHASE2:
 			pass # pass until phase2 is confirmed to exist
 
-func trigger_arm_attack_or_regen_shards(ac: Dictionary):
-	# If a dress shard anim is playing or the snowflake isn't neutral, don't include RegenShards as a choice
-	if dress_shards["Master"].anim_player.is_playing() or "RotateSlow" not in snowflake_anim_player.current_animation:
-		# Play snowflake arm raise anim
-		snowflake_hexagon_anim_player.play("TriggerArmRaise")
-		await snowflake_hexagon_anim_player.animation_finished
-		# Play arm anim
-		var chosen_attack = choose_attack(ac)
-		arm_anim_player.play(chosen_attack)
-		return
-	
+func trigger_regen_shards_or_return_attack_string(ac: Dictionary):
+	# Trigger RegenShards and return null or return an attack string
 	# Include RegenShards in attack choices
 	var num_shards_destroyed := 0
 	for shard in dress_shards.values():
 		if shard.is_destroyed():
 			num_shards_destroyed += 1
 	var regen_shards_chance := num_shards_destroyed * regen_shards_max_chance / 6.0
-	# all_chances = arm attack chances + regen shards chance
+	# all_chances = attack chances + regen shards chance
 	var all_chances = {}
 	for attack in ac:
 		all_chances[attack] = ac[attack] - regen_shards_chance / float(ac.size())
@@ -535,7 +539,23 @@ func trigger_arm_attack_or_regen_shards(ac: Dictionary):
 		play_anim_all_dress_shards(chosen_attack)
 		arm_anim_player.play(chosen_attack)
 		# To be implemented: if circling icon, do JumpShot after RegenShards. Snowflake's anim tree calls funcs to start JumpShot
+		return
 	else:
+		return chosen_attack
+
+func trigger_arm_attack_or_regen_shards(ac: Dictionary):
+	# If a dress shard anim is playing or the snowflake isn't neutral, don't include RegenShards as a choice
+	if dress_shards["Master"].anim_player.is_playing() or "RotateSlow" not in snowflake_anim_player.current_animation:
+		# Play snowflake arm raise anim
+		snowflake_hexagon_anim_player.play("TriggerArmRaise")
+		await snowflake_hexagon_anim_player.animation_finished
+		# Play arm anim
+		var chosen_attack = choose_attack(ac)
+		arm_anim_player.play(chosen_attack)
+		return
+	
+	var chosen_attack = trigger_regen_shards_or_return_attack_string(ac)
+	if chosen_attack != null:
 		# Play snowflake arm raise anim
 		snowflake_hexagon_anim_player.play("TriggerArmRaise")
 		await snowflake_hexagon_anim_player.animation_finished
@@ -736,20 +756,6 @@ func contract_blizzard_safezone(frame_duration: int):
 	# contract_blizzard_safezone transitions to the env the autochanging env would be if Cotu were within min_fog_dist, aka when cotu_dist_lerp_val is 0
 	cotu_dist_lerp_val = 0.0
 	snowfall_particles.emitting = true
-	env_autochange = true
-
-func backflip_mvmt():
-	switch_to_special()
-	var t = get_tree().create_tween()
-	var full_dash_vec = 3*full_dash_speed*-body_meshes.transform.basis.z + .6*full_dash_speed*Vector3.UP
-	t.tween_property(self, "gravity", 0, 0)
-	t.tween_property(self, "velocity", full_dash_vec, frames(27))
-	t.tween_property(self, "velocity", Vector3.ZERO, frames(130))
-	t.tween_property(self, "velocity", full_dash_speed*3 * Vector3.DOWN, 0)
-	t.tween_property(self, "gravity", .5 * ProjectSettings.get_setting("physics/3d/default_gravity"), 0)
-	t.tween_interval(frames(100))
-	# Return to base pose starts after the above interval
-	t.tween_property(self, "velocity", full_dash_speed * Vector3.ZERO, 0)
 
 func regen_shards_mvmt():
 	var t = get_tree().create_tween()
@@ -780,17 +786,15 @@ func trigger_snowflake_rotate_slow():
 	# TEST ANIM - code will eventually choose btwn Rotate1 and Rotate3 somehow
 	snowflake_anim_player.play("RotateSlow1Seg")
 
-func trigger_snowflake_short_range_attack():
-	var prefix = ["Single", "Double", "Triple", "Quad"].pick_random()
-	var attack = prefix + "ShardSequence1"
-	snowflake_anim_player.play(attack)
+func trigger_snowflake_short_range_attack_or_regen_shards():
+	var chosen_attack = trigger_regen_shards_or_return_attack_string(snowflake_short_range_attack_chances)
+	if chosen_attack != null:
+		snowflake_anim_player.play(chosen_attack)
 
-func trigger_snowflake_long_range_attack():
-	var prefix = ["Triple", "Quad"].pick_random()
-	var body = ["ShardSemicircleSequence", "ShardFanSequence"].pick_random()
-	var suffix = ["1", "2"].pick_random()
-	var attack = prefix + body + suffix
-	snowflake_anim_player.play(attack)
+func trigger_snowflake_long_range_attack_or_regen_shards():
+	var chosen_attack = trigger_regen_shards_or_return_attack_string(snowflake_long_range_attack_chances)
+	if chosen_attack != null:
+		snowflake_anim_player.play(chosen_attack)
 
 func play_anim_all_dress_shards(s: String = ""):
 	if s != "":
