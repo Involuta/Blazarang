@@ -22,7 +22,7 @@ height = 0.75
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_pmbbr"]
 height = 60.0
-radius = 1.5
+radius = 3.0
 
 [sub_resource type="Gradient" id="Gradient_lgt54"]
 offsets = PackedFloat32Array(0, 0.526012, 1)

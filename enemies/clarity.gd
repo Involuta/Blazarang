@@ -89,9 +89,13 @@ var staggerable := false # When head is exposed but not glowing, staggerable is 
 @export var wait_raised_left_min_secs := .6
 @export var wait_raised_left_max_secs := 6.0
 
-@export var arm_attack_chances = {
+@export var arm_attack_chances_circling_icon = {
 	"RaiseRightSlice" : .5,
 	"LongSlice" : .5,
+}
+
+@export var arm_attack_chances_circling_spawner = {
+	"RaiseRightSlice" : .5 # PLACEHOLDER: replace with spawner boost
 }
 
 @export var snowflake_attack_chances = {
@@ -472,6 +476,8 @@ func walk_circle_spawner():
 
 	# 5. Apply linear speed and let CharacterBody3D handle movement
 	velocity = move_dir * walk_speed
+	
+	arm_long_dist_attack_check()
 
 func switch_to_circle_icon():
 	arm_long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
@@ -493,49 +499,48 @@ func queue_arm_attack():
 		PHASE.PHASE1:
 			match(behav_state):
 				CIRCLE_ICON:
-					var chosen_attack = "RaiseRightSlice"
-					switch_to_stop()
-					play_anim_all_dress_shards("JumpShotToWalkLeft")
-					arm_anim_player.play(chosen_attack)
-					return
-					"""
-					# If a dress shard anim is playing or the snowflake isn't neutral, don't include RegenShards as a choice
-					if dress_shards["Master"].anim_player.is_playing() or snowflake_anim_playback.get_current_node() != "RotateSlow":
-						# Play snowflake arm raise anim
-						snowflake_hexagon_anim_player.play("TriggerArmRaise")
-						await snowflake_hexagon_anim_player.animation_finished
-						# Play arm anim
-						var chosen_attack = choose_attack(arm_attack_chances)
-						arm_anim_player.play(chosen_attack)
-						return
-					
-					# Include RegenShards in arm attack choices
-					var num_shards_destroyed := 0
-					for shard in dress_shards.values():
-						if shard.is_destroyed():
-							num_shards_destroyed += 1
-					var regen_shards_chance := num_shards_destroyed * regen_shards_max_chance / 6.0
-					# all_chances = arm attack chances + regen shards chance
-					var all_chances = {}
-					for attack in arm_attack_chances:
-						all_chances[attack] = arm_attack_chances[attack] - regen_shards_chance / float(arm_attack_chances.size())
-					all_chances["RegenShards"] = regen_shards_chance
-					var chosen_attack = choose_attack(all_chances)
-					if chosen_attack == "RegenShards":
-						# Prevent arm and snowflake attacks from being chosen during the attack
-						switch_to_stop()
-						play_anim_all_dress_shards(chosen_attack)
-						arm_anim_player.play(chosen_attack)
-						# JumpShot always occurs after RegenShards. Snowflake's anim tree calls funcs to start JumpShot
-					else:
-						# Play snowflake arm raise anim
-						snowflake_hexagon_anim_player.play("TriggerArmRaise")
-						await snowflake_hexagon_anim_player.animation_finished
-						# Play arm anim
-						arm_anim_player.play(chosen_attack)
-					"""
+					trigger_arm_attack_or_regen_shards(arm_attack_chances_circling_icon)
+				CIRCLE_SPAWNER:
+					trigger_arm_attack_or_regen_shards(arm_attack_chances_circling_spawner)
 		PHASE.PHASE2:
 			pass # pass until phase2 is confirmed to exist
+
+func trigger_arm_attack_or_regen_shards(ac: Dictionary):
+	# If a dress shard anim is playing or the snowflake isn't neutral, don't include RegenShards as a choice
+	if dress_shards["Master"].anim_player.is_playing() or "RotateSlow" not in snowflake_anim_player.current_animation:
+		# Play snowflake arm raise anim
+		snowflake_hexagon_anim_player.play("TriggerArmRaise")
+		await snowflake_hexagon_anim_player.animation_finished
+		# Play arm anim
+		var chosen_attack = choose_attack(ac)
+		arm_anim_player.play(chosen_attack)
+		return
+	
+	# Include RegenShards in attack choices
+	var num_shards_destroyed := 0
+	for shard in dress_shards.values():
+		if shard.is_destroyed():
+			num_shards_destroyed += 1
+	var regen_shards_chance := num_shards_destroyed * regen_shards_max_chance / 6.0
+	# all_chances = arm attack chances + regen shards chance
+	var all_chances = {}
+	for attack in ac:
+		all_chances[attack] = ac[attack] - regen_shards_chance / float(ac.size())
+	all_chances["RegenShards"] = regen_shards_chance
+	var chosen_attack = choose_attack(all_chances)
+	if chosen_attack == "RegenShards":
+		# Prevent arm and snowflake attacks from being chosen during the attack
+		switch_to_stop()
+		snowflake_anim_player.play(chosen_attack)
+		play_anim_all_dress_shards(chosen_attack)
+		arm_anim_player.play(chosen_attack)
+		# To be implemented: if circling icon, do JumpShot after RegenShards. Snowflake's anim tree calls funcs to start JumpShot
+	else:
+		# Play snowflake arm raise anim
+		snowflake_hexagon_anim_player.play("TriggerArmRaise")
+		await snowflake_hexagon_anim_player.animation_finished
+		# Play arm anim
+		arm_anim_player.play(chosen_attack)
 
 func choose_attack(attack_chances) -> String:
 	var choice := randf()
