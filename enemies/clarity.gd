@@ -45,6 +45,8 @@ enum PHASE {
 }
 var phase := PHASE.PHASE1
 
+var ice_sprite_spawner_spawned := false
+
 @export var min_y_pos := 10.0 # y pos of arena floor, ie X's minimum y position
 
 @export var blizzard_safezone_base_radius := 15.0
@@ -139,7 +141,6 @@ var ice_sprite_spawner := preload("res://enemies/ice_sprite_spawner.tscn")
 @onready var blizzard_light := $ClarityArmMeshes/BlizzardLight
 @onready var blizzard_hitbox := $BlizzardDOT
 @onready var snowfall_particles := $SnowfallParticles
-@onready var blizzard_particles := $BlizzardParticles
 @onready var body_cone_fog := $FogVolume/BodyCone
 @onready var feet_fog := $FogVolume/FeetFog
 @onready var body_cloud := $FogVolume/BodyCloud
@@ -218,8 +219,6 @@ class DressShard extends Node3D:
 	func regen():
 		self.hurtbox.regen()
 
-# For testing
-var jump_shot_manual_trigger := true
 func _ready():
 	head_hurtbox = find_child("EnemyHurtbox")
 	
@@ -262,11 +261,13 @@ func _ready():
 	# Ensure all shards are full health and hurtable when Clarity spawns
 	regen_dress_shards()
 	
-	# FOR TESTING: Jump Shot to reach phase 2 immediately
-	snowflake_anim_player.play("JumpShot")
+	# FOR TESTING: play JumpShot or RegenShards to reach phase 2 immediately
+	switch_to_stop()
+	snowflake_anim_player.play("RegenShards")
+	play_anim_all_dress_shards("RegenShards")
+	arm_anim_player.play("RegenShards")
 	
 	await get_tree().create_timer(.1).timeout
-	jump_shot_manual_trigger = false
 	
 func frames(num: int) -> float:
 	return num * get_physics_process_delta_time()
@@ -640,8 +641,14 @@ func wait_raised_left():
 		await arm_anim_player.animation_finished
 		arm_anim_player.play("LeftSliceFromInfuse")
 
+# Called by snowflake anim player at the end of its RegenShards anim
+# JumpShot only occurs after RegenShards if Clarity is circling the icon
+func trigger_jump_shot_anim():
+	if behav_state == CIRCLE_ICON:
+		snowflake_anim_player.play("JumpShot")
+
 # Called by snowflake anim player in its JumpShot anim
-func start_jump_shot_anim():
+func start_arm_and_dress_jump_shot_anims():
 	play_anim_all_dress_shards("JumpShotToWalkLeft")
 	arm_anim_player.play("JumpShotToWalkLeft")
 
@@ -894,6 +901,8 @@ func spawn_infuse_slice_hitbox():
 	inst.rotation.z = 0
 
 func spawn_ice_sprite_spawner():
+	if ice_sprite_spawner_spawned:
+		return
 	var inst = ice_sprite_spawner.instantiate()
 	level.add_child.call_deferred(inst)
 	await inst.tree_entered
@@ -902,3 +911,5 @@ func spawn_ice_sprite_spawner():
 	blizzard_center = inst
 	# Clarity now faces the ice sprite spawner
 	target = inst
+	# Prevent another ice sprite spawner from being spawned
+	ice_sprite_spawner_spawned = true

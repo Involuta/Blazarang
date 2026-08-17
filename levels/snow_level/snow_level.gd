@@ -16,7 +16,7 @@ func _ready():
 	clarity = root.find_child("Clarity", true, false)
 	ui_root.hide_black_screen()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# Update UI
 	frostbite_bar.max_value = cotu_hurtbox.current_frostbite_threshold
 	frostbite_bar.value = cotu_hurtbox.frostbite_buildup

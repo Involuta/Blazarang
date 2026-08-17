@@ -532,49 +532,49 @@ bone_name = "CentralEye0"
 bone_idx = 1
 
 [node name="MiddleLeft" parent="Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.5, -0.866025, -1.68512e-07, 0.866025, 0.5, 7.78428e-08, 1.41496e-07, -2.19039e-07, 1, 1.86265e-07, 2.38419e-07, 2.5332e-07)
+transform = Transform3D(0.5, -0.866025, -1.68512e-07, 0.866025, 0.5, 7.78428e-08, 1.41496e-07, -2.19039e-07, 1, 1.8999e-07, 1.78814e-07, 2.51457e-07)
 bone_idx = 7
 
 [node name="MiddleLeft" parent="Armature/Skeleton3D/MiddleLeft" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_yakaa")
 
 [node name="FrontLeft" parent="Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.5, -0.866025, -3.3271e-08, 0.866025, 0.5, -1.64724e-08, 1.19133e-07, -2.72554e-08, 1, -1.78814e-07, 4.17233e-07, -4.1537e-07)
+transform = Transform3D(0.5, -0.866025, -3.3271e-08, 0.866025, 0.5, -1.64723e-08, 1.19133e-07, -2.72554e-08, 1, -2.98023e-07, 5.96046e-07, -4.17233e-07)
 bone_idx = 9
 
 [node name="FrontLeft" parent="Armature/Skeleton3D/FrontLeft" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_h2bxt")
 
 [node name="BackRight" parent="Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.5, -0.866025, -2.22193e-07, 0.866025, 0.5, 9.25606e-08, 1.19232e-07, -1.84906e-07, 1, 1.78814e-07, -8.9407e-08, -2.16067e-07)
+transform = Transform3D(0.5, -0.866025, -2.22193e-07, 0.866025, 0.5, 9.25606e-08, 1.19232e-07, -1.84906e-07, 1, 1.19209e-07, -5.96046e-08, -2.12342e-07)
 bone_idx = 11
 
 [node name="BackRight" parent="Armature/Skeleton3D/BackRight" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fiurh")
 
 [node name="BackLeft" parent="Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.5, -0.866025, -2.45632e-07, 0.866025, 0.5, 7.5445e-08, 1.62384e-07, -1.27782e-07, 1, 1.07288e-06, 3.57628e-07, -1.22935e-07)
+transform = Transform3D(0.5, -0.866025, -2.45632e-07, 0.866025, 0.5, 7.5445e-08, 1.62384e-07, -1.27782e-07, 1, 1.01328e-06, 4.17233e-07, -1.2666e-07)
 bone_idx = 13
 
 [node name="BackLeft" parent="Armature/Skeleton3D/BackLeft" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_3dvlp")
 
 [node name="MiddleRight" parent="Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.5, -0.866025, -7.05937e-08, 0.866025, 0.5, 6.94563e-08, 1.41126e-07, -1.02877e-08, 1, -5.59376e-07, -1.43051e-06, 3.29688e-07)
+transform = Transform3D(0.5, -0.866025, -9.8657e-08, 0.866025, 0.5, 6.94073e-08, 1.78732e-07, -1.14831e-07, 1, -4.31901e-07, -1.3113e-06, 3.31551e-07)
 bone_idx = 15
 
 [node name="MiddleRight" parent="Armature/Skeleton3D/MiddleRight" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_d1nc3")
 
 [node name="FrontRight" parent="Armature/Skeleton3D" index="9"]
-transform = Transform3D(0.5, -0.866025, -7.63442e-08, 0.866025, 0.5, -7.80547e-08, 3.03628e-07, -3.2948e-08, 1, -1.07288e-06, -7.7486e-07, -1.86265e-09)
+transform = Transform3D(0.5, -0.866025, -7.63442e-08, 0.866025, 0.5, -7.80547e-08, 3.03628e-07, -3.44107e-08, 1, -1.01328e-06, -5.96046e-07, -3.72529e-09)
 bone_idx = 17
 
 [node name="FrontRight" parent="Armature/Skeleton3D/FrontRight" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_yau8r")
 
 [node name="FacePlate" parent="Armature/Skeleton3D" index="10"]
-transform = Transform3D(0.5, -0.866025, 4.14939e-08, 0.866025, 0.5, -5.96048e-08, 1.19209e-07, 5.96045e-08, 1, -1.39173e-07, 1.49011e-08, 0)
+transform = Transform3D(0.5, -0.866025, 4.14939e-08, 0.866025, 0.5, -5.96048e-08, 1.19209e-07, 5.96045e-08, 1, -1.39173e-07, 1.49011e-08, 5.96046e-08)
 bone_idx = 19
 
 [node name="FacePlate" parent="Armature/Skeleton3D/FacePlate" index="0"]

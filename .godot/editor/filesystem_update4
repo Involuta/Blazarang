@@ -53,3 +53,6 @@ res://enemies/enemy_anims/snowflake_entity_singleshardseq1.res
 res://enemies/enemy_anims/snowflake_entity_stagger.res
 res://enemies/enemy_anims/snowflake_entity_tripleshardseq1.res
 res://globals.gd
+res://enemies/enemy_anims/clarity_regenshards.res
+res://levels/snow_level/snow_level.gd
+res://enemies/enemy_anims/snowflake_entity_regenshards.res
