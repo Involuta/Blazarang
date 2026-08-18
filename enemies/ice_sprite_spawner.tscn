@@ -112,7 +112,6 @@ transform = Transform3D(-0.126142, 2.76493e-08, -0.490438, 0.490438, -2.14377e-0
 
 [node name="HeadSphere" type="MeshInstance3D" parent="Visuals/Scalable"]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
-transparency = 0.15
 cast_shadow = 0
 mesh = SubResource("SphereMesh_38oom")
 skeleton = NodePath("../../OmniLight")

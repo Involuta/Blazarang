@@ -56,3 +56,4 @@ res://globals.gd
 res://enemies/enemy_anims/clarity_regenshards.res
 res://levels/snow_level/snow_level.gd
 res://enemies/enemy_anims/snowflake_entity_regenshards.res
+res://enemies/flat_hexagon.tscn

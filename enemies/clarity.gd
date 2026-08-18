@@ -262,10 +262,11 @@ func _ready():
 	regen_dress_shards()
 	
 	# FOR TESTING: play JumpShot or RegenShards to reach phase 2 immediately
-	switch_to_stop()
-	snowflake_anim_player.play("RegenShards")
-	play_anim_all_dress_shards("RegenShards")
-	arm_anim_player.play("RegenShards")
+	snowflake_anim_player.play("JumpShot")
+	#switch_to_stop()
+	#snowflake_anim_player.play("RegenShards")
+	#play_anim_all_dress_shards("RegenShards")
+	#arm_anim_player.play("RegenShards")
 	
 	await get_tree().create_timer(.1).timeout
 	
@@ -901,6 +902,7 @@ func spawn_infuse_slice_hitbox():
 	inst.rotation.z = 0
 
 func spawn_ice_sprite_spawner():
+	print("Yes")
 	if ice_sprite_spawner_spawned:
 		return
 	var inst = ice_sprite_spawner.instantiate()
