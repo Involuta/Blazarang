@@ -2416,6 +2416,7 @@ Lightning: Neuro does a weird pose, stops moving, and electric buzzing noise slo
 Caltrops: Neuro floats in the air, moving so slowly it almost looks like they’re not moving, then drops a bunch of sparking electric caltrops to the ground
 Head Slam: while standing, Neuro brings their head back a far distance, then the head sparks with electric arcs, then Neuro slams their head down on the ground in front of them, electrifying the entire floor for a while
 Counterplay: jump high into the air, then hit Neuro in the head to stop the floor electrification
+Magnetize: Neuro coils up, turning itself into an electromagnet that attracts nearby metal objects
 Switches from their purple glow to red in phase 2
 Idea: occasionally twitches (jerks around suddenly, cancels a move, etc.)
 Inspired by UFC fighter Dustin Poirier’s habit of pulling up his shorts
@@ -2871,12 +2872,14 @@ Greg didn’t take the tournament as seriously as Pilot, causing friction betwee
 No name is passionate about fighting and wants to become elite (i.e. enter the gala), but he’s also passionate because he feels insecure about holding his brothers back since he can’t use magic or portals
 No name used to be subservient to his brothers (mainly Pilot since he was bossy) because he had no voice. After Pilot and Greg worked out their differences, no name gained the freedom to think for himself and self-actualized. He realized he was genuinely passionate about fighting and became the brothers’ leader. He communicates to his brothers mainly by doing some vague gesture that the brothers miraculously interpret correctly every time
 
-Jab Crab aka Jack Boss (just an idea)
-Heavily armored crab in a tiny arena surrounded by walls/floor spikes/floor shark teeth/whatever
-Has 2 big claws attached by long extendable/retractable tube arms
+Jab Crab aka Jac Boss (just an idea)
+Heavily armored lobster in a tiny arena surrounded by walls/floor spikes/floor shark teeth/whatever
+Has 2 big claws attached by long extendable/retractable tube arms (think of Claw Man, your My Hero Academia OC)
 Can catch the rose and throw it aside and/or parry it
 Approaches slowly and cautiously with jabs (reaching out and clasping with the claw)
 Feints constantly
+Jab feint
+Dash feint (ducks/leans without actually moving very much)
 Damage he takes depends on his stance when you hit him
 If both hands are blocking: he perfect parries and takes very little arm damage
 If one hand is blocking and the other is jabbing, and you hit his blocking side: he blocks it and the rose is deflected, but takes partial damage to the claw
@@ -2884,12 +2887,16 @@ If one hand is blocking and the other is jabbing, and you hit his jabbing side: 
 If you hit him behind or around his claws: he takes full damage
 Claw can break after blocking too much
 Occasionally unexpectedly dashes in with open claws
-Inspired by UFC fighters
-Reference: Alex Pereira vs Khalil Rountree
+Can punch the ground to launch himself into the air
+Aerial attacks:
+Ground Grab: JC grabs the ground beneath the target with 1 claw, then dives in and does a spin attack with the other claw. Moderate endlag
+Smash: JC brings both claws above his head (like Donkey Kong’s forward air in Smash Ultimate) and extends them slightly, then slams them into the ground while retracting them
 Idea: in phase 2, instead of staying low to the ground, he gets up on his hind legs (walking on 4 legs instead of 6 or 8), allowing him to lunge forward with its chest and his arms instead of just the arms
 Idea: tether tag
 When close enough, JC attaches a tether to your body. It deals damage over time when JC is too far from you. To remove the tether, you must touch JC with your body
 JC plans to dash in aggressively, attach a tether, then constantly back away while jabbing
+Inspired by UFC fighters
+Reference: Alex Pereira vs Khalil Rountree
 
 Jab Crab’s Goofy Friend
 Goofy, weak looking character who wants nothing to do with fighting and is only with Jab Crab for emotional support (and to give him his honest feedback)
@@ -2908,11 +2915,12 @@ Long Arms
 Ball/polyhedron with extremely big and long arms with huge tri-finger claws with glowing dots in the palms. Legs are 2 short stubby legs or 4 crab-like legs. Has a huge eye in the center
 Fights by standing at a distance and holding its claws out in front of you, ready to catch your attacks or strike
 Inspired by Conor McGregor holding out his open hands to control his opponent’s hands (great examples in his fight vs Eddie Alvarez)
-This could possibly be the Sean Strickland god who trains Jab Crab and beefs with Future Blade
+This is the Sean Strickland god who trains Jab Crab and beefs with Future Blade
 Idea: has a little translator screen that speaks for him. It sounds like Sean Strickland and makes facial expressions
-On the other hand, it would also be cool to lean into the Conor McGregor parallels and make him act more like McGregor
-Idea: while training Jab Crab, Long Arms calls him Jack, referencing Sean Strickland talking to Jack Marshman in R3 of their fight
+While training Jab Crab, Long Arms calls him Jac, referencing Sean Strickland talking to Jack Marshman in R3 of their fight
 Idea: he’s actually around the strength of a Gauntlet 2 boss, but he rides a dragon in Gauntlet Central to fight at their level
+Lore/Story Ideas
+Convo with Jac about how Jac’s lucky to be a grower, not a shower. LA is talking about Jac’s arms, which are retractable unlike LA’s. LA has to figure out where to put his arms when they’re not being used
 
 RPG Boss (just an idea)
 Special gamemode where it’s a turn-based RPG that looks like Mother/Earthbound
@@ -3701,6 +3709,9 @@ X flares up. He attacks with a Superman as Cotu dodges backward
 Cotu draws his weapon. He looks shocked.
 X: “I won’t waste both of our time with a weak bout. This is as low as I’ll go. Now fight.”
 Cotu chuckles and smiles. “This is why I like you.”
+Issues with the cutscene:
+Wouldn’t Cotu like the challenge? Wouldn’t Cotu ask X to use as much power as possible since Cotu likes fighting so much?
+Alt scene idea: Cotu asks X to use as much power as possible, and X calls Cotu stupid and tells him to fight within his limits. Cotu ragebaits X in return
 Jab Crab and Cotu conversation about how holding back works
 JC: “Wait, if you get experience points from winning fights, why doesn’t X just let you win?”
 Cotu: “It all has to deal with the soul. My soul needs to be convinced that the fight is real, otherwise it doesn’t reward me the XP.”
@@ -3716,7 +3727,7 @@ X: “I need to train for the gala as well, and I won’t be challenged at this 
 Cotu: “We can keep fighting each other.”
 X looks aside. “The truth is…I can’t stand seeing you this weak, knowing what you’re capable of. I want to fight you at your best.”
 Cotu: “X…”
-X: “Also, I’m sick of holding back. You’d be shocked at how tiring that is.”
+X: “Also, I’m sick of holding back. Containing my power is exhausting.”
 Cotu’s expression relaxes
 X collects himself for a moment: “If you’re not back to full strength by the time the gala begins,” X’s face ignites. “I will find you, and I will hurl you a hundred light years into the void.”
 Cotu nods. “Understo-”
@@ -3831,7 +3842,10 @@ Issues with Plot Ideas 3A and 3B:
 The gala is a casual competition, and nobody (which includes the player and the fighters) cares about competitions unless the rankings are official
 Plot Idea 3C: Trip to the Gala C
 Same as Plot Idea 3A, but with some major changes
-The general concept is the same: Cotu trains with others in his weakened form to get strong enough to fight in the gala, then eventually competes in it. The primary difference here is that the gala is no longer a casual event; it is an official event to determine rankings OR is one of a select number of galas throughout the universe to qualify for the tournament
+The general concept is the same: Cotu trains with others in his weakened form to get strong enough to fight in the gala, then eventually competes in it. The primary difference here is that the gala is no longer a casual event; it is one of a select number of galas throughout the universe to qualify for the tournament
+Each gala is filled with an even spread of low to high level fighters like the World Cup (i.e. not all top fighters are in the same qualifier event, otherwise the main tournament would miss out on many of the best fighters and wouldn’t be as interesting to watch)
+This means the player’s progression in the gala bracket closely resembles a top team’s progression in a World Cup qualifier (e.g. #1 seed fights #16, then #8, then #4, then #2)
+This also means Cotu likely won’t fight Blackstar. Maybe she fights him after the gala and Tempered X is the final gala boss? This would also allow the player to have as many attempts as they want with Blackstar, unlike the gala bosses
 I was wondering why I couldn’t get as emotionally invested in the gala as much as UFC fights, and I thought maybe it’s because the gala is unranked. I imagined what it’d be like if a UFC fight were also unranked and realized that I would care about it a lot less, and so would the fighters
 Why is it still called a gala? The gala can still be a name for an official sporting event, e.g. the Golden Gala
 Idea: the tournament was originally called “the tournament” because the creator of the universe only imagined it as a tournament, nothing more. Afterward, the gods agreed that they may add other events to the tournament, so they renamed it to “the gala”
@@ -3853,6 +3867,9 @@ Attempt 5: Late Gala
 Btwn attempts 5 & 6: practice late gala bosses
 Attempt 6: Win
 I’m undecided between several options for how Cotu lost his powers:
+The Singularity: some time after the tournament, Cotu’s passion for growth and fun caused him to achieve an uncontrollable level of power known as the Singularity, which the universe simulation banned. As a result, Jessica reset his powers (and possibly erased his memory of the Singularity’s existence). Cotu’s upset by this and wants to get his powers back ASAP (especially with the upcoming tournament), which is why he’s willing to enter the void just to get stronger
+Alt Sy Idea: instead of being upset, Cotu doesn’t mind the fact that he has to start from the beginning because he likes improving so much. Jessica removed his powers and erased the memories he formed after the tournament, which is what led to him reaching the Sy. After defeating Blackstar, Cotu is approached by Mike, who wants to fight him. It turns out that Cotu spent all of his post-tournament time with Mike, the only one who could keep up with him and the one who pushed him enough to reach the Sy. Mike itself wants to do research on the Sy. Cotu hid his whereabouts post-tournament bc he didn’t want everyone else to feel left behind or scared by his power
+Singularity is inspired by both a black hole’s singularity (gravitational singularity) and the technological singularity, a concept where self-upgrading AI surpasses human intelligence and control, causing unpredictable changes in civilization
 They were taken from him by Darkness, his arch-nemesis who is now on the run from every god in the universe OR locked away in Gauntlet Central like Candy Cat
 It is a mystery how his powers were taken
 This would make for a good talking point among all characters: the biggest controversy/drama with the current champion, sparking all kinds of discussion and rumors
@@ -3879,22 +3896,31 @@ Some weaker gods are more motivated now that he’s closer to their level
 Cotu goes from gym to gym to get stronger before the gala
 Gym 1: Beginners and Casuals
 Gauntlet Variant 1, the gentle guides
-Jab Crab, a nervous beginner who’s unsure of what his long term plans are for fighting
+Jab Crab, an ambitious beginner
 Mite Queen, who fights as a fun hobby
-Gym 2: Bullies and Ambitious Rising Stars
-Grow-a-Gator
-Grow-a-Gator’s victims
-Elite Gunner and Sentinel, the cool managers/coaches
+X, who’s not supposed to be here but trains you
+Idea: X comes if you fight everyone in Gym 1 before moving on to Gym 2
+Mites, wild animals spreading around
+Gym 2: Chaotic Bullies and Ambitious Rising Stars
+Elite Gunner and Sentinel, the cool coaches
+Long Arms, Jab Crab’s no-nonsense coach (?)
+Triplets (if you’re fast enough)
+Idea: X (if you’re fast enough)
+Grow-a-Gator (if you’re too slow)
+Clarity, god of the Great Void
 Gauntlet Central (+ nearby gods): Elite Athletes
-Future Blade: a self-deprecating drag queen
-Fire Dancer (?)
-Angels: folks who just want to play catch
+Future Blade, a self-deprecating drag queen
+Candy Cat, the captive sparring partner
+Triplets, who aren’t supposed to be here but help you
+Angels, folks who just want to play catch
 Gala: Championship Contenders
+Flora
 Neuro
 Tempered X
 Blackstar
 Turbo Jester (?)
-Fire Dancer (?)
+Issues with this plot:
+Including alternate routes (e.g. mites, Clarity) adds a lot to the game’s scope (Or does it? If the bosses are just selectable from a menu, is there really that big of a difference btwn having the boss on a main route vs an alternate route?)
 Plot Idea 3D: The Gala
 Same as Plot Idea 3C, but with major changes
 The general concept is the same: Cotu trains with others in his weakened form to get stronger, and the gala is an official event to qualify for the tournament. The primary differences here are 1: there are no non-gala subplots (trapped with mites, trapped with Clarity, Candy Cat’s escape) and 2: all Gauntlet gyms are participating in the gala; every single gym is a qualifier for the next stage. To progress to the next stage, each fighter must defeat a certain number of other fighters
