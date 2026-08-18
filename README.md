@@ -3843,9 +3843,9 @@ The gala is a casual competition, and nobody (which includes the player and the 
 Plot Idea 3C: Trip to the Gala C
 Same as Plot Idea 3A, but with some major changes
 The general concept is the same: Cotu trains with others in his weakened form to get strong enough to fight in the gala, then eventually competes in it. The primary difference here is that the gala is no longer a casual event; it is one of a select number of galas throughout the universe to qualify for the tournament
-Each gala is filled with an even spread of low to high level fighters like the World Cup (i.e. not all top fighters are in the same qualifier event, otherwise the main tournament would miss out on many of the best fighters and wouldn’t be as interesting to watch)
-This means the player’s progression in the gala bracket closely resembles a top team’s progression in a World Cup qualifier (e.g. #1 seed fights #16, then #8, then #4, then #2)
-This also means Cotu likely won’t fight Blackstar. Maybe she fights him after the gala and Tempered X is the final gala boss? This would also allow the player to have as many attempts as they want with Blackstar, unlike the gala bosses
+Each gala is filled with an even spread of low to high level fighters like the World Cup (i.e. not all top fighters are in the same qualifier event, otherwise the main tournament would miss out on many of the best fighters and wouldn’t be as interesting to watch). This means the player’s progression in the gala bracket closely resembles a top team’s progression in a World Cup qualifier (e.g. #1 seed fights #16, then #8, then #4, then #2)
+Why is Cotu allowed to fight Blackstar in the same gala? Shouldn’t they be in different galas? Cotu asks this and Blackstar explains that Cotu’s seed position was revoked since he reset his powers
+Why would Blackstar fight in the same gala as Cotu, who might prevent her from reaching the tournament? She knows how fast he improves; shouldn’t she be with easier competition? She explains that it’s for a few reasons. 1: She and the gauntlet believe she should be able to defeat anyone in the universe to deserve to make it to the tournament. No gauntlet member should be afraid of any matchup in the universe; it’s against their courageous culture. If she can’t beat Cotu, she doesn’t deserve to enter the tournament. 2: She recognizes that she’s not improving while every other major god is, which means her chances of winning the tournament are dwindling by the second. If she loses, she doesn’t want to lose in the tournament, in front of the entire universe with a bunch of strangers. She wants to lose in her own home, surrounded by the people she loves (she says this while making eye contact with Cotu).
 I was wondering why I couldn’t get as emotionally invested in the gala as much as UFC fights, and I thought maybe it’s because the gala is unranked. I imagined what it’d be like if a UFC fight were also unranked and realized that I would care about it a lot less, and so would the fighters
 Why is it still called a gala? The gala can still be a name for an official sporting event, e.g. the Golden Gala
 Idea: the tournament was originally called “the tournament” because the creator of the universe only imagined it as a tournament, nothing more. Afterward, the gods agreed that they may add other events to the tournament, so they renamed it to “the gala”
@@ -3866,18 +3866,10 @@ Btwn attempts 4 & 5: practice gala bosses
 Attempt 5: Late Gala
 Btwn attempts 5 & 6: practice late gala bosses
 Attempt 6: Win
-I’m undecided between several options for how Cotu lost his powers:
-The Singularity: some time after the tournament, Cotu’s passion for growth and fun caused him to achieve an uncontrollable level of power known as the Singularity, which the universe simulation banned. As a result, Jessica reset his powers (and possibly erased his memory of the Singularity’s existence). Cotu’s upset by this and wants to get his powers back ASAP (especially with the upcoming tournament), which is why he’s willing to enter the void just to get stronger
-Alt Sy Idea: instead of being upset, Cotu doesn’t mind the fact that he has to start from the beginning because he likes improving so much. Jessica removed his powers and erased the memories he formed after the tournament, which is what led to him reaching the Sy. After defeating Blackstar, Cotu is approached by Mike, who wants to fight him. It turns out that Cotu spent all of his post-tournament time with Mike, the only one who could keep up with him and the one who pushed him enough to reach the Sy. Mike itself wants to do research on the Sy. Cotu hid his whereabouts post-tournament bc he didn’t want everyone else to feel left behind or scared by his power
+Cotu lost his powers due to achieving The Singularity
+Some time after the tournament, Cotu’s passion for growth and fun caused him to achieve an uncontrollable level of power known as the Singularity, which the universe simulation banned. As a result, Jessica reset his powers and warned him not to upgrade himself too far again, otherwise she might have no choice but to delete him. Cotu doesn’t mind the fact that he has to start from the beginning because he likes improving, but his excitement, ambition, and pressure from the upcoming tournament makes him try to get his powers back ASAP, which is why he’s willing to fight X at full strength and enter the void just to get stronger
+Idea: After defeating Blackstar, Cotu is approached by Mike, who wants to fight him. Mike wants to do research on the Singularity and knows that Cotu achieved it
 Singularity is inspired by both a black hole’s singularity (gravitational singularity) and the technological singularity, a concept where self-upgrading AI surpasses human intelligence and control, causing unpredictable changes in civilization
-They were taken from him by Darkness, his arch-nemesis who is now on the run from every god in the universe OR locked away in Gauntlet Central like Candy Cat
-It is a mystery how his powers were taken
-This would make for a good talking point among all characters: the biggest controversy/drama with the current champion, sparking all kinds of discussion and rumors
-An investigation into the mystery might be good for a DLC or sequel, as an investigation sidequest is unnecessary in this game if the primary plot is about the gala. An investigation can be hinted at at the end of the game as a cliffhanger
-Mike helps investigate since it considers the power stealing a threat, and Mike doesn’t seem interested in the gala for whatever reason (it’s too strong for anyone in the gala)
-Cotu removed them on purpose to interact with weaker gods OR because he became so strong after the tournament that he thought he would easily dominate other gods in future tourneys
-This kinda removes the stakes since we know Cotu’s capable of beating everyone. It also sounds like cheap fanservice power fantasy, which may make the player roll their eyes
-Cotu removed them on purpose because he likes the journey from the bottom to the top. It’s sort of like starting Elden Ring over again from the beginning to see how much of it you can do better. You’ll be surprised just how quickly you can beat the game on the second run since you know how to beat the bosses
 Who Cotu travels with is kept ambiguous by the fact that the player only sees the current level menu (the catalogue of available fighters at the realm Cotu is currently in), not Cotu’s ship or any other hub world
 The player must still use their time wisely to get as strong as possible before the gala begins, a la Persona 5
 On the trip, gods fight Cotu for various reasons
@@ -3919,6 +3911,20 @@ Neuro
 Tempered X
 Blackstar
 Turbo Jester (?)
+Blackstar and Cotu’s fate
+After winning the gala, Cotu and Blackstar have a heart-to-heart. After accepting defeat, Blackstar finally lets go of her ambition and self-pressure, which causes her to reincarnate.
+Some upcoming galas offer the gauntlet a chance to compete in them using the new reincarnation, but the gauntlet refuses, accepting defeat fairly (and proving that Blackstar truly did move on).
+Afterward, Cotu has one last chance to upgrade himself, or enter the tournament as-is.
+If the player chooses not to upgrade Cotu, they get the good (canon) ending
+If the player chooses to upgrade Cotu, they buy all the upgrades (they have to in order to progress) and trigger the Singularity ending
+Good Ending
+Cotu walks away from the upgrade room, feeling content
+Undecided what happens after
+Singularity Ending
+Idea: after upgrading himself, Cotu has an inner conflict before finding that he’s split into 2 versions: Cotu and the Singularity (aka Sy). Sy steals Cotu’s icon and turns it into a weapon not used in the game up until this point: the chakram (just an idea).
+Sy throws the chakram at a defenseless Cotu before Jessica appears to save Cotu, subdue Sy, and think about what to do next
+Cotu begs Jessica not to change him and tells her he can defeat Sy
+Undecided what happens after
 Issues with this plot:
 Including alternate routes (e.g. mites, Clarity) adds a lot to the game’s scope (Or does it? If the bosses are just selectable from a menu, is there really that big of a difference btwn having the boss on a main route vs an alternate route?)
 Plot Idea 3D: The Gala
