@@ -1,6 +1,5 @@
-[gd_scene load_steps=21 format=3 uid="uid://bg48lfbn1h34h"]
+[gd_scene load_steps=20 format=3 uid="uid://bg48lfbn1h34h"]
 
-[ext_resource type="PackedScene" uid="uid://c35irt0wpfa0g" path="res://enemies/flat_hexagon.tscn" id="1_fa0ep"]
 [ext_resource type="Script" path="res://enemies/ice_sprite_spawner.gd" id="1_p5m4w"]
 [ext_resource type="Texture2D" uid="uid://namwvkk58jhe" path="res://sprites/blurry_circle.png" id="3_gms0c"]
 [ext_resource type="Script" path="res://general_scripts/damage_over_time_area.gd" id="4_1uke8"]
@@ -48,7 +47,7 @@ color_ramp = SubResource("GradientTexture1D_paov1")
 
 [sub_resource type="Gradient" id="Gradient_lt7b8"]
 offsets = PackedFloat32Array(0, 0.138728, 0.586705, 1)
-colors = PackedColorArray(0, 0, 0, 0.188235, 0, 0, 0, 0.352941, 0.827451, 0.827451, 0.827451, 0.141176, 0.843184, 0.843184, 0.843184, 0)
+colors = PackedColorArray(1, 1, 1, 0.188235, 1, 1, 1, 0.352941, 0.585063, 0.585062, 0.585062, 0.141176, 0.381703, 0.381703, 0.381703, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_in7qc"]
 gradient = SubResource("Gradient_lt7b8")
@@ -87,31 +86,18 @@ size = Vector2(1.6, 1.3)
 
 [node name="IceSpriteSpawner" type="Node3D"]
 script = ExtResource("1_p5m4w")
+rise_time = 10.0
+hex_count = 90
+hex_rotate_speed = 1.5
+ice_sprite_spawn_interval = 6.0
 
 [node name="Visuals" type="Node3D" parent="."]
 
 [node name="Scalable" type="Node3D" parent="Visuals"]
 
-[node name="FlatHexagon1" parent="Visuals/Scalable" instance=ExtResource("1_fa0ep")]
-transform = Transform3D(0.839734, -3.87625e-18, 3.06322e-17, 3.06322e-17, 0.209173, -0.813264, -3.87625e-18, 0.813264, 0.209173, 0, 0, 0)
-
-[node name="FlatHexagon2" parent="Visuals/Scalable" instance=ExtResource("1_fa0ep")]
-transform = Transform3D(0.826933, -2.38384e-16, 3.01642e-17, 3.01642e-17, 0.205976, 0.80087, -2.38384e-16, -0.80087, 0.205976, 0, 0, 0)
-
-[node name="FlatHexagon3" parent="Visuals/Scalable" instance=ExtResource("1_fa0ep")]
-transform = Transform3D(-5.37445e-09, -0.122953, 0.478041, 0.4936, -2.15759e-08, -1.72161e-16, 2.08958e-08, 0.478041, 0.122953, 0, 0, 0)
-
-[node name="FlatHexagon4" parent="Visuals/Scalable" instance=ExtResource("1_fa0ep")]
-transform = Transform3D(-1.74502e-09, -0.0399215, -0.155215, 0.160266, -7.00547e-09, -5.58988e-17, -6.78465e-09, -0.155215, 0.0399215, 0, 0, 0)
-
-[node name="FlatHexagon5" parent="Visuals/Scalable" instance=ExtResource("1_fa0ep")]
-transform = Transform3D(-0.0431101, -9.4494e-09, 0.167612, -0.167612, -7.32654e-09, -0.0431101, 9.4494e-09, -0.173067, -7.32654e-09, 0, 0, 0)
-
-[node name="FlatHexagon6" parent="Visuals/Scalable" instance=ExtResource("1_fa0ep")]
-transform = Transform3D(-0.126142, 2.76493e-08, -0.490438, 0.490438, -2.14377e-08, -0.126142, -2.76493e-08, -0.5064, -2.14377e-08, 0, 0, 0)
-
 [node name="HeadSphere" type="MeshInstance3D" parent="Visuals/Scalable"]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+visible = false
 cast_shadow = 0
 mesh = SubResource("SphereMesh_38oom")
 skeleton = NodePath("../../OmniLight")

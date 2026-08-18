@@ -902,7 +902,6 @@ func spawn_infuse_slice_hitbox():
 	inst.rotation.z = 0
 
 func spawn_ice_sprite_spawner():
-	print("Yes")
 	if ice_sprite_spawner_spawned:
 		return
 	var inst = ice_sprite_spawner.instantiate()

@@ -57,3 +57,7 @@ res://enemies/enemy_anims/clarity_regenshards.res
 res://levels/snow_level/snow_level.gd
 res://enemies/enemy_anims/snowflake_entity_regenshards.res
 res://enemies/flat_hexagon.tscn
+res://enemies/ice_sprite_spawner.gd
+res://cotu/CotuControl.gd
+res://cotu/cotu_cb_main.tscn
+res://enemies/ice_sprite.tscn
