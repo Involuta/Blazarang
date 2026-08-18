@@ -1504,22 +1504,99 @@ Make a func that starts the JumpShot anim in ClarityArmShards and all DressShard
 Make snowflake’s JumpShot anim call the start_jump_shot_anim func
 Ensure JumpShot returns Clarity to neutral
 Code summary: Immediately after RegenShards, the snowflake anim tree goes to the snowflake's JumpShot anim, which contains both the snowflake telegraph with the tiny shards and the actual behavior of the snowflake during the entirety of JumpShot (actual behavior is yet to be decided). As a result, snowflake calls the func start_jump_shot_anim right when the JumpShot anim in ClarityArmShards and DressShardsMaster is supposed to begin. This func plays both anims in both objects. Afterward, ClarityArmShards, all DressShards and the snowflake return to neutral
-Make phase 2.2: rising spawner
-Make spawner (or spawner effect meshes) in Blender
+Make phase 2.2: rising ice sprite spawner
+Make sprite spawner (or sprite spawner effect meshes) in Blender
+6 hexagons like the snowflake’s hexagon effect
+Each hexagon starts with scale = 0, then after some num of frames, each hexagon grows one after another. After reaching max size, the hexagon shrinks down to nothing, then starts again. Hexagons also all rotate in different axes and directions on said axes, creating the illusion of a 3D shape made up of 2D shapes
+Turn the above anim into a looping one
+Spawner constantly looks at camera so that thin edges of the hexagons aren’t seen
 Make spawner spawn from jump shot impact site if the jump shot is used for the first time
+Remake anim where all hexagons grow from scale 0 and use it as the “appear” anim, then use an anim tree to immediately transition from the appear anim to the looping undulate anim
 Make blizzard center on spawner instead of Clarity
-Make Clarity orbit around and face her body twds spawner instead of target. Head behavior is undecided; try both making her look at the target and the spawner and choose what looks best
-Make Clarity long range shard attacks
-TripleShardSpiralSequence1 (her left 3 shards spiral CW)
-TripleShardSpiralSequence2 (her right 3 shards spiral CCW)
-QuadShardSpiralSequence1
-QuadShardSpiralSequence2
-TripleShardFarSequence1 (same as TripleShardSequence1 but shards spread out over time, move slower, and travel farther)
-TripleShardFarSequence2
+Blizzard center is a node var that’s set to the ice sprite spawner when it spawns
+When the blizzard closes in, it closes in around the blizzard center
+Rename Clarity’s BodyLight to BlizzardLight, and make its size depend on the blizzard safezone radius
+Clarity moves the BlizzardLight to the spawner’s position when spawner appears
+Even as the spawner rises, the blizzard safezone area and light remain on the ground. The spawner has its own light
+Idea: spawner visuals move up while the main node remains grounded. This way, Clarity can still simply set the target node to the instantiated inst node
+Make spawner rise and grow over time
+Use tweens to make spawner rise and grow
+Make spawner’s omni light bright at first, then dim as it rises above the ground
+Make Clarity orbit around and face her body twds spawner instead of target. Head behavior is undecided; try making her look at the target, then the spawner,  then choose what looks best → looking at spawner is best
+Make Clarity orbit in a circular path around the spawner (or move toward the path if she isn’t there already)
+Make Clarity long range dress shard attacks
+Make brief outlines, then follow through with details
+TripleShardSemicircleSequence1 (her left 3 shards spiral CW)
+TripleShardSemicircleSequence2 (her right 3 shards spiral CCW)
+QuadShardSemicircleSequence1
+QuadShardSemicircleSequence2
+TripleShardFanSequence1 (same as TripleShardSequence1 but shards spread out over time, move slower, and travel farther)
+TripleShardFanSequence2
+QuadShardFanSequence1
+QuadShardFanSequence2
+Long range dress shard attacks occurs after every snowflake interval instead of every 3 intervals
+Make and import snowflake RotateSlow1Seg anim
+Try making triple shard attacks faster than quad shard attacks
+Make func keyframes for long range dress shard attacks and short snowflake interval
+Import all new long range dress shard anims
+TripleShardSemicircleSequence1
+TripleShardSemicircleSequence2
+QuadShardSemicircleSequence1
+QuadShardSemicircleSequence2
+TripleShardFanSequence1
+TripleShardFanSequence2
+QuadShardFanSequence1
+QuadShardFanSequence2
+Import short snowflake interval anim
+Short snowflake interval
+Make snowflake telegraph anims for long range dress shard attacks
+Shards stick out more and move more slowly than in usual dress shard attacks
+QuadShardFanSequence1
+QuadShardFanSequence2
+QuadShardSemicircleSequence1
+QuadShardSemicircleSequence2
+TripleShardFanSequence1
+TripleShardFanSequence2
+TripleShardSemicircleSequence1
+TripleShardSemicircleSequence2
+Snowflake uses telegraph anims for long range dress shard attacks
+Make snowflake use code to select an attack instead of an anim tree since the anim tree would get way too crowded
+Make the play_anim_all_dress_shards use the current snowflake anim as the attack string so you don’t have to put in the attack string as a parameter every time
+Test the above code with original snowflake telegraph/dress shard anims bc they already have keyframes for the snowflake telegraph anims
+Import all new snowflake anims and add functional keyframes to them
+QuadShardFanSequence1
+QuadShardFanSequence2
+QuadShardSemicircleSequence1
+QuadShardSemicircleSequence2
+TripleShardFanSequence1
+TripleShardFanSequence2
+TripleShardSemicircleSequence1
+TripleShardSemicircleSequence2
+Spawner spawns cubes as it rises
+Make spawner, not the environment, spawn ice sprites
+Spawner drops snow as it rises
+Snow DOT hitbox
+Snow visual effect
+Allow Clarity to use RegenShards during this phase
+Issue: Clarity uses dress shard attacks so often that the following condition is essentially always true: Clarity’s dress shards are attacking, or the snowflake is telegraphing the next dress shard attack. She only chooses RegenShards on queue_arm_attack when this condition is true. 
+Try allowing the snowflake (not just the arm via queue_arm_attack) to choose RegenShards as well
+Make sure arm is neutral
+Ensure that all current phase transitions and other triggers (e.g. first jump shot) happen through a formal structure and not just test code (e.g. jump shot manual trigger)
+Only the first JumpShot spawns the spawner; use a flag for this
+Clarity only does a JumpShot after RegenShards if circling the icon
+Make and import snowflake RegenShards anim
+Snowflake’s RegenShards anim calls a func that plays JumpShot unless Clarity is circling the spawner
+Current task
+Make Clarity spawner boost attack(s)
+Idea: instead of infusing her arm and shooting it at the spawner, Clarity infuses her arm and uses it to create a tiny ringed planet that floats towards the spawner. The player must destroy it before it reaches the spawner, or else the spawner gets boosted
+Effect idea: a bunch of lines appear and rapidly dart around to form 1 or more hexagonal shapes, then the hexagonal shapes start rotating and a planet grows inside them
+Idea: spawner spawns 2 different cubes: linger cubes (lingering DOT hitbox) and burst cubes (high single hit damage but no lingering hitbox and lower health)
 Animate snowflake in jump shot
 Figure out what snowflake should do
 Idea: snowflake rotates and hollows itself out to create a window for the arm shard to shoot through it
 To fit Clarity’s attack theme of continuous large area coverage, try making her slices move much slower (except for infuse slice, which needs to be fast to make the ring)
+I undid this change bc although slow attacks fit Clarity's theme of continuous area coverage, they remove the necessity to pay close attention to an element in the fight (Clarity's head before, snowflake now) to know when to dodge. With slow attacks, the player can simply react to the blade itself. Clarity doesn't just test the player's ability to weave through continuous area coverage; she tests their attentiveness and reaction speed as well
+Consider making Frostbite incurable via stabilizer, which makes the fight feel scarier and unfair
 Try adding a violently vibrating spinning planet thing in the middle of the infused slice ring so it’s more clear that it deals damage in the center
 Make Clarity’s body shard always deflect projectiles (give it a heavy enemy collider)
 Make Clarity’s hat deflect projectiles, but not bounce projectiles away when vulnerable
