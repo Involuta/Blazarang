@@ -492,11 +492,15 @@ Make particles linger even after the rang ricochets and is caught
 Cotu himself contains rang particles. When the roserang is in flight, his script activates the particles and moves them to the rang’s position
 Clarity polishing
 Make snowflake “tattoo” on underside of hat (and possibly beyond) materialize in an intricate animation as the head tilts up and starts glowing
-Current task (polish)
 Make Jump Shot start from the correct pose (WalkLeft instead of WalkForward)
 Ice sprite spawner
-Idea: each hexagon rotates in a random direction upon appearing instead of following the same patterns every time
+Idea: each hexagon rotates in a random direction upon appearing instead of following the same patterns every time. Hexagons still grow and shrink back to nothing
+With the overlapping hexagons and random rotation axes, the shapes/patterns look irregular, which makes them look ugly like a bunch of floating spaghetti. Adding some more hexagons increased the irregularity instead of decreasing it (I thought more hexagons would make things look more uniform)
+Current task (polish)
+Make the # of hexagons a parameter in ice_sprite_spawner
 Idea: large concentric rotating rings appear one after another as the spawner rises and grows. The more rings there are, the closer the spawner is to full height
+Try making the central sphere a regular polyhedron (e.g. icosahedron, aka d20)
+Make semicircle dress shard attacks look smoother; currently the shards jitter
 Ice sprite lingering explosion hitbox has particles and fog
 Mite Level Polishing
 Give landmite a separate glb import instead of making paramite and landmite share the same meshes. This way there won’t be errors with missing anim tracks in paramite
@@ -1826,7 +1830,9 @@ Current task
 Snowflake Boss: Comet/Clarity
 See Blazarang Long Tasks
 
-Remove SFX from Roserang since it should be present in hurtboxes
+Remove SFX from roserang since it should be present in hurtboxes
+
+Remove power throw from roserang since it does the same thing as the ax
 
 Add UI icon or crosshair to show how close to the center of the screen a target needs to be in order for homing instant rethrow to target it (like what Soldier 76’s ultimate does)
 
@@ -1847,9 +1853,15 @@ Unlockable Skill
 “Ax Counterstrike”
 Idea: detonating the ax also recalls it, removing the floating ax continuous attack and increasing gameplay momentum (which also fits Cotu’s character more)
 
-Make Different Game Mechanics Intersect; to create depth, you should be able to use multiple skills simultaneously
+Idea: make rang techniques more complex so they feel more like unlocking skills in a martial art than a direct boost in strength
+Idea: instead of just 1 special, you have multiple specials you can use like cooldowns in Overwatch, except instead of spending time to use the cooldown again, you spend buffs. To choose which special to use, press the corresponding special button
+Idea: each special requires a different set of buffs to activate
+Unlockable Skill
+Idea: Mini Flurry. Rose rapidly autotargets and hits a nearby enemy a few times. The final return to Cotu can be instant rethrown to keep the rose in flight, but the buffs required for the flurry will be spent
+
+Make Different Game Mechanics Intersect; to create depth, different skills should feel connected
 Vid on Interesting Mechanics vs Depth: https://www.youtube.com/watch?v=Fuf_SpKCYVY
-One of the biggest issues I noticed with Blazarang is that you can only use either the rose or the ax at a time, not both simultaneously or rapidly. This limits the player’s creative expression. As the vid above explains, if there are a lot of different game mechanics in a game, but they don’t intersect, the game feels shallow. To combat this problem in Blazarang, try allowing the player to use both the rose and ax and possibly more simultaneously
+One of the biggest issues I noticed with Blazarang is that you can only use either the rose or the ax at a time, and they don’t synergize with each other. This limits the player’s creative expression. As the vid above explains, if there are a lot of different game mechanics in a game, but they don’t intersect, the game feels shallow. To combat this problem in Blazarang, try making the rose synergize with or build up to the ax
 When the player unlocks the ax, they also gain the option to automatically instant rethrow when the rose hits Cotu
 Idea: a ghost hand instant rethrows the rose while Cotu himself does what the player wants
 Idea: when Cotu inputs a non-rose throw button right before the rose hits him (i.e. as if the player is using the that button to instant rethrow), something beneficial happens
@@ -1860,18 +1872,18 @@ Shuriken
 Shuriken costs no stability
 Chakram (come back to this after you add Chakram)
 Chakram does a full circle instead of a semicircle (but the chakram doesn’t move faster, so the slash takes twice as long overall)
-When the player unlocks the ax, they also gain the option to automatically throw the ax. This means the ax is automatically thrown in whatever direction the player camera is looking (throw is omnidirectional if zoomed in), then detonated when it’s near an enemy, hits a wall, or travels its max distance, then automatically recalled, then automatically perfect caught
+When the player unlocks the ax, they also gain the option to automatically throw the ax. This means the ax is automatically thrown in whatever direction the player camera is looking (throw is omnidirectional instead of just lateral if zoomed in), then detonated when it’s near an enemy, hits a wall, or travels its max distance, then automatically recalled, then automatically perfect caught
 Idea: ghost hand does the throwing, detonation, and recalling
 Additional synergy abilities
 Homing ax: if the player’s next roserang instant rethrow will be homing, and the player normal throws the ax such that the roserang hits Cotu in the last (instant_rethrow_window_secs) before the ax anim ends, the ax will be thrown as a homing throw, following the same targeting rules as a shuriken. The ax can still be detonated
 This knowledge is available when both the ax and homing instant rethrow are unlocked
-Power throw ax combo: if the ax was perfect caught and is now unthrown, then while holding power throw, press throw ax to throw both the powered roserang and ax at the same time in the same direction
+Issues with above ideas:
+Auto-throwing a rang doesn’t feel like a skilled, deliberate decision. Using the boomerangs should feel like a martial art, and in martial arts, you can’t just upgrade 1 technique to become 2 techniques at once. Every ability should have an understandable cost, either with resources or technical difficulty
+I want Cotu to look/feel like he’s doing all the work himself with his own body, not using some ghost to do it for him. This makes him feel more real and inspirational since he’s more similar to a human
 Alt idea: instead of being able to use both the ax and rose simultaneously, try making the ax an ultimate ability
 Hitting enemies with the rose charges the ax
 When the ax is fully charged, the player can use it in a sweeping slice or throw. Both of these attacks have low startup & endlag and deal very high damage (akin to critical hit damage in Dark Souls 3)
-After the initial attack, the ax’s damage diminishes greatly, becoming its normal form in the game currently. The ax is usable in this form for a short period of time before becoming inaccessible until the next ax full charge
-If Cotu isn’t holding the ax when the ax timer ends, it explodes and disappears
-Idea: when the ax is airborne, dodging causes the icon to stop following Cotu just like dodging when the rose is airborne. This can be used to dodge gigantic attacks (as a substitute for a super jump or long dodge for example)
+When the ax is airborne, dodging causes the icon to stop following Cotu just like dodging when the rose is airborne. This can be used to dodge gigantic attacks (as a substitute for a super jump or long dodge for example)
 
 The player doesn’t really think about stability management. They’re just making the decision of whether to instant rethrow or dodge, which is fine and already entertaining on its own for gauntlet variant 1 and X, but it feels like a waste of the stability mechanic
 Idea: stability vs power v1
@@ -3913,6 +3925,18 @@ Blackstar
 Turbo Jester (?)
 Blackstar and Cotu’s fate
 After winning the gala, Cotu and Blackstar have a heart-to-heart. After accepting defeat, Blackstar finally lets go of her ambition and self-pressure, which causes her to reincarnate.
+Blackstar is trying her hardest not to cry. She tries to stay still and quiet, but fails as tears stream down her face
+Cotu notices Blackstar is crying. Cotu begins to apologize
+Blackstar: “Don’t be sorry. You fought a good fight.”
+Cotu sits with Blackstar as she cries.
+…
+Blackstar: “I’m so disappointed.”
+…
+Blackstar: “I love them so much. They gave me everything. And I let them down. They deserve someone so much better than me.”
+Cotu disagrees
+Cotu tells her that the gauntlet will love her no matter what happens
+Blackstar: “I know that…I just wish I could’ve done more for them.”
+…
 Some upcoming galas offer the gauntlet a chance to compete in them using the new reincarnation, but the gauntlet refuses, accepting defeat fairly (and proving that Blackstar truly did move on).
 Afterward, Cotu has one last chance to upgrade himself, or enter the tournament as-is.
 If the player chooses not to upgrade Cotu, they get the good (canon) ending
