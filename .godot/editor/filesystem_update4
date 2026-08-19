@@ -61,3 +61,4 @@ res://enemies/ice_sprite_spawner.gd
 res://cotu/CotuControl.gd
 res://cotu/cotu_cb_main.tscn
 res://enemies/ice_sprite.tscn
+res://enemies/enemy_anims/clarity_stagger.res
