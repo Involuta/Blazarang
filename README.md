@@ -1847,10 +1847,6 @@ If you use a stabilizer while you’re still stable, you’re briefly invincible
 
 Consider ax reworks to make it more fun and usable
 Idea: ax’s current vertical throw is a fast attack, but the player can hold the throw button to spin the ax around their back like a Clash Royale Valkyrie and throw the ax horizontally
-Idea: ax counterstrike — right when the ax is horizontally thrown, Cotu becomes briefly invincible OR the ax has a separate melee attack, and that can be upgraded to a counterstrike
-Slash is a wide diagonal slash
-Unlockable Skill
-“Ax Counterstrike”
 Idea: detonating the ax also recalls it, removing the floating ax continuous attack and increasing gameplay momentum (which also fits Cotu’s character more)
 
 Idea: make rang techniques more complex so they feel more like unlocking skills in a martial art than a direct boost in strength
@@ -1862,28 +1858,19 @@ Idea: Mini Flurry. Rose rapidly autotargets and hits a nearby enemy a few times.
 Make Different Game Mechanics Intersect; to create depth, different skills should feel connected
 Vid on Interesting Mechanics vs Depth: https://www.youtube.com/watch?v=Fuf_SpKCYVY
 One of the biggest issues I noticed with Blazarang is that you can only use either the rose or the ax at a time, and they don’t synergize with each other. This limits the player’s creative expression. As the vid above explains, if there are a lot of different game mechanics in a game, but they don’t intersect, the game feels shallow. To combat this problem in Blazarang, try making the rose synergize with or build up to the ax
-When the player unlocks the ax, they also gain the option to automatically instant rethrow when the rose hits Cotu
-Idea: a ghost hand instant rethrows the rose while Cotu himself does what the player wants
-Idea: when Cotu inputs a non-rose throw button right before the rose hits him (i.e. as if the player is using the that button to instant rethrow), something beneficial happens
-Ax
-Ax gets buffed?
-Rose gets thrown backwards?
-Shuriken
-Shuriken costs no stability
-Chakram (come back to this after you add Chakram)
-Chakram does a full circle instead of a semicircle (but the chakram doesn’t move faster, so the slash takes twice as long overall)
-When the player unlocks the ax, they also gain the option to automatically throw the ax. This means the ax is automatically thrown in whatever direction the player camera is looking (throw is omnidirectional instead of just lateral if zoomed in), then detonated when it’s near an enemy, hits a wall, or travels its max distance, then automatically recalled, then automatically perfect caught
-Idea: ghost hand does the throwing, detonation, and recalling
-Additional synergy abilities
-Homing ax: if the player’s next roserang instant rethrow will be homing, and the player normal throws the ax such that the roserang hits Cotu in the last (instant_rethrow_window_secs) before the ax anim ends, the ax will be thrown as a homing throw, following the same targeting rules as a shuriken. The ax can still be detonated
-This knowledge is available when both the ax and homing instant rethrow are unlocked
-Issues with above ideas:
-Auto-throwing a rang doesn’t feel like a skilled, deliberate decision. Using the boomerangs should feel like a martial art, and in martial arts, you can’t just upgrade 1 technique to become 2 techniques at once. Every ability should have an understandable cost, either with resources or technical difficulty
-I want Cotu to look/feel like he’s doing all the work himself with his own body, not using some ghost to do it for him. This makes him feel more real and inspirational since he’s more similar to a human
-Alt idea: instead of being able to use both the ax and rose simultaneously, try making the ax an ultimate ability
+Make the ax an ultimate ability
 Hitting enemies with the rose charges the ax
-When the ax is fully charged, the player can use it in a sweeping slice or throw. Both of these attacks have low startup & endlag and deal very high damage (akin to critical hit damage in Dark Souls 3)
+When the ax is fully charged, the player can use it in a melee diagonal sweeping slice or throw. Both of these attacks have moderate startup & endlag and deal very high damage (akin to critical hit damage in Dark Souls 3)
+Right before and during the slice, Cotu becomes briefly invincible
+Unlockable Skill
+“Ax Counterstrike”
+If the player’s next roserang instant rethrow will be homing, and the player throws the ax such that the roserang hits Cotu in the last (instant_rethrow_window_secs) before the ax anim ends, the ax will be thrown as a homing throw, following the same targeting rules as a shuriken. The ax can still be detonated
+Unlockable Skill
+“Homing Ax”
+This knowledge is available when both the ax and homing instant rethrow are unlocked
 When the ax is airborne, dodging causes the icon to stop following Cotu just like dodging when the rose is airborne. This can be used to dodge gigantic attacks (as a substitute for a super jump or long dodge for example)
+Unlockable Skill
+“Stationary Soul”
 
 The player doesn’t really think about stability management. They’re just making the decision of whether to instant rethrow or dodge, which is fine and already entertaining on its own for gauntlet variant 1 and X, but it feels like a waste of the stability mechanic
 Idea: stability vs power v1
