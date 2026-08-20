@@ -1,23 +1,12 @@
-[gd_scene load_steps=20 format=3 uid="uid://bg48lfbn1h34h"]
+[gd_scene load_steps=19 format=3 uid="uid://bg48lfbn1h34h"]
 
 [ext_resource type="Script" path="res://enemies/ice_sprite_spawner.gd" id="1_p5m4w"]
+[ext_resource type="PackedScene" uid="uid://cvbcwrvb8488" path="res://glb_inherited_scenes/icosahedron.tscn" id="3_2sm6t"]
 [ext_resource type="Texture2D" uid="uid://namwvkk58jhe" path="res://sprites/blurry_circle.png" id="3_gms0c"]
 [ext_resource type="Script" path="res://general_scripts/damage_over_time_area.gd" id="4_1uke8"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="5_aeffj"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="6_j8l7h"]
 [ext_resource type="Shader" uid="uid://vvgsovx2psnk" path="res://shaders/smoke_LOD.tres" id="7_bu7u5"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_idhv3"]
-roughness = 0.12
-emission_enabled = true
-emission = Color(0, 0.415686, 0.768627, 1)
-emission_energy_multiplier = 2.0
-subsurf_scatter_strength = 0.01
-
-[sub_resource type="SphereMesh" id="SphereMesh_38oom"]
-material = SubResource("StandardMaterial3D_idhv3")
-radius = 0.375
-height = 0.75
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_pmbbr"]
 height = 60.0
@@ -46,8 +35,8 @@ scale_max = 0.03
 color_ramp = SubResource("GradientTexture1D_paov1")
 
 [sub_resource type="Gradient" id="Gradient_lt7b8"]
-offsets = PackedFloat32Array(0, 0.138728, 0.586705, 1)
-colors = PackedColorArray(1, 1, 1, 0.188235, 1, 1, 1, 0.352941, 0.585063, 0.585062, 0.585062, 0.141176, 0.381703, 0.381703, 0.381703, 0)
+offsets = PackedFloat32Array(0, 0.138728, 1)
+colors = PackedColorArray(1, 1, 1, 0.188235, 1, 1, 1, 0.352941, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_in7qc"]
 gradient = SubResource("Gradient_lt7b8")
@@ -67,9 +56,9 @@ emission_ring_radius = 0.6
 emission_ring_inner_radius = 0.3
 direction = Vector3(2.08165e-12, -1, 2.08165e-12)
 spread = 15.0
-gravity = Vector3(2.08165e-12, 0.45, 2.08165e-12)
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 0.6
-initial_velocity_max = 1.2
+initial_velocity_max = 0.9
 scale_min = 2.4
 scale_max = 3.6
 scale_curve = SubResource("CurveTexture_7uscm")
@@ -78,7 +67,7 @@ color_ramp = SubResource("GradientTexture1D_in7qc")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jswwv"]
 render_priority = 0
 shader = ExtResource("7_bu7u5")
-shader_parameter/ColorParameter = Color(0.552941, 0.768627, 1, 1)
+shader_parameter/ColorParameter = Color(0.607843, 0.803922, 1, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_wxrcu"]
 material = SubResource("ShaderMaterial_jswwv")
@@ -87,7 +76,8 @@ size = Vector2(1.6, 1.3)
 [node name="IceSpriteSpawner" type="Node3D"]
 script = ExtResource("1_p5m4w")
 rise_time = 10.0
-hex_count = 90
+max_scale = 5.0
+hex_count = 8
 hex_rotate_speed = 1.5
 ice_sprite_spawn_interval = 6.0
 
@@ -95,12 +85,18 @@ ice_sprite_spawn_interval = 6.0
 
 [node name="Scalable" type="Node3D" parent="Visuals"]
 
-[node name="HeadSphere" type="MeshInstance3D" parent="Visuals/Scalable"]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
-visible = false
+[node name="HeadSprite" type="Sprite3D" parent="Visuals/Scalable"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 cast_shadow = 0
-mesh = SubResource("SphereMesh_38oom")
-skeleton = NodePath("../../OmniLight")
+modulate = Color(0.458824, 0.709804, 1, 1)
+billboard = 1
+double_sided = false
+render_priority = -1
+texture = ExtResource("3_gms0c")
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+
+[node name="Icosahedron" parent="Visuals/Scalable" instance=ExtResource("3_2sm6t")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 
 [node name="OmniLight" type="OmniLight3D" parent="Visuals"]
 light_color = Color(0.509804, 0.733333, 1, 1)
@@ -111,16 +107,6 @@ light_bake_mode = 0
 omni_range = 6.0
 omni_attenuation = 0.6
 omni_shadow_mode = 0
-
-[node name="HeadSprite" type="Sprite3D" parent="Visuals/OmniLight"]
-transform = Transform3D(1, -3.48786e-16, 3.48786e-16, 3.48786e-16, 1, -3.48786e-16, -3.48786e-16, 3.48786e-16, 1, 0, 0, 0)
-visible = false
-cast_shadow = 0
-modulate = Color(0.462745, 0.713726, 1.6, 1)
-billboard = 1
-double_sided = false
-no_depth_test = true
-texture = ExtResource("3_gms0c")
 
 [node name="FootDOTArea" type="Node3D" parent="Visuals"]
 script = ExtResource("4_1uke8")
@@ -140,8 +126,9 @@ shape = SubResource("CylinderShape3D_pmbbr")
 
 [node name="HatSnowParticles" type="GPUParticles3D" parent="Visuals"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-amount = 210
-lifetime = 4.0
+visible = false
+amount = 200
+lifetime = 8.0
 process_material = SubResource("ParticleProcessMaterial_gyud0")
 draw_pass_1 = ExtResource("6_j8l7h")
 
@@ -149,7 +136,8 @@ draw_pass_1 = ExtResource("6_j8l7h")
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 cast_shadow = 0
 amount = 240
-lifetime = 7.5
+lifetime = 12.0
 preprocess = 1.5
+speed_scale = 2.0
 process_material = SubResource("ParticleProcessMaterial_i1gg2")
 draw_pass_1 = SubResource("QuadMesh_wxrcu")

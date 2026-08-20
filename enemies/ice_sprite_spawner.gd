@@ -16,6 +16,7 @@ extends Node3D
 @onready var root := get_tree().root
 @onready var visuals := $Visuals
 @onready var visuals_scalable := $Visuals/Scalable
+@onready var ico := $Visuals/Scalable/Icosahedron
 @onready var light := $OmniLight
 
 @onready var hexagon_mesh := preload("res://enemies/flat_hexagon.tscn")
@@ -29,7 +30,6 @@ var cam : Node3D
 
 var hexes: Array[Node3D] = []
 var hex_timers: Array[float] = []
-var hex_axes: Array[Vector3] = []
 
 func _ready():
 	level = root.find_child("Level", true, false)
@@ -45,12 +45,16 @@ func _ready():
 		visuals_scalable.add_child.call_deferred(hex)
 		await hex.tree_entered
 		hexes.append(hex)
+		# Set a random initial rotation across all axes
+		hex.rotation = Vector3(
+			randf_range(0.0, TAU),
+			randf_range(0.0, TAU),
+			randf_range(0.0, TAU)
+		)
 
 		# Evenly distribute start phase so all hexes begin at different points in their cycle
 		var start_progress = float(i) / float(hex_count)
 		hex_timers.append(start_progress * cycle_time)
-
-		hex_axes.append(_get_random_axis())
 
 func _physics_process(delta):
 	# Hexagon anim
@@ -60,35 +64,27 @@ func _physics_process(delta):
 		# Reset cycle if it exceeds cycle_time
 		if hex_timers[i] >= cycle_time:
 			hex_timers[i] = fmod(hex_timers[i], cycle_time)
-			_reset_hex_rotation(i)
 
 		# Scale using sine wave
 		var progress = hex_timers[i] / cycle_time
 		var scale_factor = sin(progress * PI)
-		
-		if scale_factor < .9:
-			scale_factor = 0
+
+		#if scale_factor < .9:
+			#scale_factor = 0
 		hexes[i].scale = Vector3.ONE * scale_factor
 
-		# Apply rotation
-		hexes[i].rotate(hex_axes[i], hex_rotate_speed * delta)
-
+		# Rotate around its local X axis
+		hexes[i].rotate_object_local(Vector3.RIGHT, hex_rotate_speed * delta)
+	
+	# Rotate ico
+	ico.rotate_x(hex_rotate_speed * delta)
+	ico.rotate_y(hex_rotate_speed * delta)
+	
 	# Spawning Logic
 	spawn_timer += delta
 	if spawn_timer >= ice_sprite_spawn_interval:
 		spawn_timer = 0.0
 		spawn_ice_sprite()
-
-# Helper function to assign a new randomized rotation trajectory
-func _reset_hex_rotation(index: int) -> void:
-	hex_axes[index] = _get_random_axis()
-
-# Helper function to grab a random valid 3D vector
-func _get_random_axis() -> Vector3:
-	var axis = Vector3.ZERO
-	while axis.length_squared() < 0.001:
-		axis = Vector3(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0), randf_range(-1.0, 1.0))
-	return axis.normalized()
 
 func spawn_ice_sprite():
 	# Check against the spawn rate (0.167 chance)
