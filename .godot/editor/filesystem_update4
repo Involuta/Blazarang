@@ -49,3 +49,6 @@ res://enemies/enemy_anims/clarity_regenshards.res
 res://enemies/enemy_anims/clarity_stagger.res
 res://enemies/ice_sprite_spawner.gd
 res://glb_inherited_scenes/icosahedron.tscn
+res://enemies/clarity_infused_slice_hitbox.tscn
+res://enemies/clarity_infused_slice_ring.gd
+res://enemies/enemy_anims/clarity_spawnerboost_planet.res
