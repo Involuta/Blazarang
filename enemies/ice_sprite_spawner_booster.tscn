@@ -1,0 +1,81 @@
+[gd_scene load_steps=8 format=3 uid="uid://c7tss2yg511nu"]
+
+[ext_resource type="Shader" path="res://shaders/ring_appear.gdshader" id="1_b2mca"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8a4yl"]
+render_priority = 0
+shader = ExtResource("1_b2mca")
+shader_parameter/fade_alpha = 1.0
+shader_parameter/progress = 1.2
+shader_parameter/spark_length = 0.15
+shader_parameter/spark_sharpness = 15.0
+shader_parameter/start_offset = 0.25
+shader_parameter/leading_color = Color(4, 4, 4, 1)
+shader_parameter/trailing_color = Color(0.403922, 0.545098, 1, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_3h8bf"]
+material = SubResource("ShaderMaterial_8a4yl")
+inner_radius = 0.8
+rings = 6
+ring_segments = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8pi35"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.38
+
+[sub_resource type="SphereMesh" id="SphereMesh_c5hu5"]
+material = SubResource("StandardMaterial3D_8pi35")
+radius = 0.3
+height = 0.6
+
+[sub_resource type="Animation" id="Animation_q0xfn"]
+resource_name = "spin_rings"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HexRing1:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(3.48787e-16, 3.48787e-16, 3.14159)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HexRing2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.5708, 3.48787e-16, 3.48787e-16), Vector3(1.5708, 3.48787e-16, 3.14159)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5ixlm"]
+_data = {
+"spin_rings": SubResource("Animation_q0xfn")
+}
+
+[node name="IceSpriteSpawnerBooster" type="Node3D"]
+
+[node name="HexRing1" type="MeshInstance3D" parent="."]
+mesh = SubResource("TorusMesh_3h8bf")
+
+[node name="HexRing2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, -1.5246e-23, -1.5246e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("TorusMesh_3h8bf")
+
+[node name="Planet" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_c5hu5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "spin_rings"
+libraries = {
+"": SubResource("AnimationLibrary_5ixlm")
+}
