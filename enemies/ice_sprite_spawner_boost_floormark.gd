@@ -1,5 +1,7 @@
 extends Node2D
 
+signal anim_finished
+
 var center = Vector2(256, 256) # Center of a 512x512 viewport
 var radius = 200.0
 @export var draw_duration = 2.5 # Seconds per animation phase
@@ -64,3 +66,6 @@ func start_animation():
 	animate_line(get_point(60), center, tween3)
 	animate_line(get_point(180), center, tween3)
 	animate_line(get_point(300), center, tween3)
+	
+	await tween3.finished
+	anim_finished.emit()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c7tss2yg511nu"]
+[gd_scene load_steps=17 format=3 uid="uid://c7tss2yg511nu"]
 
 [ext_resource type="Script" path="res://enemies/ice_sprite_spawner_boost.gd" id="1_cr75j"]
 [ext_resource type="Shader" path="res://shaders/ring_appear.gdshader" id="2_cv3le"]
@@ -43,10 +43,10 @@ tracks/0/path = NodePath("Ring1:mesh:material:shader_parameter/progress")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.6, 1.2),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.6, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, 1.2]
+"values": [0.0, 0.0, 1.2]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -82,7 +82,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 1.2, 3.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, 0.0, 6.0]
+"values": [0.0, 0.0, 1.0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -97,9 +97,74 @@ tracks/4/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_c72q8"]
+resource_name = "spawn"
+length = 0.10001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ring1:mesh:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Planet:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HeadSprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Planet:mesh:material:emission_energy_multiplier")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SnowParticles:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5ixlm"]
 _data = {
-"appear": SubResource("Animation_q0xfn")
+"appear": SubResource("Animation_q0xfn"),
+"spawn": SubResource("Animation_c72q8")
 }
 
 [sub_resource type="Curve" id="Curve_bregd"]
@@ -133,6 +198,7 @@ transform = Transform3D(2.08165e-12, 0, 0, 0, 2.08165e-12, 0, 0, 0, 2.08165e-12,
 mesh = SubResource("SphereMesh_c5hu5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "spawn"
 libraries = {
 "": SubResource("AnimationLibrary_5ixlm")
 }
@@ -149,6 +215,7 @@ texture = ExtResource("3_0sl8y")
 region_rect = Rect2(2.08165e-12, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 
 [node name="SnowParticles" type="GPUParticles3D" parent="."]
+emitting = false
 process_material = SubResource("ParticleProcessMaterial_6fqge")
 draw_pass_1 = ExtResource("4_cja42")
 
@@ -157,7 +224,7 @@ transparent_bg = true
 
 [node name="FloorMarkAnimation" type="Node2D" parent="FloorMarkViewport"]
 script = ExtResource("5_c638d")
-draw_duration = 1.0
+draw_duration = 0.6
 
 [node name="FloorMarkSprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, -1.5246e-23, -1.5246e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
