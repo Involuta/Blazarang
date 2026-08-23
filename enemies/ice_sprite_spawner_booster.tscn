@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7tss2yg511nu"]
+[gd_scene load_steps=9 format=3 uid="uid://c7tss2yg511nu"]
 
 [ext_resource type="Shader" path="res://shaders/ring_appear.gdshader" id="1_b2mca"]
+[ext_resource type="Script" path="res://enemies/ice_sprite_spawner_booster.gd" id="1_g7sun"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8a4yl"]
 render_priority = 0
@@ -15,9 +16,9 @@ shader_parameter/trailing_color = Color(0.403922, 0.545098, 1, 1)
 
 [sub_resource type="TorusMesh" id="TorusMesh_3h8bf"]
 material = SubResource("ShaderMaterial_8a4yl")
-inner_radius = 0.8
-rings = 6
-ring_segments = 6
+inner_radius = 0.9
+rings = 36
+ring_segments = 18
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8pi35"]
 emission_enabled = true
@@ -30,52 +31,62 @@ radius = 0.3
 height = 0.6
 
 [sub_resource type="Animation" id="Animation_q0xfn"]
-resource_name = "spin_rings"
-loop_mode = 1
+resource_name = "appear"
+length = 0.60001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("HexRing1:rotation")
+tracks/0/path = NodePath("Ring1:mesh:material:shader_parameter/progress")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0.2, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(3.48787e-16, 3.48787e-16, 3.14159)]
+"values": [0.0, 1.2]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("HexRing2:rotation")
+tracks/1/path = NodePath("Planet:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(1.5708, 3.48787e-16, 3.48787e-16), Vector3(1.5708, 3.48787e-16, 3.14159)]
+"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5ixlm"]
 _data = {
-"spin_rings": SubResource("Animation_q0xfn")
+"appear": SubResource("Animation_q0xfn")
 }
 
 [node name="IceSpriteSpawnerBooster" type="Node3D"]
+script = ExtResource("1_g7sun")
+max_height = null
+rise_time = null
+min_scale = null
+max_scale = null
+hex_count = null
+cycle_time = null
+hex_rotate_speed = null
+arena_floor_y = null
+ice_sprite_spawn_interval = null
 
-[node name="HexRing1" type="MeshInstance3D" parent="."]
+[node name="Ring1" type="MeshInstance3D" parent="."]
 mesh = SubResource("TorusMesh_3h8bf")
 
-[node name="HexRing2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, -1.5246e-23, -1.5246e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+[node name="Ring2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.33, 0, 0, 0, 1.33, 0, 0, 0, 1.33, 0, 0, 0)
 mesh = SubResource("TorusMesh_3h8bf")
 
 [node name="Planet" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_c5hu5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "spin_rings"
+autoplay = "appear"
 libraries = {
 "": SubResource("AnimationLibrary_5ixlm")
 }

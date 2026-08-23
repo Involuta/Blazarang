@@ -1,3 +1,4 @@
+class_name IceSpriteSpawner
 extends Node3D
 
 @export var max_brightness := 12.0
