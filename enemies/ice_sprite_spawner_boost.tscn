@@ -25,6 +25,7 @@ ring_segments = 18
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8pi35"]
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 5.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_c5hu5"]
 material = SubResource("StandardMaterial3D_8pi35")
@@ -53,7 +54,7 @@ tracks/1/path = NodePath("Planet:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.2),
+"times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1)]
@@ -103,6 +104,7 @@ scale_curve = SubResource("CurveTexture_7me7k")
 
 [node name="IceSpriteSpawnerBoost" type="Node3D"]
 script = ExtResource("1_cr75j")
+move_speed = 7.2
 ring_rotate_speed = 2.4
 
 [node name="Ring1" type="MeshInstance3D" parent="."]
