@@ -65,15 +65,6 @@ _data = {
 
 [node name="IceSpriteSpawnerBooster" type="Node3D"]
 script = ExtResource("1_g7sun")
-max_height = null
-rise_time = null
-min_scale = null
-max_scale = null
-hex_count = null
-cycle_time = null
-hex_rotate_speed = null
-arena_floor_y = null
-ice_sprite_spawn_interval = null
 
 [node name="Ring1" type="MeshInstance3D" parent="."]
 mesh = SubResource("TorusMesh_3h8bf")

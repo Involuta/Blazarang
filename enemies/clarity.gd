@@ -97,7 +97,7 @@ var staggerable := false # When head is exposed but not glowing, staggerable is 
 }
 
 @export var arm_attack_chances_circling_spawner = {
-	"RaiseRightSlice" : .5 # PLACEHOLDER: replace with spawner boost
+	"SpawnerBoostPlanet" : 1.0
 }
 
 @export var snowflake_short_range_attack_chances = {
@@ -126,12 +126,14 @@ var rng := RandomNumberGenerator.new()
 var transparent_mat := preload("res://textures/clear_tile.tres")
 var infused_slice_hitbox := preload("res://enemies/clarity_infused_slice_hitbox.tscn")
 var ice_sprite_spawner := preload("res://enemies/ice_sprite_spawner.tscn")
+var ice_sprite_spawner_booster := preload("res://enemies/ice_sprite_spawner_booster.tscn")
 @onready var blizzard_center : Node3D = self
 @onready var arm_anim_player := $ClarityArmMeshes/AnimationPlayer # Depends on Clarity.glb. Plays stagger anim after anim tree is set inactive
 @onready var mhp := $MeleeHitboxPivot
 @onready var arm_meshes := $ClarityArmMeshes # The ClarityMeshes associated with the arm
 @onready var body_meshes := $DressShardMaster # Depends on ClarityDressMeshes.glb. Plays dress shard anims
 @onready var arm_shard_mesh := $ClarityArmMeshes/Armature/Skeleton3D/Arm_2/Arm_2 # The singular arm mesh
+@onready var arm_tip_pt := $ClarityArmMeshes/Armature/Skeleton3D/Arm_2/ArmTipEmptyNode
 @onready var snowflake := $ClarityArmMeshes/SnowflakeEntity
 @onready var snowflake_anim_player := $ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/AnimationPlayer
 @onready var snowflake_hexagon_anim_player := $ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/HexagonAnimationPlayer
@@ -914,3 +916,9 @@ func spawn_ice_sprite_spawner():
 	target = inst
 	# Prevent another ice sprite spawner from being spawned
 	ice_sprite_spawner_spawned = true
+
+func spawn_ice_sprite_spawner_booster():
+	var inst = ice_sprite_spawner_booster.instantiate()
+	level.add_child.call_deferred(inst)
+	await inst.tree_entered
+	inst.global_position = arm_tip_pt.global_position
