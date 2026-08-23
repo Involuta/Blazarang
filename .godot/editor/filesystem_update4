@@ -47,3 +47,5 @@ res://enemies/ice_sprite_spawner.tscn
 res://enemies/ice_sprite_spawner.gd
 res://enemies/clarity.tscn
 res://enemies/clarity.gd
+res://enemies/ice_sprite_spawner_boost.tscn
+res://enemies/ice_sprite_spawner_boost.gd

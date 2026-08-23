@@ -1,0 +1,137 @@
+[gd_scene load_steps=14 format=3 uid="uid://c7tss2yg511nu"]
+
+[ext_resource type="Script" path="res://enemies/ice_sprite_spawner_boost.gd" id="1_cr75j"]
+[ext_resource type="Shader" path="res://shaders/ring_appear.gdshader" id="2_cv3le"]
+[ext_resource type="Texture2D" uid="uid://namwvkk58jhe" path="res://sprites/blurry_circle.png" id="3_0sl8y"]
+[ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="4_cja42"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8a4yl"]
+render_priority = 0
+shader = ExtResource("2_cv3le")
+shader_parameter/fade_alpha = 1.0
+shader_parameter/progress = 1.2
+shader_parameter/spark_length = 0.15
+shader_parameter/spark_sharpness = 15.0
+shader_parameter/start_offset = 0.25
+shader_parameter/leading_color = Color(4, 4, 4, 1)
+shader_parameter/trailing_color = Color(0.403922, 0.545098, 1, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_3h8bf"]
+material = SubResource("ShaderMaterial_8a4yl")
+inner_radius = 0.9
+rings = 36
+ring_segments = 18
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8pi35"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_c5hu5"]
+material = SubResource("StandardMaterial3D_8pi35")
+radius = 0.3
+height = 0.6
+
+[sub_resource type="Animation" id="Animation_q0xfn"]
+resource_name = "appear"
+length = 3.60001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ring1:mesh:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.6, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Planet:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HeadSprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1.2, 1.2, 1.2), Vector3(0.3, 0.3, 0.3)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Planet:mesh:material:emission_energy_multiplier")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.2, 3.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 6.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5ixlm"]
+_data = {
+"appear": SubResource("Animation_q0xfn")
+}
+
+[sub_resource type="Curve" id="Curve_bregd"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.1, 0.03), 0.0, 0.0, 0, 0, Vector2(0.5, 0.03), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_7me7k"]
+curve = SubResource("Curve_bregd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6fqge"]
+emission_shape = 2
+emission_sphere_radius = 0.3
+gravity = Vector3(2.08165e-12, -0.1, 2.08165e-12)
+scale_curve = SubResource("CurveTexture_7me7k")
+
+[node name="IceSpriteSpawnerBoost" type="Node3D"]
+script = ExtResource("1_cr75j")
+ring_rotate_speed = 2.4
+
+[node name="Ring1" type="MeshInstance3D" parent="."]
+mesh = SubResource("TorusMesh_3h8bf")
+
+[node name="Ring2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.33, 0, 0, 0, 1.33, 0, 0, 0, 1.33, 0, 0, 0)
+mesh = SubResource("TorusMesh_3h8bf")
+
+[node name="Planet" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_c5hu5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "appear"
+libraries = {
+"": SubResource("AnimationLibrary_5ixlm")
+}
+
+[node name="HeadSprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+visible = false
+cast_shadow = 0
+modulate = Color(0.458824, 0.709804, 1, 1)
+billboard = 1
+double_sided = false
+render_priority = -1
+texture = ExtResource("3_0sl8y")
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+process_material = SubResource("ParticleProcessMaterial_6fqge")
+draw_pass_1 = ExtResource("4_cja42")

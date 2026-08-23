@@ -126,7 +126,7 @@ var rng := RandomNumberGenerator.new()
 var transparent_mat := preload("res://textures/clear_tile.tres")
 var infused_slice_hitbox := preload("res://enemies/clarity_infused_slice_hitbox.tscn")
 var ice_sprite_spawner := preload("res://enemies/ice_sprite_spawner.tscn")
-var ice_sprite_spawner_booster := preload("res://enemies/ice_sprite_spawner_booster.tscn")
+var ice_sprite_spawner_booster := preload("res://enemies/ice_sprite_spawner_boost.tscn")
 @onready var blizzard_center : Node3D = self
 @onready var arm_anim_player := $ClarityArmMeshes/AnimationPlayer # Depends on Clarity.glb. Plays stagger anim after anim tree is set inactive
 @onready var mhp := $MeleeHitboxPivot
@@ -264,13 +264,11 @@ func _ready():
 	regen_dress_shards()
 	
 	# FOR TESTING: play JumpShot or RegenShards to reach phase 2 immediately
-	snowflake_anim_player.play("JumpShot")
-	#switch_to_stop()
-	#snowflake_anim_player.play("RegenShards")
-	#play_anim_all_dress_shards("RegenShards")
-	#arm_anim_player.play("RegenShards")
-	
-	await get_tree().create_timer(.1).timeout
+	#snowflake_anim_player.play("JumpShot")
+	switch_to_stop()
+	snowflake_anim_player.play("RegenShards")
+	play_anim_all_dress_shards("RegenShards")
+	arm_anim_player.play("RegenShards")
 	
 func frames(num: int) -> float:
 	return num * get_physics_process_delta_time()
