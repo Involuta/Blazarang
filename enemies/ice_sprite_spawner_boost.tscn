@@ -1,15 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://c7tss2yg511nu"]
+[gd_scene load_steps=16 format=3 uid="uid://c7tss2yg511nu"]
 
 [ext_resource type="Script" path="res://enemies/ice_sprite_spawner_boost.gd" id="1_cr75j"]
 [ext_resource type="Shader" path="res://shaders/ring_appear.gdshader" id="2_cv3le"]
 [ext_resource type="Texture2D" uid="uid://namwvkk58jhe" path="res://sprites/blurry_circle.png" id="3_0sl8y"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="4_cja42"]
+[ext_resource type="Script" path="res://enemies/ice_sprite_spawner_boost_floormark.gd" id="5_c638d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8a4yl"]
 render_priority = 0
 shader = ExtResource("2_cv3le")
 shader_parameter/fade_alpha = 1.0
-shader_parameter/progress = 1.2
+shader_parameter/progress = 0.0
 shader_parameter/spark_length = 0.15
 shader_parameter/spark_sharpness = 15.0
 shader_parameter/start_offset = 0.25
@@ -25,7 +26,7 @@ ring_segments = 18
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8pi35"]
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 5.0
+emission_energy_multiplier = 0.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_c5hu5"]
 material = SubResource("StandardMaterial3D_8pi35")
@@ -83,6 +84,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [0.0, 0.0, 6.0]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SnowParticles:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5ixlm"]
 _data = {
@@ -102,10 +115,11 @@ emission_sphere_radius = 0.3
 gravity = Vector3(2.08165e-12, -0.1, 2.08165e-12)
 scale_curve = SubResource("CurveTexture_7me7k")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_7wvdy"]
+viewport_path = NodePath("FloorMarkViewport")
+
 [node name="IceSpriteSpawnerBoost" type="Node3D"]
 script = ExtResource("1_cr75j")
-move_speed = 7.2
-ring_rotate_speed = 2.4
 
 [node name="Ring1" type="MeshInstance3D" parent="."]
 mesh = SubResource("TorusMesh_3h8bf")
@@ -115,16 +129,16 @@ transform = Transform3D(1.33, 0, 0, 0, 1.33, 0, 0, 0, 1.33, 0, 0, 0)
 mesh = SubResource("TorusMesh_3h8bf")
 
 [node name="Planet" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.08165e-12, 0, 0, 0, 2.08165e-12, 0, 0, 0, 2.08165e-12, 0, 0, 0)
 mesh = SubResource("SphereMesh_c5hu5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "appear"
 libraries = {
 "": SubResource("AnimationLibrary_5ixlm")
 }
 
 [node name="HeadSprite" type="Sprite3D" parent="."]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+transform = Transform3D(2.08165e-12, 0, 0, 0, 2.08165e-12, 0, 0, 0, 2.08165e-12, 0, 0, 0)
 visible = false
 cast_shadow = 0
 modulate = Color(0.458824, 0.709804, 1, 1)
@@ -134,6 +148,17 @@ render_priority = -1
 texture = ExtResource("3_0sl8y")
 region_rect = Rect2(2.08165e-12, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="SnowParticles" type="GPUParticles3D" parent="."]
 process_material = SubResource("ParticleProcessMaterial_6fqge")
 draw_pass_1 = ExtResource("4_cja42")
+
+[node name="FloorMarkViewport" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="FloorMarkAnimation" type="Node2D" parent="FloorMarkViewport"]
+script = ExtResource("5_c638d")
+draw_duration = 1.0
+
+[node name="FloorMarkSprite" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, -1.5246e-23, -1.5246e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+texture = SubResource("ViewportTexture_7wvdy")

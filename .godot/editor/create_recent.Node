@@ -1,3 +1,6 @@
+Sprite3D
+Node2D
+SubViewport
 GPUParticles3D
 Node3D
 AnimationPlayer
@@ -7,7 +10,6 @@ AnimationTree
 CollisionShape3D
 Hitbox
 DamageOverTimeArea
-Sprite3D
 Area3D
 EnemyHurtbox
 GPUTrail3D
@@ -28,5 +30,3 @@ StaticBody3D
 Label
 Label3D
 Node
-AudioStreamPlayer3D
-AudioStreamPlayer

@@ -1,7 +1,7 @@
 extends Node3D
 
-@export var move_speed := 6.0
-@export var ring_rotate_speed := 1.8
+@export var move_speed := 7.2
+@export var ring_rotate_speed := 2.4
 var r1_rotate_dir := Vector3.ONE
 var r2_rotate_dir := Vector3.ONE
 
