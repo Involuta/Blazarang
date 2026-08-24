@@ -297,6 +297,7 @@ func switch_to_stop():
 	# Set behav_state and look_state
 	behav_state = STOP
 	look_state = LOOK_STATE.STOP
+	velocity = Vector3.ZERO
 
 func set_head_rotation(rot_deg: Vector3):
 	# Set rotation of dynamic head (the head that looks at the player)

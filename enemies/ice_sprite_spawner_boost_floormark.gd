@@ -2,11 +2,13 @@ extends Node2D
 
 signal anim_finished
 
-var center = Vector2(256, 256) # Center of a 512x512 viewport
-var radius = 200.0
+@onready var vp := get_parent() as SubViewport
+var center : Vector2
+@export var radius : float
 @export var draw_duration = 2.5 # Seconds per animation phase
 
 func _ready():
+	center = vp.size / 2
 	start_animation()
 
 func get_point(angle_degrees: float) -> Vector2:
@@ -16,7 +18,10 @@ func get_point(angle_degrees: float) -> Vector2:
 func animate_line(start: Vector2, end: Vector2, tween: Tween):
 	var line = Line2D.new()
 	line.width = 10.0
-	line.default_color = Color(0, 1, 0.8) # Neon cyan
+	
+	# Standard pale blue
+	line.default_color = Color(0.4, 0.8, 1.0)
+	
 	add_child(line)
 
 	# Start with both points at the origin of the line
@@ -68,4 +73,18 @@ func start_animation():
 	animate_line(get_point(300), center, tween3)
 	
 	await tween3.finished
+	
+	# PHASE 4: Flash and Fade
+	var final_tween = create_tween()
+
+	# 1. Flash incredibly bright white for 0.15 seconds
+	# Using an HDR multiplier (3.0) forces an intense bloom
+	final_tween.tween_property(self, "modulate", Color(3.0, 3.0, 3.0, 1.0), 0.15)
+
+	# 2. Fade to completely transparent over 1.5 seconds
+	# Alpha drops to 0.0
+	final_tween.tween_property(self, "modulate", Color(1.0, 1.0, 1.0, 0.0), 1.5)
+	
+	await final_tween.finished
+	
 	anim_finished.emit()
