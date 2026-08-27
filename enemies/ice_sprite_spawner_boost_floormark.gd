@@ -77,13 +77,13 @@ func start_animation():
 	# PHASE 4: Flash and Fade
 	var final_tween = create_tween()
 
-	# 1. Flash incredibly bright white for 0.15 seconds
+	# 1. Flash incredibly bright white
 	# Using an HDR multiplier (3.0) forces an intense bloom
-	final_tween.tween_property(self, "modulate", Color(3.0, 3.0, 3.0, 1.0), 0.15)
+	final_tween.tween_property(self, "modulate", Color(3.0, 3.0, 3.0, 1.0), 0.1)
 
-	# 2. Fade to completely transparent over 1.5 seconds
+	# 2. Fade to completely transparent
 	# Alpha drops to 0.0
-	final_tween.tween_property(self, "modulate", Color(1.0, 1.0, 1.0, 0.0), 1.5)
+	final_tween.tween_property(self, "modulate", Color(1.0, 1.0, 1.0, 0.0), .5)
 	
 	await final_tween.finished
 	
