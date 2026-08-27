@@ -75,10 +75,9 @@ size = Vector2(1.6, 1.3)
 
 [node name="IceSpriteSpawner" type="Node3D"]
 script = ExtResource("1_p5m4w")
-rise_time = 10.0
 max_scale = 5.0
 hex_count = 8
-hex_rotate_speed = 1.5
+hex_rotate_speed_boost = 3.0
 ice_sprite_spawn_interval = 6.0
 
 [node name="Visuals" type="Node3D" parent="."]

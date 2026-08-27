@@ -4,15 +4,23 @@ extends Node3D
 @export var max_brightness := 12.0
 @export var min_brightness := 6.0
 @export var appear_dim_time := 12.0
-@export var max_height := 18.0
-@export var rise_time := 120.0
+@export var max_height := 100.0
 @export var min_scale := 1.0
 @export var max_scale := 6.0
+@export var rise_speed_base := 1.0
+var rise_speed := rise_speed_base
+@export var rise_speed_boost := 3.0
 
 # Hexagon vars
 @export var hex_count := 6
 @export var cycle_time := 3.6
-@export var hex_rotate_speed := 1.8
+@export var hex_rotate_speed_base := 1.8
+var hex_rotate_speed := hex_rotate_speed_base
+@export var hex_rotate_speed_boost := 1.8
+
+@export var boost_decay_time := 1.0
+var rise_speed_boost_decay_rate = rise_speed_boost / boost_decay_time
+var hex_rotate_speed_boost_decay_rate = hex_rotate_speed_boost / boost_decay_time
 
 @onready var root := get_tree().root
 @onready var visuals := $Visuals
@@ -37,8 +45,6 @@ func _ready():
 	cam = root.find_child("Camera3D", true, false)
 
 	var t = get_tree().create_tween().set_parallel()
-	t.tween_property(visuals, "position", max_height * Vector3.UP, rise_time).as_relative().from(6 * Vector3.DOWN)
-	t.tween_property(visuals_scalable, "scale", max_scale * Vector3.ONE, rise_time).from(min_scale)
 
 	# Instantiate hexes and distribute their starting phase evenly
 	for i in range(hex_count):
@@ -58,6 +64,9 @@ func _ready():
 		hex_timers.append(start_progress * cycle_time)
 
 func _physics_process(delta):
+	# Rise mvmt
+	visuals.position.y += rise_speed * delta
+	
 	# Hexagon anim
 	for i in range(hexes.size()):
 		hex_timers[i] += delta
@@ -86,6 +95,19 @@ func _physics_process(delta):
 	if spawn_timer >= ice_sprite_spawn_interval:
 		spawn_timer = 0.0
 		spawn_ice_sprite()
+	
+	# Set scale of visuals scalable based on local height ascent (0 to max_height)
+	var clamped_y: float = clampf(visuals.position.y, 0.0, max_height)
+	var current_scale: float = remap(clamped_y, 0.0, max_height, min_scale, max_scale)
+	visuals_scalable.scale = Vector3.ONE * current_scale
+	
+	# Reduce rise speed to base level
+	if rise_speed > rise_speed_base:
+		rise_speed -= rise_speed_boost_decay_rate * delta
+	
+	# Reduce hex_rotate_speed to base level
+	if hex_rotate_speed > hex_rotate_speed_base:
+		hex_rotate_speed -= hex_rotate_speed_boost_decay_rate * delta
 
 func spawn_ice_sprite():
 	# Check against the spawn rate (0.167 chance)
@@ -93,3 +115,7 @@ func spawn_ice_sprite():
 	level.add_child.call_deferred(sprite_instance)
 	await sprite_instance.tree_entered
 	sprite_instance.global_position = visuals.global_position
+
+func boost():
+	rise_speed = rise_speed_base + rise_speed_boost
+	hex_rotate_speed = hex_rotate_speed_base + hex_rotate_speed_boost
