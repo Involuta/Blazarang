@@ -1,10 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://c7tss2yg511nu"]
+[gd_scene load_steps=14 format=3 uid="uid://c7tss2yg511nu"]
 
 [ext_resource type="Script" path="res://enemies/ice_sprite_spawner_boost.gd" id="1_cr75j"]
 [ext_resource type="Shader" path="res://shaders/ring_appear.gdshader" id="2_cv3le"]
 [ext_resource type="Texture2D" uid="uid://namwvkk58jhe" path="res://sprites/blurry_circle.png" id="3_0sl8y"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="4_cja42"]
-[ext_resource type="Script" path="res://enemies/ice_sprite_spawner_boost_floormark.gd" id="5_c638d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8a4yl"]
 render_priority = 0
@@ -97,74 +96,9 @@ tracks/4/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_c72q8"]
-resource_name = "spawn"
-length = 0.10001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Ring1:mesh:material:shader_parameter/progress")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Planet:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("HeadSprite:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Planet:mesh:material:emission_energy_multiplier")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 3.6),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("SnowParticles:emitting")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5ixlm"]
 _data = {
-"appear": SubResource("Animation_q0xfn"),
-"spawn": SubResource("Animation_c72q8")
+"appear": SubResource("Animation_q0xfn")
 }
 
 [sub_resource type="Curve" id="Curve_bregd"]
@@ -179,24 +113,6 @@ emission_shape = 2
 emission_sphere_radius = 0.3
 gravity = Vector3(2.08165e-12, -0.1, 2.08165e-12)
 scale_curve = SubResource("CurveTexture_7me7k")
-
-[sub_resource type="QuadMesh" id="QuadMesh_apsdt"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_qaafj"]
-viewport_path = NodePath("FloorMarkViewport")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_rmeyh"]
-viewport_path = NodePath("FloorMarkViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xup7b"]
-resource_local_to_scene = true
-transparency = 1
-cull_mode = 2
-albedo_color = Color(0, 0, 0, 1)
-albedo_texture = SubResource("ViewportTexture_qaafj")
-emission_enabled = true
-emission_energy_multiplier = 3.0
-emission_texture = SubResource("ViewportTexture_rmeyh")
 
 [node name="IceSpriteSpawnerBoost" type="Node3D"]
 script = ExtResource("1_cr75j")
@@ -214,7 +130,7 @@ transform = Transform3D(2.08165e-12, 0, 0, 0, 2.08165e-12, 0, 0, 0, 2.08165e-12,
 mesh = SubResource("SphereMesh_c5hu5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "spawn"
+autoplay = "appear"
 libraries = {
 "": SubResource("AnimationLibrary_5ixlm")
 }
@@ -231,21 +147,6 @@ texture = ExtResource("3_0sl8y")
 region_rect = Rect2(2.08165e-12, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 
 [node name="SnowParticles" type="GPUParticles3D" parent="."]
-emitting = false
 amount = 12
 process_material = SubResource("ParticleProcessMaterial_6fqge")
 draw_pass_1 = ExtResource("4_cja42")
-
-[node name="FloorMarkViewport" type="SubViewport" parent="."]
-transparent_bg = true
-size = Vector2i(1024, 1024)
-
-[node name="FloorMarkAnimation" type="Node2D" parent="FloorMarkViewport"]
-script = ExtResource("5_c638d")
-radius = 480.0
-draw_duration = 0.6
-
-[node name="FloormarkMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(9, -6.27816e-15, -1.37214e-22, -1.37214e-22, -3.93403e-07, 9, -6.27816e-15, -9, -3.93403e-07, 2.08165e-12, 0.2, 2.08165e-12)
-mesh = SubResource("QuadMesh_apsdt")
-surface_material_override/0 = SubResource("StandardMaterial3D_xup7b")

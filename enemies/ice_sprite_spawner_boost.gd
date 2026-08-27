@@ -1,7 +1,5 @@
 extends Node3D
 
-var moving := false
-
 @export var move_speed := 7.2
 @export var ring_rotate_speed := 2.4
 var r1_rotate_dir := Vector3.ONE
@@ -12,7 +10,6 @@ var r2_rotate_dir := Vector3.ONE
 @onready var ring1 := $Ring1
 @onready var ring2 := $Ring2
 @onready var anim_player := $AnimationPlayer
-@onready var floormark := $FloorMarkViewport/FloorMarkAnimation
 
 var level : Node3D
 var spawner_visuals : Node3D
@@ -21,10 +18,6 @@ func _ready():
 	level = root.find_child("Level", true, false)
 	var spawner = level.find_children("IceSpriteSpawner", "IceSpriteSpawner", true, false)[0]
 	spawner_visuals = spawner.find_child("Visuals")
-	
-	await floormark.anim_finished
-	anim_player.play("appear")
-	moving = true
 	
 	# Set a random ring rotation dir across all axes
 	r1_rotate_dir = Vector3(
@@ -42,10 +35,9 @@ func _ready():
 	ring2.rotation = r2_rotate_dir
 
 func _physics_process(delta):
-	if moving:
-		global_position += move_speed * delta * global_position.direction_to(spawner_visuals.global_position)
-		# Rotate around its local X axis
-		ring1.rotate_object_local(r1_rotate_dir, ring_rotate_speed * delta)
-		ring2.rotate_object_local(r2_rotate_dir, ring_rotate_speed * delta)
-		if global_position.distance_to(spawner_visuals.global_position) < .1:
-			queue_free()
+	global_position += move_speed * delta * global_position.direction_to(spawner_visuals.global_position)
+	# Rotate around its local X axis
+	ring1.rotate_object_local(r1_rotate_dir, ring_rotate_speed * delta)
+	ring2.rotate_object_local(r2_rotate_dir, ring_rotate_speed * delta)
+	if global_position.distance_to(spawner_visuals.global_position) < .1:
+		queue_free()
