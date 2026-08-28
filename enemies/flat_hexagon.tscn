@@ -8,6 +8,8 @@ cull_mode = 2
 albedo_color = Color(0.584314, 0.792157, 1, 1)
 emission_enabled = true
 emission = Color(0.584314, 0.792157, 1, 1)
+emission_energy_multiplier = 0.9
+disable_receive_shadows = true
 
 [node name="FlatHexagon" instance=ExtResource("1_l8gfi")]
 

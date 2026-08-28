@@ -48,3 +48,5 @@ res://enemies/enemy_anims/clarity_regenshards.res
 res://enemies/enemy_anims/clarity_stagger.res
 res://enemies/ice_sprite_spawner.gd
 res://enemies/clarity.gd
+res://glb_inherited_scenes/icosahedron.tscn
+res://enemies/flat_hexagon.tscn
