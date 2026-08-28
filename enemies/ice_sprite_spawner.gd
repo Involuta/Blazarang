@@ -5,33 +5,39 @@ extends Node3D
 @export var min_brightness := 6.0
 @export var appear_dim_time := 12.0
 @export var max_height := 100.0
-@export var min_scale := 1.0
+@export var min_scale := 3.0
 @export var max_scale := 6.0
-@export var rise_speed_base := 1.0
+@export var rise_speed_base := .3
 var rise_speed := rise_speed_base
-@export var rise_speed_boost := 3.0
+@export var rise_speed_boosted := 3.0
 
 # Hexagon vars
 @export var hex_count := 6
 @export var cycle_time := 3.6
 @export var hex_rotate_speed_base := 1.8
 var hex_rotate_speed := hex_rotate_speed_base
-@export var hex_rotate_speed_boost := 1.8
+@export var hex_rotate_speed_boosted := 4.8
 
-@export var boost_decay_time := 1.0
-var rise_speed_boost_decay_rate = rise_speed_boost / boost_decay_time
-var hex_rotate_speed_boost_decay_rate = hex_rotate_speed_boost / boost_decay_time
+# Other visuals vars
+@export var light_energy_base := 1.0
+@export var light_energy_boosted := 3.0
+@export var glow_sprite_scale_base := 1.5
+@export var glow_sprite_scale_boosted := 3.0
+
+@export var boost_decay_time := 1.5
+var rise_speed_boost_decay_rate = (rise_speed_boosted - rise_speed_base) / boost_decay_time
 
 @onready var root := get_tree().root
 @onready var visuals := $Visuals
 @onready var visuals_scalable := $Visuals/Scalable
 @onready var ico := $Visuals/Scalable/Icosahedron
-@onready var light := $OmniLight
+@onready var light := $Visuals/OmniLight
+@onready var glow_sprite := $Visuals/Scalable/GlowSprite
 
 @onready var hexagon_mesh := preload("res://enemies/flat_hexagon.tscn")
 @onready var ice_sprite := preload("res://enemies/ice_sprite.tscn")
 @export var arena_floor_y := 10.0
-@export var ice_sprite_spawn_interval := 4.0
+@export var ice_sprite_spawn_interval := 6.0
 var spawn_timer := 0.0
 
 var level : Node3D
@@ -43,8 +49,6 @@ var hex_timers: Array[float] = []
 func _ready():
 	level = root.find_child("Level", true, false)
 	cam = root.find_child("Camera3D", true, false)
-
-	var t = get_tree().create_tween().set_parallel()
 
 	# Instantiate hexes and distribute their starting phase evenly
 	for i in range(hex_count):
@@ -105,9 +109,10 @@ func _physics_process(delta):
 	if rise_speed > rise_speed_base:
 		rise_speed -= rise_speed_boost_decay_rate * delta
 	
-	# Reduce hex_rotate_speed to base level
-	if hex_rotate_speed > hex_rotate_speed_base:
-		hex_rotate_speed -= hex_rotate_speed_boost_decay_rate * delta
+	# Remap rise speed to calculate other speeds
+	hex_rotate_speed = remap(rise_speed, rise_speed_base, rise_speed_boosted, hex_rotate_speed_base, hex_rotate_speed_boosted)
+	light.light_energy = remap(rise_speed, rise_speed_base, rise_speed_boosted, light_energy_base, light_energy_boosted)
+	#glow_sprite.scale = Vector3.ONE * remap(rise_speed, rise_speed_base, rise_speed_boosted, glow_sprite_scale_base, glow_sprite_scale_boosted)
 
 func spawn_ice_sprite():
 	# Check against the spawn rate (0.167 chance)
@@ -117,5 +122,7 @@ func spawn_ice_sprite():
 	sprite_instance.global_position = visuals.global_position
 
 func boost():
-	rise_speed = rise_speed_base + rise_speed_boost
-	hex_rotate_speed = hex_rotate_speed_base + hex_rotate_speed_boost
+	rise_speed = rise_speed_boosted
+	hex_rotate_speed = hex_rotate_speed_boosted
+	light.light_energy = light_energy_boosted
+	#glow_sprite.scale = Vector3.ONE * glow_sprite_scale_boosted
