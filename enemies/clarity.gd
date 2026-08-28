@@ -923,8 +923,11 @@ func spawn_ice_sprite_spawner():
 	inst.global_position = arm_shard_mesh.global_position
 	inst.global_position.y = min_y_pos
 	blizzard_center = inst
-	# Clarity now faces the ice sprite spawner
-	target = inst
+	# Wait for ice sprite spawner visuals to get referenceable
+	await get_tree().create_timer(.1).timeout
+	# Clarity now faces the ice sprite spawner visuals
+	# so she fires the arm shard at the visuals on her next jump shot
+	target = inst.visuals
 	# Prevent another ice sprite spawner from being spawned in future jump shots
 	ice_sprite_spawner_spawned = true
 	# Receive signal for when ice sprite spawner reaches max height
