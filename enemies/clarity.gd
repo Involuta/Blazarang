@@ -46,6 +46,7 @@ enum PHASE {
 var phase := PHASE.PHASE1
 
 var ice_sprite_spawner_spawned := false
+var spawner_max_height_reached := false
 
 @export var min_y_pos := 10.0 # y pos of arena floor, ie X's minimum y position
 
@@ -119,6 +120,7 @@ var staggerable := false # When head is exposed but not glowing, staggerable is 
 }
 
 @export var regen_shards_max_chance := .5 # When all 6 shards are destroyed, this is the chance that the next arm attack will be RegenShards
+var regen_shards_forced := false # Used to trigger RegenShards when spawner reaches max height
 
 var param_path_base := "parameters/conditions/"
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -523,6 +525,12 @@ func queue_arm_attack():
 			pass # pass until phase2 is confirmed to exist
 
 func trigger_regen_shards_or_return_attack_string(ac: Dictionary):
+	if regen_shards_forced:
+		# RegenShards shouldn't be forced twice in a row
+		regen_shards_forced = false
+		trigger_regen_shards_anims()
+		return
+	
 	# Trigger RegenShards and return null or return an attack string
 	# Include RegenShards in attack choices
 	var num_shards_destroyed := 0
@@ -537,12 +545,7 @@ func trigger_regen_shards_or_return_attack_string(ac: Dictionary):
 	all_chances["RegenShards"] = regen_shards_chance
 	var chosen_attack = choose_attack(all_chances)
 	if chosen_attack == "RegenShards":
-		# Prevent arm and snowflake attacks from being chosen during the attack
-		switch_to_stop()
-		snowflake_anim_player.play(chosen_attack)
-		play_anim_all_dress_shards(chosen_attack)
-		arm_anim_player.play(chosen_attack)
-		# To be implemented: if circling icon, do JumpShot after RegenShards. Snowflake's anim tree calls funcs to start JumpShot
+		trigger_regen_shards_anims()
 		return
 	else:
 		return chosen_attack
@@ -644,10 +647,18 @@ func wait_raised_left():
 		await arm_anim_player.animation_finished
 		arm_anim_player.play("LeftSliceFromInfuse")
 
+func trigger_regen_shards_anims():
+	# Prevent arm and snowflake attacks from being chosen during the attack
+	switch_to_stop()
+	snowflake_anim_player.play("RegenShards")
+	play_anim_all_dress_shards("RegenShards")
+	arm_anim_player.play("RegenShards")
+
 # Called by snowflake anim player at the end of its RegenShards anim
 # JumpShot only occurs after RegenShards if Clarity is circling the icon
+# OR if the ice sprite spawner has just reached its destination
 func trigger_jump_shot_anim():
-	if behav_state == CIRCLE_ICON:
+	if behav_state == CIRCLE_ICON or (behav_state == CIRCLE_SPAWNER and spawner_max_height_reached):
 		snowflake_anim_player.play("JumpShot")
 
 # Called by snowflake anim player in its JumpShot anim
@@ -914,11 +925,19 @@ func spawn_ice_sprite_spawner():
 	blizzard_center = inst
 	# Clarity now faces the ice sprite spawner
 	target = inst
-	# Prevent another ice sprite spawner from being spawned
+	# Prevent another ice sprite spawner from being spawned in future jump shots
 	ice_sprite_spawner_spawned = true
+	# Receive signal for when ice sprite spawner reaches max height
+	inst.max_height_reached.connect(on_spawner_max_height_reached)
 
 func spawn_ice_sprite_spawner_boost():
 	var inst = ice_sprite_spawner_boost.instantiate()
 	level.add_child.call_deferred(inst)
 	await inst.tree_entered
 	inst.global_position = arm_tip_pt.global_position
+
+func on_spawner_max_height_reached():
+	# Set flag so that RegenShards triggers JumpShot
+	spawner_max_height_reached = true
+	# Force RegenShards to be chosen on next arm attack
+	regen_shards_forced = true

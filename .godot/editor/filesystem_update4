@@ -47,3 +47,4 @@ res://enemies/enemy_anims/clarity_raise_right_slice.res
 res://enemies/enemy_anims/clarity_regenshards.res
 res://enemies/enemy_anims/clarity_stagger.res
 res://enemies/ice_sprite_spawner.gd
+res://enemies/clarity.gd

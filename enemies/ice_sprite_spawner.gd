@@ -1,6 +1,8 @@
 class_name IceSpriteSpawner
 extends Node3D
 
+signal max_height_reached
+
 @export var max_brightness := 12.0
 @export var min_brightness := 6.0
 @export var appear_dim_time := 12.0
@@ -69,7 +71,10 @@ func _ready():
 
 func _physics_process(delta):
 	# Rise mvmt
-	visuals.position.y += rise_speed * delta
+	if visuals.position.y < max_height:
+		visuals.position.y += rise_speed * delta
+		if visuals.position.y >= max_height:
+			max_height_reached.emit()
 	
 	# Hexagon anim
 	for i in range(hexes.size()):
