@@ -138,3 +138,5 @@ preprocess = 1.5
 speed_scale = 2.0
 process_material = SubResource("ParticleProcessMaterial_i1gg2")
 draw_pass_1 = SubResource("QuadMesh_wxrcu")
+
+[editable path="Visuals/Scalable/Icosahedron"]

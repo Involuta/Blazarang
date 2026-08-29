@@ -26,6 +26,12 @@ var hex_rotate_speed := hex_rotate_speed_base
 @export var glow_sprite_scale_base := 1.5
 @export var glow_sprite_scale_boosted := 3.0
 
+# Albedo visual vars
+@export var ico_albedo_base: Color = Color(0.5, 0.75, 1.0) # Normal color state
+@export var ico_albedo_boosted: Color = Color(1.0, 1.3, 3.6) # Bright/HDR boosted color state
+@export var hex_albedo_base: Color = Color(0.5, 0.75, 1.0)
+@export var hex_albedo_boosted: Color = Color(1.0, 1.3, 3.6)
+
 @export var boost_decay_time := 1.5
 var rise_speed_boost_decay_rate = (rise_speed_boosted - rise_speed_base) / boost_decay_time
 
@@ -33,6 +39,7 @@ var rise_speed_boost_decay_rate = (rise_speed_boosted - rise_speed_base) / boost
 @onready var visuals := $Visuals
 @onready var visuals_scalable := $Visuals/Scalable
 @onready var ico := $Visuals/Scalable/Icosahedron
+@onready var ico_mesh: MeshInstance3D = $Visuals/Scalable/Icosahedron/Cube
 @onready var light := $Visuals/OmniLight
 @onready var glow_sprite := $Visuals/Scalable/GlowSprite
 
@@ -48,9 +55,14 @@ var cam : Node3D
 var hexes: Array[Node3D] = []
 var hex_timers: Array[float] = []
 
+var ico_material: StandardMaterial3D
+var hex_material: StandardMaterial3D
+
 func _ready():
 	level = root.find_child("Level", true, false)
 	cam = root.find_child("Camera3D", true, false)
+	
+	ico_material = ico_mesh.get_surface_override_material(0)
 
 	# Instantiate hexes and distribute their starting phase evenly
 	for i in range(hex_count):
@@ -58,6 +70,13 @@ func _ready():
 		visuals_scalable.add_child.call_deferred(hex)
 		await hex.tree_entered
 		hexes.append(hex)
+
+		# Store the shared material reference from the first instantiated hexagon
+		if not hex_material:
+			var mesh_instance := hex.find_child("*", true, false) as MeshInstance3D
+			if mesh_instance:
+				hex_material = mesh_instance.get_surface_override_material(0) as StandardMaterial3D
+
 		# Set a random initial rotation across all axes
 		hex.rotation = Vector3(
 			randf_range(0.0, TAU),
@@ -88,8 +107,6 @@ func _physics_process(delta):
 		var progress = hex_timers[i] / cycle_time
 		var scale_factor = sin(progress * PI)
 
-		#if scale_factor < .9:
-			#scale_factor = 0
 		hexes[i].scale = Vector3.ONE * scale_factor
 
 		# Rotate around its local X axis
@@ -113,11 +130,19 @@ func _physics_process(delta):
 	# Reduce rise speed to base level
 	if rise_speed > rise_speed_base:
 		rise_speed -= rise_speed_boost_decay_rate * delta
+		rise_speed = maxf(rise_speed, rise_speed_base) # Clamp to avoid undershooting base speed
 	
-	# Remap rise speed to calculate other speeds
+	# Remap rise speed to calculate other speeds & visuals
 	hex_rotate_speed = remap(rise_speed, rise_speed_base, rise_speed_boosted, hex_rotate_speed_base, hex_rotate_speed_boosted)
 	light.light_energy = remap(rise_speed, rise_speed_base, rise_speed_boosted, light_energy_base, light_energy_boosted)
-	#glow_sprite.scale = Vector3.ONE * remap(rise_speed, rise_speed_base, rise_speed_boosted, glow_sprite_scale_base, glow_sprite_scale_boosted)
+	
+	var lerp_val: float = remap(rise_speed, rise_speed_base, rise_speed_boosted, 0.0, 1.0)
+	
+	if ico_material:
+		ico_material.albedo_color = ico_albedo_base.lerp(ico_albedo_boosted, lerp_val)
+
+	if hex_material:
+		hex_material.albedo_color = hex_albedo_base.lerp(hex_albedo_boosted, lerp_val)
 
 func spawn_ice_sprite():
 	# Check against the spawn rate (0.167 chance)
@@ -128,6 +153,7 @@ func spawn_ice_sprite():
 
 func boost():
 	rise_speed = rise_speed_boosted
-	hex_rotate_speed = hex_rotate_speed_boosted
-	light.light_energy = light_energy_boosted
-	#glow_sprite.scale = Vector3.ONE * glow_sprite_scale_boosted
+	if ico_material:
+		ico_material.albedo_color = ico_albedo_boosted
+	if hex_material:
+		hex_material.albedo_color = hex_albedo_boosted
