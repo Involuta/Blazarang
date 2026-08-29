@@ -1,7 +1,7 @@
 [gd_scene load_steps=33 format=3 uid="uid://cyguldrcukgxk"]
 
 [ext_resource type="PackedScene" uid="uid://cx5rx4acw6xna" path="res://glb_imports/SnowflakeEntity.glb" id="1_xrs3j"]
-[ext_resource type="PackedScene" uid="uid://c35irt0wpfa0g" path="res://enemies/flat_hexagon.tscn" id="2_shy50"]
+[ext_resource type="PackedScene" uid="uid://c35irt0wpfa0g" path="res://glb_inherited_scenes/flat_hexagon.tscn" id="2_shy50"]
 [ext_resource type="Texture2D" uid="uid://namwvkk58jhe" path="res://sprites/blurry_circle.png" id="2_x83ru"]
 
 [sub_resource type="Shader" id="Shader_0yqwf"]

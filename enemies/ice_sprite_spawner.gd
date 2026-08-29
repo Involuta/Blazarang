@@ -43,7 +43,7 @@ var rise_speed_boost_decay_rate = (rise_speed_boosted - rise_speed_base) / boost
 @onready var light := $Visuals/OmniLight
 @onready var glow_sprite := $Visuals/Scalable/GlowSprite
 
-@onready var hexagon_mesh := preload("res://enemies/flat_hexagon.tscn")
+@onready var hexagon_mesh := preload("res://glb_inherited_scenes/ice_sprite_spawner_flat_hexagon.tscn")
 @onready var ice_sprite := preload("res://enemies/ice_sprite.tscn")
 @export var arena_floor_y := 10.0
 @export var ice_sprite_spawn_interval := 6.0

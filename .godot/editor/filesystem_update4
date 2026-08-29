@@ -1,11 +1,10 @@
-res://enemies/ice_sprite_spawner.tscn
-res://textures/clear_tile.tres
+res://glb_meshes/snowflake_particle_mesh.res
 res://textures/noise_texture_2d.tres
 res://shaders/smoke_LOD.tres
 res://shaders/ring_appear.gdshader
-res://glb_meshes/snowflake_particle_mesh.res
 res://shaders/black_outline.gdshader
 res://enemies/clarity_arm_shard.gdshader
+res://textures/clear_tile.tres
 res://glb_meshes/long_hexagon_particle_mesh.res
 res://GPUTrail-main/shaders/trail.gdshader
 res://shaders/smoke.gdshader
@@ -32,9 +31,9 @@ res://shaders/sobel_outline.gdshader
 res://enemies/snowflake_link_outline.gdshader
 res://enemies/ground_glow.gdshader
 res://enemies/clarity_dress_shard.gdshader
+res://glb_inherited_scenes/ice_sprite_spawner_flat_hexagon.tscn
 res://enemies/ice_sprite_spawner.gd
+res://enemies/ice_sprite_spawner.tscn
 res://enemies/ice_sprite_spawner_boost.tscn
 res://enemies/clarity.tscn
-res://glb_inherited_scenes/icosahedron.tscn
-res://enemies/flat_hexagon.tscn
 res://glb_inherited_scenes/snowflake_entity_meshes.tscn
