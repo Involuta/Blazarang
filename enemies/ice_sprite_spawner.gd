@@ -42,6 +42,7 @@ var rise_speed_boost_decay_rate = (rise_speed_boosted - rise_speed_base) / boost
 @onready var ico_mesh: MeshInstance3D = $Visuals/Scalable/Icosahedron/Cube
 @onready var light := $Visuals/OmniLight
 @onready var glow_sprite := $Visuals/Scalable/GlowSprite
+@onready var anim_player := $AnimationPlayer
 
 @onready var hexagon_mesh := preload("res://glb_inherited_scenes/ice_sprite_spawner_flat_hexagon.tscn")
 @onready var ice_sprite := preload("res://enemies/ice_sprite.tscn")
@@ -94,6 +95,11 @@ func _physics_process(delta):
 		visuals.position.y += rise_speed * delta
 		if visuals.position.y >= max_height:
 			max_height_reached.emit()
+		
+		# While rising, set scale of visuals scalable based on local height ascent (0 to max_height)
+		var clamped_y: float = clampf(visuals.position.y, 0.0, max_height)
+		var current_scale: float = remap(clamped_y, 0.0, max_height, min_scale, max_scale)
+		visuals_scalable.scale = Vector3.ONE * current_scale
 	
 	# Hexagon anim
 	for i in range(hexes.size()):
@@ -122,11 +128,6 @@ func _physics_process(delta):
 		spawn_timer = 0.0
 		spawn_ice_sprite()
 	
-	# Set scale of visuals scalable based on local height ascent (0 to max_height)
-	var clamped_y: float = clampf(visuals.position.y, 0.0, max_height)
-	var current_scale: float = remap(clamped_y, 0.0, max_height, min_scale, max_scale)
-	visuals_scalable.scale = Vector3.ONE * current_scale
-	
 	# Reduce rise speed to base level
 	if rise_speed > rise_speed_base:
 		rise_speed -= rise_speed_boost_decay_rate * delta
@@ -152,8 +153,11 @@ func spawn_ice_sprite():
 	sprite_instance.global_position = visuals.global_position
 
 func boost():
+	# All other boosted properties are based on rise_speed
 	rise_speed = rise_speed_boosted
-	if ico_material:
-		ico_material.albedo_color = ico_albedo_boosted
-	if hex_material:
-		hex_material.albedo_color = hex_albedo_boosted
+
+func explode():
+	anim_player.play("explode")
+	var t = create_tween()
+	t.tween_property(visuals_scalable, "scale", Vector3.ONE * max_scale * 1.6, 1.0).set_ease(Tween.EASE_OUT)
+	t.tween_property(self, "rise_speed", rise_speed_base * .4, 1.0).set_ease(Tween.EASE_OUT)

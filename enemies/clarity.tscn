@@ -26,14 +26,14 @@ radius = 1.5
 offsets = PackedFloat32Array(0.182081, 0.361272)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_eksoc"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hn8nk"]
 gradient = SubResource("Gradient_7e2c3")
 
 [sub_resource type="Curve" id="Curve_jhxyr"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0699153, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0129609), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_8w4yp"]
+[sub_resource type="CurveTexture" id="CurveTexture_pkd12"]
 curve = SubResource("Curve_jhxyr")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1ffcq"]
@@ -47,9 +47,9 @@ damping_min = 0.5
 damping_max = 0.5
 scale_min = 0.08
 scale_max = 0.16
-scale_curve = SubResource("CurveTexture_8w4yp")
+scale_curve = SubResource("CurveTexture_pkd12")
 color = Color(0.792157, 0.92549, 1, 1)
-color_ramp = SubResource("GradientTexture1D_eksoc")
+color_ramp = SubResource("GradientTexture1D_hn8nk")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wjs3c"]
 radius = 1.5

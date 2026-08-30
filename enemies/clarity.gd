@@ -348,6 +348,11 @@ func body_face_position_directly(target_pos: Vector3):
 # Lerp val (float btwn 0 and 1) to be used for value transitions
 var cotu_dist_lerp_val := .5
 func _physics_process(delta):
+	# Check if the arm has just hit the ice sprite spawner. If so, explode it
+	# Why isn't this in a circling_spawner frame? Bc during the jump shot, Clarity isn't circling the spawner
+	if target != icon and arm_tip_pt.global_position.distance_to(target.global_position) < 6.0:
+		on_spawner_explode()
+	
 	min_fog_radius = blizzard_safezone_radius * .8 # Dist from Clarity where fog is minimized
 	max_fog_radius = blizzard_safezone_radius * 1.6 # Dist from Clarity where fog is maximized
 	blizzard_light.omni_range = blizzard_safezone_radius * 1.2
@@ -944,3 +949,6 @@ func on_spawner_max_height_reached():
 	spawner_max_height_reached = true
 	# Force RegenShards to be chosen on next arm attack
 	regen_shards_forced = true
+
+func on_spawner_explode():
+	target.get_parent().explode()
