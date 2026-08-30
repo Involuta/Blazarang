@@ -37,3 +37,5 @@ res://enemies/ice_sprite_spawner.tscn
 res://enemies/ice_sprite_spawner_boost.tscn
 res://enemies/clarity.tscn
 res://glb_inherited_scenes/snowflake_entity_meshes.tscn
+res://enemies/ice_sprite.gd
+res://enemies/ice_sprite.tscn

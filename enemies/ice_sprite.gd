@@ -38,12 +38,12 @@ func _ready():
 func _physics_process(delta):
 	if not explosion_triggered and global_position.distance_to(target.global_position) < target_distance:
 		start_attack()
-	if not explosion_started:
-		if is_on_floor():
+	if is_on_floor():
+		if not explosion_triggered:
 			jump()
-		else:
-			velocity.y -= .67 * gravity * delta
-		move_and_slide()
+	else:
+		velocity.y -= .67 * gravity * delta
+	move_and_slide()
 	if global_position.y < -100:
 		queue_free()
 
