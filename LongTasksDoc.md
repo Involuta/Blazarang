@@ -1492,7 +1492,7 @@ Clarity now orbits around the spawner, not you, from a far distance. She intermi
 Idea: this phase also introduces head shard attacks. The head can reveal itself and fire 2 triple shot attacks with tiny glowing blue projectiles
 When the spawner is at its max height, Clarity regens her shards again, does a second jump shot, this time shooting at the spawner. This detonates (but doesn’t destroy) the spawner at the top of the spire, which sends ice projectiles flying everywhere and stops it from dropping snow clouds. After this jump shot, the blizzard goes back to being centered on Clarity
 Idea: the spawner looks like a hexacontium 
-The spire entity now spawns ice sprites while Clarity goes back to phase 2.1 (plus some additional attacks, e.g. infused slice, head shard attacks). Perhaps every time Clarity regens her shards, she jump shots the spire entity to send ice (and possibly a bunch of ice sprites) everywhere)
+The spire entity now spawns ice sprites while Clarity goes to phase 2.3 (same as phase 2.1 plus some additional attacks, e.g. infused slice, head shard attacks). Perhaps every time Clarity regens her shards, she jump shots the spire entity to send ice (and possibly a bunch of ice sprites) everywhere)
 If using the head shard attack idea, Clarity also now shoots 6 shards per shot instead of 3
 Idea: Clarity’s head can also amplify the natural snow falling from her head so that it covers a much wider area. As the head grows and the hat tilts up very slowly, the snowfall radius increases. To deactivate the snowfall, you must hit the head
 Best idea: the idea immediately above. Jump shot is used after every instance of regen shards. It’s also used to transition from phase 2.1 to 2.2 (rising spawner)
@@ -1586,11 +1586,35 @@ Only the first JumpShot spawns the spawner; use a flag for this
 Clarity only does a JumpShot after RegenShards if circling the icon
 Make and import snowflake RegenShards anim
 Snowflake’s RegenShards anim calls a func that plays JumpShot unless Clarity is circling the spawner
-Current task
 Make Clarity spawner boost attack(s)
 Idea: instead of infusing her arm and shooting it at the spawner, Clarity infuses her arm and uses it to create a tiny ringed planet that floats towards the spawner. The player must destroy it before it reaches the spawner, or else the spawner gets boosted
-Effect idea: a bunch of lines appear and rapidly dart around to form 1 or more hexagonal shapes, then the hexagonal shapes start rotating and a planet grows inside them
-Idea: spawner spawns 2 different cubes: linger cubes (lingering DOT hitbox) and burst cubes (high single hit damage but no lingering hitbox and lower health)
+Idea: Clarity brings the arm in front of her and lets the tip rest on the ground, then stops moving, then markings and/or a snow geyser appear on the ground, then the mark disappears as a planet appears on the tip of the arm as the arm rises in front of her. When the planet appears, it grows from nothing and rings appear around it. The arm rising pushes the planet towards the spawner (the planet travels directly towards the spawner at a constant vel with a speed similar to the speed of the arm rising). These rings rotate in a single random direction until the planet reaches the spawner
+Having the ground mark form at the same time the arm infuses can cause confusion as to where the planet is coming from (the ground or the arm?) and the mark looks dubious for now, so save the mark in its own scene for later and just have the planet form without the mark
+Spawner boost causes spawner to ascend a bit and flash brightly (omni light brightens, material colors become whiter)
+Ice sprite cubes stop hopping and just slide when charging up their explosion
+Make phase 2.2-2.3 transition
+When the spawner is at its max height, Clarity regens her shards again, then does a second jump shot, this time shooting at the spawner. This detonates (but doesn’t destroy) the spawner, which sends ice particles flying everywhere and stops it from dropping snow clouds. After this jump shot, the blizzard goes back to being centered on Clarity and Clarity switches her target back to the icon
+Create spawner explode anim
+Emit hexagon particles (reuse Clarity’s stagger particles)
+Current task
+Stop dropping snow clouds
+Deactivate snow cloud hitbox
+Make spawner explode func that allows its execution IF the spawner reached max height. This stops the func from being called when the arm initially spawns the spawner
+Func also expands visuals. Why not the anim? Bc the script has access to max_scale, so the scale can tween from max_scale to something like 1.5*max_scale
+Make Clarity func that’s called when the tip of her arm is near the spawner (on_spawner_explode). In this func,
+Clarity calls spawner’s explode func
+Blizzard goes back to Clarity
+Clarity switches target back to icon
+Make phase 2.3
+Background is dark and grey
+Create ice fairies
+Core concept: ice sprites build up over time until they’re everywhere
+Instead of being spawned in the blizzard, they’re spawned via projectile from a spire, a structure that spawns at the impact site of a jump shot OR a giant snowflake icon on the ground that appears at the site of a jump shot
+An ice sprite starts out as a hopper, which behaves identically to the current ice sprite, except if the ice sprite is destroyed before it destroys itself, it doesn’t create the snow hitbox
+If the ice sprite destroys itself, glowing snow particles slowly rise into the air, then settle at a point high up (around top of snowflake level or higher). At this point, the ice fairy starts manifesting
+The ice fairy starts off as a glowing blue-white dot. It gets brighter over time, and right before it spawns, it plays a telegraph anim of some kind (e.g. a bunch of particles emitted or received). During this telegraph anim, if you hit the ice sprite fairy, it dies in one hit
+When the ice sprite fairy fully spawns, it mostly just meanders randomly in Clarity’s vicinity and occasionally shoots fast projectiles that create a snow cloud just like the ice sprite explosion. It dies in 3 rose (or ax) hits, but right before it fires a projectile, it glows brightly, and when it glows brightly, you can hit it to kill it in 1 hit
+Ice sprite spawner spawns ice fairies instead of ice sprites
 Animate snowflake in jump shot
 Figure out what snowflake should do
 Idea: snowflake rotates and hollows itself out to create a window for the arm shard to shoot through it
@@ -1600,14 +1624,6 @@ Consider making Frostbite incurable via stabilizer, which makes the fight feel s
 Try adding a violently vibrating spinning planet thing in the middle of the infused slice ring so it’s more clear that it deals damage in the center
 Make Clarity’s body shard always deflect projectiles (give it a heavy enemy collider)
 Make Clarity’s hat deflect projectiles, but not bounce projectiles away when vulnerable
-Idea: ice sprite rework
-Ice sprites aren’t threatening at all. You can easily walk away from them to dodge their attack. I want the player to actually think about the ice sprites. I also want this fight to symbolize the power of ice: slow, creeping power that builds up over time until it’s overwhelming. Simple, but brutal and effective if left unchecked.
-Core concept: ice sprites build up over time until they’re everywhere
-Instead of being spawned in the blizzard, they’re spawned via projectile from a spire, a structure that spawns at the impact site of a jump shot OR a giant snowflake icon on the ground that appears at the site of a jump shot
-An ice sprite starts out as a hopper, which behaves identically to the current ice sprite, except if the ice sprite is destroyed before it destroys itself, it doesn’t create the snow hitbox
-If the ice sprite destroys itself, glowing snow particles slowly rise into the air, then settle at a point high up (around top of snowflake level or higher). At this point, the ice sprite fairy starts manifesting
-The ice sprite fairy starts off as a glowing blue-white dot. It gets brighter over time, and right before it spawns, it plays a telegraph anim of some kind (e.g. a bunch of particles emitted or received). During this telegraph anim, if you hit the ice sprite fairy, it dies in one hit
-When the ice sprite fairy fully spawns, it mostly just meanders randomly in Clarity’s vicinity and occasionally shoots fast projectiles that create a snow cloud just like the ice sprite explosion. It dies in 3 rose (or ax) hits, but right before it fires a projectile, it glows brightly, and when it glows brightly, you can hit it to kill it in 1 hit
 Snowflake anim during RegenShards
 Snowflake looks boring just lying there getting stabbed; try making a branching snowflake pattern form on the ground as it’s stabbed
 Idea: make a big snowflake mesh in Blender, then use a shader to expand the visible area of the snowflake mesh starting from the center to outward. This expanding area is preferably a hexagon so the snowflake’s branches appear evenly
