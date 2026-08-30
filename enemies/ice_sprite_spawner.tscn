@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bg48lfbn1h34h"]
+[gd_scene load_steps=28 format=3 uid="uid://bg48lfbn1h34h"]
 
 [ext_resource type="Script" path="res://enemies/ice_sprite_spawner.gd" id="1_p5m4w"]
 [ext_resource type="PackedScene" uid="uid://cvbcwrvb8488" path="res://glb_inherited_scenes/icosahedron.tscn" id="3_2sm6t"]
@@ -117,9 +117,98 @@ tracks/0/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/HatFallingClouds:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/HatSnowParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/FootDOTArea/EnemyHitbox:monitorable")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_dgob4"]
+resource_name = "appear"
+length = 0.10001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/HatSnowParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/HatFallingClouds:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/FootDOTArea/EnemyHitbox:monitorable")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/StaggerHexagonParticles:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0qggk"]
 _data = {
+"appear": SubResource("Animation_dgob4"),
 "explode": SubResource("Animation_dem2f")
 }
 
@@ -174,7 +263,6 @@ shape = SubResource("CylinderShape3D_pmbbr")
 
 [node name="HatSnowParticles" type="GPUParticles3D" parent="Visuals"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-visible = false
 amount = 200
 lifetime = 8.0
 process_material = SubResource("ParticleProcessMaterial_gyud0")
@@ -191,6 +279,7 @@ process_material = SubResource("ParticleProcessMaterial_i1gg2")
 draw_pass_1 = SubResource("QuadMesh_wxrcu")
 
 [node name="StaggerHexagonParticles" type="GPUParticles3D" parent="Visuals"]
+emitting = false
 amount = 90
 lifetime = 3.0
 one_shot = true
@@ -200,6 +289,7 @@ process_material = SubResource("ParticleProcessMaterial_y1g8l")
 draw_pass_1 = ExtResource("8_8wm8a")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "appear"
 libraries = {
 "": SubResource("AnimationLibrary_0qggk")
 }
