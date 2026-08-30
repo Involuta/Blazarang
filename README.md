@@ -495,11 +495,14 @@ Make snowflake “tattoo” on underside of hat (and possibly beyond) materializ
 Make Jump Shot start from the correct pose (WalkLeft instead of WalkForward)
 Ice sprite spawner
 Idea: each hexagon rotates in a random direction upon appearing instead of following the same patterns every time. Hexagons still grow and shrink back to nothing
-With the overlapping hexagons and random rotation axes, the shapes/patterns look irregular, which makes them look ugly like a bunch of floating spaghetti. Adding some more hexagons increased the irregularity instead of decreasing it (I thought more hexagons would make things look more uniform)
+With the overlapping hexagons and random rotation axes, the shapes/patterns look irregular, which makes them look ugly like a bunch of floating spaghetti. Try experimenting with very high nums of hexagons
+Make the # of hexagons a parameter in ice_sprite_spawner to experiment with different hexagon amts
+Adding some more hexagons (up to 24) increased the irregularity and made the spawner look worse, but adding a lot more hexagons (up to 120) made the spawner look more uniform. However, it still looks basic and ugly. For now, the best case is still just 6 hexagons
+Try adding a background glow sprite to make the spawner look more layered→ this helped
+Try making hexagons rotate about their local x axis to make the shape more concrete and uniform → this helped
+Try making the center of the spawner an icosahedron to add structure → this also helped
+Make particles appear when spawner is boosted
 Current task (polish)
-Make the # of hexagons a parameter in ice_sprite_spawner
-Idea: large concentric rotating rings appear one after another as the spawner rises and grows. The more rings there are, the closer the spawner is to full height
-Try making the central sphere a regular polyhedron (e.g. icosahedron, aka d20)
 Make semicircle dress shard attacks look smoother; currently the shards jitter
 Ice sprite lingering explosion hitbox has particles and fog
 Mite Level Polishing
@@ -1846,14 +1849,14 @@ I still like the idea of being able to use a stabilizer while you’re still sta
 If you use a stabilizer while you’re still stable, you’re briefly invincible AND your next attack is boosted greatly like Royal Knight’s Resolve from Elden Ring. Perhaps make the damage boost an unlockable skill
 
 Consider ax reworks to make it more fun and usable
-Idea: ax’s current vertical throw is a fast attack, but the player can hold the throw button to spin the ax around their back like a Clash Royale Valkyrie and throw the ax horizontally
 Idea: detonating the ax also recalls it, removing the floating ax continuous attack and increasing gameplay momentum (which also fits Cotu’s character more)
 
 Idea: make rang techniques more complex so they feel more like unlocking skills in a martial art than a direct boost in strength
 Idea: instead of just 1 special, you have multiple specials you can use like cooldowns in Overwatch, except instead of spending time to use the cooldown again, you spend buffs. To choose which special to use, press the corresponding special button
 Idea: each special requires a different set of buffs to activate
+Rose rapidly autotargets and hits a nearby enemy a few times. The final return to Cotu can be instant rethrown to keep the rose in flight, but the buffs required for the flurry will be spent
 Unlockable Skill
-Idea: Mini Flurry. Rose rapidly autotargets and hits a nearby enemy a few times. The final return to Cotu can be instant rethrown to keep the rose in flight, but the buffs required for the flurry will be spent
+“Mini Flurry”
 
 Make Different Game Mechanics Intersect; to create depth, different skills should feel connected
 Vid on Interesting Mechanics vs Depth: https://www.youtube.com/watch?v=Fuf_SpKCYVY
@@ -2055,14 +2058,15 @@ You’re standing on a small solitary platform raised high in the air surrounded
 Each wave of targets gets harder than the last (faster, weirder paths, less predictable, farther away)
 Some targets are tough and require the ax
 
-Grow-a-Gator (named “Groa” maybe? And then it calls itself “Groa”)
+Grow-a-Gator (Cotu names it “Groa” maybe? And then it calls itself “Groa”)
 Fast giant alligator with the ability to grow and shrink
 Tiny: size of Dwarf Caiman, used for dodges and quick positioning
 Normal: size of American alligator
 Big: size is comparable to Vordt of the Boreal Valley from Dark Souls 3
 Huge: size is comparable to Golden Hippopotamus from Elden Ring
 Giga: too big to fit in the arena; he hangs onto the floor with his hands and attacks with his head
-Idea: its soul is a ring around its tail
+One eye contains a cube drawn with lines only, the other is a solid square. This represents the square-cube law, which aligns with Gator’s growth mechanic
+Its icon is a ring around its tail
 Slide: runs at target, then slides on the wet floor
 Ambush: runs at target in tiny mode, then grows to normal mode when close to the target and bites. If successful, target is grabbed and a punish anim plays
 Idea: When hit, one of Cotu’s arms is ripped off
@@ -2073,8 +2077,47 @@ Shockwave: in huge or giga mode, gator slowly opens its jaw wide, then slams it 
 Idea: for 2nd phase, it can swim through the ground and walls and attack from them
 Floor Chomp: swims under the floor, then chomps up at target from below in either Big or Huge mode. Huge mode has longer chargeup time and a different sound effect
 Projectile Shockwave: same as shockwave but done while the gator’s inside a swimmable surface, which causes the shockwave to launch a projectile directly at the target (more precisely, in the direction the mouth is pointing), then send out a shockwave immediately after. If the player uses a dodge to avoid the projectile, they’ll likely be hit by the shockwave
-Ring Toss: gator spins its soul around its tail, spikes appear on the soul, then it throws its soul at you like a chakram before it bounces off a wall and returns to gator
-Idea: defeating gator gives you the chakram
+Ring Toss: Gator spins its soul around its tail, spikes appear on the soul, then it throws its soul at you like a chakram before it bounces off a wall and returns to gator
+Idea: defeating Gator gives you the chakram
+Lore/Story Ideas:
+Intro cutscene that also explains gods
+A pink spotted egg is drifting through space
+Dev: “Alright, so what exactly is a god? Explain in simple terms.”
+Jessica: “Let’s break it down—all gods are made up of these 4 things: a body [cut to a closer shot of the egg],”
+Dev: “Mhm,”
+Jessica: “a soul [cut to the egg’s halo],”
+Dev: “Okay,”
+Jessica: “a realm [cut to a wide shot of the realm the egg fell from]”
+Dev: “Wait, what’s a realm?”
+Jessica: “Great question! A realm is a place in the universe designed for a specific god. No one—aside from the god themself—can get in without the god’s permission. So basically, it’s their home!”
+Dev: “I see.”
+Jessica: “Now here’s where it gets interesting—(Dev sighs) when a god’s body is killed, their soul travels all the way back to their realm, and makes a brand new body that inherits the memories of the old one!”
+Dev: “Ah…that’s what makes them immortal.”
+Jessica: “That’s a really good observation. It shows that you’re not just-”
+Dev: “How big do they get?”
+Jessica: “Hmm, I didn’t think very hard about that, so I made them in all kinds of sizes! Some of them are as small as your house, others a forest, and some are as big as a whole galaxy. Wow!”
+Dev: “What the-oh whatever. The universe can handle millions of galaxies, I’m sure it’ll be fine.”
+Jessica: “You’re exactly right!”
+Dev: “Hold on, what was that fourth thing all gods have?”
+Jessica: “My apologies, I should have finished that thought earlier. The fourth thing is…the ability to read!”
+Dev looks surprised. “Huh.”
+Cut to Gator reading an invitation from the gauntlet to fight in the gala. These invitations were sent to all realms in the area
+Jessica: “You look surprised. Should I make gods illiterate by default?”
+Dev: “No, I just, uh, didn’t think of it. Honestly I like the idea.”
+Jessica: “Great! If you want, I can-”
+Dev: “That’s all for now, bye.”
+Jessica disappears
+Dev: “...I’m using a modern model, why the f*ck does she still talk like that?”
+Idea: Groa Transformation - if you defeat Gator in Gauntlet Gym 1 (which can happen if you wait long enough at Gym 1), you can take it to Gauntlet Central to give it as much time to train with elite athletes as possible. This causes Gator to reach a higher form later on: Groa
+Gauntlet Central boss
+Curvaceous, extremely sexy dragon-razorbill hybrid about 1.5 times Cotu’s height
+Razorbill Inspiration:
+
+Lore/Story Ideas:
+Idea: Groa speaks articulately and elegantly
+Everybody is infatuated with and extremely curious about Groa
+Groa shows Cotu (and the player) that they used to be Gator by showing their crazy eyes, which have the same shapes as Gator’s (but possibly with different colors)
+Fun fact: crocodilians and birds are the only living members of the archosaur clade, which includes dinosaurs and pterosaurs
 
 Paramecium and Babies
 Goofy and cute mild challenge boss in Gauntlet Gym 2
@@ -2161,6 +2204,13 @@ One big dancer in the center does dance moves corresponding with movement patter
 
 Future Blade Boss
 Tall, skinny swordsman with robber fly motif; long wing-like cloak threads/scarves, long snout, long fake antennae on back of his head like Trobbio from Hollow Knight Silksong, and short stubby real antennae on his forehead
+Concept art inspiration
+Robber fly
+
+Gooseworx character (face and torso) (ignore the drill and hair)
+
+Clubbed mydas fly (fly anatomy, band on waist)
+
 Moves in sudden bursts of speed like an insect, even in casual settings (although with less speed)
 Does huge slashes and moves in quick, long dashes, but has “before-images” that show what he’s going to do a while before he does it
 Moves so frequently and quickly that the lingering before-images make it look/feel like several enemies are fighting you
@@ -3609,6 +3659,9 @@ More instances of rising from middle to elite/top (Paramecium? Slicer? Cactus an
 Decrease in power (Neuro?)
 TO DO: visual representation of start and end points here
 
+Idea: Introduce builds like in Elden Ring to increase replayability
+People can spec into stats to boost certain parts of Cotu (e.g. health, rang damage/range/speed, projectile count, cooldown shortening, movement, etc.)
+
 Story Progression Arcs/Episodes (uses Plot Idea 3C)
 Cotu goes on a journey and encounters progressively more antagonistic antagonists
 Destination is a gala for top competitors. Gala is like a pantheon from Hollow Knight where you fight several bosses in a row
@@ -3853,6 +3906,7 @@ The player repeatedly attempts the gala, strategizing while getting further and 
 The above loop makes Blazarang sound like a roguelike, but Blazarang also seems close in style to Cuphead in that it’s a boss rush with little player ability variety, so what should the game lean more towards? I want to keep the strategy involved in long-term planning and reward the player for beating a boss in only a few attempts bc it shows the player’s increase in skill, so I’ll keep the roguelike aspect of repeating the gala from the start. However, it’s vital to note that roguelikes work bc they have a lot of gameplay/build variety. Since Blazarang doesn’t have as much variety, make the full run attempts longer so that the player isn’t forced into the same gameplay too much
 You may also feel inspired to make Blazarang feel similar to the gauntlets in Hollow Knight and Sekiro since you like those, but don’t make Blazarang work exactly like that. The gauntlets only work in those games bc you already mastered the bosses beforehand (plus, the gauntlets aren’t the main draw in those games; they’re just bonuses). Instead, give the player time to learn the bosses individually just like in Hollow Knight and Sekiro
 Idea: at the end of each run, you can go into battle memory mode where you can attempt any boss you’ve ever fought across all runs as many times as you want with any of the upgrades you unlocked across all runs, but once you start a new run, you can’t practice anymore
+Issue: making the boss gauntlet the main gameplay route (as opposed to the free play being the main route) won’t be received well since most players (including you) are frustrated by restarting challenging gauntlets over and over again and having to fight the same bosses every time. This is bonus content for masochistic players who want to show mastery—a very small minority of gamers
 Alt idea: to unlock free play mode, you must first reach the gala. This way, the player isn’t tempted to replay the easy bosses too many times before making another run attempt
 Expected progress for the average player:
 Attempt 1: Late Gym 2-Early Central
@@ -3938,6 +3992,10 @@ Cotu begs Jessica not to change him and tells her he can defeat Sy
 Undecided what happens after
 Issues with this plot:
 Including alternate routes (e.g. mites, Clarity) adds a lot to the game’s scope (Or does it? If the bosses are just selectable from a menu, is there really that big of a difference btwn having the boss on a main route vs an alternate route?)
+Figuring out the best sequence of bosses to fight in order to get to (and win) the gala is a big part of the game, but if I were playing this game, I’d just want to figure out how to defeat the bosses themselves, not how to get to them. The puzzle I’m interested in solving is how to defeat an individual boss, not the route to a boss
+Neil’s issue: having a time limit that ticks down when you attempt a boss punishes the player for doing practice attempts, which feels discouragingly restrictive
+Let’s say your run ends right after you defeat a mid-game boss. Instead of being rewarded with new bosses, you have to defeat all the required early and mid game bosses again. Yes, you can explore a new early-game route, but if the player has already explored all alternate routes, then they’re just repeating puzzles they’ve already solved at this point
+If the player is currently fighting a boss late in the time limit and is aware that they won’t be able to make it very far beyond this boss, they’ll feel discouraged the entire time they’re fighting the boss and want to reset
 Plot Idea 3D: The Gala
 Same as Plot Idea 3C, but with major changes
 The general concept is the same: Cotu trains with others in his weakened form to get stronger, and the gala is an official event to qualify for the tournament. The primary differences here are 1: there are no non-gala subplots (trapped with mites, trapped with Clarity, Candy Cat’s escape) and 2: all Gauntlet gyms are participating in the gala; every single gym is a qualifier for the next stage. To progress to the next stage, each fighter must defeat a certain number of other fighters
@@ -3965,6 +4023,49 @@ Turbo Jester (?)
 Issues with this plot:
 No non-gala subplots makes the universe feel lame and small
 Forcing the player to complete previous gyms before entering the gala takes away some player freedom and strategy (do I skip straight to Gauntlet Central to practice against the harder bosses? Or go through the easier bosses to increase my stats?)
+Plot Idea 3E: Lossless Gala
+Same as Plot Idea 3D in that all gyms are part of the gala, but losing is unacceptable, which means if Cotu dies, the game resets him back in time to before he lost just like the vast majority of other video games
+The gauntlet gala specifically takes place in stages: Stage 1 is open to everyone, Stage 2 is open to Stage 1 winners, and the final stage is open to Stage 2 winners
+In Stage 1, Cotu fights:
+Gauntlet Variant 1
+Jab Crab
+After Stage 1 ends, there’s some downtime before Stage 2 begins
+Cotu immediately goes to X’s realm
+Grow-a-Gator arrives right after Cotu leaves while everyone’s still there
+Cotu can either fight Clarity or go to Gym 2, which initiates Stage 2. Cotu can still go to Gym 2 after beating Clarity
+After reaching Gym 2,
+Gator travels to Gym 2 after massacreing everyone in Gym 1
+In Stage 2, Cotu fights:
+Elite Gunner and Sentinel
+Long Arms ← disqualified due to not showing up
+Triplets
+Mites
+Sometime during Stage 2, Elite Gunner and Sentinel hear about the attack on Gym 1. Sentinel suggests allowing Gator to compete since it’s clearly passionate. Gunner disagrees since Gator was late and didn’t treat fighters with respect. Sentinel suggests that the gauntlet rehabilitates Gator since it’s full of potential. She acknowledges Sentinel’s point and tells him if Gator learns some manners, then the gauntlet will consider taking Gator under its wing. If not (and in all likelihood), the gauntlet will imprison it in Gauntlet Central
+Right as Cotu enters his final Stage 2 fight, Long Arms arrives at Gym 2. He argues with EG and Sentinel about how his DQ is unfair until the conversation is interrupted by Gator’s arrival. LA tells the gauntlet that “this ain’t over yet” before all 3 of them plus everyone else in the gym attack Gator simultaneously
+Cotu defeats his opponent, then Gator instantly kills Cotu’s opponent and becomes Cotu’s new opponent
+Cotu teaches Gator some manners, then shows the gauntlet that Gator’s behaving. The gauntlet agrees and Gator is officially eliminated from the gala
+After Stage 2 ends, there’s some downtime before the gala begins
+Cotu offers LA the chance to fight and get eliminated “properly”
+Cotu takes Gator to Gauntlet Central to train
+Cotu trains with Future Blade and optionally Candy Cat
+In the gala, Cotu fights:
+Flora
+Neuro
+Tempered X
+Blackstar
+After the gala, there’s some downtime
+Cotu can fight Microwave to get the Singularity ending
+Plot Idea 3F: Timeless Trip to the Gala
+Same as Plot Idea 3C but without the time limit constraint before the gala begins
+Grow-a-Gator appears in Gym 1 when you defeat a certain # of bosses, then Gym 2 when you defeat a certain # of additional bosses
+Lesser Triplets are in Gym 2 until you defeat a certain # of bosses, then they move to Central
+You decide when the gala begins, but once it starts, you’re locked into an ending route
+If you lose at any point, you get the bad ending
+If you win, you get either the good or Singularity ending
+You’re warned beforehand that you need certain upgrades to defeat certain bosses (e.g. Cotu knows that he needs Dominion to defeat Blackstar)
+Issues with this plot:
+How will the player practice fighting the gala bosses?
+Idea: reaching a boss in the gala unlocks them in free play mode, allowing the player to fight them repeatedly in order to practice
 Plot Idea 4: Nothing (Minimal Plot)
 Cotu trains with others in his weakened form, but only to make himself stronger, not for a competition. As he progresses through the gyms, word spreads that the champion is getting back into fighting, and more and more people flock to the gyms to see him fight. Eventually, he unintentionally gathers a huge following after training at Gauntlet Central, and the Gauntlet organizes an unofficial mock tournament among the gods there just for fun
 Issues with this plot:
@@ -4010,6 +4111,8 @@ Issues with this plot:
 Since there’s no gala, there’s no longer a time limit, which means there’s no more long-term strategy, overarching anxiety, nor replayability
 Counterpoint: the lack of repetition may be a good thing. Blazarang is closer in style to Cuphead in that it’s a boss rush with little player ability variety. The repetitive gameplay structure of progressing through the gala is more reminiscent of roguelikes like Slay the Spire, Risk of Rain 2, Enter the Gungeon, etc. However, these games work bc they have a lot of gameplay/build variety. Also, the continuous gauntlet (where you have to start from the beginning when you lose) also only works in Hollow Knight and Sekiro bc the games make you fight the bosses individually in the world first, and the gauntlets aren’t the main draw in those games
 This feels more serious than Blazarang should be; it’s about a bunch of gods hanging out and competing for fun, so why is Blackstar’s ascension taken so seriously?
+Counterpoint: just because Blackstar’s ascension is the main goal doesn’t mean it’s a serious matter
+Without the gala, we don’t get to see competitive characters’ competitive sides (Blackstar, X, Future Blade) and casual characters’ conflict with them (Cotu, Triplets, Flora)
 Character interactions that are the same regardless of plot
 Idea: Sean Strickland god overhears Future Blade and his friends gossiping about him and starts beef
 After fighting FB, Sean god becomes friends with him because he respects him as a fighter
