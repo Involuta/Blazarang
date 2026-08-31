@@ -60,6 +60,27 @@ var blizzard_safezone_radius := 15.0
 
 @export var blizzard_light_base_radius := 18.0
 @export var blizzard_light_expanded_radius := 180.0 # Light expands on jumps to show new safezone
+
+func make_gradient(c0: Color, c1: Color) -> Gradient:
+	var g = Gradient.new()
+	g.set_color(0, c0)
+	g.set_color(1, c1)
+	return g
+@export var sky_top_gradient_light_0 := Color("#65768f")
+@export var sky_top_gradient_light_1 := Color("#3c485a")
+var sky_top_gradient_light := make_gradient(sky_top_gradient_light_0, sky_top_gradient_light_1)
+# Sky top gradient starts as light then becomes dark after spawner explodes
+var sky_top_gradient := sky_top_gradient_light
+@export var sky_horizon_gradient_light_0 := Color("#5a6c82")
+@export var sky_horizon_gradient_light_1 := Color("#1d2730")
+var sky_horizon_gradient_light := make_gradient(sky_horizon_gradient_light_0, sky_horizon_gradient_light_1)
+# Sky horizon gradient also starts as light then becomes dark after spawner explodes
+var sky_horizon_gradient := sky_horizon_gradient_light
+@export var body_fog_gradient_0 := Color("aad3ff")
+@export var body_fog_gradient_1 := Color("0078f0") # Same as blizzard_light.light_color
+# Body fog gradient doesn't change when spawner explodes
+var body_fog_gradient := make_gradient(body_fog_gradient_0, body_fog_gradient_1)
+
 # Fog radii are set in physics process
 var min_fog_radius : float # Dist from Clarity where fog is minimized
 var max_fog_radius : float # Dist from Clarity where fog is maximized
@@ -705,15 +726,7 @@ func env_autochange_frame(dist_to_cotu: float, delta: float):
 	level_env.fog_density = lerpf(min_fog_density, max_fog_density, cotu_dist_lerp_val)
 	
 	# Repeat the above for sky and fog colors (0 is near, 1 is far)
-	# Sky top color
-	var sky_top_gradient = Gradient.new()
-	sky_top_gradient.set_color(0, Color("#65768f"))
-	sky_top_gradient.set_color(1, Color("#3c485a"))
 	sky.sky_top_color = sky_top_gradient.sample(cotu_dist_lerp_val)
-	# Sky/ground horizon color
-	var sky_horizon_gradient = Gradient.new()
-	sky_horizon_gradient.set_color(0, Color("#5a6c82"))
-	sky_horizon_gradient.set_color(1, Color("#1d2730"))
 	sky.sky_horizon_color = sky_horizon_gradient.sample(cotu_dist_lerp_val)
 	sky.ground_horizon_color = sky.sky_horizon_color
 	# Fog color is the same as horizon color
@@ -732,7 +745,7 @@ func env_autochange_frame(dist_to_cotu: float, delta: float):
 	var near_feet_fog_density := .6
 	#feet_fog.material.set_shader_parameter("density", lerpf(near_feet_fog_density, 0, cotu_dist_lerp_val))
 	#feet_fog.material.density = lerpf(near_feet_fog_density, 0, cotu_dist_lerp_val)
-	var body_fog_gradient = Gradient.new()
+	body_fog_gradient = Gradient.new()
 	body_fog_gradient.set_color(0, Color("aad3ff"))
 	body_fog_gradient.set_color(1, blizzard_light.light_color)
 	body_cone_fog.material.set_shader_parameter("emission", body_fog_gradient.sample(cotu_dist_lerp_val-.1))
