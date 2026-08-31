@@ -1,7 +1,8 @@
 class_name IceSpriteSpawner
 extends Node3D
 
-signal max_height_reached
+signal spawner_max_height_reached
+var max_height_reached := false
 
 @export var max_brightness := 12.0
 @export var min_brightness := 6.0
@@ -94,7 +95,8 @@ func _physics_process(delta):
 	if visuals.position.y < max_height:
 		visuals.position.y += rise_speed * delta
 		if visuals.position.y >= max_height:
-			max_height_reached.emit()
+			spawner_max_height_reached.emit()
+			max_height_reached = true
 		
 		# While rising, set scale of visuals scalable based on local height ascent (0 to max_height)
 		var clamped_y: float = clampf(visuals.position.y, 0.0, max_height)
@@ -158,6 +160,7 @@ func boost():
 
 func explode():
 	anim_player.play("explode")
-	var t = create_tween()
+	var t = create_tween().set_parallel()
 	t.tween_property(visuals_scalable, "scale", Vector3.ONE * max_scale * 1.6, 1.0).set_ease(Tween.EASE_OUT)
 	t.tween_property(self, "rise_speed", rise_speed_base * .4, 1.0).set_ease(Tween.EASE_OUT)
+	t.tween_property(light, "light_energy", 0, 1.0).set_ease(Tween.EASE_OUT)

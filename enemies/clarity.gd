@@ -47,6 +47,7 @@ var phase := PHASE.PHASE1
 
 var ice_sprite_spawner_spawned := false
 var spawner_max_height_reached := false
+var spawner_exploded := false
 
 @export var min_y_pos := 10.0 # y pos of arena floor, ie X's minimum y position
 
@@ -348,9 +349,9 @@ func body_face_position_directly(target_pos: Vector3):
 # Lerp val (float btwn 0 and 1) to be used for value transitions
 var cotu_dist_lerp_val := .5
 func _physics_process(delta):
-	# Check if the arm has just hit the ice sprite spawner. If so, explode it
+	# Check if the arm has just hit the ice sprite spawner and it's at max height. If so, explode it
 	# Why isn't this in a circling_spawner frame? Bc during the jump shot, Clarity isn't circling the spawner
-	if target != icon and arm_tip_pt.global_position.distance_to(target.global_position) < 6.0:
+	if spawner_max_height_reached and not spawner_exploded and arm_tip_pt.global_position.distance_to(target.global_position) < 6.0:
 		on_spawner_explode()
 	
 	min_fog_radius = blizzard_safezone_radius * .8 # Dist from Clarity where fog is minimized
@@ -936,7 +937,7 @@ func spawn_ice_sprite_spawner():
 	# Prevent another ice sprite spawner from being spawned in future jump shots
 	ice_sprite_spawner_spawned = true
 	# Receive signal for when ice sprite spawner reaches max height
-	inst.max_height_reached.connect(on_spawner_max_height_reached)
+	inst.spawner_max_height_reached.connect(on_spawner_max_height_reached)
 
 func spawn_ice_sprite_spawner_boost():
 	var inst = ice_sprite_spawner_boost.instantiate()
@@ -952,3 +953,7 @@ func on_spawner_max_height_reached():
 
 func on_spawner_explode():
 	target.get_parent().explode()
+	# If the arm touches the spawner again, on_spawner_explode isn't called again
+	spawner_exploded = true
+	blizzard_center = self
+	target = icon

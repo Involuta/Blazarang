@@ -40,3 +40,4 @@ res://glb_inherited_scenes/snowflake_entity_meshes.tscn
 res://enemies/ice_sprite.gd
 res://enemies/ice_sprite.tscn
 res://enemies/clarity.gd
+res://enemies/enemy_anims/clarity_jumpshot_towalkleft.res
