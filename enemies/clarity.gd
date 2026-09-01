@@ -61,25 +61,44 @@ var blizzard_safezone_radius := 15.0
 @export var blizzard_light_base_radius := 18.0
 @export var blizzard_light_expanded_radius := 180.0 # Light expands on jumps to show new safezone
 
+# After spawner explodes (i.e. when env turns dark), min fog density increases
+@export var min_fog_density_light := .01
+@export var min_fog_density_dark := .06
+var min_fog_density := min_fog_density_light
+@export var max_fog_density := .48
+
 func make_gradient(c0: Color, c1: Color) -> Gradient:
 	var g = Gradient.new()
 	g.set_color(0, c0)
 	g.set_color(1, c1)
 	return g
+
 @export var sky_top_gradient_light_0 := Color("#65768f")
 @export var sky_top_gradient_light_1 := Color("#3c485a")
 var sky_top_gradient_light := make_gradient(sky_top_gradient_light_0, sky_top_gradient_light_1)
+@export var sky_top_gradient_dark_0 := Color("#364252")
+@export var sky_top_gradient_dark_1 := Color("#202834")
+var sky_top_gradient_dark := make_gradient(sky_top_gradient_dark_0, sky_top_gradient_dark_1)
 # Sky top gradient starts as light then becomes dark after spawner explodes
 var sky_top_gradient := sky_top_gradient_light
+
 @export var sky_horizon_gradient_light_0 := Color("#5a6c82")
 @export var sky_horizon_gradient_light_1 := Color("#1d2730")
 var sky_horizon_gradient_light := make_gradient(sky_horizon_gradient_light_0, sky_horizon_gradient_light_1)
+@export var sky_horizon_gradient_dark_0 := Color("#384555")
+@export var sky_horizon_gradient_dark_1 := Color("#19222a")
+var sky_horizon_gradient_dark := make_gradient(sky_horizon_gradient_dark_0, sky_horizon_gradient_dark_1)
 # Sky horizon gradient also starts as light then becomes dark after spawner explodes
 var sky_horizon_gradient := sky_horizon_gradient_light
-@export var body_fog_gradient_0 := Color("aad3ff")
-@export var body_fog_gradient_1 := Color("0078f0") # Same as blizzard_light.light_color
+
+@export var body_fog_gradient_light_0 := Color("aad3ff")
+@export var body_fog_gradient_light_1 := Color("0078f0")
 # Body fog gradient doesn't change when spawner explodes
-var body_fog_gradient := make_gradient(body_fog_gradient_0, body_fog_gradient_1)
+var body_fog_gradient_light := make_gradient(body_fog_gradient_light_0, body_fog_gradient_light_1)
+@export var body_fog_gradient_dark_0 := Color("aad3ff")
+@export var body_fog_gradient_dark_1 := Color("0078f0")
+var body_fog_gradient_dark := make_gradient(body_fog_gradient_dark_0, body_fog_gradient_dark_1)
+var body_fog_gradient := body_fog_gradient_light
 
 # Fog radii are set in physics process
 var min_fog_radius : float # Dist from Clarity where fog is minimized
@@ -183,6 +202,7 @@ var camera : Node3D
 var clarity_icon : Node3D
 var level_env : Environment
 var sky : ProceduralSkyMaterial
+var env_sun: DirectionalLight3D
 var level_fog : FogMaterial
 
 class DressShard extends Node3D:
@@ -258,6 +278,7 @@ func _ready():
 	clarity_icon = level.find_child("ClarityIcon")
 	
 	level_env = level.find_child("WorldEnvironment").environment
+	env_sun = level.find_child("DirectionalLight3D")
 	sky = level_env.sky.sky_material
 	
 	blizzard_safezone_radius = blizzard_safezone_base_radius
@@ -721,8 +742,6 @@ func env_autochange_frame(dist_to_cotu: float, delta: float):
 	cotu_dist_lerp_val = move_toward(cotu_dist_lerp_val, target_cotu_dist_lerp_val, delta / 3)
 	
 	# Set fog density based on dist from Cotu
-	var min_fog_density := .01
-	var max_fog_density := .48
 	level_env.fog_density = lerpf(min_fog_density, max_fog_density, cotu_dist_lerp_val)
 	
 	# Repeat the above for sky and fog colors (0 is near, 1 is far)
@@ -796,6 +815,7 @@ func contract_blizzard_safezone(frame_duration: int):
 	# contract_blizzard_safezone transitions to the env the autochanging env would be if Cotu were within min_fog_dist, aka when cotu_dist_lerp_val is 0
 	cotu_dist_lerp_val = 0.0
 	snowfall_particles.emitting = true
+	env_autochange = true
 
 func regen_shards_mvmt():
 	var t = get_tree().create_tween()
@@ -970,3 +990,11 @@ func on_spawner_explode():
 	spawner_exploded = true
 	blizzard_center = self
 	target = icon
+	# Switch to dark gradients
+	sky_top_gradient = sky_top_gradient_dark
+	sky_horizon_gradient = sky_horizon_gradient_dark
+	body_fog_gradient = body_fog_gradient_dark
+	# Darken the environment light source (the sun)
+	env_sun.light_energy = 0.1
+	# Increase min fog thickness
+	min_fog_density = min_fog_density_dark
