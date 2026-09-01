@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://i2xuy407tpbj"]
+[gd_scene load_steps=43 format=3 uid="uid://i2xuy407tpbj"]
 
 [ext_resource type="Script" path="res://enemies/ice_sprite.gd" id="1_h7jw6"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="2_6lw04"]
@@ -149,24 +149,22 @@ tracks/5/path = NodePath("DamageOverTimeArea:process_mode")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 5),
+"times": PackedFloat32Array(0, 5.00001),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 4]
 }
-tracks/6/type = "method"
+tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath(".")
+tracks/6/path = NodePath("EnemyHurtbox:process_mode")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"set_explosion_started"
-}]
+"update": 1,
+"values": [4]
 }
 
 [sub_resource type="Animation" id="Animation_lsn44"]
@@ -279,10 +277,112 @@ tracks/8/keys = {
 "update": 0,
 "values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1)]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("EnemyHurtbox:process_mode")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("IceChunkParticles:emitting")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_5ski5"]
+resource_name = "die"
+length = 1.0
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:collision_layer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DamageOverTimeArea:process_mode")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("IceChunkParticles:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MeshInstance3D:mesh:material:albedo_color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.560784, 0.803922, 1, 0.74902)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("EnemyHurtbox:process_mode")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7uy7i"]
 _data = {
 "chargeup": SubResource("Animation_2adtf"),
+"die": SubResource("Animation_5ski5"),
 "explode": SubResource("Animation_m58tf"),
 "spawn": SubResource("Animation_lsn44")
 }
@@ -316,8 +416,8 @@ scale_curve = SubResource("CurveTexture_4dpie")
 color = Color(0.827451, 0.929412, 1, 1)
 
 [sub_resource type="Gradient" id="Gradient_ltlji"]
-offsets = PackedFloat32Array(0, 0.205202, 0.517341, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.490196, 0.82606, 0.82606, 0.82606, 0.54902, 0.843184, 0.843184, 0.843184, 0)
+offsets = PackedFloat32Array(0, 0.205202, 0.517341, 0.774818, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.490196, 0.82606, 0.82606, 0.82606, 0.54902, 0.84, 0.84, 0.84, 0.13, 0.843184, 0.843184, 0.843184, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_w8wxo"]
 gradient = SubResource("Gradient_ltlji")
@@ -497,10 +597,22 @@ height = 1.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_xhnoi"]
 radius = 4.5
 
+[sub_resource type="CurveTexture" id="CurveTexture_kc0bm"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jaerh"]
+direction = Vector3(2.08165e-12, 1, 2.08165e-12)
+gravity = Vector3(2.08165e-12, -9.8, 2.08165e-12)
+initial_velocity_min = 4.0
+initial_velocity_max = 6.0
+scale_min = 0.25
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_kc0bm")
+
 [node name="IceSprite" type="CharacterBody3D"]
 collision_layer = 8
 collision_mask = 26
 script = ExtResource("1_h7jw6")
+explode_secs = 7.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_fp5fu")
@@ -517,6 +629,7 @@ libraries = {
 
 [node name="SnowParticles" type="GPUParticles3D" parent="."]
 cast_shadow = 0
+custom_aabb = AABB(-300, -300, -300, 600, 600, 600)
 emitting = false
 amount = 30
 lifetime = 6.0
@@ -527,6 +640,7 @@ process_material = SubResource("ParticleProcessMaterial_j2xt2")
 draw_pass_1 = ExtResource("2_6lw04")
 
 [node name="FogClumps" type="GPUParticles3D" parent="."]
+custom_aabb = AABB(-300, -300, -300, 600, 600, 600)
 emitting = false
 amount = 30
 lifetime = 6.0
@@ -536,6 +650,7 @@ process_material = SubResource("ParticleProcessMaterial_47sp6")
 draw_pass_1 = SubResource("QuadMesh_g85f8")
 
 [node name="EnemyHurtbox" type="Area3D" parent="."]
+process_mode = 4
 collision_layer = 8
 collision_mask = 257
 script = ExtResource("4_kf4e5")
@@ -553,7 +668,6 @@ script = ExtResource("4_n1e1v")
 time_btwn_damage_ticks = 0.3
 
 [node name="EnemyHitbox" type="Area3D" parent="DamageOverTimeArea"]
-process_mode = 4
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("3_ovd7j")
@@ -562,3 +676,12 @@ frostbite_buildup = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DamageOverTimeArea/EnemyHitbox"]
 shape = SubResource("SphereShape3D_xhnoi")
+
+[node name="IceChunkParticles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 9
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_jaerh")
+draw_pass_1 = SubResource("BoxMesh_adun2")

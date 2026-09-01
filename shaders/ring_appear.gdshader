@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode blend_add, depth_draw_opaque, cull_disabled;
+render_mode blend_add, depth_draw_opaque;
 
 // Controls overall opacity when fading out the entire ring (1.0 = fully visible, 0.0 = invisible)
 uniform float fade_alpha : hint_range(0.0, 1.0) = 1.0;
