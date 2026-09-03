@@ -1,7 +1,9 @@
+Sprite3D
+GPUParticlesAttractorBox3D
+GPUParticlesAttractorSphere3D
 GPUParticles3D
 AnimationPlayer
 MeshInstance3D
-Sprite3D
 Node2D
 SubViewport
 Node3D
@@ -15,8 +17,6 @@ EnemyHurtbox
 GPUTrail3D
 Trail3D
 FogVolume
-GPUParticlesAttractorSphere3D
-GPUParticlesAttractorBox3D
 GPUParticlesAttractorVectorField3D
 NavigationRegion3D
 ClarityShardHurtbox
