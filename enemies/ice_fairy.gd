@@ -23,6 +23,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 @onready var anim_player := $AnimationPlayer
 @onready var hurtbox := $EnemyHurtbox
+@onready var fairy_origin_glow := $FairyOriginGlow
 @onready var root := get_tree().root
 
 var target : Node3D
@@ -66,13 +67,13 @@ func jump():
 
 func start_attack():
 	explosion_triggered = true
-	anim_player.play("chargeup")
+	anim_player.play("sprite_chargeup")
 
 # Called by hurtbox OR chargeup anim
 func death_effect():
 	# If the explosion was triggered, explode ice sprite
 	if explosion_triggered:
-		anim_player.play("explode")
+		anim_player.play("sprite_explode")
 		await anim_player.animation_finished
 		await get_tree().create_timer(explode_secs).timeout
 		queue_free()
@@ -80,7 +81,7 @@ func death_effect():
 	else:
 		# Stop ice sprite from moving while dying
 		explosion_triggered = true
-		anim_player.play("die")
+		anim_player.play("sprite_die")
 	await anim_player.animation_finished
 	await get_tree().create_timer(explode_secs).timeout
 	queue_free()
@@ -88,3 +89,11 @@ func death_effect():
 # This func is here so that when EnemyHurtbox calls its die func, set_active is called instead of queue freeing this Ice Sprite node
 func set_active(_state: bool):
 	return
+
+func ready_fairy():
+	# Move fairy origin down to be with the rest of the node,
+	# Then move the node up to the height the origin was at
+	var y = fairy_origin_glow.y
+	fairy_origin_glow.position = Vector3.ZERO
+	global_position.y += y
+	
