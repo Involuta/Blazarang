@@ -1596,24 +1596,48 @@ Make phase 2.2-2.3 transition
 When the spawner is at its max height, Clarity regens her shards again, then does a second jump shot, this time shooting at the spawner. This detonates (but doesn’t destroy) the spawner, which sends ice particles flying everywhere and stops it from dropping snow clouds. After this jump shot, the blizzard goes back to being centered on Clarity and Clarity switches her target back to the icon
 Create spawner explode anim
 Emit hexagon particles (reuse Clarity’s stagger particles)
-Current task
 Stop dropping snow clouds
 Deactivate snow cloud hitbox
 Make spawner explode func that allows its execution IF the spawner reached max height. This stops the func from being called when the arm initially spawns the spawner
 Func also expands visuals. Why not the anim? Bc the script has access to max_scale, so the scale can tween from max_scale to something like 1.5*max_scale
+Func also deactivates omni light so that the blizzard center is the only source of light
 Make Clarity func that’s called when the tip of her arm is near the spawner (on_spawner_explode). In this func,
 Clarity calls spawner’s explode func
 Blizzard goes back to Clarity
 Clarity switches target back to icon
+Clarity is in circle icon instead of circle spawner mode (this already happens in end_arm_attack; if this func is called when target is icon, Clarity switches to circle icon mode, and midway through the jump shot anim, Clarity switches target to icon)
 Make phase 2.3
 Background is dark and grey
+Plan: environment autochange frame func uses the current sky gradients (top and horizon). Both gradients can be switched between a light and dark gradient. The one used pre-spawner-explosion is the light gradient. After the spawner explosion, the gradient switches to the dark gradient
+Simplify env autochange frame to not create gradients itself
+Create light gradient objects settable in inspector
+Repeat the above step for dark gradients
+When spawner explodes, the current sky gradients switch from using the light to dark versions
+Ice sprites don’t create the snow hitbox if destroyed
+Make “die” anim that plays when ice sprite is destroyed without the explosion chargeup being triggered
 Create ice fairies
-Core concept: ice sprites build up over time until they’re everywhere
-Instead of being spawned in the blizzard, they’re spawned via projectile from a spire, a structure that spawns at the impact site of a jump shot OR a giant snowflake icon on the ground that appears at the site of a jump shot
-An ice sprite starts out as a hopper, which behaves identically to the current ice sprite, except if the ice sprite is destroyed before it destroys itself, it doesn’t create the snow hitbox
-If the ice sprite destroys itself, glowing snow particles slowly rise into the air, then settle at a point high up (around top of snowflake level or higher). At this point, the ice fairy starts manifesting
-The ice fairy starts off as a glowing blue-white dot. It gets brighter over time, and right before it spawns, it plays a telegraph anim of some kind (e.g. a bunch of particles emitted or received). During this telegraph anim, if you hit the ice sprite fairy, it dies in one hit
+Core concept: ice fairies build up over time until they’re everywhere
+An ice fairy starts out as a hopper, which behaves identically to the current ice sprite
+If the ice fairy destroys itself, glowing snow particles slowly rise from the fog into the air, then settle at a point high up (around top of snowflake level or higher). At this point, the ice fairy starts manifesting
+Make rising snow particles
+Make particle attractor high in the air
+Make glow mesh that will grow slowly as the particles gather
+The ice fairy starts off as a glowing blue-white dot. It gets bigger and brighter over time, and when it spawns, it glows brightly and simply remains stationary. During this telegraph anim, if you hit the ice sprite fairy, it dies in one hit
+Make ready_fairy anim. In it,
+Aerial visuals move back down to position 0
+Overall node’s global position moves up to the height of aerial visuals
+Fairy does a glow flash (use albedo/emission instead of an omni light to avoid lag)
+Fairy is hittable
+Fairy dies in 1 hit when hit during the anim then heals to full health afterward
+Fairy doesn’t die on explode
+In death_effect, if fairy is in fairy mode, fairy dies then gets deleted
+If not fairy mode and explosion triggered, play sprite_explode then ready_fairy anim
+If not fairy mode and not explosion triggered, do sprite die
+Fairy’s health is set to 1 during ready fairy anim
+Fairy heals up to full fairy health at end of ready fairy anim. Why not in the anim afterward? Bc the anim afterward is a looping idle anim, and the heal-to-full code can’t be called there or else the fairy would heal every time the anim loops
+Current task
 When the ice sprite fairy fully spawns, it mostly just meanders randomly in Clarity’s vicinity and occasionally shoots fast projectiles that create a snow cloud just like the ice sprite explosion. It dies in 3 rose (or ax) hits, but right before it fires a projectile, it glows brightly, and when it glows brightly, you can hit it to kill it in 1 hit
+Make idle loop anim
 Ice sprite spawner spawns ice fairies instead of ice sprites
 Animate snowflake in jump shot
 Figure out what snowflake should do
