@@ -212,55 +212,55 @@ tracks/2/keys = {
 "update": 1,
 "values": [false]
 }
-tracks/3/type = "value"
+tracks/3/type = "method"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("FairyOriginGlow:scale")
+tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1, 1, 1)]
+"values": [{
+"args": [],
+"method": &"ready_fairy_start"
+}]
 }
-tracks/4/type = "method"
+tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath(".")
+tracks/4/path = NodePath("FairyGlowMesh:mesh:material:albedo_color")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"ready_fairy"
-}]
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.76, 0.9, 1.5, 1), Color(1, 1, 1, 1)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("FairyOriginGlowMesh:mesh:material:albedo_color")
+tracks/5/path = NodePath("FairyGlowMesh:mesh:material:emission_energy_multiplier")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.76, 0.9, 1.5, 1), Color(1, 1, 1, 1)]
+"values": [1.0, 0.46]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("FairyOriginGlowMesh:mesh:material:emission_energy_multiplier")
+tracks/6/path = NodePath("FairyGlowMesh:scale")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [1.0, 0.46]
+"values": [Vector3(1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_m58tf"]
@@ -366,7 +366,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("FairyOriginGlow:scale")
+tracks/8/path = NodePath("FairyGlowMesh:scale")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -378,7 +378,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("FairyOriginGlow:position")
+tracks/9/path = NodePath("FairyGlowMesh:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -832,10 +832,10 @@ color_ramp = SubResource("GradientTexture1D_pyaxw")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5l8wk"]
 transparency = 4
-albedo_color = Color(0.76, 0.9, 1.5, 1)
 albedo_texture = ExtResource("7_7yopq")
 emission_enabled = true
 emission = Color(0.77, 0.91, 1.5, 1)
+emission_energy_multiplier = 0.46
 billboard_mode = 1
 billboard_keep_scale = true
 
@@ -863,7 +863,6 @@ libraries = {
 
 [node name="SnowParticles" type="GPUParticles3D" parent="."]
 cast_shadow = 0
-emitting = false
 amount = 30
 lifetime = 6.0
 one_shot = true
@@ -874,7 +873,6 @@ process_material = SubResource("ParticleProcessMaterial_j2xt2")
 draw_pass_1 = ExtResource("2_rl78v")
 
 [node name="FogClumps" type="GPUParticles3D" parent="."]
-emitting = false
 amount = 30
 lifetime = 7.5
 one_shot = true
@@ -884,6 +882,7 @@ process_material = SubResource("ParticleProcessMaterial_47sp6")
 draw_pass_1 = SubResource("QuadMesh_g85f8")
 
 [node name="EnemyHurtbox" type="Area3D" parent="."]
+process_mode = 4
 collision_layer = 8
 collision_mask = 257
 script = ExtResource("3_66w1x")
@@ -896,7 +895,6 @@ opponent_hitboxes = ["PlayerHitbox"]
 shape = SubResource("CapsuleShape3D_s45hv")
 
 [node name="DamageOverTimeArea" type="Node3D" parent="."]
-process_mode = 4
 script = ExtResource("5_1ifbq")
 time_btwn_damage_ticks = 0.3
 
@@ -920,7 +918,6 @@ process_material = SubResource("ParticleProcessMaterial_jaerh")
 draw_pass_1 = SubResource("BoxMesh_adun2")
 
 [node name="RisingParticles" type="GPUParticles3D" parent="."]
-emitting = false
 amount = 6
 lifetime = 6.0
 visibility_aabb = AABB(-300, -300, -300, 600, 600, 600)
@@ -933,15 +930,6 @@ strength = 6.0
 attenuation = 5.65685
 size = Vector3(6, 3, 6)
 
-[node name="FairyOriginGlow" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 7.6, 2.08165e-12)
-visible = false
-modulate = Color(0.76, 0.87, 1.5, 1)
-billboard = 1
-double_sided = false
-no_depth_test = true
-texture = ExtResource("7_7yopq")
-
 [node name="FairyDeathParticles" type="GPUParticles3D" parent="."]
 emitting = false
 amount = 60
@@ -952,6 +940,6 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_m76nu")
 draw_pass_1 = ExtResource("8_rq4qr")
 
-[node name="FairyOriginGlowMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 3.6, 2.08165e-12)
+[node name="FairyGlowMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.08165e-12, 0, 0, 0, 2.08165e-12, 0, 0, 0, 2.08165e-12, 2.08165e-12, 7.6, 2.08165e-12)
 mesh = SubResource("QuadMesh_sqp36")

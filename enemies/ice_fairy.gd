@@ -14,6 +14,7 @@ var follow_speed := 5.0 # Ice sprite follow speed is set to be very similar to i
 @export var attack_turn_speed := .5
 @export var jump_vertical_speed := 3.6
 
+var is_fairy := false # Set to true in ready_fairy func
 var explosion_triggered := false # Set to true when close to player
 @export var explode_secs := 6.0
 
@@ -23,7 +24,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 @onready var anim_player := $AnimationPlayer
 @onready var hurtbox := $EnemyHurtbox
-@onready var fairy_origin_glow := $FairyOriginGlow
+@onready var fairy_glow := $FairyGlowMesh
 @onready var root := get_tree().root
 
 var target : Node3D
@@ -71,28 +72,36 @@ func start_attack():
 
 # Called by hurtbox OR chargeup anim
 func death_effect():
-	# If the explosion was triggered, explode ice sprite
-	if explosion_triggered:
-		anim_player.play("sprite_explode")
+	if is_fairy:
+		anim_player.play("fairy_die")
 		await anim_player.animation_finished
-		await get_tree().create_timer(explode_secs).timeout
 		queue_free()
-	# If the explosion wasn't triggered, don't explode ice sprite
 	else:
-		# Stop ice sprite from moving while dying
-		explosion_triggered = true
-		anim_player.play("sprite_die")
-	await anim_player.animation_finished
-	await get_tree().create_timer(explode_secs).timeout
-	queue_free()
+		# If the explosion was triggered, explode ice sprite,
+		# then become fairy
+		if explosion_triggered:
+			anim_player.play("sprite_explode")
+			await anim_player.animation_finished
+			anim_player.play("ready_fairy")
+		# If the explosion wasn't triggered, don't explode ice sprite
+		else:
+			# Stop ice sprite from jumping while dying
+			explosion_triggered = true
+			anim_player.play("sprite_die")
+			await anim_player.animation_finished
+			await get_tree().create_timer(explode_secs).timeout
+			queue_free()
 
 # This func is here so that when EnemyHurtbox calls its die func, set_active is called instead of queue freeing this Ice Sprite node
 func set_active(_state: bool):
 	return
 
-func ready_fairy():
-	# Move fairy origin down to be with the rest of the node,
-	# Then move the node up to the height the origin was at
-	var y = fairy_origin_glow.y
-	fairy_origin_glow.position = Vector3.ZERO
+func ready_fairy_start():
+	is_fairy = true
+	# Move fairy glow local pos down to be with the rest of the node,
+	# Then move the node up to the height the glow was at
+	var y = fairy_glow.y
+	fairy_glow.position = Vector3.ZERO
 	global_position.y += y
+	
+	
