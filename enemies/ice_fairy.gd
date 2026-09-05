@@ -103,5 +103,8 @@ func ready_fairy_start():
 	var y = fairy_glow.y
 	fairy_glow.position = Vector3.ZERO
 	global_position.y += y
-	
-	
+	# Fairy dies in 1 hit during ready_fairy anim
+	hurtbox.health = 1
+
+func ready_fairy_end():
+	hurtbox.health = hurtbox.max_health
