@@ -37,13 +37,16 @@ func _ready():
 	add_to_group("lockonables")
 
 func _physics_process(delta):
-	if not explosion_triggered and global_position.distance_to(target.global_position) < target_distance:
-		start_attack()
-	if is_on_floor():
-		if not explosion_triggered:
-			jump()
+	if is_fairy:
+		pass
 	else:
-		velocity.y -= .67 * gravity * delta
+		if not explosion_triggered and global_position.distance_to(target.global_position) < target_distance:
+			trigger_sprite_chargeup()
+		if is_on_floor():
+			if not explosion_triggered:
+				jump()
+		else:
+			velocity.y -= .67 * gravity * delta
 	move_and_slide()
 	if global_position.y < -100:
 		queue_free()
@@ -66,7 +69,7 @@ func jump():
 	global_rotation.x = 0
 	global_rotation.z = 0
 
-func start_attack():
+func trigger_sprite_chargeup():
 	explosion_triggered = true
 	anim_player.play("sprite_chargeup")
 
@@ -100,7 +103,7 @@ func ready_fairy_start():
 	is_fairy = true
 	# Move fairy glow local pos down to be with the rest of the node,
 	# Then move the node up to the height the glow was at
-	var y = fairy_glow.y
+	var y = fairy_glow.position.y
 	fairy_glow.position = Vector3.ZERO
 	global_position.y += y
 	# Fairy dies in 1 hit during ready_fairy anim

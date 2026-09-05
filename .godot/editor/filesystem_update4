@@ -35,3 +35,4 @@ res://enemies/clarity_dress_shard.gdshader
 res://enemies/ice_fairy.gd
 res://enemies/ice_sprite_spawner.tscn
 res://enemies/clarity.tscn
+res://enemies/ice_sprite_spawner.gd
