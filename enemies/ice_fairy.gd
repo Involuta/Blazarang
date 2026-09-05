@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var entity_name := "IceSprite" # Used by globals to assign hit score, kill score, etc. (Health is determined by hurtbox. entity_name doesn't affect health so that hurtboxes have more control over health)
+@export var entity_name := "IceFairy" # Used by globals to assign hit score, kill score, etc. (Health is determined by hurtbox. entity_name doesn't affect health so that hurtboxes have more control over health)
 
 enum {
 	FOLLOW,
@@ -96,4 +96,3 @@ func ready_fairy():
 	var y = fairy_origin_glow.y
 	fairy_origin_glow.position = Vector3.ZERO
 	global_position.y += y
-	

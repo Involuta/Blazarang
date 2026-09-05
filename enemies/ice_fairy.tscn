@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://2ipib84sl774"]
+[gd_scene load_steps=61 format=3 uid="uid://2ipib84sl774"]
 
 [ext_resource type="Script" path="res://enemies/ice_fairy.gd" id="1_6kq3x"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="2_rl78v"]
@@ -237,6 +237,30 @@ tracks/4/keys = {
 "args": [],
 "method": &"ready_fairy"
 }]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("FairyOriginGlowMesh:mesh:material:albedo_color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.76, 0.9, 1.5, 1), Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("FairyOriginGlowMesh:mesh:material:emission_energy_multiplier")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.46]
 }
 
 [sub_resource type="Animation" id="Animation_m58tf"]
@@ -806,6 +830,18 @@ scale_curve = SubResource("CurveTexture_cfcn5")
 color = Color(0.792157, 0.92549, 1, 1)
 color_ramp = SubResource("GradientTexture1D_pyaxw")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5l8wk"]
+transparency = 4
+albedo_color = Color(0.76, 0.9, 1.5, 1)
+albedo_texture = ExtResource("7_7yopq")
+emission_enabled = true
+emission = Color(0.77, 0.91, 1.5, 1)
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_sqp36"]
+material = SubResource("StandardMaterial3D_5l8wk")
+
 [node name="IceFairy" type="CharacterBody3D"]
 collision_layer = 8
 collision_mask = 26
@@ -899,6 +935,7 @@ size = Vector3(6, 3, 6)
 
 [node name="FairyOriginGlow" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 7.6, 2.08165e-12)
+visible = false
 modulate = Color(0.76, 0.87, 1.5, 1)
 billboard = 1
 double_sided = false
@@ -914,3 +951,7 @@ preprocess = 0.15
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_m76nu")
 draw_pass_1 = ExtResource("8_rq4qr")
+
+[node name="FairyOriginGlowMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 3.6, 2.08165e-12)
+mesh = SubResource("QuadMesh_sqp36")
