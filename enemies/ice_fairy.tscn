@@ -886,6 +886,15 @@ size = Vector2(2.4, 3)
 collision_layer = 0
 collision_mask = 26
 script = ExtResource("1_6kq3x")
+min_orbit_speed = 0.2
+max_orbit_speed = 0.4
+min_orbit_radius = 6.0
+max_orbit_radius = 12.0
+min_height_offset = 1.0
+max_height_offset = 7.0
+speed_change_interval_min = 6.0
+speed_change_interval_max = 12.0
+speed_transition_duration = 1.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_fp5fu")
