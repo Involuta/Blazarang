@@ -36,3 +36,5 @@ res://enemies/ice_fairy.gd
 res://enemies/ice_sprite_spawner.tscn
 res://enemies/clarity.tscn
 res://enemies/ice_sprite_spawner.gd
+res://enemies/ice_fairy_shot.tscn
+res://enemies/ice_fairy_shot.gd

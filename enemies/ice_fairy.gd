@@ -8,6 +8,11 @@ enum {
 }
 var behav_state = FOLLOW
 
+var ice_shot := preload("res://enemies/ice_fairy_shot.tscn")
+
+@export var ice_shot_speed := 6
+
+@export_group("Ice Sprite Parameters")
 var follow_speed := 5.0 # Ice sprite follow speed is set to be very similar to if not identical to Cotu's walk speed
 @export var target_distance := 4.5
 @export var follow_turn_speed := .15
@@ -15,21 +20,21 @@ var follow_speed := 5.0 # Ice sprite follow speed is set to be very similar to i
 @export var jump_vertical_speed := 3.6
 
 # Fairy Orbit & Movement Parameters
-@export_group("Fairy Orbit Parameters")
-@export var min_orbit_speed := 1.0
-@export var max_orbit_speed := 4.0
+@export_group("Fairy Mvmt Parameters")
+@export var min_orbit_speed := .2
+@export var max_orbit_speed := .4
 
-@export var min_orbit_radius := 2.0
-@export var max_orbit_radius := 5.5
+@export var min_orbit_radius := 6.0
+@export var max_orbit_radius := 12.0
 
-@export var min_height_offset := 0.8
-@export var max_height_offset := 3.0
+@export var min_height_offset := 1.0
+@export var max_height_offset := 7.0
 
-@export var speed_change_interval_min := 2.0
-@export var speed_change_interval_max := 5.0
-@export var speed_transition_duration := 0.6
+@export var speed_change_interval_min := 6.0
+@export var speed_change_interval_max := 12.0
+@export var speed_transition_duration := 1.5
 @export var fairy_drift_speed := 4.0
-@export var fairy_orbit_tolerance := 0.5 # Distance buffer around the orbit radius to switch to orbiting
+@export var fairy_orbit_tolerance := 1.5 # Distance buffer around the orbit radius to switch to orbiting
 
 # Active orbit state variables modified dynamically
 var current_orbit_speed := 2.0
@@ -56,11 +61,13 @@ var rng := RandomNumberGenerator.new()
 @onready var fairy_glow := $FairyGlowMesh
 @onready var root := get_tree().root
 
+var level : Node3D
 var target : Node3D
 var cotu : Node3D # Used to get player's vel. Enemy moves when the player moves
 var clarity : Node3D
 
 func _ready():
+	level = root.find_child("Level", true, false)
 	target = root.find_child("Icon", true, false)
 	cotu = root.find_child("cotuCB", true, false)
 	clarity = root.find_child("Clarity", true, false)
@@ -206,3 +213,11 @@ func ready_fairy_start():
 
 func ready_fairy_end():
 	hurtbox.health = hurtbox.max_health
+
+func shoot():
+	var bullet_inst = ice_shot.instantiate()
+	level.add_child.call_deferred(bullet_inst)
+	await bullet_inst.tree_entered
+	bullet_inst.global_position = global_position
+	bullet_inst.look_at(target.global_position)
+	bullet_inst.velocity = ice_shot_speed * -bullet_inst.get_global_transform().basis.z

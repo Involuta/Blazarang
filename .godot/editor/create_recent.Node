@@ -1,9 +1,9 @@
+AnimationPlayer
 MeshInstance3D
 Sprite3D
 GPUParticlesAttractorBox3D
 GPUParticlesAttractorSphere3D
 GPUParticles3D
-AnimationPlayer
 Node2D
 SubViewport
 Node3D
