@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://2ipib84sl774"]
+[gd_scene load_steps=62 format=3 uid="uid://2ipib84sl774"]
 
 [ext_resource type="Script" path="res://enemies/ice_fairy.gd" id="1_6kq3x"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="2_rl78v"]
@@ -558,9 +558,27 @@ tracks/3/keys = {
 "values": [0.0, 0.3]
 }
 
+[sub_resource type="Animation" id="Animation_2tacr"]
+resource_name = "shoot"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shoot"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7uy7i"]
 _data = {
 "ready_fairy": SubResource("Animation_5ov4e"),
+"shoot": SubResource("Animation_2tacr"),
 "spawn": SubResource("Animation_lsn44"),
 "sprite_chargeup": SubResource("Animation_2adtf"),
 "sprite_die": SubResource("Animation_5ski5"),
@@ -886,6 +904,7 @@ size = Vector2(2.4, 3)
 collision_layer = 0
 collision_mask = 26
 script = ExtResource("1_6kq3x")
+ice_shot_speed = 20.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_fp5fu")
@@ -914,7 +933,6 @@ process_material = SubResource("ParticleProcessMaterial_j2xt2")
 draw_pass_1 = ExtResource("2_rl78v")
 
 [node name="FogClumps" type="GPUParticles3D" parent="."]
-emitting = false
 amount = 30
 lifetime = 7.5
 one_shot = true
@@ -937,7 +955,6 @@ opponent_hitboxes = ["PlayerHitbox"]
 shape = SubResource("CapsuleShape3D_s45hv")
 
 [node name="DamageOverTimeArea" type="Node3D" parent="."]
-process_mode = 4
 script = ExtResource("5_1ifbq")
 time_btwn_damage_ticks = 0.3
 
@@ -985,5 +1002,5 @@ process_material = SubResource("ParticleProcessMaterial_m76nu")
 draw_pass_1 = ExtResource("8_rq4qr")
 
 [node name="FairyGlowMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 7.6, 2.08165e-12)
+transform = Transform3D(0.36, 0, 0, 0, 0.36, 0, 0, 0, 0.36, 2.08165e-12, 7.6, 2.08165e-12)
 mesh = SubResource("QuadMesh_sqp36")

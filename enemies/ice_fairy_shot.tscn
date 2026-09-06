@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://d3jn15a8111yi"]
+[gd_scene load_steps=35 format=3 uid="uid://d3jn15a8111yi"]
 
 [ext_resource type="Script" path="res://enemies/ice_fairy_shot.gd" id="1_03h8j"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="1_xgvds"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="3_6opei"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_v3n1q"]
+radius = 0.3
+height = 0.6
 
 [sub_resource type="Curve" id="Curve_r04qa"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.121525, 1), 0.0, 0.0, 0, 0, Vector2(0.359915, 0), 0.0, 0.0, 0, 0]
@@ -253,6 +255,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("EnemyHitbox:process_mode")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
 
 [sub_resource type="Animation" id="Animation_4lsew"]
 resource_name = "spawn"
@@ -292,12 +306,27 @@ tracks/2/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("EnemyHitbox:process_mode")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y1tuo"]
 _data = {
 "explode": SubResource("Animation_v6ljq"),
 "spawn": SubResource("Animation_4lsew")
 }
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3njra"]
+radius = 0.3
 
 [node name="IceFairyShot" type="Node3D"]
 script = ExtResource("1_03h8j")
@@ -347,4 +376,12 @@ libraries = {
 "": SubResource("AnimationLibrary_y1tuo")
 }
 
-[connection signal="body_entered" from="DamageOverTimeArea/EnemyHitbox" to="." method="_on_body_entered"]
+[node name="EnemyHitbox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 18
+script = ExtResource("3_6opei")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHitbox"]
+shape = SubResource("SphereShape3D_3njra")
+
+[connection signal="body_entered" from="EnemyHitbox" to="." method="_on_body_entered"]

@@ -1,3 +1,5 @@
+CollisionShape3D
+Hitbox
 AnimationPlayer
 MeshInstance3D
 Sprite3D
@@ -9,8 +11,6 @@ SubViewport
 Node3D
 OmniLight3D
 AnimationTree
-CollisionShape3D
-Hitbox
 DamageOverTimeArea
 Area3D
 EnemyHurtbox

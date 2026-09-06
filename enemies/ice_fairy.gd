@@ -10,8 +10,6 @@ var behav_state = FOLLOW
 
 var ice_shot := preload("res://enemies/ice_fairy_shot.tscn")
 
-@export var ice_shot_speed := 6
-
 @export_group("Ice Sprite Parameters")
 var follow_speed := 5.0 # Ice sprite follow speed is set to be very similar to if not identical to Cotu's walk speed
 @export var target_distance := 4.5
@@ -19,7 +17,6 @@ var follow_speed := 5.0 # Ice sprite follow speed is set to be very similar to i
 @export var attack_turn_speed := .5
 @export var jump_vertical_speed := 3.6
 
-# Fairy Orbit & Movement Parameters
 @export_group("Fairy Mvmt Parameters")
 @export var min_orbit_speed := .2
 @export var max_orbit_speed := .4
@@ -36,6 +33,11 @@ var follow_speed := 5.0 # Ice sprite follow speed is set to be very similar to i
 @export var fairy_drift_speed := 4.0
 @export var fairy_orbit_tolerance := 1.5 # Distance buffer around the orbit radius to switch to orbiting
 
+@export_group("Fairy Attack Parameters")
+@export var ice_shot_speed := 6.0
+@export var shoot_interval_min := 3.0
+@export var shoot_interval_max := 7.0
+
 # Active orbit state variables modified dynamically
 var current_orbit_speed := 2.0
 var current_orbit_radius := 3.5
@@ -45,6 +47,9 @@ var current_orbit_direction := 1.0 # 1.0 for counter-clockwise, -1.0 for clockwi
 var speed_timer := 0.0
 var next_speed_change_time := 0.0
 var state_tween : Tween
+
+var shoot_timer := 0.0
+var next_shoot_time := 0.0
 
 var fairy_orbit_angle := 0.0
 
@@ -77,12 +82,14 @@ func _ready():
 	current_height_offset = rng.randf_range(min_height_offset, max_height_offset)
 	current_orbit_direction = 1.0 if rng.randf() > 0.5 else -1.0
 	schedule_next_speed_change()
+	schedule_next_shot()
 	add_to_group("lockonables")
 
 func _physics_process(delta):
 	if is_fairy:
 		process_fairy_speed_timer(delta)
 		process_fairy_movement(delta)
+		process_shooting_timer(delta)
 	else:
 		if not explosion_triggered and global_position.distance_to(target.global_position) < target_distance:
 			trigger_sprite_chargeup()
@@ -94,6 +101,16 @@ func _physics_process(delta):
 	move_and_slide()
 	if global_position.y < -100:
 		queue_free()
+
+func process_shooting_timer(delta: float):
+	shoot_timer += delta
+	if shoot_timer >= next_shoot_time:
+		shoot_timer = 0.0
+		schedule_next_shot()
+		anim_player.play("shoot")
+
+func schedule_next_shot():
+	next_shoot_time = rng.randf_range(shoot_interval_min, shoot_interval_max)
 
 func process_fairy_speed_timer(delta: float):
 	speed_timer += delta
