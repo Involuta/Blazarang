@@ -1,4 +1,4 @@
-[gd_scene load_steps=158 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=160 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -14,6 +14,7 @@
 [ext_resource type="Shader" path="res://shaders/smoke.gdshader" id="7_pdkmx"]
 [ext_resource type="PackedScene" uid="uid://dhtdubq3e6ehk" path="res://glb_inherited_scenes/snowflake_entity_sprite.tscn" id="9_ajxjw"]
 [ext_resource type="Script" path="res://GPUTrail-main/GPUTrail3D.gd" id="9_xxn08"]
+[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="11_ekkw4"]
 [ext_resource type="PackedScene" uid="uid://luimf8n4rk70" path="res://glb_inherited_scenes/clarity_dress_shards_meshes.tscn" id="12_y7646"]
 [ext_resource type="PackedScene" uid="uid://cm3mndrep3gns" path="res://glb_inherited_scenes/clarity_dress_shards_master.tscn" id="13_2l47j"]
 [ext_resource type="PackedScene" uid="uid://dotk8qi7oo127" path="res://enemies/clarity_dress_shard_hit_particles.tscn" id="14_luiy3"]
@@ -276,6 +277,9 @@ shader_parameter/curve = SubResource("CurveTexture_vxuhc")
 
 [sub_resource type="QuadMesh" id="QuadMesh_w4b3d"]
 material = SubResource("ShaderMaterial_4duwi")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_twi1a"]
+size = Vector3(1.8, 9, 1.8)
 
 [sub_resource type="SphereMesh" id="SphereMesh_numd5"]
 radius = 0.15
@@ -1584,6 +1588,20 @@ transform = Transform3D(0.9963, -0.0859565, -3.75669e-09, 0.0859557, 0.9963, -1.
 
 [node name="Center_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="2"]
 transform = Transform3D(0.982278, 0.104528, 0.155578, -0.0949129, 0.993159, -0.0680211, -0.161623, 0.0520493, 0.985479, 0.562103, 9.96609, 0.284472)
+
+[node name="EnemyHurtbox" type="Area3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Center_2" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -3, 2.08165e-12)
+collision_layer = 8
+collision_mask = 257
+script = ExtResource("11_ekkw4")
+enemy_name = "ClarityCenterShard"
+hit_particles = ExtResource("14_luiy3")
+hit_particle_color = Color(0.713726, 0.870588, 1, 1)
+defense = 999
+opponent_hitboxes = ["PlayerHitbox"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Center_2/EnemyHurtbox"]
+shape = SubResource("BoxShape3D_twi1a")
 
 [node name="MiddleLeft" parent="ClarityArmMeshes/Armature/Skeleton3D" index="3"]
 transform = Transform3D(0.766044, 0.219846, 0.604023, -3.79893e-08, 0.939693, -0.34202, -0.642788, 0.262002, 0.719846, -0.521672, 0.156014, -0.548502)

@@ -1,5 +1,7 @@
-MeshInstance3D
 CollisionShape3D
+EnemyHurtbox
+StaticBody3D
+MeshInstance3D
 Hitbox
 AnimationPlayer
 Sprite3D
@@ -13,7 +15,6 @@ OmniLight3D
 AnimationTree
 DamageOverTimeArea
 Area3D
-EnemyHurtbox
 GPUTrail3D
 Trail3D
 FogVolume
@@ -26,7 +27,6 @@ NavigationAgent3D
 CharacterBody3D
 Camera3D
 WorldEnvironment
-StaticBody3D
 Label
 Label3D
 Node
