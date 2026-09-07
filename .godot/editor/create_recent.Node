@@ -1,7 +1,7 @@
+MeshInstance3D
 CollisionShape3D
 Hitbox
 AnimationPlayer
-MeshInstance3D
 Sprite3D
 GPUParticlesAttractorBox3D
 GPUParticlesAttractorSphere3D

@@ -38,6 +38,9 @@ var follow_speed := 5.0 # Ice sprite follow speed is set to be very similar to i
 @export var shoot_interval_min := 3.0
 @export var shoot_interval_max := 7.0
 
+# Saves ice fairy health pre-shoot, as health is 1 during shoot anim
+var pre_shoot_health : int
+
 # Active orbit state variables modified dynamically
 var current_orbit_speed := 2.0
 var current_orbit_radius := 3.5
@@ -231,10 +234,18 @@ func ready_fairy_start():
 func ready_fairy_end():
 	hurtbox.health = hurtbox.max_health
 
-func shoot():
+func shoot_start():
+	# Fairy dies in 1 hit during shoot anim
+	pre_shoot_health = hurtbox.health
+	hurtbox.health = 1
+	# Instantiate bullet
 	var bullet_inst = ice_shot.instantiate()
 	level.add_child.call_deferred(bullet_inst)
 	await bullet_inst.tree_entered
 	bullet_inst.global_position = global_position
 	bullet_inst.look_at(target.global_position)
 	bullet_inst.velocity = ice_shot_speed * -bullet_inst.get_global_transform().basis.z
+
+func shoot_end():
+	# Restore old health after shoot anim
+	hurtbox.health = pre_shoot_health

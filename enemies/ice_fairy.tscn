@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://2ipib84sl774"]
+[gd_scene load_steps=64 format=3 uid="uid://2ipib84sl774"]
 
 [ext_resource type="Script" path="res://enemies/ice_fairy.gd" id="1_6kq3x"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="2_rl78v"]
@@ -14,7 +14,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qf6aq"]
 resource_local_to_scene = true
 transparency = 4
-albedo_color = Color(1.5, 1.5, 1.5, 1)
+albedo_color = Color(0.560784, 0.803922, 1, 0.74902)
 roughness = 0.12
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
@@ -182,6 +182,18 @@ tracks/12/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("TestMesh:visible")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_5ov4e"]
@@ -560,6 +572,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_2tacr"]
 resource_name = "shoot"
+length = 3.00001
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -567,16 +580,59 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
-"method": &"shoot"
+"method": &"shoot_start"
+}, {
+"args": [],
+"method": &"shoot_end"
 }]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TestMesh:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_rypli"]
+resource_name = "fairy_die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FairyDeathParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FairyGlowMesh:mesh:material:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7uy7i"]
 _data = {
+"fairy_die": SubResource("Animation_rypli"),
 "ready_fairy": SubResource("Animation_5ov4e"),
 "shoot": SubResource("Animation_2tacr"),
 "spawn": SubResource("Animation_lsn44"),
@@ -866,7 +922,7 @@ colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
 gradient = SubResource("Gradient_5owmt")
 
 [sub_resource type="Curve" id="Curve_51jeq"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.501055, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0129609), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.123336, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0129609), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_cfcn5"]
@@ -879,8 +935,8 @@ spread = 180.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 3.0
 initial_velocity_max = 6.0
-damping_min = 4.0
-damping_max = 4.0
+damping_min = 1.0
+damping_max = 1.0
 scale_min = 0.08
 scale_max = 0.16
 scale_curve = SubResource("CurveTexture_cfcn5")
@@ -889,6 +945,7 @@ color_ramp = SubResource("GradientTexture1D_pyaxw")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5l8wk"]
 transparency = 4
+albedo_color = Color(1, 1, 1, 0)
 albedo_texture = ExtResource("7_7yopq")
 emission_enabled = true
 emission = Color(0.77, 0.91, 1.5, 1)
@@ -900,18 +957,24 @@ billboard_keep_scale = true
 material = SubResource("StandardMaterial3D_5l8wk")
 size = Vector2(2.4, 3)
 
+[sub_resource type="PrismMesh" id="PrismMesh_0ntxm"]
+
 [node name="IceFairy" type="CharacterBody3D"]
-collision_layer = 0
+collision_layer = 8
 collision_mask = 26
 script = ExtResource("1_6kq3x")
-ice_shot_speed = 20.0
+max_orbit_radius = 18.0
+min_height_offset = 2.08165e-12
+max_height_offset = 12.0
+ice_shot_speed = 12.0
+shoot_interval_min = 6.0
+shoot_interval_max = 12.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_fp5fu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(2.08165e-12, 0, 0, 0, 2.08165e-12, 0, 0, 0, 2.08165e-12, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh = SubResource("BoxMesh_adun2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -933,6 +996,7 @@ process_material = SubResource("ParticleProcessMaterial_j2xt2")
 draw_pass_1 = ExtResource("2_rl78v")
 
 [node name="FogClumps" type="GPUParticles3D" parent="."]
+emitting = false
 amount = 30
 lifetime = 7.5
 one_shot = true
@@ -942,11 +1006,10 @@ process_material = SubResource("ParticleProcessMaterial_47sp6")
 draw_pass_1 = SubResource("QuadMesh_g85f8")
 
 [node name="EnemyHurtbox" type="Area3D" parent="."]
-process_mode = 4
 collision_layer = 8
 collision_mask = 257
 script = ExtResource("3_66w1x")
-enemy_name = "IceSprite"
+enemy_name = "IceFairy"
 hit_particles = ExtResource("4_obml0")
 hit_particle_color = Color(0.592157, 0.788235, 1, 1)
 opponent_hitboxes = ["PlayerHitbox"]
@@ -955,6 +1018,7 @@ opponent_hitboxes = ["PlayerHitbox"]
 shape = SubResource("CapsuleShape3D_s45hv")
 
 [node name="DamageOverTimeArea" type="Node3D" parent="."]
+process_mode = 4
 script = ExtResource("5_1ifbq")
 time_btwn_damage_ticks = 0.3
 
@@ -1002,5 +1066,8 @@ process_material = SubResource("ParticleProcessMaterial_m76nu")
 draw_pass_1 = ExtResource("8_rq4qr")
 
 [node name="FairyGlowMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.36, 0, 0, 0, 0.36, 0, 0, 0, 0.36, 2.08165e-12, 7.6, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 7.6, 2.08165e-12)
 mesh = SubResource("QuadMesh_sqp36")
+
+[node name="TestMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("PrismMesh_0ntxm")

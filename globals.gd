@@ -145,7 +145,8 @@ const enemy_hurtbox_data = {
 	"JumpingSpider" : [800, 1.0, 1.0],
 	
 	"ClarityBodyShard" : [45, 1.0, 15.0],
-	"IceSprite" : [66, 1.0, 60.0],
+	"IceSprite" : [60, 1.0, 60.0],
+	"IceFairy" : [15, 1.0, 60.0],
 	"Clarity" : [3000, 1.0, 1000.0],
 }
 
