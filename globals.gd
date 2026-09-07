@@ -148,7 +148,7 @@ const enemy_hurtbox_data = {
 	"IceSprite" : [60, 1.0, 60.0],
 	"IceFairy" : [15, 1.0, 60.0],
 	"Clarity" : [3000, 1.0, 1000.0],
-	"ClarityCenterShard" : [99999, 0.0, 0.0]
+	"ClarityUnbreakablePart" : [99999, 0.0, 0.0]
 }
 
 func rotate_toward(from: float, to: float, delta: float) -> float:

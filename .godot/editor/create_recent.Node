@@ -1,5 +1,6 @@
 CollisionShape3D
 EnemyHurtbox
+Hurtbox
 StaticBody3D
 MeshInstance3D
 Hitbox
@@ -29,4 +30,3 @@ Camera3D
 WorldEnvironment
 Label
 Label3D
-Node

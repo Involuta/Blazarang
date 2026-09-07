@@ -180,6 +180,7 @@ var ice_sprite_spawner_boost := preload("res://enemies/ice_sprite_spawner_boost.
 @onready var snowflake := $ClarityArmMeshes/SnowflakeEntity
 @onready var snowflake_anim_player := $ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/AnimationPlayer
 @onready var snowflake_hexagon_anim_player := $ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/HexagonAnimationPlayer
+@onready var head_hurtbox := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/EnemyHurtbox
 @onready var head_light := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/BaseOffsetRotation/HeadMesh/HeadLight
 @onready var head_bone := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2
 @onready var head_mesh := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
@@ -190,7 +191,6 @@ var ice_sprite_spawner_boost := preload("res://enemies/ice_sprite_spawner_boost.
 @onready var feet_fog := $FogVolume/FeetFog
 @onready var body_cloud := $FogVolume/BodyCloud
 
-var head_hurtbox : Node3D
 var dress_shards := {}
 
 @onready var root := get_tree().root
@@ -266,8 +266,6 @@ class DressShard extends Node3D:
 		self.hurtbox.regen()
 
 func _ready():
-	head_hurtbox = find_child("EnemyHurtbox")
-	
 	head_hurtbox.add_to_group("lockonables")
 	snowflake.add_to_group("lockonables")
 	level = root.find_child("Level", true, false)
@@ -302,15 +300,16 @@ func _ready():
 	
 	head_hurtbox.hit_received.connect(on_head_hit)
 	
-	# Set up all states pre-fight. This may eventually be replaced by either a PreFight anim or an anim that spawns the snowflake entity
-	arm_anim_player.play("WalkLeftAggressive")
-	
 	# Ensure all shards are full health and hurtable when Clarity spawns
 	regen_dress_shards()
 	
-	# FOR TESTING: play JumpShot or RegenShards to reach phase 2 immediately
-	snowflake_anim_player.play("JumpShot")
+	# Activate snowflake
+	snowflake_anim_player.play("RotateSlow3Seg")
 	
+	# FOR TESTING: play JumpShot to reach phase 2 immediately
+	#snowflake_anim_player.play("JumpShot")
+	
+	# FOR TESTING: play RegenShards to reach phase 2 immediately
 	#switch_to_stop()
 	#snowflake_anim_player.play("RegenShards")
 	#play_anim_all_dress_shards("RegenShards")

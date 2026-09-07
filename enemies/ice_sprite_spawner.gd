@@ -149,6 +149,7 @@ func _physics_process(delta):
 		hex_material.albedo_color = hex_albedo_base.lerp(hex_albedo_boosted, lerp_val)
 
 func spawn_ice_sprite():
+	return
 	var sprite_instance
 	if max_height_reached:
 		sprite_instance = ice_fairy.instantiate()

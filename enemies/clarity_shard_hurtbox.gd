@@ -57,13 +57,13 @@ func regen():
 func receive_hit(hitbox, hitter):
 	# Glow to dim effect
 	var t = get_tree().create_tween()
-	t.tween_property(mat, "shader_parameter/emission_energy", 0.75, 0)
+	t.tween_property(mat, "shader_parameter/emission_energy", 1.0, 0)
 	t.tween_property(mat, "shader_parameter/emission_energy", 0.0, 0.6)
 	super(hitbox, hitter)
 
 func receive_hit_no_hitbox(damage):
 	# Glow to dim effect
 	var t = get_tree().create_tween()
-	t.tween_property(mat, "emission_energy_multiplier", 1.2, 0)
-	t.tween_property(mat, "emission_energy_multiplier", 0.0, 0.6)
+	t.tween_property(mat, "shader_parameter/emission_energy", 1.5, 0)
+	t.tween_property(mat, "shader_parameter/emission_energy", 0.0, 0.6)
 	super(damage)
