@@ -1835,7 +1835,7 @@ See Blazarang Long Tasks
 
 Remove SFX from roserang since it should be present in hurtboxes
 
-Remove power throw from roserang since it does the same thing as the ax
+Remove power throw from roserang since it does the same thing as the ax. Replace it with an omnidirectional rose petal throw (when aiming up/down, the rose petal is simply tilted up/down)
 
 Add UI icon or crosshair to show how close to the center of the screen a target needs to be in order for homing instant rethrow to target it (like what Soldier 76’s ultimate does)
 
@@ -2035,7 +2035,8 @@ When you want to mark (maybe by pressing mark button once), camera switches to s
 When aiming, a UI circle in the middle of the screen appears. You must keep the enemy’s center inside the circle for some time as the circle shrinks
 Once the enemy has been in the circle long enough, an effect plays and the circle stops shrinking. Press the mark button to mark the enemy
 While aiming, Cotu holds his icon in front of him with one hand and holds the mark in his other hand. The hand/arm positions are reminiscent of a bow and arrow, but his hands are open
-Idea: mark starts out as a plumbata, then gets upgraded to become a spear eventually
+Idea: mark starts out as a plumbata, then gets upgraded to become a spear, then spear + atlatl eventually
+Idea: when mark becomes placeable, the spear’s tip splits into 4 parts that levitate out to the sides and have pulsing chaotic energy between them and the spearhead’s original position
 
 Stabilizer anim
 Animation: a ball revolves around Cotu while decreasing its orbital radius and rising above him over time, settling directly above his head. It then slams into his head
@@ -2059,7 +2060,7 @@ Each wave of targets gets harder than the last (faster, weirder paths, less pred
 Some targets are tough and require the ax
 
 Grow-a-Gator (Cotu names it “Groa” maybe? And then it calls itself “Groa”)
-Fast giant alligator with the ability to grow and shrink
+Fast giant alligator with the ability to grow and shrink. Its scale origin point is its icon; it moves its icon throughout its body to grow and shrink about different points
 Tiny: size of Dwarf Caiman, used for dodges and quick positioning
 Normal: size of American alligator
 Big: size is comparable to Vordt of the Boreal Valley from Dark Souls 3
@@ -2073,10 +2074,9 @@ Idea: When hit, one of Cotu’s arms is ripped off
 When one arm is gone, the ax can no longer be thrown
 When both arms are gone, no rangs can be thrown
 Stabilizing restores both arms
-Shockwave: in huge or giga mode, gator slowly opens its jaw wide, then slams it shut instantly, sending out an omnidirectional shockwave of pressurized air
+Air Blast: in huge or giga mode, Gator slowly opens its jaw wide while sucking in air, then slams it shut while shrinking to tiny size, sending out a directional wave of compressed air
 Idea: for 2nd phase, it can swim through the ground and walls and attack from them
 Floor Chomp: swims under the floor, then chomps up at target from below in either Big or Huge mode. Huge mode has longer chargeup time and a different sound effect
-Projectile Shockwave: same as shockwave but done while the gator’s inside a swimmable surface, which causes the shockwave to launch a projectile directly at the target (more precisely, in the direction the mouth is pointing), then send out a shockwave immediately after. If the player uses a dodge to avoid the projectile, they’ll likely be hit by the shockwave
 Ring Toss: Gator spins its soul around its tail, spikes appear on the soul, then it throws its soul at you like a chakram before it bounces off a wall and returns to gator
 Idea: defeating Gator gives you the chakram
 Lore/Story Ideas:
@@ -3794,7 +3794,7 @@ In the shuttle, to put in the coordinates for Gauntlet Gym 2, Gator simply spins
 While dancing in the shuttle, Gator moves its head back and forth in a downward facing arc
 A title appears: [number] [time units] UNTIL IT ARRIVES. The camera then cuts back to the player
 Cutscene that plays when Grow-a-Gator reaches Gauntlet Gym 2
-Gator crash lands its ship. Its theme song starts playing as people turn to look at the wreckage. It somehow ends up on top of a high place, and jumps up and down and clumsily/slightly unclearly screams to all the fighters just as the song gets good: “rrrrrrrrrrAAAAHHHHH! I BITE EVERYBODY! I KILL EVERYBODY! ALL YOU! I KILL ALL YOU! I KILLA! I KELELELAH (incoherent babbling) RAAAAAHHHHH!!!”
+Gator crash lands its ship. Its theme song starts playing as people turn to look at the wreckage. It somehow ends up on top of a high place, and jumps up and down and clumsily/slightly unclearly screams to all the fighters just as the song gets good: “rrrrrrrrrrAAAAHHHHH! I’LL BITE EVERYBODY! I’LL KILL EVERYBODY! EVERYONE HERE! I’LL KILL EVERYBODY! KILL KILL KILL KILL KILL KILL KILL KILL KELELELAH (incoherent babbling) RAAAAAHHHHH!!!”
 As Gator monologues, people prepare to fight it
 Slicer hunches down and ignites hand blades while Jumping Spider stands still
 Lobsters fist bump while Paramecium floats by
@@ -4114,6 +4114,29 @@ This feels more serious than Blazarang should be; it’s about a bunch of gods h
 Counterpoint: just because Blackstar’s ascension is the main goal doesn’t mean it’s a serious matter
 Without the gala, we don’t get to see competitive characters’ competitive sides (Blackstar, X, Future Blade) and casual characters’ conflict with them (Cotu, Triplets, Flora)
 Character interactions that are the same regardless of plot
+Blackstar and her coach, Gauntlet Variant 97
+We see a compilation of Blackstar training and getting hurt. The camera focuses on her face throughout the compilation
+97: “What’s that look on your face?”
+Blackstar winces
+97: “Are you tired?”
+Blackstar: “...I’m-”
+97, passive-aggressively: “If you are, that’s fine. Just know that you don’t have champion-level stamina.”
+Blackstar: “...”
+97, sternly: “What’s wrong?”
+Blackstar: “...nothing, um-”
+97: “You asked me to train you. You asked me to make you a warrior who can fight at the highest level. You asked me to push you until you reincarnate, and as we can both see, that hasn’t happened yet. You asked for this.”
+Blackstar looks away ashamed
+97, calmly: “If you disagree with my teaching methods, then replace me.”
+Blackstar: “n-no!”
+97 turns her back to Blackstar and talks behind her over her shoulder. “I have no problem with it. It’s up to you to decide who’s best for you. You’re gauntlet incarnate, after all.”
+Blackstar: “I-...I need you, 97. You’re the only one who pushes me this hard. You’re the only one who understands what we have to do. No one else is willing to do this. No one else is willing…to…”
+97 turns back towards Blackstar. “I agree with you. This is what makes us elite.”
+97 turns her head away from Blackstar out into the distance. “We gauntlet variants aren’t born with the powers that the elite gods have. We have to make up for our difference in power with hard work and tactical strategy. Crucially, we need practice to perfect our execution, and true practice does not exist without pain.”
+Blackstar: “...exactly.”
+97, solemnly: “You are what the gauntlet needs, Blackstar. You carry the legacy of our people in your hands, and you will carry us to victory. I will do everything in my power to make you the best fighter in the universe, and if not, I will make you reincarnate into someone who is.”
+Blackstar looks stressed, but resolved
+Bonus Lore:
+98 is considered a failure. He nearly lost the tournament to a fighter he should have mopped the floor with, and the immense shame caused him to reincarnate immediately
 Idea: Sean Strickland god overhears Future Blade and his friends gossiping about him and starts beef
 After fighting FB, Sean god becomes friends with him because he respects him as a fighter
 FB gossipped about him to tick him off on purpose so that they could fight without FB having to ask to spar Sean god himself
