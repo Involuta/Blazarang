@@ -57,3 +57,4 @@ res://enemies/clarity.gd
 res://globals.gd
 res://cotu/CotuControl.gd
 res://rang/roserang.tscn
+res://enemies/clarity_head.tscn
