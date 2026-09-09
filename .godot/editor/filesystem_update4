@@ -53,3 +53,7 @@ res://enemies/enemy_anims/snowflake_entity_tripleshardsemiseq2.res
 res://enemies/enemy_anims/snowflake_entity_tripleshardseq1.res
 res://enemies/ice_sprite_spawner.tscn
 res://enemies/clarity.tscn
+res://enemies/clarity.gd
+res://globals.gd
+res://cotu/CotuControl.gd
+res://rang/roserang.tscn

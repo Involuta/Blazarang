@@ -1,7 +1,7 @@
 CollisionShape3D
+StaticBody3D
 EnemyHurtbox
 Hurtbox
-StaticBody3D
 MeshInstance3D
 Hitbox
 AnimationPlayer
