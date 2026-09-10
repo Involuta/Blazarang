@@ -441,6 +441,7 @@ skeleton = NodePath("../..")
 [node name="Hurtbox" type="Area3D" parent="."]
 collision_mask = 11
 script = ExtResource("2_fvpfg")
+frostbite_stage_thresholds = [30.0, 60.0, 90.0]
 opponent_hitboxes = ["EnemyHitbox", "DeathHitbox"]
 
 [node name="HurtboxCollider" type="CollisionShape3D" parent="Hurtbox"]

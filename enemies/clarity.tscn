@@ -1498,7 +1498,7 @@ transform = Transform3D(0.339741, 0.92836, 0.15074, -0.932056, 0.353784, -0.0781
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 script = ExtResource("4_5f0ps")
 damage = 30
-frostbite_buildup = 15
+frostbite_buildup = 12
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2/EnemyHitbox"]
 transform = Transform3D(0.996195, -0.0871557, 4.28562e-16, 0.0871557, 0.996195, -1.78015e-16, -1.35457e-16, -3.71025e-16, 1, 0.67, -7.5, 2.08165e-12)
@@ -1679,8 +1679,6 @@ transform = Transform3D(1, 5.8286e-10, 1.01449e-09, -2.48745e-10, 1, 1.59747e-08
 bones/5/rotation = Quaternion(0.683013, -0.183013, -0.183013, 0.683013)
 bones/6/position = Vector3(0.828085, 1.02211, -0.462035)
 bones/8/position = Vector3(0.00320047, 1.02211, -1.0554)
-bones/10/position = Vector3(-0.00379542, 1.02211, 0.950407)
-bones/12/position = Vector3(0.825767, 1.02211, 0.477676)
 bones/14/position = Vector3(-0.823051, 1.02211, 0.473662)
 bones/16/position = Vector3(-0.820733, 1.02211, -0.466049)
 
@@ -1697,10 +1695,10 @@ transform = Transform3D(0.866025, 0.5, 1.37447e-07, -0.5, 0.866025, 7.91047e-08,
 transform = Transform3D(0.866025, 0.5, 4.31323e-08, -0.5, 0.866025, -5.6136e-08, -5.96806e-08, 3.23494e-08, 1, 5.96046e-08, -1.78814e-07, 1.17347e-07)
 
 [node name="BackRight" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.866025, 0.5, 1.52165e-07, -0.5, 0.866025, 1.32786e-07, -5.95815e-08, -1.25301e-07, 1, 2.38419e-07, 2.98023e-07, 8.19564e-08)
+transform = Transform3D(0.866025, 0.5, 1.52165e-07, -0.5, 0.866025, 1.32786e-07, -5.95815e-08, -1.25301e-07, 1, 2.08616e-07, 2.98023e-07, -3.72529e-08)
 
 [node name="BackLeft" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.866025, 0.5, 1.3505e-07, -0.5, 0.866025, 1.56225e-07, -1.64302e-08, -6.81776e-08, 1, -5.96046e-08, 5.96046e-08, 1.67638e-07)
+transform = Transform3D(0.866025, 0.5, 1.3505e-07, -0.5, 0.866025, 1.56225e-07, -1.64302e-08, -6.81776e-08, 1, 0, 1.78814e-07, 4.84288e-08)
 
 [node name="MiddleRight" parent="ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D" index="8"]
 transform = Transform3D(0.866025, 0.5, 1.33939e-07, -0.5, 0.866025, -5.88597e-09, 2.02364e-08, -7.6886e-08, 1, 4.17233e-07, 2.46451e-07, 2.12342e-07)

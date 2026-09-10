@@ -58,3 +58,7 @@ res://globals.gd
 res://cotu/CotuControl.gd
 res://rang/roserang.tscn
 res://enemies/clarity_head.tscn
+res://cotu/CotuHurtbox.gd
+res://cotu/cotu_cb_main.tscn
+res://enemies/clarity_infused_slice_hitbox.tscn
+res://enemies/ice_sprite.tscn

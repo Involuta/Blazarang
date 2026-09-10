@@ -83,7 +83,8 @@ time_btwn_damage_ticks = 0.3
 
 [node name="EnemyHitbox" type="Area3D" parent="DamageOverTimeArea"]
 script = ExtResource("3_vkjku")
-damage = 12
+damage = 6
+frostbite_buildup = 6
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DamageOverTimeArea/EnemyHitbox"]
 shape = SubResource("CapsuleShape3D_hbolv")
