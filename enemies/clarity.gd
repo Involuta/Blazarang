@@ -162,19 +162,19 @@ var staggerable := false # When head is exposed but not glowing, staggerable is 
 }
 
 @export var snowflake_all_attack_chances = {
-	"SingleShardSequence1": .1,
-	"DoubleShardSequence1": .1,
-	"TripleShardSequence1": .1,
-	"QuadShardSequence1": .1,
+	"SingleShardSequence1": .15,
+	"DoubleShardSequence1": .15,
+	"TripleShardSequence1": .15,
+	"QuadShardSequence1": .15,
 	
-	"TripleShardFanSequence1": .075,
-	"TripleShardFanSequence2": .075,
-	"TripleShardSemicircleSequence1": .075,
-	"TripleShardSemicircleSequence2": .075,
-	"QuadShardFanSequence1": .075,
-	"QuadShardFanSequence2": .075,
-	"QuadShardSemicircleSequence1": .075,
-	"QuadShardSemicircleSequence2": .075,
+	"TripleShardFanSequence1": .05,
+	"TripleShardFanSequence2": .05,
+	"TripleShardSemicircleSequence1": .05,
+	"TripleShardSemicircleSequence2": .05,
+	"QuadShardFanSequence1": .05,
+	"QuadShardFanSequence2": .05,
+	"QuadShardSemicircleSequence1": .05,
+	"QuadShardSemicircleSequence2": .05,
 }
 
 @export var regen_shards_max_chance := .5 # When all 6 shards are destroyed, this is the chance that the next arm attack will be RegenShards
