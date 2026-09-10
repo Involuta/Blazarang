@@ -51,9 +51,10 @@ var spawner_exploded := false
 
 @export var min_y_pos := 10.0 # y pos of arena floor, ie X's minimum y position
 
-@export var blizzard_safezone_base_radius := 15.0
+@export var blizzard_safezone_base_radius := 15.0 # Safezone radius at start of fight
 @export var blizzard_safezone_expanded_radius := 150.0 # Blizzard safezone expands on jumps
 @export var blizzard_safezone_ice_sprite_spawner_radius := 24.0 # When blizzard centers on ice sprite spawner
+@export var blizzard_safezone_final_radius := 19.5 # Safezone radius after ice sprite spawner explodes
 var blizzard_safezone_radius := 15.0
 @export var safezone_expand_frames_jump_shot := 144
 @export var safezone_contract_frames_jump_shot := 360
@@ -158,6 +159,22 @@ var staggerable := false # When head is exposed but not glowing, staggerable is 
 	"QuadShardFanSequence2": .125,
 	"QuadShardSemicircleSequence1": .125,
 	"QuadShardSemicircleSequence2": .125,
+}
+
+@export var snowflake_all_attack_chances = {
+	"SingleShardSequence1": .1,
+	"DoubleShardSequence1": .1,
+	"TripleShardSequence1": .1,
+	"QuadShardSequence1": .1,
+	
+	"TripleShardFanSequence1": .075,
+	"TripleShardFanSequence2": .075,
+	"TripleShardSemicircleSequence1": .075,
+	"TripleShardSemicircleSequence2": .075,
+	"QuadShardFanSequence1": .075,
+	"QuadShardFanSequence2": .075,
+	"QuadShardSemicircleSequence1": .075,
+	"QuadShardSemicircleSequence2": .075,
 }
 
 @export var regen_shards_max_chance := .5 # When all 6 shards are destroyed, this is the chance that the next arm attack will be RegenShards
@@ -305,17 +322,17 @@ func _ready():
 	regen_dress_shards()
 	
 	# Activate snowflake
-	snowflake_anim_player.play("RotateSlow3Seg")
+	#snowflake_anim_player.play("RotateSlow3Seg")
 	
 	# FOR TESTING: play JumpShot to reach phase 2 immediately
-	#snowflake_anim_player.play("JumpShot")
+	snowflake_anim_player.play("JumpShot")
 	
 	# FOR TESTING: play RegenShards to reach phase 2 immediately
 	#switch_to_stop()
 	#snowflake_anim_player.play("RegenShards")
 	#play_anim_all_dress_shards("RegenShards")
 	#arm_anim_player.play("RegenShards")
-	
+
 func frames(num: int) -> float:
 	return num * get_physics_process_delta_time()
 
@@ -793,8 +810,9 @@ func expand_blizzard_safezone(frame_duration: int):
 
 func contract_blizzard_safezone(frame_duration: int):
 	var t = get_tree().create_tween().set_parallel()
+	# When blizzard safezone contracts, it never returns to base radius; it either becomes the ice sprite spawner radius or the final radius
 	if blizzard_center == self:
-		t.tween_property(self, "blizzard_safezone_radius", blizzard_safezone_base_radius, frames(frame_duration))
+		t.tween_property(self, "blizzard_safezone_radius", blizzard_safezone_final_radius, frames(frame_duration))
 	else:
 		t.tween_property(self, "blizzard_safezone_radius", blizzard_safezone_ice_sprite_spawner_radius, frames(frame_duration))
 	t.tween_property(blizzard_light, "light_color", Color("#007ce4"), frames(frame_duration))
@@ -843,16 +861,28 @@ func recall_dress_shard(s: String):
 	dress_shards[s].recall()
 
 func trigger_snowflake_rotate_slow():
-	# TEST ANIM - code will eventually choose btwn Rotate1 and Rotate3 somehow
-	snowflake_anim_player.play("RotateSlow1Seg")
+	# Number of segments to rotate
+	var seg_num : int
+	# Use state vars to check phase
+	if not ice_sprite_spawner_spawned:
+		seg_num = 3
+	elif not spawner_exploded:
+		seg_num = 1
+	else:
+		seg_num = 3
+	var anim_str = "RotateSlow%dSeg" % seg_num
+	snowflake_anim_player.play(anim_str)
 
-func trigger_snowflake_short_range_attack_or_regen_shards():
-	trigger_snowflake_attack_or_regen_shards(snowflake_short_range_attack_chances)
-
-func trigger_snowflake_long_range_attack_or_regen_shards():
-	trigger_snowflake_attack_or_regen_shards(snowflake_long_range_attack_chances)
-
-func trigger_snowflake_attack_or_regen_shards(ac: Dictionary):
+func trigger_snowflake_attack_or_regen_shards():
+	var ac : Dictionary
+	# Use blizzard safezone radius to check phase
+	if not ice_sprite_spawner_spawned:
+		ac = snowflake_short_range_attack_chances
+	elif not spawner_exploded:
+		ac = snowflake_long_range_attack_chances
+	else:
+		ac = snowflake_all_attack_chances
+	
 	# If the arm is attacking, don't include RegenShards as a choice
 	if arm_attacking:
 		# Play snowflake anim
