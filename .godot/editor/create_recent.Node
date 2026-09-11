@@ -1,6 +1,9 @@
+StaticBody3D
+Generic6DOFJoint3D
+RigidBody3D
+GPUTrail3D
 GPUParticles3D
 CollisionShape3D
-StaticBody3D
 EnemyHurtbox
 Hurtbox
 MeshInstance3D
@@ -16,7 +19,6 @@ OmniLight3D
 AnimationTree
 DamageOverTimeArea
 Area3D
-GPUTrail3D
 Trail3D
 FogVolume
 GPUParticlesAttractorVectorField3D
@@ -28,5 +30,3 @@ NavigationAgent3D
 CharacterBody3D
 Camera3D
 WorldEnvironment
-Label
-Label3D
