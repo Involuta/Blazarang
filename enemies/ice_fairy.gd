@@ -109,7 +109,7 @@ func process_shooting_timer(delta: float):
 	if shoot_timer >= next_shoot_time:
 		shoot_timer = 0.0
 		schedule_next_shot()
-		anim_player.play("shoot", .15)
+		anim_player.play("shoot", .3)
 
 func schedule_next_shot():
 	next_shoot_time = rng.randf_range(shoot_interval_min, shoot_interval_max)
@@ -211,6 +211,7 @@ func death_effect():
 		# then become fairy
 		if explosion_triggered:
 			velocity = Vector3.ZERO
+			gravity = 0
 			anim_player.play("sprite_explode")
 			await anim_player.animation_finished
 			anim_player.play("ready_fairy")
@@ -263,4 +264,4 @@ func shoot_vulnerability_end():
 	hurtbox.health = pre_shoot_health
 
 func play_fairy_idle():
-	anim_player.play("fairy_idle")
+	anim_player.play("fairy_idle", .3)
