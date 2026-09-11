@@ -56,17 +56,16 @@ var next_shoot_time := 0.0
 
 var fairy_orbit_angle := 0.0
 
-var is_fairy := false # Set to true in ready_fairy func
 var explosion_triggered := false # Set to true when close to player
 @export var explode_secs := 6.0
-
-var aiming_at_target := true
+var is_fairy := false # Set to true in ready_fairy func
+var aiming_at_target := false
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 @onready var anim_player := $AnimationPlayer
 @onready var hurtbox := $EnemyHurtbox
-@onready var fairy_glow := $IceFairyVisuals/FairyGlowMesh
+@onready var fairy_glow := $FairyGlowMesh
 @onready var root := get_tree().root
 
 var level : Node3D
@@ -169,16 +168,21 @@ func process_fairy_movement(delta: float):
 		# Smoothly slide towards the active orbit point
 		var to_desired = desired_orbit_pos - global_position
 		velocity = to_desired * fairy_drift_speed
-
-	lerp_look_at_walk_dir(follow_turn_speed)
-
-func lerp_look_at_target(turn_speed):
-	var vec3_to_target := global_position.direction_to(target.global_position)
-	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
+	
+	if aiming_at_target:
+		lerp_look_at_target(follow_turn_speed)
+	else:
+		lerp_look_at_walk_dir(follow_turn_speed)
 
 func lerp_look_at_walk_dir(turn_speed):
 	if velocity.length_squared() > 0.01:
 		global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(velocity.x, velocity.z), turn_speed)
+
+func lerp_look_at_target(turn_speed):
+	var vec3_to_target := -global_position.direction_to(target.global_position)
+	global_rotation.x = lerp_angle(global_rotation.x, 0, turn_speed)
+	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
+	global_rotation.z = lerp_angle(global_rotation.z, 0, turn_speed)
 
 func follow():
 	if is_on_floor():
@@ -205,6 +209,7 @@ func death_effect():
 		# If the explosion was triggered, explode ice sprite,
 		# then become fairy
 		if explosion_triggered:
+			velocity = Vector3.ZERO
 			anim_player.play("sprite_explode")
 			await anim_player.animation_finished
 			anim_player.play("ready_fairy")
@@ -222,7 +227,6 @@ func set_active(_state: bool):
 	return
 
 func ready_fairy_start():
-	is_fairy = true
 	# Move fairy glow local pos down to be with the rest of the node,
 	# Then move the node up to the height the glow was at
 	var y = fairy_glow.position.y
@@ -232,12 +236,19 @@ func ready_fairy_start():
 	hurtbox.health = 1
 
 func ready_fairy_end():
+	is_fairy = true
 	hurtbox.health = hurtbox.max_health
+	anim_player.play("fairy_idle")
 
-func shoot_start():
+func set_aiming_at_target(state: bool):
+	aiming_at_target = state
+
+func shoot_vulnerability_start():
 	# Fairy dies in 1 hit during shoot anim
 	pre_shoot_health = hurtbox.health
 	hurtbox.health = 1
+
+func shoot_shot():
 	# Instantiate bullet
 	var bullet_inst = ice_shot.instantiate()
 	level.add_child.call_deferred(bullet_inst)
@@ -246,6 +257,9 @@ func shoot_start():
 	bullet_inst.look_at(target.global_position)
 	bullet_inst.velocity = ice_shot_speed * -bullet_inst.get_global_transform().basis.z
 
-func shoot_end():
+func shoot_vulnerability_end():
 	# Restore old health after shoot anim
 	hurtbox.health = pre_shoot_health
+
+func play_fairy_idle():
+	anim_player.play("fairy_idle")
