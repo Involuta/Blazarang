@@ -109,7 +109,7 @@ func process_shooting_timer(delta: float):
 	if shoot_timer >= next_shoot_time:
 		shoot_timer = 0.0
 		schedule_next_shot()
-		anim_player.play("shoot")
+		anim_player.play("shoot", .15)
 
 func schedule_next_shot():
 	next_shoot_time = rng.randf_range(shoot_interval_min, shoot_interval_max)
@@ -176,7 +176,9 @@ func process_fairy_movement(delta: float):
 
 func lerp_look_at_walk_dir(turn_speed):
 	if velocity.length_squared() > 0.01:
+		global_rotation.x = lerp_angle(global_rotation.x, 0, turn_speed)
 		global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(velocity.x, velocity.z), turn_speed)
+		global_rotation.z = lerp_angle(global_rotation.z, 0, turn_speed)
 
 func lerp_look_at_target(turn_speed):
 	# Calculate direction to target
