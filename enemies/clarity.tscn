@@ -1448,9 +1448,6 @@ transform = Transform3D(1.42986, 0.00998886, -0.0170402, -0.0125256, 1.41244, -0
 
 [node name="ClarityHead" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2" index="1" instance=ExtResource("3_05q7x")]
 
-[node name="HeadMesh" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/BaseOffsetRotation" index="0"]
-surface_material_override/0 = null
-
 [node name="EnemyHurtbox" type="Area3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead"]
 script = ExtResource("11_ekkw4")
 enemy_name = "ClarityUnbreakablePart"

@@ -66,7 +66,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 @onready var anim_player := $AnimationPlayer
 @onready var hurtbox := $EnemyHurtbox
-@onready var fairy_glow := $FairyGlowMesh
+@onready var fairy_glow := $IceFairyVisuals/FairyGlowMesh
 @onready var root := get_tree().root
 
 var level : Node3D
