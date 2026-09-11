@@ -179,15 +179,14 @@ func lerp_look_at_walk_dir(turn_speed):
 		global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(velocity.x, velocity.z), turn_speed)
 
 func lerp_look_at_target(turn_speed):
-	var vec3_to_target := -global_position.direction_to(target.global_position)
-	global_rotation.x = lerp_angle(global_rotation.x, 0, turn_speed)
-	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(vec3_to_target.x, vec3_to_target.z), turn_speed)
-	global_rotation.z = lerp_angle(global_rotation.z, 0, turn_speed)
-
-func follow():
-	if is_on_floor():
-		jump()
-	lerp_look_at_walk_dir(follow_turn_speed)
+	# Calculate direction to target
+	var dir_to_target = global_position.direction_to(target.global_position)
+	# Target position facing away from the target (why facing away? To make the fairy legs, not the head, point twds the target)
+	var away_pos = global_position - dir_to_target
+	# Calculate what the Transform SHOULD be facing away
+	var target_transform = global_transform.looking_at(away_pos, Vector3.UP)
+	# Smoothly interpolate the current Transform
+	global_transform = global_transform.interpolate_with(target_transform, turn_speed)
 
 func jump():
 	velocity = follow_speed*global_position.direction_to(target.global_position)
