@@ -1,10 +1,10 @@
+GPUParticles3D
 MeshInstance3D
 Node3D
 StaticBody3D
 Generic6DOFJoint3D
 RigidBody3D
 GPUTrail3D
-GPUParticles3D
 CollisionShape3D
 EnemyHurtbox
 Hurtbox

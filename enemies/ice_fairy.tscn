@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="6_sy1g1"]
 [ext_resource type="Texture2D" uid="uid://namwvkk58jhe" path="res://sprites/blurry_circle.png" id="7_7yopq"]
 [ext_resource type="ArrayMesh" uid="uid://d1vjlc1x8tyik" path="res://glb_meshes/long_hexagon_particle_mesh.res" id="8_rq4qr"]
-[ext_resource type="Shader" path="res://shaders/ring_appear.gdshader" id="9_460xm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fp5fu"]
 
@@ -246,7 +245,7 @@ tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/path = NodePath("IceFairyVisuals/Spike0:rotation")
-tracks/3/interp = 2
+tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 1, 3.6, 4.8),
@@ -258,7 +257,7 @@ tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/path = NodePath("IceFairyVisuals/Spike1:rotation")
-tracks/4/interp = 2
+tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0, 1, 3.6, 4.8),
@@ -270,7 +269,7 @@ tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/path = NodePath("IceFairyVisuals/Spike2:rotation")
-tracks/5/interp = 2
+tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0, 1, 3.6, 4.8),
@@ -282,19 +281,19 @@ tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/path = NodePath("IceFairyVisuals/Spike3:rotation")
-tracks/6/interp = 2
+tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 1, 4.8),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 1, 3.6, 4.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(3.48787e-16, 3.48787e-16, 0.20944), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(3.48787e-16, 3.48787e-16, 0.20944), Vector3(3.48787e-16, 3.48787e-16, 0.20944), Vector3(0, 0, 0)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/path = NodePath("IceFairyVisuals/Spike0:position")
-tracks/7/interp = 2
+tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0, 1, 3.6, 4.8),
@@ -306,7 +305,7 @@ tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/path = NodePath("IceFairyVisuals/Spike1:position")
-tracks/8/interp = 2
+tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0, 1, 3.6, 4.8),
@@ -318,7 +317,7 @@ tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/path = NodePath("IceFairyVisuals/Spike2:position")
-tracks/9/interp = 2
+tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0, 1, 3.6, 4.8),
@@ -330,13 +329,13 @@ tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/path = NodePath("IceFairyVisuals/Spike3:position")
-tracks/10/interp = 2
+tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(0, 1, 4.8),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 1, 3.6, 4.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(-0.3, -0.675, 2.08165e-12), Vector3(-0.15, -0.6, 2.08165e-12), Vector3(-0.3, -0.6, 2.08165e-12)]
+"values": [Vector3(-0.3, -0.675, 2.08165e-12), Vector3(-0.15, -0.6, 2.08165e-12), Vector3(-0.15, -0.6, 2.08165e-12), Vector3(-0.3, -0.6, 2.08165e-12)]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
@@ -453,6 +452,18 @@ tracks/19/keys = {
 "args": [],
 "method": &"play_fairy_idle"
 }]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("IceFairyVisuals/Spike0/RingMesh:mesh:material:shader_parameter/trailing_color")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0, 2.9, 3, 4.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.309804, 0.470588, 1, 1), Color(0.35, 0.51, 1, 1), Color(0.35, 0.51, 3, 1), Color(0.309804, 0.470588, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_lsn44"]
@@ -910,6 +921,7 @@ tracks/11/keys = {
 resource_name = "fairy_idle"
 length = 6.0
 loop_mode = 1
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -920,7 +932,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 3, 6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(2.08165e-12, -1, 0.3), Vector3(2.08165e-12, -0.6, 0.3), Vector3(2.08165e-12, -1, 0.3)]
+"values": [Vector3(2.08165e-12, -1, 0.2), Vector3(2.08165e-12, -0.6, 0.3), Vector3(2.08165e-12, -1, 0.2)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -932,7 +944,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 3, 6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(2.08165e-12, -1, -0.3), Vector3(2.08165e-12, -0.6, -0.3), Vector3(2.08165e-12, -1, -0.3)]
+"values": [Vector3(2.08165e-12, -1, -0.2), Vector3(2.08165e-12, -0.6, -0.3), Vector3(2.08165e-12, -1, -0.2)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -944,7 +956,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 3, 6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0.3, -0.6, 2.08165e-12), Vector3(0.3, -1, 2.08165e-12), Vector3(0.3, -0.6, 2.08165e-12)]
+"values": [Vector3(0.2, -0.6, 2.08165e-12), Vector3(0.3, -0.8, 2.08165e-12), Vector3(0.2, -0.6, 2.08165e-12)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -956,7 +968,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 3, 6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(-0.3, -0.6, 2.08165e-12), Vector3(-0.3, -1, 2.08165e-12), Vector3(-0.3, -0.6, 2.08165e-12)]
+"values": [Vector3(-0.2, -0.6, 2.08165e-12), Vector3(-0.3, -0.8, 2.08165e-12), Vector3(-0.2, -0.6, 2.08165e-12)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -1324,19 +1336,75 @@ top_radius = 0.1
 bottom_radius = 0.0
 height = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_72qc7"]
+[sub_resource type="Shader" id="Shader_7edmq"]
+code = "shader_type spatial;
+render_mode blend_add, depth_draw_opaque;
+
+// Controls overall opacity when fading out the entire ring (1.0 = fully visible, 0.0 = invisible)
+uniform float fade_alpha : hint_range(0.0, 1.0) = 1.0;
+
+// Controls progress along the loop (0.0 to 1.2 to allow full spark fade-out)
+uniform float progress : hint_range(0.0, 1.2) = 0.0;
+
+// Length of the intense sparkler tip transition zone
+uniform float spark_length : hint_range(0.01, 0.5) = 0.15;
+
+// Sharpness/decay speed of the white-hot leading tip
+uniform float spark_sharpness : hint_range(1.0, 50.0) = 15.0;
+
+// Shift starting position around the loop (0.25 usually maps to the right side)
+uniform float start_offset : hint_range(0.0, 1.0) = 0.25;
+
+// Colors
+uniform vec4 leading_color : source_color = vec4(4.0, 4.0, 4.0, 1.0); // HDR white-hot tip
+uniform vec4 trailing_color : source_color = vec4(1.0, 0.3, 0.0, 1.0); // Orange ember glow
+
+void fragment() {
+    if (fade_alpha <= 0.0) {
+        discard;
+    }
+
+    // 1. Invert (1.0 - UV.x) to reverse direction from counterclockwise to clockwise
+    // 2. Add start_offset to rotate the starting point to the right side
+    float current_u = fract((1.0 - UV.x) + start_offset);
+    
+    // Calculate distance behind progress with seamless circular wrapping
+    float dist = fract(progress - current_u);
+    
+    // Discard geometry ahead of the leading edge until the initial reveal finishes
+    if (progress <= 1.0 && current_u > progress) {
+        discard;
+    }
+    
+    // Calculate raw tip intensity (1.0 at tip, fading to 0.0 moving backward)
+    float tip_factor = clamp(1.0 - (dist / spark_length), 0.0, 1.0);
+    float spark_intensity = pow(tip_factor, spark_sharpness);
+    
+    // Fade out the spark tip entirely as progress moves from 1.0 to (1.0 + spark_length)
+    float spark_fade = 1.0 - clamp((progress - 1.0) / spark_length, 0.0, 1.0);
+    spark_intensity *= spark_fade;
+    
+    // Mix between the warm trailing body and the bright sparkler tip
+    vec3 final_color = mix(trailing_color.rgb, leading_color.rgb, spark_intensity);
+    
+    ALBEDO = final_color;
+    EMISSION = final_color * (1.0 + spark_intensity * 4.0) * fade_alpha;
+    ALPHA = fade_alpha;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yvpgd"]
 render_priority = 0
-shader = ExtResource("9_460xm")
+shader = SubResource("Shader_7edmq")
 shader_parameter/fade_alpha = 1.0
 shader_parameter/progress = 1.2
 shader_parameter/spark_length = 0.15
 shader_parameter/spark_sharpness = 1.0
 shader_parameter/start_offset = 0.25
-shader_parameter/leading_color = Color(3, 3, 3, 1)
-shader_parameter/trailing_color = Color(0.470588, 0.992157, 1, 1)
+shader_parameter/leading_color = Color(1, 1, 1, 1)
+shader_parameter/trailing_color = Color(0.309804, 0.470588, 1, 1)
 
 [sub_resource type="TorusMesh" id="TorusMesh_xm0to"]
-material = SubResource("ShaderMaterial_72qc7")
+material = SubResource("ShaderMaterial_yvpgd")
 inner_radius = 0.1
 outer_radius = 0.12
 
@@ -1453,12 +1521,13 @@ process_material = SubResource("ParticleProcessMaterial_m76nu")
 draw_pass_1 = ExtResource("8_rq4qr")
 
 [node name="IceFairyVisuals" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 
 [node name="Cap" type="MeshInstance3D" parent="IceFairyVisuals"]
 mesh = SubResource("SphereMesh_twu4l")
 
 [node name="Spike0" type="MeshInstance3D" parent="IceFairyVisuals"]
-transform = Transform3D(1, 1.58819e-22, 5.23785e-30, -1.58819e-22, 0.999999, -2.84193e-15, -5.23785e-30, 2.84193e-15, 0.999999, 2.08165e-12, -1, 0.3)
+transform = Transform3D(1, 1.58819e-22, 5.23785e-30, -1.58819e-22, 0.999999, -2.84193e-15, -5.23785e-30, 2.84193e-15, 0.999999, 2.08165e-12, -0.75, 0.3)
 mesh = SubResource("CylinderMesh_5iovp")
 
 [node name="RingMesh" type="MeshInstance3D" parent="IceFairyVisuals/Spike0"]
@@ -1466,7 +1535,7 @@ transform = Transform3D(1, -2.50388e-23, -1.29184e-23, 2.50388e-23, 1, 3.26397e-
 mesh = SubResource("TorusMesh_xm0to")
 
 [node name="Spike1" type="MeshInstance3D" parent="IceFairyVisuals"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -1, -0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.75, -0.3)
 mesh = SubResource("CylinderMesh_5iovp")
 
 [node name="RingMesh" type="MeshInstance3D" parent="IceFairyVisuals/Spike1"]
