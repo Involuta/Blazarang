@@ -1850,6 +1850,7 @@ If you use a stabilizer while you’re still stable, you’re briefly invincible
 
 Consider ax reworks to make it more fun and usable
 Idea: detonating the ax also recalls it, removing the floating ax continuous attack and increasing gameplay momentum (which also fits Cotu’s character more)
+To keep enemy and boss behavior consistent and simple, thick enemy collision layer also deflects (aka detonates) the ax
 
 Idea: make rang techniques more complex so they feel more like unlocking skills in a martial art than a direct boost in strength
 Idea: instead of just 1 special, you have multiple specials you can use like cooldowns in Overwatch, except instead of spending time to use the cooldown again, you spend buffs. To choose which special to use, press the corresponding special button
@@ -2922,10 +2923,12 @@ No name is passionate about fighting and wants to become elite (i.e. enter the g
 No name used to be subservient to his brothers (mainly Pilot since he was bossy) because he had no voice. After Pilot and Greg worked out their differences, no name gained the freedom to think for himself and self-actualized. He realized he was genuinely passionate about fighting and became the brothers’ leader. He communicates to his brothers mainly by doing some vague gesture that the brothers miraculously interpret correctly every time
 
 Jab Crab aka Jac Boss (just an idea)
-Heavily armored lobster in a tiny arena surrounded by walls/floor spikes/floor shark teeth/whatever
-Has 2 big claws attached by long extendable/retractable tube arms (think of Claw Man, your My Hero Academia OC)
+Heavily armored lobster with 2 big claws attached by long extendable/retractable tube arms (think of Claw Man, your My Hero Academia OC)
+Idea: his icon floats in front of his forward eye (left eye if he’s in orthodox stance, right eye if southpaw) and telegraphs his attacks by rotating, changing in size, and brightening
+
+Realm is a tiny arena surrounded by walls/floor spikes/floor shark teeth/whatever
 Can catch the rose and throw it aside and/or parry it
-Approaches slowly and cautiously with jabs (reaching out and clasping with the claw)
+Approaches slowly and cautiously with jab grabs (reaching out and clasping with the claw). If he lands a grab, he holds Cotu in his claw, which deals minor damage. A moment later, he squeezes his claw to deal high damage over time. Cotu can dodge while grabbed to get free
 Feints constantly
 Jab feint
 Dash feint (ducks/leans without actually moving very much)
@@ -2946,6 +2949,9 @@ When close enough, JC attaches a tether to your body. It deals damage over time 
 JC plans to dash in aggressively, attach a tether, then constantly back away while jabbing
 Inspired by UFC fighters
 Reference: Alex Pereira vs Khalil Rountree
+Lore/story ideas:
+Coached by Long Arms, a huge bully who talks like Sean Strickland
+Has some level of realm control. Cotu comments that realm control is extremely rare and difficult, so this is impressive for a beginner and shows he has high potential
 
 Jab Crab’s Goofy Friend
 Goofy, weak looking character who wants nothing to do with fighting and is only with Jab Crab for emotional support (and to give him his honest feedback)
@@ -3450,9 +3456,10 @@ The gauntlet can spawn any member of any of its previous variants to help train 
 After Blackstar, the gauntlet has never made another variant, and she’s been the latest variant far longer than anyone else has
 Some people think Blackstar cannot reincarnate because she’s already perfect (X, Cotu, her ancestors)
 Blackstar knows she isn’t perfect and feels like a failure for not reincarnating longer than any of her ancestors
-Blackstar feels helpless because no matter how long and hard she trains, she doesn’t feel like she improved at all, and no new variant appears from the spawner. She has no idea what else to do to reincarnate
-This is made worse by the fact that many other gods have improved significantly after the tournament, but Blackstar hasn’t changed at all
-Blackstar thinks that if she ever feels proud of herself, she’ll lose all motivation to improve and truly fail
+Blackstar feels helpless because no matter how long and hard she trains, no new variant appears from the spawner. She has no idea what else to do to reincarnate
+This is made worse by the fact that many other gods have improved significantly after the tournament, but Blackstar hasn’t changed at all (she gets more experience in different matchups, but doesn’t get new abilities or increase her power)
+Blackstar thinks that if she ever feels proud of herself, she’ll lose all motivation to improve and truly fail - caused by OCD
+Has OCD, has low self-esteem, and distrusts others who claim to like and admire her. She obsessively fears the thought that they only like her because she’s the best and pushes herself to continue being the best
 Idea: Elite Gunner looks at Cotu’s upgrades
 Elite Gunner is happy, but also ashamed since her master isn’t making the same progress
 Cotu wants to know how the Gauntlet really feels
@@ -3768,22 +3775,11 @@ Jab Crab and Cotu conversation about how holding back works
 JC: “Wait, if you get experience points from winning fights, why doesn’t X just let you win?”
 Cotu: “It all has to deal with the soul. My soul needs to be convinced that the fight is real, otherwise it doesn’t reward me the XP.”
 JC: “Ohh.”
-Cotu: “Yeah. That’s why I like X so much. He puts on a convincing act.”
+Cotu: “Yeah. That’s why I like X. He puts on a convincing act.”
 JC: “His personality’s an act?”
 Cotu: “I don’t know. That’s how good it is.”
-JC: “Are you sure that’s not just…the way he is?”
-Cotu: “Nah. Maybe my soul thinks he’s a menace, but I think he’s a mushy little sweetheart on the inside.” JC chuckles. “Don’t tell him I said that. He’d hurl me a hundred light years into the void.”
-X leaves Gauntlet Gym 1
-Cotu: “Leaving already?”
-X: “I need to train for the gala as well, and I won’t be challenged at this gym…and at this point, neither will you.”
-Cotu: “We can keep fighting each other.”
-X looks aside. “The truth is…I can’t stand seeing you this weak, knowing what you’re capable of. I want to fight you at your best.”
-Cotu: “X…”
-X: “Also, I’m sick of holding back. Containing my power is exhausting.”
-Cotu’s expression relaxes
-X collects himself for a moment: “If you’re not back to full strength by the time the gala begins,” X’s face ignites. “I will find you, and I will hurl you a hundred light years into the void.”
-Cotu nods. “Understo-”
-X teleports out
+JC: “What if that’s just…the way he is?”
+Cotu: “Nah. He’s a mushy sweetheart on the inside.” JC chuckles. “Don’t tell him I said that. He’d hurl me a hundred light years into the void.”
 Cutscene that plays when you reach Gauntlet Gym 2
 While its hype theme song plays, Gator jumps up and down on top of a pile of dead bodies containing everyone from Gauntlet Gym 1
 Music inspiration: Laser Dance from Ocean’s Twelve, aka Khamzat Chimaev’s theme song: https://www.youtube.com/shorts/u8taxTK_6kw
@@ -3792,7 +3788,6 @@ It spots a nearby gauntlet shuttle, gets a wicked grin, and sprints to it
 It pops its head up from under the desk and rests it on the console, punches in some coordinates, then flies the ship into space while head-dancing on the console
 In the shuttle, to put in the coordinates for Gauntlet Gym 2, Gator simply spins on top of the console in a static pose
 While dancing in the shuttle, Gator moves its head back and forth in a downward facing arc
-A title appears: [number] [time units] UNTIL IT ARRIVES. The camera then cuts back to the player
 Cutscene that plays when Grow-a-Gator reaches Gauntlet Gym 2
 Gator crash lands its ship. Its theme song starts playing as people turn to look at the wreckage. It somehow ends up on top of a high place, and jumps up and down and clumsily/slightly unclearly screams to all the fighters just as the song gets good: “rrrrrrrrrrAAAAHHHHH! I’LL BITE EVERYBODY! I’LL KILL EVERYBODY! EVERYONE HERE! I’LL KILL EVERYBODY! KILL KILL KILL KILL KILL KILL KILL KILL KELELELAH (incoherent babbling) RAAAAAHHHHH!!!”
 As Gator monologues, people prepare to fight it
@@ -3838,6 +3833,8 @@ Cutscene that plays when Cotu makes it to a high rank in the gala (or makes it t
 Blackstar is grateful that Cotu made it this far so he can help her reincarnate. She’s also grateful that her friend is back
 She walks up to him and hugs him. After a moment of surprise and hesitation, he hugs her back. He has a look of sadness that turns into quiet resolution
 Context: the way this scene is written, Cotu held back against Blackstar in the final tournament match. He regrets it because he thinks it caused Blackstar to not reincarnate. He plans not to hold back in the gala
+
+Story Progression Arcs/Episodes (uses Plot Idea 3C)
 
 Notes for full version:
 Idea: for certain levels/bosses, give the player a limited number of attempts before the level/boss becomes unavailable for the rest of the playthrough
@@ -3973,10 +3970,10 @@ Cotu sits with Blackstar as she cries.
 …
 Blackstar: “I’m so disappointed.”
 …
-Blackstar: “I love them so much. They gave me everything. And I let them down. They deserve someone so much better than me.”
+Blackstar: “I love them so much. They gave me everything I have. And I let them down. They deserve someone better than me.”
 Cotu disagrees
-Cotu tells her that the gauntlet will love her no matter what happens
-Blackstar: “I know that…I just wish I could’ve done more for them.”
+Cotu tells her that the gauntlet will love her no matter what happens. Blackstar doesn’t say this out loud, but she doubts this
+Blackstar: “I wish I could’ve done more for them.”
 …
 Some upcoming galas offer the gauntlet a chance to compete in them using the new reincarnation, but the gauntlet refuses, accepting defeat fairly (and proving that Blackstar truly did move on).
 Afterward, Cotu has one last chance to upgrade himself, or enter the tournament as-is.
@@ -4040,7 +4037,7 @@ Elite Gunner and Sentinel
 Long Arms ← disqualified due to not showing up
 Triplets
 Mites
-Sometime during Stage 2, Elite Gunner and Sentinel hear about the attack on Gym 1. Sentinel suggests allowing Gator to compete since it’s clearly passionate. Gunner disagrees since Gator was late and didn’t treat fighters with respect. Sentinel suggests that the gauntlet rehabilitates Gator since it’s full of potential. She acknowledges Sentinel’s point and tells him if Gator learns some manners, then the gauntlet will consider taking Gator under its wing. If not (and in all likelihood), the gauntlet will imprison it in Gauntlet Central
+Sometime during Stage 2, Elite Gunner and Sentinel hear about the attack on Gym 1. They warn the others about the terrorist and prepare their defenses. Sentinel suggests rehabilitating Gator while it’s in prison. EG reluctantly relents since it could be a newborn, but insists that someone outside the gauntlet does the rehabilitation, as “the gauntlet doesn’t cater to terrorists.”
 Right as Cotu enters his final Stage 2 fight, Long Arms arrives at Gym 2. He argues with EG and Sentinel about how his DQ is unfair until the conversation is interrupted by Gator’s arrival. LA tells the gauntlet that “this ain’t over yet” before all 3 of them plus everyone else in the gym attack Gator simultaneously
 Cotu defeats his opponent, then Gator instantly kills Cotu’s opponent and becomes Cotu’s new opponent
 Cotu teaches Gator some manners, then shows the gauntlet that Gator’s behaving. The gauntlet agrees and Gator is officially eliminated from the gala
@@ -4113,6 +4110,84 @@ Counterpoint: the lack of repetition may be a good thing. Blazarang is closer in
 This feels more serious than Blazarang should be; it’s about a bunch of gods hanging out and competing for fun, so why is Blackstar’s ascension taken so seriously?
 Counterpoint: just because Blackstar’s ascension is the main goal doesn’t mean it’s a serious matter
 Without the gala, we don’t get to see competitive characters’ competitive sides (Blackstar, X, Future Blade) and casual characters’ conflict with them (Cotu, Triplets, Flora)
+Plot Idea 6: The Universal Gala
+Different gods and organizations (e.g. the gauntlet, Mike) host their own galas, which are qualifier competitions for the universal tournament
+Idea: Mike’s gala circuit is more like a robotics competition than an MMA competition
+Cotu’s journey: gauntlet training-only gym → gauntlet gala qualifier → gauntlet gala at Gauntlet Central → universal tournament
+Note: when referring to the universal tournament, people say “the tournament” when only the current tournament is in conversation, but say “T1” and “T2” when both tournaments are in conversation
+Cotu can participate in both ranked and unranked fights. If Cotu dies in a ranked fight, the game resets him back in time to before he lost. If Cotu dies in an unranked fight, the game continues time as normal
+Gym 1: Low-Level Gauntlet, Training-Only
+All matches are unranked. Used by beginners and hobbyists
+The player can fight anyone at the gym at any time
+Gauntlet Variant 1
+Jab Crab
+Mite Queen
+X meets Cotu at Gym 1 to accelerate Cotu’s growth. X then leaves to participate in a different gala circuit while Cotu leaves Gym 1 as well
+Meanwhile, Grow-a-gator arrives at Gym 1
+Before entering the next stage of competition, the player can choose to fight gods in their actual realms
+Which non-participating gods should be available at this point? Maybe everyone except angels and demons? 
+Gym 2: Gauntlet Gala Qualifier
+Between matches, the player rests in a hub room where they have different options
+The player can fight in a ranked match to progress the story. After winning a ranked match, the opponent in the “ranked match option” changes. After going through all opponents, the player wins the competition and can move on to the next area
+Long Arms
+Boss 2
+Boss 3
+Why only 3 total? The min number of people you can fight in order to win a national sambo or judo tournament is 3
+The player can practice with non-participants, e.g. Elite Gunner and Sentinel
+The player can practice with the Triplets, members of his corner who met up with him here and travel with him afterward. They’re essentially his training dummies
+After the qualifier ends, Grow-a-gator attacks and Cotu tames it
+Before the next stage of competition begins, the player can choose to fight gods in their actual realms OR fight non-participating gods at Gauntlet Central during the downtime before the gala begins
+Gym 3: The Gauntlet Gala at Gauntlet Central
+Same hub room system as Gym 2
+Same ranked match system as Gym 2
+Future Blade
+Flora
+Boss 3
+Boss 4
+Why not just 3? The gauntlet gala circuit is huge
+Same unranked match system as Gym 2. The player has the option to fight gods at Gauntlet Central they didn’t fight during downtime
+Candy Cat
+Same Triplets corner as Gym 2
+Player has one last chance to fight gods in their actual realms
+The Universal Tournament
+Hub room only contains the ranked matches and the corner
+Ranked opponents:
+Turbo Jester (?)
+Neuro
+Tempered X
+Blackstar
+Fun fact: 4 opponents may seem like a low number to you, but it’s common in top level sports tournaments. In Olympic wrestling, a wrestler only needs to beat 4 opponents in a single-elimination tournament bracket to win the gold medal. Same goes for Olympic boxing (4 or 5 opponents depending on your seed and the total # of fighters in your weight class). In the NBA playoffs, a team only needs to beat 4 other teams to win the championship (although the team has to win a best of 7 against each opponent). The World Cup requires 8 wins though
+After the tournament, the player can choose to end the game happily (good ending) or pursue more power (singularity ending) to cap off Cotu’s character arc. Perhaps the singularity ending is only possible by praying and by defeating all gods
+Note: In this story, it’s Cotu, not X, who feels empty and unfulfilled, which makes far more sense for their celestial objects. X is a shining star who guides others, while Cotu is a black hole who consumes and is never satisfied
+In the hubs, the player can talk to nearby NPCs and pray to Dev, in which Cotu talks to himself
+Cotu tells Dev that he has fun fighting, but questions whether the tournament is all he’ll be doing for the rest of eternity. “Is this all we’ll be doing? Is this really the only thing we were made for?”
+It makes sense that Cotu’s feeling empty after his win since his one goal in life has been accomplished. Deep down, he doubts that other people can understand how he feels since they are still pursuing the championship
+His emptiness also matches the emptiness of a black hole. Black holes always want more but are never filled
+Cotu does have fun fighting and being with others, but to him, they’re not so much deeply fulfilling and satisfying for his purpose and more like distractions. Every time a distraction ends, Cotu is led back into existential turmoil
+Cotu tells Dev about what others think about their purpose in life
+X is simple minded. He understands that this universe is shallow and that his only purpose is to fight until the end of time. He accepts this fully since fighting is the only thing he wants to do
+Cotu’s glad that X is satisfied with just this. Cotu feels like something’s missing, but he doesn’t know what
+Pilot gets scared thinking too much about his purpose, but as long as he’s there for his brothers, he feels secure
+Cotu tells Dev that he completely understands Pilot’s POV. “I get it. It’s nice being around the people you care about. But…if I’m being honest…” Cotu looks around. “It-it feels wrong to say this, but…wouldn’t you get…bored? If being with others is all you do? Maybe there’s something wrong with me, but it just doesn’t seem right.”
+Greg doesn’t see the issue. Who cares what your purpose is? Just do what you wanna do
+Cotu: “Ah, Greg. Ignorance is bliss, right? Then again, it’s gotta feel a lot better than…thinking about things like this. All the time… Heh, I might’ve underestimated Greg. He may just be the smartest of us all.”
+No name wants to figure out how to talk
+All 3 brothers also want to find their realm
+Cotu: “I think that might be what I need. A goal to work towards. Now that I’ve won the first tournament, I just need something else to work towards. But what could be bigger than that?” “...Why am I thinking bigger? Being the most powerful god in the universe is already a lot to ask, hehe. I guess there’s nowhere to go but down.”
+Cotu never had this discussion with the gauntlet. He always thought they were too busy to have a sit down like this. “Besides, it’s obvious what they want in life. All they want to do is be the best. I could see them getting the belt and defending it till the end of time. But they’ll have to get through me first.”
+These existential doubts are what caused Cotu to upgrade his powers after T1. He kept pushing and pushing until he finally reached the singularity, forcing Jessica to reset his post-T1 memories and reset his powers
+Idea: he secretly trained with Mike, who wanted to achieve a singularity of his own
+Good ending events:
+Cotu takes his own advice (that he gave Blackstar) and decides that the skills available to him in his current upgrade tree are enough, and he doesn’t need power and success to be happy
+Maybe Jessica appears and tells him that he passed her test
+Singularity ending events:
+At some point, Jessica explains that Dev left and didn’t hear any of Cotu’s prayers, but she heard everything
+Cotu gives into temptation and attempts to reach the singularity
+His friends attempt to intervene, but Jessica appears and freezes Cotu
+She explains that she deleted his post-T1 memories and removed his powers because he reached the singularity, which nearly crashed the universe simulation. She gives his friends one last chance to say goodbye to him before she deletes him forever, but Mike appears
+Mike asks Jessica if it’s possible to keep Cotu in the universe so long as he’s contained, and she agrees since Mike is a robot like her (Pilot: “aren’t we all, kind of robots? We’re all programs running on a computer-”)
+The player, now playing as Singularity Cotu, fights Mike
+Post-fight events undecided
 Character interactions that are the same regardless of plot
 Blackstar and her coach, Gauntlet Variant 97
 We see a compilation of Blackstar training and getting hurt. The camera focuses on her face throughout the compilation
@@ -4129,14 +4204,22 @@ Blackstar looks away ashamed
 97, calmly: “If you disagree with my teaching methods, then replace me.”
 Blackstar: “n-no!”
 97 turns her back to Blackstar and talks behind her over her shoulder. “I have no problem with it. It’s up to you to decide who’s best for you. You’re gauntlet incarnate, after all.”
-Blackstar: “I-...I need you, 97. You’re the only one who pushes me this hard. You’re the only one who understands what we have to do. No one else is willing to do this. No one else is willing…to…”
+Blackstar: “I-...I need you, 97. You’re the only one who pushes me like this. You, y-you understand how much work we need to do. N-no one else is willing to do what you do. No one else is willing…to…”
 97 turns back towards Blackstar. “I agree with you. This is what makes us elite.”
-97 turns her head away from Blackstar out into the distance. “We gauntlet variants aren’t born with the powers that the elite gods have. We have to make up for our difference in power with hard work and tactical strategy. Crucially, we need practice to perfect our execution, and true practice does not exist without pain.”
+97 turns her head away from Blackstar out into the distance. “We gauntlet variants aren’t born with the powers that the other elite gods have. We have to make up the difference in power with hard work and strategy. Most importantly, we need practice to perfect our execution, and true practice requires pain.”
 Blackstar: “...exactly.”
-97, solemnly: “You are what the gauntlet needs, Blackstar. You carry the legacy of our people in your hands, and you will carry us to victory. I will do everything in my power to make you the best fighter in the universe, and if not, I will make you reincarnate into someone who is.”
+97 expresses approval in some subtle way. 97 turns and kneels down to meet Blackstar’s eyes. Solemnly: “You are what the gauntlet needs, Blackstar. You carry the legacy of our people in your hands, and you will carry us to victory. I will do everything in my power to make you the best fighter in the universe…or I will make you reincarnate into someone who is.”
 Blackstar looks stressed, but resolved
 Bonus Lore:
-98 is considered a failure. He nearly lost the tournament to a fighter he should have mopped the floor with, and the immense shame caused him to reincarnate immediately
+98 is considered a shocking failure. He nearly lost the tournament to a fighter he should have mopped the floor with. The immense shame caused him to reincarnate immediately
+EG and Sentinel scolding a troublemaker/sore loser and hating books
+Loser argues with gauntlet staff and the winner
+Sentinel obliterates Loser
+EG, loudly and sternly: “Since some people refuse to listen, we’ll go over the rules ONE MORE TIME. 1: Don’t be a sore loser. 2: No violence outside a realm room (Sentinel: unless we’re the ones doing it). And finally: No. BOOKS.”
+EG points her gun at Pilot’s book and blasts it. No name pulls him out of the way. She and other gauntlet staff unload countless shots into the book. Pilot cowers in fear.
+EG: “Books are degenerate time wasters that have no place in our gym. If we see ANYONE break these rules again, it’s immediate execution. Are we clear? Just say yes!”
+Everyone: “Yes!!!”
+EG: “Dismissed.”
 Idea: Sean Strickland god overhears Future Blade and his friends gossiping about him and starts beef
 After fighting FB, Sean god becomes friends with him because he respects him as a fighter
 FB gossipped about him to tick him off on purpose so that they could fight without FB having to ask to spar Sean god himself
@@ -4171,18 +4254,6 @@ Pilot, in a higher pitched voice: “I-I-I’m sorry. It’s just, people are us
 X: “Relax. I was joking.”
 Pilot: “...ah, of, of course! You were! Hahahah! That’s so funny!”
 X and Pilot just stand in silence
-Greg remembering X
-Pilot is surprised that Greg is trying to get to know X, as Pilot thought X was famous
-Pilot: “You don’t remember him? He was one of the top contenders for a while. A lot of people thought he’d win the whole thing.”
-Greg squints at X
-Greg: “Wait…oh! Oh, I remember now! Yeah, you were the “Star Guy”! *sigh* I-I completely forgot about you!”
-X’s posture shifts: “...you forgot me?”
-Greg: “Yeah, I did, I…er, oh, sorry man. My bad.”
-X: “The blame is on me. I failed too soon, and allowed you to forget me. Next time will be different.”
-X approaches Greg. Greg gets nervous
-X: “Greg, I promise you: after the next tournament, you—along with the rest of the entire universe—will never forget me.”
-Greg, nervously: “wow, that’s quite a statement. Well, good luck with that, man!”
-X nods
 Greg, Pilot, no name, and X playing Go Fish (or some other card game that requires knowledge of your opponents’ cards)
 X wants to win at Go Fish to prove his own skill. He doesn’t cheat because he’s not as insecure about himself as no name
 Pilot wants to mess around a bit, perhaps to encourage the others not to take the game so seriously, and make sure things stay civil
