@@ -3970,10 +3970,10 @@ Cotu sits with Blackstar as she cries.
 …
 Blackstar: “I’m so disappointed.”
 …
-Blackstar: “I love them so much. They gave me everything. And I let them down. They deserve someone so much better than me.”
+Blackstar: “I love them so much. They gave me everything I have. And I let them down. They deserve someone better than me.”
 Cotu disagrees
-Cotu tells her that the gauntlet will love her no matter what happens
-Blackstar: “I know that…I just wish I could’ve done more for them.”
+Cotu tells her that the gauntlet will love her no matter what happens. Blackstar doesn’t say this out loud, but she doubts this
+Blackstar: “I wish I could’ve done more for them.”
 …
 Some upcoming galas offer the gauntlet a chance to compete in them using the new reincarnation, but the gauntlet refuses, accepting defeat fairly (and proving that Blackstar truly did move on).
 Afterward, Cotu has one last chance to upgrade himself, or enter the tournament as-is.
