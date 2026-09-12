@@ -411,8 +411,8 @@ _data = {
 "spawn": SubResource("Animation_4lsew")
 }
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_3njra"]
-radius = 0.3
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jlgm8"]
+radius = 0.2
 
 [sub_resource type="Gradient" id="Gradient_v4t7x"]
 offsets = PackedFloat32Array(0, 0.72973)
@@ -508,13 +508,15 @@ libraries = {
 collision_layer = 8
 collision_mask = 18
 script = ExtResource("3_6opei")
-frostbite_buildup = 9
+damage = 6
+frostbite_buildup = 6
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHitbox"]
-shape = SubResource("SphereShape3D_3njra")
+transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_jlgm8")
 
 [node name="FlightParticles" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 0.596369)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 0.45)
 amount = 18
 lifetime = 0.36
 local_coords = true
