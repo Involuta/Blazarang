@@ -78,6 +78,7 @@ var homing_targets_added := 0 # Increments for every homing buff applied
 # Buff list is in Globals
 var next_roserang_buff_index := 0
 var normal_throw_roserang_self_damage := 18.0
+var power_throw_unlocked := false
 var power_throw_roserang_self_damage := 24.0
 var roserang_throw_charging := false # Set to true when throw roserang button is pressed, set to false when released
 @export var roserang_power_throw_min_charge_time := 0.25
@@ -514,8 +515,8 @@ func _physics_process(delta):
 		axrang_buff_decay_timer = 0.0
 	
 	if roserang_instances.is_empty():
+		# Instant rethrow
 		if roserang_instant_rethrow_queued:
-			# Instant rethrow
 			roserang_instant_rethrow_queued = false
 			
 			# If you're instant rethrowing after a roserang special was just used, clear roserang buffs
@@ -543,22 +544,49 @@ func _physics_process(delta):
 				ROSERANG_THROW_TYPES.HOMING:
 					throw_roserang_with_script(homing_script)
 			Globals.award_score(Globals.INSTANT_RETHROW_SCORE)
-		# Power throw charge
-		# Why not just use is_action_pressed? Because you must only check whether Cotu is busy on the first frame the button is pressed, not afterward (because he'd already be busy); i.e. you can't do "is_action_pressed and !busy" to increment charge time
-		elif Input.is_action_just_pressed("ThrowRoserang") and !busy:
-			roserang_throw_charging = true
-			set_busy(true)
-		# Normal and power throw are triggered on button release
-		elif Input.is_action_just_released("ThrowRoserang") and roserang_throw_charging:
-			roserang_throw_charging = false
-			if roserang_throw_charge_time >= roserang_power_throw_min_charge_time:
-				# Replace these 3 lines with an anim tree line once you have the power throw anim
+		elif power_throw_unlocked:
+			# Power throw charge
+			# Why not just use is_action_pressed? Because you must only check whether Cotu is busy on the first frame the button is pressed, not afterward (because he'd already be busy); i.e. you can't do "is_action_pressed and !busy" to increment charge time
+			if Input.is_action_just_pressed("ThrowRoserang") and !busy:
+				roserang_throw_charging = true
 				set_busy(true)
-				roserang_power_throw()
-				set_busy(false)
-			else:
-				anim_tree.set(anim_tree_param_path_base + "NormalThrowRoserang", true)
-			roserang_throw_charge_time = 0.0
+			# Normal and power throw are triggered on button release
+			elif Input.is_action_just_released("ThrowRoserang") and roserang_throw_charging:
+				roserang_throw_charging = false
+				if roserang_throw_charge_time >= roserang_power_throw_min_charge_time:
+					# Omnidirectional power throw
+					if shoulder_zoomed_in:
+						# Replace these 3 lines with an anim tree line once you have the power throw anim
+						set_busy(true)
+						roserang_power_throw()
+						set_busy(false)
+					# Lateral power throw
+					else:
+						#replace the code below when you can
+						anim_tree.set(anim_tree_param_path_base + "NormalThrowRoserang", true)
+				else:
+					# Omnidirectional normal throw
+					if shoulder_zoomed_in:
+						# Replace these 3 lines with an anim tree line once you have the power throw anim
+						set_busy(true)
+						roserang_power_throw()
+						set_busy(false)
+					# Lateral normal throw
+					else:
+						anim_tree.set(anim_tree_param_path_base + "NormalThrowRoserang", true)
+				roserang_throw_charge_time = 0.0
+		else:
+			# If power throw isn't unlocked, normal and power throw are triggered on button press
+			if Input.is_action_just_pressed("ThrowRoserang") and !busy:
+				# Omnidirectional normal throw
+				if shoulder_zoomed_in:
+					# Replace these 3 lines with an anim tree line once you have the power throw anim
+					set_busy(true)
+					roserang_power_throw()
+					set_busy(false)
+				# Lateral normal throw
+				else:
+					anim_tree.set(anim_tree_param_path_base + "NormalThrowRoserang", true)
 	# Instant rethrow is triggered on button press
 	elif Input.is_action_just_pressed("ThrowRoserang") and not roserang_instant_rethrow_queued:
 		start_roserang_instant_rethrow_timer()
