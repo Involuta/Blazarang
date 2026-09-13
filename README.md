@@ -1829,13 +1829,17 @@ Anim tree checks whether super charge time > min super charge time to know wheth
 Make Icon emit particles continuously on full charge
 Make Icon flash with light and explode with particles on release
 
-Current task
 Snowflake Boss: Comet/Clarity
 See Blazarang Long Tasks
 
 Remove SFX from roserang since it should be present in hurtboxes
 
 Remove power throw from roserang since it does the same thing as the ax. Replace it with an omnidirectional rose petal throw (when aiming up/down, the rose petal is simply tilted up/down)
+In power throw script, replace straight mvmt with roserang petal mvmt
+Current task
+In Cotu’s script, make the roserang use the power throw script when aiming, not when holding the throw button
+In Cotu’s script, make the instant rethrow use the power throw script when aiming
+Rename the power throw to the omnidirectional throw in all places
 
 Add UI icon or crosshair to show how close to the center of the screen a target needs to be in order for homing instant rethrow to target it (like what Soldier 76’s ultimate does)
 
@@ -3780,11 +3784,17 @@ JC: “His personality’s an act?”
 Cotu: “I don’t know. That’s how good it is.”
 JC: “What if that’s just…the way he is?”
 Cotu: “Nah. He’s a mushy sweetheart on the inside.” JC chuckles. “Don’t tell him I said that. He’d hurl me a hundred light years into the void.”
-Cutscene that plays when you reach Gauntlet Gym 2
+Cutscene of Grow-a-Gator’s arrival at Gauntlet Gym 1
+Grow-a-gator holds an invitation to the gauntlet gala and presents it to a gauntlet staff member
+The staff member kneels down and takes the invite, and sympathetically tells Gator that the registration for the gala has already ended and the competition has already begun at Gauntlet Gym 2
+Gator looks sad, grabs the invite back, and boops the staff members foot with its nose a couple times
+The staff member apologizes. He invites Gator to watch the matches at Gym 2 or to train with others here at Gym 1
+Gator looks over at the gods fighting just behind the staff member. Gator then drops the invite and looks down at it one more time. Camera switches to a close up of Gator’s neutral facial expression
+Cutscene that plays when you reach Gauntlet Gym 2: Grow-a-gator’s Attack
 While its hype theme song plays, Gator jumps up and down on top of a pile of dead bodies containing everyone from Gauntlet Gym 1
 Music inspiration: Laser Dance from Ocean’s Twelve, aka Khamzat Chimaev’s theme song: https://www.youtube.com/shorts/u8taxTK_6kw
-While Gator jumps on the pile, some souls can be seen flying out of the pile
-It spots a nearby gauntlet shuttle, gets a wicked grin, and sprints to it
+While Gator jumps on the pile, some souls can be seen flying out of the pile and some background scenery is damaged and burning
+It spots a nearby gauntlet shuttle, gets a wicked grin, and sprints to it. A gauntlet building collapses in the background
 It pops its head up from under the desk and rests it on the console, punches in some coordinates, then flies the ship into space while head-dancing on the console
 In the shuttle, to put in the coordinates for Gauntlet Gym 2, Gator simply spins on top of the console in a static pose
 While dancing in the shuttle, Gator moves its head back and forth in a downward facing arc
