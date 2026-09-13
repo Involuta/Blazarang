@@ -536,11 +536,7 @@ func _physics_process(delta):
 			
 			match(roserang_throw_type):
 				ROSERANG_THROW_TYPES.ROSE:
-					# If aiming, use omnidirectional throw
-					if shoulder_zoomed_in:
-						throw_roserang_with_script(rose_power_throw_script)
-					else:
-						throw_roserang_with_script(rose_script)
+					throw_roserang_with_script(rose_script)
 				ROSERANG_THROW_TYPES.HOMING:
 					throw_roserang_with_script(homing_script)
 			Globals.award_score(Globals.INSTANT_RETHROW_SCORE)
@@ -550,43 +546,23 @@ func _physics_process(delta):
 			if Input.is_action_just_pressed("ThrowRoserang") and !busy:
 				roserang_throw_charging = true
 				set_busy(true)
-			# Normal and power throw are triggered on button release
+			# If power throw is unlocked, normal and power throw are triggered on button release
 			elif Input.is_action_just_released("ThrowRoserang") and roserang_throw_charging:
 				roserang_throw_charging = false
+				# Power throw
 				if roserang_throw_charge_time >= roserang_power_throw_min_charge_time:
-					# Omnidirectional power throw
-					if shoulder_zoomed_in:
-						# Replace these 3 lines with an anim tree line once you have the power throw anim
-						set_busy(true)
-						roserang_power_throw()
-						set_busy(false)
-					# Lateral power throw
-					else:
-						#replace the code below when you can
-						anim_tree.set(anim_tree_param_path_base + "NormalThrowRoserang", true)
-				else:
-					# Omnidirectional normal throw
-					if shoulder_zoomed_in:
-						# Replace these 3 lines with an anim tree line once you have the power throw anim
-						set_busy(true)
-						roserang_power_throw()
-						set_busy(false)
-					# Lateral normal throw
-					else:
-						anim_tree.set(anim_tree_param_path_base + "NormalThrowRoserang", true)
-				roserang_throw_charge_time = 0.0
-		else:
-			# If power throw isn't unlocked, normal and power throw are triggered on button press
-			if Input.is_action_just_pressed("ThrowRoserang") and !busy:
-				# Omnidirectional normal throw
-				if shoulder_zoomed_in:
 					# Replace these 3 lines with an anim tree line once you have the power throw anim
 					set_busy(true)
 					roserang_power_throw()
 					set_busy(false)
-				# Lateral normal throw
+				# Normal throw
 				else:
 					anim_tree.set(anim_tree_param_path_base + "NormalThrowRoserang", true)
+				roserang_throw_charge_time = 0.0
+		else:
+			# If power throw isn't unlocked, normal throw is triggered on button press
+			if Input.is_action_just_pressed("ThrowRoserang") and !busy:
+				anim_tree.set(anim_tree_param_path_base + "NormalThrowRoserang", true)
 	# Instant rethrow is triggered on button press
 	elif Input.is_action_just_pressed("ThrowRoserang") and not roserang_instant_rethrow_queued:
 		start_roserang_instant_rethrow_timer()
