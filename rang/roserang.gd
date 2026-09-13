@@ -89,20 +89,20 @@ func _ready():
 	
 	# Pre-calculate Rose settings (for when we eventually switch to Rose)
 	rose_eqn_initial_throw_angle = rose_eqn_petals*throw_angle + rose_eqn_initial_throw_angle_offset
-	set_direction() # Sets rotation speed variables
+	set_horz_direction() # Sets rotation speed variables
+	
+	if cotu.shoulder_zoomed_in:
+		mvmt_state = OMNIROSE
 	
 	change_color(rose_color)
 
-func set_direction():
+func set_horz_direction():
 	if cotu.moving_right:
 		rose_eqn_angle_speed = -1*(PI / (rose_eqn_petals * 120 / BPM))
 		rose_eqn_current_angle = (-2*PI - rose_eqn_initial_throw_angle) / rose_eqn_petals
 	else:
 		rose_eqn_angle_speed = PI / (rose_eqn_petals * 120 / BPM)
 		rose_eqn_current_angle = (2*PI - rose_eqn_initial_throw_angle) / rose_eqn_petals
-	
-	if cotu.shoulder_zoomed_in:
-		mvmt_state = OMNIROSE
 
 func rose_omnidirectional(delta):
 	rose_eqn_current_angle += rose_eqn_angle_speed * delta
@@ -136,6 +136,9 @@ func _physics_process(delta):
 			
 	match(mvmt_state):
 		OMNIROSE:
+			if icon.roserang_queued:
+				switch_to_rose()
+				return
 			var new_pos = rose_omnidirectional(delta)
 			var vel_vec = new_pos - global_position 
 			look_at(new_pos)
@@ -210,17 +213,19 @@ func switch_to_rose():
 	icon.roserang_queued = false
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, true)
 	set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, true)
+	current_loop_angle = 0.0
+	
+	if mvmt_state != OMNIROSE:
+		# Recalculate angles based on current return velocity for smooth transition
+		rose_eqn_initial_throw_angle = rose_eqn_petals*(-1*Vector2(velocity.normalized().x, velocity.normalized().z).angle() - PI/2)
+		if cotu.moving_right:
+			rose_eqn_initial_throw_angle += rose_switch_angle_offset_right
+		else:
+			rose_eqn_initial_throw_angle += rose_switch_angle_offset_left
+		set_horz_direction()
+		change_color(rose_color)
+	
 	mvmt_state = ROSE
-	current_loop_angle = 0
-
-	# Recalculate angles based on current return velocity for smooth transition
-	rose_eqn_initial_throw_angle = rose_eqn_petals*(-1*Vector2(velocity.normalized().x, velocity.normalized().z).angle() - PI/2)
-	if cotu.moving_right:
-		rose_eqn_initial_throw_angle += rose_switch_angle_offset_right
-	else:
-		rose_eqn_initial_throw_angle += rose_switch_angle_offset_left
-	set_direction()
-	change_color(rose_color)
 
 func ricochet(collision):
 	velocity = velocity - 2 * velocity.project(collision.get_normal())
@@ -238,7 +243,6 @@ func rose_handle_collision(collision, vel_vec, delta):
 		if col_obj.has_method("rose_rang_hit"):
 			col_obj.rose_rang_hit(collision, vel_vec, delta)
 		
-		# NOTE: This function sets the state to Ricochet
 		mvmt_state = RICOCHET 
 		return true
 	return false

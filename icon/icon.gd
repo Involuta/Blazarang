@@ -4,7 +4,7 @@ var following_cotu := true
 var follow_cotu_min_dist := .5
 
 # For transition from ricochet/return to rose
-var roserang_queued := false # did the rang just hit the target while in the ricochet or return state?
+var roserang_queued := false # did the rang just hit the icon while in the ricochet or return state?
 var rang_thrown := true # the roserang script has just readied; was the rang thrown by Cotu, or did it come from a ricochet or return state?
 
 @onready var anim_tree = $AnimationTree
