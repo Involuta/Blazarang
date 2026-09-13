@@ -54,3 +54,7 @@ res://enemies/ice_fairy.tscn
 res://enemies/clarity_infused_slice_hitbox.tscn
 res://enemies/ice_fairy_shot.tscn
 res://glb_inherited_scenes/snowflake_entity_meshes.tscn
+res://rang/roserang_power.gd
+res://rang/roserang.tscn
+res://cotu/cotu_cb_main.tscn
+res://cotu/CotuControl.gd

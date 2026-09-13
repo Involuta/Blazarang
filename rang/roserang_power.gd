@@ -8,10 +8,13 @@ class_name RoserangPower
 const SPECIAL_DIST := 13 # max dist from Cotu where doing special input will perform a special move
 
 var BPM := 120.0
-var rose_eqn_max_radius := 30
+var rose_eqn_max_radius := 30.0
 var rose_eqn_petals := 5
 
-var rose_eqn_angle_speed := PI / (rose_eqn_petals * 120 / BPM)
+var throw_max_height : float # For omnidirectional throw
+var vert_mvmt_angle := 0.0 # Height at any pt in the throw is calculated by sin(vert_mvmt_angle). vert_mvmt_angle goes from 0 to PI as current_loop_angle goes from 0 to PI/rose_eqn_petals
+
+var rose_eqn_angle_speed := PI / (rose_eqn_petals * 120.0 / BPM)
 var rose_eqn_current_angle := 0.0 # angle to calculate radius
 var rose_eqn_current_radius := 0.0 # dist from rose center at angle
 
@@ -42,7 +45,7 @@ const MAX_TRAVEL_DIST := 40.0
 var travel_start_pos: Vector3
 var travel_direction: Vector3
 
-var current_loop_angle := 0.0 
+var current_loop_angle := 0.0
 const RETURN_ACC := 1.2
 const MAX_RETURN_SPEED := 55
 
@@ -90,11 +93,10 @@ func _ready():
 	
 	# Setup initial positioning
 	global_position = icon.global_position
-	travel_start_pos = global_position
 	
-	# Calculate Travel Direction (Straight forward based on throw angle)
+	# Calculate Travel Direction
 	var throw_angle = cotu.get_rang_throw_y_angle()
-	travel_direction = Vector3.FORWARD.rotated(Vector3.UP, throw_angle)
+	throw_max_height = rose_eqn_max_radius * cotu.get_camera_fwd_dir().y
 	
 	# Pre-calculate Rose settings (for when we eventually switch to Rose)
 	rose_eqn_initial_throw_angle = rose_eqn_petals*throw_angle + rose_eqn_initial_throw_angle_offset
@@ -117,11 +119,20 @@ func set_direction():
 		rose_eqn_angle_speed = PI / (rose_eqn_petals * 120 / BPM)
 		rose_eqn_current_angle = (2*PI - rose_eqn_initial_throw_angle) / rose_eqn_petals
 
+func rose_omnidirectional(delta):
+	rose_eqn_current_angle += rose_eqn_angle_speed * delta
+	rose_eqn_current_radius = rose_eqn_max_radius * sin(rose_eqn_petals * rose_eqn_current_angle + rose_eqn_initial_throw_angle)
+	var angle_vec := rose_eqn_current_radius * Vector2.from_angle(rose_eqn_current_angle)
+	# vert_mvmt_angle goes from 0 to PI as current_loop_angle goes from 0 to PI/rose_eqn_petals
+	vert_mvmt_angle = current_loop_angle * rose_eqn_petals
+	var current_height = throw_max_height * sin(vert_mvmt_angle)
+	return icon.global_position + Vector3(angle_vec.x, current_height, angle_vec.y)
+
 func rose(delta):
 	rose_eqn_current_angle += rose_eqn_angle_speed * delta
 	rose_eqn_current_radius = rose_eqn_max_radius * sin(rose_eqn_petals * rose_eqn_current_angle + rose_eqn_initial_throw_angle)
-	var angle_vec := Vector2.from_angle(rose_eqn_current_angle)
-	return icon.global_position + rose_eqn_current_radius * Vector3(angle_vec.x, 0, angle_vec.y)
+	var angle_vec := rose_eqn_current_radius * Vector2.from_angle(rose_eqn_current_angle)
+	return icon.global_position + Vector3(angle_vec.x, 0, angle_vec.y)
 
 func change_color(color: Color):
 	trail.color_ramp.gradient.colors[1] = color
@@ -140,23 +151,18 @@ func _physics_process(delta):
 			
 	match(mvmt_state):
 		TRAVEL:
-			var current_vel = travel_direction * TRAVEL_SPEED
-			var displacement = current_vel * delta
-			look_at(global_position + current_vel)
-			
-			var hit_arena = rose_handle_collision(move_and_collide(displacement, true), displacement, delta)
-			
+			var new_pos = rose_omnidirectional(delta)
+			var vel_vec = new_pos - global_position 
+			look_at(new_pos)
+			var hit_arena = rose_handle_collision(move_and_collide(vel_vec, true), vel_vec, delta)
 			if hit_arena:
-				# rose_handle_collision handles the mvmt_state = RICOCHET transition
 				return
+			global_position = new_pos
 			
-			global_position += displacement
-			
-			if global_position.distance_to(travel_start_pos) >= MAX_TRAVEL_DIST:
-				set_collision_mask_value(Globals.ARENA_COL_LAYER, false)
-				set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, false)
-				change_color(return_color)
-				mvmt_state = RETURN
+			var reached_return := current_loop_angle < PI/(2*rose_eqn_petals)
+			set_collision_mask_value(Globals.ARENA_COL_LAYER, reached_return)
+			set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, reached_return)
+			change_color(rose_color if reached_return else return_color)
 
 		ROSE:
 			var new_pos = rose(delta)
