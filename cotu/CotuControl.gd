@@ -806,9 +806,6 @@ func throw_roserang_with_script(script):
 	# Unlike the damage buff, the homing buff (which sets homing targets) is only applied once: when the rang is instant rethrown for the first time in the buff cycle. Since it's only applied once per cycle, it's not applied in the same way as other buffs in apply_buffs_to_roserang_instance
 	if script == homing_script:
 		new_roserang.set_homing_targets(homing_targets_added)
-	# If power throwing and zoomed in, throw omnidirectionally
-	elif script == rose_power_throw_script and shoulder_zoomed_in:
-		new_roserang.set_omnidirectional(camera_pos.global_position)
 	
 	if axrang_mvmt_buffs_other_rangs_damage and axrang_instance != null and not axrang_instance.is_stationary():
 		new_roserang.apply_damage_multiplier(axrang_mvmt_buffs_other_rangs_damage_multiplier)

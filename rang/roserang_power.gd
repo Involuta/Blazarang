@@ -30,20 +30,13 @@ var base_time_until_can_ricochet := 0.02
 var remaining_time_until_can_ricochet := 0.0 
 
 enum {
-	TRAVEL,
+	OMNIROSE,
 	ROSE,
 	RICOCHET,
 	RETURN
 }
 
-# Initialize in TRAVEL state per instructions
-var mvmt_state = TRAVEL
-
-# TRAVEL State variables
-const TRAVEL_SPEED := 67.0
-const MAX_TRAVEL_DIST := 40.0
-var travel_start_pos: Vector3
-var travel_direction: Vector3
+var mvmt_state = ROSE
 
 var current_loop_angle := 0.0
 const RETURN_ACC := 1.2
@@ -94,7 +87,7 @@ func _ready():
 	# Setup initial positioning
 	global_position = icon.global_position
 	
-	# Calculate Travel Direction
+	# Start throw vars
 	var throw_angle = cotu.get_rang_throw_y_angle()
 	throw_max_height = rose_eqn_max_radius * cotu.get_camera_fwd_dir().y
 	
@@ -104,13 +97,6 @@ func _ready():
 	
 	change_color(rose_color)
 
-# Used when player is aiming power throw with shoulder zoom-in, which makes it move omnidirectionally (instead of just laterally)
-func set_omnidirectional(camera_pos: Vector3):
-	travel_direction = cotu.get_camera_fwd_dir()
-	# Start moving from camera_pos so there's no discrepancy btwn crosshair and rang
-	global_position = camera_pos
-	travel_start_pos = camera_pos
-
 func set_direction():
 	if cotu.moving_right:
 		rose_eqn_angle_speed = -1*(PI / (rose_eqn_petals * 120 / BPM))
@@ -118,6 +104,9 @@ func set_direction():
 	else:
 		rose_eqn_angle_speed = PI / (rose_eqn_petals * 120 / BPM)
 		rose_eqn_current_angle = (2*PI - rose_eqn_initial_throw_angle) / rose_eqn_petals
+	
+	if cotu.shoulder_zoomed_in:
+		mvmt_state = OMNIROSE
 
 func rose_omnidirectional(delta):
 	rose_eqn_current_angle += rose_eqn_angle_speed * delta
@@ -150,7 +139,7 @@ func _physics_process(delta):
 			can_ricochet = true
 			
 	match(mvmt_state):
-		TRAVEL:
+		OMNIROSE:
 			var new_pos = rose_omnidirectional(delta)
 			var vel_vec = new_pos - global_position 
 			look_at(new_pos)
@@ -185,7 +174,7 @@ func _physics_process(delta):
 			look_at(global_position + velocity)
 			ricochet_handle_collision(move_and_collide(velocity * delta))
 			
-			# If we are in TRAVEL mode's ricochet, we might want to return 
+			# If we are in OMNIROSE mode's ricochet, we might want to return 
 			# even if the loop angle hasn't finished yet. 
 			# Or, we just let the loop angle dictate the return as usual.
 			if current_loop_angle >= PI/(2*rose_eqn_petals):
@@ -228,7 +217,7 @@ func switch_to_rose():
 	mvmt_state = ROSE
 	current_loop_angle = 0
 
-	# Recalculate angles based on current return/travel velocity for smooth transition
+	# Recalculate angles based on current return velocity for smooth transition
 	rose_eqn_initial_throw_angle = rose_eqn_petals*(-1*Vector2(velocity.normalized().x, velocity.normalized().z).angle() - PI/2)
 	if cotu.moving_right:
 		rose_eqn_initial_throw_angle += rose_switch_angle_offset_right
@@ -244,7 +233,7 @@ func ricochet(collision):
 
 func rose_handle_collision(collision, vel_vec, delta):
 	if collision and (Globals.compare_layers(collision.get_collider().collision_layer, Globals.ARENA_COL_LAYER) or Globals.compare_layers(collision.get_collider().collision_layer, Globals.THICK_ENEMY_COL_LAYER)):
-		# Reuse vel_vec (which is essentially 'velocity' in Travel mode) for ricochet calc
+		# Reuse vel_vec (which is essentially 'velocity' in Omnirose mode) for ricochet calc
 		velocity = (1/delta) * (vel_vec - 2 * vel_vec.project(collision.get_normal()))
 		emit_ricochet_particles(vel_vec)
 		change_color(ricochet_color)
@@ -276,8 +265,8 @@ func emit_ricochet_particles(dir):
 
 func get_mvmt_state():
 	match(mvmt_state):
-		TRAVEL:
-			return "TRAVEL"
+		OMNIROSE:
+			return "OMNIROSE"
 		ROSE:
 			return "ROSE"
 		RICOCHET:
