@@ -535,7 +535,11 @@ func _physics_process(delta):
 			
 			match(roserang_throw_type):
 				ROSERANG_THROW_TYPES.ROSE:
-					throw_roserang_with_script(rose_script)
+					# If aiming, use omnidirectional throw
+					if shoulder_zoomed_in:
+						throw_roserang_with_script(rose_power_throw_script)
+					else:
+						throw_roserang_with_script(rose_script)
 				ROSERANG_THROW_TYPES.HOMING:
 					throw_roserang_with_script(homing_script)
 			Globals.award_score(Globals.INSTANT_RETHROW_SCORE)
