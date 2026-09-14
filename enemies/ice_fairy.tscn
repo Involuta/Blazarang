@@ -27,6 +27,7 @@ material = SubResource("StandardMaterial3D_qf6aq")
 
 [sub_resource type="Animation" id="Animation_rypli"]
 resource_name = "fairy_die"
+length = 4.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1211,7 +1212,8 @@ material = SubResource("ShaderMaterial_ljxgr")
 size = Vector2(6, 6)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s45hv"]
-height = 1.0
+radius = 0.6
+height = 2.4
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xhnoi"]
 radius = 4.5
@@ -1422,7 +1424,7 @@ shoot_interval_max = 12.0
 shape = SubResource("BoxShape3D_fp5fu")
 
 [node name="SpriteMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(2.08165e-12, 0, 0, 0, 2.08165e-12, 0, 0, 0, 2.08165e-12, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh = SubResource("BoxMesh_adun2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -1454,6 +1456,7 @@ process_material = SubResource("ParticleProcessMaterial_47sp6")
 draw_pass_1 = SubResource("QuadMesh_g85f8")
 
 [node name="EnemyHurtbox" type="Area3D" parent="."]
+process_mode = 4
 collision_layer = 8
 collision_mask = 257
 script = ExtResource("3_66w1x")
@@ -1463,6 +1466,7 @@ hit_particle_color = Color(0.592157, 0.788235, 1, 1)
 opponent_hitboxes = ["PlayerHitbox"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHurtbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.428899, 0)
 shape = SubResource("CapsuleShape3D_s45hv")
 
 [node name="DamageOverTimeArea" type="Node3D" parent="."]

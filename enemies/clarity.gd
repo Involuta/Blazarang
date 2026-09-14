@@ -575,6 +575,8 @@ func switch_to_circle_spawner():
 
 func switch_to_special():
 	behav_state = SPECIAL
+	look_state = LOOK_STATE.STOP
+	velocity = Vector3.ZERO
 	# Look state isn't set bc look state often changes in special attacks (e.g. jump shot goes from STOP to BODY FULL ROTATION to TARGET HEAD ARM BODY ROTATION)
 
 func queue_arm_attack():
@@ -734,7 +736,7 @@ func start_arm_and_dress_jump_shot_anims():
 func jump_shot_mvmt():
 	switch_to_special()
 	var t = get_tree().create_tween()
-	var full_dash_vec = full_dash_speed * body_meshes.transform.basis.z
+	var full_dash_vec = full_dash_speed * body_meshes.transform.basis.x
 	t.tween_property(self, "velocity", full_dash_vec, frames(97))
 	t.tween_property(self, "velocity", full_dash_vec + 9 * Vector3.UP, frames(30)).set_ease(Tween.EASE_OUT)
 	t.tween_property(self, "velocity", Vector3.ZERO, frames(120))
@@ -942,7 +944,8 @@ func on_snowflake_hit(a: Area3D):
 		snowflake_stagger()
 		unlink_all_dress_shards_from_snowflake()
 	# If snowflake isn't vulnerable, play deflect anim
-	snowflake_central_eye_anim_player.play("Deflect")
+	else:
+		snowflake_central_eye_anim_player.play("Deflect")
 
 func unlink_all_dress_shards_from_snowflake():
 	for ds_name in dress_shards:

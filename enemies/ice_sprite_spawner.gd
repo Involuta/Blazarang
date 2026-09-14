@@ -49,7 +49,7 @@ var rise_speed_boost_decay_rate = (rise_speed_boosted - rise_speed_base) / boost
 @onready var ice_sprite := preload("res://enemies/ice_sprite.tscn")
 @onready var ice_fairy := preload("res://enemies/ice_fairy.tscn")
 @export var arena_floor_y := 10.0
-@export var ice_sprite_spawn_interval := 6.0
+@export var ice_enemy_spawn_interval := 6.0
 var spawn_timer := 0.0
 
 var level : Node3D
@@ -127,9 +127,9 @@ func _physics_process(delta):
 	
 	# Spawning Logic
 	spawn_timer += delta
-	if spawn_timer >= ice_sprite_spawn_interval:
+	if spawn_timer >= ice_enemy_spawn_interval:
 		spawn_timer = 0.0
-		spawn_ice_sprite()
+		spawn_ice_enemy()
 	
 	# Reduce rise speed to base level
 	if rise_speed > rise_speed_base:
@@ -148,13 +148,12 @@ func _physics_process(delta):
 	if hex_material:
 		hex_material.albedo_color = hex_albedo_base.lerp(hex_albedo_boosted, lerp_val)
 
-func spawn_ice_sprite():
-	#return
+func spawn_ice_enemy():
 	var sprite_instance
 	if max_height_reached:
 		sprite_instance = ice_fairy.instantiate()
 	else:
-		sprite_instance = ice_fairy.instantiate()
+		sprite_instance = ice_sprite.instantiate()
 	level.add_child.call_deferred(sprite_instance)
 	await sprite_instance.tree_entered
 	sprite_instance.global_position = visuals.global_position
