@@ -1116,9 +1116,13 @@ func _on_mark_removed():
 func get_rang_throw_y_angle():
 	return camera_twist_pivot.basis.get_euler().y
 
-# Used by roserang power throw script to get camera's fwd vec
+# Used by roserang to get camera's fwd vec for omnidirectional throw
 func get_camera_fwd_dir() -> Vector3:
 	return -camera.global_transform.basis.z
+
+# Used by roserang to get camera's pos for omnidirectional throw
+func get_camera_global_pos() -> Vector3:
+	return camera.global_position
 
 # Used by X to get Cotu's rang throw direction in the lateral plane only
 func get_camera_fwd_dir_lateral():

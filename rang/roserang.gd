@@ -12,6 +12,7 @@ var rose_eqn_max_radius := 30.0
 var rose_eqn_petals := 5
 
 var throw_max_height : float # For omnidirectional throw
+var throw_max_radius : float # For omnidirectional throw
 var vert_mvmt_angle := 0.0 # Height at any pt in the throw is calculated by sin(vert_mvmt_angle). vert_mvmt_angle goes from 0 to PI as current_loop_angle goes from 0 to PI/rose_eqn_petals
 
 var rose_eqn_angle_speed := PI / (rose_eqn_petals * 120.0 / BPM)
@@ -80,19 +81,22 @@ func _ready():
 	set_collision_mask_value(Globals.ARENA_COL_LAYER, true)
 	set_collision_mask_value(Globals.THICK_ENEMY_COL_LAYER, true)
 	
-	# Setup initial positioning
-	global_position = icon.global_position
-	
 	# Start throw vars
 	var throw_angle = cotu.get_rang_throw_y_angle()
-	throw_max_height = rose_eqn_max_radius * cotu.get_camera_fwd_dir().y
+	var throw_vec = cotu.get_camera_fwd_dir()
+	throw_max_height = rose_eqn_max_radius * throw_vec.y
+	throw_max_radius = rose_eqn_max_radius * Vector2(throw_vec.x, throw_vec.z).length()
 	
 	# Pre-calculate Rose settings (for when we eventually switch to Rose)
 	rose_eqn_initial_throw_angle = rose_eqn_petals*throw_angle + rose_eqn_initial_throw_angle_offset
 	set_horz_direction() # Sets rotation speed variables
 	
+	# Setup initial positioning
 	if cotu.shoulder_zoomed_in:
+		global_position = icon.global_position#cotu.get_camera_global_pos()
 		mvmt_state = OMNIROSE
+	else:
+		global_position = icon.global_position
 	
 	change_color(rose_color)
 
@@ -106,7 +110,7 @@ func set_horz_direction():
 
 func rose_omnidirectional(delta):
 	rose_eqn_current_angle += rose_eqn_angle_speed * delta
-	rose_eqn_current_radius = rose_eqn_max_radius * sin(rose_eqn_petals * rose_eqn_current_angle + rose_eqn_initial_throw_angle)
+	rose_eqn_current_radius = throw_max_radius * sin(rose_eqn_petals * rose_eqn_current_angle + rose_eqn_initial_throw_angle)
 	var angle_vec := rose_eqn_current_radius * Vector2.from_angle(rose_eqn_current_angle)
 	# vert_mvmt_angle goes from 0 to PI as current_loop_angle goes from 0 to PI/rose_eqn_petals
 	vert_mvmt_angle = current_loop_angle * rose_eqn_petals

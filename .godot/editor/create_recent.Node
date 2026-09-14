@@ -1,3 +1,4 @@
+Sprite2D
 GPUParticles3D
 MeshInstance3D
 Node3D
@@ -24,7 +25,6 @@ FogVolume
 GPUParticlesAttractorVectorField3D
 NavigationRegion3D
 ClarityShardHurtbox
-Sprite2D
 BossHurtbox
 NavigationAgent3D
 CharacterBody3D
