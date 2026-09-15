@@ -256,7 +256,7 @@ radius = 4.5
 
 [sub_resource type="Animation" id="Animation_v6ljq"]
 resource_name = "explode"
-length = 6.00001
+length = 5.00001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -264,7 +264,7 @@ tracks/0/path = NodePath("DamageOverTimeArea:process_mode")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 3.3),
+"times": PackedFloat32Array(0, 2.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 4]
@@ -399,10 +399,22 @@ tracks/5/path = NodePath("FlightParticles:emitting")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true]
+"values": [false, true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MeshInstance3D:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(0.6, 0.6, 0.6)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y1tuo"]
@@ -459,13 +471,14 @@ script = ExtResource("1_03h8j")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.6, -3.99853e-31, 1.74781e-38, 0, -2.62268e-08, -0.6, 3.99853e-31, 0.6, -2.62268e-08, 0, 0, 0)
+visible = false
 mesh = SubResource("ArrayMesh_3xnq4")
 
 [node name="SnowParticles" type="GPUParticles3D" parent="."]
 cast_shadow = 0
 emitting = false
 amount = 30
-lifetime = 4.0
+lifetime = 3.0
 one_shot = true
 preprocess = 0.3
 explosiveness = 0.98
@@ -476,7 +489,7 @@ draw_pass_1 = ExtResource("1_xgvds")
 [node name="FogClumps" type="GPUParticles3D" parent="."]
 emitting = false
 amount = 30
-lifetime = 5.0
+lifetime = 4.0
 one_shot = true
 explosiveness = 1.0
 visibility_aabb = AABB(-300, -300, -300, 600, 600, 600)
@@ -505,6 +518,7 @@ libraries = {
 }
 
 [node name="EnemyHitbox" type="Area3D" parent="."]
+process_mode = 4
 collision_layer = 8
 collision_mask = 18
 script = ExtResource("3_6opei")
@@ -517,6 +531,7 @@ shape = SubResource("CapsuleShape3D_jlgm8")
 
 [node name="FlightParticles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 0.45)
+emitting = false
 amount = 18
 lifetime = 0.36
 local_coords = true

@@ -109,7 +109,7 @@ func process_shooting_timer(delta: float):
 	if shoot_timer >= next_shoot_time:
 		shoot_timer = 0.0
 		schedule_next_shot()
-		anim_player.play("shoot", .3)
+		anim_player.play("shoot")
 
 func schedule_next_shot():
 	next_shoot_time = rng.randf_range(shoot_interval_min, shoot_interval_max)
