@@ -1,3 +1,6 @@
+CSGBox3D
+CSGTorus3D
+CSGCombiner3D
 Sprite2D
 GPUParticles3D
 MeshInstance3D
@@ -28,5 +31,3 @@ ClarityShardHurtbox
 BossHurtbox
 NavigationAgent3D
 CharacterBody3D
-Camera3D
-WorldEnvironment
