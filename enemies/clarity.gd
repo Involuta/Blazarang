@@ -100,6 +100,15 @@ var body_fog_gradient_light := make_gradient(body_fog_gradient_light_0, body_fog
 var body_fog_gradient_dark := make_gradient(body_fog_gradient_dark_0, body_fog_gradient_dark_1)
 var body_fog_gradient := body_fog_gradient_light
 
+@export var snowflake_light_color_light := Color("#82bbff")
+@export var snowflake_light_color_dark := Color("#5a77ff")
+
+@export var snowflake_sprite_color_light := Color("#95caff")
+@export var snowflake_sprite_color_dark := Color("#6f96ff")
+
+@export var snowflake_glow_color_light := Color("9ad6ff")
+@export var snowflake_glow_color_dark := Color("90b0ff")
+
 # Fog radii are set in physics process
 var min_fog_radius : float # Dist from Clarity where fog is minimized
 var max_fog_radius : float # Dist from Clarity where fog is maximized
@@ -194,6 +203,9 @@ var ice_sprite_spawner_boost := preload("res://enemies/ice_sprite_spawner_boost.
 @onready var arm_shard_mesh := $ClarityArmMeshes/Armature/Skeleton3D/Arm_2/Arm_2 # The singular arm mesh
 @onready var arm_tip_pt := $ClarityArmMeshes/Armature/Skeleton3D/Arm_2/ArmTipEmptyNode
 @onready var snowflake := $ClarityArmMeshes/SnowflakeEntity
+@onready var snowflake_light := $ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/HeadLight
+@onready var snowflake_sprite := $ClarityArmMeshes/SnowflakeEntity/SnowflakeEntitySprite/FlatSpikes
+@onready var snowflake_glow := $ClarityArmMeshes/SnowflakeEntity/SnowflakeEntitySprite/Glow
 @onready var snowflake_anim_player := $ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/AnimationPlayer
 @onready var snowflake_hexagon_anim_player := $ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/HexagonAnimationPlayer
 @onready var snowflake_central_eye_anim_player := $ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D/FacePlate/SnowflakeEntityAdvancedRig/AnimationPlayer
@@ -204,7 +216,6 @@ var ice_sprite_spawner_boost := preload("res://enemies/ice_sprite_spawner_boost.
 @onready var blizzard_light := $ClarityArmMeshes/BlizzardLight
 @onready var blizzard_hitbox := $BlizzardDOT
 @onready var snowfall_particles := $SnowfallParticles
-@onready var body_cone_fog := $FogVolume/BodyCone
 @onready var feet_fog := $FogVolume/FeetFog
 @onready var body_cloud := $FogVolume/BodyCloud
 
@@ -319,6 +330,10 @@ func _ready():
 	
 	# Ensure all shards are full health and hurtable when Clarity spawns
 	regen_dress_shards()
+	
+	snowflake_light.light_color = snowflake_light_color_light
+	snowflake_sprite.get_surface_override_material(0).emission = snowflake_sprite_color_light
+	snowflake_glow.modulate = snowflake_glow_color_light
 	
 	# Activate snowflake
 	#snowflake_anim_player.play("RotateSlow3Seg")
@@ -770,15 +785,6 @@ func env_autochange_frame(dist_to_cotu: float, delta: float):
 	snowfall_particles.process_material.initial_velocity_min = lerpf(1.2, 6, cotu_dist_lerp_val)
 	snowfall_particles.process_material.initial_velocity_max = lerpf(2.4, 9, cotu_dist_lerp_val)
 	snowfall_particles.process_material.emission_ring_radius = lerpf(18, 9, cotu_dist_lerp_val)
-	
-	# Body/feet fog
-	# Feet fog goes to 0 at far dist
-	var near_feet_fog_density := .6
-	#feet_fog.material.set_shader_parameter("density", lerpf(near_feet_fog_density, 0, cotu_dist_lerp_val))
-	#feet_fog.material.density = lerpf(near_feet_fog_density, 0, cotu_dist_lerp_val)
-	body_cone_fog.material.set_shader_parameter("emission", body_fog_gradient.sample(cotu_dist_lerp_val-.1))
-	#feet_fog.material.emission = body_fog_gradient.sample(cotu_dist_lerp_val)
-	#feet_fog.material.set_shader_parameter("emission", body_fog_gradient.sample(cotu_dist_lerp_val))
 
 func expand_blizzard_safezone(frame_duration: int):
 	snowfall_particles.emitting = false
@@ -796,9 +802,6 @@ func expand_blizzard_safezone(frame_duration: int):
 	t.tween_property(level_env, "volumetric_fog_density", .0009, frames(frame_duration))
 	t.tween_property(level_env, "volumetric_fog_emission", Color("#95a5bd"), frames(frame_duration))
 	#t.tween_property(particle_attractor, "strength", 300, frames(frame_duration))
-	# Body fog
-	t.tween_property(body_cone_fog.material, "shader_parameter/density", 0.0, frames(frame_duration))
-	#t.tween_property(feet_fog.material, "shader_parameter/density", 0.0, frames(frame_duration))
 
 func contract_blizzard_safezone(frame_duration: int):
 	var t = get_tree().create_tween().set_parallel()
@@ -817,9 +820,6 @@ func contract_blizzard_safezone(frame_duration: int):
 	t.tween_property(level_env, "volumetric_fog_density", 0.036, frames(frame_duration))
 	t.tween_property(level_env, "volumetric_fog_emission", Color("#65768f"), frames(frame_duration))
 	#t.tween_property(particle_attractor, "strength", 0, frames(frame_duration/2))
-	# Body fog
-	t.tween_property(body_cone_fog.material, "shader_parameter/density", 0.3, frames(frame_duration/2))
-	#t.tween_property(feet_fog.material, "shader_parameter/density", 0.15, frames(frames/2))
 
 	await get_tree().create_timer(frames(frame_duration)).timeout
 	# contract_blizzard_safezone transitions to the env the autochanging env would be if Cotu were within min_fog_dist, aka when cotu_dist_lerp_val is 0
@@ -896,7 +896,6 @@ func play_anim_all_dress_shards(s: String = ""):
 
 func snowflake_brighten(brightness: float, duration: float):
 	var t = get_tree().create_tween()
-	var snowflake_light = snowflake.find_child("HeadLight")
 	t.tween_property(snowflake_light, "light_energy", brightness, duration)
 
 func snowflake_glow_flash():
@@ -1025,3 +1024,7 @@ func spawner_explode():
 	env_sun.light_energy = 0.1
 	# Increase min fog thickness
 	min_fog_density = min_fog_density_dark
+	# Switch to dark snowflake light color
+	snowflake_light.light_color = snowflake_light_color_dark
+	snowflake_sprite.get_surface_override_material(0).emission = snowflake_sprite_color_dark
+	snowflake_glow.modulate = snowflake_glow_color_dark
