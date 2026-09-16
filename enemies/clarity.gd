@@ -94,9 +94,8 @@ var sky_horizon_gradient := sky_horizon_gradient_light
 
 @export var body_fog_gradient_light_0 := Color("aad3ff")
 @export var body_fog_gradient_light_1 := Color("0078f0")
-# Body fog gradient doesn't change when spawner explodes
 var body_fog_gradient_light := make_gradient(body_fog_gradient_light_0, body_fog_gradient_light_1)
-@export var body_fog_gradient_dark_0 := Color("aad3ff")
+@export var body_fog_gradient_dark_0 := Color("0078f0")
 @export var body_fog_gradient_dark_1 := Color("0078f0")
 var body_fog_gradient_dark := make_gradient(body_fog_gradient_dark_0, body_fog_gradient_dark_1)
 var body_fog_gradient := body_fog_gradient_light
@@ -773,14 +772,10 @@ func env_autochange_frame(dist_to_cotu: float, delta: float):
 	snowfall_particles.process_material.emission_ring_radius = lerpf(18, 9, cotu_dist_lerp_val)
 	
 	# Body/feet fog
-	# Body fog doesn't change
 	# Feet fog goes to 0 at far dist
 	var near_feet_fog_density := .6
 	#feet_fog.material.set_shader_parameter("density", lerpf(near_feet_fog_density, 0, cotu_dist_lerp_val))
 	#feet_fog.material.density = lerpf(near_feet_fog_density, 0, cotu_dist_lerp_val)
-	body_fog_gradient = Gradient.new()
-	body_fog_gradient.set_color(0, Color("aad3ff"))
-	body_fog_gradient.set_color(1, blizzard_light.light_color)
 	body_cone_fog.material.set_shader_parameter("emission", body_fog_gradient.sample(cotu_dist_lerp_val-.1))
 	#feet_fog.material.emission = body_fog_gradient.sample(cotu_dist_lerp_val)
 	#feet_fog.material.set_shader_parameter("emission", body_fog_gradient.sample(cotu_dist_lerp_val))

@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://2ipib84sl774"]
+[gd_scene load_steps=70 format=3 uid="uid://2ipib84sl774"]
 
 [ext_resource type="Script" path="res://enemies/ice_fairy.gd" id="1_6kq3x"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="2_rl78v"]
@@ -442,7 +442,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike0/OldRingMesh:scale")
+tracks/10/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike0/RingMeshContainer:scale")
 tracks/10/interp = 2
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -454,7 +454,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike1/OldRingMesh:scale")
+tracks/11/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike1/RingMeshContainer:scale")
 tracks/11/interp = 2
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -466,7 +466,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike2/OldRingMesh:scale")
+tracks/12/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike2/RingMeshContainer:scale")
 tracks/12/interp = 2
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -478,7 +478,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike3/OldRingMesh:scale")
+tracks/13/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike3/RingMeshContainer:scale")
 tracks/13/interp = 2
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -490,7 +490,7 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike0/OldRingMesh:position")
+tracks/14/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike0/RingMeshContainer:position")
 tracks/14/interp = 2
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -502,7 +502,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike1/OldRingMesh:position")
+tracks/15/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike1/RingMeshContainer:position")
 tracks/15/interp = 2
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -514,7 +514,7 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike2/OldRingMesh:position")
+tracks/16/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike2/RingMeshContainer:position")
 tracks/16/interp = 2
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -526,7 +526,7 @@ tracks/16/keys = {
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike3/OldRingMesh:position")
+tracks/17/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike3/RingMeshContainer:position")
 tracks/17/interp = 2
 tracks/17/loop_wrap = true
 tracks/17/keys = {
@@ -558,7 +558,7 @@ tracks/18/keys = {
 tracks/19/type = "value"
 tracks/19/imported = false
 tracks/19/enabled = true
-tracks/19/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike0/OldRingMesh:mesh:material:shader_parameter/trailing_color")
+tracks/19/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike0/RingMeshContainer:mesh:material:shader_parameter/trailing_color")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
@@ -590,6 +590,114 @@ tracks/21/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 0, 0)]
+}
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike0/RingMeshContainer/OldRingMesh:visible")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
+"times": PackedFloat32Array(0, 0.9, 3.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike1/RingMeshContainer/OldRingMesh:visible")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = {
+"times": PackedFloat32Array(0, 0.9, 3.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike2/RingMeshContainer/OldRingMesh:visible")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/keys = {
+"times": PackedFloat32Array(0, 0.9, 3.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/25/type = "value"
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike3/RingMeshContainer/OldRingMesh:visible")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/keys = {
+"times": PackedFloat32Array(0, 0.9, 3.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/26/type = "value"
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike0/RingMeshContainer/RingMesh:visible")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/keys = {
+"times": PackedFloat32Array(0, 0.9, 3.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/27/type = "value"
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike1/RingMeshContainer/RingMesh:visible")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/keys = {
+"times": PackedFloat32Array(0, 0.9, 3.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/28/type = "value"
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike2/RingMeshContainer/RingMesh:visible")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/keys = {
+"times": PackedFloat32Array(0, 0.9, 3.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/29/type = "value"
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike3/RingMeshContainer/RingMesh:visible")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/keys = {
+"times": PackedFloat32Array(0, 0.9, 3.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/30/type = "value"
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike0/RingMeshContainer/OldRingMesh:mesh:material:shader_parameter/trailing_color")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/keys = {
+"times": PackedFloat32Array(0, 3, 4.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.31, 0.47, 3, 1), Color(0.35, 0.51, 3, 1), Color(0.31, 0.47, 3, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_lsn44"]
@@ -1459,7 +1567,12 @@ shader_parameter/spark_length = 0.15
 shader_parameter/spark_sharpness = 1.0
 shader_parameter/start_offset = 0.25
 shader_parameter/leading_color = Color(1, 1, 1, 1)
-shader_parameter/trailing_color = Color(0.341684, 0.501846, 1, 1)
+shader_parameter/trailing_color = Color(0.31, 0.47, 3, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_bqg5x"]
+material = SubResource("ShaderMaterial_yvpgd")
+inner_radius = 0.18
+outer_radius = 0.22
 
 [node name="IceFairy" type="CharacterBody3D"]
 collision_layer = 8
@@ -1591,85 +1704,101 @@ transform = Transform3D(1, 1.58819e-22, 5.23784e-30, -1.58819e-22, 0.999999, -2.
 mesh = SubResource("CylinderMesh_5iovp")
 skeleton = NodePath("../../..")
 
-[node name="OldRingMesh" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike0"]
+[node name="RingMeshContainer" type="Node3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike0"]
 transform = Transform3D(1, -2.50388e-23, -1.29184e-23, 2.50388e-23, 1, 3.26397e-09, 1.29184e-23, -3.26397e-09, 1, 2.08165e-12, 0.55, 0)
 
-[node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike0/OldRingMesh"]
+[node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike0/RingMeshContainer"]
 transform = Transform3D(1, 1.62918e-22, 1.29184e-23, -1.81775e-22, 1, -3.26398e-09, -1.29184e-23, 3.26398e-09, 1, -2.60209e-18, 0, 0)
 
-[node name="CSGTorus3D" type="CSGTorus3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike0/OldRingMesh/RingMesh"]
+[node name="CSGTorus3D" type="CSGTorus3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike0/RingMeshContainer/RingMesh"]
 inner_radius = 0.18
 outer_radius = 0.22
 sides = 30
 material = SubResource("ShaderMaterial_yvpgd")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike0/OldRingMesh/RingMesh"]
+[node name="CSGBox3D" type="CSGBox3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike0/RingMeshContainer/RingMesh"]
 transform = Transform3D(1, -1.50854e-22, 1.79819e-29, 9.04185e-23, 1, 9.47539e-15, 8.09297e-30, -1.27917e-14, 1, 2.08165e-12, 2.08165e-12, -0.22)
 operation = 2
 size = Vector3(0.3, 0.12, 0.12)
+
+[node name="OldRingMesh" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike0/RingMeshContainer"]
+visible = false
+mesh = SubResource("TorusMesh_bqg5x")
 
 [node name="Spike1" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.675, -0.36)
 mesh = SubResource("CylinderMesh_5iovp")
 skeleton = NodePath("../../..")
 
-[node name="OldRingMesh" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike1"]
+[node name="RingMeshContainer" type="Node3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.55, 2.08165e-12)
 
-[node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike1/OldRingMesh"]
+[node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike1/RingMeshContainer"]
 transform = Transform3D(-1, 3.48787e-16, -8.74228e-08, 3.48787e-16, 1, -3.48787e-16, 8.74228e-08, -3.48787e-16, -1, -2.60209e-18, 0, 0)
 
-[node name="CSGTorus3D" type="CSGTorus3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike1/OldRingMesh/RingMesh"]
+[node name="CSGTorus3D" type="CSGTorus3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike1/RingMeshContainer/RingMesh"]
 inner_radius = 0.18
 outer_radius = 0.22
 sides = 30
 material = SubResource("ShaderMaterial_yvpgd")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike1/OldRingMesh/RingMesh"]
+[node name="CSGBox3D" type="CSGBox3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike1/RingMeshContainer/RingMesh"]
 transform = Transform3D(1, 1.58738e-21, 2.13163e-14, 2.02205e-22, 0.999999, 9.00006e-15, 1.13687e-13, -3.86044e-14, 0.999999, 2.08165e-12, 2.08165e-12, -0.22)
 operation = 2
 size = Vector3(0.3, 0.12, 0.12)
+
+[node name="OldRingMesh" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike1/RingMeshContainer"]
+visible = false
+mesh = SubResource("TorusMesh_bqg5x")
 
 [node name="Spike2" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.36, -0.675, 2.08165e-12)
 mesh = SubResource("CylinderMesh_5iovp")
 skeleton = NodePath("../../..")
 
-[node name="OldRingMesh" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike2"]
+[node name="RingMeshContainer" type="Node3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.55, 2.08165e-12)
 
-[node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike2/OldRingMesh"]
+[node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike2/RingMeshContainer"]
 transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, -2.60209e-18, 0, 0)
 
-[node name="CSGTorus3D" type="CSGTorus3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike2/OldRingMesh/RingMesh"]
+[node name="CSGTorus3D" type="CSGTorus3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike2/RingMeshContainer/RingMesh"]
 inner_radius = 0.18
 outer_radius = 0.22
 sides = 30
 material = SubResource("ShaderMaterial_yvpgd")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike2/OldRingMesh/RingMesh"]
+[node name="CSGBox3D" type="CSGBox3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike2/RingMeshContainer/RingMesh"]
 transform = Transform3D(1, 5.44851e-15, -5.20963e-15, 2.32109e-14, 0.999999, -1.16043e-14, 2.32109e-14, 8.28804e-15, 0.999999, 2.08165e-12, 2.08165e-12, -0.22)
 operation = 2
 size = Vector3(0.3, 0.12, 0.12)
+
+[node name="OldRingMesh" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike2/RingMeshContainer"]
+visible = false
+mesh = SubResource("TorusMesh_bqg5x")
 
 [node name="Spike3" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.36, -0.675, 2.08165e-12)
 mesh = SubResource("CylinderMesh_5iovp")
 skeleton = NodePath("../../..")
 
-[node name="OldRingMesh" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike3"]
+[node name="RingMeshContainer" type="Node3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.55, 2.08165e-12)
 
-[node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike3/OldRingMesh"]
+[node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike3/RingMeshContainer"]
 transform = Transform3D(-4.37114e-08, -3.48787e-16, -1, 3.48787e-16, 1, -3.48787e-16, 1, -3.48787e-16, -4.37114e-08, -2.60209e-18, 0, 0)
 
-[node name="CSGTorus3D" type="CSGTorus3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike3/OldRingMesh/RingMesh"]
+[node name="CSGTorus3D" type="CSGTorus3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike3/RingMeshContainer/RingMesh"]
 inner_radius = 0.18
 outer_radius = 0.22
 sides = 30
 material = SubResource("ShaderMaterial_yvpgd")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike3/OldRingMesh/RingMesh"]
+[node name="CSGBox3D" type="CSGBox3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike3/RingMeshContainer/RingMesh"]
 transform = Transform3D(1, -2.84311e-15, 4.26231e-15, -1.96582e-14, 0.999999, -1.16043e-14, -1.96582e-14, 8.28804e-15, 0.999999, 2.08165e-12, 2.08165e-12, -0.22)
 operation = 2
 size = Vector3(0.3, 0.12, 0.12)
+
+[node name="OldRingMesh" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike3/RingMeshContainer"]
+visible = false
+mesh = SubResource("TorusMesh_bqg5x")

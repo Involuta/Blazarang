@@ -1,10 +1,10 @@
+MeshInstance3D
+Node3D
 CSGBox3D
 CSGTorus3D
 CSGCombiner3D
 Sprite2D
 GPUParticles3D
-MeshInstance3D
-Node3D
 StaticBody3D
 Generic6DOFJoint3D
 RigidBody3D
@@ -30,4 +30,3 @@ NavigationRegion3D
 ClarityShardHurtbox
 BossHurtbox
 NavigationAgent3D
-CharacterBody3D
