@@ -92,13 +92,9 @@ var sky_horizon_gradient_dark := make_gradient(sky_horizon_gradient_dark_0, sky_
 # Sky horizon gradient also starts as light then becomes dark after spawner explodes
 var sky_horizon_gradient := sky_horizon_gradient_light
 
-@export var body_fog_gradient_light_0 := Color("aad3ff")
-@export var body_fog_gradient_light_1 := Color("0078f0")
-var body_fog_gradient_light := make_gradient(body_fog_gradient_light_0, body_fog_gradient_light_1)
-@export var body_fog_gradient_dark_0 := Color("0078f0")
-@export var body_fog_gradient_dark_1 := Color("0078f0")
-var body_fog_gradient_dark := make_gradient(body_fog_gradient_dark_0, body_fog_gradient_dark_1)
-var body_fog_gradient := body_fog_gradient_light
+@export var blizzard_light_color_light := Color("#007ce4")
+@export var blizzard_light_color_dark := Color("#0078f0")
+var blizzard_light_color := blizzard_light_color_light
 
 @export var snowflake_light_color_light := Color("#82bbff")
 @export var snowflake_light_color_dark := Color("#5a77ff")
@@ -331,6 +327,10 @@ func _ready():
 	# Ensure all shards are full health and hurtable when Clarity spawns
 	regen_dress_shards()
 	
+	# Set up blizzard and snowflake colors
+	# Why not just set blizzard_light.light_color directly instead of setting the var blizzard_light_color? blizzard_light_color is used for blizzard expansion and contraction
+	blizzard_light_color = blizzard_light_color_light
+	blizzard_light.light_color = blizzard_light_color
 	snowflake_light.light_color = snowflake_light_color_light
 	snowflake_sprite.get_surface_override_material(0).emission = snowflake_sprite_color_light
 	snowflake_glow.modulate = snowflake_glow_color_light
@@ -810,7 +810,7 @@ func contract_blizzard_safezone(frame_duration: int):
 		t.tween_property(self, "blizzard_safezone_radius", blizzard_safezone_final_radius, frames(frame_duration))
 	else:
 		t.tween_property(self, "blizzard_safezone_radius", blizzard_safezone_ice_sprite_spawner_radius, frames(frame_duration))
-	t.tween_property(blizzard_light, "light_color", Color("#007ce4"), frames(frame_duration))
+	t.tween_property(blizzard_light, "light_color", blizzard_light_color, frames(frame_duration))
 	t.tween_property(blizzard_light, "light_volumetric_fog_energy", 6.0, frames(frame_duration))
 	t.tween_property(sky, "sky_top_color", Color("#65768f"), frames(frame_duration))
 	t.tween_property(sky, "sky_horizon_color", Color("#5a6c82"), frames(frame_duration))
@@ -1019,11 +1019,12 @@ func spawner_explode():
 	# Switch to dark gradients
 	sky_top_gradient = sky_top_gradient_dark
 	sky_horizon_gradient = sky_horizon_gradient_dark
-	body_fog_gradient = body_fog_gradient_dark
 	# Darken the environment light source (the sun)
 	env_sun.light_energy = 0.1
 	# Increase min fog thickness
 	min_fog_density = min_fog_density_dark
+	# Switch to dark blizzard light color
+	blizzard_light_color = blizzard_light_color_dark
 	# Switch to dark snowflake light color
 	snowflake_light.light_color = snowflake_light_color_dark
 	snowflake_sprite.get_surface_override_material(0).emission = snowflake_sprite_color_dark
