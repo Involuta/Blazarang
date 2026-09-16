@@ -44,3 +44,5 @@ res://cotu/cotu_cb_main.tscn
 res://cotu/cotu_anims/use_item_stabilizer.res
 res://levels/snow_level/snow_level_test_env.tscn
 res://glb_inherited_scenes/snowflake_entity_sprite.tscn
+res://enemies/enemy_anims/clarity_regenshards.res
+res://enemies/enemy_anims/clarity_prefight.res
