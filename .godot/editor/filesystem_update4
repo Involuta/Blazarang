@@ -46,3 +46,7 @@ res://levels/snow_level/snow_level_test_env.tscn
 res://glb_inherited_scenes/snowflake_entity_sprite.tscn
 res://enemies/enemy_anims/clarity_regenshards.res
 res://enemies/enemy_anims/clarity_prefight.res
+res://textures/solid_light_gray_tile.tres
+res://levels/snow_level/snow_level.gd
+res://levels/x_boss_level/x_boss_level1_viewcontrol.tscn
+res://globals.gd

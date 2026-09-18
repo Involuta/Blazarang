@@ -84,6 +84,14 @@ grow_vertical = 1
 scale = Vector2(0.4, 0.4)
 value = 0.0
 
+[node name="ClarityHealthBar" parent="UIRoot" instance=ExtResource("3_bfhsg")]
+modulate = Color(0, 0.596078, 1, 1)
+layout_mode = 1
+offset_left = -480.0
+offset_top = 360.0
+offset_right = 480.0
+offset_bottom = 408.0
+
 [node name="Icon" parent="." instance=ExtResource("3_0wesa")]
 
 [node name="cotuCB" parent="." instance=ExtResource("4_y0ibd")]

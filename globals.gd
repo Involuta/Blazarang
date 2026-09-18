@@ -147,7 +147,7 @@ const enemy_hurtbox_data = {
 	"ClarityBodyShard" : [45, 1.0, 15.0],
 	"IceSprite" : [60, 1.0, 60.0],
 	"IceFairy" : [15, 1.0, 60.0],
-	"Clarity" : [3000, 1.0, 1000.0],
+	"Clarity" : [600, 1.0, 1000.0],
 	"ClarityUnbreakablePart" : [99999, 0.0, 0.0]
 }
 

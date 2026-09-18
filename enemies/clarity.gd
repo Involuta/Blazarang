@@ -205,7 +205,7 @@ var ice_sprite_spawner_boost := preload("res://enemies/ice_sprite_spawner_boost.
 @onready var snowflake_anim_player := $ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/AnimationPlayer
 @onready var snowflake_hexagon_anim_player := $ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/HexagonAnimationPlayer
 @onready var snowflake_central_eye_anim_player := $ClarityArmMeshes/SnowflakeEntity/SnowflakeEntityMeshes/Armature/Skeleton3D/FacePlate/SnowflakeEntityAdvancedRig/AnimationPlayer
-@onready var head_hurtbox := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/EnemyHurtbox
+@onready var head_hurtbox := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/HeadHurtbox
 @onready var head_light := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/BaseOffsetRotation/HeadMesh/HeadLight
 @onready var head_bone := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2
 @onready var head_mesh := $ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead
@@ -928,7 +928,7 @@ func on_snowflake_hit(a: Area3D):
 			snowflake_vulnerable = true
 			ds.self_damage(snowflake_hit_dress_shard_damage)
 	
-	# Damage Clarity (if snowflake entity is vulnerable)
+	# Stagger snowflake (if snowflake entity is vulnerable)
 	if snowflake_vulnerable:
 		snowflake_stagger()
 		unlink_all_dress_shards_from_snowflake()
