@@ -1396,7 +1396,7 @@ radius = 0.6
 height = 2.4
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xhnoi"]
-radius = 4.5
+radius = 3.6
 
 [sub_resource type="Curve" id="Curve_wqxol"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]

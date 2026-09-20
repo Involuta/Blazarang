@@ -50,3 +50,7 @@ res://textures/solid_light_gray_tile.tres
 res://levels/snow_level/snow_level.gd
 res://levels/x_boss_level/x_boss_level1_viewcontrol.tscn
 res://globals.gd
+res://general_scripts/string_mesh.gd
+res://enemies/clarity_head.tscn
+res://enemies/ice_sprite_spawner.gd
+res://enemies/enemy_anims/clarity_infuse_left.res

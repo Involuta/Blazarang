@@ -252,7 +252,7 @@ material = SubResource("ShaderMaterial_youx8")
 size = Vector2(6, 6)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_epivg"]
-radius = 4.5
+radius = 3.6
 
 [sub_resource type="Animation" id="Animation_v6ljq"]
 resource_name = "explode"

@@ -214,7 +214,7 @@ _data = {
 
 [node name="IceSpriteSpawner" type="Node3D"]
 script = ExtResource("1_p5m4w")
-max_height = 18.0
+exploded_scale = 24.0
 rise_speed_boosted = 60.0
 hex_count = 7
 ice_enemy_spawn_interval = 9.0
