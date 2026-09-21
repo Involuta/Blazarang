@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://bchvxjbrcaguh"]
+
+[ext_resource type="PackedScene" uid="uid://doivjcpoyvu1f" path="res://glb_imports/ClarityScarf.glb" id="1_u3upu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kshcs"]
+transparency = 4
+cull_mode = 2
+albedo_color = Color(0.635294, 0.878431, 1, 0.588235)
+
+[node name="ClarityScarf" instance=ExtResource("1_u3upu")]
+
+[node name="Skeleton3D" parent="ScarfArmature" index="0"]
+bones/0/position = Vector3(1.11022e-16, 11.0421, 0)
+bones/0/rotation = Quaternion(-0.861174, -6.33834e-25, -4.61562e-25, 0.50831)
+bones/1/rotation = Quaternion(0.00855807, -7.90866e-33, -2.43784e-32, 0.999963)
+bones/2/rotation = Quaternion(0.0149292, 9.52683e-33, 1.83624e-32, 0.999889)
+bones/3/rotation = Quaternion(0.0229452, 9.24943e-33, -1.942e-31, 0.999736)
+bones/4/rotation = Quaternion(0.0324323, 7.77254e-33, 5.05501e-32, 0.999474)
+bones/5/rotation = Quaternion(0.0428237, -4.13887e-32, 1.49622e-31, 0.999082)
+bones/6/rotation = Quaternion(0.0525842, -1.43924e-32, -2.61267e-31, 0.998616)
+bones/7/rotation = Quaternion(0.0615092, -8.09021e-33, 5.25576e-33, 0.998106)
+bones/8/rotation = Quaternion(0.066765, 8.15896e-33, 5.83888e-32, 0.997768)
+bones/9/rotation = Quaternion(0.0671264, -3.98988e-32, 2.93399e-31, 0.997744)
+bones/10/rotation = Quaternion(0.0615139, 1.10256e-32, -3.58368e-32, 0.998104)
+bones/11/rotation = Quaternion(0.049119, 1.40959e-32, -6.6328e-31, 0.998793)
+
+[node name="ScarfMesh" parent="ScarfArmature/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_kshcs")
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "ScarfIdle"
