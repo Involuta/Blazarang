@@ -53,8 +53,8 @@ var spawner_exploded := false
 
 @export var blizzard_safezone_base_radius := 15.0 # Safezone radius at start of fight
 @export var blizzard_safezone_expanded_radius := 150.0 # Blizzard safezone expands on jumps
-@export var blizzard_safezone_ice_sprite_spawner_radius := 24.0 # When blizzard centers on ice sprite spawner
-@export var blizzard_safezone_final_radius := 19.5 # Safezone radius after ice sprite spawner explodes
+@export var blizzard_safezone_ice_sprite_spawner_radius := 21.0 # When blizzard centers on ice sprite spawner
+@export var blizzard_safezone_final_radius := 18.0 # Safezone radius after ice sprite spawner explodes
 var blizzard_safezone_radius := 15.0
 @export var safezone_expand_frames_jump_shot := 144
 @export var safezone_contract_frames_jump_shot := 360
@@ -339,13 +339,13 @@ func _ready():
 	#snowflake_anim_player.play("RotateSlow3Seg")
 	
 	# FOR TESTING: play JumpShot to reach phase 2 immediately
-	snowflake_anim_player.play("JumpShot")
+	#snowflake_anim_player.play("JumpShot")
 	
 	# FOR TESTING: play RegenShards to reach phase 2 immediately
-	#switch_to_stop()
-	#snowflake_anim_player.play("RegenShards")
-	#play_anim_all_dress_shards("RegenShards")
-	#arm_anim_player.play("RegenShards")
+	switch_to_stop()
+	snowflake_anim_player.play("RegenShards")
+	play_anim_all_dress_shards("RegenShards")
+	arm_anim_player.play("RegenShards")
 
 func frames(num: int) -> float:
 	return num * get_physics_process_delta_time()
