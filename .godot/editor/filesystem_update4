@@ -63,3 +63,4 @@ res://enemies/enemy_anims/clarity_spawnerboost_planet.res
 res://enemies/enemy_anims/clarity_stagger.res
 res://glb_inherited_scenes/clarity_scarf.tscn
 res://enemies/clarity_shard_hurtbox.gd
+res://enemies/enemy_anims/clarity_dressshards_regenshards.res
