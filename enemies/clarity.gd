@@ -214,6 +214,8 @@ var ice_sprite_spawner_boost := preload("res://enemies/ice_sprite_spawner_boost.
 @onready var snowfall_particles := $SnowfallParticles
 @onready var feet_fog := $FogVolume/FeetFog
 @onready var body_cloud := $FogVolume/BodyCloud
+@onready var scarf1_anim_player := $ClarityArmMeshes/ClarityScarf/AnimationPlayer
+@onready var scarf2_anim_player := $ClarityArmMeshes/ClarityScarf2/AnimationPlayer
 
 var dress_shards := {}
 
@@ -346,6 +348,13 @@ func _ready():
 	snowflake_anim_player.play("RegenShards")
 	play_anim_all_dress_shards("RegenShards")
 	arm_anim_player.play("RegenShards")
+
+func play_scarf_anim(anim: String):
+	scarf1_anim_player.play(anim)
+	if "Idle" in anim:
+		scarf2_anim_player.play(anim)
+	else:
+		scarf2_anim_player.play(anim + "Mirrored")
 
 func frames(num: int) -> float:
 	return num * get_physics_process_delta_time()
