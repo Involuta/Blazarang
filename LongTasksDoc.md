@@ -1635,30 +1635,79 @@ If not fairy mode and explosion triggered, play sprite_explode then ready_fairy 
 If not fairy mode and not explosion triggered, do sprite die
 Fairy’s health is set to 1 during ready fairy anim
 Fairy heals up to full fairy health at end of ready fairy anim. Why not in the anim afterward? Bc the anim afterward is a looping idle anim, and the heal-to-full code can’t be called there or else the fairy would heal every time the anim loops
-Current task
-When the ice sprite fairy fully spawns, it mostly just meanders randomly in Clarity’s vicinity and occasionally shoots fast projectiles that create a snow cloud just like the ice sprite explosion. It dies in 3 rose (or ax) hits, but right before it fires a projectile, it glows brightly, and when it glows brightly, you can hit it to kill it in 1 hit
-Make idle loop anim
-Ice sprite spawner spawns ice fairies instead of ice sprites
-Animate snowflake in jump shot
-Figure out what snowflake should do
-Idea: snowflake rotates and hollows itself out to create a window for the arm shard to shoot through it
+Ice fairy meanders passively in Clarity’s vicinity
+If too far from Clarity, fairy drifts towards her
+If close enough to Clarity, fairy moves toward, then follows a circular path around her
+Every so often, the fairy’s orbit speed changes to somewhere between a min and max. Min and max can be set in inspector. When a new speed is set, speed changes smoothly btwn old and new for .6 seconds
+Every so often, the orbit radius and height offset also changes btwn a min and max, and orbit direction can also change
+Fairy occasionally shoots fast projectiles that create a snow cloud just like the ice sprite explosion
+An ice shot is shot occasionally. The interval btwn shots is randomly chosen btwn a min and max interval. A shot is shot with anim_player.play("shoot")
+Fairy dies in 3 rose (or 1 ax) hits, but right before it fires a projectile, it glows brightly, and when it glows brightly, you can kill it in 1 hit
+Idea: fairy is based on a moon jelly
+Make idle loop anim → spikes undulate up and down and all visuals rotate in y axis
+Make shoot anim visuals (shoot anim currently exists, but all it does is fire the projectile and allow fairy to die in 1 hit) → fairy expands 4 rings to look like a moon jelly
+Make idle anim transition smoothly to and from shoot anim
+Make fairy ice shot
+Make snow particles and ice shot mesh appear at tip of spikes while ice shot is charging up
+Ice sprite spawner spawns ice fairies instead of ice sprites after exploding
 To fit Clarity’s attack theme of continuous large area coverage, try making her slices move much slower (except for infuse slice, which needs to be fast to make the ring)
 I undid this change bc although slow attacks fit Clarity's theme of continuous area coverage, they remove the necessity to pay close attention to an element in the fight (Clarity's head before, snowflake now) to know when to dodge. With slow attacks, the player can simply react to the blade itself. Clarity doesn't just test the player's ability to weave through continuous area coverage; she tests their attentiveness and reaction speed as well
+In phase 2.3,
+Blizzard safezone radius is bigger than in 2.1 but smaller than 2.2
+All dress shard attacks are choosable
+Body light changes to dark blue/purple (instead of light blue) → I removed the body light entirely since it felt kinda weird to have a glowing light in the middle of the dress shards for no discernible reason
+Snowflake light, glow, and sprite switches from light blue to dark blue/purple
+Blizzard light (Clarity’s light) switches from pale blue to slightly purple → snowflake purple + Clarity purple looked too uniform, so I kept Clarity’s light deep blue, but I made the light blizzard light match what the blizzard light post-jump shot
 Consider making Frostbite incurable via stabilizer, which makes the fight feel scarier and unfair
-Try adding a violently vibrating spinning planet thing in the middle of the infused slice ring so it’s more clear that it deals damage in the center
-Make Clarity’s body shard always deflect projectiles (give it a heavy enemy collider)
+Make Clarity’s body shard a hurtbox that takes 1 damage and never breaks
 Make Clarity’s hat deflect projectiles, but not bounce projectiles away when vulnerable
-Snowflake anim during RegenShards
-Snowflake looks boring just lying there getting stabbed; try making a branching snowflake pattern form on the ground as it’s stabbed
-Idea: make a big snowflake mesh in Blender, then use a shader to expand the visible area of the snowflake mesh starting from the center to outward. This expanding area is preferably a hexagon so the snowflake’s branches appear evenly
-OR instead of lying on the ground, the snowflake goes to where the hat is and transforms, showing that it’s vulnerable
+The shape of the hat makes bouncing unpredictable and odd; just make it also a 1 damage hurtbox
 Snowflake invulnerability anims
 Idea: make face plate spin on the y axis when hit by a projectile while invulnerable
 Currently, this doesn’t work bc the face plate is right behind the central eye’s spikes. This could work if the central eye’s spikes could detach and move outward, allowing the face plate to spin
-Add shrinking outline onto face plate when it’s vulnerable
+Adding new bones to the rig completely breaks the anims when the project is imported to Godot. Save the current SE with the new central eye spike bones in a file outside of the BlazarangBlenderProjects repo folder, then take the BBP repo back in time to a commit before the new bones were added, then add the new file back to BBP repo as “SnowflakeEntityAdvancedRig”
+Make snowflake entity scene contain another snowflake entity. It’s a child of the central ring, and this child only shows the ring and central eye meshes. It rotates on the fwd axis with the parent SE and does the deflect anim when hit by the rang
+Add shrinking outline onto face plate when it’s vulnerable OR find some other way to show that it’s vulnerable, e.g. a purple pupil? Maybe Clarity’s head can also be purple instead of light blue to show that it’s weak? → Snowflake entity pupil is now a darker blue by default and becomes light blue/white when vulnerable. Light blue now represents vulnerability, which is why Clarity’s head is also light blue
+Create healthbar
+Only decreases when Clarity’s head is damaged
+Add “string” that dangles off the corners of Clarity’s hat and droops to the ground like the pacific sea nettle jellyfish. The string responds to her movement and fades near the edges
+
+Experiment with dot and hexagon particles to see what works best
+Dots look alright
+Long hexagon particles don’t work bc they’ll point in the direction of their particle process material’s initial vel, not their visual direction which is influenced by Clarity’s mvmt. Round hexagon particles would just look like the dots
 Remove RaiseLeftSliceFast and RaiseLeftFast since Clarity must be commanded by the snowflake to move it quickly, and she shouldn’t infuse the arm just to lift it quickly
-Make dress shards emit a sound when hit by a weapon and a different sound when hit by a snowflake link hit
-Implement Phase 1
+Save shard offsets of dress shards in case the offset transforms are reset later (likely caused by you adding a new object in the ClarityDressShards Blender project, which can reset the transforms of the offset nodes)
+FrontLeft
+
+2.9, -3.15, 3.9
+-14.6, .6, 14.9
+FrontRight
+
+-2.9, -3.44, 3.9
+-13.9, 3.8, -15.3
+MiddleLeft
+
+4.67, -3.14, 0
+0, 0, 14.5
+MiddleRight
+
+-5.13, -4.2, .05
+.6, -.1, -15.6
+BackLeft
+
+3.095, -4.62, -4.1
+13.3, 6.5, 16.5
+BackRight
+
+-3.3, -5.2, -4.21
+14.6, -1.4, -14.8
+Choose a concept for Phase 1
+Requirements:
+Teach the most important concepts for Clarity fight
+Stay near the boss
+Destroy shards to expose weak point
+Concept 1: Giant snowflake
+Vibe: this is an otherworldly god whose thoughts and behavior are unknown. I’m making the conscious decision to provoke this god in its realm knowing that it may destroy me, although I can’t imagine what it’s capable of
 Body is a 3D snowflake with many branches
 Concept art from ChatGPT (note that this looks more flat than what the snowflake should be)
 
@@ -1670,6 +1719,62 @@ Same as above but the thrust path rotates about its center
 Alternating left and right wing shots
 Spiral: 3-4 shards are shot out and fly in Archimedean spirals (r = bθ where r = orbital radius from gem, b = a constant, and θ = orbit angle). Each shard has a different b. The middlemost shard will hit the target if the target remains in the same place throughout the shards’ flight
 If the boss uses 4 shards, the third closest/second farthest shard will hit the target
+Positives of this concept:
+More mysterious than other concepts since it doesn’t resemble an animal — moreso an otherworldly incomprehensible being
+Issues with this concept:
+Doesn’t fit the jellyfish motif
+Isn’t sympathetic since it doesn’t look like an animal
+Looks really abstract compared to phase 2’s more concrete design (phase 2 is more clearly a humanoid/jellyfish duelist)
+Concept 2: Giant jellyfish
+Vibe: this is a giant beast that is passive and unintelligent, but intimidating af. I’m making the conscious decision to hunt this innocent creature in its natural habitat knowing that there may be dire consequences — not because the creature will fight back, but because it’s morally wrong → irrationality of player’s actions + danger = tension
+Inspirations: Phalanx from Shadow of the Colossus, IRL whales
+Dress shards are oral arms and trails (particles) are tentacles. Bell contains a design that looks like a cross between a moon jellyfish and a snowflake
+6 rings instead of 4
+Lines around the edges of the bell
+Aimlessly flies around
+Destroying the shards exposes the bell’s weak point
+Positives:
+Matches/establishes the jellyfish design motif
+Matches phase 2’s design the most (long oral arms become scarves, short oral arms become dress shards)
+Awesome; feels cool to hunt
+Issues:
+If Clarity can move freely in her base form, why is she trapped in the void? → Maybe she’s just been swimming in circles
+Concept 3: Colony of small jellyfish
+Vibe: these are harmless critters that are passive and unintelligent. I’m making the conscious decision to murder these innocent critters in their natural habitat knowing that there may be dire consequences; not because the creature will fight back, but because it’s morally wrong → irrationality of player’s actions + lack of danger + intimidating environment = tension
+Positives:
+Defenselessness makes them sympathetic
+Issues:
+It doesn’t intuitively make sense for Cotu to fight them since they’re harmless. Cotu could be trying to provoke the god into counterattacking or transforming, but Cotu doesn’t know whether it can actually do so
+Concept 4: Giant polyp
+Vibe: this is a tree-like animal that is passive and unintelligent. It’s intimidating just because it’s big, but aside from the snow it’s spewing, it’s clearly harmless. I’m making the conscious decision to destroy this organism in its natural habitat knowing that there may be dire consequences — not because the creature will fight back, but because it’s morally wrong → irrationality of player’s actions + danger = tension
+Positives:
+Defenselessness makes it sympathetic
+Fits jellyfish life cycle (polyp → ephyra, aka phase 2 snowflake entity → medusa, aka phase 2 main body)
+More mysterious than jellyfish concepts since it’s less commonly known
+Issues:
+Less intimidating than the big jelly (bc it can’t move and we understand jellyfish to be dangerous, not polyps), less sympathetic than the small jellies since it’s less cute
+Final choice: giant jelly bc it’s intimidating (unlike jelly colony and polyp), sympathetic (unlike snowflake), concrete (unlike snowflake, which is abstract), makes sense for Cotu to fight in order to gain XP (unlike colony and arguably polyp), and feels like an awesome monster hunt (unlike everything else)
+Note: motif becomes jellyfish-to-human transformation. Snowflake’s motif was snowflake-to-human, colony’s was sin-to-punishment, polyp’s was the jellyfish lifecycle
+Current task
+Create Phase 1 moveset
+Requirements
+Phase feels like a puzzle more than a fight
+Phase is medium length (maybe around 60 seconds) if you don’t know what you’re doing, and short (15-30 secs) if you do
+Boss doesn’t target the player unless provoked (although it’s not required for the boss to target the player when provoked)
+Boss should teach the player how phase 2 works → fight procedure should be a simplified version of phase 2
+Attacks
+
+
+Fight procedure
+Destroy dress shards to open glowing weak point on jellyfish’s mouth (underside of bell)
+Hit glowing weak point to damage boss
+Occasionally, the bell’s eye opens up. Hit the eye to damage all dress shards greatly
+When the eye opens, the dress shard link outline animations play for all dress shards
+Create Phase 1 concept
+Make sketch
+Make model
+
+
 Remove WalkLeftPassive and WalkForwardPassive. The passive/aggressive difference is too subtle to see and can frustrate the player. The subtle non-attacking vs attacking modes are shown via the lowered arm and the slowly rising arm
 Implement Phase 3
 Looks more like a person. Has a secretary bird-like face, a more feminine human-shaped chest, and a solid dress instead of dress shards. She has 1 arm with a cake-knife looking shard for a hand and maybe a long baggy sleeve made of icicles. She can use this to throw shards. Maybe she has shards orbiting around the back of her head
