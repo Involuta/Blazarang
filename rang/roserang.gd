@@ -14,6 +14,8 @@ var rose_eqn_petals := 5
 var throw_max_height : float # For omnidirectional throw
 var throw_max_radius : float # For omnidirectional throw
 var vert_mvmt_angle := 0.0 # Height at any pt in the throw is calculated by sin(vert_mvmt_angle). vert_mvmt_angle goes from 0 to PI as current_loop_angle goes from 0 to PI/rose_eqn_petals
+var rose_plane_right := Vector3.RIGHT
+var rose_plane_forward := Vector3.BACK
 
 var rose_eqn_angle_speed := PI / (rose_eqn_petals * 120.0 / BPM)
 var rose_eqn_current_angle := 0.0 # angle to calculate radius
@@ -86,6 +88,8 @@ func _ready():
 	var throw_vec = cotu.get_camera_fwd_dir()
 	throw_max_height = rose_eqn_max_radius * throw_vec.y
 	throw_max_radius = rose_eqn_max_radius * Vector2(throw_vec.x, throw_vec.z).length()
+	if not cotu.shoulder_zoomed_in and cotu.is_on_floor():
+		set_rose_plane_normal(cotu.get_floor_normal())
 	
 	# Pre-calculate Rose settings (for when we eventually switch to Rose)
 	rose_eqn_initial_throw_angle = rose_eqn_petals*throw_angle + rose_eqn_initial_throw_angle_offset
@@ -108,6 +112,13 @@ func set_horz_direction():
 		rose_eqn_angle_speed = PI / (rose_eqn_petals * 120 / BPM)
 		rose_eqn_current_angle = (2*PI - rose_eqn_initial_throw_angle) / rose_eqn_petals
 
+func set_rose_plane_normal(normal: Vector3):
+	rose_plane_right = Vector3.RIGHT - normal * Vector3.RIGHT.dot(normal)
+	if rose_plane_right.length_squared() < 0.0001:
+		rose_plane_right = Vector3.FORWARD - normal * Vector3.FORWARD.dot(normal)
+	rose_plane_right = rose_plane_right.normalized()
+	rose_plane_forward = rose_plane_right.cross(normal).normalized()
+
 func rose_omnidirectional(delta):
 	rose_eqn_current_angle += rose_eqn_angle_speed * delta
 	rose_eqn_current_radius = throw_max_radius * sin(rose_eqn_petals * rose_eqn_current_angle + rose_eqn_initial_throw_angle)
@@ -121,7 +132,7 @@ func rose(delta):
 	rose_eqn_current_angle += rose_eqn_angle_speed * delta
 	rose_eqn_current_radius = rose_eqn_max_radius * sin(rose_eqn_petals * rose_eqn_current_angle + rose_eqn_initial_throw_angle)
 	var angle_vec := rose_eqn_current_radius * Vector2.from_angle(rose_eqn_current_angle)
-	return icon.global_position + Vector3(angle_vec.x, 0, angle_vec.y)
+	return icon.global_position + rose_plane_right * angle_vec.x + rose_plane_forward * angle_vec.y
 
 func change_color(color: Color):
 	trail.color_ramp.gradient.colors[1] = color

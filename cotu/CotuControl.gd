@@ -78,7 +78,7 @@ var homing_targets_added := 0 # Increments for every homing buff applied
 # Buff list is in Globals
 var next_roserang_buff_index := 0
 var normal_throw_roserang_self_damage := 18.0
-var power_throw_unlocked := false
+var power_throw_unlocked := true
 var power_throw_roserang_self_damage := 24.0
 var roserang_throw_charging := false # Set to true when throw roserang button is pressed, set to false when released
 @export var roserang_power_throw_min_charge_time := 0.25

@@ -1,12 +1,12 @@
 res://enemies/clarity.tscn
-res://shaders/black_outline.gdshader
-res://enemies/clarity_arm_shard.gdshader
 res://textures/clear_tile.tres
 res://textures/noise_texture_2d.tres
 res://shaders/smoke_LOD.tres
 res://shaders/ring_appear.gdshader
 res://glb_meshes/snowflake_particle_mesh.res
 res://glb_meshes/long_hexagon_particle_mesh.res
+res://shaders/black_outline.gdshader
+res://enemies/clarity_arm_shard.gdshader
 res://GPUTrail-main/shaders/trail.gdshader
 res://GPUTrail-main/shaders/trail_draw_pass.gdshader
 res://GPUTrail-main/defaults/texture.tres
@@ -32,5 +32,6 @@ res://shaders/sobel_outline.gdshader
 res://enemies/snowflake_link_outline.gdshader
 res://enemies/ground_glow.gdshader
 res://enemies/clarity_dress_shard.gdshader
-res://enemies/clarity.gd
-res://enemies/enemy_anims/clarity_regenshards.res
+res://levels/mite_level/mite_level.tscn
+res://levels/mite_level/mite_level_viewcontrol.tscn
+res://cotu/CotuControl.gd
