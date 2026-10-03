@@ -1701,11 +1701,57 @@ BackRight
 
 -3.3, -5.2, -4.21
 14.6, -1.4, -14.8
-Choose a concept for Phase 1
+Remove WalkLeftPassive and WalkForwardPassive. The passive/aggressive difference is too subtle to see and can frustrate the player. The subtle non-attacking vs attacking modes are shown via the lowered arm and the slowly rising arm
+Choose a visual design concept for Phase 1
 Requirements:
-Teach the most important concepts for Clarity fight
-Stay near the boss
-Destroy shards to expose weak point
+Teach the player the non-obvious gameplay concepts used in phase 2. Introduce obvious mechanics in phase 2 since the player’s required to learn them on the fly (i.e. while in more danger and with higher stakes)
+Non-obvious concepts
+Stay in a certain area (this isn’t obvious bc you wouldn’t learn this until you get too far away)
+The snowflake is only vulnerable when its eye changes color (this isn’t obvious bc the snowflake is unhittable most of the time while the shards are always hittable, so initially, the player may assume that the snowflake is just never hittable, which prevents them from trying)
+Hitting the snowflake hits all shards linked to it
+When given the choice between hitting a shard and hitting the snowflake, always choose the snowflake (this isn’t obvious bc the player would only learn this through trial and error)
+Obvious concepts
+Hit the glowing weak point on the head when it appears
+Destroy dress shards to force regeneration, which makes head vulnerable (this is obvious bc you’re most likely already hitting/destroying the dress shards since they’re right in front of you, so you’ll definitely see what happens next)
+OR let the player learn the hard concepts on their own in phase 2. You don’t want to end up like the Wolverine game where they baby the player all the time. Let the player figure complex things out on their own and they’ll feel more engaged and accomplished. In phase 1, you can reveal the most obvious concepts that the player would have figured out quickly anyway
+Concepts to learn in phase 2:
+Hit the glowing weak point on the head when it appears (this isn’t a hard concept, but I’m thinking it would be cool to introduce the snowflake before the body)
+Destroy dress shards to force regeneration, which makes head vulnerable (this also isn’t a hard concept bc you’re most likely already hitting/destroying the dress shards since they’re right in front of you, so you’ll definitely see that that causes regeneration, but again, I’m thinking of intro-ing body after snowflake)
+Hitting the snowflake hits all shards linked to it
+When given the choice between hitting a shard and hitting the snowflake, always choose the snowflake (this isn’t obvious bc the player would only learn this through trial and error)
+Things that are fine to reveal in phase 1:
+Stay in a certain area
+The snowflake is only vulnerable when its eye changes color
+Contrast with phase 2
+Phase 2
+Big
+Slow
+Intimidating
+Fast sweeping attacks
+Phase 1
+Small
+Fast
+Cute
+Slow thrust attacks
+Fit Clarity’s character role → but what is that role? Choose the best option given her character design, her gameplay, and the game’s overarching stories
+Tournament fighter
+Ambition matches her angry-looking design and focused movement
+Realm that freezes you rather than destroying you feels a lot more fitting as a genuine threat on your god-life than a tournament fighter
+Monster you accidentally bump into
+Scary situation matches her scary appearance
+Why would Cotu accidentally run into her? Now that there’s no gauntlet gym progression (since the stakes were too low to be interesting and the game isn’t meant to be relaxing) and the entire plot is the competition, Cotu wouldn’t stray from the competition/training unless he knows there’s a god out there he can fight to gain experience
+Victim defending herself from your power greed
+She’s the one who looks powerful and determined, not you → this doesn’t match
+Menace you recklessly challenge on purpose
+Scary situation matches her scary appearance
+Realm that freezes you rather than destroying you feels fitting as a genuine threat on your god-life
+This fits Cotu’s arc (doing stupid things to get stronger) and Clarity’s character (menace who freezes everyone in the void)
+God protecting something precious
+Part of her looks powerful and determined, another part is vulnerable and needs protecting
+What is there to protect out here bruh 💀
+If she’s just protecting herself, then this concept doesn’t work for the same reason as the “Victim defending herself” concept
+Final choice: Menace you recklessly challenge
+After Gauntlet Gym 2, the Gauntlet warns fighters not to traverse the void to get to Gauntlet Central faster since there’s a hostile and aggressive god in the void that attacks and freezes gods. Any attempt to communicate with the god was met with silence. It didn’t participate in the tournament so it’s unranked. It’s suspected to have lower intelligence (or at least unknown communication methods) and its motives are unknown. If anyone enters the void despite the warnings, the Gauntlet won’t step in to save them until after the gala
 Concept 1: Giant snowflake
 Vibe: this is an otherworldly god whose thoughts and behavior are unknown. I’m making the conscious decision to provoke this god in its realm knowing that it may destroy me, although I can’t imagine what it’s capable of
 Body is a 3D snowflake with many branches
@@ -1753,31 +1799,51 @@ Fits jellyfish life cycle (polyp → ephyra, aka phase 2 snowflake entity → me
 More mysterious than jellyfish concepts since it’s less commonly known
 Issues:
 Less intimidating than the big jelly (bc it can’t move and we understand jellyfish to be dangerous, not polyps), less sympathetic than the small jellies since it’s less cute
-Final choice: giant jelly bc it’s intimidating (unlike jelly colony and polyp), sympathetic (unlike snowflake), concrete (unlike snowflake, which is abstract), makes sense for Cotu to fight in order to gain XP (unlike colony and arguably polyp), and feels like an awesome monster hunt (unlike everything else)
-Note: motif becomes jellyfish-to-human transformation. Snowflake’s motif was snowflake-to-human, colony’s was sin-to-punishment, polyp’s was the jellyfish lifecycle
+Concept 5: Ephyra
+Looks almost exactly like phase 2 snowflake entity but smaller and less dangerous
+Floats above roserang grounded range and does shard telegraph anims like the phase 2 dress shard telegraphs, but the entity itself does the attacking. After a telegraph, it floats down and rotates to be horizontal to the ground (idea: only the physical shell and icon rotates; the icon’s eye itself stays upright) before shooting out the shards it telegraphed (and possibly even rotating during the telegraph anim to indicate rotating during the shooting)
+Hit it during the telegraph to stagger it
+Idea: groups of ice sprites do synchronized dance attacks (e.g. hopping in from the sides in a staggered formation) during telegraph anims to distract the player
+Positives:
+Smallness and weakness contrasts with phase 2’s largeness and strength
+Fits jellyfish motif
+Indicates the ability to observe (it has a big eye) and doesn’t indicate whether it can think, leaving that ambiguous and/or indicating a sense of non-humanness
+Issues:
+None
+Final choice: Ephyra - it contrasts with phase 2 by being cute and fast/chaotic, reveals basic concepts about the phase 2 which act as teaching and subtle foreshadowing, and fits Clarity’s character as an autonomous monster/force of nature (ephyra isn’t human nor acts like one)
 Current task
 Create Phase 1 moveset
 Requirements
 Phase feels like a puzzle more than a fight
 Phase is medium length (maybe around 60 seconds) if you don’t know what you’re doing, and short (15-30 secs) if you do
-Boss doesn’t target the player unless provoked (although it’s not required for the boss to target the player when provoked)
-Boss should teach the player how phase 2 works → fight procedure should be a simplified version of phase 2
+Fit Clarity’s character
+Her (faded mind’s) motivation was to trap you in her realm. Now that she’s done that, all she wants to do is observe you and keep you from leaving (which fits her deep-seated loneliness). So then why would she attack you while you’re already in her realm? The only reason that makes sense is self-defense. → Cotu tries to provoke her by destroying her heart. The heart could be the old ice sprite spawner, a polyhedron with rotating hexagons
+Boss should teach the player the simplest concepts of phase 2 (the player must learn the harder concepts on the fly)
+Simple concepts to introduce in phase 1:
+Stay in a certain area (for phase 1, maybe there’s a small arena you have to stand in instead of just being near the boss?)
+The snowflake is only vulnerable when its eye changes color
+Harder concepts to save for phase 2:
+Hit the glowing weak point on the head when it appears
+Destroy dress shards to force regeneration, which makes head vulnerable (this is obvious bc you’re most likely already hitting/destroying the dress shards since they’re right in front of you, so you’ll definitely see what happens next)
+Hitting the snowflake hits all shards linked to it
+When given the choice between hitting a shard and hitting the snowflake, always choose the snowflake (this isn’t obvious bc the player would only learn this through trial and error)
 Attacks
 
 
 Fight procedure
-Destroy dress shards to open glowing weak point on jellyfish’s mouth (underside of bell)
-Hit glowing weak point to damage boss
-Occasionally, the bell’s eye opens up. Hit the eye to damage all dress shards greatly
-When the eye opens, the dress shard link outline animations play for all dress shards
+
+
 Create Phase 1 concept
 Make sketch
 Make model
-
-
-Remove WalkLeftPassive and WalkForwardPassive. The passive/aggressive difference is too subtle to see and can frustrate the player. The subtle non-attacking vs attacking modes are shown via the lowered arm and the slowly rising arm
-Implement Phase 3
-Looks more like a person. Has a secretary bird-like face, a more feminine human-shaped chest, and a solid dress instead of dress shards. She has 1 arm with a cake-knife looking shard for a hand and maybe a long baggy sleeve made of icicles. She can use this to throw shards. Maybe she has shards orbiting around the back of her head
+Make ice sprites droplet-shaped so they feel more like video game slimes and so they match jellyfish egg design
+Idea: snowflake entity buzzsaw attack
+While ice sprite spawner is rising, Clarity can raise the arm to touch the snowflake entity’s eye, then bring the arm down in front of her while spinning the snowflake faster and faster, then releasing it like an ice sprite spawner planet to orbit around the ice sprite spawner before returning to Clarity OR launch it towards the target like a boomerang, then it comes back and Clarity catches it/pins it with her arm and puts it back in its place
+Make ice sprite spawner look like a polyp
+As spawner object rises, a Blender anim plays where a polyp grows. The lowest ring rises and grows, then when it reaches its max height, a new ring rises and grows, and so on. If the spawner gets boosted, the anim gets boosted by the same speed change
+Implement Phase 3 (if necessary)
+Idea: humanoid
+Has a secretary bird-like face, a more feminine human-shaped chest, and a solid dress instead of dress shards. She has 1 arm with a cake-knife looking shard for a hand and maybe a long baggy sleeve made of icicles. She can use this to throw shards. Maybe she has shards orbiting around the back of her head
 Idea: Comet form
 The arena floor turns into ice so Cotu can skate on it. The air near the ground is filled with intense fog. The player must skate around until they find an icicle that acts as a ramp leading up into the sky (maybe these icicles are shot by Clarity all across the realm when she transforms into phase 3). The player must do this in order to see where and when Clarity will attack. Before she attacks, she is straight up a comet flying across the sky. Eventually, she runs into one of many floating glowing ice “stars,” which redirect her trajectory straight towards the target. The player must hit her with the ax to prevent her from landing and immediately freezing them
 Idea: Spin
