@@ -137,11 +137,12 @@ More glowing cracks = less health (aka stability)
 
 Skin ideas
 Latra: coyote head and pointed eyes, wears a hoodie with hood down
-Stretch goal: make mouth expressive
-Comma: girl wearing sweater; eyes are same as default but with points coming from the bottom like commas
-Refined: guy wearing dress shirt, dress pants, overalls, and a fedora
+Comma: girl wearing sweater; eyes are same as default but with points coming from the bottom like commas. Hair is one solid piece and styled like a comma
+Casual: guy wearing slightly undone dress shirt, dress pants, overalls, and a fedora
 69: same body as Comma but with sporty clothes, and one eye has a point coming from the top instead of the bottom like an apostrophe
-Regal: long ceremonial-looking ornate badass cloak + fancy canine mask. Earned by reaching the final gala battle
+QUEEN: girl with feminine pointed/almond stylized eyes, a curvaceous figure with large breasts, and thick voluptuous twintails. Wears a pleated miniskirt and a dress shirt. Unlocked after defeating Future Blade
+Flavor text: “Bow down.”
+Regal: long ceremonial-looking ornate cloak + fancy canine mask. Earned by winning the Gauntlet Gala and reaching the final tournament
 
 
 Boomerang
@@ -389,6 +390,15 @@ Bug List
 
 Solved Bug List
 (most recent at top)
+Clarity dress shards aren’t registering hits when you hit them
+Caused by you reimporting ClarityDressShards with some modification to the node hierarchy (e.g. you added a new object like Clarity Scarf), which clears the transforms of all shard offsets in all DressShard nodes
+Solution: redo all of the shard offsets manually and keep them saved somewhere (take screenshots since you can’t copy-paste Godot’s Vector3 values)
+FrontLeft
+FrontRight
+MiddleLeft
+MiddleRight
+BackLeft
+BackRight
 Roserang homing attacks target mites underground
 Caused by roserang hitting a mite, then it dies and moves underground, then the roserang follows it underground
 Solution: mites wait 1 sec after dying before going underground
@@ -462,7 +472,7 @@ Playtester Questions
 
 
 Polish List
-Make rose and ax throw charges cancellable by dodging
+Add input buffering (e.g. if you press attack during a dodge, you’ll attack immediately after the dodge)
 Frostbite effect text (like a mini version of DESTABILIZED)
 Cotu grounded main anims
 Rose normal throw
@@ -493,6 +503,7 @@ Cotu himself contains rang particles. When the roserang is in flight, his script
 Clarity polishing
 Make snowflake “tattoo” on underside of hat (and possibly beyond) materialize in an intricate animation as the head tilts up and starts glowing
 Make Jump Shot start from the correct pose (WalkLeft instead of WalkForward)
+Make Jump Shot turn and dash to the side instead of forward
 Ice sprite spawner
 Idea: each hexagon rotates in a random direction upon appearing instead of following the same patterns every time. Hexagons still grow and shrink back to nothing
 With the overlapping hexagons and random rotation axes, the shapes/patterns look irregular, which makes them look ugly like a bunch of floating spaghetti. Try experimenting with very high nums of hexagons
@@ -501,10 +512,56 @@ Adding some more hexagons (up to 24) increased the irregularity and made the spa
 Try adding a background glow sprite to make the spawner look more layered→ this helped
 Try making hexagons rotate about their local x axis to make the shape more concrete and uniform → this helped
 Try making the center of the spawner an icosahedron to add structure → this also helped
-Make particles appear when spawner is boosted
+Animate snowflake in jump shot
+Figure out what snowflake should do
+Idea: snowflake rotates and hollows itself out to create a window for the arm shard to shoot through it
+Idea: snowflake goes behind Clarity’s hat
+Try adding scarf (jellyfish oral arms)
+
+
+Make scarf mesh and rig it
+Make idle anim by keying only head bone (bone connecting scarf to center shard)
+In Blender, duplicate the scarf and rotate it 45 deg twds arm shard to see what it would look like
+Bake anim
+Play the head-only idle anim so that all the bones go into their proper orientations (the bones adapt dynamically to the head bone bc of the damped track bone constraint)
+Play the anim up until near the end
+Pause, then use the right arrow key to inch over to the frame just before the final frame
+Click on frame 0
+Select all bones
+At the top-left of the screen, click Pose → Animation → Bake Action…
+Bake from frame 0 (NOT 1) to the final frame of the anim
+Rename the new action to ScarfIdle_loop
+Import just one scarf into Godot and make an inherited scene from it
+Add the scarf to Clarity, dupe it, and rotate the dupe 45 deg twds the arm
+Make the baked idle anim play by making it play on autoload
+Make scarf anims for special attacks
+Process:
+Start with just 1 scarf mesh and armature
+Make scarf anim where only head bone has keyframes
+Duplicate scarf mesh and armature
+Make mirrored scarf anim on second scarf
+Delete second scarf
+For both original and mirrored anims, bake the anim (select the anim you want to bake, then select all bones, then go to Pose → Animation → Bake Action). In case these settings change in the future, make sure the baking starts from frame 0, not frame 1, and turn on Clear Constraints so the animation looks the same every time you play the baked anim
+Note: after you bake an anim, the constraints will be gone, so to bake the mirrored anim, you have to apply the constraints again
+Import the new scarf into Godot
+Make the new scarf anim play when the Clarity anims play
 Current task (polish)
+JumpShot
+Make scarf anim
+RegenShards
+Make a texture for the scarf
+Complex intricate line patterns
+Glowing white and blue
+Inspiration: Raava from Legend of Korra
+
 Make semicircle dress shard attacks look smoother; currently the shards jitter
 Ice sprite lingering explosion hitbox has particles and fog
+Try adding a violently vibrating spinning planet thing in the middle of the infused slice ring so it’s more clear that it deals damage in the center
+Make dress shards emit a sound when hit by a weapon and a different sound when hit by a snowflake link hit
+Snowflake anim during RegenShards
+Snowflake looks boring just lying there getting stabbed; try making a branching snowflake pattern form on the ground as it’s stabbed
+Idea: make a big snowflake mesh in Blender, then use a shader to expand the visible area of the snowflake mesh starting from the center to outward. This expanding area is preferably a hexagon so the snowflake’s branches appear evenly
+OR instead of lying on the ground, the snowflake goes to where the hat is and transforms, showing that it’s vulnerable
 Mite Level Polishing
 Give landmite a separate glb import instead of making paramite and landmite share the same meshes. This way there won’t be errors with missing anim tracks in paramite
 Program landmite/paramite walk anim (Procedural anim video progress: complete)
@@ -1829,17 +1886,26 @@ Anim tree checks whether super charge time > min super charge time to know wheth
 Make Icon emit particles continuously on full charge
 Make Icon flash with light and explode with particles on release
 
+Current task
 Snowflake Boss: Comet/Clarity
 See Blazarang Long Tasks
 
 Remove SFX from roserang since it should be present in hurtboxes
 
-Remove power throw from roserang since it does the same thing as the ax. Replace it with an omnidirectional rose petal throw (when aiming up/down, the rose petal is simply tilted up/down)
+Try removing power throw from roserang (i.e. make it possible to turn the power throw ability system on/off) since it does the same thing as the ax. Replace it with an omnidirectional rose petal throw (when aiming up/down, the rose petal is simply tilted up/down)
 In power throw script, replace straight mvmt with roserang petal mvmt
-Current task
-In Cotu’s script, make the roserang use the power throw script when aiming, not when holding the throw button
+Try making code that lets you throw laterally and omnidirectionally without the existence of the power throw, but don’t fully delete power throw’s code in case you want to use it later. Instead, allow yourself to switch between power throw existing and not existing
+In Cotu’s script, add a new flag power_throw_unlocked. If this is true, use current functionality. Otherwise, simply pressing the throw button throws the rose immediately, and if you’re aiming, the roserang uses the power throw script
 In Cotu’s script, make the instant rethrow use the power throw script when aiming
-Rename the power throw to the omnidirectional throw in all places
+Rename the power throw to the omnidirectional throw in all places where the power throw is used just as an omnidirectional throw OR just make the normal roserang script have the omnirose functionality and just switch out the power throw with normal rang throw (in the places where power throw is used as an omnidirectional throw)
+Fix bug where dodging an omni throw (thrown upward) causes the rang to move upward instead of laterally
+Fix bug where rang trajectory doesn’t match the crosshair (the higher you look up, the less accurate it gets)
+This was caused by me not reducing the lateral dist of the rose no matter how high up you looked; it was max dist every time, so the higher you looked, the lower the trajectory looked compared to where you were aiming
+Fixed this by decreasing lateral dist of the rose path as you look higher upward
+
+When not aiming, make the roserang’s petal parallel to the surface Cotu’s standing on to make it easier to hit enemies on slopes
+Prompt: when the roserang is thrown and Cotu isn’t aiming, adjust the roserang’s upward/downward trajectory so that the roserang’s petal path is parallel to the surface beneath Cotu (instead of just always horizontal)
+Prompt 2: now only make the roserang’s petal path parallel to the surface beneath Cotu if Cotu’s standing on the ground. If he’s in the air, make the path flat → turns out the AI already did it this way for some reason
 
 Add UI icon or crosshair to show how close to the center of the screen a target needs to be in order for homing instant rethrow to target it (like what Soldier 76’s ultimate does)
 
@@ -2367,6 +2433,7 @@ Terrifying giant predator
 Potential Inspiration: “Spotted by the Tyrannosaur” by robotinpyjamas on Instagram
 Sunken eyes imply hunger
 Jaw size implies strength
+Blank expression with open mouth implies focus, control, and intelligence. An angry expression would imply that it allows emotion to get in the way of its hunt
 Blank expression with open mouth implies supremacy. An angry expression typical in blockbuster movie monsters would imply that the monster plans to fight you. With a blank expression and an open mouth, it looks more like an ambush predator hunting prey, meaning there’s no chance of you winning the fight
 Top of its head is 4 giant spikes forming a mask above its mouth, and its mouth looks like Denji’s from Chainsaw Man with big teeth
 Mask spikes can fold back to form a mane, revealing crazy cat eyes and/or a bunch of tentacles underneath
@@ -2381,16 +2448,17 @@ Idea: this is a super high-ranking god (e.g. 7), making it a real threat to Cotu
 Idea: constantly feints to terrify the player. Every 9th feint is an actual attack that is nearly impossible to react to unless you were keeping count
 I considered the idea that the count gets reset after certain moves (e.g. a special retreat anim or special move), but I realized that it’d be cool for the player to survive a special move and have to keep the current number memorized the entire time
 Alt idea: instead of feinting, Candy Cat initially performs a series of easy-to-dodge/counter attacks to bore the player and give them a false sense of security. Perhaps Candy Cat also displays a pretty and soothing pattern in the air and/or in the background using its hypnotic eye, further soothing the player. CC occasionally breaks up the monotony with terrifying ferocious attacks
+Idea: Candy Cat also moves deceptively slowly/awkwardly to hide its true speed
 Uses the candy bits on his body as projectiles
 Lunge Splash: CC extends its torso to move its head and front paws in an arc up, forward, then behind the target. Its front paws land at a spot around a rose petal’s dist behind the target. On impact, molasses immediately spread from the impact site to a huge circular area around it, greatly slowing Cotu (more than snow and mite infestation) if he’s standing in it. The area covered by molasses then grows upward into sharp sugar crystals in an instant like rock spikes from Promised Consort Radahn’s spiral slam in Elden Ring
 Hypnosis ability
-When it opens its mask, Candy Cat exposes tentacles and/or a twitching eye, which emits hypnotic waves that distort its prey’s mind
+When it opens its mask, Candy Cat exposes a vibrating drum of molasses, which emits hypnotic waves that distort its prey’s mind
 Hypnosis makes the stability bar and buffs look like they’re increasing and changes their colors - it looks like Cotu has more stability and buffs he actually has
 SFX and music fade into the background, and a deep seductive male voice reverberates clearly to say relaxing words
 “Relax.”
-“Be calm.”
 “Ease your mind.”
-“Be still.”
+“Be…still.”
+“Let…me…in.”
 Used immediately before a powerful attack
 Song is calming, seductive, and insidious OR initially scary, then romantic and seductive like Never Never Gonna Give Ya Up by Barry White
 Idea: song has deep distorted lyrics
@@ -2398,19 +2466,55 @@ So soft, so sweet, so nice
 And it could be yours for a low low price
 Come a little closer, don’t be shy
 Why should a god be afraid to die?
-So soft, so sweet, so kind
-Even though you’re not a person in my eyes
-I like that you’re with me tonight
-Come into my realm and I can make you mine
-Candy Cat is a prisoner
-Candy Cat is locked away in gauntlet central bc it kept attacking gods whose bodies or realms contained some trace of sugar, and it showed no willingness to change (due to having the mind of a voracious beast). It traveled great distances using its wormholes, ate sugar, and turned the sugar into its body parts, enhancing them. The gauntlet keeps it in one place only by filling its holding chamber with allulose, which satisfies it and disables it bc allulose doesn’t crystalize, unlike sugar and sugar alcohols
-To train, gods can fight Candy Cat in a gauntlet holding cell. The gauntlet grants special access to that particular god, then gives Candy Cat a controlled dosage of sugar, then covers the challenger in sugar
+So warm, so sweet, so kind
+Come into my realm and I will make you mine
+All your effort to resist this delight
+Is useless, you will never win this fight
+Lore/Story Ideas:
+Candy Cat is a prisoner locked deep inside Gauntlet Central
+Candy Cat is strictly off-limits to all non-gauntlet-affiliated personnel, even Cotu
+Motive Idea 1: Sugar Addiction
+Candy Cat is imprisoned for attacking gods whose bodies or realms contained some trace of sugar, and it showed no willingness to change. It traveled great distances using its wormholes, ate sugar, and turned the sugar into its body parts, enhancing them. The gauntlet keeps it in one place only by filling its holding chamber with allulose, which satisfies it and disables it bc allulose doesn’t crystalize, unlike sugar and sugar alcohols
 Intro cutscene idea: Candy Cat sees Cotu covered in sugar and his eyes turn into candy hearts with messages on them (e.g. BE MINE)
+Cotu covers himself in sugar on purpose to provoke Candy Cat into fighting him
+Candy Cat initially tries seducing him instead but eventually caves and fights
+Motive Idea 2: Cosmic Bliss
+After the tournament, Candy Cat ate gods unprovoked and their souls never returned to their realms to regenerate. The Gauntlet deemed Candy Cat too dangerous to roam free, so they imprisoned it
+Why didn’t Candy Cat get caught during the tournament? Maybe it fought legitimately initially and didn’t discover its sugar abilities until after the tourney
+Cotu challenges Candy Cat to a fight, but Candy Cat attempts to convince him to join its harem
+Cat, relaxed and smug: “Fight? Why?”
+Cotu: “I thought you’d like fighting, since you attacked all those gods unprovoked. That’s why you’re stuck here, isn’t it?”
+Cat: “Oh, is that what the Gauntlet told you?” Cat chuckles. “No, no. That’s a lie. All I did was offer the gods something they couldn’t refuse.”
+Cotu: “And that was?”
+Cat: “Cosmic bliss, beyond your comprehension.”
+Cat faces Cotu.
+Cat: “Tell me, what is your goal in life?”
+Cotu: “...to win the tournament?”
+Cat: “Wrong…it’s to feel good for winning the tournament. Everything we do in our entire lives is to feel good.”
+Cotu looks part worried, part skeptical, as if he understands what Cat is saying
+Cat: “So if you felt good for your entire life, your life would be perfect. You wouldn’t want to do anything else. Everything else you could ever do…becomes meaningless.”
+Cat steps toward Cotu
+Cat: “That is what I offer. A perfect life.”
+Cotu: “...”
+Cat: “Don’t believe me? Look.”
+Cat opens its jaw to a sickening degree, exposing a pool of molasses in its mouth containing stationary icons
+Cotu is horrified but trying to stay nonchalant
+Cotu: “They’re not moving.”
+Cat: “They don’t want to. They’re right where they wanna be.”
+Cotu: “What happened to their bodies?”
+Cat giggles. “They became one with mine. We all share the same body. They feel everything I feel. And I feel everything they feel. Every last ounce of indescribable pleasure. That’s how I know they’re satisfied.”
+Cat giggles again. Cotu is frozen. Cat closes its mouth, and the darkness closes in on the souls one by one before they’re consumed
+Cat: “So, are you convinced? Are you ready to join us?”
+Cotu: “...nah, I got a tournament to win. Maybe I’ll think about it afterward.”
+Cat: “Did you not hear me? This feeling makes the tournament completely meaningless.”
+Cotu: “I’m not arguing.” Cotu draws his weapon
+Cat: “I see. You’re afraid of letting go of your old life, and that fear is keeping you from eternal happiness. Don’t worry. I’ll take care of you.”
+Monologue I don’t know where to put
+Cat: “I am the final god. In our eternal lives, we will do all that there is to do, and all that can be done. Eventually, everything you do will leave you bored and unfulfilled, and that’s when you’ll come running back to me.”
 Story Idea: Candy Cat’s escape
-In a back corner of gauntlet central, 2 lively NPCs are sitting and chatting. When Cotu approaches them and tries to talk to them, they get up and walk away without looking at him. Cotu comments on their rudeness. Typically, gauntlet gym NPCs are friendly and open to meeting new people
-During the gala, after a few matches have passed, news breaks out that Candy Cat has escaped confinement at gauntlet central. Blackstar is summoned by the gauntlet to aid the search for it and withdraws from the gala. X is also summoned by the gauntlet since he’s the one who eliminated Candy Cat during the tournament. Blackstar comments that the only way Candy Cat could have escaped is if someone smuggled sugar into gauntlet central, which shouldn’t have been possible since guests are screened before entering gauntlet central
-Idea: at the gala, without the watchful eyes of Blackstar and X, Cotu is kidnapped, ending the game
-Idea: to win the game, the player must bring Clarity or the mites to Candy Cat’s holding cell to restrain Candy Cat, AND stop the kidnappers by following the rude NPCs when they walk away
+The player sneaks into Candy Cat’s holding cell to get XP from killing it
+Cotu promises to become part of Candy Cat’s harem if Candy Cat agrees not to attack anyone after returning to its realm
+After killing Candy Cat, the souls trapped in its mouth return to their realms. The gods regenerate and feel suffering beyond comprehension for an unspecified length of time
 
 Flower Boss: (and/or Flower Clerk) Flora
 Gala boss
@@ -2929,6 +3033,8 @@ No name used to be subservient to his brothers (mainly Pilot since he was bossy)
 Jab Crab aka Jac Boss (just an idea)
 Heavily armored lobster with 2 big claws attached by long extendable/retractable tube arms (think of Claw Man, your My Hero Academia OC)
 Idea: his icon floats in front of his forward eye (left eye if he’s in orthodox stance, right eye if southpaw) and telegraphs his attacks by rotating, changing in size, and brightening
+
+
 
 Realm is a tiny arena surrounded by walls/floor spikes/floor shark teeth/whatever
 Can catch the rose and throw it aside and/or parry it
@@ -3784,12 +3890,26 @@ JC: “His personality’s an act?”
 Cotu: “I don’t know. That’s how good it is.”
 JC: “What if that’s just…the way he is?”
 Cotu: “Nah. He’s a mushy sweetheart on the inside.” JC chuckles. “Don’t tell him I said that. He’d hurl me a hundred light years into the void.”
+Cutscene of Grow-a-Gator receiving the Gala Invite
+Gator’s egg hatches. Gator looks around into space, then sees the invite. It slowly brings its head closer to the invite, then curiously and cautiously bites it
+The invite suddenly activates a hologram. It’s a life-size display of a formidable-looking warrior. Gator cowers into its egg
+97, regally: “Greetings, I am Gauntlet Variant 97. As you may have heard, the Universe Tournament has been restructured to no longer be an open tournament alone. To earn admission into the tournament, competitors must now win a qualifying event or series of events called a Gala.”
+Gator stares forward smiling like an idiot. It blinks its eyes individually
+97: “On behalf of the Gauntlet, I cordially invite you to the Gauntlet Gala, the greatest Gala event in the universe. When you participate in the Gauntlet Gala, you will train with the best fighters in the universe, and you will have access to the most knowledgeable and disciplined coaching staff in the universe: previous incarnations of the first tournament’s finalist, Blackstar.”
+Gator leans forward to bite 97’s ankle, but it rotates too far forward and the egg starts somersaulting
+97: “Additionally, given your realm’s location in sector [HEXCODE-HEXCODE], the Gauntlet Gala is your closest option.”
+Every time Gator’s head spins around to 97’s foot, Gator bites at it. The egg gets closer and closer to the invitation
+97: ”We hope to see you at the Gauntlet Gala. If you would like more information-”
+Gator bites the invitation, which is located where 97’s foot is
+97 then guides Gator to Gym 1. Gator breaks free from the egg and follows her just by floating through space slowly
 Cutscene of Grow-a-Gator’s arrival at Gauntlet Gym 1
-Grow-a-gator holds an invitation to the gauntlet gala and presents it to a gauntlet staff member
+Grow-a-gator follows his gala invitation to Gym 1 without knowing what it actually is
 The staff member kneels down and takes the invite, and sympathetically tells Gator that the registration for the gala has already ended and the competition has already begun at Gauntlet Gym 2
-Gator looks sad, grabs the invite back, and boops the staff members foot with its nose a couple times
-The staff member apologizes. He invites Gator to watch the matches at Gym 2 or to train with others here at Gym 1
-Gator looks over at the gods fighting just behind the staff member. Gator then drops the invite and looks down at it one more time. Camera switches to a close up of Gator’s neutral facial expression
+Gator bites the staff member’s foot
+The staff member reprimands Gator and tells it that violence is only condoned in a realm room
+Gator bites again
+The staff member draws their sword. “The Gauntlet has no tolerance for uncondoned violence. Unbite me or I will have no choice but to detain you.”
+Gator looks up at the staff member. Zoom in on Gator’s face. Gator smiles
 Cutscene that plays when you reach Gauntlet Gym 2: Grow-a-gator’s Attack
 While its hype theme song plays, Gator jumps up and down on top of a pile of dead bodies containing everyone from Gauntlet Gym 1
 Music inspiration: Laser Dance from Ocean’s Twelve, aka Khamzat Chimaev’s theme song: https://www.youtube.com/shorts/u8taxTK_6kw
@@ -3798,8 +3918,11 @@ It spots a nearby gauntlet shuttle, gets a wicked grin, and sprints to it. A gau
 It pops its head up from under the desk and rests it on the console, punches in some coordinates, then flies the ship into space while head-dancing on the console
 In the shuttle, to put in the coordinates for Gauntlet Gym 2, Gator simply spins on top of the console in a static pose
 While dancing in the shuttle, Gator moves its head back and forth in a downward facing arc
+Event that occurs after defeating 1 or 2 bosses at Gauntlet Gym 2
+In the hub area, background posters suddenly display a picture of Grow-a-Gator and the text “KNOWN TERRORIST”. The PA speakers explain that there was an attack on Gauntlet Gym 1 and that if anyone sees Gator, seek shelter and contact gauntlet personnel immediately
+Different people react to the announcement. Some think Gator’s cute and harmless, others are appalled at its actions, others are baffled that such a tiny creature could do such a thing
 Cutscene that plays when Grow-a-Gator reaches Gauntlet Gym 2
-Gator crash lands its ship. Its theme song starts playing as people turn to look at the wreckage. It somehow ends up on top of a high place, and jumps up and down and clumsily/slightly unclearly screams to all the fighters just as the song gets good: “rrrrrrrrrrAAAAHHHHH! I’LL BITE EVERYBODY! I’LL KILL EVERYBODY! EVERYONE HERE! I’LL KILL EVERYBODY! KILL KILL KILL KILL KILL KILL KILL KILL KELELELAH (incoherent babbling) RAAAAAHHHHH!!!”
+Gator crash lands its ship into a parking lot. There’s a wall obscuring the camera’s view of what’s happening on the parking lot’s ground level, but we see an explosion and a bunch of ships being thrown around and exploding. Gator’s theme song starts playing as people turn to look at the wreckage. Gator somehow ends up on top of a high place, and jumps up and down and clumsily/slightly unclearly screams to all the fighters just as the song gets good: “rrrrrrrrrrAAAAHHHHH! BITE EVERYBODY! KILL EVERYBODY! EVERYBODY! I KILL EVERYBODY! KILL KILL KILL KILL KILL KILL KILL KILL KELELELAH (incoherent babbling) RAAAAAHHHHH!!!”
 As Gator monologues, people prepare to fight it
 Slicer hunches down and ignites hand blades while Jumping Spider stands still
 Lobsters fist bump while Paramecium floats by
@@ -3808,10 +3931,9 @@ At Gator’s final scream, all the characters jump at Gator
 Inspired by Khamzat Chimaev’s rambling after defeating Kevin Holland: https://www.youtube.com/shorts/h2Xqm1km6J8
 Cutscene that plays when you meet Grow-a-Gator (maybe the sequence is: Gator arrives, player does a fight, this cutscene plays)
 Gator’s lying flat on its belly. It’s very fat and sleeping. All of the gauntlet shuttles and the communication tower are destroyed. It burps out a soul that flies away
-Idea: the player can sneak around Gator to get to the control room, where there are spare shuttles in the basement
 Cutscene that plays after you defeat Grow-a-Gator
 After Cotu defeats Gator, Gator struggles against Cotu’s grip.
-Gator: “KILL EVERYBODY! *incoherent babbling*”
+Gator: “KILL YOU! *incoherent babbling*”
 Cotu holds up his weapon and starts to strike, which causes Gator to freeze. Cotu realizes Gator’s frozen and stops.
 Cotu: “Stay.”
 Gator looks at Cotu
@@ -3819,10 +3941,10 @@ Cotu gets up and backs away. Gator lies motionless on the ground. [Camera is on 
 [Cut to Gator] Gator suddenly raises its head and looks up at Cotu. [Cut to Cotu] Cotu instantly raises and flashes his weapon.
 [Cut to Gator] Gator is lying motionless on the ground in the exact same pose it was in before. It then goes “bleh” and sticks its tongue out
 Cotu: “Hey.”
-Gator is still motionless
-Cotu: “If you want to kill somebody, ask for permission first.”
+Gator is still motionless. Cotu walks over to and crouches down in front of Gator
+Cotu talks sternly: “If you want to kill somebody, ask for permission first.”
 Gator: “...”
-Cotu: “Understand?”
+Cotu points his weapon at Gator: “Understand?”
 Gator: “...bleh.”
 Cotu slowly puts away his weapon. Gator lies still
 Idea: Cutscene that plays when Future Blade takes photos for the gala
@@ -3842,7 +3964,6 @@ Cotu walks by outside hearing screams of terror. He looks horrified and slowly t
 Cutscene that plays when Cotu makes it to a high rank in the gala (or makes it to the gala?): Blackstar’s first appearance
 Blackstar is grateful that Cotu made it this far so he can help her reincarnate. She’s also grateful that her friend is back
 She walks up to him and hugs him. After a moment of surprise and hesitation, he hugs her back. He has a look of sadness that turns into quiet resolution
-Context: the way this scene is written, Cotu held back against Blackstar in the final tournament match. He regrets it because he thinks it caused Blackstar to not reincarnate. He plans not to hold back in the gala
 
 Story Progression Arcs/Episodes (uses Plot Idea 3C)
 
@@ -4473,6 +4594,26 @@ Greg in his thoughts: “*sigh* She’s way outta my league, I’m not even gonn
 Greg approaches Blackstar
 Greg: “Sup, Blackstar, welcome to the ship.”
 Blackstar: “...hi.”
+Cotu and Pilot talking about life goals (similar to convo below where Cotu and Pilot talk about the future, maybe only one of the 2 can be kept?)
+The player is bored, so they choose to talk to Pilot
+Pilot wants to know more about Cotu
+Pilot: “Cotu, what’s your goal in life?”
+Cotu: “Heh, we’re getting deep right off the bat.”
+Pilot: “Sorry, am I going too fast?”
+Cotu: “Nah you’re good. I like it fast.”
+Pilot looks relieved
+Cotu: “My goal in life…is to get stronger. That’s all.”
+Pilot: “Oh. Um…don’t you get stronger all the time?”
+Cotu: “Yea, so I’m always achieving my goal and I’m always happy. Nice, right?”
+Pilot chuckles. “That does sound nice.”
+They sit in silence for a moment
+Pilot: “But…how strong are you going to get? When does it end?”
+Cotu: “...maybe when I’m stronger than all the other gods.”
+Pilot: “Didn’t you already prove that when you won the tournament?”
+Cotu: “I want to do it again.”
+Pilot: “And aren’t the other gods also getting stronger to keep up with you?”
+Cotu: “I guess I’ll just have to get even stronger.”
+Pilot laughs.
 Cotu and Pilot talking about the future
 Pilot’s unsure of what to do with his life, and he’s scared of not knowing
 Cotu always lives life in the present and enjoys what he does
