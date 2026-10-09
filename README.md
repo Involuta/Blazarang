@@ -140,7 +140,7 @@ Latra: coyote head and pointed eyes, wears a hoodie with hood down
 Comma: girl wearing sweater; eyes are same as default but with points coming from the bottom like commas. Hair is one solid piece and styled like a comma
 Casual: guy wearing slightly undone dress shirt, dress pants, overalls, and a fedora
 69: same body as Comma but with sporty clothes, and one eye has a point coming from the top instead of the bottom like an apostrophe
-QUEEN: girl with feminine pointed/almond stylized eyes, a curvaceous figure with large breasts, and thick voluptuous twintails. Wears a pleated miniskirt and a dress shirt. Unlocked after defeating Future Blade
+QUEEN: girl with feminine pointed/almond stylized eyes, a curvaceous figure with large breasts, and thick voluptuous twintails. Wears a stylish miniskirt and a skin-tight top. Unlocked after defeating Future Blade
 Flavor text: “Bow down.”
 Regal: long ceremonial-looking ornate cloak + fancy canine mask. Earned by winning the Gauntlet Gala and reaching the final tournament
 
@@ -1886,11 +1886,11 @@ Anim tree checks whether super charge time > min super charge time to know wheth
 Make Icon emit particles continuously on full charge
 Make Icon flash with light and explode with particles on release
 
-Current task
+Current task on hold until after Future Blade + possible other tasks
 Snowflake Boss: Comet/Clarity
 See Blazarang Long Tasks
 
-Remove SFX from roserang since it should be present in hurtboxes
+Remove hit SFX from roserang since it should be present in hurtboxes
 
 Try removing power throw from roserang (i.e. make it possible to turn the power throw ability system on/off) since it does the same thing as the ax. Replace it with an omnidirectional rose petal throw (when aiming up/down, the rose petal is simply tilted up/down)
 In power throw script, replace straight mvmt with roserang petal mvmt
@@ -1920,7 +1920,7 @@ If you use a stabilizer while you’re still stable, you’re briefly invincible
 
 Consider ax reworks to make it more fun and usable
 Idea: detonating the ax also recalls it, removing the floating ax continuous attack and increasing gameplay momentum (which also fits Cotu’s character more)
-To keep enemy and boss behavior consistent and simple, thick enemy collision layer also deflects (aka detonates) the ax
+To keep enemy and boss behavior consistent and simple, thick enemy collision layer also deflects (aka detonates) the ax and makes a special sound effect
 
 Idea: make rang techniques more complex so they feel more like unlocking skills in a martial art than a direct boost in strength
 Idea: instead of just 1 special, you have multiple specials you can use like cooldowns in Overwatch, except instead of spending time to use the cooldown again, you spend buffs. To choose which special to use, press the corresponding special button
@@ -1945,6 +1945,9 @@ This knowledge is available when both the ax and homing instant rethrow are unlo
 When the ax is airborne, dodging causes the icon to stop following Cotu just like dodging when the rose is airborne. This can be used to dodge gigantic attacks (as a substitute for a super jump or long dodge for example)
 Unlockable Skill
 “Stationary Soul”
+When a target is marked, holding the ax melee input instead of pressing it causes Cotu to fly towards the target and slice with the ax upon reaching his destination like Spectre Knight’s Judgment Rush in Shovel Knight: Shadow of Torment
+Unlockable Skill
+“Inevitable Doom”
 
 The player doesn’t really think about stability management. They’re just making the decision of whether to instant rethrow or dodge, which is fine and already entertaining on its own for gauntlet variant 1 and X, but it feels like a waste of the stability mechanic
 Idea: stability vs power v1
@@ -2179,6 +2182,24 @@ Jessica: “Great! If you want, I can-”
 Dev: “That’s all for now, bye.”
 Jessica disappears
 Dev: “...I’m using a modern model, why the f*ck does she still talk like that?”
+Alt intro cutscene that also explains gods: Gator hatches from the egg, then Jessica gives it the same rundown on its existence that she gave every other god when they were born
+[ACTIVATING…ICON]
+[ACTIVATING…REALM]
+[LOADING…BODY]
+[LOADING…AI]
+[INSTALLING…LANGUAGE]
+[ACTIVATING…BODY]
+[GOD STARTUP COMPLETE]
+Gator hatches and looks around its realm
+Jessica calmly approaches Gator like it’s a wild animal
+She introduces herself and gives Gator a warm welcome. She starts to explain everything while Gator tries to bite her and everything she talks about
+Jessica’s talking points:
+You’re a god
+What is a god + (your definition + your purpose)
+You have a soul (also called an icon), a realm, and one or more bodies
+Dev created this universe to have a tournament of gods
+Dev’s gone now but he left Jessica in charge of the simulation and the tournaments
+All gods were created at the start of the universe simulation, but not all of them were awake. About 20% of gods were asleep, and they’ll gradually wake up over time, but they won’t spend more than 1% of the universe’s lifetime total asleep
 Idea: Groa Transformation - if you defeat Gator in Gauntlet Gym 1 (which can happen if you wait long enough at Gym 1), you can take it to Gauntlet Central to give it as much time to train with elite athletes as possible. This causes Gator to reach a higher form later on: Groa
 Gauntlet Central boss
 Curvaceous, extremely sexy dragon-razorbill hybrid about 1.5 times Cotu’s height
@@ -2273,111 +2294,9 @@ Party Pillars
 Arena consists of a ton of small pillars and one giant pillar in the center with flashy people dancing on it
 One big dancer in the center does dance moves corresponding with movement patterns of the pillars below (e.g. arm/leg mvmts left → all pillars move to the left, spin → all pillars rotate)
 
+Current task
 Future Blade Boss
-Tall, skinny swordsman with robber fly motif; long wing-like cloak threads/scarves, long snout, long fake antennae on back of his head like Trobbio from Hollow Knight Silksong, and short stubby real antennae on his forehead
-Concept art inspiration
-Robber fly
-
-Gooseworx character (face and torso) (ignore the drill and hair)
-
-Clubbed mydas fly (fly anatomy, band on waist)
-
-Moves in sudden bursts of speed like an insect, even in casual settings (although with less speed)
-Does huge slashes and moves in quick, long dashes, but has “before-images” that show what he’s going to do a while before he does it
-Moves so frequently and quickly that the lingering before-images make it look/feel like several enemies are fighting you
-Only shows before-images when the sword is unsheathed and in his hands
-Before-image visual logic: when FB plans to dash slash, his semi-transparent before-image does the slash, leaving its own after-images in its path. These after-images are even more transparent and fade away briefly after spawning. The before-image also fades slightly, but quickly stops fading and just lingers until the real FB performs the dash slash himself and ends up in the same position as the before-image
-FB can “lie” and create a fake before-image that is distinct from the original in some way, likely the sword and outline color
-Lies can be created at the same time as real before-images to deceive/confuse the player
-After sending out a before-image, FB can change his mind and do something else, causing another before-image to appear and making the original disappear
-Has a wide variety of dash slashes and a few tricks
-Sword throw: FB throws his sword, then dashes over to catch the sword. This creates 2 before-images: one that lasts from the windup of the throw to the exact moment where it leaves his hands, and one that starts when he catches it and ends when he either sheathes the sword or does his next attack
-Lie Double Slash: FB dash slashes from a position with both a real dash slash and a lie dash slash
-Phase 2: FB transforms even more into a robber fly, discards some of his fashion, grows wings and possibly exposes an additional pair of limbs, and becomes even faster and generates even more images. He also coats his sword in corrosive venom using his beak
-This venom is actually chlorine trifluoride, one of the strongest oxidizers known to man. It’s reactive enough to corrode stainless steel, glass, and rock (i.e. silicate minerals). Since these are the most common chemicals present in god bodies (because they are the most common chemicals of solid objects in the universe), FB’s venom is a deadly threat to most gods, which may be why he’s ranked so high despite his disability. He’s predictable, but he only needs a few hits to kill you
-Monologue idea:
-FB envenomates his blade
-FB: “Since you made it this far, and you seem pretty chill, I’ll let you in on my big secret. I call myself Future Blade on purpose. It draws attention to my biggest weakness, and takes attention away from my biggest strength: venom. Even though it’s my trump card, my name and reputation alone made it so easy to forget. Just one touch, and…I’ll let you learn what happens next.”
-Phase 2 attacks:
-Flying thrust: FB sometimes flies up into the air and dive thrusts to the ground to attack. This creates a before-image in the air with FB’s wings exposed . Hitting a wing is one of the only ways (or the only way) to damage FB in phase 2
-Tackle: FB sheaths the sword and flies directly at the target to tackle it with his robber fly legs. Since the sword is sheathed, FB creates no before-image but moves much more slowly. Upon landing the tackle on Cotu, a grab animation plays where FB injects Cotu with his venomous beak
-Idea: FB grows an extremely durable exoskeleton. The only way to damage FB is to hit him in midair while his wings are exposed. This is most likely to occur when FB shows a before-image in flight with his wings wide open
-Idea: chats with friends while waiting for you to challenge him. Conversations are long and organic; they’re the type of conversation you’d hear between girls in public and want to eavesdrop on
-FB
-Smart, toxic, and responsible. Sassy
-Miss Serpentine (a snake): dumb, well-meaning, and responsible. Gentle
-Flora (flower girl in a pot of dirt): semi-smart, toxic, and irresponsible. Smooth
-Conversation ideas:
-Flora talking with X
-Flora: “...So I talked with X recently…”
-FB: “STOP.”
-MS: “No, go on! What’d you guys talk about?”
-Flora says they made small talk and eventually sparred together. Afterward, X told Flora that he respects her as a fighter. Flora enunciates this like it’s a huge deal
-FB: “That’s it?”
-Flora: “AND, he said I’m a ‘wise tactician.’”
-FB: “...girl.”
-Flora: “Now I know it doesn’t sound like much, but X doesn’t compliment people, so for him to say all this, maybe it means…something else, you know?”
-FB: “...girl, he does.”
-Flora: “Does what?”
-FB: “Give out compliments. He does that to everyone he trains with.”
-Flora: “WHAT THE HELL?”
-MS: “Really? I thought he was too mean for that.”
-FB: “You guys totally won’t believe me, but he’s actually a really nice guy. I haven’t seen him around the gyms, like, super often, but whenever I see him, he’s always kind and respectful. I’ve never seen him say anything mean to anyone, just to be mean. It’s always like, constructive criticism.”
-Flora: “So what was up with that whole tough guy persona he had during the tournament?”
-FB: “That was just to hype up the crowd for his fights, but that’s not who he is in real life. Have you ever even talked to him outside of this one conversation?”
-Flora: “...oh my god. Oh my GOD.”
-MS: “What’s wrong Flora? Shouldn’t you like him even more now? I know I do!”
-Flora: “Girl, him being mean is what made him hot!”
-…
-Note: After overhearing the part of the conversation where FB says X is nice, the player can confront X about it at the gala. X says that he has to be nice for people to want to train with him, and it’d be stupid to be mean to everyone. He can only be himself around you and his closest friends, and in the arena, when he talks to the crowd. What’s left out of his explanation is the fact that in the gyms, he’s Tempered X, who has a more gentle personality. The player can infer this themself
-Everyone talking about Cotu
-Subtext: in this case, Cotu didn’t choose to lose his powers, and the way that he lost his powers is shrouded in mystery
-Everyone speaks in more hushed tones
-MS: “I mean, it wasn’t his fault, right?”
-FB: “We don’t know that for sure. We don’t know anything. He didn’t make anything public.”
-Flora: “I heard one of the gods did it.”
-FB: “What? Which one?”
-MS: “Is that even possible?”
-Flora: “Okay, don’t tell him I told you this, but,” she scans around the room and notices Cotu has respawned. “Shit, he’s here.”
-FB raises his voice: “Oh my god, Snakes, you have got to tell us about…what it’s like to be part of a hive mind.”
-Miss Serpentine talking about what it’s like to be part of a hive mind
-
-
-Everyone talking about the idea of adding weight divisions to the gala
-
-
-FB telling Flora to look for a better coach than him
-FB coaches Flora, who is his star student. He believes that Flora has grown beyond his coaching and wants her to move on to better coaches (i.e. coaches who can teach her how to use her powers better), but Flora wants to keep spending time with her friend FB
-Coached by her friend FB. A brilliant student who has the potential to rival top gods if taught by a coach whose skillset and power level more closely matches hers (e.g. late gauntlet variants), but she’s reluctant to train with them because she doesn’t want to lose her friend FB
-FB suggests late gauntlet variants
-Flora says they’re boring
-Misc ideas:
-FB tells Flora to shut up before he tips over her pot
-MS giggles at something
-Lore/story ideas:
-Is a high-level contender
-Zesty, sparkly, clearly put effort into his own visual design
-Observant and has high fight IQ; frequently comments on his and others’ combat capabilities and strategies, often sassily. Others often come to him for advice, and he’s looked up to as a great coach
-Line idea: “When I see people train, I have a tendency to just, like, tell them whatever I’m thinking, and I think they’re confusing it for coaching. Now people keep coming to me for advice, and like…don’t get me wrong, it’s nice to help, but like…*sigh*...sometimes they bite my ankles.” (referring to Grow-a-Gator)
-Rolls his eyes (metaphorically and literally) at Cotu bc Cotu’s weapon is overpowered
-Jealous of all other fighters because his attacks are telegraphed the most. Leads to self doubt
-Line idea: “Ugh, it’s just that I’m like…so jealous, of literally everyone who isn’t me, ‘cause, like...” He swiftly raises his blade and dashes right in front of Cotu, which gets telegraphed with a before-image
-Convo idea:
-FB: “I have so many bad habits, like, I talk too much, I’m too honest, I say ‘like’ too often and it’s like…damn, look…do I just suck? Like at life? Am I just dumb?”
-Cotu: “No, of course not. You’re one of the smartest fighters I know.”
-FB: “People keep telling me that, but I know they’re all wrong ‘cause I know I’m stupid. Wait, if I’m stupid, doesn’t that mean I’m wrong and they’re right, and I’m actually smart? Ugh, whatever, I don’t care anymore.”
-Cotu looks confused
-Convo idea after defeat:
-FB: “No matter how hard I train…no matter how many techniques I learn, no matter how often I mix things up, you’ll always know my next move. How is that fair at all?”
-Cotu: “Blade...you can still keep up with me. You fight on the level of the elite contenders. It’s impressive what you’ve accomplished despite telegraphing every move. You should be proud.”
-FB: “I’ll be proud…when…I get a win over you in the tournament.”
-His telegraphing is balanced by his incredibly high speed, precision, and strength
-Relates to and quickly grows attached to Cotu as he’s the first person he’s met who really seems interested in their own visual design like FB is
-FB only comments on this if the player chooses a non-default skin
-FB: “Oh my god. People said I was CRAZY for changing my looks this much.”
-Cotu raises an eyebrow: “I didn’t know it was that big of a deal.”
-FB: “*sigh* You have no idea.”
-Idea: FB has a locket with Trobbio’s face in it (ask Team Cherry first)
+See Blazarang Long Tasks
 
 Idea: Cactyrants - Evil Cactus and Giant Bird
 Surreal, funny, and disturbing Gauntlet Gym 2 boss
@@ -4111,8 +4030,8 @@ Afterward, Cotu has one last chance to upgrade himself, or enter the tournament 
 If the player chooses not to upgrade Cotu, they get the good (canon) ending
 If the player chooses to upgrade Cotu, they buy all the upgrades (they have to in order to progress) and trigger the Singularity ending
 Good Ending
-Cotu walks away from the upgrade room, feeling content
-Undecided what happens after
+Idea: Singularity attempts to take over Cotu’s body, but Grow-a-Gator somehow saves Cotu
+Idea: at one point in the game, Cotu told Grow-a-Gator to “come by [his realm] anytime”, thus granting Grow-a-Gator full access to Cotu’s realm
 Singularity Ending
 Idea: after upgrading himself, Cotu has an inner conflict before finding that he’s split into 2 versions: Cotu and the Singularity (aka Sy). Sy steals Cotu’s icon and turns it into a weapon not used in the game up until this point: the chakram (just an idea).
 Sy throws the chakram at a defenseless Cotu before Jessica appears to save Cotu, subdue Sy, and think about what to do next
@@ -4839,6 +4758,9 @@ Cotu: “Goodbye, Creator.”
 Dev: “Bye, Cotu. Enjoy your life.”
 Cotu does a cool exit
 Miscellaneous Trivia
+Gods
+Idea: all gods can speak through their icons, which works like telepathy (no audible voice, only subtitles), but in order to use their actual voice, they need a body
+Gods typically talk using their bodies when they have them. To them, talking through their icons when their bodies are available is like you texting someone when you’re standing right in front of them
 Blazar / Blaze / Cotu
 Named after blazars
 Blazars are quasars pointed towards Earth
