@@ -1704,35 +1704,19 @@ BackRight
 Remove WalkLeftPassive and WalkForwardPassive. The passive/aggressive difference is too subtle to see and can frustrate the player. The subtle non-attacking vs attacking modes are shown via the lowered arm and the slowly rising arm
 Choose a visual design concept for Phase 1
 Requirements:
-Teach the player the non-obvious gameplay concepts used in phase 2. Introduce obvious mechanics in phase 2 since the player’s required to learn them on the fly (i.e. while in more danger and with higher stakes)
-Non-obvious concepts
-Stay in a certain area (this isn’t obvious bc you wouldn’t learn this until you get too far away)
-The snowflake is only vulnerable when its eye changes color (this isn’t obvious bc the snowflake is unhittable most of the time while the shards are always hittable, so initially, the player may assume that the snowflake is just never hittable, which prevents them from trying)
-Hitting the snowflake hits all shards linked to it
-When given the choice between hitting a shard and hitting the snowflake, always choose the snowflake (this isn’t obvious bc the player would only learn this through trial and error)
-Obvious concepts
-Hit the glowing weak point on the head when it appears
-Destroy dress shards to force regeneration, which makes head vulnerable (this is obvious bc you’re most likely already hitting/destroying the dress shards since they’re right in front of you, so you’ll definitely see what happens next)
-OR let the player learn the hard concepts on their own in phase 2. You don’t want to end up like the Wolverine game where they baby the player all the time. Let the player figure complex things out on their own and they’ll feel more engaged and accomplished. In phase 1, you can reveal the most obvious concepts that the player would have figured out quickly anyway
-Concepts to learn in phase 2:
-Hit the glowing weak point on the head when it appears (this isn’t a hard concept, but I’m thinking it would be cool to introduce the snowflake before the body)
-Destroy dress shards to force regeneration, which makes head vulnerable (this also isn’t a hard concept bc you’re most likely already hitting/destroying the dress shards since they’re right in front of you, so you’ll definitely see that that causes regeneration, but again, I’m thinking of intro-ing body after snowflake)
-Hitting the snowflake hits all shards linked to it
-When given the choice between hitting a shard and hitting the snowflake, always choose the snowflake (this isn’t obvious bc the player would only learn this through trial and error)
-Things that are fine to reveal in phase 1:
-Stay in a certain area
-The snowflake is only vulnerable when its eye changes color
 Contrast with phase 2
 Phase 2
 Big
 Slow
 Intimidating
-Fast sweeping attacks
+Fast sweeping attacks + complex projectile combos
+Trying to kill you
 Phase 1
 Small
 Fast
 Cute
-Slow thrust attacks
+Slow thrust attacks + simple projectile combos
+Trying to preserve you
 Fit Clarity’s character role → but what is that role? Choose the best option given her character design, her gameplay, and the game’s overarching stories
 Tournament fighter
 Ambition matches her angry-looking design and focused movement
@@ -1811,31 +1795,74 @@ Indicates the ability to observe (it has a big eye) and doesn’t indicate wheth
 Issues:
 None
 Final choice: Ephyra - it contrasts with phase 2 by being cute and fast/chaotic, reveals basic concepts about the phase 2 which act as teaching and subtle foreshadowing, and fits Clarity’s character as an autonomous monster/force of nature (ephyra isn’t human nor acts like one)
-Current task
-Create Phase 1 moveset
+Design Phase 1 moveset
 Requirements
-Phase feels like a puzzle more than a fight
-Phase is medium length (maybe around 60 seconds) if you don’t know what you’re doing, and short (15-30 secs) if you do
+Phase feels mildly difficult at first, then easy once you get the hang of it
+Phase is medium length (maybe around 60 seconds) if you don’t know what you’re doing, and short (30 secs) if you do
 Fit Clarity’s character
 Her (faded mind’s) motivation was to trap you in her realm. Now that she’s done that, all she wants to do is observe you and keep you from leaving (which fits her deep-seated loneliness). So then why would she attack you while you’re already in her realm? The only reason that makes sense is self-defense. → Cotu tries to provoke her by destroying her heart. The heart could be the old ice sprite spawner, a polyhedron with rotating hexagons
 Boss should teach the player the simplest concepts of phase 2 (the player must learn the harder concepts on the fly)
 Simple concepts to introduce in phase 1:
+Dodge a bunch of projectiles
 Stay in a certain area (for phase 1, maybe there’s a small arena you have to stand in instead of just being near the boss?)
 The snowflake is only vulnerable when its eye changes color
+Ice sprites
 Harder concepts to save for phase 2:
 Hit the glowing weak point on the head when it appears
 Destroy dress shards to force regeneration, which makes head vulnerable (this is obvious bc you’re most likely already hitting/destroying the dress shards since they’re right in front of you, so you’ll definitely see what happens next)
 Hitting the snowflake hits all shards linked to it
 When given the choice between hitting a shard and hitting the snowflake, always choose the snowflake (this isn’t obvious bc the player would only learn this through trial and error)
-Attacks
-
-
-Fight procedure
-
-
-Create Phase 1 concept
+Pre-fight sequence
+Cotu is trapped in Clarity’s realm and trudging forward using the roserang as a torch against the snow
+Eventually, Clarity’s icon appears. It watches him slowly and patiently. Cotu marches on towards the god’s main body; a heart. He attacks it
+The icon is surprised/enraged and blows Cotu away from the heart, then phase 1 begins
+Current task on hold until after Future Blade + possible other tasks
+Create other bosses before designing ephyra’s behavior and attacks. Why?
+The ephyra is supposed to feel very different from other bosses because it's just an icon and has low/simple intelligence, but I can’t make a boss that breaks the mold if I don't have a solid enough grasp on what the mold is yet. Currently, I’ve implemented gauntlet variant 1, X, mites, Clarity phase 2, and an early version of jumping spider. As it stands now, I only have 1 boss that properly sets the mold (X) and half of a boss that sets the mold (gauntlet tower isn’t multifaceted, interesting, nor challenging enough to set the standard for a Blazarang boss fight, which is why it’s part of an army battle). The other bosses I’ve implemented are meant to break the mold. I need 1 or 2 more examples of more typical bosses (fast-paced, tactical) before making another mold breaker.
+Another reason to make other bosses first is that I conceptualized several bosses that are guaranteed to be in the game before the ephyra (e.g. Future Blade, Grow-a-Gator, Candy Cat). If I have ideas of what they should be like and those ideas aren’t likely to change, AND I don’t have a solid grasp on what the ephyra should be like, I should implement/flesh out the solid bosses first and reshape ephyra to fit them
+Implement typical boss 1: Future Blade (because his idea is the most solid out of all not-yet-made bosses)
+Implement typical boss 2: Grow-a-Gator (because his idea is the second most solid; I’m more willing to change Gator to fit or contrast FB)
+Behavior & Attacks
+Note: all attacks (i.e. all interaction with the physical world) require ephyra to have a body
+Idea: it floats around as a naked icon for a bit before doing a telegraph anim, where it assembles pieces to make a body (like phase 2 snowflake entity’s single shard seq 1 but faster)
+Ephyra uses tricky mvmt during telegraph anims. It’ll be hard for a player to hit it during a telegraph on their first try, but they should be able to manage after predicting the snowflake’s mvmt
+Idea: it’s staggerable as long as it has a body, which makes it feel fragile
+Straight barrage: ephyra flies along the ground in a circular path around the target while spinning (spin axis is dir to target). It pulls ice pellets up from the ground below it to itself in rapid succession. When a pellet touches the eye, it is redirected to the target
+Hitting it at any pt during this attack will stagger it since when a pellet is at its eye, that pellet is its body
+Omni barrage: ephyra hovers at roserang throw height and spins w spin on vertical axis. It continuously pulls pellets up from the ground and shoots them in all directions. Hitting pellets with any rang will destroy them
+Ascent shot: similar mvmt to phase 2’s jump shot but faster, and instead of a jump (sudden burst of speed), it’s a smooth acceleration upwards. A telegraph anim occurs during the ascent and finishes at the apex. At the apex, ephyra shoots a shotgun spread of pellets at the target
+Ice sprite spawn to snow shower combo
+Ephyra does a telegraph anim, then shoots small ice balls in a spread upward/in front of it. These balls spawn ice sprites out of the ground after a bit
+Ephyra then flies around at a moderate distance in strange ways to make the player lose track of it as they deal with the sprites
+At some point while moving laterally, the ephyra does a telegraph anim. Once this completes, it continuously blows snow forward a short distance in a cone shape while moving twds the target. The only way to stop it is to hit it, which staggers it and destroys the body
+Snow blast: ephyra charges up, then blasts snow in a huge area in front of it. The only way to avoid getting damaged by this is to get behind it or stagger it with good timing
+Idea: shoot shards into the ground to summon ice sprites
+Telegraph anim is phase 2 snowflake entity’s single shard seq 1 but double the speed
+Alt idea: hitting the ephyra causes its attached pieces to fly out as projectiles. When they hit the ground, they spawn ice sprites
+Create Phase 1 visuals
 Make sketch
-Make model
+
+Phase 2 left, phase 1 right
+Make flat model
+
+Try rounding out the outer corners of the wings and hexagon to make it softer and friendlier-looking
+
+Try adding more detail to the wings to make it look more full
+
+
+I like eye-type designs the best, iterate on them
+
+Also try changing the wings
+
+I want the ephyra’s wings to look floppy, make them stick out some more, but not as far as the oldest versions since they look too flimsy
+
+Make them stick out even more
+
+Try making the wings fuse in an outer ring
+
+Idea: ephyra is animated to show Clarity’s soul’s/mind’s complexity compared to other gods
+Make solid body (in pieces)
+Make rig
 Make ice sprites droplet-shaped so they feel more like video game slimes and so they match jellyfish egg design
 Idea: snowflake entity buzzsaw attack
 While ice sprite spawner is rising, Clarity can raise the arm to touch the snowflake entity’s eye, then bring the arm down in front of her while spinning the snowflake faster and faster, then releasing it like an ice sprite spawner planet to orbit around the ice sprite spawner before returning to Clarity OR launch it towards the target like a boomerang, then it comes back and Clarity catches it/pins it with her arm and puts it back in its place
@@ -1851,3 +1878,122 @@ Like an ice skater, Clarity leaps into the air, tucks in her arm and dress shard
 Blizzard safezone shrinks to nothing if you take too long to defeat Clarity at the end of phase 2
 Idea: occasionally, songbird-like ice creatures will fly onto Clarity and stare at the target. They all fly away when she attacks, but there’s a slight chance they fly away beforehand to explore around
 Idea: Cotu can make snowballs and throw them with no stability cost (but making a snowball isn’t fast). Hitting an ice sprite with a snowball triggers its explosion
+
+Future Blade Boss
+Tall, skinny swordsman with robber fly motif; long cloak-like wings, pointed face, long fake antennae on back of his head like Trobbio from Hollow Knight Silksong, and short stubby real antennae on his forehead
+Concept art inspiration
+Robber fly
+
+Gooseworx character (face and torso) (ignore the drill and hair)
+
+Clubbed mydas fly (fly anatomy, band on waist)
+
+Moves in sudden bursts of speed like an insect, even in casual settings (although with less speed)
+Does huge slashes and moves in quick, long dashes, but has “before-images” that show what he’s going to do a while before he does it
+Moves so frequently and quickly that the lingering before-images make it look/feel like several enemies are fighting you
+Only shows before-images when the sword is unsheathed and in his hands
+Before-image visual logic: when FB plans to dash slash, his semi-transparent before-image does the slash, leaving its own after-images in its path. These after-images are even more transparent and fade away briefly after spawning. The before-image also fades slightly, but quickly stops fading and just lingers until the real FB performs the dash slash himself and ends up in the same position as the before-image
+FB can “lie” and create a fake before-image that is distinct from the original in some way, likely the sword and outline color
+Lies can be created at the same time as real before-images to deceive/confuse the player
+After sending out a before-image, FB can change his mind and do something else, causing another before-image to appear and making the original disappear
+Has a wide variety of dash slashes and a few tricks
+Sword throw: FB throws his sword, then dashes over to catch the sword. This creates 2 before-images: one that lasts from the windup of the throw to the exact moment where it leaves his hands, and one that starts when he catches it and ends when he either sheathes the sword or does his next attack
+Lie Double Slash: FB dash slashes from a position with both a real dash slash and a lie dash slash
+Phase 2: FB transforms even more into a robber fly, discards some of his fashion, grows wings and possibly exposes an additional pair of limbs, and becomes even faster and generates even more images. He also coats his sword in corrosive venom using his beak
+This venom is actually chlorine trifluoride, one of the strongest oxidizers known to man. It’s reactive enough to corrode stainless steel, glass, and rock (i.e. silicate minerals). Since these are the most common chemicals present in god bodies (because they are the most common chemicals of solid objects in the universe), FB’s venom is a deadly threat to most gods, which may be why he’s ranked so high despite his disability. He’s predictable, but he only needs a few hits to kill you
+Monologue idea:
+FB envenomates his blade
+FB: “Since you made it this far, and you seem pretty chill, I’ll let you in on my big secret. I call myself Future Blade on purpose. It draws attention to my biggest weakness, and takes attention away from my biggest strength: venom. Even though it’s my trump card, my name and reputation alone made it so easy to forget. Just one touch, and…I’ll let you learn what happens next.”
+Phase 2 attacks:
+Flying thrust: FB sometimes flies up into the air and dive thrusts to the ground to attack. This creates a before-image in the air with FB’s wings exposed . Hitting a wing is one of the only ways (or the only way) to damage FB in phase 2
+Tackle: FB sheaths the sword and flies directly at the target to tackle it with his robber fly legs. Since the sword is sheathed, FB creates no before-image but moves much more slowly. Upon landing the tackle on Cotu, a grab animation plays where FB injects Cotu with his venomous beak
+Idea: FB grows an extremely durable exoskeleton. The only way to damage FB is to hit him in midair while his wings are exposed. This is most likely to occur when FB shows a before-image in flight with his wings wide open
+Idea: chats with friends while waiting for you to challenge him. Conversations are long and organic; they’re the type of conversation you’d hear between girls in public and want to eavesdrop on
+FB
+Smart, toxic, and responsible. Sassy
+Miss Serpentine (a snake): dumb, well-meaning, and responsible. Gentle
+Flora (flower girl in a pot of dirt): semi-smart, toxic, and irresponsible. Smooth
+Conversation ideas:
+Flora talking with X
+Flora: “...So I talked with X recently…”
+FB: “STOP.”
+MS: “No, go on! What’d you guys talk about?”
+Flora says they made small talk and eventually sparred together. Afterward, X told Flora that he respects her as a fighter. Flora enunciates this like it’s a huge deal
+FB: “That’s it?”
+Flora: “AND, he said I’m a ‘wise tactician.’”
+FB: “...girl.”
+Flora: “Now I know it doesn’t sound like much, but X doesn’t compliment people, so for him to say all this, maybe it means…something else, you know?”
+FB: “...girl, he does.”
+Flora: “Does what?”
+FB: “Give out compliments. He does that to everyone he trains with.”
+Flora: “WHAT THE HELL?”
+MS: “Really? I thought he was too mean for that.”
+FB: “You guys totally won’t believe me, but he’s actually a really nice guy. I haven’t seen him around the gyms, like, super often, but whenever I see him, he’s always kind and respectful. I’ve never seen him say anything mean to anyone, just to be mean. It’s always like, constructive criticism.”
+Flora: “So what was up with that whole tough guy persona he had during the tournament?”
+FB: “That was just to hype up the crowd for his fights, but that’s not who he is in real life. Have you ever even talked to him outside of this one conversation?”
+Flora: “...oh my god. Oh my GOD.”
+MS: “What’s wrong Flora? Shouldn’t you like him even more now? I know I do!”
+Flora: “Girl, him being mean is what made him hot!”
+…
+Note: After overhearing the part of the conversation where FB says X is nice, the player can confront X about it at the gala. X says that he has to be nice for people to want to train with him, and it’d be stupid to be mean to everyone. He can only be himself around you and his closest friends, and in the arena, when he talks to the crowd. What’s left out of his explanation is the fact that in the gyms, he’s Tempered X, who has a more gentle personality. The player can infer this themself
+Everyone talking about Cotu
+Subtext: in this case, Cotu didn’t choose to lose his powers, and the way that he lost his powers is shrouded in mystery
+Everyone speaks in more hushed tones
+MS: “I mean, it wasn’t his fault, right?”
+FB: “We don’t know that for sure. We don’t know anything. He didn’t make anything public.”
+Flora: “I heard one of the gods did it.”
+FB: “What? Which one?”
+MS: “Is that even possible?”
+Flora: “Okay, don’t tell him I told you this, but,” she scans around the room and notices Cotu has respawned. “Shit, he’s here.”
+FB raises his voice: “Oh my god, Snakes, you have got to tell us about…what it’s like to be part of a hive mind.”
+Miss Serpentine talking about what it’s like to be part of a hive mind
+
+
+Everyone talking about the idea of adding weight divisions to the gala
+
+
+FB telling Flora to look for a better coach than him
+FB coaches Flora, who is his star student. He believes that Flora has grown beyond his coaching and wants her to move on to better coaches (i.e. coaches who can teach her how to use her powers better), but Flora wants to keep spending time with her friend FB
+Coached by her friend FB. A brilliant student who has the potential to rival top gods if taught by a coach whose skillset and power level more closely matches hers (e.g. late gauntlet variants), but she’s reluctant to train with them because she doesn’t want to lose her friend FB
+FB suggests late gauntlet variants
+Flora says they’re boring
+Misc ideas:
+FB tells Flora to shut up before he tips over her pot
+MS giggles at something
+Lore/story ideas:
+Is a high-level contender
+Zesty, sparkly, clearly put effort into his own visual design
+Observant and has high fight IQ; frequently comments on his and others’ combat capabilities and strategies, often sassily. Others often come to him for advice, and he’s looked up to as a great coach
+Line idea: “When I see people train, I have a tendency to just, like, tell them whatever I’m thinking, and I think they’re confusing it for coaching. Now people keep coming to me for advice, and like…don’t get me wrong, it’s nice to help, but like…*sigh*...sometimes they bite my ankles.” (referring to Grow-a-Gator)
+Rolls his eyes (metaphorically and literally) at Cotu bc Cotu’s weapon is overpowered
+Jealous of all other fighters because his attacks are telegraphed the most. Leads to self doubt
+Line idea: “Ugh, it’s just that I’m like…so jealous, of literally everyone who isn’t me, ‘cause, like...” He swiftly raises his blade and dashes right in front of Cotu, which gets telegraphed with a before-image
+Convo idea:
+FB: “I have so many bad habits, like, I talk too much, I’m too honest, I say ‘like’ too often and it’s like…damn, look…do I just suck? Like at life? Am I just dumb?”
+Cotu: “No, of course not. You’re one of the smartest fighters I know.”
+FB: “People keep telling me that, but I know they’re all wrong ‘cause I know I’m stupid. Wait, if I’m stupid, doesn’t that mean I’m wrong and they’re right, and I’m actually smart? Ugh, whatever, I don’t care anymore.”
+Cotu looks confused
+Convo idea after defeat:
+FB: “No matter how hard I train…no matter how many techniques I learn, no matter how often I mix things up, you’ll always know my next move. How is that fair at all?”
+Cotu: “Blade...you can still keep up with me. You fight on the level of the elite contenders. It’s impressive what you’ve accomplished despite telegraphing every move. You should be proud.”
+FB: “I’ll be proud…when…I get a win over you in the tournament.”
+His telegraphing is balanced by his incredibly high speed, precision, and strength
+Relates to and quickly grows attached to Cotu as he’s the first person he’s met who really seems interested in their own visual design like FB is
+FB only comments on this if the player chooses a non-default skin
+FB: “Oh my god. People said I was CRAZY for changing my looks this much.”
+Cotu: “I didn’t know it was that big of a deal.”
+FB: “*sigh* Enjoy your innocence while it lasts.”
+Idea: FB has a locket with Trobbio’s face in it (ask Team Cherry first)
+Current task
+Task notes:
+Make early sketches
+
+
+
+
+Add body/clothing detail (armor, wings, etc.)
+Narrow shoulders bc wide shoulders convey strength, but he relies on intelligence and speed
+Light armor since he’s a bug and he’s fragile and he cares about protecting himself, and he wants mobility
+Cape-like wings
+
+
