@@ -392,7 +392,8 @@ Test if mites can navigate around solid objects that aren’t part of the nav me
 They can! I tested this with a cube over twice their width and they could still navigate around it. With a smaller round object, they could totally avoid it
 Hard eggs all disappear once jumping spider arrives
 Jumping hopmites (work on this after shurikens; even though you’re currently familiar and comfortable with mite code, you don’t know how (or if it’s possible) to make hopmites stand out from both landmites and shield enemies aka melee tier 3s from gauntlet level 1)
-Looks like a camel spider with an ant door head
+Looks like a mite harvestman (not a harvestman)
+
 Dies in 3 unbuffed rose hits from behind or 1 unbuffed ax hit + explosion
 Has big head that ricochets rose hits from the front
 Mvmt states:
@@ -405,6 +406,8 @@ Thick mites (size is btwn landmite and jumping spider, slightly smaller than hop
 Dies in 5 once-damage-buffed rose hits or 2 unbuffed axrang hits + 1 unbuffed axrang explosion
 Has somewhat more health than a landmite, but is easier to hit since it’s a big target and can’t jump
 Runs significantly faster than landmites but can’t jump
+Gallmites: environmental spike hazard that pokes out of the ground
+
 Jumping Spider is a gimmick boss that doesn’t fit the rest of the level. Replace it with the Megamite
 Gigantic thick mite with a back full of eggs like a Surinam toad, but instead of a set of holes, it’s one big hole that acts like a bowl (this makes modeling easier)
 Slowly walks on walls and floors with the same code as the procedural anim spider (instead of a nav agent, set the mite’s walk and turn inputs to make it walk around the arena)
@@ -1986,14 +1989,13 @@ FB: “*sigh* Enjoy your innocence while it lasts.”
 Idea: FB has a locket with Trobbio’s face in it (ask Team Cherry first)
 Current task
 Task notes:
-Make early sketches
+Make early face sketches
 
 
+Make early body shape sketches
 
 
 Add body/clothing detail (armor, wings, etc.)
 Narrow shoulders bc wide shoulders convey strength, but he relies on intelligence and speed
 Light armor since he’s a bug and he’s fragile and he cares about protecting himself, and he wants mobility
 Cape-like wings
-
-
