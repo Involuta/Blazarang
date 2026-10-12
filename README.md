@@ -4226,7 +4226,9 @@ All 3 brothers also want to find their realm
 Cotu: “I think that might be what I need. A goal to work towards. Now that I’ve won the first tournament, I just need something else to work towards. But what could be bigger than that?” “...Why am I thinking bigger? Being the most powerful god in the universe is already a lot to ask, hehe. I guess there’s nowhere to go but down.”
 Cotu never had this discussion with the gauntlet. He always thought they were too busy to have a sit down like this. “Besides, it’s obvious what they want in life. All they want to do is be the best. I could see them getting the belt and defending it till the end of time. But they’ll have to get through me first.”
 These existential doubts are what caused Cotu to upgrade his powers after T1. He kept pushing and pushing until he finally reached the singularity, forcing Jessica to reset his post-T1 memories and reset his powers
-Idea: he secretly trained with Mike, who wanted to achieve a singularity of his own
+Idea: Cotu hid in his realm while he upgraded himself relentlessly. When he reached the singularity, Jessica intervened before he could unleash his power into the universe. She entered his realm, reset his powers, and started tinkering with his memories. When she started doing so, she used AI deepfake technology to send a message to the universe as Cotu to tell everyone that everything’s okay and Cotu’s been on hiatus just resting in his realm on vacation
+After resetting his powers and erasing his memory of reaching/using the singularity, Jessica told Cotu to never do that again or else she’ll have to delete him
+This origin story is why Cotu now perpetuates the lie that he went on vacation after the tournament
 Good ending events:
 Cotu takes his own advice (that he gave Blackstar) and decides that the skills available to him in his current upgrade tree are enough, and he doesn’t need power and success to be happy
 Maybe Jessica appears and tells him that he passed her test
@@ -4792,7 +4794,10 @@ Stretch goal: its slam attack starts a somersault. After the initial slam, there
 Flying giant moths
 Circles the arena while carrying a ton of landmites and paramites on its back. When it gets close to the arena, the landmites jump onto it and the paramites do their parachute launch
 Can be hit by roserang’s homing special. Upon multiple hits, it flies away from the arena while descending, preventing any mites still on its back from jumping to the arena
-At one point, JS leaving the arena was inspired by a bug where it jumped to its jump destination, but didn’t stop like it was supposed to, causing it to slide up the side of the arena and fly out. Somehow, it always eventually found its way back. To implement the (now unused) arena leaving feature, I had to deliberately cause the bug to occur again
+In real life, mites are one of the most diverse groups in the animal kingdom. This is because they’re quite modular; many of their parts (mouth, legs, body shape, size) can adapt individually to fit their environment, which fits the variety of mites in-game
+Source: https://www.youtube.com/watch?v=nFLQvtHnzOQ
+Mites are one of the most numerous animals on Earth and they populate everything everywhere (e.g. face mites that feed on your skin oil), which fits their personality in-game to conquer everything
+At one point, JS leaving the arena was inspired by a code bug where it jumped to its jump destination, but didn’t stop like it was supposed to, causing it to slide up the side of the arena and fly out. Somehow, it always eventually found its way back. To implement the (now unused) arena leaving feature, I had to deliberately cause the bug to occur again
 Jumping spiders have some of the most advanced eyes in the animal kingdom, which is why JS can see Cotu while he’s invisible
 Microwave
 Originally just a funny gimmick that also fit my idea of an ideal robot soldier (small size so it can move quickly and be difficult to hit)
@@ -4805,7 +4810,9 @@ The Creator asked the AI to name itself, and the AI decided on Jessica because i
 The Creator made some changes to the virtual universe from his own universe, which has the same rules as ours
 Vastly increased the speed of light to make interstellar travel/communication easier
 Added stability
-Designed the gods himself
+Set the rules for what a god is
+The reason why he gave them all realms is so that they don’t have to pay rent like he does
+Designed some of the gods himself but left Jessica to do the others
 Gods were meant to be good, but Jessica, being an unreliable AI, messed that up sometimes
 Stability
 Gods naturally produce stability from their icons
