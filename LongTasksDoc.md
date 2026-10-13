@@ -1772,7 +1772,7 @@ Matches phase 2’s design the most (long oral arms become scarves, short oral a
 Awesome; feels cool to hunt
 Issues:
 If Clarity can move freely in her base form, why is she trapped in the void? → Maybe she’s just been swimming in circles
-Concept 3: Colony of small jellyfish
+Concept 3: colony of small jellyfish
 Vibe: these are harmless critters that are passive and unintelligent. I’m making the conscious decision to murder these innocent critters in their natural habitat knowing that there may be dire consequences; not because the creature will fight back, but because it’s morally wrong → irrationality of player’s actions + lack of danger + intimidating environment = tension
 Positives:
 Defenselessness makes them sympathetic
@@ -1796,8 +1796,26 @@ Smallness and weakness contrasts with phase 2’s largeness and strength
 Fits jellyfish motif
 Indicates the ability to observe (it has a big eye) and doesn’t indicate whether it can think, leaving that ambiguous and/or indicating a sense of non-humanness
 Issues:
+Unintimidating
+Concept 6: Somewhat synchronized but mostly chaotic swarm of moderately intimidating jellyfish
+Same as the current 4-armed moon jellies, except these are 6-armed jellies, and the arms are longer to make them more intimidating
+Mostly fly around the target in circles chaotically before occasionally firing ice shots
+Attacking a jelly while it’s charging an ice shot will interrupt it
+Occasionally, 6 jellies will group up in a ring (a “pod”) and attack simultaneously to cover a larger area. When they do this, they glow brightly
+In level code, there’s a timer that counts down to every pod attack. In about half of all pod attacks, 2 or more pods will form in very quick succession
+In every pod attack, the player must choose to attack the jellies in a pod (if there’s just one pod), or dodge the pod shots (if there’s multiple pods)
+Using the ax on the center of a pod is best bc one explosion will hit all the jellies
+Jellies die in 1 buffed rose hit or 2 unbuffed rose hits
+There is a finite total num of jellies at the start (maybe 72). Destroy all of them to move on to the next phase
+Semi-difficult; only slightly less difficult than phase 2. Phase 1 & 2 combined now feel like a marathon instead of P1 being a cakewalk and P2 being the primary event, which is better imo since P1 now doesn’t feel as wasteful; the player has reason to spend effort to optimize P1. If it were easy, it would just feel like a meaningless time waster. Put another way, the player should realistically be able to lose in P1 alone (similar to how the player can definitely die to the King of Puppets before Romeo in Lies of P)
+Vibe: this is a chaotic swarm of dangerous enemies. I’m massacring them all in the hopes of fighting a powerful opponent, which makes me feel badass. I’m making the conscious decision to attack this collective knowing there might be dire consequences; not just bc this god is clearly powerful, but bc it’s morally wrong since I attacked it unprovoked → irrationality of player’s actions + threat of danger = tension
+Positives:
+Chaotic flying swarm behavior is memorable and contrasts with the rest of the game
+Disorganized army contrasts with focused singular duelist in phase 2
+It also makes phase 2 look like a queen in comparison to the peasant army
+Issues:
 None
-Final choice: Ephyra - it contrasts with phase 2 by being cute and fast/chaotic, reveals basic concepts about the phase 2 which act as teaching and subtle foreshadowing, and fits Clarity’s character as an autonomous monster/force of nature (ephyra isn’t human nor acts like one)
+Final choice: Swarm - it contrasts with phase 2 by being disorganized and fast, reveals basic concepts about phase 2 (e.g. hit enemies while they’re charging their attacks/glowing to stun them), fits Clarity’s character as an inhuman monster/force of nature (swarm isn’t human nor acts like one), and creates an escalation from the weaker army and the queen that leads them
 Design Phase 1 moveset
 Requirements
 Phase feels mildly difficult at first, then easy once you get the hang of it
@@ -1863,6 +1881,9 @@ Make them stick out even more
 
 Try making the wings fuse in an outer ring
 
+Favorites:
+ thin eye shape makes it look like a realistic eye
+ looks cutest and friendliest
 Idea: ephyra is animated to show Clarity’s soul’s/mind’s complexity compared to other gods
 Make solid body (in pieces)
 Make rig
@@ -1987,15 +2008,39 @@ FB: “Oh my god. People said I was CRAZY for changing my looks this much.”
 Cotu: “I didn’t know it was that big of a deal.”
 FB: “*sigh* Enjoy your innocence while it lasts.”
 Idea: FB has a locket with Trobbio’s face in it (ask Team Cherry first)
-Current task
 Task notes:
 Make early face sketches
 
 
 Make early body shape sketches
-
-
-Add body/clothing detail (armor, wings, etc.)
-Narrow shoulders bc wide shoulders convey strength, but he relies on intelligence and speed
-Light armor since he’s a bug and he’s fragile and he cares about protecting himself, and he wants mobility
+Long limbs
+Round narrow shoulders (square/wide shoulders imply strength and rigidity, FB is fluid and relies on strategy and speed more than strength)
 Cape-like wings
+
+
+Add body detail
+Light armor since he’s fragile and cares about protecting himself, but he wants mobility. Also bc he’s a bug
+OR no armor to fit Blazarang’s basic art style more
+
+Idea 0: nothing
+
+Idea 1: shield → too defensive
+
+Idea 2: bug segmented chest → basic?
+
+Idea 3: samurai armor plate → too layered?
+
+Idea 4: samurai armor plate + necklace → too busy (at least for Blazarang)?
+
+Idea 5: samurai armor plate + neck cloth → too busy?
+Favorites: bug segmented chest and samurai armor plate (necklace and cloth can be added later)
+Make front-facing A-pose sketch
+Ask ChatGPT to generate one
+
+Trace over it to fix the flaws
+
+Current task
+Make model
+For now, model is twice Cotu’s height → Cotu is 1.6 m, Future Blade is 3.2 m (antennae don’t count twds height)
+To make head modeling easier, divide head into 2 halves with a midline
+
