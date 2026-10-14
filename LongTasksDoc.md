@@ -1842,7 +1842,7 @@ Pre-fight sequence
 Cotu is trapped in Clarity’s realm and trudging forward using the roserang as a torch against the snow
 Eventually, Clarity’s icon appears. It watches him slowly and patiently. Cotu marches on towards the god’s main body; a colony of idle jellyfish. He attacks them
 The icon is surprised/enraged and the jellyfish start moving
-[Outdated but task is archived FYI] create other bosses before designing phase 1’s behavior and attacks. Why?
+[Outdated but task is archived notes] create other bosses before designing phase 1’s behavior and attacks. Why?
 Point 1: Phase 1 is supposed to feel very different from other bosses, but I can’t make a boss that breaks the mold if I don't have a solid enough grasp on what the mold is yet. Currently, I’ve implemented gauntlet variant 1, X, mites, Clarity phase 2, and an early version of jumping spider. As it stands now, I only have 1 boss that properly sets the mold (X) and half of a boss that sets the mold (gauntlet tower isn’t multifaceted, interesting, nor challenging enough to set the standard for a Blazarang boss fight, which is why it’s part of an army battle). The other bosses I’ve implemented are meant to break the mold. I need 1 or 2 more examples of more typical bosses (fast-paced, tactical) before making another mold breaker.
 Point 2: Another reason to make other bosses first is that I conceptualized several bosses that are guaranteed to be in the game before Clarity phase 1 (e.g. Future Blade, Grow-a-Gator, Candy Cat). If I have ideas of what they should be like and those ideas aren’t likely to change, AND I don’t have a solid grasp on what phase 1 should be like, I should implement/flesh out the solid bosses first and reshape phase 1 to fit them
 Implement typical boss 1: Future Blade (because his idea is the most solid out of all not-yet-made bosses)
@@ -1850,23 +1850,17 @@ Implement typical boss 2: Grow-a-Gator (because his idea is the second most soli
 After thinking more about how the Future Blade fight will go and after thinking of the new jellyfish colony idea, I now no longer feel the need to do mold-making bosses first. I have addressed Point 1 because I now have a better grasp on what the mold is; it’s rapid grounded attacks. Gauntlet var 1, mites, X, and Future Blade all (or will all) cover the ground with quick attacks. To make a fight that breaks the mold, I just have to make it mostly airborne. I addressed Point 2 because I now have a solid idea of how Clarity phase 1 should go, so I no longer need to reshape phase 1 to fit other fights/levels
 Current task
 Behavior & Attacks
-Note: all attacks (i.e. all interaction with the physical world) require ephyra to have a body
-Idea: it floats around as a naked icon for a bit before doing a telegraph anim, where it assembles pieces to make a body (like phase 2 snowflake entity’s single shard seq 1 but faster)
-Ephyra uses tricky mvmt during telegraph anims. It’ll be hard for a player to hit it during a telegraph on their first try, but they should be able to manage after predicting the snowflake’s mvmt
-Idea: it’s staggerable as long as it has a body, which makes it feel fragile
-Straight barrage: ephyra flies along the ground in a circular path around the target while spinning (spin axis is dir to target). It pulls ice pellets up from the ground below it to itself in rapid succession. When a pellet touches the eye, it is redirected to the target
-Hitting it at any pt during this attack will stagger it since when a pellet is at its eye, that pellet is its body
-Omni barrage: ephyra hovers at roserang throw height and spins w spin on vertical axis. It continuously pulls pellets up from the ground and shoots them in all directions. Hitting pellets with any rang will destroy them
-Ascent shot: similar mvmt to phase 2’s jump shot but faster, and instead of a jump (sudden burst of speed), it’s a smooth acceleration upwards. A telegraph anim occurs during the ascent and finishes at the apex. At the apex, ephyra shoots a shotgun spread of pellets at the target
-Ice sprite spawn to snow shower combo
-Ephyra does a telegraph anim, then shoots small ice balls in a spread upward/in front of it. These balls spawn ice sprites out of the ground after a bit
-Ephyra then flies around at a moderate distance in strange ways to make the player lose track of it as they deal with the sprites
-At some point while moving laterally, the ephyra does a telegraph anim. Once this completes, it continuously blows snow forward a short distance in a cone shape while moving twds the target. The only way to stop it is to hit it, which staggers it and destroys the body
-Snow blast: ephyra charges up, then blasts snow in a huge area in front of it. The only way to avoid getting damaged by this is to get behind it or stagger it with good timing
-Idea: shoot shards into the ground to summon ice sprites
-Telegraph anim is phase 2 snowflake entity’s single shard seq 1 but double the speed
-Alt idea: hitting the ephyra causes its attached pieces to fly out as projectiles. When they hit the ground, they spawn ice sprites
-Create Phase 1 visuals
+Initially, each jelly spawns at a different y coordinate and a random radius
+Each jelly flies in a flat circle + a small random y vel. This y vel changes every so often to add chaos to the movement. The jellies’ mvmt and positions collectively form a rough dome shape
+Each jelly does contact damage and frostbite, preventing Cotu from leaving the swarm
+When it loads, the level script starts a timer that lasts about as long as the phase 2 snowflake entity’s 3 segment rotation. When the timer stops, one or more jelly pods form
+When a pod forms, its starting location is chosen first. This location can be anywhere in the jelly dome. A pod node then spawns at that location
+A pod node is just a Node3D with 6 child Node3Ds forming the vertices of a hexagon around it. The central node looks at the target, which affects the child nodes’ orientations and positions. The central node also moves slowly in a circular path
+When a pod node spawns, 6 random nearby jellies (i.e. any 6 jellies within the pod formation radius) tween towards the pod child nodes and match their positions and orientations. Each jelly starts moving one by one at about the same rate as snowflake entity little shards move in the SingleShardSequence1 telegraph anim. Note: the jellies face in the opposite direction of the child nodes so that their arms face the target instead of their bells
+The jellies wait until all of them are in the pod, then they all charge up their shard shots simultaneously. If a jelly is hit, its chargeup is interrupted and it’s stunned, but it doesn’t affect the rest of the jellies in the pod. The jellies are all facing the same direction as the pod’s center, so their shots aren’t traveling exactly twds the target, but around it
+After the pod shoots, each jelly tweens back towards its starting height, radius, and speed
+Put the above info into VSCode Copilot
+Create Ephyra visuals
 Make sketch
 
 Phase 2 left, phase 1 right
