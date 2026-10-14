@@ -1807,27 +1807,32 @@ In every pod attack, the player must choose to attack the jellies in a pod (if t
 Using the ax on the center of a pod is best bc one explosion will hit all the jellies
 Jellies die in 1 buffed rose hit or 2 unbuffed rose hits
 There is a finite total num of jellies at the start (maybe 72). Destroy all of them to move on to the next phase
-Semi-difficult; only slightly less difficult than phase 2. Phase 1 & 2 combined now feel like a marathon instead of P1 being a cakewalk and P2 being the primary event, which is better imo since P1 now doesn’t feel as wasteful; the player has reason to spend effort to optimize P1. If it were easy, it would just feel like a meaningless time waster. Put another way, the player should realistically be able to lose in P1 alone (similar to how the player can definitely die to the King of Puppets before Romeo in Lies of P)
+The player is encouraged to fight as aggressively as possible to reach phase 2 quickly
+Semi-difficult; only slightly less difficult than phase 2. Phase 1 & 2 combined now feel like a marathon instead of P1 being a cakewalk and P2 being the primary event, which is better imo since the player now has reason to put in effort to optimize P1. If P1 were easy, the player would master it quickly and in subsequent attempts, it would just feel like a meaningless time waster. Put another way, the player should definitely be able to lose in P1 alone, similar to how the player can definitely die to the first phase of the King of Puppets fight in Lies of P
 Vibe: this is a chaotic swarm of dangerous enemies. I’m massacring them all in the hopes of fighting a powerful opponent, which makes me feel badass. I’m making the conscious decision to attack this collective knowing there might be dire consequences; not just bc this god is clearly powerful, but bc it’s morally wrong since I attacked it unprovoked → irrationality of player’s actions + threat of danger = tension
 Positives:
-Chaotic flying swarm behavior is memorable and contrasts with the rest of the game
+Fast-paced aggressive combat contrasts with the slow, tense combat of phase 2
 Disorganized army contrasts with focused singular duelist in phase 2
 It also makes phase 2 look like a queen in comparison to the peasant army
+Chaotic flying swarm behavior is memorable and contrasts with the rest of the game (gauntlet var 1 is organized and grounded, mites are mostly grounded)
 Issues:
 None
 Final choice: Swarm - it contrasts with phase 2 by being disorganized and fast, reveals basic concepts about phase 2 (e.g. hit enemies while they’re charging their attacks/glowing to stun them), fits Clarity’s character as an inhuman monster/force of nature (swarm isn’t human nor acts like one), and creates an escalation from the weaker army and the queen that leads them
 Design Phase 1 moveset
 Requirements
-Phase feels mildly difficult at first, then easy once you get the hang of it
-Phase is medium length (maybe around 60 seconds) if you don’t know what you’re doing, and short (30 secs) if you do
+Phase feels difficult at first, then moderate to easy once you get the hang of it
+Phase feels medium-long length (maybe ~4 mins) if you don’t know what you’re doing, and medium-short (maybe ~2-3 mins) if you do
+Quick notes on boss feel & actual time:
+Sister Friede
+Phase 1: feels medium-short, ~2 mins
+Phase 2: feels long, ~4 mins
+Phase 3: feels medium-long, ~6 mins
 Fit Clarity’s character
-Her (faded mind’s) motivation was to trap you in her realm. Now that she’s done that, all she wants to do is observe you and keep you from leaving (which fits her deep-seated loneliness). So then why would she attack you while you’re already in her realm? The only reason that makes sense is self-defense. → Cotu tries to provoke her by destroying her heart. The heart could be the old ice sprite spawner, a polyhedron with rotating hexagons
-Boss should teach the player the simplest concepts of phase 2 (the player must learn the harder concepts on the fly)
+Her (faded mind’s) motivation was to trap you in her realm. Now that she’s done that, all she wants to do is observe you and keep you from leaving (which fits her deep-seated loneliness). So then why would she attack you while you’re already in her realm? The only reason that makes sense is self-defense. → Cotu tries to provoke her by destroying her body
+Boss should teach the player some of the simplest concepts of phase 2. The player can learn the rest on the fly
 Simple concepts to introduce in phase 1:
-Dodge a bunch of projectiles
-Stay in a certain area (for phase 1, maybe there’s a small arena you have to stand in instead of just being near the boss?)
-The snowflake is only vulnerable when its eye changes color
-Ice sprites
+Dodge a bunch of projectiles → jellies fire tons of projectiles
+The snowflake is only vulnerable when its eye changes color → jellies are stunnable right when they’re about to fire, at which point they change color
 Harder concepts to save for phase 2:
 Hit the glowing weak point on the head when it appears
 Destroy dress shards to force regeneration, which makes head vulnerable (this is obvious bc you’re most likely already hitting/destroying the dress shards since they’re right in front of you, so you’ll definitely see what happens next)
@@ -1835,14 +1840,15 @@ Hitting the snowflake hits all shards linked to it
 When given the choice between hitting a shard and hitting the snowflake, always choose the snowflake (this isn’t obvious bc the player would only learn this through trial and error)
 Pre-fight sequence
 Cotu is trapped in Clarity’s realm and trudging forward using the roserang as a torch against the snow
-Eventually, Clarity’s icon appears. It watches him slowly and patiently. Cotu marches on towards the god’s main body; a heart. He attacks it
-The icon is surprised/enraged and blows Cotu away from the heart, then phase 1 begins
-Current task on hold until after Future Blade + possible other tasks
-Create other bosses before designing ephyra’s behavior and attacks. Why?
-The ephyra is supposed to feel very different from other bosses because it's just an icon and has low/simple intelligence, but I can’t make a boss that breaks the mold if I don't have a solid enough grasp on what the mold is yet. Currently, I’ve implemented gauntlet variant 1, X, mites, Clarity phase 2, and an early version of jumping spider. As it stands now, I only have 1 boss that properly sets the mold (X) and half of a boss that sets the mold (gauntlet tower isn’t multifaceted, interesting, nor challenging enough to set the standard for a Blazarang boss fight, which is why it’s part of an army battle). The other bosses I’ve implemented are meant to break the mold. I need 1 or 2 more examples of more typical bosses (fast-paced, tactical) before making another mold breaker.
-Another reason to make other bosses first is that I conceptualized several bosses that are guaranteed to be in the game before the ephyra (e.g. Future Blade, Grow-a-Gator, Candy Cat). If I have ideas of what they should be like and those ideas aren’t likely to change, AND I don’t have a solid grasp on what the ephyra should be like, I should implement/flesh out the solid bosses first and reshape ephyra to fit them
+Eventually, Clarity’s icon appears. It watches him slowly and patiently. Cotu marches on towards the god’s main body; a colony of idle jellyfish. He attacks them
+The icon is surprised/enraged and the jellyfish start moving
+[Outdated but task is archived FYI] create other bosses before designing phase 1’s behavior and attacks. Why?
+Point 1: Phase 1 is supposed to feel very different from other bosses, but I can’t make a boss that breaks the mold if I don't have a solid enough grasp on what the mold is yet. Currently, I’ve implemented gauntlet variant 1, X, mites, Clarity phase 2, and an early version of jumping spider. As it stands now, I only have 1 boss that properly sets the mold (X) and half of a boss that sets the mold (gauntlet tower isn’t multifaceted, interesting, nor challenging enough to set the standard for a Blazarang boss fight, which is why it’s part of an army battle). The other bosses I’ve implemented are meant to break the mold. I need 1 or 2 more examples of more typical bosses (fast-paced, tactical) before making another mold breaker.
+Point 2: Another reason to make other bosses first is that I conceptualized several bosses that are guaranteed to be in the game before Clarity phase 1 (e.g. Future Blade, Grow-a-Gator, Candy Cat). If I have ideas of what they should be like and those ideas aren’t likely to change, AND I don’t have a solid grasp on what phase 1 should be like, I should implement/flesh out the solid bosses first and reshape phase 1 to fit them
 Implement typical boss 1: Future Blade (because his idea is the most solid out of all not-yet-made bosses)
 Implement typical boss 2: Grow-a-Gator (because his idea is the second most solid; I’m more willing to change Gator to fit or contrast FB)
+After thinking more about how the Future Blade fight will go and after thinking of the new jellyfish colony idea, I now no longer feel the need to do mold-making bosses first. I have addressed Point 1 because I now have a better grasp on what the mold is; it’s rapid grounded attacks. Gauntlet var 1, mites, X, and Future Blade all (or will all) cover the ground with quick attacks. To make a fight that breaks the mold, I just have to make it mostly airborne. I addressed Point 2 because I now have a solid idea of how Clarity phase 1 should go, so I no longer need to reshape phase 1 to fit other fights/levels
+Current task
 Behavior & Attacks
 Note: all attacks (i.e. all interaction with the physical world) require ephyra to have a body
 Idea: it floats around as a naked icon for a bit before doing a telegraph anim, where it assembles pieces to make a body (like phase 2 snowflake entity’s single shard seq 1 but faster)
@@ -2039,8 +2045,17 @@ Ask ChatGPT to generate one
 
 Trace over it to fix the flaws
 
-Current task
 Make model
 For now, model is twice Cotu’s height → Cotu is 1.6 m, Future Blade is 3.2 m (antennae don’t count twds height)
 To make head modeling easier, divide head into 2 halves with a midline
 
+Torso
+Arms
+Legs
+Head
+Feet
+Hands
+Current task on hold until after Clarity Phase 1
+Wings
+Antennae
+Eyes
