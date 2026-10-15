@@ -62,6 +62,7 @@ size = Vector3(600, 1, 600)
 script = ExtResource("8_phase1")
 min_orbit_speed = 0.6
 max_orbit_speed = 1.2
+min_pod_spawn_height = 20.0
 pod_orbit_speed = 0.6
 
 [node name="UIRoot" parent="." instance=ExtResource("3_e5lk6")]

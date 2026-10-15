@@ -20,6 +20,14 @@ var in_transition := false
 var is_in_pod := false
 var slot_locked := false
 var formation_slot: Node3D
+var returning_to_orbit := false
+var return_elapsed := 0.0
+var return_duration := 1.0
+var return_start_position := Vector3.ZERO
+var return_start_radius := 0.0
+var return_start_height := 0.0
+var return_start_speed := 0.0
+var return_start_vertical_speed := 0.0
 
 var current_orbit_radius := 8.0
 var current_height := 5.0
@@ -74,6 +82,9 @@ func _physics_process(delta: float):
 		global_rotation = (formation_slot.global_transform.basis * Basis(Vector3.UP, PI)).get_euler()
 		return
 	if formation_slot != null:
+		return
+	if returning_to_orbit:
+		_process_return_to_orbit(delta)
 		return
 	orbit_angle += current_orbit_speed * orbit_direction * delta
 	current_height += vertical_speed * delta
@@ -148,27 +159,46 @@ func return_to_dome(duration: float):
 		return
 	formation_slot = null
 	slot_locked = false
-	in_transition = true
 	is_charging = false
-	var home_position := orbit_center + Vector3(
-		cos(starting_orbit_angle) * starting_orbit_radius,
-		starting_height,
-		sin(starting_orbit_angle) * starting_orbit_radius
+	returning_to_orbit = true
+	return_elapsed = 0.0
+	return_duration = maxf(duration, 0.001)
+	return_start_position = global_position
+	return_start_radius = current_orbit_radius
+	return_start_height = current_height
+	return_start_speed = current_orbit_speed
+	return_start_vertical_speed = vertical_speed
+	orbit_angle = starting_orbit_angle
+	orbit_direction = starting_orbit_direction
+
+func _process_return_to_orbit(delta: float):
+	return_elapsed = minf(return_elapsed + delta, return_duration)
+	var blend := smoothstep(0.0, 1.0, return_elapsed / return_duration)
+	current_orbit_radius = lerpf(return_start_radius, starting_orbit_radius, blend)
+	current_orbit_speed = lerpf(return_start_speed, starting_orbit_speed, blend)
+	vertical_speed = lerpf(return_start_vertical_speed, starting_vertical_speed, blend)
+	var return_height := return_start_height + return_start_vertical_speed * return_elapsed
+	var orbit_height := starting_height + starting_vertical_speed * return_elapsed
+	current_height = lerpf(return_height, orbit_height, blend)
+	orbit_angle += current_orbit_speed * orbit_direction * delta
+	var orbit_position := orbit_center + Vector3(
+		cos(orbit_angle) * current_orbit_radius,
+		current_height,
+		sin(orbit_angle) * current_orbit_radius
 	)
-	if transition_tween and transition_tween.is_running():
-		transition_tween.kill()
-	transition_tween = create_tween().set_parallel(true).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	transition_tween.tween_property(self, "global_position", home_position, duration)
-	transition_tween.tween_property(self, "current_orbit_radius", starting_orbit_radius, duration)
-	transition_tween.tween_property(self, "current_height", starting_height, duration)
-	transition_tween.tween_property(self, "current_orbit_speed", starting_orbit_speed, duration)
-	await transition_tween.finished
-	if is_alive:
-		orbit_direction = starting_orbit_direction
+	var previous_position := global_position
+	global_position = return_start_position.lerp(orbit_position, blend)
+	var movement_direction := previous_position.direction_to(global_position)
+	if movement_direction.length_squared() > 0.001:
+		global_rotation.y = PI + atan2(movement_direction.x, movement_direction.z)
+
+	if return_elapsed >= return_duration:
+		current_orbit_radius = starting_orbit_radius
+		current_height = orbit_height
+		current_orbit_speed = starting_orbit_speed
 		vertical_speed = starting_vertical_speed
-		orbit_angle = starting_orbit_angle
 		is_in_pod = false
-		in_transition = false
+		returning_to_orbit = false
 
 func _on_hurtbox_hit(_damage: int):
 	if not is_charging:

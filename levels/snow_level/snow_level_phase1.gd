@@ -19,6 +19,7 @@ const JellyfishPodScene := preload("res://enemies/ice_jellyfish_pod.tscn")
 @export_range(1, 3) var min_pod_count := 1
 @export_range(1, 3) var max_pod_count := 3
 @export var pod_formation_radius := 10.0
+@export var min_pod_spawn_height := 12.0
 @export var pod_orbit_speed := 0.2
 @export var slot_move_duration := 0.8
 @export var slot_move_stagger := 0.12
@@ -77,6 +78,9 @@ func find_pod_plans(requested_count: int) -> Array[Dictionary]:
 			survivors.append(jelly)
 	if survivors.size() < 6:
 		return []
+	var eligible_anchors := survivors.filter(func(jelly): return jelly.global_position.y >= min_pod_spawn_height)
+	if eligible_anchors.is_empty():
+		return []
 
 	for pod_count in range(requested_count, 0, -1):
 		var reserved: Array[Node3D] = []
@@ -85,7 +89,7 @@ func find_pod_plans(requested_count: int) -> Array[Dictionary]:
 		for _pod_index in range(pod_count):
 			var formed := false
 			for _attempt in range(80):
-				var anchor: Node3D = survivors.pick_random()
+				var anchor: Node3D = eligible_anchors.pick_random()
 				if reserved.has(anchor):
 					continue
 				var center := anchor.global_position + Vector3(
@@ -93,6 +97,7 @@ func find_pod_plans(requested_count: int) -> Array[Dictionary]:
 					rng.randf_range(-1.0, 1.0),
 					rng.randf_range(-pod_formation_radius * 0.2, pod_formation_radius * 0.2)
 				)
+				center.y = maxf(center.y, min_pod_spawn_height)
 				var nearby: Array[Node3D] = []
 				for jelly in survivors:
 					if not reserved.has(jelly) and jelly.global_position.distance_to(center) <= pod_formation_radius:
