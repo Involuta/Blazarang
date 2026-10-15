@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://ccwhnbrjgpt14"]
+
+[ext_resource type="Script" path="res://enemies/ice_jellyfish.gd" id="1_jelly"]
+[ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_hurtbox"]
+[ext_resource type="Script" path="res://general_scripts/damage_over_time_area.gd" id="3_contact"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="4_hitbox"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ice"]
+albedo_color = Color(0.55, 0.82, 1, 1)
+metallic = 0.15
+roughness = 0.3
+emission_enabled = true
+emission = Color(0.2, 0.5, 0.8, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_bell"]
+radius = 0.75
+height = 1.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_body"]
+radius = 1.0
+
+[node name="IceJellyfish" type="Node3D"]
+script = ExtResource("1_jelly")
+
+[node name="Bell" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = SubResource("StandardMaterial3D_ice")
+mesh = SubResource("SphereMesh_bell")
+
+[node name="EnemyHurtbox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 257
+script = ExtResource("2_hurtbox")
+enemy_name = "IceFairy"
+hit_particle_color = Color(0.592157, 0.788235, 1, 1)
+opponent_hitboxes = ["PlayerHitbox"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHurtbox"]
+shape = SubResource("SphereShape3D_body")
+
+[node name="DamageOverTimeArea" type="Node3D" parent="."]
+script = ExtResource("3_contact")
+time_btwn_damage_ticks = 0.5
+
+[node name="EnemyHitbox" type="Area3D" parent="DamageOverTimeArea"]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("4_hitbox")
+damage = 3
+frostbite_buildup = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DamageOverTimeArea/EnemyHitbox"]
+shape = SubResource("SphereShape3D_body")

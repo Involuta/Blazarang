@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://enemies/ice_jellyfish_pod.gd" id="1_pod"]
+
+[node name="IceJellyfishPod" type="Node3D"]
+script = ExtResource("1_pod")
+
+[node name="Slot1" type="Node3D" parent="."]
+position = Vector3(0, 2.5, 0)
+rotation = Vector3(0, 3.14159, 0)
+
+[node name="Slot2" type="Node3D" parent="."]
+position = Vector3(2.165, 1.25, 0)
+rotation = Vector3(0, 3.14159, 0)
+
+[node name="Slot3" type="Node3D" parent="."]
+position = Vector3(2.165, -1.25, 0)
+rotation = Vector3(0, 3.14159, 0)
+
+[node name="Slot4" type="Node3D" parent="."]
+position = Vector3(0, -2.5, 0)
+rotation = Vector3(0, 3.14159, 0)
+
+[node name="Slot5" type="Node3D" parent="."]
+position = Vector3(-2.165, -1.25, 0)
+rotation = Vector3(0, 3.14159, 0)
+
+[node name="Slot6" type="Node3D" parent="."]
+position = Vector3(-2.165, 1.25, 0)
+rotation = Vector3(0, 3.14159, 0)
