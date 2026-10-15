@@ -173,7 +173,8 @@ func return_to_dome(duration: float):
 
 func _process_return_to_orbit(delta: float):
 	return_elapsed = minf(return_elapsed + delta, return_duration)
-	var blend := smoothstep(0.0, 1.0, return_elapsed / return_duration)
+	var progress := pow(return_elapsed / return_duration, 1.05)
+	var blend := progress * progress * progress * (progress * (progress * 6.0 - 15.0) + 10.0)
 	current_orbit_radius = lerpf(return_start_radius, starting_orbit_radius, blend)
 	current_orbit_speed = lerpf(return_start_speed, starting_orbit_speed, blend)
 	vertical_speed = lerpf(return_start_vertical_speed, starting_vertical_speed, blend)
