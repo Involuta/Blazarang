@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=3 uid="uid://2ipib84sl774"]
+[gd_scene load_steps=83 format=3 uid="uid://2ipib84sl774"]
 
 [ext_resource type="Script" path="res://enemies/ice_fairy.gd" id="1_6kq3x"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="2_rl78v"]
@@ -1504,7 +1504,7 @@ scale_curve = SubResource("CurveTexture_cfcn5")
 color = Color(0.792157, 0.92549, 1, 1)
 color_ramp = SubResource("GradientTexture1D_pyaxw")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sedas"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_772d5"]
 resource_local_to_scene = true
 transparency = 4
 albedo_color = Color(0.560784, 0.803922, 1, 0.54902)
@@ -1515,17 +1515,27 @@ emission_energy_multiplier = 0.0
 refraction_scale = 1.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_twu4l"]
-material = SubResource("StandardMaterial3D_sedas")
+material = SubResource("StandardMaterial3D_772d5")
 radius = 1.0
 is_hemisphere = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_78tcj"]
+resource_local_to_scene = true
+transparency = 4
+albedo_color = Color(0.560784, 0.803922, 1, 0.74902)
+roughness = 0.12
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+refraction_enabled = true
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_5iovp"]
-material = SubResource("StandardMaterial3D_qf6aq")
+material = SubResource("StandardMaterial3D_78tcj")
 top_radius = 0.15
 bottom_radius = 0.0
 height = 1.0
 
-[sub_resource type="Shader" id="Shader_7edmq"]
+[sub_resource type="Shader" id="Shader_a6aib"]
 code = "shader_type spatial;
 render_mode blend_add, depth_draw_opaque;
 
@@ -1583,6 +1593,73 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yvpgd"]
 render_priority = 0
+shader = SubResource("Shader_a6aib")
+shader_parameter/fade_alpha = 1.0
+shader_parameter/progress = 1.2
+shader_parameter/spark_length = 0.15
+shader_parameter/spark_sharpness = 1.0
+shader_parameter/start_offset = 0.25
+shader_parameter/leading_color = Color(1, 1, 1, 1)
+shader_parameter/trailing_color = Color(0.44, 0.65, 1, 1)
+
+[sub_resource type="Shader" id="Shader_7edmq"]
+code = "shader_type spatial;
+render_mode blend_add, depth_draw_opaque;
+
+// Controls overall opacity when fading out the entire ring (1.0 = fully visible, 0.0 = invisible)
+uniform float fade_alpha : hint_range(0.0, 1.0) = 1.0;
+
+// Controls progress along the loop (0.0 to 1.2 to allow full spark fade-out)
+uniform float progress : hint_range(0.0, 1.2) = 0.0;
+
+// Length of the intense sparkler tip transition zone
+uniform float spark_length : hint_range(0.01, 0.5) = 0.15;
+
+// Sharpness/decay speed of the white-hot leading tip
+uniform float spark_sharpness : hint_range(1.0, 50.0) = 15.0;
+
+// Shift starting position around the loop (0.25 usually maps to the right side)
+uniform float start_offset : hint_range(0.0, 1.0) = 0.25;
+
+// Colors
+uniform vec4 leading_color : source_color = vec4(4.0, 4.0, 4.0, 1.0); // HDR white-hot tip
+uniform vec4 trailing_color : source_color = vec4(1.0, 0.3, 0.0, 1.0); // Orange ember glow
+
+void fragment() {
+    if (fade_alpha <= 0.0) {
+        discard;
+    }
+
+    // 1. Invert (1.0 - UV.x) to reverse direction from counterclockwise to clockwise
+    // 2. Add start_offset to rotate the starting point to the right side
+    float current_u = fract((1.0 - UV.x) + start_offset);
+    
+    // Calculate distance behind progress with seamless circular wrapping
+    float dist = fract(progress - current_u);
+    
+    // Discard geometry ahead of the leading edge until the initial reveal finishes
+    if (progress <= 1.0 && current_u > progress) {
+        discard;
+    }
+    
+    // Calculate raw tip intensity (1.0 at tip, fading to 0.0 moving backward)
+    float tip_factor = clamp(1.0 - (dist / spark_length), 0.0, 1.0);
+    float spark_intensity = pow(tip_factor, spark_sharpness);
+    
+    // Fade out the spark tip entirely as progress moves from 1.0 to (1.0 + spark_length)
+    float spark_fade = 1.0 - clamp((progress - 1.0) / spark_length, 0.0, 1.0);
+    spark_intensity *= spark_fade;
+    
+    // Mix between the warm trailing body and the bright sparkler tip
+    vec3 final_color = mix(trailing_color.rgb, leading_color.rgb, spark_intensity);
+    
+    ALBEDO = final_color;
+    EMISSION = final_color * (1.0 + spark_intensity * 4.0) * fade_alpha;
+    ALPHA = fade_alpha;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3uokh"]
+render_priority = 0
 shader = SubResource("Shader_7edmq")
 shader_parameter/fade_alpha = 1.0
 shader_parameter/progress = 1.2
@@ -1593,7 +1670,7 @@ shader_parameter/leading_color = Color(1, 1, 1, 1)
 shader_parameter/trailing_color = Color(0.44, 0.65, 1, 1)
 
 [sub_resource type="TorusMesh" id="TorusMesh_bqg5x"]
-material = SubResource("ShaderMaterial_yvpgd")
+material = SubResource("ShaderMaterial_3uokh")
 inner_radius = 0.18
 outer_radius = 0.22
 
@@ -1601,14 +1678,14 @@ outer_radius = 0.22
 offsets = PackedFloat32Array(0, 0.72973)
 colors = PackedColorArray(1, 1, 1, 1, 0.6, 0.75, 3, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_l6ikc"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gt4tf"]
 gradient = SubResource("Gradient_v3txv")
 
 [sub_resource type="Curve" id="Curve_7jqik"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.49701, 0.298832), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_3r0wo"]
+[sub_resource type="CurveTexture" id="CurveTexture_r8jm3"]
 curve = SubResource("Curve_7jqik")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mnh1n"]
@@ -1621,11 +1698,11 @@ damping_min = 1.0
 damping_max = 1.0
 scale_min = 0.6
 scale_max = 0.6
-scale_curve = SubResource("CurveTexture_3r0wo")
+scale_curve = SubResource("CurveTexture_r8jm3")
 color = Color(0.71, 0.83, 1, 1)
-color_ramp = SubResource("GradientTexture1D_l6ikc")
+color_ramp = SubResource("GradientTexture1D_gt4tf")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x0h1j"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qabk4"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
 billboard_mode = 3
@@ -1635,7 +1712,7 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_nkbfh"]
-material = SubResource("StandardMaterial3D_x0h1j")
+material = SubResource("StandardMaterial3D_qabk4")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hibss"]
 vertex_color_use_as_albedo = true
@@ -1647,7 +1724,7 @@ backlight_enabled = true
 backlight = Color(0.6, 0.75, 1, 1)
 billboard_keep_scale = true
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_4ck5x"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_i6pct"]
 _surfaces = [{
 "aabb": AABB(-0.34, -1.9, -0.3, 0.68, 3.8, 0.60001),
 "format": 4097,
@@ -1677,7 +1754,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray(68, 181, 65, 62, 96, 148, 128, 63, 154, 153, 153, 62, 252, 127, 28, 160, 255, 255, 255, 63, 68, 181, 65, 62, 96, 148, 128, 63, 154, 153, 153, 62, 255, 127, 255, 127, 255, 255, 255, 63, 68, 181, 65, 62, 96, 148, 128, 63, 154, 153, 153, 62, 162, 195, 217, 153, 255, 255, 255, 63, 68, 181, 65, 62, 96, 148, 128, 63, 154, 153, 153, 62, 43, 213, 255, 127, 255, 255, 255, 63, 124, 20, 174, 62, 127, 84, 129, 63, 0, 0, 0, 128, 36, 230, 91, 188, 255, 255, 255, 191, 124, 20, 174, 62, 127, 84, 129, 63, 0, 0, 0, 128, 162, 195, 217, 153, 255, 255, 255, 63, 124, 20, 174, 62, 127, 84, 129, 63, 0, 0, 0, 128, 255, 255, 210, 170, 255, 255, 255, 191, 124, 20, 174, 62, 127, 84, 129, 63, 0, 0, 0, 128, 43, 213, 255, 127, 255, 255, 255, 63, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 218, 25, 91, 188, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 92, 60, 217, 153, 255, 255, 255, 63, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 28, 32, 252, 255, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 252, 127, 28, 160, 255, 255, 255, 63, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 226, 223, 252, 255, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 2, 128, 28, 160, 255, 255, 255, 63, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 36, 230, 91, 188, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 162, 195, 217, 153, 255, 255, 255, 63, 0, 0, 0, 0, 255, 145, 128, 63, 154, 153, 153, 62, 252, 127, 28, 160, 255, 255, 255, 63, 0, 0, 0, 0, 255, 145, 128, 63, 154, 153, 153, 62, 255, 127, 255, 127, 255, 255, 255, 63, 0, 0, 0, 0, 255, 145, 128, 63, 154, 153, 153, 62, 2, 128, 28, 160, 255, 255, 255, 63, 68, 181, 65, 62, 0, 0, 0, 0, 154, 153, 153, 62, 255, 127, 255, 127, 255, 255, 255, 63, 68, 181, 65, 62, 0, 0, 0, 0, 154, 153, 153, 62, 43, 213, 255, 127, 255, 255, 255, 63, 124, 20, 174, 62, 0, 0, 0, 0, 0, 0, 0, 128, 255, 255, 210, 170, 255, 255, 255, 191, 124, 20, 174, 62, 0, 0, 0, 0, 0, 0, 0, 128, 43, 213, 255, 127, 255, 255, 255, 63, 0, 0, 0, 0, 0, 0, 0, 0, 154, 153, 153, 62, 255, 127, 255, 127, 255, 255, 255, 63, 68, 181, 65, 190, 96, 148, 128, 63, 154, 153, 153, 62, 211, 42, 255, 127, 255, 255, 255, 63, 68, 181, 65, 190, 96, 148, 128, 63, 154, 153, 153, 62, 92, 60, 217, 153, 255, 255, 255, 63, 68, 181, 65, 190, 96, 148, 128, 63, 154, 153, 153, 62, 255, 127, 255, 127, 255, 255, 255, 63, 68, 181, 65, 190, 96, 148, 128, 63, 154, 153, 153, 62, 2, 128, 28, 160, 255, 255, 255, 63, 124, 20, 174, 190, 127, 84, 129, 63, 0, 0, 0, 128, 0, 0, 210, 170, 255, 255, 255, 191, 124, 20, 174, 190, 127, 84, 129, 63, 0, 0, 0, 128, 211, 42, 255, 127, 255, 255, 255, 63, 124, 20, 174, 190, 127, 84, 129, 63, 0, 0, 0, 128, 218, 25, 91, 188, 255, 255, 255, 191, 124, 20, 174, 190, 127, 84, 129, 63, 0, 0, 0, 128, 92, 60, 217, 153, 255, 255, 255, 63, 68, 181, 65, 190, 0, 0, 0, 0, 154, 153, 153, 62, 211, 42, 255, 127, 255, 255, 255, 63, 68, 181, 65, 190, 0, 0, 0, 0, 154, 153, 153, 62, 255, 127, 255, 127, 255, 255, 255, 63, 124, 20, 174, 190, 0, 0, 0, 0, 0, 0, 0, 128, 0, 0, 210, 170, 255, 255, 255, 191, 124, 20, 174, 190, 0, 0, 0, 0, 0, 0, 0, 128, 211, 42, 255, 127, 255, 255, 255, 63, 68, 181, 65, 62, 96, 148, 128, 63, 154, 153, 153, 190, 28, 32, 252, 255, 255, 255, 255, 191, 68, 181, 65, 62, 96, 148, 128, 63, 154, 153, 153, 190, 255, 255, 255, 255, 255, 255, 255, 191, 68, 181, 65, 62, 96, 148, 128, 63, 154, 153, 153, 190, 36, 230, 91, 188, 255, 255, 255, 191, 68, 181, 65, 62, 96, 148, 128, 63, 154, 153, 153, 190, 255, 255, 210, 170, 255, 255, 255, 191, 0, 0, 0, 0, 255, 145, 128, 63, 154, 153, 153, 190, 28, 32, 252, 255, 255, 255, 255, 191, 0, 0, 0, 0, 255, 145, 128, 63, 154, 153, 153, 190, 255, 255, 255, 255, 255, 255, 255, 191, 0, 0, 0, 0, 255, 145, 128, 63, 154, 153, 153, 190, 226, 223, 252, 255, 255, 255, 255, 191, 68, 181, 65, 62, 0, 0, 0, 0, 154, 153, 153, 190, 255, 255, 255, 255, 255, 255, 255, 191, 68, 181, 65, 62, 0, 0, 0, 0, 154, 153, 153, 190, 255, 255, 210, 170, 255, 255, 255, 191, 0, 0, 0, 0, 0, 0, 0, 0, 154, 153, 153, 190, 255, 255, 255, 255, 255, 255, 255, 191, 68, 181, 65, 190, 96, 148, 128, 63, 154, 153, 153, 190, 0, 0, 210, 170, 255, 255, 255, 191, 68, 181, 65, 190, 96, 148, 128, 63, 154, 153, 153, 190, 218, 25, 91, 188, 255, 255, 255, 191, 68, 181, 65, 190, 96, 148, 128, 63, 154, 153, 153, 190, 255, 255, 255, 255, 255, 255, 255, 191, 68, 181, 65, 190, 96, 148, 128, 63, 154, 153, 153, 190, 226, 223, 252, 255, 255, 255, 255, 191, 68, 181, 65, 190, 0, 0, 0, 0, 154, 153, 153, 190, 0, 0, 210, 170, 255, 255, 255, 191, 68, 181, 65, 190, 0, 0, 0, 0, 154, 153, 153, 190, 255, 255, 255, 255, 255, 255, 255, 191, 68, 181, 65, 62, 96, 148, 128, 191, 154, 153, 153, 62, 252, 127, 226, 95, 255, 255, 255, 63, 68, 181, 65, 62, 96, 148, 128, 191, 154, 153, 153, 62, 255, 127, 255, 127, 255, 255, 255, 63, 68, 181, 65, 62, 96, 148, 128, 191, 154, 153, 153, 62, 162, 195, 37, 102, 255, 255, 255, 63, 68, 181, 65, 62, 96, 148, 128, 191, 154, 153, 153, 62, 43, 213, 255, 127, 255, 255, 255, 63, 124, 20, 174, 62, 127, 84, 129, 191, 0, 0, 0, 128, 36, 230, 163, 67, 255, 255, 255, 191, 124, 20, 174, 62, 127, 84, 129, 191, 0, 0, 0, 128, 162, 195, 37, 102, 255, 255, 255, 63, 124, 20, 174, 62, 127, 84, 129, 191, 0, 0, 0, 128, 255, 255, 210, 170, 255, 255, 255, 191, 124, 20, 174, 62, 127, 84, 129, 191, 0, 0, 0, 128, 43, 213, 255, 127, 255, 255, 255, 63, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 218, 25, 163, 67, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 92, 60, 37, 102, 255, 255, 255, 63, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 28, 32, 2, 0, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 252, 127, 226, 95, 255, 255, 255, 63, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 226, 223, 2, 0, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 2, 128, 226, 95, 255, 255, 255, 63, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 36, 230, 163, 67, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 162, 195, 37, 102, 255, 255, 255, 63, 0, 0, 0, 0, 255, 145, 128, 191, 154, 153, 153, 62, 252, 127, 226, 95, 255, 255, 255, 63, 0, 0, 0, 0, 255, 145, 128, 191, 154, 153, 153, 62, 255, 127, 255, 127, 255, 255, 255, 63, 0, 0, 0, 0, 255, 145, 128, 191, 154, 153, 153, 62, 2, 128, 226, 95, 255, 255, 255, 63, 68, 181, 65, 190, 96, 148, 128, 191, 154, 153, 153, 62, 211, 42, 255, 127, 255, 255, 255, 63, 68, 181, 65, 190, 96, 148, 128, 191, 154, 153, 153, 62, 92, 60, 37, 102, 255, 255, 255, 63, 68, 181, 65, 190, 96, 148, 128, 191, 154, 153, 153, 62, 255, 127, 255, 127, 255, 255, 255, 63, 68, 181, 65, 190, 96, 148, 128, 191, 154, 153, 153, 62, 2, 128, 226, 95, 255, 255, 255, 63, 124, 20, 174, 190, 127, 84, 129, 191, 0, 0, 0, 128, 0, 0, 210, 170, 255, 255, 255, 191, 124, 20, 174, 190, 127, 84, 129, 191, 0, 0, 0, 128, 211, 42, 255, 127, 255, 255, 255, 63, 124, 20, 174, 190, 127, 84, 129, 191, 0, 0, 0, 128, 218, 25, 163, 67, 255, 255, 255, 191, 124, 20, 174, 190, 127, 84, 129, 191, 0, 0, 0, 128, 92, 60, 37, 102, 255, 255, 255, 63, 68, 181, 65, 62, 96, 148, 128, 191, 154, 153, 153, 190, 28, 32, 2, 0, 255, 255, 255, 191, 68, 181, 65, 62, 96, 148, 128, 191, 154, 153, 153, 190, 255, 255, 255, 255, 255, 255, 255, 191, 68, 181, 65, 62, 96, 148, 128, 191, 154, 153, 153, 190, 36, 230, 163, 67, 255, 255, 255, 191, 68, 181, 65, 62, 96, 148, 128, 191, 154, 153, 153, 190, 255, 255, 210, 170, 255, 255, 255, 191, 0, 0, 0, 0, 255, 145, 128, 191, 154, 153, 153, 190, 28, 32, 2, 0, 255, 255, 255, 191, 0, 0, 0, 0, 255, 145, 128, 191, 154, 153, 153, 190, 255, 255, 255, 255, 255, 255, 255, 191, 0, 0, 0, 0, 255, 145, 128, 191, 154, 153, 153, 190, 226, 223, 2, 0, 255, 255, 255, 191, 68, 181, 65, 190, 96, 148, 128, 191, 154, 153, 153, 190, 0, 0, 210, 170, 255, 255, 255, 191, 68, 181, 65, 190, 96, 148, 128, 191, 154, 153, 153, 190, 218, 25, 163, 67, 255, 255, 255, 191, 68, 181, 65, 190, 96, 148, 128, 191, 154, 153, 153, 190, 255, 255, 255, 255, 255, 255, 255, 191, 68, 181, 65, 190, 96, 148, 128, 191, 154, 153, 153, 190, 226, 223, 2, 0, 255, 255, 255, 191, 124, 20, 174, 62, 127, 84, 129, 63, 0, 0, 0, 128, 66, 210, 73, 132, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 232, 9, 68, 154, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 118, 23, 173, 247, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 202, 201, 197, 144, 255, 255, 255, 63, 68, 181, 65, 62, 0, 0, 0, 0, 154, 153, 153, 62, 1, 210, 108, 123, 255, 255, 255, 63, 68, 181, 65, 190, 0, 0, 0, 0, 154, 153, 153, 62, 179, 28, 255, 124, 255, 255, 255, 63, 68, 181, 65, 62, 96, 148, 128, 63, 154, 153, 153, 190, 36, 230, 91, 188, 255, 255, 255, 191, 124, 20, 174, 62, 127, 84, 129, 191, 0, 0, 0, 128, 48, 206, 180, 117, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 99, 32, 38, 101, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 225, 223, 0, 0, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 228, 197, 121, 105, 255, 255, 255, 63, 68, 181, 65, 62, 96, 148, 128, 191, 154, 153, 153, 190, 36, 230, 163, 67, 255, 255, 255, 191, 68, 181, 65, 190, 96, 148, 128, 191, 154, 153, 153, 190, 212, 8, 63, 92, 255, 255, 255, 191, 68, 181, 65, 62, 96, 148, 128, 63, 154, 153, 153, 62, 162, 195, 217, 153, 255, 255, 255, 63, 124, 20, 174, 62, 127, 84, 129, 63, 0, 0, 0, 128, 162, 206, 162, 137, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 92, 60, 217, 153, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 225, 223, 254, 255, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 162, 195, 217, 153, 255, 255, 255, 63, 124, 20, 174, 190, 127, 84, 129, 63, 0, 0, 0, 128, 92, 49, 162, 137, 255, 255, 255, 191, 68, 181, 65, 62, 96, 148, 128, 63, 154, 153, 153, 190, 36, 230, 91, 188, 255, 255, 255, 191, 68, 181, 65, 62, 96, 148, 128, 191, 154, 153, 153, 62, 162, 195, 37, 102, 255, 255, 255, 63, 124, 20, 174, 62, 127, 84, 129, 191, 0, 0, 0, 128, 162, 206, 92, 118, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 92, 60, 37, 102, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 29, 32, 0, 0, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 162, 195, 37, 102, 255, 255, 255, 63, 124, 20, 174, 190, 127, 84, 129, 191, 0, 0, 0, 128, 92, 49, 92, 118, 255, 255, 255, 191, 68, 181, 65, 62, 96, 148, 128, 191, 154, 153, 153, 190, 36, 230, 163, 67, 255, 255, 255, 191)
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_4ck5x")
+shadow_mesh = SubResource("ArrayMesh_i6pct")
 
 [node name="IceFairy" type="CharacterBody3D"]
 collision_layer = 8

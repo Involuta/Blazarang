@@ -1,31 +1,267 @@
-[gd_scene load_steps=8 format=3 uid="uid://ccwhnbrjgpt14"]
+[gd_scene load_steps=25 format=3 uid="uid://ccwhnbrjgpt14"]
 
 [ext_resource type="Script" path="res://enemies/ice_jellyfish.gd" id="1_jelly"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_hurtbox"]
 [ext_resource type="Script" path="res://general_scripts/damage_over_time_area.gd" id="3_contact"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="4_hitbox"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ice"]
-albedo_color = Color(0.55, 0.82, 1, 1)
-metallic = 0.15
-roughness = 0.3
-emission_enabled = true
-emission = Color(0.2, 0.5, 0.8, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_bell"]
-radius = 0.75
-height = 1.5
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_body"]
 radius = 1.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sedas"]
+resource_local_to_scene = true
+transparency = 4
+albedo_color = Color(0.560784, 0.803922, 1, 0.54902)
+roughness = 0.12
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+refraction_scale = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_2umox"]
+material = SubResource("StandardMaterial3D_sedas")
+radius = 1.0
+is_hemisphere = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qf6aq"]
+resource_local_to_scene = true
+transparency = 4
+albedo_color = Color(0.560784, 0.803922, 1, 0.74902)
+roughness = 0.12
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+refraction_enabled = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_b648n"]
+material = SubResource("StandardMaterial3D_qf6aq")
+top_radius = 0.15
+bottom_radius = 0.0
+height = 1.0
+
+[sub_resource type="Shader" id="Shader_7edmq"]
+code = "shader_type spatial;
+render_mode blend_add, depth_draw_opaque;
+
+// Controls overall opacity when fading out the entire ring (1.0 = fully visible, 0.0 = invisible)
+uniform float fade_alpha : hint_range(0.0, 1.0) = 1.0;
+
+// Controls progress along the loop (0.0 to 1.2 to allow full spark fade-out)
+uniform float progress : hint_range(0.0, 1.2) = 0.0;
+
+// Length of the intense sparkler tip transition zone
+uniform float spark_length : hint_range(0.01, 0.5) = 0.15;
+
+// Sharpness/decay speed of the white-hot leading tip
+uniform float spark_sharpness : hint_range(1.0, 50.0) = 15.0;
+
+// Shift starting position around the loop (0.25 usually maps to the right side)
+uniform float start_offset : hint_range(0.0, 1.0) = 0.25;
+
+// Colors
+uniform vec4 leading_color : source_color = vec4(4.0, 4.0, 4.0, 1.0); // HDR white-hot tip
+uniform vec4 trailing_color : source_color = vec4(1.0, 0.3, 0.0, 1.0); // Orange ember glow
+
+void fragment() {
+    if (fade_alpha <= 0.0) {
+        discard;
+    }
+
+    // 1. Invert (1.0 - UV.x) to reverse direction from counterclockwise to clockwise
+    // 2. Add start_offset to rotate the starting point to the right side
+    float current_u = fract((1.0 - UV.x) + start_offset);
+    
+    // Calculate distance behind progress with seamless circular wrapping
+    float dist = fract(progress - current_u);
+    
+    // Discard geometry ahead of the leading edge until the initial reveal finishes
+    if (progress <= 1.0 && current_u > progress) {
+        discard;
+    }
+    
+    // Calculate raw tip intensity (1.0 at tip, fading to 0.0 moving backward)
+    float tip_factor = clamp(1.0 - (dist / spark_length), 0.0, 1.0);
+    float spark_intensity = pow(tip_factor, spark_sharpness);
+    
+    // Fade out the spark tip entirely as progress moves from 1.0 to (1.0 + spark_length)
+    float spark_fade = 1.0 - clamp((progress - 1.0) / spark_length, 0.0, 1.0);
+    spark_intensity *= spark_fade;
+    
+    // Mix between the warm trailing body and the bright sparkler tip
+    vec3 final_color = mix(trailing_color.rgb, leading_color.rgb, spark_intensity);
+    
+    ALBEDO = final_color;
+    EMISSION = final_color * (1.0 + spark_intensity * 4.0) * fade_alpha;
+    ALPHA = fade_alpha;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3uokh"]
+render_priority = 0
+shader = SubResource("Shader_7edmq")
+shader_parameter/fade_alpha = 1.0
+shader_parameter/progress = 1.2
+shader_parameter/spark_length = 0.15
+shader_parameter/spark_sharpness = 1.0
+shader_parameter/start_offset = 0.25
+shader_parameter/leading_color = Color(1, 1, 1, 1)
+shader_parameter/trailing_color = Color(0.44, 0.65, 1, 1)
+
+[sub_resource type="Shader" id="Shader_a6aib"]
+code = "shader_type spatial;
+render_mode blend_add, depth_draw_opaque;
+
+// Controls overall opacity when fading out the entire ring (1.0 = fully visible, 0.0 = invisible)
+uniform float fade_alpha : hint_range(0.0, 1.0) = 1.0;
+
+// Controls progress along the loop (0.0 to 1.2 to allow full spark fade-out)
+uniform float progress : hint_range(0.0, 1.2) = 0.0;
+
+// Length of the intense sparkler tip transition zone
+uniform float spark_length : hint_range(0.01, 0.5) = 0.15;
+
+// Sharpness/decay speed of the white-hot leading tip
+uniform float spark_sharpness : hint_range(1.0, 50.0) = 15.0;
+
+// Shift starting position around the loop (0.25 usually maps to the right side)
+uniform float start_offset : hint_range(0.0, 1.0) = 0.25;
+
+// Colors
+uniform vec4 leading_color : source_color = vec4(4.0, 4.0, 4.0, 1.0); // HDR white-hot tip
+uniform vec4 trailing_color : source_color = vec4(1.0, 0.3, 0.0, 1.0); // Orange ember glow
+
+void fragment() {
+    if (fade_alpha <= 0.0) {
+        discard;
+    }
+
+    // 1. Invert (1.0 - UV.x) to reverse direction from counterclockwise to clockwise
+    // 2. Add start_offset to rotate the starting point to the right side
+    float current_u = fract((1.0 - UV.x) + start_offset);
+    
+    // Calculate distance behind progress with seamless circular wrapping
+    float dist = fract(progress - current_u);
+    
+    // Discard geometry ahead of the leading edge until the initial reveal finishes
+    if (progress <= 1.0 && current_u > progress) {
+        discard;
+    }
+    
+    // Calculate raw tip intensity (1.0 at tip, fading to 0.0 moving backward)
+    float tip_factor = clamp(1.0 - (dist / spark_length), 0.0, 1.0);
+    float spark_intensity = pow(tip_factor, spark_sharpness);
+    
+    // Fade out the spark tip entirely as progress moves from 1.0 to (1.0 + spark_length)
+    float spark_fade = 1.0 - clamp((progress - 1.0) / spark_length, 0.0, 1.0);
+    spark_intensity *= spark_fade;
+    
+    // Mix between the warm trailing body and the bright sparkler tip
+    vec3 final_color = mix(trailing_color.rgb, leading_color.rgb, spark_intensity);
+    
+    ALBEDO = final_color;
+    EMISSION = final_color * (1.0 + spark_intensity * 4.0) * fade_alpha;
+    ALPHA = fade_alpha;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yvpgd"]
+render_priority = 0
+shader = SubResource("Shader_a6aib")
+shader_parameter/fade_alpha = 1.0
+shader_parameter/progress = 1.2
+shader_parameter/spark_length = 0.15
+shader_parameter/spark_sharpness = 1.0
+shader_parameter/start_offset = 0.25
+shader_parameter/leading_color = Color(1, 1, 1, 1)
+shader_parameter/trailing_color = Color(0.44, 0.65, 1, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_anxkm"]
+material = SubResource("ShaderMaterial_yvpgd")
+inner_radius = 0.18
+outer_radius = 0.22
+
+[sub_resource type="Gradient" id="Gradient_ol4s2"]
+offsets = PackedFloat32Array(0, 0.72973)
+colors = PackedColorArray(1, 1, 1, 1, 0.6, 0.75, 3, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_l6ikc"]
+gradient = SubResource("Gradient_ol4s2")
+
+[sub_resource type="Curve" id="Curve_kryyq"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.49701, 0.298832), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_3r0wo"]
+curve = SubResource("Curve_kryyq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4rosk"]
+direction = Vector3(2.08165e-12, 2.08165e-12, 1)
+spread = 18.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 12.0
+initial_velocity_max = 12.0
+damping_min = 1.0
+damping_max = 1.0
+scale_min = 0.6
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_3r0wo")
+color = Color(0.71, 0.83, 1, 1)
+color_ramp = SubResource("GradientTexture1D_l6ikc")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x0h1j"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_qgr6i"]
+material = SubResource("StandardMaterial3D_x0h1j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hibss"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.6, 0.75, 1, 1)
+roughness = 0.1
+emission_enabled = true
+emission = Color(0.6, 0.75, 1, 1)
+backlight_enabled = true
+backlight = Color(0.6, 0.75, 1, 1)
+billboard_keep_scale = true
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_4ck5x"]
+_surfaces = [{
+"aabb": AABB(-0.34, -1.9, -0.3, 0.68, 3.8, 0.60001),
+"format": 4097,
+"index_count": 144,
+"index_data": PackedByteArray(2, 0, 0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 1, 0, 4, 0, 0, 0, 1, 0, 5, 0, 4, 0, 0, 0, 6, 0, 3, 0, 0, 0, 4, 0, 6, 0, 2, 0, 3, 0, 7, 0, 8, 0, 2, 0, 7, 0, 8, 0, 9, 0, 10, 0, 8, 0, 7, 0, 9, 0, 7, 0, 6, 0, 9, 0, 7, 0, 3, 0, 6, 0, 2, 0, 12, 0, 11, 0, 1, 0, 2, 0, 11, 0, 1, 0, 13, 0, 5, 0, 1, 0, 11, 0, 13, 0, 11, 0, 14, 0, 13, 0, 11, 0, 12, 0, 14, 0, 2, 0, 15, 0, 12, 0, 8, 0, 15, 0, 2, 0, 8, 0, 16, 0, 15, 0, 8, 0, 10, 0, 16, 0, 15, 0, 14, 0, 12, 0, 15, 0, 16, 0, 14, 0, 19, 0, 20, 0, 17, 0, 18, 0, 19, 0, 17, 0, 18, 0, 4, 0, 5, 0, 18, 0, 17, 0, 4, 0, 17, 0, 6, 0, 4, 0, 17, 0, 20, 0, 6, 0, 19, 0, 21, 0, 20, 0, 22, 0, 21, 0, 19, 0, 22, 0, 9, 0, 21, 0, 22, 0, 10, 0, 9, 0, 21, 0, 6, 0, 20, 0, 21, 0, 9, 0, 6, 0, 19, 0, 23, 0, 24, 0, 18, 0, 23, 0, 19, 0, 18, 0, 13, 0, 23, 0, 18, 0, 5, 0, 13, 0, 23, 0, 14, 0, 24, 0, 23, 0, 13, 0, 14, 0, 19, 0, 24, 0, 25, 0, 22, 0, 19, 0, 25, 0, 22, 0, 16, 0, 10, 0, 22, 0, 25, 0, 16, 0, 25, 0, 14, 0, 16, 0, 25, 0, 24, 0, 14, 0),
+"lods": [0.213759, PackedByteArray(1, 0, 0, 0, 2, 0, 1, 0, 4, 0, 0, 0, 18, 0, 4, 0, 1, 0, 18, 0, 17, 0, 4, 0, 18, 0, 19, 0, 17, 0, 0, 0, 4, 0, 2, 0, 7, 0, 2, 0, 4, 0, 7, 0, 4, 0, 9, 0, 21, 0, 9, 0, 4, 0, 21, 0, 4, 0, 19, 0, 17, 0, 19, 0, 4, 0, 8, 0, 2, 0, 7, 0, 8, 0, 7, 0, 9, 0, 22, 0, 8, 0, 9, 0, 22, 0, 9, 0, 21, 0, 22, 0, 21, 0, 19, 0, 1, 0, 2, 0, 11, 0, 1, 0, 11, 0, 13, 0, 18, 0, 1, 0, 13, 0, 18, 0, 13, 0, 23, 0, 18, 0, 23, 0, 19, 0, 2, 0, 15, 0, 11, 0, 15, 0, 13, 0, 11, 0, 15, 0, 16, 0, 13, 0, 25, 0, 13, 0, 16, 0, 25, 0, 23, 0, 13, 0, 19, 0, 23, 0, 25, 0, 8, 0, 15, 0, 2, 0, 8, 0, 16, 0, 15, 0, 22, 0, 16, 0, 8, 0, 22, 0, 25, 0, 16, 0, 22, 0, 19, 0, 25, 0), 0.341557, PackedByteArray(1, 0, 4, 0, 2, 0, 18, 0, 19, 0, 4, 0, 18, 0, 4, 0, 1, 0, 25, 0, 2, 0, 9, 0, 19, 0, 25, 0, 9, 0, 9, 0, 2, 0, 4, 0, 9, 0, 4, 0, 19, 0, 1, 0, 2, 0, 11, 0, 1, 0, 11, 0, 13, 0, 18, 0, 1, 0, 13, 0, 18, 0, 13, 0, 23, 0, 18, 0, 23, 0, 19, 0, 2, 0, 25, 0, 11, 0, 25, 0, 13, 0, 11, 0, 25, 0, 23, 0, 13, 0, 19, 0, 23, 0, 25, 0)],
+"name": "Material",
+"primitive": 3,
+"vertex_count": 26,
+"vertex_data": PackedByteArray(68, 181, 65, 62, 96, 148, 128, 63, 154, 153, 153, 62, 124, 20, 174, 62, 127, 84, 129, 63, 0, 0, 0, 128, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 0, 0, 0, 0, 255, 145, 128, 63, 154, 153, 153, 62, 68, 181, 65, 62, 0, 0, 0, 0, 154, 153, 153, 62, 124, 20, 174, 62, 0, 0, 0, 0, 0, 0, 0, 128, 0, 0, 0, 0, 0, 0, 0, 0, 154, 153, 153, 62, 68, 181, 65, 190, 96, 148, 128, 63, 154, 153, 153, 62, 124, 20, 174, 190, 127, 84, 129, 63, 0, 0, 0, 128, 68, 181, 65, 190, 0, 0, 0, 0, 154, 153, 153, 62, 124, 20, 174, 190, 0, 0, 0, 0, 0, 0, 0, 128, 68, 181, 65, 62, 96, 148, 128, 63, 154, 153, 153, 190, 0, 0, 0, 0, 255, 145, 128, 63, 154, 153, 153, 190, 68, 181, 65, 62, 0, 0, 0, 0, 154, 153, 153, 190, 0, 0, 0, 0, 0, 0, 0, 0, 154, 153, 153, 190, 68, 181, 65, 190, 96, 148, 128, 63, 154, 153, 153, 190, 68, 181, 65, 190, 0, 0, 0, 0, 154, 153, 153, 190, 68, 181, 65, 62, 96, 148, 128, 191, 154, 153, 153, 62, 124, 20, 174, 62, 127, 84, 129, 191, 0, 0, 0, 128, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 0, 0, 0, 0, 255, 145, 128, 191, 154, 153, 153, 62, 68, 181, 65, 190, 96, 148, 128, 191, 154, 153, 153, 62, 124, 20, 174, 190, 127, 84, 129, 191, 0, 0, 0, 128, 68, 181, 65, 62, 96, 148, 128, 191, 154, 153, 153, 190, 0, 0, 0, 0, 255, 145, 128, 191, 154, 153, 153, 190, 68, 181, 65, 190, 96, 148, 128, 191, 154, 153, 153, 190)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_hs801"]
+resource_name = "LongHexagon_Cube"
+_surfaces = [{
+"aabb": AABB(-0.34, -1.9, -0.3, 0.68, 3.8, 0.60001),
+"attribute_data": PackedByteArray(0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 0, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62),
+"format": 4119,
+"index_count": 144,
+"index_data": PackedByteArray(11, 0, 0, 0, 16, 0, 5, 0, 2, 0, 15, 0, 7, 0, 20, 0, 3, 0, 7, 0, 22, 0, 20, 0, 1, 0, 23, 0, 17, 0, 1, 0, 19, 0, 23, 0, 13, 0, 18, 0, 27, 0, 31, 0, 9, 0, 25, 0, 29, 0, 32, 0, 35, 0, 29, 0, 24, 0, 32, 0, 26, 0, 23, 0, 33, 0, 26, 0, 17, 0, 23, 0, 10, 0, 40, 0, 36, 0, 4, 0, 14, 0, 38, 0, 6, 0, 44, 0, 21, 0, 6, 0, 39, 0, 44, 0, 37, 0, 45, 0, 43, 0, 37, 0, 41, 0, 45, 0, 12, 0, 49, 0, 42, 0, 30, 0, 47, 0, 8, 0, 28, 0, 50, 0, 46, 0, 28, 0, 34, 0, 50, 0, 48, 0, 45, 0, 41, 0, 48, 0, 51, 0, 45, 0, 63, 0, 68, 0, 52, 0, 57, 0, 67, 0, 54, 0, 59, 0, 20, 0, 22, 0, 59, 0, 55, 0, 20, 0, 53, 0, 23, 0, 19, 0, 53, 0, 69, 0, 23, 0, 65, 0, 74, 0, 70, 0, 78, 0, 72, 0, 61, 0, 76, 0, 32, 0, 71, 0, 76, 0, 35, 0, 32, 0, 73, 0, 23, 0, 69, 0, 73, 0, 33, 0, 23, 0, 62, 0, 79, 0, 83, 0, 56, 0, 81, 0, 66, 0, 58, 0, 44, 0, 82, 0, 58, 0, 21, 0, 44, 0, 80, 0, 45, 0, 84, 0, 80, 0, 43, 0, 45, 0, 64, 0, 85, 0, 89, 0, 77, 0, 60, 0, 87, 0, 75, 0, 50, 0, 34, 0, 75, 0, 86, 0, 50, 0, 88, 0, 45, 0, 51, 0, 88, 0, 84, 0, 45, 0),
+"lods": [0.213759, PackedByteArray(104, 0, 103, 0, 107, 0, 104, 0, 20, 0, 3, 0, 111, 0, 20, 0, 104, 0, 111, 0, 55, 0, 20, 0, 111, 0, 114, 0, 110, 0, 0, 0, 19, 0, 11, 0, 26, 0, 11, 0, 19, 0, 26, 0, 19, 0, 33, 0, 73, 0, 33, 0, 19, 0, 73, 0, 19, 0, 63, 0, 52, 0, 63, 0, 19, 0, 108, 0, 105, 0, 24, 0, 108, 0, 24, 0, 32, 0, 115, 0, 108, 0, 32, 0, 115, 0, 32, 0, 71, 0, 115, 0, 71, 0, 112, 0, 4, 0, 14, 0, 109, 0, 4, 0, 39, 0, 44, 0, 56, 0, 4, 0, 44, 0, 56, 0, 44, 0, 82, 0, 56, 0, 116, 0, 66, 0, 106, 0, 48, 0, 36, 0, 48, 0, 43, 0, 36, 0, 48, 0, 51, 0, 43, 0, 88, 0, 43, 0, 51, 0, 88, 0, 79, 0, 43, 0, 113, 0, 79, 0, 88, 0, 28, 0, 46, 0, 8, 0, 28, 0, 50, 0, 46, 0, 75, 0, 50, 0, 28, 0, 75, 0, 86, 0, 50, 0, 75, 0, 60, 0, 86, 0), 0.341557, PackedByteArray(90, 0, 94, 0, 93, 0, 97, 0, 100, 0, 94, 0, 97, 0, 20, 0, 90, 0, 102, 0, 91, 0, 95, 0, 98, 0, 102, 0, 95, 0, 33, 0, 11, 0, 19, 0, 33, 0, 19, 0, 63, 0, 4, 0, 14, 0, 96, 0, 4, 0, 39, 0, 44, 0, 56, 0, 4, 0, 44, 0, 56, 0, 44, 0, 82, 0, 56, 0, 101, 0, 66, 0, 92, 0, 88, 0, 36, 0, 88, 0, 43, 0, 36, 0, 88, 0, 79, 0, 43, 0, 99, 0, 79, 0, 88, 0)],
+"material": SubResource("StandardMaterial3D_hibss"),
+"name": "Material",
+"primitive": 3,
+"vertex_count": 117,
+"vertex_data": PackedByteArray(68, 181, 65, 62, 96, 148, 128, 63, 154, 153, 153, 62, 252, 127, 28, 160, 255, 255, 255, 63, 68, 181, 65, 62, 96, 148, 128, 63, 154, 153, 153, 62, 255, 127, 255, 127, 255, 255, 255, 63, 68, 181, 65, 62, 96, 148, 128, 63, 154, 153, 153, 62, 162, 195, 217, 153, 255, 255, 255, 63, 68, 181, 65, 62, 96, 148, 128, 63, 154, 153, 153, 62, 43, 213, 255, 127, 255, 255, 255, 63, 124, 20, 174, 62, 127, 84, 129, 63, 0, 0, 0, 128, 36, 230, 91, 188, 255, 255, 255, 191, 124, 20, 174, 62, 127, 84, 129, 63, 0, 0, 0, 128, 162, 195, 217, 153, 255, 255, 255, 63, 124, 20, 174, 62, 127, 84, 129, 63, 0, 0, 0, 128, 255, 255, 210, 170, 255, 255, 255, 191, 124, 20, 174, 62, 127, 84, 129, 63, 0, 0, 0, 128, 43, 213, 255, 127, 255, 255, 255, 63, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 218, 25, 91, 188, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 92, 60, 217, 153, 255, 255, 255, 63, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 28, 32, 252, 255, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 252, 127, 28, 160, 255, 255, 255, 63, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 226, 223, 252, 255, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 2, 128, 28, 160, 255, 255, 255, 63, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 36, 230, 91, 188, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 162, 195, 217, 153, 255, 255, 255, 63, 0, 0, 0, 0, 255, 145, 128, 63, 154, 153, 153, 62, 252, 127, 28, 160, 255, 255, 255, 63, 0, 0, 0, 0, 255, 145, 128, 63, 154, 153, 153, 62, 255, 127, 255, 127, 255, 255, 255, 63, 0, 0, 0, 0, 255, 145, 128, 63, 154, 153, 153, 62, 2, 128, 28, 160, 255, 255, 255, 63, 68, 181, 65, 62, 0, 0, 0, 0, 154, 153, 153, 62, 255, 127, 255, 127, 255, 255, 255, 63, 68, 181, 65, 62, 0, 0, 0, 0, 154, 153, 153, 62, 43, 213, 255, 127, 255, 255, 255, 63, 124, 20, 174, 62, 0, 0, 0, 0, 0, 0, 0, 128, 255, 255, 210, 170, 255, 255, 255, 191, 124, 20, 174, 62, 0, 0, 0, 0, 0, 0, 0, 128, 43, 213, 255, 127, 255, 255, 255, 63, 0, 0, 0, 0, 0, 0, 0, 0, 154, 153, 153, 62, 255, 127, 255, 127, 255, 255, 255, 63, 68, 181, 65, 190, 96, 148, 128, 63, 154, 153, 153, 62, 211, 42, 255, 127, 255, 255, 255, 63, 68, 181, 65, 190, 96, 148, 128, 63, 154, 153, 153, 62, 92, 60, 217, 153, 255, 255, 255, 63, 68, 181, 65, 190, 96, 148, 128, 63, 154, 153, 153, 62, 255, 127, 255, 127, 255, 255, 255, 63, 68, 181, 65, 190, 96, 148, 128, 63, 154, 153, 153, 62, 2, 128, 28, 160, 255, 255, 255, 63, 124, 20, 174, 190, 127, 84, 129, 63, 0, 0, 0, 128, 0, 0, 210, 170, 255, 255, 255, 191, 124, 20, 174, 190, 127, 84, 129, 63, 0, 0, 0, 128, 211, 42, 255, 127, 255, 255, 255, 63, 124, 20, 174, 190, 127, 84, 129, 63, 0, 0, 0, 128, 218, 25, 91, 188, 255, 255, 255, 191, 124, 20, 174, 190, 127, 84, 129, 63, 0, 0, 0, 128, 92, 60, 217, 153, 255, 255, 255, 63, 68, 181, 65, 190, 0, 0, 0, 0, 154, 153, 153, 62, 211, 42, 255, 127, 255, 255, 255, 63, 68, 181, 65, 190, 0, 0, 0, 0, 154, 153, 153, 62, 255, 127, 255, 127, 255, 255, 255, 63, 124, 20, 174, 190, 0, 0, 0, 0, 0, 0, 0, 128, 0, 0, 210, 170, 255, 255, 255, 191, 124, 20, 174, 190, 0, 0, 0, 0, 0, 0, 0, 128, 211, 42, 255, 127, 255, 255, 255, 63, 68, 181, 65, 62, 96, 148, 128, 63, 154, 153, 153, 190, 28, 32, 252, 255, 255, 255, 255, 191, 68, 181, 65, 62, 96, 148, 128, 63, 154, 153, 153, 190, 255, 255, 255, 255, 255, 255, 255, 191, 68, 181, 65, 62, 96, 148, 128, 63, 154, 153, 153, 190, 36, 230, 91, 188, 255, 255, 255, 191, 68, 181, 65, 62, 96, 148, 128, 63, 154, 153, 153, 190, 255, 255, 210, 170, 255, 255, 255, 191, 0, 0, 0, 0, 255, 145, 128, 63, 154, 153, 153, 190, 28, 32, 252, 255, 255, 255, 255, 191, 0, 0, 0, 0, 255, 145, 128, 63, 154, 153, 153, 190, 255, 255, 255, 255, 255, 255, 255, 191, 0, 0, 0, 0, 255, 145, 128, 63, 154, 153, 153, 190, 226, 223, 252, 255, 255, 255, 255, 191, 68, 181, 65, 62, 0, 0, 0, 0, 154, 153, 153, 190, 255, 255, 255, 255, 255, 255, 255, 191, 68, 181, 65, 62, 0, 0, 0, 0, 154, 153, 153, 190, 255, 255, 210, 170, 255, 255, 255, 191, 0, 0, 0, 0, 0, 0, 0, 0, 154, 153, 153, 190, 255, 255, 255, 255, 255, 255, 255, 191, 68, 181, 65, 190, 96, 148, 128, 63, 154, 153, 153, 190, 0, 0, 210, 170, 255, 255, 255, 191, 68, 181, 65, 190, 96, 148, 128, 63, 154, 153, 153, 190, 218, 25, 91, 188, 255, 255, 255, 191, 68, 181, 65, 190, 96, 148, 128, 63, 154, 153, 153, 190, 255, 255, 255, 255, 255, 255, 255, 191, 68, 181, 65, 190, 96, 148, 128, 63, 154, 153, 153, 190, 226, 223, 252, 255, 255, 255, 255, 191, 68, 181, 65, 190, 0, 0, 0, 0, 154, 153, 153, 190, 0, 0, 210, 170, 255, 255, 255, 191, 68, 181, 65, 190, 0, 0, 0, 0, 154, 153, 153, 190, 255, 255, 255, 255, 255, 255, 255, 191, 68, 181, 65, 62, 96, 148, 128, 191, 154, 153, 153, 62, 252, 127, 226, 95, 255, 255, 255, 63, 68, 181, 65, 62, 96, 148, 128, 191, 154, 153, 153, 62, 255, 127, 255, 127, 255, 255, 255, 63, 68, 181, 65, 62, 96, 148, 128, 191, 154, 153, 153, 62, 162, 195, 37, 102, 255, 255, 255, 63, 68, 181, 65, 62, 96, 148, 128, 191, 154, 153, 153, 62, 43, 213, 255, 127, 255, 255, 255, 63, 124, 20, 174, 62, 127, 84, 129, 191, 0, 0, 0, 128, 36, 230, 163, 67, 255, 255, 255, 191, 124, 20, 174, 62, 127, 84, 129, 191, 0, 0, 0, 128, 162, 195, 37, 102, 255, 255, 255, 63, 124, 20, 174, 62, 127, 84, 129, 191, 0, 0, 0, 128, 255, 255, 210, 170, 255, 255, 255, 191, 124, 20, 174, 62, 127, 84, 129, 191, 0, 0, 0, 128, 43, 213, 255, 127, 255, 255, 255, 63, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 218, 25, 163, 67, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 92, 60, 37, 102, 255, 255, 255, 63, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 28, 32, 2, 0, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 252, 127, 226, 95, 255, 255, 255, 63, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 226, 223, 2, 0, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 2, 128, 226, 95, 255, 255, 255, 63, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 36, 230, 163, 67, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 162, 195, 37, 102, 255, 255, 255, 63, 0, 0, 0, 0, 255, 145, 128, 191, 154, 153, 153, 62, 252, 127, 226, 95, 255, 255, 255, 63, 0, 0, 0, 0, 255, 145, 128, 191, 154, 153, 153, 62, 255, 127, 255, 127, 255, 255, 255, 63, 0, 0, 0, 0, 255, 145, 128, 191, 154, 153, 153, 62, 2, 128, 226, 95, 255, 255, 255, 63, 68, 181, 65, 190, 96, 148, 128, 191, 154, 153, 153, 62, 211, 42, 255, 127, 255, 255, 255, 63, 68, 181, 65, 190, 96, 148, 128, 191, 154, 153, 153, 62, 92, 60, 37, 102, 255, 255, 255, 63, 68, 181, 65, 190, 96, 148, 128, 191, 154, 153, 153, 62, 255, 127, 255, 127, 255, 255, 255, 63, 68, 181, 65, 190, 96, 148, 128, 191, 154, 153, 153, 62, 2, 128, 226, 95, 255, 255, 255, 63, 124, 20, 174, 190, 127, 84, 129, 191, 0, 0, 0, 128, 0, 0, 210, 170, 255, 255, 255, 191, 124, 20, 174, 190, 127, 84, 129, 191, 0, 0, 0, 128, 211, 42, 255, 127, 255, 255, 255, 63, 124, 20, 174, 190, 127, 84, 129, 191, 0, 0, 0, 128, 218, 25, 163, 67, 255, 255, 255, 191, 124, 20, 174, 190, 127, 84, 129, 191, 0, 0, 0, 128, 92, 60, 37, 102, 255, 255, 255, 63, 68, 181, 65, 62, 96, 148, 128, 191, 154, 153, 153, 190, 28, 32, 2, 0, 255, 255, 255, 191, 68, 181, 65, 62, 96, 148, 128, 191, 154, 153, 153, 190, 255, 255, 255, 255, 255, 255, 255, 191, 68, 181, 65, 62, 96, 148, 128, 191, 154, 153, 153, 190, 36, 230, 163, 67, 255, 255, 255, 191, 68, 181, 65, 62, 96, 148, 128, 191, 154, 153, 153, 190, 255, 255, 210, 170, 255, 255, 255, 191, 0, 0, 0, 0, 255, 145, 128, 191, 154, 153, 153, 190, 28, 32, 2, 0, 255, 255, 255, 191, 0, 0, 0, 0, 255, 145, 128, 191, 154, 153, 153, 190, 255, 255, 255, 255, 255, 255, 255, 191, 0, 0, 0, 0, 255, 145, 128, 191, 154, 153, 153, 190, 226, 223, 2, 0, 255, 255, 255, 191, 68, 181, 65, 190, 96, 148, 128, 191, 154, 153, 153, 190, 0, 0, 210, 170, 255, 255, 255, 191, 68, 181, 65, 190, 96, 148, 128, 191, 154, 153, 153, 190, 218, 25, 163, 67, 255, 255, 255, 191, 68, 181, 65, 190, 96, 148, 128, 191, 154, 153, 153, 190, 255, 255, 255, 255, 255, 255, 255, 191, 68, 181, 65, 190, 96, 148, 128, 191, 154, 153, 153, 190, 226, 223, 2, 0, 255, 255, 255, 191, 124, 20, 174, 62, 127, 84, 129, 63, 0, 0, 0, 128, 66, 210, 73, 132, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 232, 9, 68, 154, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 118, 23, 173, 247, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 202, 201, 197, 144, 255, 255, 255, 63, 68, 181, 65, 62, 0, 0, 0, 0, 154, 153, 153, 62, 1, 210, 108, 123, 255, 255, 255, 63, 68, 181, 65, 190, 0, 0, 0, 0, 154, 153, 153, 62, 179, 28, 255, 124, 255, 255, 255, 63, 68, 181, 65, 62, 96, 148, 128, 63, 154, 153, 153, 190, 36, 230, 91, 188, 255, 255, 255, 191, 124, 20, 174, 62, 127, 84, 129, 191, 0, 0, 0, 128, 48, 206, 180, 117, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 99, 32, 38, 101, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 225, 223, 0, 0, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 228, 197, 121, 105, 255, 255, 255, 63, 68, 181, 65, 62, 96, 148, 128, 191, 154, 153, 153, 190, 36, 230, 163, 67, 255, 255, 255, 191, 68, 181, 65, 190, 96, 148, 128, 191, 154, 153, 153, 190, 212, 8, 63, 92, 255, 255, 255, 191, 68, 181, 65, 62, 96, 148, 128, 63, 154, 153, 153, 62, 162, 195, 217, 153, 255, 255, 255, 63, 124, 20, 174, 62, 127, 84, 129, 63, 0, 0, 0, 128, 162, 206, 162, 137, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 92, 60, 217, 153, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 225, 223, 254, 255, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 63, 0, 0, 0, 128, 162, 195, 217, 153, 255, 255, 255, 63, 124, 20, 174, 190, 127, 84, 129, 63, 0, 0, 0, 128, 92, 49, 162, 137, 255, 255, 255, 191, 68, 181, 65, 62, 96, 148, 128, 63, 154, 153, 153, 190, 36, 230, 91, 188, 255, 255, 255, 191, 68, 181, 65, 62, 96, 148, 128, 191, 154, 153, 153, 62, 162, 195, 37, 102, 255, 255, 255, 63, 124, 20, 174, 62, 127, 84, 129, 191, 0, 0, 0, 128, 162, 206, 92, 118, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 92, 60, 37, 102, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 29, 32, 0, 0, 255, 255, 255, 191, 0, 0, 0, 0, 51, 51, 243, 191, 0, 0, 0, 128, 162, 195, 37, 102, 255, 255, 255, 63, 124, 20, 174, 190, 127, 84, 129, 191, 0, 0, 0, 128, 92, 49, 92, 118, 255, 255, 255, 191, 68, 181, 65, 62, 96, 148, 128, 191, 154, 153, 153, 190, 36, 230, 163, 67, 255, 255, 255, 191)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_4ck5x")
+
 [node name="IceJellyfish" type="Node3D"]
 script = ExtResource("1_jelly")
-
-[node name="Bell" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-material_override = SubResource("StandardMaterial3D_ice")
-mesh = SubResource("SphereMesh_bell")
 
 [node name="EnemyHurtbox" type="Area3D" parent="."]
 collision_layer = 8
@@ -51,3 +287,131 @@ frostbite_buildup = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DamageOverTimeArea/EnemyHitbox"]
 shape = SubResource("SphereShape3D_body")
+
+[node name="IceFairyVisuals" type="Node3D" parent="."]
+
+[node name="PitchPivot" type="Node3D" parent="IceFairyVisuals"]
+transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 0, 0, 0)
+
+[node name="YawPivot" type="Node3D" parent="IceFairyVisuals/PitchPivot"]
+
+[node name="Cap" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
+mesh = SubResource("SphereMesh_2umox")
+skeleton = NodePath("../../..")
+
+[node name="Spike0" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
+transform = Transform3D(1, 1.58819e-22, 5.23784e-30, -1.58819e-22, 0.999999, -2.84194e-15, -5.23785e-30, 2.84194e-15, 0.999999, 2.08165e-12, -0.9, 0.33)
+mesh = SubResource("CylinderMesh_b648n")
+skeleton = NodePath("../../..")
+
+[node name="RingMeshContainer" type="Node3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike0"]
+transform = Transform3D(1, -2.50388e-23, -1.29184e-23, 2.50388e-23, 1, 3.26397e-09, 1.29184e-23, -3.26397e-09, 1, 2.08165e-12, 0.55, 0)
+
+[node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike0/RingMeshContainer"]
+transform = Transform3D(1, 1.62918e-22, 1.29184e-23, -1.81775e-22, 1, -3.26398e-09, -1.29184e-23, 3.26398e-09, 1, -2.60209e-18, 0, 0)
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike0/RingMeshContainer/RingMesh"]
+inner_radius = 0.18
+outer_radius = 0.22
+sides = 30
+material = SubResource("ShaderMaterial_3uokh")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike0/RingMeshContainer/RingMesh"]
+transform = Transform3D(1, -1.50854e-22, 1.79819e-29, 9.04185e-23, 1, 9.47539e-15, 8.09297e-30, -1.27917e-14, 1, 2.08165e-12, 2.08165e-12, -0.22)
+operation = 2
+size = Vector3(0.3, 0.12, 0.12)
+
+[node name="OldRingMesh" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike0/RingMeshContainer"]
+visible = false
+mesh = SubResource("TorusMesh_anxkm")
+
+[node name="Spike1" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.9, -0.33)
+mesh = SubResource("CylinderMesh_b648n")
+skeleton = NodePath("../../..")
+
+[node name="RingMeshContainer" type="Node3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.55, 2.08165e-12)
+
+[node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike1/RingMeshContainer"]
+transform = Transform3D(-1, 3.48787e-16, -8.74228e-08, 3.48787e-16, 1, -3.48787e-16, 8.74228e-08, -3.48787e-16, -1, -2.60209e-18, 0, 0)
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike1/RingMeshContainer/RingMesh"]
+inner_radius = 0.18
+outer_radius = 0.22
+sides = 30
+material = SubResource("ShaderMaterial_3uokh")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike1/RingMeshContainer/RingMesh"]
+transform = Transform3D(1, 1.58738e-21, 2.13163e-14, 2.02205e-22, 0.999999, 9.00006e-15, 1.13687e-13, -3.86044e-14, 0.999999, 2.08165e-12, 2.08165e-12, -0.22)
+operation = 2
+size = Vector3(0.3, 0.12, 0.12)
+
+[node name="OldRingMesh" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike1/RingMeshContainer"]
+visible = false
+mesh = SubResource("TorusMesh_anxkm")
+
+[node name="Spike2" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, -0.6, 2.08165e-12)
+mesh = SubResource("CylinderMesh_b648n")
+skeleton = NodePath("../../..")
+
+[node name="RingMeshContainer" type="Node3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.55, 2.08165e-12)
+
+[node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike2/RingMeshContainer"]
+transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, -2.60209e-18, 0, 0)
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike2/RingMeshContainer/RingMesh"]
+inner_radius = 0.18
+outer_radius = 0.22
+sides = 30
+material = SubResource("ShaderMaterial_3uokh")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike2/RingMeshContainer/RingMesh"]
+transform = Transform3D(1, 5.44851e-15, -5.20963e-15, 2.32109e-14, 0.999999, -1.16043e-14, 2.32109e-14, 8.28804e-15, 0.999999, 2.08165e-12, 2.08165e-12, -0.22)
+operation = 2
+size = Vector3(0.3, 0.12, 0.12)
+
+[node name="OldRingMesh" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike2/RingMeshContainer"]
+visible = false
+mesh = SubResource("TorusMesh_anxkm")
+
+[node name="Spike3" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33, -0.6, 2.08165e-12)
+mesh = SubResource("CylinderMesh_b648n")
+skeleton = NodePath("../../..")
+
+[node name="RingMeshContainer" type="Node3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.55, 2.08165e-12)
+
+[node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike3/RingMeshContainer"]
+transform = Transform3D(-4.37114e-08, -3.48787e-16, -1, 3.48787e-16, 1, -3.48787e-16, 1, -3.48787e-16, -4.37114e-08, -2.60209e-18, 0, 0)
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike3/RingMeshContainer/RingMesh"]
+inner_radius = 0.18
+outer_radius = 0.22
+sides = 30
+material = SubResource("ShaderMaterial_3uokh")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike3/RingMeshContainer/RingMesh"]
+transform = Transform3D(1, -2.84311e-15, 4.26231e-15, -1.96582e-14, 0.999999, -1.16043e-14, -1.96582e-14, 8.28804e-15, 0.999999, 2.08165e-12, 2.08165e-12, -0.22)
+operation = 2
+size = Vector3(0.3, 0.12, 0.12)
+
+[node name="OldRingMesh" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike3/RingMeshContainer"]
+visible = false
+mesh = SubResource("TorusMesh_anxkm")
+
+[node name="IceShotChargeParticles" type="GPUParticles3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
+transform = Transform3D(1, 0, -1.5246e-23, -1.5246e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+emitting = false
+amount = 30
+lifetime = 0.36
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_4rosk")
+draw_pass_1 = SubResource("QuadMesh_qgr6i")
+
+[node name="ShotMesh" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
+transform = Transform3D(2.08165e-12, 0, -1.65073e-42, 0, 2.08165e-12, 8.20634e-29, 1.65073e-42, -8.20634e-29, 2.08165e-12, 0, -1.38107, 2.02204e-15)
+mesh = SubResource("ArrayMesh_hs801")
