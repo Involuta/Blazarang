@@ -5,6 +5,9 @@ const IceShardScene := preload("res://enemies/ice_fairy_shot.tscn")
 
 @export var charge_duration := 1.6
 @export var stun_duration := 1.0
+@export var orbit_arm_spin_speed := 1.5
+@export var orbit_arm_flap_speed := 0.8
+@export var orbit_arm_open_distance := 0.035
 @export var vertical_change_interval_min := 2.0
 @export var vertical_change_interval_max := 4.0
 var min_vertical_speed := -0.35
@@ -49,14 +52,27 @@ var starting_vertical_speed := 0.0
 var transition_tween: Tween
 var slot_move_start_position := Vector3.ZERO
 var slot_move_start_basis := Basis.IDENTITY
+var orbit_arm_rest_transforms: Array[Transform3D] = []
+var orbit_arm_spin_angle := 0.0
+var orbit_arm_flap_phase := 0.0
 var rng := RandomNumberGenerator.new()
 @onready var hurtbox := $EnemyHurtbox
+@onready var orbit_arm_meshes: Array[MeshInstance3D] = [
+	$IceFairyVisuals/PitchPivot/YawPivot/Spike0,
+	$IceFairyVisuals/PitchPivot/YawPivot/Spike1,
+	$IceFairyVisuals/PitchPivot/YawPivot/Spike2,
+	$IceFairyVisuals/PitchPivot/YawPivot/Spike3,
+	$IceFairyVisuals/PitchPivot/YawPivot/Spike4,
+	$IceFairyVisuals/PitchPivot/YawPivot/Spike5,
+]
 
 func _ready():
 	rng.randomize()
 	level = get_tree().root.find_child("Level", true, false)
 	hurtbox.hit_received.connect(_on_hurtbox_hit)
 	add_to_group("lockonables")
+	for arm_mesh in orbit_arm_meshes:
+		orbit_arm_rest_transforms.append(arm_mesh.transform)
 
 func configure_orbit(center: Vector3, radius: float, height: float, angle: float, speed: float, direction: float, initial_vertical_speed: float, dome_height: float):
 	orbit_center = center
@@ -106,6 +122,21 @@ func _physics_process(delta: float):
 	global_position = next_position
 	if movement_direction.length_squared() > 0.001:
 		global_rotation = Vector3(0.0, PI + atan2(movement_direction.x, movement_direction.z), 0.0)
+	_animate_orbit_arms(delta)
+
+func _animate_orbit_arms(delta: float):
+	orbit_arm_spin_angle = fposmod(orbit_arm_spin_angle + orbit_arm_spin_speed * delta, TAU)
+	orbit_arm_flap_phase = fposmod(orbit_arm_flap_phase + orbit_arm_flap_speed * delta, TAU)
+	var open_angle := sin(orbit_arm_flap_phase) * orbit_arm_open_distance
+	var collective_rotation := Basis(Vector3.UP, orbit_arm_spin_angle)
+	for index in range(orbit_arm_meshes.size()):
+		var arm_mesh := orbit_arm_meshes[index]
+		var rest_transform := orbit_arm_rest_transforms[index]
+		var radial_direction := Vector3(rest_transform.origin.x, 0.0, rest_transform.origin.z).normalized()
+		var hinge_axis := Vector3.UP.cross(radial_direction).normalized()
+		var hinge_rotation := Basis(hinge_axis, open_angle)
+		arm_mesh.position = collective_rotation * rest_transform.origin
+		arm_mesh.transform.basis = collective_rotation * hinge_rotation * rest_transform.basis
 
 func move_into_slot(slot: Node3D, duration: float) -> Tween:
 	is_in_pod = true
