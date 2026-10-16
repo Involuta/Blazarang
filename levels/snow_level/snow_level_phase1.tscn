@@ -65,6 +65,7 @@ dome_radius = 15.0
 min_jelly_radius = 12.0
 min_orbit_speed = 0.6
 max_orbit_speed = 1.2
+pod_spawn_interval = 3.0
 min_pod_spawn_height = 20.0
 pod_orbit_speed = 0.6
 

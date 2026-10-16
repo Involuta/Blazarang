@@ -1,5 +1,7 @@
 extends Node3D
 
+signal pod_wave_finished
+
 const JellyfishScene := preload("res://enemies/ice_jellyfish.tscn")
 const JellyfishPodScene := preload("res://enemies/ice_jellyfish_pod.tscn")
 
@@ -16,6 +18,7 @@ const JellyfishPodScene := preload("res://enemies/ice_jellyfish_pod.tscn")
 
 @export_group("Pod Attack")
 @export var pod_spawn_interval := 2.5
+@export var pod_spawn_interval_variation := 0.5
 @export_range(1, 3) var min_pod_count := 1
 @export_range(1, 3) var max_pod_count := 3
 @export var pod_formation_radius := 10.0
@@ -28,6 +31,7 @@ const JellyfishPodScene := preload("res://enemies/ice_jellyfish_pod.tscn")
 var rng := RandomNumberGenerator.new()
 var cotu: Node3D
 var jellyfish: Array[Node3D] = []
+var active_pod_attacks := 0
 
 func _ready():
 	var parent_node := get_parent()
@@ -62,13 +66,18 @@ func spawn_jellyfish():
 
 func start_pod_sequence():
 	while is_inside_tree():
-		await get_tree().create_timer(pod_spawn_interval).timeout
+		var interval := maxf(0.0, pod_spawn_interval + rng.randf_range(-pod_spawn_interval_variation, pod_spawn_interval_variation))
+		await get_tree().create_timer(interval).timeout
 		if not is_inside_tree():
 			return
 		var requested_count := rng.randi_range(min_pod_count, max_pod_count)
 		var pod_plans := find_pod_plans(requested_count)
+		if pod_plans.is_empty():
+			continue
+		active_pod_attacks = pod_plans.size()
 		for plan in pod_plans:
 			run_pod_attack(plan)
+		await pod_wave_finished
 
 func find_pod_plans(requested_count: int) -> Array[Dictionary]:
 	var survivors: Array[Node3D] = []
@@ -139,9 +148,11 @@ func run_pod_attack(plan: Dictionary):
 	for jelly in plan.jellies:
 		if is_instance_valid(jelly) and jelly.is_alive:
 			jelly.return_to_dome(slot_move_duration)
-			#await get_tree().create_timer(slot_move_stagger).timeout
 	await get_tree().create_timer(slot_move_duration).timeout
 	pod.queue_free()
+	active_pod_attacks -= 1
+	if active_pod_attacks == 0:
+		pod_wave_finished.emit()
 
 func _dome_position(radius: float, height_offset: float, angle: float) -> Vector3:
 	return dome_center + Vector3(cos(angle) * radius, height_offset, sin(angle) * radius)
