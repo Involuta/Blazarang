@@ -24,7 +24,6 @@ const JellyfishPodScene := preload("res://enemies/ice_jellyfish_pod.tscn")
 @export var slot_move_duration := 0.8
 @export var slot_move_stagger := 0.12
 @export var charge_wait_duration := 1.6
-@export var return_move_duration := 1.0
 
 var rng := RandomNumberGenerator.new()
 var cotu: Node3D
@@ -139,8 +138,9 @@ func run_pod_attack(plan: Dictionary):
 
 	for jelly in plan.jellies:
 		if is_instance_valid(jelly) and jelly.is_alive:
-			jelly.return_to_dome(return_move_duration)
-	await get_tree().create_timer(return_move_duration + 0.1).timeout
+			jelly.return_to_dome(slot_move_duration)
+			#await get_tree().create_timer(slot_move_stagger).timeout
+	await get_tree().create_timer(slot_move_duration).timeout
 	pod.queue_free()
 
 func _dome_position(radius: float, height_offset: float, angle: float) -> Vector3:

@@ -262,6 +262,7 @@ shadow_mesh = SubResource("ArrayMesh_4ck5x")
 
 [node name="IceJellyfish" type="Node3D"]
 script = ExtResource("1_jelly")
+orbit_arm_flap_speed = 1.6
 
 [node name="EnemyHurtbox" type="Area3D" parent="."]
 collision_layer = 8

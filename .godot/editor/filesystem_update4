@@ -36,3 +36,4 @@ res://levels/snow_level/snow_level_test_env.tscn
 res://levels/snow_level/snow_level_phase1.tscn
 res://enemies/ice_jellyfish.tscn
 res://enemies/ice_fairy.tscn
+res://levels/snow_level/snow_level_phase1.gd

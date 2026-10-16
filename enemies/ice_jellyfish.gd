@@ -7,7 +7,7 @@ const IceShardScene := preload("res://enemies/ice_fairy_shot.tscn")
 @export var stun_duration := 1.0
 @export var orbit_arm_spin_speed := 1.5
 @export var orbit_arm_flap_speed := 0.8
-@export var orbit_arm_open_distance := 0.035
+@export var orbit_arm_open_angle := 0.2
 @export var vertical_change_interval_min := 2.0
 @export var vertical_change_interval_max := 4.0
 var min_vertical_speed := -0.35
@@ -127,7 +127,7 @@ func _physics_process(delta: float):
 func _animate_orbit_arms(delta: float):
 	orbit_arm_spin_angle = fposmod(orbit_arm_spin_angle + orbit_arm_spin_speed * delta, TAU)
 	orbit_arm_flap_phase = fposmod(orbit_arm_flap_phase + orbit_arm_flap_speed * delta, TAU)
-	var open_angle := sin(orbit_arm_flap_phase) * orbit_arm_open_distance
+	var open_angle := sin(orbit_arm_flap_phase) * orbit_arm_open_angle
 	var collective_rotation := Basis(Vector3.UP, orbit_arm_spin_angle)
 	for index in range(orbit_arm_meshes.size()):
 		var arm_mesh := orbit_arm_meshes[index]
@@ -183,7 +183,7 @@ func shoot():
 	level.add_child.call_deferred(shard)
 	await shard.tree_entered
 	shard.global_position = global_position
-	shard.global_transform.basis = global_transform.basis
+	shard.look_at(shard.global_position + global_transform.basis.z, Vector3.UP)
 	shard.velocity = 6.0 * -shard.global_transform.basis.z
 
 func return_to_dome(duration: float):
