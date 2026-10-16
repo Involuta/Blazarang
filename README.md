@@ -2949,7 +2949,7 @@ Greg didn’t take the tournament as seriously as Pilot, causing friction betwee
 No name is passionate about fighting and wants to become elite (i.e. enter the gala), but he’s also passionate because he feels insecure about holding his brothers back since he can’t use magic or portals
 No name used to be subservient to his brothers (mainly Pilot since he was bossy) because he had no voice. After Pilot and Greg worked out their differences, no name gained the freedom to think for himself and self-actualized. He realized he was genuinely passionate about fighting and became the brothers’ leader. He communicates to his brothers mainly by doing some vague gesture that the brothers miraculously interpret correctly every time
 
-Jab Crab aka Jac Boss (just an idea)
+Jab Crab aka Jack Boss (just an idea)
 Heavily armored lobster with 2 big claws attached by long extendable/retractable tube arms (think of Claw Man, your My Hero Academia OC)
 Idea: his icon floats in front of his forward eye (left eye if he’s in orthodox stance, right eye if southpaw) and telegraphs his attacks by rotating, changing in size, and brightening
 
@@ -3001,10 +3001,10 @@ Fights by standing at a distance and holding its claws out in front of you, read
 Inspired by Conor McGregor holding out his open hands to control his opponent’s hands (great examples in his fight vs Eddie Alvarez)
 This is the Sean Strickland god who trains Jab Crab and beefs with Future Blade
 Idea: has a little translator screen that speaks for him. It sounds like Sean Strickland and makes facial expressions
-While training Jab Crab, Long Arms calls him Jac, referencing Sean Strickland talking to Jack Marshman in R3 of their fight
+While training Jab Crab, Long Arms calls him Jack, referencing Sean Strickland talking to Jack Marshman in R3 of their fight
 Idea: he’s actually around the strength of a Gauntlet 2 boss, but he rides a dragon in Gauntlet Central to fight at their level
 Lore/Story Ideas
-Convo with Jac about how Jac’s lucky to be a grower, not a shower. LA is talking about Jac’s arms, which are retractable unlike LA’s. LA has to figure out where to put his arms when they’re not being used
+Convo with Jack about how Jack’s lucky to be a grower, not a shower. LA is talking about Jack’s arms, which are retractable unlike LA’s. LA has to figure out where to put his arms when they’re not being used
 
 RPG Boss (just an idea)
 Special gamemode where it’s a turn-based RPG that looks like Mother/Earthbound
@@ -4241,13 +4241,25 @@ Mike asks Jessica if it’s possible to keep Cotu in the universe so long as he�
 The player, now playing as Singularity Cotu, fights Mike
 Post-fight events undecided
 Character interactions that are the same regardless of plot
+Cotu chatting with Jab Crab
+Cotu: “Are you a newborn?”
+Jack: “Kinda, yeah. I was born in the middle of the tournament, not after. I don’t know if that counts.”
+Cotu: “Ah, so did you watch my fights?”
+Jack: “Of course! I’ve watched all your fights! I even watched recordings from before I was born.”
+Cotu: “Am I your favorite?”
+Jack: “Erm, no, sorry. I’m a hardcore DracoNYX fan. But you’re definitely in my top 5!”
+Cotu: “DracoNYX, huh? Typical. You’re not still upset I beat the brakes off him, are ya?”
+Jack: “*sigh* I’m still a little sad about that, but it was worth it. It’s in my top 2 DracoNYX fights of all time!”
+Cotu: “Hmph. We sure did put on a show. I miss that big fella. Hope I run into him sometime in this circuit.”
+Jack: “He’ll kick your ass in the rematch, just you wait!”
+Cotu: “Heh. We’ll see.”
 Blackstar and her coach, Gauntlet Variant 97
 We see a compilation of Blackstar training and getting hurt. The camera focuses on her face throughout the compilation
 97: “What’s that look on your face?”
 Blackstar winces
 97: “Are you tired?”
 Blackstar: “...I’m-”
-97, passive-aggressively: “If you are, that’s fine. Just know that you don’t have champion-level stamina.”
+97, passive-aggressively: “If you are, that’s fine. Just be aware that you lack the stamina necessary to fight at the top level.”
 Blackstar: “...”
 97, sternly: “What’s wrong?”
 Blackstar: “...nothing, um-”
@@ -4256,9 +4268,9 @@ Blackstar looks away ashamed
 97, calmly: “If you disagree with my teaching methods, then replace me.”
 Blackstar: “n-no!”
 97 turns her back to Blackstar and talks behind her over her shoulder. “I have no problem with it. It’s up to you to decide who’s best for you. You’re gauntlet incarnate, after all.”
-Blackstar: “I-...I need you, 97. You’re the only one who pushes me like this. You, y-you understand how much work we need to do. N-no one else is willing to do what you do. No one else is willing…to…”
+Blackstar: “I-...I need you, 97. You’re the only one who pushes me like this. You, you understand how much w-work I need to do. N-no one else is willing to do what you do. No one else is willing…to…”
 97 turns back towards Blackstar. “I agree with you. This is what makes us elite.”
-97 turns her head away from Blackstar out into the distance. “We gauntlet variants aren’t born with the powers that the other elite gods have. We have to make up the difference in power with hard work and strategy. Most importantly, we need practice to perfect our execution, and true practice requires pain.”
+97 turns her head away from Blackstar out into the distance. “We gauntlet variants aren’t born with the powers the other elite gods have. We have to make up for the difference in power with hard work and strategy. And most importantly, we need practice, and real practice requires pain. After all, pain is the best teacher.”
 Blackstar: “...exactly.”
 97 expresses approval in some subtle way. 97 turns and kneels down to meet Blackstar’s eyes. Solemnly: “You are what the gauntlet needs, Blackstar. You carry the legacy of our people in your hands, and you will carry us to victory. I will do everything in my power to make you the best fighter in the universe…or I will make you reincarnate into someone who is.”
 Blackstar looks stressed, but resolved
@@ -4269,7 +4281,7 @@ Loser argues with gauntlet staff and the winner
 Sentinel obliterates Loser
 EG, loudly and sternly: “Since some people refuse to listen, we’ll go over the rules ONE MORE TIME. 1: Don’t be a sore loser. 2: No violence outside a realm room (Sentinel: unless we’re the ones doing it). And finally: No. BOOKS.”
 EG points her gun at Pilot’s book and blasts it. No name pulls him out of the way. She and other gauntlet staff unload countless shots into the book. Pilot cowers in fear.
-EG: “Books are degenerate time wasters that have no place in our gym. If we see ANYONE break these rules again, it’s immediate execution. Are we clear? Just say yes!”
+EG: “Books are degenerate time wasters that force a sedentary lifestyle. They have no place in our gym. If we see ANYONE break these rules again, it’s immediate execution. Are we clear? Just say yes!”
 Everyone: “Yes!!!”
 EG: “Dismissed.”
 Idea: Sean Strickland god overhears Future Blade and his friends gossiping about him and starts beef
@@ -4763,6 +4775,21 @@ Miscellaneous Trivia
 Gods
 Idea: all gods can speak through their icons, which works like telepathy (no audible voice, only subtitles), but in order to use their actual voice, they need a body
 Gods typically talk using their bodies when they have them. To them, talking through their icons when their bodies are available is like you texting someone when you’re standing right in front of them
+Realm Control
+Idea: Gauntlet Central teaches a class on realm control
+Calm speaker
+With the cadence of a TED Talk: “What is a realm? What is a realm…to you? Jessica designed your realm to be your home, your safe haven, your one respite of privacy in an uncaring universe. (pause) From what we’ve observed, the individuals with the most powerful realm control are the ones who treat their realms as home. They know everything about it, inside and out, and they take great care of it. Now, we don’t know if that’s the reason why they have such good realm control—correlation, causation, y’know—but this is the information we have so far, so it shouldn’t hurt to try it. Plus it feels good to take care of yourself, your realm is you, after all. So here are 3 big tips to help your home feel like home.”
+Clean it!
+Make it work for you. This will depend a lot on your body. Maybe you have wings and it’s easier to fly everywhere, and in that case, it’d be easier to open up your living spaces and put plenty of spots to perch. Or maybe you’re built flat and low to the ground, and in that case you’ll want to minimize the amount of climbing you’ll have to do. Maybe give tunnels a try.
+Decorations. This isn’t a plug or anything, but I really love Flora’s Flower Shop. They have a wide variety of selections to make your realm…pleasant to be in. And they don’t just sell flowers, if those aren’t your thing. I bought a banyan tree from them for my town square not too long ago.
+“The goal is for your realm to make it feel so familiar to you and so much like home that it almost feels like…an extension of your own mind. As we learn more about it, we might just come to find…that that’s exactly what it is.”
+Stern speaker
+“You might think that you can’t control your realm since you can’t feel anything through your realm like you can through your body, but this is a misconception. Everyone here is capable of realm control. When you die, your soul returns to your realm and regenerates your body. Your soul interacts with the physical realm without a body. How is this possible? I’ll tell you how: your soul uses your realm to regenerate your body. That’s right; every time you die and come back to life, you’re doing realm control.”
+People start murmuring and complaining
+“ORDER! …I understand that this may be unpleasant for some of us (more confused murmurs), but it is the most effective method we know of to practice realm control. While your body is regenerating, your mind returns at some point during the process. As soon as you gain awareness, try to feel every part of your body regenerate—every limb, every finger and every toe if you have them, even the smallest whiskers—feel them come back to you. At the same time, pay attention to your surroundings. (some people walk out) Memorize exactly where you are in your realm when you regenerate. You may even find that your location changes while you’re regenerating. Repeat this process enough times, and you’ll start to feel where in your realm your body parts are coming from, and once you understand that, your realm will slowly begin to feel like an extension of your body.”
+Audience guy 1: “Now I get why they got the feng shui guy to talk first.”
+Audience guy 2: “Who’s gonna wanna kill themselves for this? You’d have to be crazy to do something like that.”
+Audience guy 3: “Maybe, some time in the future, someone will figure out a better way to do this.”
 Blazar / Blaze / Cotu
 Named after blazars
 Blazars are quasars pointed towards Earth
