@@ -57,6 +57,7 @@ var orbit_arm_spin_angle := 0.0
 var orbit_arm_flap_phase := 0.0
 var rng := RandomNumberGenerator.new()
 @onready var hurtbox := $EnemyHurtbox
+@onready var ice_chunk_particles: GPUParticles3D = $IceChunkParticles
 @onready var orbit_arm_meshes: Array[MeshInstance3D] = [
 	$IceFairyVisuals/PitchPivot/YawPivot/Spike0,
 	$IceFairyVisuals/PitchPivot/YawPivot/Spike1,
@@ -244,6 +245,17 @@ func _on_hurtbox_hit(_damage: int):
 	await get_tree().create_timer(stun_duration).timeout
 	if is_alive:
 		is_stunned = false
+
+func death_effect():
+	if not is_instance_valid(level):
+		return
+	var particles: GPUParticles3D = ice_chunk_particles.duplicate()
+	level.add_child(particles)
+	particles.global_transform = ice_chunk_particles.global_transform
+	particles.emitting = true
+	await get_tree().create_timer(particles.lifetime).timeout
+	if is_instance_valid(particles):
+		particles.queue_free()
 
 func set_active(state: bool):
 	if state:

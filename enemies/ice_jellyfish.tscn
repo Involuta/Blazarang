@@ -1,9 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://ccwhnbrjgpt14"]
+[gd_scene load_steps=28 format=3 uid="uid://ccwhnbrjgpt14"]
 
 [ext_resource type="Script" path="res://enemies/ice_jellyfish.gd" id="1_jelly"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_hurtbox"]
 [ext_resource type="Script" path="res://general_scripts/damage_over_time_area.gd" id="3_contact"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="4_hitbox"]
+[ext_resource type="PackedScene" uid="uid://dotk8qi7oo127" path="res://enemies/clarity_dress_shard_hit_particles.tscn" id="5_hit_particles"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_body"]
 radius = 1.0
@@ -260,6 +261,17 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_4ck5x")
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ice_chunks"]
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 6.0
+scale_min = 0.25
+scale_max = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_ice_chunks"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_qf6aq")
+
 [node name="IceJellyfish" type="Node3D"]
 script = ExtResource("1_jelly")
 orbit_arm_flap_speed = 1.6
@@ -269,6 +281,7 @@ collision_layer = 8
 collision_mask = 257
 script = ExtResource("2_hurtbox")
 enemy_name = "IceFairy"
+hit_particles = ExtResource("5_hit_particles")
 hit_particle_color = Color(0.592157, 0.788235, 1, 1)
 opponent_hitboxes = ["PlayerHitbox"]
 
@@ -500,3 +513,12 @@ draw_pass_1 = SubResource("QuadMesh_qgr6i")
 transform = Transform3D(2.08165e-12, 0, -1.65073e-42, 0, 2.08165e-12, 8.20634e-29, 1.65073e-42, -8.20634e-29, 2.08165e-12, 0, -1.38107, 2.02204e-15)
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
 mesh = SubResource("ArrayMesh_hs801")
+
+[node name="IceChunkParticles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 9
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ice_chunks")
+draw_pass_1 = SubResource("BoxMesh_ice_chunks")
