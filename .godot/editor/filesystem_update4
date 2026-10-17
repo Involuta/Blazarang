@@ -1,11 +1,11 @@
-res://levels/snow_level/snow_level_phase1.tscn
-res://glb_meshes/snowflake_particle_mesh.res
+res://enemies/clarity.tscn
 res://shaders/black_outline.gdshader
 res://enemies/clarity_arm_shard.gdshader
 res://textures/clear_tile.tres
 res://textures/noise_texture_2d.tres
 res://shaders/smoke_LOD.tres
 res://shaders/ring_appear.gdshader
+res://glb_meshes/snowflake_particle_mesh.res
 res://glb_meshes/long_hexagon_particle_mesh.res
 res://GPUTrail-main/shaders/trail.gdshader
 res://GPUTrail-main/shaders/trail_draw_pass.gdshader
@@ -32,7 +32,7 @@ res://shaders/sobel_outline.gdshader
 res://enemies/snowflake_link_outline.gdshader
 res://enemies/ground_glow.gdshader
 res://enemies/clarity_dress_shard.gdshader
-res://enemies/clarity.tscn
 res://levels/snow_level/snow_level_test_env.tscn
+res://levels/snow_level/snow_level_phase1.tscn
 res://enemies/ice_jellyfish.tscn
 res://enemies/ice_fairy.tscn
