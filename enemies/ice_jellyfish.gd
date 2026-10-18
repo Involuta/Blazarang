@@ -198,6 +198,9 @@ func shoot():
 func return_to_dome(duration: float):
 	if not is_alive or returning_to_orbit:
 		return
+	if transition_tween and transition_tween.is_running():
+		transition_tween.kill()
+	in_transition = false
 	formation_slot = null
 	slot_locked = false
 	is_charging = false

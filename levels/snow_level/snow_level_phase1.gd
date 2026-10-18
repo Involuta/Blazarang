@@ -82,7 +82,7 @@ func start_pod_sequence():
 func find_pod_plans(requested_count: int) -> Array[Dictionary]:
 	var survivors: Array[Node3D] = []
 	for jelly in jellyfish:
-		if is_instance_valid(jelly) and jelly.is_alive and not jelly.is_in_pod:
+		if is_alive(jelly) and not jelly.is_in_pod:
 			survivors.append(jelly)
 	if survivors.size() < 6:
 		return []
@@ -127,39 +127,58 @@ func find_pod_plans(requested_count: int) -> Array[Dictionary]:
 			return plans
 	return []
 
+func is_alive(target):
+	return is_instance_valid(target) and target.is_alive
+
 func run_pod_attack(plan: Dictionary):
+	var members: Array[Node3D] = []
+	for candidate in plan.jellies:
+		if is_alive(candidate):
+			members.append(candidate)
+	if members.size() < 6:
+		_finish_pod_attack()
+		return
+
 	var pod = JellyfishPodScene.instantiate()
 	add_child(pod)
 	pod.configure(cotu, dome_center, plan.center, pod_orbit_speed)
-	pod.register_members(plan.jellies)
+	pod.register_members(members)
 	var slots: Array[Node3D] = pod.get_slots()
-	for index in range(6):
-		var jelly: Node3D = plan.jellies[index]
-		if is_instance_valid(jelly) and jelly.is_alive:
-			jelly.pod_exit_duration = slot_move_duration
-			jelly.move_into_slot(slots[index], slot_move_duration)
-			await get_tree().create_timer(slot_move_stagger).timeout
+	var entered_members: Array = []
+	for index in range(members.size()):
+		var jelly_candidate: Variant = members[index]
+		if not is_alive(jelly_candidate):
+			# If a jelly dies on the way to its pod, the pod continues forming as if nothing happened
+			continue
+		var jelly: Node3D = jelly_candidate
+		jelly.pod_exit_duration = slot_move_duration
+		jelly.move_into_slot(slots[index], slot_move_duration)
+		entered_members.append(jelly_candidate)
+		await get_tree().create_timer(slot_move_stagger).timeout
 
 	await get_tree().create_timer(slot_move_duration).timeout
-	for jelly in plan.jellies:
-		if is_instance_valid(jelly) and jelly.is_alive:
+	for jelly in members:
+		if is_alive(jelly):
 			jelly.charge_duration = charge_wait_duration
 			jelly.charge_and_shoot()
 	await pod.wait_for_charge_window(charge_wait_duration + 0.2)
 
-	for jelly in plan.jellies:
-		if is_instance_valid(jelly) and jelly.is_alive and jelly.is_in_pod and not jelly.is_staggering and not jelly.returning_to_orbit:
+	for jelly in members:
+		if is_alive(jelly) and jelly.is_in_pod and not jelly.is_staggering and not jelly.returning_to_orbit:
 			jelly.return_to_dome(slot_move_duration)
-	while _has_jellies_in_pod(plan.jellies):
+	while _has_jellies_in_pod(members):
 		await get_tree().process_frame
 	pod.queue_free()
+	_finish_pod_attack()
+
+func _finish_pod_attack():
 	active_pod_attacks -= 1
 	if active_pod_attacks == 0:
 		pod_wave_finished.emit()
 
 func _has_jellies_in_pod(members: Array) -> bool:
 	for jelly in members:
-		if is_instance_valid(jelly) and jelly.is_alive and jelly.is_in_pod:
+		if is_alive(jelly) and jelly.is_in_pod:
 			return true
 	return false
 

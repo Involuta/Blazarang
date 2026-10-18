@@ -95,6 +95,8 @@ func homing_attack(target, to_icon: bool):
 		homing_time = icon_homing_time
 	
 	# Get original vector from target to current pos
+	if is_dead(target):
+		return
 	var original_vec = global_position - target.global_position
 	# Imagine a vec pointing from the target to rang's current pos; this vec decreases in size every frame, eventually leading the rang to the target
 	# Progress = value btwn 0 and 1 where 0 is beginning of path and 1 is end
@@ -103,12 +105,17 @@ func homing_attack(target, to_icon: bool):
 	var n = int(homing_time/get_physics_process_delta_time())
 	# 1 is added to n bc the rang won't reach if the dist btwn icon and the target increases during the rang mvmt
 	for i in range(n+1):
-		if target == null:
+		if is_dead(target):
 			return
 		var progress = float(i)/n
 		var progress_vec = ((1 - progress) * original_vec)
 		global_position = target.global_position + progress_vec
 		await get_tree().physics_frame
+
+func is_dead(target):
+	if target == icon:
+		return false
+	return not is_instance_valid(target) or not target.is_alive
 
 func _physics_process(_delta):
 	mesh.rotate_y(rotate_speed)
