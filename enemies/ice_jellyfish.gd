@@ -1,6 +1,8 @@
 extends Node3D
 class_name IceJellyfish
 
+signal staggered_during_charge
+
 const IceShardScene := preload("res://enemies/ice_fairy_shot.tscn")
 
 @export var charge_duration := 1.6
@@ -19,6 +21,8 @@ var is_alive := true
 var is_charging := false
 var charge_interrupted := false
 var is_stunned := false
+var is_staggering := false
+var pod_exit_duration := 0.8
 var in_transition := false
 var is_in_pod := false
 var slot_locked := false
@@ -57,6 +61,8 @@ var orbit_arm_spin_angle := 0.0
 var orbit_arm_flap_phase := 0.0
 var rng := RandomNumberGenerator.new()
 @onready var hurtbox := $EnemyHurtbox
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var cap_mesh: MeshInstance3D = $IceFairyVisuals/PitchPivot/YawPivot/Cap
 @onready var ice_chunk_particles: GPUParticles3D = $IceChunkParticles
 @onready var orbit_arm_meshes: Array[MeshInstance3D] = [
 	$IceFairyVisuals/PitchPivot/YawPivot/Spike0,
@@ -74,6 +80,8 @@ func _ready():
 	add_to_group("lockonables")
 	for arm_mesh in orbit_arm_meshes:
 		orbit_arm_rest_transforms.append(arm_mesh.transform)
+	var visual_meshes: Array[MeshInstance3D] = [cap_mesh]
+	visual_meshes.append_array(orbit_arm_meshes)
 
 func configure_orbit(center: Vector3, radius: float, height: float, angle: float, speed: float, direction: float, initial_vertical_speed: float, dome_height: float):
 	orbit_center = center
@@ -188,7 +196,7 @@ func shoot():
 	shard.velocity = 6.0 * -shard.global_transform.basis.z
 
 func return_to_dome(duration: float):
-	if not is_alive:
+	if not is_alive or returning_to_orbit:
 		return
 	formation_slot = null
 	slot_locked = false
@@ -237,14 +245,19 @@ func _process_return_to_orbit(delta: float):
 		returning_to_orbit = false
 
 func _on_hurtbox_hit(_damage: int):
-	if not is_charging:
+	if not is_charging or is_staggering:
 		return
 	charge_interrupted = true
 	is_charging = false
 	is_stunned = true
-	await get_tree().create_timer(stun_duration).timeout
+	is_staggering = true
+	staggered_during_charge.emit()
+	animation_player.play("stagger")
+	await animation_player.animation_finished
 	if is_alive:
+		is_staggering = false
 		is_stunned = false
+		return_to_dome(pod_exit_duration)
 
 func death_effect():
 	if not is_instance_valid(level):

@@ -131,10 +131,12 @@ func run_pod_attack(plan: Dictionary):
 	var pod = JellyfishPodScene.instantiate()
 	add_child(pod)
 	pod.configure(cotu, dome_center, plan.center, pod_orbit_speed)
+	pod.register_members(plan.jellies)
 	var slots: Array[Node3D] = pod.get_slots()
 	for index in range(6):
 		var jelly: Node3D = plan.jellies[index]
 		if is_instance_valid(jelly) and jelly.is_alive:
+			jelly.pod_exit_duration = slot_move_duration
 			jelly.move_into_slot(slots[index], slot_move_duration)
 			await get_tree().create_timer(slot_move_stagger).timeout
 
@@ -143,16 +145,23 @@ func run_pod_attack(plan: Dictionary):
 		if is_instance_valid(jelly) and jelly.is_alive:
 			jelly.charge_duration = charge_wait_duration
 			jelly.charge_and_shoot()
-	await get_tree().create_timer(charge_wait_duration + 0.2).timeout
+	await pod.wait_for_charge_window(charge_wait_duration + 0.2)
 
 	for jelly in plan.jellies:
-		if is_instance_valid(jelly) and jelly.is_alive:
+		if is_instance_valid(jelly) and jelly.is_alive and jelly.is_in_pod and not jelly.is_staggering and not jelly.returning_to_orbit:
 			jelly.return_to_dome(slot_move_duration)
-	await get_tree().create_timer(slot_move_duration).timeout
+	while _has_jellies_in_pod(plan.jellies):
+		await get_tree().process_frame
 	pod.queue_free()
 	active_pod_attacks -= 1
 	if active_pod_attacks == 0:
 		pod_wave_finished.emit()
+
+func _has_jellies_in_pod(members: Array) -> bool:
+	for jelly in members:
+		if is_instance_valid(jelly) and jelly.is_alive and jelly.is_in_pod:
+			return true
+	return false
 
 func _dome_position(radius: float, height_offset: float, angle: float) -> Vector3:
 	return dome_center + Vector3(cos(angle) * radius, height_offset, sin(angle) * radius)
