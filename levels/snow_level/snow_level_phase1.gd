@@ -24,8 +24,8 @@ const JellyfishPodScene := preload("res://enemies/ice_jellyfish_pod.tscn")
 @export var pod_formation_radius := 10.0
 @export var min_pod_spawn_height := 12.0
 @export var pod_orbit_speed := 0.2
-@export var slot_move_duration := 0.8
-@export var slot_move_stagger := 0.12
+@export var slot_move_duration := 0.8 # Time it takes for a jelly to travel from orbit to a pod
+@export var slot_move_stagger := 0.12 # Time in btwn each jelly being summoned to a pod
 @export var charge_wait_duration := 1.6
 
 var rng := RandomNumberGenerator.new()
@@ -161,7 +161,8 @@ func run_pod_attack(plan: Dictionary):
 		if is_alive(jelly):
 			jelly.charge_duration = charge_wait_duration
 			jelly.charge_and_shoot()
-	await pod.wait_for_charge_window(charge_wait_duration + 0.2)
+	# Wait for charge window to end naturally (all jellies fire shots) or end due to all jellies being staggered
+	await pod.do_charge_window(charge_wait_duration + 0.2)
 
 	for jelly in members:
 		if is_alive(jelly) and jelly.is_in_pod and not jelly.is_staggering and not jelly.returning_to_orbit:

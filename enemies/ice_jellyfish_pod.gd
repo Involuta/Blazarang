@@ -30,10 +30,8 @@ func register_members(members: Array):
 	for jelly in members:
 		jelly.staggered_during_charge.connect(_on_member_staggered)
 
-func wait_for_charge_window(duration: float):
+func do_charge_window(duration: float):
 	charge_window_ended_early = false
-	if member_count > 0 and staggered_member_count >= member_count:
-		return true
 	charge_timer = Timer.new()
 	charge_timer.one_shot = true
 	add_child(charge_timer)

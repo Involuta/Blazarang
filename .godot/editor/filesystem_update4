@@ -40,3 +40,5 @@ res://enemies/ice_fairy.tscn
 res://cotu/cotu_cb_main.tscn
 res://rang/roserang_homing.gd
 res://levels/snow_level/snow_level_phase1.gd
+res://enemies/ice_jellyfish_pod.gd
+res://enemies/ice_jellyfish_pod.tscn
