@@ -467,11 +467,12 @@ Fixed by making the advance expressions for DashGrab transitions check a func th
 Bug Turned Feature List
 You can lock onto enemies through walls; shouldn’t be an issue since there’s no reason to hide enemies at all
 
-Playtester Questions
+Questions for Playtesters
 
 
 
 Polish List
+Change jump anim + mvmt so that the soul acts as a platform that accelerates upward for a bit, then disappears, launching Cotu into the air. Also make it last 2 secs
 Add input buffering (e.g. if you press attack during a dodge, you’ll attack immediately after the dodge)
 Frostbite effect text (like a mini version of DESTABILIZED)
 Cotu grounded main anims
@@ -1886,7 +1887,7 @@ Anim tree checks whether super charge time > min super charge time to know wheth
 Make Icon emit particles continuously on full charge
 Make Icon flash with light and explode with particles on release
 
-Current task on hold until after Future Blade + possible other tasks
+Current task
 Snowflake Boss: Comet/Clarity
 See Blazarang Long Tasks
 
@@ -1947,7 +1948,9 @@ Unlockable Skill
 “Stationary Soul”
 When a target is marked, holding the ax melee input instead of pressing it causes Cotu to fly towards the target and slice with the ax upon reaching his destination like Spectre Knight’s Judgment Rush in Shovel Knight: Shadow of Torment
 Unlockable Skill
-“Inevitable Doom”
+“Ax Rush”
+
+Idea: you can gain an ability that lets you teleport to the ax, and then you can do a follow-up attack with it afterward
 
 The player doesn’t really think about stability management. They’re just making the decision of whether to instant rethrow or dodge, which is fine and already entertaining on its own for gauntlet variant 1 and X, but it feels like a waste of the stability mechanic
 Idea: stability vs power v1
@@ -2122,7 +2125,7 @@ Super Stabilizer: restores all stability and makes you invincible for a short pe
 Multirose: temporarily allows you to have up to n (3?) roserangs
 All rangs still consume stability unless you consume a Super Stabilizer
 
-Mia (pronounced “my-ah”) the Mite Queen
+Boss: Mia (pronounced “my-ah”) the Mite Queen
 Inspired by Susan, the silly, loud, laid-back middle-aged South African lady who plays pickleball with my family
 Fights in Gauntlet Gym 1 for fun, not for serious competition
 Line idea: “If you want serious, fight them. If you want fun, fight me.”
@@ -2133,7 +2136,7 @@ You’re standing on a small solitary platform raised high in the air surrounded
 Each wave of targets gets harder than the last (faster, weirder paths, less predictable, farther away)
 Some targets are tough and require the ax
 
-Grow-a-Gator (Cotu names it “Groa” maybe? And then it calls itself “Groa”)
+Boss: Grow-a-Gator (Cotu names it “Groa” maybe? And then it calls itself “Groa”)
 Fast giant alligator with the ability to grow and shrink. Its scale origin point is its icon; it moves its icon throughout its body to grow and shrink about different points
 Tiny: size of Dwarf Caiman, used for dodges and quick positioning
 Normal: size of American alligator
@@ -2211,7 +2214,7 @@ Everybody is infatuated with and extremely curious about Groa
 Groa shows Cotu (and the player) that they used to be Gator by showing their crazy eyes, which have the same shapes as Gator’s (but possibly with different colors)
 Fun fact: crocodilians and birds are the only living members of the archosaur clade, which includes dinosaurs and pterosaurs
 
-Paramecium and Babies
+Boss: Paramecium and Babies
 Goofy and cute mild challenge boss in Gauntlet Gym 2
 Personality idea: down to Earth and ordinary. Wants to challenge itself more than beginner-level combat, but doesn’t want the stress that comes with high-level competition. Aversion to stress matches soft, squishy exterior
 One paramecium miniboss (“parent”) about 3 times as massive as Cotu accompanied by 10 babies
@@ -2223,7 +2226,7 @@ Idea: one long continuous chain attack where each baby dives at the target
 Idea: all babies start acting on their own temporarily and dive at the target or orbit around the target sporadically
 Parent can jump high into the air and backward, bring all of its babies around it to orbit around it in a ring, then throw the ring at the target. As each baby in the ring hits the ground, it bounces off the ground. Each baby makes a wet slap noise upon hitting the ground
 
-Giant Dual Purple/Skyblue Centipede
+Boss: Giant Dual Purple/Skyblue Centipede
 Glowing purple/skyblue streaks all over its body
 Glowing purple/skyblue eyes
 Big jaws
@@ -2245,7 +2248,7 @@ Centipede does the same sequence of actions in every attempt
 Lore: fight is pre-recorded bc the real Centipede is busy elsewhere
 Each behavior state (purple, blue, black, combined, etc.) has its own section in the boss song. When a section of the boss song plays, its corresponding behavior state is active
 
-Flying Whale and Mortal Warrior
+Boss: Flying Whale and Mortal Warrior
 Surreal and tragic Gauntlet Gym 2 boss
 God is a giant eye whose iris is a soul. It can transform into a giant whale and watch the arena from afar
 You don’t fight the god; you fight her loyal mortal warrior
@@ -2290,15 +2293,14 @@ Post-writing comments:
 The concept of a mortal worshipping their god is unique and interesting in this universe, but make sure not to spend too much time on it or treat mortal death too seriously to keep the tone of the story consistent
 Make it clear at some point that to many gods, mortals are really just an extension of their bodies (e.g. imagine if your fingernails had a mind of their own. You don’t feel sad when they die bc you get new ones)
 
-Party Pillars
+Boss: Party Pillars
 Arena consists of a ton of small pillars and one giant pillar in the center with flashy people dancing on it
 One big dancer in the center does dance moves corresponding with movement patterns of the pillars below (e.g. arm/leg mvmts left → all pillars move to the left, spin → all pillars rotate)
 
-Current task
-Future Blade Boss
+Boss: Future Blade
 See Blazarang Long Tasks
 
-Idea: Cactyrants - Evil Cactus and Giant Bird
+Idea: Boss: Cactyrants - Evil Cactus and Giant Bird
 Surreal, funny, and disturbing Gauntlet Gym 2 boss
 Giant Bird Head appears out of the ground where the camera can’t see it
 Has an attack that just slams its head forward and down over and over again
@@ -2345,7 +2347,7 @@ After some time fighting the boss, all squares containing incorrect quotient ans
 When the arena attack occurs, if the boss happens to be standing on a tile that contains the remainder, it’s added to the PF
 The tile that the boss is considered to be standing on (i.e. the tile the boss is closest to) is constantly highlighted as the boss moves around
 
-Candy Cat
+Boss: Candy Cat
 Gauntlet Central boss
 Giant cat monster made of sugar crystals and candy bits
 Terrifying giant predator
@@ -2370,6 +2372,8 @@ Alt idea: instead of feinting, Candy Cat initially performs a series of easy-to-
 Idea: Candy Cat also moves deceptively slowly/awkwardly to hide its true speed
 Uses the candy bits on his body as projectiles
 Lunge Splash: CC extends its torso to move its head and front paws in an arc up, forward, then behind the target. Its front paws land at a spot around a rose petal’s dist behind the target. On impact, molasses immediately spread from the impact site to a huge circular area around it, greatly slowing Cotu (more than snow and mite infestation) if he’s standing in it. The area covered by molasses then grows upward into sharp sugar crystals in an instant like rock spikes from Promised Consort Radahn’s spiral slam in Elden Ring
+Mouth Spikes: CC stands on 2 legs, opens its jaw disturbingly wide, then a disorganized clump of multicolored sugar spikes begins to grow from its mouth. They expand at an irregular rate in a cone shape and eventually grow so big that they cover the entire arena in front of CC. The only way to dodge it is to get around/behind the cone. After finally reaching max size, the spikes retreat back into CC’s mouth
+Flood: CC opens its mouth and vomits molasses onto the floor for a long time. The only way to dodge this is to get on top of CC
 Hypnosis ability
 When it opens its mask, Candy Cat exposes a vibrating drum of molasses, which emits hypnotic waves that distort its prey’s mind
 Hypnosis makes the stability bar and buffs look like they’re increasing and changes their colors - it looks like Cotu has more stability and buffs he actually has
@@ -2670,7 +2674,8 @@ Idea: player gets to see microwave motivating its army and explaining that the r
 Alt personality/character idea: good guy Mike
 Mike isn’t the rank 2 fighter, Blackstar is. Mike is 3 or lower. This way, Blackstar is motivated to defeat Cotu instead of Mike, and BS will see Mike as a future threat instead of the current goal
 Blackstar and Mike help each other train; Blackstar wants to reincarnate, and Mike wants to test his army’s war tactics and iterate on his technology. Blackstar sees that Mike gets stronger after every training session, meanwhile Blackstar stays the same. This, along with Cotu’s progress, put immense pressure and despair on Blackstar
-Despite being so powerful, Mike wasn’t invited to the gala since most consider him boring. Blackstar and Cotu agree that this was ridiculous and unfortunate, but the Gauntlet sent out a survey and around 40% of prospective attendees (including competitors) said they wouldn’t come if Mike did. BS wants as many people to come as possible because this isn’t just a training session for her to potentially reincarnate; it’s supposed to be a fun entertainment event. BS also acknowledges that some may consider Mike’s tactics boring since they take so long to set up
+Lore/Story ideas:
+Holds the record for most significant strikes landed and most significant strikes landed per minute
 
 Endless Buffs
 Icon-given buffs that continue being applied beyond Cotu’s limit of 3
@@ -2877,7 +2882,9 @@ Can use realm items that are simply an extension of his body
 Fights like Bruce Lee (strong singular strikes)/Jon Jones (range control)/Asadula Imangazaliev (speed & spins) since he has long thin limbs
 Makes himself inconspicuous and moves frequently to lose your attention and sneak into attack range
 Cannot speak, write, or sign (except for basic expressions/gestures like yes, no, and maybe), but comprehension and instruction following is fine. Essentially has expressive aphasia
-Despite this, his twins understand him just fine. They don’t hear what he says, they just know instinctively what he’s trying to communicate. His speech impediment only affects his communication with others
+Despite this, his twins understand him just fine. They don’t hear what he says, they just (usually) know instinctively what he’s trying to communicate like twins in real life. His speech impediment only significantly affects his communication with others
+Idea: he can read minds. This is expressed very subtly throughout the game since he can’t verbally explain it (e.g. helping someone after they think of asking for help, being protective of Greg when he’s with Turbo Jester, comments from others like “how are you so good at martial arts?” or “good read, you knew I wanted that ____” or “you have really good reaction time”)
+Issue: shouldn’t no name stop Cotu from reaching the singularity?
 Left handed; does most fast kicks with his right leg and strong kicks with his left
 Mvmt options (fwd = dir from no name to target):
 Follow: walks forward with one side of his body facing the target like a fighter
@@ -3262,8 +3269,9 @@ If the player answers YES: “Really? After everything I’ve done? Everything I
 NPC Idea: The Chosen One
 Generic RPG/Isekai self-insert protagonist with no personality; use a free asset from an asset library
 Typically aura farms (poses dramatically)
-They can walk up to you and open a dialogue menu near their face, showing a list of options. They repeatedly select the “Flirt” and “Seduce” options, which simply exit the menu as the character does a basic talking animation like Link’s dialogue animation from Breath of the Wild
-Appears in Gauntlet Central, implying that they’re one of the strongest in the universe
+They can walk up to everyone around them and open a dialogue menu near their face, showing a list of options. They repeatedly select the “Flirt” and “Seduce” options, which simply exit the menu as the character does a basic talking animation like Link’s dialogue animation from Breath of the Wild
+Cotu is confused and doesn’t hear anything
+Appears in Gauntlet Central
 Frenemy of Y/N
 
 NPC Idea: Y/N (“Your Name”)
@@ -3271,12 +3279,12 @@ Generic Wattpad fanfiction self-insert protagonist with no personality; use a fr
 Emits a menacing aura representing reality bending for them
 Introverted but very pleasant to talk to
 When threatened, a handsome CEO appears to defend them
-Appears in Gauntlet Central, implying that they’re one of the strongest in the universe
+Appears in Gauntlet Central
 Frenemy of The Chosen One
 
-Tempered X Boss
+Boss: Tempered X
 Pre-fight quote: “Tell me, Cotu…Can you read me?”
-Face is modeled after a T shape instead of an X
+Face is modeled after a T or Y shape instead of an X
 Soul is a plus sign with pointed tips and with the top segment (the one facing away from the target) removed, i.e. a T whose stalk is as long as the branches. Soul faces in the direction X wants to attack in
 Instead of orange, his primary color is the color of infinite temperature (Google it; it’s a cool blue/purple)
 Phase 1
@@ -3285,6 +3293,7 @@ Somewhat smaller arena than original X’s, but there are multiple copies of thi
 Dodges when you throw a non-shuriken rang. Can only dodge once until his next attack, which refreshes the dodge. Dodge types:
 Side dodge: dodges to the side just as original X did
 Jump headbutt: jumps up, then dives directly to the target with a headbutt that detonates on impact. Occurs about ⅓ to ¼ of the time instead of side dodge
+Sometimes in neutral (or while his icon is moving to prepare an attack), he ignites a short range blade and spins his arm in front of himself while walking you down to aura farm. If you hit him with a non-ax rang during this time, it’s deflected
 Short dist attacks
 Spin Slice: X ignites his left hand blade while turning his left shoulder towards the target and pointing his left hand straight up, then does the original X’s Chain Slice attack anim (his arm spins around him 360 degrees before reattaching and slicing out)
 Energy Burst: X channels energy into his left hand, then blasts it out in a mid/low-range straight line inspired by Lucario’s side-special Force Palm in Smash Ultimate. Anim consists of a charge up that looks like a baseball pitcher winding up a pitch, then a straight punch with the pitching hand
@@ -3327,6 +3336,8 @@ X’s icon slightly shrinks
 Completely black background
 No music; only ambient SFX (e.g. scary deep explosion echoes) or silence in the background
 X constantly does simple fast attacks with a lot of teleport and attack baiting
+Idea: X can defend himself after whiffing an attack by twirling his arm with a short-range blade to form a circular shield, which deflects non-ax rangs
+Anim idea: X turns his shoulder to the target, ignites his short range blade, and spins his arm in a circle (spin axis is his fwd dir)
 Backflip Dive: X jumps away with a backflip, lingers in midair while abruptly spreading his face pieces apart to reveal a blue sun in the center, then dives at the target just like Lunge Facerain from original X. Impact also spawns volcano. Undecided what happens to face pieces afterward (they may return to X’s face, be left on the ground, or do something else)
 TP Superkick: X teleports nearby in a lunging pose, then jumps and superkicks exactly like Lunge Superkick from original X
 TP Superkick Cancel: same as TP Superkick, but at the peak of the jump and right before the dash begins, he teleports elsewhere and starts a different action (cannot be another TP Superkick or TP Superkick Cancel)
@@ -4955,6 +4966,28 @@ Violent gremlin who fights dirty and constantly shoots takedowns. Hunts for comp
 Completely unhinged, making him unintentionally hilarious
 “SMASH EVERYBODY! KILL EVERYBODY!”
 Has an awesome theme song: Laser Dance from Ocean’s Twelve
+
+
+Every Problem in the UFC Solved by Blazarang’s Universe
+Risk of death and disability
+CTE
+Short careers/primes due to age and cumulative damage
+Sub-problems:
+Generational separation (e.g. we’ll never see Demetrious Johnson vs Joshua Van or GSP vs Islam)
+Limited matchups (e.g. Khabib never faced an elite grappler, Alex Pereira never faced an elite wrestler)
+Fans and fighters want more fights
+Long absences due to injuries (e.g. Shavkat Rakhmonov’s leg, Tom Aspinall’s eye)
+Champions refusing to fight to keep the belt (e.g. Khamzat Chimaev, Jon Jones)
+Fighters ducking opponents (e.g. Jon Jones ducking prime Stipe Miocic, Francis Ngannou, and Tom Aspinall)
+Cheating (e.g. Ciryl Gane’s constant eyepokes not being called out by refs)
+Weight cutting
+Referee mistakes (e.g. early/late stoppages)
+Strict rules (e.g. no knees to the heads of grounded opponents)
+Fighters pulling out due to pay disputes (e.g. Paulo Costa)
+Fighters are often evil because it takes either a strong mental will or an evil heart to do combat sports (e.g. Jon Jones, Conor McGregor, Rousimar Palhares, Anthony Smith, Jorge Masvidal, Rampage Jackson, Chael Sonnen, Sean Strickland, etc.)
+Sub-problems:
+Legal issues prevent fighters from fighting for long stretches of time
+
 
 Why Fighters Might Want to Change Gyms
 What all of these reasons have in common is that the fighter has great potential
