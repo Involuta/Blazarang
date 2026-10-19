@@ -1,4 +1,4 @@
-res://enemies/clarity.tscn
+res://levels/snow_level/snow_level_phase1.tscn
 res://glb_meshes/snowflake_particle_mesh.res
 res://shaders/black_outline.gdshader
 res://enemies/clarity_arm_shard.gdshader
@@ -32,13 +32,7 @@ res://shaders/sobel_outline.gdshader
 res://enemies/snowflake_link_outline.gdshader
 res://enemies/ground_glow.gdshader
 res://enemies/clarity_dress_shard.gdshader
-res://globals.gd
+res://enemies/clarity.tscn
 res://levels/snow_level/snow_level_test_env.tscn
-res://levels/snow_level/snow_level_phase1.tscn
 res://enemies/ice_jellyfish.tscn
-res://enemies/ice_fairy.tscn
-res://cotu/cotu_cb_main.tscn
-res://rang/roserang_homing.gd
-res://levels/snow_level/snow_level_phase1.gd
-res://enemies/ice_jellyfish_pod.gd
 res://enemies/ice_jellyfish_pod.tscn

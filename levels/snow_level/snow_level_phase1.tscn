@@ -69,8 +69,9 @@ max_orbit_speed = 1.2
 min_vertical_speed = -0.6
 max_vertical_speed = 0.6
 pod_spawn_interval = 3.0
-min_pod_spawn_height = 20.0
-pod_orbit_speed = 0.6
+min_pod_spawn_height = 16.0
+pod_orbit_speed = 0.5
+pod_orbit_speed_variation = 0.3
 
 [node name="UIRoot" parent="." instance=ExtResource("3_e5lk6")]
 

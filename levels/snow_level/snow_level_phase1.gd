@@ -24,6 +24,7 @@ const JellyfishPodScene := preload("res://enemies/ice_jellyfish_pod.tscn")
 @export var pod_formation_radius := 10.0
 @export var min_pod_spawn_height := 12.0
 @export var pod_orbit_speed := 0.2
+@export var pod_orbit_speed_variation := 0.1
 @export var slot_move_duration := 0.8 # Time it takes for a jelly to travel from orbit to a pod
 @export var slot_move_stagger := 0.12 # Time in btwn each jelly being summoned to a pod
 @export var charge_wait_duration := 1.6
@@ -141,7 +142,8 @@ func run_pod_attack(plan: Dictionary):
 
 	var pod = JellyfishPodScene.instantiate()
 	add_child(pod)
-	pod.configure(cotu, dome_center, plan.center, pod_orbit_speed)
+	var randomized_orbit_speed := maxf(0.0, pod_orbit_speed + rng.randf_range(-pod_orbit_speed_variation, pod_orbit_speed_variation))
+	pod.configure(cotu, dome_center, plan.center, randomized_orbit_speed)
 	pod.register_members(members)
 	var slots: Array[Node3D] = pod.get_slots()
 	var entered_members: Array = []
