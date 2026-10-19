@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://ccwhnbrjgpt14"]
+[gd_scene load_steps=32 format=3 uid="uid://ccwhnbrjgpt14"]
 
 [ext_resource type="Script" path="res://enemies/ice_jellyfish.gd" id="1_jelly"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_hurtbox"]
@@ -456,6 +456,18 @@ tracks/14/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/IceShotChargeParticles:emitting")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_syfb0"]
 resource_name = "stagger"
@@ -640,9 +652,193 @@ tracks/14/keys = {
 "values": [0.6, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_xmv4e"]
+resource_name = "shoot"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/IceShotChargeParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/ShotMesh:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(0.6, 0.6, 0.6)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/ShotMesh:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike0:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, -0.9, 0.2), Vector3(2.08209e-12, -0.9, 0.38)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike1:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, -0.9, -0.2), Vector3(2.08209e-12, -0.9, -0.38)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike2:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.18, -0.84, 0.1), Vector3(0.33, -0.9, 0.19)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike3:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.18, -0.84, -0.1), Vector3(-0.33, -0.9, -0.19)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike4:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.18, -0.84, -0.1), Vector3(0.33, -0.9, -0.19)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike5:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.18, -0.84, 0.1), Vector3(-0.33, -0.9, 0.19)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike5:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.15708, 3.48787e-16, 0.244346), Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike0:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.261799, 3.48787e-16, 3.48787e-16), Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike1:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.261799, 3.48787e-16, 3.48787e-16), Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike2:rotation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.15708, 3.48787e-16, -0.244346), Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike3:rotation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.15708, 3.48787e-16, 0.244346), Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike4:rotation")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.15708, 3.48787e-16, -0.244346), Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6nudi"]
 _data = {
 "RESET": SubResource("Animation_kru4s"),
+"shoot": SubResource("Animation_xmv4e"),
 "stagger": SubResource("Animation_syfb0")
 }
 
@@ -885,7 +1081,8 @@ process_material = SubResource("ParticleProcessMaterial_4rosk")
 draw_pass_1 = SubResource("QuadMesh_qgr6i")
 
 [node name="ShotMesh" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
-transform = Transform3D(2.08165e-12, 0, -1.65073e-42, 0, 2.08165e-12, 8.20634e-29, 1.65073e-42, -8.20634e-29, 2.08165e-12, 0, -1.38107, 2.02204e-15)
+transform = Transform3D(0.6, 0, -4.75795e-31, 0, 0.6, 2.36534e-17, 4.75795e-31, -2.36534e-17, 0.6, 0, -1.38107, 2.02204e-15)
+visible = false
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
 mesh = SubResource("ArrayMesh_hs801")
 
