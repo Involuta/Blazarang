@@ -5,7 +5,6 @@ signal staggered_during_charge
 
 const IceShardScene := preload("res://enemies/ice_fairy_shot.tscn")
 
-@export var charge_duration := 1.6
 @export var stun_duration := 1.0
 @export var orbit_arm_spin_speed := 1.5
 @export var orbit_arm_flap_speed := 0.8
@@ -178,7 +177,8 @@ func charge_and_shoot():
 		return
 	is_charging = true
 	charge_interrupted = false
-	await get_tree().create_timer(charge_duration).timeout
+	animation_player.play("shoot")
+	await animation_player.animation_finished
 	if not is_alive or charge_interrupted:
 		is_charging = false
 		return

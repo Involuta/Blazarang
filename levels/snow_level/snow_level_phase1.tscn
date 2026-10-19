@@ -72,6 +72,7 @@ pod_spawn_interval = 3.0
 min_pod_spawn_height = 16.0
 pod_orbit_speed = 0.5
 pod_orbit_speed_variation = 0.3
+charge_wait_duration = 2.0
 
 [node name="UIRoot" parent="." instance=ExtResource("3_e5lk6")]
 

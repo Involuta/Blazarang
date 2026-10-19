@@ -161,7 +161,6 @@ func run_pod_attack(plan: Dictionary):
 	await get_tree().create_timer(slot_move_duration).timeout
 	for jelly in members:
 		if is_alive(jelly):
-			jelly.charge_duration = charge_wait_duration
 			jelly.charge_and_shoot()
 	# Wait for charge window to end naturally (all jellies fire shots) or end due to all jellies being staggered
 	await pod.do_charge_window(charge_wait_duration + 0.2)
