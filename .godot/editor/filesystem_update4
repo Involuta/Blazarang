@@ -38,3 +38,4 @@ res://levels/snow_level/snow_level_phase1.gd
 res://enemies/clarity.tscn
 res://enemies/ice_jellyfish_pod.tscn
 res://enemies/ice_fairy.tscn
+res://enemies/ice_jellyfish_pod.gd

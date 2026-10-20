@@ -30,7 +30,7 @@ func register_members(members: Array):
 	for jelly in members:
 		jelly.staggered_during_charge.connect(_on_member_staggered)
 
-func do_charge_window(duration: float):
+func run_charge_window(duration: float):
 	charge_window_ended_early = false
 	charge_timer = Timer.new()
 	charge_timer.one_shot = true

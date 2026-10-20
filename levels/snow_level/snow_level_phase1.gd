@@ -163,7 +163,7 @@ func run_pod_attack(plan: Dictionary):
 		if is_alive(jelly):
 			jelly.charge_and_shoot()
 	# Wait for charge window to end naturally (all jellies fire shots) or end due to all jellies being staggered
-	await pod.do_charge_window(charge_wait_duration + 0.2)
+	await pod.run_charge_window(charge_wait_duration + 0.2)
 
 	for jelly in members:
 		if is_alive(jelly) and jelly.is_in_pod and not jelly.is_staggering and not jelly.returning_to_orbit:
