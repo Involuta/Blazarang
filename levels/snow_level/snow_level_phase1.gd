@@ -184,5 +184,20 @@ func _has_jellies_in_pod(members: Array) -> bool:
 			return true
 	return false
 
+func start_sweep_sequence():
+	while is_inside_tree():
+		var interval := maxf(0.0, sweep_spawn_interval + rng.randf_range(-sweep_spawn_interval_variation, sweep_spawn_interval_variation))
+		await get_tree().create_timer(interval).timeout
+		# Don't sweep if a pod attack wave is happening
+		if not is_inside_tree() or active_pod_attacks > 0:
+			return
+		var sweep_plans := find_sweep_plan()
+		if sweep_plans.is_empty():
+			continue
+		for plan in sweep_plans:
+			run_sweep_attack(plan)
+
+
+
 func _dome_position(radius: float, height_offset: float, angle: float) -> Vector3:
 	return dome_center + Vector3(cos(angle) * radius, height_offset, sin(angle) * radius)

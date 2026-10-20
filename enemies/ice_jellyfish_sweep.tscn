@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://b5igt1mr45psn"]
+
+[node name="IceJellyfishSweep" type="Node3D"]
+
+[node name="Slot1" type="Node3D" parent="."]
+
+[node name="Slot2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.08165e-12, 2.08165e-12)
+
+[node name="Slot3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2.08165e-12, 2.08165e-12)
