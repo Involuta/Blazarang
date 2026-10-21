@@ -61,7 +61,6 @@ size = Vector3(600, 1, 600)
 [node name="Level" type="Node3D"]
 script = ExtResource("8_phase1")
 jellyfish_count = 72
-dome_center = null
 dome_radius = 15.0
 dome_height = 15.0
 min_jelly_radius = 12.0
@@ -70,15 +69,9 @@ max_orbit_speed = 1.2
 min_vertical_speed = -0.6
 max_vertical_speed = 0.6
 pod_spawn_interval = 3.0
-pod_spawn_interval_variation = null
-min_pod_count = null
-max_pod_count = null
-pod_formation_radius = null
 min_pod_spawn_height = 16.0
 pod_orbit_speed = 0.5
 pod_orbit_speed_variation = 0.3
-slot_move_duration = null
-slot_move_stagger = null
 charge_wait_duration = 2.0
 
 [node name="UIRoot" parent="." instance=ExtResource("3_e5lk6")]
@@ -107,26 +100,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 12, 2.08165e-12)
 
 [node name="Phase1Controller" type="Node3D" parent="."]
 script = ExtResource("8_phase1")
-jellyfish_count = null
-dome_center = null
-dome_radius = null
-dome_height = null
-min_jelly_radius = null
-min_orbit_speed = null
-max_orbit_speed = null
-min_vertical_speed = null
-max_vertical_speed = null
-pod_spawn_interval = null
-pod_spawn_interval_variation = null
-min_pod_count = null
-max_pod_count = null
-pod_formation_radius = null
-min_pod_spawn_height = null
-pod_orbit_speed = null
-pod_orbit_speed_variation = null
-slot_move_duration = null
-slot_move_stagger = null
-charge_wait_duration = null
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_fxt2w")

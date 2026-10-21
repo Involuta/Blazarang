@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://b5igt1mr45psn"]
+[gd_scene load_steps=2 format=3 uid="uid://b5igt1mr45psn"]
+
+[ext_resource type="Script" path="res://enemies/ice_jellyfish_sweep.gd" id="1_m1ysc"]
 
 [node name="IceJellyfishSweep" type="Node3D"]
+script = ExtResource("1_m1ysc")
 
 [node name="Slot1" type="Node3D" parent="."]
 

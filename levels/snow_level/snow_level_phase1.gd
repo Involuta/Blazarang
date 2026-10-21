@@ -4,6 +4,7 @@ signal pod_wave_finished
 
 const JellyfishScene := preload("res://enemies/ice_jellyfish.tscn")
 const JellyfishPodScene := preload("res://enemies/ice_jellyfish_pod.tscn")
+const JellyfishSweepScene := preload("res://enemies/ice_jellyfish_sweep.tscn")
 
 @export_group("Swarm")
 @export var jellyfish_count := 18
@@ -28,6 +29,14 @@ const JellyfishPodScene := preload("res://enemies/ice_jellyfish_pod.tscn")
 @export var slot_move_duration := 0.8 # Time it takes for a jelly to travel from orbit to a pod
 @export var slot_move_stagger := 0.12 # Time in btwn each jelly being summoned to a pod
 @export var charge_wait_duration := 1.6
+
+@export_group("Sweep Attack")
+@export var sweep_spawn_interval := .9
+@export var sweep_spawn_interval_variation := .3
+@export_range(1, 3) var min_sweep_jelly_count := 1
+@export_range(1, 3) var max_sweep_jelly_count := 3
+@export var sweep_spawn_height := 12.0
+@export var sweep_speed := 12.0
 
 var rng := RandomNumberGenerator.new()
 var cotu: Node3D
@@ -234,7 +243,7 @@ func run_sweep_attack(plan: Dictionary):
 
 	var sweep = JellyfishSweepScene.instantiate()
 	add_child(sweep)
-	sweep.configure(cotu, dome_center, plan.center)
+	sweep.configure(cotu, dome_center, plan.center, sweep_speed, sweep_spawn_height)
 	sweep.register_members(members)
 	var slots: Array[Node3D] = sweep.get_slots()
 	var entered_members: Array = []
