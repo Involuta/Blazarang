@@ -31,7 +31,7 @@ var charge_interrupted := false
 var is_stunned := false
 var is_staggering := false
 var pod_exit_duration := 0.8
-var is_in_pod := false
+var is_in_formation := false
 var formation_slot: Node3D
 var returning_to_orbit := false
 var return_elapsed := 0.0
@@ -120,7 +120,7 @@ func _physics_process(delta: float):
 				global_position = formation_slot.global_position
 				global_rotation = (formation_slot.global_transform.basis * Basis(Vector3.UP, PI)).get_euler()
 		SWEEP:
-			_process_sweep(delta)
+			pass
 		SLOT_TO_ORBIT:
 			_process_return_to_orbit(delta)
 
@@ -161,7 +161,7 @@ func _animate_orbit_arms(delta: float):
 		arm_mesh.transform.basis = collective_rotation * hinge_rotation * rest_transform.basis
 
 func move_into_slot(slot: Node3D, duration: float) -> Tween:
-	is_in_pod = true
+	is_in_formation = true
 	formation_slot = slot
 	behav_state = ORBIT_TO_SLOT
 	slot_move_start_position = global_position
@@ -255,14 +255,21 @@ func _process_return_to_orbit(delta: float):
 		current_orbit_speed = starting_orbit_speed
 		vertical_speed = starting_vertical_speed
 		global_rotation = Vector3(0.0, orbit_yaw, 0.0)
-		is_in_pod = false
+		is_in_formation = false
 		returning_to_orbit = false
 
-func sweep():
-	pass
+func sweep(slot: Node3D, duration: float) -> Tween:
+	behav_state = SWEEP
+	var sweep_vec = 2*global_position.distance_to(orbit_center) * transform.basis.z
+	if transition_tween and transition_tween.is_running():
+		transition_tween.kill()
+	transition_tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	transition_tween.tween_property(self, "global_position", sweep_vec , duration).as_relative()
+	return transition_tween
 
-func _process_sweep(delta):
-	pass
+#func _on_sweep_finished(slot: Node3D):
+#	if formation_slot == slot and is_alive:
+#		return_to_dome(pod_exit_duration)
 
 func _on_hurtbox_hit(_damage: int):
 	if not is_charging or is_staggering:
@@ -297,3 +304,8 @@ func set_active(state: bool):
 	remove_from_group("lockonables")
 	queue_free.call_deferred()
 
+func is_in_slot():
+	return behav_state == SLOT
+
+func is_in_orbit():
+	return behav_state == ORBIT

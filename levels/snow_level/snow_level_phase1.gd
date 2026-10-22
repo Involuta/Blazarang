@@ -36,7 +36,7 @@ const JellyfishSweepScene := preload("res://enemies/ice_jellyfish_sweep.tscn")
 @export_range(1, 3) var min_sweep_jelly_count := 1
 @export_range(1, 3) var max_sweep_jelly_count := 3
 @export var sweep_spawn_height := 12.0
-@export var sweep_speed := 12.0
+@export var sweep_duration := 2.0
 
 var rng := RandomNumberGenerator.new()
 var cotu: Node3D
@@ -54,6 +54,7 @@ func _ready():
 
 	spawn_jellyfish()
 	start_pod_sequence()
+	start_sweep_sequence()
 
 func spawn_jellyfish():
 	for index in range(jellyfish_count):
@@ -92,7 +93,7 @@ func start_pod_sequence():
 func find_pod_plans(requested_count: int) -> Array[Dictionary]:
 	var survivors: Array[Node3D] = []
 	for jelly in jellyfish:
-		if _is_alive(jelly) and not jelly.is_in_pod:
+		if _is_alive(jelly) and not jelly.is_in_formation:
 			survivors.append(jelly)
 	if survivors.size() < 6:
 		return []
@@ -172,7 +173,7 @@ func run_pod_attack(plan: Dictionary):
 	await pod.run_charge_window(charge_wait_duration + 0.2)
 
 	for jelly in members:
-		if _is_alive(jelly) and jelly.is_in_pod and not jelly.is_staggering and not jelly.returning_to_orbit:
+		if _is_alive(jelly) and jelly.is_in_formation and not jelly.is_staggering and not jelly.returning_to_orbit:
 			jelly.return_to_dome(slot_move_duration)
 	while _has_jellies(members):
 		await get_tree().process_frame
@@ -186,7 +187,7 @@ func _finish_pod_attack():
 
 func _has_jellies(members: Array) -> bool:
 	for jelly in members:
-		if _is_alive(jelly) and jelly.is_in_pod:
+		if _is_alive(jelly) and jelly.is_in_formation:
 			return true
 	return false
 
@@ -198,16 +199,13 @@ func start_sweep_sequence():
 		if not is_inside_tree() or active_pod_attacks > 0:
 			return
 		var max_jellies_in_sweep := rng.randi_range(1, 3)
-		var sweep_plans := find_sweep_plan(max_jellies_in_sweep)
-		if sweep_plans.is_empty():
-			continue
-		for plan in sweep_plans:
-			run_sweep_attack(plan)
+		var sweep_plan := find_sweep_plan(max_jellies_in_sweep)
+		run_sweep_attack(sweep_plan)
 
 func find_sweep_plan(requested_count: int) -> Dictionary:
 	var survivors: Array[Node3D] = []
 	for jelly in jellyfish:
-		if _is_alive(jelly) and not jelly.is_in_pod:
+		if _is_alive(jelly) and not jelly.is_in_formation:
 			survivors.append(jelly)
 	if survivors.size() < requested_count:
 		return {}
@@ -243,7 +241,7 @@ func run_sweep_attack(plan: Dictionary):
 
 	var sweep = JellyfishSweepScene.instantiate()
 	add_child(sweep)
-	sweep.configure(cotu, dome_center, plan.center, sweep_speed, sweep_spawn_height)
+	sweep.configure(cotu, dome_center, plan.center, sweep_spawn_height)
 	sweep.register_members(members)
 	var slots: Array[Node3D] = sweep.get_slots()
 	var entered_members: Array = []
@@ -259,14 +257,18 @@ func run_sweep_attack(plan: Dictionary):
 		await get_tree().create_timer(slot_move_stagger).timeout
 
 	await get_tree().create_timer(slot_move_duration).timeout
-	for jelly in members:
-		if _is_alive(jelly):
-			jelly.sweep()
+	for index in range(members.size()):
+		var jelly_candidate: Variant = members[index]
+		if not _is_alive(jelly_candidate):
+			# If a jelly dies on the way to its sweep pod, the sweep pod continues forming as if nothing happened
+			continue
+		var jelly: Node3D = jelly_candidate
+		jelly.sweep(slots[index], sweep_duration)
 	# Wait for sweep window to end naturally (all jellies finish sweeping) or end due to all jellies being staggered
-	await sweep.run_sweep_window(charge_wait_duration + 0.2)
+	await sweep.run_sweep_window(sweep_duration + 0.2)
 
 	for jelly in members:
-		if _is_alive(jelly) and jelly.is_in_sweep and not jelly.is_staggering and not jelly.returning_to_orbit:
+		if _is_alive(jelly) and jelly.is_in_formation and not jelly.is_staggering and not jelly.returning_to_orbit:
 			jelly.return_to_dome(slot_move_duration)
 	while _has_jellies(members):
 		await get_tree().process_frame

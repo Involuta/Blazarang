@@ -3,23 +3,20 @@ extends Node3D
 signal sweep_window_finished
 
 var target: Node3D
-var orbit_origin := Vector3.ZERO
 var sweep_dir := Vector3.ZERO
-var sweep_speed := 0.0
-var sweep_height := 0.0
 var member_count := 0
 var staggered_member_count := 0
 var sweep_window_ended_early := false
 var sweep_timer: Timer
 
-func configure(look_target: Node3D, dome_center: Vector3, start_position: Vector3, speed: float, height: float):
+func configure(look_target: Node3D, dome_center: Vector3, start_position: Vector3, height: float):
 	target = look_target
-	orbit_origin = dome_center
+	var dome_center_at_sweep_height := dome_center
+	dome_center_at_sweep_height.y = height
 	global_position = start_position
-	sweep_dir = start_position.direction_to(orbit_origin)
-	sweep_speed = speed
-	sweep_height = height
-	look_at(orbit_origin)
+	global_position.y = height
+	sweep_dir = global_position.direction_to(dome_center_at_sweep_height)
+	look_at(dome_center_at_sweep_height)
 
 func register_members(members: Array):
 	member_count = members.size()
@@ -51,10 +48,6 @@ func _on_member_staggered():
 func _on_sweep_timer_timeout():
 	sweep_window_ended_early = false
 	sweep_window_finished.emit()
-
-func _process(delta: float):
-	global_position += sweep_dir * sweep_speed
-	global_position.y = sweep_height
 
 func get_slots() -> Array[Node3D]:
 	return [get_node("Slot1"), get_node("Slot2"), get_node("Slot3")]
