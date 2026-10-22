@@ -1,6 +1,15 @@
 extends Node3D
 class_name IceJellyfish
 
+enum {
+	ORBIT,
+	ORBIT_TO_SLOT,
+	SLOT,
+	SWEEP,
+	SLOT_TO_ORBIT
+}
+var behav_state := ORBIT
+
 signal staggered_during_charge
 
 const IceShardScene := preload("res://enemies/ice_fairy_shot.tscn")
@@ -22,9 +31,7 @@ var charge_interrupted := false
 var is_stunned := false
 var is_staggering := false
 var pod_exit_duration := 0.8
-var in_transition := false
 var is_in_pod := false
-var slot_locked := false
 var formation_slot: Node3D
 var returning_to_orbit := false
 var return_elapsed := 0.0
@@ -100,17 +107,24 @@ func configure_orbit(center: Vector3, radius: float, height: float, angle: float
 	vertical_speed_timer = rng.randf_range(vertical_change_interval_min, vertical_change_interval_max)
 
 func _physics_process(delta: float):
-	if not is_alive or is_stunned or in_transition:
+	if not is_alive or is_stunned:
 		return
-	if slot_locked and is_instance_valid(formation_slot):
-		global_position = formation_slot.global_position
-		global_rotation = (formation_slot.global_transform.basis * Basis(Vector3.UP, PI)).get_euler()
-		return
-	if formation_slot != null:
-		return
-	if returning_to_orbit:
-		_process_return_to_orbit(delta)
-		return
+	match(behav_state):
+		ORBIT:
+			_process_orbit(delta)
+		ORBIT_TO_SLOT:
+			# Transition from orbit to slot uses tween, not process func
+			pass
+		SLOT:
+			if is_instance_valid(formation_slot):
+				global_position = formation_slot.global_position
+				global_rotation = (formation_slot.global_transform.basis * Basis(Vector3.UP, PI)).get_euler()
+		SWEEP:
+			_process_sweep(delta)
+		SLOT_TO_ORBIT:
+			_process_return_to_orbit(delta)
+
+func _process_orbit(delta):
 	orbit_angle += current_orbit_speed * orbit_direction * delta
 	current_height += vertical_speed * delta
 	if current_height <= 1.0 or current_height >= max_dome_height:
@@ -149,8 +163,7 @@ func _animate_orbit_arms(delta: float):
 func move_into_slot(slot: Node3D, duration: float) -> Tween:
 	is_in_pod = true
 	formation_slot = slot
-	slot_locked = false
-	in_transition = true
+	behav_state = ORBIT_TO_SLOT
 	slot_move_start_position = global_position
 	slot_move_start_basis = global_transform.basis
 	if transition_tween and transition_tween.is_running():
@@ -169,8 +182,7 @@ func _update_slot_transition(progress: float, slot: Node3D):
 
 func _on_slot_move_finished(slot: Node3D):
 	if formation_slot == slot and is_alive:
-		in_transition = false
-		slot_locked = true
+		behav_state = SLOT
 
 func charge_and_shoot():
 	if not is_alive:
@@ -200,9 +212,8 @@ func return_to_dome(duration: float):
 		return
 	if transition_tween and transition_tween.is_running():
 		transition_tween.kill()
-	in_transition = false
+	behav_state = SLOT_TO_ORBIT
 	formation_slot = null
-	slot_locked = false
 	is_charging = false
 	returning_to_orbit = true
 	return_elapsed = 0.0
@@ -247,6 +258,12 @@ func _process_return_to_orbit(delta: float):
 		is_in_pod = false
 		returning_to_orbit = false
 
+func sweep():
+	pass
+
+func _process_sweep(delta):
+	pass
+
 func _on_hurtbox_hit(_damage: int):
 	if not is_charging or is_staggering:
 		return
@@ -279,3 +296,4 @@ func set_active(state: bool):
 	is_alive = false
 	remove_from_group("lockonables")
 	queue_free.call_deferred()
+

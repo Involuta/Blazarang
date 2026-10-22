@@ -199,8 +199,8 @@ curve = SubResource("Curve_kryyq")
 direction = Vector3(2.08165e-12, 2.08165e-12, 1)
 spread = 18.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-initial_velocity_min = 6.0
-initial_velocity_max = 6.0
+initial_velocity_min = 10.5511
+initial_velocity_max = 10.5511
 damping_min = 1.0
 damping_max = 1.0
 scale_min = 0.6
@@ -859,6 +859,42 @@ tracks/14/keys = {
 "update": 0,
 "values": [0.6, 0.0]
 }
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/ShotMesh:scale")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.6, 0.6, 0.6)]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/ShotMesh:visible")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/IceShotChargeParticles:emitting")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6nudi"]
 _data = {
@@ -1106,7 +1142,8 @@ process_material = SubResource("ParticleProcessMaterial_4rosk")
 draw_pass_1 = SubResource("QuadMesh_qgr6i")
 
 [node name="ShotMesh" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
-transform = Transform3D(2.08165e-12, 0, -1.65073e-42, 0, 2.08165e-12, 8.20635e-29, 1.65073e-42, -8.20635e-29, 2.08165e-12, 0, -1.38107, 2.02204e-15)
+transform = Transform3D(0.6, 0, -4.75795e-31, 0, 0.6, 2.36534e-17, 4.75795e-31, -2.36534e-17, 0.6, 0, -1.38107, 2.02204e-15)
+visible = false
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
 mesh = SubResource("ArrayMesh_hs801")
 

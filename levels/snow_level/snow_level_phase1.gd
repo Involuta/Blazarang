@@ -273,7 +273,7 @@ func run_sweep_attack(plan: Dictionary):
 	sweep.queue_free()
 
 func _is_alive(target):
-	return is_instance_valid(target) and target._is_alive
+	return is_instance_valid(target) and target.is_alive
 
 func _dome_position(radius: float, height_offset: float, angle: float) -> Vector3:
 	return dome_center + Vector3(cos(angle) * radius, height_offset, sin(angle) * radius)
