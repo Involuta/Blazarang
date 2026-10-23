@@ -27,12 +27,13 @@ glow_enabled = true
 glow_mix = 0.954
 glow_bloom = 0.3
 fog_enabled = true
-fog_light_color = Color(0.3, 0.42, 0.54, 1)
+fog_light_color = Color(0.301961, 0.419608, 0.541176, 1)
+fog_density = 0.03
 fog_height = 10.0
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.036
-volumetric_fog_albedo = Color(0.396078, 0.462745, 0.560784, 1)
-volumetric_fog_emission = Color(0.396078, 0.462745, 0.560784, 1)
+volumetric_fog_albedo = Color(0.113725, 0.141176, 0.184314, 1)
+volumetric_fog_emission = Color(0.2, 0.243137, 0.305882, 1)
 volumetric_fog_anisotropy = 0.6
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_xylej"]
@@ -42,7 +43,7 @@ polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Arr
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_uh0ie"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uvw7i"]
-albedo_color = Color(0.85098, 0.909804, 1, 1)
+albedo_color = Color(0.709804, 0.823529, 1, 1)
 metallic_specular = 0.7
 roughness = 0.9
 rim_enabled = true
@@ -73,6 +74,8 @@ min_pod_spawn_height = 16.0
 pod_orbit_speed = 0.5
 pod_orbit_speed_variation = 0.3
 charge_wait_duration = 2.0
+sweep_spawn_interval = 1.2
+max_sweep_jelly_count = 2
 
 [node name="UIRoot" parent="." instance=ExtResource("3_e5lk6")]
 
