@@ -195,11 +195,13 @@ func start_sweep_sequence():
 	while is_inside_tree():
 		var interval := maxf(0.0, sweep_spawn_interval + rng.randf_range(-sweep_spawn_interval_variation, sweep_spawn_interval_variation))
 		await get_tree().create_timer(interval).timeout
-		# Don't sweep if a pod attack wave is happening
-		if not is_inside_tree() or active_pod_attacks > 0:
+		if not is_inside_tree():
 			return
 		var max_jellies_in_sweep := rng.randi_range(1, 3)
 		var sweep_plan := find_sweep_plan(max_jellies_in_sweep)
+		# Don't sweep if a pod attack wave is happening
+		if active_pod_attacks > 0 or sweep_plan.is_empty():
+			continue
 		run_sweep_attack(sweep_plan)
 
 func find_sweep_plan(requested_count: int) -> Dictionary:
