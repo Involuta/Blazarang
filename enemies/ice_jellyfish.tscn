@@ -1,10 +1,11 @@
-[gd_scene load_steps=32 format=3 uid="uid://ccwhnbrjgpt14"]
+[gd_scene load_steps=38 format=3 uid="uid://ccwhnbrjgpt14"]
 
 [ext_resource type="Script" path="res://enemies/ice_jellyfish.gd" id="1_jelly"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_hurtbox"]
 [ext_resource type="Script" path="res://general_scripts/damage_over_time_area.gd" id="3_contact"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="4_hitbox"]
 [ext_resource type="PackedScene" uid="uid://dotk8qi7oo127" path="res://enemies/clarity_dress_shard_hit_particles.tscn" id="5_hit_particles"]
+[ext_resource type="ArrayMesh" uid="uid://d1vjlc1x8tyik" path="res://glb_meshes/long_hexagon_particle_mesh.res" id="6_qr4nb"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_body"]
 radius = 1.0
@@ -273,6 +274,35 @@ scale_max = 0.5
 [sub_resource type="BoxMesh" id="BoxMesh_ice_chunks"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_qf6aq")
+
+[sub_resource type="Gradient" id="Gradient_csok0"]
+offsets = PackedFloat32Array(0.182081, 0.361272)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_01bc1"]
+gradient = SubResource("Gradient_csok0")
+
+[sub_resource type="Curve" id="Curve_pfm5q"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0699153, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0129609), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_636ka"]
+curve = SubResource("Curve_pfm5q")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_312t6"]
+particle_flag_align_y = true
+direction = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+spread = 180.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 2.0
+initial_velocity_max = 4.0
+damping_min = 0.5
+damping_max = 0.5
+scale_min = 0.1
+scale_max = 0.2
+scale_curve = SubResource("CurveTexture_636ka")
+color = Color(0.792157, 0.92549, 1, 1)
+color_ramp = SubResource("GradientTexture1D_01bc1")
 
 [sub_resource type="Animation" id="Animation_kru4s"]
 length = 0.001
@@ -679,6 +709,7 @@ tracks/16/keys = {
 
 [sub_resource type="Animation" id="Animation_syfb0"]
 resource_name = "stagger"
+length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -686,10 +717,10 @@ tracks/0/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 1.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(3.48787e-16, -3.14159, 3.48787e-16), Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
+"values": [Vector3(3.48787e-16, -4.71239, 3.48787e-16), Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -698,7 +729,7 @@ tracks/1/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike0:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 1.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(2.08165e-12, -0.7, 1.9), Vector3(2.08209e-12, -0.9, 0.38)]
@@ -710,7 +741,7 @@ tracks/2/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike1:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 1.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(2.08165e-12, -0.7, -1.9), Vector3(2.08209e-12, -0.9, -0.38)]
@@ -722,7 +753,7 @@ tracks/3/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike2:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 1.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(1.7, -0.48, 0.95), Vector3(0.33, -0.9, 0.19)]
@@ -734,7 +765,7 @@ tracks/4/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike3:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 1.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(-1.7, -0.48, -0.95), Vector3(-0.33, -0.9, -0.19)]
@@ -746,7 +777,7 @@ tracks/5/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike4:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 1.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(1.7, -0.48, -0.95), Vector3(0.33, -0.9, -0.19)]
@@ -758,7 +789,7 @@ tracks/6/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike5:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 1.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(-1.7, -0.48, 0.95), Vector3(-0.33, -0.9, 0.19)]
@@ -770,7 +801,7 @@ tracks/7/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike5:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 1.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(-1.309, 3.86851e-08, -1.0472), Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
@@ -782,7 +813,7 @@ tracks/8/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike0:rotation")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 1.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(-1.309, -3.36902e-16, 3.48786e-16), Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
@@ -794,7 +825,7 @@ tracks/9/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike1:rotation")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 1.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(1.309, 3.36902e-16, 3.48786e-16), Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
@@ -806,7 +837,7 @@ tracks/10/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike2:rotation")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 1.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(-1.309, 1.10896e-07, 1.0472), Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
@@ -818,7 +849,7 @@ tracks/11/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike3:rotation")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 1.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(1.309, -1.46344e-08, -1.0472), Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
@@ -830,7 +861,7 @@ tracks/12/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike4:rotation")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 1.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(1.309, 1.14355e-07, 1.0472), Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
@@ -842,7 +873,7 @@ tracks/13/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Cap:mesh:material
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
-"times": PackedFloat32Array(0, 0.7),
+"times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.6, 0.0]
@@ -854,7 +885,7 @@ tracks/14/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike0:mesh:mater
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
-"times": PackedFloat32Array(0, 0.7),
+"times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.6, 0.0]
@@ -894,6 +925,18 @@ tracks/17/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("StaggerParticles:emitting")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6nudi"]
@@ -1155,6 +1198,16 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_ice_chunks")
 draw_pass_1 = SubResource("BoxMesh_ice_chunks")
+
+[node name="StaggerParticles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 36
+lifetime = 1.5
+one_shot = true
+preprocess = 0.15
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_312t6")
+draw_pass_1 = ExtResource("6_qr4nb")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
