@@ -1933,24 +1933,48 @@ Unlockable Skill
 Make Different Game Mechanics Intersect; to create depth, different skills should feel connected
 Vid on Interesting Mechanics vs Depth: https://www.youtube.com/watch?v=Fuf_SpKCYVY
 One of the biggest issues I noticed with Blazarang is that you can only use either the rose or the ax at a time, and they don’t synergize with each other. This limits the player’s creative expression. As the vid above explains, if there are a lot of different game mechanics in a game, but they don’t intersect, the game feels shallow. To combat this problem in Blazarang, try making the rose synergize with or build up to the ax
-Make the ax an ultimate ability
+Make the ax charged by the rose
 Hitting enemies with the rose charges the ax
 When the ax is fully charged, the player can use it in a melee diagonal sweeping slice or throw. Both of these attacks have moderate startup & endlag and deal very high damage (akin to critical hit damage in Dark Souls 3)
-Right before and during the slice, Cotu becomes briefly invincible
+Idea: right before and during the slice, Cotu becomes briefly invincible
 Unlockable Skill
 “Ax Counterstrike”
+Idea: if the player presses jump and ax throw at about the same time, the icon launches Cotu up and backward
 If the player’s next roserang instant rethrow will be homing, and the player throws the ax such that the roserang hits Cotu in the last (instant_rethrow_window_secs) before the ax anim ends, the ax will be thrown as a homing throw, following the same targeting rules as a shuriken. The ax can still be detonated
 Unlockable Skill
 “Homing Ax”
 This knowledge is available when both the ax and homing instant rethrow are unlocked
-When the ax is airborne, dodging causes the icon to stop following Cotu just like dodging when the rose is airborne. This can be used to dodge gigantic attacks (as a substitute for a super jump or long dodge for example)
+Idea: When the ax is airborne, dodging causes the icon to stop following Cotu just like dodging when the rose is airborne. This can be used to dodge gigantic attacks (as a substitute for a super jump or long dodge for example)
 Unlockable Skill
 “Stationary Soul”
-When a target is marked, holding the ax melee input instead of pressing it causes Cotu to fly towards the target and slice with the ax upon reaching his destination like Spectre Knight’s Judgment Rush in Shovel Knight: Shadow of Torment
+Make the mark charged by the shurikens
+Shurikens are now thrown like basic homing projectiles; press the throw button to consume stability and throw it at an enemy, and if it gets physically close enough to one, it starts chasing the enemy (but isn’t guaranteed to hit the enemy). If it touches the enemy, it acts like the current shuriken does (it slices through the enemy multiple times)
+Idea: make the shurikens always return instead of having the option to explode so that all of Cotu’s rangs come back
+Hitting enemies with shurikens charges the mark
+Idea: holding the throw-shuriken button charges the shuriken (it spins on Cotu’s finger), and when fully charged, its damage and mark charge are doubled
+Idea: holding the throw-shuriken button now charges multiple shurikens simultaneously (up to 3)
 Unlockable Skill
-“Ax Rush”
+“Shuriken Multicharge”
+When the mark is charged, it is automatically given to Cotu’s left hand (i.e. not applied to any enemy). Aside from that, mark control remains exactly the same as it is currently
+Idea: The mark is only usable for a limited amt of time until it runs out, and to keep it alive, you must hit the mark with shurikens
+Idea: mark gravity control
+Cotu can use his left hand to telekinetically give the mark strong gravitational pull. This has multiple effects depending on the context
+Idea: controlling the mark’s gravity continuously consumes stability
+Idea: controlling the mark’s gravity also charges the mark
+If the mark is on an enemy, it:
+Pulls nearby enemies towards the mark; the closer the enemy, the stronger the gravitational pull
+Pulls nearby rangs towards the mark, which behave differently
+Rose acts exactly like a thrown shuriken. If it hits, it slices 5 times before returning (since the rose has 5 petals)
+As the ax approaches the mark, it’s attracted to the mark like a shuriken. Once the ax gets within a very close distance to the mark, it ignores the mark’s gravity, making it travel in a straight line afterward instead of being attracted after the hit. Basically, the ax should never decelerate due to the mark’s gravity–only accelerate
+If the mark is in Cotu’s hand, it:
+Doesn’t affect rang mvmt
+Pulls nearby enemies twds Cotu or Cotu twds a single enemy, depending on who’s heavier/harder to move
+The mark and/or mark VFX look different depending on which scenario is happening
+When a target is marked, holding the ax melee input instead of pressing it causes the Cotu to fly towards the target (or vice versa) and slice with the ax upon reaching his destination (or upon the player letting go of the ax button) like Spectre Knight’s Judgment Rush in Shovel Knight: Shadow of Torment
+Unlockable Skill
+“Inescapable Pain”
 
-Idea: you can gain an ability that lets you teleport to the ax, and then you can do a follow-up attack with it afterward
+Idea: you can gain an ability that lets you teleport (or wormhole) to the ax, and then you can do a follow-up attack with it afterward
 
 The player doesn’t really think about stability management. They’re just making the decision of whether to instant rethrow or dodge, which is fine and already entertaining on its own for gauntlet variant 1 and X, but it feels like a waste of the stability mechanic
 Idea: stability vs power v1
@@ -2738,22 +2762,6 @@ Close friends of Cotu from the tournament
 3 stickmen made out of an unknown seemingly indestructible material
 They don’t know where their realm is, and because nothing has been able to destroy them and thus make them respawn at their realm, they may never know. They all feel deeply insecure about their lack of a realm
 Part of the reason they befriended Cotu was because Cotu also lacked a realm (or so they thought) and/or Cotu’s realm is one of the smallest in the universe and they sympathized with him
-If the above is true, why would Cotu remove his powers? Shouldn’t he keep them to protect the triplets from being lost in space? Idea: he didn’t choose to lose his powers; the reason why he lost them is a mystery they’re trying to solve
-Idea: Cotu lost his powers because after defeating Blackstar, Cotu began to question why he fought so hard in the first place if his objective in the tournament was just to have fun. The internal conflict in his soul between having fun and challenging himself caused his powers to disappear. Cotu realizes this fact after telling Blackstar (at the gala, in a flashback, or something else) that true strength comes from the soul, and encountering this conflict yet again threatens his powers. He keeps them for good when the player makes the choice themself. The player should know that this choice won’t affect gameplay so that they can reflect on how they’d answer this question themself
-There are some problems with this concept:
-Having fun and challenging yourself/putting in some effort aren’t this mutually exclusive. It’s not only possible, but likely that Cotu derives fun and fulfillment FROM the challenge and from the effort
-In this universe, strength comes from the soul, and the soul is powered by stability, so more mental/emotional stability should generally correspond to more power. If Blazarang is the strongest, he should be more mentally stable/secure than this idea makes him out to be
-Alt idea: Cotu lost his powers as a natural function of his body he can’t control. When his strength plateaus, his body resets him back to square 1 so he can reach an even higher peak the next time. The way his powers grow and shrink cyclically resembles the flight of a boomerang. This solves the problems from the previous idea by removing Cotu’s inner conflict between fun and effort, which isn’t even really a conflict
-Alt idea: they’re an early incarnation of the Gauntlet, which changes some things (for better, worse, or neither)
-It’s subtly foreshadowed that the triplets and the Gauntlet have some sort of history/relation, only to reveal at the gala (or some other late game moment) that they were Gauntlet the entire time
-Idea for setup: X insults the triplets in front of Blackstar
-Idea: the relationship between the triplets and the rest of the Gauntlet is tense bc the triplets abandoned the Gauntlet to be independent. The Gauntlet officially approves their leave, but some variants resent the triplets
-The trio is proof that the Gauntlet doesn’t just want to become the strongest and train others. A part of it also wants to relax and live freely and selfishly
-Greg and Blackstar no longer have romantic feelings for each other. They become more like siblings
-Problem: the triplets being gauntlet members muddles their identity (3 minds, ability trade offs, invincibility, AND gauntlet resurrection?) and wastes some of their uniqueness.
-Problem: if the triplets and the Gauntlet are so different, they feel pretty much like different people entirely, so it doesn’t make sense that the triplets are actually Gauntlet
-Problem: there’s no more subplot where the triplets try to find their realm, which was an interesting idea unique to them
-Problem: the triplets lose their primary character motivation, which is to find their realm
 Pilot: support
 Creates portals between realms and fetches hazards and minions from them
 All items are either free assets from the Internet or assets already in the game
@@ -3402,15 +3410,16 @@ If you fail this quicktime event, the fight continues for a little before you ge
 Alt idea: gameplay is the same as the original concept, but arena is patrolled by a small white slug or snail and the heavens send dark leviathans instead of divine light and hands. Also slug/snail itself doesn’t attack
 Lore: no one has ever beaten The Edge except for Microwave
 
-2 Boss OR Champion of the Universe: Blackstar, Gauntlet Incarnate
-She has Demetrius Johnson’s stature, Kobe Bryant’s mamba mentality (harsh self-criticism and relentless drive for self-improvement), and Messi’s lack of casual social skill
+Boss: Blackstar, Gauntlet Incarnate
+She has Demetrius Johnson’s stature, Kobe Bryant’s mamba mentality (harsh self-criticism and relentless drive for self-improvement), and Messi’s lack of casual social skill. She comes off autistic
 Thin black humanoid with diamond-like limbs and spiked gold mask
 Early face concept art:
 
 Body concept art (3D art by ChatGPT 5):
 
 Idea: ropes loop around her back in 2 loops like short fly wings
-Make her shorter, rounder, and more compact to fit her personality and fighting style (she feels small and is hyperactive like a small animal or child). Her face maybe resembles Pomni’s from The Amazing Digital Circus
+This tall and intimidating build & mask works for her ultimate form, but not her base/speed form. Her base form should resemble a teenage girl to fit her character role, personality, and fighting style (she moves and fights like a gymnast)
+Idea: her base form’s face is cute and innocent, with a round shape and big, round, expressive eyes, but her mouth and nose are covered in a bulky intimidating mask, representing her burden and how she hides her true self for the Gauntlet’s sake
 Fights using extremely long golden ropes, which she uses to grapple onto background elements and fly around or throw things at her enemy
 Can grapple onto her star-shaped soul. If her soul is at her position, she can grapple it and swing around it to change her momentum instantly
 Parries most projectiles most of the time (e.g. she parries shurikens while she’s not attacking)
@@ -4258,9 +4267,9 @@ Jack: “Kinda, yeah. I was born in the middle of the tournament, not after. I d
 Cotu: “Ah, so did you watch my fights?”
 Jack: “Of course! I’ve watched all your fights! I even watched recordings from before I was born.”
 Cotu: “Am I your favorite?”
-Jack: “Erm, no, sorry. I’m a hardcore DracoNYX fan. But you’re definitely in my top 5!”
-Cotu: “DracoNYX, huh? Typical. You’re not still upset I beat the brakes off him, are ya?”
-Jack: “*sigh* I’m still a little sad about that, but it was worth it. It’s in my top 2 DracoNYX fights of all time!”
+Jack: “Erm, no, sorry. I’m a hardcore Draconix fan. But you’re definitely in my top 5!”
+Cotu: “Draconix, huh? Typical. You’re not still upset I beat the brakes off him, are ya?”
+Jack: “*sigh* I’m still a little sad about that, but it was worth it. It’s in my top 2 Draconix fights of all time!”
 Cotu: “Hmph. We sure did put on a show. I miss that big fella. Hope I run into him sometime in this circuit.”
 Jack: “He’ll kick your ass in the rematch, just you wait!”
 Cotu: “Heh. We’ll see.”
@@ -4907,6 +4916,20 @@ No rose buffing - challenges player to buff the rose on the ground before taking
 No dodging - relatively minor/moderate setback since Cotu moves so fast he can dodge things just by moving
 Could be feature creep since it’s a broken ability that deviates a LOT from the original game. I turned a ground-based hack-n-slash game to a flying one with a completely different gameplay loop. Work on the hoverboard in the future only if necessary
 Icon Shield (blocking? parrying?)
+
+Bosses to Check Out for Inspiration
+
+Arlecchino from Lies of P (idk anything about him)
+Erlang from Black Myth Wukong
+You have to hit him mid-combo, which means you attack and defend simultaneously
+He’s so smart and adaptive that he feels like another player
+Ozma from The First Berserker: Khazan
+Apparently the best souslike boss Seany Salami has ever fought https://www.youtube.com/watch?v=sNBkbllRgm8
+Apparently very emotional story
+Wide arsenal of attacks
+Long fight/huge health pool
+Looks awesome
+
 
 Real Life Fighter Inspiration
 
