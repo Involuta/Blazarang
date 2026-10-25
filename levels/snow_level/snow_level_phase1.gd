@@ -19,6 +19,9 @@ const JellyfishSweepScene := preload("res://enemies/ice_jellyfish_sweep.tscn")
 
 @export_group("Blizzard")
 @export var blizzard_safezone_radius := 15.0
+@export var min_fog_density := 0.01
+@export var max_fog_density := 0.48
+@export var fog_transition_duration := 3.0
 
 @export_group("Pod Attack")
 @export var pod_spawn_interval := 2.5
@@ -44,6 +47,9 @@ const JellyfishSweepScene := preload("res://enemies/ice_jellyfish_sweep.tscn")
 var rng := RandomNumberGenerator.new()
 var cotu: Node3D
 var blizzard_hitbox: DamageOverTimeArea
+var level_environment: Environment
+var sky_material: ProceduralSkyMaterial
+var fog_distance_lerp := 0.0
 var jellyfish: Array[Node3D] = []
 var active_pod_attacks := 0
 
@@ -57,20 +63,36 @@ func _ready():
 		return
 	blizzard_hitbox = $BlizzardDOT
 	blizzard_hitbox.global_position = dome_center
+	level_environment = $WorldEnvironment.environment
+	sky_material = level_environment.sky.sky_material
 
 	spawn_jellyfish()
 	start_pod_sequence()
 	start_sweep_sequence()
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	if cotu == null or blizzard_hitbox == null:
 		return
 
 	blizzard_hitbox.global_position = dome_center
-	if cotu.global_position.distance_to(dome_center) > blizzard_safezone_radius:
+	var distance_to_dome := cotu.global_position.distance_to(dome_center)
+	if distance_to_dome > blizzard_safezone_radius:
 		blizzard_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
 	else:
 		blizzard_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+
+	var min_fog_radius := blizzard_safezone_radius * 0.8
+	var max_fog_radius := blizzard_safezone_radius * 1.6
+	var clamped_distance := clampf(distance_to_dome, min_fog_radius, max_fog_radius)
+	var target_fog_lerp := remap(clamped_distance, min_fog_radius, max_fog_radius, 0.0, 1.0)
+	fog_distance_lerp = move_toward(fog_distance_lerp, target_fog_lerp, delta / maxf(fog_transition_duration, 0.001))
+
+	level_environment.fog_density = lerpf(min_fog_density, max_fog_density, fog_distance_lerp)
+	sky_material.sky_top_color = Color("#65768f").lerp(Color("#3c485a"), fog_distance_lerp)
+	sky_material.sky_horizon_color = Color("#5a6c82").lerp(Color("#1d2730"), fog_distance_lerp)
+	sky_material.ground_horizon_color = sky_material.sky_horizon_color
+	level_environment.fog_light_color = sky_material.sky_horizon_color
+	level_environment.volumetric_fog_emission = sky_material.sky_horizon_color
 
 func spawn_jellyfish():
 	for index in range(jellyfish_count):
