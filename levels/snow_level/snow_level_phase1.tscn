@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cy08u0gxtqtdm"]
+[gd_scene load_steps=18 format=3 uid="uid://cy08u0gxtqtdm"]
 
 [ext_resource type="PackedScene" uid="uid://kl1hpr0grn1v" path="res://ui/ui_root.tscn" id="3_e5lk6"]
 [ext_resource type="PackedScene" uid="uid://daj44qqb6dior" path="res://ui/health_bar.tscn" id="4_gw15w"]
@@ -6,6 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="6_q51ip"]
 [ext_resource type="Script" path="res://general_scripts/bg_camera.gd" id="7_eccl6"]
 [ext_resource type="Script" path="res://levels/snow_level/snow_level_phase1.gd" id="8_phase1"]
+[ext_resource type="Script" path="res://general_scripts/damage_over_time_area.gd" id="9_dot"]
+[ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="10_hitbox"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_blizzard"]
+size = Vector3(150, 30, 150)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o2vos"]
 sky_top_color = Color(0.396078, 0.462745, 0.560784, 1)
@@ -100,6 +105,20 @@ value = 0.0
 
 [node name="cotuCB" parent="." instance=ExtResource("6_q51ip")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 12, 2.08165e-12)
+
+[node name="BlizzardDOT" type="Node3D" parent="."]
+script = ExtResource("9_dot")
+time_btwn_damage_ticks = 0.15
+
+[node name="EnemyHitbox" type="Area3D" parent="BlizzardDOT"]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("10_hitbox")
+damage = 3
+frostbite_buildup = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlizzardDOT/EnemyHitbox"]
+shape = SubResource("BoxShape3D_blizzard")
 
 [node name="Phase1Controller" type="Node3D" parent="."]
 script = ExtResource("8_phase1")

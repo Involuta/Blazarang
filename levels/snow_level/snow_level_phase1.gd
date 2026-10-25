@@ -17,6 +17,9 @@ const JellyfishSweepScene := preload("res://enemies/ice_jellyfish_sweep.tscn")
 @export var min_vertical_speed := -0.35
 @export var max_vertical_speed := 0.35
 
+@export_group("Blizzard")
+@export var blizzard_safezone_radius := 15.0
+
 @export_group("Pod Attack")
 @export var pod_spawn_interval := 2.5
 @export var pod_spawn_interval_variation := 0.5
@@ -40,6 +43,7 @@ const JellyfishSweepScene := preload("res://enemies/ice_jellyfish_sweep.tscn")
 
 var rng := RandomNumberGenerator.new()
 var cotu: Node3D
+var blizzard_hitbox: DamageOverTimeArea
 var jellyfish: Array[Node3D] = []
 var active_pod_attacks := 0
 
@@ -51,10 +55,22 @@ func _ready():
 	cotu = get_tree().root.find_child("cotuCB", true, false)
 	if cotu == null:
 		return
+	blizzard_hitbox = $BlizzardDOT
+	blizzard_hitbox.global_position = dome_center
 
 	spawn_jellyfish()
 	start_pod_sequence()
 	start_sweep_sequence()
+
+func _physics_process(_delta):
+	if cotu == null or blizzard_hitbox == null:
+		return
+
+	blizzard_hitbox.global_position = dome_center
+	if cotu.global_position.distance_to(dome_center) > blizzard_safezone_radius:
+		blizzard_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
+	else:
+		blizzard_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 
 func spawn_jellyfish():
 	for index in range(jellyfish_count):
