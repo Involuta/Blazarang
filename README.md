@@ -1957,6 +1957,15 @@ Unlockable Skill
 “Shuriken Multicharge”
 When the mark is charged, it is automatically given to Cotu’s left hand (i.e. not applied to any enemy). Aside from that, mark control remains exactly the same as it is currently
 Idea: The mark is only usable for a limited amt of time until it runs out, and to keep it alive, you must hit the mark with shurikens
+Issue: this idea makes shurikens feel more like a means to an end than a weapon in their own right. Is their only purpose to charge up the mark? I think it would be interesting if you had to choose between throwing shurikens (in the way that they are described here as basic homing projectiles) and charging the mark by keeping the enemy inside your aiming circle as described in Alt Idea below
+Alt Idea: shurikens and mark are separate
+Instead of marking an enemy the same way you discord orb an enemy using Zenyatta in Overwatch, marking requires you to aim at an enemy for some time, then press the mark button
+When you want to mark (maybe by pressing mark button once), camera switches to over the shoulder aim mode
+When aiming, a UI circle in the middle of the screen appears. You must keep the enemy’s center inside the circle for some time as the circle shrinks
+Once the enemy has been in the circle long enough, an effect plays and the circle stops shrinking. Press the mark button to mark the enemy
+While aiming, Cotu holds his icon in front of him with one hand and holds the mark in his other hand. The hand/arm positions are reminiscent of a bow and arrow, but his hands are open
+Idea: mark starts out as a plumbata, then gets upgraded to become a spear, then spear + atlatl eventually
+Idea: when mark becomes placeable, the spear’s tip splits into 4 parts that levitate out to the sides and have pulsing chaotic energy between them and the spearhead’s original position
 Idea: mark gravity control
 Cotu can use his left hand to telekinetically give the mark strong gravitational pull. This has multiple effects depending on the context
 Idea: controlling the mark’s gravity continuously consumes stability
@@ -1972,28 +1981,19 @@ Pulls nearby enemies twds Cotu or Cotu twds a single enemy, depending on who’s
 The mark and/or mark VFX look different depending on which scenario is happening
 When a target is marked, holding the ax melee input instead of pressing it causes the Cotu to fly towards the target (or vice versa) and slice with the ax upon reaching his destination (or upon the player letting go of the ax button) like Spectre Knight’s Judgment Rush in Shovel Knight: Shadow of Torment
 Unlockable Skill
-“Inescapable Pain”
+“Inescapable Judgment”
 
 Idea: you can gain an ability that lets you teleport (or wormhole) to the ax, and then you can do a follow-up attack with it afterward
 
-The player doesn’t really think about stability management. They’re just making the decision of whether to instant rethrow or dodge, which is fine and already entertaining on its own for gauntlet variant 1 and X, but it feels like a waste of the stability mechanic
-Idea: stability vs power v1
-Instead of buffs, the rose has a continuous stat called power
-Stability and power are measured with the same units
-When you throw the rose, you lose 1 unit of stability and give the rose 1 unit of power
-When you instant rethrow the rose, the rose touches your body, so you gain 1 unit of stability and the rose loses 1 unit of power
-If your stability is <1 unit away from the max, you reach max stability and the rose keeps the excess power
-In effect, the rose accumulates power over time when you instant rethrow while you’re at max stability
-When you dodge the rose, the rose touches your icon, so the rose gains 1 unit of power. The dodge itself costs 1 unit of stability
-In all 3 scenarios above, the total of stability and power remains the same; they’re exchanged equally between each other
-When the rose hits an enemy, its power slightly increases depending on the damage it deals (more damage → more power gain)
-Effects of stability vs power v1:
-Excessive dodging is discouraged bc it drains your stability
-Instant rethrowing is encouraged bc it powers up the rose and is the best tool for aiming. However, instant rethrowing to hit enemies increases power very slowly at first, which may encourage the player to dodge soon after the initial throw and greatly increase the rose’s power (and therefore its rate of power accumulation)
-Idea: stability vs power v2
-Same as v1, but when you initially throw the rose, the rose does not receive 1 unit of power; it starts off with 0
-Effects of stability vs power v2:
-On the initial throw, the player incurs a debt that must be repaid by hitting enemies enough. This makes the player care about stability management more than the original stability concept. Instead of being able to throw the rose and just waiting for the stability to return via natural regen, the player must land hits with the rose to regen the stability
+Issue: if you want to buff (or otherwise reward) yourself, it doesn’t matter how well you respond to your environment (e.g. hitting enemies). The only things that really matter for self-strengthening are your input timing and your attention to your rangs, and since those are independent of any external factors, self-strengthening becomes boring as soon as the player masters the input timing and gets used to the rangs themselves
+Here’s some examples of how great games avoid this issue to help think of ideas:
+Hollow Knight: the only way to heal yourself and use spells is to successfully hit enemies → how well you respond to your environment matters. The way Blazarang works currently is almost like if Hollow Knight allowed you to generate soul by pressing the nail-swing button with consistent timing
+Terraria: when using a boomerang, if you miss your target, you have to wait for the rang to travel its entire path distance and back before you can try to throw it again. If you hit your target, the rang immediately comes back to you and you can throw it again immediately, allowing you to rapidly increase your damage
+Idea: stability vs power
+When the rose hits an enemy, it collects “power”. When the rose hits the icon, the rose’s accumulated power is deposited into your power bar, which is displayed directly below HP
+Meeting certain power thresholds (e.g. ⅓ of be bar) unlocks buffs. Segments of the bar (or the entire bar) can be consumed to use special attacks
+Idea: if your stability is full, then after some time without a gain in power, power decays over time. If power falls below a buff threshold, that buff is lost
+Idea: self-inflicted stability loss is naturally regenerated after a brief delay as it is currently. Externally-inflicted stability loss (EISL) is regenerated after a brief delay by drawing power from the power bar. If you have no power and you’re hit with EISL, your max HP (that is naturally regenerable) is effectively decreased
 
 Chakram Rang
 Press throw button to spawn a chakram a few meters left/right of Cotu. The chakram immediately travels in a wide semicircle arc around Cotu and then disappears, functioning as a pseudo-melee attack
@@ -2045,13 +2045,31 @@ Faster reconstruction - increases num of attempts across entire run (indirectly 
 Consider keeping upgrade system simple to avoid feature creep; before adding any more crazy synergy buffs, focus on direct health and damage upgrades
 
 Certain unlockable skills are unlocked by unlocking new rang types
-Rose power throw = rose + ax
 Rose homing (both special and instant rethrow) = rose + shuriken
 Rose rapidorbit = rose + chakram
 Increased chakram capacity = chakram + shuriken
-Exploding shurikens = shuriken + ax
 
-Rush Buff: the less attempts the player has for a fight, the stronger they get
+Gimmick Boss: La Mosquita
+Gauntlet Gym 2 boss that you officially fight to move up in the tournament
+Her fight is accessible immediately after unlocking the shuriken and/or mark
+A newborn (born post-T1) mosquito with an undefeated record (all by decision). She simply flies around and does chip damage while her opponent completely fails to hit her
+Inspired by Movsar Evloev’s 20-0 MMA record (pre-Volkanovski) where all 10 of his UFC wins were by decision (although Movsar actually fights aggressively)
+Her entrance has a cutscene
+She rides in on a roofless palanquin carried by male mosquitos like Apollo Creed in Rocky I. She lies on a comfortable pillow with closed eyes and a cheeky smirk
+A commentator shares a story about how she partied the night before the fight like Ilia Topuria
+A crowd of mosquitoes chants “Mosquita! Mosquita!”
+An angry guy shouts “If Blazarang loses to La Mosquita, I am NEVER WATCHING THIS SPORT AGAIN!”
+Flashback to X talking to Cotu over the phone: “She dashes in and out of range and dodges everything. Don’t underestimate her. She doesn’t do much damage, but she’s never been touched.”
+Cotu: “She reminds me of…Blackstar.”
+She darts in all directions in short bursts, then pauses for some moments to bait you into throwing a rang. If you do, she dodges it, then attacks the icon rapidly from all directions
+There’s only one way to defeat her:
+Unlock Stationary Soul
+Charge up the ax
+Throw the ax (Mosquita dodges it), then dodge so that the icon stays in one place while the ax flies. This dodge should dodge Mosquita’s counterattack
+While Mosquita continuously attacks the icon, run away from the icon so that she’s contained within the mark aim circle, then charge the mark on her
+Once the mark is fully charged, throw a shuriken or homing rang to win. She dies in 1 hit
+Idea: trained by Future Blade, who only appears in the background and has no lines
+This idea is bad bc Future Blade is supposed to be seen as a competent, intelligent coach, and allowing Mosquita to showboat without ensuring that she’s a well-rounded fighter makes him look bad
 
 Ultimate attacks
 Charged like an Ultimate Art in Elden Ring Nightreign. Charge accrues by:
@@ -2129,15 +2147,6 @@ This skill must be unlocked AFTER the mites are defeated so the Jumping Spider i
 Destroy Jumping Spider without using any stabilizers
 Super
 Destroy Jumping Spider hitless (destabilized the entire fight + no stabilizers, other items ok)
-
-Mark Rework
-Instead of marking an enemy the same way you discord orb an enemy using Zenyatta in Overwatch, marking requires you to aim at an enemy for some time, then press the mark button
-When you want to mark (maybe by pressing mark button once), camera switches to semi first-person aim mode like power throw and charged ax throw
-When aiming, a UI circle in the middle of the screen appears. You must keep the enemy’s center inside the circle for some time as the circle shrinks
-Once the enemy has been in the circle long enough, an effect plays and the circle stops shrinking. Press the mark button to mark the enemy
-While aiming, Cotu holds his icon in front of him with one hand and holds the mark in his other hand. The hand/arm positions are reminiscent of a bow and arrow, but his hands are open
-Idea: mark starts out as a plumbata, then gets upgraded to become a spear, then spear + atlatl eventually
-Idea: when mark becomes placeable, the spear’s tip splits into 4 parts that levitate out to the sides and have pulsing chaotic energy between them and the spearhead’s original position
 
 Stabilizer anim
 Animation: a ball revolves around Cotu while decreasing its orbital radius and rising above him over time, settling directly above his head. It then slams into his head
