@@ -1,8 +1,7 @@
-[gd_scene load_steps=38 format=3 uid="uid://ccwhnbrjgpt14"]
+[gd_scene load_steps=37 format=3 uid="uid://ccwhnbrjgpt14"]
 
 [ext_resource type="Script" path="res://enemies/ice_jellyfish.gd" id="1_jelly"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_hurtbox"]
-[ext_resource type="Script" path="res://general_scripts/damage_over_time_area.gd" id="3_contact"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="4_hitbox"]
 [ext_resource type="PackedScene" uid="uid://dotk8qi7oo127" path="res://enemies/clarity_dress_shard_hit_particles.tscn" id="5_hit_particles"]
 [ext_resource type="ArrayMesh" uid="uid://d1vjlc1x8tyik" path="res://glb_meshes/long_hexagon_particle_mesh.res" id="6_qr4nb"]
@@ -962,18 +961,14 @@ opponent_hitboxes = ["PlayerHitbox"]
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHurtbox"]
 shape = SubResource("SphereShape3D_body")
 
-[node name="DamageOverTimeArea" type="Node3D" parent="."]
-script = ExtResource("3_contact")
-time_btwn_damage_ticks = 0.5
-
-[node name="EnemyHitbox" type="Area3D" parent="DamageOverTimeArea"]
+[node name="EnemyHitbox" type="Area3D" parent="."]
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("4_hitbox")
-damage = 3
-frostbite_buildup = 3
+damage = 18
+frostbite_buildup = 6
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DamageOverTimeArea/EnemyHitbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHitbox"]
 shape = SubResource("SphereShape3D_body")
 
 [node name="IceFairyVisuals" type="Node3D" parent="."]
