@@ -94,6 +94,7 @@ func configure_orbit(center: Vector3, radius: float, height: float, angle: float
 	current_orbit_radius = radius
 	current_height = height
 	orbit_angle = angle
+	orbit_arm_flap_phase = angle
 	current_orbit_speed = speed
 	orbit_direction = direction
 	vertical_speed = initial_vertical_speed

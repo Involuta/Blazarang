@@ -947,7 +947,8 @@ _data = {
 
 [node name="IceJellyfish" type="Node3D"]
 script = ExtResource("1_jelly")
-orbit_arm_flap_speed = 1.5
+orbit_arm_flap_speed = 1.8
+orbit_arm_open_angle = 0.24
 
 [node name="EnemyHurtbox" type="Area3D" parent="."]
 collision_layer = 8
