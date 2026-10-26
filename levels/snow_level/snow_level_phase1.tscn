@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cy08u0gxtqtdm"]
+[gd_scene load_steps=20 format=3 uid="uid://cy08u0gxtqtdm"]
 
 [ext_resource type="PackedScene" uid="uid://kl1hpr0grn1v" path="res://ui/ui_root.tscn" id="3_e5lk6"]
 [ext_resource type="PackedScene" uid="uid://daj44qqb6dior" path="res://ui/health_bar.tscn" id="4_gw15w"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://icbfj05gq8vk" path="res://cotu/cotu_cb_main.tscn" id="6_q51ip"]
 [ext_resource type="Script" path="res://general_scripts/bg_camera.gd" id="7_eccl6"]
 [ext_resource type="Script" path="res://levels/snow_level/snow_level_phase1.gd" id="8_phase1"]
+[ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="9_d51tf"]
 [ext_resource type="Script" path="res://general_scripts/damage_over_time_area.gd" id="9_dot"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="10_hitbox"]
 
@@ -64,15 +65,31 @@ size = Vector2(600, 600)
 [sub_resource type="BoxShape3D" id="BoxShape3D_dfqnq"]
 size = Vector3(600, 1, 600)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ybaaf"]
+emission_shape = 6
+emission_ring_axis = Vector3(-0.1, -1, 2.08165e-12)
+emission_ring_height = 1.0
+emission_ring_radius = 24.0
+emission_ring_inner_radius = 2.08165e-12
+particle_flag_align_y = true
+direction = Vector3(2.08165e-12, -1, 2.08165e-12)
+spread = 12.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 1.5
+initial_velocity_max = 3.0
+scale_min = 0.02
+scale_max = 0.02
+color = Color(0.705882, 0.854902, 1, 1)
+
 [node name="Level" type="Node3D"]
 script = ExtResource("8_phase1")
 jellyfish_count = 120
 dome_radius = 15.0
-dome_height = 15.0
-min_jelly_radius = 12.0
+dome_height = 18.0
+min_jelly_radius = 2.08165e-12
 min_orbit_speed = 0.6
 max_orbit_speed = 1.8
-min_vertical_speed = -0.6
+min_vertical_speed = -1.2
 max_vertical_speed = 1.2
 blizzard_safezone_radius = 10.5
 min_fog_density = 0.06
@@ -155,3 +172,13 @@ mesh = SubResource("PlaneMesh_2im7k")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/TestFloor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.05, 2.08165e-12)
 shape = SubResource("BoxShape3D_dfqnq")
+
+[node name="SnowfallParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 27.2579, 2.08165e-12)
+custom_aabb = AABB(-1000, -1000, -1000, 2000, 2000, 2000)
+amount = 600
+lifetime = 12.0
+preprocess = 6.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_ybaaf")
+draw_pass_1 = ExtResource("9_d51tf")

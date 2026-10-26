@@ -52,6 +52,7 @@ var sky_material: ProceduralSkyMaterial
 var fog_distance_lerp := 0.0
 var jellyfish: Array[Node3D] = []
 var active_pod_attacks := 0
+var snowfall_particles: GPUParticles3D
 
 func _ready():
 	var parent_node := get_parent()
@@ -65,6 +66,7 @@ func _ready():
 	blizzard_hitbox.global_position = dome_center
 	level_environment = $WorldEnvironment.environment
 	sky_material = level_environment.sky.sky_material
+	snowfall_particles = $SnowfallParticles
 
 	spawn_jellyfish()
 	start_pod_sequence()
@@ -93,6 +95,10 @@ func _physics_process(delta):
 	sky_material.ground_horizon_color = sky_material.sky_horizon_color
 	level_environment.fog_light_color = sky_material.sky_horizon_color
 	level_environment.volumetric_fog_emission = sky_material.sky_horizon_color
+	
+	snowfall_particles.global_position = cotu.global_position + 15*Vector3.UP
+	snowfall_particles.process_material.initial_velocity_min = lerpf(1.2, 6, fog_distance_lerp)
+	snowfall_particles.process_material.initial_velocity_max = lerpf(2.4, 6, fog_distance_lerp)
 
 func spawn_jellyfish():
 	for index in range(jellyfish_count):
@@ -100,12 +106,12 @@ func spawn_jellyfish():
 		var height_offset := rng.randf_range(1.0, dome_height)
 		var height_ratio := height_offset / dome_height
 		var radius_limit := dome_radius * sqrt(maxf(0.0, 1.0 - height_ratio * height_ratio))
-		var radius := rng.randf_range(min_jelly_radius, maxf(min_jelly_radius, radius_limit))
-		var angle := TAU * (float(index) / maxf(1.0, float(jellyfish_count))) + rng.randf_range(-0.2, 0.2)
+		var radius := radius_limit#rng.randf_range(min_jelly_radius, maxf(min_jelly_radius, radius_limit))
+		var angle := TAU * (float(index) / float(jellyfish_count)) + rng.randf_range(-0.2, 0.2)
 		var orbit_speed := rng.randf_range(min_orbit_speed, max_orbit_speed)
 		var orbit_direction := -1.0 if rng.randf() < 0.5 else 1.0
 		var vertical_speed := rng.randf_range(min_vertical_speed, max_vertical_speed)
-
+		
 		add_child(jelly)
 		jelly.min_vertical_speed = min_vertical_speed
 		jelly.max_vertical_speed = max_vertical_speed
