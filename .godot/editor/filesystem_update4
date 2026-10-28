@@ -1,4 +1,4 @@
-res://levels/snow_level/snow_level_phase1.tscn
+res://enemies/ice_jellyfish.tscn
 res://shaders/black_outline.gdshader
 res://enemies/clarity_arm_shard.gdshader
 res://textures/clear_tile.tres
@@ -32,9 +32,9 @@ res://shaders/sobel_outline.gdshader
 res://enemies/snowflake_link_outline.gdshader
 res://enemies/ground_glow.gdshader
 res://enemies/clarity_dress_shard.gdshader
-res://levels/snow_level/snow_level_phase1.gd
 res://enemies/clarity.tscn
-res://enemies/ice_jellyfish.tscn
+res://levels/snow_level/snow_level_phase1.tscn
 res://enemies/ice_jellyfish_sweep.tscn
 res://enemies/ice_fairy_shot.tscn
-res://enemies/ice_jellyfish.gd
+res://enemies/ice_fairy.tscn
+res://enemies/ice_jellyfish_pod.tscn

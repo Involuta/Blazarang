@@ -1535,7 +1535,7 @@ top_radius = 0.15
 bottom_radius = 0.0
 height = 1.0
 
-[sub_resource type="Shader" id="Shader_a6aib"]
+[sub_resource type="Shader" id="Shader_arix8"]
 code = "shader_type spatial;
 render_mode blend_add, depth_draw_opaque;
 
@@ -1593,7 +1593,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yvpgd"]
 render_priority = 0
-shader = SubResource("Shader_a6aib")
+shader = SubResource("Shader_arix8")
 shader_parameter/fade_alpha = 1.0
 shader_parameter/progress = 1.2
 shader_parameter/spark_length = 0.15
@@ -1658,7 +1658,7 @@ void fragment() {
     ALPHA = fade_alpha;
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3uokh"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2fpcu"]
 render_priority = 0
 shader = SubResource("Shader_7edmq")
 shader_parameter/fade_alpha = 1.0
@@ -1670,7 +1670,7 @@ shader_parameter/leading_color = Color(1, 1, 1, 1)
 shader_parameter/trailing_color = Color(0.44, 0.65, 1, 1)
 
 [sub_resource type="TorusMesh" id="TorusMesh_bqg5x"]
-material = SubResource("ShaderMaterial_3uokh")
+material = SubResource("ShaderMaterial_2fpcu")
 inner_radius = 0.18
 outer_radius = 0.22
 

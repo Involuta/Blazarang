@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://ccwhnbrjgpt14"]
+[gd_scene load_steps=34 format=3 uid="uid://ccwhnbrjgpt14"]
 
 [ext_resource type="Script" path="res://enemies/ice_jellyfish.gd" id="1_jelly"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_hurtbox"]
@@ -23,91 +23,8 @@ refraction_scale = 1.0
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_sedas")
 radius = 1.0
+height = 0.9
 is_hemisphere = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qf6aq"]
-resource_local_to_scene = true
-transparency = 4
-albedo_color = Color(0.560784, 0.803922, 1, 0.705882)
-roughness = 0.12
-emission_enabled = true
-emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 0.0
-refraction_enabled = true
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_b648n"]
-resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_qf6aq")
-top_radius = 0.15
-bottom_radius = 0.0
-height = 1.5
-
-[sub_resource type="Shader" id="Shader_7edmq"]
-code = "shader_type spatial;
-render_mode blend_add, depth_draw_opaque;
-
-// Controls overall opacity when fading out the entire ring (1.0 = fully visible, 0.0 = invisible)
-uniform float fade_alpha : hint_range(0.0, 1.0) = 1.0;
-
-// Controls progress along the loop (0.0 to 1.2 to allow full spark fade-out)
-uniform float progress : hint_range(0.0, 1.2) = 0.0;
-
-// Length of the intense sparkler tip transition zone
-uniform float spark_length : hint_range(0.01, 0.5) = 0.15;
-
-// Sharpness/decay speed of the white-hot leading tip
-uniform float spark_sharpness : hint_range(1.0, 50.0) = 15.0;
-
-// Shift starting position around the loop (0.25 usually maps to the right side)
-uniform float start_offset : hint_range(0.0, 1.0) = 0.25;
-
-// Colors
-uniform vec4 leading_color : source_color = vec4(4.0, 4.0, 4.0, 1.0); // HDR white-hot tip
-uniform vec4 trailing_color : source_color = vec4(1.0, 0.3, 0.0, 1.0); // Orange ember glow
-
-void fragment() {
-    if (fade_alpha <= 0.0) {
-        discard;
-    }
-
-    // 1. Invert (1.0 - UV.x) to reverse direction from counterclockwise to clockwise
-    // 2. Add start_offset to rotate the starting point to the right side
-    float current_u = fract((1.0 - UV.x) + start_offset);
-    
-    // Calculate distance behind progress with seamless circular wrapping
-    float dist = fract(progress - current_u);
-    
-    // Discard geometry ahead of the leading edge until the initial reveal finishes
-    if (progress <= 1.0 && current_u > progress) {
-        discard;
-    }
-    
-    // Calculate raw tip intensity (1.0 at tip, fading to 0.0 moving backward)
-    float tip_factor = clamp(1.0 - (dist / spark_length), 0.0, 1.0);
-    float spark_intensity = pow(tip_factor, spark_sharpness);
-    
-    // Fade out the spark tip entirely as progress moves from 1.0 to (1.0 + spark_length)
-    float spark_fade = 1.0 - clamp((progress - 1.0) / spark_length, 0.0, 1.0);
-    spark_intensity *= spark_fade;
-    
-    // Mix between the warm trailing body and the bright sparkler tip
-    vec3 final_color = mix(trailing_color.rgb, leading_color.rgb, spark_intensity);
-    
-    ALBEDO = final_color;
-    EMISSION = final_color * (1.0 + spark_intensity * 4.0) * fade_alpha;
-    ALPHA = fade_alpha;
-}"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3uokh"]
-render_priority = 0
-shader = SubResource("Shader_7edmq")
-shader_parameter/fade_alpha = 1.0
-shader_parameter/progress = 1.2
-shader_parameter/spark_length = 0.15
-shader_parameter/spark_sharpness = 1.0
-shader_parameter/start_offset = 0.25
-shader_parameter/leading_color = Color(1, 1, 1, 1)
-shader_parameter/trailing_color = Color(0.44, 0.65, 1, 1)
 
 [sub_resource type="Shader" id="Shader_a6aib"]
 code = "shader_type spatial;
@@ -165,7 +82,7 @@ void fragment() {
     ALPHA = fade_alpha;
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yvpgd"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aedf4"]
 render_priority = 0
 shader = SubResource("Shader_a6aib")
 shader_parameter/fade_alpha = 1.0
@@ -176,10 +93,22 @@ shader_parameter/start_offset = 0.25
 shader_parameter/leading_color = Color(1, 1, 1, 1)
 shader_parameter/trailing_color = Color(0.44, 0.65, 1, 1)
 
-[sub_resource type="TorusMesh" id="TorusMesh_anxkm"]
-material = SubResource("ShaderMaterial_yvpgd")
-inner_radius = 0.18
-outer_radius = 0.22
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qf6aq"]
+resource_local_to_scene = true
+transparency = 4
+albedo_color = Color(0.560784, 0.803922, 1, 0.705882)
+roughness = 0.12
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+refraction_enabled = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_b648n"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_qf6aq")
+top_radius = 0.1
+bottom_radius = 0.0
+height = 4.5
 
 [sub_resource type="Gradient" id="Gradient_ol4s2"]
 offsets = PackedFloat32Array(0, 0.72973)
@@ -948,7 +877,7 @@ _data = {
 [node name="IceJellyfish" type="Node3D"]
 script = ExtResource("1_jelly")
 orbit_arm_flap_speed = 1.8
-orbit_arm_open_angle = 0.24
+orbit_arm_open_angle = 0.18
 
 [node name="EnemyHurtbox" type="Area3D" parent="."]
 collision_layer = 8
@@ -966,7 +895,7 @@ shape = SubResource("SphereShape3D_body")
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("4_hitbox")
-damage = 18
+damage = 42
 frostbite_buildup = 6
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyHitbox"]
@@ -985,191 +914,72 @@ custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
 mesh = SubResource("SphereMesh_2umox")
 skeleton = NodePath("../../..")
 
-[node name="Spike0" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
-transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 0.999999, -3.48787e-16, -3.48787e-16, 3.48787e-16, 0.999999, 2.08209e-12, -0.9, 0.38)
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-mesh = SubResource("CylinderMesh_b648n")
-skeleton = NodePath("../../..")
+[node name="RingMeshContainer" type="Node3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Cap"]
+transform = Transform3D(1, 0, -1.29184e-23, 0, 1, 3.26397e-09, 1.29184e-23, -3.26397e-09, 1, 2.08165e-12, 0.392051, 5.15542e-10)
 
-[node name="RingMeshContainer" type="Node3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike0"]
-transform = Transform3D(1, -2.50388e-23, -1.29184e-23, 2.50388e-23, 1, 3.26397e-09, 1.29184e-23, -3.26397e-09, 1, 2.08165e-12, 0.55, 0)
-
-[node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike0/RingMeshContainer"]
+[node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Cap/RingMeshContainer"]
 transform = Transform3D(1, 1.62918e-22, 1.29184e-23, -1.81775e-22, 1, -3.26398e-09, -1.29184e-23, 3.26398e-09, 1, -2.60209e-18, 0, 0)
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
 
-[node name="CSGTorus3D" type="CSGTorus3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike0/RingMeshContainer/RingMesh"]
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-inner_radius = 0.18
-outer_radius = 0.22
+[node name="CSGTorus3D" type="CSGTorus3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Cap/RingMeshContainer/RingMesh"]
+inner_radius = 0.6
+outer_radius = 0.75
 sides = 30
-material = SubResource("ShaderMaterial_3uokh")
+material = SubResource("ShaderMaterial_aedf4")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike0/RingMeshContainer/RingMesh"]
+[node name="CSGTorus3D2" type="CSGTorus3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Cap/RingMeshContainer/RingMesh"]
+transform = Transform3D(1, 0, 4.01839e-30, 0, 1, 0, 4.01839e-30, 0, 1, 2.08165e-12, 0.3, 2.08165e-12)
+inner_radius = 0.15
+outer_radius = 0.3
+sides = 30
+material = SubResource("ShaderMaterial_aedf4")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Cap/RingMeshContainer/RingMesh"]
 transform = Transform3D(1, -1.50854e-22, 1.79819e-29, 9.04185e-23, 1, 9.47539e-15, 8.09297e-30, -1.27917e-14, 1, 2.08165e-12, 2.08165e-12, -0.22)
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
+visible = false
 operation = 2
 size = Vector3(0.3, 0.12, 0.12)
 
-[node name="OldRingMesh" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike0/RingMeshContainer"]
+[node name="Spike0" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 0.999999, -3.48787e-16, -3.48787e-16, 3.48787e-16, 0.999999, 2.08209e-12, -0.9, 0.38)
 visible = false
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-mesh = SubResource("TorusMesh_anxkm")
+mesh = SubResource("CylinderMesh_b648n")
+skeleton = NodePath("../../..")
 
 [node name="Spike1" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08209e-12, -0.9, -0.38)
+visible = false
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
 mesh = SubResource("CylinderMesh_b648n")
 skeleton = NodePath("../../..")
-
-[node name="RingMeshContainer" type="Node3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.55, 2.08165e-12)
-
-[node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike1/RingMeshContainer"]
-transform = Transform3D(-1, 3.48787e-16, -8.74228e-08, 3.48787e-16, 1, -3.48787e-16, 8.74228e-08, -3.48787e-16, -1, -2.60209e-18, 0, 0)
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-
-[node name="CSGTorus3D" type="CSGTorus3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike1/RingMeshContainer/RingMesh"]
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-inner_radius = 0.18
-outer_radius = 0.22
-sides = 30
-material = SubResource("ShaderMaterial_3uokh")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike1/RingMeshContainer/RingMesh"]
-transform = Transform3D(1, 1.58738e-21, 2.13163e-14, 2.02205e-22, 0.999999, 9.00006e-15, 1.13687e-13, -3.86044e-14, 0.999999, 2.08165e-12, 2.08165e-12, -0.22)
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-operation = 2
-size = Vector3(0.3, 0.12, 0.12)
-
-[node name="OldRingMesh" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike1/RingMeshContainer"]
-visible = false
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-mesh = SubResource("TorusMesh_anxkm")
 
 [node name="Spike2" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 0.33, -0.9, 0.19)
+visible = false
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
 mesh = SubResource("CylinderMesh_b648n")
 skeleton = NodePath("../../..")
-
-[node name="RingMeshContainer" type="Node3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.55, 2.08165e-12)
-
-[node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike2/RingMeshContainer"]
-transform = Transform3D(0.5, 1.27665e-16, 0.866025, 3.48787e-16, 1, -3.48787e-16, -0.866025, 4.76452e-16, 0.5, 0, 0, 0)
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-
-[node name="CSGTorus3D" type="CSGTorus3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike2/RingMeshContainer/RingMesh"]
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-inner_radius = 0.18
-outer_radius = 0.22
-sides = 30
-material = SubResource("ShaderMaterial_3uokh")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike2/RingMeshContainer/RingMesh"]
-transform = Transform3D(1, 5.44851e-15, -5.20963e-15, 2.32109e-14, 0.999999, -1.16043e-14, 2.32109e-14, 8.28804e-15, 0.999999, 2.08165e-12, 2.08165e-12, -0.22)
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-operation = 2
-size = Vector3(0.3, 0.12, 0.12)
-
-[node name="OldRingMesh" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike2/RingMeshContainer"]
-visible = false
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-mesh = SubResource("TorusMesh_anxkm")
 
 [node name="Spike3" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, -0.33, -0.9, -0.19)
+visible = false
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
 mesh = SubResource("CylinderMesh_b648n")
 skeleton = NodePath("../../..")
-
-[node name="RingMeshContainer" type="Node3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.55, 2.08165e-12)
-
-[node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike3/RingMeshContainer"]
-transform = Transform3D(-0.5, -1.27665e-16, -0.866025, 3.48787e-16, 1, -3.48787e-16, 0.866025, -4.76452e-16, -0.5, 0, 0, 0)
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-
-[node name="CSGTorus3D" type="CSGTorus3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike3/RingMeshContainer/RingMesh"]
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-inner_radius = 0.18
-outer_radius = 0.22
-sides = 30
-material = SubResource("ShaderMaterial_3uokh")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike3/RingMeshContainer/RingMesh"]
-transform = Transform3D(1, -2.84311e-15, 4.26231e-15, -1.96582e-14, 0.999999, -1.16043e-14, -1.96582e-14, 8.28804e-15, 0.999999, 2.08165e-12, 2.08165e-12, -0.22)
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-operation = 2
-size = Vector3(0.3, 0.12, 0.12)
-
-[node name="OldRingMesh" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike3/RingMeshContainer"]
-visible = false
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-mesh = SubResource("TorusMesh_anxkm")
 
 [node name="Spike4" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 0.33, -0.9, -0.19)
+visible = false
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
 mesh = SubResource("CylinderMesh_b648n")
 skeleton = NodePath("../../..")
-
-[node name="RingMeshContainer" type="Node3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.55, 2.08165e-12)
-
-[node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike4/RingMeshContainer"]
-transform = Transform3D(-0.5, 4.76452e-16, 0.866026, 3.48787e-16, 1, -3.48787e-16, -0.866026, 1.27665e-16, -0.5, 0, 0, 0)
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-
-[node name="CSGTorus3D" type="CSGTorus3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike4/RingMeshContainer/RingMesh"]
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-inner_radius = 0.18
-outer_radius = 0.22
-sides = 30
-material = SubResource("ShaderMaterial_3uokh")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike4/RingMeshContainer/RingMesh"]
-transform = Transform3D(1, -2.84311e-15, 4.26231e-15, -1.96582e-14, 0.999999, -1.16043e-14, -1.96582e-14, 8.28804e-15, 0.999999, 2.08165e-12, 2.08165e-12, -0.22)
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-operation = 2
-size = Vector3(0.3, 0.12, 0.12)
-
-[node name="OldRingMesh" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike4/RingMeshContainer"]
-visible = false
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-mesh = SubResource("TorusMesh_anxkm")
 
 [node name="Spike5" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, -0.33, -0.9, 0.19)
+visible = false
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
 mesh = SubResource("CylinderMesh_b648n")
 skeleton = NodePath("../../..")
-
-[node name="RingMeshContainer" type="Node3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.55, 2.08165e-12)
-
-[node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike5/RingMeshContainer"]
-transform = Transform3D(0.5, -4.76452e-16, -0.866025, 3.48787e-16, 1, -3.48787e-16, 0.866025, -1.27665e-16, 0.5, 0, 0, 0)
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-
-[node name="CSGTorus3D" type="CSGTorus3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike5/RingMeshContainer/RingMesh"]
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-inner_radius = 0.18
-outer_radius = 0.22
-sides = 30
-material = SubResource("ShaderMaterial_3uokh")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike5/RingMeshContainer/RingMesh"]
-transform = Transform3D(1, -2.84311e-15, 4.26231e-15, -1.96582e-14, 0.999999, -1.16043e-14, -1.96582e-14, 8.28804e-15, 0.999999, 2.08165e-12, 2.08165e-12, -0.22)
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-operation = 2
-size = Vector3(0.3, 0.12, 0.12)
-
-[node name="OldRingMesh" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Spike5/RingMeshContainer"]
-visible = false
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-mesh = SubResource("TorusMesh_anxkm")
 
 [node name="IceShotChargeParticles" type="GPUParticles3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
 transform = Transform3D(1, 0, -1.5246e-23, -1.5246e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -1185,6 +995,45 @@ transform = Transform3D(0.6, 0, -4.75795e-31, 0, 0.6, 2.36534e-17, 4.75795e-31, 
 visible = false
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
 mesh = SubResource("ArrayMesh_hs801")
+
+[node name="Node3D" type="Node3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
+transform = Transform3D(0.866025, -1.27665e-16, 0.5, 3.48787e-16, 1, -3.48787e-16, -0.5, 4.76452e-16, 0.866025, 0, 0, 0)
+
+[node name="Spike6" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Node3D"]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 0.999999, 0, -3.48787e-16, -1.65928e-15, 0.999999, 2.08165e-12, -2.202, 0.9)
+custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
+mesh = SubResource("CylinderMesh_b648n")
+skeleton = NodePath("../../../..")
+
+[node name="Spike7" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Node3D"]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, 0, -3.48787e-16, 0, 1, 2.08165e-12, -2.202, -0.9)
+custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
+mesh = SubResource("CylinderMesh_b648n")
+skeleton = NodePath("../../../..")
+
+[node name="Spike8" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Node3D"]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, 0, -3.48787e-16, 0, 1, 0.75, -2.202, 0.48)
+custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
+mesh = SubResource("CylinderMesh_b648n")
+skeleton = NodePath("../../../..")
+
+[node name="Spike9" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Node3D"]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, 0, -3.48787e-16, 0, 1, -0.75, -2.202, -0.48)
+custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
+mesh = SubResource("CylinderMesh_b648n")
+skeleton = NodePath("../../../..")
+
+[node name="Spike10" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Node3D"]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, 0, -3.48787e-16, 0, 1, 0.75, -2.202, -0.48)
+custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
+mesh = SubResource("CylinderMesh_b648n")
+skeleton = NodePath("../../../..")
+
+[node name="Spike11" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot/Node3D"]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, 0, -3.48787e-16, 0, 1, -0.75, -2.202, 0.48)
+custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
+mesh = SubResource("CylinderMesh_b648n")
+skeleton = NodePath("../../../..")
 
 [node name="IceChunkParticles" type="GPUParticles3D" parent="."]
 emitting = false
