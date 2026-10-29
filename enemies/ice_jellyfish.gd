@@ -145,7 +145,7 @@ func _process_orbit(delta):
 	global_position = next_position
 	if movement_direction.length_squared() > 0.001:
 		global_rotation = Vector3(0.0, PI + atan2(movement_direction.x, movement_direction.z), 0.0)
-	_animate_orbit_arms(delta)
+	#_animate_orbit_arms(delta)
 
 func _animate_orbit_arms(delta: float):
 	orbit_arm_spin_angle = fposmod(orbit_arm_spin_angle + orbit_arm_spin_speed * delta, TAU)

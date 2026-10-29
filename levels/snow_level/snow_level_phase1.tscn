@@ -252,7 +252,7 @@ nodes/fragment/connections = PackedInt32Array(3, 1, 4, 0, 4, 0, 2, 1, 2, 1, 6, 0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_youx8"]
 render_priority = 0
 shader = SubResource("VisualShader_ub2nb")
-shader_parameter/ColorParameter = Color(0.301961, 0.419608, 0.541176, 1)
+shader_parameter/ColorParameter = Color(0.262745, 0.368627, 0.482353, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_n8jys"]
 material = SubResource("ShaderMaterial_youx8")
@@ -268,7 +268,7 @@ min_orbit_speed = 0.6
 max_orbit_speed = 1.8
 min_vertical_speed = -1.2
 max_vertical_speed = 1.2
-blizzard_safezone_radius = 10.5
+blizzard_safezone_radius = 12.0
 min_fog_density = 0.06
 max_fog_density = 1.0
 fog_transition_duration = 0.2
@@ -327,7 +327,7 @@ environment = SubResource("Environment_fxt2w")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
-light_color = Color(0.756863, 0.870588, 1, 1)
+light_color = Color(0.411765, 0.572549, 0.819608, 1)
 light_energy = 0.3
 shadow_enabled = true
 

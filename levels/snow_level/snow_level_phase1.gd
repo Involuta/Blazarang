@@ -93,8 +93,8 @@ func _physics_process(delta):
 	sky_material.sky_top_color = Color("#65768f").lerp(Color("#3c485a"), fog_distance_lerp)
 	sky_material.sky_horizon_color = Color("#5a6c82").lerp(Color("#1d2730"), fog_distance_lerp)
 	sky_material.ground_horizon_color = sky_material.sky_horizon_color
-	level_environment.fog_light_color = sky_material.sky_horizon_color
-	level_environment.volumetric_fog_emission = sky_material.sky_horizon_color
+	level_environment.fog_light_color = Color("#4d6b8a")#sky_material.sky_horizon_color
+	level_environment.volumetric_fog_emission = Color("#333e4e")#sky_material.sky_horizon_color
 	
 	snowfall_particles.global_position = cotu.global_position + 15*Vector3.UP
 	snowfall_particles.process_material.initial_velocity_min = lerpf(1.2, 6, fog_distance_lerp)
