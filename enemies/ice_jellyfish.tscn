@@ -243,6 +243,9 @@ transform = Transform3D(1, -2.32109e-14, -2.55786e-14, -2.32109e-14, 1, -7.10543
 [node name="Cube" parent="ClarityJellyfish/Armature/Skeleton3D/Cube" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fvdw3")
 
+[node name="AnimationPlayer" parent="ClarityJellyfish" index="4"]
+autoplay = "Orbit"
+
 [node name="EnemyHurtbox" type="Area3D" parent="."]
 collision_layer = 8
 collision_mask = 257

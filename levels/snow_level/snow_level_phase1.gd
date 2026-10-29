@@ -298,7 +298,7 @@ func run_sweep_attack(plan: Dictionary):
 			continue
 		var jelly: Node3D = jelly_candidate
 		jelly.pod_exit_duration = slot_move_duration
-		jelly.move_into_slot(slots[index], slot_move_duration)
+		jelly.move_into_slot(slots[index], slot_move_duration, true)
 		entered_members.append(jelly_candidate)
 		await get_tree().create_timer(slot_move_stagger).timeout
 
