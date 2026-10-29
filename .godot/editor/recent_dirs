@@ -1,3 +1,4 @@
+res://glb_imports
 res://glb_inherited_scenes
 res://general_scripts
 res://enemies/enemy_anims
@@ -19,7 +20,6 @@ res://level_maps
 res://procedural_animation
 res://enemies/spawners
 res://rang
-res://photo_scenes
 /Users/ryanbascos/GameDevMiscAssets
 /Users/ryanbascos/Library/Application Support/TrenchBroom/games
 /Users/ryanbascos/GodotBuilds

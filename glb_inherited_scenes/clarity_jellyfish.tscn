@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://ba6d6u3767v3y"]
+
+[ext_resource type="PackedScene" uid="uid://dow1qscs47oqd" path="res://glb_imports/ClarityJellyfish.glb" id="1_r3siw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qf6aq"]
+resource_local_to_scene = true
+transparency = 4
+albedo_color = Color(0.560784, 0.803922, 1, 0.705882)
+roughness = 0.12
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+refraction_enabled = true
+
+[node name="ClarityJellyfish" instance=ExtResource("1_r3siw")]
+
+[node name="Cube_001" parent="Armature/Skeleton3D" index="0"]
+transform = Transform3D(1, -6.3573e-08, -6.86866e-14, 6.3573e-08, 1, -5.96047e-08, 3.55295e-14, 5.96046e-08, 1, 4.21331e-08, 2.98023e-07, -1.30851e-07)
+bone_idx = 2
+
+[node name="Cube_001" parent="Armature/Skeleton3D/Cube_001" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_qf6aq")
+
+[node name="Cube_002" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(1, -7.27647e-08, 3.72524e-09, 7.27646e-08, 1, -5.96047e-08, -3.72526e-09, 5.96046e-08, 1, 5.96046e-08, 1.49012e-07, 2.56114e-08)
+bone_idx = 4
+
+[node name="Cube_002" parent="Armature/Skeleton3D/Cube_002" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_qf6aq")
+
+[node name="Cube_003" parent="Armature/Skeleton3D" index="2"]
+transform = Transform3D(1, -7.46273e-08, -9.31434e-10, 7.46271e-08, 1, -5.96047e-08, 9.31412e-10, 5.96046e-08, 1, -1.19209e-07, 2.38419e-07, -9.17353e-08)
+bone_idx = 6
+
+[node name="Cube_003" parent="Armature/Skeleton3D/Cube_003" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_qf6aq")
+
+[node name="Cube_004" parent="Armature/Skeleton3D" index="3"]
+transform = Transform3D(1, -6.35731e-08, 2.36773e-15, 6.35729e-08, 1, -5.96047e-08, -2.13139e-14, 5.96047e-08, 1, -3.92285e-08, 3.57628e-07, -2.04891e-08)
+bone_idx = 8
+
+[node name="Cube_004" parent="Armature/Skeleton3D/Cube_004" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_qf6aq")
+
+[node name="Cube_006" parent="Armature/Skeleton3D" index="4"]
+transform = Transform3D(1, -5.13442e-08, 8.38179e-09, 5.13442e-08, 1, -5.96047e-08, -8.38181e-09, 5.96046e-08, 1, 5.96046e-08, 2.68221e-07, 5.4948e-08)
+bone_idx = 10
+
+[node name="Cube_006" parent="Armature/Skeleton3D/Cube_006" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_qf6aq")
+
+[node name="Cube_005" parent="Armature/Skeleton3D" index="5"]
+transform = Transform3D(1, -4.43593e-08, -6.98503e-09, 4.43592e-08, 1, -5.96047e-08, 6.98502e-09, 5.96046e-08, 1, 0, 3.8743e-07, -9.45292e-08)
+bone_idx = 12
+
+[node name="Cube_005" parent="Armature/Skeleton3D/Cube_005" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_qf6aq")
+
+[node name="Cube" parent="Armature/Skeleton3D" index="6"]
+transform = Transform3D(1, -2.32109e-14, -2.55786e-14, -2.32109e-14, 1, -7.10543e-15, -2.55786e-14, -7.10543e-15, 1, 2.1583e-14, 1.78814e-07, -5.96046e-08)
+bone_idx = 13
+
+[node name="Cube" parent="Armature/Skeleton3D/Cube" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_qf6aq")
