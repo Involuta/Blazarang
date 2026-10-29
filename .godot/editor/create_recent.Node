@@ -1,7 +1,8 @@
+GPUParticles3D
+GPUTrail3D
 Node3D
 AnimationPlayer
 MeshInstance3D
-GPUParticles3D
 CSGBox3D
 CSGTorus3D
 CSGCombiner3D
@@ -9,7 +10,6 @@ Sprite2D
 StaticBody3D
 Generic6DOFJoint3D
 RigidBody3D
-GPUTrail3D
 CollisionShape3D
 EnemyHurtbox
 Hurtbox

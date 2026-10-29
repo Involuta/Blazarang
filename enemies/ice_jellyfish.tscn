@@ -1,11 +1,34 @@
-[gd_scene load_steps=27 format=3 uid="uid://ccwhnbrjgpt14"]
+[gd_scene load_steps=29 format=3 uid="uid://ccwhnbrjgpt14"]
 
 [ext_resource type="Script" path="res://enemies/ice_jellyfish.gd" id="1_jelly"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="2_hurtbox"]
 [ext_resource type="PackedScene" uid="uid://ba6d6u3767v3y" path="res://glb_inherited_scenes/clarity_jellyfish.tscn" id="2_ogtv3"]
+[ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="3_ep8uq"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="4_hitbox"]
 [ext_resource type="PackedScene" uid="uid://dotk8qi7oo127" path="res://enemies/clarity_dress_shard_hit_particles.tscn" id="5_hit_particles"]
 [ext_resource type="ArrayMesh" uid="uid://d1vjlc1x8tyik" path="res://glb_meshes/long_hexagon_particle_mesh.res" id="6_qr4nb"]
+
+[sub_resource type="Curve" id="Curve_uxwfd"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.300812, 0.298832), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_wgerf"]
+curve = SubResource("Curve_uxwfd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ihaak"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 3.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+direction = Vector3(2.08165e-12, 2.08165e-12, -1)
+spread = 30.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 6.0
+initial_velocity_max = 9.0
+scale_min = 0.3
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_wgerf")
 
 [sub_resource type="Gradient" id="Gradient_ol4s2"]
 offsets = PackedFloat32Array(0, 0.72973)
@@ -15,7 +38,7 @@ colors = PackedColorArray(1, 1, 1, 1, 0.6, 0.75, 3, 1)
 gradient = SubResource("Gradient_ol4s2")
 
 [sub_resource type="Curve" id="Curve_kryyq"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.49701, 0.298832), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 0.298832), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_3r0wo"]
@@ -29,23 +52,11 @@ initial_velocity_min = 12.0
 initial_velocity_max = 12.0
 damping_min = 1.0
 damping_max = 1.0
-scale_min = 0.6
+scale_min = 0.3
 scale_max = 0.6
 scale_curve = SubResource("CurveTexture_3r0wo")
 color = Color(0.71, 0.83, 1, 1)
 color_ramp = SubResource("GradientTexture1D_l6ikc")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x0h1j"]
-shading_mode = 0
-vertex_color_use_as_albedo = true
-billboard_mode = 3
-billboard_keep_scale = true
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="QuadMesh" id="QuadMesh_qgr6i"]
-material = SubResource("StandardMaterial3D_x0h1j")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hibss"]
 vertex_color_use_as_albedo = true
@@ -159,14 +170,21 @@ orbit_arm_open_angle = 0.18
 
 [node name="ClarityJellyfish" parent="." instance=ExtResource("2_ogtv3")]
 
+[node name="SweepFlurryParticles" type="GPUParticles3D" parent="ClarityJellyfish"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.57148)
+emitting = false
+amount = 120
+process_material = SubResource("ParticleProcessMaterial_ihaak")
+draw_pass_1 = ExtResource("3_ep8uq")
+
 [node name="IceShotChargeParticles" type="GPUParticles3D" parent="ClarityJellyfish"]
 transform = Transform3D(1, 3.48787e-16, 1.04636e-15, -3.48787e-16, 1, 0, -1.04636e-15, 0, 1, 2.08165e-12, 2.08165e-12, -2.08165e-12)
 emitting = false
-amount = 30
+amount = 18
 lifetime = 0.36
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_4rosk")
-draw_pass_1 = SubResource("QuadMesh_qgr6i")
+draw_pass_1 = ExtResource("3_ep8uq")
 
 [node name="ShotMesh" type="MeshInstance3D" parent="ClarityJellyfish"]
 transform = Transform3D(0.6, -6.27817e-16, -2.74427e-23, 0, -2.62268e-08, 0.6, -6.27817e-16, -0.6, -2.62268e-08, 2.08165e-12, 2.08165e-12, 1.5)
