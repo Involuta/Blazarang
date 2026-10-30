@@ -8,9 +8,19 @@
 [ext_resource type="PackedScene" uid="uid://dotk8qi7oo127" path="res://enemies/clarity_dress_shard_hit_particles.tscn" id="5_hit_particles"]
 [ext_resource type="ArrayMesh" uid="uid://d1vjlc1x8tyik" path="res://glb_meshes/long_hexagon_particle_mesh.res" id="6_qr4nb"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fvdw3"]
+resource_local_to_scene = true
+transparency = 4
+albedo_color = Color(0.560784, 0.803922, 1, 0.705882)
+roughness = 0.12
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+refraction_enabled = true
+
 [sub_resource type="Curve" id="Curve_uxwfd"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.300812, 0.298832), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0.300812, 0.298832), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_wgerf"]
 curve = SubResource("Curve_uxwfd")
@@ -26,8 +36,8 @@ spread = 30.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 6.0
 initial_velocity_max = 9.0
-scale_min = 0.3
-scale_max = 0.6
+scale_min = 0.1
+scale_max = 0.3
 scale_curve = SubResource("CurveTexture_wgerf")
 
 [sub_resource type="Gradient" id="Gradient_ol4s2"]
@@ -52,8 +62,8 @@ initial_velocity_min = 12.0
 initial_velocity_max = 12.0
 damping_min = 1.0
 damping_max = 1.0
-scale_min = 0.3
-scale_max = 0.6
+scale_min = 0.1
+scale_max = 0.3
 scale_curve = SubResource("CurveTexture_3r0wo")
 color = Color(0.71, 0.83, 1, 1)
 color_ramp = SubResource("GradientTexture1D_l6ikc")
@@ -99,16 +109,6 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_4ck5x")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fvdw3"]
-resource_local_to_scene = true
-transparency = 4
-albedo_color = Color(0.560784, 0.803922, 1, 0.705882)
-roughness = 0.12
-emission_enabled = true
-emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 0.0
-refraction_enabled = true
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_body"]
 radius = 1.0
@@ -170,29 +170,6 @@ orbit_arm_open_angle = 0.18
 
 [node name="ClarityJellyfish" parent="." instance=ExtResource("2_ogtv3")]
 
-[node name="SweepFlurryParticles" type="GPUParticles3D" parent="ClarityJellyfish"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.57148)
-emitting = false
-amount = 120
-process_material = SubResource("ParticleProcessMaterial_ihaak")
-draw_pass_1 = ExtResource("3_ep8uq")
-
-[node name="IceShotChargeParticles" type="GPUParticles3D" parent="ClarityJellyfish"]
-transform = Transform3D(1, 3.48787e-16, 1.04636e-15, -3.48787e-16, 1, 0, -1.04636e-15, 0, 1, 2.08165e-12, 2.08165e-12, -2.08165e-12)
-emitting = false
-amount = 18
-lifetime = 0.36
-local_coords = true
-process_material = SubResource("ParticleProcessMaterial_4rosk")
-draw_pass_1 = ExtResource("3_ep8uq")
-
-[node name="ShotMesh" type="MeshInstance3D" parent="ClarityJellyfish"]
-transform = Transform3D(0.6, -6.27817e-16, -2.74427e-23, 0, -2.62268e-08, 0.6, -6.27817e-16, -0.6, -2.62268e-08, 2.08165e-12, 2.08165e-12, 1.5)
-visible = false
-custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
-mesh = SubResource("ArrayMesh_hs801")
-skeleton = NodePath("")
-
 [node name="Skeleton3D" parent="ClarityJellyfish/Armature" index="0"]
 bones/1/rotation = Quaternion(-0.258819, 3.07034e-08, 9.25609e-08, 0.965926)
 bones/3/rotation = Quaternion(-0.12941, -1.92835e-08, -0.224144, 0.965926)
@@ -243,8 +220,32 @@ transform = Transform3D(1, -2.32109e-14, -2.55786e-14, -2.32109e-14, 1, -7.10543
 [node name="Cube" parent="ClarityJellyfish/Armature/Skeleton3D/Cube" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fvdw3")
 
-[node name="AnimationPlayer" parent="ClarityJellyfish" index="4"]
+[node name="AnimationPlayer" parent="ClarityJellyfish" index="1"]
 autoplay = "Orbit"
+
+[node name="SweepFlurryParticles" type="GPUParticles3D" parent="ClarityJellyfish"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.57148)
+emitting = false
+amount = 120
+visibility_aabb = AABB(-100, -100, -100, 200, 200, 200)
+process_material = SubResource("ParticleProcessMaterial_ihaak")
+draw_pass_1 = ExtResource("3_ep8uq")
+
+[node name="IceShotChargeParticles" type="GPUParticles3D" parent="ClarityJellyfish"]
+transform = Transform3D(1, 3.48787e-16, 1.04636e-15, -3.48787e-16, 1, 0, -1.04636e-15, 0, 1, 2.08165e-12, 2.08165e-12, -2.08165e-12)
+emitting = false
+amount = 18
+lifetime = 0.36
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_4rosk")
+draw_pass_1 = ExtResource("3_ep8uq")
+
+[node name="ShotMesh" type="MeshInstance3D" parent="ClarityJellyfish"]
+transform = Transform3D(2.08165e-12, -2.17816e-27, -9.52102e-35, 0, -9.09917e-20, 2.08165e-12, -2.17816e-27, -2.08165e-12, -9.09917e-20, 2.08165e-12, 2.08165e-12, 1.8)
+visible = false
+custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
+mesh = SubResource("ArrayMesh_hs801")
+skeleton = NodePath("")
 
 [node name="EnemyHurtbox" type="Area3D" parent="."]
 collision_layer = 8
