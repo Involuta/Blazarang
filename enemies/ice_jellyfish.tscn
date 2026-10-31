@@ -456,37 +456,37 @@ bones/9/rotation = Quaternion(-0.129409, -2.66113e-07, 0.224144, 0.965926)
 bones/11/rotation = Quaternion(0.12941, -3.8085e-07, 0.224144, 0.965926)
 
 [node name="Cube_001" parent="ClarityJellyfish/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1, -6.3573e-08, -1.0753e-13, 5.50559e-08, 0.866025, 0.5, -3.17864e-08, -0.5, 0.866025, 4.21331e-08, 0.0909672, 0.330792)
+transform = Transform3D(1, -6.35731e-08, -6.08703e-14, 5.50558e-08, 0.866025, 0.5, -3.17865e-08, -0.5, 0.866025, 4.21331e-08, 0.0909672, 0.330792)
 
 [node name="Cube_001" parent="ClarityJellyfish/Armature/Skeleton3D/Cube_001" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fvdw3")
 
 [node name="Cube_002" parent="ClarityJellyfish/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.899519, -0.0580127, 0.433013, -0.0580127, 0.966506, 0.25, -0.433013, -0.25, 0.866025, 0.0759111, 0.0438274, 0.31843)
+transform = Transform3D(0.899519, -0.0580129, 0.433013, -0.0580128, 0.966506, 0.250001, -0.433013, -0.250001, 0.866025, 0.0759113, 0.0438276, 0.318431)
 
 [node name="Cube_002" parent="ClarityJellyfish/Armature/Skeleton3D/Cube_002" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fvdw3")
 
 [node name="Cube_003" parent="ClarityJellyfish/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.899519, 0.0580127, 0.433013, 0.0580128, 0.966506, -0.25, -0.433013, 0.25, 0.866025, 0.0762646, -0.0440312, 0.319954)
+transform = Transform3D(0.899519, 0.0580125, 0.433013, 0.0580126, 0.966506, -0.249999, -0.433013, 0.249999, 0.866025, 0.0762645, -0.044031, 0.319954)
 
 [node name="Cube_003" parent="ClarityJellyfish/Armature/Skeleton3D/Cube_003" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fvdw3")
 
 [node name="Cube_004" parent="ClarityJellyfish/Armature/Skeleton3D" index="3"]
-transform = Transform3D(1, -6.3573e-08, 6.06327e-14, 5.50557e-08, 0.866025, -0.5, 3.17864e-08, 0.5, 0.866025, -3.92284e-08, -0.0848454, 0.307948)
+transform = Transform3D(1, -6.35723e-08, 2.82558e-13, 5.50552e-08, 0.866025, -0.5, 3.17858e-08, 0.5, 0.866025, -3.9228e-08, -0.0848453, 0.307948)
 
 [node name="Cube_004" parent="ClarityJellyfish/Armature/Skeleton3D/Cube_004" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fvdw3")
 
 [node name="Cube_006" parent="ClarityJellyfish/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.899519, 0.0580126, -0.433013, 0.0580128, 0.966506, 0.25, 0.433013, -0.25, 0.866025, -0.0767694, 0.0443231, 0.322129)
+transform = Transform3D(0.899519, 0.0580124, -0.433013, 0.0580126, 0.966506, 0.249999, 0.433013, -0.249999, 0.866025, -0.0767694, 0.044323, 0.322129)
 
 [node name="Cube_006" parent="ClarityJellyfish/Armature/Skeleton3D/Cube_006" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fvdw3")
 
 [node name="Cube_005" parent="ClarityJellyfish/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.899519, -0.0580128, -0.433013, -0.0580126, 0.966506, -0.25, 0.433013, 0.25, 0.866025, -0.0754063, -0.0435354, 0.316255)
+transform = Transform3D(0.899519, -0.0580129, -0.433013, -0.0580128, 0.966506, -0.25, 0.433013, 0.25, 0.866025, -0.0754064, -0.0435356, 0.316255)
 
 [node name="Cube_005" parent="ClarityJellyfish/Armature/Skeleton3D/Cube_005" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fvdw3")

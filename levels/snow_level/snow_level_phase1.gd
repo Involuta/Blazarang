@@ -14,8 +14,6 @@ const JellyfishSweepScene := preload("res://enemies/ice_jellyfish_sweep.tscn")
 @export var min_jelly_radius := 2.5
 @export var min_orbit_speed := 0.25
 @export var max_orbit_speed := 0.65
-@export var min_vertical_speed := -0.35
-@export var max_vertical_speed := 0.35
 
 @export_group("Blizzard")
 @export var blizzard_safezone_radius := 15.0
@@ -110,12 +108,9 @@ func spawn_jellyfish():
 		var angle := TAU * (float(index) / float(jellyfish_count)) + rng.randf_range(-0.2, 0.2)
 		var orbit_speed := rng.randf_range(min_orbit_speed, max_orbit_speed)
 		var orbit_direction := -1.0 if rng.randf() < 0.5 else 1.0
-		var vertical_speed := rng.randf_range(min_vertical_speed, max_vertical_speed)
 		
 		add_child(jelly)
-		jelly.min_vertical_speed = min_vertical_speed
-		jelly.max_vertical_speed = max_vertical_speed
-		jelly.configure_orbit(dome_center, radius, height_offset, angle, orbit_speed, orbit_direction, vertical_speed, dome_height)
+		jelly.configure_orbit(dome_center, radius, height_offset, angle, orbit_speed, orbit_direction, dome_height)
 		jelly.global_position = _dome_position(radius, height_offset, angle)
 		jellyfish.append(jelly)
 

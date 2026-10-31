@@ -18,10 +18,6 @@ const IceShardScene := preload("res://enemies/ice_fairy_shot.tscn")
 @export var orbit_arm_spin_speed := 1.5
 @export var orbit_arm_flap_speed := 0.8
 @export var orbit_arm_open_angle := 0.2
-@export var vertical_change_interval_min := 2.0
-@export var vertical_change_interval_max := 4.0
-var min_vertical_speed := -0.35
-var max_vertical_speed := 0.35
 
 var orbit_center := Vector3.ZERO
 var level: Node3D
@@ -40,7 +36,6 @@ var return_start_position := Vector3.ZERO
 var return_start_radius := 0.0
 var return_start_height := 0.0
 var return_start_speed := 0.0
-var return_start_vertical_speed := 0.0
 var return_start_basis := Basis.IDENTITY
 
 var current_orbit_radius := 8.0
@@ -48,8 +43,6 @@ var current_height := 5.0
 var current_orbit_speed := 0.4
 var orbit_direction := 1.0
 var orbit_angle := 0.0
-var vertical_speed := 0.0
-var vertical_speed_timer := 0.0
 var max_dome_height := 13.0
 
 var starting_orbit_radius := 8.0
@@ -57,7 +50,6 @@ var starting_height := 5.0
 var starting_orbit_speed := 0.4
 var starting_orbit_direction := 1.0
 var starting_orbit_angle := 0.0
-var starting_vertical_speed := 0.0
 
 var transition_tween: Tween
 var slot_move_start_position := Vector3.ZERO
@@ -78,7 +70,7 @@ func _ready():
 	add_to_group("lockonables")
 	var visual_meshes: Array[MeshInstance3D] = [cap_mesh]
 
-func configure_orbit(center: Vector3, radius: float, height: float, angle: float, speed: float, direction: float, initial_vertical_speed: float, dome_height: float):
+func configure_orbit(center: Vector3, radius: float, height: float, angle: float, speed: float, direction: float, dome_height: float):
 	orbit_center = center
 	current_orbit_radius = radius
 	current_height = height
@@ -86,15 +78,12 @@ func configure_orbit(center: Vector3, radius: float, height: float, angle: float
 	orbit_arm_flap_phase = angle
 	current_orbit_speed = speed
 	orbit_direction = direction
-	vertical_speed = initial_vertical_speed
 	max_dome_height = dome_height
 	starting_orbit_radius = radius
 	starting_height = height
 	starting_orbit_speed = speed
 	starting_orbit_direction = direction
 	starting_orbit_angle = angle
-	starting_vertical_speed = initial_vertical_speed
-	vertical_speed_timer = rng.randf_range(vertical_change_interval_min, vertical_change_interval_max)
 
 func _physics_process(delta: float):
 	if not is_alive or is_stunned:
@@ -116,14 +105,6 @@ func _physics_process(delta: float):
 
 func _process_orbit(delta):
 	orbit_angle += current_orbit_speed * orbit_direction * delta
-	current_height += vertical_speed * delta
-	if current_height <= 1.0 or current_height >= max_dome_height:
-		current_height = clampf(current_height, 1.0, max_dome_height)
-		vertical_speed = -vertical_speed
-	vertical_speed_timer -= delta
-	if vertical_speed_timer <= 0.0:
-		vertical_speed = rng.randf_range(min_vertical_speed, max_vertical_speed)
-		vertical_speed_timer = rng.randf_range(vertical_change_interval_min, vertical_change_interval_max)
 
 	var next_position := orbit_center + Vector3(
 		cos(orbit_angle) * current_orbit_radius,
@@ -206,7 +187,6 @@ func return_to_dome(duration: float):
 	return_start_radius = current_orbit_radius
 	return_start_height = current_height
 	return_start_speed = current_orbit_speed
-	return_start_vertical_speed = vertical_speed
 	return_start_basis = global_transform.basis
 	orbit_angle = starting_orbit_angle
 	orbit_direction = starting_orbit_direction
@@ -216,9 +196,8 @@ func _process_return_to_orbit(delta: float):
 	var blend := return_elapsed / return_duration
 	current_orbit_radius = lerpf(return_start_radius, starting_orbit_radius, blend)
 	current_orbit_speed = lerpf(return_start_speed, starting_orbit_speed, blend)
-	vertical_speed = lerpf(return_start_vertical_speed, starting_vertical_speed, blend)
-	var return_height := return_start_height + return_start_vertical_speed * return_elapsed
-	var orbit_height := starting_height + starting_vertical_speed * return_elapsed
+	var return_height := return_start_height
+	var orbit_height := starting_height
 	current_height = lerpf(return_height, orbit_height, blend)
 	orbit_angle += current_orbit_speed * orbit_direction * delta
 	var orbit_position := orbit_center + Vector3(
@@ -238,7 +217,6 @@ func _process_return_to_orbit(delta: float):
 		current_orbit_radius = starting_orbit_radius
 		current_height = orbit_height
 		current_orbit_speed = starting_orbit_speed
-		vertical_speed = starting_vertical_speed
 		global_rotation = Vector3(0.0, orbit_yaw, 0.0)
 		is_in_formation = false
 		returning_to_orbit = false
