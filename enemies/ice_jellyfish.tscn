@@ -36,7 +36,7 @@ gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 6.0
 initial_velocity_max = 9.0
 scale_min = 0.1
-scale_max = 0.3
+scale_max = 0.15
 scale_curve = SubResource("CurveTexture_wgerf")
 
 [sub_resource type="Gradient" id="Gradient_txjib"]
@@ -273,7 +273,7 @@ initial_velocity_max = 15.0
 damping_min = 1.0
 damping_max = 1.0
 scale_min = 0.1
-scale_max = 0.3
+scale_max = 0.15
 scale_curve = SubResource("CurveTexture_3r0wo")
 color = Color(0.71, 0.83, 1, 1)
 color_ramp = SubResource("GradientTexture1D_l6ikc")
@@ -518,7 +518,7 @@ process_material = SubResource("ParticleProcessMaterial_e7wfj")
 draw_pass_1 = SubResource("QuadMesh_pbq48")
 
 [node name="IceShotChargeFogClumps" type="GPUParticles3D" parent="ClarityJellyfish"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 1.5)
 emitting = false
 amount = 30
 lifetime = 0.6
@@ -537,7 +537,7 @@ process_material = SubResource("ParticleProcessMaterial_4rosk")
 draw_pass_1 = ExtResource("3_ep8uq")
 
 [node name="ShotMesh" type="MeshInstance3D" parent="ClarityJellyfish"]
-transform = Transform3D(0.6, -6.27817e-16, -2.74428e-23, 0, -2.62268e-08, 0.6, -6.27817e-16, -0.6, -2.62268e-08, 2.08165e-12, 2.08165e-12, 1.8)
+transform = Transform3D(2.08165e-12, -2.17816e-27, -9.52103e-35, 0, -9.09917e-20, 2.08165e-12, -2.17816e-27, -2.08165e-12, -9.09917e-20, 2.08165e-12, 2.08165e-12, 1.8)
 visible = false
 custom_aabb = AABB(-100, -100, -100, 200, 200, 200)
 mesh = SubResource("ArrayMesh_hs801")
