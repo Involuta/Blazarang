@@ -40,3 +40,5 @@ res://enemies/ice_fairy_shot.tscn
 res://enemies/enemy_anims/jellyfish_orbit.res
 res://enemies/enemy_anims/jellyfish_shoot.res
 res://globals.gd
+res://enemies/ice_jellyfish.gd
+res://levels/snow_level/snow_level_phase1.gd

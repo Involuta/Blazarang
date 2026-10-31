@@ -35,7 +35,7 @@ var is_in_formation := false
 var formation_slot: Node3D
 var returning_to_orbit := false
 var return_elapsed := 0.0
-var return_duration := 1.0
+@export var return_duration := 1.5
 var return_start_position := Vector3.ZERO
 var return_start_radius := 0.0
 var return_start_height := 0.0
@@ -213,8 +213,7 @@ func return_to_dome(duration: float):
 
 func _process_return_to_orbit(delta: float):
 	return_elapsed = minf(return_elapsed + delta, return_duration)
-	var progress := pow(return_elapsed / return_duration, 1.05)
-	var blend := progress * progress * progress * (progress * (progress * 6.0 - 15.0) + 10.0)
+	var blend := return_elapsed / return_duration
 	current_orbit_radius = lerpf(return_start_radius, starting_orbit_radius, blend)
 	current_orbit_speed = lerpf(return_start_speed, starting_orbit_speed, blend)
 	vertical_speed = lerpf(return_start_vertical_speed, starting_vertical_speed, blend)

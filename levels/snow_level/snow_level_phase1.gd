@@ -185,7 +185,7 @@ func find_pod_plans(requested_count: int) -> Array[Dictionary]:
 func run_pod_attack(plan: Dictionary):
 	var members: Array[Node3D] = []
 	for candidate in plan.jellies:
-		if _is_alive(candidate):
+		if _is_alive(candidate)  and candidate.is_in_orbit():
 			members.append(candidate)
 	if members.size() < 6:
 		_finish_pod_attack()
@@ -282,7 +282,7 @@ func find_sweep_plan(requested_count: int) -> Dictionary:
 func run_sweep_attack(plan: Dictionary):
 	var members: Array[Node3D] = []
 	for candidate in plan.jellies:
-		if _is_alive(candidate):
+		if _is_alive(candidate) and candidate.is_in_orbit():
 			members.append(candidate)
 
 	var sweep = JellyfishSweepScene.instantiate()
