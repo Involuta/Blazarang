@@ -261,14 +261,12 @@ size = Vector2(6, 6)
 [node name="Level" type="Node3D"]
 script = ExtResource("8_phase1")
 jellyfish_count = 120
-dome_radius = 15.0
 dome_height = 18.0
 min_jelly_radius = 2.08165e-12
 min_orbit_speed = 0.6
 max_orbit_speed = 1.8
 min_vertical_speed = -1.2
 max_vertical_speed = 1.2
-blizzard_safezone_radius = 12.0
 min_fog_density = 0.06
 max_fog_density = 1.0
 fog_transition_duration = 0.2

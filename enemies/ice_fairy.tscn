@@ -1535,7 +1535,7 @@ top_radius = 0.15
 bottom_radius = 0.0
 height = 1.0
 
-[sub_resource type="Shader" id="Shader_arix8"]
+[sub_resource type="Shader" id="Shader_2si0i"]
 code = "shader_type spatial;
 render_mode blend_add, depth_draw_opaque;
 
@@ -1593,7 +1593,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yvpgd"]
 render_priority = 0
-shader = SubResource("Shader_arix8")
+shader = SubResource("Shader_2si0i")
 shader_parameter/fade_alpha = 1.0
 shader_parameter/progress = 1.2
 shader_parameter/spark_length = 0.15

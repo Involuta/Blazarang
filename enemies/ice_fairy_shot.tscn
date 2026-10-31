@@ -79,7 +79,7 @@ color = Color(0.827451, 0.929412, 1, 1)
 offsets = PackedFloat32Array(0, 0.205202, 0.517341, 0.774818, 1)
 colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.490196, 0.82606, 0.82606, 0.82606, 0.54902, 0.84, 0.84, 0.84, 0.13, 0.843184, 0.843184, 0.843184, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_56jml"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_uthck"]
 gradient = SubResource("Gradient_y4koy")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ght75"]
@@ -88,7 +88,7 @@ emission_sphere_radius = 3.0
 direction = Vector3(2.08165e-12, 1, 2.08165e-12)
 spread = 180.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-color_ramp = SubResource("GradientTexture1D_56jml")
+color_ramp = SubResource("GradientTexture1D_uthck")
 
 [sub_resource type="Gradient" id="Gradient_hsi04"]
 colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0.137255)
@@ -98,14 +98,14 @@ noise_type = 3
 frequency = 0.015
 offset = Vector3(2.08167e-08, 2.08167e-08, 2.08167e-08)
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5pgek"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bolgp"]
 invert = true
 color_ramp = SubResource("Gradient_hsi04")
 noise = SubResource("FastNoiseLite_vwck5")
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_3h8d2"]
 expanded_output_ports = [0]
-texture = SubResource("NoiseTexture2D_5pgek")
+texture = SubResource("NoiseTexture2D_bolgp")
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_3u8v6"]
 expanded_output_ports = [0]
@@ -114,12 +114,12 @@ input_name = "color"
 [sub_resource type="VisualShaderNodeRemap" id="VisualShaderNodeRemap_873qj"]
 default_input_values = [1, 0.0, 2, 1.0, 3, 3.0, 4, 8.0]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gie4p"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mc5li"]
 load_path = "res://.godot/imported/blurry_circle.png-28c9b3767e93468af3b0b31a45e9924b.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_v6jhm"]
 expanded_output_ports = [0]
-texture = SubResource("CompressedTexture2D_gie4p")
+texture = SubResource("CompressedTexture2D_mc5li")
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_ndy1y"]
 operator = 2
@@ -242,13 +242,13 @@ nodes/fragment/9/node = SubResource("VisualShaderNodeColorParameter_hog8y")
 nodes/fragment/9/position = Vector2(-220, 80)
 nodes/fragment/connections = PackedInt32Array(3, 1, 4, 0, 4, 0, 2, 1, 2, 1, 6, 0, 6, 0, 8, 0, 7, 4, 8, 1, 8, 0, 0, 1, 9, 0, 0, 0, 5, 4, 6, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pu7md"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ls0w"]
 render_priority = 0
 shader = SubResource("VisualShader_b6fuh")
 shader_parameter/ColorParameter = Color(0.517647, 0.745098, 1, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_io380"]
-material = SubResource("ShaderMaterial_pu7md")
+material = SubResource("ShaderMaterial_4ls0w")
 size = Vector2(6, 6)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_epivg"]
