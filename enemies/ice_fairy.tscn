@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://2ipib84sl774"]
+[gd_scene load_steps=86 format=3 uid="uid://2ipib84sl774"]
 
 [ext_resource type="Script" path="res://enemies/ice_fairy.gd" id="1_6kq3x"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="2_rl78v"]
@@ -25,6 +25,21 @@ refraction_enabled = true
 [sub_resource type="BoxMesh" id="BoxMesh_adun2"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_qf6aq")
+
+[sub_resource type="Animation" id="Animation_j5acs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("IceFairyVisuals:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_rypli"]
 resource_name = "fairy_die"
@@ -563,10 +578,10 @@ tracks/19/path = NodePath("IceFairyVisuals/PitchPivot:rotation")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
-"times": PackedFloat32Array(0, 1.8, 3, 4.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-1.5708, 3.48787e-16, 3.48787e-16), Vector3(1.5708, 3.48787e-16, 3.48787e-16), Vector3(1.5708, 3.48787e-16, 3.48787e-16), Vector3(-1.5708, 3.48787e-16, 3.48787e-16)]
+"values": [Vector3(1.5708, 3.48787e-16, 3.48787e-16)]
 }
 tracks/20/type = "value"
 tracks/20/imported = false
@@ -723,6 +738,88 @@ tracks/32/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
+}
+tracks/33/type = "value"
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/path = NodePath("IceFairyVisuals:visible")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/34/type = "animation"
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/path = NodePath("IceFairyEphyra/AnimationPlayer")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/keys = {
+"clips": PackedStringArray("ChargeShot"),
+"times": PackedFloat32Array(0)
+}
+tracks/35/type = "value"
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Cap:visible")
+tracks/35/interp = 1
+tracks/35/loop_wrap = true
+tracks/35/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/36/type = "value"
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike0:visible")
+tracks/36/interp = 1
+tracks/36/loop_wrap = true
+tracks/36/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/37/type = "value"
+tracks/37/imported = false
+tracks/37/enabled = true
+tracks/37/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike1:visible")
+tracks/37/interp = 1
+tracks/37/loop_wrap = true
+tracks/37/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/38/type = "value"
+tracks/38/imported = false
+tracks/38/enabled = true
+tracks/38/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike2:visible")
+tracks/38/interp = 1
+tracks/38/loop_wrap = true
+tracks/38/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/39/type = "value"
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/path = NodePath("IceFairyVisuals/PitchPivot/YawPivot/Spike3:visible")
+tracks/39/interp = 1
+tracks/39/loop_wrap = true
+tracks/39/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_lsn44"]
@@ -1178,6 +1275,7 @@ tracks/11/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7uy7i"]
 _data = {
+"RESET": SubResource("Animation_j5acs"),
 "fairy_die": SubResource("Animation_rypli"),
 "fairy_idle": SubResource("Animation_c6hfp"),
 "ready_fairy": SubResource("Animation_5ov4e"),
@@ -1881,6 +1979,37 @@ process_material = SubResource("ParticleProcessMaterial_m76nu")
 draw_pass_1 = ExtResource("8_rq4qr")
 
 [node name="IceFairyEphyra" parent="." instance=ExtResource("9_mtvsl")]
+transform = Transform3D(-0.81, 2.82517e-16, -7.08124e-08, 2.82517e-16, 0.81, -2.82517e-16, 7.08124e-08, -2.82517e-16, -0.81, 0, 0, 0)
+
+[node name="Skeleton3D" parent="IceFairyEphyra/Armature" index="0"]
+bones/1/position = Vector3(-1.17266, 0.000365329, -0.935165)
+bones/1/rotation = Quaternion(-0.636999, 0.306842, 0.306763, 0.637164)
+bones/2/rotation = Quaternion(0.000166733, -1.06518e-07, 2.18773e-07, 1)
+bones/3/rotation = Quaternion(0.000192397, 4.65762e-09, -1.22424e-08, 1)
+bones/4/position = Vector3(-1.05242e-06, 0.000365282, -1.49989)
+bones/4/rotation = Quaternion(-0.707015, 7.58493e-08, 4.44991e-07, 0.707198)
+bones/5/rotation = Quaternion(0.000166693, -2.39725e-08, -6.63302e-09, 1)
+bones/6/rotation = Quaternion(0.000192401, -4.43622e-08, -4.43448e-08, 1)
+bones/7/position = Vector3(1.17266, 0.000365373, -0.935167)
+bones/7/rotation = Quaternion(-0.636999, -0.306842, -0.306763, 0.637164)
+bones/8/rotation = Quaternion(0.000166718, -4.03945e-08, 4.85468e-07, 1)
+bones/9/rotation = Quaternion(0.000192403, -1.02416e-07, -8.93178e-08, 1)
+bones/10/position = Vector3(1.46228, 0.000365091, 0.333755)
+bones/10/rotation = Quaternion(0.440817, 0.55291, 0.552767, -0.440931)
+bones/11/rotation = Quaternion(0.000166664, 3.52772e-08, 2.47209e-07, 1)
+bones/12/rotation = Quaternion(0.000192403, -2.58091e-08, -1.21728e-08, 1)
+bones/13/position = Vector3(0.650779, 0.000364927, 1.35135)
+bones/13/rotation = Quaternion(0.157326, 0.689467, 0.689289, -0.157366)
+bones/14/rotation = Quaternion(0.000166704, -8.82883e-08, 1.77145e-07, 1)
+bones/15/rotation = Quaternion(0.000192397, -1.14015e-07, -3.94965e-08, 1)
+bones/16/position = Vector3(-0.650777, 0.000364927, 1.35135)
+bones/16/rotation = Quaternion(-0.157325, 0.689467, 0.689289, 0.157366)
+bones/17/rotation = Quaternion(0.000166704, 6.17398e-08, 1.05096e-07, 1)
+bones/18/rotation = Quaternion(0.000192403, -7.12095e-08, -7.31573e-08, 1)
+bones/19/position = Vector3(-1.46228, 0.000365091, 0.333758)
+bones/19/rotation = Quaternion(-0.440817, 0.55291, 0.552767, 0.440931)
+bones/20/rotation = Quaternion(0.000166657, -3.47225e-08, 1.98337e-07, 1)
+bones/21/rotation = Quaternion(0.000192409, -1.38334e-08, -2.79637e-08, 1)
 
 [node name="Ephyra" parent="IceFairyEphyra/Armature/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_hh645")
@@ -1889,7 +2018,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_hh645")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 
 [node name="PitchPivot" type="Node3D" parent="IceFairyVisuals"]
-transform = Transform3D(1, -6.97574e-16, -1.26261e-21, -1.26261e-21, -3.61999e-06, 1, -6.97574e-16, -1, -3.61999e-06, 0, 0, 0)
+transform = Transform3D(1, 0, -1.26261e-21, -1.26261e-21, -3.61999e-06, -1, 0, 1, -3.61999e-06, 0, 0, 0)
 
 [node name="YawPivot" type="Node3D" parent="IceFairyVisuals/PitchPivot"]
 
@@ -2011,7 +2140,7 @@ process_material = SubResource("ParticleProcessMaterial_mnh1n")
 draw_pass_1 = SubResource("QuadMesh_nkbfh")
 
 [node name="ShotMesh" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
-transform = Transform3D(0.6, 0, -4.75795e-31, 0, 0.6, 2.36534e-17, 4.75795e-31, -2.36534e-17, 0.6, 0, -1.38107, 2.02204e-15)
+transform = Transform3D(0.6, 0, -4.75795e-31, 0, 0.6, 2.36534e-17, 4.75795e-31, -2.36534e-17, 0.6, 2.08165e-12, -3.6, 2.08165e-12)
 visible = false
 mesh = SubResource("ArrayMesh_1f47m")
 
