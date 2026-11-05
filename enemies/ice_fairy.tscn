@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://2ipib84sl774"]
+[gd_scene load_steps=85 format=3 uid="uid://2ipib84sl774"]
 
 [ext_resource type="Script" path="res://enemies/ice_fairy.gd" id="1_6kq3x"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="2_rl78v"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="6_sy1g1"]
 [ext_resource type="Texture2D" uid="uid://namwvkk58jhe" path="res://sprites/blurry_circle.png" id="7_7yopq"]
 [ext_resource type="ArrayMesh" uid="uid://d1vjlc1x8tyik" path="res://glb_meshes/long_hexagon_particle_mesh.res" id="8_rq4qr"]
+[ext_resource type="PackedScene" uid="uid://cgmb0hmwl11fs" path="res://glb_inherited_scenes/ice_fairy_ephyra.tscn" id="9_mtvsl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fp5fu"]
 
@@ -1464,10 +1465,11 @@ material = SubResource("StandardMaterial3D_dftyw")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5l8wk"]
 resource_local_to_scene = true
 transparency = 4
+albedo_color = Color(0.74902, 0.87451, 1, 0.705882)
 albedo_texture = ExtResource("7_7yopq")
 emission_enabled = true
 emission = Color(0.74902, 0.87451, 1, 1)
-emission_energy_multiplier = 1.2
+emission_energy_multiplier = 0.46
 billboard_mode = 1
 billboard_keep_scale = true
 
@@ -1503,6 +1505,15 @@ scale_max = 0.16
 scale_curve = SubResource("CurveTexture_cfcn5")
 color = Color(0.792157, 0.92549, 1, 1)
 color_ramp = SubResource("GradientTexture1D_pyaxw")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hh645"]
+resource_local_to_scene = true
+transparency = 4
+albedo_color = Color(0.560784, 0.803922, 1, 0.705882)
+roughness = 0.12
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_772d5"]
 resource_local_to_scene = true
@@ -1667,7 +1678,7 @@ shader_parameter/spark_length = 0.15
 shader_parameter/spark_sharpness = 1.0
 shader_parameter/start_offset = 0.25
 shader_parameter/leading_color = Color(1, 1, 1, 1)
-shader_parameter/trailing_color = Color(0.44, 0.65, 1, 1)
+shader_parameter/trailing_color = Color(0.44, 0.65, 3, 1)
 
 [sub_resource type="TorusMesh" id="TorusMesh_bqg5x"]
 material = SubResource("ShaderMaterial_2fpcu")
@@ -1804,7 +1815,6 @@ process_material = SubResource("ParticleProcessMaterial_47sp6")
 draw_pass_1 = SubResource("QuadMesh_g85f8")
 
 [node name="EnemyHurtbox" type="Area3D" parent="."]
-process_mode = 4
 collision_layer = 8
 collision_mask = 257
 script = ExtResource("3_66w1x")
@@ -1870,10 +1880,16 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_m76nu")
 draw_pass_1 = ExtResource("8_rq4qr")
 
+[node name="IceFairyEphyra" parent="." instance=ExtResource("9_mtvsl")]
+
+[node name="Ephyra" parent="IceFairyEphyra/Armature/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_hh645")
+
 [node name="IceFairyVisuals" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 
 [node name="PitchPivot" type="Node3D" parent="IceFairyVisuals"]
-transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(1, -6.97574e-16, -1.26261e-21, -1.26261e-21, -3.61999e-06, 1, -6.97574e-16, -1, -3.61999e-06, 0, 0, 0)
 
 [node name="YawPivot" type="Node3D" parent="IceFairyVisuals/PitchPivot"]
 
@@ -1882,7 +1898,7 @@ mesh = SubResource("SphereMesh_twu4l")
 skeleton = NodePath("../../..")
 
 [node name="Spike0" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
-transform = Transform3D(1, 1.58819e-22, 5.23784e-30, -1.58819e-22, 0.999999, -2.84194e-15, -5.23785e-30, 2.84194e-15, 0.999999, 2.08165e-12, -0.9, 0.33)
+transform = Transform3D(1, 1.58819e-22, 5.23784e-30, -1.58819e-22, 0.999999, -2.84194e-15, -5.23785e-30, 2.84194e-15, 0.999999, 2.08165e-12, -0.675, 0.36)
 mesh = SubResource("CylinderMesh_5iovp")
 skeleton = NodePath("../../..")
 
@@ -1908,7 +1924,7 @@ visible = false
 mesh = SubResource("TorusMesh_bqg5x")
 
 [node name="Spike1" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.9, -0.33)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.675, -0.36)
 mesh = SubResource("CylinderMesh_5iovp")
 skeleton = NodePath("../../..")
 
@@ -1934,7 +1950,7 @@ visible = false
 mesh = SubResource("TorusMesh_bqg5x")
 
 [node name="Spike2" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, -0.6, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.36, -0.675, 2.08165e-12)
 mesh = SubResource("CylinderMesh_5iovp")
 skeleton = NodePath("../../..")
 
@@ -1960,7 +1976,7 @@ visible = false
 mesh = SubResource("TorusMesh_bqg5x")
 
 [node name="Spike3" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33, -0.6, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.36, -0.675, 2.08165e-12)
 mesh = SubResource("CylinderMesh_5iovp")
 skeleton = NodePath("../../..")
 
@@ -1995,5 +2011,8 @@ process_material = SubResource("ParticleProcessMaterial_mnh1n")
 draw_pass_1 = SubResource("QuadMesh_nkbfh")
 
 [node name="ShotMesh" type="MeshInstance3D" parent="IceFairyVisuals/PitchPivot/YawPivot"]
-transform = Transform3D(2.08165e-12, 0, -1.65073e-42, 0, 2.08165e-12, 8.20634e-29, 1.65073e-42, -8.20634e-29, 2.08165e-12, 0, -1.38107, 2.02204e-15)
+transform = Transform3D(0.6, 0, -4.75795e-31, 0, 0.6, 2.36534e-17, 4.75795e-31, -2.36534e-17, 0.6, 0, -1.38107, 2.02204e-15)
+visible = false
 mesh = SubResource("ArrayMesh_1f47m")
+
+[editable path="IceFairyEphyra"]

@@ -51,7 +51,7 @@ enum ROSERANG_BUFFS {
 }
 
 # All roserang instances look at and use this
-var roserang_buff_list := [Globals.ROSERANG_BUFFS.HOMING]
+var roserang_buff_list := [Globals.ROSERANG_BUFFS.DAMAGE]
 
 enum AXRANG_BUFFS {
 	DAMAGE,
@@ -146,7 +146,7 @@ const enemy_hurtbox_data = {
 	
 	"ClarityJellyfish" : [10, 1.0, 1.0],
 	
-	"ClarityBodyShard" : [45, 1.0, 15.0],
+	"ClarityBodyShard" : [300, 1.0, 15.0],
 	"IceSprite" : [60, 1.0, 60.0],
 	"IceFairy" : [15, 1.0, 60.0],
 	"Clarity" : [600, 1.0, 1000.0],

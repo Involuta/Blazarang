@@ -115,7 +115,7 @@ func homing_attack(target, to_icon: bool):
 func is_dead(target):
 	if target == icon:
 		return false
-	return not is_instance_valid(target) or not target.is_alive
+	return not is_instance_valid(target) or not target.is_alive()
 
 func _physics_process(_delta):
 	mesh.rotate_y(rotate_speed)

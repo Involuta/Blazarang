@@ -96,6 +96,8 @@ spread = 180.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 radial_accel_min = 12.0
 radial_accel_max = 15.0
+scale_min = 1.5
+scale_max = 1.5
 color_ramp = SubResource("GradientTexture1D_w8wxo")
 
 [sub_resource type="Gradient" id="Gradient_vtef7"]

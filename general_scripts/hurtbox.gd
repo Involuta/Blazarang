@@ -87,3 +87,6 @@ func receive_hit(hitbox, _hitter):
 
 func die():
 	hb_owner.queue_free.call_deferred()
+
+func is_alive():
+	return health > 0

@@ -327,7 +327,7 @@ func _ready():
 	head_hurtbox.hit_received.connect(on_head_hit)
 	
 	# Ensure all shards are full health and hurtable when Clarity spawns
-	regen_dress_shards()
+	#regen_dress_shards()
 	
 	# Set up blizzard and snowflake colors
 	# Why not just set blizzard_light.light_color directly instead of setting the var blizzard_light_color? blizzard_light_color is used for blizzard expansion and contraction
@@ -338,16 +338,16 @@ func _ready():
 	snowflake_glow.modulate = snowflake_glow_color_light
 	
 	# Activate snowflake
-	#snowflake_anim_player.play("RotateSlow3Seg")
+	snowflake_anim_player.play("RotateSlow3Seg")
 	
 	# FOR TESTING: play JumpShot to reach phase 2 immediately
 	#snowflake_anim_player.play("JumpShot")
 	
 	# FOR TESTING: play RegenShards to reach phase 2 immediately
-	switch_to_stop()
-	snowflake_anim_player.play("RegenShards")
-	play_anim_all_dress_shards("RegenShards")
-	arm_anim_player.play("RegenShards")
+	#switch_to_stop()
+	#snowflake_anim_player.play("RegenShards")
+	#play_anim_all_dress_shards("RegenShards")
+	#arm_anim_player.play("RegenShards")
 
 func play_scarf_anim(anim: String):
 	scarf1_anim_player.play(anim)
@@ -803,13 +803,13 @@ func expand_blizzard_safezone(frame_duration: int):
 	t.tween_property(self, "blizzard_safezone_radius", blizzard_safezone_expanded_radius, frames(frame_duration))
 	t.tween_property(blizzard_light, "light_color", Color.SNOW, frames(frame_duration))
 	t.tween_property(blizzard_light, "light_volumetric_fog_energy", 12.0, frames(frame_duration))
-	t.tween_property(sky, "sky_top_color", Color.LIGHT_SKY_BLUE, frames(frame_duration))
-	t.tween_property(sky, "sky_horizon_color", Color.SKY_BLUE, frames(frame_duration))
-	t.tween_property(sky, "ground_horizon_color", Color.SKY_BLUE, frames(frame_duration))
-	t.tween_property(level_env, "fog_light_color", Color.NAVY_BLUE, frames(frame_duration))
-	t.tween_property(level_env, "fog_density", 0.0015, frames(frame_duration))
-	t.tween_property(level_env, "volumetric_fog_density", .0009, frames(frame_duration))
-	t.tween_property(level_env, "volumetric_fog_emission", Color("#95a5bd"), frames(frame_duration))
+	#t.tween_property(sky, "sky_top_color", Color.LIGHT_SKY_BLUE, frames(frame_duration))
+	#t.tween_property(sky, "sky_horizon_color", Color.SKY_BLUE, frames(frame_duration))
+	#t.tween_property(sky, "ground_horizon_color", Color.SKY_BLUE, frames(frame_duration))
+	#t.tween_property(level_env, "fog_light_color", Color.NAVY_BLUE, frames(frame_duration))
+	#t.tween_property(level_env, "fog_density", 0.0015, frames(frame_duration))
+	#t.tween_property(level_env, "volumetric_fog_density", .0009, frames(frame_duration))
+	#t.tween_property(level_env, "volumetric_fog_emission", Color("#95a5bd"), frames(frame_duration))
 	#t.tween_property(particle_attractor, "strength", 300, frames(frame_duration))
 
 func contract_blizzard_safezone(frame_duration: int):
