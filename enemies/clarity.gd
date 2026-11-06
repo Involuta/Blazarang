@@ -327,7 +327,7 @@ func _ready():
 	head_hurtbox.hit_received.connect(on_head_hit)
 	
 	# Ensure all shards are full health and hurtable when Clarity spawns
-	#regen_dress_shards()
+	regen_dress_shards()
 	
 	# Set up blizzard and snowflake colors
 	# Why not just set blizzard_light.light_color directly instead of setting the var blizzard_light_color? blizzard_light_color is used for blizzard expansion and contraction
@@ -341,7 +341,7 @@ func _ready():
 	snowflake_anim_player.play("RotateSlow3Seg")
 	
 	# FOR TESTING: play JumpShot to reach phase 2 immediately
-	#snowflake_anim_player.play("JumpShot")
+	snowflake_anim_player.play("JumpShot")
 	
 	# FOR TESTING: play RegenShards to reach phase 2 immediately
 	#switch_to_stop()
