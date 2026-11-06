@@ -38,3 +38,4 @@ res://enemies/ice_sprite_spawner.gd
 res://enemies/clarity.tscn
 res://levels/snow_level/snow_level_phase1.tscn
 res://cotu/cotu_cb_main.tscn
+res://cotu/CotuControl.gd

@@ -280,7 +280,7 @@ func _physics_process(delta):
 			Engine.time_scale = 1
 		else:
 			slow = true
-			Engine.time_scale = .1#6.0
+			Engine.time_scale = 6.0
 	# Camera movement/orientation; ui_cancel means esc
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
