@@ -11,7 +11,7 @@ emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 0.0
 
-[node name="IceFairyEphyra" instance=ExtResource("1_qoehe")]
+[node name="IceFairyEphyraMeshes" instance=ExtResource("1_qoehe")]
 
 [node name="Skeleton3D" parent="Armature" index="0"]
 bones/1/position = Vector3(-1.17275, 5.21285e-13, -0.935234)

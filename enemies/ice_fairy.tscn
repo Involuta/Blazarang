@@ -28,30 +28,6 @@ material = SubResource("StandardMaterial3D_qf6aq")
 
 [sub_resource type="Animation" id="Animation_j5acs"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("IceFairyVisuals:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("IceFairyEphyra:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(2.86212e-15, -3.14159, -0.896035)]
-}
 
 [sub_resource type="Animation" id="Animation_rypli"]
 resource_name = "fairy_die"
@@ -95,7 +71,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("IceFairyEphyra:visible")
+tracks/3/path = NodePath("IceFairyEphyraMeshes:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -137,7 +113,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("IceFairyEphyra:rotation")
+tracks/2/path = NodePath("IceFairyEphyraMeshes:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -290,7 +266,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("IceFairyEphyra:visible")
+tracks/11/path = NodePath("IceFairyEphyraMeshes:visible")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -730,7 +706,7 @@ tracks/33/keys = {
 tracks/34/type = "animation"
 tracks/34/imported = false
 tracks/34/enabled = true
-tracks/34/path = NodePath("IceFairyEphyra/AnimationPlayer")
+tracks/34/path = NodePath("IceFairyEphyraMeshes/AnimationPlayer")
 tracks/34/interp = 1
 tracks/34/loop_wrap = true
 tracks/34/keys = {
@@ -812,7 +788,7 @@ tracks/40/keys = {
 tracks/41/type = "value"
 tracks/41/imported = false
 tracks/41/enabled = true
-tracks/41/path = NodePath("IceFairyEphyra:rotation")
+tracks/41/path = NodePath("IceFairyEphyraMeshes:rotation")
 tracks/41/interp = 1
 tracks/41/loop_wrap = true
 tracks/41/keys = {
@@ -995,7 +971,7 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("IceFairyEphyra:visible")
+tracks/14/path = NodePath("IceFairyEphyraMeshes:visible")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -2123,6 +2099,7 @@ mesh = SubResource("QuadMesh_sqp36")
 
 [node name="FairyDeathParticles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 0, 0, 0)
+emitting = false
 amount = 60
 lifetime = 3.0
 one_shot = true
@@ -2131,10 +2108,10 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_m76nu")
 draw_pass_1 = ExtResource("8_rq4qr")
 
-[node name="IceFairyEphyra" parent="." instance=ExtResource("9_mtvsl")]
-transform = Transform3D(-0.374827, -0.468514, -9.05975e-08, -0.468514, 0.374827, -1.71727e-15, 5.65973e-08, 7.07436e-08, -0.6, 0, 0, 0)
+[node name="IceFairyEphyraMeshes" parent="." instance=ExtResource("9_mtvsl")]
+transform = Transform3D(-0.6, 2.09272e-16, -9.05975e-08, 2.09272e-16, 0.6, -2.09272e-16, 9.05975e-08, -2.09272e-16, -0.6, 0, 0, 0)
 
-[node name="Skeleton3D" parent="IceFairyEphyra/Armature" index="0"]
+[node name="Skeleton3D" parent="IceFairyEphyraMeshes/Armature" index="0"]
 bones/1/position = Vector3(-1.17275, 5.21285e-13, -0.935234)
 bones/1/rotation = Quaternion(-0.637081, 0.306802, 0.306802, 0.637081)
 bones/2/rotation = Quaternion(2.55085e-07, -9.81414e-08, 2.16067e-07, 1)
@@ -2164,7 +2141,7 @@ bones/19/rotation = Quaternion(-0.440874, 0.552838, 0.552839, 0.440874)
 bones/20/rotation = Quaternion(1.79194e-07, -3.5842e-08, 2.01166e-07, 1)
 bones/21/rotation = Quaternion(2.76194e-10, -1.45276e-08, -2.23517e-08, 1)
 
-[node name="Ephyra" parent="IceFairyEphyra/Armature/Skeleton3D" index="0"]
+[node name="Ephyra" parent="IceFairyEphyraMeshes/Armature/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_hh645")
 
 [node name="IceFairyVisuals" type="Node3D" parent="."]
@@ -2301,4 +2278,4 @@ draw_pass_1 = SubResource("QuadMesh_86pyp")
 transform = Transform3D(2.08165e-12, 0, -1.65073e-42, 0, 2.08165e-12, 8.20635e-29, 1.65073e-42, -8.20635e-29, 2.08165e-12, 2.08165e-12, -3.6, 2.08165e-12)
 mesh = SubResource("ArrayMesh_1f47m")
 
-[editable path="IceFairyEphyra"]
+[editable path="IceFairyEphyraMeshes"]
