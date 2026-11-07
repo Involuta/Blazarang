@@ -1995,6 +1995,8 @@ Meeting certain power thresholds (e.g. ⅓ of be bar) unlocks buffs. Segments of
 Idea: if your stability is full, then after some time without a gain in power, power decays over time. If power falls below a buff threshold, that buff is lost
 Idea: self-inflicted stability loss is naturally regenerated after a brief delay as it is currently. Externally-inflicted stability loss (EISL) is regenerated after a brief delay by drawing power from the power bar. If you have no power and you’re hit with EISL, your max HP (that is naturally regenerable) is effectively decreased
 
+Idea: stabilizers have a long cooldown like potion sickness from Terraria
+
 Chakram Rang
 Press throw button to spawn a chakram a few meters left/right of Cotu. The chakram immediately travels in a wide semicircle arc around Cotu and then disappears, functioning as a pseudo-melee attack
 Functionally similar to Chaos Blades from God of War 4, looks/feels similar to basic nail strikes from Hollow Knight
@@ -2048,6 +2050,29 @@ Certain unlockable skills are unlocked by unlocking new rang types
 Rose homing (both special and instant rethrow) = rose + shuriken
 Rose rapidorbit = rose + chakram
 Increased chakram capacity = chakram + shuriken
+
+Gauntlet Gym 1 Boss: Quaddies
+4 quadrupedal little rascals around the size of paramites but with longer legs
+Constantly chitter chatter in high-pitched gravelly goblin-like voices and only say each other’s names, giggles, grunts, clicks, and screams
+Quazzie
+The leader
+Arms can turn into straight swords
+Can spin 2 swords in a circle to become a helicopter
+Quaggy
+The wild card
+Arms can turn into guns (free assets)
+Has an eye that can display a holographic status report of other quaddies
+Quabby
+The support
+Top of head/body (it’s the same thing) can turn into a bounce pad to launch other quaddies or her enemies. When she bounces a target, the bounce pad pushes outward from her head like pneumo fists from Shadow Fight 2
+Mini bouncer: top of her head stays the same size. Used on quaddies
+Big bouncer: top of her head expands and legs lengthen to form an angled trampoline
+Idea: can regurgitate outside weapons in order to cheat
+Ska
+The trap
+Top of head/body has spikes
+Arms can turn into shoves to dig underground. Burrows towards their target or to a location where the target will likely go and just camps
+Can turn into a landmine, bouncing betty, or spike trap
 
 Gimmick Boss: La Mosquita
 Gauntlet Gym 2 boss that you officially fight to move up in the tournament
@@ -3518,34 +3543,11 @@ Blackstar feels helpless because no matter how long and hard she trains, no new 
 This is made worse by the fact that many other gods have improved significantly after the tournament, but Blackstar hasn’t changed at all (she gets more experience in different matchups, but doesn’t get new abilities or increase her power)
 Blackstar thinks that if she ever feels proud of herself, she’ll lose all motivation to improve and truly fail - caused by OCD
 Has OCD, has low self-esteem, and distrusts others who claim to like and admire her. She obsessively fears the thought that they only like her because she’s the best and pushes herself to continue being the best
-Idea: Elite Gunner looks at Cotu’s upgrades
-Elite Gunner is happy, but also ashamed since her master isn’t making the same progress
-Cotu wants to know how the Gauntlet really feels
-EG: “[current upgrade name]. Already?” She sounds like a mixture between impressed and sad
-Cotu: “Is something wrong?”
-EG *shakes her head*: “No. Not at all. It’s impressive how fast you’ve made it this far.”
-Cotu: “Thanks.” Cotu senses something’s going on, but he’s not sure what. “But I’ve still got a long way to go before the gala.”
-EG takes another look at the upgrades. “Indeed.” *she looks at Cotu* “I’ll send this info to Master. Thank you for showing us this.”
-Cotu: “Of course.”
-EG: “Whatever you need, the Gauntlet will be right behind you.” She salutes to him
-Cotu nods. “See you soon.”
 She is extremely personally motivated to fight Cotu at his best
-Idea 1: Poor Reputation After Tournament Loss
-Public opinion of the Gauntlet has decreased ever since her loss to Cotu in the tournament. People say the Gauntlet’s been on a decline and/or stagnating and/or out of its prime
+Idea: Poor Reputation After Tournament Loss
+Public opinion of the Gauntlet has decreased ever since her loss to Cotu in the tournament. People say the Gauntlet’s been on a decline and/or stagnating and/or out of its prime. She’s still top level currently, but if things don’t change, her era will end almost as quickly as it started
 Blackstar can take being insulted herself, but she’s pained by her family being talked about negatively. She doesn’t want to restore her glory—she wants to restore theirs, and secure the Gauntlet’s future by reincarnating
-Idea 2: Blackstar won the tournament, but only because Blazar let her win
-Blackstar believes that she’s not reincarnating because Blaze held back
-This plays into the idea established at the beginning of the game in the intro conversation with X: the soul must be convinced that a fight is real in order to gain XP. Blackstar thinks that because her soul wasn’t convinced, she didn’t gain the XP. She doesn’t know for sure that’s the reason why she didn’t gain the XP, it’s just her best guess
-She also feels like a fraud who’s lying to everybody, and the clout she has isn’t deserved
-Sub idea: Blackstar must concentrate her mind to not let the knowledge that Blaze let her win flow back into the Gauntlet’s soul, which would transmit the memory to all of her predecessors. This concentration makes her unable to reincarnate
-Blaze knew how much the tournament meant to Blackstar, so he lost on purpose to give peace to her and her followers. He was also just fighting for fun, so he didn’t mind losing
-Throughout almost all of the fight, Blaze was genuinely fighting to win to give her a real fight, but when Blackstar was extremely close to winning at one point, Blaze allowed her to, even though he had one last ability he could have used to save himself and continue the fight (let’s say this was Mark Sacrifice). Blaze never used this attack in a tournament game, so no one knew that he had it except for Blackstar and himself
-Blackstar somehow knew that he had this ability at the time he fought her, and she knew the damage it did. If Blaze used it, Blackstar would have destabilized and most likely lost
-Idea: Blackstar stalked him in the training room to memorize his techniques, and she saw him use it against someone important
-After Cotu arrives at the gala and before their fight, Blackstar approaches Cotu and tells him that even though the gala’s not a serious competition, she politely and timidly asks him not to hold back, as this is her last chance to reincarnate before the next tournament
-(If using motivation Idea 2 above): Blackstar reveals to Blaze and the player that she knows that he let her win. Blaze asks how she knows and she explains how
-Idea: Blackstar asks to meet in Blaze’s realm so that no one can hear her say Blaze let her win
-X is jealous that she pulled Cotu aside
+She does enjoy combat, but she secretly wants to take a break and just relax with her family and friends
 Idea: after Blackstar’s battle with Cotu, he helps her accept that she’s done everything she can, and she should enjoy her life and all the friends and family she has. She then realizes that the only way to reincarnate is not to improve her skill or physical strength, but her soul. Each variant has its own unique skills, strength, and personality. The soul of the gauntlet, Blackstar’s soul, rejects Blackstar’s personality.
 After the battle, Blackstar’s helmet is cracked open, revealing a less physically sharp, more relatable, expressive person within. Cotu talks casually with Blackstar until she comes to the realization. Mid-conversation, she suddenly stops responding to Cotu. The camera’s on Cotu and he’s looking away while waiting for her response. After a bit, he turns to check on her. The armor looks frail and withered, and has lost its glow. The person inside Blackstar’s armor looks at Cotu differently than she did, with a wide-eyed, curious expression.
 Cotu: “Hi.”
@@ -4269,6 +4271,26 @@ She explains that she deleted his post-T1 memories and removed his powers becaus
 Mike asks Jessica if it’s possible to keep Cotu in the universe so long as he’s contained, and she agrees since Mike is a robot like her (Pilot: “aren’t we all, kind of robots? We’re all programs running on a computer-”)
 The player, now playing as Singularity Cotu, fights Mike
 Post-fight events undecided
+Plot Idea 7: The First Tournament
+In all the other plots, Cotu was already the champion, so the player is working towards a goal that the main character has already completed, so there’s little importance to it. This gave the plot a more chill vibe, but the characters and setting befit a hype plot, not a chill one. This is Blazarang, not Stardew Valley. If we don’t know what’s going to happen next, then everything suddenly becomes brand new and exciting
+Another reason for this plot being better is that it emphasizes the extreme newness instead of kind of sitting in the middle btwn having an established status quo and total anarchy. Think about it this way; stories typically start in 1 of 2 ways: a well-established status quo that affirms the difficulty of the challenge the protagonist must face (e.g. “the Dark Lord has reigned unchallenged for the past 100 years”) or a complete lack of a status quo that gives way to rampant discovery and chaos (e.g. several contestants being introduced to a death game). Since the other plots took place in the second tourney, the characters had a general sense about each other and the universe, but there’s wasn’t enough history to make any solid conclusions just yet, so people were generally gonna be more on the fence about how things are compared to the very first tourney or a tourney several years after the birth of the universe. The plot taking place in T1 capitalizes on the chaos, excitement, and anticipation of learning how people measure up against each other for the first time
+“But Cotu’s real goal is to get back to his old strength!” So why is he participating in the tournament then? He must want to compete, but not that much since he already won. That’s LAME
+“But Cotu’s being tempted to fight by the Singularity!” Let’s say the player is aware of this the entire time. Then there’s an existential psychological dread in the background of all the fights that distracts us from the action. I want to be fully invested in the task at hand. OR if Sy’s influence is kept a secret from the player until the end, then all the player knows when Cotu fights is that he’s interested in fighting, but not that much, and there’s no communicated explanation for the interest. That’s LAME
+Blaze already knows X, the Triplets, and the Gauntlet since they trained together. There was some multi-week or multi-month long training period before the start of the tourney
+The game opens either some time before the first tourney fight or immediately after Blaze’s first fight
+Blaze can participate in both ranked and unranked fights. If Blaze dies in a ranked fight, the game resets him back in time to before he lost. If Blaze dies in an unranked fight, the game continues time as normal
+Reworks of plot scenarios from Plot Idea 6 and 3E:
+Since I want Blaze to fight Tempered X in the tournament, X will no longer lose the first tourney shockingly early. He’s simply very competitive and especially hated losing to Blaze in training sessions
+Grow-a-Gator still appears and attacks Gauntlet Gym 1, which is also where the opening of the game takes place, but the second attack where the player actually fights it takes place at a Jessica-made tournament venue and not another Gauntlet gym
+Clarity still exists and is still a threat that Blaze can challenge
+Candy Cat is still in prison by the time Blaze meets it, but its imprisonment takes place before the tournament. Since it was disqualified, its true strength is unknown
+Idea: Draconix is the one who subdued Candy Cat, demonstrating his strength
+Why not X? Because X’s primary feat is having the fastest average fight time, shown through both training fights and in the tourney
+Neuro still appears in the game, but instead of gaining motivation by watching T1 from inside the Brain, it watched gods train during the training period. Neuro participates in the tourney despite having barely any training time whatsoever
+Gods think that Neuro didn’t train with others on purpose to hide its abilities, and Neuro plays into the rumors
+New characters, plots, and storylines
+The player sees the gauntlet’s latest incarnations slowly become more obsessed, insecure, and antisocial until they finally culminate with Blackstar
+Draconix now appears in the game as an elite fighter on the same level as Neuro and X
 Character interactions that are the same regardless of plot
 Cotu chatting with Jab Crab
 Cotu: “Are you a newborn?”
@@ -4998,6 +5020,14 @@ Violent gremlin who fights dirty and constantly shoots takedowns. Hunts for comp
 Completely unhinged, making him unintentionally hilarious
 “SMASH EVERYBODY! KILL EVERYBODY!”
 Has an awesome theme song: Laser Dance from Ocean’s Twelve
+
+Merab Dvalishvili
+Happy goblin with insane energy, positivity, and fun
+Once drove a couch down the streets of Las Vegas
+
+Petr Yan
+Calm, patient, highly technical mastermind. A machine
+Starts fights slowly, downloads his opponent, then capitalizes on their weaknesses to dominate the later rounds
 
 
 Every Problem in the UFC Solved by Blazarang’s Universe
