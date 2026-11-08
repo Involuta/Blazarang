@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=3 uid="uid://2ipib84sl774"]
+[gd_scene load_steps=89 format=3 uid="uid://2ipib84sl774"]
 
 [ext_resource type="Script" path="res://enemies/ice_fairy.gd" id="1_6kq3x"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="2_rl78v"]
@@ -25,9 +25,6 @@ refraction_enabled = true
 [sub_resource type="BoxMesh" id="BoxMesh_adun2"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_qf6aq")
-
-[sub_resource type="Animation" id="Animation_j5acs"]
-length = 0.001
 
 [sub_resource type="Animation" id="Animation_rypli"]
 resource_name = "fairy_die"
@@ -154,25 +151,13 @@ tracks/1/keys = {
 "update": 1,
 "values": [0]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("RisingParticles:emitting")
+tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
@@ -183,109 +168,109 @@ tracks/3/keys = {
 "method": &"ready_fairy_end"
 }]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FairyGlowMesh:mesh:material:albedo_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.74902, 0.87451, 1, 0.705882)]
+}
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("FairyGlowMesh:mesh:material:albedo_color")
+tracks/4/path = NodePath("FairyGlowMesh:mesh:material:emission_energy_multiplier")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(0.74902, 0.87451, 1, 0.705882)]
+"values": [1.2, 0.46]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("FairyGlowMesh:mesh:material:emission_energy_multiplier")
+tracks/5/path = NodePath("FairyGlowMesh:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1.2, 0.46]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("FairyGlowMesh:scale")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.1, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(2.4, 2.4, 2.4), Vector3(3, 3, 3), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
 }
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("IceFairyVFX:visible")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("IceFairyVFX:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("SpriteMesh:mesh:material:albedo_color")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.560784, 0.803922, 1, 0.74902)]
+}
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("SpriteMesh:mesh:material:albedo_color")
+tracks/8/path = NodePath("SpriteMesh:mesh:material:emission_energy_multiplier")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0.560784, 0.803922, 1, 0.74902)]
+"values": [0.0]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("SpriteMesh:mesh:material:emission_energy_multiplier")
+tracks/9/path = NodePath("IceFairyVFX/PitchPivot:rotation")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [Vector3(1.5708, 3.48787e-16, 3.48787e-16)]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("IceFairyVFX/PitchPivot:rotation")
+tracks/10/path = NodePath("IceFairyEphyraMeshes:visible")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1.5708, 3.48787e-16, 3.48787e-16)]
+"update": 1,
+"values": [true]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("IceFairyEphyraMeshes:visible")
+tracks/11/path = NodePath("EnemyHurtbox/CollisionShape3D:shape")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("EnemyHurtbox/CollisionShape3D:shape")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -802,496 +787,12 @@ tracks/40/keys = {
 "values": [Vector3(3.48786e-16, -3.14159, 3.48786e-16)]
 }
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s45hv"]
-radius = 0.6
-height = 2.4
-
-[sub_resource type="Animation" id="Animation_lsn44"]
-resource_name = "spawn"
-length = 1.00001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SnowParticles:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("SpriteMesh:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("SpriteMesh:mesh:material:albedo_color")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.560784, 0.803922, 1, 0.74902)]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"values": []
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".:collision_layer")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [8]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("FogClumps:emitting")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("DamageOverTimeArea:process_mode")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("SpriteMesh:mesh:material:emission_energy_multiplier")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("SpriteMesh:scale")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1)]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("EnemyHurtbox:process_mode")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [4, 0]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("IceChunkParticles:emitting")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("RisingParticles:emitting")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("FairyGlowMesh:scale")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)]
-}
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("IceFairyVFX:visible")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/14/type = "value"
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath("IceFairyEphyraMeshes:visible")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/15/type = "value"
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/path = NodePath("EnemyHurtbox/CollisionShape3D:shape")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("CapsuleShape3D_s45hv")]
-}
-
-[sub_resource type="Animation" id="Animation_2adtf"]
-resource_name = "sprite_chargeup"
-length = 3.0
-step = 0.0166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SpriteMesh:mesh:material:albedo_color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.560784, 0.803922, 1, 0.74902)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(3),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"death_effect"
-}]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:collision_layer")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [8]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("SpriteMesh:mesh:material:emission_energy_multiplier")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 2.76667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 0.3]
-}
-
-[sub_resource type="Animation" id="Animation_5ski5"]
-resource_name = "sprite_die"
-step = 0.0166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SpriteMesh:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:collision_layer")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("DamageOverTimeArea:process_mode")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("IceChunkParticles:emitting")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("SpriteMesh:mesh:material:albedo_color")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.560784, 0.803922, 1, 0.74902)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("EnemyHurtbox:process_mode")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-
-[sub_resource type="Animation" id="Animation_m58tf"]
-resource_name = "sprite_explode"
-length = 7.0
-step = 0.0166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SnowParticles:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("SpriteMesh:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("SpriteMesh:mesh:material:albedo_color")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1.5, 1.5, 1.5, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("FogClumps:emitting")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".:collision_layer")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("DamageOverTimeArea:process_mode")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 4]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("EnemyHurtbox:process_mode")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("RisingParticles:emitting")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0, 4.00001),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("FairyGlowMesh:scale")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0, 4.50001, 7.00001),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(2.4, 2.4, 2.4)]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("FairyGlowMesh:position")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(2.08165e-12, 7.6, 2.08165e-12)]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("FairyGlowMesh:mesh:material:albedo_color")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.74902, 0.87451, 1, 0.705882)]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("FairyGlowMesh:mesh:material:emission_energy_multiplier")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.46]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7uy7i"]
 _data = {
-"RESET": SubResource("Animation_j5acs"),
 "fairy_die": SubResource("Animation_rypli"),
 "fairy_idle": SubResource("Animation_c6hfp"),
 "ready_fairy": SubResource("Animation_5ov4e"),
-"shoot": SubResource("Animation_2tacr"),
-"spawn": SubResource("Animation_lsn44"),
-"sprite_chargeup": SubResource("Animation_2adtf"),
-"sprite_die": SubResource("Animation_5ski5"),
-"sprite_explode": SubResource("Animation_m58tf")
+"shoot": SubResource("Animation_2tacr")
 }
 
 [sub_resource type="Curve" id="Curve_8ln7e"]
@@ -1516,53 +1017,6 @@ initial_velocity_max = 6.0
 scale_min = 0.25
 scale_max = 0.5
 scale_curve = SubResource("CurveTexture_kc0bm")
-
-[sub_resource type="Curve" id="Curve_vtsij"]
-min_value = -1.0
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_8bg0r"]
-curve = SubResource("Curve_vtsij")
-
-[sub_resource type="Curve" id="Curve_c68v2"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.252056, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_r6cnk"]
-curve = SubResource("Curve_c68v2")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cslra"]
-emission_shape = 6
-emission_ring_axis = Vector3(2.08165e-12, 1, 2.08165e-12)
-emission_ring_height = 2.08165e-12
-emission_ring_radius = 1.0
-emission_ring_inner_radius = 0.0
-direction = Vector3(2.08165e-12, 1, 2.08165e-12)
-spread = 3.0
-gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-initial_velocity_min = 0.1
-initial_velocity_max = 0.1
-linear_accel_min = 1.0
-linear_accel_max = 1.0
-linear_accel_curve = SubResource("CurveTexture_8bg0r")
-scale_min = 0.3
-scale_max = 0.6
-scale_curve = SubResource("CurveTexture_r6cnk")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dftyw"]
-transparency = 4
-shading_mode = 0
-albedo_color = Color(0.756863, 0.87451, 1, 1)
-albedo_texture = ExtResource("7_7yopq")
-billboard_mode = 3
-billboard_keep_scale = true
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="QuadMesh" id="QuadMesh_xbuiy"]
-material = SubResource("StandardMaterial3D_dftyw")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5l8wk"]
 resource_local_to_scene = true
@@ -2028,10 +1482,11 @@ shape = SubResource("BoxShape3D_fp5fu")
 
 [node name="SpriteMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(2.08165e-12, 0, 0, 0, 2.08165e-12, 0, 0, 0, 2.08165e-12, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+visible = false
 mesh = SubResource("BoxMesh_adun2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "spawn"
+autoplay = "ready_fairy"
 libraries = {
 "": SubResource("AnimationLibrary_7uy7i")
 }
@@ -2095,20 +1550,6 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_jaerh")
 draw_pass_1 = SubResource("BoxMesh_adun2")
 
-[node name="RisingParticles" type="GPUParticles3D" parent="."]
-emitting = false
-amount = 6
-lifetime = 6.0
-visibility_aabb = AABB(-300, -300, -300, 600, 600, 600)
-process_material = SubResource("ParticleProcessMaterial_cslra")
-draw_pass_1 = SubResource("QuadMesh_xbuiy")
-
-[node name="ParticleAttractor" type="GPUParticlesAttractorBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 7.6, 2.08165e-12)
-strength = 6.0
-attenuation = 5.65685
-size = Vector3(6, 3, 6)
-
 [node name="FairyGlowMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(2.4, 0, 0, 0, 2.4, 0, 0, 0, 2.4, 2.08165e-12, 7.6, 2.08165e-12)
 mesh = SubResource("QuadMesh_sqp36")
@@ -2128,34 +1569,34 @@ draw_pass_1 = ExtResource("8_rq4qr")
 transform = Transform3D(-0.6, 2.09272e-16, -9.05975e-08, 2.09272e-16, 0.6, -2.09272e-16, 9.05975e-08, -2.09272e-16, -0.6, 0, 0, 0)
 
 [node name="Skeleton3D" parent="IceFairyEphyraMeshes/Armature" index="0"]
-bones/1/position = Vector3(-1.17237, 0.00081545, -0.934933)
-bones/1/rotation = Quaternion(-0.636905, 0.306887, 0.306718, 0.637257)
-bones/2/rotation = Quaternion(0.000517155, -1.11694e-07, 2.20391e-07, 1)
-bones/3/rotation = Quaternion(0.000447274, 6.97488e-09, -2.41046e-08, 1)
-bones/4/position = Vector3(-1.04123e-06, 0.00081552, -1.49952)
-bones/4/rotation = Quaternion(-0.706912, 5.88178e-08, 4.35527e-07, 0.707302)
-bones/5/rotation = Quaternion(0.000517115, -2.57101e-08, -1.74329e-08, 1)
-bones/6/rotation = Quaternion(0.000447272, -3.60935e-08, -5.13479e-08, 1)
-bones/7/position = Vector3(1.17237, 0.000815486, -0.934935)
-bones/7/rotation = Quaternion(-0.636905, -0.306886, -0.306718, 0.637257)
-bones/8/rotation = Quaternion(0.00051714, -3.66165e-08, 4.94936e-07, 1)
-bones/9/rotation = Quaternion(0.000447274, -9.37224e-08, -8.92118e-08, 1)
-bones/10/position = Vector3(1.46192, 0.000815176, 0.333672)
-bones/10/rotation = Quaternion(0.440753, 0.552991, 0.552686, -0.440995)
-bones/11/rotation = Quaternion(0.000517087, 3.74753e-08, 2.50239e-07, 1)
-bones/12/rotation = Quaternion(0.000447274, -2.74526e-08, -1.04872e-08, 1)
-bones/13/position = Vector3(0.650617, 0.000815129, 1.35102)
-bones/13/rotation = Quaternion(0.157303, 0.689568, 0.689188, -0.15739)
-bones/14/rotation = Quaternion(0.000517127, -8.53428e-08, 1.75714e-07, 1)
-bones/15/rotation = Quaternion(0.000447274, -1.18943e-07, -4.78332e-08, 1)
-bones/16/position = Vector3(-0.650615, 0.000815128, 1.35102)
-bones/16/rotation = Quaternion(-0.157302, 0.689568, 0.689188, 0.157389)
-bones/17/rotation = Quaternion(0.000517127, 6.77155e-08, 1.01229e-07, 1)
-bones/18/rotation = Quaternion(0.000447274, -5.60639e-08, -7.00957e-08, 1)
-bones/19/position = Vector3(-1.46192, 0.000815248, 0.333675)
-bones/19/rotation = Quaternion(-0.440752, 0.552991, 0.552686, 0.440995)
-bones/20/rotation = Quaternion(0.000517079, -3.39652e-08, 1.94213e-07, 1)
-bones/21/rotation = Quaternion(0.000447274, -8.66274e-09, -4.27746e-08, 1)
+bones/1/position = Vector3(-1.17275, 5.21285e-13, -0.935234)
+bones/1/rotation = Quaternion(-0.637081, 0.306802, 0.306802, 0.637081)
+bones/2/rotation = Quaternion(2.55085e-07, -9.81414e-08, 2.16067e-07, 1)
+bones/3/rotation = Quaternion(-1.71763e-10, 4.68216e-09, -1.49012e-08, 1)
+bones/4/position = Vector3(-1.0468e-06, -2.41102e-09, -1.5)
+bones/4/rotation = Quaternion(-0.707107, 8.92197e-08, 4.52377e-07, 0.707107)
+bones/5/rotation = Quaternion(2.15427e-07, -2.11993e-08, 1.05871e-08, 1)
+bones/6/rotation = Quaternion(-2.03829e-09, -4.50678e-08, -4.50678e-08, 1)
+bones/7/position = Vector3(1.17275, -2.17864e-12, -0.935236)
+bones/7/rotation = Quaternion(-0.637081, -0.306802, -0.306803, 0.637081)
+bones/8/rotation = Quaternion(2.40183e-07, -4.61593e-08, 4.99189e-07, 1)
+bones/9/rotation = Quaternion(-1.71665e-10, -1.04741e-07, -8.9407e-08, 1)
+bones/10/position = Vector3(1.46239, -2.38418e-07, 0.33378)
+bones/10/rotation = Quaternion(0.440874, 0.552838, 0.552838, -0.440874)
+bones/11/rotation = Quaternion(1.86644e-07, 3.18938e-08, 2.45869e-07, 1)
+bones/12/rotation = Quaternion(2.76221e-10, -2.51072e-08, -1.49012e-08, 1)
+bones/13/position = Vector3(0.650827, -3.57627e-07, 1.35145)
+bones/13/rotation = Quaternion(0.157346, 0.689378, 0.689378, -0.157346)
+bones/14/rotation = Quaternion(2.26679e-07, -9.28908e-08, 1.93715e-07, 1)
+bones/15/rotation = Quaternion(-2.09017e-10, -1.14364e-07, -2.98024e-08, 1)
+bones/16/position = Vector3(-0.650825, -3.57627e-07, 1.35145)
+bones/16/rotation = Quaternion(-0.157346, 0.689378, 0.689378, 0.157346)
+bones/17/rotation = Quaternion(2.26679e-07, 5.22344e-08, 9.68575e-08, 1)
+bones/18/rotation = Quaternion(-2.09067e-10, -7.33454e-08, -7.45058e-08, 1)
+bones/19/position = Vector3(-1.46239, -2.38418e-07, 0.333782)
+bones/19/rotation = Quaternion(-0.440874, 0.552838, 0.552839, 0.440874)
+bones/20/rotation = Quaternion(1.79194e-07, -3.5842e-08, 2.01166e-07, 1)
+bones/21/rotation = Quaternion(2.76194e-10, -1.45276e-08, -2.23517e-08, 1)
 
 [node name="Ephyra" parent="IceFairyEphyraMeshes/Armature/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_hh645")
@@ -2172,7 +1613,7 @@ transform = Transform3D(1, 0, -1.26261e-21, -1.26261e-21, -3.61999e-06, -1, 0, 1
 transform = Transform3D(1, 1.58819e-22, 5.23784e-30, -1.58819e-22, 0.999999, -2.84194e-15, -5.23785e-30, 2.84194e-15, 0.999999, 2.08165e-12, -0.675, 0.5)
 
 [node name="RingMeshContainer" type="Node3D" parent="IceFairyVFX/PitchPivot/YawPivot/Spike0"]
-transform = Transform3D(1.5, -3.75582e-23, -1.93776e-23, 3.75582e-23, 1.5, 4.89595e-09, 1.93776e-23, -4.89595e-09, 1.5, 2.08165e-12, 0.55, 0)
+transform = Transform3D(1.5, -3.75582e-23, -1.93776e-23, 3.75582e-23, 1.5, 4.89595e-09, 1.93776e-23, -4.89595e-09, 1.5, 2.08165e-12, 0.6, 2.08165e-12)
 
 [node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVFX/PitchPivot/YawPivot/Spike0/RingMeshContainer"]
 transform = Transform3D(1, 1.62918e-22, 1.29184e-23, -1.81775e-22, 1, -3.26398e-09, -1.29184e-23, 3.26398e-09, 1, -2.60209e-18, 0, 0)
@@ -2196,7 +1637,7 @@ mesh = SubResource("TorusMesh_bqg5x")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.675, -0.5)
 
 [node name="RingMeshContainer" type="Node3D" parent="IceFairyVFX/PitchPivot/YawPivot/Spike1"]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 2.08165e-12, 0.55, 2.08165e-12)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 2.08165e-12, 0.6, 2.08165e-12)
 
 [node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVFX/PitchPivot/YawPivot/Spike1/RingMeshContainer"]
 transform = Transform3D(-1, 3.48787e-16, -8.74228e-08, 3.48787e-16, 1, -3.48787e-16, 8.74228e-08, -3.48787e-16, -1, -2.60209e-18, 0, 0)
@@ -2220,7 +1661,7 @@ mesh = SubResource("TorusMesh_bqg5x")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.675, 2.08165e-12)
 
 [node name="RingMeshContainer" type="Node3D" parent="IceFairyVFX/PitchPivot/YawPivot/Spike2"]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 2.08165e-12, 0.55, 2.08165e-12)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 2.08165e-12, 0.6, 2.08165e-12)
 
 [node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVFX/PitchPivot/YawPivot/Spike2/RingMeshContainer"]
 transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, -2.60209e-18, 0, 0)
@@ -2244,7 +1685,7 @@ mesh = SubResource("TorusMesh_bqg5x")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.675, 2.08165e-12)
 
 [node name="RingMeshContainer" type="Node3D" parent="IceFairyVFX/PitchPivot/YawPivot/Spike3"]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 2.08165e-12, 0.55, 2.08165e-12)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 2.08165e-12, 0.6, 2.08165e-12)
 
 [node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVFX/PitchPivot/YawPivot/Spike3/RingMeshContainer"]
 transform = Transform3D(-4.37114e-08, -3.48787e-16, -1, 3.48787e-16, 1, -3.48787e-16, 1, -3.48787e-16, -4.37114e-08, -2.60209e-18, 0, 0)
@@ -2284,8 +1725,7 @@ process_material = SubResource("ParticleProcessMaterial_u46px")
 draw_pass_1 = SubResource("QuadMesh_86pyp")
 
 [node name="ShotMesh" type="MeshInstance3D" parent="IceFairyVFX/PitchPivot/YawPivot"]
-transform = Transform3D(0.6, 0, -4.75795e-31, 0, 0.6, 2.36534e-17, 4.75795e-31, -2.36534e-17, 0.6, 2.08165e-12, -3.6, 2.08165e-12)
-visible = false
+transform = Transform3D(2.08165e-12, 0, -1.65073e-42, 0, 2.08165e-12, 8.20635e-29, 1.65073e-42, -8.20635e-29, 2.08165e-12, 2.08165e-12, -3.6, 2.08165e-12)
 mesh = SubResource("ArrayMesh_1f47m")
 
 [editable path="IceFairyEphyraMeshes"]

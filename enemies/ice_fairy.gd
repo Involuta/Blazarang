@@ -10,14 +10,8 @@ var behav_state = FOLLOW
 
 var ice_shot := preload("res://enemies/ice_fairy_shot.tscn")
 
-@export_group("Ice Sprite Parameters")
-var follow_speed := 5.0 # Ice sprite follow speed is set to be very similar to if not identical to Cotu's walk speed
-@export var target_distance := 4.5
-@export var follow_turn_speed := .15
-@export var attack_turn_speed := .5
-@export var jump_vertical_speed := 3.6
-
 @export_group("Fairy Mvmt Parameters")
+@export var aim_turn_speed := .15
 @export var min_orbit_speed := .2
 @export var max_orbit_speed := .4
 
@@ -56,9 +50,6 @@ var next_shoot_time := 0.0
 
 var fairy_orbit_angle := 0.0
 
-var explosion_triggered := false # Set to true when close to player
-@export var explode_secs := 6.0
-var is_fairy := false # Set to true in ready_fairy func
 var aiming_at_target := false
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -78,7 +69,6 @@ func _ready():
 	target = root.find_child("Icon", true, false)
 	cotu = root.find_child("cotuCB", true, false)
 	clarity = root.find_child("Clarity", true, false)
-	follow_speed = cotu.walk_speed * .76
 	current_orbit_speed = rng.randf_range(min_orbit_speed, max_orbit_speed)
 	current_orbit_radius = rng.randf_range(min_orbit_radius, max_orbit_radius)
 	current_height_offset = rng.randf_range(min_height_offset, max_height_offset)
@@ -88,18 +78,9 @@ func _ready():
 	add_to_group("lockonables")
 
 func _physics_process(delta):
-	if is_fairy:
-		process_fairy_speed_timer(delta)
-		process_fairy_movement(delta)
-		process_shooting_timer(delta)
-	else:
-		if not explosion_triggered and global_position.distance_to(target.global_position) < target_distance:
-			trigger_sprite_chargeup()
-		if is_on_floor():
-			if not explosion_triggered:
-				jump()
-		else:
-			velocity.y -= .67 * gravity * delta
+	process_fairy_speed_timer(delta)
+	process_fairy_movement(delta)
+	process_shooting_timer(delta)
 	move_and_slide()
 	if global_position.y < -100:
 		queue_free()
@@ -170,9 +151,9 @@ func process_fairy_movement(delta: float):
 		velocity = to_desired * fairy_drift_speed
 	
 	if aiming_at_target:
-		lerp_look_at_target(follow_turn_speed, true)
+		lerp_look_at_target(aim_turn_speed, true)
 	else:
-		lerp_look_at_target(follow_turn_speed)
+		lerp_look_at_target(aim_turn_speed)
 
 func lerp_look_at_walk_dir(turn_speed):
 	if velocity.length_squared() > 0.01:
@@ -184,39 +165,11 @@ func lerp_look_at_target(turn_speed, reverse := false):
 	var target_transform = global_transform.looking_at(target.global_position, Vector3.UP)
 	global_transform = global_transform.interpolate_with(target_transform, turn_speed)
 
-func jump():
-	velocity = follow_speed*global_position.direction_to(target.global_position)
-	velocity.y = jump_vertical_speed
-	global_rotation.x = 0
-	global_rotation.z = 0
-
-func trigger_sprite_chargeup():
-	explosion_triggered = true
-	anim_player.play("sprite_chargeup")
-
 # Called by hurtbox OR chargeup anim
 func death_effect():
-	if is_fairy:
 		anim_player.play("fairy_die")
 		await anim_player.animation_finished
 		queue_free()
-	else:
-		# If the explosion was triggered, explode ice sprite,
-		# then become fairy
-		if explosion_triggered:
-			velocity = Vector3.ZERO
-			gravity = 0
-			anim_player.play("sprite_explode")
-			await anim_player.animation_finished
-			anim_player.play("ready_fairy")
-		# If the explosion wasn't triggered, don't explode ice sprite
-		else:
-			# Stop ice sprite from jumping while dying
-			explosion_triggered = true
-			anim_player.play("sprite_die")
-			await anim_player.animation_finished
-			await get_tree().create_timer(explode_secs).timeout
-			queue_free()
 
 # This func is here so that when EnemyHurtbox calls its die func, set_active is called instead of queue freeing this Ice Sprite node
 func set_active(_state: bool):
@@ -232,7 +185,6 @@ func ready_fairy_start():
 	hurtbox.health = 1
 
 func ready_fairy_end():
-	is_fairy = true
 	hurtbox.health = hurtbox.max_health
 	anim_player.play("fairy_idle")
 

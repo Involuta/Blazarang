@@ -40,3 +40,4 @@ res://levels/snow_level/snow_level_phase1.tscn
 res://cotu/cotu_cb_main.tscn
 res://cotu/CotuControl.gd
 res://glb_inherited_scenes/ice_ephyra_meshes.tscn
+res://enemies/ice_fairy.gd
