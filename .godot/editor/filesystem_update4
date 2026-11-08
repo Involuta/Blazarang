@@ -41,3 +41,4 @@ res://cotu/cotu_cb_main.tscn
 res://cotu/CotuControl.gd
 res://glb_inherited_scenes/ice_ephyra_meshes.tscn
 res://enemies/ice_fairy.gd
+res://general_scripts/hurtbox.gd
