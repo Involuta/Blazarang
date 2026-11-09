@@ -1910,10 +1910,6 @@ Prompt 2: now only make the roserang’s petal path parallel to the surface bene
 
 Add UI icon or crosshair to show how close to the center of the screen a target needs to be in order for homing instant rethrow to target it (like what Soldier 76’s ultimate does)
 
-Consider not removing all rose buffs when the player catches the rose
-Buffs would now only gradually decay over time like with the ax, encouraging the player to be aggressive without outright forcing them in case they need to catch the rose to defend themselves
-Now, the only advantage of instant rethrowing the rose is to prevent the long startup time on the initial throw, which honestly feels like a good tradeoff to me
-
 Reconsider whether the player should be able to restabilize during the invincibility period after destabilization
 Currently, if the player destabilizes, there’s absolutely no skill involved in restabilizing. If you use a stabilizer during the invincibility period, you’re right back to normal. Wouldn’t it be more thrilling and challenging if the player had to wait until they were vulnerable again before being able to use a stabilizer?
 I still like the idea of being able to use a stabilizer while you’re still stable in order to become invincible temporarily (e.g. during a grab), but wouldn’t it be confusing or nonsensical to the player if the stabilizer was usable all the time except that brief period right after destabilization?
@@ -1923,46 +1919,43 @@ Consider ax reworks to make it more fun and usable
 Idea: detonating the ax also recalls it, removing the floating ax continuous attack and increasing gameplay momentum (which also fits Cotu’s character more)
 To keep enemy and boss behavior consistent and simple, thick enemy collision layer also deflects (aka detonates) the ax and makes a special sound effect
 
-Idea: make rang techniques more complex so they feel more like unlocking skills in a martial art than a direct boost in strength
-Idea: instead of just 1 special, you have multiple specials you can use like cooldowns in Overwatch, except instead of spending time to use the cooldown again, you spend buffs. To choose which special to use, press the corresponding special button
-Idea: each special requires a different set of buffs to activate
-Rose rapidly autotargets and hits a nearby enemy a few times. The final return to Cotu can be instant rethrown to keep the rose in flight, but the buffs required for the flurry will be spent
+Issue: if you want to buff (or otherwise reward) yourself, it doesn’t matter how well you respond to your environment (e.g. hitting enemies). The only things that really matter for self-strengthening are your input timing and your attention to your rangs, and since those are independent of any external factors, self-strengthening becomes boring as soon as the player masters the input timing and gets used to the rangs themselves
+Here’s some examples of how great games avoid this issue to help think of ideas:
+Hollow Knight: the only way to heal yourself and use spells is to successfully hit enemies → how well you respond to your environment matters. The way Blazarang works currently is almost like if Hollow Knight allowed you to generate soul by pressing the nail-swing button with consistent timing
+Terraria: when using a boomerang, if you miss your target, you have to wait for the rang to travel its entire path distance and back before you can try to throw it again. If you hit your target, the rang immediately comes back to you and you can throw it again immediately, allowing you to rapidly increase your damage
+Idea: stability vs power
+When the rose hits an enemy, it collects “power”. When the rose hits the icon, the rose’s accumulated power is deposited into your power bar, which is displayed directly below HP
+Idea: shurikens also collect power after hitting enemies and also deposit it to the icon like the rose does, but the icon doesn’t return to Cotu when shurikens hit it; the shurikens just disappear. To balance this, shurikens are now thrown like basic straight projectiles; press the throw button to consume stability and throw it. If it hits an enemy, it acts like the current shuriken does (it slices through the enemy multiple times)
+Idea: shurikens are affected by gravity slightly, but the forward velocity is so high that it’s not noticeable except in far distances
+Idea: holding the throw-shuriken button charges the shuriken (it spins on Cotu’s finger), and when fully charged, its damage and power collection are doubled
+Idea: holding the throw-shuriken button now charges multiple shurikens simultaneously (up to 3)
 Unlockable Skill
-“Mini Flurry”
+“Shuriken Multicharge”
+Idea: the player has the option to make shurikens explode at the end of their attack instead of returning to the icon and increasing power
+Meeting certain power thresholds (e.g. ⅓ of the bar) unlocks buffs. Segments of the bar (or the entire bar) can be consumed to use special attacks
+Idea: every use of the ax costs a buff
+Rose buffs no longer disappear when catching the rose
+This mechanic only encouraged the player to keep a consistent rhythm of throwing and dodging, not responding to the environment or managing stability. Since this isn’t a rhythm game, this mechanic no longer makes sense
+Idea: new stability regeneration
+Self-inflicted stability loss is naturally regenerated after a brief delay as it is currently
+Externally-inflicted stability loss (ESL) must be manually regenerated by holding the heal button (H on PC, square on PS4 controller), which converts power directly to stability. If you have no power and you’re hit with EISL, your max HP (that is naturally regenerable) is effectively decreased
+Healing slows down your movement and disables other actions just like drinking a Flask of Crimson Tears in Elden Ring. To do other actions, let go of the heal button
+Cotu also naturally regenerates stability very slowly (slightly faster than Blessed Dew talisman’s effect from Elden Ring). This way, when the player’s low on max stability and has no power, they won’t be forced to destabilize (throwing the rose to collect more power would destabilize them)
+
+Idea: stabilizers have a long cooldown like potion sickness from Terraria
 
 Make Different Game Mechanics Intersect; to create depth, different skills should feel connected
 Vid on Interesting Mechanics vs Depth: https://www.youtube.com/watch?v=Fuf_SpKCYVY
 One of the biggest issues I noticed with Blazarang is that you can only use either the rose or the ax at a time, and they don’t synergize with each other. This limits the player’s creative expression. As the vid above explains, if there are a lot of different game mechanics in a game, but they don’t intersect, the game feels shallow. To combat this problem in Blazarang, try making the rose synergize with or build up to the ax
-Make the ax charged by the rose
-Hitting enemies with the rose charges the ax
-When the ax is fully charged, the player can use it in a melee diagonal sweeping slice or throw. Both of these attacks have moderate startup & endlag and deal very high damage (akin to critical hit damage in Dark Souls 3)
-Idea: right before and during the slice, Cotu becomes briefly invincible
-Unlockable Skill
-“Ax Counterstrike”
-Idea: if the player presses jump and ax throw at about the same time, the icon launches Cotu up and backward
-If the player’s next roserang instant rethrow will be homing, and the player throws the ax such that the roserang hits Cotu in the last (instant_rethrow_window_secs) before the ax anim ends, the ax will be thrown as a homing throw, following the same targeting rules as a shuriken. The ax can still be detonated
-Unlockable Skill
-“Homing Ax”
-This knowledge is available when both the ax and homing instant rethrow are unlocked
-Idea: When the ax is airborne, dodging causes the icon to stop following Cotu just like dodging when the rose is airborne. This can be used to dodge gigantic attacks (as a substitute for a super jump or long dodge for example)
-Unlockable Skill
-“Stationary Soul”
-Make the mark charged by the shurikens
-Shurikens are now thrown like basic homing projectiles; press the throw button to consume stability and throw it at an enemy, and if it gets physically close enough to one, it starts chasing the enemy (but isn’t guaranteed to hit the enemy). If it touches the enemy, it acts like the current shuriken does (it slices through the enemy multiple times)
-Idea: make the shurikens always return instead of having the option to explode so that all of Cotu’s rangs come back
-Hitting enemies with shurikens charges the mark
-Idea: holding the throw-shuriken button charges the shuriken (it spins on Cotu’s finger), and when fully charged, its damage and mark charge are doubled
-Idea: holding the throw-shuriken button now charges multiple shurikens simultaneously (up to 3)
-Unlockable Skill
-“Shuriken Multicharge”
-When the mark is charged, it is automatically given to Cotu’s left hand (i.e. not applied to any enemy). Aside from that, mark control remains exactly the same as it is currently
-Idea: The mark is only usable for a limited amt of time until it runs out, and to keep it alive, you must hit the mark with shurikens
-Issue: this idea makes shurikens feel more like a means to an end than a weapon in their own right. Is their only purpose to charge up the mark? I think it would be interesting if you had to choose between throwing shurikens (in the way that they are described here as basic homing projectiles) and charging the mark by keeping the enemy inside your aiming circle as described in Alt Idea below
-Alt Idea: shurikens and mark are separate
+Make the ax charged by the rose (this used to be a task but is now just a note on how the rose and ax should be related; if you implemented the idea above where the ax consumes buffs, this should be done)
+Make shurikens contribute to power (this is also a note on how the shurikens should be related to the rest of Cotu’s toolkit; if you implemented the idea above where shurikens collect power, this should be done)
+Mark rework
 Instead of marking an enemy the same way you discord orb an enemy using Zenyatta in Overwatch, marking requires you to aim at an enemy for some time, then press the mark button
 When you want to mark (maybe by pressing mark button once), camera switches to over the shoulder aim mode
-When aiming, a UI circle in the middle of the screen appears. You must keep the enemy’s center inside the circle for some time as the circle shrinks
-Once the enemy has been in the circle long enough, an effect plays and the circle stops shrinking. Press the mark button to mark the enemy
+When aiming, a UI circle in the middle of the screen appears. You must keep the enemy’s center inside the circle for some time as the circle shrinks. Once the enemy has been in the circle for min_mark_time seconds, an effect plays. The player can now press the mark button again to mark the enemy
+Instead of marking after min_mark_time, the player can keep aiming at the enemy and continue shrinking the circle. The longer the player keeps the enemy in the circle, the longer the mark lasts
+The circle shrinks at a slower rate over time but eventually becomes just a dot
+Every 1 second of aiming translates to >1 second of mark life (conversion rate is TBD)
 While aiming, Cotu holds his icon in front of him with one hand and holds the mark in his other hand. The hand/arm positions are reminiscent of a bow and arrow, but his hands are open
 Idea: mark starts out as a plumbata, then gets upgraded to become a spear, then spear + atlatl eventually
 Idea: when mark becomes placeable, the spear’s tip splits into 4 parts that levitate out to the sides and have pulsing chaotic energy between them and the spearhead’s original position
@@ -1983,19 +1976,14 @@ When a target is marked, holding the ax melee input instead of pressing it cause
 Unlockable Skill
 “Inescapable Judgment”
 
+Idea: make rang techniques more complex so they feel more like unlocking skills in a martial art than a direct boost in strength
+Idea: instead of just 1 special, you have multiple specials you can use like cooldowns in Overwatch, except instead of spending time to use the cooldown again, you spend buffs. To choose which special to use, press the corresponding special button
+Idea: each special requires a different set of buffs to activate
+Rose rapidly autotargets and hits a nearby enemy a few times. The final return to Cotu can be instant rethrown to keep the rose in flight, but the buffs required for the flurry will be spent
+Unlockable Skill
+“Mini Flurry”
+
 Idea: you can gain an ability that lets you teleport (or wormhole) to the ax, and then you can do a follow-up attack with it afterward
-
-Issue: if you want to buff (or otherwise reward) yourself, it doesn’t matter how well you respond to your environment (e.g. hitting enemies). The only things that really matter for self-strengthening are your input timing and your attention to your rangs, and since those are independent of any external factors, self-strengthening becomes boring as soon as the player masters the input timing and gets used to the rangs themselves
-Here’s some examples of how great games avoid this issue to help think of ideas:
-Hollow Knight: the only way to heal yourself and use spells is to successfully hit enemies → how well you respond to your environment matters. The way Blazarang works currently is almost like if Hollow Knight allowed you to generate soul by pressing the nail-swing button with consistent timing
-Terraria: when using a boomerang, if you miss your target, you have to wait for the rang to travel its entire path distance and back before you can try to throw it again. If you hit your target, the rang immediately comes back to you and you can throw it again immediately, allowing you to rapidly increase your damage
-Idea: stability vs power
-When the rose hits an enemy, it collects “power”. When the rose hits the icon, the rose’s accumulated power is deposited into your power bar, which is displayed directly below HP
-Meeting certain power thresholds (e.g. ⅓ of be bar) unlocks buffs. Segments of the bar (or the entire bar) can be consumed to use special attacks
-Idea: if your stability is full, then after some time without a gain in power, power decays over time. If power falls below a buff threshold, that buff is lost
-Idea: self-inflicted stability loss is naturally regenerated after a brief delay as it is currently. Externally-inflicted stability loss (EISL) is regenerated after a brief delay by drawing power from the power bar. If you have no power and you’re hit with EISL, your max HP (that is naturally regenerable) is effectively decreased
-
-Idea: stabilizers have a long cooldown like potion sickness from Terraria
 
 Chakram Rang
 Press throw button to spawn a chakram a few meters left/right of Cotu. The chakram immediately travels in a wide semicircle arc around Cotu and then disappears, functioning as a pseudo-melee attack
