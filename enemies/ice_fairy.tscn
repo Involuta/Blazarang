@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://enemies/ice_fairy.gd" id="1_6kq3x"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="2_rl78v"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="3_66w1x"]
-[ext_resource type="Script" path="res://enemies/multi_hurtbox_child.gd" id="3_ep0uc"]
 [ext_resource type="PackedScene" uid="uid://dotk8qi7oo127" path="res://enemies/clarity_dress_shard_hit_particles.tscn" id="4_obml0"]
 [ext_resource type="ArrayMesh" uid="uid://d1vjlc1x8tyik" path="res://glb_meshes/long_hexagon_particle_mesh.res" id="8_rq4qr"]
 [ext_resource type="PackedScene" uid="uid://cgmb0hmwl11fs" path="res://glb_inherited_scenes/ice_ephyra_meshes.tscn" id="9_mtvsl"]
@@ -104,9 +103,22 @@ tracks/3/keys = {
 "values": [true]
 }
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1a2px"]
+height = 0.6
+radius = 3.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j8tjj"]
+radius = 2.4
+height = 5.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bo3ss"]
+radius = 1.5
+height = 3.0
+
 [sub_resource type="Animation" id="Animation_2tacr"]
 resource_name = "shoot"
 length = 4.8
+step = 0.0166667
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -613,6 +625,30 @@ tracks/40/keys = {
 "update": 0,
 "values": [Vector3(3.48786e-16, -3.14159, 3.48786e-16)]
 }
+tracks/41/type = "value"
+tracks/41/imported = false
+tracks/41/enabled = true
+tracks/41/path = NodePath("EnemyHurtbox/CenterCylinderCollider:shape")
+tracks/41/interp = 1
+tracks/41/loop_wrap = true
+tracks/41/keys = {
+"times": PackedFloat32Array(0, 0.866667, 1.26667, 4, 4.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [SubResource("CylinderShape3D_1a2px"), SubResource("CapsuleShape3D_j8tjj"), SubResource("CapsuleShape3D_bo3ss"), SubResource("CapsuleShape3D_j8tjj"), SubResource("CylinderShape3D_1a2px")]
+}
+tracks/42/type = "value"
+tracks/42/imported = false
+tracks/42/enabled = true
+tracks/42/path = NodePath("EnemyHurtbox/CenterCylinderCollider:position")
+tracks/42/interp = 1
+tracks/42/loop_wrap = true
+tracks/42/keys = {
+"times": PackedFloat32Array(0, 1.26667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(2.08165e-12, 2.08165e-12, -1.65)]
+}
 
 [sub_resource type="Animation" id="Animation_1l0yb"]
 length = 0.001
@@ -645,14 +681,6 @@ roughness = 0.12
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 0.0
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pmbwf"]
-radius = 0.6
-height = 3.0
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_1a2px"]
-height = 0.6
-radius = 1.06
 
 [sub_resource type="Gradient" id="Gradient_5owmt"]
 offsets = PackedFloat32Array(0.182081, 0.361272)
@@ -1099,183 +1127,8 @@ libraries = {
 "": SubResource("AnimationLibrary_7uy7i")
 }
 
-[node name="IceFairyEphyraMeshes" parent="." instance=ExtResource("9_mtvsl")]
-transform = Transform3D(-0.6, 2.09272e-16, -9.05975e-08, 2.09272e-16, 0.6, -2.09272e-16, 9.05975e-08, -2.09272e-16, -0.6, 0, 0, 0)
-
-[node name="Skeleton3D" parent="IceFairyEphyraMeshes/Armature" index="0"]
-bones/1/position = Vector3(-1.17275, 5.21285e-13, -0.935234)
-bones/1/rotation = Quaternion(-0.637081, 0.306802, 0.306802, 0.637081)
-bones/2/rotation = Quaternion(2.55085e-07, -9.81414e-08, 2.16067e-07, 1)
-bones/3/rotation = Quaternion(-1.71763e-10, 4.68216e-09, -1.49012e-08, 1)
-bones/4/position = Vector3(-1.0468e-06, -2.41102e-09, -1.5)
-bones/4/rotation = Quaternion(-0.707107, 8.92197e-08, 4.52377e-07, 0.707107)
-bones/5/rotation = Quaternion(2.15427e-07, -2.11993e-08, 1.05871e-08, 1)
-bones/6/rotation = Quaternion(-2.03829e-09, -4.50678e-08, -4.50678e-08, 1)
-bones/7/position = Vector3(1.17275, -2.17864e-12, -0.935236)
-bones/7/rotation = Quaternion(-0.637081, -0.306802, -0.306803, 0.637081)
-bones/8/rotation = Quaternion(2.40183e-07, -4.61593e-08, 4.99189e-07, 1)
-bones/9/rotation = Quaternion(-1.71665e-10, -1.04741e-07, -8.9407e-08, 1)
-bones/10/position = Vector3(1.46239, -2.38418e-07, 0.33378)
-bones/10/rotation = Quaternion(0.440874, 0.552838, 0.552838, -0.440874)
-bones/11/rotation = Quaternion(1.86644e-07, 3.18938e-08, 2.45869e-07, 1)
-bones/12/rotation = Quaternion(2.76221e-10, -2.51072e-08, -1.49012e-08, 1)
-bones/13/position = Vector3(0.650827, -3.57627e-07, 1.35145)
-bones/13/rotation = Quaternion(0.157346, 0.689378, 0.689378, -0.157346)
-bones/14/rotation = Quaternion(2.26679e-07, -9.28908e-08, 1.93715e-07, 1)
-bones/15/rotation = Quaternion(-2.09017e-10, -1.14364e-07, -2.98024e-08, 1)
-bones/16/position = Vector3(-0.650825, -3.57627e-07, 1.35145)
-bones/16/rotation = Quaternion(-0.157346, 0.689378, 0.689378, 0.157346)
-bones/17/rotation = Quaternion(2.26679e-07, 5.22344e-08, 9.68575e-08, 1)
-bones/18/rotation = Quaternion(-2.09067e-10, -7.33454e-08, -7.45058e-08, 1)
-bones/19/position = Vector3(-1.46239, -2.38418e-07, 0.333782)
-bones/19/rotation = Quaternion(-0.440874, 0.552838, 0.552839, 0.440874)
-bones/20/rotation = Quaternion(1.79194e-07, -3.5842e-08, 2.01166e-07, 1)
-bones/21/rotation = Quaternion(2.76194e-10, -1.45276e-08, -2.23517e-08, 1)
-
-[node name="Ephyra" parent="IceFairyEphyraMeshes/Armature/Skeleton3D" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_hh645")
-
-[node name="Arm0" type="BoneAttachment3D" parent="IceFairyEphyraMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.623489, 0.781832, 8.04662e-07, -0.781832, 0.623489, -4.76838e-07, -8.64267e-07, -3.57628e-07, 1, 1.17275, 0.935236, -0.1)
-bone_name = "Bone.004"
-bone_idx = 7
-
-[node name="MultiHurtboxChild0" type="Area3D" parent="IceFairyEphyraMeshes/Armature/Skeleton3D/Arm0" node_paths=PackedStringArray("hurtbox_owner")]
-collision_layer = 8
-collision_mask = 257
-script = ExtResource("3_ep0uc")
-enemy_name = "IceFairy"
-hit_particles = ExtResource("4_obml0")
-hit_particle_color = Color(0.592157, 0.788235, 1, 1)
-opponent_hitboxes = ["Player"]
-hurtbox_owner = NodePath("../../MasterHurtbox")
-
-[node name="ArmHurtbox0" type="CollisionShape3D" parent="IceFairyEphyraMeshes/Armature/Skeleton3D/Arm0/MultiHurtboxChild0"]
-transform = Transform3D(-1, -1.73357e-06, 1.10467e-06, -1.73357e-06, 1, 3.57628e-07, -1.10467e-06, 3.57626e-07, -1, 0.0274713, 2.01371, 0.100001)
-shape = SubResource("CapsuleShape3D_pmbwf")
-
-[node name="Arm1" type="BoneAttachment3D" parent="IceFairyEphyraMeshes/Armature/Skeleton3D" index="2"]
-transform = Transform3D(-0.222521, 0.974928, 3.57628e-07, -0.974928, -0.222521, 4.76837e-07, 4.76837e-07, -3.57628e-07, 1, 1.46239, -0.333781, -0.1)
-bone_name = "Bone.005"
-bone_idx = 10
-
-[node name="MultiHurtboxChild1" type="Area3D" parent="IceFairyEphyraMeshes/Armature/Skeleton3D/Arm1" node_paths=PackedStringArray("hurtbox_owner")]
-transform = Transform3D(0.62349, -0.781831, 8.30289e-07, 0.781831, 0.62349, 6.48039e-07, -8.81966e-07, 2.38156e-07, 1, -1.17275, -0.564767, 5.96046e-07)
-collision_layer = 8
-collision_mask = 257
-script = ExtResource("3_ep0uc")
-enemy_name = "IceFairy"
-hit_particles = ExtResource("4_obml0")
-hit_particle_color = Color(0.592157, 0.788235, 1, 1)
-opponent_hitboxes = ["Player"]
-hurtbox_owner = NodePath("../../MasterHurtbox")
-
-[node name="ArmHurtbox1" type="CollisionShape3D" parent="IceFairyEphyraMeshes/Armature/Skeleton3D/Arm1/MultiHurtboxChild1"]
-transform = Transform3D(0.611927, 0.790914, 1.96816e-10, -0.790914, 0.611927, -2.96596e-10, -3.55019e-10, 2.58305e-11, 1, 2.7496, 0.65495, -0.000282027)
-shape = SubResource("CapsuleShape3D_pmbwf")
-
-[node name="Arm2" type="BoneAttachment3D" parent="IceFairyEphyraMeshes/Armature/Skeleton3D" index="3"]
-transform = Transform3D(-0.900969, 0.433883, 4.91738e-07, -0.433884, -0.900969, -4.17233e-07, 2.23517e-07, -7.15256e-07, 1, 0.650826, -1.35145, -0.1)
-bone_name = "Bone.006"
-bone_idx = 13
-
-[node name="MultiHurtboxChild2" type="Area3D" parent="IceFairyEphyraMeshes/Armature/Skeleton3D/Arm2" node_paths=PackedStringArray("hurtbox_owner")]
-transform = Transform3D(-0.22252, -0.974928, -2.56074e-07, 0.974929, -0.22252, 1.89475e-07, -1.17207e-07, -2.98873e-07, 1, -1.46239, -1.83378, -6.33299e-07)
-collision_layer = 8
-collision_mask = 257
-script = ExtResource("3_ep0uc")
-enemy_name = "IceFairy"
-hit_particles = ExtResource("4_obml0")
-hit_particle_color = Color(0.592157, 0.788235, 1, 1)
-opponent_hitboxes = ["Player"]
-hurtbox_owner = NodePath("../../MasterHurtbox")
-
-[node name="ArmHurtbox2" type="CollisionShape3D" parent="IceFairyEphyraMeshes/Armature/Skeleton3D/Arm2/MultiHurtboxChild2"]
-transform = Transform3D(-0.222076, 0.975029, 3.35501e-10, -0.975029, -0.222076, -1.59773e-10, -8.12771e-11, -3.62605e-10, 1, 3.45439, -2.31256, 3.66569e-05)
-shape = SubResource("CapsuleShape3D_pmbwf")
-
-[node name="Arm3" type="BoneAttachment3D" parent="IceFairyEphyraMeshes/Armature/Skeleton3D" index="4"]
-transform = Transform3D(-0.900968, -0.433884, -5.08038e-13, 0.433884, -0.900968, -7.7486e-07, 3.27825e-07, -7.15255e-07, 1, -0.650826, -1.35145, -0.1)
-bone_name = "Bone.007"
-bone_idx = 16
-
-[node name="MultiHurtboxChild3" type="Area3D" parent="IceFairyEphyraMeshes/Armature/Skeleton3D/Arm3" node_paths=PackedStringArray("hurtbox_owner")]
-transform = Transform3D(-0.900969, -0.433885, -5.95669e-07, 0.433885, -0.900969, -6.1764e-07, -2.58569e-07, -8.59813e-07, 1, -0.650824, -2.85146, -1.47521e-06)
-collision_layer = 8
-collision_mask = 257
-script = ExtResource("3_ep0uc")
-enemy_name = "IceFairy"
-hit_particles = ExtResource("4_obml0")
-hit_particle_color = Color(0.592157, 0.788235, 1, 1)
-opponent_hitboxes = ["Player"]
-hurtbox_owner = NodePath("../../MasterHurtbox")
-
-[node name="ArmHurtbox3" type="CollisionShape3D" parent="IceFairyEphyraMeshes/Armature/Skeleton3D/Arm3/MultiHurtboxChild3"]
-transform = Transform3D(0.890911, 0.454179, 1.10467e-06, 0.454179, -0.890911, 3.40095e-07, 1.13863e-06, 1.98723e-07, -1, 1.5055, -4.66115, 0.0999998)
-shape = SubResource("CapsuleShape3D_pmbwf")
-
-[node name="Arm4" type="BoneAttachment3D" parent="IceFairyEphyraMeshes/Armature/Skeleton3D" index="5"]
-transform = Transform3D(-0.222521, -0.974928, -1.78814e-07, 0.974928, -0.222521, -8.34465e-07, 7.7486e-07, -3.57628e-07, 1, -1.46239, -0.333781, -0.1)
-bone_name = "Bone.008"
-bone_idx = 19
-
-[node name="MultiHurtboxChild4" type="Area3D" parent="IceFairyEphyraMeshes/Armature/Skeleton3D/Arm4" node_paths=PackedStringArray("hurtbox_owner")]
-transform = Transform3D(-0.90097, 0.433883, 1.29817e-07, -0.433883, -0.90097, -1.0384e-06, -3.21311e-07, -1.01604e-06, 1, 0.650828, -2.85145, -1.2964e-06)
-collision_layer = 8
-collision_mask = 257
-script = ExtResource("3_ep0uc")
-enemy_name = "IceFairy"
-hit_particles = ExtResource("4_obml0")
-hit_particle_color = Color(0.592157, 0.788235, 1, 1)
-opponent_hitboxes = ["Player"]
-hurtbox_owner = NodePath("../../MasterHurtbox")
-
-[node name="ArmHurtbox4" type="CollisionShape3D" parent="IceFairyEphyraMeshes/Armature/Skeleton3D/Arm4/MultiHurtboxChild4"]
-transform = Transform3D(0.884557, -0.466428, 0.00174679, -0.466432, -0.88455, 0.00357636, -0.000122987, -0.00397825, -0.999992, -1.55735, -4.60705, 0.0999967)
-shape = SubResource("CapsuleShape3D_pmbwf")
-
-[node name="Arm5" type="BoneAttachment3D" parent="IceFairyEphyraMeshes/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.62349, -0.781832, -3.19561e-07, 0.781831, 0.62349, -7.09964e-07, 7.92329e-07, 1.52541e-07, 1, -2.13211, 1.7003, -0.1)
-bone_name = "Bone.009"
-bone_idx = 2
-
-[node name="MultiHurtboxChild5" type="Area3D" parent="IceFairyEphyraMeshes/Armature/Skeleton3D/Arm5" node_paths=PackedStringArray("hurtbox_owner")]
-transform = Transform3D(0.883364, 0.468689, 8.83207e-07, -0.468689, 0.883364, -7.33602e-07, -1.14459e-06, 1.62246e-07, 1, 0.658387, -0.28293, -4.17233e-07)
-collision_layer = 8
-collision_mask = 257
-script = ExtResource("3_ep0uc")
-enemy_name = "IceFairy"
-hit_particles = ExtResource("4_obml0")
-hit_particle_color = Color(0.592157, 0.788235, 1, 1)
-opponent_hitboxes = ["Player"]
-hurtbox_owner = NodePath("../../MasterHurtbox")
-
-[node name="ArmHurtbox5" type="CollisionShape3D" parent="IceFairyEphyraMeshes/Armature/Skeleton3D/Arm5/MultiHurtboxChild5"]
-transform = Transform3D(0.885142, -0.465321, -3.73125e-13, 0.465321, 0.885142, 4.18984e-13, 1.35306e-13, -5.44483e-13, 1, -1.03301, 0.628783, 0.00961673)
-shape = SubResource("CapsuleShape3D_pmbwf")
-
-[node name="Arm6" type="BoneAttachment3D" parent="IceFairyEphyraMeshes/Armature/Skeleton3D" index="7"]
-transform = Transform3D(1, -1.31457e-07, -5.55981e-07, 1.31457e-07, 1, -7.32254e-08, 5.55981e-07, 7.32258e-08, 1, -2.09148e-07, 2.72707, -0.1)
-bone_name = "Bone.010"
-bone_idx = 5
-
-[node name="MultiHurtboxChild6" type="Area3D" parent="IceFairyEphyraMeshes/Armature/Skeleton3D/Arm6" node_paths=PackedStringArray("hurtbox_owner")]
-transform = Transform3D(0.659585, 0.0871292, 0.746563, -0.248159, 0.962805, 0.106881, -0.709483, -0.255764, 0.656673, -1.05403, -0.339476, 0.181996)
-collision_layer = 8
-collision_mask = 257
-script = ExtResource("3_ep0uc")
-enemy_name = "IceFairy"
-hit_particles = ExtResource("4_obml0")
-hit_particle_color = Color(0.592157, 0.788235, 1, 1)
-opponent_hitboxes = ["Player"]
-hurtbox_owner = NodePath("../../MasterHurtbox")
-
-[node name="ArmHurtbox6" type="CollisionShape3D" parent="IceFairyEphyraMeshes/Armature/Skeleton3D/Arm6/MultiHurtboxChild6"]
-transform = Transform3D(-0.657684, -0.253154, 0.709482, -0.0944276, 0.962117, 0.255764, -0.747352, 0.101217, -0.656674, 0.455587, 1.22835, 0.845781)
-shape = SubResource("CapsuleShape3D_pmbwf")
-
-[node name="MasterHurtbox" type="Area3D" parent="IceFairyEphyraMeshes/Armature/Skeleton3D" index="8" node_paths=PackedStringArray("hurtbox_owner")]
-transform = Transform3D(-1.03915, 1.30305, 1.56907e-07, 1.30305, 1.03915, -1.96755e-07, -2.5166e-07, 1.06082e-15, -1.66667, 0, 0, 0)
+[node name="EnemyHurtbox" type="Area3D" parent="." node_paths=PackedStringArray("hurtbox_owner")]
+transform = Transform3D(1, -4.04304e-08, 8.53088e-16, 2.9247e-08, 1, 3.8989e-15, 8.8422e-15, 7.96685e-15, 1, 0, 0, 0)
 collision_layer = 8
 collision_mask = 257
 script = ExtResource("3_66w1x")
@@ -1283,11 +1136,47 @@ enemy_name = "IceFairy"
 hit_particles = ExtResource("4_obml0")
 hit_particle_color = Color(0.592157, 0.788235, 1, 1)
 opponent_hitboxes = ["PlayerHitbox"]
-hurtbox_owner = NodePath("../../../..")
+hurtbox_owner = NodePath("..")
 
-[node name="CenterCylinderCollider" type="CollisionShape3D" parent="IceFairyEphyraMeshes/Armature/Skeleton3D/MasterHurtbox"]
-transform = Transform3D(1, 0, -1.5246e-23, -1.5246e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+[node name="CenterCylinderCollider" type="CollisionShape3D" parent="EnemyHurtbox"]
+transform = Transform3D(1, -2.68881e-22, -1.01877e-15, -5.42837e-15, -4.37114e-08, -1, -2.33406e-21, 1, -4.37114e-08, 2.08165e-12, 2.08165e-12, -1.65)
 shape = SubResource("CylinderShape3D_1a2px")
+
+[node name="IceFairyEphyraMeshes" parent="." instance=ExtResource("9_mtvsl")]
+transform = Transform3D(-0.6, 2.09272e-16, -9.05975e-08, 2.09272e-16, 0.6, -2.09272e-16, 9.05975e-08, -2.09272e-16, -0.6, 0, 0, 0)
+
+[node name="Skeleton3D" parent="IceFairyEphyraMeshes/Armature" index="0"]
+bones/1/position = Vector3(-1.17241, 0.000728129, -0.934965)
+bones/1/rotation = Quaternion(-0.636924, 0.306877, 0.306727, 0.637238)
+bones/2/rotation = Quaternion(0.000461804, -1.10242e-07, 2.19928e-07, 1)
+bones/3/rotation = Quaternion(0.000399378, 6.72936e-09, -2.31191e-08, 1)
+bones/4/position = Vector3(-1.04183e-06, 0.000728191, -1.49957)
+bones/4/rotation = Quaternion(-0.706933, 6.20733e-08, 4.37331e-07, 0.707281)
+bones/5/rotation = Quaternion(0.000461764, -2.5227e-08, -1.44324e-08, 1)
+bones/6/rotation = Quaternion(0.000399376, -3.70545e-08, -5.06754e-08, 1)
+bones/7/position = Vector3(1.17241, 0.000728161, -0.934968)
+bones/7/rotation = Quaternion(-0.636924, -0.306877, -0.306727, 0.637238)
+bones/8/rotation = Quaternion(0.000461789, -3.76384e-08, 4.95392e-07, 1)
+bones/9/rotation = Quaternion(0.000399378, -9.49024e-08, -8.92327e-08, 1)
+bones/10/position = Vector3(1.46197, 0.000727859, 0.333684)
+bones/10/rotation = Quaternion(0.440766, 0.552974, 0.552702, -0.440982)
+bones/11/rotation = Quaternion(0.000461735, 3.68776e-08, 2.49771e-07, 1)
+bones/12/rotation = Quaternion(0.000399378, -2.72015e-08, -1.09598e-08, 1)
+bones/13/position = Vector3(0.65064, 0.000727804, 1.35106)
+bones/13/rotation = Quaternion(0.157308, 0.689548, 0.689209, -0.157385)
+bones/14/rotation = Quaternion(0.000461775, -8.61511e-08, 1.77642e-07, 1)
+bones/15/rotation = Quaternion(0.000399378, -1.18453e-07, -4.59024e-08, 1)
+bones/16/position = Vector3(-0.650638, 0.000727803, 1.35107)
+bones/16/rotation = Quaternion(-0.157307, 0.689548, 0.689209, 0.157385)
+bones/17/rotation = Quaternion(0.000461775, 6.60577e-08, 1.00761e-07, 1)
+bones/18/rotation = Quaternion(0.000399378, -5.79144e-08, -7.05679e-08, 1)
+bones/19/position = Vector3(-1.46197, 0.000727923, 0.333686)
+bones/19/rotation = Quaternion(-0.440765, 0.552974, 0.552703, 0.440982)
+bones/20/rotation = Quaternion(0.000461728, -3.41661e-08, 1.94958e-07, 1)
+bones/21/rotation = Quaternion(0.000399378, -9.29077e-09, -4.05876e-08, 1)
+
+[node name="Ephyra" parent="IceFairyEphyraMeshes/Armature/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_hh645")
 
 [node name="FairyDeathParticles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 0, 0, 0)
@@ -1301,7 +1190,7 @@ process_material = SubResource("ParticleProcessMaterial_m76nu")
 draw_pass_1 = ExtResource("8_rq4qr")
 
 [node name="IceFairyVFX" type="Node3D" parent="."]
-transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 0, 0, 0)
+transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 
 [node name="PitchPivot" type="Node3D" parent="IceFairyVFX"]
 transform = Transform3D(1, 0, -1.26261e-21, -1.26261e-21, -3.61999e-06, -1, 0, 1, -3.61999e-06, 0, 0, 0)
@@ -1312,7 +1201,7 @@ transform = Transform3D(1, 0, -1.26261e-21, -1.26261e-21, -3.61999e-06, -1, 0, 1
 transform = Transform3D(1, 1.58819e-22, 5.23784e-30, -1.58819e-22, 0.999999, -2.84194e-15, -5.23785e-30, 2.84194e-15, 0.999999, 2.08165e-12, -0.675, 0.5)
 
 [node name="RingMeshContainer" type="Node3D" parent="IceFairyVFX/PitchPivot/YawPivot/Spike0"]
-transform = Transform3D(1.5, -3.75582e-23, -1.93776e-23, 3.75582e-23, 1.5, 4.89595e-09, 1.93776e-23, -4.89595e-09, 1.5, 2.08165e-12, 0.6, 2.08165e-12)
+transform = Transform3D(1.5, -3.75582e-23, -1.93776e-23, 3.75582e-23, 1.5, 4.89595e-09, 1.93776e-23, -4.89595e-09, 1.5, 2.08165e-12, 0.55, 0)
 
 [node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVFX/PitchPivot/YawPivot/Spike0/RingMeshContainer"]
 transform = Transform3D(1, 1.62918e-22, 1.29184e-23, -1.81775e-22, 1, -3.26398e-09, -1.29184e-23, 3.26398e-09, 1, -2.60209e-18, 0, 0)
@@ -1336,7 +1225,7 @@ mesh = SubResource("TorusMesh_bqg5x")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.675, -0.5)
 
 [node name="RingMeshContainer" type="Node3D" parent="IceFairyVFX/PitchPivot/YawPivot/Spike1"]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 2.08165e-12, 0.6, 2.08165e-12)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 2.08165e-12, 0.55, 2.08165e-12)
 
 [node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVFX/PitchPivot/YawPivot/Spike1/RingMeshContainer"]
 transform = Transform3D(-1, 3.48787e-16, -8.74228e-08, 3.48787e-16, 1, -3.48787e-16, 8.74228e-08, -3.48787e-16, -1, -2.60209e-18, 0, 0)
@@ -1360,7 +1249,7 @@ mesh = SubResource("TorusMesh_bqg5x")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.675, 2.08165e-12)
 
 [node name="RingMeshContainer" type="Node3D" parent="IceFairyVFX/PitchPivot/YawPivot/Spike2"]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 2.08165e-12, 0.6, 2.08165e-12)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 2.08165e-12, 0.55, 2.08165e-12)
 
 [node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVFX/PitchPivot/YawPivot/Spike2/RingMeshContainer"]
 transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, -2.60209e-18, 0, 0)
@@ -1384,7 +1273,7 @@ mesh = SubResource("TorusMesh_bqg5x")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.675, 2.08165e-12)
 
 [node name="RingMeshContainer" type="Node3D" parent="IceFairyVFX/PitchPivot/YawPivot/Spike3"]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 2.08165e-12, 0.6, 2.08165e-12)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 2.08165e-12, 0.55, 2.08165e-12)
 
 [node name="RingMesh" type="CSGCombiner3D" parent="IceFairyVFX/PitchPivot/YawPivot/Spike3/RingMeshContainer"]
 transform = Transform3D(-4.37114e-08, -3.48787e-16, -1, 3.48787e-16, 1, -3.48787e-16, 1, -3.48787e-16, -4.37114e-08, -2.60209e-18, 0, 0)
@@ -1424,7 +1313,8 @@ process_material = SubResource("ParticleProcessMaterial_u46px")
 draw_pass_1 = SubResource("QuadMesh_86pyp")
 
 [node name="ShotMesh" type="MeshInstance3D" parent="IceFairyVFX/PitchPivot/YawPivot"]
-transform = Transform3D(2.08165e-12, 0, -1.65073e-42, 0, 2.08165e-12, 8.20635e-29, 1.65073e-42, -8.20635e-29, 2.08165e-12, 2.08165e-12, -3.6, 2.08165e-12)
+transform = Transform3D(0.6, 0, -4.75795e-31, 0, 0.6, 2.36534e-17, 4.75795e-31, -2.36534e-17, 0.6, 2.08165e-12, -3.6, 2.08165e-12)
+visible = false
 mesh = SubResource("ArrayMesh_1f47m")
 
 [editable path="IceFairyEphyraMeshes"]

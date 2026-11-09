@@ -55,7 +55,7 @@ var aiming_at_target := false
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 @onready var anim_player := $AnimationPlayer
-@onready var hurtbox := $IceFairyEphyraMeshes/Armature/Skeleton3D/MasterHurtbox
+@onready var hurtbox := $EnemyHurtbox
 @onready var root := get_tree().root
 
 var level : Node3D
