@@ -55,8 +55,7 @@ var aiming_at_target := false
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 @onready var anim_player := $AnimationPlayer
-@onready var hurtbox := $EnemyHurtbox
-@onready var fairy_glow := $FairyGlowMesh
+@onready var hurtbox := $IceFairyEphyraMeshes/Armature/Skeleton3D/MasterHurtbox
 @onready var root := get_tree().root
 
 var level : Node3D
@@ -150,10 +149,7 @@ func process_fairy_movement(delta: float):
 		var to_desired = desired_orbit_pos - global_position
 		velocity = to_desired * fairy_drift_speed
 	
-	if aiming_at_target:
-		lerp_look_at_target(aim_turn_speed, true)
-	else:
-		lerp_look_at_target(aim_turn_speed)
+	lerp_look_at_target(aim_turn_speed)
 
 func lerp_look_at_walk_dir(turn_speed):
 	if velocity.length_squared() > 0.01:
@@ -161,7 +157,7 @@ func lerp_look_at_walk_dir(turn_speed):
 		global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(velocity.x, velocity.z), turn_speed)
 		global_rotation.z = lerp_angle(global_rotation.z, 0, turn_speed)
 
-func lerp_look_at_target(turn_speed, reverse := false):
+func lerp_look_at_target(turn_speed):
 	var target_transform = global_transform.looking_at(target.global_position, Vector3.UP)
 	global_transform = global_transform.interpolate_with(target_transform, turn_speed)
 
@@ -174,19 +170,6 @@ func death_effect():
 # This func is here so that when EnemyHurtbox calls its die func, set_active is called instead of queue freeing this Ice Sprite node
 func set_active(_state: bool):
 	return
-
-func ready_fairy_start():
-	# Move fairy glow local pos down to be with the rest of the node,
-	# Then move the node up to the height the glow was at
-	var y = fairy_glow.position.y
-	fairy_glow.position = Vector3.ZERO
-	global_position.y += y
-	# Fairy dies in 1 hit during ready_fairy anim
-	hurtbox.health = 1
-
-func ready_fairy_end():
-	hurtbox.health = hurtbox.max_health
-	anim_player.play("fairy_idle")
 
 func set_aiming_at_target(state: bool):
 	aiming_at_target = state

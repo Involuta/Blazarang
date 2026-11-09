@@ -909,7 +909,6 @@ func snowflake_brighten(brightness: float, duration: float):
 
 func snowflake_glow_flash():
 	var t = get_tree().create_tween()
-	var snowflake_light = snowflake.find_child("HeadLight")
 	t.tween_property(snowflake_light, "light_energy", 0, .6).from(12.0)
 
 func link_dress_shard_to_snowflake_hit(s: String):
