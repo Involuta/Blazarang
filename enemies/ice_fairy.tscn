@@ -622,25 +622,13 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(0.560784, 0.803922, 1, 0.705882)]
 }
-tracks/1/type = "value"
+tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("IceFairyEphyraMeshes/Armature/Skeleton3D/Ephyra:surface_material_override/1:albedo_color")
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(0.54, 0.82, 1.5, 1)]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -648,37 +636,37 @@ tracks/2/keys = {
 "method": &"play_fairy_idle"
 }]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("IceFairyVFX:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("IceFairyVFX:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("IceFairyVFX:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("IceFairyVFX:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
 }
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("IceFairyEphyraMeshes:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("IceFairyEphyraMeshes:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -1163,6 +1151,36 @@ shape = SubResource("CylinderShape3D_1a2px")
 
 [node name="IceFairyEphyraMeshes" parent="." instance=ExtResource("9_mtvsl")]
 transform = Transform3D(-0.6, 2.09271e-16, -1.52111e-06, 2.09272e-16, 0.6, -2.09272e-16, 1.52111e-06, -2.09272e-16, -0.6, 0, 0, 0)
+
+[node name="Skeleton3D" parent="IceFairyEphyraMeshes/Armature" index="0"]
+bones/1/position = Vector3(-1.17275, 5.21285e-13, -0.935234)
+bones/1/rotation = Quaternion(-0.637081, 0.306802, 0.306802, 0.637081)
+bones/2/rotation = Quaternion(2.55085e-07, -9.81414e-08, 2.16067e-07, 1)
+bones/3/rotation = Quaternion(-1.71763e-10, 4.68216e-09, -1.49012e-08, 1)
+bones/4/position = Vector3(-1.0468e-06, -2.41102e-09, -1.5)
+bones/4/rotation = Quaternion(-0.707107, 8.92197e-08, 4.52377e-07, 0.707107)
+bones/5/rotation = Quaternion(2.15427e-07, -2.11993e-08, 1.05871e-08, 1)
+bones/6/rotation = Quaternion(-2.03829e-09, -4.50678e-08, -4.50678e-08, 1)
+bones/7/position = Vector3(1.17275, -2.17864e-12, -0.935236)
+bones/7/rotation = Quaternion(-0.637081, -0.306802, -0.306803, 0.637081)
+bones/8/rotation = Quaternion(2.40183e-07, -4.61593e-08, 4.99189e-07, 1)
+bones/9/rotation = Quaternion(-1.71665e-10, -1.04741e-07, -8.9407e-08, 1)
+bones/10/position = Vector3(1.46239, -2.38418e-07, 0.33378)
+bones/10/rotation = Quaternion(0.440874, 0.552838, 0.552838, -0.440874)
+bones/11/rotation = Quaternion(1.86644e-07, 3.18938e-08, 2.45869e-07, 1)
+bones/12/rotation = Quaternion(2.76221e-10, -2.51072e-08, -1.49012e-08, 1)
+bones/13/position = Vector3(0.650827, -3.57627e-07, 1.35145)
+bones/13/rotation = Quaternion(0.157346, 0.689378, 0.689378, -0.157346)
+bones/14/rotation = Quaternion(2.26679e-07, -9.28908e-08, 1.93715e-07, 1)
+bones/15/rotation = Quaternion(-2.09017e-10, -1.14364e-07, -2.98024e-08, 1)
+bones/16/position = Vector3(-0.650825, -3.57627e-07, 1.35145)
+bones/16/rotation = Quaternion(-0.157346, 0.689378, 0.689378, 0.157346)
+bones/17/rotation = Quaternion(2.26679e-07, 5.22344e-08, 9.68575e-08, 1)
+bones/18/rotation = Quaternion(-2.09067e-10, -7.33454e-08, -7.45058e-08, 1)
+bones/19/position = Vector3(-1.46239, -2.38418e-07, 0.333782)
+bones/19/rotation = Quaternion(-0.440874, 0.552838, 0.552839, 0.440874)
+bones/20/rotation = Quaternion(1.79194e-07, -3.5842e-08, 2.01166e-07, 1)
+bones/21/rotation = Quaternion(2.76194e-10, -1.45276e-08, -2.23517e-08, 1)
 
 [node name="Ephyra" parent="IceFairyEphyraMeshes/Armature/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_hh645")
