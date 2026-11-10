@@ -11,6 +11,8 @@ var behav_state = FOLLOW
 var ice_shot := preload("res://enemies/ice_fairy_shot.tscn")
 
 @export_group("Fairy Mvmt Parameters")
+@export var rotate_speed := .08
+
 @export var aim_turn_speed := .15
 @export var min_orbit_speed := .2
 @export var max_orbit_speed := .4
@@ -56,6 +58,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 @onready var anim_player := $AnimationPlayer
 @onready var hurtbox := $EnemyHurtbox
+@onready var meshes := $IceFairyEphyraMeshes
 @onready var root := get_tree().root
 
 var level : Node3D
@@ -80,6 +83,7 @@ func _physics_process(delta):
 	process_fairy_speed_timer(delta)
 	process_fairy_movement(delta)
 	process_shooting_timer(delta)
+	rotate_visuals(delta)
 	move_and_slide()
 	if global_position.y < -100:
 		queue_free()
@@ -150,6 +154,9 @@ func process_fairy_movement(delta: float):
 		velocity = to_desired * fairy_drift_speed
 	
 	lerp_look_at_target(aim_turn_speed)
+
+func rotate_visuals(delta: float):
+	meshes.rotate_z(current_orbit_direction * velocity.length() * delta * rotate_speed)
 
 func lerp_look_at_walk_dir(turn_speed):
 	if velocity.length_squared() > 0.01:
