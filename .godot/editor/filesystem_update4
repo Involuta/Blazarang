@@ -38,3 +38,4 @@ res://cotu/cotu_cb_main.tscn
 res://enemies/ice_sprite_spawner.tscn
 res://enemies/ice_fairy_shot.tscn
 res://enemies/ice_fairy.gd
+res://glb_inherited_scenes/ice_ephyra_meshes.tscn
