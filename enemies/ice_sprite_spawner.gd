@@ -8,6 +8,8 @@ var max_height_reached := false
 @export var min_brightness := 6.0
 @export var appear_dim_time := 12.0
 @export var max_height := 60.0
+var ring0_active := false
+var ring1_active := false
 @export var exploded_height := 30.0
 @export var min_scale := 3.0
 @export var max_scale := 6.0
@@ -96,14 +98,21 @@ func _ready():
 
 func _physics_process(delta):
 	# Rotate polyp
-	polyp.rotate_y(delta / 2)
+	polyp.rotate_y(delta / 2.0)
 	
 	# Rise mvmt
 	if visuals.position.y < max_height:
 		visuals.position.y += rise_speed * delta
-		if visuals.position.y >= max_height:
+		if !ring0_active and visuals.position.y >= max_height / 3.0:
+			ring0_active = true
+			anim_player.play("ring0_appear")
+		if !ring1_active and visuals.position.y >= max_height * 2.0 / 3.0:
+			ring1_active = true
+			anim_player.play("ring1_appear")
+		if !max_height_reached and visuals.position.y >= max_height:
 			spawner_max_height_reached.emit()
 			max_height_reached = true
+			anim_player.play("ring2_appear")
 		
 		# While rising, set scale of visuals scalable based on local height ascent (0 to max_height)
 		var clamped_y: float = clampf(visuals.position.y, 0.0, max_height)

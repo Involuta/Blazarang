@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bryh388y16f43"]
+[gd_scene load_steps=4 format=3 uid="uid://bryh388y16f43"]
 
 [ext_resource type="PackedScene" uid="uid://cpqf8m6s1678o" path="res://glb_imports/Polyp.glb" id="1_pq8ap"]
 
@@ -11,13 +11,25 @@ emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 0.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1s282"]
+resource_local_to_scene = true
+transparency = 4
+albedo_color = Color(0.78, 0.9, 1.1, 1)
+roughness = 0.12
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+
 [node name="Polyp" instance=ExtResource("1_pq8ap")]
 
 [node name="HexRing2" parent="." index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fvdw3")
+surface_material_override/1 = SubResource("StandardMaterial3D_1s282")
 
 [node name="HexRing1" parent="." index="1"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fvdw3")
+surface_material_override/1 = SubResource("StandardMaterial3D_1s282")
 
 [node name="HexRing0" parent="." index="2"]
 surface_material_override/0 = SubResource("StandardMaterial3D_fvdw3")
+surface_material_override/1 = SubResource("StandardMaterial3D_1s282")

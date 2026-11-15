@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bg48lfbn1h34h"]
+[gd_scene load_steps=34 format=3 uid="uid://bg48lfbn1h34h"]
 
 [ext_resource type="Script" path="res://enemies/ice_sprite_spawner.gd" id="1_p5m4w"]
 [ext_resource type="PackedScene" uid="uid://bryh388y16f43" path="res://glb_inherited_scenes/polyp.tscn" id="2_0wk6e"]
@@ -14,6 +14,15 @@
 resource_local_to_scene = true
 transparency = 4
 albedo_color = Color(0.560784, 0.803922, 1, 0.705882)
+roughness = 0.12
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_msxit"]
+resource_local_to_scene = true
+transparency = 4
+albedo_color = Color(0.78, 0.9, 1.1, 1)
 roughness = 0.12
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
@@ -164,6 +173,42 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visuals/Polyp/HexRing2:transparency")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Visuals/Polyp/HexRing1:transparency")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Visuals/Polyp/HexRing0:transparency")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
 
 [sub_resource type="Animation" id="Animation_dem2f"]
 resource_name = "explode"
@@ -218,14 +263,15 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_a1fo1"]
 resource_name = "ring0_appear"
+length = 0.20001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Visuals/Polyp/HexRing0:scale")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(1.3, 1.3, 1.3), Vector3(1, 1, 1)]
@@ -233,23 +279,11 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/Polyp/HexRing0:rotation")
-tracks/1/interp = 1
+tracks/1/path = NodePath("Visuals/Polyp/HexRing0:transparency")
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(3.48787e-16, 0.523599, 3.48787e-16), Vector3(0, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/Polyp/HexRing0:transparency")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [1.0, 0.0]
@@ -257,6 +291,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_vhi75"]
 resource_name = "ring1_appear"
+length = 0.20001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -264,7 +299,7 @@ tracks/0/path = NodePath("Visuals/Polyp/HexRing1:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(1.3, 1.3, 1.3), Vector3(1, 1, 1)]
@@ -272,47 +307,23 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/Polyp/HexRing1:rotation")
+tracks/1/path = NodePath("Visuals/Polyp/HexRing0:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(3.48787e-16, 0.523599, 3.48787e-16), Vector3(0, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/Polyp/HexRing0:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(1, 1, 1)]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Visuals/Polyp/HexRing0:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Visuals/Polyp/HexRing1:transparency")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 1),
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/Polyp/HexRing1:transparency")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [1.0, 0.0]
@@ -320,6 +331,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_l0v83"]
 resource_name = "ring2_appear"
+length = 0.20001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -327,7 +339,7 @@ tracks/0/path = NodePath("Visuals/Polyp/HexRing2:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(1.3, 1.3, 1.3), Vector3(1, 1, 1)]
@@ -335,94 +347,58 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/Polyp/HexRing2:rotation")
+tracks/1/path = NodePath("Visuals/Polyp/HexRing2:transparency")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(3.48787e-16, 0.523599, 3.48787e-16), Vector3(0, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/Polyp/HexRing2:transparency")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [1.0, 0.0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/Polyp/HexRing1:transparency")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Visuals/Polyp/HexRing1:rotation")
+tracks/3/path = NodePath("Visuals/Polyp/HexRing1:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(1, 1, 1)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Visuals/Polyp/HexRing1:transparency")
+tracks/4/path = NodePath("Visuals/Polyp/HexRing0:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [Vector3(1, 1, 1)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Visuals/Polyp/HexRing1:scale")
+tracks/5/path = NodePath("Visuals/Polyp/HexRing0:transparency")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1, 1, 1)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Visuals/Polyp/HexRing0:scale")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1, 1, 1)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Visuals/Polyp/HexRing0:rotation")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("Visuals/Polyp/HexRing0:transparency")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -440,9 +416,9 @@ _data = {
 
 [node name="IceSpriteSpawner" type="Node3D"]
 script = ExtResource("1_p5m4w")
-max_height = 12.0
+max_height = 24.0
 exploded_scale = 24.0
-rise_speed_boosted = 60.0
+rise_speed_boosted = 6.0
 hex_count = 7
 ice_enemy_spawn_interval = 9.0
 
@@ -452,13 +428,17 @@ ice_enemy_spawn_interval = 9.0
 transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
 
 [node name="HexRing2" parent="Visuals/Polyp" index="0"]
+transform = Transform3D(0.866025, -1.27665e-16, 0.5, 3.48787e-16, 1, -3.48787e-16, -0.5, 4.76452e-16, 0.866025, 0, 3.7, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_b24no")
+surface_material_override/1 = SubResource("StandardMaterial3D_msxit")
 
 [node name="HexRing1" parent="Visuals/Polyp" index="1"]
 surface_material_override/0 = SubResource("StandardMaterial3D_b24no")
+surface_material_override/1 = SubResource("StandardMaterial3D_msxit")
 
 [node name="HexRing0" parent="Visuals/Polyp" index="2"]
 surface_material_override/0 = SubResource("StandardMaterial3D_b24no")
+surface_material_override/1 = SubResource("StandardMaterial3D_msxit")
 
 [node name="Scalable" type="Node3D" parent="Visuals"]
 transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
