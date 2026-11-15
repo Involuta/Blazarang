@@ -40,6 +40,7 @@ var rise_speed_boost_decay_rate = (rise_speed_boosted - rise_speed_base) / boost
 
 @onready var root := get_tree().root
 @onready var visuals := $Visuals
+@onready var polyp := $Visuals/Polyp
 @onready var visuals_scalable := $Visuals/Scalable
 @onready var ico := $Visuals/Scalable/Icosahedron
 @onready var ico_mesh: MeshInstance3D = $Visuals/Scalable/Icosahedron/Cube
@@ -94,6 +95,9 @@ func _ready():
 		hex_timers.append(start_progress * cycle_time)
 
 func _physics_process(delta):
+	# Rotate polyp
+	polyp.rotate_y(delta / 2)
+	
 	# Rise mvmt
 	if visuals.position.y < max_height:
 		visuals.position.y += rise_speed * delta
