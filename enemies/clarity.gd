@@ -998,7 +998,7 @@ func spawn_ice_sprite_spawner():
 	await get_tree().create_timer(.1).timeout
 	# Clarity now faces the ice sprite spawner visuals
 	# so she fires the arm shard at the visuals on her next jump shot
-	target = inst.visuals
+	target = inst.rising_visuals
 	# Prevent another ice sprite spawner from being spawned in future jump shots
 	ice_sprite_spawner_spawned = true
 	# Receive signal for when ice sprite spawner reaches max height

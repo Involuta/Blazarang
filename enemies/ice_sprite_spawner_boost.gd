@@ -18,7 +18,7 @@ var spawner_visuals : Node3D
 func _ready():
 	level = root.find_child("Level", true, false)
 	spawner = level.find_children("IceSpriteSpawner", "IceSpriteSpawner", true, false)[0]
-	spawner_visuals = spawner.find_child("Visuals")
+	spawner_visuals = spawner.find_child("RisingVisuals")
 	
 	# Set a random ring rotation dir across all axes
 	r1_rotate_dir = Vector3(

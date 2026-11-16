@@ -14,6 +14,7 @@ var ring1_active := false
 @export var min_scale := 3.0
 @export var max_scale := 6.0
 @export var exploded_scale := 18.0
+var current_scale := 1.0
 @export var rise_speed_base := .3
 var rise_speed := rise_speed_base
 @export var rise_speed_boosted := 3.0
@@ -41,13 +42,12 @@ var hex_rotate_speed := hex_rotate_speed_base
 var rise_speed_boost_decay_rate = (rise_speed_boosted - rise_speed_base) / boost_decay_time
 
 @onready var root := get_tree().root
-@onready var visuals := $Visuals
+@onready var rising_visuals := $RisingVisuals
 @onready var polyp := $Polyp
-@onready var visuals_scalable := $Visuals/Scalable
-@onready var ico := $Visuals/Scalable/Icosahedron
-@onready var ico_mesh: MeshInstance3D = $Visuals/Scalable/Icosahedron/Cube
-@onready var light := $Visuals/OmniLight
-@onready var glow_sprite := $Visuals/Scalable/GlowSprite
+@onready var ico := $RisingVisuals/Icosahedron
+@onready var ico_mesh: MeshInstance3D = $RisingVisuals/Icosahedron/Cube
+@onready var light := $RisingVisuals/OmniLight
+@onready var glow_sprite := $RisingVisuals/Icosahedron/GlowSprite
 @onready var anim_player := $AnimationPlayer
 
 @onready var hexagon_mesh := preload("res://glb_inherited_scenes/ice_sprite_spawner_flat_hexagon.tscn")
@@ -75,7 +75,7 @@ func _ready():
 	# Instantiate hexes and distribute their starting phase evenly
 	for i in range(hex_count):
 		var hex = hexagon_mesh.instantiate() as Node3D
-		visuals_scalable.add_child.call_deferred(hex)
+		ico.add_child.call_deferred(hex)
 		await hex.tree_entered
 		hexes.append(hex)
 
@@ -98,26 +98,26 @@ func _ready():
 
 func _physics_process(delta):
 	# Rotate polyp
-	polyp.rotate_y(delta / 2.0)
+	polyp.rotate_y(delta / 3.0)
 	
 	# Rise mvmt
-	if visuals.position.y < max_height:
-		visuals.position.y += rise_speed * delta
-		if !ring0_active and visuals.position.y >= max_height / 3.0:
+	if !max_height_reached:
+		rising_visuals.position.y += rise_speed * delta
+		if !ring0_active and rising_visuals.position.y >= max_height / 3.0:
 			ring0_active = true
 			anim_player.play("ring0_appear")
-		if !ring1_active and visuals.position.y >= max_height * 2.0 / 3.0:
+		if !ring1_active and rising_visuals.position.y >= max_height * 2.0 / 3.0:
 			ring1_active = true
 			anim_player.play("ring1_appear")
-		if !max_height_reached and visuals.position.y >= max_height:
+		if !max_height_reached and rising_visuals.position.y >= max_height:
 			spawner_max_height_reached.emit()
 			max_height_reached = true
 			anim_player.play("ring2_appear")
-		
-		# While rising, set scale of visuals scalable based on local height ascent (0 to max_height)
-		var clamped_y: float = clampf(visuals.position.y, 0.0, max_height)
-		var current_scale: float = remap(clamped_y, 0.0, max_height, min_scale, max_scale)
-		visuals_scalable.scale = Vector3.ONE * current_scale
+		# While rising, set scale of ico based on local height ascent (0 to max_height)
+		var clamped_y: float = clampf(rising_visuals.position.y, 0.0, max_height)
+		current_scale =  remap(clamped_y, 0.0, max_height, min_scale, max_scale)
+		ico.scale = Vector3.ONE * current_scale * .3
+		polyp.scale = Vector3.ONE * current_scale
 	
 	# Hexagon anim
 	for i in range(hexes.size()):
@@ -131,7 +131,7 @@ func _physics_process(delta):
 		var progress = hex_timers[i] / cycle_time
 		var scale_factor = sin(progress * PI)
 
-		hexes[i].scale = Vector3.ONE * scale_factor
+		hexes[i].scale = Vector3.ONE * scale_factor * current_scale * .6
 
 		# Rotate around its local X axis
 		hexes[i].rotate_object_local(Vector3.RIGHT, hex_rotate_speed * delta)
@@ -171,7 +171,7 @@ func spawn_ice_enemy():
 		sprite_instance = ice_sprite.instantiate()
 	level.add_child.call_deferred(sprite_instance)
 	await sprite_instance.tree_entered
-	sprite_instance.global_position = visuals.global_position
+	sprite_instance.global_position = rising_visuals.global_position
 
 func boost():
 	# All other boosted properties are based on rise_speed
@@ -180,8 +180,9 @@ func boost():
 func explode():
 	anim_player.play("explode")
 	var t = create_tween().set_parallel()
-	t.tween_property(visuals, "position", Vector3.UP * exploded_height, 1.0).set_ease(Tween.EASE_OUT)
-	t.tween_property(visuals_scalable, "scale", Vector3.ONE * exploded_scale, 1.0).set_ease(Tween.EASE_OUT)
+	t.tween_property(rising_visuals, "position", Vector3.UP * exploded_height, 1.0).set_ease(Tween.EASE_OUT)
+	t.tween_property(ico, "scale", Vector3.ONE * exploded_scale * .3, 1.0).set_ease(Tween.EASE_OUT)
+	t.tween_property(polyp, "scale", Vector3.ONE * exploded_scale, 1.0).set_ease(Tween.EASE_OUT)
 	# Reminder that rise speed controls hexagon rotate speed as well
 	t.tween_property(self, "rise_speed", rise_speed_base * .4, 1.0).set_ease(Tween.EASE_OUT)
 	t.tween_property(light, "light_energy", 1.0, 1.0).set_ease(Tween.EASE_OUT)

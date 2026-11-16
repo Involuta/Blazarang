@@ -37,3 +37,5 @@ res://glb_inherited_scenes/polyp.tscn
 res://enemies/clarity.tscn
 res://levels/snow_level/snow_level_phase1.tscn
 res://enemies/ice_fairy.tscn
+res://enemies/clarity.gd
+res://enemies/ice_sprite_spawner_boost.gd
