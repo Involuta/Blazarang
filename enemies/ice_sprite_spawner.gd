@@ -42,7 +42,7 @@ var rise_speed_boost_decay_rate = (rise_speed_boosted - rise_speed_base) / boost
 
 @onready var root := get_tree().root
 @onready var visuals := $Visuals
-@onready var polyp := $Visuals/Polyp
+@onready var polyp := $Polyp
 @onready var visuals_scalable := $Visuals/Scalable
 @onready var ico := $Visuals/Scalable/Icosahedron
 @onready var ico_mesh: MeshInstance3D = $Visuals/Scalable/Icosahedron/Cube

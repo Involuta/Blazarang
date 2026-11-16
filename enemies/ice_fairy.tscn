@@ -672,6 +672,18 @@ tracks/4/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("IceFairyVFX/PitchPivot/YawPivot/ShotMesh:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7uy7i"]
 _data = {
@@ -1153,34 +1165,34 @@ shape = SubResource("CylinderShape3D_1a2px")
 transform = Transform3D(-0.6, 2.09271e-16, -1.52111e-06, 2.09272e-16, 0.6, -2.09272e-16, 1.52111e-06, -2.09272e-16, -0.6, 0, 0, 0)
 
 [node name="Skeleton3D" parent="IceFairyEphyraMeshes/Armature" index="0"]
-bones/1/position = Vector3(-1.17244, 0.000672078, -0.934986)
-bones/1/rotation = Quaternion(-0.636936, 0.306872, 0.306733, 0.637226)
-bones/2/rotation = Quaternion(0.000426274, -1.09311e-07, 2.19631e-07, 1)
-bones/3/rotation = Quaternion(0.000368634, 6.57177e-09, -2.24865e-08, 1)
-bones/4/position = Vector3(-1.04221e-06, 0.000672135, -1.4996)
-bones/4/rotation = Quaternion(-0.706946, 6.4163e-08, 4.3849e-07, 0.707267)
-bones/5/rotation = Quaternion(0.000426234, -2.4917e-08, -1.25064e-08, 1)
-bones/6/rotation = Quaternion(0.000368632, -3.76714e-08, -5.02437e-08, 1)
-bones/7/position = Vector3(1.17243, 0.000672108, -0.934988)
-bones/7/rotation = Quaternion(-0.636936, -0.306872, -0.306733, 0.637226)
-bones/8/rotation = Quaternion(0.000426259, -3.82943e-08, 4.95684e-07, 1)
-bones/9/rotation = Quaternion(0.000368634, -9.56598e-08, -8.92461e-08, 1)
-bones/10/position = Vector3(1.462, 0.00067181, 0.333691)
-bones/10/rotation = Quaternion(0.440774, 0.552964, 0.552713, -0.440974)
-bones/11/rotation = Quaternion(0.000426205, 3.6494e-08, 2.49471e-07, 1)
-bones/12/rotation = Quaternion(0.000368635, -2.70403e-08, -1.12632e-08, 1)
-bones/13/position = Vector3(0.650654, 0.00067175, 1.35109)
-bones/13/rotation = Quaternion(0.157311, 0.689535, 0.689222, -0.157382)
-bones/14/rotation = Quaternion(0.000426246, -8.66699e-08, 1.78879e-07, 1)
-bones/15/rotation = Quaternion(0.000368634, -1.18138e-07, -4.4663e-08, 1)
-bones/16/position = Vector3(-0.650652, 0.00067175, 1.3511)
-bones/16/rotation = Quaternion(-0.15731, 0.689535, 0.689222, 0.157382)
-bones/17/rotation = Quaternion(0.000426245, 6.49936e-08, 1.00461e-07, 1)
-bones/18/rotation = Quaternion(0.000368634, -5.91023e-08, -7.08711e-08, 1)
-bones/19/position = Vector3(-1.462, 0.000671869, 0.333694)
-bones/19/rotation = Quaternion(-0.440773, 0.552964, 0.552713, 0.440974)
-bones/20/rotation = Quaternion(0.000426198, -3.42951e-08, 1.95436e-07, 1)
-bones/21/rotation = Quaternion(0.000368635, -9.69389e-09, -3.91839e-08, 1)
+bones/1/position = Vector3(-1.17245, 0.000635121, -0.934999)
+bones/1/rotation = Quaternion(-0.636944, 0.306868, 0.306737, 0.637218)
+bones/2/rotation = Quaternion(0.000402848, -1.08697e-07, 2.19435e-07, 1)
+bones/3/rotation = Quaternion(0.000348363, 6.46786e-09, -2.20694e-08, 1)
+bones/4/position = Vector3(-1.04246e-06, 0.000635175, -1.49962)
+bones/4/rotation = Quaternion(-0.706955, 6.55409e-08, 4.39253e-07, 0.707258)
+bones/5/rotation = Quaternion(0.000402808, -2.47125e-08, -1.12365e-08, 1)
+bones/6/rotation = Quaternion(0.000348361, -3.80781e-08, -4.99591e-08, 1)
+bones/7/position = Vector3(1.17245, 0.000635149, -0.935002)
+bones/7/rotation = Quaternion(-0.636944, -0.306868, -0.306737, 0.637218)
+bones/8/rotation = Quaternion(0.000402833, -3.87268e-08, 4.95877e-07, 1)
+bones/9/rotation = Quaternion(0.000348363, -9.61592e-08, -8.92549e-08, 1)
+bones/10/position = Vector3(1.46203, 0.000634855, 0.333696)
+bones/10/rotation = Quaternion(0.440779, 0.552957, 0.55272, -0.440968)
+bones/11/rotation = Quaternion(0.000402779, 3.6241e-08, 2.49273e-07, 1)
+bones/12/rotation = Quaternion(0.000348364, -2.6934e-08, -1.14633e-08, 1)
+bones/13/position = Vector3(0.650664, 0.000634792, 1.35111)
+bones/13/rotation = Quaternion(0.157313, 0.689526, 0.68923, -0.15738)
+bones/14/rotation = Quaternion(0.000402819, -8.7012e-08, 1.79695e-07, 1)
+bones/15/rotation = Quaternion(0.000348363, -1.1793e-07, -4.38459e-08, 1)
+bones/16/position = Vector3(-0.650662, 0.000634792, 1.35111)
+bones/16/rotation = Quaternion(-0.157312, 0.689526, 0.68923, 0.15738)
+bones/17/rotation = Quaternion(0.000402819, 6.4292e-08, 1.00262e-07, 1)
+bones/18/rotation = Quaternion(0.000348363, -5.98855e-08, -7.1071e-08, 1)
+bones/19/position = Vector3(-1.46203, 0.000634911, 0.333699)
+bones/19/rotation = Quaternion(-0.440779, 0.552957, 0.55272, 0.440969)
+bones/20/rotation = Quaternion(0.000402772, -3.43802e-08, 1.95751e-07, 1)
+bones/21/rotation = Quaternion(0.000348364, -9.95969e-09, -3.82583e-08, 1)
 
 [node name="Ephyra" parent="IceFairyEphyraMeshes/Armature/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_hh645")
