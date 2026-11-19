@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckw86q1glx1gb"]
+
+[ext_resource type="PackedScene" uid="uid://bnnnbvmhe324v" path="res://glb_imports/IceSlime.glb" id="1_6uxjc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qf6aq"]
+resource_local_to_scene = true
+transparency = 4
+albedo_color = Color(0.560784, 0.803922, 1, 0.74902)
+roughness = 0.12
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+refraction_enabled = true
+
+[node name="IceSlimeMeshes" instance=ExtResource("1_6uxjc")]
+
+[node name="IceSlime2" parent="Armature/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_qf6aq")

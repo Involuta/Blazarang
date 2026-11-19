@@ -1,13 +1,24 @@
-[gd_scene load_steps=44 format=3 uid="uid://i2xuy407tpbj"]
+[gd_scene load_steps=46 format=3 uid="uid://i2xuy407tpbj"]
 
 [ext_resource type="Script" path="res://enemies/ice_sprite.gd" id="1_h7jw6"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="2_6lw04"]
+[ext_resource type="PackedScene" uid="uid://ckw86q1glx1gb" path="res://glb_inherited_scenes/ice_slime_meshes.tscn" id="2_dixv6"]
 [ext_resource type="Script" path="res://general_scripts/hitbox.gd" id="3_ovd7j"]
 [ext_resource type="PackedScene" uid="uid://dotk8qi7oo127" path="res://enemies/clarity_dress_shard_hit_particles.tscn" id="4_dcuw3"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="4_kf4e5"]
 [ext_resource type="Script" path="res://general_scripts/damage_over_time_area.gd" id="4_n1e1v"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fp5fu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1cbh0"]
+resource_local_to_scene = true
+transparency = 4
+albedo_color = Color(0.560784, 0.803922, 1, 0.74902)
+roughness = 0.12
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+refraction_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qf6aq"]
 resource_local_to_scene = true
@@ -16,7 +27,7 @@ albedo_color = Color(0.560784, 0.803922, 1, 0.74902)
 roughness = 0.12
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 0.00542169
+emission_energy_multiplier = 0.0
 refraction_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_adun2"]
@@ -72,6 +83,18 @@ tracks/3/path = NodePath("MeshInstance3D:mesh:material:emission_energy_multiplie
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.76667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.3]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("IceSlimeMeshes/Armature/Skeleton3D/IceSlime2:surface_material_override/0:emission_energy_multiplier")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0, 2.76667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
@@ -152,6 +175,18 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [4]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("IceSlimeMeshes:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_m58tf"]
@@ -242,6 +277,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [4]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("IceSlimeMeshes:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_lsn44"]
 resource_name = "spawn"
@@ -268,7 +315,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -376,6 +423,42 @@ tracks/10/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("IceSlimeMeshes:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("IceSlimeMeshes:scale")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12), Vector3(1, 1, 1)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("IceSlimeMeshes/Armature/Skeleton3D/IceSlime2:surface_material_override/0:emission_energy_multiplier")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7uy7i"]
@@ -621,8 +704,21 @@ explode_secs = 7.0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_fp5fu")
 
+[node name="IceSlimeMeshes" parent="." instance=ExtResource("2_dixv6")]
+transform = Transform3D(2.08165e-12, 0, 0, 0, 2.08165e-12, 0, 0, 0, 2.08165e-12, 2.08165e-12, -0.3, 2.08165e-12)
+
+[node name="Skeleton3D" parent="IceSlimeMeshes/Armature" index="0"]
+bones/0/position = Vector3(0, -0.5, 0)
+
+[node name="IceSlime2" parent="IceSlimeMeshes/Armature/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_1cbh0")
+
+[node name="AnimationPlayer" parent="IceSlimeMeshes" index="1"]
+autoplay = "Jump"
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(2.08165e-12, 0, 0, 0, 2.08165e-12, 0, 0, 0, 2.08165e-12, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+visible = false
 mesh = SubResource("BoxMesh_adun2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -689,3 +785,5 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_jaerh")
 draw_pass_1 = SubResource("BoxMesh_adun2")
+
+[editable path="IceSlimeMeshes"]

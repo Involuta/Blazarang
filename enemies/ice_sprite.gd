@@ -23,6 +23,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var rng := RandomNumberGenerator.new()
 @onready var anim_player := $AnimationPlayer
 @onready var hurtbox := $EnemyHurtbox
+@onready var slime_meshes_anim_player := $IceSlimeMeshes/AnimationPlayer
 @onready var root := get_tree().root
 
 var target : Node3D
@@ -63,6 +64,7 @@ func jump():
 	velocity.y = jump_vertical_speed
 	global_rotation.x = 0
 	global_rotation.z = 0
+	slime_meshes_anim_player.play("jump")
 
 func start_attack():
 	explosion_triggered = true
