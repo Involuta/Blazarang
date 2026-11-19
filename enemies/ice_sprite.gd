@@ -38,10 +38,8 @@ func _ready():
 func _physics_process(delta):
 	if not explosion_triggered and global_position.distance_to(target.global_position) < target_distance:
 		start_attack()
-	if is_on_floor():
-		if not explosion_triggered:
-			jump()
-	else:
+	follow()
+	if !is_on_floor():
 		velocity.y -= .67 * gravity * delta
 	move_and_slide()
 	if global_position.y < -100:
@@ -55,16 +53,9 @@ func lerp_look_at_walk_dir(turn_speed):
 	global_rotation.y = lerp_angle(global_rotation.y, PI + atan2(velocity.x, velocity.z), turn_speed)
 
 func follow():
-	if is_on_floor():
-		jump()
-	lerp_look_at_walk_dir(follow_turn_speed)
-
-func jump():
-	velocity = follow_speed*global_position.direction_to(target.global_position)
-	velocity.y = jump_vertical_speed
-	global_rotation.x = 0
-	global_rotation.z = 0
-	slime_meshes_anim_player.play("jump")
+	var target_dir = global_position.direction_to(target.global_position)
+	velocity.x = follow_speed * target_dir.x
+	velocity.z = follow_speed * target_dir.z
 
 func start_attack():
 	explosion_triggered = true

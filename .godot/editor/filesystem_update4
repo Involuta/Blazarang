@@ -37,3 +37,4 @@ res://enemies/clarity.tscn
 res://enemies/ice_sprite_spawner.tscn
 res://glb_inherited_scenes/polyp.tscn
 res://enemies/ice_fairy.tscn
+res://enemies/ice_sprite.gd
