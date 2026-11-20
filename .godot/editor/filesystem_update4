@@ -1,4 +1,4 @@
-res://enemies/ice_sprite.tscn
+res://enemies/clarity.tscn
 res://shaders/black_outline.gdshader
 res://enemies/clarity_arm_shard.gdshader
 res://textures/clear_tile.tres
@@ -32,9 +32,8 @@ res://shaders/sobel_outline.gdshader
 res://enemies/snowflake_link_outline.gdshader
 res://enemies/ground_glow.gdshader
 res://enemies/clarity_dress_shard.gdshader
-res://glb_inherited_scenes/ice_slime_meshes.tscn
-res://enemies/clarity.tscn
 res://enemies/ice_sprite_spawner.tscn
 res://glb_inherited_scenes/polyp.tscn
 res://enemies/ice_fairy.tscn
-res://enemies/ice_sprite.gd
+res://enemies/ice_sprite.tscn
+res://glb_inherited_scenes/ice_slime_meshes.tscn

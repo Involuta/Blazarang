@@ -1,4 +1,4 @@
-[gd_scene load_steps=161 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=163 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -1394,6 +1394,12 @@ density = 3.83374e-16
 albedo = Color(0.768627, 0.890196, 1, 1)
 edge_fade = 3.0
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_68o34"]
+size = Vector3(18, 3, 18)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pp7hc"]
+size = Vector3(18, 3, 18)
+
 [node name="Clarity" type="CharacterBody3D"]
 collision_layer = 8
 collision_mask = 146
@@ -2641,6 +2647,23 @@ visible = false
 size = Vector3(30, 30, 30)
 shape = 0
 material = SubResource("FogMaterial_hru1u")
+
+[node name="ArmWave" type="Node3D" parent="."]
+
+[node name="EnemyHitbox" type="Area3D" parent="ArmWave"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15.1053)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("4_5f0ps")
+damage = 69
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ArmWave/EnemyHitbox"]
+transform = Transform3D(0.707107, 1.60554e-24, 0.707107, 3.48787e-16, 1, -3.48787e-16, -0.707107, 4.93259e-16, 0.707107, 2.08165e-12, -1.8, 2.08165e-12)
+shape = SubResource("BoxShape3D_68o34")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ArmWave/EnemyHitbox"]
+transform = Transform3D(0.707107, 1.60554e-24, 0.707107, 3.48787e-16, 1, -3.48787e-16, -0.707107, 4.93259e-16, 0.707107, 2.08165e-12, -1.8, 2.08165e-12)
+mesh = SubResource("BoxMesh_pp7hc")
 
 [connection signal="area_entered" from="ClarityArmMeshes/SnowflakeEntity/SnowflakeHurtbox" to="." method="on_snowflake_hit"]
 
