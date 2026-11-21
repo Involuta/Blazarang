@@ -32,8 +32,13 @@ res://shaders/sobel_outline.gdshader
 res://enemies/snowflake_link_outline.gdshader
 res://enemies/ground_glow.gdshader
 res://enemies/clarity_dress_shard.gdshader
+res://enemies/enemy_anims/clarity_infuse_left.res
+res://enemies/enemy_anims/clarity_left_slice_from_infuse.res
+res://enemies/enemy_anims/clarity_raise_right_slice.res
+res://enemies/enemy_anims/clarity_prefight.res
 res://enemies/ice_sprite_spawner.tscn
 res://glb_inherited_scenes/polyp.tscn
 res://enemies/ice_fairy.tscn
 res://enemies/ice_sprite.tscn
 res://glb_inherited_scenes/ice_slime_meshes.tscn
+res://enemies/clarity.gd
