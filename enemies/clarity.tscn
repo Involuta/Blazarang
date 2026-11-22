@@ -1,4 +1,4 @@
-[gd_scene load_steps=167 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=166 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -1028,8 +1028,6 @@ color_ramp = SubResource("GradientTexture1D_e6812")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o5urh"]
 
-[sub_resource type="PrismMesh" id="PrismMesh_ocn5u"]
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_5v2xg"]
 size = Vector3(150, 30, 150)
 
@@ -1525,12 +1523,6 @@ bones/16/rotation = Quaternion(0.321999, -0.24697, 0.885482, 0.226373)
 transform = Transform3D(1.42986, 0.00998905, -0.0170401, -0.0125258, 1.41244, -0.223079, 0.0152725, 0.223207, 1.41239, 0.918732, 14.4374, 0.659002)
 
 [node name="ClarityHead" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2" index="1" instance=ExtResource("3_05q7x")]
-
-[node name="HexParticles0" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/BaseOffsetRotation/HeadMesh/HatParticles0" index="0"]
-visible = true
-
-[node name="HexParticles1" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead/BaseOffsetRotation/HeadMesh/HatParticles1" index="0"]
-visible = true
 
 [node name="EnemyHurtbox" type="Area3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2/ClarityHead"]
 script = ExtResource("11_ekkw4")
@@ -2652,13 +2644,6 @@ draw_pass_1 = SubResource("QuadMesh_fxxhb")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -2.4, 2.08165e-12)
 shape = SubResource("CapsuleShape3D_o5urh")
-
-[node name="MeleeHitboxPivot" type="Node3D" parent="."]
-
-[node name="Marker" type="MeshInstance3D" parent="."]
-top_level = true
-visible = false
-mesh = SubResource("PrismMesh_ocn5u")
 
 [node name="BlizzardDOT" type="Node3D" parent="."]
 script = ExtResource("7_ffp3t")

@@ -193,7 +193,6 @@ var ice_sprite_spawner := preload("res://enemies/ice_sprite_spawner.tscn")
 var ice_sprite_spawner_boost := preload("res://enemies/ice_sprite_spawner_boost.tscn")
 @onready var blizzard_center : Node3D = self
 @onready var arm_anim_player := $ClarityArmMeshes/AnimationPlayer # Depends on Clarity.glb. Plays stagger anim after anim tree is set inactive
-@onready var mhp := $MeleeHitboxPivot
 @onready var arm_meshes := $ClarityArmMeshes # The ClarityMeshes associated with the arm
 @onready var body_meshes := $DressShardMaster # Depends on ClarityDressMeshes.glb. Plays dress shard anims
 @onready var arm_wave := $ArmWave
@@ -314,8 +313,6 @@ func _ready():
 	snowflake_long_dist_wait_remaining = rng.randf_range(min_long_dist_wait, max_long_dist_wait)
 	
 	switch_to_circle_icon()
-	
-	mhp.visible = false
 	
 	dress_shards["FrontLeft"] = DressShard.new(find_child("DressShardFrontLeft"))
 	dress_shards["FrontRight"] = DressShard.new(find_child("DressShardFrontRight"))
