@@ -196,6 +196,7 @@ var ice_sprite_spawner_boost := preload("res://enemies/ice_sprite_spawner_boost.
 @onready var mhp := $MeleeHitboxPivot
 @onready var arm_meshes := $ClarityArmMeshes # The ClarityMeshes associated with the arm
 @onready var body_meshes := $DressShardMaster # Depends on ClarityDressMeshes.glb. Plays dress shard anims
+@onready var arm_wave := $ArmWave
 @onready var arm_shard_mesh := $ClarityArmMeshes/Armature/Skeleton3D/Arm_2/Arm_2 # The singular arm mesh
 @onready var arm_tip_pt := $ClarityArmMeshes/Armature/Skeleton3D/Arm_2/ArmTipEmptyNode
 @onready var snowflake := $ClarityArmMeshes/SnowflakeEntity
@@ -975,6 +976,9 @@ func defuse_arm():
 	# Shrink/dematerialize link outline
 	var t = get_tree().create_tween()
 	t.tween_property(arm_shader, "shader_parameter/glow_progress", 0.0, 2.4)
+
+func set_arm_wave_rotation():
+	arm_wave.rotation = arm_meshes.rotation
 
 func spawn_infuse_slice_hitbox():
 	var inst = infused_slice_hitbox.instantiate()

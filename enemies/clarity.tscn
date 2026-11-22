@@ -1,4 +1,4 @@
-[gd_scene load_steps=169 format=3 uid="uid://dy2jv4evmbrmf"]
+[gd_scene load_steps=167 format=3 uid="uid://dy2jv4evmbrmf"]
 
 [ext_resource type="PackedScene" uid="uid://cwejhmociib43" path="res://glb_imports/clarity_meshes.tscn" id="1_4e0of"]
 [ext_resource type="Script" path="res://enemies/clarity.gd" id="1_172k1"]
@@ -12,7 +12,6 @@
 [ext_resource type="Shader" path="res://GPUTrail-main/shaders/trail.gdshader" id="6_rnief"]
 [ext_resource type="Script" path="res://general_scripts/damage_over_time_area.gd" id="7_ffp3t"]
 [ext_resource type="ArrayMesh" uid="uid://c62dcg0fxmat1" path="res://glb_meshes/snowflake_particle_mesh.res" id="7_i53v5"]
-[ext_resource type="Script" path="res://general_scripts/string_mesh.gd" id="8_58kbc"]
 [ext_resource type="PackedScene" uid="uid://dhtdubq3e6ehk" path="res://glb_inherited_scenes/snowflake_entity_sprite.tscn" id="9_ajxjw"]
 [ext_resource type="Script" path="res://GPUTrail-main/GPUTrail3D.gd" id="9_xxn08"]
 [ext_resource type="Script" path="res://enemies/enemy_hurtbox.gd" id="11_ekkw4"]
@@ -20,6 +19,55 @@
 [ext_resource type="PackedScene" uid="uid://cm3mndrep3gns" path="res://glb_inherited_scenes/clarity_dress_shards_master.tscn" id="13_2l47j"]
 [ext_resource type="PackedScene" uid="uid://dotk8qi7oo127" path="res://enemies/clarity_dress_shard_hit_particles.tscn" id="14_luiy3"]
 [ext_resource type="PackedScene" uid="uid://cyguldrcukgxk" path="res://glb_inherited_scenes/snowflake_entity_meshes.tscn" id="15_o8h64"]
+
+[sub_resource type="Gradient" id="Gradient_0utni"]
+offsets = PackedFloat32Array(0, 0.138728, 0.586705, 0.812139, 1)
+colors = PackedColorArray(0, 0, 0, 0.188235, 0.421731, 0.421731, 0.421731, 0.352941, 0.827451, 0.827451, 0.827451, 0.141176, 0.835294, 0.835294, 0.835294, 0.282353, 0.843184, 0.843184, 0.843184, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qls30"]
+gradient = SubResource("Gradient_0utni")
+
+[sub_resource type="Curve" id="Curve_ebyc3"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.025678, 0.357065), 0.0, 0.0, 0, 0, Vector2(0.502458, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_uenxs"]
+curve = SubResource("Curve_ebyc3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_540m2"]
+direction = Vector3(2.08165e-12, 2.08165e-12, 1)
+flatness = 0.9
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 18.0
+initial_velocity_max = 18.0
+scale_min = 6.0
+scale_max = 12.0
+scale_curve = SubResource("CurveTexture_uenxs")
+color_ramp = SubResource("GradientTexture1D_qls30")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6f3ts"]
+render_priority = 0
+shader = ExtResource("5_w48cf")
+shader_parameter/ColorParameter = Color(0.552941, 0.768627, 1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_7dp0r"]
+material = SubResource("ShaderMaterial_6f3ts")
+size = Vector2(1.6, 1.3)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sa5ak"]
+direction = Vector3(2.08165e-12, 2.08165e-12, 1)
+flatness = 0.8
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 18.0
+initial_velocity_max = 18.0
+scale_min = 0.02
+scale_max = 0.03
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_68o34"]
+size = Vector3(18, 3, 18)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pp7hc"]
+size = Vector3(18, 3, 18)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ejlx4"]
 height = 1.0
@@ -56,8 +104,6 @@ scale_max = 0.16
 scale_curve = SubResource("CurveTexture_eaavf")
 color = Color(0.792157, 0.92549, 1, 1)
 color_ramp = SubResource("GradientTexture1D_kfpv8")
-
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_nmjhd"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wjs3c"]
 radius = 1.5
@@ -109,15 +155,6 @@ scale_min = 0.9
 scale_max = 3.0
 scale_curve = SubResource("CurveTexture_e4eeg")
 color_ramp = SubResource("GradientTexture1D_x78lu")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6f3ts"]
-render_priority = 0
-shader = ExtResource("5_w48cf")
-shader_parameter/ColorParameter = Color(0.552941, 0.768627, 1, 1)
-
-[sub_resource type="QuadMesh" id="QuadMesh_7dp0r"]
-material = SubResource("ShaderMaterial_6f3ts")
-size = Vector2(1.6, 1.3)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fw1xx"]
 shader = ExtResource("6_rnief")
@@ -1394,46 +1431,6 @@ density = 3.83374e-16
 albedo = Color(0.768627, 0.890196, 1, 1)
 edge_fade = 3.0
 
-[sub_resource type="Gradient" id="Gradient_0utni"]
-offsets = PackedFloat32Array(0, 0.138728, 0.586705, 0.812139, 1)
-colors = PackedColorArray(0, 0, 0, 0.188235, 0.421731, 0.421731, 0.421731, 0.352941, 0.827451, 0.827451, 0.827451, 0.141176, 0.835294, 0.835294, 0.835294, 0.282353, 0.843184, 0.843184, 0.843184, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_qls30"]
-gradient = SubResource("Gradient_0utni")
-
-[sub_resource type="Curve" id="Curve_ebyc3"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.025678, 0.357065), 0.0, 0.0, 0, 0, Vector2(0.502458, 1), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_uenxs"]
-curve = SubResource("Curve_ebyc3")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_540m2"]
-direction = Vector3(2.08165e-12, 2.08165e-12, 1)
-flatness = 0.9
-gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-initial_velocity_min = 18.0
-initial_velocity_max = 18.0
-scale_min = 6.0
-scale_max = 12.0
-scale_curve = SubResource("CurveTexture_uenxs")
-color_ramp = SubResource("GradientTexture1D_qls30")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sa5ak"]
-direction = Vector3(2.08165e-12, 2.08165e-12, 1)
-flatness = 0.8
-gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-initial_velocity_min = 18.0
-initial_velocity_max = 18.0
-scale_min = 0.03
-scale_max = 0.04
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_68o34"]
-size = Vector3(18, 3, 18)
-
-[sub_resource type="BoxMesh" id="BoxMesh_pp7hc"]
-size = Vector3(18, 3, 18)
-
 [node name="Clarity" type="CharacterBody3D"]
 collision_layer = 8
 collision_mask = 146
@@ -1454,7 +1451,54 @@ wait_lowered_left_min_secs = 0.3
 wait_lowered_left_max_secs = 3.0
 wait_raised_left_min_secs = 0.3
 wait_raised_left_max_secs = 3.0
+arm_attack_chances_circling_icon = {
+"LongSlice": 2.08167e-12,
+"RaiseRightSlice": 1.0
+}
 regen_shards_max_chance = 0.99
+
+[node name="ArmWave" type="Node3D" parent="."]
+transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0, 0)
+
+[node name="WaveCloudParticles" type="GPUParticles3D" parent="ArmWave"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -1.3, 2.65174)
+emitting = false
+amount = 360
+lifetime = 3.0
+explosiveness = 0.75
+process_material = SubResource("ParticleProcessMaterial_540m2")
+draw_pass_1 = SubResource("QuadMesh_7dp0r")
+
+[node name="WaveSnowParticles" type="GPUParticles3D" parent="ArmWave"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -1.3, 2.65)
+emitting = false
+amount = 600
+lifetime = 3.0
+explosiveness = 0.75
+process_material = SubResource("ParticleProcessMaterial_sa5ak")
+draw_pass_1 = ExtResource("7_i53v5")
+
+[node name="DamageOverTimeArea" type="Node3D" parent="ArmWave"]
+process_mode = 4
+script = ExtResource("7_ffp3t")
+time_btwn_damage_ticks = 0.1
+
+[node name="EnemyHitbox" type="Area3D" parent="ArmWave/DamageOverTimeArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15.1053)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("4_5f0ps")
+damage = 15
+frostbite_buildup = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ArmWave/DamageOverTimeArea/EnemyHitbox"]
+transform = Transform3D(0.707107, 1.60554e-24, 0.707107, 3.48787e-16, 1, -3.48787e-16, -0.707107, 4.93259e-16, 0.707107, 2.08165e-12, -1.8, 2.08165e-12)
+shape = SubResource("BoxShape3D_68o34")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ArmWave/DamageOverTimeArea/EnemyHitbox"]
+transform = Transform3D(0.707107, 1.60554e-24, 0.707107, 3.48787e-16, 1, -3.48787e-16, -0.707107, 4.93259e-16, 0.707107, 2.08165e-12, -1.8, 2.08165e-12)
+visible = false
+mesh = SubResource("BoxMesh_pp7hc")
 
 [node name="ClarityArmMeshes" parent="." instance=ExtResource("1_4e0of")]
 transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
@@ -1462,8 +1506,8 @@ transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
 [node name="Skeleton3D" parent="ClarityArmMeshes/Armature" index="0"]
 bones/0/rotation = Quaternion(0.0301653, 0.0796906, -0.0501057, 0.995102)
 bones/1/rotation = Quaternion(0.0484073, -0.0812806, 0.0524297, 0.994133)
-bones/3/position = Vector3(3.55217, 4.65005, 0.114262)
-bones/3/rotation = Quaternion(-0.815142, -0.558884, 0.1077, -0.107666)
+bones/3/position = Vector3(-3.7482, 4.38423, -0.0847618)
+bones/3/rotation = Quaternion(0.00101031, -0.00552394, 0.86527, 0.501275)
 bones/6/position = Vector3(2.01413, 2.22899, -2.08285)
 bones/6/rotation = Quaternion(0.305356, -0.212565, 0.925231, -0.0743114)
 bones/8/position = Vector3(2.06725, 1.3427, 0.8528)
@@ -1517,27 +1561,14 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_1ffcq")
 draw_pass_1 = ExtResource("5_1f67e")
 
-[node name="String" type="MeshInstance3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2" index="4" node_paths=PackedStringArray("node_a", "node_b")]
-visible = false
-mesh = SubResource("ImmediateMesh_nmjhd")
-script = ExtResource("8_58kbc")
-node_a = NodePath("A")
-node_b = NodePath("B")
-
-[node name="A" type="Node3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2/String"]
-transform = Transform3D(1, 2.62494e-10, 2.31387e-09, -3.62545e-10, 1, -6.55304e-10, -4.61861e-10, 1.77604e-08, 1, -5.39422e-05, -0.839575, 4.45279)
-
-[node name="B" type="Node3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Hat_2/String"]
-transform = Transform3D(1, 2.30996e-09, 7.90181e-09, -3.62545e-10, 1, -6.55304e-10, -4.61861e-10, 9.78092e-08, 1, -0.464782, -13.8199, 4.45)
-
 [node name="Arm_2" parent="ClarityArmMeshes/Armature/Skeleton3D" index="1"]
-transform = Transform3D(-0.33655, -0.912243, -0.23355, -0.894401, 0.387259, -0.223778, 0.294584, 0.133575, -0.946244, 5.26385, 8.24249, -0.329748)
+transform = Transform3D(0.339741, 0.92836, 0.15074, -0.932056, 0.353784, -0.0781572, -0.125888, -0.113945, 0.985479, -4.57237, 8.73293, 0.998591)
 
 [node name="EnemyHitbox" type="Area3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2" index="1"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 script = ExtResource("4_5f0ps")
-damage = 30
-frostbite_buildup = 12
+damage = 15
+frostbite_buildup = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ClarityArmMeshes/Armature/Skeleton3D/Arm_2/EnemyHitbox"]
 transform = Transform3D(0.996195, -0.0871557, 4.28562e-16, 0.0871557, 0.996195, -1.78015e-16, -1.35457e-16, -3.71025e-16, 1, 0.67, -7.5, 2.08165e-12)
@@ -1693,6 +1724,7 @@ visible = false
 autoplay = "PreFight"
 
 [node name="ClarityScarf" parent="ClarityArmMeshes" instance=ExtResource("3_7vov3")]
+transform = Transform3D(0.92388, -4.55712e-16, -0.382683, 3.48787e-16, 1, -3.48787e-16, 0.382683, 1.88762e-16, 0.92388, 0, 0, 0)
 
 [node name="Skeleton3D" parent="ClarityArmMeshes/ClarityScarf/ScarfArmature" index="0"]
 bones/0/rotation = Quaternion(-0.865704, 8.45589e-26, -1.9169e-27, 0.500557)
@@ -1709,7 +1741,7 @@ bones/10/rotation = Quaternion(0.0804798, 3.44746e-06, -4.27617e-05, 0.996756)
 bones/11/rotation = Quaternion(0.0751067, 1.5297e-05, -0.000203771, 0.997176)
 
 [node name="ClarityScarf2" parent="ClarityArmMeshes" instance=ExtResource("3_7vov3")]
-transform = Transform3D(0.707107, -6.22982e-23, 0.707107, 3.48787e-16, 1, -3.48787e-16, -0.707107, 4.93259e-16, 0.707107, 0, 0, 0)
+transform = Transform3D(0.92388, -1.88762e-16, 0.382684, 3.48787e-16, 1, -3.48787e-16, -0.382684, 4.55712e-16, 0.92388, 0, 0, 0)
 
 [node name="Skeleton3D" parent="ClarityArmMeshes/ClarityScarf2/ScarfArmature" index="0"]
 bones/0/position = Vector3(1.11022e-16, -2.98023e-08, 0)
@@ -2690,48 +2722,6 @@ visible = false
 size = Vector3(30, 30, 30)
 shape = 0
 material = SubResource("FogMaterial_hru1u")
-
-[node name="ArmWave" type="Node3D" parent="."]
-
-[node name="WaveCloudParticles" type="GPUParticles3D" parent="ArmWave"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -1.3, 2.65174)
-emitting = false
-amount = 360
-lifetime = 6.0
-explosiveness = 0.75
-process_material = SubResource("ParticleProcessMaterial_540m2")
-draw_pass_1 = SubResource("QuadMesh_7dp0r")
-
-[node name="WaveSnowParticles" type="GPUParticles3D" parent="ArmWave"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -1.3, 2.65)
-emitting = false
-amount = 600
-lifetime = 6.0
-explosiveness = 0.75
-process_material = SubResource("ParticleProcessMaterial_sa5ak")
-draw_pass_1 = ExtResource("7_i53v5")
-
-[node name="DamageOverTimeArea" type="Node3D" parent="ArmWave"]
-process_mode = 4
-script = ExtResource("7_ffp3t")
-time_btwn_damage_ticks = 0.3
-
-[node name="EnemyHitbox" type="Area3D" parent="ArmWave/DamageOverTimeArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15.1053)
-collision_layer = 8
-collision_mask = 0
-script = ExtResource("4_5f0ps")
-damage = 15
-frostbite_buildup = 5
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ArmWave/DamageOverTimeArea/EnemyHitbox"]
-transform = Transform3D(0.707107, 1.60554e-24, 0.707107, 3.48787e-16, 1, -3.48787e-16, -0.707107, 4.93259e-16, 0.707107, 2.08165e-12, -1.8, 2.08165e-12)
-shape = SubResource("BoxShape3D_68o34")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ArmWave/DamageOverTimeArea/EnemyHitbox"]
-transform = Transform3D(0.707107, 1.60554e-24, 0.707107, 3.48787e-16, 1, -3.48787e-16, -0.707107, 4.93259e-16, 0.707107, 2.08165e-12, -1.8, 2.08165e-12)
-visible = false
-mesh = SubResource("BoxMesh_pp7hc")
 
 [connection signal="area_entered" from="ClarityArmMeshes/SnowflakeEntity/SnowflakeHurtbox" to="." method="on_snowflake_hit"]
 
