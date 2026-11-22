@@ -22,7 +22,7 @@ render_priority = 0
 next_pass = SubResource("ShaderMaterial_c8oi3")
 shader = ExtResource("3_5b4y1")
 shader_parameter/base_color = Color(0.56, 0.8, 1, 1)
-shader_parameter/glow_color = Color(0.56, 0.8, 1, 1)
+shader_parameter/glow_color = Color(0.196078, 0.411765, 1, 1)
 shader_parameter/max_brightness = 3.0
 shader_parameter/glow_progress = 0.0
 shader_parameter/arm_bottom = 2.375e-06
@@ -58,7 +58,7 @@ visible = false
 surface_material_override/0 = SubResource("StandardMaterial3D_7lkse")
 
 [node name="Arm_2" parent="Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.0560289, 0.981503, -0.183062, -0.981908, 0.0209516, -0.188194, -0.180877, 0.190294, 0.96492, -4.87745, 10.2879, -0.788927)
+transform = Transform3D(0.0560288, 0.981503, -0.183062, -0.981908, 0.0209516, -0.188194, -0.180877, 0.190294, 0.96492, -4.87745, 10.2879, -0.788926)
 bone_idx = 4
 
 [node name="Arm_2" parent="Armature/Skeleton3D/Arm_2" index="0"]

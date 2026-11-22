@@ -964,18 +964,16 @@ func snowflake_stagger():
 	snowflake_brighten(0, .6)
 
 func infuse_arm():
-	# Get snowflake shard outline shader
 	var arm_shader = arm_shard_mesh.get_surface_override_material(0) as ShaderMaterial
-	# Shrink/dematerialize link outline
-	var t = get_tree().create_tween()
+	var t = get_tree().create_tween().set_parallel()
 	t.tween_property(arm_shader, "shader_parameter/glow_progress", 1.0, 1.2).from(0.0)
+	t.tween_property(arm_shader, "shader_parameter/max_brightness", 6.0, 1.2).from(0.0)
 
 func defuse_arm():
-	# Get snowflake shard outline shader
 	var arm_shader = arm_shard_mesh.get_surface_override_material(0) as ShaderMaterial
-	# Shrink/dematerialize link outline
-	var t = get_tree().create_tween()
+	var t = get_tree().create_tween().set_parallel()
 	t.tween_property(arm_shader, "shader_parameter/glow_progress", 0.0, 2.4)
+	t.tween_property(arm_shader, "shader_parameter/max_brightness", 0.0, 2.4)
 
 func set_arm_wave_rotation():
 	arm_wave.rotation = arm_meshes.rotation
