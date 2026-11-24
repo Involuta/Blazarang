@@ -5,9 +5,6 @@ res://shaders/smoke_LOD.tres
 res://shaders/ring_appear.gdshader
 res://glb_meshes/snowflake_particle_mesh.res
 res://glb_meshes/long_hexagon_particle_mesh.res
-res://enemies/enemy_anims/clarity_left_slice_from_wait.res
-res://enemies/enemy_anims/clarity_prefight.res
-res://enemies/enemy_anims/clarity_raise_right_slice.res
 res://shaders/black_outline.gdshader
 res://enemies/clarity_arm_shard.gdshader
 res://GPUTrail-main/shaders/trail.gdshader
@@ -35,11 +32,10 @@ res://shaders/sobel_outline.gdshader
 res://enemies/snowflake_link_outline.gdshader
 res://enemies/ground_glow.gdshader
 res://enemies/clarity_dress_shard.gdshader
-res://enemies/clarity.gd
 res://enemies/ice_sprite_spawner.tscn
 res://glb_inherited_scenes/polyp.tscn
-res://enemies/ice_fairy.tscn
-res://enemies/ice_sprite.tscn
 res://glb_inherited_scenes/ice_slime_meshes.tscn
 res://glb_imports/clarity_meshes.tscn
-res://enemies/clarity_head.tscn
+res://enemies/clarity_arm_wave_floor_telegraph.gdshader
+res://enemies/noise_transparency.gdshader
+res://shaders/noise_transparency.gdshader

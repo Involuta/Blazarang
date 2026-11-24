@@ -1,6 +1,6 @@
+MeshInstance3D
 DamageOverTimeArea
 GPUParticles3D
-MeshInstance3D
 Hitbox
 CollisionShape3D
 Area3D
