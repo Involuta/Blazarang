@@ -38,3 +38,9 @@ res://glb_inherited_scenes/polyp.tscn
 res://glb_inherited_scenes/ice_slime_meshes.tscn
 res://glb_imports/clarity_meshes.tscn
 res://enemies/clarity_head.tscn
+res://enemies/enemy_anims/clarity_infuse_left.res
+res://enemies/enemy_anims/clarity_raise_right_slice.res
+res://enemies/clarity.gd
+res://enemies/enemy_anims/clarity_left_slice_from_infuse.res
+res://enemies/enemy_anims/clarity_stagger.res
+res://enemies/enemy_anims/clarity_jumpshot_towalkleft.res

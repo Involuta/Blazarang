@@ -483,6 +483,7 @@ surface_material_override/1 = SubResource("StandardMaterial3D_msxit")
 
 [node name="GlowSprite" type="Sprite3D" parent="RisingVisuals"]
 transform = Transform3D(9, 0, 0, 0, 9, 0, 0, 0, 9, 0, 0, 0)
+visible = false
 cast_shadow = 0
 modulate = Color(0.46, 0.71, 1.5, 1)
 billboard = 1

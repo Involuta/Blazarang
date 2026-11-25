@@ -122,8 +122,6 @@ var walk_dir := Vector3.FORWARD # Randomly set when switching to walk straight
 # Distance in front of herself Clarity looks in order to match anim head looking forward
 @export var look_forward_dist := 12.0
 
-var aiming_at_target := true
-
 @export var base_head_brightness := 0.0
 @export var full_head_brightness := 6.0
 
@@ -339,7 +337,7 @@ func _ready():
 	snowflake_anim_player.play("RotateSlow3Seg")
 	
 	# FOR TESTING: play JumpShot to reach phase 2 immediately
-	#snowflake_anim_player.play("JumpShot")
+	snowflake_anim_player.play("JumpShot")
 	
 	# FOR TESTING: play RegenShards to reach phase 2 immediately
 	#switch_to_stop()
@@ -358,13 +356,11 @@ func frames(num: int) -> float:
 	return num * get_physics_process_delta_time()
 
 func set_head_hurtbox_active(state: bool):
+	staggerable = state
 	if state:
 		head_hurtbox.process_mode = PROCESS_MODE_INHERIT
 	else:
 		head_hurtbox.process_mode = PROCESS_MODE_DISABLED
-
-func set_staggerable(state: bool):
-	staggerable = state
 
 func on_head_hit(damage: int):
 	if staggerable and damage >= stagger_damage_threshold and behav_state != STOP:
@@ -470,8 +466,7 @@ func _physics_process(delta):
 			body_look_in_direction(global_position.direction_to(target.global_position))
 			snowflake_face_position(target.global_position)
 		LOOK_STATE.TARGET_BODY_FULL_ROTATION:
-			if aiming_at_target:
-				body_face_position_directly(target.global_position)
+			body_face_position_directly(target.global_position)
 		LOOK_STATE.STOP:
 			pass
 	if stationary:
@@ -665,7 +660,6 @@ func start_arm_attack():
 	# Without this await, the animation player would call end_arm_attack at the end of the previous animation on the exact same frame as when the AnimationPlayer.play func is called below. Since an animation was currently in progress, the func call would do nothing, leaving the enemy in ATTACK mode but with no animation playing to free it from ATTACK mode, causing it to stand still indefinitely
 	await get_tree().physics_frame
 	arm_attacking = true # Prevent another arm attack from being queued
-	aiming_at_target = true
 
 func end_arm_attack():
 	no_arm_attack_queued.emit()
@@ -690,9 +684,6 @@ func end_arm_attack():
 
 func set_stationary(state: bool):
 	stationary = state
-
-func set_aiming_at_target(state: bool):
-	aiming_at_target = state
 
 func set_look_state(new_state: LOOK_STATE):
 	look_state = new_state
