@@ -1,12 +1,12 @@
 res://enemies/clarity.tscn
-res://shaders/black_outline.gdshader
-res://enemies/clarity_arm_shard.gdshader
 res://textures/clear_tile.tres
 res://textures/noise_texture_2d.tres
 res://shaders/smoke_LOD.tres
 res://shaders/ring_appear.gdshader
 res://glb_meshes/snowflake_particle_mesh.res
 res://glb_meshes/long_hexagon_particle_mesh.res
+res://shaders/black_outline.gdshader
+res://enemies/clarity_arm_shard.gdshader
 res://shaders/noise_transparency.gdshader
 res://GPUTrail-main/shaders/trail.gdshader
 res://GPUTrail-main/shaders/trail_draw_pass.gdshader
@@ -36,11 +36,6 @@ res://enemies/clarity_dress_shard.gdshader
 res://enemies/ice_sprite_spawner.tscn
 res://glb_inherited_scenes/polyp.tscn
 res://glb_inherited_scenes/ice_slime_meshes.tscn
-res://glb_imports/clarity_meshes.tscn
-res://enemies/clarity_head.tscn
 res://enemies/enemy_anims/clarity_infuse_left.res
-res://enemies/enemy_anims/clarity_raise_right_slice.res
-res://enemies/clarity.gd
 res://enemies/enemy_anims/clarity_left_slice_from_infuse.res
-res://enemies/enemy_anims/clarity_stagger.res
-res://enemies/enemy_anims/clarity_jumpshot_towalkleft.res
+res://enemies/enemy_anims/clarity_raise_right_slice.res

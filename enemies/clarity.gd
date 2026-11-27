@@ -337,7 +337,7 @@ func _ready():
 	snowflake_anim_player.play("RotateSlow3Seg")
 	
 	# FOR TESTING: play JumpShot to reach phase 2 immediately
-	snowflake_anim_player.play("JumpShot")
+	#snowflake_anim_player.play("JumpShot")
 	
 	# FOR TESTING: play RegenShards to reach phase 2 immediately
 	#switch_to_stop()
@@ -710,7 +710,7 @@ func wait_raised_left():
 	var wait_time := randf_range(wait_raised_left_min_secs, wait_raised_left_max_secs)
 	await get_tree().create_timer(wait_time).timeout
 	# Choose between LeftSliceFromWait and TriggerArmSlice --> InfuseLeft --> LeftSliceFromInfuse
-	if randf() < 0.5:
+	if randf() < 0.0:
 		snowflake_hexagon_anim_player.play("TriggerFastArmSlice")
 		await snowflake_hexagon_anim_player.animation_finished
 		arm_anim_player.play("LeftSliceFromWait")
